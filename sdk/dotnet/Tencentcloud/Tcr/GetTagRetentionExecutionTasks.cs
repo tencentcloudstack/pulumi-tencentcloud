@@ -15,68 +15,62 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcr
         /// <summary>
         /// Use this data source to query detailed information of tcr tag_retention_execution_tasks
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var tasks = Tencentcloud.Tcr.GetTagRetentionExecutionTasks.Invoke(new()
         ///     {
-        ///         var tasks = Output.Create(Tencentcloud.Tcr.GetTagRetentionExecutionTasks.InvokeAsync(new Tencentcloud.Tcr.GetTagRetentionExecutionTasksArgs
-        ///         {
-        ///             ExecutionId = 1,
-        ///             RegistryId = "tcr_ins_id",
-        ///             RetentionId = 1,
-        ///         }));
-        ///     }
+        ///         ExecutionId = 1,
+        ///         RegistryId = "tcr_ins_id",
+        ///         RetentionId = 1,
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetTagRetentionExecutionTasksResult> InvokeAsync(GetTagRetentionExecutionTasksArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetTagRetentionExecutionTasksResult>("tencentcloud:Tcr/getTagRetentionExecutionTasks:getTagRetentionExecutionTasks", args ?? new GetTagRetentionExecutionTasksArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetTagRetentionExecutionTasksResult>("tencentcloud:Tcr/getTagRetentionExecutionTasks:getTagRetentionExecutionTasks", args ?? new GetTagRetentionExecutionTasksArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of tcr tag_retention_execution_tasks
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var tasks = Tencentcloud.Tcr.GetTagRetentionExecutionTasks.Invoke(new()
         ///     {
-        ///         var tasks = Output.Create(Tencentcloud.Tcr.GetTagRetentionExecutionTasks.InvokeAsync(new Tencentcloud.Tcr.GetTagRetentionExecutionTasksArgs
-        ///         {
-        ///             ExecutionId = 1,
-        ///             RegistryId = "tcr_ins_id",
-        ///             RetentionId = 1,
-        ///         }));
-        ///     }
+        ///         ExecutionId = 1,
+        ///         RegistryId = "tcr_ins_id",
+        ///         RetentionId = 1,
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetTagRetentionExecutionTasksResult> Invoke(GetTagRetentionExecutionTasksInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetTagRetentionExecutionTasksResult>("tencentcloud:Tcr/getTagRetentionExecutionTasks:getTagRetentionExecutionTasks", args ?? new GetTagRetentionExecutionTasksInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetTagRetentionExecutionTasksResult>("tencentcloud:Tcr/getTagRetentionExecutionTasks:getTagRetentionExecutionTasks", args ?? new GetTagRetentionExecutionTasksInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetTagRetentionExecutionTasksArgs : Pulumi.InvokeArgs
+    public sealed class GetTagRetentionExecutionTasksArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// execution id.
@@ -105,9 +99,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcr
         public GetTagRetentionExecutionTasksArgs()
         {
         }
+        public static new GetTagRetentionExecutionTasksArgs Empty => new GetTagRetentionExecutionTasksArgs();
     }
 
-    public sealed class GetTagRetentionExecutionTasksInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetTagRetentionExecutionTasksInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// execution id.
@@ -136,6 +131,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcr
         public GetTagRetentionExecutionTasksInvokeArgs()
         {
         }
+        public static new GetTagRetentionExecutionTasksInvokeArgs Empty => new GetTagRetentionExecutionTasksInvokeArgs();
     }
 
 

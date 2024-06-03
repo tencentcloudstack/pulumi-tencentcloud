@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tat.Inputs
 {
 
-    public sealed class CommandTagArgs : Pulumi.ResourceArgs
+    public sealed class CommandTagArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Tag key.
@@ -28,5 +28,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tat.Inputs
         public CommandTagArgs()
         {
         }
+        public static new CommandTagArgs Empty => new CommandTagArgs();
     }
 }

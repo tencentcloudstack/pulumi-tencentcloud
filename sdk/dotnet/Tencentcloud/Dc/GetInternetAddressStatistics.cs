@@ -15,58 +15,52 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dc
         /// <summary>
         /// Use this data source to query detailed information of dc internet_address_statistics
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
-        ///     {
-        ///         var internetAddressStatistics = Output.Create(Tencentcloud.Dc.GetInternetAddressStatistics.InvokeAsync());
-        ///     }
+        ///     var internetAddressStatistics = Tencentcloud.Dc.GetInternetAddressStatistics.Invoke();
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetInternetAddressStatisticsResult> InvokeAsync(GetInternetAddressStatisticsArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetInternetAddressStatisticsResult>("tencentcloud:Dc/getInternetAddressStatistics:getInternetAddressStatistics", args ?? new GetInternetAddressStatisticsArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetInternetAddressStatisticsResult>("tencentcloud:Dc/getInternetAddressStatistics:getInternetAddressStatistics", args ?? new GetInternetAddressStatisticsArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of dc internet_address_statistics
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
-        ///     {
-        ///         var internetAddressStatistics = Output.Create(Tencentcloud.Dc.GetInternetAddressStatistics.InvokeAsync());
-        ///     }
+        ///     var internetAddressStatistics = Tencentcloud.Dc.GetInternetAddressStatistics.Invoke();
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetInternetAddressStatisticsResult> Invoke(GetInternetAddressStatisticsInvokeArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetInternetAddressStatisticsResult>("tencentcloud:Dc/getInternetAddressStatistics:getInternetAddressStatistics", args ?? new GetInternetAddressStatisticsInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetInternetAddressStatisticsResult>("tencentcloud:Dc/getInternetAddressStatistics:getInternetAddressStatistics", args ?? new GetInternetAddressStatisticsInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetInternetAddressStatisticsArgs : Pulumi.InvokeArgs
+    public sealed class GetInternetAddressStatisticsArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Used to save results.
@@ -77,9 +71,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dc
         public GetInternetAddressStatisticsArgs()
         {
         }
+        public static new GetInternetAddressStatisticsArgs Empty => new GetInternetAddressStatisticsArgs();
     }
 
-    public sealed class GetInternetAddressStatisticsInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetInternetAddressStatisticsInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Used to save results.
@@ -90,6 +85,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dc
         public GetInternetAddressStatisticsInvokeArgs()
         {
         }
+        public static new GetInternetAddressStatisticsInvokeArgs Empty => new GetInternetAddressStatisticsInvokeArgs();
     }
 
 

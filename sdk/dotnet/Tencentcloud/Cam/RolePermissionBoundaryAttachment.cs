@@ -15,34 +15,35 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var rolePermissionBoundaryAttachment = new Tencentcloud.Cam.RolePermissionBoundaryAttachment("rolePermissionBoundaryAttachment", new()
     ///     {
-    ///         var rolePermissionBoundaryAttachment = new Tencentcloud.Cam.RolePermissionBoundaryAttachment("rolePermissionBoundaryAttachment", new Tencentcloud.Cam.RolePermissionBoundaryAttachmentArgs
-    ///         {
-    ///             PolicyId = 1,
-    ///             RoleName = "test-cam-tag",
-    ///         });
-    ///     }
+    ///         PolicyId = 1,
+    ///         RoleName = "test-cam-tag",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// cam role_permission_boundary_attachment can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Cam/rolePermissionBoundaryAttachment:RolePermissionBoundaryAttachment role_permission_boundary_attachment role_permission_boundary_attachment_id
+    /// $ pulumi import tencentcloud:Cam/rolePermissionBoundaryAttachment:RolePermissionBoundaryAttachment role_permission_boundary_attachment role_permission_boundary_attachment_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Cam/rolePermissionBoundaryAttachment:RolePermissionBoundaryAttachment")]
-    public partial class RolePermissionBoundaryAttachment : Pulumi.CustomResource
+    public partial class RolePermissionBoundaryAttachment : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Role ID.
@@ -107,7 +108,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam
         }
     }
 
-    public sealed class RolePermissionBoundaryAttachmentArgs : Pulumi.ResourceArgs
+    public sealed class RolePermissionBoundaryAttachmentArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Role ID.
@@ -130,9 +131,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam
         public RolePermissionBoundaryAttachmentArgs()
         {
         }
+        public static new RolePermissionBoundaryAttachmentArgs Empty => new RolePermissionBoundaryAttachmentArgs();
     }
 
-    public sealed class RolePermissionBoundaryAttachmentState : Pulumi.ResourceArgs
+    public sealed class RolePermissionBoundaryAttachmentState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Role ID.
@@ -155,5 +157,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam
         public RolePermissionBoundaryAttachmentState()
         {
         }
+        public static new RolePermissionBoundaryAttachmentState Empty => new RolePermissionBoundaryAttachmentState();
     }
 }

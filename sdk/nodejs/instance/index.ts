@@ -5,13 +5,21 @@ import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
 // Export members:
-export * from "./getTypes";
-export * from "./instance";
-export * from "./set";
+export { GetTypesArgs, GetTypesResult, GetTypesOutputArgs } from "./getTypes";
+export const getTypes: typeof import("./getTypes").getTypes = null as any;
+export const getTypesOutput: typeof import("./getTypes").getTypesOutput = null as any;
+utilities.lazyLoad(exports, ["getTypes","getTypesOutput"], () => require("./getTypes"));
 
-// Import resources to register:
-import { Instance } from "./instance";
-import { Set } from "./set";
+export { InstanceArgs, InstanceState } from "./instance";
+export type Instance = import("./instance").Instance;
+export const Instance: typeof import("./instance").Instance = null as any;
+utilities.lazyLoad(exports, ["Instance"], () => require("./instance"));
+
+export { SetArgs, SetState } from "./set";
+export type Set = import("./set").Set;
+export const Set: typeof import("./set").Set = null as any;
+utilities.lazyLoad(exports, ["Set"], () => require("./set"));
+
 
 const _module = {
     version: utilities.getVersion(),

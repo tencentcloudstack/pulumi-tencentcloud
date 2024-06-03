@@ -9,17 +9,19 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const updatePluginsOperation = new tencentcloud.Elasticsearch.UpdatePluginsOperation("update_plugins_operation", {
+ * const updatePluginsOperation = new tencentcloud.elasticsearch.UpdatePluginsOperation("updatePluginsOperation", {
  *     forceRestart: false,
  *     forceUpdate: true,
  *     installPluginLists: ["analysis-pinyin"],
  *     instanceId: "es-xxxxxx",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export class UpdatePluginsOperation extends pulumi.CustomResource {
     /**

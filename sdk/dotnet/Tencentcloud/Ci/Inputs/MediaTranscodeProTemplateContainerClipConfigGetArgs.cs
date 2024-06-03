@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ci.Inputs
 {
 
-    public sealed class MediaTranscodeProTemplateContainerClipConfigGetArgs : Pulumi.ResourceArgs
+    public sealed class MediaTranscodeProTemplateContainerClipConfigGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Fragmentation duration, default 5s.
@@ -22,5 +22,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ci.Inputs
         public MediaTranscodeProTemplateContainerClipConfigGetArgs()
         {
         }
+        public static new MediaTranscodeProTemplateContainerClipConfigGetArgs Empty => new MediaTranscodeProTemplateContainerClipConfigGetArgs();
     }
 }

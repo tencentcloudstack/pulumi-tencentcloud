@@ -9,11 +9,12 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const wordSample = new tencentcloud.Mps.WordSample("word_sample", {
+ * const wordSample = new tencentcloud.mps.WordSample("wordSample", {
  *     keyword: "tf_test_kw_1",
  *     tags: [
  *         "tags_1",
@@ -26,13 +27,14 @@ import * as utilities from "../utilities";
  *     ],
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * mps word_sample can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Mps/wordSample:WordSample word_sample keyword
+ * $ pulumi import tencentcloud:Mps/wordSample:WordSample word_sample keyword
  * ```
  */
 export class WordSample extends pulumi.CustomResource {

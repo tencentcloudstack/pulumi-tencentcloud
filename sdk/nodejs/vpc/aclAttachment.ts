@@ -12,7 +12,7 @@ import * as utilities from "../utilities";
  * Acl attachment can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Vpc/aclAttachment:AclAttachment attachment acl-eotx5qsg#subnet-91x0geu6
+ * $ pulumi import tencentcloud:Vpc/aclAttachment:AclAttachment attachment acl-eotx5qsg#subnet-91x0geu6
  * ```
  */
 export class AclAttachment extends pulumi.CustomResource {

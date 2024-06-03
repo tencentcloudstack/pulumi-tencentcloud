@@ -22,6 +22,9 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcr.Outputs
         /// ID of the resource.
         /// </summary>
         public readonly int? Id;
+        /// <summary>
+        /// namespace name.
+        /// </summary>
         public readonly string? NsName;
         /// <summary>
         /// repository decoration type:repoMatches or repoExcludes.

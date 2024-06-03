@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Trocket.Inputs
 {
 
-    public sealed class RocketmqInstanceIpRuleGetArgs : Pulumi.ResourceArgs
+    public sealed class RocketmqInstanceIpRuleGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Whether to allow release or not.
@@ -34,5 +34,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Trocket.Inputs
         public RocketmqInstanceIpRuleGetArgs()
         {
         }
+        public static new RocketmqInstanceIpRuleGetArgs Empty => new RocketmqInstanceIpRuleGetArgs();
     }
 }

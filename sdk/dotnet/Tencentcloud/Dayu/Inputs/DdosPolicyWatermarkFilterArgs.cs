@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dayu.Inputs
 {
 
-    public sealed class DdosPolicyWatermarkFilterArgs : Pulumi.ResourceArgs
+    public sealed class DdosPolicyWatermarkFilterArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Indicate whether to auto-remove the watermark or not.
@@ -58,5 +58,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dayu.Inputs
         public DdosPolicyWatermarkFilterArgs()
         {
         }
+        public static new DdosPolicyWatermarkFilterArgs Empty => new DdosPolicyWatermarkFilterArgs();
     }
 }

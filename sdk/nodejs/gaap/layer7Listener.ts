@@ -9,9 +9,10 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const fooProxy = new tencentcloud.gaap.Proxy("fooProxy", {
  *     bandwidth: 10,
@@ -25,13 +26,14 @@ import * as utilities from "../utilities";
  *     proxyId: fooProxy.id,
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * GAAP layer7 listener can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Gaap/layer7Listener:Layer7Listener tencentcloud_gaap_layer7_listener.foo listener-11112222
+ * $ pulumi import tencentcloud:Gaap/layer7Listener:Layer7Listener tencentcloud_gaap_layer7_listener.foo listener-11112222
  * ```
  */
 export class Layer7Listener extends pulumi.CustomResource {
@@ -73,7 +75,7 @@ export class Layer7Listener extends pulumi.CustomResource {
     /**
      * It has been deprecated from version 1.26.0. Set `clientCertificateIds` instead. ID of the client certificate. Set only when `authType` is specified as mutual authentication. NOTES: Only supports listeners of `HTTPS` protocol.
      *
-     * @deprecated It has been deprecated from version 1.26.0. Set `client_certificate_ids` instead.
+     * @deprecated It has been deprecated from version 1.26.0. Set `clientCertificateIds` instead.
      */
     public readonly clientCertificateId!: pulumi.Output<string>;
     /**
@@ -176,7 +178,7 @@ export interface Layer7ListenerState {
     /**
      * It has been deprecated from version 1.26.0. Set `clientCertificateIds` instead. ID of the client certificate. Set only when `authType` is specified as mutual authentication. NOTES: Only supports listeners of `HTTPS` protocol.
      *
-     * @deprecated It has been deprecated from version 1.26.0. Set `client_certificate_ids` instead.
+     * @deprecated It has been deprecated from version 1.26.0. Set `clientCertificateIds` instead.
      */
     clientCertificateId?: pulumi.Input<string>;
     /**
@@ -228,7 +230,7 @@ export interface Layer7ListenerArgs {
     /**
      * It has been deprecated from version 1.26.0. Set `clientCertificateIds` instead. ID of the client certificate. Set only when `authType` is specified as mutual authentication. NOTES: Only supports listeners of `HTTPS` protocol.
      *
-     * @deprecated It has been deprecated from version 1.26.0. Set `client_certificate_ids` instead.
+     * @deprecated It has been deprecated from version 1.26.0. Set `clientCertificateIds` instead.
      */
     clientCertificateId?: pulumi.Input<string>;
     /**

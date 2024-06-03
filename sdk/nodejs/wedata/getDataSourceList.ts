@@ -2,28 +2,34 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
  * Use this data source to query detailed information of wedata dataSourceList
  *
  * ## Example Usage
+ *
  * ### Query All
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const example = pulumi.output(tencentcloud.Wedata.getDataSourceList());
+ * const example = tencentcloud.Wedata.getDataSourceList({});
  * ```
+ * <!--End PulumiCodeChooser -->
+ *
  * ### Query By filter
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const example = pulumi.output(tencentcloud.Wedata.getDataSourceList({
+ * const example = tencentcloud.Wedata.getDataSourceList({
  *     filters: [{
  *         name: "Name",
  *         values: ["tf_example"],
@@ -32,16 +38,14 @@ import * as utilities from "../utilities";
  *         direction: "DESC",
  *         name: "create_time",
  *     }],
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getDataSourceList(args?: GetDataSourceListArgs, opts?: pulumi.InvokeOptions): Promise<GetDataSourceListResult> {
     args = args || {};
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Wedata/getDataSourceList:getDataSourceList", {
         "filters": args.filters,
         "orderFields": args.orderFields,
@@ -83,9 +87,44 @@ export interface GetDataSourceListResult {
      */
     readonly rows: outputs.Wedata.GetDataSourceListRow[];
 }
-
+/**
+ * Use this data source to query detailed information of wedata dataSourceList
+ *
+ * ## Example Usage
+ *
+ * ### Query All
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const example = tencentcloud.Wedata.getDataSourceList({});
+ * ```
+ * <!--End PulumiCodeChooser -->
+ *
+ * ### Query By filter
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const example = tencentcloud.Wedata.getDataSourceList({
+ *     filters: [{
+ *         name: "Name",
+ *         values: ["tf_example"],
+ *     }],
+ *     orderFields: [{
+ *         direction: "DESC",
+ *         name: "create_time",
+ *     }],
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getDataSourceListOutput(args?: GetDataSourceListOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetDataSourceListResult> {
-    return pulumi.output(args).apply(a => getDataSourceList(a, opts))
+    return pulumi.output(args).apply((a: any) => getDataSourceList(a, opts))
 }
 
 /**

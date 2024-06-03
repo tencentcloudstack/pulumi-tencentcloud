@@ -9,11 +9,12 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const account = new tencentcloud.Mariadb.Account("account", {
+ * const account = new tencentcloud.mariadb.Account("account", {
  *     description: "desc",
  *     host: "10.101.202.22",
  *     instanceId: "tdsql-4pzs5b67",
@@ -22,13 +23,14 @@ import * as utilities from "../utilities";
  *     userName: "account-test",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * mariadb account can be imported using the instance_id#user_name#host, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Mariadb/account:Account account tdsql-4pzs5b67#account-test#10.101.202.22
+ * $ pulumi import tencentcloud:Mariadb/account:Account account tdsql-4pzs5b67#account-test#10.101.202.22
  * ```
  */
 export class Account extends pulumi.CustomResource {
@@ -120,11 +122,13 @@ export class Account extends pulumi.CustomResource {
             resourceInputs["description"] = args ? args.description : undefined;
             resourceInputs["host"] = args ? args.host : undefined;
             resourceInputs["instanceId"] = args ? args.instanceId : undefined;
-            resourceInputs["password"] = args ? args.password : undefined;
+            resourceInputs["password"] = args?.password ? pulumi.secret(args.password) : undefined;
             resourceInputs["readOnly"] = args ? args.readOnly : undefined;
             resourceInputs["userName"] = args ? args.userName : undefined;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+        const secretOpts = { additionalSecretOutputs: ["password"] };
+        opts = pulumi.mergeOptions(opts, secretOpts);
         super(Account.__pulumiType, name, resourceInputs, opts);
     }
 }

@@ -15,74 +15,68 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Antiddos
         /// <summary>
         /// Use this data source to query detailed information of antiddos bgp_biz_trend
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var bgpBizTrend = Tencentcloud.Antiddos.GetBgpBizTrend.Invoke(new()
         ///     {
-        ///         var bgpBizTrend = Output.Create(Tencentcloud.Antiddos.GetBgpBizTrend.InvokeAsync(new Tencentcloud.Antiddos.GetBgpBizTrendArgs
-        ///         {
-        ///             Business = "bgp-multip",
-        ///             EndTime = "2023-11-22 10:25:00",
-        ///             Flag = 0,
-        ///             InstanceId = "bgp-00000ry7",
-        ///             MetricName = "intraffic",
-        ///             StartTime = "2023-11-22 09:25:00",
-        ///         }));
-        ///     }
+        ///         Business = "bgp-multip",
+        ///         EndTime = "2023-11-22 10:25:00",
+        ///         Flag = 0,
+        ///         InstanceId = "bgp-00000ry7",
+        ///         MetricName = "intraffic",
+        ///         StartTime = "2023-11-22 09:25:00",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetBgpBizTrendResult> InvokeAsync(GetBgpBizTrendArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetBgpBizTrendResult>("tencentcloud:Antiddos/getBgpBizTrend:getBgpBizTrend", args ?? new GetBgpBizTrendArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetBgpBizTrendResult>("tencentcloud:Antiddos/getBgpBizTrend:getBgpBizTrend", args ?? new GetBgpBizTrendArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of antiddos bgp_biz_trend
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var bgpBizTrend = Tencentcloud.Antiddos.GetBgpBizTrend.Invoke(new()
         ///     {
-        ///         var bgpBizTrend = Output.Create(Tencentcloud.Antiddos.GetBgpBizTrend.InvokeAsync(new Tencentcloud.Antiddos.GetBgpBizTrendArgs
-        ///         {
-        ///             Business = "bgp-multip",
-        ///             EndTime = "2023-11-22 10:25:00",
-        ///             Flag = 0,
-        ///             InstanceId = "bgp-00000ry7",
-        ///             MetricName = "intraffic",
-        ///             StartTime = "2023-11-22 09:25:00",
-        ///         }));
-        ///     }
+        ///         Business = "bgp-multip",
+        ///         EndTime = "2023-11-22 10:25:00",
+        ///         Flag = 0,
+        ///         InstanceId = "bgp-00000ry7",
+        ///         MetricName = "intraffic",
+        ///         StartTime = "2023-11-22 09:25:00",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetBgpBizTrendResult> Invoke(GetBgpBizTrendInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetBgpBizTrendResult>("tencentcloud:Antiddos/getBgpBizTrend:getBgpBizTrend", args ?? new GetBgpBizTrendInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetBgpBizTrendResult>("tencentcloud:Antiddos/getBgpBizTrend:getBgpBizTrend", args ?? new GetBgpBizTrendInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetBgpBizTrendArgs : Pulumi.InvokeArgs
+    public sealed class GetBgpBizTrendArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Dayu sub product code (bgpip represents advanced defense IP; net represents professional version of advanced defense IP).
@@ -129,9 +123,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Antiddos
         public GetBgpBizTrendArgs()
         {
         }
+        public static new GetBgpBizTrendArgs Empty => new GetBgpBizTrendArgs();
     }
 
-    public sealed class GetBgpBizTrendInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetBgpBizTrendInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Dayu sub product code (bgpip represents advanced defense IP; net represents professional version of advanced defense IP).
@@ -178,6 +173,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Antiddos
         public GetBgpBizTrendInvokeArgs()
         {
         }
+        public static new GetBgpBizTrendInvokeArgs Empty => new GetBgpBizTrendInvokeArgs();
     }
 
 

@@ -9,11 +9,12 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const snapshot = new tencentcloud.Cfs.Snapshot("snapshot", {
+ * const snapshot = new tencentcloud.cfs.Snapshot("snapshot", {
  *     fileSystemId: "cfs-iobiaxtj",
  *     snapshotName: "test",
  *     tags: {
@@ -21,13 +22,14 @@ import * as utilities from "../utilities";
  *     },
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * cfs snapshot can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Cfs/snapshot:Snapshot snapshot snapshot_id
+ * $ pulumi import tencentcloud:Cfs/snapshot:Snapshot snapshot snapshot_id
  * ```
  */
 export class Snapshot extends pulumi.CustomResource {

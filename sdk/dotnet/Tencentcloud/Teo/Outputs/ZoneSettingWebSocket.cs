@@ -15,7 +15,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Outputs
     public sealed class ZoneSettingWebSocket
     {
         /// <summary>
-        /// Whether to enable custom WebSocket timeout setting. When is off: it means to keep the default WebSocket connection timeout period, which is 15 seconds. To change the timeout period, please set it to on.
+        /// Whether to enable custom WebSocket timeout setting. When it's off: it means to keep the default WebSocket connection timeout period, which is 15 seconds. To change the timeout period, please set it to on.
         /// </summary>
         public readonly string Switch;
         /// <summary>

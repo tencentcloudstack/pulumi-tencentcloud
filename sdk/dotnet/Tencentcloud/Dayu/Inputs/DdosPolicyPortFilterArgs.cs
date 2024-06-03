@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dayu.Inputs
 {
 
-    public sealed class DdosPolicyPortFilterArgs : Pulumi.ResourceArgs
+    public sealed class DdosPolicyPortFilterArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Action of port to take. Valid values: `drop`, `transmit`.
@@ -46,5 +46,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dayu.Inputs
         public DdosPolicyPortFilterArgs()
         {
         }
+        public static new DdosPolicyPortFilterArgs Empty => new DdosPolicyPortFilterArgs();
     }
 }

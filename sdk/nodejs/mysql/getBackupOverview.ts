@@ -9,21 +9,20 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const backupOverview = pulumi.output(tencentcloud.Mysql.getBackupOverview({
+ * const backupOverview = tencentcloud.Mysql.getBackupOverview({
  *     product: "mysql",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getBackupOverview(args: GetBackupOverviewArgs, opts?: pulumi.InvokeOptions): Promise<GetBackupOverviewResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Mysql/getBackupOverview:getBackupOverview", {
         "product": args.product,
         "resultOutputFile": args.resultOutputFile,
@@ -83,9 +82,24 @@ export interface GetBackupOverviewResult {
     readonly remoteBackupVolume: number;
     readonly resultOutputFile?: string;
 }
-
+/**
+ * Use this data source to query detailed information of mysql backupOverview
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const backupOverview = tencentcloud.Mysql.getBackupOverview({
+ *     product: "mysql",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getBackupOverviewOutput(args: GetBackupOverviewOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetBackupOverviewResult> {
-    return pulumi.output(args).apply(a => getBackupOverview(a, opts))
+    return pulumi.output(args).apply((a: any) => getBackupOverview(a, opts))
 }
 
 /**

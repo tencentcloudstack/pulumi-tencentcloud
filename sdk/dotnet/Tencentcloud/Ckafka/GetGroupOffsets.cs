@@ -15,66 +15,60 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka
         /// <summary>
         /// Use this data source to query detailed information of ckafka group_offsets
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var groupOffsets = Tencentcloud.Ckafka.GetGroupOffsets.Invoke(new()
         ///     {
-        ///         var groupOffsets = Output.Create(Tencentcloud.Ckafka.GetGroupOffsets.InvokeAsync(new Tencentcloud.Ckafka.GetGroupOffsetsArgs
-        ///         {
-        ///             Group = "xxxxxx",
-        ///             InstanceId = "ckafka-xxxxxx",
-        ///         }));
-        ///     }
+        ///         Group = "xxxxxx",
+        ///         InstanceId = "ckafka-xxxxxx",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetGroupOffsetsResult> InvokeAsync(GetGroupOffsetsArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetGroupOffsetsResult>("tencentcloud:Ckafka/getGroupOffsets:getGroupOffsets", args ?? new GetGroupOffsetsArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetGroupOffsetsResult>("tencentcloud:Ckafka/getGroupOffsets:getGroupOffsets", args ?? new GetGroupOffsetsArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of ckafka group_offsets
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var groupOffsets = Tencentcloud.Ckafka.GetGroupOffsets.Invoke(new()
         ///     {
-        ///         var groupOffsets = Output.Create(Tencentcloud.Ckafka.GetGroupOffsets.InvokeAsync(new Tencentcloud.Ckafka.GetGroupOffsetsArgs
-        ///         {
-        ///             Group = "xxxxxx",
-        ///             InstanceId = "ckafka-xxxxxx",
-        ///         }));
-        ///     }
+        ///         Group = "xxxxxx",
+        ///         InstanceId = "ckafka-xxxxxx",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetGroupOffsetsResult> Invoke(GetGroupOffsetsInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetGroupOffsetsResult>("tencentcloud:Ckafka/getGroupOffsets:getGroupOffsets", args ?? new GetGroupOffsetsInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetGroupOffsetsResult>("tencentcloud:Ckafka/getGroupOffsets:getGroupOffsets", args ?? new GetGroupOffsetsInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetGroupOffsetsArgs : Pulumi.InvokeArgs
+    public sealed class GetGroupOffsetsArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Kafka consumer group name.
@@ -115,9 +109,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka
         public GetGroupOffsetsArgs()
         {
         }
+        public static new GetGroupOffsetsArgs Empty => new GetGroupOffsetsArgs();
     }
 
-    public sealed class GetGroupOffsetsInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetGroupOffsetsInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Kafka consumer group name.
@@ -158,6 +153,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka
         public GetGroupOffsetsInvokeArgs()
         {
         }
+        public static new GetGroupOffsetsInvokeArgs Empty => new GetGroupOffsetsInvokeArgs();
     }
 
 

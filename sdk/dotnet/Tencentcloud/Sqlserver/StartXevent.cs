@@ -15,81 +15,87 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = Pulumi.Tencentcloud;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var zones = Tencentcloud.Availability.GetZonesByProduct.Invoke(new()
     ///     {
-    ///         var zones = Output.Create(Tencentcloud.Availability.GetZonesByProduct.InvokeAsync(new Tencentcloud.Availability.GetZonesByProductArgs
-    ///         {
-    ///             Product = "sqlserver",
-    ///         }));
-    ///         var vpc = new Tencentcloud.Vpc.Instance("vpc", new Tencentcloud.Vpc.InstanceArgs
-    ///         {
-    ///             CidrBlock = "10.0.0.0/16",
-    ///         });
-    ///         var subnet = new Tencentcloud.Subnet.Instance("subnet", new Tencentcloud.Subnet.InstanceArgs
-    ///         {
-    ///             AvailabilityZone = zones.Apply(zones =&gt; zones.Zones?[4]?.Name),
-    ///             VpcId = vpc.Id,
-    ///             CidrBlock = "10.0.0.0/16",
-    ///             IsMulticast = false,
-    ///         });
-    ///         var securityGroup = new Tencentcloud.Security.Group("securityGroup", new Tencentcloud.Security.GroupArgs
-    ///         {
-    ///             Description = "desc.",
-    ///         });
-    ///         var exampleBasicInstance = new Tencentcloud.Sqlserver.BasicInstance("exampleBasicInstance", new Tencentcloud.Sqlserver.BasicInstanceArgs
-    ///         {
-    ///             AvailabilityZone = zones.Apply(zones =&gt; zones.Zones?[4]?.Name),
-    ///             ChargeType = "POSTPAID_BY_HOUR",
-    ///             VpcId = vpc.Id,
-    ///             SubnetId = subnet.Id,
-    ///             ProjectId = 0,
-    ///             Memory = 4,
-    ///             Storage = 100,
-    ///             Cpu = 2,
-    ///             MachineType = "CLOUD_PREMIUM",
-    ///             MaintenanceWeekSets = 
-    ///             {
-    ///                 1,
-    ///                 2,
-    ///                 3,
-    ///             },
-    ///             MaintenanceStartTime = "09:00",
-    ///             MaintenanceTimeSpan = 3,
-    ///             SecurityGroups = 
-    ///             {
-    ///                 securityGroup.Id,
-    ///             },
-    ///             Tags = 
-    ///             {
-    ///                 { "test", "test" },
-    ///             },
-    ///         });
-    ///         var exampleStartXevent = new Tencentcloud.Sqlserver.StartXevent("exampleStartXevent", new Tencentcloud.Sqlserver.StartXeventArgs
-    ///         {
-    ///             InstanceId = exampleBasicInstance.Id,
-    ///             EventConfigs = 
-    ///             {
-    ///                 new Tencentcloud.Sqlserver.Inputs.StartXeventEventConfigArgs
-    ///                 {
-    ///                     EventType = "slow",
-    ///                     Threshold = 0,
-    ///                 },
-    ///             },
-    ///         });
-    ///     }
+    ///         Product = "sqlserver",
+    ///     });
     /// 
-    /// }
+    ///     var vpc = new Tencentcloud.Vpc.Instance("vpc", new()
+    ///     {
+    ///         CidrBlock = "10.0.0.0/16",
+    ///     });
+    /// 
+    ///     var subnet = new Tencentcloud.Subnet.Instance("subnet", new()
+    ///     {
+    ///         AvailabilityZone = zones.Apply(getZonesByProductResult =&gt; getZonesByProductResult.Zones[4]?.Name),
+    ///         VpcId = vpc.Id,
+    ///         CidrBlock = "10.0.0.0/16",
+    ///         IsMulticast = false,
+    ///     });
+    /// 
+    ///     var securityGroup = new Tencentcloud.Security.Group("securityGroup", new()
+    ///     {
+    ///         Description = "desc.",
+    ///     });
+    /// 
+    ///     var exampleBasicInstance = new Tencentcloud.Sqlserver.BasicInstance("exampleBasicInstance", new()
+    ///     {
+    ///         AvailabilityZone = zones.Apply(getZonesByProductResult =&gt; getZonesByProductResult.Zones[4]?.Name),
+    ///         ChargeType = "POSTPAID_BY_HOUR",
+    ///         VpcId = vpc.Id,
+    ///         SubnetId = subnet.Id,
+    ///         ProjectId = 0,
+    ///         Memory = 4,
+    ///         Storage = 100,
+    ///         Cpu = 2,
+    ///         MachineType = "CLOUD_PREMIUM",
+    ///         MaintenanceWeekSets = new[]
+    ///         {
+    ///             1,
+    ///             2,
+    ///             3,
+    ///         },
+    ///         MaintenanceStartTime = "09:00",
+    ///         MaintenanceTimeSpan = 3,
+    ///         SecurityGroups = new[]
+    ///         {
+    ///             securityGroup.Id,
+    ///         },
+    ///         Tags = 
+    ///         {
+    ///             { "test", "test" },
+    ///         },
+    ///     });
+    /// 
+    ///     var exampleStartXevent = new Tencentcloud.Sqlserver.StartXevent("exampleStartXevent", new()
+    ///     {
+    ///         InstanceId = exampleBasicInstance.Id,
+    ///         EventConfigs = new[]
+    ///         {
+    ///             new Tencentcloud.Sqlserver.Inputs.StartXeventEventConfigArgs
+    ///             {
+    ///                 EventType = "slow",
+    ///                 Threshold = 0,
+    ///             },
+    ///         },
+    ///     });
+    /// 
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Sqlserver/startXevent:StartXevent")]
-    public partial class StartXevent : Pulumi.CustomResource
+    public partial class StartXevent : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Whether to start or stop an extended event.
@@ -148,7 +154,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
         }
     }
 
-    public sealed class StartXeventArgs : Pulumi.ResourceArgs
+    public sealed class StartXeventArgs : global::Pulumi.ResourceArgs
     {
         [Input("eventConfigs", required: true)]
         private InputList<Inputs.StartXeventEventConfigArgs>? _eventConfigs;
@@ -171,9 +177,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
         public StartXeventArgs()
         {
         }
+        public static new StartXeventArgs Empty => new StartXeventArgs();
     }
 
-    public sealed class StartXeventState : Pulumi.ResourceArgs
+    public sealed class StartXeventState : global::Pulumi.ResourceArgs
     {
         [Input("eventConfigs")]
         private InputList<Inputs.StartXeventEventConfigGetArgs>? _eventConfigs;
@@ -196,5 +203,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
         public StartXeventState()
         {
         }
+        public static new StartXeventState Empty => new StartXeventState();
     }
 }

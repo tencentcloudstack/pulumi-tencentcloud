@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,21 +11,20 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const taskStatus = pulumi.output(tencentcloud.Ckafka.getTaskStatus({
+ * const taskStatus = tencentcloud.Ckafka.getTaskStatus({
  *     flowId: 123456,
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getTaskStatus(args: GetTaskStatusArgs, opts?: pulumi.InvokeOptions): Promise<GetTaskStatusResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Ckafka/getTaskStatus:getTaskStatus", {
         "flowId": args.flowId,
         "resultOutputFile": args.resultOutputFile,
@@ -60,9 +60,24 @@ export interface GetTaskStatusResult {
      */
     readonly results: outputs.Ckafka.GetTaskStatusResult[];
 }
-
+/**
+ * Use this data source to query detailed information of ckafka taskStatus
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const taskStatus = tencentcloud.Ckafka.getTaskStatus({
+ *     flowId: 123456,
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getTaskStatusOutput(args: GetTaskStatusOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetTaskStatusResult> {
-    return pulumi.output(args).apply(a => getTaskStatus(a, opts))
+    return pulumi.output(args).apply((a: any) => getTaskStatus(a, opts))
 }
 
 /**

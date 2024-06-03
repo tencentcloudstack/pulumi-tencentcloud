@@ -15,58 +15,52 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ses
         /// <summary>
         /// Use this data source to query detailed information of ses email_identities
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
-        ///     {
-        ///         var emailIdentities = Output.Create(Tencentcloud.Ses.GetEmailIdentities.InvokeAsync());
-        ///     }
+        ///     var emailIdentities = Tencentcloud.Ses.GetEmailIdentities.Invoke();
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetEmailIdentitiesResult> InvokeAsync(GetEmailIdentitiesArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetEmailIdentitiesResult>("tencentcloud:Ses/getEmailIdentities:getEmailIdentities", args ?? new GetEmailIdentitiesArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetEmailIdentitiesResult>("tencentcloud:Ses/getEmailIdentities:getEmailIdentities", args ?? new GetEmailIdentitiesArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of ses email_identities
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
-        ///     {
-        ///         var emailIdentities = Output.Create(Tencentcloud.Ses.GetEmailIdentities.InvokeAsync());
-        ///     }
+        ///     var emailIdentities = Tencentcloud.Ses.GetEmailIdentities.Invoke();
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetEmailIdentitiesResult> Invoke(GetEmailIdentitiesInvokeArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetEmailIdentitiesResult>("tencentcloud:Ses/getEmailIdentities:getEmailIdentities", args ?? new GetEmailIdentitiesInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetEmailIdentitiesResult>("tencentcloud:Ses/getEmailIdentities:getEmailIdentities", args ?? new GetEmailIdentitiesInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetEmailIdentitiesArgs : Pulumi.InvokeArgs
+    public sealed class GetEmailIdentitiesArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Used to save results.
@@ -77,9 +71,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ses
         public GetEmailIdentitiesArgs()
         {
         }
+        public static new GetEmailIdentitiesArgs Empty => new GetEmailIdentitiesArgs();
     }
 
-    public sealed class GetEmailIdentitiesInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetEmailIdentitiesInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Used to save results.
@@ -90,6 +85,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ses
         public GetEmailIdentitiesInvokeArgs()
         {
         }
+        public static new GetEmailIdentitiesInvokeArgs Empty => new GetEmailIdentitiesInvokeArgs();
     }
 
 

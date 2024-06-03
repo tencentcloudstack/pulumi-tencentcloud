@@ -15,96 +15,94 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
         /// <summary>
         /// Use this data source to query gaap layer7 listeners.
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var fooProxy = new Tencentcloud.Gaap.Proxy("fooProxy", new()
         ///     {
-        ///         var fooProxy = new Tencentcloud.Gaap.Proxy("fooProxy", new Tencentcloud.Gaap.ProxyArgs
-        ///         {
-        ///             Bandwidth = 10,
-        ///             Concurrent = 2,
-        ///             AccessRegion = "SouthChina",
-        ///             RealserverRegion = "NorthChina",
-        ///         });
-        ///         var fooLayer7Listener = new Tencentcloud.Gaap.Layer7Listener("fooLayer7Listener", new Tencentcloud.Gaap.Layer7ListenerArgs
-        ///         {
-        ///             Protocol = "HTTP",
-        ///             Port = 80,
-        ///             ProxyId = fooProxy.Id,
-        ///         });
-        ///         var listenerId = Tencentcloud.Gaap.GetLayer7Listeners.Invoke(new Tencentcloud.Gaap.GetLayer7ListenersInvokeArgs
-        ///         {
-        ///             Protocol = "HTTP",
-        ///             ProxyId = fooProxy.Id,
-        ///             ListenerId = fooLayer7Listener.Id,
-        ///         });
-        ///     }
+        ///         Bandwidth = 10,
+        ///         Concurrent = 2,
+        ///         AccessRegion = "SouthChina",
+        ///         RealserverRegion = "NorthChina",
+        ///     });
         /// 
-        /// }
+        ///     var fooLayer7Listener = new Tencentcloud.Gaap.Layer7Listener("fooLayer7Listener", new()
+        ///     {
+        ///         Protocol = "HTTP",
+        ///         Port = 80,
+        ///         ProxyId = fooProxy.Id,
+        ///     });
+        /// 
+        ///     var listenerId = Tencentcloud.Gaap.GetLayer7Listeners.Invoke(new()
+        ///     {
+        ///         Protocol = "HTTP",
+        ///         ProxyId = fooProxy.Id,
+        ///         ListenerId = fooLayer7Listener.Id,
+        ///     });
+        /// 
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetLayer7ListenersResult> InvokeAsync(GetLayer7ListenersArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetLayer7ListenersResult>("tencentcloud:Gaap/getLayer7Listeners:getLayer7Listeners", args ?? new GetLayer7ListenersArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetLayer7ListenersResult>("tencentcloud:Gaap/getLayer7Listeners:getLayer7Listeners", args ?? new GetLayer7ListenersArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query gaap layer7 listeners.
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var fooProxy = new Tencentcloud.Gaap.Proxy("fooProxy", new()
         ///     {
-        ///         var fooProxy = new Tencentcloud.Gaap.Proxy("fooProxy", new Tencentcloud.Gaap.ProxyArgs
-        ///         {
-        ///             Bandwidth = 10,
-        ///             Concurrent = 2,
-        ///             AccessRegion = "SouthChina",
-        ///             RealserverRegion = "NorthChina",
-        ///         });
-        ///         var fooLayer7Listener = new Tencentcloud.Gaap.Layer7Listener("fooLayer7Listener", new Tencentcloud.Gaap.Layer7ListenerArgs
-        ///         {
-        ///             Protocol = "HTTP",
-        ///             Port = 80,
-        ///             ProxyId = fooProxy.Id,
-        ///         });
-        ///         var listenerId = Tencentcloud.Gaap.GetLayer7Listeners.Invoke(new Tencentcloud.Gaap.GetLayer7ListenersInvokeArgs
-        ///         {
-        ///             Protocol = "HTTP",
-        ///             ProxyId = fooProxy.Id,
-        ///             ListenerId = fooLayer7Listener.Id,
-        ///         });
-        ///     }
+        ///         Bandwidth = 10,
+        ///         Concurrent = 2,
+        ///         AccessRegion = "SouthChina",
+        ///         RealserverRegion = "NorthChina",
+        ///     });
         /// 
-        /// }
+        ///     var fooLayer7Listener = new Tencentcloud.Gaap.Layer7Listener("fooLayer7Listener", new()
+        ///     {
+        ///         Protocol = "HTTP",
+        ///         Port = 80,
+        ///         ProxyId = fooProxy.Id,
+        ///     });
+        /// 
+        ///     var listenerId = Tencentcloud.Gaap.GetLayer7Listeners.Invoke(new()
+        ///     {
+        ///         Protocol = "HTTP",
+        ///         ProxyId = fooProxy.Id,
+        ///         ListenerId = fooLayer7Listener.Id,
+        ///     });
+        /// 
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetLayer7ListenersResult> Invoke(GetLayer7ListenersInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetLayer7ListenersResult>("tencentcloud:Gaap/getLayer7Listeners:getLayer7Listeners", args ?? new GetLayer7ListenersInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetLayer7ListenersResult>("tencentcloud:Gaap/getLayer7Listeners:getLayer7Listeners", args ?? new GetLayer7ListenersInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetLayer7ListenersArgs : Pulumi.InvokeArgs
+    public sealed class GetLayer7ListenersArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// ID of the layer7 listener to be queried.
@@ -145,9 +143,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
         public GetLayer7ListenersArgs()
         {
         }
+        public static new GetLayer7ListenersArgs Empty => new GetLayer7ListenersArgs();
     }
 
-    public sealed class GetLayer7ListenersInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetLayer7ListenersInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// ID of the layer7 listener to be queried.
@@ -188,6 +187,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
         public GetLayer7ListenersInvokeArgs()
         {
         }
+        public static new GetLayer7ListenersInvokeArgs Empty => new GetLayer7ListenersInvokeArgs();
     }
 
 

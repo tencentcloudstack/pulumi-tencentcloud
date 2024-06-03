@@ -15,37 +15,38 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Address
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var foo = new Tencentcloud.Address.TemplateGroup("foo", new()
     ///     {
-    ///         var foo = new Tencentcloud.Address.TemplateGroup("foo", new Tencentcloud.Address.TemplateGroupArgs
+    ///         TemplateIds = new[]
     ///         {
-    ///             TemplateIds = 
-    ///             {
-    ///                 "ipl-axaf24151",
-    ///                 "ipl-axaf24152",
-    ///             },
-    ///         });
-    ///     }
+    ///             "ipl-axaf24151",
+    ///             "ipl-axaf24152",
+    ///         },
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// Address template group can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Address/templateGroup:TemplateGroup foo ipmg-0np3u974
+    /// $ pulumi import tencentcloud:Address/templateGroup:TemplateGroup foo ipmg-0np3u974
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Address/templateGroup:TemplateGroup")]
-    public partial class TemplateGroup : Pulumi.CustomResource
+    public partial class TemplateGroup : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Name of the address template group.
@@ -104,7 +105,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Address
         }
     }
 
-    public sealed class TemplateGroupArgs : Pulumi.ResourceArgs
+    public sealed class TemplateGroupArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Name of the address template group.
@@ -127,9 +128,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Address
         public TemplateGroupArgs()
         {
         }
+        public static new TemplateGroupArgs Empty => new TemplateGroupArgs();
     }
 
-    public sealed class TemplateGroupState : Pulumi.ResourceArgs
+    public sealed class TemplateGroupState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Name of the address template group.
@@ -152,5 +154,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Address
         public TemplateGroupState()
         {
         }
+        public static new TemplateGroupState Empty => new TemplateGroupState();
     }
 }

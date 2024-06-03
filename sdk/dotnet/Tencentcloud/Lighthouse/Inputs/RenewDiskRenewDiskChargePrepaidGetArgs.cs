@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Lighthouse.Inputs
 {
 
-    public sealed class RenewDiskRenewDiskChargePrepaidGetArgs : Pulumi.ResourceArgs
+    public sealed class RenewDiskRenewDiskChargePrepaidGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Current instance expiration time. Such as 2018-01-01 00:00:00. Specifying this parameter can align the expiration time of the instance attached to the disk. One of this parameter and Period must be specified, and cannot be specified at the same time.
@@ -40,5 +40,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Lighthouse.Inputs
         public RenewDiskRenewDiskChargePrepaidGetArgs()
         {
         }
+        public static new RenewDiskRenewDiskChargePrepaidGetArgs Empty => new RenewDiskRenewDiskChargePrepaidGetArgs();
     }
 }

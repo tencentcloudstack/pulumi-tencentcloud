@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka.Inputs
 {
 
-    public sealed class InstanceTagGetArgs : Pulumi.ResourceArgs
+    public sealed class InstanceTagGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Tag key.
@@ -28,5 +28,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka.Inputs
         public InstanceTagGetArgs()
         {
         }
+        public static new InstanceTagGetArgs Empty => new InstanceTagGetArgs();
     }
 }

@@ -7,42 +7,48 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a waf webShell
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Waf"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Waf"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Waf.NewWebShell(ctx, "example", &Waf.WebShellArgs{
-// 			Domain: pulumi.String("demo.waf.com"),
-// 			Status: pulumi.Int(0),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Waf.NewWebShell(ctx, "example", &Waf.WebShellArgs{
+//				Domain: pulumi.String("demo.waf.com"),
+//				Status: pulumi.Int(0),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // waf web_shell can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Waf/webShell:WebShell example demo.waf.com
+// $ pulumi import tencentcloud:Waf/webShell:WebShell example demo.waf.com
 // ```
 type WebShell struct {
 	pulumi.CustomResourceState
@@ -66,7 +72,7 @@ func NewWebShell(ctx *pulumi.Context,
 	if args.Status == nil {
 		return nil, errors.New("invalid value for required argument 'Status'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource WebShell
 	err := ctx.RegisterResource("tencentcloud:Waf/webShell:WebShell", name, args, &resource, opts...)
 	if err != nil {
@@ -147,7 +153,7 @@ func (i *WebShell) ToWebShellOutputWithContext(ctx context.Context) WebShellOutp
 // WebShellArrayInput is an input type that accepts WebShellArray and WebShellArrayOutput values.
 // You can construct a concrete instance of `WebShellArrayInput` via:
 //
-//          WebShellArray{ WebShellArgs{...} }
+//	WebShellArray{ WebShellArgs{...} }
 type WebShellArrayInput interface {
 	pulumi.Input
 
@@ -172,7 +178,7 @@ func (i WebShellArray) ToWebShellArrayOutputWithContext(ctx context.Context) Web
 // WebShellMapInput is an input type that accepts WebShellMap and WebShellMapOutput values.
 // You can construct a concrete instance of `WebShellMapInput` via:
 //
-//          WebShellMap{ "key": WebShellArgs{...} }
+//	WebShellMap{ "key": WebShellArgs{...} }
 type WebShellMapInput interface {
 	pulumi.Input
 

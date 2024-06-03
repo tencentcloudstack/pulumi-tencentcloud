@@ -15,36 +15,37 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpn
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var vpnGatewayCcnRoutes = new Tencentcloud.Vpn.GatewayCcnRoutes("vpnGatewayCcnRoutes", new()
     ///     {
-    ///         var vpnGatewayCcnRoutes = new Tencentcloud.Vpn.GatewayCcnRoutes("vpnGatewayCcnRoutes", new Tencentcloud.Vpn.GatewayCcnRoutesArgs
-    ///         {
-    ///             DestinationCidrBlock = "192.168.1.0/24",
-    ///             RouteId = "vpnr-akdy0757",
-    ///             Status = "DISABLE",
-    ///             VpnGatewayId = "vpngw-lie1a4u7",
-    ///         });
-    ///     }
+    ///         DestinationCidrBlock = "192.168.1.0/24",
+    ///         RouteId = "vpnr-akdy0757",
+    ///         Status = "DISABLE",
+    ///         VpnGatewayId = "vpngw-lie1a4u7",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// vpc vpn_gateway_ccn_routes can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Vpn/gatewayCcnRoutes:GatewayCcnRoutes vpn_gateway_ccn_routes vpn_gateway_id#ccn_routes_id
+    /// $ pulumi import tencentcloud:Vpn/gatewayCcnRoutes:GatewayCcnRoutes vpn_gateway_ccn_routes vpn_gateway_id#ccn_routes_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Vpn/gatewayCcnRoutes:GatewayCcnRoutes")]
-    public partial class GatewayCcnRoutes : Pulumi.CustomResource
+    public partial class GatewayCcnRoutes : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Routing CIDR.
@@ -115,7 +116,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpn
         }
     }
 
-    public sealed class GatewayCcnRoutesArgs : Pulumi.ResourceArgs
+    public sealed class GatewayCcnRoutesArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Routing CIDR.
@@ -144,9 +145,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpn
         public GatewayCcnRoutesArgs()
         {
         }
+        public static new GatewayCcnRoutesArgs Empty => new GatewayCcnRoutesArgs();
     }
 
-    public sealed class GatewayCcnRoutesState : Pulumi.ResourceArgs
+    public sealed class GatewayCcnRoutesState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Routing CIDR.
@@ -175,5 +177,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpn
         public GatewayCcnRoutesState()
         {
         }
+        public static new GatewayCcnRoutesState Empty => new GatewayCcnRoutesState();
     }
 }

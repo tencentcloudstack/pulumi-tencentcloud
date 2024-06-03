@@ -15,83 +15,84 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tem
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var gateway = new Tencentcloud.Tem.Gateway("gateway", new()
     ///     {
-    ///         var gateway = new Tencentcloud.Tem.Gateway("gateway", new Tencentcloud.Tem.GatewayArgs
+    ///         Ingress = new Tencentcloud.Tem.Inputs.GatewayIngressArgs
     ///         {
-    ///             Ingress = new Tencentcloud.Tem.Inputs.GatewayIngressArgs
+    ///             AddressIpVersion = "IPV4",
+    ///             EnvironmentId = "en-853mggjm",
+    ///             IngressName = "demo",
+    ///             Mixed = false,
+    ///             RewriteType = "NONE",
+    ///             Rules = new[]
     ///             {
-    ///                 AddressIpVersion = "IPV4",
-    ///                 EnvironmentId = "en-853mggjm",
-    ///                 IngressName = "demo",
-    ///                 Mixed = false,
-    ///                 RewriteType = "NONE",
-    ///                 Rules = 
+    ///                 new Tencentcloud.Tem.Inputs.GatewayIngressRuleArgs
     ///                 {
-    ///                     new Tencentcloud.Tem.Inputs.GatewayIngressRuleArgs
+    ///                     Host = "test.com",
+    ///                     Http = new Tencentcloud.Tem.Inputs.GatewayIngressRuleHttpArgs
     ///                     {
-    ///                         Host = "test.com",
-    ///                         Http = new Tencentcloud.Tem.Inputs.GatewayIngressRuleHttpArgs
+    ///                         Paths = new[]
     ///                         {
-    ///                             Paths = 
+    ///                             new Tencentcloud.Tem.Inputs.GatewayIngressRuleHttpPathArgs
     ///                             {
-    ///                                 new Tencentcloud.Tem.Inputs.GatewayIngressRuleHttpPathArgs
+    ///                                 Backend = new Tencentcloud.Tem.Inputs.GatewayIngressRuleHttpPathBackendArgs
     ///                                 {
-    ///                                     Backend = new Tencentcloud.Tem.Inputs.GatewayIngressRuleHttpPathBackendArgs
-    ///                                     {
-    ///                                         ServiceName = "demo",
-    ///                                         ServicePort = 80,
-    ///                                     },
-    ///                                     Path = "/",
+    ///                                     ServiceName = "demo",
+    ///                                     ServicePort = 80,
     ///                                 },
+    ///                                 Path = "/",
     ///                             },
     ///                         },
-    ///                         Protocol = "http",
     ///                     },
-    ///                     new Tencentcloud.Tem.Inputs.GatewayIngressRuleArgs
+    ///                     Protocol = "http",
+    ///                 },
+    ///                 new Tencentcloud.Tem.Inputs.GatewayIngressRuleArgs
+    ///                 {
+    ///                     Host = "hello.com",
+    ///                     Http = new Tencentcloud.Tem.Inputs.GatewayIngressRuleHttpArgs
     ///                     {
-    ///                         Host = "hello.com",
-    ///                         Http = new Tencentcloud.Tem.Inputs.GatewayIngressRuleHttpArgs
+    ///                         Paths = new[]
     ///                         {
-    ///                             Paths = 
+    ///                             new Tencentcloud.Tem.Inputs.GatewayIngressRuleHttpPathArgs
     ///                             {
-    ///                                 new Tencentcloud.Tem.Inputs.GatewayIngressRuleHttpPathArgs
+    ///                                 Backend = new Tencentcloud.Tem.Inputs.GatewayIngressRuleHttpPathBackendArgs
     ///                                 {
-    ///                                     Backend = new Tencentcloud.Tem.Inputs.GatewayIngressRuleHttpPathBackendArgs
-    ///                                     {
-    ///                                         ServiceName = "hello",
-    ///                                         ServicePort = 36000,
-    ///                                     },
-    ///                                     Path = "/",
+    ///                                     ServiceName = "hello",
+    ///                                     ServicePort = 36000,
     ///                                 },
+    ///                                 Path = "/",
     ///                             },
     ///                         },
-    ///                         Protocol = "http",
     ///                     },
+    ///                     Protocol = "http",
     ///                 },
     ///             },
-    ///         });
-    ///     }
+    ///         },
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// tem gateway can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Tem/gateway:Gateway gateway environmentId#gatewayName
+    /// $ pulumi import tencentcloud:Tem/gateway:Gateway gateway environmentId#gatewayName
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Tem/gateway:Gateway")]
-    public partial class Gateway : Pulumi.CustomResource
+    public partial class Gateway : global::Pulumi.CustomResource
     {
         /// <summary>
         /// gateway properties.
@@ -144,7 +145,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tem
         }
     }
 
-    public sealed class GatewayArgs : Pulumi.ResourceArgs
+    public sealed class GatewayArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// gateway properties.
@@ -155,9 +156,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tem
         public GatewayArgs()
         {
         }
+        public static new GatewayArgs Empty => new GatewayArgs();
     }
 
-    public sealed class GatewayState : Pulumi.ResourceArgs
+    public sealed class GatewayState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// gateway properties.
@@ -168,5 +170,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tem
         public GatewayState()
         {
         }
+        public static new GatewayState Empty => new GatewayState();
     }
 }

@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf.Inputs
 {
 
-    public sealed class DeployContainerGroupHealthCheckSettingsLivenessProbeGetArgs : Pulumi.ResourceArgs
+    public sealed class DeployContainerGroupHealthCheckSettingsLivenessProbeGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// The health check method. HTTP: checks through an HTTP interface; CMD: checks by executing a command; TCP: checks by establishing a TCP connection. Note: This field may return null, indicating that no valid values can be obtained.
@@ -88,5 +88,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf.Inputs
         public DeployContainerGroupHealthCheckSettingsLivenessProbeGetArgs()
         {
         }
+        public static new DeployContainerGroupHealthCheckSettingsLivenessProbeGetArgs Empty => new DeployContainerGroupHealthCheckSettingsLivenessProbeGetArgs();
     }
 }

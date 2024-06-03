@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos.Inputs
 {
 
-    public sealed class BatchOperationCosPutObjectCopyGetArgs : Pulumi.ResourceArgs
+    public sealed class BatchOperationCosPutObjectCopyGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// This element specifies how ACL is copied. Valid values:
@@ -109,5 +109,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos.Inputs
         public BatchOperationCosPutObjectCopyGetArgs()
         {
         }
+        public static new BatchOperationCosPutObjectCopyGetArgs Empty => new BatchOperationCosPutObjectCopyGetArgs();
     }
 }

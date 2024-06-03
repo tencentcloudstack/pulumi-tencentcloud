@@ -8,35 +8,40 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Use this data source to query detailed information of protocol template groups.
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Protocol"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Protocol"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Protocol"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Protocol.GetTemplateGroups(ctx, &protocol.GetTemplateGroupsArgs{
-// 			Name: pulumi.StringRef("test"),
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Protocol.GetTemplateGroups(ctx, &protocol.GetTemplateGroupsArgs{
+//				Name: pulumi.StringRef("test"),
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 func GetTemplateGroups(ctx *pulumi.Context, args *GetTemplateGroupsArgs, opts ...pulumi.InvokeOption) (*GetTemplateGroupsResult, error) {
-	opts = pkgInvokeDefaultOpts(opts)
+	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetTemplateGroupsResult
 	err := ctx.Invoke("tencentcloud:Protocol/getTemplateGroups:getTemplateGroups", args, &rv, opts...)
 	if err != nil {

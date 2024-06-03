@@ -7,46 +7,52 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a organization orgMemberPolicyAttachment
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Organization"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Organization"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Organization.NewOrgMemberPolicyAttachment(ctx, "orgMemberPolicyAttachment", &Organization.OrgMemberPolicyAttachmentArgs{
-// 			IdentityId: pulumi.Int(1),
-// 			MemberUins: pulumi.IntArray{
-// 				pulumi.Int(100033905366),
-// 				pulumi.Int(100033905356),
-// 			},
-// 			PolicyName: pulumi.String("example-iac"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Organization.NewOrgMemberPolicyAttachment(ctx, "orgMemberPolicyAttachment", &Organization.OrgMemberPolicyAttachmentArgs{
+//				IdentityId: pulumi.Int(1),
+//				MemberUins: pulumi.IntArray{
+//					pulumi.Int(100033905366),
+//					pulumi.Int(100033905356),
+//				},
+//				PolicyName: pulumi.String("example-iac"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // organization org_member_policy_attachment can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Organization/orgMemberPolicyAttachment:OrgMemberPolicyAttachment org_member_policy_attachment org_member_policy_attachment_id
+// $ pulumi import tencentcloud:Organization/orgMemberPolicyAttachment:OrgMemberPolicyAttachment org_member_policy_attachment org_member_policy_attachment_id
 // ```
 type OrgMemberPolicyAttachment struct {
 	pulumi.CustomResourceState
@@ -77,7 +83,7 @@ func NewOrgMemberPolicyAttachment(ctx *pulumi.Context,
 	if args.PolicyName == nil {
 		return nil, errors.New("invalid value for required argument 'PolicyName'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource OrgMemberPolicyAttachment
 	err := ctx.RegisterResource("tencentcloud:Organization/orgMemberPolicyAttachment:OrgMemberPolicyAttachment", name, args, &resource, opts...)
 	if err != nil {
@@ -174,7 +180,7 @@ func (i *OrgMemberPolicyAttachment) ToOrgMemberPolicyAttachmentOutputWithContext
 // OrgMemberPolicyAttachmentArrayInput is an input type that accepts OrgMemberPolicyAttachmentArray and OrgMemberPolicyAttachmentArrayOutput values.
 // You can construct a concrete instance of `OrgMemberPolicyAttachmentArrayInput` via:
 //
-//          OrgMemberPolicyAttachmentArray{ OrgMemberPolicyAttachmentArgs{...} }
+//	OrgMemberPolicyAttachmentArray{ OrgMemberPolicyAttachmentArgs{...} }
 type OrgMemberPolicyAttachmentArrayInput interface {
 	pulumi.Input
 
@@ -199,7 +205,7 @@ func (i OrgMemberPolicyAttachmentArray) ToOrgMemberPolicyAttachmentArrayOutputWi
 // OrgMemberPolicyAttachmentMapInput is an input type that accepts OrgMemberPolicyAttachmentMap and OrgMemberPolicyAttachmentMapOutput values.
 // You can construct a concrete instance of `OrgMemberPolicyAttachmentMapInput` via:
 //
-//          OrgMemberPolicyAttachmentMap{ "key": OrgMemberPolicyAttachmentArgs{...} }
+//	OrgMemberPolicyAttachmentMap{ "key": OrgMemberPolicyAttachmentArgs{...} }
 type OrgMemberPolicyAttachmentMapInput interface {
 	pulumi.Input
 

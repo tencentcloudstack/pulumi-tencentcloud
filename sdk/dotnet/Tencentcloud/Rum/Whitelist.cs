@@ -15,35 +15,36 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Rum
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var whitelist = new Tencentcloud.Rum.Whitelist("whitelist", new()
     ///     {
-    ///         var whitelist = new Tencentcloud.Rum.Whitelist("whitelist", new Tencentcloud.Rum.WhitelistArgs
-    ///         {
-    ///             InstanceId = "rum-pasZKEI3RLgakj",
-    ///             Remark = "white list remark",
-    ///             WhitelistUin = "20221122",
-    ///         });
-    ///     }
+    ///         InstanceId = "rum-pasZKEI3RLgakj",
+    ///         Remark = "white list remark",
+    ///         WhitelistUin = "20221122",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// rum whitelist can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Rum/whitelist:Whitelist whitelist whitelist_id
+    /// $ pulumi import tencentcloud:Rum/whitelist:Whitelist whitelist whitelist_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Rum/whitelist:Whitelist")]
-    public partial class Whitelist : Pulumi.CustomResource
+    public partial class Whitelist : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Business identifier.
@@ -138,7 +139,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Rum
         }
     }
 
-    public sealed class WhitelistArgs : Pulumi.ResourceArgs
+    public sealed class WhitelistArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Business identifier.
@@ -167,9 +168,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Rum
         public WhitelistArgs()
         {
         }
+        public static new WhitelistArgs Empty => new WhitelistArgs();
     }
 
-    public sealed class WhitelistState : Pulumi.ResourceArgs
+    public sealed class WhitelistState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Business identifier.
@@ -222,5 +224,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Rum
         public WhitelistState()
         {
         }
+        public static new WhitelistState Empty => new WhitelistState();
     }
 }

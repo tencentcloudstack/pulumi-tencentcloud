@@ -7,42 +7,48 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a cynosdb reloadProxyNode
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cynosdb"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cynosdb"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Cynosdb.NewReloadProxyNode(ctx, "reloadProxyNode", &Cynosdb.ReloadProxyNodeArgs{
-// 			ClusterId:    pulumi.String("cynosdbmysql-cgd2gpwr"),
-// 			ProxyGroupId: pulumi.String("cynosdbmysql-proxy-8lqtl8pk"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Cynosdb.NewReloadProxyNode(ctx, "reloadProxyNode", &Cynosdb.ReloadProxyNodeArgs{
+//				ClusterId:    pulumi.String("cynosdbmysql-cgd2gpwr"),
+//				ProxyGroupId: pulumi.String("cynosdbmysql-proxy-8lqtl8pk"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // cynosdb reload_proxy_node can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Cynosdb/reloadProxyNode:ReloadProxyNode reload_proxy_node reload_proxy_node_id
+// $ pulumi import tencentcloud:Cynosdb/reloadProxyNode:ReloadProxyNode reload_proxy_node reload_proxy_node_id
 // ```
 type ReloadProxyNode struct {
 	pulumi.CustomResourceState
@@ -66,7 +72,7 @@ func NewReloadProxyNode(ctx *pulumi.Context,
 	if args.ProxyGroupId == nil {
 		return nil, errors.New("invalid value for required argument 'ProxyGroupId'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource ReloadProxyNode
 	err := ctx.RegisterResource("tencentcloud:Cynosdb/reloadProxyNode:ReloadProxyNode", name, args, &resource, opts...)
 	if err != nil {
@@ -147,7 +153,7 @@ func (i *ReloadProxyNode) ToReloadProxyNodeOutputWithContext(ctx context.Context
 // ReloadProxyNodeArrayInput is an input type that accepts ReloadProxyNodeArray and ReloadProxyNodeArrayOutput values.
 // You can construct a concrete instance of `ReloadProxyNodeArrayInput` via:
 //
-//          ReloadProxyNodeArray{ ReloadProxyNodeArgs{...} }
+//	ReloadProxyNodeArray{ ReloadProxyNodeArgs{...} }
 type ReloadProxyNodeArrayInput interface {
 	pulumi.Input
 
@@ -172,7 +178,7 @@ func (i ReloadProxyNodeArray) ToReloadProxyNodeArrayOutputWithContext(ctx contex
 // ReloadProxyNodeMapInput is an input type that accepts ReloadProxyNodeMap and ReloadProxyNodeMapOutput values.
 // You can construct a concrete instance of `ReloadProxyNodeMapInput` via:
 //
-//          ReloadProxyNodeMap{ "key": ReloadProxyNodeArgs{...} }
+//	ReloadProxyNodeMap{ "key": ReloadProxyNodeArgs{...} }
 type ReloadProxyNodeMapInput interface {
 	pulumi.Input
 

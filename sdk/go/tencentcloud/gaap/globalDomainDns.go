@@ -7,47 +7,53 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a gaap global domain dns
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Gaap"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Gaap"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Gaap.NewGlobalDomainDns(ctx, "globalDomainDns", &Gaap.GlobalDomainDnsArgs{
-// 			DomainId: pulumi.String("dm-xxxxxx"),
-// 			NationCountryInnerCodes: pulumi.StringArray{
-// 				pulumi.String("101001"),
-// 			},
-// 			ProxyIdLists: pulumi.StringArray{
-// 				pulumi.String("link-xxxxxx"),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Gaap.NewGlobalDomainDns(ctx, "globalDomainDns", &Gaap.GlobalDomainDnsArgs{
+//				DomainId: pulumi.String("dm-xxxxxx"),
+//				NationCountryInnerCodes: pulumi.StringArray{
+//					pulumi.String("101001"),
+//				},
+//				ProxyIdLists: pulumi.StringArray{
+//					pulumi.String("link-xxxxxx"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // gaap global_domain_dns can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Gaap/globalDomainDns:GlobalDomainDns global_domain_dns ${domainId}#${dnsRecordId}
+// $ pulumi import tencentcloud:Gaap/globalDomainDns:GlobalDomainDns global_domain_dns ${domainId}#${dnsRecordId}
 // ```
 type GlobalDomainDns struct {
 	pulumi.CustomResourceState
@@ -76,7 +82,7 @@ func NewGlobalDomainDns(ctx *pulumi.Context,
 	if args.ProxyIdLists == nil {
 		return nil, errors.New("invalid value for required argument 'ProxyIdLists'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource GlobalDomainDns
 	err := ctx.RegisterResource("tencentcloud:Gaap/globalDomainDns:GlobalDomainDns", name, args, &resource, opts...)
 	if err != nil {
@@ -165,7 +171,7 @@ func (i *GlobalDomainDns) ToGlobalDomainDnsOutputWithContext(ctx context.Context
 // GlobalDomainDnsArrayInput is an input type that accepts GlobalDomainDnsArray and GlobalDomainDnsArrayOutput values.
 // You can construct a concrete instance of `GlobalDomainDnsArrayInput` via:
 //
-//          GlobalDomainDnsArray{ GlobalDomainDnsArgs{...} }
+//	GlobalDomainDnsArray{ GlobalDomainDnsArgs{...} }
 type GlobalDomainDnsArrayInput interface {
 	pulumi.Input
 
@@ -190,7 +196,7 @@ func (i GlobalDomainDnsArray) ToGlobalDomainDnsArrayOutputWithContext(ctx contex
 // GlobalDomainDnsMapInput is an input type that accepts GlobalDomainDnsMap and GlobalDomainDnsMapOutput values.
 // You can construct a concrete instance of `GlobalDomainDnsMapInput` via:
 //
-//          GlobalDomainDnsMap{ "key": GlobalDomainDnsArgs{...} }
+//	GlobalDomainDnsMap{ "key": GlobalDomainDnsArgs{...} }
 type GlobalDomainDnsMapInput interface {
 	pulumi.Input
 

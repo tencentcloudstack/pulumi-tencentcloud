@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps.Inputs
 {
 
-    public sealed class GetMediaMetaDataInputInfoCosInputInfoArgs : Pulumi.InvokeArgs
+    public sealed class GetMediaMetaDataInputInfoCosInputInfoArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// The COS bucket of the object to process, such as `TopRankVideo-125xxx88`.
@@ -34,5 +34,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps.Inputs
         public GetMediaMetaDataInputInfoCosInputInfoArgs()
         {
         }
+        public static new GetMediaMetaDataInputInfoCosInputInfoArgs Empty => new GetMediaMetaDataInputInfoCosInputInfoArgs();
     }
 }

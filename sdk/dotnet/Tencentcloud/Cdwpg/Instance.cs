@@ -15,75 +15,76 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cdwpg
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var instance = new Tencentcloud.Cdwpg.Instance("instance", new()
     ///     {
-    ///         var instance = new Tencentcloud.Cdwpg.Instance("instance", new Tencentcloud.Cdwpg.InstanceArgs
+    ///         AdminPassword = "xxxxxx",
+    ///         ChargeProperties = new Tencentcloud.Cdwpg.Inputs.InstanceChargePropertiesArgs
     ///         {
-    ///             AdminPassword = "xxxxxx",
-    ///             ChargeProperties = new Tencentcloud.Cdwpg.Inputs.InstanceChargePropertiesArgs
+    ///             ChargeType = "POSTPAID_BY_HOUR",
+    ///             RenewFlag = 0,
+    ///             TimeSpan = 1,
+    ///             TimeUnit = "h",
+    ///         },
+    ///         InstanceName = "test_cdwpg",
+    ///         Resources = new[]
+    ///         {
+    ///             new Tencentcloud.Cdwpg.Inputs.InstanceResourceArgs
     ///             {
-    ///                 ChargeType = "POSTPAID_BY_HOUR",
-    ///                 RenewFlag = 0,
-    ///                 TimeSpan = 1,
-    ///                 TimeUnit = "h",
-    ///             },
-    ///             InstanceName = "test_cdwpg",
-    ///             Resources = 
-    ///             {
-    ///                 new Tencentcloud.Cdwpg.Inputs.InstanceResourceArgs
+    ///                 Count = 2,
+    ///                 DiskSpec = new Tencentcloud.Cdwpg.Inputs.InstanceResourceDiskSpecArgs
     ///                 {
-    ///                     Count = 2,
-    ///                     DiskSpec = new Tencentcloud.Cdwpg.Inputs.InstanceResourceDiskSpecArgs
-    ///                     {
-    ///                         DiskCount = 1,
-    ///                         DiskSize = 200,
-    ///                         DiskType = "CLOUD_HSSD",
-    ///                     },
-    ///                     SpecName = "S_4_16_H_CN",
-    ///                     Type = "cn",
+    ///                     DiskCount = 1,
+    ///                     DiskSize = 200,
+    ///                     DiskType = "CLOUD_HSSD",
     ///                 },
-    ///                 new Tencentcloud.Cdwpg.Inputs.InstanceResourceArgs
-    ///                 {
-    ///                     Count = 2,
-    ///                     DiskSpec = new Tencentcloud.Cdwpg.Inputs.InstanceResourceDiskSpecArgs
-    ///                     {
-    ///                         DiskCount = 10,
-    ///                         DiskSize = 20,
-    ///                         DiskType = "CLOUD_HSSD",
-    ///                     },
-    ///                     SpecName = "S_4_16_H_CN",
-    ///                     Type = "dn",
-    ///                 },
+    ///                 SpecName = "S_4_16_H_CN",
+    ///                 Type = "cn",
     ///             },
-    ///             Tags = 
+    ///             new Tencentcloud.Cdwpg.Inputs.InstanceResourceArgs
     ///             {
-    ///                 { "tagKey", "tagValue" },
+    ///                 Count = 2,
+    ///                 DiskSpec = new Tencentcloud.Cdwpg.Inputs.InstanceResourceDiskSpecArgs
+    ///                 {
+    ///                     DiskCount = 10,
+    ///                     DiskSize = 20,
+    ///                     DiskType = "CLOUD_HSSD",
+    ///                 },
+    ///                 SpecName = "S_4_16_H_CN",
+    ///                 Type = "dn",
     ///             },
-    ///             UserSubnetId = "subnet-xxxxxx",
-    ///             UserVpcId = "vpc-xxxxxx",
-    ///             Zone = "ap-guangzhou-6",
-    ///         });
-    ///     }
+    ///         },
+    ///         Tags = 
+    ///         {
+    ///             { "tagKey", "tagValue" },
+    ///         },
+    ///         UserSubnetId = "subnet-xxxxxx",
+    ///         UserVpcId = "vpc-xxxxxx",
+    ///         Zone = "ap-guangzhou-6",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// cdwpg instance can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Cdwpg/instance:Instance instance instance_id
+    /// $ pulumi import tencentcloud:Cdwpg/instance:Instance instance instance_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Cdwpg/instance:Instance")]
-    public partial class Instance : Pulumi.CustomResource
+    public partial class Instance : global::Pulumi.CustomResource
     {
         /// <summary>
         /// cluster password.
@@ -157,6 +158,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cdwpg
             {
                 Version = Utilities.Version,
                 PluginDownloadURL = "github://api.github.com/tencentcloudstack",
+                AdditionalSecretOutputs =
+                {
+                    "adminPassword",
+                },
             };
             var merged = CustomResourceOptions.Merge(defaultOptions, options);
             // Override the ID if one was specified for consistency with other language SDKs.
@@ -178,13 +183,23 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cdwpg
         }
     }
 
-    public sealed class InstanceArgs : Pulumi.ResourceArgs
+    public sealed class InstanceArgs : global::Pulumi.ResourceArgs
     {
+        [Input("adminPassword", required: true)]
+        private Input<string>? _adminPassword;
+
         /// <summary>
         /// cluster password.
         /// </summary>
-        [Input("adminPassword", required: true)]
-        public Input<string> AdminPassword { get; set; } = null!;
+        public Input<string>? AdminPassword
+        {
+            get => _adminPassword;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _adminPassword = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
 
         /// <summary>
         /// instance billing mode.
@@ -243,15 +258,26 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cdwpg
         public InstanceArgs()
         {
         }
+        public static new InstanceArgs Empty => new InstanceArgs();
     }
 
-    public sealed class InstanceState : Pulumi.ResourceArgs
+    public sealed class InstanceState : global::Pulumi.ResourceArgs
     {
+        [Input("adminPassword")]
+        private Input<string>? _adminPassword;
+
         /// <summary>
         /// cluster password.
         /// </summary>
-        [Input("adminPassword")]
-        public Input<string>? AdminPassword { get; set; }
+        public Input<string>? AdminPassword
+        {
+            get => _adminPassword;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _adminPassword = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
 
         /// <summary>
         /// instance billing mode.
@@ -310,5 +336,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cdwpg
         public InstanceState()
         {
         }
+        public static new InstanceState Empty => new InstanceState();
     }
 }

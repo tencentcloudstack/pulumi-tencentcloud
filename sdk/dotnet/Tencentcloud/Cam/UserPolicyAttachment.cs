@@ -15,86 +15,83 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
     /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using System.Text.Json;
     /// using Pulumi;
     /// using Tencentcloud = Pulumi.Tencentcloud;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var config = new Config();
+    ///     var camUserBasic = config.Get("camUserBasic") ?? "keep-cam-user";
+    ///     var policyBasic = new Tencentcloud.Cam.Policy("policyBasic", new()
     ///     {
-    ///         var config = new Config();
-    ///         var camUserBasic = config.Get("camUserBasic") ?? "keep-cam-user";
-    ///         var policyBasic = new Tencentcloud.Cam.Policy("policyBasic", new Tencentcloud.Cam.PolicyArgs
+    ///         Document = JsonSerializer.Serialize(new Dictionary&lt;string, object?&gt;
     ///         {
-    ///             Document = JsonSerializer.Serialize(new Dictionary&lt;string, object?&gt;
+    ///             ["version"] = "2.0",
+    ///             ["statement"] = new[]
     ///             {
-    ///                 { "version", "2.0" },
-    ///                 { "statement", new[]
+    ///                 new Dictionary&lt;string, object?&gt;
+    ///                 {
+    ///                     ["action"] = new[]
     ///                     {
-    ///                         new Dictionary&lt;string, object?&gt;
-    ///                         {
-    ///                             { "action", new[]
-    ///                                 {
-    ///                                     "cos:*",
-    ///                                 }
-    ///                              },
-    ///                             { "resource", new[]
-    ///                                 {
-    ///                                     "*",
-    ///                                 }
-    ///                              },
-    ///                             { "effect", "allow" },
-    ///                         },
-    ///                         new Dictionary&lt;string, object?&gt;
-    ///                         {
-    ///                             { "effect", "allow" },
-    ///                             { "action", new[]
-    ///                                 {
-    ///                                     "monitor:*",
-    ///                                     "cam:ListUsersForGroup",
-    ///                                     "cam:ListGroups",
-    ///                                     "cam:GetGroup",
-    ///                                 }
-    ///                              },
-    ///                             { "resource", new[]
-    ///                                 {
-    ///                                     "*",
-    ///                                 }
-    ///                              },
-    ///                         },
-    ///                     }
-    ///                  },
-    ///             }),
-    ///             Description = "tf_test",
-    ///         });
-    ///         var users = Output.Create(Tencentcloud.Cam.GetUsers.InvokeAsync(new Tencentcloud.Cam.GetUsersArgs
-    ///         {
-    ///             Name = camUserBasic,
-    ///         }));
-    ///         var userPolicyAttachmentBasic = new Tencentcloud.Cam.UserPolicyAttachment("userPolicyAttachmentBasic", new Tencentcloud.Cam.UserPolicyAttachmentArgs
-    ///         {
-    ///             UserName = users.Apply(users =&gt; users.UserLists?[0]?.UserId),
-    ///             PolicyId = policyBasic.Id,
-    ///         });
-    ///     }
+    ///                         "cos:*",
+    ///                     },
+    ///                     ["resource"] = new[]
+    ///                     {
+    ///                         "*",
+    ///                     },
+    ///                     ["effect"] = "allow",
+    ///                 },
+    ///                 new Dictionary&lt;string, object?&gt;
+    ///                 {
+    ///                     ["effect"] = "allow",
+    ///                     ["action"] = new[]
+    ///                     {
+    ///                         "monitor:*",
+    ///                         "cam:ListUsersForGroup",
+    ///                         "cam:ListGroups",
+    ///                         "cam:GetGroup",
+    ///                     },
+    ///                     ["resource"] = new[]
+    ///                     {
+    ///                         "*",
+    ///                     },
+    ///                 },
+    ///             },
+    ///         }),
+    ///         Description = "tf_test",
+    ///     });
     /// 
-    /// }
+    ///     var users = Tencentcloud.Cam.GetUsers.Invoke(new()
+    ///     {
+    ///         Name = camUserBasic,
+    ///     });
+    /// 
+    ///     var userPolicyAttachmentBasic = new Tencentcloud.Cam.UserPolicyAttachment("userPolicyAttachmentBasic", new()
+    ///     {
+    ///         UserName = users.Apply(getUsersResult =&gt; getUsersResult.UserLists[0]?.UserId),
+    ///         PolicyId = policyBasic.Id,
+    ///     });
+    /// 
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// CAM user policy attachment can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Cam/userPolicyAttachment:UserPolicyAttachment foo cam-test#26800353
+    /// $ pulumi import tencentcloud:Cam/userPolicyAttachment:UserPolicyAttachment foo cam-test#26800353
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Cam/userPolicyAttachment:UserPolicyAttachment")]
-    public partial class UserPolicyAttachment : Pulumi.CustomResource
+    public partial class UserPolicyAttachment : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Mode of Creation of the CAM user policy attachment. `1` means the CAM policy attachment is created by production, and the others indicate syntax strategy ways.
@@ -183,7 +180,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam
         }
     }
 
-    public sealed class UserPolicyAttachmentArgs : Pulumi.ResourceArgs
+    public sealed class UserPolicyAttachmentArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// ID of the policy.
@@ -206,9 +203,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam
         public UserPolicyAttachmentArgs()
         {
         }
+        public static new UserPolicyAttachmentArgs Empty => new UserPolicyAttachmentArgs();
     }
 
-    public sealed class UserPolicyAttachmentState : Pulumi.ResourceArgs
+    public sealed class UserPolicyAttachmentState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Mode of Creation of the CAM user policy attachment. `1` means the CAM policy attachment is created by production, and the others indicate syntax strategy ways.
@@ -255,5 +253,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam
         public UserPolicyAttachmentState()
         {
         }
+        public static new UserPolicyAttachmentState Empty => new UserPolicyAttachmentState();
     }
 }

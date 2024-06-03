@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,6 +11,7 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
@@ -25,13 +27,11 @@ import * as utilities from "../utilities";
  *     ruleId: tencentcloud_dayu_l4_rule.test_rule.rule_id,
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getL4Rules(args: GetL4RulesArgs, opts?: pulumi.InvokeOptions): Promise<GetL4RulesResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Dayu/getL4Rules:getL4Rules", {
         "name": args.name,
         "resourceId": args.resourceId,
@@ -91,9 +91,31 @@ export interface GetL4RulesResult {
      */
     readonly ruleId?: string;
 }
-
+/**
+ * Use this data source to query dayu layer 4 rules
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const nameTest = tencentcloud.Dayu.getL4Rules({
+ *     resourceType: tencentcloud_dayu_l4_rule.test_rule.resource_type,
+ *     resourceId: tencentcloud_dayu_l4_rule.test_rule.resource_id,
+ *     name: tencentcloud_dayu_l4_rule.test_rule.name,
+ * });
+ * const idTest = tencentcloud.Dayu.getL4Rules({
+ *     resourceType: tencentcloud_dayu_l4_rule.test_rule.resource_type,
+ *     resourceId: tencentcloud_dayu_l4_rule.test_rule.resource_id,
+ *     ruleId: tencentcloud_dayu_l4_rule.test_rule.rule_id,
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getL4RulesOutput(args: GetL4RulesOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetL4RulesResult> {
-    return pulumi.output(args).apply(a => getL4Rules(a, opts))
+    return pulumi.output(args).apply((a: any) => getL4Rules(a, opts))
 }
 
 /**

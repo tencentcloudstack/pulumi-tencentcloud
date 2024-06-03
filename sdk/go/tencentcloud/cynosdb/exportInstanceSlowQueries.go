@@ -7,40 +7,46 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a cynosdb exportInstanceSlowQueries
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cynosdb"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cynosdb"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Cynosdb.NewExportInstanceSlowQueries(ctx, "exportInstanceSlowQueries", &Cynosdb.ExportInstanceSlowQueriesArgs{
-// 			Database:   pulumi.String("db1"),
-// 			EndTime:    pulumi.String("2022-01-01 14:00:00"),
-// 			FileType:   pulumi.String("csv"),
-// 			Host:       pulumi.String("10.10.10.10"),
-// 			InstanceId: pulumi.String("cynosdbmysql-ins-123"),
-// 			StartTime:  pulumi.String("2022-01-01 12:00:00"),
-// 			Username:   pulumi.String("root"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Cynosdb.NewExportInstanceSlowQueries(ctx, "exportInstanceSlowQueries", &Cynosdb.ExportInstanceSlowQueriesArgs{
+//				Database:   pulumi.String("db1"),
+//				EndTime:    pulumi.String("2022-01-01 14:00:00"),
+//				FileType:   pulumi.String("csv"),
+//				Host:       pulumi.String("10.10.10.10"),
+//				InstanceId: pulumi.String("cynosdbmysql-ins-123"),
+//				StartTime:  pulumi.String("2022-01-01 12:00:00"),
+//				Username:   pulumi.String("root"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 type ExportInstanceSlowQueries struct {
 	pulumi.CustomResourceState
 
@@ -72,7 +78,7 @@ func NewExportInstanceSlowQueries(ctx *pulumi.Context,
 	if args.InstanceId == nil {
 		return nil, errors.New("invalid value for required argument 'InstanceId'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource ExportInstanceSlowQueries
 	err := ctx.RegisterResource("tencentcloud:Cynosdb/exportInstanceSlowQueries:ExportInstanceSlowQueries", name, args, &resource, opts...)
 	if err != nil {
@@ -197,7 +203,7 @@ func (i *ExportInstanceSlowQueries) ToExportInstanceSlowQueriesOutputWithContext
 // ExportInstanceSlowQueriesArrayInput is an input type that accepts ExportInstanceSlowQueriesArray and ExportInstanceSlowQueriesArrayOutput values.
 // You can construct a concrete instance of `ExportInstanceSlowQueriesArrayInput` via:
 //
-//          ExportInstanceSlowQueriesArray{ ExportInstanceSlowQueriesArgs{...} }
+//	ExportInstanceSlowQueriesArray{ ExportInstanceSlowQueriesArgs{...} }
 type ExportInstanceSlowQueriesArrayInput interface {
 	pulumi.Input
 
@@ -222,7 +228,7 @@ func (i ExportInstanceSlowQueriesArray) ToExportInstanceSlowQueriesArrayOutputWi
 // ExportInstanceSlowQueriesMapInput is an input type that accepts ExportInstanceSlowQueriesMap and ExportInstanceSlowQueriesMapOutput values.
 // You can construct a concrete instance of `ExportInstanceSlowQueriesMapInput` via:
 //
-//          ExportInstanceSlowQueriesMap{ "key": ExportInstanceSlowQueriesArgs{...} }
+//	ExportInstanceSlowQueriesMap{ "key": ExportInstanceSlowQueriesArgs{...} }
 type ExportInstanceSlowQueriesMapInput interface {
 	pulumi.Input
 

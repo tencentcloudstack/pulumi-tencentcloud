@@ -15,35 +15,36 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var endPointServiceWhiteList = new Tencentcloud.Vpc.EndPointServiceWhiteList("endPointServiceWhiteList", new()
     ///     {
-    ///         var endPointServiceWhiteList = new Tencentcloud.Vpc.EndPointServiceWhiteList("endPointServiceWhiteList", new Tencentcloud.Vpc.EndPointServiceWhiteListArgs
-    ///         {
-    ///             Description = "terraform for test",
-    ///             EndPointServiceId = "vpcsvc-69y13tdb",
-    ///             UserUin = "100020512675",
-    ///         });
-    ///     }
+    ///         Description = "terraform for test",
+    ///         EndPointServiceId = "vpcsvc-69y13tdb",
+    ///         UserUin = "100020512675",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// vpc end_point_service_white_list can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Vpc/endPointServiceWhiteList:EndPointServiceWhiteList end_point_service_white_list end_point_service_white_list_id
+    /// $ pulumi import tencentcloud:Vpc/endPointServiceWhiteList:EndPointServiceWhiteList end_point_service_white_list end_point_service_white_list_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Vpc/endPointServiceWhiteList:EndPointServiceWhiteList")]
-    public partial class EndPointServiceWhiteList : Pulumi.CustomResource
+    public partial class EndPointServiceWhiteList : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Create Time.
@@ -120,7 +121,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         }
     }
 
-    public sealed class EndPointServiceWhiteListArgs : Pulumi.ResourceArgs
+    public sealed class EndPointServiceWhiteListArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Description of white list.
@@ -143,9 +144,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         public EndPointServiceWhiteListArgs()
         {
         }
+        public static new EndPointServiceWhiteListArgs Empty => new EndPointServiceWhiteListArgs();
     }
 
-    public sealed class EndPointServiceWhiteListState : Pulumi.ResourceArgs
+    public sealed class EndPointServiceWhiteListState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Create Time.
@@ -180,5 +182,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         public EndPointServiceWhiteListState()
         {
         }
+        public static new EndPointServiceWhiteListState Empty => new EndPointServiceWhiteListState();
     }
 }

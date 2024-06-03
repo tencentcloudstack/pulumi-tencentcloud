@@ -7,35 +7,41 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to recover a clickhouse back up
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Clickhouse"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Clickhouse"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Clickhouse.NewRecoverBackupJob(ctx, "recoverBackupJob", &Clickhouse.RecoverBackupJobArgs{
-// 			BackUpJobId: pulumi.Int(1234),
-// 			InstanceId:  pulumi.String("cdwch-xxxxxx"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Clickhouse.NewRecoverBackupJob(ctx, "recoverBackupJob", &Clickhouse.RecoverBackupJobArgs{
+//				BackUpJobId: pulumi.Int(1234),
+//				InstanceId:  pulumi.String("cdwch-xxxxxx"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 type RecoverBackupJob struct {
 	pulumi.CustomResourceState
 
@@ -58,7 +64,7 @@ func NewRecoverBackupJob(ctx *pulumi.Context,
 	if args.InstanceId == nil {
 		return nil, errors.New("invalid value for required argument 'InstanceId'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource RecoverBackupJob
 	err := ctx.RegisterResource("tencentcloud:Clickhouse/recoverBackupJob:RecoverBackupJob", name, args, &resource, opts...)
 	if err != nil {
@@ -139,7 +145,7 @@ func (i *RecoverBackupJob) ToRecoverBackupJobOutputWithContext(ctx context.Conte
 // RecoverBackupJobArrayInput is an input type that accepts RecoverBackupJobArray and RecoverBackupJobArrayOutput values.
 // You can construct a concrete instance of `RecoverBackupJobArrayInput` via:
 //
-//          RecoverBackupJobArray{ RecoverBackupJobArgs{...} }
+//	RecoverBackupJobArray{ RecoverBackupJobArgs{...} }
 type RecoverBackupJobArrayInput interface {
 	pulumi.Input
 
@@ -164,7 +170,7 @@ func (i RecoverBackupJobArray) ToRecoverBackupJobArrayOutputWithContext(ctx cont
 // RecoverBackupJobMapInput is an input type that accepts RecoverBackupJobMap and RecoverBackupJobMapOutput values.
 // You can construct a concrete instance of `RecoverBackupJobMapInput` via:
 //
-//          RecoverBackupJobMap{ "key": RecoverBackupJobArgs{...} }
+//	RecoverBackupJobMap{ "key": RecoverBackupJobArgs{...} }
 type RecoverBackupJobMapInput interface {
 	pulumi.Input
 

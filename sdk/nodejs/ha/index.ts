@@ -5,14 +5,26 @@ import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
 // Export members:
-export * from "./getVipEipAttachments";
-export * from "./getVips";
-export * from "./vip";
-export * from "./vipEipAttachment";
+export { GetVipEipAttachmentsArgs, GetVipEipAttachmentsResult, GetVipEipAttachmentsOutputArgs } from "./getVipEipAttachments";
+export const getVipEipAttachments: typeof import("./getVipEipAttachments").getVipEipAttachments = null as any;
+export const getVipEipAttachmentsOutput: typeof import("./getVipEipAttachments").getVipEipAttachmentsOutput = null as any;
+utilities.lazyLoad(exports, ["getVipEipAttachments","getVipEipAttachmentsOutput"], () => require("./getVipEipAttachments"));
 
-// Import resources to register:
-import { Vip } from "./vip";
-import { VipEipAttachment } from "./vipEipAttachment";
+export { GetVipsArgs, GetVipsResult, GetVipsOutputArgs } from "./getVips";
+export const getVips: typeof import("./getVips").getVips = null as any;
+export const getVipsOutput: typeof import("./getVips").getVipsOutput = null as any;
+utilities.lazyLoad(exports, ["getVips","getVipsOutput"], () => require("./getVips"));
+
+export { VipArgs, VipState } from "./vip";
+export type Vip = import("./vip").Vip;
+export const Vip: typeof import("./vip").Vip = null as any;
+utilities.lazyLoad(exports, ["Vip"], () => require("./vip"));
+
+export { VipEipAttachmentArgs, VipEipAttachmentState } from "./vipEipAttachment";
+export type VipEipAttachment = import("./vipEipAttachment").VipEipAttachment;
+export const VipEipAttachment: typeof import("./vipEipAttachment").VipEipAttachment = null as any;
+utilities.lazyLoad(exports, ["VipEipAttachment"], () => require("./vipEipAttachment"));
+
 
 const _module = {
     version: utilities.getVersion(),

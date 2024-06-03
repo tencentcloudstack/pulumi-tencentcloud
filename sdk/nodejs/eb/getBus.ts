@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,10 +11,11 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const foo = new tencentcloud.eb.EventBus("foo", {
  *     eventBusName: "tf-event_bus",
@@ -33,14 +35,12 @@ import * as utilities from "../utilities";
  *     }],
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getBus(args?: GetBusArgs, opts?: pulumi.InvokeOptions): Promise<GetBusResult> {
     args = args || {};
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Eb/getBus:getBus", {
         "filters": args.filters,
         "order": args.order,
@@ -88,9 +88,39 @@ export interface GetBusResult {
     readonly orderBy?: string;
     readonly resultOutputFile?: string;
 }
-
+/**
+ * Use this data source to query detailed information of eb bus
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
+ *
+ * const foo = new tencentcloud.eb.EventBus("foo", {
+ *     eventBusName: "tf-event_bus",
+ *     description: "event bus desc",
+ *     enableStore: false,
+ *     saveDays: 1,
+ *     tags: {
+ *         createdBy: "terraform",
+ *     },
+ * });
+ * const bus = tencentcloud.Eb.getBus({
+ *     orderBy: "AddTime",
+ *     order: "DESC",
+ *     filters: [{
+ *         values: ["Custom"],
+ *         name: "Type",
+ *     }],
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getBusOutput(args?: GetBusOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetBusResult> {
-    return pulumi.output(args).apply(a => getBus(a, opts))
+    return pulumi.output(args).apply((a: any) => getBus(a, opts))
 }
 
 /**

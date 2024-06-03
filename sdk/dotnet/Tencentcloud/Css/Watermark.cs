@@ -15,38 +15,39 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Css
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var watermark = new Tencentcloud.Css.Watermark("watermark", new()
     ///     {
-    ///         var watermark = new Tencentcloud.Css.Watermark("watermark", new Tencentcloud.Css.WatermarkArgs
-    ///         {
-    ///             Height = 0,
-    ///             PictureUrl = "picture_url",
-    ///             WatermarkName = "watermark_name",
-    ///             Width = 0,
-    ///             XPosition = 0,
-    ///             YPosition = 0,
-    ///         });
-    ///     }
+    ///         Height = 0,
+    ///         PictureUrl = "picture_url",
+    ///         WatermarkName = "watermark_name",
+    ///         Width = 0,
+    ///         XPosition = 0,
+    ///         YPosition = 0,
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// css watermark can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Css/watermark:Watermark watermark watermark_id
+    /// $ pulumi import tencentcloud:Css/watermark:Watermark watermark watermark_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Css/watermark:Watermark")]
-    public partial class Watermark : Pulumi.CustomResource
+    public partial class Watermark : global::Pulumi.CustomResource
     {
         /// <summary>
         /// height of the picture.
@@ -135,7 +136,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Css
         }
     }
 
-    public sealed class WatermarkArgs : Pulumi.ResourceArgs
+    public sealed class WatermarkArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// height of the picture.
@@ -176,9 +177,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Css
         public WatermarkArgs()
         {
         }
+        public static new WatermarkArgs Empty => new WatermarkArgs();
     }
 
-    public sealed class WatermarkState : Pulumi.ResourceArgs
+    public sealed class WatermarkState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// height of the picture.
@@ -225,5 +227,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Css
         public WatermarkState()
         {
         }
+        public static new WatermarkState Empty => new WatermarkState();
     }
 }

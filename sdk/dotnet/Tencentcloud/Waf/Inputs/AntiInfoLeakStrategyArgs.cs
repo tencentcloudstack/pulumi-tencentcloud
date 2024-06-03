@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Waf.Inputs
 {
 
-    public sealed class AntiInfoLeakStrategyArgs : Pulumi.ResourceArgs
+    public sealed class AntiInfoLeakStrategyArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Matching Content. If field is returncode support: 400, 403, 404, 4xx, 500, 501, 502, 504, 5xx; If field is information support: idcard, phone, bankcard; If field is keywords users input matching content themselves.
@@ -28,5 +28,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Waf.Inputs
         public AntiInfoLeakStrategyArgs()
         {
         }
+        public static new AntiInfoLeakStrategyArgs Empty => new AntiInfoLeakStrategyArgs();
     }
 }

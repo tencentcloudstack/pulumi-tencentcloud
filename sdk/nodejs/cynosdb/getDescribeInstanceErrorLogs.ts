@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,11 +11,12 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const describeInstanceErrorLogs = pulumi.output(tencentcloud.Cynosdb.getDescribeInstanceErrorLogs({
+ * const describeInstanceErrorLogs = tencentcloud.Cynosdb.getDescribeInstanceErrorLogs({
  *     endTime: "2023-06-19 15:04:05",
  *     instanceId: "cynosdbmysql-ins-afqx1hy0",
  *     keyWords: ["Aborted"],
@@ -25,15 +27,13 @@ import * as utilities from "../utilities";
  *     orderBy: "Timestamp",
  *     orderByType: "DESC",
  *     startTime: "2023-06-01 15:04:05",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getDescribeInstanceErrorLogs(args: GetDescribeInstanceErrorLogsArgs, opts?: pulumi.InvokeOptions): Promise<GetDescribeInstanceErrorLogsResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Cynosdb/getDescribeInstanceErrorLogs:getDescribeInstanceErrorLogs", {
         "endTime": args.endTime,
         "instanceId": args.instanceId,
@@ -105,9 +105,33 @@ export interface GetDescribeInstanceErrorLogsResult {
     readonly resultOutputFile?: string;
     readonly startTime?: string;
 }
-
+/**
+ * Use this data source to query detailed information of cynosdb describeInstanceErrorLogs
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const describeInstanceErrorLogs = tencentcloud.Cynosdb.getDescribeInstanceErrorLogs({
+ *     endTime: "2023-06-19 15:04:05",
+ *     instanceId: "cynosdbmysql-ins-afqx1hy0",
+ *     keyWords: ["Aborted"],
+ *     logLevels: [
+ *         "note",
+ *         "warning",
+ *     ],
+ *     orderBy: "Timestamp",
+ *     orderByType: "DESC",
+ *     startTime: "2023-06-01 15:04:05",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getDescribeInstanceErrorLogsOutput(args: GetDescribeInstanceErrorLogsOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetDescribeInstanceErrorLogsResult> {
-    return pulumi.output(args).apply(a => getDescribeInstanceErrorLogs(a, opts))
+    return pulumi.output(args).apply((a: any) => getDescribeInstanceErrorLogs(a, opts))
 }
 
 /**

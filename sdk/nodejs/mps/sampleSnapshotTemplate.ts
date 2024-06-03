@@ -9,11 +9,12 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const sampleSnapshotTemplate = new tencentcloud.Mps.SampleSnapshotTemplate("sample_snapshot_template", {
+ * const sampleSnapshotTemplate = new tencentcloud.mps.SampleSnapshotTemplate("sampleSnapshotTemplate", {
  *     fillType: "stretch",
  *     format: "jpg",
  *     height: 128,
@@ -23,13 +24,14 @@ import * as utilities from "../utilities";
  *     width: 140,
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * mps sample_snapshot_template can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Mps/sampleSnapshotTemplate:SampleSnapshotTemplate sample_snapshot_template sample_snapshot_template_id
+ * $ pulumi import tencentcloud:Mps/sampleSnapshotTemplate:SampleSnapshotTemplate sample_snapshot_template sample_snapshot_template_id
  * ```
  */
 export class SampleSnapshotTemplate extends pulumi.CustomResource {

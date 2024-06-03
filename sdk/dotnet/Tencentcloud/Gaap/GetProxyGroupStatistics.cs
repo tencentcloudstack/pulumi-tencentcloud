@@ -15,84 +15,78 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
         /// <summary>
         /// Use this data source to query detailed information of gaap proxy group statistics
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var proxyGroupStatistics = Tencentcloud.Gaap.GetProxyGroupStatistics.Invoke(new()
         ///     {
-        ///         var proxyGroupStatistics = Output.Create(Tencentcloud.Gaap.GetProxyGroupStatistics.InvokeAsync(new Tencentcloud.Gaap.GetProxyGroupStatisticsArgs
+        ///         EndTime = "2023-10-09 23:59:59",
+        ///         Granularity = 300,
+        ///         GroupId = "link-m9t4yho9",
+        ///         MetricNames = new[]
         ///         {
-        ///             EndTime = "2023-10-09 23:59:59",
-        ///             Granularity = 300,
-        ///             GroupId = "link-8lpyo88p",
-        ///             MetricNames = 
-        ///             {
-        ///                 "InBandwidth",
-        ///                 "OutBandwidth",
-        ///                 "InFlow",
-        ///                 "OutFlow",
-        ///             },
-        ///             StartTime = "2023-10-09 00:00:00",
-        ///         }));
-        ///     }
+        ///             "InBandwidth",
+        ///             "OutBandwidth",
+        ///             "InFlow",
+        ///             "OutFlow",
+        ///         },
+        ///         StartTime = "2023-10-09 00:00:00",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetProxyGroupStatisticsResult> InvokeAsync(GetProxyGroupStatisticsArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetProxyGroupStatisticsResult>("tencentcloud:Gaap/getProxyGroupStatistics:getProxyGroupStatistics", args ?? new GetProxyGroupStatisticsArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetProxyGroupStatisticsResult>("tencentcloud:Gaap/getProxyGroupStatistics:getProxyGroupStatistics", args ?? new GetProxyGroupStatisticsArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of gaap proxy group statistics
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var proxyGroupStatistics = Tencentcloud.Gaap.GetProxyGroupStatistics.Invoke(new()
         ///     {
-        ///         var proxyGroupStatistics = Output.Create(Tencentcloud.Gaap.GetProxyGroupStatistics.InvokeAsync(new Tencentcloud.Gaap.GetProxyGroupStatisticsArgs
+        ///         EndTime = "2023-10-09 23:59:59",
+        ///         Granularity = 300,
+        ///         GroupId = "link-m9t4yho9",
+        ///         MetricNames = new[]
         ///         {
-        ///             EndTime = "2023-10-09 23:59:59",
-        ///             Granularity = 300,
-        ///             GroupId = "link-8lpyo88p",
-        ///             MetricNames = 
-        ///             {
-        ///                 "InBandwidth",
-        ///                 "OutBandwidth",
-        ///                 "InFlow",
-        ///                 "OutFlow",
-        ///             },
-        ///             StartTime = "2023-10-09 00:00:00",
-        ///         }));
-        ///     }
+        ///             "InBandwidth",
+        ///             "OutBandwidth",
+        ///             "InFlow",
+        ///             "OutFlow",
+        ///         },
+        ///         StartTime = "2023-10-09 00:00:00",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetProxyGroupStatisticsResult> Invoke(GetProxyGroupStatisticsInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetProxyGroupStatisticsResult>("tencentcloud:Gaap/getProxyGroupStatistics:getProxyGroupStatistics", args ?? new GetProxyGroupStatisticsInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetProxyGroupStatisticsResult>("tencentcloud:Gaap/getProxyGroupStatistics:getProxyGroupStatistics", args ?? new GetProxyGroupStatisticsInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetProxyGroupStatisticsArgs : Pulumi.InvokeArgs
+    public sealed class GetProxyGroupStatisticsArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// End Time.
@@ -139,9 +133,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
         public GetProxyGroupStatisticsArgs()
         {
         }
+        public static new GetProxyGroupStatisticsArgs Empty => new GetProxyGroupStatisticsArgs();
     }
 
-    public sealed class GetProxyGroupStatisticsInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetProxyGroupStatisticsInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// End Time.
@@ -188,6 +183,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
         public GetProxyGroupStatisticsInvokeArgs()
         {
         }
+        public static new GetProxyGroupStatisticsInvokeArgs Empty => new GetProxyGroupStatisticsInvokeArgs();
     }
 
 

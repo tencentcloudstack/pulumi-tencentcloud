@@ -9,11 +9,12 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = new tencentcloud.Kms.WhiteBoxKey("example", {
+ * const example = new tencentcloud.kms.WhiteBoxKey("example", {
  *     algorithm: "SM4",
  *     alias: "tf_example",
  *     description: "test desc.",
@@ -23,13 +24,14 @@ import * as utilities from "../utilities";
  *     },
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * kms white_box_key can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Kms/whiteBoxKey:WhiteBoxKey example 244dab8c-6dad-11ea-80c6-5254006d0810
+ * $ pulumi import tencentcloud:Kms/whiteBoxKey:WhiteBoxKey example 244dab8c-6dad-11ea-80c6-5254006d0810
  * ```
  */
 export class WhiteBoxKey extends pulumi.CustomResource {

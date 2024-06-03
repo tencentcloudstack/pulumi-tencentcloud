@@ -15,68 +15,62 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf
         /// <summary>
         /// Use this data source to query detailed information of tsf application_public_config
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var applicationPublicConfig = Tencentcloud.Tsf.GetApplicationPublicConfig.Invoke(new()
         ///     {
-        ///         var applicationPublicConfig = Output.Create(Tencentcloud.Tsf.GetApplicationPublicConfig.InvokeAsync(new Tencentcloud.Tsf.GetApplicationPublicConfigArgs
-        ///         {
-        ///             ConfigId = "dcfg-p-evjrbgly",
-        ///             ConfigName = "dsadsa",
-        ///             ConfigVersion = "123",
-        ///         }));
-        ///     }
+        ///         ConfigId = "dcfg-p-evjrbgly",
+        ///         ConfigName = "dsadsa",
+        ///         ConfigVersion = "123",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetApplicationPublicConfigResult> InvokeAsync(GetApplicationPublicConfigArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetApplicationPublicConfigResult>("tencentcloud:Tsf/getApplicationPublicConfig:getApplicationPublicConfig", args ?? new GetApplicationPublicConfigArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetApplicationPublicConfigResult>("tencentcloud:Tsf/getApplicationPublicConfig:getApplicationPublicConfig", args ?? new GetApplicationPublicConfigArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of tsf application_public_config
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var applicationPublicConfig = Tencentcloud.Tsf.GetApplicationPublicConfig.Invoke(new()
         ///     {
-        ///         var applicationPublicConfig = Output.Create(Tencentcloud.Tsf.GetApplicationPublicConfig.InvokeAsync(new Tencentcloud.Tsf.GetApplicationPublicConfigArgs
-        ///         {
-        ///             ConfigId = "dcfg-p-evjrbgly",
-        ///             ConfigName = "dsadsa",
-        ///             ConfigVersion = "123",
-        ///         }));
-        ///     }
+        ///         ConfigId = "dcfg-p-evjrbgly",
+        ///         ConfigName = "dsadsa",
+        ///         ConfigVersion = "123",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetApplicationPublicConfigResult> Invoke(GetApplicationPublicConfigInvokeArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetApplicationPublicConfigResult>("tencentcloud:Tsf/getApplicationPublicConfig:getApplicationPublicConfig", args ?? new GetApplicationPublicConfigInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetApplicationPublicConfigResult>("tencentcloud:Tsf/getApplicationPublicConfig:getApplicationPublicConfig", args ?? new GetApplicationPublicConfigInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetApplicationPublicConfigArgs : Pulumi.InvokeArgs
+    public sealed class GetApplicationPublicConfigArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Config ID. Query all items if not passed, high priority.
@@ -117,9 +111,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf
         public GetApplicationPublicConfigArgs()
         {
         }
+        public static new GetApplicationPublicConfigArgs Empty => new GetApplicationPublicConfigArgs();
     }
 
-    public sealed class GetApplicationPublicConfigInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetApplicationPublicConfigInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Config ID. Query all items if not passed, high priority.
@@ -160,6 +155,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf
         public GetApplicationPublicConfigInvokeArgs()
         {
         }
+        public static new GetApplicationPublicConfigInvokeArgs Empty => new GetApplicationPublicConfigInvokeArgs();
     }
 
 

@@ -7,64 +7,69 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a waf ipAccessControl
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Waf"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Waf"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Waf"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Waf.NewIpAccessControl(ctx, "example", &Waf.IpAccessControlArgs{
-// 			Domain:     pulumi.String("www.demo.com"),
-// 			Edition:    pulumi.String("sparta-waf"),
-// 			InstanceId: pulumi.String("waf_2kxtlbky00b3b4qz"),
-// 			Items: waf.IpAccessControlItemArray{
-// 				&waf.IpAccessControlItemArgs{
-// 					Action:  pulumi.Int(40),
-// 					Ip:      pulumi.String("1.1.1.1"),
-// 					Note:    pulumi.String("desc info."),
-// 					ValidTs: pulumi.Int(2019571199),
-// 				},
-// 				&waf.IpAccessControlItemArgs{
-// 					Action:  pulumi.Int(42),
-// 					Ip:      pulumi.String("2.2.2.2"),
-// 					Note:    pulumi.String("desc info."),
-// 					ValidTs: pulumi.Int(2019571199),
-// 				},
-// 				&waf.IpAccessControlItemArgs{
-// 					Action:  pulumi.Int(40),
-// 					Ip:      pulumi.String("3.3.3.3"),
-// 					Note:    pulumi.String("desc info."),
-// 					ValidTs: pulumi.Int(1680570420),
-// 				},
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Waf.NewIpAccessControl(ctx, "example", &Waf.IpAccessControlArgs{
+//				Domain:     pulumi.String("www.demo.com"),
+//				Edition:    pulumi.String("sparta-waf"),
+//				InstanceId: pulumi.String("waf_2kxtlbky00b3b4qz"),
+//				Items: waf.IpAccessControlItemArray{
+//					&waf.IpAccessControlItemArgs{
+//						Action:  pulumi.Int(40),
+//						Ip:      pulumi.String("1.1.1.1"),
+//						Note:    pulumi.String("desc info."),
+//						ValidTs: pulumi.Int(2019571199),
+//					},
+//					&waf.IpAccessControlItemArgs{
+//						Action:  pulumi.Int(42),
+//						Ip:      pulumi.String("2.2.2.2"),
+//						Note:    pulumi.String("desc info."),
+//						ValidTs: pulumi.Int(2019571199),
+//					},
+//					&waf.IpAccessControlItemArgs{
+//						Action:  pulumi.Int(40),
+//						Ip:      pulumi.String("3.3.3.3"),
+//						Note:    pulumi.String("desc info."),
+//						ValidTs: pulumi.Int(1680570420),
+//					},
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // waf ip_access_control can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Waf/ipAccessControl:IpAccessControl example waf_2kxtlbky00b3b4qz#www.demo.com#sparta-waf
+// $ pulumi import tencentcloud:Waf/ipAccessControl:IpAccessControl example waf_2kxtlbky00b3b4qz#www.demo.com#sparta-waf
 // ```
 type IpAccessControl struct {
 	pulumi.CustomResourceState
@@ -98,7 +103,7 @@ func NewIpAccessControl(ctx *pulumi.Context,
 	if args.Items == nil {
 		return nil, errors.New("invalid value for required argument 'Items'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource IpAccessControl
 	err := ctx.RegisterResource("tencentcloud:Waf/ipAccessControl:IpAccessControl", name, args, &resource, opts...)
 	if err != nil {
@@ -195,7 +200,7 @@ func (i *IpAccessControl) ToIpAccessControlOutputWithContext(ctx context.Context
 // IpAccessControlArrayInput is an input type that accepts IpAccessControlArray and IpAccessControlArrayOutput values.
 // You can construct a concrete instance of `IpAccessControlArrayInput` via:
 //
-//          IpAccessControlArray{ IpAccessControlArgs{...} }
+//	IpAccessControlArray{ IpAccessControlArgs{...} }
 type IpAccessControlArrayInput interface {
 	pulumi.Input
 
@@ -220,7 +225,7 @@ func (i IpAccessControlArray) ToIpAccessControlArrayOutputWithContext(ctx contex
 // IpAccessControlMapInput is an input type that accepts IpAccessControlMap and IpAccessControlMapOutput values.
 // You can construct a concrete instance of `IpAccessControlMapInput` via:
 //
-//          IpAccessControlMap{ "key": IpAccessControlArgs{...} }
+//	IpAccessControlMap{ "key": IpAccessControlArgs{...} }
 type IpAccessControlMapInput interface {
 	pulumi.Input
 

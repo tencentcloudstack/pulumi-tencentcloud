@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cvm.Inputs
 {
 
-    public sealed class LaunchTemplateEnhancedServiceGetArgs : Pulumi.ResourceArgs
+    public sealed class LaunchTemplateEnhancedServiceGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Enable TencentCloud Automation Tools(TAT).
@@ -34,5 +34,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cvm.Inputs
         public LaunchTemplateEnhancedServiceGetArgs()
         {
         }
+        public static new LaunchTemplateEnhancedServiceGetArgs Empty => new LaunchTemplateEnhancedServiceGetArgs();
     }
 }

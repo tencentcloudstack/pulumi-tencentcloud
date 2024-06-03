@@ -13,14 +13,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdmq
     public static class GetVipInstance
     {
         public static Task<GetVipInstanceResult> InvokeAsync(GetVipInstanceArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetVipInstanceResult>("tencentcloud:Tdmq/getVipInstance:getVipInstance", args ?? new GetVipInstanceArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetVipInstanceResult>("tencentcloud:Tdmq/getVipInstance:getVipInstance", args ?? new GetVipInstanceArgs(), options.WithDefaults());
 
         public static Output<GetVipInstanceResult> Invoke(GetVipInstanceInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetVipInstanceResult>("tencentcloud:Tdmq/getVipInstance:getVipInstance", args ?? new GetVipInstanceInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetVipInstanceResult>("tencentcloud:Tdmq/getVipInstance:getVipInstance", args ?? new GetVipInstanceInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetVipInstanceArgs : Pulumi.InvokeArgs
+    public sealed class GetVipInstanceArgs : global::Pulumi.InvokeArgs
     {
         [Input("clusterId", required: true)]
         public string ClusterId { get; set; } = null!;
@@ -31,9 +31,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdmq
         public GetVipInstanceArgs()
         {
         }
+        public static new GetVipInstanceArgs Empty => new GetVipInstanceArgs();
     }
 
-    public sealed class GetVipInstanceInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetVipInstanceInvokeArgs : global::Pulumi.InvokeArgs
     {
         [Input("clusterId", required: true)]
         public Input<string> ClusterId { get; set; } = null!;
@@ -44,6 +45,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdmq
         public GetVipInstanceInvokeArgs()
         {
         }
+        public static new GetVipInstanceInvokeArgs Empty => new GetVipInstanceInvokeArgs();
     }
 
 

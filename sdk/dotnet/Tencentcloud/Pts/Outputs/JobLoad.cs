@@ -14,8 +14,17 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Pts.Outputs
     [OutputType]
     public sealed class JobLoad
     {
+        /// <summary>
+        /// Pressure distribution.
+        /// </summary>
         public readonly ImmutableArray<Outputs.JobLoadGeoRegionsLoadDistribution> GeoRegionsLoadDistributions;
+        /// <summary>
+        /// Pressure allocation.
+        /// </summary>
         public readonly Outputs.JobLoadLoadSpec? LoadSpec;
+        /// <summary>
+        /// Source of stress.
+        /// </summary>
         public readonly Outputs.JobLoadVpcLoadDistribution? VpcLoadDistribution;
 
         [OutputConstructor]

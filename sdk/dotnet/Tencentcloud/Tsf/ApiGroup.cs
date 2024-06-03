@@ -15,40 +15,41 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var apiGroup = new Tencentcloud.Tsf.ApiGroup("apiGroup", new()
     ///     {
-    ///         var apiGroup = new Tencentcloud.Tsf.ApiGroup("apiGroup", new Tencentcloud.Tsf.ApiGroupArgs
-    ///         {
-    ///             AuthType = "none",
-    ///             Description = "terraform-test",
-    ///             GatewayInstanceId = "gw-ins-i6mjpgm8",
-    ///             GroupContext = "/terraform-test",
-    ///             GroupName = "terraform_test_group",
-    ///             GroupType = "ms",
-    ///             NamespaceNameKeyPosition = "path",
-    ///             ServiceNameKeyPosition = "path",
-    ///         });
-    ///     }
+    ///         AuthType = "none",
+    ///         Description = "terraform-test",
+    ///         GatewayInstanceId = "gw-ins-i6mjpgm8",
+    ///         GroupContext = "/terraform-test",
+    ///         GroupName = "terraform_test_group",
+    ///         GroupType = "ms",
+    ///         NamespaceNameKeyPosition = "path",
+    ///         ServiceNameKeyPosition = "path",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// tsf api_group can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Tsf/apiGroup:ApiGroup api_group api_group_id
+    /// $ pulumi import tencentcloud:Tsf/apiGroup:ApiGroup api_group api_group_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Tsf/apiGroup:ApiGroup")]
-    public partial class ApiGroup : Pulumi.CustomResource
+    public partial class ApiGroup : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Access group ACL type.
@@ -203,7 +204,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf
         }
     }
 
-    public sealed class ApiGroupArgs : Pulumi.ResourceArgs
+    public sealed class ApiGroupArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// authentication type. secret: key authentication; none: no authentication.
@@ -268,9 +269,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf
         public ApiGroupArgs()
         {
         }
+        public static new ApiGroupArgs Empty => new ApiGroupArgs();
     }
 
-    public sealed class ApiGroupState : Pulumi.ResourceArgs
+    public sealed class ApiGroupState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Access group ACL type.
@@ -389,5 +391,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf
         public ApiGroupState()
         {
         }
+        public static new ApiGroupState Empty => new ApiGroupState();
     }
 }

@@ -15,140 +15,140 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway
         /// <summary>
         /// Use this data source to query API gateway APIs.
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var service = new Tencentcloud.ApiGateway.Service("service", new()
         ///     {
-        ///         var service = new Tencentcloud.ApiGateway.Service("service", new Tencentcloud.ApiGateway.ServiceArgs
+        ///         ServiceName = "ck",
+        ///         Protocol = "http&amp;https",
+        ///         ServiceDesc = "your nice service",
+        ///         NetTypes = new[]
         ///         {
-        ///             ServiceName = "ck",
-        ///             Protocol = "http&amp;https",
-        ///             ServiceDesc = "your nice service",
-        ///             NetTypes = 
-        ///             {
-        ///                 "INNER",
-        ///                 "OUTER",
-        ///             },
-        ///             IpVersion = "IPv4",
-        ///         });
-        ///         var api = new Tencentcloud.ApiGateway.Api("api", new Tencentcloud.ApiGateway.ApiArgs
-        ///         {
-        ///             ServiceId = service.Id,
-        ///             ApiName = "hello",
-        ///             ApiDesc = "my hello api",
-        ///             AuthType = "NONE",
-        ///             Protocol = "HTTP",
-        ///             EnableCors = true,
-        ///             RequestConfigPath = "/user/info",
-        ///             RequestConfigMethod = "GET",
-        ///             ServiceConfigType = "HTTP",
-        ///             ServiceConfigTimeout = 15,
-        ///             ServiceConfigUrl = "http://www.qq.com",
-        ///             ServiceConfigPath = "/user",
-        ///             ServiceConfigMethod = "GET",
-        ///             ResponseType = "HTML",
-        ///             ResponseSuccessExample = "success",
-        ///             ResponseFailExample = "fail",
-        ///         });
-        ///         var id = Tencentcloud.ApiGateway.GetApis.Invoke(new Tencentcloud.ApiGateway.GetApisInvokeArgs
-        ///         {
-        ///             ServiceId = service.Id,
-        ///             ApiId = api.Id,
-        ///         });
-        ///         var name = Tencentcloud.ApiGateway.GetApis.Invoke(new Tencentcloud.ApiGateway.GetApisInvokeArgs
-        ///         {
-        ///             ServiceId = service.Id,
-        ///             ApiName = api.ApiName,
-        ///         });
-        ///     }
+        ///             "INNER",
+        ///             "OUTER",
+        ///         },
+        ///         IpVersion = "IPv4",
+        ///     });
         /// 
-        /// }
+        ///     var api = new Tencentcloud.ApiGateway.Api("api", new()
+        ///     {
+        ///         ServiceId = service.Id,
+        ///         ApiName = "hello",
+        ///         ApiDesc = "my hello api",
+        ///         AuthType = "NONE",
+        ///         Protocol = "HTTP",
+        ///         EnableCors = true,
+        ///         RequestConfigPath = "/user/info",
+        ///         RequestConfigMethod = "GET",
+        ///         ServiceConfigType = "HTTP",
+        ///         ServiceConfigTimeout = 15,
+        ///         ServiceConfigUrl = "http://www.qq.com",
+        ///         ServiceConfigPath = "/user",
+        ///         ServiceConfigMethod = "GET",
+        ///         ResponseType = "HTML",
+        ///         ResponseSuccessExample = "success",
+        ///         ResponseFailExample = "fail",
+        ///     });
+        /// 
+        ///     var id = Tencentcloud.ApiGateway.GetApis.Invoke(new()
+        ///     {
+        ///         ServiceId = service.Id,
+        ///         ApiId = api.Id,
+        ///     });
+        /// 
+        ///     var name = Tencentcloud.ApiGateway.GetApis.Invoke(new()
+        ///     {
+        ///         ServiceId = service.Id,
+        ///         ApiName = api.ApiName,
+        ///     });
+        /// 
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetApisResult> InvokeAsync(GetApisArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetApisResult>("tencentcloud:ApiGateway/getApis:getApis", args ?? new GetApisArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetApisResult>("tencentcloud:ApiGateway/getApis:getApis", args ?? new GetApisArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query API gateway APIs.
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var service = new Tencentcloud.ApiGateway.Service("service", new()
         ///     {
-        ///         var service = new Tencentcloud.ApiGateway.Service("service", new Tencentcloud.ApiGateway.ServiceArgs
+        ///         ServiceName = "ck",
+        ///         Protocol = "http&amp;https",
+        ///         ServiceDesc = "your nice service",
+        ///         NetTypes = new[]
         ///         {
-        ///             ServiceName = "ck",
-        ///             Protocol = "http&amp;https",
-        ///             ServiceDesc = "your nice service",
-        ///             NetTypes = 
-        ///             {
-        ///                 "INNER",
-        ///                 "OUTER",
-        ///             },
-        ///             IpVersion = "IPv4",
-        ///         });
-        ///         var api = new Tencentcloud.ApiGateway.Api("api", new Tencentcloud.ApiGateway.ApiArgs
-        ///         {
-        ///             ServiceId = service.Id,
-        ///             ApiName = "hello",
-        ///             ApiDesc = "my hello api",
-        ///             AuthType = "NONE",
-        ///             Protocol = "HTTP",
-        ///             EnableCors = true,
-        ///             RequestConfigPath = "/user/info",
-        ///             RequestConfigMethod = "GET",
-        ///             ServiceConfigType = "HTTP",
-        ///             ServiceConfigTimeout = 15,
-        ///             ServiceConfigUrl = "http://www.qq.com",
-        ///             ServiceConfigPath = "/user",
-        ///             ServiceConfigMethod = "GET",
-        ///             ResponseType = "HTML",
-        ///             ResponseSuccessExample = "success",
-        ///             ResponseFailExample = "fail",
-        ///         });
-        ///         var id = Tencentcloud.ApiGateway.GetApis.Invoke(new Tencentcloud.ApiGateway.GetApisInvokeArgs
-        ///         {
-        ///             ServiceId = service.Id,
-        ///             ApiId = api.Id,
-        ///         });
-        ///         var name = Tencentcloud.ApiGateway.GetApis.Invoke(new Tencentcloud.ApiGateway.GetApisInvokeArgs
-        ///         {
-        ///             ServiceId = service.Id,
-        ///             ApiName = api.ApiName,
-        ///         });
-        ///     }
+        ///             "INNER",
+        ///             "OUTER",
+        ///         },
+        ///         IpVersion = "IPv4",
+        ///     });
         /// 
-        /// }
+        ///     var api = new Tencentcloud.ApiGateway.Api("api", new()
+        ///     {
+        ///         ServiceId = service.Id,
+        ///         ApiName = "hello",
+        ///         ApiDesc = "my hello api",
+        ///         AuthType = "NONE",
+        ///         Protocol = "HTTP",
+        ///         EnableCors = true,
+        ///         RequestConfigPath = "/user/info",
+        ///         RequestConfigMethod = "GET",
+        ///         ServiceConfigType = "HTTP",
+        ///         ServiceConfigTimeout = 15,
+        ///         ServiceConfigUrl = "http://www.qq.com",
+        ///         ServiceConfigPath = "/user",
+        ///         ServiceConfigMethod = "GET",
+        ///         ResponseType = "HTML",
+        ///         ResponseSuccessExample = "success",
+        ///         ResponseFailExample = "fail",
+        ///     });
+        /// 
+        ///     var id = Tencentcloud.ApiGateway.GetApis.Invoke(new()
+        ///     {
+        ///         ServiceId = service.Id,
+        ///         ApiId = api.Id,
+        ///     });
+        /// 
+        ///     var name = Tencentcloud.ApiGateway.GetApis.Invoke(new()
+        ///     {
+        ///         ServiceId = service.Id,
+        ///         ApiName = api.ApiName,
+        ///     });
+        /// 
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetApisResult> Invoke(GetApisInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetApisResult>("tencentcloud:ApiGateway/getApis:getApis", args ?? new GetApisInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetApisResult>("tencentcloud:ApiGateway/getApis:getApis", args ?? new GetApisInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetApisArgs : Pulumi.InvokeArgs
+    public sealed class GetApisArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Created API ID.
@@ -177,9 +177,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway
         public GetApisArgs()
         {
         }
+        public static new GetApisArgs Empty => new GetApisArgs();
     }
 
-    public sealed class GetApisInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetApisInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Created API ID.
@@ -208,6 +209,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway
         public GetApisInvokeArgs()
         {
         }
+        public static new GetApisInvokeArgs Empty => new GetApisInvokeArgs();
     }
 
 

@@ -15,80 +15,74 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dcdb
         /// <summary>
         /// Use this data source to query detailed information of dcdb price
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var price = Tencentcloud.Dcdb.GetPrice.Invoke(new()
         ///     {
-        ///         var price = Output.Create(Tencentcloud.Dcdb.GetPrice.InvokeAsync(new Tencentcloud.Dcdb.GetPriceArgs
-        ///         {
-        ///             InstanceCount = 1,
-        ///             Zone = @var.Default_az,
-        ///             Period = 1,
-        ///             ShardNodeCount = 2,
-        ///             ShardMemory = 2,
-        ///             ShardStorage = 10,
-        ///             ShardCount = 2,
-        ///             Paymode = "postpaid",
-        ///             AmountUnit = "pent",
-        ///         }));
-        ///     }
+        ///         InstanceCount = 1,
+        ///         Zone = @var.Default_az,
+        ///         Period = 1,
+        ///         ShardNodeCount = 2,
+        ///         ShardMemory = 2,
+        ///         ShardStorage = 10,
+        ///         ShardCount = 2,
+        ///         Paymode = "postpaid",
+        ///         AmountUnit = "pent",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetPriceResult> InvokeAsync(GetPriceArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetPriceResult>("tencentcloud:Dcdb/getPrice:getPrice", args ?? new GetPriceArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetPriceResult>("tencentcloud:Dcdb/getPrice:getPrice", args ?? new GetPriceArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of dcdb price
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var price = Tencentcloud.Dcdb.GetPrice.Invoke(new()
         ///     {
-        ///         var price = Output.Create(Tencentcloud.Dcdb.GetPrice.InvokeAsync(new Tencentcloud.Dcdb.GetPriceArgs
-        ///         {
-        ///             InstanceCount = 1,
-        ///             Zone = @var.Default_az,
-        ///             Period = 1,
-        ///             ShardNodeCount = 2,
-        ///             ShardMemory = 2,
-        ///             ShardStorage = 10,
-        ///             ShardCount = 2,
-        ///             Paymode = "postpaid",
-        ///             AmountUnit = "pent",
-        ///         }));
-        ///     }
+        ///         InstanceCount = 1,
+        ///         Zone = @var.Default_az,
+        ///         Period = 1,
+        ///         ShardNodeCount = 2,
+        ///         ShardMemory = 2,
+        ///         ShardStorage = 10,
+        ///         ShardCount = 2,
+        ///         Paymode = "postpaid",
+        ///         AmountUnit = "pent",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetPriceResult> Invoke(GetPriceInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetPriceResult>("tencentcloud:Dcdb/getPrice:getPrice", args ?? new GetPriceInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetPriceResult>("tencentcloud:Dcdb/getPrice:getPrice", args ?? new GetPriceInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetPriceArgs : Pulumi.InvokeArgs
+    public sealed class GetPriceArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Price unit. Valid values: `pent` (cent), `microPent` (microcent).
@@ -153,9 +147,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dcdb
         public GetPriceArgs()
         {
         }
+        public static new GetPriceArgs Empty => new GetPriceArgs();
     }
 
-    public sealed class GetPriceInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetPriceInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Price unit. Valid values: `pent` (cent), `microPent` (microcent).
@@ -220,6 +215,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dcdb
         public GetPriceInvokeArgs()
         {
         }
+        public static new GetPriceInvokeArgs Empty => new GetPriceInvokeArgs();
     }
 
 

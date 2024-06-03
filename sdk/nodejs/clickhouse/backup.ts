@@ -9,22 +9,24 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const backup = new tencentcloud.Clickhouse.Backup("backup", {
+ * const backup = new tencentcloud.clickhouse.Backup("backup", {
  *     cosBucketName: "xxxxxx",
  *     instanceId: "cdwch-xxxxxx",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * clickhouse backup can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Clickhouse/backup:Backup backup instance_id
+ * $ pulumi import tencentcloud:Clickhouse/backup:Backup backup instance_id
  * ```
  */
 export class Backup extends pulumi.CustomResource {

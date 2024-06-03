@@ -15,26 +15,27 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Pts
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var tmpKey = new Tencentcloud.Pts.TmpKeyGenerate("tmpKey", new()
     ///     {
-    ///         var tmpKey = new Tencentcloud.Pts.TmpKeyGenerate("tmpKey", new Tencentcloud.Pts.TmpKeyGenerateArgs
-    ///         {
-    ///             ProjectId = "project-1b0zqmhg",
-    ///             ScenarioId = "scenario-abc",
-    ///         });
-    ///     }
+    ///         ProjectId = "project-1b0zqmhg",
+    ///         ScenarioId = "scenario-abc",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Pts/tmpKeyGenerate:TmpKeyGenerate")]
-    public partial class TmpKeyGenerate : Pulumi.CustomResource
+    public partial class TmpKeyGenerate : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Temporary access credentials.
@@ -111,7 +112,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Pts
         }
     }
 
-    public sealed class TmpKeyGenerateArgs : Pulumi.ResourceArgs
+    public sealed class TmpKeyGenerateArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Project ID.
@@ -128,9 +129,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Pts
         public TmpKeyGenerateArgs()
         {
         }
+        public static new TmpKeyGenerateArgs Empty => new TmpKeyGenerateArgs();
     }
 
-    public sealed class TmpKeyGenerateState : Pulumi.ResourceArgs
+    public sealed class TmpKeyGenerateState : global::Pulumi.ResourceArgs
     {
         [Input("credentials")]
         private InputList<Inputs.TmpKeyGenerateCredentialGetArgs>? _credentials;
@@ -171,5 +173,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Pts
         public TmpKeyGenerateState()
         {
         }
+        public static new TmpKeyGenerateState Empty => new TmpKeyGenerateState();
     }
 }

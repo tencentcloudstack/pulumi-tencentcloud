@@ -9,11 +9,12 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const watermark = new tencentcloud.Css.Watermark("watermark", {
+ * const watermark = new tencentcloud.css.Watermark("watermark", {
  *     height: 0,
  *     pictureUrl: "picture_url",
  *     watermarkName: "watermark_name",
@@ -22,13 +23,14 @@ import * as utilities from "../utilities";
  *     yPosition: 0,
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * css watermark can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Css/watermark:Watermark watermark watermark_id
+ * $ pulumi import tencentcloud:Css/watermark:Watermark watermark watermark_id
  * ```
  */
 export class Watermark extends pulumi.CustomResource {

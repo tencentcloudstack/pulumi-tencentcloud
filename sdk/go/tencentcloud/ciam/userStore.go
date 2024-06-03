@@ -7,43 +7,49 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a ciam user store
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ciam"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ciam"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Ciam.NewUserStore(ctx, "userStore", &Ciam.UserStoreArgs{
-// 			UserPoolDesc: pulumi.String("for terraform test 123"),
-// 			UserPoolLogo: pulumi.String("https://ciam-prd-1302490086.cos.ap-guangzhou.myqcloud.com/temporary/92630252a2c5422d9663db5feafd619b.png"),
-// 			UserPoolName: pulumi.String("tf_user_store"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Ciam.NewUserStore(ctx, "userStore", &Ciam.UserStoreArgs{
+//				UserPoolDesc: pulumi.String("for terraform test 123"),
+//				UserPoolLogo: pulumi.String("https://ciam-prd-1302490086.cos.ap-guangzhou.myqcloud.com/temporary/92630252a2c5422d9663db5feafd619b.png"),
+//				UserPoolName: pulumi.String("tf_user_store"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // ciam user_store can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Ciam/userStore:UserStore user_store userStoreId
+// $ pulumi import tencentcloud:Ciam/userStore:UserStore user_store userStoreId
 // ```
 type UserStore struct {
 	pulumi.CustomResourceState
@@ -66,7 +72,7 @@ func NewUserStore(ctx *pulumi.Context,
 	if args.UserPoolName == nil {
 		return nil, errors.New("invalid value for required argument 'UserPoolName'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource UserStore
 	err := ctx.RegisterResource("tencentcloud:Ciam/userStore:UserStore", name, args, &resource, opts...)
 	if err != nil {
@@ -155,7 +161,7 @@ func (i *UserStore) ToUserStoreOutputWithContext(ctx context.Context) UserStoreO
 // UserStoreArrayInput is an input type that accepts UserStoreArray and UserStoreArrayOutput values.
 // You can construct a concrete instance of `UserStoreArrayInput` via:
 //
-//          UserStoreArray{ UserStoreArgs{...} }
+//	UserStoreArray{ UserStoreArgs{...} }
 type UserStoreArrayInput interface {
 	pulumi.Input
 
@@ -180,7 +186,7 @@ func (i UserStoreArray) ToUserStoreArrayOutputWithContext(ctx context.Context) U
 // UserStoreMapInput is an input type that accepts UserStoreMap and UserStoreMapOutput values.
 // You can construct a concrete instance of `UserStoreMapInput` via:
 //
-//          UserStoreMap{ "key": UserStoreArgs{...} }
+//	UserStoreMap{ "key": UserStoreArgs{...} }
 type UserStoreMapInput interface {
 	pulumi.Input
 

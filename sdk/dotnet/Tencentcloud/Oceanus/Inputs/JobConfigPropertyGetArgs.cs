@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Oceanus.Inputs
 {
 
-    public sealed class JobConfigPropertyGetArgs : Pulumi.ResourceArgs
+    public sealed class JobConfigPropertyGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// System configuration key.
@@ -28,5 +28,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Oceanus.Inputs
         public JobConfigPropertyGetArgs()
         {
         }
+        public static new JobConfigPropertyGetArgs Empty => new JobConfigPropertyGetArgs();
     }
 }

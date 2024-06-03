@@ -15,64 +15,58 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dts
         /// <summary>
         /// Use this data source to query detailed information of dts compareTasks
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var compareTasks = Tencentcloud.Dts.GetCompareTasks.Invoke(new()
         ///     {
-        ///         var compareTasks = Output.Create(Tencentcloud.Dts.GetCompareTasks.InvokeAsync(new Tencentcloud.Dts.GetCompareTasksArgs
-        ///         {
-        ///             JobId = "",
-        ///         }));
-        ///     }
+        ///         JobId = "",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetCompareTasksResult> InvokeAsync(GetCompareTasksArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetCompareTasksResult>("tencentcloud:Dts/getCompareTasks:getCompareTasks", args ?? new GetCompareTasksArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetCompareTasksResult>("tencentcloud:Dts/getCompareTasks:getCompareTasks", args ?? new GetCompareTasksArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of dts compareTasks
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var compareTasks = Tencentcloud.Dts.GetCompareTasks.Invoke(new()
         ///     {
-        ///         var compareTasks = Output.Create(Tencentcloud.Dts.GetCompareTasks.InvokeAsync(new Tencentcloud.Dts.GetCompareTasksArgs
-        ///         {
-        ///             JobId = "",
-        ///         }));
-        ///     }
+        ///         JobId = "",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetCompareTasksResult> Invoke(GetCompareTasksInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetCompareTasksResult>("tencentcloud:Dts/getCompareTasks:getCompareTasks", args ?? new GetCompareTasksInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetCompareTasksResult>("tencentcloud:Dts/getCompareTasks:getCompareTasks", args ?? new GetCompareTasksInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetCompareTasksArgs : Pulumi.InvokeArgs
+    public sealed class GetCompareTasksArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// job id.
@@ -89,9 +83,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dts
         public GetCompareTasksArgs()
         {
         }
+        public static new GetCompareTasksArgs Empty => new GetCompareTasksArgs();
     }
 
-    public sealed class GetCompareTasksInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetCompareTasksInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// job id.
@@ -108,6 +103,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dts
         public GetCompareTasksInvokeArgs()
         {
         }
+        public static new GetCompareTasksInvokeArgs Empty => new GetCompareTasksInvokeArgs();
     }
 
 

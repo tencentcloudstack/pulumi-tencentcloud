@@ -6,13 +6,15 @@ import * as utilities from "../utilities";
 
 /**
  * ## Example Usage
+ *
  * ### VPC SSL VPN gateway
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const myCgw = new tencentcloud.Vpn.Gateway("my_cgw", {
+ * const myCgw = new tencentcloud.vpn.Gateway("myCgw", {
  *     bandwidth: 5,
  *     tags: {
  *         test: "test",
@@ -22,13 +24,16 @@ import * as utilities from "../utilities";
  *     zone: "ap-guangzhou-3",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
+ *
  * ### CCN IPSEC VPN gateway
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const myCgw = new tencentcloud.Vpn.Gateway("my_cgw", {
+ * const myCgw = new tencentcloud.vpn.Gateway("myCgw", {
  *     bandwidth: 5,
  *     tags: {
  *         test: "test",
@@ -37,13 +42,16 @@ import * as utilities from "../utilities";
  *     zone: "ap-guangzhou-3",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
+ *
  * ### CCN SSL VPN gateway
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const myCgw = new tencentcloud.Vpn.Gateway("my_cgw", {
+ * const myCgw = new tencentcloud.vpn.Gateway("myCgw", {
  *     bandwidth: 5,
  *     tags: {
  *         test: "test",
@@ -52,13 +60,16 @@ import * as utilities from "../utilities";
  *     zone: "ap-guangzhou-3",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
+ *
  * ### POSTPAID_BY_HOUR VPN gateway
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const myCgw = new tencentcloud.Vpn.Gateway("my_cgw", {
+ * const myCgw = new tencentcloud.vpn.Gateway("myCgw", {
  *     bandwidth: 5,
  *     tags: {
  *         test: "test",
@@ -67,13 +78,16 @@ import * as utilities from "../utilities";
  *     zone: "ap-guangzhou-3",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
+ *
  * ### PREPAID VPN gateway
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const myCgw = new tencentcloud.Vpn.Gateway("my_cgw", {
+ * const myCgw = new tencentcloud.vpn.Gateway("myCgw", {
  *     bandwidth: 5,
  *     chargeType: "PREPAID",
  *     prepaidPeriod: 1,
@@ -84,13 +98,14 @@ import * as utilities from "../utilities";
  *     zone: "ap-guangzhou-3",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * VPN gateway can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Vpn/gateway:Gateway foo vpngw-8ccsnclt
+ * $ pulumi import tencentcloud:Vpn/gateway:Gateway foo vpngw-8ccsnclt
  * ```
  */
 export class Gateway extends pulumi.CustomResource {

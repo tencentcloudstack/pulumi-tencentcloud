@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway.Inputs
 {
 
-    public sealed class UpstreamK8sServiceGetArgs : Pulumi.ResourceArgs
+    public sealed class UpstreamK8sServiceGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// K8s cluster ID.
@@ -21,6 +21,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway.Inputs
 
         [Input("extraLabels", required: true)]
         private InputList<Inputs.UpstreamK8sServiceExtraLabelGetArgs>? _extraLabels;
+
+        /// <summary>
+        /// Additional Selected Pod Label.
+        /// </summary>
         public InputList<Inputs.UpstreamK8sServiceExtraLabelGetArgs> ExtraLabels
         {
             get => _extraLabels ?? (_extraLabels = new InputList<Inputs.UpstreamK8sServiceExtraLabelGetArgs>());
@@ -60,5 +64,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway.Inputs
         public UpstreamK8sServiceGetArgs()
         {
         }
+        public static new UpstreamK8sServiceGetArgs Empty => new UpstreamK8sServiceGetArgs();
     }
 }

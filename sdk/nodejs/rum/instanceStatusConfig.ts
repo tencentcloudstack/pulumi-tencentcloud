@@ -9,22 +9,24 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const instanceStatusConfig = new tencentcloud.Rum.InstanceStatusConfig("instance_status_config", {
+ * const instanceStatusConfig = new tencentcloud.rum.InstanceStatusConfig("instanceStatusConfig", {
  *     instanceId: "rum-pasZKEI3RLgakj",
  *     operate: "stop",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * rum instance_status_config can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Rum/instanceStatusConfig:InstanceStatusConfig instance_status_config instance_id
+ * $ pulumi import tencentcloud:Rum/instanceStatusConfig:InstanceStatusConfig instance_status_config instance_id
  * ```
  */
 export class InstanceStatusConfig extends pulumi.CustomResource {

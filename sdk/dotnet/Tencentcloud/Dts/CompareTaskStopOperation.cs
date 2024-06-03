@@ -15,26 +15,27 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dts
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var compareTaskStopOperation = new Tencentcloud.Dts.CompareTaskStopOperation("compareTaskStopOperation", new()
     ///     {
-    ///         var compareTaskStopOperation = new Tencentcloud.Dts.CompareTaskStopOperation("compareTaskStopOperation", new Tencentcloud.Dts.CompareTaskStopOperationArgs
-    ///         {
-    ///             CompareTaskId = "dts-8yv4w2i1-cmp-37skmii9",
-    ///             JobId = "dts-8yv4w2i1",
-    ///         });
-    ///     }
+    ///         CompareTaskId = "dts-8yv4w2i1-cmp-37skmii9",
+    ///         JobId = "dts-8yv4w2i1",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Dts/compareTaskStopOperation:CompareTaskStopOperation")]
-    public partial class CompareTaskStopOperation : Pulumi.CustomResource
+    public partial class CompareTaskStopOperation : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Compare task id.
@@ -93,7 +94,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dts
         }
     }
 
-    public sealed class CompareTaskStopOperationArgs : Pulumi.ResourceArgs
+    public sealed class CompareTaskStopOperationArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Compare task id.
@@ -110,9 +111,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dts
         public CompareTaskStopOperationArgs()
         {
         }
+        public static new CompareTaskStopOperationArgs Empty => new CompareTaskStopOperationArgs();
     }
 
-    public sealed class CompareTaskStopOperationState : Pulumi.ResourceArgs
+    public sealed class CompareTaskStopOperationState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Compare task id.
@@ -129,5 +131,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dts
         public CompareTaskStopOperationState()
         {
         }
+        public static new CompareTaskStopOperationState Empty => new CompareTaskStopOperationState();
     }
 }

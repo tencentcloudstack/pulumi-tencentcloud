@@ -5,11 +5,8 @@ import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
 export function getBackupDownloadUrl(args: GetBackupDownloadUrlArgs, opts?: pulumi.InvokeOptions): Promise<GetBackupDownloadUrlResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Cynosdb/getBackupDownloadUrl:getBackupDownloadUrl", {
         "backupId": args.backupId,
         "clusterId": args.clusterId,
@@ -39,9 +36,8 @@ export interface GetBackupDownloadUrlResult {
     readonly id: string;
     readonly resultOutputFile?: string;
 }
-
 export function getBackupDownloadUrlOutput(args: GetBackupDownloadUrlOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetBackupDownloadUrlResult> {
-    return pulumi.output(args).apply(a => getBackupDownloadUrl(a, opts))
+    return pulumi.output(args).apply((a: any) => getBackupDownloadUrl(a, opts))
 }
 
 /**

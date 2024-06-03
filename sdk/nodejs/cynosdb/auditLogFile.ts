@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,16 +11,18 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const auditLogFile = new tencentcloud.Cynosdb.AuditLogFile("audit_log_file", {
+ * const auditLogFile = new tencentcloud.cynosdb.AuditLogFile("auditLogFile", {
  *     endTime: "2022-08-12 10:29:20",
  *     instanceId: "cynosdbmysql-ins-afqx1hy0",
  *     startTime: "2022-07-12 10:29:20",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export class AuditLogFile extends pulumi.CustomResource {
     /**

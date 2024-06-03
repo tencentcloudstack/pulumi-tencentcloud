@@ -15,41 +15,42 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Bi
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var datasourceCloud = new Tencentcloud.Bi.DatasourceCloud("datasourceCloud", new()
     ///     {
-    ///         var datasourceCloud = new Tencentcloud.Bi.DatasourceCloud("datasourceCloud", new Tencentcloud.Bi.DatasourceCloudArgs
+    ///         Charset = "utf8",
+    ///         DbName = "bi_dev",
+    ///         DbPwd = "xxxxxx",
+    ///         DbType = "MYSQL",
+    ///         DbUser = "root",
+    ///         ProjectId = "11015056",
+    ///         RegionId = "gz",
+    ///         ServiceType = new Tencentcloud.Bi.Inputs.DatasourceCloudServiceTypeArgs
     ///         {
-    ///             Charset = "utf8",
-    ///             DbName = "bi_dev",
-    ///             DbPwd = "xxxxxx",
-    ///             DbType = "MYSQL",
-    ///             DbUser = "root",
-    ///             ProjectId = "11015056",
-    ///             RegionId = "gz",
-    ///             ServiceType = new Tencentcloud.Bi.Inputs.DatasourceCloudServiceTypeArgs
-    ///             {
-    ///                 InstanceId = "cdb-12viotu5",
-    ///                 Region = "ap-guangzhou",
-    ///                 Type = "Cloud",
-    ///             },
-    ///             SourceName = "tf-test1",
-    ///             Vip = "10.0.0.4",
-    ///             VpcId = "5292713",
-    ///             Vport = "3306",
-    ///         });
-    ///     }
+    ///             InstanceId = "cdb-12viotu5",
+    ///             Region = "ap-guangzhou",
+    ///             Type = "Cloud",
+    ///         },
+    ///         SourceName = "tf-test1",
+    ///         Vip = "10.0.0.4",
+    ///         VpcId = "5292713",
+    ///         Vport = "3306",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Bi/datasourceCloud:DatasourceCloud")]
-    public partial class DatasourceCloud : Pulumi.CustomResource
+    public partial class DatasourceCloud : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Charset.
@@ -183,6 +184,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Bi
             {
                 Version = Utilities.Version,
                 PluginDownloadURL = "github://api.github.com/tencentcloudstack",
+                AdditionalSecretOutputs =
+                {
+                    "dbPwd",
+                },
             };
             var merged = CustomResourceOptions.Merge(defaultOptions, options);
             // Override the ID if one was specified for consistency with other language SDKs.
@@ -204,7 +209,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Bi
         }
     }
 
-    public sealed class DatasourceCloudArgs : Pulumi.ResourceArgs
+    public sealed class DatasourceCloudArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Charset.
@@ -242,11 +247,21 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Bi
         [Input("dbName", required: true)]
         public Input<string> DbName { get; set; } = null!;
 
+        [Input("dbPwd", required: true)]
+        private Input<string>? _dbPwd;
+
         /// <summary>
         /// Password.
         /// </summary>
-        [Input("dbPwd", required: true)]
-        public Input<string> DbPwd { get; set; } = null!;
+        public Input<string>? DbPwd
+        {
+            get => _dbPwd;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _dbPwd = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
 
         /// <summary>
         /// `MYSQL`, `TDSQL-C_MYSQL`, `TDSQL_MYSQL`, `MSSQL`, `POSTGRESQL`, `MARIADB`.
@@ -317,9 +332,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Bi
         public DatasourceCloudArgs()
         {
         }
+        public static new DatasourceCloudArgs Empty => new DatasourceCloudArgs();
     }
 
-    public sealed class DatasourceCloudState : Pulumi.ResourceArgs
+    public sealed class DatasourceCloudState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Charset.
@@ -357,11 +373,21 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Bi
         [Input("dbName")]
         public Input<string>? DbName { get; set; }
 
+        [Input("dbPwd")]
+        private Input<string>? _dbPwd;
+
         /// <summary>
         /// Password.
         /// </summary>
-        [Input("dbPwd")]
-        public Input<string>? DbPwd { get; set; }
+        public Input<string>? DbPwd
+        {
+            get => _dbPwd;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _dbPwd = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
 
         /// <summary>
         /// `MYSQL`, `TDSQL-C_MYSQL`, `TDSQL_MYSQL`, `MSSQL`, `POSTGRESQL`, `MARIADB`.
@@ -432,5 +458,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Bi
         public DatasourceCloudState()
         {
         }
+        public static new DatasourceCloudState Empty => new DatasourceCloudState();
     }
 }

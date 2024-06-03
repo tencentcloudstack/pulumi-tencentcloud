@@ -15,26 +15,27 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Lighthouse
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var snapshot = new Tencentcloud.Lighthouse.Snapshot("snapshot", new()
     ///     {
-    ///         var snapshot = new Tencentcloud.Lighthouse.Snapshot("snapshot", new Tencentcloud.Lighthouse.SnapshotArgs
-    ///         {
-    ///             InstanceId = "lhins-acd1234",
-    ///             SnapshotName = "snap_20200903",
-    ///         });
-    ///     }
+    ///         InstanceId = "lhins-acd1234",
+    ///         SnapshotName = "snap_20200903",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Lighthouse/snapshot:Snapshot")]
-    public partial class Snapshot : Pulumi.CustomResource
+    public partial class Snapshot : global::Pulumi.CustomResource
     {
         /// <summary>
         /// ID of the instance for which to create a snapshot.
@@ -93,7 +94,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Lighthouse
         }
     }
 
-    public sealed class SnapshotArgs : Pulumi.ResourceArgs
+    public sealed class SnapshotArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// ID of the instance for which to create a snapshot.
@@ -110,9 +111,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Lighthouse
         public SnapshotArgs()
         {
         }
+        public static new SnapshotArgs Empty => new SnapshotArgs();
     }
 
-    public sealed class SnapshotState : Pulumi.ResourceArgs
+    public sealed class SnapshotState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// ID of the instance for which to create a snapshot.
@@ -129,5 +131,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Lighthouse
         public SnapshotState()
         {
         }
+        public static new SnapshotState Empty => new SnapshotState();
     }
 }

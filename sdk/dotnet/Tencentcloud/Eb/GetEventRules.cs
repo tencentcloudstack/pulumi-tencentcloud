@@ -15,136 +15,130 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Eb
         /// <summary>
         /// Use this data source to query detailed information of eb event_rules
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
         /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using System.Text.Json;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var foo = new Tencentcloud.Eb.EventBus("foo", new()
         ///     {
-        ///         var foo = new Tencentcloud.Eb.EventBus("foo", new Tencentcloud.Eb.EventBusArgs
+        ///         EventBusName = "tf-event_bus_rule",
+        ///         Description = "event bus desc",
+        ///         EnableStore = false,
+        ///         SaveDays = 1,
+        ///         Tags = 
         ///         {
-        ///             EventBusName = "tf-event_bus_rule",
-        ///             Description = "event bus desc",
-        ///             EnableStore = false,
-        ///             SaveDays = 1,
-        ///             Tags = 
-        ///             {
-        ///                 { "createdBy", "terraform" },
-        ///             },
-        ///         });
-        ///         var eventRule = new Tencentcloud.Eb.EventRule("eventRule", new Tencentcloud.Eb.EventRuleArgs
-        ///         {
-        ///             EventBusId = foo.Id,
-        ///             RuleName = "tf-event_rule",
-        ///             Description = "event rule desc",
-        ///             Enable = true,
-        ///             EventPattern = JsonSerializer.Serialize(new Dictionary&lt;string, object?&gt;
-        ///             {
-        ///                 { "source", "apigw.cloud.tencent" },
-        ///                 { "type", new[]
-        ///                     {
-        ///                         "connector:apigw",
-        ///                     }
-        ///                  },
-        ///             }),
-        ///             Tags = 
-        ///             {
-        ///                 { "createdBy", "terraform" },
-        ///             },
-        ///         });
-        ///         var eventRules = Tencentcloud.Eb.GetEventRules.Invoke(new Tencentcloud.Eb.GetEventRulesInvokeArgs
-        ///         {
-        ///             EventBusId = foo.Id,
-        ///             OrderBy = "AddTime",
-        ///             Order = "DESC",
-        ///         });
-        ///     }
+        ///             { "createdBy", "terraform" },
+        ///         },
+        ///     });
         /// 
-        /// }
+        ///     var eventRule = new Tencentcloud.Eb.EventRule("eventRule", new()
+        ///     {
+        ///         EventBusId = foo.Id,
+        ///         RuleName = "tf-event_rule",
+        ///         Description = "event rule desc",
+        ///         Enable = true,
+        ///         EventPattern = JsonSerializer.Serialize(new Dictionary&lt;string, object?&gt;
+        ///         {
+        ///             ["source"] = "apigw.cloud.tencent",
+        ///             ["type"] = new[]
+        ///             {
+        ///                 "connector:apigw",
+        ///             },
+        ///         }),
+        ///         Tags = 
+        ///         {
+        ///             { "createdBy", "terraform" },
+        ///         },
+        ///     });
+        /// 
+        ///     var eventRules = Tencentcloud.Eb.GetEventRules.Invoke(new()
+        ///     {
+        ///         EventBusId = foo.Id,
+        ///         OrderBy = "AddTime",
+        ///         Order = "DESC",
+        ///     });
+        /// 
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetEventRulesResult> InvokeAsync(GetEventRulesArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetEventRulesResult>("tencentcloud:Eb/getEventRules:getEventRules", args ?? new GetEventRulesArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetEventRulesResult>("tencentcloud:Eb/getEventRules:getEventRules", args ?? new GetEventRulesArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of eb event_rules
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
         /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using System.Text.Json;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var foo = new Tencentcloud.Eb.EventBus("foo", new()
         ///     {
-        ///         var foo = new Tencentcloud.Eb.EventBus("foo", new Tencentcloud.Eb.EventBusArgs
+        ///         EventBusName = "tf-event_bus_rule",
+        ///         Description = "event bus desc",
+        ///         EnableStore = false,
+        ///         SaveDays = 1,
+        ///         Tags = 
         ///         {
-        ///             EventBusName = "tf-event_bus_rule",
-        ///             Description = "event bus desc",
-        ///             EnableStore = false,
-        ///             SaveDays = 1,
-        ///             Tags = 
-        ///             {
-        ///                 { "createdBy", "terraform" },
-        ///             },
-        ///         });
-        ///         var eventRule = new Tencentcloud.Eb.EventRule("eventRule", new Tencentcloud.Eb.EventRuleArgs
-        ///         {
-        ///             EventBusId = foo.Id,
-        ///             RuleName = "tf-event_rule",
-        ///             Description = "event rule desc",
-        ///             Enable = true,
-        ///             EventPattern = JsonSerializer.Serialize(new Dictionary&lt;string, object?&gt;
-        ///             {
-        ///                 { "source", "apigw.cloud.tencent" },
-        ///                 { "type", new[]
-        ///                     {
-        ///                         "connector:apigw",
-        ///                     }
-        ///                  },
-        ///             }),
-        ///             Tags = 
-        ///             {
-        ///                 { "createdBy", "terraform" },
-        ///             },
-        ///         });
-        ///         var eventRules = Tencentcloud.Eb.GetEventRules.Invoke(new Tencentcloud.Eb.GetEventRulesInvokeArgs
-        ///         {
-        ///             EventBusId = foo.Id,
-        ///             OrderBy = "AddTime",
-        ///             Order = "DESC",
-        ///         });
-        ///     }
+        ///             { "createdBy", "terraform" },
+        ///         },
+        ///     });
         /// 
-        /// }
+        ///     var eventRule = new Tencentcloud.Eb.EventRule("eventRule", new()
+        ///     {
+        ///         EventBusId = foo.Id,
+        ///         RuleName = "tf-event_rule",
+        ///         Description = "event rule desc",
+        ///         Enable = true,
+        ///         EventPattern = JsonSerializer.Serialize(new Dictionary&lt;string, object?&gt;
+        ///         {
+        ///             ["source"] = "apigw.cloud.tencent",
+        ///             ["type"] = new[]
+        ///             {
+        ///                 "connector:apigw",
+        ///             },
+        ///         }),
+        ///         Tags = 
+        ///         {
+        ///             { "createdBy", "terraform" },
+        ///         },
+        ///     });
+        /// 
+        ///     var eventRules = Tencentcloud.Eb.GetEventRules.Invoke(new()
+        ///     {
+        ///         EventBusId = foo.Id,
+        ///         OrderBy = "AddTime",
+        ///         Order = "DESC",
+        ///     });
+        /// 
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetEventRulesResult> Invoke(GetEventRulesInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetEventRulesResult>("tencentcloud:Eb/getEventRules:getEventRules", args ?? new GetEventRulesInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetEventRulesResult>("tencentcloud:Eb/getEventRules:getEventRules", args ?? new GetEventRulesInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetEventRulesArgs : Pulumi.InvokeArgs
+    public sealed class GetEventRulesArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// event bus Id.
@@ -173,9 +167,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Eb
         public GetEventRulesArgs()
         {
         }
+        public static new GetEventRulesArgs Empty => new GetEventRulesArgs();
     }
 
-    public sealed class GetEventRulesInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetEventRulesInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// event bus Id.
@@ -204,6 +199,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Eb
         public GetEventRulesInvokeArgs()
         {
         }
+        public static new GetEventRulesInvokeArgs Empty => new GetEventRulesInvokeArgs();
     }
 
 

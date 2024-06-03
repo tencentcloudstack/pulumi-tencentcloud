@@ -15,49 +15,50 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var foo = new Tencentcloud.Cynosdb.ReadonlyInstance("foo", new()
     ///     {
-    ///         var foo = new Tencentcloud.Cynosdb.ReadonlyInstance("foo", new Tencentcloud.Cynosdb.ReadonlyInstanceArgs
+    ///         ClusterId = cynosdbmysql_dzj5l8gz,
+    ///         InstanceName = "tf-cynosdb-readonly-instance",
+    ///         ForceDelete = true,
+    ///         InstanceCpuCore = 2,
+    ///         InstanceMemorySize = 4,
+    ///         InstanceMaintainDuration = 7200,
+    ///         InstanceMaintainStartTime = 21600,
+    ///         InstanceMaintainWeekdays = new[]
     ///         {
-    ///             ClusterId = cynosdbmysql_dzj5l8gz,
-    ///             InstanceName = "tf-cynosdb-readonly-instance",
-    ///             ForceDelete = true,
-    ///             InstanceCpuCore = 2,
-    ///             InstanceMemorySize = 4,
-    ///             InstanceMaintainDuration = 7200,
-    ///             InstanceMaintainStartTime = 21600,
-    ///             InstanceMaintainWeekdays = 
-    ///             {
-    ///                 "Fri",
-    ///                 "Mon",
-    ///                 "Sat",
-    ///                 "Sun",
-    ///                 "Thu",
-    ///                 "Wed",
-    ///                 "Tue",
-    ///             },
-    ///         });
-    ///     }
+    ///             "Fri",
+    ///             "Mon",
+    ///             "Sat",
+    ///             "Sun",
+    ///             "Thu",
+    ///             "Wed",
+    ///             "Tue",
+    ///         },
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// CynosDB readonly instance can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Cynosdb/readonlyInstance:ReadonlyInstance foo cynosdbmysql-ins-dhwynib6
+    /// $ pulumi import tencentcloud:Cynosdb/readonlyInstance:ReadonlyInstance foo cynosdbmysql-ins-dhwynib6
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Cynosdb/readonlyInstance:ReadonlyInstance")]
-    public partial class ReadonlyInstance : Pulumi.CustomResource
+    public partial class ReadonlyInstance : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Cluster ID which the readonly instance belongs to.
@@ -176,7 +177,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
         }
     }
 
-    public sealed class ReadonlyInstanceArgs : Pulumi.ResourceArgs
+    public sealed class ReadonlyInstanceArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Cluster ID which the readonly instance belongs to.
@@ -247,9 +248,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
         public ReadonlyInstanceArgs()
         {
         }
+        public static new ReadonlyInstanceArgs Empty => new ReadonlyInstanceArgs();
     }
 
-    public sealed class ReadonlyInstanceState : Pulumi.ResourceArgs
+    public sealed class ReadonlyInstanceState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Cluster ID which the readonly instance belongs to.
@@ -332,5 +334,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
         public ReadonlyInstanceState()
         {
         }
+        public static new ReadonlyInstanceState Empty => new ReadonlyInstanceState();
     }
 }

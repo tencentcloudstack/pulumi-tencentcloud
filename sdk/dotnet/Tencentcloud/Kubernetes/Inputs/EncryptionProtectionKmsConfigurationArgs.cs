@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes.Inputs
 {
 
-    public sealed class EncryptionProtectionKmsConfigurationArgs : Pulumi.ResourceArgs
+    public sealed class EncryptionProtectionKmsConfigurationArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// kms id.
@@ -28,5 +28,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes.Inputs
         public EncryptionProtectionKmsConfigurationArgs()
         {
         }
+        public static new EncryptionProtectionKmsConfigurationArgs Empty => new EncryptionProtectionKmsConfigurationArgs();
     }
 }

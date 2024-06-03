@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Eb.Inputs
 {
 
-    public sealed class EventTransformTransformationTransformOutputStructArgs : Pulumi.ResourceArgs
+    public sealed class EventTransformTransformationTransformOutputStructArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Corresponding to the key in the output json.
@@ -34,5 +34,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Eb.Inputs
         public EventTransformTransformationTransformOutputStructArgs()
         {
         }
+        public static new EventTransformTransformationTransformOutputStructArgs Empty => new EventTransformTransformationTransformOutputStructArgs();
     }
 }

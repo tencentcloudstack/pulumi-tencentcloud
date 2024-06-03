@@ -13,158 +13,16 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps
     /// <summary>
     /// Provides a resource to create a mps content_review_template
     /// 
-    /// ## Example Usage
-    /// 
-    /// ```csharp
-    /// using Pulumi;
-    /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
-    /// 
-    /// class MyStack : Stack
-    /// {
-    ///     public MyStack()
-    ///     {
-    ///         var template = new Tencentcloud.Mps.ContentReviewTemplate("template", new Tencentcloud.Mps.ContentReviewTemplateArgs
-    ///         {
-    ///             Comment = "tf test content review temp",
-    ///             PoliticalConfigure = new Tencentcloud.Mps.Inputs.ContentReviewTemplatePoliticalConfigureArgs
-    ///             {
-    ///                 AsrReviewInfo = new Tencentcloud.Mps.Inputs.ContentReviewTemplatePoliticalConfigureAsrReviewInfoArgs
-    ///                 {
-    ///                     BlockConfidence = 60,
-    ///                     ReviewConfidence = 100,
-    ///                     Switch = "ON",
-    ///                 },
-    ///                 ImgReviewInfo = new Tencentcloud.Mps.Inputs.ContentReviewTemplatePoliticalConfigureImgReviewInfoArgs
-    ///                 {
-    ///                     BlockConfidence = 60,
-    ///                     LabelSet = 
-    ///                     {
-    ///                         "violation_photo",
-    ///                         "politician",
-    ///                     },
-    ///                     ReviewConfidence = 100,
-    ///                     Switch = "ON",
-    ///                 },
-    ///                 OcrReviewInfo = new Tencentcloud.Mps.Inputs.ContentReviewTemplatePoliticalConfigureOcrReviewInfoArgs
-    ///                 {
-    ///                     BlockConfidence = 60,
-    ///                     ReviewConfidence = 100,
-    ///                     Switch = "ON",
-    ///                 },
-    ///             },
-    ///             PornConfigure = new Tencentcloud.Mps.Inputs.ContentReviewTemplatePornConfigureArgs
-    ///             {
-    ///                 AsrReviewInfo = new Tencentcloud.Mps.Inputs.ContentReviewTemplatePornConfigureAsrReviewInfoArgs
-    ///                 {
-    ///                     BlockConfidence = 60,
-    ///                     ReviewConfidence = 100,
-    ///                     Switch = "ON",
-    ///                 },
-    ///                 ImgReviewInfo = new Tencentcloud.Mps.Inputs.ContentReviewTemplatePornConfigureImgReviewInfoArgs
-    ///                 {
-    ///                     BlockConfidence = 60,
-    ///                     LabelSet = 
-    ///                     {
-    ///                         "porn",
-    ///                         "vulgar",
-    ///                     },
-    ///                     ReviewConfidence = 100,
-    ///                     Switch = "ON",
-    ///                 },
-    ///                 OcrReviewInfo = new Tencentcloud.Mps.Inputs.ContentReviewTemplatePornConfigureOcrReviewInfoArgs
-    ///                 {
-    ///                     BlockConfidence = 60,
-    ///                     ReviewConfidence = 100,
-    ///                     Switch = "ON",
-    ///                 },
-    ///             },
-    ///             ProhibitedConfigure = new Tencentcloud.Mps.Inputs.ContentReviewTemplateProhibitedConfigureArgs
-    ///             {
-    ///                 AsrReviewInfo = new Tencentcloud.Mps.Inputs.ContentReviewTemplateProhibitedConfigureAsrReviewInfoArgs
-    ///                 {
-    ///                     BlockConfidence = 60,
-    ///                     ReviewConfidence = 100,
-    ///                     Switch = "ON",
-    ///                 },
-    ///                 OcrReviewInfo = new Tencentcloud.Mps.Inputs.ContentReviewTemplateProhibitedConfigureOcrReviewInfoArgs
-    ///                 {
-    ///                     BlockConfidence = 60,
-    ///                     ReviewConfidence = 100,
-    ///                     Switch = "ON",
-    ///                 },
-    ///             },
-    ///             TerrorismConfigure = new Tencentcloud.Mps.Inputs.ContentReviewTemplateTerrorismConfigureArgs
-    ///             {
-    ///                 ImgReviewInfo = new Tencentcloud.Mps.Inputs.ContentReviewTemplateTerrorismConfigureImgReviewInfoArgs
-    ///                 {
-    ///                     BlockConfidence = 60,
-    ///                     LabelSet = 
-    ///                     {
-    ///                         "guns",
-    ///                         "crowd",
-    ///                     },
-    ///                     ReviewConfidence = 100,
-    ///                     Switch = "ON",
-    ///                 },
-    ///                 OcrReviewInfo = new Tencentcloud.Mps.Inputs.ContentReviewTemplateTerrorismConfigureOcrReviewInfoArgs
-    ///                 {
-    ///                     BlockConfidence = 60,
-    ///                     ReviewConfidence = 100,
-    ///                     Switch = "ON",
-    ///                 },
-    ///             },
-    ///             UserDefineConfigure = new Tencentcloud.Mps.Inputs.ContentReviewTemplateUserDefineConfigureArgs
-    ///             {
-    ///                 AsrReviewInfo = new Tencentcloud.Mps.Inputs.ContentReviewTemplateUserDefineConfigureAsrReviewInfoArgs
-    ///                 {
-    ///                     BlockConfidence = 60,
-    ///                     LabelSet = 
-    ///                     {
-    ///                         "VOICE_1",
-    ///                         "VOICE_2",
-    ///                     },
-    ///                     ReviewConfidence = 100,
-    ///                     Switch = "ON",
-    ///                 },
-    ///                 FaceReviewInfo = new Tencentcloud.Mps.Inputs.ContentReviewTemplateUserDefineConfigureFaceReviewInfoArgs
-    ///                 {
-    ///                     BlockConfidence = 60,
-    ///                     LabelSet = 
-    ///                     {
-    ///                         "FACE_1",
-    ///                         "FACE_2",
-    ///                     },
-    ///                     ReviewConfidence = 100,
-    ///                     Switch = "ON",
-    ///                 },
-    ///                 OcrReviewInfo = new Tencentcloud.Mps.Inputs.ContentReviewTemplateUserDefineConfigureOcrReviewInfoArgs
-    ///                 {
-    ///                     BlockConfidence = 60,
-    ///                     LabelSet = 
-    ///                     {
-    ///                         "VIDEO_1",
-    ///                         "VIDEO_2",
-    ///                     },
-    ///                     ReviewConfidence = 100,
-    ///                     Switch = "ON",
-    ///                 },
-    ///             },
-    ///         });
-    ///     }
-    /// 
-    /// }
-    /// ```
-    /// 
     /// ## Import
     /// 
     /// mps content_review_template can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Mps/contentReviewTemplate:ContentReviewTemplate content_review_template definition
+    /// $ pulumi import tencentcloud:Mps/contentReviewTemplate:ContentReviewTemplate content_review_template definition
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Mps/contentReviewTemplate:ContentReviewTemplate")]
-    public partial class ContentReviewTemplate : Pulumi.CustomResource
+    public partial class ContentReviewTemplate : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Content review template description information, length limit: 256 characters.
@@ -253,7 +111,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps
         }
     }
 
-    public sealed class ContentReviewTemplateArgs : Pulumi.ResourceArgs
+    public sealed class ContentReviewTemplateArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Content review template description information, length limit: 256 characters.
@@ -300,9 +158,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps
         public ContentReviewTemplateArgs()
         {
         }
+        public static new ContentReviewTemplateArgs Empty => new ContentReviewTemplateArgs();
     }
 
-    public sealed class ContentReviewTemplateState : Pulumi.ResourceArgs
+    public sealed class ContentReviewTemplateState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Content review template description information, length limit: 256 characters.
@@ -349,5 +208,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps
         public ContentReviewTemplateState()
         {
         }
+        public static new ContentReviewTemplateState Empty => new ContentReviewTemplateState();
     }
 }

@@ -15,44 +15,45 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tat
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var invoker = new Tencentcloud.Tat.Invoker("invoker", new()
     ///     {
-    ///         var invoker = new Tencentcloud.Tat.Invoker("invoker", new Tencentcloud.Tat.InvokerArgs
+    ///         CommandId = "cmd-6fydo27j",
+    ///         InstanceIds = new[]
     ///         {
-    ///             CommandId = "cmd-6fydo27j",
-    ///             InstanceIds = 
-    ///             {
-    ///                 "ins-3c7q2ebs",
-    ///             },
-    ///             ScheduleSettings = new Tencentcloud.Tat.Inputs.InvokerScheduleSettingsArgs
-    ///             {
-    ///                 InvokeTime = "2099-11-17T16:00:00Z",
-    ///                 Policy = "ONCE",
-    ///             },
-    ///             Type = "SCHEDULE",
-    ///             Username = "root",
-    ///         });
-    ///     }
+    ///             "ins-3c7q2ebs",
+    ///         },
+    ///         ScheduleSettings = new Tencentcloud.Tat.Inputs.InvokerScheduleSettingsArgs
+    ///         {
+    ///             InvokeTime = "2099-11-17T16:00:00Z",
+    ///             Policy = "ONCE",
+    ///         },
+    ///         Type = "SCHEDULE",
+    ///         Username = "root",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// tat invoker can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Tat/invoker:Invoker invoker ivk-gwb4ztk5
+    /// $ pulumi import tencentcloud:Tat/invoker:Invoker invoker ivk-gwb4ztk5
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Tat/invoker:Invoker")]
-    public partial class Invoker : Pulumi.CustomResource
+    public partial class Invoker : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Remote command ID.
@@ -165,7 +166,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tat
         }
     }
 
-    public sealed class InvokerArgs : Pulumi.ResourceArgs
+    public sealed class InvokerArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Remote command ID.
@@ -218,9 +219,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tat
         public InvokerArgs()
         {
         }
+        public static new InvokerArgs Empty => new InvokerArgs();
     }
 
-    public sealed class InvokerState : Pulumi.ResourceArgs
+    public sealed class InvokerState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Remote command ID.
@@ -297,5 +299,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tat
         public InvokerState()
         {
         }
+        public static new InvokerState Empty => new InvokerState();
     }
 }

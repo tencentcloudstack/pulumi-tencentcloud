@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps.Inputs
 {
 
-    public sealed class EditMediaOperationFileInfoGetArgs : Pulumi.ResourceArgs
+    public sealed class EditMediaOperationFileInfoGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// End time offset of video clipping in seconds.
@@ -34,5 +34,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps.Inputs
         public EditMediaOperationFileInfoGetArgs()
         {
         }
+        public static new EditMediaOperationFileInfoGetArgs Empty => new EditMediaOperationFileInfoGetArgs();
     }
 }

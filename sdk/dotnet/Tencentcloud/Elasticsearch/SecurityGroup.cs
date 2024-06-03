@@ -15,38 +15,39 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Elasticsearch
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var securityGroup = new Tencentcloud.Elasticsearch.SecurityGroup("securityGroup", new()
     ///     {
-    ///         var securityGroup = new Tencentcloud.Elasticsearch.SecurityGroup("securityGroup", new Tencentcloud.Elasticsearch.SecurityGroupArgs
+    ///         InstanceId = "es-5wn36he6",
+    ///         SecurityGroupIds = new[]
     ///         {
-    ///             InstanceId = "es-5wn36he6",
-    ///             SecurityGroupIds = 
-    ///             {
-    ///                 "sg-mayqdlt1",
-    ///                 "sg-po2q8cg7",
-    ///             },
-    ///         });
-    ///     }
+    ///             "sg-mayqdlt1",
+    ///             "sg-po2q8cg7",
+    ///         },
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// elasticsearch security_group can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Elasticsearch/securityGroup:SecurityGroup security_group instance_id
+    /// $ pulumi import tencentcloud:Elasticsearch/securityGroup:SecurityGroup security_group instance_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Elasticsearch/securityGroup:SecurityGroup")]
-    public partial class SecurityGroup : Pulumi.CustomResource
+    public partial class SecurityGroup : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Instance Id.
@@ -105,7 +106,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Elasticsearch
         }
     }
 
-    public sealed class SecurityGroupArgs : Pulumi.ResourceArgs
+    public sealed class SecurityGroupArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Instance Id.
@@ -128,9 +129,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Elasticsearch
         public SecurityGroupArgs()
         {
         }
+        public static new SecurityGroupArgs Empty => new SecurityGroupArgs();
     }
 
-    public sealed class SecurityGroupState : Pulumi.ResourceArgs
+    public sealed class SecurityGroupState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Instance Id.
@@ -153,5 +155,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Elasticsearch
         public SecurityGroupState()
         {
         }
+        public static new SecurityGroupState Empty => new SecurityGroupState();
     }
 }

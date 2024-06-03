@@ -7,8 +7,9 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 type ApplicationProxy struct {
@@ -70,7 +71,7 @@ func NewApplicationProxy(ctx *pulumi.Context,
 	if args.ZoneId == nil {
 		return nil, errors.New("invalid value for required argument 'ZoneId'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource ApplicationProxy
 	err := ctx.RegisterResource("tencentcloud:Teo/applicationProxy:ApplicationProxy", name, args, &resource, opts...)
 	if err != nil {
@@ -239,7 +240,7 @@ func (i *ApplicationProxy) ToApplicationProxyOutputWithContext(ctx context.Conte
 // ApplicationProxyArrayInput is an input type that accepts ApplicationProxyArray and ApplicationProxyArrayOutput values.
 // You can construct a concrete instance of `ApplicationProxyArrayInput` via:
 //
-//          ApplicationProxyArray{ ApplicationProxyArgs{...} }
+//	ApplicationProxyArray{ ApplicationProxyArgs{...} }
 type ApplicationProxyArrayInput interface {
 	pulumi.Input
 
@@ -264,7 +265,7 @@ func (i ApplicationProxyArray) ToApplicationProxyArrayOutputWithContext(ctx cont
 // ApplicationProxyMapInput is an input type that accepts ApplicationProxyMap and ApplicationProxyMapOutput values.
 // You can construct a concrete instance of `ApplicationProxyMapInput` via:
 //
-//          ApplicationProxyMap{ "key": ApplicationProxyArgs{...} }
+//	ApplicationProxyMap{ "key": ApplicationProxyArgs{...} }
 type ApplicationProxyMapInput interface {
 	pulumi.Input
 

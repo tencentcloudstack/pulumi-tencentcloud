@@ -9,23 +9,22 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const dbSpaceStatus = pulumi.output(tencentcloud.Dbbrain.getDbSpaceStatus({
+ * const dbSpaceStatus = tencentcloud.Dbbrain.getDbSpaceStatus({
  *     instanceId: "%s",
  *     product: "mysql",
  *     rangeDays: 7,
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getDbSpaceStatus(args: GetDbSpaceStatusArgs, opts?: pulumi.InvokeOptions): Promise<GetDbSpaceStatusResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Dbbrain/getDbSpaceStatus:getDbSpaceStatus", {
         "instanceId": args.instanceId,
         "product": args.product,
@@ -85,9 +84,26 @@ export interface GetDbSpaceStatusResult {
      */
     readonly total: number;
 }
-
+/**
+ * Use this data source to query detailed information of dbbrain dbSpaceStatus
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const dbSpaceStatus = tencentcloud.Dbbrain.getDbSpaceStatus({
+ *     instanceId: "%s",
+ *     product: "mysql",
+ *     rangeDays: 7,
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getDbSpaceStatusOutput(args: GetDbSpaceStatusOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetDbSpaceStatusResult> {
-    return pulumi.output(args).apply(a => getDbSpaceStatus(a, opts))
+    return pulumi.output(args).apply((a: any) => getDbSpaceStatus(a, opts))
 }
 
 /**

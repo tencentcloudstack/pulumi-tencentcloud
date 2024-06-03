@@ -14,8 +14,17 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos.Outputs
     [OutputType]
     public sealed class GetBucketsBucketListOriginDomainRuleResult
     {
+        /// <summary>
+        /// Specify domain host.
+        /// </summary>
         public readonly string Domain;
+        /// <summary>
+        /// Domain status, default: `ENABLED`.
+        /// </summary>
         public readonly string? Status;
+        /// <summary>
+        /// Specify origin domain type, available values: `REST`, `WEBSITE`, `ACCELERATE`, default: `REST`.
+        /// </summary>
         public readonly string? Type;
 
         [OutputConstructor]

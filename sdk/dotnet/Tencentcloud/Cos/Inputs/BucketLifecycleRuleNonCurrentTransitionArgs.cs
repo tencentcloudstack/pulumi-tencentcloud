@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos.Inputs
 {
 
-    public sealed class BucketLifecycleRuleNonCurrentTransitionArgs : Pulumi.ResourceArgs
+    public sealed class BucketLifecycleRuleNonCurrentTransitionArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Number of days after non current object creation when the specific rule action takes effect.
@@ -28,5 +28,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos.Inputs
         public BucketLifecycleRuleNonCurrentTransitionArgs()
         {
         }
+        public static new BucketLifecycleRuleNonCurrentTransitionArgs Empty => new BucketLifecycleRuleNonCurrentTransitionArgs();
     }
 }

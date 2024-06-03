@@ -7,41 +7,46 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a lighthouse renewInstance
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Lighthouse"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Lighthouse"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Lighthouse"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Lighthouse.NewRenewInstance(ctx, "renewInstance", &Lighthouse.RenewInstanceArgs{
-// 			AutoVoucher: pulumi.Bool(false),
-// 			InstanceChargePrepaid: &lighthouse.RenewInstanceInstanceChargePrepaidArgs{
-// 				Period:    pulumi.Int(1),
-// 				RenewFlag: pulumi.String("NOTIFY_AND_MANUAL_RENEW"),
-// 			},
-// 			InstanceId:    pulumi.String(""),
-// 			RenewDataDisk: pulumi.Bool(true),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Lighthouse.NewRenewInstance(ctx, "renewInstance", &Lighthouse.RenewInstanceArgs{
+//				AutoVoucher: pulumi.Bool(false),
+//				InstanceChargePrepaid: &lighthouse.RenewInstanceInstanceChargePrepaidArgs{
+//					Period:    pulumi.Int(1),
+//					RenewFlag: pulumi.String("NOTIFY_AND_MANUAL_RENEW"),
+//				},
+//				InstanceId:    pulumi.String("lhins-xxxxxxx"),
+//				RenewDataDisk: pulumi.Bool(true),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 type RenewInstance struct {
 	pulumi.CustomResourceState
 
@@ -70,7 +75,7 @@ func NewRenewInstance(ctx *pulumi.Context,
 	if args.InstanceId == nil {
 		return nil, errors.New("invalid value for required argument 'InstanceId'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource RenewInstance
 	err := ctx.RegisterResource("tencentcloud:Lighthouse/renewInstance:RenewInstance", name, args, &resource, opts...)
 	if err != nil {
@@ -175,7 +180,7 @@ func (i *RenewInstance) ToRenewInstanceOutputWithContext(ctx context.Context) Re
 // RenewInstanceArrayInput is an input type that accepts RenewInstanceArray and RenewInstanceArrayOutput values.
 // You can construct a concrete instance of `RenewInstanceArrayInput` via:
 //
-//          RenewInstanceArray{ RenewInstanceArgs{...} }
+//	RenewInstanceArray{ RenewInstanceArgs{...} }
 type RenewInstanceArrayInput interface {
 	pulumi.Input
 
@@ -200,7 +205,7 @@ func (i RenewInstanceArray) ToRenewInstanceArrayOutputWithContext(ctx context.Co
 // RenewInstanceMapInput is an input type that accepts RenewInstanceMap and RenewInstanceMapOutput values.
 // You can construct a concrete instance of `RenewInstanceMapInput` via:
 //
-//          RenewInstanceMap{ "key": RenewInstanceArgs{...} }
+//	RenewInstanceMap{ "key": RenewInstanceArgs{...} }
 type RenewInstanceMapInput interface {
 	pulumi.Input
 
@@ -237,8 +242,8 @@ func (o RenewInstanceOutput) ToRenewInstanceOutputWithContext(ctx context.Contex
 }
 
 // Whether to automatically deduct vouchers. Valid values:
-// - true: Automatically deduct vouchers.
-//   -false:Do not automatically deduct vouchers. Default value: false.
+//   - true: Automatically deduct vouchers.
+//     -false:Do not automatically deduct vouchers. Default value: false.
 func (o RenewInstanceOutput) AutoVoucher() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *RenewInstance) pulumi.BoolPtrOutput { return v.AutoVoucher }).(pulumi.BoolPtrOutput)
 }

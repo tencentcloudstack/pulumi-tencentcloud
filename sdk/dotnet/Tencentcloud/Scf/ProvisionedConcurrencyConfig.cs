@@ -15,42 +15,43 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Scf
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var provisionedConcurrencyConfig = new Tencentcloud.Scf.ProvisionedConcurrencyConfig("provisionedConcurrencyConfig", new()
     ///     {
-    ///         var provisionedConcurrencyConfig = new Tencentcloud.Scf.ProvisionedConcurrencyConfig("provisionedConcurrencyConfig", new Tencentcloud.Scf.ProvisionedConcurrencyConfigArgs
+    ///         FunctionName = "keep-1676351130",
+    ///         MaxCapacity = 2,
+    ///         MinCapacity = 1,
+    ///         Namespace = "default",
+    ///         ProvisionedType = "Default",
+    ///         Qualifier = "2",
+    ///         TrackingTarget = 0.5,
+    ///         TriggerActions = new[]
     ///         {
-    ///             FunctionName = "keep-1676351130",
-    ///             MaxCapacity = 2,
-    ///             MinCapacity = 1,
-    ///             Namespace = "default",
-    ///             ProvisionedType = "Default",
-    ///             Qualifier = "2",
-    ///             TrackingTarget = 0.5,
-    ///             TriggerActions = 
+    ///             new Tencentcloud.Scf.Inputs.ProvisionedConcurrencyConfigTriggerActionArgs
     ///             {
-    ///                 new Tencentcloud.Scf.Inputs.ProvisionedConcurrencyConfigTriggerActionArgs
-    ///                 {
-    ///                     ProvisionedType = "Default",
-    ///                     TriggerCronConfig = "29 45 12 29 05 * 2023",
-    ///                     TriggerName = "test",
-    ///                     TriggerProvisionedConcurrencyNum = 2,
-    ///                 },
+    ///                 ProvisionedType = "Default",
+    ///                 TriggerCronConfig = "29 45 12 29 05 * 2023",
+    ///                 TriggerName = "test",
+    ///                 TriggerProvisionedConcurrencyNum = 2,
     ///             },
-    ///             VersionProvisionedConcurrencyNum = 2,
-    ///         });
-    ///     }
+    ///         },
+    ///         VersionProvisionedConcurrencyNum = 2,
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Scf/provisionedConcurrencyConfig:ProvisionedConcurrencyConfig")]
-    public partial class ProvisionedConcurrencyConfig : Pulumi.CustomResource
+    public partial class ProvisionedConcurrencyConfig : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Name of the function for which to set the provisioned concurrency.
@@ -151,7 +152,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Scf
         }
     }
 
-    public sealed class ProvisionedConcurrencyConfigArgs : Pulumi.ResourceArgs
+    public sealed class ProvisionedConcurrencyConfigArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Name of the function for which to set the provisioned concurrency.
@@ -216,9 +217,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Scf
         public ProvisionedConcurrencyConfigArgs()
         {
         }
+        public static new ProvisionedConcurrencyConfigArgs Empty => new ProvisionedConcurrencyConfigArgs();
     }
 
-    public sealed class ProvisionedConcurrencyConfigState : Pulumi.ResourceArgs
+    public sealed class ProvisionedConcurrencyConfigState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Name of the function for which to set the provisioned concurrency.
@@ -283,5 +285,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Scf
         public ProvisionedConcurrencyConfigState()
         {
         }
+        public static new ProvisionedConcurrencyConfigState Empty => new ProvisionedConcurrencyConfigState();
     }
 }

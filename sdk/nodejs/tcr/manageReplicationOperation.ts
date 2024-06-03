@@ -2,13 +2,59 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
  * Provides a resource to start a tcr instance replication operation
  *
  * ## Example Usage
+ *
+ * ### Sync source tcr instance to target instance
+ *
+ * Synchronize an existing tcr instance to the destination instance. This operation is often used in the cross-multiple region scenario.
+ * Assume you have had two TCR instances before this operation. This example shows how to sync a tcr instance from ap-guangzhou(gz) to ap-shanghai(sh).
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
+ *
+ * // tcr instance on ap-guangzhou
+ * const exampleGzInstance = new tencentcloud.tcr.Instance("exampleGzInstance", {
+ *     instanceType: "premium",
+ *     tags: {
+ *         createdBy: "terraform",
+ *     },
+ * });
+ * const exampleGzNamespace = new tencentcloud.tcr.Namespace("exampleGzNamespace", {
+ *     instanceId: exampleGzInstance.id,
+ *     isPublic: true,
+ *     isAutoScan: true,
+ *     isPreventVul: true,
+ *     severity: "medium",
+ *     cveWhitelistItems: [{
+ *         cveId: "cve-xxxxx",
+ *     }],
+ * });
+ * // tcr instance on ap-shanghai
+ * const exampleShInstance = new tencentcloud.tcr.Instance("exampleShInstance", {
+ *     instanceType: "premium",
+ *     deleteBucket: true,
+ * });
+ * const exampleShNamespace = new tencentcloud.tcr.Namespace("exampleShNamespace", {
+ *     instanceId: exampleShInstance.id,
+ *     isPublic: true,
+ *     isAutoScan: true,
+ *     isPreventVul: true,
+ *     severity: "medium",
+ *     cveWhitelistItems: [{
+ *         cveId: "cve-xxxxx",
+ *     }],
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
  */
 export class ManageReplicationOperation extends pulumi.CustomResource {
     /**

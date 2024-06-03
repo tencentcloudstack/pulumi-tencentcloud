@@ -8,74 +8,79 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Use this data source to query detailed information of dcdb upgradePrice
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Dcdb"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dcdb"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dcdb"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Dcdb.GetUpgradePrice(ctx, &dcdb.GetUpgradePriceArgs{
-// 			InstanceId:  local.Dcdb_id,
-// 			UpgradeType: "ADD",
-// 			AddShardConfig: dcdb.GetUpgradePriceAddShardConfig{
-// 				ShardCount:   2,
-// 				ShardMemory:  2,
-// 				ShardStorage: 100,
-// 			},
-// 			AmountUnit: pulumi.StringRef("pent"),
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_, err = Dcdb.GetUpgradePrice(ctx, &dcdb.GetUpgradePriceArgs{
-// 			InstanceId:  local.Dcdb_id,
-// 			UpgradeType: "EXPAND",
-// 			ExpandShardConfig: dcdb.GetUpgradePriceExpandShardConfig{
-// 				ShardInstanceIds: []string{
-// 					"shard-1b5r04az",
-// 				},
-// 				ShardMemory:    2,
-// 				ShardStorage:   40,
-// 				ShardNodeCount: pulumi.IntRef(2),
-// 			},
-// 			AmountUnit: pulumi.StringRef("pent"),
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_, err = Dcdb.GetUpgradePrice(ctx, &dcdb.GetUpgradePriceArgs{
-// 			InstanceId:  local.Dcdb_id,
-// 			UpgradeType: "SPLIT",
-// 			SplitShardConfig: dcdb.GetUpgradePriceSplitShardConfig{
-// 				ShardInstanceIds: []string{
-// 					"shard-1b5r04az",
-// 				},
-// 				SplitRate:    50,
-// 				ShardMemory:  2,
-// 				ShardStorage: 100,
-// 			},
-// 			AmountUnit: pulumi.StringRef("pent"),
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Dcdb.GetUpgradePrice(ctx, &dcdb.GetUpgradePriceArgs{
+//				InstanceId:  local.Dcdb_id,
+//				UpgradeType: "ADD",
+//				AddShardConfig: dcdb.GetUpgradePriceAddShardConfig{
+//					ShardCount:   2,
+//					ShardMemory:  2,
+//					ShardStorage: 100,
+//				},
+//				AmountUnit: pulumi.StringRef("pent"),
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			_, err = Dcdb.GetUpgradePrice(ctx, &dcdb.GetUpgradePriceArgs{
+//				InstanceId:  local.Dcdb_id,
+//				UpgradeType: "EXPAND",
+//				ExpandShardConfig: dcdb.GetUpgradePriceExpandShardConfig{
+//					ShardInstanceIds: []string{
+//						"shard-1b5r04az",
+//					},
+//					ShardMemory:    2,
+//					ShardStorage:   40,
+//					ShardNodeCount: pulumi.IntRef(2),
+//				},
+//				AmountUnit: pulumi.StringRef("pent"),
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			_, err = Dcdb.GetUpgradePrice(ctx, &dcdb.GetUpgradePriceArgs{
+//				InstanceId:  local.Dcdb_id,
+//				UpgradeType: "SPLIT",
+//				SplitShardConfig: dcdb.GetUpgradePriceSplitShardConfig{
+//					ShardInstanceIds: []string{
+//						"shard-1b5r04az",
+//					},
+//					SplitRate:    50,
+//					ShardMemory:  2,
+//					ShardStorage: 100,
+//				},
+//				AmountUnit: pulumi.StringRef("pent"),
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 func GetUpgradePrice(ctx *pulumi.Context, args *GetUpgradePriceArgs, opts ...pulumi.InvokeOption) (*GetUpgradePriceResult, error) {
-	opts = pkgInvokeDefaultOpts(opts)
+	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetUpgradePriceResult
 	err := ctx.Invoke("tencentcloud:Dcdb/getUpgradePrice:getUpgradePrice", args, &rv, opts...)
 	if err != nil {

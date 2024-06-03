@@ -14,10 +14,25 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql.Outputs
     [OutputType]
     public sealed class GetProxyCustomCustomConfResult
     {
+        /// <summary>
+        /// number of cores.
+        /// </summary>
         public readonly int Cpu;
+        /// <summary>
+        /// equipment.
+        /// </summary>
         public readonly string Device;
+        /// <summary>
+        /// Equipment type.
+        /// </summary>
         public readonly string DeviceType;
+        /// <summary>
+        /// Memory.
+        /// </summary>
         public readonly int Memory;
+        /// <summary>
+        /// type.
+        /// </summary>
         public readonly string Type;
 
         [OutputConstructor]

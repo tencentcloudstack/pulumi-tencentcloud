@@ -7,45 +7,51 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a cbs snapshotSharePermission
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cbs"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cbs"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Cbs.NewSnapshotSharePermission(ctx, "snapshotSharePermission", &Cbs.SnapshotSharePermissionArgs{
-// 			AccountIds: pulumi.StringArray{
-// 				pulumi.String("1xxxxxx"),
-// 				pulumi.String("2xxxxxx"),
-// 			},
-// 			SnapshotId: pulumi.String("snap-xxxxxx"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Cbs.NewSnapshotSharePermission(ctx, "snapshotSharePermission", &Cbs.SnapshotSharePermissionArgs{
+//				AccountIds: pulumi.StringArray{
+//					pulumi.String("1xxxxxx"),
+//					pulumi.String("2xxxxxx"),
+//				},
+//				SnapshotId: pulumi.String("snap-xxxxxx"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // cbs snapshot_share_permission can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Cbs/snapshotSharePermission:SnapshotSharePermission snapshot_share_permission snap-xxxxxx
+// $ pulumi import tencentcloud:Cbs/snapshotSharePermission:SnapshotSharePermission snapshot_share_permission snap-xxxxxx
 // ```
 type SnapshotSharePermission struct {
 	pulumi.CustomResourceState
@@ -69,7 +75,7 @@ func NewSnapshotSharePermission(ctx *pulumi.Context,
 	if args.SnapshotId == nil {
 		return nil, errors.New("invalid value for required argument 'SnapshotId'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource SnapshotSharePermission
 	err := ctx.RegisterResource("tencentcloud:Cbs/snapshotSharePermission:SnapshotSharePermission", name, args, &resource, opts...)
 	if err != nil {
@@ -150,7 +156,7 @@ func (i *SnapshotSharePermission) ToSnapshotSharePermissionOutputWithContext(ctx
 // SnapshotSharePermissionArrayInput is an input type that accepts SnapshotSharePermissionArray and SnapshotSharePermissionArrayOutput values.
 // You can construct a concrete instance of `SnapshotSharePermissionArrayInput` via:
 //
-//          SnapshotSharePermissionArray{ SnapshotSharePermissionArgs{...} }
+//	SnapshotSharePermissionArray{ SnapshotSharePermissionArgs{...} }
 type SnapshotSharePermissionArrayInput interface {
 	pulumi.Input
 
@@ -175,7 +181,7 @@ func (i SnapshotSharePermissionArray) ToSnapshotSharePermissionArrayOutputWithCo
 // SnapshotSharePermissionMapInput is an input type that accepts SnapshotSharePermissionMap and SnapshotSharePermissionMapOutput values.
 // You can construct a concrete instance of `SnapshotSharePermissionMapInput` via:
 //
-//          SnapshotSharePermissionMap{ "key": SnapshotSharePermissionArgs{...} }
+//	SnapshotSharePermissionMap{ "key": SnapshotSharePermissionArgs{...} }
 type SnapshotSharePermissionMapInput interface {
 	pulumi.Input
 

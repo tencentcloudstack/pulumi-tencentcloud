@@ -7,42 +7,48 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Manage Guetzli compression functionality
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ci"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ci"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Ci.NewGuetzli(ctx, "foo", &Ci.GuetzliArgs{
-// 			Bucket: pulumi.String("examplebucket-1250000000"),
-// 			Status: pulumi.String("on"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Ci.NewGuetzli(ctx, "foo", &Ci.GuetzliArgs{
+//				Bucket: pulumi.String("examplebucket-1250000000"),
+//				Status: pulumi.String("on"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // Resource guetzli can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Ci/guetzli:Guetzli example examplebucket-1250000000
+// $ pulumi import tencentcloud:Ci/guetzli:Guetzli example examplebucket-1250000000
 // ```
 type Guetzli struct {
 	pulumi.CustomResourceState
@@ -66,7 +72,7 @@ func NewGuetzli(ctx *pulumi.Context,
 	if args.Status == nil {
 		return nil, errors.New("invalid value for required argument 'Status'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource Guetzli
 	err := ctx.RegisterResource("tencentcloud:Ci/guetzli:Guetzli", name, args, &resource, opts...)
 	if err != nil {
@@ -147,7 +153,7 @@ func (i *Guetzli) ToGuetzliOutputWithContext(ctx context.Context) GuetzliOutput 
 // GuetzliArrayInput is an input type that accepts GuetzliArray and GuetzliArrayOutput values.
 // You can construct a concrete instance of `GuetzliArrayInput` via:
 //
-//          GuetzliArray{ GuetzliArgs{...} }
+//	GuetzliArray{ GuetzliArgs{...} }
 type GuetzliArrayInput interface {
 	pulumi.Input
 
@@ -172,7 +178,7 @@ func (i GuetzliArray) ToGuetzliArrayOutputWithContext(ctx context.Context) Guetz
 // GuetzliMapInput is an input type that accepts GuetzliMap and GuetzliMapOutput values.
 // You can construct a concrete instance of `GuetzliMapInput` via:
 //
-//          GuetzliMap{ "key": GuetzliArgs{...} }
+//	GuetzliMap{ "key": GuetzliArgs{...} }
 type GuetzliMapInput interface {
 	pulumi.Input
 

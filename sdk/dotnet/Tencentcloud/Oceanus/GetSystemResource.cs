@@ -15,96 +15,90 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Oceanus
         /// <summary>
         /// Use this data source to query detailed information of oceanus system_resource
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var example = Tencentcloud.Oceanus.GetSystemResource.Invoke(new()
         ///     {
-        ///         var example = Output.Create(Tencentcloud.Oceanus.GetSystemResource.InvokeAsync(new Tencentcloud.Oceanus.GetSystemResourceArgs
+        ///         ClusterId = "cluster-n8yaia0p",
+        ///         Filters = new[]
         ///         {
-        ///             ClusterId = "cluster-n8yaia0p",
-        ///             Filters = 
+        ///             new Tencentcloud.Oceanus.Inputs.GetSystemResourceFilterInputArgs
         ///             {
-        ///                 new Tencentcloud.Oceanus.Inputs.GetSystemResourceFilterArgs
+        ///                 Name = "Name",
+        ///                 Values = new[]
         ///                 {
-        ///                     Name = "Name",
-        ///                     Values = 
-        ///                     {
-        ///                         "tf_example",
-        ///                     },
+        ///                     "tf_example",
         ///                 },
         ///             },
-        ///             FlinkVersion = "Flink-1.11",
-        ///             ResourceIds = 
-        ///             {
-        ///                 "resource-abd503yt",
-        ///             },
-        ///         }));
-        ///     }
+        ///         },
+        ///         FlinkVersion = "Flink-1.11",
+        ///         ResourceIds = new[]
+        ///         {
+        ///             "resource-abd503yt",
+        ///         },
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetSystemResourceResult> InvokeAsync(GetSystemResourceArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetSystemResourceResult>("tencentcloud:Oceanus/getSystemResource:getSystemResource", args ?? new GetSystemResourceArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetSystemResourceResult>("tencentcloud:Oceanus/getSystemResource:getSystemResource", args ?? new GetSystemResourceArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of oceanus system_resource
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var example = Tencentcloud.Oceanus.GetSystemResource.Invoke(new()
         ///     {
-        ///         var example = Output.Create(Tencentcloud.Oceanus.GetSystemResource.InvokeAsync(new Tencentcloud.Oceanus.GetSystemResourceArgs
+        ///         ClusterId = "cluster-n8yaia0p",
+        ///         Filters = new[]
         ///         {
-        ///             ClusterId = "cluster-n8yaia0p",
-        ///             Filters = 
+        ///             new Tencentcloud.Oceanus.Inputs.GetSystemResourceFilterInputArgs
         ///             {
-        ///                 new Tencentcloud.Oceanus.Inputs.GetSystemResourceFilterArgs
+        ///                 Name = "Name",
+        ///                 Values = new[]
         ///                 {
-        ///                     Name = "Name",
-        ///                     Values = 
-        ///                     {
-        ///                         "tf_example",
-        ///                     },
+        ///                     "tf_example",
         ///                 },
         ///             },
-        ///             FlinkVersion = "Flink-1.11",
-        ///             ResourceIds = 
-        ///             {
-        ///                 "resource-abd503yt",
-        ///             },
-        ///         }));
-        ///     }
+        ///         },
+        ///         FlinkVersion = "Flink-1.11",
+        ///         ResourceIds = new[]
+        ///         {
+        ///             "resource-abd503yt",
+        ///         },
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetSystemResourceResult> Invoke(GetSystemResourceInvokeArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetSystemResourceResult>("tencentcloud:Oceanus/getSystemResource:getSystemResource", args ?? new GetSystemResourceInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetSystemResourceResult>("tencentcloud:Oceanus/getSystemResource:getSystemResource", args ?? new GetSystemResourceInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetSystemResourceArgs : Pulumi.InvokeArgs
+    public sealed class GetSystemResourceArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Cluster ID.
@@ -151,9 +145,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Oceanus
         public GetSystemResourceArgs()
         {
         }
+        public static new GetSystemResourceArgs Empty => new GetSystemResourceArgs();
     }
 
-    public sealed class GetSystemResourceInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetSystemResourceInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Cluster ID.
@@ -200,6 +195,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Oceanus
         public GetSystemResourceInvokeArgs()
         {
         }
+        public static new GetSystemResourceInvokeArgs Empty => new GetSystemResourceInvokeArgs();
     }
 
 

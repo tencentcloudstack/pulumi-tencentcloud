@@ -15,78 +15,72 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cat
         /// <summary>
         /// Use this data source to query detailed information of cat metric_data
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var metricData = Tencentcloud.Cat.GetMetricData.Invoke(new()
         ///     {
-        ///         var metricData = Output.Create(Tencentcloud.Cat.GetMetricData.InvokeAsync(new Tencentcloud.Cat.GetMetricDataArgs
+        ///         AnalyzeTaskType = "AnalyzeTaskType_Network",
+        ///         Field = "avg(\"ping_time\")",
+        ///         Filters = new[]
         ///         {
-        ///             AnalyzeTaskType = "AnalyzeTaskType_Network",
-        ///             Field = "avg(\"ping_time\")",
-        ///             Filters = 
-        ///             {
-        ///                 "\"host\" = 'www.qq.com'",
-        ///                 "time &gt;= now()-1h",
-        ///             },
-        ///             MetricType = "gauge",
-        ///         }));
-        ///     }
+        ///             "\"host\" = 'www.qq.com'",
+        ///             "time &gt;= now()-1h",
+        ///         },
+        ///         MetricType = "gauge",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetMetricDataResult> InvokeAsync(GetMetricDataArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetMetricDataResult>("tencentcloud:Cat/getMetricData:getMetricData", args ?? new GetMetricDataArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetMetricDataResult>("tencentcloud:Cat/getMetricData:getMetricData", args ?? new GetMetricDataArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of cat metric_data
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var metricData = Tencentcloud.Cat.GetMetricData.Invoke(new()
         ///     {
-        ///         var metricData = Output.Create(Tencentcloud.Cat.GetMetricData.InvokeAsync(new Tencentcloud.Cat.GetMetricDataArgs
+        ///         AnalyzeTaskType = "AnalyzeTaskType_Network",
+        ///         Field = "avg(\"ping_time\")",
+        ///         Filters = new[]
         ///         {
-        ///             AnalyzeTaskType = "AnalyzeTaskType_Network",
-        ///             Field = "avg(\"ping_time\")",
-        ///             Filters = 
-        ///             {
-        ///                 "\"host\" = 'www.qq.com'",
-        ///                 "time &gt;= now()-1h",
-        ///             },
-        ///             MetricType = "gauge",
-        ///         }));
-        ///     }
+        ///             "\"host\" = 'www.qq.com'",
+        ///             "time &gt;= now()-1h",
+        ///         },
+        ///         MetricType = "gauge",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetMetricDataResult> Invoke(GetMetricDataInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetMetricDataResult>("tencentcloud:Cat/getMetricData:getMetricData", args ?? new GetMetricDataInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetMetricDataResult>("tencentcloud:Cat/getMetricData:getMetricData", args ?? new GetMetricDataInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetMetricDataArgs : Pulumi.InvokeArgs
+    public sealed class GetMetricDataArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Analysis of task type, supported types: `AnalyzeTaskType_Network`: network quality, `AnalyzeTaskType_Browse`: page performance, `AnalyzeTaskType_Transport`: port performance, `AnalyzeTaskType_UploadDownload`: file transport, `AnalyzeTaskType_MediaStream`: audiovisual experience.
@@ -139,9 +133,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cat
         public GetMetricDataArgs()
         {
         }
+        public static new GetMetricDataArgs Empty => new GetMetricDataArgs();
     }
 
-    public sealed class GetMetricDataInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetMetricDataInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Analysis of task type, supported types: `AnalyzeTaskType_Network`: network quality, `AnalyzeTaskType_Browse`: page performance, `AnalyzeTaskType_Transport`: port performance, `AnalyzeTaskType_UploadDownload`: file transport, `AnalyzeTaskType_MediaStream`: audiovisual experience.
@@ -194,6 +189,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cat
         public GetMetricDataInvokeArgs()
         {
         }
+        public static new GetMetricDataInvokeArgs Empty => new GetMetricDataInvokeArgs();
     }
 
 

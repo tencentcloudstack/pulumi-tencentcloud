@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dayu.Inputs
 {
 
-    public sealed class DdosPolicyV2BlackWhiteIpGetArgs : Pulumi.ResourceArgs
+    public sealed class DdosPolicyV2BlackWhiteIpGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Ip of resource instance.
@@ -28,5 +28,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dayu.Inputs
         public DdosPolicyV2BlackWhiteIpGetArgs()
         {
         }
+        public static new DdosPolicyV2BlackWhiteIpGetArgs Empty => new DdosPolicyV2BlackWhiteIpGetArgs();
     }
 }

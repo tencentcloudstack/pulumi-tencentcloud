@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,24 +11,23 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const mysql = pulumi.output(tencentcloud.Mysql.getParameterList({
+ * const mysql = tencentcloud.Mysql.getParameterList({
  *     engineVersion: "5.5",
  *     mysqlId: "terraform-test-local-database",
  *     resultOutputFile: "mytestpath",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getParameterList(args?: GetParameterListArgs, opts?: pulumi.InvokeOptions): Promise<GetParameterListResult> {
     args = args || {};
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Mysql/getParameterList:getParameterList", {
         "engineVersion": args.engineVersion,
         "mysqlId": args.mysqlId,
@@ -69,9 +69,26 @@ export interface GetParameterListResult {
     readonly parameterLists: outputs.Mysql.GetParameterListParameterList[];
     readonly resultOutputFile?: string;
 }
-
+/**
+ * Use this data source to get information about a parameter group of a database instance.
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const mysql = tencentcloud.Mysql.getParameterList({
+ *     engineVersion: "5.5",
+ *     mysqlId: "terraform-test-local-database",
+ *     resultOutputFile: "mytestpath",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getParameterListOutput(args?: GetParameterListOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetParameterListResult> {
-    return pulumi.output(args).apply(a => getParameterList(a, opts))
+    return pulumi.output(args).apply((a: any) => getParameterList(a, opts))
 }
 
 /**

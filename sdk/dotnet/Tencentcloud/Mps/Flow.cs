@@ -14,187 +14,198 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps
     /// Provides a resource to create a mps flow
     /// 
     /// ## Example Usage
+    /// 
     /// ### Create a mps RTP flow
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var @event = new Tencentcloud.Mps.Event("event", new()
     ///     {
-    ///         var @event = new Tencentcloud.Mps.Event("event", new Tencentcloud.Mps.EventArgs
+    ///         EventName = "tf_test_event_srt_%d",
+    ///         Description = "tf test mps event description",
+    ///     });
+    /// 
+    ///     var flow = new Tencentcloud.Mps.Flow("flow", new()
+    ///     {
+    ///         FlowName = "tf_test_mps_flow_srt_%d",
+    ///         MaxBandwidth = 10000000,
+    ///         InputGroups = new[]
     ///         {
-    ///             EventName = "tf_test_event_srt_%d",
-    ///             Description = "tf test mps event description",
-    ///         });
-    ///         var flow = new Tencentcloud.Mps.Flow("flow", new Tencentcloud.Mps.FlowArgs
-    ///         {
-    ///             FlowName = "tf_test_mps_flow_srt_%d",
-    ///             MaxBandwidth = 10000000,
-    ///             InputGroups = 
+    ///             new Tencentcloud.Mps.Inputs.FlowInputGroupArgs
     ///             {
-    ///                 new Tencentcloud.Mps.Inputs.FlowInputGroupArgs
+    ///                 InputName = "test_inputname",
+    ///                 Protocol = "SRT",
+    ///                 Description = "input name Description",
+    ///                 AllowIpLists = new[]
     ///                 {
-    ///                     InputName = "test_inputname",
-    ///                     Protocol = "SRT",
-    ///                     Description = "input name Description",
-    ///                     AllowIpLists = 
-    ///                     {
-    ///                         "0.0.0.0/0",
-    ///                     },
-    ///                     SrtSettings = new Tencentcloud.Mps.Inputs.FlowInputGroupSrtSettingsArgs
-    ///                     {
-    ///                         Mode = "LISTENER",
-    ///                         StreamId = "#!::u=johnny,r=resource,h=xxx.com,t=stream,m=play",
-    ///                         Latency = 1000,
-    ///                         RecvLatency = 1000,
-    ///                         PeerLatency = 1000,
-    ///                         PeerIdleTimeout = 1000,
-    ///                     },
+    ///                     "0.0.0.0/0",
+    ///                 },
+    ///                 SrtSettings = new Tencentcloud.Mps.Inputs.FlowInputGroupSrtSettingsArgs
+    ///                 {
+    ///                     Mode = "LISTENER",
+    ///                     StreamId = "#!::u=johnny,r=resource,h=xxx.com,t=stream,m=play",
+    ///                     Latency = 1000,
+    ///                     RecvLatency = 1000,
+    ///                     PeerLatency = 1000,
+    ///                     PeerIdleTimeout = 1000,
     ///                 },
     ///             },
-    ///             EventId = @event.Id,
-    ///         });
-    ///     }
+    ///         },
+    ///         EventId = @event.Id,
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
+    /// 
     /// ### Create a mps RTP flow
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var eventRtp = new Tencentcloud.Mps.Event("eventRtp", new()
     ///     {
-    ///         var eventRtp = new Tencentcloud.Mps.Event("eventRtp", new Tencentcloud.Mps.EventArgs
-    ///         {
-    ///             EventName = "tf_test_event_rtp_%d",
-    ///             Description = "tf test mps event description",
-    ///         });
-    ///         var flowRtp = new Tencentcloud.Mps.Flow("flowRtp", new Tencentcloud.Mps.FlowArgs
-    ///         {
-    ///             FlowName = "tf_test_mps_flow_rtp_%d",
-    ///             MaxBandwidth = 10000000,
-    ///             InputGroups = 
-    ///             {
-    ///                 new Tencentcloud.Mps.Inputs.FlowInputGroupArgs
-    ///                 {
-    ///                     InputName = "test_inputname",
-    ///                     Protocol = "RTP",
-    ///                     Description = "input name Description",
-    ///                     AllowIpLists = 
-    ///                     {
-    ///                         "0.0.0.0/0",
-    ///                     },
-    ///                     RtpSettings = new Tencentcloud.Mps.Inputs.FlowInputGroupRtpSettingsArgs
-    ///                     {
-    ///                         Fec = "none",
-    ///                         IdleTimeout = 1000,
-    ///                     },
-    ///                 },
-    ///             },
-    ///             EventId = eventRtp.Id,
-    ///         });
-    ///     }
+    ///         EventName = "tf_test_event_rtp_%d",
+    ///         Description = "tf test mps event description",
+    ///     });
     /// 
-    /// }
-    /// ```
-    /// ### Create a mps RTP flow and start it
-    /// 
-    /// Before you start a mps flow, you need to create a output first.
-    /// 
-    /// ```csharp
-    /// using Pulumi;
-    /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
-    /// 
-    /// class MyStack : Stack
-    /// {
-    ///     public MyStack()
+    ///     var flowRtp = new Tencentcloud.Mps.Flow("flowRtp", new()
     ///     {
-    ///         var eventRtp = new Tencentcloud.Mps.Event("eventRtp", new Tencentcloud.Mps.EventArgs
+    ///         FlowName = "tf_test_mps_flow_rtp_%d",
+    ///         MaxBandwidth = 10000000,
+    ///         InputGroups = new[]
     ///         {
-    ///             EventName = "your_event_name",
-    ///             Description = "tf test mps event description",
-    ///         });
-    ///         var flowRtp = new Tencentcloud.Mps.Flow("flowRtp", new Tencentcloud.Mps.FlowArgs
-    ///         {
-    ///             FlowName = "your_flow_name",
-    ///             MaxBandwidth = 10000000,
-    ///             InputGroups = 
+    ///             new Tencentcloud.Mps.Inputs.FlowInputGroupArgs
     ///             {
-    ///                 new Tencentcloud.Mps.Inputs.FlowInputGroupArgs
-    ///                 {
-    ///                     InputName = "test_inputname",
-    ///                     Protocol = "RTP",
-    ///                     Description = "input name Description",
-    ///                     AllowIpLists = 
-    ///                     {
-    ///                         "0.0.0.0/0",
-    ///                     },
-    ///                     RtpSettings = new Tencentcloud.Mps.Inputs.FlowInputGroupRtpSettingsArgs
-    ///                     {
-    ///                         Fec = "none",
-    ///                         IdleTimeout = 1000,
-    ///                     },
-    ///                 },
-    ///             },
-    ///             EventId = eventRtp.Id,
-    ///         });
-    ///         var output = new Tencentcloud.Mps.Output("output", new Tencentcloud.Mps.OutputArgs
-    ///         {
-    ///             FlowId = flowRtp.Id,
-    ///             Output = new Tencentcloud.Mps.Inputs.OutputOutputArgs
-    ///             {
-    ///                 OutputName = "your_output_name",
-    ///                 Description = "tf mps output group",
+    ///                 InputName = "test_inputname",
     ///                 Protocol = "RTP",
-    ///                 OutputRegion = "ap-guangzhou",
-    ///                 RtpSettings = new Tencentcloud.Mps.Inputs.OutputOutputRtpSettingsArgs
+    ///                 Description = "input name Description",
+    ///                 AllowIpLists = new[]
     ///                 {
-    ///                     Destinations = 
-    ///                     {
-    ///                         new Tencentcloud.Mps.Inputs.OutputOutputRtpSettingsDestinationArgs
-    ///                         {
-    ///                             Ip = "203.205.141.84",
-    ///                             Port = 65535,
-    ///                         },
-    ///                     },
+    ///                     "0.0.0.0/0",
+    ///                 },
+    ///                 RtpSettings = new Tencentcloud.Mps.Inputs.FlowInputGroupRtpSettingsArgs
+    ///                 {
     ///                     Fec = "none",
     ///                     IdleTimeout = 1000,
     ///                 },
     ///             },
-    ///         });
-    ///         var operation = new Tencentcloud.Mps.StartFlowOperation("operation", new Tencentcloud.Mps.StartFlowOperationArgs
-    ///         {
-    ///             FlowId = flowRtp.Id,
-    ///             Start = true,
-    ///         }, new CustomResourceOptions
-    ///         {
-    ///             DependsOn = 
-    ///             {
-    ///                 output,
-    ///             },
-    ///         });
-    ///     }
+    ///         },
+    ///         EventId = eventRtp.Id,
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
+    /// 
+    /// ### Create a mps RTP flow and start it
+    /// 
+    /// Before you start a mps flow, you need to create a output first.
+    /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
+    /// using Pulumi;
+    /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     var eventRtp = new Tencentcloud.Mps.Event("eventRtp", new()
+    ///     {
+    ///         EventName = "your_event_name",
+    ///         Description = "tf test mps event description",
+    ///     });
+    /// 
+    ///     var flowRtp = new Tencentcloud.Mps.Flow("flowRtp", new()
+    ///     {
+    ///         FlowName = "your_flow_name",
+    ///         MaxBandwidth = 10000000,
+    ///         InputGroups = new[]
+    ///         {
+    ///             new Tencentcloud.Mps.Inputs.FlowInputGroupArgs
+    ///             {
+    ///                 InputName = "test_inputname",
+    ///                 Protocol = "RTP",
+    ///                 Description = "input name Description",
+    ///                 AllowIpLists = new[]
+    ///                 {
+    ///                     "0.0.0.0/0",
+    ///                 },
+    ///                 RtpSettings = new Tencentcloud.Mps.Inputs.FlowInputGroupRtpSettingsArgs
+    ///                 {
+    ///                     Fec = "none",
+    ///                     IdleTimeout = 1000,
+    ///                 },
+    ///             },
+    ///         },
+    ///         EventId = eventRtp.Id,
+    ///     });
+    /// 
+    ///     var output = new Tencentcloud.Mps.Output("output", new()
+    ///     {
+    ///         FlowId = flowRtp.Id,
+    ///         MpsOutput = new Tencentcloud.Mps.Inputs.OutputOutputArgs
+    ///         {
+    ///             OutputName = "your_output_name",
+    ///             Description = "tf mps output group",
+    ///             Protocol = "RTP",
+    ///             OutputRegion = "ap-guangzhou",
+    ///             RtpSettings = new Tencentcloud.Mps.Inputs.OutputOutputRtpSettingsArgs
+    ///             {
+    ///                 Destinations = new[]
+    ///                 {
+    ///                     new Tencentcloud.Mps.Inputs.OutputOutputRtpSettingsDestinationArgs
+    ///                     {
+    ///                         Ip = "203.205.141.84",
+    ///                         Port = 65535,
+    ///                     },
+    ///                 },
+    ///                 Fec = "none",
+    ///                 IdleTimeout = 1000,
+    ///             },
+    ///         },
+    ///     });
+    /// 
+    ///     var operation = new Tencentcloud.Mps.StartFlowOperation("operation", new()
+    ///     {
+    ///         FlowId = flowRtp.Id,
+    ///         Start = true,
+    ///     }, new CustomResourceOptions
+    ///     {
+    ///         DependsOn =
+    ///         {
+    ///             output, 
+    ///         },
+    ///     });
+    /// 
+    /// });
+    /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// mps flow can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Mps/flow:Flow flow flow_id
+    /// $ pulumi import tencentcloud:Mps/flow:Flow flow flow_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Mps/flow:Flow")]
-    public partial class Flow : Pulumi.CustomResource
+    public partial class Flow : global::Pulumi.CustomResource
     {
         /// <summary>
         /// The event ID associated with this Flow. Each flow can only be associated with one Event.
@@ -265,7 +276,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps
         }
     }
 
-    public sealed class FlowArgs : Pulumi.ResourceArgs
+    public sealed class FlowArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// The event ID associated with this Flow. Each flow can only be associated with one Event.
@@ -300,9 +311,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps
         public FlowArgs()
         {
         }
+        public static new FlowArgs Empty => new FlowArgs();
     }
 
-    public sealed class FlowState : Pulumi.ResourceArgs
+    public sealed class FlowState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// The event ID associated with this Flow. Each flow can only be associated with one Event.
@@ -337,5 +349,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps
         public FlowState()
         {
         }
+        public static new FlowState Empty => new FlowState();
     }
 }

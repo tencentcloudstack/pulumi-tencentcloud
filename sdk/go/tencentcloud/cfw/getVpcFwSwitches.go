@@ -8,35 +8,40 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Use this data source to query detailed information of cfw vpcFwSwitches
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Cfw"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cfw"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cfw"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Cfw.GetVpcFwSwitches(ctx, &cfw.GetVpcFwSwitchesArgs{
-// 			VpcInsId: "cfwg-c8c2de41",
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Cfw.GetVpcFwSwitches(ctx, &cfw.GetVpcFwSwitchesArgs{
+//				VpcInsId: "cfwg-c8c2de41",
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 func GetVpcFwSwitches(ctx *pulumi.Context, args *GetVpcFwSwitchesArgs, opts ...pulumi.InvokeOption) (*GetVpcFwSwitchesResult, error) {
-	opts = pkgInvokeDefaultOpts(opts)
+	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetVpcFwSwitchesResult
 	err := ctx.Invoke("tencentcloud:Cfw/getVpcFwSwitches:getVpcFwSwitches", args, &rv, opts...)
 	if err != nil {

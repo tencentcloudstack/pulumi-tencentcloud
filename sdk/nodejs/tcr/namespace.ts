@@ -2,18 +2,21 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
  * Use this resource to create tcr namespace.
  *
  * ## Example Usage
+ *
  * ### Create a tcr namespace instance
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const exampleInstance = new tencentcloud.tcr.Instance("exampleInstance", {
  *     instanceType: "premium",
@@ -32,13 +35,14 @@ import * as utilities from "../utilities";
  *     }],
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * tcr namespace can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Tcr/namespace:Namespace example tcr_instance_id#namespace_name
+ * $ pulumi import tencentcloud:Tcr/namespace:Namespace example tcr_instance_id#namespace_name
  * ```
  */
 export class Namespace extends pulumi.CustomResource {

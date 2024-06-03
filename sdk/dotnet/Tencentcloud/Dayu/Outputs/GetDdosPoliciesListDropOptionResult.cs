@@ -34,6 +34,9 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dayu.Outputs
         /// The limit of new connections based on destination IP.
         /// </summary>
         public readonly int DNewLimit;
+        /// <summary>
+        /// Indicate whether to drop abroad traffic or not.
+        /// </summary>
         public readonly bool DropAbroad;
         /// <summary>
         /// Indicate whether to drop ICMP protocol or not.

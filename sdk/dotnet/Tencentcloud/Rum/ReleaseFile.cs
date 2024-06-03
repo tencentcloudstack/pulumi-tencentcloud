@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Rum
 {
     [TencentcloudResourceType("tencentcloud:Rum/releaseFile:ReleaseFile")]
-    public partial class ReleaseFile : Pulumi.CustomResource
+    public partial class ReleaseFile : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Release file hash.
@@ -94,7 +94,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Rum
         }
     }
 
-    public sealed class ReleaseFileArgs : Pulumi.ResourceArgs
+    public sealed class ReleaseFileArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Release file hash.
@@ -135,9 +135,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Rum
         public ReleaseFileArgs()
         {
         }
+        public static new ReleaseFileArgs Empty => new ReleaseFileArgs();
     }
 
-    public sealed class ReleaseFileState : Pulumi.ResourceArgs
+    public sealed class ReleaseFileState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Release file hash.
@@ -178,5 +179,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Rum
         public ReleaseFileState()
         {
         }
+        public static new ReleaseFileState Empty => new ReleaseFileState();
     }
 }

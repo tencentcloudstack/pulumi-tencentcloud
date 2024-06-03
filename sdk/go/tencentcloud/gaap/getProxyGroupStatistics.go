@@ -8,44 +8,49 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Use this data source to query detailed information of gaap proxy group statistics
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Gaap"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Gaap"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Gaap"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Gaap.GetProxyGroupStatistics(ctx, &gaap.GetProxyGroupStatisticsArgs{
-// 			EndTime:     "2023-10-09 23:59:59",
-// 			Granularity: 300,
-// 			GroupId:     "link-8lpyo88p",
-// 			MetricNames: []string{
-// 				"InBandwidth",
-// 				"OutBandwidth",
-// 				"InFlow",
-// 				"OutFlow",
-// 			},
-// 			StartTime: "2023-10-09 00:00:00",
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Gaap.GetProxyGroupStatistics(ctx, &gaap.GetProxyGroupStatisticsArgs{
+//				EndTime:     "2023-10-09 23:59:59",
+//				Granularity: 300,
+//				GroupId:     "link-m9t4yho9",
+//				MetricNames: []string{
+//					"InBandwidth",
+//					"OutBandwidth",
+//					"InFlow",
+//					"OutFlow",
+//				},
+//				StartTime: "2023-10-09 00:00:00",
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 func GetProxyGroupStatistics(ctx *pulumi.Context, args *GetProxyGroupStatisticsArgs, opts ...pulumi.InvokeOption) (*GetProxyGroupStatisticsResult, error) {
-	opts = pkgInvokeDefaultOpts(opts)
+	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetProxyGroupStatisticsResult
 	err := ctx.Invoke("tencentcloud:Gaap/getProxyGroupStatistics:getProxyGroupStatistics", args, &rv, opts...)
 	if err != nil {

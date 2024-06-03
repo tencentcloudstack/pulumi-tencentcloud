@@ -15,41 +15,42 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var bucketReferer = new Tencentcloud.Cos.BucketReferer("bucketReferer", new()
     ///     {
-    ///         var bucketReferer = new Tencentcloud.Cos.BucketReferer("bucketReferer", new Tencentcloud.Cos.BucketRefererArgs
+    ///         Bucket = "mycos-1258798060",
+    ///         DomainLists = new[]
     ///         {
-    ///             Bucket = "mycos-1258798060",
-    ///             DomainLists = 
-    ///             {
-    ///                 "127.0.0.1",
-    ///                 "terraform.com",
-    ///             },
-    ///             EmptyReferConfiguration = "Allow",
-    ///             RefererType = "Black-List",
-    ///             Status = "Enabled",
-    ///         });
-    ///     }
+    ///             "127.0.0.1",
+    ///             "terraform.com",
+    ///         },
+    ///         EmptyReferConfiguration = "Allow",
+    ///         RefererType = "Black-List",
+    ///         Status = "Enabled",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// cos bucket_referer can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Cos/bucketReferer:BucketReferer bucket_referer bucket_id
+    /// $ pulumi import tencentcloud:Cos/bucketReferer:BucketReferer bucket_referer bucket_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Cos/bucketReferer:BucketReferer")]
-    public partial class BucketReferer : Pulumi.CustomResource
+    public partial class BucketReferer : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Bucket format should be [custom name]-[appid], for example `mycos-1258798060`.
@@ -126,7 +127,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos
         }
     }
 
-    public sealed class BucketRefererArgs : Pulumi.ResourceArgs
+    public sealed class BucketRefererArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Bucket format should be [custom name]-[appid], for example `mycos-1258798060`.
@@ -167,9 +168,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos
         public BucketRefererArgs()
         {
         }
+        public static new BucketRefererArgs Empty => new BucketRefererArgs();
     }
 
-    public sealed class BucketRefererState : Pulumi.ResourceArgs
+    public sealed class BucketRefererState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Bucket format should be [custom name]-[appid], for example `mycos-1258798060`.
@@ -210,5 +212,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos
         public BucketRefererState()
         {
         }
+        public static new BucketRefererState Empty => new BucketRefererState();
     }
 }

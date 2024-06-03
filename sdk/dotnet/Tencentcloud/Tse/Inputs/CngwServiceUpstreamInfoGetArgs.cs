@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tse.Inputs
 {
 
-    public sealed class CngwServiceUpstreamInfoGetArgs : Pulumi.ResourceArgs
+    public sealed class CngwServiceUpstreamInfoGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// load balance algorithm,default: `round-robin`, `least-connections` and `consisten_hashing` also support.
@@ -136,5 +136,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tse.Inputs
         public CngwServiceUpstreamInfoGetArgs()
         {
         }
+        public static new CngwServiceUpstreamInfoGetArgs Empty => new CngwServiceUpstreamInfoGetArgs();
     }
 }

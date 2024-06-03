@@ -11,11 +11,17 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Pts.Inputs
 {
 
-    public sealed class JobLoadLoadSpecRequestsPerSecondGetArgs : Pulumi.ResourceArgs
+    public sealed class JobLoadLoadSpecRequestsPerSecondGetArgs : global::Pulumi.ResourceArgs
     {
+        /// <summary>
+        /// Pressure time.
+        /// </summary>
         [Input("durationSeconds")]
         public Input<int>? DurationSeconds { get; set; }
 
+        /// <summary>
+        /// Elegant shutdown waiting time.
+        /// </summary>
         [Input("gracefulStopSeconds")]
         public Input<int>? GracefulStopSeconds { get; set; }
 
@@ -25,17 +31,27 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Pts.Inputs
         [Input("maxRequestsPerSecond")]
         public Input<int>? MaxRequestsPerSecond { get; set; }
 
+        /// <summary>
+        /// Number of resources.
+        /// </summary>
         [Input("resources")]
         public Input<int>? Resources { get; set; }
 
+        /// <summary>
+        /// Initial RPS.
+        /// </summary>
         [Input("startRequestsPerSecond")]
         public Input<int>? StartRequestsPerSecond { get; set; }
 
+        /// <summary>
+        /// Target RPS, invalid input parameter.
+        /// </summary>
         [Input("targetRequestsPerSecond")]
         public Input<int>? TargetRequestsPerSecond { get; set; }
 
         public JobLoadLoadSpecRequestsPerSecondGetArgs()
         {
         }
+        public static new JobLoadLoadSpecRequestsPerSecondGetArgs Empty => new JobLoadLoadSpecRequestsPerSecondGetArgs();
     }
 }

@@ -8,11 +8,56 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Use this data source to query detailed information of monitor basicAlarms
+//
+// ## Example Usage
+//
+// <!--Start PulumiCodeChooser -->
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Monitor"
+//
+// )
+// func main() {
+// pulumi.Run(func(ctx *pulumi.Context) error {
+// _, err := Monitor.GetAlarmBasicAlarms(ctx, &monitor.GetAlarmBasicAlarmsArgs{
+// AlarmStatuses: interface{}{
+// 1,
+// },
+// EndTime: pulumi.IntRef(1697098903),
+// InstanceGroupIds: interface{}{
+// 5497073,
+// },
+// MetricNames: []string{
+// "cpu_usage",
+// },
+// Module: "monitor",
+// OccurTimeOrder: pulumi.StringRef("DESC"),
+// ProjectIds: interface{}{
+// 0,
+// },
+// StartTime: pulumi.IntRef(1696990903),
+// ViewNames: []string{
+// "cvm_device",
+// },
+// }, nil);
+// if err != nil {
+// return err
+// }
+// return nil
+// })
+// }
+// ```
+// <!--End PulumiCodeChooser -->
 func GetAlarmBasicAlarms(ctx *pulumi.Context, args *GetAlarmBasicAlarmsArgs, opts ...pulumi.InvokeOption) (*GetAlarmBasicAlarmsResult, error) {
-	opts = pkgInvokeDefaultOpts(opts)
+	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetAlarmBasicAlarmsResult
 	err := ctx.Invoke("tencentcloud:Monitor/getAlarmBasicAlarms:getAlarmBasicAlarms", args, &rv, opts...)
 	if err != nil {

@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,21 +11,20 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const listenerRealServers = pulumi.output(tencentcloud.Gaap.getListenerRealServers({
+ * const listenerRealServers = tencentcloud.Gaap.getListenerRealServers({
  *     listenerId: "listener-xxxxxx",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getListenerRealServers(args: GetListenerRealServersArgs, opts?: pulumi.InvokeOptions): Promise<GetListenerRealServersResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Gaap/getListenerRealServers:getListenerRealServers", {
         "listenerId": args.listenerId,
         "resultOutputFile": args.resultOutputFile,
@@ -64,9 +64,24 @@ export interface GetListenerRealServersResult {
     readonly realServerSets: outputs.Gaap.GetListenerRealServersRealServerSet[];
     readonly resultOutputFile?: string;
 }
-
+/**
+ * Use this data source to query detailed information of gaap listener real servers
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const listenerRealServers = tencentcloud.Gaap.getListenerRealServers({
+ *     listenerId: "listener-xxxxxx",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getListenerRealServersOutput(args: GetListenerRealServersOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetListenerRealServersResult> {
-    return pulumi.output(args).apply(a => getListenerRealServers(a, opts))
+    return pulumi.output(args).apply((a: any) => getListenerRealServers(a, opts))
 }
 
 /**

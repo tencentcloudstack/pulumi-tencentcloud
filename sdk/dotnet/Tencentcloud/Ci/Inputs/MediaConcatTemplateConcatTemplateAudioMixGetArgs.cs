@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ci.Inputs
 {
 
-    public sealed class MediaConcatTemplateConcatTemplateAudioMixGetArgs : Pulumi.ResourceArgs
+    public sealed class MediaConcatTemplateConcatTemplateAudioMixGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// The media address of the audio track that needs to be mixed.
@@ -40,5 +40,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ci.Inputs
         public MediaConcatTemplateConcatTemplateAudioMixGetArgs()
         {
         }
+        public static new MediaConcatTemplateConcatTemplateAudioMixGetArgs Empty => new MediaConcatTemplateConcatTemplateAudioMixGetArgs();
     }
 }

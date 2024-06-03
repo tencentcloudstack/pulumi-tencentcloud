@@ -15,67 +15,72 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var config = new Config();
+    ///     var availabilityZone = config.Get("availabilityZone") ?? "ap-guangzhou-4";
+    ///     var vpc = new Tencentcloud.Vpc.Instance("vpc", new()
     ///     {
-    ///         var config = new Config();
-    ///         var availabilityZone = config.Get("availabilityZone") ?? "ap-guangzhou-4";
-    ///         var vpc = new Tencentcloud.Vpc.Instance("vpc", new Tencentcloud.Vpc.InstanceArgs
+    ///         CidrBlock = "10.0.0.0/16",
+    ///     });
+    /// 
+    ///     var subnet = new Tencentcloud.Subnet.Instance("subnet", new()
+    ///     {
+    ///         VpcId = vpc.Id,
+    ///         AvailabilityZone = availabilityZone,
+    ///         CidrBlock = "10.0.1.0/24",
+    ///     });
+    /// 
+    ///     var fooTmpInstance = new Tencentcloud.Monitor.TmpInstance("fooTmpInstance", new()
+    ///     {
+    ///         InstanceName = "tf-tmp-instance",
+    ///         VpcId = vpc.Id,
+    ///         SubnetId = subnet.Id,
+    ///         DataRetentionTime = 30,
+    ///         Zone = availabilityZone,
+    ///         Tags = 
     ///         {
-    ///             CidrBlock = "10.0.0.0/16",
-    ///         });
-    ///         var subnet = new Tencentcloud.Subnet.Instance("subnet", new Tencentcloud.Subnet.InstanceArgs
-    ///         {
-    ///             VpcId = vpc.Id,
-    ///             AvailabilityZone = availabilityZone,
-    ///             CidrBlock = "10.0.1.0/24",
-    ///         });
-    ///         var fooTmpInstance = new Tencentcloud.Monitor.TmpInstance("fooTmpInstance", new Tencentcloud.Monitor.TmpInstanceArgs
-    ///         {
-    ///             InstanceName = "tf-tmp-instance",
-    ///             VpcId = vpc.Id,
-    ///             SubnetId = subnet.Id,
-    ///             DataRetentionTime = 30,
-    ///             Zone = availabilityZone,
-    ///             Tags = 
-    ///             {
-    ///                 { "createdBy", "terraform" },
-    ///             },
-    ///         });
-    ///         var fooTmpCvmAgent = new Tencentcloud.Monitor.TmpCvmAgent("fooTmpCvmAgent", new Tencentcloud.Monitor.TmpCvmAgentArgs
-    ///         {
-    ///             InstanceId = fooTmpInstance.Id,
-    ///         });
-    ///         var fooTmpScrapeJob = new Tencentcloud.Monitor.TmpScrapeJob("fooTmpScrapeJob", new Tencentcloud.Monitor.TmpScrapeJobArgs
-    ///         {
-    ///             InstanceId = fooTmpInstance.Id,
-    ///             AgentId = fooTmpCvmAgent.AgentId,
-    ///             Config = @"job_name: demo-config
+    ///             { "createdBy", "terraform" },
+    ///         },
+    ///     });
+    /// 
+    ///     var fooTmpCvmAgent = new Tencentcloud.Monitor.TmpCvmAgent("fooTmpCvmAgent", new()
+    ///     {
+    ///         InstanceId = fooTmpInstance.Id,
+    ///     });
+    /// 
+    ///     var fooTmpScrapeJob = new Tencentcloud.Monitor.TmpScrapeJob("fooTmpScrapeJob", new()
+    ///     {
+    ///         InstanceId = fooTmpInstance.Id,
+    ///         AgentId = fooTmpCvmAgent.AgentId,
+    ///         Config = @"job_name: demo-config
     /// honor_timestamps: true
     /// metrics_path: /metrics
     /// scheme: https
     /// ",
-    ///         });
-    ///     }
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// monitor tmpScrapeJob can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Monitor/tmpScrapeJob:TmpScrapeJob tmpScrapeJob tmpScrapeJob_id
+    /// $ pulumi import tencentcloud:Monitor/tmpScrapeJob:TmpScrapeJob tmpScrapeJob tmpScrapeJob_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Monitor/tmpScrapeJob:TmpScrapeJob")]
-    public partial class TmpScrapeJob : Pulumi.CustomResource
+    public partial class TmpScrapeJob : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Agent id.
@@ -140,7 +145,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
         }
     }
 
-    public sealed class TmpScrapeJobArgs : Pulumi.ResourceArgs
+    public sealed class TmpScrapeJobArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Agent id.
@@ -163,9 +168,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
         public TmpScrapeJobArgs()
         {
         }
+        public static new TmpScrapeJobArgs Empty => new TmpScrapeJobArgs();
     }
 
-    public sealed class TmpScrapeJobState : Pulumi.ResourceArgs
+    public sealed class TmpScrapeJobState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Agent id.
@@ -188,5 +194,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
         public TmpScrapeJobState()
         {
         }
+        public static new TmpScrapeJobState Empty => new TmpScrapeJobState();
     }
 }

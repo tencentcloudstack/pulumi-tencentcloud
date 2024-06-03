@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcm.Inputs
 {
 
-    public sealed class MeshConfigTracingZipkinGetArgs : Pulumi.ResourceArgs
+    public sealed class MeshConfigTracingZipkinGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Zipkin address.
@@ -22,5 +22,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcm.Inputs
         public MeshConfigTracingZipkinGetArgs()
         {
         }
+        public static new MeshConfigTracingZipkinGetArgs Empty => new MeshConfigTracingZipkinGetArgs();
     }
 }

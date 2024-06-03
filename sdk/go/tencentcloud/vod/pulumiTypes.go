@@ -8,13 +8,20 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
+
+var _ = internal.GetEnvOrDefault
 
 type AdaptiveDynamicStreamingTemplateStreamInfo struct {
 	// Audio parameter information.
 	Audio AdaptiveDynamicStreamingTemplateStreamInfoAudio `pulumi:"audio"`
 	// Whether to remove audio stream. Valid values: `false`: no, `true`: yes. `false` by default.
 	RemoveAudio *bool `pulumi:"removeAudio"`
+	// Whether to remove video stream. Valid values: `false`: no, `true`: yes. `false` by default.
+	RemoveVideo *bool `pulumi:"removeVideo"`
+	// Extremely fast HD transcoding parameters.
+	TehdConfig *AdaptiveDynamicStreamingTemplateStreamInfoTehdConfig `pulumi:"tehdConfig"`
 	// Video parameter information.
 	Video AdaptiveDynamicStreamingTemplateStreamInfoVideo `pulumi:"video"`
 }
@@ -22,7 +29,7 @@ type AdaptiveDynamicStreamingTemplateStreamInfo struct {
 // AdaptiveDynamicStreamingTemplateStreamInfoInput is an input type that accepts AdaptiveDynamicStreamingTemplateStreamInfoArgs and AdaptiveDynamicStreamingTemplateStreamInfoOutput values.
 // You can construct a concrete instance of `AdaptiveDynamicStreamingTemplateStreamInfoInput` via:
 //
-//          AdaptiveDynamicStreamingTemplateStreamInfoArgs{...}
+//	AdaptiveDynamicStreamingTemplateStreamInfoArgs{...}
 type AdaptiveDynamicStreamingTemplateStreamInfoInput interface {
 	pulumi.Input
 
@@ -35,6 +42,10 @@ type AdaptiveDynamicStreamingTemplateStreamInfoArgs struct {
 	Audio AdaptiveDynamicStreamingTemplateStreamInfoAudioInput `pulumi:"audio"`
 	// Whether to remove audio stream. Valid values: `false`: no, `true`: yes. `false` by default.
 	RemoveAudio pulumi.BoolPtrInput `pulumi:"removeAudio"`
+	// Whether to remove video stream. Valid values: `false`: no, `true`: yes. `false` by default.
+	RemoveVideo pulumi.BoolPtrInput `pulumi:"removeVideo"`
+	// Extremely fast HD transcoding parameters.
+	TehdConfig AdaptiveDynamicStreamingTemplateStreamInfoTehdConfigPtrInput `pulumi:"tehdConfig"`
 	// Video parameter information.
 	Video AdaptiveDynamicStreamingTemplateStreamInfoVideoInput `pulumi:"video"`
 }
@@ -54,7 +65,7 @@ func (i AdaptiveDynamicStreamingTemplateStreamInfoArgs) ToAdaptiveDynamicStreami
 // AdaptiveDynamicStreamingTemplateStreamInfoArrayInput is an input type that accepts AdaptiveDynamicStreamingTemplateStreamInfoArray and AdaptiveDynamicStreamingTemplateStreamInfoArrayOutput values.
 // You can construct a concrete instance of `AdaptiveDynamicStreamingTemplateStreamInfoArrayInput` via:
 //
-//          AdaptiveDynamicStreamingTemplateStreamInfoArray{ AdaptiveDynamicStreamingTemplateStreamInfoArgs{...} }
+//	AdaptiveDynamicStreamingTemplateStreamInfoArray{ AdaptiveDynamicStreamingTemplateStreamInfoArgs{...} }
 type AdaptiveDynamicStreamingTemplateStreamInfoArrayInput interface {
 	pulumi.Input
 
@@ -102,6 +113,18 @@ func (o AdaptiveDynamicStreamingTemplateStreamInfoOutput) RemoveAudio() pulumi.B
 	return o.ApplyT(func(v AdaptiveDynamicStreamingTemplateStreamInfo) *bool { return v.RemoveAudio }).(pulumi.BoolPtrOutput)
 }
 
+// Whether to remove video stream. Valid values: `false`: no, `true`: yes. `false` by default.
+func (o AdaptiveDynamicStreamingTemplateStreamInfoOutput) RemoveVideo() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v AdaptiveDynamicStreamingTemplateStreamInfo) *bool { return v.RemoveVideo }).(pulumi.BoolPtrOutput)
+}
+
+// Extremely fast HD transcoding parameters.
+func (o AdaptiveDynamicStreamingTemplateStreamInfoOutput) TehdConfig() AdaptiveDynamicStreamingTemplateStreamInfoTehdConfigPtrOutput {
+	return o.ApplyT(func(v AdaptiveDynamicStreamingTemplateStreamInfo) *AdaptiveDynamicStreamingTemplateStreamInfoTehdConfig {
+		return v.TehdConfig
+	}).(AdaptiveDynamicStreamingTemplateStreamInfoTehdConfigPtrOutput)
+}
+
 // Video parameter information.
 func (o AdaptiveDynamicStreamingTemplateStreamInfoOutput) Video() AdaptiveDynamicStreamingTemplateStreamInfoVideoOutput {
 	return o.ApplyT(func(v AdaptiveDynamicStreamingTemplateStreamInfo) AdaptiveDynamicStreamingTemplateStreamInfoVideo {
@@ -143,7 +166,7 @@ type AdaptiveDynamicStreamingTemplateStreamInfoAudio struct {
 // AdaptiveDynamicStreamingTemplateStreamInfoAudioInput is an input type that accepts AdaptiveDynamicStreamingTemplateStreamInfoAudioArgs and AdaptiveDynamicStreamingTemplateStreamInfoAudioOutput values.
 // You can construct a concrete instance of `AdaptiveDynamicStreamingTemplateStreamInfoAudioInput` via:
 //
-//          AdaptiveDynamicStreamingTemplateStreamInfoAudioArgs{...}
+//	AdaptiveDynamicStreamingTemplateStreamInfoAudioArgs{...}
 type AdaptiveDynamicStreamingTemplateStreamInfoAudioInput interface {
 	pulumi.Input
 
@@ -208,19 +231,201 @@ func (o AdaptiveDynamicStreamingTemplateStreamInfoAudioOutput) SampleRate() pulu
 	return o.ApplyT(func(v AdaptiveDynamicStreamingTemplateStreamInfoAudio) int { return v.SampleRate }).(pulumi.IntOutput)
 }
 
+type AdaptiveDynamicStreamingTemplateStreamInfoTehdConfig struct {
+	// Video bitrate limit, which is valid when Type specifies extreme speed HD type. If you leave it empty or enter 0, there is no video bitrate limit.
+	MaxVideoBitrate *int `pulumi:"maxVideoBitrate"`
+	// Extreme high-speed HD type, available values:
+	// - TEHD-100: super high definition-100th;
+	// - OFF: turn off Ultra High definition.
+	Type string `pulumi:"type"`
+}
+
+// AdaptiveDynamicStreamingTemplateStreamInfoTehdConfigInput is an input type that accepts AdaptiveDynamicStreamingTemplateStreamInfoTehdConfigArgs and AdaptiveDynamicStreamingTemplateStreamInfoTehdConfigOutput values.
+// You can construct a concrete instance of `AdaptiveDynamicStreamingTemplateStreamInfoTehdConfigInput` via:
+//
+//	AdaptiveDynamicStreamingTemplateStreamInfoTehdConfigArgs{...}
+type AdaptiveDynamicStreamingTemplateStreamInfoTehdConfigInput interface {
+	pulumi.Input
+
+	ToAdaptiveDynamicStreamingTemplateStreamInfoTehdConfigOutput() AdaptiveDynamicStreamingTemplateStreamInfoTehdConfigOutput
+	ToAdaptiveDynamicStreamingTemplateStreamInfoTehdConfigOutputWithContext(context.Context) AdaptiveDynamicStreamingTemplateStreamInfoTehdConfigOutput
+}
+
+type AdaptiveDynamicStreamingTemplateStreamInfoTehdConfigArgs struct {
+	// Video bitrate limit, which is valid when Type specifies extreme speed HD type. If you leave it empty or enter 0, there is no video bitrate limit.
+	MaxVideoBitrate pulumi.IntPtrInput `pulumi:"maxVideoBitrate"`
+	// Extreme high-speed HD type, available values:
+	// - TEHD-100: super high definition-100th;
+	// - OFF: turn off Ultra High definition.
+	Type pulumi.StringInput `pulumi:"type"`
+}
+
+func (AdaptiveDynamicStreamingTemplateStreamInfoTehdConfigArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*AdaptiveDynamicStreamingTemplateStreamInfoTehdConfig)(nil)).Elem()
+}
+
+func (i AdaptiveDynamicStreamingTemplateStreamInfoTehdConfigArgs) ToAdaptiveDynamicStreamingTemplateStreamInfoTehdConfigOutput() AdaptiveDynamicStreamingTemplateStreamInfoTehdConfigOutput {
+	return i.ToAdaptiveDynamicStreamingTemplateStreamInfoTehdConfigOutputWithContext(context.Background())
+}
+
+func (i AdaptiveDynamicStreamingTemplateStreamInfoTehdConfigArgs) ToAdaptiveDynamicStreamingTemplateStreamInfoTehdConfigOutputWithContext(ctx context.Context) AdaptiveDynamicStreamingTemplateStreamInfoTehdConfigOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(AdaptiveDynamicStreamingTemplateStreamInfoTehdConfigOutput)
+}
+
+func (i AdaptiveDynamicStreamingTemplateStreamInfoTehdConfigArgs) ToAdaptiveDynamicStreamingTemplateStreamInfoTehdConfigPtrOutput() AdaptiveDynamicStreamingTemplateStreamInfoTehdConfigPtrOutput {
+	return i.ToAdaptiveDynamicStreamingTemplateStreamInfoTehdConfigPtrOutputWithContext(context.Background())
+}
+
+func (i AdaptiveDynamicStreamingTemplateStreamInfoTehdConfigArgs) ToAdaptiveDynamicStreamingTemplateStreamInfoTehdConfigPtrOutputWithContext(ctx context.Context) AdaptiveDynamicStreamingTemplateStreamInfoTehdConfigPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(AdaptiveDynamicStreamingTemplateStreamInfoTehdConfigOutput).ToAdaptiveDynamicStreamingTemplateStreamInfoTehdConfigPtrOutputWithContext(ctx)
+}
+
+// AdaptiveDynamicStreamingTemplateStreamInfoTehdConfigPtrInput is an input type that accepts AdaptiveDynamicStreamingTemplateStreamInfoTehdConfigArgs, AdaptiveDynamicStreamingTemplateStreamInfoTehdConfigPtr and AdaptiveDynamicStreamingTemplateStreamInfoTehdConfigPtrOutput values.
+// You can construct a concrete instance of `AdaptiveDynamicStreamingTemplateStreamInfoTehdConfigPtrInput` via:
+//
+//	        AdaptiveDynamicStreamingTemplateStreamInfoTehdConfigArgs{...}
+//
+//	or:
+//
+//	        nil
+type AdaptiveDynamicStreamingTemplateStreamInfoTehdConfigPtrInput interface {
+	pulumi.Input
+
+	ToAdaptiveDynamicStreamingTemplateStreamInfoTehdConfigPtrOutput() AdaptiveDynamicStreamingTemplateStreamInfoTehdConfigPtrOutput
+	ToAdaptiveDynamicStreamingTemplateStreamInfoTehdConfigPtrOutputWithContext(context.Context) AdaptiveDynamicStreamingTemplateStreamInfoTehdConfigPtrOutput
+}
+
+type adaptiveDynamicStreamingTemplateStreamInfoTehdConfigPtrType AdaptiveDynamicStreamingTemplateStreamInfoTehdConfigArgs
+
+func AdaptiveDynamicStreamingTemplateStreamInfoTehdConfigPtr(v *AdaptiveDynamicStreamingTemplateStreamInfoTehdConfigArgs) AdaptiveDynamicStreamingTemplateStreamInfoTehdConfigPtrInput {
+	return (*adaptiveDynamicStreamingTemplateStreamInfoTehdConfigPtrType)(v)
+}
+
+func (*adaptiveDynamicStreamingTemplateStreamInfoTehdConfigPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**AdaptiveDynamicStreamingTemplateStreamInfoTehdConfig)(nil)).Elem()
+}
+
+func (i *adaptiveDynamicStreamingTemplateStreamInfoTehdConfigPtrType) ToAdaptiveDynamicStreamingTemplateStreamInfoTehdConfigPtrOutput() AdaptiveDynamicStreamingTemplateStreamInfoTehdConfigPtrOutput {
+	return i.ToAdaptiveDynamicStreamingTemplateStreamInfoTehdConfigPtrOutputWithContext(context.Background())
+}
+
+func (i *adaptiveDynamicStreamingTemplateStreamInfoTehdConfigPtrType) ToAdaptiveDynamicStreamingTemplateStreamInfoTehdConfigPtrOutputWithContext(ctx context.Context) AdaptiveDynamicStreamingTemplateStreamInfoTehdConfigPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(AdaptiveDynamicStreamingTemplateStreamInfoTehdConfigPtrOutput)
+}
+
+type AdaptiveDynamicStreamingTemplateStreamInfoTehdConfigOutput struct{ *pulumi.OutputState }
+
+func (AdaptiveDynamicStreamingTemplateStreamInfoTehdConfigOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*AdaptiveDynamicStreamingTemplateStreamInfoTehdConfig)(nil)).Elem()
+}
+
+func (o AdaptiveDynamicStreamingTemplateStreamInfoTehdConfigOutput) ToAdaptiveDynamicStreamingTemplateStreamInfoTehdConfigOutput() AdaptiveDynamicStreamingTemplateStreamInfoTehdConfigOutput {
+	return o
+}
+
+func (o AdaptiveDynamicStreamingTemplateStreamInfoTehdConfigOutput) ToAdaptiveDynamicStreamingTemplateStreamInfoTehdConfigOutputWithContext(ctx context.Context) AdaptiveDynamicStreamingTemplateStreamInfoTehdConfigOutput {
+	return o
+}
+
+func (o AdaptiveDynamicStreamingTemplateStreamInfoTehdConfigOutput) ToAdaptiveDynamicStreamingTemplateStreamInfoTehdConfigPtrOutput() AdaptiveDynamicStreamingTemplateStreamInfoTehdConfigPtrOutput {
+	return o.ToAdaptiveDynamicStreamingTemplateStreamInfoTehdConfigPtrOutputWithContext(context.Background())
+}
+
+func (o AdaptiveDynamicStreamingTemplateStreamInfoTehdConfigOutput) ToAdaptiveDynamicStreamingTemplateStreamInfoTehdConfigPtrOutputWithContext(ctx context.Context) AdaptiveDynamicStreamingTemplateStreamInfoTehdConfigPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v AdaptiveDynamicStreamingTemplateStreamInfoTehdConfig) *AdaptiveDynamicStreamingTemplateStreamInfoTehdConfig {
+		return &v
+	}).(AdaptiveDynamicStreamingTemplateStreamInfoTehdConfigPtrOutput)
+}
+
+// Video bitrate limit, which is valid when Type specifies extreme speed HD type. If you leave it empty or enter 0, there is no video bitrate limit.
+func (o AdaptiveDynamicStreamingTemplateStreamInfoTehdConfigOutput) MaxVideoBitrate() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v AdaptiveDynamicStreamingTemplateStreamInfoTehdConfig) *int { return v.MaxVideoBitrate }).(pulumi.IntPtrOutput)
+}
+
+// Extreme high-speed HD type, available values:
+// - TEHD-100: super high definition-100th;
+// - OFF: turn off Ultra High definition.
+func (o AdaptiveDynamicStreamingTemplateStreamInfoTehdConfigOutput) Type() pulumi.StringOutput {
+	return o.ApplyT(func(v AdaptiveDynamicStreamingTemplateStreamInfoTehdConfig) string { return v.Type }).(pulumi.StringOutput)
+}
+
+type AdaptiveDynamicStreamingTemplateStreamInfoTehdConfigPtrOutput struct{ *pulumi.OutputState }
+
+func (AdaptiveDynamicStreamingTemplateStreamInfoTehdConfigPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**AdaptiveDynamicStreamingTemplateStreamInfoTehdConfig)(nil)).Elem()
+}
+
+func (o AdaptiveDynamicStreamingTemplateStreamInfoTehdConfigPtrOutput) ToAdaptiveDynamicStreamingTemplateStreamInfoTehdConfigPtrOutput() AdaptiveDynamicStreamingTemplateStreamInfoTehdConfigPtrOutput {
+	return o
+}
+
+func (o AdaptiveDynamicStreamingTemplateStreamInfoTehdConfigPtrOutput) ToAdaptiveDynamicStreamingTemplateStreamInfoTehdConfigPtrOutputWithContext(ctx context.Context) AdaptiveDynamicStreamingTemplateStreamInfoTehdConfigPtrOutput {
+	return o
+}
+
+func (o AdaptiveDynamicStreamingTemplateStreamInfoTehdConfigPtrOutput) Elem() AdaptiveDynamicStreamingTemplateStreamInfoTehdConfigOutput {
+	return o.ApplyT(func(v *AdaptiveDynamicStreamingTemplateStreamInfoTehdConfig) AdaptiveDynamicStreamingTemplateStreamInfoTehdConfig {
+		if v != nil {
+			return *v
+		}
+		var ret AdaptiveDynamicStreamingTemplateStreamInfoTehdConfig
+		return ret
+	}).(AdaptiveDynamicStreamingTemplateStreamInfoTehdConfigOutput)
+}
+
+// Video bitrate limit, which is valid when Type specifies extreme speed HD type. If you leave it empty or enter 0, there is no video bitrate limit.
+func (o AdaptiveDynamicStreamingTemplateStreamInfoTehdConfigPtrOutput) MaxVideoBitrate() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *AdaptiveDynamicStreamingTemplateStreamInfoTehdConfig) *int {
+		if v == nil {
+			return nil
+		}
+		return v.MaxVideoBitrate
+	}).(pulumi.IntPtrOutput)
+}
+
+// Extreme high-speed HD type, available values:
+// - TEHD-100: super high definition-100th;
+// - OFF: turn off Ultra High definition.
+func (o AdaptiveDynamicStreamingTemplateStreamInfoTehdConfigPtrOutput) Type() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *AdaptiveDynamicStreamingTemplateStreamInfoTehdConfig) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Type
+	}).(pulumi.StringPtrOutput)
+}
+
 type AdaptiveDynamicStreamingTemplateStreamInfoVideo struct {
 	// Bitrate of video stream in Kbps. Value range: `0` and `[128, 35000]`. If the value is `0`, the bitrate of the video will be the same as that of the source video.
 	Bitrate int `pulumi:"bitrate"`
 	// Video stream encoder. Valid values: `libx264`,`libx265`,`av1`. `libx264`: H.264, `libx265`: H.265, `av1`: AOMedia Video 1. Currently, a resolution within 640x480 must be specified for `H.265`. and the `av1` container only supports mp4.
 	Codec string `pulumi:"codec"`
+	// Encoding label, valid only if the encoding format of the video stream is H.265 encoding. Available values:
+	// - hvc1: stands for hvc1 tag;
+	// - hev1: stands for the hev1 tag;
+	//   Default value: hvc1.
+	CodecTag *string `pulumi:"codecTag"`
 	// Fill type. Fill refers to the way of processing a screenshot when its aspect ratio is different from that of the source video. The following fill types are supported: `stretch`: stretch. The screenshot will be stretched frame by frame to match the aspect ratio of the source video, which may make the screenshot shorter or longer; `black`: fill with black. This option retains the aspect ratio of the source video for the screenshot and fills the unmatched area with black color blocks. Default value: black. Note: this field may return null, indicating that no valid values can be obtained.
 	FillType *string `pulumi:"fillType"`
 	// Video frame rate in Hz. Value range: `[0, 60]`. If the value is `0`, the frame rate will be the same as that of the source video.
 	Fps int `pulumi:"fps"`
+	// Interval between Keyframe I frames, value range: 0 and [1, 100000], unit: number of frames. When you fill in 0 or leave it empty, the gop length is automatically set.
+	Gop *int `pulumi:"gop"`
 	// Maximum value of the height (or short side) of a video stream in px. Value range: `0` and `[128, 4096]`. If both `width` and `height` are `0`, the resolution will be the same as that of the source video; If `width` is `0`, but `height` is not `0`, `width` will be proportionally scaled; If `width` is not `0`, but `height` is `0`, `height` will be proportionally scaled; If both `width` and `height` are not `0`, the custom resolution will be used. Default value: `0`. Note: this field may return null, indicating that no valid values can be obtained.
 	Height *int `pulumi:"height"`
+	// Whether the transcoding output still maintains HDR when the original video is HDR (High Dynamic Range). Value range:
+	// - ON: if the original file is HDR, the transcoding output remains HDR;, otherwise the transcoding output is SDR (Standard Dynamic Range);
+	// - OFF: regardless of whether the original file is HDR or SDR, the transcoding output is SDR;
+	//   Default value: OFF.
+	PreserveHdrSwitch *string `pulumi:"preserveHdrSwitch"`
 	// Resolution adaption. Valid values: `true`,`false`. `true`: enabled. In this case, `width` represents the long side of a video, while `height` the short side; `false`: disabled. In this case, `width` represents the width of a video, while `height` the height. Default value: `true`. Note: this field may return null, indicating that no valid values can be obtained.
 	ResolutionAdaptive *bool `pulumi:"resolutionAdaptive"`
+	// Video constant bit rate control factor, value range is [1,51].
+	// Note:
+	// - If this parameter is specified, the bitrate control method of CRF will be used for transcoding (the video bitrate will no longer take effect);
+	// - This field is required when the video stream encoding format is H.266. The recommended value is 28;
+	// - If there are no special requirements, it is not recommended to specify this parameter.
+	Vcrf *int `pulumi:"vcrf"`
 	// Maximum value of the width (or long side) of a video stream in px. Value range: `0` and `[128, 4096]`. If both `width` and `height` are `0`, the resolution will be the same as that of the source video; If `width` is `0`, but `height` is not `0`, `width` will be proportionally scaled; If `width` is not `0`, but `height` is `0`, `height` will be proportionally scaled; If both `width` and `height` are not `0`, the custom resolution will be used. Default value: `0`. Note: this field may return null, indicating that no valid values can be obtained.
 	Width *int `pulumi:"width"`
 }
@@ -228,7 +433,7 @@ type AdaptiveDynamicStreamingTemplateStreamInfoVideo struct {
 // AdaptiveDynamicStreamingTemplateStreamInfoVideoInput is an input type that accepts AdaptiveDynamicStreamingTemplateStreamInfoVideoArgs and AdaptiveDynamicStreamingTemplateStreamInfoVideoOutput values.
 // You can construct a concrete instance of `AdaptiveDynamicStreamingTemplateStreamInfoVideoInput` via:
 //
-//          AdaptiveDynamicStreamingTemplateStreamInfoVideoArgs{...}
+//	AdaptiveDynamicStreamingTemplateStreamInfoVideoArgs{...}
 type AdaptiveDynamicStreamingTemplateStreamInfoVideoInput interface {
 	pulumi.Input
 
@@ -241,14 +446,32 @@ type AdaptiveDynamicStreamingTemplateStreamInfoVideoArgs struct {
 	Bitrate pulumi.IntInput `pulumi:"bitrate"`
 	// Video stream encoder. Valid values: `libx264`,`libx265`,`av1`. `libx264`: H.264, `libx265`: H.265, `av1`: AOMedia Video 1. Currently, a resolution within 640x480 must be specified for `H.265`. and the `av1` container only supports mp4.
 	Codec pulumi.StringInput `pulumi:"codec"`
+	// Encoding label, valid only if the encoding format of the video stream is H.265 encoding. Available values:
+	// - hvc1: stands for hvc1 tag;
+	// - hev1: stands for the hev1 tag;
+	//   Default value: hvc1.
+	CodecTag pulumi.StringPtrInput `pulumi:"codecTag"`
 	// Fill type. Fill refers to the way of processing a screenshot when its aspect ratio is different from that of the source video. The following fill types are supported: `stretch`: stretch. The screenshot will be stretched frame by frame to match the aspect ratio of the source video, which may make the screenshot shorter or longer; `black`: fill with black. This option retains the aspect ratio of the source video for the screenshot and fills the unmatched area with black color blocks. Default value: black. Note: this field may return null, indicating that no valid values can be obtained.
 	FillType pulumi.StringPtrInput `pulumi:"fillType"`
 	// Video frame rate in Hz. Value range: `[0, 60]`. If the value is `0`, the frame rate will be the same as that of the source video.
 	Fps pulumi.IntInput `pulumi:"fps"`
+	// Interval between Keyframe I frames, value range: 0 and [1, 100000], unit: number of frames. When you fill in 0 or leave it empty, the gop length is automatically set.
+	Gop pulumi.IntPtrInput `pulumi:"gop"`
 	// Maximum value of the height (or short side) of a video stream in px. Value range: `0` and `[128, 4096]`. If both `width` and `height` are `0`, the resolution will be the same as that of the source video; If `width` is `0`, but `height` is not `0`, `width` will be proportionally scaled; If `width` is not `0`, but `height` is `0`, `height` will be proportionally scaled; If both `width` and `height` are not `0`, the custom resolution will be used. Default value: `0`. Note: this field may return null, indicating that no valid values can be obtained.
 	Height pulumi.IntPtrInput `pulumi:"height"`
+	// Whether the transcoding output still maintains HDR when the original video is HDR (High Dynamic Range). Value range:
+	// - ON: if the original file is HDR, the transcoding output remains HDR;, otherwise the transcoding output is SDR (Standard Dynamic Range);
+	// - OFF: regardless of whether the original file is HDR or SDR, the transcoding output is SDR;
+	//   Default value: OFF.
+	PreserveHdrSwitch pulumi.StringPtrInput `pulumi:"preserveHdrSwitch"`
 	// Resolution adaption. Valid values: `true`,`false`. `true`: enabled. In this case, `width` represents the long side of a video, while `height` the short side; `false`: disabled. In this case, `width` represents the width of a video, while `height` the height. Default value: `true`. Note: this field may return null, indicating that no valid values can be obtained.
 	ResolutionAdaptive pulumi.BoolPtrInput `pulumi:"resolutionAdaptive"`
+	// Video constant bit rate control factor, value range is [1,51].
+	// Note:
+	// - If this parameter is specified, the bitrate control method of CRF will be used for transcoding (the video bitrate will no longer take effect);
+	// - This field is required when the video stream encoding format is H.266. The recommended value is 28;
+	// - If there are no special requirements, it is not recommended to specify this parameter.
+	Vcrf pulumi.IntPtrInput `pulumi:"vcrf"`
 	// Maximum value of the width (or long side) of a video stream in px. Value range: `0` and `[128, 4096]`. If both `width` and `height` are `0`, the resolution will be the same as that of the source video; If `width` is `0`, but `height` is not `0`, `width` will be proportionally scaled; If `width` is not `0`, but `height` is `0`, `height` will be proportionally scaled; If both `width` and `height` are not `0`, the custom resolution will be used. Default value: `0`. Note: this field may return null, indicating that no valid values can be obtained.
 	Width pulumi.IntPtrInput `pulumi:"width"`
 }
@@ -289,6 +512,14 @@ func (o AdaptiveDynamicStreamingTemplateStreamInfoVideoOutput) Codec() pulumi.St
 	return o.ApplyT(func(v AdaptiveDynamicStreamingTemplateStreamInfoVideo) string { return v.Codec }).(pulumi.StringOutput)
 }
 
+// Encoding label, valid only if the encoding format of the video stream is H.265 encoding. Available values:
+//   - hvc1: stands for hvc1 tag;
+//   - hev1: stands for the hev1 tag;
+//     Default value: hvc1.
+func (o AdaptiveDynamicStreamingTemplateStreamInfoVideoOutput) CodecTag() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v AdaptiveDynamicStreamingTemplateStreamInfoVideo) *string { return v.CodecTag }).(pulumi.StringPtrOutput)
+}
+
 // Fill type. Fill refers to the way of processing a screenshot when its aspect ratio is different from that of the source video. The following fill types are supported: `stretch`: stretch. The screenshot will be stretched frame by frame to match the aspect ratio of the source video, which may make the screenshot shorter or longer; `black`: fill with black. This option retains the aspect ratio of the source video for the screenshot and fills the unmatched area with black color blocks. Default value: black. Note: this field may return null, indicating that no valid values can be obtained.
 func (o AdaptiveDynamicStreamingTemplateStreamInfoVideoOutput) FillType() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v AdaptiveDynamicStreamingTemplateStreamInfoVideo) *string { return v.FillType }).(pulumi.StringPtrOutput)
@@ -299,9 +530,22 @@ func (o AdaptiveDynamicStreamingTemplateStreamInfoVideoOutput) Fps() pulumi.IntO
 	return o.ApplyT(func(v AdaptiveDynamicStreamingTemplateStreamInfoVideo) int { return v.Fps }).(pulumi.IntOutput)
 }
 
+// Interval between Keyframe I frames, value range: 0 and [1, 100000], unit: number of frames. When you fill in 0 or leave it empty, the gop length is automatically set.
+func (o AdaptiveDynamicStreamingTemplateStreamInfoVideoOutput) Gop() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v AdaptiveDynamicStreamingTemplateStreamInfoVideo) *int { return v.Gop }).(pulumi.IntPtrOutput)
+}
+
 // Maximum value of the height (or short side) of a video stream in px. Value range: `0` and `[128, 4096]`. If both `width` and `height` are `0`, the resolution will be the same as that of the source video; If `width` is `0`, but `height` is not `0`, `width` will be proportionally scaled; If `width` is not `0`, but `height` is `0`, `height` will be proportionally scaled; If both `width` and `height` are not `0`, the custom resolution will be used. Default value: `0`. Note: this field may return null, indicating that no valid values can be obtained.
 func (o AdaptiveDynamicStreamingTemplateStreamInfoVideoOutput) Height() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v AdaptiveDynamicStreamingTemplateStreamInfoVideo) *int { return v.Height }).(pulumi.IntPtrOutput)
+}
+
+// Whether the transcoding output still maintains HDR when the original video is HDR (High Dynamic Range). Value range:
+//   - ON: if the original file is HDR, the transcoding output remains HDR;, otherwise the transcoding output is SDR (Standard Dynamic Range);
+//   - OFF: regardless of whether the original file is HDR or SDR, the transcoding output is SDR;
+//     Default value: OFF.
+func (o AdaptiveDynamicStreamingTemplateStreamInfoVideoOutput) PreserveHdrSwitch() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v AdaptiveDynamicStreamingTemplateStreamInfoVideo) *string { return v.PreserveHdrSwitch }).(pulumi.StringPtrOutput)
 }
 
 // Resolution adaption. Valid values: `true`,`false`. `true`: enabled. In this case, `width` represents the long side of a video, while `height` the short side; `false`: disabled. In this case, `width` represents the width of a video, while `height` the height. Default value: `true`. Note: this field may return null, indicating that no valid values can be obtained.
@@ -309,9 +553,292 @@ func (o AdaptiveDynamicStreamingTemplateStreamInfoVideoOutput) ResolutionAdaptiv
 	return o.ApplyT(func(v AdaptiveDynamicStreamingTemplateStreamInfoVideo) *bool { return v.ResolutionAdaptive }).(pulumi.BoolPtrOutput)
 }
 
+// Video constant bit rate control factor, value range is [1,51].
+// Note:
+// - If this parameter is specified, the bitrate control method of CRF will be used for transcoding (the video bitrate will no longer take effect);
+// - This field is required when the video stream encoding format is H.266. The recommended value is 28;
+// - If there are no special requirements, it is not recommended to specify this parameter.
+func (o AdaptiveDynamicStreamingTemplateStreamInfoVideoOutput) Vcrf() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v AdaptiveDynamicStreamingTemplateStreamInfoVideo) *int { return v.Vcrf }).(pulumi.IntPtrOutput)
+}
+
 // Maximum value of the width (or long side) of a video stream in px. Value range: `0` and `[128, 4096]`. If both `width` and `height` are `0`, the resolution will be the same as that of the source video; If `width` is `0`, but `height` is not `0`, `width` will be proportionally scaled; If `width` is not `0`, but `height` is `0`, `height` will be proportionally scaled; If both `width` and `height` are not `0`, the custom resolution will be used. Default value: `0`. Note: this field may return null, indicating that no valid values can be obtained.
 func (o AdaptiveDynamicStreamingTemplateStreamInfoVideoOutput) Width() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v AdaptiveDynamicStreamingTemplateStreamInfoVideo) *int { return v.Width }).(pulumi.IntPtrOutput)
+}
+
+type ProcedureTemplateAiAnalysisTask struct {
+	// Video content analysis template ID.
+	Definition *string `pulumi:"definition"`
+}
+
+// ProcedureTemplateAiAnalysisTaskInput is an input type that accepts ProcedureTemplateAiAnalysisTaskArgs and ProcedureTemplateAiAnalysisTaskOutput values.
+// You can construct a concrete instance of `ProcedureTemplateAiAnalysisTaskInput` via:
+//
+//	ProcedureTemplateAiAnalysisTaskArgs{...}
+type ProcedureTemplateAiAnalysisTaskInput interface {
+	pulumi.Input
+
+	ToProcedureTemplateAiAnalysisTaskOutput() ProcedureTemplateAiAnalysisTaskOutput
+	ToProcedureTemplateAiAnalysisTaskOutputWithContext(context.Context) ProcedureTemplateAiAnalysisTaskOutput
+}
+
+type ProcedureTemplateAiAnalysisTaskArgs struct {
+	// Video content analysis template ID.
+	Definition pulumi.StringPtrInput `pulumi:"definition"`
+}
+
+func (ProcedureTemplateAiAnalysisTaskArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ProcedureTemplateAiAnalysisTask)(nil)).Elem()
+}
+
+func (i ProcedureTemplateAiAnalysisTaskArgs) ToProcedureTemplateAiAnalysisTaskOutput() ProcedureTemplateAiAnalysisTaskOutput {
+	return i.ToProcedureTemplateAiAnalysisTaskOutputWithContext(context.Background())
+}
+
+func (i ProcedureTemplateAiAnalysisTaskArgs) ToProcedureTemplateAiAnalysisTaskOutputWithContext(ctx context.Context) ProcedureTemplateAiAnalysisTaskOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ProcedureTemplateAiAnalysisTaskOutput)
+}
+
+func (i ProcedureTemplateAiAnalysisTaskArgs) ToProcedureTemplateAiAnalysisTaskPtrOutput() ProcedureTemplateAiAnalysisTaskPtrOutput {
+	return i.ToProcedureTemplateAiAnalysisTaskPtrOutputWithContext(context.Background())
+}
+
+func (i ProcedureTemplateAiAnalysisTaskArgs) ToProcedureTemplateAiAnalysisTaskPtrOutputWithContext(ctx context.Context) ProcedureTemplateAiAnalysisTaskPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ProcedureTemplateAiAnalysisTaskOutput).ToProcedureTemplateAiAnalysisTaskPtrOutputWithContext(ctx)
+}
+
+// ProcedureTemplateAiAnalysisTaskPtrInput is an input type that accepts ProcedureTemplateAiAnalysisTaskArgs, ProcedureTemplateAiAnalysisTaskPtr and ProcedureTemplateAiAnalysisTaskPtrOutput values.
+// You can construct a concrete instance of `ProcedureTemplateAiAnalysisTaskPtrInput` via:
+//
+//	        ProcedureTemplateAiAnalysisTaskArgs{...}
+//
+//	or:
+//
+//	        nil
+type ProcedureTemplateAiAnalysisTaskPtrInput interface {
+	pulumi.Input
+
+	ToProcedureTemplateAiAnalysisTaskPtrOutput() ProcedureTemplateAiAnalysisTaskPtrOutput
+	ToProcedureTemplateAiAnalysisTaskPtrOutputWithContext(context.Context) ProcedureTemplateAiAnalysisTaskPtrOutput
+}
+
+type procedureTemplateAiAnalysisTaskPtrType ProcedureTemplateAiAnalysisTaskArgs
+
+func ProcedureTemplateAiAnalysisTaskPtr(v *ProcedureTemplateAiAnalysisTaskArgs) ProcedureTemplateAiAnalysisTaskPtrInput {
+	return (*procedureTemplateAiAnalysisTaskPtrType)(v)
+}
+
+func (*procedureTemplateAiAnalysisTaskPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**ProcedureTemplateAiAnalysisTask)(nil)).Elem()
+}
+
+func (i *procedureTemplateAiAnalysisTaskPtrType) ToProcedureTemplateAiAnalysisTaskPtrOutput() ProcedureTemplateAiAnalysisTaskPtrOutput {
+	return i.ToProcedureTemplateAiAnalysisTaskPtrOutputWithContext(context.Background())
+}
+
+func (i *procedureTemplateAiAnalysisTaskPtrType) ToProcedureTemplateAiAnalysisTaskPtrOutputWithContext(ctx context.Context) ProcedureTemplateAiAnalysisTaskPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ProcedureTemplateAiAnalysisTaskPtrOutput)
+}
+
+type ProcedureTemplateAiAnalysisTaskOutput struct{ *pulumi.OutputState }
+
+func (ProcedureTemplateAiAnalysisTaskOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ProcedureTemplateAiAnalysisTask)(nil)).Elem()
+}
+
+func (o ProcedureTemplateAiAnalysisTaskOutput) ToProcedureTemplateAiAnalysisTaskOutput() ProcedureTemplateAiAnalysisTaskOutput {
+	return o
+}
+
+func (o ProcedureTemplateAiAnalysisTaskOutput) ToProcedureTemplateAiAnalysisTaskOutputWithContext(ctx context.Context) ProcedureTemplateAiAnalysisTaskOutput {
+	return o
+}
+
+func (o ProcedureTemplateAiAnalysisTaskOutput) ToProcedureTemplateAiAnalysisTaskPtrOutput() ProcedureTemplateAiAnalysisTaskPtrOutput {
+	return o.ToProcedureTemplateAiAnalysisTaskPtrOutputWithContext(context.Background())
+}
+
+func (o ProcedureTemplateAiAnalysisTaskOutput) ToProcedureTemplateAiAnalysisTaskPtrOutputWithContext(ctx context.Context) ProcedureTemplateAiAnalysisTaskPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v ProcedureTemplateAiAnalysisTask) *ProcedureTemplateAiAnalysisTask {
+		return &v
+	}).(ProcedureTemplateAiAnalysisTaskPtrOutput)
+}
+
+// Video content analysis template ID.
+func (o ProcedureTemplateAiAnalysisTaskOutput) Definition() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ProcedureTemplateAiAnalysisTask) *string { return v.Definition }).(pulumi.StringPtrOutput)
+}
+
+type ProcedureTemplateAiAnalysisTaskPtrOutput struct{ *pulumi.OutputState }
+
+func (ProcedureTemplateAiAnalysisTaskPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**ProcedureTemplateAiAnalysisTask)(nil)).Elem()
+}
+
+func (o ProcedureTemplateAiAnalysisTaskPtrOutput) ToProcedureTemplateAiAnalysisTaskPtrOutput() ProcedureTemplateAiAnalysisTaskPtrOutput {
+	return o
+}
+
+func (o ProcedureTemplateAiAnalysisTaskPtrOutput) ToProcedureTemplateAiAnalysisTaskPtrOutputWithContext(ctx context.Context) ProcedureTemplateAiAnalysisTaskPtrOutput {
+	return o
+}
+
+func (o ProcedureTemplateAiAnalysisTaskPtrOutput) Elem() ProcedureTemplateAiAnalysisTaskOutput {
+	return o.ApplyT(func(v *ProcedureTemplateAiAnalysisTask) ProcedureTemplateAiAnalysisTask {
+		if v != nil {
+			return *v
+		}
+		var ret ProcedureTemplateAiAnalysisTask
+		return ret
+	}).(ProcedureTemplateAiAnalysisTaskOutput)
+}
+
+// Video content analysis template ID.
+func (o ProcedureTemplateAiAnalysisTaskPtrOutput) Definition() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ProcedureTemplateAiAnalysisTask) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Definition
+	}).(pulumi.StringPtrOutput)
+}
+
+type ProcedureTemplateAiRecognitionTask struct {
+	// Intelligent video recognition template ID.
+	Definition *string `pulumi:"definition"`
+}
+
+// ProcedureTemplateAiRecognitionTaskInput is an input type that accepts ProcedureTemplateAiRecognitionTaskArgs and ProcedureTemplateAiRecognitionTaskOutput values.
+// You can construct a concrete instance of `ProcedureTemplateAiRecognitionTaskInput` via:
+//
+//	ProcedureTemplateAiRecognitionTaskArgs{...}
+type ProcedureTemplateAiRecognitionTaskInput interface {
+	pulumi.Input
+
+	ToProcedureTemplateAiRecognitionTaskOutput() ProcedureTemplateAiRecognitionTaskOutput
+	ToProcedureTemplateAiRecognitionTaskOutputWithContext(context.Context) ProcedureTemplateAiRecognitionTaskOutput
+}
+
+type ProcedureTemplateAiRecognitionTaskArgs struct {
+	// Intelligent video recognition template ID.
+	Definition pulumi.StringPtrInput `pulumi:"definition"`
+}
+
+func (ProcedureTemplateAiRecognitionTaskArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ProcedureTemplateAiRecognitionTask)(nil)).Elem()
+}
+
+func (i ProcedureTemplateAiRecognitionTaskArgs) ToProcedureTemplateAiRecognitionTaskOutput() ProcedureTemplateAiRecognitionTaskOutput {
+	return i.ToProcedureTemplateAiRecognitionTaskOutputWithContext(context.Background())
+}
+
+func (i ProcedureTemplateAiRecognitionTaskArgs) ToProcedureTemplateAiRecognitionTaskOutputWithContext(ctx context.Context) ProcedureTemplateAiRecognitionTaskOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ProcedureTemplateAiRecognitionTaskOutput)
+}
+
+func (i ProcedureTemplateAiRecognitionTaskArgs) ToProcedureTemplateAiRecognitionTaskPtrOutput() ProcedureTemplateAiRecognitionTaskPtrOutput {
+	return i.ToProcedureTemplateAiRecognitionTaskPtrOutputWithContext(context.Background())
+}
+
+func (i ProcedureTemplateAiRecognitionTaskArgs) ToProcedureTemplateAiRecognitionTaskPtrOutputWithContext(ctx context.Context) ProcedureTemplateAiRecognitionTaskPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ProcedureTemplateAiRecognitionTaskOutput).ToProcedureTemplateAiRecognitionTaskPtrOutputWithContext(ctx)
+}
+
+// ProcedureTemplateAiRecognitionTaskPtrInput is an input type that accepts ProcedureTemplateAiRecognitionTaskArgs, ProcedureTemplateAiRecognitionTaskPtr and ProcedureTemplateAiRecognitionTaskPtrOutput values.
+// You can construct a concrete instance of `ProcedureTemplateAiRecognitionTaskPtrInput` via:
+//
+//	        ProcedureTemplateAiRecognitionTaskArgs{...}
+//
+//	or:
+//
+//	        nil
+type ProcedureTemplateAiRecognitionTaskPtrInput interface {
+	pulumi.Input
+
+	ToProcedureTemplateAiRecognitionTaskPtrOutput() ProcedureTemplateAiRecognitionTaskPtrOutput
+	ToProcedureTemplateAiRecognitionTaskPtrOutputWithContext(context.Context) ProcedureTemplateAiRecognitionTaskPtrOutput
+}
+
+type procedureTemplateAiRecognitionTaskPtrType ProcedureTemplateAiRecognitionTaskArgs
+
+func ProcedureTemplateAiRecognitionTaskPtr(v *ProcedureTemplateAiRecognitionTaskArgs) ProcedureTemplateAiRecognitionTaskPtrInput {
+	return (*procedureTemplateAiRecognitionTaskPtrType)(v)
+}
+
+func (*procedureTemplateAiRecognitionTaskPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**ProcedureTemplateAiRecognitionTask)(nil)).Elem()
+}
+
+func (i *procedureTemplateAiRecognitionTaskPtrType) ToProcedureTemplateAiRecognitionTaskPtrOutput() ProcedureTemplateAiRecognitionTaskPtrOutput {
+	return i.ToProcedureTemplateAiRecognitionTaskPtrOutputWithContext(context.Background())
+}
+
+func (i *procedureTemplateAiRecognitionTaskPtrType) ToProcedureTemplateAiRecognitionTaskPtrOutputWithContext(ctx context.Context) ProcedureTemplateAiRecognitionTaskPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ProcedureTemplateAiRecognitionTaskPtrOutput)
+}
+
+type ProcedureTemplateAiRecognitionTaskOutput struct{ *pulumi.OutputState }
+
+func (ProcedureTemplateAiRecognitionTaskOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ProcedureTemplateAiRecognitionTask)(nil)).Elem()
+}
+
+func (o ProcedureTemplateAiRecognitionTaskOutput) ToProcedureTemplateAiRecognitionTaskOutput() ProcedureTemplateAiRecognitionTaskOutput {
+	return o
+}
+
+func (o ProcedureTemplateAiRecognitionTaskOutput) ToProcedureTemplateAiRecognitionTaskOutputWithContext(ctx context.Context) ProcedureTemplateAiRecognitionTaskOutput {
+	return o
+}
+
+func (o ProcedureTemplateAiRecognitionTaskOutput) ToProcedureTemplateAiRecognitionTaskPtrOutput() ProcedureTemplateAiRecognitionTaskPtrOutput {
+	return o.ToProcedureTemplateAiRecognitionTaskPtrOutputWithContext(context.Background())
+}
+
+func (o ProcedureTemplateAiRecognitionTaskOutput) ToProcedureTemplateAiRecognitionTaskPtrOutputWithContext(ctx context.Context) ProcedureTemplateAiRecognitionTaskPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v ProcedureTemplateAiRecognitionTask) *ProcedureTemplateAiRecognitionTask {
+		return &v
+	}).(ProcedureTemplateAiRecognitionTaskPtrOutput)
+}
+
+// Intelligent video recognition template ID.
+func (o ProcedureTemplateAiRecognitionTaskOutput) Definition() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ProcedureTemplateAiRecognitionTask) *string { return v.Definition }).(pulumi.StringPtrOutput)
+}
+
+type ProcedureTemplateAiRecognitionTaskPtrOutput struct{ *pulumi.OutputState }
+
+func (ProcedureTemplateAiRecognitionTaskPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**ProcedureTemplateAiRecognitionTask)(nil)).Elem()
+}
+
+func (o ProcedureTemplateAiRecognitionTaskPtrOutput) ToProcedureTemplateAiRecognitionTaskPtrOutput() ProcedureTemplateAiRecognitionTaskPtrOutput {
+	return o
+}
+
+func (o ProcedureTemplateAiRecognitionTaskPtrOutput) ToProcedureTemplateAiRecognitionTaskPtrOutputWithContext(ctx context.Context) ProcedureTemplateAiRecognitionTaskPtrOutput {
+	return o
+}
+
+func (o ProcedureTemplateAiRecognitionTaskPtrOutput) Elem() ProcedureTemplateAiRecognitionTaskOutput {
+	return o.ApplyT(func(v *ProcedureTemplateAiRecognitionTask) ProcedureTemplateAiRecognitionTask {
+		if v != nil {
+			return *v
+		}
+		var ret ProcedureTemplateAiRecognitionTask
+		return ret
+	}).(ProcedureTemplateAiRecognitionTaskOutput)
+}
+
+// Intelligent video recognition template ID.
+func (o ProcedureTemplateAiRecognitionTaskPtrOutput) Definition() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ProcedureTemplateAiRecognitionTask) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Definition
+	}).(pulumi.StringPtrOutput)
 }
 
 type ProcedureTemplateMediaProcessTask struct {
@@ -334,7 +861,7 @@ type ProcedureTemplateMediaProcessTask struct {
 // ProcedureTemplateMediaProcessTaskInput is an input type that accepts ProcedureTemplateMediaProcessTaskArgs and ProcedureTemplateMediaProcessTaskOutput values.
 // You can construct a concrete instance of `ProcedureTemplateMediaProcessTaskInput` via:
 //
-//          ProcedureTemplateMediaProcessTaskArgs{...}
+//	ProcedureTemplateMediaProcessTaskArgs{...}
 type ProcedureTemplateMediaProcessTaskInput interface {
 	pulumi.Input
 
@@ -382,11 +909,11 @@ func (i ProcedureTemplateMediaProcessTaskArgs) ToProcedureTemplateMediaProcessTa
 // ProcedureTemplateMediaProcessTaskPtrInput is an input type that accepts ProcedureTemplateMediaProcessTaskArgs, ProcedureTemplateMediaProcessTaskPtr and ProcedureTemplateMediaProcessTaskPtrOutput values.
 // You can construct a concrete instance of `ProcedureTemplateMediaProcessTaskPtrInput` via:
 //
-//          ProcedureTemplateMediaProcessTaskArgs{...}
+//	        ProcedureTemplateMediaProcessTaskArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type ProcedureTemplateMediaProcessTaskPtrInput interface {
 	pulumi.Input
 
@@ -582,6 +1109,8 @@ func (o ProcedureTemplateMediaProcessTaskPtrOutput) TranscodeTaskLists() Procedu
 type ProcedureTemplateMediaProcessTaskAdaptiveDynamicStreamingTaskList struct {
 	// Adaptive bitrate streaming template ID.
 	Definition string `pulumi:"definition"`
+	// Subtitle list, element is subtitle ID, support multiple subtitles, up to 16.
+	SubtitleLists []string `pulumi:"subtitleLists"`
 	// List of up to `10` image or text watermarks. Note: this field may return null, indicating that no valid values can be obtained.
 	WatermarkLists []ProcedureTemplateMediaProcessTaskAdaptiveDynamicStreamingTaskListWatermarkList `pulumi:"watermarkLists"`
 }
@@ -589,7 +1118,7 @@ type ProcedureTemplateMediaProcessTaskAdaptiveDynamicStreamingTaskList struct {
 // ProcedureTemplateMediaProcessTaskAdaptiveDynamicStreamingTaskListInput is an input type that accepts ProcedureTemplateMediaProcessTaskAdaptiveDynamicStreamingTaskListArgs and ProcedureTemplateMediaProcessTaskAdaptiveDynamicStreamingTaskListOutput values.
 // You can construct a concrete instance of `ProcedureTemplateMediaProcessTaskAdaptiveDynamicStreamingTaskListInput` via:
 //
-//          ProcedureTemplateMediaProcessTaskAdaptiveDynamicStreamingTaskListArgs{...}
+//	ProcedureTemplateMediaProcessTaskAdaptiveDynamicStreamingTaskListArgs{...}
 type ProcedureTemplateMediaProcessTaskAdaptiveDynamicStreamingTaskListInput interface {
 	pulumi.Input
 
@@ -600,6 +1129,8 @@ type ProcedureTemplateMediaProcessTaskAdaptiveDynamicStreamingTaskListInput inte
 type ProcedureTemplateMediaProcessTaskAdaptiveDynamicStreamingTaskListArgs struct {
 	// Adaptive bitrate streaming template ID.
 	Definition pulumi.StringInput `pulumi:"definition"`
+	// Subtitle list, element is subtitle ID, support multiple subtitles, up to 16.
+	SubtitleLists pulumi.StringArrayInput `pulumi:"subtitleLists"`
 	// List of up to `10` image or text watermarks. Note: this field may return null, indicating that no valid values can be obtained.
 	WatermarkLists ProcedureTemplateMediaProcessTaskAdaptiveDynamicStreamingTaskListWatermarkListArrayInput `pulumi:"watermarkLists"`
 }
@@ -619,7 +1150,7 @@ func (i ProcedureTemplateMediaProcessTaskAdaptiveDynamicStreamingTaskListArgs) T
 // ProcedureTemplateMediaProcessTaskAdaptiveDynamicStreamingTaskListArrayInput is an input type that accepts ProcedureTemplateMediaProcessTaskAdaptiveDynamicStreamingTaskListArray and ProcedureTemplateMediaProcessTaskAdaptiveDynamicStreamingTaskListArrayOutput values.
 // You can construct a concrete instance of `ProcedureTemplateMediaProcessTaskAdaptiveDynamicStreamingTaskListArrayInput` via:
 //
-//          ProcedureTemplateMediaProcessTaskAdaptiveDynamicStreamingTaskListArray{ ProcedureTemplateMediaProcessTaskAdaptiveDynamicStreamingTaskListArgs{...} }
+//	ProcedureTemplateMediaProcessTaskAdaptiveDynamicStreamingTaskListArray{ ProcedureTemplateMediaProcessTaskAdaptiveDynamicStreamingTaskListArgs{...} }
 type ProcedureTemplateMediaProcessTaskAdaptiveDynamicStreamingTaskListArrayInput interface {
 	pulumi.Input
 
@@ -658,6 +1189,13 @@ func (o ProcedureTemplateMediaProcessTaskAdaptiveDynamicStreamingTaskListOutput)
 // Adaptive bitrate streaming template ID.
 func (o ProcedureTemplateMediaProcessTaskAdaptiveDynamicStreamingTaskListOutput) Definition() pulumi.StringOutput {
 	return o.ApplyT(func(v ProcedureTemplateMediaProcessTaskAdaptiveDynamicStreamingTaskList) string { return v.Definition }).(pulumi.StringOutput)
+}
+
+// Subtitle list, element is subtitle ID, support multiple subtitles, up to 16.
+func (o ProcedureTemplateMediaProcessTaskAdaptiveDynamicStreamingTaskListOutput) SubtitleLists() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v ProcedureTemplateMediaProcessTaskAdaptiveDynamicStreamingTaskList) []string {
+		return v.SubtitleLists
+	}).(pulumi.StringArrayOutput)
 }
 
 // List of up to `10` image or text watermarks. Note: this field may return null, indicating that no valid values can be obtained.
@@ -703,7 +1241,7 @@ type ProcedureTemplateMediaProcessTaskAdaptiveDynamicStreamingTaskListWatermarkL
 // ProcedureTemplateMediaProcessTaskAdaptiveDynamicStreamingTaskListWatermarkListInput is an input type that accepts ProcedureTemplateMediaProcessTaskAdaptiveDynamicStreamingTaskListWatermarkListArgs and ProcedureTemplateMediaProcessTaskAdaptiveDynamicStreamingTaskListWatermarkListOutput values.
 // You can construct a concrete instance of `ProcedureTemplateMediaProcessTaskAdaptiveDynamicStreamingTaskListWatermarkListInput` via:
 //
-//          ProcedureTemplateMediaProcessTaskAdaptiveDynamicStreamingTaskListWatermarkListArgs{...}
+//	ProcedureTemplateMediaProcessTaskAdaptiveDynamicStreamingTaskListWatermarkListArgs{...}
 type ProcedureTemplateMediaProcessTaskAdaptiveDynamicStreamingTaskListWatermarkListInput interface {
 	pulumi.Input
 
@@ -739,7 +1277,7 @@ func (i ProcedureTemplateMediaProcessTaskAdaptiveDynamicStreamingTaskListWaterma
 // ProcedureTemplateMediaProcessTaskAdaptiveDynamicStreamingTaskListWatermarkListArrayInput is an input type that accepts ProcedureTemplateMediaProcessTaskAdaptiveDynamicStreamingTaskListWatermarkListArray and ProcedureTemplateMediaProcessTaskAdaptiveDynamicStreamingTaskListWatermarkListArrayOutput values.
 // You can construct a concrete instance of `ProcedureTemplateMediaProcessTaskAdaptiveDynamicStreamingTaskListWatermarkListArrayInput` via:
 //
-//          ProcedureTemplateMediaProcessTaskAdaptiveDynamicStreamingTaskListWatermarkListArray{ ProcedureTemplateMediaProcessTaskAdaptiveDynamicStreamingTaskListWatermarkListArgs{...} }
+//	ProcedureTemplateMediaProcessTaskAdaptiveDynamicStreamingTaskListWatermarkListArray{ ProcedureTemplateMediaProcessTaskAdaptiveDynamicStreamingTaskListWatermarkListArgs{...} }
 type ProcedureTemplateMediaProcessTaskAdaptiveDynamicStreamingTaskListWatermarkListArrayInput interface {
 	pulumi.Input
 
@@ -842,7 +1380,7 @@ type ProcedureTemplateMediaProcessTaskAnimatedGraphicTaskList struct {
 // ProcedureTemplateMediaProcessTaskAnimatedGraphicTaskListInput is an input type that accepts ProcedureTemplateMediaProcessTaskAnimatedGraphicTaskListArgs and ProcedureTemplateMediaProcessTaskAnimatedGraphicTaskListOutput values.
 // You can construct a concrete instance of `ProcedureTemplateMediaProcessTaskAnimatedGraphicTaskListInput` via:
 //
-//          ProcedureTemplateMediaProcessTaskAnimatedGraphicTaskListArgs{...}
+//	ProcedureTemplateMediaProcessTaskAnimatedGraphicTaskListArgs{...}
 type ProcedureTemplateMediaProcessTaskAnimatedGraphicTaskListInput interface {
 	pulumi.Input
 
@@ -874,7 +1412,7 @@ func (i ProcedureTemplateMediaProcessTaskAnimatedGraphicTaskListArgs) ToProcedur
 // ProcedureTemplateMediaProcessTaskAnimatedGraphicTaskListArrayInput is an input type that accepts ProcedureTemplateMediaProcessTaskAnimatedGraphicTaskListArray and ProcedureTemplateMediaProcessTaskAnimatedGraphicTaskListArrayOutput values.
 // You can construct a concrete instance of `ProcedureTemplateMediaProcessTaskAnimatedGraphicTaskListArrayInput` via:
 //
-//          ProcedureTemplateMediaProcessTaskAnimatedGraphicTaskListArray{ ProcedureTemplateMediaProcessTaskAnimatedGraphicTaskListArgs{...} }
+//	ProcedureTemplateMediaProcessTaskAnimatedGraphicTaskListArray{ ProcedureTemplateMediaProcessTaskAnimatedGraphicTaskListArgs{...} }
 type ProcedureTemplateMediaProcessTaskAnimatedGraphicTaskListArrayInput interface {
 	pulumi.Input
 
@@ -959,7 +1497,7 @@ type ProcedureTemplateMediaProcessTaskCoverBySnapshotTaskList struct {
 // ProcedureTemplateMediaProcessTaskCoverBySnapshotTaskListInput is an input type that accepts ProcedureTemplateMediaProcessTaskCoverBySnapshotTaskListArgs and ProcedureTemplateMediaProcessTaskCoverBySnapshotTaskListOutput values.
 // You can construct a concrete instance of `ProcedureTemplateMediaProcessTaskCoverBySnapshotTaskListInput` via:
 //
-//          ProcedureTemplateMediaProcessTaskCoverBySnapshotTaskListArgs{...}
+//	ProcedureTemplateMediaProcessTaskCoverBySnapshotTaskListArgs{...}
 type ProcedureTemplateMediaProcessTaskCoverBySnapshotTaskListInput interface {
 	pulumi.Input
 
@@ -993,7 +1531,7 @@ func (i ProcedureTemplateMediaProcessTaskCoverBySnapshotTaskListArgs) ToProcedur
 // ProcedureTemplateMediaProcessTaskCoverBySnapshotTaskListArrayInput is an input type that accepts ProcedureTemplateMediaProcessTaskCoverBySnapshotTaskListArray and ProcedureTemplateMediaProcessTaskCoverBySnapshotTaskListArrayOutput values.
 // You can construct a concrete instance of `ProcedureTemplateMediaProcessTaskCoverBySnapshotTaskListArrayInput` via:
 //
-//          ProcedureTemplateMediaProcessTaskCoverBySnapshotTaskListArray{ ProcedureTemplateMediaProcessTaskCoverBySnapshotTaskListArgs{...} }
+//	ProcedureTemplateMediaProcessTaskCoverBySnapshotTaskListArray{ ProcedureTemplateMediaProcessTaskCoverBySnapshotTaskListArgs{...} }
 type ProcedureTemplateMediaProcessTaskCoverBySnapshotTaskListArrayInput interface {
 	pulumi.Input
 
@@ -1087,7 +1625,7 @@ type ProcedureTemplateMediaProcessTaskCoverBySnapshotTaskListWatermarkList struc
 // ProcedureTemplateMediaProcessTaskCoverBySnapshotTaskListWatermarkListInput is an input type that accepts ProcedureTemplateMediaProcessTaskCoverBySnapshotTaskListWatermarkListArgs and ProcedureTemplateMediaProcessTaskCoverBySnapshotTaskListWatermarkListOutput values.
 // You can construct a concrete instance of `ProcedureTemplateMediaProcessTaskCoverBySnapshotTaskListWatermarkListInput` via:
 //
-//          ProcedureTemplateMediaProcessTaskCoverBySnapshotTaskListWatermarkListArgs{...}
+//	ProcedureTemplateMediaProcessTaskCoverBySnapshotTaskListWatermarkListArgs{...}
 type ProcedureTemplateMediaProcessTaskCoverBySnapshotTaskListWatermarkListInput interface {
 	pulumi.Input
 
@@ -1123,7 +1661,7 @@ func (i ProcedureTemplateMediaProcessTaskCoverBySnapshotTaskListWatermarkListArg
 // ProcedureTemplateMediaProcessTaskCoverBySnapshotTaskListWatermarkListArrayInput is an input type that accepts ProcedureTemplateMediaProcessTaskCoverBySnapshotTaskListWatermarkListArray and ProcedureTemplateMediaProcessTaskCoverBySnapshotTaskListWatermarkListArrayOutput values.
 // You can construct a concrete instance of `ProcedureTemplateMediaProcessTaskCoverBySnapshotTaskListWatermarkListArrayInput` via:
 //
-//          ProcedureTemplateMediaProcessTaskCoverBySnapshotTaskListWatermarkListArray{ ProcedureTemplateMediaProcessTaskCoverBySnapshotTaskListWatermarkListArgs{...} }
+//	ProcedureTemplateMediaProcessTaskCoverBySnapshotTaskListWatermarkListArray{ ProcedureTemplateMediaProcessTaskCoverBySnapshotTaskListWatermarkListArgs{...} }
 type ProcedureTemplateMediaProcessTaskCoverBySnapshotTaskListWatermarkListArrayInput interface {
 	pulumi.Input
 
@@ -1222,7 +1760,7 @@ type ProcedureTemplateMediaProcessTaskImageSpriteTaskList struct {
 // ProcedureTemplateMediaProcessTaskImageSpriteTaskListInput is an input type that accepts ProcedureTemplateMediaProcessTaskImageSpriteTaskListArgs and ProcedureTemplateMediaProcessTaskImageSpriteTaskListOutput values.
 // You can construct a concrete instance of `ProcedureTemplateMediaProcessTaskImageSpriteTaskListInput` via:
 //
-//          ProcedureTemplateMediaProcessTaskImageSpriteTaskListArgs{...}
+//	ProcedureTemplateMediaProcessTaskImageSpriteTaskListArgs{...}
 type ProcedureTemplateMediaProcessTaskImageSpriteTaskListInput interface {
 	pulumi.Input
 
@@ -1250,7 +1788,7 @@ func (i ProcedureTemplateMediaProcessTaskImageSpriteTaskListArgs) ToProcedureTem
 // ProcedureTemplateMediaProcessTaskImageSpriteTaskListArrayInput is an input type that accepts ProcedureTemplateMediaProcessTaskImageSpriteTaskListArray and ProcedureTemplateMediaProcessTaskImageSpriteTaskListArrayOutput values.
 // You can construct a concrete instance of `ProcedureTemplateMediaProcessTaskImageSpriteTaskListArrayInput` via:
 //
-//          ProcedureTemplateMediaProcessTaskImageSpriteTaskListArray{ ProcedureTemplateMediaProcessTaskImageSpriteTaskListArgs{...} }
+//	ProcedureTemplateMediaProcessTaskImageSpriteTaskListArray{ ProcedureTemplateMediaProcessTaskImageSpriteTaskListArgs{...} }
 type ProcedureTemplateMediaProcessTaskImageSpriteTaskListArrayInput interface {
 	pulumi.Input
 
@@ -1321,7 +1859,7 @@ type ProcedureTemplateMediaProcessTaskSampleSnapshotTaskList struct {
 // ProcedureTemplateMediaProcessTaskSampleSnapshotTaskListInput is an input type that accepts ProcedureTemplateMediaProcessTaskSampleSnapshotTaskListArgs and ProcedureTemplateMediaProcessTaskSampleSnapshotTaskListOutput values.
 // You can construct a concrete instance of `ProcedureTemplateMediaProcessTaskSampleSnapshotTaskListInput` via:
 //
-//          ProcedureTemplateMediaProcessTaskSampleSnapshotTaskListArgs{...}
+//	ProcedureTemplateMediaProcessTaskSampleSnapshotTaskListArgs{...}
 type ProcedureTemplateMediaProcessTaskSampleSnapshotTaskListInput interface {
 	pulumi.Input
 
@@ -1351,7 +1889,7 @@ func (i ProcedureTemplateMediaProcessTaskSampleSnapshotTaskListArgs) ToProcedure
 // ProcedureTemplateMediaProcessTaskSampleSnapshotTaskListArrayInput is an input type that accepts ProcedureTemplateMediaProcessTaskSampleSnapshotTaskListArray and ProcedureTemplateMediaProcessTaskSampleSnapshotTaskListArrayOutput values.
 // You can construct a concrete instance of `ProcedureTemplateMediaProcessTaskSampleSnapshotTaskListArrayInput` via:
 //
-//          ProcedureTemplateMediaProcessTaskSampleSnapshotTaskListArray{ ProcedureTemplateMediaProcessTaskSampleSnapshotTaskListArgs{...} }
+//	ProcedureTemplateMediaProcessTaskSampleSnapshotTaskListArray{ ProcedureTemplateMediaProcessTaskSampleSnapshotTaskListArgs{...} }
 type ProcedureTemplateMediaProcessTaskSampleSnapshotTaskListArrayInput interface {
 	pulumi.Input
 
@@ -1435,7 +1973,7 @@ type ProcedureTemplateMediaProcessTaskSampleSnapshotTaskListWatermarkList struct
 // ProcedureTemplateMediaProcessTaskSampleSnapshotTaskListWatermarkListInput is an input type that accepts ProcedureTemplateMediaProcessTaskSampleSnapshotTaskListWatermarkListArgs and ProcedureTemplateMediaProcessTaskSampleSnapshotTaskListWatermarkListOutput values.
 // You can construct a concrete instance of `ProcedureTemplateMediaProcessTaskSampleSnapshotTaskListWatermarkListInput` via:
 //
-//          ProcedureTemplateMediaProcessTaskSampleSnapshotTaskListWatermarkListArgs{...}
+//	ProcedureTemplateMediaProcessTaskSampleSnapshotTaskListWatermarkListArgs{...}
 type ProcedureTemplateMediaProcessTaskSampleSnapshotTaskListWatermarkListInput interface {
 	pulumi.Input
 
@@ -1471,7 +2009,7 @@ func (i ProcedureTemplateMediaProcessTaskSampleSnapshotTaskListWatermarkListArgs
 // ProcedureTemplateMediaProcessTaskSampleSnapshotTaskListWatermarkListArrayInput is an input type that accepts ProcedureTemplateMediaProcessTaskSampleSnapshotTaskListWatermarkListArray and ProcedureTemplateMediaProcessTaskSampleSnapshotTaskListWatermarkListArrayOutput values.
 // You can construct a concrete instance of `ProcedureTemplateMediaProcessTaskSampleSnapshotTaskListWatermarkListArrayInput` via:
 //
-//          ProcedureTemplateMediaProcessTaskSampleSnapshotTaskListWatermarkListArray{ ProcedureTemplateMediaProcessTaskSampleSnapshotTaskListWatermarkListArgs{...} }
+//	ProcedureTemplateMediaProcessTaskSampleSnapshotTaskListWatermarkListArray{ ProcedureTemplateMediaProcessTaskSampleSnapshotTaskListWatermarkListArgs{...} }
 type ProcedureTemplateMediaProcessTaskSampleSnapshotTaskListWatermarkListArrayInput interface {
 	pulumi.Input
 
@@ -1567,6 +2105,8 @@ type ProcedureTemplateMediaProcessTaskSnapshotByTimeOffsetTaskList struct {
 	Definition string `pulumi:"definition"`
 	// The list of screenshot time points. `s` and `%` formats are supported: When a time point string ends with `s`, its unit is second. For example, `3.5s` means the 3.5th second of the video; When a time point string ends with `%`, it is marked with corresponding percentage of the video duration. For example, `10%` means that the time point is at the 10% of the video entire duration.
 	ExtTimeOffsetLists []string `pulumi:"extTimeOffsetLists"`
+	// List of time points for screencapturing in milliseconds. Note: this field may return null, indicating that no valid values can be obtained.
+	TimeOffsetLists []float64 `pulumi:"timeOffsetLists"`
 	// List of up to `10` image or text watermarks. Note: this field may return null, indicating that no valid values can be obtained.
 	WatermarkLists []ProcedureTemplateMediaProcessTaskSnapshotByTimeOffsetTaskListWatermarkList `pulumi:"watermarkLists"`
 }
@@ -1574,7 +2114,7 @@ type ProcedureTemplateMediaProcessTaskSnapshotByTimeOffsetTaskList struct {
 // ProcedureTemplateMediaProcessTaskSnapshotByTimeOffsetTaskListInput is an input type that accepts ProcedureTemplateMediaProcessTaskSnapshotByTimeOffsetTaskListArgs and ProcedureTemplateMediaProcessTaskSnapshotByTimeOffsetTaskListOutput values.
 // You can construct a concrete instance of `ProcedureTemplateMediaProcessTaskSnapshotByTimeOffsetTaskListInput` via:
 //
-//          ProcedureTemplateMediaProcessTaskSnapshotByTimeOffsetTaskListArgs{...}
+//	ProcedureTemplateMediaProcessTaskSnapshotByTimeOffsetTaskListArgs{...}
 type ProcedureTemplateMediaProcessTaskSnapshotByTimeOffsetTaskListInput interface {
 	pulumi.Input
 
@@ -1587,6 +2127,8 @@ type ProcedureTemplateMediaProcessTaskSnapshotByTimeOffsetTaskListArgs struct {
 	Definition pulumi.StringInput `pulumi:"definition"`
 	// The list of screenshot time points. `s` and `%` formats are supported: When a time point string ends with `s`, its unit is second. For example, `3.5s` means the 3.5th second of the video; When a time point string ends with `%`, it is marked with corresponding percentage of the video duration. For example, `10%` means that the time point is at the 10% of the video entire duration.
 	ExtTimeOffsetLists pulumi.StringArrayInput `pulumi:"extTimeOffsetLists"`
+	// List of time points for screencapturing in milliseconds. Note: this field may return null, indicating that no valid values can be obtained.
+	TimeOffsetLists pulumi.Float64ArrayInput `pulumi:"timeOffsetLists"`
 	// List of up to `10` image or text watermarks. Note: this field may return null, indicating that no valid values can be obtained.
 	WatermarkLists ProcedureTemplateMediaProcessTaskSnapshotByTimeOffsetTaskListWatermarkListArrayInput `pulumi:"watermarkLists"`
 }
@@ -1606,7 +2148,7 @@ func (i ProcedureTemplateMediaProcessTaskSnapshotByTimeOffsetTaskListArgs) ToPro
 // ProcedureTemplateMediaProcessTaskSnapshotByTimeOffsetTaskListArrayInput is an input type that accepts ProcedureTemplateMediaProcessTaskSnapshotByTimeOffsetTaskListArray and ProcedureTemplateMediaProcessTaskSnapshotByTimeOffsetTaskListArrayOutput values.
 // You can construct a concrete instance of `ProcedureTemplateMediaProcessTaskSnapshotByTimeOffsetTaskListArrayInput` via:
 //
-//          ProcedureTemplateMediaProcessTaskSnapshotByTimeOffsetTaskListArray{ ProcedureTemplateMediaProcessTaskSnapshotByTimeOffsetTaskListArgs{...} }
+//	ProcedureTemplateMediaProcessTaskSnapshotByTimeOffsetTaskListArray{ ProcedureTemplateMediaProcessTaskSnapshotByTimeOffsetTaskListArgs{...} }
 type ProcedureTemplateMediaProcessTaskSnapshotByTimeOffsetTaskListArrayInput interface {
 	pulumi.Input
 
@@ -1654,6 +2196,13 @@ func (o ProcedureTemplateMediaProcessTaskSnapshotByTimeOffsetTaskListOutput) Ext
 	}).(pulumi.StringArrayOutput)
 }
 
+// List of time points for screencapturing in milliseconds. Note: this field may return null, indicating that no valid values can be obtained.
+func (o ProcedureTemplateMediaProcessTaskSnapshotByTimeOffsetTaskListOutput) TimeOffsetLists() pulumi.Float64ArrayOutput {
+	return o.ApplyT(func(v ProcedureTemplateMediaProcessTaskSnapshotByTimeOffsetTaskList) []float64 {
+		return v.TimeOffsetLists
+	}).(pulumi.Float64ArrayOutput)
+}
+
 // List of up to `10` image or text watermarks. Note: this field may return null, indicating that no valid values can be obtained.
 func (o ProcedureTemplateMediaProcessTaskSnapshotByTimeOffsetTaskListOutput) WatermarkLists() ProcedureTemplateMediaProcessTaskSnapshotByTimeOffsetTaskListWatermarkListArrayOutput {
 	return o.ApplyT(func(v ProcedureTemplateMediaProcessTaskSnapshotByTimeOffsetTaskList) []ProcedureTemplateMediaProcessTaskSnapshotByTimeOffsetTaskListWatermarkList {
@@ -1697,7 +2246,7 @@ type ProcedureTemplateMediaProcessTaskSnapshotByTimeOffsetTaskListWatermarkList 
 // ProcedureTemplateMediaProcessTaskSnapshotByTimeOffsetTaskListWatermarkListInput is an input type that accepts ProcedureTemplateMediaProcessTaskSnapshotByTimeOffsetTaskListWatermarkListArgs and ProcedureTemplateMediaProcessTaskSnapshotByTimeOffsetTaskListWatermarkListOutput values.
 // You can construct a concrete instance of `ProcedureTemplateMediaProcessTaskSnapshotByTimeOffsetTaskListWatermarkListInput` via:
 //
-//          ProcedureTemplateMediaProcessTaskSnapshotByTimeOffsetTaskListWatermarkListArgs{...}
+//	ProcedureTemplateMediaProcessTaskSnapshotByTimeOffsetTaskListWatermarkListArgs{...}
 type ProcedureTemplateMediaProcessTaskSnapshotByTimeOffsetTaskListWatermarkListInput interface {
 	pulumi.Input
 
@@ -1733,7 +2282,7 @@ func (i ProcedureTemplateMediaProcessTaskSnapshotByTimeOffsetTaskListWatermarkLi
 // ProcedureTemplateMediaProcessTaskSnapshotByTimeOffsetTaskListWatermarkListArrayInput is an input type that accepts ProcedureTemplateMediaProcessTaskSnapshotByTimeOffsetTaskListWatermarkListArray and ProcedureTemplateMediaProcessTaskSnapshotByTimeOffsetTaskListWatermarkListArrayOutput values.
 // You can construct a concrete instance of `ProcedureTemplateMediaProcessTaskSnapshotByTimeOffsetTaskListWatermarkListArrayInput` via:
 //
-//          ProcedureTemplateMediaProcessTaskSnapshotByTimeOffsetTaskListWatermarkListArray{ ProcedureTemplateMediaProcessTaskSnapshotByTimeOffsetTaskListWatermarkListArgs{...} }
+//	ProcedureTemplateMediaProcessTaskSnapshotByTimeOffsetTaskListWatermarkListArray{ ProcedureTemplateMediaProcessTaskSnapshotByTimeOffsetTaskListWatermarkListArgs{...} }
 type ProcedureTemplateMediaProcessTaskSnapshotByTimeOffsetTaskListWatermarkListArrayInput interface {
 	pulumi.Input
 
@@ -1825,10 +2374,20 @@ func (o ProcedureTemplateMediaProcessTaskSnapshotByTimeOffsetTaskListWatermarkLi
 }
 
 type ProcedureTemplateMediaProcessTaskTranscodeTaskList struct {
+	// opyright watermark.
+	CopyRightWatermark *ProcedureTemplateMediaProcessTaskTranscodeTaskListCopyRightWatermark `pulumi:"copyRightWatermark"`
 	// Video transcoding template ID.
 	Definition string `pulumi:"definition"`
+	// End time offset of blur in seconds. If this parameter is left empty or `0` is entered, the blur will exist till the last video frame; If this value is greater than `0` (e.g., n), the blur will exist till second n; If this value is smaller than `0` (e.g., -n), the blur will exist till second n before the last video frame.
+	EndTimeOffset *float64 `pulumi:"endTimeOffset"`
+	// List of video opening/closing credits configuration template IDs. You can enter up to 10 IDs.
+	HeadTailLists []ProcedureTemplateMediaProcessTaskTranscodeTaskListHeadTailList `pulumi:"headTailLists"`
 	// List of blurs. Up to 10 ones can be supported.
 	MosaicLists []ProcedureTemplateMediaProcessTaskTranscodeTaskListMosaicList `pulumi:"mosaicLists"`
+	// Start time offset of blur in seconds. If this parameter is left empty or `0` is entered, the blur will appear upon the first video frame. If this parameter is left empty or `0` is entered, the blur will appear upon the first video frame; If this value is greater than `0` (e.g., n), the blur will appear at second n after the first video frame; If this value is smaller than `0` (e.g., -n), the blur will appear at second n before the last video frame.
+	StartTimeOffset *float64 `pulumi:"startTimeOffset"`
+	// Digital watermark.
+	TraceWatermark *ProcedureTemplateMediaProcessTaskTranscodeTaskListTraceWatermark `pulumi:"traceWatermark"`
 	// List of up to `10` image or text watermarks. Note: this field may return null, indicating that no valid values can be obtained.
 	WatermarkLists []ProcedureTemplateMediaProcessTaskTranscodeTaskListWatermarkList `pulumi:"watermarkLists"`
 }
@@ -1836,7 +2395,7 @@ type ProcedureTemplateMediaProcessTaskTranscodeTaskList struct {
 // ProcedureTemplateMediaProcessTaskTranscodeTaskListInput is an input type that accepts ProcedureTemplateMediaProcessTaskTranscodeTaskListArgs and ProcedureTemplateMediaProcessTaskTranscodeTaskListOutput values.
 // You can construct a concrete instance of `ProcedureTemplateMediaProcessTaskTranscodeTaskListInput` via:
 //
-//          ProcedureTemplateMediaProcessTaskTranscodeTaskListArgs{...}
+//	ProcedureTemplateMediaProcessTaskTranscodeTaskListArgs{...}
 type ProcedureTemplateMediaProcessTaskTranscodeTaskListInput interface {
 	pulumi.Input
 
@@ -1845,10 +2404,20 @@ type ProcedureTemplateMediaProcessTaskTranscodeTaskListInput interface {
 }
 
 type ProcedureTemplateMediaProcessTaskTranscodeTaskListArgs struct {
+	// opyright watermark.
+	CopyRightWatermark ProcedureTemplateMediaProcessTaskTranscodeTaskListCopyRightWatermarkPtrInput `pulumi:"copyRightWatermark"`
 	// Video transcoding template ID.
 	Definition pulumi.StringInput `pulumi:"definition"`
+	// End time offset of blur in seconds. If this parameter is left empty or `0` is entered, the blur will exist till the last video frame; If this value is greater than `0` (e.g., n), the blur will exist till second n; If this value is smaller than `0` (e.g., -n), the blur will exist till second n before the last video frame.
+	EndTimeOffset pulumi.Float64PtrInput `pulumi:"endTimeOffset"`
+	// List of video opening/closing credits configuration template IDs. You can enter up to 10 IDs.
+	HeadTailLists ProcedureTemplateMediaProcessTaskTranscodeTaskListHeadTailListArrayInput `pulumi:"headTailLists"`
 	// List of blurs. Up to 10 ones can be supported.
 	MosaicLists ProcedureTemplateMediaProcessTaskTranscodeTaskListMosaicListArrayInput `pulumi:"mosaicLists"`
+	// Start time offset of blur in seconds. If this parameter is left empty or `0` is entered, the blur will appear upon the first video frame. If this parameter is left empty or `0` is entered, the blur will appear upon the first video frame; If this value is greater than `0` (e.g., n), the blur will appear at second n after the first video frame; If this value is smaller than `0` (e.g., -n), the blur will appear at second n before the last video frame.
+	StartTimeOffset pulumi.Float64PtrInput `pulumi:"startTimeOffset"`
+	// Digital watermark.
+	TraceWatermark ProcedureTemplateMediaProcessTaskTranscodeTaskListTraceWatermarkPtrInput `pulumi:"traceWatermark"`
 	// List of up to `10` image or text watermarks. Note: this field may return null, indicating that no valid values can be obtained.
 	WatermarkLists ProcedureTemplateMediaProcessTaskTranscodeTaskListWatermarkListArrayInput `pulumi:"watermarkLists"`
 }
@@ -1868,7 +2437,7 @@ func (i ProcedureTemplateMediaProcessTaskTranscodeTaskListArgs) ToProcedureTempl
 // ProcedureTemplateMediaProcessTaskTranscodeTaskListArrayInput is an input type that accepts ProcedureTemplateMediaProcessTaskTranscodeTaskListArray and ProcedureTemplateMediaProcessTaskTranscodeTaskListArrayOutput values.
 // You can construct a concrete instance of `ProcedureTemplateMediaProcessTaskTranscodeTaskListArrayInput` via:
 //
-//          ProcedureTemplateMediaProcessTaskTranscodeTaskListArray{ ProcedureTemplateMediaProcessTaskTranscodeTaskListArgs{...} }
+//	ProcedureTemplateMediaProcessTaskTranscodeTaskListArray{ ProcedureTemplateMediaProcessTaskTranscodeTaskListArgs{...} }
 type ProcedureTemplateMediaProcessTaskTranscodeTaskListArrayInput interface {
 	pulumi.Input
 
@@ -1904,9 +2473,28 @@ func (o ProcedureTemplateMediaProcessTaskTranscodeTaskListOutput) ToProcedureTem
 	return o
 }
 
+// opyright watermark.
+func (o ProcedureTemplateMediaProcessTaskTranscodeTaskListOutput) CopyRightWatermark() ProcedureTemplateMediaProcessTaskTranscodeTaskListCopyRightWatermarkPtrOutput {
+	return o.ApplyT(func(v ProcedureTemplateMediaProcessTaskTranscodeTaskList) *ProcedureTemplateMediaProcessTaskTranscodeTaskListCopyRightWatermark {
+		return v.CopyRightWatermark
+	}).(ProcedureTemplateMediaProcessTaskTranscodeTaskListCopyRightWatermarkPtrOutput)
+}
+
 // Video transcoding template ID.
 func (o ProcedureTemplateMediaProcessTaskTranscodeTaskListOutput) Definition() pulumi.StringOutput {
 	return o.ApplyT(func(v ProcedureTemplateMediaProcessTaskTranscodeTaskList) string { return v.Definition }).(pulumi.StringOutput)
+}
+
+// End time offset of blur in seconds. If this parameter is left empty or `0` is entered, the blur will exist till the last video frame; If this value is greater than `0` (e.g., n), the blur will exist till second n; If this value is smaller than `0` (e.g., -n), the blur will exist till second n before the last video frame.
+func (o ProcedureTemplateMediaProcessTaskTranscodeTaskListOutput) EndTimeOffset() pulumi.Float64PtrOutput {
+	return o.ApplyT(func(v ProcedureTemplateMediaProcessTaskTranscodeTaskList) *float64 { return v.EndTimeOffset }).(pulumi.Float64PtrOutput)
+}
+
+// List of video opening/closing credits configuration template IDs. You can enter up to 10 IDs.
+func (o ProcedureTemplateMediaProcessTaskTranscodeTaskListOutput) HeadTailLists() ProcedureTemplateMediaProcessTaskTranscodeTaskListHeadTailListArrayOutput {
+	return o.ApplyT(func(v ProcedureTemplateMediaProcessTaskTranscodeTaskList) []ProcedureTemplateMediaProcessTaskTranscodeTaskListHeadTailList {
+		return v.HeadTailLists
+	}).(ProcedureTemplateMediaProcessTaskTranscodeTaskListHeadTailListArrayOutput)
 }
 
 // List of blurs. Up to 10 ones can be supported.
@@ -1914,6 +2502,18 @@ func (o ProcedureTemplateMediaProcessTaskTranscodeTaskListOutput) MosaicLists() 
 	return o.ApplyT(func(v ProcedureTemplateMediaProcessTaskTranscodeTaskList) []ProcedureTemplateMediaProcessTaskTranscodeTaskListMosaicList {
 		return v.MosaicLists
 	}).(ProcedureTemplateMediaProcessTaskTranscodeTaskListMosaicListArrayOutput)
+}
+
+// Start time offset of blur in seconds. If this parameter is left empty or `0` is entered, the blur will appear upon the first video frame. If this parameter is left empty or `0` is entered, the blur will appear upon the first video frame; If this value is greater than `0` (e.g., n), the blur will appear at second n after the first video frame; If this value is smaller than `0` (e.g., -n), the blur will appear at second n before the last video frame.
+func (o ProcedureTemplateMediaProcessTaskTranscodeTaskListOutput) StartTimeOffset() pulumi.Float64PtrOutput {
+	return o.ApplyT(func(v ProcedureTemplateMediaProcessTaskTranscodeTaskList) *float64 { return v.StartTimeOffset }).(pulumi.Float64PtrOutput)
+}
+
+// Digital watermark.
+func (o ProcedureTemplateMediaProcessTaskTranscodeTaskListOutput) TraceWatermark() ProcedureTemplateMediaProcessTaskTranscodeTaskListTraceWatermarkPtrOutput {
+	return o.ApplyT(func(v ProcedureTemplateMediaProcessTaskTranscodeTaskList) *ProcedureTemplateMediaProcessTaskTranscodeTaskListTraceWatermark {
+		return v.TraceWatermark
+	}).(ProcedureTemplateMediaProcessTaskTranscodeTaskListTraceWatermarkPtrOutput)
 }
 
 // List of up to `10` image or text watermarks. Note: this field may return null, indicating that no valid values can be obtained.
@@ -1943,6 +2543,240 @@ func (o ProcedureTemplateMediaProcessTaskTranscodeTaskListArrayOutput) Index(i p
 	}).(ProcedureTemplateMediaProcessTaskTranscodeTaskListOutput)
 }
 
+type ProcedureTemplateMediaProcessTaskTranscodeTaskListCopyRightWatermark struct {
+	// Copyright information, maximum length is 200 characters.
+	Text *string `pulumi:"text"`
+}
+
+// ProcedureTemplateMediaProcessTaskTranscodeTaskListCopyRightWatermarkInput is an input type that accepts ProcedureTemplateMediaProcessTaskTranscodeTaskListCopyRightWatermarkArgs and ProcedureTemplateMediaProcessTaskTranscodeTaskListCopyRightWatermarkOutput values.
+// You can construct a concrete instance of `ProcedureTemplateMediaProcessTaskTranscodeTaskListCopyRightWatermarkInput` via:
+//
+//	ProcedureTemplateMediaProcessTaskTranscodeTaskListCopyRightWatermarkArgs{...}
+type ProcedureTemplateMediaProcessTaskTranscodeTaskListCopyRightWatermarkInput interface {
+	pulumi.Input
+
+	ToProcedureTemplateMediaProcessTaskTranscodeTaskListCopyRightWatermarkOutput() ProcedureTemplateMediaProcessTaskTranscodeTaskListCopyRightWatermarkOutput
+	ToProcedureTemplateMediaProcessTaskTranscodeTaskListCopyRightWatermarkOutputWithContext(context.Context) ProcedureTemplateMediaProcessTaskTranscodeTaskListCopyRightWatermarkOutput
+}
+
+type ProcedureTemplateMediaProcessTaskTranscodeTaskListCopyRightWatermarkArgs struct {
+	// Copyright information, maximum length is 200 characters.
+	Text pulumi.StringPtrInput `pulumi:"text"`
+}
+
+func (ProcedureTemplateMediaProcessTaskTranscodeTaskListCopyRightWatermarkArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ProcedureTemplateMediaProcessTaskTranscodeTaskListCopyRightWatermark)(nil)).Elem()
+}
+
+func (i ProcedureTemplateMediaProcessTaskTranscodeTaskListCopyRightWatermarkArgs) ToProcedureTemplateMediaProcessTaskTranscodeTaskListCopyRightWatermarkOutput() ProcedureTemplateMediaProcessTaskTranscodeTaskListCopyRightWatermarkOutput {
+	return i.ToProcedureTemplateMediaProcessTaskTranscodeTaskListCopyRightWatermarkOutputWithContext(context.Background())
+}
+
+func (i ProcedureTemplateMediaProcessTaskTranscodeTaskListCopyRightWatermarkArgs) ToProcedureTemplateMediaProcessTaskTranscodeTaskListCopyRightWatermarkOutputWithContext(ctx context.Context) ProcedureTemplateMediaProcessTaskTranscodeTaskListCopyRightWatermarkOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ProcedureTemplateMediaProcessTaskTranscodeTaskListCopyRightWatermarkOutput)
+}
+
+func (i ProcedureTemplateMediaProcessTaskTranscodeTaskListCopyRightWatermarkArgs) ToProcedureTemplateMediaProcessTaskTranscodeTaskListCopyRightWatermarkPtrOutput() ProcedureTemplateMediaProcessTaskTranscodeTaskListCopyRightWatermarkPtrOutput {
+	return i.ToProcedureTemplateMediaProcessTaskTranscodeTaskListCopyRightWatermarkPtrOutputWithContext(context.Background())
+}
+
+func (i ProcedureTemplateMediaProcessTaskTranscodeTaskListCopyRightWatermarkArgs) ToProcedureTemplateMediaProcessTaskTranscodeTaskListCopyRightWatermarkPtrOutputWithContext(ctx context.Context) ProcedureTemplateMediaProcessTaskTranscodeTaskListCopyRightWatermarkPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ProcedureTemplateMediaProcessTaskTranscodeTaskListCopyRightWatermarkOutput).ToProcedureTemplateMediaProcessTaskTranscodeTaskListCopyRightWatermarkPtrOutputWithContext(ctx)
+}
+
+// ProcedureTemplateMediaProcessTaskTranscodeTaskListCopyRightWatermarkPtrInput is an input type that accepts ProcedureTemplateMediaProcessTaskTranscodeTaskListCopyRightWatermarkArgs, ProcedureTemplateMediaProcessTaskTranscodeTaskListCopyRightWatermarkPtr and ProcedureTemplateMediaProcessTaskTranscodeTaskListCopyRightWatermarkPtrOutput values.
+// You can construct a concrete instance of `ProcedureTemplateMediaProcessTaskTranscodeTaskListCopyRightWatermarkPtrInput` via:
+//
+//	        ProcedureTemplateMediaProcessTaskTranscodeTaskListCopyRightWatermarkArgs{...}
+//
+//	or:
+//
+//	        nil
+type ProcedureTemplateMediaProcessTaskTranscodeTaskListCopyRightWatermarkPtrInput interface {
+	pulumi.Input
+
+	ToProcedureTemplateMediaProcessTaskTranscodeTaskListCopyRightWatermarkPtrOutput() ProcedureTemplateMediaProcessTaskTranscodeTaskListCopyRightWatermarkPtrOutput
+	ToProcedureTemplateMediaProcessTaskTranscodeTaskListCopyRightWatermarkPtrOutputWithContext(context.Context) ProcedureTemplateMediaProcessTaskTranscodeTaskListCopyRightWatermarkPtrOutput
+}
+
+type procedureTemplateMediaProcessTaskTranscodeTaskListCopyRightWatermarkPtrType ProcedureTemplateMediaProcessTaskTranscodeTaskListCopyRightWatermarkArgs
+
+func ProcedureTemplateMediaProcessTaskTranscodeTaskListCopyRightWatermarkPtr(v *ProcedureTemplateMediaProcessTaskTranscodeTaskListCopyRightWatermarkArgs) ProcedureTemplateMediaProcessTaskTranscodeTaskListCopyRightWatermarkPtrInput {
+	return (*procedureTemplateMediaProcessTaskTranscodeTaskListCopyRightWatermarkPtrType)(v)
+}
+
+func (*procedureTemplateMediaProcessTaskTranscodeTaskListCopyRightWatermarkPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**ProcedureTemplateMediaProcessTaskTranscodeTaskListCopyRightWatermark)(nil)).Elem()
+}
+
+func (i *procedureTemplateMediaProcessTaskTranscodeTaskListCopyRightWatermarkPtrType) ToProcedureTemplateMediaProcessTaskTranscodeTaskListCopyRightWatermarkPtrOutput() ProcedureTemplateMediaProcessTaskTranscodeTaskListCopyRightWatermarkPtrOutput {
+	return i.ToProcedureTemplateMediaProcessTaskTranscodeTaskListCopyRightWatermarkPtrOutputWithContext(context.Background())
+}
+
+func (i *procedureTemplateMediaProcessTaskTranscodeTaskListCopyRightWatermarkPtrType) ToProcedureTemplateMediaProcessTaskTranscodeTaskListCopyRightWatermarkPtrOutputWithContext(ctx context.Context) ProcedureTemplateMediaProcessTaskTranscodeTaskListCopyRightWatermarkPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ProcedureTemplateMediaProcessTaskTranscodeTaskListCopyRightWatermarkPtrOutput)
+}
+
+type ProcedureTemplateMediaProcessTaskTranscodeTaskListCopyRightWatermarkOutput struct{ *pulumi.OutputState }
+
+func (ProcedureTemplateMediaProcessTaskTranscodeTaskListCopyRightWatermarkOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ProcedureTemplateMediaProcessTaskTranscodeTaskListCopyRightWatermark)(nil)).Elem()
+}
+
+func (o ProcedureTemplateMediaProcessTaskTranscodeTaskListCopyRightWatermarkOutput) ToProcedureTemplateMediaProcessTaskTranscodeTaskListCopyRightWatermarkOutput() ProcedureTemplateMediaProcessTaskTranscodeTaskListCopyRightWatermarkOutput {
+	return o
+}
+
+func (o ProcedureTemplateMediaProcessTaskTranscodeTaskListCopyRightWatermarkOutput) ToProcedureTemplateMediaProcessTaskTranscodeTaskListCopyRightWatermarkOutputWithContext(ctx context.Context) ProcedureTemplateMediaProcessTaskTranscodeTaskListCopyRightWatermarkOutput {
+	return o
+}
+
+func (o ProcedureTemplateMediaProcessTaskTranscodeTaskListCopyRightWatermarkOutput) ToProcedureTemplateMediaProcessTaskTranscodeTaskListCopyRightWatermarkPtrOutput() ProcedureTemplateMediaProcessTaskTranscodeTaskListCopyRightWatermarkPtrOutput {
+	return o.ToProcedureTemplateMediaProcessTaskTranscodeTaskListCopyRightWatermarkPtrOutputWithContext(context.Background())
+}
+
+func (o ProcedureTemplateMediaProcessTaskTranscodeTaskListCopyRightWatermarkOutput) ToProcedureTemplateMediaProcessTaskTranscodeTaskListCopyRightWatermarkPtrOutputWithContext(ctx context.Context) ProcedureTemplateMediaProcessTaskTranscodeTaskListCopyRightWatermarkPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v ProcedureTemplateMediaProcessTaskTranscodeTaskListCopyRightWatermark) *ProcedureTemplateMediaProcessTaskTranscodeTaskListCopyRightWatermark {
+		return &v
+	}).(ProcedureTemplateMediaProcessTaskTranscodeTaskListCopyRightWatermarkPtrOutput)
+}
+
+// Copyright information, maximum length is 200 characters.
+func (o ProcedureTemplateMediaProcessTaskTranscodeTaskListCopyRightWatermarkOutput) Text() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ProcedureTemplateMediaProcessTaskTranscodeTaskListCopyRightWatermark) *string { return v.Text }).(pulumi.StringPtrOutput)
+}
+
+type ProcedureTemplateMediaProcessTaskTranscodeTaskListCopyRightWatermarkPtrOutput struct{ *pulumi.OutputState }
+
+func (ProcedureTemplateMediaProcessTaskTranscodeTaskListCopyRightWatermarkPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**ProcedureTemplateMediaProcessTaskTranscodeTaskListCopyRightWatermark)(nil)).Elem()
+}
+
+func (o ProcedureTemplateMediaProcessTaskTranscodeTaskListCopyRightWatermarkPtrOutput) ToProcedureTemplateMediaProcessTaskTranscodeTaskListCopyRightWatermarkPtrOutput() ProcedureTemplateMediaProcessTaskTranscodeTaskListCopyRightWatermarkPtrOutput {
+	return o
+}
+
+func (o ProcedureTemplateMediaProcessTaskTranscodeTaskListCopyRightWatermarkPtrOutput) ToProcedureTemplateMediaProcessTaskTranscodeTaskListCopyRightWatermarkPtrOutputWithContext(ctx context.Context) ProcedureTemplateMediaProcessTaskTranscodeTaskListCopyRightWatermarkPtrOutput {
+	return o
+}
+
+func (o ProcedureTemplateMediaProcessTaskTranscodeTaskListCopyRightWatermarkPtrOutput) Elem() ProcedureTemplateMediaProcessTaskTranscodeTaskListCopyRightWatermarkOutput {
+	return o.ApplyT(func(v *ProcedureTemplateMediaProcessTaskTranscodeTaskListCopyRightWatermark) ProcedureTemplateMediaProcessTaskTranscodeTaskListCopyRightWatermark {
+		if v != nil {
+			return *v
+		}
+		var ret ProcedureTemplateMediaProcessTaskTranscodeTaskListCopyRightWatermark
+		return ret
+	}).(ProcedureTemplateMediaProcessTaskTranscodeTaskListCopyRightWatermarkOutput)
+}
+
+// Copyright information, maximum length is 200 characters.
+func (o ProcedureTemplateMediaProcessTaskTranscodeTaskListCopyRightWatermarkPtrOutput) Text() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ProcedureTemplateMediaProcessTaskTranscodeTaskListCopyRightWatermark) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Text
+	}).(pulumi.StringPtrOutput)
+}
+
+type ProcedureTemplateMediaProcessTaskTranscodeTaskListHeadTailList struct {
+	// Video opening/closing credits configuration template ID.
+	Definition *string `pulumi:"definition"`
+}
+
+// ProcedureTemplateMediaProcessTaskTranscodeTaskListHeadTailListInput is an input type that accepts ProcedureTemplateMediaProcessTaskTranscodeTaskListHeadTailListArgs and ProcedureTemplateMediaProcessTaskTranscodeTaskListHeadTailListOutput values.
+// You can construct a concrete instance of `ProcedureTemplateMediaProcessTaskTranscodeTaskListHeadTailListInput` via:
+//
+//	ProcedureTemplateMediaProcessTaskTranscodeTaskListHeadTailListArgs{...}
+type ProcedureTemplateMediaProcessTaskTranscodeTaskListHeadTailListInput interface {
+	pulumi.Input
+
+	ToProcedureTemplateMediaProcessTaskTranscodeTaskListHeadTailListOutput() ProcedureTemplateMediaProcessTaskTranscodeTaskListHeadTailListOutput
+	ToProcedureTemplateMediaProcessTaskTranscodeTaskListHeadTailListOutputWithContext(context.Context) ProcedureTemplateMediaProcessTaskTranscodeTaskListHeadTailListOutput
+}
+
+type ProcedureTemplateMediaProcessTaskTranscodeTaskListHeadTailListArgs struct {
+	// Video opening/closing credits configuration template ID.
+	Definition pulumi.StringPtrInput `pulumi:"definition"`
+}
+
+func (ProcedureTemplateMediaProcessTaskTranscodeTaskListHeadTailListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ProcedureTemplateMediaProcessTaskTranscodeTaskListHeadTailList)(nil)).Elem()
+}
+
+func (i ProcedureTemplateMediaProcessTaskTranscodeTaskListHeadTailListArgs) ToProcedureTemplateMediaProcessTaskTranscodeTaskListHeadTailListOutput() ProcedureTemplateMediaProcessTaskTranscodeTaskListHeadTailListOutput {
+	return i.ToProcedureTemplateMediaProcessTaskTranscodeTaskListHeadTailListOutputWithContext(context.Background())
+}
+
+func (i ProcedureTemplateMediaProcessTaskTranscodeTaskListHeadTailListArgs) ToProcedureTemplateMediaProcessTaskTranscodeTaskListHeadTailListOutputWithContext(ctx context.Context) ProcedureTemplateMediaProcessTaskTranscodeTaskListHeadTailListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ProcedureTemplateMediaProcessTaskTranscodeTaskListHeadTailListOutput)
+}
+
+// ProcedureTemplateMediaProcessTaskTranscodeTaskListHeadTailListArrayInput is an input type that accepts ProcedureTemplateMediaProcessTaskTranscodeTaskListHeadTailListArray and ProcedureTemplateMediaProcessTaskTranscodeTaskListHeadTailListArrayOutput values.
+// You can construct a concrete instance of `ProcedureTemplateMediaProcessTaskTranscodeTaskListHeadTailListArrayInput` via:
+//
+//	ProcedureTemplateMediaProcessTaskTranscodeTaskListHeadTailListArray{ ProcedureTemplateMediaProcessTaskTranscodeTaskListHeadTailListArgs{...} }
+type ProcedureTemplateMediaProcessTaskTranscodeTaskListHeadTailListArrayInput interface {
+	pulumi.Input
+
+	ToProcedureTemplateMediaProcessTaskTranscodeTaskListHeadTailListArrayOutput() ProcedureTemplateMediaProcessTaskTranscodeTaskListHeadTailListArrayOutput
+	ToProcedureTemplateMediaProcessTaskTranscodeTaskListHeadTailListArrayOutputWithContext(context.Context) ProcedureTemplateMediaProcessTaskTranscodeTaskListHeadTailListArrayOutput
+}
+
+type ProcedureTemplateMediaProcessTaskTranscodeTaskListHeadTailListArray []ProcedureTemplateMediaProcessTaskTranscodeTaskListHeadTailListInput
+
+func (ProcedureTemplateMediaProcessTaskTranscodeTaskListHeadTailListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ProcedureTemplateMediaProcessTaskTranscodeTaskListHeadTailList)(nil)).Elem()
+}
+
+func (i ProcedureTemplateMediaProcessTaskTranscodeTaskListHeadTailListArray) ToProcedureTemplateMediaProcessTaskTranscodeTaskListHeadTailListArrayOutput() ProcedureTemplateMediaProcessTaskTranscodeTaskListHeadTailListArrayOutput {
+	return i.ToProcedureTemplateMediaProcessTaskTranscodeTaskListHeadTailListArrayOutputWithContext(context.Background())
+}
+
+func (i ProcedureTemplateMediaProcessTaskTranscodeTaskListHeadTailListArray) ToProcedureTemplateMediaProcessTaskTranscodeTaskListHeadTailListArrayOutputWithContext(ctx context.Context) ProcedureTemplateMediaProcessTaskTranscodeTaskListHeadTailListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ProcedureTemplateMediaProcessTaskTranscodeTaskListHeadTailListArrayOutput)
+}
+
+type ProcedureTemplateMediaProcessTaskTranscodeTaskListHeadTailListOutput struct{ *pulumi.OutputState }
+
+func (ProcedureTemplateMediaProcessTaskTranscodeTaskListHeadTailListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ProcedureTemplateMediaProcessTaskTranscodeTaskListHeadTailList)(nil)).Elem()
+}
+
+func (o ProcedureTemplateMediaProcessTaskTranscodeTaskListHeadTailListOutput) ToProcedureTemplateMediaProcessTaskTranscodeTaskListHeadTailListOutput() ProcedureTemplateMediaProcessTaskTranscodeTaskListHeadTailListOutput {
+	return o
+}
+
+func (o ProcedureTemplateMediaProcessTaskTranscodeTaskListHeadTailListOutput) ToProcedureTemplateMediaProcessTaskTranscodeTaskListHeadTailListOutputWithContext(ctx context.Context) ProcedureTemplateMediaProcessTaskTranscodeTaskListHeadTailListOutput {
+	return o
+}
+
+// Video opening/closing credits configuration template ID.
+func (o ProcedureTemplateMediaProcessTaskTranscodeTaskListHeadTailListOutput) Definition() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ProcedureTemplateMediaProcessTaskTranscodeTaskListHeadTailList) *string { return v.Definition }).(pulumi.StringPtrOutput)
+}
+
+type ProcedureTemplateMediaProcessTaskTranscodeTaskListHeadTailListArrayOutput struct{ *pulumi.OutputState }
+
+func (ProcedureTemplateMediaProcessTaskTranscodeTaskListHeadTailListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ProcedureTemplateMediaProcessTaskTranscodeTaskListHeadTailList)(nil)).Elem()
+}
+
+func (o ProcedureTemplateMediaProcessTaskTranscodeTaskListHeadTailListArrayOutput) ToProcedureTemplateMediaProcessTaskTranscodeTaskListHeadTailListArrayOutput() ProcedureTemplateMediaProcessTaskTranscodeTaskListHeadTailListArrayOutput {
+	return o
+}
+
+func (o ProcedureTemplateMediaProcessTaskTranscodeTaskListHeadTailListArrayOutput) ToProcedureTemplateMediaProcessTaskTranscodeTaskListHeadTailListArrayOutputWithContext(ctx context.Context) ProcedureTemplateMediaProcessTaskTranscodeTaskListHeadTailListArrayOutput {
+	return o
+}
+
+func (o ProcedureTemplateMediaProcessTaskTranscodeTaskListHeadTailListArrayOutput) Index(i pulumi.IntInput) ProcedureTemplateMediaProcessTaskTranscodeTaskListHeadTailListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) ProcedureTemplateMediaProcessTaskTranscodeTaskListHeadTailList {
+		return vs[0].([]ProcedureTemplateMediaProcessTaskTranscodeTaskListHeadTailList)[vs[1].(int)]
+	}).(ProcedureTemplateMediaProcessTaskTranscodeTaskListHeadTailListOutput)
+}
+
 type ProcedureTemplateMediaProcessTaskTranscodeTaskListMosaicList struct {
 	// Origin position, which currently can only be: `TopLeft`: the origin of coordinates is in the top-left corner of the video, and the origin of the blur is in the top-left corner of the image or text. Default value: TopLeft.
 	CoordinateOrigin *string `pulumi:"coordinateOrigin"`
@@ -1963,7 +2797,7 @@ type ProcedureTemplateMediaProcessTaskTranscodeTaskListMosaicList struct {
 // ProcedureTemplateMediaProcessTaskTranscodeTaskListMosaicListInput is an input type that accepts ProcedureTemplateMediaProcessTaskTranscodeTaskListMosaicListArgs and ProcedureTemplateMediaProcessTaskTranscodeTaskListMosaicListOutput values.
 // You can construct a concrete instance of `ProcedureTemplateMediaProcessTaskTranscodeTaskListMosaicListInput` via:
 //
-//          ProcedureTemplateMediaProcessTaskTranscodeTaskListMosaicListArgs{...}
+//	ProcedureTemplateMediaProcessTaskTranscodeTaskListMosaicListArgs{...}
 type ProcedureTemplateMediaProcessTaskTranscodeTaskListMosaicListInput interface {
 	pulumi.Input
 
@@ -2003,7 +2837,7 @@ func (i ProcedureTemplateMediaProcessTaskTranscodeTaskListMosaicListArgs) ToProc
 // ProcedureTemplateMediaProcessTaskTranscodeTaskListMosaicListArrayInput is an input type that accepts ProcedureTemplateMediaProcessTaskTranscodeTaskListMosaicListArray and ProcedureTemplateMediaProcessTaskTranscodeTaskListMosaicListArrayOutput values.
 // You can construct a concrete instance of `ProcedureTemplateMediaProcessTaskTranscodeTaskListMosaicListArrayInput` via:
 //
-//          ProcedureTemplateMediaProcessTaskTranscodeTaskListMosaicListArray{ ProcedureTemplateMediaProcessTaskTranscodeTaskListMosaicListArgs{...} }
+//	ProcedureTemplateMediaProcessTaskTranscodeTaskListMosaicListArray{ ProcedureTemplateMediaProcessTaskTranscodeTaskListMosaicListArgs{...} }
 type ProcedureTemplateMediaProcessTaskTranscodeTaskListMosaicListArrayInput interface {
 	pulumi.Input
 
@@ -2098,6 +2932,143 @@ func (o ProcedureTemplateMediaProcessTaskTranscodeTaskListMosaicListArrayOutput)
 	}).(ProcedureTemplateMediaProcessTaskTranscodeTaskListMosaicListOutput)
 }
 
+type ProcedureTemplateMediaProcessTaskTranscodeTaskListTraceWatermark struct {
+	// Whether to use digital watermarks. This parameter is required. Valid values: ON, OFF.
+	Switch *string `pulumi:"switch"`
+}
+
+// ProcedureTemplateMediaProcessTaskTranscodeTaskListTraceWatermarkInput is an input type that accepts ProcedureTemplateMediaProcessTaskTranscodeTaskListTraceWatermarkArgs and ProcedureTemplateMediaProcessTaskTranscodeTaskListTraceWatermarkOutput values.
+// You can construct a concrete instance of `ProcedureTemplateMediaProcessTaskTranscodeTaskListTraceWatermarkInput` via:
+//
+//	ProcedureTemplateMediaProcessTaskTranscodeTaskListTraceWatermarkArgs{...}
+type ProcedureTemplateMediaProcessTaskTranscodeTaskListTraceWatermarkInput interface {
+	pulumi.Input
+
+	ToProcedureTemplateMediaProcessTaskTranscodeTaskListTraceWatermarkOutput() ProcedureTemplateMediaProcessTaskTranscodeTaskListTraceWatermarkOutput
+	ToProcedureTemplateMediaProcessTaskTranscodeTaskListTraceWatermarkOutputWithContext(context.Context) ProcedureTemplateMediaProcessTaskTranscodeTaskListTraceWatermarkOutput
+}
+
+type ProcedureTemplateMediaProcessTaskTranscodeTaskListTraceWatermarkArgs struct {
+	// Whether to use digital watermarks. This parameter is required. Valid values: ON, OFF.
+	Switch pulumi.StringPtrInput `pulumi:"switch"`
+}
+
+func (ProcedureTemplateMediaProcessTaskTranscodeTaskListTraceWatermarkArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ProcedureTemplateMediaProcessTaskTranscodeTaskListTraceWatermark)(nil)).Elem()
+}
+
+func (i ProcedureTemplateMediaProcessTaskTranscodeTaskListTraceWatermarkArgs) ToProcedureTemplateMediaProcessTaskTranscodeTaskListTraceWatermarkOutput() ProcedureTemplateMediaProcessTaskTranscodeTaskListTraceWatermarkOutput {
+	return i.ToProcedureTemplateMediaProcessTaskTranscodeTaskListTraceWatermarkOutputWithContext(context.Background())
+}
+
+func (i ProcedureTemplateMediaProcessTaskTranscodeTaskListTraceWatermarkArgs) ToProcedureTemplateMediaProcessTaskTranscodeTaskListTraceWatermarkOutputWithContext(ctx context.Context) ProcedureTemplateMediaProcessTaskTranscodeTaskListTraceWatermarkOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ProcedureTemplateMediaProcessTaskTranscodeTaskListTraceWatermarkOutput)
+}
+
+func (i ProcedureTemplateMediaProcessTaskTranscodeTaskListTraceWatermarkArgs) ToProcedureTemplateMediaProcessTaskTranscodeTaskListTraceWatermarkPtrOutput() ProcedureTemplateMediaProcessTaskTranscodeTaskListTraceWatermarkPtrOutput {
+	return i.ToProcedureTemplateMediaProcessTaskTranscodeTaskListTraceWatermarkPtrOutputWithContext(context.Background())
+}
+
+func (i ProcedureTemplateMediaProcessTaskTranscodeTaskListTraceWatermarkArgs) ToProcedureTemplateMediaProcessTaskTranscodeTaskListTraceWatermarkPtrOutputWithContext(ctx context.Context) ProcedureTemplateMediaProcessTaskTranscodeTaskListTraceWatermarkPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ProcedureTemplateMediaProcessTaskTranscodeTaskListTraceWatermarkOutput).ToProcedureTemplateMediaProcessTaskTranscodeTaskListTraceWatermarkPtrOutputWithContext(ctx)
+}
+
+// ProcedureTemplateMediaProcessTaskTranscodeTaskListTraceWatermarkPtrInput is an input type that accepts ProcedureTemplateMediaProcessTaskTranscodeTaskListTraceWatermarkArgs, ProcedureTemplateMediaProcessTaskTranscodeTaskListTraceWatermarkPtr and ProcedureTemplateMediaProcessTaskTranscodeTaskListTraceWatermarkPtrOutput values.
+// You can construct a concrete instance of `ProcedureTemplateMediaProcessTaskTranscodeTaskListTraceWatermarkPtrInput` via:
+//
+//	        ProcedureTemplateMediaProcessTaskTranscodeTaskListTraceWatermarkArgs{...}
+//
+//	or:
+//
+//	        nil
+type ProcedureTemplateMediaProcessTaskTranscodeTaskListTraceWatermarkPtrInput interface {
+	pulumi.Input
+
+	ToProcedureTemplateMediaProcessTaskTranscodeTaskListTraceWatermarkPtrOutput() ProcedureTemplateMediaProcessTaskTranscodeTaskListTraceWatermarkPtrOutput
+	ToProcedureTemplateMediaProcessTaskTranscodeTaskListTraceWatermarkPtrOutputWithContext(context.Context) ProcedureTemplateMediaProcessTaskTranscodeTaskListTraceWatermarkPtrOutput
+}
+
+type procedureTemplateMediaProcessTaskTranscodeTaskListTraceWatermarkPtrType ProcedureTemplateMediaProcessTaskTranscodeTaskListTraceWatermarkArgs
+
+func ProcedureTemplateMediaProcessTaskTranscodeTaskListTraceWatermarkPtr(v *ProcedureTemplateMediaProcessTaskTranscodeTaskListTraceWatermarkArgs) ProcedureTemplateMediaProcessTaskTranscodeTaskListTraceWatermarkPtrInput {
+	return (*procedureTemplateMediaProcessTaskTranscodeTaskListTraceWatermarkPtrType)(v)
+}
+
+func (*procedureTemplateMediaProcessTaskTranscodeTaskListTraceWatermarkPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**ProcedureTemplateMediaProcessTaskTranscodeTaskListTraceWatermark)(nil)).Elem()
+}
+
+func (i *procedureTemplateMediaProcessTaskTranscodeTaskListTraceWatermarkPtrType) ToProcedureTemplateMediaProcessTaskTranscodeTaskListTraceWatermarkPtrOutput() ProcedureTemplateMediaProcessTaskTranscodeTaskListTraceWatermarkPtrOutput {
+	return i.ToProcedureTemplateMediaProcessTaskTranscodeTaskListTraceWatermarkPtrOutputWithContext(context.Background())
+}
+
+func (i *procedureTemplateMediaProcessTaskTranscodeTaskListTraceWatermarkPtrType) ToProcedureTemplateMediaProcessTaskTranscodeTaskListTraceWatermarkPtrOutputWithContext(ctx context.Context) ProcedureTemplateMediaProcessTaskTranscodeTaskListTraceWatermarkPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ProcedureTemplateMediaProcessTaskTranscodeTaskListTraceWatermarkPtrOutput)
+}
+
+type ProcedureTemplateMediaProcessTaskTranscodeTaskListTraceWatermarkOutput struct{ *pulumi.OutputState }
+
+func (ProcedureTemplateMediaProcessTaskTranscodeTaskListTraceWatermarkOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ProcedureTemplateMediaProcessTaskTranscodeTaskListTraceWatermark)(nil)).Elem()
+}
+
+func (o ProcedureTemplateMediaProcessTaskTranscodeTaskListTraceWatermarkOutput) ToProcedureTemplateMediaProcessTaskTranscodeTaskListTraceWatermarkOutput() ProcedureTemplateMediaProcessTaskTranscodeTaskListTraceWatermarkOutput {
+	return o
+}
+
+func (o ProcedureTemplateMediaProcessTaskTranscodeTaskListTraceWatermarkOutput) ToProcedureTemplateMediaProcessTaskTranscodeTaskListTraceWatermarkOutputWithContext(ctx context.Context) ProcedureTemplateMediaProcessTaskTranscodeTaskListTraceWatermarkOutput {
+	return o
+}
+
+func (o ProcedureTemplateMediaProcessTaskTranscodeTaskListTraceWatermarkOutput) ToProcedureTemplateMediaProcessTaskTranscodeTaskListTraceWatermarkPtrOutput() ProcedureTemplateMediaProcessTaskTranscodeTaskListTraceWatermarkPtrOutput {
+	return o.ToProcedureTemplateMediaProcessTaskTranscodeTaskListTraceWatermarkPtrOutputWithContext(context.Background())
+}
+
+func (o ProcedureTemplateMediaProcessTaskTranscodeTaskListTraceWatermarkOutput) ToProcedureTemplateMediaProcessTaskTranscodeTaskListTraceWatermarkPtrOutputWithContext(ctx context.Context) ProcedureTemplateMediaProcessTaskTranscodeTaskListTraceWatermarkPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v ProcedureTemplateMediaProcessTaskTranscodeTaskListTraceWatermark) *ProcedureTemplateMediaProcessTaskTranscodeTaskListTraceWatermark {
+		return &v
+	}).(ProcedureTemplateMediaProcessTaskTranscodeTaskListTraceWatermarkPtrOutput)
+}
+
+// Whether to use digital watermarks. This parameter is required. Valid values: ON, OFF.
+func (o ProcedureTemplateMediaProcessTaskTranscodeTaskListTraceWatermarkOutput) Switch() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ProcedureTemplateMediaProcessTaskTranscodeTaskListTraceWatermark) *string { return v.Switch }).(pulumi.StringPtrOutput)
+}
+
+type ProcedureTemplateMediaProcessTaskTranscodeTaskListTraceWatermarkPtrOutput struct{ *pulumi.OutputState }
+
+func (ProcedureTemplateMediaProcessTaskTranscodeTaskListTraceWatermarkPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**ProcedureTemplateMediaProcessTaskTranscodeTaskListTraceWatermark)(nil)).Elem()
+}
+
+func (o ProcedureTemplateMediaProcessTaskTranscodeTaskListTraceWatermarkPtrOutput) ToProcedureTemplateMediaProcessTaskTranscodeTaskListTraceWatermarkPtrOutput() ProcedureTemplateMediaProcessTaskTranscodeTaskListTraceWatermarkPtrOutput {
+	return o
+}
+
+func (o ProcedureTemplateMediaProcessTaskTranscodeTaskListTraceWatermarkPtrOutput) ToProcedureTemplateMediaProcessTaskTranscodeTaskListTraceWatermarkPtrOutputWithContext(ctx context.Context) ProcedureTemplateMediaProcessTaskTranscodeTaskListTraceWatermarkPtrOutput {
+	return o
+}
+
+func (o ProcedureTemplateMediaProcessTaskTranscodeTaskListTraceWatermarkPtrOutput) Elem() ProcedureTemplateMediaProcessTaskTranscodeTaskListTraceWatermarkOutput {
+	return o.ApplyT(func(v *ProcedureTemplateMediaProcessTaskTranscodeTaskListTraceWatermark) ProcedureTemplateMediaProcessTaskTranscodeTaskListTraceWatermark {
+		if v != nil {
+			return *v
+		}
+		var ret ProcedureTemplateMediaProcessTaskTranscodeTaskListTraceWatermark
+		return ret
+	}).(ProcedureTemplateMediaProcessTaskTranscodeTaskListTraceWatermarkOutput)
+}
+
+// Whether to use digital watermarks. This parameter is required. Valid values: ON, OFF.
+func (o ProcedureTemplateMediaProcessTaskTranscodeTaskListTraceWatermarkPtrOutput) Switch() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ProcedureTemplateMediaProcessTaskTranscodeTaskListTraceWatermark) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Switch
+	}).(pulumi.StringPtrOutput)
+}
+
 type ProcedureTemplateMediaProcessTaskTranscodeTaskListWatermarkList struct {
 	// Watermarking template ID.
 	Definition string `pulumi:"definition"`
@@ -2114,7 +3085,7 @@ type ProcedureTemplateMediaProcessTaskTranscodeTaskListWatermarkList struct {
 // ProcedureTemplateMediaProcessTaskTranscodeTaskListWatermarkListInput is an input type that accepts ProcedureTemplateMediaProcessTaskTranscodeTaskListWatermarkListArgs and ProcedureTemplateMediaProcessTaskTranscodeTaskListWatermarkListOutput values.
 // You can construct a concrete instance of `ProcedureTemplateMediaProcessTaskTranscodeTaskListWatermarkListInput` via:
 //
-//          ProcedureTemplateMediaProcessTaskTranscodeTaskListWatermarkListArgs{...}
+//	ProcedureTemplateMediaProcessTaskTranscodeTaskListWatermarkListArgs{...}
 type ProcedureTemplateMediaProcessTaskTranscodeTaskListWatermarkListInput interface {
 	pulumi.Input
 
@@ -2150,7 +3121,7 @@ func (i ProcedureTemplateMediaProcessTaskTranscodeTaskListWatermarkListArgs) ToP
 // ProcedureTemplateMediaProcessTaskTranscodeTaskListWatermarkListArrayInput is an input type that accepts ProcedureTemplateMediaProcessTaskTranscodeTaskListWatermarkListArray and ProcedureTemplateMediaProcessTaskTranscodeTaskListWatermarkListArrayOutput values.
 // You can construct a concrete instance of `ProcedureTemplateMediaProcessTaskTranscodeTaskListWatermarkListArrayInput` via:
 //
-//          ProcedureTemplateMediaProcessTaskTranscodeTaskListWatermarkListArray{ ProcedureTemplateMediaProcessTaskTranscodeTaskListWatermarkListArgs{...} }
+//	ProcedureTemplateMediaProcessTaskTranscodeTaskListWatermarkListArray{ ProcedureTemplateMediaProcessTaskTranscodeTaskListWatermarkListArgs{...} }
 type ProcedureTemplateMediaProcessTaskTranscodeTaskListWatermarkListArrayInput interface {
 	pulumi.Input
 
@@ -2235,6 +3206,162 @@ func (o ProcedureTemplateMediaProcessTaskTranscodeTaskListWatermarkListArrayOutp
 	}).(ProcedureTemplateMediaProcessTaskTranscodeTaskListWatermarkListOutput)
 }
 
+type ProcedureTemplateReviewAudioVideoTask struct {
+	// Review template.
+	Definition *string `pulumi:"definition"`
+	// The type of moderated content. Valid values:
+	ReviewContents []string `pulumi:"reviewContents"`
+}
+
+// ProcedureTemplateReviewAudioVideoTaskInput is an input type that accepts ProcedureTemplateReviewAudioVideoTaskArgs and ProcedureTemplateReviewAudioVideoTaskOutput values.
+// You can construct a concrete instance of `ProcedureTemplateReviewAudioVideoTaskInput` via:
+//
+//	ProcedureTemplateReviewAudioVideoTaskArgs{...}
+type ProcedureTemplateReviewAudioVideoTaskInput interface {
+	pulumi.Input
+
+	ToProcedureTemplateReviewAudioVideoTaskOutput() ProcedureTemplateReviewAudioVideoTaskOutput
+	ToProcedureTemplateReviewAudioVideoTaskOutputWithContext(context.Context) ProcedureTemplateReviewAudioVideoTaskOutput
+}
+
+type ProcedureTemplateReviewAudioVideoTaskArgs struct {
+	// Review template.
+	Definition pulumi.StringPtrInput `pulumi:"definition"`
+	// The type of moderated content. Valid values:
+	ReviewContents pulumi.StringArrayInput `pulumi:"reviewContents"`
+}
+
+func (ProcedureTemplateReviewAudioVideoTaskArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ProcedureTemplateReviewAudioVideoTask)(nil)).Elem()
+}
+
+func (i ProcedureTemplateReviewAudioVideoTaskArgs) ToProcedureTemplateReviewAudioVideoTaskOutput() ProcedureTemplateReviewAudioVideoTaskOutput {
+	return i.ToProcedureTemplateReviewAudioVideoTaskOutputWithContext(context.Background())
+}
+
+func (i ProcedureTemplateReviewAudioVideoTaskArgs) ToProcedureTemplateReviewAudioVideoTaskOutputWithContext(ctx context.Context) ProcedureTemplateReviewAudioVideoTaskOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ProcedureTemplateReviewAudioVideoTaskOutput)
+}
+
+func (i ProcedureTemplateReviewAudioVideoTaskArgs) ToProcedureTemplateReviewAudioVideoTaskPtrOutput() ProcedureTemplateReviewAudioVideoTaskPtrOutput {
+	return i.ToProcedureTemplateReviewAudioVideoTaskPtrOutputWithContext(context.Background())
+}
+
+func (i ProcedureTemplateReviewAudioVideoTaskArgs) ToProcedureTemplateReviewAudioVideoTaskPtrOutputWithContext(ctx context.Context) ProcedureTemplateReviewAudioVideoTaskPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ProcedureTemplateReviewAudioVideoTaskOutput).ToProcedureTemplateReviewAudioVideoTaskPtrOutputWithContext(ctx)
+}
+
+// ProcedureTemplateReviewAudioVideoTaskPtrInput is an input type that accepts ProcedureTemplateReviewAudioVideoTaskArgs, ProcedureTemplateReviewAudioVideoTaskPtr and ProcedureTemplateReviewAudioVideoTaskPtrOutput values.
+// You can construct a concrete instance of `ProcedureTemplateReviewAudioVideoTaskPtrInput` via:
+//
+//	        ProcedureTemplateReviewAudioVideoTaskArgs{...}
+//
+//	or:
+//
+//	        nil
+type ProcedureTemplateReviewAudioVideoTaskPtrInput interface {
+	pulumi.Input
+
+	ToProcedureTemplateReviewAudioVideoTaskPtrOutput() ProcedureTemplateReviewAudioVideoTaskPtrOutput
+	ToProcedureTemplateReviewAudioVideoTaskPtrOutputWithContext(context.Context) ProcedureTemplateReviewAudioVideoTaskPtrOutput
+}
+
+type procedureTemplateReviewAudioVideoTaskPtrType ProcedureTemplateReviewAudioVideoTaskArgs
+
+func ProcedureTemplateReviewAudioVideoTaskPtr(v *ProcedureTemplateReviewAudioVideoTaskArgs) ProcedureTemplateReviewAudioVideoTaskPtrInput {
+	return (*procedureTemplateReviewAudioVideoTaskPtrType)(v)
+}
+
+func (*procedureTemplateReviewAudioVideoTaskPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**ProcedureTemplateReviewAudioVideoTask)(nil)).Elem()
+}
+
+func (i *procedureTemplateReviewAudioVideoTaskPtrType) ToProcedureTemplateReviewAudioVideoTaskPtrOutput() ProcedureTemplateReviewAudioVideoTaskPtrOutput {
+	return i.ToProcedureTemplateReviewAudioVideoTaskPtrOutputWithContext(context.Background())
+}
+
+func (i *procedureTemplateReviewAudioVideoTaskPtrType) ToProcedureTemplateReviewAudioVideoTaskPtrOutputWithContext(ctx context.Context) ProcedureTemplateReviewAudioVideoTaskPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ProcedureTemplateReviewAudioVideoTaskPtrOutput)
+}
+
+type ProcedureTemplateReviewAudioVideoTaskOutput struct{ *pulumi.OutputState }
+
+func (ProcedureTemplateReviewAudioVideoTaskOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ProcedureTemplateReviewAudioVideoTask)(nil)).Elem()
+}
+
+func (o ProcedureTemplateReviewAudioVideoTaskOutput) ToProcedureTemplateReviewAudioVideoTaskOutput() ProcedureTemplateReviewAudioVideoTaskOutput {
+	return o
+}
+
+func (o ProcedureTemplateReviewAudioVideoTaskOutput) ToProcedureTemplateReviewAudioVideoTaskOutputWithContext(ctx context.Context) ProcedureTemplateReviewAudioVideoTaskOutput {
+	return o
+}
+
+func (o ProcedureTemplateReviewAudioVideoTaskOutput) ToProcedureTemplateReviewAudioVideoTaskPtrOutput() ProcedureTemplateReviewAudioVideoTaskPtrOutput {
+	return o.ToProcedureTemplateReviewAudioVideoTaskPtrOutputWithContext(context.Background())
+}
+
+func (o ProcedureTemplateReviewAudioVideoTaskOutput) ToProcedureTemplateReviewAudioVideoTaskPtrOutputWithContext(ctx context.Context) ProcedureTemplateReviewAudioVideoTaskPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v ProcedureTemplateReviewAudioVideoTask) *ProcedureTemplateReviewAudioVideoTask {
+		return &v
+	}).(ProcedureTemplateReviewAudioVideoTaskPtrOutput)
+}
+
+// Review template.
+func (o ProcedureTemplateReviewAudioVideoTaskOutput) Definition() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ProcedureTemplateReviewAudioVideoTask) *string { return v.Definition }).(pulumi.StringPtrOutput)
+}
+
+// The type of moderated content. Valid values:
+func (o ProcedureTemplateReviewAudioVideoTaskOutput) ReviewContents() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v ProcedureTemplateReviewAudioVideoTask) []string { return v.ReviewContents }).(pulumi.StringArrayOutput)
+}
+
+type ProcedureTemplateReviewAudioVideoTaskPtrOutput struct{ *pulumi.OutputState }
+
+func (ProcedureTemplateReviewAudioVideoTaskPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**ProcedureTemplateReviewAudioVideoTask)(nil)).Elem()
+}
+
+func (o ProcedureTemplateReviewAudioVideoTaskPtrOutput) ToProcedureTemplateReviewAudioVideoTaskPtrOutput() ProcedureTemplateReviewAudioVideoTaskPtrOutput {
+	return o
+}
+
+func (o ProcedureTemplateReviewAudioVideoTaskPtrOutput) ToProcedureTemplateReviewAudioVideoTaskPtrOutputWithContext(ctx context.Context) ProcedureTemplateReviewAudioVideoTaskPtrOutput {
+	return o
+}
+
+func (o ProcedureTemplateReviewAudioVideoTaskPtrOutput) Elem() ProcedureTemplateReviewAudioVideoTaskOutput {
+	return o.ApplyT(func(v *ProcedureTemplateReviewAudioVideoTask) ProcedureTemplateReviewAudioVideoTask {
+		if v != nil {
+			return *v
+		}
+		var ret ProcedureTemplateReviewAudioVideoTask
+		return ret
+	}).(ProcedureTemplateReviewAudioVideoTaskOutput)
+}
+
+// Review template.
+func (o ProcedureTemplateReviewAudioVideoTaskPtrOutput) Definition() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ProcedureTemplateReviewAudioVideoTask) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Definition
+	}).(pulumi.StringPtrOutput)
+}
+
+// The type of moderated content. Valid values:
+func (o ProcedureTemplateReviewAudioVideoTaskPtrOutput) ReviewContents() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *ProcedureTemplateReviewAudioVideoTask) []string {
+		if v == nil {
+			return nil
+		}
+		return v.ReviewContents
+	}).(pulumi.StringArrayOutput)
+}
+
 type SuperPlayerConfigDrmStreamingInfo struct {
 	// ID of the adaptive dynamic streaming template whose protection type is `SimpleAES`.
 	SimpleAesDefinition *string `pulumi:"simpleAesDefinition"`
@@ -2243,7 +3370,7 @@ type SuperPlayerConfigDrmStreamingInfo struct {
 // SuperPlayerConfigDrmStreamingInfoInput is an input type that accepts SuperPlayerConfigDrmStreamingInfoArgs and SuperPlayerConfigDrmStreamingInfoOutput values.
 // You can construct a concrete instance of `SuperPlayerConfigDrmStreamingInfoInput` via:
 //
-//          SuperPlayerConfigDrmStreamingInfoArgs{...}
+//	SuperPlayerConfigDrmStreamingInfoArgs{...}
 type SuperPlayerConfigDrmStreamingInfoInput interface {
 	pulumi.Input
 
@@ -2279,11 +3406,11 @@ func (i SuperPlayerConfigDrmStreamingInfoArgs) ToSuperPlayerConfigDrmStreamingIn
 // SuperPlayerConfigDrmStreamingInfoPtrInput is an input type that accepts SuperPlayerConfigDrmStreamingInfoArgs, SuperPlayerConfigDrmStreamingInfoPtr and SuperPlayerConfigDrmStreamingInfoPtrOutput values.
 // You can construct a concrete instance of `SuperPlayerConfigDrmStreamingInfoPtrInput` via:
 //
-//          SuperPlayerConfigDrmStreamingInfoArgs{...}
+//	        SuperPlayerConfigDrmStreamingInfoArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type SuperPlayerConfigDrmStreamingInfoPtrInput interface {
 	pulumi.Input
 
@@ -2382,7 +3509,7 @@ type SuperPlayerConfigResolutionName struct {
 // SuperPlayerConfigResolutionNameInput is an input type that accepts SuperPlayerConfigResolutionNameArgs and SuperPlayerConfigResolutionNameOutput values.
 // You can construct a concrete instance of `SuperPlayerConfigResolutionNameInput` via:
 //
-//          SuperPlayerConfigResolutionNameArgs{...}
+//	SuperPlayerConfigResolutionNameArgs{...}
 type SuperPlayerConfigResolutionNameInput interface {
 	pulumi.Input
 
@@ -2412,7 +3539,7 @@ func (i SuperPlayerConfigResolutionNameArgs) ToSuperPlayerConfigResolutionNameOu
 // SuperPlayerConfigResolutionNameArrayInput is an input type that accepts SuperPlayerConfigResolutionNameArray and SuperPlayerConfigResolutionNameArrayOutput values.
 // You can construct a concrete instance of `SuperPlayerConfigResolutionNameArrayInput` via:
 //
-//          SuperPlayerConfigResolutionNameArray{ SuperPlayerConfigResolutionNameArgs{...} }
+//	SuperPlayerConfigResolutionNameArray{ SuperPlayerConfigResolutionNameArgs{...} }
 type SuperPlayerConfigResolutionNameArrayInput interface {
 	pulumi.Input
 
@@ -2478,6 +3605,1246 @@ func (o SuperPlayerConfigResolutionNameArrayOutput) Index(i pulumi.IntInput) Sup
 	}).(SuperPlayerConfigResolutionNameOutput)
 }
 
+type TranscodeTemplateAudioTemplate struct {
+	// Audio channel system. Valid values:1: mono-channel2: dual-channel6: stereoYou cannot set the sound channel as stereo for media files in container formats for audios (FLAC, OGG, MP3, M4A).Default value: 2.
+	AudioChannel *int `pulumi:"audioChannel"`
+	// Audio stream bitrate in Kbps. Value range: 0 and [26, 256].If the value is 0, the bitrate of the audio stream will be the same as that of the original audio.
+	Bitrate int `pulumi:"bitrate"`
+	// The audio codec.If `Container` is `mp3`, the valid value is:`libmp3lame`If `Container` is `ogg` or `flac`, the valid value is:`flac`If `Container` is `m4a`, the valid values are:`libfdkAac``libmp3lame``ac3`If `Container` is `mp4` or `flv`, the valid values are:`libfdkAac` (Recommended for MP4)`libmp3lame` (Recommended for FLV)`mp2`If `Container` is `hls`, the valid value is:`libfdkAac`If `Format` is `HLS` or `MPEG-DASH`, the valid value is:`libfdkAac`If `Container` is `wav`, the valid value is:`pcm16`.
+	Codec string `pulumi:"codec"`
+	// The audio sample rate. Valid values:`16000` (valid only if `Codec` is `pcm16`)`32000``44100``48000`Unit: Hz.
+	SampleRate int `pulumi:"sampleRate"`
+}
+
+// TranscodeTemplateAudioTemplateInput is an input type that accepts TranscodeTemplateAudioTemplateArgs and TranscodeTemplateAudioTemplateOutput values.
+// You can construct a concrete instance of `TranscodeTemplateAudioTemplateInput` via:
+//
+//	TranscodeTemplateAudioTemplateArgs{...}
+type TranscodeTemplateAudioTemplateInput interface {
+	pulumi.Input
+
+	ToTranscodeTemplateAudioTemplateOutput() TranscodeTemplateAudioTemplateOutput
+	ToTranscodeTemplateAudioTemplateOutputWithContext(context.Context) TranscodeTemplateAudioTemplateOutput
+}
+
+type TranscodeTemplateAudioTemplateArgs struct {
+	// Audio channel system. Valid values:1: mono-channel2: dual-channel6: stereoYou cannot set the sound channel as stereo for media files in container formats for audios (FLAC, OGG, MP3, M4A).Default value: 2.
+	AudioChannel pulumi.IntPtrInput `pulumi:"audioChannel"`
+	// Audio stream bitrate in Kbps. Value range: 0 and [26, 256].If the value is 0, the bitrate of the audio stream will be the same as that of the original audio.
+	Bitrate pulumi.IntInput `pulumi:"bitrate"`
+	// The audio codec.If `Container` is `mp3`, the valid value is:`libmp3lame`If `Container` is `ogg` or `flac`, the valid value is:`flac`If `Container` is `m4a`, the valid values are:`libfdkAac``libmp3lame``ac3`If `Container` is `mp4` or `flv`, the valid values are:`libfdkAac` (Recommended for MP4)`libmp3lame` (Recommended for FLV)`mp2`If `Container` is `hls`, the valid value is:`libfdkAac`If `Format` is `HLS` or `MPEG-DASH`, the valid value is:`libfdkAac`If `Container` is `wav`, the valid value is:`pcm16`.
+	Codec pulumi.StringInput `pulumi:"codec"`
+	// The audio sample rate. Valid values:`16000` (valid only if `Codec` is `pcm16`)`32000``44100``48000`Unit: Hz.
+	SampleRate pulumi.IntInput `pulumi:"sampleRate"`
+}
+
+func (TranscodeTemplateAudioTemplateArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*TranscodeTemplateAudioTemplate)(nil)).Elem()
+}
+
+func (i TranscodeTemplateAudioTemplateArgs) ToTranscodeTemplateAudioTemplateOutput() TranscodeTemplateAudioTemplateOutput {
+	return i.ToTranscodeTemplateAudioTemplateOutputWithContext(context.Background())
+}
+
+func (i TranscodeTemplateAudioTemplateArgs) ToTranscodeTemplateAudioTemplateOutputWithContext(ctx context.Context) TranscodeTemplateAudioTemplateOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(TranscodeTemplateAudioTemplateOutput)
+}
+
+func (i TranscodeTemplateAudioTemplateArgs) ToTranscodeTemplateAudioTemplatePtrOutput() TranscodeTemplateAudioTemplatePtrOutput {
+	return i.ToTranscodeTemplateAudioTemplatePtrOutputWithContext(context.Background())
+}
+
+func (i TranscodeTemplateAudioTemplateArgs) ToTranscodeTemplateAudioTemplatePtrOutputWithContext(ctx context.Context) TranscodeTemplateAudioTemplatePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(TranscodeTemplateAudioTemplateOutput).ToTranscodeTemplateAudioTemplatePtrOutputWithContext(ctx)
+}
+
+// TranscodeTemplateAudioTemplatePtrInput is an input type that accepts TranscodeTemplateAudioTemplateArgs, TranscodeTemplateAudioTemplatePtr and TranscodeTemplateAudioTemplatePtrOutput values.
+// You can construct a concrete instance of `TranscodeTemplateAudioTemplatePtrInput` via:
+//
+//	        TranscodeTemplateAudioTemplateArgs{...}
+//
+//	or:
+//
+//	        nil
+type TranscodeTemplateAudioTemplatePtrInput interface {
+	pulumi.Input
+
+	ToTranscodeTemplateAudioTemplatePtrOutput() TranscodeTemplateAudioTemplatePtrOutput
+	ToTranscodeTemplateAudioTemplatePtrOutputWithContext(context.Context) TranscodeTemplateAudioTemplatePtrOutput
+}
+
+type transcodeTemplateAudioTemplatePtrType TranscodeTemplateAudioTemplateArgs
+
+func TranscodeTemplateAudioTemplatePtr(v *TranscodeTemplateAudioTemplateArgs) TranscodeTemplateAudioTemplatePtrInput {
+	return (*transcodeTemplateAudioTemplatePtrType)(v)
+}
+
+func (*transcodeTemplateAudioTemplatePtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**TranscodeTemplateAudioTemplate)(nil)).Elem()
+}
+
+func (i *transcodeTemplateAudioTemplatePtrType) ToTranscodeTemplateAudioTemplatePtrOutput() TranscodeTemplateAudioTemplatePtrOutput {
+	return i.ToTranscodeTemplateAudioTemplatePtrOutputWithContext(context.Background())
+}
+
+func (i *transcodeTemplateAudioTemplatePtrType) ToTranscodeTemplateAudioTemplatePtrOutputWithContext(ctx context.Context) TranscodeTemplateAudioTemplatePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(TranscodeTemplateAudioTemplatePtrOutput)
+}
+
+type TranscodeTemplateAudioTemplateOutput struct{ *pulumi.OutputState }
+
+func (TranscodeTemplateAudioTemplateOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*TranscodeTemplateAudioTemplate)(nil)).Elem()
+}
+
+func (o TranscodeTemplateAudioTemplateOutput) ToTranscodeTemplateAudioTemplateOutput() TranscodeTemplateAudioTemplateOutput {
+	return o
+}
+
+func (o TranscodeTemplateAudioTemplateOutput) ToTranscodeTemplateAudioTemplateOutputWithContext(ctx context.Context) TranscodeTemplateAudioTemplateOutput {
+	return o
+}
+
+func (o TranscodeTemplateAudioTemplateOutput) ToTranscodeTemplateAudioTemplatePtrOutput() TranscodeTemplateAudioTemplatePtrOutput {
+	return o.ToTranscodeTemplateAudioTemplatePtrOutputWithContext(context.Background())
+}
+
+func (o TranscodeTemplateAudioTemplateOutput) ToTranscodeTemplateAudioTemplatePtrOutputWithContext(ctx context.Context) TranscodeTemplateAudioTemplatePtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v TranscodeTemplateAudioTemplate) *TranscodeTemplateAudioTemplate {
+		return &v
+	}).(TranscodeTemplateAudioTemplatePtrOutput)
+}
+
+// Audio channel system. Valid values:1: mono-channel2: dual-channel6: stereoYou cannot set the sound channel as stereo for media files in container formats for audios (FLAC, OGG, MP3, M4A).Default value: 2.
+func (o TranscodeTemplateAudioTemplateOutput) AudioChannel() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v TranscodeTemplateAudioTemplate) *int { return v.AudioChannel }).(pulumi.IntPtrOutput)
+}
+
+// Audio stream bitrate in Kbps. Value range: 0 and [26, 256].If the value is 0, the bitrate of the audio stream will be the same as that of the original audio.
+func (o TranscodeTemplateAudioTemplateOutput) Bitrate() pulumi.IntOutput {
+	return o.ApplyT(func(v TranscodeTemplateAudioTemplate) int { return v.Bitrate }).(pulumi.IntOutput)
+}
+
+// The audio codec.If `Container` is `mp3`, the valid value is:`libmp3lame`If `Container` is `ogg` or `flac`, the valid value is:`flac`If `Container` is `m4a`, the valid values are:`libfdkAac“libmp3lame“ac3`If `Container` is `mp4` or `flv`, the valid values are:`libfdkAac` (Recommended for MP4)`libmp3lame` (Recommended for FLV)`mp2`If `Container` is `hls`, the valid value is:`libfdkAac`If `Format` is `HLS` or `MPEG-DASH`, the valid value is:`libfdkAac`If `Container` is `wav`, the valid value is:`pcm16`.
+func (o TranscodeTemplateAudioTemplateOutput) Codec() pulumi.StringOutput {
+	return o.ApplyT(func(v TranscodeTemplateAudioTemplate) string { return v.Codec }).(pulumi.StringOutput)
+}
+
+// The audio sample rate. Valid values:`16000` (valid only if `Codec` is `pcm16`)`32000“44100“48000`Unit: Hz.
+func (o TranscodeTemplateAudioTemplateOutput) SampleRate() pulumi.IntOutput {
+	return o.ApplyT(func(v TranscodeTemplateAudioTemplate) int { return v.SampleRate }).(pulumi.IntOutput)
+}
+
+type TranscodeTemplateAudioTemplatePtrOutput struct{ *pulumi.OutputState }
+
+func (TranscodeTemplateAudioTemplatePtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**TranscodeTemplateAudioTemplate)(nil)).Elem()
+}
+
+func (o TranscodeTemplateAudioTemplatePtrOutput) ToTranscodeTemplateAudioTemplatePtrOutput() TranscodeTemplateAudioTemplatePtrOutput {
+	return o
+}
+
+func (o TranscodeTemplateAudioTemplatePtrOutput) ToTranscodeTemplateAudioTemplatePtrOutputWithContext(ctx context.Context) TranscodeTemplateAudioTemplatePtrOutput {
+	return o
+}
+
+func (o TranscodeTemplateAudioTemplatePtrOutput) Elem() TranscodeTemplateAudioTemplateOutput {
+	return o.ApplyT(func(v *TranscodeTemplateAudioTemplate) TranscodeTemplateAudioTemplate {
+		if v != nil {
+			return *v
+		}
+		var ret TranscodeTemplateAudioTemplate
+		return ret
+	}).(TranscodeTemplateAudioTemplateOutput)
+}
+
+// Audio channel system. Valid values:1: mono-channel2: dual-channel6: stereoYou cannot set the sound channel as stereo for media files in container formats for audios (FLAC, OGG, MP3, M4A).Default value: 2.
+func (o TranscodeTemplateAudioTemplatePtrOutput) AudioChannel() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *TranscodeTemplateAudioTemplate) *int {
+		if v == nil {
+			return nil
+		}
+		return v.AudioChannel
+	}).(pulumi.IntPtrOutput)
+}
+
+// Audio stream bitrate in Kbps. Value range: 0 and [26, 256].If the value is 0, the bitrate of the audio stream will be the same as that of the original audio.
+func (o TranscodeTemplateAudioTemplatePtrOutput) Bitrate() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *TranscodeTemplateAudioTemplate) *int {
+		if v == nil {
+			return nil
+		}
+		return &v.Bitrate
+	}).(pulumi.IntPtrOutput)
+}
+
+// The audio codec.If `Container` is `mp3`, the valid value is:`libmp3lame`If `Container` is `ogg` or `flac`, the valid value is:`flac`If `Container` is `m4a`, the valid values are:`libfdkAac“libmp3lame“ac3`If `Container` is `mp4` or `flv`, the valid values are:`libfdkAac` (Recommended for MP4)`libmp3lame` (Recommended for FLV)`mp2`If `Container` is `hls`, the valid value is:`libfdkAac`If `Format` is `HLS` or `MPEG-DASH`, the valid value is:`libfdkAac`If `Container` is `wav`, the valid value is:`pcm16`.
+func (o TranscodeTemplateAudioTemplatePtrOutput) Codec() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *TranscodeTemplateAudioTemplate) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Codec
+	}).(pulumi.StringPtrOutput)
+}
+
+// The audio sample rate. Valid values:`16000` (valid only if `Codec` is `pcm16`)`32000“44100“48000`Unit: Hz.
+func (o TranscodeTemplateAudioTemplatePtrOutput) SampleRate() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *TranscodeTemplateAudioTemplate) *int {
+		if v == nil {
+			return nil
+		}
+		return &v.SampleRate
+	}).(pulumi.IntPtrOutput)
+}
+
+type TranscodeTemplateTehdConfig struct {
+	// Maximum bitrate, which is valid when `Type` is `TESHD`.If this parameter is left blank or 0 is entered, there will be no upper limit for bitrate.
+	MaxVideoBitrate *int `pulumi:"maxVideoBitrate"`
+	// TESHD transcoding type. Valid values: TEHD-100, OFF (default).
+	Type string `pulumi:"type"`
+}
+
+// TranscodeTemplateTehdConfigInput is an input type that accepts TranscodeTemplateTehdConfigArgs and TranscodeTemplateTehdConfigOutput values.
+// You can construct a concrete instance of `TranscodeTemplateTehdConfigInput` via:
+//
+//	TranscodeTemplateTehdConfigArgs{...}
+type TranscodeTemplateTehdConfigInput interface {
+	pulumi.Input
+
+	ToTranscodeTemplateTehdConfigOutput() TranscodeTemplateTehdConfigOutput
+	ToTranscodeTemplateTehdConfigOutputWithContext(context.Context) TranscodeTemplateTehdConfigOutput
+}
+
+type TranscodeTemplateTehdConfigArgs struct {
+	// Maximum bitrate, which is valid when `Type` is `TESHD`.If this parameter is left blank or 0 is entered, there will be no upper limit for bitrate.
+	MaxVideoBitrate pulumi.IntPtrInput `pulumi:"maxVideoBitrate"`
+	// TESHD transcoding type. Valid values: TEHD-100, OFF (default).
+	Type pulumi.StringInput `pulumi:"type"`
+}
+
+func (TranscodeTemplateTehdConfigArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*TranscodeTemplateTehdConfig)(nil)).Elem()
+}
+
+func (i TranscodeTemplateTehdConfigArgs) ToTranscodeTemplateTehdConfigOutput() TranscodeTemplateTehdConfigOutput {
+	return i.ToTranscodeTemplateTehdConfigOutputWithContext(context.Background())
+}
+
+func (i TranscodeTemplateTehdConfigArgs) ToTranscodeTemplateTehdConfigOutputWithContext(ctx context.Context) TranscodeTemplateTehdConfigOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(TranscodeTemplateTehdConfigOutput)
+}
+
+func (i TranscodeTemplateTehdConfigArgs) ToTranscodeTemplateTehdConfigPtrOutput() TranscodeTemplateTehdConfigPtrOutput {
+	return i.ToTranscodeTemplateTehdConfigPtrOutputWithContext(context.Background())
+}
+
+func (i TranscodeTemplateTehdConfigArgs) ToTranscodeTemplateTehdConfigPtrOutputWithContext(ctx context.Context) TranscodeTemplateTehdConfigPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(TranscodeTemplateTehdConfigOutput).ToTranscodeTemplateTehdConfigPtrOutputWithContext(ctx)
+}
+
+// TranscodeTemplateTehdConfigPtrInput is an input type that accepts TranscodeTemplateTehdConfigArgs, TranscodeTemplateTehdConfigPtr and TranscodeTemplateTehdConfigPtrOutput values.
+// You can construct a concrete instance of `TranscodeTemplateTehdConfigPtrInput` via:
+//
+//	        TranscodeTemplateTehdConfigArgs{...}
+//
+//	or:
+//
+//	        nil
+type TranscodeTemplateTehdConfigPtrInput interface {
+	pulumi.Input
+
+	ToTranscodeTemplateTehdConfigPtrOutput() TranscodeTemplateTehdConfigPtrOutput
+	ToTranscodeTemplateTehdConfigPtrOutputWithContext(context.Context) TranscodeTemplateTehdConfigPtrOutput
+}
+
+type transcodeTemplateTehdConfigPtrType TranscodeTemplateTehdConfigArgs
+
+func TranscodeTemplateTehdConfigPtr(v *TranscodeTemplateTehdConfigArgs) TranscodeTemplateTehdConfigPtrInput {
+	return (*transcodeTemplateTehdConfigPtrType)(v)
+}
+
+func (*transcodeTemplateTehdConfigPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**TranscodeTemplateTehdConfig)(nil)).Elem()
+}
+
+func (i *transcodeTemplateTehdConfigPtrType) ToTranscodeTemplateTehdConfigPtrOutput() TranscodeTemplateTehdConfigPtrOutput {
+	return i.ToTranscodeTemplateTehdConfigPtrOutputWithContext(context.Background())
+}
+
+func (i *transcodeTemplateTehdConfigPtrType) ToTranscodeTemplateTehdConfigPtrOutputWithContext(ctx context.Context) TranscodeTemplateTehdConfigPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(TranscodeTemplateTehdConfigPtrOutput)
+}
+
+type TranscodeTemplateTehdConfigOutput struct{ *pulumi.OutputState }
+
+func (TranscodeTemplateTehdConfigOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*TranscodeTemplateTehdConfig)(nil)).Elem()
+}
+
+func (o TranscodeTemplateTehdConfigOutput) ToTranscodeTemplateTehdConfigOutput() TranscodeTemplateTehdConfigOutput {
+	return o
+}
+
+func (o TranscodeTemplateTehdConfigOutput) ToTranscodeTemplateTehdConfigOutputWithContext(ctx context.Context) TranscodeTemplateTehdConfigOutput {
+	return o
+}
+
+func (o TranscodeTemplateTehdConfigOutput) ToTranscodeTemplateTehdConfigPtrOutput() TranscodeTemplateTehdConfigPtrOutput {
+	return o.ToTranscodeTemplateTehdConfigPtrOutputWithContext(context.Background())
+}
+
+func (o TranscodeTemplateTehdConfigOutput) ToTranscodeTemplateTehdConfigPtrOutputWithContext(ctx context.Context) TranscodeTemplateTehdConfigPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v TranscodeTemplateTehdConfig) *TranscodeTemplateTehdConfig {
+		return &v
+	}).(TranscodeTemplateTehdConfigPtrOutput)
+}
+
+// Maximum bitrate, which is valid when `Type` is `TESHD`.If this parameter is left blank or 0 is entered, there will be no upper limit for bitrate.
+func (o TranscodeTemplateTehdConfigOutput) MaxVideoBitrate() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v TranscodeTemplateTehdConfig) *int { return v.MaxVideoBitrate }).(pulumi.IntPtrOutput)
+}
+
+// TESHD transcoding type. Valid values: TEHD-100, OFF (default).
+func (o TranscodeTemplateTehdConfigOutput) Type() pulumi.StringOutput {
+	return o.ApplyT(func(v TranscodeTemplateTehdConfig) string { return v.Type }).(pulumi.StringOutput)
+}
+
+type TranscodeTemplateTehdConfigPtrOutput struct{ *pulumi.OutputState }
+
+func (TranscodeTemplateTehdConfigPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**TranscodeTemplateTehdConfig)(nil)).Elem()
+}
+
+func (o TranscodeTemplateTehdConfigPtrOutput) ToTranscodeTemplateTehdConfigPtrOutput() TranscodeTemplateTehdConfigPtrOutput {
+	return o
+}
+
+func (o TranscodeTemplateTehdConfigPtrOutput) ToTranscodeTemplateTehdConfigPtrOutputWithContext(ctx context.Context) TranscodeTemplateTehdConfigPtrOutput {
+	return o
+}
+
+func (o TranscodeTemplateTehdConfigPtrOutput) Elem() TranscodeTemplateTehdConfigOutput {
+	return o.ApplyT(func(v *TranscodeTemplateTehdConfig) TranscodeTemplateTehdConfig {
+		if v != nil {
+			return *v
+		}
+		var ret TranscodeTemplateTehdConfig
+		return ret
+	}).(TranscodeTemplateTehdConfigOutput)
+}
+
+// Maximum bitrate, which is valid when `Type` is `TESHD`.If this parameter is left blank or 0 is entered, there will be no upper limit for bitrate.
+func (o TranscodeTemplateTehdConfigPtrOutput) MaxVideoBitrate() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *TranscodeTemplateTehdConfig) *int {
+		if v == nil {
+			return nil
+		}
+		return v.MaxVideoBitrate
+	}).(pulumi.IntPtrOutput)
+}
+
+// TESHD transcoding type. Valid values: TEHD-100, OFF (default).
+func (o TranscodeTemplateTehdConfigPtrOutput) Type() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *TranscodeTemplateTehdConfig) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Type
+	}).(pulumi.StringPtrOutput)
+}
+
+type TranscodeTemplateVideoTemplate struct {
+	// Bitrate of video stream in Kbps. Value range: 0 and [128, 35,000].If the value is 0, the bitrate of the video will be the same as that of the source video.
+	Bitrate int `pulumi:"bitrate"`
+	// The video codec. Valid values:libx264: H.264; libx265: H.265; av1: AOMedia Video 1; H.266: H.266. The AOMedia Video 1 and H.266 codecs can only be used for MP4 files. Only CRF is supported for H.266 currently.
+	Codec string `pulumi:"codec"`
+	// The codec tag. This parameter is valid only if the H.265 codec is used. Valid values:hvc1hev1Default value: hvc1.
+	CodecTag *string `pulumi:"codecTag"`
+	// Fill type, the way of processing a screenshot when the configured aspect ratio is different from that of the source video. Valid values:stretch: stretches the video image frame by frame to fill the screen. The video image may become squashed or stretched after transcoding.black: fills the uncovered area with black color, without changing the image&#39;s aspect ratio.white: fills the uncovered area with white color, without changing the image&#39;s aspect ratio.gauss: applies Gaussian blur to the uncovered area, without changing the image&#39;s aspect ratio.Default value: black.
+	FillType *string `pulumi:"fillType"`
+	// Video frame rate in Hz. Value range: [0,100].If the value is 0, the frame rate will be the same as that of the source video.
+	Fps int `pulumi:"fps"`
+	// I-frame interval in frames. Valid values: 0 and 1-100000.When this parameter is set to 0 or left empty, `Gop` will be automatically set.
+	Gop *int `pulumi:"gop"`
+	// The maximum video height (or short side) in pixels. Value range: 0 and [128, 8192].If both `Width` and `Height` are 0, the output resolution will be the same as that of the source video.If `Width` is 0 and `Height` is not, the video width will be proportionally scaled.If `Width` is not 0 and `Height` is, the video height will be proportionally scaled.If neither `Width` nor `Height` is 0, the specified width and height will be used.Default value: 0.
+	Height *int `pulumi:"height"`
+	// Whether to output an HDR (high dynamic range) video if the source video is HDR. Valid values:ON: If the source video is HDR, output an HDR video; if not, output an SDR (standard dynamic range) video.OFF: Output an SDR video regardless of whether the source video is HDR.Default value: OFF.
+	PreserveHdrSwitch *string `pulumi:"preserveHdrSwitch"`
+	// Resolution adaption. Valid values:open: enabled. In this case, `Width` represents the long side of a video, while `Height` the short side;close: disabled. In this case, `Width` represents the width of a video, while `Height` the height.Default value: open.Note: this field may return null, indicating that no valid values can be obtained.
+	ResolutionAdaptive *string `pulumi:"resolutionAdaptive"`
+	// The video constant rate factor (CRF). Value range: 1-51.If this parameter is specified, CRF encoding will be used and the bitrate parameter will be ignored.If `Codec` is `H.266`, this parameter is required (`28` is recommended).We don't recommend using this parameter unless you have special requirements.
+	Vcrf *int `pulumi:"vcrf"`
+	// The maximum video width (or long side) in pixels. Value range: 0 and [128, 8192].If both `Width` and `Height` are 0, the output resolution will be the same as that of the source video.If `Width` is 0 and `Height` is not, the video width will be proportionally scaled.If `Width` is not 0 and `Height` is, the video height will be proportionally scaled.If neither `Width` nor `Height` is 0, the specified width and height will be used.Default value: 0.
+	Width *int `pulumi:"width"`
+}
+
+// TranscodeTemplateVideoTemplateInput is an input type that accepts TranscodeTemplateVideoTemplateArgs and TranscodeTemplateVideoTemplateOutput values.
+// You can construct a concrete instance of `TranscodeTemplateVideoTemplateInput` via:
+//
+//	TranscodeTemplateVideoTemplateArgs{...}
+type TranscodeTemplateVideoTemplateInput interface {
+	pulumi.Input
+
+	ToTranscodeTemplateVideoTemplateOutput() TranscodeTemplateVideoTemplateOutput
+	ToTranscodeTemplateVideoTemplateOutputWithContext(context.Context) TranscodeTemplateVideoTemplateOutput
+}
+
+type TranscodeTemplateVideoTemplateArgs struct {
+	// Bitrate of video stream in Kbps. Value range: 0 and [128, 35,000].If the value is 0, the bitrate of the video will be the same as that of the source video.
+	Bitrate pulumi.IntInput `pulumi:"bitrate"`
+	// The video codec. Valid values:libx264: H.264; libx265: H.265; av1: AOMedia Video 1; H.266: H.266. The AOMedia Video 1 and H.266 codecs can only be used for MP4 files. Only CRF is supported for H.266 currently.
+	Codec pulumi.StringInput `pulumi:"codec"`
+	// The codec tag. This parameter is valid only if the H.265 codec is used. Valid values:hvc1hev1Default value: hvc1.
+	CodecTag pulumi.StringPtrInput `pulumi:"codecTag"`
+	// Fill type, the way of processing a screenshot when the configured aspect ratio is different from that of the source video. Valid values:stretch: stretches the video image frame by frame to fill the screen. The video image may become squashed or stretched after transcoding.black: fills the uncovered area with black color, without changing the image&#39;s aspect ratio.white: fills the uncovered area with white color, without changing the image&#39;s aspect ratio.gauss: applies Gaussian blur to the uncovered area, without changing the image&#39;s aspect ratio.Default value: black.
+	FillType pulumi.StringPtrInput `pulumi:"fillType"`
+	// Video frame rate in Hz. Value range: [0,100].If the value is 0, the frame rate will be the same as that of the source video.
+	Fps pulumi.IntInput `pulumi:"fps"`
+	// I-frame interval in frames. Valid values: 0 and 1-100000.When this parameter is set to 0 or left empty, `Gop` will be automatically set.
+	Gop pulumi.IntPtrInput `pulumi:"gop"`
+	// The maximum video height (or short side) in pixels. Value range: 0 and [128, 8192].If both `Width` and `Height` are 0, the output resolution will be the same as that of the source video.If `Width` is 0 and `Height` is not, the video width will be proportionally scaled.If `Width` is not 0 and `Height` is, the video height will be proportionally scaled.If neither `Width` nor `Height` is 0, the specified width and height will be used.Default value: 0.
+	Height pulumi.IntPtrInput `pulumi:"height"`
+	// Whether to output an HDR (high dynamic range) video if the source video is HDR. Valid values:ON: If the source video is HDR, output an HDR video; if not, output an SDR (standard dynamic range) video.OFF: Output an SDR video regardless of whether the source video is HDR.Default value: OFF.
+	PreserveHdrSwitch pulumi.StringPtrInput `pulumi:"preserveHdrSwitch"`
+	// Resolution adaption. Valid values:open: enabled. In this case, `Width` represents the long side of a video, while `Height` the short side;close: disabled. In this case, `Width` represents the width of a video, while `Height` the height.Default value: open.Note: this field may return null, indicating that no valid values can be obtained.
+	ResolutionAdaptive pulumi.StringPtrInput `pulumi:"resolutionAdaptive"`
+	// The video constant rate factor (CRF). Value range: 1-51.If this parameter is specified, CRF encoding will be used and the bitrate parameter will be ignored.If `Codec` is `H.266`, this parameter is required (`28` is recommended).We don't recommend using this parameter unless you have special requirements.
+	Vcrf pulumi.IntPtrInput `pulumi:"vcrf"`
+	// The maximum video width (or long side) in pixels. Value range: 0 and [128, 8192].If both `Width` and `Height` are 0, the output resolution will be the same as that of the source video.If `Width` is 0 and `Height` is not, the video width will be proportionally scaled.If `Width` is not 0 and `Height` is, the video height will be proportionally scaled.If neither `Width` nor `Height` is 0, the specified width and height will be used.Default value: 0.
+	Width pulumi.IntPtrInput `pulumi:"width"`
+}
+
+func (TranscodeTemplateVideoTemplateArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*TranscodeTemplateVideoTemplate)(nil)).Elem()
+}
+
+func (i TranscodeTemplateVideoTemplateArgs) ToTranscodeTemplateVideoTemplateOutput() TranscodeTemplateVideoTemplateOutput {
+	return i.ToTranscodeTemplateVideoTemplateOutputWithContext(context.Background())
+}
+
+func (i TranscodeTemplateVideoTemplateArgs) ToTranscodeTemplateVideoTemplateOutputWithContext(ctx context.Context) TranscodeTemplateVideoTemplateOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(TranscodeTemplateVideoTemplateOutput)
+}
+
+func (i TranscodeTemplateVideoTemplateArgs) ToTranscodeTemplateVideoTemplatePtrOutput() TranscodeTemplateVideoTemplatePtrOutput {
+	return i.ToTranscodeTemplateVideoTemplatePtrOutputWithContext(context.Background())
+}
+
+func (i TranscodeTemplateVideoTemplateArgs) ToTranscodeTemplateVideoTemplatePtrOutputWithContext(ctx context.Context) TranscodeTemplateVideoTemplatePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(TranscodeTemplateVideoTemplateOutput).ToTranscodeTemplateVideoTemplatePtrOutputWithContext(ctx)
+}
+
+// TranscodeTemplateVideoTemplatePtrInput is an input type that accepts TranscodeTemplateVideoTemplateArgs, TranscodeTemplateVideoTemplatePtr and TranscodeTemplateVideoTemplatePtrOutput values.
+// You can construct a concrete instance of `TranscodeTemplateVideoTemplatePtrInput` via:
+//
+//	        TranscodeTemplateVideoTemplateArgs{...}
+//
+//	or:
+//
+//	        nil
+type TranscodeTemplateVideoTemplatePtrInput interface {
+	pulumi.Input
+
+	ToTranscodeTemplateVideoTemplatePtrOutput() TranscodeTemplateVideoTemplatePtrOutput
+	ToTranscodeTemplateVideoTemplatePtrOutputWithContext(context.Context) TranscodeTemplateVideoTemplatePtrOutput
+}
+
+type transcodeTemplateVideoTemplatePtrType TranscodeTemplateVideoTemplateArgs
+
+func TranscodeTemplateVideoTemplatePtr(v *TranscodeTemplateVideoTemplateArgs) TranscodeTemplateVideoTemplatePtrInput {
+	return (*transcodeTemplateVideoTemplatePtrType)(v)
+}
+
+func (*transcodeTemplateVideoTemplatePtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**TranscodeTemplateVideoTemplate)(nil)).Elem()
+}
+
+func (i *transcodeTemplateVideoTemplatePtrType) ToTranscodeTemplateVideoTemplatePtrOutput() TranscodeTemplateVideoTemplatePtrOutput {
+	return i.ToTranscodeTemplateVideoTemplatePtrOutputWithContext(context.Background())
+}
+
+func (i *transcodeTemplateVideoTemplatePtrType) ToTranscodeTemplateVideoTemplatePtrOutputWithContext(ctx context.Context) TranscodeTemplateVideoTemplatePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(TranscodeTemplateVideoTemplatePtrOutput)
+}
+
+type TranscodeTemplateVideoTemplateOutput struct{ *pulumi.OutputState }
+
+func (TranscodeTemplateVideoTemplateOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*TranscodeTemplateVideoTemplate)(nil)).Elem()
+}
+
+func (o TranscodeTemplateVideoTemplateOutput) ToTranscodeTemplateVideoTemplateOutput() TranscodeTemplateVideoTemplateOutput {
+	return o
+}
+
+func (o TranscodeTemplateVideoTemplateOutput) ToTranscodeTemplateVideoTemplateOutputWithContext(ctx context.Context) TranscodeTemplateVideoTemplateOutput {
+	return o
+}
+
+func (o TranscodeTemplateVideoTemplateOutput) ToTranscodeTemplateVideoTemplatePtrOutput() TranscodeTemplateVideoTemplatePtrOutput {
+	return o.ToTranscodeTemplateVideoTemplatePtrOutputWithContext(context.Background())
+}
+
+func (o TranscodeTemplateVideoTemplateOutput) ToTranscodeTemplateVideoTemplatePtrOutputWithContext(ctx context.Context) TranscodeTemplateVideoTemplatePtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v TranscodeTemplateVideoTemplate) *TranscodeTemplateVideoTemplate {
+		return &v
+	}).(TranscodeTemplateVideoTemplatePtrOutput)
+}
+
+// Bitrate of video stream in Kbps. Value range: 0 and [128, 35,000].If the value is 0, the bitrate of the video will be the same as that of the source video.
+func (o TranscodeTemplateVideoTemplateOutput) Bitrate() pulumi.IntOutput {
+	return o.ApplyT(func(v TranscodeTemplateVideoTemplate) int { return v.Bitrate }).(pulumi.IntOutput)
+}
+
+// The video codec. Valid values:libx264: H.264; libx265: H.265; av1: AOMedia Video 1; H.266: H.266. The AOMedia Video 1 and H.266 codecs can only be used for MP4 files. Only CRF is supported for H.266 currently.
+func (o TranscodeTemplateVideoTemplateOutput) Codec() pulumi.StringOutput {
+	return o.ApplyT(func(v TranscodeTemplateVideoTemplate) string { return v.Codec }).(pulumi.StringOutput)
+}
+
+// The codec tag. This parameter is valid only if the H.265 codec is used. Valid values:hvc1hev1Default value: hvc1.
+func (o TranscodeTemplateVideoTemplateOutput) CodecTag() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v TranscodeTemplateVideoTemplate) *string { return v.CodecTag }).(pulumi.StringPtrOutput)
+}
+
+// Fill type, the way of processing a screenshot when the configured aspect ratio is different from that of the source video. Valid values:stretch: stretches the video image frame by frame to fill the screen. The video image may become squashed or stretched after transcoding.black: fills the uncovered area with black color, without changing the image&#39;s aspect ratio.white: fills the uncovered area with white color, without changing the image&#39;s aspect ratio.gauss: applies Gaussian blur to the uncovered area, without changing the image&#39;s aspect ratio.Default value: black.
+func (o TranscodeTemplateVideoTemplateOutput) FillType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v TranscodeTemplateVideoTemplate) *string { return v.FillType }).(pulumi.StringPtrOutput)
+}
+
+// Video frame rate in Hz. Value range: [0,100].If the value is 0, the frame rate will be the same as that of the source video.
+func (o TranscodeTemplateVideoTemplateOutput) Fps() pulumi.IntOutput {
+	return o.ApplyT(func(v TranscodeTemplateVideoTemplate) int { return v.Fps }).(pulumi.IntOutput)
+}
+
+// I-frame interval in frames. Valid values: 0 and 1-100000.When this parameter is set to 0 or left empty, `Gop` will be automatically set.
+func (o TranscodeTemplateVideoTemplateOutput) Gop() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v TranscodeTemplateVideoTemplate) *int { return v.Gop }).(pulumi.IntPtrOutput)
+}
+
+// The maximum video height (or short side) in pixels. Value range: 0 and [128, 8192].If both `Width` and `Height` are 0, the output resolution will be the same as that of the source video.If `Width` is 0 and `Height` is not, the video width will be proportionally scaled.If `Width` is not 0 and `Height` is, the video height will be proportionally scaled.If neither `Width` nor `Height` is 0, the specified width and height will be used.Default value: 0.
+func (o TranscodeTemplateVideoTemplateOutput) Height() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v TranscodeTemplateVideoTemplate) *int { return v.Height }).(pulumi.IntPtrOutput)
+}
+
+// Whether to output an HDR (high dynamic range) video if the source video is HDR. Valid values:ON: If the source video is HDR, output an HDR video; if not, output an SDR (standard dynamic range) video.OFF: Output an SDR video regardless of whether the source video is HDR.Default value: OFF.
+func (o TranscodeTemplateVideoTemplateOutput) PreserveHdrSwitch() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v TranscodeTemplateVideoTemplate) *string { return v.PreserveHdrSwitch }).(pulumi.StringPtrOutput)
+}
+
+// Resolution adaption. Valid values:open: enabled. In this case, `Width` represents the long side of a video, while `Height` the short side;close: disabled. In this case, `Width` represents the width of a video, while `Height` the height.Default value: open.Note: this field may return null, indicating that no valid values can be obtained.
+func (o TranscodeTemplateVideoTemplateOutput) ResolutionAdaptive() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v TranscodeTemplateVideoTemplate) *string { return v.ResolutionAdaptive }).(pulumi.StringPtrOutput)
+}
+
+// The video constant rate factor (CRF). Value range: 1-51.If this parameter is specified, CRF encoding will be used and the bitrate parameter will be ignored.If `Codec` is `H.266`, this parameter is required (`28` is recommended).We don't recommend using this parameter unless you have special requirements.
+func (o TranscodeTemplateVideoTemplateOutput) Vcrf() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v TranscodeTemplateVideoTemplate) *int { return v.Vcrf }).(pulumi.IntPtrOutput)
+}
+
+// The maximum video width (or long side) in pixels. Value range: 0 and [128, 8192].If both `Width` and `Height` are 0, the output resolution will be the same as that of the source video.If `Width` is 0 and `Height` is not, the video width will be proportionally scaled.If `Width` is not 0 and `Height` is, the video height will be proportionally scaled.If neither `Width` nor `Height` is 0, the specified width and height will be used.Default value: 0.
+func (o TranscodeTemplateVideoTemplateOutput) Width() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v TranscodeTemplateVideoTemplate) *int { return v.Width }).(pulumi.IntPtrOutput)
+}
+
+type TranscodeTemplateVideoTemplatePtrOutput struct{ *pulumi.OutputState }
+
+func (TranscodeTemplateVideoTemplatePtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**TranscodeTemplateVideoTemplate)(nil)).Elem()
+}
+
+func (o TranscodeTemplateVideoTemplatePtrOutput) ToTranscodeTemplateVideoTemplatePtrOutput() TranscodeTemplateVideoTemplatePtrOutput {
+	return o
+}
+
+func (o TranscodeTemplateVideoTemplatePtrOutput) ToTranscodeTemplateVideoTemplatePtrOutputWithContext(ctx context.Context) TranscodeTemplateVideoTemplatePtrOutput {
+	return o
+}
+
+func (o TranscodeTemplateVideoTemplatePtrOutput) Elem() TranscodeTemplateVideoTemplateOutput {
+	return o.ApplyT(func(v *TranscodeTemplateVideoTemplate) TranscodeTemplateVideoTemplate {
+		if v != nil {
+			return *v
+		}
+		var ret TranscodeTemplateVideoTemplate
+		return ret
+	}).(TranscodeTemplateVideoTemplateOutput)
+}
+
+// Bitrate of video stream in Kbps. Value range: 0 and [128, 35,000].If the value is 0, the bitrate of the video will be the same as that of the source video.
+func (o TranscodeTemplateVideoTemplatePtrOutput) Bitrate() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *TranscodeTemplateVideoTemplate) *int {
+		if v == nil {
+			return nil
+		}
+		return &v.Bitrate
+	}).(pulumi.IntPtrOutput)
+}
+
+// The video codec. Valid values:libx264: H.264; libx265: H.265; av1: AOMedia Video 1; H.266: H.266. The AOMedia Video 1 and H.266 codecs can only be used for MP4 files. Only CRF is supported for H.266 currently.
+func (o TranscodeTemplateVideoTemplatePtrOutput) Codec() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *TranscodeTemplateVideoTemplate) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Codec
+	}).(pulumi.StringPtrOutput)
+}
+
+// The codec tag. This parameter is valid only if the H.265 codec is used. Valid values:hvc1hev1Default value: hvc1.
+func (o TranscodeTemplateVideoTemplatePtrOutput) CodecTag() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *TranscodeTemplateVideoTemplate) *string {
+		if v == nil {
+			return nil
+		}
+		return v.CodecTag
+	}).(pulumi.StringPtrOutput)
+}
+
+// Fill type, the way of processing a screenshot when the configured aspect ratio is different from that of the source video. Valid values:stretch: stretches the video image frame by frame to fill the screen. The video image may become squashed or stretched after transcoding.black: fills the uncovered area with black color, without changing the image&#39;s aspect ratio.white: fills the uncovered area with white color, without changing the image&#39;s aspect ratio.gauss: applies Gaussian blur to the uncovered area, without changing the image&#39;s aspect ratio.Default value: black.
+func (o TranscodeTemplateVideoTemplatePtrOutput) FillType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *TranscodeTemplateVideoTemplate) *string {
+		if v == nil {
+			return nil
+		}
+		return v.FillType
+	}).(pulumi.StringPtrOutput)
+}
+
+// Video frame rate in Hz. Value range: [0,100].If the value is 0, the frame rate will be the same as that of the source video.
+func (o TranscodeTemplateVideoTemplatePtrOutput) Fps() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *TranscodeTemplateVideoTemplate) *int {
+		if v == nil {
+			return nil
+		}
+		return &v.Fps
+	}).(pulumi.IntPtrOutput)
+}
+
+// I-frame interval in frames. Valid values: 0 and 1-100000.When this parameter is set to 0 or left empty, `Gop` will be automatically set.
+func (o TranscodeTemplateVideoTemplatePtrOutput) Gop() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *TranscodeTemplateVideoTemplate) *int {
+		if v == nil {
+			return nil
+		}
+		return v.Gop
+	}).(pulumi.IntPtrOutput)
+}
+
+// The maximum video height (or short side) in pixels. Value range: 0 and [128, 8192].If both `Width` and `Height` are 0, the output resolution will be the same as that of the source video.If `Width` is 0 and `Height` is not, the video width will be proportionally scaled.If `Width` is not 0 and `Height` is, the video height will be proportionally scaled.If neither `Width` nor `Height` is 0, the specified width and height will be used.Default value: 0.
+func (o TranscodeTemplateVideoTemplatePtrOutput) Height() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *TranscodeTemplateVideoTemplate) *int {
+		if v == nil {
+			return nil
+		}
+		return v.Height
+	}).(pulumi.IntPtrOutput)
+}
+
+// Whether to output an HDR (high dynamic range) video if the source video is HDR. Valid values:ON: If the source video is HDR, output an HDR video; if not, output an SDR (standard dynamic range) video.OFF: Output an SDR video regardless of whether the source video is HDR.Default value: OFF.
+func (o TranscodeTemplateVideoTemplatePtrOutput) PreserveHdrSwitch() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *TranscodeTemplateVideoTemplate) *string {
+		if v == nil {
+			return nil
+		}
+		return v.PreserveHdrSwitch
+	}).(pulumi.StringPtrOutput)
+}
+
+// Resolution adaption. Valid values:open: enabled. In this case, `Width` represents the long side of a video, while `Height` the short side;close: disabled. In this case, `Width` represents the width of a video, while `Height` the height.Default value: open.Note: this field may return null, indicating that no valid values can be obtained.
+func (o TranscodeTemplateVideoTemplatePtrOutput) ResolutionAdaptive() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *TranscodeTemplateVideoTemplate) *string {
+		if v == nil {
+			return nil
+		}
+		return v.ResolutionAdaptive
+	}).(pulumi.StringPtrOutput)
+}
+
+// The video constant rate factor (CRF). Value range: 1-51.If this parameter is specified, CRF encoding will be used and the bitrate parameter will be ignored.If `Codec` is `H.266`, this parameter is required (`28` is recommended).We don't recommend using this parameter unless you have special requirements.
+func (o TranscodeTemplateVideoTemplatePtrOutput) Vcrf() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *TranscodeTemplateVideoTemplate) *int {
+		if v == nil {
+			return nil
+		}
+		return v.Vcrf
+	}).(pulumi.IntPtrOutput)
+}
+
+// The maximum video width (or long side) in pixels. Value range: 0 and [128, 8192].If both `Width` and `Height` are 0, the output resolution will be the same as that of the source video.If `Width` is 0 and `Height` is not, the video width will be proportionally scaled.If `Width` is not 0 and `Height` is, the video height will be proportionally scaled.If neither `Width` nor `Height` is 0, the specified width and height will be used.Default value: 0.
+func (o TranscodeTemplateVideoTemplatePtrOutput) Width() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *TranscodeTemplateVideoTemplate) *int {
+		if v == nil {
+			return nil
+		}
+		return v.Width
+	}).(pulumi.IntPtrOutput)
+}
+
+type WatermarkTemplateImageTemplate struct {
+	// Watermark height. % and px formats are supported: If the string ends in %, the `Height` of the watermark will be the specified percentage of the video height; for example, `10%` means that `Height` is 10% of the video height;  If the string ends in px, the `Height` of the watermark will be in px; for example, `100px` means that `Height` is 100 px. Valid values: 0 or [8,4096]. Default value: 0 px, which means that `Height` will be proportionally scaled according to the aspect ratio of the original watermark image.
+	Height *string `pulumi:"height"`
+	// The [Base64](https://tools.ietf.org/html/rfc4648) encoded string of a watermark image. Only JPEG, PNG, and GIF images are supported.
+	ImageContent string `pulumi:"imageContent"`
+	// Repeat type of an animated watermark. Valid values: once: no longer appears after watermark playback ends.  repeat_last_frame: stays on the last frame after watermark playback ends.  repeat (default): repeats the playback until the video ends.
+	RepeatType *string `pulumi:"repeatType"`
+	// Image watermark transparency: 0: completely opaque  100: completely transparent Default value: 0.
+	Transparency *int `pulumi:"transparency"`
+	// Watermark width. % and px formats are supported: If the string ends in %, the `Width` of the watermark will be the specified percentage of the video width. For example, `10%` means that `Width` is 10% of the video width;  If the string ends in px, the `Width` of the watermark will be in pixels. For example, `100px` means that `Width` is 100 pixels. Value range: [8, 4096]. Default value: 10%.
+	Width *string `pulumi:"width"`
+}
+
+// WatermarkTemplateImageTemplateInput is an input type that accepts WatermarkTemplateImageTemplateArgs and WatermarkTemplateImageTemplateOutput values.
+// You can construct a concrete instance of `WatermarkTemplateImageTemplateInput` via:
+//
+//	WatermarkTemplateImageTemplateArgs{...}
+type WatermarkTemplateImageTemplateInput interface {
+	pulumi.Input
+
+	ToWatermarkTemplateImageTemplateOutput() WatermarkTemplateImageTemplateOutput
+	ToWatermarkTemplateImageTemplateOutputWithContext(context.Context) WatermarkTemplateImageTemplateOutput
+}
+
+type WatermarkTemplateImageTemplateArgs struct {
+	// Watermark height. % and px formats are supported: If the string ends in %, the `Height` of the watermark will be the specified percentage of the video height; for example, `10%` means that `Height` is 10% of the video height;  If the string ends in px, the `Height` of the watermark will be in px; for example, `100px` means that `Height` is 100 px. Valid values: 0 or [8,4096]. Default value: 0 px, which means that `Height` will be proportionally scaled according to the aspect ratio of the original watermark image.
+	Height pulumi.StringPtrInput `pulumi:"height"`
+	// The [Base64](https://tools.ietf.org/html/rfc4648) encoded string of a watermark image. Only JPEG, PNG, and GIF images are supported.
+	ImageContent pulumi.StringInput `pulumi:"imageContent"`
+	// Repeat type of an animated watermark. Valid values: once: no longer appears after watermark playback ends.  repeat_last_frame: stays on the last frame after watermark playback ends.  repeat (default): repeats the playback until the video ends.
+	RepeatType pulumi.StringPtrInput `pulumi:"repeatType"`
+	// Image watermark transparency: 0: completely opaque  100: completely transparent Default value: 0.
+	Transparency pulumi.IntPtrInput `pulumi:"transparency"`
+	// Watermark width. % and px formats are supported: If the string ends in %, the `Width` of the watermark will be the specified percentage of the video width. For example, `10%` means that `Width` is 10% of the video width;  If the string ends in px, the `Width` of the watermark will be in pixels. For example, `100px` means that `Width` is 100 pixels. Value range: [8, 4096]. Default value: 10%.
+	Width pulumi.StringPtrInput `pulumi:"width"`
+}
+
+func (WatermarkTemplateImageTemplateArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*WatermarkTemplateImageTemplate)(nil)).Elem()
+}
+
+func (i WatermarkTemplateImageTemplateArgs) ToWatermarkTemplateImageTemplateOutput() WatermarkTemplateImageTemplateOutput {
+	return i.ToWatermarkTemplateImageTemplateOutputWithContext(context.Background())
+}
+
+func (i WatermarkTemplateImageTemplateArgs) ToWatermarkTemplateImageTemplateOutputWithContext(ctx context.Context) WatermarkTemplateImageTemplateOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(WatermarkTemplateImageTemplateOutput)
+}
+
+func (i WatermarkTemplateImageTemplateArgs) ToWatermarkTemplateImageTemplatePtrOutput() WatermarkTemplateImageTemplatePtrOutput {
+	return i.ToWatermarkTemplateImageTemplatePtrOutputWithContext(context.Background())
+}
+
+func (i WatermarkTemplateImageTemplateArgs) ToWatermarkTemplateImageTemplatePtrOutputWithContext(ctx context.Context) WatermarkTemplateImageTemplatePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(WatermarkTemplateImageTemplateOutput).ToWatermarkTemplateImageTemplatePtrOutputWithContext(ctx)
+}
+
+// WatermarkTemplateImageTemplatePtrInput is an input type that accepts WatermarkTemplateImageTemplateArgs, WatermarkTemplateImageTemplatePtr and WatermarkTemplateImageTemplatePtrOutput values.
+// You can construct a concrete instance of `WatermarkTemplateImageTemplatePtrInput` via:
+//
+//	        WatermarkTemplateImageTemplateArgs{...}
+//
+//	or:
+//
+//	        nil
+type WatermarkTemplateImageTemplatePtrInput interface {
+	pulumi.Input
+
+	ToWatermarkTemplateImageTemplatePtrOutput() WatermarkTemplateImageTemplatePtrOutput
+	ToWatermarkTemplateImageTemplatePtrOutputWithContext(context.Context) WatermarkTemplateImageTemplatePtrOutput
+}
+
+type watermarkTemplateImageTemplatePtrType WatermarkTemplateImageTemplateArgs
+
+func WatermarkTemplateImageTemplatePtr(v *WatermarkTemplateImageTemplateArgs) WatermarkTemplateImageTemplatePtrInput {
+	return (*watermarkTemplateImageTemplatePtrType)(v)
+}
+
+func (*watermarkTemplateImageTemplatePtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**WatermarkTemplateImageTemplate)(nil)).Elem()
+}
+
+func (i *watermarkTemplateImageTemplatePtrType) ToWatermarkTemplateImageTemplatePtrOutput() WatermarkTemplateImageTemplatePtrOutput {
+	return i.ToWatermarkTemplateImageTemplatePtrOutputWithContext(context.Background())
+}
+
+func (i *watermarkTemplateImageTemplatePtrType) ToWatermarkTemplateImageTemplatePtrOutputWithContext(ctx context.Context) WatermarkTemplateImageTemplatePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(WatermarkTemplateImageTemplatePtrOutput)
+}
+
+type WatermarkTemplateImageTemplateOutput struct{ *pulumi.OutputState }
+
+func (WatermarkTemplateImageTemplateOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*WatermarkTemplateImageTemplate)(nil)).Elem()
+}
+
+func (o WatermarkTemplateImageTemplateOutput) ToWatermarkTemplateImageTemplateOutput() WatermarkTemplateImageTemplateOutput {
+	return o
+}
+
+func (o WatermarkTemplateImageTemplateOutput) ToWatermarkTemplateImageTemplateOutputWithContext(ctx context.Context) WatermarkTemplateImageTemplateOutput {
+	return o
+}
+
+func (o WatermarkTemplateImageTemplateOutput) ToWatermarkTemplateImageTemplatePtrOutput() WatermarkTemplateImageTemplatePtrOutput {
+	return o.ToWatermarkTemplateImageTemplatePtrOutputWithContext(context.Background())
+}
+
+func (o WatermarkTemplateImageTemplateOutput) ToWatermarkTemplateImageTemplatePtrOutputWithContext(ctx context.Context) WatermarkTemplateImageTemplatePtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v WatermarkTemplateImageTemplate) *WatermarkTemplateImageTemplate {
+		return &v
+	}).(WatermarkTemplateImageTemplatePtrOutput)
+}
+
+// Watermark height. % and px formats are supported: If the string ends in %, the `Height` of the watermark will be the specified percentage of the video height; for example, `10%` means that `Height` is 10% of the video height;  If the string ends in px, the `Height` of the watermark will be in px; for example, `100px` means that `Height` is 100 px. Valid values: 0 or [8,4096]. Default value: 0 px, which means that `Height` will be proportionally scaled according to the aspect ratio of the original watermark image.
+func (o WatermarkTemplateImageTemplateOutput) Height() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v WatermarkTemplateImageTemplate) *string { return v.Height }).(pulumi.StringPtrOutput)
+}
+
+// The [Base64](https://tools.ietf.org/html/rfc4648) encoded string of a watermark image. Only JPEG, PNG, and GIF images are supported.
+func (o WatermarkTemplateImageTemplateOutput) ImageContent() pulumi.StringOutput {
+	return o.ApplyT(func(v WatermarkTemplateImageTemplate) string { return v.ImageContent }).(pulumi.StringOutput)
+}
+
+// Repeat type of an animated watermark. Valid values: once: no longer appears after watermark playback ends.  repeat_last_frame: stays on the last frame after watermark playback ends.  repeat (default): repeats the playback until the video ends.
+func (o WatermarkTemplateImageTemplateOutput) RepeatType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v WatermarkTemplateImageTemplate) *string { return v.RepeatType }).(pulumi.StringPtrOutput)
+}
+
+// Image watermark transparency: 0: completely opaque  100: completely transparent Default value: 0.
+func (o WatermarkTemplateImageTemplateOutput) Transparency() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v WatermarkTemplateImageTemplate) *int { return v.Transparency }).(pulumi.IntPtrOutput)
+}
+
+// Watermark width. % and px formats are supported: If the string ends in %, the `Width` of the watermark will be the specified percentage of the video width. For example, `10%` means that `Width` is 10% of the video width;  If the string ends in px, the `Width` of the watermark will be in pixels. For example, `100px` means that `Width` is 100 pixels. Value range: [8, 4096]. Default value: 10%.
+func (o WatermarkTemplateImageTemplateOutput) Width() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v WatermarkTemplateImageTemplate) *string { return v.Width }).(pulumi.StringPtrOutput)
+}
+
+type WatermarkTemplateImageTemplatePtrOutput struct{ *pulumi.OutputState }
+
+func (WatermarkTemplateImageTemplatePtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**WatermarkTemplateImageTemplate)(nil)).Elem()
+}
+
+func (o WatermarkTemplateImageTemplatePtrOutput) ToWatermarkTemplateImageTemplatePtrOutput() WatermarkTemplateImageTemplatePtrOutput {
+	return o
+}
+
+func (o WatermarkTemplateImageTemplatePtrOutput) ToWatermarkTemplateImageTemplatePtrOutputWithContext(ctx context.Context) WatermarkTemplateImageTemplatePtrOutput {
+	return o
+}
+
+func (o WatermarkTemplateImageTemplatePtrOutput) Elem() WatermarkTemplateImageTemplateOutput {
+	return o.ApplyT(func(v *WatermarkTemplateImageTemplate) WatermarkTemplateImageTemplate {
+		if v != nil {
+			return *v
+		}
+		var ret WatermarkTemplateImageTemplate
+		return ret
+	}).(WatermarkTemplateImageTemplateOutput)
+}
+
+// Watermark height. % and px formats are supported: If the string ends in %, the `Height` of the watermark will be the specified percentage of the video height; for example, `10%` means that `Height` is 10% of the video height;  If the string ends in px, the `Height` of the watermark will be in px; for example, `100px` means that `Height` is 100 px. Valid values: 0 or [8,4096]. Default value: 0 px, which means that `Height` will be proportionally scaled according to the aspect ratio of the original watermark image.
+func (o WatermarkTemplateImageTemplatePtrOutput) Height() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *WatermarkTemplateImageTemplate) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Height
+	}).(pulumi.StringPtrOutput)
+}
+
+// The [Base64](https://tools.ietf.org/html/rfc4648) encoded string of a watermark image. Only JPEG, PNG, and GIF images are supported.
+func (o WatermarkTemplateImageTemplatePtrOutput) ImageContent() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *WatermarkTemplateImageTemplate) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.ImageContent
+	}).(pulumi.StringPtrOutput)
+}
+
+// Repeat type of an animated watermark. Valid values: once: no longer appears after watermark playback ends.  repeat_last_frame: stays on the last frame after watermark playback ends.  repeat (default): repeats the playback until the video ends.
+func (o WatermarkTemplateImageTemplatePtrOutput) RepeatType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *WatermarkTemplateImageTemplate) *string {
+		if v == nil {
+			return nil
+		}
+		return v.RepeatType
+	}).(pulumi.StringPtrOutput)
+}
+
+// Image watermark transparency: 0: completely opaque  100: completely transparent Default value: 0.
+func (o WatermarkTemplateImageTemplatePtrOutput) Transparency() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *WatermarkTemplateImageTemplate) *int {
+		if v == nil {
+			return nil
+		}
+		return v.Transparency
+	}).(pulumi.IntPtrOutput)
+}
+
+// Watermark width. % and px formats are supported: If the string ends in %, the `Width` of the watermark will be the specified percentage of the video width. For example, `10%` means that `Width` is 10% of the video width;  If the string ends in px, the `Width` of the watermark will be in pixels. For example, `100px` means that `Width` is 100 pixels. Value range: [8, 4096]. Default value: 10%.
+func (o WatermarkTemplateImageTemplatePtrOutput) Width() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *WatermarkTemplateImageTemplate) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Width
+	}).(pulumi.StringPtrOutput)
+}
+
+type WatermarkTemplateSvgTemplate struct {
+	// Watermark height, which supports six formats of px, %, W%, H%, S%, and L%: If the string ends in px, the `Height` of the watermark will be in px; for example, `100px` means that `Height` is 100 px; if `0px` is entered and `Width` is not `0px`, the watermark height will be proportionally scaled based on the source SVG image; if `0px` is entered for both `Width` and `Height`, the watermark height will be the height of the source SVG image;  If the string ends in `W%`, the `Height` of the watermark will be the specified percentage of the video width; for example, `10W%` means that `Height` is 10% of the video width;  If the string ends in `H%`, the `Height` of the watermark will be the specified percentage of the video height; for example, `10H%` means that `Height` is 10% of the video height;  If the string ends in `S%`, the `Height` of the watermark will be the specified percentage of the short side of the video; for example, `10S%` means that `Height` is 10% of the short side of the video;  If the string ends in `L%`, the `Height` of the watermark will be the specified percentage of the long side of the video; for example, `10L%` means that `Height` is 10% of the long side of the video;  If the string ends in %, the meaning is the same as `H%`. Default value: 0 px.
+	Height *string `pulumi:"height"`
+	// Watermark width, which supports six formats of px, %, W%, H%, S%, and L%: If the string ends in px, the `Width` of the watermark will be in px; for example, `100px` means that `Width` is 100 px; if `0px` is entered and `Height` is not `0px`, the watermark width will be proportionally scaled based on the source SVG image; if `0px` is entered for both `Width` and `Height`, the watermark width will be the width of the source SVG image;  If the string ends in `W%`, the `Width` of the watermark will be the specified percentage of the video width; for example, `10W%` means that `Width` is 10% of the video width;  If the string ends in `H%`, the `Width` of the watermark will be the specified percentage of the video height; for example, `10H%` means that `Width` is 10% of the video height;  If the string ends in `S%`, the `Width` of the watermark will be the specified percentage of the short side of the video; for example, `10S%` means that `Width` is 10% of the short side of the video;  If the string ends in `L%`, the `Width` of the watermark will be the specified percentage of the long side of the video; for example, `10L%` means that `Width` is 10% of the long side of the video;  If the string ends in %, the meaning is the same as `W%`. Default value: 10W%.
+	Width *string `pulumi:"width"`
+}
+
+// WatermarkTemplateSvgTemplateInput is an input type that accepts WatermarkTemplateSvgTemplateArgs and WatermarkTemplateSvgTemplateOutput values.
+// You can construct a concrete instance of `WatermarkTemplateSvgTemplateInput` via:
+//
+//	WatermarkTemplateSvgTemplateArgs{...}
+type WatermarkTemplateSvgTemplateInput interface {
+	pulumi.Input
+
+	ToWatermarkTemplateSvgTemplateOutput() WatermarkTemplateSvgTemplateOutput
+	ToWatermarkTemplateSvgTemplateOutputWithContext(context.Context) WatermarkTemplateSvgTemplateOutput
+}
+
+type WatermarkTemplateSvgTemplateArgs struct {
+	// Watermark height, which supports six formats of px, %, W%, H%, S%, and L%: If the string ends in px, the `Height` of the watermark will be in px; for example, `100px` means that `Height` is 100 px; if `0px` is entered and `Width` is not `0px`, the watermark height will be proportionally scaled based on the source SVG image; if `0px` is entered for both `Width` and `Height`, the watermark height will be the height of the source SVG image;  If the string ends in `W%`, the `Height` of the watermark will be the specified percentage of the video width; for example, `10W%` means that `Height` is 10% of the video width;  If the string ends in `H%`, the `Height` of the watermark will be the specified percentage of the video height; for example, `10H%` means that `Height` is 10% of the video height;  If the string ends in `S%`, the `Height` of the watermark will be the specified percentage of the short side of the video; for example, `10S%` means that `Height` is 10% of the short side of the video;  If the string ends in `L%`, the `Height` of the watermark will be the specified percentage of the long side of the video; for example, `10L%` means that `Height` is 10% of the long side of the video;  If the string ends in %, the meaning is the same as `H%`. Default value: 0 px.
+	Height pulumi.StringPtrInput `pulumi:"height"`
+	// Watermark width, which supports six formats of px, %, W%, H%, S%, and L%: If the string ends in px, the `Width` of the watermark will be in px; for example, `100px` means that `Width` is 100 px; if `0px` is entered and `Height` is not `0px`, the watermark width will be proportionally scaled based on the source SVG image; if `0px` is entered for both `Width` and `Height`, the watermark width will be the width of the source SVG image;  If the string ends in `W%`, the `Width` of the watermark will be the specified percentage of the video width; for example, `10W%` means that `Width` is 10% of the video width;  If the string ends in `H%`, the `Width` of the watermark will be the specified percentage of the video height; for example, `10H%` means that `Width` is 10% of the video height;  If the string ends in `S%`, the `Width` of the watermark will be the specified percentage of the short side of the video; for example, `10S%` means that `Width` is 10% of the short side of the video;  If the string ends in `L%`, the `Width` of the watermark will be the specified percentage of the long side of the video; for example, `10L%` means that `Width` is 10% of the long side of the video;  If the string ends in %, the meaning is the same as `W%`. Default value: 10W%.
+	Width pulumi.StringPtrInput `pulumi:"width"`
+}
+
+func (WatermarkTemplateSvgTemplateArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*WatermarkTemplateSvgTemplate)(nil)).Elem()
+}
+
+func (i WatermarkTemplateSvgTemplateArgs) ToWatermarkTemplateSvgTemplateOutput() WatermarkTemplateSvgTemplateOutput {
+	return i.ToWatermarkTemplateSvgTemplateOutputWithContext(context.Background())
+}
+
+func (i WatermarkTemplateSvgTemplateArgs) ToWatermarkTemplateSvgTemplateOutputWithContext(ctx context.Context) WatermarkTemplateSvgTemplateOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(WatermarkTemplateSvgTemplateOutput)
+}
+
+func (i WatermarkTemplateSvgTemplateArgs) ToWatermarkTemplateSvgTemplatePtrOutput() WatermarkTemplateSvgTemplatePtrOutput {
+	return i.ToWatermarkTemplateSvgTemplatePtrOutputWithContext(context.Background())
+}
+
+func (i WatermarkTemplateSvgTemplateArgs) ToWatermarkTemplateSvgTemplatePtrOutputWithContext(ctx context.Context) WatermarkTemplateSvgTemplatePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(WatermarkTemplateSvgTemplateOutput).ToWatermarkTemplateSvgTemplatePtrOutputWithContext(ctx)
+}
+
+// WatermarkTemplateSvgTemplatePtrInput is an input type that accepts WatermarkTemplateSvgTemplateArgs, WatermarkTemplateSvgTemplatePtr and WatermarkTemplateSvgTemplatePtrOutput values.
+// You can construct a concrete instance of `WatermarkTemplateSvgTemplatePtrInput` via:
+//
+//	        WatermarkTemplateSvgTemplateArgs{...}
+//
+//	or:
+//
+//	        nil
+type WatermarkTemplateSvgTemplatePtrInput interface {
+	pulumi.Input
+
+	ToWatermarkTemplateSvgTemplatePtrOutput() WatermarkTemplateSvgTemplatePtrOutput
+	ToWatermarkTemplateSvgTemplatePtrOutputWithContext(context.Context) WatermarkTemplateSvgTemplatePtrOutput
+}
+
+type watermarkTemplateSvgTemplatePtrType WatermarkTemplateSvgTemplateArgs
+
+func WatermarkTemplateSvgTemplatePtr(v *WatermarkTemplateSvgTemplateArgs) WatermarkTemplateSvgTemplatePtrInput {
+	return (*watermarkTemplateSvgTemplatePtrType)(v)
+}
+
+func (*watermarkTemplateSvgTemplatePtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**WatermarkTemplateSvgTemplate)(nil)).Elem()
+}
+
+func (i *watermarkTemplateSvgTemplatePtrType) ToWatermarkTemplateSvgTemplatePtrOutput() WatermarkTemplateSvgTemplatePtrOutput {
+	return i.ToWatermarkTemplateSvgTemplatePtrOutputWithContext(context.Background())
+}
+
+func (i *watermarkTemplateSvgTemplatePtrType) ToWatermarkTemplateSvgTemplatePtrOutputWithContext(ctx context.Context) WatermarkTemplateSvgTemplatePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(WatermarkTemplateSvgTemplatePtrOutput)
+}
+
+type WatermarkTemplateSvgTemplateOutput struct{ *pulumi.OutputState }
+
+func (WatermarkTemplateSvgTemplateOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*WatermarkTemplateSvgTemplate)(nil)).Elem()
+}
+
+func (o WatermarkTemplateSvgTemplateOutput) ToWatermarkTemplateSvgTemplateOutput() WatermarkTemplateSvgTemplateOutput {
+	return o
+}
+
+func (o WatermarkTemplateSvgTemplateOutput) ToWatermarkTemplateSvgTemplateOutputWithContext(ctx context.Context) WatermarkTemplateSvgTemplateOutput {
+	return o
+}
+
+func (o WatermarkTemplateSvgTemplateOutput) ToWatermarkTemplateSvgTemplatePtrOutput() WatermarkTemplateSvgTemplatePtrOutput {
+	return o.ToWatermarkTemplateSvgTemplatePtrOutputWithContext(context.Background())
+}
+
+func (o WatermarkTemplateSvgTemplateOutput) ToWatermarkTemplateSvgTemplatePtrOutputWithContext(ctx context.Context) WatermarkTemplateSvgTemplatePtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v WatermarkTemplateSvgTemplate) *WatermarkTemplateSvgTemplate {
+		return &v
+	}).(WatermarkTemplateSvgTemplatePtrOutput)
+}
+
+// Watermark height, which supports six formats of px, %, W%, H%, S%, and L%: If the string ends in px, the `Height` of the watermark will be in px; for example, `100px` means that `Height` is 100 px; if `0px` is entered and `Width` is not `0px`, the watermark height will be proportionally scaled based on the source SVG image; if `0px` is entered for both `Width` and `Height`, the watermark height will be the height of the source SVG image;  If the string ends in `W%`, the `Height` of the watermark will be the specified percentage of the video width; for example, `10W%` means that `Height` is 10% of the video width;  If the string ends in `H%`, the `Height` of the watermark will be the specified percentage of the video height; for example, `10H%` means that `Height` is 10% of the video height;  If the string ends in `S%`, the `Height` of the watermark will be the specified percentage of the short side of the video; for example, `10S%` means that `Height` is 10% of the short side of the video;  If the string ends in `L%`, the `Height` of the watermark will be the specified percentage of the long side of the video; for example, `10L%` means that `Height` is 10% of the long side of the video;  If the string ends in %, the meaning is the same as `H%`. Default value: 0 px.
+func (o WatermarkTemplateSvgTemplateOutput) Height() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v WatermarkTemplateSvgTemplate) *string { return v.Height }).(pulumi.StringPtrOutput)
+}
+
+// Watermark width, which supports six formats of px, %, W%, H%, S%, and L%: If the string ends in px, the `Width` of the watermark will be in px; for example, `100px` means that `Width` is 100 px; if `0px` is entered and `Height` is not `0px`, the watermark width will be proportionally scaled based on the source SVG image; if `0px` is entered for both `Width` and `Height`, the watermark width will be the width of the source SVG image;  If the string ends in `W%`, the `Width` of the watermark will be the specified percentage of the video width; for example, `10W%` means that `Width` is 10% of the video width;  If the string ends in `H%`, the `Width` of the watermark will be the specified percentage of the video height; for example, `10H%` means that `Width` is 10% of the video height;  If the string ends in `S%`, the `Width` of the watermark will be the specified percentage of the short side of the video; for example, `10S%` means that `Width` is 10% of the short side of the video;  If the string ends in `L%`, the `Width` of the watermark will be the specified percentage of the long side of the video; for example, `10L%` means that `Width` is 10% of the long side of the video;  If the string ends in %, the meaning is the same as `W%`. Default value: 10W%.
+func (o WatermarkTemplateSvgTemplateOutput) Width() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v WatermarkTemplateSvgTemplate) *string { return v.Width }).(pulumi.StringPtrOutput)
+}
+
+type WatermarkTemplateSvgTemplatePtrOutput struct{ *pulumi.OutputState }
+
+func (WatermarkTemplateSvgTemplatePtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**WatermarkTemplateSvgTemplate)(nil)).Elem()
+}
+
+func (o WatermarkTemplateSvgTemplatePtrOutput) ToWatermarkTemplateSvgTemplatePtrOutput() WatermarkTemplateSvgTemplatePtrOutput {
+	return o
+}
+
+func (o WatermarkTemplateSvgTemplatePtrOutput) ToWatermarkTemplateSvgTemplatePtrOutputWithContext(ctx context.Context) WatermarkTemplateSvgTemplatePtrOutput {
+	return o
+}
+
+func (o WatermarkTemplateSvgTemplatePtrOutput) Elem() WatermarkTemplateSvgTemplateOutput {
+	return o.ApplyT(func(v *WatermarkTemplateSvgTemplate) WatermarkTemplateSvgTemplate {
+		if v != nil {
+			return *v
+		}
+		var ret WatermarkTemplateSvgTemplate
+		return ret
+	}).(WatermarkTemplateSvgTemplateOutput)
+}
+
+// Watermark height, which supports six formats of px, %, W%, H%, S%, and L%: If the string ends in px, the `Height` of the watermark will be in px; for example, `100px` means that `Height` is 100 px; if `0px` is entered and `Width` is not `0px`, the watermark height will be proportionally scaled based on the source SVG image; if `0px` is entered for both `Width` and `Height`, the watermark height will be the height of the source SVG image;  If the string ends in `W%`, the `Height` of the watermark will be the specified percentage of the video width; for example, `10W%` means that `Height` is 10% of the video width;  If the string ends in `H%`, the `Height` of the watermark will be the specified percentage of the video height; for example, `10H%` means that `Height` is 10% of the video height;  If the string ends in `S%`, the `Height` of the watermark will be the specified percentage of the short side of the video; for example, `10S%` means that `Height` is 10% of the short side of the video;  If the string ends in `L%`, the `Height` of the watermark will be the specified percentage of the long side of the video; for example, `10L%` means that `Height` is 10% of the long side of the video;  If the string ends in %, the meaning is the same as `H%`. Default value: 0 px.
+func (o WatermarkTemplateSvgTemplatePtrOutput) Height() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *WatermarkTemplateSvgTemplate) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Height
+	}).(pulumi.StringPtrOutput)
+}
+
+// Watermark width, which supports six formats of px, %, W%, H%, S%, and L%: If the string ends in px, the `Width` of the watermark will be in px; for example, `100px` means that `Width` is 100 px; if `0px` is entered and `Height` is not `0px`, the watermark width will be proportionally scaled based on the source SVG image; if `0px` is entered for both `Width` and `Height`, the watermark width will be the width of the source SVG image;  If the string ends in `W%`, the `Width` of the watermark will be the specified percentage of the video width; for example, `10W%` means that `Width` is 10% of the video width;  If the string ends in `H%`, the `Width` of the watermark will be the specified percentage of the video height; for example, `10H%` means that `Width` is 10% of the video height;  If the string ends in `S%`, the `Width` of the watermark will be the specified percentage of the short side of the video; for example, `10S%` means that `Width` is 10% of the short side of the video;  If the string ends in `L%`, the `Width` of the watermark will be the specified percentage of the long side of the video; for example, `10L%` means that `Width` is 10% of the long side of the video;  If the string ends in %, the meaning is the same as `W%`. Default value: 10W%.
+func (o WatermarkTemplateSvgTemplatePtrOutput) Width() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *WatermarkTemplateSvgTemplate) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Width
+	}).(pulumi.StringPtrOutput)
+}
+
+type WatermarkTemplateTextTemplate struct {
+	// Text transparency. Value range: (0, 1] 0: completely transparent  1: completely opaque Default value: 1.
+	FontAlpha float64 `pulumi:"fontAlpha"`
+	// Font color in 0xRRGGBB format. Default value: 0xFFFFFF (white).
+	FontColor string `pulumi:"fontColor"`
+	// Font size in Npx format where N is a numeric value.
+	FontSize string `pulumi:"fontSize"`
+	// Font type. Currently, two types are supported: simkai.ttf: both Chinese and English are supported;  arial.ttf: only English is supported.
+	FontType string `pulumi:"fontType"`
+}
+
+// WatermarkTemplateTextTemplateInput is an input type that accepts WatermarkTemplateTextTemplateArgs and WatermarkTemplateTextTemplateOutput values.
+// You can construct a concrete instance of `WatermarkTemplateTextTemplateInput` via:
+//
+//	WatermarkTemplateTextTemplateArgs{...}
+type WatermarkTemplateTextTemplateInput interface {
+	pulumi.Input
+
+	ToWatermarkTemplateTextTemplateOutput() WatermarkTemplateTextTemplateOutput
+	ToWatermarkTemplateTextTemplateOutputWithContext(context.Context) WatermarkTemplateTextTemplateOutput
+}
+
+type WatermarkTemplateTextTemplateArgs struct {
+	// Text transparency. Value range: (0, 1] 0: completely transparent  1: completely opaque Default value: 1.
+	FontAlpha pulumi.Float64Input `pulumi:"fontAlpha"`
+	// Font color in 0xRRGGBB format. Default value: 0xFFFFFF (white).
+	FontColor pulumi.StringInput `pulumi:"fontColor"`
+	// Font size in Npx format where N is a numeric value.
+	FontSize pulumi.StringInput `pulumi:"fontSize"`
+	// Font type. Currently, two types are supported: simkai.ttf: both Chinese and English are supported;  arial.ttf: only English is supported.
+	FontType pulumi.StringInput `pulumi:"fontType"`
+}
+
+func (WatermarkTemplateTextTemplateArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*WatermarkTemplateTextTemplate)(nil)).Elem()
+}
+
+func (i WatermarkTemplateTextTemplateArgs) ToWatermarkTemplateTextTemplateOutput() WatermarkTemplateTextTemplateOutput {
+	return i.ToWatermarkTemplateTextTemplateOutputWithContext(context.Background())
+}
+
+func (i WatermarkTemplateTextTemplateArgs) ToWatermarkTemplateTextTemplateOutputWithContext(ctx context.Context) WatermarkTemplateTextTemplateOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(WatermarkTemplateTextTemplateOutput)
+}
+
+func (i WatermarkTemplateTextTemplateArgs) ToWatermarkTemplateTextTemplatePtrOutput() WatermarkTemplateTextTemplatePtrOutput {
+	return i.ToWatermarkTemplateTextTemplatePtrOutputWithContext(context.Background())
+}
+
+func (i WatermarkTemplateTextTemplateArgs) ToWatermarkTemplateTextTemplatePtrOutputWithContext(ctx context.Context) WatermarkTemplateTextTemplatePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(WatermarkTemplateTextTemplateOutput).ToWatermarkTemplateTextTemplatePtrOutputWithContext(ctx)
+}
+
+// WatermarkTemplateTextTemplatePtrInput is an input type that accepts WatermarkTemplateTextTemplateArgs, WatermarkTemplateTextTemplatePtr and WatermarkTemplateTextTemplatePtrOutput values.
+// You can construct a concrete instance of `WatermarkTemplateTextTemplatePtrInput` via:
+//
+//	        WatermarkTemplateTextTemplateArgs{...}
+//
+//	or:
+//
+//	        nil
+type WatermarkTemplateTextTemplatePtrInput interface {
+	pulumi.Input
+
+	ToWatermarkTemplateTextTemplatePtrOutput() WatermarkTemplateTextTemplatePtrOutput
+	ToWatermarkTemplateTextTemplatePtrOutputWithContext(context.Context) WatermarkTemplateTextTemplatePtrOutput
+}
+
+type watermarkTemplateTextTemplatePtrType WatermarkTemplateTextTemplateArgs
+
+func WatermarkTemplateTextTemplatePtr(v *WatermarkTemplateTextTemplateArgs) WatermarkTemplateTextTemplatePtrInput {
+	return (*watermarkTemplateTextTemplatePtrType)(v)
+}
+
+func (*watermarkTemplateTextTemplatePtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**WatermarkTemplateTextTemplate)(nil)).Elem()
+}
+
+func (i *watermarkTemplateTextTemplatePtrType) ToWatermarkTemplateTextTemplatePtrOutput() WatermarkTemplateTextTemplatePtrOutput {
+	return i.ToWatermarkTemplateTextTemplatePtrOutputWithContext(context.Background())
+}
+
+func (i *watermarkTemplateTextTemplatePtrType) ToWatermarkTemplateTextTemplatePtrOutputWithContext(ctx context.Context) WatermarkTemplateTextTemplatePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(WatermarkTemplateTextTemplatePtrOutput)
+}
+
+type WatermarkTemplateTextTemplateOutput struct{ *pulumi.OutputState }
+
+func (WatermarkTemplateTextTemplateOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*WatermarkTemplateTextTemplate)(nil)).Elem()
+}
+
+func (o WatermarkTemplateTextTemplateOutput) ToWatermarkTemplateTextTemplateOutput() WatermarkTemplateTextTemplateOutput {
+	return o
+}
+
+func (o WatermarkTemplateTextTemplateOutput) ToWatermarkTemplateTextTemplateOutputWithContext(ctx context.Context) WatermarkTemplateTextTemplateOutput {
+	return o
+}
+
+func (o WatermarkTemplateTextTemplateOutput) ToWatermarkTemplateTextTemplatePtrOutput() WatermarkTemplateTextTemplatePtrOutput {
+	return o.ToWatermarkTemplateTextTemplatePtrOutputWithContext(context.Background())
+}
+
+func (o WatermarkTemplateTextTemplateOutput) ToWatermarkTemplateTextTemplatePtrOutputWithContext(ctx context.Context) WatermarkTemplateTextTemplatePtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v WatermarkTemplateTextTemplate) *WatermarkTemplateTextTemplate {
+		return &v
+	}).(WatermarkTemplateTextTemplatePtrOutput)
+}
+
+// Text transparency. Value range: (0, 1] 0: completely transparent  1: completely opaque Default value: 1.
+func (o WatermarkTemplateTextTemplateOutput) FontAlpha() pulumi.Float64Output {
+	return o.ApplyT(func(v WatermarkTemplateTextTemplate) float64 { return v.FontAlpha }).(pulumi.Float64Output)
+}
+
+// Font color in 0xRRGGBB format. Default value: 0xFFFFFF (white).
+func (o WatermarkTemplateTextTemplateOutput) FontColor() pulumi.StringOutput {
+	return o.ApplyT(func(v WatermarkTemplateTextTemplate) string { return v.FontColor }).(pulumi.StringOutput)
+}
+
+// Font size in Npx format where N is a numeric value.
+func (o WatermarkTemplateTextTemplateOutput) FontSize() pulumi.StringOutput {
+	return o.ApplyT(func(v WatermarkTemplateTextTemplate) string { return v.FontSize }).(pulumi.StringOutput)
+}
+
+// Font type. Currently, two types are supported: simkai.ttf: both Chinese and English are supported;  arial.ttf: only English is supported.
+func (o WatermarkTemplateTextTemplateOutput) FontType() pulumi.StringOutput {
+	return o.ApplyT(func(v WatermarkTemplateTextTemplate) string { return v.FontType }).(pulumi.StringOutput)
+}
+
+type WatermarkTemplateTextTemplatePtrOutput struct{ *pulumi.OutputState }
+
+func (WatermarkTemplateTextTemplatePtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**WatermarkTemplateTextTemplate)(nil)).Elem()
+}
+
+func (o WatermarkTemplateTextTemplatePtrOutput) ToWatermarkTemplateTextTemplatePtrOutput() WatermarkTemplateTextTemplatePtrOutput {
+	return o
+}
+
+func (o WatermarkTemplateTextTemplatePtrOutput) ToWatermarkTemplateTextTemplatePtrOutputWithContext(ctx context.Context) WatermarkTemplateTextTemplatePtrOutput {
+	return o
+}
+
+func (o WatermarkTemplateTextTemplatePtrOutput) Elem() WatermarkTemplateTextTemplateOutput {
+	return o.ApplyT(func(v *WatermarkTemplateTextTemplate) WatermarkTemplateTextTemplate {
+		if v != nil {
+			return *v
+		}
+		var ret WatermarkTemplateTextTemplate
+		return ret
+	}).(WatermarkTemplateTextTemplateOutput)
+}
+
+// Text transparency. Value range: (0, 1] 0: completely transparent  1: completely opaque Default value: 1.
+func (o WatermarkTemplateTextTemplatePtrOutput) FontAlpha() pulumi.Float64PtrOutput {
+	return o.ApplyT(func(v *WatermarkTemplateTextTemplate) *float64 {
+		if v == nil {
+			return nil
+		}
+		return &v.FontAlpha
+	}).(pulumi.Float64PtrOutput)
+}
+
+// Font color in 0xRRGGBB format. Default value: 0xFFFFFF (white).
+func (o WatermarkTemplateTextTemplatePtrOutput) FontColor() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *WatermarkTemplateTextTemplate) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.FontColor
+	}).(pulumi.StringPtrOutput)
+}
+
+// Font size in Npx format where N is a numeric value.
+func (o WatermarkTemplateTextTemplatePtrOutput) FontSize() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *WatermarkTemplateTextTemplate) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.FontSize
+	}).(pulumi.StringPtrOutput)
+}
+
+// Font type. Currently, two types are supported: simkai.ttf: both Chinese and English are supported;  arial.ttf: only English is supported.
+func (o WatermarkTemplateTextTemplatePtrOutput) FontType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *WatermarkTemplateTextTemplate) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.FontType
+	}).(pulumi.StringPtrOutput)
+}
+
 type GetAdaptiveDynamicStreamingTemplatesTemplateList struct {
 	// Template description.
 	Comment string `pulumi:"comment"`
@@ -2506,7 +4873,7 @@ type GetAdaptiveDynamicStreamingTemplatesTemplateList struct {
 // GetAdaptiveDynamicStreamingTemplatesTemplateListInput is an input type that accepts GetAdaptiveDynamicStreamingTemplatesTemplateListArgs and GetAdaptiveDynamicStreamingTemplatesTemplateListOutput values.
 // You can construct a concrete instance of `GetAdaptiveDynamicStreamingTemplatesTemplateListInput` via:
 //
-//          GetAdaptiveDynamicStreamingTemplatesTemplateListArgs{...}
+//	GetAdaptiveDynamicStreamingTemplatesTemplateListArgs{...}
 type GetAdaptiveDynamicStreamingTemplatesTemplateListInput interface {
 	pulumi.Input
 
@@ -2554,7 +4921,7 @@ func (i GetAdaptiveDynamicStreamingTemplatesTemplateListArgs) ToGetAdaptiveDynam
 // GetAdaptiveDynamicStreamingTemplatesTemplateListArrayInput is an input type that accepts GetAdaptiveDynamicStreamingTemplatesTemplateListArray and GetAdaptiveDynamicStreamingTemplatesTemplateListArrayOutput values.
 // You can construct a concrete instance of `GetAdaptiveDynamicStreamingTemplatesTemplateListArrayInput` via:
 //
-//          GetAdaptiveDynamicStreamingTemplatesTemplateListArray{ GetAdaptiveDynamicStreamingTemplatesTemplateListArgs{...} }
+//	GetAdaptiveDynamicStreamingTemplatesTemplateListArray{ GetAdaptiveDynamicStreamingTemplatesTemplateListArgs{...} }
 type GetAdaptiveDynamicStreamingTemplatesTemplateListArrayInput interface {
 	pulumi.Input
 
@@ -2679,7 +5046,7 @@ type GetAdaptiveDynamicStreamingTemplatesTemplateListStreamInfo struct {
 // GetAdaptiveDynamicStreamingTemplatesTemplateListStreamInfoInput is an input type that accepts GetAdaptiveDynamicStreamingTemplatesTemplateListStreamInfoArgs and GetAdaptiveDynamicStreamingTemplatesTemplateListStreamInfoOutput values.
 // You can construct a concrete instance of `GetAdaptiveDynamicStreamingTemplatesTemplateListStreamInfoInput` via:
 //
-//          GetAdaptiveDynamicStreamingTemplatesTemplateListStreamInfoArgs{...}
+//	GetAdaptiveDynamicStreamingTemplatesTemplateListStreamInfoArgs{...}
 type GetAdaptiveDynamicStreamingTemplatesTemplateListStreamInfoInput interface {
 	pulumi.Input
 
@@ -2711,7 +5078,7 @@ func (i GetAdaptiveDynamicStreamingTemplatesTemplateListStreamInfoArgs) ToGetAda
 // GetAdaptiveDynamicStreamingTemplatesTemplateListStreamInfoArrayInput is an input type that accepts GetAdaptiveDynamicStreamingTemplatesTemplateListStreamInfoArray and GetAdaptiveDynamicStreamingTemplatesTemplateListStreamInfoArrayOutput values.
 // You can construct a concrete instance of `GetAdaptiveDynamicStreamingTemplatesTemplateListStreamInfoArrayInput` via:
 //
-//          GetAdaptiveDynamicStreamingTemplatesTemplateListStreamInfoArray{ GetAdaptiveDynamicStreamingTemplatesTemplateListStreamInfoArgs{...} }
+//	GetAdaptiveDynamicStreamingTemplatesTemplateListStreamInfoArray{ GetAdaptiveDynamicStreamingTemplatesTemplateListStreamInfoArgs{...} }
 type GetAdaptiveDynamicStreamingTemplatesTemplateListStreamInfoArrayInput interface {
 	pulumi.Input
 
@@ -2800,7 +5167,7 @@ type GetAdaptiveDynamicStreamingTemplatesTemplateListStreamInfoAudio struct {
 // GetAdaptiveDynamicStreamingTemplatesTemplateListStreamInfoAudioInput is an input type that accepts GetAdaptiveDynamicStreamingTemplatesTemplateListStreamInfoAudioArgs and GetAdaptiveDynamicStreamingTemplatesTemplateListStreamInfoAudioOutput values.
 // You can construct a concrete instance of `GetAdaptiveDynamicStreamingTemplatesTemplateListStreamInfoAudioInput` via:
 //
-//          GetAdaptiveDynamicStreamingTemplatesTemplateListStreamInfoAudioArgs{...}
+//	GetAdaptiveDynamicStreamingTemplatesTemplateListStreamInfoAudioArgs{...}
 type GetAdaptiveDynamicStreamingTemplatesTemplateListStreamInfoAudioInput interface {
 	pulumi.Input
 
@@ -2834,7 +5201,7 @@ func (i GetAdaptiveDynamicStreamingTemplatesTemplateListStreamInfoAudioArgs) ToG
 // GetAdaptiveDynamicStreamingTemplatesTemplateListStreamInfoAudioArrayInput is an input type that accepts GetAdaptiveDynamicStreamingTemplatesTemplateListStreamInfoAudioArray and GetAdaptiveDynamicStreamingTemplatesTemplateListStreamInfoAudioArrayOutput values.
 // You can construct a concrete instance of `GetAdaptiveDynamicStreamingTemplatesTemplateListStreamInfoAudioArrayInput` via:
 //
-//          GetAdaptiveDynamicStreamingTemplatesTemplateListStreamInfoAudioArray{ GetAdaptiveDynamicStreamingTemplatesTemplateListStreamInfoAudioArgs{...} }
+//	GetAdaptiveDynamicStreamingTemplatesTemplateListStreamInfoAudioArray{ GetAdaptiveDynamicStreamingTemplatesTemplateListStreamInfoAudioArgs{...} }
 type GetAdaptiveDynamicStreamingTemplatesTemplateListStreamInfoAudioArrayInput interface {
 	pulumi.Input
 
@@ -2930,7 +5297,7 @@ type GetAdaptiveDynamicStreamingTemplatesTemplateListStreamInfoVideo struct {
 // GetAdaptiveDynamicStreamingTemplatesTemplateListStreamInfoVideoInput is an input type that accepts GetAdaptiveDynamicStreamingTemplatesTemplateListStreamInfoVideoArgs and GetAdaptiveDynamicStreamingTemplatesTemplateListStreamInfoVideoOutput values.
 // You can construct a concrete instance of `GetAdaptiveDynamicStreamingTemplatesTemplateListStreamInfoVideoInput` via:
 //
-//          GetAdaptiveDynamicStreamingTemplatesTemplateListStreamInfoVideoArgs{...}
+//	GetAdaptiveDynamicStreamingTemplatesTemplateListStreamInfoVideoArgs{...}
 type GetAdaptiveDynamicStreamingTemplatesTemplateListStreamInfoVideoInput interface {
 	pulumi.Input
 
@@ -2970,7 +5337,7 @@ func (i GetAdaptiveDynamicStreamingTemplatesTemplateListStreamInfoVideoArgs) ToG
 // GetAdaptiveDynamicStreamingTemplatesTemplateListStreamInfoVideoArrayInput is an input type that accepts GetAdaptiveDynamicStreamingTemplatesTemplateListStreamInfoVideoArray and GetAdaptiveDynamicStreamingTemplatesTemplateListStreamInfoVideoArrayOutput values.
 // You can construct a concrete instance of `GetAdaptiveDynamicStreamingTemplatesTemplateListStreamInfoVideoArrayInput` via:
 //
-//          GetAdaptiveDynamicStreamingTemplatesTemplateListStreamInfoVideoArray{ GetAdaptiveDynamicStreamingTemplatesTemplateListStreamInfoVideoArgs{...} }
+//	GetAdaptiveDynamicStreamingTemplatesTemplateListStreamInfoVideoArray{ GetAdaptiveDynamicStreamingTemplatesTemplateListStreamInfoVideoArgs{...} }
 type GetAdaptiveDynamicStreamingTemplatesTemplateListStreamInfoVideoArrayInput interface {
 	pulumi.Input
 
@@ -3097,7 +5464,7 @@ type GetImageSpriteTemplatesTemplateList struct {
 // GetImageSpriteTemplatesTemplateListInput is an input type that accepts GetImageSpriteTemplatesTemplateListArgs and GetImageSpriteTemplatesTemplateListOutput values.
 // You can construct a concrete instance of `GetImageSpriteTemplatesTemplateListInput` via:
 //
-//          GetImageSpriteTemplatesTemplateListArgs{...}
+//	GetImageSpriteTemplatesTemplateListArgs{...}
 type GetImageSpriteTemplatesTemplateListInput interface {
 	pulumi.Input
 
@@ -3151,7 +5518,7 @@ func (i GetImageSpriteTemplatesTemplateListArgs) ToGetImageSpriteTemplatesTempla
 // GetImageSpriteTemplatesTemplateListArrayInput is an input type that accepts GetImageSpriteTemplatesTemplateListArray and GetImageSpriteTemplatesTemplateListArrayOutput values.
 // You can construct a concrete instance of `GetImageSpriteTemplatesTemplateListArrayInput` via:
 //
-//          GetImageSpriteTemplatesTemplateListArray{ GetImageSpriteTemplatesTemplateListArgs{...} }
+//	GetImageSpriteTemplatesTemplateListArray{ GetImageSpriteTemplatesTemplateListArgs{...} }
 type GetImageSpriteTemplatesTemplateListArrayInput interface {
 	pulumi.Input
 
@@ -3295,7 +5662,7 @@ type GetProcedureTemplatesTemplateList struct {
 // GetProcedureTemplatesTemplateListInput is an input type that accepts GetProcedureTemplatesTemplateListArgs and GetProcedureTemplatesTemplateListOutput values.
 // You can construct a concrete instance of `GetProcedureTemplatesTemplateListInput` via:
 //
-//          GetProcedureTemplatesTemplateListArgs{...}
+//	GetProcedureTemplatesTemplateListArgs{...}
 type GetProcedureTemplatesTemplateListInput interface {
 	pulumi.Input
 
@@ -3333,7 +5700,7 @@ func (i GetProcedureTemplatesTemplateListArgs) ToGetProcedureTemplatesTemplateLi
 // GetProcedureTemplatesTemplateListArrayInput is an input type that accepts GetProcedureTemplatesTemplateListArray and GetProcedureTemplatesTemplateListArrayOutput values.
 // You can construct a concrete instance of `GetProcedureTemplatesTemplateListArrayInput` via:
 //
-//          GetProcedureTemplatesTemplateListArray{ GetProcedureTemplatesTemplateListArgs{...} }
+//	GetProcedureTemplatesTemplateListArray{ GetProcedureTemplatesTemplateListArgs{...} }
 type GetProcedureTemplatesTemplateListArrayInput interface {
 	pulumi.Input
 
@@ -3441,7 +5808,7 @@ type GetProcedureTemplatesTemplateListMediaProcessTask struct {
 // GetProcedureTemplatesTemplateListMediaProcessTaskInput is an input type that accepts GetProcedureTemplatesTemplateListMediaProcessTaskArgs and GetProcedureTemplatesTemplateListMediaProcessTaskOutput values.
 // You can construct a concrete instance of `GetProcedureTemplatesTemplateListMediaProcessTaskInput` via:
 //
-//          GetProcedureTemplatesTemplateListMediaProcessTaskArgs{...}
+//	GetProcedureTemplatesTemplateListMediaProcessTaskArgs{...}
 type GetProcedureTemplatesTemplateListMediaProcessTaskInput interface {
 	pulumi.Input
 
@@ -3481,7 +5848,7 @@ func (i GetProcedureTemplatesTemplateListMediaProcessTaskArgs) ToGetProcedureTem
 // GetProcedureTemplatesTemplateListMediaProcessTaskArrayInput is an input type that accepts GetProcedureTemplatesTemplateListMediaProcessTaskArray and GetProcedureTemplatesTemplateListMediaProcessTaskArrayOutput values.
 // You can construct a concrete instance of `GetProcedureTemplatesTemplateListMediaProcessTaskArrayInput` via:
 //
-//          GetProcedureTemplatesTemplateListMediaProcessTaskArray{ GetProcedureTemplatesTemplateListMediaProcessTaskArgs{...} }
+//	GetProcedureTemplatesTemplateListMediaProcessTaskArray{ GetProcedureTemplatesTemplateListMediaProcessTaskArgs{...} }
 type GetProcedureTemplatesTemplateListMediaProcessTaskArrayInput interface {
 	pulumi.Input
 
@@ -3596,7 +5963,7 @@ type GetProcedureTemplatesTemplateListMediaProcessTaskAdaptiveDynamicStreamingTa
 // GetProcedureTemplatesTemplateListMediaProcessTaskAdaptiveDynamicStreamingTaskListInput is an input type that accepts GetProcedureTemplatesTemplateListMediaProcessTaskAdaptiveDynamicStreamingTaskListArgs and GetProcedureTemplatesTemplateListMediaProcessTaskAdaptiveDynamicStreamingTaskListOutput values.
 // You can construct a concrete instance of `GetProcedureTemplatesTemplateListMediaProcessTaskAdaptiveDynamicStreamingTaskListInput` via:
 //
-//          GetProcedureTemplatesTemplateListMediaProcessTaskAdaptiveDynamicStreamingTaskListArgs{...}
+//	GetProcedureTemplatesTemplateListMediaProcessTaskAdaptiveDynamicStreamingTaskListArgs{...}
 type GetProcedureTemplatesTemplateListMediaProcessTaskAdaptiveDynamicStreamingTaskListInput interface {
 	pulumi.Input
 
@@ -3626,7 +5993,7 @@ func (i GetProcedureTemplatesTemplateListMediaProcessTaskAdaptiveDynamicStreamin
 // GetProcedureTemplatesTemplateListMediaProcessTaskAdaptiveDynamicStreamingTaskListArrayInput is an input type that accepts GetProcedureTemplatesTemplateListMediaProcessTaskAdaptiveDynamicStreamingTaskListArray and GetProcedureTemplatesTemplateListMediaProcessTaskAdaptiveDynamicStreamingTaskListArrayOutput values.
 // You can construct a concrete instance of `GetProcedureTemplatesTemplateListMediaProcessTaskAdaptiveDynamicStreamingTaskListArrayInput` via:
 //
-//          GetProcedureTemplatesTemplateListMediaProcessTaskAdaptiveDynamicStreamingTaskListArray{ GetProcedureTemplatesTemplateListMediaProcessTaskAdaptiveDynamicStreamingTaskListArgs{...} }
+//	GetProcedureTemplatesTemplateListMediaProcessTaskAdaptiveDynamicStreamingTaskListArray{ GetProcedureTemplatesTemplateListMediaProcessTaskAdaptiveDynamicStreamingTaskListArgs{...} }
 type GetProcedureTemplatesTemplateListMediaProcessTaskAdaptiveDynamicStreamingTaskListArrayInput interface {
 	pulumi.Input
 
@@ -3703,14 +6070,16 @@ type GetProcedureTemplatesTemplateListMediaProcessTaskAdaptiveDynamicStreamingTa
 	EndTimeOffset *float64 `pulumi:"endTimeOffset"`
 	// Start time offset of blur in seconds. If this parameter is left empty or `0` is entered, the blur will appear upon the first video frame. If this parameter is left empty or `0` is entered, the blur will appear upon the first video frame; If this value is greater than `0` (e.g., n), the blur will appear at second n after the first video frame; If this value is smaller than `0` (e.g., -n), the blur will appear at second n before the last video frame.
 	StartTimeOffset *float64 `pulumi:"startTimeOffset"`
-	SvgContent      *string  `pulumi:"svgContent"`
-	TextContent     *string  `pulumi:"textContent"`
+	// SVG content of up to `2000000` characters. This needs to be entered only when the watermark type is `SVG`. Note: this field may return null, indicating that no valid values can be obtained.
+	SvgContent *string `pulumi:"svgContent"`
+	// Text content of up to `100` characters. This needs to be entered only when the watermark type is text. Note: this field may return null, indicating that no valid values can be obtained.
+	TextContent *string `pulumi:"textContent"`
 }
 
 // GetProcedureTemplatesTemplateListMediaProcessTaskAdaptiveDynamicStreamingTaskListWatermarkListInput is an input type that accepts GetProcedureTemplatesTemplateListMediaProcessTaskAdaptiveDynamicStreamingTaskListWatermarkListArgs and GetProcedureTemplatesTemplateListMediaProcessTaskAdaptiveDynamicStreamingTaskListWatermarkListOutput values.
 // You can construct a concrete instance of `GetProcedureTemplatesTemplateListMediaProcessTaskAdaptiveDynamicStreamingTaskListWatermarkListInput` via:
 //
-//          GetProcedureTemplatesTemplateListMediaProcessTaskAdaptiveDynamicStreamingTaskListWatermarkListArgs{...}
+//	GetProcedureTemplatesTemplateListMediaProcessTaskAdaptiveDynamicStreamingTaskListWatermarkListArgs{...}
 type GetProcedureTemplatesTemplateListMediaProcessTaskAdaptiveDynamicStreamingTaskListWatermarkListInput interface {
 	pulumi.Input
 
@@ -3725,8 +6094,10 @@ type GetProcedureTemplatesTemplateListMediaProcessTaskAdaptiveDynamicStreamingTa
 	EndTimeOffset pulumi.Float64PtrInput `pulumi:"endTimeOffset"`
 	// Start time offset of blur in seconds. If this parameter is left empty or `0` is entered, the blur will appear upon the first video frame. If this parameter is left empty or `0` is entered, the blur will appear upon the first video frame; If this value is greater than `0` (e.g., n), the blur will appear at second n after the first video frame; If this value is smaller than `0` (e.g., -n), the blur will appear at second n before the last video frame.
 	StartTimeOffset pulumi.Float64PtrInput `pulumi:"startTimeOffset"`
-	SvgContent      pulumi.StringPtrInput  `pulumi:"svgContent"`
-	TextContent     pulumi.StringPtrInput  `pulumi:"textContent"`
+	// SVG content of up to `2000000` characters. This needs to be entered only when the watermark type is `SVG`. Note: this field may return null, indicating that no valid values can be obtained.
+	SvgContent pulumi.StringPtrInput `pulumi:"svgContent"`
+	// Text content of up to `100` characters. This needs to be entered only when the watermark type is text. Note: this field may return null, indicating that no valid values can be obtained.
+	TextContent pulumi.StringPtrInput `pulumi:"textContent"`
 }
 
 func (GetProcedureTemplatesTemplateListMediaProcessTaskAdaptiveDynamicStreamingTaskListWatermarkListArgs) ElementType() reflect.Type {
@@ -3744,7 +6115,7 @@ func (i GetProcedureTemplatesTemplateListMediaProcessTaskAdaptiveDynamicStreamin
 // GetProcedureTemplatesTemplateListMediaProcessTaskAdaptiveDynamicStreamingTaskListWatermarkListArrayInput is an input type that accepts GetProcedureTemplatesTemplateListMediaProcessTaskAdaptiveDynamicStreamingTaskListWatermarkListArray and GetProcedureTemplatesTemplateListMediaProcessTaskAdaptiveDynamicStreamingTaskListWatermarkListArrayOutput values.
 // You can construct a concrete instance of `GetProcedureTemplatesTemplateListMediaProcessTaskAdaptiveDynamicStreamingTaskListWatermarkListArrayInput` via:
 //
-//          GetProcedureTemplatesTemplateListMediaProcessTaskAdaptiveDynamicStreamingTaskListWatermarkListArray{ GetProcedureTemplatesTemplateListMediaProcessTaskAdaptiveDynamicStreamingTaskListWatermarkListArgs{...} }
+//	GetProcedureTemplatesTemplateListMediaProcessTaskAdaptiveDynamicStreamingTaskListWatermarkListArray{ GetProcedureTemplatesTemplateListMediaProcessTaskAdaptiveDynamicStreamingTaskListWatermarkListArgs{...} }
 type GetProcedureTemplatesTemplateListMediaProcessTaskAdaptiveDynamicStreamingTaskListWatermarkListArrayInput interface {
 	pulumi.Input
 
@@ -3801,12 +6172,14 @@ func (o GetProcedureTemplatesTemplateListMediaProcessTaskAdaptiveDynamicStreamin
 	}).(pulumi.Float64PtrOutput)
 }
 
+// SVG content of up to `2000000` characters. This needs to be entered only when the watermark type is `SVG`. Note: this field may return null, indicating that no valid values can be obtained.
 func (o GetProcedureTemplatesTemplateListMediaProcessTaskAdaptiveDynamicStreamingTaskListWatermarkListOutput) SvgContent() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v GetProcedureTemplatesTemplateListMediaProcessTaskAdaptiveDynamicStreamingTaskListWatermarkList) *string {
 		return v.SvgContent
 	}).(pulumi.StringPtrOutput)
 }
 
+// Text content of up to `100` characters. This needs to be entered only when the watermark type is text. Note: this field may return null, indicating that no valid values can be obtained.
 func (o GetProcedureTemplatesTemplateListMediaProcessTaskAdaptiveDynamicStreamingTaskListWatermarkListOutput) TextContent() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v GetProcedureTemplatesTemplateListMediaProcessTaskAdaptiveDynamicStreamingTaskListWatermarkList) *string {
 		return v.TextContent
@@ -3845,7 +6218,7 @@ type GetProcedureTemplatesTemplateListMediaProcessTaskAnimatedGraphicTaskList st
 // GetProcedureTemplatesTemplateListMediaProcessTaskAnimatedGraphicTaskListInput is an input type that accepts GetProcedureTemplatesTemplateListMediaProcessTaskAnimatedGraphicTaskListArgs and GetProcedureTemplatesTemplateListMediaProcessTaskAnimatedGraphicTaskListOutput values.
 // You can construct a concrete instance of `GetProcedureTemplatesTemplateListMediaProcessTaskAnimatedGraphicTaskListInput` via:
 //
-//          GetProcedureTemplatesTemplateListMediaProcessTaskAnimatedGraphicTaskListArgs{...}
+//	GetProcedureTemplatesTemplateListMediaProcessTaskAnimatedGraphicTaskListArgs{...}
 type GetProcedureTemplatesTemplateListMediaProcessTaskAnimatedGraphicTaskListInput interface {
 	pulumi.Input
 
@@ -3877,7 +6250,7 @@ func (i GetProcedureTemplatesTemplateListMediaProcessTaskAnimatedGraphicTaskList
 // GetProcedureTemplatesTemplateListMediaProcessTaskAnimatedGraphicTaskListArrayInput is an input type that accepts GetProcedureTemplatesTemplateListMediaProcessTaskAnimatedGraphicTaskListArray and GetProcedureTemplatesTemplateListMediaProcessTaskAnimatedGraphicTaskListArrayOutput values.
 // You can construct a concrete instance of `GetProcedureTemplatesTemplateListMediaProcessTaskAnimatedGraphicTaskListArrayInput` via:
 //
-//          GetProcedureTemplatesTemplateListMediaProcessTaskAnimatedGraphicTaskListArray{ GetProcedureTemplatesTemplateListMediaProcessTaskAnimatedGraphicTaskListArgs{...} }
+//	GetProcedureTemplatesTemplateListMediaProcessTaskAnimatedGraphicTaskListArray{ GetProcedureTemplatesTemplateListMediaProcessTaskAnimatedGraphicTaskListArgs{...} }
 type GetProcedureTemplatesTemplateListMediaProcessTaskAnimatedGraphicTaskListArrayInput interface {
 	pulumi.Input
 
@@ -3968,7 +6341,7 @@ type GetProcedureTemplatesTemplateListMediaProcessTaskCoverBySnapshotTaskList st
 // GetProcedureTemplatesTemplateListMediaProcessTaskCoverBySnapshotTaskListInput is an input type that accepts GetProcedureTemplatesTemplateListMediaProcessTaskCoverBySnapshotTaskListArgs and GetProcedureTemplatesTemplateListMediaProcessTaskCoverBySnapshotTaskListOutput values.
 // You can construct a concrete instance of `GetProcedureTemplatesTemplateListMediaProcessTaskCoverBySnapshotTaskListInput` via:
 //
-//          GetProcedureTemplatesTemplateListMediaProcessTaskCoverBySnapshotTaskListArgs{...}
+//	GetProcedureTemplatesTemplateListMediaProcessTaskCoverBySnapshotTaskListArgs{...}
 type GetProcedureTemplatesTemplateListMediaProcessTaskCoverBySnapshotTaskListInput interface {
 	pulumi.Input
 
@@ -4002,7 +6375,7 @@ func (i GetProcedureTemplatesTemplateListMediaProcessTaskCoverBySnapshotTaskList
 // GetProcedureTemplatesTemplateListMediaProcessTaskCoverBySnapshotTaskListArrayInput is an input type that accepts GetProcedureTemplatesTemplateListMediaProcessTaskCoverBySnapshotTaskListArray and GetProcedureTemplatesTemplateListMediaProcessTaskCoverBySnapshotTaskListArrayOutput values.
 // You can construct a concrete instance of `GetProcedureTemplatesTemplateListMediaProcessTaskCoverBySnapshotTaskListArrayInput` via:
 //
-//          GetProcedureTemplatesTemplateListMediaProcessTaskCoverBySnapshotTaskListArray{ GetProcedureTemplatesTemplateListMediaProcessTaskCoverBySnapshotTaskListArgs{...} }
+//	GetProcedureTemplatesTemplateListMediaProcessTaskCoverBySnapshotTaskListArray{ GetProcedureTemplatesTemplateListMediaProcessTaskCoverBySnapshotTaskListArgs{...} }
 type GetProcedureTemplatesTemplateListMediaProcessTaskCoverBySnapshotTaskListArrayInput interface {
 	pulumi.Input
 
@@ -4093,14 +6466,16 @@ type GetProcedureTemplatesTemplateListMediaProcessTaskCoverBySnapshotTaskListWat
 	EndTimeOffset *float64 `pulumi:"endTimeOffset"`
 	// Start time offset of blur in seconds. If this parameter is left empty or `0` is entered, the blur will appear upon the first video frame. If this parameter is left empty or `0` is entered, the blur will appear upon the first video frame; If this value is greater than `0` (e.g., n), the blur will appear at second n after the first video frame; If this value is smaller than `0` (e.g., -n), the blur will appear at second n before the last video frame.
 	StartTimeOffset *float64 `pulumi:"startTimeOffset"`
-	SvgContent      *string  `pulumi:"svgContent"`
-	TextContent     *string  `pulumi:"textContent"`
+	// SVG content of up to `2000000` characters. This needs to be entered only when the watermark type is `SVG`. Note: this field may return null, indicating that no valid values can be obtained.
+	SvgContent *string `pulumi:"svgContent"`
+	// Text content of up to `100` characters. This needs to be entered only when the watermark type is text. Note: this field may return null, indicating that no valid values can be obtained.
+	TextContent *string `pulumi:"textContent"`
 }
 
 // GetProcedureTemplatesTemplateListMediaProcessTaskCoverBySnapshotTaskListWatermarkListInput is an input type that accepts GetProcedureTemplatesTemplateListMediaProcessTaskCoverBySnapshotTaskListWatermarkListArgs and GetProcedureTemplatesTemplateListMediaProcessTaskCoverBySnapshotTaskListWatermarkListOutput values.
 // You can construct a concrete instance of `GetProcedureTemplatesTemplateListMediaProcessTaskCoverBySnapshotTaskListWatermarkListInput` via:
 //
-//          GetProcedureTemplatesTemplateListMediaProcessTaskCoverBySnapshotTaskListWatermarkListArgs{...}
+//	GetProcedureTemplatesTemplateListMediaProcessTaskCoverBySnapshotTaskListWatermarkListArgs{...}
 type GetProcedureTemplatesTemplateListMediaProcessTaskCoverBySnapshotTaskListWatermarkListInput interface {
 	pulumi.Input
 
@@ -4115,8 +6490,10 @@ type GetProcedureTemplatesTemplateListMediaProcessTaskCoverBySnapshotTaskListWat
 	EndTimeOffset pulumi.Float64PtrInput `pulumi:"endTimeOffset"`
 	// Start time offset of blur in seconds. If this parameter is left empty or `0` is entered, the blur will appear upon the first video frame. If this parameter is left empty or `0` is entered, the blur will appear upon the first video frame; If this value is greater than `0` (e.g., n), the blur will appear at second n after the first video frame; If this value is smaller than `0` (e.g., -n), the blur will appear at second n before the last video frame.
 	StartTimeOffset pulumi.Float64PtrInput `pulumi:"startTimeOffset"`
-	SvgContent      pulumi.StringPtrInput  `pulumi:"svgContent"`
-	TextContent     pulumi.StringPtrInput  `pulumi:"textContent"`
+	// SVG content of up to `2000000` characters. This needs to be entered only when the watermark type is `SVG`. Note: this field may return null, indicating that no valid values can be obtained.
+	SvgContent pulumi.StringPtrInput `pulumi:"svgContent"`
+	// Text content of up to `100` characters. This needs to be entered only when the watermark type is text. Note: this field may return null, indicating that no valid values can be obtained.
+	TextContent pulumi.StringPtrInput `pulumi:"textContent"`
 }
 
 func (GetProcedureTemplatesTemplateListMediaProcessTaskCoverBySnapshotTaskListWatermarkListArgs) ElementType() reflect.Type {
@@ -4134,7 +6511,7 @@ func (i GetProcedureTemplatesTemplateListMediaProcessTaskCoverBySnapshotTaskList
 // GetProcedureTemplatesTemplateListMediaProcessTaskCoverBySnapshotTaskListWatermarkListArrayInput is an input type that accepts GetProcedureTemplatesTemplateListMediaProcessTaskCoverBySnapshotTaskListWatermarkListArray and GetProcedureTemplatesTemplateListMediaProcessTaskCoverBySnapshotTaskListWatermarkListArrayOutput values.
 // You can construct a concrete instance of `GetProcedureTemplatesTemplateListMediaProcessTaskCoverBySnapshotTaskListWatermarkListArrayInput` via:
 //
-//          GetProcedureTemplatesTemplateListMediaProcessTaskCoverBySnapshotTaskListWatermarkListArray{ GetProcedureTemplatesTemplateListMediaProcessTaskCoverBySnapshotTaskListWatermarkListArgs{...} }
+//	GetProcedureTemplatesTemplateListMediaProcessTaskCoverBySnapshotTaskListWatermarkListArray{ GetProcedureTemplatesTemplateListMediaProcessTaskCoverBySnapshotTaskListWatermarkListArgs{...} }
 type GetProcedureTemplatesTemplateListMediaProcessTaskCoverBySnapshotTaskListWatermarkListArrayInput interface {
 	pulumi.Input
 
@@ -4191,12 +6568,14 @@ func (o GetProcedureTemplatesTemplateListMediaProcessTaskCoverBySnapshotTaskList
 	}).(pulumi.Float64PtrOutput)
 }
 
+// SVG content of up to `2000000` characters. This needs to be entered only when the watermark type is `SVG`. Note: this field may return null, indicating that no valid values can be obtained.
 func (o GetProcedureTemplatesTemplateListMediaProcessTaskCoverBySnapshotTaskListWatermarkListOutput) SvgContent() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v GetProcedureTemplatesTemplateListMediaProcessTaskCoverBySnapshotTaskListWatermarkList) *string {
 		return v.SvgContent
 	}).(pulumi.StringPtrOutput)
 }
 
+// Text content of up to `100` characters. This needs to be entered only when the watermark type is text. Note: this field may return null, indicating that no valid values can be obtained.
 func (o GetProcedureTemplatesTemplateListMediaProcessTaskCoverBySnapshotTaskListWatermarkListOutput) TextContent() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v GetProcedureTemplatesTemplateListMediaProcessTaskCoverBySnapshotTaskListWatermarkList) *string {
 		return v.TextContent
@@ -4231,7 +6610,7 @@ type GetProcedureTemplatesTemplateListMediaProcessTaskImageSpriteTaskList struct
 // GetProcedureTemplatesTemplateListMediaProcessTaskImageSpriteTaskListInput is an input type that accepts GetProcedureTemplatesTemplateListMediaProcessTaskImageSpriteTaskListArgs and GetProcedureTemplatesTemplateListMediaProcessTaskImageSpriteTaskListOutput values.
 // You can construct a concrete instance of `GetProcedureTemplatesTemplateListMediaProcessTaskImageSpriteTaskListInput` via:
 //
-//          GetProcedureTemplatesTemplateListMediaProcessTaskImageSpriteTaskListArgs{...}
+//	GetProcedureTemplatesTemplateListMediaProcessTaskImageSpriteTaskListArgs{...}
 type GetProcedureTemplatesTemplateListMediaProcessTaskImageSpriteTaskListInput interface {
 	pulumi.Input
 
@@ -4259,7 +6638,7 @@ func (i GetProcedureTemplatesTemplateListMediaProcessTaskImageSpriteTaskListArgs
 // GetProcedureTemplatesTemplateListMediaProcessTaskImageSpriteTaskListArrayInput is an input type that accepts GetProcedureTemplatesTemplateListMediaProcessTaskImageSpriteTaskListArray and GetProcedureTemplatesTemplateListMediaProcessTaskImageSpriteTaskListArrayOutput values.
 // You can construct a concrete instance of `GetProcedureTemplatesTemplateListMediaProcessTaskImageSpriteTaskListArrayInput` via:
 //
-//          GetProcedureTemplatesTemplateListMediaProcessTaskImageSpriteTaskListArray{ GetProcedureTemplatesTemplateListMediaProcessTaskImageSpriteTaskListArgs{...} }
+//	GetProcedureTemplatesTemplateListMediaProcessTaskImageSpriteTaskListArray{ GetProcedureTemplatesTemplateListMediaProcessTaskImageSpriteTaskListArgs{...} }
 type GetProcedureTemplatesTemplateListMediaProcessTaskImageSpriteTaskListArrayInput interface {
 	pulumi.Input
 
@@ -4332,7 +6711,7 @@ type GetProcedureTemplatesTemplateListMediaProcessTaskSampleSnapshotTaskList str
 // GetProcedureTemplatesTemplateListMediaProcessTaskSampleSnapshotTaskListInput is an input type that accepts GetProcedureTemplatesTemplateListMediaProcessTaskSampleSnapshotTaskListArgs and GetProcedureTemplatesTemplateListMediaProcessTaskSampleSnapshotTaskListOutput values.
 // You can construct a concrete instance of `GetProcedureTemplatesTemplateListMediaProcessTaskSampleSnapshotTaskListInput` via:
 //
-//          GetProcedureTemplatesTemplateListMediaProcessTaskSampleSnapshotTaskListArgs{...}
+//	GetProcedureTemplatesTemplateListMediaProcessTaskSampleSnapshotTaskListArgs{...}
 type GetProcedureTemplatesTemplateListMediaProcessTaskSampleSnapshotTaskListInput interface {
 	pulumi.Input
 
@@ -4362,7 +6741,7 @@ func (i GetProcedureTemplatesTemplateListMediaProcessTaskSampleSnapshotTaskListA
 // GetProcedureTemplatesTemplateListMediaProcessTaskSampleSnapshotTaskListArrayInput is an input type that accepts GetProcedureTemplatesTemplateListMediaProcessTaskSampleSnapshotTaskListArray and GetProcedureTemplatesTemplateListMediaProcessTaskSampleSnapshotTaskListArrayOutput values.
 // You can construct a concrete instance of `GetProcedureTemplatesTemplateListMediaProcessTaskSampleSnapshotTaskListArrayInput` via:
 //
-//          GetProcedureTemplatesTemplateListMediaProcessTaskSampleSnapshotTaskListArray{ GetProcedureTemplatesTemplateListMediaProcessTaskSampleSnapshotTaskListArgs{...} }
+//	GetProcedureTemplatesTemplateListMediaProcessTaskSampleSnapshotTaskListArray{ GetProcedureTemplatesTemplateListMediaProcessTaskSampleSnapshotTaskListArgs{...} }
 type GetProcedureTemplatesTemplateListMediaProcessTaskSampleSnapshotTaskListArrayInput interface {
 	pulumi.Input
 
@@ -4439,14 +6818,16 @@ type GetProcedureTemplatesTemplateListMediaProcessTaskSampleSnapshotTaskListWate
 	EndTimeOffset *float64 `pulumi:"endTimeOffset"`
 	// Start time offset of blur in seconds. If this parameter is left empty or `0` is entered, the blur will appear upon the first video frame. If this parameter is left empty or `0` is entered, the blur will appear upon the first video frame; If this value is greater than `0` (e.g., n), the blur will appear at second n after the first video frame; If this value is smaller than `0` (e.g., -n), the blur will appear at second n before the last video frame.
 	StartTimeOffset *float64 `pulumi:"startTimeOffset"`
-	SvgContent      *string  `pulumi:"svgContent"`
-	TextContent     *string  `pulumi:"textContent"`
+	// SVG content of up to `2000000` characters. This needs to be entered only when the watermark type is `SVG`. Note: this field may return null, indicating that no valid values can be obtained.
+	SvgContent *string `pulumi:"svgContent"`
+	// Text content of up to `100` characters. This needs to be entered only when the watermark type is text. Note: this field may return null, indicating that no valid values can be obtained.
+	TextContent *string `pulumi:"textContent"`
 }
 
 // GetProcedureTemplatesTemplateListMediaProcessTaskSampleSnapshotTaskListWatermarkListInput is an input type that accepts GetProcedureTemplatesTemplateListMediaProcessTaskSampleSnapshotTaskListWatermarkListArgs and GetProcedureTemplatesTemplateListMediaProcessTaskSampleSnapshotTaskListWatermarkListOutput values.
 // You can construct a concrete instance of `GetProcedureTemplatesTemplateListMediaProcessTaskSampleSnapshotTaskListWatermarkListInput` via:
 //
-//          GetProcedureTemplatesTemplateListMediaProcessTaskSampleSnapshotTaskListWatermarkListArgs{...}
+//	GetProcedureTemplatesTemplateListMediaProcessTaskSampleSnapshotTaskListWatermarkListArgs{...}
 type GetProcedureTemplatesTemplateListMediaProcessTaskSampleSnapshotTaskListWatermarkListInput interface {
 	pulumi.Input
 
@@ -4461,8 +6842,10 @@ type GetProcedureTemplatesTemplateListMediaProcessTaskSampleSnapshotTaskListWate
 	EndTimeOffset pulumi.Float64PtrInput `pulumi:"endTimeOffset"`
 	// Start time offset of blur in seconds. If this parameter is left empty or `0` is entered, the blur will appear upon the first video frame. If this parameter is left empty or `0` is entered, the blur will appear upon the first video frame; If this value is greater than `0` (e.g., n), the blur will appear at second n after the first video frame; If this value is smaller than `0` (e.g., -n), the blur will appear at second n before the last video frame.
 	StartTimeOffset pulumi.Float64PtrInput `pulumi:"startTimeOffset"`
-	SvgContent      pulumi.StringPtrInput  `pulumi:"svgContent"`
-	TextContent     pulumi.StringPtrInput  `pulumi:"textContent"`
+	// SVG content of up to `2000000` characters. This needs to be entered only when the watermark type is `SVG`. Note: this field may return null, indicating that no valid values can be obtained.
+	SvgContent pulumi.StringPtrInput `pulumi:"svgContent"`
+	// Text content of up to `100` characters. This needs to be entered only when the watermark type is text. Note: this field may return null, indicating that no valid values can be obtained.
+	TextContent pulumi.StringPtrInput `pulumi:"textContent"`
 }
 
 func (GetProcedureTemplatesTemplateListMediaProcessTaskSampleSnapshotTaskListWatermarkListArgs) ElementType() reflect.Type {
@@ -4480,7 +6863,7 @@ func (i GetProcedureTemplatesTemplateListMediaProcessTaskSampleSnapshotTaskListW
 // GetProcedureTemplatesTemplateListMediaProcessTaskSampleSnapshotTaskListWatermarkListArrayInput is an input type that accepts GetProcedureTemplatesTemplateListMediaProcessTaskSampleSnapshotTaskListWatermarkListArray and GetProcedureTemplatesTemplateListMediaProcessTaskSampleSnapshotTaskListWatermarkListArrayOutput values.
 // You can construct a concrete instance of `GetProcedureTemplatesTemplateListMediaProcessTaskSampleSnapshotTaskListWatermarkListArrayInput` via:
 //
-//          GetProcedureTemplatesTemplateListMediaProcessTaskSampleSnapshotTaskListWatermarkListArray{ GetProcedureTemplatesTemplateListMediaProcessTaskSampleSnapshotTaskListWatermarkListArgs{...} }
+//	GetProcedureTemplatesTemplateListMediaProcessTaskSampleSnapshotTaskListWatermarkListArray{ GetProcedureTemplatesTemplateListMediaProcessTaskSampleSnapshotTaskListWatermarkListArgs{...} }
 type GetProcedureTemplatesTemplateListMediaProcessTaskSampleSnapshotTaskListWatermarkListArrayInput interface {
 	pulumi.Input
 
@@ -4537,12 +6920,14 @@ func (o GetProcedureTemplatesTemplateListMediaProcessTaskSampleSnapshotTaskListW
 	}).(pulumi.Float64PtrOutput)
 }
 
+// SVG content of up to `2000000` characters. This needs to be entered only when the watermark type is `SVG`. Note: this field may return null, indicating that no valid values can be obtained.
 func (o GetProcedureTemplatesTemplateListMediaProcessTaskSampleSnapshotTaskListWatermarkListOutput) SvgContent() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v GetProcedureTemplatesTemplateListMediaProcessTaskSampleSnapshotTaskListWatermarkList) *string {
 		return v.SvgContent
 	}).(pulumi.StringPtrOutput)
 }
 
+// Text content of up to `100` characters. This needs to be entered only when the watermark type is text. Note: this field may return null, indicating that no valid values can be obtained.
 func (o GetProcedureTemplatesTemplateListMediaProcessTaskSampleSnapshotTaskListWatermarkListOutput) TextContent() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v GetProcedureTemplatesTemplateListMediaProcessTaskSampleSnapshotTaskListWatermarkList) *string {
 		return v.TextContent
@@ -4581,7 +6966,7 @@ type GetProcedureTemplatesTemplateListMediaProcessTaskSnapshotByTimeOffsetTaskLi
 // GetProcedureTemplatesTemplateListMediaProcessTaskSnapshotByTimeOffsetTaskListInput is an input type that accepts GetProcedureTemplatesTemplateListMediaProcessTaskSnapshotByTimeOffsetTaskListArgs and GetProcedureTemplatesTemplateListMediaProcessTaskSnapshotByTimeOffsetTaskListOutput values.
 // You can construct a concrete instance of `GetProcedureTemplatesTemplateListMediaProcessTaskSnapshotByTimeOffsetTaskListInput` via:
 //
-//          GetProcedureTemplatesTemplateListMediaProcessTaskSnapshotByTimeOffsetTaskListArgs{...}
+//	GetProcedureTemplatesTemplateListMediaProcessTaskSnapshotByTimeOffsetTaskListArgs{...}
 type GetProcedureTemplatesTemplateListMediaProcessTaskSnapshotByTimeOffsetTaskListInput interface {
 	pulumi.Input
 
@@ -4613,7 +6998,7 @@ func (i GetProcedureTemplatesTemplateListMediaProcessTaskSnapshotByTimeOffsetTas
 // GetProcedureTemplatesTemplateListMediaProcessTaskSnapshotByTimeOffsetTaskListArrayInput is an input type that accepts GetProcedureTemplatesTemplateListMediaProcessTaskSnapshotByTimeOffsetTaskListArray and GetProcedureTemplatesTemplateListMediaProcessTaskSnapshotByTimeOffsetTaskListArrayOutput values.
 // You can construct a concrete instance of `GetProcedureTemplatesTemplateListMediaProcessTaskSnapshotByTimeOffsetTaskListArrayInput` via:
 //
-//          GetProcedureTemplatesTemplateListMediaProcessTaskSnapshotByTimeOffsetTaskListArray{ GetProcedureTemplatesTemplateListMediaProcessTaskSnapshotByTimeOffsetTaskListArgs{...} }
+//	GetProcedureTemplatesTemplateListMediaProcessTaskSnapshotByTimeOffsetTaskListArray{ GetProcedureTemplatesTemplateListMediaProcessTaskSnapshotByTimeOffsetTaskListArgs{...} }
 type GetProcedureTemplatesTemplateListMediaProcessTaskSnapshotByTimeOffsetTaskListArrayInput interface {
 	pulumi.Input
 
@@ -4697,14 +7082,16 @@ type GetProcedureTemplatesTemplateListMediaProcessTaskSnapshotByTimeOffsetTaskLi
 	EndTimeOffset *float64 `pulumi:"endTimeOffset"`
 	// Start time offset of blur in seconds. If this parameter is left empty or `0` is entered, the blur will appear upon the first video frame. If this parameter is left empty or `0` is entered, the blur will appear upon the first video frame; If this value is greater than `0` (e.g., n), the blur will appear at second n after the first video frame; If this value is smaller than `0` (e.g., -n), the blur will appear at second n before the last video frame.
 	StartTimeOffset *float64 `pulumi:"startTimeOffset"`
-	SvgContent      *string  `pulumi:"svgContent"`
-	TextContent     *string  `pulumi:"textContent"`
+	// SVG content of up to `2000000` characters. This needs to be entered only when the watermark type is `SVG`. Note: this field may return null, indicating that no valid values can be obtained.
+	SvgContent *string `pulumi:"svgContent"`
+	// Text content of up to `100` characters. This needs to be entered only when the watermark type is text. Note: this field may return null, indicating that no valid values can be obtained.
+	TextContent *string `pulumi:"textContent"`
 }
 
 // GetProcedureTemplatesTemplateListMediaProcessTaskSnapshotByTimeOffsetTaskListWatermarkListInput is an input type that accepts GetProcedureTemplatesTemplateListMediaProcessTaskSnapshotByTimeOffsetTaskListWatermarkListArgs and GetProcedureTemplatesTemplateListMediaProcessTaskSnapshotByTimeOffsetTaskListWatermarkListOutput values.
 // You can construct a concrete instance of `GetProcedureTemplatesTemplateListMediaProcessTaskSnapshotByTimeOffsetTaskListWatermarkListInput` via:
 //
-//          GetProcedureTemplatesTemplateListMediaProcessTaskSnapshotByTimeOffsetTaskListWatermarkListArgs{...}
+//	GetProcedureTemplatesTemplateListMediaProcessTaskSnapshotByTimeOffsetTaskListWatermarkListArgs{...}
 type GetProcedureTemplatesTemplateListMediaProcessTaskSnapshotByTimeOffsetTaskListWatermarkListInput interface {
 	pulumi.Input
 
@@ -4719,8 +7106,10 @@ type GetProcedureTemplatesTemplateListMediaProcessTaskSnapshotByTimeOffsetTaskLi
 	EndTimeOffset pulumi.Float64PtrInput `pulumi:"endTimeOffset"`
 	// Start time offset of blur in seconds. If this parameter is left empty or `0` is entered, the blur will appear upon the first video frame. If this parameter is left empty or `0` is entered, the blur will appear upon the first video frame; If this value is greater than `0` (e.g., n), the blur will appear at second n after the first video frame; If this value is smaller than `0` (e.g., -n), the blur will appear at second n before the last video frame.
 	StartTimeOffset pulumi.Float64PtrInput `pulumi:"startTimeOffset"`
-	SvgContent      pulumi.StringPtrInput  `pulumi:"svgContent"`
-	TextContent     pulumi.StringPtrInput  `pulumi:"textContent"`
+	// SVG content of up to `2000000` characters. This needs to be entered only when the watermark type is `SVG`. Note: this field may return null, indicating that no valid values can be obtained.
+	SvgContent pulumi.StringPtrInput `pulumi:"svgContent"`
+	// Text content of up to `100` characters. This needs to be entered only when the watermark type is text. Note: this field may return null, indicating that no valid values can be obtained.
+	TextContent pulumi.StringPtrInput `pulumi:"textContent"`
 }
 
 func (GetProcedureTemplatesTemplateListMediaProcessTaskSnapshotByTimeOffsetTaskListWatermarkListArgs) ElementType() reflect.Type {
@@ -4738,7 +7127,7 @@ func (i GetProcedureTemplatesTemplateListMediaProcessTaskSnapshotByTimeOffsetTas
 // GetProcedureTemplatesTemplateListMediaProcessTaskSnapshotByTimeOffsetTaskListWatermarkListArrayInput is an input type that accepts GetProcedureTemplatesTemplateListMediaProcessTaskSnapshotByTimeOffsetTaskListWatermarkListArray and GetProcedureTemplatesTemplateListMediaProcessTaskSnapshotByTimeOffsetTaskListWatermarkListArrayOutput values.
 // You can construct a concrete instance of `GetProcedureTemplatesTemplateListMediaProcessTaskSnapshotByTimeOffsetTaskListWatermarkListArrayInput` via:
 //
-//          GetProcedureTemplatesTemplateListMediaProcessTaskSnapshotByTimeOffsetTaskListWatermarkListArray{ GetProcedureTemplatesTemplateListMediaProcessTaskSnapshotByTimeOffsetTaskListWatermarkListArgs{...} }
+//	GetProcedureTemplatesTemplateListMediaProcessTaskSnapshotByTimeOffsetTaskListWatermarkListArray{ GetProcedureTemplatesTemplateListMediaProcessTaskSnapshotByTimeOffsetTaskListWatermarkListArgs{...} }
 type GetProcedureTemplatesTemplateListMediaProcessTaskSnapshotByTimeOffsetTaskListWatermarkListArrayInput interface {
 	pulumi.Input
 
@@ -4795,12 +7184,14 @@ func (o GetProcedureTemplatesTemplateListMediaProcessTaskSnapshotByTimeOffsetTas
 	}).(pulumi.Float64PtrOutput)
 }
 
+// SVG content of up to `2000000` characters. This needs to be entered only when the watermark type is `SVG`. Note: this field may return null, indicating that no valid values can be obtained.
 func (o GetProcedureTemplatesTemplateListMediaProcessTaskSnapshotByTimeOffsetTaskListWatermarkListOutput) SvgContent() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v GetProcedureTemplatesTemplateListMediaProcessTaskSnapshotByTimeOffsetTaskListWatermarkList) *string {
 		return v.SvgContent
 	}).(pulumi.StringPtrOutput)
 }
 
+// Text content of up to `100` characters. This needs to be entered only when the watermark type is text. Note: this field may return null, indicating that no valid values can be obtained.
 func (o GetProcedureTemplatesTemplateListMediaProcessTaskSnapshotByTimeOffsetTaskListWatermarkListOutput) TextContent() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v GetProcedureTemplatesTemplateListMediaProcessTaskSnapshotByTimeOffsetTaskListWatermarkList) *string {
 		return v.TextContent
@@ -4839,7 +7230,7 @@ type GetProcedureTemplatesTemplateListMediaProcessTaskTranscodeTaskList struct {
 // GetProcedureTemplatesTemplateListMediaProcessTaskTranscodeTaskListInput is an input type that accepts GetProcedureTemplatesTemplateListMediaProcessTaskTranscodeTaskListArgs and GetProcedureTemplatesTemplateListMediaProcessTaskTranscodeTaskListOutput values.
 // You can construct a concrete instance of `GetProcedureTemplatesTemplateListMediaProcessTaskTranscodeTaskListInput` via:
 //
-//          GetProcedureTemplatesTemplateListMediaProcessTaskTranscodeTaskListArgs{...}
+//	GetProcedureTemplatesTemplateListMediaProcessTaskTranscodeTaskListArgs{...}
 type GetProcedureTemplatesTemplateListMediaProcessTaskTranscodeTaskListInput interface {
 	pulumi.Input
 
@@ -4871,7 +7262,7 @@ func (i GetProcedureTemplatesTemplateListMediaProcessTaskTranscodeTaskListArgs) 
 // GetProcedureTemplatesTemplateListMediaProcessTaskTranscodeTaskListArrayInput is an input type that accepts GetProcedureTemplatesTemplateListMediaProcessTaskTranscodeTaskListArray and GetProcedureTemplatesTemplateListMediaProcessTaskTranscodeTaskListArrayOutput values.
 // You can construct a concrete instance of `GetProcedureTemplatesTemplateListMediaProcessTaskTranscodeTaskListArrayInput` via:
 //
-//          GetProcedureTemplatesTemplateListMediaProcessTaskTranscodeTaskListArray{ GetProcedureTemplatesTemplateListMediaProcessTaskTranscodeTaskListArgs{...} }
+//	GetProcedureTemplatesTemplateListMediaProcessTaskTranscodeTaskListArray{ GetProcedureTemplatesTemplateListMediaProcessTaskTranscodeTaskListArgs{...} }
 type GetProcedureTemplatesTemplateListMediaProcessTaskTranscodeTaskListArrayInput interface {
 	pulumi.Input
 
@@ -4966,7 +7357,7 @@ type GetProcedureTemplatesTemplateListMediaProcessTaskTranscodeTaskListMosaicLis
 // GetProcedureTemplatesTemplateListMediaProcessTaskTranscodeTaskListMosaicListInput is an input type that accepts GetProcedureTemplatesTemplateListMediaProcessTaskTranscodeTaskListMosaicListArgs and GetProcedureTemplatesTemplateListMediaProcessTaskTranscodeTaskListMosaicListOutput values.
 // You can construct a concrete instance of `GetProcedureTemplatesTemplateListMediaProcessTaskTranscodeTaskListMosaicListInput` via:
 //
-//          GetProcedureTemplatesTemplateListMediaProcessTaskTranscodeTaskListMosaicListArgs{...}
+//	GetProcedureTemplatesTemplateListMediaProcessTaskTranscodeTaskListMosaicListArgs{...}
 type GetProcedureTemplatesTemplateListMediaProcessTaskTranscodeTaskListMosaicListInput interface {
 	pulumi.Input
 
@@ -5006,7 +7397,7 @@ func (i GetProcedureTemplatesTemplateListMediaProcessTaskTranscodeTaskListMosaic
 // GetProcedureTemplatesTemplateListMediaProcessTaskTranscodeTaskListMosaicListArrayInput is an input type that accepts GetProcedureTemplatesTemplateListMediaProcessTaskTranscodeTaskListMosaicListArray and GetProcedureTemplatesTemplateListMediaProcessTaskTranscodeTaskListMosaicListArrayOutput values.
 // You can construct a concrete instance of `GetProcedureTemplatesTemplateListMediaProcessTaskTranscodeTaskListMosaicListArrayInput` via:
 //
-//          GetProcedureTemplatesTemplateListMediaProcessTaskTranscodeTaskListMosaicListArray{ GetProcedureTemplatesTemplateListMediaProcessTaskTranscodeTaskListMosaicListArgs{...} }
+//	GetProcedureTemplatesTemplateListMediaProcessTaskTranscodeTaskListMosaicListArray{ GetProcedureTemplatesTemplateListMediaProcessTaskTranscodeTaskListMosaicListArgs{...} }
 type GetProcedureTemplatesTemplateListMediaProcessTaskTranscodeTaskListMosaicListArrayInput interface {
 	pulumi.Input
 
@@ -5118,14 +7509,16 @@ type GetProcedureTemplatesTemplateListMediaProcessTaskTranscodeTaskListWatermark
 	EndTimeOffset *float64 `pulumi:"endTimeOffset"`
 	// Start time offset of blur in seconds. If this parameter is left empty or `0` is entered, the blur will appear upon the first video frame. If this parameter is left empty or `0` is entered, the blur will appear upon the first video frame; If this value is greater than `0` (e.g., n), the blur will appear at second n after the first video frame; If this value is smaller than `0` (e.g., -n), the blur will appear at second n before the last video frame.
 	StartTimeOffset *float64 `pulumi:"startTimeOffset"`
-	SvgContent      *string  `pulumi:"svgContent"`
-	TextContent     *string  `pulumi:"textContent"`
+	// SVG content of up to `2000000` characters. This needs to be entered only when the watermark type is `SVG`. Note: this field may return null, indicating that no valid values can be obtained.
+	SvgContent *string `pulumi:"svgContent"`
+	// Text content of up to `100` characters. This needs to be entered only when the watermark type is text. Note: this field may return null, indicating that no valid values can be obtained.
+	TextContent *string `pulumi:"textContent"`
 }
 
 // GetProcedureTemplatesTemplateListMediaProcessTaskTranscodeTaskListWatermarkListInput is an input type that accepts GetProcedureTemplatesTemplateListMediaProcessTaskTranscodeTaskListWatermarkListArgs and GetProcedureTemplatesTemplateListMediaProcessTaskTranscodeTaskListWatermarkListOutput values.
 // You can construct a concrete instance of `GetProcedureTemplatesTemplateListMediaProcessTaskTranscodeTaskListWatermarkListInput` via:
 //
-//          GetProcedureTemplatesTemplateListMediaProcessTaskTranscodeTaskListWatermarkListArgs{...}
+//	GetProcedureTemplatesTemplateListMediaProcessTaskTranscodeTaskListWatermarkListArgs{...}
 type GetProcedureTemplatesTemplateListMediaProcessTaskTranscodeTaskListWatermarkListInput interface {
 	pulumi.Input
 
@@ -5140,8 +7533,10 @@ type GetProcedureTemplatesTemplateListMediaProcessTaskTranscodeTaskListWatermark
 	EndTimeOffset pulumi.Float64PtrInput `pulumi:"endTimeOffset"`
 	// Start time offset of blur in seconds. If this parameter is left empty or `0` is entered, the blur will appear upon the first video frame. If this parameter is left empty or `0` is entered, the blur will appear upon the first video frame; If this value is greater than `0` (e.g., n), the blur will appear at second n after the first video frame; If this value is smaller than `0` (e.g., -n), the blur will appear at second n before the last video frame.
 	StartTimeOffset pulumi.Float64PtrInput `pulumi:"startTimeOffset"`
-	SvgContent      pulumi.StringPtrInput  `pulumi:"svgContent"`
-	TextContent     pulumi.StringPtrInput  `pulumi:"textContent"`
+	// SVG content of up to `2000000` characters. This needs to be entered only when the watermark type is `SVG`. Note: this field may return null, indicating that no valid values can be obtained.
+	SvgContent pulumi.StringPtrInput `pulumi:"svgContent"`
+	// Text content of up to `100` characters. This needs to be entered only when the watermark type is text. Note: this field may return null, indicating that no valid values can be obtained.
+	TextContent pulumi.StringPtrInput `pulumi:"textContent"`
 }
 
 func (GetProcedureTemplatesTemplateListMediaProcessTaskTranscodeTaskListWatermarkListArgs) ElementType() reflect.Type {
@@ -5159,7 +7554,7 @@ func (i GetProcedureTemplatesTemplateListMediaProcessTaskTranscodeTaskListWaterm
 // GetProcedureTemplatesTemplateListMediaProcessTaskTranscodeTaskListWatermarkListArrayInput is an input type that accepts GetProcedureTemplatesTemplateListMediaProcessTaskTranscodeTaskListWatermarkListArray and GetProcedureTemplatesTemplateListMediaProcessTaskTranscodeTaskListWatermarkListArrayOutput values.
 // You can construct a concrete instance of `GetProcedureTemplatesTemplateListMediaProcessTaskTranscodeTaskListWatermarkListArrayInput` via:
 //
-//          GetProcedureTemplatesTemplateListMediaProcessTaskTranscodeTaskListWatermarkListArray{ GetProcedureTemplatesTemplateListMediaProcessTaskTranscodeTaskListWatermarkListArgs{...} }
+//	GetProcedureTemplatesTemplateListMediaProcessTaskTranscodeTaskListWatermarkListArray{ GetProcedureTemplatesTemplateListMediaProcessTaskTranscodeTaskListWatermarkListArgs{...} }
 type GetProcedureTemplatesTemplateListMediaProcessTaskTranscodeTaskListWatermarkListArrayInput interface {
 	pulumi.Input
 
@@ -5216,12 +7611,14 @@ func (o GetProcedureTemplatesTemplateListMediaProcessTaskTranscodeTaskListWaterm
 	}).(pulumi.Float64PtrOutput)
 }
 
+// SVG content of up to `2000000` characters. This needs to be entered only when the watermark type is `SVG`. Note: this field may return null, indicating that no valid values can be obtained.
 func (o GetProcedureTemplatesTemplateListMediaProcessTaskTranscodeTaskListWatermarkListOutput) SvgContent() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v GetProcedureTemplatesTemplateListMediaProcessTaskTranscodeTaskListWatermarkList) *string {
 		return v.SvgContent
 	}).(pulumi.StringPtrOutput)
 }
 
+// Text content of up to `100` characters. This needs to be entered only when the watermark type is text. Note: this field may return null, indicating that no valid values can be obtained.
 func (o GetProcedureTemplatesTemplateListMediaProcessTaskTranscodeTaskListWatermarkListOutput) TextContent() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v GetProcedureTemplatesTemplateListMediaProcessTaskTranscodeTaskListWatermarkList) *string {
 		return v.TextContent
@@ -5276,7 +7673,7 @@ type GetSnapshotByTimeOffsetTemplatesTemplateList struct {
 // GetSnapshotByTimeOffsetTemplatesTemplateListInput is an input type that accepts GetSnapshotByTimeOffsetTemplatesTemplateListArgs and GetSnapshotByTimeOffsetTemplatesTemplateListOutput values.
 // You can construct a concrete instance of `GetSnapshotByTimeOffsetTemplatesTemplateListInput` via:
 //
-//          GetSnapshotByTimeOffsetTemplatesTemplateListArgs{...}
+//	GetSnapshotByTimeOffsetTemplatesTemplateListArgs{...}
 type GetSnapshotByTimeOffsetTemplatesTemplateListInput interface {
 	pulumi.Input
 
@@ -5324,7 +7721,7 @@ func (i GetSnapshotByTimeOffsetTemplatesTemplateListArgs) ToGetSnapshotByTimeOff
 // GetSnapshotByTimeOffsetTemplatesTemplateListArrayInput is an input type that accepts GetSnapshotByTimeOffsetTemplatesTemplateListArray and GetSnapshotByTimeOffsetTemplatesTemplateListArrayOutput values.
 // You can construct a concrete instance of `GetSnapshotByTimeOffsetTemplatesTemplateListArrayInput` via:
 //
-//          GetSnapshotByTimeOffsetTemplatesTemplateListArray{ GetSnapshotByTimeOffsetTemplatesTemplateListArgs{...} }
+//	GetSnapshotByTimeOffsetTemplatesTemplateListArray{ GetSnapshotByTimeOffsetTemplatesTemplateListArgs{...} }
 type GetSnapshotByTimeOffsetTemplatesTemplateListArrayInput interface {
 	pulumi.Input
 
@@ -5465,7 +7862,7 @@ type GetSuperPlayerConfigsConfigList struct {
 // GetSuperPlayerConfigsConfigListInput is an input type that accepts GetSuperPlayerConfigsConfigListArgs and GetSuperPlayerConfigsConfigListOutput values.
 // You can construct a concrete instance of `GetSuperPlayerConfigsConfigListInput` via:
 //
-//          GetSuperPlayerConfigsConfigListArgs{...}
+//	GetSuperPlayerConfigsConfigListArgs{...}
 type GetSuperPlayerConfigsConfigListInput interface {
 	pulumi.Input
 
@@ -5515,7 +7912,7 @@ func (i GetSuperPlayerConfigsConfigListArgs) ToGetSuperPlayerConfigsConfigListOu
 // GetSuperPlayerConfigsConfigListArrayInput is an input type that accepts GetSuperPlayerConfigsConfigListArray and GetSuperPlayerConfigsConfigListArrayOutput values.
 // You can construct a concrete instance of `GetSuperPlayerConfigsConfigListArrayInput` via:
 //
-//          GetSuperPlayerConfigsConfigListArray{ GetSuperPlayerConfigsConfigListArgs{...} }
+//	GetSuperPlayerConfigsConfigListArray{ GetSuperPlayerConfigsConfigListArgs{...} }
 type GetSuperPlayerConfigsConfigListArrayInput interface {
 	pulumi.Input
 
@@ -5643,7 +8040,7 @@ type GetSuperPlayerConfigsConfigListDrmStreamingInfo struct {
 // GetSuperPlayerConfigsConfigListDrmStreamingInfoInput is an input type that accepts GetSuperPlayerConfigsConfigListDrmStreamingInfoArgs and GetSuperPlayerConfigsConfigListDrmStreamingInfoOutput values.
 // You can construct a concrete instance of `GetSuperPlayerConfigsConfigListDrmStreamingInfoInput` via:
 //
-//          GetSuperPlayerConfigsConfigListDrmStreamingInfoArgs{...}
+//	GetSuperPlayerConfigsConfigListDrmStreamingInfoArgs{...}
 type GetSuperPlayerConfigsConfigListDrmStreamingInfoInput interface {
 	pulumi.Input
 
@@ -5671,7 +8068,7 @@ func (i GetSuperPlayerConfigsConfigListDrmStreamingInfoArgs) ToGetSuperPlayerCon
 // GetSuperPlayerConfigsConfigListDrmStreamingInfoArrayInput is an input type that accepts GetSuperPlayerConfigsConfigListDrmStreamingInfoArray and GetSuperPlayerConfigsConfigListDrmStreamingInfoArrayOutput values.
 // You can construct a concrete instance of `GetSuperPlayerConfigsConfigListDrmStreamingInfoArrayInput` via:
 //
-//          GetSuperPlayerConfigsConfigListDrmStreamingInfoArray{ GetSuperPlayerConfigsConfigListDrmStreamingInfoArgs{...} }
+//	GetSuperPlayerConfigsConfigListDrmStreamingInfoArray{ GetSuperPlayerConfigsConfigListDrmStreamingInfoArgs{...} }
 type GetSuperPlayerConfigsConfigListDrmStreamingInfoArrayInput interface {
 	pulumi.Input
 
@@ -5742,7 +8139,7 @@ type GetSuperPlayerConfigsConfigListResolutionName struct {
 // GetSuperPlayerConfigsConfigListResolutionNameInput is an input type that accepts GetSuperPlayerConfigsConfigListResolutionNameArgs and GetSuperPlayerConfigsConfigListResolutionNameOutput values.
 // You can construct a concrete instance of `GetSuperPlayerConfigsConfigListResolutionNameInput` via:
 //
-//          GetSuperPlayerConfigsConfigListResolutionNameArgs{...}
+//	GetSuperPlayerConfigsConfigListResolutionNameArgs{...}
 type GetSuperPlayerConfigsConfigListResolutionNameInput interface {
 	pulumi.Input
 
@@ -5772,7 +8169,7 @@ func (i GetSuperPlayerConfigsConfigListResolutionNameArgs) ToGetSuperPlayerConfi
 // GetSuperPlayerConfigsConfigListResolutionNameArrayInput is an input type that accepts GetSuperPlayerConfigsConfigListResolutionNameArray and GetSuperPlayerConfigsConfigListResolutionNameArrayOutput values.
 // You can construct a concrete instance of `GetSuperPlayerConfigsConfigListResolutionNameArrayInput` via:
 //
-//          GetSuperPlayerConfigsConfigListResolutionNameArray{ GetSuperPlayerConfigsConfigListResolutionNameArgs{...} }
+//	GetSuperPlayerConfigsConfigListResolutionNameArray{ GetSuperPlayerConfigsConfigListResolutionNameArgs{...} }
 type GetSuperPlayerConfigsConfigListResolutionNameArrayInput interface {
 	pulumi.Input
 
@@ -5842,7 +8239,13 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*AdaptiveDynamicStreamingTemplateStreamInfoInput)(nil)).Elem(), AdaptiveDynamicStreamingTemplateStreamInfoArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*AdaptiveDynamicStreamingTemplateStreamInfoArrayInput)(nil)).Elem(), AdaptiveDynamicStreamingTemplateStreamInfoArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*AdaptiveDynamicStreamingTemplateStreamInfoAudioInput)(nil)).Elem(), AdaptiveDynamicStreamingTemplateStreamInfoAudioArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*AdaptiveDynamicStreamingTemplateStreamInfoTehdConfigInput)(nil)).Elem(), AdaptiveDynamicStreamingTemplateStreamInfoTehdConfigArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*AdaptiveDynamicStreamingTemplateStreamInfoTehdConfigPtrInput)(nil)).Elem(), AdaptiveDynamicStreamingTemplateStreamInfoTehdConfigArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*AdaptiveDynamicStreamingTemplateStreamInfoVideoInput)(nil)).Elem(), AdaptiveDynamicStreamingTemplateStreamInfoVideoArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ProcedureTemplateAiAnalysisTaskInput)(nil)).Elem(), ProcedureTemplateAiAnalysisTaskArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ProcedureTemplateAiAnalysisTaskPtrInput)(nil)).Elem(), ProcedureTemplateAiAnalysisTaskArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ProcedureTemplateAiRecognitionTaskInput)(nil)).Elem(), ProcedureTemplateAiRecognitionTaskArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ProcedureTemplateAiRecognitionTaskPtrInput)(nil)).Elem(), ProcedureTemplateAiRecognitionTaskArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProcedureTemplateMediaProcessTaskInput)(nil)).Elem(), ProcedureTemplateMediaProcessTaskArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProcedureTemplateMediaProcessTaskPtrInput)(nil)).Elem(), ProcedureTemplateMediaProcessTaskArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProcedureTemplateMediaProcessTaskAdaptiveDynamicStreamingTaskListInput)(nil)).Elem(), ProcedureTemplateMediaProcessTaskAdaptiveDynamicStreamingTaskListArgs{})
@@ -5867,14 +8270,34 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*ProcedureTemplateMediaProcessTaskSnapshotByTimeOffsetTaskListWatermarkListArrayInput)(nil)).Elem(), ProcedureTemplateMediaProcessTaskSnapshotByTimeOffsetTaskListWatermarkListArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProcedureTemplateMediaProcessTaskTranscodeTaskListInput)(nil)).Elem(), ProcedureTemplateMediaProcessTaskTranscodeTaskListArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProcedureTemplateMediaProcessTaskTranscodeTaskListArrayInput)(nil)).Elem(), ProcedureTemplateMediaProcessTaskTranscodeTaskListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ProcedureTemplateMediaProcessTaskTranscodeTaskListCopyRightWatermarkInput)(nil)).Elem(), ProcedureTemplateMediaProcessTaskTranscodeTaskListCopyRightWatermarkArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ProcedureTemplateMediaProcessTaskTranscodeTaskListCopyRightWatermarkPtrInput)(nil)).Elem(), ProcedureTemplateMediaProcessTaskTranscodeTaskListCopyRightWatermarkArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ProcedureTemplateMediaProcessTaskTranscodeTaskListHeadTailListInput)(nil)).Elem(), ProcedureTemplateMediaProcessTaskTranscodeTaskListHeadTailListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ProcedureTemplateMediaProcessTaskTranscodeTaskListHeadTailListArrayInput)(nil)).Elem(), ProcedureTemplateMediaProcessTaskTranscodeTaskListHeadTailListArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProcedureTemplateMediaProcessTaskTranscodeTaskListMosaicListInput)(nil)).Elem(), ProcedureTemplateMediaProcessTaskTranscodeTaskListMosaicListArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProcedureTemplateMediaProcessTaskTranscodeTaskListMosaicListArrayInput)(nil)).Elem(), ProcedureTemplateMediaProcessTaskTranscodeTaskListMosaicListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ProcedureTemplateMediaProcessTaskTranscodeTaskListTraceWatermarkInput)(nil)).Elem(), ProcedureTemplateMediaProcessTaskTranscodeTaskListTraceWatermarkArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ProcedureTemplateMediaProcessTaskTranscodeTaskListTraceWatermarkPtrInput)(nil)).Elem(), ProcedureTemplateMediaProcessTaskTranscodeTaskListTraceWatermarkArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProcedureTemplateMediaProcessTaskTranscodeTaskListWatermarkListInput)(nil)).Elem(), ProcedureTemplateMediaProcessTaskTranscodeTaskListWatermarkListArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProcedureTemplateMediaProcessTaskTranscodeTaskListWatermarkListArrayInput)(nil)).Elem(), ProcedureTemplateMediaProcessTaskTranscodeTaskListWatermarkListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ProcedureTemplateReviewAudioVideoTaskInput)(nil)).Elem(), ProcedureTemplateReviewAudioVideoTaskArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ProcedureTemplateReviewAudioVideoTaskPtrInput)(nil)).Elem(), ProcedureTemplateReviewAudioVideoTaskArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*SuperPlayerConfigDrmStreamingInfoInput)(nil)).Elem(), SuperPlayerConfigDrmStreamingInfoArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*SuperPlayerConfigDrmStreamingInfoPtrInput)(nil)).Elem(), SuperPlayerConfigDrmStreamingInfoArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*SuperPlayerConfigResolutionNameInput)(nil)).Elem(), SuperPlayerConfigResolutionNameArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*SuperPlayerConfigResolutionNameArrayInput)(nil)).Elem(), SuperPlayerConfigResolutionNameArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*TranscodeTemplateAudioTemplateInput)(nil)).Elem(), TranscodeTemplateAudioTemplateArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*TranscodeTemplateAudioTemplatePtrInput)(nil)).Elem(), TranscodeTemplateAudioTemplateArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*TranscodeTemplateTehdConfigInput)(nil)).Elem(), TranscodeTemplateTehdConfigArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*TranscodeTemplateTehdConfigPtrInput)(nil)).Elem(), TranscodeTemplateTehdConfigArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*TranscodeTemplateVideoTemplateInput)(nil)).Elem(), TranscodeTemplateVideoTemplateArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*TranscodeTemplateVideoTemplatePtrInput)(nil)).Elem(), TranscodeTemplateVideoTemplateArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*WatermarkTemplateImageTemplateInput)(nil)).Elem(), WatermarkTemplateImageTemplateArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*WatermarkTemplateImageTemplatePtrInput)(nil)).Elem(), WatermarkTemplateImageTemplateArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*WatermarkTemplateSvgTemplateInput)(nil)).Elem(), WatermarkTemplateSvgTemplateArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*WatermarkTemplateSvgTemplatePtrInput)(nil)).Elem(), WatermarkTemplateSvgTemplateArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*WatermarkTemplateTextTemplateInput)(nil)).Elem(), WatermarkTemplateTextTemplateArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*WatermarkTemplateTextTemplatePtrInput)(nil)).Elem(), WatermarkTemplateTextTemplateArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetAdaptiveDynamicStreamingTemplatesTemplateListInput)(nil)).Elem(), GetAdaptiveDynamicStreamingTemplatesTemplateListArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetAdaptiveDynamicStreamingTemplatesTemplateListArrayInput)(nil)).Elem(), GetAdaptiveDynamicStreamingTemplatesTemplateListArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetAdaptiveDynamicStreamingTemplatesTemplateListStreamInfoInput)(nil)).Elem(), GetAdaptiveDynamicStreamingTemplatesTemplateListStreamInfoArgs{})
@@ -5926,7 +8349,13 @@ func init() {
 	pulumi.RegisterOutputType(AdaptiveDynamicStreamingTemplateStreamInfoOutput{})
 	pulumi.RegisterOutputType(AdaptiveDynamicStreamingTemplateStreamInfoArrayOutput{})
 	pulumi.RegisterOutputType(AdaptiveDynamicStreamingTemplateStreamInfoAudioOutput{})
+	pulumi.RegisterOutputType(AdaptiveDynamicStreamingTemplateStreamInfoTehdConfigOutput{})
+	pulumi.RegisterOutputType(AdaptiveDynamicStreamingTemplateStreamInfoTehdConfigPtrOutput{})
 	pulumi.RegisterOutputType(AdaptiveDynamicStreamingTemplateStreamInfoVideoOutput{})
+	pulumi.RegisterOutputType(ProcedureTemplateAiAnalysisTaskOutput{})
+	pulumi.RegisterOutputType(ProcedureTemplateAiAnalysisTaskPtrOutput{})
+	pulumi.RegisterOutputType(ProcedureTemplateAiRecognitionTaskOutput{})
+	pulumi.RegisterOutputType(ProcedureTemplateAiRecognitionTaskPtrOutput{})
 	pulumi.RegisterOutputType(ProcedureTemplateMediaProcessTaskOutput{})
 	pulumi.RegisterOutputType(ProcedureTemplateMediaProcessTaskPtrOutput{})
 	pulumi.RegisterOutputType(ProcedureTemplateMediaProcessTaskAdaptiveDynamicStreamingTaskListOutput{})
@@ -5951,14 +8380,34 @@ func init() {
 	pulumi.RegisterOutputType(ProcedureTemplateMediaProcessTaskSnapshotByTimeOffsetTaskListWatermarkListArrayOutput{})
 	pulumi.RegisterOutputType(ProcedureTemplateMediaProcessTaskTranscodeTaskListOutput{})
 	pulumi.RegisterOutputType(ProcedureTemplateMediaProcessTaskTranscodeTaskListArrayOutput{})
+	pulumi.RegisterOutputType(ProcedureTemplateMediaProcessTaskTranscodeTaskListCopyRightWatermarkOutput{})
+	pulumi.RegisterOutputType(ProcedureTemplateMediaProcessTaskTranscodeTaskListCopyRightWatermarkPtrOutput{})
+	pulumi.RegisterOutputType(ProcedureTemplateMediaProcessTaskTranscodeTaskListHeadTailListOutput{})
+	pulumi.RegisterOutputType(ProcedureTemplateMediaProcessTaskTranscodeTaskListHeadTailListArrayOutput{})
 	pulumi.RegisterOutputType(ProcedureTemplateMediaProcessTaskTranscodeTaskListMosaicListOutput{})
 	pulumi.RegisterOutputType(ProcedureTemplateMediaProcessTaskTranscodeTaskListMosaicListArrayOutput{})
+	pulumi.RegisterOutputType(ProcedureTemplateMediaProcessTaskTranscodeTaskListTraceWatermarkOutput{})
+	pulumi.RegisterOutputType(ProcedureTemplateMediaProcessTaskTranscodeTaskListTraceWatermarkPtrOutput{})
 	pulumi.RegisterOutputType(ProcedureTemplateMediaProcessTaskTranscodeTaskListWatermarkListOutput{})
 	pulumi.RegisterOutputType(ProcedureTemplateMediaProcessTaskTranscodeTaskListWatermarkListArrayOutput{})
+	pulumi.RegisterOutputType(ProcedureTemplateReviewAudioVideoTaskOutput{})
+	pulumi.RegisterOutputType(ProcedureTemplateReviewAudioVideoTaskPtrOutput{})
 	pulumi.RegisterOutputType(SuperPlayerConfigDrmStreamingInfoOutput{})
 	pulumi.RegisterOutputType(SuperPlayerConfigDrmStreamingInfoPtrOutput{})
 	pulumi.RegisterOutputType(SuperPlayerConfigResolutionNameOutput{})
 	pulumi.RegisterOutputType(SuperPlayerConfigResolutionNameArrayOutput{})
+	pulumi.RegisterOutputType(TranscodeTemplateAudioTemplateOutput{})
+	pulumi.RegisterOutputType(TranscodeTemplateAudioTemplatePtrOutput{})
+	pulumi.RegisterOutputType(TranscodeTemplateTehdConfigOutput{})
+	pulumi.RegisterOutputType(TranscodeTemplateTehdConfigPtrOutput{})
+	pulumi.RegisterOutputType(TranscodeTemplateVideoTemplateOutput{})
+	pulumi.RegisterOutputType(TranscodeTemplateVideoTemplatePtrOutput{})
+	pulumi.RegisterOutputType(WatermarkTemplateImageTemplateOutput{})
+	pulumi.RegisterOutputType(WatermarkTemplateImageTemplatePtrOutput{})
+	pulumi.RegisterOutputType(WatermarkTemplateSvgTemplateOutput{})
+	pulumi.RegisterOutputType(WatermarkTemplateSvgTemplatePtrOutput{})
+	pulumi.RegisterOutputType(WatermarkTemplateTextTemplateOutput{})
+	pulumi.RegisterOutputType(WatermarkTemplateTextTemplatePtrOutput{})
 	pulumi.RegisterOutputType(GetAdaptiveDynamicStreamingTemplatesTemplateListOutput{})
 	pulumi.RegisterOutputType(GetAdaptiveDynamicStreamingTemplatesTemplateListArrayOutput{})
 	pulumi.RegisterOutputType(GetAdaptiveDynamicStreamingTemplatesTemplateListStreamInfoOutput{})

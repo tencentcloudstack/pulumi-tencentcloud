@@ -8,49 +8,54 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Use this data source to query detailed information of dayu DDoS policy attachments
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Dayu"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dayu"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dayu"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Dayu.GetDdosPolicyAttachments(ctx, &dayu.GetDdosPolicyAttachmentsArgs{
-// 			ResourceType: tencentcloud_dayu_ddos_policy_attachment.Dayu_ddos_policy_attachment.Resource_type,
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_, err = Dayu.GetDdosPolicyAttachments(ctx, &dayu.GetDdosPolicyAttachmentsArgs{
-// 			ResourceId:   pulumi.StringRef(tencentcloud_dayu_ddos_policy_attachment.Dayu_ddos_policy_attachment.Resource_id),
-// 			ResourceType: tencentcloud_dayu_ddos_policy_attachment.Dayu_ddos_policy_attachment.Resource_type,
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_, err = Dayu.GetDdosPolicyAttachments(ctx, &dayu.GetDdosPolicyAttachmentsArgs{
-// 			ResourceType: tencentcloud_dayu_ddos_policy_attachment.Dayu_ddos_policy_attachment.Resource_type,
-// 			PolicyId:     pulumi.StringRef(tencentcloud_dayu_ddos_policy_attachment.Dayu_ddos_policy_attachment.Policy_id),
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Dayu.GetDdosPolicyAttachments(ctx, &dayu.GetDdosPolicyAttachmentsArgs{
+//				ResourceType: tencentcloud_dayu_ddos_policy_attachment.Dayu_ddos_policy_attachment.Resource_type,
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			_, err = Dayu.GetDdosPolicyAttachments(ctx, &dayu.GetDdosPolicyAttachmentsArgs{
+//				ResourceId:   pulumi.StringRef(tencentcloud_dayu_ddos_policy_attachment.Dayu_ddos_policy_attachment.Resource_id),
+//				ResourceType: tencentcloud_dayu_ddos_policy_attachment.Dayu_ddos_policy_attachment.Resource_type,
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			_, err = Dayu.GetDdosPolicyAttachments(ctx, &dayu.GetDdosPolicyAttachmentsArgs{
+//				ResourceType: tencentcloud_dayu_ddos_policy_attachment.Dayu_ddos_policy_attachment.Resource_type,
+//				PolicyId:     pulumi.StringRef(tencentcloud_dayu_ddos_policy_attachment.Dayu_ddos_policy_attachment.Policy_id),
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 func GetDdosPolicyAttachments(ctx *pulumi.Context, args *GetDdosPolicyAttachmentsArgs, opts ...pulumi.InvokeOption) (*GetDdosPolicyAttachmentsResult, error) {
-	opts = pkgInvokeDefaultOpts(opts)
+	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetDdosPolicyAttachmentsResult
 	err := ctx.Invoke("tencentcloud:Dayu/getDdosPolicyAttachments:getDdosPolicyAttachments", args, &rv, opts...)
 	if err != nil {

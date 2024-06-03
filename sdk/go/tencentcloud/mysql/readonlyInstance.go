@@ -7,8 +7,9 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a mysql instance resource to create read-only database instances.
@@ -18,105 +19,109 @@ import (
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Availability"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Availability"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Mysql"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Security"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Subnet"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Availability"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Mysql"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Security"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Subnet"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		zones, err := Availability.GetZonesByProduct(ctx, &availability.GetZonesByProductArgs{
-// 			Product: "cdb",
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		vpc, err := Vpc.NewInstance(ctx, "vpc", &Vpc.InstanceArgs{
-// 			CidrBlock: pulumi.String("10.0.0.0/16"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		subnet, err := Subnet.NewInstance(ctx, "subnet", &Subnet.InstanceArgs{
-// 			AvailabilityZone: pulumi.String(zones.Zones[0].Name),
-// 			VpcId:            vpc.ID(),
-// 			CidrBlock:        pulumi.String("10.0.0.0/16"),
-// 			IsMulticast:      pulumi.Bool(false),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		securityGroup, err := Security.NewGroup(ctx, "securityGroup", &Security.GroupArgs{
-// 			Description: pulumi.String("mysql test"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		exampleInstance, err := Mysql.NewInstance(ctx, "exampleInstance", &Mysql.InstanceArgs{
-// 			InternetService:  pulumi.Int(1),
-// 			EngineVersion:    pulumi.String("5.7"),
-// 			ChargeType:       pulumi.String("POSTPAID"),
-// 			RootPassword:     pulumi.String("PassWord123"),
-// 			SlaveDeployMode:  pulumi.Int(0),
-// 			AvailabilityZone: pulumi.String(zones.Zones[0].Name),
-// 			SlaveSyncMode:    pulumi.Int(1),
-// 			InstanceName:     pulumi.String("tf-example-mysql"),
-// 			MemSize:          pulumi.Int(4000),
-// 			VolumeSize:       pulumi.Int(200),
-// 			VpcId:            vpc.ID(),
-// 			SubnetId:         subnet.ID(),
-// 			IntranetPort:     pulumi.Int(3306),
-// 			SecurityGroups: pulumi.StringArray{
-// 				securityGroup.ID(),
-// 			},
-// 			Tags: pulumi.AnyMap{
-// 				"name": pulumi.Any("test"),
-// 			},
-// 			Parameters: pulumi.AnyMap{
-// 				"character_set_server": pulumi.Any("UTF8"),
-// 				"max_connections":      pulumi.Any("1000"),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_, err = Mysql.NewReadonlyInstance(ctx, "exampleReadonlyInstance", &Mysql.ReadonlyInstanceArgs{
-// 			MasterInstanceId: exampleInstance.ID(),
-// 			InstanceName:     pulumi.String("tf-example"),
-// 			MemSize:          pulumi.Int(128000),
-// 			VolumeSize:       pulumi.Int(255),
-// 			VpcId:            vpc.ID(),
-// 			SubnetId:         subnet.ID(),
-// 			IntranetPort:     pulumi.Int(3306),
-// 			SecurityGroups: pulumi.StringArray{
-// 				securityGroup.ID(),
-// 			},
-// 			Tags: pulumi.AnyMap{
-// 				"createBy": pulumi.Any("terraform"),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			zones, err := Availability.GetZonesByProduct(ctx, &availability.GetZonesByProductArgs{
+//				Product: "cdb",
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			vpc, err := Vpc.NewInstance(ctx, "vpc", &Vpc.InstanceArgs{
+//				CidrBlock: pulumi.String("10.0.0.0/16"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			subnet, err := Subnet.NewInstance(ctx, "subnet", &Subnet.InstanceArgs{
+//				AvailabilityZone: pulumi.String(zones.Zones[0].Name),
+//				VpcId:            vpc.ID(),
+//				CidrBlock:        pulumi.String("10.0.0.0/16"),
+//				IsMulticast:      pulumi.Bool(false),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			securityGroup, err := Security.NewGroup(ctx, "securityGroup", &Security.GroupArgs{
+//				Description: pulumi.String("mysql test"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			exampleInstance, err := Mysql.NewInstance(ctx, "exampleInstance", &Mysql.InstanceArgs{
+//				InternetService:  pulumi.Int(1),
+//				EngineVersion:    pulumi.String("5.7"),
+//				ChargeType:       pulumi.String("POSTPAID"),
+//				RootPassword:     pulumi.String("PassWord123"),
+//				SlaveDeployMode:  pulumi.Int(0),
+//				AvailabilityZone: pulumi.String(zones.Zones[0].Name),
+//				SlaveSyncMode:    pulumi.Int(1),
+//				InstanceName:     pulumi.String("tf-example-mysql"),
+//				MemSize:          pulumi.Int(4000),
+//				VolumeSize:       pulumi.Int(200),
+//				VpcId:            vpc.ID(),
+//				SubnetId:         subnet.ID(),
+//				IntranetPort:     pulumi.Int(3306),
+//				SecurityGroups: pulumi.StringArray{
+//					securityGroup.ID(),
+//				},
+//				Tags: pulumi.Map{
+//					"name": pulumi.Any("test"),
+//				},
+//				Parameters: pulumi.Map{
+//					"character_set_server": pulumi.Any("UTF8"),
+//					"max_connections":      pulumi.Any("1000"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_, err = Mysql.NewReadonlyInstance(ctx, "exampleReadonlyInstance", &Mysql.ReadonlyInstanceArgs{
+//				MasterInstanceId: exampleInstance.ID(),
+//				InstanceName:     pulumi.String("tf-example"),
+//				MemSize:          pulumi.Int(128000),
+//				VolumeSize:       pulumi.Int(255),
+//				VpcId:            vpc.ID(),
+//				SubnetId:         subnet.ID(),
+//				IntranetPort:     pulumi.Int(3306),
+//				SecurityGroups: pulumi.StringArray{
+//					securityGroup.ID(),
+//				},
+//				Tags: pulumi.Map{
+//					"createBy": pulumi.Any("terraform"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // mysql read-only database instances can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Mysql/readonlyInstance:ReadonlyInstance default cdb-dnqksd9f
+// $ pulumi import tencentcloud:Mysql/readonlyInstance:ReadonlyInstance default cdb-dnqksd9f
 // ```
 type ReadonlyInstance struct {
 	pulumi.CustomResourceState
@@ -151,11 +156,11 @@ type ReadonlyInstance struct {
 	ParamTemplateId pulumi.IntPtrOutput `pulumi:"paramTemplateId"`
 	// It has been deprecated from version 1.36.0. Please use `chargeType` instead. Pay type of instance. Valid values: `0`, `1`. `0`: prepaid, `1`: postpaid.
 	//
-	// Deprecated: It has been deprecated from version 1.36.0. Please use `charge_type` instead.
+	// Deprecated: It has been deprecated from version 1.36.0. Please use `chargeType` instead.
 	PayType pulumi.IntPtrOutput `pulumi:"payType"`
 	// It has been deprecated from version 1.36.0. Please use `prepaidPeriod` instead. Period of instance. NOTES: Only supported prepaid instance.
 	//
-	// Deprecated: It has been deprecated from version 1.36.0. Please use `prepaid_period` instead.
+	// Deprecated: It has been deprecated from version 1.36.0. Please use `prepaidPeriod` instead.
 	Period pulumi.IntPtrOutput `pulumi:"period"`
 	// Period of instance. NOTES: Only supported prepaid instance.
 	PrepaidPeriod pulumi.IntPtrOutput `pulumi:"prepaidPeriod"`
@@ -200,7 +205,7 @@ func NewReadonlyInstance(ctx *pulumi.Context,
 	if args.VolumeSize == nil {
 		return nil, errors.New("invalid value for required argument 'VolumeSize'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource ReadonlyInstance
 	err := ctx.RegisterResource("tencentcloud:Mysql/readonlyInstance:ReadonlyInstance", name, args, &resource, opts...)
 	if err != nil {
@@ -253,11 +258,11 @@ type readonlyInstanceState struct {
 	ParamTemplateId *int `pulumi:"paramTemplateId"`
 	// It has been deprecated from version 1.36.0. Please use `chargeType` instead. Pay type of instance. Valid values: `0`, `1`. `0`: prepaid, `1`: postpaid.
 	//
-	// Deprecated: It has been deprecated from version 1.36.0. Please use `charge_type` instead.
+	// Deprecated: It has been deprecated from version 1.36.0. Please use `chargeType` instead.
 	PayType *int `pulumi:"payType"`
 	// It has been deprecated from version 1.36.0. Please use `prepaidPeriod` instead. Period of instance. NOTES: Only supported prepaid instance.
 	//
-	// Deprecated: It has been deprecated from version 1.36.0. Please use `prepaid_period` instead.
+	// Deprecated: It has been deprecated from version 1.36.0. Please use `prepaidPeriod` instead.
 	Period *int `pulumi:"period"`
 	// Period of instance. NOTES: Only supported prepaid instance.
 	PrepaidPeriod *int `pulumi:"prepaidPeriod"`
@@ -314,11 +319,11 @@ type ReadonlyInstanceState struct {
 	ParamTemplateId pulumi.IntPtrInput
 	// It has been deprecated from version 1.36.0. Please use `chargeType` instead. Pay type of instance. Valid values: `0`, `1`. `0`: prepaid, `1`: postpaid.
 	//
-	// Deprecated: It has been deprecated from version 1.36.0. Please use `charge_type` instead.
+	// Deprecated: It has been deprecated from version 1.36.0. Please use `chargeType` instead.
 	PayType pulumi.IntPtrInput
 	// It has been deprecated from version 1.36.0. Please use `prepaidPeriod` instead. Period of instance. NOTES: Only supported prepaid instance.
 	//
-	// Deprecated: It has been deprecated from version 1.36.0. Please use `prepaid_period` instead.
+	// Deprecated: It has been deprecated from version 1.36.0. Please use `prepaidPeriod` instead.
 	Period pulumi.IntPtrInput
 	// Period of instance. NOTES: Only supported prepaid instance.
 	PrepaidPeriod pulumi.IntPtrInput
@@ -375,11 +380,11 @@ type readonlyInstanceArgs struct {
 	ParamTemplateId *int `pulumi:"paramTemplateId"`
 	// It has been deprecated from version 1.36.0. Please use `chargeType` instead. Pay type of instance. Valid values: `0`, `1`. `0`: prepaid, `1`: postpaid.
 	//
-	// Deprecated: It has been deprecated from version 1.36.0. Please use `charge_type` instead.
+	// Deprecated: It has been deprecated from version 1.36.0. Please use `chargeType` instead.
 	PayType *int `pulumi:"payType"`
 	// It has been deprecated from version 1.36.0. Please use `prepaidPeriod` instead. Period of instance. NOTES: Only supported prepaid instance.
 	//
-	// Deprecated: It has been deprecated from version 1.36.0. Please use `prepaid_period` instead.
+	// Deprecated: It has been deprecated from version 1.36.0. Please use `prepaidPeriod` instead.
 	Period *int `pulumi:"period"`
 	// Period of instance. NOTES: Only supported prepaid instance.
 	PrepaidPeriod *int `pulumi:"prepaidPeriod"`
@@ -429,11 +434,11 @@ type ReadonlyInstanceArgs struct {
 	ParamTemplateId pulumi.IntPtrInput
 	// It has been deprecated from version 1.36.0. Please use `chargeType` instead. Pay type of instance. Valid values: `0`, `1`. `0`: prepaid, `1`: postpaid.
 	//
-	// Deprecated: It has been deprecated from version 1.36.0. Please use `charge_type` instead.
+	// Deprecated: It has been deprecated from version 1.36.0. Please use `chargeType` instead.
 	PayType pulumi.IntPtrInput
 	// It has been deprecated from version 1.36.0. Please use `prepaidPeriod` instead. Period of instance. NOTES: Only supported prepaid instance.
 	//
-	// Deprecated: It has been deprecated from version 1.36.0. Please use `prepaid_period` instead.
+	// Deprecated: It has been deprecated from version 1.36.0. Please use `prepaidPeriod` instead.
 	Period pulumi.IntPtrInput
 	// Period of instance. NOTES: Only supported prepaid instance.
 	PrepaidPeriod pulumi.IntPtrInput
@@ -481,7 +486,7 @@ func (i *ReadonlyInstance) ToReadonlyInstanceOutputWithContext(ctx context.Conte
 // ReadonlyInstanceArrayInput is an input type that accepts ReadonlyInstanceArray and ReadonlyInstanceArrayOutput values.
 // You can construct a concrete instance of `ReadonlyInstanceArrayInput` via:
 //
-//          ReadonlyInstanceArray{ ReadonlyInstanceArgs{...} }
+//	ReadonlyInstanceArray{ ReadonlyInstanceArgs{...} }
 type ReadonlyInstanceArrayInput interface {
 	pulumi.Input
 
@@ -506,7 +511,7 @@ func (i ReadonlyInstanceArray) ToReadonlyInstanceArrayOutputWithContext(ctx cont
 // ReadonlyInstanceMapInput is an input type that accepts ReadonlyInstanceMap and ReadonlyInstanceMapOutput values.
 // You can construct a concrete instance of `ReadonlyInstanceMapInput` via:
 //
-//          ReadonlyInstanceMap{ "key": ReadonlyInstanceArgs{...} }
+//	ReadonlyInstanceMap{ "key": ReadonlyInstanceArgs{...} }
 type ReadonlyInstanceMapInput interface {
 	pulumi.Input
 
@@ -614,14 +619,14 @@ func (o ReadonlyInstanceOutput) ParamTemplateId() pulumi.IntPtrOutput {
 
 // It has been deprecated from version 1.36.0. Please use `chargeType` instead. Pay type of instance. Valid values: `0`, `1`. `0`: prepaid, `1`: postpaid.
 //
-// Deprecated: It has been deprecated from version 1.36.0. Please use `charge_type` instead.
+// Deprecated: It has been deprecated from version 1.36.0. Please use `chargeType` instead.
 func (o ReadonlyInstanceOutput) PayType() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *ReadonlyInstance) pulumi.IntPtrOutput { return v.PayType }).(pulumi.IntPtrOutput)
 }
 
 // It has been deprecated from version 1.36.0. Please use `prepaidPeriod` instead. Period of instance. NOTES: Only supported prepaid instance.
 //
-// Deprecated: It has been deprecated from version 1.36.0. Please use `prepaid_period` instead.
+// Deprecated: It has been deprecated from version 1.36.0. Please use `prepaidPeriod` instead.
 func (o ReadonlyInstanceOutput) Period() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *ReadonlyInstance) pulumi.IntPtrOutput { return v.Period }).(pulumi.IntPtrOutput)
 }

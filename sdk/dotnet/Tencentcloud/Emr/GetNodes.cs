@@ -17,68 +17,62 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Emr
         /// 
         /// The EMR data source obtain the hardware node information by using the emr cluster ID.
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var myEmrNodes = Tencentcloud.Emr.GetNodes.Invoke(new()
         ///     {
-        ///         var myEmrNodes = Output.Create(Tencentcloud.Emr.GetNodes.InvokeAsync(new Tencentcloud.Emr.GetNodesArgs
-        ///         {
-        ///             InstanceId = "emr-rnzqrleq",
-        ///             NodeFlag = "master",
-        ///         }));
-        ///     }
+        ///         InstanceId = "emr-rnzqrleq",
+        ///         NodeFlag = "master",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetNodesResult> InvokeAsync(GetNodesArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetNodesResult>("tencentcloud:Emr/getNodes:getNodes", args ?? new GetNodesArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetNodesResult>("tencentcloud:Emr/getNodes:getNodes", args ?? new GetNodesArgs(), options.WithDefaults());
 
         /// <summary>
         /// Provides an available EMR for the user.
         /// 
         /// The EMR data source obtain the hardware node information by using the emr cluster ID.
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var myEmrNodes = Tencentcloud.Emr.GetNodes.Invoke(new()
         ///     {
-        ///         var myEmrNodes = Output.Create(Tencentcloud.Emr.GetNodes.InvokeAsync(new Tencentcloud.Emr.GetNodesArgs
-        ///         {
-        ///             InstanceId = "emr-rnzqrleq",
-        ///             NodeFlag = "master",
-        ///         }));
-        ///     }
+        ///         InstanceId = "emr-rnzqrleq",
+        ///         NodeFlag = "master",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetNodesResult> Invoke(GetNodesInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetNodesResult>("tencentcloud:Emr/getNodes:getNodes", args ?? new GetNodesInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetNodesResult>("tencentcloud:Emr/getNodes:getNodes", args ?? new GetNodesInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetNodesArgs : Pulumi.InvokeArgs
+    public sealed class GetNodesArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Resource type: Support all/host/pod, default is all.
@@ -109,6 +103,8 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Emr
         /// - db: Indicates that the cdb information for the normal state is obtained.
         /// - recyle: Indicates that the node information in the Recycle Bin isolation, including the cdb information, is obtained.
         /// - renew: Indicates that all node information to be renewed, including cddb information, is obtained, and the auto-renewal node will not be returned.
+        /// 
+        /// Note: Only the above values are now supported, entering other values will cause an error.
         /// </summary>
         [Input("nodeFlag", required: true)]
         public string NodeFlag { get; set; } = null!;
@@ -128,9 +124,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Emr
         public GetNodesArgs()
         {
         }
+        public static new GetNodesArgs Empty => new GetNodesArgs();
     }
 
-    public sealed class GetNodesInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetNodesInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Resource type: Support all/host/pod, default is all.
@@ -161,6 +158,8 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Emr
         /// - db: Indicates that the cdb information for the normal state is obtained.
         /// - recyle: Indicates that the node information in the Recycle Bin isolation, including the cdb information, is obtained.
         /// - renew: Indicates that all node information to be renewed, including cddb information, is obtained, and the auto-renewal node will not be returned.
+        /// 
+        /// Note: Only the above values are now supported, entering other values will cause an error.
         /// </summary>
         [Input("nodeFlag", required: true)]
         public Input<string> NodeFlag { get; set; } = null!;
@@ -180,6 +179,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Emr
         public GetNodesInvokeArgs()
         {
         }
+        public static new GetNodesInvokeArgs Empty => new GetNodesInvokeArgs();
     }
 
 

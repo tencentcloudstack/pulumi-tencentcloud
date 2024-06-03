@@ -15,84 +15,78 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
         /// <summary>
         /// Use this data source to query detailed information of clb exclusive_clusters
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var exclusiveClusters = Tencentcloud.Clb.GetExclusiveClusters.Invoke(new()
         ///     {
-        ///         var exclusiveClusters = Output.Create(Tencentcloud.Clb.GetExclusiveClusters.InvokeAsync(new Tencentcloud.Clb.GetExclusiveClustersArgs
+        ///         Filters = new[]
         ///         {
-        ///             Filters = 
+        ///             new Tencentcloud.Clb.Inputs.GetExclusiveClustersFilterInputArgs
         ///             {
-        ///                 new Tencentcloud.Clb.Inputs.GetExclusiveClustersFilterArgs
+        ///                 Name = "zone",
+        ///                 Values = new[]
         ///                 {
-        ///                     Name = "zone",
-        ///                     Values = 
-        ///                     {
-        ///                         "ap-guangzhou-1",
-        ///                     },
+        ///                     "ap-guangzhou-1",
         ///                 },
         ///             },
-        ///         }));
-        ///     }
+        ///         },
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetExclusiveClustersResult> InvokeAsync(GetExclusiveClustersArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetExclusiveClustersResult>("tencentcloud:Clb/getExclusiveClusters:getExclusiveClusters", args ?? new GetExclusiveClustersArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetExclusiveClustersResult>("tencentcloud:Clb/getExclusiveClusters:getExclusiveClusters", args ?? new GetExclusiveClustersArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of clb exclusive_clusters
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var exclusiveClusters = Tencentcloud.Clb.GetExclusiveClusters.Invoke(new()
         ///     {
-        ///         var exclusiveClusters = Output.Create(Tencentcloud.Clb.GetExclusiveClusters.InvokeAsync(new Tencentcloud.Clb.GetExclusiveClustersArgs
+        ///         Filters = new[]
         ///         {
-        ///             Filters = 
+        ///             new Tencentcloud.Clb.Inputs.GetExclusiveClustersFilterInputArgs
         ///             {
-        ///                 new Tencentcloud.Clb.Inputs.GetExclusiveClustersFilterArgs
+        ///                 Name = "zone",
+        ///                 Values = new[]
         ///                 {
-        ///                     Name = "zone",
-        ///                     Values = 
-        ///                     {
-        ///                         "ap-guangzhou-1",
-        ///                     },
+        ///                     "ap-guangzhou-1",
         ///                 },
         ///             },
-        ///         }));
-        ///     }
+        ///         },
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetExclusiveClustersResult> Invoke(GetExclusiveClustersInvokeArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetExclusiveClustersResult>("tencentcloud:Clb/getExclusiveClusters:getExclusiveClusters", args ?? new GetExclusiveClustersInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetExclusiveClustersResult>("tencentcloud:Clb/getExclusiveClusters:getExclusiveClusters", args ?? new GetExclusiveClustersInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetExclusiveClustersArgs : Pulumi.InvokeArgs
+    public sealed class GetExclusiveClustersArgs : global::Pulumi.InvokeArgs
     {
         [Input("filters")]
         private List<Inputs.GetExclusiveClustersFilterArgs>? _filters;
@@ -115,9 +109,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
         public GetExclusiveClustersArgs()
         {
         }
+        public static new GetExclusiveClustersArgs Empty => new GetExclusiveClustersArgs();
     }
 
-    public sealed class GetExclusiveClustersInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetExclusiveClustersInvokeArgs : global::Pulumi.InvokeArgs
     {
         [Input("filters")]
         private InputList<Inputs.GetExclusiveClustersFilterInputArgs>? _filters;
@@ -140,6 +135,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
         public GetExclusiveClustersInvokeArgs()
         {
         }
+        public static new GetExclusiveClustersInvokeArgs Empty => new GetExclusiveClustersInvokeArgs();
     }
 
 

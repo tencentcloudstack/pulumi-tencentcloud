@@ -8,37 +8,42 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Use this data source to query detailed information of apiGateway apiAppApi
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/ApiGateway"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/ApiGateway"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/ApiGateway"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := ApiGateway.GetApiAppApi(ctx, &apigateway.GetApiAppApiArgs{
-// 			ApiId:     "api-0cvmf4x4",
-// 			ApiRegion: "ap-guangzhou",
-// 			ServiceId: "service-nxz6yync",
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := ApiGateway.GetApiAppApi(ctx, &apigateway.GetApiAppApiArgs{
+//				ApiId:     "api-0cvmf4x4",
+//				ApiRegion: "ap-guangzhou",
+//				ServiceId: "service-nxz6yync",
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 func LookupApiAppApi(ctx *pulumi.Context, args *LookupApiAppApiArgs, opts ...pulumi.InvokeOption) (*LookupApiAppApiResult, error) {
-	opts = pkgInvokeDefaultOpts(opts)
+	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv LookupApiAppApiResult
 	err := ctx.Invoke("tencentcloud:ApiGateway/getApiAppApi:getApiAppApi", args, &rv, opts...)
 	if err != nil {

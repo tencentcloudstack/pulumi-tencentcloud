@@ -7,8 +7,9 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 type ImportImage struct {
@@ -63,7 +64,7 @@ func NewImportImage(ctx *pulumi.Context,
 	if args.OsVersion == nil {
 		return nil, errors.New("invalid value for required argument 'OsVersion'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource ImportImage
 	err := ctx.RegisterResource("tencentcloud:Cvm/importImage:ImportImage", name, args, &resource, opts...)
 	if err != nil {
@@ -228,7 +229,7 @@ func (i *ImportImage) ToImportImageOutputWithContext(ctx context.Context) Import
 // ImportImageArrayInput is an input type that accepts ImportImageArray and ImportImageArrayOutput values.
 // You can construct a concrete instance of `ImportImageArrayInput` via:
 //
-//          ImportImageArray{ ImportImageArgs{...} }
+//	ImportImageArray{ ImportImageArgs{...} }
 type ImportImageArrayInput interface {
 	pulumi.Input
 
@@ -253,7 +254,7 @@ func (i ImportImageArray) ToImportImageArrayOutputWithContext(ctx context.Contex
 // ImportImageMapInput is an input type that accepts ImportImageMap and ImportImageMapOutput values.
 // You can construct a concrete instance of `ImportImageMapInput` via:
 //
-//          ImportImageMap{ "key": ImportImageArgs{...} }
+//	ImportImageMap{ "key": ImportImageArgs{...} }
 type ImportImageMapInput interface {
 	pulumi.Input
 

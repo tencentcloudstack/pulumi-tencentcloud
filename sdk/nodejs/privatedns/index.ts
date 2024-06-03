@@ -5,15 +5,31 @@ import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
 // Export members:
-export * from "./getRecords";
-export * from "./record";
-export * from "./zone";
-export * from "./zoneVpcAttachment";
+export { GetPrivateZoneListArgs, GetPrivateZoneListResult, GetPrivateZoneListOutputArgs } from "./getPrivateZoneList";
+export const getPrivateZoneList: typeof import("./getPrivateZoneList").getPrivateZoneList = null as any;
+export const getPrivateZoneListOutput: typeof import("./getPrivateZoneList").getPrivateZoneListOutput = null as any;
+utilities.lazyLoad(exports, ["getPrivateZoneList","getPrivateZoneListOutput"], () => require("./getPrivateZoneList"));
 
-// Import resources to register:
-import { Record } from "./record";
-import { Zone } from "./zone";
-import { ZoneVpcAttachment } from "./zoneVpcAttachment";
+export { GetRecordsArgs, GetRecordsResult, GetRecordsOutputArgs } from "./getRecords";
+export const getRecords: typeof import("./getRecords").getRecords = null as any;
+export const getRecordsOutput: typeof import("./getRecords").getRecordsOutput = null as any;
+utilities.lazyLoad(exports, ["getRecords","getRecordsOutput"], () => require("./getRecords"));
+
+export { RecordArgs, RecordState } from "./record";
+export type Record = import("./record").Record;
+export const Record: typeof import("./record").Record = null as any;
+utilities.lazyLoad(exports, ["Record"], () => require("./record"));
+
+export { ZoneArgs, ZoneState } from "./zone";
+export type Zone = import("./zone").Zone;
+export const Zone: typeof import("./zone").Zone = null as any;
+utilities.lazyLoad(exports, ["Zone"], () => require("./zone"));
+
+export { ZoneVpcAttachmentArgs, ZoneVpcAttachmentState } from "./zoneVpcAttachment";
+export type ZoneVpcAttachment = import("./zoneVpcAttachment").ZoneVpcAttachment;
+export const ZoneVpcAttachment: typeof import("./zoneVpcAttachment").ZoneVpcAttachment = null as any;
+utilities.lazyLoad(exports, ["ZoneVpcAttachment"], () => require("./zoneVpcAttachment"));
+
 
 const _module = {
     version: utilities.getVersion(),

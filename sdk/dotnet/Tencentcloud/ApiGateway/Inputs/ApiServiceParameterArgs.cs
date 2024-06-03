@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway.Inputs
 {
 
-    public sealed class ApiServiceParameterArgs : Pulumi.ResourceArgs
+    public sealed class ApiServiceParameterArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// The default value for the backend service parameters of the API. This parameter is only used when ServiceType is HTTP.Note: This field may return null, indicating that a valid value cannot be obtained.
@@ -58,5 +58,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway.Inputs
         public ApiServiceParameterArgs()
         {
         }
+        public static new ApiServiceParameterArgs Empty => new ApiServiceParameterArgs();
     }
 }

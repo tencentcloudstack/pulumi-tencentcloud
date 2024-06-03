@@ -14,59 +14,62 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps
     /// Provides a resource to create a mps process_live_stream_operation
     /// 
     /// ## Example Usage
+    /// 
     /// ### Process mps live stream through CMQ
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var output = new Tencentcloud.Cos.Bucket("output", new()
     ///     {
-    ///         var output = new Tencentcloud.Cos.Bucket("output", new Tencentcloud.Cos.BucketArgs
-    ///         {
-    ///             Bucket = $"tf-bucket-mps-process-live-stream-output-{local.App_id}",
-    ///             ForceClean = true,
-    ///             Acl = "public-read",
-    ///         });
-    ///         var operation = new Tencentcloud.Mps.ProcessLiveStreamOperation("operation", new Tencentcloud.Mps.ProcessLiveStreamOperationArgs
-    ///         {
-    ///             Url = "http://www.abc.com/abc.m3u8",
-    ///             TaskNotifyConfig = new Tencentcloud.Mps.Inputs.ProcessLiveStreamOperationTaskNotifyConfigArgs
-    ///             {
-    ///                 CmqModel = "Queue",
-    ///                 CmqRegion = "gz",
-    ///                 QueueName = "test",
-    ///                 TopicName = "test",
-    ///                 NotifyType = "CMQ",
-    ///             },
-    ///             OutputStorage = new Tencentcloud.Mps.Inputs.ProcessLiveStreamOperationOutputStorageArgs
-    ///             {
-    ///                 Type = "COS",
-    ///                 CosOutputStorage = new Tencentcloud.Mps.Inputs.ProcessLiveStreamOperationOutputStorageCosOutputStorageArgs
-    ///                 {
-    ///                     Bucket = output.CosBucket,
-    ///                     Region = "%s",
-    ///                 },
-    ///             },
-    ///             OutputDir = "/output/",
-    ///             AiContentReviewTask = new Tencentcloud.Mps.Inputs.ProcessLiveStreamOperationAiContentReviewTaskArgs
-    ///             {
-    ///                 Definition = 10,
-    ///             },
-    ///             AiRecognitionTask = new Tencentcloud.Mps.Inputs.ProcessLiveStreamOperationAiRecognitionTaskArgs
-    ///             {
-    ///                 Definition = 10,
-    ///             },
-    ///         });
-    ///     }
+    ///         CosBucket = $"tf-bucket-mps-process-live-stream-output-{local.App_id}",
+    ///         ForceClean = true,
+    ///         Acl = "public-read",
+    ///     });
     /// 
-    /// }
+    ///     var operation = new Tencentcloud.Mps.ProcessLiveStreamOperation("operation", new()
+    ///     {
+    ///         Url = "http://www.abc.com/abc.m3u8",
+    ///         TaskNotifyConfig = new Tencentcloud.Mps.Inputs.ProcessLiveStreamOperationTaskNotifyConfigArgs
+    ///         {
+    ///             CmqModel = "Queue",
+    ///             CmqRegion = "gz",
+    ///             QueueName = "test",
+    ///             TopicName = "test",
+    ///             NotifyType = "CMQ",
+    ///         },
+    ///         OutputStorage = new Tencentcloud.Mps.Inputs.ProcessLiveStreamOperationOutputStorageArgs
+    ///         {
+    ///             Type = "COS",
+    ///             CosOutputStorage = new Tencentcloud.Mps.Inputs.ProcessLiveStreamOperationOutputStorageCosOutputStorageArgs
+    ///             {
+    ///                 Bucket = output.CosBucket,
+    ///                 Region = "%s",
+    ///             },
+    ///         },
+    ///         OutputDir = "/output/",
+    ///         AiContentReviewTask = new Tencentcloud.Mps.Inputs.ProcessLiveStreamOperationAiContentReviewTaskArgs
+    ///         {
+    ///             Definition = 10,
+    ///         },
+    ///         AiRecognitionTask = new Tencentcloud.Mps.Inputs.ProcessLiveStreamOperationAiRecognitionTaskArgs
+    ///         {
+    ///             Definition = 10,
+    ///         },
+    ///     });
+    /// 
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Mps/processLiveStreamOperation:ProcessLiveStreamOperation")]
-    public partial class ProcessLiveStreamOperation : Pulumi.CustomResource
+    public partial class ProcessLiveStreamOperation : global::Pulumi.CustomResource
     {
         /// <summary>
         /// AI video intelligent analysis input parameter types.
@@ -179,7 +182,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps
         }
     }
 
-    public sealed class ProcessLiveStreamOperationArgs : Pulumi.ResourceArgs
+    public sealed class ProcessLiveStreamOperationArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// AI video intelligent analysis input parameter types.
@@ -250,9 +253,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps
         public ProcessLiveStreamOperationArgs()
         {
         }
+        public static new ProcessLiveStreamOperationArgs Empty => new ProcessLiveStreamOperationArgs();
     }
 
-    public sealed class ProcessLiveStreamOperationState : Pulumi.ResourceArgs
+    public sealed class ProcessLiveStreamOperationState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// AI video intelligent analysis input parameter types.
@@ -323,5 +327,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps
         public ProcessLiveStreamOperationState()
         {
         }
+        public static new ProcessLiveStreamOperationState Empty => new ProcessLiveStreamOperationState();
     }
 }

@@ -15,64 +15,58 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         /// <summary>
         /// Use this data source to query detailed information of vpc gateway_flow_qos
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var gatewayFlowQos = Tencentcloud.Vpc.GetGatewayFlowQos.Invoke(new()
         ///     {
-        ///         var gatewayFlowQos = Output.Create(Tencentcloud.Vpc.GetGatewayFlowQos.InvokeAsync(new Tencentcloud.Vpc.GetGatewayFlowQosArgs
-        ///         {
-        ///             GatewayId = "vpngw-gt8bianl",
-        ///         }));
-        ///     }
+        ///         GatewayId = "vpngw-gt8bianl",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetGatewayFlowQosResult> InvokeAsync(GetGatewayFlowQosArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetGatewayFlowQosResult>("tencentcloud:Vpc/getGatewayFlowQos:getGatewayFlowQos", args ?? new GetGatewayFlowQosArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetGatewayFlowQosResult>("tencentcloud:Vpc/getGatewayFlowQos:getGatewayFlowQos", args ?? new GetGatewayFlowQosArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of vpc gateway_flow_qos
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var gatewayFlowQos = Tencentcloud.Vpc.GetGatewayFlowQos.Invoke(new()
         ///     {
-        ///         var gatewayFlowQos = Output.Create(Tencentcloud.Vpc.GetGatewayFlowQos.InvokeAsync(new Tencentcloud.Vpc.GetGatewayFlowQosArgs
-        ///         {
-        ///             GatewayId = "vpngw-gt8bianl",
-        ///         }));
-        ///     }
+        ///         GatewayId = "vpngw-gt8bianl",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetGatewayFlowQosResult> Invoke(GetGatewayFlowQosInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetGatewayFlowQosResult>("tencentcloud:Vpc/getGatewayFlowQos:getGatewayFlowQos", args ?? new GetGatewayFlowQosInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetGatewayFlowQosResult>("tencentcloud:Vpc/getGatewayFlowQos:getGatewayFlowQos", args ?? new GetGatewayFlowQosInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetGatewayFlowQosArgs : Pulumi.InvokeArgs
+    public sealed class GetGatewayFlowQosArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Network instance ID, the network instance types we currently support are:Private line gateway instance ID, in the form of `dcg-ltjahce6`;Nat gateway instance ID, in the form of `nat-ltjahce6`;VPN gateway instance ID, in the form of `vpn-ltjahce6`.
@@ -101,9 +95,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         public GetGatewayFlowQosArgs()
         {
         }
+        public static new GetGatewayFlowQosArgs Empty => new GetGatewayFlowQosArgs();
     }
 
-    public sealed class GetGatewayFlowQosInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetGatewayFlowQosInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Network instance ID, the network instance types we currently support are:Private line gateway instance ID, in the form of `dcg-ltjahce6`;Nat gateway instance ID, in the form of `nat-ltjahce6`;VPN gateway instance ID, in the form of `vpn-ltjahce6`.
@@ -132,6 +127,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         public GetGatewayFlowQosInvokeArgs()
         {
         }
+        public static new GetGatewayFlowQosInvokeArgs Empty => new GetGatewayFlowQosInvokeArgs();
     }
 
 

@@ -15,43 +15,44 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Organization
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var orgIdentity = new Tencentcloud.Organization.OrgIdentity("orgIdentity", new()
     ///     {
-    ///         var orgIdentity = new Tencentcloud.Organization.OrgIdentity("orgIdentity", new Tencentcloud.Organization.OrgIdentityArgs
+    ///         Description = "iac-test",
+    ///         IdentityAliasName = "example-iac-test",
+    ///         IdentityPolicies = new[]
     ///         {
-    ///             Description = "iac-test",
-    ///             IdentityAliasName = "example-iac-test",
-    ///             IdentityPolicies = 
+    ///             new Tencentcloud.Organization.Inputs.OrgIdentityIdentityPolicyArgs
     ///             {
-    ///                 new Tencentcloud.Organization.Inputs.OrgIdentityIdentityPolicyArgs
-    ///                 {
-    ///                     PolicyId = 1,
-    ///                     PolicyName = "AdministratorAccess",
-    ///                     PolicyType = 2,
-    ///                 },
+    ///                 PolicyId = 1,
+    ///                 PolicyName = "AdministratorAccess",
+    ///                 PolicyType = 2,
     ///             },
-    ///         });
-    ///     }
+    ///         },
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// organization org_identity can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Organization/orgIdentity:OrgIdentity org_identity org_identity_id
+    /// $ pulumi import tencentcloud:Organization/orgIdentity:OrgIdentity org_identity org_identity_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Organization/orgIdentity:OrgIdentity")]
-    public partial class OrgIdentity : Pulumi.CustomResource
+    public partial class OrgIdentity : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Identity description.
@@ -116,7 +117,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Organization
         }
     }
 
-    public sealed class OrgIdentityArgs : Pulumi.ResourceArgs
+    public sealed class OrgIdentityArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Identity description.
@@ -145,9 +146,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Organization
         public OrgIdentityArgs()
         {
         }
+        public static new OrgIdentityArgs Empty => new OrgIdentityArgs();
     }
 
-    public sealed class OrgIdentityState : Pulumi.ResourceArgs
+    public sealed class OrgIdentityState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Identity description.
@@ -176,5 +178,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Organization
         public OrgIdentityState()
         {
         }
+        public static new OrgIdentityState Empty => new OrgIdentityState();
     }
 }

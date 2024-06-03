@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,11 +11,12 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const ccPrecisionPolicy = new tencentcloud.Antiddos.CcPrecisionPolicy("cc_precision_policy", {
+ * const ccPrecisionPolicy = new tencentcloud.antiddos.CcPrecisionPolicy("ccPrecisionPolicy", {
  *     domain: "t.baidu.com",
  *     instanceId: "bgpip-0000078h",
  *     ip: "212.64.62.191",
@@ -36,13 +38,14 @@ import * as utilities from "../utilities";
  *     protocol: "http",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * antiddos cc_precision_policy can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Antiddos/ccPrecisionPolicy:CcPrecisionPolicy cc_precision_policy ${instanceId}#${policyId}#${instanceIp}#${domain}#${protocol}
+ * $ pulumi import tencentcloud:Antiddos/ccPrecisionPolicy:CcPrecisionPolicy cc_precision_policy ${instanceId}#${policyId}#${instanceIp}#${domain}#${protocol}
  * ```
  */
 export class CcPrecisionPolicy extends pulumi.CustomResource {

@@ -8,41 +8,46 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Use this data source to query vpc instances' information.
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		foo, err := Vpc.NewInstance(ctx, "foo", &Vpc.InstanceArgs{
-// 			CidrBlock: pulumi.String("10.0.0.0/16"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_ = Vpc.GetInstancesOutput(ctx, vpc.GetInstancesOutputArgs{
-// 			VpcId: foo.ID(),
-// 		}, nil)
-// 		_ = Vpc.GetInstancesOutput(ctx, vpc.GetInstancesOutputArgs{
-// 			Name: foo.Name,
-// 		}, nil)
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			foo, err := Vpc.NewInstance(ctx, "foo", &Vpc.InstanceArgs{
+//				CidrBlock: pulumi.String("10.0.0.0/16"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_ = Vpc.GetInstancesOutput(ctx, vpc.GetInstancesOutputArgs{
+//				VpcId: foo.ID(),
+//			}, nil)
+//			_ = Vpc.GetInstancesOutput(ctx, vpc.GetInstancesOutputArgs{
+//				Name: foo.Name,
+//			}, nil)
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 func GetInstances(ctx *pulumi.Context, args *GetInstancesArgs, opts ...pulumi.InvokeOption) (*GetInstancesResult, error) {
-	opts = pkgInvokeDefaultOpts(opts)
+	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetInstancesResult
 	err := ctx.Invoke("tencentcloud:Vpc/getInstances:getInstances", args, &rv, opts...)
 	if err != nil {

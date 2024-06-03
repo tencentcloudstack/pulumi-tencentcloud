@@ -7,51 +7,57 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a ciam user group
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ciam"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ciam"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		userStore, err := Ciam.NewUserStore(ctx, "userStore", &Ciam.UserStoreArgs{
-// 			UserPoolName: pulumi.String("tf_user_store"),
-// 			UserPoolDesc: pulumi.String("for terraform test"),
-// 			UserPoolLogo: pulumi.String("https://ciam-prd-1302490086.cos.ap-guangzhou.myqcloud.com/temporary/92630252a2c5422d9663db5feafd619b.png"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_, err = Ciam.NewUserGroup(ctx, "userGroup", &Ciam.UserGroupArgs{
-// 			DisplayName: pulumi.String("tf_user_group"),
-// 			UserStoreId: userStore.ID(),
-// 			Description: pulumi.String("for terrafrom test"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			userStore, err := Ciam.NewUserStore(ctx, "userStore", &Ciam.UserStoreArgs{
+//				UserPoolName: pulumi.String("tf_user_store"),
+//				UserPoolDesc: pulumi.String("for terraform test"),
+//				UserPoolLogo: pulumi.String("https://ciam-prd-1302490086.cos.ap-guangzhou.myqcloud.com/temporary/92630252a2c5422d9663db5feafd619b.png"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_, err = Ciam.NewUserGroup(ctx, "userGroup", &Ciam.UserGroupArgs{
+//				DisplayName: pulumi.String("tf_user_group"),
+//				UserStoreId: userStore.ID(),
+//				Description: pulumi.String("for terrafrom test"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // ciam user_group can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Ciam/userGroup:UserGroup user_group userStoreId#userGroupId
+// $ pulumi import tencentcloud:Ciam/userGroup:UserGroup user_group userStoreId#userGroupId
 // ```
 type UserGroup struct {
 	pulumi.CustomResourceState
@@ -77,7 +83,7 @@ func NewUserGroup(ctx *pulumi.Context,
 	if args.UserStoreId == nil {
 		return nil, errors.New("invalid value for required argument 'UserStoreId'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource UserGroup
 	err := ctx.RegisterResource("tencentcloud:Ciam/userGroup:UserGroup", name, args, &resource, opts...)
 	if err != nil {
@@ -166,7 +172,7 @@ func (i *UserGroup) ToUserGroupOutputWithContext(ctx context.Context) UserGroupO
 // UserGroupArrayInput is an input type that accepts UserGroupArray and UserGroupArrayOutput values.
 // You can construct a concrete instance of `UserGroupArrayInput` via:
 //
-//          UserGroupArray{ UserGroupArgs{...} }
+//	UserGroupArray{ UserGroupArgs{...} }
 type UserGroupArrayInput interface {
 	pulumi.Input
 
@@ -191,7 +197,7 @@ func (i UserGroupArray) ToUserGroupArrayOutputWithContext(ctx context.Context) U
 // UserGroupMapInput is an input type that accepts UserGroupMap and UserGroupMapOutput values.
 // You can construct a concrete instance of `UserGroupMapInput` via:
 //
-//          UserGroupMap{ "key": UserGroupArgs{...} }
+//	UserGroupMap{ "key": UserGroupArgs{...} }
 type UserGroupMapInput interface {
 	pulumi.Input
 

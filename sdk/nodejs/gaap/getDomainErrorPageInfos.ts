@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,21 +11,20 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const domainErrorPageInfos = pulumi.output(tencentcloud.Gaap.getDomainErrorPageInfos({
+ * const domainErrorPageInfos = tencentcloud.Gaap.getDomainErrorPageInfos({
  *     errorPageIds: ["errorPage-xxxxxx"],
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getDomainErrorPageInfos(args: GetDomainErrorPageInfosArgs, opts?: pulumi.InvokeOptions): Promise<GetDomainErrorPageInfosResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Gaap/getDomainErrorPageInfos:getDomainErrorPageInfos", {
         "errorPageIds": args.errorPageIds,
         "resultOutputFile": args.resultOutputFile,
@@ -60,9 +60,24 @@ export interface GetDomainErrorPageInfosResult {
     readonly id: string;
     readonly resultOutputFile?: string;
 }
-
+/**
+ * Use this data source to query detailed information of gaap domain error page infos
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const domainErrorPageInfos = tencentcloud.Gaap.getDomainErrorPageInfos({
+ *     errorPageIds: ["errorPage-xxxxxx"],
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getDomainErrorPageInfosOutput(args: GetDomainErrorPageInfosOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetDomainErrorPageInfosResult> {
-    return pulumi.output(args).apply(a => getDomainErrorPageInfos(a, opts))
+    return pulumi.output(args).apply((a: any) => getDomainErrorPageInfos(a, opts))
 }
 
 /**

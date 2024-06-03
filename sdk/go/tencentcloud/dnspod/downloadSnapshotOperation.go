@@ -7,35 +7,41 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a dnspod downloadSnapshot
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dnspod"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dnspod"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Dnspod.NewDownloadSnapshotOperation(ctx, "downloadSnapshot", &Dnspod.DownloadSnapshotOperationArgs{
-// 			Domain:     pulumi.String("dnspod.cn"),
-// 			SnapshotId: pulumi.String("456"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Dnspod.NewDownloadSnapshotOperation(ctx, "downloadSnapshot", &Dnspod.DownloadSnapshotOperationArgs{
+//				Domain:     pulumi.String("dnspod.cn"),
+//				SnapshotId: pulumi.String("456"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 type DownloadSnapshotOperation struct {
 	pulumi.CustomResourceState
 
@@ -60,7 +66,7 @@ func NewDownloadSnapshotOperation(ctx *pulumi.Context,
 	if args.SnapshotId == nil {
 		return nil, errors.New("invalid value for required argument 'SnapshotId'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource DownloadSnapshotOperation
 	err := ctx.RegisterResource("tencentcloud:Dnspod/downloadSnapshotOperation:DownloadSnapshotOperation", name, args, &resource, opts...)
 	if err != nil {
@@ -145,7 +151,7 @@ func (i *DownloadSnapshotOperation) ToDownloadSnapshotOperationOutputWithContext
 // DownloadSnapshotOperationArrayInput is an input type that accepts DownloadSnapshotOperationArray and DownloadSnapshotOperationArrayOutput values.
 // You can construct a concrete instance of `DownloadSnapshotOperationArrayInput` via:
 //
-//          DownloadSnapshotOperationArray{ DownloadSnapshotOperationArgs{...} }
+//	DownloadSnapshotOperationArray{ DownloadSnapshotOperationArgs{...} }
 type DownloadSnapshotOperationArrayInput interface {
 	pulumi.Input
 
@@ -170,7 +176,7 @@ func (i DownloadSnapshotOperationArray) ToDownloadSnapshotOperationArrayOutputWi
 // DownloadSnapshotOperationMapInput is an input type that accepts DownloadSnapshotOperationMap and DownloadSnapshotOperationMapOutput values.
 // You can construct a concrete instance of `DownloadSnapshotOperationMapInput` via:
 //
-//          DownloadSnapshotOperationMap{ "key": DownloadSnapshotOperationArgs{...} }
+//	DownloadSnapshotOperationMap{ "key": DownloadSnapshotOperationArgs{...} }
 type DownloadSnapshotOperationMapInput interface {
 	pulumi.Input
 

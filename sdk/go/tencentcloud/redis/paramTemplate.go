@@ -8,84 +8,94 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a redis parameter template
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Redis"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Redis"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Redis"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Redis.NewParamTemplate(ctx, "paramTemplate", &Redis.ParamTemplateArgs{
-// 			Description: pulumi.String("This is an example redis param template."),
-// 			ParamsOverrides: redis.ParamTemplateParamsOverrideArray{
-// 				&redis.ParamTemplateParamsOverrideArgs{
-// 					Key:   pulumi.String("timeout"),
-// 					Value: pulumi.String("7200"),
-// 				},
-// 			},
-// 			ProductType: pulumi.Int(6),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Redis.NewParamTemplate(ctx, "paramTemplate", &Redis.ParamTemplateArgs{
+//				Description: pulumi.String("This is an example redis param template."),
+//				ParamsOverrides: redis.ParamTemplateParamsOverrideArray{
+//					&redis.ParamTemplateParamsOverrideArgs{
+//						Key:   pulumi.String("timeout"),
+//						Value: pulumi.String("7200"),
+//					},
+//				},
+//				ProductType: pulumi.Int(6),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
+//
 // ### Copy from another template
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Redis"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Redis"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Redis"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		foo, err := Redis.NewParamTemplate(ctx, "foo", &Redis.ParamTemplateArgs{
-// 			Description: pulumi.String("This is an example redis param template."),
-// 			ProductType: pulumi.Int(6),
-// 			ParamsOverrides: redis.ParamTemplateParamsOverrideArray{
-// 				&redis.ParamTemplateParamsOverrideArgs{
-// 					Key:   pulumi.String("timeout"),
-// 					Value: pulumi.String("7200"),
-// 				},
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_, err = Redis.NewParamTemplate(ctx, "paramTemplate", &Redis.ParamTemplateArgs{
-// 			Description: pulumi.String("This is an copied redis param template from tf-template."),
-// 			TemplateId:  foo.ID(),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			foo, err := Redis.NewParamTemplate(ctx, "foo", &Redis.ParamTemplateArgs{
+//				Description: pulumi.String("This is an example redis param template."),
+//				ProductType: pulumi.Int(6),
+//				ParamsOverrides: redis.ParamTemplateParamsOverrideArray{
+//					&redis.ParamTemplateParamsOverrideArgs{
+//						Key:   pulumi.String("timeout"),
+//						Value: pulumi.String("7200"),
+//					},
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_, err = Redis.NewParamTemplate(ctx, "paramTemplate", &Redis.ParamTemplateArgs{
+//				Description: pulumi.String("This is an copied redis param template from tf-template."),
+//				TemplateId:  foo.ID(),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // redis param_template can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Redis/paramTemplate:ParamTemplate param_template param_template_id
+// $ pulumi import tencentcloud:Redis/paramTemplate:ParamTemplate param_template param_template_id
 // ```
 type ParamTemplate struct {
 	pulumi.CustomResourceState
@@ -111,7 +121,7 @@ func NewParamTemplate(ctx *pulumi.Context,
 		args = &ParamTemplateArgs{}
 	}
 
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource ParamTemplate
 	err := ctx.RegisterResource("tencentcloud:Redis/paramTemplate:ParamTemplate", name, args, &resource, opts...)
 	if err != nil {
@@ -220,7 +230,7 @@ func (i *ParamTemplate) ToParamTemplateOutputWithContext(ctx context.Context) Pa
 // ParamTemplateArrayInput is an input type that accepts ParamTemplateArray and ParamTemplateArrayOutput values.
 // You can construct a concrete instance of `ParamTemplateArrayInput` via:
 //
-//          ParamTemplateArray{ ParamTemplateArgs{...} }
+//	ParamTemplateArray{ ParamTemplateArgs{...} }
 type ParamTemplateArrayInput interface {
 	pulumi.Input
 
@@ -245,7 +255,7 @@ func (i ParamTemplateArray) ToParamTemplateArrayOutputWithContext(ctx context.Co
 // ParamTemplateMapInput is an input type that accepts ParamTemplateMap and ParamTemplateMapOutput values.
 // You can construct a concrete instance of `ParamTemplateMapInput` via:
 //
-//          ParamTemplateMap{ "key": ParamTemplateArgs{...} }
+//	ParamTemplateMap{ "key": ParamTemplateArgs{...} }
 type ParamTemplateMapInput interface {
 	pulumi.Input
 

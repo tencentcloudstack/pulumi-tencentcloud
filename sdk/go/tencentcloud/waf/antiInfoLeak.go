@@ -7,51 +7,56 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a waf antiInfoLeak
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Waf"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Waf"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Waf"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Waf.NewAntiInfoLeak(ctx, "example", &Waf.AntiInfoLeakArgs{
-// 			ActionType: pulumi.Int(0),
-// 			Domain:     pulumi.String("tf.example.com"),
-// 			Status:     pulumi.Int(1),
-// 			Strategies: waf.AntiInfoLeakStrategyArray{
-// 				&waf.AntiInfoLeakStrategyArgs{
-// 					Content: pulumi.String("phone"),
-// 					Field:   pulumi.String("information"),
-// 				},
-// 			},
-// 			Uri: pulumi.String("/anti_info_leak_url"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Waf.NewAntiInfoLeak(ctx, "example", &Waf.AntiInfoLeakArgs{
+//				ActionType: pulumi.Int(0),
+//				Domain:     pulumi.String("tf.example.com"),
+//				Status:     pulumi.Int(1),
+//				Strategies: waf.AntiInfoLeakStrategyArray{
+//					&waf.AntiInfoLeakStrategyArgs{
+//						Content: pulumi.String("phone"),
+//						Field:   pulumi.String("information"),
+//					},
+//				},
+//				Uri: pulumi.String("/anti_info_leak_url"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // waf anti_info_leak can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Waf/antiInfoLeak:AntiInfoLeak example 3100077499#tf.example.com
+// $ pulumi import tencentcloud:Waf/antiInfoLeak:AntiInfoLeak example 3100077499#tf.example.com
 // ```
 type AntiInfoLeak struct {
 	pulumi.CustomResourceState
@@ -89,7 +94,7 @@ func NewAntiInfoLeak(ctx *pulumi.Context,
 	if args.Uri == nil {
 		return nil, errors.New("invalid value for required argument 'Uri'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource AntiInfoLeak
 	err := ctx.RegisterResource("tencentcloud:Waf/antiInfoLeak:AntiInfoLeak", name, args, &resource, opts...)
 	if err != nil {
@@ -202,7 +207,7 @@ func (i *AntiInfoLeak) ToAntiInfoLeakOutputWithContext(ctx context.Context) Anti
 // AntiInfoLeakArrayInput is an input type that accepts AntiInfoLeakArray and AntiInfoLeakArrayOutput values.
 // You can construct a concrete instance of `AntiInfoLeakArrayInput` via:
 //
-//          AntiInfoLeakArray{ AntiInfoLeakArgs{...} }
+//	AntiInfoLeakArray{ AntiInfoLeakArgs{...} }
 type AntiInfoLeakArrayInput interface {
 	pulumi.Input
 
@@ -227,7 +232,7 @@ func (i AntiInfoLeakArray) ToAntiInfoLeakArrayOutputWithContext(ctx context.Cont
 // AntiInfoLeakMapInput is an input type that accepts AntiInfoLeakMap and AntiInfoLeakMapOutput values.
 // You can construct a concrete instance of `AntiInfoLeakMapInput` via:
 //
-//          AntiInfoLeakMap{ "key": AntiInfoLeakArgs{...} }
+//	AntiInfoLeakMap{ "key": AntiInfoLeakArgs{...} }
 type AntiInfoLeakMapInput interface {
 	pulumi.Input
 

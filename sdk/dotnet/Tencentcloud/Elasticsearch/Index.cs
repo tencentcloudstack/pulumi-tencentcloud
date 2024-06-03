@@ -15,36 +15,37 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Elasticsearch
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var index = new Tencentcloud.Elasticsearch.Index("index", new()
     ///     {
-    ///         var index = new Tencentcloud.Elasticsearch.Index("index", new Tencentcloud.Elasticsearch.IndexArgs
-    ///         {
-    ///             IndexMetaJson = "{\"mappings\":{},\"settings\":{\"index.number_of_replicas\":1,\"index.number_of_shards\":1,\"index.refresh_interval\":\"30s\"}}",
-    ///             IndexName = "test-es-index",
-    ///             IndexType = "normal",
-    ///             InstanceId = "es-xxxxxx",
-    ///         });
-    ///     }
+    ///         IndexMetaJson = "{\"mappings\":{},\"settings\":{\"index.number_of_replicas\":1,\"index.number_of_shards\":1,\"index.refresh_interval\":\"30s\"}}",
+    ///         IndexName = "test-es-index",
+    ///         IndexType = "normal",
+    ///         InstanceId = "es-xxxxxx",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// elasticsearch index can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Elasticsearch/index:Index index index_id
+    /// $ pulumi import tencentcloud:Elasticsearch/index:Index index index_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Elasticsearch/index:Index")]
-    public partial class Index : Pulumi.CustomResource
+    public partial class Index : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Create index metadata JSON, such as mappings, settings.
@@ -115,7 +116,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Elasticsearch
         }
     }
 
-    public sealed class IndexArgs : Pulumi.ResourceArgs
+    public sealed class IndexArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Create index metadata JSON, such as mappings, settings.
@@ -144,9 +145,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Elasticsearch
         public IndexArgs()
         {
         }
+        public static new IndexArgs Empty => new IndexArgs();
     }
 
-    public sealed class IndexState : Pulumi.ResourceArgs
+    public sealed class IndexState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Create index metadata JSON, such as mappings, settings.
@@ -175,5 +177,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Elasticsearch
         public IndexState()
         {
         }
+        public static new IndexState Empty => new IndexState();
     }
 }

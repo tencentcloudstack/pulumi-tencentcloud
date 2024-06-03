@@ -9,21 +9,21 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = new tencentcloud.Dasb.CmdTemplate("example", {
- *     cmdList: "rm -rf*",
- * });
+ * const example = new tencentcloud.dasb.CmdTemplate("example", {cmdList: "rm -rf*"});
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * dasb cmd_template can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Dasb/cmdTemplate:CmdTemplate example 15
+ * $ pulumi import tencentcloud:Dasb/cmdTemplate:CmdTemplate example 15
  * ```
  */
 export class CmdTemplate extends pulumi.CustomResource {

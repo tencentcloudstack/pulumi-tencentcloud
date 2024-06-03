@@ -15,124 +15,129 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var config = new Config();
+    ///     var availabilityZone = config.Get("availabilityZone") ?? "ap-guangzhou-6";
+    ///     var vpc = new Tencentcloud.Vpc.Instance("vpc", new()
     ///     {
-    ///         var config = new Config();
-    ///         var availabilityZone = config.Get("availabilityZone") ?? "ap-guangzhou-6";
-    ///         var vpc = new Tencentcloud.Vpc.Instance("vpc", new Tencentcloud.Vpc.InstanceArgs
-    ///         {
-    ///             CidrBlock = "10.0.0.0/16",
-    ///         });
-    ///         var subnet = new Tencentcloud.Subnet.Instance("subnet", new Tencentcloud.Subnet.InstanceArgs
-    ///         {
-    ///             VpcId = vpc.Id,
-    ///             AvailabilityZone = availabilityZone,
-    ///             CidrBlock = "10.0.1.0/24",
-    ///         });
-    ///         var fooGrafanaInstance = new Tencentcloud.Monitor.GrafanaInstance("fooGrafanaInstance", new Tencentcloud.Monitor.GrafanaInstanceArgs
-    ///         {
-    ///             InstanceName = "test-grafana",
-    ///             VpcId = vpc.Id,
-    ///             SubnetIds = 
-    ///             {
-    ///                 subnet.Id,
-    ///             },
-    ///             GrafanaInitPassword = "1234567890",
-    ///             EnableInternet = false,
-    ///             Tags = 
-    ///             {
-    ///                 { "createdBy", "test" },
-    ///             },
-    ///         });
-    ///         var fooAlarmNotice = new Tencentcloud.Monitor.AlarmNotice("fooAlarmNotice", new Tencentcloud.Monitor.AlarmNoticeArgs
-    ///         {
-    ///             NoticeType = "ALL",
-    ///             NoticeLanguage = "zh-CN",
-    ///             UserNotices = 
-    ///             {
-    ///                 new Tencentcloud.Monitor.Inputs.AlarmNoticeUserNoticeArgs
-    ///                 {
-    ///                     ReceiverType = "USER",
-    ///                     StartTime = 0,
-    ///                     EndTime = 1,
-    ///                     NoticeWays = 
-    ///                     {
-    ///                         "SMS",
-    ///                         "EMAIL",
-    ///                     },
-    ///                     UserIds = 
-    ///                     {
-    ///                         10001,
-    ///                     },
-    ///                     GroupIds = {},
-    ///                     PhoneOrders = 
-    ///                     {
-    ///                         10001,
-    ///                     },
-    ///                     PhoneCircleTimes = 2,
-    ///                     PhoneCircleInterval = 50,
-    ///                     PhoneInnerInterval = 60,
-    ///                     NeedPhoneArriveNotice = 1,
-    ///                     PhoneCallType = "CIRCLE",
-    ///                     Weekdays = 
-    ///                     {
-    ///                         1,
-    ///                         2,
-    ///                         3,
-    ///                         4,
-    ///                         5,
-    ///                         6,
-    ///                         7,
-    ///                     },
-    ///                 },
-    ///             },
-    ///             UrlNotices = 
-    ///             {
-    ///                 new Tencentcloud.Monitor.Inputs.AlarmNoticeUrlNoticeArgs
-    ///                 {
-    ///                     Url = "https://www.mytest.com/validate",
-    ///                     EndTime = 0,
-    ///                     StartTime = 1,
-    ///                     Weekdays = 
-    ///                     {
-    ///                         1,
-    ///                         2,
-    ///                         3,
-    ///                         4,
-    ///                         5,
-    ///                         6,
-    ///                         7,
-    ///                     },
-    ///                 },
-    ///             },
-    ///         });
-    ///         var grafanaNotificationChannel = new Tencentcloud.Monitor.GrafanaNotificationChannel("grafanaNotificationChannel", new Tencentcloud.Monitor.GrafanaNotificationChannelArgs
-    ///         {
-    ///             InstanceId = fooGrafanaInstance.Id,
-    ///             ChannelName = "tf-channel",
-    ///             OrgId = 1,
-    ///             Receivers = 
-    ///             {
-    ///                 fooAlarmNotice.AmpConsumerId,
-    ///             },
-    ///             ExtraOrgIds = 
-    ///             {
-    ///                 "1",
-    ///             },
-    ///         });
-    ///     }
+    ///         CidrBlock = "10.0.0.0/16",
+    ///     });
     /// 
-    /// }
+    ///     var subnet = new Tencentcloud.Subnet.Instance("subnet", new()
+    ///     {
+    ///         VpcId = vpc.Id,
+    ///         AvailabilityZone = availabilityZone,
+    ///         CidrBlock = "10.0.1.0/24",
+    ///     });
+    /// 
+    ///     var fooGrafanaInstance = new Tencentcloud.Monitor.GrafanaInstance("fooGrafanaInstance", new()
+    ///     {
+    ///         InstanceName = "test-grafana",
+    ///         VpcId = vpc.Id,
+    ///         SubnetIds = new[]
+    ///         {
+    ///             subnet.Id,
+    ///         },
+    ///         GrafanaInitPassword = "1234567890",
+    ///         EnableInternet = false,
+    ///         Tags = 
+    ///         {
+    ///             { "createdBy", "test" },
+    ///         },
+    ///     });
+    /// 
+    ///     var fooAlarmNotice = new Tencentcloud.Monitor.AlarmNotice("fooAlarmNotice", new()
+    ///     {
+    ///         NoticeType = "ALL",
+    ///         NoticeLanguage = "zh-CN",
+    ///         UserNotices = new[]
+    ///         {
+    ///             new Tencentcloud.Monitor.Inputs.AlarmNoticeUserNoticeArgs
+    ///             {
+    ///                 ReceiverType = "USER",
+    ///                 StartTime = 0,
+    ///                 EndTime = 1,
+    ///                 NoticeWays = new[]
+    ///                 {
+    ///                     "SMS",
+    ///                     "EMAIL",
+    ///                 },
+    ///                 UserIds = new[]
+    ///                 {
+    ///                     10001,
+    ///                 },
+    ///                 GroupIds = new() { },
+    ///                 PhoneOrders = new[]
+    ///                 {
+    ///                     10001,
+    ///                 },
+    ///                 PhoneCircleTimes = 2,
+    ///                 PhoneCircleInterval = 50,
+    ///                 PhoneInnerInterval = 60,
+    ///                 NeedPhoneArriveNotice = 1,
+    ///                 PhoneCallType = "CIRCLE",
+    ///                 Weekdays = new[]
+    ///                 {
+    ///                     1,
+    ///                     2,
+    ///                     3,
+    ///                     4,
+    ///                     5,
+    ///                     6,
+    ///                     7,
+    ///                 },
+    ///             },
+    ///         },
+    ///         UrlNotices = new[]
+    ///         {
+    ///             new Tencentcloud.Monitor.Inputs.AlarmNoticeUrlNoticeArgs
+    ///             {
+    ///                 Url = "https://www.mytest.com/validate",
+    ///                 EndTime = 0,
+    ///                 StartTime = 1,
+    ///                 Weekdays = new[]
+    ///                 {
+    ///                     1,
+    ///                     2,
+    ///                     3,
+    ///                     4,
+    ///                     5,
+    ///                     6,
+    ///                     7,
+    ///                 },
+    ///             },
+    ///         },
+    ///     });
+    /// 
+    ///     var grafanaNotificationChannel = new Tencentcloud.Monitor.GrafanaNotificationChannel("grafanaNotificationChannel", new()
+    ///     {
+    ///         InstanceId = fooGrafanaInstance.Id,
+    ///         ChannelName = "tf-channel",
+    ///         OrgId = 1,
+    ///         Receivers = new[]
+    ///         {
+    ///             fooAlarmNotice.AmpConsumerId,
+    ///         },
+    ///         ExtraOrgIds = new[]
+    ///         {
+    ///             "1",
+    ///         },
+    ///     });
+    /// 
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Monitor/grafanaNotificationChannel:GrafanaNotificationChannel")]
-    public partial class GrafanaNotificationChannel : Pulumi.CustomResource
+    public partial class GrafanaNotificationChannel : global::Pulumi.CustomResource
     {
         /// <summary>
         /// plugin id.
@@ -215,7 +220,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
         }
     }
 
-    public sealed class GrafanaNotificationChannelArgs : Pulumi.ResourceArgs
+    public sealed class GrafanaNotificationChannelArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// channel name.
@@ -262,9 +267,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
         public GrafanaNotificationChannelArgs()
         {
         }
+        public static new GrafanaNotificationChannelArgs Empty => new GrafanaNotificationChannelArgs();
     }
 
-    public sealed class GrafanaNotificationChannelState : Pulumi.ResourceArgs
+    public sealed class GrafanaNotificationChannelState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// plugin id.
@@ -317,5 +323,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
         public GrafanaNotificationChannelState()
         {
         }
+        public static new GrafanaNotificationChannelState Empty => new GrafanaNotificationChannelState();
     }
 }

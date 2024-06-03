@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dlc.Inputs
 {
 
-    public sealed class DataEngineSessionResourceTemplateGetArgs : Pulumi.ResourceArgs
+    public sealed class DataEngineSessionResourceTemplateGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Engine driver size specification only supports: small/medium/large/xlarge/m.small/m.medium/m.large/m.xlarge.
@@ -40,5 +40,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dlc.Inputs
         public DataEngineSessionResourceTemplateGetArgs()
         {
         }
+        public static new DataEngineSessionResourceTemplateGetArgs Empty => new DataEngineSessionResourceTemplateGetArgs();
     }
 }

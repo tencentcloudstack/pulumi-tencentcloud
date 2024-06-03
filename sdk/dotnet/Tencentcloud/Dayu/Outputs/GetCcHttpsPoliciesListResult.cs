@@ -50,6 +50,9 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dayu.Outputs
         /// Rule id of the domain that the CC self-define https policy works for.
         /// </summary>
         public readonly string RuleId;
+        /// <summary>
+        /// Rule list of the CC self-define https policy.
+        /// </summary>
         public readonly ImmutableArray<Outputs.GetCcHttpsPoliciesListRuleListResult> RuleLists;
         /// <summary>
         /// Indicate the CC self-define https policy takes effect or not.

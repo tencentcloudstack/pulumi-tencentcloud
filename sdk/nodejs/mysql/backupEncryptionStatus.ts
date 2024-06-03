@@ -8,19 +8,21 @@ import * as utilities from "../utilities";
  * Provides a resource to create a mysql backupEncryptionStatus
  *
  * ## Example Usage
+ *
  * ### Enable encryption
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const zones = tencentcloud.Availability.getZonesByProduct({
  *     product: "cdb",
  * });
  * const vpc = new tencentcloud.vpc.Instance("vpc", {cidrBlock: "10.0.0.0/16"});
  * const subnet = new tencentcloud.subnet.Instance("subnet", {
- *     availabilityZone: zones.then(zones => zones.zones?[0]?.name),
+ *     availabilityZone: zones.then(zones => zones.zones?.[0]?.name),
  *     vpcId: vpc.id,
  *     cidrBlock: "10.0.0.0/16",
  *     isMulticast: false,
@@ -32,7 +34,7 @@ import * as utilities from "../utilities";
  *     chargeType: "POSTPAID",
  *     rootPassword: "PassWord123",
  *     slaveDeployMode: 0,
- *     availabilityZone: zones.then(zones => zones.zones?[0]?.name),
+ *     availabilityZone: zones.then(zones => zones.zones?.[0]?.name),
  *     slaveSyncMode: 1,
  *     instanceName: "tf-example-mysql",
  *     memSize: 4000,
@@ -54,24 +56,28 @@ import * as utilities from "../utilities";
  *     encryptionStatus: "on",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
+ *
  * ### Disable encryption
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const example = new tencentcloud.mysql.BackupEncryptionStatus("example", {
  *     instanceId: tencentcloud_mysql_instance.example.id,
  *     encryptionStatus: "off",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * mysql backup_encryption_status can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Mysql/backupEncryptionStatus:BackupEncryptionStatus backup_encryption_status backup_encryption_status_id
+ * $ pulumi import tencentcloud:Mysql/backupEncryptionStatus:BackupEncryptionStatus backup_encryption_status backup_encryption_status_id
  * ```
  */
 export class BackupEncryptionStatus extends pulumi.CustomResource {

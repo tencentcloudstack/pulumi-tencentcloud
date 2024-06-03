@@ -15,64 +15,58 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssl
         /// <summary>
         /// Use this data source to query detailed information of ssl describe_certificate
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var describeCertificate = Tencentcloud.Ssl.GetDescribeCertificate.Invoke(new()
         ///     {
-        ///         var describeCertificate = Output.Create(Tencentcloud.Ssl.GetDescribeCertificate.InvokeAsync(new Tencentcloud.Ssl.GetDescribeCertificateArgs
-        ///         {
-        ///             CertificateId = "8cj4g8h8",
-        ///         }));
-        ///     }
+        ///         CertificateId = "8cj4g8h8",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetDescribeCertificateResult> InvokeAsync(GetDescribeCertificateArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetDescribeCertificateResult>("tencentcloud:Ssl/getDescribeCertificate:getDescribeCertificate", args ?? new GetDescribeCertificateArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetDescribeCertificateResult>("tencentcloud:Ssl/getDescribeCertificate:getDescribeCertificate", args ?? new GetDescribeCertificateArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of ssl describe_certificate
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var describeCertificate = Tencentcloud.Ssl.GetDescribeCertificate.Invoke(new()
         ///     {
-        ///         var describeCertificate = Output.Create(Tencentcloud.Ssl.GetDescribeCertificate.InvokeAsync(new Tencentcloud.Ssl.GetDescribeCertificateArgs
-        ///         {
-        ///             CertificateId = "8cj4g8h8",
-        ///         }));
-        ///     }
+        ///         CertificateId = "8cj4g8h8",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetDescribeCertificateResult> Invoke(GetDescribeCertificateInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetDescribeCertificateResult>("tencentcloud:Ssl/getDescribeCertificate:getDescribeCertificate", args ?? new GetDescribeCertificateInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetDescribeCertificateResult>("tencentcloud:Ssl/getDescribeCertificate:getDescribeCertificate", args ?? new GetDescribeCertificateInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetDescribeCertificateArgs : Pulumi.InvokeArgs
+    public sealed class GetDescribeCertificateArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Certificate ID.
@@ -89,9 +83,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssl
         public GetDescribeCertificateArgs()
         {
         }
+        public static new GetDescribeCertificateArgs Empty => new GetDescribeCertificateArgs();
     }
 
-    public sealed class GetDescribeCertificateInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetDescribeCertificateInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Certificate ID.
@@ -108,6 +103,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssl
         public GetDescribeCertificateInvokeArgs()
         {
         }
+        public static new GetDescribeCertificateInvokeArgs Empty => new GetDescribeCertificateInvokeArgs();
     }
 
 

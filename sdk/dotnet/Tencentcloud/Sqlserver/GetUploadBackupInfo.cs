@@ -15,66 +15,60 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
         /// <summary>
         /// Use this data source to query detailed information of sqlserver upload_backup_info
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var example = Tencentcloud.Sqlserver.GetUploadBackupInfo.Invoke(new()
         ///     {
-        ///         var example = Output.Create(Tencentcloud.Sqlserver.GetUploadBackupInfo.InvokeAsync(new Tencentcloud.Sqlserver.GetUploadBackupInfoArgs
-        ///         {
-        ///             BackupMigrationId = "mssql-backup-migration-8a0f3eht",
-        ///             InstanceId = "mssql-qelbzgwf",
-        ///         }));
-        ///     }
+        ///         BackupMigrationId = "mssql-backup-migration-8a0f3eht",
+        ///         InstanceId = "mssql-qelbzgwf",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetUploadBackupInfoResult> InvokeAsync(GetUploadBackupInfoArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetUploadBackupInfoResult>("tencentcloud:Sqlserver/getUploadBackupInfo:getUploadBackupInfo", args ?? new GetUploadBackupInfoArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetUploadBackupInfoResult>("tencentcloud:Sqlserver/getUploadBackupInfo:getUploadBackupInfo", args ?? new GetUploadBackupInfoArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of sqlserver upload_backup_info
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var example = Tencentcloud.Sqlserver.GetUploadBackupInfo.Invoke(new()
         ///     {
-        ///         var example = Output.Create(Tencentcloud.Sqlserver.GetUploadBackupInfo.InvokeAsync(new Tencentcloud.Sqlserver.GetUploadBackupInfoArgs
-        ///         {
-        ///             BackupMigrationId = "mssql-backup-migration-8a0f3eht",
-        ///             InstanceId = "mssql-qelbzgwf",
-        ///         }));
-        ///     }
+        ///         BackupMigrationId = "mssql-backup-migration-8a0f3eht",
+        ///         InstanceId = "mssql-qelbzgwf",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetUploadBackupInfoResult> Invoke(GetUploadBackupInfoInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetUploadBackupInfoResult>("tencentcloud:Sqlserver/getUploadBackupInfo:getUploadBackupInfo", args ?? new GetUploadBackupInfoInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetUploadBackupInfoResult>("tencentcloud:Sqlserver/getUploadBackupInfo:getUploadBackupInfo", args ?? new GetUploadBackupInfoInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetUploadBackupInfoArgs : Pulumi.InvokeArgs
+    public sealed class GetUploadBackupInfoArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Backup import task ID, which is returned through the API CreateBackupMigration.
@@ -97,9 +91,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
         public GetUploadBackupInfoArgs()
         {
         }
+        public static new GetUploadBackupInfoArgs Empty => new GetUploadBackupInfoArgs();
     }
 
-    public sealed class GetUploadBackupInfoInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetUploadBackupInfoInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Backup import task ID, which is returned through the API CreateBackupMigration.
@@ -122,6 +117,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
         public GetUploadBackupInfoInvokeArgs()
         {
         }
+        public static new GetUploadBackupInfoInvokeArgs Empty => new GetUploadBackupInfoInvokeArgs();
     }
 
 

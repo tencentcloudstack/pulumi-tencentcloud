@@ -15,46 +15,46 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Wedata
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
     /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using System.Text.Json;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var example = new Tencentcloud.Wedata.Datasource("example", new()
     ///     {
-    ///         var example = new Tencentcloud.Wedata.Datasource("example", new Tencentcloud.Wedata.DatasourceArgs
+    ///         Category = "DB",
+    ///         Type = "MYSQL",
+    ///         OwnerProjectId = "1612982498218618880",
+    ///         OwnerProjectName = "project_demo",
+    ///         OwnerProjectIdent = "体验项目",
+    ///         Description = "description.",
+    ///         Display = "tf_example_demo",
+    ///         Status = 1,
+    ///         CosBucket = "wedata-agent-sh-1257305158",
+    ///         CosRegion = "ap-shanghai",
+    ///         Params = JsonSerializer.Serialize(new Dictionary&lt;string, object?&gt;
     ///         {
-    ///             Category = "DB",
-    ///             Type = "MYSQL",
-    ///             OwnerProjectId = "1612982498218618880",
-    ///             OwnerProjectName = "project_demo",
-    ///             OwnerProjectIdent = "体验项目",
-    ///             Description = "description.",
-    ///             Display = "tf_example_demo",
-    ///             Status = 1,
-    ///             CosBucket = "wedata-agent-sh-1257305158",
-    ///             CosRegion = "ap-shanghai",
-    ///             Params = JsonSerializer.Serialize(new Dictionary&lt;string, object?&gt;
-    ///             {
-    ///                 { "connectType", "public" },
-    ///                 { "authorityType", "true" },
-    ///                 { "deployType", "CONNSTR_PUBLICDB" },
-    ///                 { "url", "jdbc:mysql://1.1.1.1:8080/database" },
-    ///                 { "username", "root" },
-    ///                 { "password", "password" },
-    ///                 { "type", "MYSQL" },
-    ///             }),
-    ///         });
-    ///     }
+    ///             ["connectType"] = "public",
+    ///             ["authorityType"] = "true",
+    ///             ["deployType"] = "CONNSTR_PUBLICDB",
+    ///             ["url"] = "jdbc:mysql://1.1.1.1:8080/database",
+    ///             ["username"] = "root",
+    ///             ["password"] = "password",
+    ///             ["type"] = "MYSQL",
+    ///         }),
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Wedata/datasource:Datasource")]
-    public partial class Datasource : Pulumi.CustomResource
+    public partial class Datasource : global::Pulumi.CustomResource
     {
         /// <summary>
         /// BizParams.
@@ -209,7 +209,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Wedata
         }
     }
 
-    public sealed class DatasourceArgs : Pulumi.ResourceArgs
+    public sealed class DatasourceArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// BizParams.
@@ -316,9 +316,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Wedata
         public DatasourceArgs()
         {
         }
+        public static new DatasourceArgs Empty => new DatasourceArgs();
     }
 
-    public sealed class DatasourceState : Pulumi.ResourceArgs
+    public sealed class DatasourceState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// BizParams.
@@ -431,5 +432,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Wedata
         public DatasourceState()
         {
         }
+        public static new DatasourceState Empty => new DatasourceState();
     }
 }

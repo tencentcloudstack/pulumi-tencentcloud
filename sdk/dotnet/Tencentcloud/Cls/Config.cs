@@ -15,67 +15,68 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var config = new Tencentcloud.Cls.Config("config", new()
     ///     {
-    ///         var config = new Tencentcloud.Cls.Config("config", new Tencentcloud.Cls.ConfigArgs
+    ///         ExcludePaths = new[]
     ///         {
-    ///             ExcludePaths = 
+    ///             new Tencentcloud.Cls.Inputs.ConfigExcludePathArgs
     ///             {
-    ///                 new Tencentcloud.Cls.Inputs.ConfigExcludePathArgs
+    ///                 Type = "Path",
+    ///                 Value = "/data",
+    ///             },
+    ///             new Tencentcloud.Cls.Inputs.ConfigExcludePathArgs
+    ///             {
+    ///                 Type = "File",
+    ///                 Value = "/file",
+    ///             },
+    ///         },
+    ///         ExtractRule = new Tencentcloud.Cls.Inputs.ConfigExtractRuleArgs
+    ///         {
+    ///             Backtracking = -1,
+    ///             FilterKeyRegexes = new[]
+    ///             {
+    ///                 new Tencentcloud.Cls.Inputs.ConfigExtractRuleFilterKeyRegexArgs
     ///                 {
-    ///                     Type = "Path",
-    ///                     Value = "/data",
+    ///                     Key = "key1",
+    ///                     Regex = "value1",
     ///                 },
-    ///                 new Tencentcloud.Cls.Inputs.ConfigExcludePathArgs
+    ///                 new Tencentcloud.Cls.Inputs.ConfigExtractRuleFilterKeyRegexArgs
     ///                 {
-    ///                     Type = "File",
-    ///                     Value = "/file",
+    ///                     Key = "key2",
+    ///                     Regex = "value2",
     ///                 },
     ///             },
-    ///             ExtractRule = new Tencentcloud.Cls.Inputs.ConfigExtractRuleArgs
-    ///             {
-    ///                 Backtracking = -1,
-    ///                 FilterKeyRegexes = 
-    ///                 {
-    ///                     new Tencentcloud.Cls.Inputs.ConfigExtractRuleFilterKeyRegexArgs
-    ///                     {
-    ///                         Key = "key1",
-    ///                         Regex = "value1",
-    ///                     },
-    ///                     new Tencentcloud.Cls.Inputs.ConfigExtractRuleFilterKeyRegexArgs
-    ///                     {
-    ///                         Key = "key2",
-    ///                         Regex = "value2",
-    ///                     },
-    ///                 },
-    ///                 UnMatchLogKey = "config",
-    ///                 UnMatchUpLoadSwitch = true,
-    ///             },
-    ///             LogType = "json_log",
-    ///             Output = "4d07fba0-b93e-4e0b-9a7f-d58542560bbb",
-    ///             Path = "/var/log/kubernetes",
-    ///         });
-    ///     }
+    ///             UnMatchLogKey = "config",
+    ///             UnMatchUpLoadSwitch = true,
+    ///         },
+    ///         LogType = "json_log",
+    ///         Output = "4d07fba0-b93e-4e0b-9a7f-d58542560bbb",
+    ///         Path = "/var/log/kubernetes",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// cls config can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Cls/config:Config config config_id
+    /// $ pulumi import tencentcloud:Cls/config:Config config config_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Cls/config:Config")]
-    public partial class Config : Pulumi.CustomResource
+    public partial class Config : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Collection path blocklist.
@@ -164,7 +165,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls
         }
     }
 
-    public sealed class ConfigArgs : Pulumi.ResourceArgs
+    public sealed class ConfigArgs : global::Pulumi.ResourceArgs
     {
         [Input("excludePaths")]
         private InputList<Inputs.ConfigExcludePathArgs>? _excludePaths;
@@ -217,9 +218,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls
         public ConfigArgs()
         {
         }
+        public static new ConfigArgs Empty => new ConfigArgs();
     }
 
-    public sealed class ConfigState : Pulumi.ResourceArgs
+    public sealed class ConfigState : global::Pulumi.ResourceArgs
     {
         [Input("excludePaths")]
         private InputList<Inputs.ConfigExcludePathGetArgs>? _excludePaths;
@@ -272,5 +274,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls
         public ConfigState()
         {
         }
+        public static new ConfigState Empty => new ConfigState();
     }
 }

@@ -7,44 +7,50 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a antiddos ddos black white ip
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Antiddos"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Antiddos"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Antiddos.NewDdosBlackWhiteIp(ctx, "ddosBlackWhiteIp", &Antiddos.DdosBlackWhiteIpArgs{
-// 			InstanceId: pulumi.String("bgp-xxxxxx"),
-// 			Ip:         pulumi.String("1.2.3.5"),
-// 			Mask:       pulumi.Int(0),
-// 			Type:       pulumi.String("black"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Antiddos.NewDdosBlackWhiteIp(ctx, "ddosBlackWhiteIp", &Antiddos.DdosBlackWhiteIpArgs{
+//				InstanceId: pulumi.String("bgp-xxxxxx"),
+//				Ip:         pulumi.String("1.2.3.5"),
+//				Mask:       pulumi.Int(0),
+//				Type:       pulumi.String("black"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // antiddos ddos_black_white_ip can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Antiddos/ddosBlackWhiteIp:DdosBlackWhiteIp ddos_black_white_ip ${instanceId}#${ip}
+// $ pulumi import tencentcloud:Antiddos/ddosBlackWhiteIp:DdosBlackWhiteIp ddos_black_white_ip ${instanceId}#${ip}
 // ```
 type DdosBlackWhiteIp struct {
 	pulumi.CustomResourceState
@@ -78,7 +84,7 @@ func NewDdosBlackWhiteIp(ctx *pulumi.Context,
 	if args.Type == nil {
 		return nil, errors.New("invalid value for required argument 'Type'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource DdosBlackWhiteIp
 	err := ctx.RegisterResource("tencentcloud:Antiddos/ddosBlackWhiteIp:DdosBlackWhiteIp", name, args, &resource, opts...)
 	if err != nil {
@@ -175,7 +181,7 @@ func (i *DdosBlackWhiteIp) ToDdosBlackWhiteIpOutputWithContext(ctx context.Conte
 // DdosBlackWhiteIpArrayInput is an input type that accepts DdosBlackWhiteIpArray and DdosBlackWhiteIpArrayOutput values.
 // You can construct a concrete instance of `DdosBlackWhiteIpArrayInput` via:
 //
-//          DdosBlackWhiteIpArray{ DdosBlackWhiteIpArgs{...} }
+//	DdosBlackWhiteIpArray{ DdosBlackWhiteIpArgs{...} }
 type DdosBlackWhiteIpArrayInput interface {
 	pulumi.Input
 
@@ -200,7 +206,7 @@ func (i DdosBlackWhiteIpArray) ToDdosBlackWhiteIpArrayOutputWithContext(ctx cont
 // DdosBlackWhiteIpMapInput is an input type that accepts DdosBlackWhiteIpMap and DdosBlackWhiteIpMapOutput values.
 // You can construct a concrete instance of `DdosBlackWhiteIpMapInput` via:
 //
-//          DdosBlackWhiteIpMap{ "key": DdosBlackWhiteIpArgs{...} }
+//	DdosBlackWhiteIpMap{ "key": DdosBlackWhiteIpArgs{...} }
 type DdosBlackWhiteIpMapInput interface {
 	pulumi.Input
 

@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,21 +11,20 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const example = pulumi.output(tencentcloud.ApiGateway.getServiceEnvironmentList({
+ * const example = tencentcloud.ApiGateway.getServiceEnvironmentList({
  *     serviceId: "service-nxz6yync",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getServiceEnvironmentList(args: GetServiceEnvironmentListArgs, opts?: pulumi.InvokeOptions): Promise<GetServiceEnvironmentListResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:ApiGateway/getServiceEnvironmentList:getServiceEnvironmentList", {
         "resultOutputFile": args.resultOutputFile,
         "serviceId": args.serviceId,
@@ -60,9 +60,24 @@ export interface GetServiceEnvironmentListResult {
     readonly results: outputs.ApiGateway.GetServiceEnvironmentListResult[];
     readonly serviceId: string;
 }
-
+/**
+ * Use this data source to query detailed information of apiGateway serviceEnvironmentList
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const example = tencentcloud.ApiGateway.getServiceEnvironmentList({
+ *     serviceId: "service-nxz6yync",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getServiceEnvironmentListOutput(args: GetServiceEnvironmentListOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetServiceEnvironmentListResult> {
-    return pulumi.output(args).apply(a => getServiceEnvironmentList(a, opts))
+    return pulumi.output(args).apply((a: any) => getServiceEnvironmentList(a, opts))
 }
 
 /**

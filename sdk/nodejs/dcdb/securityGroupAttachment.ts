@@ -9,22 +9,24 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const securityGroupAttachment = new tencentcloud.Dcdb.SecurityGroupAttachment("security_group_attachment", {
+ * const securityGroupAttachment = new tencentcloud.dcdb.SecurityGroupAttachment("securityGroupAttachment", {
  *     instanceId: "",
  *     securityGroupId: "",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * dcdb security_group_attachment can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Dcdb/securityGroupAttachment:SecurityGroupAttachment security_group_attachment securityGroupAttachment_id
+ * $ pulumi import tencentcloud:Dcdb/securityGroupAttachment:SecurityGroupAttachment security_group_attachment securityGroupAttachment_id
  * ```
  */
 export class SecurityGroupAttachment extends pulumi.CustomResource {

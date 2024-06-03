@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mongodb.Inputs
 {
 
-    public sealed class InstanceAccountAuthRoleGetArgs : Pulumi.ResourceArgs
+    public sealed class InstanceAccountAuthRoleGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Permission information of the current account. 0: No permission. 1: read-only. 2: Write only. 3: Read and write.
@@ -28,5 +28,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mongodb.Inputs
         public InstanceAccountAuthRoleGetArgs()
         {
         }
+        public static new InstanceAccountAuthRoleGetArgs Empty => new InstanceAccountAuthRoleGetArgs();
     }
 }

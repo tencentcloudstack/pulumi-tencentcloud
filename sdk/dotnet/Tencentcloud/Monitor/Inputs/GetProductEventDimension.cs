@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor.Inputs
 {
 
-    public sealed class GetProductEventDimensionArgs : Pulumi.InvokeArgs
+    public sealed class GetProductEventDimensionArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Instance dimension name, eg: `deviceWanIp` for internet ip.
@@ -28,5 +28,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor.Inputs
         public GetProductEventDimensionArgs()
         {
         }
+        public static new GetProductEventDimensionArgs Empty => new GetProductEventDimensionArgs();
     }
 }

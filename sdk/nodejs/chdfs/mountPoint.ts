@@ -9,23 +9,25 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const mountPoint = new tencentcloud.Chdfs.MountPoint("mount_point", {
+ * const mountPoint = new tencentcloud.chdfs.MountPoint("mountPoint", {
  *     fileSystemId: "f14mpfy5lh4e",
  *     mountPointName: "terraform-test",
  *     mountPointStatus: 1,
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * chdfs mount_point can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Chdfs/mountPoint:MountPoint mount_point mount_point_id
+ * $ pulumi import tencentcloud:Chdfs/mountPoint:MountPoint mount_point mount_point_id
  * ```
  */
 export class MountPoint extends pulumi.CustomResource {

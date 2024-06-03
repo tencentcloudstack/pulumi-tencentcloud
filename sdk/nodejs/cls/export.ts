@@ -9,11 +9,12 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const exportExport = new tencentcloud.Cls.Export("export", {
+ * const _export = new tencentcloud.cls.Export("export", {
  *     format: "json",
  *     from: 1607499107000,
  *     logCount: 2,
@@ -23,13 +24,14 @@ import * as utilities from "../utilities";
  *     topicId: "7e34a3a7-635e-4da8-9005-88106c1fde69",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * cls export can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Cls/export:Export export topic_id#export_id
+ * $ pulumi import tencentcloud:Cls/export:Export export topic_id#export_id
  * ```
  */
 export class Export extends pulumi.CustomResource {

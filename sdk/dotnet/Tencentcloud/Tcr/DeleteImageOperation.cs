@@ -14,53 +14,57 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcr
     /// Provides a resource to delete the specified tcr image.
     /// 
     /// ## Example Usage
+    /// 
     /// ### To delete the specified image
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var exampleInstance = new Tencentcloud.Tcr.Instance("exampleInstance", new()
     ///     {
-    ///         var exampleInstance = new Tencentcloud.Tcr.Instance("exampleInstance", new Tencentcloud.Tcr.InstanceArgs
+    ///         InstanceType = "premium",
+    ///         Tags = 
     ///         {
-    ///             InstanceType = "premium",
-    ///             Tags = 
-    ///             {
-    ///                 { "createdBy", "terraform" },
-    ///             },
-    ///         });
-    ///         var exampleNamespace = new Tencentcloud.Tcr.Namespace("exampleNamespace", new Tencentcloud.Tcr.NamespaceArgs
-    ///         {
-    ///             InstanceId = exampleInstance.Id,
-    ///             IsPublic = true,
-    ///             IsAutoScan = true,
-    ///             IsPreventVul = true,
-    ///             Severity = "medium",
-    ///             CveWhitelistItems = 
-    ///             {
-    ///                 new Tencentcloud.Tcr.Inputs.NamespaceCveWhitelistItemArgs
-    ///                 {
-    ///                     CveId = "cve-xxxxx",
-    ///                 },
-    ///             },
-    ///         });
-    ///         var exampleDeleteImageOperation = new Tencentcloud.Tcr.DeleteImageOperation("exampleDeleteImageOperation", new Tencentcloud.Tcr.DeleteImageOperationArgs
-    ///         {
-    ///             RegistryId = exampleInstance.Id,
-    ///             RepositoryName = "repo",
-    ///             ImageVersion = "v1",
-    ///             NamespaceName = exampleNamespace.Name,
-    ///         });
-    ///     }
+    ///             { "createdBy", "terraform" },
+    ///         },
+    ///     });
     /// 
-    /// }
+    ///     var exampleNamespace = new Tencentcloud.Tcr.Namespace("exampleNamespace", new()
+    ///     {
+    ///         InstanceId = exampleInstance.Id,
+    ///         IsPublic = true,
+    ///         IsAutoScan = true,
+    ///         IsPreventVul = true,
+    ///         Severity = "medium",
+    ///         CveWhitelistItems = new[]
+    ///         {
+    ///             new Tencentcloud.Tcr.Inputs.NamespaceCveWhitelistItemArgs
+    ///             {
+    ///                 CveId = "cve-xxxxx",
+    ///             },
+    ///         },
+    ///     });
+    /// 
+    ///     var exampleDeleteImageOperation = new Tencentcloud.Tcr.DeleteImageOperation("exampleDeleteImageOperation", new()
+    ///     {
+    ///         RegistryId = exampleInstance.Id,
+    ///         RepositoryName = "repo",
+    ///         ImageVersion = "v1",
+    ///         NamespaceName = exampleNamespace.Name,
+    ///     });
+    /// 
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Tcr/deleteImageOperation:DeleteImageOperation")]
-    public partial class DeleteImageOperation : Pulumi.CustomResource
+    public partial class DeleteImageOperation : global::Pulumi.CustomResource
     {
         /// <summary>
         /// image version name.
@@ -131,7 +135,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcr
         }
     }
 
-    public sealed class DeleteImageOperationArgs : Pulumi.ResourceArgs
+    public sealed class DeleteImageOperationArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// image version name.
@@ -160,9 +164,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcr
         public DeleteImageOperationArgs()
         {
         }
+        public static new DeleteImageOperationArgs Empty => new DeleteImageOperationArgs();
     }
 
-    public sealed class DeleteImageOperationState : Pulumi.ResourceArgs
+    public sealed class DeleteImageOperationState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// image version name.
@@ -191,5 +196,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcr
         public DeleteImageOperationState()
         {
         }
+        public static new DeleteImageOperationState Empty => new DeleteImageOperationState();
     }
 }

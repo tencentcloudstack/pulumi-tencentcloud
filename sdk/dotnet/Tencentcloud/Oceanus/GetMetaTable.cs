@@ -15,70 +15,64 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Oceanus
         /// <summary>
         /// Use this data source to query detailed information of oceanus meta_table
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var example = Tencentcloud.Oceanus.GetMetaTable.Invoke(new()
         ///     {
-        ///         var example = Output.Create(Tencentcloud.Oceanus.GetMetaTable.InvokeAsync(new Tencentcloud.Oceanus.GetMetaTableArgs
-        ///         {
-        ///             Catalog = "_dc",
-        ///             Database = "_db",
-        ///             Table = "tf_table",
-        ///             WorkSpaceId = "space-6w8eab6f",
-        ///         }));
-        ///     }
+        ///         Catalog = "_dc",
+        ///         Database = "_db",
+        ///         Table = "tf_table",
+        ///         WorkSpaceId = "space-6w8eab6f",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetMetaTableResult> InvokeAsync(GetMetaTableArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetMetaTableResult>("tencentcloud:Oceanus/getMetaTable:getMetaTable", args ?? new GetMetaTableArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetMetaTableResult>("tencentcloud:Oceanus/getMetaTable:getMetaTable", args ?? new GetMetaTableArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of oceanus meta_table
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var example = Tencentcloud.Oceanus.GetMetaTable.Invoke(new()
         ///     {
-        ///         var example = Output.Create(Tencentcloud.Oceanus.GetMetaTable.InvokeAsync(new Tencentcloud.Oceanus.GetMetaTableArgs
-        ///         {
-        ///             Catalog = "_dc",
-        ///             Database = "_db",
-        ///             Table = "tf_table",
-        ///             WorkSpaceId = "space-6w8eab6f",
-        ///         }));
-        ///     }
+        ///         Catalog = "_dc",
+        ///         Database = "_db",
+        ///         Table = "tf_table",
+        ///         WorkSpaceId = "space-6w8eab6f",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetMetaTableResult> Invoke(GetMetaTableInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetMetaTableResult>("tencentcloud:Oceanus/getMetaTable:getMetaTable", args ?? new GetMetaTableInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetMetaTableResult>("tencentcloud:Oceanus/getMetaTable:getMetaTable", args ?? new GetMetaTableInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetMetaTableArgs : Pulumi.InvokeArgs
+    public sealed class GetMetaTableArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Catalog name.
@@ -113,9 +107,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Oceanus
         public GetMetaTableArgs()
         {
         }
+        public static new GetMetaTableArgs Empty => new GetMetaTableArgs();
     }
 
-    public sealed class GetMetaTableInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetMetaTableInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Catalog name.
@@ -150,6 +145,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Oceanus
         public GetMetaTableInvokeArgs()
         {
         }
+        public static new GetMetaTableInvokeArgs Empty => new GetMetaTableInvokeArgs();
     }
 
 

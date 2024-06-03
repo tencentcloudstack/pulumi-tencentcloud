@@ -15,70 +15,64 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clickhouse
         /// <summary>
         /// Use this data source to query detailed information of clickhouse instance_nodes
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var instanceNodes = Tencentcloud.Clickhouse.GetInstanceNodes.Invoke(new()
         ///     {
-        ///         var instanceNodes = Output.Create(Tencentcloud.Clickhouse.GetInstanceNodes.InvokeAsync(new Tencentcloud.Clickhouse.GetInstanceNodesArgs
-        ///         {
-        ///             DisplayPolicy = "all",
-        ///             ForceAll = true,
-        ///             InstanceId = "cdwch-mvfjh373",
-        ///             NodeRole = "data",
-        ///         }));
-        ///     }
+        ///         DisplayPolicy = "all",
+        ///         ForceAll = true,
+        ///         InstanceId = "cdwch-mvfjh373",
+        ///         NodeRole = "data",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetInstanceNodesResult> InvokeAsync(GetInstanceNodesArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetInstanceNodesResult>("tencentcloud:Clickhouse/getInstanceNodes:getInstanceNodes", args ?? new GetInstanceNodesArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetInstanceNodesResult>("tencentcloud:Clickhouse/getInstanceNodes:getInstanceNodes", args ?? new GetInstanceNodesArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of clickhouse instance_nodes
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var instanceNodes = Tencentcloud.Clickhouse.GetInstanceNodes.Invoke(new()
         ///     {
-        ///         var instanceNodes = Output.Create(Tencentcloud.Clickhouse.GetInstanceNodes.InvokeAsync(new Tencentcloud.Clickhouse.GetInstanceNodesArgs
-        ///         {
-        ///             DisplayPolicy = "all",
-        ///             ForceAll = true,
-        ///             InstanceId = "cdwch-mvfjh373",
-        ///             NodeRole = "data",
-        ///         }));
-        ///     }
+        ///         DisplayPolicy = "all",
+        ///         ForceAll = true,
+        ///         InstanceId = "cdwch-mvfjh373",
+        ///         NodeRole = "data",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetInstanceNodesResult> Invoke(GetInstanceNodesInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetInstanceNodesResult>("tencentcloud:Clickhouse/getInstanceNodes:getInstanceNodes", args ?? new GetInstanceNodesInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetInstanceNodesResult>("tencentcloud:Clickhouse/getInstanceNodes:getInstanceNodes", args ?? new GetInstanceNodesInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetInstanceNodesArgs : Pulumi.InvokeArgs
+    public sealed class GetInstanceNodesArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Display strategy, display all when All.
@@ -113,9 +107,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clickhouse
         public GetInstanceNodesArgs()
         {
         }
+        public static new GetInstanceNodesArgs Empty => new GetInstanceNodesArgs();
     }
 
-    public sealed class GetInstanceNodesInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetInstanceNodesInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Display strategy, display all when All.
@@ -150,6 +145,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clickhouse
         public GetInstanceNodesInvokeArgs()
         {
         }
+        public static new GetInstanceNodesInvokeArgs Empty => new GetInstanceNodesInvokeArgs();
     }
 
 

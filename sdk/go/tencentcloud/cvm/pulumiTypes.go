@@ -8,7 +8,10 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
+
+var _ = internal.GetEnvOrDefault
 
 type ChcConfigBmcVirtualPrivateCloud struct {
 	// Whether to use a CVM instance as a public gateway. The public gateway is only available when the instance has a public IP and resides in a VPC. Valid values:&lt;br&gt;&lt;li&gt;TRUE: yes;&lt;br&gt;&lt;li&gt;FALSE: no&lt;br&gt;&lt;br&gt;Default: FALSE.
@@ -26,7 +29,7 @@ type ChcConfigBmcVirtualPrivateCloud struct {
 // ChcConfigBmcVirtualPrivateCloudInput is an input type that accepts ChcConfigBmcVirtualPrivateCloudArgs and ChcConfigBmcVirtualPrivateCloudOutput values.
 // You can construct a concrete instance of `ChcConfigBmcVirtualPrivateCloudInput` via:
 //
-//          ChcConfigBmcVirtualPrivateCloudArgs{...}
+//	ChcConfigBmcVirtualPrivateCloudArgs{...}
 type ChcConfigBmcVirtualPrivateCloudInput interface {
 	pulumi.Input
 
@@ -70,11 +73,11 @@ func (i ChcConfigBmcVirtualPrivateCloudArgs) ToChcConfigBmcVirtualPrivateCloudPt
 // ChcConfigBmcVirtualPrivateCloudPtrInput is an input type that accepts ChcConfigBmcVirtualPrivateCloudArgs, ChcConfigBmcVirtualPrivateCloudPtr and ChcConfigBmcVirtualPrivateCloudPtrOutput values.
 // You can construct a concrete instance of `ChcConfigBmcVirtualPrivateCloudPtrInput` via:
 //
-//          ChcConfigBmcVirtualPrivateCloudArgs{...}
+//	        ChcConfigBmcVirtualPrivateCloudArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type ChcConfigBmcVirtualPrivateCloudPtrInput interface {
 	pulumi.Input
 
@@ -239,7 +242,7 @@ type ChcConfigDeployVirtualPrivateCloud struct {
 // ChcConfigDeployVirtualPrivateCloudInput is an input type that accepts ChcConfigDeployVirtualPrivateCloudArgs and ChcConfigDeployVirtualPrivateCloudOutput values.
 // You can construct a concrete instance of `ChcConfigDeployVirtualPrivateCloudInput` via:
 //
-//          ChcConfigDeployVirtualPrivateCloudArgs{...}
+//	ChcConfigDeployVirtualPrivateCloudArgs{...}
 type ChcConfigDeployVirtualPrivateCloudInput interface {
 	pulumi.Input
 
@@ -283,11 +286,11 @@ func (i ChcConfigDeployVirtualPrivateCloudArgs) ToChcConfigDeployVirtualPrivateC
 // ChcConfigDeployVirtualPrivateCloudPtrInput is an input type that accepts ChcConfigDeployVirtualPrivateCloudArgs, ChcConfigDeployVirtualPrivateCloudPtr and ChcConfigDeployVirtualPrivateCloudPtrOutput values.
 // You can construct a concrete instance of `ChcConfigDeployVirtualPrivateCloudPtrInput` via:
 //
-//          ChcConfigDeployVirtualPrivateCloudArgs{...}
+//	        ChcConfigDeployVirtualPrivateCloudArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type ChcConfigDeployVirtualPrivateCloudPtrInput interface {
 	pulumi.Input
 
@@ -437,14 +440,16 @@ func (o ChcConfigDeployVirtualPrivateCloudPtrOutput) VpcId() pulumi.StringPtrOut
 }
 
 type ImportImageTagSpecification struct {
-	ResourceType string                           `pulumi:"resourceType"`
-	Tags         []ImportImageTagSpecificationTag `pulumi:"tags"`
+	// Resource type. Valid values: instance (CVM), host (CDH), image (for image), and keypair (for key). Note: This field may return null, indicating that no valid values can be obtained.
+	ResourceType string `pulumi:"resourceType"`
+	// Tag pairs Note: This field may return null, indicating that no valid values can be obtained.
+	Tags []ImportImageTagSpecificationTag `pulumi:"tags"`
 }
 
 // ImportImageTagSpecificationInput is an input type that accepts ImportImageTagSpecificationArgs and ImportImageTagSpecificationOutput values.
 // You can construct a concrete instance of `ImportImageTagSpecificationInput` via:
 //
-//          ImportImageTagSpecificationArgs{...}
+//	ImportImageTagSpecificationArgs{...}
 type ImportImageTagSpecificationInput interface {
 	pulumi.Input
 
@@ -453,8 +458,10 @@ type ImportImageTagSpecificationInput interface {
 }
 
 type ImportImageTagSpecificationArgs struct {
-	ResourceType pulumi.StringInput                       `pulumi:"resourceType"`
-	Tags         ImportImageTagSpecificationTagArrayInput `pulumi:"tags"`
+	// Resource type. Valid values: instance (CVM), host (CDH), image (for image), and keypair (for key). Note: This field may return null, indicating that no valid values can be obtained.
+	ResourceType pulumi.StringInput `pulumi:"resourceType"`
+	// Tag pairs Note: This field may return null, indicating that no valid values can be obtained.
+	Tags ImportImageTagSpecificationTagArrayInput `pulumi:"tags"`
 }
 
 func (ImportImageTagSpecificationArgs) ElementType() reflect.Type {
@@ -472,7 +479,7 @@ func (i ImportImageTagSpecificationArgs) ToImportImageTagSpecificationOutputWith
 // ImportImageTagSpecificationArrayInput is an input type that accepts ImportImageTagSpecificationArray and ImportImageTagSpecificationArrayOutput values.
 // You can construct a concrete instance of `ImportImageTagSpecificationArrayInput` via:
 //
-//          ImportImageTagSpecificationArray{ ImportImageTagSpecificationArgs{...} }
+//	ImportImageTagSpecificationArray{ ImportImageTagSpecificationArgs{...} }
 type ImportImageTagSpecificationArrayInput interface {
 	pulumi.Input
 
@@ -508,10 +515,12 @@ func (o ImportImageTagSpecificationOutput) ToImportImageTagSpecificationOutputWi
 	return o
 }
 
+// Resource type. Valid values: instance (CVM), host (CDH), image (for image), and keypair (for key). Note: This field may return null, indicating that no valid values can be obtained.
 func (o ImportImageTagSpecificationOutput) ResourceType() pulumi.StringOutput {
 	return o.ApplyT(func(v ImportImageTagSpecification) string { return v.ResourceType }).(pulumi.StringOutput)
 }
 
+// Tag pairs Note: This field may return null, indicating that no valid values can be obtained.
 func (o ImportImageTagSpecificationOutput) Tags() ImportImageTagSpecificationTagArrayOutput {
 	return o.ApplyT(func(v ImportImageTagSpecification) []ImportImageTagSpecificationTag { return v.Tags }).(ImportImageTagSpecificationTagArrayOutput)
 }
@@ -537,14 +546,16 @@ func (o ImportImageTagSpecificationArrayOutput) Index(i pulumi.IntInput) ImportI
 }
 
 type ImportImageTagSpecificationTag struct {
-	Key   string `pulumi:"key"`
+	// Tag key.
+	Key string `pulumi:"key"`
+	// Tag value.
 	Value string `pulumi:"value"`
 }
 
 // ImportImageTagSpecificationTagInput is an input type that accepts ImportImageTagSpecificationTagArgs and ImportImageTagSpecificationTagOutput values.
 // You can construct a concrete instance of `ImportImageTagSpecificationTagInput` via:
 //
-//          ImportImageTagSpecificationTagArgs{...}
+//	ImportImageTagSpecificationTagArgs{...}
 type ImportImageTagSpecificationTagInput interface {
 	pulumi.Input
 
@@ -553,7 +564,9 @@ type ImportImageTagSpecificationTagInput interface {
 }
 
 type ImportImageTagSpecificationTagArgs struct {
-	Key   pulumi.StringInput `pulumi:"key"`
+	// Tag key.
+	Key pulumi.StringInput `pulumi:"key"`
+	// Tag value.
 	Value pulumi.StringInput `pulumi:"value"`
 }
 
@@ -572,7 +585,7 @@ func (i ImportImageTagSpecificationTagArgs) ToImportImageTagSpecificationTagOutp
 // ImportImageTagSpecificationTagArrayInput is an input type that accepts ImportImageTagSpecificationTagArray and ImportImageTagSpecificationTagArrayOutput values.
 // You can construct a concrete instance of `ImportImageTagSpecificationTagArrayInput` via:
 //
-//          ImportImageTagSpecificationTagArray{ ImportImageTagSpecificationTagArgs{...} }
+//	ImportImageTagSpecificationTagArray{ ImportImageTagSpecificationTagArgs{...} }
 type ImportImageTagSpecificationTagArrayInput interface {
 	pulumi.Input
 
@@ -608,10 +621,12 @@ func (o ImportImageTagSpecificationTagOutput) ToImportImageTagSpecificationTagOu
 	return o
 }
 
+// Tag key.
 func (o ImportImageTagSpecificationTagOutput) Key() pulumi.StringOutput {
 	return o.ApplyT(func(v ImportImageTagSpecificationTag) string { return v.Key }).(pulumi.StringOutput)
 }
 
+// Tag value.
 func (o ImportImageTagSpecificationTagOutput) Value() pulumi.StringOutput {
 	return o.ApplyT(func(v ImportImageTagSpecificationTag) string { return v.Value }).(pulumi.StringOutput)
 }
@@ -648,7 +663,7 @@ type LaunchTemplateActionTimer struct {
 // LaunchTemplateActionTimerInput is an input type that accepts LaunchTemplateActionTimerArgs and LaunchTemplateActionTimerOutput values.
 // You can construct a concrete instance of `LaunchTemplateActionTimerInput` via:
 //
-//          LaunchTemplateActionTimerArgs{...}
+//	LaunchTemplateActionTimerArgs{...}
 type LaunchTemplateActionTimerInput interface {
 	pulumi.Input
 
@@ -688,11 +703,11 @@ func (i LaunchTemplateActionTimerArgs) ToLaunchTemplateActionTimerPtrOutputWithC
 // LaunchTemplateActionTimerPtrInput is an input type that accepts LaunchTemplateActionTimerArgs, LaunchTemplateActionTimerPtr and LaunchTemplateActionTimerPtrOutput values.
 // You can construct a concrete instance of `LaunchTemplateActionTimerPtrInput` via:
 //
-//          LaunchTemplateActionTimerArgs{...}
+//	        LaunchTemplateActionTimerArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type LaunchTemplateActionTimerPtrInput interface {
 	pulumi.Input
 
@@ -823,7 +838,7 @@ type LaunchTemplateActionTimerExternals struct {
 // LaunchTemplateActionTimerExternalsInput is an input type that accepts LaunchTemplateActionTimerExternalsArgs and LaunchTemplateActionTimerExternalsOutput values.
 // You can construct a concrete instance of `LaunchTemplateActionTimerExternalsInput` via:
 //
-//          LaunchTemplateActionTimerExternalsArgs{...}
+//	LaunchTemplateActionTimerExternalsArgs{...}
 type LaunchTemplateActionTimerExternalsInput interface {
 	pulumi.Input
 
@@ -863,11 +878,11 @@ func (i LaunchTemplateActionTimerExternalsArgs) ToLaunchTemplateActionTimerExter
 // LaunchTemplateActionTimerExternalsPtrInput is an input type that accepts LaunchTemplateActionTimerExternalsArgs, LaunchTemplateActionTimerExternalsPtr and LaunchTemplateActionTimerExternalsPtrOutput values.
 // You can construct a concrete instance of `LaunchTemplateActionTimerExternalsPtrInput` via:
 //
-//          LaunchTemplateActionTimerExternalsArgs{...}
+//	        LaunchTemplateActionTimerExternalsArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type LaunchTemplateActionTimerExternalsPtrInput interface {
 	pulumi.Input
 
@@ -1000,7 +1015,7 @@ type LaunchTemplateActionTimerExternalsStorageBlockAttr struct {
 // LaunchTemplateActionTimerExternalsStorageBlockAttrInput is an input type that accepts LaunchTemplateActionTimerExternalsStorageBlockAttrArgs and LaunchTemplateActionTimerExternalsStorageBlockAttrOutput values.
 // You can construct a concrete instance of `LaunchTemplateActionTimerExternalsStorageBlockAttrInput` via:
 //
-//          LaunchTemplateActionTimerExternalsStorageBlockAttrArgs{...}
+//	LaunchTemplateActionTimerExternalsStorageBlockAttrArgs{...}
 type LaunchTemplateActionTimerExternalsStorageBlockAttrInput interface {
 	pulumi.Input
 
@@ -1040,11 +1055,11 @@ func (i LaunchTemplateActionTimerExternalsStorageBlockAttrArgs) ToLaunchTemplate
 // LaunchTemplateActionTimerExternalsStorageBlockAttrPtrInput is an input type that accepts LaunchTemplateActionTimerExternalsStorageBlockAttrArgs, LaunchTemplateActionTimerExternalsStorageBlockAttrPtr and LaunchTemplateActionTimerExternalsStorageBlockAttrPtrOutput values.
 // You can construct a concrete instance of `LaunchTemplateActionTimerExternalsStorageBlockAttrPtrInput` via:
 //
-//          LaunchTemplateActionTimerExternalsStorageBlockAttrArgs{...}
+//	        LaunchTemplateActionTimerExternalsStorageBlockAttrArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type LaunchTemplateActionTimerExternalsStorageBlockAttrPtrInput interface {
 	pulumi.Input
 
@@ -1187,7 +1202,7 @@ type LaunchTemplateDataDisk struct {
 // LaunchTemplateDataDiskInput is an input type that accepts LaunchTemplateDataDiskArgs and LaunchTemplateDataDiskOutput values.
 // You can construct a concrete instance of `LaunchTemplateDataDiskInput` via:
 //
-//          LaunchTemplateDataDiskArgs{...}
+//	LaunchTemplateDataDiskArgs{...}
 type LaunchTemplateDataDiskInput interface {
 	pulumi.Input
 
@@ -1231,7 +1246,7 @@ func (i LaunchTemplateDataDiskArgs) ToLaunchTemplateDataDiskOutputWithContext(ct
 // LaunchTemplateDataDiskArrayInput is an input type that accepts LaunchTemplateDataDiskArray and LaunchTemplateDataDiskArrayOutput values.
 // You can construct a concrete instance of `LaunchTemplateDataDiskArrayInput` via:
 //
-//          LaunchTemplateDataDiskArray{ LaunchTemplateDataDiskArgs{...} }
+//	LaunchTemplateDataDiskArray{ LaunchTemplateDataDiskArgs{...} }
 type LaunchTemplateDataDiskArrayInput interface {
 	pulumi.Input
 
@@ -1344,7 +1359,7 @@ type LaunchTemplateEnhancedService struct {
 // LaunchTemplateEnhancedServiceInput is an input type that accepts LaunchTemplateEnhancedServiceArgs and LaunchTemplateEnhancedServiceOutput values.
 // You can construct a concrete instance of `LaunchTemplateEnhancedServiceInput` via:
 //
-//          LaunchTemplateEnhancedServiceArgs{...}
+//	LaunchTemplateEnhancedServiceArgs{...}
 type LaunchTemplateEnhancedServiceInput interface {
 	pulumi.Input
 
@@ -1384,11 +1399,11 @@ func (i LaunchTemplateEnhancedServiceArgs) ToLaunchTemplateEnhancedServicePtrOut
 // LaunchTemplateEnhancedServicePtrInput is an input type that accepts LaunchTemplateEnhancedServiceArgs, LaunchTemplateEnhancedServicePtr and LaunchTemplateEnhancedServicePtrOutput values.
 // You can construct a concrete instance of `LaunchTemplateEnhancedServicePtrInput` via:
 //
-//          LaunchTemplateEnhancedServiceArgs{...}
+//	        LaunchTemplateEnhancedServiceArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type LaunchTemplateEnhancedServicePtrInput interface {
 	pulumi.Input
 
@@ -1521,7 +1536,7 @@ type LaunchTemplateEnhancedServiceAutomationService struct {
 // LaunchTemplateEnhancedServiceAutomationServiceInput is an input type that accepts LaunchTemplateEnhancedServiceAutomationServiceArgs and LaunchTemplateEnhancedServiceAutomationServiceOutput values.
 // You can construct a concrete instance of `LaunchTemplateEnhancedServiceAutomationServiceInput` via:
 //
-//          LaunchTemplateEnhancedServiceAutomationServiceArgs{...}
+//	LaunchTemplateEnhancedServiceAutomationServiceArgs{...}
 type LaunchTemplateEnhancedServiceAutomationServiceInput interface {
 	pulumi.Input
 
@@ -1557,11 +1572,11 @@ func (i LaunchTemplateEnhancedServiceAutomationServiceArgs) ToLaunchTemplateEnha
 // LaunchTemplateEnhancedServiceAutomationServicePtrInput is an input type that accepts LaunchTemplateEnhancedServiceAutomationServiceArgs, LaunchTemplateEnhancedServiceAutomationServicePtr and LaunchTemplateEnhancedServiceAutomationServicePtrOutput values.
 // You can construct a concrete instance of `LaunchTemplateEnhancedServiceAutomationServicePtrInput` via:
 //
-//          LaunchTemplateEnhancedServiceAutomationServiceArgs{...}
+//	        LaunchTemplateEnhancedServiceAutomationServiceArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type LaunchTemplateEnhancedServiceAutomationServicePtrInput interface {
 	pulumi.Input
 
@@ -1658,7 +1673,7 @@ type LaunchTemplateEnhancedServiceMonitorService struct {
 // LaunchTemplateEnhancedServiceMonitorServiceInput is an input type that accepts LaunchTemplateEnhancedServiceMonitorServiceArgs and LaunchTemplateEnhancedServiceMonitorServiceOutput values.
 // You can construct a concrete instance of `LaunchTemplateEnhancedServiceMonitorServiceInput` via:
 //
-//          LaunchTemplateEnhancedServiceMonitorServiceArgs{...}
+//	LaunchTemplateEnhancedServiceMonitorServiceArgs{...}
 type LaunchTemplateEnhancedServiceMonitorServiceInput interface {
 	pulumi.Input
 
@@ -1694,11 +1709,11 @@ func (i LaunchTemplateEnhancedServiceMonitorServiceArgs) ToLaunchTemplateEnhance
 // LaunchTemplateEnhancedServiceMonitorServicePtrInput is an input type that accepts LaunchTemplateEnhancedServiceMonitorServiceArgs, LaunchTemplateEnhancedServiceMonitorServicePtr and LaunchTemplateEnhancedServiceMonitorServicePtrOutput values.
 // You can construct a concrete instance of `LaunchTemplateEnhancedServiceMonitorServicePtrInput` via:
 //
-//          LaunchTemplateEnhancedServiceMonitorServiceArgs{...}
+//	        LaunchTemplateEnhancedServiceMonitorServiceArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type LaunchTemplateEnhancedServiceMonitorServicePtrInput interface {
 	pulumi.Input
 
@@ -1795,7 +1810,7 @@ type LaunchTemplateEnhancedServiceSecurityService struct {
 // LaunchTemplateEnhancedServiceSecurityServiceInput is an input type that accepts LaunchTemplateEnhancedServiceSecurityServiceArgs and LaunchTemplateEnhancedServiceSecurityServiceOutput values.
 // You can construct a concrete instance of `LaunchTemplateEnhancedServiceSecurityServiceInput` via:
 //
-//          LaunchTemplateEnhancedServiceSecurityServiceArgs{...}
+//	LaunchTemplateEnhancedServiceSecurityServiceArgs{...}
 type LaunchTemplateEnhancedServiceSecurityServiceInput interface {
 	pulumi.Input
 
@@ -1831,11 +1846,11 @@ func (i LaunchTemplateEnhancedServiceSecurityServiceArgs) ToLaunchTemplateEnhanc
 // LaunchTemplateEnhancedServiceSecurityServicePtrInput is an input type that accepts LaunchTemplateEnhancedServiceSecurityServiceArgs, LaunchTemplateEnhancedServiceSecurityServicePtr and LaunchTemplateEnhancedServiceSecurityServicePtrOutput values.
 // You can construct a concrete instance of `LaunchTemplateEnhancedServiceSecurityServicePtrInput` via:
 //
-//          LaunchTemplateEnhancedServiceSecurityServiceArgs{...}
+//	        LaunchTemplateEnhancedServiceSecurityServiceArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type LaunchTemplateEnhancedServiceSecurityServicePtrInput interface {
 	pulumi.Input
 
@@ -1934,7 +1949,7 @@ type LaunchTemplateInstanceChargePrepaid struct {
 // LaunchTemplateInstanceChargePrepaidInput is an input type that accepts LaunchTemplateInstanceChargePrepaidArgs and LaunchTemplateInstanceChargePrepaidOutput values.
 // You can construct a concrete instance of `LaunchTemplateInstanceChargePrepaidInput` via:
 //
-//          LaunchTemplateInstanceChargePrepaidArgs{...}
+//	LaunchTemplateInstanceChargePrepaidArgs{...}
 type LaunchTemplateInstanceChargePrepaidInput interface {
 	pulumi.Input
 
@@ -1972,11 +1987,11 @@ func (i LaunchTemplateInstanceChargePrepaidArgs) ToLaunchTemplateInstanceChargeP
 // LaunchTemplateInstanceChargePrepaidPtrInput is an input type that accepts LaunchTemplateInstanceChargePrepaidArgs, LaunchTemplateInstanceChargePrepaidPtr and LaunchTemplateInstanceChargePrepaidPtrOutput values.
 // You can construct a concrete instance of `LaunchTemplateInstanceChargePrepaidPtrInput` via:
 //
-//          LaunchTemplateInstanceChargePrepaidArgs{...}
+//	        LaunchTemplateInstanceChargePrepaidArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type LaunchTemplateInstanceChargePrepaidPtrInput interface {
 	pulumi.Input
 
@@ -2090,7 +2105,7 @@ type LaunchTemplateInstanceMarketOptions struct {
 // LaunchTemplateInstanceMarketOptionsInput is an input type that accepts LaunchTemplateInstanceMarketOptionsArgs and LaunchTemplateInstanceMarketOptionsOutput values.
 // You can construct a concrete instance of `LaunchTemplateInstanceMarketOptionsInput` via:
 //
-//          LaunchTemplateInstanceMarketOptionsArgs{...}
+//	LaunchTemplateInstanceMarketOptionsArgs{...}
 type LaunchTemplateInstanceMarketOptionsInput interface {
 	pulumi.Input
 
@@ -2128,11 +2143,11 @@ func (i LaunchTemplateInstanceMarketOptionsArgs) ToLaunchTemplateInstanceMarketO
 // LaunchTemplateInstanceMarketOptionsPtrInput is an input type that accepts LaunchTemplateInstanceMarketOptionsArgs, LaunchTemplateInstanceMarketOptionsPtr and LaunchTemplateInstanceMarketOptionsPtrOutput values.
 // You can construct a concrete instance of `LaunchTemplateInstanceMarketOptionsPtrInput` via:
 //
-//          LaunchTemplateInstanceMarketOptionsArgs{...}
+//	        LaunchTemplateInstanceMarketOptionsArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type LaunchTemplateInstanceMarketOptionsPtrInput interface {
 	pulumi.Input
 
@@ -2248,7 +2263,7 @@ type LaunchTemplateInstanceMarketOptionsSpotOptions struct {
 // LaunchTemplateInstanceMarketOptionsSpotOptionsInput is an input type that accepts LaunchTemplateInstanceMarketOptionsSpotOptionsArgs and LaunchTemplateInstanceMarketOptionsSpotOptionsOutput values.
 // You can construct a concrete instance of `LaunchTemplateInstanceMarketOptionsSpotOptionsInput` via:
 //
-//          LaunchTemplateInstanceMarketOptionsSpotOptionsArgs{...}
+//	LaunchTemplateInstanceMarketOptionsSpotOptionsArgs{...}
 type LaunchTemplateInstanceMarketOptionsSpotOptionsInput interface {
 	pulumi.Input
 
@@ -2286,11 +2301,11 @@ func (i LaunchTemplateInstanceMarketOptionsSpotOptionsArgs) ToLaunchTemplateInst
 // LaunchTemplateInstanceMarketOptionsSpotOptionsPtrInput is an input type that accepts LaunchTemplateInstanceMarketOptionsSpotOptionsArgs, LaunchTemplateInstanceMarketOptionsSpotOptionsPtr and LaunchTemplateInstanceMarketOptionsSpotOptionsPtrOutput values.
 // You can construct a concrete instance of `LaunchTemplateInstanceMarketOptionsSpotOptionsPtrInput` via:
 //
-//          LaunchTemplateInstanceMarketOptionsSpotOptionsArgs{...}
+//	        LaunchTemplateInstanceMarketOptionsSpotOptionsArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type LaunchTemplateInstanceMarketOptionsSpotOptionsPtrInput interface {
 	pulumi.Input
 
@@ -2408,7 +2423,7 @@ type LaunchTemplateInternetAccessible struct {
 // LaunchTemplateInternetAccessibleInput is an input type that accepts LaunchTemplateInternetAccessibleArgs and LaunchTemplateInternetAccessibleOutput values.
 // You can construct a concrete instance of `LaunchTemplateInternetAccessibleInput` via:
 //
-//          LaunchTemplateInternetAccessibleArgs{...}
+//	LaunchTemplateInternetAccessibleArgs{...}
 type LaunchTemplateInternetAccessibleInput interface {
 	pulumi.Input
 
@@ -2450,11 +2465,11 @@ func (i LaunchTemplateInternetAccessibleArgs) ToLaunchTemplateInternetAccessible
 // LaunchTemplateInternetAccessiblePtrInput is an input type that accepts LaunchTemplateInternetAccessibleArgs, LaunchTemplateInternetAccessiblePtr and LaunchTemplateInternetAccessiblePtrOutput values.
 // You can construct a concrete instance of `LaunchTemplateInternetAccessiblePtrInput` via:
 //
-//          LaunchTemplateInternetAccessibleArgs{...}
+//	        LaunchTemplateInternetAccessibleArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type LaunchTemplateInternetAccessiblePtrInput interface {
 	pulumi.Input
 
@@ -2600,7 +2615,7 @@ type LaunchTemplateLoginSettings struct {
 // LaunchTemplateLoginSettingsInput is an input type that accepts LaunchTemplateLoginSettingsArgs and LaunchTemplateLoginSettingsOutput values.
 // You can construct a concrete instance of `LaunchTemplateLoginSettingsInput` via:
 //
-//          LaunchTemplateLoginSettingsArgs{...}
+//	LaunchTemplateLoginSettingsArgs{...}
 type LaunchTemplateLoginSettingsInput interface {
 	pulumi.Input
 
@@ -2640,11 +2655,11 @@ func (i LaunchTemplateLoginSettingsArgs) ToLaunchTemplateLoginSettingsPtrOutputW
 // LaunchTemplateLoginSettingsPtrInput is an input type that accepts LaunchTemplateLoginSettingsArgs, LaunchTemplateLoginSettingsPtr and LaunchTemplateLoginSettingsPtrOutput values.
 // You can construct a concrete instance of `LaunchTemplateLoginSettingsPtrInput` via:
 //
-//          LaunchTemplateLoginSettingsArgs{...}
+//	        LaunchTemplateLoginSettingsArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type LaunchTemplateLoginSettingsPtrInput interface {
 	pulumi.Input
 
@@ -2777,7 +2792,7 @@ type LaunchTemplatePlacement struct {
 // LaunchTemplatePlacementInput is an input type that accepts LaunchTemplatePlacementArgs and LaunchTemplatePlacementOutput values.
 // You can construct a concrete instance of `LaunchTemplatePlacementInput` via:
 //
-//          LaunchTemplatePlacementArgs{...}
+//	LaunchTemplatePlacementArgs{...}
 type LaunchTemplatePlacementInput interface {
 	pulumi.Input
 
@@ -2819,11 +2834,11 @@ func (i LaunchTemplatePlacementArgs) ToLaunchTemplatePlacementPtrOutputWithConte
 // LaunchTemplatePlacementPtrInput is an input type that accepts LaunchTemplatePlacementArgs, LaunchTemplatePlacementPtr and LaunchTemplatePlacementPtrOutput values.
 // You can construct a concrete instance of `LaunchTemplatePlacementPtrInput` via:
 //
-//          LaunchTemplatePlacementArgs{...}
+//	        LaunchTemplatePlacementArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type LaunchTemplatePlacementPtrInput interface {
 	pulumi.Input
 
@@ -2971,7 +2986,7 @@ type LaunchTemplateSystemDisk struct {
 // LaunchTemplateSystemDiskInput is an input type that accepts LaunchTemplateSystemDiskArgs and LaunchTemplateSystemDiskOutput values.
 // You can construct a concrete instance of `LaunchTemplateSystemDiskInput` via:
 //
-//          LaunchTemplateSystemDiskArgs{...}
+//	LaunchTemplateSystemDiskArgs{...}
 type LaunchTemplateSystemDiskInput interface {
 	pulumi.Input
 
@@ -3013,11 +3028,11 @@ func (i LaunchTemplateSystemDiskArgs) ToLaunchTemplateSystemDiskPtrOutputWithCon
 // LaunchTemplateSystemDiskPtrInput is an input type that accepts LaunchTemplateSystemDiskArgs, LaunchTemplateSystemDiskPtr and LaunchTemplateSystemDiskPtrOutput values.
 // You can construct a concrete instance of `LaunchTemplateSystemDiskPtrInput` via:
 //
-//          LaunchTemplateSystemDiskArgs{...}
+//	        LaunchTemplateSystemDiskArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type LaunchTemplateSystemDiskPtrInput interface {
 	pulumi.Input
 
@@ -3161,7 +3176,7 @@ type LaunchTemplateTagSpecification struct {
 // LaunchTemplateTagSpecificationInput is an input type that accepts LaunchTemplateTagSpecificationArgs and LaunchTemplateTagSpecificationOutput values.
 // You can construct a concrete instance of `LaunchTemplateTagSpecificationInput` via:
 //
-//          LaunchTemplateTagSpecificationArgs{...}
+//	LaunchTemplateTagSpecificationArgs{...}
 type LaunchTemplateTagSpecificationInput interface {
 	pulumi.Input
 
@@ -3191,7 +3206,7 @@ func (i LaunchTemplateTagSpecificationArgs) ToLaunchTemplateTagSpecificationOutp
 // LaunchTemplateTagSpecificationArrayInput is an input type that accepts LaunchTemplateTagSpecificationArray and LaunchTemplateTagSpecificationArrayOutput values.
 // You can construct a concrete instance of `LaunchTemplateTagSpecificationArrayInput` via:
 //
-//          LaunchTemplateTagSpecificationArray{ LaunchTemplateTagSpecificationArgs{...} }
+//	LaunchTemplateTagSpecificationArray{ LaunchTemplateTagSpecificationArgs{...} }
 type LaunchTemplateTagSpecificationArrayInput interface {
 	pulumi.Input
 
@@ -3267,7 +3282,7 @@ type LaunchTemplateTagSpecificationTag struct {
 // LaunchTemplateTagSpecificationTagInput is an input type that accepts LaunchTemplateTagSpecificationTagArgs and LaunchTemplateTagSpecificationTagOutput values.
 // You can construct a concrete instance of `LaunchTemplateTagSpecificationTagInput` via:
 //
-//          LaunchTemplateTagSpecificationTagArgs{...}
+//	LaunchTemplateTagSpecificationTagArgs{...}
 type LaunchTemplateTagSpecificationTagInput interface {
 	pulumi.Input
 
@@ -3297,7 +3312,7 @@ func (i LaunchTemplateTagSpecificationTagArgs) ToLaunchTemplateTagSpecificationT
 // LaunchTemplateTagSpecificationTagArrayInput is an input type that accepts LaunchTemplateTagSpecificationTagArray and LaunchTemplateTagSpecificationTagArrayOutput values.
 // You can construct a concrete instance of `LaunchTemplateTagSpecificationTagArrayInput` via:
 //
-//          LaunchTemplateTagSpecificationTagArray{ LaunchTemplateTagSpecificationTagArgs{...} }
+//	LaunchTemplateTagSpecificationTagArray{ LaunchTemplateTagSpecificationTagArgs{...} }
 type LaunchTemplateTagSpecificationTagArrayInput interface {
 	pulumi.Input
 
@@ -3375,7 +3390,7 @@ type LaunchTemplateVersionActionTimer struct {
 // LaunchTemplateVersionActionTimerInput is an input type that accepts LaunchTemplateVersionActionTimerArgs and LaunchTemplateVersionActionTimerOutput values.
 // You can construct a concrete instance of `LaunchTemplateVersionActionTimerInput` via:
 //
-//          LaunchTemplateVersionActionTimerArgs{...}
+//	LaunchTemplateVersionActionTimerArgs{...}
 type LaunchTemplateVersionActionTimerInput interface {
 	pulumi.Input
 
@@ -3415,11 +3430,11 @@ func (i LaunchTemplateVersionActionTimerArgs) ToLaunchTemplateVersionActionTimer
 // LaunchTemplateVersionActionTimerPtrInput is an input type that accepts LaunchTemplateVersionActionTimerArgs, LaunchTemplateVersionActionTimerPtr and LaunchTemplateVersionActionTimerPtrOutput values.
 // You can construct a concrete instance of `LaunchTemplateVersionActionTimerPtrInput` via:
 //
-//          LaunchTemplateVersionActionTimerArgs{...}
+//	        LaunchTemplateVersionActionTimerArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type LaunchTemplateVersionActionTimerPtrInput interface {
 	pulumi.Input
 
@@ -3552,7 +3567,7 @@ type LaunchTemplateVersionActionTimerExternals struct {
 // LaunchTemplateVersionActionTimerExternalsInput is an input type that accepts LaunchTemplateVersionActionTimerExternalsArgs and LaunchTemplateVersionActionTimerExternalsOutput values.
 // You can construct a concrete instance of `LaunchTemplateVersionActionTimerExternalsInput` via:
 //
-//          LaunchTemplateVersionActionTimerExternalsArgs{...}
+//	LaunchTemplateVersionActionTimerExternalsArgs{...}
 type LaunchTemplateVersionActionTimerExternalsInput interface {
 	pulumi.Input
 
@@ -3592,11 +3607,11 @@ func (i LaunchTemplateVersionActionTimerExternalsArgs) ToLaunchTemplateVersionAc
 // LaunchTemplateVersionActionTimerExternalsPtrInput is an input type that accepts LaunchTemplateVersionActionTimerExternalsArgs, LaunchTemplateVersionActionTimerExternalsPtr and LaunchTemplateVersionActionTimerExternalsPtrOutput values.
 // You can construct a concrete instance of `LaunchTemplateVersionActionTimerExternalsPtrInput` via:
 //
-//          LaunchTemplateVersionActionTimerExternalsArgs{...}
+//	        LaunchTemplateVersionActionTimerExternalsArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type LaunchTemplateVersionActionTimerExternalsPtrInput interface {
 	pulumi.Input
 
@@ -3729,7 +3744,7 @@ type LaunchTemplateVersionActionTimerExternalsStorageBlockAttr struct {
 // LaunchTemplateVersionActionTimerExternalsStorageBlockAttrInput is an input type that accepts LaunchTemplateVersionActionTimerExternalsStorageBlockAttrArgs and LaunchTemplateVersionActionTimerExternalsStorageBlockAttrOutput values.
 // You can construct a concrete instance of `LaunchTemplateVersionActionTimerExternalsStorageBlockAttrInput` via:
 //
-//          LaunchTemplateVersionActionTimerExternalsStorageBlockAttrArgs{...}
+//	LaunchTemplateVersionActionTimerExternalsStorageBlockAttrArgs{...}
 type LaunchTemplateVersionActionTimerExternalsStorageBlockAttrInput interface {
 	pulumi.Input
 
@@ -3769,11 +3784,11 @@ func (i LaunchTemplateVersionActionTimerExternalsStorageBlockAttrArgs) ToLaunchT
 // LaunchTemplateVersionActionTimerExternalsStorageBlockAttrPtrInput is an input type that accepts LaunchTemplateVersionActionTimerExternalsStorageBlockAttrArgs, LaunchTemplateVersionActionTimerExternalsStorageBlockAttrPtr and LaunchTemplateVersionActionTimerExternalsStorageBlockAttrPtrOutput values.
 // You can construct a concrete instance of `LaunchTemplateVersionActionTimerExternalsStorageBlockAttrPtrInput` via:
 //
-//          LaunchTemplateVersionActionTimerExternalsStorageBlockAttrArgs{...}
+//	        LaunchTemplateVersionActionTimerExternalsStorageBlockAttrArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type LaunchTemplateVersionActionTimerExternalsStorageBlockAttrPtrInput interface {
 	pulumi.Input
 
@@ -3916,7 +3931,7 @@ type LaunchTemplateVersionDataDisk struct {
 // LaunchTemplateVersionDataDiskInput is an input type that accepts LaunchTemplateVersionDataDiskArgs and LaunchTemplateVersionDataDiskOutput values.
 // You can construct a concrete instance of `LaunchTemplateVersionDataDiskInput` via:
 //
-//          LaunchTemplateVersionDataDiskArgs{...}
+//	LaunchTemplateVersionDataDiskArgs{...}
 type LaunchTemplateVersionDataDiskInput interface {
 	pulumi.Input
 
@@ -3960,7 +3975,7 @@ func (i LaunchTemplateVersionDataDiskArgs) ToLaunchTemplateVersionDataDiskOutput
 // LaunchTemplateVersionDataDiskArrayInput is an input type that accepts LaunchTemplateVersionDataDiskArray and LaunchTemplateVersionDataDiskArrayOutput values.
 // You can construct a concrete instance of `LaunchTemplateVersionDataDiskArrayInput` via:
 //
-//          LaunchTemplateVersionDataDiskArray{ LaunchTemplateVersionDataDiskArgs{...} }
+//	LaunchTemplateVersionDataDiskArray{ LaunchTemplateVersionDataDiskArgs{...} }
 type LaunchTemplateVersionDataDiskArrayInput interface {
 	pulumi.Input
 
@@ -4073,7 +4088,7 @@ type LaunchTemplateVersionEnhancedService struct {
 // LaunchTemplateVersionEnhancedServiceInput is an input type that accepts LaunchTemplateVersionEnhancedServiceArgs and LaunchTemplateVersionEnhancedServiceOutput values.
 // You can construct a concrete instance of `LaunchTemplateVersionEnhancedServiceInput` via:
 //
-//          LaunchTemplateVersionEnhancedServiceArgs{...}
+//	LaunchTemplateVersionEnhancedServiceArgs{...}
 type LaunchTemplateVersionEnhancedServiceInput interface {
 	pulumi.Input
 
@@ -4113,11 +4128,11 @@ func (i LaunchTemplateVersionEnhancedServiceArgs) ToLaunchTemplateVersionEnhance
 // LaunchTemplateVersionEnhancedServicePtrInput is an input type that accepts LaunchTemplateVersionEnhancedServiceArgs, LaunchTemplateVersionEnhancedServicePtr and LaunchTemplateVersionEnhancedServicePtrOutput values.
 // You can construct a concrete instance of `LaunchTemplateVersionEnhancedServicePtrInput` via:
 //
-//          LaunchTemplateVersionEnhancedServiceArgs{...}
+//	        LaunchTemplateVersionEnhancedServiceArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type LaunchTemplateVersionEnhancedServicePtrInput interface {
 	pulumi.Input
 
@@ -4250,7 +4265,7 @@ type LaunchTemplateVersionEnhancedServiceAutomationService struct {
 // LaunchTemplateVersionEnhancedServiceAutomationServiceInput is an input type that accepts LaunchTemplateVersionEnhancedServiceAutomationServiceArgs and LaunchTemplateVersionEnhancedServiceAutomationServiceOutput values.
 // You can construct a concrete instance of `LaunchTemplateVersionEnhancedServiceAutomationServiceInput` via:
 //
-//          LaunchTemplateVersionEnhancedServiceAutomationServiceArgs{...}
+//	LaunchTemplateVersionEnhancedServiceAutomationServiceArgs{...}
 type LaunchTemplateVersionEnhancedServiceAutomationServiceInput interface {
 	pulumi.Input
 
@@ -4286,11 +4301,11 @@ func (i LaunchTemplateVersionEnhancedServiceAutomationServiceArgs) ToLaunchTempl
 // LaunchTemplateVersionEnhancedServiceAutomationServicePtrInput is an input type that accepts LaunchTemplateVersionEnhancedServiceAutomationServiceArgs, LaunchTemplateVersionEnhancedServiceAutomationServicePtr and LaunchTemplateVersionEnhancedServiceAutomationServicePtrOutput values.
 // You can construct a concrete instance of `LaunchTemplateVersionEnhancedServiceAutomationServicePtrInput` via:
 //
-//          LaunchTemplateVersionEnhancedServiceAutomationServiceArgs{...}
+//	        LaunchTemplateVersionEnhancedServiceAutomationServiceArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type LaunchTemplateVersionEnhancedServiceAutomationServicePtrInput interface {
 	pulumi.Input
 
@@ -4387,7 +4402,7 @@ type LaunchTemplateVersionEnhancedServiceMonitorService struct {
 // LaunchTemplateVersionEnhancedServiceMonitorServiceInput is an input type that accepts LaunchTemplateVersionEnhancedServiceMonitorServiceArgs and LaunchTemplateVersionEnhancedServiceMonitorServiceOutput values.
 // You can construct a concrete instance of `LaunchTemplateVersionEnhancedServiceMonitorServiceInput` via:
 //
-//          LaunchTemplateVersionEnhancedServiceMonitorServiceArgs{...}
+//	LaunchTemplateVersionEnhancedServiceMonitorServiceArgs{...}
 type LaunchTemplateVersionEnhancedServiceMonitorServiceInput interface {
 	pulumi.Input
 
@@ -4423,11 +4438,11 @@ func (i LaunchTemplateVersionEnhancedServiceMonitorServiceArgs) ToLaunchTemplate
 // LaunchTemplateVersionEnhancedServiceMonitorServicePtrInput is an input type that accepts LaunchTemplateVersionEnhancedServiceMonitorServiceArgs, LaunchTemplateVersionEnhancedServiceMonitorServicePtr and LaunchTemplateVersionEnhancedServiceMonitorServicePtrOutput values.
 // You can construct a concrete instance of `LaunchTemplateVersionEnhancedServiceMonitorServicePtrInput` via:
 //
-//          LaunchTemplateVersionEnhancedServiceMonitorServiceArgs{...}
+//	        LaunchTemplateVersionEnhancedServiceMonitorServiceArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type LaunchTemplateVersionEnhancedServiceMonitorServicePtrInput interface {
 	pulumi.Input
 
@@ -4524,7 +4539,7 @@ type LaunchTemplateVersionEnhancedServiceSecurityService struct {
 // LaunchTemplateVersionEnhancedServiceSecurityServiceInput is an input type that accepts LaunchTemplateVersionEnhancedServiceSecurityServiceArgs and LaunchTemplateVersionEnhancedServiceSecurityServiceOutput values.
 // You can construct a concrete instance of `LaunchTemplateVersionEnhancedServiceSecurityServiceInput` via:
 //
-//          LaunchTemplateVersionEnhancedServiceSecurityServiceArgs{...}
+//	LaunchTemplateVersionEnhancedServiceSecurityServiceArgs{...}
 type LaunchTemplateVersionEnhancedServiceSecurityServiceInput interface {
 	pulumi.Input
 
@@ -4560,11 +4575,11 @@ func (i LaunchTemplateVersionEnhancedServiceSecurityServiceArgs) ToLaunchTemplat
 // LaunchTemplateVersionEnhancedServiceSecurityServicePtrInput is an input type that accepts LaunchTemplateVersionEnhancedServiceSecurityServiceArgs, LaunchTemplateVersionEnhancedServiceSecurityServicePtr and LaunchTemplateVersionEnhancedServiceSecurityServicePtrOutput values.
 // You can construct a concrete instance of `LaunchTemplateVersionEnhancedServiceSecurityServicePtrInput` via:
 //
-//          LaunchTemplateVersionEnhancedServiceSecurityServiceArgs{...}
+//	        LaunchTemplateVersionEnhancedServiceSecurityServiceArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type LaunchTemplateVersionEnhancedServiceSecurityServicePtrInput interface {
 	pulumi.Input
 
@@ -4663,7 +4678,7 @@ type LaunchTemplateVersionInstanceChargePrepaid struct {
 // LaunchTemplateVersionInstanceChargePrepaidInput is an input type that accepts LaunchTemplateVersionInstanceChargePrepaidArgs and LaunchTemplateVersionInstanceChargePrepaidOutput values.
 // You can construct a concrete instance of `LaunchTemplateVersionInstanceChargePrepaidInput` via:
 //
-//          LaunchTemplateVersionInstanceChargePrepaidArgs{...}
+//	LaunchTemplateVersionInstanceChargePrepaidArgs{...}
 type LaunchTemplateVersionInstanceChargePrepaidInput interface {
 	pulumi.Input
 
@@ -4701,11 +4716,11 @@ func (i LaunchTemplateVersionInstanceChargePrepaidArgs) ToLaunchTemplateVersionI
 // LaunchTemplateVersionInstanceChargePrepaidPtrInput is an input type that accepts LaunchTemplateVersionInstanceChargePrepaidArgs, LaunchTemplateVersionInstanceChargePrepaidPtr and LaunchTemplateVersionInstanceChargePrepaidPtrOutput values.
 // You can construct a concrete instance of `LaunchTemplateVersionInstanceChargePrepaidPtrInput` via:
 //
-//          LaunchTemplateVersionInstanceChargePrepaidArgs{...}
+//	        LaunchTemplateVersionInstanceChargePrepaidArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type LaunchTemplateVersionInstanceChargePrepaidPtrInput interface {
 	pulumi.Input
 
@@ -4819,7 +4834,7 @@ type LaunchTemplateVersionInstanceMarketOptions struct {
 // LaunchTemplateVersionInstanceMarketOptionsInput is an input type that accepts LaunchTemplateVersionInstanceMarketOptionsArgs and LaunchTemplateVersionInstanceMarketOptionsOutput values.
 // You can construct a concrete instance of `LaunchTemplateVersionInstanceMarketOptionsInput` via:
 //
-//          LaunchTemplateVersionInstanceMarketOptionsArgs{...}
+//	LaunchTemplateVersionInstanceMarketOptionsArgs{...}
 type LaunchTemplateVersionInstanceMarketOptionsInput interface {
 	pulumi.Input
 
@@ -4857,11 +4872,11 @@ func (i LaunchTemplateVersionInstanceMarketOptionsArgs) ToLaunchTemplateVersionI
 // LaunchTemplateVersionInstanceMarketOptionsPtrInput is an input type that accepts LaunchTemplateVersionInstanceMarketOptionsArgs, LaunchTemplateVersionInstanceMarketOptionsPtr and LaunchTemplateVersionInstanceMarketOptionsPtrOutput values.
 // You can construct a concrete instance of `LaunchTemplateVersionInstanceMarketOptionsPtrInput` via:
 //
-//          LaunchTemplateVersionInstanceMarketOptionsArgs{...}
+//	        LaunchTemplateVersionInstanceMarketOptionsArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type LaunchTemplateVersionInstanceMarketOptionsPtrInput interface {
 	pulumi.Input
 
@@ -4977,7 +4992,7 @@ type LaunchTemplateVersionInstanceMarketOptionsSpotOptions struct {
 // LaunchTemplateVersionInstanceMarketOptionsSpotOptionsInput is an input type that accepts LaunchTemplateVersionInstanceMarketOptionsSpotOptionsArgs and LaunchTemplateVersionInstanceMarketOptionsSpotOptionsOutput values.
 // You can construct a concrete instance of `LaunchTemplateVersionInstanceMarketOptionsSpotOptionsInput` via:
 //
-//          LaunchTemplateVersionInstanceMarketOptionsSpotOptionsArgs{...}
+//	LaunchTemplateVersionInstanceMarketOptionsSpotOptionsArgs{...}
 type LaunchTemplateVersionInstanceMarketOptionsSpotOptionsInput interface {
 	pulumi.Input
 
@@ -5015,11 +5030,11 @@ func (i LaunchTemplateVersionInstanceMarketOptionsSpotOptionsArgs) ToLaunchTempl
 // LaunchTemplateVersionInstanceMarketOptionsSpotOptionsPtrInput is an input type that accepts LaunchTemplateVersionInstanceMarketOptionsSpotOptionsArgs, LaunchTemplateVersionInstanceMarketOptionsSpotOptionsPtr and LaunchTemplateVersionInstanceMarketOptionsSpotOptionsPtrOutput values.
 // You can construct a concrete instance of `LaunchTemplateVersionInstanceMarketOptionsSpotOptionsPtrInput` via:
 //
-//          LaunchTemplateVersionInstanceMarketOptionsSpotOptionsArgs{...}
+//	        LaunchTemplateVersionInstanceMarketOptionsSpotOptionsArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type LaunchTemplateVersionInstanceMarketOptionsSpotOptionsPtrInput interface {
 	pulumi.Input
 
@@ -5137,7 +5152,7 @@ type LaunchTemplateVersionInternetAccessible struct {
 // LaunchTemplateVersionInternetAccessibleInput is an input type that accepts LaunchTemplateVersionInternetAccessibleArgs and LaunchTemplateVersionInternetAccessibleOutput values.
 // You can construct a concrete instance of `LaunchTemplateVersionInternetAccessibleInput` via:
 //
-//          LaunchTemplateVersionInternetAccessibleArgs{...}
+//	LaunchTemplateVersionInternetAccessibleArgs{...}
 type LaunchTemplateVersionInternetAccessibleInput interface {
 	pulumi.Input
 
@@ -5179,11 +5194,11 @@ func (i LaunchTemplateVersionInternetAccessibleArgs) ToLaunchTemplateVersionInte
 // LaunchTemplateVersionInternetAccessiblePtrInput is an input type that accepts LaunchTemplateVersionInternetAccessibleArgs, LaunchTemplateVersionInternetAccessiblePtr and LaunchTemplateVersionInternetAccessiblePtrOutput values.
 // You can construct a concrete instance of `LaunchTemplateVersionInternetAccessiblePtrInput` via:
 //
-//          LaunchTemplateVersionInternetAccessibleArgs{...}
+//	        LaunchTemplateVersionInternetAccessibleArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type LaunchTemplateVersionInternetAccessiblePtrInput interface {
 	pulumi.Input
 
@@ -5329,7 +5344,7 @@ type LaunchTemplateVersionLoginSettings struct {
 // LaunchTemplateVersionLoginSettingsInput is an input type that accepts LaunchTemplateVersionLoginSettingsArgs and LaunchTemplateVersionLoginSettingsOutput values.
 // You can construct a concrete instance of `LaunchTemplateVersionLoginSettingsInput` via:
 //
-//          LaunchTemplateVersionLoginSettingsArgs{...}
+//	LaunchTemplateVersionLoginSettingsArgs{...}
 type LaunchTemplateVersionLoginSettingsInput interface {
 	pulumi.Input
 
@@ -5369,11 +5384,11 @@ func (i LaunchTemplateVersionLoginSettingsArgs) ToLaunchTemplateVersionLoginSett
 // LaunchTemplateVersionLoginSettingsPtrInput is an input type that accepts LaunchTemplateVersionLoginSettingsArgs, LaunchTemplateVersionLoginSettingsPtr and LaunchTemplateVersionLoginSettingsPtrOutput values.
 // You can construct a concrete instance of `LaunchTemplateVersionLoginSettingsPtrInput` via:
 //
-//          LaunchTemplateVersionLoginSettingsArgs{...}
+//	        LaunchTemplateVersionLoginSettingsArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type LaunchTemplateVersionLoginSettingsPtrInput interface {
 	pulumi.Input
 
@@ -5506,7 +5521,7 @@ type LaunchTemplateVersionPlacement struct {
 // LaunchTemplateVersionPlacementInput is an input type that accepts LaunchTemplateVersionPlacementArgs and LaunchTemplateVersionPlacementOutput values.
 // You can construct a concrete instance of `LaunchTemplateVersionPlacementInput` via:
 //
-//          LaunchTemplateVersionPlacementArgs{...}
+//	LaunchTemplateVersionPlacementArgs{...}
 type LaunchTemplateVersionPlacementInput interface {
 	pulumi.Input
 
@@ -5548,11 +5563,11 @@ func (i LaunchTemplateVersionPlacementArgs) ToLaunchTemplateVersionPlacementPtrO
 // LaunchTemplateVersionPlacementPtrInput is an input type that accepts LaunchTemplateVersionPlacementArgs, LaunchTemplateVersionPlacementPtr and LaunchTemplateVersionPlacementPtrOutput values.
 // You can construct a concrete instance of `LaunchTemplateVersionPlacementPtrInput` via:
 //
-//          LaunchTemplateVersionPlacementArgs{...}
+//	        LaunchTemplateVersionPlacementArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type LaunchTemplateVersionPlacementPtrInput interface {
 	pulumi.Input
 
@@ -5700,7 +5715,7 @@ type LaunchTemplateVersionSystemDisk struct {
 // LaunchTemplateVersionSystemDiskInput is an input type that accepts LaunchTemplateVersionSystemDiskArgs and LaunchTemplateVersionSystemDiskOutput values.
 // You can construct a concrete instance of `LaunchTemplateVersionSystemDiskInput` via:
 //
-//          LaunchTemplateVersionSystemDiskArgs{...}
+//	LaunchTemplateVersionSystemDiskArgs{...}
 type LaunchTemplateVersionSystemDiskInput interface {
 	pulumi.Input
 
@@ -5742,11 +5757,11 @@ func (i LaunchTemplateVersionSystemDiskArgs) ToLaunchTemplateVersionSystemDiskPt
 // LaunchTemplateVersionSystemDiskPtrInput is an input type that accepts LaunchTemplateVersionSystemDiskArgs, LaunchTemplateVersionSystemDiskPtr and LaunchTemplateVersionSystemDiskPtrOutput values.
 // You can construct a concrete instance of `LaunchTemplateVersionSystemDiskPtrInput` via:
 //
-//          LaunchTemplateVersionSystemDiskArgs{...}
+//	        LaunchTemplateVersionSystemDiskArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type LaunchTemplateVersionSystemDiskPtrInput interface {
 	pulumi.Input
 
@@ -5890,7 +5905,7 @@ type LaunchTemplateVersionTagSpecification struct {
 // LaunchTemplateVersionTagSpecificationInput is an input type that accepts LaunchTemplateVersionTagSpecificationArgs and LaunchTemplateVersionTagSpecificationOutput values.
 // You can construct a concrete instance of `LaunchTemplateVersionTagSpecificationInput` via:
 //
-//          LaunchTemplateVersionTagSpecificationArgs{...}
+//	LaunchTemplateVersionTagSpecificationArgs{...}
 type LaunchTemplateVersionTagSpecificationInput interface {
 	pulumi.Input
 
@@ -5920,7 +5935,7 @@ func (i LaunchTemplateVersionTagSpecificationArgs) ToLaunchTemplateVersionTagSpe
 // LaunchTemplateVersionTagSpecificationArrayInput is an input type that accepts LaunchTemplateVersionTagSpecificationArray and LaunchTemplateVersionTagSpecificationArrayOutput values.
 // You can construct a concrete instance of `LaunchTemplateVersionTagSpecificationArrayInput` via:
 //
-//          LaunchTemplateVersionTagSpecificationArray{ LaunchTemplateVersionTagSpecificationArgs{...} }
+//	LaunchTemplateVersionTagSpecificationArray{ LaunchTemplateVersionTagSpecificationArgs{...} }
 type LaunchTemplateVersionTagSpecificationArrayInput interface {
 	pulumi.Input
 
@@ -5998,7 +6013,7 @@ type LaunchTemplateVersionTagSpecificationTag struct {
 // LaunchTemplateVersionTagSpecificationTagInput is an input type that accepts LaunchTemplateVersionTagSpecificationTagArgs and LaunchTemplateVersionTagSpecificationTagOutput values.
 // You can construct a concrete instance of `LaunchTemplateVersionTagSpecificationTagInput` via:
 //
-//          LaunchTemplateVersionTagSpecificationTagArgs{...}
+//	LaunchTemplateVersionTagSpecificationTagArgs{...}
 type LaunchTemplateVersionTagSpecificationTagInput interface {
 	pulumi.Input
 
@@ -6028,7 +6043,7 @@ func (i LaunchTemplateVersionTagSpecificationTagArgs) ToLaunchTemplateVersionTag
 // LaunchTemplateVersionTagSpecificationTagArrayInput is an input type that accepts LaunchTemplateVersionTagSpecificationTagArray and LaunchTemplateVersionTagSpecificationTagArrayOutput values.
 // You can construct a concrete instance of `LaunchTemplateVersionTagSpecificationTagArrayInput` via:
 //
-//          LaunchTemplateVersionTagSpecificationTagArray{ LaunchTemplateVersionTagSpecificationTagArgs{...} }
+//	LaunchTemplateVersionTagSpecificationTagArray{ LaunchTemplateVersionTagSpecificationTagArgs{...} }
 type LaunchTemplateVersionTagSpecificationTagArrayInput interface {
 	pulumi.Input
 
@@ -6110,7 +6125,7 @@ type LaunchTemplateVersionVirtualPrivateCloud struct {
 // LaunchTemplateVersionVirtualPrivateCloudInput is an input type that accepts LaunchTemplateVersionVirtualPrivateCloudArgs and LaunchTemplateVersionVirtualPrivateCloudOutput values.
 // You can construct a concrete instance of `LaunchTemplateVersionVirtualPrivateCloudInput` via:
 //
-//          LaunchTemplateVersionVirtualPrivateCloudArgs{...}
+//	LaunchTemplateVersionVirtualPrivateCloudArgs{...}
 type LaunchTemplateVersionVirtualPrivateCloudInput interface {
 	pulumi.Input
 
@@ -6154,11 +6169,11 @@ func (i LaunchTemplateVersionVirtualPrivateCloudArgs) ToLaunchTemplateVersionVir
 // LaunchTemplateVersionVirtualPrivateCloudPtrInput is an input type that accepts LaunchTemplateVersionVirtualPrivateCloudArgs, LaunchTemplateVersionVirtualPrivateCloudPtr and LaunchTemplateVersionVirtualPrivateCloudPtrOutput values.
 // You can construct a concrete instance of `LaunchTemplateVersionVirtualPrivateCloudPtrInput` via:
 //
-//          LaunchTemplateVersionVirtualPrivateCloudArgs{...}
+//	        LaunchTemplateVersionVirtualPrivateCloudArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type LaunchTemplateVersionVirtualPrivateCloudPtrInput interface {
 	pulumi.Input
 
@@ -6323,7 +6338,7 @@ type LaunchTemplateVirtualPrivateCloud struct {
 // LaunchTemplateVirtualPrivateCloudInput is an input type that accepts LaunchTemplateVirtualPrivateCloudArgs and LaunchTemplateVirtualPrivateCloudOutput values.
 // You can construct a concrete instance of `LaunchTemplateVirtualPrivateCloudInput` via:
 //
-//          LaunchTemplateVirtualPrivateCloudArgs{...}
+//	LaunchTemplateVirtualPrivateCloudArgs{...}
 type LaunchTemplateVirtualPrivateCloudInput interface {
 	pulumi.Input
 
@@ -6367,11 +6382,11 @@ func (i LaunchTemplateVirtualPrivateCloudArgs) ToLaunchTemplateVirtualPrivateClo
 // LaunchTemplateVirtualPrivateCloudPtrInput is an input type that accepts LaunchTemplateVirtualPrivateCloudArgs, LaunchTemplateVirtualPrivateCloudPtr and LaunchTemplateVirtualPrivateCloudPtrOutput values.
 // You can construct a concrete instance of `LaunchTemplateVirtualPrivateCloudPtrInput` via:
 //
-//          LaunchTemplateVirtualPrivateCloudArgs{...}
+//	        LaunchTemplateVirtualPrivateCloudArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type LaunchTemplateVirtualPrivateCloudPtrInput interface {
 	pulumi.Input
 
@@ -6521,21 +6536,47 @@ func (o LaunchTemplateVirtualPrivateCloudPtrOutput) VpcId() pulumi.StringPtrOutp
 }
 
 type ModifyInstanceDiskTypeDataDisk struct {
-	CdcId                 *string `pulumi:"cdcId"`
-	DeleteWithInstance    *bool   `pulumi:"deleteWithInstance"`
-	DiskId                *string `pulumi:"diskId"`
-	DiskSize              int     `pulumi:"diskSize"`
-	DiskType              *string `pulumi:"diskType"`
-	Encrypt               *bool   `pulumi:"encrypt"`
-	KmsKeyId              *string `pulumi:"kmsKeyId"`
-	SnapshotId            *string `pulumi:"snapshotId"`
-	ThroughputPerformance *int    `pulumi:"throughputPerformance"`
+	// ID of the dedicated cluster to which the instance belongs.
+	CdcId *string `pulumi:"cdcId"`
+	// Whether to terminate the data disk when its CVM is terminated. Valid values:
+	// - TRUE: terminate the data disk when its CVM is terminated. This value only supports pay-as-you-go cloud disks billed on an hourly basis.
+	// - FALSE: retain the data disk when its CVM is terminated.
+	//   Default value: TRUE.
+	DeleteWithInstance *bool `pulumi:"deleteWithInstance"`
+	// Data disk ID. Note that it's not available for LOCAL_BASIC and LOCAL_SSD disks.
+	DiskId *string `pulumi:"diskId"`
+	// Data disk size (in GB). The minimum adjustment increment is 10 GB. The value range varies by data disk type. The default value is 0, indicating that no data disk is purchased. For more information, see the product documentation.
+	DiskSize int `pulumi:"diskSize"`
+	// Data disk type. Valid values:
+	// - LOCAL_BASIC: local hard disk;
+	// - LOCAL_SSD: local SSD hard disk;
+	// - LOCAL_NVME: local NVME hard disk, which is strongly related to InstanceType and cannot be specified;
+	// - LOCAL_PRO: local HDD hard disk, which is strongly related to InstanceType and cannot be specified;
+	// - CLOUD_BASIC: ordinary cloud disk;
+	// - CLOUD_PREMIUM: high-performance cloud disk;
+	// - CLOUD_SSD:SSD cloud disk;
+	// - CLOUD_HSSD: enhanced SSD cloud disk;
+	// - CLOUD_TSSD: extremely fast SSD cloud disk;
+	// - CLOUD_BSSD: general-purpose SSD cloud disk;
+	//   Default value: LOCAL_BASIC.
+	DiskType *string `pulumi:"diskType"`
+	// Specifies whether the data disk is encrypted. Valid values:
+	// - TRUE: encrypted
+	// - FALSE: not encrypted
+	//   Default value: FALSE.
+	Encrypt *bool `pulumi:"encrypt"`
+	// ID of the custom CMK in the format of UUID or “kms-abcd1234”. This parameter is used to encrypt cloud disks.
+	KmsKeyId *string `pulumi:"kmsKeyId"`
+	// Data disk snapshot ID. The size of the selected data disk snapshot must be smaller than that of the data disk.
+	SnapshotId *string `pulumi:"snapshotId"`
+	// Cloud disk performance, in MB/s.
+	ThroughputPerformance *int `pulumi:"throughputPerformance"`
 }
 
 // ModifyInstanceDiskTypeDataDiskInput is an input type that accepts ModifyInstanceDiskTypeDataDiskArgs and ModifyInstanceDiskTypeDataDiskOutput values.
 // You can construct a concrete instance of `ModifyInstanceDiskTypeDataDiskInput` via:
 //
-//          ModifyInstanceDiskTypeDataDiskArgs{...}
+//	ModifyInstanceDiskTypeDataDiskArgs{...}
 type ModifyInstanceDiskTypeDataDiskInput interface {
 	pulumi.Input
 
@@ -6544,15 +6585,41 @@ type ModifyInstanceDiskTypeDataDiskInput interface {
 }
 
 type ModifyInstanceDiskTypeDataDiskArgs struct {
-	CdcId                 pulumi.StringPtrInput `pulumi:"cdcId"`
-	DeleteWithInstance    pulumi.BoolPtrInput   `pulumi:"deleteWithInstance"`
-	DiskId                pulumi.StringPtrInput `pulumi:"diskId"`
-	DiskSize              pulumi.IntInput       `pulumi:"diskSize"`
-	DiskType              pulumi.StringPtrInput `pulumi:"diskType"`
-	Encrypt               pulumi.BoolPtrInput   `pulumi:"encrypt"`
-	KmsKeyId              pulumi.StringPtrInput `pulumi:"kmsKeyId"`
-	SnapshotId            pulumi.StringPtrInput `pulumi:"snapshotId"`
-	ThroughputPerformance pulumi.IntPtrInput    `pulumi:"throughputPerformance"`
+	// ID of the dedicated cluster to which the instance belongs.
+	CdcId pulumi.StringPtrInput `pulumi:"cdcId"`
+	// Whether to terminate the data disk when its CVM is terminated. Valid values:
+	// - TRUE: terminate the data disk when its CVM is terminated. This value only supports pay-as-you-go cloud disks billed on an hourly basis.
+	// - FALSE: retain the data disk when its CVM is terminated.
+	//   Default value: TRUE.
+	DeleteWithInstance pulumi.BoolPtrInput `pulumi:"deleteWithInstance"`
+	// Data disk ID. Note that it's not available for LOCAL_BASIC and LOCAL_SSD disks.
+	DiskId pulumi.StringPtrInput `pulumi:"diskId"`
+	// Data disk size (in GB). The minimum adjustment increment is 10 GB. The value range varies by data disk type. The default value is 0, indicating that no data disk is purchased. For more information, see the product documentation.
+	DiskSize pulumi.IntInput `pulumi:"diskSize"`
+	// Data disk type. Valid values:
+	// - LOCAL_BASIC: local hard disk;
+	// - LOCAL_SSD: local SSD hard disk;
+	// - LOCAL_NVME: local NVME hard disk, which is strongly related to InstanceType and cannot be specified;
+	// - LOCAL_PRO: local HDD hard disk, which is strongly related to InstanceType and cannot be specified;
+	// - CLOUD_BASIC: ordinary cloud disk;
+	// - CLOUD_PREMIUM: high-performance cloud disk;
+	// - CLOUD_SSD:SSD cloud disk;
+	// - CLOUD_HSSD: enhanced SSD cloud disk;
+	// - CLOUD_TSSD: extremely fast SSD cloud disk;
+	// - CLOUD_BSSD: general-purpose SSD cloud disk;
+	//   Default value: LOCAL_BASIC.
+	DiskType pulumi.StringPtrInput `pulumi:"diskType"`
+	// Specifies whether the data disk is encrypted. Valid values:
+	// - TRUE: encrypted
+	// - FALSE: not encrypted
+	//   Default value: FALSE.
+	Encrypt pulumi.BoolPtrInput `pulumi:"encrypt"`
+	// ID of the custom CMK in the format of UUID or “kms-abcd1234”. This parameter is used to encrypt cloud disks.
+	KmsKeyId pulumi.StringPtrInput `pulumi:"kmsKeyId"`
+	// Data disk snapshot ID. The size of the selected data disk snapshot must be smaller than that of the data disk.
+	SnapshotId pulumi.StringPtrInput `pulumi:"snapshotId"`
+	// Cloud disk performance, in MB/s.
+	ThroughputPerformance pulumi.IntPtrInput `pulumi:"throughputPerformance"`
 }
 
 func (ModifyInstanceDiskTypeDataDiskArgs) ElementType() reflect.Type {
@@ -6570,7 +6637,7 @@ func (i ModifyInstanceDiskTypeDataDiskArgs) ToModifyInstanceDiskTypeDataDiskOutp
 // ModifyInstanceDiskTypeDataDiskArrayInput is an input type that accepts ModifyInstanceDiskTypeDataDiskArray and ModifyInstanceDiskTypeDataDiskArrayOutput values.
 // You can construct a concrete instance of `ModifyInstanceDiskTypeDataDiskArrayInput` via:
 //
-//          ModifyInstanceDiskTypeDataDiskArray{ ModifyInstanceDiskTypeDataDiskArgs{...} }
+//	ModifyInstanceDiskTypeDataDiskArray{ ModifyInstanceDiskTypeDataDiskArgs{...} }
 type ModifyInstanceDiskTypeDataDiskArrayInput interface {
 	pulumi.Input
 
@@ -6606,38 +6673,64 @@ func (o ModifyInstanceDiskTypeDataDiskOutput) ToModifyInstanceDiskTypeDataDiskOu
 	return o
 }
 
+// ID of the dedicated cluster to which the instance belongs.
 func (o ModifyInstanceDiskTypeDataDiskOutput) CdcId() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ModifyInstanceDiskTypeDataDisk) *string { return v.CdcId }).(pulumi.StringPtrOutput)
 }
 
+// Whether to terminate the data disk when its CVM is terminated. Valid values:
+//   - TRUE: terminate the data disk when its CVM is terminated. This value only supports pay-as-you-go cloud disks billed on an hourly basis.
+//   - FALSE: retain the data disk when its CVM is terminated.
+//     Default value: TRUE.
 func (o ModifyInstanceDiskTypeDataDiskOutput) DeleteWithInstance() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v ModifyInstanceDiskTypeDataDisk) *bool { return v.DeleteWithInstance }).(pulumi.BoolPtrOutput)
 }
 
+// Data disk ID. Note that it's not available for LOCAL_BASIC and LOCAL_SSD disks.
 func (o ModifyInstanceDiskTypeDataDiskOutput) DiskId() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ModifyInstanceDiskTypeDataDisk) *string { return v.DiskId }).(pulumi.StringPtrOutput)
 }
 
+// Data disk size (in GB). The minimum adjustment increment is 10 GB. The value range varies by data disk type. The default value is 0, indicating that no data disk is purchased. For more information, see the product documentation.
 func (o ModifyInstanceDiskTypeDataDiskOutput) DiskSize() pulumi.IntOutput {
 	return o.ApplyT(func(v ModifyInstanceDiskTypeDataDisk) int { return v.DiskSize }).(pulumi.IntOutput)
 }
 
+// Data disk type. Valid values:
+//   - LOCAL_BASIC: local hard disk;
+//   - LOCAL_SSD: local SSD hard disk;
+//   - LOCAL_NVME: local NVME hard disk, which is strongly related to InstanceType and cannot be specified;
+//   - LOCAL_PRO: local HDD hard disk, which is strongly related to InstanceType and cannot be specified;
+//   - CLOUD_BASIC: ordinary cloud disk;
+//   - CLOUD_PREMIUM: high-performance cloud disk;
+//   - CLOUD_SSD:SSD cloud disk;
+//   - CLOUD_HSSD: enhanced SSD cloud disk;
+//   - CLOUD_TSSD: extremely fast SSD cloud disk;
+//   - CLOUD_BSSD: general-purpose SSD cloud disk;
+//     Default value: LOCAL_BASIC.
 func (o ModifyInstanceDiskTypeDataDiskOutput) DiskType() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ModifyInstanceDiskTypeDataDisk) *string { return v.DiskType }).(pulumi.StringPtrOutput)
 }
 
+// Specifies whether the data disk is encrypted. Valid values:
+//   - TRUE: encrypted
+//   - FALSE: not encrypted
+//     Default value: FALSE.
 func (o ModifyInstanceDiskTypeDataDiskOutput) Encrypt() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v ModifyInstanceDiskTypeDataDisk) *bool { return v.Encrypt }).(pulumi.BoolPtrOutput)
 }
 
+// ID of the custom CMK in the format of UUID or “kms-abcd1234”. This parameter is used to encrypt cloud disks.
 func (o ModifyInstanceDiskTypeDataDiskOutput) KmsKeyId() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ModifyInstanceDiskTypeDataDisk) *string { return v.KmsKeyId }).(pulumi.StringPtrOutput)
 }
 
+// Data disk snapshot ID. The size of the selected data disk snapshot must be smaller than that of the data disk.
 func (o ModifyInstanceDiskTypeDataDiskOutput) SnapshotId() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ModifyInstanceDiskTypeDataDisk) *string { return v.SnapshotId }).(pulumi.StringPtrOutput)
 }
 
+// Cloud disk performance, in MB/s.
 func (o ModifyInstanceDiskTypeDataDiskOutput) ThroughputPerformance() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v ModifyInstanceDiskTypeDataDisk) *int { return v.ThroughputPerformance }).(pulumi.IntPtrOutput)
 }
@@ -6663,16 +6756,26 @@ func (o ModifyInstanceDiskTypeDataDiskArrayOutput) Index(i pulumi.IntInput) Modi
 }
 
 type ModifyInstanceDiskTypeSystemDisk struct {
-	CdcId    *string `pulumi:"cdcId"`
-	DiskId   *string `pulumi:"diskId"`
-	DiskSize *int    `pulumi:"diskSize"`
+	// ID of the dedicated cluster to which the instance belongs.
+	CdcId *string `pulumi:"cdcId"`
+	// System disk ID. System disks whose type is LOCAL_BASIC or LOCAL_SSD do not have an ID and do not support this parameter.
+	DiskId *string `pulumi:"diskId"`
+	// System disk size; unit: GB; default value: 50 GB.
+	DiskSize *int `pulumi:"diskSize"`
+	// System disk type. Valid values:- LOCAL_BASIC: local disk
+	// - LOCAL_SSD: local SSD disk
+	// - CLOUD_BASIC: ordinary cloud disk
+	// - CLOUD_SSD: SSD cloud disk
+	// - CLOUD_PREMIUM: Premium cloud storage
+	// - CLOUD_BSSD: Balanced SSD
+	//   The disk currently in stock will be used by default.
 	DiskType *string `pulumi:"diskType"`
 }
 
 // ModifyInstanceDiskTypeSystemDiskInput is an input type that accepts ModifyInstanceDiskTypeSystemDiskArgs and ModifyInstanceDiskTypeSystemDiskOutput values.
 // You can construct a concrete instance of `ModifyInstanceDiskTypeSystemDiskInput` via:
 //
-//          ModifyInstanceDiskTypeSystemDiskArgs{...}
+//	ModifyInstanceDiskTypeSystemDiskArgs{...}
 type ModifyInstanceDiskTypeSystemDiskInput interface {
 	pulumi.Input
 
@@ -6681,9 +6784,19 @@ type ModifyInstanceDiskTypeSystemDiskInput interface {
 }
 
 type ModifyInstanceDiskTypeSystemDiskArgs struct {
-	CdcId    pulumi.StringPtrInput `pulumi:"cdcId"`
-	DiskId   pulumi.StringPtrInput `pulumi:"diskId"`
-	DiskSize pulumi.IntPtrInput    `pulumi:"diskSize"`
+	// ID of the dedicated cluster to which the instance belongs.
+	CdcId pulumi.StringPtrInput `pulumi:"cdcId"`
+	// System disk ID. System disks whose type is LOCAL_BASIC or LOCAL_SSD do not have an ID and do not support this parameter.
+	DiskId pulumi.StringPtrInput `pulumi:"diskId"`
+	// System disk size; unit: GB; default value: 50 GB.
+	DiskSize pulumi.IntPtrInput `pulumi:"diskSize"`
+	// System disk type. Valid values:- LOCAL_BASIC: local disk
+	// - LOCAL_SSD: local SSD disk
+	// - CLOUD_BASIC: ordinary cloud disk
+	// - CLOUD_SSD: SSD cloud disk
+	// - CLOUD_PREMIUM: Premium cloud storage
+	// - CLOUD_BSSD: Balanced SSD
+	//   The disk currently in stock will be used by default.
 	DiskType pulumi.StringPtrInput `pulumi:"diskType"`
 }
 
@@ -6710,11 +6823,11 @@ func (i ModifyInstanceDiskTypeSystemDiskArgs) ToModifyInstanceDiskTypeSystemDisk
 // ModifyInstanceDiskTypeSystemDiskPtrInput is an input type that accepts ModifyInstanceDiskTypeSystemDiskArgs, ModifyInstanceDiskTypeSystemDiskPtr and ModifyInstanceDiskTypeSystemDiskPtrOutput values.
 // You can construct a concrete instance of `ModifyInstanceDiskTypeSystemDiskPtrInput` via:
 //
-//          ModifyInstanceDiskTypeSystemDiskArgs{...}
+//	        ModifyInstanceDiskTypeSystemDiskArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type ModifyInstanceDiskTypeSystemDiskPtrInput interface {
 	pulumi.Input
 
@@ -6764,18 +6877,28 @@ func (o ModifyInstanceDiskTypeSystemDiskOutput) ToModifyInstanceDiskTypeSystemDi
 	}).(ModifyInstanceDiskTypeSystemDiskPtrOutput)
 }
 
+// ID of the dedicated cluster to which the instance belongs.
 func (o ModifyInstanceDiskTypeSystemDiskOutput) CdcId() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ModifyInstanceDiskTypeSystemDisk) *string { return v.CdcId }).(pulumi.StringPtrOutput)
 }
 
+// System disk ID. System disks whose type is LOCAL_BASIC or LOCAL_SSD do not have an ID and do not support this parameter.
 func (o ModifyInstanceDiskTypeSystemDiskOutput) DiskId() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ModifyInstanceDiskTypeSystemDisk) *string { return v.DiskId }).(pulumi.StringPtrOutput)
 }
 
+// System disk size; unit: GB; default value: 50 GB.
 func (o ModifyInstanceDiskTypeSystemDiskOutput) DiskSize() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v ModifyInstanceDiskTypeSystemDisk) *int { return v.DiskSize }).(pulumi.IntPtrOutput)
 }
 
+// System disk type. Valid values:- LOCAL_BASIC: local disk
+//   - LOCAL_SSD: local SSD disk
+//   - CLOUD_BASIC: ordinary cloud disk
+//   - CLOUD_SSD: SSD cloud disk
+//   - CLOUD_PREMIUM: Premium cloud storage
+//   - CLOUD_BSSD: Balanced SSD
+//     The disk currently in stock will be used by default.
 func (o ModifyInstanceDiskTypeSystemDiskOutput) DiskType() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ModifyInstanceDiskTypeSystemDisk) *string { return v.DiskType }).(pulumi.StringPtrOutput)
 }
@@ -6804,6 +6927,7 @@ func (o ModifyInstanceDiskTypeSystemDiskPtrOutput) Elem() ModifyInstanceDiskType
 	}).(ModifyInstanceDiskTypeSystemDiskOutput)
 }
 
+// ID of the dedicated cluster to which the instance belongs.
 func (o ModifyInstanceDiskTypeSystemDiskPtrOutput) CdcId() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ModifyInstanceDiskTypeSystemDisk) *string {
 		if v == nil {
@@ -6813,6 +6937,7 @@ func (o ModifyInstanceDiskTypeSystemDiskPtrOutput) CdcId() pulumi.StringPtrOutpu
 	}).(pulumi.StringPtrOutput)
 }
 
+// System disk ID. System disks whose type is LOCAL_BASIC or LOCAL_SSD do not have an ID and do not support this parameter.
 func (o ModifyInstanceDiskTypeSystemDiskPtrOutput) DiskId() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ModifyInstanceDiskTypeSystemDisk) *string {
 		if v == nil {
@@ -6822,6 +6947,7 @@ func (o ModifyInstanceDiskTypeSystemDiskPtrOutput) DiskId() pulumi.StringPtrOutp
 	}).(pulumi.StringPtrOutput)
 }
 
+// System disk size; unit: GB; default value: 50 GB.
 func (o ModifyInstanceDiskTypeSystemDiskPtrOutput) DiskSize() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *ModifyInstanceDiskTypeSystemDisk) *int {
 		if v == nil {
@@ -6831,6 +6957,13 @@ func (o ModifyInstanceDiskTypeSystemDiskPtrOutput) DiskSize() pulumi.IntPtrOutpu
 	}).(pulumi.IntPtrOutput)
 }
 
+// System disk type. Valid values:- LOCAL_BASIC: local disk
+//   - LOCAL_SSD: local SSD disk
+//   - CLOUD_BASIC: ordinary cloud disk
+//   - CLOUD_SSD: SSD cloud disk
+//   - CLOUD_PREMIUM: Premium cloud storage
+//   - CLOUD_BSSD: Balanced SSD
+//     The disk currently in stock will be used by default.
 func (o ModifyInstanceDiskTypeSystemDiskPtrOutput) DiskType() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ModifyInstanceDiskTypeSystemDisk) *string {
 		if v == nil {
@@ -6841,14 +6974,16 @@ func (o ModifyInstanceDiskTypeSystemDiskPtrOutput) DiskType() pulumi.StringPtrOu
 }
 
 type RenewHostHostChargePrepaid struct {
-	Period    int     `pulumi:"period"`
+	// The duration of purchasing an instance, unit: month. Value range: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36.
+	Period int `pulumi:"period"`
+	// Auto renewal flag. Valid values:&lt;br&gt;&lt;li&gt;NOTIFY_AND_AUTO_RENEW: notify upon expiration and renew automatically&lt;br&gt;&lt;li&gt;NOTIFY_AND_MANUAL_RENEW: notify upon expiration but do not renew automatically&lt;br&gt;&lt;li&gt;DISABLE_NOTIFY_AND_MANUAL_RENEW: neither notify upon expiration nor renew automatically&lt;br&gt;&lt;br&gt;Default value: NOTIFY_AND_AUTO_RENEW。If this parameter is specified as NOTIFY_AND_AUTO_RENEW, the instance will be automatically renewed on a monthly basis if the account balance is sufficient.
 	RenewFlag *string `pulumi:"renewFlag"`
 }
 
 // RenewHostHostChargePrepaidInput is an input type that accepts RenewHostHostChargePrepaidArgs and RenewHostHostChargePrepaidOutput values.
 // You can construct a concrete instance of `RenewHostHostChargePrepaidInput` via:
 //
-//          RenewHostHostChargePrepaidArgs{...}
+//	RenewHostHostChargePrepaidArgs{...}
 type RenewHostHostChargePrepaidInput interface {
 	pulumi.Input
 
@@ -6857,7 +6992,9 @@ type RenewHostHostChargePrepaidInput interface {
 }
 
 type RenewHostHostChargePrepaidArgs struct {
-	Period    pulumi.IntInput       `pulumi:"period"`
+	// The duration of purchasing an instance, unit: month. Value range: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36.
+	Period pulumi.IntInput `pulumi:"period"`
+	// Auto renewal flag. Valid values:&lt;br&gt;&lt;li&gt;NOTIFY_AND_AUTO_RENEW: notify upon expiration and renew automatically&lt;br&gt;&lt;li&gt;NOTIFY_AND_MANUAL_RENEW: notify upon expiration but do not renew automatically&lt;br&gt;&lt;li&gt;DISABLE_NOTIFY_AND_MANUAL_RENEW: neither notify upon expiration nor renew automatically&lt;br&gt;&lt;br&gt;Default value: NOTIFY_AND_AUTO_RENEW。If this parameter is specified as NOTIFY_AND_AUTO_RENEW, the instance will be automatically renewed on a monthly basis if the account balance is sufficient.
 	RenewFlag pulumi.StringPtrInput `pulumi:"renewFlag"`
 }
 
@@ -6884,11 +7021,11 @@ func (i RenewHostHostChargePrepaidArgs) ToRenewHostHostChargePrepaidPtrOutputWit
 // RenewHostHostChargePrepaidPtrInput is an input type that accepts RenewHostHostChargePrepaidArgs, RenewHostHostChargePrepaidPtr and RenewHostHostChargePrepaidPtrOutput values.
 // You can construct a concrete instance of `RenewHostHostChargePrepaidPtrInput` via:
 //
-//          RenewHostHostChargePrepaidArgs{...}
+//	        RenewHostHostChargePrepaidArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type RenewHostHostChargePrepaidPtrInput interface {
 	pulumi.Input
 
@@ -6938,10 +7075,12 @@ func (o RenewHostHostChargePrepaidOutput) ToRenewHostHostChargePrepaidPtrOutputW
 	}).(RenewHostHostChargePrepaidPtrOutput)
 }
 
+// The duration of purchasing an instance, unit: month. Value range: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36.
 func (o RenewHostHostChargePrepaidOutput) Period() pulumi.IntOutput {
 	return o.ApplyT(func(v RenewHostHostChargePrepaid) int { return v.Period }).(pulumi.IntOutput)
 }
 
+// Auto renewal flag. Valid values:&lt;br&gt;&lt;li&gt;NOTIFY_AND_AUTO_RENEW: notify upon expiration and renew automatically&lt;br&gt;&lt;li&gt;NOTIFY_AND_MANUAL_RENEW: notify upon expiration but do not renew automatically&lt;br&gt;&lt;li&gt;DISABLE_NOTIFY_AND_MANUAL_RENEW: neither notify upon expiration nor renew automatically&lt;br&gt;&lt;br&gt;Default value: NOTIFY_AND_AUTO_RENEW。If this parameter is specified as NOTIFY_AND_AUTO_RENEW, the instance will be automatically renewed on a monthly basis if the account balance is sufficient.
 func (o RenewHostHostChargePrepaidOutput) RenewFlag() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v RenewHostHostChargePrepaid) *string { return v.RenewFlag }).(pulumi.StringPtrOutput)
 }
@@ -6970,6 +7109,7 @@ func (o RenewHostHostChargePrepaidPtrOutput) Elem() RenewHostHostChargePrepaidOu
 	}).(RenewHostHostChargePrepaidOutput)
 }
 
+// The duration of purchasing an instance, unit: month. Value range: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36.
 func (o RenewHostHostChargePrepaidPtrOutput) Period() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *RenewHostHostChargePrepaid) *int {
 		if v == nil {
@@ -6979,6 +7119,7 @@ func (o RenewHostHostChargePrepaidPtrOutput) Period() pulumi.IntPtrOutput {
 	}).(pulumi.IntPtrOutput)
 }
 
+// Auto renewal flag. Valid values:&lt;br&gt;&lt;li&gt;NOTIFY_AND_AUTO_RENEW: notify upon expiration and renew automatically&lt;br&gt;&lt;li&gt;NOTIFY_AND_MANUAL_RENEW: notify upon expiration but do not renew automatically&lt;br&gt;&lt;li&gt;DISABLE_NOTIFY_AND_MANUAL_RENEW: neither notify upon expiration nor renew automatically&lt;br&gt;&lt;br&gt;Default value: NOTIFY_AND_AUTO_RENEW。If this parameter is specified as NOTIFY_AND_AUTO_RENEW, the instance will be automatically renewed on a monthly basis if the account balance is sufficient.
 func (o RenewHostHostChargePrepaidPtrOutput) RenewFlag() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *RenewHostHostChargePrepaid) *string {
 		if v == nil {
@@ -6992,17 +7133,13 @@ type RenewInstanceInstanceChargePrepaid struct {
 	// Subscription period; unit: month; valid values: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36, 48, 60. Note: This field may return null, indicating that no valid value is found.
 	Period int `pulumi:"period"`
 	// Auto renewal flag. Valid values:
-	// - `NOTIFY_AND_AUTO_RENEW`: notify upon expiration and renew automatically;
-	// - `NOTIFY_AND_MANUAL_RENEW`: notify upon expiration but do not renew automatically;
-	// - `DISABLE_NOTIFY_AND_MANUAL_RENEW`: neither notify upon expiration nor renew automatically;
-	//   Default value: NOTIFY_AND_MANUAL_RENEW. If this parameter is specified as NOTIFY_AND_AUTO_RENEW, the instance will be automatically renewed on a monthly basis if the account balance is sufficient. Note: This field may return null, indicating that no valid value is found.
 	RenewFlag *string `pulumi:"renewFlag"`
 }
 
 // RenewInstanceInstanceChargePrepaidInput is an input type that accepts RenewInstanceInstanceChargePrepaidArgs and RenewInstanceInstanceChargePrepaidOutput values.
 // You can construct a concrete instance of `RenewInstanceInstanceChargePrepaidInput` via:
 //
-//          RenewInstanceInstanceChargePrepaidArgs{...}
+//	RenewInstanceInstanceChargePrepaidArgs{...}
 type RenewInstanceInstanceChargePrepaidInput interface {
 	pulumi.Input
 
@@ -7014,10 +7151,6 @@ type RenewInstanceInstanceChargePrepaidArgs struct {
 	// Subscription period; unit: month; valid values: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36, 48, 60. Note: This field may return null, indicating that no valid value is found.
 	Period pulumi.IntInput `pulumi:"period"`
 	// Auto renewal flag. Valid values:
-	// - `NOTIFY_AND_AUTO_RENEW`: notify upon expiration and renew automatically;
-	// - `NOTIFY_AND_MANUAL_RENEW`: notify upon expiration but do not renew automatically;
-	// - `DISABLE_NOTIFY_AND_MANUAL_RENEW`: neither notify upon expiration nor renew automatically;
-	//   Default value: NOTIFY_AND_MANUAL_RENEW. If this parameter is specified as NOTIFY_AND_AUTO_RENEW, the instance will be automatically renewed on a monthly basis if the account balance is sufficient. Note: This field may return null, indicating that no valid value is found.
 	RenewFlag pulumi.StringPtrInput `pulumi:"renewFlag"`
 }
 
@@ -7044,11 +7177,11 @@ func (i RenewInstanceInstanceChargePrepaidArgs) ToRenewInstanceInstanceChargePre
 // RenewInstanceInstanceChargePrepaidPtrInput is an input type that accepts RenewInstanceInstanceChargePrepaidArgs, RenewInstanceInstanceChargePrepaidPtr and RenewInstanceInstanceChargePrepaidPtrOutput values.
 // You can construct a concrete instance of `RenewInstanceInstanceChargePrepaidPtrInput` via:
 //
-//          RenewInstanceInstanceChargePrepaidArgs{...}
+//	        RenewInstanceInstanceChargePrepaidArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type RenewInstanceInstanceChargePrepaidPtrInput interface {
 	pulumi.Input
 
@@ -7104,10 +7237,6 @@ func (o RenewInstanceInstanceChargePrepaidOutput) Period() pulumi.IntOutput {
 }
 
 // Auto renewal flag. Valid values:
-// - `NOTIFY_AND_AUTO_RENEW`: notify upon expiration and renew automatically;
-// - `NOTIFY_AND_MANUAL_RENEW`: notify upon expiration but do not renew automatically;
-// - `DISABLE_NOTIFY_AND_MANUAL_RENEW`: neither notify upon expiration nor renew automatically;
-//   Default value: NOTIFY_AND_MANUAL_RENEW. If this parameter is specified as NOTIFY_AND_AUTO_RENEW, the instance will be automatically renewed on a monthly basis if the account balance is sufficient. Note: This field may return null, indicating that no valid value is found.
 func (o RenewInstanceInstanceChargePrepaidOutput) RenewFlag() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v RenewInstanceInstanceChargePrepaid) *string { return v.RenewFlag }).(pulumi.StringPtrOutput)
 }
@@ -7147,10 +7276,6 @@ func (o RenewInstanceInstanceChargePrepaidPtrOutput) Period() pulumi.IntPtrOutpu
 }
 
 // Auto renewal flag. Valid values:
-// - `NOTIFY_AND_AUTO_RENEW`: notify upon expiration and renew automatically;
-// - `NOTIFY_AND_MANUAL_RENEW`: notify upon expiration but do not renew automatically;
-// - `DISABLE_NOTIFY_AND_MANUAL_RENEW`: neither notify upon expiration nor renew automatically;
-//   Default value: NOTIFY_AND_MANUAL_RENEW. If this parameter is specified as NOTIFY_AND_AUTO_RENEW, the instance will be automatically renewed on a monthly basis if the account balance is sufficient. Note: This field may return null, indicating that no valid value is found.
 func (o RenewInstanceInstanceChargePrepaidPtrOutput) RenewFlag() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *RenewInstanceInstanceChargePrepaid) *string {
 		if v == nil {
@@ -7172,7 +7297,7 @@ type GetChcDeniedActionsChcHostDeniedActionSet struct {
 // GetChcDeniedActionsChcHostDeniedActionSetInput is an input type that accepts GetChcDeniedActionsChcHostDeniedActionSetArgs and GetChcDeniedActionsChcHostDeniedActionSetOutput values.
 // You can construct a concrete instance of `GetChcDeniedActionsChcHostDeniedActionSetInput` via:
 //
-//          GetChcDeniedActionsChcHostDeniedActionSetArgs{...}
+//	GetChcDeniedActionsChcHostDeniedActionSetArgs{...}
 type GetChcDeniedActionsChcHostDeniedActionSetInput interface {
 	pulumi.Input
 
@@ -7204,7 +7329,7 @@ func (i GetChcDeniedActionsChcHostDeniedActionSetArgs) ToGetChcDeniedActionsChcH
 // GetChcDeniedActionsChcHostDeniedActionSetArrayInput is an input type that accepts GetChcDeniedActionsChcHostDeniedActionSetArray and GetChcDeniedActionsChcHostDeniedActionSetArrayOutput values.
 // You can construct a concrete instance of `GetChcDeniedActionsChcHostDeniedActionSetArrayInput` via:
 //
-//          GetChcDeniedActionsChcHostDeniedActionSetArray{ GetChcDeniedActionsChcHostDeniedActionSetArgs{...} }
+//	GetChcDeniedActionsChcHostDeniedActionSetArray{ GetChcDeniedActionsChcHostDeniedActionSetArgs{...} }
 type GetChcDeniedActionsChcHostDeniedActionSetArrayInput interface {
 	pulumi.Input
 
@@ -7323,7 +7448,7 @@ type GetChcHostsChcHostSet struct {
 // GetChcHostsChcHostSetInput is an input type that accepts GetChcHostsChcHostSetArgs and GetChcHostsChcHostSetOutput values.
 // You can construct a concrete instance of `GetChcHostsChcHostSetInput` via:
 //
-//          GetChcHostsChcHostSetArgs{...}
+//	GetChcHostsChcHostSetArgs{...}
 type GetChcHostsChcHostSetInput interface {
 	pulumi.Input
 
@@ -7391,7 +7516,7 @@ func (i GetChcHostsChcHostSetArgs) ToGetChcHostsChcHostSetOutputWithContext(ctx 
 // GetChcHostsChcHostSetArrayInput is an input type that accepts GetChcHostsChcHostSetArray and GetChcHostsChcHostSetArrayOutput values.
 // You can construct a concrete instance of `GetChcHostsChcHostSetArrayInput` via:
 //
-//          GetChcHostsChcHostSetArray{ GetChcHostsChcHostSetArgs{...} }
+//	GetChcHostsChcHostSetArray{ GetChcHostsChcHostSetArgs{...} }
 type GetChcHostsChcHostSetArrayInput interface {
 	pulumi.Input
 
@@ -7572,7 +7697,7 @@ type GetChcHostsChcHostSetBmcVirtualPrivateCloud struct {
 // GetChcHostsChcHostSetBmcVirtualPrivateCloudInput is an input type that accepts GetChcHostsChcHostSetBmcVirtualPrivateCloudArgs and GetChcHostsChcHostSetBmcVirtualPrivateCloudOutput values.
 // You can construct a concrete instance of `GetChcHostsChcHostSetBmcVirtualPrivateCloudInput` via:
 //
-//          GetChcHostsChcHostSetBmcVirtualPrivateCloudArgs{...}
+//	GetChcHostsChcHostSetBmcVirtualPrivateCloudArgs{...}
 type GetChcHostsChcHostSetBmcVirtualPrivateCloudInput interface {
 	pulumi.Input
 
@@ -7608,7 +7733,7 @@ func (i GetChcHostsChcHostSetBmcVirtualPrivateCloudArgs) ToGetChcHostsChcHostSet
 // GetChcHostsChcHostSetBmcVirtualPrivateCloudArrayInput is an input type that accepts GetChcHostsChcHostSetBmcVirtualPrivateCloudArray and GetChcHostsChcHostSetBmcVirtualPrivateCloudArrayOutput values.
 // You can construct a concrete instance of `GetChcHostsChcHostSetBmcVirtualPrivateCloudArrayInput` via:
 //
-//          GetChcHostsChcHostSetBmcVirtualPrivateCloudArray{ GetChcHostsChcHostSetBmcVirtualPrivateCloudArgs{...} }
+//	GetChcHostsChcHostSetBmcVirtualPrivateCloudArray{ GetChcHostsChcHostSetBmcVirtualPrivateCloudArgs{...} }
 type GetChcHostsChcHostSetBmcVirtualPrivateCloudArrayInput interface {
 	pulumi.Input
 
@@ -7705,7 +7830,7 @@ type GetChcHostsChcHostSetDeployVirtualPrivateCloud struct {
 // GetChcHostsChcHostSetDeployVirtualPrivateCloudInput is an input type that accepts GetChcHostsChcHostSetDeployVirtualPrivateCloudArgs and GetChcHostsChcHostSetDeployVirtualPrivateCloudOutput values.
 // You can construct a concrete instance of `GetChcHostsChcHostSetDeployVirtualPrivateCloudInput` via:
 //
-//          GetChcHostsChcHostSetDeployVirtualPrivateCloudArgs{...}
+//	GetChcHostsChcHostSetDeployVirtualPrivateCloudArgs{...}
 type GetChcHostsChcHostSetDeployVirtualPrivateCloudInput interface {
 	pulumi.Input
 
@@ -7741,7 +7866,7 @@ func (i GetChcHostsChcHostSetDeployVirtualPrivateCloudArgs) ToGetChcHostsChcHost
 // GetChcHostsChcHostSetDeployVirtualPrivateCloudArrayInput is an input type that accepts GetChcHostsChcHostSetDeployVirtualPrivateCloudArray and GetChcHostsChcHostSetDeployVirtualPrivateCloudArrayOutput values.
 // You can construct a concrete instance of `GetChcHostsChcHostSetDeployVirtualPrivateCloudArrayInput` via:
 //
-//          GetChcHostsChcHostSetDeployVirtualPrivateCloudArray{ GetChcHostsChcHostSetDeployVirtualPrivateCloudArgs{...} }
+//	GetChcHostsChcHostSetDeployVirtualPrivateCloudArray{ GetChcHostsChcHostSetDeployVirtualPrivateCloudArgs{...} }
 type GetChcHostsChcHostSetDeployVirtualPrivateCloudArrayInput interface {
 	pulumi.Input
 
@@ -7838,7 +7963,7 @@ type GetChcHostsChcHostSetPlacement struct {
 // GetChcHostsChcHostSetPlacementInput is an input type that accepts GetChcHostsChcHostSetPlacementArgs and GetChcHostsChcHostSetPlacementOutput values.
 // You can construct a concrete instance of `GetChcHostsChcHostSetPlacementInput` via:
 //
-//          GetChcHostsChcHostSetPlacementArgs{...}
+//	GetChcHostsChcHostSetPlacementArgs{...}
 type GetChcHostsChcHostSetPlacementInput interface {
 	pulumi.Input
 
@@ -7874,7 +7999,7 @@ func (i GetChcHostsChcHostSetPlacementArgs) ToGetChcHostsChcHostSetPlacementOutp
 // GetChcHostsChcHostSetPlacementArrayInput is an input type that accepts GetChcHostsChcHostSetPlacementArray and GetChcHostsChcHostSetPlacementArrayOutput values.
 // You can construct a concrete instance of `GetChcHostsChcHostSetPlacementArrayInput` via:
 //
-//          GetChcHostsChcHostSetPlacementArray{ GetChcHostsChcHostSetPlacementArgs{...} }
+//	GetChcHostsChcHostSetPlacementArray{ GetChcHostsChcHostSetPlacementArgs{...} }
 type GetChcHostsChcHostSetPlacementArrayInput interface {
 	pulumi.Input
 
@@ -7965,7 +8090,7 @@ type GetChcHostsFilter struct {
 // GetChcHostsFilterInput is an input type that accepts GetChcHostsFilterArgs and GetChcHostsFilterOutput values.
 // You can construct a concrete instance of `GetChcHostsFilterInput` via:
 //
-//          GetChcHostsFilterArgs{...}
+//	GetChcHostsFilterArgs{...}
 type GetChcHostsFilterInput interface {
 	pulumi.Input
 
@@ -7995,7 +8120,7 @@ func (i GetChcHostsFilterArgs) ToGetChcHostsFilterOutputWithContext(ctx context.
 // GetChcHostsFilterArrayInput is an input type that accepts GetChcHostsFilterArray and GetChcHostsFilterArrayOutput values.
 // You can construct a concrete instance of `GetChcHostsFilterArrayInput` via:
 //
-//          GetChcHostsFilterArray{ GetChcHostsFilterArgs{...} }
+//	GetChcHostsFilterArray{ GetChcHostsFilterArgs{...} }
 type GetChcHostsFilterArrayInput interface {
 	pulumi.Input
 
@@ -8071,7 +8196,7 @@ type GetImageSharePermissionSharePermissionSet struct {
 // GetImageSharePermissionSharePermissionSetInput is an input type that accepts GetImageSharePermissionSharePermissionSetArgs and GetImageSharePermissionSharePermissionSetOutput values.
 // You can construct a concrete instance of `GetImageSharePermissionSharePermissionSetInput` via:
 //
-//          GetImageSharePermissionSharePermissionSetArgs{...}
+//	GetImageSharePermissionSharePermissionSetArgs{...}
 type GetImageSharePermissionSharePermissionSetInput interface {
 	pulumi.Input
 
@@ -8101,7 +8226,7 @@ func (i GetImageSharePermissionSharePermissionSetArgs) ToGetImageSharePermission
 // GetImageSharePermissionSharePermissionSetArrayInput is an input type that accepts GetImageSharePermissionSharePermissionSetArray and GetImageSharePermissionSharePermissionSetArrayOutput values.
 // You can construct a concrete instance of `GetImageSharePermissionSharePermissionSetArrayInput` via:
 //
-//          GetImageSharePermissionSharePermissionSetArray{ GetImageSharePermissionSharePermissionSetArgs{...} }
+//	GetImageSharePermissionSharePermissionSetArray{ GetImageSharePermissionSharePermissionSetArgs{...} }
 type GetImageSharePermissionSharePermissionSetArrayInput interface {
 	pulumi.Input
 
@@ -8177,7 +8302,7 @@ type GetImportImageOsImportImageOsListSupported struct {
 // GetImportImageOsImportImageOsListSupportedInput is an input type that accepts GetImportImageOsImportImageOsListSupportedArgs and GetImportImageOsImportImageOsListSupportedOutput values.
 // You can construct a concrete instance of `GetImportImageOsImportImageOsListSupportedInput` via:
 //
-//          GetImportImageOsImportImageOsListSupportedArgs{...}
+//	GetImportImageOsImportImageOsListSupportedArgs{...}
 type GetImportImageOsImportImageOsListSupportedInput interface {
 	pulumi.Input
 
@@ -8207,7 +8332,7 @@ func (i GetImportImageOsImportImageOsListSupportedArgs) ToGetImportImageOsImport
 // GetImportImageOsImportImageOsListSupportedArrayInput is an input type that accepts GetImportImageOsImportImageOsListSupportedArray and GetImportImageOsImportImageOsListSupportedArrayOutput values.
 // You can construct a concrete instance of `GetImportImageOsImportImageOsListSupportedArrayInput` via:
 //
-//          GetImportImageOsImportImageOsListSupportedArray{ GetImportImageOsImportImageOsListSupportedArgs{...} }
+//	GetImportImageOsImportImageOsListSupportedArray{ GetImportImageOsImportImageOsListSupportedArgs{...} }
 type GetImportImageOsImportImageOsListSupportedArrayInput interface {
 	pulumi.Input
 
@@ -8285,7 +8410,7 @@ type GetImportImageOsImportImageOsVersionSet struct {
 // GetImportImageOsImportImageOsVersionSetInput is an input type that accepts GetImportImageOsImportImageOsVersionSetArgs and GetImportImageOsImportImageOsVersionSetOutput values.
 // You can construct a concrete instance of `GetImportImageOsImportImageOsVersionSetInput` via:
 //
-//          GetImportImageOsImportImageOsVersionSetArgs{...}
+//	GetImportImageOsImportImageOsVersionSetArgs{...}
 type GetImportImageOsImportImageOsVersionSetInput interface {
 	pulumi.Input
 
@@ -8317,7 +8442,7 @@ func (i GetImportImageOsImportImageOsVersionSetArgs) ToGetImportImageOsImportIma
 // GetImportImageOsImportImageOsVersionSetArrayInput is an input type that accepts GetImportImageOsImportImageOsVersionSetArray and GetImportImageOsImportImageOsVersionSetArrayOutput values.
 // You can construct a concrete instance of `GetImportImageOsImportImageOsVersionSetArrayInput` via:
 //
-//          GetImportImageOsImportImageOsVersionSetArray{ GetImportImageOsImportImageOsVersionSetArgs{...} }
+//	GetImportImageOsImportImageOsVersionSetArray{ GetImportImageOsImportImageOsVersionSetArgs{...} }
 type GetImportImageOsImportImageOsVersionSetArrayInput interface {
 	pulumi.Input
 
@@ -8398,7 +8523,7 @@ type GetInstancesModificationFilter struct {
 // GetInstancesModificationFilterInput is an input type that accepts GetInstancesModificationFilterArgs and GetInstancesModificationFilterOutput values.
 // You can construct a concrete instance of `GetInstancesModificationFilterInput` via:
 //
-//          GetInstancesModificationFilterArgs{...}
+//	GetInstancesModificationFilterArgs{...}
 type GetInstancesModificationFilterInput interface {
 	pulumi.Input
 
@@ -8428,7 +8553,7 @@ func (i GetInstancesModificationFilterArgs) ToGetInstancesModificationFilterOutp
 // GetInstancesModificationFilterArrayInput is an input type that accepts GetInstancesModificationFilterArray and GetInstancesModificationFilterArrayOutput values.
 // You can construct a concrete instance of `GetInstancesModificationFilterArrayInput` via:
 //
-//          GetInstancesModificationFilterArray{ GetInstancesModificationFilterArgs{...} }
+//	GetInstancesModificationFilterArray{ GetInstancesModificationFilterArgs{...} }
 type GetInstancesModificationFilterArrayInput interface {
 	pulumi.Input
 
@@ -8506,7 +8631,7 @@ type GetInstancesModificationInstanceTypeConfigStatusList struct {
 // GetInstancesModificationInstanceTypeConfigStatusListInput is an input type that accepts GetInstancesModificationInstanceTypeConfigStatusListArgs and GetInstancesModificationInstanceTypeConfigStatusListOutput values.
 // You can construct a concrete instance of `GetInstancesModificationInstanceTypeConfigStatusListInput` via:
 //
-//          GetInstancesModificationInstanceTypeConfigStatusListArgs{...}
+//	GetInstancesModificationInstanceTypeConfigStatusListArgs{...}
 type GetInstancesModificationInstanceTypeConfigStatusListInput interface {
 	pulumi.Input
 
@@ -8538,7 +8663,7 @@ func (i GetInstancesModificationInstanceTypeConfigStatusListArgs) ToGetInstances
 // GetInstancesModificationInstanceTypeConfigStatusListArrayInput is an input type that accepts GetInstancesModificationInstanceTypeConfigStatusListArray and GetInstancesModificationInstanceTypeConfigStatusListArrayOutput values.
 // You can construct a concrete instance of `GetInstancesModificationInstanceTypeConfigStatusListArrayInput` via:
 //
-//          GetInstancesModificationInstanceTypeConfigStatusListArray{ GetInstancesModificationInstanceTypeConfigStatusListArgs{...} }
+//	GetInstancesModificationInstanceTypeConfigStatusListArray{ GetInstancesModificationInstanceTypeConfigStatusListArgs{...} }
 type GetInstancesModificationInstanceTypeConfigStatusListArrayInput interface {
 	pulumi.Input
 
@@ -8631,7 +8756,7 @@ type GetInstancesModificationInstanceTypeConfigStatusListInstanceTypeConfig stru
 // GetInstancesModificationInstanceTypeConfigStatusListInstanceTypeConfigInput is an input type that accepts GetInstancesModificationInstanceTypeConfigStatusListInstanceTypeConfigArgs and GetInstancesModificationInstanceTypeConfigStatusListInstanceTypeConfigOutput values.
 // You can construct a concrete instance of `GetInstancesModificationInstanceTypeConfigStatusListInstanceTypeConfigInput` via:
 //
-//          GetInstancesModificationInstanceTypeConfigStatusListInstanceTypeConfigArgs{...}
+//	GetInstancesModificationInstanceTypeConfigStatusListInstanceTypeConfigArgs{...}
 type GetInstancesModificationInstanceTypeConfigStatusListInstanceTypeConfigInput interface {
 	pulumi.Input
 
@@ -8671,7 +8796,7 @@ func (i GetInstancesModificationInstanceTypeConfigStatusListInstanceTypeConfigAr
 // GetInstancesModificationInstanceTypeConfigStatusListInstanceTypeConfigArrayInput is an input type that accepts GetInstancesModificationInstanceTypeConfigStatusListInstanceTypeConfigArray and GetInstancesModificationInstanceTypeConfigStatusListInstanceTypeConfigArrayOutput values.
 // You can construct a concrete instance of `GetInstancesModificationInstanceTypeConfigStatusListInstanceTypeConfigArrayInput` via:
 //
-//          GetInstancesModificationInstanceTypeConfigStatusListInstanceTypeConfigArray{ GetInstancesModificationInstanceTypeConfigStatusListInstanceTypeConfigArgs{...} }
+//	GetInstancesModificationInstanceTypeConfigStatusListInstanceTypeConfigArray{ GetInstancesModificationInstanceTypeConfigStatusListInstanceTypeConfigArgs{...} }
 type GetInstancesModificationInstanceTypeConfigStatusListInstanceTypeConfigArrayInput interface {
 	pulumi.Input
 

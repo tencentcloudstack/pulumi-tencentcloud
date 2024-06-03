@@ -15,18 +15,19 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var foo = new Tencentcloud.Cam.Policy("foo", new()
     ///     {
-    ///         var foo = new Tencentcloud.Cam.Policy("foo", new Tencentcloud.Cam.PolicyArgs
-    ///         {
-    ///             Description = "tf_test",
-    ///             Document = @"{
+    ///         Description = "tf_test",
+    ///         Document = @"{
     ///   ""version"": ""2.0"",
     ///   ""statement"": [
     ///     {
@@ -42,22 +43,22 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam
     /// }
     /// 
     /// ",
-    ///         });
-    ///     }
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// CAM policy can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Cam/policy:Policy foo 26655801
+    /// $ pulumi import tencentcloud:Cam/policy:Policy foo 26655801
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Cam/policy:Policy")]
-    public partial class Policy : Pulumi.CustomResource
+    public partial class Policy : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Create time of the CAM policy.
@@ -72,10 +73,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam
         public Output<string?> Description { get; private set; } = null!;
 
         /// <summary>
-        /// Document of the CAM policy. The syntax refers to [CAM
-        /// POLICY](https://intl.cloud.tencent.com/document/product/598/10604). There are some notes when using this para in
-        /// terraform: 1. The elements in JSON claimed supporting two types as `string` and `array` only support type `array`; 2.
-        /// Terraform does not support the `root` syntax, when it appears, it must be replaced with the uin it stands for.
+        /// Document of the CAM policy. The syntax refers to CAM POLICY Name of CAM policy.
         /// </summary>
         [Output("document")]
         public Output<string> Document { get; private set; } = null!;
@@ -143,7 +141,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam
         }
     }
 
-    public sealed class PolicyArgs : Pulumi.ResourceArgs
+    public sealed class PolicyArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Description of the CAM policy.
@@ -152,10 +150,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam
         public Input<string>? Description { get; set; }
 
         /// <summary>
-        /// Document of the CAM policy. The syntax refers to [CAM
-        /// POLICY](https://intl.cloud.tencent.com/document/product/598/10604). There are some notes when using this para in
-        /// terraform: 1. The elements in JSON claimed supporting two types as `string` and `array` only support type `array`; 2.
-        /// Terraform does not support the `root` syntax, when it appears, it must be replaced with the uin it stands for.
+        /// Document of the CAM policy. The syntax refers to CAM POLICY Name of CAM policy.
         /// </summary>
         [Input("document", required: true)]
         public Input<string> Document { get; set; } = null!;
@@ -169,9 +164,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam
         public PolicyArgs()
         {
         }
+        public static new PolicyArgs Empty => new PolicyArgs();
     }
 
-    public sealed class PolicyState : Pulumi.ResourceArgs
+    public sealed class PolicyState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Create time of the CAM policy.
@@ -186,10 +182,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam
         public Input<string>? Description { get; set; }
 
         /// <summary>
-        /// Document of the CAM policy. The syntax refers to [CAM
-        /// POLICY](https://intl.cloud.tencent.com/document/product/598/10604). There are some notes when using this para in
-        /// terraform: 1. The elements in JSON claimed supporting two types as `string` and `array` only support type `array`; 2.
-        /// Terraform does not support the `root` syntax, when it appears, it must be replaced with the uin it stands for.
+        /// Document of the CAM policy. The syntax refers to CAM POLICY Name of CAM policy.
         /// </summary>
         [Input("document")]
         public Input<string>? Document { get; set; }
@@ -215,5 +208,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam
         public PolicyState()
         {
         }
+        public static new PolicyState Empty => new PolicyState();
     }
 }

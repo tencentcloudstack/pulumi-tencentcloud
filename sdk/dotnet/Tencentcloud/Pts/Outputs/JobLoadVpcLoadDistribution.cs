@@ -14,9 +14,21 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Pts.Outputs
     [OutputType]
     public sealed class JobLoadVpcLoadDistribution
     {
+        /// <summary>
+        /// Region.
+        /// </summary>
         public readonly string? Region;
+        /// <summary>
+        /// Regional ID.
+        /// </summary>
         public readonly int RegionId;
+        /// <summary>
+        /// Subnet ID list.
+        /// </summary>
         public readonly ImmutableArray<string> SubnetIds;
+        /// <summary>
+        /// VPC ID.
+        /// </summary>
         public readonly string? VpcId;
 
         [OutputConstructor]

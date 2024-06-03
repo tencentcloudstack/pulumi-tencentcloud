@@ -16,81 +16,87 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Waf
     /// &gt; **NOTE:** Region only supports `ap-guangzhou` and `ap-seoul`.
     /// 
     /// ## Example Usage
+    /// 
     /// ### Create a basic waf premium saas instance
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var example = new Tencentcloud.Waf.SaasInstance("example", new()
     ///     {
-    ///         var example = new Tencentcloud.Waf.SaasInstance("example", new Tencentcloud.Waf.SaasInstanceArgs
-    ///         {
-    ///             GoodsCategory = "premium_saas",
-    ///             InstanceName = "tf-example-saas-waf",
-    ///         });
-    ///     }
+    ///         GoodsCategory = "premium_saas",
+    ///         InstanceName = "tf-example-saas-waf",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
+    /// 
     /// ### Create a complete waf ultimate_saas instance
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var example = new Tencentcloud.Waf.SaasInstance("example", new()
     ///     {
-    ///         var example = new Tencentcloud.Waf.SaasInstance("example", new Tencentcloud.Waf.SaasInstanceArgs
-    ///         {
-    ///             ApiSecurity = 1,
-    ///             AutoRenewFlag = 1,
-    ///             BotManagement = 1,
-    ///             ElasticMode = 1,
-    ///             GoodsCategory = "ultimate_saas",
-    ///             InstanceName = "tf-example-saas-waf",
-    ///             RealRegion = "gz",
-    ///             TimeSpan = 1,
-    ///             TimeUnit = "m",
-    ///         });
-    ///     }
+    ///         ApiSecurity = 1,
+    ///         AutoRenewFlag = 1,
+    ///         BotManagement = 1,
+    ///         ElasticMode = 1,
+    ///         GoodsCategory = "ultimate_saas",
+    ///         InstanceName = "tf-example-saas-waf",
+    ///         RealRegion = "gz",
+    ///         TimeSpan = 1,
+    ///         TimeUnit = "m",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
+    /// 
     /// ### Set waf ultimate_saas instance qps limit
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var example = new Tencentcloud.Waf.SaasInstance("example", new()
     ///     {
-    ///         var example = new Tencentcloud.Waf.SaasInstance("example", new Tencentcloud.Waf.SaasInstanceArgs
-    ///         {
-    ///             ApiSecurity = 1,
-    ///             AutoRenewFlag = 1,
-    ///             BotManagement = 1,
-    ///             ElasticMode = 1,
-    ///             GoodsCategory = "ultimate_saas",
-    ///             InstanceName = "tf-example-saas-waf",
-    ///             QpsLimit = 200000,
-    ///             RealRegion = "gz",
-    ///             TimeSpan = 1,
-    ///             TimeUnit = "m",
-    ///         });
-    ///     }
+    ///         ApiSecurity = 1,
+    ///         AutoRenewFlag = 1,
+    ///         BotManagement = 1,
+    ///         ElasticMode = 1,
+    ///         GoodsCategory = "ultimate_saas",
+    ///         InstanceName = "tf-example-saas-waf",
+    ///         QpsLimit = 200000,
+    ///         RealRegion = "gz",
+    ///         TimeSpan = 1,
+    ///         TimeUnit = "m",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Waf/saasInstance:SaasInstance")]
-    public partial class SaasInstance : Pulumi.CustomResource
+    public partial class SaasInstance : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Whether to purchase API Security, 1: yes, 0: no. Default is 0.
@@ -227,7 +233,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Waf
         }
     }
 
-    public sealed class SaasInstanceArgs : Pulumi.ResourceArgs
+    public sealed class SaasInstanceArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Whether to purchase API Security, 1: yes, 0: no. Default is 0.
@@ -292,9 +298,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Waf
         public SaasInstanceArgs()
         {
         }
+        public static new SaasInstanceArgs Empty => new SaasInstanceArgs();
     }
 
-    public sealed class SaasInstanceState : Pulumi.ResourceArgs
+    public sealed class SaasInstanceState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Whether to purchase API Security, 1: yes, 0: no. Default is 0.
@@ -389,5 +396,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Waf
         public SaasInstanceState()
         {
         }
+        public static new SaasInstanceState Empty => new SaasInstanceState();
     }
 }

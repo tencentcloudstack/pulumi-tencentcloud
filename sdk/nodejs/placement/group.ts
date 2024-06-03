@@ -9,21 +9,21 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const foo = new tencentcloud.Placement.Group("foo", {
- *     type: "HOST",
- * });
+ * const foo = new tencentcloud.placement.Group("foo", {type: "HOST"});
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * Placement group can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Placement/group:Group foo ps-ilan8vjf
+ * $ pulumi import tencentcloud:Placement/group:Group foo ps-ilan8vjf
  * ```
  */
 export class Group extends pulumi.CustomResource {

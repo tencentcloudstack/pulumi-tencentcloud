@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap.Inputs
 {
 
-    public sealed class CustomHeaderHeaderArgs : Pulumi.ResourceArgs
+    public sealed class CustomHeaderHeaderArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Header name.
@@ -28,5 +28,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap.Inputs
         public CustomHeaderHeaderArgs()
         {
         }
+        public static new CustomHeaderHeaderArgs Empty => new CustomHeaderHeaderArgs();
     }
 }

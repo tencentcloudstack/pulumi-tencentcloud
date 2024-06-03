@@ -15,39 +15,41 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var vpc = new Tencentcloud.Vpc.Instance("vpc", new()
     ///     {
-    ///         var vpc = new Tencentcloud.Vpc.Instance("vpc", new Tencentcloud.Vpc.InstanceArgs
-    ///         {
-    ///             CidrBlock = "10.0.0.0/16",
-    ///         });
-    ///         var example = new Tencentcloud.Vpc.LocalGateway("example", new Tencentcloud.Vpc.LocalGatewayArgs
-    ///         {
-    ///             LocalGatewayName = "tf-example",
-    ///             VpcId = vpc.Id,
-    ///             CdcId = "cluster-j9gyu1iy",
-    ///         });
-    ///     }
+    ///         CidrBlock = "10.0.0.0/16",
+    ///     });
     /// 
-    /// }
+    ///     var example = new Tencentcloud.Vpc.LocalGateway("example", new()
+    ///     {
+    ///         LocalGatewayName = "tf-example",
+    ///         VpcId = vpc.Id,
+    ///         CdcId = "cluster-j9gyu1iy",
+    ///     });
+    /// 
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// vpc local_gateway can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Vpc/localGateway:LocalGateway local_gateway local_gateway_id
+    /// $ pulumi import tencentcloud:Vpc/localGateway:LocalGateway local_gateway local_gateway_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Vpc/localGateway:LocalGateway")]
-    public partial class LocalGateway : Pulumi.CustomResource
+    public partial class LocalGateway : global::Pulumi.CustomResource
     {
         /// <summary>
         /// CDC instance ID.
@@ -112,7 +114,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         }
     }
 
-    public sealed class LocalGatewayArgs : Pulumi.ResourceArgs
+    public sealed class LocalGatewayArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// CDC instance ID.
@@ -135,9 +137,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         public LocalGatewayArgs()
         {
         }
+        public static new LocalGatewayArgs Empty => new LocalGatewayArgs();
     }
 
-    public sealed class LocalGatewayState : Pulumi.ResourceArgs
+    public sealed class LocalGatewayState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// CDC instance ID.
@@ -160,5 +163,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         public LocalGatewayState()
         {
         }
+        public static new LocalGatewayState Empty => new LocalGatewayState();
     }
 }

@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,21 +11,20 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const deliveryConfigByGroupId = pulumi.output(tencentcloud.Tsf.getDeliveryConfigByGroupId({
+ * const deliveryConfigByGroupId = tencentcloud.Tsf.getDeliveryConfigByGroupId({
  *     groupId: "group-yrjkln9v",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getDeliveryConfigByGroupId(args: GetDeliveryConfigByGroupIdArgs, opts?: pulumi.InvokeOptions): Promise<GetDeliveryConfigByGroupIdResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Tsf/getDeliveryConfigByGroupId:getDeliveryConfigByGroupId", {
         "groupId": args.groupId,
         "resultOutputFile": args.resultOutputFile,
@@ -60,9 +60,24 @@ export interface GetDeliveryConfigByGroupIdResult {
      */
     readonly results: outputs.Tsf.GetDeliveryConfigByGroupIdResult[];
 }
-
+/**
+ * Use this data source to query detailed information of tsf deliveryConfigByGroupId
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const deliveryConfigByGroupId = tencentcloud.Tsf.getDeliveryConfigByGroupId({
+ *     groupId: "group-yrjkln9v",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getDeliveryConfigByGroupIdOutput(args: GetDeliveryConfigByGroupIdOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetDeliveryConfigByGroupIdResult> {
-    return pulumi.output(args).apply(a => getDeliveryConfigByGroupId(a, opts))
+    return pulumi.output(args).apply((a: any) => getDeliveryConfigByGroupId(a, opts))
 }
 
 /**

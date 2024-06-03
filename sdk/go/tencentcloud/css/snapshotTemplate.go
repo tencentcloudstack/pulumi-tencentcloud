@@ -7,49 +7,55 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a css snapshotTemplate
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Css"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Css"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Css.NewSnapshotTemplate(ctx, "snapshotTemplate", &Css.SnapshotTemplateArgs{
-// 			CosAppId:         pulumi.Int(1308919341),
-// 			CosBucket:        pulumi.String("keep-bucket"),
-// 			CosRegion:        pulumi.String("ap-guangzhou"),
-// 			Description:      pulumi.String("snapshot template"),
-// 			Height:           pulumi.Int(0),
-// 			PornFlag:         pulumi.Int(0),
-// 			SnapshotInterval: pulumi.Int(2),
-// 			TemplateName:     pulumi.String("tf-snapshot-template"),
-// 			Width:            pulumi.Int(0),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Css.NewSnapshotTemplate(ctx, "snapshotTemplate", &Css.SnapshotTemplateArgs{
+//				CosAppId:         pulumi.Int(1308919341),
+//				CosBucket:        pulumi.String("keep-bucket"),
+//				CosRegion:        pulumi.String("ap-guangzhou"),
+//				Description:      pulumi.String("snapshot template"),
+//				Height:           pulumi.Int(0),
+//				PornFlag:         pulumi.Int(0),
+//				SnapshotInterval: pulumi.Int(2),
+//				TemplateName:     pulumi.String("tf-snapshot-template"),
+//				Width:            pulumi.Int(0),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // css snapshot_template can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Css/snapshotTemplate:SnapshotTemplate snapshot_template templateId
+// $ pulumi import tencentcloud:Css/snapshotTemplate:SnapshotTemplate snapshot_template templateId
 // ```
 type SnapshotTemplate struct {
 	pulumi.CustomResourceState
@@ -97,7 +103,7 @@ func NewSnapshotTemplate(ctx *pulumi.Context,
 	if args.TemplateName == nil {
 		return nil, errors.New("invalid value for required argument 'TemplateName'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource SnapshotTemplate
 	err := ctx.RegisterResource("tencentcloud:Css/snapshotTemplate:SnapshotTemplate", name, args, &resource, opts...)
 	if err != nil {
@@ -250,7 +256,7 @@ func (i *SnapshotTemplate) ToSnapshotTemplateOutputWithContext(ctx context.Conte
 // SnapshotTemplateArrayInput is an input type that accepts SnapshotTemplateArray and SnapshotTemplateArrayOutput values.
 // You can construct a concrete instance of `SnapshotTemplateArrayInput` via:
 //
-//          SnapshotTemplateArray{ SnapshotTemplateArgs{...} }
+//	SnapshotTemplateArray{ SnapshotTemplateArgs{...} }
 type SnapshotTemplateArrayInput interface {
 	pulumi.Input
 
@@ -275,7 +281,7 @@ func (i SnapshotTemplateArray) ToSnapshotTemplateArrayOutputWithContext(ctx cont
 // SnapshotTemplateMapInput is an input type that accepts SnapshotTemplateMap and SnapshotTemplateMapOutput values.
 // You can construct a concrete instance of `SnapshotTemplateMapInput` via:
 //
-//          SnapshotTemplateMap{ "key": SnapshotTemplateArgs{...} }
+//	SnapshotTemplateMap{ "key": SnapshotTemplateArgs{...} }
 type SnapshotTemplateMapInput interface {
 	pulumi.Input
 

@@ -9,20 +9,19 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const example = pulumi.output(tencentcloud.Ssm.getServiceStatus());
+ * const example = tencentcloud.Ssm.getServiceStatus({});
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getServiceStatus(args?: GetServiceStatusArgs, opts?: pulumi.InvokeOptions): Promise<GetServiceStatusResult> {
     args = args || {};
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Ssm/getServiceStatus:getServiceStatus", {
         "resultOutputFile": args.resultOutputFile,
     }, opts);
@@ -60,9 +59,22 @@ export interface GetServiceStatusResult {
      */
     readonly serviceEnabled: boolean;
 }
-
+/**
+ * Use this data source to query detailed information of ssm serviceStatus
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const example = tencentcloud.Ssm.getServiceStatus({});
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getServiceStatusOutput(args?: GetServiceStatusOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetServiceStatusResult> {
-    return pulumi.output(args).apply(a => getServiceStatus(a, opts))
+    return pulumi.output(args).apply((a: any) => getServiceStatus(a, opts))
 }
 
 /**

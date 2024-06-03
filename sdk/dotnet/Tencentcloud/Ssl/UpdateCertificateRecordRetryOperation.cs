@@ -15,33 +15,34 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssl
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var updateCertificateRecordRetry = new Tencentcloud.Ssl.UpdateCertificateRecordRetryOperation("updateCertificateRecordRetry", new()
     ///     {
-    ///         var updateCertificateRecordRetry = new Tencentcloud.Ssl.UpdateCertificateRecordRetryOperation("updateCertificateRecordRetry", new Tencentcloud.Ssl.UpdateCertificateRecordRetryOperationArgs
-    ///         {
-    ///             DeployRecordId = 1603,
-    ///         });
-    ///     }
+    ///         DeployRecordId = 1603,
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// ssl update_certificate_record_retry can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Ssl/updateCertificateRecordRetryOperation:UpdateCertificateRecordRetryOperation update_certificate_record_retry update_certificate_record_retry_id
+    /// $ pulumi import tencentcloud:Ssl/updateCertificateRecordRetryOperation:UpdateCertificateRecordRetryOperation update_certificate_record_retry update_certificate_record_retry_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Ssl/updateCertificateRecordRetryOperation:UpdateCertificateRecordRetryOperation")]
-    public partial class UpdateCertificateRecordRetryOperation : Pulumi.CustomResource
+    public partial class UpdateCertificateRecordRetryOperation : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Deployment record details ID to be retried.
@@ -100,7 +101,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssl
         }
     }
 
-    public sealed class UpdateCertificateRecordRetryOperationArgs : Pulumi.ResourceArgs
+    public sealed class UpdateCertificateRecordRetryOperationArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Deployment record details ID to be retried.
@@ -117,9 +118,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssl
         public UpdateCertificateRecordRetryOperationArgs()
         {
         }
+        public static new UpdateCertificateRecordRetryOperationArgs Empty => new UpdateCertificateRecordRetryOperationArgs();
     }
 
-    public sealed class UpdateCertificateRecordRetryOperationState : Pulumi.ResourceArgs
+    public sealed class UpdateCertificateRecordRetryOperationState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Deployment record details ID to be retried.
@@ -136,5 +138,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssl
         public UpdateCertificateRecordRetryOperationState()
         {
         }
+        public static new UpdateCertificateRecordRetryOperationState Empty => new UpdateCertificateRecordRetryOperationState();
     }
 }

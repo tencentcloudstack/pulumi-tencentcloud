@@ -7,47 +7,53 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a kms whiteBoxKey
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Kms"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Kms"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Kms.NewWhiteBoxKey(ctx, "example", &Kms.WhiteBoxKeyArgs{
-// 			Algorithm:   pulumi.String("SM4"),
-// 			Alias:       pulumi.String("tf_example"),
-// 			Description: pulumi.String("test desc."),
-// 			Status:      pulumi.String("Enabled"),
-// 			Tags: pulumi.AnyMap{
-// 				"createdBy": pulumi.Any("terraform"),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Kms.NewWhiteBoxKey(ctx, "example", &Kms.WhiteBoxKeyArgs{
+//				Algorithm:   pulumi.String("SM4"),
+//				Alias:       pulumi.String("tf_example"),
+//				Description: pulumi.String("test desc."),
+//				Status:      pulumi.String("Enabled"),
+//				Tags: pulumi.Map{
+//					"createdBy": pulumi.Any("terraform"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // kms white_box_key can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Kms/whiteBoxKey:WhiteBoxKey example 244dab8c-6dad-11ea-80c6-5254006d0810
+// $ pulumi import tencentcloud:Kms/whiteBoxKey:WhiteBoxKey example 244dab8c-6dad-11ea-80c6-5254006d0810
 // ```
 type WhiteBoxKey struct {
 	pulumi.CustomResourceState
@@ -77,7 +83,7 @@ func NewWhiteBoxKey(ctx *pulumi.Context,
 	if args.Alias == nil {
 		return nil, errors.New("invalid value for required argument 'Alias'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource WhiteBoxKey
 	err := ctx.RegisterResource("tencentcloud:Kms/whiteBoxKey:WhiteBoxKey", name, args, &resource, opts...)
 	if err != nil {
@@ -182,7 +188,7 @@ func (i *WhiteBoxKey) ToWhiteBoxKeyOutputWithContext(ctx context.Context) WhiteB
 // WhiteBoxKeyArrayInput is an input type that accepts WhiteBoxKeyArray and WhiteBoxKeyArrayOutput values.
 // You can construct a concrete instance of `WhiteBoxKeyArrayInput` via:
 //
-//          WhiteBoxKeyArray{ WhiteBoxKeyArgs{...} }
+//	WhiteBoxKeyArray{ WhiteBoxKeyArgs{...} }
 type WhiteBoxKeyArrayInput interface {
 	pulumi.Input
 
@@ -207,7 +213,7 @@ func (i WhiteBoxKeyArray) ToWhiteBoxKeyArrayOutputWithContext(ctx context.Contex
 // WhiteBoxKeyMapInput is an input type that accepts WhiteBoxKeyMap and WhiteBoxKeyMapOutput values.
 // You can construct a concrete instance of `WhiteBoxKeyMapInput` via:
 //
-//          WhiteBoxKeyMap{ "key": WhiteBoxKeyArgs{...} }
+//	WhiteBoxKeyMap{ "key": WhiteBoxKeyArgs{...} }
 type WhiteBoxKeyMapInput interface {
 	pulumi.Input
 

@@ -9,22 +9,24 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const foo = new tencentcloud.Ha.VipEipAttachment("foo", {
+ * const foo = new tencentcloud.ha.VipEipAttachment("foo", {
  *     addressIp: "1.1.1.1",
  *     havipId: "havip-kjqwe4ba",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * HA VIP EIP attachment can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Ha/vipEipAttachment:VipEipAttachment foo havip-kjqwe4ba#1.1.1.1
+ * $ pulumi import tencentcloud:Ha/vipEipAttachment:VipEipAttachment foo havip-kjqwe4ba#1.1.1.1
  * ```
  */
 export class VipEipAttachment extends pulumi.CustomResource {

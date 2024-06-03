@@ -13,79 +13,16 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vod
     /// <summary>
     /// Provide a resource to create a VOD adaptive dynamic streaming template.
     /// 
-    /// ## Example Usage
-    /// 
-    /// ```csharp
-    /// using Pulumi;
-    /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
-    /// 
-    /// class MyStack : Stack
-    /// {
-    ///     public MyStack()
-    ///     {
-    ///         var foo = new Tencentcloud.Vod.AdaptiveDynamicStreamingTemplate("foo", new Tencentcloud.Vod.AdaptiveDynamicStreamingTemplateArgs
-    ///         {
-    ///             Comment = "test",
-    ///             DisableHigherVideoBitrate = false,
-    ///             DisableHigherVideoResolution = false,
-    ///             DrmType = "SimpleAES",
-    ///             Format = "HLS",
-    ///             StreamInfos = 
-    ///             {
-    ///                 new Tencentcloud.Vod.Inputs.AdaptiveDynamicStreamingTemplateStreamInfoArgs
-    ///                 {
-    ///                     Audio = new Tencentcloud.Vod.Inputs.AdaptiveDynamicStreamingTemplateStreamInfoAudioArgs
-    ///                     {
-    ///                         AudioChannel = "dual",
-    ///                         Bitrate = 129,
-    ///                         Codec = "libmp3lame",
-    ///                         SampleRate = 44100,
-    ///                     },
-    ///                     RemoveAudio = false,
-    ///                     Video = new Tencentcloud.Vod.Inputs.AdaptiveDynamicStreamingTemplateStreamInfoVideoArgs
-    ///                     {
-    ///                         Bitrate = 129,
-    ///                         Codec = "libx265",
-    ///                         FillType = "stretch",
-    ///                         Fps = 4,
-    ///                         Height = 128,
-    ///                         ResolutionAdaptive = false,
-    ///                         Width = 128,
-    ///                     },
-    ///                 },
-    ///                 new Tencentcloud.Vod.Inputs.AdaptiveDynamicStreamingTemplateStreamInfoArgs
-    ///                 {
-    ///                     Audio = new Tencentcloud.Vod.Inputs.AdaptiveDynamicStreamingTemplateStreamInfoAudioArgs
-    ///                     {
-    ///                         Bitrate = 256,
-    ///                         Codec = "libfdk_aac",
-    ///                         SampleRate = 44100,
-    ///                     },
-    ///                     RemoveAudio = true,
-    ///                     Video = new Tencentcloud.Vod.Inputs.AdaptiveDynamicStreamingTemplateStreamInfoVideoArgs
-    ///                     {
-    ///                         Bitrate = 256,
-    ///                         Codec = "libx264",
-    ///                         Fps = 4,
-    ///                     },
-    ///                 },
-    ///             },
-    ///         });
-    ///     }
-    /// 
-    /// }
-    /// ```
-    /// 
     /// ## Import
     /// 
-    /// VOD adaptive dynamic streaming template can be imported using the id, e.g.
+    /// VOD adaptive dynamic streaming template can be imported using the id($subAppId#$templateId), e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Vod/adaptiveDynamicStreamingTemplate:AdaptiveDynamicStreamingTemplate foo 169141
+    /// $ pulumi import tencentcloud:Vod/adaptiveDynamicStreamingTemplate:AdaptiveDynamicStreamingTemplate foo $subAppId#$templateId
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Vod/adaptiveDynamicStreamingTemplate:AdaptiveDynamicStreamingTemplate")]
-    public partial class AdaptiveDynamicStreamingTemplate : Pulumi.CustomResource
+    public partial class AdaptiveDynamicStreamingTemplate : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Template description. Length limit: 256 characters.
@@ -130,13 +67,22 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vod
         public Output<string> Name { get; private set; } = null!;
 
         /// <summary>
+        /// Segment type, valid when Format is HLS, optional values:
+        /// - ts: ts segment;
+        /// - fmp4: fmp4 segment;
+        /// Default value: ts.
+        /// </summary>
+        [Output("segmentType")]
+        public Output<string> SegmentType { get; private set; } = null!;
+
+        /// <summary>
         /// List of AdaptiveStreamTemplate parameter information of output substream for adaptive bitrate streaming. Up to 10 substreams can be output. Note: the frame rate of all substreams must be the same; otherwise, the frame rate of the first substream will be used as the output frame rate.
         /// </summary>
         [Output("streamInfos")]
         public Output<ImmutableArray<Outputs.AdaptiveDynamicStreamingTemplateStreamInfo>> StreamInfos { get; private set; } = null!;
 
         /// <summary>
-        /// Subapplication ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+        /// The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.
         /// </summary>
         [Output("subAppId")]
         public Output<int?> SubAppId { get; private set; } = null!;
@@ -192,7 +138,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vod
         }
     }
 
-    public sealed class AdaptiveDynamicStreamingTemplateArgs : Pulumi.ResourceArgs
+    public sealed class AdaptiveDynamicStreamingTemplateArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Template description. Length limit: 256 characters.
@@ -230,6 +176,15 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vod
         [Input("name")]
         public Input<string>? Name { get; set; }
 
+        /// <summary>
+        /// Segment type, valid when Format is HLS, optional values:
+        /// - ts: ts segment;
+        /// - fmp4: fmp4 segment;
+        /// Default value: ts.
+        /// </summary>
+        [Input("segmentType")]
+        public Input<string>? SegmentType { get; set; }
+
         [Input("streamInfos", required: true)]
         private InputList<Inputs.AdaptiveDynamicStreamingTemplateStreamInfoArgs>? _streamInfos;
 
@@ -243,7 +198,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vod
         }
 
         /// <summary>
-        /// Subapplication ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+        /// The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.
         /// </summary>
         [Input("subAppId")]
         public Input<int>? SubAppId { get; set; }
@@ -251,9 +206,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vod
         public AdaptiveDynamicStreamingTemplateArgs()
         {
         }
+        public static new AdaptiveDynamicStreamingTemplateArgs Empty => new AdaptiveDynamicStreamingTemplateArgs();
     }
 
-    public sealed class AdaptiveDynamicStreamingTemplateState : Pulumi.ResourceArgs
+    public sealed class AdaptiveDynamicStreamingTemplateState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Template description. Length limit: 256 characters.
@@ -297,6 +253,15 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vod
         [Input("name")]
         public Input<string>? Name { get; set; }
 
+        /// <summary>
+        /// Segment type, valid when Format is HLS, optional values:
+        /// - ts: ts segment;
+        /// - fmp4: fmp4 segment;
+        /// Default value: ts.
+        /// </summary>
+        [Input("segmentType")]
+        public Input<string>? SegmentType { get; set; }
+
         [Input("streamInfos")]
         private InputList<Inputs.AdaptiveDynamicStreamingTemplateStreamInfoGetArgs>? _streamInfos;
 
@@ -310,7 +275,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vod
         }
 
         /// <summary>
-        /// Subapplication ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+        /// The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.
         /// </summary>
         [Input("subAppId")]
         public Input<int>? SubAppId { get; set; }
@@ -324,5 +289,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vod
         public AdaptiveDynamicStreamingTemplateState()
         {
         }
+        public static new AdaptiveDynamicStreamingTemplateState Empty => new AdaptiveDynamicStreamingTemplateState();
     }
 }

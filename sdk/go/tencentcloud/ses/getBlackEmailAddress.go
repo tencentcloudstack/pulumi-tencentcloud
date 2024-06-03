@@ -8,38 +8,43 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Use this data source to query detailed information of ses blackEmailAddress
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Ses"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ses"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ses"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Ses.GetBlackEmailAddress(ctx, &ses.GetBlackEmailAddressArgs{
-// 			EmailAddress: pulumi.StringRef("xxx@mail.qcloud.com"),
-// 			EndDate:      "2020-09-23",
-// 			StartDate:    "2020-09-22",
-// 			TaskId:       pulumi.StringRef("7000"),
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Ses.GetBlackEmailAddress(ctx, &ses.GetBlackEmailAddressArgs{
+//				EmailAddress: pulumi.StringRef("xxx@mail.qcloud.com"),
+//				EndDate:      "2020-09-23",
+//				StartDate:    "2020-09-22",
+//				TaskId:       pulumi.StringRef("7000"),
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 func GetBlackEmailAddress(ctx *pulumi.Context, args *GetBlackEmailAddressArgs, opts ...pulumi.InvokeOption) (*GetBlackEmailAddressResult, error) {
-	opts = pkgInvokeDefaultOpts(opts)
+	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetBlackEmailAddressResult
 	err := ctx.Invoke("tencentcloud:Ses/getBlackEmailAddress:getBlackEmailAddress", args, &rv, opts...)
 	if err != nil {

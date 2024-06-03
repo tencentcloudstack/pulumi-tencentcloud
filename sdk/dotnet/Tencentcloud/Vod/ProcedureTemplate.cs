@@ -13,133 +13,29 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vod
     /// <summary>
     /// Provide a resource to create a VOD procedure template.
     /// 
-    /// ## Example Usage
-    /// 
-    /// ```csharp
-    /// using Pulumi;
-    /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
-    /// 
-    /// class MyStack : Stack
-    /// {
-    ///     public MyStack()
-    ///     {
-    ///         var fooAdaptiveDynamicStreamingTemplate = new Tencentcloud.Vod.AdaptiveDynamicStreamingTemplate("fooAdaptiveDynamicStreamingTemplate", new Tencentcloud.Vod.AdaptiveDynamicStreamingTemplateArgs
-    ///         {
-    ///             Format = "HLS",
-    ///             DrmType = "SimpleAES",
-    ///             DisableHigherVideoBitrate = false,
-    ///             DisableHigherVideoResolution = false,
-    ///             Comment = "test",
-    ///             StreamInfos = 
-    ///             {
-    ///                 new Tencentcloud.Vod.Inputs.AdaptiveDynamicStreamingTemplateStreamInfoArgs
-    ///                 {
-    ///                     Video = new Tencentcloud.Vod.Inputs.AdaptiveDynamicStreamingTemplateStreamInfoVideoArgs
-    ///                     {
-    ///                         Codec = "libx265",
-    ///                         Fps = 4,
-    ///                         Bitrate = 129,
-    ///                         ResolutionAdaptive = false,
-    ///                         Width = 128,
-    ///                         Height = 128,
-    ///                         FillType = "stretch",
-    ///                     },
-    ///                     Audio = new Tencentcloud.Vod.Inputs.AdaptiveDynamicStreamingTemplateStreamInfoAudioArgs
-    ///                     {
-    ///                         Codec = "libmp3lame",
-    ///                         Bitrate = 129,
-    ///                         SampleRate = 44100,
-    ///                         AudioChannel = "dual",
-    ///                     },
-    ///                     RemoveAudio = false,
-    ///                 },
-    ///                 new Tencentcloud.Vod.Inputs.AdaptiveDynamicStreamingTemplateStreamInfoArgs
-    ///                 {
-    ///                     Video = new Tencentcloud.Vod.Inputs.AdaptiveDynamicStreamingTemplateStreamInfoVideoArgs
-    ///                     {
-    ///                         Codec = "libx264",
-    ///                         Fps = 4,
-    ///                         Bitrate = 256,
-    ///                     },
-    ///                     Audio = new Tencentcloud.Vod.Inputs.AdaptiveDynamicStreamingTemplateStreamInfoAudioArgs
-    ///                     {
-    ///                         Codec = "libfdk_aac",
-    ///                         Bitrate = 256,
-    ///                         SampleRate = 44100,
-    ///                     },
-    ///                     RemoveAudio = true,
-    ///                 },
-    ///             },
-    ///         });
-    ///         var fooSnapshotByTimeOffsetTemplate = new Tencentcloud.Vod.SnapshotByTimeOffsetTemplate("fooSnapshotByTimeOffsetTemplate", new Tencentcloud.Vod.SnapshotByTimeOffsetTemplateArgs
-    ///         {
-    ///             Width = 130,
-    ///             Height = 128,
-    ///             ResolutionAdaptive = false,
-    ///             Format = "png",
-    ///             Comment = "test",
-    ///             FillType = "white",
-    ///         });
-    ///         var fooImageSpriteTemplate = new Tencentcloud.Vod.ImageSpriteTemplate("fooImageSpriteTemplate", new Tencentcloud.Vod.ImageSpriteTemplateArgs
-    ///         {
-    ///             SampleType = "Percent",
-    ///             SampleInterval = 10,
-    ///             RowCount = 3,
-    ///             ColumnCount = 3,
-    ///             Comment = "test",
-    ///             FillType = "stretch",
-    ///             Width = 128,
-    ///             Height = 128,
-    ///             ResolutionAdaptive = false,
-    ///         });
-    ///         var fooProcedureTemplate = new Tencentcloud.Vod.ProcedureTemplate("fooProcedureTemplate", new Tencentcloud.Vod.ProcedureTemplateArgs
-    ///         {
-    ///             Comment = "test",
-    ///             MediaProcessTask = new Tencentcloud.Vod.Inputs.ProcedureTemplateMediaProcessTaskArgs
-    ///             {
-    ///                 AdaptiveDynamicStreamingTaskLists = 
-    ///                 {
-    ///                     new Tencentcloud.Vod.Inputs.ProcedureTemplateMediaProcessTaskAdaptiveDynamicStreamingTaskListArgs
-    ///                     {
-    ///                         Definition = fooAdaptiveDynamicStreamingTemplate.Id,
-    ///                     },
-    ///                 },
-    ///                 SnapshotByTimeOffsetTaskLists = 
-    ///                 {
-    ///                     new Tencentcloud.Vod.Inputs.ProcedureTemplateMediaProcessTaskSnapshotByTimeOffsetTaskListArgs
-    ///                     {
-    ///                         Definition = fooSnapshotByTimeOffsetTemplate.Id,
-    ///                         ExtTimeOffsetLists = 
-    ///                         {
-    ///                             "3.5s",
-    ///                         },
-    ///                     },
-    ///                 },
-    ///                 ImageSpriteTaskLists = 
-    ///                 {
-    ///                     new Tencentcloud.Vod.Inputs.ProcedureTemplateMediaProcessTaskImageSpriteTaskListArgs
-    ///                     {
-    ///                         Definition = fooImageSpriteTemplate.Id,
-    ///                     },
-    ///                 },
-    ///             },
-    ///         });
-    ///     }
-    /// 
-    /// }
-    /// ```
-    /// 
     /// ## Import
     /// 
     /// VOD procedure template can be imported using the name, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Vod/procedureTemplate:ProcedureTemplate foo tf-procedure
+    /// $ pulumi import tencentcloud:Vod/procedureTemplate:ProcedureTemplate foo tf-procedure
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Vod/procedureTemplate:ProcedureTemplate")]
-    public partial class ProcedureTemplate : Pulumi.CustomResource
+    public partial class ProcedureTemplate : global::Pulumi.CustomResource
     {
+        /// <summary>
+        /// Parameter of AI-based content analysis task.
+        /// </summary>
+        [Output("aiAnalysisTask")]
+        public Output<Outputs.ProcedureTemplateAiAnalysisTask> AiAnalysisTask { get; private set; } = null!;
+
+        /// <summary>
+        /// Type parameter of AI-based content recognition task.
+        /// </summary>
+        [Output("aiRecognitionTask")]
+        public Output<Outputs.ProcedureTemplateAiRecognitionTask> AiRecognitionTask { get; private set; } = null!;
+
         /// <summary>
         /// Template description. Length limit: 256 characters.
         /// </summary>
@@ -165,10 +61,24 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vod
         public Output<string> Name { get; private set; } = null!;
 
         /// <summary>
-        /// Subapplication ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+        /// Type parameter of AI-based content recognition task.
+        /// </summary>
+        [Output("reviewAudioVideoTask")]
+        public Output<Outputs.ProcedureTemplateReviewAudioVideoTask> ReviewAudioVideoTask { get; private set; } = null!;
+
+        /// <summary>
+        /// The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.
         /// </summary>
         [Output("subAppId")]
         public Output<int?> SubAppId { get; private set; } = null!;
+
+        /// <summary>
+        /// Template type, value range:
+        /// - Preset: system preset template;
+        /// - Custom: user-defined templates.
+        /// </summary>
+        [Output("type")]
+        public Output<string> Type { get; private set; } = null!;
 
         /// <summary>
         /// Last modified time of template in ISO date format.
@@ -221,8 +131,20 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vod
         }
     }
 
-    public sealed class ProcedureTemplateArgs : Pulumi.ResourceArgs
+    public sealed class ProcedureTemplateArgs : global::Pulumi.ResourceArgs
     {
+        /// <summary>
+        /// Parameter of AI-based content analysis task.
+        /// </summary>
+        [Input("aiAnalysisTask")]
+        public Input<Inputs.ProcedureTemplateAiAnalysisTaskArgs>? AiAnalysisTask { get; set; }
+
+        /// <summary>
+        /// Type parameter of AI-based content recognition task.
+        /// </summary>
+        [Input("aiRecognitionTask")]
+        public Input<Inputs.ProcedureTemplateAiRecognitionTaskArgs>? AiRecognitionTask { get; set; }
+
         /// <summary>
         /// Template description. Length limit: 256 characters.
         /// </summary>
@@ -242,7 +164,13 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vod
         public Input<string>? Name { get; set; }
 
         /// <summary>
-        /// Subapplication ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+        /// Type parameter of AI-based content recognition task.
+        /// </summary>
+        [Input("reviewAudioVideoTask")]
+        public Input<Inputs.ProcedureTemplateReviewAudioVideoTaskArgs>? ReviewAudioVideoTask { get; set; }
+
+        /// <summary>
+        /// The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.
         /// </summary>
         [Input("subAppId")]
         public Input<int>? SubAppId { get; set; }
@@ -250,10 +178,23 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vod
         public ProcedureTemplateArgs()
         {
         }
+        public static new ProcedureTemplateArgs Empty => new ProcedureTemplateArgs();
     }
 
-    public sealed class ProcedureTemplateState : Pulumi.ResourceArgs
+    public sealed class ProcedureTemplateState : global::Pulumi.ResourceArgs
     {
+        /// <summary>
+        /// Parameter of AI-based content analysis task.
+        /// </summary>
+        [Input("aiAnalysisTask")]
+        public Input<Inputs.ProcedureTemplateAiAnalysisTaskGetArgs>? AiAnalysisTask { get; set; }
+
+        /// <summary>
+        /// Type parameter of AI-based content recognition task.
+        /// </summary>
+        [Input("aiRecognitionTask")]
+        public Input<Inputs.ProcedureTemplateAiRecognitionTaskGetArgs>? AiRecognitionTask { get; set; }
+
         /// <summary>
         /// Template description. Length limit: 256 characters.
         /// </summary>
@@ -279,10 +220,24 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vod
         public Input<string>? Name { get; set; }
 
         /// <summary>
-        /// Subapplication ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+        /// Type parameter of AI-based content recognition task.
+        /// </summary>
+        [Input("reviewAudioVideoTask")]
+        public Input<Inputs.ProcedureTemplateReviewAudioVideoTaskGetArgs>? ReviewAudioVideoTask { get; set; }
+
+        /// <summary>
+        /// The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.
         /// </summary>
         [Input("subAppId")]
         public Input<int>? SubAppId { get; set; }
+
+        /// <summary>
+        /// Template type, value range:
+        /// - Preset: system preset template;
+        /// - Custom: user-defined templates.
+        /// </summary>
+        [Input("type")]
+        public Input<string>? Type { get; set; }
 
         /// <summary>
         /// Last modified time of template in ISO date format.
@@ -293,5 +248,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vod
         public ProcedureTemplateState()
         {
         }
+        public static new ProcedureTemplateState Empty => new ProcedureTemplateState();
     }
 }

@@ -7,68 +7,73 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a dc dcxExtraConfig
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Dcx"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dcx"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dcx"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Dcx.NewExtraConfig(ctx, "dcxExtraConfig", &Dcx.ExtraConfigArgs{
-// 			Bandwidth: pulumi.Int(10),
-// 			BfdEnable: pulumi.Int(0),
-// 			BfdInfo: &dcx.ExtraConfigBfdInfoArgs{
-// 				Interval:         pulumi.Int(100),
-// 				ProbeFailedTimes: pulumi.Int(3),
-// 			},
-// 			BgpPeer: &dcx.ExtraConfigBgpPeerArgs{
-// 				Asn:     pulumi.Int(65101),
-// 				AuthKey: pulumi.String("test123"),
-// 			},
-// 			CustomerAddress:       pulumi.String("192.168.1.4"),
-// 			DirectConnectTunnelId: pulumi.String("dcx-4z49tnws"),
-// 			EnableBgpCommunity:    pulumi.Bool(false),
-// 			Ipv6Enable:            pulumi.Int(0),
-// 			JumboEnable:           pulumi.Int(0),
-// 			NqaEnable:             pulumi.Int(1),
-// 			NqaInfo: &dcx.ExtraConfigNqaInfoArgs{
-// 				DestinationIp:    pulumi.String("192.168.2.2"),
-// 				Interval:         pulumi.Int(100),
-// 				ProbeFailedTimes: pulumi.Int(3),
-// 			},
-// 			RouteFilterPrefixes: &dcx.ExtraConfigRouteFilterPrefixesArgs{
-// 				Cidr: pulumi.String("192.168.0.0/24"),
-// 			},
-// 			TencentAddress:       pulumi.String("192.168.1.1"),
-// 			TencentBackupAddress: pulumi.String("192.168.1.2"),
-// 			Vlan:                 pulumi.Int(123),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Dcx.NewExtraConfig(ctx, "dcxExtraConfig", &Dcx.ExtraConfigArgs{
+//				Bandwidth: pulumi.Int(10),
+//				BfdEnable: pulumi.Int(0),
+//				BfdInfo: &dcx.ExtraConfigBfdInfoArgs{
+//					Interval:         pulumi.Int(100),
+//					ProbeFailedTimes: pulumi.Int(3),
+//				},
+//				BgpPeer: &dcx.ExtraConfigBgpPeerArgs{
+//					Asn:     pulumi.Int(65101),
+//					AuthKey: pulumi.String("test123"),
+//				},
+//				CustomerAddress:       pulumi.String("192.168.1.4"),
+//				DirectConnectTunnelId: pulumi.String("dcx-4z49tnws"),
+//				EnableBgpCommunity:    pulumi.Bool(false),
+//				Ipv6Enable:            pulumi.Int(0),
+//				JumboEnable:           pulumi.Int(0),
+//				NqaEnable:             pulumi.Int(1),
+//				NqaInfo: &dcx.ExtraConfigNqaInfoArgs{
+//					DestinationIp:    pulumi.String("192.168.2.2"),
+//					Interval:         pulumi.Int(100),
+//					ProbeFailedTimes: pulumi.Int(3),
+//				},
+//				RouteFilterPrefixes: &dcx.ExtraConfigRouteFilterPrefixesArgs{
+//					Cidr: pulumi.String("192.168.0.0/24"),
+//				},
+//				TencentAddress:       pulumi.String("192.168.1.1"),
+//				TencentBackupAddress: pulumi.String("192.168.1.2"),
+//				Vlan:                 pulumi.Int(123),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // dc dcx_extra_config can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Dcx/extraConfig:ExtraConfig dcx_extra_config dcx_id
+// $ pulumi import tencentcloud:Dcx/extraConfig:ExtraConfig dcx_extra_config dcx_id
 // ```
 type ExtraConfig struct {
 	pulumi.CustomResourceState
@@ -115,7 +120,7 @@ func NewExtraConfig(ctx *pulumi.Context,
 	if args.DirectConnectTunnelId == nil {
 		return nil, errors.New("invalid value for required argument 'DirectConnectTunnelId'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource ExtraConfig
 	err := ctx.RegisterResource("tencentcloud:Dcx/extraConfig:ExtraConfig", name, args, &resource, opts...)
 	if err != nil {
@@ -300,7 +305,7 @@ func (i *ExtraConfig) ToExtraConfigOutputWithContext(ctx context.Context) ExtraC
 // ExtraConfigArrayInput is an input type that accepts ExtraConfigArray and ExtraConfigArrayOutput values.
 // You can construct a concrete instance of `ExtraConfigArrayInput` via:
 //
-//          ExtraConfigArray{ ExtraConfigArgs{...} }
+//	ExtraConfigArray{ ExtraConfigArgs{...} }
 type ExtraConfigArrayInput interface {
 	pulumi.Input
 
@@ -325,7 +330,7 @@ func (i ExtraConfigArray) ToExtraConfigArrayOutputWithContext(ctx context.Contex
 // ExtraConfigMapInput is an input type that accepts ExtraConfigMap and ExtraConfigMapOutput values.
 // You can construct a concrete instance of `ExtraConfigMapInput` via:
 //
-//          ExtraConfigMap{ "key": ExtraConfigArgs{...} }
+//	ExtraConfigMap{ "key": ExtraConfigArgs{...} }
 type ExtraConfigMapInput interface {
 	pulumi.Input
 

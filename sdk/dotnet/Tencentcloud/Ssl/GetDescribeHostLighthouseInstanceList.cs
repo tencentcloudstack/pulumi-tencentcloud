@@ -15,66 +15,60 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssl
         /// <summary>
         /// Use this data source to query detailed information of ssl describe_host_lighthouse_instance_list
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var describeHostLighthouseInstanceList = Tencentcloud.Ssl.GetDescribeHostLighthouseInstanceList.Invoke(new()
         ///     {
-        ///         var describeHostLighthouseInstanceList = Output.Create(Tencentcloud.Ssl.GetDescribeHostLighthouseInstanceList.InvokeAsync(new Tencentcloud.Ssl.GetDescribeHostLighthouseInstanceListArgs
-        ///         {
-        ///             CertificateId = "8tvMCvGF",
-        ///             ResourceType = "lighthouse",
-        ///         }));
-        ///     }
+        ///         CertificateId = "8tvMCvGF",
+        ///         ResourceType = "lighthouse",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetDescribeHostLighthouseInstanceListResult> InvokeAsync(GetDescribeHostLighthouseInstanceListArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetDescribeHostLighthouseInstanceListResult>("tencentcloud:Ssl/getDescribeHostLighthouseInstanceList:getDescribeHostLighthouseInstanceList", args ?? new GetDescribeHostLighthouseInstanceListArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetDescribeHostLighthouseInstanceListResult>("tencentcloud:Ssl/getDescribeHostLighthouseInstanceList:getDescribeHostLighthouseInstanceList", args ?? new GetDescribeHostLighthouseInstanceListArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of ssl describe_host_lighthouse_instance_list
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var describeHostLighthouseInstanceList = Tencentcloud.Ssl.GetDescribeHostLighthouseInstanceList.Invoke(new()
         ///     {
-        ///         var describeHostLighthouseInstanceList = Output.Create(Tencentcloud.Ssl.GetDescribeHostLighthouseInstanceList.InvokeAsync(new Tencentcloud.Ssl.GetDescribeHostLighthouseInstanceListArgs
-        ///         {
-        ///             CertificateId = "8tvMCvGF",
-        ///             ResourceType = "lighthouse",
-        ///         }));
-        ///     }
+        ///         CertificateId = "8tvMCvGF",
+        ///         ResourceType = "lighthouse",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetDescribeHostLighthouseInstanceListResult> Invoke(GetDescribeHostLighthouseInstanceListInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetDescribeHostLighthouseInstanceListResult>("tencentcloud:Ssl/getDescribeHostLighthouseInstanceList:getDescribeHostLighthouseInstanceList", args ?? new GetDescribeHostLighthouseInstanceListInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetDescribeHostLighthouseInstanceListResult>("tencentcloud:Ssl/getDescribeHostLighthouseInstanceList:getDescribeHostLighthouseInstanceList", args ?? new GetDescribeHostLighthouseInstanceListInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetDescribeHostLighthouseInstanceListArgs : Pulumi.InvokeArgs
+    public sealed class GetDescribeHostLighthouseInstanceListArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Certificate ID to be deployed.
@@ -115,9 +109,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssl
         public GetDescribeHostLighthouseInstanceListArgs()
         {
         }
+        public static new GetDescribeHostLighthouseInstanceListArgs Empty => new GetDescribeHostLighthouseInstanceListArgs();
     }
 
-    public sealed class GetDescribeHostLighthouseInstanceListInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetDescribeHostLighthouseInstanceListInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Certificate ID to be deployed.
@@ -158,6 +153,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssl
         public GetDescribeHostLighthouseInstanceListInvokeArgs()
         {
         }
+        public static new GetDescribeHostLighthouseInstanceListInvokeArgs Empty => new GetDescribeHostLighthouseInstanceListInvokeArgs();
     }
 
 

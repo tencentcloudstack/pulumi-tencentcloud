@@ -14,12 +14,33 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dts.Outputs
     [OutputType]
     public sealed class GetCompareTasksListConfigObjectItemResult
     {
+        /// <summary>
+        /// database mode.
+        /// </summary>
         public readonly string? DbMode;
+        /// <summary>
+        /// database name.
+        /// </summary>
         public readonly string? DbName;
+        /// <summary>
+        /// schema name.
+        /// </summary>
         public readonly string? SchemaName;
+        /// <summary>
+        /// table mode.
+        /// </summary>
         public readonly string? TableMode;
+        /// <summary>
+        /// table list.
+        /// </summary>
         public readonly ImmutableArray<Outputs.GetCompareTasksListConfigObjectItemTableResult> Tables;
+        /// <summary>
+        /// view mode.
+        /// </summary>
         public readonly string? ViewMode;
+        /// <summary>
+        /// view list.
+        /// </summary>
         public readonly ImmutableArray<Outputs.GetCompareTasksListConfigObjectItemViewResult> Views;
 
         [OutputConstructor]

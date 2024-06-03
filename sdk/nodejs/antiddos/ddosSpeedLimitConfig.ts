@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,11 +11,12 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const ddosSpeedLimitConfig = new tencentcloud.Antiddos.DdosSpeedLimitConfig("ddos_speed_limit_config", {
+ * const ddosSpeedLimitConfig = new tencentcloud.antiddos.DdosSpeedLimitConfig("ddosSpeedLimitConfig", {
  *     ddosSpeedLimitConfig: {
  *         dstPortList: "8000",
  *         mode: 1,
@@ -33,13 +35,14 @@ import * as utilities from "../utilities";
  *     instanceId: "bgp-xxxxxx",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * antiddos ddos_speed_limit_config can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Antiddos/ddosSpeedLimitConfig:DdosSpeedLimitConfig ddos_speed_limit_config ${instanceId}#${configId}s
+ * $ pulumi import tencentcloud:Antiddos/ddosSpeedLimitConfig:DdosSpeedLimitConfig ddos_speed_limit_config ${instanceId}#${configId}s
  * ```
  */
 export class DdosSpeedLimitConfig extends pulumi.CustomResource {

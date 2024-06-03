@@ -7,45 +7,51 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a vpc endPointService
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Vpc.NewEndPointService(ctx, "endPointService", &Vpc.EndPointServiceArgs{
-// 			AutoAcceptFlag:      pulumi.Bool(false),
-// 			EndPointServiceName: pulumi.String("terraform-endpoint-service"),
-// 			ServiceInstanceId:   pulumi.String("lb-o5f6x7ke"),
-// 			ServiceType:         pulumi.String("CLB"),
-// 			VpcId:               pulumi.String("vpc-391sv4w3"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Vpc.NewEndPointService(ctx, "endPointService", &Vpc.EndPointServiceArgs{
+//				AutoAcceptFlag:      pulumi.Bool(false),
+//				EndPointServiceName: pulumi.String("terraform-endpoint-service"),
+//				ServiceInstanceId:   pulumi.String("lb-o5f6x7ke"),
+//				ServiceType:         pulumi.String("CLB"),
+//				VpcId:               pulumi.String("vpc-391sv4w3"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // vpc end_point_service can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Vpc/endPointService:EndPointService end_point_service end_point_service_id
+// $ pulumi import tencentcloud:Vpc/endPointService:EndPointService end_point_service end_point_service_id
 // ```
 type EndPointService struct {
 	pulumi.CustomResourceState
@@ -89,7 +95,7 @@ func NewEndPointService(ctx *pulumi.Context,
 	if args.VpcId == nil {
 		return nil, errors.New("invalid value for required argument 'VpcId'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource EndPointService
 	err := ctx.RegisterResource("tencentcloud:Vpc/endPointService:EndPointService", name, args, &resource, opts...)
 	if err != nil {
@@ -210,7 +216,7 @@ func (i *EndPointService) ToEndPointServiceOutputWithContext(ctx context.Context
 // EndPointServiceArrayInput is an input type that accepts EndPointServiceArray and EndPointServiceArrayOutput values.
 // You can construct a concrete instance of `EndPointServiceArrayInput` via:
 //
-//          EndPointServiceArray{ EndPointServiceArgs{...} }
+//	EndPointServiceArray{ EndPointServiceArgs{...} }
 type EndPointServiceArrayInput interface {
 	pulumi.Input
 
@@ -235,7 +241,7 @@ func (i EndPointServiceArray) ToEndPointServiceArrayOutputWithContext(ctx contex
 // EndPointServiceMapInput is an input type that accepts EndPointServiceMap and EndPointServiceMapOutput values.
 // You can construct a concrete instance of `EndPointServiceMapInput` via:
 //
-//          EndPointServiceMap{ "key": EndPointServiceArgs{...} }
+//	EndPointServiceMap{ "key": EndPointServiceArgs{...} }
 type EndPointServiceMapInput interface {
 	pulumi.Input
 

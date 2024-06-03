@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb.Inputs
 {
 
-    public sealed class SnatIpIpGetArgs : Pulumi.ResourceArgs
+    public sealed class SnatIpIpGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Snat IP.
@@ -28,5 +28,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb.Inputs
         public SnatIpIpGetArgs()
         {
         }
+        public static new SnatIpIpGetArgs Empty => new SnatIpIpGetArgs();
     }
 }

@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cdh.Inputs
 {
 
-    public sealed class InstanceHostResourceArgs : Pulumi.ResourceArgs
+    public sealed class InstanceHostResourceArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// The number of available CPU cores of the instance.
@@ -58,5 +58,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cdh.Inputs
         public InstanceHostResourceArgs()
         {
         }
+        public static new InstanceHostResourceArgs Empty => new InstanceHostResourceArgs();
     }
 }

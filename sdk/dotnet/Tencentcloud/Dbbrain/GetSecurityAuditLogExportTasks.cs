@@ -15,102 +15,98 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dbbrain
         /// <summary>
         /// Use this data source to query detailed information of dbbrain securityAuditLogExportTasks
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var task = new Tencentcloud.Dbbrain.SecurityAuditLogExportTask("task", new()
         ///     {
-        ///         var task = new Tencentcloud.Dbbrain.SecurityAuditLogExportTask("task", new Tencentcloud.Dbbrain.SecurityAuditLogExportTaskArgs
+        ///         SecAuditGroupId = "sec_audit_group_id",
+        ///         StartTime = "start_time",
+        ///         EndTime = "end_time",
+        ///         Product = "mysql",
+        ///         DangerLevels = new[]
         ///         {
-        ///             SecAuditGroupId = "sec_audit_group_id",
-        ///             StartTime = "start_time",
-        ///             EndTime = "end_time",
-        ///             Product = "mysql",
-        ///             DangerLevels = 
-        ///             {
-        ///                 0,
-        ///                 1,
-        ///                 2,
-        ///             },
-        ///         });
-        ///         var tasks = Tencentcloud.Dbbrain.GetSecurityAuditLogExportTasks.Invoke(new Tencentcloud.Dbbrain.GetSecurityAuditLogExportTasksInvokeArgs
-        ///         {
-        ///             SecAuditGroupId = "sec_audit_group_id",
-        ///             Product = "mysql",
-        ///             AsyncRequestIds = 
-        ///             {
-        ///                 task.AsyncRequestId,
-        ///             },
-        ///         });
-        ///     }
+        ///             0,
+        ///             1,
+        ///             2,
+        ///         },
+        ///     });
         /// 
-        /// }
+        ///     var tasks = Tencentcloud.Dbbrain.GetSecurityAuditLogExportTasks.Invoke(new()
+        ///     {
+        ///         SecAuditGroupId = "sec_audit_group_id",
+        ///         Product = "mysql",
+        ///         AsyncRequestIds = new[]
+        ///         {
+        ///             task.AsyncRequestId,
+        ///         },
+        ///     });
+        /// 
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetSecurityAuditLogExportTasksResult> InvokeAsync(GetSecurityAuditLogExportTasksArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetSecurityAuditLogExportTasksResult>("tencentcloud:Dbbrain/getSecurityAuditLogExportTasks:getSecurityAuditLogExportTasks", args ?? new GetSecurityAuditLogExportTasksArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetSecurityAuditLogExportTasksResult>("tencentcloud:Dbbrain/getSecurityAuditLogExportTasks:getSecurityAuditLogExportTasks", args ?? new GetSecurityAuditLogExportTasksArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of dbbrain securityAuditLogExportTasks
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var task = new Tencentcloud.Dbbrain.SecurityAuditLogExportTask("task", new()
         ///     {
-        ///         var task = new Tencentcloud.Dbbrain.SecurityAuditLogExportTask("task", new Tencentcloud.Dbbrain.SecurityAuditLogExportTaskArgs
+        ///         SecAuditGroupId = "sec_audit_group_id",
+        ///         StartTime = "start_time",
+        ///         EndTime = "end_time",
+        ///         Product = "mysql",
+        ///         DangerLevels = new[]
         ///         {
-        ///             SecAuditGroupId = "sec_audit_group_id",
-        ///             StartTime = "start_time",
-        ///             EndTime = "end_time",
-        ///             Product = "mysql",
-        ///             DangerLevels = 
-        ///             {
-        ///                 0,
-        ///                 1,
-        ///                 2,
-        ///             },
-        ///         });
-        ///         var tasks = Tencentcloud.Dbbrain.GetSecurityAuditLogExportTasks.Invoke(new Tencentcloud.Dbbrain.GetSecurityAuditLogExportTasksInvokeArgs
-        ///         {
-        ///             SecAuditGroupId = "sec_audit_group_id",
-        ///             Product = "mysql",
-        ///             AsyncRequestIds = 
-        ///             {
-        ///                 task.AsyncRequestId,
-        ///             },
-        ///         });
-        ///     }
+        ///             0,
+        ///             1,
+        ///             2,
+        ///         },
+        ///     });
         /// 
-        /// }
+        ///     var tasks = Tencentcloud.Dbbrain.GetSecurityAuditLogExportTasks.Invoke(new()
+        ///     {
+        ///         SecAuditGroupId = "sec_audit_group_id",
+        ///         Product = "mysql",
+        ///         AsyncRequestIds = new[]
+        ///         {
+        ///             task.AsyncRequestId,
+        ///         },
+        ///     });
+        /// 
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetSecurityAuditLogExportTasksResult> Invoke(GetSecurityAuditLogExportTasksInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetSecurityAuditLogExportTasksResult>("tencentcloud:Dbbrain/getSecurityAuditLogExportTasks:getSecurityAuditLogExportTasks", args ?? new GetSecurityAuditLogExportTasksInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetSecurityAuditLogExportTasksResult>("tencentcloud:Dbbrain/getSecurityAuditLogExportTasks:getSecurityAuditLogExportTasks", args ?? new GetSecurityAuditLogExportTasksInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetSecurityAuditLogExportTasksArgs : Pulumi.InvokeArgs
+    public sealed class GetSecurityAuditLogExportTasksArgs : global::Pulumi.InvokeArgs
     {
         [Input("asyncRequestIds")]
         private List<int>? _asyncRequestIds;
@@ -145,9 +141,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dbbrain
         public GetSecurityAuditLogExportTasksArgs()
         {
         }
+        public static new GetSecurityAuditLogExportTasksArgs Empty => new GetSecurityAuditLogExportTasksArgs();
     }
 
-    public sealed class GetSecurityAuditLogExportTasksInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetSecurityAuditLogExportTasksInvokeArgs : global::Pulumi.InvokeArgs
     {
         [Input("asyncRequestIds")]
         private InputList<int>? _asyncRequestIds;
@@ -182,6 +179,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dbbrain
         public GetSecurityAuditLogExportTasksInvokeArgs()
         {
         }
+        public static new GetSecurityAuditLogExportTasksInvokeArgs Empty => new GetSecurityAuditLogExportTasksInvokeArgs();
     }
 
 

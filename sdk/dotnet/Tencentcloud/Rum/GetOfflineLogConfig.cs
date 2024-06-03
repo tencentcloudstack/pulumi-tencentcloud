@@ -15,64 +15,58 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Rum
         /// <summary>
         /// Use this data source to query detailed information of rum offlineLogConfig
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var offlineLogConfig = Tencentcloud.Rum.GetOfflineLogConfig.Invoke(new()
         ///     {
-        ///         var offlineLogConfig = Output.Create(Tencentcloud.Rum.GetOfflineLogConfig.InvokeAsync(new Tencentcloud.Rum.GetOfflineLogConfigArgs
-        ///         {
-        ///             ProjectKey = "ZEYrYfvaYQ30jRdmPx",
-        ///         }));
-        ///     }
+        ///         ProjectKey = "ZEYrYfvaYQ30jRdmPx",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetOfflineLogConfigResult> InvokeAsync(GetOfflineLogConfigArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetOfflineLogConfigResult>("tencentcloud:Rum/getOfflineLogConfig:getOfflineLogConfig", args ?? new GetOfflineLogConfigArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetOfflineLogConfigResult>("tencentcloud:Rum/getOfflineLogConfig:getOfflineLogConfig", args ?? new GetOfflineLogConfigArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of rum offlineLogConfig
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var offlineLogConfig = Tencentcloud.Rum.GetOfflineLogConfig.Invoke(new()
         ///     {
-        ///         var offlineLogConfig = Output.Create(Tencentcloud.Rum.GetOfflineLogConfig.InvokeAsync(new Tencentcloud.Rum.GetOfflineLogConfigArgs
-        ///         {
-        ///             ProjectKey = "ZEYrYfvaYQ30jRdmPx",
-        ///         }));
-        ///     }
+        ///         ProjectKey = "ZEYrYfvaYQ30jRdmPx",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetOfflineLogConfigResult> Invoke(GetOfflineLogConfigInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetOfflineLogConfigResult>("tencentcloud:Rum/getOfflineLogConfig:getOfflineLogConfig", args ?? new GetOfflineLogConfigInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetOfflineLogConfigResult>("tencentcloud:Rum/getOfflineLogConfig:getOfflineLogConfig", args ?? new GetOfflineLogConfigInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetOfflineLogConfigArgs : Pulumi.InvokeArgs
+    public sealed class GetOfflineLogConfigArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Unique project key for reporting.
@@ -89,9 +83,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Rum
         public GetOfflineLogConfigArgs()
         {
         }
+        public static new GetOfflineLogConfigArgs Empty => new GetOfflineLogConfigArgs();
     }
 
-    public sealed class GetOfflineLogConfigInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetOfflineLogConfigInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Unique project key for reporting.
@@ -108,6 +103,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Rum
         public GetOfflineLogConfigInvokeArgs()
         {
         }
+        public static new GetOfflineLogConfigInvokeArgs Empty => new GetOfflineLogConfigInvokeArgs();
     }
 
 

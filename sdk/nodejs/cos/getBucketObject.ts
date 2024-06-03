@@ -9,23 +9,22 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const mycos = pulumi.output(tencentcloud.Cos.getBucketObject({
+ * const mycos = tencentcloud.Cos.getBucketObject({
  *     bucket: "mycos-test-1258798060",
  *     key: "hello-world.py",
  *     resultOutputFile: "TFresults",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getBucketObject(args: GetBucketObjectArgs, opts?: pulumi.InvokeOptions): Promise<GetBucketObjectResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Cos/getBucketObject:getBucketObject", {
         "bucket": args.bucket,
         "key": args.key,
@@ -91,9 +90,26 @@ export interface GetBucketObjectResult {
      */
     readonly storageClass: string;
 }
-
+/**
+ * Use this data source to query the metadata of an object stored inside a bucket.
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const mycos = tencentcloud.Cos.getBucketObject({
+ *     bucket: "mycos-test-1258798060",
+ *     key: "hello-world.py",
+ *     resultOutputFile: "TFresults",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getBucketObjectOutput(args: GetBucketObjectOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetBucketObjectResult> {
-    return pulumi.output(args).apply(a => getBucketObject(a, opts))
+    return pulumi.output(args).apply((a: any) => getBucketObject(a, opts))
 }
 
 /**

@@ -7,86 +7,91 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a tem scaleRule
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Tem"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tem"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tem"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Tem.NewScaleRule(ctx, "scaleRule", &Tem.ScaleRuleArgs{
-// 			EnvironmentId: pulumi.String("en-o5edaepv"),
-// 			ApplicationId: pulumi.String("app-3j29aa2p"),
-// 			WorkloadId:    pulumi.Any(resource.Tencentcloud_tem_workload.Workload.Id),
-// 			Autoscaler: &tem.ScaleRuleAutoscalerArgs{
-// 				AutoscalerName: pulumi.String("test3123"),
-// 				Description:    pulumi.String("test"),
-// 				Enabled:        pulumi.Bool(true),
-// 				MinReplicas:    pulumi.Int(1),
-// 				MaxReplicas:    pulumi.Int(4),
-// 				CronHorizontalAutoscalers: tem.ScaleRuleAutoscalerCronHorizontalAutoscalerArray{
-// 					&tem.ScaleRuleAutoscalerCronHorizontalAutoscalerArgs{
-// 						Name:     pulumi.String("test"),
-// 						Period:   pulumi.String("* * *"),
-// 						Priority: pulumi.Int(1),
-// 						Enabled:  pulumi.Bool(true),
-// 						Schedules: tem.ScaleRuleAutoscalerCronHorizontalAutoscalerScheduleArray{
-// 							&tem.ScaleRuleAutoscalerCronHorizontalAutoscalerScheduleArgs{
-// 								StartAt:        pulumi.String("03:00"),
-// 								TargetReplicas: pulumi.Int(1),
-// 							},
-// 						},
-// 					},
-// 					&tem.ScaleRuleAutoscalerCronHorizontalAutoscalerArgs{
-// 						Name:     pulumi.String("test123123"),
-// 						Period:   pulumi.String("* * *"),
-// 						Priority: pulumi.Int(0),
-// 						Enabled:  pulumi.Bool(true),
-// 						Schedules: tem.ScaleRuleAutoscalerCronHorizontalAutoscalerScheduleArray{
-// 							&tem.ScaleRuleAutoscalerCronHorizontalAutoscalerScheduleArgs{
-// 								StartAt:        pulumi.String("04:13"),
-// 								TargetReplicas: pulumi.Int(1),
-// 							},
-// 						},
-// 					},
-// 				},
-// 				HorizontalAutoscalers: tem.ScaleRuleAutoscalerHorizontalAutoscalerArray{
-// 					&tem.ScaleRuleAutoscalerHorizontalAutoscalerArgs{
-// 						Metrics:     pulumi.String("CPU"),
-// 						Enabled:     pulumi.Bool(true),
-// 						MaxReplicas: pulumi.Int(4),
-// 						MinReplicas: pulumi.Int(1),
-// 						Threshold:   pulumi.Int(60),
-// 					},
-// 				},
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Tem.NewScaleRule(ctx, "scaleRule", &Tem.ScaleRuleArgs{
+//				EnvironmentId: pulumi.String("en-o5edaepv"),
+//				ApplicationId: pulumi.String("app-3j29aa2p"),
+//				WorkloadId:    pulumi.Any(resource.Tencentcloud_tem_workload.Workload.Id),
+//				Autoscaler: &tem.ScaleRuleAutoscalerArgs{
+//					AutoscalerName: pulumi.String("test3123"),
+//					Description:    pulumi.String("test"),
+//					Enabled:        pulumi.Bool(true),
+//					MinReplicas:    pulumi.Int(1),
+//					MaxReplicas:    pulumi.Int(4),
+//					CronHorizontalAutoscalers: tem.ScaleRuleAutoscalerCronHorizontalAutoscalerArray{
+//						&tem.ScaleRuleAutoscalerCronHorizontalAutoscalerArgs{
+//							Name:     pulumi.String("test"),
+//							Period:   pulumi.String("* * *"),
+//							Priority: pulumi.Int(1),
+//							Enabled:  pulumi.Bool(true),
+//							Schedules: tem.ScaleRuleAutoscalerCronHorizontalAutoscalerScheduleArray{
+//								&tem.ScaleRuleAutoscalerCronHorizontalAutoscalerScheduleArgs{
+//									StartAt:        pulumi.String("03:00"),
+//									TargetReplicas: pulumi.Int(1),
+//								},
+//							},
+//						},
+//						&tem.ScaleRuleAutoscalerCronHorizontalAutoscalerArgs{
+//							Name:     pulumi.String("test123123"),
+//							Period:   pulumi.String("* * *"),
+//							Priority: pulumi.Int(0),
+//							Enabled:  pulumi.Bool(true),
+//							Schedules: tem.ScaleRuleAutoscalerCronHorizontalAutoscalerScheduleArray{
+//								&tem.ScaleRuleAutoscalerCronHorizontalAutoscalerScheduleArgs{
+//									StartAt:        pulumi.String("04:13"),
+//									TargetReplicas: pulumi.Int(1),
+//								},
+//							},
+//						},
+//					},
+//					HorizontalAutoscalers: tem.ScaleRuleAutoscalerHorizontalAutoscalerArray{
+//						&tem.ScaleRuleAutoscalerHorizontalAutoscalerArgs{
+//							Metrics:     pulumi.String("CPU"),
+//							Enabled:     pulumi.Bool(true),
+//							MaxReplicas: pulumi.Int(4),
+//							MinReplicas: pulumi.Int(1),
+//							Threshold:   pulumi.Int(60),
+//						},
+//					},
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // tem scaleRule can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Tem/scaleRule:ScaleRule scaleRule environmentId#applicationId#scaleRuleId
+// $ pulumi import tencentcloud:Tem/scaleRule:ScaleRule scaleRule environmentId#applicationId#scaleRuleId
 // ```
 type ScaleRule struct {
 	pulumi.CustomResourceState
@@ -120,7 +125,7 @@ func NewScaleRule(ctx *pulumi.Context,
 	if args.WorkloadId == nil {
 		return nil, errors.New("invalid value for required argument 'WorkloadId'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource ScaleRule
 	err := ctx.RegisterResource("tencentcloud:Tem/scaleRule:ScaleRule", name, args, &resource, opts...)
 	if err != nil {
@@ -217,7 +222,7 @@ func (i *ScaleRule) ToScaleRuleOutputWithContext(ctx context.Context) ScaleRuleO
 // ScaleRuleArrayInput is an input type that accepts ScaleRuleArray and ScaleRuleArrayOutput values.
 // You can construct a concrete instance of `ScaleRuleArrayInput` via:
 //
-//          ScaleRuleArray{ ScaleRuleArgs{...} }
+//	ScaleRuleArray{ ScaleRuleArgs{...} }
 type ScaleRuleArrayInput interface {
 	pulumi.Input
 
@@ -242,7 +247,7 @@ func (i ScaleRuleArray) ToScaleRuleArrayOutputWithContext(ctx context.Context) S
 // ScaleRuleMapInput is an input type that accepts ScaleRuleMap and ScaleRuleMapOutput values.
 // You can construct a concrete instance of `ScaleRuleMapInput` via:
 //
-//          ScaleRuleMap{ "key": ScaleRuleArgs{...} }
+//	ScaleRuleMap{ "key": ScaleRuleArgs{...} }
 type ScaleRuleMapInput interface {
 	pulumi.Input
 

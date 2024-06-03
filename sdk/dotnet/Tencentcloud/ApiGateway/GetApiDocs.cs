@@ -15,58 +15,52 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway
         /// <summary>
         /// Use this data source to query list information of api_gateway api_doc
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
-        ///     {
-        ///         var myApiDoc = Output.Create(Tencentcloud.ApiGateway.GetApiDocs.InvokeAsync());
-        ///     }
+        ///     var myApiDoc = Tencentcloud.ApiGateway.GetApiDocs.Invoke();
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetApiDocsResult> InvokeAsync(GetApiDocsArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetApiDocsResult>("tencentcloud:ApiGateway/getApiDocs:getApiDocs", args ?? new GetApiDocsArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetApiDocsResult>("tencentcloud:ApiGateway/getApiDocs:getApiDocs", args ?? new GetApiDocsArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query list information of api_gateway api_doc
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
-        ///     {
-        ///         var myApiDoc = Output.Create(Tencentcloud.ApiGateway.GetApiDocs.InvokeAsync());
-        ///     }
+        ///     var myApiDoc = Tencentcloud.ApiGateway.GetApiDocs.Invoke();
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetApiDocsResult> Invoke(GetApiDocsInvokeArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetApiDocsResult>("tencentcloud:ApiGateway/getApiDocs:getApiDocs", args ?? new GetApiDocsInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetApiDocsResult>("tencentcloud:ApiGateway/getApiDocs:getApiDocs", args ?? new GetApiDocsInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetApiDocsArgs : Pulumi.InvokeArgs
+    public sealed class GetApiDocsArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Used to save results.
@@ -77,9 +71,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway
         public GetApiDocsArgs()
         {
         }
+        public static new GetApiDocsArgs Empty => new GetApiDocsArgs();
     }
 
-    public sealed class GetApiDocsInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetApiDocsInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Used to save results.
@@ -90,6 +85,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway
         public GetApiDocsInvokeArgs()
         {
         }
+        public static new GetApiDocsInvokeArgs Empty => new GetApiDocsInvokeArgs();
     }
 
 

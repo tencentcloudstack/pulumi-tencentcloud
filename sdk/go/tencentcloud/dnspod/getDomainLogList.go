@@ -8,36 +8,41 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Use this data source to query detailed information of dnspod domainLogList
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Dnspod"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dnspod"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dnspod"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Dnspod.GetDomainLogList(ctx, &dnspod.GetDomainLogListArgs{
-// 			Domain:   "iac-tf.cloud",
-// 			DomainId: pulumi.IntRef(123),
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Dnspod.GetDomainLogList(ctx, &dnspod.GetDomainLogListArgs{
+//				Domain:   "iac-tf.cloud",
+//				DomainId: pulumi.IntRef(123),
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 func GetDomainLogList(ctx *pulumi.Context, args *GetDomainLogListArgs, opts ...pulumi.InvokeOption) (*GetDomainLogListResult, error) {
-	opts = pkgInvokeDefaultOpts(opts)
+	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetDomainLogListResult
 	err := ctx.Invoke("tencentcloud:Dnspod/getDomainLogList:getDomainLogList", args, &rv, opts...)
 	if err != nil {

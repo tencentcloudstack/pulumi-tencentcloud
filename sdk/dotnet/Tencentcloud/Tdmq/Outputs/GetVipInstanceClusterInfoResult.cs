@@ -14,20 +14,65 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdmq.Outputs
     [OutputType]
     public sealed class GetVipInstanceClusterInfoResult
     {
+        /// <summary>
+        /// Cluster ID.
+        /// </summary>
         public readonly string ClusterId;
+        /// <summary>
+        /// Cluster Name.
+        /// </summary>
         public readonly string ClusterName;
+        /// <summary>
+        /// Creation time, in milliseconds.
+        /// </summary>
         public readonly int CreateTime;
+        /// <summary>
+        /// HTTP protocol public network access addressNote: This field may return null, indicating that no valid value can be obtained.
+        /// </summary>
         public readonly string HttpPublicEndpoint;
+        /// <summary>
+        /// HTTP protocol VPC access addressNote: This field may return null, indicating that no valid value can be obtained.
+        /// </summary>
         public readonly string HttpVpcEndpoint;
+        /// <summary>
+        /// Whether it is a dedicated instanceNote: This field may return null, indicating that no valid value can be obtained.
+        /// </summary>
         public readonly bool IsVip;
+        /// <summary>
+        /// Overdue suspension time, in millisecondsNote: This field may return null, indicating that no valid value can be obtained.
+        /// </summary>
         public readonly int IsolateTime;
+        /// <summary>
+        /// Public network access address.
+        /// </summary>
         public readonly string PublicEndPoint;
+        /// <summary>
+        /// Region.
+        /// </summary>
         public readonly string Region;
+        /// <summary>
+        /// Cluster description informationNote: This field may return null, indicating that no valid value can be obtained.
+        /// </summary>
         public readonly string Remark;
+        /// <summary>
+        /// Rocketmq cluster identificationNote: This field may return null, indicating that no valid value can be obtained.
+        /// </summary>
         public readonly bool RocketMqFlag;
+        /// <summary>
+        /// Billing status, 1 means normal, 2 means stopped, 3 means destroyedNote: This field may return null, indicating that no valid value can be obtained.
+        /// </summary>
         public readonly int Status;
+        /// <summary>
+        /// Whether namespace access points are supportedNote: This field may return null, indicating that no valid value can be obtained.
+        /// </summary>
         public readonly bool SupportNamespaceEndpoint;
+        /// <summary>
+        /// VPC access address.
+        /// </summary>
         public readonly string VpcEndPoint;
+        /// <summary>
+        /// VPC informationNote: This field may return null, indicating that no valid value can be obtained.
+        /// </summary>
         public readonly ImmutableArray<Outputs.GetVipInstanceClusterInfoVpcResult> Vpcs;
 
         [OutputConstructor]

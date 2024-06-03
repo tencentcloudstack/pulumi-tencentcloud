@@ -9,22 +9,24 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const snapshotConfig = new tencentcloud.Dnspod.SnapshotConfig("snapshot_config", {
+ * const snapshotConfig = new tencentcloud.dnspod.SnapshotConfig("snapshotConfig", {
  *     domain: "dnspod.cn",
  *     period: "hourly",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * dnspod snapshot_config can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Dnspod/snapshotConfig:SnapshotConfig snapshot_config domain
+ * $ pulumi import tencentcloud:Dnspod/snapshotConfig:SnapshotConfig snapshot_config domain
  * ```
  */
 export class SnapshotConfig extends pulumi.CustomResource {

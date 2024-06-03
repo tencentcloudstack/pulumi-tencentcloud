@@ -7,52 +7,57 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a tcm clusterAttachment
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Tcm"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tcm"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tcm"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Tcm.NewClusterAttachment(ctx, "clusterAttachment", &Tcm.ClusterAttachmentArgs{
-// 			ClusterLists: tcm.ClusterAttachmentClusterListArray{
-// 				&tcm.ClusterAttachmentClusterListArgs{
-// 					ClusterId: pulumi.String("cls-rc5uy6dy"),
-// 					Region:    pulumi.String("ap-guangzhou"),
-// 					Role:      pulumi.String("REMOTE"),
-// 					SubnetId:  pulumi.String("subnet-lkyb3ayc"),
-// 					Type:      pulumi.String("TKE"),
-// 					VpcId:     pulumi.String("vpc-a1jycmbx"),
-// 				},
-// 			},
-// 			MeshId: pulumi.String("mesh-b9q6vf9l"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Tcm.NewClusterAttachment(ctx, "clusterAttachment", &Tcm.ClusterAttachmentArgs{
+//				ClusterLists: tcm.ClusterAttachmentClusterListArray{
+//					&tcm.ClusterAttachmentClusterListArgs{
+//						ClusterId: pulumi.String("cls-rc5uy6dy"),
+//						Region:    pulumi.String("ap-guangzhou"),
+//						Role:      pulumi.String("REMOTE"),
+//						SubnetId:  pulumi.String("subnet-lkyb3ayc"),
+//						Type:      pulumi.String("TKE"),
+//						VpcId:     pulumi.String("vpc-a1jycmbx"),
+//					},
+//				},
+//				MeshId: pulumi.String("mesh-b9q6vf9l"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // tcm cluster_attachment can be imported using the mesh_id#cluster_id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Tcm/clusterAttachment:ClusterAttachment cluster_attachment mesh-b9q6vf9l#cls-rc5uy6dy
+// $ pulumi import tencentcloud:Tcm/clusterAttachment:ClusterAttachment cluster_attachment mesh-b9q6vf9l#cls-rc5uy6dy
 // ```
 type ClusterAttachment struct {
 	pulumi.CustomResourceState
@@ -73,7 +78,7 @@ func NewClusterAttachment(ctx *pulumi.Context,
 	if args.MeshId == nil {
 		return nil, errors.New("invalid value for required argument 'MeshId'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource ClusterAttachment
 	err := ctx.RegisterResource("tencentcloud:Tcm/clusterAttachment:ClusterAttachment", name, args, &resource, opts...)
 	if err != nil {
@@ -154,7 +159,7 @@ func (i *ClusterAttachment) ToClusterAttachmentOutputWithContext(ctx context.Con
 // ClusterAttachmentArrayInput is an input type that accepts ClusterAttachmentArray and ClusterAttachmentArrayOutput values.
 // You can construct a concrete instance of `ClusterAttachmentArrayInput` via:
 //
-//          ClusterAttachmentArray{ ClusterAttachmentArgs{...} }
+//	ClusterAttachmentArray{ ClusterAttachmentArgs{...} }
 type ClusterAttachmentArrayInput interface {
 	pulumi.Input
 
@@ -179,7 +184,7 @@ func (i ClusterAttachmentArray) ToClusterAttachmentArrayOutputWithContext(ctx co
 // ClusterAttachmentMapInput is an input type that accepts ClusterAttachmentMap and ClusterAttachmentMapOutput values.
 // You can construct a concrete instance of `ClusterAttachmentMapInput` via:
 //
-//          ClusterAttachmentMap{ "key": ClusterAttachmentArgs{...} }
+//	ClusterAttachmentMap{ "key": ClusterAttachmentArgs{...} }
 type ClusterAttachmentMapInput interface {
 	pulumi.Input
 

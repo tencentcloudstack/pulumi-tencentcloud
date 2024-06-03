@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cvm.Inputs
 {
 
-    public sealed class GetChcHostsFilterInputArgs : Pulumi.ResourceArgs
+    public sealed class GetChcHostsFilterInputArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Filter name.
@@ -34,5 +34,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cvm.Inputs
         public GetChcHostsFilterInputArgs()
         {
         }
+        public static new GetChcHostsFilterInputArgs Empty => new GetChcHostsFilterInputArgs();
     }
 }

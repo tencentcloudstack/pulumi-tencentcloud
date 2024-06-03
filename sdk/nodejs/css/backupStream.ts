@@ -11,24 +11,26 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const backupStream = new tencentcloud.Css.BackupStream("backup_stream", {
+ * const backupStream = new tencentcloud.css.BackupStream("backupStream", {
  *     appName: "live",
  *     pushDomainName: "177154.push.tlivecloud.com",
  *     streamName: "1308919341_test",
  *     upstreamSequence: "2209501773993286139",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * css backup_stream can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Css/backupStream:BackupStream backup_stream pushDomainName#appName#streamName
+ * $ pulumi import tencentcloud:Css/backupStream:BackupStream backup_stream pushDomainName#appName#streamName
  * ```
  */
 export class BackupStream extends pulumi.CustomResource {

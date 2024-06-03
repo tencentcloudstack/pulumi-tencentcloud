@@ -9,22 +9,24 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const foo = new tencentcloud.Ci.Guetzli("foo", {
+ * const foo = new tencentcloud.ci.Guetzli("foo", {
  *     bucket: "examplebucket-1250000000",
  *     status: "on",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * Resource guetzli can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Ci/guetzli:Guetzli example examplebucket-1250000000
+ * $ pulumi import tencentcloud:Ci/guetzli:Guetzli example examplebucket-1250000000
  * ```
  */
 export class Guetzli extends pulumi.CustomResource {

@@ -8,10 +8,11 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 func GetDescHaLog(ctx *pulumi.Context, args *GetDescHaLogArgs, opts ...pulumi.InvokeOption) (*GetDescHaLogResult, error) {
-	opts = pkgInvokeDefaultOpts(opts)
+	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetDescHaLogResult
 	err := ctx.Invoke("tencentcloud:Sqlserver/getDescHaLog:getDescHaLog", args, &rv, opts...)
 	if err != nil {

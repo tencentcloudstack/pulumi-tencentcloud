@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf.Inputs
 {
 
-    public sealed class DeployVmGroupHealthCheckSettingsArgs : Pulumi.ResourceArgs
+    public sealed class DeployVmGroupHealthCheckSettingsArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Survival health check. Note: This field may return null, indicating that no valid value was found.
@@ -28,5 +28,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf.Inputs
         public DeployVmGroupHealthCheckSettingsArgs()
         {
         }
+        public static new DeployVmGroupHealthCheckSettingsArgs Empty => new DeployVmGroupHealthCheckSettingsArgs();
     }
 }

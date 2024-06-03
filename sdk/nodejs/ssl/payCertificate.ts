@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -19,11 +20,12 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = new tencentcloud.Ssl.PayCertificate("example", {
+ * const example = new tencentcloud.ssl.PayCertificate("example", {
  *     alias: "ssl desc.",
  *     domainNum: 1,
  *     information: {
@@ -54,13 +56,14 @@ import * as utilities from "../utilities";
  *     projectId: 0,
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * payment SSL instance can be imported, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Ssl/payCertificate:PayCertificate ssl iPQNn61x#33#1#1
+ * $ pulumi import tencentcloud:Ssl/payCertificate:PayCertificate ssl iPQNn61x#33#1#1
  * ```
  */
 export class PayCertificate extends pulumi.CustomResource {

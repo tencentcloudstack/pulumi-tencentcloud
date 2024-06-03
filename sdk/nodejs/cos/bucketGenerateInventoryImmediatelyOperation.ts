@@ -9,15 +9,17 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const generateInventoryImmediately = new tencentcloud.Cos.BucketGenerateInventoryImmediatelyOperation("generate_inventory_immediately", {
+ * const generateInventoryImmediately = new tencentcloud.cos.BucketGenerateInventoryImmediatelyOperation("generateInventoryImmediately", {
  *     bucket: "keep-test-xxxxxx",
  *     inventoryId: "test",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export class BucketGenerateInventoryImmediatelyOperation extends pulumi.CustomResource {
     /**

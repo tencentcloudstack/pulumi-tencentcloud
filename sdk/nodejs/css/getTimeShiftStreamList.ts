@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,25 +11,24 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const timeShiftStreamList = pulumi.output(tencentcloud.Css.getTimeShiftStreamList({
+ * const timeShiftStreamList = tencentcloud.Css.getTimeShiftStreamList({
  *     domain: "177154.push.tlivecloud.com",
  *     domainGroup: "tf-test",
  *     endTime: 1698820641,
  *     startTime: 1698768000,
  *     streamName: "live",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getTimeShiftStreamList(args: GetTimeShiftStreamListArgs, opts?: pulumi.InvokeOptions): Promise<GetTimeShiftStreamListResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Css/getTimeShiftStreamList:getTimeShiftStreamList", {
         "domain": args.domain,
         "domainGroup": args.domainGroup,
@@ -107,9 +107,28 @@ export interface GetTimeShiftStreamListResult {
      */
     readonly totalSize: number;
 }
-
+/**
+ * Use this data source to query detailed information of css timeShiftStreamList
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const timeShiftStreamList = tencentcloud.Css.getTimeShiftStreamList({
+ *     domain: "177154.push.tlivecloud.com",
+ *     domainGroup: "tf-test",
+ *     endTime: 1698820641,
+ *     startTime: 1698768000,
+ *     streamName: "live",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getTimeShiftStreamListOutput(args: GetTimeShiftStreamListOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetTimeShiftStreamListResult> {
-    return pulumi.output(args).apply(a => getTimeShiftStreamList(a, opts))
+    return pulumi.output(args).apply((a: any) => getTimeShiftStreamList(a, opts))
 }
 
 /**

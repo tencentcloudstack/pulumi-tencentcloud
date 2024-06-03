@@ -7,95 +7,100 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a wedata integrationTaskNode
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Wedata"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Wedata"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Wedata"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Wedata.NewIntegrationTaskNode(ctx, "example", &Wedata.IntegrationTaskNodeArgs{
-// 			DataSourceType: pulumi.String("MYSQL"),
-// 			NodeInfo: &wedata.IntegrationTaskNodeNodeInfoArgs{
-// 				Configs: wedata.IntegrationTaskNodeNodeInfoConfigArray{
-// 					&wedata.IntegrationTaskNodeNodeInfoConfigArgs{
-// 						Name:  pulumi.String("Type"),
-// 						Value: pulumi.String("MYSQL"),
-// 					},
-// 					&wedata.IntegrationTaskNodeNodeInfoConfigArgs{
-// 						Name:  pulumi.String("splitPk"),
-// 						Value: pulumi.String("id"),
-// 					},
-// 					&wedata.IntegrationTaskNodeNodeInfoConfigArgs{
-// 						Name:  pulumi.String("PrimaryKey"),
-// 						Value: pulumi.String("id"),
-// 					},
-// 					&wedata.IntegrationTaskNodeNodeInfoConfigArgs{
-// 						Name:  pulumi.String("isNew"),
-// 						Value: pulumi.String("true"),
-// 					},
-// 					&wedata.IntegrationTaskNodeNodeInfoConfigArgs{
-// 						Name:  pulumi.String("PrimaryKey_INPUT_SYMBOL"),
-// 						Value: pulumi.String("input"),
-// 					},
-// 					&wedata.IntegrationTaskNodeNodeInfoConfigArgs{
-// 						Name:  pulumi.String("splitPk_INPUT_SYMBOL"),
-// 						Value: pulumi.String("input"),
-// 					},
-// 					&wedata.IntegrationTaskNodeNodeInfoConfigArgs{
-// 						Name:  pulumi.String("Database"),
-// 						Value: pulumi.String("demo_mysql"),
-// 					},
-// 					&wedata.IntegrationTaskNodeNodeInfoConfigArgs{
-// 						Name:  pulumi.String("TableNames"),
-// 						Value: pulumi.String("users"),
-// 					},
-// 					&wedata.IntegrationTaskNodeNodeInfoConfigArgs{
-// 						Name:  pulumi.String("SiblingNodes"),
-// 						Value: pulumi.String("[]"),
-// 					},
-// 				},
-// 				DatasourceId: pulumi.String("5085"),
-// 				Schemas: wedata.IntegrationTaskNodeNodeInfoSchemaArray{
-// 					&wedata.IntegrationTaskNodeNodeInfoSchemaArgs{
-// 						Alias: pulumi.String("id"),
-// 						Id:    pulumi.String("471331072"),
-// 						Name:  pulumi.String("id"),
-// 						Type:  pulumi.String("INT"),
-// 					},
-// 					&wedata.IntegrationTaskNodeNodeInfoSchemaArgs{
-// 						Alias: pulumi.String("username"),
-// 						Id:    pulumi.String("422052352"),
-// 						Name:  pulumi.String("username"),
-// 						Type:  pulumi.String("VARCHAR(50)"),
-// 					},
-// 				},
-// 			},
-// 			NodeType:  pulumi.String("INPUT"),
-// 			ProjectId: pulumi.String("1612982498218618880"),
-// 			TaskId:    pulumi.String("20231022181114990"),
-// 			TaskMode:  pulumi.Int(2),
-// 			TaskType:  pulumi.Int(202),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Wedata.NewIntegrationTaskNode(ctx, "example", &Wedata.IntegrationTaskNodeArgs{
+//				DataSourceType: pulumi.String("MYSQL"),
+//				NodeInfo: &wedata.IntegrationTaskNodeNodeInfoArgs{
+//					Configs: wedata.IntegrationTaskNodeNodeInfoConfigArray{
+//						&wedata.IntegrationTaskNodeNodeInfoConfigArgs{
+//							Name:  pulumi.String("Type"),
+//							Value: pulumi.String("MYSQL"),
+//						},
+//						&wedata.IntegrationTaskNodeNodeInfoConfigArgs{
+//							Name:  pulumi.String("splitPk"),
+//							Value: pulumi.String("id"),
+//						},
+//						&wedata.IntegrationTaskNodeNodeInfoConfigArgs{
+//							Name:  pulumi.String("PrimaryKey"),
+//							Value: pulumi.String("id"),
+//						},
+//						&wedata.IntegrationTaskNodeNodeInfoConfigArgs{
+//							Name:  pulumi.String("isNew"),
+//							Value: pulumi.String("true"),
+//						},
+//						&wedata.IntegrationTaskNodeNodeInfoConfigArgs{
+//							Name:  pulumi.String("PrimaryKey_INPUT_SYMBOL"),
+//							Value: pulumi.String("input"),
+//						},
+//						&wedata.IntegrationTaskNodeNodeInfoConfigArgs{
+//							Name:  pulumi.String("splitPk_INPUT_SYMBOL"),
+//							Value: pulumi.String("input"),
+//						},
+//						&wedata.IntegrationTaskNodeNodeInfoConfigArgs{
+//							Name:  pulumi.String("Database"),
+//							Value: pulumi.String("demo_mysql"),
+//						},
+//						&wedata.IntegrationTaskNodeNodeInfoConfigArgs{
+//							Name:  pulumi.String("TableNames"),
+//							Value: pulumi.String("users"),
+//						},
+//						&wedata.IntegrationTaskNodeNodeInfoConfigArgs{
+//							Name:  pulumi.String("SiblingNodes"),
+//							Value: pulumi.String("[]"),
+//						},
+//					},
+//					DatasourceId: pulumi.String("5085"),
+//					Schemas: wedata.IntegrationTaskNodeNodeInfoSchemaArray{
+//						&wedata.IntegrationTaskNodeNodeInfoSchemaArgs{
+//							Alias: pulumi.String("id"),
+//							Id:    pulumi.String("471331072"),
+//							Name:  pulumi.String("id"),
+//							Type:  pulumi.String("INT"),
+//						},
+//						&wedata.IntegrationTaskNodeNodeInfoSchemaArgs{
+//							Alias: pulumi.String("username"),
+//							Id:    pulumi.String("422052352"),
+//							Name:  pulumi.String("username"),
+//							Type:  pulumi.String("VARCHAR(50)"),
+//						},
+//					},
+//				},
+//				NodeType:  pulumi.String("INPUT"),
+//				ProjectId: pulumi.String("1612982498218618880"),
+//				TaskId:    pulumi.String("20231022181114990"),
+//				TaskMode:  pulumi.Int(2),
+//				TaskType:  pulumi.Int(202),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 type IntegrationTaskNode struct {
 	pulumi.CustomResourceState
 
@@ -147,7 +152,7 @@ func NewIntegrationTaskNode(ctx *pulumi.Context,
 	if args.TaskType == nil {
 		return nil, errors.New("invalid value for required argument 'TaskType'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource IntegrationTaskNode
 	err := ctx.RegisterResource("tencentcloud:Wedata/integrationTaskNode:IntegrationTaskNode", name, args, &resource, opts...)
 	if err != nil {
@@ -280,7 +285,7 @@ func (i *IntegrationTaskNode) ToIntegrationTaskNodeOutputWithContext(ctx context
 // IntegrationTaskNodeArrayInput is an input type that accepts IntegrationTaskNodeArray and IntegrationTaskNodeArrayOutput values.
 // You can construct a concrete instance of `IntegrationTaskNodeArrayInput` via:
 //
-//          IntegrationTaskNodeArray{ IntegrationTaskNodeArgs{...} }
+//	IntegrationTaskNodeArray{ IntegrationTaskNodeArgs{...} }
 type IntegrationTaskNodeArrayInput interface {
 	pulumi.Input
 
@@ -305,7 +310,7 @@ func (i IntegrationTaskNodeArray) ToIntegrationTaskNodeArrayOutputWithContext(ct
 // IntegrationTaskNodeMapInput is an input type that accepts IntegrationTaskNodeMap and IntegrationTaskNodeMapOutput values.
 // You can construct a concrete instance of `IntegrationTaskNodeMapInput` via:
 //
-//          IntegrationTaskNodeMap{ "key": IntegrationTaskNodeArgs{...} }
+//	IntegrationTaskNodeMap{ "key": IntegrationTaskNodeArgs{...} }
 type IntegrationTaskNodeMapInput interface {
 	pulumi.Input
 

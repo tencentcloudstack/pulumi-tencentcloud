@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcm.Inputs
 {
 
-    public sealed class MeshConfigIstioArgs : Pulumi.ResourceArgs
+    public sealed class MeshConfigIstioArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Disable http retry.
@@ -52,5 +52,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcm.Inputs
         public MeshConfigIstioArgs()
         {
         }
+        public static new MeshConfigIstioArgs Empty => new MeshConfigIstioArgs();
     }
 }

@@ -20,12 +20,28 @@ type DataSourceOutput struct {
 	CsharpAlters map[string]string `json:"csharp_alters,omitempty"`
 }
 
+type FilterFunc func(resource string) bool
+
+func skipResource(resource string, filter FilterFunc) bool {
+	return filter(resource)
+}
+
 func GetResourceOutput() []*ResourceOutput {
 	p := tencentcloud.Provider()
 	resourceOutputs := make([]*ResourceOutput, 0, len(p.ResourcesMap))
 
+	// skip the resources whose document cannot be generated correctly
+	skippedResources := map[string]struct{}{
+		"tencentcloud_audit":     {},
+		"tencentcloud_cls_index": {},
+	}
+	skipFilter := func(resource string) bool {
+		_, exists := skippedResources[resource]
+		return exists
+	}
+
 	for k, v := range p.ResourcesMap {
-		if v.DeprecationMessage != "" {
+		if v.DeprecationMessage != "" || skipResource(k, skipFilter) {
 			continue
 		}
 		module, entity := transform.ResolveModuleEntity(k)

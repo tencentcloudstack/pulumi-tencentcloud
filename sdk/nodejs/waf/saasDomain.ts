@@ -2,22 +2,25 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
  * Provides a resource to create a waf saasDomain
  *
  * ## Example Usage
+ *
  * ### If upstreamType is 0
  *
  * Create a basic waf saas domain
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = new tencentcloud.Waf.SaasDomain("example", {
+ * const example = new tencentcloud.waf.SaasDomain("example", {
  *     domain: "tf.example.com",
  *     instanceId: "waf_2kxtlbky01b3wceb",
  *     ports: [{
@@ -29,13 +32,16 @@ import * as utilities from "../utilities";
  *     srcLists: ["1.1.1.1"],
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
+ *
  * ### Create a load balancing strategy is weighted polling saas domain
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = new tencentcloud.Waf.SaasDomain("example", {
+ * const example = new tencentcloud.waf.SaasDomain("example", {
  *     domain: "tf.example.com",
  *     instanceId: "waf_2kxtlbky01b3wceb",
  *     loadBalance: "2",
@@ -55,13 +61,16 @@ import * as utilities from "../utilities";
  *     ],
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
+ *
  * ### If upstreamType is 1
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = new tencentcloud.Waf.SaasDomain("example", {
+ * const example = new tencentcloud.waf.SaasDomain("example", {
  *     domain: "tf.example.com",
  *     instanceId: "waf_2kxtlbky01b3wceb",
  *     ports: [{
@@ -74,13 +83,16 @@ import * as utilities from "../utilities";
  *     upstreamType: 1,
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
+ *
  * ### Create a waf saas domain with set Http&Https
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = new tencentcloud.Waf.SaasDomain("example", {
+ * const example = new tencentcloud.waf.SaasDomain("example", {
  *     certType: 2,
  *     domain: "tf.example.com",
  *     httpsRewrite: 1,
@@ -118,13 +130,16 @@ import * as utilities from "../utilities";
  *     ],
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
+ *
  * ### Create a complete waf saas domain
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = new tencentcloud.Waf.SaasDomain("example", {
+ * const example = new tencentcloud.waf.SaasDomain("example", {
  *     activeCheck: 1,
  *     apiSafeStatus: 1,
  *     botStatus: 1,
@@ -174,13 +189,14 @@ import * as utilities from "../utilities";
  *     xffReset: 1,
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * waf saas_domain can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Waf/saasDomain:SaasDomain example waf_2kxtlbky01b3wceb#tf.example.com#9647c91da0aa5f5aaa49d0ca40e2af24
+ * $ pulumi import tencentcloud:Waf/saasDomain:SaasDomain example waf_2kxtlbky01b3wceb#tf.example.com#9647c91da0aa5f5aaa49d0ca40e2af24
  * ```
  */
 export class SaasDomain extends pulumi.CustomResource {

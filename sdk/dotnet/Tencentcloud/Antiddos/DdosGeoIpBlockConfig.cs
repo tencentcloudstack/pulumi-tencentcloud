@@ -15,42 +15,43 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Antiddos
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var ddosGeoIpBlockConfig = new Tencentcloud.Antiddos.DdosGeoIpBlockConfig("ddosGeoIpBlockConfig", new()
     ///     {
-    ///         var ddosGeoIpBlockConfig = new Tencentcloud.Antiddos.DdosGeoIpBlockConfig("ddosGeoIpBlockConfig", new Tencentcloud.Antiddos.DdosGeoIpBlockConfigArgs
+    ///         AntiddosDdosGeoIpBlockConfig = new Tencentcloud.Antiddos.Inputs.DdosGeoIpBlockConfigDdosGeoIpBlockConfigArgs
     ///         {
-    ///             DdosGeoIpBlockConfig = new Tencentcloud.Antiddos.Inputs.DdosGeoIpBlockConfigDdosGeoIpBlockConfigArgs
+    ///             Action = "drop",
+    ///             AreaLists = new[]
     ///             {
-    ///                 Action = "drop",
-    ///                 AreaLists = 
-    ///                 {
-    ///                     100002,
-    ///                 },
-    ///                 RegionType = "customized",
+    ///                 100002,
     ///             },
-    ///             InstanceId = "bgp-xxxxxx",
-    ///         });
-    ///     }
+    ///             RegionType = "customized",
+    ///         },
+    ///         InstanceId = "bgp-xxxxxx",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// antiddos ddos_geo_ip_block_config can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Antiddos/ddosGeoIpBlockConfig:DdosGeoIpBlockConfig ddos_geo_ip_block_config ${instanceId}#${configId}
+    /// $ pulumi import tencentcloud:Antiddos/ddosGeoIpBlockConfig:DdosGeoIpBlockConfig ddos_geo_ip_block_config ${instanceId}#${configId}
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Antiddos/ddosGeoIpBlockConfig:DdosGeoIpBlockConfig")]
-    public partial class DdosGeoIpBlockConfig : Pulumi.CustomResource
+    public partial class DdosGeoIpBlockConfig : global::Pulumi.CustomResource
     {
         /// <summary>
         /// DDoS region blocking configuration, configuration ID cannot be empty when filling in parameters.
@@ -109,7 +110,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Antiddos
         }
     }
 
-    public sealed class DdosGeoIpBlockConfigArgs : Pulumi.ResourceArgs
+    public sealed class DdosGeoIpBlockConfigArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// DDoS region blocking configuration, configuration ID cannot be empty when filling in parameters.
@@ -126,9 +127,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Antiddos
         public DdosGeoIpBlockConfigArgs()
         {
         }
+        public static new DdosGeoIpBlockConfigArgs Empty => new DdosGeoIpBlockConfigArgs();
     }
 
-    public sealed class DdosGeoIpBlockConfigState : Pulumi.ResourceArgs
+    public sealed class DdosGeoIpBlockConfigState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// DDoS region blocking configuration, configuration ID cannot be empty when filling in parameters.
@@ -145,5 +147,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Antiddos
         public DdosGeoIpBlockConfigState()
         {
         }
+        public static new DdosGeoIpBlockConfigState Empty => new DdosGeoIpBlockConfigState();
     }
 }

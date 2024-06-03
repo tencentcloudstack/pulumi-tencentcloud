@@ -15,86 +15,80 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tse
         /// <summary>
         /// Use this data source to query detailed information of tse groups
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var groups = Tencentcloud.Tse.GetGroups.Invoke(new()
         ///     {
-        ///         var groups = Output.Create(Tencentcloud.Tse.GetGroups.InvokeAsync(new Tencentcloud.Tse.GetGroupsArgs
+        ///         Filters = new[]
         ///         {
-        ///             Filters = 
+        ///             new Tencentcloud.Tse.Inputs.GetGroupsFilterInputArgs
         ///             {
-        ///                 new Tencentcloud.Tse.Inputs.GetGroupsFilterArgs
+        ///                 Name = "GroupId",
+        ///                 Values = new[]
         ///                 {
-        ///                     Name = "GroupId",
-        ///                     Values = 
-        ///                     {
-        ///                         "group-013c0d8e",
-        ///                     },
+        ///                     "group-013c0d8e",
         ///                 },
         ///             },
-        ///             GatewayId = "gateway-ddbb709b",
-        ///         }));
-        ///     }
+        ///         },
+        ///         GatewayId = "gateway-ddbb709b",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetGroupsResult> InvokeAsync(GetGroupsArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetGroupsResult>("tencentcloud:Tse/getGroups:getGroups", args ?? new GetGroupsArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetGroupsResult>("tencentcloud:Tse/getGroups:getGroups", args ?? new GetGroupsArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of tse groups
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var groups = Tencentcloud.Tse.GetGroups.Invoke(new()
         ///     {
-        ///         var groups = Output.Create(Tencentcloud.Tse.GetGroups.InvokeAsync(new Tencentcloud.Tse.GetGroupsArgs
+        ///         Filters = new[]
         ///         {
-        ///             Filters = 
+        ///             new Tencentcloud.Tse.Inputs.GetGroupsFilterInputArgs
         ///             {
-        ///                 new Tencentcloud.Tse.Inputs.GetGroupsFilterArgs
+        ///                 Name = "GroupId",
+        ///                 Values = new[]
         ///                 {
-        ///                     Name = "GroupId",
-        ///                     Values = 
-        ///                     {
-        ///                         "group-013c0d8e",
-        ///                     },
+        ///                     "group-013c0d8e",
         ///                 },
         ///             },
-        ///             GatewayId = "gateway-ddbb709b",
-        ///         }));
-        ///     }
+        ///         },
+        ///         GatewayId = "gateway-ddbb709b",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetGroupsResult> Invoke(GetGroupsInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetGroupsResult>("tencentcloud:Tse/getGroups:getGroups", args ?? new GetGroupsInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetGroupsResult>("tencentcloud:Tse/getGroups:getGroups", args ?? new GetGroupsInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetGroupsArgs : Pulumi.InvokeArgs
+    public sealed class GetGroupsArgs : global::Pulumi.InvokeArgs
     {
         [Input("filters")]
         private List<Inputs.GetGroupsFilterArgs>? _filters;
@@ -123,9 +117,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tse
         public GetGroupsArgs()
         {
         }
+        public static new GetGroupsArgs Empty => new GetGroupsArgs();
     }
 
-    public sealed class GetGroupsInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetGroupsInvokeArgs : global::Pulumi.InvokeArgs
     {
         [Input("filters")]
         private InputList<Inputs.GetGroupsFilterInputArgs>? _filters;
@@ -154,6 +149,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tse
         public GetGroupsInvokeArgs()
         {
         }
+        public static new GetGroupsInvokeArgs Empty => new GetGroupsInvokeArgs();
     }
 
 

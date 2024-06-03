@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,22 +11,21 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const invokerRecords = pulumi.output(tencentcloud.Tat.getInvokerRecords({
+ * const invokerRecords = tencentcloud.Tat.getInvokerRecords({
  *     invokerIds: ["ivk-cas4upyf"],
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getInvokerRecords(args?: GetInvokerRecordsArgs, opts?: pulumi.InvokeOptions): Promise<GetInvokerRecordsResult> {
     args = args || {};
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Tat/getInvokerRecords:getInvokerRecords", {
         "invokerIds": args.invokerIds,
         "resultOutputFile": args.resultOutputFile,
@@ -61,9 +61,24 @@ export interface GetInvokerRecordsResult {
     readonly invokerRecordSets: outputs.Tat.GetInvokerRecordsInvokerRecordSet[];
     readonly resultOutputFile?: string;
 }
-
+/**
+ * Use this data source to query detailed information of tat invokerRecords
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const invokerRecords = tencentcloud.Tat.getInvokerRecords({
+ *     invokerIds: ["ivk-cas4upyf"],
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getInvokerRecordsOutput(args?: GetInvokerRecordsOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetInvokerRecordsResult> {
-    return pulumi.output(args).apply(a => getInvokerRecords(a, opts))
+    return pulumi.output(args).apply((a: any) => getInvokerRecords(a, opts))
 }
 
 /**

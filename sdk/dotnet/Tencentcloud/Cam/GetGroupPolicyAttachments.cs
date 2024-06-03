@@ -15,74 +15,70 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam
         /// <summary>
         /// Use this data source to query detailed information of CAM group policy attachments
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var foo = Tencentcloud.Cam.GetGroupPolicyAttachments.Invoke(new()
         ///     {
-        ///         var foo = Output.Create(Tencentcloud.Cam.GetGroupPolicyAttachments.InvokeAsync(new Tencentcloud.Cam.GetGroupPolicyAttachmentsArgs
-        ///         {
-        ///             GroupId = tencentcloud_cam_group.Foo.Id,
-        ///         }));
-        ///         var bar = Output.Create(Tencentcloud.Cam.GetGroupPolicyAttachments.InvokeAsync(new Tencentcloud.Cam.GetGroupPolicyAttachmentsArgs
-        ///         {
-        ///             GroupId = tencentcloud_cam_group.Foo.Id,
-        ///             PolicyId = tencentcloud_cam_policy.Foo.Id,
-        ///         }));
-        ///     }
+        ///         GroupId = tencentcloud_cam_group.Foo.Id,
+        ///     });
         /// 
-        /// }
+        ///     var bar = Tencentcloud.Cam.GetGroupPolicyAttachments.Invoke(new()
+        ///     {
+        ///         GroupId = tencentcloud_cam_group.Foo.Id,
+        ///         PolicyId = tencentcloud_cam_policy.Foo.Id,
+        ///     });
+        /// 
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetGroupPolicyAttachmentsResult> InvokeAsync(GetGroupPolicyAttachmentsArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetGroupPolicyAttachmentsResult>("tencentcloud:Cam/getGroupPolicyAttachments:getGroupPolicyAttachments", args ?? new GetGroupPolicyAttachmentsArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetGroupPolicyAttachmentsResult>("tencentcloud:Cam/getGroupPolicyAttachments:getGroupPolicyAttachments", args ?? new GetGroupPolicyAttachmentsArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of CAM group policy attachments
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var foo = Tencentcloud.Cam.GetGroupPolicyAttachments.Invoke(new()
         ///     {
-        ///         var foo = Output.Create(Tencentcloud.Cam.GetGroupPolicyAttachments.InvokeAsync(new Tencentcloud.Cam.GetGroupPolicyAttachmentsArgs
-        ///         {
-        ///             GroupId = tencentcloud_cam_group.Foo.Id,
-        ///         }));
-        ///         var bar = Output.Create(Tencentcloud.Cam.GetGroupPolicyAttachments.InvokeAsync(new Tencentcloud.Cam.GetGroupPolicyAttachmentsArgs
-        ///         {
-        ///             GroupId = tencentcloud_cam_group.Foo.Id,
-        ///             PolicyId = tencentcloud_cam_policy.Foo.Id,
-        ///         }));
-        ///     }
+        ///         GroupId = tencentcloud_cam_group.Foo.Id,
+        ///     });
         /// 
-        /// }
+        ///     var bar = Tencentcloud.Cam.GetGroupPolicyAttachments.Invoke(new()
+        ///     {
+        ///         GroupId = tencentcloud_cam_group.Foo.Id,
+        ///         PolicyId = tencentcloud_cam_policy.Foo.Id,
+        ///     });
+        /// 
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetGroupPolicyAttachmentsResult> Invoke(GetGroupPolicyAttachmentsInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetGroupPolicyAttachmentsResult>("tencentcloud:Cam/getGroupPolicyAttachments:getGroupPolicyAttachments", args ?? new GetGroupPolicyAttachmentsInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetGroupPolicyAttachmentsResult>("tencentcloud:Cam/getGroupPolicyAttachments:getGroupPolicyAttachments", args ?? new GetGroupPolicyAttachmentsInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetGroupPolicyAttachmentsArgs : Pulumi.InvokeArgs
+    public sealed class GetGroupPolicyAttachmentsArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Mode of creation of the CAM user policy attachment. 1 means the cam policy attachment is created by production, and the others indicate syntax strategy ways.
@@ -117,9 +113,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam
         public GetGroupPolicyAttachmentsArgs()
         {
         }
+        public static new GetGroupPolicyAttachmentsArgs Empty => new GetGroupPolicyAttachmentsArgs();
     }
 
-    public sealed class GetGroupPolicyAttachmentsInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetGroupPolicyAttachmentsInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Mode of creation of the CAM user policy attachment. 1 means the cam policy attachment is created by production, and the others indicate syntax strategy ways.
@@ -154,6 +151,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam
         public GetGroupPolicyAttachmentsInvokeArgs()
         {
         }
+        public static new GetGroupPolicyAttachmentsInvokeArgs Empty => new GetGroupPolicyAttachmentsInvokeArgs();
     }
 
 

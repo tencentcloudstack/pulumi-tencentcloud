@@ -7,42 +7,48 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a tsf enableUnitRule
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tsf"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tsf"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Tsf.NewEnableUnitRule(ctx, "enableUnitRule", &Tsf.EnableUnitRuleArgs{
-// 			RuleId: pulumi.String("unit-rl-is9m4nxz"),
-// 			Switch: pulumi.String("enabled"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Tsf.NewEnableUnitRule(ctx, "enableUnitRule", &Tsf.EnableUnitRuleArgs{
+//				RuleId: pulumi.String("unit-rl-is9m4nxz"),
+//				Switch: pulumi.String("enabled"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // tsf enable_unit_rule can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Tsf/enableUnitRule:EnableUnitRule enable_unit_rule enable_unit_rule_id
+// $ pulumi import tencentcloud:Tsf/enableUnitRule:EnableUnitRule enable_unit_rule enable_unit_rule_id
 // ```
 type EnableUnitRule struct {
 	pulumi.CustomResourceState
@@ -66,7 +72,7 @@ func NewEnableUnitRule(ctx *pulumi.Context,
 	if args.Switch == nil {
 		return nil, errors.New("invalid value for required argument 'Switch'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource EnableUnitRule
 	err := ctx.RegisterResource("tencentcloud:Tsf/enableUnitRule:EnableUnitRule", name, args, &resource, opts...)
 	if err != nil {
@@ -147,7 +153,7 @@ func (i *EnableUnitRule) ToEnableUnitRuleOutputWithContext(ctx context.Context) 
 // EnableUnitRuleArrayInput is an input type that accepts EnableUnitRuleArray and EnableUnitRuleArrayOutput values.
 // You can construct a concrete instance of `EnableUnitRuleArrayInput` via:
 //
-//          EnableUnitRuleArray{ EnableUnitRuleArgs{...} }
+//	EnableUnitRuleArray{ EnableUnitRuleArgs{...} }
 type EnableUnitRuleArrayInput interface {
 	pulumi.Input
 
@@ -172,7 +178,7 @@ func (i EnableUnitRuleArray) ToEnableUnitRuleArrayOutputWithContext(ctx context.
 // EnableUnitRuleMapInput is an input type that accepts EnableUnitRuleMap and EnableUnitRuleMapOutput values.
 // You can construct a concrete instance of `EnableUnitRuleMapInput` via:
 //
-//          EnableUnitRuleMap{ "key": EnableUnitRuleArgs{...} }
+//	EnableUnitRuleMap{ "key": EnableUnitRuleArgs{...} }
 type EnableUnitRuleMapInput interface {
 	pulumi.Input
 

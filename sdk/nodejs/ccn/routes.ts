@@ -9,23 +9,25 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const ccnRoutes = new tencentcloud.Ccn.Routes("ccn_routes", {
+ * const ccnRoutes = new tencentcloud.ccn.Routes("ccnRoutes", {
  *     ccnId: "ccn-39lqkygf",
  *     routeId: "ccnr-3o0dfyuw",
- *     switch: "on",
+ *     "switch": "on",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * vpc ccn_routes can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Ccn/routes:Routes ccn_routes ccnId#routesId
+ * $ pulumi import tencentcloud:Ccn/routes:Routes ccn_routes ccnId#routesId
  * ```
  */
 export class Routes extends pulumi.CustomResource {

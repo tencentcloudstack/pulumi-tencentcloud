@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dts.Inputs
 {
 
-    public sealed class SyncConfigOptionsGetArgs : Pulumi.ResourceArgs
+    public sealed class SyncConfigOptionsGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Whether to add additional columns. Note: This field may return null, indicating that no valid value can be obtained.
@@ -70,5 +70,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dts.Inputs
         public SyncConfigOptionsGetArgs()
         {
         }
+        public static new SyncConfigOptionsGetArgs Empty => new SyncConfigOptionsGetArgs();
     }
 }

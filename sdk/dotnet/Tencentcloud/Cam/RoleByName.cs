@@ -14,21 +14,23 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam
     /// Provides a resource to create a CAM role.
     /// 
     /// ## Example Usage
+    /// 
     /// ### Create normally
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var foo = new Tencentcloud.Cam.RoleByName("foo", new()
     ///     {
-    ///         var foo = new Tencentcloud.Cam.RoleByName("foo", new Tencentcloud.Cam.RoleByNameArgs
-    ///         {
-    ///             ConsoleLogin = true,
-    ///             Description = "test",
-    ///             Document = @"{
+    ///         ConsoleLogin = true,
+    ///         Description = "test",
+    ///         Document = @"{
     ///   ""version"": ""2.0"",
     ///   ""statement"": [
     ///     {
@@ -42,30 +44,32 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam
     /// }
     /// 
     /// ",
-    ///             Tags = 
-    ///             {
-    ///                 { "test", "tf-cam-role" },
-    ///             },
-    ///         });
-    ///     }
+    ///         Tags = 
+    ///         {
+    ///             { "test", "tf-cam-role" },
+    ///         },
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
+    /// 
     /// ### Create with SAML provider
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var boo = new Tencentcloud.Cam.RoleByName("boo", new()
     ///     {
-    ///         var boo = new Tencentcloud.Cam.RoleByName("boo", new Tencentcloud.Cam.RoleByNameArgs
-    ///         {
-    ///             ConsoleLogin = true,
-    ///             Description = "test",
-    ///             Document = @"{
+    ///         ConsoleLogin = true,
+    ///         Description = "test",
+    ///         Document = @"{
     ///   ""version"": ""2.0"",
     ///   ""statement"": [
     ///     {
@@ -79,22 +83,22 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam
     /// }
     /// 
     /// ",
-    ///         });
-    ///     }
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// CAM role can be imported using the name, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Cam/roleByName:RoleByName foo cam-role-test
+    /// $ pulumi import tencentcloud:Cam/roleByName:RoleByName foo cam-role-test
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Cam/roleByName:RoleByName")]
-    public partial class RoleByName : Pulumi.CustomResource
+    public partial class RoleByName : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Indicates whether the CAM role can login or not.
@@ -115,10 +119,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam
         public Output<string?> Description { get; private set; } = null!;
 
         /// <summary>
-        /// Document of the CAM role. The syntax refers to [CAM POLICY](https://intl.cloud.tencent.com/document/product/598/10604).
-        /// There are some notes when using this para in terraform: 1. The elements in json claimed supporting two types as `string`
-        /// and `array` only support type `array`; 2. Terraform does not support the `root` syntax, when appears, it must be
-        /// replaced with the uin it stands for.
+        /// Document of the CAM role. The syntax refers to CAM POLICY Name of CAM role.
         /// </summary>
         [Output("document")]
         public Output<string> Document { get; private set; } = null!;
@@ -186,7 +187,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam
         }
     }
 
-    public sealed class RoleByNameArgs : Pulumi.ResourceArgs
+    public sealed class RoleByNameArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Indicates whether the CAM role can login or not.
@@ -201,10 +202,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam
         public Input<string>? Description { get; set; }
 
         /// <summary>
-        /// Document of the CAM role. The syntax refers to [CAM POLICY](https://intl.cloud.tencent.com/document/product/598/10604).
-        /// There are some notes when using this para in terraform: 1. The elements in json claimed supporting two types as `string`
-        /// and `array` only support type `array`; 2. Terraform does not support the `root` syntax, when appears, it must be
-        /// replaced with the uin it stands for.
+        /// Document of the CAM role. The syntax refers to CAM POLICY Name of CAM role.
         /// </summary>
         [Input("document", required: true)]
         public Input<string> Document { get; set; } = null!;
@@ -230,9 +228,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam
         public RoleByNameArgs()
         {
         }
+        public static new RoleByNameArgs Empty => new RoleByNameArgs();
     }
 
-    public sealed class RoleByNameState : Pulumi.ResourceArgs
+    public sealed class RoleByNameState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Indicates whether the CAM role can login or not.
@@ -253,10 +252,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam
         public Input<string>? Description { get; set; }
 
         /// <summary>
-        /// Document of the CAM role. The syntax refers to [CAM POLICY](https://intl.cloud.tencent.com/document/product/598/10604).
-        /// There are some notes when using this para in terraform: 1. The elements in json claimed supporting two types as `string`
-        /// and `array` only support type `array`; 2. Terraform does not support the `root` syntax, when appears, it must be
-        /// replaced with the uin it stands for.
+        /// Document of the CAM role. The syntax refers to CAM POLICY Name of CAM role.
         /// </summary>
         [Input("document")]
         public Input<string>? Document { get; set; }
@@ -288,5 +284,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam
         public RoleByNameState()
         {
         }
+        public static new RoleByNameState Empty => new RoleByNameState();
     }
 }

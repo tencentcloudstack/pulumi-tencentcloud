@@ -15,70 +15,64 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dcdb
         /// <summary>
         /// Use this data source to query detailed information of dcdb orders
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var orders = Tencentcloud.Dcdb.GetOrders.Invoke(new()
         ///     {
-        ///         var orders = Output.Create(Tencentcloud.Dcdb.GetOrders.InvokeAsync(new Tencentcloud.Dcdb.GetOrdersArgs
+        ///         DealNames = new[]
         ///         {
-        ///             DealNames = 
-        ///             {
-        ///                 "2023061224903413767xxxx",
-        ///             },
-        ///         }));
-        ///     }
+        ///             "2023061224903413767xxxx",
+        ///         },
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetOrdersResult> InvokeAsync(GetOrdersArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetOrdersResult>("tencentcloud:Dcdb/getOrders:getOrders", args ?? new GetOrdersArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetOrdersResult>("tencentcloud:Dcdb/getOrders:getOrders", args ?? new GetOrdersArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of dcdb orders
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var orders = Tencentcloud.Dcdb.GetOrders.Invoke(new()
         ///     {
-        ///         var orders = Output.Create(Tencentcloud.Dcdb.GetOrders.InvokeAsync(new Tencentcloud.Dcdb.GetOrdersArgs
+        ///         DealNames = new[]
         ///         {
-        ///             DealNames = 
-        ///             {
-        ///                 "2023061224903413767xxxx",
-        ///             },
-        ///         }));
-        ///     }
+        ///             "2023061224903413767xxxx",
+        ///         },
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetOrdersResult> Invoke(GetOrdersInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetOrdersResult>("tencentcloud:Dcdb/getOrders:getOrders", args ?? new GetOrdersInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetOrdersResult>("tencentcloud:Dcdb/getOrders:getOrders", args ?? new GetOrdersInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetOrdersArgs : Pulumi.InvokeArgs
+    public sealed class GetOrdersArgs : global::Pulumi.InvokeArgs
     {
         [Input("dealNames", required: true)]
         private List<string>? _dealNames;
@@ -101,9 +95,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dcdb
         public GetOrdersArgs()
         {
         }
+        public static new GetOrdersArgs Empty => new GetOrdersArgs();
     }
 
-    public sealed class GetOrdersInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetOrdersInvokeArgs : global::Pulumi.InvokeArgs
     {
         [Input("dealNames", required: true)]
         private InputList<string>? _dealNames;
@@ -126,6 +121,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dcdb
         public GetOrdersInvokeArgs()
         {
         }
+        public static new GetOrdersInvokeArgs Empty => new GetOrdersInvokeArgs();
     }
 
 

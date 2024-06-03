@@ -7,51 +7,56 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a scf functionEventInvokeConfig
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Scf"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Scf"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Scf"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Scf.NewFunctionEventInvokeConfig(ctx, "functionEventInvokeConfig", &Scf.FunctionEventInvokeConfigArgs{
-// 			AsyncTriggerConfig: &scf.FunctionEventInvokeConfigAsyncTriggerConfigArgs{
-// 				MsgTtl: pulumi.Int(24),
-// 				RetryConfigs: scf.FunctionEventInvokeConfigAsyncTriggerConfigRetryConfigArray{
-// 					&scf.FunctionEventInvokeConfigAsyncTriggerConfigRetryConfigArgs{
-// 						RetryNum: pulumi.Int(2),
-// 					},
-// 				},
-// 			},
-// 			FunctionName: pulumi.String("keep-1676351130"),
-// 			Namespace:    pulumi.String("default"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Scf.NewFunctionEventInvokeConfig(ctx, "functionEventInvokeConfig", &Scf.FunctionEventInvokeConfigArgs{
+//				AsyncTriggerConfig: &scf.FunctionEventInvokeConfigAsyncTriggerConfigArgs{
+//					MsgTtl: pulumi.Int(24),
+//					RetryConfigs: scf.FunctionEventInvokeConfigAsyncTriggerConfigRetryConfigArray{
+//						&scf.FunctionEventInvokeConfigAsyncTriggerConfigRetryConfigArgs{
+//							RetryNum: pulumi.Int(2),
+//						},
+//					},
+//				},
+//				FunctionName: pulumi.String("keep-1676351130"),
+//				Namespace:    pulumi.String("default"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // scf function_event_invoke_config can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Scf/functionEventInvokeConfig:FunctionEventInvokeConfig function_event_invoke_config function_name#namespace
+// $ pulumi import tencentcloud:Scf/functionEventInvokeConfig:FunctionEventInvokeConfig function_event_invoke_config function_name#namespace
 // ```
 type FunctionEventInvokeConfig struct {
 	pulumi.CustomResourceState
@@ -77,7 +82,7 @@ func NewFunctionEventInvokeConfig(ctx *pulumi.Context,
 	if args.FunctionName == nil {
 		return nil, errors.New("invalid value for required argument 'FunctionName'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource FunctionEventInvokeConfig
 	err := ctx.RegisterResource("tencentcloud:Scf/functionEventInvokeConfig:FunctionEventInvokeConfig", name, args, &resource, opts...)
 	if err != nil {
@@ -166,7 +171,7 @@ func (i *FunctionEventInvokeConfig) ToFunctionEventInvokeConfigOutputWithContext
 // FunctionEventInvokeConfigArrayInput is an input type that accepts FunctionEventInvokeConfigArray and FunctionEventInvokeConfigArrayOutput values.
 // You can construct a concrete instance of `FunctionEventInvokeConfigArrayInput` via:
 //
-//          FunctionEventInvokeConfigArray{ FunctionEventInvokeConfigArgs{...} }
+//	FunctionEventInvokeConfigArray{ FunctionEventInvokeConfigArgs{...} }
 type FunctionEventInvokeConfigArrayInput interface {
 	pulumi.Input
 
@@ -191,7 +196,7 @@ func (i FunctionEventInvokeConfigArray) ToFunctionEventInvokeConfigArrayOutputWi
 // FunctionEventInvokeConfigMapInput is an input type that accepts FunctionEventInvokeConfigMap and FunctionEventInvokeConfigMapOutput values.
 // You can construct a concrete instance of `FunctionEventInvokeConfigMapInput` via:
 //
-//          FunctionEventInvokeConfigMap{ "key": FunctionEventInvokeConfigArgs{...} }
+//	FunctionEventInvokeConfigMap{ "key": FunctionEventInvokeConfigArgs{...} }
 type FunctionEventInvokeConfigMapInput interface {
 	pulumi.Input
 

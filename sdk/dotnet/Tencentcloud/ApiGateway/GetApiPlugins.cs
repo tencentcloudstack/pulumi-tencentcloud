@@ -15,68 +15,62 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway
         /// <summary>
         /// Use this data source to query detailed information of apiGateway api_plugins
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var example = Tencentcloud.ApiGateway.GetApiPlugins.Invoke(new()
         ///     {
-        ///         var example = Output.Create(Tencentcloud.ApiGateway.GetApiPlugins.InvokeAsync(new Tencentcloud.ApiGateway.GetApiPluginsArgs
-        ///         {
-        ///             ApiId = "api-0cvmf4x4",
-        ///             EnvironmentName = "test",
-        ///             ServiceId = "service-nxz6yync",
-        ///         }));
-        ///     }
+        ///         ApiId = "api-0cvmf4x4",
+        ///         EnvironmentName = "test",
+        ///         ServiceId = "service-nxz6yync",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetApiPluginsResult> InvokeAsync(GetApiPluginsArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetApiPluginsResult>("tencentcloud:ApiGateway/getApiPlugins:getApiPlugins", args ?? new GetApiPluginsArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetApiPluginsResult>("tencentcloud:ApiGateway/getApiPlugins:getApiPlugins", args ?? new GetApiPluginsArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of apiGateway api_plugins
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var example = Tencentcloud.ApiGateway.GetApiPlugins.Invoke(new()
         ///     {
-        ///         var example = Output.Create(Tencentcloud.ApiGateway.GetApiPlugins.InvokeAsync(new Tencentcloud.ApiGateway.GetApiPluginsArgs
-        ///         {
-        ///             ApiId = "api-0cvmf4x4",
-        ///             EnvironmentName = "test",
-        ///             ServiceId = "service-nxz6yync",
-        ///         }));
-        ///     }
+        ///         ApiId = "api-0cvmf4x4",
+        ///         EnvironmentName = "test",
+        ///         ServiceId = "service-nxz6yync",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetApiPluginsResult> Invoke(GetApiPluginsInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetApiPluginsResult>("tencentcloud:ApiGateway/getApiPlugins:getApiPlugins", args ?? new GetApiPluginsInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetApiPluginsResult>("tencentcloud:ApiGateway/getApiPlugins:getApiPlugins", args ?? new GetApiPluginsInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetApiPluginsArgs : Pulumi.InvokeArgs
+    public sealed class GetApiPluginsArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// API ID to be queried.
@@ -105,9 +99,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway
         public GetApiPluginsArgs()
         {
         }
+        public static new GetApiPluginsArgs Empty => new GetApiPluginsArgs();
     }
 
-    public sealed class GetApiPluginsInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetApiPluginsInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// API ID to be queried.
@@ -136,6 +131,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway
         public GetApiPluginsInvokeArgs()
         {
         }
+        public static new GetApiPluginsInvokeArgs Empty => new GetApiPluginsInvokeArgs();
     }
 
 

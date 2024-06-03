@@ -15,70 +15,64 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka
         /// <summary>
         /// Use this data source to query detailed acl information of Ckafka
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var foo = Tencentcloud.Ckafka.GetAcls.Invoke(new()
         ///     {
-        ///         var foo = Output.Create(Tencentcloud.Ckafka.GetAcls.InvokeAsync(new Tencentcloud.Ckafka.GetAclsArgs
-        ///         {
-        ///             Host = "2",
-        ///             InstanceId = "ckafka-f9ife4zz",
-        ///             ResourceName = "topic-tf-test",
-        ///             ResourceType = "TOPIC",
-        ///         }));
-        ///     }
+        ///         Host = "2",
+        ///         InstanceId = "ckafka-f9ife4zz",
+        ///         ResourceName = "topic-tf-test",
+        ///         ResourceType = "TOPIC",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetAclsResult> InvokeAsync(GetAclsArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetAclsResult>("tencentcloud:Ckafka/getAcls:getAcls", args ?? new GetAclsArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetAclsResult>("tencentcloud:Ckafka/getAcls:getAcls", args ?? new GetAclsArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed acl information of Ckafka
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var foo = Tencentcloud.Ckafka.GetAcls.Invoke(new()
         ///     {
-        ///         var foo = Output.Create(Tencentcloud.Ckafka.GetAcls.InvokeAsync(new Tencentcloud.Ckafka.GetAclsArgs
-        ///         {
-        ///             Host = "2",
-        ///             InstanceId = "ckafka-f9ife4zz",
-        ///             ResourceName = "topic-tf-test",
-        ///             ResourceType = "TOPIC",
-        ///         }));
-        ///     }
+        ///         Host = "2",
+        ///         InstanceId = "ckafka-f9ife4zz",
+        ///         ResourceName = "topic-tf-test",
+        ///         ResourceType = "TOPIC",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetAclsResult> Invoke(GetAclsInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetAclsResult>("tencentcloud:Ckafka/getAcls:getAcls", args ?? new GetAclsInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetAclsResult>("tencentcloud:Ckafka/getAcls:getAcls", args ?? new GetAclsInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetAclsArgs : Pulumi.InvokeArgs
+    public sealed class GetAclsArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Host substr used for querying.
@@ -113,9 +107,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka
         public GetAclsArgs()
         {
         }
+        public static new GetAclsArgs Empty => new GetAclsArgs();
     }
 
-    public sealed class GetAclsInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetAclsInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Host substr used for querying.
@@ -150,6 +145,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka
         public GetAclsInvokeArgs()
         {
         }
+        public static new GetAclsInvokeArgs Empty => new GetAclsInvokeArgs();
     }
 
 

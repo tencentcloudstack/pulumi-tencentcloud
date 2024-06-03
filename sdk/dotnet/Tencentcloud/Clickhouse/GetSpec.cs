@@ -15,68 +15,62 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clickhouse
         /// <summary>
         /// Use this data source to query detailed information of clickhouse spec
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var spec = Tencentcloud.Clickhouse.GetSpec.Invoke(new()
         ///     {
-        ///         var spec = Output.Create(Tencentcloud.Clickhouse.GetSpec.InvokeAsync(new Tencentcloud.Clickhouse.GetSpecArgs
-        ///         {
-        ///             IsElastic = false,
-        ///             PayMode = "PREPAID",
-        ///             Zone = "ap-guangzhou-7",
-        ///         }));
-        ///     }
+        ///         IsElastic = false,
+        ///         PayMode = "PREPAID",
+        ///         Zone = "ap-guangzhou-7",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetSpecResult> InvokeAsync(GetSpecArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetSpecResult>("tencentcloud:Clickhouse/getSpec:getSpec", args ?? new GetSpecArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetSpecResult>("tencentcloud:Clickhouse/getSpec:getSpec", args ?? new GetSpecArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of clickhouse spec
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var spec = Tencentcloud.Clickhouse.GetSpec.Invoke(new()
         ///     {
-        ///         var spec = Output.Create(Tencentcloud.Clickhouse.GetSpec.InvokeAsync(new Tencentcloud.Clickhouse.GetSpecArgs
-        ///         {
-        ///             IsElastic = false,
-        ///             PayMode = "PREPAID",
-        ///             Zone = "ap-guangzhou-7",
-        ///         }));
-        ///     }
+        ///         IsElastic = false,
+        ///         PayMode = "PREPAID",
+        ///         Zone = "ap-guangzhou-7",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetSpecResult> Invoke(GetSpecInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetSpecResult>("tencentcloud:Clickhouse/getSpec:getSpec", args ?? new GetSpecInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetSpecResult>("tencentcloud:Clickhouse/getSpec:getSpec", args ?? new GetSpecInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetSpecArgs : Pulumi.InvokeArgs
+    public sealed class GetSpecArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Is it elastic.
@@ -105,9 +99,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clickhouse
         public GetSpecArgs()
         {
         }
+        public static new GetSpecArgs Empty => new GetSpecArgs();
     }
 
-    public sealed class GetSpecInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetSpecInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Is it elastic.
@@ -136,6 +131,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clickhouse
         public GetSpecInvokeArgs()
         {
         }
+        public static new GetSpecInvokeArgs Empty => new GetSpecInvokeArgs();
     }
 
 

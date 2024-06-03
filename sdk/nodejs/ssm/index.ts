@@ -5,25 +5,66 @@ import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
 // Export members:
-export * from "./getProducts";
-export * from "./getRotationDetail";
-export * from "./getRotationHistory";
-export * from "./getSecretVersions";
-export * from "./getSecrets";
-export * from "./getServiceStatus";
-export * from "./getSshKeyPairValue";
-export * from "./productSecret";
-export * from "./rotateProductSecret";
-export * from "./secret";
-export * from "./secretVersion";
-export * from "./sshKeyPairSecret";
+export { GetProductsArgs, GetProductsResult, GetProductsOutputArgs } from "./getProducts";
+export const getProducts: typeof import("./getProducts").getProducts = null as any;
+export const getProductsOutput: typeof import("./getProducts").getProductsOutput = null as any;
+utilities.lazyLoad(exports, ["getProducts","getProductsOutput"], () => require("./getProducts"));
 
-// Import resources to register:
-import { ProductSecret } from "./productSecret";
-import { RotateProductSecret } from "./rotateProductSecret";
-import { Secret } from "./secret";
-import { SecretVersion } from "./secretVersion";
-import { SshKeyPairSecret } from "./sshKeyPairSecret";
+export { GetRotationDetailArgs, GetRotationDetailResult, GetRotationDetailOutputArgs } from "./getRotationDetail";
+export const getRotationDetail: typeof import("./getRotationDetail").getRotationDetail = null as any;
+export const getRotationDetailOutput: typeof import("./getRotationDetail").getRotationDetailOutput = null as any;
+utilities.lazyLoad(exports, ["getRotationDetail","getRotationDetailOutput"], () => require("./getRotationDetail"));
+
+export { GetRotationHistoryArgs, GetRotationHistoryResult, GetRotationHistoryOutputArgs } from "./getRotationHistory";
+export const getRotationHistory: typeof import("./getRotationHistory").getRotationHistory = null as any;
+export const getRotationHistoryOutput: typeof import("./getRotationHistory").getRotationHistoryOutput = null as any;
+utilities.lazyLoad(exports, ["getRotationHistory","getRotationHistoryOutput"], () => require("./getRotationHistory"));
+
+export { GetSecretVersionsArgs, GetSecretVersionsResult, GetSecretVersionsOutputArgs } from "./getSecretVersions";
+export const getSecretVersions: typeof import("./getSecretVersions").getSecretVersions = null as any;
+export const getSecretVersionsOutput: typeof import("./getSecretVersions").getSecretVersionsOutput = null as any;
+utilities.lazyLoad(exports, ["getSecretVersions","getSecretVersionsOutput"], () => require("./getSecretVersions"));
+
+export { GetSecretsArgs, GetSecretsResult, GetSecretsOutputArgs } from "./getSecrets";
+export const getSecrets: typeof import("./getSecrets").getSecrets = null as any;
+export const getSecretsOutput: typeof import("./getSecrets").getSecretsOutput = null as any;
+utilities.lazyLoad(exports, ["getSecrets","getSecretsOutput"], () => require("./getSecrets"));
+
+export { GetServiceStatusArgs, GetServiceStatusResult, GetServiceStatusOutputArgs } from "./getServiceStatus";
+export const getServiceStatus: typeof import("./getServiceStatus").getServiceStatus = null as any;
+export const getServiceStatusOutput: typeof import("./getServiceStatus").getServiceStatusOutput = null as any;
+utilities.lazyLoad(exports, ["getServiceStatus","getServiceStatusOutput"], () => require("./getServiceStatus"));
+
+export { GetSshKeyPairValueArgs, GetSshKeyPairValueResult, GetSshKeyPairValueOutputArgs } from "./getSshKeyPairValue";
+export const getSshKeyPairValue: typeof import("./getSshKeyPairValue").getSshKeyPairValue = null as any;
+export const getSshKeyPairValueOutput: typeof import("./getSshKeyPairValue").getSshKeyPairValueOutput = null as any;
+utilities.lazyLoad(exports, ["getSshKeyPairValue","getSshKeyPairValueOutput"], () => require("./getSshKeyPairValue"));
+
+export { ProductSecretArgs, ProductSecretState } from "./productSecret";
+export type ProductSecret = import("./productSecret").ProductSecret;
+export const ProductSecret: typeof import("./productSecret").ProductSecret = null as any;
+utilities.lazyLoad(exports, ["ProductSecret"], () => require("./productSecret"));
+
+export { RotateProductSecretArgs, RotateProductSecretState } from "./rotateProductSecret";
+export type RotateProductSecret = import("./rotateProductSecret").RotateProductSecret;
+export const RotateProductSecret: typeof import("./rotateProductSecret").RotateProductSecret = null as any;
+utilities.lazyLoad(exports, ["RotateProductSecret"], () => require("./rotateProductSecret"));
+
+export { SecretArgs, SecretState } from "./secret";
+export type Secret = import("./secret").Secret;
+export const Secret: typeof import("./secret").Secret = null as any;
+utilities.lazyLoad(exports, ["Secret"], () => require("./secret"));
+
+export { SecretVersionArgs, SecretVersionState } from "./secretVersion";
+export type SecretVersion = import("./secretVersion").SecretVersion;
+export const SecretVersion: typeof import("./secretVersion").SecretVersion = null as any;
+utilities.lazyLoad(exports, ["SecretVersion"], () => require("./secretVersion"));
+
+export { SshKeyPairSecretArgs, SshKeyPairSecretState } from "./sshKeyPairSecret";
+export type SshKeyPairSecret = import("./sshKeyPairSecret").SshKeyPairSecret;
+export const SshKeyPairSecret: typeof import("./sshKeyPairSecret").SshKeyPairSecret = null as any;
+utilities.lazyLoad(exports, ["SshKeyPairSecret"], () => require("./sshKeyPairSecret"));
+
 
 const _module = {
     version: utilities.getVersion(),

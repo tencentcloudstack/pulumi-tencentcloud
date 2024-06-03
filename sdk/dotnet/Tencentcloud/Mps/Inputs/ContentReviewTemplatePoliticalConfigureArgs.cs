@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps.Inputs
 {
 
-    public sealed class ContentReviewTemplatePoliticalConfigureArgs : Pulumi.ResourceArgs
+    public sealed class ContentReviewTemplatePoliticalConfigureArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Political asr control parameters.
@@ -34,5 +34,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps.Inputs
         public ContentReviewTemplatePoliticalConfigureArgs()
         {
         }
+        public static new ContentReviewTemplatePoliticalConfigureArgs Empty => new ContentReviewTemplatePoliticalConfigureArgs();
     }
 }

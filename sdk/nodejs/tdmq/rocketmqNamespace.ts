@@ -9,9 +9,10 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const exampleRocketmqCluster = new tencentcloud.tdmq.RocketmqCluster("exampleRocketmqCluster", {
  *     clusterName: "tf_example",
@@ -23,13 +24,14 @@ import * as utilities from "../utilities";
  *     remark: "remark.",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * tdmqRocketmq namespace can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Tdmq/rocketmqNamespace:RocketmqNamespace namespace namespace_id
+ * $ pulumi import tencentcloud:Tdmq/rocketmqNamespace:RocketmqNamespace namespace namespace_id
  * ```
  */
 export class RocketmqNamespace extends pulumi.CustomResource {

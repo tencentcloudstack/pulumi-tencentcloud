@@ -15,114 +15,110 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
         /// <summary>
         /// Use this data source to query detailed information of postgresql read_only_groups
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var @group = new Tencentcloud.Postgresql.ReadonlyGroup("group", new()
         ///     {
-        ///         var @group = new Tencentcloud.Postgresql.ReadonlyGroup("group", new Tencentcloud.Postgresql.ReadonlyGroupArgs
+        ///         MasterDbInstanceId = "postgres-gzg9jb2n",
+        ///         ProjectId = 0,
+        ///         VpcId = "vpc-86v957zb",
+        ///         SubnetId = "subnet-enm92y0m",
+        ///         ReplayLagEliminate = 1,
+        ///         ReplayLatencyEliminate = 1,
+        ///         MaxReplayLag = 100,
+        ///         MaxReplayLatency = 512,
+        ///         MinDelayEliminateReserve = 1,
+        ///     });
+        /// 
+        ///     var readOnlyGroups = Tencentcloud.Postgresql.GetReadonlyGroups.Invoke(new()
+        ///     {
+        ///         Filters = new[]
         ///         {
-        ///             MasterDbInstanceId = "postgres-gzg9jb2n",
-        ///             ProjectId = 0,
-        ///             VpcId = "vpc-86v957zb",
-        ///             SubnetId = "subnet-enm92y0m",
-        ///             ReplayLagEliminate = 1,
-        ///             ReplayLatencyEliminate = 1,
-        ///             MaxReplayLag = 100,
-        ///             MaxReplayLatency = 512,
-        ///             MinDelayEliminateReserve = 1,
-        ///         });
-        ///         var readOnlyGroups = Tencentcloud.Postgresql.GetReadonlyGroups.Invoke(new Tencentcloud.Postgresql.GetReadonlyGroupsInvokeArgs
-        ///         {
-        ///             Filters = 
+        ///             new Tencentcloud.Postgresql.Inputs.GetReadonlyGroupsFilterInputArgs
         ///             {
-        ///                 new Tencentcloud.Postgresql.Inputs.GetReadonlyGroupsFilterInputArgs
+        ///                 Name = "db-master-instance-id",
+        ///                 Values = new[]
         ///                 {
-        ///                     Name = "db-master-instance-id",
-        ///                     Values = 
-        ///                     {
-        ///                         @group.MasterDbInstanceId,
-        ///                     },
+        ///                     @group.MasterDbInstanceId,
         ///                 },
         ///             },
-        ///             OrderBy = "CreateTime",
-        ///             OrderByType = "asc",
-        ///         });
-        ///     }
+        ///         },
+        ///         OrderBy = "CreateTime",
+        ///         OrderByType = "asc",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetReadonlyGroupsResult> InvokeAsync(GetReadonlyGroupsArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetReadonlyGroupsResult>("tencentcloud:Postgresql/getReadonlyGroups:getReadonlyGroups", args ?? new GetReadonlyGroupsArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetReadonlyGroupsResult>("tencentcloud:Postgresql/getReadonlyGroups:getReadonlyGroups", args ?? new GetReadonlyGroupsArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of postgresql read_only_groups
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var @group = new Tencentcloud.Postgresql.ReadonlyGroup("group", new()
         ///     {
-        ///         var @group = new Tencentcloud.Postgresql.ReadonlyGroup("group", new Tencentcloud.Postgresql.ReadonlyGroupArgs
+        ///         MasterDbInstanceId = "postgres-gzg9jb2n",
+        ///         ProjectId = 0,
+        ///         VpcId = "vpc-86v957zb",
+        ///         SubnetId = "subnet-enm92y0m",
+        ///         ReplayLagEliminate = 1,
+        ///         ReplayLatencyEliminate = 1,
+        ///         MaxReplayLag = 100,
+        ///         MaxReplayLatency = 512,
+        ///         MinDelayEliminateReserve = 1,
+        ///     });
+        /// 
+        ///     var readOnlyGroups = Tencentcloud.Postgresql.GetReadonlyGroups.Invoke(new()
+        ///     {
+        ///         Filters = new[]
         ///         {
-        ///             MasterDbInstanceId = "postgres-gzg9jb2n",
-        ///             ProjectId = 0,
-        ///             VpcId = "vpc-86v957zb",
-        ///             SubnetId = "subnet-enm92y0m",
-        ///             ReplayLagEliminate = 1,
-        ///             ReplayLatencyEliminate = 1,
-        ///             MaxReplayLag = 100,
-        ///             MaxReplayLatency = 512,
-        ///             MinDelayEliminateReserve = 1,
-        ///         });
-        ///         var readOnlyGroups = Tencentcloud.Postgresql.GetReadonlyGroups.Invoke(new Tencentcloud.Postgresql.GetReadonlyGroupsInvokeArgs
-        ///         {
-        ///             Filters = 
+        ///             new Tencentcloud.Postgresql.Inputs.GetReadonlyGroupsFilterInputArgs
         ///             {
-        ///                 new Tencentcloud.Postgresql.Inputs.GetReadonlyGroupsFilterInputArgs
+        ///                 Name = "db-master-instance-id",
+        ///                 Values = new[]
         ///                 {
-        ///                     Name = "db-master-instance-id",
-        ///                     Values = 
-        ///                     {
-        ///                         @group.MasterDbInstanceId,
-        ///                     },
+        ///                     @group.MasterDbInstanceId,
         ///                 },
         ///             },
-        ///             OrderBy = "CreateTime",
-        ///             OrderByType = "asc",
-        ///         });
-        ///     }
+        ///         },
+        ///         OrderBy = "CreateTime",
+        ///         OrderByType = "asc",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetReadonlyGroupsResult> Invoke(GetReadonlyGroupsInvokeArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetReadonlyGroupsResult>("tencentcloud:Postgresql/getReadonlyGroups:getReadonlyGroups", args ?? new GetReadonlyGroupsInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetReadonlyGroupsResult>("tencentcloud:Postgresql/getReadonlyGroups:getReadonlyGroups", args ?? new GetReadonlyGroupsInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetReadonlyGroupsArgs : Pulumi.InvokeArgs
+    public sealed class GetReadonlyGroupsArgs : global::Pulumi.InvokeArgs
     {
         [Input("filters")]
         private List<Inputs.GetReadonlyGroupsFilterArgs>? _filters;
@@ -157,9 +153,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
         public GetReadonlyGroupsArgs()
         {
         }
+        public static new GetReadonlyGroupsArgs Empty => new GetReadonlyGroupsArgs();
     }
 
-    public sealed class GetReadonlyGroupsInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetReadonlyGroupsInvokeArgs : global::Pulumi.InvokeArgs
     {
         [Input("filters")]
         private InputList<Inputs.GetReadonlyGroupsFilterInputArgs>? _filters;
@@ -194,6 +191,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
         public GetReadonlyGroupsInvokeArgs()
         {
         }
+        public static new GetReadonlyGroupsInvokeArgs Empty => new GetReadonlyGroupsInvokeArgs();
     }
 
 

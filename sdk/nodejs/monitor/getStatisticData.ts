@@ -2,15 +2,13 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 export function getStatisticData(args: GetStatisticDataArgs, opts?: pulumi.InvokeOptions): Promise<GetStatisticDataResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Monitor/getStatisticData:getStatisticData", {
         "conditions": args.conditions,
         "groupBys": args.groupBys,
@@ -52,9 +50,8 @@ export interface GetStatisticDataResult {
     readonly resultOutputFile?: string;
     readonly startTime: string;
 }
-
 export function getStatisticDataOutput(args: GetStatisticDataOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetStatisticDataResult> {
-    return pulumi.output(args).apply(a => getStatisticData(a, opts))
+    return pulumi.output(args).apply((a: any) => getStatisticData(a, opts))
 }
 
 /**

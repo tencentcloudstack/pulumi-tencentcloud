@@ -7,8 +7,9 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a mariadb instanceConfig
@@ -18,7 +19,7 @@ import (
 // mariadb instance_config can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Mariadb/instanceConfig:InstanceConfig test id
+// $ pulumi import tencentcloud:Mariadb/instanceConfig:InstanceConfig test id
 // ```
 type InstanceConfig struct {
 	pulumi.CustomResourceState
@@ -41,7 +42,7 @@ func NewInstanceConfig(ctx *pulumi.Context,
 	if args.InstanceId == nil {
 		return nil, errors.New("invalid value for required argument 'InstanceId'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource InstanceConfig
 	err := ctx.RegisterResource("tencentcloud:Mariadb/instanceConfig:InstanceConfig", name, args, &resource, opts...)
 	if err != nil {
@@ -130,7 +131,7 @@ func (i *InstanceConfig) ToInstanceConfigOutputWithContext(ctx context.Context) 
 // InstanceConfigArrayInput is an input type that accepts InstanceConfigArray and InstanceConfigArrayOutput values.
 // You can construct a concrete instance of `InstanceConfigArrayInput` via:
 //
-//          InstanceConfigArray{ InstanceConfigArgs{...} }
+//	InstanceConfigArray{ InstanceConfigArgs{...} }
 type InstanceConfigArrayInput interface {
 	pulumi.Input
 
@@ -155,7 +156,7 @@ func (i InstanceConfigArray) ToInstanceConfigArrayOutputWithContext(ctx context.
 // InstanceConfigMapInput is an input type that accepts InstanceConfigMap and InstanceConfigMapOutput values.
 // You can construct a concrete instance of `InstanceConfigMapInput` via:
 //
-//          InstanceConfigMap{ "key": InstanceConfigArgs{...} }
+//	InstanceConfigMap{ "key": InstanceConfigArgs{...} }
 type InstanceConfigMapInput interface {
 	pulumi.Input
 

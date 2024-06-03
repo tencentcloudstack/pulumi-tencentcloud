@@ -7,8 +7,9 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a pts file
@@ -17,39 +18,44 @@ import (
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Pts"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Pts"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Pts.NewFile(ctx, "file", &Pts.FileArgs{
-// 			FileId:       pulumi.String("file-de2dbaf8"),
-// 			HeaderInFile: pulumi.Bool(false),
-// 			Kind:         pulumi.Int(3),
-// 			LineCount:    pulumi.Int(0),
-// 			ProjectId:    pulumi.String("project-45vw7v82"),
-// 			Size:         pulumi.Int(10799),
-// 			Type:         pulumi.String("text/plain"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Pts.NewFile(ctx, "file", &Pts.FileArgs{
+//				FileId:       pulumi.String("file-de2dbaf8"),
+//				HeaderInFile: pulumi.Bool(false),
+//				Kind:         pulumi.Int(3),
+//				LineCount:    pulumi.Int(0),
+//				ProjectId:    pulumi.String("project-45vw7v82"),
+//				Size:         pulumi.Int(10799),
+//				Type:         pulumi.String("text/plain"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // pts file can be imported using the project_id#file_id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Pts/file:File file project-45vw7v82#file-de2dbaf8
+// $ pulumi import tencentcloud:Pts/file:File file project-45vw7v82#file-de2dbaf8
 // ```
 type File struct {
 	pulumi.CustomResourceState
@@ -102,7 +108,7 @@ func NewFile(ctx *pulumi.Context,
 	if args.Type == nil {
 		return nil, errors.New("invalid value for required argument 'Type'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource File
 	err := ctx.RegisterResource("tencentcloud:Pts/file:File", name, args, &resource, opts...)
 	if err != nil {
@@ -263,7 +269,7 @@ func (i *File) ToFileOutputWithContext(ctx context.Context) FileOutput {
 // FileArrayInput is an input type that accepts FileArray and FileArrayOutput values.
 // You can construct a concrete instance of `FileArrayInput` via:
 //
-//          FileArray{ FileArgs{...} }
+//	FileArray{ FileArgs{...} }
 type FileArrayInput interface {
 	pulumi.Input
 
@@ -288,7 +294,7 @@ func (i FileArray) ToFileArrayOutputWithContext(ctx context.Context) FileArrayOu
 // FileMapInput is an input type that accepts FileMap and FileMapOutput values.
 // You can construct a concrete instance of `FileMapInput` via:
 //
-//          FileMap{ "key": FileArgs{...} }
+//	FileMap{ "key": FileArgs{...} }
 type FileMapInput interface {
 	pulumi.Input
 

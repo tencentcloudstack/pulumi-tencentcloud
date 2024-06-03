@@ -15,64 +15,58 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssl
         /// <summary>
         /// Use this data source to query detailed information of ssl describe_host_tke_instance_list
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var describeHostTkeInstanceList = Tencentcloud.Ssl.GetDescribeHostTkeInstanceList.Invoke(new()
         ///     {
-        ///         var describeHostTkeInstanceList = Output.Create(Tencentcloud.Ssl.GetDescribeHostTkeInstanceList.InvokeAsync(new Tencentcloud.Ssl.GetDescribeHostTkeInstanceListArgs
-        ///         {
-        ///             CertificateId = "8u8DII0l",
-        ///         }));
-        ///     }
+        ///         CertificateId = "8u8DII0l",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetDescribeHostTkeInstanceListResult> InvokeAsync(GetDescribeHostTkeInstanceListArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetDescribeHostTkeInstanceListResult>("tencentcloud:Ssl/getDescribeHostTkeInstanceList:getDescribeHostTkeInstanceList", args ?? new GetDescribeHostTkeInstanceListArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetDescribeHostTkeInstanceListResult>("tencentcloud:Ssl/getDescribeHostTkeInstanceList:getDescribeHostTkeInstanceList", args ?? new GetDescribeHostTkeInstanceListArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of ssl describe_host_tke_instance_list
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var describeHostTkeInstanceList = Tencentcloud.Ssl.GetDescribeHostTkeInstanceList.Invoke(new()
         ///     {
-        ///         var describeHostTkeInstanceList = Output.Create(Tencentcloud.Ssl.GetDescribeHostTkeInstanceList.InvokeAsync(new Tencentcloud.Ssl.GetDescribeHostTkeInstanceListArgs
-        ///         {
-        ///             CertificateId = "8u8DII0l",
-        ///         }));
-        ///     }
+        ///         CertificateId = "8u8DII0l",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetDescribeHostTkeInstanceListResult> Invoke(GetDescribeHostTkeInstanceListInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetDescribeHostTkeInstanceListResult>("tencentcloud:Ssl/getDescribeHostTkeInstanceList:getDescribeHostTkeInstanceList", args ?? new GetDescribeHostTkeInstanceListInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetDescribeHostTkeInstanceListResult>("tencentcloud:Ssl/getDescribeHostTkeInstanceList:getDescribeHostTkeInstanceList", args ?? new GetDescribeHostTkeInstanceListInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetDescribeHostTkeInstanceListArgs : Pulumi.InvokeArgs
+    public sealed class GetDescribeHostTkeInstanceListArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Whether to cache asynchronous.
@@ -119,9 +113,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssl
         public GetDescribeHostTkeInstanceListArgs()
         {
         }
+        public static new GetDescribeHostTkeInstanceListArgs Empty => new GetDescribeHostTkeInstanceListArgs();
     }
 
-    public sealed class GetDescribeHostTkeInstanceListInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetDescribeHostTkeInstanceListInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Whether to cache asynchronous.
@@ -168,6 +163,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssl
         public GetDescribeHostTkeInstanceListInvokeArgs()
         {
         }
+        public static new GetDescribeHostTkeInstanceListInvokeArgs Empty => new GetDescribeHostTkeInstanceListInvokeArgs();
     }
 
 

@@ -15,50 +15,53 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cdn
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var foo = new Tencentcloud.Cdn.UrlPurge("foo", new()
     ///     {
-    ///         var foo = new Tencentcloud.Cdn.UrlPurge("foo", new Tencentcloud.Cdn.UrlPurgeArgs
+    ///         Urls = new[]
     ///         {
-    ///             Urls = 
-    ///             {
-    ///                 "https://www.example.com/a",
-    ///             },
-    ///         });
-    ///     }
+    ///             "https://www.example.com/a",
+    ///         },
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
+    /// 
     /// ### argument to request new purge task with same urls
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var foo = new Tencentcloud.Cdn.UrlPurge("foo", new()
     ///     {
-    ///         var foo = new Tencentcloud.Cdn.UrlPurge("foo", new Tencentcloud.Cdn.UrlPurgeArgs
+    ///         Redo = 1,
+    ///         Urls = new[]
     ///         {
-    ///             Redo = 1,
-    ///             Urls = 
-    ///             {
-    ///                 "https://www.example.com/a",
-    ///             },
-    ///         });
-    ///     }
+    ///             "https://www.example.com/a",
+    ///         },
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Cdn/urlPurge:UrlPurge")]
-    public partial class UrlPurge : Pulumi.CustomResource
+    public partial class UrlPurge : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Specify purge area. NOTE: only purge same area cache contents.
@@ -141,7 +144,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cdn
         }
     }
 
-    public sealed class UrlPurgeArgs : Pulumi.ResourceArgs
+    public sealed class UrlPurgeArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Specify purge area. NOTE: only purge same area cache contents.
@@ -176,9 +179,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cdn
         public UrlPurgeArgs()
         {
         }
+        public static new UrlPurgeArgs Empty => new UrlPurgeArgs();
     }
 
-    public sealed class UrlPurgeState : Pulumi.ResourceArgs
+    public sealed class UrlPurgeState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Specify purge area. NOTE: only purge same area cache contents.
@@ -231,5 +235,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cdn
         public UrlPurgeState()
         {
         }
+        public static new UrlPurgeState Empty => new UrlPurgeState();
     }
 }

@@ -15,64 +15,58 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dcdb
         /// <summary>
         /// Use this data source to query detailed information of dcdb securityGroups
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var securityGroups = Tencentcloud.Dcdb.GetSecurityGroups.Invoke(new()
         ///     {
-        ///         var securityGroups = Output.Create(Tencentcloud.Dcdb.GetSecurityGroups.InvokeAsync(new Tencentcloud.Dcdb.GetSecurityGroupsArgs
-        ///         {
-        ///             InstanceId = "your_instance_id",
-        ///         }));
-        ///     }
+        ///         InstanceId = "your_instance_id",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetSecurityGroupsResult> InvokeAsync(GetSecurityGroupsArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetSecurityGroupsResult>("tencentcloud:Dcdb/getSecurityGroups:getSecurityGroups", args ?? new GetSecurityGroupsArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetSecurityGroupsResult>("tencentcloud:Dcdb/getSecurityGroups:getSecurityGroups", args ?? new GetSecurityGroupsArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of dcdb securityGroups
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var securityGroups = Tencentcloud.Dcdb.GetSecurityGroups.Invoke(new()
         ///     {
-        ///         var securityGroups = Output.Create(Tencentcloud.Dcdb.GetSecurityGroups.InvokeAsync(new Tencentcloud.Dcdb.GetSecurityGroupsArgs
-        ///         {
-        ///             InstanceId = "your_instance_id",
-        ///         }));
-        ///     }
+        ///         InstanceId = "your_instance_id",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetSecurityGroupsResult> Invoke(GetSecurityGroupsInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetSecurityGroupsResult>("tencentcloud:Dcdb/getSecurityGroups:getSecurityGroups", args ?? new GetSecurityGroupsInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetSecurityGroupsResult>("tencentcloud:Dcdb/getSecurityGroups:getSecurityGroups", args ?? new GetSecurityGroupsInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetSecurityGroupsArgs : Pulumi.InvokeArgs
+    public sealed class GetSecurityGroupsArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// instance id.
@@ -89,9 +83,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dcdb
         public GetSecurityGroupsArgs()
         {
         }
+        public static new GetSecurityGroupsArgs Empty => new GetSecurityGroupsArgs();
     }
 
-    public sealed class GetSecurityGroupsInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetSecurityGroupsInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// instance id.
@@ -108,6 +103,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dcdb
         public GetSecurityGroupsInvokeArgs()
         {
         }
+        public static new GetSecurityGroupsInvokeArgs Empty => new GetSecurityGroupsInvokeArgs();
     }
 
 

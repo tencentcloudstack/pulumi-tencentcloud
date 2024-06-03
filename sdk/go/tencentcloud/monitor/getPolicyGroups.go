@@ -8,44 +8,49 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Use this data source to query monitor policy groups (There is a lot of data and it is recommended to output to a file)
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Monitor"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Monitor"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Monitor"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Monitor.GetPolicyGroups(ctx, &monitor.GetPolicyGroupsArgs{
-// 			PolicyViewNames: []string{
-// 				"REDIS-CLUSTER",
-// 				"cvm_device",
-// 			},
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_, err = Monitor.GetPolicyGroups(ctx, &monitor.GetPolicyGroupsArgs{
-// 			Name: pulumi.StringRef("test"),
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Monitor.GetPolicyGroups(ctx, &monitor.GetPolicyGroupsArgs{
+//				PolicyViewNames: []string{
+//					"REDIS-CLUSTER",
+//					"cvm_device",
+//				},
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			_, err = Monitor.GetPolicyGroups(ctx, &monitor.GetPolicyGroupsArgs{
+//				Name: pulumi.StringRef("test"),
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 func GetPolicyGroups(ctx *pulumi.Context, args *GetPolicyGroupsArgs, opts ...pulumi.InvokeOption) (*GetPolicyGroupsResult, error) {
-	opts = pkgInvokeDefaultOpts(opts)
+	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetPolicyGroupsResult
 	err := ctx.Invoke("tencentcloud:Monitor/getPolicyGroups:getPolicyGroups", args, &rv, opts...)
 	if err != nil {

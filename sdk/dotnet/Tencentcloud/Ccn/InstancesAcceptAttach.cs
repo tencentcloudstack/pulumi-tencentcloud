@@ -15,34 +15,35 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ccn
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var ccnInstancesAcceptAttach = new Tencentcloud.Ccn.InstancesAcceptAttach("ccnInstancesAcceptAttach", new()
     ///     {
-    ///         var ccnInstancesAcceptAttach = new Tencentcloud.Ccn.InstancesAcceptAttach("ccnInstancesAcceptAttach", new Tencentcloud.Ccn.InstancesAcceptAttachArgs
+    ///         CcnId = "ccn-39lqkygf",
+    ///         Instances = new[]
     ///         {
-    ///             CcnId = "ccn-39lqkygf",
-    ///             Instances = 
+    ///             new Tencentcloud.Ccn.Inputs.InstancesAcceptAttachInstanceArgs
     ///             {
-    ///                 new Tencentcloud.Ccn.Inputs.InstancesAcceptAttachInstanceArgs
-    ///                 {
-    ///                     InstanceId = "vpc-j9yhbzpn",
-    ///                     InstanceRegion = "ap-guangzhou",
-    ///                     InstanceType = "VPC",
-    ///                 },
+    ///                 InstanceId = "vpc-j9yhbzpn",
+    ///                 InstanceRegion = "ap-guangzhou",
+    ///                 InstanceType = "VPC",
     ///             },
-    ///         });
-    ///     }
+    ///         },
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Ccn/instancesAcceptAttach:InstancesAcceptAttach")]
-    public partial class InstancesAcceptAttach : Pulumi.CustomResource
+    public partial class InstancesAcceptAttach : global::Pulumi.CustomResource
     {
         /// <summary>
         /// CCN Instance ID.
@@ -101,7 +102,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ccn
         }
     }
 
-    public sealed class InstancesAcceptAttachArgs : Pulumi.ResourceArgs
+    public sealed class InstancesAcceptAttachArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// CCN Instance ID.
@@ -124,9 +125,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ccn
         public InstancesAcceptAttachArgs()
         {
         }
+        public static new InstancesAcceptAttachArgs Empty => new InstancesAcceptAttachArgs();
     }
 
-    public sealed class InstancesAcceptAttachState : Pulumi.ResourceArgs
+    public sealed class InstancesAcceptAttachState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// CCN Instance ID.
@@ -149,5 +151,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ccn
         public InstancesAcceptAttachState()
         {
         }
+        public static new InstancesAcceptAttachState Empty => new InstancesAcceptAttachState();
     }
 }

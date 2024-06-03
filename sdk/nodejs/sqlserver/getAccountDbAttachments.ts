@@ -2,18 +2,16 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
  * Use this data source to query the list of SQL Server account DB privileges.
  */
 export function getAccountDbAttachments(args: GetAccountDbAttachmentsArgs, opts?: pulumi.InvokeOptions): Promise<GetAccountDbAttachmentsResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Sqlserver/getAccountDbAttachments:getAccountDbAttachments", {
         "accountName": args.accountName,
         "dbName": args.dbName,
@@ -70,9 +68,11 @@ export interface GetAccountDbAttachmentsResult {
     readonly lists: outputs.Sqlserver.GetAccountDbAttachmentsList[];
     readonly resultOutputFile?: string;
 }
-
+/**
+ * Use this data source to query the list of SQL Server account DB privileges.
+ */
 export function getAccountDbAttachmentsOutput(args: GetAccountDbAttachmentsOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetAccountDbAttachmentsResult> {
-    return pulumi.output(args).apply(a => getAccountDbAttachments(a, opts))
+    return pulumi.output(args).apply((a: any) => getAccountDbAttachments(a, opts))
 }
 
 /**

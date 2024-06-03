@@ -14,12 +14,21 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Pts.Outputs
     [OutputType]
     public sealed class JobLoadLoadSpecConcurrency
     {
+        /// <summary>
+        /// Wait time for graceful termination of the task.
+        /// </summary>
         public readonly int? GracefulStopSeconds;
+        /// <summary>
+        /// Number of runs.
+        /// </summary>
         public readonly int? IterationCount;
         /// <summary>
         /// Maximum requests per second.
         /// </summary>
         public readonly int? MaxRequestsPerSecond;
+        /// <summary>
+        /// Multi-phase configuration array.
+        /// </summary>
         public readonly ImmutableArray<Outputs.JobLoadLoadSpecConcurrencyStage> Stages;
 
         [OutputConstructor]

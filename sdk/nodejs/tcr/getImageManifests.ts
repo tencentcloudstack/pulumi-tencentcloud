@@ -9,24 +9,23 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const imageManifests = pulumi.output(tencentcloud.Tcr.getImageManifests({
+ * const imageManifests = tencentcloud.Tcr.getImageManifests({
  *     imageVersion: "v1",
  *     namespaceName: "%s",
  *     registryId: "%s",
  *     repositoryName: "%s",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getImageManifests(args: GetImageManifestsArgs, opts?: pulumi.InvokeOptions): Promise<GetImageManifestsResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Tcr/getImageManifests:getImageManifests", {
         "imageVersion": args.imageVersion,
         "namespaceName": args.namespaceName,
@@ -84,9 +83,27 @@ export interface GetImageManifestsResult {
     readonly repositoryName: string;
     readonly resultOutputFile?: string;
 }
-
+/**
+ * Use this data source to query detailed information of tcr imageManifests
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const imageManifests = tencentcloud.Tcr.getImageManifests({
+ *     imageVersion: "v1",
+ *     namespaceName: "%s",
+ *     registryId: "%s",
+ *     repositoryName: "%s",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getImageManifestsOutput(args: GetImageManifestsOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetImageManifestsResult> {
-    return pulumi.output(args).apply(a => getImageManifests(a, opts))
+    return pulumi.output(args).apply((a: any) => getImageManifests(a, opts))
 }
 
 /**

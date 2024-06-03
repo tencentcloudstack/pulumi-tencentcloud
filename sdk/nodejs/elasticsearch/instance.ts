@@ -2,19 +2,22 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
  * Provides an elasticsearch instance resource.
  *
  * ## Example Usage
+ *
  * ### Create a basic version of elasticsearch instance paid by the hour
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const availabilityZone = tencentcloud.Availability.getZonesByProduct({
  *     product: "es",
@@ -22,12 +25,12 @@ import * as utilities from "../utilities";
  * const vpc = new tencentcloud.vpc.Instance("vpc", {cidrBlock: "10.0.0.0/16"});
  * const subnet = new tencentcloud.subnet.Instance("subnet", {
  *     vpcId: vpc.id,
- *     availabilityZone: availabilityZone.then(availabilityZone => availabilityZone.zones?[0]?.name),
+ *     availabilityZone: availabilityZone.then(availabilityZone => availabilityZone.zones?.[0]?.name),
  *     cidrBlock: "10.0.1.0/24",
  * });
  * const example = new tencentcloud.elasticsearch.Instance("example", {
  *     instanceName: "tf_example_es",
- *     availabilityZone: availabilityZone.then(availabilityZone => availabilityZone.zones?[0]?.name),
+ *     availabilityZone: availabilityZone.then(availabilityZone => availabilityZone.zones?.[0]?.name),
  *     version: "7.10.1",
  *     vpcId: vpc.id,
  *     subnetId: subnet.id,
@@ -51,12 +54,15 @@ import * as utilities from "../utilities";
  *     },
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
+ *
  * ### Create a basic version of elasticsearch instance for multi-availability zone deployment
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const availabilityZone = tencentcloud.Availability.getZonesByProduct({
  *     product: "es",
@@ -64,12 +70,12 @@ import * as utilities from "../utilities";
  * const vpc = new tencentcloud.vpc.Instance("vpc", {cidrBlock: "10.0.0.0/16"});
  * const subnet = new tencentcloud.subnet.Instance("subnet", {
  *     vpcId: vpc.id,
- *     availabilityZone: availabilityZone.then(availabilityZone => availabilityZone.zones?[0]?.name),
+ *     availabilityZone: availabilityZone.then(availabilityZone => availabilityZone.zones?.[0]?.name),
  *     cidrBlock: "10.0.1.0/24",
  * });
  * const subnetMultiZone = new tencentcloud.subnet.Instance("subnetMultiZone", {
  *     vpcId: vpc.id,
- *     availabilityZone: availabilityZone.then(availabilityZone => availabilityZone.zones?[1]?.name),
+ *     availabilityZone: availabilityZone.then(availabilityZone => availabilityZone.zones?.[1]?.name),
  *     cidrBlock: "10.0.2.0/24",
  * });
  * const exampleMultiZone = new tencentcloud.elasticsearch.Instance("exampleMultiZone", {
@@ -84,11 +90,11 @@ import * as utilities from "../utilities";
  *     deployMode: 1,
  *     multiZoneInfos: [
  *         {
- *             availabilityZone: availabilityZone.then(availabilityZone => availabilityZone.zones?[0]?.name),
+ *             availabilityZone: availabilityZone.then(availabilityZone => availabilityZone.zones?.[0]?.name),
  *             subnetId: subnet.id,
  *         },
  *         {
- *             availabilityZone: availabilityZone.then(availabilityZone => availabilityZone.zones?[1]?.name),
+ *             availabilityZone: availabilityZone.then(availabilityZone => availabilityZone.zones?.[1]?.name),
  *             subnetId: subnetMultiZone.id,
  *         },
  *     ],
@@ -118,13 +124,14 @@ import * as utilities from "../utilities";
  *     },
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * Elasticsearch instance can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Elasticsearch/instance:Instance foo es-17634f05
+ * $ pulumi import tencentcloud:Elasticsearch/instance:Instance foo es-17634f05
  * ```
  */
 export class Instance extends pulumi.CustomResource {
@@ -303,7 +310,7 @@ export class Instance extends pulumi.CustomResource {
             resourceInputs["licenseType"] = args ? args.licenseType : undefined;
             resourceInputs["multiZoneInfos"] = args ? args.multiZoneInfos : undefined;
             resourceInputs["nodeInfoLists"] = args ? args.nodeInfoLists : undefined;
-            resourceInputs["password"] = args ? args.password : undefined;
+            resourceInputs["password"] = args?.password ? pulumi.secret(args.password) : undefined;
             resourceInputs["renewFlag"] = args ? args.renewFlag : undefined;
             resourceInputs["subnetId"] = args ? args.subnetId : undefined;
             resourceInputs["tags"] = args ? args.tags : undefined;
@@ -317,6 +324,8 @@ export class Instance extends pulumi.CustomResource {
             resourceInputs["kibanaUrl"] = undefined /*out*/;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+        const secretOpts = { additionalSecretOutputs: ["password"] };
+        opts = pulumi.mergeOptions(opts, secretOpts);
         super(Instance.__pulumiType, name, resourceInputs, opts);
     }
 }

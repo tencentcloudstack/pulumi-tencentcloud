@@ -8,40 +8,45 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Use this data source to query detailed information of clb listenersByTargets
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Clb"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Clb"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Clb"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Clb.GetListenersByTargets(ctx, &clb.GetListenersByTargetsArgs{
-// 			Backends: []clb.GetListenersByTargetsBackend{
-// 				clb.GetListenersByTargetsBackend{
-// 					PrivateIp: "106.52.160.211",
-// 					VpcId:     "vpc-4owdpnwr",
-// 				},
-// 			},
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Clb.GetListenersByTargets(ctx, &clb.GetListenersByTargetsArgs{
+//				Backends: []clb.GetListenersByTargetsBackend{
+//					{
+//						PrivateIp: "106.52.160.211",
+//						VpcId:     "vpc-4owdpnwr",
+//					},
+//				},
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 func GetListenersByTargets(ctx *pulumi.Context, args *GetListenersByTargetsArgs, opts ...pulumi.InvokeOption) (*GetListenersByTargetsResult, error) {
-	opts = pkgInvokeDefaultOpts(opts)
+	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetListenersByTargetsResult
 	err := ctx.Invoke("tencentcloud:Clb/getListenersByTargets:getListenersByTargets", args, &rv, opts...)
 	if err != nil {

@@ -8,13 +8,15 @@ import * as utilities from "../utilities";
  * Provides a resource to create a CLB redirection.
  *
  * ## Example Usage
+ *
  * ### Manual Rewrite
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const foo = new tencentcloud.Clb.Redirection("foo", {
+ * const foo = new tencentcloud.clb.Redirection("foo", {
  *     clbId: "lb-p7olt9e5",
  *     sourceListenerId: "lbl-jc1dx6ju",
  *     sourceRuleId: "loc-ft8fmngv",
@@ -22,26 +24,30 @@ import * as utilities from "../utilities";
  *     targetRuleId: "loc-4xxr2cy7",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
+ *
  * ### Auto Rewrite
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const foo = new tencentcloud.Clb.Redirection("foo", {
+ * const foo = new tencentcloud.clb.Redirection("foo", {
  *     clbId: "lb-p7olt9e5",
  *     isAutoRewrite: true,
  *     targetListenerId: "lbl-asj1hzuo",
  *     targetRuleId: "loc-4xxr2cy7",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * CLB redirection can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Clb/redirection:Redirection foo loc-ft8fmngv#loc-4xxr2cy7#lbl-jc1dx6ju#lbl-asj1hzuo#lb-p7olt9e5
+ * $ pulumi import tencentcloud:Clb/redirection:Redirection foo loc-ft8fmngv#loc-4xxr2cy7#lbl-jc1dx6ju#lbl-asj1hzuo#lb-p7olt9e5
  * ```
  */
 export class Redirection extends pulumi.CustomResource {

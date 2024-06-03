@@ -15,39 +15,65 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.PrivateDns
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var vpc = new Tencentcloud.Vpc.Instance("vpc", new()
     ///     {
-    ///         var foo = new Tencentcloud.PrivateDns.Record("foo", new Tencentcloud.PrivateDns.RecordArgs
-    ///         {
-    ///             Mx = 0,
-    ///             RecordType = "A",
-    ///             RecordValue = "192.168.1.2",
-    ///             SubDomain = "www",
-    ///             Ttl = 300,
-    ///             Weight = 1,
-    ///             ZoneId = "zone-rqndjnki",
-    ///         });
-    ///     }
+    ///         CidrBlock = "10.0.0.0/16",
+    ///     });
     /// 
-    /// }
+    ///     var exampleZone = new Tencentcloud.PrivateDns.Zone("exampleZone", new()
+    ///     {
+    ///         Domain = "domain.com",
+    ///         Remark = "remark.",
+    ///         VpcSets = new[]
+    ///         {
+    ///             new Tencentcloud.PrivateDns.Inputs.ZoneVpcSetArgs
+    ///             {
+    ///                 Region = "ap-guangzhou",
+    ///                 UniqVpcId = vpc.Id,
+    ///             },
+    ///         },
+    ///         DnsForwardStatus = "DISABLED",
+    ///         CnameSpeedupStatus = "ENABLED",
+    ///         Tags = 
+    ///         {
+    ///             { "createdBy", "terraform" },
+    ///         },
+    ///     });
+    /// 
+    ///     var exampleRecord = new Tencentcloud.PrivateDns.Record("exampleRecord", new()
+    ///     {
+    ///         ZoneId = exampleZone.Id,
+    ///         RecordType = "A",
+    ///         RecordValue = "192.168.1.2",
+    ///         SubDomain = "www",
+    ///         Ttl = 300,
+    ///         Weight = 1,
+    ///         Mx = 0,
+    ///     });
+    /// 
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// Private Dns Record can be imported, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:PrivateDns/record:Record foo zone_id#record_id
+    /// $ pulumi import tencentcloud:PrivateDns/record:Record example zone-iza3a33s#1983030
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:PrivateDns/record:Record")]
-    public partial class Record : Pulumi.CustomResource
+    public partial class Record : global::Pulumi.CustomResource
     {
         /// <summary>
         /// MX priority, which is required when the record type is MX. Valid values: 5, 10, 15, 20, 30, 40, 50.
@@ -62,7 +88,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.PrivateDns
         public Output<string> RecordType { get; private set; } = null!;
 
         /// <summary>
-        /// Record value, such as IP: 192.168.10.2, CNAME: cname.qcloud.com, and MX: mail.qcloud.com..
+        /// Record value, such as IP: 192.168.10.2, CNAME: cname.qcloud.com, and MX: mail.qcloud.com.
         /// </summary>
         [Output("recordValue")]
         public Output<string> RecordValue { get; private set; } = null!;
@@ -77,7 +103,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.PrivateDns
         /// Record cache time. The smaller the value, the faster the record will take effect. Value range: 1~86400s.
         /// </summary>
         [Output("ttl")]
-        public Output<int?> Ttl { get; private set; } = null!;
+        public Output<int> Ttl { get; private set; } = null!;
 
         /// <summary>
         /// Record weight. Value range: 1~100.
@@ -136,7 +162,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.PrivateDns
         }
     }
 
-    public sealed class RecordArgs : Pulumi.ResourceArgs
+    public sealed class RecordArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// MX priority, which is required when the record type is MX. Valid values: 5, 10, 15, 20, 30, 40, 50.
@@ -151,7 +177,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.PrivateDns
         public Input<string> RecordType { get; set; } = null!;
 
         /// <summary>
-        /// Record value, such as IP: 192.168.10.2, CNAME: cname.qcloud.com, and MX: mail.qcloud.com..
+        /// Record value, such as IP: 192.168.10.2, CNAME: cname.qcloud.com, and MX: mail.qcloud.com.
         /// </summary>
         [Input("recordValue", required: true)]
         public Input<string> RecordValue { get; set; } = null!;
@@ -183,9 +209,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.PrivateDns
         public RecordArgs()
         {
         }
+        public static new RecordArgs Empty => new RecordArgs();
     }
 
-    public sealed class RecordState : Pulumi.ResourceArgs
+    public sealed class RecordState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// MX priority, which is required when the record type is MX. Valid values: 5, 10, 15, 20, 30, 40, 50.
@@ -200,7 +227,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.PrivateDns
         public Input<string>? RecordType { get; set; }
 
         /// <summary>
-        /// Record value, such as IP: 192.168.10.2, CNAME: cname.qcloud.com, and MX: mail.qcloud.com..
+        /// Record value, such as IP: 192.168.10.2, CNAME: cname.qcloud.com, and MX: mail.qcloud.com.
         /// </summary>
         [Input("recordValue")]
         public Input<string>? RecordValue { get; set; }
@@ -232,5 +259,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.PrivateDns
         public RecordState()
         {
         }
+        public static new RecordState Empty => new RecordState();
     }
 }

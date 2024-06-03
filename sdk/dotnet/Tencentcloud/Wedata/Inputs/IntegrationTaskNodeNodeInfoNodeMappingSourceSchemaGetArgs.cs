@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Wedata.Inputs
 {
 
-    public sealed class IntegrationTaskNodeNodeInfoNodeMappingSourceSchemaGetArgs : Pulumi.ResourceArgs
+    public sealed class IntegrationTaskNodeNodeInfoNodeMappingSourceSchemaGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Schema alias.
@@ -64,5 +64,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Wedata.Inputs
         public IntegrationTaskNodeNodeInfoNodeMappingSourceSchemaGetArgs()
         {
         }
+        public static new IntegrationTaskNodeNodeInfoNodeMappingSourceSchemaGetArgs Empty => new IntegrationTaskNodeNodeInfoNodeMappingSourceSchemaGetArgs();
     }
 }

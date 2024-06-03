@@ -8,11 +8,69 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Use this data source to query detailed information of postgresql backupDownloadUrls
+//
+// ## Example Usage
+//
+// <!--Start PulumiCodeChooser -->
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Postgresql"
+//
+// )
+// func main() {
+// pulumi.Run(func(ctx *pulumi.Context) error {
+// logBackups, err := Postgresql.GetLogBackups(ctx, &postgresql.GetLogBackupsArgs{
+// MinFinishTime: pulumi.StringRef("%s"),
+// MaxFinishTime: pulumi.StringRef("%s"),
+// Filters: []postgresql.GetLogBackupsFilter{
+// {
+// Name: pulumi.StringRef("db-instance-id"),
+// Values: interface{}{
+// local.Pgsql_id,
+// },
+// },
+// },
+// OrderBy: pulumi.StringRef("StartTime"),
+// OrderByType: pulumi.StringRef("desc"),
+// }, nil);
+// if err != nil {
+// return err
+// }
+// _, err = Postgresql.GetBackupDownloadUrls(ctx, &postgresql.GetBackupDownloadUrlsArgs{
+// DbInstanceId: local.Pgsql_id,
+// BackupType: "LogBackup",
+// BackupId: logBackups.LogBackupSets[0].Id,
+// UrlExpireTime: pulumi.IntRef(12),
+// BackupDownloadRestriction: postgresql.GetBackupDownloadUrlsBackupDownloadRestriction{
+// RestrictionType: pulumi.StringRef("NONE"),
+// VpcRestrictionEffect: pulumi.StringRef("ALLOW"),
+// VpcIdSets: interface{}{
+// local.Vpc_id,
+// },
+// IpRestrictionEffect: pulumi.StringRef("ALLOW"),
+// IpSets: []string{
+// "0.0.0.0",
+// },
+// },
+// }, nil);
+// if err != nil {
+// return err
+// }
+// return nil
+// })
+// }
+// ```
+// <!--End PulumiCodeChooser -->
 func GetBackupDownloadUrls(ctx *pulumi.Context, args *GetBackupDownloadUrlsArgs, opts ...pulumi.InvokeOption) (*GetBackupDownloadUrlsResult, error) {
-	opts = pkgInvokeDefaultOpts(opts)
+	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetBackupDownloadUrlsResult
 	err := ctx.Invoke("tencentcloud:Postgresql/getBackupDownloadUrls:getBackupDownloadUrls", args, &rv, opts...)
 	if err != nil {

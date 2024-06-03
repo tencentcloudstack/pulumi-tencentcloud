@@ -15,66 +15,60 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Lighthouse
         /// <summary>
         /// Use this data source to query detailed information of all region lighthouse scene
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var scene = Tencentcloud.Lighthouse.GetAllScene.Invoke(new()
         ///     {
-        ///         var scene = Output.Create(Tencentcloud.Lighthouse.GetAllScene.InvokeAsync(new Tencentcloud.Lighthouse.GetAllSceneArgs
-        ///         {
-        ///             Limit = 20,
-        ///             Offset = 0,
-        ///         }));
-        ///     }
+        ///         Limit = 20,
+        ///         Offset = 0,
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetAllSceneResult> InvokeAsync(GetAllSceneArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetAllSceneResult>("tencentcloud:Lighthouse/getAllScene:getAllScene", args ?? new GetAllSceneArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetAllSceneResult>("tencentcloud:Lighthouse/getAllScene:getAllScene", args ?? new GetAllSceneArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of all region lighthouse scene
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var scene = Tencentcloud.Lighthouse.GetAllScene.Invoke(new()
         ///     {
-        ///         var scene = Output.Create(Tencentcloud.Lighthouse.GetAllScene.InvokeAsync(new Tencentcloud.Lighthouse.GetAllSceneArgs
-        ///         {
-        ///             Limit = 20,
-        ///             Offset = 0,
-        ///         }));
-        ///     }
+        ///         Limit = 20,
+        ///         Offset = 0,
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetAllSceneResult> Invoke(GetAllSceneInvokeArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetAllSceneResult>("tencentcloud:Lighthouse/getAllScene:getAllScene", args ?? new GetAllSceneInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetAllSceneResult>("tencentcloud:Lighthouse/getAllScene:getAllScene", args ?? new GetAllSceneInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetAllSceneArgs : Pulumi.InvokeArgs
+    public sealed class GetAllSceneArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Number of returned results. Default value is 20. Maximum value is 100.
@@ -109,9 +103,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Lighthouse
         public GetAllSceneArgs()
         {
         }
+        public static new GetAllSceneArgs Empty => new GetAllSceneArgs();
     }
 
-    public sealed class GetAllSceneInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetAllSceneInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Number of returned results. Default value is 20. Maximum value is 100.
@@ -146,6 +141,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Lighthouse
         public GetAllSceneInvokeArgs()
         {
         }
+        public static new GetAllSceneInvokeArgs Empty => new GetAllSceneInvokeArgs();
     }
 
 

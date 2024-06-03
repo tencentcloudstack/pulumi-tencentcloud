@@ -7,191 +7,201 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a ssm productSecret
 //
 // ## Example Usage
+//
 // ### Ssm secret for mysql
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Availability"
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Ssm"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Availability"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Kms"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Mysql"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Security"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ssm"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Subnet"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Availability"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Kms"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Mysql"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Security"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ssm"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Subnet"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		zones, err := Availability.GetZonesByProduct(ctx, &availability.GetZonesByProductArgs{
-// 			Product: "cdb",
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		vpc, err := Vpc.NewInstance(ctx, "vpc", &Vpc.InstanceArgs{
-// 			CidrBlock: pulumi.String("10.0.0.0/16"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		subnet, err := Subnet.NewInstance(ctx, "subnet", &Subnet.InstanceArgs{
-// 			AvailabilityZone: pulumi.String(zones.Zones[0].Name),
-// 			VpcId:            vpc.ID(),
-// 			CidrBlock:        pulumi.String("10.0.0.0/16"),
-// 			IsMulticast:      pulumi.Bool(false),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		securityGroup, err := Security.NewGroup(ctx, "securityGroup", &Security.GroupArgs{
-// 			Description: pulumi.String("desc."),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		exampleInstance, err := Mysql.NewInstance(ctx, "exampleInstance", &Mysql.InstanceArgs{
-// 			InternetService:  pulumi.Int(1),
-// 			EngineVersion:    pulumi.String("5.7"),
-// 			ChargeType:       pulumi.String("POSTPAID"),
-// 			RootPassword:     pulumi.String("PassWord123"),
-// 			SlaveDeployMode:  pulumi.Int(0),
-// 			AvailabilityZone: pulumi.String(zones.Zones[0].Name),
-// 			SlaveSyncMode:    pulumi.Int(1),
-// 			InstanceName:     pulumi.String("tf-example"),
-// 			MemSize:          pulumi.Int(4000),
-// 			VolumeSize:       pulumi.Int(200),
-// 			VpcId:            vpc.ID(),
-// 			SubnetId:         subnet.ID(),
-// 			IntranetPort:     pulumi.Int(3306),
-// 			SecurityGroups: pulumi.StringArray{
-// 				securityGroup.ID(),
-// 			},
-// 			Tags: pulumi.AnyMap{
-// 				"createBy": pulumi.Any("terraform"),
-// 			},
-// 			Parameters: pulumi.AnyMap{
-// 				"character_set_server": pulumi.Any("utf8"),
-// 				"max_connections":      pulumi.Any("1000"),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		exampleKey, err := Kms.NewKey(ctx, "exampleKey", &Kms.KeyArgs{
-// 			Alias:              pulumi.String("tf-example-kms-key"),
-// 			Description:        pulumi.String("example of kms key"),
-// 			KeyRotationEnabled: pulumi.Bool(false),
-// 			IsEnabled:          pulumi.Bool(true),
-// 			Tags: pulumi.AnyMap{
-// 				"createdBy": pulumi.Any("terraform"),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_, err = Ssm.NewProductSecret(ctx, "exampleProductSecret", &Ssm.ProductSecretArgs{
-// 			SecretName:     pulumi.String("tf-example"),
-// 			UserNamePrefix: pulumi.String("prefix"),
-// 			ProductName:    pulumi.String("Mysql"),
-// 			InstanceId:     exampleInstance.ID(),
-// 			Domains: pulumi.StringArray{
-// 				pulumi.String("10.0.0.0"),
-// 			},
-// 			PrivilegesLists: ssm.ProductSecretPrivilegesListArray{
-// 				&ssm.ProductSecretPrivilegesListArgs{
-// 					PrivilegeName: pulumi.String("GlobalPrivileges"),
-// 					Privileges: pulumi.StringArray{
-// 						pulumi.String("ALTER ROUTINE"),
-// 					},
-// 				},
-// 			},
-// 			Description:       pulumi.String("for ssm product test"),
-// 			KmsKeyId:          exampleKey.ID(),
-// 			Status:            pulumi.String("Enabled"),
-// 			EnableRotation:    pulumi.Bool(true),
-// 			RotationBeginTime: pulumi.String("2023-08-05 20:54:33"),
-// 			RotationFrequency: pulumi.Int(30),
-// 			Tags: pulumi.AnyMap{
-// 				"createdBy": pulumi.Any("terraform"),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			zones, err := Availability.GetZonesByProduct(ctx, &availability.GetZonesByProductArgs{
+//				Product: "cdb",
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			vpc, err := Vpc.NewInstance(ctx, "vpc", &Vpc.InstanceArgs{
+//				CidrBlock: pulumi.String("10.0.0.0/16"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			subnet, err := Subnet.NewInstance(ctx, "subnet", &Subnet.InstanceArgs{
+//				AvailabilityZone: pulumi.String(zones.Zones[0].Name),
+//				VpcId:            vpc.ID(),
+//				CidrBlock:        pulumi.String("10.0.0.0/16"),
+//				IsMulticast:      pulumi.Bool(false),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			securityGroup, err := Security.NewGroup(ctx, "securityGroup", &Security.GroupArgs{
+//				Description: pulumi.String("desc."),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			exampleInstance, err := Mysql.NewInstance(ctx, "exampleInstance", &Mysql.InstanceArgs{
+//				InternetService:  pulumi.Int(1),
+//				EngineVersion:    pulumi.String("5.7"),
+//				ChargeType:       pulumi.String("POSTPAID"),
+//				RootPassword:     pulumi.String("PassWord123"),
+//				SlaveDeployMode:  pulumi.Int(0),
+//				AvailabilityZone: pulumi.String(zones.Zones[0].Name),
+//				SlaveSyncMode:    pulumi.Int(1),
+//				InstanceName:     pulumi.String("tf-example"),
+//				MemSize:          pulumi.Int(4000),
+//				VolumeSize:       pulumi.Int(200),
+//				VpcId:            vpc.ID(),
+//				SubnetId:         subnet.ID(),
+//				IntranetPort:     pulumi.Int(3306),
+//				SecurityGroups: pulumi.StringArray{
+//					securityGroup.ID(),
+//				},
+//				Tags: pulumi.Map{
+//					"createBy": pulumi.Any("terraform"),
+//				},
+//				Parameters: pulumi.Map{
+//					"character_set_server": pulumi.Any("utf8"),
+//					"max_connections":      pulumi.Any("1000"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			exampleKey, err := Kms.NewKey(ctx, "exampleKey", &Kms.KeyArgs{
+//				Alias:              pulumi.String("tf-example-kms-key"),
+//				Description:        pulumi.String("example of kms key"),
+//				KeyRotationEnabled: pulumi.Bool(false),
+//				IsEnabled:          pulumi.Bool(true),
+//				Tags: pulumi.Map{
+//					"createdBy": pulumi.Any("terraform"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_, err = Ssm.NewProductSecret(ctx, "exampleProductSecret", &Ssm.ProductSecretArgs{
+//				SecretName:     pulumi.String("tf-example"),
+//				UserNamePrefix: pulumi.String("prefix"),
+//				ProductName:    pulumi.String("Mysql"),
+//				InstanceId:     exampleInstance.ID(),
+//				Domains: pulumi.StringArray{
+//					pulumi.String("10.0.0.0"),
+//				},
+//				PrivilegesLists: ssm.ProductSecretPrivilegesListArray{
+//					&ssm.ProductSecretPrivilegesListArgs{
+//						PrivilegeName: pulumi.String("GlobalPrivileges"),
+//						Privileges: pulumi.StringArray{
+//							pulumi.String("ALTER ROUTINE"),
+//						},
+//					},
+//				},
+//				Description:       pulumi.String("for ssm product test"),
+//				KmsKeyId:          exampleKey.ID(),
+//				Status:            pulumi.String("Enabled"),
+//				EnableRotation:    pulumi.Bool(true),
+//				RotationBeginTime: pulumi.String("2023-08-05 20:54:33"),
+//				RotationFrequency: pulumi.Int(30),
+//				Tags: pulumi.Map{
+//					"createdBy": pulumi.Any("terraform"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
+//
 // ### Ssm secret for tdsql-c-mysql
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Ssm"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ssm"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ssm"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Ssm.NewProductSecret(ctx, "example", &Ssm.ProductSecretArgs{
-// 			SecretName:     pulumi.String("tf-tdsql-c-example"),
-// 			UserNamePrefix: pulumi.String("prefix"),
-// 			ProductName:    pulumi.String("Tdsql_C_Mysql"),
-// 			InstanceId:     pulumi.String("cynosdbmysql-xxxxxx"),
-// 			Domains: pulumi.StringArray{
-// 				pulumi.String("%"),
-// 			},
-// 			PrivilegesLists: ssm.ProductSecretPrivilegesListArray{
-// 				&ssm.ProductSecretPrivilegesListArgs{
-// 					PrivilegeName: pulumi.String("GlobalPrivileges"),
-// 					Privileges: pulumi.StringArray{
-// 						pulumi.String("ALTER"),
-// 						pulumi.String("CREATE"),
-// 						pulumi.String("DELETE"),
-// 					},
-// 				},
-// 				&ssm.ProductSecretPrivilegesListArgs{
-// 					PrivilegeName: pulumi.String("DatabasePrivileges"),
-// 					Database:      pulumi.String("test"),
-// 					Privileges: pulumi.StringArray{
-// 						pulumi.String("ALTER"),
-// 						pulumi.String("CREATE"),
-// 						pulumi.String("DELETE"),
-// 						pulumi.String("SELECT"),
-// 					},
-// 				},
-// 			},
-// 			Description:       pulumi.String("test tdsql-c"),
-// 			KmsKeyId:          nil,
-// 			Status:            pulumi.String("Enabled"),
-// 			EnableRotation:    pulumi.Bool(false),
-// 			RotationBeginTime: pulumi.String("2023-08-05 20:54:33"),
-// 			RotationFrequency: pulumi.Int(30),
-// 			Tags: pulumi.AnyMap{
-// 				"createdBy": pulumi.Any("terraform"),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Ssm.NewProductSecret(ctx, "example", &Ssm.ProductSecretArgs{
+//				SecretName:     pulumi.String("tf-tdsql-c-example"),
+//				UserNamePrefix: pulumi.String("prefix"),
+//				ProductName:    pulumi.String("Tdsql_C_Mysql"),
+//				InstanceId:     pulumi.String("cynosdbmysql-xxxxxx"),
+//				Domains: pulumi.StringArray{
+//					pulumi.String("%"),
+//				},
+//				PrivilegesLists: ssm.ProductSecretPrivilegesListArray{
+//					&ssm.ProductSecretPrivilegesListArgs{
+//						PrivilegeName: pulumi.String("GlobalPrivileges"),
+//						Privileges: pulumi.StringArray{
+//							pulumi.String("ALTER"),
+//							pulumi.String("CREATE"),
+//							pulumi.String("DELETE"),
+//						},
+//					},
+//					&ssm.ProductSecretPrivilegesListArgs{
+//						PrivilegeName: pulumi.String("DatabasePrivileges"),
+//						Database:      pulumi.String("test"),
+//						Privileges: pulumi.StringArray{
+//							pulumi.String("ALTER"),
+//							pulumi.String("CREATE"),
+//							pulumi.String("DELETE"),
+//							pulumi.String("SELECT"),
+//						},
+//					},
+//				},
+//				Description:       pulumi.String("test tdsql-c"),
+//				KmsKeyId:          nil,
+//				Status:            pulumi.String("Enabled"),
+//				EnableRotation:    pulumi.Bool(false),
+//				RotationBeginTime: pulumi.String("2023-08-05 20:54:33"),
+//				RotationFrequency: pulumi.Int(30),
+//				Tags: pulumi.Map{
+//					"createdBy": pulumi.Any("terraform"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 type ProductSecret struct {
 	pulumi.CustomResourceState
 
@@ -252,7 +262,7 @@ func NewProductSecret(ctx *pulumi.Context,
 	if args.UserNamePrefix == nil {
 		return nil, errors.New("invalid value for required argument 'UserNamePrefix'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource ProductSecret
 	err := ctx.RegisterResource("tencentcloud:Ssm/productSecret:ProductSecret", name, args, &resource, opts...)
 	if err != nil {
@@ -429,7 +439,7 @@ func (i *ProductSecret) ToProductSecretOutputWithContext(ctx context.Context) Pr
 // ProductSecretArrayInput is an input type that accepts ProductSecretArray and ProductSecretArrayOutput values.
 // You can construct a concrete instance of `ProductSecretArrayInput` via:
 //
-//          ProductSecretArray{ ProductSecretArgs{...} }
+//	ProductSecretArray{ ProductSecretArgs{...} }
 type ProductSecretArrayInput interface {
 	pulumi.Input
 
@@ -454,7 +464,7 @@ func (i ProductSecretArray) ToProductSecretArrayOutputWithContext(ctx context.Co
 // ProductSecretMapInput is an input type that accepts ProductSecretMap and ProductSecretMapOutput values.
 // You can construct a concrete instance of `ProductSecretMapInput` via:
 //
-//          ProductSecretMap{ "key": ProductSecretArgs{...} }
+//	ProductSecretMap{ "key": ProductSecretArgs{...} }
 type ProductSecretMapInput interface {
 	pulumi.Input
 

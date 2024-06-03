@@ -15,58 +15,52 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kms
         /// <summary>
         /// Use this data source to query detailed information of kms list_algorithms
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
-        ///     {
-        ///         var example = Output.Create(Tencentcloud.Kms.GetListAlgorithms.InvokeAsync());
-        ///     }
+        ///     var example = Tencentcloud.Kms.GetListAlgorithms.Invoke();
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetListAlgorithmsResult> InvokeAsync(GetListAlgorithmsArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetListAlgorithmsResult>("tencentcloud:Kms/getListAlgorithms:getListAlgorithms", args ?? new GetListAlgorithmsArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetListAlgorithmsResult>("tencentcloud:Kms/getListAlgorithms:getListAlgorithms", args ?? new GetListAlgorithmsArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of kms list_algorithms
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
-        ///     {
-        ///         var example = Output.Create(Tencentcloud.Kms.GetListAlgorithms.InvokeAsync());
-        ///     }
+        ///     var example = Tencentcloud.Kms.GetListAlgorithms.Invoke();
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetListAlgorithmsResult> Invoke(GetListAlgorithmsInvokeArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetListAlgorithmsResult>("tencentcloud:Kms/getListAlgorithms:getListAlgorithms", args ?? new GetListAlgorithmsInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetListAlgorithmsResult>("tencentcloud:Kms/getListAlgorithms:getListAlgorithms", args ?? new GetListAlgorithmsInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetListAlgorithmsArgs : Pulumi.InvokeArgs
+    public sealed class GetListAlgorithmsArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Used to save results.
@@ -77,9 +71,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kms
         public GetListAlgorithmsArgs()
         {
         }
+        public static new GetListAlgorithmsArgs Empty => new GetListAlgorithmsArgs();
     }
 
-    public sealed class GetListAlgorithmsInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetListAlgorithmsInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Used to save results.
@@ -90,6 +85,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kms
         public GetListAlgorithmsInvokeArgs()
         {
         }
+        public static new GetListAlgorithmsInvokeArgs Empty => new GetListAlgorithmsInvokeArgs();
     }
 
 

@@ -15,68 +15,62 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ses
         /// <summary>
         /// Use this data source to query detailed information of ses send_email_status
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var sendEmailStatus = Tencentcloud.Ses.GetSendEmailStatus.Invoke(new()
         ///     {
-        ///         var sendEmailStatus = Output.Create(Tencentcloud.Ses.GetSendEmailStatus.InvokeAsync(new Tencentcloud.Ses.GetSendEmailStatusArgs
-        ///         {
-        ///             MessageId = "qcloudses-30-4123414323-date-20210101094334-syNARhMTbKI1",
-        ///             RequestDate = "2020-09-22",
-        ///             ToEmailAddress = "example@cloud.com",
-        ///         }));
-        ///     }
+        ///         MessageId = "qcloudses-30-4123414323-date-20210101094334-syNARhMTbKI1",
+        ///         RequestDate = "2020-09-22",
+        ///         ToEmailAddress = "example@cloud.com",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetSendEmailStatusResult> InvokeAsync(GetSendEmailStatusArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetSendEmailStatusResult>("tencentcloud:Ses/getSendEmailStatus:getSendEmailStatus", args ?? new GetSendEmailStatusArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetSendEmailStatusResult>("tencentcloud:Ses/getSendEmailStatus:getSendEmailStatus", args ?? new GetSendEmailStatusArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of ses send_email_status
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var sendEmailStatus = Tencentcloud.Ses.GetSendEmailStatus.Invoke(new()
         ///     {
-        ///         var sendEmailStatus = Output.Create(Tencentcloud.Ses.GetSendEmailStatus.InvokeAsync(new Tencentcloud.Ses.GetSendEmailStatusArgs
-        ///         {
-        ///             MessageId = "qcloudses-30-4123414323-date-20210101094334-syNARhMTbKI1",
-        ///             RequestDate = "2020-09-22",
-        ///             ToEmailAddress = "example@cloud.com",
-        ///         }));
-        ///     }
+        ///         MessageId = "qcloudses-30-4123414323-date-20210101094334-syNARhMTbKI1",
+        ///         RequestDate = "2020-09-22",
+        ///         ToEmailAddress = "example@cloud.com",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetSendEmailStatusResult> Invoke(GetSendEmailStatusInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetSendEmailStatusResult>("tencentcloud:Ses/getSendEmailStatus:getSendEmailStatus", args ?? new GetSendEmailStatusInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetSendEmailStatusResult>("tencentcloud:Ses/getSendEmailStatus:getSendEmailStatus", args ?? new GetSendEmailStatusInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetSendEmailStatusArgs : Pulumi.InvokeArgs
+    public sealed class GetSendEmailStatusArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// The MessageId field returned by the SendMail API.
@@ -105,9 +99,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ses
         public GetSendEmailStatusArgs()
         {
         }
+        public static new GetSendEmailStatusArgs Empty => new GetSendEmailStatusArgs();
     }
 
-    public sealed class GetSendEmailStatusInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetSendEmailStatusInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// The MessageId field returned by the SendMail API.
@@ -136,6 +131,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ses
         public GetSendEmailStatusInvokeArgs()
         {
         }
+        public static new GetSendEmailStatusInvokeArgs Empty => new GetSendEmailStatusInvokeArgs();
     }
 
 

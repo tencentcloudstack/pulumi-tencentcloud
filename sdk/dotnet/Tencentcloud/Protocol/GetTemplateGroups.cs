@@ -15,64 +15,58 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Protocol
         /// <summary>
         /// Use this data source to query detailed information of protocol template groups.
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var name = Tencentcloud.Protocol.GetTemplateGroups.Invoke(new()
         ///     {
-        ///         var name = Output.Create(Tencentcloud.Protocol.GetTemplateGroups.InvokeAsync(new Tencentcloud.Protocol.GetTemplateGroupsArgs
-        ///         {
-        ///             Name = "test",
-        ///         }));
-        ///     }
+        ///         Name = "test",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetTemplateGroupsResult> InvokeAsync(GetTemplateGroupsArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetTemplateGroupsResult>("tencentcloud:Protocol/getTemplateGroups:getTemplateGroups", args ?? new GetTemplateGroupsArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetTemplateGroupsResult>("tencentcloud:Protocol/getTemplateGroups:getTemplateGroups", args ?? new GetTemplateGroupsArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of protocol template groups.
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var name = Tencentcloud.Protocol.GetTemplateGroups.Invoke(new()
         ///     {
-        ///         var name = Output.Create(Tencentcloud.Protocol.GetTemplateGroups.InvokeAsync(new Tencentcloud.Protocol.GetTemplateGroupsArgs
-        ///         {
-        ///             Name = "test",
-        ///         }));
-        ///     }
+        ///         Name = "test",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetTemplateGroupsResult> Invoke(GetTemplateGroupsInvokeArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetTemplateGroupsResult>("tencentcloud:Protocol/getTemplateGroups:getTemplateGroups", args ?? new GetTemplateGroupsInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetTemplateGroupsResult>("tencentcloud:Protocol/getTemplateGroups:getTemplateGroups", args ?? new GetTemplateGroupsInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetTemplateGroupsArgs : Pulumi.InvokeArgs
+    public sealed class GetTemplateGroupsArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// ID of the protocol template group to query.
@@ -95,9 +89,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Protocol
         public GetTemplateGroupsArgs()
         {
         }
+        public static new GetTemplateGroupsArgs Empty => new GetTemplateGroupsArgs();
     }
 
-    public sealed class GetTemplateGroupsInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetTemplateGroupsInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// ID of the protocol template group to query.
@@ -120,6 +115,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Protocol
         public GetTemplateGroupsInvokeArgs()
         {
         }
+        public static new GetTemplateGroupsInvokeArgs Empty => new GetTemplateGroupsInvokeArgs();
     }
 
 

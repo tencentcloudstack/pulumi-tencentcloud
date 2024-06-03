@@ -9,26 +9,6 @@ from subprocess import check_call
 
 
 VERSION = "0.0.0"
-PLUGIN_VERSION = "0.0.0"
-
-class InstallPluginCommand(install):
-    def run(self):
-        install.run(self)
-        try:
-            check_call(['pulumi', 'plugin', 'install', 'resource', 'tencentcloud', PLUGIN_VERSION, '--server', 'github://api.github.com/tencentcloudstack'])
-        except OSError as error:
-            if error.errno == errno.ENOENT:
-                print(f"""
-                There was an error installing the tencentcloud resource provider plugin.
-                It looks like `pulumi` is not installed on your system.
-                Please visit https://pulumi.com/ to install the Pulumi CLI.
-                You may try manually installing the plugin by running
-                `pulumi plugin install resource tencentcloud {PLUGIN_VERSION}`
-                """)
-            else:
-                raise
-
-
 def readme():
     try:
         with open('README.md', encoding='utf-8') as f:
@@ -38,13 +18,11 @@ def readme():
 
 
 setup(name='tencentcloud_iac_pulumi',
+      python_requires='>=3.8',
       version=VERSION,
       description="A Pulumi package for creating and managing Tencent Cloud resources.",
       long_description=readme(),
       long_description_content_type='text/markdown',
-      cmdclass={
-          'install': InstallPluginCommand,
-      },
       keywords='pulumi tencentcloud category/cloud',
       url='https://www.pulumi.com',
       project_urls={

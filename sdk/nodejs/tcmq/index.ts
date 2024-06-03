@@ -5,17 +5,36 @@ import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
 // Export members:
-export * from "./getQueue";
-export * from "./getSubscribe";
-export * from "./getTopic";
-export * from "./queue";
-export * from "./subscribe";
-export * from "./topic";
+export { GetQueueArgs, GetQueueResult, GetQueueOutputArgs } from "./getQueue";
+export const getQueue: typeof import("./getQueue").getQueue = null as any;
+export const getQueueOutput: typeof import("./getQueue").getQueueOutput = null as any;
+utilities.lazyLoad(exports, ["getQueue","getQueueOutput"], () => require("./getQueue"));
 
-// Import resources to register:
-import { Queue } from "./queue";
-import { Subscribe } from "./subscribe";
-import { Topic } from "./topic";
+export { GetSubscribeArgs, GetSubscribeResult, GetSubscribeOutputArgs } from "./getSubscribe";
+export const getSubscribe: typeof import("./getSubscribe").getSubscribe = null as any;
+export const getSubscribeOutput: typeof import("./getSubscribe").getSubscribeOutput = null as any;
+utilities.lazyLoad(exports, ["getSubscribe","getSubscribeOutput"], () => require("./getSubscribe"));
+
+export { GetTopicArgs, GetTopicResult, GetTopicOutputArgs } from "./getTopic";
+export const getTopic: typeof import("./getTopic").getTopic = null as any;
+export const getTopicOutput: typeof import("./getTopic").getTopicOutput = null as any;
+utilities.lazyLoad(exports, ["getTopic","getTopicOutput"], () => require("./getTopic"));
+
+export { QueueArgs, QueueState } from "./queue";
+export type Queue = import("./queue").Queue;
+export const Queue: typeof import("./queue").Queue = null as any;
+utilities.lazyLoad(exports, ["Queue"], () => require("./queue"));
+
+export { SubscribeArgs, SubscribeState } from "./subscribe";
+export type Subscribe = import("./subscribe").Subscribe;
+export const Subscribe: typeof import("./subscribe").Subscribe = null as any;
+utilities.lazyLoad(exports, ["Subscribe"], () => require("./subscribe"));
+
+export { TopicArgs, TopicState } from "./topic";
+export type Topic = import("./topic").Topic;
+export const Topic: typeof import("./topic").Topic = null as any;
+utilities.lazyLoad(exports, ["Topic"], () => require("./topic"));
+
 
 const _module = {
     version: utilities.getVersion(),

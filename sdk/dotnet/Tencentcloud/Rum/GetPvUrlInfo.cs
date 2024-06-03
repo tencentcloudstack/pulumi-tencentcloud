@@ -15,70 +15,64 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Rum
         /// <summary>
         /// Use this data source to query detailed information of rum pv_url_info
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var pvUrlInfo = Tencentcloud.Rum.GetPvUrlInfo.Invoke(new()
         ///     {
-        ///         var pvUrlInfo = Output.Create(Tencentcloud.Rum.GetPvUrlInfo.InvokeAsync(new Tencentcloud.Rum.GetPvUrlInfoArgs
-        ///         {
-        ///             EndTime = 1625454840,
-        ///             ProjectId = 1,
-        ///             StartTime = 1625444040,
-        ///             Type = "pagepv",
-        ///         }));
-        ///     }
+        ///         EndTime = 1625454840,
+        ///         ProjectId = 1,
+        ///         StartTime = 1625444040,
+        ///         Type = "pagepv",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetPvUrlInfoResult> InvokeAsync(GetPvUrlInfoArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetPvUrlInfoResult>("tencentcloud:Rum/getPvUrlInfo:getPvUrlInfo", args ?? new GetPvUrlInfoArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetPvUrlInfoResult>("tencentcloud:Rum/getPvUrlInfo:getPvUrlInfo", args ?? new GetPvUrlInfoArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of rum pv_url_info
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var pvUrlInfo = Tencentcloud.Rum.GetPvUrlInfo.Invoke(new()
         ///     {
-        ///         var pvUrlInfo = Output.Create(Tencentcloud.Rum.GetPvUrlInfo.InvokeAsync(new Tencentcloud.Rum.GetPvUrlInfoArgs
-        ///         {
-        ///             EndTime = 1625454840,
-        ///             ProjectId = 1,
-        ///             StartTime = 1625444040,
-        ///             Type = "pagepv",
-        ///         }));
-        ///     }
+        ///         EndTime = 1625454840,
+        ///         ProjectId = 1,
+        ///         StartTime = 1625444040,
+        ///         Type = "pagepv",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetPvUrlInfoResult> Invoke(GetPvUrlInfoInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetPvUrlInfoResult>("tencentcloud:Rum/getPvUrlInfo:getPvUrlInfo", args ?? new GetPvUrlInfoInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetPvUrlInfoResult>("tencentcloud:Rum/getPvUrlInfo:getPvUrlInfo", args ?? new GetPvUrlInfoInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetPvUrlInfoArgs : Pulumi.InvokeArgs
+    public sealed class GetPvUrlInfoArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// The region where the data reporting takes place.
@@ -215,9 +209,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Rum
         public GetPvUrlInfoArgs()
         {
         }
+        public static new GetPvUrlInfoArgs Empty => new GetPvUrlInfoArgs();
     }
 
-    public sealed class GetPvUrlInfoInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetPvUrlInfoInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// The region where the data reporting takes place.
@@ -354,6 +349,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Rum
         public GetPvUrlInfoInvokeArgs()
         {
         }
+        public static new GetPvUrlInfoInvokeArgs Empty => new GetPvUrlInfoInvokeArgs();
     }
 
 

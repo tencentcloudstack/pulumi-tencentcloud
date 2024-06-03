@@ -7,44 +7,70 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a COS resource to create a COS bucket policy and set its attributes.
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"fmt"
 //
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cos"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cos"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Cos.NewBucketPolicy(ctx, "cosPolicy", &Cos.BucketPolicyArgs{
-// 			Bucket: pulumi.String("mycos-1258798060"),
-// 			Policy: pulumi.String(fmt.Sprintf("%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v", "{\n", "  \"version\": \"2.0\",\n", "  \"Statement\": [\n", "    {\n", "      \"Principal\": {\n", "        \"qcs\": [\n", "          \"qcs::cam::uin/<your-account-id>:uin/<your-account-id>\"\n", "        ]\n", "      },\n", "      \"Action\": [\n", "        \"name/cos:DeleteBucket\",\n", "        \"name/cos:PutBucketACL\"\n", "      ],\n", "      \"Effect\": \"allow\",\n", "      \"Resource\": [\n", "        \"qcs::cos:<bucket region>:uid/<your-account-id>:<bucket name>/*\"\n", "      ]\n", "    }\n", "  ]\n", "}\n", "\n")),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Cos.NewBucketPolicy(ctx, "cosPolicy", &Cos.BucketPolicyArgs{
+//				Bucket: pulumi.String("mycos-1258798060"),
+//				Policy: pulumi.String(`{
+//	  "version": "2.0",
+//	  "Statement": [
+//	    {
+//	      "Principal": {
+//	        "qcs": [
+//	          "qcs::cam::uin/<your-account-id>:uin/<your-account-id>"
+//	        ]
+//	      },
+//	      "Action": [
+//	        "name/cos:DeleteBucket",
+//	        "name/cos:PutBucketACL"
+//	      ],
+//	      "Effect": "allow",
+//	      "Resource": [
+//	        "qcs::cos:<bucket region>:uid/<your-account-id>:<bucket name>/*"
+//	      ]
+//	    }
+//	  ]
+//	}
+//
+// `),
+//
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // COS bucket policy can be imported, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Cos/bucketPolicy:BucketPolicy bucket bucket-name
+// $ pulumi import tencentcloud:Cos/bucketPolicy:BucketPolicy bucket bucket-name
 // ```
 type BucketPolicy struct {
 	pulumi.CustomResourceState
@@ -68,7 +94,7 @@ func NewBucketPolicy(ctx *pulumi.Context,
 	if args.Policy == nil {
 		return nil, errors.New("invalid value for required argument 'Policy'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource BucketPolicy
 	err := ctx.RegisterResource("tencentcloud:Cos/bucketPolicy:BucketPolicy", name, args, &resource, opts...)
 	if err != nil {
@@ -149,7 +175,7 @@ func (i *BucketPolicy) ToBucketPolicyOutputWithContext(ctx context.Context) Buck
 // BucketPolicyArrayInput is an input type that accepts BucketPolicyArray and BucketPolicyArrayOutput values.
 // You can construct a concrete instance of `BucketPolicyArrayInput` via:
 //
-//          BucketPolicyArray{ BucketPolicyArgs{...} }
+//	BucketPolicyArray{ BucketPolicyArgs{...} }
 type BucketPolicyArrayInput interface {
 	pulumi.Input
 
@@ -174,7 +200,7 @@ func (i BucketPolicyArray) ToBucketPolicyArrayOutputWithContext(ctx context.Cont
 // BucketPolicyMapInput is an input type that accepts BucketPolicyMap and BucketPolicyMapOutput values.
 // You can construct a concrete instance of `BucketPolicyMapInput` via:
 //
-//          BucketPolicyMap{ "key": BucketPolicyArgs{...} }
+//	BucketPolicyMap{ "key": BucketPolicyArgs{...} }
 type BucketPolicyMapInput interface {
 	pulumi.Input
 

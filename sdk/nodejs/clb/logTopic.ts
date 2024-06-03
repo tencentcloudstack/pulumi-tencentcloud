@@ -9,22 +9,24 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const topic = new tencentcloud.Clb.LogTopic("topic", {
- *     logSetId: tencentcloud_clb_log_set_set.id,
+ * const topic = new tencentcloud.clb.LogTopic("topic", {
+ *     logSetId: tencentcloud_clb_log_set.set.id,
  *     topicName: "clb-topic",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * CLB log topic can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Clb/logTopic:LogTopic topic lb-7a0t6zqb
+ * $ pulumi import tencentcloud:Clb/logTopic:LogTopic topic lb-7a0t6zqb
  * ```
  */
 export class LogTopic extends pulumi.CustomResource {

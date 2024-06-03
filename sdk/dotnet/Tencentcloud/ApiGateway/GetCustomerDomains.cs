@@ -15,94 +15,90 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway
         /// <summary>
         /// Use this data source to query API gateway domain list.
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var foo = new Tencentcloud.ApiGateway.CustomDomain("foo", new()
         ///     {
-        ///         var foo = new Tencentcloud.ApiGateway.CustomDomain("foo", new Tencentcloud.ApiGateway.CustomDomainArgs
+        ///         ServiceId = "service-ohxqslqe",
+        ///         SubDomain = "tic-test.dnsv1.com",
+        ///         Protocol = "http",
+        ///         NetType = "OUTER",
+        ///         IsDefaultMapping = false,
+        ///         DefaultDomain = "service-ohxqslqe-1259649581.gz.apigw.tencentcs.com",
+        ///         PathMappings = new[]
         ///         {
-        ///             ServiceId = "service-ohxqslqe",
-        ///             SubDomain = "tic-test.dnsv1.com",
-        ///             Protocol = "http",
-        ///             NetType = "OUTER",
-        ///             IsDefaultMapping = false,
-        ///             DefaultDomain = "service-ohxqslqe-1259649581.gz.apigw.tencentcs.com",
-        ///             PathMappings = 
-        ///             {
-        ///                 "/good#test",
-        ///                 "/root#release",
-        ///             },
-        ///         });
-        ///         var id = Tencentcloud.ApiGateway.GetCustomerDomains.Invoke(new Tencentcloud.ApiGateway.GetCustomerDomainsInvokeArgs
-        ///         {
-        ///             ServiceId = foo.ServiceId,
-        ///         });
-        ///     }
+        ///             "/good#test",
+        ///             "/root#release",
+        ///         },
+        ///     });
         /// 
-        /// }
+        ///     var id = Tencentcloud.ApiGateway.GetCustomerDomains.Invoke(new()
+        ///     {
+        ///         ServiceId = foo.ServiceId,
+        ///     });
+        /// 
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetCustomerDomainsResult> InvokeAsync(GetCustomerDomainsArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetCustomerDomainsResult>("tencentcloud:ApiGateway/getCustomerDomains:getCustomerDomains", args ?? new GetCustomerDomainsArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetCustomerDomainsResult>("tencentcloud:ApiGateway/getCustomerDomains:getCustomerDomains", args ?? new GetCustomerDomainsArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query API gateway domain list.
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var foo = new Tencentcloud.ApiGateway.CustomDomain("foo", new()
         ///     {
-        ///         var foo = new Tencentcloud.ApiGateway.CustomDomain("foo", new Tencentcloud.ApiGateway.CustomDomainArgs
+        ///         ServiceId = "service-ohxqslqe",
+        ///         SubDomain = "tic-test.dnsv1.com",
+        ///         Protocol = "http",
+        ///         NetType = "OUTER",
+        ///         IsDefaultMapping = false,
+        ///         DefaultDomain = "service-ohxqslqe-1259649581.gz.apigw.tencentcs.com",
+        ///         PathMappings = new[]
         ///         {
-        ///             ServiceId = "service-ohxqslqe",
-        ///             SubDomain = "tic-test.dnsv1.com",
-        ///             Protocol = "http",
-        ///             NetType = "OUTER",
-        ///             IsDefaultMapping = false,
-        ///             DefaultDomain = "service-ohxqslqe-1259649581.gz.apigw.tencentcs.com",
-        ///             PathMappings = 
-        ///             {
-        ///                 "/good#test",
-        ///                 "/root#release",
-        ///             },
-        ///         });
-        ///         var id = Tencentcloud.ApiGateway.GetCustomerDomains.Invoke(new Tencentcloud.ApiGateway.GetCustomerDomainsInvokeArgs
-        ///         {
-        ///             ServiceId = foo.ServiceId,
-        ///         });
-        ///     }
+        ///             "/good#test",
+        ///             "/root#release",
+        ///         },
+        ///     });
         /// 
-        /// }
+        ///     var id = Tencentcloud.ApiGateway.GetCustomerDomains.Invoke(new()
+        ///     {
+        ///         ServiceId = foo.ServiceId,
+        ///     });
+        /// 
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetCustomerDomainsResult> Invoke(GetCustomerDomainsInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetCustomerDomainsResult>("tencentcloud:ApiGateway/getCustomerDomains:getCustomerDomains", args ?? new GetCustomerDomainsInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetCustomerDomainsResult>("tencentcloud:ApiGateway/getCustomerDomains:getCustomerDomains", args ?? new GetCustomerDomainsInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetCustomerDomainsArgs : Pulumi.InvokeArgs
+    public sealed class GetCustomerDomainsArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Used to save results.
@@ -119,9 +115,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway
         public GetCustomerDomainsArgs()
         {
         }
+        public static new GetCustomerDomainsArgs Empty => new GetCustomerDomainsArgs();
     }
 
-    public sealed class GetCustomerDomainsInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetCustomerDomainsInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Used to save results.
@@ -138,6 +135,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway
         public GetCustomerDomainsInvokeArgs()
         {
         }
+        public static new GetCustomerDomainsInvokeArgs Empty => new GetCustomerDomainsInvokeArgs();
     }
 
 

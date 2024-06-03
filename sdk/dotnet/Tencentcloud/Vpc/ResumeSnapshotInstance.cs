@@ -14,89 +14,96 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
     /// Provides a resource to create a vpc resume_snapshot_instance
     /// 
     /// ## Example Usage
+    /// 
     /// ### Basic example
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var resumeSnapshotInstance = new Tencentcloud.Vpc.ResumeSnapshotInstance("resumeSnapshotInstance", new()
     ///     {
-    ///         var resumeSnapshotInstance = new Tencentcloud.Vpc.ResumeSnapshotInstance("resumeSnapshotInstance", new Tencentcloud.Vpc.ResumeSnapshotInstanceArgs
-    ///         {
-    ///             InstanceId = "ntrgm89v",
-    ///             SnapshotFileId = "ssfile-emtabuwu2z",
-    ///             SnapshotPolicyId = "sspolicy-1t6cobbv",
-    ///         });
-    ///     }
+    ///         InstanceId = "ntrgm89v",
+    ///         SnapshotFileId = "ssfile-emtabuwu2z",
+    ///         SnapshotPolicyId = "sspolicy-1t6cobbv",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
+    /// 
     /// ### Complete example
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = Pulumi.Tencentcloud;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var exampleSnapshotFiles = Tencentcloud.Vpc.GetSnapshotFiles.Invoke(new()
     ///     {
-    ///         var exampleSnapshotFiles = Output.Create(Tencentcloud.Vpc.GetSnapshotFiles.InvokeAsync(new Tencentcloud.Vpc.GetSnapshotFilesArgs
-    ///         {
-    ///             BusinessType = "securitygroup",
-    ///             InstanceId = "sg-902tl7t7",
-    ///             StartDate = "2022-10-10 00:00:00",
-    ///             EndDate = "2023-10-30 00:00:00",
-    ///         }));
-    ///         var exampleBucket = new Tencentcloud.Cos.Bucket("exampleBucket", new Tencentcloud.Cos.BucketArgs
-    ///         {
-    ///             Bucket = "tf-example-1308919341",
-    ///             Acl = "private",
-    ///         });
-    ///         var exampleSnapshotPolicy = new Tencentcloud.Vpc.SnapshotPolicy("exampleSnapshotPolicy", new Tencentcloud.Vpc.SnapshotPolicyArgs
-    ///         {
-    ///             SnapshotPolicyName = "tf-example",
-    ///             BackupType = "time",
-    ///             CosBucket = exampleBucket.CosBucket,
-    ///             CosRegion = "ap-guangzhou",
-    ///             CreateNewCos = false,
-    ///             KeepTime = 2,
-    ///             BackupPolicies = 
-    ///             {
-    ///                 new Tencentcloud.Vpc.Inputs.SnapshotPolicyBackupPolicyArgs
-    ///                 {
-    ///                     BackupDay = "monday",
-    ///                     BackupTime = "00:00:00",
-    ///                 },
-    ///                 new Tencentcloud.Vpc.Inputs.SnapshotPolicyBackupPolicyArgs
-    ///                 {
-    ///                     BackupDay = "tuesday",
-    ///                     BackupTime = "01:00:00",
-    ///                 },
-    ///                 new Tencentcloud.Vpc.Inputs.SnapshotPolicyBackupPolicyArgs
-    ///                 {
-    ///                     BackupDay = "wednesday",
-    ///                     BackupTime = "02:00:00",
-    ///                 },
-    ///             },
-    ///         });
-    ///         var exampleResumeSnapshotInstance = new Tencentcloud.Vpc.ResumeSnapshotInstance("exampleResumeSnapshotInstance", new Tencentcloud.Vpc.ResumeSnapshotInstanceArgs
-    ///         {
-    ///             SnapshotPolicyId = exampleSnapshotPolicy.Id,
-    ///             SnapshotFileId = exampleSnapshotFiles.Apply(exampleSnapshotFiles =&gt; exampleSnapshotFiles.SnapshotFileSets?[0]?.SnapshotFileId),
-    ///             InstanceId = "policy-1t6cob",
-    ///         });
-    ///     }
+    ///         BusinessType = "securitygroup",
+    ///         InstanceId = "sg-902tl7t7",
+    ///         StartDate = "2022-10-10 00:00:00",
+    ///         EndDate = "2023-10-30 00:00:00",
+    ///     });
     /// 
-    /// }
+    ///     var exampleBucket = new Tencentcloud.Cos.Bucket("exampleBucket", new()
+    ///     {
+    ///         CosBucket = "tf-example-1308919341",
+    ///         Acl = "private",
+    ///     });
+    /// 
+    ///     var exampleSnapshotPolicy = new Tencentcloud.Vpc.SnapshotPolicy("exampleSnapshotPolicy", new()
+    ///     {
+    ///         SnapshotPolicyName = "tf-example",
+    ///         BackupType = "time",
+    ///         CosBucket = exampleBucket.CosBucket,
+    ///         CosRegion = "ap-guangzhou",
+    ///         CreateNewCos = false,
+    ///         KeepTime = 2,
+    ///         BackupPolicies = new[]
+    ///         {
+    ///             new Tencentcloud.Vpc.Inputs.SnapshotPolicyBackupPolicyArgs
+    ///             {
+    ///                 BackupDay = "monday",
+    ///                 BackupTime = "00:00:00",
+    ///             },
+    ///             new Tencentcloud.Vpc.Inputs.SnapshotPolicyBackupPolicyArgs
+    ///             {
+    ///                 BackupDay = "tuesday",
+    ///                 BackupTime = "01:00:00",
+    ///             },
+    ///             new Tencentcloud.Vpc.Inputs.SnapshotPolicyBackupPolicyArgs
+    ///             {
+    ///                 BackupDay = "wednesday",
+    ///                 BackupTime = "02:00:00",
+    ///             },
+    ///         },
+    ///     });
+    /// 
+    ///     var exampleResumeSnapshotInstance = new Tencentcloud.Vpc.ResumeSnapshotInstance("exampleResumeSnapshotInstance", new()
+    ///     {
+    ///         SnapshotPolicyId = exampleSnapshotPolicy.Id,
+    ///         SnapshotFileId = exampleSnapshotFiles.Apply(getSnapshotFilesResult =&gt; getSnapshotFilesResult.SnapshotFileSets[0]?.SnapshotFileId),
+    ///         InstanceId = "policy-1t6cob",
+    ///     });
+    /// 
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Vpc/resumeSnapshotInstance:ResumeSnapshotInstance")]
-    public partial class ResumeSnapshotInstance : Pulumi.CustomResource
+    public partial class ResumeSnapshotInstance : global::Pulumi.CustomResource
     {
         /// <summary>
         /// InstanceId.
@@ -161,7 +168,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         }
     }
 
-    public sealed class ResumeSnapshotInstanceArgs : Pulumi.ResourceArgs
+    public sealed class ResumeSnapshotInstanceArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// InstanceId.
@@ -184,9 +191,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         public ResumeSnapshotInstanceArgs()
         {
         }
+        public static new ResumeSnapshotInstanceArgs Empty => new ResumeSnapshotInstanceArgs();
     }
 
-    public sealed class ResumeSnapshotInstanceState : Pulumi.ResourceArgs
+    public sealed class ResumeSnapshotInstanceState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// InstanceId.
@@ -209,5 +217,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         public ResumeSnapshotInstanceState()
         {
         }
+        public static new ResumeSnapshotInstanceState Empty => new ResumeSnapshotInstanceState();
     }
 }

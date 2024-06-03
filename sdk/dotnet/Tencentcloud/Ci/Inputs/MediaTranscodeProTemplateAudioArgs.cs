@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ci.Inputs
 {
 
-    public sealed class MediaTranscodeProTemplateAudioArgs : Pulumi.ResourceArgs
+    public sealed class MediaTranscodeProTemplateAudioArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Codec format, value aac, mp3, flac, amr, Vorbis, opus, pcm_s16le.
@@ -28,5 +28,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ci.Inputs
         public MediaTranscodeProTemplateAudioArgs()
         {
         }
+        public static new MediaTranscodeProTemplateAudioArgs Empty => new MediaTranscodeProTemplateAudioArgs();
     }
 }

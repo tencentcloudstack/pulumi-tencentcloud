@@ -15,76 +15,70 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
         /// <summary>
         /// Use this data source to Interlude notification list.
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var notices = Tencentcloud.Monitor.GetAlarmNotices.Invoke(new()
         ///     {
-        ///         var notices = Output.Create(Tencentcloud.Monitor.GetAlarmNotices.InvokeAsync(new Tencentcloud.Monitor.GetAlarmNoticesArgs
-        ///         {
-        ///             GroupIds = {},
-        ///             Name = "",
-        ///             NoticeIds = {},
-        ///             Order = "DESC",
-        ///             OwnerUid = 1,
-        ///             ReceiverType = "",
-        ///             UserIds = {},
-        ///         }));
-        ///     }
+        ///         GroupIds = new() { },
+        ///         Name = "",
+        ///         NoticeIds = new() { },
+        ///         Order = "DESC",
+        ///         OwnerUid = 1,
+        ///         ReceiverType = "",
+        ///         UserIds = new() { },
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetAlarmNoticesResult> InvokeAsync(GetAlarmNoticesArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetAlarmNoticesResult>("tencentcloud:Monitor/getAlarmNotices:getAlarmNotices", args ?? new GetAlarmNoticesArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetAlarmNoticesResult>("tencentcloud:Monitor/getAlarmNotices:getAlarmNotices", args ?? new GetAlarmNoticesArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to Interlude notification list.
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var notices = Tencentcloud.Monitor.GetAlarmNotices.Invoke(new()
         ///     {
-        ///         var notices = Output.Create(Tencentcloud.Monitor.GetAlarmNotices.InvokeAsync(new Tencentcloud.Monitor.GetAlarmNoticesArgs
-        ///         {
-        ///             GroupIds = {},
-        ///             Name = "",
-        ///             NoticeIds = {},
-        ///             Order = "DESC",
-        ///             OwnerUid = 1,
-        ///             ReceiverType = "",
-        ///             UserIds = {},
-        ///         }));
-        ///     }
+        ///         GroupIds = new() { },
+        ///         Name = "",
+        ///         NoticeIds = new() { },
+        ///         Order = "DESC",
+        ///         OwnerUid = 1,
+        ///         ReceiverType = "",
+        ///         UserIds = new() { },
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetAlarmNoticesResult> Invoke(GetAlarmNoticesInvokeArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetAlarmNoticesResult>("tencentcloud:Monitor/getAlarmNotices:getAlarmNotices", args ?? new GetAlarmNoticesInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetAlarmNoticesResult>("tencentcloud:Monitor/getAlarmNotices:getAlarmNotices", args ?? new GetAlarmNoticesInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetAlarmNoticesArgs : Pulumi.InvokeArgs
+    public sealed class GetAlarmNoticesArgs : global::Pulumi.InvokeArgs
     {
         [Input("groupIds")]
         private List<int>? _groupIds;
@@ -155,9 +149,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
         public GetAlarmNoticesArgs()
         {
         }
+        public static new GetAlarmNoticesArgs Empty => new GetAlarmNoticesArgs();
     }
 
-    public sealed class GetAlarmNoticesInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetAlarmNoticesInvokeArgs : global::Pulumi.InvokeArgs
     {
         [Input("groupIds")]
         private InputList<int>? _groupIds;
@@ -228,6 +223,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
         public GetAlarmNoticesInvokeArgs()
         {
         }
+        public static new GetAlarmNoticesInvokeArgs Empty => new GetAlarmNoticesInvokeArgs();
     }
 
 

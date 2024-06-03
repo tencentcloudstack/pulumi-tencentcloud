@@ -9,22 +9,24 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const securityGroupAttachment = new tencentcloud.Cvm.SecurityGroupAttachment("security_group_attachment", {
+ * const securityGroupAttachment = new tencentcloud.cvm.SecurityGroupAttachment("securityGroupAttachment", {
  *     instanceId: "ins-xxxxxxxx",
  *     securityGroupId: "sg-xxxxxxx",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * cvm security_group_attachment can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Cvm/securityGroupAttachment:SecurityGroupAttachment security_group_attachment ${instance_id}#${security_group_id}
+ * $ pulumi import tencentcloud:Cvm/securityGroupAttachment:SecurityGroupAttachment security_group_attachment ${instance_id}#${security_group_id}
  * ```
  */
 export class SecurityGroupAttachment extends pulumi.CustomResource {

@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ses.Inputs
 {
 
-    public sealed class TemplateTemplateContentGetArgs : Pulumi.ResourceArgs
+    public sealed class TemplateTemplateContentGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Html code after base64.
@@ -28,5 +28,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ses.Inputs
         public TemplateTemplateContentGetArgs()
         {
         }
+        public static new TemplateTemplateContentGetArgs Empty => new TemplateTemplateContentGetArgs();
     }
 }

@@ -14,7 +14,13 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dayu.Outputs
     [OutputType]
     public sealed class GetL4RulesListSourceListResult
     {
+        /// <summary>
+        /// Source IP or domain.
+        /// </summary>
         public readonly string Source;
+        /// <summary>
+        /// Weight of the source.
+        /// </summary>
         public readonly int Weight;
 
         [OutputConstructor]

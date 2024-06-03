@@ -9,11 +9,12 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const storage = new tencentcloud.Cbs.Storage("storage", {
+ * const storage = new tencentcloud.cbs.Storage("storage", {
  *     availabilityZone: "ap-guangzhou-3",
  *     encrypt: false,
  *     projectId: 0,
@@ -25,13 +26,14 @@ import * as utilities from "../utilities";
  *     },
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * CBS storage can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Cbs/storage:Storage storage disk-41s6jwy4
+ * $ pulumi import tencentcloud:Cbs/storage:Storage storage disk-41s6jwy4
  * ```
  */
 export class Storage extends pulumi.CustomResource {
@@ -89,7 +91,7 @@ export class Storage extends pulumi.CustomResource {
     /**
      * It has been deprecated from version 1.33.0. Set `prepaidPeriod` instead. The purchased usage period of CBS. Valid values: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36].
      *
-     * @deprecated It has been deprecated from version 1.33.0. Set `prepaid_period` instead.
+     * @deprecated It has been deprecated from version 1.33.0. Set `prepaidPeriod` instead.
      */
     public readonly period!: pulumi.Output<number | undefined>;
     /**
@@ -231,7 +233,7 @@ export interface StorageState {
     /**
      * It has been deprecated from version 1.33.0. Set `prepaidPeriod` instead. The purchased usage period of CBS. Valid values: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36].
      *
-     * @deprecated It has been deprecated from version 1.33.0. Set `prepaid_period` instead.
+     * @deprecated It has been deprecated from version 1.33.0. Set `prepaidPeriod` instead.
      */
     period?: pulumi.Input<number>;
     /**
@@ -303,7 +305,7 @@ export interface StorageArgs {
     /**
      * It has been deprecated from version 1.33.0. Set `prepaidPeriod` instead. The purchased usage period of CBS. Valid values: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36].
      *
-     * @deprecated It has been deprecated from version 1.33.0. Set `prepaid_period` instead.
+     * @deprecated It has been deprecated from version 1.33.0. Set `prepaidPeriod` instead.
      */
     period?: pulumi.Input<number>;
     /**

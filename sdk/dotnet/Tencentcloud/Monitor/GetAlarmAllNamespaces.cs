@@ -15,82 +15,76 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
         /// <summary>
         /// Use this data source to query detailed information of monitor alarm_all_namespaces
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var alarmAllNamespaces = Tencentcloud.Monitor.GetAlarmAllNamespaces.Invoke(new()
         ///     {
-        ///         var alarmAllNamespaces = Output.Create(Tencentcloud.Monitor.GetAlarmAllNamespaces.InvokeAsync(new Tencentcloud.Monitor.GetAlarmAllNamespacesArgs
+        ///         Ids = new[]
         ///         {
-        ///             Ids = 
-        ///             {
-        ///                 "qaap_tunnel_l4_listeners",
-        ///             },
-        ///             Module = "monitor",
-        ///             MonitorTypes = 
-        ///             {
-        ///                 "MT_QCE",
-        ///             },
-        ///             SceneType = "ST_ALARM",
-        ///         }));
-        ///     }
+        ///             "qaap_tunnel_l4_listeners",
+        ///         },
+        ///         Module = "monitor",
+        ///         MonitorTypes = new[]
+        ///         {
+        ///             "MT_QCE",
+        ///         },
+        ///         SceneType = "ST_ALARM",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetAlarmAllNamespacesResult> InvokeAsync(GetAlarmAllNamespacesArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetAlarmAllNamespacesResult>("tencentcloud:Monitor/getAlarmAllNamespaces:getAlarmAllNamespaces", args ?? new GetAlarmAllNamespacesArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetAlarmAllNamespacesResult>("tencentcloud:Monitor/getAlarmAllNamespaces:getAlarmAllNamespaces", args ?? new GetAlarmAllNamespacesArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of monitor alarm_all_namespaces
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var alarmAllNamespaces = Tencentcloud.Monitor.GetAlarmAllNamespaces.Invoke(new()
         ///     {
-        ///         var alarmAllNamespaces = Output.Create(Tencentcloud.Monitor.GetAlarmAllNamespaces.InvokeAsync(new Tencentcloud.Monitor.GetAlarmAllNamespacesArgs
+        ///         Ids = new[]
         ///         {
-        ///             Ids = 
-        ///             {
-        ///                 "qaap_tunnel_l4_listeners",
-        ///             },
-        ///             Module = "monitor",
-        ///             MonitorTypes = 
-        ///             {
-        ///                 "MT_QCE",
-        ///             },
-        ///             SceneType = "ST_ALARM",
-        ///         }));
-        ///     }
+        ///             "qaap_tunnel_l4_listeners",
+        ///         },
+        ///         Module = "monitor",
+        ///         MonitorTypes = new[]
+        ///         {
+        ///             "MT_QCE",
+        ///         },
+        ///         SceneType = "ST_ALARM",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetAlarmAllNamespacesResult> Invoke(GetAlarmAllNamespacesInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetAlarmAllNamespacesResult>("tencentcloud:Monitor/getAlarmAllNamespaces:getAlarmAllNamespaces", args ?? new GetAlarmAllNamespacesInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetAlarmAllNamespacesResult>("tencentcloud:Monitor/getAlarmAllNamespaces:getAlarmAllNamespaces", args ?? new GetAlarmAllNamespacesInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetAlarmAllNamespacesArgs : Pulumi.InvokeArgs
+    public sealed class GetAlarmAllNamespacesArgs : global::Pulumi.InvokeArgs
     {
         [Input("ids")]
         private List<string>? _ids;
@@ -137,9 +131,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
         public GetAlarmAllNamespacesArgs()
         {
         }
+        public static new GetAlarmAllNamespacesArgs Empty => new GetAlarmAllNamespacesArgs();
     }
 
-    public sealed class GetAlarmAllNamespacesInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetAlarmAllNamespacesInvokeArgs : global::Pulumi.InvokeArgs
     {
         [Input("ids")]
         private InputList<string>? _ids;
@@ -186,6 +181,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
         public GetAlarmAllNamespacesInvokeArgs()
         {
         }
+        public static new GetAlarmAllNamespacesInvokeArgs Empty => new GetAlarmAllNamespacesInvokeArgs();
     }
 
 

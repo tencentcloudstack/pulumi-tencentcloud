@@ -15,40 +15,41 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var foo = new Tencentcloud.Gaap.Proxy("foo", new()
     ///     {
-    ///         var foo = new Tencentcloud.Gaap.Proxy("foo", new Tencentcloud.Gaap.ProxyArgs
+    ///         AccessRegion = "SouthChina",
+    ///         Bandwidth = 10,
+    ///         Concurrent = 2,
+    ///         RealserverRegion = "NorthChina",
+    ///         Tags = 
     ///         {
-    ///             AccessRegion = "SouthChina",
-    ///             Bandwidth = 10,
-    ///             Concurrent = 2,
-    ///             RealserverRegion = "NorthChina",
-    ///             Tags = 
-    ///             {
-    ///                 { "test", "test" },
-    ///             },
-    ///         });
-    ///     }
+    ///             { "test", "test" },
+    ///         },
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// GAAP proxy can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Gaap/proxy:Proxy tencentcloud_gaap_proxy.foo link-11112222
+    /// $ pulumi import tencentcloud:Gaap/proxy:Proxy tencentcloud_gaap_proxy.foo link-11112222
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Gaap/proxy:Proxy")]
-    public partial class Proxy : Pulumi.CustomResource
+    public partial class Proxy : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Access region of the GAAP proxy. Valid value: `Hongkong`, `SoutheastAsia`, `Korea`, `Europe`, `NorthAmerica`, `Canada`, `WestIndia`, `Thailand`, `Virginia`, `Japan`, `Taipei`, `SL_AZURE_NorthUAE`, `SL_AZURE_EastAUS`, `SL_AZURE_NorthCentralUSA`, `SL_AZURE_SouthIndia`, `SL_AZURE_SouthBrazil`, `SL_AZURE_NorthZAF`, `SL_AZURE_SoutheastAsia`, `SL_AZURE_CentralFrance`, `SL_AZURE_SouthEngland`, `SL_AZURE_EastUS`, `SL_AZURE_WestUS`, `SL_AZURE_SouthCentralUSA`, `Jakarta`, `Beijing`, `Shanghai`, `Guangzhou`, `Chengdu`, `SL_AZURE_NorwayEast`, `Chongqing`, `Nanjing`, `SaoPaulo`, `SL_AZURE_JapanEast`, `Changsha`, `Xian`, `Wuhan`, `Fuzhou`, `Shenyang`, `Zhengzhou`, `Jinan`, `Hangzhou`, `Shijiazhuang`, `Hefei`.
@@ -191,7 +192,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
         }
     }
 
-    public sealed class ProxyArgs : Pulumi.ResourceArgs
+    public sealed class ProxyArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Access region of the GAAP proxy. Valid value: `Hongkong`, `SoutheastAsia`, `Korea`, `Europe`, `NorthAmerica`, `Canada`, `WestIndia`, `Thailand`, `Virginia`, `Japan`, `Taipei`, `SL_AZURE_NorthUAE`, `SL_AZURE_EastAUS`, `SL_AZURE_NorthCentralUSA`, `SL_AZURE_SouthIndia`, `SL_AZURE_SouthBrazil`, `SL_AZURE_NorthZAF`, `SL_AZURE_SoutheastAsia`, `SL_AZURE_CentralFrance`, `SL_AZURE_SouthEngland`, `SL_AZURE_EastUS`, `SL_AZURE_WestUS`, `SL_AZURE_SouthCentralUSA`, `Jakarta`, `Beijing`, `Shanghai`, `Guangzhou`, `Chengdu`, `SL_AZURE_NorwayEast`, `Chongqing`, `Nanjing`, `SaoPaulo`, `SL_AZURE_JapanEast`, `Changsha`, `Xian`, `Wuhan`, `Fuzhou`, `Shenyang`, `Zhengzhou`, `Jinan`, `Hangzhou`, `Shijiazhuang`, `Hefei`.
@@ -256,9 +257,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
         public ProxyArgs()
         {
         }
+        public static new ProxyArgs Empty => new ProxyArgs();
     }
 
-    public sealed class ProxyState : Pulumi.ResourceArgs
+    public sealed class ProxyState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Access region of the GAAP proxy. Valid value: `Hongkong`, `SoutheastAsia`, `Korea`, `Europe`, `NorthAmerica`, `Canada`, `WestIndia`, `Thailand`, `Virginia`, `Japan`, `Taipei`, `SL_AZURE_NorthUAE`, `SL_AZURE_EastAUS`, `SL_AZURE_NorthCentralUSA`, `SL_AZURE_SouthIndia`, `SL_AZURE_SouthBrazil`, `SL_AZURE_NorthZAF`, `SL_AZURE_SoutheastAsia`, `SL_AZURE_CentralFrance`, `SL_AZURE_SouthEngland`, `SL_AZURE_EastUS`, `SL_AZURE_WestUS`, `SL_AZURE_SouthCentralUSA`, `Jakarta`, `Beijing`, `Shanghai`, `Guangzhou`, `Chengdu`, `SL_AZURE_NorwayEast`, `Chongqing`, `Nanjing`, `SaoPaulo`, `SL_AZURE_JapanEast`, `Changsha`, `Xian`, `Wuhan`, `Fuzhou`, `Shenyang`, `Zhengzhou`, `Jinan`, `Hangzhou`, `Shijiazhuang`, `Hefei`.
@@ -371,5 +373,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
         public ProxyState()
         {
         }
+        public static new ProxyState Empty => new ProxyState();
     }
 }

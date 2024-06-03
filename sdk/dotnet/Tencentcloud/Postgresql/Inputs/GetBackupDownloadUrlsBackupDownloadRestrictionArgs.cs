@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql.Inputs
 {
 
-    public sealed class GetBackupDownloadUrlsBackupDownloadRestrictionInputArgs : Pulumi.ResourceArgs
+    public sealed class GetBackupDownloadUrlsBackupDownloadRestrictionInputArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Whether IP is allowed. Valid values: `ALLOW` (allow), `DENY` (deny).
@@ -58,5 +58,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql.Inputs
         public GetBackupDownloadUrlsBackupDownloadRestrictionInputArgs()
         {
         }
+        public static new GetBackupDownloadUrlsBackupDownloadRestrictionInputArgs Empty => new GetBackupDownloadUrlsBackupDownloadRestrictionInputArgs();
     }
 }

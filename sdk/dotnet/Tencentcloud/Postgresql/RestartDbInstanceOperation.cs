@@ -15,25 +15,26 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var restartDbInstanceOperation = new Tencentcloud.Postgresql.RestartDbInstanceOperation("restartDbInstanceOperation", new()
     ///     {
-    ///         var restartDbInstanceOperation = new Tencentcloud.Postgresql.RestartDbInstanceOperation("restartDbInstanceOperation", new Tencentcloud.Postgresql.RestartDbInstanceOperationArgs
-    ///         {
-    ///             DbInstanceId = local.Pgsql_id,
-    ///         });
-    ///     }
+    ///         DbInstanceId = local.Pgsql_id,
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Postgresql/restartDbInstanceOperation:RestartDbInstanceOperation")]
-    public partial class RestartDbInstanceOperation : Pulumi.CustomResource
+    public partial class RestartDbInstanceOperation : global::Pulumi.CustomResource
     {
         /// <summary>
         /// dbInstance ID.
@@ -86,7 +87,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
         }
     }
 
-    public sealed class RestartDbInstanceOperationArgs : Pulumi.ResourceArgs
+    public sealed class RestartDbInstanceOperationArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// dbInstance ID.
@@ -97,9 +98,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
         public RestartDbInstanceOperationArgs()
         {
         }
+        public static new RestartDbInstanceOperationArgs Empty => new RestartDbInstanceOperationArgs();
     }
 
-    public sealed class RestartDbInstanceOperationState : Pulumi.ResourceArgs
+    public sealed class RestartDbInstanceOperationState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// dbInstance ID.
@@ -110,5 +112,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
         public RestartDbInstanceOperationState()
         {
         }
+        public static new RestartDbInstanceOperationState Empty => new RestartDbInstanceOperationState();
     }
 }

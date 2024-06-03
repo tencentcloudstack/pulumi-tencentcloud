@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos.Inputs
 {
 
-    public sealed class BucketLifecycleRuleNonCurrentExpirationArgs : Pulumi.ResourceArgs
+    public sealed class BucketLifecycleRuleNonCurrentExpirationArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Number of days after non current object creation when the specific rule action takes effect. The maximum value is 3650.
@@ -22,5 +22,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos.Inputs
         public BucketLifecycleRuleNonCurrentExpirationArgs()
         {
         }
+        public static new BucketLifecycleRuleNonCurrentExpirationArgs Empty => new BucketLifecycleRuleNonCurrentExpirationArgs();
     }
 }

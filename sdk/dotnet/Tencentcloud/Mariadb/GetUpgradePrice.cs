@@ -15,70 +15,64 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mariadb
         /// <summary>
         /// Use this data source to query detailed information of mariadb upgrade_price
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var upgradePrice = Tencentcloud.Mariadb.GetUpgradePrice.Invoke(new()
         ///     {
-        ///         var upgradePrice = Output.Create(Tencentcloud.Mariadb.GetUpgradePrice.InvokeAsync(new Tencentcloud.Mariadb.GetUpgradePriceArgs
-        ///         {
-        ///             InstanceId = "tdsql-9vqvls95",
-        ///             Memory = 4,
-        ///             NodeCount = 2,
-        ///             Storage = 40,
-        ///         }));
-        ///     }
+        ///         InstanceId = "tdsql-9vqvls95",
+        ///         Memory = 4,
+        ///         NodeCount = 2,
+        ///         Storage = 40,
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetUpgradePriceResult> InvokeAsync(GetUpgradePriceArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetUpgradePriceResult>("tencentcloud:Mariadb/getUpgradePrice:getUpgradePrice", args ?? new GetUpgradePriceArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetUpgradePriceResult>("tencentcloud:Mariadb/getUpgradePrice:getUpgradePrice", args ?? new GetUpgradePriceArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of mariadb upgrade_price
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var upgradePrice = Tencentcloud.Mariadb.GetUpgradePrice.Invoke(new()
         ///     {
-        ///         var upgradePrice = Output.Create(Tencentcloud.Mariadb.GetUpgradePrice.InvokeAsync(new Tencentcloud.Mariadb.GetUpgradePriceArgs
-        ///         {
-        ///             InstanceId = "tdsql-9vqvls95",
-        ///             Memory = 4,
-        ///             NodeCount = 2,
-        ///             Storage = 40,
-        ///         }));
-        ///     }
+        ///         InstanceId = "tdsql-9vqvls95",
+        ///         Memory = 4,
+        ///         NodeCount = 2,
+        ///         Storage = 40,
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetUpgradePriceResult> Invoke(GetUpgradePriceInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetUpgradePriceResult>("tencentcloud:Mariadb/getUpgradePrice:getUpgradePrice", args ?? new GetUpgradePriceInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetUpgradePriceResult>("tencentcloud:Mariadb/getUpgradePrice:getUpgradePrice", args ?? new GetUpgradePriceInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetUpgradePriceArgs : Pulumi.InvokeArgs
+    public sealed class GetUpgradePriceArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Price unit. Valid values: `* pent` (cent), `* microPent` (microcent).
@@ -119,9 +113,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mariadb
         public GetUpgradePriceArgs()
         {
         }
+        public static new GetUpgradePriceArgs Empty => new GetUpgradePriceArgs();
     }
 
-    public sealed class GetUpgradePriceInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetUpgradePriceInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Price unit. Valid values: `* pent` (cent), `* microPent` (microcent).
@@ -162,6 +157,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mariadb
         public GetUpgradePriceInvokeArgs()
         {
         }
+        public static new GetUpgradePriceInvokeArgs Empty => new GetUpgradePriceInvokeArgs();
     }
 
 

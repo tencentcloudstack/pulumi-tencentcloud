@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,11 +11,12 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = new tencentcloud.Mysql.BackupDownloadRestriction("example", {
+ * const example = new tencentcloud.mysql.BackupDownloadRestriction("example", {
  *     ipComparisonSymbol: "In",
  *     limitIps: ["127.0.0.1"],
  *     limitType: "Customize",
@@ -25,13 +27,14 @@ import * as utilities from "../utilities";
  *     vpcComparisonSymbol: "In",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * mysql backup_download_restriction can be imported using the "BackupDownloadRestriction", as follows.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Mysql/backupDownloadRestriction:BackupDownloadRestriction backup_download_restriction BackupDownloadRestriction
+ * $ pulumi import tencentcloud:Mysql/backupDownloadRestriction:BackupDownloadRestriction backup_download_restriction BackupDownloadRestriction
  * ```
  */
 export class BackupDownloadRestriction extends pulumi.CustomResource {

@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor.Inputs
 {
 
-    public sealed class TmpTkeClusterAgentAgentsExternalLabelArgs : Pulumi.ResourceArgs
+    public sealed class TmpTkeClusterAgentAgentsExternalLabelArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Indicator name.
@@ -28,5 +28,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor.Inputs
         public TmpTkeClusterAgentAgentsExternalLabelArgs()
         {
         }
+        public static new TmpTkeClusterAgentAgentsExternalLabelArgs Empty => new TmpTkeClusterAgentAgentsExternalLabelArgs();
     }
 }

@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.As.Inputs
 {
 
-    public sealed class ScalingConfigDataDiskGetArgs : Pulumi.ResourceArgs
+    public sealed class ScalingConfigDataDiskGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Indicates whether the disk remove after instance terminated. Default is `false`.
@@ -40,5 +40,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.As.Inputs
         public ScalingConfigDataDiskGetArgs()
         {
         }
+        public static new ScalingConfigDataDiskGetArgs Empty => new ScalingConfigDataDiskGetArgs();
     }
 }

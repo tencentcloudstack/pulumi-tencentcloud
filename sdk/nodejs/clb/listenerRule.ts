@@ -11,11 +11,12 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const foo = new tencentcloud.Clb.ListenerRule("foo", {
+ * const foo = new tencentcloud.clb.ListenerRule("foo", {
  *     certificateCaId: "VfqO4zkB",
  *     certificateId: "VjANRdz8",
  *     certificateSslMode: "MUTUAL",
@@ -35,13 +36,14 @@ import * as utilities from "../utilities";
  *     url: "/bar",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * CLB listener rule can be imported using the id (version >= 1.47.0), e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Clb/listenerRule:ListenerRule foo lb-7a0t6zqb#lbl-hh141sn9#loc-agg236ys
+ * $ pulumi import tencentcloud:Clb/listenerRule:ListenerRule foo lb-7a0t6zqb#lbl-hh141sn9#loc-agg236ys
  * ```
  */
 export class ListenerRule extends pulumi.CustomResource {

@@ -10,13 +10,15 @@ import * as utilities from "../utilities";
  * > **NOTE:** If create domain rule, `RuleType` not support set 2.
  *
  * ## Example Usage
+ *
  * ### If create ip rule
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = new tencentcloud.Cfw.BlockIgnore("example", {
+ * const example = new tencentcloud.cfw.BlockIgnore("example", {
  *     comment: "remark.",
  *     direction: "0",
  *     endTime: "2023-10-01 00:00:00",
@@ -25,13 +27,16 @@ import * as utilities from "../utilities";
  *     startTime: "2023-09-01 00:00:00",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
+ *
  * ### If create domain rule
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = new tencentcloud.Cfw.BlockIgnore("example", {
+ * const example = new tencentcloud.cfw.BlockIgnore("example", {
  *     comment: "remark.",
  *     direction: "1",
  *     domain: "domain.com",
@@ -40,19 +45,22 @@ import * as utilities from "../utilities";
  *     startTime: "2023-09-01 00:00:00",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
- * cfw block_ignore_list can be imported using the id, e.g. If import ip rule
+ * cfw block_ignore_list can be imported using the id, e.g.
+ *
+ * If import ip rule
  *
  * ```sh
- *  $ pulumi import tencentcloud:Cfw/blockIgnore:BlockIgnore example 1.1.1.1##0#1
+ * $ pulumi import tencentcloud:Cfw/blockIgnore:BlockIgnore example 1.1.1.1##0#1
  * ```
  *
- *  If import domain rule
+ * If import domain rule
  *
  * ```sh
- *  $ pulumi import tencentcloud:Cfw/blockIgnore:BlockIgnore example domain.com##0#1
+ * $ pulumi import tencentcloud:Cfw/blockIgnore:BlockIgnore example domain.com##0#1
  * ```
  */
 export class BlockIgnore extends pulumi.CustomResource {

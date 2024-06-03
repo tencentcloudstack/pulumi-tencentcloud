@@ -9,16 +9,18 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const exportImages = new tencentcloud.Cvm.ExportImages("export_images", {
+ * const exportImages = new tencentcloud.cvm.ExportImages("exportImages", {
  *     bucketName: "xxxxxx",
  *     fileNamePrefix: "test-",
  *     imageId: "img-xxxxxx",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export class ExportImages extends pulumi.CustomResource {
     /**

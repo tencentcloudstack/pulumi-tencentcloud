@@ -9,10 +9,14 @@ from .cngw_canary_rule import *
 from .cngw_certificate import *
 from .cngw_gateway import *
 from .cngw_group import *
+from .cngw_network import *
+from .cngw_network_access_control import *
 from .cngw_route import *
 from .cngw_route_rate_limit import *
 from .cngw_service import *
 from .cngw_service_rate_limit import *
+from .cngw_strategy import *
+from .cngw_strategy_bind_group import *
 from .get_access_address import *
 from .get_gateway_canary_rules import *
 from .get_gateway_certificates import *

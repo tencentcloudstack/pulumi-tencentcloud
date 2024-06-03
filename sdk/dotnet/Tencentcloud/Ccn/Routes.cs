@@ -15,35 +15,36 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ccn
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var ccnRoutes = new Tencentcloud.Ccn.Routes("ccnRoutes", new()
     ///     {
-    ///         var ccnRoutes = new Tencentcloud.Ccn.Routes("ccnRoutes", new Tencentcloud.Ccn.RoutesArgs
-    ///         {
-    ///             CcnId = "ccn-39lqkygf",
-    ///             RouteId = "ccnr-3o0dfyuw",
-    ///             Switch = "on",
-    ///         });
-    ///     }
+    ///         CcnId = "ccn-39lqkygf",
+    ///         RouteId = "ccnr-3o0dfyuw",
+    ///         Switch = "on",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// vpc ccn_routes can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Ccn/routes:Routes ccn_routes ccnId#routesId
+    /// $ pulumi import tencentcloud:Ccn/routes:Routes ccn_routes ccnId#routesId
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Ccn/routes:Routes")]
-    public partial class Routes : Pulumi.CustomResource
+    public partial class Routes : global::Pulumi.CustomResource
     {
         /// <summary>
         /// CCN Instance ID.
@@ -108,7 +109,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ccn
         }
     }
 
-    public sealed class RoutesArgs : Pulumi.ResourceArgs
+    public sealed class RoutesArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// CCN Instance ID.
@@ -131,9 +132,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ccn
         public RoutesArgs()
         {
         }
+        public static new RoutesArgs Empty => new RoutesArgs();
     }
 
-    public sealed class RoutesState : Pulumi.ResourceArgs
+    public sealed class RoutesState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// CCN Instance ID.
@@ -156,5 +158,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ccn
         public RoutesState()
         {
         }
+        public static new RoutesState Empty => new RoutesState();
     }
 }

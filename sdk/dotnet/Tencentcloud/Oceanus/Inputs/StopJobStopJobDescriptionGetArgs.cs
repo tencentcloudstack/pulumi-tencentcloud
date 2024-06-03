@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Oceanus.Inputs
 {
 
-    public sealed class StopJobStopJobDescriptionGetArgs : Pulumi.ResourceArgs
+    public sealed class StopJobStopJobDescriptionGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Job Id.
@@ -28,5 +28,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Oceanus.Inputs
         public StopJobStopJobDescriptionGetArgs()
         {
         }
+        public static new StopJobStopJobDescriptionGetArgs Empty => new StopJobStopJobDescriptionGetArgs();
     }
 }

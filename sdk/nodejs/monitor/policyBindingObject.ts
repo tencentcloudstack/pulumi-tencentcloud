@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,10 +11,11 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const instances = tencentcloud.Instances.getInstance({});
  * const policy = new tencentcloud.monitor.AlarmPolicy("policy", {
@@ -52,17 +54,18 @@ import * as utilities from "../utilities";
  * const binding = new tencentcloud.monitor.PolicyBindingObject("binding", {
  *     policyId: policy.id,
  *     dimensions: [{
- *         dimensionsJson: instances.then(instances => `{"unInstanceId":"${instances.instanceLists?[0]?.instanceId}"}`),
+ *         dimensionsJson: instances.then(instances => `{"unInstanceId":"${instances.instanceLists?.[0]?.instanceId}"}`),
  *     }],
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * Monitor Policy Binding Object can be imported, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Monitor/policyBindingObject:PolicyBindingObject binding policyId
+ * $ pulumi import tencentcloud:Monitor/policyBindingObject:PolicyBindingObject binding policyId
  * ```
  */
 export class PolicyBindingObject extends pulumi.CustomResource {

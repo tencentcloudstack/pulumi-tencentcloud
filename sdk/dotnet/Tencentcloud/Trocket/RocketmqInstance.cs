@@ -16,73 +16,77 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Trocket
     /// &gt; **NOTE:** It only support create postpaid rocketmq 5.x instance.
     /// 
     /// ## Example Usage
+    /// 
     /// ### Basic Instance
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var rocketmqInstance = new Tencentcloud.Trocket.RocketmqInstance("rocketmqInstance", new()
     ///     {
-    ///         var rocketmqInstance = new Tencentcloud.Trocket.RocketmqInstance("rocketmqInstance", new Tencentcloud.Trocket.RocketmqInstanceArgs
+    ///         InstanceType = "EXPERIMENT",
+    ///         Remark = "remark",
+    ///         SkuCode = "experiment_500",
+    ///         SubnetId = "subnet-xxxxxx",
+    ///         Tags = 
     ///         {
-    ///             InstanceType = "EXPERIMENT",
-    ///             Remark = "remark",
-    ///             SkuCode = "experiment_500",
-    ///             SubnetId = "subnet-xxxxxx",
-    ///             Tags = 
-    ///             {
-    ///                 { "tag_key", "rocketmq" },
-    ///                 { "tag_value", "5.x" },
-    ///             },
-    ///             VpcId = "vpc-xxxxxx",
-    ///         });
-    ///     }
+    ///             { "tag_key", "rocketmq" },
+    ///             { "tag_value", "5.x" },
+    ///         },
+    ///         VpcId = "vpc-xxxxxx",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
+    /// 
     /// ### Enable Public Instance
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var rocketmqInstancePublic = new Tencentcloud.Trocket.RocketmqInstance("rocketmqInstancePublic", new()
     ///     {
-    ///         var rocketmqInstancePublic = new Tencentcloud.Trocket.RocketmqInstance("rocketmqInstancePublic", new Tencentcloud.Trocket.RocketmqInstanceArgs
+    ///         Bandwidth = 1,
+    ///         EnablePublic = true,
+    ///         InstanceType = "EXPERIMENT",
+    ///         Remark = "remark",
+    ///         SkuCode = "experiment_500",
+    ///         SubnetId = "subnet-xxxxxx",
+    ///         Tags = 
     ///         {
-    ///             Bandwidth = 1,
-    ///             EnablePublic = true,
-    ///             InstanceType = "EXPERIMENT",
-    ///             Remark = "remark",
-    ///             SkuCode = "experiment_500",
-    ///             SubnetId = "subnet-xxxxxx",
-    ///             Tags = 
-    ///             {
-    ///                 { "tag_key", "rocketmq" },
-    ///                 { "tag_value", "5.x" },
-    ///             },
-    ///             VpcId = "vpc-xxxxxx",
-    ///         });
-    ///     }
+    ///             { "tag_key", "rocketmq" },
+    ///             { "tag_value", "5.x" },
+    ///         },
+    ///         VpcId = "vpc-xxxxxx",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// trocket rocketmq_instance can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Trocket/rocketmqInstance:RocketmqInstance rocketmq_instance rocketmq_instance_id
+    /// $ pulumi import tencentcloud:Trocket/rocketmqInstance:RocketmqInstance rocketmq_instance rocketmq_instance_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Trocket/rocketmqInstance:RocketmqInstance")]
-    public partial class RocketmqInstance : Pulumi.CustomResource
+    public partial class RocketmqInstance : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Public network bandwidth. `bandwidth` must be greater than zero when `enable_public` equal true.
@@ -207,7 +211,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Trocket
         }
     }
 
-    public sealed class RocketmqInstanceArgs : Pulumi.ResourceArgs
+    public sealed class RocketmqInstanceArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Public network bandwidth. `bandwidth` must be greater than zero when `enable_public` equal true.
@@ -290,9 +294,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Trocket
         public RocketmqInstanceArgs()
         {
         }
+        public static new RocketmqInstanceArgs Empty => new RocketmqInstanceArgs();
     }
 
-    public sealed class RocketmqInstanceState : Pulumi.ResourceArgs
+    public sealed class RocketmqInstanceState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Public network bandwidth. `bandwidth` must be greater than zero when `enable_public` equal true.
@@ -387,5 +392,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Trocket
         public RocketmqInstanceState()
         {
         }
+        public static new RocketmqInstanceState Empty => new RocketmqInstanceState();
     }
 }

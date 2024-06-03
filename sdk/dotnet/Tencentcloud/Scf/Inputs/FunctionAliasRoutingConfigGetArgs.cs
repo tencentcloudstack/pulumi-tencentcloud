@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Scf.Inputs
 {
 
-    public sealed class FunctionAliasRoutingConfigGetArgs : Pulumi.ResourceArgs
+    public sealed class FunctionAliasRoutingConfigGetArgs : global::Pulumi.ResourceArgs
     {
         [Input("additionalVersionMatches")]
         private InputList<Inputs.FunctionAliasRoutingConfigAdditionalVersionMatchGetArgs>? _additionalVersionMatches;
@@ -40,5 +40,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Scf.Inputs
         public FunctionAliasRoutingConfigGetArgs()
         {
         }
+        public static new FunctionAliasRoutingConfigGetArgs Empty => new FunctionAliasRoutingConfigGetArgs();
     }
 }

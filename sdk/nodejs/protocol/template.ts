@@ -9,25 +9,25 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const foo = new tencentcloud.Protocol.Template("foo", {
- *     protocols: [
- *         "tcp:80",
- *         "udp:all",
- *         "icmp:10-30",
- *     ],
- * });
+ * const foo = new tencentcloud.protocol.Template("foo", {protocols: [
+ *     "tcp:80",
+ *     "udp:all",
+ *     "icmp:10-30",
+ * ]});
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * Protocol template can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Protocol/template:Template foo ppm-nwrggd14
+ * $ pulumi import tencentcloud:Protocol/template:Template foo ppm-nwrggd14
  * ```
  */
 export class Template extends pulumi.CustomResource {

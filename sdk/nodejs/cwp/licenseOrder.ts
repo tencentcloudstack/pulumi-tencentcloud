@@ -9,11 +9,12 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = new tencentcloud.Cwp.LicenseOrder("example", {
+ * const example = new tencentcloud.cwp.LicenseOrder("example", {
  *     alias: "tf_example",
  *     licenseNum: 1,
  *     licenseType: 0,
@@ -24,13 +25,14 @@ import * as utilities from "../utilities";
  *     },
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * cwp license_order can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Cwp/licenseOrder:LicenseOrder example cwplic-130715d2#1
+ * $ pulumi import tencentcloud:Cwp/licenseOrder:LicenseOrder example cwplic-130715d2#1
  * ```
  */
 export class LicenseOrder extends pulumi.CustomResource {

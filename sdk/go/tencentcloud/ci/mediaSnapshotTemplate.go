@@ -7,53 +7,58 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a ci mediaSnapshotTemplate
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Ci"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ci"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ci"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Ci.NewMediaSnapshotTemplate(ctx, "mediaSnapshotTemplate", &Ci.MediaSnapshotTemplateArgs{
-// 			Bucket: pulumi.String("terraform-ci-xxxxxx"),
-// 			Snapshot: &ci.MediaSnapshotTemplateSnapshotArgs{
-// 				Count:           pulumi.String("10"),
-// 				SnapshotOutMode: pulumi.String("SnapshotAndSprite"),
-// 				SpriteSnapshotConfig: &ci.MediaSnapshotTemplateSnapshotSpriteSnapshotConfigArgs{
-// 					Color:   pulumi.String("White"),
-// 					Columns: pulumi.String("10"),
-// 					Lines:   pulumi.String("10"),
-// 					Margin:  pulumi.String("10"),
-// 					Padding: pulumi.String("10"),
-// 				},
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Ci.NewMediaSnapshotTemplate(ctx, "mediaSnapshotTemplate", &Ci.MediaSnapshotTemplateArgs{
+//				Bucket: pulumi.String("terraform-ci-xxxxxx"),
+//				Snapshot: &ci.MediaSnapshotTemplateSnapshotArgs{
+//					Count:           pulumi.String("10"),
+//					SnapshotOutMode: pulumi.String("SnapshotAndSprite"),
+//					SpriteSnapshotConfig: &ci.MediaSnapshotTemplateSnapshotSpriteSnapshotConfigArgs{
+//						Color:   pulumi.String("White"),
+//						Columns: pulumi.String("10"),
+//						Lines:   pulumi.String("10"),
+//						Margin:  pulumi.String("10"),
+//						Padding: pulumi.String("10"),
+//					},
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // ci media_snapshot_template can be imported using the bucket#templateId, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Ci/mediaSnapshotTemplate:MediaSnapshotTemplate media_snapshot_template terraform-ci-xxxxxx#t18210645f96564eaf80e86b1f58c20152
+// $ pulumi import tencentcloud:Ci/mediaSnapshotTemplate:MediaSnapshotTemplate media_snapshot_template terraform-ci-xxxxxx#t18210645f96564eaf80e86b1f58c20152
 // ```
 type MediaSnapshotTemplate struct {
 	pulumi.CustomResourceState
@@ -85,7 +90,7 @@ func NewMediaSnapshotTemplate(ctx *pulumi.Context,
 	if args.Snapshot == nil {
 		return nil, errors.New("invalid value for required argument 'Snapshot'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource MediaSnapshotTemplate
 	err := ctx.RegisterResource("tencentcloud:Ci/mediaSnapshotTemplate:MediaSnapshotTemplate", name, args, &resource, opts...)
 	if err != nil {
@@ -186,7 +191,7 @@ func (i *MediaSnapshotTemplate) ToMediaSnapshotTemplateOutputWithContext(ctx con
 // MediaSnapshotTemplateArrayInput is an input type that accepts MediaSnapshotTemplateArray and MediaSnapshotTemplateArrayOutput values.
 // You can construct a concrete instance of `MediaSnapshotTemplateArrayInput` via:
 //
-//          MediaSnapshotTemplateArray{ MediaSnapshotTemplateArgs{...} }
+//	MediaSnapshotTemplateArray{ MediaSnapshotTemplateArgs{...} }
 type MediaSnapshotTemplateArrayInput interface {
 	pulumi.Input
 
@@ -211,7 +216,7 @@ func (i MediaSnapshotTemplateArray) ToMediaSnapshotTemplateArrayOutputWithContex
 // MediaSnapshotTemplateMapInput is an input type that accepts MediaSnapshotTemplateMap and MediaSnapshotTemplateMapOutput values.
 // You can construct a concrete instance of `MediaSnapshotTemplateMapInput` via:
 //
-//          MediaSnapshotTemplateMap{ "key": MediaSnapshotTemplateArgs{...} }
+//	MediaSnapshotTemplateMap{ "key": MediaSnapshotTemplateArgs{...} }
 type MediaSnapshotTemplateMapInput interface {
 	pulumi.Input
 

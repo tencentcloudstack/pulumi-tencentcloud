@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,21 +11,20 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const cosBucketInventorys = pulumi.output(tencentcloud.Cos.getBucketInventorys({
+ * const cosBucketInventorys = tencentcloud.Cos.getBucketInventorys({
  *     bucket: "xxxxxx",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getBucketInventorys(args: GetBucketInventorysArgs, opts?: pulumi.InvokeOptions): Promise<GetBucketInventorysResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Cos/getBucketInventorys:getBucketInventorys", {
         "bucket": args.bucket,
         "resultOutputFile": args.resultOutputFile,
@@ -63,9 +63,24 @@ export interface GetBucketInventorysResult {
     readonly inventorys: outputs.Cos.GetBucketInventorysInventory[];
     readonly resultOutputFile?: string;
 }
-
+/**
+ * Use this data source to query the COS bucket inventorys.
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const cosBucketInventorys = tencentcloud.Cos.getBucketInventorys({
+ *     bucket: "xxxxxx",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getBucketInventorysOutput(args: GetBucketInventorysOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetBucketInventorysResult> {
-    return pulumi.output(args).apply(a => getBucketInventorys(a, opts))
+    return pulumi.output(args).apply((a: any) => getBucketInventorys(a, opts))
 }
 
 /**

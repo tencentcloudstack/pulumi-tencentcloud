@@ -9,15 +9,17 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = new tencentcloud.ApiGateway.UpdateApiAppKey("example", {
+ * const example = new tencentcloud.apigateway.UpdateApiAppKey("example", {
  *     apiAppId: "app-krljp4wn",
  *     apiAppKey: "APID6JmG21yRCc03h4z16hlsTqj1wpO3dB3ZQcUP",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export class UpdateApiAppKey extends pulumi.CustomResource {
     /**

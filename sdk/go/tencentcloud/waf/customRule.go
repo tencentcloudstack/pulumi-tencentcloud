@@ -7,55 +7,60 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a waf customRule
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Waf"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Waf"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Waf"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Waf.NewCustomRule(ctx, "example", &Waf.CustomRuleArgs{
-// 			ActionType: pulumi.String("1"),
-// 			Domain:     pulumi.String("test.com"),
-// 			ExpireTime: pulumi.String("0"),
-// 			Redirect:   pulumi.String("/"),
-// 			SortId:     pulumi.String("50"),
-// 			Status:     pulumi.String("1"),
-// 			Strategies: waf.CustomRuleStrategyArray{
-// 				&waf.CustomRuleStrategyArgs{
-// 					Arg:         pulumi.String(""),
-// 					CompareFunc: pulumi.String("ipmatch"),
-// 					Content:     pulumi.String("2.2.2.2"),
-// 					Field:       pulumi.String("IP"),
-// 				},
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Waf.NewCustomRule(ctx, "example", &Waf.CustomRuleArgs{
+//				ActionType: pulumi.String("1"),
+//				Domain:     pulumi.String("test.com"),
+//				ExpireTime: pulumi.String("0"),
+//				Redirect:   pulumi.String("/"),
+//				SortId:     pulumi.String("50"),
+//				Status:     pulumi.String("1"),
+//				Strategies: waf.CustomRuleStrategyArray{
+//					&waf.CustomRuleStrategyArgs{
+//						Arg:         pulumi.String(""),
+//						CompareFunc: pulumi.String("ipmatch"),
+//						Content:     pulumi.String("2.2.2.2"),
+//						Field:       pulumi.String("IP"),
+//					},
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // waf custom_rule can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Waf/customRule:CustomRule example test.com#1100310609
+// $ pulumi import tencentcloud:Waf/customRule:CustomRule example test.com#1100310609
 // ```
 type CustomRule struct {
 	pulumi.CustomResourceState
@@ -102,7 +107,7 @@ func NewCustomRule(ctx *pulumi.Context,
 	if args.Strategies == nil {
 		return nil, errors.New("invalid value for required argument 'Strategies'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource CustomRule
 	err := ctx.RegisterResource("tencentcloud:Waf/customRule:CustomRule", name, args, &resource, opts...)
 	if err != nil {
@@ -235,7 +240,7 @@ func (i *CustomRule) ToCustomRuleOutputWithContext(ctx context.Context) CustomRu
 // CustomRuleArrayInput is an input type that accepts CustomRuleArray and CustomRuleArrayOutput values.
 // You can construct a concrete instance of `CustomRuleArrayInput` via:
 //
-//          CustomRuleArray{ CustomRuleArgs{...} }
+//	CustomRuleArray{ CustomRuleArgs{...} }
 type CustomRuleArrayInput interface {
 	pulumi.Input
 
@@ -260,7 +265,7 @@ func (i CustomRuleArray) ToCustomRuleArrayOutputWithContext(ctx context.Context)
 // CustomRuleMapInput is an input type that accepts CustomRuleMap and CustomRuleMapOutput values.
 // You can construct a concrete instance of `CustomRuleMapInput` via:
 //
-//          CustomRuleMap{ "key": CustomRuleArgs{...} }
+//	CustomRuleMap{ "key": CustomRuleArgs{...} }
 type CustomRuleMapInput interface {
 	pulumi.Input
 

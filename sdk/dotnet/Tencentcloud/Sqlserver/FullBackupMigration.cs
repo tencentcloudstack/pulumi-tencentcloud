@@ -15,107 +15,116 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = Pulumi.Tencentcloud;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var zones = Tencentcloud.Availability.GetZonesByProduct.Invoke(new()
     ///     {
-    ///         var zones = Output.Create(Tencentcloud.Availability.GetZonesByProduct.InvokeAsync(new Tencentcloud.Availability.GetZonesByProductArgs
-    ///         {
-    ///             Product = "sqlserver",
-    ///         }));
-    ///         var vpc = new Tencentcloud.Vpc.Instance("vpc", new Tencentcloud.Vpc.InstanceArgs
-    ///         {
-    ///             CidrBlock = "10.0.0.0/16",
-    ///         });
-    ///         var subnet = new Tencentcloud.Subnet.Instance("subnet", new Tencentcloud.Subnet.InstanceArgs
-    ///         {
-    ///             AvailabilityZone = zones.Apply(zones =&gt; zones.Zones?[4]?.Name),
-    ///             VpcId = vpc.Id,
-    ///             CidrBlock = "10.0.0.0/16",
-    ///             IsMulticast = false,
-    ///         });
-    ///         var securityGroup = new Tencentcloud.Security.Group("securityGroup", new Tencentcloud.Security.GroupArgs
-    ///         {
-    ///             Description = "desc.",
-    ///         });
-    ///         var exampleBasicInstance = new Tencentcloud.Sqlserver.BasicInstance("exampleBasicInstance", new Tencentcloud.Sqlserver.BasicInstanceArgs
-    ///         {
-    ///             AvailabilityZone = zones.Apply(zones =&gt; zones.Zones?[4]?.Name),
-    ///             ChargeType = "POSTPAID_BY_HOUR",
-    ///             VpcId = vpc.Id,
-    ///             SubnetId = subnet.Id,
-    ///             ProjectId = 0,
-    ///             Memory = 4,
-    ///             Storage = 100,
-    ///             Cpu = 2,
-    ///             MachineType = "CLOUD_PREMIUM",
-    ///             MaintenanceWeekSets = 
-    ///             {
-    ///                 1,
-    ///                 2,
-    ///                 3,
-    ///             },
-    ///             MaintenanceStartTime = "09:00",
-    ///             MaintenanceTimeSpan = 3,
-    ///             SecurityGroups = 
-    ///             {
-    ///                 securityGroup.Id,
-    ///             },
-    ///             Tags = 
-    ///             {
-    ///                 { "test", "test" },
-    ///             },
-    ///         });
-    ///         var exampleDb = new Tencentcloud.Sqlserver.Db("exampleDb", new Tencentcloud.Sqlserver.DbArgs
-    ///         {
-    ///             InstanceId = exampleBasicInstance.Id,
-    ///             Charset = "Chinese_PRC_BIN",
-    ///             Remark = "test-remark",
-    ///         });
-    ///         var exampleGeneralBackup = new Tencentcloud.Sqlserver.GeneralBackup("exampleGeneralBackup", new Tencentcloud.Sqlserver.GeneralBackupArgs
-    ///         {
-    ///             InstanceId = exampleDb.InstanceId,
-    ///             BackupName = "tf_example_backup",
-    ///             Strategy = 0,
-    ///         });
-    ///         var exampleBackups = Tencentcloud.Sqlserver.GetBackups.Invoke(new Tencentcloud.Sqlserver.GetBackupsInvokeArgs
-    ///         {
-    ///             InstanceId = exampleDb.InstanceId,
-    ///             BackupName = exampleGeneralBackup.BackupName,
-    ///             StartTime = "2023-07-25 00:00:00",
-    ///             EndTime = "2023-08-04 00:00:00",
-    ///         });
-    ///         var exampleFullBackupMigration = new Tencentcloud.Sqlserver.FullBackupMigration("exampleFullBackupMigration", new Tencentcloud.Sqlserver.FullBackupMigrationArgs
-    ///         {
-    ///             InstanceId = exampleGeneralBackup.InstanceId,
-    ///             RecoveryType = "FULL",
-    ///             UploadType = "COS_URL",
-    ///             MigrationName = "migration_test",
-    ///             BackupFiles = 
-    ///             {
-    ///                 exampleBackups.Apply(exampleBackups =&gt; exampleBackups.Lists?[0]?.InternetUrl),
-    ///             },
-    ///         });
-    ///     }
+    ///         Product = "sqlserver",
+    ///     });
     /// 
-    /// }
+    ///     var vpc = new Tencentcloud.Vpc.Instance("vpc", new()
+    ///     {
+    ///         CidrBlock = "10.0.0.0/16",
+    ///     });
+    /// 
+    ///     var subnet = new Tencentcloud.Subnet.Instance("subnet", new()
+    ///     {
+    ///         AvailabilityZone = zones.Apply(getZonesByProductResult =&gt; getZonesByProductResult.Zones[4]?.Name),
+    ///         VpcId = vpc.Id,
+    ///         CidrBlock = "10.0.0.0/16",
+    ///         IsMulticast = false,
+    ///     });
+    /// 
+    ///     var securityGroup = new Tencentcloud.Security.Group("securityGroup", new()
+    ///     {
+    ///         Description = "desc.",
+    ///     });
+    /// 
+    ///     var exampleBasicInstance = new Tencentcloud.Sqlserver.BasicInstance("exampleBasicInstance", new()
+    ///     {
+    ///         AvailabilityZone = zones.Apply(getZonesByProductResult =&gt; getZonesByProductResult.Zones[4]?.Name),
+    ///         ChargeType = "POSTPAID_BY_HOUR",
+    ///         VpcId = vpc.Id,
+    ///         SubnetId = subnet.Id,
+    ///         ProjectId = 0,
+    ///         Memory = 4,
+    ///         Storage = 100,
+    ///         Cpu = 2,
+    ///         MachineType = "CLOUD_PREMIUM",
+    ///         MaintenanceWeekSets = new[]
+    ///         {
+    ///             1,
+    ///             2,
+    ///             3,
+    ///         },
+    ///         MaintenanceStartTime = "09:00",
+    ///         MaintenanceTimeSpan = 3,
+    ///         SecurityGroups = new[]
+    ///         {
+    ///             securityGroup.Id,
+    ///         },
+    ///         Tags = 
+    ///         {
+    ///             { "test", "test" },
+    ///         },
+    ///     });
+    /// 
+    ///     var exampleDb = new Tencentcloud.Sqlserver.Db("exampleDb", new()
+    ///     {
+    ///         InstanceId = exampleBasicInstance.Id,
+    ///         Charset = "Chinese_PRC_BIN",
+    ///         Remark = "test-remark",
+    ///     });
+    /// 
+    ///     var exampleGeneralBackup = new Tencentcloud.Sqlserver.GeneralBackup("exampleGeneralBackup", new()
+    ///     {
+    ///         InstanceId = exampleDb.InstanceId,
+    ///         BackupName = "tf_example_backup",
+    ///         Strategy = 0,
+    ///     });
+    /// 
+    ///     var exampleBackups = Tencentcloud.Sqlserver.GetBackups.Invoke(new()
+    ///     {
+    ///         InstanceId = exampleDb.InstanceId,
+    ///         BackupName = exampleGeneralBackup.BackupName,
+    ///         StartTime = "2023-07-25 00:00:00",
+    ///         EndTime = "2023-08-04 00:00:00",
+    ///     });
+    /// 
+    ///     var exampleFullBackupMigration = new Tencentcloud.Sqlserver.FullBackupMigration("exampleFullBackupMigration", new()
+    ///     {
+    ///         InstanceId = exampleGeneralBackup.InstanceId,
+    ///         RecoveryType = "FULL",
+    ///         UploadType = "COS_URL",
+    ///         MigrationName = "migration_test",
+    ///         BackupFiles = new[]
+    ///         {
+    ///             exampleBackups.Apply(getBackupsResult =&gt; getBackupsResult.Lists[0]?.InternetUrl),
+    ///         },
+    ///     });
+    /// 
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// sqlserver full_backup_migration can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Sqlserver/fullBackupMigration:FullBackupMigration example mssql-si2823jyl#mssql-backup-migration-cg0ffgqt
+    /// $ pulumi import tencentcloud:Sqlserver/fullBackupMigration:FullBackupMigration example mssql-si2823jyl#mssql-backup-migration-cg0ffgqt
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Sqlserver/fullBackupMigration:FullBackupMigration")]
-    public partial class FullBackupMigration : Pulumi.CustomResource
+    public partial class FullBackupMigration : global::Pulumi.CustomResource
     {
         /// <summary>
         /// If the UploadType is COS_URL, fill in the URL here. If the UploadType is COS_UPLOAD, fill in the name of the backup file here. Only 1 backup file is supported, but a backup file can involve multiple databases.
@@ -198,7 +207,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
         }
     }
 
-    public sealed class FullBackupMigrationArgs : Pulumi.ResourceArgs
+    public sealed class FullBackupMigrationArgs : global::Pulumi.ResourceArgs
     {
         [Input("backupFiles")]
         private InputList<string>? _backupFiles;
@@ -239,9 +248,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
         public FullBackupMigrationArgs()
         {
         }
+        public static new FullBackupMigrationArgs Empty => new FullBackupMigrationArgs();
     }
 
-    public sealed class FullBackupMigrationState : Pulumi.ResourceArgs
+    public sealed class FullBackupMigrationState : global::Pulumi.ResourceArgs
     {
         [Input("backupFiles")]
         private InputList<string>? _backupFiles;
@@ -288,5 +298,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
         public FullBackupMigrationState()
         {
         }
+        public static new FullBackupMigrationState Empty => new FullBackupMigrationState();
     }
 }

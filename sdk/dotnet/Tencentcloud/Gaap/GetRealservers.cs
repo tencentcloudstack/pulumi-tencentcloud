@@ -15,74 +15,70 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
         /// <summary>
         /// Use this data source to query gaap realservers.
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var fooRealserver = new Tencentcloud.Gaap.Realserver("fooRealserver", new()
         ///     {
-        ///         var fooRealserver = new Tencentcloud.Gaap.Realserver("fooRealserver", new Tencentcloud.Gaap.RealserverArgs
-        ///         {
-        ///             Ip = "1.1.1.1",
-        ///         });
-        ///         var fooRealservers = fooRealserver.Ip.Apply(ip =&gt; Tencentcloud.Gaap.GetRealservers.Invoke(new Tencentcloud.Gaap.GetRealserversInvokeArgs
-        ///         {
-        ///             Ip = ip,
-        ///         }));
-        ///     }
+        ///         Ip = "1.1.1.1",
+        ///     });
         /// 
-        /// }
+        ///     var fooRealservers = Tencentcloud.Gaap.GetRealservers.Invoke(new()
+        ///     {
+        ///         Ip = fooRealserver.Ip,
+        ///     });
+        /// 
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetRealserversResult> InvokeAsync(GetRealserversArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetRealserversResult>("tencentcloud:Gaap/getRealservers:getRealservers", args ?? new GetRealserversArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetRealserversResult>("tencentcloud:Gaap/getRealservers:getRealservers", args ?? new GetRealserversArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query gaap realservers.
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var fooRealserver = new Tencentcloud.Gaap.Realserver("fooRealserver", new()
         ///     {
-        ///         var fooRealserver = new Tencentcloud.Gaap.Realserver("fooRealserver", new Tencentcloud.Gaap.RealserverArgs
-        ///         {
-        ///             Ip = "1.1.1.1",
-        ///         });
-        ///         var fooRealservers = fooRealserver.Ip.Apply(ip =&gt; Tencentcloud.Gaap.GetRealservers.Invoke(new Tencentcloud.Gaap.GetRealserversInvokeArgs
-        ///         {
-        ///             Ip = ip,
-        ///         }));
-        ///     }
+        ///         Ip = "1.1.1.1",
+        ///     });
         /// 
-        /// }
+        ///     var fooRealservers = Tencentcloud.Gaap.GetRealservers.Invoke(new()
+        ///     {
+        ///         Ip = fooRealserver.Ip,
+        ///     });
+        /// 
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetRealserversResult> Invoke(GetRealserversInvokeArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetRealserversResult>("tencentcloud:Gaap/getRealservers:getRealservers", args ?? new GetRealserversInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetRealserversResult>("tencentcloud:Gaap/getRealservers:getRealservers", args ?? new GetRealserversInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetRealserversArgs : Pulumi.InvokeArgs
+    public sealed class GetRealserversArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Domain of the GAAP realserver to be queried, conflict with `ip`.
@@ -129,9 +125,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
         public GetRealserversArgs()
         {
         }
+        public static new GetRealserversArgs Empty => new GetRealserversArgs();
     }
 
-    public sealed class GetRealserversInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetRealserversInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Domain of the GAAP realserver to be queried, conflict with `ip`.
@@ -178,6 +175,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
         public GetRealserversInvokeArgs()
         {
         }
+        public static new GetRealserversInvokeArgs Empty => new GetRealserversInvokeArgs();
     }
 
 

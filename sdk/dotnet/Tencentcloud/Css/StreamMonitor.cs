@@ -15,68 +15,69 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Css
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var streamMonitor = new Tencentcloud.Css.StreamMonitor("streamMonitor", new()
     ///     {
-    ///         var streamMonitor = new Tencentcloud.Css.StreamMonitor("streamMonitor", new Tencentcloud.Css.StreamMonitorArgs
+    ///         AiAsrInputIndexLists = new[]
     ///         {
-    ///             AiAsrInputIndexLists = 
+    ///             1,
+    ///         },
+    ///         AiFormatDiagnose = 1,
+    ///         AiOcrInputIndexLists = new[]
+    ///         {
+    ///             1,
+    ///         },
+    ///         AllowMonitorReport = 1,
+    ///         AsrLanguage = 1,
+    ///         CheckStreamBroken = 1,
+    ///         CheckStreamLowFrameRate = 1,
+    ///         InputLists = new[]
+    ///         {
+    ///             new Tencentcloud.Css.Inputs.StreamMonitorInputListArgs
     ///             {
-    ///                 1,
+    ///                 InputApp = "live",
+    ///                 InputDomain = "177154.push.tlivecloud.com",
+    ///                 InputStreamName = "ppp",
     ///             },
-    ///             AiFormatDiagnose = 1,
-    ///             AiOcrInputIndexLists = 
-    ///             {
-    ///                 1,
-    ///             },
-    ///             AllowMonitorReport = 1,
-    ///             AsrLanguage = 1,
-    ///             CheckStreamBroken = 1,
-    ///             CheckStreamLowFrameRate = 1,
-    ///             InputLists = 
-    ///             {
-    ///                 new Tencentcloud.Css.Inputs.StreamMonitorInputListArgs
-    ///                 {
-    ///                     InputApp = "live",
-    ///                     InputDomain = "177154.push.tlivecloud.com",
-    ///                     InputStreamName = "ppp",
-    ///                 },
-    ///             },
-    ///             MonitorName = "test",
-    ///             NotifyPolicy = new Tencentcloud.Css.Inputs.StreamMonitorNotifyPolicyArgs
-    ///             {
-    ///                 CallbackUrl = "http://example.com/test",
-    ///                 NotifyPolicyType = 1,
-    ///             },
-    ///             OcrLanguage = 1,
-    ///             OutputInfo = new Tencentcloud.Css.Inputs.StreamMonitorOutputInfoArgs
-    ///             {
-    ///                 OutputDomain = "test122.jingxhu.top",
-    ///                 OutputStreamHeight = 1080,
-    ///                 OutputStreamName = "afc7847d-1fe1-43bc-b1e4-20d86303c393",
-    ///                 OutputStreamWidth = 1920,
-    ///             },
-    ///         });
-    ///     }
+    ///         },
+    ///         MonitorName = "test",
+    ///         NotifyPolicy = new Tencentcloud.Css.Inputs.StreamMonitorNotifyPolicyArgs
+    ///         {
+    ///             CallbackUrl = "http://example.com/test",
+    ///             NotifyPolicyType = 1,
+    ///         },
+    ///         OcrLanguage = 1,
+    ///         OutputInfo = new Tencentcloud.Css.Inputs.StreamMonitorOutputInfoArgs
+    ///         {
+    ///             OutputDomain = "test122.jingxhu.top",
+    ///             OutputStreamHeight = 1080,
+    ///             OutputStreamName = "afc7847d-1fe1-43bc-b1e4-20d86303c393",
+    ///             OutputStreamWidth = 1920,
+    ///         },
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// css stream_monitor can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Css/streamMonitor:StreamMonitor stream_monitor stream_monitor_id
+    /// $ pulumi import tencentcloud:Css/streamMonitor:StreamMonitor stream_monitor stream_monitor_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Css/streamMonitor:StreamMonitor")]
-    public partial class StreamMonitor : Pulumi.CustomResource
+    public partial class StreamMonitor : global::Pulumi.CustomResource
     {
         /// <summary>
         /// AI asr input index list.(first input index is 1.).
@@ -195,7 +196,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Css
         }
     }
 
-    public sealed class StreamMonitorArgs : Pulumi.ResourceArgs
+    public sealed class StreamMonitorArgs : global::Pulumi.ResourceArgs
     {
         [Input("aiAsrInputIndexLists")]
         private InputList<int>? _aiAsrInputIndexLists;
@@ -290,9 +291,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Css
         public StreamMonitorArgs()
         {
         }
+        public static new StreamMonitorArgs Empty => new StreamMonitorArgs();
     }
 
-    public sealed class StreamMonitorState : Pulumi.ResourceArgs
+    public sealed class StreamMonitorState : global::Pulumi.ResourceArgs
     {
         [Input("aiAsrInputIndexLists")]
         private InputList<int>? _aiAsrInputIndexLists;
@@ -387,5 +389,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Css
         public StreamMonitorState()
         {
         }
+        public static new StreamMonitorState Empty => new StreamMonitorState();
     }
 }

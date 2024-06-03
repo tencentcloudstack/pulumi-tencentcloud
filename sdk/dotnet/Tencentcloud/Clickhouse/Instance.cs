@@ -15,89 +15,92 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clickhouse
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var cdwchInstance = new Tencentcloud.Clickhouse.Instance("cdwchInstance", new()
     ///     {
-    ///         var cdwchInstance = new Tencentcloud.Clickhouse.Instance("cdwchInstance", new Tencentcloud.Clickhouse.InstanceArgs
+    ///         ChargeType = "POSTPAID_BY_HOUR",
+    ///         CommonSpec = new Tencentcloud.Clickhouse.Inputs.InstanceCommonSpecArgs
     ///         {
-    ///             ChargeType = "POSTPAID_BY_HOUR",
-    ///             CommonSpec = new Tencentcloud.Clickhouse.Inputs.InstanceCommonSpecArgs
-    ///             {
-    ///                 Count = 3,
-    ///                 DiskSize = 300,
-    ///                 SpecName = "SCH6",
-    ///             },
-    ///             DataSpec = new Tencentcloud.Clickhouse.Inputs.InstanceDataSpecArgs
-    ///             {
-    ///                 Count = 2,
-    ///                 DiskSize = 300,
-    ///                 SpecName = "SCH6",
-    ///             },
-    ///             HaFlag = true,
-    ///             InstanceName = "tf-test-clickhouse",
-    ///             ProductVersion = "21.8.12.29",
-    ///             SubnetId = "subnet-xxxxxx",
-    ///             VpcId = "vpc-xxxxxx",
-    ///             Zone = "ap-guangzhou-6",
-    ///         });
-    ///     }
+    ///             Count = 3,
+    ///             DiskSize = 300,
+    ///             SpecName = "SCH6",
+    ///         },
+    ///         DataSpec = new Tencentcloud.Clickhouse.Inputs.InstanceDataSpecArgs
+    ///         {
+    ///             Count = 2,
+    ///             DiskSize = 300,
+    ///             SpecName = "SCH6",
+    ///         },
+    ///         HaFlag = true,
+    ///         InstanceName = "tf-test-clickhouse",
+    ///         ProductVersion = "21.8.12.29",
+    ///         SubnetId = "subnet-xxxxxx",
+    ///         VpcId = "vpc-xxxxxx",
+    ///         Zone = "ap-guangzhou-6",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
+    /// 
     /// ### PREPAID instance
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var cdwchInstancePrepaid = new Tencentcloud.Clickhouse.Instance("cdwchInstancePrepaid", new()
     ///     {
-    ///         var cdwchInstancePrepaid = new Tencentcloud.Clickhouse.Instance("cdwchInstancePrepaid", new Tencentcloud.Clickhouse.InstanceArgs
+    ///         ChargeType = "PREPAID",
+    ///         CommonSpec = new Tencentcloud.Clickhouse.Inputs.InstanceCommonSpecArgs
     ///         {
-    ///             ChargeType = "PREPAID",
-    ///             CommonSpec = new Tencentcloud.Clickhouse.Inputs.InstanceCommonSpecArgs
-    ///             {
-    ///                 Count = 3,
-    ///                 DiskSize = 300,
-    ///                 SpecName = "SCH6",
-    ///             },
-    ///             DataSpec = new Tencentcloud.Clickhouse.Inputs.InstanceDataSpecArgs
-    ///             {
-    ///                 Count = 2,
-    ///                 DiskSize = 300,
-    ///                 SpecName = "SCH6",
-    ///             },
-    ///             HaFlag = true,
-    ///             InstanceName = "tf-test-clickhouse-prepaid",
-    ///             ProductVersion = "21.8.12.29",
-    ///             RenewFlag = 1,
-    ///             SubnetId = "subnet-xxxxxx",
-    ///             TimeSpan = 1,
-    ///             VpcId = "vpc-xxxxxx",
-    ///             Zone = "ap-guangzhou-6",
-    ///         });
-    ///     }
+    ///             Count = 3,
+    ///             DiskSize = 300,
+    ///             SpecName = "SCH6",
+    ///         },
+    ///         DataSpec = new Tencentcloud.Clickhouse.Inputs.InstanceDataSpecArgs
+    ///         {
+    ///             Count = 2,
+    ///             DiskSize = 300,
+    ///             SpecName = "SCH6",
+    ///         },
+    ///         HaFlag = true,
+    ///         InstanceName = "tf-test-clickhouse-prepaid",
+    ///         ProductVersion = "21.8.12.29",
+    ///         RenewFlag = 1,
+    ///         SubnetId = "subnet-xxxxxx",
+    ///         TimeSpan = 1,
+    ///         VpcId = "vpc-xxxxxx",
+    ///         Zone = "ap-guangzhou-6",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// Clickhouse instance can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Clickhouse/instance:Instance foo cdwch-xxxxxx
+    /// $ pulumi import tencentcloud:Clickhouse/instance:Instance foo cdwch-xxxxxx
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Clickhouse/instance:Instance")]
-    public partial class Instance : Pulumi.CustomResource
+    public partial class Instance : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Billing type: `PREPAID` prepaid, `POSTPAID_BY_HOUR` postpaid.
@@ -246,7 +249,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clickhouse
         }
     }
 
-    public sealed class InstanceArgs : Pulumi.ResourceArgs
+    public sealed class InstanceArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Billing type: `PREPAID` prepaid, `POSTPAID_BY_HOUR` postpaid.
@@ -353,9 +356,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clickhouse
         public InstanceArgs()
         {
         }
+        public static new InstanceArgs Empty => new InstanceArgs();
     }
 
-    public sealed class InstanceState : Pulumi.ResourceArgs
+    public sealed class InstanceState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Billing type: `PREPAID` prepaid, `POSTPAID_BY_HOUR` postpaid.
@@ -468,5 +472,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clickhouse
         public InstanceState()
         {
         }
+        public static new InstanceState Empty => new InstanceState();
     }
 }

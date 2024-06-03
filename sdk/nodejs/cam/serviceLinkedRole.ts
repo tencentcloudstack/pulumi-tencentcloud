@@ -9,11 +9,12 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const serviceLinkedRole = new tencentcloud.Cam.ServiceLinkedRole("service_linked_role", {
+ * const serviceLinkedRole = new tencentcloud.cam.ServiceLinkedRole("serviceLinkedRole", {
  *     customSuffix: "tf",
  *     description: "desc cam",
  *     qcsServiceNames: [
@@ -25,6 +26,7 @@ import * as utilities from "../utilities";
  *     },
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export class ServiceLinkedRole extends pulumi.CustomResource {
     /**

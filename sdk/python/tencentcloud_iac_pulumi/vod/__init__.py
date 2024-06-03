@@ -6,6 +6,7 @@ from .. import _utilities
 import typing
 # Export this package's modules as members:
 from .adaptive_dynamic_streaming_template import *
+from .event_config import *
 from .get_adaptive_dynamic_streaming_templates import *
 from .get_image_sprite_templates import *
 from .get_procedure_templates import *
@@ -13,8 +14,11 @@ from .get_snapshot_by_time_offset_templates import *
 from .get_super_player_configs import *
 from .image_sprite_template import *
 from .procedure_template import *
+from .sample_snapshot_template import *
 from .snapshot_by_time_offset_template import *
 from .sub_application import *
 from .super_player_config import *
+from .transcode_template import *
+from .watermark_template import *
 from ._inputs import *
 from . import outputs

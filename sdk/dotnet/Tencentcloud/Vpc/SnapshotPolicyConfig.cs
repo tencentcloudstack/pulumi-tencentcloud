@@ -15,66 +15,69 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var exampleBucket = new Tencentcloud.Cos.Bucket("exampleBucket", new()
     ///     {
-    ///         var exampleBucket = new Tencentcloud.Cos.Bucket("exampleBucket", new Tencentcloud.Cos.BucketArgs
-    ///         {
-    ///             Bucket = "tf-example-1308919341",
-    ///             Acl = "private",
-    ///         });
-    ///         var exampleSnapshotPolicy = new Tencentcloud.Vpc.SnapshotPolicy("exampleSnapshotPolicy", new Tencentcloud.Vpc.SnapshotPolicyArgs
-    ///         {
-    ///             SnapshotPolicyName = "tf-example",
-    ///             BackupType = "time",
-    ///             CosBucket = exampleBucket.CosBucket,
-    ///             CosRegion = "ap-guangzhou",
-    ///             CreateNewCos = false,
-    ///             KeepTime = 2,
-    ///             BackupPolicies = 
-    ///             {
-    ///                 new Tencentcloud.Vpc.Inputs.SnapshotPolicyBackupPolicyArgs
-    ///                 {
-    ///                     BackupDay = "monday",
-    ///                     BackupTime = "00:00:00",
-    ///                 },
-    ///                 new Tencentcloud.Vpc.Inputs.SnapshotPolicyBackupPolicyArgs
-    ///                 {
-    ///                     BackupDay = "tuesday",
-    ///                     BackupTime = "01:00:00",
-    ///                 },
-    ///                 new Tencentcloud.Vpc.Inputs.SnapshotPolicyBackupPolicyArgs
-    ///                 {
-    ///                     BackupDay = "wednesday",
-    ///                     BackupTime = "02:00:00",
-    ///                 },
-    ///             },
-    ///         });
-    ///         var config = new Tencentcloud.Vpc.SnapshotPolicyConfig("config", new Tencentcloud.Vpc.SnapshotPolicyConfigArgs
-    ///         {
-    ///             SnapshotPolicyId = exampleSnapshotPolicy.Id,
-    ///             Enable = false,
-    ///         });
-    ///     }
+    ///         CosBucket = "tf-example-1308919341",
+    ///         Acl = "private",
+    ///     });
     /// 
-    /// }
+    ///     var exampleSnapshotPolicy = new Tencentcloud.Vpc.SnapshotPolicy("exampleSnapshotPolicy", new()
+    ///     {
+    ///         SnapshotPolicyName = "tf-example",
+    ///         BackupType = "time",
+    ///         CosBucket = exampleBucket.CosBucket,
+    ///         CosRegion = "ap-guangzhou",
+    ///         CreateNewCos = false,
+    ///         KeepTime = 2,
+    ///         BackupPolicies = new[]
+    ///         {
+    ///             new Tencentcloud.Vpc.Inputs.SnapshotPolicyBackupPolicyArgs
+    ///             {
+    ///                 BackupDay = "monday",
+    ///                 BackupTime = "00:00:00",
+    ///             },
+    ///             new Tencentcloud.Vpc.Inputs.SnapshotPolicyBackupPolicyArgs
+    ///             {
+    ///                 BackupDay = "tuesday",
+    ///                 BackupTime = "01:00:00",
+    ///             },
+    ///             new Tencentcloud.Vpc.Inputs.SnapshotPolicyBackupPolicyArgs
+    ///             {
+    ///                 BackupDay = "wednesday",
+    ///                 BackupTime = "02:00:00",
+    ///             },
+    ///         },
+    ///     });
+    /// 
+    ///     var config = new Tencentcloud.Vpc.SnapshotPolicyConfig("config", new()
+    ///     {
+    ///         SnapshotPolicyId = exampleSnapshotPolicy.Id,
+    ///         Enable = false,
+    ///     });
+    /// 
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// vpc snapshot_policy_config can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Vpc/snapshotPolicyConfig:SnapshotPolicyConfig snapshot_policy_config snapshot_policy_id
+    /// $ pulumi import tencentcloud:Vpc/snapshotPolicyConfig:SnapshotPolicyConfig snapshot_policy_config snapshot_policy_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Vpc/snapshotPolicyConfig:SnapshotPolicyConfig")]
-    public partial class SnapshotPolicyConfig : Pulumi.CustomResource
+    public partial class SnapshotPolicyConfig : global::Pulumi.CustomResource
     {
         /// <summary>
         /// If enable snapshot policy.
@@ -133,7 +136,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         }
     }
 
-    public sealed class SnapshotPolicyConfigArgs : Pulumi.ResourceArgs
+    public sealed class SnapshotPolicyConfigArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// If enable snapshot policy.
@@ -150,9 +153,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         public SnapshotPolicyConfigArgs()
         {
         }
+        public static new SnapshotPolicyConfigArgs Empty => new SnapshotPolicyConfigArgs();
     }
 
-    public sealed class SnapshotPolicyConfigState : Pulumi.ResourceArgs
+    public sealed class SnapshotPolicyConfigState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// If enable snapshot policy.
@@ -169,5 +173,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         public SnapshotPolicyConfigState()
         {
         }
+        public static new SnapshotPolicyConfigState Empty => new SnapshotPolicyConfigState();
     }
 }

@@ -15,64 +15,58 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dlc
         /// <summary>
         /// Use this data source to query detailed information of dlc describe_updatable_data_engines
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var describeUpdatableDataEngines = Tencentcloud.Dlc.GetDescribeUpdatableDataEngines.Invoke(new()
         ///     {
-        ///         var describeUpdatableDataEngines = Output.Create(Tencentcloud.Dlc.GetDescribeUpdatableDataEngines.InvokeAsync(new Tencentcloud.Dlc.GetDescribeUpdatableDataEnginesArgs
-        ///         {
-        ///             DataEngineConfigCommand = "UpdateSparkSQLLakefsPath",
-        ///         }));
-        ///     }
+        ///         DataEngineConfigCommand = "UpdateSparkSQLLakefsPath",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetDescribeUpdatableDataEnginesResult> InvokeAsync(GetDescribeUpdatableDataEnginesArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetDescribeUpdatableDataEnginesResult>("tencentcloud:Dlc/getDescribeUpdatableDataEngines:getDescribeUpdatableDataEngines", args ?? new GetDescribeUpdatableDataEnginesArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetDescribeUpdatableDataEnginesResult>("tencentcloud:Dlc/getDescribeUpdatableDataEngines:getDescribeUpdatableDataEngines", args ?? new GetDescribeUpdatableDataEnginesArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of dlc describe_updatable_data_engines
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var describeUpdatableDataEngines = Tencentcloud.Dlc.GetDescribeUpdatableDataEngines.Invoke(new()
         ///     {
-        ///         var describeUpdatableDataEngines = Output.Create(Tencentcloud.Dlc.GetDescribeUpdatableDataEngines.InvokeAsync(new Tencentcloud.Dlc.GetDescribeUpdatableDataEnginesArgs
-        ///         {
-        ///             DataEngineConfigCommand = "UpdateSparkSQLLakefsPath",
-        ///         }));
-        ///     }
+        ///         DataEngineConfigCommand = "UpdateSparkSQLLakefsPath",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetDescribeUpdatableDataEnginesResult> Invoke(GetDescribeUpdatableDataEnginesInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetDescribeUpdatableDataEnginesResult>("tencentcloud:Dlc/getDescribeUpdatableDataEngines:getDescribeUpdatableDataEngines", args ?? new GetDescribeUpdatableDataEnginesInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetDescribeUpdatableDataEnginesResult>("tencentcloud:Dlc/getDescribeUpdatableDataEngines:getDescribeUpdatableDataEngines", args ?? new GetDescribeUpdatableDataEnginesInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetDescribeUpdatableDataEnginesArgs : Pulumi.InvokeArgs
+    public sealed class GetDescribeUpdatableDataEnginesArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Engine configuration operation command, UpdateSparkSQLLakefsPath updates the managed table path, UpdateSparkSQLResultPath updates the result bucket path.
@@ -89,9 +83,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dlc
         public GetDescribeUpdatableDataEnginesArgs()
         {
         }
+        public static new GetDescribeUpdatableDataEnginesArgs Empty => new GetDescribeUpdatableDataEnginesArgs();
     }
 
-    public sealed class GetDescribeUpdatableDataEnginesInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetDescribeUpdatableDataEnginesInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Engine configuration operation command, UpdateSparkSQLLakefsPath updates the managed table path, UpdateSparkSQLResultPath updates the result bucket path.
@@ -108,6 +103,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dlc
         public GetDescribeUpdatableDataEnginesInvokeArgs()
         {
         }
+        public static new GetDescribeUpdatableDataEnginesInvokeArgs Empty => new GetDescribeUpdatableDataEnginesInvokeArgs();
     }
 
 

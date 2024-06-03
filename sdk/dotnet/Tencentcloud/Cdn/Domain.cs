@@ -17,191 +17,197 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cdn
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var foo = new Tencentcloud.Cdn.Domain("foo", new()
     ///     {
-    ///         var foo = new Tencentcloud.Cdn.Domain("foo", new Tencentcloud.Cdn.DomainArgs
+    ///         Area = "mainland",
+    ///         CdnDomain = "xxxx.com",
+    ///         FullUrlCache = false,
+    ///         HttpsConfig = new Tencentcloud.Cdn.Inputs.DomainHttpsConfigArgs
     ///         {
-    ///             Area = "mainland",
-    ///             Domain = "xxxx.com",
-    ///             FullUrlCache = false,
-    ///             HttpsConfig = new Tencentcloud.Cdn.Inputs.DomainHttpsConfigArgs
+    ///             ForceRedirect = new Tencentcloud.Cdn.Inputs.DomainHttpsConfigForceRedirectArgs
     ///             {
-    ///                 ForceRedirect = new Tencentcloud.Cdn.Inputs.DomainHttpsConfigForceRedirectArgs
-    ///                 {
-    ///                     RedirectStatusCode = 302,
-    ///                     RedirectType = "http",
-    ///                     Switch = "on",
-    ///                 },
-    ///                 Http2Switch = "off",
-    ///                 HttpsSwitch = "off",
-    ///                 OcspStaplingSwitch = "off",
-    ///                 SpdySwitch = "off",
-    ///                 VerifyClient = "off",
-    ///             },
-    ///             Origin = new Tencentcloud.Cdn.Inputs.DomainOriginArgs
-    ///             {
-    ///                 OriginLists = 
-    ///                 {
-    ///                     "127.0.0.1",
-    ///                 },
-    ///                 OriginPullProtocol = "follow",
-    ///                 OriginType = "ip",
-    ///             },
-    ///             ServiceType = "web",
-    ///             Tags = 
-    ///             {
-    ///                 { "hello", "world" },
-    ///             },
-    ///         });
-    ///     }
-    /// 
-    /// }
-    /// ```
-    /// ### Example Usage of cdn uses cache and request headers
-    /// 
-    /// ```csharp
-    /// using Pulumi;
-    /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
-    /// 
-    /// class MyStack : Stack
-    /// {
-    ///     public MyStack()
-    ///     {
-    ///         var foo = new Tencentcloud.Cdn.Domain("foo", new Tencentcloud.Cdn.DomainArgs
-    ///         {
-    ///             Area = "mainland",
-    ///             CacheKey = new Tencentcloud.Cdn.Inputs.DomainCacheKeyArgs
-    ///             {
-    ///                 FullUrlCache = "on",
-    ///             },
-    ///             Domain = "xxxx.com",
-    ///             HttpsConfig = new Tencentcloud.Cdn.Inputs.DomainHttpsConfigArgs
-    ///             {
-    ///                 ForceRedirect = new Tencentcloud.Cdn.Inputs.DomainHttpsConfigForceRedirectArgs
-    ///                 {
-    ///                     RedirectStatusCode = 302,
-    ///                     RedirectType = "http",
-    ///                     Switch = "on",
-    ///                 },
-    ///                 Http2Switch = "off",
-    ///                 HttpsSwitch = "off",
-    ///                 OcspStaplingSwitch = "off",
-    ///                 SpdySwitch = "off",
-    ///                 VerifyClient = "off",
-    ///             },
-    ///             Origin = new Tencentcloud.Cdn.Inputs.DomainOriginArgs
-    ///             {
-    ///                 OriginLists = 
-    ///                 {
-    ///                     "127.0.0.1",
-    ///                 },
-    ///                 OriginPullProtocol = "follow",
-    ///                 OriginType = "ip",
-    ///             },
-    ///             RangeOriginSwitch = "off",
-    ///             RequestHeader = new Tencentcloud.Cdn.Inputs.DomainRequestHeaderArgs
-    ///             {
-    ///                 HeaderRules = 
-    ///                 {
-    ///                     new Tencentcloud.Cdn.Inputs.DomainRequestHeaderHeaderRuleArgs
-    ///                     {
-    ///                         HeaderMode = "add",
-    ///                         HeaderName = "tf-header-name",
-    ///                         HeaderValue = "tf-header-value",
-    ///                         RulePaths = 
-    ///                         {
-    ///                             "*",
-    ///                         },
-    ///                         RuleType = "all",
-    ///                     },
-    ///                 },
+    ///                 RedirectStatusCode = 302,
+    ///                 RedirectType = "http",
     ///                 Switch = "on",
     ///             },
-    ///             RuleCaches = 
+    ///             Http2Switch = "off",
+    ///             HttpsSwitch = "off",
+    ///             OcspStaplingSwitch = "off",
+    ///             SpdySwitch = "off",
+    ///             VerifyClient = "off",
+    ///         },
+    ///         Origin = new Tencentcloud.Cdn.Inputs.DomainOriginArgs
+    ///         {
+    ///             OriginLists = new[]
     ///             {
-    ///                 new Tencentcloud.Cdn.Inputs.DomainRuleCachArgs
-    ///                 {
-    ///                     CacheTime = 10000,
-    ///                     NoCacheSwitch = "on",
-    ///                     ReValidate = "on",
-    ///                 },
+    ///                 "127.0.0.1",
     ///             },
-    ///             ServiceType = "web",
-    ///             Tags = 
-    ///             {
-    ///                 { "hello", "world" },
-    ///             },
-    ///         });
-    ///     }
+    ///             OriginPullProtocol = "follow",
+    ///             OriginType = "ip",
+    ///         },
+    ///         ServiceType = "web",
+    ///         Tags = 
+    ///         {
+    ///             { "hello", "world" },
+    ///         },
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
-    /// ### Example Usage of COS bucket url as origin
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
+    /// ### Example Usage of cdn uses cache and request headers
+    /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var foo = new Tencentcloud.Cdn.Domain("foo", new()
     ///     {
-    ///         var bucket = new Tencentcloud.Cos.Bucket("bucket", new Tencentcloud.Cos.BucketArgs
+    ///         Area = "mainland",
+    ///         CacheKey = new Tencentcloud.Cdn.Inputs.DomainCacheKeyArgs
     ///         {
-    ///             Bucket = "demo-bucket-1251234567",
-    ///             Acl = "private",
-    ///         });
-    ///         // Create cdn domain
-    ///         var cdn = new Tencentcloud.Cdn.Domain("cdn", new Tencentcloud.Cdn.DomainArgs
+    ///             FullUrlCache = "on",
+    ///         },
+    ///         CdnDomain = "xxxx.com",
+    ///         HttpsConfig = new Tencentcloud.Cdn.Inputs.DomainHttpsConfigArgs
     ///         {
-    ///             Domain = "abc.com",
-    ///             ServiceType = "web",
-    ///             Area = "mainland",
-    ///             CacheKey = new Tencentcloud.Cdn.Inputs.DomainCacheKeyArgs
+    ///             ForceRedirect = new Tencentcloud.Cdn.Inputs.DomainHttpsConfigForceRedirectArgs
     ///             {
-    ///                 FullUrlCache = "off",
+    ///                 RedirectStatusCode = 302,
+    ///                 RedirectType = "http",
+    ///                 Switch = "on",
     ///             },
-    ///             Origin = new Tencentcloud.Cdn.Inputs.DomainOriginArgs
+    ///             Http2Switch = "off",
+    ///             HttpsSwitch = "off",
+    ///             OcspStaplingSwitch = "off",
+    ///             SpdySwitch = "off",
+    ///             VerifyClient = "off",
+    ///         },
+    ///         Origin = new Tencentcloud.Cdn.Inputs.DomainOriginArgs
+    ///         {
+    ///             OriginLists = new[]
     ///             {
-    ///                 OriginType = "cos",
-    ///                 OriginLists = 
+    ///                 "127.0.0.1",
+    ///             },
+    ///             OriginPullProtocol = "follow",
+    ///             OriginType = "ip",
+    ///         },
+    ///         RangeOriginSwitch = "off",
+    ///         RequestHeader = new Tencentcloud.Cdn.Inputs.DomainRequestHeaderArgs
+    ///         {
+    ///             HeaderRules = new[]
+    ///             {
+    ///                 new Tencentcloud.Cdn.Inputs.DomainRequestHeaderHeaderRuleArgs
     ///                 {
-    ///                     bucket.CosBucketUrl,
+    ///                     HeaderMode = "add",
+    ///                     HeaderName = "tf-header-name",
+    ///                     HeaderValue = "tf-header-value",
+    ///                     RulePaths = new[]
+    ///                     {
+    ///                         "*",
+    ///                     },
+    ///                     RuleType = "all",
     ///                 },
-    ///                 ServerName = bucket.CosBucketUrl,
-    ///                 OriginPullProtocol = "follow",
-    ///                 CosPrivateAccess = "on",
     ///             },
-    ///             HttpsConfig = new Tencentcloud.Cdn.Inputs.DomainHttpsConfigArgs
+    ///             Switch = "on",
+    ///         },
+    ///         RuleCaches = new[]
+    ///         {
+    ///             new Tencentcloud.Cdn.Inputs.DomainRuleCachArgs
     ///             {
-    ///                 HttpsSwitch = "off",
-    ///                 Http2Switch = "off",
-    ///                 OcspStaplingSwitch = "off",
-    ///                 SpdySwitch = "off",
-    ///                 VerifyClient = "off",
+    ///                 CacheTime = 10000,
+    ///                 NoCacheSwitch = "on",
+    ///                 ReValidate = "on",
     ///             },
-    ///         });
-    ///     }
+    ///         },
+    ///         ServiceType = "web",
+    ///         Tags = 
+    ///         {
+    ///             { "hello", "world" },
+    ///         },
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
+    /// 
+    /// ### Example Usage of COS bucket url as origin
+    /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
+    /// using Pulumi;
+    /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     var bucket = new Tencentcloud.Cos.Bucket("bucket", new()
+    ///     {
+    ///         CosBucket = "demo-bucket-1251234567",
+    ///         Acl = "private",
+    ///     });
+    /// 
+    ///     // Create cdn domain
+    ///     var cdn = new Tencentcloud.Cdn.Domain("cdn", new()
+    ///     {
+    ///         CdnDomain = "abc.com",
+    ///         ServiceType = "web",
+    ///         Area = "mainland",
+    ///         CacheKey = new Tencentcloud.Cdn.Inputs.DomainCacheKeyArgs
+    ///         {
+    ///             FullUrlCache = "off",
+    ///         },
+    ///         Origin = new Tencentcloud.Cdn.Inputs.DomainOriginArgs
+    ///         {
+    ///             OriginType = "cos",
+    ///             OriginLists = new[]
+    ///             {
+    ///                 bucket.CosBucketUrl,
+    ///             },
+    ///             ServerName = bucket.CosBucketUrl,
+    ///             OriginPullProtocol = "follow",
+    ///             CosPrivateAccess = "on",
+    ///         },
+    ///         HttpsConfig = new Tencentcloud.Cdn.Inputs.DomainHttpsConfigArgs
+    ///         {
+    ///             HttpsSwitch = "off",
+    ///             Http2Switch = "off",
+    ///             OcspStaplingSwitch = "off",
+    ///             SpdySwitch = "off",
+    ///             VerifyClient = "off",
+    ///         },
+    ///     });
+    /// 
+    /// });
+    /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// CDN domain can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Cdn/domain:Domain foo xxxx.com
+    /// $ pulumi import tencentcloud:Cdn/domain:Domain foo xxxx.com
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Cdn/domain:Domain")]
-    public partial class Domain : Pulumi.CustomResource
+    public partial class Domain : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Domain name acceleration region. `mainland`: acceleration inside mainland China, `overseas`: acceleration outside mainland China, `global`: global acceleration. Overseas acceleration service must be enabled to use overseas acceleration and global acceleration.
@@ -518,7 +524,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cdn
         }
     }
 
-    public sealed class DomainArgs : Pulumi.ResourceArgs
+    public sealed class DomainArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Domain name acceleration region. `mainland`: acceleration inside mainland China, `overseas`: acceleration outside mainland China, `global`: global acceleration. Overseas acceleration service must be enabled to use overseas acceleration and global acceleration.
@@ -781,9 +787,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cdn
         public DomainArgs()
         {
         }
+        public static new DomainArgs Empty => new DomainArgs();
     }
 
-    public sealed class DomainState : Pulumi.ResourceArgs
+    public sealed class DomainState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Domain name acceleration region. `mainland`: acceleration inside mainland China, `overseas`: acceleration outside mainland China, `global`: global acceleration. Overseas acceleration service must be enabled to use overseas acceleration and global acceleration.
@@ -1076,5 +1083,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cdn
         public DomainState()
         {
         }
+        public static new DomainState Empty => new DomainState();
     }
 }

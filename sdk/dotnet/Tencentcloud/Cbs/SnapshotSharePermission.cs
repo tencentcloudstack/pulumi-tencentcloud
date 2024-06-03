@@ -15,38 +15,39 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cbs
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var snapshotSharePermission = new Tencentcloud.Cbs.SnapshotSharePermission("snapshotSharePermission", new()
     ///     {
-    ///         var snapshotSharePermission = new Tencentcloud.Cbs.SnapshotSharePermission("snapshotSharePermission", new Tencentcloud.Cbs.SnapshotSharePermissionArgs
+    ///         AccountIds = new[]
     ///         {
-    ///             AccountIds = 
-    ///             {
-    ///                 "1xxxxxx",
-    ///                 "2xxxxxx",
-    ///             },
-    ///             SnapshotId = "snap-xxxxxx",
-    ///         });
-    ///     }
+    ///             "1xxxxxx",
+    ///             "2xxxxxx",
+    ///         },
+    ///         SnapshotId = "snap-xxxxxx",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// cbs snapshot_share_permission can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Cbs/snapshotSharePermission:SnapshotSharePermission snapshot_share_permission snap-xxxxxx
+    /// $ pulumi import tencentcloud:Cbs/snapshotSharePermission:SnapshotSharePermission snapshot_share_permission snap-xxxxxx
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Cbs/snapshotSharePermission:SnapshotSharePermission")]
-    public partial class SnapshotSharePermission : Pulumi.CustomResource
+    public partial class SnapshotSharePermission : global::Pulumi.CustomResource
     {
         /// <summary>
         /// List of account IDs with which a snapshot is shared. For the format of array-type parameters, see[API Introduction](https://cloud.tencent.com/document/api/213/568). You can find the account ID in[Account Information](https://console.cloud.tencent.com/developer).
@@ -105,7 +106,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cbs
         }
     }
 
-    public sealed class SnapshotSharePermissionArgs : Pulumi.ResourceArgs
+    public sealed class SnapshotSharePermissionArgs : global::Pulumi.ResourceArgs
     {
         [Input("accountIds", required: true)]
         private InputList<string>? _accountIds;
@@ -128,9 +129,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cbs
         public SnapshotSharePermissionArgs()
         {
         }
+        public static new SnapshotSharePermissionArgs Empty => new SnapshotSharePermissionArgs();
     }
 
-    public sealed class SnapshotSharePermissionState : Pulumi.ResourceArgs
+    public sealed class SnapshotSharePermissionState : global::Pulumi.ResourceArgs
     {
         [Input("accountIds")]
         private InputList<string>? _accountIds;
@@ -153,5 +155,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cbs
         public SnapshotSharePermissionState()
         {
         }
+        public static new SnapshotSharePermissionState Empty => new SnapshotSharePermissionState();
     }
 }

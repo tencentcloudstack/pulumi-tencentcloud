@@ -15,7 +15,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Outputs
     public sealed class ZoneSettingQuic
     {
         /// <summary>
-        /// Whether to enable QUIC.- `on`: Enable.- `off`: Disable.
+        /// Whether to enable QUIC.
         /// </summary>
         public readonly string Switch;
 

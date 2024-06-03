@@ -2,18 +2,21 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
  * Provides a resource to create a mps withdrawsWatermarkOperation
  *
  * ## Example Usage
+ *
  * ### Withdraw the watermark from COS
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const exampleBucket = new tencentcloud.cos.Bucket("exampleBucket", {
  *     bucket: `tf-test-mps-wm-${local.app_id}`,
@@ -29,13 +32,14 @@ import * as utilities from "../utilities";
  *         type: "COS",
  *         cosInputInfo: {
  *             bucket: exampleBucketObject.bucket,
- *             region: `%s`,
+ *             region: "%s",
  *             object: exampleBucketObject.key,
  *         },
  *     },
  *     sessionContext: "this is a example session context",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export class WithdrawsWatermarkOperation extends pulumi.CustomResource {
     /**

@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cvm.Inputs
 {
 
-    public sealed class LaunchTemplateActionTimerExternalsGetArgs : Pulumi.ResourceArgs
+    public sealed class LaunchTemplateActionTimerExternalsGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Release address.
@@ -40,5 +40,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cvm.Inputs
         public LaunchTemplateActionTimerExternalsGetArgs()
         {
         }
+        public static new LaunchTemplateActionTimerExternalsGetArgs Empty => new LaunchTemplateActionTimerExternalsGetArgs();
     }
 }

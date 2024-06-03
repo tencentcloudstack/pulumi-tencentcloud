@@ -15,92 +15,86 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cat
         /// <summary>
         /// Use this data source to query detailed information of cat probe data
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var probeData = Tencentcloud.Cat.GetProbeData.Invoke(new()
         ///     {
-        ///         var probeData = Output.Create(Tencentcloud.Cat.GetProbeData.InvokeAsync(new Tencentcloud.Cat.GetProbeDataArgs
+        ///         Ascending = true,
+        ///         BeginTime = 1667923200000,
+        ///         EndTime = 1667996208428,
+        ///         Limit = 20,
+        ///         Offset = 0,
+        ///         SelectedFields = new[]
         ///         {
-        ///             Ascending = true,
-        ///             BeginTime = 1667923200000,
-        ///             EndTime = 1667996208428,
-        ///             Limit = 20,
-        ///             Offset = 0,
-        ///             SelectedFields = 
-        ///             {
-        ///                 "terraform",
-        ///             },
-        ///             SortField = "ProbeTime",
-        ///             TaskIds = 
-        ///             {
-        ///                 "task-knare1mk",
-        ///             },
-        ///             TaskType = "AnalyzeTaskType_Network",
-        ///         }));
-        ///     }
+        ///             "terraform",
+        ///         },
+        ///         SortField = "ProbeTime",
+        ///         TaskIds = new[]
+        ///         {
+        ///             "task-knare1mk",
+        ///         },
+        ///         TaskType = "AnalyzeTaskType_Network",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetProbeDataResult> InvokeAsync(GetProbeDataArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetProbeDataResult>("tencentcloud:Cat/getProbeData:getProbeData", args ?? new GetProbeDataArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetProbeDataResult>("tencentcloud:Cat/getProbeData:getProbeData", args ?? new GetProbeDataArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of cat probe data
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var probeData = Tencentcloud.Cat.GetProbeData.Invoke(new()
         ///     {
-        ///         var probeData = Output.Create(Tencentcloud.Cat.GetProbeData.InvokeAsync(new Tencentcloud.Cat.GetProbeDataArgs
+        ///         Ascending = true,
+        ///         BeginTime = 1667923200000,
+        ///         EndTime = 1667996208428,
+        ///         Limit = 20,
+        ///         Offset = 0,
+        ///         SelectedFields = new[]
         ///         {
-        ///             Ascending = true,
-        ///             BeginTime = 1667923200000,
-        ///             EndTime = 1667996208428,
-        ///             Limit = 20,
-        ///             Offset = 0,
-        ///             SelectedFields = 
-        ///             {
-        ///                 "terraform",
-        ///             },
-        ///             SortField = "ProbeTime",
-        ///             TaskIds = 
-        ///             {
-        ///                 "task-knare1mk",
-        ///             },
-        ///             TaskType = "AnalyzeTaskType_Network",
-        ///         }));
-        ///     }
+        ///             "terraform",
+        ///         },
+        ///         SortField = "ProbeTime",
+        ///         TaskIds = new[]
+        ///         {
+        ///             "task-knare1mk",
+        ///         },
+        ///         TaskType = "AnalyzeTaskType_Network",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetProbeDataResult> Invoke(GetProbeDataInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetProbeDataResult>("tencentcloud:Cat/getProbeData:getProbeData", args ?? new GetProbeDataInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetProbeDataResult>("tencentcloud:Cat/getProbeData:getProbeData", args ?? new GetProbeDataInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetProbeDataArgs : Pulumi.InvokeArgs
+    public sealed class GetProbeDataArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// true is Ascending.
@@ -237,9 +231,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cat
         public GetProbeDataArgs()
         {
         }
+        public static new GetProbeDataArgs Empty => new GetProbeDataArgs();
     }
 
-    public sealed class GetProbeDataInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetProbeDataInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// true is Ascending.
@@ -376,6 +371,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cat
         public GetProbeDataInvokeArgs()
         {
         }
+        public static new GetProbeDataInvokeArgs Empty => new GetProbeDataInvokeArgs();
     }
 
 

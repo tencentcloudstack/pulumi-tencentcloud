@@ -14,123 +14,135 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Redis
     /// Provides a resource to create a redis account
     /// 
     /// ## Example Usage
+    /// 
     /// ### Create an account with read and write permissions
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = Pulumi.Tencentcloud;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var zone = Tencentcloud.Redis.GetZoneConfig.Invoke(new()
     ///     {
-    ///         var zone = Output.Create(Tencentcloud.Redis.GetZoneConfig.InvokeAsync(new Tencentcloud.Redis.GetZoneConfigArgs
-    ///         {
-    ///             TypeId = 7,
-    ///         }));
-    ///         var vpc = new Tencentcloud.Vpc.Instance("vpc", new Tencentcloud.Vpc.InstanceArgs
-    ///         {
-    ///             CidrBlock = "10.0.0.0/16",
-    ///         });
-    ///         var subnet = new Tencentcloud.Subnet.Instance("subnet", new Tencentcloud.Subnet.InstanceArgs
-    ///         {
-    ///             VpcId = vpc.Id,
-    ///             AvailabilityZone = zone.Apply(zone =&gt; zone.Lists?[1]?.Zone),
-    ///             CidrBlock = "10.0.1.0/24",
-    ///         });
-    ///         var foo = new Tencentcloud.Redis.Instance("foo", new Tencentcloud.Redis.InstanceArgs
-    ///         {
-    ///             AvailabilityZone = zone.Apply(zone =&gt; zone.Lists?[1]?.Zone),
-    ///             TypeId = zone.Apply(zone =&gt; zone.Lists?[1]?.TypeId),
-    ///             Password = "test12345789",
-    ///             MemSize = 8192,
-    ///             RedisShardNum = zone.Apply(zone =&gt; zone.Lists?[1]?.RedisShardNums?[0]),
-    ///             RedisReplicasNum = zone.Apply(zone =&gt; zone.Lists?[1]?.RedisReplicasNums?[0]),
-    ///             Port = 6379,
-    ///             VpcId = vpc.Id,
-    ///             SubnetId = subnet.Id,
-    ///         });
-    ///         var account = new Tencentcloud.Redis.Account("account", new Tencentcloud.Redis.AccountArgs
-    ///         {
-    ///             InstanceId = foo.Id,
-    ///             AccountName = "account_test",
-    ///             AccountPassword = "test1234",
-    ///             Remark = "master",
-    ///             ReadonlyPolicies = 
-    ///             {
-    ///                 "master",
-    ///             },
-    ///             Privilege = "rw",
-    ///         });
-    ///     }
+    ///         TypeId = 7,
+    ///     });
     /// 
-    /// }
+    ///     var vpc = new Tencentcloud.Vpc.Instance("vpc", new()
+    ///     {
+    ///         CidrBlock = "10.0.0.0/16",
+    ///     });
+    /// 
+    ///     var subnet = new Tencentcloud.Subnet.Instance("subnet", new()
+    ///     {
+    ///         VpcId = vpc.Id,
+    ///         AvailabilityZone = zone.Apply(getZoneConfigResult =&gt; getZoneConfigResult.Lists[1]?.Zone),
+    ///         CidrBlock = "10.0.1.0/24",
+    ///     });
+    /// 
+    ///     var foo = new Tencentcloud.Redis.Instance("foo", new()
+    ///     {
+    ///         AvailabilityZone = zone.Apply(getZoneConfigResult =&gt; getZoneConfigResult.Lists[1]?.Zone),
+    ///         TypeId = zone.Apply(getZoneConfigResult =&gt; getZoneConfigResult.Lists[1]?.TypeId),
+    ///         Password = "test12345789",
+    ///         MemSize = 8192,
+    ///         RedisShardNum = zone.Apply(getZoneConfigResult =&gt; getZoneConfigResult.Lists[1]?.RedisShardNums[0]),
+    ///         RedisReplicasNum = zone.Apply(getZoneConfigResult =&gt; getZoneConfigResult.Lists[1]?.RedisReplicasNums[0]),
+    ///         Port = 6379,
+    ///         VpcId = vpc.Id,
+    ///         SubnetId = subnet.Id,
+    ///     });
+    /// 
+    ///     var account = new Tencentcloud.Redis.Account("account", new()
+    ///     {
+    ///         InstanceId = foo.Id,
+    ///         AccountName = "account_test",
+    ///         AccountPassword = "test1234",
+    ///         Remark = "master",
+    ///         ReadonlyPolicies = new[]
+    ///         {
+    ///             "master",
+    ///         },
+    ///         Privilege = "rw",
+    ///     });
+    /// 
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
+    /// 
     /// ### Create an account with read-only permissions
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = Pulumi.Tencentcloud;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var zone = Tencentcloud.Redis.GetZoneConfig.Invoke(new()
     ///     {
-    ///         var zone = Output.Create(Tencentcloud.Redis.GetZoneConfig.InvokeAsync(new Tencentcloud.Redis.GetZoneConfigArgs
-    ///         {
-    ///             TypeId = 7,
-    ///         }));
-    ///         var vpc = new Tencentcloud.Vpc.Instance("vpc", new Tencentcloud.Vpc.InstanceArgs
-    ///         {
-    ///             CidrBlock = "10.0.0.0/16",
-    ///         });
-    ///         var subnet = new Tencentcloud.Subnet.Instance("subnet", new Tencentcloud.Subnet.InstanceArgs
-    ///         {
-    ///             VpcId = vpc.Id,
-    ///             AvailabilityZone = zone.Apply(zone =&gt; zone.Lists?[1]?.Zone),
-    ///             CidrBlock = "10.0.1.0/24",
-    ///         });
-    ///         var foo = new Tencentcloud.Redis.Instance("foo", new Tencentcloud.Redis.InstanceArgs
-    ///         {
-    ///             AvailabilityZone = zone.Apply(zone =&gt; zone.Lists?[1]?.Zone),
-    ///             TypeId = zone.Apply(zone =&gt; zone.Lists?[1]?.TypeId),
-    ///             Password = "test12345789",
-    ///             MemSize = 8192,
-    ///             RedisShardNum = zone.Apply(zone =&gt; zone.Lists?[1]?.RedisShardNums?[0]),
-    ///             RedisReplicasNum = zone.Apply(zone =&gt; zone.Lists?[1]?.RedisReplicasNums?[0]),
-    ///             Port = 6379,
-    ///             VpcId = vpc.Id,
-    ///             SubnetId = subnet.Id,
-    ///         });
-    ///         var account = new Tencentcloud.Redis.Account("account", new Tencentcloud.Redis.AccountArgs
-    ///         {
-    ///             InstanceId = foo.Id,
-    ///             AccountName = "account_test",
-    ///             AccountPassword = "test1234",
-    ///             Remark = "master",
-    ///             ReadonlyPolicies = 
-    ///             {
-    ///                 "master",
-    ///             },
-    ///             Privilege = "r",
-    ///         });
-    ///     }
+    ///         TypeId = 7,
+    ///     });
     /// 
-    /// }
+    ///     var vpc = new Tencentcloud.Vpc.Instance("vpc", new()
+    ///     {
+    ///         CidrBlock = "10.0.0.0/16",
+    ///     });
+    /// 
+    ///     var subnet = new Tencentcloud.Subnet.Instance("subnet", new()
+    ///     {
+    ///         VpcId = vpc.Id,
+    ///         AvailabilityZone = zone.Apply(getZoneConfigResult =&gt; getZoneConfigResult.Lists[1]?.Zone),
+    ///         CidrBlock = "10.0.1.0/24",
+    ///     });
+    /// 
+    ///     var foo = new Tencentcloud.Redis.Instance("foo", new()
+    ///     {
+    ///         AvailabilityZone = zone.Apply(getZoneConfigResult =&gt; getZoneConfigResult.Lists[1]?.Zone),
+    ///         TypeId = zone.Apply(getZoneConfigResult =&gt; getZoneConfigResult.Lists[1]?.TypeId),
+    ///         Password = "test12345789",
+    ///         MemSize = 8192,
+    ///         RedisShardNum = zone.Apply(getZoneConfigResult =&gt; getZoneConfigResult.Lists[1]?.RedisShardNums[0]),
+    ///         RedisReplicasNum = zone.Apply(getZoneConfigResult =&gt; getZoneConfigResult.Lists[1]?.RedisReplicasNums[0]),
+    ///         Port = 6379,
+    ///         VpcId = vpc.Id,
+    ///         SubnetId = subnet.Id,
+    ///     });
+    /// 
+    ///     var account = new Tencentcloud.Redis.Account("account", new()
+    ///     {
+    ///         InstanceId = foo.Id,
+    ///         AccountName = "account_test",
+    ///         AccountPassword = "test1234",
+    ///         Remark = "master",
+    ///         ReadonlyPolicies = new[]
+    ///         {
+    ///             "master",
+    ///         },
+    ///         Privilege = "r",
+    ///     });
+    /// 
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// redis account can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Redis/account:Account account crs-xxxxxx#account_test
+    /// $ pulumi import tencentcloud:Redis/account:Account account crs-xxxxxx#account_test
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Redis/account:Account")]
-    public partial class Account : Pulumi.CustomResource
+    public partial class Account : global::Pulumi.CustomResource
     {
         /// <summary>
         /// The account name.
@@ -192,6 +204,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Redis
             {
                 Version = Utilities.Version,
                 PluginDownloadURL = "github://api.github.com/tencentcloudstack",
+                AdditionalSecretOutputs =
+                {
+                    "accountPassword",
+                },
             };
             var merged = CustomResourceOptions.Merge(defaultOptions, options);
             // Override the ID if one was specified for consistency with other language SDKs.
@@ -213,7 +229,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Redis
         }
     }
 
-    public sealed class AccountArgs : Pulumi.ResourceArgs
+    public sealed class AccountArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// The account name.
@@ -221,11 +237,21 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Redis
         [Input("accountName", required: true)]
         public Input<string> AccountName { get; set; } = null!;
 
+        [Input("accountPassword", required: true)]
+        private Input<string>? _accountPassword;
+
         /// <summary>
         /// 1: Length 8-30 digits, it is recommended to use a password of more than 12 digits; 2: Cannot start with `/`; 3: Include at least two items: a.Lowercase letters `a-z`; b.Uppercase letters `A-Z` c.Numbers `0-9`;  d.`()`~!@#$%^&amp;*-+=_|{}[]:;&lt;&gt;,.?/`.
         /// </summary>
-        [Input("accountPassword", required: true)]
-        public Input<string> AccountPassword { get; set; } = null!;
+        public Input<string>? AccountPassword
+        {
+            get => _accountPassword;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _accountPassword = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
 
         /// <summary>
         /// The ID of instance.
@@ -260,9 +286,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Redis
         public AccountArgs()
         {
         }
+        public static new AccountArgs Empty => new AccountArgs();
     }
 
-    public sealed class AccountState : Pulumi.ResourceArgs
+    public sealed class AccountState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// The account name.
@@ -270,11 +297,21 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Redis
         [Input("accountName")]
         public Input<string>? AccountName { get; set; }
 
+        [Input("accountPassword")]
+        private Input<string>? _accountPassword;
+
         /// <summary>
         /// 1: Length 8-30 digits, it is recommended to use a password of more than 12 digits; 2: Cannot start with `/`; 3: Include at least two items: a.Lowercase letters `a-z`; b.Uppercase letters `A-Z` c.Numbers `0-9`;  d.`()`~!@#$%^&amp;*-+=_|{}[]:;&lt;&gt;,.?/`.
         /// </summary>
-        [Input("accountPassword")]
-        public Input<string>? AccountPassword { get; set; }
+        public Input<string>? AccountPassword
+        {
+            get => _accountPassword;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _accountPassword = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
 
         /// <summary>
         /// The ID of instance.
@@ -309,5 +346,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Redis
         public AccountState()
         {
         }
+        public static new AccountState Empty => new AccountState();
     }
 }

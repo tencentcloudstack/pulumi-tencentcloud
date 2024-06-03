@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka.Inputs
 {
 
-    public sealed class DatahubTaskSourceResourceMySqlParamDataTargetRecordMappingArgs : Pulumi.ResourceArgs
+    public sealed class DatahubTaskSourceResourceMySqlParamDataTargetRecordMappingArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Whether the message is allowed to be empty.
@@ -70,5 +70,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka.Inputs
         public DatahubTaskSourceResourceMySqlParamDataTargetRecordMappingArgs()
         {
         }
+        public static new DatahubTaskSourceResourceMySqlParamDataTargetRecordMappingArgs Empty => new DatahubTaskSourceResourceMySqlParamDataTargetRecordMappingArgs();
     }
 }

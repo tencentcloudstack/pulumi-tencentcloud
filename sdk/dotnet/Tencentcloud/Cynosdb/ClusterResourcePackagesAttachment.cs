@@ -15,37 +15,38 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var clusterResourcePackagesAttachment = new Tencentcloud.Cynosdb.ClusterResourcePackagesAttachment("clusterResourcePackagesAttachment", new()
     ///     {
-    ///         var clusterResourcePackagesAttachment = new Tencentcloud.Cynosdb.ClusterResourcePackagesAttachment("clusterResourcePackagesAttachment", new Tencentcloud.Cynosdb.ClusterResourcePackagesAttachmentArgs
+    ///         ClusterId = "cynosdbmysql-q1d8151n",
+    ///         PackageIds = new[]
     ///         {
-    ///             ClusterId = "cynosdbmysql-q1d8151n",
-    ///             PackageIds = 
-    ///             {
-    ///                 "package-hy4d2ppl",
-    ///             },
-    ///         });
-    ///     }
+    ///             "package-hy4d2ppl",
+    ///         },
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// cynosdb cluster_resource_packages_attachment can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Cynosdb/clusterResourcePackagesAttachment:ClusterResourcePackagesAttachment cluster_resource_packages_attachment cluster_resource_packages_attachment_id
+    /// $ pulumi import tencentcloud:Cynosdb/clusterResourcePackagesAttachment:ClusterResourcePackagesAttachment cluster_resource_packages_attachment cluster_resource_packages_attachment_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Cynosdb/clusterResourcePackagesAttachment:ClusterResourcePackagesAttachment")]
-    public partial class ClusterResourcePackagesAttachment : Pulumi.CustomResource
+    public partial class ClusterResourcePackagesAttachment : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Cluster ID.
@@ -104,7 +105,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
         }
     }
 
-    public sealed class ClusterResourcePackagesAttachmentArgs : Pulumi.ResourceArgs
+    public sealed class ClusterResourcePackagesAttachmentArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Cluster ID.
@@ -127,9 +128,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
         public ClusterResourcePackagesAttachmentArgs()
         {
         }
+        public static new ClusterResourcePackagesAttachmentArgs Empty => new ClusterResourcePackagesAttachmentArgs();
     }
 
-    public sealed class ClusterResourcePackagesAttachmentState : Pulumi.ResourceArgs
+    public sealed class ClusterResourcePackagesAttachmentState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Cluster ID.
@@ -152,5 +154,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
         public ClusterResourcePackagesAttachmentState()
         {
         }
+        public static new ClusterResourcePackagesAttachmentState Empty => new ClusterResourcePackagesAttachmentState();
     }
 }

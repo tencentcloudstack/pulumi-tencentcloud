@@ -15,64 +15,58 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mariadb
         /// <summary>
         /// Use this data source to query detailed information of mariadb orders
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var orders = Tencentcloud.Mariadb.GetOrders.Invoke(new()
         ///     {
-        ///         var orders = Output.Create(Tencentcloud.Mariadb.GetOrders.InvokeAsync(new Tencentcloud.Mariadb.GetOrdersArgs
-        ///         {
-        ///             DealName = "20230607164033835942781",
-        ///         }));
-        ///     }
+        ///         DealName = "20230607164033835942781",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetOrdersResult> InvokeAsync(GetOrdersArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetOrdersResult>("tencentcloud:Mariadb/getOrders:getOrders", args ?? new GetOrdersArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetOrdersResult>("tencentcloud:Mariadb/getOrders:getOrders", args ?? new GetOrdersArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of mariadb orders
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var orders = Tencentcloud.Mariadb.GetOrders.Invoke(new()
         ///     {
-        ///         var orders = Output.Create(Tencentcloud.Mariadb.GetOrders.InvokeAsync(new Tencentcloud.Mariadb.GetOrdersArgs
-        ///         {
-        ///             DealName = "20230607164033835942781",
-        ///         }));
-        ///     }
+        ///         DealName = "20230607164033835942781",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetOrdersResult> Invoke(GetOrdersInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetOrdersResult>("tencentcloud:Mariadb/getOrders:getOrders", args ?? new GetOrdersInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetOrdersResult>("tencentcloud:Mariadb/getOrders:getOrders", args ?? new GetOrdersInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetOrdersArgs : Pulumi.InvokeArgs
+    public sealed class GetOrdersArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// List of long order numbers to be queried, which are returned for the APIs for creating, renewing, or scaling instances.
@@ -89,9 +83,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mariadb
         public GetOrdersArgs()
         {
         }
+        public static new GetOrdersArgs Empty => new GetOrdersArgs();
     }
 
-    public sealed class GetOrdersInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetOrdersInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// List of long order numbers to be queried, which are returned for the APIs for creating, renewing, or scaling instances.
@@ -108,6 +103,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mariadb
         public GetOrdersInvokeArgs()
         {
         }
+        public static new GetOrdersInvokeArgs Empty => new GetOrdersInvokeArgs();
     }
 
 

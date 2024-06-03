@@ -9,20 +9,19 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const accountSummary = pulumi.output(tencentcloud.Cam.getAccountSummary());
+ * const accountSummary = tencentcloud.Cam.getAccountSummary({});
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getAccountSummary(args?: GetAccountSummaryArgs, opts?: pulumi.InvokeOptions): Promise<GetAccountSummaryResult> {
     args = args || {};
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Cam/getAccountSummary:getAccountSummary", {
         "resultOutputFile": args.resultOutputFile,
     }, opts);
@@ -72,9 +71,22 @@ export interface GetAccountSummaryResult {
      */
     readonly user: number;
 }
-
+/**
+ * Use this data source to query detailed information of cam accountSummary
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const accountSummary = tencentcloud.Cam.getAccountSummary({});
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getAccountSummaryOutput(args?: GetAccountSummaryOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetAccountSummaryResult> {
-    return pulumi.output(args).apply(a => getAccountSummary(a, opts))
+    return pulumi.output(args).apply((a: any) => getAccountSummary(a, opts))
 }
 
 /**

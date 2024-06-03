@@ -11,10 +11,10 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Inputs
 {
 
-    public sealed class ZoneSettingIpv6GetArgs : Pulumi.ResourceArgs
+    public sealed class ZoneSettingIpv6GetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// Specifies whether to enable cache prefresh.- `on`: Enable.- `off`: Disable.
+        /// Cache configuration switch.
         /// </summary>
         [Input("switch", required: true)]
         public Input<string> Switch { get; set; } = null!;
@@ -22,5 +22,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Inputs
         public ZoneSettingIpv6GetArgs()
         {
         }
+        public static new ZoneSettingIpv6GetArgs Empty => new ZoneSettingIpv6GetArgs();
     }
 }

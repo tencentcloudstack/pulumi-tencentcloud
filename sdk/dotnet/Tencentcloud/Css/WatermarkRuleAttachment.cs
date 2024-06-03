@@ -14,62 +14,66 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Css
     /// Provides a resource to create a css watermark_rule
     /// 
     /// ## Example Usage
+    /// 
     /// ### Binding watermark rule with a css stream
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var examplePullStreamTask = new Tencentcloud.Css.PullStreamTask("examplePullStreamTask", new()
     ///     {
-    ///         var examplePullStreamTask = new Tencentcloud.Css.PullStreamTask("examplePullStreamTask", new Tencentcloud.Css.PullStreamTaskArgs
+    ///         StreamName = "tf_example_stream_name",
+    ///         SourceType = "PullLivePushLive",
+    ///         SourceUrls = new[]
     ///         {
-    ///             StreamName = "tf_example_stream_name",
-    ///             SourceType = "PullLivePushLive",
-    ///             SourceUrls = 
-    ///             {
-    ///                 "rtmp://xxx.com/live/stream",
-    ///             },
-    ///             DomainName = "test.domain.com",
-    ///             AppName = "live",
-    ///             StartTime = "2023-09-27T10:28:21Z",
-    ///             EndTime = "2023-09-27T17:28:21Z",
-    ///             Operator = "tf_admin",
-    ///             Comment = "This is a e2e test case.",
-    ///         });
-    ///         var exampleWatermark = new Tencentcloud.Css.Watermark("exampleWatermark", new Tencentcloud.Css.WatermarkArgs
-    ///         {
-    ///             PictureUrl = "picture_url",
-    ///             WatermarkName = "watermark_name",
-    ///             XPosition = 0,
-    ///             YPosition = 0,
-    ///             Width = 0,
-    ///             Height = 0,
-    ///         });
-    ///         var watermarkRuleAttachment = new Tencentcloud.Css.WatermarkRuleAttachment("watermarkRuleAttachment", new Tencentcloud.Css.WatermarkRuleAttachmentArgs
-    ///         {
-    ///             DomainName = examplePullStreamTask.DomainName,
-    ///             AppName = examplePullStreamTask.AppName,
-    ///             StreamName = examplePullStreamTask.StreamName,
-    ///             TemplateId = exampleWatermark.Id,
-    ///         });
-    ///     }
+    ///             "rtmp://xxx.com/live/stream",
+    ///         },
+    ///         DomainName = "test.domain.com",
+    ///         AppName = "live",
+    ///         StartTime = "2023-09-27T10:28:21Z",
+    ///         EndTime = "2023-09-27T17:28:21Z",
+    ///         Operator = "tf_admin",
+    ///         Comment = "This is a e2e test case.",
+    ///     });
     /// 
-    /// }
+    ///     var exampleWatermark = new Tencentcloud.Css.Watermark("exampleWatermark", new()
+    ///     {
+    ///         PictureUrl = "picture_url",
+    ///         WatermarkName = "watermark_name",
+    ///         XPosition = 0,
+    ///         YPosition = 0,
+    ///         Width = 0,
+    ///         Height = 0,
+    ///     });
+    /// 
+    ///     var watermarkRuleAttachment = new Tencentcloud.Css.WatermarkRuleAttachment("watermarkRuleAttachment", new()
+    ///     {
+    ///         DomainName = examplePullStreamTask.DomainName,
+    ///         AppName = examplePullStreamTask.AppName,
+    ///         StreamName = examplePullStreamTask.StreamName,
+    ///         TemplateId = exampleWatermark.Id,
+    ///     });
+    /// 
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// css watermark_rule_attachment can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Css/watermarkRuleAttachment:WatermarkRuleAttachment watermark_rule domain_name#app_name#stream_name#template_id
+    /// $ pulumi import tencentcloud:Css/watermarkRuleAttachment:WatermarkRuleAttachment watermark_rule domain_name#app_name#stream_name#template_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Css/watermarkRuleAttachment:WatermarkRuleAttachment")]
-    public partial class WatermarkRuleAttachment : Pulumi.CustomResource
+    public partial class WatermarkRuleAttachment : global::Pulumi.CustomResource
     {
         /// <summary>
         /// rule app name.
@@ -152,7 +156,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Css
         }
     }
 
-    public sealed class WatermarkRuleAttachmentArgs : Pulumi.ResourceArgs
+    public sealed class WatermarkRuleAttachmentArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// rule app name.
@@ -181,9 +185,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Css
         public WatermarkRuleAttachmentArgs()
         {
         }
+        public static new WatermarkRuleAttachmentArgs Empty => new WatermarkRuleAttachmentArgs();
     }
 
-    public sealed class WatermarkRuleAttachmentState : Pulumi.ResourceArgs
+    public sealed class WatermarkRuleAttachmentState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// rule app name.
@@ -224,5 +229,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Css
         public WatermarkRuleAttachmentState()
         {
         }
+        public static new WatermarkRuleAttachmentState Empty => new WatermarkRuleAttachmentState();
     }
 }

@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dlc.Inputs
 {
 
-    public sealed class BindWorkGroupsToUserAttachmentAddInfoGetArgs : Pulumi.ResourceArgs
+    public sealed class BindWorkGroupsToUserAttachmentAddInfoGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// User id, matched with CAM side uin.
@@ -34,5 +34,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dlc.Inputs
         public BindWorkGroupsToUserAttachmentAddInfoGetArgs()
         {
         }
+        public static new BindWorkGroupsToUserAttachmentAddInfoGetArgs Empty => new BindWorkGroupsToUserAttachmentAddInfoGetArgs();
     }
 }

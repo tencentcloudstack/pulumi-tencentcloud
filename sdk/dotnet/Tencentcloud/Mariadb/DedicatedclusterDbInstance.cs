@@ -15,40 +15,41 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mariadb
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var dedicatedclusterDbInstance = new Tencentcloud.Mariadb.DedicatedclusterDbInstance("dedicatedclusterDbInstance", new()
     ///     {
-    ///         var dedicatedclusterDbInstance = new Tencentcloud.Mariadb.DedicatedclusterDbInstance("dedicatedclusterDbInstance", new Tencentcloud.Mariadb.DedicatedclusterDbInstanceArgs
-    ///         {
-    ///             ClusterId = "dbdc-24odnuhr",
-    ///             DbVersionId = "8.0",
-    ///             GoodsNum = 1,
-    ///             InstanceName = "cluster-mariadb-test-1",
-    ///             Memory = 2,
-    ///             Storage = 10,
-    ///             SubnetId = "subnet-3ku415by",
-    ///             VpcId = "vpc-ii1jfbhl",
-    ///         });
-    ///     }
+    ///         ClusterId = "dbdc-24odnuhr",
+    ///         DbVersionId = "8.0",
+    ///         GoodsNum = 1,
+    ///         InstanceName = "cluster-mariadb-test-1",
+    ///         Memory = 2,
+    ///         Storage = 10,
+    ///         SubnetId = "subnet-3ku415by",
+    ///         VpcId = "vpc-ii1jfbhl",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// mariadb dedicatedcluster_db_instance can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Mariadb/dedicatedclusterDbInstance:DedicatedclusterDbInstance dedicatedcluster_db_instance tdsql-050g3fmv
+    /// $ pulumi import tencentcloud:Mariadb/dedicatedclusterDbInstance:DedicatedclusterDbInstance dedicatedcluster_db_instance tdsql-050g3fmv
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Mariadb/dedicatedclusterDbInstance:DedicatedclusterDbInstance")]
-    public partial class DedicatedclusterDbInstance : Pulumi.CustomResource
+    public partial class DedicatedclusterDbInstance : global::Pulumi.CustomResource
     {
         /// <summary>
         /// dedicated cluster id.
@@ -161,7 +162,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mariadb
         }
     }
 
-    public sealed class DedicatedclusterDbInstanceArgs : Pulumi.ResourceArgs
+    public sealed class DedicatedclusterDbInstanceArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// dedicated cluster id.
@@ -238,9 +239,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mariadb
         public DedicatedclusterDbInstanceArgs()
         {
         }
+        public static new DedicatedclusterDbInstanceArgs Empty => new DedicatedclusterDbInstanceArgs();
     }
 
-    public sealed class DedicatedclusterDbInstanceState : Pulumi.ResourceArgs
+    public sealed class DedicatedclusterDbInstanceState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// dedicated cluster id.
@@ -317,5 +319,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mariadb
         public DedicatedclusterDbInstanceState()
         {
         }
+        public static new DedicatedclusterDbInstanceState Empty => new DedicatedclusterDbInstanceState();
     }
 }

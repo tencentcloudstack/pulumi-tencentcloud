@@ -15,64 +15,58 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dlc
         /// <summary>
         /// Use this data source to query detailed information of dlc check_data_engine_image_can_be_rollback
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var checkDataEngineImageCanBeRollback = Tencentcloud.Dlc.GetCheckDataEngineImageCanBeRollback.Invoke(new()
         ///     {
-        ///         var checkDataEngineImageCanBeRollback = Output.Create(Tencentcloud.Dlc.GetCheckDataEngineImageCanBeRollback.InvokeAsync(new Tencentcloud.Dlc.GetCheckDataEngineImageCanBeRollbackArgs
-        ///         {
-        ///             DataEngineId = "DataEngine-public-1308919341",
-        ///         }));
-        ///     }
+        ///         DataEngineId = "DataEngine-public-1308919341",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetCheckDataEngineImageCanBeRollbackResult> InvokeAsync(GetCheckDataEngineImageCanBeRollbackArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetCheckDataEngineImageCanBeRollbackResult>("tencentcloud:Dlc/getCheckDataEngineImageCanBeRollback:getCheckDataEngineImageCanBeRollback", args ?? new GetCheckDataEngineImageCanBeRollbackArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetCheckDataEngineImageCanBeRollbackResult>("tencentcloud:Dlc/getCheckDataEngineImageCanBeRollback:getCheckDataEngineImageCanBeRollback", args ?? new GetCheckDataEngineImageCanBeRollbackArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of dlc check_data_engine_image_can_be_rollback
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var checkDataEngineImageCanBeRollback = Tencentcloud.Dlc.GetCheckDataEngineImageCanBeRollback.Invoke(new()
         ///     {
-        ///         var checkDataEngineImageCanBeRollback = Output.Create(Tencentcloud.Dlc.GetCheckDataEngineImageCanBeRollback.InvokeAsync(new Tencentcloud.Dlc.GetCheckDataEngineImageCanBeRollbackArgs
-        ///         {
-        ///             DataEngineId = "DataEngine-public-1308919341",
-        ///         }));
-        ///     }
+        ///         DataEngineId = "DataEngine-public-1308919341",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetCheckDataEngineImageCanBeRollbackResult> Invoke(GetCheckDataEngineImageCanBeRollbackInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetCheckDataEngineImageCanBeRollbackResult>("tencentcloud:Dlc/getCheckDataEngineImageCanBeRollback:getCheckDataEngineImageCanBeRollback", args ?? new GetCheckDataEngineImageCanBeRollbackInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetCheckDataEngineImageCanBeRollbackResult>("tencentcloud:Dlc/getCheckDataEngineImageCanBeRollback:getCheckDataEngineImageCanBeRollback", args ?? new GetCheckDataEngineImageCanBeRollbackInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetCheckDataEngineImageCanBeRollbackArgs : Pulumi.InvokeArgs
+    public sealed class GetCheckDataEngineImageCanBeRollbackArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Engine unique id.
@@ -89,9 +83,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dlc
         public GetCheckDataEngineImageCanBeRollbackArgs()
         {
         }
+        public static new GetCheckDataEngineImageCanBeRollbackArgs Empty => new GetCheckDataEngineImageCanBeRollbackArgs();
     }
 
-    public sealed class GetCheckDataEngineImageCanBeRollbackInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetCheckDataEngineImageCanBeRollbackInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Engine unique id.
@@ -108,6 +103,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dlc
         public GetCheckDataEngineImageCanBeRollbackInvokeArgs()
         {
         }
+        public static new GetCheckDataEngineImageCanBeRollbackInvokeArgs Empty => new GetCheckDataEngineImageCanBeRollbackInvokeArgs();
     }
 
 

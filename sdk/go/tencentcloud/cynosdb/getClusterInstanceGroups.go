@@ -8,38 +8,12 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Use this data source to query detailed information of cynosdb clusterInstanceGroups
-//
-// ## Example Usage
-//
-// ```go
-// package main
-//
-// import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Cynosdb"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cynosdb"
-// )
-//
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Cynosdb.GetClusterInstanceGroups(ctx, &cynosdb.GetClusterInstanceGroupsArgs{
-// 			ClusterId: "",
-// 			Xxxxxx: []map[string]interface{}{
-// 				nil,
-// 			},
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
-// ```
 func GetClusterInstanceGroups(ctx *pulumi.Context, args *GetClusterInstanceGroupsArgs, opts ...pulumi.InvokeOption) (*GetClusterInstanceGroupsResult, error) {
-	opts = pkgInvokeDefaultOpts(opts)
+	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetClusterInstanceGroupsResult
 	err := ctx.Invoke("tencentcloud:Cynosdb/getClusterInstanceGroups:getClusterInstanceGroups", args, &rv, opts...)
 	if err != nil {

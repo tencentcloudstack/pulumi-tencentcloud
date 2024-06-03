@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cdn.Inputs
 {
 
-    public sealed class DomainHttpsConfigForceRedirectArgs : Pulumi.ResourceArgs
+    public sealed class DomainHttpsConfigForceRedirectArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Whether to return the newly added header during force redirection. Values: `on`, `off`.
@@ -40,5 +40,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cdn.Inputs
         public DomainHttpsConfigForceRedirectArgs()
         {
         }
+        public static new DomainHttpsConfigForceRedirectArgs Empty => new DomainHttpsConfigForceRedirectArgs();
     }
 }

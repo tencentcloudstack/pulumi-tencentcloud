@@ -15,30 +15,31 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Bi
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var embedToken = new Tencentcloud.Bi.EmbedTokenApply("embedToken", new()
     ///     {
-    ///         var embedToken = new Tencentcloud.Bi.EmbedTokenApply("embedToken", new Tencentcloud.Bi.EmbedTokenApplyArgs
-    ///         {
-    ///             ExpireTime = "240",
-    ///             PageId = 10520483,
-    ///             ProjectId = 11015030,
-    ///             Scope = "page",
-    ///             UserCorpId = "100022975249",
-    ///             UserId = "100024664626",
-    ///         });
-    ///     }
+    ///         ExpireTime = "240",
+    ///         PageId = 10520483,
+    ///         ProjectId = 11015030,
+    ///         Scope = "page",
+    ///         UserCorpId = "100022975249",
+    ///         UserId = "100024664626",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Bi/embedTokenApply:EmbedTokenApply")]
-    public partial class EmbedTokenApply : Pulumi.CustomResource
+    public partial class EmbedTokenApply : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Create the generated token.
@@ -145,7 +146,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Bi
         }
     }
 
-    public sealed class EmbedTokenApplyArgs : Pulumi.ResourceArgs
+    public sealed class EmbedTokenApplyArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Expiration. Unit: Minutes Maximum value: 240. i.e. 4 hours Default: 240.
@@ -192,9 +193,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Bi
         public EmbedTokenApplyArgs()
         {
         }
+        public static new EmbedTokenApplyArgs Empty => new EmbedTokenApplyArgs();
     }
 
-    public sealed class EmbedTokenApplyState : Pulumi.ResourceArgs
+    public sealed class EmbedTokenApplyState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Create the generated token.
@@ -259,5 +261,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Bi
         public EmbedTokenApplyState()
         {
         }
+        public static new EmbedTokenApplyState Empty => new EmbedTokenApplyState();
     }
 }

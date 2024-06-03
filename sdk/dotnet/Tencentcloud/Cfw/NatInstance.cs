@@ -14,81 +14,85 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cfw
     /// Provides a resource to create a cfw nat_instance
     /// 
     /// ## Example Usage
+    /// 
     /// ### If mode is 0
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var example = new Tencentcloud.Cfw.NatInstance("example", new()
     ///     {
-    ///         var example = new Tencentcloud.Cfw.NatInstance("example", new Tencentcloud.Cfw.NatInstanceArgs
+    ///         CrossAZone = 0,
+    ///         Mode = 0,
+    ///         NewModeItems = new Tencentcloud.Cfw.Inputs.NatInstanceNewModeItemsArgs
     ///         {
-    ///             CrossAZone = 0,
-    ///             Mode = 0,
-    ///             NewModeItems = new Tencentcloud.Cfw.Inputs.NatInstanceNewModeItemsArgs
+    ///             Eips = new[]
     ///             {
-    ///                 Eips = 
-    ///                 {
-    ///                     "152.136.168.192",
-    ///                 },
-    ///                 VpcLists = 
-    ///                 {
-    ///                     "vpc-5063ta4i",
-    ///                 },
+    ///                 "152.136.168.192",
     ///             },
-    ///             Width = 20,
-    ///             ZoneSets = 
+    ///             VpcLists = new[]
     ///             {
-    ///                 "ap-guangzhou-7",
+    ///                 "vpc-5063ta4i",
     ///             },
-    ///         });
-    ///     }
+    ///         },
+    ///         Width = 20,
+    ///         ZoneSets = new[]
+    ///         {
+    ///             "ap-guangzhou-7",
+    ///         },
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
+    /// 
     /// ### If mode is 1
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var example = new Tencentcloud.Cfw.NatInstance("example", new()
     ///     {
-    ///         var example = new Tencentcloud.Cfw.NatInstance("example", new Tencentcloud.Cfw.NatInstanceArgs
+    ///         CrossAZone = 0,
+    ///         Mode = 1,
+    ///         NatGwLists = new[]
     ///         {
-    ///             CrossAZone = 0,
-    ///             Mode = 1,
-    ///             NatGwLists = 
-    ///             {
-    ///                 "nat-9wwkz1kr",
-    ///             },
-    ///             Width = 20,
-    ///             ZoneSets = 
-    ///             {
-    ///                 "ap-guangzhou-6",
-    ///                 "ap-guangzhou-7",
-    ///             },
-    ///         });
-    ///     }
+    ///             "nat-9wwkz1kr",
+    ///         },
+    ///         Width = 20,
+    ///         ZoneSets = new[]
+    ///         {
+    ///             "ap-guangzhou-6",
+    ///             "ap-guangzhou-7",
+    ///         },
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// cfw nat_instance can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Cfw/natInstance:NatInstance example cfwnat-54a21421
+    /// $ pulumi import tencentcloud:Cfw/natInstance:NatInstance example cfwnat-54a21421
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Cfw/natInstance:NatInstance")]
-    public partial class NatInstance : Pulumi.CustomResource
+    public partial class NatInstance : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Off-site disaster recovery 1: use off-site disaster recovery; 0: do not use off-site disaster recovery; if empty, the default is not to use off-site disaster recovery.
@@ -177,7 +181,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cfw
         }
     }
 
-    public sealed class NatInstanceArgs : Pulumi.ResourceArgs
+    public sealed class NatInstanceArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Off-site disaster recovery 1: use off-site disaster recovery; 0: do not use off-site disaster recovery; if empty, the default is not to use off-site disaster recovery.
@@ -236,9 +240,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cfw
         public NatInstanceArgs()
         {
         }
+        public static new NatInstanceArgs Empty => new NatInstanceArgs();
     }
 
-    public sealed class NatInstanceState : Pulumi.ResourceArgs
+    public sealed class NatInstanceState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Off-site disaster recovery 1: use off-site disaster recovery; 0: do not use off-site disaster recovery; if empty, the default is not to use off-site disaster recovery.
@@ -297,5 +302,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cfw
         public NatInstanceState()
         {
         }
+        public static new NatInstanceState Empty => new NatInstanceState();
     }
 }

@@ -14,7 +14,13 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc.Outputs
     [OutputType]
     public sealed class NetworkAclQuintupleNetworkAclQuintupleSet
     {
+        /// <summary>
+        /// Network ACL quintuple outbound rule.
+        /// </summary>
         public readonly ImmutableArray<Outputs.NetworkAclQuintupleNetworkAclQuintupleSetEgress> Egresses;
+        /// <summary>
+        /// Network ACL quintuple inbound rule.
+        /// </summary>
         public readonly ImmutableArray<Outputs.NetworkAclQuintupleNetworkAclQuintupleSetIngress> Ingresses;
 
         [OutputConstructor]

@@ -15,70 +15,64 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         /// <summary>
         /// Use this data source to query detailed information of vpc gateway_flow_monitor_detail
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var gatewayFlowMonitorDetail = Tencentcloud.Vpc.GetGatewayFlowMonitorDetail.Invoke(new()
         ///     {
-        ///         var gatewayFlowMonitorDetail = Output.Create(Tencentcloud.Vpc.GetGatewayFlowMonitorDetail.InvokeAsync(new Tencentcloud.Vpc.GetGatewayFlowMonitorDetailArgs
-        ///         {
-        ///             OrderDirection = "DESC",
-        ///             OrderField = "OutTraffic",
-        ///             TimePoint = "2023-06-02 12:15:20",
-        ///             VpnId = "vpngw-gt8bianl",
-        ///         }));
-        ///     }
+        ///         OrderDirection = "DESC",
+        ///         OrderField = "OutTraffic",
+        ///         TimePoint = "2023-06-02 12:15:20",
+        ///         VpnId = "vpngw-gt8bianl",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetGatewayFlowMonitorDetailResult> InvokeAsync(GetGatewayFlowMonitorDetailArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetGatewayFlowMonitorDetailResult>("tencentcloud:Vpc/getGatewayFlowMonitorDetail:getGatewayFlowMonitorDetail", args ?? new GetGatewayFlowMonitorDetailArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetGatewayFlowMonitorDetailResult>("tencentcloud:Vpc/getGatewayFlowMonitorDetail:getGatewayFlowMonitorDetail", args ?? new GetGatewayFlowMonitorDetailArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of vpc gateway_flow_monitor_detail
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var gatewayFlowMonitorDetail = Tencentcloud.Vpc.GetGatewayFlowMonitorDetail.Invoke(new()
         ///     {
-        ///         var gatewayFlowMonitorDetail = Output.Create(Tencentcloud.Vpc.GetGatewayFlowMonitorDetail.InvokeAsync(new Tencentcloud.Vpc.GetGatewayFlowMonitorDetailArgs
-        ///         {
-        ///             OrderDirection = "DESC",
-        ///             OrderField = "OutTraffic",
-        ///             TimePoint = "2023-06-02 12:15:20",
-        ///             VpnId = "vpngw-gt8bianl",
-        ///         }));
-        ///     }
+        ///         OrderDirection = "DESC",
+        ///         OrderField = "OutTraffic",
+        ///         TimePoint = "2023-06-02 12:15:20",
+        ///         VpnId = "vpngw-gt8bianl",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetGatewayFlowMonitorDetailResult> Invoke(GetGatewayFlowMonitorDetailInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetGatewayFlowMonitorDetailResult>("tencentcloud:Vpc/getGatewayFlowMonitorDetail:getGatewayFlowMonitorDetail", args ?? new GetGatewayFlowMonitorDetailInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetGatewayFlowMonitorDetailResult>("tencentcloud:Vpc/getGatewayFlowMonitorDetail:getGatewayFlowMonitorDetail", args ?? new GetGatewayFlowMonitorDetailInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetGatewayFlowMonitorDetailArgs : Pulumi.InvokeArgs
+    public sealed class GetGatewayFlowMonitorDetailArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// The instance ID of the Direct Connect gateway, such as `dcg-ltjahce6`.
@@ -131,9 +125,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         public GetGatewayFlowMonitorDetailArgs()
         {
         }
+        public static new GetGatewayFlowMonitorDetailArgs Empty => new GetGatewayFlowMonitorDetailArgs();
     }
 
-    public sealed class GetGatewayFlowMonitorDetailInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetGatewayFlowMonitorDetailInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// The instance ID of the Direct Connect gateway, such as `dcg-ltjahce6`.
@@ -186,6 +181,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         public GetGatewayFlowMonitorDetailInvokeArgs()
         {
         }
+        public static new GetGatewayFlowMonitorDetailInvokeArgs Empty => new GetGatewayFlowMonitorDetailInvokeArgs();
     }
 
 

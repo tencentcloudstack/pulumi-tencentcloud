@@ -14,7 +14,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dayu
     /// Provides a resource to create a antiddos ip. Only support for bgp-multip.
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Dayu/ddosIpAttachmentV2:DdosIpAttachmentV2")]
-    public partial class DdosIpAttachmentV2 : Pulumi.CustomResource
+    public partial class DdosIpAttachmentV2 : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Anti-DDoS instance ID.
@@ -73,7 +73,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dayu
         }
     }
 
-    public sealed class DdosIpAttachmentV2Args : Pulumi.ResourceArgs
+    public sealed class DdosIpAttachmentV2Args : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Anti-DDoS instance ID.
@@ -96,9 +96,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dayu
         public DdosIpAttachmentV2Args()
         {
         }
+        public static new DdosIpAttachmentV2Args Empty => new DdosIpAttachmentV2Args();
     }
 
-    public sealed class DdosIpAttachmentV2State : Pulumi.ResourceArgs
+    public sealed class DdosIpAttachmentV2State : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Anti-DDoS instance ID.
@@ -121,5 +122,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dayu
         public DdosIpAttachmentV2State()
         {
         }
+        public static new DdosIpAttachmentV2State Empty => new DdosIpAttachmentV2State();
     }
 }

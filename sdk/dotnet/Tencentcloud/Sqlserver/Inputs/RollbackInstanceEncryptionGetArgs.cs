@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver.Inputs
 {
 
-    public sealed class RollbackInstanceEncryptionGetArgs : Pulumi.ResourceArgs
+    public sealed class RollbackInstanceEncryptionGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Database name.
@@ -28,5 +28,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver.Inputs
         public RollbackInstanceEncryptionGetArgs()
         {
         }
+        public static new RollbackInstanceEncryptionGetArgs Empty => new RollbackInstanceEncryptionGetArgs();
     }
 }

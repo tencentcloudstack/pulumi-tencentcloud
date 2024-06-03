@@ -13,14 +13,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Waf
     public static class GetWafInfos
     {
         public static Task<GetWafInfosResult> InvokeAsync(GetWafInfosArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetWafInfosResult>("tencentcloud:Waf/getWafInfos:getWafInfos", args ?? new GetWafInfosArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetWafInfosResult>("tencentcloud:Waf/getWafInfos:getWafInfos", args ?? new GetWafInfosArgs(), options.WithDefaults());
 
         public static Output<GetWafInfosResult> Invoke(GetWafInfosInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetWafInfosResult>("tencentcloud:Waf/getWafInfos:getWafInfos", args ?? new GetWafInfosInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetWafInfosResult>("tencentcloud:Waf/getWafInfos:getWafInfos", args ?? new GetWafInfosInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetWafInfosArgs : Pulumi.InvokeArgs
+    public sealed class GetWafInfosArgs : global::Pulumi.InvokeArgs
     {
         [Input("params", required: true)]
         private List<Inputs.GetWafInfosParamArgs>? _params;
@@ -36,9 +36,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Waf
         public GetWafInfosArgs()
         {
         }
+        public static new GetWafInfosArgs Empty => new GetWafInfosArgs();
     }
 
-    public sealed class GetWafInfosInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetWafInfosInvokeArgs : global::Pulumi.InvokeArgs
     {
         [Input("params", required: true)]
         private InputList<Inputs.GetWafInfosParamInputArgs>? _params;
@@ -54,6 +55,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Waf
         public GetWafInfosInvokeArgs()
         {
         }
+        public static new GetWafInfosInvokeArgs Empty => new GetWafInfosInvokeArgs();
     }
 
 

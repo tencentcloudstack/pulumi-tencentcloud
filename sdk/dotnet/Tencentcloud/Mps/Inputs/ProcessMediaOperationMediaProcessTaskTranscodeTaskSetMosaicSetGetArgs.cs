@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps.Inputs
 {
 
-    public sealed class ProcessMediaOperationMediaProcessTaskTranscodeTaskSetMosaicSetGetArgs : Pulumi.ResourceArgs
+    public sealed class ProcessMediaOperationMediaProcessTaskTranscodeTaskSetMosaicSetGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Origin position, which currently can only be:TopLeft: the origin of coordinates is in the top-left corner of the video, and the origin of the blur is in the top-left corner of the image or text.Default value: TopLeft.
@@ -58,5 +58,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps.Inputs
         public ProcessMediaOperationMediaProcessTaskTranscodeTaskSetMosaicSetGetArgs()
         {
         }
+        public static new ProcessMediaOperationMediaProcessTaskTranscodeTaskSetMosaicSetGetArgs Empty => new ProcessMediaOperationMediaProcessTaskTranscodeTaskSetMosaicSetGetArgs();
     }
 }

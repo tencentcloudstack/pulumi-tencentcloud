@@ -9,27 +9,26 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const crossBorderCompliance = pulumi.output(tencentcloud.Ccn.getCrossBorderCompliance({
+ * const crossBorderCompliance = tencentcloud.Ccn.getCrossBorderCompliance({
  *     complianceId: 10002,
  *     email: "test@tencent.com",
  *     serviceEndDate: "2021-07-29",
  *     serviceProvider: "UNICOM",
  *     serviceStartDate: "2020-07-29",
  *     state: "APPROVED",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getCrossBorderCompliance(args?: GetCrossBorderComplianceArgs, opts?: pulumi.InvokeOptions): Promise<GetCrossBorderComplianceResult> {
     args = args || {};
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Ccn/getCrossBorderCompliance:getCrossBorderCompliance", {
         "businessAddress": args.businessAddress,
         "company": args.company,
@@ -151,9 +150,29 @@ export interface GetCrossBorderComplianceResult {
     readonly state?: string;
     readonly uniformSocialCreditCode?: string;
 }
-
+/**
+ * Use this data source to query detailed information of ccn crossBorderCompliance
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const crossBorderCompliance = tencentcloud.Ccn.getCrossBorderCompliance({
+ *     complianceId: 10002,
+ *     email: "test@tencent.com",
+ *     serviceEndDate: "2021-07-29",
+ *     serviceProvider: "UNICOM",
+ *     serviceStartDate: "2020-07-29",
+ *     state: "APPROVED",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getCrossBorderComplianceOutput(args?: GetCrossBorderComplianceOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetCrossBorderComplianceResult> {
-    return pulumi.output(args).apply(a => getCrossBorderCompliance(a, opts))
+    return pulumi.output(args).apply((a: any) => getCrossBorderCompliance(a, opts))
 }
 
 /**

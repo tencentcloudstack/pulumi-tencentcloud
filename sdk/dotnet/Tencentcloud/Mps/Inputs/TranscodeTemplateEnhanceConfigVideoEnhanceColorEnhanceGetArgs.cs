@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps.Inputs
 {
 
-    public sealed class TranscodeTemplateEnhanceConfigVideoEnhanceColorEnhanceGetArgs : Pulumi.ResourceArgs
+    public sealed class TranscodeTemplateEnhanceConfigVideoEnhanceColorEnhanceGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Capability configuration switch, optional value: ON/OFF.Default value: ON.
@@ -28,5 +28,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps.Inputs
         public TranscodeTemplateEnhanceConfigVideoEnhanceColorEnhanceGetArgs()
         {
         }
+        public static new TranscodeTemplateEnhanceConfigVideoEnhanceColorEnhanceGetArgs Empty => new TranscodeTemplateEnhanceConfigVideoEnhanceColorEnhanceGetArgs();
     }
 }

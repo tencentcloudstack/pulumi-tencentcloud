@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls.Inputs
 {
 
-    public sealed class AlarmCallBackArgs : Pulumi.ResourceArgs
+    public sealed class AlarmCallBackArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// callback body.
@@ -34,5 +34,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls.Inputs
         public AlarmCallBackArgs()
         {
         }
+        public static new AlarmCallBackArgs Empty => new AlarmCallBackArgs();
     }
 }

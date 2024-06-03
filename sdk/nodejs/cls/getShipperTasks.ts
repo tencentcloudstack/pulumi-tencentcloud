@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,23 +11,22 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const shipperTasks = pulumi.output(tencentcloud.Cls.getShipperTasks({
+ * const shipperTasks = tencentcloud.Cls.getShipperTasks({
  *     endTime: 160749910800,
  *     shipperId: "dbde3c9b-ea16-4032-bc2a-d8fa65567a8e",
  *     startTime: 160749910700,
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getShipperTasks(args: GetShipperTasksArgs, opts?: pulumi.InvokeOptions): Promise<GetShipperTasksResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Cls/getShipperTasks:getShipperTasks", {
         "endTime": args.endTime,
         "resultOutputFile": args.resultOutputFile,
@@ -83,9 +83,26 @@ export interface GetShipperTasksResult {
      */
     readonly tasks: outputs.Cls.GetShipperTasksTask[];
 }
-
+/**
+ * Use this data source to query detailed information of cls shipperTasks
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const shipperTasks = tencentcloud.Cls.getShipperTasks({
+ *     endTime: 160749910800,
+ *     shipperId: "dbde3c9b-ea16-4032-bc2a-d8fa65567a8e",
+ *     startTime: 160749910700,
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getShipperTasksOutput(args: GetShipperTasksOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetShipperTasksResult> {
-    return pulumi.output(args).apply(a => getShipperTasks(a, opts))
+    return pulumi.output(args).apply((a: any) => getShipperTasks(a, opts))
 }
 
 /**

@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcr.Inputs
 {
 
-    public sealed class TagRetentionRuleRetentionRuleArgs : Pulumi.ResourceArgs
+    public sealed class TagRetentionRuleRetentionRuleArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// The supported policies are latestPushedK (retain the latest `k` pushed versions) and nDaysSinceLastPush (retain pushed versions within the last `n` days).
@@ -28,5 +28,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcr.Inputs
         public TagRetentionRuleRetentionRuleArgs()
         {
         }
+        public static new TagRetentionRuleRetentionRuleArgs Empty => new TagRetentionRuleRetentionRuleArgs();
     }
 }

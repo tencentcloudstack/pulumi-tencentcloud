@@ -8,37 +8,42 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Use this data source to query detailed information of cam secretLastUsedTime
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Cam"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cam"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cam"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Cam.GetSecretLastUsedTime(ctx, &cam.GetSecretLastUsedTimeArgs{
-// 			SecretIdLists: []string{
-// 				"xxxx",
-// 			},
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Cam.GetSecretLastUsedTime(ctx, &cam.GetSecretLastUsedTimeArgs{
+//				SecretIdLists: []string{
+//					"xxxx",
+//				},
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 func GetSecretLastUsedTime(ctx *pulumi.Context, args *GetSecretLastUsedTimeArgs, opts ...pulumi.InvokeOption) (*GetSecretLastUsedTimeResult, error) {
-	opts = pkgInvokeDefaultOpts(opts)
+	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetSecretLastUsedTimeResult
 	err := ctx.Invoke("tencentcloud:Cam/getSecretLastUsedTime:getSecretLastUsedTime", args, &rv, opts...)
 	if err != nil {

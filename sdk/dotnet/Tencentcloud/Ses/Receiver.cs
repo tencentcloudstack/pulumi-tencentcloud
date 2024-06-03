@@ -15,76 +15,78 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ses
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var receiver = new Tencentcloud.Ses.Receiver("receiver", new()
     ///     {
-    ///         var receiver = new Tencentcloud.Ses.Receiver("receiver", new Tencentcloud.Ses.ReceiverArgs
+    ///         Datas = new[]
     ///         {
-    ///             Datas = 
+    ///             new Tencentcloud.Ses.Inputs.ReceiverDataArgs
     ///             {
-    ///                 new Tencentcloud.Ses.Inputs.ReceiverDataArgs
-    ///                 {
-    ///                     Email = "abc@abc.com",
-    ///                 },
-    ///                 new Tencentcloud.Ses.Inputs.ReceiverDataArgs
-    ///                 {
-    ///                     Email = "abcd@abcd.com",
-    ///                 },
+    ///                 Email = "abc@abc.com",
     ///             },
-    ///             Desc = "description",
-    ///             ReceiversName = "terraform_test",
-    ///         });
-    ///     }
+    ///             new Tencentcloud.Ses.Inputs.ReceiverDataArgs
+    ///             {
+    ///                 Email = "abcd@abcd.com",
+    ///             },
+    ///         },
+    ///         Desc = "description",
+    ///         ReceiversName = "terraform_test",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var receiver = new Tencentcloud.Ses.Receiver("receiver", new()
     ///     {
-    ///         var receiver = new Tencentcloud.Ses.Receiver("receiver", new Tencentcloud.Ses.ReceiverArgs
+    ///         Datas = new[]
     ///         {
-    ///             Datas = 
+    ///             new Tencentcloud.Ses.Inputs.ReceiverDataArgs
     ///             {
-    ///                 new Tencentcloud.Ses.Inputs.ReceiverDataArgs
-    ///                 {
-    ///                     Email = "abc@abc.com",
-    ///                     TemplateData = "{\"name\":\"xxx\",\"age\":\"xx\"}",
-    ///                 },
-    ///                 new Tencentcloud.Ses.Inputs.ReceiverDataArgs
-    ///                 {
-    ///                     Email = "abcd@abcd.com",
-    ///                     TemplateData = "{\"name\":\"xxx\",\"age\":\"xx\"}",
-    ///                 },
+    ///                 Email = "abc@abc.com",
+    ///                 TemplateData = "{\"name\":\"xxx\",\"age\":\"xx\"}",
     ///             },
-    ///             Desc = "description",
-    ///             ReceiversName = "terraform_test",
-    ///         });
-    ///     }
+    ///             new Tencentcloud.Ses.Inputs.ReceiverDataArgs
+    ///             {
+    ///                 Email = "abcd@abcd.com",
+    ///                 TemplateData = "{\"name\":\"xxx\",\"age\":\"xx\"}",
+    ///             },
+    ///         },
+    ///         Desc = "description",
+    ///         ReceiversName = "terraform_test",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// ses email_address can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Ses/receiver:Receiver receiver receiverId
+    /// $ pulumi import tencentcloud:Ses/receiver:Receiver receiver receiverId
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Ses/receiver:Receiver")]
-    public partial class Receiver : Pulumi.CustomResource
+    public partial class Receiver : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Recipient email and template parameters in array format. The number of recipients is limited to within 20,000. If there is an object in the `data` list that inputs `template_data`, then other objects are also required.
@@ -149,7 +151,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ses
         }
     }
 
-    public sealed class ReceiverArgs : Pulumi.ResourceArgs
+    public sealed class ReceiverArgs : global::Pulumi.ResourceArgs
     {
         [Input("datas", required: true)]
         private InputList<Inputs.ReceiverDataArgs>? _datas;
@@ -178,9 +180,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ses
         public ReceiverArgs()
         {
         }
+        public static new ReceiverArgs Empty => new ReceiverArgs();
     }
 
-    public sealed class ReceiverState : Pulumi.ResourceArgs
+    public sealed class ReceiverState : global::Pulumi.ResourceArgs
     {
         [Input("datas")]
         private InputList<Inputs.ReceiverDataGetArgs>? _datas;
@@ -209,5 +212,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ses
         public ReceiverState()
         {
         }
+        public static new ReceiverState Empty => new ReceiverState();
     }
 }

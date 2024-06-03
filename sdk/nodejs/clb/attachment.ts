@@ -2,19 +2,25 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
  * Provides a resource to create a CLB attachment.
  *
+ * > **NOTE:** This resource is designed to manage the entire set of binding relationships associated with a particular CLB (Cloud Load Balancer). As such, it does not allow the simultaneous use of this resource for the same CLB across different contexts or environments.
+ *
  * ## Example Usage
  *
+ * ### Bind a Cvm instance
+ *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const foo = new tencentcloud.Clb.Attachment("foo", {
+ * const foo = new tencentcloud.clb.Attachment("foo", {
  *     clbId: "lb-k2zjp9lv",
  *     listenerId: "lbl-hh141sn9",
  *     ruleId: "loc-4xxr2cy7",
@@ -25,13 +31,61 @@ import * as utilities from "../utilities";
  *     }],
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
+ *
+ * ### Bind multiple Cvm instances
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
+ *
+ * const foo = new tencentcloud.clb.Attachment("foo", {
+ *     clbId: "lb-k2zjp9lv",
+ *     listenerId: "lbl-hh141sn9",
+ *     ruleId: "loc-4xxr2cy7",
+ *     targets: [
+ *         {
+ *             instanceId: "ins-1flbqyp8",
+ *             port: 80,
+ *             weight: 10,
+ *         },
+ *         {
+ *             instanceId: "ins-ekloqpa1",
+ *             port: 81,
+ *             weight: 10,
+ *         },
+ *     ],
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ *
+ * ### Bind backend target is ENI
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
+ *
+ * const foo = new tencentcloud.clb.Attachment("foo", {
+ *     clbId: "lb-k2zjp9lv",
+ *     listenerId: "lbl-hh141sn9",
+ *     ruleId: "loc-4xxr2cy7",
+ *     targets: [{
+ *         eniIp: "example-ip",
+ *         port: 23,
+ *         weight: 50,
+ *     }],
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * CLB attachment can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Clb/attachment:Attachment foo loc-4xxr2cy7#lbl-hh141sn9#lb-7a0t6zqb
+ * $ pulumi import tencentcloud:Clb/attachment:Attachment foo loc-4xxr2cy7#lbl-hh141sn9#lb-7a0t6zqb
  * ```
  */
 export class Attachment extends pulumi.CustomResource {

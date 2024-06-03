@@ -15,47 +15,48 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Waf
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var example = new Tencentcloud.Waf.CustomWhiteRule("example", new()
     ///     {
-    ///         var example = new Tencentcloud.Waf.CustomWhiteRule("example", new Tencentcloud.Waf.CustomWhiteRuleArgs
+    ///         Bypass = "geoip,cc,owasp",
+    ///         Domain = "test.com",
+    ///         ExpireTime = "0",
+    ///         SortId = "30",
+    ///         Status = "1",
+    ///         Strategies = new[]
     ///         {
-    ///             Bypass = "geoip,cc,owasp",
-    ///             Domain = "test.com",
-    ///             ExpireTime = "0",
-    ///             SortId = "30",
-    ///             Status = "1",
-    ///             Strategies = 
+    ///             new Tencentcloud.Waf.Inputs.CustomWhiteRuleStrategyArgs
     ///             {
-    ///                 new Tencentcloud.Waf.Inputs.CustomWhiteRuleStrategyArgs
-    ///                 {
-    ///                     Arg = "",
-    ///                     CompareFunc = "ipmatch",
-    ///                     Content = "1.1.1.1",
-    ///                     Field = "IP",
-    ///                 },
+    ///                 Arg = "",
+    ///                 CompareFunc = "ipmatch",
+    ///                 Content = "1.1.1.1",
+    ///                 Field = "IP",
     ///             },
-    ///         });
-    ///     }
+    ///         },
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// waf custom_white_rule can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Waf/customWhiteRule:CustomWhiteRule example test.com#1100310837
+    /// $ pulumi import tencentcloud:Waf/customWhiteRule:CustomWhiteRule example test.com#1100310837
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Waf/customWhiteRule:CustomWhiteRule")]
-    public partial class CustomWhiteRule : Pulumi.CustomResource
+    public partial class CustomWhiteRule : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Details of bypass.
@@ -150,7 +151,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Waf
         }
     }
 
-    public sealed class CustomWhiteRuleArgs : Pulumi.ResourceArgs
+    public sealed class CustomWhiteRuleArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Details of bypass.
@@ -203,9 +204,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Waf
         public CustomWhiteRuleArgs()
         {
         }
+        public static new CustomWhiteRuleArgs Empty => new CustomWhiteRuleArgs();
     }
 
-    public sealed class CustomWhiteRuleState : Pulumi.ResourceArgs
+    public sealed class CustomWhiteRuleState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Details of bypass.
@@ -264,5 +266,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Waf
         public CustomWhiteRuleState()
         {
         }
+        public static new CustomWhiteRuleState Empty => new CustomWhiteRuleState();
     }
 }

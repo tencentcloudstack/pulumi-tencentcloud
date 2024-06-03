@@ -15,70 +15,64 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.As
         /// <summary>
         /// Use this data source to query detailed information of as advices
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var advices = Tencentcloud.As.GetAdvices.Invoke(new()
         ///     {
-        ///         var advices = Output.Create(Tencentcloud.As.GetAdvices.InvokeAsync(new Tencentcloud.As.GetAdvicesArgs
+        ///         AutoScalingGroupIds = new[]
         ///         {
-        ///             AutoScalingGroupIds = 
-        ///             {
-        ///                 "asc-lo0b94oy",
-        ///             },
-        ///         }));
-        ///     }
+        ///             "asc-lo0b94oy",
+        ///         },
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetAdvicesResult> InvokeAsync(GetAdvicesArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetAdvicesResult>("tencentcloud:As/getAdvices:getAdvices", args ?? new GetAdvicesArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetAdvicesResult>("tencentcloud:As/getAdvices:getAdvices", args ?? new GetAdvicesArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of as advices
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var advices = Tencentcloud.As.GetAdvices.Invoke(new()
         ///     {
-        ///         var advices = Output.Create(Tencentcloud.As.GetAdvices.InvokeAsync(new Tencentcloud.As.GetAdvicesArgs
+        ///         AutoScalingGroupIds = new[]
         ///         {
-        ///             AutoScalingGroupIds = 
-        ///             {
-        ///                 "asc-lo0b94oy",
-        ///             },
-        ///         }));
-        ///     }
+        ///             "asc-lo0b94oy",
+        ///         },
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetAdvicesResult> Invoke(GetAdvicesInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetAdvicesResult>("tencentcloud:As/getAdvices:getAdvices", args ?? new GetAdvicesInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetAdvicesResult>("tencentcloud:As/getAdvices:getAdvices", args ?? new GetAdvicesInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetAdvicesArgs : Pulumi.InvokeArgs
+    public sealed class GetAdvicesArgs : global::Pulumi.InvokeArgs
     {
         [Input("autoScalingGroupIds", required: true)]
         private List<string>? _autoScalingGroupIds;
@@ -101,9 +95,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.As
         public GetAdvicesArgs()
         {
         }
+        public static new GetAdvicesArgs Empty => new GetAdvicesArgs();
     }
 
-    public sealed class GetAdvicesInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetAdvicesInvokeArgs : global::Pulumi.InvokeArgs
     {
         [Input("autoScalingGroupIds", required: true)]
         private InputList<string>? _autoScalingGroupIds;
@@ -126,6 +121,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.As
         public GetAdvicesInvokeArgs()
         {
         }
+        public static new GetAdvicesInvokeArgs Empty => new GetAdvicesInvokeArgs();
     }
 
 

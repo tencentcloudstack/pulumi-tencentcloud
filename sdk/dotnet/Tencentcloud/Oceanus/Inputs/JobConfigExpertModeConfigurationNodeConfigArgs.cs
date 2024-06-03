@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Oceanus.Inputs
 {
 
-    public sealed class JobConfigExpertModeConfigurationNodeConfigArgs : Pulumi.ResourceArgs
+    public sealed class JobConfigExpertModeConfigurationNodeConfigArgs : global::Pulumi.ResourceArgs
     {
         [Input("configurations")]
         private InputList<Inputs.JobConfigExpertModeConfigurationNodeConfigConfigurationArgs>? _configurations;
@@ -52,5 +52,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Oceanus.Inputs
         public JobConfigExpertModeConfigurationNodeConfigArgs()
         {
         }
+        public static new JobConfigExpertModeConfigurationNodeConfigArgs Empty => new JobConfigExpertModeConfigurationNodeConfigArgs();
     }
 }

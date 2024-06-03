@@ -7,42 +7,48 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Use this resource to create postgresql readonly group.
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Postgresql"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Postgresql"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Postgresql.NewReadonlyGroup(ctx, "group", &Postgresql.ReadonlyGroupArgs{
-// 			MasterDbInstanceId:       pulumi.String("postgres-gzg9jb2n"),
-// 			MaxReplayLag:             pulumi.Int(100),
-// 			MaxReplayLatency:         pulumi.Int(512),
-// 			MinDelayEliminateReserve: pulumi.Int(1),
-// 			ProjectId:                pulumi.Int(0),
-// 			ReplayLagEliminate:       pulumi.Int(1),
-// 			ReplayLatencyEliminate:   pulumi.Int(1),
-// 			SubnetId:                 pulumi.String("subnet-enm92y0m"),
-// 			VpcId:                    pulumi.String("vpc-86v957zb"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Postgresql.NewReadonlyGroup(ctx, "group", &Postgresql.ReadonlyGroupArgs{
+//				MasterDbInstanceId:       pulumi.String("postgres-gzg9jb2n"),
+//				MaxReplayLag:             pulumi.Int(100),
+//				MaxReplayLatency:         pulumi.Int(512),
+//				MinDelayEliminateReserve: pulumi.Int(1),
+//				ProjectId:                pulumi.Int(0),
+//				ReplayLagEliminate:       pulumi.Int(1),
+//				ReplayLatencyEliminate:   pulumi.Int(1),
+//				SubnetId:                 pulumi.String("subnet-enm92y0m"),
+//				VpcId:                    pulumi.String("vpc-86v957zb"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 type ReadonlyGroup struct {
 	pulumi.CustomResourceState
 
@@ -58,6 +64,8 @@ type ReadonlyGroup struct {
 	MinDelayEliminateReserve pulumi.IntOutput `pulumi:"minDelayEliminateReserve"`
 	// RO group name.
 	Name pulumi.StringOutput `pulumi:"name"`
+	// List of db instance net info.
+	NetInfoLists ReadonlyGroupNetInfoListArrayOutput `pulumi:"netInfoLists"`
 	// Project ID.
 	ProjectId pulumi.IntOutput `pulumi:"projectId"`
 	// Whether to remove a read-only replica from an RO group if the delay between the read-only replica and the primary instance exceeds the threshold. Valid values: 0 (no), 1 (yes).
@@ -106,7 +114,7 @@ func NewReadonlyGroup(ctx *pulumi.Context,
 	if args.VpcId == nil {
 		return nil, errors.New("invalid value for required argument 'VpcId'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource ReadonlyGroup
 	err := ctx.RegisterResource("tencentcloud:Postgresql/readonlyGroup:ReadonlyGroup", name, args, &resource, opts...)
 	if err != nil {
@@ -141,6 +149,8 @@ type readonlyGroupState struct {
 	MinDelayEliminateReserve *int `pulumi:"minDelayEliminateReserve"`
 	// RO group name.
 	Name *string `pulumi:"name"`
+	// List of db instance net info.
+	NetInfoLists []ReadonlyGroupNetInfoList `pulumi:"netInfoLists"`
 	// Project ID.
 	ProjectId *int `pulumi:"projectId"`
 	// Whether to remove a read-only replica from an RO group if the delay between the read-only replica and the primary instance exceeds the threshold. Valid values: 0 (no), 1 (yes).
@@ -168,6 +178,8 @@ type ReadonlyGroupState struct {
 	MinDelayEliminateReserve pulumi.IntPtrInput
 	// RO group name.
 	Name pulumi.StringPtrInput
+	// List of db instance net info.
+	NetInfoLists ReadonlyGroupNetInfoListArrayInput
 	// Project ID.
 	ProjectId pulumi.IntPtrInput
 	// Whether to remove a read-only replica from an RO group if the delay between the read-only replica and the primary instance exceeds the threshold. Valid values: 0 (no), 1 (yes).
@@ -263,7 +275,7 @@ func (i *ReadonlyGroup) ToReadonlyGroupOutputWithContext(ctx context.Context) Re
 // ReadonlyGroupArrayInput is an input type that accepts ReadonlyGroupArray and ReadonlyGroupArrayOutput values.
 // You can construct a concrete instance of `ReadonlyGroupArrayInput` via:
 //
-//          ReadonlyGroupArray{ ReadonlyGroupArgs{...} }
+//	ReadonlyGroupArray{ ReadonlyGroupArgs{...} }
 type ReadonlyGroupArrayInput interface {
 	pulumi.Input
 
@@ -288,7 +300,7 @@ func (i ReadonlyGroupArray) ToReadonlyGroupArrayOutputWithContext(ctx context.Co
 // ReadonlyGroupMapInput is an input type that accepts ReadonlyGroupMap and ReadonlyGroupMapOutput values.
 // You can construct a concrete instance of `ReadonlyGroupMapInput` via:
 //
-//          ReadonlyGroupMap{ "key": ReadonlyGroupArgs{...} }
+//	ReadonlyGroupMap{ "key": ReadonlyGroupArgs{...} }
 type ReadonlyGroupMapInput interface {
 	pulumi.Input
 
@@ -352,6 +364,11 @@ func (o ReadonlyGroupOutput) MinDelayEliminateReserve() pulumi.IntOutput {
 // RO group name.
 func (o ReadonlyGroupOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v *ReadonlyGroup) pulumi.StringOutput { return v.Name }).(pulumi.StringOutput)
+}
+
+// List of db instance net info.
+func (o ReadonlyGroupOutput) NetInfoLists() ReadonlyGroupNetInfoListArrayOutput {
+	return o.ApplyT(func(v *ReadonlyGroup) ReadonlyGroupNetInfoListArrayOutput { return v.NetInfoLists }).(ReadonlyGroupNetInfoListArrayOutput)
 }
 
 // Project ID.

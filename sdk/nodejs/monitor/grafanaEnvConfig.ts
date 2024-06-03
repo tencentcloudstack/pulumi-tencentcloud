@@ -9,11 +9,12 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const grafanaEnvConfig = new tencentcloud.Monitor.GrafanaEnvConfig("grafana_env_config", {
+ * const grafanaEnvConfig = new tencentcloud.monitor.GrafanaEnvConfig("grafanaEnvConfig", {
  *     envs: {
  *         aaa: "ccc",
  *         bbb: "ccc",
@@ -21,13 +22,14 @@ import * as utilities from "../utilities";
  *     instanceId: "grafana-dp2hnnfa",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * monitor grafana_env_config can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Monitor/grafanaEnvConfig:GrafanaEnvConfig grafana_env_config instance_id
+ * $ pulumi import tencentcloud:Monitor/grafanaEnvConfig:GrafanaEnvConfig grafana_env_config instance_id
  * ```
  */
 export class GrafanaEnvConfig extends pulumi.CustomResource {

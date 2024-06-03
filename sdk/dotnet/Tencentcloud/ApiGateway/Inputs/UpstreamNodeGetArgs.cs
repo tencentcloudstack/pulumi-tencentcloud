@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway.Inputs
 {
 
-    public sealed class UpstreamNodeGetArgs : Pulumi.ResourceArgs
+    public sealed class UpstreamNodeGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// The ID of the TKE clusterNote: This field may return null, indicating that a valid value cannot be obtained.
@@ -82,5 +82,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway.Inputs
         public UpstreamNodeGetArgs()
         {
         }
+        public static new UpstreamNodeGetArgs Empty => new UpstreamNodeGetArgs();
     }
 }

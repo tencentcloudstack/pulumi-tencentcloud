@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Pts.Inputs
 {
 
-    public sealed class ScenarioSlaPolicySlaRuleGetArgs : Pulumi.ResourceArgs
+    public sealed class ScenarioSlaPolicySlaRuleGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Whether to stop the stress test task.
@@ -64,5 +64,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Pts.Inputs
         public ScenarioSlaPolicySlaRuleGetArgs()
         {
         }
+        public static new ScenarioSlaPolicySlaRuleGetArgs Empty => new ScenarioSlaPolicySlaRuleGetArgs();
     }
 }

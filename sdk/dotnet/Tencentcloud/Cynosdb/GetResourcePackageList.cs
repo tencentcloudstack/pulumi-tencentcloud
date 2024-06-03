@@ -15,112 +15,106 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
         /// <summary>
         /// Use this data source to query detailed information of cynosdb resource_package_list
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var resourcePackageList = Tencentcloud.Cynosdb.GetResourcePackageList.Invoke(new()
         ///     {
-        ///         var resourcePackageList = Output.Create(Tencentcloud.Cynosdb.GetResourcePackageList.InvokeAsync(new Tencentcloud.Cynosdb.GetResourcePackageListArgs
+        ///         OrderBies = new[]
         ///         {
-        ///             OrderBies = 
-        ///             {
-        ///                 "startTime",
-        ///             },
-        ///             OrderDirection = "DESC",
-        ///             PackageIds = 
-        ///             {
-        ///                 "package-hy4d2ppl",
-        ///             },
-        ///             PackageNames = 
-        ///             {
-        ///                 "keep-package-disk",
-        ///             },
-        ///             PackageRegions = 
-        ///             {
-        ///                 "china",
-        ///             },
-        ///             PackageTypes = 
-        ///             {
-        ///                 "DISK",
-        ///             },
-        ///             Statuses = 
-        ///             {
-        ///                 "using",
-        ///             },
-        ///         }));
-        ///     }
+        ///             "startTime",
+        ///         },
+        ///         OrderDirection = "DESC",
+        ///         PackageIds = new[]
+        ///         {
+        ///             "package-hy4d2ppl",
+        ///         },
+        ///         PackageNames = new[]
+        ///         {
+        ///             "keep-package-disk",
+        ///         },
+        ///         PackageRegions = new[]
+        ///         {
+        ///             "china",
+        ///         },
+        ///         PackageTypes = new[]
+        ///         {
+        ///             "DISK",
+        ///         },
+        ///         Statuses = new[]
+        ///         {
+        ///             "using",
+        ///         },
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetResourcePackageListResult> InvokeAsync(GetResourcePackageListArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetResourcePackageListResult>("tencentcloud:Cynosdb/getResourcePackageList:getResourcePackageList", args ?? new GetResourcePackageListArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetResourcePackageListResult>("tencentcloud:Cynosdb/getResourcePackageList:getResourcePackageList", args ?? new GetResourcePackageListArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of cynosdb resource_package_list
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var resourcePackageList = Tencentcloud.Cynosdb.GetResourcePackageList.Invoke(new()
         ///     {
-        ///         var resourcePackageList = Output.Create(Tencentcloud.Cynosdb.GetResourcePackageList.InvokeAsync(new Tencentcloud.Cynosdb.GetResourcePackageListArgs
+        ///         OrderBies = new[]
         ///         {
-        ///             OrderBies = 
-        ///             {
-        ///                 "startTime",
-        ///             },
-        ///             OrderDirection = "DESC",
-        ///             PackageIds = 
-        ///             {
-        ///                 "package-hy4d2ppl",
-        ///             },
-        ///             PackageNames = 
-        ///             {
-        ///                 "keep-package-disk",
-        ///             },
-        ///             PackageRegions = 
-        ///             {
-        ///                 "china",
-        ///             },
-        ///             PackageTypes = 
-        ///             {
-        ///                 "DISK",
-        ///             },
-        ///             Statuses = 
-        ///             {
-        ///                 "using",
-        ///             },
-        ///         }));
-        ///     }
+        ///             "startTime",
+        ///         },
+        ///         OrderDirection = "DESC",
+        ///         PackageIds = new[]
+        ///         {
+        ///             "package-hy4d2ppl",
+        ///         },
+        ///         PackageNames = new[]
+        ///         {
+        ///             "keep-package-disk",
+        ///         },
+        ///         PackageRegions = new[]
+        ///         {
+        ///             "china",
+        ///         },
+        ///         PackageTypes = new[]
+        ///         {
+        ///             "DISK",
+        ///         },
+        ///         Statuses = new[]
+        ///         {
+        ///             "using",
+        ///         },
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetResourcePackageListResult> Invoke(GetResourcePackageListInvokeArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetResourcePackageListResult>("tencentcloud:Cynosdb/getResourcePackageList:getResourcePackageList", args ?? new GetResourcePackageListInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetResourcePackageListResult>("tencentcloud:Cynosdb/getResourcePackageList:getResourcePackageList", args ?? new GetResourcePackageListInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetResourcePackageListArgs : Pulumi.InvokeArgs
+    public sealed class GetResourcePackageListArgs : global::Pulumi.InvokeArgs
     {
         [Input("orderBies")]
         private List<string>? _orderBies;
@@ -209,9 +203,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
         public GetResourcePackageListArgs()
         {
         }
+        public static new GetResourcePackageListArgs Empty => new GetResourcePackageListArgs();
     }
 
-    public sealed class GetResourcePackageListInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetResourcePackageListInvokeArgs : global::Pulumi.InvokeArgs
     {
         [Input("orderBies")]
         private InputList<string>? _orderBies;
@@ -300,6 +295,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
         public GetResourcePackageListInvokeArgs()
         {
         }
+        public static new GetResourcePackageListInvokeArgs Empty => new GetResourcePackageListInvokeArgs();
     }
 
 

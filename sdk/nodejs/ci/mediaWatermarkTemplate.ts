@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,11 +11,12 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const mediaWatermarkTemplate = new tencentcloud.Ci.MediaWatermarkTemplate("media_watermark_template", {
+ * const mediaWatermarkTemplate = new tencentcloud.ci.MediaWatermarkTemplate("mediaWatermarkTemplate", {
  *     bucket: "terraform-ci-1308919341",
  *     watermark: {
  *         dx: "128",
@@ -23,14 +25,6 @@ import * as utilities from "../utilities";
  *         locMode: "Absolute",
  *         pos: "TopRight",
  *         startTime: "0",
- *         // image {
- *         // 	url = ""
- *         // 	mode = ""
- *         // 	width = ""
- *         // 	height = ""
- *         // 	transparency = ""
- *         // 	background = ""
- *         // }
  *         text: {
  *             fontColor: "0xF0F8F0",
  *             fontSize: "30",
@@ -42,13 +36,14 @@ import * as utilities from "../utilities";
  *     },
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * ci media_watermark_template can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Ci/mediaWatermarkTemplate:MediaWatermarkTemplate media_watermark_template media_watermark_template_id
+ * $ pulumi import tencentcloud:Ci/mediaWatermarkTemplate:MediaWatermarkTemplate media_watermark_template media_watermark_template_id
  * ```
  */
 export class MediaWatermarkTemplate extends pulumi.CustomResource {

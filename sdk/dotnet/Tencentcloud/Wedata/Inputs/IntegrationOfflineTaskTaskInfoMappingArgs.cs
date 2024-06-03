@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Wedata.Inputs
 {
 
-    public sealed class IntegrationOfflineTaskTaskInfoMappingArgs : Pulumi.ResourceArgs
+    public sealed class IntegrationOfflineTaskTaskInfoMappingArgs : global::Pulumi.ResourceArgs
     {
         [Input("extConfigs")]
         private InputList<Inputs.IntegrationOfflineTaskTaskInfoMappingExtConfigArgs>? _extConfigs;
@@ -64,5 +64,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Wedata.Inputs
         public IntegrationOfflineTaskTaskInfoMappingArgs()
         {
         }
+        public static new IntegrationOfflineTaskTaskInfoMappingArgs Empty => new IntegrationOfflineTaskTaskInfoMappingArgs();
     }
 }

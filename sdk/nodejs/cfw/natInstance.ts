@@ -2,20 +2,23 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
  * Provides a resource to create a cfw natInstance
  *
  * ## Example Usage
+ *
  * ### If mode is 0
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = new tencentcloud.Cfw.NatInstance("example", {
+ * const example = new tencentcloud.cfw.NatInstance("example", {
  *     crossAZone: 0,
  *     mode: 0,
  *     newModeItems: {
@@ -26,13 +29,16 @@ import * as utilities from "../utilities";
  *     zoneSets: ["ap-guangzhou-7"],
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
+ *
  * ### If mode is 1
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = new tencentcloud.Cfw.NatInstance("example", {
+ * const example = new tencentcloud.cfw.NatInstance("example", {
  *     crossAZone: 0,
  *     mode: 1,
  *     natGwLists: ["nat-9wwkz1kr"],
@@ -43,13 +49,14 @@ import * as utilities from "../utilities";
  *     ],
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * cfw nat_instance can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Cfw/natInstance:NatInstance example cfwnat-54a21421
+ * $ pulumi import tencentcloud:Cfw/natInstance:NatInstance example cfwnat-54a21421
  * ```
  */
 export class NatInstance extends pulumi.CustomResource {

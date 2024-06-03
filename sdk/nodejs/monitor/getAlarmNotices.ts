@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,11 +11,12 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const notices = pulumi.output(tencentcloud.Monitor.getAlarmNotices({
+ * const notices = tencentcloud.Monitor.getAlarmNotices({
  *     groupIds: [],
  *     name: "",
  *     noticeIds: [],
@@ -22,16 +24,14 @@ import * as utilities from "../utilities";
  *     ownerUid: 1,
  *     receiverType: "",
  *     userIds: [],
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getAlarmNotices(args?: GetAlarmNoticesArgs, opts?: pulumi.InvokeOptions): Promise<GetAlarmNoticesResult> {
     args = args || {};
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Monitor/getAlarmNotices:getAlarmNotices", {
         "groupIds": args.groupIds,
         "name": args.name,
@@ -115,9 +115,30 @@ export interface GetAlarmNoticesResult {
      */
     readonly userIds?: number[];
 }
-
+/**
+ * Use this data source to Interlude notification list.
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const notices = tencentcloud.Monitor.getAlarmNotices({
+ *     groupIds: [],
+ *     name: "",
+ *     noticeIds: [],
+ *     order: "DESC",
+ *     ownerUid: 1,
+ *     receiverType: "",
+ *     userIds: [],
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getAlarmNoticesOutput(args?: GetAlarmNoticesOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetAlarmNoticesResult> {
-    return pulumi.output(args).apply(a => getAlarmNotices(a, opts))
+    return pulumi.output(args).apply((a: any) => getAlarmNotices(a, opts))
 }
 
 /**

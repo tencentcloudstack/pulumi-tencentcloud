@@ -9,11 +9,12 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = new tencentcloud.Wedata.Script("example", {
+ * const example = new tencentcloud.wedata.Script("example", {
  *     bucketName: "wedata-demo-1257305158",
  *     fileExtensionType: "sql",
  *     filePath: "/datastudio/project/tf_example.sql",
@@ -21,13 +22,14 @@ import * as utilities from "../utilities";
  *     region: "ap-guangzhou",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * wedata script can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Wedata/script:Script example 1470575647377821696#/datastudio/project/tf_example.sql#4147824b-7ba2-432b-8a8b-7e747594c926
+ * $ pulumi import tencentcloud:Wedata/script:Script example 1470575647377821696#/datastudio/project/tf_example.sql#4147824b-7ba2-432b-8a8b-7e747594c926
  * ```
  */
 export class Script extends pulumi.CustomResource {

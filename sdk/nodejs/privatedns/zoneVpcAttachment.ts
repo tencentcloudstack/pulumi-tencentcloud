@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -11,11 +12,13 @@ import * as utilities from "../utilities";
  * > **NOTE:**  If you need to bind account A to account B's VPC resources, you need to first grant role authorization to account A.
  *
  * ## Example Usage
+ *
  * ### Append VPC associated with private dns zone
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const exampleZone = new tencentcloud.privatedns.Zone("exampleZone", {
  *     domain: "domain.com",
@@ -35,11 +38,14 @@ import * as utilities from "../utilities";
  *     },
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
+ *
  * ### Add VPC information for associated accounts in the private dns zone
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const example = new tencentcloud.privatedns.ZoneVpcAttachment("example", {
  *     zoneId: tencentcloud_private_dns_zone.example.id,
@@ -50,13 +56,14 @@ import * as utilities from "../utilities";
  *     },
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * PrivateDns zone_vpc_attachment can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:PrivateDns/zoneVpcAttachment:ZoneVpcAttachment example zone-6t11lof0#vpc-jdx11z0t
+ * $ pulumi import tencentcloud:PrivateDns/zoneVpcAttachment:ZoneVpcAttachment example zone-6t11lof0#vpc-jdx11z0t
  * ```
  */
 export class ZoneVpcAttachment extends pulumi.CustomResource {

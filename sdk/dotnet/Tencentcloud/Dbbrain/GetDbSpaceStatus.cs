@@ -15,68 +15,62 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dbbrain
         /// <summary>
         /// Use this data source to query detailed information of dbbrain db_space_status
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var dbSpaceStatus = Tencentcloud.Dbbrain.GetDbSpaceStatus.Invoke(new()
         ///     {
-        ///         var dbSpaceStatus = Output.Create(Tencentcloud.Dbbrain.GetDbSpaceStatus.InvokeAsync(new Tencentcloud.Dbbrain.GetDbSpaceStatusArgs
-        ///         {
-        ///             InstanceId = "%s",
-        ///             Product = "mysql",
-        ///             RangeDays = 7,
-        ///         }));
-        ///     }
+        ///         InstanceId = "%s",
+        ///         Product = "mysql",
+        ///         RangeDays = 7,
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetDbSpaceStatusResult> InvokeAsync(GetDbSpaceStatusArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetDbSpaceStatusResult>("tencentcloud:Dbbrain/getDbSpaceStatus:getDbSpaceStatus", args ?? new GetDbSpaceStatusArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetDbSpaceStatusResult>("tencentcloud:Dbbrain/getDbSpaceStatus:getDbSpaceStatus", args ?? new GetDbSpaceStatusArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of dbbrain db_space_status
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var dbSpaceStatus = Tencentcloud.Dbbrain.GetDbSpaceStatus.Invoke(new()
         ///     {
-        ///         var dbSpaceStatus = Output.Create(Tencentcloud.Dbbrain.GetDbSpaceStatus.InvokeAsync(new Tencentcloud.Dbbrain.GetDbSpaceStatusArgs
-        ///         {
-        ///             InstanceId = "%s",
-        ///             Product = "mysql",
-        ///             RangeDays = 7,
-        ///         }));
-        ///     }
+        ///         InstanceId = "%s",
+        ///         Product = "mysql",
+        ///         RangeDays = 7,
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetDbSpaceStatusResult> Invoke(GetDbSpaceStatusInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetDbSpaceStatusResult>("tencentcloud:Dbbrain/getDbSpaceStatus:getDbSpaceStatus", args ?? new GetDbSpaceStatusInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetDbSpaceStatusResult>("tencentcloud:Dbbrain/getDbSpaceStatus:getDbSpaceStatus", args ?? new GetDbSpaceStatusInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetDbSpaceStatusArgs : Pulumi.InvokeArgs
+    public sealed class GetDbSpaceStatusArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// instance id.
@@ -105,9 +99,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dbbrain
         public GetDbSpaceStatusArgs()
         {
         }
+        public static new GetDbSpaceStatusArgs Empty => new GetDbSpaceStatusArgs();
     }
 
-    public sealed class GetDbSpaceStatusInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetDbSpaceStatusInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// instance id.
@@ -136,6 +131,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dbbrain
         public GetDbSpaceStatusInvokeArgs()
         {
         }
+        public static new GetDbSpaceStatusInvokeArgs Empty => new GetDbSpaceStatusInvokeArgs();
     }
 
 

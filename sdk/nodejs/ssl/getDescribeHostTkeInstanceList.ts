@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,21 +11,20 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const describeHostTkeInstanceList = pulumi.output(tencentcloud.Ssl.getDescribeHostTkeInstanceList({
+ * const describeHostTkeInstanceList = tencentcloud.Ssl.getDescribeHostTkeInstanceList({
  *     certificateId: "8u8DII0l",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getDescribeHostTkeInstanceList(args: GetDescribeHostTkeInstanceListArgs, opts?: pulumi.InvokeOptions): Promise<GetDescribeHostTkeInstanceListResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Ssl/getDescribeHostTkeInstanceList:getDescribeHostTkeInstanceList", {
         "asyncCache": args.asyncCache,
         "certificateId": args.certificateId,
@@ -96,9 +96,24 @@ export interface GetDescribeHostTkeInstanceListResult {
     readonly oldCertificateId?: string;
     readonly resultOutputFile?: string;
 }
-
+/**
+ * Use this data source to query detailed information of ssl describeHostTkeInstanceList
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const describeHostTkeInstanceList = tencentcloud.Ssl.getDescribeHostTkeInstanceList({
+ *     certificateId: "8u8DII0l",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getDescribeHostTkeInstanceListOutput(args: GetDescribeHostTkeInstanceListOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetDescribeHostTkeInstanceListResult> {
-    return pulumi.output(args).apply(a => getDescribeHostTkeInstanceList(a, opts))
+    return pulumi.output(args).apply((a: any) => getDescribeHostTkeInstanceList(a, opts))
 }
 
 /**

@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Bi.Inputs
 {
 
-    public sealed class DatasourceCloudServiceTypeArgs : Pulumi.ResourceArgs
+    public sealed class DatasourceCloudServiceTypeArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Instance Id.
@@ -34,5 +34,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Bi.Inputs
         public DatasourceCloudServiceTypeArgs()
         {
         }
+        public static new DatasourceCloudServiceTypeArgs Empty => new DatasourceCloudServiceTypeArgs();
     }
 }

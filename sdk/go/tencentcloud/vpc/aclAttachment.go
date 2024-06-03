@@ -7,8 +7,9 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provide a resource to attach an existing subnet to Network ACL.
@@ -18,7 +19,7 @@ import (
 // Acl attachment can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Vpc/aclAttachment:AclAttachment attachment acl-eotx5qsg#subnet-91x0geu6
+// $ pulumi import tencentcloud:Vpc/aclAttachment:AclAttachment attachment acl-eotx5qsg#subnet-91x0geu6
 // ```
 type AclAttachment struct {
 	pulumi.CustomResourceState
@@ -42,7 +43,7 @@ func NewAclAttachment(ctx *pulumi.Context,
 	if args.SubnetId == nil {
 		return nil, errors.New("invalid value for required argument 'SubnetId'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource AclAttachment
 	err := ctx.RegisterResource("tencentcloud:Vpc/aclAttachment:AclAttachment", name, args, &resource, opts...)
 	if err != nil {
@@ -123,7 +124,7 @@ func (i *AclAttachment) ToAclAttachmentOutputWithContext(ctx context.Context) Ac
 // AclAttachmentArrayInput is an input type that accepts AclAttachmentArray and AclAttachmentArrayOutput values.
 // You can construct a concrete instance of `AclAttachmentArrayInput` via:
 //
-//          AclAttachmentArray{ AclAttachmentArgs{...} }
+//	AclAttachmentArray{ AclAttachmentArgs{...} }
 type AclAttachmentArrayInput interface {
 	pulumi.Input
 
@@ -148,7 +149,7 @@ func (i AclAttachmentArray) ToAclAttachmentArrayOutputWithContext(ctx context.Co
 // AclAttachmentMapInput is an input type that accepts AclAttachmentMap and AclAttachmentMapOutput values.
 // You can construct a concrete instance of `AclAttachmentMapInput` via:
 //
-//          AclAttachmentMap{ "key": AclAttachmentArgs{...} }
+//	AclAttachmentMap{ "key": AclAttachmentArgs{...} }
 type AclAttachmentMapInput interface {
 	pulumi.Input
 

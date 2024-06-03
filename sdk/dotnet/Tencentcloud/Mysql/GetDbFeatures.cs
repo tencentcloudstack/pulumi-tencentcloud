@@ -15,64 +15,58 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
         /// <summary>
         /// Use this data source to query detailed information of mysql db_features
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var dbFeatures = Tencentcloud.Mysql.GetDbFeatures.Invoke(new()
         ///     {
-        ///         var dbFeatures = Output.Create(Tencentcloud.Mysql.GetDbFeatures.InvokeAsync(new Tencentcloud.Mysql.GetDbFeaturesArgs
-        ///         {
-        ///             InstanceId = "cdb-fitq5t9h",
-        ///         }));
-        ///     }
+        ///         InstanceId = "cdb-fitq5t9h",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetDbFeaturesResult> InvokeAsync(GetDbFeaturesArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetDbFeaturesResult>("tencentcloud:Mysql/getDbFeatures:getDbFeatures", args ?? new GetDbFeaturesArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetDbFeaturesResult>("tencentcloud:Mysql/getDbFeatures:getDbFeatures", args ?? new GetDbFeaturesArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of mysql db_features
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var dbFeatures = Tencentcloud.Mysql.GetDbFeatures.Invoke(new()
         ///     {
-        ///         var dbFeatures = Output.Create(Tencentcloud.Mysql.GetDbFeatures.InvokeAsync(new Tencentcloud.Mysql.GetDbFeaturesArgs
-        ///         {
-        ///             InstanceId = "cdb-fitq5t9h",
-        ///         }));
-        ///     }
+        ///         InstanceId = "cdb-fitq5t9h",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetDbFeaturesResult> Invoke(GetDbFeaturesInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetDbFeaturesResult>("tencentcloud:Mysql/getDbFeatures:getDbFeatures", args ?? new GetDbFeaturesInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetDbFeaturesResult>("tencentcloud:Mysql/getDbFeatures:getDbFeatures", args ?? new GetDbFeaturesInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetDbFeaturesArgs : Pulumi.InvokeArgs
+    public sealed class GetDbFeaturesArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Instance ID, the format is: cdb-c1nl9rpv or cdbro-c1nl9rpv, which is the same as the instance ID displayed on the cloud database console page.
@@ -89,9 +83,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
         public GetDbFeaturesArgs()
         {
         }
+        public static new GetDbFeaturesArgs Empty => new GetDbFeaturesArgs();
     }
 
-    public sealed class GetDbFeaturesInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetDbFeaturesInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Instance ID, the format is: cdb-c1nl9rpv or cdbro-c1nl9rpv, which is the same as the instance ID displayed on the cloud database console page.
@@ -108,6 +103,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
         public GetDbFeaturesInvokeArgs()
         {
         }
+        public static new GetDbFeaturesInvokeArgs Empty => new GetDbFeaturesInvokeArgs();
     }
 
 

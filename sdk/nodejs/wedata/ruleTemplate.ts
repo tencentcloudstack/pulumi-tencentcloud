@@ -12,7 +12,7 @@ import * as utilities from "../utilities";
  * wedata rule_template can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Wedata/ruleTemplate:RuleTemplate rule_template rule_template_id
+ * $ pulumi import tencentcloud:Wedata/ruleTemplate:RuleTemplate rule_template rule_template_id
  * ```
  */
 export class RuleTemplate extends pulumi.CustomResource {

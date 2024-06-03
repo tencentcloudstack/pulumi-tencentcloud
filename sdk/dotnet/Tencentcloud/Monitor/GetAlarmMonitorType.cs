@@ -15,58 +15,52 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
         /// <summary>
         /// Use this data source to query detailed information of monitor alarm_monitor_type
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
-        ///     {
-        ///         var alarmMonitorType = Output.Create(Tencentcloud.Monitor.GetAlarmMonitorType.InvokeAsync());
-        ///     }
+        ///     var alarmMonitorType = Tencentcloud.Monitor.GetAlarmMonitorType.Invoke();
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetAlarmMonitorTypeResult> InvokeAsync(GetAlarmMonitorTypeArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetAlarmMonitorTypeResult>("tencentcloud:Monitor/getAlarmMonitorType:getAlarmMonitorType", args ?? new GetAlarmMonitorTypeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetAlarmMonitorTypeResult>("tencentcloud:Monitor/getAlarmMonitorType:getAlarmMonitorType", args ?? new GetAlarmMonitorTypeArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of monitor alarm_monitor_type
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
-        ///     {
-        ///         var alarmMonitorType = Output.Create(Tencentcloud.Monitor.GetAlarmMonitorType.InvokeAsync());
-        ///     }
+        ///     var alarmMonitorType = Tencentcloud.Monitor.GetAlarmMonitorType.Invoke();
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetAlarmMonitorTypeResult> Invoke(GetAlarmMonitorTypeInvokeArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetAlarmMonitorTypeResult>("tencentcloud:Monitor/getAlarmMonitorType:getAlarmMonitorType", args ?? new GetAlarmMonitorTypeInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetAlarmMonitorTypeResult>("tencentcloud:Monitor/getAlarmMonitorType:getAlarmMonitorType", args ?? new GetAlarmMonitorTypeInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetAlarmMonitorTypeArgs : Pulumi.InvokeArgs
+    public sealed class GetAlarmMonitorTypeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Used to save results.
@@ -77,9 +71,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
         public GetAlarmMonitorTypeArgs()
         {
         }
+        public static new GetAlarmMonitorTypeArgs Empty => new GetAlarmMonitorTypeArgs();
     }
 
-    public sealed class GetAlarmMonitorTypeInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetAlarmMonitorTypeInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Used to save results.
@@ -90,6 +85,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
         public GetAlarmMonitorTypeInvokeArgs()
         {
         }
+        public static new GetAlarmMonitorTypeInvokeArgs Empty => new GetAlarmMonitorTypeInvokeArgs();
     }
 
 

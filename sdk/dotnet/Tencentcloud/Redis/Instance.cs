@@ -18,196 +18,63 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Redis
     /// &gt; **NOTE:** Both adding and removing replications in one change is supported but not recommend.
     /// 
     /// ## Example Usage
+    /// 
     /// ### Create a base version of redis
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = Pulumi.Tencentcloud;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var zone = Tencentcloud.Redis.GetZoneConfig.Invoke(new()
     ///     {
-    ///         var zone = Output.Create(Tencentcloud.Redis.GetZoneConfig.InvokeAsync(new Tencentcloud.Redis.GetZoneConfigArgs
-    ///         {
-    ///             TypeId = 7,
-    ///         }));
-    ///         var vpc = new Tencentcloud.Vpc.Instance("vpc", new Tencentcloud.Vpc.InstanceArgs
-    ///         {
-    ///             CidrBlock = "10.0.0.0/16",
-    ///         });
-    ///         var subnet = new Tencentcloud.Subnet.Instance("subnet", new Tencentcloud.Subnet.InstanceArgs
-    ///         {
-    ///             VpcId = vpc.Id,
-    ///             AvailabilityZone = zone.Apply(zone =&gt; zone.Lists?[0]?.Zone),
-    ///             CidrBlock = "10.0.1.0/24",
-    ///         });
-    ///         var foo = new Tencentcloud.Redis.Instance("foo", new Tencentcloud.Redis.InstanceArgs
-    ///         {
-    ///             AvailabilityZone = zone.Apply(zone =&gt; zone.Lists?[0]?.Zone),
-    ///             TypeId = zone.Apply(zone =&gt; zone.Lists?[0]?.TypeId),
-    ///             Password = "test12345789",
-    ///             MemSize = 8192,
-    ///             RedisShardNum = zone.Apply(zone =&gt; zone.Lists?[0]?.RedisShardNums?[0]),
-    ///             RedisReplicasNum = zone.Apply(zone =&gt; zone.Lists?[0]?.RedisReplicasNums?[0]),
-    ///             Port = 6379,
-    ///             VpcId = vpc.Id,
-    ///             SubnetId = subnet.Id,
-    ///         });
-    ///     }
+    ///         TypeId = 7,
+    ///     });
     /// 
-    /// }
-    /// ```
-    /// ### Buy a month of prepaid instances
-    /// 
-    /// ```csharp
-    /// using Pulumi;
-    /// using Tencentcloud = Pulumi.Tencentcloud;
-    /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
-    /// 
-    /// class MyStack : Stack
-    /// {
-    ///     public MyStack()
+    ///     var vpc = new Tencentcloud.Vpc.Instance("vpc", new()
     ///     {
-    ///         var zone = Output.Create(Tencentcloud.Redis.GetZoneConfig.InvokeAsync(new Tencentcloud.Redis.GetZoneConfigArgs
-    ///         {
-    ///             TypeId = 7,
-    ///         }));
-    ///         var vpc = new Tencentcloud.Vpc.Instance("vpc", new Tencentcloud.Vpc.InstanceArgs
-    ///         {
-    ///             CidrBlock = "10.0.0.0/16",
-    ///         });
-    ///         var subnet = new Tencentcloud.Subnet.Instance("subnet", new Tencentcloud.Subnet.InstanceArgs
-    ///         {
-    ///             VpcId = vpc.Id,
-    ///             AvailabilityZone = zone.Apply(zone =&gt; zone.Lists?[1]?.Zone),
-    ///             CidrBlock = "10.0.1.0/24",
-    ///         });
-    ///         var fooGroup = new Tencentcloud.Security.Group("fooGroup", new Tencentcloud.Security.GroupArgs
-    ///         {
-    ///         });
-    ///         var fooGroupLiteRule = new Tencentcloud.Security.GroupLiteRule("fooGroupLiteRule", new Tencentcloud.Security.GroupLiteRuleArgs
-    ///         {
-    ///             SecurityGroupId = fooGroup.Id,
-    ///             Ingresses = 
-    ///             {
-    ///                 "ACCEPT#192.168.1.0/24#80#TCP",
-    ///                 "DROP#8.8.8.8#80,90#UDP",
-    ///                 "DROP#0.0.0.0/0#80-90#TCP",
-    ///             },
-    ///             Egresses = 
-    ///             {
-    ///                 "ACCEPT#192.168.0.0/16#ALL#TCP",
-    ///                 "ACCEPT#10.0.0.0/8#ALL#ICMP",
-    ///                 "DROP#0.0.0.0/0#ALL#ALL",
-    ///             },
-    ///         });
-    ///         var fooInstance = new Tencentcloud.Redis.Instance("fooInstance", new Tencentcloud.Redis.InstanceArgs
-    ///         {
-    ///             AvailabilityZone = zone.Apply(zone =&gt; zone.Lists?[0]?.Zone),
-    ///             TypeId = zone.Apply(zone =&gt; zone.Lists?[0]?.TypeId),
-    ///             Password = "test12345789",
-    ///             MemSize = 8192,
-    ///             RedisShardNum = zone.Apply(zone =&gt; zone.Lists?[0]?.RedisShardNums?[0]),
-    ///             RedisReplicasNum = zone.Apply(zone =&gt; zone.Lists?[0]?.RedisReplicasNums?[0]),
-    ///             Port = 6379,
-    ///             VpcId = vpc.Id,
-    ///             SubnetId = subnet.Id,
-    ///             SecurityGroups = 
-    ///             {
-    ///                 fooGroup.Id,
-    ///             },
-    ///             ChargeType = "PREPAID",
-    ///             PrepaidPeriod = 1,
-    ///         });
-    ///     }
+    ///         CidrBlock = "10.0.0.0/16",
+    ///     });
     /// 
-    /// }
-    /// ```
-    /// ### Create a multi-AZ instance
-    /// 
-    /// ```csharp
-    /// using Pulumi;
-    /// using Tencentcloud = Pulumi.Tencentcloud;
-    /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
-    /// 
-    /// class MyStack : Stack
-    /// {
-    ///     public MyStack()
+    ///     var subnet = new Tencentcloud.Subnet.Instance("subnet", new()
     ///     {
-    ///         var zone = Output.Create(Tencentcloud.Redis.GetZoneConfig.InvokeAsync(new Tencentcloud.Redis.GetZoneConfigArgs
-    ///         {
-    ///             TypeId = 7,
-    ///             Region = "ap-guangzhou",
-    ///         }));
-    ///         var config = new Config();
-    ///         var replicaZoneIds = config.GetObject&lt;dynamic&gt;("replicaZoneIds") ?? 
-    ///         {
-    ///             100004,
-    ///             100006,
-    ///         };
-    ///         var vpc = new Tencentcloud.Vpc.Instance("vpc", new Tencentcloud.Vpc.InstanceArgs
-    ///         {
-    ///             CidrBlock = "10.0.0.0/16",
-    ///         });
-    ///         var subnet = new Tencentcloud.Subnet.Instance("subnet", new Tencentcloud.Subnet.InstanceArgs
-    ///         {
-    ///             VpcId = vpc.Id,
-    ///             AvailabilityZone = zone.Apply(zone =&gt; zone.Lists?[2]?.Zone),
-    ///             CidrBlock = "10.0.1.0/24",
-    ///         });
-    ///         var fooGroup = new Tencentcloud.Security.Group("fooGroup", new Tencentcloud.Security.GroupArgs
-    ///         {
-    ///         });
-    ///         var fooGroupLiteRule = new Tencentcloud.Security.GroupLiteRule("fooGroupLiteRule", new Tencentcloud.Security.GroupLiteRuleArgs
-    ///         {
-    ///             SecurityGroupId = fooGroup.Id,
-    ///             Ingresses = 
-    ///             {
-    ///                 "ACCEPT#192.168.1.0/24#80#TCP",
-    ///                 "DROP#8.8.8.8#80,90#UDP",
-    ///                 "DROP#0.0.0.0/0#80-90#TCP",
-    ///             },
-    ///             Egresses = 
-    ///             {
-    ///                 "ACCEPT#192.168.0.0/16#ALL#TCP",
-    ///                 "ACCEPT#10.0.0.0/8#ALL#ICMP",
-    ///                 "DROP#0.0.0.0/0#ALL#ALL",
-    ///             },
-    ///         });
-    ///         var fooInstance = new Tencentcloud.Redis.Instance("fooInstance", new Tencentcloud.Redis.InstanceArgs
-    ///         {
-    ///             AvailabilityZone = zone.Apply(zone =&gt; zone.Lists?[2]?.Zone),
-    ///             TypeId = zone.Apply(zone =&gt; zone.Lists?[2]?.TypeId),
-    ///             Password = "test12345789",
-    ///             MemSize = 8192,
-    ///             RedisShardNum = zone.Apply(zone =&gt; zone.Lists?[2]?.RedisShardNums?[0]),
-    ///             RedisReplicasNum = 2,
-    ///             ReplicaZoneIds = replicaZoneIds,
-    ///             Port = 6379,
-    ///             VpcId = vpc.Id,
-    ///             SubnetId = subnet.Id,
-    ///             SecurityGroups = 
-    ///             {
-    ///                 fooGroup.Id,
-    ///             },
-    ///         });
-    ///     }
+    ///         VpcId = vpc.Id,
+    ///         AvailabilityZone = zone.Apply(getZoneConfigResult =&gt; getZoneConfigResult.Lists[0]?.Zone),
+    ///         CidrBlock = "10.0.1.0/24",
+    ///     });
     /// 
-    /// }
+    ///     var foo = new Tencentcloud.Redis.Instance("foo", new()
+    ///     {
+    ///         AvailabilityZone = zone.Apply(getZoneConfigResult =&gt; getZoneConfigResult.Lists[0]?.Zone),
+    ///         TypeId = zone.Apply(getZoneConfigResult =&gt; getZoneConfigResult.Lists[0]?.TypeId),
+    ///         Password = "test12345789",
+    ///         MemSize = 8192,
+    ///         RedisShardNum = zone.Apply(getZoneConfigResult =&gt; getZoneConfigResult.Lists[0]?.RedisShardNums[0]),
+    ///         RedisReplicasNum = zone.Apply(getZoneConfigResult =&gt; getZoneConfigResult.Lists[0]?.RedisReplicasNums[0]),
+    ///         Port = 6379,
+    ///         VpcId = vpc.Id,
+    ///         SubnetId = subnet.Id,
+    ///     });
+    /// 
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// Redis instance can be imported, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Redis/instance:Instance redislab redis-id
+    /// $ pulumi import tencentcloud:Redis/instance:Instance redislab redis-id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Redis/instance:Instance")]
-    public partial class Instance : Pulumi.CustomResource
+    public partial class Instance : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Auto-renew flag. 0 - default state (manual renewal); 1 - automatic renewal; 2 - explicit no automatic renewal.
@@ -246,7 +113,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Redis
         public Output<string> Ip { get; private set; } = null!;
 
         /// <summary>
-        /// The memory volume of an available instance(in MB), please refer to `tencentcloud_redis_zone_config.list[zone].shard_memories`. When redis is standard type, it represents total memory size of the instance; when Redis is cluster type, it represents memory size of per sharding.
+        /// The memory volume of an available instance(in MB), please refer to `tencentcloud_redis_zone_config.list[zone].shard_memories`. When redis is standard type, it represents total memory size of the instance; when Redis is cluster type, it represents memory size of per sharding. `512MB` is supported only in master-slave instance.
         /// </summary>
         [Output("memSize")]
         public Output<int> MemSize { get; private set; } = null!;
@@ -407,6 +274,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Redis
             {
                 Version = Utilities.Version,
                 PluginDownloadURL = "github://api.github.com/tencentcloudstack",
+                AdditionalSecretOutputs =
+                {
+                    "password",
+                },
             };
             var merged = CustomResourceOptions.Merge(defaultOptions, options);
             // Override the ID if one was specified for consistency with other language SDKs.
@@ -428,7 +299,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Redis
         }
     }
 
-    public sealed class InstanceArgs : Pulumi.ResourceArgs
+    public sealed class InstanceArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Auto-renew flag. 0 - default state (manual renewal); 1 - automatic renewal; 2 - explicit no automatic renewal.
@@ -461,7 +332,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Redis
         public Input<string>? Ip { get; set; }
 
         /// <summary>
-        /// The memory volume of an available instance(in MB), please refer to `tencentcloud_redis_zone_config.list[zone].shard_memories`. When redis is standard type, it represents total memory size of the instance; when Redis is cluster type, it represents memory size of per sharding.
+        /// The memory volume of an available instance(in MB), please refer to `tencentcloud_redis_zone_config.list[zone].shard_memories`. When redis is standard type, it represents total memory size of the instance; when Redis is cluster type, it represents memory size of per sharding. `512MB` is supported only in master-slave instance.
         /// </summary>
         [Input("memSize", required: true)]
         public Input<int> MemSize { get; set; } = null!;
@@ -490,11 +361,21 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Redis
         [Input("paramsTemplateId")]
         public Input<string>? ParamsTemplateId { get; set; }
 
+        [Input("password")]
+        private Input<string>? _password;
+
         /// <summary>
         /// Password for a Redis user, which should be 8 to 16 characters. NOTE: Only `no_auth=true` specified can make password empty.
         /// </summary>
-        [Input("password")]
-        public Input<string>? Password { get; set; }
+        public Input<string>? Password
+        {
+            get => _password;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _password = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
 
         /// <summary>
         /// The port used to access a redis instance. The default value is 6379. When the `operation_network` is `changeVPort` or `changeVip`, this parameter needs to be configured.
@@ -607,9 +488,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Redis
         public InstanceArgs()
         {
         }
+        public static new InstanceArgs Empty => new InstanceArgs();
     }
 
-    public sealed class InstanceState : Pulumi.ResourceArgs
+    public sealed class InstanceState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Auto-renew flag. 0 - default state (manual renewal); 1 - automatic renewal; 2 - explicit no automatic renewal.
@@ -648,7 +530,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Redis
         public Input<string>? Ip { get; set; }
 
         /// <summary>
-        /// The memory volume of an available instance(in MB), please refer to `tencentcloud_redis_zone_config.list[zone].shard_memories`. When redis is standard type, it represents total memory size of the instance; when Redis is cluster type, it represents memory size of per sharding.
+        /// The memory volume of an available instance(in MB), please refer to `tencentcloud_redis_zone_config.list[zone].shard_memories`. When redis is standard type, it represents total memory size of the instance; when Redis is cluster type, it represents memory size of per sharding. `512MB` is supported only in master-slave instance.
         /// </summary>
         [Input("memSize")]
         public Input<int>? MemSize { get; set; }
@@ -689,11 +571,21 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Redis
         [Input("paramsTemplateId")]
         public Input<string>? ParamsTemplateId { get; set; }
 
+        [Input("password")]
+        private Input<string>? _password;
+
         /// <summary>
         /// Password for a Redis user, which should be 8 to 16 characters. NOTE: Only `no_auth=true` specified can make password empty.
         /// </summary>
-        [Input("password")]
-        public Input<string>? Password { get; set; }
+        public Input<string>? Password
+        {
+            get => _password;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _password = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
 
         /// <summary>
         /// The port used to access a redis instance. The default value is 6379. When the `operation_network` is `changeVPort` or `changeVip`, this parameter needs to be configured.
@@ -812,5 +704,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Redis
         public InstanceState()
         {
         }
+        public static new InstanceState Empty => new InstanceState();
     }
 }

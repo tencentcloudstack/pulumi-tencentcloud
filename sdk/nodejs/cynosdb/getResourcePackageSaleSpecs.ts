@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,23 +11,22 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const resourcePackageSaleSpecs = pulumi.output(tencentcloud.Cynosdb.getResourcePackageSaleSpecs({
+ * const resourcePackageSaleSpecs = tencentcloud.Cynosdb.getResourcePackageSaleSpecs({
  *     instanceType: "cynosdb-serverless",
  *     packageRegion: "china",
  *     packageType: "CCU",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getResourcePackageSaleSpecs(args: GetResourcePackageSaleSpecsArgs, opts?: pulumi.InvokeOptions): Promise<GetResourcePackageSaleSpecsResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Cynosdb/getResourcePackageSaleSpecs:getResourcePackageSaleSpecs", {
         "instanceType": args.instanceType,
         "packageRegion": args.packageRegion,
@@ -80,9 +80,26 @@ export interface GetResourcePackageSaleSpecsResult {
     readonly packageType: string;
     readonly resultOutputFile?: string;
 }
-
+/**
+ * Use this data source to query detailed information of cynosdb resourcePackageSaleSpecs
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const resourcePackageSaleSpecs = tencentcloud.Cynosdb.getResourcePackageSaleSpecs({
+ *     instanceType: "cynosdb-serverless",
+ *     packageRegion: "china",
+ *     packageType: "CCU",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getResourcePackageSaleSpecsOutput(args: GetResourcePackageSaleSpecsOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetResourcePackageSaleSpecsResult> {
-    return pulumi.output(args).apply(a => getResourcePackageSaleSpecs(a, opts))
+    return pulumi.output(args).apply((a: any) => getResourcePackageSaleSpecs(a, opts))
 }
 
 /**

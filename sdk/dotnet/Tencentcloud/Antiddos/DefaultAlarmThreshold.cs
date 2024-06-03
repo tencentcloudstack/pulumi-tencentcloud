@@ -15,38 +15,39 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Antiddos
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var defaultAlarmThreshold = new Tencentcloud.Antiddos.DefaultAlarmThreshold("defaultAlarmThreshold", new()
     ///     {
-    ///         var defaultAlarmThreshold = new Tencentcloud.Antiddos.DefaultAlarmThreshold("defaultAlarmThreshold", new Tencentcloud.Antiddos.DefaultAlarmThresholdArgs
+    ///         DefaultAlarmConfig = new Tencentcloud.Antiddos.Inputs.DefaultAlarmThresholdDefaultAlarmConfigArgs
     ///         {
-    ///             DefaultAlarmConfig = new Tencentcloud.Antiddos.Inputs.DefaultAlarmThresholdDefaultAlarmConfigArgs
-    ///             {
-    ///                 AlarmThreshold = 2000,
-    ///                 AlarmType = 1,
-    ///             },
-    ///             InstanceType = "bgp",
-    ///         });
-    ///     }
+    ///             AlarmThreshold = 2000,
+    ///             AlarmType = 1,
+    ///         },
+    ///         InstanceType = "bgp",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// antiddos default_alarm_threshold can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Antiddos/defaultAlarmThreshold:DefaultAlarmThreshold default_alarm_threshold ${instanceType}
+    /// $ pulumi import tencentcloud:Antiddos/defaultAlarmThreshold:DefaultAlarmThreshold default_alarm_threshold ${instanceType}
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Antiddos/defaultAlarmThreshold:DefaultAlarmThreshold")]
-    public partial class DefaultAlarmThreshold : Pulumi.CustomResource
+    public partial class DefaultAlarmThreshold : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Alarm threshold configuration.
@@ -105,7 +106,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Antiddos
         }
     }
 
-    public sealed class DefaultAlarmThresholdArgs : Pulumi.ResourceArgs
+    public sealed class DefaultAlarmThresholdArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Alarm threshold configuration.
@@ -122,9 +123,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Antiddos
         public DefaultAlarmThresholdArgs()
         {
         }
+        public static new DefaultAlarmThresholdArgs Empty => new DefaultAlarmThresholdArgs();
     }
 
-    public sealed class DefaultAlarmThresholdState : Pulumi.ResourceArgs
+    public sealed class DefaultAlarmThresholdState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Alarm threshold configuration.
@@ -141,5 +143,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Antiddos
         public DefaultAlarmThresholdState()
         {
         }
+        public static new DefaultAlarmThresholdState Empty => new DefaultAlarmThresholdState();
     }
 }

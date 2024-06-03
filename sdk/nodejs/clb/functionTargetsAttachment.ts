@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,14 +11,15 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const functionTargets = new tencentcloud.Clb.FunctionTargetsAttachment("function_targets", {
+ * const functionTargets = new tencentcloud.clb.FunctionTargetsAttachment("functionTargets", {
  *     domain: "xxx.com",
  *     functionTargets: {
- *         function: {
+ *         "function": {
  *             functionName: "keep-tf-test-1675954233",
  *             functionNamespace: "default",
  *             functionQualifier: "$LATEST",
@@ -30,13 +32,14 @@ import * as utilities from "../utilities";
  *     url: "/",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * clb function_targets_attachment can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Clb/functionTargetsAttachment:FunctionTargetsAttachment function_targets loadBalancerId#listenerId#locationId or loadBalancerId#listenerId#domain#rule
+ * $ pulumi import tencentcloud:Clb/functionTargetsAttachment:FunctionTargetsAttachment function_targets loadBalancerId#listenerId#locationId or loadBalancerId#listenerId#domain#rule
  * ```
  */
 export class FunctionTargetsAttachment extends pulumi.CustomResource {

@@ -15,41 +15,42 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var imageSpriteTemplate = new Tencentcloud.Mps.ImageSpriteTemplate("imageSpriteTemplate", new()
     ///     {
-    ///         var imageSpriteTemplate = new Tencentcloud.Mps.ImageSpriteTemplate("imageSpriteTemplate", new Tencentcloud.Mps.ImageSpriteTemplateArgs
-    ///         {
-    ///             ColumnCount = 10,
-    ///             FillType = "stretch",
-    ///             Format = "jpg",
-    ///             Height = 143,
-    ///             ResolutionAdaptive = "open",
-    ///             RowCount = 10,
-    ///             SampleInterval = 10,
-    ///             SampleType = "Time",
-    ///             Width = 182,
-    ///         });
-    ///     }
+    ///         ColumnCount = 10,
+    ///         FillType = "stretch",
+    ///         Format = "jpg",
+    ///         Height = 143,
+    ///         ResolutionAdaptive = "open",
+    ///         RowCount = 10,
+    ///         SampleInterval = 10,
+    ///         SampleType = "Time",
+    ///         Width = 182,
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// mps image_sprite_template can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Mps/imageSpriteTemplate:ImageSpriteTemplate image_sprite_template image_sprite_template_id
+    /// $ pulumi import tencentcloud:Mps/imageSpriteTemplate:ImageSpriteTemplate image_sprite_template image_sprite_template_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Mps/imageSpriteTemplate:ImageSpriteTemplate")]
-    public partial class ImageSpriteTemplate : Pulumi.CustomResource
+    public partial class ImageSpriteTemplate : global::Pulumi.CustomResource
     {
         /// <summary>
         /// The number of columns in the small image in the sprite.
@@ -162,7 +163,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps
         }
     }
 
-    public sealed class ImageSpriteTemplateArgs : Pulumi.ResourceArgs
+    public sealed class ImageSpriteTemplateArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// The number of columns in the small image in the sprite.
@@ -233,9 +234,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps
         public ImageSpriteTemplateArgs()
         {
         }
+        public static new ImageSpriteTemplateArgs Empty => new ImageSpriteTemplateArgs();
     }
 
-    public sealed class ImageSpriteTemplateState : Pulumi.ResourceArgs
+    public sealed class ImageSpriteTemplateState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// The number of columns in the small image in the sprite.
@@ -306,5 +308,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps
         public ImageSpriteTemplateState()
         {
         }
+        public static new ImageSpriteTemplateState Empty => new ImageSpriteTemplateState();
     }
 }

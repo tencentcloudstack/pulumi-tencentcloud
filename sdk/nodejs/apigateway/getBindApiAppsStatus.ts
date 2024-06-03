@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,11 +11,12 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const example = pulumi.output(tencentcloud.ApiGateway.getBindApiAppsStatus({
+ * const example = tencentcloud.ApiGateway.getBindApiAppsStatus({
  *     apiIds: [
  *         "api-0cvmf4x4",
  *         "api-jvqlzolk",
@@ -24,15 +26,13 @@ import * as utilities from "../utilities";
  *         values: ["app-krljp4wn"],
  *     }],
  *     serviceId: "service-nxz6yync",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getBindApiAppsStatus(args: GetBindApiAppsStatusArgs, opts?: pulumi.InvokeOptions): Promise<GetBindApiAppsStatusResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:ApiGateway/getBindApiAppsStatus:getBindApiAppsStatus", {
         "apiIds": args.apiIds,
         "filters": args.filters,
@@ -83,9 +83,32 @@ export interface GetBindApiAppsStatusResult {
      */
     readonly serviceId: string;
 }
-
+/**
+ * Use this data source to query detailed information of apiGateway bindApiAppsStatus
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const example = tencentcloud.ApiGateway.getBindApiAppsStatus({
+ *     apiIds: [
+ *         "api-0cvmf4x4",
+ *         "api-jvqlzolk",
+ *     ],
+ *     filters: [{
+ *         name: "ApiAppId",
+ *         values: ["app-krljp4wn"],
+ *     }],
+ *     serviceId: "service-nxz6yync",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getBindApiAppsStatusOutput(args: GetBindApiAppsStatusOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetBindApiAppsStatusResult> {
-    return pulumi.output(args).apply(a => getBindApiAppsStatus(a, opts))
+    return pulumi.output(args).apply((a: any) => getBindApiAppsStatus(a, opts))
 }
 
 /**

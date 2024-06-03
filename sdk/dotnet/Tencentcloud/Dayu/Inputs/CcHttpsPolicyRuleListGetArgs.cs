@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dayu.Inputs
 {
 
-    public sealed class CcHttpsPolicyRuleListGetArgs : Pulumi.ResourceArgs
+    public sealed class CcHttpsPolicyRuleListGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Operator of the rule. Valid values are `include` and `equal`.
@@ -34,5 +34,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dayu.Inputs
         public CcHttpsPolicyRuleListGetArgs()
         {
         }
+        public static new CcHttpsPolicyRuleListGetArgs Empty => new CcHttpsPolicyRuleListGetArgs();
     }
 }

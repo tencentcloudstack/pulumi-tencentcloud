@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf.Inputs
 {
 
-    public sealed class ApiGroupBindedGatewayDeployGroupGetArgs : Pulumi.ResourceArgs
+    public sealed class ApiGroupBindedGatewayDeployGroupGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// application ID.
@@ -58,5 +58,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf.Inputs
         public ApiGroupBindedGatewayDeployGroupGetArgs()
         {
         }
+        public static new ApiGroupBindedGatewayDeployGroupGetArgs Empty => new ApiGroupBindedGatewayDeployGroupGetArgs();
     }
 }

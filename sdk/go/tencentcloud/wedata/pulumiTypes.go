@@ -8,7 +8,10 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
+
+var _ = internal.GetEnvOrDefault
 
 type BaselineAlarmRuleDto struct {
 	// Important;Urgent;Normal.
@@ -20,7 +23,7 @@ type BaselineAlarmRuleDto struct {
 // BaselineAlarmRuleDtoInput is an input type that accepts BaselineAlarmRuleDtoArgs and BaselineAlarmRuleDtoOutput values.
 // You can construct a concrete instance of `BaselineAlarmRuleDtoInput` via:
 //
-//          BaselineAlarmRuleDtoArgs{...}
+//	BaselineAlarmRuleDtoArgs{...}
 type BaselineAlarmRuleDtoInput interface {
 	pulumi.Input
 
@@ -58,11 +61,11 @@ func (i BaselineAlarmRuleDtoArgs) ToBaselineAlarmRuleDtoPtrOutputWithContext(ctx
 // BaselineAlarmRuleDtoPtrInput is an input type that accepts BaselineAlarmRuleDtoArgs, BaselineAlarmRuleDtoPtr and BaselineAlarmRuleDtoPtrOutput values.
 // You can construct a concrete instance of `BaselineAlarmRuleDtoPtrInput` via:
 //
-//          BaselineAlarmRuleDtoArgs{...}
+//	        BaselineAlarmRuleDtoArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type BaselineAlarmRuleDtoPtrInput interface {
 	pulumi.Input
 
@@ -198,7 +201,7 @@ type BaselineBaselineCreateAlarmRuleRequest struct {
 // BaselineBaselineCreateAlarmRuleRequestInput is an input type that accepts BaselineBaselineCreateAlarmRuleRequestArgs and BaselineBaselineCreateAlarmRuleRequestOutput values.
 // You can construct a concrete instance of `BaselineBaselineCreateAlarmRuleRequestInput` via:
 //
-//          BaselineBaselineCreateAlarmRuleRequestArgs{...}
+//	BaselineBaselineCreateAlarmRuleRequestArgs{...}
 type BaselineBaselineCreateAlarmRuleRequestInput interface {
 	pulumi.Input
 
@@ -258,11 +261,11 @@ func (i BaselineBaselineCreateAlarmRuleRequestArgs) ToBaselineBaselineCreateAlar
 // BaselineBaselineCreateAlarmRuleRequestPtrInput is an input type that accepts BaselineBaselineCreateAlarmRuleRequestArgs, BaselineBaselineCreateAlarmRuleRequestPtr and BaselineBaselineCreateAlarmRuleRequestPtrOutput values.
 // You can construct a concrete instance of `BaselineBaselineCreateAlarmRuleRequestPtrInput` via:
 //
-//          BaselineBaselineCreateAlarmRuleRequestArgs{...}
+//	        BaselineBaselineCreateAlarmRuleRequestArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type BaselineBaselineCreateAlarmRuleRequestPtrInput interface {
 	pulumi.Input
 
@@ -553,7 +556,7 @@ type BaselinePromiseTask struct {
 // BaselinePromiseTaskInput is an input type that accepts BaselinePromiseTaskArgs and BaselinePromiseTaskOutput values.
 // You can construct a concrete instance of `BaselinePromiseTaskInput` via:
 //
-//          BaselinePromiseTaskArgs{...}
+//	BaselinePromiseTaskArgs{...}
 type BaselinePromiseTaskInput interface {
 	pulumi.Input
 
@@ -595,7 +598,7 @@ func (i BaselinePromiseTaskArgs) ToBaselinePromiseTaskOutputWithContext(ctx cont
 // BaselinePromiseTaskArrayInput is an input type that accepts BaselinePromiseTaskArray and BaselinePromiseTaskArrayOutput values.
 // You can construct a concrete instance of `BaselinePromiseTaskArrayInput` via:
 //
-//          BaselinePromiseTaskArray{ BaselinePromiseTaskArgs{...} }
+//	BaselinePromiseTaskArray{ BaselinePromiseTaskArgs{...} }
 type BaselinePromiseTaskArrayInput interface {
 	pulumi.Input
 
@@ -701,7 +704,7 @@ type DqRuleCompareRule struct {
 // DqRuleCompareRuleInput is an input type that accepts DqRuleCompareRuleArgs and DqRuleCompareRuleOutput values.
 // You can construct a concrete instance of `DqRuleCompareRuleInput` via:
 //
-//          DqRuleCompareRuleArgs{...}
+//	DqRuleCompareRuleArgs{...}
 type DqRuleCompareRuleInput interface {
 	pulumi.Input
 
@@ -739,11 +742,11 @@ func (i DqRuleCompareRuleArgs) ToDqRuleCompareRulePtrOutputWithContext(ctx conte
 // DqRuleCompareRulePtrInput is an input type that accepts DqRuleCompareRuleArgs, DqRuleCompareRulePtr and DqRuleCompareRulePtrOutput values.
 // You can construct a concrete instance of `DqRuleCompareRulePtrInput` via:
 //
-//          DqRuleCompareRuleArgs{...}
+//	        DqRuleCompareRuleArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type DqRuleCompareRulePtrInput interface {
 	pulumi.Input
 
@@ -861,7 +864,7 @@ type DqRuleCompareRuleItem struct {
 // DqRuleCompareRuleItemInput is an input type that accepts DqRuleCompareRuleItemArgs and DqRuleCompareRuleItemOutput values.
 // You can construct a concrete instance of `DqRuleCompareRuleItemInput` via:
 //
-//          DqRuleCompareRuleItemArgs{...}
+//	DqRuleCompareRuleItemArgs{...}
 type DqRuleCompareRuleItemInput interface {
 	pulumi.Input
 
@@ -895,7 +898,7 @@ func (i DqRuleCompareRuleItemArgs) ToDqRuleCompareRuleItemOutputWithContext(ctx 
 // DqRuleCompareRuleItemArrayInput is an input type that accepts DqRuleCompareRuleItemArray and DqRuleCompareRuleItemArrayOutput values.
 // You can construct a concrete instance of `DqRuleCompareRuleItemArrayInput` via:
 //
-//          DqRuleCompareRuleItemArray{ DqRuleCompareRuleItemArgs{...} }
+//	DqRuleCompareRuleItemArray{ DqRuleCompareRuleItemArgs{...} }
 type DqRuleCompareRuleItemArrayInput interface {
 	pulumi.Input
 
@@ -981,7 +984,7 @@ type DqRuleCompareRuleItemValueList struct {
 // DqRuleCompareRuleItemValueListInput is an input type that accepts DqRuleCompareRuleItemValueListArgs and DqRuleCompareRuleItemValueListOutput values.
 // You can construct a concrete instance of `DqRuleCompareRuleItemValueListInput` via:
 //
-//          DqRuleCompareRuleItemValueListArgs{...}
+//	DqRuleCompareRuleItemValueListArgs{...}
 type DqRuleCompareRuleItemValueListInput interface {
 	pulumi.Input
 
@@ -1011,7 +1014,7 @@ func (i DqRuleCompareRuleItemValueListArgs) ToDqRuleCompareRuleItemValueListOutp
 // DqRuleCompareRuleItemValueListArrayInput is an input type that accepts DqRuleCompareRuleItemValueListArray and DqRuleCompareRuleItemValueListArrayOutput values.
 // You can construct a concrete instance of `DqRuleCompareRuleItemValueListArrayInput` via:
 //
-//          DqRuleCompareRuleItemValueListArray{ DqRuleCompareRuleItemValueListArgs{...} }
+//	DqRuleCompareRuleItemValueListArray{ DqRuleCompareRuleItemValueListArgs{...} }
 type DqRuleCompareRuleItemValueListArrayInput interface {
 	pulumi.Input
 
@@ -1087,7 +1090,7 @@ type DqRuleFieldConfig struct {
 // DqRuleFieldConfigInput is an input type that accepts DqRuleFieldConfigArgs and DqRuleFieldConfigOutput values.
 // You can construct a concrete instance of `DqRuleFieldConfigInput` via:
 //
-//          DqRuleFieldConfigArgs{...}
+//	DqRuleFieldConfigArgs{...}
 type DqRuleFieldConfigInput interface {
 	pulumi.Input
 
@@ -1125,11 +1128,11 @@ func (i DqRuleFieldConfigArgs) ToDqRuleFieldConfigPtrOutputWithContext(ctx conte
 // DqRuleFieldConfigPtrInput is an input type that accepts DqRuleFieldConfigArgs, DqRuleFieldConfigPtr and DqRuleFieldConfigPtrOutput values.
 // You can construct a concrete instance of `DqRuleFieldConfigPtrInput` via:
 //
-//          DqRuleFieldConfigArgs{...}
+//	        DqRuleFieldConfigArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type DqRuleFieldConfigPtrInput interface {
 	pulumi.Input
 
@@ -1251,7 +1254,7 @@ type DqRuleFieldConfigTableConfig struct {
 // DqRuleFieldConfigTableConfigInput is an input type that accepts DqRuleFieldConfigTableConfigArgs and DqRuleFieldConfigTableConfigOutput values.
 // You can construct a concrete instance of `DqRuleFieldConfigTableConfigInput` via:
 //
-//          DqRuleFieldConfigTableConfigArgs{...}
+//	DqRuleFieldConfigTableConfigArgs{...}
 type DqRuleFieldConfigTableConfigInput interface {
 	pulumi.Input
 
@@ -1289,7 +1292,7 @@ func (i DqRuleFieldConfigTableConfigArgs) ToDqRuleFieldConfigTableConfigOutputWi
 // DqRuleFieldConfigTableConfigArrayInput is an input type that accepts DqRuleFieldConfigTableConfigArray and DqRuleFieldConfigTableConfigArrayOutput values.
 // You can construct a concrete instance of `DqRuleFieldConfigTableConfigArrayInput` via:
 //
-//          DqRuleFieldConfigTableConfigArray{ DqRuleFieldConfigTableConfigArgs{...} }
+//	DqRuleFieldConfigTableConfigArray{ DqRuleFieldConfigTableConfigArgs{...} }
 type DqRuleFieldConfigTableConfigArrayInput interface {
 	pulumi.Input
 
@@ -1387,7 +1390,7 @@ type DqRuleFieldConfigTableConfigFieldConfig struct {
 // DqRuleFieldConfigTableConfigFieldConfigInput is an input type that accepts DqRuleFieldConfigTableConfigFieldConfigArgs and DqRuleFieldConfigTableConfigFieldConfigOutput values.
 // You can construct a concrete instance of `DqRuleFieldConfigTableConfigFieldConfigInput` via:
 //
-//          DqRuleFieldConfigTableConfigFieldConfigArgs{...}
+//	DqRuleFieldConfigTableConfigFieldConfigArgs{...}
 type DqRuleFieldConfigTableConfigFieldConfigInput interface {
 	pulumi.Input
 
@@ -1419,7 +1422,7 @@ func (i DqRuleFieldConfigTableConfigFieldConfigArgs) ToDqRuleFieldConfigTableCon
 // DqRuleFieldConfigTableConfigFieldConfigArrayInput is an input type that accepts DqRuleFieldConfigTableConfigFieldConfigArray and DqRuleFieldConfigTableConfigFieldConfigArrayOutput values.
 // You can construct a concrete instance of `DqRuleFieldConfigTableConfigFieldConfigArrayInput` via:
 //
-//          DqRuleFieldConfigTableConfigFieldConfigArray{ DqRuleFieldConfigTableConfigFieldConfigArgs{...} }
+//	DqRuleFieldConfigTableConfigFieldConfigArray{ DqRuleFieldConfigTableConfigFieldConfigArgs{...} }
 type DqRuleFieldConfigTableConfigFieldConfigArrayInput interface {
 	pulumi.Input
 
@@ -1502,7 +1505,7 @@ type DqRuleFieldConfigWhereConfig struct {
 // DqRuleFieldConfigWhereConfigInput is an input type that accepts DqRuleFieldConfigWhereConfigArgs and DqRuleFieldConfigWhereConfigOutput values.
 // You can construct a concrete instance of `DqRuleFieldConfigWhereConfigInput` via:
 //
-//          DqRuleFieldConfigWhereConfigArgs{...}
+//	DqRuleFieldConfigWhereConfigArgs{...}
 type DqRuleFieldConfigWhereConfigInput interface {
 	pulumi.Input
 
@@ -1534,7 +1537,7 @@ func (i DqRuleFieldConfigWhereConfigArgs) ToDqRuleFieldConfigWhereConfigOutputWi
 // DqRuleFieldConfigWhereConfigArrayInput is an input type that accepts DqRuleFieldConfigWhereConfigArray and DqRuleFieldConfigWhereConfigArrayOutput values.
 // You can construct a concrete instance of `DqRuleFieldConfigWhereConfigArrayInput` via:
 //
-//          DqRuleFieldConfigWhereConfigArray{ DqRuleFieldConfigWhereConfigArgs{...} }
+//	DqRuleFieldConfigWhereConfigArray{ DqRuleFieldConfigWhereConfigArgs{...} }
 type DqRuleFieldConfigWhereConfigArrayInput interface {
 	pulumi.Input
 
@@ -1621,7 +1624,7 @@ type FunctionResourceList struct {
 // FunctionResourceListInput is an input type that accepts FunctionResourceListArgs and FunctionResourceListOutput values.
 // You can construct a concrete instance of `FunctionResourceListInput` via:
 //
-//          FunctionResourceListArgs{...}
+//	FunctionResourceListArgs{...}
 type FunctionResourceListInput interface {
 	pulumi.Input
 
@@ -1657,7 +1660,7 @@ func (i FunctionResourceListArgs) ToFunctionResourceListOutputWithContext(ctx co
 // FunctionResourceListArrayInput is an input type that accepts FunctionResourceListArray and FunctionResourceListArrayOutput values.
 // You can construct a concrete instance of `FunctionResourceListArrayInput` via:
 //
-//          FunctionResourceListArray{ FunctionResourceListArgs{...} }
+//	FunctionResourceListArray{ FunctionResourceListArgs{...} }
 type FunctionResourceListArrayInput interface {
 	pulumi.Input
 
@@ -1826,7 +1829,7 @@ type IntegrationOfflineTaskTaskInfo struct {
 // IntegrationOfflineTaskTaskInfoInput is an input type that accepts IntegrationOfflineTaskTaskInfoArgs and IntegrationOfflineTaskTaskInfoOutput values.
 // You can construct a concrete instance of `IntegrationOfflineTaskTaskInfoInput` via:
 //
-//          IntegrationOfflineTaskTaskInfoArgs{...}
+//	IntegrationOfflineTaskTaskInfoArgs{...}
 type IntegrationOfflineTaskTaskInfoInput interface {
 	pulumi.Input
 
@@ -1942,11 +1945,11 @@ func (i IntegrationOfflineTaskTaskInfoArgs) ToIntegrationOfflineTaskTaskInfoPtrO
 // IntegrationOfflineTaskTaskInfoPtrInput is an input type that accepts IntegrationOfflineTaskTaskInfoArgs, IntegrationOfflineTaskTaskInfoPtr and IntegrationOfflineTaskTaskInfoPtrOutput values.
 // You can construct a concrete instance of `IntegrationOfflineTaskTaskInfoPtrInput` via:
 //
-//          IntegrationOfflineTaskTaskInfoArgs{...}
+//	        IntegrationOfflineTaskTaskInfoArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type IntegrationOfflineTaskTaskInfoPtrInput interface {
 	pulumi.Input
 
@@ -2649,7 +2652,7 @@ type IntegrationOfflineTaskTaskInfoConfig struct {
 // IntegrationOfflineTaskTaskInfoConfigInput is an input type that accepts IntegrationOfflineTaskTaskInfoConfigArgs and IntegrationOfflineTaskTaskInfoConfigOutput values.
 // You can construct a concrete instance of `IntegrationOfflineTaskTaskInfoConfigInput` via:
 //
-//          IntegrationOfflineTaskTaskInfoConfigArgs{...}
+//	IntegrationOfflineTaskTaskInfoConfigArgs{...}
 type IntegrationOfflineTaskTaskInfoConfigInput interface {
 	pulumi.Input
 
@@ -2679,7 +2682,7 @@ func (i IntegrationOfflineTaskTaskInfoConfigArgs) ToIntegrationOfflineTaskTaskIn
 // IntegrationOfflineTaskTaskInfoConfigArrayInput is an input type that accepts IntegrationOfflineTaskTaskInfoConfigArray and IntegrationOfflineTaskTaskInfoConfigArrayOutput values.
 // You can construct a concrete instance of `IntegrationOfflineTaskTaskInfoConfigArrayInput` via:
 //
-//          IntegrationOfflineTaskTaskInfoConfigArray{ IntegrationOfflineTaskTaskInfoConfigArgs{...} }
+//	IntegrationOfflineTaskTaskInfoConfigArray{ IntegrationOfflineTaskTaskInfoConfigArgs{...} }
 type IntegrationOfflineTaskTaskInfoConfigArrayInput interface {
 	pulumi.Input
 
@@ -2755,7 +2758,7 @@ type IntegrationOfflineTaskTaskInfoExecuteContext struct {
 // IntegrationOfflineTaskTaskInfoExecuteContextInput is an input type that accepts IntegrationOfflineTaskTaskInfoExecuteContextArgs and IntegrationOfflineTaskTaskInfoExecuteContextOutput values.
 // You can construct a concrete instance of `IntegrationOfflineTaskTaskInfoExecuteContextInput` via:
 //
-//          IntegrationOfflineTaskTaskInfoExecuteContextArgs{...}
+//	IntegrationOfflineTaskTaskInfoExecuteContextArgs{...}
 type IntegrationOfflineTaskTaskInfoExecuteContextInput interface {
 	pulumi.Input
 
@@ -2785,7 +2788,7 @@ func (i IntegrationOfflineTaskTaskInfoExecuteContextArgs) ToIntegrationOfflineTa
 // IntegrationOfflineTaskTaskInfoExecuteContextArrayInput is an input type that accepts IntegrationOfflineTaskTaskInfoExecuteContextArray and IntegrationOfflineTaskTaskInfoExecuteContextArrayOutput values.
 // You can construct a concrete instance of `IntegrationOfflineTaskTaskInfoExecuteContextArrayInput` via:
 //
-//          IntegrationOfflineTaskTaskInfoExecuteContextArray{ IntegrationOfflineTaskTaskInfoExecuteContextArgs{...} }
+//	IntegrationOfflineTaskTaskInfoExecuteContextArray{ IntegrationOfflineTaskTaskInfoExecuteContextArgs{...} }
 type IntegrationOfflineTaskTaskInfoExecuteContextArrayInput interface {
 	pulumi.Input
 
@@ -2861,7 +2864,7 @@ type IntegrationOfflineTaskTaskInfoExtConfig struct {
 // IntegrationOfflineTaskTaskInfoExtConfigInput is an input type that accepts IntegrationOfflineTaskTaskInfoExtConfigArgs and IntegrationOfflineTaskTaskInfoExtConfigOutput values.
 // You can construct a concrete instance of `IntegrationOfflineTaskTaskInfoExtConfigInput` via:
 //
-//          IntegrationOfflineTaskTaskInfoExtConfigArgs{...}
+//	IntegrationOfflineTaskTaskInfoExtConfigArgs{...}
 type IntegrationOfflineTaskTaskInfoExtConfigInput interface {
 	pulumi.Input
 
@@ -2891,7 +2894,7 @@ func (i IntegrationOfflineTaskTaskInfoExtConfigArgs) ToIntegrationOfflineTaskTas
 // IntegrationOfflineTaskTaskInfoExtConfigArrayInput is an input type that accepts IntegrationOfflineTaskTaskInfoExtConfigArray and IntegrationOfflineTaskTaskInfoExtConfigArrayOutput values.
 // You can construct a concrete instance of `IntegrationOfflineTaskTaskInfoExtConfigArrayInput` via:
 //
-//          IntegrationOfflineTaskTaskInfoExtConfigArray{ IntegrationOfflineTaskTaskInfoExtConfigArgs{...} }
+//	IntegrationOfflineTaskTaskInfoExtConfigArray{ IntegrationOfflineTaskTaskInfoExtConfigArgs{...} }
 type IntegrationOfflineTaskTaskInfoExtConfigArrayInput interface {
 	pulumi.Input
 
@@ -2973,7 +2976,7 @@ type IntegrationOfflineTaskTaskInfoMapping struct {
 // IntegrationOfflineTaskTaskInfoMappingInput is an input type that accepts IntegrationOfflineTaskTaskInfoMappingArgs and IntegrationOfflineTaskTaskInfoMappingOutput values.
 // You can construct a concrete instance of `IntegrationOfflineTaskTaskInfoMappingInput` via:
 //
-//          IntegrationOfflineTaskTaskInfoMappingArgs{...}
+//	IntegrationOfflineTaskTaskInfoMappingArgs{...}
 type IntegrationOfflineTaskTaskInfoMappingInput interface {
 	pulumi.Input
 
@@ -3009,7 +3012,7 @@ func (i IntegrationOfflineTaskTaskInfoMappingArgs) ToIntegrationOfflineTaskTaskI
 // IntegrationOfflineTaskTaskInfoMappingArrayInput is an input type that accepts IntegrationOfflineTaskTaskInfoMappingArray and IntegrationOfflineTaskTaskInfoMappingArrayOutput values.
 // You can construct a concrete instance of `IntegrationOfflineTaskTaskInfoMappingArrayInput` via:
 //
-//          IntegrationOfflineTaskTaskInfoMappingArray{ IntegrationOfflineTaskTaskInfoMappingArgs{...} }
+//	IntegrationOfflineTaskTaskInfoMappingArray{ IntegrationOfflineTaskTaskInfoMappingArgs{...} }
 type IntegrationOfflineTaskTaskInfoMappingArrayInput interface {
 	pulumi.Input
 
@@ -3106,7 +3109,7 @@ type IntegrationOfflineTaskTaskInfoMappingExtConfig struct {
 // IntegrationOfflineTaskTaskInfoMappingExtConfigInput is an input type that accepts IntegrationOfflineTaskTaskInfoMappingExtConfigArgs and IntegrationOfflineTaskTaskInfoMappingExtConfigOutput values.
 // You can construct a concrete instance of `IntegrationOfflineTaskTaskInfoMappingExtConfigInput` via:
 //
-//          IntegrationOfflineTaskTaskInfoMappingExtConfigArgs{...}
+//	IntegrationOfflineTaskTaskInfoMappingExtConfigArgs{...}
 type IntegrationOfflineTaskTaskInfoMappingExtConfigInput interface {
 	pulumi.Input
 
@@ -3136,7 +3139,7 @@ func (i IntegrationOfflineTaskTaskInfoMappingExtConfigArgs) ToIntegrationOffline
 // IntegrationOfflineTaskTaskInfoMappingExtConfigArrayInput is an input type that accepts IntegrationOfflineTaskTaskInfoMappingExtConfigArray and IntegrationOfflineTaskTaskInfoMappingExtConfigArrayOutput values.
 // You can construct a concrete instance of `IntegrationOfflineTaskTaskInfoMappingExtConfigArrayInput` via:
 //
-//          IntegrationOfflineTaskTaskInfoMappingExtConfigArray{ IntegrationOfflineTaskTaskInfoMappingExtConfigArgs{...} }
+//	IntegrationOfflineTaskTaskInfoMappingExtConfigArray{ IntegrationOfflineTaskTaskInfoMappingExtConfigArgs{...} }
 type IntegrationOfflineTaskTaskInfoMappingExtConfigArrayInput interface {
 	pulumi.Input
 
@@ -3212,7 +3215,7 @@ type IntegrationOfflineTaskTaskInfoMappingSchemaMapping struct {
 // IntegrationOfflineTaskTaskInfoMappingSchemaMappingInput is an input type that accepts IntegrationOfflineTaskTaskInfoMappingSchemaMappingArgs and IntegrationOfflineTaskTaskInfoMappingSchemaMappingOutput values.
 // You can construct a concrete instance of `IntegrationOfflineTaskTaskInfoMappingSchemaMappingInput` via:
 //
-//          IntegrationOfflineTaskTaskInfoMappingSchemaMappingArgs{...}
+//	IntegrationOfflineTaskTaskInfoMappingSchemaMappingArgs{...}
 type IntegrationOfflineTaskTaskInfoMappingSchemaMappingInput interface {
 	pulumi.Input
 
@@ -3242,7 +3245,7 @@ func (i IntegrationOfflineTaskTaskInfoMappingSchemaMappingArgs) ToIntegrationOff
 // IntegrationOfflineTaskTaskInfoMappingSchemaMappingArrayInput is an input type that accepts IntegrationOfflineTaskTaskInfoMappingSchemaMappingArray and IntegrationOfflineTaskTaskInfoMappingSchemaMappingArrayOutput values.
 // You can construct a concrete instance of `IntegrationOfflineTaskTaskInfoMappingSchemaMappingArrayInput` via:
 //
-//          IntegrationOfflineTaskTaskInfoMappingSchemaMappingArray{ IntegrationOfflineTaskTaskInfoMappingSchemaMappingArgs{...} }
+//	IntegrationOfflineTaskTaskInfoMappingSchemaMappingArray{ IntegrationOfflineTaskTaskInfoMappingSchemaMappingArgs{...} }
 type IntegrationOfflineTaskTaskInfoMappingSchemaMappingArrayInput interface {
 	pulumi.Input
 
@@ -3328,7 +3331,7 @@ type IntegrationOfflineTaskTaskInfoMappingSourceSchema struct {
 // IntegrationOfflineTaskTaskInfoMappingSourceSchemaInput is an input type that accepts IntegrationOfflineTaskTaskInfoMappingSourceSchemaArgs and IntegrationOfflineTaskTaskInfoMappingSourceSchemaOutput values.
 // You can construct a concrete instance of `IntegrationOfflineTaskTaskInfoMappingSourceSchemaInput` via:
 //
-//          IntegrationOfflineTaskTaskInfoMappingSourceSchemaArgs{...}
+//	IntegrationOfflineTaskTaskInfoMappingSourceSchemaArgs{...}
 type IntegrationOfflineTaskTaskInfoMappingSourceSchemaInput interface {
 	pulumi.Input
 
@@ -3368,7 +3371,7 @@ func (i IntegrationOfflineTaskTaskInfoMappingSourceSchemaArgs) ToIntegrationOffl
 // IntegrationOfflineTaskTaskInfoMappingSourceSchemaArrayInput is an input type that accepts IntegrationOfflineTaskTaskInfoMappingSourceSchemaArray and IntegrationOfflineTaskTaskInfoMappingSourceSchemaArrayOutput values.
 // You can construct a concrete instance of `IntegrationOfflineTaskTaskInfoMappingSourceSchemaArrayInput` via:
 //
-//          IntegrationOfflineTaskTaskInfoMappingSourceSchemaArray{ IntegrationOfflineTaskTaskInfoMappingSourceSchemaArgs{...} }
+//	IntegrationOfflineTaskTaskInfoMappingSourceSchemaArray{ IntegrationOfflineTaskTaskInfoMappingSourceSchemaArgs{...} }
 type IntegrationOfflineTaskTaskInfoMappingSourceSchemaArrayInput interface {
 	pulumi.Input
 
@@ -3471,7 +3474,7 @@ type IntegrationOfflineTaskTaskInfoMappingSourceSchemaProperty struct {
 // IntegrationOfflineTaskTaskInfoMappingSourceSchemaPropertyInput is an input type that accepts IntegrationOfflineTaskTaskInfoMappingSourceSchemaPropertyArgs and IntegrationOfflineTaskTaskInfoMappingSourceSchemaPropertyOutput values.
 // You can construct a concrete instance of `IntegrationOfflineTaskTaskInfoMappingSourceSchemaPropertyInput` via:
 //
-//          IntegrationOfflineTaskTaskInfoMappingSourceSchemaPropertyArgs{...}
+//	IntegrationOfflineTaskTaskInfoMappingSourceSchemaPropertyArgs{...}
 type IntegrationOfflineTaskTaskInfoMappingSourceSchemaPropertyInput interface {
 	pulumi.Input
 
@@ -3501,7 +3504,7 @@ func (i IntegrationOfflineTaskTaskInfoMappingSourceSchemaPropertyArgs) ToIntegra
 // IntegrationOfflineTaskTaskInfoMappingSourceSchemaPropertyArrayInput is an input type that accepts IntegrationOfflineTaskTaskInfoMappingSourceSchemaPropertyArray and IntegrationOfflineTaskTaskInfoMappingSourceSchemaPropertyArrayOutput values.
 // You can construct a concrete instance of `IntegrationOfflineTaskTaskInfoMappingSourceSchemaPropertyArrayInput` via:
 //
-//          IntegrationOfflineTaskTaskInfoMappingSourceSchemaPropertyArray{ IntegrationOfflineTaskTaskInfoMappingSourceSchemaPropertyArgs{...} }
+//	IntegrationOfflineTaskTaskInfoMappingSourceSchemaPropertyArray{ IntegrationOfflineTaskTaskInfoMappingSourceSchemaPropertyArgs{...} }
 type IntegrationOfflineTaskTaskInfoMappingSourceSchemaPropertyArrayInput interface {
 	pulumi.Input
 
@@ -3589,7 +3592,7 @@ type IntegrationOfflineTaskTaskInfoOfflineTaskAddEntity struct {
 // IntegrationOfflineTaskTaskInfoOfflineTaskAddEntityInput is an input type that accepts IntegrationOfflineTaskTaskInfoOfflineTaskAddEntityArgs and IntegrationOfflineTaskTaskInfoOfflineTaskAddEntityOutput values.
 // You can construct a concrete instance of `IntegrationOfflineTaskTaskInfoOfflineTaskAddEntityInput` via:
 //
-//          IntegrationOfflineTaskTaskInfoOfflineTaskAddEntityArgs{...}
+//	IntegrationOfflineTaskTaskInfoOfflineTaskAddEntityArgs{...}
 type IntegrationOfflineTaskTaskInfoOfflineTaskAddEntityInput interface {
 	pulumi.Input
 
@@ -3639,11 +3642,11 @@ func (i IntegrationOfflineTaskTaskInfoOfflineTaskAddEntityArgs) ToIntegrationOff
 // IntegrationOfflineTaskTaskInfoOfflineTaskAddEntityPtrInput is an input type that accepts IntegrationOfflineTaskTaskInfoOfflineTaskAddEntityArgs, IntegrationOfflineTaskTaskInfoOfflineTaskAddEntityPtr and IntegrationOfflineTaskTaskInfoOfflineTaskAddEntityPtrOutput values.
 // You can construct a concrete instance of `IntegrationOfflineTaskTaskInfoOfflineTaskAddEntityPtrInput` via:
 //
-//          IntegrationOfflineTaskTaskInfoOfflineTaskAddEntityArgs{...}
+//	        IntegrationOfflineTaskTaskInfoOfflineTaskAddEntityArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type IntegrationOfflineTaskTaskInfoOfflineTaskAddEntityPtrInput interface {
 	pulumi.Input
 
@@ -3921,7 +3924,7 @@ type IntegrationRealtimeTaskTaskInfo struct {
 // IntegrationRealtimeTaskTaskInfoInput is an input type that accepts IntegrationRealtimeTaskTaskInfoArgs and IntegrationRealtimeTaskTaskInfoOutput values.
 // You can construct a concrete instance of `IntegrationRealtimeTaskTaskInfoInput` via:
 //
-//          IntegrationRealtimeTaskTaskInfoArgs{...}
+//	IntegrationRealtimeTaskTaskInfoArgs{...}
 type IntegrationRealtimeTaskTaskInfoInput interface {
 	pulumi.Input
 
@@ -4033,11 +4036,11 @@ func (i IntegrationRealtimeTaskTaskInfoArgs) ToIntegrationRealtimeTaskTaskInfoPt
 // IntegrationRealtimeTaskTaskInfoPtrInput is an input type that accepts IntegrationRealtimeTaskTaskInfoArgs, IntegrationRealtimeTaskTaskInfoPtr and IntegrationRealtimeTaskTaskInfoPtrOutput values.
 // You can construct a concrete instance of `IntegrationRealtimeTaskTaskInfoPtrInput` via:
 //
-//          IntegrationRealtimeTaskTaskInfoArgs{...}
+//	        IntegrationRealtimeTaskTaskInfoArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type IntegrationRealtimeTaskTaskInfoPtrInput interface {
 	pulumi.Input
 
@@ -4710,7 +4713,7 @@ type IntegrationRealtimeTaskTaskInfoConfig struct {
 // IntegrationRealtimeTaskTaskInfoConfigInput is an input type that accepts IntegrationRealtimeTaskTaskInfoConfigArgs and IntegrationRealtimeTaskTaskInfoConfigOutput values.
 // You can construct a concrete instance of `IntegrationRealtimeTaskTaskInfoConfigInput` via:
 //
-//          IntegrationRealtimeTaskTaskInfoConfigArgs{...}
+//	IntegrationRealtimeTaskTaskInfoConfigArgs{...}
 type IntegrationRealtimeTaskTaskInfoConfigInput interface {
 	pulumi.Input
 
@@ -4740,7 +4743,7 @@ func (i IntegrationRealtimeTaskTaskInfoConfigArgs) ToIntegrationRealtimeTaskTask
 // IntegrationRealtimeTaskTaskInfoConfigArrayInput is an input type that accepts IntegrationRealtimeTaskTaskInfoConfigArray and IntegrationRealtimeTaskTaskInfoConfigArrayOutput values.
 // You can construct a concrete instance of `IntegrationRealtimeTaskTaskInfoConfigArrayInput` via:
 //
-//          IntegrationRealtimeTaskTaskInfoConfigArray{ IntegrationRealtimeTaskTaskInfoConfigArgs{...} }
+//	IntegrationRealtimeTaskTaskInfoConfigArray{ IntegrationRealtimeTaskTaskInfoConfigArgs{...} }
 type IntegrationRealtimeTaskTaskInfoConfigArrayInput interface {
 	pulumi.Input
 
@@ -4816,7 +4819,7 @@ type IntegrationRealtimeTaskTaskInfoExecuteContext struct {
 // IntegrationRealtimeTaskTaskInfoExecuteContextInput is an input type that accepts IntegrationRealtimeTaskTaskInfoExecuteContextArgs and IntegrationRealtimeTaskTaskInfoExecuteContextOutput values.
 // You can construct a concrete instance of `IntegrationRealtimeTaskTaskInfoExecuteContextInput` via:
 //
-//          IntegrationRealtimeTaskTaskInfoExecuteContextArgs{...}
+//	IntegrationRealtimeTaskTaskInfoExecuteContextArgs{...}
 type IntegrationRealtimeTaskTaskInfoExecuteContextInput interface {
 	pulumi.Input
 
@@ -4846,7 +4849,7 @@ func (i IntegrationRealtimeTaskTaskInfoExecuteContextArgs) ToIntegrationRealtime
 // IntegrationRealtimeTaskTaskInfoExecuteContextArrayInput is an input type that accepts IntegrationRealtimeTaskTaskInfoExecuteContextArray and IntegrationRealtimeTaskTaskInfoExecuteContextArrayOutput values.
 // You can construct a concrete instance of `IntegrationRealtimeTaskTaskInfoExecuteContextArrayInput` via:
 //
-//          IntegrationRealtimeTaskTaskInfoExecuteContextArray{ IntegrationRealtimeTaskTaskInfoExecuteContextArgs{...} }
+//	IntegrationRealtimeTaskTaskInfoExecuteContextArray{ IntegrationRealtimeTaskTaskInfoExecuteContextArgs{...} }
 type IntegrationRealtimeTaskTaskInfoExecuteContextArrayInput interface {
 	pulumi.Input
 
@@ -4922,7 +4925,7 @@ type IntegrationRealtimeTaskTaskInfoExtConfig struct {
 // IntegrationRealtimeTaskTaskInfoExtConfigInput is an input type that accepts IntegrationRealtimeTaskTaskInfoExtConfigArgs and IntegrationRealtimeTaskTaskInfoExtConfigOutput values.
 // You can construct a concrete instance of `IntegrationRealtimeTaskTaskInfoExtConfigInput` via:
 //
-//          IntegrationRealtimeTaskTaskInfoExtConfigArgs{...}
+//	IntegrationRealtimeTaskTaskInfoExtConfigArgs{...}
 type IntegrationRealtimeTaskTaskInfoExtConfigInput interface {
 	pulumi.Input
 
@@ -4952,7 +4955,7 @@ func (i IntegrationRealtimeTaskTaskInfoExtConfigArgs) ToIntegrationRealtimeTaskT
 // IntegrationRealtimeTaskTaskInfoExtConfigArrayInput is an input type that accepts IntegrationRealtimeTaskTaskInfoExtConfigArray and IntegrationRealtimeTaskTaskInfoExtConfigArrayOutput values.
 // You can construct a concrete instance of `IntegrationRealtimeTaskTaskInfoExtConfigArrayInput` via:
 //
-//          IntegrationRealtimeTaskTaskInfoExtConfigArray{ IntegrationRealtimeTaskTaskInfoExtConfigArgs{...} }
+//	IntegrationRealtimeTaskTaskInfoExtConfigArray{ IntegrationRealtimeTaskTaskInfoExtConfigArgs{...} }
 type IntegrationRealtimeTaskTaskInfoExtConfigArrayInput interface {
 	pulumi.Input
 
@@ -5034,7 +5037,7 @@ type IntegrationRealtimeTaskTaskInfoMapping struct {
 // IntegrationRealtimeTaskTaskInfoMappingInput is an input type that accepts IntegrationRealtimeTaskTaskInfoMappingArgs and IntegrationRealtimeTaskTaskInfoMappingOutput values.
 // You can construct a concrete instance of `IntegrationRealtimeTaskTaskInfoMappingInput` via:
 //
-//          IntegrationRealtimeTaskTaskInfoMappingArgs{...}
+//	IntegrationRealtimeTaskTaskInfoMappingArgs{...}
 type IntegrationRealtimeTaskTaskInfoMappingInput interface {
 	pulumi.Input
 
@@ -5070,7 +5073,7 @@ func (i IntegrationRealtimeTaskTaskInfoMappingArgs) ToIntegrationRealtimeTaskTas
 // IntegrationRealtimeTaskTaskInfoMappingArrayInput is an input type that accepts IntegrationRealtimeTaskTaskInfoMappingArray and IntegrationRealtimeTaskTaskInfoMappingArrayOutput values.
 // You can construct a concrete instance of `IntegrationRealtimeTaskTaskInfoMappingArrayInput` via:
 //
-//          IntegrationRealtimeTaskTaskInfoMappingArray{ IntegrationRealtimeTaskTaskInfoMappingArgs{...} }
+//	IntegrationRealtimeTaskTaskInfoMappingArray{ IntegrationRealtimeTaskTaskInfoMappingArgs{...} }
 type IntegrationRealtimeTaskTaskInfoMappingArrayInput interface {
 	pulumi.Input
 
@@ -5167,7 +5170,7 @@ type IntegrationRealtimeTaskTaskInfoMappingExtConfig struct {
 // IntegrationRealtimeTaskTaskInfoMappingExtConfigInput is an input type that accepts IntegrationRealtimeTaskTaskInfoMappingExtConfigArgs and IntegrationRealtimeTaskTaskInfoMappingExtConfigOutput values.
 // You can construct a concrete instance of `IntegrationRealtimeTaskTaskInfoMappingExtConfigInput` via:
 //
-//          IntegrationRealtimeTaskTaskInfoMappingExtConfigArgs{...}
+//	IntegrationRealtimeTaskTaskInfoMappingExtConfigArgs{...}
 type IntegrationRealtimeTaskTaskInfoMappingExtConfigInput interface {
 	pulumi.Input
 
@@ -5197,7 +5200,7 @@ func (i IntegrationRealtimeTaskTaskInfoMappingExtConfigArgs) ToIntegrationRealti
 // IntegrationRealtimeTaskTaskInfoMappingExtConfigArrayInput is an input type that accepts IntegrationRealtimeTaskTaskInfoMappingExtConfigArray and IntegrationRealtimeTaskTaskInfoMappingExtConfigArrayOutput values.
 // You can construct a concrete instance of `IntegrationRealtimeTaskTaskInfoMappingExtConfigArrayInput` via:
 //
-//          IntegrationRealtimeTaskTaskInfoMappingExtConfigArray{ IntegrationRealtimeTaskTaskInfoMappingExtConfigArgs{...} }
+//	IntegrationRealtimeTaskTaskInfoMappingExtConfigArray{ IntegrationRealtimeTaskTaskInfoMappingExtConfigArgs{...} }
 type IntegrationRealtimeTaskTaskInfoMappingExtConfigArrayInput interface {
 	pulumi.Input
 
@@ -5273,7 +5276,7 @@ type IntegrationRealtimeTaskTaskInfoMappingSchemaMapping struct {
 // IntegrationRealtimeTaskTaskInfoMappingSchemaMappingInput is an input type that accepts IntegrationRealtimeTaskTaskInfoMappingSchemaMappingArgs and IntegrationRealtimeTaskTaskInfoMappingSchemaMappingOutput values.
 // You can construct a concrete instance of `IntegrationRealtimeTaskTaskInfoMappingSchemaMappingInput` via:
 //
-//          IntegrationRealtimeTaskTaskInfoMappingSchemaMappingArgs{...}
+//	IntegrationRealtimeTaskTaskInfoMappingSchemaMappingArgs{...}
 type IntegrationRealtimeTaskTaskInfoMappingSchemaMappingInput interface {
 	pulumi.Input
 
@@ -5303,7 +5306,7 @@ func (i IntegrationRealtimeTaskTaskInfoMappingSchemaMappingArgs) ToIntegrationRe
 // IntegrationRealtimeTaskTaskInfoMappingSchemaMappingArrayInput is an input type that accepts IntegrationRealtimeTaskTaskInfoMappingSchemaMappingArray and IntegrationRealtimeTaskTaskInfoMappingSchemaMappingArrayOutput values.
 // You can construct a concrete instance of `IntegrationRealtimeTaskTaskInfoMappingSchemaMappingArrayInput` via:
 //
-//          IntegrationRealtimeTaskTaskInfoMappingSchemaMappingArray{ IntegrationRealtimeTaskTaskInfoMappingSchemaMappingArgs{...} }
+//	IntegrationRealtimeTaskTaskInfoMappingSchemaMappingArray{ IntegrationRealtimeTaskTaskInfoMappingSchemaMappingArgs{...} }
 type IntegrationRealtimeTaskTaskInfoMappingSchemaMappingArrayInput interface {
 	pulumi.Input
 
@@ -5389,7 +5392,7 @@ type IntegrationRealtimeTaskTaskInfoMappingSourceSchema struct {
 // IntegrationRealtimeTaskTaskInfoMappingSourceSchemaInput is an input type that accepts IntegrationRealtimeTaskTaskInfoMappingSourceSchemaArgs and IntegrationRealtimeTaskTaskInfoMappingSourceSchemaOutput values.
 // You can construct a concrete instance of `IntegrationRealtimeTaskTaskInfoMappingSourceSchemaInput` via:
 //
-//          IntegrationRealtimeTaskTaskInfoMappingSourceSchemaArgs{...}
+//	IntegrationRealtimeTaskTaskInfoMappingSourceSchemaArgs{...}
 type IntegrationRealtimeTaskTaskInfoMappingSourceSchemaInput interface {
 	pulumi.Input
 
@@ -5429,7 +5432,7 @@ func (i IntegrationRealtimeTaskTaskInfoMappingSourceSchemaArgs) ToIntegrationRea
 // IntegrationRealtimeTaskTaskInfoMappingSourceSchemaArrayInput is an input type that accepts IntegrationRealtimeTaskTaskInfoMappingSourceSchemaArray and IntegrationRealtimeTaskTaskInfoMappingSourceSchemaArrayOutput values.
 // You can construct a concrete instance of `IntegrationRealtimeTaskTaskInfoMappingSourceSchemaArrayInput` via:
 //
-//          IntegrationRealtimeTaskTaskInfoMappingSourceSchemaArray{ IntegrationRealtimeTaskTaskInfoMappingSourceSchemaArgs{...} }
+//	IntegrationRealtimeTaskTaskInfoMappingSourceSchemaArray{ IntegrationRealtimeTaskTaskInfoMappingSourceSchemaArgs{...} }
 type IntegrationRealtimeTaskTaskInfoMappingSourceSchemaArrayInput interface {
 	pulumi.Input
 
@@ -5532,7 +5535,7 @@ type IntegrationRealtimeTaskTaskInfoMappingSourceSchemaProperty struct {
 // IntegrationRealtimeTaskTaskInfoMappingSourceSchemaPropertyInput is an input type that accepts IntegrationRealtimeTaskTaskInfoMappingSourceSchemaPropertyArgs and IntegrationRealtimeTaskTaskInfoMappingSourceSchemaPropertyOutput values.
 // You can construct a concrete instance of `IntegrationRealtimeTaskTaskInfoMappingSourceSchemaPropertyInput` via:
 //
-//          IntegrationRealtimeTaskTaskInfoMappingSourceSchemaPropertyArgs{...}
+//	IntegrationRealtimeTaskTaskInfoMappingSourceSchemaPropertyArgs{...}
 type IntegrationRealtimeTaskTaskInfoMappingSourceSchemaPropertyInput interface {
 	pulumi.Input
 
@@ -5562,7 +5565,7 @@ func (i IntegrationRealtimeTaskTaskInfoMappingSourceSchemaPropertyArgs) ToIntegr
 // IntegrationRealtimeTaskTaskInfoMappingSourceSchemaPropertyArrayInput is an input type that accepts IntegrationRealtimeTaskTaskInfoMappingSourceSchemaPropertyArray and IntegrationRealtimeTaskTaskInfoMappingSourceSchemaPropertyArrayOutput values.
 // You can construct a concrete instance of `IntegrationRealtimeTaskTaskInfoMappingSourceSchemaPropertyArrayInput` via:
 //
-//          IntegrationRealtimeTaskTaskInfoMappingSourceSchemaPropertyArray{ IntegrationRealtimeTaskTaskInfoMappingSourceSchemaPropertyArgs{...} }
+//	IntegrationRealtimeTaskTaskInfoMappingSourceSchemaPropertyArray{ IntegrationRealtimeTaskTaskInfoMappingSourceSchemaPropertyArgs{...} }
 type IntegrationRealtimeTaskTaskInfoMappingSourceSchemaPropertyArrayInput interface {
 	pulumi.Input
 
@@ -5670,7 +5673,7 @@ type IntegrationRealtimeTaskTaskInfoNode struct {
 // IntegrationRealtimeTaskTaskInfoNodeInput is an input type that accepts IntegrationRealtimeTaskTaskInfoNodeArgs and IntegrationRealtimeTaskTaskInfoNodeOutput values.
 // You can construct a concrete instance of `IntegrationRealtimeTaskTaskInfoNodeInput` via:
 //
-//          IntegrationRealtimeTaskTaskInfoNodeArgs{...}
+//	IntegrationRealtimeTaskTaskInfoNodeArgs{...}
 type IntegrationRealtimeTaskTaskInfoNodeInput interface {
 	pulumi.Input
 
@@ -5732,7 +5735,7 @@ func (i IntegrationRealtimeTaskTaskInfoNodeArgs) ToIntegrationRealtimeTaskTaskIn
 // IntegrationRealtimeTaskTaskInfoNodeArrayInput is an input type that accepts IntegrationRealtimeTaskTaskInfoNodeArray and IntegrationRealtimeTaskTaskInfoNodeArrayOutput values.
 // You can construct a concrete instance of `IntegrationRealtimeTaskTaskInfoNodeArrayInput` via:
 //
-//          IntegrationRealtimeTaskTaskInfoNodeArray{ IntegrationRealtimeTaskTaskInfoNodeArgs{...} }
+//	IntegrationRealtimeTaskTaskInfoNodeArray{ IntegrationRealtimeTaskTaskInfoNodeArgs{...} }
 type IntegrationRealtimeTaskTaskInfoNodeArrayInput interface {
 	pulumi.Input
 
@@ -5896,7 +5899,7 @@ type IntegrationRealtimeTaskTaskInfoNodeConfig struct {
 // IntegrationRealtimeTaskTaskInfoNodeConfigInput is an input type that accepts IntegrationRealtimeTaskTaskInfoNodeConfigArgs and IntegrationRealtimeTaskTaskInfoNodeConfigOutput values.
 // You can construct a concrete instance of `IntegrationRealtimeTaskTaskInfoNodeConfigInput` via:
 //
-//          IntegrationRealtimeTaskTaskInfoNodeConfigArgs{...}
+//	IntegrationRealtimeTaskTaskInfoNodeConfigArgs{...}
 type IntegrationRealtimeTaskTaskInfoNodeConfigInput interface {
 	pulumi.Input
 
@@ -5926,7 +5929,7 @@ func (i IntegrationRealtimeTaskTaskInfoNodeConfigArgs) ToIntegrationRealtimeTask
 // IntegrationRealtimeTaskTaskInfoNodeConfigArrayInput is an input type that accepts IntegrationRealtimeTaskTaskInfoNodeConfigArray and IntegrationRealtimeTaskTaskInfoNodeConfigArrayOutput values.
 // You can construct a concrete instance of `IntegrationRealtimeTaskTaskInfoNodeConfigArrayInput` via:
 //
-//          IntegrationRealtimeTaskTaskInfoNodeConfigArray{ IntegrationRealtimeTaskTaskInfoNodeConfigArgs{...} }
+//	IntegrationRealtimeTaskTaskInfoNodeConfigArray{ IntegrationRealtimeTaskTaskInfoNodeConfigArgs{...} }
 type IntegrationRealtimeTaskTaskInfoNodeConfigArrayInput interface {
 	pulumi.Input
 
@@ -6002,7 +6005,7 @@ type IntegrationRealtimeTaskTaskInfoNodeExtConfig struct {
 // IntegrationRealtimeTaskTaskInfoNodeExtConfigInput is an input type that accepts IntegrationRealtimeTaskTaskInfoNodeExtConfigArgs and IntegrationRealtimeTaskTaskInfoNodeExtConfigOutput values.
 // You can construct a concrete instance of `IntegrationRealtimeTaskTaskInfoNodeExtConfigInput` via:
 //
-//          IntegrationRealtimeTaskTaskInfoNodeExtConfigArgs{...}
+//	IntegrationRealtimeTaskTaskInfoNodeExtConfigArgs{...}
 type IntegrationRealtimeTaskTaskInfoNodeExtConfigInput interface {
 	pulumi.Input
 
@@ -6032,7 +6035,7 @@ func (i IntegrationRealtimeTaskTaskInfoNodeExtConfigArgs) ToIntegrationRealtimeT
 // IntegrationRealtimeTaskTaskInfoNodeExtConfigArrayInput is an input type that accepts IntegrationRealtimeTaskTaskInfoNodeExtConfigArray and IntegrationRealtimeTaskTaskInfoNodeExtConfigArrayOutput values.
 // You can construct a concrete instance of `IntegrationRealtimeTaskTaskInfoNodeExtConfigArrayInput` via:
 //
-//          IntegrationRealtimeTaskTaskInfoNodeExtConfigArray{ IntegrationRealtimeTaskTaskInfoNodeExtConfigArgs{...} }
+//	IntegrationRealtimeTaskTaskInfoNodeExtConfigArray{ IntegrationRealtimeTaskTaskInfoNodeExtConfigArgs{...} }
 type IntegrationRealtimeTaskTaskInfoNodeExtConfigArrayInput interface {
 	pulumi.Input
 
@@ -6114,7 +6117,7 @@ type IntegrationRealtimeTaskTaskInfoNodeNodeMapping struct {
 // IntegrationRealtimeTaskTaskInfoNodeNodeMappingInput is an input type that accepts IntegrationRealtimeTaskTaskInfoNodeNodeMappingArgs and IntegrationRealtimeTaskTaskInfoNodeNodeMappingOutput values.
 // You can construct a concrete instance of `IntegrationRealtimeTaskTaskInfoNodeNodeMappingInput` via:
 //
-//          IntegrationRealtimeTaskTaskInfoNodeNodeMappingArgs{...}
+//	IntegrationRealtimeTaskTaskInfoNodeNodeMappingArgs{...}
 type IntegrationRealtimeTaskTaskInfoNodeNodeMappingInput interface {
 	pulumi.Input
 
@@ -6158,11 +6161,11 @@ func (i IntegrationRealtimeTaskTaskInfoNodeNodeMappingArgs) ToIntegrationRealtim
 // IntegrationRealtimeTaskTaskInfoNodeNodeMappingPtrInput is an input type that accepts IntegrationRealtimeTaskTaskInfoNodeNodeMappingArgs, IntegrationRealtimeTaskTaskInfoNodeNodeMappingPtr and IntegrationRealtimeTaskTaskInfoNodeNodeMappingPtrOutput values.
 // You can construct a concrete instance of `IntegrationRealtimeTaskTaskInfoNodeNodeMappingPtrInput` via:
 //
-//          IntegrationRealtimeTaskTaskInfoNodeNodeMappingArgs{...}
+//	        IntegrationRealtimeTaskTaskInfoNodeNodeMappingArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type IntegrationRealtimeTaskTaskInfoNodeNodeMappingPtrInput interface {
 	pulumi.Input
 
@@ -6327,7 +6330,7 @@ type IntegrationRealtimeTaskTaskInfoNodeNodeMappingExtConfig struct {
 // IntegrationRealtimeTaskTaskInfoNodeNodeMappingExtConfigInput is an input type that accepts IntegrationRealtimeTaskTaskInfoNodeNodeMappingExtConfigArgs and IntegrationRealtimeTaskTaskInfoNodeNodeMappingExtConfigOutput values.
 // You can construct a concrete instance of `IntegrationRealtimeTaskTaskInfoNodeNodeMappingExtConfigInput` via:
 //
-//          IntegrationRealtimeTaskTaskInfoNodeNodeMappingExtConfigArgs{...}
+//	IntegrationRealtimeTaskTaskInfoNodeNodeMappingExtConfigArgs{...}
 type IntegrationRealtimeTaskTaskInfoNodeNodeMappingExtConfigInput interface {
 	pulumi.Input
 
@@ -6357,7 +6360,7 @@ func (i IntegrationRealtimeTaskTaskInfoNodeNodeMappingExtConfigArgs) ToIntegrati
 // IntegrationRealtimeTaskTaskInfoNodeNodeMappingExtConfigArrayInput is an input type that accepts IntegrationRealtimeTaskTaskInfoNodeNodeMappingExtConfigArray and IntegrationRealtimeTaskTaskInfoNodeNodeMappingExtConfigArrayOutput values.
 // You can construct a concrete instance of `IntegrationRealtimeTaskTaskInfoNodeNodeMappingExtConfigArrayInput` via:
 //
-//          IntegrationRealtimeTaskTaskInfoNodeNodeMappingExtConfigArray{ IntegrationRealtimeTaskTaskInfoNodeNodeMappingExtConfigArgs{...} }
+//	IntegrationRealtimeTaskTaskInfoNodeNodeMappingExtConfigArray{ IntegrationRealtimeTaskTaskInfoNodeNodeMappingExtConfigArgs{...} }
 type IntegrationRealtimeTaskTaskInfoNodeNodeMappingExtConfigArrayInput interface {
 	pulumi.Input
 
@@ -6433,7 +6436,7 @@ type IntegrationRealtimeTaskTaskInfoNodeNodeMappingSchemaMapping struct {
 // IntegrationRealtimeTaskTaskInfoNodeNodeMappingSchemaMappingInput is an input type that accepts IntegrationRealtimeTaskTaskInfoNodeNodeMappingSchemaMappingArgs and IntegrationRealtimeTaskTaskInfoNodeNodeMappingSchemaMappingOutput values.
 // You can construct a concrete instance of `IntegrationRealtimeTaskTaskInfoNodeNodeMappingSchemaMappingInput` via:
 //
-//          IntegrationRealtimeTaskTaskInfoNodeNodeMappingSchemaMappingArgs{...}
+//	IntegrationRealtimeTaskTaskInfoNodeNodeMappingSchemaMappingArgs{...}
 type IntegrationRealtimeTaskTaskInfoNodeNodeMappingSchemaMappingInput interface {
 	pulumi.Input
 
@@ -6463,7 +6466,7 @@ func (i IntegrationRealtimeTaskTaskInfoNodeNodeMappingSchemaMappingArgs) ToInteg
 // IntegrationRealtimeTaskTaskInfoNodeNodeMappingSchemaMappingArrayInput is an input type that accepts IntegrationRealtimeTaskTaskInfoNodeNodeMappingSchemaMappingArray and IntegrationRealtimeTaskTaskInfoNodeNodeMappingSchemaMappingArrayOutput values.
 // You can construct a concrete instance of `IntegrationRealtimeTaskTaskInfoNodeNodeMappingSchemaMappingArrayInput` via:
 //
-//          IntegrationRealtimeTaskTaskInfoNodeNodeMappingSchemaMappingArray{ IntegrationRealtimeTaskTaskInfoNodeNodeMappingSchemaMappingArgs{...} }
+//	IntegrationRealtimeTaskTaskInfoNodeNodeMappingSchemaMappingArray{ IntegrationRealtimeTaskTaskInfoNodeNodeMappingSchemaMappingArgs{...} }
 type IntegrationRealtimeTaskTaskInfoNodeNodeMappingSchemaMappingArrayInput interface {
 	pulumi.Input
 
@@ -6549,7 +6552,7 @@ type IntegrationRealtimeTaskTaskInfoNodeNodeMappingSourceSchema struct {
 // IntegrationRealtimeTaskTaskInfoNodeNodeMappingSourceSchemaInput is an input type that accepts IntegrationRealtimeTaskTaskInfoNodeNodeMappingSourceSchemaArgs and IntegrationRealtimeTaskTaskInfoNodeNodeMappingSourceSchemaOutput values.
 // You can construct a concrete instance of `IntegrationRealtimeTaskTaskInfoNodeNodeMappingSourceSchemaInput` via:
 //
-//          IntegrationRealtimeTaskTaskInfoNodeNodeMappingSourceSchemaArgs{...}
+//	IntegrationRealtimeTaskTaskInfoNodeNodeMappingSourceSchemaArgs{...}
 type IntegrationRealtimeTaskTaskInfoNodeNodeMappingSourceSchemaInput interface {
 	pulumi.Input
 
@@ -6589,7 +6592,7 @@ func (i IntegrationRealtimeTaskTaskInfoNodeNodeMappingSourceSchemaArgs) ToIntegr
 // IntegrationRealtimeTaskTaskInfoNodeNodeMappingSourceSchemaArrayInput is an input type that accepts IntegrationRealtimeTaskTaskInfoNodeNodeMappingSourceSchemaArray and IntegrationRealtimeTaskTaskInfoNodeNodeMappingSourceSchemaArrayOutput values.
 // You can construct a concrete instance of `IntegrationRealtimeTaskTaskInfoNodeNodeMappingSourceSchemaArrayInput` via:
 //
-//          IntegrationRealtimeTaskTaskInfoNodeNodeMappingSourceSchemaArray{ IntegrationRealtimeTaskTaskInfoNodeNodeMappingSourceSchemaArgs{...} }
+//	IntegrationRealtimeTaskTaskInfoNodeNodeMappingSourceSchemaArray{ IntegrationRealtimeTaskTaskInfoNodeNodeMappingSourceSchemaArgs{...} }
 type IntegrationRealtimeTaskTaskInfoNodeNodeMappingSourceSchemaArrayInput interface {
 	pulumi.Input
 
@@ -6692,7 +6695,7 @@ type IntegrationRealtimeTaskTaskInfoNodeNodeMappingSourceSchemaProperty struct {
 // IntegrationRealtimeTaskTaskInfoNodeNodeMappingSourceSchemaPropertyInput is an input type that accepts IntegrationRealtimeTaskTaskInfoNodeNodeMappingSourceSchemaPropertyArgs and IntegrationRealtimeTaskTaskInfoNodeNodeMappingSourceSchemaPropertyOutput values.
 // You can construct a concrete instance of `IntegrationRealtimeTaskTaskInfoNodeNodeMappingSourceSchemaPropertyInput` via:
 //
-//          IntegrationRealtimeTaskTaskInfoNodeNodeMappingSourceSchemaPropertyArgs{...}
+//	IntegrationRealtimeTaskTaskInfoNodeNodeMappingSourceSchemaPropertyArgs{...}
 type IntegrationRealtimeTaskTaskInfoNodeNodeMappingSourceSchemaPropertyInput interface {
 	pulumi.Input
 
@@ -6722,7 +6725,7 @@ func (i IntegrationRealtimeTaskTaskInfoNodeNodeMappingSourceSchemaPropertyArgs) 
 // IntegrationRealtimeTaskTaskInfoNodeNodeMappingSourceSchemaPropertyArrayInput is an input type that accepts IntegrationRealtimeTaskTaskInfoNodeNodeMappingSourceSchemaPropertyArray and IntegrationRealtimeTaskTaskInfoNodeNodeMappingSourceSchemaPropertyArrayOutput values.
 // You can construct a concrete instance of `IntegrationRealtimeTaskTaskInfoNodeNodeMappingSourceSchemaPropertyArrayInput` via:
 //
-//          IntegrationRealtimeTaskTaskInfoNodeNodeMappingSourceSchemaPropertyArray{ IntegrationRealtimeTaskTaskInfoNodeNodeMappingSourceSchemaPropertyArgs{...} }
+//	IntegrationRealtimeTaskTaskInfoNodeNodeMappingSourceSchemaPropertyArray{ IntegrationRealtimeTaskTaskInfoNodeNodeMappingSourceSchemaPropertyArgs{...} }
 type IntegrationRealtimeTaskTaskInfoNodeNodeMappingSourceSchemaPropertyArrayInput interface {
 	pulumi.Input
 
@@ -6808,7 +6811,7 @@ type IntegrationRealtimeTaskTaskInfoNodeSchema struct {
 // IntegrationRealtimeTaskTaskInfoNodeSchemaInput is an input type that accepts IntegrationRealtimeTaskTaskInfoNodeSchemaArgs and IntegrationRealtimeTaskTaskInfoNodeSchemaOutput values.
 // You can construct a concrete instance of `IntegrationRealtimeTaskTaskInfoNodeSchemaInput` via:
 //
-//          IntegrationRealtimeTaskTaskInfoNodeSchemaArgs{...}
+//	IntegrationRealtimeTaskTaskInfoNodeSchemaArgs{...}
 type IntegrationRealtimeTaskTaskInfoNodeSchemaInput interface {
 	pulumi.Input
 
@@ -6848,7 +6851,7 @@ func (i IntegrationRealtimeTaskTaskInfoNodeSchemaArgs) ToIntegrationRealtimeTask
 // IntegrationRealtimeTaskTaskInfoNodeSchemaArrayInput is an input type that accepts IntegrationRealtimeTaskTaskInfoNodeSchemaArray and IntegrationRealtimeTaskTaskInfoNodeSchemaArrayOutput values.
 // You can construct a concrete instance of `IntegrationRealtimeTaskTaskInfoNodeSchemaArrayInput` via:
 //
-//          IntegrationRealtimeTaskTaskInfoNodeSchemaArray{ IntegrationRealtimeTaskTaskInfoNodeSchemaArgs{...} }
+//	IntegrationRealtimeTaskTaskInfoNodeSchemaArray{ IntegrationRealtimeTaskTaskInfoNodeSchemaArgs{...} }
 type IntegrationRealtimeTaskTaskInfoNodeSchemaArrayInput interface {
 	pulumi.Input
 
@@ -6951,7 +6954,7 @@ type IntegrationRealtimeTaskTaskInfoNodeSchemaProperty struct {
 // IntegrationRealtimeTaskTaskInfoNodeSchemaPropertyInput is an input type that accepts IntegrationRealtimeTaskTaskInfoNodeSchemaPropertyArgs and IntegrationRealtimeTaskTaskInfoNodeSchemaPropertyOutput values.
 // You can construct a concrete instance of `IntegrationRealtimeTaskTaskInfoNodeSchemaPropertyInput` via:
 //
-//          IntegrationRealtimeTaskTaskInfoNodeSchemaPropertyArgs{...}
+//	IntegrationRealtimeTaskTaskInfoNodeSchemaPropertyArgs{...}
 type IntegrationRealtimeTaskTaskInfoNodeSchemaPropertyInput interface {
 	pulumi.Input
 
@@ -6981,7 +6984,7 @@ func (i IntegrationRealtimeTaskTaskInfoNodeSchemaPropertyArgs) ToIntegrationReal
 // IntegrationRealtimeTaskTaskInfoNodeSchemaPropertyArrayInput is an input type that accepts IntegrationRealtimeTaskTaskInfoNodeSchemaPropertyArray and IntegrationRealtimeTaskTaskInfoNodeSchemaPropertyArrayOutput values.
 // You can construct a concrete instance of `IntegrationRealtimeTaskTaskInfoNodeSchemaPropertyArrayInput` via:
 //
-//          IntegrationRealtimeTaskTaskInfoNodeSchemaPropertyArray{ IntegrationRealtimeTaskTaskInfoNodeSchemaPropertyArgs{...} }
+//	IntegrationRealtimeTaskTaskInfoNodeSchemaPropertyArray{ IntegrationRealtimeTaskTaskInfoNodeSchemaPropertyArgs{...} }
 type IntegrationRealtimeTaskTaskInfoNodeSchemaPropertyArrayInput interface {
 	pulumi.Input
 
@@ -7075,7 +7078,7 @@ type IntegrationTaskNodeNodeInfo struct {
 // IntegrationTaskNodeNodeInfoInput is an input type that accepts IntegrationTaskNodeNodeInfoArgs and IntegrationTaskNodeNodeInfoOutput values.
 // You can construct a concrete instance of `IntegrationTaskNodeNodeInfoInput` via:
 //
-//          IntegrationTaskNodeNodeInfoArgs{...}
+//	IntegrationTaskNodeNodeInfoArgs{...}
 type IntegrationTaskNodeNodeInfoInput interface {
 	pulumi.Input
 
@@ -7131,11 +7134,11 @@ func (i IntegrationTaskNodeNodeInfoArgs) ToIntegrationTaskNodeNodeInfoPtrOutputW
 // IntegrationTaskNodeNodeInfoPtrInput is an input type that accepts IntegrationTaskNodeNodeInfoArgs, IntegrationTaskNodeNodeInfoPtr and IntegrationTaskNodeNodeInfoPtrOutput values.
 // You can construct a concrete instance of `IntegrationTaskNodeNodeInfoPtrInput` via:
 //
-//          IntegrationTaskNodeNodeInfoArgs{...}
+//	        IntegrationTaskNodeNodeInfoArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type IntegrationTaskNodeNodeInfoPtrInput interface {
 	pulumi.Input
 
@@ -7384,7 +7387,7 @@ type IntegrationTaskNodeNodeInfoConfig struct {
 // IntegrationTaskNodeNodeInfoConfigInput is an input type that accepts IntegrationTaskNodeNodeInfoConfigArgs and IntegrationTaskNodeNodeInfoConfigOutput values.
 // You can construct a concrete instance of `IntegrationTaskNodeNodeInfoConfigInput` via:
 //
-//          IntegrationTaskNodeNodeInfoConfigArgs{...}
+//	IntegrationTaskNodeNodeInfoConfigArgs{...}
 type IntegrationTaskNodeNodeInfoConfigInput interface {
 	pulumi.Input
 
@@ -7414,7 +7417,7 @@ func (i IntegrationTaskNodeNodeInfoConfigArgs) ToIntegrationTaskNodeNodeInfoConf
 // IntegrationTaskNodeNodeInfoConfigArrayInput is an input type that accepts IntegrationTaskNodeNodeInfoConfigArray and IntegrationTaskNodeNodeInfoConfigArrayOutput values.
 // You can construct a concrete instance of `IntegrationTaskNodeNodeInfoConfigArrayInput` via:
 //
-//          IntegrationTaskNodeNodeInfoConfigArray{ IntegrationTaskNodeNodeInfoConfigArgs{...} }
+//	IntegrationTaskNodeNodeInfoConfigArray{ IntegrationTaskNodeNodeInfoConfigArgs{...} }
 type IntegrationTaskNodeNodeInfoConfigArrayInput interface {
 	pulumi.Input
 
@@ -7490,7 +7493,7 @@ type IntegrationTaskNodeNodeInfoExtConfig struct {
 // IntegrationTaskNodeNodeInfoExtConfigInput is an input type that accepts IntegrationTaskNodeNodeInfoExtConfigArgs and IntegrationTaskNodeNodeInfoExtConfigOutput values.
 // You can construct a concrete instance of `IntegrationTaskNodeNodeInfoExtConfigInput` via:
 //
-//          IntegrationTaskNodeNodeInfoExtConfigArgs{...}
+//	IntegrationTaskNodeNodeInfoExtConfigArgs{...}
 type IntegrationTaskNodeNodeInfoExtConfigInput interface {
 	pulumi.Input
 
@@ -7520,7 +7523,7 @@ func (i IntegrationTaskNodeNodeInfoExtConfigArgs) ToIntegrationTaskNodeNodeInfoE
 // IntegrationTaskNodeNodeInfoExtConfigArrayInput is an input type that accepts IntegrationTaskNodeNodeInfoExtConfigArray and IntegrationTaskNodeNodeInfoExtConfigArrayOutput values.
 // You can construct a concrete instance of `IntegrationTaskNodeNodeInfoExtConfigArrayInput` via:
 //
-//          IntegrationTaskNodeNodeInfoExtConfigArray{ IntegrationTaskNodeNodeInfoExtConfigArgs{...} }
+//	IntegrationTaskNodeNodeInfoExtConfigArray{ IntegrationTaskNodeNodeInfoExtConfigArgs{...} }
 type IntegrationTaskNodeNodeInfoExtConfigArrayInput interface {
 	pulumi.Input
 
@@ -7602,7 +7605,7 @@ type IntegrationTaskNodeNodeInfoNodeMapping struct {
 // IntegrationTaskNodeNodeInfoNodeMappingInput is an input type that accepts IntegrationTaskNodeNodeInfoNodeMappingArgs and IntegrationTaskNodeNodeInfoNodeMappingOutput values.
 // You can construct a concrete instance of `IntegrationTaskNodeNodeInfoNodeMappingInput` via:
 //
-//          IntegrationTaskNodeNodeInfoNodeMappingArgs{...}
+//	IntegrationTaskNodeNodeInfoNodeMappingArgs{...}
 type IntegrationTaskNodeNodeInfoNodeMappingInput interface {
 	pulumi.Input
 
@@ -7646,11 +7649,11 @@ func (i IntegrationTaskNodeNodeInfoNodeMappingArgs) ToIntegrationTaskNodeNodeInf
 // IntegrationTaskNodeNodeInfoNodeMappingPtrInput is an input type that accepts IntegrationTaskNodeNodeInfoNodeMappingArgs, IntegrationTaskNodeNodeInfoNodeMappingPtr and IntegrationTaskNodeNodeInfoNodeMappingPtrOutput values.
 // You can construct a concrete instance of `IntegrationTaskNodeNodeInfoNodeMappingPtrInput` via:
 //
-//          IntegrationTaskNodeNodeInfoNodeMappingArgs{...}
+//	        IntegrationTaskNodeNodeInfoNodeMappingArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type IntegrationTaskNodeNodeInfoNodeMappingPtrInput interface {
 	pulumi.Input
 
@@ -7815,7 +7818,7 @@ type IntegrationTaskNodeNodeInfoNodeMappingExtConfig struct {
 // IntegrationTaskNodeNodeInfoNodeMappingExtConfigInput is an input type that accepts IntegrationTaskNodeNodeInfoNodeMappingExtConfigArgs and IntegrationTaskNodeNodeInfoNodeMappingExtConfigOutput values.
 // You can construct a concrete instance of `IntegrationTaskNodeNodeInfoNodeMappingExtConfigInput` via:
 //
-//          IntegrationTaskNodeNodeInfoNodeMappingExtConfigArgs{...}
+//	IntegrationTaskNodeNodeInfoNodeMappingExtConfigArgs{...}
 type IntegrationTaskNodeNodeInfoNodeMappingExtConfigInput interface {
 	pulumi.Input
 
@@ -7845,7 +7848,7 @@ func (i IntegrationTaskNodeNodeInfoNodeMappingExtConfigArgs) ToIntegrationTaskNo
 // IntegrationTaskNodeNodeInfoNodeMappingExtConfigArrayInput is an input type that accepts IntegrationTaskNodeNodeInfoNodeMappingExtConfigArray and IntegrationTaskNodeNodeInfoNodeMappingExtConfigArrayOutput values.
 // You can construct a concrete instance of `IntegrationTaskNodeNodeInfoNodeMappingExtConfigArrayInput` via:
 //
-//          IntegrationTaskNodeNodeInfoNodeMappingExtConfigArray{ IntegrationTaskNodeNodeInfoNodeMappingExtConfigArgs{...} }
+//	IntegrationTaskNodeNodeInfoNodeMappingExtConfigArray{ IntegrationTaskNodeNodeInfoNodeMappingExtConfigArgs{...} }
 type IntegrationTaskNodeNodeInfoNodeMappingExtConfigArrayInput interface {
 	pulumi.Input
 
@@ -7921,7 +7924,7 @@ type IntegrationTaskNodeNodeInfoNodeMappingSchemaMapping struct {
 // IntegrationTaskNodeNodeInfoNodeMappingSchemaMappingInput is an input type that accepts IntegrationTaskNodeNodeInfoNodeMappingSchemaMappingArgs and IntegrationTaskNodeNodeInfoNodeMappingSchemaMappingOutput values.
 // You can construct a concrete instance of `IntegrationTaskNodeNodeInfoNodeMappingSchemaMappingInput` via:
 //
-//          IntegrationTaskNodeNodeInfoNodeMappingSchemaMappingArgs{...}
+//	IntegrationTaskNodeNodeInfoNodeMappingSchemaMappingArgs{...}
 type IntegrationTaskNodeNodeInfoNodeMappingSchemaMappingInput interface {
 	pulumi.Input
 
@@ -7951,7 +7954,7 @@ func (i IntegrationTaskNodeNodeInfoNodeMappingSchemaMappingArgs) ToIntegrationTa
 // IntegrationTaskNodeNodeInfoNodeMappingSchemaMappingArrayInput is an input type that accepts IntegrationTaskNodeNodeInfoNodeMappingSchemaMappingArray and IntegrationTaskNodeNodeInfoNodeMappingSchemaMappingArrayOutput values.
 // You can construct a concrete instance of `IntegrationTaskNodeNodeInfoNodeMappingSchemaMappingArrayInput` via:
 //
-//          IntegrationTaskNodeNodeInfoNodeMappingSchemaMappingArray{ IntegrationTaskNodeNodeInfoNodeMappingSchemaMappingArgs{...} }
+//	IntegrationTaskNodeNodeInfoNodeMappingSchemaMappingArray{ IntegrationTaskNodeNodeInfoNodeMappingSchemaMappingArgs{...} }
 type IntegrationTaskNodeNodeInfoNodeMappingSchemaMappingArrayInput interface {
 	pulumi.Input
 
@@ -8037,7 +8040,7 @@ type IntegrationTaskNodeNodeInfoNodeMappingSourceSchema struct {
 // IntegrationTaskNodeNodeInfoNodeMappingSourceSchemaInput is an input type that accepts IntegrationTaskNodeNodeInfoNodeMappingSourceSchemaArgs and IntegrationTaskNodeNodeInfoNodeMappingSourceSchemaOutput values.
 // You can construct a concrete instance of `IntegrationTaskNodeNodeInfoNodeMappingSourceSchemaInput` via:
 //
-//          IntegrationTaskNodeNodeInfoNodeMappingSourceSchemaArgs{...}
+//	IntegrationTaskNodeNodeInfoNodeMappingSourceSchemaArgs{...}
 type IntegrationTaskNodeNodeInfoNodeMappingSourceSchemaInput interface {
 	pulumi.Input
 
@@ -8077,7 +8080,7 @@ func (i IntegrationTaskNodeNodeInfoNodeMappingSourceSchemaArgs) ToIntegrationTas
 // IntegrationTaskNodeNodeInfoNodeMappingSourceSchemaArrayInput is an input type that accepts IntegrationTaskNodeNodeInfoNodeMappingSourceSchemaArray and IntegrationTaskNodeNodeInfoNodeMappingSourceSchemaArrayOutput values.
 // You can construct a concrete instance of `IntegrationTaskNodeNodeInfoNodeMappingSourceSchemaArrayInput` via:
 //
-//          IntegrationTaskNodeNodeInfoNodeMappingSourceSchemaArray{ IntegrationTaskNodeNodeInfoNodeMappingSourceSchemaArgs{...} }
+//	IntegrationTaskNodeNodeInfoNodeMappingSourceSchemaArray{ IntegrationTaskNodeNodeInfoNodeMappingSourceSchemaArgs{...} }
 type IntegrationTaskNodeNodeInfoNodeMappingSourceSchemaArrayInput interface {
 	pulumi.Input
 
@@ -8180,7 +8183,7 @@ type IntegrationTaskNodeNodeInfoNodeMappingSourceSchemaProperty struct {
 // IntegrationTaskNodeNodeInfoNodeMappingSourceSchemaPropertyInput is an input type that accepts IntegrationTaskNodeNodeInfoNodeMappingSourceSchemaPropertyArgs and IntegrationTaskNodeNodeInfoNodeMappingSourceSchemaPropertyOutput values.
 // You can construct a concrete instance of `IntegrationTaskNodeNodeInfoNodeMappingSourceSchemaPropertyInput` via:
 //
-//          IntegrationTaskNodeNodeInfoNodeMappingSourceSchemaPropertyArgs{...}
+//	IntegrationTaskNodeNodeInfoNodeMappingSourceSchemaPropertyArgs{...}
 type IntegrationTaskNodeNodeInfoNodeMappingSourceSchemaPropertyInput interface {
 	pulumi.Input
 
@@ -8210,7 +8213,7 @@ func (i IntegrationTaskNodeNodeInfoNodeMappingSourceSchemaPropertyArgs) ToIntegr
 // IntegrationTaskNodeNodeInfoNodeMappingSourceSchemaPropertyArrayInput is an input type that accepts IntegrationTaskNodeNodeInfoNodeMappingSourceSchemaPropertyArray and IntegrationTaskNodeNodeInfoNodeMappingSourceSchemaPropertyArrayOutput values.
 // You can construct a concrete instance of `IntegrationTaskNodeNodeInfoNodeMappingSourceSchemaPropertyArrayInput` via:
 //
-//          IntegrationTaskNodeNodeInfoNodeMappingSourceSchemaPropertyArray{ IntegrationTaskNodeNodeInfoNodeMappingSourceSchemaPropertyArgs{...} }
+//	IntegrationTaskNodeNodeInfoNodeMappingSourceSchemaPropertyArray{ IntegrationTaskNodeNodeInfoNodeMappingSourceSchemaPropertyArgs{...} }
 type IntegrationTaskNodeNodeInfoNodeMappingSourceSchemaPropertyArrayInput interface {
 	pulumi.Input
 
@@ -8296,7 +8299,7 @@ type IntegrationTaskNodeNodeInfoSchema struct {
 // IntegrationTaskNodeNodeInfoSchemaInput is an input type that accepts IntegrationTaskNodeNodeInfoSchemaArgs and IntegrationTaskNodeNodeInfoSchemaOutput values.
 // You can construct a concrete instance of `IntegrationTaskNodeNodeInfoSchemaInput` via:
 //
-//          IntegrationTaskNodeNodeInfoSchemaArgs{...}
+//	IntegrationTaskNodeNodeInfoSchemaArgs{...}
 type IntegrationTaskNodeNodeInfoSchemaInput interface {
 	pulumi.Input
 
@@ -8336,7 +8339,7 @@ func (i IntegrationTaskNodeNodeInfoSchemaArgs) ToIntegrationTaskNodeNodeInfoSche
 // IntegrationTaskNodeNodeInfoSchemaArrayInput is an input type that accepts IntegrationTaskNodeNodeInfoSchemaArray and IntegrationTaskNodeNodeInfoSchemaArrayOutput values.
 // You can construct a concrete instance of `IntegrationTaskNodeNodeInfoSchemaArrayInput` via:
 //
-//          IntegrationTaskNodeNodeInfoSchemaArray{ IntegrationTaskNodeNodeInfoSchemaArgs{...} }
+//	IntegrationTaskNodeNodeInfoSchemaArray{ IntegrationTaskNodeNodeInfoSchemaArgs{...} }
 type IntegrationTaskNodeNodeInfoSchemaArrayInput interface {
 	pulumi.Input
 
@@ -8439,7 +8442,7 @@ type IntegrationTaskNodeNodeInfoSchemaProperty struct {
 // IntegrationTaskNodeNodeInfoSchemaPropertyInput is an input type that accepts IntegrationTaskNodeNodeInfoSchemaPropertyArgs and IntegrationTaskNodeNodeInfoSchemaPropertyOutput values.
 // You can construct a concrete instance of `IntegrationTaskNodeNodeInfoSchemaPropertyInput` via:
 //
-//          IntegrationTaskNodeNodeInfoSchemaPropertyArgs{...}
+//	IntegrationTaskNodeNodeInfoSchemaPropertyArgs{...}
 type IntegrationTaskNodeNodeInfoSchemaPropertyInput interface {
 	pulumi.Input
 
@@ -8469,7 +8472,7 @@ func (i IntegrationTaskNodeNodeInfoSchemaPropertyArgs) ToIntegrationTaskNodeNode
 // IntegrationTaskNodeNodeInfoSchemaPropertyArrayInput is an input type that accepts IntegrationTaskNodeNodeInfoSchemaPropertyArray and IntegrationTaskNodeNodeInfoSchemaPropertyArrayOutput values.
 // You can construct a concrete instance of `IntegrationTaskNodeNodeInfoSchemaPropertyArrayInput` via:
 //
-//          IntegrationTaskNodeNodeInfoSchemaPropertyArray{ IntegrationTaskNodeNodeInfoSchemaPropertyArgs{...} }
+//	IntegrationTaskNodeNodeInfoSchemaPropertyArray{ IntegrationTaskNodeNodeInfoSchemaPropertyArgs{...} }
 type IntegrationTaskNodeNodeInfoSchemaPropertyArrayInput interface {
 	pulumi.Input
 
@@ -8545,7 +8548,7 @@ type GetDataSourceListFilter struct {
 // GetDataSourceListFilterInput is an input type that accepts GetDataSourceListFilterArgs and GetDataSourceListFilterOutput values.
 // You can construct a concrete instance of `GetDataSourceListFilterInput` via:
 //
-//          GetDataSourceListFilterArgs{...}
+//	GetDataSourceListFilterArgs{...}
 type GetDataSourceListFilterInput interface {
 	pulumi.Input
 
@@ -8575,7 +8578,7 @@ func (i GetDataSourceListFilterArgs) ToGetDataSourceListFilterOutputWithContext(
 // GetDataSourceListFilterArrayInput is an input type that accepts GetDataSourceListFilterArray and GetDataSourceListFilterArrayOutput values.
 // You can construct a concrete instance of `GetDataSourceListFilterArrayInput` via:
 //
-//          GetDataSourceListFilterArray{ GetDataSourceListFilterArgs{...} }
+//	GetDataSourceListFilterArray{ GetDataSourceListFilterArgs{...} }
 type GetDataSourceListFilterArrayInput interface {
 	pulumi.Input
 
@@ -8651,7 +8654,7 @@ type GetDataSourceListOrderField struct {
 // GetDataSourceListOrderFieldInput is an input type that accepts GetDataSourceListOrderFieldArgs and GetDataSourceListOrderFieldOutput values.
 // You can construct a concrete instance of `GetDataSourceListOrderFieldInput` via:
 //
-//          GetDataSourceListOrderFieldArgs{...}
+//	GetDataSourceListOrderFieldArgs{...}
 type GetDataSourceListOrderFieldInput interface {
 	pulumi.Input
 
@@ -8681,7 +8684,7 @@ func (i GetDataSourceListOrderFieldArgs) ToGetDataSourceListOrderFieldOutputWith
 // GetDataSourceListOrderFieldArrayInput is an input type that accepts GetDataSourceListOrderFieldArray and GetDataSourceListOrderFieldArrayOutput values.
 // You can construct a concrete instance of `GetDataSourceListOrderFieldArrayInput` via:
 //
-//          GetDataSourceListOrderFieldArray{ GetDataSourceListOrderFieldArgs{...} }
+//	GetDataSourceListOrderFieldArray{ GetDataSourceListOrderFieldArgs{...} }
 type GetDataSourceListOrderFieldArrayInput interface {
 	pulumi.Input
 
@@ -8815,7 +8818,7 @@ type GetDataSourceListRow struct {
 // GetDataSourceListRowInput is an input type that accepts GetDataSourceListRowArgs and GetDataSourceListRowOutput values.
 // You can construct a concrete instance of `GetDataSourceListRowInput` via:
 //
-//          GetDataSourceListRowArgs{...}
+//	GetDataSourceListRowArgs{...}
 type GetDataSourceListRowInput interface {
 	pulumi.Input
 
@@ -8903,7 +8906,7 @@ func (i GetDataSourceListRowArgs) ToGetDataSourceListRowOutputWithContext(ctx co
 // GetDataSourceListRowArrayInput is an input type that accepts GetDataSourceListRowArray and GetDataSourceListRowArrayOutput values.
 // You can construct a concrete instance of `GetDataSourceListRowArrayInput` via:
 //
-//          GetDataSourceListRowArray{ GetDataSourceListRowArgs{...} }
+//	GetDataSourceListRowArray{ GetDataSourceListRowArgs{...} }
 type GetDataSourceListRowArrayInput interface {
 	pulumi.Input
 
@@ -9182,7 +9185,7 @@ type GetDataSourceWithoutInfoData struct {
 // GetDataSourceWithoutInfoDataInput is an input type that accepts GetDataSourceWithoutInfoDataArgs and GetDataSourceWithoutInfoDataOutput values.
 // You can construct a concrete instance of `GetDataSourceWithoutInfoDataInput` via:
 //
-//          GetDataSourceWithoutInfoDataArgs{...}
+//	GetDataSourceWithoutInfoDataArgs{...}
 type GetDataSourceWithoutInfoDataInput interface {
 	pulumi.Input
 
@@ -9270,7 +9273,7 @@ func (i GetDataSourceWithoutInfoDataArgs) ToGetDataSourceWithoutInfoDataOutputWi
 // GetDataSourceWithoutInfoDataArrayInput is an input type that accepts GetDataSourceWithoutInfoDataArray and GetDataSourceWithoutInfoDataArrayOutput values.
 // You can construct a concrete instance of `GetDataSourceWithoutInfoDataArrayInput` via:
 //
-//          GetDataSourceWithoutInfoDataArray{ GetDataSourceWithoutInfoDataArgs{...} }
+//	GetDataSourceWithoutInfoDataArray{ GetDataSourceWithoutInfoDataArgs{...} }
 type GetDataSourceWithoutInfoDataArrayInput interface {
 	pulumi.Input
 
@@ -9491,7 +9494,7 @@ type GetDataSourceWithoutInfoFilter struct {
 // GetDataSourceWithoutInfoFilterInput is an input type that accepts GetDataSourceWithoutInfoFilterArgs and GetDataSourceWithoutInfoFilterOutput values.
 // You can construct a concrete instance of `GetDataSourceWithoutInfoFilterInput` via:
 //
-//          GetDataSourceWithoutInfoFilterArgs{...}
+//	GetDataSourceWithoutInfoFilterArgs{...}
 type GetDataSourceWithoutInfoFilterInput interface {
 	pulumi.Input
 
@@ -9521,7 +9524,7 @@ func (i GetDataSourceWithoutInfoFilterArgs) ToGetDataSourceWithoutInfoFilterOutp
 // GetDataSourceWithoutInfoFilterArrayInput is an input type that accepts GetDataSourceWithoutInfoFilterArray and GetDataSourceWithoutInfoFilterArrayOutput values.
 // You can construct a concrete instance of `GetDataSourceWithoutInfoFilterArrayInput` via:
 //
-//          GetDataSourceWithoutInfoFilterArray{ GetDataSourceWithoutInfoFilterArgs{...} }
+//	GetDataSourceWithoutInfoFilterArray{ GetDataSourceWithoutInfoFilterArgs{...} }
 type GetDataSourceWithoutInfoFilterArrayInput interface {
 	pulumi.Input
 
@@ -9597,7 +9600,7 @@ type GetDataSourceWithoutInfoOrderField struct {
 // GetDataSourceWithoutInfoOrderFieldInput is an input type that accepts GetDataSourceWithoutInfoOrderFieldArgs and GetDataSourceWithoutInfoOrderFieldOutput values.
 // You can construct a concrete instance of `GetDataSourceWithoutInfoOrderFieldInput` via:
 //
-//          GetDataSourceWithoutInfoOrderFieldArgs{...}
+//	GetDataSourceWithoutInfoOrderFieldArgs{...}
 type GetDataSourceWithoutInfoOrderFieldInput interface {
 	pulumi.Input
 
@@ -9627,7 +9630,7 @@ func (i GetDataSourceWithoutInfoOrderFieldArgs) ToGetDataSourceWithoutInfoOrderF
 // GetDataSourceWithoutInfoOrderFieldArrayInput is an input type that accepts GetDataSourceWithoutInfoOrderFieldArray and GetDataSourceWithoutInfoOrderFieldArrayOutput values.
 // You can construct a concrete instance of `GetDataSourceWithoutInfoOrderFieldArrayInput` via:
 //
-//          GetDataSourceWithoutInfoOrderFieldArray{ GetDataSourceWithoutInfoOrderFieldArgs{...} }
+//	GetDataSourceWithoutInfoOrderFieldArray{ GetDataSourceWithoutInfoOrderFieldArgs{...} }
 type GetDataSourceWithoutInfoOrderFieldArrayInput interface {
 	pulumi.Input
 
@@ -9735,7 +9738,7 @@ type GetRuleTemplatesData struct {
 // GetRuleTemplatesDataInput is an input type that accepts GetRuleTemplatesDataArgs and GetRuleTemplatesDataOutput values.
 // You can construct a concrete instance of `GetRuleTemplatesDataInput` via:
 //
-//          GetRuleTemplatesDataArgs{...}
+//	GetRuleTemplatesDataArgs{...}
 type GetRuleTemplatesDataInput interface {
 	pulumi.Input
 
@@ -9797,7 +9800,7 @@ func (i GetRuleTemplatesDataArgs) ToGetRuleTemplatesDataOutputWithContext(ctx co
 // GetRuleTemplatesDataArrayInput is an input type that accepts GetRuleTemplatesDataArray and GetRuleTemplatesDataArrayOutput values.
 // You can construct a concrete instance of `GetRuleTemplatesDataArrayInput` via:
 //
-//          GetRuleTemplatesDataArray{ GetRuleTemplatesDataArgs{...} }
+//	GetRuleTemplatesDataArray{ GetRuleTemplatesDataArgs{...} }
 type GetRuleTemplatesDataArrayInput interface {
 	pulumi.Input
 

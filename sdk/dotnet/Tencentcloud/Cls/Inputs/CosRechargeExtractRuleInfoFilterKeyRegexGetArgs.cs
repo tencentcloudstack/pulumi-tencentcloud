@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls.Inputs
 {
 
-    public sealed class CosRechargeExtractRuleInfoFilterKeyRegexGetArgs : Pulumi.ResourceArgs
+    public sealed class CosRechargeExtractRuleInfoFilterKeyRegexGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// need filter log key.
@@ -28,5 +28,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls.Inputs
         public CosRechargeExtractRuleInfoFilterKeyRegexGetArgs()
         {
         }
+        public static new CosRechargeExtractRuleInfoFilterKeyRegexGetArgs Empty => new CosRechargeExtractRuleInfoFilterKeyRegexGetArgs();
     }
 }

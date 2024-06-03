@@ -7,87 +7,92 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a monitor grafana ssoAccount
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Monitor"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Monitor"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Subnet"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Monitor"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Subnet"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		cfg := config.New(ctx, "")
-// 		availabilityZone := "ap-guangzhou-6"
-// 		if param := cfg.Get("availabilityZone"); param != "" {
-// 			availabilityZone = param
-// 		}
-// 		vpc, err := Vpc.NewInstance(ctx, "vpc", &Vpc.InstanceArgs{
-// 			CidrBlock: pulumi.String("10.0.0.0/16"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		subnet, err := Subnet.NewInstance(ctx, "subnet", &Subnet.InstanceArgs{
-// 			VpcId:            vpc.ID(),
-// 			AvailabilityZone: pulumi.String(availabilityZone),
-// 			CidrBlock:        pulumi.String("10.0.1.0/24"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		foo, err := Monitor.NewGrafanaInstance(ctx, "foo", &Monitor.GrafanaInstanceArgs{
-// 			InstanceName: pulumi.String("test-grafana"),
-// 			VpcId:        vpc.ID(),
-// 			SubnetIds: pulumi.StringArray{
-// 				subnet.ID(),
-// 			},
-// 			GrafanaInitPassword: pulumi.String("1234567890"),
-// 			EnableInternet:      pulumi.Bool(false),
-// 			Tags: pulumi.AnyMap{
-// 				"createdBy": pulumi.Any("test"),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_, err = Monitor.NewGrafanaSsoAccount(ctx, "ssoAccount", &Monitor.GrafanaSsoAccountArgs{
-// 			InstanceId: foo.ID(),
-// 			UserId:     pulumi.String("111"),
-// 			Notes:      pulumi.String("desc12222"),
-// 			Roles: monitor.GrafanaSsoAccountRoleArray{
-// 				&monitor.GrafanaSsoAccountRoleArgs{
-// 					Organization: pulumi.String("Main Org."),
-// 					Role:         pulumi.String("Admin"),
-// 				},
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			cfg := config.New(ctx, "")
+//			availabilityZone := "ap-guangzhou-6"
+//			if param := cfg.Get("availabilityZone"); param != "" {
+//				availabilityZone = param
+//			}
+//			vpc, err := Vpc.NewInstance(ctx, "vpc", &Vpc.InstanceArgs{
+//				CidrBlock: pulumi.String("10.0.0.0/16"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			subnet, err := Subnet.NewInstance(ctx, "subnet", &Subnet.InstanceArgs{
+//				VpcId:            vpc.ID(),
+//				AvailabilityZone: pulumi.String(availabilityZone),
+//				CidrBlock:        pulumi.String("10.0.1.0/24"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			foo, err := Monitor.NewGrafanaInstance(ctx, "foo", &Monitor.GrafanaInstanceArgs{
+//				InstanceName: pulumi.String("test-grafana"),
+//				VpcId:        vpc.ID(),
+//				SubnetIds: pulumi.StringArray{
+//					subnet.ID(),
+//				},
+//				GrafanaInitPassword: pulumi.String("1234567890"),
+//				EnableInternet:      pulumi.Bool(false),
+//				Tags: pulumi.Map{
+//					"createdBy": pulumi.Any("test"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_, err = Monitor.NewGrafanaSsoAccount(ctx, "ssoAccount", &Monitor.GrafanaSsoAccountArgs{
+//				InstanceId: foo.ID(),
+//				UserId:     pulumi.String("111"),
+//				Notes:      pulumi.String("desc12222"),
+//				Roles: monitor.GrafanaSsoAccountRoleArray{
+//					&monitor.GrafanaSsoAccountRoleArgs{
+//						Organization: pulumi.String("Main Org."),
+//						Role:         pulumi.String("Admin"),
+//					},
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // monitor grafana ssoAccount can be imported using the instance_id#user_id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Monitor/grafanaSsoAccount:GrafanaSsoAccount ssoAccount grafana-50nj6v00#111
+// $ pulumi import tencentcloud:Monitor/grafanaSsoAccount:GrafanaSsoAccount ssoAccount grafana-50nj6v00#111
 // ```
 type GrafanaSsoAccount struct {
 	pulumi.CustomResourceState
@@ -115,7 +120,7 @@ func NewGrafanaSsoAccount(ctx *pulumi.Context,
 	if args.UserId == nil {
 		return nil, errors.New("invalid value for required argument 'UserId'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource GrafanaSsoAccount
 	err := ctx.RegisterResource("tencentcloud:Monitor/grafanaSsoAccount:GrafanaSsoAccount", name, args, &resource, opts...)
 	if err != nil {
@@ -212,7 +217,7 @@ func (i *GrafanaSsoAccount) ToGrafanaSsoAccountOutputWithContext(ctx context.Con
 // GrafanaSsoAccountArrayInput is an input type that accepts GrafanaSsoAccountArray and GrafanaSsoAccountArrayOutput values.
 // You can construct a concrete instance of `GrafanaSsoAccountArrayInput` via:
 //
-//          GrafanaSsoAccountArray{ GrafanaSsoAccountArgs{...} }
+//	GrafanaSsoAccountArray{ GrafanaSsoAccountArgs{...} }
 type GrafanaSsoAccountArrayInput interface {
 	pulumi.Input
 
@@ -237,7 +242,7 @@ func (i GrafanaSsoAccountArray) ToGrafanaSsoAccountArrayOutputWithContext(ctx co
 // GrafanaSsoAccountMapInput is an input type that accepts GrafanaSsoAccountMap and GrafanaSsoAccountMapOutput values.
 // You can construct a concrete instance of `GrafanaSsoAccountMapInput` via:
 //
-//          GrafanaSsoAccountMap{ "key": GrafanaSsoAccountArgs{...} }
+//	GrafanaSsoAccountMap{ "key": GrafanaSsoAccountArgs{...} }
 type GrafanaSsoAccountMapInput interface {
 	pulumi.Input
 

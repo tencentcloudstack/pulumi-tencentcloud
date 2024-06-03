@@ -15,66 +15,60 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssl
         /// <summary>
         /// Use this data source to query detailed information of ssl describe_host_waf_instance_list
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var describeHostWafInstanceList = Tencentcloud.Ssl.GetDescribeHostWafInstanceList.Invoke(new()
         ///     {
-        ///         var describeHostWafInstanceList = Output.Create(Tencentcloud.Ssl.GetDescribeHostWafInstanceList.InvokeAsync(new Tencentcloud.Ssl.GetDescribeHostWafInstanceListArgs
-        ///         {
-        ///             CertificateId = "8u8DII0l",
-        ///             ResourceType = "waf",
-        ///         }));
-        ///     }
+        ///         CertificateId = "8u8DII0l",
+        ///         ResourceType = "waf",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetDescribeHostWafInstanceListResult> InvokeAsync(GetDescribeHostWafInstanceListArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetDescribeHostWafInstanceListResult>("tencentcloud:Ssl/getDescribeHostWafInstanceList:getDescribeHostWafInstanceList", args ?? new GetDescribeHostWafInstanceListArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetDescribeHostWafInstanceListResult>("tencentcloud:Ssl/getDescribeHostWafInstanceList:getDescribeHostWafInstanceList", args ?? new GetDescribeHostWafInstanceListArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of ssl describe_host_waf_instance_list
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var describeHostWafInstanceList = Tencentcloud.Ssl.GetDescribeHostWafInstanceList.Invoke(new()
         ///     {
-        ///         var describeHostWafInstanceList = Output.Create(Tencentcloud.Ssl.GetDescribeHostWafInstanceList.InvokeAsync(new Tencentcloud.Ssl.GetDescribeHostWafInstanceListArgs
-        ///         {
-        ///             CertificateId = "8u8DII0l",
-        ///             ResourceType = "waf",
-        ///         }));
-        ///     }
+        ///         CertificateId = "8u8DII0l",
+        ///         ResourceType = "waf",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetDescribeHostWafInstanceListResult> Invoke(GetDescribeHostWafInstanceListInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetDescribeHostWafInstanceListResult>("tencentcloud:Ssl/getDescribeHostWafInstanceList:getDescribeHostWafInstanceList", args ?? new GetDescribeHostWafInstanceListInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetDescribeHostWafInstanceListResult>("tencentcloud:Ssl/getDescribeHostWafInstanceList:getDescribeHostWafInstanceList", args ?? new GetDescribeHostWafInstanceListInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetDescribeHostWafInstanceListArgs : Pulumi.InvokeArgs
+    public sealed class GetDescribeHostWafInstanceListArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Certificate ID to be deployed.
@@ -121,9 +115,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssl
         public GetDescribeHostWafInstanceListArgs()
         {
         }
+        public static new GetDescribeHostWafInstanceListArgs Empty => new GetDescribeHostWafInstanceListArgs();
     }
 
-    public sealed class GetDescribeHostWafInstanceListInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetDescribeHostWafInstanceListInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Certificate ID to be deployed.
@@ -170,6 +165,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssl
         public GetDescribeHostWafInstanceListInvokeArgs()
         {
         }
+        public static new GetDescribeHostWafInstanceListInvokeArgs Empty => new GetDescribeHostWafInstanceListInvokeArgs();
     }
 
 

@@ -9,31 +9,33 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const example = pulumi.output(tencentcloud.Waf.getPorts());
+ * const example = tencentcloud.Waf.getPorts({});
  * ```
+ * <!--End PulumiCodeChooser -->
+ *
  * ### Or
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const example = pulumi.output(tencentcloud.Waf.getPorts({
+ * const example = tencentcloud.Waf.getPorts({
  *     edition: "clb-waf",
  *     instanceId: "waf_2kxtlbky00b2v1fn",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getPorts(args?: GetPortsArgs, opts?: pulumi.InvokeOptions): Promise<GetPortsResult> {
     args = args || {};
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Waf/getPorts:getPorts", {
         "edition": args.edition,
         "instanceId": args.instanceId,
@@ -79,9 +81,36 @@ export interface GetPortsResult {
     readonly instanceId?: string;
     readonly resultOutputFile?: string;
 }
-
+/**
+ * Use this data source to query detailed information of waf ports
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const example = tencentcloud.Waf.getPorts({});
+ * ```
+ * <!--End PulumiCodeChooser -->
+ *
+ * ### Or
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const example = tencentcloud.Waf.getPorts({
+ *     edition: "clb-waf",
+ *     instanceId: "waf_2kxtlbky00b2v1fn",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getPortsOutput(args?: GetPortsOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetPortsResult> {
-    return pulumi.output(args).apply(a => getPorts(a, opts))
+    return pulumi.output(args).apply((a: any) => getPorts(a, opts))
 }
 
 /**

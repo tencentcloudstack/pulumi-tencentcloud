@@ -15,42 +15,43 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cfw
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var example = new Tencentcloud.Cfw.NatPolicy("example", new()
     ///     {
-    ///         var example = new Tencentcloud.Cfw.NatPolicy("example", new Tencentcloud.Cfw.NatPolicyArgs
-    ///         {
-    ///             Description = "policy description.",
-    ///             Direction = 1,
-    ///             Enable = "true",
-    ///             Port = "-1/-1",
-    ///             Protocol = "TCP",
-    ///             RuleAction = "drop",
-    ///             SourceContent = "1.1.1.1/0",
-    ///             SourceType = "net",
-    ///             TargetContent = "0.0.0.0/0",
-    ///             TargetType = "net",
-    ///         });
-    ///     }
+    ///         Description = "policy description.",
+    ///         Direction = 1,
+    ///         Enable = "true",
+    ///         Port = "-1/-1",
+    ///         Protocol = "TCP",
+    ///         RuleAction = "drop",
+    ///         SourceContent = "1.1.1.1/0",
+    ///         SourceType = "net",
+    ///         TargetContent = "0.0.0.0/0",
+    ///         TargetType = "net",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// cfw nat_policy can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Cfw/natPolicy:NatPolicy example nat_policy_id
+    /// $ pulumi import tencentcloud:Cfw/natPolicy:NatPolicy example nat_policy_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Cfw/natPolicy:NatPolicy")]
-    public partial class NatPolicy : Pulumi.CustomResource
+    public partial class NatPolicy : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Description.
@@ -169,7 +170,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cfw
         }
     }
 
-    public sealed class NatPolicyArgs : Pulumi.ResourceArgs
+    public sealed class NatPolicyArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Description.
@@ -234,9 +235,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cfw
         public NatPolicyArgs()
         {
         }
+        public static new NatPolicyArgs Empty => new NatPolicyArgs();
     }
 
-    public sealed class NatPolicyState : Pulumi.ResourceArgs
+    public sealed class NatPolicyState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Description.
@@ -313,5 +315,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cfw
         public NatPolicyState()
         {
         }
+        public static new NatPolicyState Empty => new NatPolicyState();
     }
 }

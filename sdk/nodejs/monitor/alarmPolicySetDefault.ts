@@ -9,15 +9,17 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const policySetDefault = new tencentcloud.Monitor.AlarmPolicySetDefault("policy_set_default", {
+ * const policySetDefault = new tencentcloud.monitor.AlarmPolicySetDefault("policySetDefault", {
  *     module: "monitor",
  *     policyId: "policy-u4iykjkt",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export class AlarmPolicySetDefault extends pulumi.CustomResource {
     /**

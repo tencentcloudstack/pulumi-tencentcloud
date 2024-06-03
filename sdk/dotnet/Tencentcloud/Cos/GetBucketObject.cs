@@ -15,68 +15,62 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos
         /// <summary>
         /// Use this data source to query the metadata of an object stored inside a bucket.
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var mycos = Tencentcloud.Cos.GetBucketObject.Invoke(new()
         ///     {
-        ///         var mycos = Output.Create(Tencentcloud.Cos.GetBucketObject.InvokeAsync(new Tencentcloud.Cos.GetBucketObjectArgs
-        ///         {
-        ///             Bucket = "mycos-test-1258798060",
-        ///             Key = "hello-world.py",
-        ///             ResultOutputFile = "TFresults",
-        ///         }));
-        ///     }
+        ///         Bucket = "mycos-test-1258798060",
+        ///         Key = "hello-world.py",
+        ///         ResultOutputFile = "TFresults",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetBucketObjectResult> InvokeAsync(GetBucketObjectArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetBucketObjectResult>("tencentcloud:Cos/getBucketObject:getBucketObject", args ?? new GetBucketObjectArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetBucketObjectResult>("tencentcloud:Cos/getBucketObject:getBucketObject", args ?? new GetBucketObjectArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query the metadata of an object stored inside a bucket.
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var mycos = Tencentcloud.Cos.GetBucketObject.Invoke(new()
         ///     {
-        ///         var mycos = Output.Create(Tencentcloud.Cos.GetBucketObject.InvokeAsync(new Tencentcloud.Cos.GetBucketObjectArgs
-        ///         {
-        ///             Bucket = "mycos-test-1258798060",
-        ///             Key = "hello-world.py",
-        ///             ResultOutputFile = "TFresults",
-        ///         }));
-        ///     }
+        ///         Bucket = "mycos-test-1258798060",
+        ///         Key = "hello-world.py",
+        ///         ResultOutputFile = "TFresults",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetBucketObjectResult> Invoke(GetBucketObjectInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetBucketObjectResult>("tencentcloud:Cos/getBucketObject:getBucketObject", args ?? new GetBucketObjectInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetBucketObjectResult>("tencentcloud:Cos/getBucketObject:getBucketObject", args ?? new GetBucketObjectInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetBucketObjectArgs : Pulumi.InvokeArgs
+    public sealed class GetBucketObjectArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Name of the bucket that contains the objects to query.
@@ -99,9 +93,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos
         public GetBucketObjectArgs()
         {
         }
+        public static new GetBucketObjectArgs Empty => new GetBucketObjectArgs();
     }
 
-    public sealed class GetBucketObjectInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetBucketObjectInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Name of the bucket that contains the objects to query.
@@ -124,6 +119,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos
         public GetBucketObjectInvokeArgs()
         {
         }
+        public static new GetBucketObjectInvokeArgs Empty => new GetBucketObjectInvokeArgs();
     }
 
 

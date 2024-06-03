@@ -15,74 +15,70 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam
         /// <summary>
         /// Use this data source to query detailed information of CAM role policy attachments
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var foo = Tencentcloud.Cam.GetRolePolicyAttachments.Invoke(new()
         ///     {
-        ///         var foo = Output.Create(Tencentcloud.Cam.GetRolePolicyAttachments.InvokeAsync(new Tencentcloud.Cam.GetRolePolicyAttachmentsArgs
-        ///         {
-        ///             RoleId = tencentcloud_cam_role.Foo.Id,
-        ///         }));
-        ///         var bar = Output.Create(Tencentcloud.Cam.GetRolePolicyAttachments.InvokeAsync(new Tencentcloud.Cam.GetRolePolicyAttachmentsArgs
-        ///         {
-        ///             RoleId = tencentcloud_cam_role.Foo.Id,
-        ///             PolicyId = tencentcloud_cam_policy.Foo.Id,
-        ///         }));
-        ///     }
+        ///         RoleId = tencentcloud_cam_role.Foo.Id,
+        ///     });
         /// 
-        /// }
+        ///     var bar = Tencentcloud.Cam.GetRolePolicyAttachments.Invoke(new()
+        ///     {
+        ///         RoleId = tencentcloud_cam_role.Foo.Id,
+        ///         PolicyId = tencentcloud_cam_policy.Foo.Id,
+        ///     });
+        /// 
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetRolePolicyAttachmentsResult> InvokeAsync(GetRolePolicyAttachmentsArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetRolePolicyAttachmentsResult>("tencentcloud:Cam/getRolePolicyAttachments:getRolePolicyAttachments", args ?? new GetRolePolicyAttachmentsArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetRolePolicyAttachmentsResult>("tencentcloud:Cam/getRolePolicyAttachments:getRolePolicyAttachments", args ?? new GetRolePolicyAttachmentsArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of CAM role policy attachments
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var foo = Tencentcloud.Cam.GetRolePolicyAttachments.Invoke(new()
         ///     {
-        ///         var foo = Output.Create(Tencentcloud.Cam.GetRolePolicyAttachments.InvokeAsync(new Tencentcloud.Cam.GetRolePolicyAttachmentsArgs
-        ///         {
-        ///             RoleId = tencentcloud_cam_role.Foo.Id,
-        ///         }));
-        ///         var bar = Output.Create(Tencentcloud.Cam.GetRolePolicyAttachments.InvokeAsync(new Tencentcloud.Cam.GetRolePolicyAttachmentsArgs
-        ///         {
-        ///             RoleId = tencentcloud_cam_role.Foo.Id,
-        ///             PolicyId = tencentcloud_cam_policy.Foo.Id,
-        ///         }));
-        ///     }
+        ///         RoleId = tencentcloud_cam_role.Foo.Id,
+        ///     });
         /// 
-        /// }
+        ///     var bar = Tencentcloud.Cam.GetRolePolicyAttachments.Invoke(new()
+        ///     {
+        ///         RoleId = tencentcloud_cam_role.Foo.Id,
+        ///         PolicyId = tencentcloud_cam_policy.Foo.Id,
+        ///     });
+        /// 
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetRolePolicyAttachmentsResult> Invoke(GetRolePolicyAttachmentsInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetRolePolicyAttachmentsResult>("tencentcloud:Cam/getRolePolicyAttachments:getRolePolicyAttachments", args ?? new GetRolePolicyAttachmentsInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetRolePolicyAttachmentsResult>("tencentcloud:Cam/getRolePolicyAttachments:getRolePolicyAttachments", args ?? new GetRolePolicyAttachmentsInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetRolePolicyAttachmentsArgs : Pulumi.InvokeArgs
+    public sealed class GetRolePolicyAttachmentsArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Mode of Creation of the CAM user policy attachment. `1` means the cam policy attachment is created by production, and the others indicate syntax strategy ways.
@@ -117,9 +113,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam
         public GetRolePolicyAttachmentsArgs()
         {
         }
+        public static new GetRolePolicyAttachmentsArgs Empty => new GetRolePolicyAttachmentsArgs();
     }
 
-    public sealed class GetRolePolicyAttachmentsInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetRolePolicyAttachmentsInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Mode of Creation of the CAM user policy attachment. `1` means the cam policy attachment is created by production, and the others indicate syntax strategy ways.
@@ -154,6 +151,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam
         public GetRolePolicyAttachmentsInvokeArgs()
         {
         }
+        public static new GetRolePolicyAttachmentsInvokeArgs Empty => new GetRolePolicyAttachmentsInvokeArgs();
     }
 
 

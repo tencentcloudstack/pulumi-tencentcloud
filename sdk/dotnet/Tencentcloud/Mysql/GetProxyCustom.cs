@@ -13,14 +13,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
     public static class GetProxyCustom
     {
         public static Task<GetProxyCustomResult> InvokeAsync(GetProxyCustomArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetProxyCustomResult>("tencentcloud:Mysql/getProxyCustom:getProxyCustom", args ?? new GetProxyCustomArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetProxyCustomResult>("tencentcloud:Mysql/getProxyCustom:getProxyCustom", args ?? new GetProxyCustomArgs(), options.WithDefaults());
 
         public static Output<GetProxyCustomResult> Invoke(GetProxyCustomInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetProxyCustomResult>("tencentcloud:Mysql/getProxyCustom:getProxyCustom", args ?? new GetProxyCustomInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetProxyCustomResult>("tencentcloud:Mysql/getProxyCustom:getProxyCustom", args ?? new GetProxyCustomInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetProxyCustomArgs : Pulumi.InvokeArgs
+    public sealed class GetProxyCustomArgs : global::Pulumi.InvokeArgs
     {
         [Input("instanceId", required: true)]
         public string InstanceId { get; set; } = null!;
@@ -31,9 +31,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
         public GetProxyCustomArgs()
         {
         }
+        public static new GetProxyCustomArgs Empty => new GetProxyCustomArgs();
     }
 
-    public sealed class GetProxyCustomInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetProxyCustomInvokeArgs : global::Pulumi.InvokeArgs
     {
         [Input("instanceId", required: true)]
         public Input<string> InstanceId { get; set; } = null!;
@@ -44,6 +45,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
         public GetProxyCustomInvokeArgs()
         {
         }
+        public static new GetProxyCustomInvokeArgs Empty => new GetProxyCustomInvokeArgs();
     }
 
 

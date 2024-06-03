@@ -9,17 +9,19 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const upgradeProxyVersionOperation = new tencentcloud.Redis.UpgradeProxyVersionOperation("upgrade_proxy_version_operation", {
+ * const upgradeProxyVersionOperation = new tencentcloud.redis.UpgradeProxyVersionOperation("upgradeProxyVersionOperation", {
  *     currentProxyVersion: "5.0.0",
  *     instanceId: "crs-c1nl9rpv",
  *     instanceTypeUpgradeNow: 1,
  *     upgradeProxyVersion: "5.0.0",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export class UpgradeProxyVersionOperation extends pulumi.CustomResource {
     /**

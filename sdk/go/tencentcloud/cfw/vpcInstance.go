@@ -7,102 +7,21 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a cfw vpcInstance
 //
 // ## Example Usage
-// ### If mode is 0
-//
-// ```go
-// package main
-//
-// import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Cfw"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cfw"
-// )
-//
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Cfw.NewVpcInstance(ctx, "example", &Cfw.VpcInstanceArgs{
-// 			FwVpcCidr:  pulumi.String("auto"),
-// 			Mode:       pulumi.Int(0),
-// 			SwitchMode: pulumi.Int(1),
-// 			VpcFwInstances: cfw.VpcInstanceVpcFwInstanceArray{
-// 				&cfw.VpcInstanceVpcFwInstanceArgs{
-// 					FwDeploy: &cfw.VpcInstanceVpcFwInstanceFwDeployArgs{
-// 						CrossAZone:   pulumi.Int(1),
-// 						DeployRegion: pulumi.String("ap-guangzhou"),
-// 						Width:        pulumi.Int(1024),
-// 						ZoneSet: []string{
-// 							"ap-guangzhou-6",
-// 							"ap-guangzhou-7",
-// 						},
-// 					},
-// 					Name: pulumi.String("fw_ins_example"),
-// 					VpcIds: pulumi.StringArray{
-// 						pulumi.String("vpc-291vnoeu"),
-// 						pulumi.String("vpc-39ixq9ci"),
-// 					},
-// 				},
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
-// ```
-// ### If mode is 1
-//
-// ```go
-// package main
-//
-// import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Cfw"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cfw"
-// )
-//
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Cfw.NewVpcInstance(ctx, "example", &Cfw.VpcInstanceArgs{
-// 			CcnId:      pulumi.String("ccn-peihfqo7"),
-// 			FwVpcCidr:  pulumi.String("auto"),
-// 			Mode:       pulumi.Int(1),
-// 			SwitchMode: pulumi.Int(1),
-// 			VpcFwInstances: cfw.VpcInstanceVpcFwInstanceArray{
-// 				&cfw.VpcInstanceVpcFwInstanceArgs{
-// 					FwDeploy: &cfw.VpcInstanceVpcFwInstanceFwDeployArgs{
-// 						CrossAZone:   pulumi.Int(0),
-// 						DeployRegion: pulumi.String("ap-guangzhou"),
-// 						Width:        pulumi.Int(1024),
-// 						ZoneSet: []string{
-// 							"ap-guangzhou-6",
-// 						},
-// 					},
-// 					Name: pulumi.String("fw_ins_example"),
-// 				},
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
-// ```
 //
 // ## Import
 //
 // cfw vpc_instance can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Cfw/vpcInstance:VpcInstance example cfwg-4ee69507
+// $ pulumi import tencentcloud:Cfw/vpcInstance:VpcInstance example cfwg-4ee69507
 // ```
 type VpcInstance struct {
 	pulumi.CustomResourceState
@@ -137,7 +56,7 @@ func NewVpcInstance(ctx *pulumi.Context,
 	if args.VpcFwInstances == nil {
 		return nil, errors.New("invalid value for required argument 'VpcFwInstances'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource VpcInstance
 	err := ctx.RegisterResource("tencentcloud:Cfw/vpcInstance:VpcInstance", name, args, &resource, opts...)
 	if err != nil {
@@ -250,7 +169,7 @@ func (i *VpcInstance) ToVpcInstanceOutputWithContext(ctx context.Context) VpcIns
 // VpcInstanceArrayInput is an input type that accepts VpcInstanceArray and VpcInstanceArrayOutput values.
 // You can construct a concrete instance of `VpcInstanceArrayInput` via:
 //
-//          VpcInstanceArray{ VpcInstanceArgs{...} }
+//	VpcInstanceArray{ VpcInstanceArgs{...} }
 type VpcInstanceArrayInput interface {
 	pulumi.Input
 
@@ -275,7 +194,7 @@ func (i VpcInstanceArray) ToVpcInstanceArrayOutputWithContext(ctx context.Contex
 // VpcInstanceMapInput is an input type that accepts VpcInstanceMap and VpcInstanceMapOutput values.
 // You can construct a concrete instance of `VpcInstanceMapInput` via:
 //
-//          VpcInstanceMap{ "key": VpcInstanceArgs{...} }
+//	VpcInstanceMap{ "key": VpcInstanceArgs{...} }
 type VpcInstanceMapInput interface {
 	pulumi.Input
 

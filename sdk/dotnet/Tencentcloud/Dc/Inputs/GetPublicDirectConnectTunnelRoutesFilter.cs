@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dc.Inputs
 {
 
-    public sealed class GetPublicDirectConnectTunnelRoutesFilterArgs : Pulumi.InvokeArgs
+    public sealed class GetPublicDirectConnectTunnelRoutesFilterArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Fields to be filtered.
@@ -34,5 +34,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dc.Inputs
         public GetPublicDirectConnectTunnelRoutesFilterArgs()
         {
         }
+        public static new GetPublicDirectConnectTunnelRoutesFilterArgs Empty => new GetPublicDirectConnectTunnelRoutesFilterArgs();
     }
 }

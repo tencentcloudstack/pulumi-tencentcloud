@@ -15,27 +15,28 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mongodb
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var instanceBackup = new Tencentcloud.Mongodb.InstanceBackup("instanceBackup", new()
     ///     {
-    ///         var instanceBackup = new Tencentcloud.Mongodb.InstanceBackup("instanceBackup", new Tencentcloud.Mongodb.InstanceBackupArgs
-    ///         {
-    ///             BackupMethod = 0,
-    ///             BackupRemark = "my backup",
-    ///             InstanceId = "cmgo-9d0p6umb",
-    ///         });
-    ///     }
+    ///         BackupMethod = 0,
+    ///         BackupRemark = "my backup",
+    ///         InstanceId = "cmgo-9d0p6umb",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Mongodb/instanceBackup:InstanceBackup")]
-    public partial class InstanceBackup : Pulumi.CustomResource
+    public partial class InstanceBackup : global::Pulumi.CustomResource
     {
         /// <summary>
         /// 0:logical backup, 1:physical backup.
@@ -100,7 +101,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mongodb
         }
     }
 
-    public sealed class InstanceBackupArgs : Pulumi.ResourceArgs
+    public sealed class InstanceBackupArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// 0:logical backup, 1:physical backup.
@@ -123,9 +124,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mongodb
         public InstanceBackupArgs()
         {
         }
+        public static new InstanceBackupArgs Empty => new InstanceBackupArgs();
     }
 
-    public sealed class InstanceBackupState : Pulumi.ResourceArgs
+    public sealed class InstanceBackupState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// 0:logical backup, 1:physical backup.
@@ -148,5 +150,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mongodb
         public InstanceBackupState()
         {
         }
+        public static new InstanceBackupState Empty => new InstanceBackupState();
     }
 }

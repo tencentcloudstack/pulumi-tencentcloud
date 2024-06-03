@@ -8,24 +8,29 @@ import * as utilities from "../utilities";
  * Use this resource to create API gateway access key.
  *
  * ## Example Usage
+ *
  * ### Automatically generate key for API gateway access key.
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const exampleAuto = new tencentcloud.ApiGateway.ApiKey("example_auto", {
+ * const exampleAuto = new tencentcloud.apigateway.ApiKey("exampleAuto", {
  *     secretName: "tf_example_auto",
  *     status: "on",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
+ *
  * ### Manually generate a secret key for API gateway access key.
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const exampleManual = new tencentcloud.ApiGateway.ApiKey("example_manual", {
+ * const exampleManual = new tencentcloud.apigateway.ApiKey("exampleManual", {
  *     accessKeyId: "28e287e340507fa147b2c8284dab542f",
  *     accessKeySecret: "0198a4b8c3105080f4acd9e507599eff",
  *     accessKeyType: "manual",
@@ -33,13 +38,14 @@ import * as utilities from "../utilities";
  *     status: "on",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * API gateway access key can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:ApiGateway/apiKey:ApiKey test AKIDMZwceezso9ps5p8jkro8a9fwe1e7nzF2k50B
+ * $ pulumi import tencentcloud:ApiGateway/apiKey:ApiKey test AKIDMZwceezso9ps5p8jkro8a9fwe1e7nzF2k50B
  * ```
  */
 export class ApiKey extends pulumi.CustomResource {

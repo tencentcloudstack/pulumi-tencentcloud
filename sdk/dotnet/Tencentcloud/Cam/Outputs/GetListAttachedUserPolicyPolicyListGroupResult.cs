@@ -14,7 +14,13 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam.Outputs
     [OutputType]
     public sealed class GetListAttachedUserPolicyPolicyListGroupResult
     {
+        /// <summary>
+        /// Group ID.
+        /// </summary>
         public readonly int GroupId;
+        /// <summary>
+        /// Group Name.
+        /// </summary>
         public readonly string GroupName;
 
         [OutputConstructor]

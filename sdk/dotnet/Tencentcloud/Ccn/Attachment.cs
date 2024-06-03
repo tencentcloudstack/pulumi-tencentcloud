@@ -15,55 +15,59 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ccn
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var config = new Config();
+    ///     var region = config.Get("region") ?? "ap-guangzhou";
+    ///     var otheruin = config.Get("otheruin") ?? "123353";
+    ///     var otherccn = config.Get("otherccn") ?? "ccn-151ssaga";
+    ///     var vpc = new Tencentcloud.Vpc.Instance("vpc", new()
     ///     {
-    ///         var config = new Config();
-    ///         var region = config.Get("region") ?? "ap-guangzhou";
-    ///         var otheruin = config.Get("otheruin") ?? "123353";
-    ///         var otherccn = config.Get("otherccn") ?? "ccn-151ssaga";
-    ///         var vpc = new Tencentcloud.Vpc.Instance("vpc", new Tencentcloud.Vpc.InstanceArgs
+    ///         CidrBlock = "10.0.0.0/16",
+    ///         DnsServers = new[]
     ///         {
-    ///             CidrBlock = "10.0.0.0/16",
-    ///             DnsServers = 
-    ///             {
-    ///                 "119.29.29.29",
-    ///                 "8.8.8.8",
-    ///             },
-    ///             IsMulticast = false,
-    ///         });
-    ///         var main = new Tencentcloud.Ccn.Instance("main", new Tencentcloud.Ccn.InstanceArgs
-    ///         {
-    ///             Description = "ci-temp-test-ccn-des",
-    ///             Qos = "AG",
-    ///         });
-    ///         var attachment = new Tencentcloud.Ccn.Attachment("attachment", new Tencentcloud.Ccn.AttachmentArgs
-    ///         {
-    ///             CcnId = main.Id,
-    ///             InstanceType = "VPC",
-    ///             InstanceId = vpc.Id,
-    ///             InstanceRegion = region,
-    ///         });
-    ///         var otherAccount = new Tencentcloud.Ccn.Attachment("otherAccount", new Tencentcloud.Ccn.AttachmentArgs
-    ///         {
-    ///             CcnId = otherccn,
-    ///             InstanceType = "VPC",
-    ///             InstanceId = vpc.Id,
-    ///             InstanceRegion = region,
-    ///             CcnUin = otheruin,
-    ///         });
-    ///     }
+    ///             "119.29.29.29",
+    ///             "8.8.8.8",
+    ///         },
+    ///         IsMulticast = false,
+    ///     });
     /// 
-    /// }
+    ///     var main = new Tencentcloud.Ccn.Instance("main", new()
+    ///     {
+    ///         Description = "ci-temp-test-ccn-des",
+    ///         Qos = "AG",
+    ///     });
+    /// 
+    ///     var attachment = new Tencentcloud.Ccn.Attachment("attachment", new()
+    ///     {
+    ///         CcnId = main.Id,
+    ///         InstanceType = "VPC",
+    ///         InstanceId = vpc.Id,
+    ///         InstanceRegion = region,
+    ///     });
+    /// 
+    ///     var otherAccount = new Tencentcloud.Ccn.Attachment("otherAccount", new()
+    ///     {
+    ///         CcnId = otherccn,
+    ///         InstanceType = "VPC",
+    ///         InstanceId = vpc.Id,
+    ///         InstanceRegion = region,
+    ///         CcnUin = otheruin,
+    ///     });
+    /// 
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Ccn/attachment:Attachment")]
-    public partial class Attachment : Pulumi.CustomResource
+    public partial class Attachment : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Time of attaching.
@@ -78,7 +82,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ccn
         public Output<string> CcnId { get; private set; } = null!;
 
         /// <summary>
-        /// Uin of the ccn attached. Default is ``, which means the uin of this account. This parameter is used with case when attaching ccn of other account to the instance of this account. For now only support instance type `VPC`.
+        /// Uin of the ccn attached. If not set, which means the uin of this account. This parameter is used with case when attaching ccn of other account to the instance of this account. For now only support instance type `VPC`.
         /// </summary>
         [Output("ccnUin")]
         public Output<string> CcnUin { get; private set; } = null!;
@@ -170,7 +174,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ccn
         }
     }
 
-    public sealed class AttachmentArgs : Pulumi.ResourceArgs
+    public sealed class AttachmentArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// ID of the CCN.
@@ -179,7 +183,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ccn
         public Input<string> CcnId { get; set; } = null!;
 
         /// <summary>
-        /// Uin of the ccn attached. Default is ``, which means the uin of this account. This parameter is used with case when attaching ccn of other account to the instance of this account. For now only support instance type `VPC`.
+        /// Uin of the ccn attached. If not set, which means the uin of this account. This parameter is used with case when attaching ccn of other account to the instance of this account. For now only support instance type `VPC`.
         /// </summary>
         [Input("ccnUin")]
         public Input<string>? CcnUin { get; set; }
@@ -211,9 +215,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ccn
         public AttachmentArgs()
         {
         }
+        public static new AttachmentArgs Empty => new AttachmentArgs();
     }
 
-    public sealed class AttachmentState : Pulumi.ResourceArgs
+    public sealed class AttachmentState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Time of attaching.
@@ -228,7 +233,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ccn
         public Input<string>? CcnId { get; set; }
 
         /// <summary>
-        /// Uin of the ccn attached. Default is ``, which means the uin of this account. This parameter is used with case when attaching ccn of other account to the instance of this account. For now only support instance type `VPC`.
+        /// Uin of the ccn attached. If not set, which means the uin of this account. This parameter is used with case when attaching ccn of other account to the instance of this account. For now only support instance type `VPC`.
         /// </summary>
         [Input("ccnUin")]
         public Input<string>? CcnUin { get; set; }
@@ -290,5 +295,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ccn
         public AttachmentState()
         {
         }
+        public static new AttachmentState Empty => new AttachmentState();
     }
 }

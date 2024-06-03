@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
 {
     [TencentcloudResourceType("tencentcloud:Vpc/classicLinkAttachment:ClassicLinkAttachment")]
-    public partial class ClassicLinkAttachment : Pulumi.CustomResource
+    public partial class ClassicLinkAttachment : global::Pulumi.CustomResource
     {
         /// <summary>
         /// CVM instance ID. It only support set one instance now.
@@ -70,7 +70,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         }
     }
 
-    public sealed class ClassicLinkAttachmentArgs : Pulumi.ResourceArgs
+    public sealed class ClassicLinkAttachmentArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// CVM instance ID. It only support set one instance now.
@@ -87,9 +87,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         public ClassicLinkAttachmentArgs()
         {
         }
+        public static new ClassicLinkAttachmentArgs Empty => new ClassicLinkAttachmentArgs();
     }
 
-    public sealed class ClassicLinkAttachmentState : Pulumi.ResourceArgs
+    public sealed class ClassicLinkAttachmentState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// CVM instance ID. It only support set one instance now.
@@ -106,5 +107,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         public ClassicLinkAttachmentState()
         {
         }
+        public static new ClassicLinkAttachmentState Empty => new ClassicLinkAttachmentState();
     }
 }

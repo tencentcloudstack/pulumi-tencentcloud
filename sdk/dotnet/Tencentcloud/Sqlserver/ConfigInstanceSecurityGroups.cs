@@ -15,38 +15,39 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var configInstanceSecurityGroups = new Tencentcloud.Sqlserver.ConfigInstanceSecurityGroups("configInstanceSecurityGroups", new()
     ///     {
-    ///         var configInstanceSecurityGroups = new Tencentcloud.Sqlserver.ConfigInstanceSecurityGroups("configInstanceSecurityGroups", new Tencentcloud.Sqlserver.ConfigInstanceSecurityGroupsArgs
+    ///         InstanceId = "mssql-qelbzgwf",
+    ///         SecurityGroupIdSets = new[]
     ///         {
-    ///             InstanceId = "mssql-qelbzgwf",
-    ///             SecurityGroupIdSets = 
-    ///             {
-    ///                 "sg-mayqdlt1",
-    ///                 "sg-5aubsf8n",
-    ///             },
-    ///         });
-    ///     }
+    ///             "sg-mayqdlt1",
+    ///             "sg-5aubsf8n",
+    ///         },
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// sqlserver config_instance_security_groups can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Sqlserver/configInstanceSecurityGroups:ConfigInstanceSecurityGroups config_instance_security_groups config_instance_security_groups_id
+    /// $ pulumi import tencentcloud:Sqlserver/configInstanceSecurityGroups:ConfigInstanceSecurityGroups config_instance_security_groups config_instance_security_groups_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Sqlserver/configInstanceSecurityGroups:ConfigInstanceSecurityGroups")]
-    public partial class ConfigInstanceSecurityGroups : Pulumi.CustomResource
+    public partial class ConfigInstanceSecurityGroups : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Instance ID.
@@ -105,7 +106,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
         }
     }
 
-    public sealed class ConfigInstanceSecurityGroupsArgs : Pulumi.ResourceArgs
+    public sealed class ConfigInstanceSecurityGroupsArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Instance ID.
@@ -128,9 +129,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
         public ConfigInstanceSecurityGroupsArgs()
         {
         }
+        public static new ConfigInstanceSecurityGroupsArgs Empty => new ConfigInstanceSecurityGroupsArgs();
     }
 
-    public sealed class ConfigInstanceSecurityGroupsState : Pulumi.ResourceArgs
+    public sealed class ConfigInstanceSecurityGroupsState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Instance ID.
@@ -153,5 +155,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
         public ConfigInstanceSecurityGroupsState()
         {
         }
+        public static new ConfigInstanceSecurityGroupsState Empty => new ConfigInstanceSecurityGroupsState();
     }
 }

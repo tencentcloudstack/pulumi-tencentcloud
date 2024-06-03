@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cvm.Inputs
 {
 
-    public sealed class LaunchTemplateVersionVirtualPrivateCloudGetArgs : Pulumi.ResourceArgs
+    public sealed class LaunchTemplateVersionVirtualPrivateCloudGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Whether to use a CVM instance as a public gateway. The public gateway is only available when the instance has a public IP and resides in a VPC.
@@ -52,5 +52,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cvm.Inputs
         public LaunchTemplateVersionVirtualPrivateCloudGetArgs()
         {
         }
+        public static new LaunchTemplateVersionVirtualPrivateCloudGetArgs Empty => new LaunchTemplateVersionVirtualPrivateCloudGetArgs();
     }
 }

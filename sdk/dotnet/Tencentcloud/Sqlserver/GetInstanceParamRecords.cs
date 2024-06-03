@@ -15,64 +15,58 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
         /// <summary>
         /// Use this data source to query detailed information of sqlserver instance_param_records
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var example = Tencentcloud.Sqlserver.GetInstanceParamRecords.Invoke(new()
         ///     {
-        ///         var example = Output.Create(Tencentcloud.Sqlserver.GetInstanceParamRecords.InvokeAsync(new Tencentcloud.Sqlserver.GetInstanceParamRecordsArgs
-        ///         {
-        ///             InstanceId = "mssql-qelbzgwf",
-        ///         }));
-        ///     }
+        ///         InstanceId = "mssql-qelbzgwf",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetInstanceParamRecordsResult> InvokeAsync(GetInstanceParamRecordsArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetInstanceParamRecordsResult>("tencentcloud:Sqlserver/getInstanceParamRecords:getInstanceParamRecords", args ?? new GetInstanceParamRecordsArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetInstanceParamRecordsResult>("tencentcloud:Sqlserver/getInstanceParamRecords:getInstanceParamRecords", args ?? new GetInstanceParamRecordsArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of sqlserver instance_param_records
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var example = Tencentcloud.Sqlserver.GetInstanceParamRecords.Invoke(new()
         ///     {
-        ///         var example = Output.Create(Tencentcloud.Sqlserver.GetInstanceParamRecords.InvokeAsync(new Tencentcloud.Sqlserver.GetInstanceParamRecordsArgs
-        ///         {
-        ///             InstanceId = "mssql-qelbzgwf",
-        ///         }));
-        ///     }
+        ///         InstanceId = "mssql-qelbzgwf",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetInstanceParamRecordsResult> Invoke(GetInstanceParamRecordsInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetInstanceParamRecordsResult>("tencentcloud:Sqlserver/getInstanceParamRecords:getInstanceParamRecords", args ?? new GetInstanceParamRecordsInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetInstanceParamRecordsResult>("tencentcloud:Sqlserver/getInstanceParamRecords:getInstanceParamRecords", args ?? new GetInstanceParamRecordsInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetInstanceParamRecordsArgs : Pulumi.InvokeArgs
+    public sealed class GetInstanceParamRecordsArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Instance ID in the format of mssql-dj5i29c5n. It is the same as the instance ID displayed in the TencentDB console and the response parameter InstanceId of the DescribeDBInstances API.
@@ -89,9 +83,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
         public GetInstanceParamRecordsArgs()
         {
         }
+        public static new GetInstanceParamRecordsArgs Empty => new GetInstanceParamRecordsArgs();
     }
 
-    public sealed class GetInstanceParamRecordsInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetInstanceParamRecordsInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Instance ID in the format of mssql-dj5i29c5n. It is the same as the instance ID displayed in the TencentDB console and the response parameter InstanceId of the DescribeDBInstances API.
@@ -108,6 +103,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
         public GetInstanceParamRecordsInvokeArgs()
         {
         }
+        public static new GetInstanceParamRecordsInvokeArgs Empty => new GetInstanceParamRecordsInvokeArgs();
     }
 
 

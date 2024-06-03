@@ -15,33 +15,34 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dasb
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var example = new Tencentcloud.Dasb.CmdTemplate("example", new()
     ///     {
-    ///         var example = new Tencentcloud.Dasb.CmdTemplate("example", new Tencentcloud.Dasb.CmdTemplateArgs
-    ///         {
-    ///             CmdList = "rm -rf*",
-    ///         });
-    ///     }
+    ///         CmdList = "rm -rf*",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// dasb cmd_template can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Dasb/cmdTemplate:CmdTemplate example 15
+    /// $ pulumi import tencentcloud:Dasb/cmdTemplate:CmdTemplate example 15
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Dasb/cmdTemplate:CmdTemplate")]
-    public partial class CmdTemplate : Pulumi.CustomResource
+    public partial class CmdTemplate : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Command list, n separated, maximum length 32768 bytes.
@@ -100,7 +101,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dasb
         }
     }
 
-    public sealed class CmdTemplateArgs : Pulumi.ResourceArgs
+    public sealed class CmdTemplateArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Command list, n separated, maximum length 32768 bytes.
@@ -117,9 +118,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dasb
         public CmdTemplateArgs()
         {
         }
+        public static new CmdTemplateArgs Empty => new CmdTemplateArgs();
     }
 
-    public sealed class CmdTemplateState : Pulumi.ResourceArgs
+    public sealed class CmdTemplateState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Command list, n separated, maximum length 32768 bytes.
@@ -136,5 +138,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dasb
         public CmdTemplateState()
         {
         }
+        public static new CmdTemplateState Empty => new CmdTemplateState();
     }
 }

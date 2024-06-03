@@ -14,251 +14,261 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Waf
     /// Provides a resource to create a waf saas_domain
     /// 
     /// ## Example Usage
+    /// 
     /// ### If upstream_type is 0
     /// 
     /// Create a basic waf saas domain
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var example = new Tencentcloud.Waf.SaasDomain("example", new()
     ///     {
-    ///         var example = new Tencentcloud.Waf.SaasDomain("example", new Tencentcloud.Waf.SaasDomainArgs
+    ///         Domain = "tf.example.com",
+    ///         InstanceId = "waf_2kxtlbky01b3wceb",
+    ///         Ports = new[]
     ///         {
-    ///             Domain = "tf.example.com",
-    ///             InstanceId = "waf_2kxtlbky01b3wceb",
-    ///             Ports = 
+    ///             new Tencentcloud.Waf.Inputs.SaasDomainPortArgs
     ///             {
-    ///                 new Tencentcloud.Waf.Inputs.SaasDomainPortArgs
-    ///                 {
-    ///                     Port = "80",
-    ///                     Protocol = "http",
-    ///                     UpstreamPort = "80",
-    ///                     UpstreamProtocol = "http",
-    ///                 },
+    ///                 Port = "80",
+    ///                 Protocol = "http",
+    ///                 UpstreamPort = "80",
+    ///                 UpstreamProtocol = "http",
     ///             },
-    ///             SrcLists = 
-    ///             {
-    ///                 "1.1.1.1",
-    ///             },
-    ///         });
-    ///     }
+    ///         },
+    ///         SrcLists = new[]
+    ///         {
+    ///             "1.1.1.1",
+    ///         },
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
+    /// 
     /// ### Create a load balancing strategy is weighted polling saas domain
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var example = new Tencentcloud.Waf.SaasDomain("example", new()
     ///     {
-    ///         var example = new Tencentcloud.Waf.SaasDomain("example", new Tencentcloud.Waf.SaasDomainArgs
+    ///         Domain = "tf.example.com",
+    ///         InstanceId = "waf_2kxtlbky01b3wceb",
+    ///         LoadBalance = "2",
+    ///         Ports = new[]
     ///         {
-    ///             Domain = "tf.example.com",
-    ///             InstanceId = "waf_2kxtlbky01b3wceb",
-    ///             LoadBalance = "2",
-    ///             Ports = 
+    ///             new Tencentcloud.Waf.Inputs.SaasDomainPortArgs
     ///             {
-    ///                 new Tencentcloud.Waf.Inputs.SaasDomainPortArgs
-    ///                 {
-    ///                     Port = "80",
-    ///                     Protocol = "http",
-    ///                     UpstreamPort = "80",
-    ///                     UpstreamProtocol = "http",
-    ///                 },
+    ///                 Port = "80",
+    ///                 Protocol = "http",
+    ///                 UpstreamPort = "80",
+    ///                 UpstreamProtocol = "http",
     ///             },
-    ///             SrcLists = 
-    ///             {
-    ///                 "1.1.1.1",
-    ///                 "2.2.2.2",
-    ///             },
-    ///             Weights = 
-    ///             {
-    ///                 30,
-    ///                 50,
-    ///             },
-    ///         });
-    ///     }
+    ///         },
+    ///         SrcLists = new[]
+    ///         {
+    ///             "1.1.1.1",
+    ///             "2.2.2.2",
+    ///         },
+    ///         Weights = new[]
+    ///         {
+    ///             30,
+    ///             50,
+    ///         },
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
+    /// 
     /// ### If upstream_type is 1
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var example = new Tencentcloud.Waf.SaasDomain("example", new()
     ///     {
-    ///         var example = new Tencentcloud.Waf.SaasDomain("example", new Tencentcloud.Waf.SaasDomainArgs
+    ///         Domain = "tf.example.com",
+    ///         InstanceId = "waf_2kxtlbky01b3wceb",
+    ///         Ports = new[]
     ///         {
-    ///             Domain = "tf.example.com",
-    ///             InstanceId = "waf_2kxtlbky01b3wceb",
-    ///             Ports = 
+    ///             new Tencentcloud.Waf.Inputs.SaasDomainPortArgs
     ///             {
-    ///                 new Tencentcloud.Waf.Inputs.SaasDomainPortArgs
-    ///                 {
-    ///                     Port = "80",
-    ///                     Protocol = "http",
-    ///                     UpstreamPort = "80",
-    ///                     UpstreamProtocol = "http",
-    ///                 },
+    ///                 Port = "80",
+    ///                 Protocol = "http",
+    ///                 UpstreamPort = "80",
+    ///                 UpstreamProtocol = "http",
     ///             },
-    ///             UpstreamDomain = "test.com",
-    ///             UpstreamType = 1,
-    ///         });
-    ///     }
+    ///         },
+    ///         UpstreamDomain = "test.com",
+    ///         UpstreamType = 1,
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
+    /// 
     /// ### Create a waf saas domain with set Http&amp;Https
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var example = new Tencentcloud.Waf.SaasDomain("example", new()
     ///     {
-    ///         var example = new Tencentcloud.Waf.SaasDomain("example", new Tencentcloud.Waf.SaasDomainArgs
+    ///         CertType = 2,
+    ///         Domain = "tf.example.com",
+    ///         HttpsRewrite = 1,
+    ///         InstanceId = "waf_2kxtlbky01b3wceb",
+    ///         IpHeaders = new[]
     ///         {
-    ///             CertType = 2,
-    ///             Domain = "tf.example.com",
-    ///             HttpsRewrite = 1,
-    ///             InstanceId = "waf_2kxtlbky01b3wceb",
-    ///             IpHeaders = 
+    ///             "headers_1",
+    ///             "headers_2",
+    ///             "headers_3",
+    ///         },
+    ///         IsCdn = 3,
+    ///         LoadBalance = "2",
+    ///         Ports = new[]
+    ///         {
+    ///             new Tencentcloud.Waf.Inputs.SaasDomainPortArgs
     ///             {
-    ///                 "headers_1",
-    ///                 "headers_2",
-    ///                 "headers_3",
+    ///                 Port = "80",
+    ///                 Protocol = "http",
+    ///                 UpstreamPort = "80",
+    ///                 UpstreamProtocol = "http",
     ///             },
-    ///             IsCdn = 3,
-    ///             LoadBalance = "2",
-    ///             Ports = 
+    ///             new Tencentcloud.Waf.Inputs.SaasDomainPortArgs
     ///             {
-    ///                 new Tencentcloud.Waf.Inputs.SaasDomainPortArgs
-    ///                 {
-    ///                     Port = "80",
-    ///                     Protocol = "http",
-    ///                     UpstreamPort = "80",
-    ///                     UpstreamProtocol = "http",
-    ///                 },
-    ///                 new Tencentcloud.Waf.Inputs.SaasDomainPortArgs
-    ///                 {
-    ///                     Port = "443",
-    ///                     Protocol = "https",
-    ///                     UpstreamPort = "443",
-    ///                     UpstreamProtocol = "https",
-    ///                 },
+    ///                 Port = "443",
+    ///                 Protocol = "https",
+    ///                 UpstreamPort = "443",
+    ///                 UpstreamProtocol = "https",
     ///             },
-    ///             SrcLists = 
-    ///             {
-    ///                 "1.1.1.1",
-    ///                 "2.2.2.2",
-    ///             },
-    ///             SslId = "3a6B5y8v",
-    ///             UpstreamScheme = "https",
-    ///             Weights = 
-    ///             {
-    ///                 50,
-    ///                 60,
-    ///             },
-    ///         });
-    ///     }
+    ///         },
+    ///         SrcLists = new[]
+    ///         {
+    ///             "1.1.1.1",
+    ///             "2.2.2.2",
+    ///         },
+    ///         SslId = "3a6B5y8v",
+    ///         UpstreamScheme = "https",
+    ///         Weights = new[]
+    ///         {
+    ///             50,
+    ///             60,
+    ///         },
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
+    /// 
     /// ### Create a complete waf saas domain
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var example = new Tencentcloud.Waf.SaasDomain("example", new()
     ///     {
-    ///         var example = new Tencentcloud.Waf.SaasDomain("example", new Tencentcloud.Waf.SaasDomainArgs
+    ///         ActiveCheck = 1,
+    ///         ApiSafeStatus = 1,
+    ///         BotStatus = 1,
+    ///         CertType = 2,
+    ///         CipherTemplate = 1,
+    ///         Domain = "tf.example.com",
+    ///         HttpsRewrite = 1,
+    ///         InstanceId = "waf_2kxtlbky01b3wceb",
+    ///         IpHeaders = new[]
     ///         {
-    ///             ActiveCheck = 1,
-    ///             ApiSafeStatus = 1,
-    ///             BotStatus = 1,
-    ///             CertType = 2,
-    ///             CipherTemplate = 1,
-    ///             Domain = "tf.example.com",
-    ///             HttpsRewrite = 1,
-    ///             InstanceId = "waf_2kxtlbky01b3wceb",
-    ///             IpHeaders = 
+    ///             "headers_1",
+    ///             "headers_2",
+    ///             "headers_3",
+    ///         },
+    ///         IsCdn = 3,
+    ///         IsHttp2 = 1,
+    ///         IsKeepAlive = "1",
+    ///         LoadBalance = "2",
+    ///         Ports = new[]
+    ///         {
+    ///             new Tencentcloud.Waf.Inputs.SaasDomainPortArgs
     ///             {
-    ///                 "headers_1",
-    ///                 "headers_2",
-    ///                 "headers_3",
+    ///                 Port = "80",
+    ///                 Protocol = "http",
+    ///                 UpstreamPort = "80",
+    ///                 UpstreamProtocol = "http",
     ///             },
-    ///             IsCdn = 3,
-    ///             IsHttp2 = 1,
-    ///             IsKeepAlive = "1",
-    ///             LoadBalance = "2",
-    ///             Ports = 
+    ///             new Tencentcloud.Waf.Inputs.SaasDomainPortArgs
     ///             {
-    ///                 new Tencentcloud.Waf.Inputs.SaasDomainPortArgs
-    ///                 {
-    ///                     Port = "80",
-    ///                     Protocol = "http",
-    ///                     UpstreamPort = "80",
-    ///                     UpstreamProtocol = "http",
-    ///                 },
-    ///                 new Tencentcloud.Waf.Inputs.SaasDomainPortArgs
-    ///                 {
-    ///                     Port = "443",
-    ///                     Protocol = "https",
-    ///                     UpstreamPort = "443",
-    ///                     UpstreamProtocol = "https",
-    ///                 },
+    ///                 Port = "443",
+    ///                 Protocol = "https",
+    ///                 UpstreamPort = "443",
+    ///                 UpstreamProtocol = "https",
     ///             },
-    ///             ProxyReadTimeout = 500,
-    ///             ProxySendTimeout = 500,
-    ///             SniHost = "3.3.3.3",
-    ///             SniType = 3,
-    ///             SrcLists = 
-    ///             {
-    ///                 "1.1.1.1",
-    ///                 "2.2.2.2",
-    ///             },
-    ///             SslId = "3a6B5y8v",
-    ///             TlsVersion = 3,
-    ///             UpstreamScheme = "https",
-    ///             Weights = 
-    ///             {
-    ///                 50,
-    ///                 60,
-    ///             },
-    ///             XffReset = 1,
-    ///         });
-    ///     }
+    ///         },
+    ///         ProxyReadTimeout = 500,
+    ///         ProxySendTimeout = 500,
+    ///         SniHost = "3.3.3.3",
+    ///         SniType = 3,
+    ///         SrcLists = new[]
+    ///         {
+    ///             "1.1.1.1",
+    ///             "2.2.2.2",
+    ///         },
+    ///         SslId = "3a6B5y8v",
+    ///         TlsVersion = 3,
+    ///         UpstreamScheme = "https",
+    ///         Weights = new[]
+    ///         {
+    ///             50,
+    ///             60,
+    ///         },
+    ///         XffReset = 1,
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// waf saas_domain can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Waf/saasDomain:SaasDomain example waf_2kxtlbky01b3wceb#tf.example.com#9647c91da0aa5f5aaa49d0ca40e2af24
+    /// $ pulumi import tencentcloud:Waf/saasDomain:SaasDomain example waf_2kxtlbky01b3wceb#tf.example.com#9647c91da0aa5f5aaa49d0ca40e2af24
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Waf/saasDomain:SaasDomain")]
-    public partial class SaasDomain : Pulumi.CustomResource
+    public partial class SaasDomain : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Whether to enable active health detection, 0 represents disable and 1 represents enable.
@@ -509,7 +519,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Waf
         }
     }
 
-    public sealed class SaasDomainArgs : Pulumi.ResourceArgs
+    public sealed class SaasDomainArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Whether to enable active health detection, 0 represents disable and 1 represents enable.
@@ -742,9 +752,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Waf
         public SaasDomainArgs()
         {
         }
+        public static new SaasDomainArgs Empty => new SaasDomainArgs();
     }
 
-    public sealed class SaasDomainState : Pulumi.ResourceArgs
+    public sealed class SaasDomainState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Whether to enable active health detection, 0 represents disable and 1 represents enable.
@@ -983,5 +994,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Waf
         public SaasDomainState()
         {
         }
+        public static new SaasDomainState Empty => new SaasDomainState();
     }
 }

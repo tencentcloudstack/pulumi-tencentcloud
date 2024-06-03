@@ -15,66 +15,60 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka
         /// <summary>
         /// Use this data source to query detailed information of ckafka topic_sync_replica
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var topicSyncReplica = Tencentcloud.Ckafka.GetTopicSyncReplica.Invoke(new()
         ///     {
-        ///         var topicSyncReplica = Output.Create(Tencentcloud.Ckafka.GetTopicSyncReplica.InvokeAsync(new Tencentcloud.Ckafka.GetTopicSyncReplicaArgs
-        ///         {
-        ///             InstanceId = "ckafka-xxxxxx",
-        ///             TopicName = "xxxxxx",
-        ///         }));
-        ///     }
+        ///         InstanceId = "ckafka-xxxxxx",
+        ///         TopicName = "xxxxxx",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetTopicSyncReplicaResult> InvokeAsync(GetTopicSyncReplicaArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetTopicSyncReplicaResult>("tencentcloud:Ckafka/getTopicSyncReplica:getTopicSyncReplica", args ?? new GetTopicSyncReplicaArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetTopicSyncReplicaResult>("tencentcloud:Ckafka/getTopicSyncReplica:getTopicSyncReplica", args ?? new GetTopicSyncReplicaArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of ckafka topic_sync_replica
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var topicSyncReplica = Tencentcloud.Ckafka.GetTopicSyncReplica.Invoke(new()
         ///     {
-        ///         var topicSyncReplica = Output.Create(Tencentcloud.Ckafka.GetTopicSyncReplica.InvokeAsync(new Tencentcloud.Ckafka.GetTopicSyncReplicaArgs
-        ///         {
-        ///             InstanceId = "ckafka-xxxxxx",
-        ///             TopicName = "xxxxxx",
-        ///         }));
-        ///     }
+        ///         InstanceId = "ckafka-xxxxxx",
+        ///         TopicName = "xxxxxx",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetTopicSyncReplicaResult> Invoke(GetTopicSyncReplicaInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetTopicSyncReplicaResult>("tencentcloud:Ckafka/getTopicSyncReplica:getTopicSyncReplica", args ?? new GetTopicSyncReplicaInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetTopicSyncReplicaResult>("tencentcloud:Ckafka/getTopicSyncReplica:getTopicSyncReplica", args ?? new GetTopicSyncReplicaInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetTopicSyncReplicaArgs : Pulumi.InvokeArgs
+    public sealed class GetTopicSyncReplicaArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// InstanceId.
@@ -103,9 +97,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka
         public GetTopicSyncReplicaArgs()
         {
         }
+        public static new GetTopicSyncReplicaArgs Empty => new GetTopicSyncReplicaArgs();
     }
 
-    public sealed class GetTopicSyncReplicaInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetTopicSyncReplicaInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// InstanceId.
@@ -134,6 +129,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka
         public GetTopicSyncReplicaInvokeArgs()
         {
         }
+        public static new GetTopicSyncReplicaInvokeArgs Empty => new GetTopicSyncReplicaInvokeArgs();
     }
 
 

@@ -9,24 +9,26 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const foo = new tencentcloud.Vpn.CustomerGateway("foo", {
+ * const foo = new tencentcloud.vpn.CustomerGateway("foo", {
  *     publicIpAddress: "1.1.1.1",
  *     tags: {
  *         tag: "test",
  *     },
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * VPN customer gateway can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Vpn/customerGateway:CustomerGateway foo cgw-xfqag
+ * $ pulumi import tencentcloud:Vpn/customerGateway:CustomerGateway foo cgw-xfqag
  * ```
  */
 export class CustomerGateway extends pulumi.CustomResource {

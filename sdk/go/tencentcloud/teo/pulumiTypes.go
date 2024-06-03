@@ -8,7 +8,10 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
+
+var _ = internal.GetEnvOrDefault
 
 type AccelerationDomainOriginInfo struct {
 	// ID of the secondary origin group (valid when `OriginType=ORIGIN_GROUP`). If it is not specified, it indicates that secondary origins are not used.
@@ -26,7 +29,7 @@ type AccelerationDomainOriginInfo struct {
 // AccelerationDomainOriginInfoInput is an input type that accepts AccelerationDomainOriginInfoArgs and AccelerationDomainOriginInfoOutput values.
 // You can construct a concrete instance of `AccelerationDomainOriginInfoInput` via:
 //
-//          AccelerationDomainOriginInfoArgs{...}
+//	AccelerationDomainOriginInfoArgs{...}
 type AccelerationDomainOriginInfoInput interface {
 	pulumi.Input
 
@@ -70,11 +73,11 @@ func (i AccelerationDomainOriginInfoArgs) ToAccelerationDomainOriginInfoPtrOutpu
 // AccelerationDomainOriginInfoPtrInput is an input type that accepts AccelerationDomainOriginInfoArgs, AccelerationDomainOriginInfoPtr and AccelerationDomainOriginInfoPtrOutput values.
 // You can construct a concrete instance of `AccelerationDomainOriginInfoPtrInput` via:
 //
-//          AccelerationDomainOriginInfoArgs{...}
+//	        AccelerationDomainOriginInfoArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type AccelerationDomainOriginInfoPtrInput interface {
 	pulumi.Input
 
@@ -235,7 +238,7 @@ type AccelerationDomainOriginInfoPrivateParameter struct {
 // AccelerationDomainOriginInfoPrivateParameterInput is an input type that accepts AccelerationDomainOriginInfoPrivateParameterArgs and AccelerationDomainOriginInfoPrivateParameterOutput values.
 // You can construct a concrete instance of `AccelerationDomainOriginInfoPrivateParameterInput` via:
 //
-//          AccelerationDomainOriginInfoPrivateParameterArgs{...}
+//	AccelerationDomainOriginInfoPrivateParameterArgs{...}
 type AccelerationDomainOriginInfoPrivateParameterInput interface {
 	pulumi.Input
 
@@ -265,7 +268,7 @@ func (i AccelerationDomainOriginInfoPrivateParameterArgs) ToAccelerationDomainOr
 // AccelerationDomainOriginInfoPrivateParameterArrayInput is an input type that accepts AccelerationDomainOriginInfoPrivateParameterArray and AccelerationDomainOriginInfoPrivateParameterArrayOutput values.
 // You can construct a concrete instance of `AccelerationDomainOriginInfoPrivateParameterArrayInput` via:
 //
-//          AccelerationDomainOriginInfoPrivateParameterArray{ AccelerationDomainOriginInfoPrivateParameterArgs{...} }
+//	AccelerationDomainOriginInfoPrivateParameterArray{ AccelerationDomainOriginInfoPrivateParameterArgs{...} }
 type AccelerationDomainOriginInfoPrivateParameterArrayInput interface {
 	pulumi.Input
 
@@ -332,13 +335,14 @@ func (o AccelerationDomainOriginInfoPrivateParameterArrayOutput) Index(i pulumi.
 }
 
 type ApplicationProxyIpv6 struct {
+	// - `on`: Enable.- `off`: Disable.
 	Switch string `pulumi:"switch"`
 }
 
 // ApplicationProxyIpv6Input is an input type that accepts ApplicationProxyIpv6Args and ApplicationProxyIpv6Output values.
 // You can construct a concrete instance of `ApplicationProxyIpv6Input` via:
 //
-//          ApplicationProxyIpv6Args{...}
+//	ApplicationProxyIpv6Args{...}
 type ApplicationProxyIpv6Input interface {
 	pulumi.Input
 
@@ -347,6 +351,7 @@ type ApplicationProxyIpv6Input interface {
 }
 
 type ApplicationProxyIpv6Args struct {
+	// - `on`: Enable.- `off`: Disable.
 	Switch pulumi.StringInput `pulumi:"switch"`
 }
 
@@ -373,11 +378,11 @@ func (i ApplicationProxyIpv6Args) ToApplicationProxyIpv6PtrOutputWithContext(ctx
 // ApplicationProxyIpv6PtrInput is an input type that accepts ApplicationProxyIpv6Args, ApplicationProxyIpv6Ptr and ApplicationProxyIpv6PtrOutput values.
 // You can construct a concrete instance of `ApplicationProxyIpv6PtrInput` via:
 //
-//          ApplicationProxyIpv6Args{...}
+//	        ApplicationProxyIpv6Args{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type ApplicationProxyIpv6PtrInput interface {
 	pulumi.Input
 
@@ -427,6 +432,7 @@ func (o ApplicationProxyIpv6Output) ToApplicationProxyIpv6PtrOutputWithContext(c
 	}).(ApplicationProxyIpv6PtrOutput)
 }
 
+// - `on`: Enable.- `off`: Disable.
 func (o ApplicationProxyIpv6Output) Switch() pulumi.StringOutput {
 	return o.ApplyT(func(v ApplicationProxyIpv6) string { return v.Switch }).(pulumi.StringOutput)
 }
@@ -455,6 +461,7 @@ func (o ApplicationProxyIpv6PtrOutput) Elem() ApplicationProxyIpv6Output {
 	}).(ApplicationProxyIpv6Output)
 }
 
+// - `on`: Enable.- `off`: Disable.
 func (o ApplicationProxyIpv6PtrOutput) Switch() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ApplicationProxyIpv6) *string {
 		if v == nil {
@@ -484,7 +491,7 @@ type CertificateConfigServerCertInfo struct {
 // CertificateConfigServerCertInfoInput is an input type that accepts CertificateConfigServerCertInfoArgs and CertificateConfigServerCertInfoOutput values.
 // You can construct a concrete instance of `CertificateConfigServerCertInfoInput` via:
 //
-//          CertificateConfigServerCertInfoArgs{...}
+//	CertificateConfigServerCertInfoArgs{...}
 type CertificateConfigServerCertInfoInput interface {
 	pulumi.Input
 
@@ -524,7 +531,7 @@ func (i CertificateConfigServerCertInfoArgs) ToCertificateConfigServerCertInfoOu
 // CertificateConfigServerCertInfoArrayInput is an input type that accepts CertificateConfigServerCertInfoArray and CertificateConfigServerCertInfoArrayOutput values.
 // You can construct a concrete instance of `CertificateConfigServerCertInfoArrayInput` via:
 //
-//          CertificateConfigServerCertInfoArray{ CertificateConfigServerCertInfoArgs{...} }
+//	CertificateConfigServerCertInfoArray{ CertificateConfigServerCertInfoArgs{...} }
 type CertificateConfigServerCertInfoArrayInput interface {
 	pulumi.Input
 
@@ -615,273 +622,557 @@ func (o CertificateConfigServerCertInfoArrayOutput) Index(i pulumi.IntInput) Cer
 	}).(CertificateConfigServerCertInfoOutput)
 }
 
-type OriginGroupOriginRecord struct {
-	// Indicating origin sites area when `Type` field is `area`. An empty List indicate the default area. Valid value:- Asia, Americas, Europe, Africa or Oceania.
-	Areas []string `pulumi:"areas"`
-	// Port of the origin site. Valid value range: 1-65535.
-	Port int `pulumi:"port"`
-	// Whether origin site is using private authentication. Only valid when `OriginType` is `thirdParty`.
+type L4ProxyDdosProtectionConfig struct {
+	// Exclusive DDoS protection specifications in the Chinese mainland. For details, see [Dedicated DDoS Mitigation Fee (Pay-as-You-Go)] (https://intl.cloud.tencent.com/document/product/1552/94162?from_cn_redirect=1). `PLATFORM`: Default protection of the platform, i.e., Exclusive DDoS protection is not enabled; `BASE30_MAX300`: Exclusive DDoS protection enabled, providing a baseline protection bandwidth of 30 Gbps and an elastic protection bandwidth of up to 300 Gbps; `BASE60_MAX600`: Exclusive DDoS protection enabled, providing a baseline protection bandwidth of 60 Gbps and an elastic protection bandwidth of up to 600 Gbps. If no parameters are filled, the default value PLATFORM is used.
+	LevelMainland *string `pulumi:"levelMainland"`
+	// Exclusive DDoS protection specifications in the worldwide region (excluding the Chinese mainland). `PLATFORM`: Default protection of the platform, i.e., Exclusive DDoS protection is not enabled; `ANYCAST300`: Exclusive DDoS protection enabled, offering a total maximum protection bandwidth of 300 Gbps; `ANYCAST_ALLIN`: Exclusive DDoS protection enabled, utilizing all available protection resources for protection. When no parameters are filled, the default value PLATFORM is used.
+	LevelOverseas *string `pulumi:"levelOverseas"`
+	// Configuration of elastic protection bandwidth for exclusive DDoS protection in the Chinese mainland.Valid only when exclusive DDoS protection in the Chinese mainland is enabled (refer to the LevelMainland parameter configuration), and the value has the following limitations: When exclusive DDoS protection is enabled in the Chinese mainland and the 30 Gbps baseline protection bandwidth is used (the LevelMainland parameter value is BASE30_MAX300): the value range is 30 to 300 in Gbps; When exclusive DDoS protection is enabled in the Chinese mainland and the 60 Gbps baseline protection bandwidth is used (the LevelMainland parameter value is BASE60_MAX600): the value range is 60 to 600 in Gbps; When the default protection of the platform is used (the LevelMainland parameter value is PLATFORM): configuration is not supported, and the value of this parameter is invalid.
+	MaxBandwidthMainland *int `pulumi:"maxBandwidthMainland"`
+}
+
+// L4ProxyDdosProtectionConfigInput is an input type that accepts L4ProxyDdosProtectionConfigArgs and L4ProxyDdosProtectionConfigOutput values.
+// You can construct a concrete instance of `L4ProxyDdosProtectionConfigInput` via:
+//
+//	L4ProxyDdosProtectionConfigArgs{...}
+type L4ProxyDdosProtectionConfigInput interface {
+	pulumi.Input
+
+	ToL4ProxyDdosProtectionConfigOutput() L4ProxyDdosProtectionConfigOutput
+	ToL4ProxyDdosProtectionConfigOutputWithContext(context.Context) L4ProxyDdosProtectionConfigOutput
+}
+
+type L4ProxyDdosProtectionConfigArgs struct {
+	// Exclusive DDoS protection specifications in the Chinese mainland. For details, see [Dedicated DDoS Mitigation Fee (Pay-as-You-Go)] (https://intl.cloud.tencent.com/document/product/1552/94162?from_cn_redirect=1). `PLATFORM`: Default protection of the platform, i.e., Exclusive DDoS protection is not enabled; `BASE30_MAX300`: Exclusive DDoS protection enabled, providing a baseline protection bandwidth of 30 Gbps and an elastic protection bandwidth of up to 300 Gbps; `BASE60_MAX600`: Exclusive DDoS protection enabled, providing a baseline protection bandwidth of 60 Gbps and an elastic protection bandwidth of up to 600 Gbps. If no parameters are filled, the default value PLATFORM is used.
+	LevelMainland pulumi.StringPtrInput `pulumi:"levelMainland"`
+	// Exclusive DDoS protection specifications in the worldwide region (excluding the Chinese mainland). `PLATFORM`: Default protection of the platform, i.e., Exclusive DDoS protection is not enabled; `ANYCAST300`: Exclusive DDoS protection enabled, offering a total maximum protection bandwidth of 300 Gbps; `ANYCAST_ALLIN`: Exclusive DDoS protection enabled, utilizing all available protection resources for protection. When no parameters are filled, the default value PLATFORM is used.
+	LevelOverseas pulumi.StringPtrInput `pulumi:"levelOverseas"`
+	// Configuration of elastic protection bandwidth for exclusive DDoS protection in the Chinese mainland.Valid only when exclusive DDoS protection in the Chinese mainland is enabled (refer to the LevelMainland parameter configuration), and the value has the following limitations: When exclusive DDoS protection is enabled in the Chinese mainland and the 30 Gbps baseline protection bandwidth is used (the LevelMainland parameter value is BASE30_MAX300): the value range is 30 to 300 in Gbps; When exclusive DDoS protection is enabled in the Chinese mainland and the 60 Gbps baseline protection bandwidth is used (the LevelMainland parameter value is BASE60_MAX600): the value range is 60 to 600 in Gbps; When the default protection of the platform is used (the LevelMainland parameter value is PLATFORM): configuration is not supported, and the value of this parameter is invalid.
+	MaxBandwidthMainland pulumi.IntPtrInput `pulumi:"maxBandwidthMainland"`
+}
+
+func (L4ProxyDdosProtectionConfigArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*L4ProxyDdosProtectionConfig)(nil)).Elem()
+}
+
+func (i L4ProxyDdosProtectionConfigArgs) ToL4ProxyDdosProtectionConfigOutput() L4ProxyDdosProtectionConfigOutput {
+	return i.ToL4ProxyDdosProtectionConfigOutputWithContext(context.Background())
+}
+
+func (i L4ProxyDdosProtectionConfigArgs) ToL4ProxyDdosProtectionConfigOutputWithContext(ctx context.Context) L4ProxyDdosProtectionConfigOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(L4ProxyDdosProtectionConfigOutput)
+}
+
+func (i L4ProxyDdosProtectionConfigArgs) ToL4ProxyDdosProtectionConfigPtrOutput() L4ProxyDdosProtectionConfigPtrOutput {
+	return i.ToL4ProxyDdosProtectionConfigPtrOutputWithContext(context.Background())
+}
+
+func (i L4ProxyDdosProtectionConfigArgs) ToL4ProxyDdosProtectionConfigPtrOutputWithContext(ctx context.Context) L4ProxyDdosProtectionConfigPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(L4ProxyDdosProtectionConfigOutput).ToL4ProxyDdosProtectionConfigPtrOutputWithContext(ctx)
+}
+
+// L4ProxyDdosProtectionConfigPtrInput is an input type that accepts L4ProxyDdosProtectionConfigArgs, L4ProxyDdosProtectionConfigPtr and L4ProxyDdosProtectionConfigPtrOutput values.
+// You can construct a concrete instance of `L4ProxyDdosProtectionConfigPtrInput` via:
+//
+//	        L4ProxyDdosProtectionConfigArgs{...}
+//
+//	or:
+//
+//	        nil
+type L4ProxyDdosProtectionConfigPtrInput interface {
+	pulumi.Input
+
+	ToL4ProxyDdosProtectionConfigPtrOutput() L4ProxyDdosProtectionConfigPtrOutput
+	ToL4ProxyDdosProtectionConfigPtrOutputWithContext(context.Context) L4ProxyDdosProtectionConfigPtrOutput
+}
+
+type l4proxyDdosProtectionConfigPtrType L4ProxyDdosProtectionConfigArgs
+
+func L4ProxyDdosProtectionConfigPtr(v *L4ProxyDdosProtectionConfigArgs) L4ProxyDdosProtectionConfigPtrInput {
+	return (*l4proxyDdosProtectionConfigPtrType)(v)
+}
+
+func (*l4proxyDdosProtectionConfigPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**L4ProxyDdosProtectionConfig)(nil)).Elem()
+}
+
+func (i *l4proxyDdosProtectionConfigPtrType) ToL4ProxyDdosProtectionConfigPtrOutput() L4ProxyDdosProtectionConfigPtrOutput {
+	return i.ToL4ProxyDdosProtectionConfigPtrOutputWithContext(context.Background())
+}
+
+func (i *l4proxyDdosProtectionConfigPtrType) ToL4ProxyDdosProtectionConfigPtrOutputWithContext(ctx context.Context) L4ProxyDdosProtectionConfigPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(L4ProxyDdosProtectionConfigPtrOutput)
+}
+
+type L4ProxyDdosProtectionConfigOutput struct{ *pulumi.OutputState }
+
+func (L4ProxyDdosProtectionConfigOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*L4ProxyDdosProtectionConfig)(nil)).Elem()
+}
+
+func (o L4ProxyDdosProtectionConfigOutput) ToL4ProxyDdosProtectionConfigOutput() L4ProxyDdosProtectionConfigOutput {
+	return o
+}
+
+func (o L4ProxyDdosProtectionConfigOutput) ToL4ProxyDdosProtectionConfigOutputWithContext(ctx context.Context) L4ProxyDdosProtectionConfigOutput {
+	return o
+}
+
+func (o L4ProxyDdosProtectionConfigOutput) ToL4ProxyDdosProtectionConfigPtrOutput() L4ProxyDdosProtectionConfigPtrOutput {
+	return o.ToL4ProxyDdosProtectionConfigPtrOutputWithContext(context.Background())
+}
+
+func (o L4ProxyDdosProtectionConfigOutput) ToL4ProxyDdosProtectionConfigPtrOutputWithContext(ctx context.Context) L4ProxyDdosProtectionConfigPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v L4ProxyDdosProtectionConfig) *L4ProxyDdosProtectionConfig {
+		return &v
+	}).(L4ProxyDdosProtectionConfigPtrOutput)
+}
+
+// Exclusive DDoS protection specifications in the Chinese mainland. For details, see [Dedicated DDoS Mitigation Fee (Pay-as-You-Go)] (https://intl.cloud.tencent.com/document/product/1552/94162?from_cn_redirect=1). `PLATFORM`: Default protection of the platform, i.e., Exclusive DDoS protection is not enabled; `BASE30_MAX300`: Exclusive DDoS protection enabled, providing a baseline protection bandwidth of 30 Gbps and an elastic protection bandwidth of up to 300 Gbps; `BASE60_MAX600`: Exclusive DDoS protection enabled, providing a baseline protection bandwidth of 60 Gbps and an elastic protection bandwidth of up to 600 Gbps. If no parameters are filled, the default value PLATFORM is used.
+func (o L4ProxyDdosProtectionConfigOutput) LevelMainland() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v L4ProxyDdosProtectionConfig) *string { return v.LevelMainland }).(pulumi.StringPtrOutput)
+}
+
+// Exclusive DDoS protection specifications in the worldwide region (excluding the Chinese mainland). `PLATFORM`: Default protection of the platform, i.e., Exclusive DDoS protection is not enabled; `ANYCAST300`: Exclusive DDoS protection enabled, offering a total maximum protection bandwidth of 300 Gbps; `ANYCAST_ALLIN`: Exclusive DDoS protection enabled, utilizing all available protection resources for protection. When no parameters are filled, the default value PLATFORM is used.
+func (o L4ProxyDdosProtectionConfigOutput) LevelOverseas() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v L4ProxyDdosProtectionConfig) *string { return v.LevelOverseas }).(pulumi.StringPtrOutput)
+}
+
+// Configuration of elastic protection bandwidth for exclusive DDoS protection in the Chinese mainland.Valid only when exclusive DDoS protection in the Chinese mainland is enabled (refer to the LevelMainland parameter configuration), and the value has the following limitations: When exclusive DDoS protection is enabled in the Chinese mainland and the 30 Gbps baseline protection bandwidth is used (the LevelMainland parameter value is BASE30_MAX300): the value range is 30 to 300 in Gbps; When exclusive DDoS protection is enabled in the Chinese mainland and the 60 Gbps baseline protection bandwidth is used (the LevelMainland parameter value is BASE60_MAX600): the value range is 60 to 600 in Gbps; When the default protection of the platform is used (the LevelMainland parameter value is PLATFORM): configuration is not supported, and the value of this parameter is invalid.
+func (o L4ProxyDdosProtectionConfigOutput) MaxBandwidthMainland() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v L4ProxyDdosProtectionConfig) *int { return v.MaxBandwidthMainland }).(pulumi.IntPtrOutput)
+}
+
+type L4ProxyDdosProtectionConfigPtrOutput struct{ *pulumi.OutputState }
+
+func (L4ProxyDdosProtectionConfigPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**L4ProxyDdosProtectionConfig)(nil)).Elem()
+}
+
+func (o L4ProxyDdosProtectionConfigPtrOutput) ToL4ProxyDdosProtectionConfigPtrOutput() L4ProxyDdosProtectionConfigPtrOutput {
+	return o
+}
+
+func (o L4ProxyDdosProtectionConfigPtrOutput) ToL4ProxyDdosProtectionConfigPtrOutputWithContext(ctx context.Context) L4ProxyDdosProtectionConfigPtrOutput {
+	return o
+}
+
+func (o L4ProxyDdosProtectionConfigPtrOutput) Elem() L4ProxyDdosProtectionConfigOutput {
+	return o.ApplyT(func(v *L4ProxyDdosProtectionConfig) L4ProxyDdosProtectionConfig {
+		if v != nil {
+			return *v
+		}
+		var ret L4ProxyDdosProtectionConfig
+		return ret
+	}).(L4ProxyDdosProtectionConfigOutput)
+}
+
+// Exclusive DDoS protection specifications in the Chinese mainland. For details, see [Dedicated DDoS Mitigation Fee (Pay-as-You-Go)] (https://intl.cloud.tencent.com/document/product/1552/94162?from_cn_redirect=1). `PLATFORM`: Default protection of the platform, i.e., Exclusive DDoS protection is not enabled; `BASE30_MAX300`: Exclusive DDoS protection enabled, providing a baseline protection bandwidth of 30 Gbps and an elastic protection bandwidth of up to 300 Gbps; `BASE60_MAX600`: Exclusive DDoS protection enabled, providing a baseline protection bandwidth of 60 Gbps and an elastic protection bandwidth of up to 600 Gbps. If no parameters are filled, the default value PLATFORM is used.
+func (o L4ProxyDdosProtectionConfigPtrOutput) LevelMainland() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *L4ProxyDdosProtectionConfig) *string {
+		if v == nil {
+			return nil
+		}
+		return v.LevelMainland
+	}).(pulumi.StringPtrOutput)
+}
+
+// Exclusive DDoS protection specifications in the worldwide region (excluding the Chinese mainland). `PLATFORM`: Default protection of the platform, i.e., Exclusive DDoS protection is not enabled; `ANYCAST300`: Exclusive DDoS protection enabled, offering a total maximum protection bandwidth of 300 Gbps; `ANYCAST_ALLIN`: Exclusive DDoS protection enabled, utilizing all available protection resources for protection. When no parameters are filled, the default value PLATFORM is used.
+func (o L4ProxyDdosProtectionConfigPtrOutput) LevelOverseas() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *L4ProxyDdosProtectionConfig) *string {
+		if v == nil {
+			return nil
+		}
+		return v.LevelOverseas
+	}).(pulumi.StringPtrOutput)
+}
+
+// Configuration of elastic protection bandwidth for exclusive DDoS protection in the Chinese mainland.Valid only when exclusive DDoS protection in the Chinese mainland is enabled (refer to the LevelMainland parameter configuration), and the value has the following limitations: When exclusive DDoS protection is enabled in the Chinese mainland and the 30 Gbps baseline protection bandwidth is used (the LevelMainland parameter value is BASE30_MAX300): the value range is 30 to 300 in Gbps; When exclusive DDoS protection is enabled in the Chinese mainland and the 60 Gbps baseline protection bandwidth is used (the LevelMainland parameter value is BASE60_MAX600): the value range is 60 to 600 in Gbps; When the default protection of the platform is used (the LevelMainland parameter value is PLATFORM): configuration is not supported, and the value of this parameter is invalid.
+func (o L4ProxyDdosProtectionConfigPtrOutput) MaxBandwidthMainland() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *L4ProxyDdosProtectionConfig) *int {
+		if v == nil {
+			return nil
+		}
+		return v.MaxBandwidthMainland
+	}).(pulumi.IntPtrOutput)
+}
+
+type OriginGroupRecord struct {
+	// Whether to use private authentication, it takes effect when the origin site type RecordType=COS/AWS_S3, the values are:
 	Private *bool `pulumi:"private"`
 	// Parameters for private authentication. Only valid when `Private` is `true`.
-	PrivateParameters []OriginGroupOriginRecordPrivateParameter `pulumi:"privateParameters"`
-	// Record value, which could be an IPv4/IPv6 address or a domain.
-	Record   string  `pulumi:"record"`
+	PrivateParameters []OriginGroupRecordPrivateParameter `pulumi:"privateParameters"`
+	// Origin site record value, does not include port information, can be: IPv4, IPv6, domain name format.
+	Record string `pulumi:"record"`
+	// Origin record ID.
 	RecordId *string `pulumi:"recordId"`
-	// Indicating origin sites weight when `Type` field is `weight`. Valid value range: 1-100. Sum of all weights should be 100.
+	// Origin site type, the values are:
+	Type *string `pulumi:"type"`
+	// The weight of the origin site, the value is 0-100. If it is not filled in, it means that the weight will not be set and the system will schedule it freely. If it is filled in with 0, it means that the weight is 0 and the traffic will not be scheduled to this origin site.
 	Weight *int `pulumi:"weight"`
 }
 
-// OriginGroupOriginRecordInput is an input type that accepts OriginGroupOriginRecordArgs and OriginGroupOriginRecordOutput values.
-// You can construct a concrete instance of `OriginGroupOriginRecordInput` via:
+// OriginGroupRecordInput is an input type that accepts OriginGroupRecordArgs and OriginGroupRecordOutput values.
+// You can construct a concrete instance of `OriginGroupRecordInput` via:
 //
-//          OriginGroupOriginRecordArgs{...}
-type OriginGroupOriginRecordInput interface {
+//	OriginGroupRecordArgs{...}
+type OriginGroupRecordInput interface {
 	pulumi.Input
 
-	ToOriginGroupOriginRecordOutput() OriginGroupOriginRecordOutput
-	ToOriginGroupOriginRecordOutputWithContext(context.Context) OriginGroupOriginRecordOutput
+	ToOriginGroupRecordOutput() OriginGroupRecordOutput
+	ToOriginGroupRecordOutputWithContext(context.Context) OriginGroupRecordOutput
 }
 
-type OriginGroupOriginRecordArgs struct {
-	// Indicating origin sites area when `Type` field is `area`. An empty List indicate the default area. Valid value:- Asia, Americas, Europe, Africa or Oceania.
-	Areas pulumi.StringArrayInput `pulumi:"areas"`
-	// Port of the origin site. Valid value range: 1-65535.
-	Port pulumi.IntInput `pulumi:"port"`
-	// Whether origin site is using private authentication. Only valid when `OriginType` is `thirdParty`.
+type OriginGroupRecordArgs struct {
+	// Whether to use private authentication, it takes effect when the origin site type RecordType=COS/AWS_S3, the values are:
 	Private pulumi.BoolPtrInput `pulumi:"private"`
 	// Parameters for private authentication. Only valid when `Private` is `true`.
-	PrivateParameters OriginGroupOriginRecordPrivateParameterArrayInput `pulumi:"privateParameters"`
-	// Record value, which could be an IPv4/IPv6 address or a domain.
-	Record   pulumi.StringInput    `pulumi:"record"`
+	PrivateParameters OriginGroupRecordPrivateParameterArrayInput `pulumi:"privateParameters"`
+	// Origin site record value, does not include port information, can be: IPv4, IPv6, domain name format.
+	Record pulumi.StringInput `pulumi:"record"`
+	// Origin record ID.
 	RecordId pulumi.StringPtrInput `pulumi:"recordId"`
-	// Indicating origin sites weight when `Type` field is `weight`. Valid value range: 1-100. Sum of all weights should be 100.
+	// Origin site type, the values are:
+	Type pulumi.StringPtrInput `pulumi:"type"`
+	// The weight of the origin site, the value is 0-100. If it is not filled in, it means that the weight will not be set and the system will schedule it freely. If it is filled in with 0, it means that the weight is 0 and the traffic will not be scheduled to this origin site.
 	Weight pulumi.IntPtrInput `pulumi:"weight"`
 }
 
-func (OriginGroupOriginRecordArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*OriginGroupOriginRecord)(nil)).Elem()
+func (OriginGroupRecordArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*OriginGroupRecord)(nil)).Elem()
 }
 
-func (i OriginGroupOriginRecordArgs) ToOriginGroupOriginRecordOutput() OriginGroupOriginRecordOutput {
-	return i.ToOriginGroupOriginRecordOutputWithContext(context.Background())
+func (i OriginGroupRecordArgs) ToOriginGroupRecordOutput() OriginGroupRecordOutput {
+	return i.ToOriginGroupRecordOutputWithContext(context.Background())
 }
 
-func (i OriginGroupOriginRecordArgs) ToOriginGroupOriginRecordOutputWithContext(ctx context.Context) OriginGroupOriginRecordOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(OriginGroupOriginRecordOutput)
+func (i OriginGroupRecordArgs) ToOriginGroupRecordOutputWithContext(ctx context.Context) OriginGroupRecordOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(OriginGroupRecordOutput)
 }
 
-// OriginGroupOriginRecordArrayInput is an input type that accepts OriginGroupOriginRecordArray and OriginGroupOriginRecordArrayOutput values.
-// You can construct a concrete instance of `OriginGroupOriginRecordArrayInput` via:
+// OriginGroupRecordArrayInput is an input type that accepts OriginGroupRecordArray and OriginGroupRecordArrayOutput values.
+// You can construct a concrete instance of `OriginGroupRecordArrayInput` via:
 //
-//          OriginGroupOriginRecordArray{ OriginGroupOriginRecordArgs{...} }
-type OriginGroupOriginRecordArrayInput interface {
+//	OriginGroupRecordArray{ OriginGroupRecordArgs{...} }
+type OriginGroupRecordArrayInput interface {
 	pulumi.Input
 
-	ToOriginGroupOriginRecordArrayOutput() OriginGroupOriginRecordArrayOutput
-	ToOriginGroupOriginRecordArrayOutputWithContext(context.Context) OriginGroupOriginRecordArrayOutput
+	ToOriginGroupRecordArrayOutput() OriginGroupRecordArrayOutput
+	ToOriginGroupRecordArrayOutputWithContext(context.Context) OriginGroupRecordArrayOutput
 }
 
-type OriginGroupOriginRecordArray []OriginGroupOriginRecordInput
+type OriginGroupRecordArray []OriginGroupRecordInput
 
-func (OriginGroupOriginRecordArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]OriginGroupOriginRecord)(nil)).Elem()
+func (OriginGroupRecordArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]OriginGroupRecord)(nil)).Elem()
 }
 
-func (i OriginGroupOriginRecordArray) ToOriginGroupOriginRecordArrayOutput() OriginGroupOriginRecordArrayOutput {
-	return i.ToOriginGroupOriginRecordArrayOutputWithContext(context.Background())
+func (i OriginGroupRecordArray) ToOriginGroupRecordArrayOutput() OriginGroupRecordArrayOutput {
+	return i.ToOriginGroupRecordArrayOutputWithContext(context.Background())
 }
 
-func (i OriginGroupOriginRecordArray) ToOriginGroupOriginRecordArrayOutputWithContext(ctx context.Context) OriginGroupOriginRecordArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(OriginGroupOriginRecordArrayOutput)
+func (i OriginGroupRecordArray) ToOriginGroupRecordArrayOutputWithContext(ctx context.Context) OriginGroupRecordArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(OriginGroupRecordArrayOutput)
 }
 
-type OriginGroupOriginRecordOutput struct{ *pulumi.OutputState }
+type OriginGroupRecordOutput struct{ *pulumi.OutputState }
 
-func (OriginGroupOriginRecordOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*OriginGroupOriginRecord)(nil)).Elem()
+func (OriginGroupRecordOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*OriginGroupRecord)(nil)).Elem()
 }
 
-func (o OriginGroupOriginRecordOutput) ToOriginGroupOriginRecordOutput() OriginGroupOriginRecordOutput {
+func (o OriginGroupRecordOutput) ToOriginGroupRecordOutput() OriginGroupRecordOutput {
 	return o
 }
 
-func (o OriginGroupOriginRecordOutput) ToOriginGroupOriginRecordOutputWithContext(ctx context.Context) OriginGroupOriginRecordOutput {
+func (o OriginGroupRecordOutput) ToOriginGroupRecordOutputWithContext(ctx context.Context) OriginGroupRecordOutput {
 	return o
 }
 
-// Indicating origin sites area when `Type` field is `area`. An empty List indicate the default area. Valid value:- Asia, Americas, Europe, Africa or Oceania.
-func (o OriginGroupOriginRecordOutput) Areas() pulumi.StringArrayOutput {
-	return o.ApplyT(func(v OriginGroupOriginRecord) []string { return v.Areas }).(pulumi.StringArrayOutput)
-}
-
-// Port of the origin site. Valid value range: 1-65535.
-func (o OriginGroupOriginRecordOutput) Port() pulumi.IntOutput {
-	return o.ApplyT(func(v OriginGroupOriginRecord) int { return v.Port }).(pulumi.IntOutput)
-}
-
-// Whether origin site is using private authentication. Only valid when `OriginType` is `thirdParty`.
-func (o OriginGroupOriginRecordOutput) Private() pulumi.BoolPtrOutput {
-	return o.ApplyT(func(v OriginGroupOriginRecord) *bool { return v.Private }).(pulumi.BoolPtrOutput)
+// Whether to use private authentication, it takes effect when the origin site type RecordType=COS/AWS_S3, the values are:
+func (o OriginGroupRecordOutput) Private() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v OriginGroupRecord) *bool { return v.Private }).(pulumi.BoolPtrOutput)
 }
 
 // Parameters for private authentication. Only valid when `Private` is `true`.
-func (o OriginGroupOriginRecordOutput) PrivateParameters() OriginGroupOriginRecordPrivateParameterArrayOutput {
-	return o.ApplyT(func(v OriginGroupOriginRecord) []OriginGroupOriginRecordPrivateParameter { return v.PrivateParameters }).(OriginGroupOriginRecordPrivateParameterArrayOutput)
+func (o OriginGroupRecordOutput) PrivateParameters() OriginGroupRecordPrivateParameterArrayOutput {
+	return o.ApplyT(func(v OriginGroupRecord) []OriginGroupRecordPrivateParameter { return v.PrivateParameters }).(OriginGroupRecordPrivateParameterArrayOutput)
 }
 
-// Record value, which could be an IPv4/IPv6 address or a domain.
-func (o OriginGroupOriginRecordOutput) Record() pulumi.StringOutput {
-	return o.ApplyT(func(v OriginGroupOriginRecord) string { return v.Record }).(pulumi.StringOutput)
+// Origin site record value, does not include port information, can be: IPv4, IPv6, domain name format.
+func (o OriginGroupRecordOutput) Record() pulumi.StringOutput {
+	return o.ApplyT(func(v OriginGroupRecord) string { return v.Record }).(pulumi.StringOutput)
 }
 
-func (o OriginGroupOriginRecordOutput) RecordId() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v OriginGroupOriginRecord) *string { return v.RecordId }).(pulumi.StringPtrOutput)
+// Origin record ID.
+func (o OriginGroupRecordOutput) RecordId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v OriginGroupRecord) *string { return v.RecordId }).(pulumi.StringPtrOutput)
 }
 
-// Indicating origin sites weight when `Type` field is `weight`. Valid value range: 1-100. Sum of all weights should be 100.
-func (o OriginGroupOriginRecordOutput) Weight() pulumi.IntPtrOutput {
-	return o.ApplyT(func(v OriginGroupOriginRecord) *int { return v.Weight }).(pulumi.IntPtrOutput)
+// Origin site type, the values are:
+func (o OriginGroupRecordOutput) Type() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v OriginGroupRecord) *string { return v.Type }).(pulumi.StringPtrOutput)
 }
 
-type OriginGroupOriginRecordArrayOutput struct{ *pulumi.OutputState }
-
-func (OriginGroupOriginRecordArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]OriginGroupOriginRecord)(nil)).Elem()
+// The weight of the origin site, the value is 0-100. If it is not filled in, it means that the weight will not be set and the system will schedule it freely. If it is filled in with 0, it means that the weight is 0 and the traffic will not be scheduled to this origin site.
+func (o OriginGroupRecordOutput) Weight() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v OriginGroupRecord) *int { return v.Weight }).(pulumi.IntPtrOutput)
 }
 
-func (o OriginGroupOriginRecordArrayOutput) ToOriginGroupOriginRecordArrayOutput() OriginGroupOriginRecordArrayOutput {
+type OriginGroupRecordArrayOutput struct{ *pulumi.OutputState }
+
+func (OriginGroupRecordArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]OriginGroupRecord)(nil)).Elem()
+}
+
+func (o OriginGroupRecordArrayOutput) ToOriginGroupRecordArrayOutput() OriginGroupRecordArrayOutput {
 	return o
 }
 
-func (o OriginGroupOriginRecordArrayOutput) ToOriginGroupOriginRecordArrayOutputWithContext(ctx context.Context) OriginGroupOriginRecordArrayOutput {
+func (o OriginGroupRecordArrayOutput) ToOriginGroupRecordArrayOutputWithContext(ctx context.Context) OriginGroupRecordArrayOutput {
 	return o
 }
 
-func (o OriginGroupOriginRecordArrayOutput) Index(i pulumi.IntInput) OriginGroupOriginRecordOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) OriginGroupOriginRecord {
-		return vs[0].([]OriginGroupOriginRecord)[vs[1].(int)]
-	}).(OriginGroupOriginRecordOutput)
+func (o OriginGroupRecordArrayOutput) Index(i pulumi.IntInput) OriginGroupRecordOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) OriginGroupRecord {
+		return vs[0].([]OriginGroupRecord)[vs[1].(int)]
+	}).(OriginGroupRecordOutput)
 }
 
-type OriginGroupOriginRecordPrivateParameter struct {
-	// Parameter Name. Valid values: `AccessKeyId`: Access Key ID; `SecretAccessKey`: Secret Access Key.
+type OriginGroupRecordPrivateParameter struct {
+	// Private authentication parameter name, the values are:
 	Name string `pulumi:"name"`
-	// Parameter value.
+	// Private authentication parameter value.
 	Value string `pulumi:"value"`
 }
 
-// OriginGroupOriginRecordPrivateParameterInput is an input type that accepts OriginGroupOriginRecordPrivateParameterArgs and OriginGroupOriginRecordPrivateParameterOutput values.
-// You can construct a concrete instance of `OriginGroupOriginRecordPrivateParameterInput` via:
+// OriginGroupRecordPrivateParameterInput is an input type that accepts OriginGroupRecordPrivateParameterArgs and OriginGroupRecordPrivateParameterOutput values.
+// You can construct a concrete instance of `OriginGroupRecordPrivateParameterInput` via:
 //
-//          OriginGroupOriginRecordPrivateParameterArgs{...}
-type OriginGroupOriginRecordPrivateParameterInput interface {
+//	OriginGroupRecordPrivateParameterArgs{...}
+type OriginGroupRecordPrivateParameterInput interface {
 	pulumi.Input
 
-	ToOriginGroupOriginRecordPrivateParameterOutput() OriginGroupOriginRecordPrivateParameterOutput
-	ToOriginGroupOriginRecordPrivateParameterOutputWithContext(context.Context) OriginGroupOriginRecordPrivateParameterOutput
+	ToOriginGroupRecordPrivateParameterOutput() OriginGroupRecordPrivateParameterOutput
+	ToOriginGroupRecordPrivateParameterOutputWithContext(context.Context) OriginGroupRecordPrivateParameterOutput
 }
 
-type OriginGroupOriginRecordPrivateParameterArgs struct {
-	// Parameter Name. Valid values: `AccessKeyId`: Access Key ID; `SecretAccessKey`: Secret Access Key.
+type OriginGroupRecordPrivateParameterArgs struct {
+	// Private authentication parameter name, the values are:
 	Name pulumi.StringInput `pulumi:"name"`
-	// Parameter value.
+	// Private authentication parameter value.
 	Value pulumi.StringInput `pulumi:"value"`
 }
 
-func (OriginGroupOriginRecordPrivateParameterArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*OriginGroupOriginRecordPrivateParameter)(nil)).Elem()
+func (OriginGroupRecordPrivateParameterArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*OriginGroupRecordPrivateParameter)(nil)).Elem()
 }
 
-func (i OriginGroupOriginRecordPrivateParameterArgs) ToOriginGroupOriginRecordPrivateParameterOutput() OriginGroupOriginRecordPrivateParameterOutput {
-	return i.ToOriginGroupOriginRecordPrivateParameterOutputWithContext(context.Background())
+func (i OriginGroupRecordPrivateParameterArgs) ToOriginGroupRecordPrivateParameterOutput() OriginGroupRecordPrivateParameterOutput {
+	return i.ToOriginGroupRecordPrivateParameterOutputWithContext(context.Background())
 }
 
-func (i OriginGroupOriginRecordPrivateParameterArgs) ToOriginGroupOriginRecordPrivateParameterOutputWithContext(ctx context.Context) OriginGroupOriginRecordPrivateParameterOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(OriginGroupOriginRecordPrivateParameterOutput)
+func (i OriginGroupRecordPrivateParameterArgs) ToOriginGroupRecordPrivateParameterOutputWithContext(ctx context.Context) OriginGroupRecordPrivateParameterOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(OriginGroupRecordPrivateParameterOutput)
 }
 
-// OriginGroupOriginRecordPrivateParameterArrayInput is an input type that accepts OriginGroupOriginRecordPrivateParameterArray and OriginGroupOriginRecordPrivateParameterArrayOutput values.
-// You can construct a concrete instance of `OriginGroupOriginRecordPrivateParameterArrayInput` via:
+// OriginGroupRecordPrivateParameterArrayInput is an input type that accepts OriginGroupRecordPrivateParameterArray and OriginGroupRecordPrivateParameterArrayOutput values.
+// You can construct a concrete instance of `OriginGroupRecordPrivateParameterArrayInput` via:
 //
-//          OriginGroupOriginRecordPrivateParameterArray{ OriginGroupOriginRecordPrivateParameterArgs{...} }
-type OriginGroupOriginRecordPrivateParameterArrayInput interface {
+//	OriginGroupRecordPrivateParameterArray{ OriginGroupRecordPrivateParameterArgs{...} }
+type OriginGroupRecordPrivateParameterArrayInput interface {
 	pulumi.Input
 
-	ToOriginGroupOriginRecordPrivateParameterArrayOutput() OriginGroupOriginRecordPrivateParameterArrayOutput
-	ToOriginGroupOriginRecordPrivateParameterArrayOutputWithContext(context.Context) OriginGroupOriginRecordPrivateParameterArrayOutput
+	ToOriginGroupRecordPrivateParameterArrayOutput() OriginGroupRecordPrivateParameterArrayOutput
+	ToOriginGroupRecordPrivateParameterArrayOutputWithContext(context.Context) OriginGroupRecordPrivateParameterArrayOutput
 }
 
-type OriginGroupOriginRecordPrivateParameterArray []OriginGroupOriginRecordPrivateParameterInput
+type OriginGroupRecordPrivateParameterArray []OriginGroupRecordPrivateParameterInput
 
-func (OriginGroupOriginRecordPrivateParameterArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]OriginGroupOriginRecordPrivateParameter)(nil)).Elem()
+func (OriginGroupRecordPrivateParameterArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]OriginGroupRecordPrivateParameter)(nil)).Elem()
 }
 
-func (i OriginGroupOriginRecordPrivateParameterArray) ToOriginGroupOriginRecordPrivateParameterArrayOutput() OriginGroupOriginRecordPrivateParameterArrayOutput {
-	return i.ToOriginGroupOriginRecordPrivateParameterArrayOutputWithContext(context.Background())
+func (i OriginGroupRecordPrivateParameterArray) ToOriginGroupRecordPrivateParameterArrayOutput() OriginGroupRecordPrivateParameterArrayOutput {
+	return i.ToOriginGroupRecordPrivateParameterArrayOutputWithContext(context.Background())
 }
 
-func (i OriginGroupOriginRecordPrivateParameterArray) ToOriginGroupOriginRecordPrivateParameterArrayOutputWithContext(ctx context.Context) OriginGroupOriginRecordPrivateParameterArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(OriginGroupOriginRecordPrivateParameterArrayOutput)
+func (i OriginGroupRecordPrivateParameterArray) ToOriginGroupRecordPrivateParameterArrayOutputWithContext(ctx context.Context) OriginGroupRecordPrivateParameterArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(OriginGroupRecordPrivateParameterArrayOutput)
 }
 
-type OriginGroupOriginRecordPrivateParameterOutput struct{ *pulumi.OutputState }
+type OriginGroupRecordPrivateParameterOutput struct{ *pulumi.OutputState }
 
-func (OriginGroupOriginRecordPrivateParameterOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*OriginGroupOriginRecordPrivateParameter)(nil)).Elem()
+func (OriginGroupRecordPrivateParameterOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*OriginGroupRecordPrivateParameter)(nil)).Elem()
 }
 
-func (o OriginGroupOriginRecordPrivateParameterOutput) ToOriginGroupOriginRecordPrivateParameterOutput() OriginGroupOriginRecordPrivateParameterOutput {
+func (o OriginGroupRecordPrivateParameterOutput) ToOriginGroupRecordPrivateParameterOutput() OriginGroupRecordPrivateParameterOutput {
 	return o
 }
 
-func (o OriginGroupOriginRecordPrivateParameterOutput) ToOriginGroupOriginRecordPrivateParameterOutputWithContext(ctx context.Context) OriginGroupOriginRecordPrivateParameterOutput {
+func (o OriginGroupRecordPrivateParameterOutput) ToOriginGroupRecordPrivateParameterOutputWithContext(ctx context.Context) OriginGroupRecordPrivateParameterOutput {
 	return o
 }
 
-// Parameter Name. Valid values: `AccessKeyId`: Access Key ID; `SecretAccessKey`: Secret Access Key.
-func (o OriginGroupOriginRecordPrivateParameterOutput) Name() pulumi.StringOutput {
-	return o.ApplyT(func(v OriginGroupOriginRecordPrivateParameter) string { return v.Name }).(pulumi.StringOutput)
+// Private authentication parameter name, the values are:
+func (o OriginGroupRecordPrivateParameterOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v OriginGroupRecordPrivateParameter) string { return v.Name }).(pulumi.StringOutput)
 }
 
-// Parameter value.
-func (o OriginGroupOriginRecordPrivateParameterOutput) Value() pulumi.StringOutput {
-	return o.ApplyT(func(v OriginGroupOriginRecordPrivateParameter) string { return v.Value }).(pulumi.StringOutput)
+// Private authentication parameter value.
+func (o OriginGroupRecordPrivateParameterOutput) Value() pulumi.StringOutput {
+	return o.ApplyT(func(v OriginGroupRecordPrivateParameter) string { return v.Value }).(pulumi.StringOutput)
 }
 
-type OriginGroupOriginRecordPrivateParameterArrayOutput struct{ *pulumi.OutputState }
+type OriginGroupRecordPrivateParameterArrayOutput struct{ *pulumi.OutputState }
 
-func (OriginGroupOriginRecordPrivateParameterArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]OriginGroupOriginRecordPrivateParameter)(nil)).Elem()
+func (OriginGroupRecordPrivateParameterArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]OriginGroupRecordPrivateParameter)(nil)).Elem()
 }
 
-func (o OriginGroupOriginRecordPrivateParameterArrayOutput) ToOriginGroupOriginRecordPrivateParameterArrayOutput() OriginGroupOriginRecordPrivateParameterArrayOutput {
+func (o OriginGroupRecordPrivateParameterArrayOutput) ToOriginGroupRecordPrivateParameterArrayOutput() OriginGroupRecordPrivateParameterArrayOutput {
 	return o
 }
 
-func (o OriginGroupOriginRecordPrivateParameterArrayOutput) ToOriginGroupOriginRecordPrivateParameterArrayOutputWithContext(ctx context.Context) OriginGroupOriginRecordPrivateParameterArrayOutput {
+func (o OriginGroupRecordPrivateParameterArrayOutput) ToOriginGroupRecordPrivateParameterArrayOutputWithContext(ctx context.Context) OriginGroupRecordPrivateParameterArrayOutput {
 	return o
 }
 
-func (o OriginGroupOriginRecordPrivateParameterArrayOutput) Index(i pulumi.IntInput) OriginGroupOriginRecordPrivateParameterOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) OriginGroupOriginRecordPrivateParameter {
-		return vs[0].([]OriginGroupOriginRecordPrivateParameter)[vs[1].(int)]
-	}).(OriginGroupOriginRecordPrivateParameterOutput)
+func (o OriginGroupRecordPrivateParameterArrayOutput) Index(i pulumi.IntInput) OriginGroupRecordPrivateParameterOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) OriginGroupRecordPrivateParameter {
+		return vs[0].([]OriginGroupRecordPrivateParameter)[vs[1].(int)]
+	}).(OriginGroupRecordPrivateParameterOutput)
+}
+
+type OriginGroupReference struct {
+	// The instance ID of the reference type.
+	InstanceId *string `pulumi:"instanceId"`
+	// Instance name of the application type.
+	InstanceName *string `pulumi:"instanceName"`
+	// Reference service type, the values are:
+	InstanceType *string `pulumi:"instanceType"`
+}
+
+// OriginGroupReferenceInput is an input type that accepts OriginGroupReferenceArgs and OriginGroupReferenceOutput values.
+// You can construct a concrete instance of `OriginGroupReferenceInput` via:
+//
+//	OriginGroupReferenceArgs{...}
+type OriginGroupReferenceInput interface {
+	pulumi.Input
+
+	ToOriginGroupReferenceOutput() OriginGroupReferenceOutput
+	ToOriginGroupReferenceOutputWithContext(context.Context) OriginGroupReferenceOutput
+}
+
+type OriginGroupReferenceArgs struct {
+	// The instance ID of the reference type.
+	InstanceId pulumi.StringPtrInput `pulumi:"instanceId"`
+	// Instance name of the application type.
+	InstanceName pulumi.StringPtrInput `pulumi:"instanceName"`
+	// Reference service type, the values are:
+	InstanceType pulumi.StringPtrInput `pulumi:"instanceType"`
+}
+
+func (OriginGroupReferenceArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*OriginGroupReference)(nil)).Elem()
+}
+
+func (i OriginGroupReferenceArgs) ToOriginGroupReferenceOutput() OriginGroupReferenceOutput {
+	return i.ToOriginGroupReferenceOutputWithContext(context.Background())
+}
+
+func (i OriginGroupReferenceArgs) ToOriginGroupReferenceOutputWithContext(ctx context.Context) OriginGroupReferenceOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(OriginGroupReferenceOutput)
+}
+
+// OriginGroupReferenceArrayInput is an input type that accepts OriginGroupReferenceArray and OriginGroupReferenceArrayOutput values.
+// You can construct a concrete instance of `OriginGroupReferenceArrayInput` via:
+//
+//	OriginGroupReferenceArray{ OriginGroupReferenceArgs{...} }
+type OriginGroupReferenceArrayInput interface {
+	pulumi.Input
+
+	ToOriginGroupReferenceArrayOutput() OriginGroupReferenceArrayOutput
+	ToOriginGroupReferenceArrayOutputWithContext(context.Context) OriginGroupReferenceArrayOutput
+}
+
+type OriginGroupReferenceArray []OriginGroupReferenceInput
+
+func (OriginGroupReferenceArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]OriginGroupReference)(nil)).Elem()
+}
+
+func (i OriginGroupReferenceArray) ToOriginGroupReferenceArrayOutput() OriginGroupReferenceArrayOutput {
+	return i.ToOriginGroupReferenceArrayOutputWithContext(context.Background())
+}
+
+func (i OriginGroupReferenceArray) ToOriginGroupReferenceArrayOutputWithContext(ctx context.Context) OriginGroupReferenceArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(OriginGroupReferenceArrayOutput)
+}
+
+type OriginGroupReferenceOutput struct{ *pulumi.OutputState }
+
+func (OriginGroupReferenceOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*OriginGroupReference)(nil)).Elem()
+}
+
+func (o OriginGroupReferenceOutput) ToOriginGroupReferenceOutput() OriginGroupReferenceOutput {
+	return o
+}
+
+func (o OriginGroupReferenceOutput) ToOriginGroupReferenceOutputWithContext(ctx context.Context) OriginGroupReferenceOutput {
+	return o
+}
+
+// The instance ID of the reference type.
+func (o OriginGroupReferenceOutput) InstanceId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v OriginGroupReference) *string { return v.InstanceId }).(pulumi.StringPtrOutput)
+}
+
+// Instance name of the application type.
+func (o OriginGroupReferenceOutput) InstanceName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v OriginGroupReference) *string { return v.InstanceName }).(pulumi.StringPtrOutput)
+}
+
+// Reference service type, the values are:
+func (o OriginGroupReferenceOutput) InstanceType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v OriginGroupReference) *string { return v.InstanceType }).(pulumi.StringPtrOutput)
+}
+
+type OriginGroupReferenceArrayOutput struct{ *pulumi.OutputState }
+
+func (OriginGroupReferenceArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]OriginGroupReference)(nil)).Elem()
+}
+
+func (o OriginGroupReferenceArrayOutput) ToOriginGroupReferenceArrayOutput() OriginGroupReferenceArrayOutput {
+	return o
+}
+
+func (o OriginGroupReferenceArrayOutput) ToOriginGroupReferenceArrayOutputWithContext(ctx context.Context) OriginGroupReferenceArrayOutput {
+	return o
+}
+
+func (o OriginGroupReferenceArrayOutput) Index(i pulumi.IntInput) OriginGroupReferenceOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) OriginGroupReference {
+		return vs[0].([]OriginGroupReference)[vs[1].(int)]
+	}).(OriginGroupReferenceOutput)
 }
 
 type RuleEngineRule struct {
-	// Actions list of the rule. See details in data source `ruleEngineSetting`.
+	// Feature to be executed.
 	Actions []RuleEngineRuleAction `pulumi:"actions"`
 	// OR Conditions list of the rule. Rule would be triggered if any of the condition is true.
 	Ors []RuleEngineRuleOr `pulumi:"ors"`
-	// Actions list of the rule. See details in data source `ruleEngineSetting`.
+	// The nested rule.
 	SubRules []RuleEngineRuleSubRule `pulumi:"subRules"`
 }
 
 // RuleEngineRuleInput is an input type that accepts RuleEngineRuleArgs and RuleEngineRuleOutput values.
 // You can construct a concrete instance of `RuleEngineRuleInput` via:
 //
-//          RuleEngineRuleArgs{...}
+//	RuleEngineRuleArgs{...}
 type RuleEngineRuleInput interface {
 	pulumi.Input
 
@@ -890,11 +1181,11 @@ type RuleEngineRuleInput interface {
 }
 
 type RuleEngineRuleArgs struct {
-	// Actions list of the rule. See details in data source `ruleEngineSetting`.
+	// Feature to be executed.
 	Actions RuleEngineRuleActionArrayInput `pulumi:"actions"`
 	// OR Conditions list of the rule. Rule would be triggered if any of the condition is true.
 	Ors RuleEngineRuleOrArrayInput `pulumi:"ors"`
-	// Actions list of the rule. See details in data source `ruleEngineSetting`.
+	// The nested rule.
 	SubRules RuleEngineRuleSubRuleArrayInput `pulumi:"subRules"`
 }
 
@@ -913,7 +1204,7 @@ func (i RuleEngineRuleArgs) ToRuleEngineRuleOutputWithContext(ctx context.Contex
 // RuleEngineRuleArrayInput is an input type that accepts RuleEngineRuleArray and RuleEngineRuleArrayOutput values.
 // You can construct a concrete instance of `RuleEngineRuleArrayInput` via:
 //
-//          RuleEngineRuleArray{ RuleEngineRuleArgs{...} }
+//	RuleEngineRuleArray{ RuleEngineRuleArgs{...} }
 type RuleEngineRuleArrayInput interface {
 	pulumi.Input
 
@@ -949,7 +1240,7 @@ func (o RuleEngineRuleOutput) ToRuleEngineRuleOutputWithContext(ctx context.Cont
 	return o
 }
 
-// Actions list of the rule. See details in data source `ruleEngineSetting`.
+// Feature to be executed.
 func (o RuleEngineRuleOutput) Actions() RuleEngineRuleActionArrayOutput {
 	return o.ApplyT(func(v RuleEngineRule) []RuleEngineRuleAction { return v.Actions }).(RuleEngineRuleActionArrayOutput)
 }
@@ -959,7 +1250,7 @@ func (o RuleEngineRuleOutput) Ors() RuleEngineRuleOrArrayOutput {
 	return o.ApplyT(func(v RuleEngineRule) []RuleEngineRuleOr { return v.Ors }).(RuleEngineRuleOrArrayOutput)
 }
 
-// Actions list of the rule. See details in data source `ruleEngineSetting`.
+// The nested rule.
 func (o RuleEngineRuleOutput) SubRules() RuleEngineRuleSubRuleArrayOutput {
 	return o.ApplyT(func(v RuleEngineRule) []RuleEngineRuleSubRule { return v.SubRules }).(RuleEngineRuleSubRuleArrayOutput)
 }
@@ -985,18 +1276,18 @@ func (o RuleEngineRuleArrayOutput) Index(i pulumi.IntInput) RuleEngineRuleOutput
 }
 
 type RuleEngineRuleAction struct {
-	// Define a code action.
+	// Feature operation with a status code. Features of this type include:
 	CodeAction *RuleEngineRuleActionCodeAction `pulumi:"codeAction"`
-	// Define a normal action.
+	// Common operation. Values:
 	NormalAction *RuleEngineRuleActionNormalAction `pulumi:"normalAction"`
-	// Define a rewrite action.
+	// Feature operation with a request/response header. Features of this type include:
 	RewriteAction *RuleEngineRuleActionRewriteAction `pulumi:"rewriteAction"`
 }
 
 // RuleEngineRuleActionInput is an input type that accepts RuleEngineRuleActionArgs and RuleEngineRuleActionOutput values.
 // You can construct a concrete instance of `RuleEngineRuleActionInput` via:
 //
-//          RuleEngineRuleActionArgs{...}
+//	RuleEngineRuleActionArgs{...}
 type RuleEngineRuleActionInput interface {
 	pulumi.Input
 
@@ -1005,11 +1296,11 @@ type RuleEngineRuleActionInput interface {
 }
 
 type RuleEngineRuleActionArgs struct {
-	// Define a code action.
+	// Feature operation with a status code. Features of this type include:
 	CodeAction RuleEngineRuleActionCodeActionPtrInput `pulumi:"codeAction"`
-	// Define a normal action.
+	// Common operation. Values:
 	NormalAction RuleEngineRuleActionNormalActionPtrInput `pulumi:"normalAction"`
-	// Define a rewrite action.
+	// Feature operation with a request/response header. Features of this type include:
 	RewriteAction RuleEngineRuleActionRewriteActionPtrInput `pulumi:"rewriteAction"`
 }
 
@@ -1028,7 +1319,7 @@ func (i RuleEngineRuleActionArgs) ToRuleEngineRuleActionOutputWithContext(ctx co
 // RuleEngineRuleActionArrayInput is an input type that accepts RuleEngineRuleActionArray and RuleEngineRuleActionArrayOutput values.
 // You can construct a concrete instance of `RuleEngineRuleActionArrayInput` via:
 //
-//          RuleEngineRuleActionArray{ RuleEngineRuleActionArgs{...} }
+//	RuleEngineRuleActionArray{ RuleEngineRuleActionArgs{...} }
 type RuleEngineRuleActionArrayInput interface {
 	pulumi.Input
 
@@ -1064,17 +1355,17 @@ func (o RuleEngineRuleActionOutput) ToRuleEngineRuleActionOutputWithContext(ctx 
 	return o
 }
 
-// Define a code action.
+// Feature operation with a status code. Features of this type include:
 func (o RuleEngineRuleActionOutput) CodeAction() RuleEngineRuleActionCodeActionPtrOutput {
 	return o.ApplyT(func(v RuleEngineRuleAction) *RuleEngineRuleActionCodeAction { return v.CodeAction }).(RuleEngineRuleActionCodeActionPtrOutput)
 }
 
-// Define a normal action.
+// Common operation. Values:
 func (o RuleEngineRuleActionOutput) NormalAction() RuleEngineRuleActionNormalActionPtrOutput {
 	return o.ApplyT(func(v RuleEngineRuleAction) *RuleEngineRuleActionNormalAction { return v.NormalAction }).(RuleEngineRuleActionNormalActionPtrOutput)
 }
 
-// Define a rewrite action.
+// Feature operation with a request/response header. Features of this type include:
 func (o RuleEngineRuleActionOutput) RewriteAction() RuleEngineRuleActionRewriteActionPtrOutput {
 	return o.ApplyT(func(v RuleEngineRuleAction) *RuleEngineRuleActionRewriteAction { return v.RewriteAction }).(RuleEngineRuleActionRewriteActionPtrOutput)
 }
@@ -1100,16 +1391,16 @@ func (o RuleEngineRuleActionArrayOutput) Index(i pulumi.IntInput) RuleEngineRule
 }
 
 type RuleEngineRuleActionCodeAction struct {
-	// Action name.
+	// Feature name. You can call the [DescribeRulesSetting](https://tcloud4api.woa.com/document/product/1657/79433?!preview&!document=1) API to view the requirements for entering the feature name.
 	Action string `pulumi:"action"`
-	// Action parameters.
+	// Operation parameter.
 	Parameters []RuleEngineRuleActionCodeActionParameter `pulumi:"parameters"`
 }
 
 // RuleEngineRuleActionCodeActionInput is an input type that accepts RuleEngineRuleActionCodeActionArgs and RuleEngineRuleActionCodeActionOutput values.
 // You can construct a concrete instance of `RuleEngineRuleActionCodeActionInput` via:
 //
-//          RuleEngineRuleActionCodeActionArgs{...}
+//	RuleEngineRuleActionCodeActionArgs{...}
 type RuleEngineRuleActionCodeActionInput interface {
 	pulumi.Input
 
@@ -1118,9 +1409,9 @@ type RuleEngineRuleActionCodeActionInput interface {
 }
 
 type RuleEngineRuleActionCodeActionArgs struct {
-	// Action name.
+	// Feature name. You can call the [DescribeRulesSetting](https://tcloud4api.woa.com/document/product/1657/79433?!preview&!document=1) API to view the requirements for entering the feature name.
 	Action pulumi.StringInput `pulumi:"action"`
-	// Action parameters.
+	// Operation parameter.
 	Parameters RuleEngineRuleActionCodeActionParameterArrayInput `pulumi:"parameters"`
 }
 
@@ -1147,11 +1438,11 @@ func (i RuleEngineRuleActionCodeActionArgs) ToRuleEngineRuleActionCodeActionPtrO
 // RuleEngineRuleActionCodeActionPtrInput is an input type that accepts RuleEngineRuleActionCodeActionArgs, RuleEngineRuleActionCodeActionPtr and RuleEngineRuleActionCodeActionPtrOutput values.
 // You can construct a concrete instance of `RuleEngineRuleActionCodeActionPtrInput` via:
 //
-//          RuleEngineRuleActionCodeActionArgs{...}
+//	        RuleEngineRuleActionCodeActionArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type RuleEngineRuleActionCodeActionPtrInput interface {
 	pulumi.Input
 
@@ -1201,12 +1492,12 @@ func (o RuleEngineRuleActionCodeActionOutput) ToRuleEngineRuleActionCodeActionPt
 	}).(RuleEngineRuleActionCodeActionPtrOutput)
 }
 
-// Action name.
+// Feature name. You can call the [DescribeRulesSetting](https://tcloud4api.woa.com/document/product/1657/79433?!preview&!document=1) API to view the requirements for entering the feature name.
 func (o RuleEngineRuleActionCodeActionOutput) Action() pulumi.StringOutput {
 	return o.ApplyT(func(v RuleEngineRuleActionCodeAction) string { return v.Action }).(pulumi.StringOutput)
 }
 
-// Action parameters.
+// Operation parameter.
 func (o RuleEngineRuleActionCodeActionOutput) Parameters() RuleEngineRuleActionCodeActionParameterArrayOutput {
 	return o.ApplyT(func(v RuleEngineRuleActionCodeAction) []RuleEngineRuleActionCodeActionParameter { return v.Parameters }).(RuleEngineRuleActionCodeActionParameterArrayOutput)
 }
@@ -1235,7 +1526,7 @@ func (o RuleEngineRuleActionCodeActionPtrOutput) Elem() RuleEngineRuleActionCode
 	}).(RuleEngineRuleActionCodeActionOutput)
 }
 
-// Action name.
+// Feature name. You can call the [DescribeRulesSetting](https://tcloud4api.woa.com/document/product/1657/79433?!preview&!document=1) API to view the requirements for entering the feature name.
 func (o RuleEngineRuleActionCodeActionPtrOutput) Action() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *RuleEngineRuleActionCodeAction) *string {
 		if v == nil {
@@ -1245,7 +1536,7 @@ func (o RuleEngineRuleActionCodeActionPtrOutput) Action() pulumi.StringPtrOutput
 	}).(pulumi.StringPtrOutput)
 }
 
-// Action parameters.
+// Operation parameter.
 func (o RuleEngineRuleActionCodeActionPtrOutput) Parameters() RuleEngineRuleActionCodeActionParameterArrayOutput {
 	return o.ApplyT(func(v *RuleEngineRuleActionCodeAction) []RuleEngineRuleActionCodeActionParameter {
 		if v == nil {
@@ -1256,18 +1547,18 @@ func (o RuleEngineRuleActionCodeActionPtrOutput) Parameters() RuleEngineRuleActi
 }
 
 type RuleEngineRuleActionCodeActionParameter struct {
-	// Target HEADER name.
+	// Parameter name.
 	Name string `pulumi:"name"`
-	// HTTP status code to use.
+	// The status code.
 	StatusCode int `pulumi:"statusCode"`
-	// Parameter Value.
+	// Parameter value.
 	Values []string `pulumi:"values"`
 }
 
 // RuleEngineRuleActionCodeActionParameterInput is an input type that accepts RuleEngineRuleActionCodeActionParameterArgs and RuleEngineRuleActionCodeActionParameterOutput values.
 // You can construct a concrete instance of `RuleEngineRuleActionCodeActionParameterInput` via:
 //
-//          RuleEngineRuleActionCodeActionParameterArgs{...}
+//	RuleEngineRuleActionCodeActionParameterArgs{...}
 type RuleEngineRuleActionCodeActionParameterInput interface {
 	pulumi.Input
 
@@ -1276,11 +1567,11 @@ type RuleEngineRuleActionCodeActionParameterInput interface {
 }
 
 type RuleEngineRuleActionCodeActionParameterArgs struct {
-	// Target HEADER name.
+	// Parameter name.
 	Name pulumi.StringInput `pulumi:"name"`
-	// HTTP status code to use.
+	// The status code.
 	StatusCode pulumi.IntInput `pulumi:"statusCode"`
-	// Parameter Value.
+	// Parameter value.
 	Values pulumi.StringArrayInput `pulumi:"values"`
 }
 
@@ -1299,7 +1590,7 @@ func (i RuleEngineRuleActionCodeActionParameterArgs) ToRuleEngineRuleActionCodeA
 // RuleEngineRuleActionCodeActionParameterArrayInput is an input type that accepts RuleEngineRuleActionCodeActionParameterArray and RuleEngineRuleActionCodeActionParameterArrayOutput values.
 // You can construct a concrete instance of `RuleEngineRuleActionCodeActionParameterArrayInput` via:
 //
-//          RuleEngineRuleActionCodeActionParameterArray{ RuleEngineRuleActionCodeActionParameterArgs{...} }
+//	RuleEngineRuleActionCodeActionParameterArray{ RuleEngineRuleActionCodeActionParameterArgs{...} }
 type RuleEngineRuleActionCodeActionParameterArrayInput interface {
 	pulumi.Input
 
@@ -1335,17 +1626,17 @@ func (o RuleEngineRuleActionCodeActionParameterOutput) ToRuleEngineRuleActionCod
 	return o
 }
 
-// Target HEADER name.
+// Parameter name.
 func (o RuleEngineRuleActionCodeActionParameterOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v RuleEngineRuleActionCodeActionParameter) string { return v.Name }).(pulumi.StringOutput)
 }
 
-// HTTP status code to use.
+// The status code.
 func (o RuleEngineRuleActionCodeActionParameterOutput) StatusCode() pulumi.IntOutput {
 	return o.ApplyT(func(v RuleEngineRuleActionCodeActionParameter) int { return v.StatusCode }).(pulumi.IntOutput)
 }
 
-// Parameter Value.
+// Parameter value.
 func (o RuleEngineRuleActionCodeActionParameterOutput) Values() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v RuleEngineRuleActionCodeActionParameter) []string { return v.Values }).(pulumi.StringArrayOutput)
 }
@@ -1371,16 +1662,16 @@ func (o RuleEngineRuleActionCodeActionParameterArrayOutput) Index(i pulumi.IntIn
 }
 
 type RuleEngineRuleActionNormalAction struct {
-	// Action name.
+	// Feature name. You can call the [DescribeRulesSetting](https://tcloud4api.woa.com/document/product/1657/79433?!preview&!document=1) API to view the requirements for entering the feature name.
 	Action string `pulumi:"action"`
-	// Action parameters.
+	// Parameter.
 	Parameters []RuleEngineRuleActionNormalActionParameter `pulumi:"parameters"`
 }
 
 // RuleEngineRuleActionNormalActionInput is an input type that accepts RuleEngineRuleActionNormalActionArgs and RuleEngineRuleActionNormalActionOutput values.
 // You can construct a concrete instance of `RuleEngineRuleActionNormalActionInput` via:
 //
-//          RuleEngineRuleActionNormalActionArgs{...}
+//	RuleEngineRuleActionNormalActionArgs{...}
 type RuleEngineRuleActionNormalActionInput interface {
 	pulumi.Input
 
@@ -1389,9 +1680,9 @@ type RuleEngineRuleActionNormalActionInput interface {
 }
 
 type RuleEngineRuleActionNormalActionArgs struct {
-	// Action name.
+	// Feature name. You can call the [DescribeRulesSetting](https://tcloud4api.woa.com/document/product/1657/79433?!preview&!document=1) API to view the requirements for entering the feature name.
 	Action pulumi.StringInput `pulumi:"action"`
-	// Action parameters.
+	// Parameter.
 	Parameters RuleEngineRuleActionNormalActionParameterArrayInput `pulumi:"parameters"`
 }
 
@@ -1418,11 +1709,11 @@ func (i RuleEngineRuleActionNormalActionArgs) ToRuleEngineRuleActionNormalAction
 // RuleEngineRuleActionNormalActionPtrInput is an input type that accepts RuleEngineRuleActionNormalActionArgs, RuleEngineRuleActionNormalActionPtr and RuleEngineRuleActionNormalActionPtrOutput values.
 // You can construct a concrete instance of `RuleEngineRuleActionNormalActionPtrInput` via:
 //
-//          RuleEngineRuleActionNormalActionArgs{...}
+//	        RuleEngineRuleActionNormalActionArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type RuleEngineRuleActionNormalActionPtrInput interface {
 	pulumi.Input
 
@@ -1472,12 +1763,12 @@ func (o RuleEngineRuleActionNormalActionOutput) ToRuleEngineRuleActionNormalActi
 	}).(RuleEngineRuleActionNormalActionPtrOutput)
 }
 
-// Action name.
+// Feature name. You can call the [DescribeRulesSetting](https://tcloud4api.woa.com/document/product/1657/79433?!preview&!document=1) API to view the requirements for entering the feature name.
 func (o RuleEngineRuleActionNormalActionOutput) Action() pulumi.StringOutput {
 	return o.ApplyT(func(v RuleEngineRuleActionNormalAction) string { return v.Action }).(pulumi.StringOutput)
 }
 
-// Action parameters.
+// Parameter.
 func (o RuleEngineRuleActionNormalActionOutput) Parameters() RuleEngineRuleActionNormalActionParameterArrayOutput {
 	return o.ApplyT(func(v RuleEngineRuleActionNormalAction) []RuleEngineRuleActionNormalActionParameter {
 		return v.Parameters
@@ -1508,7 +1799,7 @@ func (o RuleEngineRuleActionNormalActionPtrOutput) Elem() RuleEngineRuleActionNo
 	}).(RuleEngineRuleActionNormalActionOutput)
 }
 
-// Action name.
+// Feature name. You can call the [DescribeRulesSetting](https://tcloud4api.woa.com/document/product/1657/79433?!preview&!document=1) API to view the requirements for entering the feature name.
 func (o RuleEngineRuleActionNormalActionPtrOutput) Action() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *RuleEngineRuleActionNormalAction) *string {
 		if v == nil {
@@ -1518,7 +1809,7 @@ func (o RuleEngineRuleActionNormalActionPtrOutput) Action() pulumi.StringPtrOutp
 	}).(pulumi.StringPtrOutput)
 }
 
-// Action parameters.
+// Parameter.
 func (o RuleEngineRuleActionNormalActionPtrOutput) Parameters() RuleEngineRuleActionNormalActionParameterArrayOutput {
 	return o.ApplyT(func(v *RuleEngineRuleActionNormalAction) []RuleEngineRuleActionNormalActionParameter {
 		if v == nil {
@@ -1529,16 +1820,16 @@ func (o RuleEngineRuleActionNormalActionPtrOutput) Parameters() RuleEngineRuleAc
 }
 
 type RuleEngineRuleActionNormalActionParameter struct {
-	// Target HEADER name.
+	// Parameter name.
 	Name string `pulumi:"name"`
-	// Parameter Value.
+	// Parameter value.
 	Values []string `pulumi:"values"`
 }
 
 // RuleEngineRuleActionNormalActionParameterInput is an input type that accepts RuleEngineRuleActionNormalActionParameterArgs and RuleEngineRuleActionNormalActionParameterOutput values.
 // You can construct a concrete instance of `RuleEngineRuleActionNormalActionParameterInput` via:
 //
-//          RuleEngineRuleActionNormalActionParameterArgs{...}
+//	RuleEngineRuleActionNormalActionParameterArgs{...}
 type RuleEngineRuleActionNormalActionParameterInput interface {
 	pulumi.Input
 
@@ -1547,9 +1838,9 @@ type RuleEngineRuleActionNormalActionParameterInput interface {
 }
 
 type RuleEngineRuleActionNormalActionParameterArgs struct {
-	// Target HEADER name.
+	// Parameter name.
 	Name pulumi.StringInput `pulumi:"name"`
-	// Parameter Value.
+	// Parameter value.
 	Values pulumi.StringArrayInput `pulumi:"values"`
 }
 
@@ -1568,7 +1859,7 @@ func (i RuleEngineRuleActionNormalActionParameterArgs) ToRuleEngineRuleActionNor
 // RuleEngineRuleActionNormalActionParameterArrayInput is an input type that accepts RuleEngineRuleActionNormalActionParameterArray and RuleEngineRuleActionNormalActionParameterArrayOutput values.
 // You can construct a concrete instance of `RuleEngineRuleActionNormalActionParameterArrayInput` via:
 //
-//          RuleEngineRuleActionNormalActionParameterArray{ RuleEngineRuleActionNormalActionParameterArgs{...} }
+//	RuleEngineRuleActionNormalActionParameterArray{ RuleEngineRuleActionNormalActionParameterArgs{...} }
 type RuleEngineRuleActionNormalActionParameterArrayInput interface {
 	pulumi.Input
 
@@ -1604,12 +1895,12 @@ func (o RuleEngineRuleActionNormalActionParameterOutput) ToRuleEngineRuleActionN
 	return o
 }
 
-// Target HEADER name.
+// Parameter name.
 func (o RuleEngineRuleActionNormalActionParameterOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v RuleEngineRuleActionNormalActionParameter) string { return v.Name }).(pulumi.StringOutput)
 }
 
-// Parameter Value.
+// Parameter value.
 func (o RuleEngineRuleActionNormalActionParameterOutput) Values() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v RuleEngineRuleActionNormalActionParameter) []string { return v.Values }).(pulumi.StringArrayOutput)
 }
@@ -1635,16 +1926,16 @@ func (o RuleEngineRuleActionNormalActionParameterArrayOutput) Index(i pulumi.Int
 }
 
 type RuleEngineRuleActionRewriteAction struct {
-	// Action name.
+	// Feature name. You can call the [DescribeRulesSetting](https://tcloud4api.woa.com/document/product/1657/79433?!preview&!document=1) API to view the requirements for entering the feature name.
 	Action string `pulumi:"action"`
-	// Action parameters.
+	// Parameter.
 	Parameters []RuleEngineRuleActionRewriteActionParameter `pulumi:"parameters"`
 }
 
 // RuleEngineRuleActionRewriteActionInput is an input type that accepts RuleEngineRuleActionRewriteActionArgs and RuleEngineRuleActionRewriteActionOutput values.
 // You can construct a concrete instance of `RuleEngineRuleActionRewriteActionInput` via:
 //
-//          RuleEngineRuleActionRewriteActionArgs{...}
+//	RuleEngineRuleActionRewriteActionArgs{...}
 type RuleEngineRuleActionRewriteActionInput interface {
 	pulumi.Input
 
@@ -1653,9 +1944,9 @@ type RuleEngineRuleActionRewriteActionInput interface {
 }
 
 type RuleEngineRuleActionRewriteActionArgs struct {
-	// Action name.
+	// Feature name. You can call the [DescribeRulesSetting](https://tcloud4api.woa.com/document/product/1657/79433?!preview&!document=1) API to view the requirements for entering the feature name.
 	Action pulumi.StringInput `pulumi:"action"`
-	// Action parameters.
+	// Parameter.
 	Parameters RuleEngineRuleActionRewriteActionParameterArrayInput `pulumi:"parameters"`
 }
 
@@ -1682,11 +1973,11 @@ func (i RuleEngineRuleActionRewriteActionArgs) ToRuleEngineRuleActionRewriteActi
 // RuleEngineRuleActionRewriteActionPtrInput is an input type that accepts RuleEngineRuleActionRewriteActionArgs, RuleEngineRuleActionRewriteActionPtr and RuleEngineRuleActionRewriteActionPtrOutput values.
 // You can construct a concrete instance of `RuleEngineRuleActionRewriteActionPtrInput` via:
 //
-//          RuleEngineRuleActionRewriteActionArgs{...}
+//	        RuleEngineRuleActionRewriteActionArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type RuleEngineRuleActionRewriteActionPtrInput interface {
 	pulumi.Input
 
@@ -1736,12 +2027,12 @@ func (o RuleEngineRuleActionRewriteActionOutput) ToRuleEngineRuleActionRewriteAc
 	}).(RuleEngineRuleActionRewriteActionPtrOutput)
 }
 
-// Action name.
+// Feature name. You can call the [DescribeRulesSetting](https://tcloud4api.woa.com/document/product/1657/79433?!preview&!document=1) API to view the requirements for entering the feature name.
 func (o RuleEngineRuleActionRewriteActionOutput) Action() pulumi.StringOutput {
 	return o.ApplyT(func(v RuleEngineRuleActionRewriteAction) string { return v.Action }).(pulumi.StringOutput)
 }
 
-// Action parameters.
+// Parameter.
 func (o RuleEngineRuleActionRewriteActionOutput) Parameters() RuleEngineRuleActionRewriteActionParameterArrayOutput {
 	return o.ApplyT(func(v RuleEngineRuleActionRewriteAction) []RuleEngineRuleActionRewriteActionParameter {
 		return v.Parameters
@@ -1772,7 +2063,7 @@ func (o RuleEngineRuleActionRewriteActionPtrOutput) Elem() RuleEngineRuleActionR
 	}).(RuleEngineRuleActionRewriteActionOutput)
 }
 
-// Action name.
+// Feature name. You can call the [DescribeRulesSetting](https://tcloud4api.woa.com/document/product/1657/79433?!preview&!document=1) API to view the requirements for entering the feature name.
 func (o RuleEngineRuleActionRewriteActionPtrOutput) Action() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *RuleEngineRuleActionRewriteAction) *string {
 		if v == nil {
@@ -1782,7 +2073,7 @@ func (o RuleEngineRuleActionRewriteActionPtrOutput) Action() pulumi.StringPtrOut
 	}).(pulumi.StringPtrOutput)
 }
 
-// Action parameters.
+// Parameter.
 func (o RuleEngineRuleActionRewriteActionPtrOutput) Parameters() RuleEngineRuleActionRewriteActionParameterArrayOutput {
 	return o.ApplyT(func(v *RuleEngineRuleActionRewriteAction) []RuleEngineRuleActionRewriteActionParameter {
 		if v == nil {
@@ -1793,18 +2084,21 @@ func (o RuleEngineRuleActionRewriteActionPtrOutput) Parameters() RuleEngineRuleA
 }
 
 type RuleEngineRuleActionRewriteActionParameter struct {
-	// Action to take on the HEADER. Valid values: `add`, `del`, `set`.
+	// Feature parameter name. You can call the [DescribeRulesSetting](https://tcloud4api.woa.com/document/product/1657/79433?!preview&!document=1) API to view the requirements for entering the parameter name, which has three values:
+	// - add: Add the HTTP header.
+	// - set: Rewrite the HTTP header.
+	// - del: Delete the HTTP header.
 	Action string `pulumi:"action"`
-	// Target HEADER name.
+	// Parameter name.
 	Name string `pulumi:"name"`
-	// Parameter Value.
+	// Parameter value.
 	Values []string `pulumi:"values"`
 }
 
 // RuleEngineRuleActionRewriteActionParameterInput is an input type that accepts RuleEngineRuleActionRewriteActionParameterArgs and RuleEngineRuleActionRewriteActionParameterOutput values.
 // You can construct a concrete instance of `RuleEngineRuleActionRewriteActionParameterInput` via:
 //
-//          RuleEngineRuleActionRewriteActionParameterArgs{...}
+//	RuleEngineRuleActionRewriteActionParameterArgs{...}
 type RuleEngineRuleActionRewriteActionParameterInput interface {
 	pulumi.Input
 
@@ -1813,11 +2107,14 @@ type RuleEngineRuleActionRewriteActionParameterInput interface {
 }
 
 type RuleEngineRuleActionRewriteActionParameterArgs struct {
-	// Action to take on the HEADER. Valid values: `add`, `del`, `set`.
+	// Feature parameter name. You can call the [DescribeRulesSetting](https://tcloud4api.woa.com/document/product/1657/79433?!preview&!document=1) API to view the requirements for entering the parameter name, which has three values:
+	// - add: Add the HTTP header.
+	// - set: Rewrite the HTTP header.
+	// - del: Delete the HTTP header.
 	Action pulumi.StringInput `pulumi:"action"`
-	// Target HEADER name.
+	// Parameter name.
 	Name pulumi.StringInput `pulumi:"name"`
-	// Parameter Value.
+	// Parameter value.
 	Values pulumi.StringArrayInput `pulumi:"values"`
 }
 
@@ -1836,7 +2133,7 @@ func (i RuleEngineRuleActionRewriteActionParameterArgs) ToRuleEngineRuleActionRe
 // RuleEngineRuleActionRewriteActionParameterArrayInput is an input type that accepts RuleEngineRuleActionRewriteActionParameterArray and RuleEngineRuleActionRewriteActionParameterArrayOutput values.
 // You can construct a concrete instance of `RuleEngineRuleActionRewriteActionParameterArrayInput` via:
 //
-//          RuleEngineRuleActionRewriteActionParameterArray{ RuleEngineRuleActionRewriteActionParameterArgs{...} }
+//	RuleEngineRuleActionRewriteActionParameterArray{ RuleEngineRuleActionRewriteActionParameterArgs{...} }
 type RuleEngineRuleActionRewriteActionParameterArrayInput interface {
 	pulumi.Input
 
@@ -1872,17 +2169,20 @@ func (o RuleEngineRuleActionRewriteActionParameterOutput) ToRuleEngineRuleAction
 	return o
 }
 
-// Action to take on the HEADER. Valid values: `add`, `del`, `set`.
+// Feature parameter name. You can call the [DescribeRulesSetting](https://tcloud4api.woa.com/document/product/1657/79433?!preview&!document=1) API to view the requirements for entering the parameter name, which has three values:
+// - add: Add the HTTP header.
+// - set: Rewrite the HTTP header.
+// - del: Delete the HTTP header.
 func (o RuleEngineRuleActionRewriteActionParameterOutput) Action() pulumi.StringOutput {
 	return o.ApplyT(func(v RuleEngineRuleActionRewriteActionParameter) string { return v.Action }).(pulumi.StringOutput)
 }
 
-// Target HEADER name.
+// Parameter name.
 func (o RuleEngineRuleActionRewriteActionParameterOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v RuleEngineRuleActionRewriteActionParameter) string { return v.Name }).(pulumi.StringOutput)
 }
 
-// Parameter Value.
+// Parameter value.
 func (o RuleEngineRuleActionRewriteActionParameterOutput) Values() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v RuleEngineRuleActionRewriteActionParameter) []string { return v.Values }).(pulumi.StringArrayOutput)
 }
@@ -1908,14 +2208,14 @@ func (o RuleEngineRuleActionRewriteActionParameterArrayOutput) Index(i pulumi.In
 }
 
 type RuleEngineRuleOr struct {
-	// AND Conditions list of the rule. Rule would be triggered if all conditions are true.
+	// Rule engine condition. This condition will be considered met if all items in the array are met.
 	Ands []RuleEngineRuleOrAnd `pulumi:"ands"`
 }
 
 // RuleEngineRuleOrInput is an input type that accepts RuleEngineRuleOrArgs and RuleEngineRuleOrOutput values.
 // You can construct a concrete instance of `RuleEngineRuleOrInput` via:
 //
-//          RuleEngineRuleOrArgs{...}
+//	RuleEngineRuleOrArgs{...}
 type RuleEngineRuleOrInput interface {
 	pulumi.Input
 
@@ -1924,7 +2224,7 @@ type RuleEngineRuleOrInput interface {
 }
 
 type RuleEngineRuleOrArgs struct {
-	// AND Conditions list of the rule. Rule would be triggered if all conditions are true.
+	// Rule engine condition. This condition will be considered met if all items in the array are met.
 	Ands RuleEngineRuleOrAndArrayInput `pulumi:"ands"`
 }
 
@@ -1943,7 +2243,7 @@ func (i RuleEngineRuleOrArgs) ToRuleEngineRuleOrOutputWithContext(ctx context.Co
 // RuleEngineRuleOrArrayInput is an input type that accepts RuleEngineRuleOrArray and RuleEngineRuleOrArrayOutput values.
 // You can construct a concrete instance of `RuleEngineRuleOrArrayInput` via:
 //
-//          RuleEngineRuleOrArray{ RuleEngineRuleOrArgs{...} }
+//	RuleEngineRuleOrArray{ RuleEngineRuleOrArgs{...} }
 type RuleEngineRuleOrArrayInput interface {
 	pulumi.Input
 
@@ -1979,7 +2279,7 @@ func (o RuleEngineRuleOrOutput) ToRuleEngineRuleOrOutputWithContext(ctx context.
 	return o
 }
 
-// AND Conditions list of the rule. Rule would be triggered if all conditions are true.
+// Rule engine condition. This condition will be considered met if all items in the array are met.
 func (o RuleEngineRuleOrOutput) Ands() RuleEngineRuleOrAndArrayOutput {
 	return o.ApplyT(func(v RuleEngineRuleOr) []RuleEngineRuleOrAnd { return v.Ands }).(RuleEngineRuleOrAndArrayOutput)
 }
@@ -2005,22 +2305,31 @@ func (o RuleEngineRuleOrArrayOutput) Index(i pulumi.IntInput) RuleEngineRuleOrOu
 }
 
 type RuleEngineRuleOrAnd struct {
-	// Whether to ignore the case of the parameter value, the default value is false.
+	// Whether the parameter value is case insensitive. Default value: false.
 	IgnoreCase *bool `pulumi:"ignoreCase"`
-	// The parameter name corresponding to the matching type is valid when the Target value is the following, and the valid value cannot be empty:- `queryString` (query string): The parameter name of the query string in the URL request under the current site, such as lang and version in lang=cn&version=1; `requestHeader` (HTTP request header): HTTP request header field name, such as Accept-Language in Accept-Language:zh-CN,zh;q=0.9.
+	// The parameter name of the match type. This field is required only when `Target=query_string/request_header`.
 	Name *string `pulumi:"name"`
-	// Condition operator. Valid values are `equal`, `notequal`.
+	// Operator. Valid values:
 	Operator string `pulumi:"operator"`
-	// Condition target. Valid values:- `host`: Host of the URL.- `filename`: filename of the URL.- `extension`: file extension of the URL.- `fullUrl`: full url.- `url`: path of the URL.
+	// The match type. Values:
 	Target string `pulumi:"target"`
-	// Condition Value.
+	// The parameter value of the match type. It can be an empty string only when `Target=query string/request header` and `Operator=exist/notexist`.
+	// - When `Target=extension`, enter the file extension, such as "jpg" and "txt".
+	// - When `Target=filename`, enter the file name, such as "foo" in "foo.jpg".
+	// - When `Target=all`, it indicates any site request.
+	// - When `Target=host`, enter the host under the current site, such as "www.maxx55.com".
+	// - When `Target=url`, enter the partial URL path under the current site, such as "/example".
+	// - When `Target=full_url`, enter the complete URL under the current site. It must contain the HTTP protocol, host, and path, such as "https://www.maxx55.cn/example".
+	// - When `Target=client_country`, enter the ISO-3166 country/region code.
+	// - When `Target=query_string`, enter the value of the query string, such as "cn" and "1" in "lang=cn&version=1".
+	// - When `Target=request_header`, enter the HTTP request header value, such as "zh-CN,zh;q=0.9" in the "Accept-Language:zh-CN,zh;q=0.9" header.
 	Values []string `pulumi:"values"`
 }
 
 // RuleEngineRuleOrAndInput is an input type that accepts RuleEngineRuleOrAndArgs and RuleEngineRuleOrAndOutput values.
 // You can construct a concrete instance of `RuleEngineRuleOrAndInput` via:
 //
-//          RuleEngineRuleOrAndArgs{...}
+//	RuleEngineRuleOrAndArgs{...}
 type RuleEngineRuleOrAndInput interface {
 	pulumi.Input
 
@@ -2029,15 +2338,24 @@ type RuleEngineRuleOrAndInput interface {
 }
 
 type RuleEngineRuleOrAndArgs struct {
-	// Whether to ignore the case of the parameter value, the default value is false.
+	// Whether the parameter value is case insensitive. Default value: false.
 	IgnoreCase pulumi.BoolPtrInput `pulumi:"ignoreCase"`
-	// The parameter name corresponding to the matching type is valid when the Target value is the following, and the valid value cannot be empty:- `queryString` (query string): The parameter name of the query string in the URL request under the current site, such as lang and version in lang=cn&version=1; `requestHeader` (HTTP request header): HTTP request header field name, such as Accept-Language in Accept-Language:zh-CN,zh;q=0.9.
+	// The parameter name of the match type. This field is required only when `Target=query_string/request_header`.
 	Name pulumi.StringPtrInput `pulumi:"name"`
-	// Condition operator. Valid values are `equal`, `notequal`.
+	// Operator. Valid values:
 	Operator pulumi.StringInput `pulumi:"operator"`
-	// Condition target. Valid values:- `host`: Host of the URL.- `filename`: filename of the URL.- `extension`: file extension of the URL.- `fullUrl`: full url.- `url`: path of the URL.
+	// The match type. Values:
 	Target pulumi.StringInput `pulumi:"target"`
-	// Condition Value.
+	// The parameter value of the match type. It can be an empty string only when `Target=query string/request header` and `Operator=exist/notexist`.
+	// - When `Target=extension`, enter the file extension, such as "jpg" and "txt".
+	// - When `Target=filename`, enter the file name, such as "foo" in "foo.jpg".
+	// - When `Target=all`, it indicates any site request.
+	// - When `Target=host`, enter the host under the current site, such as "www.maxx55.com".
+	// - When `Target=url`, enter the partial URL path under the current site, such as "/example".
+	// - When `Target=full_url`, enter the complete URL under the current site. It must contain the HTTP protocol, host, and path, such as "https://www.maxx55.cn/example".
+	// - When `Target=client_country`, enter the ISO-3166 country/region code.
+	// - When `Target=query_string`, enter the value of the query string, such as "cn" and "1" in "lang=cn&version=1".
+	// - When `Target=request_header`, enter the HTTP request header value, such as "zh-CN,zh;q=0.9" in the "Accept-Language:zh-CN,zh;q=0.9" header.
 	Values pulumi.StringArrayInput `pulumi:"values"`
 }
 
@@ -2056,7 +2374,7 @@ func (i RuleEngineRuleOrAndArgs) ToRuleEngineRuleOrAndOutputWithContext(ctx cont
 // RuleEngineRuleOrAndArrayInput is an input type that accepts RuleEngineRuleOrAndArray and RuleEngineRuleOrAndArrayOutput values.
 // You can construct a concrete instance of `RuleEngineRuleOrAndArrayInput` via:
 //
-//          RuleEngineRuleOrAndArray{ RuleEngineRuleOrAndArgs{...} }
+//	RuleEngineRuleOrAndArray{ RuleEngineRuleOrAndArgs{...} }
 type RuleEngineRuleOrAndArrayInput interface {
 	pulumi.Input
 
@@ -2092,27 +2410,36 @@ func (o RuleEngineRuleOrAndOutput) ToRuleEngineRuleOrAndOutputWithContext(ctx co
 	return o
 }
 
-// Whether to ignore the case of the parameter value, the default value is false.
+// Whether the parameter value is case insensitive. Default value: false.
 func (o RuleEngineRuleOrAndOutput) IgnoreCase() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v RuleEngineRuleOrAnd) *bool { return v.IgnoreCase }).(pulumi.BoolPtrOutput)
 }
 
-// The parameter name corresponding to the matching type is valid when the Target value is the following, and the valid value cannot be empty:- `queryString` (query string): The parameter name of the query string in the URL request under the current site, such as lang and version in lang=cn&version=1; `requestHeader` (HTTP request header): HTTP request header field name, such as Accept-Language in Accept-Language:zh-CN,zh;q=0.9.
+// The parameter name of the match type. This field is required only when `Target=query_string/request_header`.
 func (o RuleEngineRuleOrAndOutput) Name() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v RuleEngineRuleOrAnd) *string { return v.Name }).(pulumi.StringPtrOutput)
 }
 
-// Condition operator. Valid values are `equal`, `notequal`.
+// Operator. Valid values:
 func (o RuleEngineRuleOrAndOutput) Operator() pulumi.StringOutput {
 	return o.ApplyT(func(v RuleEngineRuleOrAnd) string { return v.Operator }).(pulumi.StringOutput)
 }
 
-// Condition target. Valid values:- `host`: Host of the URL.- `filename`: filename of the URL.- `extension`: file extension of the URL.- `fullUrl`: full url.- `url`: path of the URL.
+// The match type. Values:
 func (o RuleEngineRuleOrAndOutput) Target() pulumi.StringOutput {
 	return o.ApplyT(func(v RuleEngineRuleOrAnd) string { return v.Target }).(pulumi.StringOutput)
 }
 
-// Condition Value.
+// The parameter value of the match type. It can be an empty string only when `Target=query string/request header` and `Operator=exist/notexist`.
+// - When `Target=extension`, enter the file extension, such as "jpg" and "txt".
+// - When `Target=filename`, enter the file name, such as "foo" in "foo.jpg".
+// - When `Target=all`, it indicates any site request.
+// - When `Target=host`, enter the host under the current site, such as "www.maxx55.com".
+// - When `Target=url`, enter the partial URL path under the current site, such as "/example".
+// - When `Target=full_url`, enter the complete URL under the current site. It must contain the HTTP protocol, host, and path, such as "https://www.maxx55.cn/example".
+// - When `Target=client_country`, enter the ISO-3166 country/region code.
+// - When `Target=query_string`, enter the value of the query string, such as "cn" and "1" in "lang=cn&version=1".
+// - When `Target=request_header`, enter the HTTP request header value, such as "zh-CN,zh;q=0.9" in the "Accept-Language:zh-CN,zh;q=0.9" header.
 func (o RuleEngineRuleOrAndOutput) Values() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v RuleEngineRuleOrAnd) []string { return v.Values }).(pulumi.StringArrayOutput)
 }
@@ -2138,16 +2465,16 @@ func (o RuleEngineRuleOrAndArrayOutput) Index(i pulumi.IntInput) RuleEngineRuleO
 }
 
 type RuleEngineRuleSubRule struct {
-	// Rule items list.
+	// Nested rule settings.
 	Rules []RuleEngineRuleSubRuleRule `pulumi:"rules"`
-	// rule tag list.
+	// Tag of the rule.
 	Tags []string `pulumi:"tags"`
 }
 
 // RuleEngineRuleSubRuleInput is an input type that accepts RuleEngineRuleSubRuleArgs and RuleEngineRuleSubRuleOutput values.
 // You can construct a concrete instance of `RuleEngineRuleSubRuleInput` via:
 //
-//          RuleEngineRuleSubRuleArgs{...}
+//	RuleEngineRuleSubRuleArgs{...}
 type RuleEngineRuleSubRuleInput interface {
 	pulumi.Input
 
@@ -2156,9 +2483,9 @@ type RuleEngineRuleSubRuleInput interface {
 }
 
 type RuleEngineRuleSubRuleArgs struct {
-	// Rule items list.
+	// Nested rule settings.
 	Rules RuleEngineRuleSubRuleRuleArrayInput `pulumi:"rules"`
-	// rule tag list.
+	// Tag of the rule.
 	Tags pulumi.StringArrayInput `pulumi:"tags"`
 }
 
@@ -2177,7 +2504,7 @@ func (i RuleEngineRuleSubRuleArgs) ToRuleEngineRuleSubRuleOutputWithContext(ctx 
 // RuleEngineRuleSubRuleArrayInput is an input type that accepts RuleEngineRuleSubRuleArray and RuleEngineRuleSubRuleArrayOutput values.
 // You can construct a concrete instance of `RuleEngineRuleSubRuleArrayInput` via:
 //
-//          RuleEngineRuleSubRuleArray{ RuleEngineRuleSubRuleArgs{...} }
+//	RuleEngineRuleSubRuleArray{ RuleEngineRuleSubRuleArgs{...} }
 type RuleEngineRuleSubRuleArrayInput interface {
 	pulumi.Input
 
@@ -2213,12 +2540,12 @@ func (o RuleEngineRuleSubRuleOutput) ToRuleEngineRuleSubRuleOutputWithContext(ct
 	return o
 }
 
-// Rule items list.
+// Nested rule settings.
 func (o RuleEngineRuleSubRuleOutput) Rules() RuleEngineRuleSubRuleRuleArrayOutput {
 	return o.ApplyT(func(v RuleEngineRuleSubRule) []RuleEngineRuleSubRuleRule { return v.Rules }).(RuleEngineRuleSubRuleRuleArrayOutput)
 }
 
-// rule tag list.
+// Tag of the rule.
 func (o RuleEngineRuleSubRuleOutput) Tags() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v RuleEngineRuleSubRule) []string { return v.Tags }).(pulumi.StringArrayOutput)
 }
@@ -2244,7 +2571,7 @@ func (o RuleEngineRuleSubRuleArrayOutput) Index(i pulumi.IntInput) RuleEngineRul
 }
 
 type RuleEngineRuleSubRuleRule struct {
-	// Actions list of the rule. See details in data source `ruleEngineSetting`.
+	// Feature to be executed.
 	Actions []RuleEngineRuleSubRuleRuleAction `pulumi:"actions"`
 	// OR Conditions list of the rule. Rule would be triggered if any of the condition is true.
 	Ors []RuleEngineRuleSubRuleRuleOr `pulumi:"ors"`
@@ -2253,7 +2580,7 @@ type RuleEngineRuleSubRuleRule struct {
 // RuleEngineRuleSubRuleRuleInput is an input type that accepts RuleEngineRuleSubRuleRuleArgs and RuleEngineRuleSubRuleRuleOutput values.
 // You can construct a concrete instance of `RuleEngineRuleSubRuleRuleInput` via:
 //
-//          RuleEngineRuleSubRuleRuleArgs{...}
+//	RuleEngineRuleSubRuleRuleArgs{...}
 type RuleEngineRuleSubRuleRuleInput interface {
 	pulumi.Input
 
@@ -2262,7 +2589,7 @@ type RuleEngineRuleSubRuleRuleInput interface {
 }
 
 type RuleEngineRuleSubRuleRuleArgs struct {
-	// Actions list of the rule. See details in data source `ruleEngineSetting`.
+	// Feature to be executed.
 	Actions RuleEngineRuleSubRuleRuleActionArrayInput `pulumi:"actions"`
 	// OR Conditions list of the rule. Rule would be triggered if any of the condition is true.
 	Ors RuleEngineRuleSubRuleRuleOrArrayInput `pulumi:"ors"`
@@ -2283,7 +2610,7 @@ func (i RuleEngineRuleSubRuleRuleArgs) ToRuleEngineRuleSubRuleRuleOutputWithCont
 // RuleEngineRuleSubRuleRuleArrayInput is an input type that accepts RuleEngineRuleSubRuleRuleArray and RuleEngineRuleSubRuleRuleArrayOutput values.
 // You can construct a concrete instance of `RuleEngineRuleSubRuleRuleArrayInput` via:
 //
-//          RuleEngineRuleSubRuleRuleArray{ RuleEngineRuleSubRuleRuleArgs{...} }
+//	RuleEngineRuleSubRuleRuleArray{ RuleEngineRuleSubRuleRuleArgs{...} }
 type RuleEngineRuleSubRuleRuleArrayInput interface {
 	pulumi.Input
 
@@ -2319,7 +2646,7 @@ func (o RuleEngineRuleSubRuleRuleOutput) ToRuleEngineRuleSubRuleRuleOutputWithCo
 	return o
 }
 
-// Actions list of the rule. See details in data source `ruleEngineSetting`.
+// Feature to be executed.
 func (o RuleEngineRuleSubRuleRuleOutput) Actions() RuleEngineRuleSubRuleRuleActionArrayOutput {
 	return o.ApplyT(func(v RuleEngineRuleSubRuleRule) []RuleEngineRuleSubRuleRuleAction { return v.Actions }).(RuleEngineRuleSubRuleRuleActionArrayOutput)
 }
@@ -2350,18 +2677,18 @@ func (o RuleEngineRuleSubRuleRuleArrayOutput) Index(i pulumi.IntInput) RuleEngin
 }
 
 type RuleEngineRuleSubRuleRuleAction struct {
-	// Define a code action.
+	// Feature operation with a status code. Features of this type include:
 	CodeAction *RuleEngineRuleSubRuleRuleActionCodeAction `pulumi:"codeAction"`
-	// Define a normal action.
+	// Common operation. Values:
 	NormalAction *RuleEngineRuleSubRuleRuleActionNormalAction `pulumi:"normalAction"`
-	// Define a rewrite action.
+	// Feature operation with a request/response header. Features of this type include:
 	RewriteAction *RuleEngineRuleSubRuleRuleActionRewriteAction `pulumi:"rewriteAction"`
 }
 
 // RuleEngineRuleSubRuleRuleActionInput is an input type that accepts RuleEngineRuleSubRuleRuleActionArgs and RuleEngineRuleSubRuleRuleActionOutput values.
 // You can construct a concrete instance of `RuleEngineRuleSubRuleRuleActionInput` via:
 //
-//          RuleEngineRuleSubRuleRuleActionArgs{...}
+//	RuleEngineRuleSubRuleRuleActionArgs{...}
 type RuleEngineRuleSubRuleRuleActionInput interface {
 	pulumi.Input
 
@@ -2370,11 +2697,11 @@ type RuleEngineRuleSubRuleRuleActionInput interface {
 }
 
 type RuleEngineRuleSubRuleRuleActionArgs struct {
-	// Define a code action.
+	// Feature operation with a status code. Features of this type include:
 	CodeAction RuleEngineRuleSubRuleRuleActionCodeActionPtrInput `pulumi:"codeAction"`
-	// Define a normal action.
+	// Common operation. Values:
 	NormalAction RuleEngineRuleSubRuleRuleActionNormalActionPtrInput `pulumi:"normalAction"`
-	// Define a rewrite action.
+	// Feature operation with a request/response header. Features of this type include:
 	RewriteAction RuleEngineRuleSubRuleRuleActionRewriteActionPtrInput `pulumi:"rewriteAction"`
 }
 
@@ -2393,7 +2720,7 @@ func (i RuleEngineRuleSubRuleRuleActionArgs) ToRuleEngineRuleSubRuleRuleActionOu
 // RuleEngineRuleSubRuleRuleActionArrayInput is an input type that accepts RuleEngineRuleSubRuleRuleActionArray and RuleEngineRuleSubRuleRuleActionArrayOutput values.
 // You can construct a concrete instance of `RuleEngineRuleSubRuleRuleActionArrayInput` via:
 //
-//          RuleEngineRuleSubRuleRuleActionArray{ RuleEngineRuleSubRuleRuleActionArgs{...} }
+//	RuleEngineRuleSubRuleRuleActionArray{ RuleEngineRuleSubRuleRuleActionArgs{...} }
 type RuleEngineRuleSubRuleRuleActionArrayInput interface {
 	pulumi.Input
 
@@ -2429,21 +2756,21 @@ func (o RuleEngineRuleSubRuleRuleActionOutput) ToRuleEngineRuleSubRuleRuleAction
 	return o
 }
 
-// Define a code action.
+// Feature operation with a status code. Features of this type include:
 func (o RuleEngineRuleSubRuleRuleActionOutput) CodeAction() RuleEngineRuleSubRuleRuleActionCodeActionPtrOutput {
 	return o.ApplyT(func(v RuleEngineRuleSubRuleRuleAction) *RuleEngineRuleSubRuleRuleActionCodeAction {
 		return v.CodeAction
 	}).(RuleEngineRuleSubRuleRuleActionCodeActionPtrOutput)
 }
 
-// Define a normal action.
+// Common operation. Values:
 func (o RuleEngineRuleSubRuleRuleActionOutput) NormalAction() RuleEngineRuleSubRuleRuleActionNormalActionPtrOutput {
 	return o.ApplyT(func(v RuleEngineRuleSubRuleRuleAction) *RuleEngineRuleSubRuleRuleActionNormalAction {
 		return v.NormalAction
 	}).(RuleEngineRuleSubRuleRuleActionNormalActionPtrOutput)
 }
 
-// Define a rewrite action.
+// Feature operation with a request/response header. Features of this type include:
 func (o RuleEngineRuleSubRuleRuleActionOutput) RewriteAction() RuleEngineRuleSubRuleRuleActionRewriteActionPtrOutput {
 	return o.ApplyT(func(v RuleEngineRuleSubRuleRuleAction) *RuleEngineRuleSubRuleRuleActionRewriteAction {
 		return v.RewriteAction
@@ -2471,16 +2798,16 @@ func (o RuleEngineRuleSubRuleRuleActionArrayOutput) Index(i pulumi.IntInput) Rul
 }
 
 type RuleEngineRuleSubRuleRuleActionCodeAction struct {
-	// Action name.
+	// Feature name. You can call the [DescribeRulesSetting](https://tcloud4api.woa.com/document/product/1657/79433?!preview&!document=1) API to view the requirements for entering the feature name.
 	Action string `pulumi:"action"`
-	// Action parameters.
+	// Operation parameter.
 	Parameters []RuleEngineRuleSubRuleRuleActionCodeActionParameter `pulumi:"parameters"`
 }
 
 // RuleEngineRuleSubRuleRuleActionCodeActionInput is an input type that accepts RuleEngineRuleSubRuleRuleActionCodeActionArgs and RuleEngineRuleSubRuleRuleActionCodeActionOutput values.
 // You can construct a concrete instance of `RuleEngineRuleSubRuleRuleActionCodeActionInput` via:
 //
-//          RuleEngineRuleSubRuleRuleActionCodeActionArgs{...}
+//	RuleEngineRuleSubRuleRuleActionCodeActionArgs{...}
 type RuleEngineRuleSubRuleRuleActionCodeActionInput interface {
 	pulumi.Input
 
@@ -2489,9 +2816,9 @@ type RuleEngineRuleSubRuleRuleActionCodeActionInput interface {
 }
 
 type RuleEngineRuleSubRuleRuleActionCodeActionArgs struct {
-	// Action name.
+	// Feature name. You can call the [DescribeRulesSetting](https://tcloud4api.woa.com/document/product/1657/79433?!preview&!document=1) API to view the requirements for entering the feature name.
 	Action pulumi.StringInput `pulumi:"action"`
-	// Action parameters.
+	// Operation parameter.
 	Parameters RuleEngineRuleSubRuleRuleActionCodeActionParameterArrayInput `pulumi:"parameters"`
 }
 
@@ -2518,11 +2845,11 @@ func (i RuleEngineRuleSubRuleRuleActionCodeActionArgs) ToRuleEngineRuleSubRuleRu
 // RuleEngineRuleSubRuleRuleActionCodeActionPtrInput is an input type that accepts RuleEngineRuleSubRuleRuleActionCodeActionArgs, RuleEngineRuleSubRuleRuleActionCodeActionPtr and RuleEngineRuleSubRuleRuleActionCodeActionPtrOutput values.
 // You can construct a concrete instance of `RuleEngineRuleSubRuleRuleActionCodeActionPtrInput` via:
 //
-//          RuleEngineRuleSubRuleRuleActionCodeActionArgs{...}
+//	        RuleEngineRuleSubRuleRuleActionCodeActionArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type RuleEngineRuleSubRuleRuleActionCodeActionPtrInput interface {
 	pulumi.Input
 
@@ -2572,12 +2899,12 @@ func (o RuleEngineRuleSubRuleRuleActionCodeActionOutput) ToRuleEngineRuleSubRule
 	}).(RuleEngineRuleSubRuleRuleActionCodeActionPtrOutput)
 }
 
-// Action name.
+// Feature name. You can call the [DescribeRulesSetting](https://tcloud4api.woa.com/document/product/1657/79433?!preview&!document=1) API to view the requirements for entering the feature name.
 func (o RuleEngineRuleSubRuleRuleActionCodeActionOutput) Action() pulumi.StringOutput {
 	return o.ApplyT(func(v RuleEngineRuleSubRuleRuleActionCodeAction) string { return v.Action }).(pulumi.StringOutput)
 }
 
-// Action parameters.
+// Operation parameter.
 func (o RuleEngineRuleSubRuleRuleActionCodeActionOutput) Parameters() RuleEngineRuleSubRuleRuleActionCodeActionParameterArrayOutput {
 	return o.ApplyT(func(v RuleEngineRuleSubRuleRuleActionCodeAction) []RuleEngineRuleSubRuleRuleActionCodeActionParameter {
 		return v.Parameters
@@ -2608,7 +2935,7 @@ func (o RuleEngineRuleSubRuleRuleActionCodeActionPtrOutput) Elem() RuleEngineRul
 	}).(RuleEngineRuleSubRuleRuleActionCodeActionOutput)
 }
 
-// Action name.
+// Feature name. You can call the [DescribeRulesSetting](https://tcloud4api.woa.com/document/product/1657/79433?!preview&!document=1) API to view the requirements for entering the feature name.
 func (o RuleEngineRuleSubRuleRuleActionCodeActionPtrOutput) Action() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *RuleEngineRuleSubRuleRuleActionCodeAction) *string {
 		if v == nil {
@@ -2618,7 +2945,7 @@ func (o RuleEngineRuleSubRuleRuleActionCodeActionPtrOutput) Action() pulumi.Stri
 	}).(pulumi.StringPtrOutput)
 }
 
-// Action parameters.
+// Operation parameter.
 func (o RuleEngineRuleSubRuleRuleActionCodeActionPtrOutput) Parameters() RuleEngineRuleSubRuleRuleActionCodeActionParameterArrayOutput {
 	return o.ApplyT(func(v *RuleEngineRuleSubRuleRuleActionCodeAction) []RuleEngineRuleSubRuleRuleActionCodeActionParameter {
 		if v == nil {
@@ -2629,18 +2956,18 @@ func (o RuleEngineRuleSubRuleRuleActionCodeActionPtrOutput) Parameters() RuleEng
 }
 
 type RuleEngineRuleSubRuleRuleActionCodeActionParameter struct {
-	// Target HEADER name.
+	// Parameter name.
 	Name string `pulumi:"name"`
-	// HTTP status code to use.
+	// The status code.
 	StatusCode int `pulumi:"statusCode"`
-	// Parameter Value.
+	// Parameter value.
 	Values []string `pulumi:"values"`
 }
 
 // RuleEngineRuleSubRuleRuleActionCodeActionParameterInput is an input type that accepts RuleEngineRuleSubRuleRuleActionCodeActionParameterArgs and RuleEngineRuleSubRuleRuleActionCodeActionParameterOutput values.
 // You can construct a concrete instance of `RuleEngineRuleSubRuleRuleActionCodeActionParameterInput` via:
 //
-//          RuleEngineRuleSubRuleRuleActionCodeActionParameterArgs{...}
+//	RuleEngineRuleSubRuleRuleActionCodeActionParameterArgs{...}
 type RuleEngineRuleSubRuleRuleActionCodeActionParameterInput interface {
 	pulumi.Input
 
@@ -2649,11 +2976,11 @@ type RuleEngineRuleSubRuleRuleActionCodeActionParameterInput interface {
 }
 
 type RuleEngineRuleSubRuleRuleActionCodeActionParameterArgs struct {
-	// Target HEADER name.
+	// Parameter name.
 	Name pulumi.StringInput `pulumi:"name"`
-	// HTTP status code to use.
+	// The status code.
 	StatusCode pulumi.IntInput `pulumi:"statusCode"`
-	// Parameter Value.
+	// Parameter value.
 	Values pulumi.StringArrayInput `pulumi:"values"`
 }
 
@@ -2672,7 +2999,7 @@ func (i RuleEngineRuleSubRuleRuleActionCodeActionParameterArgs) ToRuleEngineRule
 // RuleEngineRuleSubRuleRuleActionCodeActionParameterArrayInput is an input type that accepts RuleEngineRuleSubRuleRuleActionCodeActionParameterArray and RuleEngineRuleSubRuleRuleActionCodeActionParameterArrayOutput values.
 // You can construct a concrete instance of `RuleEngineRuleSubRuleRuleActionCodeActionParameterArrayInput` via:
 //
-//          RuleEngineRuleSubRuleRuleActionCodeActionParameterArray{ RuleEngineRuleSubRuleRuleActionCodeActionParameterArgs{...} }
+//	RuleEngineRuleSubRuleRuleActionCodeActionParameterArray{ RuleEngineRuleSubRuleRuleActionCodeActionParameterArgs{...} }
 type RuleEngineRuleSubRuleRuleActionCodeActionParameterArrayInput interface {
 	pulumi.Input
 
@@ -2708,17 +3035,17 @@ func (o RuleEngineRuleSubRuleRuleActionCodeActionParameterOutput) ToRuleEngineRu
 	return o
 }
 
-// Target HEADER name.
+// Parameter name.
 func (o RuleEngineRuleSubRuleRuleActionCodeActionParameterOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v RuleEngineRuleSubRuleRuleActionCodeActionParameter) string { return v.Name }).(pulumi.StringOutput)
 }
 
-// HTTP status code to use.
+// The status code.
 func (o RuleEngineRuleSubRuleRuleActionCodeActionParameterOutput) StatusCode() pulumi.IntOutput {
 	return o.ApplyT(func(v RuleEngineRuleSubRuleRuleActionCodeActionParameter) int { return v.StatusCode }).(pulumi.IntOutput)
 }
 
-// Parameter Value.
+// Parameter value.
 func (o RuleEngineRuleSubRuleRuleActionCodeActionParameterOutput) Values() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v RuleEngineRuleSubRuleRuleActionCodeActionParameter) []string { return v.Values }).(pulumi.StringArrayOutput)
 }
@@ -2744,16 +3071,16 @@ func (o RuleEngineRuleSubRuleRuleActionCodeActionParameterArrayOutput) Index(i p
 }
 
 type RuleEngineRuleSubRuleRuleActionNormalAction struct {
-	// Action name.
+	// Feature name. You can call the [DescribeRulesSetting](https://tcloud4api.woa.com/document/product/1657/79433?!preview&!document=1) API to view the requirements for entering the feature name.
 	Action string `pulumi:"action"`
-	// Action parameters.
+	// Parameter.
 	Parameters []RuleEngineRuleSubRuleRuleActionNormalActionParameter `pulumi:"parameters"`
 }
 
 // RuleEngineRuleSubRuleRuleActionNormalActionInput is an input type that accepts RuleEngineRuleSubRuleRuleActionNormalActionArgs and RuleEngineRuleSubRuleRuleActionNormalActionOutput values.
 // You can construct a concrete instance of `RuleEngineRuleSubRuleRuleActionNormalActionInput` via:
 //
-//          RuleEngineRuleSubRuleRuleActionNormalActionArgs{...}
+//	RuleEngineRuleSubRuleRuleActionNormalActionArgs{...}
 type RuleEngineRuleSubRuleRuleActionNormalActionInput interface {
 	pulumi.Input
 
@@ -2762,9 +3089,9 @@ type RuleEngineRuleSubRuleRuleActionNormalActionInput interface {
 }
 
 type RuleEngineRuleSubRuleRuleActionNormalActionArgs struct {
-	// Action name.
+	// Feature name. You can call the [DescribeRulesSetting](https://tcloud4api.woa.com/document/product/1657/79433?!preview&!document=1) API to view the requirements for entering the feature name.
 	Action pulumi.StringInput `pulumi:"action"`
-	// Action parameters.
+	// Parameter.
 	Parameters RuleEngineRuleSubRuleRuleActionNormalActionParameterArrayInput `pulumi:"parameters"`
 }
 
@@ -2791,11 +3118,11 @@ func (i RuleEngineRuleSubRuleRuleActionNormalActionArgs) ToRuleEngineRuleSubRule
 // RuleEngineRuleSubRuleRuleActionNormalActionPtrInput is an input type that accepts RuleEngineRuleSubRuleRuleActionNormalActionArgs, RuleEngineRuleSubRuleRuleActionNormalActionPtr and RuleEngineRuleSubRuleRuleActionNormalActionPtrOutput values.
 // You can construct a concrete instance of `RuleEngineRuleSubRuleRuleActionNormalActionPtrInput` via:
 //
-//          RuleEngineRuleSubRuleRuleActionNormalActionArgs{...}
+//	        RuleEngineRuleSubRuleRuleActionNormalActionArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type RuleEngineRuleSubRuleRuleActionNormalActionPtrInput interface {
 	pulumi.Input
 
@@ -2845,12 +3172,12 @@ func (o RuleEngineRuleSubRuleRuleActionNormalActionOutput) ToRuleEngineRuleSubRu
 	}).(RuleEngineRuleSubRuleRuleActionNormalActionPtrOutput)
 }
 
-// Action name.
+// Feature name. You can call the [DescribeRulesSetting](https://tcloud4api.woa.com/document/product/1657/79433?!preview&!document=1) API to view the requirements for entering the feature name.
 func (o RuleEngineRuleSubRuleRuleActionNormalActionOutput) Action() pulumi.StringOutput {
 	return o.ApplyT(func(v RuleEngineRuleSubRuleRuleActionNormalAction) string { return v.Action }).(pulumi.StringOutput)
 }
 
-// Action parameters.
+// Parameter.
 func (o RuleEngineRuleSubRuleRuleActionNormalActionOutput) Parameters() RuleEngineRuleSubRuleRuleActionNormalActionParameterArrayOutput {
 	return o.ApplyT(func(v RuleEngineRuleSubRuleRuleActionNormalAction) []RuleEngineRuleSubRuleRuleActionNormalActionParameter {
 		return v.Parameters
@@ -2881,7 +3208,7 @@ func (o RuleEngineRuleSubRuleRuleActionNormalActionPtrOutput) Elem() RuleEngineR
 	}).(RuleEngineRuleSubRuleRuleActionNormalActionOutput)
 }
 
-// Action name.
+// Feature name. You can call the [DescribeRulesSetting](https://tcloud4api.woa.com/document/product/1657/79433?!preview&!document=1) API to view the requirements for entering the feature name.
 func (o RuleEngineRuleSubRuleRuleActionNormalActionPtrOutput) Action() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *RuleEngineRuleSubRuleRuleActionNormalAction) *string {
 		if v == nil {
@@ -2891,7 +3218,7 @@ func (o RuleEngineRuleSubRuleRuleActionNormalActionPtrOutput) Action() pulumi.St
 	}).(pulumi.StringPtrOutput)
 }
 
-// Action parameters.
+// Parameter.
 func (o RuleEngineRuleSubRuleRuleActionNormalActionPtrOutput) Parameters() RuleEngineRuleSubRuleRuleActionNormalActionParameterArrayOutput {
 	return o.ApplyT(func(v *RuleEngineRuleSubRuleRuleActionNormalAction) []RuleEngineRuleSubRuleRuleActionNormalActionParameter {
 		if v == nil {
@@ -2902,16 +3229,16 @@ func (o RuleEngineRuleSubRuleRuleActionNormalActionPtrOutput) Parameters() RuleE
 }
 
 type RuleEngineRuleSubRuleRuleActionNormalActionParameter struct {
-	// Target HEADER name.
+	// Parameter name.
 	Name string `pulumi:"name"`
-	// Parameter Value.
+	// Parameter value.
 	Values []string `pulumi:"values"`
 }
 
 // RuleEngineRuleSubRuleRuleActionNormalActionParameterInput is an input type that accepts RuleEngineRuleSubRuleRuleActionNormalActionParameterArgs and RuleEngineRuleSubRuleRuleActionNormalActionParameterOutput values.
 // You can construct a concrete instance of `RuleEngineRuleSubRuleRuleActionNormalActionParameterInput` via:
 //
-//          RuleEngineRuleSubRuleRuleActionNormalActionParameterArgs{...}
+//	RuleEngineRuleSubRuleRuleActionNormalActionParameterArgs{...}
 type RuleEngineRuleSubRuleRuleActionNormalActionParameterInput interface {
 	pulumi.Input
 
@@ -2920,9 +3247,9 @@ type RuleEngineRuleSubRuleRuleActionNormalActionParameterInput interface {
 }
 
 type RuleEngineRuleSubRuleRuleActionNormalActionParameterArgs struct {
-	// Target HEADER name.
+	// Parameter name.
 	Name pulumi.StringInput `pulumi:"name"`
-	// Parameter Value.
+	// Parameter value.
 	Values pulumi.StringArrayInput `pulumi:"values"`
 }
 
@@ -2941,7 +3268,7 @@ func (i RuleEngineRuleSubRuleRuleActionNormalActionParameterArgs) ToRuleEngineRu
 // RuleEngineRuleSubRuleRuleActionNormalActionParameterArrayInput is an input type that accepts RuleEngineRuleSubRuleRuleActionNormalActionParameterArray and RuleEngineRuleSubRuleRuleActionNormalActionParameterArrayOutput values.
 // You can construct a concrete instance of `RuleEngineRuleSubRuleRuleActionNormalActionParameterArrayInput` via:
 //
-//          RuleEngineRuleSubRuleRuleActionNormalActionParameterArray{ RuleEngineRuleSubRuleRuleActionNormalActionParameterArgs{...} }
+//	RuleEngineRuleSubRuleRuleActionNormalActionParameterArray{ RuleEngineRuleSubRuleRuleActionNormalActionParameterArgs{...} }
 type RuleEngineRuleSubRuleRuleActionNormalActionParameterArrayInput interface {
 	pulumi.Input
 
@@ -2977,12 +3304,12 @@ func (o RuleEngineRuleSubRuleRuleActionNormalActionParameterOutput) ToRuleEngine
 	return o
 }
 
-// Target HEADER name.
+// Parameter name.
 func (o RuleEngineRuleSubRuleRuleActionNormalActionParameterOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v RuleEngineRuleSubRuleRuleActionNormalActionParameter) string { return v.Name }).(pulumi.StringOutput)
 }
 
-// Parameter Value.
+// Parameter value.
 func (o RuleEngineRuleSubRuleRuleActionNormalActionParameterOutput) Values() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v RuleEngineRuleSubRuleRuleActionNormalActionParameter) []string { return v.Values }).(pulumi.StringArrayOutput)
 }
@@ -3008,16 +3335,16 @@ func (o RuleEngineRuleSubRuleRuleActionNormalActionParameterArrayOutput) Index(i
 }
 
 type RuleEngineRuleSubRuleRuleActionRewriteAction struct {
-	// Action name.
+	// Feature name. You can call the [DescribeRulesSetting](https://tcloud4api.woa.com/document/product/1657/79433?!preview&!document=1) API to view the requirements for entering the feature name.
 	Action string `pulumi:"action"`
-	// Action parameters.
+	// Parameter.
 	Parameters []RuleEngineRuleSubRuleRuleActionRewriteActionParameter `pulumi:"parameters"`
 }
 
 // RuleEngineRuleSubRuleRuleActionRewriteActionInput is an input type that accepts RuleEngineRuleSubRuleRuleActionRewriteActionArgs and RuleEngineRuleSubRuleRuleActionRewriteActionOutput values.
 // You can construct a concrete instance of `RuleEngineRuleSubRuleRuleActionRewriteActionInput` via:
 //
-//          RuleEngineRuleSubRuleRuleActionRewriteActionArgs{...}
+//	RuleEngineRuleSubRuleRuleActionRewriteActionArgs{...}
 type RuleEngineRuleSubRuleRuleActionRewriteActionInput interface {
 	pulumi.Input
 
@@ -3026,9 +3353,9 @@ type RuleEngineRuleSubRuleRuleActionRewriteActionInput interface {
 }
 
 type RuleEngineRuleSubRuleRuleActionRewriteActionArgs struct {
-	// Action name.
+	// Feature name. You can call the [DescribeRulesSetting](https://tcloud4api.woa.com/document/product/1657/79433?!preview&!document=1) API to view the requirements for entering the feature name.
 	Action pulumi.StringInput `pulumi:"action"`
-	// Action parameters.
+	// Parameter.
 	Parameters RuleEngineRuleSubRuleRuleActionRewriteActionParameterArrayInput `pulumi:"parameters"`
 }
 
@@ -3055,11 +3382,11 @@ func (i RuleEngineRuleSubRuleRuleActionRewriteActionArgs) ToRuleEngineRuleSubRul
 // RuleEngineRuleSubRuleRuleActionRewriteActionPtrInput is an input type that accepts RuleEngineRuleSubRuleRuleActionRewriteActionArgs, RuleEngineRuleSubRuleRuleActionRewriteActionPtr and RuleEngineRuleSubRuleRuleActionRewriteActionPtrOutput values.
 // You can construct a concrete instance of `RuleEngineRuleSubRuleRuleActionRewriteActionPtrInput` via:
 //
-//          RuleEngineRuleSubRuleRuleActionRewriteActionArgs{...}
+//	        RuleEngineRuleSubRuleRuleActionRewriteActionArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type RuleEngineRuleSubRuleRuleActionRewriteActionPtrInput interface {
 	pulumi.Input
 
@@ -3109,12 +3436,12 @@ func (o RuleEngineRuleSubRuleRuleActionRewriteActionOutput) ToRuleEngineRuleSubR
 	}).(RuleEngineRuleSubRuleRuleActionRewriteActionPtrOutput)
 }
 
-// Action name.
+// Feature name. You can call the [DescribeRulesSetting](https://tcloud4api.woa.com/document/product/1657/79433?!preview&!document=1) API to view the requirements for entering the feature name.
 func (o RuleEngineRuleSubRuleRuleActionRewriteActionOutput) Action() pulumi.StringOutput {
 	return o.ApplyT(func(v RuleEngineRuleSubRuleRuleActionRewriteAction) string { return v.Action }).(pulumi.StringOutput)
 }
 
-// Action parameters.
+// Parameter.
 func (o RuleEngineRuleSubRuleRuleActionRewriteActionOutput) Parameters() RuleEngineRuleSubRuleRuleActionRewriteActionParameterArrayOutput {
 	return o.ApplyT(func(v RuleEngineRuleSubRuleRuleActionRewriteAction) []RuleEngineRuleSubRuleRuleActionRewriteActionParameter {
 		return v.Parameters
@@ -3145,7 +3472,7 @@ func (o RuleEngineRuleSubRuleRuleActionRewriteActionPtrOutput) Elem() RuleEngine
 	}).(RuleEngineRuleSubRuleRuleActionRewriteActionOutput)
 }
 
-// Action name.
+// Feature name. You can call the [DescribeRulesSetting](https://tcloud4api.woa.com/document/product/1657/79433?!preview&!document=1) API to view the requirements for entering the feature name.
 func (o RuleEngineRuleSubRuleRuleActionRewriteActionPtrOutput) Action() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *RuleEngineRuleSubRuleRuleActionRewriteAction) *string {
 		if v == nil {
@@ -3155,7 +3482,7 @@ func (o RuleEngineRuleSubRuleRuleActionRewriteActionPtrOutput) Action() pulumi.S
 	}).(pulumi.StringPtrOutput)
 }
 
-// Action parameters.
+// Parameter.
 func (o RuleEngineRuleSubRuleRuleActionRewriteActionPtrOutput) Parameters() RuleEngineRuleSubRuleRuleActionRewriteActionParameterArrayOutput {
 	return o.ApplyT(func(v *RuleEngineRuleSubRuleRuleActionRewriteAction) []RuleEngineRuleSubRuleRuleActionRewriteActionParameter {
 		if v == nil {
@@ -3166,18 +3493,21 @@ func (o RuleEngineRuleSubRuleRuleActionRewriteActionPtrOutput) Parameters() Rule
 }
 
 type RuleEngineRuleSubRuleRuleActionRewriteActionParameter struct {
-	// Action to take on the HEADER. Valid values: `add`, `del`, `set`.
+	// Feature parameter name. You can call the [DescribeRulesSetting](https://tcloud4api.woa.com/document/product/1657/79433?!preview&!document=1) API to view the requirements for entering the parameter name, which has three values:
+	// - add: Add the HTTP header.
+	// - set: Rewrite the HTTP header.
+	// - del: Delete the HTTP header.
 	Action string `pulumi:"action"`
-	// Target HEADER name.
+	// Parameter name.
 	Name string `pulumi:"name"`
-	// Parameter Value.
+	// Parameter value.
 	Values []string `pulumi:"values"`
 }
 
 // RuleEngineRuleSubRuleRuleActionRewriteActionParameterInput is an input type that accepts RuleEngineRuleSubRuleRuleActionRewriteActionParameterArgs and RuleEngineRuleSubRuleRuleActionRewriteActionParameterOutput values.
 // You can construct a concrete instance of `RuleEngineRuleSubRuleRuleActionRewriteActionParameterInput` via:
 //
-//          RuleEngineRuleSubRuleRuleActionRewriteActionParameterArgs{...}
+//	RuleEngineRuleSubRuleRuleActionRewriteActionParameterArgs{...}
 type RuleEngineRuleSubRuleRuleActionRewriteActionParameterInput interface {
 	pulumi.Input
 
@@ -3186,11 +3516,14 @@ type RuleEngineRuleSubRuleRuleActionRewriteActionParameterInput interface {
 }
 
 type RuleEngineRuleSubRuleRuleActionRewriteActionParameterArgs struct {
-	// Action to take on the HEADER. Valid values: `add`, `del`, `set`.
+	// Feature parameter name. You can call the [DescribeRulesSetting](https://tcloud4api.woa.com/document/product/1657/79433?!preview&!document=1) API to view the requirements for entering the parameter name, which has three values:
+	// - add: Add the HTTP header.
+	// - set: Rewrite the HTTP header.
+	// - del: Delete the HTTP header.
 	Action pulumi.StringInput `pulumi:"action"`
-	// Target HEADER name.
+	// Parameter name.
 	Name pulumi.StringInput `pulumi:"name"`
-	// Parameter Value.
+	// Parameter value.
 	Values pulumi.StringArrayInput `pulumi:"values"`
 }
 
@@ -3209,7 +3542,7 @@ func (i RuleEngineRuleSubRuleRuleActionRewriteActionParameterArgs) ToRuleEngineR
 // RuleEngineRuleSubRuleRuleActionRewriteActionParameterArrayInput is an input type that accepts RuleEngineRuleSubRuleRuleActionRewriteActionParameterArray and RuleEngineRuleSubRuleRuleActionRewriteActionParameterArrayOutput values.
 // You can construct a concrete instance of `RuleEngineRuleSubRuleRuleActionRewriteActionParameterArrayInput` via:
 //
-//          RuleEngineRuleSubRuleRuleActionRewriteActionParameterArray{ RuleEngineRuleSubRuleRuleActionRewriteActionParameterArgs{...} }
+//	RuleEngineRuleSubRuleRuleActionRewriteActionParameterArray{ RuleEngineRuleSubRuleRuleActionRewriteActionParameterArgs{...} }
 type RuleEngineRuleSubRuleRuleActionRewriteActionParameterArrayInput interface {
 	pulumi.Input
 
@@ -3245,17 +3578,20 @@ func (o RuleEngineRuleSubRuleRuleActionRewriteActionParameterOutput) ToRuleEngin
 	return o
 }
 
-// Action to take on the HEADER. Valid values: `add`, `del`, `set`.
+// Feature parameter name. You can call the [DescribeRulesSetting](https://tcloud4api.woa.com/document/product/1657/79433?!preview&!document=1) API to view the requirements for entering the parameter name, which has three values:
+// - add: Add the HTTP header.
+// - set: Rewrite the HTTP header.
+// - del: Delete the HTTP header.
 func (o RuleEngineRuleSubRuleRuleActionRewriteActionParameterOutput) Action() pulumi.StringOutput {
 	return o.ApplyT(func(v RuleEngineRuleSubRuleRuleActionRewriteActionParameter) string { return v.Action }).(pulumi.StringOutput)
 }
 
-// Target HEADER name.
+// Parameter name.
 func (o RuleEngineRuleSubRuleRuleActionRewriteActionParameterOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v RuleEngineRuleSubRuleRuleActionRewriteActionParameter) string { return v.Name }).(pulumi.StringOutput)
 }
 
-// Parameter Value.
+// Parameter value.
 func (o RuleEngineRuleSubRuleRuleActionRewriteActionParameterOutput) Values() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v RuleEngineRuleSubRuleRuleActionRewriteActionParameter) []string { return v.Values }).(pulumi.StringArrayOutput)
 }
@@ -3281,14 +3617,14 @@ func (o RuleEngineRuleSubRuleRuleActionRewriteActionParameterArrayOutput) Index(
 }
 
 type RuleEngineRuleSubRuleRuleOr struct {
-	// AND Conditions list of the rule. Rule would be triggered if all conditions are true.
+	// Rule engine condition. This condition will be considered met if all items in the array are met.
 	Ands []RuleEngineRuleSubRuleRuleOrAnd `pulumi:"ands"`
 }
 
 // RuleEngineRuleSubRuleRuleOrInput is an input type that accepts RuleEngineRuleSubRuleRuleOrArgs and RuleEngineRuleSubRuleRuleOrOutput values.
 // You can construct a concrete instance of `RuleEngineRuleSubRuleRuleOrInput` via:
 //
-//          RuleEngineRuleSubRuleRuleOrArgs{...}
+//	RuleEngineRuleSubRuleRuleOrArgs{...}
 type RuleEngineRuleSubRuleRuleOrInput interface {
 	pulumi.Input
 
@@ -3297,7 +3633,7 @@ type RuleEngineRuleSubRuleRuleOrInput interface {
 }
 
 type RuleEngineRuleSubRuleRuleOrArgs struct {
-	// AND Conditions list of the rule. Rule would be triggered if all conditions are true.
+	// Rule engine condition. This condition will be considered met if all items in the array are met.
 	Ands RuleEngineRuleSubRuleRuleOrAndArrayInput `pulumi:"ands"`
 }
 
@@ -3316,7 +3652,7 @@ func (i RuleEngineRuleSubRuleRuleOrArgs) ToRuleEngineRuleSubRuleRuleOrOutputWith
 // RuleEngineRuleSubRuleRuleOrArrayInput is an input type that accepts RuleEngineRuleSubRuleRuleOrArray and RuleEngineRuleSubRuleRuleOrArrayOutput values.
 // You can construct a concrete instance of `RuleEngineRuleSubRuleRuleOrArrayInput` via:
 //
-//          RuleEngineRuleSubRuleRuleOrArray{ RuleEngineRuleSubRuleRuleOrArgs{...} }
+//	RuleEngineRuleSubRuleRuleOrArray{ RuleEngineRuleSubRuleRuleOrArgs{...} }
 type RuleEngineRuleSubRuleRuleOrArrayInput interface {
 	pulumi.Input
 
@@ -3352,7 +3688,7 @@ func (o RuleEngineRuleSubRuleRuleOrOutput) ToRuleEngineRuleSubRuleRuleOrOutputWi
 	return o
 }
 
-// AND Conditions list of the rule. Rule would be triggered if all conditions are true.
+// Rule engine condition. This condition will be considered met if all items in the array are met.
 func (o RuleEngineRuleSubRuleRuleOrOutput) Ands() RuleEngineRuleSubRuleRuleOrAndArrayOutput {
 	return o.ApplyT(func(v RuleEngineRuleSubRuleRuleOr) []RuleEngineRuleSubRuleRuleOrAnd { return v.Ands }).(RuleEngineRuleSubRuleRuleOrAndArrayOutput)
 }
@@ -3378,22 +3714,31 @@ func (o RuleEngineRuleSubRuleRuleOrArrayOutput) Index(i pulumi.IntInput) RuleEng
 }
 
 type RuleEngineRuleSubRuleRuleOrAnd struct {
-	// Whether to ignore the case of the parameter value, the default value is false.
+	// Whether the parameter value is case insensitive. Default value: false.
 	IgnoreCase *bool `pulumi:"ignoreCase"`
-	// The parameter name corresponding to the matching type is valid when the Target value is the following, and the valid value cannot be empty:- `queryString` (query string): The parameter name of the query string in the URL request under the current site, such as lang and version in lang=cn&version=1; `requestHeader` (HTTP request header): HTTP request header field name, such as Accept-Language in Accept-Language:zh-CN,zh;q=0.9.
+	// The parameter name of the match type. This field is required only when `Target=query_string/request_header`.
 	Name *string `pulumi:"name"`
-	// Condition operator. Valid values are `equal`, `notequal`.
+	// Operator. Valid values:
 	Operator string `pulumi:"operator"`
-	// Condition target. Valid values:- `host`: Host of the URL.- `filename`: filename of the URL.- `extension`: file extension of the URL.- `fullUrl`: full url.- `url`: path of the URL.
+	// The match type. Values:
 	Target string `pulumi:"target"`
-	// Condition Value.
+	// The parameter value of the match type. It can be an empty string only when `Target=query string/request header` and `Operator=exist/notexist`.
+	// - When `Target=extension`, enter the file extension, such as "jpg" and "txt".
+	// - When `Target=filename`, enter the file name, such as "foo" in "foo.jpg".
+	// - When `Target=all`, it indicates any site request.
+	// - When `Target=host`, enter the host under the current site, such as "www.maxx55.com".
+	// - When `Target=url`, enter the partial URL path under the current site, such as "/example".
+	// - When `Target=full_url`, enter the complete URL under the current site. It must contain the HTTP protocol, host, and path, such as "https://www.maxx55.cn/example".
+	// - When `Target=client_country`, enter the ISO-3166 country/region code.
+	// - When `Target=query_string`, enter the value of the query string, such as "cn" and "1" in "lang=cn&version=1".
+	// - When `Target=request_header`, enter the HTTP request header value, such as "zh-CN,zh;q=0.9" in the "Accept-Language:zh-CN,zh;q=0.9" header.
 	Values []string `pulumi:"values"`
 }
 
 // RuleEngineRuleSubRuleRuleOrAndInput is an input type that accepts RuleEngineRuleSubRuleRuleOrAndArgs and RuleEngineRuleSubRuleRuleOrAndOutput values.
 // You can construct a concrete instance of `RuleEngineRuleSubRuleRuleOrAndInput` via:
 //
-//          RuleEngineRuleSubRuleRuleOrAndArgs{...}
+//	RuleEngineRuleSubRuleRuleOrAndArgs{...}
 type RuleEngineRuleSubRuleRuleOrAndInput interface {
 	pulumi.Input
 
@@ -3402,15 +3747,24 @@ type RuleEngineRuleSubRuleRuleOrAndInput interface {
 }
 
 type RuleEngineRuleSubRuleRuleOrAndArgs struct {
-	// Whether to ignore the case of the parameter value, the default value is false.
+	// Whether the parameter value is case insensitive. Default value: false.
 	IgnoreCase pulumi.BoolPtrInput `pulumi:"ignoreCase"`
-	// The parameter name corresponding to the matching type is valid when the Target value is the following, and the valid value cannot be empty:- `queryString` (query string): The parameter name of the query string in the URL request under the current site, such as lang and version in lang=cn&version=1; `requestHeader` (HTTP request header): HTTP request header field name, such as Accept-Language in Accept-Language:zh-CN,zh;q=0.9.
+	// The parameter name of the match type. This field is required only when `Target=query_string/request_header`.
 	Name pulumi.StringPtrInput `pulumi:"name"`
-	// Condition operator. Valid values are `equal`, `notequal`.
+	// Operator. Valid values:
 	Operator pulumi.StringInput `pulumi:"operator"`
-	// Condition target. Valid values:- `host`: Host of the URL.- `filename`: filename of the URL.- `extension`: file extension of the URL.- `fullUrl`: full url.- `url`: path of the URL.
+	// The match type. Values:
 	Target pulumi.StringInput `pulumi:"target"`
-	// Condition Value.
+	// The parameter value of the match type. It can be an empty string only when `Target=query string/request header` and `Operator=exist/notexist`.
+	// - When `Target=extension`, enter the file extension, such as "jpg" and "txt".
+	// - When `Target=filename`, enter the file name, such as "foo" in "foo.jpg".
+	// - When `Target=all`, it indicates any site request.
+	// - When `Target=host`, enter the host under the current site, such as "www.maxx55.com".
+	// - When `Target=url`, enter the partial URL path under the current site, such as "/example".
+	// - When `Target=full_url`, enter the complete URL under the current site. It must contain the HTTP protocol, host, and path, such as "https://www.maxx55.cn/example".
+	// - When `Target=client_country`, enter the ISO-3166 country/region code.
+	// - When `Target=query_string`, enter the value of the query string, such as "cn" and "1" in "lang=cn&version=1".
+	// - When `Target=request_header`, enter the HTTP request header value, such as "zh-CN,zh;q=0.9" in the "Accept-Language:zh-CN,zh;q=0.9" header.
 	Values pulumi.StringArrayInput `pulumi:"values"`
 }
 
@@ -3429,7 +3783,7 @@ func (i RuleEngineRuleSubRuleRuleOrAndArgs) ToRuleEngineRuleSubRuleRuleOrAndOutp
 // RuleEngineRuleSubRuleRuleOrAndArrayInput is an input type that accepts RuleEngineRuleSubRuleRuleOrAndArray and RuleEngineRuleSubRuleRuleOrAndArrayOutput values.
 // You can construct a concrete instance of `RuleEngineRuleSubRuleRuleOrAndArrayInput` via:
 //
-//          RuleEngineRuleSubRuleRuleOrAndArray{ RuleEngineRuleSubRuleRuleOrAndArgs{...} }
+//	RuleEngineRuleSubRuleRuleOrAndArray{ RuleEngineRuleSubRuleRuleOrAndArgs{...} }
 type RuleEngineRuleSubRuleRuleOrAndArrayInput interface {
 	pulumi.Input
 
@@ -3465,27 +3819,36 @@ func (o RuleEngineRuleSubRuleRuleOrAndOutput) ToRuleEngineRuleSubRuleRuleOrAndOu
 	return o
 }
 
-// Whether to ignore the case of the parameter value, the default value is false.
+// Whether the parameter value is case insensitive. Default value: false.
 func (o RuleEngineRuleSubRuleRuleOrAndOutput) IgnoreCase() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v RuleEngineRuleSubRuleRuleOrAnd) *bool { return v.IgnoreCase }).(pulumi.BoolPtrOutput)
 }
 
-// The parameter name corresponding to the matching type is valid when the Target value is the following, and the valid value cannot be empty:- `queryString` (query string): The parameter name of the query string in the URL request under the current site, such as lang and version in lang=cn&version=1; `requestHeader` (HTTP request header): HTTP request header field name, such as Accept-Language in Accept-Language:zh-CN,zh;q=0.9.
+// The parameter name of the match type. This field is required only when `Target=query_string/request_header`.
 func (o RuleEngineRuleSubRuleRuleOrAndOutput) Name() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v RuleEngineRuleSubRuleRuleOrAnd) *string { return v.Name }).(pulumi.StringPtrOutput)
 }
 
-// Condition operator. Valid values are `equal`, `notequal`.
+// Operator. Valid values:
 func (o RuleEngineRuleSubRuleRuleOrAndOutput) Operator() pulumi.StringOutput {
 	return o.ApplyT(func(v RuleEngineRuleSubRuleRuleOrAnd) string { return v.Operator }).(pulumi.StringOutput)
 }
 
-// Condition target. Valid values:- `host`: Host of the URL.- `filename`: filename of the URL.- `extension`: file extension of the URL.- `fullUrl`: full url.- `url`: path of the URL.
+// The match type. Values:
 func (o RuleEngineRuleSubRuleRuleOrAndOutput) Target() pulumi.StringOutput {
 	return o.ApplyT(func(v RuleEngineRuleSubRuleRuleOrAnd) string { return v.Target }).(pulumi.StringOutput)
 }
 
-// Condition Value.
+// The parameter value of the match type. It can be an empty string only when `Target=query string/request header` and `Operator=exist/notexist`.
+// - When `Target=extension`, enter the file extension, such as "jpg" and "txt".
+// - When `Target=filename`, enter the file name, such as "foo" in "foo.jpg".
+// - When `Target=all`, it indicates any site request.
+// - When `Target=host`, enter the host under the current site, such as "www.maxx55.com".
+// - When `Target=url`, enter the partial URL path under the current site, such as "/example".
+// - When `Target=full_url`, enter the complete URL under the current site. It must contain the HTTP protocol, host, and path, such as "https://www.maxx55.cn/example".
+// - When `Target=client_country`, enter the ISO-3166 country/region code.
+// - When `Target=query_string`, enter the value of the query string, such as "cn" and "1" in "lang=cn&version=1".
+// - When `Target=request_header`, enter the HTTP request header value, such as "zh-CN,zh;q=0.9" in the "Accept-Language:zh-CN,zh;q=0.9" header.
 func (o RuleEngineRuleSubRuleRuleOrAndOutput) Values() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v RuleEngineRuleSubRuleRuleOrAnd) []string { return v.Values }).(pulumi.StringArrayOutput)
 }
@@ -3518,7 +3881,7 @@ type ZoneOwnershipVerification struct {
 // ZoneOwnershipVerificationInput is an input type that accepts ZoneOwnershipVerificationArgs and ZoneOwnershipVerificationOutput values.
 // You can construct a concrete instance of `ZoneOwnershipVerificationInput` via:
 //
-//          ZoneOwnershipVerificationArgs{...}
+//	ZoneOwnershipVerificationArgs{...}
 type ZoneOwnershipVerificationInput interface {
 	pulumi.Input
 
@@ -3546,7 +3909,7 @@ func (i ZoneOwnershipVerificationArgs) ToZoneOwnershipVerificationOutputWithCont
 // ZoneOwnershipVerificationArrayInput is an input type that accepts ZoneOwnershipVerificationArray and ZoneOwnershipVerificationArrayOutput values.
 // You can construct a concrete instance of `ZoneOwnershipVerificationArrayInput` via:
 //
-//          ZoneOwnershipVerificationArray{ ZoneOwnershipVerificationArgs{...} }
+//	ZoneOwnershipVerificationArray{ ZoneOwnershipVerificationArgs{...} }
 type ZoneOwnershipVerificationArrayInput interface {
 	pulumi.Input
 
@@ -3621,7 +3984,7 @@ type ZoneOwnershipVerificationDnsVerification struct {
 // ZoneOwnershipVerificationDnsVerificationInput is an input type that accepts ZoneOwnershipVerificationDnsVerificationArgs and ZoneOwnershipVerificationDnsVerificationOutput values.
 // You can construct a concrete instance of `ZoneOwnershipVerificationDnsVerificationInput` via:
 //
-//          ZoneOwnershipVerificationDnsVerificationArgs{...}
+//	ZoneOwnershipVerificationDnsVerificationArgs{...}
 type ZoneOwnershipVerificationDnsVerificationInput interface {
 	pulumi.Input
 
@@ -3653,7 +4016,7 @@ func (i ZoneOwnershipVerificationDnsVerificationArgs) ToZoneOwnershipVerificatio
 // ZoneOwnershipVerificationDnsVerificationArrayInput is an input type that accepts ZoneOwnershipVerificationDnsVerificationArray and ZoneOwnershipVerificationDnsVerificationArrayOutput values.
 // You can construct a concrete instance of `ZoneOwnershipVerificationDnsVerificationArrayInput` via:
 //
-//          ZoneOwnershipVerificationDnsVerificationArray{ ZoneOwnershipVerificationDnsVerificationArgs{...} }
+//	ZoneOwnershipVerificationDnsVerificationArray{ ZoneOwnershipVerificationDnsVerificationArgs{...} }
 type ZoneOwnershipVerificationDnsVerificationArrayInput interface {
 	pulumi.Input
 
@@ -3736,7 +4099,7 @@ type ZoneSettingCache struct {
 // ZoneSettingCacheInput is an input type that accepts ZoneSettingCacheArgs and ZoneSettingCacheOutput values.
 // You can construct a concrete instance of `ZoneSettingCacheInput` via:
 //
-//          ZoneSettingCacheArgs{...}
+//	ZoneSettingCacheArgs{...}
 type ZoneSettingCacheInput interface {
 	pulumi.Input
 
@@ -3776,11 +4139,11 @@ func (i ZoneSettingCacheArgs) ToZoneSettingCachePtrOutputWithContext(ctx context
 // ZoneSettingCachePtrInput is an input type that accepts ZoneSettingCacheArgs, ZoneSettingCachePtr and ZoneSettingCachePtrOutput values.
 // You can construct a concrete instance of `ZoneSettingCachePtrInput` via:
 //
-//          ZoneSettingCacheArgs{...}
+//	        ZoneSettingCacheArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type ZoneSettingCachePtrInput interface {
 	pulumi.Input
 
@@ -3900,18 +4263,17 @@ func (o ZoneSettingCachePtrOutput) NoCache() ZoneSettingCacheNoCachePtrOutput {
 }
 
 type ZoneSettingCacheCache struct {
-	// Cache expiration time settings, Unit: second. The maximum value is 365 days. Note: This field may return null, indicating that no valid value can be obtained.
+	// Cache expiration time settings.
+	// Unit: second. The maximum value is 365 days. Note: This field may return null, indicating that no valid value can be obtained.
 	CacheTime *int `pulumi:"cacheTime"`
-	// Specifies whether to enable force cache. Valid values: `on`: Enable; `off`: Disable. Note: This field may return null, indicating that no valid value can be obtained.
-	IgnoreCacheControl *string `pulumi:"ignoreCacheControl"`
-	// Cache configuration switch. Valid values: `on`: Enable; `off`: Disable. Note: This field may return null, indicating that no valid value can be obtained.
+	// Cache configuration switch.
 	Switch *string `pulumi:"switch"`
 }
 
 // ZoneSettingCacheCacheInput is an input type that accepts ZoneSettingCacheCacheArgs and ZoneSettingCacheCacheOutput values.
 // You can construct a concrete instance of `ZoneSettingCacheCacheInput` via:
 //
-//          ZoneSettingCacheCacheArgs{...}
+//	ZoneSettingCacheCacheArgs{...}
 type ZoneSettingCacheCacheInput interface {
 	pulumi.Input
 
@@ -3920,11 +4282,10 @@ type ZoneSettingCacheCacheInput interface {
 }
 
 type ZoneSettingCacheCacheArgs struct {
-	// Cache expiration time settings, Unit: second. The maximum value is 365 days. Note: This field may return null, indicating that no valid value can be obtained.
+	// Cache expiration time settings.
+	// Unit: second. The maximum value is 365 days. Note: This field may return null, indicating that no valid value can be obtained.
 	CacheTime pulumi.IntPtrInput `pulumi:"cacheTime"`
-	// Specifies whether to enable force cache. Valid values: `on`: Enable; `off`: Disable. Note: This field may return null, indicating that no valid value can be obtained.
-	IgnoreCacheControl pulumi.StringPtrInput `pulumi:"ignoreCacheControl"`
-	// Cache configuration switch. Valid values: `on`: Enable; `off`: Disable. Note: This field may return null, indicating that no valid value can be obtained.
+	// Cache configuration switch.
 	Switch pulumi.StringPtrInput `pulumi:"switch"`
 }
 
@@ -3951,11 +4312,11 @@ func (i ZoneSettingCacheCacheArgs) ToZoneSettingCacheCachePtrOutputWithContext(c
 // ZoneSettingCacheCachePtrInput is an input type that accepts ZoneSettingCacheCacheArgs, ZoneSettingCacheCachePtr and ZoneSettingCacheCachePtrOutput values.
 // You can construct a concrete instance of `ZoneSettingCacheCachePtrInput` via:
 //
-//          ZoneSettingCacheCacheArgs{...}
+//	        ZoneSettingCacheCacheArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type ZoneSettingCacheCachePtrInput interface {
 	pulumi.Input
 
@@ -4005,17 +4366,13 @@ func (o ZoneSettingCacheCacheOutput) ToZoneSettingCacheCachePtrOutputWithContext
 	}).(ZoneSettingCacheCachePtrOutput)
 }
 
-// Cache expiration time settings, Unit: second. The maximum value is 365 days. Note: This field may return null, indicating that no valid value can be obtained.
+// Cache expiration time settings.
+// Unit: second. The maximum value is 365 days. Note: This field may return null, indicating that no valid value can be obtained.
 func (o ZoneSettingCacheCacheOutput) CacheTime() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v ZoneSettingCacheCache) *int { return v.CacheTime }).(pulumi.IntPtrOutput)
 }
 
-// Specifies whether to enable force cache. Valid values: `on`: Enable; `off`: Disable. Note: This field may return null, indicating that no valid value can be obtained.
-func (o ZoneSettingCacheCacheOutput) IgnoreCacheControl() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v ZoneSettingCacheCache) *string { return v.IgnoreCacheControl }).(pulumi.StringPtrOutput)
-}
-
-// Cache configuration switch. Valid values: `on`: Enable; `off`: Disable. Note: This field may return null, indicating that no valid value can be obtained.
+// Cache configuration switch.
 func (o ZoneSettingCacheCacheOutput) Switch() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ZoneSettingCacheCache) *string { return v.Switch }).(pulumi.StringPtrOutput)
 }
@@ -4044,7 +4401,8 @@ func (o ZoneSettingCacheCachePtrOutput) Elem() ZoneSettingCacheCacheOutput {
 	}).(ZoneSettingCacheCacheOutput)
 }
 
-// Cache expiration time settings, Unit: second. The maximum value is 365 days. Note: This field may return null, indicating that no valid value can be obtained.
+// Cache expiration time settings.
+// Unit: second. The maximum value is 365 days. Note: This field may return null, indicating that no valid value can be obtained.
 func (o ZoneSettingCacheCachePtrOutput) CacheTime() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *ZoneSettingCacheCache) *int {
 		if v == nil {
@@ -4054,17 +4412,7 @@ func (o ZoneSettingCacheCachePtrOutput) CacheTime() pulumi.IntPtrOutput {
 	}).(pulumi.IntPtrOutput)
 }
 
-// Specifies whether to enable force cache. Valid values: `on`: Enable; `off`: Disable. Note: This field may return null, indicating that no valid value can be obtained.
-func (o ZoneSettingCacheCachePtrOutput) IgnoreCacheControl() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *ZoneSettingCacheCache) *string {
-		if v == nil {
-			return nil
-		}
-		return v.IgnoreCacheControl
-	}).(pulumi.StringPtrOutput)
-}
-
-// Cache configuration switch. Valid values: `on`: Enable; `off`: Disable. Note: This field may return null, indicating that no valid value can be obtained.
+// Cache configuration switch.
 func (o ZoneSettingCacheCachePtrOutput) Switch() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ZoneSettingCacheCache) *string {
 		if v == nil {
@@ -4075,14 +4423,14 @@ func (o ZoneSettingCacheCachePtrOutput) Switch() pulumi.StringPtrOutput {
 }
 
 type ZoneSettingCacheFollowOrigin struct {
-	// Specifies whether to follow the origin server configuration.- `on`: Enable.- `off`: Disable. Note: This field may return null, indicating that no valid value can be obtained.
+	// Specifies whether to follow the origin server configuration.
 	Switch *string `pulumi:"switch"`
 }
 
 // ZoneSettingCacheFollowOriginInput is an input type that accepts ZoneSettingCacheFollowOriginArgs and ZoneSettingCacheFollowOriginOutput values.
 // You can construct a concrete instance of `ZoneSettingCacheFollowOriginInput` via:
 //
-//          ZoneSettingCacheFollowOriginArgs{...}
+//	ZoneSettingCacheFollowOriginArgs{...}
 type ZoneSettingCacheFollowOriginInput interface {
 	pulumi.Input
 
@@ -4091,7 +4439,7 @@ type ZoneSettingCacheFollowOriginInput interface {
 }
 
 type ZoneSettingCacheFollowOriginArgs struct {
-	// Specifies whether to follow the origin server configuration.- `on`: Enable.- `off`: Disable. Note: This field may return null, indicating that no valid value can be obtained.
+	// Specifies whether to follow the origin server configuration.
 	Switch pulumi.StringPtrInput `pulumi:"switch"`
 }
 
@@ -4118,11 +4466,11 @@ func (i ZoneSettingCacheFollowOriginArgs) ToZoneSettingCacheFollowOriginPtrOutpu
 // ZoneSettingCacheFollowOriginPtrInput is an input type that accepts ZoneSettingCacheFollowOriginArgs, ZoneSettingCacheFollowOriginPtr and ZoneSettingCacheFollowOriginPtrOutput values.
 // You can construct a concrete instance of `ZoneSettingCacheFollowOriginPtrInput` via:
 //
-//          ZoneSettingCacheFollowOriginArgs{...}
+//	        ZoneSettingCacheFollowOriginArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type ZoneSettingCacheFollowOriginPtrInput interface {
 	pulumi.Input
 
@@ -4172,7 +4520,7 @@ func (o ZoneSettingCacheFollowOriginOutput) ToZoneSettingCacheFollowOriginPtrOut
 	}).(ZoneSettingCacheFollowOriginPtrOutput)
 }
 
-// Specifies whether to follow the origin server configuration.- `on`: Enable.- `off`: Disable. Note: This field may return null, indicating that no valid value can be obtained.
+// Specifies whether to follow the origin server configuration.
 func (o ZoneSettingCacheFollowOriginOutput) Switch() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ZoneSettingCacheFollowOrigin) *string { return v.Switch }).(pulumi.StringPtrOutput)
 }
@@ -4201,7 +4549,7 @@ func (o ZoneSettingCacheFollowOriginPtrOutput) Elem() ZoneSettingCacheFollowOrig
 	}).(ZoneSettingCacheFollowOriginOutput)
 }
 
-// Specifies whether to follow the origin server configuration.- `on`: Enable.- `off`: Disable. Note: This field may return null, indicating that no valid value can be obtained.
+// Specifies whether to follow the origin server configuration.
 func (o ZoneSettingCacheFollowOriginPtrOutput) Switch() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ZoneSettingCacheFollowOrigin) *string {
 		if v == nil {
@@ -4212,7 +4560,7 @@ func (o ZoneSettingCacheFollowOriginPtrOutput) Switch() pulumi.StringPtrOutput {
 }
 
 type ZoneSettingCacheKey struct {
-	// Specifies whether to enable full-path cache.- `on`: Enable full-path cache (i.e., disable Ignore Query String).- `off`: Disable full-path cache (i.e., enable Ignore Query String). Note: This field may return null, indicating that no valid value can be obtained.
+	// Specifies whether to enable full-path cache.
 	FullUrlCache *string `pulumi:"fullUrlCache"`
 	// Specifies whether the cache key is case-sensitive. Note: This field may return null, indicating that no valid value can be obtained.
 	IgnoreCase *string `pulumi:"ignoreCase"`
@@ -4223,7 +4571,7 @@ type ZoneSettingCacheKey struct {
 // ZoneSettingCacheKeyInput is an input type that accepts ZoneSettingCacheKeyArgs and ZoneSettingCacheKeyOutput values.
 // You can construct a concrete instance of `ZoneSettingCacheKeyInput` via:
 //
-//          ZoneSettingCacheKeyArgs{...}
+//	ZoneSettingCacheKeyArgs{...}
 type ZoneSettingCacheKeyInput interface {
 	pulumi.Input
 
@@ -4232,7 +4580,7 @@ type ZoneSettingCacheKeyInput interface {
 }
 
 type ZoneSettingCacheKeyArgs struct {
-	// Specifies whether to enable full-path cache.- `on`: Enable full-path cache (i.e., disable Ignore Query String).- `off`: Disable full-path cache (i.e., enable Ignore Query String). Note: This field may return null, indicating that no valid value can be obtained.
+	// Specifies whether to enable full-path cache.
 	FullUrlCache pulumi.StringPtrInput `pulumi:"fullUrlCache"`
 	// Specifies whether the cache key is case-sensitive. Note: This field may return null, indicating that no valid value can be obtained.
 	IgnoreCase pulumi.StringPtrInput `pulumi:"ignoreCase"`
@@ -4263,11 +4611,11 @@ func (i ZoneSettingCacheKeyArgs) ToZoneSettingCacheKeyPtrOutputWithContext(ctx c
 // ZoneSettingCacheKeyPtrInput is an input type that accepts ZoneSettingCacheKeyArgs, ZoneSettingCacheKeyPtr and ZoneSettingCacheKeyPtrOutput values.
 // You can construct a concrete instance of `ZoneSettingCacheKeyPtrInput` via:
 //
-//          ZoneSettingCacheKeyArgs{...}
+//	        ZoneSettingCacheKeyArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type ZoneSettingCacheKeyPtrInput interface {
 	pulumi.Input
 
@@ -4317,7 +4665,7 @@ func (o ZoneSettingCacheKeyOutput) ToZoneSettingCacheKeyPtrOutputWithContext(ctx
 	}).(ZoneSettingCacheKeyPtrOutput)
 }
 
-// Specifies whether to enable full-path cache.- `on`: Enable full-path cache (i.e., disable Ignore Query String).- `off`: Disable full-path cache (i.e., enable Ignore Query String). Note: This field may return null, indicating that no valid value can be obtained.
+// Specifies whether to enable full-path cache.
 func (o ZoneSettingCacheKeyOutput) FullUrlCache() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ZoneSettingCacheKey) *string { return v.FullUrlCache }).(pulumi.StringPtrOutput)
 }
@@ -4356,7 +4704,7 @@ func (o ZoneSettingCacheKeyPtrOutput) Elem() ZoneSettingCacheKeyOutput {
 	}).(ZoneSettingCacheKeyOutput)
 }
 
-// Specifies whether to enable full-path cache.- `on`: Enable full-path cache (i.e., disable Ignore Query String).- `off`: Disable full-path cache (i.e., enable Ignore Query String). Note: This field may return null, indicating that no valid value can be obtained.
+// Specifies whether to enable full-path cache.
 func (o ZoneSettingCacheKeyPtrOutput) FullUrlCache() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ZoneSettingCacheKey) *string {
 		if v == nil {
@@ -4387,9 +4735,9 @@ func (o ZoneSettingCacheKeyPtrOutput) QueryString() ZoneSettingCacheKeyQueryStri
 }
 
 type ZoneSettingCacheKeyQueryString struct {
-	// - `includeCustom`: Include the specified query strings.- `excludeCustom`: Exclude the specified query strings. Note: This field may return null, indicating that no valid value can be obtained.
+	// `includeCustom`: Include the specified query strings.
 	Action *string `pulumi:"action"`
-	// Whether to use QueryString as part of CacheKey.- `on`: Enable.- `off`: Disable. Note: This field may return null, indicating that no valid value can be obtained.
+	// Whether to use QueryString as part of CacheKey.
 	Switch string `pulumi:"switch"`
 	// Array of query strings used/excluded. Note: This field may return null, indicating that no valid value can be obtained.
 	Values []string `pulumi:"values"`
@@ -4398,7 +4746,7 @@ type ZoneSettingCacheKeyQueryString struct {
 // ZoneSettingCacheKeyQueryStringInput is an input type that accepts ZoneSettingCacheKeyQueryStringArgs and ZoneSettingCacheKeyQueryStringOutput values.
 // You can construct a concrete instance of `ZoneSettingCacheKeyQueryStringInput` via:
 //
-//          ZoneSettingCacheKeyQueryStringArgs{...}
+//	ZoneSettingCacheKeyQueryStringArgs{...}
 type ZoneSettingCacheKeyQueryStringInput interface {
 	pulumi.Input
 
@@ -4407,9 +4755,9 @@ type ZoneSettingCacheKeyQueryStringInput interface {
 }
 
 type ZoneSettingCacheKeyQueryStringArgs struct {
-	// - `includeCustom`: Include the specified query strings.- `excludeCustom`: Exclude the specified query strings. Note: This field may return null, indicating that no valid value can be obtained.
+	// `includeCustom`: Include the specified query strings.
 	Action pulumi.StringPtrInput `pulumi:"action"`
-	// Whether to use QueryString as part of CacheKey.- `on`: Enable.- `off`: Disable. Note: This field may return null, indicating that no valid value can be obtained.
+	// Whether to use QueryString as part of CacheKey.
 	Switch pulumi.StringInput `pulumi:"switch"`
 	// Array of query strings used/excluded. Note: This field may return null, indicating that no valid value can be obtained.
 	Values pulumi.StringArrayInput `pulumi:"values"`
@@ -4438,11 +4786,11 @@ func (i ZoneSettingCacheKeyQueryStringArgs) ToZoneSettingCacheKeyQueryStringPtrO
 // ZoneSettingCacheKeyQueryStringPtrInput is an input type that accepts ZoneSettingCacheKeyQueryStringArgs, ZoneSettingCacheKeyQueryStringPtr and ZoneSettingCacheKeyQueryStringPtrOutput values.
 // You can construct a concrete instance of `ZoneSettingCacheKeyQueryStringPtrInput` via:
 //
-//          ZoneSettingCacheKeyQueryStringArgs{...}
+//	        ZoneSettingCacheKeyQueryStringArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type ZoneSettingCacheKeyQueryStringPtrInput interface {
 	pulumi.Input
 
@@ -4492,12 +4840,12 @@ func (o ZoneSettingCacheKeyQueryStringOutput) ToZoneSettingCacheKeyQueryStringPt
 	}).(ZoneSettingCacheKeyQueryStringPtrOutput)
 }
 
-// - `includeCustom`: Include the specified query strings.- `excludeCustom`: Exclude the specified query strings. Note: This field may return null, indicating that no valid value can be obtained.
+// `includeCustom`: Include the specified query strings.
 func (o ZoneSettingCacheKeyQueryStringOutput) Action() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ZoneSettingCacheKeyQueryString) *string { return v.Action }).(pulumi.StringPtrOutput)
 }
 
-// Whether to use QueryString as part of CacheKey.- `on`: Enable.- `off`: Disable. Note: This field may return null, indicating that no valid value can be obtained.
+// Whether to use QueryString as part of CacheKey.
 func (o ZoneSettingCacheKeyQueryStringOutput) Switch() pulumi.StringOutput {
 	return o.ApplyT(func(v ZoneSettingCacheKeyQueryString) string { return v.Switch }).(pulumi.StringOutput)
 }
@@ -4531,7 +4879,7 @@ func (o ZoneSettingCacheKeyQueryStringPtrOutput) Elem() ZoneSettingCacheKeyQuery
 	}).(ZoneSettingCacheKeyQueryStringOutput)
 }
 
-// - `includeCustom`: Include the specified query strings.- `excludeCustom`: Exclude the specified query strings. Note: This field may return null, indicating that no valid value can be obtained.
+// `includeCustom`: Include the specified query strings.
 func (o ZoneSettingCacheKeyQueryStringPtrOutput) Action() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ZoneSettingCacheKeyQueryString) *string {
 		if v == nil {
@@ -4541,7 +4889,7 @@ func (o ZoneSettingCacheKeyQueryStringPtrOutput) Action() pulumi.StringPtrOutput
 	}).(pulumi.StringPtrOutput)
 }
 
-// Whether to use QueryString as part of CacheKey.- `on`: Enable.- `off`: Disable. Note: This field may return null, indicating that no valid value can be obtained.
+// Whether to use QueryString as part of CacheKey.
 func (o ZoneSettingCacheKeyQueryStringPtrOutput) Switch() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ZoneSettingCacheKeyQueryString) *string {
 		if v == nil {
@@ -4562,14 +4910,14 @@ func (o ZoneSettingCacheKeyQueryStringPtrOutput) Values() pulumi.StringArrayOutp
 }
 
 type ZoneSettingCacheNoCache struct {
-	// Whether to cache the configuration. Valid values: `on`: Do not cache; `off`: Cache. Note: This field may return null, indicating that no valid value can be obtained.
+	// Whether to cache the configuration.
 	Switch *string `pulumi:"switch"`
 }
 
 // ZoneSettingCacheNoCacheInput is an input type that accepts ZoneSettingCacheNoCacheArgs and ZoneSettingCacheNoCacheOutput values.
 // You can construct a concrete instance of `ZoneSettingCacheNoCacheInput` via:
 //
-//          ZoneSettingCacheNoCacheArgs{...}
+//	ZoneSettingCacheNoCacheArgs{...}
 type ZoneSettingCacheNoCacheInput interface {
 	pulumi.Input
 
@@ -4578,7 +4926,7 @@ type ZoneSettingCacheNoCacheInput interface {
 }
 
 type ZoneSettingCacheNoCacheArgs struct {
-	// Whether to cache the configuration. Valid values: `on`: Do not cache; `off`: Cache. Note: This field may return null, indicating that no valid value can be obtained.
+	// Whether to cache the configuration.
 	Switch pulumi.StringPtrInput `pulumi:"switch"`
 }
 
@@ -4605,11 +4953,11 @@ func (i ZoneSettingCacheNoCacheArgs) ToZoneSettingCacheNoCachePtrOutputWithConte
 // ZoneSettingCacheNoCachePtrInput is an input type that accepts ZoneSettingCacheNoCacheArgs, ZoneSettingCacheNoCachePtr and ZoneSettingCacheNoCachePtrOutput values.
 // You can construct a concrete instance of `ZoneSettingCacheNoCachePtrInput` via:
 //
-//          ZoneSettingCacheNoCacheArgs{...}
+//	        ZoneSettingCacheNoCacheArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type ZoneSettingCacheNoCachePtrInput interface {
 	pulumi.Input
 
@@ -4659,7 +5007,7 @@ func (o ZoneSettingCacheNoCacheOutput) ToZoneSettingCacheNoCachePtrOutputWithCon
 	}).(ZoneSettingCacheNoCachePtrOutput)
 }
 
-// Whether to cache the configuration. Valid values: `on`: Do not cache; `off`: Cache. Note: This field may return null, indicating that no valid value can be obtained.
+// Whether to cache the configuration.
 func (o ZoneSettingCacheNoCacheOutput) Switch() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ZoneSettingCacheNoCache) *string { return v.Switch }).(pulumi.StringPtrOutput)
 }
@@ -4688,7 +5036,7 @@ func (o ZoneSettingCacheNoCachePtrOutput) Elem() ZoneSettingCacheNoCacheOutput {
 	}).(ZoneSettingCacheNoCacheOutput)
 }
 
-// Whether to cache the configuration. Valid values: `on`: Do not cache; `off`: Cache. Note: This field may return null, indicating that no valid value can be obtained.
+// Whether to cache the configuration.
 func (o ZoneSettingCacheNoCachePtrOutput) Switch() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ZoneSettingCacheNoCache) *string {
 		if v == nil {
@@ -4701,14 +5049,14 @@ func (o ZoneSettingCacheNoCachePtrOutput) Switch() pulumi.StringPtrOutput {
 type ZoneSettingCachePrefresh struct {
 	// Percentage of cache time before try to prefresh. Valid value range: 1-99.
 	Percent *int `pulumi:"percent"`
-	// Specifies whether to enable cache prefresh.- `on`: Enable.- `off`: Disable.
+	// Specifies whether to enable cache prefresh.
 	Switch string `pulumi:"switch"`
 }
 
 // ZoneSettingCachePrefreshInput is an input type that accepts ZoneSettingCachePrefreshArgs and ZoneSettingCachePrefreshOutput values.
 // You can construct a concrete instance of `ZoneSettingCachePrefreshInput` via:
 //
-//          ZoneSettingCachePrefreshArgs{...}
+//	ZoneSettingCachePrefreshArgs{...}
 type ZoneSettingCachePrefreshInput interface {
 	pulumi.Input
 
@@ -4719,7 +5067,7 @@ type ZoneSettingCachePrefreshInput interface {
 type ZoneSettingCachePrefreshArgs struct {
 	// Percentage of cache time before try to prefresh. Valid value range: 1-99.
 	Percent pulumi.IntPtrInput `pulumi:"percent"`
-	// Specifies whether to enable cache prefresh.- `on`: Enable.- `off`: Disable.
+	// Specifies whether to enable cache prefresh.
 	Switch pulumi.StringInput `pulumi:"switch"`
 }
 
@@ -4746,11 +5094,11 @@ func (i ZoneSettingCachePrefreshArgs) ToZoneSettingCachePrefreshPtrOutputWithCon
 // ZoneSettingCachePrefreshPtrInput is an input type that accepts ZoneSettingCachePrefreshArgs, ZoneSettingCachePrefreshPtr and ZoneSettingCachePrefreshPtrOutput values.
 // You can construct a concrete instance of `ZoneSettingCachePrefreshPtrInput` via:
 //
-//          ZoneSettingCachePrefreshArgs{...}
+//	        ZoneSettingCachePrefreshArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type ZoneSettingCachePrefreshPtrInput interface {
 	pulumi.Input
 
@@ -4805,7 +5153,7 @@ func (o ZoneSettingCachePrefreshOutput) Percent() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v ZoneSettingCachePrefresh) *int { return v.Percent }).(pulumi.IntPtrOutput)
 }
 
-// Specifies whether to enable cache prefresh.- `on`: Enable.- `off`: Disable.
+// Specifies whether to enable cache prefresh.
 func (o ZoneSettingCachePrefreshOutput) Switch() pulumi.StringOutput {
 	return o.ApplyT(func(v ZoneSettingCachePrefresh) string { return v.Switch }).(pulumi.StringOutput)
 }
@@ -4844,7 +5192,7 @@ func (o ZoneSettingCachePrefreshPtrOutput) Percent() pulumi.IntPtrOutput {
 	}).(pulumi.IntPtrOutput)
 }
 
-// Specifies whether to enable cache prefresh.- `on`: Enable.- `off`: Disable.
+// Specifies whether to enable cache prefresh.
 func (o ZoneSettingCachePrefreshPtrOutput) Switch() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ZoneSettingCachePrefresh) *string {
 		if v == nil {
@@ -4857,14 +5205,14 @@ func (o ZoneSettingCachePrefreshPtrOutput) Switch() pulumi.StringPtrOutput {
 type ZoneSettingClientIpHeader struct {
 	// Name of the origin-pull client IP request header. Note: This field may return null, indicating that no valid value can be obtained.
 	HeaderName *string `pulumi:"headerName"`
-	// Specifies whether to enable client IP header.- `on`: Enable.- `off`: Disable. Note: This field may return null, indicating that no valid value can be obtained.
+	// Specifies whether to enable client IP header.
 	Switch string `pulumi:"switch"`
 }
 
 // ZoneSettingClientIpHeaderInput is an input type that accepts ZoneSettingClientIpHeaderArgs and ZoneSettingClientIpHeaderOutput values.
 // You can construct a concrete instance of `ZoneSettingClientIpHeaderInput` via:
 //
-//          ZoneSettingClientIpHeaderArgs{...}
+//	ZoneSettingClientIpHeaderArgs{...}
 type ZoneSettingClientIpHeaderInput interface {
 	pulumi.Input
 
@@ -4875,7 +5223,7 @@ type ZoneSettingClientIpHeaderInput interface {
 type ZoneSettingClientIpHeaderArgs struct {
 	// Name of the origin-pull client IP request header. Note: This field may return null, indicating that no valid value can be obtained.
 	HeaderName pulumi.StringPtrInput `pulumi:"headerName"`
-	// Specifies whether to enable client IP header.- `on`: Enable.- `off`: Disable. Note: This field may return null, indicating that no valid value can be obtained.
+	// Specifies whether to enable client IP header.
 	Switch pulumi.StringInput `pulumi:"switch"`
 }
 
@@ -4902,11 +5250,11 @@ func (i ZoneSettingClientIpHeaderArgs) ToZoneSettingClientIpHeaderPtrOutputWithC
 // ZoneSettingClientIpHeaderPtrInput is an input type that accepts ZoneSettingClientIpHeaderArgs, ZoneSettingClientIpHeaderPtr and ZoneSettingClientIpHeaderPtrOutput values.
 // You can construct a concrete instance of `ZoneSettingClientIpHeaderPtrInput` via:
 //
-//          ZoneSettingClientIpHeaderArgs{...}
+//	        ZoneSettingClientIpHeaderArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type ZoneSettingClientIpHeaderPtrInput interface {
 	pulumi.Input
 
@@ -4961,7 +5309,7 @@ func (o ZoneSettingClientIpHeaderOutput) HeaderName() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ZoneSettingClientIpHeader) *string { return v.HeaderName }).(pulumi.StringPtrOutput)
 }
 
-// Specifies whether to enable client IP header.- `on`: Enable.- `off`: Disable. Note: This field may return null, indicating that no valid value can be obtained.
+// Specifies whether to enable client IP header.
 func (o ZoneSettingClientIpHeaderOutput) Switch() pulumi.StringOutput {
 	return o.ApplyT(func(v ZoneSettingClientIpHeader) string { return v.Switch }).(pulumi.StringOutput)
 }
@@ -5000,7 +5348,7 @@ func (o ZoneSettingClientIpHeaderPtrOutput) HeaderName() pulumi.StringPtrOutput 
 	}).(pulumi.StringPtrOutput)
 }
 
-// Specifies whether to enable client IP header.- `on`: Enable.- `off`: Disable. Note: This field may return null, indicating that no valid value can be obtained.
+// Specifies whether to enable client IP header.
 func (o ZoneSettingClientIpHeaderPtrOutput) Switch() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ZoneSettingClientIpHeader) *string {
 		if v == nil {
@@ -5013,14 +5361,14 @@ func (o ZoneSettingClientIpHeaderPtrOutput) Switch() pulumi.StringPtrOutput {
 type ZoneSettingCompression struct {
 	// Compression algorithms to select. Valid values: `brotli`, `gzip`.
 	Algorithms []string `pulumi:"algorithms"`
-	// Whether to enable Smart compression.- `on`: Enable.- `off`: Disable.
+	// Whether to enable Smart compression.
 	Switch string `pulumi:"switch"`
 }
 
 // ZoneSettingCompressionInput is an input type that accepts ZoneSettingCompressionArgs and ZoneSettingCompressionOutput values.
 // You can construct a concrete instance of `ZoneSettingCompressionInput` via:
 //
-//          ZoneSettingCompressionArgs{...}
+//	ZoneSettingCompressionArgs{...}
 type ZoneSettingCompressionInput interface {
 	pulumi.Input
 
@@ -5031,7 +5379,7 @@ type ZoneSettingCompressionInput interface {
 type ZoneSettingCompressionArgs struct {
 	// Compression algorithms to select. Valid values: `brotli`, `gzip`.
 	Algorithms pulumi.StringArrayInput `pulumi:"algorithms"`
-	// Whether to enable Smart compression.- `on`: Enable.- `off`: Disable.
+	// Whether to enable Smart compression.
 	Switch pulumi.StringInput `pulumi:"switch"`
 }
 
@@ -5058,11 +5406,11 @@ func (i ZoneSettingCompressionArgs) ToZoneSettingCompressionPtrOutputWithContext
 // ZoneSettingCompressionPtrInput is an input type that accepts ZoneSettingCompressionArgs, ZoneSettingCompressionPtr and ZoneSettingCompressionPtrOutput values.
 // You can construct a concrete instance of `ZoneSettingCompressionPtrInput` via:
 //
-//          ZoneSettingCompressionArgs{...}
+//	        ZoneSettingCompressionArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type ZoneSettingCompressionPtrInput interface {
 	pulumi.Input
 
@@ -5117,7 +5465,7 @@ func (o ZoneSettingCompressionOutput) Algorithms() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v ZoneSettingCompression) []string { return v.Algorithms }).(pulumi.StringArrayOutput)
 }
 
-// Whether to enable Smart compression.- `on`: Enable.- `off`: Disable.
+// Whether to enable Smart compression.
 func (o ZoneSettingCompressionOutput) Switch() pulumi.StringOutput {
 	return o.ApplyT(func(v ZoneSettingCompression) string { return v.Switch }).(pulumi.StringOutput)
 }
@@ -5156,7 +5504,7 @@ func (o ZoneSettingCompressionPtrOutput) Algorithms() pulumi.StringArrayOutput {
 	}).(pulumi.StringArrayOutput)
 }
 
-// Whether to enable Smart compression.- `on`: Enable.- `off`: Disable.
+// Whether to enable Smart compression.
 func (o ZoneSettingCompressionPtrOutput) Switch() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ZoneSettingCompression) *string {
 		if v == nil {
@@ -5167,16 +5515,18 @@ func (o ZoneSettingCompressionPtrOutput) Switch() pulumi.StringPtrOutput {
 }
 
 type ZoneSettingForceRedirect struct {
-	// Redirection status code.- 301- 302 Note: This field may return null, indicating that no valid value can be obtained.
+	// Redirection status code.
+	// - 301
+	// - 302 Note: This field may return null, indicating that no valid value can be obtained.
 	RedirectStatusCode *int `pulumi:"redirectStatusCode"`
-	// Whether to enable force redirect.- `on`: Enable.- `off`: Disable.
+	// Whether to enable force redirect.
 	Switch string `pulumi:"switch"`
 }
 
 // ZoneSettingForceRedirectInput is an input type that accepts ZoneSettingForceRedirectArgs and ZoneSettingForceRedirectOutput values.
 // You can construct a concrete instance of `ZoneSettingForceRedirectInput` via:
 //
-//          ZoneSettingForceRedirectArgs{...}
+//	ZoneSettingForceRedirectArgs{...}
 type ZoneSettingForceRedirectInput interface {
 	pulumi.Input
 
@@ -5185,9 +5535,11 @@ type ZoneSettingForceRedirectInput interface {
 }
 
 type ZoneSettingForceRedirectArgs struct {
-	// Redirection status code.- 301- 302 Note: This field may return null, indicating that no valid value can be obtained.
+	// Redirection status code.
+	// - 301
+	// - 302 Note: This field may return null, indicating that no valid value can be obtained.
 	RedirectStatusCode pulumi.IntPtrInput `pulumi:"redirectStatusCode"`
-	// Whether to enable force redirect.- `on`: Enable.- `off`: Disable.
+	// Whether to enable force redirect.
 	Switch pulumi.StringInput `pulumi:"switch"`
 }
 
@@ -5214,11 +5566,11 @@ func (i ZoneSettingForceRedirectArgs) ToZoneSettingForceRedirectPtrOutputWithCon
 // ZoneSettingForceRedirectPtrInput is an input type that accepts ZoneSettingForceRedirectArgs, ZoneSettingForceRedirectPtr and ZoneSettingForceRedirectPtrOutput values.
 // You can construct a concrete instance of `ZoneSettingForceRedirectPtrInput` via:
 //
-//          ZoneSettingForceRedirectArgs{...}
+//	        ZoneSettingForceRedirectArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type ZoneSettingForceRedirectPtrInput interface {
 	pulumi.Input
 
@@ -5268,12 +5620,14 @@ func (o ZoneSettingForceRedirectOutput) ToZoneSettingForceRedirectPtrOutputWithC
 	}).(ZoneSettingForceRedirectPtrOutput)
 }
 
-// Redirection status code.- 301- 302 Note: This field may return null, indicating that no valid value can be obtained.
+// Redirection status code.
+// - 301
+// - 302 Note: This field may return null, indicating that no valid value can be obtained.
 func (o ZoneSettingForceRedirectOutput) RedirectStatusCode() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v ZoneSettingForceRedirect) *int { return v.RedirectStatusCode }).(pulumi.IntPtrOutput)
 }
 
-// Whether to enable force redirect.- `on`: Enable.- `off`: Disable.
+// Whether to enable force redirect.
 func (o ZoneSettingForceRedirectOutput) Switch() pulumi.StringOutput {
 	return o.ApplyT(func(v ZoneSettingForceRedirect) string { return v.Switch }).(pulumi.StringOutput)
 }
@@ -5302,7 +5656,9 @@ func (o ZoneSettingForceRedirectPtrOutput) Elem() ZoneSettingForceRedirectOutput
 	}).(ZoneSettingForceRedirectOutput)
 }
 
-// Redirection status code.- 301- 302 Note: This field may return null, indicating that no valid value can be obtained.
+// Redirection status code.
+// - 301
+// - 302 Note: This field may return null, indicating that no valid value can be obtained.
 func (o ZoneSettingForceRedirectPtrOutput) RedirectStatusCode() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *ZoneSettingForceRedirect) *int {
 		if v == nil {
@@ -5312,7 +5668,7 @@ func (o ZoneSettingForceRedirectPtrOutput) RedirectStatusCode() pulumi.IntPtrOut
 	}).(pulumi.IntPtrOutput)
 }
 
-// Whether to enable force redirect.- `on`: Enable.- `off`: Disable.
+// Whether to enable force redirect.
 func (o ZoneSettingForceRedirectPtrOutput) Switch() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ZoneSettingForceRedirect) *string {
 		if v == nil {
@@ -5325,18 +5681,21 @@ func (o ZoneSettingForceRedirectPtrOutput) Switch() pulumi.StringPtrOutput {
 type ZoneSettingHttps struct {
 	// HSTS Configuration. Note: This field may return null, indicating that no valid value can be obtained.
 	Hsts *ZoneSettingHttpsHsts `pulumi:"hsts"`
-	// HTTP2 configuration switch.- `on`: Enable.- `off`: Disable. Note: This field may return null, indicating that no valid value can be obtained.
+	// HTTP2 configuration switch.
 	Http2 *string `pulumi:"http2"`
-	// OCSP configuration switch.- `on`: Enable.- `off`: Disable.It is disabled by default. Note: This field may return null, indicating that no valid value can be obtained.
+	// OCSP configuration switch.
 	OcspStapling *string `pulumi:"ocspStapling"`
-	// TLS version settings. Valid values: `TLSv1`, `TLSV1.1`, `TLSV1.2`, and `TLSv1.3`.Only consecutive versions can be enabled at the same time. Note: This field may return null, indicating that no valid value can be obtained.
+	// TLS version settings. Valid values: `TLSv1`, `TLSV1.1`, `TLSV1.2`, and `TLSv1.3`.
+	// Only consecutive versions can be enabled at the same time. Note: This field may return null, indicating that no valid value can be obtained.
+	//
+	// The `ipv6` object supports the following:
 	TlsVersions []string `pulumi:"tlsVersions"`
 }
 
 // ZoneSettingHttpsInput is an input type that accepts ZoneSettingHttpsArgs and ZoneSettingHttpsOutput values.
 // You can construct a concrete instance of `ZoneSettingHttpsInput` via:
 //
-//          ZoneSettingHttpsArgs{...}
+//	ZoneSettingHttpsArgs{...}
 type ZoneSettingHttpsInput interface {
 	pulumi.Input
 
@@ -5347,11 +5706,14 @@ type ZoneSettingHttpsInput interface {
 type ZoneSettingHttpsArgs struct {
 	// HSTS Configuration. Note: This field may return null, indicating that no valid value can be obtained.
 	Hsts ZoneSettingHttpsHstsPtrInput `pulumi:"hsts"`
-	// HTTP2 configuration switch.- `on`: Enable.- `off`: Disable. Note: This field may return null, indicating that no valid value can be obtained.
+	// HTTP2 configuration switch.
 	Http2 pulumi.StringPtrInput `pulumi:"http2"`
-	// OCSP configuration switch.- `on`: Enable.- `off`: Disable.It is disabled by default. Note: This field may return null, indicating that no valid value can be obtained.
+	// OCSP configuration switch.
 	OcspStapling pulumi.StringPtrInput `pulumi:"ocspStapling"`
-	// TLS version settings. Valid values: `TLSv1`, `TLSV1.1`, `TLSV1.2`, and `TLSv1.3`.Only consecutive versions can be enabled at the same time. Note: This field may return null, indicating that no valid value can be obtained.
+	// TLS version settings. Valid values: `TLSv1`, `TLSV1.1`, `TLSV1.2`, and `TLSv1.3`.
+	// Only consecutive versions can be enabled at the same time. Note: This field may return null, indicating that no valid value can be obtained.
+	//
+	// The `ipv6` object supports the following:
 	TlsVersions pulumi.StringArrayInput `pulumi:"tlsVersions"`
 }
 
@@ -5378,11 +5740,11 @@ func (i ZoneSettingHttpsArgs) ToZoneSettingHttpsPtrOutputWithContext(ctx context
 // ZoneSettingHttpsPtrInput is an input type that accepts ZoneSettingHttpsArgs, ZoneSettingHttpsPtr and ZoneSettingHttpsPtrOutput values.
 // You can construct a concrete instance of `ZoneSettingHttpsPtrInput` via:
 //
-//          ZoneSettingHttpsArgs{...}
+//	        ZoneSettingHttpsArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type ZoneSettingHttpsPtrInput interface {
 	pulumi.Input
 
@@ -5437,17 +5799,20 @@ func (o ZoneSettingHttpsOutput) Hsts() ZoneSettingHttpsHstsPtrOutput {
 	return o.ApplyT(func(v ZoneSettingHttps) *ZoneSettingHttpsHsts { return v.Hsts }).(ZoneSettingHttpsHstsPtrOutput)
 }
 
-// HTTP2 configuration switch.- `on`: Enable.- `off`: Disable. Note: This field may return null, indicating that no valid value can be obtained.
+// HTTP2 configuration switch.
 func (o ZoneSettingHttpsOutput) Http2() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ZoneSettingHttps) *string { return v.Http2 }).(pulumi.StringPtrOutput)
 }
 
-// OCSP configuration switch.- `on`: Enable.- `off`: Disable.It is disabled by default. Note: This field may return null, indicating that no valid value can be obtained.
+// OCSP configuration switch.
 func (o ZoneSettingHttpsOutput) OcspStapling() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ZoneSettingHttps) *string { return v.OcspStapling }).(pulumi.StringPtrOutput)
 }
 
-// TLS version settings. Valid values: `TLSv1`, `TLSV1.1`, `TLSV1.2`, and `TLSv1.3`.Only consecutive versions can be enabled at the same time. Note: This field may return null, indicating that no valid value can be obtained.
+// TLS version settings. Valid values: `TLSv1`, `TLSV1.1`, `TLSV1.2`, and `TLSv1.3`.
+// Only consecutive versions can be enabled at the same time. Note: This field may return null, indicating that no valid value can be obtained.
+//
+// The `ipv6` object supports the following:
 func (o ZoneSettingHttpsOutput) TlsVersions() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v ZoneSettingHttps) []string { return v.TlsVersions }).(pulumi.StringArrayOutput)
 }
@@ -5486,7 +5851,7 @@ func (o ZoneSettingHttpsPtrOutput) Hsts() ZoneSettingHttpsHstsPtrOutput {
 	}).(ZoneSettingHttpsHstsPtrOutput)
 }
 
-// HTTP2 configuration switch.- `on`: Enable.- `off`: Disable. Note: This field may return null, indicating that no valid value can be obtained.
+// HTTP2 configuration switch.
 func (o ZoneSettingHttpsPtrOutput) Http2() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ZoneSettingHttps) *string {
 		if v == nil {
@@ -5496,7 +5861,7 @@ func (o ZoneSettingHttpsPtrOutput) Http2() pulumi.StringPtrOutput {
 	}).(pulumi.StringPtrOutput)
 }
 
-// OCSP configuration switch.- `on`: Enable.- `off`: Disable.It is disabled by default. Note: This field may return null, indicating that no valid value can be obtained.
+// OCSP configuration switch.
 func (o ZoneSettingHttpsPtrOutput) OcspStapling() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ZoneSettingHttps) *string {
 		if v == nil {
@@ -5506,7 +5871,10 @@ func (o ZoneSettingHttpsPtrOutput) OcspStapling() pulumi.StringPtrOutput {
 	}).(pulumi.StringPtrOutput)
 }
 
-// TLS version settings. Valid values: `TLSv1`, `TLSV1.1`, `TLSV1.2`, and `TLSv1.3`.Only consecutive versions can be enabled at the same time. Note: This field may return null, indicating that no valid value can be obtained.
+// TLS version settings. Valid values: `TLSv1`, `TLSV1.1`, `TLSV1.2`, and `TLSv1.3`.
+// Only consecutive versions can be enabled at the same time. Note: This field may return null, indicating that no valid value can be obtained.
+//
+// The `ipv6` object supports the following:
 func (o ZoneSettingHttpsPtrOutput) TlsVersions() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v *ZoneSettingHttps) []string {
 		if v == nil {
@@ -5523,14 +5891,14 @@ type ZoneSettingHttpsHsts struct {
 	MaxAge *int `pulumi:"maxAge"`
 	// Specifies whether to preload. Valid values: `on` and `off`. Note: This field may return null, indicating that no valid value can be obtained.
 	Preload *string `pulumi:"preload"`
-	// - `on`: Enable.- `off`: Disable.
+	// `on`: Enable.
 	Switch string `pulumi:"switch"`
 }
 
 // ZoneSettingHttpsHstsInput is an input type that accepts ZoneSettingHttpsHstsArgs and ZoneSettingHttpsHstsOutput values.
 // You can construct a concrete instance of `ZoneSettingHttpsHstsInput` via:
 //
-//          ZoneSettingHttpsHstsArgs{...}
+//	ZoneSettingHttpsHstsArgs{...}
 type ZoneSettingHttpsHstsInput interface {
 	pulumi.Input
 
@@ -5545,7 +5913,7 @@ type ZoneSettingHttpsHstsArgs struct {
 	MaxAge pulumi.IntPtrInput `pulumi:"maxAge"`
 	// Specifies whether to preload. Valid values: `on` and `off`. Note: This field may return null, indicating that no valid value can be obtained.
 	Preload pulumi.StringPtrInput `pulumi:"preload"`
-	// - `on`: Enable.- `off`: Disable.
+	// `on`: Enable.
 	Switch pulumi.StringInput `pulumi:"switch"`
 }
 
@@ -5572,11 +5940,11 @@ func (i ZoneSettingHttpsHstsArgs) ToZoneSettingHttpsHstsPtrOutputWithContext(ctx
 // ZoneSettingHttpsHstsPtrInput is an input type that accepts ZoneSettingHttpsHstsArgs, ZoneSettingHttpsHstsPtr and ZoneSettingHttpsHstsPtrOutput values.
 // You can construct a concrete instance of `ZoneSettingHttpsHstsPtrInput` via:
 //
-//          ZoneSettingHttpsHstsArgs{...}
+//	        ZoneSettingHttpsHstsArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type ZoneSettingHttpsHstsPtrInput interface {
 	pulumi.Input
 
@@ -5641,7 +6009,7 @@ func (o ZoneSettingHttpsHstsOutput) Preload() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ZoneSettingHttpsHsts) *string { return v.Preload }).(pulumi.StringPtrOutput)
 }
 
-// - `on`: Enable.- `off`: Disable.
+// `on`: Enable.
 func (o ZoneSettingHttpsHstsOutput) Switch() pulumi.StringOutput {
 	return o.ApplyT(func(v ZoneSettingHttpsHsts) string { return v.Switch }).(pulumi.StringOutput)
 }
@@ -5700,7 +6068,7 @@ func (o ZoneSettingHttpsHstsPtrOutput) Preload() pulumi.StringPtrOutput {
 	}).(pulumi.StringPtrOutput)
 }
 
-// - `on`: Enable.- `off`: Disable.
+// `on`: Enable.
 func (o ZoneSettingHttpsHstsPtrOutput) Switch() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ZoneSettingHttpsHsts) *string {
 		if v == nil {
@@ -5711,14 +6079,14 @@ func (o ZoneSettingHttpsHstsPtrOutput) Switch() pulumi.StringPtrOutput {
 }
 
 type ZoneSettingIpv6 struct {
-	// Specifies whether to enable cache prefresh.- `on`: Enable.- `off`: Disable.
+	// Cache configuration switch.
 	Switch string `pulumi:"switch"`
 }
 
 // ZoneSettingIpv6Input is an input type that accepts ZoneSettingIpv6Args and ZoneSettingIpv6Output values.
 // You can construct a concrete instance of `ZoneSettingIpv6Input` via:
 //
-//          ZoneSettingIpv6Args{...}
+//	ZoneSettingIpv6Args{...}
 type ZoneSettingIpv6Input interface {
 	pulumi.Input
 
@@ -5727,7 +6095,7 @@ type ZoneSettingIpv6Input interface {
 }
 
 type ZoneSettingIpv6Args struct {
-	// Specifies whether to enable cache prefresh.- `on`: Enable.- `off`: Disable.
+	// Cache configuration switch.
 	Switch pulumi.StringInput `pulumi:"switch"`
 }
 
@@ -5754,11 +6122,11 @@ func (i ZoneSettingIpv6Args) ToZoneSettingIpv6PtrOutputWithContext(ctx context.C
 // ZoneSettingIpv6PtrInput is an input type that accepts ZoneSettingIpv6Args, ZoneSettingIpv6Ptr and ZoneSettingIpv6PtrOutput values.
 // You can construct a concrete instance of `ZoneSettingIpv6PtrInput` via:
 //
-//          ZoneSettingIpv6Args{...}
+//	        ZoneSettingIpv6Args{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type ZoneSettingIpv6PtrInput interface {
 	pulumi.Input
 
@@ -5808,7 +6176,7 @@ func (o ZoneSettingIpv6Output) ToZoneSettingIpv6PtrOutputWithContext(ctx context
 	}).(ZoneSettingIpv6PtrOutput)
 }
 
-// Specifies whether to enable cache prefresh.- `on`: Enable.- `off`: Disable.
+// Cache configuration switch.
 func (o ZoneSettingIpv6Output) Switch() pulumi.StringOutput {
 	return o.ApplyT(func(v ZoneSettingIpv6) string { return v.Switch }).(pulumi.StringOutput)
 }
@@ -5837,7 +6205,7 @@ func (o ZoneSettingIpv6PtrOutput) Elem() ZoneSettingIpv6Output {
 	}).(ZoneSettingIpv6Output)
 }
 
-// Specifies whether to enable cache prefresh.- `on`: Enable.- `off`: Disable.
+// Cache configuration switch.
 func (o ZoneSettingIpv6PtrOutput) Switch() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ZoneSettingIpv6) *string {
 		if v == nil {
@@ -5848,7 +6216,7 @@ func (o ZoneSettingIpv6PtrOutput) Switch() pulumi.StringPtrOutput {
 }
 
 type ZoneSettingMaxAge struct {
-	// Specifies whether to follow the max cache age of the origin server.- `on`: Enable.- `off`: Disable.If is on, MaxAgeTime is ignored. Note: This field may return null, indicating that no valid value can be obtained.
+	// Specifies whether to follow the max cache age of the origin server.
 	FollowOrigin *string `pulumi:"followOrigin"`
 	// Specifies the max age of the cache (in seconds). The maximum value is 365 days. Note: the value 0 means not to cache. Note: This field may return null, indicating that no valid value can be obtained.
 	MaxAgeTime *int `pulumi:"maxAgeTime"`
@@ -5857,7 +6225,7 @@ type ZoneSettingMaxAge struct {
 // ZoneSettingMaxAgeInput is an input type that accepts ZoneSettingMaxAgeArgs and ZoneSettingMaxAgeOutput values.
 // You can construct a concrete instance of `ZoneSettingMaxAgeInput` via:
 //
-//          ZoneSettingMaxAgeArgs{...}
+//	ZoneSettingMaxAgeArgs{...}
 type ZoneSettingMaxAgeInput interface {
 	pulumi.Input
 
@@ -5866,7 +6234,7 @@ type ZoneSettingMaxAgeInput interface {
 }
 
 type ZoneSettingMaxAgeArgs struct {
-	// Specifies whether to follow the max cache age of the origin server.- `on`: Enable.- `off`: Disable.If is on, MaxAgeTime is ignored. Note: This field may return null, indicating that no valid value can be obtained.
+	// Specifies whether to follow the max cache age of the origin server.
 	FollowOrigin pulumi.StringPtrInput `pulumi:"followOrigin"`
 	// Specifies the max age of the cache (in seconds). The maximum value is 365 days. Note: the value 0 means not to cache. Note: This field may return null, indicating that no valid value can be obtained.
 	MaxAgeTime pulumi.IntPtrInput `pulumi:"maxAgeTime"`
@@ -5895,11 +6263,11 @@ func (i ZoneSettingMaxAgeArgs) ToZoneSettingMaxAgePtrOutputWithContext(ctx conte
 // ZoneSettingMaxAgePtrInput is an input type that accepts ZoneSettingMaxAgeArgs, ZoneSettingMaxAgePtr and ZoneSettingMaxAgePtrOutput values.
 // You can construct a concrete instance of `ZoneSettingMaxAgePtrInput` via:
 //
-//          ZoneSettingMaxAgeArgs{...}
+//	        ZoneSettingMaxAgeArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type ZoneSettingMaxAgePtrInput interface {
 	pulumi.Input
 
@@ -5949,7 +6317,7 @@ func (o ZoneSettingMaxAgeOutput) ToZoneSettingMaxAgePtrOutputWithContext(ctx con
 	}).(ZoneSettingMaxAgePtrOutput)
 }
 
-// Specifies whether to follow the max cache age of the origin server.- `on`: Enable.- `off`: Disable.If is on, MaxAgeTime is ignored. Note: This field may return null, indicating that no valid value can be obtained.
+// Specifies whether to follow the max cache age of the origin server.
 func (o ZoneSettingMaxAgeOutput) FollowOrigin() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ZoneSettingMaxAge) *string { return v.FollowOrigin }).(pulumi.StringPtrOutput)
 }
@@ -5983,7 +6351,7 @@ func (o ZoneSettingMaxAgePtrOutput) Elem() ZoneSettingMaxAgeOutput {
 	}).(ZoneSettingMaxAgeOutput)
 }
 
-// Specifies whether to follow the max cache age of the origin server.- `on`: Enable.- `off`: Disable.If is on, MaxAgeTime is ignored. Note: This field may return null, indicating that no valid value can be obtained.
+// Specifies whether to follow the max cache age of the origin server.
 func (o ZoneSettingMaxAgePtrOutput) FollowOrigin() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ZoneSettingMaxAge) *string {
 		if v == nil {
@@ -6004,14 +6372,14 @@ func (o ZoneSettingMaxAgePtrOutput) MaxAgeTime() pulumi.IntPtrOutput {
 }
 
 type ZoneSettingOfflineCache struct {
-	// Whether to enable offline cache.- `on`: Enable.- `off`: Disable. Note: This field may return null, indicating that no valid value can be obtained.
+	// Whether to enable offline cache.
 	Switch string `pulumi:"switch"`
 }
 
 // ZoneSettingOfflineCacheInput is an input type that accepts ZoneSettingOfflineCacheArgs and ZoneSettingOfflineCacheOutput values.
 // You can construct a concrete instance of `ZoneSettingOfflineCacheInput` via:
 //
-//          ZoneSettingOfflineCacheArgs{...}
+//	ZoneSettingOfflineCacheArgs{...}
 type ZoneSettingOfflineCacheInput interface {
 	pulumi.Input
 
@@ -6020,7 +6388,7 @@ type ZoneSettingOfflineCacheInput interface {
 }
 
 type ZoneSettingOfflineCacheArgs struct {
-	// Whether to enable offline cache.- `on`: Enable.- `off`: Disable. Note: This field may return null, indicating that no valid value can be obtained.
+	// Whether to enable offline cache.
 	Switch pulumi.StringInput `pulumi:"switch"`
 }
 
@@ -6047,11 +6415,11 @@ func (i ZoneSettingOfflineCacheArgs) ToZoneSettingOfflineCachePtrOutputWithConte
 // ZoneSettingOfflineCachePtrInput is an input type that accepts ZoneSettingOfflineCacheArgs, ZoneSettingOfflineCachePtr and ZoneSettingOfflineCachePtrOutput values.
 // You can construct a concrete instance of `ZoneSettingOfflineCachePtrInput` via:
 //
-//          ZoneSettingOfflineCacheArgs{...}
+//	        ZoneSettingOfflineCacheArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type ZoneSettingOfflineCachePtrInput interface {
 	pulumi.Input
 
@@ -6101,7 +6469,7 @@ func (o ZoneSettingOfflineCacheOutput) ToZoneSettingOfflineCachePtrOutputWithCon
 	}).(ZoneSettingOfflineCachePtrOutput)
 }
 
-// Whether to enable offline cache.- `on`: Enable.- `off`: Disable. Note: This field may return null, indicating that no valid value can be obtained.
+// Whether to enable offline cache.
 func (o ZoneSettingOfflineCacheOutput) Switch() pulumi.StringOutput {
 	return o.ApplyT(func(v ZoneSettingOfflineCache) string { return v.Switch }).(pulumi.StringOutput)
 }
@@ -6130,7 +6498,7 @@ func (o ZoneSettingOfflineCachePtrOutput) Elem() ZoneSettingOfflineCacheOutput {
 	}).(ZoneSettingOfflineCacheOutput)
 }
 
-// Whether to enable offline cache.- `on`: Enable.- `off`: Disable. Note: This field may return null, indicating that no valid value can be obtained.
+// Whether to enable offline cache.
 func (o ZoneSettingOfflineCachePtrOutput) Switch() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ZoneSettingOfflineCache) *string {
 		if v == nil {
@@ -6143,9 +6511,7 @@ func (o ZoneSettingOfflineCachePtrOutput) Switch() pulumi.StringPtrOutput {
 type ZoneSettingOrigin struct {
 	// Backup origin sites list. Note: This field may return null, indicating that no valid value can be obtained.
 	BackupOrigins []string `pulumi:"backupOrigins"`
-	// Whether access private cos bucket is allowed when `OriginType` is cos. Note: This field may return null, indicating that no valid value can be obtained.
-	CosPrivateAccess *string `pulumi:"cosPrivateAccess"`
-	// Origin-pull protocol.- `http`: Switch HTTPS requests to HTTP.- `follow`: Follow the protocol of the request.- `https`: Switch HTTP requests to HTTPS. This only supports port 443 on the origin server. Note: This field may return null, indicating that no valid value can be obtained.
+	// Origin-pull protocol.
 	OriginPullProtocol *string `pulumi:"originPullProtocol"`
 	// Origin sites list. Note: This field may return null, indicating that no valid value can be obtained.
 	Origins []string `pulumi:"origins"`
@@ -6154,7 +6520,7 @@ type ZoneSettingOrigin struct {
 // ZoneSettingOriginInput is an input type that accepts ZoneSettingOriginArgs and ZoneSettingOriginOutput values.
 // You can construct a concrete instance of `ZoneSettingOriginInput` via:
 //
-//          ZoneSettingOriginArgs{...}
+//	ZoneSettingOriginArgs{...}
 type ZoneSettingOriginInput interface {
 	pulumi.Input
 
@@ -6165,9 +6531,7 @@ type ZoneSettingOriginInput interface {
 type ZoneSettingOriginArgs struct {
 	// Backup origin sites list. Note: This field may return null, indicating that no valid value can be obtained.
 	BackupOrigins pulumi.StringArrayInput `pulumi:"backupOrigins"`
-	// Whether access private cos bucket is allowed when `OriginType` is cos. Note: This field may return null, indicating that no valid value can be obtained.
-	CosPrivateAccess pulumi.StringPtrInput `pulumi:"cosPrivateAccess"`
-	// Origin-pull protocol.- `http`: Switch HTTPS requests to HTTP.- `follow`: Follow the protocol of the request.- `https`: Switch HTTP requests to HTTPS. This only supports port 443 on the origin server. Note: This field may return null, indicating that no valid value can be obtained.
+	// Origin-pull protocol.
 	OriginPullProtocol pulumi.StringPtrInput `pulumi:"originPullProtocol"`
 	// Origin sites list. Note: This field may return null, indicating that no valid value can be obtained.
 	Origins pulumi.StringArrayInput `pulumi:"origins"`
@@ -6196,11 +6560,11 @@ func (i ZoneSettingOriginArgs) ToZoneSettingOriginPtrOutputWithContext(ctx conte
 // ZoneSettingOriginPtrInput is an input type that accepts ZoneSettingOriginArgs, ZoneSettingOriginPtr and ZoneSettingOriginPtrOutput values.
 // You can construct a concrete instance of `ZoneSettingOriginPtrInput` via:
 //
-//          ZoneSettingOriginArgs{...}
+//	        ZoneSettingOriginArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type ZoneSettingOriginPtrInput interface {
 	pulumi.Input
 
@@ -6255,12 +6619,7 @@ func (o ZoneSettingOriginOutput) BackupOrigins() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v ZoneSettingOrigin) []string { return v.BackupOrigins }).(pulumi.StringArrayOutput)
 }
 
-// Whether access private cos bucket is allowed when `OriginType` is cos. Note: This field may return null, indicating that no valid value can be obtained.
-func (o ZoneSettingOriginOutput) CosPrivateAccess() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v ZoneSettingOrigin) *string { return v.CosPrivateAccess }).(pulumi.StringPtrOutput)
-}
-
-// Origin-pull protocol.- `http`: Switch HTTPS requests to HTTP.- `follow`: Follow the protocol of the request.- `https`: Switch HTTP requests to HTTPS. This only supports port 443 on the origin server. Note: This field may return null, indicating that no valid value can be obtained.
+// Origin-pull protocol.
 func (o ZoneSettingOriginOutput) OriginPullProtocol() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ZoneSettingOrigin) *string { return v.OriginPullProtocol }).(pulumi.StringPtrOutput)
 }
@@ -6304,17 +6663,7 @@ func (o ZoneSettingOriginPtrOutput) BackupOrigins() pulumi.StringArrayOutput {
 	}).(pulumi.StringArrayOutput)
 }
 
-// Whether access private cos bucket is allowed when `OriginType` is cos. Note: This field may return null, indicating that no valid value can be obtained.
-func (o ZoneSettingOriginPtrOutput) CosPrivateAccess() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *ZoneSettingOrigin) *string {
-		if v == nil {
-			return nil
-		}
-		return v.CosPrivateAccess
-	}).(pulumi.StringPtrOutput)
-}
-
-// Origin-pull protocol.- `http`: Switch HTTPS requests to HTTP.- `follow`: Follow the protocol of the request.- `https`: Switch HTTP requests to HTTPS. This only supports port 443 on the origin server. Note: This field may return null, indicating that no valid value can be obtained.
+// Origin-pull protocol.
 func (o ZoneSettingOriginPtrOutput) OriginPullProtocol() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ZoneSettingOrigin) *string {
 		if v == nil {
@@ -6337,14 +6686,14 @@ func (o ZoneSettingOriginPtrOutput) Origins() pulumi.StringArrayOutput {
 type ZoneSettingPostMaxSize struct {
 	// Maximum size. Value range: 1-500 MB. Note: This field may return null, indicating that no valid value can be obtained.
 	MaxSize *int `pulumi:"maxSize"`
-	// Specifies whether to enable custom setting of the maximum file size.- `on`: Enable. You can set a custom max size.- `off`: Disable. In this case, the max size defaults to 32 MB.
+	// Specifies whether to enable custom setting of the maximum file size.
 	Switch string `pulumi:"switch"`
 }
 
 // ZoneSettingPostMaxSizeInput is an input type that accepts ZoneSettingPostMaxSizeArgs and ZoneSettingPostMaxSizeOutput values.
 // You can construct a concrete instance of `ZoneSettingPostMaxSizeInput` via:
 //
-//          ZoneSettingPostMaxSizeArgs{...}
+//	ZoneSettingPostMaxSizeArgs{...}
 type ZoneSettingPostMaxSizeInput interface {
 	pulumi.Input
 
@@ -6355,7 +6704,7 @@ type ZoneSettingPostMaxSizeInput interface {
 type ZoneSettingPostMaxSizeArgs struct {
 	// Maximum size. Value range: 1-500 MB. Note: This field may return null, indicating that no valid value can be obtained.
 	MaxSize pulumi.IntPtrInput `pulumi:"maxSize"`
-	// Specifies whether to enable custom setting of the maximum file size.- `on`: Enable. You can set a custom max size.- `off`: Disable. In this case, the max size defaults to 32 MB.
+	// Specifies whether to enable custom setting of the maximum file size.
 	Switch pulumi.StringInput `pulumi:"switch"`
 }
 
@@ -6382,11 +6731,11 @@ func (i ZoneSettingPostMaxSizeArgs) ToZoneSettingPostMaxSizePtrOutputWithContext
 // ZoneSettingPostMaxSizePtrInput is an input type that accepts ZoneSettingPostMaxSizeArgs, ZoneSettingPostMaxSizePtr and ZoneSettingPostMaxSizePtrOutput values.
 // You can construct a concrete instance of `ZoneSettingPostMaxSizePtrInput` via:
 //
-//          ZoneSettingPostMaxSizeArgs{...}
+//	        ZoneSettingPostMaxSizeArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type ZoneSettingPostMaxSizePtrInput interface {
 	pulumi.Input
 
@@ -6441,7 +6790,7 @@ func (o ZoneSettingPostMaxSizeOutput) MaxSize() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v ZoneSettingPostMaxSize) *int { return v.MaxSize }).(pulumi.IntPtrOutput)
 }
 
-// Specifies whether to enable custom setting of the maximum file size.- `on`: Enable. You can set a custom max size.- `off`: Disable. In this case, the max size defaults to 32 MB.
+// Specifies whether to enable custom setting of the maximum file size.
 func (o ZoneSettingPostMaxSizeOutput) Switch() pulumi.StringOutput {
 	return o.ApplyT(func(v ZoneSettingPostMaxSize) string { return v.Switch }).(pulumi.StringOutput)
 }
@@ -6480,7 +6829,7 @@ func (o ZoneSettingPostMaxSizePtrOutput) MaxSize() pulumi.IntPtrOutput {
 	}).(pulumi.IntPtrOutput)
 }
 
-// Specifies whether to enable custom setting of the maximum file size.- `on`: Enable. You can set a custom max size.- `off`: Disable. In this case, the max size defaults to 32 MB.
+// Specifies whether to enable custom setting of the maximum file size.
 func (o ZoneSettingPostMaxSizePtrOutput) Switch() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ZoneSettingPostMaxSize) *string {
 		if v == nil {
@@ -6491,14 +6840,14 @@ func (o ZoneSettingPostMaxSizePtrOutput) Switch() pulumi.StringPtrOutput {
 }
 
 type ZoneSettingQuic struct {
-	// Whether to enable QUIC.- `on`: Enable.- `off`: Disable.
+	// Whether to enable QUIC.
 	Switch string `pulumi:"switch"`
 }
 
 // ZoneSettingQuicInput is an input type that accepts ZoneSettingQuicArgs and ZoneSettingQuicOutput values.
 // You can construct a concrete instance of `ZoneSettingQuicInput` via:
 //
-//          ZoneSettingQuicArgs{...}
+//	ZoneSettingQuicArgs{...}
 type ZoneSettingQuicInput interface {
 	pulumi.Input
 
@@ -6507,7 +6856,7 @@ type ZoneSettingQuicInput interface {
 }
 
 type ZoneSettingQuicArgs struct {
-	// Whether to enable QUIC.- `on`: Enable.- `off`: Disable.
+	// Whether to enable QUIC.
 	Switch pulumi.StringInput `pulumi:"switch"`
 }
 
@@ -6534,11 +6883,11 @@ func (i ZoneSettingQuicArgs) ToZoneSettingQuicPtrOutputWithContext(ctx context.C
 // ZoneSettingQuicPtrInput is an input type that accepts ZoneSettingQuicArgs, ZoneSettingQuicPtr and ZoneSettingQuicPtrOutput values.
 // You can construct a concrete instance of `ZoneSettingQuicPtrInput` via:
 //
-//          ZoneSettingQuicArgs{...}
+//	        ZoneSettingQuicArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type ZoneSettingQuicPtrInput interface {
 	pulumi.Input
 
@@ -6588,7 +6937,7 @@ func (o ZoneSettingQuicOutput) ToZoneSettingQuicPtrOutputWithContext(ctx context
 	}).(ZoneSettingQuicPtrOutput)
 }
 
-// Whether to enable QUIC.- `on`: Enable.- `off`: Disable.
+// Whether to enable QUIC.
 func (o ZoneSettingQuicOutput) Switch() pulumi.StringOutput {
 	return o.ApplyT(func(v ZoneSettingQuic) string { return v.Switch }).(pulumi.StringOutput)
 }
@@ -6617,7 +6966,7 @@ func (o ZoneSettingQuicPtrOutput) Elem() ZoneSettingQuicOutput {
 	}).(ZoneSettingQuicOutput)
 }
 
-// Whether to enable QUIC.- `on`: Enable.- `off`: Disable.
+// Whether to enable QUIC.
 func (o ZoneSettingQuicPtrOutput) Switch() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ZoneSettingQuic) *string {
 		if v == nil {
@@ -6628,14 +6977,14 @@ func (o ZoneSettingQuicPtrOutput) Switch() pulumi.StringPtrOutput {
 }
 
 type ZoneSettingSmartRouting struct {
-	// Whether to enable HTTP2 origin-pull.- `on`: Enable.- `off`: Disable.
+	// Whether to enable HTTP2 origin-pull.
 	Switch string `pulumi:"switch"`
 }
 
 // ZoneSettingSmartRoutingInput is an input type that accepts ZoneSettingSmartRoutingArgs and ZoneSettingSmartRoutingOutput values.
 // You can construct a concrete instance of `ZoneSettingSmartRoutingInput` via:
 //
-//          ZoneSettingSmartRoutingArgs{...}
+//	ZoneSettingSmartRoutingArgs{...}
 type ZoneSettingSmartRoutingInput interface {
 	pulumi.Input
 
@@ -6644,7 +6993,7 @@ type ZoneSettingSmartRoutingInput interface {
 }
 
 type ZoneSettingSmartRoutingArgs struct {
-	// Whether to enable HTTP2 origin-pull.- `on`: Enable.- `off`: Disable.
+	// Whether to enable HTTP2 origin-pull.
 	Switch pulumi.StringInput `pulumi:"switch"`
 }
 
@@ -6671,11 +7020,11 @@ func (i ZoneSettingSmartRoutingArgs) ToZoneSettingSmartRoutingPtrOutputWithConte
 // ZoneSettingSmartRoutingPtrInput is an input type that accepts ZoneSettingSmartRoutingArgs, ZoneSettingSmartRoutingPtr and ZoneSettingSmartRoutingPtrOutput values.
 // You can construct a concrete instance of `ZoneSettingSmartRoutingPtrInput` via:
 //
-//          ZoneSettingSmartRoutingArgs{...}
+//	        ZoneSettingSmartRoutingArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type ZoneSettingSmartRoutingPtrInput interface {
 	pulumi.Input
 
@@ -6725,7 +7074,7 @@ func (o ZoneSettingSmartRoutingOutput) ToZoneSettingSmartRoutingPtrOutputWithCon
 	}).(ZoneSettingSmartRoutingPtrOutput)
 }
 
-// Whether to enable HTTP2 origin-pull.- `on`: Enable.- `off`: Disable.
+// Whether to enable HTTP2 origin-pull.
 func (o ZoneSettingSmartRoutingOutput) Switch() pulumi.StringOutput {
 	return o.ApplyT(func(v ZoneSettingSmartRouting) string { return v.Switch }).(pulumi.StringOutput)
 }
@@ -6754,7 +7103,7 @@ func (o ZoneSettingSmartRoutingPtrOutput) Elem() ZoneSettingSmartRoutingOutput {
 	}).(ZoneSettingSmartRoutingOutput)
 }
 
-// Whether to enable HTTP2 origin-pull.- `on`: Enable.- `off`: Disable.
+// Whether to enable HTTP2 origin-pull.
 func (o ZoneSettingSmartRoutingPtrOutput) Switch() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ZoneSettingSmartRouting) *string {
 		if v == nil {
@@ -6765,14 +7114,14 @@ func (o ZoneSettingSmartRoutingPtrOutput) Switch() pulumi.StringPtrOutput {
 }
 
 type ZoneSettingUpstreamHttp2 struct {
-	// Specifies whether to enable cache prefresh.- `on`: Enable.- `off`: Disable.
+	// Cache configuration switch.
 	Switch string `pulumi:"switch"`
 }
 
 // ZoneSettingUpstreamHttp2Input is an input type that accepts ZoneSettingUpstreamHttp2Args and ZoneSettingUpstreamHttp2Output values.
 // You can construct a concrete instance of `ZoneSettingUpstreamHttp2Input` via:
 //
-//          ZoneSettingUpstreamHttp2Args{...}
+//	ZoneSettingUpstreamHttp2Args{...}
 type ZoneSettingUpstreamHttp2Input interface {
 	pulumi.Input
 
@@ -6781,7 +7130,7 @@ type ZoneSettingUpstreamHttp2Input interface {
 }
 
 type ZoneSettingUpstreamHttp2Args struct {
-	// Specifies whether to enable cache prefresh.- `on`: Enable.- `off`: Disable.
+	// Cache configuration switch.
 	Switch pulumi.StringInput `pulumi:"switch"`
 }
 
@@ -6808,11 +7157,11 @@ func (i ZoneSettingUpstreamHttp2Args) ToZoneSettingUpstreamHttp2PtrOutputWithCon
 // ZoneSettingUpstreamHttp2PtrInput is an input type that accepts ZoneSettingUpstreamHttp2Args, ZoneSettingUpstreamHttp2Ptr and ZoneSettingUpstreamHttp2PtrOutput values.
 // You can construct a concrete instance of `ZoneSettingUpstreamHttp2PtrInput` via:
 //
-//          ZoneSettingUpstreamHttp2Args{...}
+//	        ZoneSettingUpstreamHttp2Args{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type ZoneSettingUpstreamHttp2PtrInput interface {
 	pulumi.Input
 
@@ -6862,7 +7211,7 @@ func (o ZoneSettingUpstreamHttp2Output) ToZoneSettingUpstreamHttp2PtrOutputWithC
 	}).(ZoneSettingUpstreamHttp2PtrOutput)
 }
 
-// Specifies whether to enable cache prefresh.- `on`: Enable.- `off`: Disable.
+// Cache configuration switch.
 func (o ZoneSettingUpstreamHttp2Output) Switch() pulumi.StringOutput {
 	return o.ApplyT(func(v ZoneSettingUpstreamHttp2) string { return v.Switch }).(pulumi.StringOutput)
 }
@@ -6891,7 +7240,7 @@ func (o ZoneSettingUpstreamHttp2PtrOutput) Elem() ZoneSettingUpstreamHttp2Output
 	}).(ZoneSettingUpstreamHttp2Output)
 }
 
-// Specifies whether to enable cache prefresh.- `on`: Enable.- `off`: Disable.
+// Cache configuration switch.
 func (o ZoneSettingUpstreamHttp2PtrOutput) Switch() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ZoneSettingUpstreamHttp2) *string {
 		if v == nil {
@@ -6902,7 +7251,7 @@ func (o ZoneSettingUpstreamHttp2PtrOutput) Switch() pulumi.StringPtrOutput {
 }
 
 type ZoneSettingWebSocket struct {
-	// Whether to enable custom WebSocket timeout setting. When is off: it means to keep the default WebSocket connection timeout period, which is 15 seconds. To change the timeout period, please set it to on.
+	// Whether to enable custom WebSocket timeout setting. When it's off: it means to keep the default WebSocket connection timeout period, which is 15 seconds. To change the timeout period, please set it to on.
 	Switch string `pulumi:"switch"`
 	// Sets timeout period in seconds. Maximum value: 120.
 	Timeout *int `pulumi:"timeout"`
@@ -6911,7 +7260,7 @@ type ZoneSettingWebSocket struct {
 // ZoneSettingWebSocketInput is an input type that accepts ZoneSettingWebSocketArgs and ZoneSettingWebSocketOutput values.
 // You can construct a concrete instance of `ZoneSettingWebSocketInput` via:
 //
-//          ZoneSettingWebSocketArgs{...}
+//	ZoneSettingWebSocketArgs{...}
 type ZoneSettingWebSocketInput interface {
 	pulumi.Input
 
@@ -6920,7 +7269,7 @@ type ZoneSettingWebSocketInput interface {
 }
 
 type ZoneSettingWebSocketArgs struct {
-	// Whether to enable custom WebSocket timeout setting. When is off: it means to keep the default WebSocket connection timeout period, which is 15 seconds. To change the timeout period, please set it to on.
+	// Whether to enable custom WebSocket timeout setting. When it's off: it means to keep the default WebSocket connection timeout period, which is 15 seconds. To change the timeout period, please set it to on.
 	Switch pulumi.StringInput `pulumi:"switch"`
 	// Sets timeout period in seconds. Maximum value: 120.
 	Timeout pulumi.IntPtrInput `pulumi:"timeout"`
@@ -6949,11 +7298,11 @@ func (i ZoneSettingWebSocketArgs) ToZoneSettingWebSocketPtrOutputWithContext(ctx
 // ZoneSettingWebSocketPtrInput is an input type that accepts ZoneSettingWebSocketArgs, ZoneSettingWebSocketPtr and ZoneSettingWebSocketPtrOutput values.
 // You can construct a concrete instance of `ZoneSettingWebSocketPtrInput` via:
 //
-//          ZoneSettingWebSocketArgs{...}
+//	        ZoneSettingWebSocketArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type ZoneSettingWebSocketPtrInput interface {
 	pulumi.Input
 
@@ -7003,7 +7352,7 @@ func (o ZoneSettingWebSocketOutput) ToZoneSettingWebSocketPtrOutputWithContext(c
 	}).(ZoneSettingWebSocketPtrOutput)
 }
 
-// Whether to enable custom WebSocket timeout setting. When is off: it means to keep the default WebSocket connection timeout period, which is 15 seconds. To change the timeout period, please set it to on.
+// Whether to enable custom WebSocket timeout setting. When it's off: it means to keep the default WebSocket connection timeout period, which is 15 seconds. To change the timeout period, please set it to on.
 func (o ZoneSettingWebSocketOutput) Switch() pulumi.StringOutput {
 	return o.ApplyT(func(v ZoneSettingWebSocket) string { return v.Switch }).(pulumi.StringOutput)
 }
@@ -7037,7 +7386,7 @@ func (o ZoneSettingWebSocketPtrOutput) Elem() ZoneSettingWebSocketOutput {
 	}).(ZoneSettingWebSocketOutput)
 }
 
-// Whether to enable custom WebSocket timeout setting. When is off: it means to keep the default WebSocket connection timeout period, which is 15 seconds. To change the timeout period, please set it to on.
+// Whether to enable custom WebSocket timeout setting. When it's off: it means to keep the default WebSocket connection timeout period, which is 15 seconds. To change the timeout period, please set it to on.
 func (o ZoneSettingWebSocketPtrOutput) Switch() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ZoneSettingWebSocket) *string {
 		if v == nil {
@@ -7067,7 +7416,7 @@ type GetRuleEngineSettingsAction struct {
 // GetRuleEngineSettingsActionInput is an input type that accepts GetRuleEngineSettingsActionArgs and GetRuleEngineSettingsActionOutput values.
 // You can construct a concrete instance of `GetRuleEngineSettingsActionInput` via:
 //
-//          GetRuleEngineSettingsActionArgs{...}
+//	GetRuleEngineSettingsActionArgs{...}
 type GetRuleEngineSettingsActionInput interface {
 	pulumi.Input
 
@@ -7097,7 +7446,7 @@ func (i GetRuleEngineSettingsActionArgs) ToGetRuleEngineSettingsActionOutputWith
 // GetRuleEngineSettingsActionArrayInput is an input type that accepts GetRuleEngineSettingsActionArray and GetRuleEngineSettingsActionArrayOutput values.
 // You can construct a concrete instance of `GetRuleEngineSettingsActionArrayInput` via:
 //
-//          GetRuleEngineSettingsActionArray{ GetRuleEngineSettingsActionArgs{...} }
+//	GetRuleEngineSettingsActionArray{ GetRuleEngineSettingsActionArgs{...} }
 type GetRuleEngineSettingsActionArrayInput interface {
 	pulumi.Input
 
@@ -7187,7 +7536,7 @@ type GetRuleEngineSettingsActionProperty struct {
 // GetRuleEngineSettingsActionPropertyInput is an input type that accepts GetRuleEngineSettingsActionPropertyArgs and GetRuleEngineSettingsActionPropertyOutput values.
 // You can construct a concrete instance of `GetRuleEngineSettingsActionPropertyInput` via:
 //
-//          GetRuleEngineSettingsActionPropertyArgs{...}
+//	GetRuleEngineSettingsActionPropertyArgs{...}
 type GetRuleEngineSettingsActionPropertyInput interface {
 	pulumi.Input
 
@@ -7231,7 +7580,7 @@ func (i GetRuleEngineSettingsActionPropertyArgs) ToGetRuleEngineSettingsActionPr
 // GetRuleEngineSettingsActionPropertyArrayInput is an input type that accepts GetRuleEngineSettingsActionPropertyArray and GetRuleEngineSettingsActionPropertyArrayOutput values.
 // You can construct a concrete instance of `GetRuleEngineSettingsActionPropertyArrayInput` via:
 //
-//          GetRuleEngineSettingsActionPropertyArray{ GetRuleEngineSettingsActionPropertyArgs{...} }
+//	GetRuleEngineSettingsActionPropertyArray{ GetRuleEngineSettingsActionPropertyArgs{...} }
 type GetRuleEngineSettingsActionPropertyArrayInput interface {
 	pulumi.Input
 
@@ -7358,7 +7707,7 @@ type GetRuleEngineSettingsActionPropertyChoiceProperty struct {
 // GetRuleEngineSettingsActionPropertyChoicePropertyInput is an input type that accepts GetRuleEngineSettingsActionPropertyChoicePropertyArgs and GetRuleEngineSettingsActionPropertyChoicePropertyOutput values.
 // You can construct a concrete instance of `GetRuleEngineSettingsActionPropertyChoicePropertyInput` via:
 //
-//          GetRuleEngineSettingsActionPropertyChoicePropertyArgs{...}
+//	GetRuleEngineSettingsActionPropertyChoicePropertyArgs{...}
 type GetRuleEngineSettingsActionPropertyChoicePropertyInput interface {
 	pulumi.Input
 
@@ -7400,7 +7749,7 @@ func (i GetRuleEngineSettingsActionPropertyChoicePropertyArgs) ToGetRuleEngineSe
 // GetRuleEngineSettingsActionPropertyChoicePropertyArrayInput is an input type that accepts GetRuleEngineSettingsActionPropertyChoicePropertyArray and GetRuleEngineSettingsActionPropertyChoicePropertyArrayOutput values.
 // You can construct a concrete instance of `GetRuleEngineSettingsActionPropertyChoicePropertyArrayInput` via:
 //
-//          GetRuleEngineSettingsActionPropertyChoicePropertyArray{ GetRuleEngineSettingsActionPropertyChoicePropertyArgs{...} }
+//	GetRuleEngineSettingsActionPropertyChoicePropertyArray{ GetRuleEngineSettingsActionPropertyChoicePropertyArgs{...} }
 type GetRuleEngineSettingsActionPropertyChoicePropertyArrayInput interface {
 	pulumi.Input
 
@@ -7510,7 +7859,7 @@ type GetRuleEngineSettingsActionPropertyChoicePropertyExtraParameter struct {
 // GetRuleEngineSettingsActionPropertyChoicePropertyExtraParameterInput is an input type that accepts GetRuleEngineSettingsActionPropertyChoicePropertyExtraParameterArgs and GetRuleEngineSettingsActionPropertyChoicePropertyExtraParameterOutput values.
 // You can construct a concrete instance of `GetRuleEngineSettingsActionPropertyChoicePropertyExtraParameterInput` via:
 //
-//          GetRuleEngineSettingsActionPropertyChoicePropertyExtraParameterArgs{...}
+//	GetRuleEngineSettingsActionPropertyChoicePropertyExtraParameterArgs{...}
 type GetRuleEngineSettingsActionPropertyChoicePropertyExtraParameterInput interface {
 	pulumi.Input
 
@@ -7542,7 +7891,7 @@ func (i GetRuleEngineSettingsActionPropertyChoicePropertyExtraParameterArgs) ToG
 // GetRuleEngineSettingsActionPropertyChoicePropertyExtraParameterArrayInput is an input type that accepts GetRuleEngineSettingsActionPropertyChoicePropertyExtraParameterArray and GetRuleEngineSettingsActionPropertyChoicePropertyExtraParameterArrayOutput values.
 // You can construct a concrete instance of `GetRuleEngineSettingsActionPropertyChoicePropertyExtraParameterArrayInput` via:
 //
-//          GetRuleEngineSettingsActionPropertyChoicePropertyExtraParameterArray{ GetRuleEngineSettingsActionPropertyChoicePropertyExtraParameterArgs{...} }
+//	GetRuleEngineSettingsActionPropertyChoicePropertyExtraParameterArray{ GetRuleEngineSettingsActionPropertyChoicePropertyExtraParameterArgs{...} }
 type GetRuleEngineSettingsActionPropertyChoicePropertyExtraParameterArrayInput interface {
 	pulumi.Input
 
@@ -7625,7 +7974,7 @@ type GetRuleEngineSettingsActionPropertyExtraParameter struct {
 // GetRuleEngineSettingsActionPropertyExtraParameterInput is an input type that accepts GetRuleEngineSettingsActionPropertyExtraParameterArgs and GetRuleEngineSettingsActionPropertyExtraParameterOutput values.
 // You can construct a concrete instance of `GetRuleEngineSettingsActionPropertyExtraParameterInput` via:
 //
-//          GetRuleEngineSettingsActionPropertyExtraParameterArgs{...}
+//	GetRuleEngineSettingsActionPropertyExtraParameterArgs{...}
 type GetRuleEngineSettingsActionPropertyExtraParameterInput interface {
 	pulumi.Input
 
@@ -7657,7 +8006,7 @@ func (i GetRuleEngineSettingsActionPropertyExtraParameterArgs) ToGetRuleEngineSe
 // GetRuleEngineSettingsActionPropertyExtraParameterArrayInput is an input type that accepts GetRuleEngineSettingsActionPropertyExtraParameterArray and GetRuleEngineSettingsActionPropertyExtraParameterArrayOutput values.
 // You can construct a concrete instance of `GetRuleEngineSettingsActionPropertyExtraParameterArrayInput` via:
 //
-//          GetRuleEngineSettingsActionPropertyExtraParameterArray{ GetRuleEngineSettingsActionPropertyExtraParameterArgs{...} }
+//	GetRuleEngineSettingsActionPropertyExtraParameterArray{ GetRuleEngineSettingsActionPropertyExtraParameterArgs{...} }
 type GetRuleEngineSettingsActionPropertyExtraParameterArrayInput interface {
 	pulumi.Input
 
@@ -7735,12 +8084,12 @@ type GetZoneAvailablePlansPlanInfoList struct {
 	Currency string `pulumi:"currency"`
 	// The number of fluxes included in the zone plan. Unit: Byte.
 	Flux int `pulumi:"flux"`
-	// Billing cycle. Valid values:- `y`: Billed by the year.- `m`: Billed by the month.- `h`: Billed by the hour.- `M`: Billed by the minute.- `s`: Billed by the second.
+	// Billing cycle. Valid values:
 	Frequency string `pulumi:"frequency"`
 	// Plan type.
 	PlanType string `pulumi:"planType"`
 	// Price of the plan. Unit: cent.
-	Price int `pulumi:"price"`
+	Price float64 `pulumi:"price"`
 	// The number of requests included in the zone plan.
 	Request int `pulumi:"request"`
 	// The number of zones this zone plan can bind.
@@ -7750,7 +8099,7 @@ type GetZoneAvailablePlansPlanInfoList struct {
 // GetZoneAvailablePlansPlanInfoListInput is an input type that accepts GetZoneAvailablePlansPlanInfoListArgs and GetZoneAvailablePlansPlanInfoListOutput values.
 // You can construct a concrete instance of `GetZoneAvailablePlansPlanInfoListInput` via:
 //
-//          GetZoneAvailablePlansPlanInfoListArgs{...}
+//	GetZoneAvailablePlansPlanInfoListArgs{...}
 type GetZoneAvailablePlansPlanInfoListInput interface {
 	pulumi.Input
 
@@ -7765,12 +8114,12 @@ type GetZoneAvailablePlansPlanInfoListArgs struct {
 	Currency pulumi.StringInput `pulumi:"currency"`
 	// The number of fluxes included in the zone plan. Unit: Byte.
 	Flux pulumi.IntInput `pulumi:"flux"`
-	// Billing cycle. Valid values:- `y`: Billed by the year.- `m`: Billed by the month.- `h`: Billed by the hour.- `M`: Billed by the minute.- `s`: Billed by the second.
+	// Billing cycle. Valid values:
 	Frequency pulumi.StringInput `pulumi:"frequency"`
 	// Plan type.
 	PlanType pulumi.StringInput `pulumi:"planType"`
 	// Price of the plan. Unit: cent.
-	Price pulumi.IntInput `pulumi:"price"`
+	Price pulumi.Float64Input `pulumi:"price"`
 	// The number of requests included in the zone plan.
 	Request pulumi.IntInput `pulumi:"request"`
 	// The number of zones this zone plan can bind.
@@ -7792,7 +8141,7 @@ func (i GetZoneAvailablePlansPlanInfoListArgs) ToGetZoneAvailablePlansPlanInfoLi
 // GetZoneAvailablePlansPlanInfoListArrayInput is an input type that accepts GetZoneAvailablePlansPlanInfoListArray and GetZoneAvailablePlansPlanInfoListArrayOutput values.
 // You can construct a concrete instance of `GetZoneAvailablePlansPlanInfoListArrayInput` via:
 //
-//          GetZoneAvailablePlansPlanInfoListArray{ GetZoneAvailablePlansPlanInfoListArgs{...} }
+//	GetZoneAvailablePlansPlanInfoListArray{ GetZoneAvailablePlansPlanInfoListArgs{...} }
 type GetZoneAvailablePlansPlanInfoListArrayInput interface {
 	pulumi.Input
 
@@ -7843,7 +8192,7 @@ func (o GetZoneAvailablePlansPlanInfoListOutput) Flux() pulumi.IntOutput {
 	return o.ApplyT(func(v GetZoneAvailablePlansPlanInfoList) int { return v.Flux }).(pulumi.IntOutput)
 }
 
-// Billing cycle. Valid values:- `y`: Billed by the year.- `m`: Billed by the month.- `h`: Billed by the hour.- `M`: Billed by the minute.- `s`: Billed by the second.
+// Billing cycle. Valid values:
 func (o GetZoneAvailablePlansPlanInfoListOutput) Frequency() pulumi.StringOutput {
 	return o.ApplyT(func(v GetZoneAvailablePlansPlanInfoList) string { return v.Frequency }).(pulumi.StringOutput)
 }
@@ -7854,8 +8203,8 @@ func (o GetZoneAvailablePlansPlanInfoListOutput) PlanType() pulumi.StringOutput 
 }
 
 // Price of the plan. Unit: cent.
-func (o GetZoneAvailablePlansPlanInfoListOutput) Price() pulumi.IntOutput {
-	return o.ApplyT(func(v GetZoneAvailablePlansPlanInfoList) int { return v.Price }).(pulumi.IntOutput)
+func (o GetZoneAvailablePlansPlanInfoListOutput) Price() pulumi.Float64Output {
+	return o.ApplyT(func(v GetZoneAvailablePlansPlanInfoList) float64 { return v.Price }).(pulumi.Float64Output)
 }
 
 // The number of requests included in the zone plan.
@@ -7897,10 +8246,14 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*ApplicationProxyIpv6PtrInput)(nil)).Elem(), ApplicationProxyIpv6Args{})
 	pulumi.RegisterInputType(reflect.TypeOf((*CertificateConfigServerCertInfoInput)(nil)).Elem(), CertificateConfigServerCertInfoArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*CertificateConfigServerCertInfoArrayInput)(nil)).Elem(), CertificateConfigServerCertInfoArray{})
-	pulumi.RegisterInputType(reflect.TypeOf((*OriginGroupOriginRecordInput)(nil)).Elem(), OriginGroupOriginRecordArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*OriginGroupOriginRecordArrayInput)(nil)).Elem(), OriginGroupOriginRecordArray{})
-	pulumi.RegisterInputType(reflect.TypeOf((*OriginGroupOriginRecordPrivateParameterInput)(nil)).Elem(), OriginGroupOriginRecordPrivateParameterArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*OriginGroupOriginRecordPrivateParameterArrayInput)(nil)).Elem(), OriginGroupOriginRecordPrivateParameterArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*L4ProxyDdosProtectionConfigInput)(nil)).Elem(), L4ProxyDdosProtectionConfigArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*L4ProxyDdosProtectionConfigPtrInput)(nil)).Elem(), L4ProxyDdosProtectionConfigArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*OriginGroupRecordInput)(nil)).Elem(), OriginGroupRecordArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*OriginGroupRecordArrayInput)(nil)).Elem(), OriginGroupRecordArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*OriginGroupRecordPrivateParameterInput)(nil)).Elem(), OriginGroupRecordPrivateParameterArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*OriginGroupRecordPrivateParameterArrayInput)(nil)).Elem(), OriginGroupRecordPrivateParameterArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*OriginGroupReferenceInput)(nil)).Elem(), OriginGroupReferenceArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*OriginGroupReferenceArrayInput)(nil)).Elem(), OriginGroupReferenceArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*RuleEngineRuleInput)(nil)).Elem(), RuleEngineRuleArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*RuleEngineRuleArrayInput)(nil)).Elem(), RuleEngineRuleArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*RuleEngineRuleActionInput)(nil)).Elem(), RuleEngineRuleActionArgs{})
@@ -8009,10 +8362,14 @@ func init() {
 	pulumi.RegisterOutputType(ApplicationProxyIpv6PtrOutput{})
 	pulumi.RegisterOutputType(CertificateConfigServerCertInfoOutput{})
 	pulumi.RegisterOutputType(CertificateConfigServerCertInfoArrayOutput{})
-	pulumi.RegisterOutputType(OriginGroupOriginRecordOutput{})
-	pulumi.RegisterOutputType(OriginGroupOriginRecordArrayOutput{})
-	pulumi.RegisterOutputType(OriginGroupOriginRecordPrivateParameterOutput{})
-	pulumi.RegisterOutputType(OriginGroupOriginRecordPrivateParameterArrayOutput{})
+	pulumi.RegisterOutputType(L4ProxyDdosProtectionConfigOutput{})
+	pulumi.RegisterOutputType(L4ProxyDdosProtectionConfigPtrOutput{})
+	pulumi.RegisterOutputType(OriginGroupRecordOutput{})
+	pulumi.RegisterOutputType(OriginGroupRecordArrayOutput{})
+	pulumi.RegisterOutputType(OriginGroupRecordPrivateParameterOutput{})
+	pulumi.RegisterOutputType(OriginGroupRecordPrivateParameterArrayOutput{})
+	pulumi.RegisterOutputType(OriginGroupReferenceOutput{})
+	pulumi.RegisterOutputType(OriginGroupReferenceArrayOutput{})
 	pulumi.RegisterOutputType(RuleEngineRuleOutput{})
 	pulumi.RegisterOutputType(RuleEngineRuleArrayOutput{})
 	pulumi.RegisterOutputType(RuleEngineRuleActionOutput{})

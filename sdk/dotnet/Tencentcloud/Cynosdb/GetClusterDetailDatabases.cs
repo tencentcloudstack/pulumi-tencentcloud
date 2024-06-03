@@ -15,66 +15,60 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
         /// <summary>
         /// Use this data source to query detailed information of cynosdb cluster_detail_databases
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var clusterDetailDatabases = Tencentcloud.Cynosdb.GetClusterDetailDatabases.Invoke(new()
         ///     {
-        ///         var clusterDetailDatabases = Output.Create(Tencentcloud.Cynosdb.GetClusterDetailDatabases.InvokeAsync(new Tencentcloud.Cynosdb.GetClusterDetailDatabasesArgs
-        ///         {
-        ///             ClusterId = "cynosdbmysql-bws8h88b",
-        ///             DbName = "users",
-        ///         }));
-        ///     }
+        ///         ClusterId = "cynosdbmysql-bws8h88b",
+        ///         DbName = "users",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetClusterDetailDatabasesResult> InvokeAsync(GetClusterDetailDatabasesArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetClusterDetailDatabasesResult>("tencentcloud:Cynosdb/getClusterDetailDatabases:getClusterDetailDatabases", args ?? new GetClusterDetailDatabasesArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetClusterDetailDatabasesResult>("tencentcloud:Cynosdb/getClusterDetailDatabases:getClusterDetailDatabases", args ?? new GetClusterDetailDatabasesArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of cynosdb cluster_detail_databases
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var clusterDetailDatabases = Tencentcloud.Cynosdb.GetClusterDetailDatabases.Invoke(new()
         ///     {
-        ///         var clusterDetailDatabases = Output.Create(Tencentcloud.Cynosdb.GetClusterDetailDatabases.InvokeAsync(new Tencentcloud.Cynosdb.GetClusterDetailDatabasesArgs
-        ///         {
-        ///             ClusterId = "cynosdbmysql-bws8h88b",
-        ///             DbName = "users",
-        ///         }));
-        ///     }
+        ///         ClusterId = "cynosdbmysql-bws8h88b",
+        ///         DbName = "users",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetClusterDetailDatabasesResult> Invoke(GetClusterDetailDatabasesInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetClusterDetailDatabasesResult>("tencentcloud:Cynosdb/getClusterDetailDatabases:getClusterDetailDatabases", args ?? new GetClusterDetailDatabasesInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetClusterDetailDatabasesResult>("tencentcloud:Cynosdb/getClusterDetailDatabases:getClusterDetailDatabases", args ?? new GetClusterDetailDatabasesInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetClusterDetailDatabasesArgs : Pulumi.InvokeArgs
+    public sealed class GetClusterDetailDatabasesArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Cluster ID.
@@ -97,9 +91,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
         public GetClusterDetailDatabasesArgs()
         {
         }
+        public static new GetClusterDetailDatabasesArgs Empty => new GetClusterDetailDatabasesArgs();
     }
 
-    public sealed class GetClusterDetailDatabasesInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetClusterDetailDatabasesInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Cluster ID.
@@ -122,6 +117,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
         public GetClusterDetailDatabasesInvokeArgs()
         {
         }
+        public static new GetClusterDetailDatabasesInvokeArgs Empty => new GetClusterDetailDatabasesInvokeArgs();
     }
 
 

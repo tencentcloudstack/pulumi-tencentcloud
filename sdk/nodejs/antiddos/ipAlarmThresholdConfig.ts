@@ -9,24 +9,26 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const ipAlarmThresholdConfig = new tencentcloud.Antiddos.IpAlarmThresholdConfig("ip_alarm_threshold_config", {
+ * const ipAlarmThresholdConfig = new tencentcloud.antiddos.IpAlarmThresholdConfig("ipAlarmThresholdConfig", {
  *     alarmThreshold: 2,
  *     alarmType: 1,
  *     instanceId: "bgp-xxxxxx",
  *     instanceIp: "xxx.xxx.xxx.xxx",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * antiddos ip_alarm_threshold_config can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Antiddos/ipAlarmThresholdConfig:IpAlarmThresholdConfig ip_alarm_threshold_config ${instanceId}#${instanceIp}#${alarmType}
+ * $ pulumi import tencentcloud:Antiddos/ipAlarmThresholdConfig:IpAlarmThresholdConfig ip_alarm_threshold_config ${instanceId}#${instanceIp}#${alarmType}
  * ```
  */
 export class IpAlarmThresholdConfig extends pulumi.CustomResource {

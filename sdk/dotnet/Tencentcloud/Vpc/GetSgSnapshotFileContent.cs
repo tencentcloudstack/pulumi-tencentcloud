@@ -15,68 +15,62 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         /// <summary>
         /// Use this data source to query detailed information of vpc sg_snapshot_file_content
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var sgSnapshotFileContent = Tencentcloud.Vpc.GetSgSnapshotFileContent.Invoke(new()
         ///     {
-        ///         var sgSnapshotFileContent = Output.Create(Tencentcloud.Vpc.GetSgSnapshotFileContent.InvokeAsync(new Tencentcloud.Vpc.GetSgSnapshotFileContentArgs
-        ///         {
-        ///             SecurityGroupId = "sg-ntrgm89v",
-        ///             SnapshotFileId = "ssfile-017gepjxpr",
-        ///             SnapshotPolicyId = "sspolicy-ebjofe71",
-        ///         }));
-        ///     }
+        ///         SecurityGroupId = "sg-ntrgm89v",
+        ///         SnapshotFileId = "ssfile-017gepjxpr",
+        ///         SnapshotPolicyId = "sspolicy-ebjofe71",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetSgSnapshotFileContentResult> InvokeAsync(GetSgSnapshotFileContentArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetSgSnapshotFileContentResult>("tencentcloud:Vpc/getSgSnapshotFileContent:getSgSnapshotFileContent", args ?? new GetSgSnapshotFileContentArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetSgSnapshotFileContentResult>("tencentcloud:Vpc/getSgSnapshotFileContent:getSgSnapshotFileContent", args ?? new GetSgSnapshotFileContentArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of vpc sg_snapshot_file_content
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var sgSnapshotFileContent = Tencentcloud.Vpc.GetSgSnapshotFileContent.Invoke(new()
         ///     {
-        ///         var sgSnapshotFileContent = Output.Create(Tencentcloud.Vpc.GetSgSnapshotFileContent.InvokeAsync(new Tencentcloud.Vpc.GetSgSnapshotFileContentArgs
-        ///         {
-        ///             SecurityGroupId = "sg-ntrgm89v",
-        ///             SnapshotFileId = "ssfile-017gepjxpr",
-        ///             SnapshotPolicyId = "sspolicy-ebjofe71",
-        ///         }));
-        ///     }
+        ///         SecurityGroupId = "sg-ntrgm89v",
+        ///         SnapshotFileId = "ssfile-017gepjxpr",
+        ///         SnapshotPolicyId = "sspolicy-ebjofe71",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetSgSnapshotFileContentResult> Invoke(GetSgSnapshotFileContentInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetSgSnapshotFileContentResult>("tencentcloud:Vpc/getSgSnapshotFileContent:getSgSnapshotFileContent", args ?? new GetSgSnapshotFileContentInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetSgSnapshotFileContentResult>("tencentcloud:Vpc/getSgSnapshotFileContent:getSgSnapshotFileContent", args ?? new GetSgSnapshotFileContentInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetSgSnapshotFileContentArgs : Pulumi.InvokeArgs
+    public sealed class GetSgSnapshotFileContentArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Used to save results.
@@ -105,9 +99,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         public GetSgSnapshotFileContentArgs()
         {
         }
+        public static new GetSgSnapshotFileContentArgs Empty => new GetSgSnapshotFileContentArgs();
     }
 
-    public sealed class GetSgSnapshotFileContentInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetSgSnapshotFileContentInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Used to save results.
@@ -136,6 +131,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         public GetSgSnapshotFileContentInvokeArgs()
         {
         }
+        public static new GetSgSnapshotFileContentInvokeArgs Empty => new GetSgSnapshotFileContentInvokeArgs();
     }
 
 

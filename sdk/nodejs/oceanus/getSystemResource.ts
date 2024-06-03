@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,11 +11,12 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const example = pulumi.output(tencentcloud.Oceanus.getSystemResource({
+ * const example = tencentcloud.Oceanus.getSystemResource({
  *     clusterId: "cluster-n8yaia0p",
  *     filters: [{
  *         name: "Name",
@@ -22,16 +24,14 @@ import * as utilities from "../utilities";
  *     }],
  *     flinkVersion: "Flink-1.11",
  *     resourceIds: ["resource-abd503yt"],
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getSystemResource(args?: GetSystemResourceArgs, opts?: pulumi.InvokeOptions): Promise<GetSystemResourceResult> {
     args = args || {};
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Oceanus/getSystemResource:getSystemResource", {
         "clusterId": args.clusterId,
         "filters": args.filters,
@@ -85,9 +85,30 @@ export interface GetSystemResourceResult {
     readonly resourceSets: outputs.Oceanus.GetSystemResourceResourceSet[];
     readonly resultOutputFile?: string;
 }
-
+/**
+ * Use this data source to query detailed information of oceanus systemResource
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const example = tencentcloud.Oceanus.getSystemResource({
+ *     clusterId: "cluster-n8yaia0p",
+ *     filters: [{
+ *         name: "Name",
+ *         values: ["tf_example"],
+ *     }],
+ *     flinkVersion: "Flink-1.11",
+ *     resourceIds: ["resource-abd503yt"],
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getSystemResourceOutput(args?: GetSystemResourceOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetSystemResourceResult> {
-    return pulumi.output(args).apply(a => getSystemResource(a, opts))
+    return pulumi.output(args).apply((a: any) => getSystemResource(a, opts))
 }
 
 /**

@@ -8,51 +8,56 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Use this data source to query detailed information of gaap proxy statistics
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Gaap"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Gaap"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Gaap"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Gaap.GetProxyStatistics(ctx, &gaap.GetProxyStatisticsArgs{
-// 			EndTime:     "2023-10-09 23:59:59",
-// 			Granularity: 300,
-// 			MetricNames: []string{
-// 				"InBandwidth",
-// 				"OutBandwidth",
-// 				"InFlow",
-// 				"OutFlow",
-// 				"InPackets",
-// 				"OutPackets",
-// 				"Concurrent",
-// 				"HttpQPS",
-// 				"HttpsQPS",
-// 				"Latency",
-// 				"PacketLoss",
-// 			},
-// 			ProxyId:   "link-8lpyo88p",
-// 			StartTime: "2023-10-09 00:00:00",
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Gaap.GetProxyStatistics(ctx, &gaap.GetProxyStatisticsArgs{
+//				EndTime:     "2024-05-20 23:59:59",
+//				Granularity: 300,
+//				MetricNames: []string{
+//					"InBandwidth",
+//					"OutBandwidth",
+//					"InFlow",
+//					"OutFlow",
+//					"InPackets",
+//					"OutPackets",
+//					"Concurrent",
+//					"HttpQPS",
+//					"HttpsQPS",
+//					"Latency",
+//					"PacketLoss",
+//				},
+//				ProxyId:   "link-m9t4yho9",
+//				StartTime: "2024-05-20 00:00:00",
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 func GetProxyStatistics(ctx *pulumi.Context, args *GetProxyStatisticsArgs, opts ...pulumi.InvokeOption) (*GetProxyStatisticsResult, error) {
-	opts = pkgInvokeDefaultOpts(opts)
+	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetProxyStatisticsResult
 	err := ctx.Invoke("tencentcloud:Gaap/getProxyStatistics:getProxyStatistics", args, &rv, opts...)
 	if err != nil {

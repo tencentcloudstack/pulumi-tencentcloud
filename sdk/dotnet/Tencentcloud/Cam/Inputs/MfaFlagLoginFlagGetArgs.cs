@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam.Inputs
 {
 
-    public sealed class MfaFlagLoginFlagGetArgs : Pulumi.ResourceArgs
+    public sealed class MfaFlagLoginFlagGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Phone.
@@ -34,5 +34,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam.Inputs
         public MfaFlagLoginFlagGetArgs()
         {
         }
+        public static new MfaFlagLoginFlagGetArgs Empty => new MfaFlagLoginFlagGetArgs();
     }
 }

@@ -7,8 +7,9 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 type InstanceSsl struct {
@@ -33,7 +34,7 @@ func NewInstanceSsl(ctx *pulumi.Context,
 	if args.Type == nil {
 		return nil, errors.New("invalid value for required argument 'Type'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource InstanceSsl
 	err := ctx.RegisterResource("tencentcloud:Sqlserver/instanceSsl:InstanceSsl", name, args, &resource, opts...)
 	if err != nil {
@@ -114,7 +115,7 @@ func (i *InstanceSsl) ToInstanceSslOutputWithContext(ctx context.Context) Instan
 // InstanceSslArrayInput is an input type that accepts InstanceSslArray and InstanceSslArrayOutput values.
 // You can construct a concrete instance of `InstanceSslArrayInput` via:
 //
-//          InstanceSslArray{ InstanceSslArgs{...} }
+//	InstanceSslArray{ InstanceSslArgs{...} }
 type InstanceSslArrayInput interface {
 	pulumi.Input
 
@@ -139,7 +140,7 @@ func (i InstanceSslArray) ToInstanceSslArrayOutputWithContext(ctx context.Contex
 // InstanceSslMapInput is an input type that accepts InstanceSslMap and InstanceSslMapOutput values.
 // You can construct a concrete instance of `InstanceSslMapInput` via:
 //
-//          InstanceSslMap{ "key": InstanceSslArgs{...} }
+//	InstanceSslMap{ "key": InstanceSslArgs{...} }
 type InstanceSslMapInput interface {
 	pulumi.Input
 

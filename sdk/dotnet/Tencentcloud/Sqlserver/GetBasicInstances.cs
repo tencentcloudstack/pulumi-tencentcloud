@@ -15,148 +15,144 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
         /// <summary>
         /// Use this data source to query SQL Server basic instances
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
+        /// 
         /// ### Filter instance by Id
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var exampleId = Tencentcloud.Sqlserver.GetBasicInstances.Invoke(new()
         ///     {
-        ///         var exampleId = Output.Create(Tencentcloud.Sqlserver.GetBasicInstances.InvokeAsync(new Tencentcloud.Sqlserver.GetBasicInstancesArgs
-        ///         {
-        ///             Id = "mssql-3l3fgqn7",
-        ///         }));
-        ///     }
+        ///         Id = "mssql-3l3fgqn7",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% example %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
+        /// 
         /// ### Filter instance by project Id
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var exampleProject = Tencentcloud.Sqlserver.GetBasicInstances.Invoke(new()
         ///     {
-        ///         var exampleProject = Output.Create(Tencentcloud.Sqlserver.GetBasicInstances.InvokeAsync(new Tencentcloud.Sqlserver.GetBasicInstancesArgs
-        ///         {
-        ///             ProjectId = 0,
-        ///         }));
-        ///     }
+        ///         ProjectId = 0,
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% example %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
+        /// 
         /// ### Filter instance by VPC/Subnet
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var exampleVpc = Tencentcloud.Sqlserver.GetBasicInstances.Invoke(new()
         ///     {
-        ///         var exampleVpc = Output.Create(Tencentcloud.Sqlserver.GetBasicInstances.InvokeAsync(new Tencentcloud.Sqlserver.GetBasicInstancesArgs
-        ///         {
-        ///             SubnetId = "subnet-nf9n81ps",
-        ///             VpcId = "vpc-409mvdvv",
-        ///         }));
-        ///     }
+        ///         SubnetId = "subnet-nf9n81ps",
+        ///         VpcId = "vpc-409mvdvv",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetBasicInstancesResult> InvokeAsync(GetBasicInstancesArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetBasicInstancesResult>("tencentcloud:Sqlserver/getBasicInstances:getBasicInstances", args ?? new GetBasicInstancesArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetBasicInstancesResult>("tencentcloud:Sqlserver/getBasicInstances:getBasicInstances", args ?? new GetBasicInstancesArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query SQL Server basic instances
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
+        /// 
         /// ### Filter instance by Id
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var exampleId = Tencentcloud.Sqlserver.GetBasicInstances.Invoke(new()
         ///     {
-        ///         var exampleId = Output.Create(Tencentcloud.Sqlserver.GetBasicInstances.InvokeAsync(new Tencentcloud.Sqlserver.GetBasicInstancesArgs
-        ///         {
-        ///             Id = "mssql-3l3fgqn7",
-        ///         }));
-        ///     }
+        ///         Id = "mssql-3l3fgqn7",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% example %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
+        /// 
         /// ### Filter instance by project Id
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var exampleProject = Tencentcloud.Sqlserver.GetBasicInstances.Invoke(new()
         ///     {
-        ///         var exampleProject = Output.Create(Tencentcloud.Sqlserver.GetBasicInstances.InvokeAsync(new Tencentcloud.Sqlserver.GetBasicInstancesArgs
-        ///         {
-        ///             ProjectId = 0,
-        ///         }));
-        ///     }
+        ///         ProjectId = 0,
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% example %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
+        /// 
         /// ### Filter instance by VPC/Subnet
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var exampleVpc = Tencentcloud.Sqlserver.GetBasicInstances.Invoke(new()
         ///     {
-        ///         var exampleVpc = Output.Create(Tencentcloud.Sqlserver.GetBasicInstances.InvokeAsync(new Tencentcloud.Sqlserver.GetBasicInstancesArgs
-        ///         {
-        ///             SubnetId = "subnet-nf9n81ps",
-        ///             VpcId = "vpc-409mvdvv",
-        ///         }));
-        ///     }
+        ///         SubnetId = "subnet-nf9n81ps",
+        ///         VpcId = "vpc-409mvdvv",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetBasicInstancesResult> Invoke(GetBasicInstancesInvokeArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetBasicInstancesResult>("tencentcloud:Sqlserver/getBasicInstances:getBasicInstances", args ?? new GetBasicInstancesInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetBasicInstancesResult>("tencentcloud:Sqlserver/getBasicInstances:getBasicInstances", args ?? new GetBasicInstancesInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetBasicInstancesArgs : Pulumi.InvokeArgs
+    public sealed class GetBasicInstancesArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// ID of the SQL Server basic instance to be query.
@@ -197,9 +193,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
         public GetBasicInstancesArgs()
         {
         }
+        public static new GetBasicInstancesArgs Empty => new GetBasicInstancesArgs();
     }
 
-    public sealed class GetBasicInstancesInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetBasicInstancesInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// ID of the SQL Server basic instance to be query.
@@ -240,6 +237,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
         public GetBasicInstancesInvokeArgs()
         {
         }
+        public static new GetBasicInstancesInvokeArgs Empty => new GetBasicInstancesInvokeArgs();
     }
 
 

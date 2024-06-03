@@ -9,23 +9,25 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const apiRateLimitRule = new tencentcloud.Tsf.ApiRateLimitRule("api_rate_limit_rule", {
+ * const apiRateLimitRule = new tencentcloud.tsf.ApiRateLimitRule("apiRateLimitRule", {
  *     apiId: "api-xxxxxx",
  *     maxQps: 10,
  *     usableStatus: "enable",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * tsf api_rate_limit_rule can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Tsf/apiRateLimitRule:ApiRateLimitRule api_rate_limit_rule api_rate_limit_rule_id
+ * $ pulumi import tencentcloud:Tsf/apiRateLimitRule:ApiRateLimitRule api_rate_limit_rule api_rate_limit_rule_id
  * ```
  */
 export class ApiRateLimitRule extends pulumi.CustomResource {

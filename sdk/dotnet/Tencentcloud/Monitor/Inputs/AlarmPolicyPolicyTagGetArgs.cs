@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor.Inputs
 {
 
-    public sealed class AlarmPolicyPolicyTagGetArgs : Pulumi.ResourceArgs
+    public sealed class AlarmPolicyPolicyTagGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Tag key.
@@ -28,5 +28,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor.Inputs
         public AlarmPolicyPolicyTagGetArgs()
         {
         }
+        public static new AlarmPolicyPolicyTagGetArgs Empty => new AlarmPolicyPolicyTagGetArgs();
     }
 }

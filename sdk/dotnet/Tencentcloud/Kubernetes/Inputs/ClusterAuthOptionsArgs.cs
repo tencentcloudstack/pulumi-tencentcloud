@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes.Inputs
 {
 
-    public sealed class ClusterAuthOptionsArgs : Pulumi.ResourceArgs
+    public sealed class ClusterAuthOptionsArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// If set to `true`, the rbac rule will be created automatically which allow anonymous user to access '/.well-known/openid-configuration' and '/openid/v1/jwks'.
@@ -40,5 +40,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes.Inputs
         public ClusterAuthOptionsArgs()
         {
         }
+        public static new ClusterAuthOptionsArgs Empty => new ClusterAuthOptionsArgs();
     }
 }

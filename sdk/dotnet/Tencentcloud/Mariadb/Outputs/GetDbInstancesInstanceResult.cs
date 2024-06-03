@@ -27,6 +27,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mariadb.Outputs
         /// </summary>
         public readonly string InstanceName;
         /// <summary>
+        /// Public network access domain name.
+        /// </summary>
+        public readonly string InternetDomain;
+        /// <summary>
+        /// Public IP address.
+        /// </summary>
+        public readonly string InternetIp;
+        /// <summary>
+        /// Public network port.
+        /// </summary>
+        public readonly int InternetPort;
+        /// <summary>
         /// meory of instance.
         /// </summary>
         public readonly int Memory;
@@ -51,9 +63,17 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mariadb.Outputs
         /// </summary>
         public readonly string SubnetId;
         /// <summary>
+        /// Intranet IP address.
+        /// </summary>
+        public readonly string Vip;
+        /// <summary>
         /// vpc id.
         /// </summary>
         public readonly string VpcId;
+        /// <summary>
+        /// Intranet port.
+        /// </summary>
+        public readonly int Vport;
         /// <summary>
         /// available zone.
         /// </summary>
@@ -67,6 +87,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mariadb.Outputs
 
             string instanceName,
 
+            string internetDomain,
+
+            string internetIp,
+
+            int internetPort,
+
             int memory,
 
             int projectId,
@@ -79,20 +105,29 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mariadb.Outputs
 
             string subnetId,
 
+            string vip,
+
             string vpcId,
+
+            int vport,
 
             string zone)
         {
             DbVersionId = dbVersionId;
             InstanceId = instanceId;
             InstanceName = instanceName;
+            InternetDomain = internetDomain;
+            InternetIp = internetIp;
+            InternetPort = internetPort;
             Memory = memory;
             ProjectId = projectId;
             Region = region;
             ResourceTags = resourceTags;
             Storage = storage;
             SubnetId = subnetId;
+            Vip = vip;
             VpcId = vpcId;
+            Vport = vport;
             Zone = zone;
         }
     }

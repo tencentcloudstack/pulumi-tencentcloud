@@ -15,45 +15,46 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ci
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var mediaVideoProcessTemplate = new Tencentcloud.Ci.MediaVideoProcessTemplate("mediaVideoProcessTemplate", new()
     ///     {
-    ///         var mediaVideoProcessTemplate = new Tencentcloud.Ci.MediaVideoProcessTemplate("mediaVideoProcessTemplate", new Tencentcloud.Ci.MediaVideoProcessTemplateArgs
+    ///         Bucket = "terraform-ci-xxxxxx",
+    ///         ColorEnhance = new Tencentcloud.Ci.Inputs.MediaVideoProcessTemplateColorEnhanceArgs
     ///         {
-    ///             Bucket = "terraform-ci-xxxxxx",
-    ///             ColorEnhance = new Tencentcloud.Ci.Inputs.MediaVideoProcessTemplateColorEnhanceArgs
-    ///             {
-    ///                 Contrast = "",
-    ///                 Correction = "",
-    ///                 Enable = "true",
-    ///                 Saturation = "",
-    ///             },
-    ///             MsSharpen = new Tencentcloud.Ci.Inputs.MediaVideoProcessTemplateMsSharpenArgs
-    ///             {
-    ///                 Enable = "false",
-    ///                 SharpenLevel = "",
-    ///             },
-    ///         });
-    ///     }
+    ///             Contrast = "",
+    ///             Correction = "",
+    ///             Enable = "true",
+    ///             Saturation = "",
+    ///         },
+    ///         MsSharpen = new Tencentcloud.Ci.Inputs.MediaVideoProcessTemplateMsSharpenArgs
+    ///         {
+    ///             Enable = "false",
+    ///             SharpenLevel = "",
+    ///         },
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// ci media_video_process_template can be imported using the bucket#templateId, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Ci/mediaVideoProcessTemplate:MediaVideoProcessTemplate media_video_process_template terraform-ci-xxxxxx#t1d5694d87639a4593a9fd7e9025d26f52
+    /// $ pulumi import tencentcloud:Ci/mediaVideoProcessTemplate:MediaVideoProcessTemplate media_video_process_template terraform-ci-xxxxxx#t1d5694d87639a4593a9fd7e9025d26f52
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Ci/mediaVideoProcessTemplate:MediaVideoProcessTemplate")]
-    public partial class MediaVideoProcessTemplate : Pulumi.CustomResource
+    public partial class MediaVideoProcessTemplate : global::Pulumi.CustomResource
     {
         /// <summary>
         /// bucket name.
@@ -124,7 +125,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ci
         }
     }
 
-    public sealed class MediaVideoProcessTemplateArgs : Pulumi.ResourceArgs
+    public sealed class MediaVideoProcessTemplateArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// bucket name.
@@ -153,9 +154,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ci
         public MediaVideoProcessTemplateArgs()
         {
         }
+        public static new MediaVideoProcessTemplateArgs Empty => new MediaVideoProcessTemplateArgs();
     }
 
-    public sealed class MediaVideoProcessTemplateState : Pulumi.ResourceArgs
+    public sealed class MediaVideoProcessTemplateState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// bucket name.
@@ -184,5 +186,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ci
         public MediaVideoProcessTemplateState()
         {
         }
+        public static new MediaVideoProcessTemplateState Empty => new MediaVideoProcessTemplateState();
     }
 }

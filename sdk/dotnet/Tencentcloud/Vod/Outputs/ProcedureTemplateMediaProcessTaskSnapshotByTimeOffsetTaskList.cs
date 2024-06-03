@@ -23,6 +23,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vod.Outputs
         /// </summary>
         public readonly ImmutableArray<string> ExtTimeOffsetLists;
         /// <summary>
+        /// List of time points for screencapturing in milliseconds. Note: this field may return null, indicating that no valid values can be obtained.
+        /// </summary>
+        public readonly ImmutableArray<double> TimeOffsetLists;
+        /// <summary>
         /// List of up to `10` image or text watermarks. Note: this field may return null, indicating that no valid values can be obtained.
         /// </summary>
         public readonly ImmutableArray<Outputs.ProcedureTemplateMediaProcessTaskSnapshotByTimeOffsetTaskListWatermarkList> WatermarkLists;
@@ -33,10 +37,13 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vod.Outputs
 
             ImmutableArray<string> extTimeOffsetLists,
 
+            ImmutableArray<double> timeOffsetLists,
+
             ImmutableArray<Outputs.ProcedureTemplateMediaProcessTaskSnapshotByTimeOffsetTaskListWatermarkList> watermarkLists)
         {
             Definition = definition;
             ExtTimeOffsetLists = extTimeOffsetLists;
+            TimeOffsetLists = timeOffsetLists;
             WatermarkLists = watermarkLists;
         }
     }

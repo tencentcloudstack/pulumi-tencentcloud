@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dcx.Inputs
 {
 
-    public sealed class ExtraConfigBfdInfoGetArgs : Pulumi.ResourceArgs
+    public sealed class ExtraConfigBfdInfoGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// detect interval.
@@ -28,5 +28,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dcx.Inputs
         public ExtraConfigBfdInfoGetArgs()
         {
         }
+        public static new ExtraConfigBfdInfoGetArgs Empty => new ExtraConfigBfdInfoGetArgs();
     }
 }

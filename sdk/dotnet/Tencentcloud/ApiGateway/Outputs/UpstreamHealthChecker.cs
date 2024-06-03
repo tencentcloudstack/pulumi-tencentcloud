@@ -56,6 +56,8 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway.Outputs
         public readonly string UnhealthyHttpStatus;
         /// <summary>
         /// The automatic recovery time of abnormal node status, in seconds. When only passive checking is enabled, it must be set to a value&amp;gt;0, otherwise the passive exception node will not be able to recover. The default is 30 seconds.
+        /// 
+        /// The `k8s_service` object supports the following:
         /// </summary>
         public readonly int? UnhealthyTimeout;
 

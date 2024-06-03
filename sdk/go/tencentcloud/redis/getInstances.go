@@ -8,39 +8,44 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Use this data source to query the detail information of redis instance.
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Redis"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Redis"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Redis"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Redis.GetInstances(ctx, &redis.GetInstancesArgs{
-// 			Limit:            pulumi.IntRef(20),
-// 			ProjectId:        pulumi.IntRef(0),
-// 			ResultOutputFile: pulumi.StringRef("/tmp/redis_instances"),
-// 			SearchKey:        pulumi.StringRef("myredis"),
-// 			Zone:             pulumi.StringRef("ap-hongkong-1"),
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Redis.GetInstances(ctx, &redis.GetInstancesArgs{
+//				Limit:            pulumi.IntRef(20),
+//				ProjectId:        pulumi.IntRef(0),
+//				ResultOutputFile: pulumi.StringRef("/tmp/redis_instances"),
+//				SearchKey:        pulumi.StringRef("myredis"),
+//				Zone:             pulumi.StringRef("ap-hongkong-1"),
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 func GetInstances(ctx *pulumi.Context, args *GetInstancesArgs, opts ...pulumi.InvokeOption) (*GetInstancesResult, error) {
-	opts = pkgInvokeDefaultOpts(opts)
+	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetInstancesResult
 	err := ctx.Invoke("tencentcloud:Redis/getInstances:getInstances", args, &rv, opts...)
 	if err != nil {

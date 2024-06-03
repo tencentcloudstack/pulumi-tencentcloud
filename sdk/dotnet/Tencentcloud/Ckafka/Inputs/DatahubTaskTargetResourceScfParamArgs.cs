@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka.Inputs
 {
 
-    public sealed class DatahubTaskTargetResourceScfParamArgs : Pulumi.ResourceArgs
+    public sealed class DatahubTaskTargetResourceScfParamArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// The maximum number of messages sent in each batch, the default is 1000.
@@ -46,5 +46,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka.Inputs
         public DatahubTaskTargetResourceScfParamArgs()
         {
         }
+        public static new DatahubTaskTargetResourceScfParamArgs Empty => new DatahubTaskTargetResourceScfParamArgs();
     }
 }

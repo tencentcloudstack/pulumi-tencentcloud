@@ -15,29 +15,30 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dbbrain
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var dbDiagReportTask = new Tencentcloud.Dbbrain.DbDiagReportTask("dbDiagReportTask", new()
     ///     {
-    ///         var dbDiagReportTask = new Tencentcloud.Dbbrain.DbDiagReportTask("dbDiagReportTask", new Tencentcloud.Dbbrain.DbDiagReportTaskArgs
-    ///         {
-    ///             EndTime = "%s",
-    ///             InstanceId = "%s",
-    ///             Product = "mysql",
-    ///             SendMailFlag = 0,
-    ///             StartTime = "%s",
-    ///         });
-    ///     }
+    ///         EndTime = "%s",
+    ///         InstanceId = "%s",
+    ///         Product = "mysql",
+    ///         SendMailFlag = 0,
+    ///         StartTime = "%s",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Dbbrain/dbDiagReportTask:DbDiagReportTask")]
-    public partial class DbDiagReportTask : Pulumi.CustomResource
+    public partial class DbDiagReportTask : global::Pulumi.CustomResource
     {
         /// <summary>
         /// An array of contact group IDs to receive mail from.
@@ -48,8 +49,8 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dbbrain
         /// <summary>
         /// An array of contact IDs to receive emails from.
         /// </summary>
-        [Output("contactPeoples")]
-        public Output<ImmutableArray<int>> ContactPeoples { get; private set; } = null!;
+        [Output("contactPeople")]
+        public Output<ImmutableArray<int>> ContactPeople { get; private set; } = null!;
 
         /// <summary>
         /// End time, such as 2020-11-09T14:00:00+08:00.
@@ -126,7 +127,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dbbrain
         }
     }
 
-    public sealed class DbDiagReportTaskArgs : Pulumi.ResourceArgs
+    public sealed class DbDiagReportTaskArgs : global::Pulumi.ResourceArgs
     {
         [Input("contactGroups")]
         private InputList<int>? _contactGroups;
@@ -140,16 +141,16 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dbbrain
             set => _contactGroups = value;
         }
 
-        [Input("contactPeoples")]
-        private InputList<int>? _contactPeoples;
+        [Input("contactPeople")]
+        private InputList<int>? _contactPeople;
 
         /// <summary>
         /// An array of contact IDs to receive emails from.
         /// </summary>
-        public InputList<int> ContactPeoples
+        public InputList<int> ContactPeople
         {
-            get => _contactPeoples ?? (_contactPeoples = new InputList<int>());
-            set => _contactPeoples = value;
+            get => _contactPeople ?? (_contactPeople = new InputList<int>());
+            set => _contactPeople = value;
         }
 
         /// <summary>
@@ -185,9 +186,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dbbrain
         public DbDiagReportTaskArgs()
         {
         }
+        public static new DbDiagReportTaskArgs Empty => new DbDiagReportTaskArgs();
     }
 
-    public sealed class DbDiagReportTaskState : Pulumi.ResourceArgs
+    public sealed class DbDiagReportTaskState : global::Pulumi.ResourceArgs
     {
         [Input("contactGroups")]
         private InputList<int>? _contactGroups;
@@ -201,16 +203,16 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dbbrain
             set => _contactGroups = value;
         }
 
-        [Input("contactPeoples")]
-        private InputList<int>? _contactPeoples;
+        [Input("contactPeople")]
+        private InputList<int>? _contactPeople;
 
         /// <summary>
         /// An array of contact IDs to receive emails from.
         /// </summary>
-        public InputList<int> ContactPeoples
+        public InputList<int> ContactPeople
         {
-            get => _contactPeoples ?? (_contactPeoples = new InputList<int>());
-            set => _contactPeoples = value;
+            get => _contactPeople ?? (_contactPeople = new InputList<int>());
+            set => _contactPeople = value;
         }
 
         /// <summary>
@@ -246,5 +248,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dbbrain
         public DbDiagReportTaskState()
         {
         }
+        public static new DbDiagReportTaskState Empty => new DbDiagReportTaskState();
     }
 }

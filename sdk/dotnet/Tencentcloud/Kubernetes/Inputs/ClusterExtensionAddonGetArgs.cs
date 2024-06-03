@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes.Inputs
 {
 
-    public sealed class ClusterExtensionAddonGetArgs : Pulumi.ResourceArgs
+    public sealed class ClusterExtensionAddonGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Add-on name.
@@ -28,5 +28,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes.Inputs
         public ClusterExtensionAddonGetArgs()
         {
         }
+        public static new ClusterExtensionAddonGetArgs Empty => new ClusterExtensionAddonGetArgs();
     }
 }

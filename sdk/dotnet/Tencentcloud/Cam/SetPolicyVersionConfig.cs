@@ -15,34 +15,35 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var setPolicyVersionConfig = new Tencentcloud.Cam.SetPolicyVersionConfig("setPolicyVersionConfig", new()
     ///     {
-    ///         var setPolicyVersionConfig = new Tencentcloud.Cam.SetPolicyVersionConfig("setPolicyVersionConfig", new Tencentcloud.Cam.SetPolicyVersionConfigArgs
-    ///         {
-    ///             PolicyId = 171162811,
-    ///             VersionId = 2,
-    ///         });
-    ///     }
+    ///         PolicyId = 171162811,
+    ///         VersionId = 2,
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// cam set_policy_version_config can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Cam/setPolicyVersionConfig:SetPolicyVersionConfig set_policy_version_config set_policy_version_config_id
+    /// $ pulumi import tencentcloud:Cam/setPolicyVersionConfig:SetPolicyVersionConfig set_policy_version_config set_policy_version_config_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Cam/setPolicyVersionConfig:SetPolicyVersionConfig")]
-    public partial class SetPolicyVersionConfig : Pulumi.CustomResource
+    public partial class SetPolicyVersionConfig : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Policy ID.
@@ -101,7 +102,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam
         }
     }
 
-    public sealed class SetPolicyVersionConfigArgs : Pulumi.ResourceArgs
+    public sealed class SetPolicyVersionConfigArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Policy ID.
@@ -118,9 +119,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam
         public SetPolicyVersionConfigArgs()
         {
         }
+        public static new SetPolicyVersionConfigArgs Empty => new SetPolicyVersionConfigArgs();
     }
 
-    public sealed class SetPolicyVersionConfigState : Pulumi.ResourceArgs
+    public sealed class SetPolicyVersionConfigState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Policy ID.
@@ -137,5 +139,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam
         public SetPolicyVersionConfigState()
         {
         }
+        public static new SetPolicyVersionConfigState Empty => new SetPolicyVersionConfigState();
     }
 }

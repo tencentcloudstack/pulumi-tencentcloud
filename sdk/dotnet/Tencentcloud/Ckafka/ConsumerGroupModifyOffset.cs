@@ -15,32 +15,33 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var consumerGroupModifyOffset = new Tencentcloud.Ckafka.ConsumerGroupModifyOffset("consumerGroupModifyOffset", new()
     ///     {
-    ///         var consumerGroupModifyOffset = new Tencentcloud.Ckafka.ConsumerGroupModifyOffset("consumerGroupModifyOffset", new Tencentcloud.Ckafka.ConsumerGroupModifyOffsetArgs
+    ///         Group = "xxxxxx",
+    ///         InstanceId = "ckafka-xxxxxx",
+    ///         Offset = 0,
+    ///         Strategy = 2,
+    ///         Topics = new[]
     ///         {
-    ///             Group = "xxxxxx",
-    ///             InstanceId = "ckafka-xxxxxx",
-    ///             Offset = 0,
-    ///             Strategy = 2,
-    ///             Topics = 
-    ///             {
-    ///                 "xxxxxx",
-    ///             },
-    ///         });
-    ///     }
+    ///             "xxxxxx",
+    ///         },
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Ckafka/consumerGroupModifyOffset:ConsumerGroupModifyOffset")]
-    public partial class ConsumerGroupModifyOffset : Pulumi.CustomResource
+    public partial class ConsumerGroupModifyOffset : global::Pulumi.CustomResource
     {
         /// <summary>
         /// kafka group.
@@ -138,7 +139,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka
         }
     }
 
-    public sealed class ConsumerGroupModifyOffsetArgs : Pulumi.ResourceArgs
+    public sealed class ConsumerGroupModifyOffsetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// kafka group.
@@ -206,9 +207,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka
         public ConsumerGroupModifyOffsetArgs()
         {
         }
+        public static new ConsumerGroupModifyOffsetArgs Empty => new ConsumerGroupModifyOffsetArgs();
     }
 
-    public sealed class ConsumerGroupModifyOffsetState : Pulumi.ResourceArgs
+    public sealed class ConsumerGroupModifyOffsetState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// kafka group.
@@ -276,5 +278,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka
         public ConsumerGroupModifyOffsetState()
         {
         }
+        public static new ConsumerGroupModifyOffsetState Empty => new ConsumerGroupModifyOffsetState();
     }
 }

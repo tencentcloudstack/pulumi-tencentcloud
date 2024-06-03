@@ -7,38 +7,44 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a CFS access rule.
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cfs"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cfs"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Cfs.NewAccessRule(ctx, "foo", &Cfs.AccessRuleArgs{
-// 			AccessGroupId:  pulumi.String("pgroup-7nx89k7l"),
-// 			AuthClientIp:   pulumi.String("10.10.1.0/24"),
-// 			Priority:       pulumi.Int(1),
-// 			RwPermission:   pulumi.String("RO"),
-// 			UserPermission: pulumi.String("root_squash"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Cfs.NewAccessRule(ctx, "foo", &Cfs.AccessRuleArgs{
+//				AccessGroupId:  pulumi.String("pgroup-7nx89k7l"),
+//				AuthClientIp:   pulumi.String("10.10.1.0/24"),
+//				Priority:       pulumi.Int(1),
+//				RwPermission:   pulumi.String("RO"),
+//				UserPermission: pulumi.String("root_squash"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 type AccessRule struct {
 	pulumi.CustomResourceState
 
@@ -70,7 +76,7 @@ func NewAccessRule(ctx *pulumi.Context,
 	if args.Priority == nil {
 		return nil, errors.New("invalid value for required argument 'Priority'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource AccessRule
 	err := ctx.RegisterResource("tencentcloud:Cfs/accessRule:AccessRule", name, args, &resource, opts...)
 	if err != nil {
@@ -175,7 +181,7 @@ func (i *AccessRule) ToAccessRuleOutputWithContext(ctx context.Context) AccessRu
 // AccessRuleArrayInput is an input type that accepts AccessRuleArray and AccessRuleArrayOutput values.
 // You can construct a concrete instance of `AccessRuleArrayInput` via:
 //
-//          AccessRuleArray{ AccessRuleArgs{...} }
+//	AccessRuleArray{ AccessRuleArgs{...} }
 type AccessRuleArrayInput interface {
 	pulumi.Input
 
@@ -200,7 +206,7 @@ func (i AccessRuleArray) ToAccessRuleArrayOutputWithContext(ctx context.Context)
 // AccessRuleMapInput is an input type that accepts AccessRuleMap and AccessRuleMapOutput values.
 // You can construct a concrete instance of `AccessRuleMapInput` via:
 //
-//          AccessRuleMap{ "key": AccessRuleArgs{...} }
+//	AccessRuleMap{ "key": AccessRuleArgs{...} }
 type AccessRuleMapInput interface {
 	pulumi.Input
 

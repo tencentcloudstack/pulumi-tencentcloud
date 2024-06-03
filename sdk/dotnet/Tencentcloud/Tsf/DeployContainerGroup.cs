@@ -15,90 +15,91 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var deployContainerGroup = new Tencentcloud.Tsf.DeployContainerGroup("deployContainerGroup", new()
     ///     {
-    ///         var deployContainerGroup = new Tencentcloud.Tsf.DeployContainerGroup("deployContainerGroup", new Tencentcloud.Tsf.DeployContainerGroupArgs
+    ///         AgentCpuLimit = "0.2",
+    ///         AgentCpuRequest = "0.1",
+    ///         AgentMemLimit = "400",
+    ///         AgentMemRequest = "125",
+    ///         CpuLimit = "0.5",
+    ///         CpuRequest = "0.25",
+    ///         DeployAgent = true,
+    ///         DoNotStart = false,
+    ///         GroupId = "group-yqml6w3a",
+    ///         HealthCheckSettings = new Tencentcloud.Tsf.Inputs.DeployContainerGroupHealthCheckSettingsArgs
     ///         {
-    ///             AgentCpuLimit = "0.2",
-    ///             AgentCpuRequest = "0.1",
-    ///             AgentMemLimit = "400",
-    ///             AgentMemRequest = "125",
-    ///             CpuLimit = "0.5",
-    ///             CpuRequest = "0.25",
-    ///             DeployAgent = true,
-    ///             DoNotStart = false,
-    ///             GroupId = "group-yqml6w3a",
-    ///             HealthCheckSettings = new Tencentcloud.Tsf.Inputs.DeployContainerGroupHealthCheckSettingsArgs
+    ///             ReadinessProbe = new Tencentcloud.Tsf.Inputs.DeployContainerGroupHealthCheckSettingsReadinessProbeArgs
     ///             {
-    ///                 ReadinessProbe = new Tencentcloud.Tsf.Inputs.DeployContainerGroupHealthCheckSettingsReadinessProbeArgs
+    ///                 ActionType = "TCP",
+    ///                 FailureThreshold = 3,
+    ///                 InitialDelaySeconds = 0,
+    ///                 Path = "/",
+    ///                 PeriodSeconds = 30,
+    ///                 Port = 80,
+    ///                 Scheme = "HTTP",
+    ///                 SuccessThreshold = 1,
+    ///                 TimeoutSeconds = 3,
+    ///                 Type = "TSF_DEFAULT",
+    ///             },
+    ///         },
+    ///         InstanceNum = 1,
+    ///         JvmOpts = "-Xms128m -Xmx512m -XX:MetaspaceSize=128m -XX:MaxMetaspaceSize=512m",
+    ///         MaxSurge = "25%",
+    ///         MaxUnavailable = "0",
+    ///         MemLimit = "1280",
+    ///         MemRequest = "640",
+    ///         RepoType = "personal",
+    ///         Reponame = "tsf_100011913960/terraform",
+    ///         SchedulingStrategy = new Tencentcloud.Tsf.Inputs.DeployContainerGroupSchedulingStrategyArgs
+    ///         {
+    ///             Type = "NONE",
+    ///         },
+    ///         Server = "ccr.ccs.tencentyun.com",
+    ///         ServiceSetting = new Tencentcloud.Tsf.Inputs.DeployContainerGroupServiceSettingArgs
+    ///         {
+    ///             AccessType = 1,
+    ///             AllowDeleteService = true,
+    ///             DisableService = false,
+    ///             HeadlessService = false,
+    ///             OpenSessionAffinity = false,
+    ///             ProtocolPorts = new[]
+    ///             {
+    ///                 new Tencentcloud.Tsf.Inputs.DeployContainerGroupServiceSettingProtocolPortArgs
     ///                 {
-    ///                     ActionType = "TCP",
-    ///                     FailureThreshold = 3,
-    ///                     InitialDelaySeconds = 0,
-    ///                     Path = "/",
-    ///                     PeriodSeconds = 30,
-    ///                     Port = 80,
-    ///                     Scheme = "HTTP",
-    ///                     SuccessThreshold = 1,
-    ///                     TimeoutSeconds = 3,
-    ///                     Type = "TSF_DEFAULT",
+    ///                     NodePort = 30001,
+    ///                     Port = 18081,
+    ///                     Protocol = "TCP",
+    ///                     TargetPort = 18081,
     ///                 },
     ///             },
-    ///             InstanceNum = 1,
-    ///             JvmOpts = "-Xms128m -Xmx512m -XX:MetaspaceSize=128m -XX:MaxMetaspaceSize=512m",
-    ///             MaxSurge = "25%",
-    ///             MaxUnavailable = "0",
-    ///             MemLimit = "1280",
-    ///             MemRequest = "640",
-    ///             RepoType = "personal",
-    ///             Reponame = "tsf_100011913960/terraform",
-    ///             SchedulingStrategy = new Tencentcloud.Tsf.Inputs.DeployContainerGroupSchedulingStrategyArgs
-    ///             {
-    ///                 Type = "NONE",
-    ///             },
-    ///             Server = "ccr.ccs.tencentyun.com",
-    ///             ServiceSetting = new Tencentcloud.Tsf.Inputs.DeployContainerGroupServiceSettingArgs
-    ///             {
-    ///                 AccessType = 1,
-    ///                 AllowDeleteService = true,
-    ///                 DisableService = false,
-    ///                 HeadlessService = false,
-    ///                 OpenSessionAffinity = false,
-    ///                 ProtocolPorts = 
-    ///                 {
-    ///                     new Tencentcloud.Tsf.Inputs.DeployContainerGroupServiceSettingProtocolPortArgs
-    ///                     {
-    ///                         NodePort = 30001,
-    ///                         Port = 18081,
-    ///                         Protocol = "TCP",
-    ///                         TargetPort = 18081,
-    ///                     },
-    ///                 },
-    ///                 SessionAffinityTimeoutSeconds = 10800,
-    ///                 SubnetId = "",
-    ///             },
-    ///             TagName = "terraform-only-1",
-    ///             UpdateIvl = 10,
-    ///             UpdateType = 1,
-    ///             VolumeClean = false,
-    ///             WarmupSetting = new Tencentcloud.Tsf.Inputs.DeployContainerGroupWarmupSettingArgs
-    ///             {
-    ///                 Enabled = false,
-    ///             },
-    ///         });
-    ///     }
+    ///             SessionAffinityTimeoutSeconds = 10800,
+    ///             SubnetId = "",
+    ///         },
+    ///         TagName = "terraform-only-1",
+    ///         UpdateIvl = 10,
+    ///         UpdateType = 1,
+    ///         VolumeClean = false,
+    ///         WarmupSetting = new Tencentcloud.Tsf.Inputs.DeployContainerGroupWarmupSettingArgs
+    ///         {
+    ///             Enabled = false,
+    ///         },
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Tsf/deployContainerGroup:DeployContainerGroup")]
-    public partial class DeployContainerGroup : Pulumi.CustomResource
+    public partial class DeployContainerGroup : global::Pulumi.CustomResource
     {
         /// <summary>
         /// The maximum number of CPU cores allocated to the agent container corresponds to the limit field in Kubernetes.
@@ -361,7 +362,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf
         }
     }
 
-    public sealed class DeployContainerGroupArgs : Pulumi.ResourceArgs
+    public sealed class DeployContainerGroupArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// The maximum number of CPU cores allocated to the agent container corresponds to the limit field in Kubernetes.
@@ -606,9 +607,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf
         public DeployContainerGroupArgs()
         {
         }
+        public static new DeployContainerGroupArgs Empty => new DeployContainerGroupArgs();
     }
 
-    public sealed class DeployContainerGroupState : Pulumi.ResourceArgs
+    public sealed class DeployContainerGroupState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// The maximum number of CPU cores allocated to the agent container corresponds to the limit field in Kubernetes.
@@ -853,5 +855,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf
         public DeployContainerGroupState()
         {
         }
+        public static new DeployContainerGroupState Empty => new DeployContainerGroupState();
     }
 }

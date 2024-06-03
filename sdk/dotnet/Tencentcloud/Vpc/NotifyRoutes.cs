@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
 {
     [TencentcloudResourceType("tencentcloud:Vpc/notifyRoutes:NotifyRoutes")]
-    public partial class NotifyRoutes : Pulumi.CustomResource
+    public partial class NotifyRoutes : global::Pulumi.CustomResource
     {
         /// <summary>
         /// If published to vbc.
@@ -76,7 +76,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         }
     }
 
-    public sealed class NotifyRoutesArgs : Pulumi.ResourceArgs
+    public sealed class NotifyRoutesArgs : global::Pulumi.ResourceArgs
     {
         [Input("routeItemIds", required: true)]
         private InputList<string>? _routeItemIds;
@@ -99,9 +99,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         public NotifyRoutesArgs()
         {
         }
+        public static new NotifyRoutesArgs Empty => new NotifyRoutesArgs();
     }
 
-    public sealed class NotifyRoutesState : Pulumi.ResourceArgs
+    public sealed class NotifyRoutesState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// If published to vbc.
@@ -130,5 +131,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         public NotifyRoutesState()
         {
         }
+        public static new NotifyRoutesState Empty => new NotifyRoutesState();
     }
 }

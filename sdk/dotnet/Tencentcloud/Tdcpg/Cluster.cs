@@ -17,44 +17,45 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdcpg
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var cluster = new Tencentcloud.Tdcpg.Cluster("cluster", new()
     ///     {
-    ///         var cluster = new Tencentcloud.Tdcpg.Cluster("cluster", new Tencentcloud.Tdcpg.ClusterArgs
-    ///         {
-    ///             ClusterName = "cluster_name",
-    ///             Cpu = 1,
-    ///             DbVersion = "10.17",
-    ///             InstanceCount = 1,
-    ///             MasterUserPassword = "",
-    ///             Memory = 1,
-    ///             PayMode = "POSTPAID_BY_HOUR",
-    ///             Period = 1,
-    ///             ProjectId = 0,
-    ///             SubnetId = "subnet_id",
-    ///             VpcId = "vpc_id",
-    ///             Zone = "ap-guangzhou-3",
-    ///         });
-    ///     }
+    ///         ClusterName = "cluster_name",
+    ///         Cpu = 1,
+    ///         DbVersion = "10.17",
+    ///         InstanceCount = 1,
+    ///         MasterUserPassword = "",
+    ///         Memory = 1,
+    ///         PayMode = "POSTPAID_BY_HOUR",
+    ///         Period = 1,
+    ///         ProjectId = 0,
+    ///         SubnetId = "subnet_id",
+    ///         VpcId = "vpc_id",
+    ///         Zone = "ap-guangzhou-3",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// tdcpg cluster can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Tdcpg/cluster:Cluster cluster cluster_id
+    /// $ pulumi import tencentcloud:Tdcpg/cluster:Cluster cluster cluster_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Tdcpg/cluster:Cluster")]
-    public partial class Cluster : Pulumi.CustomResource
+    public partial class Cluster : global::Pulumi.CustomResource
     {
         /// <summary>
         /// cluster name.
@@ -158,6 +159,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdcpg
             {
                 Version = Utilities.Version,
                 PluginDownloadURL = "github://api.github.com/tencentcloudstack",
+                AdditionalSecretOutputs =
+                {
+                    "masterUserPassword",
+                },
             };
             var merged = CustomResourceOptions.Merge(defaultOptions, options);
             // Override the ID if one was specified for consistency with other language SDKs.
@@ -179,7 +184,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdcpg
         }
     }
 
-    public sealed class ClusterArgs : Pulumi.ResourceArgs
+    public sealed class ClusterArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// cluster name.
@@ -205,11 +210,21 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdcpg
         [Input("instanceCount")]
         public Input<int>? InstanceCount { get; set; }
 
+        [Input("masterUserPassword", required: true)]
+        private Input<string>? _masterUserPassword;
+
         /// <summary>
         /// user password.
         /// </summary>
-        [Input("masterUserPassword", required: true)]
-        public Input<string> MasterUserPassword { get; set; } = null!;
+        public Input<string>? MasterUserPassword
+        {
+            get => _masterUserPassword;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _masterUserPassword = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
 
         /// <summary>
         /// memory size.
@@ -262,9 +277,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdcpg
         public ClusterArgs()
         {
         }
+        public static new ClusterArgs Empty => new ClusterArgs();
     }
 
-    public sealed class ClusterState : Pulumi.ResourceArgs
+    public sealed class ClusterState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// cluster name.
@@ -290,11 +306,21 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdcpg
         [Input("instanceCount")]
         public Input<int>? InstanceCount { get; set; }
 
+        [Input("masterUserPassword")]
+        private Input<string>? _masterUserPassword;
+
         /// <summary>
         /// user password.
         /// </summary>
-        [Input("masterUserPassword")]
-        public Input<string>? MasterUserPassword { get; set; }
+        public Input<string>? MasterUserPassword
+        {
+            get => _masterUserPassword;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _masterUserPassword = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
 
         /// <summary>
         /// memory size.
@@ -347,5 +373,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdcpg
         public ClusterState()
         {
         }
+        public static new ClusterState Empty => new ClusterState();
     }
 }

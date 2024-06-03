@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,24 +11,23 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const limits = pulumi.output(tencentcloud.Vpc.getLimits({
+ * const limits = tencentcloud.Vpc.getLimits({
  *     limitTypes: [
  *         "appid-max-vpcs",
  *         "vpc-max-subnets",
  *     ],
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getLimits(args: GetLimitsArgs, opts?: pulumi.InvokeOptions): Promise<GetLimitsResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Vpc/getLimits:getLimits", {
         "limitTypes": args.limitTypes,
         "resultOutputFile": args.resultOutputFile,
@@ -63,9 +63,27 @@ export interface GetLimitsResult {
      */
     readonly vpcLimitSets: outputs.Vpc.GetLimitsVpcLimitSet[];
 }
-
+/**
+ * Use this data source to query detailed information of vpc limits
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const limits = tencentcloud.Vpc.getLimits({
+ *     limitTypes: [
+ *         "appid-max-vpcs",
+ *         "vpc-max-subnets",
+ *     ],
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getLimitsOutput(args: GetLimitsOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetLimitsResult> {
-    return pulumi.output(args).apply(a => getLimits(a, opts))
+    return pulumi.output(args).apply((a: any) => getLimits(a, opts))
 }
 
 /**

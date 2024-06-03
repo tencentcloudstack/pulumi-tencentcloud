@@ -8,40 +8,45 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Use this data source to query detailed information of vpc tenantCcn
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Ccn"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ccn"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ccn"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Ccn.GetTenantInstances(ctx, &ccn.GetTenantInstancesArgs{
-// 			CcnIds: []string{
-// 				"ccn-39lqkygf",
-// 			},
-// 			IsSecurityLocks: []string{
-// 				"true",
-// 			},
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Ccn.GetTenantInstances(ctx, &ccn.GetTenantInstancesArgs{
+//				CcnIds: []string{
+//					"ccn-39lqkygf",
+//				},
+//				IsSecurityLocks: []string{
+//					"true",
+//				},
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 func GetTenantInstances(ctx *pulumi.Context, args *GetTenantInstancesArgs, opts ...pulumi.InvokeOption) (*GetTenantInstancesResult, error) {
-	opts = pkgInvokeDefaultOpts(opts)
+	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetTenantInstancesResult
 	err := ctx.Invoke("tencentcloud:Ccn/getTenantInstances:getTenantInstances", args, &rv, opts...)
 	if err != nil {

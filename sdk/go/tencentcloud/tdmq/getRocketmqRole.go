@@ -8,11 +8,12 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Use this data source to query detailed information of tdmqRocketmq role
 func LookupRocketmqRole(ctx *pulumi.Context, args *LookupRocketmqRoleArgs, opts ...pulumi.InvokeOption) (*LookupRocketmqRoleResult, error) {
-	opts = pkgInvokeDefaultOpts(opts)
+	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv LookupRocketmqRoleResult
 	err := ctx.Invoke("tencentcloud:Tdmq/getRocketmqRole:getRocketmqRole", args, &rv, opts...)
 	if err != nil {

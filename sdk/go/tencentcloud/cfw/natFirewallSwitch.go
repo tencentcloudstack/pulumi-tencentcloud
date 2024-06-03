@@ -7,82 +7,93 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a cfw natFirewallSwitch
 //
 // ## Example Usage
+//
 // ### Turn off switch
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Cfw"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cfw"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cfw"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		exampleNatFwSwitches, err := Cfw.GetNatFwSwitches(ctx, &cfw.GetNatFwSwitchesArgs{
-// 			NatInsId: pulumi.StringRef("cfwnat-18d2ba18"),
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_, err = Cfw.NewNatFirewallSwitch(ctx, "exampleNatFirewallSwitch", &Cfw.NatFirewallSwitchArgs{
-// 			NatInsId: pulumi.String(exampleNatFwSwitches.Id),
-// 			SubnetId: pulumi.String(exampleNatFwSwitches.Datas[0].SubnetId),
-// 			Enable:   pulumi.Int(0),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			exampleNatFwSwitches, err := Cfw.GetNatFwSwitches(ctx, &cfw.GetNatFwSwitchesArgs{
+//				NatInsId: pulumi.StringRef("cfwnat-18d2ba18"),
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			_, err = Cfw.NewNatFirewallSwitch(ctx, "exampleNatFirewallSwitch", &Cfw.NatFirewallSwitchArgs{
+//				NatInsId: pulumi.String(exampleNatFwSwitches.Id),
+//				SubnetId: pulumi.String(exampleNatFwSwitches.Datas[0].SubnetId),
+//				Enable:   pulumi.Int(0),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
+//
 // ### Or turn on switch
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Cfw"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cfw"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cfw"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		exampleNatFwSwitches, err := Cfw.GetNatFwSwitches(ctx, &cfw.GetNatFwSwitchesArgs{
-// 			NatInsId: pulumi.StringRef("cfwnat-18d2ba18"),
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_, err = Cfw.NewNatFirewallSwitch(ctx, "exampleNatFirewallSwitch", &Cfw.NatFirewallSwitchArgs{
-// 			NatInsId: pulumi.String(exampleNatFwSwitches.Id),
-// 			SubnetId: pulumi.String(exampleNatFwSwitches.Datas[0].SubnetId),
-// 			Enable:   pulumi.Int(1),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			exampleNatFwSwitches, err := Cfw.GetNatFwSwitches(ctx, &cfw.GetNatFwSwitchesArgs{
+//				NatInsId: pulumi.StringRef("cfwnat-18d2ba18"),
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			_, err = Cfw.NewNatFirewallSwitch(ctx, "exampleNatFirewallSwitch", &Cfw.NatFirewallSwitchArgs{
+//				NatInsId: pulumi.String(exampleNatFwSwitches.Id),
+//				SubnetId: pulumi.String(exampleNatFwSwitches.Datas[0].SubnetId),
+//				Enable:   pulumi.Int(1),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // cfw nat_firewall_switch can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Cfw/natFirewallSwitch:NatFirewallSwitch example cfwnat-18d2ba18#subnet-ef7wyymr
+// $ pulumi import tencentcloud:Cfw/natFirewallSwitch:NatFirewallSwitch example cfwnat-18d2ba18#subnet-ef7wyymr
 // ```
 type NatFirewallSwitch struct {
 	pulumi.CustomResourceState
@@ -111,7 +122,7 @@ func NewNatFirewallSwitch(ctx *pulumi.Context,
 	if args.SubnetId == nil {
 		return nil, errors.New("invalid value for required argument 'SubnetId'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource NatFirewallSwitch
 	err := ctx.RegisterResource("tencentcloud:Cfw/natFirewallSwitch:NatFirewallSwitch", name, args, &resource, opts...)
 	if err != nil {
@@ -200,7 +211,7 @@ func (i *NatFirewallSwitch) ToNatFirewallSwitchOutputWithContext(ctx context.Con
 // NatFirewallSwitchArrayInput is an input type that accepts NatFirewallSwitchArray and NatFirewallSwitchArrayOutput values.
 // You can construct a concrete instance of `NatFirewallSwitchArrayInput` via:
 //
-//          NatFirewallSwitchArray{ NatFirewallSwitchArgs{...} }
+//	NatFirewallSwitchArray{ NatFirewallSwitchArgs{...} }
 type NatFirewallSwitchArrayInput interface {
 	pulumi.Input
 
@@ -225,7 +236,7 @@ func (i NatFirewallSwitchArray) ToNatFirewallSwitchArrayOutputWithContext(ctx co
 // NatFirewallSwitchMapInput is an input type that accepts NatFirewallSwitchMap and NatFirewallSwitchMapOutput values.
 // You can construct a concrete instance of `NatFirewallSwitchMapInput` via:
 //
-//          NatFirewallSwitchMap{ "key": NatFirewallSwitchArgs{...} }
+//	NatFirewallSwitchMap{ "key": NatFirewallSwitchArgs{...} }
 type NatFirewallSwitchMapInput interface {
 	pulumi.Input
 

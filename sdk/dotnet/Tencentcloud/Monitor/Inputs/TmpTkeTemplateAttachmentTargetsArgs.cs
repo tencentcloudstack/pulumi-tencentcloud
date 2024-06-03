@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor.Inputs
 {
 
-    public sealed class TmpTkeTemplateAttachmentTargetsArgs : Pulumi.ResourceArgs
+    public sealed class TmpTkeTemplateAttachmentTargetsArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// ID of the cluster.
@@ -64,5 +64,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor.Inputs
         public TmpTkeTemplateAttachmentTargetsArgs()
         {
         }
+        public static new TmpTkeTemplateAttachmentTargetsArgs Empty => new TmpTkeTemplateAttachmentTargetsArgs();
     }
 }

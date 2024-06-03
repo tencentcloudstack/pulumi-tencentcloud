@@ -15,72 +15,68 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam
         /// <summary>
         /// Use this data source to query detailed information of CAM roles
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var foo = Tencentcloud.Cam.GetRoles.Invoke(new()
         ///     {
-        ///         var foo = Output.Create(Tencentcloud.Cam.GetRoles.InvokeAsync(new Tencentcloud.Cam.GetRolesArgs
-        ///         {
-        ///             RoleId = tencentcloud_cam_role.Foo.Id,
-        ///         }));
-        ///         var bar = Output.Create(Tencentcloud.Cam.GetRoles.InvokeAsync(new Tencentcloud.Cam.GetRolesArgs
-        ///         {
-        ///             Name = "cam-role-test",
-        ///         }));
-        ///     }
+        ///         RoleId = tencentcloud_cam_role.Foo.Id,
+        ///     });
         /// 
-        /// }
+        ///     var bar = Tencentcloud.Cam.GetRoles.Invoke(new()
+        ///     {
+        ///         Name = "cam-role-test",
+        ///     });
+        /// 
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetRolesResult> InvokeAsync(GetRolesArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetRolesResult>("tencentcloud:Cam/getRoles:getRoles", args ?? new GetRolesArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetRolesResult>("tencentcloud:Cam/getRoles:getRoles", args ?? new GetRolesArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of CAM roles
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var foo = Tencentcloud.Cam.GetRoles.Invoke(new()
         ///     {
-        ///         var foo = Output.Create(Tencentcloud.Cam.GetRoles.InvokeAsync(new Tencentcloud.Cam.GetRolesArgs
-        ///         {
-        ///             RoleId = tencentcloud_cam_role.Foo.Id,
-        ///         }));
-        ///         var bar = Output.Create(Tencentcloud.Cam.GetRoles.InvokeAsync(new Tencentcloud.Cam.GetRolesArgs
-        ///         {
-        ///             Name = "cam-role-test",
-        ///         }));
-        ///     }
+        ///         RoleId = tencentcloud_cam_role.Foo.Id,
+        ///     });
         /// 
-        /// }
+        ///     var bar = Tencentcloud.Cam.GetRoles.Invoke(new()
+        ///     {
+        ///         Name = "cam-role-test",
+        ///     });
+        /// 
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetRolesResult> Invoke(GetRolesInvokeArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetRolesResult>("tencentcloud:Cam/getRoles:getRoles", args ?? new GetRolesInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetRolesResult>("tencentcloud:Cam/getRoles:getRoles", args ?? new GetRolesInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetRolesArgs : Pulumi.InvokeArgs
+    public sealed class GetRolesArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// The description of the CAM role to be queried.
@@ -109,9 +105,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam
         public GetRolesArgs()
         {
         }
+        public static new GetRolesArgs Empty => new GetRolesArgs();
     }
 
-    public sealed class GetRolesInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetRolesInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// The description of the CAM role to be queried.
@@ -140,6 +137,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam
         public GetRolesInvokeArgs()
         {
         }
+        public static new GetRolesInvokeArgs Empty => new GetRolesInvokeArgs();
     }
 
 

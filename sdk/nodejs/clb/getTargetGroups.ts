@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,10 +11,11 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const clbBasic = new tencentcloud.clb.Instance("clbBasic", {
  *     networkType: "OPEN",
@@ -45,14 +47,12 @@ import * as utilities from "../utilities";
  *     targetGroupId: test.id,
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getTargetGroups(args?: GetTargetGroupsArgs, opts?: pulumi.InvokeOptions): Promise<GetTargetGroupsResult> {
     args = args || {};
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Clb/getTargetGroups:getTargetGroups", {
         "resultOutputFile": args.resultOutputFile,
         "targetGroupId": args.targetGroupId,
@@ -109,9 +109,51 @@ export interface GetTargetGroupsResult {
      */
     readonly vpcId?: string;
 }
-
+/**
+ * Use this data source to query target group information.
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
+ *
+ * const clbBasic = new tencentcloud.clb.Instance("clbBasic", {
+ *     networkType: "OPEN",
+ *     clbName: "tf-clb-rule-basic",
+ * });
+ * const listenerBasic = new tencentcloud.clb.Listener("listenerBasic", {
+ *     clbId: clbBasic.id,
+ *     port: 1,
+ *     protocol: "HTTP",
+ *     listenerName: "listener_basic",
+ * });
+ * const ruleBasic = new tencentcloud.clb.ListenerRule("ruleBasic", {
+ *     clbId: clbBasic.id,
+ *     listenerId: listenerBasic.listenerId,
+ *     domain: "abc.com",
+ *     url: "/",
+ *     sessionExpireTime: 30,
+ *     scheduler: "WRR",
+ *     targetType: "TARGETGROUP",
+ * });
+ * const test = new tencentcloud.clb.TargetGroup("test", {targetGroupName: "test-target-keep-1"});
+ * const group = new tencentcloud.clb.TargetGroupAttachment("group", {
+ *     clbId: clbBasic.id,
+ *     listenerId: listenerBasic.listenerId,
+ *     ruleId: ruleBasic.ruleId,
+ *     targrtGroupId: test.id,
+ * });
+ * const targetGroupInfoId = tencentcloud.Clb.getTargetGroupsOutput({
+ *     targetGroupId: test.id,
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getTargetGroupsOutput(args?: GetTargetGroupsOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetTargetGroupsResult> {
-    return pulumi.output(args).apply(a => getTargetGroups(a, opts))
+    return pulumi.output(args).apply((a: any) => getTargetGroups(a, opts))
 }
 
 /**

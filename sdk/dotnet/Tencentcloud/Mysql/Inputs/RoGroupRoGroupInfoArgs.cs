@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql.Inputs
 {
 
-    public sealed class RoGroupRoGroupInfoArgs : Pulumi.ResourceArgs
+    public sealed class RoGroupRoGroupInfoArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// The minimum number of reserved instances. It can be set to any value less than or equal to the number of RO instances under this RO group. Note that if the setting value is greater than the number of RO instances, it will not be removed; if it is set to 0, all instances whose latency exceeds the limit will be removed.
@@ -52,5 +52,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql.Inputs
         public RoGroupRoGroupInfoArgs()
         {
         }
+        public static new RoGroupRoGroupInfoArgs Empty => new RoGroupRoGroupInfoArgs();
     }
 }

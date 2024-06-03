@@ -7,44 +7,50 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a sqlserver increBackupMigration
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Sqlserver"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Sqlserver"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Sqlserver.NewIncreBackupMigration(ctx, "example", &Sqlserver.IncreBackupMigrationArgs{
-// 			BackupFiles:       pulumi.StringArray{},
-// 			BackupMigrationId: pulumi.String("mssql-backup-migration-9tj0sxnz"),
-// 			InstanceId:        pulumi.String("mssql-4gmc5805"),
-// 			IsRecovery:        pulumi.String("YES"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Sqlserver.NewIncreBackupMigration(ctx, "example", &Sqlserver.IncreBackupMigrationArgs{
+//				BackupFiles:       pulumi.StringArray{},
+//				BackupMigrationId: pulumi.String("mssql-backup-migration-9tj0sxnz"),
+//				InstanceId:        pulumi.String("mssql-4gmc5805"),
+//				IsRecovery:        pulumi.String("YES"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // sqlserver incre_backup_migration can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Sqlserver/increBackupMigration:IncreBackupMigration incre_backup_migration incre_backup_migration_id
+// $ pulumi import tencentcloud:Sqlserver/increBackupMigration:IncreBackupMigration incre_backup_migration incre_backup_migration_id
 // ```
 type IncreBackupMigration struct {
 	pulumi.CustomResourceState
@@ -74,7 +80,7 @@ func NewIncreBackupMigration(ctx *pulumi.Context,
 	if args.InstanceId == nil {
 		return nil, errors.New("invalid value for required argument 'InstanceId'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource IncreBackupMigration
 	err := ctx.RegisterResource("tencentcloud:Sqlserver/increBackupMigration:IncreBackupMigration", name, args, &resource, opts...)
 	if err != nil {
@@ -175,7 +181,7 @@ func (i *IncreBackupMigration) ToIncreBackupMigrationOutputWithContext(ctx conte
 // IncreBackupMigrationArrayInput is an input type that accepts IncreBackupMigrationArray and IncreBackupMigrationArrayOutput values.
 // You can construct a concrete instance of `IncreBackupMigrationArrayInput` via:
 //
-//          IncreBackupMigrationArray{ IncreBackupMigrationArgs{...} }
+//	IncreBackupMigrationArray{ IncreBackupMigrationArgs{...} }
 type IncreBackupMigrationArrayInput interface {
 	pulumi.Input
 
@@ -200,7 +206,7 @@ func (i IncreBackupMigrationArray) ToIncreBackupMigrationArrayOutputWithContext(
 // IncreBackupMigrationMapInput is an input type that accepts IncreBackupMigrationMap and IncreBackupMigrationMapOutput values.
 // You can construct a concrete instance of `IncreBackupMigrationMapInput` via:
 //
-//          IncreBackupMigrationMap{ "key": IncreBackupMigrationArgs{...} }
+//	IncreBackupMigrationMap{ "key": IncreBackupMigrationArgs{...} }
 type IncreBackupMigrationMapInput interface {
 	pulumi.Input
 

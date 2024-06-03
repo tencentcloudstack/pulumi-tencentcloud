@@ -5,70 +5,201 @@ import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
 // Export members:
-export * from "./accessKey";
-export * from "./getAccountSummary";
-export * from "./getGroupMemberships";
-export * from "./getGroupPolicyAttachments";
-export * from "./getGroupUserAccount";
-export * from "./getGroups";
-export * from "./getListAttachedUserPolicy";
-export * from "./getListEntitiesForPolicy";
-export * from "./getOidcConfig";
-export * from "./getPolicies";
-export * from "./getPolicyGrantingServiceAccess";
-export * from "./getRolePolicyAttachments";
-export * from "./getRoles";
-export * from "./getSamlProviders";
-export * from "./getSecretLastUsedTime";
-export * from "./getUserPolicyAttachments";
-export * from "./getUsers";
-export * from "./group";
-export * from "./groupMembership";
-export * from "./groupPolicyAttachment";
-export * from "./mfaFlag";
-export * from "./oidcSso";
-export * from "./policy";
-export * from "./policyByName";
-export * from "./policyVersion";
-export * from "./role";
-export * from "./roleByName";
-export * from "./rolePermissionBoundaryAttachment";
-export * from "./rolePolicyAttachment";
-export * from "./rolePolicyAttachmentByName";
-export * from "./roleSso";
-export * from "./samlProvider";
-export * from "./serviceLinkedRole";
-export * from "./setPolicyVersionConfig";
-export * from "./tagRoleAttachment";
-export * from "./user";
-export * from "./userPermissionBoundaryAttachment";
-export * from "./userPolicyAttachment";
-export * from "./userSamlConfig";
+export { AccessKeyArgs, AccessKeyState } from "./accessKey";
+export type AccessKey = import("./accessKey").AccessKey;
+export const AccessKey: typeof import("./accessKey").AccessKey = null as any;
+utilities.lazyLoad(exports, ["AccessKey"], () => require("./accessKey"));
 
-// Import resources to register:
-import { AccessKey } from "./accessKey";
-import { Group } from "./group";
-import { GroupMembership } from "./groupMembership";
-import { GroupPolicyAttachment } from "./groupPolicyAttachment";
-import { MfaFlag } from "./mfaFlag";
-import { OidcSso } from "./oidcSso";
-import { Policy } from "./policy";
-import { PolicyByName } from "./policyByName";
-import { PolicyVersion } from "./policyVersion";
-import { Role } from "./role";
-import { RoleByName } from "./roleByName";
-import { RolePermissionBoundaryAttachment } from "./rolePermissionBoundaryAttachment";
-import { RolePolicyAttachment } from "./rolePolicyAttachment";
-import { RolePolicyAttachmentByName } from "./rolePolicyAttachmentByName";
-import { RoleSso } from "./roleSso";
-import { SamlProvider } from "./samlProvider";
-import { ServiceLinkedRole } from "./serviceLinkedRole";
-import { SetPolicyVersionConfig } from "./setPolicyVersionConfig";
-import { TagRoleAttachment } from "./tagRoleAttachment";
-import { User } from "./user";
-import { UserPermissionBoundaryAttachment } from "./userPermissionBoundaryAttachment";
-import { UserPolicyAttachment } from "./userPolicyAttachment";
-import { UserSamlConfig } from "./userSamlConfig";
+export { GetAccountSummaryArgs, GetAccountSummaryResult, GetAccountSummaryOutputArgs } from "./getAccountSummary";
+export const getAccountSummary: typeof import("./getAccountSummary").getAccountSummary = null as any;
+export const getAccountSummaryOutput: typeof import("./getAccountSummary").getAccountSummaryOutput = null as any;
+utilities.lazyLoad(exports, ["getAccountSummary","getAccountSummaryOutput"], () => require("./getAccountSummary"));
+
+export { GetGroupMembershipsArgs, GetGroupMembershipsResult, GetGroupMembershipsOutputArgs } from "./getGroupMemberships";
+export const getGroupMemberships: typeof import("./getGroupMemberships").getGroupMemberships = null as any;
+export const getGroupMembershipsOutput: typeof import("./getGroupMemberships").getGroupMembershipsOutput = null as any;
+utilities.lazyLoad(exports, ["getGroupMemberships","getGroupMembershipsOutput"], () => require("./getGroupMemberships"));
+
+export { GetGroupPolicyAttachmentsArgs, GetGroupPolicyAttachmentsResult, GetGroupPolicyAttachmentsOutputArgs } from "./getGroupPolicyAttachments";
+export const getGroupPolicyAttachments: typeof import("./getGroupPolicyAttachments").getGroupPolicyAttachments = null as any;
+export const getGroupPolicyAttachmentsOutput: typeof import("./getGroupPolicyAttachments").getGroupPolicyAttachmentsOutput = null as any;
+utilities.lazyLoad(exports, ["getGroupPolicyAttachments","getGroupPolicyAttachmentsOutput"], () => require("./getGroupPolicyAttachments"));
+
+export { GetGroupUserAccountArgs, GetGroupUserAccountResult, GetGroupUserAccountOutputArgs } from "./getGroupUserAccount";
+export const getGroupUserAccount: typeof import("./getGroupUserAccount").getGroupUserAccount = null as any;
+export const getGroupUserAccountOutput: typeof import("./getGroupUserAccount").getGroupUserAccountOutput = null as any;
+utilities.lazyLoad(exports, ["getGroupUserAccount","getGroupUserAccountOutput"], () => require("./getGroupUserAccount"));
+
+export { GetGroupsArgs, GetGroupsResult, GetGroupsOutputArgs } from "./getGroups";
+export const getGroups: typeof import("./getGroups").getGroups = null as any;
+export const getGroupsOutput: typeof import("./getGroups").getGroupsOutput = null as any;
+utilities.lazyLoad(exports, ["getGroups","getGroupsOutput"], () => require("./getGroups"));
+
+export { GetListAttachedUserPolicyArgs, GetListAttachedUserPolicyResult, GetListAttachedUserPolicyOutputArgs } from "./getListAttachedUserPolicy";
+export const getListAttachedUserPolicy: typeof import("./getListAttachedUserPolicy").getListAttachedUserPolicy = null as any;
+export const getListAttachedUserPolicyOutput: typeof import("./getListAttachedUserPolicy").getListAttachedUserPolicyOutput = null as any;
+utilities.lazyLoad(exports, ["getListAttachedUserPolicy","getListAttachedUserPolicyOutput"], () => require("./getListAttachedUserPolicy"));
+
+export { GetListEntitiesForPolicyArgs, GetListEntitiesForPolicyResult, GetListEntitiesForPolicyOutputArgs } from "./getListEntitiesForPolicy";
+export const getListEntitiesForPolicy: typeof import("./getListEntitiesForPolicy").getListEntitiesForPolicy = null as any;
+export const getListEntitiesForPolicyOutput: typeof import("./getListEntitiesForPolicy").getListEntitiesForPolicyOutput = null as any;
+utilities.lazyLoad(exports, ["getListEntitiesForPolicy","getListEntitiesForPolicyOutput"], () => require("./getListEntitiesForPolicy"));
+
+export { GetOidcConfigArgs, GetOidcConfigResult, GetOidcConfigOutputArgs } from "./getOidcConfig";
+export const getOidcConfig: typeof import("./getOidcConfig").getOidcConfig = null as any;
+export const getOidcConfigOutput: typeof import("./getOidcConfig").getOidcConfigOutput = null as any;
+utilities.lazyLoad(exports, ["getOidcConfig","getOidcConfigOutput"], () => require("./getOidcConfig"));
+
+export { GetPoliciesArgs, GetPoliciesResult, GetPoliciesOutputArgs } from "./getPolicies";
+export const getPolicies: typeof import("./getPolicies").getPolicies = null as any;
+export const getPoliciesOutput: typeof import("./getPolicies").getPoliciesOutput = null as any;
+utilities.lazyLoad(exports, ["getPolicies","getPoliciesOutput"], () => require("./getPolicies"));
+
+export { GetPolicyGrantingServiceAccessArgs, GetPolicyGrantingServiceAccessResult, GetPolicyGrantingServiceAccessOutputArgs } from "./getPolicyGrantingServiceAccess";
+export const getPolicyGrantingServiceAccess: typeof import("./getPolicyGrantingServiceAccess").getPolicyGrantingServiceAccess = null as any;
+export const getPolicyGrantingServiceAccessOutput: typeof import("./getPolicyGrantingServiceAccess").getPolicyGrantingServiceAccessOutput = null as any;
+utilities.lazyLoad(exports, ["getPolicyGrantingServiceAccess","getPolicyGrantingServiceAccessOutput"], () => require("./getPolicyGrantingServiceAccess"));
+
+export { GetRolePolicyAttachmentsArgs, GetRolePolicyAttachmentsResult, GetRolePolicyAttachmentsOutputArgs } from "./getRolePolicyAttachments";
+export const getRolePolicyAttachments: typeof import("./getRolePolicyAttachments").getRolePolicyAttachments = null as any;
+export const getRolePolicyAttachmentsOutput: typeof import("./getRolePolicyAttachments").getRolePolicyAttachmentsOutput = null as any;
+utilities.lazyLoad(exports, ["getRolePolicyAttachments","getRolePolicyAttachmentsOutput"], () => require("./getRolePolicyAttachments"));
+
+export { GetRolesArgs, GetRolesResult, GetRolesOutputArgs } from "./getRoles";
+export const getRoles: typeof import("./getRoles").getRoles = null as any;
+export const getRolesOutput: typeof import("./getRoles").getRolesOutput = null as any;
+utilities.lazyLoad(exports, ["getRoles","getRolesOutput"], () => require("./getRoles"));
+
+export { GetSamlProvidersArgs, GetSamlProvidersResult, GetSamlProvidersOutputArgs } from "./getSamlProviders";
+export const getSamlProviders: typeof import("./getSamlProviders").getSamlProviders = null as any;
+export const getSamlProvidersOutput: typeof import("./getSamlProviders").getSamlProvidersOutput = null as any;
+utilities.lazyLoad(exports, ["getSamlProviders","getSamlProvidersOutput"], () => require("./getSamlProviders"));
+
+export { GetSecretLastUsedTimeArgs, GetSecretLastUsedTimeResult, GetSecretLastUsedTimeOutputArgs } from "./getSecretLastUsedTime";
+export const getSecretLastUsedTime: typeof import("./getSecretLastUsedTime").getSecretLastUsedTime = null as any;
+export const getSecretLastUsedTimeOutput: typeof import("./getSecretLastUsedTime").getSecretLastUsedTimeOutput = null as any;
+utilities.lazyLoad(exports, ["getSecretLastUsedTime","getSecretLastUsedTimeOutput"], () => require("./getSecretLastUsedTime"));
+
+export { GetUserPolicyAttachmentsArgs, GetUserPolicyAttachmentsResult, GetUserPolicyAttachmentsOutputArgs } from "./getUserPolicyAttachments";
+export const getUserPolicyAttachments: typeof import("./getUserPolicyAttachments").getUserPolicyAttachments = null as any;
+export const getUserPolicyAttachmentsOutput: typeof import("./getUserPolicyAttachments").getUserPolicyAttachmentsOutput = null as any;
+utilities.lazyLoad(exports, ["getUserPolicyAttachments","getUserPolicyAttachmentsOutput"], () => require("./getUserPolicyAttachments"));
+
+export { GetUsersArgs, GetUsersResult, GetUsersOutputArgs } from "./getUsers";
+export const getUsers: typeof import("./getUsers").getUsers = null as any;
+export const getUsersOutput: typeof import("./getUsers").getUsersOutput = null as any;
+utilities.lazyLoad(exports, ["getUsers","getUsersOutput"], () => require("./getUsers"));
+
+export { GroupArgs, GroupState } from "./group";
+export type Group = import("./group").Group;
+export const Group: typeof import("./group").Group = null as any;
+utilities.lazyLoad(exports, ["Group"], () => require("./group"));
+
+export { GroupMembershipArgs, GroupMembershipState } from "./groupMembership";
+export type GroupMembership = import("./groupMembership").GroupMembership;
+export const GroupMembership: typeof import("./groupMembership").GroupMembership = null as any;
+utilities.lazyLoad(exports, ["GroupMembership"], () => require("./groupMembership"));
+
+export { GroupPolicyAttachmentArgs, GroupPolicyAttachmentState } from "./groupPolicyAttachment";
+export type GroupPolicyAttachment = import("./groupPolicyAttachment").GroupPolicyAttachment;
+export const GroupPolicyAttachment: typeof import("./groupPolicyAttachment").GroupPolicyAttachment = null as any;
+utilities.lazyLoad(exports, ["GroupPolicyAttachment"], () => require("./groupPolicyAttachment"));
+
+export { MfaFlagArgs, MfaFlagState } from "./mfaFlag";
+export type MfaFlag = import("./mfaFlag").MfaFlag;
+export const MfaFlag: typeof import("./mfaFlag").MfaFlag = null as any;
+utilities.lazyLoad(exports, ["MfaFlag"], () => require("./mfaFlag"));
+
+export { OidcSsoArgs, OidcSsoState } from "./oidcSso";
+export type OidcSso = import("./oidcSso").OidcSso;
+export const OidcSso: typeof import("./oidcSso").OidcSso = null as any;
+utilities.lazyLoad(exports, ["OidcSso"], () => require("./oidcSso"));
+
+export { PolicyArgs, PolicyState } from "./policy";
+export type Policy = import("./policy").Policy;
+export const Policy: typeof import("./policy").Policy = null as any;
+utilities.lazyLoad(exports, ["Policy"], () => require("./policy"));
+
+export { PolicyByNameArgs, PolicyByNameState } from "./policyByName";
+export type PolicyByName = import("./policyByName").PolicyByName;
+export const PolicyByName: typeof import("./policyByName").PolicyByName = null as any;
+utilities.lazyLoad(exports, ["PolicyByName"], () => require("./policyByName"));
+
+export { PolicyVersionArgs, PolicyVersionState } from "./policyVersion";
+export type PolicyVersion = import("./policyVersion").PolicyVersion;
+export const PolicyVersion: typeof import("./policyVersion").PolicyVersion = null as any;
+utilities.lazyLoad(exports, ["PolicyVersion"], () => require("./policyVersion"));
+
+export { RoleArgs, RoleState } from "./role";
+export type Role = import("./role").Role;
+export const Role: typeof import("./role").Role = null as any;
+utilities.lazyLoad(exports, ["Role"], () => require("./role"));
+
+export { RoleByNameArgs, RoleByNameState } from "./roleByName";
+export type RoleByName = import("./roleByName").RoleByName;
+export const RoleByName: typeof import("./roleByName").RoleByName = null as any;
+utilities.lazyLoad(exports, ["RoleByName"], () => require("./roleByName"));
+
+export { RolePermissionBoundaryAttachmentArgs, RolePermissionBoundaryAttachmentState } from "./rolePermissionBoundaryAttachment";
+export type RolePermissionBoundaryAttachment = import("./rolePermissionBoundaryAttachment").RolePermissionBoundaryAttachment;
+export const RolePermissionBoundaryAttachment: typeof import("./rolePermissionBoundaryAttachment").RolePermissionBoundaryAttachment = null as any;
+utilities.lazyLoad(exports, ["RolePermissionBoundaryAttachment"], () => require("./rolePermissionBoundaryAttachment"));
+
+export { RolePolicyAttachmentArgs, RolePolicyAttachmentState } from "./rolePolicyAttachment";
+export type RolePolicyAttachment = import("./rolePolicyAttachment").RolePolicyAttachment;
+export const RolePolicyAttachment: typeof import("./rolePolicyAttachment").RolePolicyAttachment = null as any;
+utilities.lazyLoad(exports, ["RolePolicyAttachment"], () => require("./rolePolicyAttachment"));
+
+export { RolePolicyAttachmentByNameArgs, RolePolicyAttachmentByNameState } from "./rolePolicyAttachmentByName";
+export type RolePolicyAttachmentByName = import("./rolePolicyAttachmentByName").RolePolicyAttachmentByName;
+export const RolePolicyAttachmentByName: typeof import("./rolePolicyAttachmentByName").RolePolicyAttachmentByName = null as any;
+utilities.lazyLoad(exports, ["RolePolicyAttachmentByName"], () => require("./rolePolicyAttachmentByName"));
+
+export { RoleSsoArgs, RoleSsoState } from "./roleSso";
+export type RoleSso = import("./roleSso").RoleSso;
+export const RoleSso: typeof import("./roleSso").RoleSso = null as any;
+utilities.lazyLoad(exports, ["RoleSso"], () => require("./roleSso"));
+
+export { SamlProviderArgs, SamlProviderState } from "./samlProvider";
+export type SamlProvider = import("./samlProvider").SamlProvider;
+export const SamlProvider: typeof import("./samlProvider").SamlProvider = null as any;
+utilities.lazyLoad(exports, ["SamlProvider"], () => require("./samlProvider"));
+
+export { ServiceLinkedRoleArgs, ServiceLinkedRoleState } from "./serviceLinkedRole";
+export type ServiceLinkedRole = import("./serviceLinkedRole").ServiceLinkedRole;
+export const ServiceLinkedRole: typeof import("./serviceLinkedRole").ServiceLinkedRole = null as any;
+utilities.lazyLoad(exports, ["ServiceLinkedRole"], () => require("./serviceLinkedRole"));
+
+export { SetPolicyVersionConfigArgs, SetPolicyVersionConfigState } from "./setPolicyVersionConfig";
+export type SetPolicyVersionConfig = import("./setPolicyVersionConfig").SetPolicyVersionConfig;
+export const SetPolicyVersionConfig: typeof import("./setPolicyVersionConfig").SetPolicyVersionConfig = null as any;
+utilities.lazyLoad(exports, ["SetPolicyVersionConfig"], () => require("./setPolicyVersionConfig"));
+
+export { TagRoleAttachmentArgs, TagRoleAttachmentState } from "./tagRoleAttachment";
+export type TagRoleAttachment = import("./tagRoleAttachment").TagRoleAttachment;
+export const TagRoleAttachment: typeof import("./tagRoleAttachment").TagRoleAttachment = null as any;
+utilities.lazyLoad(exports, ["TagRoleAttachment"], () => require("./tagRoleAttachment"));
+
+export { UserArgs, UserState } from "./user";
+export type User = import("./user").User;
+export const User: typeof import("./user").User = null as any;
+utilities.lazyLoad(exports, ["User"], () => require("./user"));
+
+export { UserPermissionBoundaryAttachmentArgs, UserPermissionBoundaryAttachmentState } from "./userPermissionBoundaryAttachment";
+export type UserPermissionBoundaryAttachment = import("./userPermissionBoundaryAttachment").UserPermissionBoundaryAttachment;
+export const UserPermissionBoundaryAttachment: typeof import("./userPermissionBoundaryAttachment").UserPermissionBoundaryAttachment = null as any;
+utilities.lazyLoad(exports, ["UserPermissionBoundaryAttachment"], () => require("./userPermissionBoundaryAttachment"));
+
+export { UserPolicyAttachmentArgs, UserPolicyAttachmentState } from "./userPolicyAttachment";
+export type UserPolicyAttachment = import("./userPolicyAttachment").UserPolicyAttachment;
+export const UserPolicyAttachment: typeof import("./userPolicyAttachment").UserPolicyAttachment = null as any;
+utilities.lazyLoad(exports, ["UserPolicyAttachment"], () => require("./userPolicyAttachment"));
+
+export { UserSamlConfigArgs, UserSamlConfigState } from "./userSamlConfig";
+export type UserSamlConfig = import("./userSamlConfig").UserSamlConfig;
+export const UserSamlConfig: typeof import("./userSamlConfig").UserSamlConfig = null as any;
+utilities.lazyLoad(exports, ["UserSamlConfig"], () => require("./userSamlConfig"));
+
 
 const _module = {
     version: utilities.getVersion(),

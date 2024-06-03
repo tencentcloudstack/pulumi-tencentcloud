@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Pts.Inputs
 {
 
-    public sealed class ScenarioLoadLoadSpecScriptOriginArgs : Pulumi.ResourceArgs
+    public sealed class ScenarioLoadLoadSpecScriptOriginArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Pressure testing time.
@@ -34,5 +34,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Pts.Inputs
         public ScenarioLoadLoadSpecScriptOriginArgs()
         {
         }
+        public static new ScenarioLoadLoadSpecScriptOriginArgs Empty => new ScenarioLoadLoadSpecScriptOriginArgs();
     }
 }

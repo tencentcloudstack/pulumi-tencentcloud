@@ -15,64 +15,58 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
         /// <summary>
         /// Use this data source to query detailed information of mysql project_security_group
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var projectSecurityGroup = Tencentcloud.Mysql.GetProjectSecurityGroup.Invoke(new()
         ///     {
-        ///         var projectSecurityGroup = Output.Create(Tencentcloud.Mysql.GetProjectSecurityGroup.InvokeAsync(new Tencentcloud.Mysql.GetProjectSecurityGroupArgs
-        ///         {
-        ///             ProjectId = 1250480,
-        ///         }));
-        ///     }
+        ///         ProjectId = 1250480,
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetProjectSecurityGroupResult> InvokeAsync(GetProjectSecurityGroupArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetProjectSecurityGroupResult>("tencentcloud:Mysql/getProjectSecurityGroup:getProjectSecurityGroup", args ?? new GetProjectSecurityGroupArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetProjectSecurityGroupResult>("tencentcloud:Mysql/getProjectSecurityGroup:getProjectSecurityGroup", args ?? new GetProjectSecurityGroupArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of mysql project_security_group
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var projectSecurityGroup = Tencentcloud.Mysql.GetProjectSecurityGroup.Invoke(new()
         ///     {
-        ///         var projectSecurityGroup = Output.Create(Tencentcloud.Mysql.GetProjectSecurityGroup.InvokeAsync(new Tencentcloud.Mysql.GetProjectSecurityGroupArgs
-        ///         {
-        ///             ProjectId = 1250480,
-        ///         }));
-        ///     }
+        ///         ProjectId = 1250480,
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetProjectSecurityGroupResult> Invoke(GetProjectSecurityGroupInvokeArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetProjectSecurityGroupResult>("tencentcloud:Mysql/getProjectSecurityGroup:getProjectSecurityGroup", args ?? new GetProjectSecurityGroupInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetProjectSecurityGroupResult>("tencentcloud:Mysql/getProjectSecurityGroup:getProjectSecurityGroup", args ?? new GetProjectSecurityGroupInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetProjectSecurityGroupArgs : Pulumi.InvokeArgs
+    public sealed class GetProjectSecurityGroupArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// project id.
@@ -89,9 +83,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
         public GetProjectSecurityGroupArgs()
         {
         }
+        public static new GetProjectSecurityGroupArgs Empty => new GetProjectSecurityGroupArgs();
     }
 
-    public sealed class GetProjectSecurityGroupInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetProjectSecurityGroupInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// project id.
@@ -108,6 +103,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
         public GetProjectSecurityGroupInvokeArgs()
         {
         }
+        public static new GetProjectSecurityGroupInvokeArgs Empty => new GetProjectSecurityGroupInvokeArgs();
     }
 
 

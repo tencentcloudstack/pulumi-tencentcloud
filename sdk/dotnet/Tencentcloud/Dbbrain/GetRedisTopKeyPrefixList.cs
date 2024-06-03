@@ -15,68 +15,62 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dbbrain
         /// <summary>
         /// Use this data source to query detailed information of dbbrain redis_top_key_prefix_list
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var redisTopKeyPrefixList = Tencentcloud.Dbbrain.GetRedisTopKeyPrefixList.Invoke(new()
         ///     {
-        ///         var redisTopKeyPrefixList = Output.Create(Tencentcloud.Dbbrain.GetRedisTopKeyPrefixList.InvokeAsync(new Tencentcloud.Dbbrain.GetRedisTopKeyPrefixListArgs
-        ///         {
-        ///             InstanceId = local.Redis_id,
-        ///             Date = "%s",
-        ///             Product = "redis",
-        ///         }));
-        ///     }
+        ///         InstanceId = local.Redis_id,
+        ///         Date = "%s",
+        ///         Product = "redis",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetRedisTopKeyPrefixListResult> InvokeAsync(GetRedisTopKeyPrefixListArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetRedisTopKeyPrefixListResult>("tencentcloud:Dbbrain/getRedisTopKeyPrefixList:getRedisTopKeyPrefixList", args ?? new GetRedisTopKeyPrefixListArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetRedisTopKeyPrefixListResult>("tencentcloud:Dbbrain/getRedisTopKeyPrefixList:getRedisTopKeyPrefixList", args ?? new GetRedisTopKeyPrefixListArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of dbbrain redis_top_key_prefix_list
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var redisTopKeyPrefixList = Tencentcloud.Dbbrain.GetRedisTopKeyPrefixList.Invoke(new()
         ///     {
-        ///         var redisTopKeyPrefixList = Output.Create(Tencentcloud.Dbbrain.GetRedisTopKeyPrefixList.InvokeAsync(new Tencentcloud.Dbbrain.GetRedisTopKeyPrefixListArgs
-        ///         {
-        ///             InstanceId = local.Redis_id,
-        ///             Date = "%s",
-        ///             Product = "redis",
-        ///         }));
-        ///     }
+        ///         InstanceId = local.Redis_id,
+        ///         Date = "%s",
+        ///         Product = "redis",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetRedisTopKeyPrefixListResult> Invoke(GetRedisTopKeyPrefixListInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetRedisTopKeyPrefixListResult>("tencentcloud:Dbbrain/getRedisTopKeyPrefixList:getRedisTopKeyPrefixList", args ?? new GetRedisTopKeyPrefixListInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetRedisTopKeyPrefixListResult>("tencentcloud:Dbbrain/getRedisTopKeyPrefixList:getRedisTopKeyPrefixList", args ?? new GetRedisTopKeyPrefixListInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetRedisTopKeyPrefixListArgs : Pulumi.InvokeArgs
+    public sealed class GetRedisTopKeyPrefixListArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Query date, such as 2021-05-27, the earliest date can be the previous 30 days.
@@ -105,9 +99,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dbbrain
         public GetRedisTopKeyPrefixListArgs()
         {
         }
+        public static new GetRedisTopKeyPrefixListArgs Empty => new GetRedisTopKeyPrefixListArgs();
     }
 
-    public sealed class GetRedisTopKeyPrefixListInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetRedisTopKeyPrefixListInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Query date, such as 2021-05-27, the earliest date can be the previous 30 days.
@@ -136,6 +131,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dbbrain
         public GetRedisTopKeyPrefixListInvokeArgs()
         {
         }
+        public static new GetRedisTopKeyPrefixListInvokeArgs Empty => new GetRedisTopKeyPrefixListInvokeArgs();
     }
 
 

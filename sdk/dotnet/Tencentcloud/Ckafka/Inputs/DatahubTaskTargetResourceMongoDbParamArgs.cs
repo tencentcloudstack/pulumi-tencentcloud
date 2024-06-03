@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka.Inputs
 {
 
-    public sealed class DatahubTaskTargetResourceMongoDbParamArgs : Pulumi.ResourceArgs
+    public sealed class DatahubTaskTargetResourceMongoDbParamArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// MongoDB collection.
@@ -88,5 +88,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka.Inputs
         public DatahubTaskTargetResourceMongoDbParamArgs()
         {
         }
+        public static new DatahubTaskTargetResourceMongoDbParamArgs Empty => new DatahubTaskTargetResourceMongoDbParamArgs();
     }
 }

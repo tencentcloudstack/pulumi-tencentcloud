@@ -8,11 +8,13 @@ import * as utilities from "../utilities";
  * Use this resource to create tcr long term token.
  *
  * ## Example Usage
+ *
  * ### Create a token for tcr instance
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const exampleInstance = new tencentcloud.tcr.Instance("exampleInstance", {
  *     instanceType: "basic",
@@ -26,13 +28,14 @@ import * as utilities from "../utilities";
  *     description: "example for the tcr token",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * tcr token can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Tcr/token:Token example instance_id#token_id
+ * $ pulumi import tencentcloud:Tcr/token:Token example instance_id#token_id
  * ```
  */
 export class Token extends pulumi.CustomResource {

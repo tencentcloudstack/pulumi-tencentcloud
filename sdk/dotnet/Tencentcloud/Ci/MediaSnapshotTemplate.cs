@@ -15,46 +15,47 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ci
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var mediaSnapshotTemplate = new Tencentcloud.Ci.MediaSnapshotTemplate("mediaSnapshotTemplate", new()
     ///     {
-    ///         var mediaSnapshotTemplate = new Tencentcloud.Ci.MediaSnapshotTemplate("mediaSnapshotTemplate", new Tencentcloud.Ci.MediaSnapshotTemplateArgs
+    ///         Bucket = "terraform-ci-xxxxxx",
+    ///         Snapshot = new Tencentcloud.Ci.Inputs.MediaSnapshotTemplateSnapshotArgs
     ///         {
-    ///             Bucket = "terraform-ci-xxxxxx",
-    ///             Snapshot = new Tencentcloud.Ci.Inputs.MediaSnapshotTemplateSnapshotArgs
+    ///             Count = "10",
+    ///             SnapshotOutMode = "SnapshotAndSprite",
+    ///             SpriteSnapshotConfig = new Tencentcloud.Ci.Inputs.MediaSnapshotTemplateSnapshotSpriteSnapshotConfigArgs
     ///             {
-    ///                 Count = "10",
-    ///                 SnapshotOutMode = "SnapshotAndSprite",
-    ///                 SpriteSnapshotConfig = new Tencentcloud.Ci.Inputs.MediaSnapshotTemplateSnapshotSpriteSnapshotConfigArgs
-    ///                 {
-    ///                     Color = "White",
-    ///                     Columns = "10",
-    ///                     Lines = "10",
-    ///                     Margin = "10",
-    ///                     Padding = "10",
-    ///                 },
+    ///                 Color = "White",
+    ///                 Columns = "10",
+    ///                 Lines = "10",
+    ///                 Margin = "10",
+    ///                 Padding = "10",
     ///             },
-    ///         });
-    ///     }
+    ///         },
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// ci media_snapshot_template can be imported using the bucket#templateId, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Ci/mediaSnapshotTemplate:MediaSnapshotTemplate media_snapshot_template terraform-ci-xxxxxx#t18210645f96564eaf80e86b1f58c20152
+    /// $ pulumi import tencentcloud:Ci/mediaSnapshotTemplate:MediaSnapshotTemplate media_snapshot_template terraform-ci-xxxxxx#t18210645f96564eaf80e86b1f58c20152
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Ci/mediaSnapshotTemplate:MediaSnapshotTemplate")]
-    public partial class MediaSnapshotTemplate : Pulumi.CustomResource
+    public partial class MediaSnapshotTemplate : global::Pulumi.CustomResource
     {
         /// <summary>
         /// bucket name.
@@ -137,7 +138,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ci
         }
     }
 
-    public sealed class MediaSnapshotTemplateArgs : Pulumi.ResourceArgs
+    public sealed class MediaSnapshotTemplateArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// bucket name.
@@ -160,9 +161,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ci
         public MediaSnapshotTemplateArgs()
         {
         }
+        public static new MediaSnapshotTemplateArgs Empty => new MediaSnapshotTemplateArgs();
     }
 
-    public sealed class MediaSnapshotTemplateState : Pulumi.ResourceArgs
+    public sealed class MediaSnapshotTemplateState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// bucket name.
@@ -203,5 +205,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ci
         public MediaSnapshotTemplateState()
         {
         }
+        public static new MediaSnapshotTemplateState Empty => new MediaSnapshotTemplateState();
     }
 }

@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcaplus.Inputs
 {
 
-    public sealed class IdlTableInfoArgs : Pulumi.ResourceArgs
+    public sealed class IdlTableInfoArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Error messages for creating IDL file.
@@ -58,5 +58,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcaplus.Inputs
         public IdlTableInfoArgs()
         {
         }
+        public static new IdlTableInfoArgs Empty => new IdlTableInfoArgs();
     }
 }

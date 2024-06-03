@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Inputs
 {
 
-    public sealed class AccelerationDomainOriginInfoArgs : Pulumi.ResourceArgs
+    public sealed class AccelerationDomainOriginInfoArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// ID of the secondary origin group (valid when `OriginType=ORIGIN_GROUP`). If it is not specified, it indicates that secondary origins are not used.
@@ -52,5 +52,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Inputs
         public AccelerationDomainOriginInfoArgs()
         {
         }
+        public static new AccelerationDomainOriginInfoArgs Empty => new AccelerationDomainOriginInfoArgs();
     }
 }

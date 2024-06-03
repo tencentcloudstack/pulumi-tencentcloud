@@ -18,11 +18,11 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
     /// CLB target group instance attachment can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Clb/targetGroupInstanceAttachment:TargetGroupInstanceAttachment test lbtg-3k3io0i0#172.16.48.18#222
+    /// $ pulumi import tencentcloud:Clb/targetGroupInstanceAttachment:TargetGroupInstanceAttachment test lbtg-3k3io0i0#172.16.48.18#222
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Clb/targetGroupInstanceAttachment:TargetGroupInstanceAttachment")]
-    public partial class TargetGroupInstanceAttachment : Pulumi.CustomResource
+    public partial class TargetGroupInstanceAttachment : global::Pulumi.CustomResource
     {
         /// <summary>
         /// The Intranet IP of the target group instance.
@@ -93,7 +93,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
         }
     }
 
-    public sealed class TargetGroupInstanceAttachmentArgs : Pulumi.ResourceArgs
+    public sealed class TargetGroupInstanceAttachmentArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// The Intranet IP of the target group instance.
@@ -122,9 +122,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
         public TargetGroupInstanceAttachmentArgs()
         {
         }
+        public static new TargetGroupInstanceAttachmentArgs Empty => new TargetGroupInstanceAttachmentArgs();
     }
 
-    public sealed class TargetGroupInstanceAttachmentState : Pulumi.ResourceArgs
+    public sealed class TargetGroupInstanceAttachmentState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// The Intranet IP of the target group instance.
@@ -153,5 +154,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
         public TargetGroupInstanceAttachmentState()
         {
         }
+        public static new TargetGroupInstanceAttachmentState Empty => new TargetGroupInstanceAttachmentState();
     }
 }

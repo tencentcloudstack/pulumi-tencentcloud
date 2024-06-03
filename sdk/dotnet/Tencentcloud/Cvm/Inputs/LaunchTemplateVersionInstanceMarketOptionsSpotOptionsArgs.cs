@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cvm.Inputs
 {
 
-    public sealed class LaunchTemplateVersionInstanceMarketOptionsSpotOptionsArgs : Pulumi.ResourceArgs
+    public sealed class LaunchTemplateVersionInstanceMarketOptionsSpotOptionsArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Bidding price.
@@ -28,5 +28,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cvm.Inputs
         public LaunchTemplateVersionInstanceMarketOptionsSpotOptionsArgs()
         {
         }
+        public static new LaunchTemplateVersionInstanceMarketOptionsSpotOptionsArgs Empty => new LaunchTemplateVersionInstanceMarketOptionsSpotOptionsArgs();
     }
 }

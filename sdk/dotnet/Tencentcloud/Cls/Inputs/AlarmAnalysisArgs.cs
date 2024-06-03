@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls.Inputs
 {
 
-    public sealed class AlarmAnalysisArgs : Pulumi.ResourceArgs
+    public sealed class AlarmAnalysisArgs : global::Pulumi.ResourceArgs
     {
         [Input("configInfos")]
         private InputList<Inputs.AlarmAnalysisConfigInfoArgs>? _configInfos;
@@ -46,5 +46,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls.Inputs
         public AlarmAnalysisArgs()
         {
         }
+        public static new AlarmAnalysisArgs Empty => new AlarmAnalysisArgs();
     }
 }

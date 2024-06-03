@@ -15,35 +15,36 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssl
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var replaceCertificate = new Tencentcloud.Ssl.ReplaceCertificateOperation("replaceCertificate", new()
     ///     {
-    ///         var replaceCertificate = new Tencentcloud.Ssl.ReplaceCertificateOperation("replaceCertificate", new Tencentcloud.Ssl.ReplaceCertificateOperationArgs
-    ///         {
-    ///             CertificateId = "8L6JsWq2",
-    ///             CsrType = "online",
-    ///             ValidType = "DNS_AUTO",
-    ///         });
-    ///     }
+    ///         CertificateId = "8L6JsWq2",
+    ///         CsrType = "online",
+    ///         ValidType = "DNS_AUTO",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// ssl replace_certificate can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Ssl/replaceCertificateOperation:ReplaceCertificateOperation replace_certificate replace_certificate_id
+    /// $ pulumi import tencentcloud:Ssl/replaceCertificateOperation:ReplaceCertificateOperation replace_certificate replace_certificate_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Ssl/replaceCertificateOperation:ReplaceCertificateOperation")]
-    public partial class ReplaceCertificateOperation : Pulumi.CustomResource
+    public partial class ReplaceCertificateOperation : global::Pulumi.CustomResource
     {
         /// <summary>
         /// CSR encryption method, optional: RSA, ECC, SM2. (Selectable only if CsrType is Online), default is RSA.
@@ -138,7 +139,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssl
         }
     }
 
-    public sealed class ReplaceCertificateOperationArgs : Pulumi.ResourceArgs
+    public sealed class ReplaceCertificateOperationArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// CSR encryption method, optional: RSA, ECC, SM2. (Selectable only if CsrType is Online), default is RSA.
@@ -191,9 +192,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssl
         public ReplaceCertificateOperationArgs()
         {
         }
+        public static new ReplaceCertificateOperationArgs Empty => new ReplaceCertificateOperationArgs();
     }
 
-    public sealed class ReplaceCertificateOperationState : Pulumi.ResourceArgs
+    public sealed class ReplaceCertificateOperationState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// CSR encryption method, optional: RSA, ECC, SM2. (Selectable only if CsrType is Online), default is RSA.
@@ -246,5 +248,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssl
         public ReplaceCertificateOperationState()
         {
         }
+        public static new ReplaceCertificateOperationState Empty => new ReplaceCertificateOperationState();
     }
 }

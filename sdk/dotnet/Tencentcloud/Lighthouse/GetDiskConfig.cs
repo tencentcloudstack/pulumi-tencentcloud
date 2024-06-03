@@ -15,84 +15,78 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Lighthouse
         /// <summary>
         /// Use this data source to query detailed information of lighthouse disk_config
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var diskConfig = Tencentcloud.Lighthouse.GetDiskConfig.Invoke(new()
         ///     {
-        ///         var diskConfig = Output.Create(Tencentcloud.Lighthouse.GetDiskConfig.InvokeAsync(new Tencentcloud.Lighthouse.GetDiskConfigArgs
+        ///         Filters = new[]
         ///         {
-        ///             Filters = 
+        ///             new Tencentcloud.Lighthouse.Inputs.GetDiskConfigFilterInputArgs
         ///             {
-        ///                 new Tencentcloud.Lighthouse.Inputs.GetDiskConfigFilterArgs
+        ///                 Name = "zone",
+        ///                 Values = new[]
         ///                 {
-        ///                     Name = "zone",
-        ///                     Values = 
-        ///                     {
-        ///                         "ap-guangzhou-3",
-        ///                     },
+        ///                     "ap-guangzhou-3",
         ///                 },
         ///             },
-        ///         }));
-        ///     }
+        ///         },
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetDiskConfigResult> InvokeAsync(GetDiskConfigArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetDiskConfigResult>("tencentcloud:Lighthouse/getDiskConfig:getDiskConfig", args ?? new GetDiskConfigArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetDiskConfigResult>("tencentcloud:Lighthouse/getDiskConfig:getDiskConfig", args ?? new GetDiskConfigArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of lighthouse disk_config
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var diskConfig = Tencentcloud.Lighthouse.GetDiskConfig.Invoke(new()
         ///     {
-        ///         var diskConfig = Output.Create(Tencentcloud.Lighthouse.GetDiskConfig.InvokeAsync(new Tencentcloud.Lighthouse.GetDiskConfigArgs
+        ///         Filters = new[]
         ///         {
-        ///             Filters = 
+        ///             new Tencentcloud.Lighthouse.Inputs.GetDiskConfigFilterInputArgs
         ///             {
-        ///                 new Tencentcloud.Lighthouse.Inputs.GetDiskConfigFilterArgs
+        ///                 Name = "zone",
+        ///                 Values = new[]
         ///                 {
-        ///                     Name = "zone",
-        ///                     Values = 
-        ///                     {
-        ///                         "ap-guangzhou-3",
-        ///                     },
+        ///                     "ap-guangzhou-3",
         ///                 },
         ///             },
-        ///         }));
-        ///     }
+        ///         },
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetDiskConfigResult> Invoke(GetDiskConfigInvokeArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetDiskConfigResult>("tencentcloud:Lighthouse/getDiskConfig:getDiskConfig", args ?? new GetDiskConfigInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetDiskConfigResult>("tencentcloud:Lighthouse/getDiskConfig:getDiskConfig", args ?? new GetDiskConfigInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetDiskConfigArgs : Pulumi.InvokeArgs
+    public sealed class GetDiskConfigArgs : global::Pulumi.InvokeArgs
     {
         [Input("filters")]
         private List<Inputs.GetDiskConfigFilterArgs>? _filters;
@@ -115,9 +109,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Lighthouse
         public GetDiskConfigArgs()
         {
         }
+        public static new GetDiskConfigArgs Empty => new GetDiskConfigArgs();
     }
 
-    public sealed class GetDiskConfigInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetDiskConfigInvokeArgs : global::Pulumi.InvokeArgs
     {
         [Input("filters")]
         private InputList<Inputs.GetDiskConfigFilterInputArgs>? _filters;
@@ -140,6 +135,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Lighthouse
         public GetDiskConfigInvokeArgs()
         {
         }
+        public static new GetDiskConfigInvokeArgs Empty => new GetDiskConfigInvokeArgs();
     }
 
 

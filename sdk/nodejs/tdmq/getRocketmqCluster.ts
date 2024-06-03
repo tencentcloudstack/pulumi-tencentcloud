@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,10 +11,11 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const exampleRocketmqCluster = tencentcloud.Tdmq.getRocketmqCluster({
  *     nameKeyword: exampleTdmq / rocketmqClusterRocketmqCluster.clusterName,
@@ -23,14 +25,12 @@ import * as utilities from "../utilities";
  *     remark: "remark.",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getRocketmqCluster(args?: GetRocketmqClusterArgs, opts?: pulumi.InvokeOptions): Promise<GetRocketmqClusterResult> {
     args = args || {};
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Tdmq/getRocketmqCluster:getRocketmqCluster", {
         "clusterIdLists": args.clusterIdLists,
         "idKeyword": args.idKeyword,
@@ -78,9 +78,29 @@ export interface GetRocketmqClusterResult {
     readonly nameKeyword?: string;
     readonly resultOutputFile?: string;
 }
-
+/**
+ * Use this data source to query detailed information of tdmqRocketmq cluster
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
+ *
+ * const exampleRocketmqCluster = tencentcloud.Tdmq.getRocketmqCluster({
+ *     nameKeyword: exampleTdmq / rocketmqClusterRocketmqCluster.clusterName,
+ * });
+ * const exampleTdmq_rocketmqClusterRocketmqCluster = new tencentcloud.tdmq.RocketmqCluster("exampleTdmq/rocketmqClusterRocketmqCluster", {
+ *     clusterName: "tf_example",
+ *     remark: "remark.",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getRocketmqClusterOutput(args?: GetRocketmqClusterOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetRocketmqClusterResult> {
-    return pulumi.output(args).apply(a => getRocketmqCluster(a, opts))
+    return pulumi.output(args).apply((a: any) => getRocketmqCluster(a, opts))
 }
 
 /**

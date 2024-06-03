@@ -15,58 +15,52 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Lighthouse
         /// <summary>
         /// Use this data source to query detailed information of lighthouse instance_traffic_package
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
-        ///     {
-        ///         var instanceTrafficPackage = Output.Create(Tencentcloud.Lighthouse.GetInstanceTrafficPackage.InvokeAsync());
-        ///     }
+        ///     var instanceTrafficPackage = Tencentcloud.Lighthouse.GetInstanceTrafficPackage.Invoke();
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetInstanceTrafficPackageResult> InvokeAsync(GetInstanceTrafficPackageArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetInstanceTrafficPackageResult>("tencentcloud:Lighthouse/getInstanceTrafficPackage:getInstanceTrafficPackage", args ?? new GetInstanceTrafficPackageArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetInstanceTrafficPackageResult>("tencentcloud:Lighthouse/getInstanceTrafficPackage:getInstanceTrafficPackage", args ?? new GetInstanceTrafficPackageArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of lighthouse instance_traffic_package
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
-        ///     {
-        ///         var instanceTrafficPackage = Output.Create(Tencentcloud.Lighthouse.GetInstanceTrafficPackage.InvokeAsync());
-        ///     }
+        ///     var instanceTrafficPackage = Tencentcloud.Lighthouse.GetInstanceTrafficPackage.Invoke();
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetInstanceTrafficPackageResult> Invoke(GetInstanceTrafficPackageInvokeArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetInstanceTrafficPackageResult>("tencentcloud:Lighthouse/getInstanceTrafficPackage:getInstanceTrafficPackage", args ?? new GetInstanceTrafficPackageInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetInstanceTrafficPackageResult>("tencentcloud:Lighthouse/getInstanceTrafficPackage:getInstanceTrafficPackage", args ?? new GetInstanceTrafficPackageInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetInstanceTrafficPackageArgs : Pulumi.InvokeArgs
+    public sealed class GetInstanceTrafficPackageArgs : global::Pulumi.InvokeArgs
     {
         [Input("instanceIds")]
         private List<string>? _instanceIds;
@@ -101,9 +95,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Lighthouse
         public GetInstanceTrafficPackageArgs()
         {
         }
+        public static new GetInstanceTrafficPackageArgs Empty => new GetInstanceTrafficPackageArgs();
     }
 
-    public sealed class GetInstanceTrafficPackageInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetInstanceTrafficPackageInvokeArgs : global::Pulumi.InvokeArgs
     {
         [Input("instanceIds")]
         private InputList<string>? _instanceIds;
@@ -138,6 +133,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Lighthouse
         public GetInstanceTrafficPackageInvokeArgs()
         {
         }
+        public static new GetInstanceTrafficPackageInvokeArgs Empty => new GetInstanceTrafficPackageInvokeArgs();
     }
 
 

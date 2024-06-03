@@ -8,38 +8,43 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Use this data source to query detailed information of vpc snapshotFiles
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Vpc.GetSnapshotFiles(ctx, &vpc.GetSnapshotFilesArgs{
-// 			BusinessType: "securitygroup",
-// 			EndDate:      "2023-10-30 19:00:00",
-// 			InstanceId:   "sg-902tl7t7",
-// 			StartDate:    "2022-10-10 00:00:00",
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Vpc.GetSnapshotFiles(ctx, &vpc.GetSnapshotFilesArgs{
+//				BusinessType: "securitygroup",
+//				EndDate:      "2023-10-30 19:00:00",
+//				InstanceId:   "sg-902tl7t7",
+//				StartDate:    "2022-10-10 00:00:00",
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 func GetSnapshotFiles(ctx *pulumi.Context, args *GetSnapshotFilesArgs, opts ...pulumi.InvokeOption) (*GetSnapshotFilesResult, error) {
-	opts = pkgInvokeDefaultOpts(opts)
+	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetSnapshotFilesResult
 	err := ctx.Invoke("tencentcloud:Vpc/getSnapshotFiles:getSnapshotFiles", args, &rv, opts...)
 	if err != nil {

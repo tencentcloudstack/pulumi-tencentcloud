@@ -15,68 +15,62 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Elasticsearch
         /// <summary>
         /// Use this data source to query detailed information of elasticsearch instance operations
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var instanceOperations = Tencentcloud.Elasticsearch.GetInstanceOperations.Invoke(new()
         ///     {
-        ///         var instanceOperations = Output.Create(Tencentcloud.Elasticsearch.GetInstanceOperations.InvokeAsync(new Tencentcloud.Elasticsearch.GetInstanceOperationsArgs
-        ///         {
-        ///             EndTime = "2023-10-31 10:12:45",
-        ///             InstanceId = "es-xxxxxx",
-        ///             StartTime = "2018-01-01 00:00:00",
-        ///         }));
-        ///     }
+        ///         EndTime = "2023-10-31 10:12:45",
+        ///         InstanceId = "es-xxxxxx",
+        ///         StartTime = "2018-01-01 00:00:00",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetInstanceOperationsResult> InvokeAsync(GetInstanceOperationsArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetInstanceOperationsResult>("tencentcloud:Elasticsearch/getInstanceOperations:getInstanceOperations", args ?? new GetInstanceOperationsArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetInstanceOperationsResult>("tencentcloud:Elasticsearch/getInstanceOperations:getInstanceOperations", args ?? new GetInstanceOperationsArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of elasticsearch instance operations
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var instanceOperations = Tencentcloud.Elasticsearch.GetInstanceOperations.Invoke(new()
         ///     {
-        ///         var instanceOperations = Output.Create(Tencentcloud.Elasticsearch.GetInstanceOperations.InvokeAsync(new Tencentcloud.Elasticsearch.GetInstanceOperationsArgs
-        ///         {
-        ///             EndTime = "2023-10-31 10:12:45",
-        ///             InstanceId = "es-xxxxxx",
-        ///             StartTime = "2018-01-01 00:00:00",
-        ///         }));
-        ///     }
+        ///         EndTime = "2023-10-31 10:12:45",
+        ///         InstanceId = "es-xxxxxx",
+        ///         StartTime = "2018-01-01 00:00:00",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetInstanceOperationsResult> Invoke(GetInstanceOperationsInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetInstanceOperationsResult>("tencentcloud:Elasticsearch/getInstanceOperations:getInstanceOperations", args ?? new GetInstanceOperationsInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetInstanceOperationsResult>("tencentcloud:Elasticsearch/getInstanceOperations:getInstanceOperations", args ?? new GetInstanceOperationsInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetInstanceOperationsArgs : Pulumi.InvokeArgs
+    public sealed class GetInstanceOperationsArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// End time, e.g. 2019-03-30 20:18:03.
@@ -105,9 +99,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Elasticsearch
         public GetInstanceOperationsArgs()
         {
         }
+        public static new GetInstanceOperationsArgs Empty => new GetInstanceOperationsArgs();
     }
 
-    public sealed class GetInstanceOperationsInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetInstanceOperationsInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// End time, e.g. 2019-03-30 20:18:03.
@@ -136,6 +131,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Elasticsearch
         public GetInstanceOperationsInvokeArgs()
         {
         }
+        public static new GetInstanceOperationsInvokeArgs Empty => new GetInstanceOperationsInvokeArgs();
     }
 
 

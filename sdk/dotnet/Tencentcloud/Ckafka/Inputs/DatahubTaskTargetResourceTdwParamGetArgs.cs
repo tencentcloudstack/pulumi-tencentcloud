@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka.Inputs
 {
 
-    public sealed class DatahubTaskTargetResourceTdwParamGetArgs : Pulumi.ResourceArgs
+    public sealed class DatahubTaskTargetResourceTdwParamGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Tdw bid.
@@ -46,5 +46,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka.Inputs
         public DatahubTaskTargetResourceTdwParamGetArgs()
         {
         }
+        public static new DatahubTaskTargetResourceTdwParamGetArgs Empty => new DatahubTaskTargetResourceTdwParamGetArgs();
     }
 }

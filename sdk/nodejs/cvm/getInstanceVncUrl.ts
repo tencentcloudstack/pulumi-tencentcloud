@@ -9,21 +9,20 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const instanceVncUrl = pulumi.output(tencentcloud.Cvm.getInstanceVncUrl({
+ * const instanceVncUrl = tencentcloud.Cvm.getInstanceVncUrl({
  *     instanceId: "ins-xxxxxxxx",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getInstanceVncUrl(args: GetInstanceVncUrlArgs, opts?: pulumi.InvokeOptions): Promise<GetInstanceVncUrlResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Cvm/getInstanceVncUrl:getInstanceVncUrl", {
         "instanceId": args.instanceId,
         "resultOutputFile": args.resultOutputFile,
@@ -59,9 +58,24 @@ export interface GetInstanceVncUrlResult {
     readonly instanceVncUrl: string;
     readonly resultOutputFile?: string;
 }
-
+/**
+ * Use this data source to query detailed information of cvm instanceVncUrl
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const instanceVncUrl = tencentcloud.Cvm.getInstanceVncUrl({
+ *     instanceId: "ins-xxxxxxxx",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getInstanceVncUrlOutput(args: GetInstanceVncUrlOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetInstanceVncUrlResult> {
-    return pulumi.output(args).apply(a => getInstanceVncUrl(a, opts))
+    return pulumi.output(args).apply((a: any) => getInstanceVncUrl(a, opts))
 }
 
 /**

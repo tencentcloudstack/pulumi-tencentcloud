@@ -15,64 +15,58 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mongodb
         /// <summary>
         /// Use this data source to query detailed information of mongodb instance_params
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var instanceParams = Tencentcloud.Mongodb.GetInstanceParams.Invoke(new()
         ///     {
-        ///         var instanceParams = Output.Create(Tencentcloud.Mongodb.GetInstanceParams.InvokeAsync(new Tencentcloud.Mongodb.GetInstanceParamsArgs
-        ///         {
-        ///             InstanceId = "cmgo-gwqk8669",
-        ///         }));
-        ///     }
+        ///         InstanceId = "cmgo-gwqk8669",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetInstanceParamsResult> InvokeAsync(GetInstanceParamsArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetInstanceParamsResult>("tencentcloud:Mongodb/getInstanceParams:getInstanceParams", args ?? new GetInstanceParamsArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetInstanceParamsResult>("tencentcloud:Mongodb/getInstanceParams:getInstanceParams", args ?? new GetInstanceParamsArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of mongodb instance_params
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var instanceParams = Tencentcloud.Mongodb.GetInstanceParams.Invoke(new()
         ///     {
-        ///         var instanceParams = Output.Create(Tencentcloud.Mongodb.GetInstanceParams.InvokeAsync(new Tencentcloud.Mongodb.GetInstanceParamsArgs
-        ///         {
-        ///             InstanceId = "cmgo-gwqk8669",
-        ///         }));
-        ///     }
+        ///         InstanceId = "cmgo-gwqk8669",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetInstanceParamsResult> Invoke(GetInstanceParamsInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetInstanceParamsResult>("tencentcloud:Mongodb/getInstanceParams:getInstanceParams", args ?? new GetInstanceParamsInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetInstanceParamsResult>("tencentcloud:Mongodb/getInstanceParams:getInstanceParams", args ?? new GetInstanceParamsInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetInstanceParamsArgs : Pulumi.InvokeArgs
+    public sealed class GetInstanceParamsArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// InstanceId.
@@ -89,9 +83,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mongodb
         public GetInstanceParamsArgs()
         {
         }
+        public static new GetInstanceParamsArgs Empty => new GetInstanceParamsArgs();
     }
 
-    public sealed class GetInstanceParamsInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetInstanceParamsInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// InstanceId.
@@ -108,6 +103,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mongodb
         public GetInstanceParamsInvokeArgs()
         {
         }
+        public static new GetInstanceParamsInvokeArgs Empty => new GetInstanceParamsInvokeArgs();
     }
 
 

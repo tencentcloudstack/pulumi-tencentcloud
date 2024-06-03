@@ -7,49 +7,54 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a ci mediaVoiceSeparateTemplate
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Ci"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ci"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ci"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Ci.NewMediaVoiceSeparateTemplate(ctx, "mediaVoiceSeparateTemplate", &Ci.MediaVoiceSeparateTemplateArgs{
-// 			AudioConfig: &ci.MediaVoiceSeparateTemplateAudioConfigArgs{
-// 				Bitrate:    pulumi.String("128"),
-// 				Channels:   pulumi.String("4"),
-// 				Codec:      pulumi.String("aac"),
-// 				Samplerate: pulumi.String("44100"),
-// 			},
-// 			AudioMode: pulumi.String("IsAudio"),
-// 			Bucket:    pulumi.String("terraform-ci-xxxxx"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Ci.NewMediaVoiceSeparateTemplate(ctx, "mediaVoiceSeparateTemplate", &Ci.MediaVoiceSeparateTemplateArgs{
+//				AudioConfig: &ci.MediaVoiceSeparateTemplateAudioConfigArgs{
+//					Bitrate:    pulumi.String("128"),
+//					Channels:   pulumi.String("4"),
+//					Codec:      pulumi.String("aac"),
+//					Samplerate: pulumi.String("44100"),
+//				},
+//				AudioMode: pulumi.String("IsAudio"),
+//				Bucket:    pulumi.String("terraform-ci-xxxxx"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // ci media_voice_separate_template can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Ci/mediaVoiceSeparateTemplate:MediaVoiceSeparateTemplate media_voice_separate_template terraform-ci-xxxxxx#t1c95566664530460d9bc2b6265feb7c32
+// $ pulumi import tencentcloud:Ci/mediaVoiceSeparateTemplate:MediaVoiceSeparateTemplate media_voice_separate_template terraform-ci-xxxxxx#t1c95566664530460d9bc2b6265feb7c32
 // ```
 type MediaVoiceSeparateTemplate struct {
 	pulumi.CustomResourceState
@@ -80,7 +85,7 @@ func NewMediaVoiceSeparateTemplate(ctx *pulumi.Context,
 	if args.Bucket == nil {
 		return nil, errors.New("invalid value for required argument 'Bucket'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource MediaVoiceSeparateTemplate
 	err := ctx.RegisterResource("tencentcloud:Ci/mediaVoiceSeparateTemplate:MediaVoiceSeparateTemplate", name, args, &resource, opts...)
 	if err != nil {
@@ -177,7 +182,7 @@ func (i *MediaVoiceSeparateTemplate) ToMediaVoiceSeparateTemplateOutputWithConte
 // MediaVoiceSeparateTemplateArrayInput is an input type that accepts MediaVoiceSeparateTemplateArray and MediaVoiceSeparateTemplateArrayOutput values.
 // You can construct a concrete instance of `MediaVoiceSeparateTemplateArrayInput` via:
 //
-//          MediaVoiceSeparateTemplateArray{ MediaVoiceSeparateTemplateArgs{...} }
+//	MediaVoiceSeparateTemplateArray{ MediaVoiceSeparateTemplateArgs{...} }
 type MediaVoiceSeparateTemplateArrayInput interface {
 	pulumi.Input
 
@@ -202,7 +207,7 @@ func (i MediaVoiceSeparateTemplateArray) ToMediaVoiceSeparateTemplateArrayOutput
 // MediaVoiceSeparateTemplateMapInput is an input type that accepts MediaVoiceSeparateTemplateMap and MediaVoiceSeparateTemplateMapOutput values.
 // You can construct a concrete instance of `MediaVoiceSeparateTemplateMapInput` via:
 //
-//          MediaVoiceSeparateTemplateMap{ "key": MediaVoiceSeparateTemplateArgs{...} }
+//	MediaVoiceSeparateTemplateMap{ "key": MediaVoiceSeparateTemplateArgs{...} }
 type MediaVoiceSeparateTemplateMapInput interface {
 	pulumi.Input
 

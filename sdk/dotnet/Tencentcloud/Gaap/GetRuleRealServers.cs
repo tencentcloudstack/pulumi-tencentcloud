@@ -15,64 +15,58 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
         /// <summary>
         /// Use this data source to query detailed information of gaap rule real servers
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var ruleRealServers = Tencentcloud.Gaap.GetRuleRealServers.Invoke(new()
         ///     {
-        ///         var ruleRealServers = Output.Create(Tencentcloud.Gaap.GetRuleRealServers.InvokeAsync(new Tencentcloud.Gaap.GetRuleRealServersArgs
-        ///         {
-        ///             RuleId = "rule-xxxxxx",
-        ///         }));
-        ///     }
+        ///         RuleId = "rule-xxxxxx",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetRuleRealServersResult> InvokeAsync(GetRuleRealServersArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetRuleRealServersResult>("tencentcloud:Gaap/getRuleRealServers:getRuleRealServers", args ?? new GetRuleRealServersArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetRuleRealServersResult>("tencentcloud:Gaap/getRuleRealServers:getRuleRealServers", args ?? new GetRuleRealServersArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of gaap rule real servers
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var ruleRealServers = Tencentcloud.Gaap.GetRuleRealServers.Invoke(new()
         ///     {
-        ///         var ruleRealServers = Output.Create(Tencentcloud.Gaap.GetRuleRealServers.InvokeAsync(new Tencentcloud.Gaap.GetRuleRealServersArgs
-        ///         {
-        ///             RuleId = "rule-xxxxxx",
-        ///         }));
-        ///     }
+        ///         RuleId = "rule-xxxxxx",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetRuleRealServersResult> Invoke(GetRuleRealServersInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetRuleRealServersResult>("tencentcloud:Gaap/getRuleRealServers:getRuleRealServers", args ?? new GetRuleRealServersInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetRuleRealServersResult>("tencentcloud:Gaap/getRuleRealServers:getRuleRealServers", args ?? new GetRuleRealServersInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetRuleRealServersArgs : Pulumi.InvokeArgs
+    public sealed class GetRuleRealServersArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Used to save results.
@@ -89,9 +83,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
         public GetRuleRealServersArgs()
         {
         }
+        public static new GetRuleRealServersArgs Empty => new GetRuleRealServersArgs();
     }
 
-    public sealed class GetRuleRealServersInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetRuleRealServersInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Used to save results.
@@ -108,6 +103,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
         public GetRuleRealServersInvokeArgs()
         {
         }
+        public static new GetRuleRealServersInvokeArgs Empty => new GetRuleRealServersInvokeArgs();
     }
 
 

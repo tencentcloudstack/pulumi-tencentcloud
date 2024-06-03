@@ -9,14 +9,14 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = new tencentcloud.Ssm.RotateProductSecret("example", {
- *     secretName: "tf_example",
- * });
+ * const example = new tencentcloud.ssm.RotateProductSecret("example", {secretName: "tf_example"});
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export class RotateProductSecret extends pulumi.CustomResource {
     /**

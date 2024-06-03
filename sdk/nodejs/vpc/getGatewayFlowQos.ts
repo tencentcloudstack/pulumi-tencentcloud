@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,21 +11,20 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const gatewayFlowQos = pulumi.output(tencentcloud.Vpc.getGatewayFlowQos({
+ * const gatewayFlowQos = tencentcloud.Vpc.getGatewayFlowQos({
  *     gatewayId: "vpngw-gt8bianl",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getGatewayFlowQos(args: GetGatewayFlowQosArgs, opts?: pulumi.InvokeOptions): Promise<GetGatewayFlowQosResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Vpc/getGatewayFlowQos:getGatewayFlowQos", {
         "gatewayId": args.gatewayId,
         "ipAddresses": args.ipAddresses,
@@ -66,9 +66,24 @@ export interface GetGatewayFlowQosResult {
     readonly ipAddresses?: string[];
     readonly resultOutputFile?: string;
 }
-
+/**
+ * Use this data source to query detailed information of vpc gatewayFlowQos
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const gatewayFlowQos = tencentcloud.Vpc.getGatewayFlowQos({
+ *     gatewayId: "vpngw-gt8bianl",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getGatewayFlowQosOutput(args: GetGatewayFlowQosOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetGatewayFlowQosResult> {
-    return pulumi.output(args).apply(a => getGatewayFlowQos(a, opts))
+    return pulumi.output(args).apply((a: any) => getGatewayFlowQos(a, opts))
 }
 
 /**

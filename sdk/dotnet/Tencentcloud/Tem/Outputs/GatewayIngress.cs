@@ -22,6 +22,9 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tem.Outputs
         /// related CLB ID, support binding existing clb, does not support modification.
         /// </summary>
         public readonly string? ClbId;
+        /// <summary>
+        /// creation time.
+        /// </summary>
         public readonly string? CreateTime;
         /// <summary>
         /// environment ID.
@@ -47,6 +50,9 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tem.Outputs
         /// ingress TLS configurations.
         /// </summary>
         public readonly ImmutableArray<Outputs.GatewayIngressTl> Tls;
+        /// <summary>
+        /// gateway vip.
+        /// </summary>
         public readonly string? Vip;
 
         [OutputConstructor]

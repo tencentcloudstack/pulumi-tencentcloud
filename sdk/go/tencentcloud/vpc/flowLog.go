@@ -7,8 +7,9 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a vpc flowLog
@@ -22,7 +23,7 @@ import (
 // vpc flow_log can be imported using the flow log Id combine vpc Id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Vpc/flowLog:FlowLog flow_log flow_log_id fl-xxxx1234#vpc-yyyy5678
+// $ pulumi import tencentcloud:Vpc/flowLog:FlowLog flow_log flow_log_id fl-xxxx1234#vpc-yyyy5678
 // ```
 type FlowLog struct {
 	pulumi.CustomResourceState
@@ -70,7 +71,7 @@ func NewFlowLog(ctx *pulumi.Context,
 	if args.TrafficType == nil {
 		return nil, errors.New("invalid value for required argument 'TrafficType'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource FlowLog
 	err := ctx.RegisterResource("tencentcloud:Vpc/flowLog:FlowLog", name, args, &resource, opts...)
 	if err != nil {
@@ -223,7 +224,7 @@ func (i *FlowLog) ToFlowLogOutputWithContext(ctx context.Context) FlowLogOutput 
 // FlowLogArrayInput is an input type that accepts FlowLogArray and FlowLogArrayOutput values.
 // You can construct a concrete instance of `FlowLogArrayInput` via:
 //
-//          FlowLogArray{ FlowLogArgs{...} }
+//	FlowLogArray{ FlowLogArgs{...} }
 type FlowLogArrayInput interface {
 	pulumi.Input
 
@@ -248,7 +249,7 @@ func (i FlowLogArray) ToFlowLogArrayOutputWithContext(ctx context.Context) FlowL
 // FlowLogMapInput is an input type that accepts FlowLogMap and FlowLogMapOutput values.
 // You can construct a concrete instance of `FlowLogMapInput` via:
 //
-//          FlowLogMap{ "key": FlowLogArgs{...} }
+//	FlowLogMap{ "key": FlowLogArgs{...} }
 type FlowLogMapInput interface {
 	pulumi.Input
 

@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,22 +11,21 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const describeIndexList = pulumi.output(tencentcloud.Elasticsearch.getDescribeIndexList({
+ * const describeIndexList = tencentcloud.Elasticsearch.getDescribeIndexList({
  *     indexType: "normal",
  *     instanceId: "es-nni6pm4s",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getDescribeIndexList(args: GetDescribeIndexListArgs, opts?: pulumi.InvokeOptions): Promise<GetDescribeIndexListResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Elasticsearch/getDescribeIndexList:getDescribeIndexList", {
         "indexName": args.indexName,
         "indexStatusLists": args.indexStatusLists,
@@ -109,9 +109,25 @@ export interface GetDescribeIndexListResult {
     readonly resultOutputFile?: string;
     readonly username?: string;
 }
-
+/**
+ * Use this data source to query detailed information of elasticsearch index list
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const describeIndexList = tencentcloud.Elasticsearch.getDescribeIndexList({
+ *     indexType: "normal",
+ *     instanceId: "es-nni6pm4s",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getDescribeIndexListOutput(args: GetDescribeIndexListOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetDescribeIndexListResult> {
-    return pulumi.output(args).apply(a => getDescribeIndexList(a, opts))
+    return pulumi.output(args).apply((a: any) => getDescribeIndexList(a, opts))
 }
 
 /**

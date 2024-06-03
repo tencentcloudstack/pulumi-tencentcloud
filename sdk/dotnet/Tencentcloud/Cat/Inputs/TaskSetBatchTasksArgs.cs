@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cat.Inputs
 {
 
-    public sealed class TaskSetBatchTasksArgs : Pulumi.ResourceArgs
+    public sealed class TaskSetBatchTasksArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Task name.
@@ -28,5 +28,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cat.Inputs
         public TaskSetBatchTasksArgs()
         {
         }
+        public static new TaskSetBatchTasksArgs Empty => new TaskSetBatchTasksArgs();
     }
 }

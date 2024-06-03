@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf.Inputs
 {
 
-    public sealed class TaskAdvanceSettingsGetArgs : Pulumi.ResourceArgs
+    public sealed class TaskAdvanceSettingsGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Subtask single-machine concurrency limit, the default value is 2.
@@ -22,5 +22,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf.Inputs
         public TaskAdvanceSettingsGetArgs()
         {
         }
+        public static new TaskAdvanceSettingsGetArgs Empty => new TaskAdvanceSettingsGetArgs();
     }
 }

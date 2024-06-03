@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dts.Inputs
 {
 
-    public sealed class SyncConfigObjectsArgs : Pulumi.ResourceArgs
+    public sealed class SyncConfigObjectsArgs : global::Pulumi.ResourceArgs
     {
         [Input("advancedObjects")]
         private InputList<string>? _advancedObjects;
@@ -52,5 +52,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dts.Inputs
         public SyncConfigObjectsArgs()
         {
         }
+        public static new SyncConfigObjectsArgs Empty => new SyncConfigObjectsArgs();
     }
 }

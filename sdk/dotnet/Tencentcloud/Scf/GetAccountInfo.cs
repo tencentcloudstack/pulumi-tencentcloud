@@ -15,58 +15,52 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Scf
         /// <summary>
         /// Use this data source to query detailed information of scf account_info
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
-        ///     {
-        ///         var accountInfo = Output.Create(Tencentcloud.Scf.GetAccountInfo.InvokeAsync());
-        ///     }
+        ///     var accountInfo = Tencentcloud.Scf.GetAccountInfo.Invoke();
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetAccountInfoResult> InvokeAsync(GetAccountInfoArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetAccountInfoResult>("tencentcloud:Scf/getAccountInfo:getAccountInfo", args ?? new GetAccountInfoArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetAccountInfoResult>("tencentcloud:Scf/getAccountInfo:getAccountInfo", args ?? new GetAccountInfoArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of scf account_info
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
-        ///     {
-        ///         var accountInfo = Output.Create(Tencentcloud.Scf.GetAccountInfo.InvokeAsync());
-        ///     }
+        ///     var accountInfo = Tencentcloud.Scf.GetAccountInfo.Invoke();
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetAccountInfoResult> Invoke(GetAccountInfoInvokeArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetAccountInfoResult>("tencentcloud:Scf/getAccountInfo:getAccountInfo", args ?? new GetAccountInfoInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetAccountInfoResult>("tencentcloud:Scf/getAccountInfo:getAccountInfo", args ?? new GetAccountInfoInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetAccountInfoArgs : Pulumi.InvokeArgs
+    public sealed class GetAccountInfoArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Used to save results.
@@ -77,9 +71,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Scf
         public GetAccountInfoArgs()
         {
         }
+        public static new GetAccountInfoArgs Empty => new GetAccountInfoArgs();
     }
 
-    public sealed class GetAccountInfoInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetAccountInfoInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Used to save results.
@@ -90,6 +85,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Scf
         public GetAccountInfoInvokeArgs()
         {
         }
+        public static new GetAccountInfoInvokeArgs Empty => new GetAccountInfoInvokeArgs();
     }
 
 

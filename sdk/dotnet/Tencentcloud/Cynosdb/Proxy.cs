@@ -15,45 +15,46 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var proxy = new Tencentcloud.Cynosdb.Proxy("proxy", new()
     ///     {
-    ///         var proxy = new Tencentcloud.Cynosdb.Proxy("proxy", new Tencentcloud.Cynosdb.ProxyArgs
+    ///         ClusterId = "cynosdbmysql-bws8h88b",
+    ///         ConnectionPoolTimeOut = 30,
+    ///         ConnectionPoolType = "SessionConnectionPool",
+    ///         Cpu = 2,
+    ///         Description = "desc sample",
+    ///         Mem = 4000,
+    ///         OpenConnectionPool = "yes",
+    ///         ProxyZones = new[]
     ///         {
-    ///             ClusterId = "cynosdbmysql-bws8h88b",
-    ///             ConnectionPoolTimeOut = 30,
-    ///             ConnectionPoolType = "SessionConnectionPool",
-    ///             Cpu = 2,
-    ///             Description = "desc sample",
-    ///             Mem = 4000,
-    ///             OpenConnectionPool = "yes",
-    ///             ProxyZones = 
+    ///             new Tencentcloud.Cynosdb.Inputs.ProxyProxyZoneArgs
     ///             {
-    ///                 new Tencentcloud.Cynosdb.Inputs.ProxyProxyZoneArgs
-    ///                 {
-    ///                     ProxyNodeCount = 2,
-    ///                     ProxyNodeZone = "ap-guangzhou-7",
-    ///                 },
+    ///                 ProxyNodeCount = 2,
+    ///                 ProxyNodeZone = "ap-guangzhou-7",
     ///             },
-    ///             SecurityGroupIds = 
-    ///             {
-    ///                 "sg-baxfiao5",
-    ///             },
-    ///             UniqueSubnetId = "subnet-jdi5xn22",
-    ///             UniqueVpcId = "vpc-k1t8ickr",
-    ///         });
-    ///     }
+    ///         },
+    ///         SecurityGroupIds = new[]
+    ///         {
+    ///             "sg-baxfiao5",
+    ///         },
+    ///         UniqueSubnetId = "subnet-jdi5xn22",
+    ///         UniqueVpcId = "vpc-k1t8ickr",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Cynosdb/proxy:Proxy")]
-    public partial class Proxy : Pulumi.CustomResource
+    public partial class Proxy : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Cluster ID.
@@ -184,7 +185,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
         }
     }
 
-    public sealed class ProxyArgs : Pulumi.ResourceArgs
+    public sealed class ProxyArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Cluster ID.
@@ -273,9 +274,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
         public ProxyArgs()
         {
         }
+        public static new ProxyArgs Empty => new ProxyArgs();
     }
 
-    public sealed class ProxyState : Pulumi.ResourceArgs
+    public sealed class ProxyState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Cluster ID.
@@ -382,5 +384,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
         public ProxyState()
         {
         }
+        public static new ProxyState Empty => new ProxyState();
     }
 }

@@ -15,49 +15,52 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
     /// using System;
+    /// using System.Collections.Generic;
     /// using System.IO;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// 	
+    /// string ReadFileBase64(string path) 
     /// {
-    /// 	private static string ReadFileBase64(string path) {
-    /// 		return Convert.ToBase64String(Encoding.UTF8.GetBytes(File.ReadAllText(path)))
-    /// 	}
-    /// 
-    ///     public MyStack()
-    ///     {
-    ///         var watermarkTemplate = new Tencentcloud.Mps.WatermarkTemplate("watermarkTemplate", new Tencentcloud.Mps.WatermarkTemplateArgs
-    ///         {
-    ///             CoordinateOrigin = "TopLeft",
-    ///             Type = "image",
-    ///             XPos = "12%",
-    ///             YPos = "21%",
-    ///             ImageTemplate = new Tencentcloud.Mps.Inputs.WatermarkTemplateImageTemplateArgs
-    ///             {
-    ///                 Height = "17px",
-    ///                 ImageContent = ReadFileBase64("./logo.png"),
-    ///                 RepeatType = "repeat",
-    ///                 Width = "12px",
-    ///             },
-    ///         });
-    ///     }
-    /// 
+    ///     return Convert.ToBase64String(Encoding.UTF8.GetBytes(File.ReadAllText(path)));
     /// }
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     var watermarkTemplate = new Tencentcloud.Mps.WatermarkTemplate("watermarkTemplate", new()
+    ///     {
+    ///         CoordinateOrigin = "TopLeft",
+    ///         Type = "image",
+    ///         XPos = "12%",
+    ///         YPos = "21%",
+    ///         ImageTemplate = new Tencentcloud.Mps.Inputs.WatermarkTemplateImageTemplateArgs
+    ///         {
+    ///             Height = "17px",
+    ///             ImageContent = ReadFileBase64("./logo.png"),
+    ///             RepeatType = "repeat",
+    ///             Width = "12px",
+    ///         },
+    ///     });
+    /// 
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// mps watermark_template can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Mps/watermarkTemplate:WatermarkTemplate watermark_template watermark_template_id
+    /// $ pulumi import tencentcloud:Mps/watermarkTemplate:WatermarkTemplate watermark_template watermark_template_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Mps/watermarkTemplate:WatermarkTemplate")]
-    public partial class WatermarkTemplate : Pulumi.CustomResource
+    public partial class WatermarkTemplate : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Template description information, length limit: 256 characters.
@@ -158,7 +161,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps
         }
     }
 
-    public sealed class WatermarkTemplateArgs : Pulumi.ResourceArgs
+    public sealed class WatermarkTemplateArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Template description information, length limit: 256 characters.
@@ -217,9 +220,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps
         public WatermarkTemplateArgs()
         {
         }
+        public static new WatermarkTemplateArgs Empty => new WatermarkTemplateArgs();
     }
 
-    public sealed class WatermarkTemplateState : Pulumi.ResourceArgs
+    public sealed class WatermarkTemplateState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Template description information, length limit: 256 characters.
@@ -278,5 +282,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps
         public WatermarkTemplateState()
         {
         }
+        public static new WatermarkTemplateState Empty => new WatermarkTemplateState();
     }
 }

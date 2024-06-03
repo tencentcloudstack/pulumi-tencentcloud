@@ -7,98 +7,103 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Use this resource to create a dayu CC self-define http policy
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Dayu"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dayu"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dayu"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Dayu.NewCcHttpPolicy(ctx, "testBgpip", &Dayu.CcHttpPolicyArgs{
-// 			Action:       pulumi.String("drop"),
-// 			ResourceId:   pulumi.String("bgpip-00000294"),
-// 			ResourceType: pulumi.String("bgpip"),
-// 			RuleLists: dayu.CcHttpPolicyRuleListArray{
-// 				&dayu.CcHttpPolicyRuleListArgs{
-// 					Operator: pulumi.String("include"),
-// 					Skey:     pulumi.String("host"),
-// 					Value:    pulumi.String("123"),
-// 				},
-// 			},
-// 			Smode:  pulumi.String("matching"),
-// 			Switch: pulumi.Bool(true),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_, err = Dayu.NewCcHttpPolicy(ctx, "testNet", &Dayu.CcHttpPolicyArgs{
-// 			Action:       pulumi.String("drop"),
-// 			ResourceId:   pulumi.String("net-0000007e"),
-// 			ResourceType: pulumi.String("net"),
-// 			RuleLists: dayu.CcHttpPolicyRuleListArray{
-// 				&dayu.CcHttpPolicyRuleListArgs{
-// 					Operator: pulumi.String("equal"),
-// 					Skey:     pulumi.String("cgi"),
-// 					Value:    pulumi.String("123"),
-// 				},
-// 			},
-// 			Smode:  pulumi.String("matching"),
-// 			Switch: pulumi.Bool(true),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_, err = Dayu.NewCcHttpPolicy(ctx, "testBgpmultip", &Dayu.CcHttpPolicyArgs{
-// 			Action:       pulumi.String("alg"),
-// 			Ip:           pulumi.String("111.230.178.25"),
-// 			ResourceId:   pulumi.String("bgp-0000008o"),
-// 			ResourceType: pulumi.String("bgp-multip"),
-// 			RuleLists: dayu.CcHttpPolicyRuleListArray{
-// 				&dayu.CcHttpPolicyRuleListArgs{
-// 					Operator: pulumi.String("not_include"),
-// 					Skey:     pulumi.String("referer"),
-// 					Value:    pulumi.String("123"),
-// 				},
-// 			},
-// 			Smode:  pulumi.String("matching"),
-// 			Switch: pulumi.Bool(true),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_, err = Dayu.NewCcHttpPolicy(ctx, "testBgp", &Dayu.CcHttpPolicyArgs{
-// 			Action:       pulumi.String("alg"),
-// 			ResourceId:   pulumi.String("bgp-000006mq"),
-// 			ResourceType: pulumi.String("bgp"),
-// 			RuleLists: dayu.CcHttpPolicyRuleListArray{
-// 				&dayu.CcHttpPolicyRuleListArgs{
-// 					Operator: pulumi.String("not_include"),
-// 					Skey:     pulumi.String("ua"),
-// 					Value:    pulumi.String("123"),
-// 				},
-// 			},
-// 			Smode:  pulumi.String("matching"),
-// 			Switch: pulumi.Bool(true),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Dayu.NewCcHttpPolicy(ctx, "testBgpip", &Dayu.CcHttpPolicyArgs{
+//				Action:       pulumi.String("drop"),
+//				ResourceId:   pulumi.String("bgpip-00000294"),
+//				ResourceType: pulumi.String("bgpip"),
+//				RuleLists: dayu.CcHttpPolicyRuleListArray{
+//					&dayu.CcHttpPolicyRuleListArgs{
+//						Operator: pulumi.String("include"),
+//						Skey:     pulumi.String("host"),
+//						Value:    pulumi.String("123"),
+//					},
+//				},
+//				Smode:  pulumi.String("matching"),
+//				Switch: pulumi.Bool(true),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_, err = Dayu.NewCcHttpPolicy(ctx, "testNet", &Dayu.CcHttpPolicyArgs{
+//				Action:       pulumi.String("drop"),
+//				ResourceId:   pulumi.String("net-0000007e"),
+//				ResourceType: pulumi.String("net"),
+//				RuleLists: dayu.CcHttpPolicyRuleListArray{
+//					&dayu.CcHttpPolicyRuleListArgs{
+//						Operator: pulumi.String("equal"),
+//						Skey:     pulumi.String("cgi"),
+//						Value:    pulumi.String("123"),
+//					},
+//				},
+//				Smode:  pulumi.String("matching"),
+//				Switch: pulumi.Bool(true),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_, err = Dayu.NewCcHttpPolicy(ctx, "testBgpmultip", &Dayu.CcHttpPolicyArgs{
+//				Action:       pulumi.String("alg"),
+//				Ip:           pulumi.String("111.230.178.25"),
+//				ResourceId:   pulumi.String("bgp-0000008o"),
+//				ResourceType: pulumi.String("bgp-multip"),
+//				RuleLists: dayu.CcHttpPolicyRuleListArray{
+//					&dayu.CcHttpPolicyRuleListArgs{
+//						Operator: pulumi.String("not_include"),
+//						Skey:     pulumi.String("referer"),
+//						Value:    pulumi.String("123"),
+//					},
+//				},
+//				Smode:  pulumi.String("matching"),
+//				Switch: pulumi.Bool(true),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_, err = Dayu.NewCcHttpPolicy(ctx, "testBgp", &Dayu.CcHttpPolicyArgs{
+//				Action:       pulumi.String("alg"),
+//				ResourceId:   pulumi.String("bgp-000006mq"),
+//				ResourceType: pulumi.String("bgp"),
+//				RuleLists: dayu.CcHttpPolicyRuleListArray{
+//					&dayu.CcHttpPolicyRuleListArgs{
+//						Operator: pulumi.String("not_include"),
+//						Skey:     pulumi.String("ua"),
+//						Value:    pulumi.String("123"),
+//					},
+//				},
+//				Smode:  pulumi.String("matching"),
+//				Switch: pulumi.Bool(true),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 type CcHttpPolicy struct {
 	pulumi.CustomResourceState
 
@@ -139,7 +144,7 @@ func NewCcHttpPolicy(ctx *pulumi.Context,
 	if args.ResourceType == nil {
 		return nil, errors.New("invalid value for required argument 'ResourceType'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource CcHttpPolicy
 	err := ctx.RegisterResource("tencentcloud:Dayu/ccHttpPolicy:CcHttpPolicy", name, args, &resource, opts...)
 	if err != nil {
@@ -284,7 +289,7 @@ func (i *CcHttpPolicy) ToCcHttpPolicyOutputWithContext(ctx context.Context) CcHt
 // CcHttpPolicyArrayInput is an input type that accepts CcHttpPolicyArray and CcHttpPolicyArrayOutput values.
 // You can construct a concrete instance of `CcHttpPolicyArrayInput` via:
 //
-//          CcHttpPolicyArray{ CcHttpPolicyArgs{...} }
+//	CcHttpPolicyArray{ CcHttpPolicyArgs{...} }
 type CcHttpPolicyArrayInput interface {
 	pulumi.Input
 
@@ -309,7 +314,7 @@ func (i CcHttpPolicyArray) ToCcHttpPolicyArrayOutputWithContext(ctx context.Cont
 // CcHttpPolicyMapInput is an input type that accepts CcHttpPolicyMap and CcHttpPolicyMapOutput values.
 // You can construct a concrete instance of `CcHttpPolicyMapInput` via:
 //
-//          CcHttpPolicyMap{ "key": CcHttpPolicyArgs{...} }
+//	CcHttpPolicyMap{ "key": CcHttpPolicyArgs{...} }
 type CcHttpPolicyMapInput interface {
 	pulumi.Input
 

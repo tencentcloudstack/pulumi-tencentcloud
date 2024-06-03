@@ -9,11 +9,12 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const test = new tencentcloud.Dayu.Eip("test", {
+ * const test = new tencentcloud.dayu.Eip("test", {
  *     bindResourceId: "ins-4m0jvxic",
  *     bindResourceRegion: "hk",
  *     bindResourceType: "cvm",
@@ -21,6 +22,7 @@ import * as utilities from "../utilities";
  *     resourceId: "bgpip-000004xg",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export class Eip extends pulumi.CustomResource {
     /**

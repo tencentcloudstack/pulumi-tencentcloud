@@ -14,115 +14,121 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcr
     /// Provides a resource to create a tcr service account.
     /// 
     /// ## Example Usage
+    /// 
     /// ### Create custom account with specified duration days
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var exampleInstance = new Tencentcloud.Tcr.Instance("exampleInstance", new()
     ///     {
-    ///         var exampleInstance = new Tencentcloud.Tcr.Instance("exampleInstance", new Tencentcloud.Tcr.InstanceArgs
+    ///         InstanceType = "basic",
+    ///         DeleteBucket = true,
+    ///         Tags = 
     ///         {
-    ///             InstanceType = "basic",
-    ///             DeleteBucket = true,
-    ///             Tags = 
-    ///             {
-    ///                 { "createdBy", "terraform" },
-    ///             },
-    ///         });
-    ///         var exampleNamespace = new Tencentcloud.Tcr.Namespace("exampleNamespace", new Tencentcloud.Tcr.NamespaceArgs
-    ///         {
-    ///             InstanceId = exampleInstance.Id,
-    ///             IsPublic = true,
-    ///             IsAutoScan = true,
-    ///             IsPreventVul = true,
-    ///             Severity = "medium",
-    ///             CveWhitelistItems = 
-    ///             {
-    ///                 new Tencentcloud.Tcr.Inputs.NamespaceCveWhitelistItemArgs
-    ///                 {
-    ///                     CveId = "tf_example_cve_id",
-    ///                 },
-    ///             },
-    ///         });
-    ///         var exampleServiceAccount = new Tencentcloud.Tcr.ServiceAccount("exampleServiceAccount", new Tencentcloud.Tcr.ServiceAccountArgs
-    ///         {
-    ///             RegistryId = exampleInstance.Id,
-    ///             Permissions = 
-    ///             {
-    ///                 new Tencentcloud.Tcr.Inputs.ServiceAccountPermissionArgs
-    ///                 {
-    ///                     Resource = exampleNamespace.Name,
-    ///                     Actions = 
-    ///                     {
-    ///                         "tcr:PushRepository",
-    ///                         "tcr:PullRepository",
-    ///                     },
-    ///                 },
-    ///             },
-    ///             Description = "tf example for tcr custom account",
-    ///             Duration = 10,
-    ///             Disable = false,
-    ///             Tags = 
-    ///             {
-    ///                 { "createdBy", "terraform" },
-    ///             },
-    ///         });
-    ///     }
+    ///             { "createdBy", "terraform" },
+    ///         },
+    ///     });
     /// 
-    /// }
+    ///     var exampleNamespace = new Tencentcloud.Tcr.Namespace("exampleNamespace", new()
+    ///     {
+    ///         InstanceId = exampleInstance.Id,
+    ///         IsPublic = true,
+    ///         IsAutoScan = true,
+    ///         IsPreventVul = true,
+    ///         Severity = "medium",
+    ///         CveWhitelistItems = new[]
+    ///         {
+    ///             new Tencentcloud.Tcr.Inputs.NamespaceCveWhitelistItemArgs
+    ///             {
+    ///                 CveId = "tf_example_cve_id",
+    ///             },
+    ///         },
+    ///     });
+    /// 
+    ///     var exampleServiceAccount = new Tencentcloud.Tcr.ServiceAccount("exampleServiceAccount", new()
+    ///     {
+    ///         RegistryId = exampleInstance.Id,
+    ///         Permissions = new[]
+    ///         {
+    ///             new Tencentcloud.Tcr.Inputs.ServiceAccountPermissionArgs
+    ///             {
+    ///                 Resource = exampleNamespace.Name,
+    ///                 Actions = new[]
+    ///                 {
+    ///                     "tcr:PushRepository",
+    ///                     "tcr:PullRepository",
+    ///                 },
+    ///             },
+    ///         },
+    ///         Description = "tf example for tcr custom account",
+    ///         Duration = 10,
+    ///         Disable = false,
+    ///         Tags = 
+    ///         {
+    ///             { "createdBy", "terraform" },
+    ///         },
+    ///     });
+    /// 
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
+    /// 
     /// ### With specified expiration time
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var example = new Tencentcloud.Tcr.ServiceAccount("example", new()
     ///     {
-    ///         var example = new Tencentcloud.Tcr.ServiceAccount("example", new Tencentcloud.Tcr.ServiceAccountArgs
+    ///         RegistryId = tencentcloud_tcr_instance.Example.Id,
+    ///         Permissions = new[]
     ///         {
-    ///             RegistryId = tencentcloud_tcr_instance.Example.Id,
-    ///             Permissions = 
+    ///             new Tencentcloud.Tcr.Inputs.ServiceAccountPermissionArgs
     ///             {
-    ///                 new Tencentcloud.Tcr.Inputs.ServiceAccountPermissionArgs
+    ///                 Resource = tencentcloud_tcr_namespace.Example.Name,
+    ///                 Actions = new[]
     ///                 {
-    ///                     Resource = tencentcloud_tcr_namespace.Example.Name,
-    ///                     Actions = 
-    ///                     {
-    ///                         "tcr:PushRepository",
-    ///                         "tcr:PullRepository",
-    ///                     },
+    ///                     "tcr:PushRepository",
+    ///                     "tcr:PullRepository",
     ///                 },
     ///             },
-    ///             Description = "tf example for tcr custom account",
-    ///             ExpiresAt = 1676897989000,
-    ///             Disable = false,
-    ///             Tags = 
-    ///             {
-    ///                 { "createdBy", "terraform" },
-    ///             },
-    ///         });
-    ///     }
+    ///         },
+    ///         Description = "tf example for tcr custom account",
+    ///         ExpiresAt = 1676897989000,
+    ///         Disable = false,
+    ///         Tags = 
+    ///         {
+    ///             { "createdBy", "terraform" },
+    ///         },
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// tcr service_account can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Tcr/serviceAccount:ServiceAccount service_account registry_id#account_name
+    /// $ pulumi import tencentcloud:Tcr/serviceAccount:ServiceAccount service_account registry_id#account_name
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Tcr/serviceAccount:ServiceAccount")]
-    public partial class ServiceAccount : Pulumi.CustomResource
+    public partial class ServiceAccount : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Service account description.
@@ -223,7 +229,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcr
         }
     }
 
-    public sealed class ServiceAccountArgs : Pulumi.ResourceArgs
+    public sealed class ServiceAccountArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Service account description.
@@ -288,9 +294,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcr
         public ServiceAccountArgs()
         {
         }
+        public static new ServiceAccountArgs Empty => new ServiceAccountArgs();
     }
 
-    public sealed class ServiceAccountState : Pulumi.ResourceArgs
+    public sealed class ServiceAccountState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Service account description.
@@ -361,5 +368,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcr
         public ServiceAccountState()
         {
         }
+        public static new ServiceAccountState Empty => new ServiceAccountState();
     }
 }

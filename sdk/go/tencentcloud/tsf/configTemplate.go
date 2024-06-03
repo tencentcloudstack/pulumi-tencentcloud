@@ -7,39 +7,50 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a tsf configTemplate
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"fmt"
 //
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tsf"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tsf"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Tsf.NewConfigTemplate(ctx, "configTemplate", &Tsf.ConfigTemplateArgs{
-// 			ConfigTemplateDesc:  pulumi.String("terraform-test"),
-// 			ConfigTemplateName:  pulumi.String("terraform-template-name"),
-// 			ConfigTemplateType:  pulumi.String("Ribbon"),
-// 			ConfigTemplateValue: pulumi.String(fmt.Sprintf("%v%v%v%v%v%v", "  ribbon.ReadTimeout: 5000\n", "  ribbon.ConnectTimeout: 2000\n", "  ribbon.MaxAutoRetries: 0\n", "  ribbon.MaxAutoRetriesNextServer: 1\n", "  ribbon.OkToRetryOnAllOperations: true\n", "\n")),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Tsf.NewConfigTemplate(ctx, "configTemplate", &Tsf.ConfigTemplateArgs{
+//				ConfigTemplateDesc: pulumi.String("terraform-test"),
+//				ConfigTemplateName: pulumi.String("terraform-template-name"),
+//				ConfigTemplateType: pulumi.String("Ribbon"),
+//				ConfigTemplateValue: pulumi.String(`  ribbon.ReadTimeout: 5000
+//	  ribbon.ConnectTimeout: 2000
+//	  ribbon.MaxAutoRetries: 0
+//	  ribbon.MaxAutoRetriesNextServer: 1
+//	  ribbon.OkToRetryOnAllOperations: true
+//
+// `),
+//
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 type ConfigTemplate struct {
 	pulumi.CustomResourceState
 
@@ -77,7 +88,7 @@ func NewConfigTemplate(ctx *pulumi.Context,
 	if args.ConfigTemplateValue == nil {
 		return nil, errors.New("invalid value for required argument 'ConfigTemplateValue'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource ConfigTemplate
 	err := ctx.RegisterResource("tencentcloud:Tsf/configTemplate:ConfigTemplate", name, args, &resource, opts...)
 	if err != nil {
@@ -194,7 +205,7 @@ func (i *ConfigTemplate) ToConfigTemplateOutputWithContext(ctx context.Context) 
 // ConfigTemplateArrayInput is an input type that accepts ConfigTemplateArray and ConfigTemplateArrayOutput values.
 // You can construct a concrete instance of `ConfigTemplateArrayInput` via:
 //
-//          ConfigTemplateArray{ ConfigTemplateArgs{...} }
+//	ConfigTemplateArray{ ConfigTemplateArgs{...} }
 type ConfigTemplateArrayInput interface {
 	pulumi.Input
 
@@ -219,7 +230,7 @@ func (i ConfigTemplateArray) ToConfigTemplateArrayOutputWithContext(ctx context.
 // ConfigTemplateMapInput is an input type that accepts ConfigTemplateMap and ConfigTemplateMapOutput values.
 // You can construct a concrete instance of `ConfigTemplateMapInput` via:
 //
-//          ConfigTemplateMap{ "key": ConfigTemplateArgs{...} }
+//	ConfigTemplateMap{ "key": ConfigTemplateArgs{...} }
 type ConfigTemplateMapInput interface {
 	pulumi.Input
 

@@ -15,47 +15,49 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var vpc = new Tencentcloud.Vpc.Instance("vpc", new()
     ///     {
-    ///         var vpc = new Tencentcloud.Vpc.Instance("vpc", new Tencentcloud.Vpc.InstanceArgs
-    ///         {
-    ///             CidrBlock = "10.0.0.0/16",
-    ///         });
-    ///         var example = new Tencentcloud.Vpc.Acl("example", new Tencentcloud.Vpc.AclArgs
-    ///         {
-    ///             VpcId = vpc.Id,
-    ///             Ingresses = 
-    ///             {
-    ///                 "ACCEPT#192.168.1.0/24#800#TCP",
-    ///                 "ACCEPT#192.168.1.0/24#800-900#TCP",
-    ///             },
-    ///             Egresses = 
-    ///             {
-    ///                 "ACCEPT#192.168.1.0/24#800#TCP",
-    ///                 "ACCEPT#192.168.1.0/24#800-900#TCP",
-    ///             },
-    ///         });
-    ///     }
+    ///         CidrBlock = "10.0.0.0/16",
+    ///     });
     /// 
-    /// }
+    ///     var example = new Tencentcloud.Vpc.Acl("example", new()
+    ///     {
+    ///         VpcId = vpc.Id,
+    ///         Ingresses = new[]
+    ///         {
+    ///             "ACCEPT#192.168.1.0/24#800#TCP",
+    ///             "ACCEPT#192.168.1.0/24#800-900#TCP",
+    ///         },
+    ///         Egresses = new[]
+    ///         {
+    ///             "ACCEPT#192.168.1.0/24#800#TCP",
+    ///             "ACCEPT#192.168.1.0/24#800-900#TCP",
+    ///         },
+    ///     });
+    /// 
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// Vpc ACL can be imported, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Vpc/acl:Acl default acl-id
+    /// $ pulumi import tencentcloud:Vpc/acl:Acl default acl-id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Vpc/acl:Acl")]
-    public partial class Acl : Pulumi.CustomResource
+    public partial class Acl : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Creation time of ACL.
@@ -138,7 +140,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         }
     }
 
-    public sealed class AclArgs : Pulumi.ResourceArgs
+    public sealed class AclArgs : global::Pulumi.ResourceArgs
     {
         [Input("egresses")]
         private InputList<string>? _egresses;
@@ -191,9 +193,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         public AclArgs()
         {
         }
+        public static new AclArgs Empty => new AclArgs();
     }
 
-    public sealed class AclState : Pulumi.ResourceArgs
+    public sealed class AclState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Creation time of ACL.
@@ -252,5 +255,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         public AclState()
         {
         }
+        public static new AclState Empty => new AclState();
     }
 }

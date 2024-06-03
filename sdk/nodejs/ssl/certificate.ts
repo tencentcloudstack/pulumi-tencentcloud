@@ -11,10 +11,11 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const config = new pulumi.Config();
  * const ca = config.get("ca") || `-----BEGIN CERTIFICATE-----
@@ -49,11 +50,13 @@ import * as utilities from "../utilities";
  *     name: caCertificate.name,
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const config = new pulumi.Config();
  * const cert = config.get("cert") || `-----BEGIN CERTIFICATE-----
@@ -272,13 +275,14 @@ import * as utilities from "../utilities";
  *     name: svrCertificate.name,
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * ssl certificate can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Ssl/certificate:Certificate tencentcloud_ssl_certificate.cert GjTNRoK7
+ * $ pulumi import tencentcloud:Ssl/certificate:Certificate tencentcloud_ssl_certificate.cert GjTNRoK7
  * ```
  */
 export class Certificate extends pulumi.CustomResource {
@@ -397,7 +401,7 @@ export class Certificate extends pulumi.CustomResource {
                 throw new Error("Missing required property 'type'");
             }
             resourceInputs["cert"] = args ? args.cert : undefined;
-            resourceInputs["key"] = args ? args.key : undefined;
+            resourceInputs["key"] = args?.key ? pulumi.secret(args.key) : undefined;
             resourceInputs["name"] = args ? args.name : undefined;
             resourceInputs["projectId"] = args ? args.projectId : undefined;
             resourceInputs["tags"] = args ? args.tags : undefined;
@@ -411,6 +415,8 @@ export class Certificate extends pulumi.CustomResource {
             resourceInputs["subjectNames"] = undefined /*out*/;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+        const secretOpts = { additionalSecretOutputs: ["key"] };
+        opts = pulumi.mergeOptions(opts, secretOpts);
         super(Certificate.__pulumiType, name, resourceInputs, opts);
     }
 }

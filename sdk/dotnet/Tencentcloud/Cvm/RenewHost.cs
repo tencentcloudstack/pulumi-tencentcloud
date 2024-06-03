@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cvm
 {
     [TencentcloudResourceType("tencentcloud:Cvm/renewHost:RenewHost")]
-    public partial class RenewHost : Pulumi.CustomResource
+    public partial class RenewHost : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Prepaid mode, that is, yearly and monthly subscription related parameter settings. Through this parameter, you can
@@ -72,7 +72,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cvm
         }
     }
 
-    public sealed class RenewHostArgs : Pulumi.ResourceArgs
+    public sealed class RenewHostArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Prepaid mode, that is, yearly and monthly subscription related parameter settings. Through this parameter, you can
@@ -91,9 +91,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cvm
         public RenewHostArgs()
         {
         }
+        public static new RenewHostArgs Empty => new RenewHostArgs();
     }
 
-    public sealed class RenewHostState : Pulumi.ResourceArgs
+    public sealed class RenewHostState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Prepaid mode, that is, yearly and monthly subscription related parameter settings. Through this parameter, you can
@@ -112,5 +113,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cvm
         public RenewHostState()
         {
         }
+        public static new RenewHostState Empty => new RenewHostState();
     }
 }

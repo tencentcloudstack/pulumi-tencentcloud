@@ -9,17 +9,18 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const zones = tencentcloud.Availability.getZonesByProduct({
  *     product: "cdb",
  * });
  * const vpc = new tencentcloud.vpc.Instance("vpc", {cidrBlock: "10.0.0.0/16"});
  * const subnet = new tencentcloud.subnet.Instance("subnet", {
- *     availabilityZone: zones.then(zones => zones.zones?[0]?.name),
+ *     availabilityZone: zones.then(zones => zones.zones?.[0]?.name),
  *     vpcId: vpc.id,
  *     cidrBlock: "10.0.0.0/16",
  *     isMulticast: false,
@@ -31,8 +32,8 @@ import * as utilities from "../utilities";
  *     chargeType: "PREPAID",
  *     rootPassword: "PassWord123",
  *     slaveDeployMode: 1,
- *     availabilityZone: zones.then(zones => zones.zones?[0]?.name),
- *     firstSlaveZone: zones.then(zones => zones.zones?[1]?.name),
+ *     availabilityZone: zones.then(zones => zones.zones?.[0]?.name),
+ *     firstSlaveZone: zones.then(zones => zones.zones?.[1]?.name),
  *     slaveSyncMode: 1,
  *     instanceName: "tf-example-mysql",
  *     memSize: 4000,
@@ -58,6 +59,7 @@ import * as utilities from "../utilities";
  *     modifyPayType: "PREPAID",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export class RenewDbInstanceOperation extends pulumi.CustomResource {
     /**

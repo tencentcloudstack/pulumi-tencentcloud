@@ -15,64 +15,58 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mariadb
         /// <summary>
         /// Use this data source to query detailed information of mariadb flow
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var flow = Tencentcloud.Mariadb.GetFlow.Invoke(new()
         ///     {
-        ///         var flow = Output.Create(Tencentcloud.Mariadb.GetFlow.InvokeAsync(new Tencentcloud.Mariadb.GetFlowArgs
-        ///         {
-        ///             FlowId = 1307,
-        ///         }));
-        ///     }
+        ///         FlowId = 1307,
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetFlowResult> InvokeAsync(GetFlowArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetFlowResult>("tencentcloud:Mariadb/getFlow:getFlow", args ?? new GetFlowArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetFlowResult>("tencentcloud:Mariadb/getFlow:getFlow", args ?? new GetFlowArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of mariadb flow
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var flow = Tencentcloud.Mariadb.GetFlow.Invoke(new()
         ///     {
-        ///         var flow = Output.Create(Tencentcloud.Mariadb.GetFlow.InvokeAsync(new Tencentcloud.Mariadb.GetFlowArgs
-        ///         {
-        ///             FlowId = 1307,
-        ///         }));
-        ///     }
+        ///         FlowId = 1307,
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetFlowResult> Invoke(GetFlowInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetFlowResult>("tencentcloud:Mariadb/getFlow:getFlow", args ?? new GetFlowInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetFlowResult>("tencentcloud:Mariadb/getFlow:getFlow", args ?? new GetFlowInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetFlowArgs : Pulumi.InvokeArgs
+    public sealed class GetFlowArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Flow ID returned by async request API.
@@ -89,9 +83,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mariadb
         public GetFlowArgs()
         {
         }
+        public static new GetFlowArgs Empty => new GetFlowArgs();
     }
 
-    public sealed class GetFlowInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetFlowInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Flow ID returned by async request API.
@@ -108,6 +103,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mariadb
         public GetFlowInvokeArgs()
         {
         }
+        public static new GetFlowInvokeArgs Empty => new GetFlowInvokeArgs();
     }
 
 

@@ -15,58 +15,52 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
         /// <summary>
         /// Use this data source to query detailed information of teo ruleEngineSettings
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
-        ///     {
-        ///         var ruleEngineSettings = Output.Create(Tencentcloud.Teo.GetRuleEngineSettings.InvokeAsync());
-        ///     }
+        ///     var ruleEngineSettings = Tencentcloud.Teo.GetRuleEngineSettings.Invoke();
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetRuleEngineSettingsResult> InvokeAsync(GetRuleEngineSettingsArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetRuleEngineSettingsResult>("tencentcloud:Teo/getRuleEngineSettings:getRuleEngineSettings", args ?? new GetRuleEngineSettingsArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetRuleEngineSettingsResult>("tencentcloud:Teo/getRuleEngineSettings:getRuleEngineSettings", args ?? new GetRuleEngineSettingsArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of teo ruleEngineSettings
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
-        ///     {
-        ///         var ruleEngineSettings = Output.Create(Tencentcloud.Teo.GetRuleEngineSettings.InvokeAsync());
-        ///     }
+        ///     var ruleEngineSettings = Tencentcloud.Teo.GetRuleEngineSettings.Invoke();
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetRuleEngineSettingsResult> Invoke(GetRuleEngineSettingsInvokeArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetRuleEngineSettingsResult>("tencentcloud:Teo/getRuleEngineSettings:getRuleEngineSettings", args ?? new GetRuleEngineSettingsInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetRuleEngineSettingsResult>("tencentcloud:Teo/getRuleEngineSettings:getRuleEngineSettings", args ?? new GetRuleEngineSettingsInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetRuleEngineSettingsArgs : Pulumi.InvokeArgs
+    public sealed class GetRuleEngineSettingsArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Used to save results.
@@ -77,9 +71,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
         public GetRuleEngineSettingsArgs()
         {
         }
+        public static new GetRuleEngineSettingsArgs Empty => new GetRuleEngineSettingsArgs();
     }
 
-    public sealed class GetRuleEngineSettingsInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetRuleEngineSettingsInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Used to save results.
@@ -90,6 +85,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
         public GetRuleEngineSettingsInvokeArgs()
         {
         }
+        public static new GetRuleEngineSettingsInvokeArgs Empty => new GetRuleEngineSettingsInvokeArgs();
     }
 
 

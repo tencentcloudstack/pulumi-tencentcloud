@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql.Inputs
 {
 
-    public sealed class PrivilegeDatabaseArgs : Pulumi.ResourceArgs
+    public sealed class PrivilegeDatabaseArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Database name.
@@ -34,5 +34,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql.Inputs
         public PrivilegeDatabaseArgs()
         {
         }
+        public static new PrivilegeDatabaseArgs Empty => new PrivilegeDatabaseArgs();
     }
 }

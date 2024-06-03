@@ -15,34 +15,35 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var binlogSaveDays = new Tencentcloud.Cynosdb.BinlogSaveDays("binlogSaveDays", new()
     ///     {
-    ///         var binlogSaveDays = new Tencentcloud.Cynosdb.BinlogSaveDays("binlogSaveDays", new Tencentcloud.Cynosdb.BinlogSaveDaysArgs
-    ///         {
-    ///             BinlogSaveDays = 7,
-    ///             ClusterId = "cynosdbmysql-123",
-    ///         });
-    ///     }
+    ///         CynosdbBinlogSaveDays = 7,
+    ///         ClusterId = "cynosdbmysql-123",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// cynosdb binlog_save_days can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Cynosdb/binlogSaveDays:BinlogSaveDays binlog_save_days binlog_save_days_id
+    /// $ pulumi import tencentcloud:Cynosdb/binlogSaveDays:BinlogSaveDays binlog_save_days binlog_save_days_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Cynosdb/binlogSaveDays:BinlogSaveDays")]
-    public partial class BinlogSaveDays : Pulumi.CustomResource
+    public partial class BinlogSaveDays : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Binlog retention days.
@@ -101,7 +102,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
         }
     }
 
-    public sealed class BinlogSaveDaysArgs : Pulumi.ResourceArgs
+    public sealed class BinlogSaveDaysArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Binlog retention days.
@@ -118,9 +119,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
         public BinlogSaveDaysArgs()
         {
         }
+        public static new BinlogSaveDaysArgs Empty => new BinlogSaveDaysArgs();
     }
 
-    public sealed class BinlogSaveDaysState : Pulumi.ResourceArgs
+    public sealed class BinlogSaveDaysState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Binlog retention days.
@@ -137,5 +139,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
         public BinlogSaveDaysState()
         {
         }
+        public static new BinlogSaveDaysState Empty => new BinlogSaveDaysState();
     }
 }

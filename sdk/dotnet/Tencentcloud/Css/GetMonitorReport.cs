@@ -15,64 +15,58 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Css
         /// <summary>
         /// Use this data source to query detailed information of css monitor_report
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var monitorReport = Tencentcloud.Css.GetMonitorReport.Invoke(new()
         ///     {
-        ///         var monitorReport = Output.Create(Tencentcloud.Css.GetMonitorReport.InvokeAsync(new Tencentcloud.Css.GetMonitorReportArgs
-        ///         {
-        ///             MonitorId = "0e8a12b5-df2a-4a1b-aa98-97d5610aa142",
-        ///         }));
-        ///     }
+        ///         MonitorId = "0e8a12b5-df2a-4a1b-aa98-97d5610aa142",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetMonitorReportResult> InvokeAsync(GetMonitorReportArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetMonitorReportResult>("tencentcloud:Css/getMonitorReport:getMonitorReport", args ?? new GetMonitorReportArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetMonitorReportResult>("tencentcloud:Css/getMonitorReport:getMonitorReport", args ?? new GetMonitorReportArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of css monitor_report
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var monitorReport = Tencentcloud.Css.GetMonitorReport.Invoke(new()
         ///     {
-        ///         var monitorReport = Output.Create(Tencentcloud.Css.GetMonitorReport.InvokeAsync(new Tencentcloud.Css.GetMonitorReportArgs
-        ///         {
-        ///             MonitorId = "0e8a12b5-df2a-4a1b-aa98-97d5610aa142",
-        ///         }));
-        ///     }
+        ///         MonitorId = "0e8a12b5-df2a-4a1b-aa98-97d5610aa142",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetMonitorReportResult> Invoke(GetMonitorReportInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetMonitorReportResult>("tencentcloud:Css/getMonitorReport:getMonitorReport", args ?? new GetMonitorReportInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetMonitorReportResult>("tencentcloud:Css/getMonitorReport:getMonitorReport", args ?? new GetMonitorReportInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetMonitorReportArgs : Pulumi.InvokeArgs
+    public sealed class GetMonitorReportArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Monitor ID.
@@ -89,9 +83,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Css
         public GetMonitorReportArgs()
         {
         }
+        public static new GetMonitorReportArgs Empty => new GetMonitorReportArgs();
     }
 
-    public sealed class GetMonitorReportInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetMonitorReportInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Monitor ID.
@@ -108,6 +103,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Css
         public GetMonitorReportInvokeArgs()
         {
         }
+        public static new GetMonitorReportInvokeArgs Empty => new GetMonitorReportInvokeArgs();
     }
 
 

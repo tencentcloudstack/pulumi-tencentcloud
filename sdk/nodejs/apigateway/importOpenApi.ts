@@ -2,20 +2,23 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
  * Provides a resource to create a apiGateway importOpenApi
  *
  * ## Example Usage
+ *
  * ### Import open Api by YAML
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = new tencentcloud.ApiGateway.ImportOpenApi("example", {
+ * const example = new tencentcloud.apigateway.ImportOpenApi("example", {
  *     content: `info:
  *   title: keep-service
  *   version: 1.0.1
@@ -47,25 +50,30 @@ import * as utilities from "../utilities";
  *       x-apigw-cors: false
  *       x-apigw-protocol: HTTP
  *       x-apigw-service-timeout: 15
+ *
  * `,
  *     contentVersion: "openAPI",
  *     encodeType: "YAML",
  *     serviceId: "service-nxz6yync",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
+ *
  * ### Import open Api by JSON
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = new tencentcloud.ApiGateway.ImportOpenApi("example", {
+ * const example = new tencentcloud.apigateway.ImportOpenApi("example", {
  *     content: "{\"openapi\": \"3.0.0\", \"info\": {\"title\": \"keep-service\", \"version\": \"1.0.1\"}, \"paths\": {\"/api/test\": {\"get\": {\"operationId\": \"test\", \"description\": \"desc\", \"responses\": {\"200\": {\"description\": \"200\", \"content\": {\"text/html\": {\"example\": \"200\"}}}, \"default\": {\"content\": {\"text/html\": {\"example\": \"400\"}}, \"description\": \"400\"}}, \"x-apigw-api-type\": \"NORMAL\", \"x-apigw-api-business-type\": \"NORMAL\", \"x-apigw-protocol\": \"HTTP\", \"x-apigw-cors\": false, \"x-apigw-service-timeout\": 15, \"x-apigw-backend\": {\"ServiceType\": \"HTTP\", \"ServiceConfig\": {\"Url\": \"http://domain.com\", \"Path\": \"/test\", \"Method\": \"GET\"}}}}}}",
  *     contentVersion: "openAPI",
  *     encodeType: "JSON",
  *     serviceId: "service-nxz6yync",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export class ImportOpenApi extends pulumi.CustomResource {
     /**

@@ -8,28 +8,34 @@ import * as utilities from "../utilities";
  * Provides a resource to verify the domain ownership by specified way when DomainNeedVerifyOwner failed in domain creation.
  *
  * ## Example Usage
+ *
  * ### dnsCheck way:
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const dnsCheck = new tencentcloud.Css.AuthenticateDomainOwnerOperation("dnsCheck", {
+ * const dnsCheck = new tencentcloud.css.AuthenticateDomainOwnerOperation("dnsCheck", {
  *     domainName: "your_domain_name",
  *     verifyType: "dnsCheck",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
+ *
  * ### fileCheck way:
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const fileCheck = new tencentcloud.Css.AuthenticateDomainOwnerOperation("fileCheck", {
+ * const fileCheck = new tencentcloud.css.AuthenticateDomainOwnerOperation("fileCheck", {
  *     domainName: "your_domain_name",
  *     verifyType: "fileCheck",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export class AuthenticateDomainOwnerOperation extends pulumi.CustomResource {
     /**

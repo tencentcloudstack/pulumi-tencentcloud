@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,10 +11,11 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const fooProxy = new tencentcloud.gaap.Proxy("fooProxy", {
  *     bandwidth: 10,
@@ -24,7 +26,7 @@ import * as utilities from "../utilities";
  * const fooLayer7Listener = new tencentcloud.gaap.Layer7Listener("fooLayer7Listener", {
  *     protocol: "HTTP",
  *     port: 80,
- *     proxyId: `%s`,
+ *     proxyId: "%s",
  * });
  * const fooHttpDomain = new tencentcloud.gaap.HttpDomain("fooHttpDomain", {
  *     listenerId: fooLayer7Listener.id,
@@ -52,13 +54,11 @@ import * as utilities from "../utilities";
  *     domain: fooDomainErrorPage.domain,
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getDomainErrorPages(args: GetDomainErrorPagesArgs, opts?: pulumi.InvokeOptions): Promise<GetDomainErrorPagesResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Gaap/getDomainErrorPages:getDomainErrorPages", {
         "domain": args.domain,
         "ids": args.ids,
@@ -112,9 +112,58 @@ export interface GetDomainErrorPagesResult {
     readonly listenerId: string;
     readonly resultOutputFile?: string;
 }
-
+/**
+ * Use this data source to query custom GAAP HTTP domain error page info list.
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
+ *
+ * const fooProxy = new tencentcloud.gaap.Proxy("fooProxy", {
+ *     bandwidth: 10,
+ *     concurrent: 2,
+ *     accessRegion: "SouthChina",
+ *     realserverRegion: "NorthChina",
+ * });
+ * const fooLayer7Listener = new tencentcloud.gaap.Layer7Listener("fooLayer7Listener", {
+ *     protocol: "HTTP",
+ *     port: 80,
+ *     proxyId: "%s",
+ * });
+ * const fooHttpDomain = new tencentcloud.gaap.HttpDomain("fooHttpDomain", {
+ *     listenerId: fooLayer7Listener.id,
+ *     domain: "www.qq.com",
+ * });
+ * const fooDomainErrorPage = new tencentcloud.gaap.DomainErrorPage("fooDomainErrorPage", {
+ *     listenerId: fooLayer7Listener.id,
+ *     domain: fooHttpDomain.domain,
+ *     errorCodes: [
+ *         406,
+ *         504,
+ *     ],
+ *     newErrorCode: 502,
+ *     body: "bad request",
+ *     clearHeaders: [
+ *         "Content-Length",
+ *         "X-TEST",
+ *     ],
+ *     setHeaders: {
+ *         "X-TEST": "test",
+ *     },
+ * });
+ * const fooDomainErrorPages = tencentcloud.Gaap.getDomainErrorPagesOutput({
+ *     listenerId: fooDomainErrorPage.listenerId,
+ *     domain: fooDomainErrorPage.domain,
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getDomainErrorPagesOutput(args: GetDomainErrorPagesOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetDomainErrorPagesResult> {
-    return pulumi.output(args).apply(a => getDomainErrorPages(a, opts))
+    return pulumi.output(args).apply((a: any) => getDomainErrorPages(a, opts))
 }
 
 /**

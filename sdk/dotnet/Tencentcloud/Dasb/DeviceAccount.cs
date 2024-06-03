@@ -15,34 +15,42 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dasb
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var exampleDevice = new Tencentcloud.Dasb.Device("exampleDevice", new()
     ///     {
-    ///         var example = new Tencentcloud.Dasb.DeviceAccount("example", new Tencentcloud.Dasb.DeviceAccountArgs
-    ///         {
-    ///             Account = "root",
-    ///             DeviceId = 100,
-    ///         });
-    ///     }
+    ///         OsName = "Linux",
+    ///         Ip = "192.168.0.1",
+    ///         Port = 80,
+    ///     });
     /// 
-    /// }
+    ///     var exampleDeviceAccount = new Tencentcloud.Dasb.DeviceAccount("exampleDeviceAccount", new()
+    ///     {
+    ///         DeviceId = exampleDevice.Id,
+    ///         Account = "root",
+    ///     });
+    /// 
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// dasb device_account can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Dasb/deviceAccount:DeviceAccount example 11
+    /// $ pulumi import tencentcloud:Dasb/deviceAccount:DeviceAccount example 11
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Dasb/deviceAccount:DeviceAccount")]
-    public partial class DeviceAccount : Pulumi.CustomResource
+    public partial class DeviceAccount : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Device account.
@@ -101,7 +109,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dasb
         }
     }
 
-    public sealed class DeviceAccountArgs : Pulumi.ResourceArgs
+    public sealed class DeviceAccountArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Device account.
@@ -118,9 +126,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dasb
         public DeviceAccountArgs()
         {
         }
+        public static new DeviceAccountArgs Empty => new DeviceAccountArgs();
     }
 
-    public sealed class DeviceAccountState : Pulumi.ResourceArgs
+    public sealed class DeviceAccountState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Device account.
@@ -137,5 +146,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dasb
         public DeviceAccountState()
         {
         }
+        public static new DeviceAccountState Empty => new DeviceAccountState();
     }
 }

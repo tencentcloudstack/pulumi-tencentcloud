@@ -15,96 +15,92 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dbbrain
         /// <summary>
         /// Use this data source to query detailed information of dbbrain security_audit_log_download_urls
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var task = new Tencentcloud.Dbbrain.SecurityAuditLogExportTask("task", new()
         ///     {
-        ///         var task = new Tencentcloud.Dbbrain.SecurityAuditLogExportTask("task", new Tencentcloud.Dbbrain.SecurityAuditLogExportTaskArgs
+        ///         SecAuditGroupId = "%s",
+        ///         StartTime = "%s",
+        ///         EndTime = "%s",
+        ///         Product = "mysql",
+        ///         DangerLevels = new[]
         ///         {
-        ///             SecAuditGroupId = "%s",
-        ///             StartTime = "%s",
-        ///             EndTime = "%s",
-        ///             Product = "mysql",
-        ///             DangerLevels = 
-        ///             {
-        ///                 0,
-        ///                 1,
-        ///                 2,
-        ///             },
-        ///         });
-        ///         var test = Tencentcloud.Dbbrain.GetSecurityAuditLogDownloadUrls.Invoke(new Tencentcloud.Dbbrain.GetSecurityAuditLogDownloadUrlsInvokeArgs
-        ///         {
-        ///             SecAuditGroupId = "%s",
-        ///             AsyncRequestId = task.AsyncRequestId,
-        ///             Product = "mysql",
-        ///         });
-        ///     }
+        ///             0,
+        ///             1,
+        ///             2,
+        ///         },
+        ///     });
         /// 
-        /// }
+        ///     var test = Tencentcloud.Dbbrain.GetSecurityAuditLogDownloadUrls.Invoke(new()
+        ///     {
+        ///         SecAuditGroupId = "%s",
+        ///         AsyncRequestId = task.AsyncRequestId,
+        ///         Product = "mysql",
+        ///     });
+        /// 
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetSecurityAuditLogDownloadUrlsResult> InvokeAsync(GetSecurityAuditLogDownloadUrlsArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetSecurityAuditLogDownloadUrlsResult>("tencentcloud:Dbbrain/getSecurityAuditLogDownloadUrls:getSecurityAuditLogDownloadUrls", args ?? new GetSecurityAuditLogDownloadUrlsArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetSecurityAuditLogDownloadUrlsResult>("tencentcloud:Dbbrain/getSecurityAuditLogDownloadUrls:getSecurityAuditLogDownloadUrls", args ?? new GetSecurityAuditLogDownloadUrlsArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of dbbrain security_audit_log_download_urls
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var task = new Tencentcloud.Dbbrain.SecurityAuditLogExportTask("task", new()
         ///     {
-        ///         var task = new Tencentcloud.Dbbrain.SecurityAuditLogExportTask("task", new Tencentcloud.Dbbrain.SecurityAuditLogExportTaskArgs
+        ///         SecAuditGroupId = "%s",
+        ///         StartTime = "%s",
+        ///         EndTime = "%s",
+        ///         Product = "mysql",
+        ///         DangerLevels = new[]
         ///         {
-        ///             SecAuditGroupId = "%s",
-        ///             StartTime = "%s",
-        ///             EndTime = "%s",
-        ///             Product = "mysql",
-        ///             DangerLevels = 
-        ///             {
-        ///                 0,
-        ///                 1,
-        ///                 2,
-        ///             },
-        ///         });
-        ///         var test = Tencentcloud.Dbbrain.GetSecurityAuditLogDownloadUrls.Invoke(new Tencentcloud.Dbbrain.GetSecurityAuditLogDownloadUrlsInvokeArgs
-        ///         {
-        ///             SecAuditGroupId = "%s",
-        ///             AsyncRequestId = task.AsyncRequestId,
-        ///             Product = "mysql",
-        ///         });
-        ///     }
+        ///             0,
+        ///             1,
+        ///             2,
+        ///         },
+        ///     });
         /// 
-        /// }
+        ///     var test = Tencentcloud.Dbbrain.GetSecurityAuditLogDownloadUrls.Invoke(new()
+        ///     {
+        ///         SecAuditGroupId = "%s",
+        ///         AsyncRequestId = task.AsyncRequestId,
+        ///         Product = "mysql",
+        ///     });
+        /// 
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetSecurityAuditLogDownloadUrlsResult> Invoke(GetSecurityAuditLogDownloadUrlsInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetSecurityAuditLogDownloadUrlsResult>("tencentcloud:Dbbrain/getSecurityAuditLogDownloadUrls:getSecurityAuditLogDownloadUrls", args ?? new GetSecurityAuditLogDownloadUrlsInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetSecurityAuditLogDownloadUrlsResult>("tencentcloud:Dbbrain/getSecurityAuditLogDownloadUrls:getSecurityAuditLogDownloadUrls", args ?? new GetSecurityAuditLogDownloadUrlsInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetSecurityAuditLogDownloadUrlsArgs : Pulumi.InvokeArgs
+    public sealed class GetSecurityAuditLogDownloadUrlsArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Asynchronous task ID.
@@ -133,9 +129,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dbbrain
         public GetSecurityAuditLogDownloadUrlsArgs()
         {
         }
+        public static new GetSecurityAuditLogDownloadUrlsArgs Empty => new GetSecurityAuditLogDownloadUrlsArgs();
     }
 
-    public sealed class GetSecurityAuditLogDownloadUrlsInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetSecurityAuditLogDownloadUrlsInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Asynchronous task ID.
@@ -164,6 +161,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dbbrain
         public GetSecurityAuditLogDownloadUrlsInvokeArgs()
         {
         }
+        public static new GetSecurityAuditLogDownloadUrlsInvokeArgs Empty => new GetSecurityAuditLogDownloadUrlsInvokeArgs();
     }
 
 

@@ -7,93 +7,105 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a cfw edgePolicy
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cfw"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cfw"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Cfw.NewEdgePolicy(ctx, "example", &Cfw.EdgePolicyArgs{
-// 			Description:   pulumi.String("policy description."),
-// 			Direction:     pulumi.Int(1),
-// 			Enable:        pulumi.String("true"),
-// 			Port:          pulumi.String("-1/-1"),
-// 			Protocol:      pulumi.String("TCP"),
-// 			RuleAction:    pulumi.String("drop"),
-// 			Scope:         pulumi.String("all"),
-// 			SourceContent: pulumi.String("1.1.1.1/0"),
-// 			SourceType:    pulumi.String("net"),
-// 			TargetContent: pulumi.String("0.0.0.0/0"),
-// 			TargetType:    pulumi.String("net"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Cfw.NewEdgePolicy(ctx, "example", &Cfw.EdgePolicyArgs{
+//				Description:   pulumi.String("policy description."),
+//				Direction:     pulumi.Int(1),
+//				Enable:        pulumi.String("true"),
+//				Port:          pulumi.String("-1/-1"),
+//				Protocol:      pulumi.String("TCP"),
+//				RuleAction:    pulumi.String("drop"),
+//				Scope:         pulumi.String("all"),
+//				SourceContent: pulumi.String("1.1.1.1/0"),
+//				SourceType:    pulumi.String("net"),
+//				TargetContent: pulumi.String("0.0.0.0/0"),
+//				TargetType:    pulumi.String("net"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
+//
 // ### If targetType is tag
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"encoding/json"
 //
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cfw"
+//	"encoding/json"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cfw"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		tmpJSON0, err := json.Marshal(map[string]interface{}{
-// 			"Key":   "test",
-// 			"Value": "dddd",
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		json0 := string(tmpJSON0)
-// 		_, err := Cfw.NewEdgePolicy(ctx, "example", &Cfw.EdgePolicyArgs{
-// 			SourceContent: pulumi.String("0.0.0.0/0"),
-// 			SourceType:    pulumi.String("net"),
-// 			TargetContent: pulumi.String(json0),
-// 			TargetType:    pulumi.String("tag"),
-// 			Protocol:      pulumi.String("TCP"),
-// 			RuleAction:    pulumi.String("drop"),
-// 			Port:          pulumi.String("-1/-1"),
-// 			Direction:     pulumi.Int(1),
-// 			Enable:        pulumi.String("true"),
-// 			Description:   pulumi.String("policy description."),
-// 			Scope:         pulumi.String("all"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			tmpJSON0, err := json.Marshal(map[string]interface{}{
+//				"Key":   "test",
+//				"Value": "dddd",
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			json0 := string(tmpJSON0)
+//			_, err = Cfw.NewEdgePolicy(ctx, "example", &Cfw.EdgePolicyArgs{
+//				SourceContent: pulumi.String("0.0.0.0/0"),
+//				SourceType:    pulumi.String("net"),
+//				TargetContent: pulumi.String(json0),
+//				TargetType:    pulumi.String("tag"),
+//				Protocol:      pulumi.String("TCP"),
+//				RuleAction:    pulumi.String("drop"),
+//				Port:          pulumi.String("-1/-1"),
+//				Direction:     pulumi.Int(1),
+//				Enable:        pulumi.String("true"),
+//				Description:   pulumi.String("policy description."),
+//				Scope:         pulumi.String("all"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // cfw edge_policy can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Cfw/edgePolicy:EdgePolicy example edge_policy_id
+// $ pulumi import tencentcloud:Cfw/edgePolicy:EdgePolicy example edge_policy_id
 // ```
 type EdgePolicy struct {
 	pulumi.CustomResourceState
@@ -157,7 +169,7 @@ func NewEdgePolicy(ctx *pulumi.Context,
 	if args.TargetType == nil {
 		return nil, errors.New("invalid value for required argument 'TargetType'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource EdgePolicy
 	err := ctx.RegisterResource("tencentcloud:Cfw/edgePolicy:EdgePolicy", name, args, &resource, opts...)
 	if err != nil {
@@ -318,7 +330,7 @@ func (i *EdgePolicy) ToEdgePolicyOutputWithContext(ctx context.Context) EdgePoli
 // EdgePolicyArrayInput is an input type that accepts EdgePolicyArray and EdgePolicyArrayOutput values.
 // You can construct a concrete instance of `EdgePolicyArrayInput` via:
 //
-//          EdgePolicyArray{ EdgePolicyArgs{...} }
+//	EdgePolicyArray{ EdgePolicyArgs{...} }
 type EdgePolicyArrayInput interface {
 	pulumi.Input
 
@@ -343,7 +355,7 @@ func (i EdgePolicyArray) ToEdgePolicyArrayOutputWithContext(ctx context.Context)
 // EdgePolicyMapInput is an input type that accepts EdgePolicyMap and EdgePolicyMapOutput values.
 // You can construct a concrete instance of `EdgePolicyMapInput` via:
 //
-//          EdgePolicyMap{ "key": EdgePolicyArgs{...} }
+//	EdgePolicyMap{ "key": EdgePolicyArgs{...} }
 type EdgePolicyMapInput interface {
 	pulumi.Input
 

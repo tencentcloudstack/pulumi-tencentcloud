@@ -15,62 +15,67 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Redis
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = Pulumi.Tencentcloud;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var zone = Tencentcloud.Redis.GetZoneConfig.Invoke(new()
     ///     {
-    ///         var zone = Output.Create(Tencentcloud.Redis.GetZoneConfig.InvokeAsync(new Tencentcloud.Redis.GetZoneConfigArgs
-    ///         {
-    ///             TypeId = 7,
-    ///         }));
-    ///         var vpc = new Tencentcloud.Vpc.Instance("vpc", new Tencentcloud.Vpc.InstanceArgs
-    ///         {
-    ///             CidrBlock = "10.0.0.0/16",
-    ///         });
-    ///         var subnet = new Tencentcloud.Subnet.Instance("subnet", new Tencentcloud.Subnet.InstanceArgs
-    ///         {
-    ///             VpcId = vpc.Id,
-    ///             AvailabilityZone = zone.Apply(zone =&gt; zone.Lists?[0]?.Zone),
-    ///             CidrBlock = "10.0.1.0/24",
-    ///         });
-    ///         var fooInstance = new Tencentcloud.Redis.Instance("fooInstance", new Tencentcloud.Redis.InstanceArgs
-    ///         {
-    ///             AvailabilityZone = zone.Apply(zone =&gt; zone.Lists?[0]?.Zone),
-    ///             TypeId = zone.Apply(zone =&gt; zone.Lists?[0]?.TypeId),
-    ///             Password = "test12345789",
-    ///             MemSize = 8192,
-    ///             RedisShardNum = zone.Apply(zone =&gt; zone.Lists?[0]?.RedisShardNums?[0]),
-    ///             RedisReplicasNum = zone.Apply(zone =&gt; zone.Lists?[0]?.RedisReplicasNums?[0]),
-    ///             Port = 6379,
-    ///             VpcId = vpc.Id,
-    ///             SubnetId = subnet.Id,
-    ///         });
-    ///         var fooMaintenanceWindow = new Tencentcloud.Redis.MaintenanceWindow("fooMaintenanceWindow", new Tencentcloud.Redis.MaintenanceWindowArgs
-    ///         {
-    ///             InstanceId = fooInstance.Id,
-    ///             StartTime = "17:00",
-    ///             EndTime = "19:00",
-    ///         });
-    ///     }
+    ///         TypeId = 7,
+    ///     });
     /// 
-    /// }
+    ///     var vpc = new Tencentcloud.Vpc.Instance("vpc", new()
+    ///     {
+    ///         CidrBlock = "10.0.0.0/16",
+    ///     });
+    /// 
+    ///     var subnet = new Tencentcloud.Subnet.Instance("subnet", new()
+    ///     {
+    ///         VpcId = vpc.Id,
+    ///         AvailabilityZone = zone.Apply(getZoneConfigResult =&gt; getZoneConfigResult.Lists[0]?.Zone),
+    ///         CidrBlock = "10.0.1.0/24",
+    ///     });
+    /// 
+    ///     var fooInstance = new Tencentcloud.Redis.Instance("fooInstance", new()
+    ///     {
+    ///         AvailabilityZone = zone.Apply(getZoneConfigResult =&gt; getZoneConfigResult.Lists[0]?.Zone),
+    ///         TypeId = zone.Apply(getZoneConfigResult =&gt; getZoneConfigResult.Lists[0]?.TypeId),
+    ///         Password = "test12345789",
+    ///         MemSize = 8192,
+    ///         RedisShardNum = zone.Apply(getZoneConfigResult =&gt; getZoneConfigResult.Lists[0]?.RedisShardNums[0]),
+    ///         RedisReplicasNum = zone.Apply(getZoneConfigResult =&gt; getZoneConfigResult.Lists[0]?.RedisReplicasNums[0]),
+    ///         Port = 6379,
+    ///         VpcId = vpc.Id,
+    ///         SubnetId = subnet.Id,
+    ///     });
+    /// 
+    ///     var fooMaintenanceWindow = new Tencentcloud.Redis.MaintenanceWindow("fooMaintenanceWindow", new()
+    ///     {
+    ///         InstanceId = fooInstance.Id,
+    ///         StartTime = "17:00",
+    ///         EndTime = "19:00",
+    ///     });
+    /// 
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// redis maintenance_window can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Redis/maintenanceWindow:MaintenanceWindow foo instance_id
+    /// $ pulumi import tencentcloud:Redis/maintenanceWindow:MaintenanceWindow foo instance_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Redis/maintenanceWindow:MaintenanceWindow")]
-    public partial class MaintenanceWindow : Pulumi.CustomResource
+    public partial class MaintenanceWindow : global::Pulumi.CustomResource
     {
         /// <summary>
         /// The end time of the maintenance window, e.g. 19:00.
@@ -135,7 +140,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Redis
         }
     }
 
-    public sealed class MaintenanceWindowArgs : Pulumi.ResourceArgs
+    public sealed class MaintenanceWindowArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// The end time of the maintenance window, e.g. 19:00.
@@ -158,9 +163,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Redis
         public MaintenanceWindowArgs()
         {
         }
+        public static new MaintenanceWindowArgs Empty => new MaintenanceWindowArgs();
     }
 
-    public sealed class MaintenanceWindowState : Pulumi.ResourceArgs
+    public sealed class MaintenanceWindowState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// The end time of the maintenance window, e.g. 19:00.
@@ -183,5 +189,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Redis
         public MaintenanceWindowState()
         {
         }
+        public static new MaintenanceWindowState Empty => new MaintenanceWindowState();
     }
 }

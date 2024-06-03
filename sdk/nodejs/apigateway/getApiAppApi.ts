@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,23 +11,22 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const example = pulumi.output(tencentcloud.ApiGateway.getApiAppApi({
+ * const example = tencentcloud.ApiGateway.getApiAppApi({
  *     apiId: "api-0cvmf4x4",
  *     apiRegion: "ap-guangzhou",
  *     serviceId: "service-nxz6yync",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getApiAppApi(args: GetApiAppApiArgs, opts?: pulumi.InvokeOptions): Promise<GetApiAppApiResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:ApiGateway/getApiAppApi:getApiAppApi", {
         "apiId": args.apiId,
         "apiRegion": args.apiRegion,
@@ -80,9 +80,26 @@ export interface GetApiAppApiResult {
      */
     readonly serviceId: string;
 }
-
+/**
+ * Use this data source to query detailed information of apiGateway apiAppApi
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const example = tencentcloud.ApiGateway.getApiAppApi({
+ *     apiId: "api-0cvmf4x4",
+ *     apiRegion: "ap-guangzhou",
+ *     serviceId: "service-nxz6yync",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getApiAppApiOutput(args: GetApiAppApiOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetApiAppApiResult> {
-    return pulumi.output(args).apply(a => getApiAppApi(a, opts))
+    return pulumi.output(args).apply((a: any) => getApiAppApi(a, opts))
 }
 
 /**

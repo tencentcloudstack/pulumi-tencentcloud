@@ -7,41 +7,47 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a vpc trafficPackage
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Vpc.NewTrafficPackage(ctx, "example", &Vpc.TrafficPackageArgs{
-// 			TrafficAmount: pulumi.Int(10),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Vpc.NewTrafficPackage(ctx, "example", &Vpc.TrafficPackageArgs{
+//				TrafficAmount: pulumi.Int(10),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // vpc traffic_package can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Vpc/trafficPackage:TrafficPackage traffic_package traffic_package_id
+// $ pulumi import tencentcloud:Vpc/trafficPackage:TrafficPackage traffic_package traffic_package_id
 // ```
 type TrafficPackage struct {
 	pulumi.CustomResourceState
@@ -66,7 +72,7 @@ func NewTrafficPackage(ctx *pulumi.Context,
 	if args.TrafficAmount == nil {
 		return nil, errors.New("invalid value for required argument 'TrafficAmount'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource TrafficPackage
 	err := ctx.RegisterResource("tencentcloud:Vpc/trafficPackage:TrafficPackage", name, args, &resource, opts...)
 	if err != nil {
@@ -151,7 +157,7 @@ func (i *TrafficPackage) ToTrafficPackageOutputWithContext(ctx context.Context) 
 // TrafficPackageArrayInput is an input type that accepts TrafficPackageArray and TrafficPackageArrayOutput values.
 // You can construct a concrete instance of `TrafficPackageArrayInput` via:
 //
-//          TrafficPackageArray{ TrafficPackageArgs{...} }
+//	TrafficPackageArray{ TrafficPackageArgs{...} }
 type TrafficPackageArrayInput interface {
 	pulumi.Input
 
@@ -176,7 +182,7 @@ func (i TrafficPackageArray) ToTrafficPackageArrayOutputWithContext(ctx context.
 // TrafficPackageMapInput is an input type that accepts TrafficPackageMap and TrafficPackageMapOutput values.
 // You can construct a concrete instance of `TrafficPackageMapInput` via:
 //
-//          TrafficPackageMap{ "key": TrafficPackageArgs{...} }
+//	TrafficPackageMap{ "key": TrafficPackageArgs{...} }
 type TrafficPackageMapInput interface {
 	pulumi.Input
 

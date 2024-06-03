@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,26 +11,25 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const foo = pulumi.output(tencentcloud.Kubernetes.getClusterCommonNames({
+ * const foo = tencentcloud.Kubernetes.getClusterCommonNames({
  *     clusterId: "cls-12345678",
  *     subaccountUins: [
  *         "1234567890",
  *         "0987654321",
  *     ],
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getClusterCommonNames(args?: GetClusterCommonNamesArgs, opts?: pulumi.InvokeOptions): Promise<GetClusterCommonNamesResult> {
     args = args || {};
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Kubernetes/getClusterCommonNames:getClusterCommonNames", {
         "clusterId": args.clusterId,
         "resultOutputFile": args.resultOutputFile,
@@ -47,7 +47,7 @@ export interface GetClusterCommonNamesArgs {
      */
     clusterId?: string;
     /**
-     * Used for save result.
+     * Used to save results.
      */
     resultOutputFile?: string;
     /**
@@ -77,9 +77,28 @@ export interface GetClusterCommonNamesResult {
     readonly roleIds?: string[];
     readonly subaccountUins?: string[];
 }
-
+/**
+ * Provide a datasource to query cluster CommonNames.
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const foo = tencentcloud.Kubernetes.getClusterCommonNames({
+ *     clusterId: "cls-12345678",
+ *     subaccountUins: [
+ *         "1234567890",
+ *         "0987654321",
+ *     ],
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getClusterCommonNamesOutput(args?: GetClusterCommonNamesOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetClusterCommonNamesResult> {
-    return pulumi.output(args).apply(a => getClusterCommonNames(a, opts))
+    return pulumi.output(args).apply((a: any) => getClusterCommonNames(a, opts))
 }
 
 /**
@@ -91,7 +110,7 @@ export interface GetClusterCommonNamesOutputArgs {
      */
     clusterId?: pulumi.Input<string>;
     /**
-     * Used for save result.
+     * Used to save results.
      */
     resultOutputFile?: pulumi.Input<string>;
     /**

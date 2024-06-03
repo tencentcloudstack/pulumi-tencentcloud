@@ -11,11 +11,12 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const demo = new tencentcloud.Dnspod.Record("demo", {
+ * const demo = new tencentcloud.dnspod.Record("demo", {
  *     domain: "mikatong.com",
  *     recordLine: "默认",
  *     recordType: "A",
@@ -23,13 +24,14 @@ import * as utilities from "../utilities";
  *     value: "1.2.3.9",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * DnsPod Domain record can be imported using the Domain#RecordId, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Dnspod/record:Record demo arunma.com#1194109872
+ * $ pulumi import tencentcloud:Dnspod/record:Record demo arunma.com#1194109872
  * ```
  */
 export class Record extends pulumi.CustomResource {

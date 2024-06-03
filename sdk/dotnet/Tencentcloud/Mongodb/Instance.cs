@@ -15,43 +15,50 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mongodb
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var mongodb = new Tencentcloud.Mongodb.Instance("mongodb", new()
     ///     {
-    ///         var mongodb = new Tencentcloud.Mongodb.Instance("mongodb", new Tencentcloud.Mongodb.InstanceArgs
-    ///         {
-    ///             AvailableZone = "ap-guangzhou-2",
-    ///             EngineVersion = "MONGO_36_WT",
-    ///             InstanceName = "mongodb",
-    ///             MachineType = "HIO10G",
-    ///             Memory = 4,
-    ///             Password = "password1234",
-    ///             ProjectId = 0,
-    ///             SubnetId = "subnet-xxxxxx",
-    ///             Volume = 100,
-    ///             VpcId = "vpc-xxxxxx",
-    ///         });
-    ///     }
+    ///         AvailableZone = "ap-guangzhou-2",
+    ///         EngineVersion = "MONGO_36_WT",
+    ///         InstanceName = "mongodb",
+    ///         MachineType = "HIO10G",
+    ///         Memory = 4,
+    ///         Password = "password1234",
+    ///         ProjectId = 0,
+    ///         SubnetId = "subnet-xxxxxx",
+    ///         Volume = 100,
+    ///         VpcId = "vpc-xxxxxx",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// Mongodb instance can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Mongodb/instance:Instance mongodb cmgo-41s6jwy4
+    /// $ pulumi import tencentcloud:Mongodb/instance:Instance mongodb cmgo-41s6jwy4
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Mongodb/instance:Instance")]
-    public partial class Instance : Pulumi.CustomResource
+    public partial class Instance : global::Pulumi.CustomResource
     {
+        /// <summary>
+        /// Add node attribute list.
+        /// </summary>
+        [Output("addNodeLists")]
+        public Output<ImmutableArray<Outputs.InstanceAddNodeList>> AddNodeLists { get; private set; } = null!;
+
         /// <summary>
         /// Auto renew flag. Valid values are `0`(NOTIFY_AND_MANUAL_RENEW), `1`(NOTIFY_AND_AUTO_RENEW) and `2`(DISABLE_NOTIFY_AND_MANUAL_RENEW). Default value is `0`. Note: only works for PREPAID instance. Only supports`0` and `1` for creation.
         /// </summary>
@@ -141,6 +148,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mongodb
         public Output<int?> ProjectId { get; private set; } = null!;
 
         /// <summary>
+        /// Add node attribute list.
+        /// </summary>
+        [Output("removeNodeLists")]
+        public Output<ImmutableArray<Outputs.InstanceRemoveNodeList>> RemoveNodeLists { get; private set; } = null!;
+
+        /// <summary>
         /// ID of the security group.
         /// </summary>
         [Output("securityGroups")]
@@ -218,6 +231,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mongodb
             {
                 Version = Utilities.Version,
                 PluginDownloadURL = "github://api.github.com/tencentcloudstack",
+                AdditionalSecretOutputs =
+                {
+                    "password",
+                },
             };
             var merged = CustomResourceOptions.Merge(defaultOptions, options);
             // Override the ID if one was specified for consistency with other language SDKs.
@@ -239,8 +256,20 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mongodb
         }
     }
 
-    public sealed class InstanceArgs : Pulumi.ResourceArgs
+    public sealed class InstanceArgs : global::Pulumi.ResourceArgs
     {
+        [Input("addNodeLists")]
+        private InputList<Inputs.InstanceAddNodeListArgs>? _addNodeLists;
+
+        /// <summary>
+        /// Add node attribute list.
+        /// </summary>
+        public InputList<Inputs.InstanceAddNodeListArgs> AddNodeLists
+        {
+            get => _addNodeLists ?? (_addNodeLists = new InputList<Inputs.InstanceAddNodeListArgs>());
+            set => _addNodeLists = value;
+        }
+
         /// <summary>
         /// Auto renew flag. Valid values are `0`(NOTIFY_AND_MANUAL_RENEW), `1`(NOTIFY_AND_AUTO_RENEW) and `2`(DISABLE_NOTIFY_AND_MANUAL_RENEW). Default value is `0`. Note: only works for PREPAID instance. Only supports`0` and `1` for creation.
         /// </summary>
@@ -311,11 +340,21 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mongodb
         [Input("nodeNum")]
         public Input<int>? NodeNum { get; set; }
 
+        [Input("password")]
+        private Input<string>? _password;
+
         /// <summary>
         /// Password of this Mongodb account.
         /// </summary>
-        [Input("password")]
-        public Input<string>? Password { get; set; }
+        public Input<string>? Password
+        {
+            get => _password;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _password = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
 
         /// <summary>
         /// The tenancy (time unit is month) of the prepaid instance. Valid values are 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36. NOTE: it only works when charge_type is set to `PREPAID`.
@@ -328,6 +367,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mongodb
         /// </summary>
         [Input("projectId")]
         public Input<int>? ProjectId { get; set; }
+
+        [Input("removeNodeLists")]
+        private InputList<Inputs.InstanceRemoveNodeListArgs>? _removeNodeLists;
+
+        /// <summary>
+        /// Add node attribute list.
+        /// </summary>
+        public InputList<Inputs.InstanceRemoveNodeListArgs> RemoveNodeLists
+        {
+            get => _removeNodeLists ?? (_removeNodeLists = new InputList<Inputs.InstanceRemoveNodeListArgs>());
+            set => _removeNodeLists = value;
+        }
 
         [Input("securityGroups")]
         private InputList<string>? _securityGroups;
@@ -374,10 +425,23 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mongodb
         public InstanceArgs()
         {
         }
+        public static new InstanceArgs Empty => new InstanceArgs();
     }
 
-    public sealed class InstanceState : Pulumi.ResourceArgs
+    public sealed class InstanceState : global::Pulumi.ResourceArgs
     {
+        [Input("addNodeLists")]
+        private InputList<Inputs.InstanceAddNodeListGetArgs>? _addNodeLists;
+
+        /// <summary>
+        /// Add node attribute list.
+        /// </summary>
+        public InputList<Inputs.InstanceAddNodeListGetArgs> AddNodeLists
+        {
+            get => _addNodeLists ?? (_addNodeLists = new InputList<Inputs.InstanceAddNodeListGetArgs>());
+            set => _addNodeLists = value;
+        }
+
         /// <summary>
         /// Auto renew flag. Valid values are `0`(NOTIFY_AND_MANUAL_RENEW), `1`(NOTIFY_AND_AUTO_RENEW) and `2`(DISABLE_NOTIFY_AND_MANUAL_RENEW). Default value is `0`. Note: only works for PREPAID instance. Only supports`0` and `1` for creation.
         /// </summary>
@@ -454,11 +518,21 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mongodb
         [Input("nodeNum")]
         public Input<int>? NodeNum { get; set; }
 
+        [Input("password")]
+        private Input<string>? _password;
+
         /// <summary>
         /// Password of this Mongodb account.
         /// </summary>
-        [Input("password")]
-        public Input<string>? Password { get; set; }
+        public Input<string>? Password
+        {
+            get => _password;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _password = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
 
         /// <summary>
         /// The tenancy (time unit is month) of the prepaid instance. Valid values are 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36. NOTE: it only works when charge_type is set to `PREPAID`.
@@ -471,6 +545,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mongodb
         /// </summary>
         [Input("projectId")]
         public Input<int>? ProjectId { get; set; }
+
+        [Input("removeNodeLists")]
+        private InputList<Inputs.InstanceRemoveNodeListGetArgs>? _removeNodeLists;
+
+        /// <summary>
+        /// Add node attribute list.
+        /// </summary>
+        public InputList<Inputs.InstanceRemoveNodeListGetArgs> RemoveNodeLists
+        {
+            get => _removeNodeLists ?? (_removeNodeLists = new InputList<Inputs.InstanceRemoveNodeListGetArgs>());
+            set => _removeNodeLists = value;
+        }
 
         [Input("securityGroups")]
         private InputList<string>? _securityGroups;
@@ -547,5 +633,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mongodb
         public InstanceState()
         {
         }
+        public static new InstanceState Empty => new InstanceState();
     }
 }

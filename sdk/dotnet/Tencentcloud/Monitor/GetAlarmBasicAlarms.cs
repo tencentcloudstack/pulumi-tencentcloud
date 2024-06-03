@@ -15,110 +15,104 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
         /// <summary>
         /// Use this data source to query detailed information of monitor basic_alarms
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var alarms = Tencentcloud.Monitor.GetAlarmBasicAlarms.Invoke(new()
         ///     {
-        ///         var alarms = Output.Create(Tencentcloud.Monitor.GetAlarmBasicAlarms.InvokeAsync(new Tencentcloud.Monitor.GetAlarmBasicAlarmsArgs
+        ///         AlarmStatuses = new[]
         ///         {
-        ///             AlarmStatuses = 
-        ///             {
-        ///                 1,
-        ///             },
-        ///             EndTime = 1697098903,
-        ///             InstanceGroupIds = 
-        ///             {
-        ///                 5497073,
-        ///             },
-        ///             MetricNames = 
-        ///             {
-        ///                 "cpu_usage",
-        ///             },
-        ///             Module = "monitor",
-        ///             OccurTimeOrder = "DESC",
-        ///             ProjectIds = 
-        ///             {
-        ///                 0,
-        ///             },
-        ///             StartTime = 1696990903,
-        ///             ViewNames = 
-        ///             {
-        ///                 "cvm_device",
-        ///             },
-        ///         }));
-        ///     }
+        ///             1,
+        ///         },
+        ///         EndTime = 1697098903,
+        ///         InstanceGroupIds = new[]
+        ///         {
+        ///             5497073,
+        ///         },
+        ///         MetricNames = new[]
+        ///         {
+        ///             "cpu_usage",
+        ///         },
+        ///         Module = "monitor",
+        ///         OccurTimeOrder = "DESC",
+        ///         ProjectIds = new[]
+        ///         {
+        ///             0,
+        ///         },
+        ///         StartTime = 1696990903,
+        ///         ViewNames = new[]
+        ///         {
+        ///             "cvm_device",
+        ///         },
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetAlarmBasicAlarmsResult> InvokeAsync(GetAlarmBasicAlarmsArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetAlarmBasicAlarmsResult>("tencentcloud:Monitor/getAlarmBasicAlarms:getAlarmBasicAlarms", args ?? new GetAlarmBasicAlarmsArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetAlarmBasicAlarmsResult>("tencentcloud:Monitor/getAlarmBasicAlarms:getAlarmBasicAlarms", args ?? new GetAlarmBasicAlarmsArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of monitor basic_alarms
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var alarms = Tencentcloud.Monitor.GetAlarmBasicAlarms.Invoke(new()
         ///     {
-        ///         var alarms = Output.Create(Tencentcloud.Monitor.GetAlarmBasicAlarms.InvokeAsync(new Tencentcloud.Monitor.GetAlarmBasicAlarmsArgs
+        ///         AlarmStatuses = new[]
         ///         {
-        ///             AlarmStatuses = 
-        ///             {
-        ///                 1,
-        ///             },
-        ///             EndTime = 1697098903,
-        ///             InstanceGroupIds = 
-        ///             {
-        ///                 5497073,
-        ///             },
-        ///             MetricNames = 
-        ///             {
-        ///                 "cpu_usage",
-        ///             },
-        ///             Module = "monitor",
-        ///             OccurTimeOrder = "DESC",
-        ///             ProjectIds = 
-        ///             {
-        ///                 0,
-        ///             },
-        ///             StartTime = 1696990903,
-        ///             ViewNames = 
-        ///             {
-        ///                 "cvm_device",
-        ///             },
-        ///         }));
-        ///     }
+        ///             1,
+        ///         },
+        ///         EndTime = 1697098903,
+        ///         InstanceGroupIds = new[]
+        ///         {
+        ///             5497073,
+        ///         },
+        ///         MetricNames = new[]
+        ///         {
+        ///             "cpu_usage",
+        ///         },
+        ///         Module = "monitor",
+        ///         OccurTimeOrder = "DESC",
+        ///         ProjectIds = new[]
+        ///         {
+        ///             0,
+        ///         },
+        ///         StartTime = 1696990903,
+        ///         ViewNames = new[]
+        ///         {
+        ///             "cvm_device",
+        ///         },
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetAlarmBasicAlarmsResult> Invoke(GetAlarmBasicAlarmsInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetAlarmBasicAlarmsResult>("tencentcloud:Monitor/getAlarmBasicAlarms:getAlarmBasicAlarms", args ?? new GetAlarmBasicAlarmsInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetAlarmBasicAlarmsResult>("tencentcloud:Monitor/getAlarmBasicAlarms:getAlarmBasicAlarms", args ?? new GetAlarmBasicAlarmsInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetAlarmBasicAlarmsArgs : Pulumi.InvokeArgs
+    public sealed class GetAlarmBasicAlarmsArgs : global::Pulumi.InvokeArgs
     {
         [Input("alarmStatuses")]
         private List<int>? _alarmStatuses;
@@ -219,9 +213,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
         public GetAlarmBasicAlarmsArgs()
         {
         }
+        public static new GetAlarmBasicAlarmsArgs Empty => new GetAlarmBasicAlarmsArgs();
     }
 
-    public sealed class GetAlarmBasicAlarmsInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetAlarmBasicAlarmsInvokeArgs : global::Pulumi.InvokeArgs
     {
         [Input("alarmStatuses")]
         private InputList<int>? _alarmStatuses;
@@ -322,6 +317,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
         public GetAlarmBasicAlarmsInvokeArgs()
         {
         }
+        public static new GetAlarmBasicAlarmsInvokeArgs Empty => new GetAlarmBasicAlarmsInvokeArgs();
     }
 
 

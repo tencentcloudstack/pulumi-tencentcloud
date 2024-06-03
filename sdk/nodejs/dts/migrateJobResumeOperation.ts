@@ -9,15 +9,17 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const resume = new tencentcloud.Dts.MigrateJobResumeOperation("resume", {
+ * const resume = new tencentcloud.dts.MigrateJobResumeOperation("resume", {
  *     jobId: "job_id",
  *     resumeOption: "normal",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export class MigrateJobResumeOperation extends pulumi.CustomResource {
     /**

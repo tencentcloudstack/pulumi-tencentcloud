@@ -15,58 +15,52 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cvm
         /// <summary>
         /// Use this data source to query detailed information of cvm disaster_recover_group_quota
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
-        ///     {
-        ///         var disasterRecoverGroupQuota = Output.Create(Tencentcloud.Cvm.GetDisasterRecoverGroupQuota.InvokeAsync());
-        ///     }
+        ///     var disasterRecoverGroupQuota = Tencentcloud.Cvm.GetDisasterRecoverGroupQuota.Invoke();
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetDisasterRecoverGroupQuotaResult> InvokeAsync(GetDisasterRecoverGroupQuotaArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetDisasterRecoverGroupQuotaResult>("tencentcloud:Cvm/getDisasterRecoverGroupQuota:getDisasterRecoverGroupQuota", args ?? new GetDisasterRecoverGroupQuotaArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetDisasterRecoverGroupQuotaResult>("tencentcloud:Cvm/getDisasterRecoverGroupQuota:getDisasterRecoverGroupQuota", args ?? new GetDisasterRecoverGroupQuotaArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of cvm disaster_recover_group_quota
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
-        ///     {
-        ///         var disasterRecoverGroupQuota = Output.Create(Tencentcloud.Cvm.GetDisasterRecoverGroupQuota.InvokeAsync());
-        ///     }
+        ///     var disasterRecoverGroupQuota = Tencentcloud.Cvm.GetDisasterRecoverGroupQuota.Invoke();
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetDisasterRecoverGroupQuotaResult> Invoke(GetDisasterRecoverGroupQuotaInvokeArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetDisasterRecoverGroupQuotaResult>("tencentcloud:Cvm/getDisasterRecoverGroupQuota:getDisasterRecoverGroupQuota", args ?? new GetDisasterRecoverGroupQuotaInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetDisasterRecoverGroupQuotaResult>("tencentcloud:Cvm/getDisasterRecoverGroupQuota:getDisasterRecoverGroupQuota", args ?? new GetDisasterRecoverGroupQuotaInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetDisasterRecoverGroupQuotaArgs : Pulumi.InvokeArgs
+    public sealed class GetDisasterRecoverGroupQuotaArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Used to save results.
@@ -77,9 +71,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cvm
         public GetDisasterRecoverGroupQuotaArgs()
         {
         }
+        public static new GetDisasterRecoverGroupQuotaArgs Empty => new GetDisasterRecoverGroupQuotaArgs();
     }
 
-    public sealed class GetDisasterRecoverGroupQuotaInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetDisasterRecoverGroupQuotaInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Used to save results.
@@ -90,6 +85,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cvm
         public GetDisasterRecoverGroupQuotaInvokeArgs()
         {
         }
+        public static new GetDisasterRecoverGroupQuotaInvokeArgs Empty => new GetDisasterRecoverGroupQuotaInvokeArgs();
     }
 
 

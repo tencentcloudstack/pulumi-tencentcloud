@@ -15,136 +15,132 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Wedata
         /// <summary>
         /// Use this data source to query detailed information of wedata data_source_list
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
+        /// 
         /// ### Query All
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
-        ///     {
-        ///         var example = Output.Create(Tencentcloud.Wedata.GetDataSourceList.InvokeAsync());
-        ///     }
+        ///     var example = Tencentcloud.Wedata.GetDataSourceList.Invoke();
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% example %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
+        /// 
         /// ### Query By filter
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var example = Tencentcloud.Wedata.GetDataSourceList.Invoke(new()
         ///     {
-        ///         var example = Output.Create(Tencentcloud.Wedata.GetDataSourceList.InvokeAsync(new Tencentcloud.Wedata.GetDataSourceListArgs
+        ///         Filters = new[]
         ///         {
-        ///             Filters = 
+        ///             new Tencentcloud.Wedata.Inputs.GetDataSourceListFilterInputArgs
         ///             {
-        ///                 new Tencentcloud.Wedata.Inputs.GetDataSourceListFilterArgs
+        ///                 Name = "Name",
+        ///                 Values = new[]
         ///                 {
-        ///                     Name = "Name",
-        ///                     Values = 
-        ///                     {
-        ///                         "tf_example",
-        ///                     },
+        ///                     "tf_example",
         ///                 },
         ///             },
-        ///             OrderFields = 
+        ///         },
+        ///         OrderFields = new[]
+        ///         {
+        ///             new Tencentcloud.Wedata.Inputs.GetDataSourceListOrderFieldInputArgs
         ///             {
-        ///                 new Tencentcloud.Wedata.Inputs.GetDataSourceListOrderFieldArgs
-        ///                 {
-        ///                     Direction = "DESC",
-        ///                     Name = "create_time",
-        ///                 },
+        ///                 Direction = "DESC",
+        ///                 Name = "create_time",
         ///             },
-        ///         }));
-        ///     }
+        ///         },
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetDataSourceListResult> InvokeAsync(GetDataSourceListArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetDataSourceListResult>("tencentcloud:Wedata/getDataSourceList:getDataSourceList", args ?? new GetDataSourceListArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetDataSourceListResult>("tencentcloud:Wedata/getDataSourceList:getDataSourceList", args ?? new GetDataSourceListArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of wedata data_source_list
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
+        /// 
         /// ### Query All
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
-        ///     {
-        ///         var example = Output.Create(Tencentcloud.Wedata.GetDataSourceList.InvokeAsync());
-        ///     }
+        ///     var example = Tencentcloud.Wedata.GetDataSourceList.Invoke();
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% example %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
+        /// 
         /// ### Query By filter
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var example = Tencentcloud.Wedata.GetDataSourceList.Invoke(new()
         ///     {
-        ///         var example = Output.Create(Tencentcloud.Wedata.GetDataSourceList.InvokeAsync(new Tencentcloud.Wedata.GetDataSourceListArgs
+        ///         Filters = new[]
         ///         {
-        ///             Filters = 
+        ///             new Tencentcloud.Wedata.Inputs.GetDataSourceListFilterInputArgs
         ///             {
-        ///                 new Tencentcloud.Wedata.Inputs.GetDataSourceListFilterArgs
+        ///                 Name = "Name",
+        ///                 Values = new[]
         ///                 {
-        ///                     Name = "Name",
-        ///                     Values = 
-        ///                     {
-        ///                         "tf_example",
-        ///                     },
+        ///                     "tf_example",
         ///                 },
         ///             },
-        ///             OrderFields = 
+        ///         },
+        ///         OrderFields = new[]
+        ///         {
+        ///             new Tencentcloud.Wedata.Inputs.GetDataSourceListOrderFieldInputArgs
         ///             {
-        ///                 new Tencentcloud.Wedata.Inputs.GetDataSourceListOrderFieldArgs
-        ///                 {
-        ///                     Direction = "DESC",
-        ///                     Name = "create_time",
-        ///                 },
+        ///                 Direction = "DESC",
+        ///                 Name = "create_time",
         ///             },
-        ///         }));
-        ///     }
+        ///         },
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetDataSourceListResult> Invoke(GetDataSourceListInvokeArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetDataSourceListResult>("tencentcloud:Wedata/getDataSourceList:getDataSourceList", args ?? new GetDataSourceListInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetDataSourceListResult>("tencentcloud:Wedata/getDataSourceList:getDataSourceList", args ?? new GetDataSourceListInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetDataSourceListArgs : Pulumi.InvokeArgs
+    public sealed class GetDataSourceListArgs : global::Pulumi.InvokeArgs
     {
         [Input("filters")]
         private List<Inputs.GetDataSourceListFilterArgs>? _filters;
@@ -179,9 +175,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Wedata
         public GetDataSourceListArgs()
         {
         }
+        public static new GetDataSourceListArgs Empty => new GetDataSourceListArgs();
     }
 
-    public sealed class GetDataSourceListInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetDataSourceListInvokeArgs : global::Pulumi.InvokeArgs
     {
         [Input("filters")]
         private InputList<Inputs.GetDataSourceListFilterInputArgs>? _filters;
@@ -216,6 +213,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Wedata
         public GetDataSourceListInvokeArgs()
         {
         }
+        public static new GetDataSourceListInvokeArgs Empty => new GetDataSourceListInvokeArgs();
     }
 
 

@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cvm
 {
     [TencentcloudResourceType("tencentcloud:Cvm/programFpgaImage:ProgramFpgaImage")]
-    public partial class ProgramFpgaImage : Pulumi.CustomResource
+    public partial class ProgramFpgaImage : global::Pulumi.CustomResource
     {
         /// <summary>
         /// The DBDF number of the FPGA card on the instance, if left blank, the FPGA image will be burned to all FPGA cards owned
@@ -83,7 +83,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cvm
         }
     }
 
-    public sealed class ProgramFpgaImageArgs : Pulumi.ResourceArgs
+    public sealed class ProgramFpgaImageArgs : global::Pulumi.ResourceArgs
     {
         [Input("dbdFs")]
         private InputList<string>? _dbdFs;
@@ -119,9 +119,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cvm
         public ProgramFpgaImageArgs()
         {
         }
+        public static new ProgramFpgaImageArgs Empty => new ProgramFpgaImageArgs();
     }
 
-    public sealed class ProgramFpgaImageState : Pulumi.ResourceArgs
+    public sealed class ProgramFpgaImageState : global::Pulumi.ResourceArgs
     {
         [Input("dbdFs")]
         private InputList<string>? _dbdFs;
@@ -157,5 +158,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cvm
         public ProgramFpgaImageState()
         {
         }
+        public static new ProgramFpgaImageState Empty => new ProgramFpgaImageState();
     }
 }

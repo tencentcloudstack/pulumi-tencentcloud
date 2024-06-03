@@ -5,64 +5,201 @@ import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
 // Export members:
-export * from "./api";
-export * from "./apiApp";
-export * from "./apiAppAttachment";
-export * from "./apiDoc";
-export * from "./apiKey";
-export * from "./apiKeyAttachment";
-export * from "./customDomain";
-export * from "./getApiAppApi";
-export * from "./getApiAppService";
-export * from "./getApiApps";
-export * from "./getApiDocs";
-export * from "./getApiKeys";
-export * from "./getApiPlugins";
-export * from "./getApiUsagePlans";
-export * from "./getApis";
-export * from "./getBindApiAppsStatus";
-export * from "./getCustomerDomains";
-export * from "./getIpStrategies";
-export * from "./getPlugins";
-export * from "./getServiceEnvironmentList";
-export * from "./getServiceReleaseVersions";
-export * from "./getServices";
-export * from "./getThrottlingApis";
-export * from "./getThrottlingServices";
-export * from "./getUpstreams";
-export * from "./getUsagePlanEnvironments";
-export * from "./getUsagePlans";
-export * from "./importOpenApi";
-export * from "./ipStrategy";
-export * from "./plugin";
-export * from "./pluginAttachment";
-export * from "./service";
-export * from "./serviceRelease";
-export * from "./strategyAttachment";
-export * from "./updateApiAppKey";
-export * from "./upstream";
-export * from "./usagePlan";
-export * from "./usagePlanAttachment";
+export { ApiArgs, ApiState } from "./api";
+export type Api = import("./api").Api;
+export const Api: typeof import("./api").Api = null as any;
+utilities.lazyLoad(exports, ["Api"], () => require("./api"));
 
-// Import resources to register:
-import { Api } from "./api";
-import { ApiApp } from "./apiApp";
-import { ApiAppAttachment } from "./apiAppAttachment";
-import { ApiDoc } from "./apiDoc";
-import { ApiKey } from "./apiKey";
-import { ApiKeyAttachment } from "./apiKeyAttachment";
-import { CustomDomain } from "./customDomain";
-import { ImportOpenApi } from "./importOpenApi";
-import { IpStrategy } from "./ipStrategy";
-import { Plugin } from "./plugin";
-import { PluginAttachment } from "./pluginAttachment";
-import { Service } from "./service";
-import { ServiceRelease } from "./serviceRelease";
-import { StrategyAttachment } from "./strategyAttachment";
-import { UpdateApiAppKey } from "./updateApiAppKey";
-import { Upstream } from "./upstream";
-import { UsagePlan } from "./usagePlan";
-import { UsagePlanAttachment } from "./usagePlanAttachment";
+export { ApiAppArgs, ApiAppState } from "./apiApp";
+export type ApiApp = import("./apiApp").ApiApp;
+export const ApiApp: typeof import("./apiApp").ApiApp = null as any;
+utilities.lazyLoad(exports, ["ApiApp"], () => require("./apiApp"));
+
+export { ApiAppAttachmentArgs, ApiAppAttachmentState } from "./apiAppAttachment";
+export type ApiAppAttachment = import("./apiAppAttachment").ApiAppAttachment;
+export const ApiAppAttachment: typeof import("./apiAppAttachment").ApiAppAttachment = null as any;
+utilities.lazyLoad(exports, ["ApiAppAttachment"], () => require("./apiAppAttachment"));
+
+export { ApiDocArgs, ApiDocState } from "./apiDoc";
+export type ApiDoc = import("./apiDoc").ApiDoc;
+export const ApiDoc: typeof import("./apiDoc").ApiDoc = null as any;
+utilities.lazyLoad(exports, ["ApiDoc"], () => require("./apiDoc"));
+
+export { ApiKeyArgs, ApiKeyState } from "./apiKey";
+export type ApiKey = import("./apiKey").ApiKey;
+export const ApiKey: typeof import("./apiKey").ApiKey = null as any;
+utilities.lazyLoad(exports, ["ApiKey"], () => require("./apiKey"));
+
+export { ApiKeyAttachmentArgs, ApiKeyAttachmentState } from "./apiKeyAttachment";
+export type ApiKeyAttachment = import("./apiKeyAttachment").ApiKeyAttachment;
+export const ApiKeyAttachment: typeof import("./apiKeyAttachment").ApiKeyAttachment = null as any;
+utilities.lazyLoad(exports, ["ApiKeyAttachment"], () => require("./apiKeyAttachment"));
+
+export { CustomDomainArgs, CustomDomainState } from "./customDomain";
+export type CustomDomain = import("./customDomain").CustomDomain;
+export const CustomDomain: typeof import("./customDomain").CustomDomain = null as any;
+utilities.lazyLoad(exports, ["CustomDomain"], () => require("./customDomain"));
+
+export { GetApiAppApiArgs, GetApiAppApiResult, GetApiAppApiOutputArgs } from "./getApiAppApi";
+export const getApiAppApi: typeof import("./getApiAppApi").getApiAppApi = null as any;
+export const getApiAppApiOutput: typeof import("./getApiAppApi").getApiAppApiOutput = null as any;
+utilities.lazyLoad(exports, ["getApiAppApi","getApiAppApiOutput"], () => require("./getApiAppApi"));
+
+export { GetApiAppServiceArgs, GetApiAppServiceResult, GetApiAppServiceOutputArgs } from "./getApiAppService";
+export const getApiAppService: typeof import("./getApiAppService").getApiAppService = null as any;
+export const getApiAppServiceOutput: typeof import("./getApiAppService").getApiAppServiceOutput = null as any;
+utilities.lazyLoad(exports, ["getApiAppService","getApiAppServiceOutput"], () => require("./getApiAppService"));
+
+export { GetApiAppsArgs, GetApiAppsResult, GetApiAppsOutputArgs } from "./getApiApps";
+export const getApiApps: typeof import("./getApiApps").getApiApps = null as any;
+export const getApiAppsOutput: typeof import("./getApiApps").getApiAppsOutput = null as any;
+utilities.lazyLoad(exports, ["getApiApps","getApiAppsOutput"], () => require("./getApiApps"));
+
+export { GetApiDocsArgs, GetApiDocsResult, GetApiDocsOutputArgs } from "./getApiDocs";
+export const getApiDocs: typeof import("./getApiDocs").getApiDocs = null as any;
+export const getApiDocsOutput: typeof import("./getApiDocs").getApiDocsOutput = null as any;
+utilities.lazyLoad(exports, ["getApiDocs","getApiDocsOutput"], () => require("./getApiDocs"));
+
+export { GetApiKeysArgs, GetApiKeysResult, GetApiKeysOutputArgs } from "./getApiKeys";
+export const getApiKeys: typeof import("./getApiKeys").getApiKeys = null as any;
+export const getApiKeysOutput: typeof import("./getApiKeys").getApiKeysOutput = null as any;
+utilities.lazyLoad(exports, ["getApiKeys","getApiKeysOutput"], () => require("./getApiKeys"));
+
+export { GetApiPluginsArgs, GetApiPluginsResult, GetApiPluginsOutputArgs } from "./getApiPlugins";
+export const getApiPlugins: typeof import("./getApiPlugins").getApiPlugins = null as any;
+export const getApiPluginsOutput: typeof import("./getApiPlugins").getApiPluginsOutput = null as any;
+utilities.lazyLoad(exports, ["getApiPlugins","getApiPluginsOutput"], () => require("./getApiPlugins"));
+
+export { GetApiUsagePlansArgs, GetApiUsagePlansResult, GetApiUsagePlansOutputArgs } from "./getApiUsagePlans";
+export const getApiUsagePlans: typeof import("./getApiUsagePlans").getApiUsagePlans = null as any;
+export const getApiUsagePlansOutput: typeof import("./getApiUsagePlans").getApiUsagePlansOutput = null as any;
+utilities.lazyLoad(exports, ["getApiUsagePlans","getApiUsagePlansOutput"], () => require("./getApiUsagePlans"));
+
+export { GetApisArgs, GetApisResult, GetApisOutputArgs } from "./getApis";
+export const getApis: typeof import("./getApis").getApis = null as any;
+export const getApisOutput: typeof import("./getApis").getApisOutput = null as any;
+utilities.lazyLoad(exports, ["getApis","getApisOutput"], () => require("./getApis"));
+
+export { GetBindApiAppsStatusArgs, GetBindApiAppsStatusResult, GetBindApiAppsStatusOutputArgs } from "./getBindApiAppsStatus";
+export const getBindApiAppsStatus: typeof import("./getBindApiAppsStatus").getBindApiAppsStatus = null as any;
+export const getBindApiAppsStatusOutput: typeof import("./getBindApiAppsStatus").getBindApiAppsStatusOutput = null as any;
+utilities.lazyLoad(exports, ["getBindApiAppsStatus","getBindApiAppsStatusOutput"], () => require("./getBindApiAppsStatus"));
+
+export { GetCustomerDomainsArgs, GetCustomerDomainsResult, GetCustomerDomainsOutputArgs } from "./getCustomerDomains";
+export const getCustomerDomains: typeof import("./getCustomerDomains").getCustomerDomains = null as any;
+export const getCustomerDomainsOutput: typeof import("./getCustomerDomains").getCustomerDomainsOutput = null as any;
+utilities.lazyLoad(exports, ["getCustomerDomains","getCustomerDomainsOutput"], () => require("./getCustomerDomains"));
+
+export { GetIpStrategiesArgs, GetIpStrategiesResult, GetIpStrategiesOutputArgs } from "./getIpStrategies";
+export const getIpStrategies: typeof import("./getIpStrategies").getIpStrategies = null as any;
+export const getIpStrategiesOutput: typeof import("./getIpStrategies").getIpStrategiesOutput = null as any;
+utilities.lazyLoad(exports, ["getIpStrategies","getIpStrategiesOutput"], () => require("./getIpStrategies"));
+
+export { GetPluginsArgs, GetPluginsResult, GetPluginsOutputArgs } from "./getPlugins";
+export const getPlugins: typeof import("./getPlugins").getPlugins = null as any;
+export const getPluginsOutput: typeof import("./getPlugins").getPluginsOutput = null as any;
+utilities.lazyLoad(exports, ["getPlugins","getPluginsOutput"], () => require("./getPlugins"));
+
+export { GetServiceEnvironmentListArgs, GetServiceEnvironmentListResult, GetServiceEnvironmentListOutputArgs } from "./getServiceEnvironmentList";
+export const getServiceEnvironmentList: typeof import("./getServiceEnvironmentList").getServiceEnvironmentList = null as any;
+export const getServiceEnvironmentListOutput: typeof import("./getServiceEnvironmentList").getServiceEnvironmentListOutput = null as any;
+utilities.lazyLoad(exports, ["getServiceEnvironmentList","getServiceEnvironmentListOutput"], () => require("./getServiceEnvironmentList"));
+
+export { GetServiceReleaseVersionsArgs, GetServiceReleaseVersionsResult, GetServiceReleaseVersionsOutputArgs } from "./getServiceReleaseVersions";
+export const getServiceReleaseVersions: typeof import("./getServiceReleaseVersions").getServiceReleaseVersions = null as any;
+export const getServiceReleaseVersionsOutput: typeof import("./getServiceReleaseVersions").getServiceReleaseVersionsOutput = null as any;
+utilities.lazyLoad(exports, ["getServiceReleaseVersions","getServiceReleaseVersionsOutput"], () => require("./getServiceReleaseVersions"));
+
+export { GetServicesArgs, GetServicesResult, GetServicesOutputArgs } from "./getServices";
+export const getServices: typeof import("./getServices").getServices = null as any;
+export const getServicesOutput: typeof import("./getServices").getServicesOutput = null as any;
+utilities.lazyLoad(exports, ["getServices","getServicesOutput"], () => require("./getServices"));
+
+export { GetThrottlingApisArgs, GetThrottlingApisResult, GetThrottlingApisOutputArgs } from "./getThrottlingApis";
+export const getThrottlingApis: typeof import("./getThrottlingApis").getThrottlingApis = null as any;
+export const getThrottlingApisOutput: typeof import("./getThrottlingApis").getThrottlingApisOutput = null as any;
+utilities.lazyLoad(exports, ["getThrottlingApis","getThrottlingApisOutput"], () => require("./getThrottlingApis"));
+
+export { GetThrottlingServicesArgs, GetThrottlingServicesResult, GetThrottlingServicesOutputArgs } from "./getThrottlingServices";
+export const getThrottlingServices: typeof import("./getThrottlingServices").getThrottlingServices = null as any;
+export const getThrottlingServicesOutput: typeof import("./getThrottlingServices").getThrottlingServicesOutput = null as any;
+utilities.lazyLoad(exports, ["getThrottlingServices","getThrottlingServicesOutput"], () => require("./getThrottlingServices"));
+
+export { GetUpstreamsArgs, GetUpstreamsResult, GetUpstreamsOutputArgs } from "./getUpstreams";
+export const getUpstreams: typeof import("./getUpstreams").getUpstreams = null as any;
+export const getUpstreamsOutput: typeof import("./getUpstreams").getUpstreamsOutput = null as any;
+utilities.lazyLoad(exports, ["getUpstreams","getUpstreamsOutput"], () => require("./getUpstreams"));
+
+export { GetUsagePlanEnvironmentsArgs, GetUsagePlanEnvironmentsResult, GetUsagePlanEnvironmentsOutputArgs } from "./getUsagePlanEnvironments";
+export const getUsagePlanEnvironments: typeof import("./getUsagePlanEnvironments").getUsagePlanEnvironments = null as any;
+export const getUsagePlanEnvironmentsOutput: typeof import("./getUsagePlanEnvironments").getUsagePlanEnvironmentsOutput = null as any;
+utilities.lazyLoad(exports, ["getUsagePlanEnvironments","getUsagePlanEnvironmentsOutput"], () => require("./getUsagePlanEnvironments"));
+
+export { GetUsagePlansArgs, GetUsagePlansResult, GetUsagePlansOutputArgs } from "./getUsagePlans";
+export const getUsagePlans: typeof import("./getUsagePlans").getUsagePlans = null as any;
+export const getUsagePlansOutput: typeof import("./getUsagePlans").getUsagePlansOutput = null as any;
+utilities.lazyLoad(exports, ["getUsagePlans","getUsagePlansOutput"], () => require("./getUsagePlans"));
+
+export { ImportOpenApiArgs, ImportOpenApiState } from "./importOpenApi";
+export type ImportOpenApi = import("./importOpenApi").ImportOpenApi;
+export const ImportOpenApi: typeof import("./importOpenApi").ImportOpenApi = null as any;
+utilities.lazyLoad(exports, ["ImportOpenApi"], () => require("./importOpenApi"));
+
+export { IpStrategyArgs, IpStrategyState } from "./ipStrategy";
+export type IpStrategy = import("./ipStrategy").IpStrategy;
+export const IpStrategy: typeof import("./ipStrategy").IpStrategy = null as any;
+utilities.lazyLoad(exports, ["IpStrategy"], () => require("./ipStrategy"));
+
+export { PluginArgs, PluginState } from "./plugin";
+export type Plugin = import("./plugin").Plugin;
+export const Plugin: typeof import("./plugin").Plugin = null as any;
+utilities.lazyLoad(exports, ["Plugin"], () => require("./plugin"));
+
+export { PluginAttachmentArgs, PluginAttachmentState } from "./pluginAttachment";
+export type PluginAttachment = import("./pluginAttachment").PluginAttachment;
+export const PluginAttachment: typeof import("./pluginAttachment").PluginAttachment = null as any;
+utilities.lazyLoad(exports, ["PluginAttachment"], () => require("./pluginAttachment"));
+
+export { ServiceArgs, ServiceState } from "./service";
+export type Service = import("./service").Service;
+export const Service: typeof import("./service").Service = null as any;
+utilities.lazyLoad(exports, ["Service"], () => require("./service"));
+
+export { ServiceReleaseArgs, ServiceReleaseState } from "./serviceRelease";
+export type ServiceRelease = import("./serviceRelease").ServiceRelease;
+export const ServiceRelease: typeof import("./serviceRelease").ServiceRelease = null as any;
+utilities.lazyLoad(exports, ["ServiceRelease"], () => require("./serviceRelease"));
+
+export { StrategyAttachmentArgs, StrategyAttachmentState } from "./strategyAttachment";
+export type StrategyAttachment = import("./strategyAttachment").StrategyAttachment;
+export const StrategyAttachment: typeof import("./strategyAttachment").StrategyAttachment = null as any;
+utilities.lazyLoad(exports, ["StrategyAttachment"], () => require("./strategyAttachment"));
+
+export { UpdateApiAppKeyArgs, UpdateApiAppKeyState } from "./updateApiAppKey";
+export type UpdateApiAppKey = import("./updateApiAppKey").UpdateApiAppKey;
+export const UpdateApiAppKey: typeof import("./updateApiAppKey").UpdateApiAppKey = null as any;
+utilities.lazyLoad(exports, ["UpdateApiAppKey"], () => require("./updateApiAppKey"));
+
+export { UpdateServiceArgs, UpdateServiceState } from "./updateService";
+export type UpdateService = import("./updateService").UpdateService;
+export const UpdateService: typeof import("./updateService").UpdateService = null as any;
+utilities.lazyLoad(exports, ["UpdateService"], () => require("./updateService"));
+
+export { UpstreamArgs, UpstreamState } from "./upstream";
+export type Upstream = import("./upstream").Upstream;
+export const Upstream: typeof import("./upstream").Upstream = null as any;
+utilities.lazyLoad(exports, ["Upstream"], () => require("./upstream"));
+
+export { UsagePlanArgs, UsagePlanState } from "./usagePlan";
+export type UsagePlan = import("./usagePlan").UsagePlan;
+export const UsagePlan: typeof import("./usagePlan").UsagePlan = null as any;
+utilities.lazyLoad(exports, ["UsagePlan"], () => require("./usagePlan"));
+
+export { UsagePlanAttachmentArgs, UsagePlanAttachmentState } from "./usagePlanAttachment";
+export type UsagePlanAttachment = import("./usagePlanAttachment").UsagePlanAttachment;
+export const UsagePlanAttachment: typeof import("./usagePlanAttachment").UsagePlanAttachment = null as any;
+utilities.lazyLoad(exports, ["UsagePlanAttachment"], () => require("./usagePlanAttachment"));
+
 
 const _module = {
     version: utilities.getVersion(),
@@ -98,6 +235,8 @@ const _module = {
                 return new StrategyAttachment(name, <any>undefined, { urn })
             case "tencentcloud:ApiGateway/updateApiAppKey:UpdateApiAppKey":
                 return new UpdateApiAppKey(name, <any>undefined, { urn })
+            case "tencentcloud:ApiGateway/updateService:UpdateService":
+                return new UpdateService(name, <any>undefined, { urn })
             case "tencentcloud:ApiGateway/upstream:Upstream":
                 return new Upstream(name, <any>undefined, { urn })
             case "tencentcloud:ApiGateway/usagePlan:UsagePlan":
@@ -124,6 +263,7 @@ pulumi.runtime.registerResourceModule("tencentcloud", "ApiGateway/service", _mod
 pulumi.runtime.registerResourceModule("tencentcloud", "ApiGateway/serviceRelease", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "ApiGateway/strategyAttachment", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "ApiGateway/updateApiAppKey", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "ApiGateway/updateService", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "ApiGateway/upstream", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "ApiGateway/usagePlan", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "ApiGateway/usagePlanAttachment", _module)

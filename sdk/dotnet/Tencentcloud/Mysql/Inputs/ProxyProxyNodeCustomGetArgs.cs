@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql.Inputs
 {
 
-    public sealed class ProxyProxyNodeCustomGetArgs : Pulumi.ResourceArgs
+    public sealed class ProxyProxyNodeCustomGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Number of CPU cores.
@@ -46,5 +46,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql.Inputs
         public ProxyProxyNodeCustomGetArgs()
         {
         }
+        public static new ProxyProxyNodeCustomGetArgs Empty => new ProxyProxyNodeCustomGetArgs();
     }
 }

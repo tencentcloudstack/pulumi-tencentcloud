@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Pts.Inputs
 {
 
-    public sealed class ScenarioDomainNameConfigHostAliasGetArgs : Pulumi.ResourceArgs
+    public sealed class ScenarioDomainNameConfigHostAliasGetArgs : global::Pulumi.ResourceArgs
     {
         [Input("hostNames")]
         private InputList<string>? _hostNames;
@@ -34,5 +34,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Pts.Inputs
         public ScenarioDomainNameConfigHostAliasGetArgs()
         {
         }
+        public static new ScenarioDomainNameConfigHostAliasGetArgs Empty => new ScenarioDomainNameConfigHostAliasGetArgs();
     }
 }

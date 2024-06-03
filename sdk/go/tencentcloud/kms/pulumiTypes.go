@@ -8,7 +8,10 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
+
+var _ = internal.GetEnvOrDefault
 
 type OverwriteWhiteBoxDeviceFingerprintsDeviceFingerprint struct {
 	// Description.
@@ -20,7 +23,7 @@ type OverwriteWhiteBoxDeviceFingerprintsDeviceFingerprint struct {
 // OverwriteWhiteBoxDeviceFingerprintsDeviceFingerprintInput is an input type that accepts OverwriteWhiteBoxDeviceFingerprintsDeviceFingerprintArgs and OverwriteWhiteBoxDeviceFingerprintsDeviceFingerprintOutput values.
 // You can construct a concrete instance of `OverwriteWhiteBoxDeviceFingerprintsDeviceFingerprintInput` via:
 //
-//          OverwriteWhiteBoxDeviceFingerprintsDeviceFingerprintArgs{...}
+//	OverwriteWhiteBoxDeviceFingerprintsDeviceFingerprintArgs{...}
 type OverwriteWhiteBoxDeviceFingerprintsDeviceFingerprintInput interface {
 	pulumi.Input
 
@@ -50,7 +53,7 @@ func (i OverwriteWhiteBoxDeviceFingerprintsDeviceFingerprintArgs) ToOverwriteWhi
 // OverwriteWhiteBoxDeviceFingerprintsDeviceFingerprintArrayInput is an input type that accepts OverwriteWhiteBoxDeviceFingerprintsDeviceFingerprintArray and OverwriteWhiteBoxDeviceFingerprintsDeviceFingerprintArrayOutput values.
 // You can construct a concrete instance of `OverwriteWhiteBoxDeviceFingerprintsDeviceFingerprintArrayInput` via:
 //
-//          OverwriteWhiteBoxDeviceFingerprintsDeviceFingerprintArray{ OverwriteWhiteBoxDeviceFingerprintsDeviceFingerprintArgs{...} }
+//	OverwriteWhiteBoxDeviceFingerprintsDeviceFingerprintArray{ OverwriteWhiteBoxDeviceFingerprintsDeviceFingerprintArgs{...} }
 type OverwriteWhiteBoxDeviceFingerprintsDeviceFingerprintArrayInput interface {
 	pulumi.Input
 
@@ -148,7 +151,7 @@ type GetDescribeKeysKeyList struct {
 // GetDescribeKeysKeyListInput is an input type that accepts GetDescribeKeysKeyListArgs and GetDescribeKeysKeyListOutput values.
 // You can construct a concrete instance of `GetDescribeKeysKeyListInput` via:
 //
-//          GetDescribeKeysKeyListArgs{...}
+//	GetDescribeKeysKeyListArgs{...}
 type GetDescribeKeysKeyListInput interface {
 	pulumi.Input
 
@@ -200,7 +203,7 @@ func (i GetDescribeKeysKeyListArgs) ToGetDescribeKeysKeyListOutputWithContext(ct
 // GetDescribeKeysKeyListArrayInput is an input type that accepts GetDescribeKeysKeyListArray and GetDescribeKeysKeyListArrayOutput values.
 // You can construct a concrete instance of `GetDescribeKeysKeyListArrayInput` via:
 //
-//          GetDescribeKeysKeyListArray{ GetDescribeKeysKeyListArgs{...} }
+//	GetDescribeKeysKeyListArray{ GetDescribeKeysKeyListArgs{...} }
 type GetDescribeKeysKeyListArrayInput interface {
 	pulumi.Input
 
@@ -353,7 +356,7 @@ type GetKeysKeyList struct {
 // GetKeysKeyListInput is an input type that accepts GetKeysKeyListArgs and GetKeysKeyListOutput values.
 // You can construct a concrete instance of `GetKeysKeyListInput` via:
 //
-//          GetKeysKeyListArgs{...}
+//	GetKeysKeyListArgs{...}
 type GetKeysKeyListInput interface {
 	pulumi.Input
 
@@ -405,7 +408,7 @@ func (i GetKeysKeyListArgs) ToGetKeysKeyListOutputWithContext(ctx context.Contex
 // GetKeysKeyListArrayInput is an input type that accepts GetKeysKeyListArray and GetKeysKeyListArrayOutput values.
 // You can construct a concrete instance of `GetKeysKeyListArrayInput` via:
 //
-//          GetKeysKeyListArray{ GetKeysKeyListArgs{...} }
+//	GetKeysKeyListArray{ GetKeysKeyListArgs{...} }
 type GetKeysKeyListArrayInput interface {
 	pulumi.Input
 
@@ -536,7 +539,7 @@ type GetListAlgorithmsAsymmetricAlgorithm struct {
 // GetListAlgorithmsAsymmetricAlgorithmInput is an input type that accepts GetListAlgorithmsAsymmetricAlgorithmArgs and GetListAlgorithmsAsymmetricAlgorithmOutput values.
 // You can construct a concrete instance of `GetListAlgorithmsAsymmetricAlgorithmInput` via:
 //
-//          GetListAlgorithmsAsymmetricAlgorithmArgs{...}
+//	GetListAlgorithmsAsymmetricAlgorithmArgs{...}
 type GetListAlgorithmsAsymmetricAlgorithmInput interface {
 	pulumi.Input
 
@@ -566,7 +569,7 @@ func (i GetListAlgorithmsAsymmetricAlgorithmArgs) ToGetListAlgorithmsAsymmetricA
 // GetListAlgorithmsAsymmetricAlgorithmArrayInput is an input type that accepts GetListAlgorithmsAsymmetricAlgorithmArray and GetListAlgorithmsAsymmetricAlgorithmArrayOutput values.
 // You can construct a concrete instance of `GetListAlgorithmsAsymmetricAlgorithmArrayInput` via:
 //
-//          GetListAlgorithmsAsymmetricAlgorithmArray{ GetListAlgorithmsAsymmetricAlgorithmArgs{...} }
+//	GetListAlgorithmsAsymmetricAlgorithmArray{ GetListAlgorithmsAsymmetricAlgorithmArgs{...} }
 type GetListAlgorithmsAsymmetricAlgorithmArrayInput interface {
 	pulumi.Input
 
@@ -642,7 +645,7 @@ type GetListAlgorithmsAsymmetricSignVerifyAlgorithm struct {
 // GetListAlgorithmsAsymmetricSignVerifyAlgorithmInput is an input type that accepts GetListAlgorithmsAsymmetricSignVerifyAlgorithmArgs and GetListAlgorithmsAsymmetricSignVerifyAlgorithmOutput values.
 // You can construct a concrete instance of `GetListAlgorithmsAsymmetricSignVerifyAlgorithmInput` via:
 //
-//          GetListAlgorithmsAsymmetricSignVerifyAlgorithmArgs{...}
+//	GetListAlgorithmsAsymmetricSignVerifyAlgorithmArgs{...}
 type GetListAlgorithmsAsymmetricSignVerifyAlgorithmInput interface {
 	pulumi.Input
 
@@ -672,7 +675,7 @@ func (i GetListAlgorithmsAsymmetricSignVerifyAlgorithmArgs) ToGetListAlgorithmsA
 // GetListAlgorithmsAsymmetricSignVerifyAlgorithmArrayInput is an input type that accepts GetListAlgorithmsAsymmetricSignVerifyAlgorithmArray and GetListAlgorithmsAsymmetricSignVerifyAlgorithmArrayOutput values.
 // You can construct a concrete instance of `GetListAlgorithmsAsymmetricSignVerifyAlgorithmArrayInput` via:
 //
-//          GetListAlgorithmsAsymmetricSignVerifyAlgorithmArray{ GetListAlgorithmsAsymmetricSignVerifyAlgorithmArgs{...} }
+//	GetListAlgorithmsAsymmetricSignVerifyAlgorithmArray{ GetListAlgorithmsAsymmetricSignVerifyAlgorithmArgs{...} }
 type GetListAlgorithmsAsymmetricSignVerifyAlgorithmArrayInput interface {
 	pulumi.Input
 
@@ -748,7 +751,7 @@ type GetListAlgorithmsSymmetricAlgorithm struct {
 // GetListAlgorithmsSymmetricAlgorithmInput is an input type that accepts GetListAlgorithmsSymmetricAlgorithmArgs and GetListAlgorithmsSymmetricAlgorithmOutput values.
 // You can construct a concrete instance of `GetListAlgorithmsSymmetricAlgorithmInput` via:
 //
-//          GetListAlgorithmsSymmetricAlgorithmArgs{...}
+//	GetListAlgorithmsSymmetricAlgorithmArgs{...}
 type GetListAlgorithmsSymmetricAlgorithmInput interface {
 	pulumi.Input
 
@@ -778,7 +781,7 @@ func (i GetListAlgorithmsSymmetricAlgorithmArgs) ToGetListAlgorithmsSymmetricAlg
 // GetListAlgorithmsSymmetricAlgorithmArrayInput is an input type that accepts GetListAlgorithmsSymmetricAlgorithmArray and GetListAlgorithmsSymmetricAlgorithmArrayOutput values.
 // You can construct a concrete instance of `GetListAlgorithmsSymmetricAlgorithmArrayInput` via:
 //
-//          GetListAlgorithmsSymmetricAlgorithmArray{ GetListAlgorithmsSymmetricAlgorithmArgs{...} }
+//	GetListAlgorithmsSymmetricAlgorithmArray{ GetListAlgorithmsSymmetricAlgorithmArgs{...} }
 type GetListAlgorithmsSymmetricAlgorithmArrayInput interface {
 	pulumi.Input
 
@@ -852,7 +855,7 @@ type GetListKeysKey struct {
 // GetListKeysKeyInput is an input type that accepts GetListKeysKeyArgs and GetListKeysKeyOutput values.
 // You can construct a concrete instance of `GetListKeysKeyInput` via:
 //
-//          GetListKeysKeyArgs{...}
+//	GetListKeysKeyArgs{...}
 type GetListKeysKeyInput interface {
 	pulumi.Input
 
@@ -880,7 +883,7 @@ func (i GetListKeysKeyArgs) ToGetListKeysKeyOutputWithContext(ctx context.Contex
 // GetListKeysKeyArrayInput is an input type that accepts GetListKeysKeyArray and GetListKeysKeyArrayOutput values.
 // You can construct a concrete instance of `GetListKeysKeyArrayInput` via:
 //
-//          GetListKeysKeyArray{ GetListKeysKeyArgs{...} }
+//	GetListKeysKeyArray{ GetListKeysKeyArgs{...} }
 type GetListKeysKeyArrayInput interface {
 	pulumi.Input
 
@@ -951,7 +954,7 @@ type GetWhiteBoxDeviceFingerprintsList struct {
 // GetWhiteBoxDeviceFingerprintsListInput is an input type that accepts GetWhiteBoxDeviceFingerprintsListArgs and GetWhiteBoxDeviceFingerprintsListOutput values.
 // You can construct a concrete instance of `GetWhiteBoxDeviceFingerprintsListInput` via:
 //
-//          GetWhiteBoxDeviceFingerprintsListArgs{...}
+//	GetWhiteBoxDeviceFingerprintsListArgs{...}
 type GetWhiteBoxDeviceFingerprintsListInput interface {
 	pulumi.Input
 
@@ -981,7 +984,7 @@ func (i GetWhiteBoxDeviceFingerprintsListArgs) ToGetWhiteBoxDeviceFingerprintsLi
 // GetWhiteBoxDeviceFingerprintsListArrayInput is an input type that accepts GetWhiteBoxDeviceFingerprintsListArray and GetWhiteBoxDeviceFingerprintsListArrayOutput values.
 // You can construct a concrete instance of `GetWhiteBoxDeviceFingerprintsListArrayInput` via:
 //
-//          GetWhiteBoxDeviceFingerprintsListArray{ GetWhiteBoxDeviceFingerprintsListArgs{...} }
+//	GetWhiteBoxDeviceFingerprintsListArray{ GetWhiteBoxDeviceFingerprintsListArgs{...} }
 type GetWhiteBoxDeviceFingerprintsListArrayInput interface {
 	pulumi.Input
 
@@ -1077,7 +1080,7 @@ type GetWhiteBoxKeyDetailsKeyInfo struct {
 // GetWhiteBoxKeyDetailsKeyInfoInput is an input type that accepts GetWhiteBoxKeyDetailsKeyInfoArgs and GetWhiteBoxKeyDetailsKeyInfoOutput values.
 // You can construct a concrete instance of `GetWhiteBoxKeyDetailsKeyInfoInput` via:
 //
-//          GetWhiteBoxKeyDetailsKeyInfoArgs{...}
+//	GetWhiteBoxKeyDetailsKeyInfoArgs{...}
 type GetWhiteBoxKeyDetailsKeyInfoInput interface {
 	pulumi.Input
 
@@ -1127,7 +1130,7 @@ func (i GetWhiteBoxKeyDetailsKeyInfoArgs) ToGetWhiteBoxKeyDetailsKeyInfoOutputWi
 // GetWhiteBoxKeyDetailsKeyInfoArrayInput is an input type that accepts GetWhiteBoxKeyDetailsKeyInfoArray and GetWhiteBoxKeyDetailsKeyInfoArrayOutput values.
 // You can construct a concrete instance of `GetWhiteBoxKeyDetailsKeyInfoArrayInput` via:
 //
-//          GetWhiteBoxKeyDetailsKeyInfoArray{ GetWhiteBoxKeyDetailsKeyInfoArgs{...} }
+//	GetWhiteBoxKeyDetailsKeyInfoArray{ GetWhiteBoxKeyDetailsKeyInfoArgs{...} }
 type GetWhiteBoxKeyDetailsKeyInfoArrayInput interface {
 	pulumi.Input
 

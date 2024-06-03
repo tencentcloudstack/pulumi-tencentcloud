@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dts.Inputs
 {
 
-    public sealed class MigrateJobDstInfoExtraAttrArgs : Pulumi.ResourceArgs
+    public sealed class MigrateJobDstInfoExtraAttrArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Key.
@@ -28,5 +28,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dts.Inputs
         public MigrateJobDstInfoExtraAttrArgs()
         {
         }
+        public static new MigrateJobDstInfoExtraAttrArgs Empty => new MigrateJobDstInfoExtraAttrArgs();
     }
 }

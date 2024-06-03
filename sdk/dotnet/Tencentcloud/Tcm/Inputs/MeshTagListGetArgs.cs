@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcm.Inputs
 {
 
-    public sealed class MeshTagListGetArgs : Pulumi.ResourceArgs
+    public sealed class MeshTagListGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Tag key.
@@ -34,5 +34,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcm.Inputs
         public MeshTagListGetArgs()
         {
         }
+        public static new MeshTagListGetArgs Empty => new MeshTagListGetArgs();
     }
 }

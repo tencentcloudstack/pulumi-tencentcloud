@@ -15,92 +15,90 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ccn
         /// <summary>
         /// Use this data source to query detailed information of CCN bandwidth limits.
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var config = new Config();
+        ///     var otherRegion1 = config.Get("otherRegion1") ?? "ap-shanghai";
+        ///     var main = new Tencentcloud.Ccn.Instance("main", new()
         ///     {
-        ///         var config = new Config();
-        ///         var otherRegion1 = config.Get("otherRegion1") ?? "ap-shanghai";
-        ///         var main = new Tencentcloud.Ccn.Instance("main", new Tencentcloud.Ccn.InstanceArgs
-        ///         {
-        ///             Description = "ci-temp-test-ccn-des",
-        ///             Qos = "AG",
-        ///         });
-        ///         var limit = Tencentcloud.Ccn.GetBandwidthLimits.Invoke(new Tencentcloud.Ccn.GetBandwidthLimitsInvokeArgs
-        ///         {
-        ///             CcnId = main.Id,
-        ///         });
-        ///         var limit1 = new Tencentcloud.Ccn.BandwidthLimit("limit1", new Tencentcloud.Ccn.BandwidthLimitArgs
-        ///         {
-        ///             CcnId = main.Id,
-        ///             Region = otherRegion1,
-        ///             BandwidthLimit = 500,
-        ///         });
-        ///     }
+        ///         Description = "ci-temp-test-ccn-des",
+        ///         Qos = "AG",
+        ///     });
         /// 
-        /// }
+        ///     var limit = Tencentcloud.Ccn.GetBandwidthLimits.Invoke(new()
+        ///     {
+        ///         CcnId = main.Id,
+        ///     });
+        /// 
+        ///     var limit1 = new Tencentcloud.Ccn.BandwidthLimit("limit1", new()
+        ///     {
+        ///         CcnId = main.Id,
+        ///         Region = otherRegion1,
+        ///         CcnBandwidthLimit = 500,
+        ///     });
+        /// 
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetBandwidthLimitsResult> InvokeAsync(GetBandwidthLimitsArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetBandwidthLimitsResult>("tencentcloud:Ccn/getBandwidthLimits:getBandwidthLimits", args ?? new GetBandwidthLimitsArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetBandwidthLimitsResult>("tencentcloud:Ccn/getBandwidthLimits:getBandwidthLimits", args ?? new GetBandwidthLimitsArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of CCN bandwidth limits.
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var config = new Config();
+        ///     var otherRegion1 = config.Get("otherRegion1") ?? "ap-shanghai";
+        ///     var main = new Tencentcloud.Ccn.Instance("main", new()
         ///     {
-        ///         var config = new Config();
-        ///         var otherRegion1 = config.Get("otherRegion1") ?? "ap-shanghai";
-        ///         var main = new Tencentcloud.Ccn.Instance("main", new Tencentcloud.Ccn.InstanceArgs
-        ///         {
-        ///             Description = "ci-temp-test-ccn-des",
-        ///             Qos = "AG",
-        ///         });
-        ///         var limit = Tencentcloud.Ccn.GetBandwidthLimits.Invoke(new Tencentcloud.Ccn.GetBandwidthLimitsInvokeArgs
-        ///         {
-        ///             CcnId = main.Id,
-        ///         });
-        ///         var limit1 = new Tencentcloud.Ccn.BandwidthLimit("limit1", new Tencentcloud.Ccn.BandwidthLimitArgs
-        ///         {
-        ///             CcnId = main.Id,
-        ///             Region = otherRegion1,
-        ///             BandwidthLimit = 500,
-        ///         });
-        ///     }
+        ///         Description = "ci-temp-test-ccn-des",
+        ///         Qos = "AG",
+        ///     });
         /// 
-        /// }
+        ///     var limit = Tencentcloud.Ccn.GetBandwidthLimits.Invoke(new()
+        ///     {
+        ///         CcnId = main.Id,
+        ///     });
+        /// 
+        ///     var limit1 = new Tencentcloud.Ccn.BandwidthLimit("limit1", new()
+        ///     {
+        ///         CcnId = main.Id,
+        ///         Region = otherRegion1,
+        ///         CcnBandwidthLimit = 500,
+        ///     });
+        /// 
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetBandwidthLimitsResult> Invoke(GetBandwidthLimitsInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetBandwidthLimitsResult>("tencentcloud:Ccn/getBandwidthLimits:getBandwidthLimits", args ?? new GetBandwidthLimitsInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetBandwidthLimitsResult>("tencentcloud:Ccn/getBandwidthLimits:getBandwidthLimits", args ?? new GetBandwidthLimitsInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetBandwidthLimitsArgs : Pulumi.InvokeArgs
+    public sealed class GetBandwidthLimitsArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// ID of the CCN to be queried.
@@ -117,9 +115,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ccn
         public GetBandwidthLimitsArgs()
         {
         }
+        public static new GetBandwidthLimitsArgs Empty => new GetBandwidthLimitsArgs();
     }
 
-    public sealed class GetBandwidthLimitsInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetBandwidthLimitsInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// ID of the CCN to be queried.
@@ -136,6 +135,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ccn
         public GetBandwidthLimitsInvokeArgs()
         {
         }
+        public static new GetBandwidthLimitsInvokeArgs Empty => new GetBandwidthLimitsInvokeArgs();
     }
 
 

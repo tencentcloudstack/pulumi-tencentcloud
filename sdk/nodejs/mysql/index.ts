@@ -5,108 +5,331 @@ import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
 // Export members:
-export * from "./account";
-export * from "./auditLogFile";
-export * from "./backupDownloadRestriction";
-export * from "./backupEncryptionStatus";
-export * from "./backupPolicy";
-export * from "./database";
-export * from "./dbImportJobOperation";
-export * from "./deployGroup";
-export * from "./drInstanceToMater";
-export * from "./getBackupList";
-export * from "./getBackupOverview";
-export * from "./getBackupSummaries";
-export * from "./getBinLog";
-export * from "./getBinlogBackupOverview";
-export * from "./getCloneList";
-export * from "./getDataBackupOverview";
-export * from "./getDatabases";
-export * from "./getDbFeatures";
-export * from "./getDefaultParams";
-export * from "./getErrorLog";
-export * from "./getInstTables";
-export * from "./getInstance";
-export * from "./getInstanceCharset";
-export * from "./getInstanceInfo";
-export * from "./getInstanceParamRecord";
-export * from "./getInstanceRebootTime";
-export * from "./getParameterList";
-export * from "./getProjectSecurityGroup";
-export * from "./getProxyCustom";
-export * from "./getRoMinScale";
-export * from "./getRollbackRangeTime";
-export * from "./getSlowLog";
-export * from "./getSlowLogData";
-export * from "./getSupportedPrivileges";
-export * from "./getSwitchRecord";
-export * from "./getUserTask";
-export * from "./getZoneConfig";
-export * from "./instance";
-export * from "./instanceEncryptionOperation";
-export * from "./isolateInstance";
-export * from "./localBinlogConfig";
-export * from "./paramTemplate";
-export * from "./passwordComplexity";
-export * from "./privilege";
-export * from "./proxy";
-export * from "./readonlyInstance";
-export * from "./reloadBalanceProxyNode";
-export * from "./remoteBackupConfig";
-export * from "./renewDbInstanceOperation";
-export * from "./resetRootAccount";
-export * from "./restartDbInstancesOperation";
-export * from "./roGroup";
-export * from "./roGroupLoadOperation";
-export * from "./roInstanceIp";
-export * from "./roStartReplication";
-export * from "./roStopReplication";
-export * from "./rollback";
-export * from "./rollbackStop";
-export * from "./securityGroupsAttachment";
-export * from "./switchForUpgrade";
-export * from "./switchMasterSlaveOperation";
-export * from "./switchProxy";
-export * from "./timeWindow";
-export * from "./verifyRootAccount";
+export { AccountArgs, AccountState } from "./account";
+export type Account = import("./account").Account;
+export const Account: typeof import("./account").Account = null as any;
+utilities.lazyLoad(exports, ["Account"], () => require("./account"));
 
-// Import resources to register:
-import { Account } from "./account";
-import { AuditLogFile } from "./auditLogFile";
-import { BackupDownloadRestriction } from "./backupDownloadRestriction";
-import { BackupEncryptionStatus } from "./backupEncryptionStatus";
-import { BackupPolicy } from "./backupPolicy";
-import { Database } from "./database";
-import { DbImportJobOperation } from "./dbImportJobOperation";
-import { DeployGroup } from "./deployGroup";
-import { DrInstanceToMater } from "./drInstanceToMater";
-import { Instance } from "./instance";
-import { InstanceEncryptionOperation } from "./instanceEncryptionOperation";
-import { IsolateInstance } from "./isolateInstance";
-import { LocalBinlogConfig } from "./localBinlogConfig";
-import { ParamTemplate } from "./paramTemplate";
-import { PasswordComplexity } from "./passwordComplexity";
-import { Privilege } from "./privilege";
-import { Proxy } from "./proxy";
-import { ReadonlyInstance } from "./readonlyInstance";
-import { ReloadBalanceProxyNode } from "./reloadBalanceProxyNode";
-import { RemoteBackupConfig } from "./remoteBackupConfig";
-import { RenewDbInstanceOperation } from "./renewDbInstanceOperation";
-import { ResetRootAccount } from "./resetRootAccount";
-import { RestartDbInstancesOperation } from "./restartDbInstancesOperation";
-import { RoGroup } from "./roGroup";
-import { RoGroupLoadOperation } from "./roGroupLoadOperation";
-import { RoInstanceIp } from "./roInstanceIp";
-import { RoStartReplication } from "./roStartReplication";
-import { RoStopReplication } from "./roStopReplication";
-import { Rollback } from "./rollback";
-import { RollbackStop } from "./rollbackStop";
-import { SecurityGroupsAttachment } from "./securityGroupsAttachment";
-import { SwitchForUpgrade } from "./switchForUpgrade";
-import { SwitchMasterSlaveOperation } from "./switchMasterSlaveOperation";
-import { SwitchProxy } from "./switchProxy";
-import { TimeWindow } from "./timeWindow";
-import { VerifyRootAccount } from "./verifyRootAccount";
+export { AuditLogFileArgs, AuditLogFileState } from "./auditLogFile";
+export type AuditLogFile = import("./auditLogFile").AuditLogFile;
+export const AuditLogFile: typeof import("./auditLogFile").AuditLogFile = null as any;
+utilities.lazyLoad(exports, ["AuditLogFile"], () => require("./auditLogFile"));
+
+export { BackupDownloadRestrictionArgs, BackupDownloadRestrictionState } from "./backupDownloadRestriction";
+export type BackupDownloadRestriction = import("./backupDownloadRestriction").BackupDownloadRestriction;
+export const BackupDownloadRestriction: typeof import("./backupDownloadRestriction").BackupDownloadRestriction = null as any;
+utilities.lazyLoad(exports, ["BackupDownloadRestriction"], () => require("./backupDownloadRestriction"));
+
+export { BackupEncryptionStatusArgs, BackupEncryptionStatusState } from "./backupEncryptionStatus";
+export type BackupEncryptionStatus = import("./backupEncryptionStatus").BackupEncryptionStatus;
+export const BackupEncryptionStatus: typeof import("./backupEncryptionStatus").BackupEncryptionStatus = null as any;
+utilities.lazyLoad(exports, ["BackupEncryptionStatus"], () => require("./backupEncryptionStatus"));
+
+export { BackupPolicyArgs, BackupPolicyState } from "./backupPolicy";
+export type BackupPolicy = import("./backupPolicy").BackupPolicy;
+export const BackupPolicy: typeof import("./backupPolicy").BackupPolicy = null as any;
+utilities.lazyLoad(exports, ["BackupPolicy"], () => require("./backupPolicy"));
+
+export { DatabaseArgs, DatabaseState } from "./database";
+export type Database = import("./database").Database;
+export const Database: typeof import("./database").Database = null as any;
+utilities.lazyLoad(exports, ["Database"], () => require("./database"));
+
+export { DbImportJobOperationArgs, DbImportJobOperationState } from "./dbImportJobOperation";
+export type DbImportJobOperation = import("./dbImportJobOperation").DbImportJobOperation;
+export const DbImportJobOperation: typeof import("./dbImportJobOperation").DbImportJobOperation = null as any;
+utilities.lazyLoad(exports, ["DbImportJobOperation"], () => require("./dbImportJobOperation"));
+
+export { DeployGroupArgs, DeployGroupState } from "./deployGroup";
+export type DeployGroup = import("./deployGroup").DeployGroup;
+export const DeployGroup: typeof import("./deployGroup").DeployGroup = null as any;
+utilities.lazyLoad(exports, ["DeployGroup"], () => require("./deployGroup"));
+
+export { DrInstanceArgs, DrInstanceState } from "./drInstance";
+export type DrInstance = import("./drInstance").DrInstance;
+export const DrInstance: typeof import("./drInstance").DrInstance = null as any;
+utilities.lazyLoad(exports, ["DrInstance"], () => require("./drInstance"));
+
+export { DrInstanceToMaterArgs, DrInstanceToMaterState } from "./drInstanceToMater";
+export type DrInstanceToMater = import("./drInstanceToMater").DrInstanceToMater;
+export const DrInstanceToMater: typeof import("./drInstanceToMater").DrInstanceToMater = null as any;
+utilities.lazyLoad(exports, ["DrInstanceToMater"], () => require("./drInstanceToMater"));
+
+export { GetBackupListArgs, GetBackupListResult, GetBackupListOutputArgs } from "./getBackupList";
+export const getBackupList: typeof import("./getBackupList").getBackupList = null as any;
+export const getBackupListOutput: typeof import("./getBackupList").getBackupListOutput = null as any;
+utilities.lazyLoad(exports, ["getBackupList","getBackupListOutput"], () => require("./getBackupList"));
+
+export { GetBackupOverviewArgs, GetBackupOverviewResult, GetBackupOverviewOutputArgs } from "./getBackupOverview";
+export const getBackupOverview: typeof import("./getBackupOverview").getBackupOverview = null as any;
+export const getBackupOverviewOutput: typeof import("./getBackupOverview").getBackupOverviewOutput = null as any;
+utilities.lazyLoad(exports, ["getBackupOverview","getBackupOverviewOutput"], () => require("./getBackupOverview"));
+
+export { GetBackupSummariesArgs, GetBackupSummariesResult, GetBackupSummariesOutputArgs } from "./getBackupSummaries";
+export const getBackupSummaries: typeof import("./getBackupSummaries").getBackupSummaries = null as any;
+export const getBackupSummariesOutput: typeof import("./getBackupSummaries").getBackupSummariesOutput = null as any;
+utilities.lazyLoad(exports, ["getBackupSummaries","getBackupSummariesOutput"], () => require("./getBackupSummaries"));
+
+export { GetBinLogArgs, GetBinLogResult, GetBinLogOutputArgs } from "./getBinLog";
+export const getBinLog: typeof import("./getBinLog").getBinLog = null as any;
+export const getBinLogOutput: typeof import("./getBinLog").getBinLogOutput = null as any;
+utilities.lazyLoad(exports, ["getBinLog","getBinLogOutput"], () => require("./getBinLog"));
+
+export { GetBinlogBackupOverviewArgs, GetBinlogBackupOverviewResult, GetBinlogBackupOverviewOutputArgs } from "./getBinlogBackupOverview";
+export const getBinlogBackupOverview: typeof import("./getBinlogBackupOverview").getBinlogBackupOverview = null as any;
+export const getBinlogBackupOverviewOutput: typeof import("./getBinlogBackupOverview").getBinlogBackupOverviewOutput = null as any;
+utilities.lazyLoad(exports, ["getBinlogBackupOverview","getBinlogBackupOverviewOutput"], () => require("./getBinlogBackupOverview"));
+
+export { GetCloneListArgs, GetCloneListResult, GetCloneListOutputArgs } from "./getCloneList";
+export const getCloneList: typeof import("./getCloneList").getCloneList = null as any;
+export const getCloneListOutput: typeof import("./getCloneList").getCloneListOutput = null as any;
+utilities.lazyLoad(exports, ["getCloneList","getCloneListOutput"], () => require("./getCloneList"));
+
+export { GetDataBackupOverviewArgs, GetDataBackupOverviewResult, GetDataBackupOverviewOutputArgs } from "./getDataBackupOverview";
+export const getDataBackupOverview: typeof import("./getDataBackupOverview").getDataBackupOverview = null as any;
+export const getDataBackupOverviewOutput: typeof import("./getDataBackupOverview").getDataBackupOverviewOutput = null as any;
+utilities.lazyLoad(exports, ["getDataBackupOverview","getDataBackupOverviewOutput"], () => require("./getDataBackupOverview"));
+
+export { GetDatabasesArgs, GetDatabasesResult, GetDatabasesOutputArgs } from "./getDatabases";
+export const getDatabases: typeof import("./getDatabases").getDatabases = null as any;
+export const getDatabasesOutput: typeof import("./getDatabases").getDatabasesOutput = null as any;
+utilities.lazyLoad(exports, ["getDatabases","getDatabasesOutput"], () => require("./getDatabases"));
+
+export { GetDbFeaturesArgs, GetDbFeaturesResult, GetDbFeaturesOutputArgs } from "./getDbFeatures";
+export const getDbFeatures: typeof import("./getDbFeatures").getDbFeatures = null as any;
+export const getDbFeaturesOutput: typeof import("./getDbFeatures").getDbFeaturesOutput = null as any;
+utilities.lazyLoad(exports, ["getDbFeatures","getDbFeaturesOutput"], () => require("./getDbFeatures"));
+
+export { GetDefaultParamsArgs, GetDefaultParamsResult, GetDefaultParamsOutputArgs } from "./getDefaultParams";
+export const getDefaultParams: typeof import("./getDefaultParams").getDefaultParams = null as any;
+export const getDefaultParamsOutput: typeof import("./getDefaultParams").getDefaultParamsOutput = null as any;
+utilities.lazyLoad(exports, ["getDefaultParams","getDefaultParamsOutput"], () => require("./getDefaultParams"));
+
+export { GetErrorLogArgs, GetErrorLogResult, GetErrorLogOutputArgs } from "./getErrorLog";
+export const getErrorLog: typeof import("./getErrorLog").getErrorLog = null as any;
+export const getErrorLogOutput: typeof import("./getErrorLog").getErrorLogOutput = null as any;
+utilities.lazyLoad(exports, ["getErrorLog","getErrorLogOutput"], () => require("./getErrorLog"));
+
+export { GetInstTablesArgs, GetInstTablesResult, GetInstTablesOutputArgs } from "./getInstTables";
+export const getInstTables: typeof import("./getInstTables").getInstTables = null as any;
+export const getInstTablesOutput: typeof import("./getInstTables").getInstTablesOutput = null as any;
+utilities.lazyLoad(exports, ["getInstTables","getInstTablesOutput"], () => require("./getInstTables"));
+
+export { GetInstanceArgs, GetInstanceResult, GetInstanceOutputArgs } from "./getInstance";
+export const getInstance: typeof import("./getInstance").getInstance = null as any;
+export const getInstanceOutput: typeof import("./getInstance").getInstanceOutput = null as any;
+utilities.lazyLoad(exports, ["getInstance","getInstanceOutput"], () => require("./getInstance"));
+
+export { GetInstanceCharsetArgs, GetInstanceCharsetResult, GetInstanceCharsetOutputArgs } from "./getInstanceCharset";
+export const getInstanceCharset: typeof import("./getInstanceCharset").getInstanceCharset = null as any;
+export const getInstanceCharsetOutput: typeof import("./getInstanceCharset").getInstanceCharsetOutput = null as any;
+utilities.lazyLoad(exports, ["getInstanceCharset","getInstanceCharsetOutput"], () => require("./getInstanceCharset"));
+
+export { GetInstanceInfoArgs, GetInstanceInfoResult, GetInstanceInfoOutputArgs } from "./getInstanceInfo";
+export const getInstanceInfo: typeof import("./getInstanceInfo").getInstanceInfo = null as any;
+export const getInstanceInfoOutput: typeof import("./getInstanceInfo").getInstanceInfoOutput = null as any;
+utilities.lazyLoad(exports, ["getInstanceInfo","getInstanceInfoOutput"], () => require("./getInstanceInfo"));
+
+export { GetInstanceParamRecordArgs, GetInstanceParamRecordResult, GetInstanceParamRecordOutputArgs } from "./getInstanceParamRecord";
+export const getInstanceParamRecord: typeof import("./getInstanceParamRecord").getInstanceParamRecord = null as any;
+export const getInstanceParamRecordOutput: typeof import("./getInstanceParamRecord").getInstanceParamRecordOutput = null as any;
+utilities.lazyLoad(exports, ["getInstanceParamRecord","getInstanceParamRecordOutput"], () => require("./getInstanceParamRecord"));
+
+export { GetInstanceRebootTimeArgs, GetInstanceRebootTimeResult, GetInstanceRebootTimeOutputArgs } from "./getInstanceRebootTime";
+export const getInstanceRebootTime: typeof import("./getInstanceRebootTime").getInstanceRebootTime = null as any;
+export const getInstanceRebootTimeOutput: typeof import("./getInstanceRebootTime").getInstanceRebootTimeOutput = null as any;
+utilities.lazyLoad(exports, ["getInstanceRebootTime","getInstanceRebootTimeOutput"], () => require("./getInstanceRebootTime"));
+
+export { GetParameterListArgs, GetParameterListResult, GetParameterListOutputArgs } from "./getParameterList";
+export const getParameterList: typeof import("./getParameterList").getParameterList = null as any;
+export const getParameterListOutput: typeof import("./getParameterList").getParameterListOutput = null as any;
+utilities.lazyLoad(exports, ["getParameterList","getParameterListOutput"], () => require("./getParameterList"));
+
+export { GetProjectSecurityGroupArgs, GetProjectSecurityGroupResult, GetProjectSecurityGroupOutputArgs } from "./getProjectSecurityGroup";
+export const getProjectSecurityGroup: typeof import("./getProjectSecurityGroup").getProjectSecurityGroup = null as any;
+export const getProjectSecurityGroupOutput: typeof import("./getProjectSecurityGroup").getProjectSecurityGroupOutput = null as any;
+utilities.lazyLoad(exports, ["getProjectSecurityGroup","getProjectSecurityGroupOutput"], () => require("./getProjectSecurityGroup"));
+
+export { GetProxyCustomArgs, GetProxyCustomResult, GetProxyCustomOutputArgs } from "./getProxyCustom";
+export const getProxyCustom: typeof import("./getProxyCustom").getProxyCustom = null as any;
+export const getProxyCustomOutput: typeof import("./getProxyCustom").getProxyCustomOutput = null as any;
+utilities.lazyLoad(exports, ["getProxyCustom","getProxyCustomOutput"], () => require("./getProxyCustom"));
+
+export { GetRoMinScaleArgs, GetRoMinScaleResult, GetRoMinScaleOutputArgs } from "./getRoMinScale";
+export const getRoMinScale: typeof import("./getRoMinScale").getRoMinScale = null as any;
+export const getRoMinScaleOutput: typeof import("./getRoMinScale").getRoMinScaleOutput = null as any;
+utilities.lazyLoad(exports, ["getRoMinScale","getRoMinScaleOutput"], () => require("./getRoMinScale"));
+
+export { GetRollbackRangeTimeArgs, GetRollbackRangeTimeResult, GetRollbackRangeTimeOutputArgs } from "./getRollbackRangeTime";
+export const getRollbackRangeTime: typeof import("./getRollbackRangeTime").getRollbackRangeTime = null as any;
+export const getRollbackRangeTimeOutput: typeof import("./getRollbackRangeTime").getRollbackRangeTimeOutput = null as any;
+utilities.lazyLoad(exports, ["getRollbackRangeTime","getRollbackRangeTimeOutput"], () => require("./getRollbackRangeTime"));
+
+export { GetSlowLogArgs, GetSlowLogResult, GetSlowLogOutputArgs } from "./getSlowLog";
+export const getSlowLog: typeof import("./getSlowLog").getSlowLog = null as any;
+export const getSlowLogOutput: typeof import("./getSlowLog").getSlowLogOutput = null as any;
+utilities.lazyLoad(exports, ["getSlowLog","getSlowLogOutput"], () => require("./getSlowLog"));
+
+export { GetSlowLogDataArgs, GetSlowLogDataResult, GetSlowLogDataOutputArgs } from "./getSlowLogData";
+export const getSlowLogData: typeof import("./getSlowLogData").getSlowLogData = null as any;
+export const getSlowLogDataOutput: typeof import("./getSlowLogData").getSlowLogDataOutput = null as any;
+utilities.lazyLoad(exports, ["getSlowLogData","getSlowLogDataOutput"], () => require("./getSlowLogData"));
+
+export { GetSupportedPrivilegesArgs, GetSupportedPrivilegesResult, GetSupportedPrivilegesOutputArgs } from "./getSupportedPrivileges";
+export const getSupportedPrivileges: typeof import("./getSupportedPrivileges").getSupportedPrivileges = null as any;
+export const getSupportedPrivilegesOutput: typeof import("./getSupportedPrivileges").getSupportedPrivilegesOutput = null as any;
+utilities.lazyLoad(exports, ["getSupportedPrivileges","getSupportedPrivilegesOutput"], () => require("./getSupportedPrivileges"));
+
+export { GetSwitchRecordArgs, GetSwitchRecordResult, GetSwitchRecordOutputArgs } from "./getSwitchRecord";
+export const getSwitchRecord: typeof import("./getSwitchRecord").getSwitchRecord = null as any;
+export const getSwitchRecordOutput: typeof import("./getSwitchRecord").getSwitchRecordOutput = null as any;
+utilities.lazyLoad(exports, ["getSwitchRecord","getSwitchRecordOutput"], () => require("./getSwitchRecord"));
+
+export { GetUserTaskArgs, GetUserTaskResult, GetUserTaskOutputArgs } from "./getUserTask";
+export const getUserTask: typeof import("./getUserTask").getUserTask = null as any;
+export const getUserTaskOutput: typeof import("./getUserTask").getUserTaskOutput = null as any;
+utilities.lazyLoad(exports, ["getUserTask","getUserTaskOutput"], () => require("./getUserTask"));
+
+export { GetZoneConfigArgs, GetZoneConfigResult, GetZoneConfigOutputArgs } from "./getZoneConfig";
+export const getZoneConfig: typeof import("./getZoneConfig").getZoneConfig = null as any;
+export const getZoneConfigOutput: typeof import("./getZoneConfig").getZoneConfigOutput = null as any;
+utilities.lazyLoad(exports, ["getZoneConfig","getZoneConfigOutput"], () => require("./getZoneConfig"));
+
+export { InstanceArgs, InstanceState } from "./instance";
+export type Instance = import("./instance").Instance;
+export const Instance: typeof import("./instance").Instance = null as any;
+utilities.lazyLoad(exports, ["Instance"], () => require("./instance"));
+
+export { InstanceEncryptionOperationArgs, InstanceEncryptionOperationState } from "./instanceEncryptionOperation";
+export type InstanceEncryptionOperation = import("./instanceEncryptionOperation").InstanceEncryptionOperation;
+export const InstanceEncryptionOperation: typeof import("./instanceEncryptionOperation").InstanceEncryptionOperation = null as any;
+utilities.lazyLoad(exports, ["InstanceEncryptionOperation"], () => require("./instanceEncryptionOperation"));
+
+export { IsolateInstanceArgs, IsolateInstanceState } from "./isolateInstance";
+export type IsolateInstance = import("./isolateInstance").IsolateInstance;
+export const IsolateInstance: typeof import("./isolateInstance").IsolateInstance = null as any;
+utilities.lazyLoad(exports, ["IsolateInstance"], () => require("./isolateInstance"));
+
+export { LocalBinlogConfigArgs, LocalBinlogConfigState } from "./localBinlogConfig";
+export type LocalBinlogConfig = import("./localBinlogConfig").LocalBinlogConfig;
+export const LocalBinlogConfig: typeof import("./localBinlogConfig").LocalBinlogConfig = null as any;
+utilities.lazyLoad(exports, ["LocalBinlogConfig"], () => require("./localBinlogConfig"));
+
+export { ParamTemplateArgs, ParamTemplateState } from "./paramTemplate";
+export type ParamTemplate = import("./paramTemplate").ParamTemplate;
+export const ParamTemplate: typeof import("./paramTemplate").ParamTemplate = null as any;
+utilities.lazyLoad(exports, ["ParamTemplate"], () => require("./paramTemplate"));
+
+export { PasswordComplexityArgs, PasswordComplexityState } from "./passwordComplexity";
+export type PasswordComplexity = import("./passwordComplexity").PasswordComplexity;
+export const PasswordComplexity: typeof import("./passwordComplexity").PasswordComplexity = null as any;
+utilities.lazyLoad(exports, ["PasswordComplexity"], () => require("./passwordComplexity"));
+
+export { PrivilegeArgs, PrivilegeState } from "./privilege";
+export type Privilege = import("./privilege").Privilege;
+export const Privilege: typeof import("./privilege").Privilege = null as any;
+utilities.lazyLoad(exports, ["Privilege"], () => require("./privilege"));
+
+export { ProxyArgs, ProxyState } from "./proxy";
+export type Proxy = import("./proxy").Proxy;
+export const Proxy: typeof import("./proxy").Proxy = null as any;
+utilities.lazyLoad(exports, ["Proxy"], () => require("./proxy"));
+
+export { ReadonlyInstanceArgs, ReadonlyInstanceState } from "./readonlyInstance";
+export type ReadonlyInstance = import("./readonlyInstance").ReadonlyInstance;
+export const ReadonlyInstance: typeof import("./readonlyInstance").ReadonlyInstance = null as any;
+utilities.lazyLoad(exports, ["ReadonlyInstance"], () => require("./readonlyInstance"));
+
+export { ReloadBalanceProxyNodeArgs, ReloadBalanceProxyNodeState } from "./reloadBalanceProxyNode";
+export type ReloadBalanceProxyNode = import("./reloadBalanceProxyNode").ReloadBalanceProxyNode;
+export const ReloadBalanceProxyNode: typeof import("./reloadBalanceProxyNode").ReloadBalanceProxyNode = null as any;
+utilities.lazyLoad(exports, ["ReloadBalanceProxyNode"], () => require("./reloadBalanceProxyNode"));
+
+export { RemoteBackupConfigArgs, RemoteBackupConfigState } from "./remoteBackupConfig";
+export type RemoteBackupConfig = import("./remoteBackupConfig").RemoteBackupConfig;
+export const RemoteBackupConfig: typeof import("./remoteBackupConfig").RemoteBackupConfig = null as any;
+utilities.lazyLoad(exports, ["RemoteBackupConfig"], () => require("./remoteBackupConfig"));
+
+export { RenewDbInstanceOperationArgs, RenewDbInstanceOperationState } from "./renewDbInstanceOperation";
+export type RenewDbInstanceOperation = import("./renewDbInstanceOperation").RenewDbInstanceOperation;
+export const RenewDbInstanceOperation: typeof import("./renewDbInstanceOperation").RenewDbInstanceOperation = null as any;
+utilities.lazyLoad(exports, ["RenewDbInstanceOperation"], () => require("./renewDbInstanceOperation"));
+
+export { ResetRootAccountArgs, ResetRootAccountState } from "./resetRootAccount";
+export type ResetRootAccount = import("./resetRootAccount").ResetRootAccount;
+export const ResetRootAccount: typeof import("./resetRootAccount").ResetRootAccount = null as any;
+utilities.lazyLoad(exports, ["ResetRootAccount"], () => require("./resetRootAccount"));
+
+export { RestartDbInstancesOperationArgs, RestartDbInstancesOperationState } from "./restartDbInstancesOperation";
+export type RestartDbInstancesOperation = import("./restartDbInstancesOperation").RestartDbInstancesOperation;
+export const RestartDbInstancesOperation: typeof import("./restartDbInstancesOperation").RestartDbInstancesOperation = null as any;
+utilities.lazyLoad(exports, ["RestartDbInstancesOperation"], () => require("./restartDbInstancesOperation"));
+
+export { RoGroupArgs, RoGroupState } from "./roGroup";
+export type RoGroup = import("./roGroup").RoGroup;
+export const RoGroup: typeof import("./roGroup").RoGroup = null as any;
+utilities.lazyLoad(exports, ["RoGroup"], () => require("./roGroup"));
+
+export { RoGroupLoadOperationArgs, RoGroupLoadOperationState } from "./roGroupLoadOperation";
+export type RoGroupLoadOperation = import("./roGroupLoadOperation").RoGroupLoadOperation;
+export const RoGroupLoadOperation: typeof import("./roGroupLoadOperation").RoGroupLoadOperation = null as any;
+utilities.lazyLoad(exports, ["RoGroupLoadOperation"], () => require("./roGroupLoadOperation"));
+
+export { RoInstanceIpArgs, RoInstanceIpState } from "./roInstanceIp";
+export type RoInstanceIp = import("./roInstanceIp").RoInstanceIp;
+export const RoInstanceIp: typeof import("./roInstanceIp").RoInstanceIp = null as any;
+utilities.lazyLoad(exports, ["RoInstanceIp"], () => require("./roInstanceIp"));
+
+export { RoStartReplicationArgs, RoStartReplicationState } from "./roStartReplication";
+export type RoStartReplication = import("./roStartReplication").RoStartReplication;
+export const RoStartReplication: typeof import("./roStartReplication").RoStartReplication = null as any;
+utilities.lazyLoad(exports, ["RoStartReplication"], () => require("./roStartReplication"));
+
+export { RoStopReplicationArgs, RoStopReplicationState } from "./roStopReplication";
+export type RoStopReplication = import("./roStopReplication").RoStopReplication;
+export const RoStopReplication: typeof import("./roStopReplication").RoStopReplication = null as any;
+utilities.lazyLoad(exports, ["RoStopReplication"], () => require("./roStopReplication"));
+
+export { RollbackArgs, RollbackState } from "./rollback";
+export type Rollback = import("./rollback").Rollback;
+export const Rollback: typeof import("./rollback").Rollback = null as any;
+utilities.lazyLoad(exports, ["Rollback"], () => require("./rollback"));
+
+export { RollbackStopArgs, RollbackStopState } from "./rollbackStop";
+export type RollbackStop = import("./rollbackStop").RollbackStop;
+export const RollbackStop: typeof import("./rollbackStop").RollbackStop = null as any;
+utilities.lazyLoad(exports, ["RollbackStop"], () => require("./rollbackStop"));
+
+export { SecurityGroupsAttachmentArgs, SecurityGroupsAttachmentState } from "./securityGroupsAttachment";
+export type SecurityGroupsAttachment = import("./securityGroupsAttachment").SecurityGroupsAttachment;
+export const SecurityGroupsAttachment: typeof import("./securityGroupsAttachment").SecurityGroupsAttachment = null as any;
+utilities.lazyLoad(exports, ["SecurityGroupsAttachment"], () => require("./securityGroupsAttachment"));
+
+export { SwitchForUpgradeArgs, SwitchForUpgradeState } from "./switchForUpgrade";
+export type SwitchForUpgrade = import("./switchForUpgrade").SwitchForUpgrade;
+export const SwitchForUpgrade: typeof import("./switchForUpgrade").SwitchForUpgrade = null as any;
+utilities.lazyLoad(exports, ["SwitchForUpgrade"], () => require("./switchForUpgrade"));
+
+export { SwitchMasterSlaveOperationArgs, SwitchMasterSlaveOperationState } from "./switchMasterSlaveOperation";
+export type SwitchMasterSlaveOperation = import("./switchMasterSlaveOperation").SwitchMasterSlaveOperation;
+export const SwitchMasterSlaveOperation: typeof import("./switchMasterSlaveOperation").SwitchMasterSlaveOperation = null as any;
+utilities.lazyLoad(exports, ["SwitchMasterSlaveOperation"], () => require("./switchMasterSlaveOperation"));
+
+export { SwitchProxyArgs, SwitchProxyState } from "./switchProxy";
+export type SwitchProxy = import("./switchProxy").SwitchProxy;
+export const SwitchProxy: typeof import("./switchProxy").SwitchProxy = null as any;
+utilities.lazyLoad(exports, ["SwitchProxy"], () => require("./switchProxy"));
+
+export { TimeWindowArgs, TimeWindowState } from "./timeWindow";
+export type TimeWindow = import("./timeWindow").TimeWindow;
+export const TimeWindow: typeof import("./timeWindow").TimeWindow = null as any;
+utilities.lazyLoad(exports, ["TimeWindow"], () => require("./timeWindow"));
+
+export { VerifyRootAccountArgs, VerifyRootAccountState } from "./verifyRootAccount";
+export type VerifyRootAccount = import("./verifyRootAccount").VerifyRootAccount;
+export const VerifyRootAccount: typeof import("./verifyRootAccount").VerifyRootAccount = null as any;
+utilities.lazyLoad(exports, ["VerifyRootAccount"], () => require("./verifyRootAccount"));
+
 
 const _module = {
     version: utilities.getVersion(),
@@ -128,6 +351,8 @@ const _module = {
                 return new DbImportJobOperation(name, <any>undefined, { urn })
             case "tencentcloud:Mysql/deployGroup:DeployGroup":
                 return new DeployGroup(name, <any>undefined, { urn })
+            case "tencentcloud:Mysql/drInstance:DrInstance":
+                return new DrInstance(name, <any>undefined, { urn })
             case "tencentcloud:Mysql/drInstanceToMater:DrInstanceToMater":
                 return new DrInstanceToMater(name, <any>undefined, { urn })
             case "tencentcloud:Mysql/instance:Instance":
@@ -197,6 +422,7 @@ pulumi.runtime.registerResourceModule("tencentcloud", "Mysql/backupPolicy", _mod
 pulumi.runtime.registerResourceModule("tencentcloud", "Mysql/database", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Mysql/dbImportJobOperation", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Mysql/deployGroup", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Mysql/drInstance", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Mysql/drInstanceToMater", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Mysql/instance", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Mysql/instanceEncryptionOperation", _module)

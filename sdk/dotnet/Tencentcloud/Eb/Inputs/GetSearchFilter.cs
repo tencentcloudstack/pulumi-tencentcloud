@@ -11,30 +11,47 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Eb.Inputs
 {
 
-    public sealed class GetSearchFilterArgs : Pulumi.InvokeArgs
+    public sealed class GetSearchFilterArgs : global::Pulumi.InvokeArgs
     {
         [Input("filters")]
         private List<Inputs.GetSearchFilterFilterArgs>? _filters;
+
+        /// <summary>
+        /// LogFilters array.
+        /// </summary>
         public List<Inputs.GetSearchFilterFilterArgs> Filters
         {
             get => _filters ?? (_filters = new List<Inputs.GetSearchFilterFilterArgs>());
             set => _filters = value;
         }
 
+        /// <summary>
+        /// filter field name.
+        /// </summary>
         [Input("key")]
         public string? Key { get; set; }
 
+        /// <summary>
+        /// operator, congruent eq, not equal neq, similar like, exclude similar not like, less than lt, less than and equal to lte, greater than gt, greater than and equal to gte, in range range, not in range norange.
+        /// </summary>
         [Input("operator")]
         public string? Operator { get; set; }
 
+        /// <summary>
+        /// The logical relationship of the level filters, the value AND or OR.
+        /// </summary>
         [Input("type")]
         public string? Type { get; set; }
 
+        /// <summary>
+        /// Filter value, range operation needs to enter two values at the same time, separated by commas.
+        /// </summary>
         [Input("value")]
         public string? Value { get; set; }
 
         public GetSearchFilterArgs()
         {
         }
+        public static new GetSearchFilterArgs Empty => new GetSearchFilterArgs();
     }
 }

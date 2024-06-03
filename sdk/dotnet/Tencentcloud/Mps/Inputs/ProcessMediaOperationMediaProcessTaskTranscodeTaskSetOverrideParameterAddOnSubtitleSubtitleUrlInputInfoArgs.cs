@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps.Inputs
 {
 
-    public sealed class ProcessMediaOperationMediaProcessTaskTranscodeTaskSetOverrideParameterAddOnSubtitleSubtitleUrlInputInfoArgs : Pulumi.ResourceArgs
+    public sealed class ProcessMediaOperationMediaProcessTaskTranscodeTaskSetOverrideParameterAddOnSubtitleSubtitleUrlInputInfoArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// URL of a video.
@@ -22,5 +22,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps.Inputs
         public ProcessMediaOperationMediaProcessTaskTranscodeTaskSetOverrideParameterAddOnSubtitleSubtitleUrlInputInfoArgs()
         {
         }
+        public static new ProcessMediaOperationMediaProcessTaskTranscodeTaskSetOverrideParameterAddOnSubtitleSubtitleUrlInputInfoArgs Empty => new ProcessMediaOperationMediaProcessTaskTranscodeTaskSetOverrideParameterAddOnSubtitleSubtitleUrlInputInfoArgs();
     }
 }

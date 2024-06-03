@@ -15,42 +15,43 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var zone = new Tencentcloud.Teo.Zone("zone", new()
     ///     {
-    ///         var zone = new Tencentcloud.Teo.Zone("zone", new Tencentcloud.Teo.ZoneArgs
+    ///         AliasZoneName = "teo-test",
+    ///         Area = "overseas",
+    ///         Paused = false,
+    ///         PlanId = "edgeone-2kfv1h391n6w",
+    ///         Tags = 
     ///         {
-    ///             AliasZoneName = "teo-test",
-    ///             Area = "overseas",
-    ///             Paused = false,
-    ///             PlanId = "edgeone-2kfv1h391n6w",
-    ///             Tags = 
-    ///             {
-    ///                 { "createdBy", "terraform" },
-    ///             },
-    ///             Type = "partial",
-    ///             ZoneName = "tf-teo.com",
-    ///         });
-    ///     }
+    ///             { "createdBy", "terraform" },
+    ///         },
+    ///         Type = "partial",
+    ///         ZoneName = "tf-teo.com",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// teo zone can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Teo/zone:Zone zone zone_id
+    /// $ pulumi import tencentcloud:Teo/zone:Zone zone zone_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Teo/zone:Zone")]
-    public partial class Zone : Pulumi.CustomResource
+    public partial class Zone : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Alias site identifier. Limit the input to a combination of numbers, English, - and _, within 20 characters. For details, refer to the alias site identifier. If there is no such usage scenario, leave this field empty.
@@ -59,7 +60,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
         public Output<string?> AliasZoneName { get; private set; } = null!;
 
         /// <summary>
-        /// When the `type` value is `partial` or `full`, the acceleration region of the L7 domain name. The following are the values of this parameter, and the default value is `overseas` if not filled in. When the `type` value is `noDomainAccess`, please leave this value empty. Valid values: `global`: Global availability zone; `mainland`: Chinese mainland availability zone; `overseas`: Global availability zone (excluding Chinese mainland).
+        /// When the Type value is partial/full, the acceleration region of the L7 domain name. The following are the values of this parameter, and the default value is overseas if not filled in. When the Type value is noDomainAccess, please leave this value empty:
+        /// - global: Global availability zone.
+        /// - mainland: Chinese mainland availability zone.
+        /// - overseas: Global availability zone (excluding Chinese mainland).
         /// </summary>
         [Output("area")]
         public Output<string> Area { get; private set; } = null!;
@@ -101,7 +105,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
         public Output<ImmutableDictionary<string, object>?> Tags { get; private set; } = null!;
 
         /// <summary>
-        /// Site access type. The value of this parameter is as follows, and the default is `partial` if not filled in. Valid values: `partial`: CNAME access; `full`: NS access; `noDomainAccess`: No domain access.
+        /// Site access type. The value of this parameter is as follows, and the default is partial if not filled in:partial: CNAME access; full: NS access; noDomainAccess: No domain access.
         /// </summary>
         [Output("type")]
         public Output<string> Type { get; private set; } = null!;
@@ -157,7 +161,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
         }
     }
 
-    public sealed class ZoneArgs : Pulumi.ResourceArgs
+    public sealed class ZoneArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Alias site identifier. Limit the input to a combination of numbers, English, - and _, within 20 characters. For details, refer to the alias site identifier. If there is no such usage scenario, leave this field empty.
@@ -166,7 +170,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
         public Input<string>? AliasZoneName { get; set; }
 
         /// <summary>
-        /// When the `type` value is `partial` or `full`, the acceleration region of the L7 domain name. The following are the values of this parameter, and the default value is `overseas` if not filled in. When the `type` value is `noDomainAccess`, please leave this value empty. Valid values: `global`: Global availability zone; `mainland`: Chinese mainland availability zone; `overseas`: Global availability zone (excluding Chinese mainland).
+        /// When the Type value is partial/full, the acceleration region of the L7 domain name. The following are the values of this parameter, and the default value is overseas if not filled in. When the Type value is noDomainAccess, please leave this value empty:
+        /// - global: Global availability zone.
+        /// - mainland: Chinese mainland availability zone.
+        /// - overseas: Global availability zone (excluding Chinese mainland).
         /// </summary>
         [Input("area", required: true)]
         public Input<string> Area { get; set; } = null!;
@@ -196,7 +203,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
         }
 
         /// <summary>
-        /// Site access type. The value of this parameter is as follows, and the default is `partial` if not filled in. Valid values: `partial`: CNAME access; `full`: NS access; `noDomainAccess`: No domain access.
+        /// Site access type. The value of this parameter is as follows, and the default is partial if not filled in:partial: CNAME access; full: NS access; noDomainAccess: No domain access.
         /// </summary>
         [Input("type", required: true)]
         public Input<string> Type { get; set; } = null!;
@@ -210,9 +217,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
         public ZoneArgs()
         {
         }
+        public static new ZoneArgs Empty => new ZoneArgs();
     }
 
-    public sealed class ZoneState : Pulumi.ResourceArgs
+    public sealed class ZoneState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Alias site identifier. Limit the input to a combination of numbers, English, - and _, within 20 characters. For details, refer to the alias site identifier. If there is no such usage scenario, leave this field empty.
@@ -221,7 +229,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
         public Input<string>? AliasZoneName { get; set; }
 
         /// <summary>
-        /// When the `type` value is `partial` or `full`, the acceleration region of the L7 domain name. The following are the values of this parameter, and the default value is `overseas` if not filled in. When the `type` value is `noDomainAccess`, please leave this value empty. Valid values: `global`: Global availability zone; `mainland`: Chinese mainland availability zone; `overseas`: Global availability zone (excluding Chinese mainland).
+        /// When the Type value is partial/full, the acceleration region of the L7 domain name. The following are the values of this parameter, and the default value is overseas if not filled in. When the Type value is noDomainAccess, please leave this value empty:
+        /// - global: Global availability zone.
+        /// - mainland: Chinese mainland availability zone.
+        /// - overseas: Global availability zone (excluding Chinese mainland).
         /// </summary>
         [Input("area")]
         public Input<string>? Area { get; set; }
@@ -281,7 +292,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
         }
 
         /// <summary>
-        /// Site access type. The value of this parameter is as follows, and the default is `partial` if not filled in. Valid values: `partial`: CNAME access; `full`: NS access; `noDomainAccess`: No domain access.
+        /// Site access type. The value of this parameter is as follows, and the default is partial if not filled in:partial: CNAME access; full: NS access; noDomainAccess: No domain access.
         /// </summary>
         [Input("type")]
         public Input<string>? Type { get; set; }
@@ -295,5 +306,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
         public ZoneState()
         {
         }
+        public static new ZoneState Empty => new ZoneState();
     }
 }

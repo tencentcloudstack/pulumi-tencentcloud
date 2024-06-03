@@ -7,59 +7,64 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a dts compareTask
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Dts"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dts"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dts"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Dts.NewCompareTask(ctx, "compareTask", &Dts.CompareTaskArgs{
-// 			JobId:      pulumi.String(""),
-// 			ObjectMode: pulumi.String(""),
-// 			Objects: &dts.CompareTaskObjectsArgs{
-// 				ObjectItems: dts.CompareTaskObjectsObjectItemArray{
-// 					&dts.CompareTaskObjectsObjectItemArgs{
-// 						DbMode:     pulumi.String(""),
-// 						DbName:     pulumi.String(""),
-// 						SchemaName: pulumi.String(""),
-// 						TableMode:  pulumi.String(""),
-// 						Tables: dts.CompareTaskObjectsObjectItemTableArray{
-// 							&dts.CompareTaskObjectsObjectItemTableArgs{
-// 								TableName: pulumi.String(""),
-// 							},
-// 						},
-// 						ViewMode: pulumi.String(""),
-// 						Views: dts.CompareTaskObjectsObjectItemViewArray{
-// 							&dts.CompareTaskObjectsObjectItemViewArgs{
-// 								ViewName: pulumi.String(""),
-// 							},
-// 						},
-// 					},
-// 				},
-// 				ObjectMode: pulumi.String(""),
-// 			},
-// 			TaskName: pulumi.String(""),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Dts.NewCompareTask(ctx, "compareTask", &Dts.CompareTaskArgs{
+//				JobId:      pulumi.String(""),
+//				ObjectMode: pulumi.String(""),
+//				Objects: &dts.CompareTaskObjectsArgs{
+//					ObjectItems: dts.CompareTaskObjectsObjectItemArray{
+//						&dts.CompareTaskObjectsObjectItemArgs{
+//							DbMode:     pulumi.String(""),
+//							DbName:     pulumi.String(""),
+//							SchemaName: pulumi.String(""),
+//							TableMode:  pulumi.String(""),
+//							Tables: dts.CompareTaskObjectsObjectItemTableArray{
+//								&dts.CompareTaskObjectsObjectItemTableArgs{
+//									TableName: pulumi.String(""),
+//								},
+//							},
+//							ViewMode: pulumi.String(""),
+//							Views: dts.CompareTaskObjectsObjectItemViewArray{
+//								&dts.CompareTaskObjectsObjectItemViewArgs{
+//									ViewName: pulumi.String(""),
+//								},
+//							},
+//						},
+//					},
+//					ObjectMode: pulumi.String(""),
+//				},
+//				TaskName: pulumi.String(""),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 type CompareTask struct {
 	pulumi.CustomResourceState
 
@@ -85,7 +90,7 @@ func NewCompareTask(ctx *pulumi.Context,
 	if args.JobId == nil {
 		return nil, errors.New("invalid value for required argument 'JobId'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource CompareTask
 	err := ctx.RegisterResource("tencentcloud:Dts/compareTask:CompareTask", name, args, &resource, opts...)
 	if err != nil {
@@ -186,7 +191,7 @@ func (i *CompareTask) ToCompareTaskOutputWithContext(ctx context.Context) Compar
 // CompareTaskArrayInput is an input type that accepts CompareTaskArray and CompareTaskArrayOutput values.
 // You can construct a concrete instance of `CompareTaskArrayInput` via:
 //
-//          CompareTaskArray{ CompareTaskArgs{...} }
+//	CompareTaskArray{ CompareTaskArgs{...} }
 type CompareTaskArrayInput interface {
 	pulumi.Input
 
@@ -211,7 +216,7 @@ func (i CompareTaskArray) ToCompareTaskArrayOutputWithContext(ctx context.Contex
 // CompareTaskMapInput is an input type that accepts CompareTaskMap and CompareTaskMapOutput values.
 // You can construct a concrete instance of `CompareTaskMapInput` via:
 //
-//          CompareTaskMap{ "key": CompareTaskArgs{...} }
+//	CompareTaskMap{ "key": CompareTaskArgs{...} }
 type CompareTaskMapInput interface {
 	pulumi.Input
 

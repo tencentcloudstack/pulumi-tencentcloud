@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls.Inputs
 {
 
-    public sealed class CosRechargeExtractRuleInfoMetaTagGetArgs : Pulumi.ResourceArgs
+    public sealed class CosRechargeExtractRuleInfoMetaTagGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// metadata key.
@@ -28,5 +28,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls.Inputs
         public CosRechargeExtractRuleInfoMetaTagGetArgs()
         {
         }
+        public static new CosRechargeExtractRuleInfoMetaTagGetArgs Empty => new CosRechargeExtractRuleInfoMetaTagGetArgs();
     }
 }

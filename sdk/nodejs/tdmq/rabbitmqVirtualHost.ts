@@ -9,17 +9,19 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const rabbitmqVirtualHost = new tencentcloud.Tdmq.RabbitmqVirtualHost("rabbitmq_virtual_host", {
+ * const rabbitmqVirtualHost = new tencentcloud.tdmq.RabbitmqVirtualHost("rabbitmqVirtualHost", {
  *     description: "desc",
  *     instanceId: "amqp-kzbe8p3n",
  *     traceFlag: false,
  *     virtualHost: "vh-test-1",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export class RabbitmqVirtualHost extends pulumi.CustomResource {
     /**

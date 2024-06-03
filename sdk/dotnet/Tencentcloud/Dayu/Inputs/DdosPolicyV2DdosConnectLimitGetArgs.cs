@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dayu.Inputs
 {
 
-    public sealed class DdosPolicyV2DdosConnectLimitGetArgs : Pulumi.ResourceArgs
+    public sealed class DdosPolicyV2DdosConnectLimitGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Based on connection suppression trigger threshold, value range [0,4294967295].
@@ -70,5 +70,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dayu.Inputs
         public DdosPolicyV2DdosConnectLimitGetArgs()
         {
         }
+        public static new DdosPolicyV2DdosConnectLimitGetArgs Empty => new DdosPolicyV2DdosConnectLimitGetArgs();
     }
 }

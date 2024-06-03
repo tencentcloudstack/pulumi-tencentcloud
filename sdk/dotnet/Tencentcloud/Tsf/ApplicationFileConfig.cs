@@ -15,34 +15,35 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var applicationFileConfig = new Tencentcloud.Tsf.ApplicationFileConfig("applicationFileConfig", new()
     ///     {
-    ///         var applicationFileConfig = new Tencentcloud.Tsf.ApplicationFileConfig("applicationFileConfig", new Tencentcloud.Tsf.ApplicationFileConfigArgs
-    ///         {
-    ///             ApplicationId = "application-a24x29xv",
-    ///             ConfigFileCode = "UTF-8",
-    ///             ConfigFileName = "application.yaml",
-    ///             ConfigFilePath = "/etc/nginx",
-    ///             ConfigFileValue = "test: 1",
-    ///             ConfigName = "terraform-test",
-    ///             ConfigPostCmd = "source .bashrc",
-    ///             ConfigVersion = "1.0",
-    ///             ConfigVersionDesc = "1.0",
-    ///             EncodeWithBase64 = true,
-    ///         });
-    ///     }
+    ///         ApplicationId = "application-a24x29xv",
+    ///         ConfigFileCode = "UTF-8",
+    ///         ConfigFileName = "application.yaml",
+    ///         ConfigFilePath = "/etc/nginx",
+    ///         ConfigFileValue = "test: 1",
+    ///         ConfigName = "terraform-test",
+    ///         ConfigPostCmd = "source .bashrc",
+    ///         ConfigVersion = "1.0",
+    ///         ConfigVersionDesc = "1.0",
+    ///         EncodeWithBase64 = true,
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Tsf/applicationFileConfig:ApplicationFileConfig")]
-    public partial class ApplicationFileConfig : Pulumi.CustomResource
+    public partial class ApplicationFileConfig : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Config file associated application ID.
@@ -155,7 +156,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf
         }
     }
 
-    public sealed class ApplicationFileConfigArgs : Pulumi.ResourceArgs
+    public sealed class ApplicationFileConfigArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Config file associated application ID.
@@ -232,9 +233,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf
         public ApplicationFileConfigArgs()
         {
         }
+        public static new ApplicationFileConfigArgs Empty => new ApplicationFileConfigArgs();
     }
 
-    public sealed class ApplicationFileConfigState : Pulumi.ResourceArgs
+    public sealed class ApplicationFileConfigState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Config file associated application ID.
@@ -311,5 +313,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf
         public ApplicationFileConfigState()
         {
         }
+        public static new ApplicationFileConfigState Empty => new ApplicationFileConfigState();
     }
 }

@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway.Inputs
 {
 
-    public sealed class ApiTargetServicesHealthCheckConfGetArgs : Pulumi.ResourceArgs
+    public sealed class ApiTargetServicesHealthCheckConfGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Threshold percentage.Note: This field may return null, indicating that a valid value cannot be obtained.
@@ -40,5 +40,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway.Inputs
         public ApiTargetServicesHealthCheckConfGetArgs()
         {
         }
+        public static new ApiTargetServicesHealthCheckConfGetArgs Empty => new ApiTargetServicesHealthCheckConfGetArgs();
     }
 }

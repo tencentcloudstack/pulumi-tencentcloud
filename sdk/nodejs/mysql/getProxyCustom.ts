@@ -2,15 +2,13 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 export function getProxyCustom(args: GetProxyCustomArgs, opts?: pulumi.InvokeOptions): Promise<GetProxyCustomResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Mysql/getProxyCustom:getProxyCustom", {
         "instanceId": args.instanceId,
         "resultOutputFile": args.resultOutputFile,
@@ -38,9 +36,8 @@ export interface GetProxyCustomResult {
     readonly resultOutputFile?: string;
     readonly weightRules: outputs.Mysql.GetProxyCustomWeightRule[];
 }
-
 export function getProxyCustomOutput(args: GetProxyCustomOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetProxyCustomResult> {
-    return pulumi.output(args).apply(a => getProxyCustom(a, opts))
+    return pulumi.output(args).apply((a: any) => getProxyCustom(a, opts))
 }
 
 /**

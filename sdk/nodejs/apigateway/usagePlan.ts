@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,24 +11,26 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = new tencentcloud.ApiGateway.UsagePlan("example", {
+ * const example = new tencentcloud.apigateway.UsagePlan("example", {
  *     maxRequestNum: 100,
  *     maxRequestNumPreSec: 10,
  *     usagePlanDesc: "desc.",
  *     usagePlanName: "tf_example",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * API gateway usage plan can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:ApiGateway/usagePlan:UsagePlan plan usagePlan-gyeafpab
+ * $ pulumi import tencentcloud:ApiGateway/usagePlan:UsagePlan plan usagePlan-gyeafpab
  * ```
  */
 export class UsagePlan extends pulumi.CustomResource {

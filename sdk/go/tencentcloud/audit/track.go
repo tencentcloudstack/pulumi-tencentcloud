@@ -7,54 +7,59 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a audit track
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Audit"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Audit"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Audit"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Audit.NewTrack(ctx, "track", &Audit.TrackArgs{
-// 			ActionType: pulumi.String("Read"),
-// 			EventNames: pulumi.StringArray{
-// 				pulumi.String("*"),
-// 			},
-// 			ResourceType: pulumi.String("*"),
-// 			Status:       pulumi.Int(1),
-// 			Storage: &audit.TrackStorageArgs{
-// 				StorageName:   pulumi.String("db90b92c-91d2-46b0-94ac-debbbb21dc4e"),
-// 				StoragePrefix: pulumi.String("cloudaudit"),
-// 				StorageRegion: pulumi.String("ap-guangzhou"),
-// 				StorageType:   pulumi.String("cls"),
-// 			},
-// 			TrackForAllMembers: pulumi.Int(0),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Audit.NewTrack(ctx, "track", &Audit.TrackArgs{
+//				ActionType: pulumi.String("Read"),
+//				EventNames: pulumi.StringArray{
+//					pulumi.String("*"),
+//				},
+//				ResourceType: pulumi.String("*"),
+//				Status:       pulumi.Int(1),
+//				Storage: &audit.TrackStorageArgs{
+//					StorageName:   pulumi.String("db90b92c-91d2-46b0-94ac-debbbb21dc4e"),
+//					StoragePrefix: pulumi.String("cloudaudit"),
+//					StorageRegion: pulumi.String("ap-guangzhou"),
+//					StorageType:   pulumi.String("cls"),
+//				},
+//				TrackForAllMembers: pulumi.Int(0),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // audit track can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Audit/track:Track track track_id
+// $ pulumi import tencentcloud:Audit/track:Track track track_id
 // ```
 type Track struct {
 	pulumi.CustomResourceState
@@ -99,7 +104,7 @@ func NewTrack(ctx *pulumi.Context,
 	if args.Storage == nil {
 		return nil, errors.New("invalid value for required argument 'Storage'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource Track
 	err := ctx.RegisterResource("tencentcloud:Audit/track:Track", name, args, &resource, opts...)
 	if err != nil {
@@ -224,7 +229,7 @@ func (i *Track) ToTrackOutputWithContext(ctx context.Context) TrackOutput {
 // TrackArrayInput is an input type that accepts TrackArray and TrackArrayOutput values.
 // You can construct a concrete instance of `TrackArrayInput` via:
 //
-//          TrackArray{ TrackArgs{...} }
+//	TrackArray{ TrackArgs{...} }
 type TrackArrayInput interface {
 	pulumi.Input
 
@@ -249,7 +254,7 @@ func (i TrackArray) ToTrackArrayOutputWithContext(ctx context.Context) TrackArra
 // TrackMapInput is an input type that accepts TrackMap and TrackMapOutput values.
 // You can construct a concrete instance of `TrackMapInput` via:
 //
-//          TrackMap{ "key": TrackArgs{...} }
+//	TrackMap{ "key": TrackArgs{...} }
 type TrackMapInput interface {
 	pulumi.Input
 

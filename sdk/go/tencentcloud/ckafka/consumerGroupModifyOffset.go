@@ -7,40 +7,46 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a ckafka consumerGroupModifyOffset
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ckafka"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ckafka"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Ckafka.NewConsumerGroupModifyOffset(ctx, "consumerGroupModifyOffset", &Ckafka.ConsumerGroupModifyOffsetArgs{
-// 			Group:      pulumi.String("xxxxxx"),
-// 			InstanceId: pulumi.String("ckafka-xxxxxx"),
-// 			Offset:     pulumi.Int(0),
-// 			Strategy:   pulumi.Int(2),
-// 			Topics: pulumi.StringArray{
-// 				pulumi.String("xxxxxx"),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Ckafka.NewConsumerGroupModifyOffset(ctx, "consumerGroupModifyOffset", &Ckafka.ConsumerGroupModifyOffsetArgs{
+//				Group:      pulumi.String("xxxxxx"),
+//				InstanceId: pulumi.String("ckafka-xxxxxx"),
+//				Offset:     pulumi.Int(0),
+//				Strategy:   pulumi.Int(2),
+//				Topics: pulumi.StringArray{
+//					pulumi.String("xxxxxx"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 type ConsumerGroupModifyOffset struct {
 	pulumi.CustomResourceState
 
@@ -81,7 +87,7 @@ func NewConsumerGroupModifyOffset(ctx *pulumi.Context,
 	if args.Strategy == nil {
 		return nil, errors.New("invalid value for required argument 'Strategy'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource ConsumerGroupModifyOffset
 	err := ctx.RegisterResource("tencentcloud:Ckafka/consumerGroupModifyOffset:ConsumerGroupModifyOffset", name, args, &resource, opts...)
 	if err != nil {
@@ -222,7 +228,7 @@ func (i *ConsumerGroupModifyOffset) ToConsumerGroupModifyOffsetOutputWithContext
 // ConsumerGroupModifyOffsetArrayInput is an input type that accepts ConsumerGroupModifyOffsetArray and ConsumerGroupModifyOffsetArrayOutput values.
 // You can construct a concrete instance of `ConsumerGroupModifyOffsetArrayInput` via:
 //
-//          ConsumerGroupModifyOffsetArray{ ConsumerGroupModifyOffsetArgs{...} }
+//	ConsumerGroupModifyOffsetArray{ ConsumerGroupModifyOffsetArgs{...} }
 type ConsumerGroupModifyOffsetArrayInput interface {
 	pulumi.Input
 
@@ -247,7 +253,7 @@ func (i ConsumerGroupModifyOffsetArray) ToConsumerGroupModifyOffsetArrayOutputWi
 // ConsumerGroupModifyOffsetMapInput is an input type that accepts ConsumerGroupModifyOffsetMap and ConsumerGroupModifyOffsetMapOutput values.
 // You can construct a concrete instance of `ConsumerGroupModifyOffsetMapInput` via:
 //
-//          ConsumerGroupModifyOffsetMap{ "key": ConsumerGroupModifyOffsetArgs{...} }
+//	ConsumerGroupModifyOffsetMap{ "key": ConsumerGroupModifyOffsetArgs{...} }
 type ConsumerGroupModifyOffsetMapInput interface {
 	pulumi.Input
 

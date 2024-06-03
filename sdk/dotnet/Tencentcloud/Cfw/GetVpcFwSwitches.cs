@@ -15,64 +15,58 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cfw
         /// <summary>
         /// Use this data source to query detailed information of cfw vpc_fw_switches
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var example = Tencentcloud.Cfw.GetVpcFwSwitches.Invoke(new()
         ///     {
-        ///         var example = Output.Create(Tencentcloud.Cfw.GetVpcFwSwitches.InvokeAsync(new Tencentcloud.Cfw.GetVpcFwSwitchesArgs
-        ///         {
-        ///             VpcInsId = "cfwg-c8c2de41",
-        ///         }));
-        ///     }
+        ///         VpcInsId = "cfwg-c8c2de41",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetVpcFwSwitchesResult> InvokeAsync(GetVpcFwSwitchesArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetVpcFwSwitchesResult>("tencentcloud:Cfw/getVpcFwSwitches:getVpcFwSwitches", args ?? new GetVpcFwSwitchesArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetVpcFwSwitchesResult>("tencentcloud:Cfw/getVpcFwSwitches:getVpcFwSwitches", args ?? new GetVpcFwSwitchesArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of cfw vpc_fw_switches
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var example = Tencentcloud.Cfw.GetVpcFwSwitches.Invoke(new()
         ///     {
-        ///         var example = Output.Create(Tencentcloud.Cfw.GetVpcFwSwitches.InvokeAsync(new Tencentcloud.Cfw.GetVpcFwSwitchesArgs
-        ///         {
-        ///             VpcInsId = "cfwg-c8c2de41",
-        ///         }));
-        ///     }
+        ///         VpcInsId = "cfwg-c8c2de41",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetVpcFwSwitchesResult> Invoke(GetVpcFwSwitchesInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetVpcFwSwitchesResult>("tencentcloud:Cfw/getVpcFwSwitches:getVpcFwSwitches", args ?? new GetVpcFwSwitchesInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetVpcFwSwitchesResult>("tencentcloud:Cfw/getVpcFwSwitches:getVpcFwSwitches", args ?? new GetVpcFwSwitchesInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetVpcFwSwitchesArgs : Pulumi.InvokeArgs
+    public sealed class GetVpcFwSwitchesArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Used to save results.
@@ -89,9 +83,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cfw
         public GetVpcFwSwitchesArgs()
         {
         }
+        public static new GetVpcFwSwitchesArgs Empty => new GetVpcFwSwitchesArgs();
     }
 
-    public sealed class GetVpcFwSwitchesInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetVpcFwSwitchesInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Used to save results.
@@ -108,6 +103,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cfw
         public GetVpcFwSwitchesInvokeArgs()
         {
         }
+        public static new GetVpcFwSwitchesInvokeArgs Empty => new GetVpcFwSwitchesInvokeArgs();
     }
 
 

@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tse.Inputs
 {
 
-    public sealed class InstanceEngineRegionInfoVpcInfoArgs : Pulumi.ResourceArgs
+    public sealed class InstanceEngineRegionInfoVpcInfoArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Intranet access addressNote: This field may return null, indicating that a valid value is not available..
@@ -34,5 +34,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tse.Inputs
         public InstanceEngineRegionInfoVpcInfoArgs()
         {
         }
+        public static new InstanceEngineRegionInfoVpcInfoArgs Empty => new InstanceEngineRegionInfoVpcInfoArgs();
     }
 }

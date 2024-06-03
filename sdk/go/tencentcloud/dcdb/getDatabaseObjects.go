@@ -8,45 +8,12 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Use this data source to query detailed information of dcdb databaseObjects
-//
-// ## Example Usage
-//
-// ```go
-// package main
-//
-// import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Dcdb"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dcdb"
-// )
-//
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Dcdb.GetDatabaseObjects(ctx, &dcdb.GetDatabaseObjectsArgs{
-// 			DbName: "",
-// 			Gt: []map[string]interface{}{
-// 				nil,
-// 			},
-// 			InstanceId: "dcdbt-ow7t8lmc",
-// 			Lt: []map[string]interface{}{
-// 				nil,
-// 			},
-// 			Nil: []map[string]interface{}{
-// 				nil,
-// 			},
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
-// ```
 func GetDatabaseObjects(ctx *pulumi.Context, args *GetDatabaseObjectsArgs, opts ...pulumi.InvokeOption) (*GetDatabaseObjectsResult, error) {
-	opts = pkgInvokeDefaultOpts(opts)
+	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetDatabaseObjectsResult
 	err := ctx.Invoke("tencentcloud:Dcdb/getDatabaseObjects:getDatabaseObjects", args, &rv, opts...)
 	if err != nil {

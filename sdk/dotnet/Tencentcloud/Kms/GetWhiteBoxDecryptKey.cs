@@ -15,64 +15,58 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kms
         /// <summary>
         /// Use this data source to query detailed information of kms white_box_decrypt_key
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var example = Tencentcloud.Kms.GetWhiteBoxDecryptKey.Invoke(new()
         ///     {
-        ///         var example = Output.Create(Tencentcloud.Kms.GetWhiteBoxDecryptKey.InvokeAsync(new Tencentcloud.Kms.GetWhiteBoxDecryptKeyArgs
-        ///         {
-        ///             KeyId = "244dab8c-6dad-11ea-80c6-5254006d0810",
-        ///         }));
-        ///     }
+        ///         KeyId = "244dab8c-6dad-11ea-80c6-5254006d0810",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetWhiteBoxDecryptKeyResult> InvokeAsync(GetWhiteBoxDecryptKeyArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetWhiteBoxDecryptKeyResult>("tencentcloud:Kms/getWhiteBoxDecryptKey:getWhiteBoxDecryptKey", args ?? new GetWhiteBoxDecryptKeyArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetWhiteBoxDecryptKeyResult>("tencentcloud:Kms/getWhiteBoxDecryptKey:getWhiteBoxDecryptKey", args ?? new GetWhiteBoxDecryptKeyArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of kms white_box_decrypt_key
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var example = Tencentcloud.Kms.GetWhiteBoxDecryptKey.Invoke(new()
         ///     {
-        ///         var example = Output.Create(Tencentcloud.Kms.GetWhiteBoxDecryptKey.InvokeAsync(new Tencentcloud.Kms.GetWhiteBoxDecryptKeyArgs
-        ///         {
-        ///             KeyId = "244dab8c-6dad-11ea-80c6-5254006d0810",
-        ///         }));
-        ///     }
+        ///         KeyId = "244dab8c-6dad-11ea-80c6-5254006d0810",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetWhiteBoxDecryptKeyResult> Invoke(GetWhiteBoxDecryptKeyInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetWhiteBoxDecryptKeyResult>("tencentcloud:Kms/getWhiteBoxDecryptKey:getWhiteBoxDecryptKey", args ?? new GetWhiteBoxDecryptKeyInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetWhiteBoxDecryptKeyResult>("tencentcloud:Kms/getWhiteBoxDecryptKey:getWhiteBoxDecryptKey", args ?? new GetWhiteBoxDecryptKeyInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetWhiteBoxDecryptKeyArgs : Pulumi.InvokeArgs
+    public sealed class GetWhiteBoxDecryptKeyArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Globally unique identifier for the white box key.
@@ -89,9 +83,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kms
         public GetWhiteBoxDecryptKeyArgs()
         {
         }
+        public static new GetWhiteBoxDecryptKeyArgs Empty => new GetWhiteBoxDecryptKeyArgs();
     }
 
-    public sealed class GetWhiteBoxDecryptKeyInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetWhiteBoxDecryptKeyInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Globally unique identifier for the white box key.
@@ -108,6 +103,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kms
         public GetWhiteBoxDecryptKeyInvokeArgs()
         {
         }
+        public static new GetWhiteBoxDecryptKeyInvokeArgs Empty => new GetWhiteBoxDecryptKeyInvokeArgs();
     }
 
 

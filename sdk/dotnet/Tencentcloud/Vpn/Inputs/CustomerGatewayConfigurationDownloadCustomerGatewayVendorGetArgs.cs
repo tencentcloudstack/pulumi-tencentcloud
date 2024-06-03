@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpn.Inputs
 {
 
-    public sealed class CustomerGatewayConfigurationDownloadCustomerGatewayVendorGetArgs : Pulumi.ResourceArgs
+    public sealed class CustomerGatewayConfigurationDownloadCustomerGatewayVendorGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Platform.
@@ -34,5 +34,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpn.Inputs
         public CustomerGatewayConfigurationDownloadCustomerGatewayVendorGetArgs()
         {
         }
+        public static new CustomerGatewayConfigurationDownloadCustomerGatewayVendorGetArgs Empty => new CustomerGatewayConfigurationDownloadCustomerGatewayVendorGetArgs();
     }
 }

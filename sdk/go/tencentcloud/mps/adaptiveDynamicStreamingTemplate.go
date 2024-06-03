@@ -7,89 +7,94 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a mps adaptiveDynamicStreamingTemplate
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Mps"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Mps"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Mps"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Mps.NewAdaptiveDynamicStreamingTemplate(ctx, "adaptiveDynamicStreamingTemplate", &Mps.AdaptiveDynamicStreamingTemplateArgs{
-// 			Comment:                      pulumi.String("terrraform test"),
-// 			DisableHigherVideoBitrate:    pulumi.Int(0),
-// 			DisableHigherVideoResolution: pulumi.Int(1),
-// 			Format:                       pulumi.String("HLS"),
-// 			StreamInfos: mps.AdaptiveDynamicStreamingTemplateStreamInfoArray{
-// 				&mps.AdaptiveDynamicStreamingTemplateStreamInfoArgs{
-// 					Audio: &mps.AdaptiveDynamicStreamingTemplateStreamInfoAudioArgs{
-// 						AudioChannel: pulumi.Int(1),
-// 						Bitrate:      pulumi.Int(55),
-// 						Codec:        pulumi.String("libmp3lame"),
-// 						SampleRate:   pulumi.Int(32000),
-// 					},
-// 					RemoveAudio: pulumi.Int(0),
-// 					RemoveVideo: pulumi.Int(0),
-// 					Video: &mps.AdaptiveDynamicStreamingTemplateStreamInfoVideoArgs{
-// 						Bitrate:            pulumi.Int(245),
-// 						Codec:              pulumi.String("libx264"),
-// 						FillType:           pulumi.String("black"),
-// 						Fps:                pulumi.Int(30),
-// 						Gop:                pulumi.Int(0),
-// 						Height:             pulumi.Int(135),
-// 						ResolutionAdaptive: pulumi.String("open"),
-// 						Vcrf:               pulumi.Int(0),
-// 						Width:              pulumi.Int(145),
-// 					},
-// 				},
-// 				&mps.AdaptiveDynamicStreamingTemplateStreamInfoArgs{
-// 					Audio: &mps.AdaptiveDynamicStreamingTemplateStreamInfoAudioArgs{
-// 						AudioChannel: pulumi.Int(2),
-// 						Bitrate:      pulumi.Int(60),
-// 						Codec:        pulumi.String("libfdk_aac"),
-// 						SampleRate:   pulumi.Int(32000),
-// 					},
-// 					RemoveAudio: pulumi.Int(0),
-// 					RemoveVideo: pulumi.Int(0),
-// 					Video: &mps.AdaptiveDynamicStreamingTemplateStreamInfoVideoArgs{
-// 						Bitrate:            pulumi.Int(400),
-// 						Codec:              pulumi.String("libx264"),
-// 						FillType:           pulumi.String("black"),
-// 						Fps:                pulumi.Int(40),
-// 						Gop:                pulumi.Int(0),
-// 						Height:             pulumi.Int(150),
-// 						ResolutionAdaptive: pulumi.String("open"),
-// 						Vcrf:               pulumi.Int(0),
-// 						Width:              pulumi.Int(160),
-// 					},
-// 				},
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Mps.NewAdaptiveDynamicStreamingTemplate(ctx, "adaptiveDynamicStreamingTemplate", &Mps.AdaptiveDynamicStreamingTemplateArgs{
+//				Comment:                      pulumi.String("terrraform test"),
+//				DisableHigherVideoBitrate:    pulumi.Int(0),
+//				DisableHigherVideoResolution: pulumi.Int(1),
+//				Format:                       pulumi.String("HLS"),
+//				StreamInfos: mps.AdaptiveDynamicStreamingTemplateStreamInfoArray{
+//					&mps.AdaptiveDynamicStreamingTemplateStreamInfoArgs{
+//						Audio: &mps.AdaptiveDynamicStreamingTemplateStreamInfoAudioArgs{
+//							AudioChannel: pulumi.Int(1),
+//							Bitrate:      pulumi.Int(55),
+//							Codec:        pulumi.String("libmp3lame"),
+//							SampleRate:   pulumi.Int(32000),
+//						},
+//						RemoveAudio: pulumi.Int(0),
+//						RemoveVideo: pulumi.Int(0),
+//						Video: &mps.AdaptiveDynamicStreamingTemplateStreamInfoVideoArgs{
+//							Bitrate:            pulumi.Int(245),
+//							Codec:              pulumi.String("libx264"),
+//							FillType:           pulumi.String("black"),
+//							Fps:                pulumi.Int(30),
+//							Gop:                pulumi.Int(0),
+//							Height:             pulumi.Int(135),
+//							ResolutionAdaptive: pulumi.String("open"),
+//							Vcrf:               pulumi.Int(0),
+//							Width:              pulumi.Int(145),
+//						},
+//					},
+//					&mps.AdaptiveDynamicStreamingTemplateStreamInfoArgs{
+//						Audio: &mps.AdaptiveDynamicStreamingTemplateStreamInfoAudioArgs{
+//							AudioChannel: pulumi.Int(2),
+//							Bitrate:      pulumi.Int(60),
+//							Codec:        pulumi.String("libfdk_aac"),
+//							SampleRate:   pulumi.Int(32000),
+//						},
+//						RemoveAudio: pulumi.Int(0),
+//						RemoveVideo: pulumi.Int(0),
+//						Video: &mps.AdaptiveDynamicStreamingTemplateStreamInfoVideoArgs{
+//							Bitrate:            pulumi.Int(400),
+//							Codec:              pulumi.String("libx264"),
+//							FillType:           pulumi.String("black"),
+//							Fps:                pulumi.Int(40),
+//							Gop:                pulumi.Int(0),
+//							Height:             pulumi.Int(150),
+//							ResolutionAdaptive: pulumi.String("open"),
+//							Vcrf:               pulumi.Int(0),
+//							Width:              pulumi.Int(160),
+//						},
+//					},
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // mps adaptive_dynamic_streaming_template can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Mps/adaptiveDynamicStreamingTemplate:AdaptiveDynamicStreamingTemplate adaptive_dynamic_streaming_template adaptive_dynamic_streaming_template_id
+// $ pulumi import tencentcloud:Mps/adaptiveDynamicStreamingTemplate:AdaptiveDynamicStreamingTemplate adaptive_dynamic_streaming_template adaptive_dynamic_streaming_template_id
 // ```
 type AdaptiveDynamicStreamingTemplate struct {
 	pulumi.CustomResourceState
@@ -121,7 +126,7 @@ func NewAdaptiveDynamicStreamingTemplate(ctx *pulumi.Context,
 	if args.StreamInfos == nil {
 		return nil, errors.New("invalid value for required argument 'StreamInfos'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource AdaptiveDynamicStreamingTemplate
 	err := ctx.RegisterResource("tencentcloud:Mps/adaptiveDynamicStreamingTemplate:AdaptiveDynamicStreamingTemplate", name, args, &resource, opts...)
 	if err != nil {
@@ -234,7 +239,7 @@ func (i *AdaptiveDynamicStreamingTemplate) ToAdaptiveDynamicStreamingTemplateOut
 // AdaptiveDynamicStreamingTemplateArrayInput is an input type that accepts AdaptiveDynamicStreamingTemplateArray and AdaptiveDynamicStreamingTemplateArrayOutput values.
 // You can construct a concrete instance of `AdaptiveDynamicStreamingTemplateArrayInput` via:
 //
-//          AdaptiveDynamicStreamingTemplateArray{ AdaptiveDynamicStreamingTemplateArgs{...} }
+//	AdaptiveDynamicStreamingTemplateArray{ AdaptiveDynamicStreamingTemplateArgs{...} }
 type AdaptiveDynamicStreamingTemplateArrayInput interface {
 	pulumi.Input
 
@@ -259,7 +264,7 @@ func (i AdaptiveDynamicStreamingTemplateArray) ToAdaptiveDynamicStreamingTemplat
 // AdaptiveDynamicStreamingTemplateMapInput is an input type that accepts AdaptiveDynamicStreamingTemplateMap and AdaptiveDynamicStreamingTemplateMapOutput values.
 // You can construct a concrete instance of `AdaptiveDynamicStreamingTemplateMapInput` via:
 //
-//          AdaptiveDynamicStreamingTemplateMap{ "key": AdaptiveDynamicStreamingTemplateArgs{...} }
+//	AdaptiveDynamicStreamingTemplateMap{ "key": AdaptiveDynamicStreamingTemplateArgs{...} }
 type AdaptiveDynamicStreamingTemplateMapInput interface {
 	pulumi.Input
 

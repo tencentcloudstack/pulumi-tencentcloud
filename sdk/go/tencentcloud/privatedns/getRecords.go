@@ -8,43 +8,48 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Use this data source to query detailed information of private dns records
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/PrivateDns"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/PrivateDns"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/PrivateDns"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := PrivateDns.GetRecords(ctx, &privatedns.GetRecordsArgs{
-// 			Filters: []privatedns.GetRecordsFilter{
-// 				privatedns.GetRecordsFilter{
-// 					Name: "Value",
-// 					Values: []string{
-// 						"8.8.8.8",
-// 					},
-// 				},
-// 			},
-// 			ZoneId: "zone-xxxxxx",
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := PrivateDns.GetRecords(ctx, &privatedns.GetRecordsArgs{
+//				Filters: []privatedns.GetRecordsFilter{
+//					{
+//						Name: "Value",
+//						Values: []string{
+//							"8.8.8.8",
+//						},
+//					},
+//				},
+//				ZoneId: "zone-xxxxxx",
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 func GetRecords(ctx *pulumi.Context, args *GetRecordsArgs, opts ...pulumi.InvokeOption) (*GetRecordsResult, error) {
-	opts = pkgInvokeDefaultOpts(opts)
+	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetRecordsResult
 	err := ctx.Invoke("tencentcloud:PrivateDns/getRecords:getRecords", args, &rv, opts...)
 	if err != nil {

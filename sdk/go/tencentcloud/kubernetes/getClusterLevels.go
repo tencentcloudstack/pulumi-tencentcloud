@@ -8,34 +8,39 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provide a datasource to query TKE cluster levels.
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Kubernetes"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Kubernetes"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Kubernetes"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		foo, err := Kubernetes.GetClusterLevels(ctx, nil, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		ctx.Export("level5", foo.Lists[0].Alias)
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			foo, err := Kubernetes.GetClusterLevels(ctx, nil, nil)
+//			if err != nil {
+//				return err
+//			}
+//			ctx.Export("level5", foo.Lists[0].Alias)
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 func GetClusterLevels(ctx *pulumi.Context, args *GetClusterLevelsArgs, opts ...pulumi.InvokeOption) (*GetClusterLevelsResult, error) {
-	opts = pkgInvokeDefaultOpts(opts)
+	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetClusterLevelsResult
 	err := ctx.Invoke("tencentcloud:Kubernetes/getClusterLevels:getClusterLevels", args, &rv, opts...)
 	if err != nil {
@@ -48,7 +53,7 @@ func GetClusterLevels(ctx *pulumi.Context, args *GetClusterLevelsArgs, opts ...p
 type GetClusterLevelsArgs struct {
 	// Specify cluster Id, if set will only query current cluster's available levels.
 	ClusterId *string `pulumi:"clusterId"`
-	// Used for save result.
+	// Used to save results.
 	ResultOutputFile *string `pulumi:"resultOutputFile"`
 }
 
@@ -79,7 +84,7 @@ func GetClusterLevelsOutput(ctx *pulumi.Context, args GetClusterLevelsOutputArgs
 type GetClusterLevelsOutputArgs struct {
 	// Specify cluster Id, if set will only query current cluster's available levels.
 	ClusterId pulumi.StringPtrInput `pulumi:"clusterId"`
-	// Used for save result.
+	// Used to save results.
 	ResultOutputFile pulumi.StringPtrInput `pulumi:"resultOutputFile"`
 }
 

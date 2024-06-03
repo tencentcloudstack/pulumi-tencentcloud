@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ccn.Inputs
 {
 
-    public sealed class GetCrossBorderRegionBandwidthLimitsFilterArgs : Pulumi.InvokeArgs
+    public sealed class GetCrossBorderRegionBandwidthLimitsFilterArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// attribute name.
@@ -34,5 +34,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ccn.Inputs
         public GetCrossBorderRegionBandwidthLimitsFilterArgs()
         {
         }
+        public static new GetCrossBorderRegionBandwidthLimitsFilterArgs Empty => new GetCrossBorderRegionBandwidthLimitsFilterArgs();
     }
 }

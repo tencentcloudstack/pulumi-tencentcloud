@@ -15,104 +15,92 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps
         /// <summary>
         /// Use this data source to query detailed information of mps media_meta_data
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
+        /// 
         /// ### Query the mps media meta data through COS
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var @object = Tencentcloud.Cos.GetBucketObject.Invoke(new()
         ///     {
-        ///         var @object = Output.Create(Tencentcloud.Cos.GetBucketObject.InvokeAsync(new Tencentcloud.Cos.GetBucketObjectArgs
-        ///         {
-        ///             Bucket = $"keep-bucket-{local.App_id}",
-        ///             Key = "/mps-test/test.mov",
-        ///         }));
-        ///         var metadata = Output.Tuple(@object, @object).Apply(values =&gt;
-        ///         {
-        ///             var @object = values.Item1;
-        ///             var @object1 = values.Item2;
-        ///             return Output.Create(Tencentcloud.Mps.GetMediaMetaData.InvokeAsync(new Tencentcloud.Mps.GetMediaMetaDataArgs
-        ///             {
-        ///                 InputInfo = new Tencentcloud.Mps.Inputs.GetMediaMetaDataInputInfoArgs
-        ///                 {
-        ///                     Type = "COS",
-        ///                     CosInputInfo = new Tencentcloud.Mps.Inputs.GetMediaMetaDataInputInfoCosInputInfoArgs
-        ///                     {
-        ///                         Bucket = @object.Bucket,
-        ///                         Region = "%s",
-        ///                         Object = @object1.Key,
-        ///                     },
-        ///                 },
-        ///             }));
-        ///         });
-        ///     }
+        ///         Bucket = $"keep-bucket-{local.App_id}",
+        ///         Key = "/mps-test/test.mov",
+        ///     });
         /// 
-        /// }
+        ///     var metadata = Tencentcloud.Mps.GetMediaMetaData.Invoke(new()
+        ///     {
+        ///         InputInfo = new Tencentcloud.Mps.Inputs.GetMediaMetaDataInputInfoInputArgs
+        ///         {
+        ///             Type = "COS",
+        ///             CosInputInfo = new Tencentcloud.Mps.Inputs.GetMediaMetaDataInputInfoCosInputInfoInputArgs
+        ///             {
+        ///                 Bucket = @object.Apply(getBucketObjectResult =&gt; getBucketObjectResult.Bucket),
+        ///                 Region = "%s",
+        ///                 Object = @object.Apply(getBucketObjectResult =&gt; getBucketObjectResult.Key),
+        ///             },
+        ///         },
+        ///     });
+        /// 
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetMediaMetaDataResult> InvokeAsync(GetMediaMetaDataArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetMediaMetaDataResult>("tencentcloud:Mps/getMediaMetaData:getMediaMetaData", args ?? new GetMediaMetaDataArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetMediaMetaDataResult>("tencentcloud:Mps/getMediaMetaData:getMediaMetaData", args ?? new GetMediaMetaDataArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of mps media_meta_data
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
+        /// 
         /// ### Query the mps media meta data through COS
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var @object = Tencentcloud.Cos.GetBucketObject.Invoke(new()
         ///     {
-        ///         var @object = Output.Create(Tencentcloud.Cos.GetBucketObject.InvokeAsync(new Tencentcloud.Cos.GetBucketObjectArgs
-        ///         {
-        ///             Bucket = $"keep-bucket-{local.App_id}",
-        ///             Key = "/mps-test/test.mov",
-        ///         }));
-        ///         var metadata = Output.Tuple(@object, @object).Apply(values =&gt;
-        ///         {
-        ///             var @object = values.Item1;
-        ///             var @object1 = values.Item2;
-        ///             return Output.Create(Tencentcloud.Mps.GetMediaMetaData.InvokeAsync(new Tencentcloud.Mps.GetMediaMetaDataArgs
-        ///             {
-        ///                 InputInfo = new Tencentcloud.Mps.Inputs.GetMediaMetaDataInputInfoArgs
-        ///                 {
-        ///                     Type = "COS",
-        ///                     CosInputInfo = new Tencentcloud.Mps.Inputs.GetMediaMetaDataInputInfoCosInputInfoArgs
-        ///                     {
-        ///                         Bucket = @object.Bucket,
-        ///                         Region = "%s",
-        ///                         Object = @object1.Key,
-        ///                     },
-        ///                 },
-        ///             }));
-        ///         });
-        ///     }
+        ///         Bucket = $"keep-bucket-{local.App_id}",
+        ///         Key = "/mps-test/test.mov",
+        ///     });
         /// 
-        /// }
+        ///     var metadata = Tencentcloud.Mps.GetMediaMetaData.Invoke(new()
+        ///     {
+        ///         InputInfo = new Tencentcloud.Mps.Inputs.GetMediaMetaDataInputInfoInputArgs
+        ///         {
+        ///             Type = "COS",
+        ///             CosInputInfo = new Tencentcloud.Mps.Inputs.GetMediaMetaDataInputInfoCosInputInfoInputArgs
+        ///             {
+        ///                 Bucket = @object.Apply(getBucketObjectResult =&gt; getBucketObjectResult.Bucket),
+        ///                 Region = "%s",
+        ///                 Object = @object.Apply(getBucketObjectResult =&gt; getBucketObjectResult.Key),
+        ///             },
+        ///         },
+        ///     });
+        /// 
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetMediaMetaDataResult> Invoke(GetMediaMetaDataInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetMediaMetaDataResult>("tencentcloud:Mps/getMediaMetaData:getMediaMetaData", args ?? new GetMediaMetaDataInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetMediaMetaDataResult>("tencentcloud:Mps/getMediaMetaData:getMediaMetaData", args ?? new GetMediaMetaDataInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetMediaMetaDataArgs : Pulumi.InvokeArgs
+    public sealed class GetMediaMetaDataArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Input information of file for metadata getting.
@@ -129,9 +117,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps
         public GetMediaMetaDataArgs()
         {
         }
+        public static new GetMediaMetaDataArgs Empty => new GetMediaMetaDataArgs();
     }
 
-    public sealed class GetMediaMetaDataInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetMediaMetaDataInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Input information of file for metadata getting.
@@ -148,6 +137,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps
         public GetMediaMetaDataInvokeArgs()
         {
         }
+        public static new GetMediaMetaDataInvokeArgs Empty => new GetMediaMetaDataInvokeArgs();
     }
 
 

@@ -11,22 +11,24 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const ri = new tencentcloud.Reserved.Instance("ri", {
+ * const ri = new tencentcloud.reserved.Instance("ri", {
  *     configId: "469043dd-28b9-4d89-b557-74f6a8326259",
  *     instanceCount: 2,
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * Reserved instance can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Reserved/instance:Instance foo 6cc16e7c-47d7-4fae-9b44-ce5c0f59a920
+ * $ pulumi import tencentcloud:Reserved/instance:Instance foo 6cc16e7c-47d7-4fae-9b44-ce5c0f59a920
  * ```
  */
 export class Instance extends pulumi.CustomResource {

@@ -8,38 +8,43 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Use this data source to query detailed information of tsf groupInstances
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Tsf"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tsf"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tsf"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Tsf.GetGroupInstances(ctx, &tsf.GetGroupInstancesArgs{
-// 			GroupId:    "group-yrjkln9v",
-// 			OrderBy:    pulumi.StringRef("ASC"),
-// 			OrderType:  pulumi.IntRef(0),
-// 			SearchWord: pulumi.StringRef("testing"),
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Tsf.GetGroupInstances(ctx, &tsf.GetGroupInstancesArgs{
+//				GroupId:    "group-yrjkln9v",
+//				OrderBy:    pulumi.StringRef("ASC"),
+//				OrderType:  pulumi.IntRef(0),
+//				SearchWord: pulumi.StringRef("testing"),
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 func LookupGroupInstances(ctx *pulumi.Context, args *LookupGroupInstancesArgs, opts ...pulumi.InvokeOption) (*LookupGroupInstancesResult, error) {
-	opts = pkgInvokeDefaultOpts(opts)
+	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv LookupGroupInstancesResult
 	err := ctx.Invoke("tencentcloud:Tsf/getGroupInstances:getGroupInstances", args, &rv, opts...)
 	if err != nil {

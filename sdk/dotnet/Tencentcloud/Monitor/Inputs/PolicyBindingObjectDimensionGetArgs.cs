@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor.Inputs
 {
 
-    public sealed class PolicyBindingObjectDimensionGetArgs : Pulumi.ResourceArgs
+    public sealed class PolicyBindingObjectDimensionGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Represents a collection of dimensions of an object instance, json format.eg:'{"unInstanceId":"ins-ot3cq4bi"}'.
@@ -19,11 +19,15 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor.Inputs
         [Input("dimensionsJson", required: true)]
         public Input<string> DimensionsJson { get; set; } = null!;
 
+        /// <summary>
+        /// Object unique ID.
+        /// </summary>
         [Input("uniqueId")]
         public Input<string>? UniqueId { get; set; }
 
         public PolicyBindingObjectDimensionGetArgs()
         {
         }
+        public static new PolicyBindingObjectDimensionGetArgs Empty => new PolicyBindingObjectDimensionGetArgs();
     }
 }

@@ -14,74 +14,79 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Nat
     /// Provides a resource to create a vpc refresh_nat_dc_route
     /// 
     /// ## Example Usage
+    /// 
     /// ### is True
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var vpc = new Tencentcloud.Vpc.Instance("vpc", new()
     ///     {
-    ///         var vpc = new Tencentcloud.Vpc.Instance("vpc", new Tencentcloud.Vpc.InstanceArgs
-    ///         {
-    ///             CidrBlock = "10.0.0.0/16",
-    ///         });
-    ///         var eipExample = new Tencentcloud.Eip.Instance("eipExample", new Tencentcloud.Eip.InstanceArgs
-    ///         {
-    ///         });
-    ///         var nat = new Tencentcloud.Nat.Gateway("nat", new Tencentcloud.Nat.GatewayArgs
-    ///         {
-    ///             VpcId = vpc.Id,
-    ///             MaxConcurrent = 3000000,
-    ///             Bandwidth = 500,
-    ///             AssignedEipSets = 
-    ///             {
-    ///                 eipExample.PublicIp,
-    ///             },
-    ///         });
-    ///         var refreshNatDcRoute = new Tencentcloud.Nat.RefreshNatDcRoute("refreshNatDcRoute", new Tencentcloud.Nat.RefreshNatDcRouteArgs
-    ///         {
-    ///             NatGatewayId = nat.Id,
-    ///             VpcId = vpc.Id,
-    ///             DryRun = true,
-    ///         });
-    ///     }
+    ///         CidrBlock = "10.0.0.0/16",
+    ///     });
     /// 
-    /// }
+    ///     var eipExample = new Tencentcloud.Eip.Instance("eipExample");
+    /// 
+    ///     var nat = new Tencentcloud.Nat.Gateway("nat", new()
+    ///     {
+    ///         VpcId = vpc.Id,
+    ///         MaxConcurrent = 3000000,
+    ///         Bandwidth = 500,
+    ///         AssignedEipSets = new[]
+    ///         {
+    ///             eipExample.PublicIp,
+    ///         },
+    ///     });
+    /// 
+    ///     var refreshNatDcRoute = new Tencentcloud.Nat.RefreshNatDcRoute("refreshNatDcRoute", new()
+    ///     {
+    ///         NatGatewayId = nat.Id,
+    ///         VpcId = vpc.Id,
+    ///         DryRun = true,
+    ///     });
+    /// 
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
+    /// 
     /// ### is False
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var refreshNatDcRoute = new Tencentcloud.Nat.RefreshNatDcRoute("refreshNatDcRoute", new()
     ///     {
-    ///         var refreshNatDcRoute = new Tencentcloud.Nat.RefreshNatDcRoute("refreshNatDcRoute", new Tencentcloud.Nat.RefreshNatDcRouteArgs
-    ///         {
-    ///             NatGatewayId = tencentcloud_nat_gateway.Nat.Id,
-    ///             VpcId = tencentcloud_vpc.Vpc.Id,
-    ///             DryRun = false,
-    ///         });
-    ///     }
+    ///         NatGatewayId = tencentcloud_nat_gateway.Nat.Id,
+    ///         VpcId = tencentcloud_vpc.Vpc.Id,
+    ///         DryRun = false,
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// vpc refresh_nat_dc_route can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Nat/refreshNatDcRoute:RefreshNatDcRoute refresh_nat_dc_route vpc_id#nat_gateway_id
+    /// $ pulumi import tencentcloud:Nat/refreshNatDcRoute:RefreshNatDcRoute refresh_nat_dc_route vpc_id#nat_gateway_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Nat/refreshNatDcRoute:RefreshNatDcRoute")]
-    public partial class RefreshNatDcRoute : Pulumi.CustomResource
+    public partial class RefreshNatDcRoute : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Whether to pre-refresh, valid values: True:yes, False:no.
@@ -146,7 +151,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Nat
         }
     }
 
-    public sealed class RefreshNatDcRouteArgs : Pulumi.ResourceArgs
+    public sealed class RefreshNatDcRouteArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Whether to pre-refresh, valid values: True:yes, False:no.
@@ -169,9 +174,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Nat
         public RefreshNatDcRouteArgs()
         {
         }
+        public static new RefreshNatDcRouteArgs Empty => new RefreshNatDcRouteArgs();
     }
 
-    public sealed class RefreshNatDcRouteState : Pulumi.ResourceArgs
+    public sealed class RefreshNatDcRouteState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Whether to pre-refresh, valid values: True:yes, False:no.
@@ -194,5 +200,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Nat
         public RefreshNatDcRouteState()
         {
         }
+        public static new RefreshNatDcRouteState Empty => new RefreshNatDcRouteState();
     }
 }

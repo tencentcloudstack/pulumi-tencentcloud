@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,22 +11,21 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const instanceZoneInfo = pulumi.output(tencentcloud.Redis.getInstanceZoneInfo({
+ * const instanceZoneInfo = tencentcloud.Redis.getInstanceZoneInfo({
  *     instanceId: "crs-c1nl9rpv",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getInstanceZoneInfo(args?: GetInstanceZoneInfoArgs, opts?: pulumi.InvokeOptions): Promise<GetInstanceZoneInfoResult> {
     args = args || {};
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Redis/getInstanceZoneInfo:getInstanceZoneInfo", {
         "instanceId": args.instanceId,
         "resultOutputFile": args.resultOutputFile,
@@ -61,9 +61,24 @@ export interface GetInstanceZoneInfoResult {
     readonly replicaGroups: outputs.Redis.GetInstanceZoneInfoReplicaGroup[];
     readonly resultOutputFile?: string;
 }
-
+/**
+ * Use this data source to query detailed information of redis instanceZoneInfo
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const instanceZoneInfo = tencentcloud.Redis.getInstanceZoneInfo({
+ *     instanceId: "crs-c1nl9rpv",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getInstanceZoneInfoOutput(args?: GetInstanceZoneInfoOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetInstanceZoneInfoResult> {
-    return pulumi.output(args).apply(a => getInstanceZoneInfo(a, opts))
+    return pulumi.output(args).apply((a: any) => getInstanceZoneInfo(a, opts))
 }
 
 /**

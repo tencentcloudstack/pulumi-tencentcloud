@@ -15,42 +15,43 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var restoreInstance = new Tencentcloud.Sqlserver.RestoreInstance("restoreInstance", new()
     ///     {
-    ///         var restoreInstance = new Tencentcloud.Sqlserver.RestoreInstance("restoreInstance", new Tencentcloud.Sqlserver.RestoreInstanceArgs
+    ///         BackupId = 3482091273,
+    ///         InstanceId = "mssql-qelbzgwf",
+    ///         RenameRestores = new[]
     ///         {
-    ///             BackupId = 3482091273,
-    ///             InstanceId = "mssql-qelbzgwf",
-    ///             RenameRestores = 
+    ///             new Tencentcloud.Sqlserver.Inputs.RestoreInstanceRenameRestoreArgs
     ///             {
-    ///                 new Tencentcloud.Sqlserver.Inputs.RestoreInstanceRenameRestoreArgs
-    ///                 {
-    ///                     NewName = "restore_keep_pubsub_db2",
-    ///                     OldName = "keep_pubsub_db2",
-    ///                 },
+    ///                 NewName = "restore_keep_pubsub_db2",
+    ///                 OldName = "keep_pubsub_db2",
     ///             },
-    ///         });
-    ///     }
+    ///         },
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// sqlserver restore_instance can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Sqlserver/restoreInstance:RestoreInstance restore_instance mssql-qelbzgwf#3482091273#keep_pubsub_db2#restore_keep_pubsub_db2
+    /// $ pulumi import tencentcloud:Sqlserver/restoreInstance:RestoreInstance restore_instance mssql-qelbzgwf#3482091273#keep_pubsub_db2#restore_keep_pubsub_db2
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Sqlserver/restoreInstance:RestoreInstance")]
-    public partial class RestoreInstance : Pulumi.CustomResource
+    public partial class RestoreInstance : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Backup file ID, which can be obtained through the Id field in the returned value of the DescribeBackups API.
@@ -121,7 +122,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
         }
     }
 
-    public sealed class RestoreInstanceArgs : Pulumi.ResourceArgs
+    public sealed class RestoreInstanceArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Backup file ID, which can be obtained through the Id field in the returned value of the DescribeBackups API.
@@ -150,9 +151,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
         public RestoreInstanceArgs()
         {
         }
+        public static new RestoreInstanceArgs Empty => new RestoreInstanceArgs();
     }
 
-    public sealed class RestoreInstanceState : Pulumi.ResourceArgs
+    public sealed class RestoreInstanceState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Backup file ID, which can be obtained through the Id field in the returned value of the DescribeBackups API.
@@ -193,5 +195,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
         public RestoreInstanceState()
         {
         }
+        public static new RestoreInstanceState Empty => new RestoreInstanceState();
     }
 }

@@ -15,70 +15,64 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Rum
         /// <summary>
         /// Use this data source to query detailed information of rum report_count
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var reportCount = Tencentcloud.Rum.GetReportCount.Invoke(new()
         ///     {
-        ///         var reportCount = Output.Create(Tencentcloud.Rum.GetReportCount.InvokeAsync(new Tencentcloud.Rum.GetReportCountArgs
-        ///         {
-        ///             EndTime = 1625454840,
-        ///             ProjectId = 1,
-        ///             ReportType = "log",
-        ///             StartTime = 1625444040,
-        ///         }));
-        ///     }
+        ///         EndTime = 1625454840,
+        ///         ProjectId = 1,
+        ///         ReportType = "log",
+        ///         StartTime = 1625444040,
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetReportCountResult> InvokeAsync(GetReportCountArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetReportCountResult>("tencentcloud:Rum/getReportCount:getReportCount", args ?? new GetReportCountArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetReportCountResult>("tencentcloud:Rum/getReportCount:getReportCount", args ?? new GetReportCountArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of rum report_count
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var reportCount = Tencentcloud.Rum.GetReportCount.Invoke(new()
         ///     {
-        ///         var reportCount = Output.Create(Tencentcloud.Rum.GetReportCount.InvokeAsync(new Tencentcloud.Rum.GetReportCountArgs
-        ///         {
-        ///             EndTime = 1625454840,
-        ///             ProjectId = 1,
-        ///             ReportType = "log",
-        ///             StartTime = 1625444040,
-        ///         }));
-        ///     }
+        ///         EndTime = 1625454840,
+        ///         ProjectId = 1,
+        ///         ReportType = "log",
+        ///         StartTime = 1625444040,
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetReportCountResult> Invoke(GetReportCountInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetReportCountResult>("tencentcloud:Rum/getReportCount:getReportCount", args ?? new GetReportCountInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetReportCountResult>("tencentcloud:Rum/getReportCount:getReportCount", args ?? new GetReportCountInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetReportCountArgs : Pulumi.InvokeArgs
+    public sealed class GetReportCountArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// End time but is represented using a timestamp in seconds.
@@ -119,9 +113,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Rum
         public GetReportCountArgs()
         {
         }
+        public static new GetReportCountArgs Empty => new GetReportCountArgs();
     }
 
-    public sealed class GetReportCountInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetReportCountInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// End time but is represented using a timestamp in seconds.
@@ -162,6 +157,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Rum
         public GetReportCountInvokeArgs()
         {
         }
+        public static new GetReportCountInvokeArgs Empty => new GetReportCountInvokeArgs();
     }
 
 

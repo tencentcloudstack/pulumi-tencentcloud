@@ -15,93 +15,97 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var logset = new Tencentcloud.Cls.Logset("logset", new()
     ///     {
-    ///         var logset = new Tencentcloud.Cls.Logset("logset", new Tencentcloud.Cls.LogsetArgs
+    ///         LogsetName = "tf-config-extra-test",
+    ///         Tags = 
     ///         {
-    ///             LogsetName = "tf-config-extra-test",
-    ///             Tags = 
+    ///             { "test", "test" },
+    ///         },
+    ///     });
+    /// 
+    ///     var topic = new Tencentcloud.Cls.Topic("topic", new()
+    ///     {
+    ///         AutoSplit = true,
+    ///         LogsetId = logset.Id,
+    ///         MaxSplitPartitions = 20,
+    ///         PartitionCount = 1,
+    ///         Period = 10,
+    ///         StorageType = "hot",
+    ///         Tags = 
+    ///         {
+    ///             { "test", "test" },
+    ///         },
+    ///         TopicName = "tf-config-extra-test",
+    ///     });
+    /// 
+    ///     var @group = new Tencentcloud.Cls.MachineGroup("group", new()
+    ///     {
+    ///         GroupName = "tf-config-extra-test",
+    ///         ServiceLogging = true,
+    ///         AutoUpdate = true,
+    ///         UpdateEndTime = "19:05:00",
+    ///         UpdateStartTime = "17:05:00",
+    ///         MachineGroupType = new Tencentcloud.Cls.Inputs.MachineGroupMachineGroupTypeArgs
+    ///         {
+    ///             Type = "ip",
+    ///             Values = new[]
     ///             {
-    ///                 { "test", "test" },
+    ///                 "192.168.1.1",
+    ///                 "192.168.1.2",
     ///             },
-    ///         });
-    ///         var topic = new Tencentcloud.Cls.Topic("topic", new Tencentcloud.Cls.TopicArgs
+    ///         },
+    ///     });
+    /// 
+    ///     var extra = new Tencentcloud.Cls.ConfigExtra("extra", new()
+    ///     {
+    ///         TopicId = topic.Id,
+    ///         Type = "container_file",
+    ///         LogType = "json_log",
+    ///         ConfigFlag = "label_k8s",
+    ///         LogsetId = logset.Id,
+    ///         LogsetName = logset.LogsetName,
+    ///         TopicName = topic.TopicName,
+    ///         ContainerFile = new Tencentcloud.Cls.Inputs.ConfigExtraContainerFileArgs
     ///         {
-    ///             AutoSplit = true,
-    ///             LogsetId = logset.Id,
-    ///             MaxSplitPartitions = 20,
-    ///             PartitionCount = 1,
-    ///             Period = 10,
-    ///             StorageType = "hot",
-    ///             Tags = 
-    ///             {
-    ///                 { "test", "test" },
-    ///             },
-    ///             TopicName = "tf-config-extra-test",
-    ///         });
-    ///         var @group = new Tencentcloud.Cls.MachineGroup("group", new Tencentcloud.Cls.MachineGroupArgs
-    ///         {
-    ///             GroupName = "tf-config-extra-test",
-    ///             ServiceLogging = true,
-    ///             AutoUpdate = true,
-    ///             UpdateEndTime = "19:05:00",
-    ///             UpdateStartTime = "17:05:00",
-    ///             MachineGroupType = new Tencentcloud.Cls.Inputs.MachineGroupMachineGroupTypeArgs
-    ///             {
-    ///                 Type = "ip",
-    ///                 Values = 
-    ///                 {
-    ///                     "192.168.1.1",
-    ///                     "192.168.1.2",
-    ///                 },
-    ///             },
-    ///         });
-    ///         var extra = new Tencentcloud.Cls.ConfigExtra("extra", new Tencentcloud.Cls.ConfigExtraArgs
-    ///         {
-    ///             TopicId = topic.Id,
-    ///             Type = "container_file",
-    ///             LogType = "json_log",
-    ///             ConfigFlag = "label_k8s",
-    ///             LogsetId = logset.Id,
-    ///             LogsetName = logset.LogsetName,
-    ///             TopicName = topic.TopicName,
-    ///             ContainerFile = new Tencentcloud.Cls.Inputs.ConfigExtraContainerFileArgs
+    ///             Container = "nginx",
+    ///             FilePattern = "log",
+    ///             LogPath = "/nginx",
+    ///             Namespace = "default",
+    ///             Workload = new Tencentcloud.Cls.Inputs.ConfigExtraContainerFileWorkloadArgs
     ///             {
     ///                 Container = "nginx",
-    ///                 FilePattern = "log",
-    ///                 LogPath = "/nginx",
+    ///                 Kind = "deployment",
+    ///                 Name = "nginx",
     ///                 Namespace = "default",
-    ///                 Workload = new Tencentcloud.Cls.Inputs.ConfigExtraContainerFileWorkloadArgs
-    ///                 {
-    ///                     Container = "nginx",
-    ///                     Kind = "deployment",
-    ///                     Name = "nginx",
-    ///                     Namespace = "default",
-    ///                 },
     ///             },
-    ///             GroupId = @group.Id,
-    ///         });
-    ///     }
+    ///         },
+    ///         GroupId = @group.Id,
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// cls config_extra can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Cls/configExtra:ConfigExtra config_extra config_extra_id
+    /// $ pulumi import tencentcloud:Cls/configExtra:ConfigExtra config_extra config_extra_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Cls/configExtra:ConfigExtra")]
-    public partial class ConfigExtra : Pulumi.CustomResource
+    public partial class ConfigExtra : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Collection configuration flag.
@@ -250,7 +254,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls
         }
     }
 
-    public sealed class ConfigExtraArgs : Pulumi.ResourceArgs
+    public sealed class ConfigExtraArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Collection configuration flag.
@@ -369,9 +373,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls
         public ConfigExtraArgs()
         {
         }
+        public static new ConfigExtraArgs Empty => new ConfigExtraArgs();
     }
 
-    public sealed class ConfigExtraState : Pulumi.ResourceArgs
+    public sealed class ConfigExtraState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Collection configuration flag.
@@ -490,5 +495,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls
         public ConfigExtraState()
         {
         }
+        public static new ConfigExtraState Empty => new ConfigExtraState();
     }
 }

@@ -15,58 +15,52 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Waf
         /// <summary>
         /// Use this data source to query detailed information of waf user_domains
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
-        ///     {
-        ///         var userDomains = Output.Create(Tencentcloud.Waf.GetUserDomains.InvokeAsync());
-        ///     }
+        ///     var userDomains = Tencentcloud.Waf.GetUserDomains.Invoke();
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetUserDomainsResult> InvokeAsync(GetUserDomainsArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetUserDomainsResult>("tencentcloud:Waf/getUserDomains:getUserDomains", args ?? new GetUserDomainsArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetUserDomainsResult>("tencentcloud:Waf/getUserDomains:getUserDomains", args ?? new GetUserDomainsArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of waf user_domains
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
-        ///     {
-        ///         var userDomains = Output.Create(Tencentcloud.Waf.GetUserDomains.InvokeAsync());
-        ///     }
+        ///     var userDomains = Tencentcloud.Waf.GetUserDomains.Invoke();
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetUserDomainsResult> Invoke(GetUserDomainsInvokeArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetUserDomainsResult>("tencentcloud:Waf/getUserDomains:getUserDomains", args ?? new GetUserDomainsInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetUserDomainsResult>("tencentcloud:Waf/getUserDomains:getUserDomains", args ?? new GetUserDomainsInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetUserDomainsArgs : Pulumi.InvokeArgs
+    public sealed class GetUserDomainsArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Used to save results.
@@ -77,9 +71,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Waf
         public GetUserDomainsArgs()
         {
         }
+        public static new GetUserDomainsArgs Empty => new GetUserDomainsArgs();
     }
 
-    public sealed class GetUserDomainsInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetUserDomainsInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Used to save results.
@@ -90,6 +85,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Waf
         public GetUserDomainsInvokeArgs()
         {
         }
+        public static new GetUserDomainsInvokeArgs Empty => new GetUserDomainsInvokeArgs();
     }
 
 

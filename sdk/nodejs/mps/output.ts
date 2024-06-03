@@ -2,20 +2,23 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
  * Provides a resource to create a mps output
  *
  * ## Example Usage
+ *
  * ### Create a output group with RTP
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const output = new tencentcloud.Mps.Output("output", {
+ * const output = new tencentcloud.mps.Output("output", {
  *     flowId: "your_flow_id",
  *     output: {
  *         description: "tf mps output group",
@@ -33,13 +36,14 @@ import * as utilities from "../utilities";
  *     },
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * mps output can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Mps/output:Output output flow_id#output_id
+ * $ pulumi import tencentcloud:Mps/output:Output output flow_id#output_id
  * ```
  */
 export class Output extends pulumi.CustomResource {

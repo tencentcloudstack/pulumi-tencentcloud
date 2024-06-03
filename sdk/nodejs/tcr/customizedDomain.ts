@@ -8,11 +8,13 @@ import * as utilities from "../utilities";
  * Provides a resource to create a tcr customized domain
  *
  * ## Example Usage
+ *
  * ### Create a tcr customized domain
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const exampleInstance = new tencentcloud.tcr.Instance("exampleInstance", {
  *     instanceType: "premium",
@@ -29,13 +31,14 @@ import * as utilities from "../utilities";
  *     },
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * tcr customized_domain can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Tcr/customizedDomain:CustomizedDomain customized_domain customized_domain_id
+ * $ pulumi import tencentcloud:Tcr/customizedDomain:CustomizedDomain customized_domain customized_domain_id
  * ```
  */
 export class CustomizedDomain extends pulumi.CustomResource {

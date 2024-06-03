@@ -9,15 +9,17 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const attach = new tencentcloud.postgresql.ReadonlyAttachment("attach", {
  *     dbInstanceId: tencentcloud_postgresql_readonly_instance.foo.id,
  *     readOnlyGroupId: tencentcloud_postgresql_readonly_group.group.id,
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export class ReadonlyAttachment extends pulumi.CustomResource {
     /**

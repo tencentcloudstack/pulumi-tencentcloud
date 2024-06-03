@@ -15,100 +15,91 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
     /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using System.Text.Json;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var policyVersion = new Tencentcloud.Cam.PolicyVersion("policyVersion", new()
     ///     {
-    ///         var policyVersion = new Tencentcloud.Cam.PolicyVersion("policyVersion", new Tencentcloud.Cam.PolicyVersionArgs
+    ///         PolicyId = 171173780,
+    ///         PolicyDocument = JsonSerializer.Serialize(new Dictionary&lt;string, object?&gt;
     ///         {
-    ///             PolicyId = 171173780,
-    ///             PolicyDocument = JsonSerializer.Serialize(new Dictionary&lt;string, object?&gt;
+    ///             ["version"] = "2.0",
+    ///             ["statement"] = new[]
     ///             {
-    ///                 { "version", "2.0" },
-    ///                 { "statement", new[]
+    ///                 new Dictionary&lt;string, object?&gt;
+    ///                 {
+    ///                     ["effect"] = "allow",
+    ///                     ["action"] = new[]
     ///                     {
-    ///                         new Dictionary&lt;string, object?&gt;
-    ///                         {
-    ///                             { "effect", "allow" },
-    ///                             { "action", new[]
-    ///                                 {
-    ///                                     "sts:AssumeRole",
-    ///                                 }
-    ///                              },
-    ///                             { "resource", new[]
-    ///                                 {
-    ///                                     "*",
-    ///                                 }
-    ///                              },
-    ///                         },
-    ///                         new Dictionary&lt;string, object?&gt;
-    ///                         {
-    ///                             { "effect", "allow" },
-    ///                             { "action", new[]
-    ///                                 {
-    ///                                     "cos:PutObject",
-    ///                                 }
-    ///                              },
-    ///                             { "resource", new[]
-    ///                                 {
-    ///                                     "*",
-    ///                                 }
-    ///                              },
-    ///                         },
-    ///                         new Dictionary&lt;string, object?&gt;
-    ///                         {
-    ///                             { "effect", "deny" },
-    ///                             { "action", new[]
-    ///                                 {
-    ///                                     "aa:*",
-    ///                                 }
-    ///                              },
-    ///                             { "resource", new[]
-    ///                                 {
-    ///                                     "*",
-    ///                                 }
-    ///                              },
-    ///                         },
-    ///                         new Dictionary&lt;string, object?&gt;
-    ///                         {
-    ///                             { "effect", "deny" },
-    ///                             { "action", new[]
-    ///                                 {
-    ///                                     "aa:*",
-    ///                                 }
-    ///                              },
-    ///                             { "resource", new[]
-    ///                                 {
-    ///                                     "*",
-    ///                                 }
-    ///                              },
-    ///                         },
-    ///                     }
-    ///                  },
-    ///             }),
-    ///             SetAsDefault = false,
-    ///         });
-    ///     }
+    ///                         "sts:AssumeRole",
+    ///                     },
+    ///                     ["resource"] = new[]
+    ///                     {
+    ///                         "*",
+    ///                     },
+    ///                 },
+    ///                 new Dictionary&lt;string, object?&gt;
+    ///                 {
+    ///                     ["effect"] = "allow",
+    ///                     ["action"] = new[]
+    ///                     {
+    ///                         "cos:PutObject",
+    ///                     },
+    ///                     ["resource"] = new[]
+    ///                     {
+    ///                         "*",
+    ///                     },
+    ///                 },
+    ///                 new Dictionary&lt;string, object?&gt;
+    ///                 {
+    ///                     ["effect"] = "deny",
+    ///                     ["action"] = new[]
+    ///                     {
+    ///                         "aa:*",
+    ///                     },
+    ///                     ["resource"] = new[]
+    ///                     {
+    ///                         "*",
+    ///                     },
+    ///                 },
+    ///                 new Dictionary&lt;string, object?&gt;
+    ///                 {
+    ///                     ["effect"] = "deny",
+    ///                     ["action"] = new[]
+    ///                     {
+    ///                         "aa:*",
+    ///                     },
+    ///                     ["resource"] = new[]
+    ///                     {
+    ///                         "*",
+    ///                     },
+    ///                 },
+    ///             },
+    ///         }),
+    ///         SetAsDefault = false,
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// cam policy_version can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Cam/policyVersion:PolicyVersion policy_version policy_version_id
+    /// $ pulumi import tencentcloud:Cam/policyVersion:PolicyVersion policy_version policy_version_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Cam/policyVersion:PolicyVersion")]
-    public partial class PolicyVersion : Pulumi.CustomResource
+    public partial class PolicyVersion : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Strategic text information.
@@ -179,7 +170,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam
         }
     }
 
-    public sealed class PolicyVersionArgs : Pulumi.ResourceArgs
+    public sealed class PolicyVersionArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Strategic text information.
@@ -214,9 +205,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam
         public PolicyVersionArgs()
         {
         }
+        public static new PolicyVersionArgs Empty => new PolicyVersionArgs();
     }
 
-    public sealed class PolicyVersionState : Pulumi.ResourceArgs
+    public sealed class PolicyVersionState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Strategic text information.
@@ -251,5 +243,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam
         public PolicyVersionState()
         {
         }
+        public static new PolicyVersionState Empty => new PolicyVersionState();
     }
 }

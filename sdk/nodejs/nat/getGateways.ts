@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,24 +11,23 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const foo = pulumi.output(tencentcloud.Nat.getGateways({
+ * const foo = tencentcloud.Nat.getGateways({
  *     id: "nat-xfaq1",
  *     name: "main",
  *     vpcId: "vpc-xfqag",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getGateways(args?: GetGatewaysArgs, opts?: pulumi.InvokeOptions): Promise<GetGatewaysResult> {
     args = args || {};
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Nat/getGateways:getGateways", {
         "id": args.id,
         "name": args.name,
@@ -80,9 +80,26 @@ export interface GetGatewaysResult {
      */
     readonly vpcId?: string;
 }
-
+/**
+ * Use this data source to query detailed information of NAT gateways.
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const foo = tencentcloud.Nat.getGateways({
+ *     id: "nat-xfaq1",
+ *     name: "main",
+ *     vpcId: "vpc-xfqag",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getGatewaysOutput(args?: GetGatewaysOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetGatewaysResult> {
-    return pulumi.output(args).apply(a => getGateways(a, opts))
+    return pulumi.output(args).apply((a: any) => getGateways(a, opts))
 }
 
 /**

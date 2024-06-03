@@ -15,25 +15,26 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dts
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var syncCheckJobOperation = new Tencentcloud.Dts.SyncCheckJobOperation("syncCheckJobOperation", new()
     ///     {
-    ///         var syncCheckJobOperation = new Tencentcloud.Dts.SyncCheckJobOperation("syncCheckJobOperation", new Tencentcloud.Dts.SyncCheckJobOperationArgs
-    ///         {
-    ///             JobId = "",
-    ///         });
-    ///     }
+    ///         JobId = "",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Dts/syncCheckJobOperation:SyncCheckJobOperation")]
-    public partial class SyncCheckJobOperation : Pulumi.CustomResource
+    public partial class SyncCheckJobOperation : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Sync job id.
@@ -86,7 +87,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dts
         }
     }
 
-    public sealed class SyncCheckJobOperationArgs : Pulumi.ResourceArgs
+    public sealed class SyncCheckJobOperationArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Sync job id.
@@ -97,9 +98,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dts
         public SyncCheckJobOperationArgs()
         {
         }
+        public static new SyncCheckJobOperationArgs Empty => new SyncCheckJobOperationArgs();
     }
 
-    public sealed class SyncCheckJobOperationState : Pulumi.ResourceArgs
+    public sealed class SyncCheckJobOperationState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Sync job id.
@@ -110,5 +112,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dts
         public SyncCheckJobOperationState()
         {
         }
+        public static new SyncCheckJobOperationState Empty => new SyncCheckJobOperationState();
     }
 }

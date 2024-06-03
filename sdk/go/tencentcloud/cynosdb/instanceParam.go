@@ -7,43 +7,48 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a cynosdb instanceParam
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Cynosdb"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cynosdb"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cynosdb"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Cynosdb.NewInstanceParam(ctx, "instanceParam", &Cynosdb.InstanceParamArgs{
-// 			ClusterId:  pulumi.String("cynosdbmysql-bws8h88b"),
-// 			InstanceId: pulumi.String("cynosdbmysql-ins-rikr6z4o"),
-// 			InstanceParamLists: cynosdb.InstanceParamInstanceParamListArray{
-// 				&cynosdb.InstanceParamInstanceParamListArgs{
-// 					CurrentValue: pulumi.String("0"),
-// 					ParamName:    pulumi.String("init_connect"),
-// 				},
-// 			},
-// 			IsInMaintainPeriod: pulumi.String("no"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Cynosdb.NewInstanceParam(ctx, "instanceParam", &Cynosdb.InstanceParamArgs{
+//				ClusterId:  pulumi.String("cynosdbmysql-bws8h88b"),
+//				InstanceId: pulumi.String("cynosdbmysql-ins-rikr6z4o"),
+//				InstanceParamLists: cynosdb.InstanceParamInstanceParamListArray{
+//					&cynosdb.InstanceParamInstanceParamListArgs{
+//						CurrentValue: pulumi.String("0"),
+//						ParamName:    pulumi.String("init_connect"),
+//					},
+//				},
+//				IsInMaintainPeriod: pulumi.String("no"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 type InstanceParam struct {
 	pulumi.CustomResourceState
 
@@ -67,7 +72,7 @@ func NewInstanceParam(ctx *pulumi.Context,
 	if args.ClusterId == nil {
 		return nil, errors.New("invalid value for required argument 'ClusterId'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource InstanceParam
 	err := ctx.RegisterResource("tencentcloud:Cynosdb/instanceParam:InstanceParam", name, args, &resource, opts...)
 	if err != nil {
@@ -164,7 +169,7 @@ func (i *InstanceParam) ToInstanceParamOutputWithContext(ctx context.Context) In
 // InstanceParamArrayInput is an input type that accepts InstanceParamArray and InstanceParamArrayOutput values.
 // You can construct a concrete instance of `InstanceParamArrayInput` via:
 //
-//          InstanceParamArray{ InstanceParamArgs{...} }
+//	InstanceParamArray{ InstanceParamArgs{...} }
 type InstanceParamArrayInput interface {
 	pulumi.Input
 
@@ -189,7 +194,7 @@ func (i InstanceParamArray) ToInstanceParamArrayOutputWithContext(ctx context.Co
 // InstanceParamMapInput is an input type that accepts InstanceParamMap and InstanceParamMapOutput values.
 // You can construct a concrete instance of `InstanceParamMapInput` via:
 //
-//          InstanceParamMap{ "key": InstanceParamArgs{...} }
+//	InstanceParamMap{ "key": InstanceParamArgs{...} }
 type InstanceParamMapInput interface {
 	pulumi.Input
 

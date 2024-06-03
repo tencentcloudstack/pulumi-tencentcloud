@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps.Inputs
 {
 
-    public sealed class WorkflowMediaProcessTaskSampleSnapshotTaskSetArgs : Pulumi.ResourceArgs
+    public sealed class WorkflowMediaProcessTaskSampleSnapshotTaskSetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Sample screenshot template ID.
@@ -52,5 +52,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps.Inputs
         public WorkflowMediaProcessTaskSampleSnapshotTaskSetArgs()
         {
         }
+        public static new WorkflowMediaProcessTaskSampleSnapshotTaskSetArgs Empty => new WorkflowMediaProcessTaskSampleSnapshotTaskSetArgs();
     }
 }

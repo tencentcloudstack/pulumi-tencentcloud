@@ -8,37 +8,42 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Use this data source to query detailed information of ses sendEmailStatus
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Ses"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ses"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ses"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Ses.GetSendEmailStatus(ctx, &ses.GetSendEmailStatusArgs{
-// 			MessageId:      pulumi.StringRef("qcloudses-30-4123414323-date-20210101094334-syNARhMTbKI1"),
-// 			RequestDate:    "2020-09-22",
-// 			ToEmailAddress: pulumi.StringRef("example@cloud.com"),
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Ses.GetSendEmailStatus(ctx, &ses.GetSendEmailStatusArgs{
+//				MessageId:      pulumi.StringRef("qcloudses-30-4123414323-date-20210101094334-syNARhMTbKI1"),
+//				RequestDate:    "2020-09-22",
+//				ToEmailAddress: pulumi.StringRef("example@cloud.com"),
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 func GetSendEmailStatus(ctx *pulumi.Context, args *GetSendEmailStatusArgs, opts ...pulumi.InvokeOption) (*GetSendEmailStatusResult, error) {
-	opts = pkgInvokeDefaultOpts(opts)
+	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetSendEmailStatusResult
 	err := ctx.Invoke("tencentcloud:Ses/getSendEmailStatus:getSendEmailStatus", args, &rv, opts...)
 	if err != nil {

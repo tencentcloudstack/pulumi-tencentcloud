@@ -15,134 +15,130 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
         /// <summary>
         /// Use this data source to query detailed information of postgresql backup_download_urls
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var logBackups = Tencentcloud.Postgresql.GetLogBackups.Invoke(new()
         ///     {
-        ///         var logBackups = Output.Create(Tencentcloud.Postgresql.GetLogBackups.InvokeAsync(new Tencentcloud.Postgresql.GetLogBackupsArgs
+        ///         MinFinishTime = "%s",
+        ///         MaxFinishTime = "%s",
+        ///         Filters = new[]
         ///         {
-        ///             MinFinishTime = "%s",
-        ///             MaxFinishTime = "%s",
-        ///             Filters = 
+        ///             new Tencentcloud.Postgresql.Inputs.GetLogBackupsFilterInputArgs
         ///             {
-        ///                 new Tencentcloud.Postgresql.Inputs.GetLogBackupsFilterArgs
+        ///                 Name = "db-instance-id",
+        ///                 Values = new[]
         ///                 {
-        ///                     Name = "db-instance-id",
-        ///                     Values = 
-        ///                     {
-        ///                         local.Pgsql_id,
-        ///                     },
+        ///                     local.Pgsql_id,
         ///                 },
         ///             },
-        ///             OrderBy = "StartTime",
-        ///             OrderByType = "desc",
-        ///         }));
-        ///         var backupDownloadUrls = logBackups.Apply(logBackups =&gt; Output.Create(Tencentcloud.Postgresql.GetBackupDownloadUrls.InvokeAsync(new Tencentcloud.Postgresql.GetBackupDownloadUrlsArgs
-        ///         {
-        ///             DbInstanceId = local.Pgsql_id,
-        ///             BackupType = "LogBackup",
-        ///             BackupId = logBackups.LogBackupSets?[0]?.Id,
-        ///             UrlExpireTime = 12,
-        ///             BackupDownloadRestriction = new Tencentcloud.Postgresql.Inputs.GetBackupDownloadUrlsBackupDownloadRestrictionArgs
-        ///             {
-        ///                 RestrictionType = "NONE",
-        ///                 VpcRestrictionEffect = "ALLOW",
-        ///                 VpcIdSets = 
-        ///                 {
-        ///                     local.Vpc_id,
-        ///                 },
-        ///                 IpRestrictionEffect = "ALLOW",
-        ///                 IpSets = 
-        ///                 {
-        ///                     "0.0.0.0",
-        ///                 },
-        ///             },
-        ///         })));
-        ///     }
+        ///         },
+        ///         OrderBy = "StartTime",
+        ///         OrderByType = "desc",
+        ///     });
         /// 
-        /// }
+        ///     var backupDownloadUrls = Tencentcloud.Postgresql.GetBackupDownloadUrls.Invoke(new()
+        ///     {
+        ///         DbInstanceId = local.Pgsql_id,
+        ///         BackupType = "LogBackup",
+        ///         BackupId = logBackups.Apply(getLogBackupsResult =&gt; getLogBackupsResult.LogBackupSets[0]?.Id),
+        ///         UrlExpireTime = 12,
+        ///         BackupDownloadRestriction = new Tencentcloud.Postgresql.Inputs.GetBackupDownloadUrlsBackupDownloadRestrictionInputArgs
+        ///         {
+        ///             RestrictionType = "NONE",
+        ///             VpcRestrictionEffect = "ALLOW",
+        ///             VpcIdSets = new[]
+        ///             {
+        ///                 local.Vpc_id,
+        ///             },
+        ///             IpRestrictionEffect = "ALLOW",
+        ///             IpSets = new[]
+        ///             {
+        ///                 "0.0.0.0",
+        ///             },
+        ///         },
+        ///     });
+        /// 
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetBackupDownloadUrlsResult> InvokeAsync(GetBackupDownloadUrlsArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetBackupDownloadUrlsResult>("tencentcloud:Postgresql/getBackupDownloadUrls:getBackupDownloadUrls", args ?? new GetBackupDownloadUrlsArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetBackupDownloadUrlsResult>("tencentcloud:Postgresql/getBackupDownloadUrls:getBackupDownloadUrls", args ?? new GetBackupDownloadUrlsArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of postgresql backup_download_urls
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var logBackups = Tencentcloud.Postgresql.GetLogBackups.Invoke(new()
         ///     {
-        ///         var logBackups = Output.Create(Tencentcloud.Postgresql.GetLogBackups.InvokeAsync(new Tencentcloud.Postgresql.GetLogBackupsArgs
+        ///         MinFinishTime = "%s",
+        ///         MaxFinishTime = "%s",
+        ///         Filters = new[]
         ///         {
-        ///             MinFinishTime = "%s",
-        ///             MaxFinishTime = "%s",
-        ///             Filters = 
+        ///             new Tencentcloud.Postgresql.Inputs.GetLogBackupsFilterInputArgs
         ///             {
-        ///                 new Tencentcloud.Postgresql.Inputs.GetLogBackupsFilterArgs
+        ///                 Name = "db-instance-id",
+        ///                 Values = new[]
         ///                 {
-        ///                     Name = "db-instance-id",
-        ///                     Values = 
-        ///                     {
-        ///                         local.Pgsql_id,
-        ///                     },
+        ///                     local.Pgsql_id,
         ///                 },
         ///             },
-        ///             OrderBy = "StartTime",
-        ///             OrderByType = "desc",
-        ///         }));
-        ///         var backupDownloadUrls = logBackups.Apply(logBackups =&gt; Output.Create(Tencentcloud.Postgresql.GetBackupDownloadUrls.InvokeAsync(new Tencentcloud.Postgresql.GetBackupDownloadUrlsArgs
-        ///         {
-        ///             DbInstanceId = local.Pgsql_id,
-        ///             BackupType = "LogBackup",
-        ///             BackupId = logBackups.LogBackupSets?[0]?.Id,
-        ///             UrlExpireTime = 12,
-        ///             BackupDownloadRestriction = new Tencentcloud.Postgresql.Inputs.GetBackupDownloadUrlsBackupDownloadRestrictionArgs
-        ///             {
-        ///                 RestrictionType = "NONE",
-        ///                 VpcRestrictionEffect = "ALLOW",
-        ///                 VpcIdSets = 
-        ///                 {
-        ///                     local.Vpc_id,
-        ///                 },
-        ///                 IpRestrictionEffect = "ALLOW",
-        ///                 IpSets = 
-        ///                 {
-        ///                     "0.0.0.0",
-        ///                 },
-        ///             },
-        ///         })));
-        ///     }
+        ///         },
+        ///         OrderBy = "StartTime",
+        ///         OrderByType = "desc",
+        ///     });
         /// 
-        /// }
+        ///     var backupDownloadUrls = Tencentcloud.Postgresql.GetBackupDownloadUrls.Invoke(new()
+        ///     {
+        ///         DbInstanceId = local.Pgsql_id,
+        ///         BackupType = "LogBackup",
+        ///         BackupId = logBackups.Apply(getLogBackupsResult =&gt; getLogBackupsResult.LogBackupSets[0]?.Id),
+        ///         UrlExpireTime = 12,
+        ///         BackupDownloadRestriction = new Tencentcloud.Postgresql.Inputs.GetBackupDownloadUrlsBackupDownloadRestrictionInputArgs
+        ///         {
+        ///             RestrictionType = "NONE",
+        ///             VpcRestrictionEffect = "ALLOW",
+        ///             VpcIdSets = new[]
+        ///             {
+        ///                 local.Vpc_id,
+        ///             },
+        ///             IpRestrictionEffect = "ALLOW",
+        ///             IpSets = new[]
+        ///             {
+        ///                 "0.0.0.0",
+        ///             },
+        ///         },
+        ///     });
+        /// 
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetBackupDownloadUrlsResult> Invoke(GetBackupDownloadUrlsInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetBackupDownloadUrlsResult>("tencentcloud:Postgresql/getBackupDownloadUrls:getBackupDownloadUrls", args ?? new GetBackupDownloadUrlsInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetBackupDownloadUrlsResult>("tencentcloud:Postgresql/getBackupDownloadUrls:getBackupDownloadUrls", args ?? new GetBackupDownloadUrlsInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetBackupDownloadUrlsArgs : Pulumi.InvokeArgs
+    public sealed class GetBackupDownloadUrlsArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Backup download restriction.
@@ -183,9 +179,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
         public GetBackupDownloadUrlsArgs()
         {
         }
+        public static new GetBackupDownloadUrlsArgs Empty => new GetBackupDownloadUrlsArgs();
     }
 
-    public sealed class GetBackupDownloadUrlsInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetBackupDownloadUrlsInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Backup download restriction.
@@ -226,6 +223,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
         public GetBackupDownloadUrlsInvokeArgs()
         {
         }
+        public static new GetBackupDownloadUrlsInvokeArgs Empty => new GetBackupDownloadUrlsInvokeArgs();
     }
 
 

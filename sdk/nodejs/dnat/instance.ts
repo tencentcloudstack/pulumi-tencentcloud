@@ -12,7 +12,7 @@ import * as utilities from "../utilities";
  * NAT forwarding can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Dnat/instance:Instance foo tcp://vpc-asg3sfa3:nat-1asg3t63@127.15.2.3:8080
+ * $ pulumi import tencentcloud:Dnat/instance:Instance foo tcp://vpc-asg3sfa3:nat-1asg3t63@127.15.2.3:8080
  * ```
  */
 export class Instance extends pulumi.CustomResource {

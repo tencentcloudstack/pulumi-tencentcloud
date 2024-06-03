@@ -9,20 +9,19 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const foo = pulumi.output(tencentcloud.User.getInfo());
+ * const foo = tencentcloud.User.getInfo({});
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getInfo(args?: GetInfoArgs, opts?: pulumi.InvokeOptions): Promise<GetInfoResult> {
     args = args || {};
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:User/getInfo:getInfo", {
         "resultOutputFile": args.resultOutputFile,
     }, opts);
@@ -64,9 +63,22 @@ export interface GetInfoResult {
      */
     readonly uin: string;
 }
-
+/**
+ * Use this data source to query user appid, uin and ownerUin.
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const foo = tencentcloud.User.getInfo({});
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getInfoOutput(args?: GetInfoOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetInfoResult> {
-    return pulumi.output(args).apply(a => getInfo(a, opts))
+    return pulumi.output(args).apply((a: any) => getInfo(a, opts))
 }
 
 /**

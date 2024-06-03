@@ -15,33 +15,34 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dasb
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var example = new Tencentcloud.Dasb.DeviceGroup("example", new()
     ///     {
-    ///         var example = new Tencentcloud.Dasb.DeviceGroup("example", new Tencentcloud.Dasb.DeviceGroupArgs
-    ///         {
-    ///             DepartmentId = "1.2",
-    ///         });
-    ///     }
+    ///         DepartmentId = "1.2",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// dasb device_group can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Dasb/deviceGroup:DeviceGroup example 36
+    /// $ pulumi import tencentcloud:Dasb/deviceGroup:DeviceGroup example 36
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Dasb/deviceGroup:DeviceGroup")]
-    public partial class DeviceGroup : Pulumi.CustomResource
+    public partial class DeviceGroup : global::Pulumi.CustomResource
     {
         /// <summary>
         /// The ID of the department to which the asset group belongs, such as: 1.2.3 name, with a maximum length of 32 characters.
@@ -100,7 +101,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dasb
         }
     }
 
-    public sealed class DeviceGroupArgs : Pulumi.ResourceArgs
+    public sealed class DeviceGroupArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// The ID of the department to which the asset group belongs, such as: 1.2.3 name, with a maximum length of 32 characters.
@@ -117,9 +118,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dasb
         public DeviceGroupArgs()
         {
         }
+        public static new DeviceGroupArgs Empty => new DeviceGroupArgs();
     }
 
-    public sealed class DeviceGroupState : Pulumi.ResourceArgs
+    public sealed class DeviceGroupState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// The ID of the department to which the asset group belongs, such as: 1.2.3 name, with a maximum length of 32 characters.
@@ -136,5 +138,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dasb
         public DeviceGroupState()
         {
         }
+        public static new DeviceGroupState Empty => new DeviceGroupState();
     }
 }

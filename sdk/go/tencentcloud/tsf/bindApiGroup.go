@@ -7,42 +7,48 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a tsf bindApiGroup
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tsf"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tsf"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Tsf.NewBindApiGroup(ctx, "bindApiGroup", &Tsf.BindApiGroupArgs{
-// 			GatewayDeployGroupId: pulumi.String("group-vzd97zpy"),
-// 			GroupId:              pulumi.String("grp-qp0rj3zi"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Tsf.NewBindApiGroup(ctx, "bindApiGroup", &Tsf.BindApiGroupArgs{
+//				GatewayDeployGroupId: pulumi.String("group-vzd97zpy"),
+//				GroupId:              pulumi.String("grp-qp0rj3zi"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // tsf bind_api_group can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Tsf/bindApiGroup:BindApiGroup bind_api_group bind_api_group_id
+// $ pulumi import tencentcloud:Tsf/bindApiGroup:BindApiGroup bind_api_group bind_api_group_id
 // ```
 type BindApiGroup struct {
 	pulumi.CustomResourceState
@@ -66,7 +72,7 @@ func NewBindApiGroup(ctx *pulumi.Context,
 	if args.GroupId == nil {
 		return nil, errors.New("invalid value for required argument 'GroupId'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource BindApiGroup
 	err := ctx.RegisterResource("tencentcloud:Tsf/bindApiGroup:BindApiGroup", name, args, &resource, opts...)
 	if err != nil {
@@ -147,7 +153,7 @@ func (i *BindApiGroup) ToBindApiGroupOutputWithContext(ctx context.Context) Bind
 // BindApiGroupArrayInput is an input type that accepts BindApiGroupArray and BindApiGroupArrayOutput values.
 // You can construct a concrete instance of `BindApiGroupArrayInput` via:
 //
-//          BindApiGroupArray{ BindApiGroupArgs{...} }
+//	BindApiGroupArray{ BindApiGroupArgs{...} }
 type BindApiGroupArrayInput interface {
 	pulumi.Input
 
@@ -172,7 +178,7 @@ func (i BindApiGroupArray) ToBindApiGroupArrayOutputWithContext(ctx context.Cont
 // BindApiGroupMapInput is an input type that accepts BindApiGroupMap and BindApiGroupMapOutput values.
 // You can construct a concrete instance of `BindApiGroupMapInput` via:
 //
-//          BindApiGroupMap{ "key": BindApiGroupArgs{...} }
+//	BindApiGroupMap{ "key": BindApiGroupArgs{...} }
 type BindApiGroupMapInput interface {
 	pulumi.Input
 

@@ -15,39 +15,40 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssl
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var deployCertificateInstance = new Tencentcloud.Ssl.DeployCertificateInstanceOperation("deployCertificateInstance", new()
     ///     {
-    ///         var deployCertificateInstance = new Tencentcloud.Ssl.DeployCertificateInstanceOperation("deployCertificateInstance", new Tencentcloud.Ssl.DeployCertificateInstanceOperationArgs
+    ///         CertificateId = "8x1eUSSl",
+    ///         InstanceIdLists = new[]
     ///         {
-    ///             CertificateId = "8x1eUSSl",
-    ///             InstanceIdLists = 
-    ///             {
-    ///                 "cdndomain1.example.com|on",
-    ///                 "cdndomain1.example.com|off",
-    ///             },
-    ///             ResourceType = "cdn",
-    ///         });
-    ///     }
+    ///             "cdndomain1.example.com|on",
+    ///             "cdndomain1.example.com|off",
+    ///         },
+    ///         ResourceType = "cdn",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// ssl deploy_certificate_instance can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Ssl/deployCertificateInstanceOperation:DeployCertificateInstanceOperation deploy_certificate_instance deploy_certificate_instance_id
+    /// $ pulumi import tencentcloud:Ssl/deployCertificateInstanceOperation:DeployCertificateInstanceOperation deploy_certificate_instance deploy_certificate_instance_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Ssl/deployCertificateInstanceOperation:DeployCertificateInstanceOperation")]
-    public partial class DeployCertificateInstanceOperation : Pulumi.CustomResource
+    public partial class DeployCertificateInstanceOperation : global::Pulumi.CustomResource
     {
         /// <summary>
         /// ID of the certificate to be deployed.
@@ -118,7 +119,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssl
         }
     }
 
-    public sealed class DeployCertificateInstanceOperationArgs : Pulumi.ResourceArgs
+    public sealed class DeployCertificateInstanceOperationArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// ID of the certificate to be deployed.
@@ -153,9 +154,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssl
         public DeployCertificateInstanceOperationArgs()
         {
         }
+        public static new DeployCertificateInstanceOperationArgs Empty => new DeployCertificateInstanceOperationArgs();
     }
 
-    public sealed class DeployCertificateInstanceOperationState : Pulumi.ResourceArgs
+    public sealed class DeployCertificateInstanceOperationState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// ID of the certificate to be deployed.
@@ -190,5 +192,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssl
         public DeployCertificateInstanceOperationState()
         {
         }
+        public static new DeployCertificateInstanceOperationState Empty => new DeployCertificateInstanceOperationState();
     }
 }

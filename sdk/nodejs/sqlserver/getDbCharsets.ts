@@ -9,21 +9,20 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const example = pulumi.output(tencentcloud.Sqlserver.getDbCharsets({
+ * const example = tencentcloud.Sqlserver.getDbCharsets({
  *     instanceId: "mssql-qelbzgwf",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getDbCharsets(args: GetDbCharsetsArgs, opts?: pulumi.InvokeOptions): Promise<GetDbCharsetsResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Sqlserver/getDbCharsets:getDbCharsets", {
         "instanceId": args.instanceId,
         "resultOutputFile": args.resultOutputFile,
@@ -59,9 +58,24 @@ export interface GetDbCharsetsResult {
     readonly instanceId: string;
     readonly resultOutputFile?: string;
 }
-
+/**
+ * Use this data source to query detailed information of sqlserver datasourceDBCharsets
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const example = tencentcloud.Sqlserver.getDbCharsets({
+ *     instanceId: "mssql-qelbzgwf",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getDbCharsetsOutput(args: GetDbCharsetsOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetDbCharsetsResult> {
-    return pulumi.output(args).apply(a => getDbCharsets(a, opts))
+    return pulumi.output(args).apply((a: any) => getDbCharsets(a, opts))
 }
 
 /**

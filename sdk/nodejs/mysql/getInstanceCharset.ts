@@ -9,21 +9,20 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const instanceCharset = pulumi.output(tencentcloud.Mysql.getInstanceCharset({
+ * const instanceCharset = tencentcloud.Mysql.getInstanceCharset({
  *     instanceId: "",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getInstanceCharset(args: GetInstanceCharsetArgs, opts?: pulumi.InvokeOptions): Promise<GetInstanceCharsetResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Mysql/getInstanceCharset:getInstanceCharset", {
         "instanceId": args.instanceId,
         "resultOutputFile": args.resultOutputFile,
@@ -59,9 +58,24 @@ export interface GetInstanceCharsetResult {
     readonly instanceId: string;
     readonly resultOutputFile?: string;
 }
-
+/**
+ * Use this data source to query detailed information of mysql instanceCharset
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const instanceCharset = tencentcloud.Mysql.getInstanceCharset({
+ *     instanceId: "",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getInstanceCharsetOutput(args: GetInstanceCharsetOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetInstanceCharsetResult> {
-    return pulumi.output(args).apply(a => getInstanceCharset(a, opts))
+    return pulumi.output(args).apply((a: any) => getInstanceCharset(a, opts))
 }
 
 /**

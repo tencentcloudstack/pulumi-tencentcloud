@@ -9,22 +9,24 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const userPermissionBoundary = new tencentcloud.Cam.UserPermissionBoundaryAttachment("user_permission_boundary", {
+ * const userPermissionBoundary = new tencentcloud.cam.UserPermissionBoundaryAttachment("userPermissionBoundary", {
  *     policyId: 151113272,
  *     targetUin: 100032767426,
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * cam user_permission_boundary can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Cam/userPermissionBoundaryAttachment:UserPermissionBoundaryAttachment user_permission_boundary user_permission_boundary_id
+ * $ pulumi import tencentcloud:Cam/userPermissionBoundaryAttachment:UserPermissionBoundaryAttachment user_permission_boundary user_permission_boundary_id
  * ```
  */
 export class UserPermissionBoundaryAttachment extends pulumi.CustomResource {

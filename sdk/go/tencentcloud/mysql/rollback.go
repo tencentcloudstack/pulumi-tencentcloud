@@ -7,8 +7,9 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a mysql rollback
@@ -43,7 +44,7 @@ func NewRollback(ctx *pulumi.Context,
 	if args.Strategy == nil {
 		return nil, errors.New("invalid value for required argument 'Strategy'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource Rollback
 	err := ctx.RegisterResource("tencentcloud:Mysql/rollback:Rollback", name, args, &resource, opts...)
 	if err != nil {
@@ -148,7 +149,7 @@ func (i *Rollback) ToRollbackOutputWithContext(ctx context.Context) RollbackOutp
 // RollbackArrayInput is an input type that accepts RollbackArray and RollbackArrayOutput values.
 // You can construct a concrete instance of `RollbackArrayInput` via:
 //
-//          RollbackArray{ RollbackArgs{...} }
+//	RollbackArray{ RollbackArgs{...} }
 type RollbackArrayInput interface {
 	pulumi.Input
 
@@ -173,7 +174,7 @@ func (i RollbackArray) ToRollbackArrayOutputWithContext(ctx context.Context) Rol
 // RollbackMapInput is an input type that accepts RollbackMap and RollbackMapOutput values.
 // You can construct a concrete instance of `RollbackMapInput` via:
 //
-//          RollbackMap{ "key": RollbackArgs{...} }
+//	RollbackMap{ "key": RollbackArgs{...} }
 type RollbackMapInput interface {
 	pulumi.Input
 

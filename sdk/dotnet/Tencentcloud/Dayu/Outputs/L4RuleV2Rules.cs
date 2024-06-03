@@ -14,16 +14,49 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dayu.Outputs
     [OutputType]
     public sealed class L4RuleV2Rules
     {
+        /// <summary>
+        /// session hold switch.
+        /// </summary>
         public readonly bool KeepEnable;
+        /// <summary>
+        /// The keeptime of the layer 4 rule.
+        /// </summary>
         public readonly int Keeptime;
+        /// <summary>
+        /// LB type of the rule, `1` for weight cycling and `2` for IP hash.
+        /// </summary>
         public readonly int LbType;
+        /// <summary>
+        /// Protocol of the rule.
+        /// </summary>
         public readonly string Protocol;
+        /// <summary>
+        /// Corresponding regional information.
+        /// </summary>
         public readonly int Region;
+        /// <summary>
+        /// Remove the watermark state.
+        /// </summary>
         public readonly bool RemoveSwitch;
+        /// <summary>
+        /// Name of the rule.
+        /// </summary>
         public readonly string RuleName;
+        /// <summary>
+        /// Source list of the rule.
+        /// </summary>
         public readonly ImmutableArray<Outputs.L4RuleV2RulesSourceList> SourceLists;
+        /// <summary>
+        /// The source port of the layer 4 rule.
+        /// </summary>
         public readonly int SourcePort;
+        /// <summary>
+        /// Source type, `1` for source of host, `2` for source of IP.
+        /// </summary>
         public readonly int SourceType;
+        /// <summary>
+        /// The virtual port of the layer 4 rule.
+        /// </summary>
         public readonly int VirtualPort;
 
         [OutputConstructor]

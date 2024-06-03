@@ -14,37 +14,39 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka
     /// Provides a resource to create a Ckafka user.
     /// 
     /// ## Example Usage
+    /// 
     /// ### Ckafka User
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var foo = new Tencentcloud.Ckafka.User("foo", new()
     ///     {
-    ///         var foo = new Tencentcloud.Ckafka.User("foo", new Tencentcloud.Ckafka.UserArgs
-    ///         {
-    ///             AccountName = "tf-test",
-    ///             InstanceId = "ckafka-f9ife4zz",
-    ///             Password = "test1234",
-    ///         });
-    ///     }
+    ///         AccountName = "tf-test",
+    ///         InstanceId = "ckafka-f9ife4zz",
+    ///         Password = "test1234",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// Ckafka user can be imported using the instance_id#account_name, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Ckafka/user:User foo ckafka-f9ife4zz#tf-test
+    /// $ pulumi import tencentcloud:Ckafka/user:User foo ckafka-f9ife4zz#tf-test
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Ckafka/user:User")]
-    public partial class User : Pulumi.CustomResource
+    public partial class User : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Account name used to access to ckafka instance.
@@ -100,6 +102,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka
             {
                 Version = Utilities.Version,
                 PluginDownloadURL = "github://api.github.com/tencentcloudstack",
+                AdditionalSecretOutputs =
+                {
+                    "password",
+                },
             };
             var merged = CustomResourceOptions.Merge(defaultOptions, options);
             // Override the ID if one was specified for consistency with other language SDKs.
@@ -121,7 +127,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka
         }
     }
 
-    public sealed class UserArgs : Pulumi.ResourceArgs
+    public sealed class UserArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Account name used to access to ckafka instance.
@@ -135,18 +141,29 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka
         [Input("instanceId", required: true)]
         public Input<string> InstanceId { get; set; } = null!;
 
+        [Input("password", required: true)]
+        private Input<string>? _password;
+
         /// <summary>
         /// Password of the account.
         /// </summary>
-        [Input("password", required: true)]
-        public Input<string> Password { get; set; } = null!;
+        public Input<string>? Password
+        {
+            get => _password;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _password = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
 
         public UserArgs()
         {
         }
+        public static new UserArgs Empty => new UserArgs();
     }
 
-    public sealed class UserState : Pulumi.ResourceArgs
+    public sealed class UserState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Account name used to access to ckafka instance.
@@ -166,11 +183,21 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka
         [Input("instanceId")]
         public Input<string>? InstanceId { get; set; }
 
+        [Input("password")]
+        private Input<string>? _password;
+
         /// <summary>
         /// Password of the account.
         /// </summary>
-        [Input("password")]
-        public Input<string>? Password { get; set; }
+        public Input<string>? Password
+        {
+            get => _password;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _password = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
 
         /// <summary>
         /// The last update time of the account.
@@ -181,5 +208,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka
         public UserState()
         {
         }
+        public static new UserState Empty => new UserState();
     }
 }

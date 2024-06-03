@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,30 +11,29 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const instanceTaskList = pulumi.output(tencentcloud.Redis.getInstanceTaskList({
+ * const instanceTaskList = tencentcloud.Redis.getInstanceTaskList({
  *     beginTime: "2021-12-30 00:00:00",
  *     endTime: "2021-12-30 00:00:00",
  *     instanceId: "crs-c1nl9rpv",
  *     instanceName: "",
  *     operateUins: [""],
- *     projectIds: [0],
- *     results: [0],
- *     taskStatuses: [0],
+ *     projectIds: [""],
+ *     results: [""],
+ *     taskStatuses: [""],
  *     taskTypes: [""],
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getInstanceTaskList(args?: GetInstanceTaskListArgs, opts?: pulumi.InvokeOptions): Promise<GetInstanceTaskListResult> {
     args = args || {};
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Redis/getInstanceTaskList:getInstanceTaskList", {
         "beginTime": args.beginTime,
         "endTime": args.endTime,
@@ -129,9 +129,32 @@ export interface GetInstanceTaskListResult {
      */
     readonly tasks: outputs.Redis.GetInstanceTaskListTask[];
 }
-
+/**
+ * Use this data source to query detailed information of redis instanceTaskList
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const instanceTaskList = tencentcloud.Redis.getInstanceTaskList({
+ *     beginTime: "2021-12-30 00:00:00",
+ *     endTime: "2021-12-30 00:00:00",
+ *     instanceId: "crs-c1nl9rpv",
+ *     instanceName: "",
+ *     operateUins: [""],
+ *     projectIds: [""],
+ *     results: [""],
+ *     taskStatuses: [""],
+ *     taskTypes: [""],
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getInstanceTaskListOutput(args?: GetInstanceTaskListOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetInstanceTaskListResult> {
-    return pulumi.output(args).apply(a => getInstanceTaskList(a, opts))
+    return pulumi.output(args).apply((a: any) => getInstanceTaskList(a, opts))
 }
 
 /**

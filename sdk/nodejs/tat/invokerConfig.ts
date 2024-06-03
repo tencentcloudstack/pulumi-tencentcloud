@@ -9,22 +9,24 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const invokerConfig = new tencentcloud.Tat.InvokerConfig("invoker_config", {
+ * const invokerConfig = new tencentcloud.tat.InvokerConfig("invokerConfig", {
  *     invokerId: "ivk-cas4upyf",
  *     invokerStatus: "on",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * tat invoker_config can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Tat/invokerConfig:InvokerConfig invoker_config invoker_config_id
+ * $ pulumi import tencentcloud:Tat/invokerConfig:InvokerConfig invoker_config invoker_config_id
  * ```
  */
 export class InvokerConfig extends pulumi.CustomResource {

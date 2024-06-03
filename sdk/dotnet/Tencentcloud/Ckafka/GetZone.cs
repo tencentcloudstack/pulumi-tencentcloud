@@ -15,58 +15,52 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka
         /// <summary>
         /// Use this data source to query detailed information of ckafka zone
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
-        ///     {
-        ///         var ckafkaZone = Output.Create(Tencentcloud.Ckafka.GetZone.InvokeAsync());
-        ///     }
+        ///     var ckafkaZone = Tencentcloud.Ckafka.GetZone.Invoke();
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetZoneResult> InvokeAsync(GetZoneArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetZoneResult>("tencentcloud:Ckafka/getZone:getZone", args ?? new GetZoneArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetZoneResult>("tencentcloud:Ckafka/getZone:getZone", args ?? new GetZoneArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of ckafka zone
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
-        ///     {
-        ///         var ckafkaZone = Output.Create(Tencentcloud.Ckafka.GetZone.InvokeAsync());
-        ///     }
+        ///     var ckafkaZone = Tencentcloud.Ckafka.GetZone.Invoke();
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetZoneResult> Invoke(GetZoneInvokeArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetZoneResult>("tencentcloud:Ckafka/getZone:getZone", args ?? new GetZoneInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetZoneResult>("tencentcloud:Ckafka/getZone:getZone", args ?? new GetZoneInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetZoneArgs : Pulumi.InvokeArgs
+    public sealed class GetZoneArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// cdc professional cluster business parameters.
@@ -83,9 +77,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka
         public GetZoneArgs()
         {
         }
+        public static new GetZoneArgs Empty => new GetZoneArgs();
     }
 
-    public sealed class GetZoneInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetZoneInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// cdc professional cluster business parameters.
@@ -102,6 +97,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka
         public GetZoneInvokeArgs()
         {
         }
+        public static new GetZoneInvokeArgs Empty => new GetZoneInvokeArgs();
     }
 
 

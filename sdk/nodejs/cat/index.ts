@@ -5,13 +5,26 @@ import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
 // Export members:
-export * from "./getMetricData";
-export * from "./getNode";
-export * from "./getProbeData";
-export * from "./taskSet";
+export { GetMetricDataArgs, GetMetricDataResult, GetMetricDataOutputArgs } from "./getMetricData";
+export const getMetricData: typeof import("./getMetricData").getMetricData = null as any;
+export const getMetricDataOutput: typeof import("./getMetricData").getMetricDataOutput = null as any;
+utilities.lazyLoad(exports, ["getMetricData","getMetricDataOutput"], () => require("./getMetricData"));
 
-// Import resources to register:
-import { TaskSet } from "./taskSet";
+export { GetNodeArgs, GetNodeResult, GetNodeOutputArgs } from "./getNode";
+export const getNode: typeof import("./getNode").getNode = null as any;
+export const getNodeOutput: typeof import("./getNode").getNodeOutput = null as any;
+utilities.lazyLoad(exports, ["getNode","getNodeOutput"], () => require("./getNode"));
+
+export { GetProbeDataArgs, GetProbeDataResult, GetProbeDataOutputArgs } from "./getProbeData";
+export const getProbeData: typeof import("./getProbeData").getProbeData = null as any;
+export const getProbeDataOutput: typeof import("./getProbeData").getProbeDataOutput = null as any;
+utilities.lazyLoad(exports, ["getProbeData","getProbeDataOutput"], () => require("./getProbeData"));
+
+export { TaskSetArgs, TaskSetState } from "./taskSet";
+export type TaskSet = import("./taskSet").TaskSet;
+export const TaskSet: typeof import("./taskSet").TaskSet = null as any;
+utilities.lazyLoad(exports, ["TaskSet"], () => require("./taskSet"));
+
 
 const _module = {
     version: utilities.getVersion(),

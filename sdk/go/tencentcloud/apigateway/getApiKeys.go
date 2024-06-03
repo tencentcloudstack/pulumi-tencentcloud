@@ -8,42 +8,47 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Use this data source to query API gateway access keys.
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/ApiGateway"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/ApiGateway"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/ApiGateway"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		test, err := ApiGateway.NewApiKey(ctx, "test", &ApiGateway.ApiKeyArgs{
-// 			SecretName: pulumi.String("my_api_key"),
-// 			Status:     pulumi.String("on"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_ = ApiGateway.GetApiKeysOutput(ctx, apigateway.GetApiKeysOutputArgs{
-// 			SecretName: test.SecretName,
-// 		}, nil)
-// 		_ = ApiGateway.GetApiKeysOutput(ctx, apigateway.GetApiKeysOutputArgs{
-// 			ApiKeyId: test.ID(),
-// 		}, nil)
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			test, err := ApiGateway.NewApiKey(ctx, "test", &ApiGateway.ApiKeyArgs{
+//				SecretName: pulumi.String("my_api_key"),
+//				Status:     pulumi.String("on"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_ = ApiGateway.GetApiKeysOutput(ctx, apigateway.GetApiKeysOutputArgs{
+//				SecretName: test.SecretName,
+//			}, nil)
+//			_ = ApiGateway.GetApiKeysOutput(ctx, apigateway.GetApiKeysOutputArgs{
+//				ApiKeyId: test.ID(),
+//			}, nil)
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 func GetApiKeys(ctx *pulumi.Context, args *GetApiKeysArgs, opts ...pulumi.InvokeOption) (*GetApiKeysResult, error) {
-	opts = pkgInvokeDefaultOpts(opts)
+	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetApiKeysResult
 	err := ctx.Invoke("tencentcloud:ApiGateway/getApiKeys:getApiKeys", args, &rv, opts...)
 	if err != nil {

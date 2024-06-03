@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Lighthouse.Inputs
 {
 
-    public sealed class InstanceLoginConfigurationArgs : Pulumi.ResourceArgs
+    public sealed class InstanceLoginConfigurationArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// whether auto generate password. if false, need set password.
@@ -28,5 +28,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Lighthouse.Inputs
         public InstanceLoginConfigurationArgs()
         {
         }
+        public static new InstanceLoginConfigurationArgs Empty => new InstanceLoginConfigurationArgs();
     }
 }

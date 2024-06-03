@@ -2,19 +2,22 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
  * Provide a resource to create serverless node pool of cluster.
  *
  * ## Example Usage
+ *
  * ### Add serverless node pool to a cluster
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const config = new pulumi.Config();
  * const availabilityZone = config.get("availabilityZone") || "ap-guangzhou-3";
@@ -23,12 +26,12 @@ import * as utilities from "../utilities";
  *     isDefault: true,
  *     availabilityZone: availabilityZone,
  * });
- * const vpcId = vpc.then(vpc => vpc.instanceLists?[0]?.vpcId);
- * const subnetId = vpc.then(vpc => vpc.instanceLists?[0]?.subnetId);
+ * const vpcId = vpc.then(vpc => vpc.instanceLists?.[0]?.vpcId);
+ * const subnetId = vpc.then(vpc => vpc.instanceLists?.[0]?.subnetId);
  * const sg = tencentcloud.Security.getGroups({
  *     name: "default",
  * });
- * const sgId = sg.then(sg => sg.securityGroups?[0]?.securityGroupId);
+ * const sgId = sg.then(sg => sg.securityGroups?.[0]?.securityGroupId);
  * const exampleCluster = new tencentcloud.kubernetes.Cluster("exampleCluster", {
  *     vpcId: vpcId,
  *     clusterCidr: exampleClusterCidr,
@@ -58,13 +61,16 @@ import * as utilities from "../utilities";
  *     },
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
+ *
  * ### Adding taints to the virtual nodes under this node pool
  *
  * The pods without appropriate tolerations will not be scheduled on this node. Refer [taint-and-toleration](https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/) for more details.
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const example = new tencentcloud.kubernetes.ServerlessNodePool("example", {
  *     clusterId: tencentcloud_kubernetes_cluster.example.id,
@@ -97,13 +103,14 @@ import * as utilities from "../utilities";
  *     ],
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * serverless node pool can be imported, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Kubernetes/serverlessNodePool:ServerlessNodePool test cls-xxx#np-xxx
+ * $ pulumi import tencentcloud:Kubernetes/serverlessNodePool:ServerlessNodePool test cls-xxx#np-xxx
  * ```
  */
 export class ServerlessNodePool extends pulumi.CustomResource {

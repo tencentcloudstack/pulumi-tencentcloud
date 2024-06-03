@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Eb.Inputs
 {
 
-    public sealed class EventTargetTargetDescriptionCkafkaTargetParamsRetryPolicyGetArgs : Pulumi.ResourceArgs
+    public sealed class EventTargetTargetDescriptionCkafkaTargetParamsRetryPolicyGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Maximum number of retries.
@@ -28,5 +28,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Eb.Inputs
         public EventTargetTargetDescriptionCkafkaTargetParamsRetryPolicyGetArgs()
         {
         }
+        public static new EventTargetTargetDescriptionCkafkaTargetParamsRetryPolicyGetArgs Empty => new EventTargetTargetDescriptionCkafkaTargetParamsRetryPolicyGetArgs();
     }
 }

@@ -14,55 +14,57 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps
     /// Provides a resource to create a mps output
     /// 
     /// ## Example Usage
+    /// 
     /// ### Create a output group with RTP
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var output = new Tencentcloud.Mps.Output("output", new()
     ///     {
-    ///         var output = new Tencentcloud.Mps.Output("output", new Tencentcloud.Mps.OutputArgs
+    ///         FlowId = "your_flow_id",
+    ///         MpsOutput = new Tencentcloud.Mps.Inputs.OutputOutputArgs
     ///         {
-    ///             FlowId = "your_flow_id",
-    ///             Output = new Tencentcloud.Mps.Inputs.OutputOutputArgs
+    ///             Description = "tf mps output group",
+    ///             OutputName = "your_output_name",
+    ///             OutputRegion = "ap-guangzhou",
+    ///             Protocol = "RTP",
+    ///             RtpSettings = new Tencentcloud.Mps.Inputs.OutputOutputRtpSettingsArgs
     ///             {
-    ///                 Description = "tf mps output group",
-    ///                 OutputName = "your_output_name",
-    ///                 OutputRegion = "ap-guangzhou",
-    ///                 Protocol = "RTP",
-    ///                 RtpSettings = new Tencentcloud.Mps.Inputs.OutputOutputRtpSettingsArgs
+    ///                 Destinations = new[]
     ///                 {
-    ///                     Destinations = 
+    ///                     new Tencentcloud.Mps.Inputs.OutputOutputRtpSettingsDestinationArgs
     ///                     {
-    ///                         new Tencentcloud.Mps.Inputs.OutputOutputRtpSettingsDestinationArgs
-    ///                         {
-    ///                             Ip = "203.205.141.84",
-    ///                             Port = 65535,
-    ///                         },
+    ///                         Ip = "203.205.141.84",
+    ///                         Port = 65535,
     ///                     },
-    ///                     Fec = "none",
-    ///                     IdleTimeout = 1000,
     ///                 },
+    ///                 Fec = "none",
+    ///                 IdleTimeout = 1000,
     ///             },
-    ///         });
-    ///     }
+    ///         },
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// mps output can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Mps/output:Output output flow_id#output_id
+    /// $ pulumi import tencentcloud:Mps/output:Output output flow_id#output_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Mps/output:Output")]
-    public partial class Output : Pulumi.CustomResource
+    public partial class Output : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Flow ID.
@@ -121,7 +123,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps
         }
     }
 
-    public sealed class OutputArgs : Pulumi.ResourceArgs
+    public sealed class OutputArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Flow ID.
@@ -138,9 +140,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps
         public OutputArgs()
         {
         }
+        public static new OutputArgs Empty => new OutputArgs();
     }
 
-    public sealed class OutputState : Pulumi.ResourceArgs
+    public sealed class OutputState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Flow ID.
@@ -157,5 +160,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps
         public OutputState()
         {
         }
+        public static new OutputState Empty => new OutputState();
     }
 }

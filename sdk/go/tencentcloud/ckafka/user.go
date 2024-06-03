@@ -7,44 +7,51 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a Ckafka user.
 //
 // ## Example Usage
+//
 // ### Ckafka User
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ckafka"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ckafka"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Ckafka.NewUser(ctx, "foo", &Ckafka.UserArgs{
-// 			AccountName: pulumi.String("tf-test"),
-// 			InstanceId:  pulumi.String("ckafka-f9ife4zz"),
-// 			Password:    pulumi.String("test1234"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Ckafka.NewUser(ctx, "foo", &Ckafka.UserArgs{
+//				AccountName: pulumi.String("tf-test"),
+//				InstanceId:  pulumi.String("ckafka-f9ife4zz"),
+//				Password:    pulumi.String("test1234"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // Ckafka user can be imported using the instance_id#account_name, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Ckafka/user:User foo ckafka-f9ife4zz#tf-test
+// $ pulumi import tencentcloud:Ckafka/user:User foo ckafka-f9ife4zz#tf-test
 // ```
 type User struct {
 	pulumi.CustomResourceState
@@ -77,7 +84,14 @@ func NewUser(ctx *pulumi.Context,
 	if args.Password == nil {
 		return nil, errors.New("invalid value for required argument 'Password'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	if args.Password != nil {
+		args.Password = pulumi.ToSecret(args.Password).(pulumi.StringInput)
+	}
+	secrets := pulumi.AdditionalSecretOutputs([]string{
+		"password",
+	})
+	opts = append(opts, secrets)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource User
 	err := ctx.RegisterResource("tencentcloud:Ckafka/user:User", name, args, &resource, opts...)
 	if err != nil {
@@ -174,7 +188,7 @@ func (i *User) ToUserOutputWithContext(ctx context.Context) UserOutput {
 // UserArrayInput is an input type that accepts UserArray and UserArrayOutput values.
 // You can construct a concrete instance of `UserArrayInput` via:
 //
-//          UserArray{ UserArgs{...} }
+//	UserArray{ UserArgs{...} }
 type UserArrayInput interface {
 	pulumi.Input
 
@@ -199,7 +213,7 @@ func (i UserArray) ToUserArrayOutputWithContext(ctx context.Context) UserArrayOu
 // UserMapInput is an input type that accepts UserMap and UserMapOutput values.
 // You can construct a concrete instance of `UserMapInput` via:
 //
-//          UserMap{ "key": UserArgs{...} }
+//	UserMap{ "key": UserArgs{...} }
 type UserMapInput interface {
 	pulumi.Input
 

@@ -7,11 +7,45 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a cvm renewInstance
+//
+// ## Example Usage
+//
+// <!--Start PulumiCodeChooser -->
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cvm"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Cvm.NewRenewInstance(ctx, "renewInstance", &Cvm.RenewInstanceArgs{
+//				InstanceChargePrepaid: &cvm.RenewInstanceInstanceChargePrepaidArgs{
+//					Period:    pulumi.Int(1),
+//					RenewFlag: pulumi.String("NOTIFY_AND_AUTO_RENEW"),
+//				},
+//				InstanceId:            pulumi.String("ins-f9jr4bd2"),
+//				RenewPortableDataDisk: pulumi.Bool(true),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
+// <!--End PulumiCodeChooser -->
 type RenewInstance struct {
 	pulumi.CustomResourceState
 
@@ -20,9 +54,6 @@ type RenewInstance struct {
 	// Instance ID.
 	InstanceId pulumi.StringOutput `pulumi:"instanceId"`
 	// Whether to renew the elastic data disk. Valid values:
-	// - `TRUE`: Indicates to renew the subscription instance and renew the attached elastic data disk at the same time
-	// - `FALSE`: Indicates that the subscription instance will be renewed and the elastic data disk attached to it will not be renewed
-	//   Default value: TRUE.
 	RenewPortableDataDisk pulumi.BoolPtrOutput `pulumi:"renewPortableDataDisk"`
 }
 
@@ -36,7 +67,7 @@ func NewRenewInstance(ctx *pulumi.Context,
 	if args.InstanceId == nil {
 		return nil, errors.New("invalid value for required argument 'InstanceId'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource RenewInstance
 	err := ctx.RegisterResource("tencentcloud:Cvm/renewInstance:RenewInstance", name, args, &resource, opts...)
 	if err != nil {
@@ -64,9 +95,6 @@ type renewInstanceState struct {
 	// Instance ID.
 	InstanceId *string `pulumi:"instanceId"`
 	// Whether to renew the elastic data disk. Valid values:
-	// - `TRUE`: Indicates to renew the subscription instance and renew the attached elastic data disk at the same time
-	// - `FALSE`: Indicates that the subscription instance will be renewed and the elastic data disk attached to it will not be renewed
-	//   Default value: TRUE.
 	RenewPortableDataDisk *bool `pulumi:"renewPortableDataDisk"`
 }
 
@@ -76,9 +104,6 @@ type RenewInstanceState struct {
 	// Instance ID.
 	InstanceId pulumi.StringPtrInput
 	// Whether to renew the elastic data disk. Valid values:
-	// - `TRUE`: Indicates to renew the subscription instance and renew the attached elastic data disk at the same time
-	// - `FALSE`: Indicates that the subscription instance will be renewed and the elastic data disk attached to it will not be renewed
-	//   Default value: TRUE.
 	RenewPortableDataDisk pulumi.BoolPtrInput
 }
 
@@ -92,9 +117,6 @@ type renewInstanceArgs struct {
 	// Instance ID.
 	InstanceId string `pulumi:"instanceId"`
 	// Whether to renew the elastic data disk. Valid values:
-	// - `TRUE`: Indicates to renew the subscription instance and renew the attached elastic data disk at the same time
-	// - `FALSE`: Indicates that the subscription instance will be renewed and the elastic data disk attached to it will not be renewed
-	//   Default value: TRUE.
 	RenewPortableDataDisk *bool `pulumi:"renewPortableDataDisk"`
 }
 
@@ -105,9 +127,6 @@ type RenewInstanceArgs struct {
 	// Instance ID.
 	InstanceId pulumi.StringInput
 	// Whether to renew the elastic data disk. Valid values:
-	// - `TRUE`: Indicates to renew the subscription instance and renew the attached elastic data disk at the same time
-	// - `FALSE`: Indicates that the subscription instance will be renewed and the elastic data disk attached to it will not be renewed
-	//   Default value: TRUE.
 	RenewPortableDataDisk pulumi.BoolPtrInput
 }
 
@@ -137,7 +156,7 @@ func (i *RenewInstance) ToRenewInstanceOutputWithContext(ctx context.Context) Re
 // RenewInstanceArrayInput is an input type that accepts RenewInstanceArray and RenewInstanceArrayOutput values.
 // You can construct a concrete instance of `RenewInstanceArrayInput` via:
 //
-//          RenewInstanceArray{ RenewInstanceArgs{...} }
+//	RenewInstanceArray{ RenewInstanceArgs{...} }
 type RenewInstanceArrayInput interface {
 	pulumi.Input
 
@@ -162,7 +181,7 @@ func (i RenewInstanceArray) ToRenewInstanceArrayOutputWithContext(ctx context.Co
 // RenewInstanceMapInput is an input type that accepts RenewInstanceMap and RenewInstanceMapOutput values.
 // You can construct a concrete instance of `RenewInstanceMapInput` via:
 //
-//          RenewInstanceMap{ "key": RenewInstanceArgs{...} }
+//	RenewInstanceMap{ "key": RenewInstanceArgs{...} }
 type RenewInstanceMapInput interface {
 	pulumi.Input
 
@@ -209,9 +228,6 @@ func (o RenewInstanceOutput) InstanceId() pulumi.StringOutput {
 }
 
 // Whether to renew the elastic data disk. Valid values:
-// - `TRUE`: Indicates to renew the subscription instance and renew the attached elastic data disk at the same time
-// - `FALSE`: Indicates that the subscription instance will be renewed and the elastic data disk attached to it will not be renewed
-//   Default value: TRUE.
 func (o RenewInstanceOutput) RenewPortableDataDisk() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *RenewInstance) pulumi.BoolPtrOutput { return v.RenewPortableDataDisk }).(pulumi.BoolPtrOutput)
 }

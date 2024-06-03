@@ -9,23 +9,22 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const example = pulumi.output(tencentcloud.Kms.getGetParametersForImport({
+ * const example = tencentcloud.Kms.getGetParametersForImport({
  *     keyId: "786aea8c-4aec-11ee-b601-525400281a45",
  *     wrappingAlgorithm: "RSAES_OAEP_SHA_1",
  *     wrappingKeySpec: "RSA_2048",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getGetParametersForImport(args: GetGetParametersForImportArgs, opts?: pulumi.InvokeOptions): Promise<GetGetParametersForImportResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Kms/getGetParametersForImport:getGetParametersForImport", {
         "keyId": args.keyId,
         "resultOutputFile": args.resultOutputFile,
@@ -81,9 +80,26 @@ export interface GetGetParametersForImportResult {
     readonly wrappingAlgorithm: string;
     readonly wrappingKeySpec: string;
 }
-
+/**
+ * Use this data source to query detailed information of kms getParametersForImport
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const example = tencentcloud.Kms.getGetParametersForImport({
+ *     keyId: "786aea8c-4aec-11ee-b601-525400281a45",
+ *     wrappingAlgorithm: "RSAES_OAEP_SHA_1",
+ *     wrappingKeySpec: "RSA_2048",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getGetParametersForImportOutput(args: GetGetParametersForImportOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetGetParametersForImportResult> {
-    return pulumi.output(args).apply(a => getGetParametersForImport(a, opts))
+    return pulumi.output(args).apply((a: any) => getGetParametersForImport(a, opts))
 }
 
 /**

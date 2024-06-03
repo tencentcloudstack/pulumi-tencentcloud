@@ -15,72 +15,75 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var logset = new Tencentcloud.Cls.Logset("logset", new()
     ///     {
-    ///         var logset = new Tencentcloud.Cls.Logset("logset", new Tencentcloud.Cls.LogsetArgs
+    ///         LogsetName = "tf-example-logset",
+    ///         Tags = 
     ///         {
-    ///             LogsetName = "tf-example-logset",
-    ///             Tags = 
-    ///             {
-    ///                 { "createdBy", "terraform" },
-    ///             },
-    ///         });
-    ///         var topic = new Tencentcloud.Cls.Topic("topic", new Tencentcloud.Cls.TopicArgs
-    ///         {
-    ///             TopicName = "tf-example-topic",
-    ///             LogsetId = logset.Id,
-    ///             AutoSplit = false,
-    ///             MaxSplitPartitions = 20,
-    ///             PartitionCount = 1,
-    ///             Period = 10,
-    ///             StorageType = "hot",
-    ///             Tags = 
-    ///             {
-    ///                 { "test", "test" },
-    ///             },
-    ///         });
-    ///         var scheduledSql = new Tencentcloud.Cls.ScheduledSql("scheduledSql", new Tencentcloud.Cls.ScheduledSqlArgs
-    ///         {
-    ///             SrcTopicId = topic.Id,
-    ///             EnableFlag = 1,
-    ///             DstResource = new Tencentcloud.Cls.Inputs.ScheduledSqlDstResourceArgs
-    ///             {
-    ///                 TopicId = topic.Id,
-    ///                 Region = "ap-guangzhou",
-    ///                 BizType = 0,
-    ///                 MetricName = "test",
-    ///             },
-    ///             ScheduledSqlContent = "xxx",
-    ///             ProcessStartTime = 1690515360000,
-    ///             ProcessType = 1,
-    ///             ProcessPeriod = 10,
-    ///             ProcessTimeWindow = "@m-15m,@m",
-    ///             ProcessDelay = 5,
-    ///             SrcTopicRegion = "ap-guangzhou",
-    ///             ProcessEndTime = 1690515360000,
-    ///             SyntaxRule = 0,
-    ///         });
-    ///     }
+    ///             { "createdBy", "terraform" },
+    ///         },
+    ///     });
     /// 
-    /// }
+    ///     var topic = new Tencentcloud.Cls.Topic("topic", new()
+    ///     {
+    ///         TopicName = "tf-example-topic",
+    ///         LogsetId = logset.Id,
+    ///         AutoSplit = false,
+    ///         MaxSplitPartitions = 20,
+    ///         PartitionCount = 1,
+    ///         Period = 10,
+    ///         StorageType = "hot",
+    ///         Tags = 
+    ///         {
+    ///             { "test", "test" },
+    ///         },
+    ///     });
+    /// 
+    ///     var scheduledSql = new Tencentcloud.Cls.ScheduledSql("scheduledSql", new()
+    ///     {
+    ///         SrcTopicId = topic.Id,
+    ///         EnableFlag = 1,
+    ///         DstResource = new Tencentcloud.Cls.Inputs.ScheduledSqlDstResourceArgs
+    ///         {
+    ///             TopicId = topic.Id,
+    ///             Region = "ap-guangzhou",
+    ///             BizType = 0,
+    ///             MetricName = "test",
+    ///         },
+    ///         ScheduledSqlContent = "xxx",
+    ///         ProcessStartTime = 1690515360000,
+    ///         ProcessType = 1,
+    ///         ProcessPeriod = 10,
+    ///         ProcessTimeWindow = "@m-15m,@m",
+    ///         ProcessDelay = 5,
+    ///         SrcTopicRegion = "ap-guangzhou",
+    ///         ProcessEndTime = 1690515360000,
+    ///         SyntaxRule = 0,
+    ///     });
+    /// 
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// cls scheduled_sql can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Cls/scheduledSql:ScheduledSql scheduled_sql scheduled_sql_id
+    /// $ pulumi import tencentcloud:Cls/scheduledSql:ScheduledSql scheduled_sql scheduled_sql_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Cls/scheduledSql:ScheduledSql")]
-    public partial class ScheduledSql : Pulumi.CustomResource
+    public partial class ScheduledSql : global::Pulumi.CustomResource
     {
         /// <summary>
         /// scheduled slq dst resource.
@@ -205,7 +208,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls
         }
     }
 
-    public sealed class ScheduledSqlArgs : Pulumi.ResourceArgs
+    public sealed class ScheduledSqlArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// scheduled slq dst resource.
@@ -288,9 +291,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls
         public ScheduledSqlArgs()
         {
         }
+        public static new ScheduledSqlArgs Empty => new ScheduledSqlArgs();
     }
 
-    public sealed class ScheduledSqlState : Pulumi.ResourceArgs
+    public sealed class ScheduledSqlState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// scheduled slq dst resource.
@@ -373,5 +377,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls
         public ScheduledSqlState()
         {
         }
+        public static new ScheduledSqlState Empty => new ScheduledSqlState();
     }
 }

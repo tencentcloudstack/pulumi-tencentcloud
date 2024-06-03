@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,21 +11,20 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const views = pulumi.output(tencentcloud.Elasticsearch.getViews({
+ * const views = tencentcloud.Elasticsearch.getViews({
  *     instanceId: "es-xxxxxx",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getViews(args: GetViewsArgs, opts?: pulumi.InvokeOptions): Promise<GetViewsResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Elasticsearch/getViews:getViews", {
         "instanceId": args.instanceId,
         "resultOutputFile": args.resultOutputFile,
@@ -68,9 +68,24 @@ export interface GetViewsResult {
     readonly nodesViews: outputs.Elasticsearch.GetViewsNodesView[];
     readonly resultOutputFile?: string;
 }
-
+/**
+ * Use this data source to query detailed information of elasticsearch views
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const views = tencentcloud.Elasticsearch.getViews({
+ *     instanceId: "es-xxxxxx",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getViewsOutput(args: GetViewsOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetViewsResult> {
-    return pulumi.output(args).apply(a => getViews(a, opts))
+    return pulumi.output(args).apply((a: any) => getViews(a, opts))
 }
 
 /**

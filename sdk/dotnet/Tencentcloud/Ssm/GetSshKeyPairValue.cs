@@ -17,148 +17,142 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssm
         /// 
         /// &gt; **NOTE:** Must set at least one of `secret_name` or `ssh_key_id`.
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var example = Tencentcloud.Ssm.GetSshKeyPairValue.Invoke(new()
         ///     {
-        ///         var example = Output.Create(Tencentcloud.Ssm.GetSshKeyPairValue.InvokeAsync(new Tencentcloud.Ssm.GetSshKeyPairValueArgs
-        ///         {
-        ///             SecretName = "keep_terraform",
-        ///             SshKeyId = "skey-2ae2snwd",
-        ///         }));
-        ///     }
+        ///         SecretName = "keep_terraform",
+        ///         SshKeyId = "skey-2ae2snwd",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% example %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
+        /// 
         /// ### Or
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var example = Tencentcloud.Ssm.GetSshKeyPairValue.Invoke(new()
         ///     {
-        ///         var example = Output.Create(Tencentcloud.Ssm.GetSshKeyPairValue.InvokeAsync(new Tencentcloud.Ssm.GetSshKeyPairValueArgs
-        ///         {
-        ///             SecretName = "keep_terraform",
-        ///         }));
-        ///     }
+        ///         SecretName = "keep_terraform",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% example %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
+        /// 
         /// ### Or
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var example = Tencentcloud.Ssm.GetSshKeyPairValue.Invoke(new()
         ///     {
-        ///         var example = Output.Create(Tencentcloud.Ssm.GetSshKeyPairValue.InvokeAsync(new Tencentcloud.Ssm.GetSshKeyPairValueArgs
-        ///         {
-        ///             SshKeyId = "skey-2ae2snwd",
-        ///         }));
-        ///     }
+        ///         SshKeyId = "skey-2ae2snwd",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetSshKeyPairValueResult> InvokeAsync(GetSshKeyPairValueArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetSshKeyPairValueResult>("tencentcloud:Ssm/getSshKeyPairValue:getSshKeyPairValue", args ?? new GetSshKeyPairValueArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetSshKeyPairValueResult>("tencentcloud:Ssm/getSshKeyPairValue:getSshKeyPairValue", args ?? new GetSshKeyPairValueArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of ssm ssh_key_pair_value
         /// 
         /// &gt; **NOTE:** Must set at least one of `secret_name` or `ssh_key_id`.
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var example = Tencentcloud.Ssm.GetSshKeyPairValue.Invoke(new()
         ///     {
-        ///         var example = Output.Create(Tencentcloud.Ssm.GetSshKeyPairValue.InvokeAsync(new Tencentcloud.Ssm.GetSshKeyPairValueArgs
-        ///         {
-        ///             SecretName = "keep_terraform",
-        ///             SshKeyId = "skey-2ae2snwd",
-        ///         }));
-        ///     }
+        ///         SecretName = "keep_terraform",
+        ///         SshKeyId = "skey-2ae2snwd",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% example %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
+        /// 
         /// ### Or
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var example = Tencentcloud.Ssm.GetSshKeyPairValue.Invoke(new()
         ///     {
-        ///         var example = Output.Create(Tencentcloud.Ssm.GetSshKeyPairValue.InvokeAsync(new Tencentcloud.Ssm.GetSshKeyPairValueArgs
-        ///         {
-        ///             SecretName = "keep_terraform",
-        ///         }));
-        ///     }
+        ///         SecretName = "keep_terraform",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% example %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
+        /// 
         /// ### Or
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var example = Tencentcloud.Ssm.GetSshKeyPairValue.Invoke(new()
         ///     {
-        ///         var example = Output.Create(Tencentcloud.Ssm.GetSshKeyPairValue.InvokeAsync(new Tencentcloud.Ssm.GetSshKeyPairValueArgs
-        ///         {
-        ///             SshKeyId = "skey-2ae2snwd",
-        ///         }));
-        ///     }
+        ///         SshKeyId = "skey-2ae2snwd",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetSshKeyPairValueResult> Invoke(GetSshKeyPairValueInvokeArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetSshKeyPairValueResult>("tencentcloud:Ssm/getSshKeyPairValue:getSshKeyPairValue", args ?? new GetSshKeyPairValueInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetSshKeyPairValueResult>("tencentcloud:Ssm/getSshKeyPairValue:getSshKeyPairValue", args ?? new GetSshKeyPairValueInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetSshKeyPairValueArgs : Pulumi.InvokeArgs
+    public sealed class GetSshKeyPairValueArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Used to save results.
@@ -181,9 +175,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssm
         public GetSshKeyPairValueArgs()
         {
         }
+        public static new GetSshKeyPairValueArgs Empty => new GetSshKeyPairValueArgs();
     }
 
-    public sealed class GetSshKeyPairValueInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetSshKeyPairValueInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Used to save results.
@@ -206,6 +201,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssm
         public GetSshKeyPairValueInvokeArgs()
         {
         }
+        public static new GetSshKeyPairValueInvokeArgs Empty => new GetSshKeyPairValueInvokeArgs();
     }
 
 

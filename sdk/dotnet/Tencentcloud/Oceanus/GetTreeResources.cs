@@ -15,64 +15,58 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Oceanus
         /// <summary>
         /// Use this data source to query detailed information of oceanus tree_resources
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var example = Tencentcloud.Oceanus.GetTreeResources.Invoke(new()
         ///     {
-        ///         var example = Output.Create(Tencentcloud.Oceanus.GetTreeResources.InvokeAsync(new Tencentcloud.Oceanus.GetTreeResourcesArgs
-        ///         {
-        ///             WorkSpaceId = "space-2idq8wbr",
-        ///         }));
-        ///     }
+        ///         WorkSpaceId = "space-2idq8wbr",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetTreeResourcesResult> InvokeAsync(GetTreeResourcesArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetTreeResourcesResult>("tencentcloud:Oceanus/getTreeResources:getTreeResources", args ?? new GetTreeResourcesArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetTreeResourcesResult>("tencentcloud:Oceanus/getTreeResources:getTreeResources", args ?? new GetTreeResourcesArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of oceanus tree_resources
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var example = Tencentcloud.Oceanus.GetTreeResources.Invoke(new()
         ///     {
-        ///         var example = Output.Create(Tencentcloud.Oceanus.GetTreeResources.InvokeAsync(new Tencentcloud.Oceanus.GetTreeResourcesArgs
-        ///         {
-        ///             WorkSpaceId = "space-2idq8wbr",
-        ///         }));
-        ///     }
+        ///         WorkSpaceId = "space-2idq8wbr",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetTreeResourcesResult> Invoke(GetTreeResourcesInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetTreeResourcesResult>("tencentcloud:Oceanus/getTreeResources:getTreeResources", args ?? new GetTreeResourcesInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetTreeResourcesResult>("tencentcloud:Oceanus/getTreeResources:getTreeResources", args ?? new GetTreeResourcesInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetTreeResourcesArgs : Pulumi.InvokeArgs
+    public sealed class GetTreeResourcesArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Used to save results.
@@ -89,9 +83,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Oceanus
         public GetTreeResourcesArgs()
         {
         }
+        public static new GetTreeResourcesArgs Empty => new GetTreeResourcesArgs();
     }
 
-    public sealed class GetTreeResourcesInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetTreeResourcesInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Used to save results.
@@ -108,6 +103,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Oceanus
         public GetTreeResourcesInvokeArgs()
         {
         }
+        public static new GetTreeResourcesInvokeArgs Empty => new GetTreeResourcesInvokeArgs();
     }
 
 

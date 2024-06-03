@@ -9,11 +9,12 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const mongodb = new tencentcloud.Mongodb.ShardingInstance("mongodb", {
+ * const mongodb = new tencentcloud.mongodb.ShardingInstance("mongodb", {
  *     availableZone: "ap-guangzhou-3",
  *     engineVersion: "MONGO_36_WT",
  *     instanceName: "mongodb",
@@ -31,13 +32,14 @@ import * as utilities from "../utilities";
  *     vpcId: "vpc-mz3efvbw",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * Mongodb sharding instance can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Mongodb/shardingInstance:ShardingInstance mongodb cmgo-41s6jwy4
+ * $ pulumi import tencentcloud:Mongodb/shardingInstance:ShardingInstance mongodb cmgo-41s6jwy4
  * ```
  */
 export class ShardingInstance extends pulumi.CustomResource {
@@ -255,7 +257,7 @@ export class ShardingInstance extends pulumi.CustomResource {
             resourceInputs["mongosMemory"] = args ? args.mongosMemory : undefined;
             resourceInputs["mongosNodeNum"] = args ? args.mongosNodeNum : undefined;
             resourceInputs["nodesPerShard"] = args ? args.nodesPerShard : undefined;
-            resourceInputs["password"] = args ? args.password : undefined;
+            resourceInputs["password"] = args?.password ? pulumi.secret(args.password) : undefined;
             resourceInputs["prepaidPeriod"] = args ? args.prepaidPeriod : undefined;
             resourceInputs["projectId"] = args ? args.projectId : undefined;
             resourceInputs["securityGroups"] = args ? args.securityGroups : undefined;
@@ -270,6 +272,8 @@ export class ShardingInstance extends pulumi.CustomResource {
             resourceInputs["vport"] = undefined /*out*/;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+        const secretOpts = { additionalSecretOutputs: ["password"] };
+        opts = pulumi.mergeOptions(opts, secretOpts);
         super(ShardingInstance.__pulumiType, name, resourceInputs, opts);
     }
 }

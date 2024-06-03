@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Security.Inputs
 {
 
-    public sealed class GroupRuleSetIngressArgs : Pulumi.ResourceArgs
+    public sealed class GroupRuleSetIngressArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Rule policy of security group. Valid values: `ACCEPT` and `DROP`.
@@ -49,6 +49,9 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Security.Inputs
         [Input("ipv6CidrBlock")]
         public Input<string>? Ipv6CidrBlock { get; set; }
 
+        /// <summary>
+        /// The security group rule index number, whose value dynamically changes with changes in security group rules.
+        /// </summary>
         [Input("policyIndex")]
         public Input<int>? PolicyIndex { get; set; }
 
@@ -85,5 +88,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Security.Inputs
         public GroupRuleSetIngressArgs()
         {
         }
+        public static new GroupRuleSetIngressArgs Empty => new GroupRuleSetIngressArgs();
     }
 }

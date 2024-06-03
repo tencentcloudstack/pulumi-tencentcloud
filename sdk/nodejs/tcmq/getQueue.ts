@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,22 +11,21 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const queue = pulumi.output(tencentcloud.Tcmq.getQueue({
+ * const queue = tencentcloud.Tcmq.getQueue({
  *     queueName: "queue_name",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getQueue(args?: GetQueueArgs, opts?: pulumi.InvokeOptions): Promise<GetQueueResult> {
     args = args || {};
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Tcmq/getQueue:getQueue", {
         "filters": args.filters,
         "isTagFilter": args.isTagFilter,
@@ -94,9 +94,24 @@ export interface GetQueueResult {
     readonly queueNameLists?: string[];
     readonly resultOutputFile?: string;
 }
-
+/**
+ * Use this data source to query detailed information of tcmq queue
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const queue = tencentcloud.Tcmq.getQueue({
+ *     queueName: "queue_name",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getQueueOutput(args?: GetQueueOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetQueueResult> {
-    return pulumi.output(args).apply(a => getQueue(a, opts))
+    return pulumi.output(args).apply((a: any) => getQueue(a, opts))
 }
 
 /**

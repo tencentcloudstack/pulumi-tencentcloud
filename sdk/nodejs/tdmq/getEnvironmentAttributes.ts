@@ -9,10 +9,11 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const exampleInstance = new tencentcloud.tdmq.Instance("exampleInstance", {
  *     clusterName: "tf_example",
@@ -32,13 +33,11 @@ import * as utilities from "../utilities";
  *     clusterId: exampleInstance.id,
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getEnvironmentAttributes(args: GetEnvironmentAttributesArgs, opts?: pulumi.InvokeOptions): Promise<GetEnvironmentAttributesResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Tdmq/getEnvironmentAttributes:getEnvironmentAttributes", {
         "clusterId": args.clusterId,
         "environmentId": args.environmentId,
@@ -104,9 +103,39 @@ export interface GetEnvironmentAttributesResult {
      */
     readonly retentionSize: number;
 }
-
+/**
+ * Use this data source to query detailed information of tdmq environmentAttributes
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
+ *
+ * const exampleInstance = new tencentcloud.tdmq.Instance("exampleInstance", {
+ *     clusterName: "tf_example",
+ *     remark: "remark.",
+ *     tags: {
+ *         createdBy: "terraform",
+ *     },
+ * });
+ * const exampleNamespace = new tencentcloud.tdmq.Namespace("exampleNamespace", {
+ *     environName: "tf_example",
+ *     msgTtl: 300,
+ *     clusterId: exampleInstance.id,
+ *     remark: "remark.",
+ * });
+ * const exampleEnvironmentAttributes = tencentcloud.Tdmq.getEnvironmentAttributesOutput({
+ *     environmentId: exampleNamespace.environName,
+ *     clusterId: exampleInstance.id,
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getEnvironmentAttributesOutput(args: GetEnvironmentAttributesOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetEnvironmentAttributesResult> {
-    return pulumi.output(args).apply(a => getEnvironmentAttributes(a, opts))
+    return pulumi.output(args).apply((a: any) => getEnvironmentAttributes(a, opts))
 }
 
 /**

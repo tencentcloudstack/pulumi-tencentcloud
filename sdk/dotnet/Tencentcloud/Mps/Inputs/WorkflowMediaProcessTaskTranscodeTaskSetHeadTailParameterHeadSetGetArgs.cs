@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps.Inputs
 {
 
-    public sealed class WorkflowMediaProcessTaskTranscodeTaskSetHeadTailParameterHeadSetGetArgs : Pulumi.ResourceArgs
+    public sealed class WorkflowMediaProcessTaskTranscodeTaskSetHeadTailParameterHeadSetGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Valid when Type is COS, this item is required, indicating media processing COS object information.
@@ -34,5 +34,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps.Inputs
         public WorkflowMediaProcessTaskTranscodeTaskSetHeadTailParameterHeadSetGetArgs()
         {
         }
+        public static new WorkflowMediaProcessTaskTranscodeTaskSetHeadTailParameterHeadSetGetArgs Empty => new WorkflowMediaProcessTaskTranscodeTaskSetHeadTailParameterHeadSetGetArgs();
     }
 }

@@ -7,42 +7,48 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a ssl downloadCertificate
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ssl"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ssl"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Ssl.NewDownloadCertificateOperation(ctx, "downloadCertificate", &Ssl.DownloadCertificateOperationArgs{
-// 			CertificateId: pulumi.String("8x1eUSSl"),
-// 			OutputPath:    pulumi.String("./"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Ssl.NewDownloadCertificateOperation(ctx, "downloadCertificate", &Ssl.DownloadCertificateOperationArgs{
+//				CertificateId: pulumi.String("8x1eUSSl"),
+//				OutputPath:    pulumi.String("./"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // ssl download_certificate can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Ssl/downloadCertificateOperation:DownloadCertificateOperation download_certificate download_certificate_id
+// $ pulumi import tencentcloud:Ssl/downloadCertificateOperation:DownloadCertificateOperation download_certificate download_certificate_id
 // ```
 type DownloadCertificateOperation struct {
 	pulumi.CustomResourceState
@@ -66,7 +72,7 @@ func NewDownloadCertificateOperation(ctx *pulumi.Context,
 	if args.OutputPath == nil {
 		return nil, errors.New("invalid value for required argument 'OutputPath'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource DownloadCertificateOperation
 	err := ctx.RegisterResource("tencentcloud:Ssl/downloadCertificateOperation:DownloadCertificateOperation", name, args, &resource, opts...)
 	if err != nil {
@@ -147,7 +153,7 @@ func (i *DownloadCertificateOperation) ToDownloadCertificateOperationOutputWithC
 // DownloadCertificateOperationArrayInput is an input type that accepts DownloadCertificateOperationArray and DownloadCertificateOperationArrayOutput values.
 // You can construct a concrete instance of `DownloadCertificateOperationArrayInput` via:
 //
-//          DownloadCertificateOperationArray{ DownloadCertificateOperationArgs{...} }
+//	DownloadCertificateOperationArray{ DownloadCertificateOperationArgs{...} }
 type DownloadCertificateOperationArrayInput interface {
 	pulumi.Input
 
@@ -172,7 +178,7 @@ func (i DownloadCertificateOperationArray) ToDownloadCertificateOperationArrayOu
 // DownloadCertificateOperationMapInput is an input type that accepts DownloadCertificateOperationMap and DownloadCertificateOperationMapOutput values.
 // You can construct a concrete instance of `DownloadCertificateOperationMapInput` via:
 //
-//          DownloadCertificateOperationMap{ "key": DownloadCertificateOperationArgs{...} }
+//	DownloadCertificateOperationMap{ "key": DownloadCertificateOperationArgs{...} }
 type DownloadCertificateOperationMapInput interface {
 	pulumi.Input
 

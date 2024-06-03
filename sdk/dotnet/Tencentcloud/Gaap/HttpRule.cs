@@ -15,84 +15,90 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var fooProxy = new Tencentcloud.Gaap.Proxy("fooProxy", new()
     ///     {
-    ///         var fooProxy = new Tencentcloud.Gaap.Proxy("fooProxy", new Tencentcloud.Gaap.ProxyArgs
-    ///         {
-    ///             Bandwidth = 10,
-    ///             Concurrent = 2,
-    ///             AccessRegion = "SouthChina",
-    ///             RealserverRegion = "NorthChina",
-    ///         });
-    ///         var fooLayer7Listener = new Tencentcloud.Gaap.Layer7Listener("fooLayer7Listener", new Tencentcloud.Gaap.Layer7ListenerArgs
-    ///         {
-    ///             Protocol = "HTTP",
-    ///             Port = 80,
-    ///             ProxyId = fooProxy.Id,
-    ///         });
-    ///         var fooRealserver = new Tencentcloud.Gaap.Realserver("fooRealserver", new Tencentcloud.Gaap.RealserverArgs
-    ///         {
-    ///             Ip = "1.1.1.1",
-    ///         });
-    ///         var bar = new Tencentcloud.Gaap.Realserver("bar", new Tencentcloud.Gaap.RealserverArgs
-    ///         {
-    ///             Ip = "8.8.8.8",
-    ///         });
-    ///         var fooHttpDomain = new Tencentcloud.Gaap.HttpDomain("fooHttpDomain", new Tencentcloud.Gaap.HttpDomainArgs
-    ///         {
-    ///             ListenerId = fooLayer7Listener.Id,
-    ///             Domain = "www.qq.com",
-    ///         });
-    ///         var fooHttpRule = new Tencentcloud.Gaap.HttpRule("fooHttpRule", new Tencentcloud.Gaap.HttpRuleArgs
-    ///         {
-    ///             ListenerId = fooLayer7Listener.Id,
-    ///             Domain = fooHttpDomain.Domain,
-    ///             Path = "/",
-    ///             RealserverType = "IP",
-    ///             HealthCheck = true,
-    ///             HealthCheckPath = "/",
-    ///             HealthCheckMethod = "GET",
-    ///             HealthCheckStatusCodes = 
-    ///             {
-    ///                 200,
-    ///             },
-    ///             Realservers = 
-    ///             {
-    ///                 new Tencentcloud.Gaap.Inputs.HttpRuleRealserverArgs
-    ///                 {
-    ///                     Id = fooRealserver.Id,
-    ///                     Ip = fooRealserver.Ip,
-    ///                     Port = 80,
-    ///                 },
-    ///                 new Tencentcloud.Gaap.Inputs.HttpRuleRealserverArgs
-    ///                 {
-    ///                     Id = bar.Id,
-    ///                     Ip = bar.Ip,
-    ///                     Port = 80,
-    ///                 },
-    ///             },
-    ///         });
-    ///     }
+    ///         Bandwidth = 10,
+    ///         Concurrent = 2,
+    ///         AccessRegion = "SouthChina",
+    ///         RealserverRegion = "NorthChina",
+    ///     });
     /// 
-    /// }
+    ///     var fooLayer7Listener = new Tencentcloud.Gaap.Layer7Listener("fooLayer7Listener", new()
+    ///     {
+    ///         Protocol = "HTTP",
+    ///         Port = 80,
+    ///         ProxyId = fooProxy.Id,
+    ///     });
+    /// 
+    ///     var fooRealserver = new Tencentcloud.Gaap.Realserver("fooRealserver", new()
+    ///     {
+    ///         Ip = "1.1.1.1",
+    ///     });
+    /// 
+    ///     var bar = new Tencentcloud.Gaap.Realserver("bar", new()
+    ///     {
+    ///         Ip = "8.8.8.8",
+    ///     });
+    /// 
+    ///     var fooHttpDomain = new Tencentcloud.Gaap.HttpDomain("fooHttpDomain", new()
+    ///     {
+    ///         ListenerId = fooLayer7Listener.Id,
+    ///         Domain = "www.qq.com",
+    ///     });
+    /// 
+    ///     var fooHttpRule = new Tencentcloud.Gaap.HttpRule("fooHttpRule", new()
+    ///     {
+    ///         ListenerId = fooLayer7Listener.Id,
+    ///         Domain = fooHttpDomain.Domain,
+    ///         Path = "/",
+    ///         RealserverType = "IP",
+    ///         HealthCheck = true,
+    ///         HealthCheckPath = "/",
+    ///         HealthCheckMethod = "GET",
+    ///         HealthCheckStatusCodes = new[]
+    ///         {
+    ///             200,
+    ///         },
+    ///         Realservers = new[]
+    ///         {
+    ///             new Tencentcloud.Gaap.Inputs.HttpRuleRealserverArgs
+    ///             {
+    ///                 Id = fooRealserver.Id,
+    ///                 Ip = fooRealserver.Ip,
+    ///                 Port = 80,
+    ///             },
+    ///             new Tencentcloud.Gaap.Inputs.HttpRuleRealserverArgs
+    ///             {
+    ///                 Id = bar.Id,
+    ///                 Ip = bar.Ip,
+    ///                 Port = 80,
+    ///             },
+    ///         },
+    ///     });
+    /// 
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// GAAP http rule can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Gaap/httpRule:HttpRule tencentcloud_gaap_http_rule.foo rule-3bsuu01r
+    /// $ pulumi import tencentcloud:Gaap/httpRule:HttpRule tencentcloud_gaap_http_rule.foo rule-3bsuu01r
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Gaap/httpRule:HttpRule")]
-    public partial class HttpRule : Pulumi.CustomResource
+    public partial class HttpRule : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Timeout of the health check response, default value is 2s.
@@ -229,7 +235,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
         }
     }
 
-    public sealed class HttpRuleArgs : Pulumi.ResourceArgs
+    public sealed class HttpRuleArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Timeout of the health check response, default value is 2s.
@@ -336,9 +342,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
         public HttpRuleArgs()
         {
         }
+        public static new HttpRuleArgs Empty => new HttpRuleArgs();
     }
 
-    public sealed class HttpRuleState : Pulumi.ResourceArgs
+    public sealed class HttpRuleState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Timeout of the health check response, default value is 2s.
@@ -445,5 +452,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
         public HttpRuleState()
         {
         }
+        public static new HttpRuleState Empty => new HttpRuleState();
     }
 }

@@ -8,37 +8,42 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Use this data source to query detailed information of vpc subnetResourceDashboard
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Vpc.GetSubnetResourceDashboard(ctx, &vpc.GetSubnetResourceDashboardArgs{
-// 			SubnetIds: []string{
-// 				"subnet-i9tpf6hq",
-// 			},
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Vpc.GetSubnetResourceDashboard(ctx, &vpc.GetSubnetResourceDashboardArgs{
+//				SubnetIds: []string{
+//					"subnet-i9tpf6hq",
+//				},
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 func GetSubnetResourceDashboard(ctx *pulumi.Context, args *GetSubnetResourceDashboardArgs, opts ...pulumi.InvokeOption) (*GetSubnetResourceDashboardResult, error) {
-	opts = pkgInvokeDefaultOpts(opts)
+	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetSubnetResourceDashboardResult
 	err := ctx.Invoke("tencentcloud:Vpc/getSubnetResourceDashboard:getSubnetResourceDashboard", args, &rv, opts...)
 	if err != nil {

@@ -7,102 +7,107 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a cls config extra
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Cls"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cls"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cls"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		logset, err := Cls.NewLogset(ctx, "logset", &Cls.LogsetArgs{
-// 			LogsetName: pulumi.String("tf-config-extra-test"),
-// 			Tags: pulumi.AnyMap{
-// 				"test": pulumi.Any("test"),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		topic, err := Cls.NewTopic(ctx, "topic", &Cls.TopicArgs{
-// 			AutoSplit:          pulumi.Bool(true),
-// 			LogsetId:           logset.ID(),
-// 			MaxSplitPartitions: pulumi.Int(20),
-// 			PartitionCount:     pulumi.Int(1),
-// 			Period:             pulumi.Int(10),
-// 			StorageType:        pulumi.String("hot"),
-// 			Tags: pulumi.AnyMap{
-// 				"test": pulumi.Any("test"),
-// 			},
-// 			TopicName: pulumi.String("tf-config-extra-test"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		group, err := Cls.NewMachineGroup(ctx, "group", &Cls.MachineGroupArgs{
-// 			GroupName:       pulumi.String("tf-config-extra-test"),
-// 			ServiceLogging:  pulumi.Bool(true),
-// 			AutoUpdate:      pulumi.Bool(true),
-// 			UpdateEndTime:   pulumi.String("19:05:00"),
-// 			UpdateStartTime: pulumi.String("17:05:00"),
-// 			MachineGroupType: &cls.MachineGroupMachineGroupTypeArgs{
-// 				Type: pulumi.String("ip"),
-// 				Values: pulumi.StringArray{
-// 					pulumi.String("192.168.1.1"),
-// 					pulumi.String("192.168.1.2"),
-// 				},
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_, err = Cls.NewConfigExtra(ctx, "extra", &Cls.ConfigExtraArgs{
-// 			TopicId:    topic.ID(),
-// 			Type:       pulumi.String("container_file"),
-// 			LogType:    pulumi.String("json_log"),
-// 			ConfigFlag: pulumi.String("label_k8s"),
-// 			LogsetId:   logset.ID(),
-// 			LogsetName: logset.LogsetName,
-// 			TopicName:  topic.TopicName,
-// 			ContainerFile: &cls.ConfigExtraContainerFileArgs{
-// 				Container:   pulumi.String("nginx"),
-// 				FilePattern: pulumi.String("log"),
-// 				LogPath:     pulumi.String("/nginx"),
-// 				Namespace:   pulumi.String("default"),
-// 				Workload: &cls.ConfigExtraContainerFileWorkloadArgs{
-// 					Container: pulumi.String("nginx"),
-// 					Kind:      pulumi.String("deployment"),
-// 					Name:      pulumi.String("nginx"),
-// 					Namespace: pulumi.String("default"),
-// 				},
-// 			},
-// 			GroupId: group.ID(),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			logset, err := Cls.NewLogset(ctx, "logset", &Cls.LogsetArgs{
+//				LogsetName: pulumi.String("tf-config-extra-test"),
+//				Tags: pulumi.Map{
+//					"test": pulumi.Any("test"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			topic, err := Cls.NewTopic(ctx, "topic", &Cls.TopicArgs{
+//				AutoSplit:          pulumi.Bool(true),
+//				LogsetId:           logset.ID(),
+//				MaxSplitPartitions: pulumi.Int(20),
+//				PartitionCount:     pulumi.Int(1),
+//				Period:             pulumi.Int(10),
+//				StorageType:        pulumi.String("hot"),
+//				Tags: pulumi.Map{
+//					"test": pulumi.Any("test"),
+//				},
+//				TopicName: pulumi.String("tf-config-extra-test"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			group, err := Cls.NewMachineGroup(ctx, "group", &Cls.MachineGroupArgs{
+//				GroupName:       pulumi.String("tf-config-extra-test"),
+//				ServiceLogging:  pulumi.Bool(true),
+//				AutoUpdate:      pulumi.Bool(true),
+//				UpdateEndTime:   pulumi.String("19:05:00"),
+//				UpdateStartTime: pulumi.String("17:05:00"),
+//				MachineGroupType: &cls.MachineGroupMachineGroupTypeArgs{
+//					Type: pulumi.String("ip"),
+//					Values: pulumi.StringArray{
+//						pulumi.String("192.168.1.1"),
+//						pulumi.String("192.168.1.2"),
+//					},
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_, err = Cls.NewConfigExtra(ctx, "extra", &Cls.ConfigExtraArgs{
+//				TopicId:    topic.ID(),
+//				Type:       pulumi.String("container_file"),
+//				LogType:    pulumi.String("json_log"),
+//				ConfigFlag: pulumi.String("label_k8s"),
+//				LogsetId:   logset.ID(),
+//				LogsetName: logset.LogsetName,
+//				TopicName:  topic.TopicName,
+//				ContainerFile: &cls.ConfigExtraContainerFileArgs{
+//					Container:   pulumi.String("nginx"),
+//					FilePattern: pulumi.String("log"),
+//					LogPath:     pulumi.String("/nginx"),
+//					Namespace:   pulumi.String("default"),
+//					Workload: &cls.ConfigExtraContainerFileWorkloadArgs{
+//						Container: pulumi.String("nginx"),
+//						Kind:      pulumi.String("deployment"),
+//						Name:      pulumi.String("nginx"),
+//						Namespace: pulumi.String("default"),
+//					},
+//				},
+//				GroupId: group.ID(),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // cls config_extra can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Cls/configExtra:ConfigExtra config_extra config_extra_id
+// $ pulumi import tencentcloud:Cls/configExtra:ConfigExtra config_extra config_extra_id
 // ```
 type ConfigExtra struct {
 	pulumi.CustomResourceState
@@ -171,7 +176,7 @@ func NewConfigExtra(ctx *pulumi.Context,
 	if args.Type == nil {
 		return nil, errors.New("invalid value for required argument 'Type'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource ConfigExtra
 	err := ctx.RegisterResource("tencentcloud:Cls/configExtra:ConfigExtra", name, args, &resource, opts...)
 	if err != nil {
@@ -372,7 +377,7 @@ func (i *ConfigExtra) ToConfigExtraOutputWithContext(ctx context.Context) Config
 // ConfigExtraArrayInput is an input type that accepts ConfigExtraArray and ConfigExtraArrayOutput values.
 // You can construct a concrete instance of `ConfigExtraArrayInput` via:
 //
-//          ConfigExtraArray{ ConfigExtraArgs{...} }
+//	ConfigExtraArray{ ConfigExtraArgs{...} }
 type ConfigExtraArrayInput interface {
 	pulumi.Input
 
@@ -397,7 +402,7 @@ func (i ConfigExtraArray) ToConfigExtraArrayOutputWithContext(ctx context.Contex
 // ConfigExtraMapInput is an input type that accepts ConfigExtraMap and ConfigExtraMapOutput values.
 // You can construct a concrete instance of `ConfigExtraMapInput` via:
 //
-//          ConfigExtraMap{ "key": ConfigExtraArgs{...} }
+//	ConfigExtraMap{ "key": ConfigExtraArgs{...} }
 type ConfigExtraMapInput interface {
 	pulumi.Input
 

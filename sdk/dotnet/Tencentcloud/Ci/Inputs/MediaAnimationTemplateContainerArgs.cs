@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ci.Inputs
 {
 
-    public sealed class MediaAnimationTemplateContainerArgs : Pulumi.ResourceArgs
+    public sealed class MediaAnimationTemplateContainerArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Package format.
@@ -22,5 +22,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ci.Inputs
         public MediaAnimationTemplateContainerArgs()
         {
         }
+        public static new MediaAnimationTemplateContainerArgs Empty => new MediaAnimationTemplateContainerArgs();
     }
 }

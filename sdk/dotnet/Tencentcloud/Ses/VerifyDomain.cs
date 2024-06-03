@@ -17,25 +17,26 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ses
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var verifyDomain = new Tencentcloud.Ses.VerifyDomain("verifyDomain", new()
     ///     {
-    ///         var verifyDomain = new Tencentcloud.Ses.VerifyDomain("verifyDomain", new Tencentcloud.Ses.VerifyDomainArgs
-    ///         {
-    ///             EmailIdentity = "example.com",
-    ///         });
-    ///     }
+    ///         EmailIdentity = "example.com",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Ses/verifyDomain:VerifyDomain")]
-    public partial class VerifyDomain : Pulumi.CustomResource
+    public partial class VerifyDomain : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Domain name requested for verification.
@@ -88,7 +89,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ses
         }
     }
 
-    public sealed class VerifyDomainArgs : Pulumi.ResourceArgs
+    public sealed class VerifyDomainArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Domain name requested for verification.
@@ -99,9 +100,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ses
         public VerifyDomainArgs()
         {
         }
+        public static new VerifyDomainArgs Empty => new VerifyDomainArgs();
     }
 
-    public sealed class VerifyDomainState : Pulumi.ResourceArgs
+    public sealed class VerifyDomainState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Domain name requested for verification.
@@ -112,5 +114,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ses
         public VerifyDomainState()
         {
         }
+        public static new VerifyDomainState Empty => new VerifyDomainState();
     }
 }

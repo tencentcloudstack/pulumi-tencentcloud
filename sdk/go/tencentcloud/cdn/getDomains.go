@@ -8,39 +8,44 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Use this data source to query the detail information of CDN domain.
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Cdn"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cdn"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cdn"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Cdn.GetDomains(ctx, &cdn.GetDomainsArgs{
-// 			Domain:             pulumi.StringRef("xxxx.com"),
-// 			FullUrlCache:       pulumi.BoolRef(false),
-// 			HttpsSwitch:        pulumi.StringRef("on"),
-// 			OriginPullProtocol: pulumi.StringRef("follow"),
-// 			ServiceType:        pulumi.StringRef("web"),
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Cdn.GetDomains(ctx, &cdn.GetDomainsArgs{
+//				Domain:             pulumi.StringRef("xxxx.com"),
+//				FullUrlCache:       pulumi.BoolRef(false),
+//				HttpsSwitch:        pulumi.StringRef("on"),
+//				OriginPullProtocol: pulumi.StringRef("follow"),
+//				ServiceType:        pulumi.StringRef("web"),
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 func GetDomains(ctx *pulumi.Context, args *GetDomainsArgs, opts ...pulumi.InvokeOption) (*GetDomainsResult, error) {
-	opts = pkgInvokeDefaultOpts(opts)
+	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetDomainsResult
 	err := ctx.Invoke("tencentcloud:Cdn/getDomains:getDomains", args, &rv, opts...)
 	if err != nil {

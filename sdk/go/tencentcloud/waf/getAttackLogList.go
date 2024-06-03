@@ -8,71 +8,82 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Use this data source to query detailed information of waf attackLogList
 //
 // ## Example Usage
+//
 // ### Obtain the specified domain name attack log list
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Waf"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Waf"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Waf"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Waf.GetAttackLogList(ctx, &waf.GetAttackLogListArgs{
-// 			Domain:      "domain.com",
-// 			EndTime:     "2023-09-07 00:00:00",
-// 			Page:        pulumi.IntRef(0),
-// 			QueryCount:  pulumi.IntRef(10),
-// 			QueryString: "method:GET",
-// 			Sort:        pulumi.StringRef("desc"),
-// 			StartTime:   "2023-09-01 00:00:00",
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Waf.GetAttackLogList(ctx, &waf.GetAttackLogListArgs{
+//				Domain:      "domain.com",
+//				EndTime:     "2023-09-07 00:00:00",
+//				Page:        pulumi.IntRef(0),
+//				QueryCount:  pulumi.IntRef(10),
+//				QueryString: "method:GET",
+//				Sort:        pulumi.StringRef("desc"),
+//				StartTime:   "2023-09-01 00:00:00",
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
+//
 // ### Obtain all domain name attack log list
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Waf"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Waf"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Waf"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Waf.GetAttackLogList(ctx, &waf.GetAttackLogListArgs{
-// 			Domain:      "all",
-// 			EndTime:     "2023-09-07 00:00:00",
-// 			Page:        pulumi.IntRef(1),
-// 			QueryCount:  pulumi.IntRef(20),
-// 			QueryString: "method:GET",
-// 			Sort:        pulumi.StringRef("asc"),
-// 			StartTime:   "2023-09-01 00:00:00",
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Waf.GetAttackLogList(ctx, &waf.GetAttackLogListArgs{
+//				Domain:      "all",
+//				EndTime:     "2023-09-07 00:00:00",
+//				Page:        pulumi.IntRef(1),
+//				QueryCount:  pulumi.IntRef(20),
+//				QueryString: "method:GET",
+//				Sort:        pulumi.StringRef("asc"),
+//				StartTime:   "2023-09-01 00:00:00",
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 func GetAttackLogList(ctx *pulumi.Context, args *GetAttackLogListArgs, opts ...pulumi.InvokeOption) (*GetAttackLogListResult, error) {
-	opts = pkgInvokeDefaultOpts(opts)
+	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetAttackLogListResult
 	err := ctx.Invoke("tencentcloud:Waf/getAttackLogList:getAttackLogList", args, &rv, opts...)
 	if err != nil {

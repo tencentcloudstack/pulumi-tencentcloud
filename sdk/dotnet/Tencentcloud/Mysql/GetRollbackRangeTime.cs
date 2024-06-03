@@ -15,70 +15,64 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
         /// <summary>
         /// Use this data source to query detailed information of mysql rollback_range_time
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var rollbackRangeTime = Tencentcloud.Mysql.GetRollbackRangeTime.Invoke(new()
         ///     {
-        ///         var rollbackRangeTime = Output.Create(Tencentcloud.Mysql.GetRollbackRangeTime.InvokeAsync(new Tencentcloud.Mysql.GetRollbackRangeTimeArgs
+        ///         InstanceIds = new[]
         ///         {
-        ///             InstanceIds = 
-        ///             {
-        ///                 "cdb-fitq5t9h",
-        ///             },
-        ///         }));
-        ///     }
+        ///             "cdb-fitq5t9h",
+        ///         },
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetRollbackRangeTimeResult> InvokeAsync(GetRollbackRangeTimeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetRollbackRangeTimeResult>("tencentcloud:Mysql/getRollbackRangeTime:getRollbackRangeTime", args ?? new GetRollbackRangeTimeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetRollbackRangeTimeResult>("tencentcloud:Mysql/getRollbackRangeTime:getRollbackRangeTime", args ?? new GetRollbackRangeTimeArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of mysql rollback_range_time
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var rollbackRangeTime = Tencentcloud.Mysql.GetRollbackRangeTime.Invoke(new()
         ///     {
-        ///         var rollbackRangeTime = Output.Create(Tencentcloud.Mysql.GetRollbackRangeTime.InvokeAsync(new Tencentcloud.Mysql.GetRollbackRangeTimeArgs
+        ///         InstanceIds = new[]
         ///         {
-        ///             InstanceIds = 
-        ///             {
-        ///                 "cdb-fitq5t9h",
-        ///             },
-        ///         }));
-        ///     }
+        ///             "cdb-fitq5t9h",
+        ///         },
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetRollbackRangeTimeResult> Invoke(GetRollbackRangeTimeInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetRollbackRangeTimeResult>("tencentcloud:Mysql/getRollbackRangeTime:getRollbackRangeTime", args ?? new GetRollbackRangeTimeInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetRollbackRangeTimeResult>("tencentcloud:Mysql/getRollbackRangeTime:getRollbackRangeTime", args ?? new GetRollbackRangeTimeInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetRollbackRangeTimeArgs : Pulumi.InvokeArgs
+    public sealed class GetRollbackRangeTimeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// If the clone instance is not in the same region as the source instance, fill in the region where the clone instance is located, for example: ap-guangzhou.
@@ -113,9 +107,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
         public GetRollbackRangeTimeArgs()
         {
         }
+        public static new GetRollbackRangeTimeArgs Empty => new GetRollbackRangeTimeArgs();
     }
 
-    public sealed class GetRollbackRangeTimeInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetRollbackRangeTimeInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// If the clone instance is not in the same region as the source instance, fill in the region where the clone instance is located, for example: ap-guangzhou.
@@ -150,6 +145,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
         public GetRollbackRangeTimeInvokeArgs()
         {
         }
+        public static new GetRollbackRangeTimeInvokeArgs Empty => new GetRollbackRangeTimeInvokeArgs();
     }
 
 

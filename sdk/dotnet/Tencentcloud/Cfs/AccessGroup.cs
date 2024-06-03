@@ -15,33 +15,34 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cfs
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var example = new Tencentcloud.Cfs.AccessGroup("example", new()
     ///     {
-    ///         var example = new Tencentcloud.Cfs.AccessGroup("example", new Tencentcloud.Cfs.AccessGroupArgs
-    ///         {
-    ///             Description = "desc.",
-    ///         });
-    ///     }
+    ///         Description = "desc.",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// CFS access group can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Cfs/accessGroup:AccessGroup example pgroup-7nx89k7l
+    /// $ pulumi import tencentcloud:Cfs/accessGroup:AccessGroup example pgroup-7nx89k7l
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Cfs/accessGroup:AccessGroup")]
-    public partial class AccessGroup : Pulumi.CustomResource
+    public partial class AccessGroup : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Create time of the access group.
@@ -106,7 +107,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cfs
         }
     }
 
-    public sealed class AccessGroupArgs : Pulumi.ResourceArgs
+    public sealed class AccessGroupArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Description of the access group, and max length is 255.
@@ -123,9 +124,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cfs
         public AccessGroupArgs()
         {
         }
+        public static new AccessGroupArgs Empty => new AccessGroupArgs();
     }
 
-    public sealed class AccessGroupState : Pulumi.ResourceArgs
+    public sealed class AccessGroupState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Create time of the access group.
@@ -148,5 +150,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cfs
         public AccessGroupState()
         {
         }
+        public static new AccessGroupState Empty => new AccessGroupState();
     }
 }

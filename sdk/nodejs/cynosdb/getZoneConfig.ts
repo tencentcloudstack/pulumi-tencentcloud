@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,20 +11,19 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const foo = pulumi.output(tencentcloud.Cynosdb.getZoneConfig());
+ * const foo = tencentcloud.Cynosdb.getZoneConfig({});
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getZoneConfig(args?: GetZoneConfigArgs, opts?: pulumi.InvokeOptions): Promise<GetZoneConfigResult> {
     args = args || {};
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Cynosdb/getZoneConfig:getZoneConfig", {
         "resultOutputFile": args.resultOutputFile,
     }, opts);
@@ -53,9 +53,22 @@ export interface GetZoneConfigResult {
     readonly lists: outputs.Cynosdb.GetZoneConfigList[];
     readonly resultOutputFile?: string;
 }
-
+/**
+ * Use this data source to query which instance types of Redis are available in a specific region.
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const foo = tencentcloud.Cynosdb.getZoneConfig({});
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getZoneConfigOutput(args?: GetZoneConfigOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetZoneConfigResult> {
-    return pulumi.output(args).apply(a => getZoneConfig(a, opts))
+    return pulumi.output(args).apply((a: any) => getZoneConfig(a, opts))
 }
 
 /**

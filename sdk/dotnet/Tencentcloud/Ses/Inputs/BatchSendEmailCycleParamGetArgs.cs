@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ses.Inputs
 {
 
-    public sealed class BatchSendEmailCycleParamGetArgs : Pulumi.ResourceArgs
+    public sealed class BatchSendEmailCycleParamGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Start time of the task.
@@ -34,5 +34,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ses.Inputs
         public BatchSendEmailCycleParamGetArgs()
         {
         }
+        public static new BatchSendEmailCycleParamGetArgs Empty => new BatchSendEmailCycleParamGetArgs();
     }
 }

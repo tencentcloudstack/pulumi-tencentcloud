@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql.Inputs
 {
 
-    public sealed class RoGroupRoWeightValueGetArgs : Pulumi.ResourceArgs
+    public sealed class RoGroupRoWeightValueGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// RO instance ID.
@@ -28,5 +28,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql.Inputs
         public RoGroupRoWeightValueGetArgs()
         {
         }
+        public static new RoGroupRoWeightValueGetArgs Empty => new RoGroupRoWeightValueGetArgs();
     }
 }

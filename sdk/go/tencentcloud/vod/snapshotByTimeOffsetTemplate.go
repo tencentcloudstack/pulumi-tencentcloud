@@ -8,44 +8,50 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provide a resource to create a VOD snapshot by time offset template.
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vod"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vod"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Vod.NewSnapshotByTimeOffsetTemplate(ctx, "foo", &Vod.SnapshotByTimeOffsetTemplateArgs{
-// 			Comment:            pulumi.String("test"),
-// 			FillType:           pulumi.String("white"),
-// 			Format:             pulumi.String("png"),
-// 			Height:             pulumi.Int(128),
-// 			ResolutionAdaptive: pulumi.Bool(false),
-// 			Width:              pulumi.Int(130),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Vod.NewSnapshotByTimeOffsetTemplate(ctx, "foo", &Vod.SnapshotByTimeOffsetTemplateArgs{
+//				Comment:            pulumi.String("test"),
+//				FillType:           pulumi.String("white"),
+//				Format:             pulumi.String("png"),
+//				Height:             pulumi.Int(128),
+//				ResolutionAdaptive: pulumi.Bool(false),
+//				Width:              pulumi.Int(130),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
-// VOD snapshot by time offset template can be imported using the id, e.g.
+// VOD snapshot by time offset template can be imported using the id($subAppId#$templateId), e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Vod/snapshotByTimeOffsetTemplate:SnapshotByTimeOffsetTemplate foo 46906
+// $ pulumi import tencentcloud:Vod/snapshotByTimeOffsetTemplate:SnapshotByTimeOffsetTemplate foo $subAppId#$templateId
 // ```
 type SnapshotByTimeOffsetTemplate struct {
 	pulumi.CustomResourceState
@@ -64,8 +70,12 @@ type SnapshotByTimeOffsetTemplate struct {
 	Name pulumi.StringOutput `pulumi:"name"`
 	// Resolution adaption. Valid values: `true`,`false`. `true`: enabled. In this case, `width` represents the long side of a video, while `height` the short side; `false`: disabled. In this case, `width` represents the width of a video, while `height` the height. Default value: `true`.
 	ResolutionAdaptive pulumi.BoolPtrOutput `pulumi:"resolutionAdaptive"`
-	// Subapplication ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+	// The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.
 	SubAppId pulumi.IntPtrOutput `pulumi:"subAppId"`
+	// Template type, value range:
+	// - Preset: system preset template;
+	// - Custom: user-defined templates.
+	Type pulumi.StringOutput `pulumi:"type"`
 	// Last modified time of template in ISO date format.
 	UpdateTime pulumi.StringOutput `pulumi:"updateTime"`
 	// Maximum value of the `width` (or long side) of a screenshot in px. Value range: 0 and [128, 4,096]. If both `width` and `height` are `0`, the resolution will be the same as that of the source video; If `width` is `0`, but `height` is not `0`, width will be proportionally scaled; If `width` is not `0`, but `height` is `0`, `height` will be proportionally scaled; If both `width` and `height` are not `0`, the custom resolution will be used. Default value: `0`.
@@ -79,7 +89,7 @@ func NewSnapshotByTimeOffsetTemplate(ctx *pulumi.Context,
 		args = &SnapshotByTimeOffsetTemplateArgs{}
 	}
 
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource SnapshotByTimeOffsetTemplate
 	err := ctx.RegisterResource("tencentcloud:Vod/snapshotByTimeOffsetTemplate:SnapshotByTimeOffsetTemplate", name, args, &resource, opts...)
 	if err != nil {
@@ -116,8 +126,12 @@ type snapshotByTimeOffsetTemplateState struct {
 	Name *string `pulumi:"name"`
 	// Resolution adaption. Valid values: `true`,`false`. `true`: enabled. In this case, `width` represents the long side of a video, while `height` the short side; `false`: disabled. In this case, `width` represents the width of a video, while `height` the height. Default value: `true`.
 	ResolutionAdaptive *bool `pulumi:"resolutionAdaptive"`
-	// Subapplication ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+	// The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.
 	SubAppId *int `pulumi:"subAppId"`
+	// Template type, value range:
+	// - Preset: system preset template;
+	// - Custom: user-defined templates.
+	Type *string `pulumi:"type"`
 	// Last modified time of template in ISO date format.
 	UpdateTime *string `pulumi:"updateTime"`
 	// Maximum value of the `width` (or long side) of a screenshot in px. Value range: 0 and [128, 4,096]. If both `width` and `height` are `0`, the resolution will be the same as that of the source video; If `width` is `0`, but `height` is not `0`, width will be proportionally scaled; If `width` is not `0`, but `height` is `0`, `height` will be proportionally scaled; If both `width` and `height` are not `0`, the custom resolution will be used. Default value: `0`.
@@ -139,8 +153,12 @@ type SnapshotByTimeOffsetTemplateState struct {
 	Name pulumi.StringPtrInput
 	// Resolution adaption. Valid values: `true`,`false`. `true`: enabled. In this case, `width` represents the long side of a video, while `height` the short side; `false`: disabled. In this case, `width` represents the width of a video, while `height` the height. Default value: `true`.
 	ResolutionAdaptive pulumi.BoolPtrInput
-	// Subapplication ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+	// The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.
 	SubAppId pulumi.IntPtrInput
+	// Template type, value range:
+	// - Preset: system preset template;
+	// - Custom: user-defined templates.
+	Type pulumi.StringPtrInput
 	// Last modified time of template in ISO date format.
 	UpdateTime pulumi.StringPtrInput
 	// Maximum value of the `width` (or long side) of a screenshot in px. Value range: 0 and [128, 4,096]. If both `width` and `height` are `0`, the resolution will be the same as that of the source video; If `width` is `0`, but `height` is not `0`, width will be proportionally scaled; If `width` is not `0`, but `height` is `0`, `height` will be proportionally scaled; If both `width` and `height` are not `0`, the custom resolution will be used. Default value: `0`.
@@ -164,7 +182,7 @@ type snapshotByTimeOffsetTemplateArgs struct {
 	Name *string `pulumi:"name"`
 	// Resolution adaption. Valid values: `true`,`false`. `true`: enabled. In this case, `width` represents the long side of a video, while `height` the short side; `false`: disabled. In this case, `width` represents the width of a video, while `height` the height. Default value: `true`.
 	ResolutionAdaptive *bool `pulumi:"resolutionAdaptive"`
-	// Subapplication ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+	// The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.
 	SubAppId *int `pulumi:"subAppId"`
 	// Maximum value of the `width` (or long side) of a screenshot in px. Value range: 0 and [128, 4,096]. If both `width` and `height` are `0`, the resolution will be the same as that of the source video; If `width` is `0`, but `height` is not `0`, width will be proportionally scaled; If `width` is not `0`, but `height` is `0`, `height` will be proportionally scaled; If both `width` and `height` are not `0`, the custom resolution will be used. Default value: `0`.
 	Width *int `pulumi:"width"`
@@ -184,7 +202,7 @@ type SnapshotByTimeOffsetTemplateArgs struct {
 	Name pulumi.StringPtrInput
 	// Resolution adaption. Valid values: `true`,`false`. `true`: enabled. In this case, `width` represents the long side of a video, while `height` the short side; `false`: disabled. In this case, `width` represents the width of a video, while `height` the height. Default value: `true`.
 	ResolutionAdaptive pulumi.BoolPtrInput
-	// Subapplication ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+	// The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.
 	SubAppId pulumi.IntPtrInput
 	// Maximum value of the `width` (or long side) of a screenshot in px. Value range: 0 and [128, 4,096]. If both `width` and `height` are `0`, the resolution will be the same as that of the source video; If `width` is `0`, but `height` is not `0`, width will be proportionally scaled; If `width` is not `0`, but `height` is `0`, `height` will be proportionally scaled; If both `width` and `height` are not `0`, the custom resolution will be used. Default value: `0`.
 	Width pulumi.IntPtrInput
@@ -216,7 +234,7 @@ func (i *SnapshotByTimeOffsetTemplate) ToSnapshotByTimeOffsetTemplateOutputWithC
 // SnapshotByTimeOffsetTemplateArrayInput is an input type that accepts SnapshotByTimeOffsetTemplateArray and SnapshotByTimeOffsetTemplateArrayOutput values.
 // You can construct a concrete instance of `SnapshotByTimeOffsetTemplateArrayInput` via:
 //
-//          SnapshotByTimeOffsetTemplateArray{ SnapshotByTimeOffsetTemplateArgs{...} }
+//	SnapshotByTimeOffsetTemplateArray{ SnapshotByTimeOffsetTemplateArgs{...} }
 type SnapshotByTimeOffsetTemplateArrayInput interface {
 	pulumi.Input
 
@@ -241,7 +259,7 @@ func (i SnapshotByTimeOffsetTemplateArray) ToSnapshotByTimeOffsetTemplateArrayOu
 // SnapshotByTimeOffsetTemplateMapInput is an input type that accepts SnapshotByTimeOffsetTemplateMap and SnapshotByTimeOffsetTemplateMapOutput values.
 // You can construct a concrete instance of `SnapshotByTimeOffsetTemplateMapInput` via:
 //
-//          SnapshotByTimeOffsetTemplateMap{ "key": SnapshotByTimeOffsetTemplateArgs{...} }
+//	SnapshotByTimeOffsetTemplateMap{ "key": SnapshotByTimeOffsetTemplateArgs{...} }
 type SnapshotByTimeOffsetTemplateMapInput interface {
 	pulumi.Input
 
@@ -312,9 +330,16 @@ func (o SnapshotByTimeOffsetTemplateOutput) ResolutionAdaptive() pulumi.BoolPtrO
 	return o.ApplyT(func(v *SnapshotByTimeOffsetTemplate) pulumi.BoolPtrOutput { return v.ResolutionAdaptive }).(pulumi.BoolPtrOutput)
 }
 
-// Subapplication ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+// The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.
 func (o SnapshotByTimeOffsetTemplateOutput) SubAppId() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *SnapshotByTimeOffsetTemplate) pulumi.IntPtrOutput { return v.SubAppId }).(pulumi.IntPtrOutput)
+}
+
+// Template type, value range:
+// - Preset: system preset template;
+// - Custom: user-defined templates.
+func (o SnapshotByTimeOffsetTemplateOutput) Type() pulumi.StringOutput {
+	return o.ApplyT(func(v *SnapshotByTimeOffsetTemplate) pulumi.StringOutput { return v.Type }).(pulumi.StringOutput)
 }
 
 // Last modified time of template in ISO date format.

@@ -7,95 +7,114 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a cfs autoSnapshotPolicy
 //
 // ## Example Usage
+//
 // ### use day of week
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cfs"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cfs"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Cfs.NewAutoSnapshotPolicy(ctx, "autoSnapshotPolicy", &Cfs.AutoSnapshotPolicyArgs{
-// 			AliveDays:  pulumi.Int(7),
-// 			DayOfWeek:  pulumi.String("1,2"),
-// 			Hour:       pulumi.String("2,3"),
-// 			PolicyName: pulumi.String("policy_name"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Cfs.NewAutoSnapshotPolicy(ctx, "autoSnapshotPolicy", &Cfs.AutoSnapshotPolicyArgs{
+//				AliveDays:  pulumi.Int(7),
+//				DayOfWeek:  pulumi.String("1,2"),
+//				Hour:       pulumi.String("2,3"),
+//				PolicyName: pulumi.String("policy_name"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
+//
 // ### use day of month
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cfs"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cfs"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Cfs.NewAutoSnapshotPolicy(ctx, "autoSnapshotPolicy", &Cfs.AutoSnapshotPolicyArgs{
-// 			AliveDays:  pulumi.Int(7),
-// 			DayOfMonth: pulumi.String("2,3,4"),
-// 			Hour:       pulumi.String("2,3"),
-// 			PolicyName: pulumi.String("policy_name"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Cfs.NewAutoSnapshotPolicy(ctx, "autoSnapshotPolicy", &Cfs.AutoSnapshotPolicyArgs{
+//				AliveDays:  pulumi.Int(7),
+//				DayOfMonth: pulumi.String("2,3,4"),
+//				Hour:       pulumi.String("2,3"),
+//				PolicyName: pulumi.String("policy_name"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
+//
 // ### use interval days
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cfs"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cfs"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Cfs.NewAutoSnapshotPolicy(ctx, "autoSnapshotPolicy", &Cfs.AutoSnapshotPolicyArgs{
-// 			AliveDays:    pulumi.Int(7),
-// 			Hour:         pulumi.String("2,3"),
-// 			IntervalDays: pulumi.Int(1),
-// 			PolicyName:   pulumi.String("policy_name"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Cfs.NewAutoSnapshotPolicy(ctx, "autoSnapshotPolicy", &Cfs.AutoSnapshotPolicyArgs{
+//				AliveDays:    pulumi.Int(7),
+//				Hour:         pulumi.String("2,3"),
+//				IntervalDays: pulumi.Int(1),
+//				PolicyName:   pulumi.String("policy_name"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // cfs auto_snapshot_policy can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Cfs/autoSnapshotPolicy:AutoSnapshotPolicy auto_snapshot_policy auto_snapshot_policy_id
+// $ pulumi import tencentcloud:Cfs/autoSnapshotPolicy:AutoSnapshotPolicy auto_snapshot_policy auto_snapshot_policy_id
 // ```
 type AutoSnapshotPolicy struct {
 	pulumi.CustomResourceState
@@ -124,7 +143,7 @@ func NewAutoSnapshotPolicy(ctx *pulumi.Context,
 	if args.Hour == nil {
 		return nil, errors.New("invalid value for required argument 'Hour'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource AutoSnapshotPolicy
 	err := ctx.RegisterResource("tencentcloud:Cfs/autoSnapshotPolicy:AutoSnapshotPolicy", name, args, &resource, opts...)
 	if err != nil {
@@ -237,7 +256,7 @@ func (i *AutoSnapshotPolicy) ToAutoSnapshotPolicyOutputWithContext(ctx context.C
 // AutoSnapshotPolicyArrayInput is an input type that accepts AutoSnapshotPolicyArray and AutoSnapshotPolicyArrayOutput values.
 // You can construct a concrete instance of `AutoSnapshotPolicyArrayInput` via:
 //
-//          AutoSnapshotPolicyArray{ AutoSnapshotPolicyArgs{...} }
+//	AutoSnapshotPolicyArray{ AutoSnapshotPolicyArgs{...} }
 type AutoSnapshotPolicyArrayInput interface {
 	pulumi.Input
 
@@ -262,7 +281,7 @@ func (i AutoSnapshotPolicyArray) ToAutoSnapshotPolicyArrayOutputWithContext(ctx 
 // AutoSnapshotPolicyMapInput is an input type that accepts AutoSnapshotPolicyMap and AutoSnapshotPolicyMapOutput values.
 // You can construct a concrete instance of `AutoSnapshotPolicyMapInput` via:
 //
-//          AutoSnapshotPolicyMap{ "key": AutoSnapshotPolicyArgs{...} }
+//	AutoSnapshotPolicyMap{ "key": AutoSnapshotPolicyArgs{...} }
 type AutoSnapshotPolicyMapInput interface {
 	pulumi.Input
 

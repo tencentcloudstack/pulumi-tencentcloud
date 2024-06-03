@@ -15,60 +15,62 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clickhouse
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var accountPermissionAllDatabase = new Tencentcloud.Clickhouse.AccountPermission("accountPermissionAllDatabase", new()
     ///     {
-    ///         var accountPermissionAllDatabase = new Tencentcloud.Clickhouse.AccountPermission("accountPermissionAllDatabase", new Tencentcloud.Clickhouse.AccountPermissionArgs
+    ///         AllDatabase = true,
+    ///         Cluster = "default_cluster",
+    ///         GlobalPrivileges = new[]
     ///         {
-    ///             AllDatabase = true,
-    ///             Cluster = "default_cluster",
-    ///             GlobalPrivileges = 
-    ///             {
-    ///                 "SELECT",
-    ///                 "ALTER",
-    ///             },
-    ///             InstanceId = "cdwch-xxxxxx",
-    ///             UserName = "user1",
-    ///         });
-    ///         var accountPermissionNotAllDatabase = new Tencentcloud.Clickhouse.AccountPermission("accountPermissionNotAllDatabase", new Tencentcloud.Clickhouse.AccountPermissionArgs
+    ///             "SELECT",
+    ///             "ALTER",
+    ///         },
+    ///         InstanceId = "cdwch-xxxxxx",
+    ///         UserName = "user1",
+    ///     });
+    /// 
+    ///     var accountPermissionNotAllDatabase = new Tencentcloud.Clickhouse.AccountPermission("accountPermissionNotAllDatabase", new()
+    ///     {
+    ///         AllDatabase = false,
+    ///         Cluster = "default_cluster",
+    ///         DatabasePrivilegeLists = new[]
     ///         {
-    ///             AllDatabase = false,
-    ///             Cluster = "default_cluster",
-    ///             DatabasePrivilegeLists = 
+    ///             new Tencentcloud.Clickhouse.Inputs.AccountPermissionDatabasePrivilegeListArgs
     ///             {
-    ///                 new Tencentcloud.Clickhouse.Inputs.AccountPermissionDatabasePrivilegeListArgs
+    ///                 DatabaseName = "xxxxxx",
+    ///                 DatabasePrivileges = new[]
     ///                 {
-    ///                     DatabaseName = "xxxxxx",
-    ///                     DatabasePrivileges = 
-    ///                     {
-    ///                         "SELECT",
-    ///                         "ALTER",
-    ///                     },
+    ///                     "SELECT",
+    ///                     "ALTER",
     ///                 },
     ///             },
-    ///             InstanceId = "cdwch-xxxxxx",
-    ///             UserName = "user2",
-    ///         });
-    ///     }
+    ///         },
+    ///         InstanceId = "cdwch-xxxxxx",
+    ///         UserName = "user2",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// clickhouse account_permission can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Clickhouse/accountPermission:AccountPermission account_permission ${instanceId}#${cluster}#${userName}
+    /// $ pulumi import tencentcloud:Clickhouse/accountPermission:AccountPermission account_permission ${instanceId}#${cluster}#${userName}
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Clickhouse/accountPermission:AccountPermission")]
-    public partial class AccountPermission : Pulumi.CustomResource
+    public partial class AccountPermission : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Whether all database tables.
@@ -151,7 +153,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clickhouse
         }
     }
 
-    public sealed class AccountPermissionArgs : Pulumi.ResourceArgs
+    public sealed class AccountPermissionArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Whether all database tables.
@@ -204,9 +206,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clickhouse
         public AccountPermissionArgs()
         {
         }
+        public static new AccountPermissionArgs Empty => new AccountPermissionArgs();
     }
 
-    public sealed class AccountPermissionState : Pulumi.ResourceArgs
+    public sealed class AccountPermissionState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Whether all database tables.
@@ -259,5 +262,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clickhouse
         public AccountPermissionState()
         {
         }
+        public static new AccountPermissionState Empty => new AccountPermissionState();
     }
 }

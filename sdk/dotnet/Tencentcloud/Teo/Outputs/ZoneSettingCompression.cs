@@ -19,7 +19,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Outputs
         /// </summary>
         public readonly ImmutableArray<string> Algorithms;
         /// <summary>
-        /// Whether to enable Smart compression.- `on`: Enable.- `off`: Disable.
+        /// Whether to enable Smart compression.
         /// </summary>
         public readonly string Switch;
 

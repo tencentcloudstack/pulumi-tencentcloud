@@ -15,158 +15,152 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cbs
         /// <summary>
         /// Use this data source to query detailed information of CBS storages.
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var storages = Tencentcloud.Cbs.GetStorages.Invoke(new()
         ///     {
-        ///         var storages = Output.Create(Tencentcloud.Cbs.GetStorages.InvokeAsync(new Tencentcloud.Cbs.GetStoragesArgs
-        ///         {
-        ///             ResultOutputFile = "mytestpath",
-        ///             StorageId = "disk-kdt0sq6m",
-        ///         }));
-        ///     }
+        ///         ResultOutputFile = "mytestpath",
+        ///         StorageId = "disk-kdt0sq6m",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% example %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
+        /// 
         /// ### The following snippet shows the new supported query params
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var whatsNew = Tencentcloud.Cbs.GetStorages.Invoke(new()
         ///     {
-        ///         var whatsNew = Output.Create(Tencentcloud.Cbs.GetStorages.InvokeAsync(new Tencentcloud.Cbs.GetStoragesArgs
+        ///         ChargeTypes = new[]
         ///         {
-        ///             ChargeTypes = 
-        ///             {
-        ///                 "POSTPAID_BY_HOUR",
-        ///                 "PREPAID",
-        ///             },
-        ///             InstanceIps = 
-        ///             {
-        ///                 "10.0.0.2",
-        ///             },
-        ///             InstanceNames = 
-        ///             {
-        ///                 "my-instance",
-        ///             },
-        ///             Portable = true,
-        ///             StorageStates = 
-        ///             {
-        ///                 "ATTACHED",
-        ///             },
-        ///             TagKeys = 
-        ///             {
-        ///                 "foo",
-        ///             },
-        ///             TagValues = 
-        ///             {
-        ///                 "bar",
-        ///                 "baz",
-        ///             },
-        ///         }));
-        ///     }
+        ///             "POSTPAID_BY_HOUR",
+        ///             "PREPAID",
+        ///         },
+        ///         InstanceIps = new[]
+        ///         {
+        ///             "10.0.0.2",
+        ///         },
+        ///         InstanceNames = new[]
+        ///         {
+        ///             "my-instance",
+        ///         },
+        ///         Portable = true,
+        ///         StorageStates = new[]
+        ///         {
+        ///             "ATTACHED",
+        ///         },
+        ///         TagKeys = new[]
+        ///         {
+        ///             "foo",
+        ///         },
+        ///         TagValues = new[]
+        ///         {
+        ///             "bar",
+        ///             "baz",
+        ///         },
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetStoragesResult> InvokeAsync(GetStoragesArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetStoragesResult>("tencentcloud:Cbs/getStorages:getStorages", args ?? new GetStoragesArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetStoragesResult>("tencentcloud:Cbs/getStorages:getStorages", args ?? new GetStoragesArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of CBS storages.
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var storages = Tencentcloud.Cbs.GetStorages.Invoke(new()
         ///     {
-        ///         var storages = Output.Create(Tencentcloud.Cbs.GetStorages.InvokeAsync(new Tencentcloud.Cbs.GetStoragesArgs
-        ///         {
-        ///             ResultOutputFile = "mytestpath",
-        ///             StorageId = "disk-kdt0sq6m",
-        ///         }));
-        ///     }
+        ///         ResultOutputFile = "mytestpath",
+        ///         StorageId = "disk-kdt0sq6m",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% example %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
+        /// 
         /// ### The following snippet shows the new supported query params
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var whatsNew = Tencentcloud.Cbs.GetStorages.Invoke(new()
         ///     {
-        ///         var whatsNew = Output.Create(Tencentcloud.Cbs.GetStorages.InvokeAsync(new Tencentcloud.Cbs.GetStoragesArgs
+        ///         ChargeTypes = new[]
         ///         {
-        ///             ChargeTypes = 
-        ///             {
-        ///                 "POSTPAID_BY_HOUR",
-        ///                 "PREPAID",
-        ///             },
-        ///             InstanceIps = 
-        ///             {
-        ///                 "10.0.0.2",
-        ///             },
-        ///             InstanceNames = 
-        ///             {
-        ///                 "my-instance",
-        ///             },
-        ///             Portable = true,
-        ///             StorageStates = 
-        ///             {
-        ///                 "ATTACHED",
-        ///             },
-        ///             TagKeys = 
-        ///             {
-        ///                 "foo",
-        ///             },
-        ///             TagValues = 
-        ///             {
-        ///                 "bar",
-        ///                 "baz",
-        ///             },
-        ///         }));
-        ///     }
+        ///             "POSTPAID_BY_HOUR",
+        ///             "PREPAID",
+        ///         },
+        ///         InstanceIps = new[]
+        ///         {
+        ///             "10.0.0.2",
+        ///         },
+        ///         InstanceNames = new[]
+        ///         {
+        ///             "my-instance",
+        ///         },
+        ///         Portable = true,
+        ///         StorageStates = new[]
+        ///         {
+        ///             "ATTACHED",
+        ///         },
+        ///         TagKeys = new[]
+        ///         {
+        ///             "foo",
+        ///         },
+        ///         TagValues = new[]
+        ///         {
+        ///             "bar",
+        ///             "baz",
+        ///         },
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetStoragesResult> Invoke(GetStoragesInvokeArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetStoragesResult>("tencentcloud:Cbs/getStorages:getStorages", args ?? new GetStoragesInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetStoragesResult>("tencentcloud:Cbs/getStorages:getStorages", args ?? new GetStoragesInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetStoragesArgs : Pulumi.InvokeArgs
+    public sealed class GetStoragesArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// The available zone that the CBS instance locates at.
@@ -291,9 +285,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cbs
         public GetStoragesArgs()
         {
         }
+        public static new GetStoragesArgs Empty => new GetStoragesArgs();
     }
 
-    public sealed class GetStoragesInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetStoragesInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// The available zone that the CBS instance locates at.
@@ -418,6 +413,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cbs
         public GetStoragesInvokeArgs()
         {
         }
+        public static new GetStoragesInvokeArgs Empty => new GetStoragesInvokeArgs();
     }
 
 

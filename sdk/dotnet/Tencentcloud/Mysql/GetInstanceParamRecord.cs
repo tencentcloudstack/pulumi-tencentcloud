@@ -15,64 +15,58 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
         /// <summary>
         /// Use this data source to query detailed information of mysql instance_param_record
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var instanceParamRecord = Tencentcloud.Mysql.GetInstanceParamRecord.Invoke(new()
         ///     {
-        ///         var instanceParamRecord = Output.Create(Tencentcloud.Mysql.GetInstanceParamRecord.InvokeAsync(new Tencentcloud.Mysql.GetInstanceParamRecordArgs
-        ///         {
-        ///             InstanceId = "",
-        ///         }));
-        ///     }
+        ///         InstanceId = "",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetInstanceParamRecordResult> InvokeAsync(GetInstanceParamRecordArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetInstanceParamRecordResult>("tencentcloud:Mysql/getInstanceParamRecord:getInstanceParamRecord", args ?? new GetInstanceParamRecordArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetInstanceParamRecordResult>("tencentcloud:Mysql/getInstanceParamRecord:getInstanceParamRecord", args ?? new GetInstanceParamRecordArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of mysql instance_param_record
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var instanceParamRecord = Tencentcloud.Mysql.GetInstanceParamRecord.Invoke(new()
         ///     {
-        ///         var instanceParamRecord = Output.Create(Tencentcloud.Mysql.GetInstanceParamRecord.InvokeAsync(new Tencentcloud.Mysql.GetInstanceParamRecordArgs
-        ///         {
-        ///             InstanceId = "",
-        ///         }));
-        ///     }
+        ///         InstanceId = "",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetInstanceParamRecordResult> Invoke(GetInstanceParamRecordInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetInstanceParamRecordResult>("tencentcloud:Mysql/getInstanceParamRecord:getInstanceParamRecord", args ?? new GetInstanceParamRecordInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetInstanceParamRecordResult>("tencentcloud:Mysql/getInstanceParamRecord:getInstanceParamRecord", args ?? new GetInstanceParamRecordInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetInstanceParamRecordArgs : Pulumi.InvokeArgs
+    public sealed class GetInstanceParamRecordArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Instance ID, the format is: cdb-c1nl9rpv, which is the same as the instance ID displayed on the cloud database console page, and you can use the [query instance list] (https://cloud.tencent.com/document/api/236/15872) interface Gets the value of the field InstanceId in the output parameter.
@@ -89,9 +83,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
         public GetInstanceParamRecordArgs()
         {
         }
+        public static new GetInstanceParamRecordArgs Empty => new GetInstanceParamRecordArgs();
     }
 
-    public sealed class GetInstanceParamRecordInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetInstanceParamRecordInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Instance ID, the format is: cdb-c1nl9rpv, which is the same as the instance ID displayed on the cloud database console page, and you can use the [query instance list] (https://cloud.tencent.com/document/api/236/15872) interface Gets the value of the field InstanceId in the output parameter.
@@ -108,6 +103,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
         public GetInstanceParamRecordInvokeArgs()
         {
         }
+        public static new GetInstanceParamRecordInvokeArgs Empty => new GetInstanceParamRecordInvokeArgs();
     }
 
 

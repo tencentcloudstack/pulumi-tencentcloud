@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps.Inputs
 {
 
-    public sealed class ScheduleActivityActivityParaTranscodeTaskOverrideParameterAddonAudioStreamArgs : Pulumi.ResourceArgs
+    public sealed class ScheduleActivityActivityParaTranscodeTaskOverrideParameterAddonAudioStreamArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// The information of the COS object to process. This parameter is valid and required when `Type` is `COS`.
@@ -40,5 +40,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps.Inputs
         public ScheduleActivityActivityParaTranscodeTaskOverrideParameterAddonAudioStreamArgs()
         {
         }
+        public static new ScheduleActivityActivityParaTranscodeTaskOverrideParameterAddonAudioStreamArgs Empty => new ScheduleActivityActivityParaTranscodeTaskOverrideParameterAddonAudioStreamArgs();
     }
 }

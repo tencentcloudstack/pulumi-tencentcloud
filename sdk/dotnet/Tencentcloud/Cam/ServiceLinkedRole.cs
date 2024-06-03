@@ -15,35 +15,36 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var serviceLinkedRole = new Tencentcloud.Cam.ServiceLinkedRole("serviceLinkedRole", new()
     ///     {
-    ///         var serviceLinkedRole = new Tencentcloud.Cam.ServiceLinkedRole("serviceLinkedRole", new Tencentcloud.Cam.ServiceLinkedRoleArgs
+    ///         CustomSuffix = "tf",
+    ///         Description = "desc cam",
+    ///         QcsServiceNames = new[]
     ///         {
-    ///             CustomSuffix = "tf",
-    ///             Description = "desc cam",
-    ///             QcsServiceNames = 
-    ///             {
-    ///                 "cvm.qcloud.com",
-    ///                 "ekslog.tke.cloud.tencent.com",
-    ///             },
-    ///             Tags = 
-    ///             {
-    ///                 { "createdBy", "terraform" },
-    ///             },
-    ///         });
-    ///     }
+    ///             "cvm.qcloud.com",
+    ///             "ekslog.tke.cloud.tencent.com",
+    ///         },
+    ///         Tags = 
+    ///         {
+    ///             { "createdBy", "terraform" },
+    ///         },
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Cam/serviceLinkedRole:ServiceLinkedRole")]
-    public partial class ServiceLinkedRole : Pulumi.CustomResource
+    public partial class ServiceLinkedRole : global::Pulumi.CustomResource
     {
         /// <summary>
         /// The custom suffix, based on the string you provide, is combined with the prefix provided by the service to form the full role name. This field is not allowed to contain the character `_`.
@@ -114,7 +115,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam
         }
     }
 
-    public sealed class ServiceLinkedRoleArgs : Pulumi.ResourceArgs
+    public sealed class ServiceLinkedRoleArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// The custom suffix, based on the string you provide, is combined with the prefix provided by the service to form the full role name. This field is not allowed to contain the character `_`.
@@ -155,9 +156,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam
         public ServiceLinkedRoleArgs()
         {
         }
+        public static new ServiceLinkedRoleArgs Empty => new ServiceLinkedRoleArgs();
     }
 
-    public sealed class ServiceLinkedRoleState : Pulumi.ResourceArgs
+    public sealed class ServiceLinkedRoleState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// The custom suffix, based on the string you provide, is combined with the prefix provided by the service to form the full role name. This field is not allowed to contain the character `_`.
@@ -198,5 +200,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam
         public ServiceLinkedRoleState()
         {
         }
+        public static new ServiceLinkedRoleState Empty => new ServiceLinkedRoleState();
     }
 }

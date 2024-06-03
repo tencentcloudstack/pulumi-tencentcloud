@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,22 +11,21 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const accounts = pulumi.output(tencentcloud.Cynosdb.getAccounts({
+ * const accounts = tencentcloud.Cynosdb.getAccounts({
  *     accountNames: ["root"],
  *     clusterId: "cynosdbmysql-bws8h88b",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getAccounts(args: GetAccountsArgs, opts?: pulumi.InvokeOptions): Promise<GetAccountsResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Cynosdb/getAccounts:getAccounts", {
         "accountNames": args.accountNames,
         "clusterId": args.clusterId,
@@ -73,9 +73,25 @@ export interface GetAccountsResult {
     readonly id: string;
     readonly resultOutputFile?: string;
 }
-
+/**
+ * Use this data source to query detailed information of cynosdb accounts
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const accounts = tencentcloud.Cynosdb.getAccounts({
+ *     accountNames: ["root"],
+ *     clusterId: "cynosdbmysql-bws8h88b",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getAccountsOutput(args: GetAccountsOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetAccountsResult> {
-    return pulumi.output(args).apply(a => getAccounts(a, opts))
+    return pulumi.output(args).apply((a: any) => getAccounts(a, opts))
 }
 
 /**

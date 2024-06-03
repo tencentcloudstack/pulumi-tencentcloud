@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,11 +11,12 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const accessLogConfig = new tencentcloud.Tcm.AccessLogConfig("access_log_config", {
+ * const accessLogConfig = new tencentcloud.tcm.AccessLogConfig("accessLogConfig", {
  *     address: "10.0.0.1",
  *     cls: {
  *         enable: false,
@@ -48,6 +50,7 @@ import * as utilities from "../utilities";
  * 	"user_agent": "%REQ(USER-AGENT)%",
  * 	"x_forwarded_for": "%REQ(X-FORWARDED-FOR)%"
  * }
+ *
  * `,
  *     meshName: "mesh-rofjmxxx",
  *     selectedRange: {
@@ -55,7 +58,7 @@ import * as utilities from "../utilities";
  *     },
  *     template: "istio",
  * });
- * const deleteLogConfig = new tencentcloud.Tcm.AccessLogConfig("delete_log_config", {
+ * const deleteLogConfig = new tencentcloud.tcm.AccessLogConfig("deleteLogConfig", {
  *     cls: {
  *         enable: false,
  *     },
@@ -64,13 +67,14 @@ import * as utilities from "../utilities";
  *     meshName: "mesh-rofjmux7",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * tcm access_log_config can be imported using the mesh_id(mesh_name), e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Tcm/accessLogConfig:AccessLogConfig access_log_config mesh-rofjmxxx
+ * $ pulumi import tencentcloud:Tcm/accessLogConfig:AccessLogConfig access_log_config mesh-rofjmxxx
  * ```
  */
 export class AccessLogConfig extends pulumi.CustomResource {

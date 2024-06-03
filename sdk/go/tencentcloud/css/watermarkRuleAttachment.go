@@ -7,72 +7,79 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a css watermarkRule
 //
 // ## Example Usage
+//
 // ### Binding watermark rule with a css stream
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Css"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Css"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		examplePullStreamTask, err := Css.NewPullStreamTask(ctx, "examplePullStreamTask", &Css.PullStreamTaskArgs{
-// 			StreamName: pulumi.String("tf_example_stream_name"),
-// 			SourceType: pulumi.String("PullLivePushLive"),
-// 			SourceUrls: pulumi.StringArray{
-// 				pulumi.String("rtmp://xxx.com/live/stream"),
-// 			},
-// 			DomainName: pulumi.String("test.domain.com"),
-// 			AppName:    pulumi.String("live"),
-// 			StartTime:  pulumi.String("2023-09-27T10:28:21Z"),
-// 			EndTime:    pulumi.String("2023-09-27T17:28:21Z"),
-// 			Operator:   pulumi.String("tf_admin"),
-// 			Comment:    pulumi.String("This is a e2e test case."),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		exampleWatermark, err := Css.NewWatermark(ctx, "exampleWatermark", &Css.WatermarkArgs{
-// 			PictureUrl:    pulumi.String("picture_url"),
-// 			WatermarkName: pulumi.String("watermark_name"),
-// 			XPosition:     pulumi.Int(0),
-// 			YPosition:     pulumi.Int(0),
-// 			Width:         pulumi.Int(0),
-// 			Height:        pulumi.Int(0),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_, err = Css.NewWatermarkRuleAttachment(ctx, "watermarkRuleAttachment", &Css.WatermarkRuleAttachmentArgs{
-// 			DomainName: examplePullStreamTask.DomainName,
-// 			AppName:    examplePullStreamTask.AppName,
-// 			StreamName: examplePullStreamTask.StreamName,
-// 			TemplateId: exampleWatermark.ID(),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			examplePullStreamTask, err := Css.NewPullStreamTask(ctx, "examplePullStreamTask", &Css.PullStreamTaskArgs{
+//				StreamName: pulumi.String("tf_example_stream_name"),
+//				SourceType: pulumi.String("PullLivePushLive"),
+//				SourceUrls: pulumi.StringArray{
+//					pulumi.String("rtmp://xxx.com/live/stream"),
+//				},
+//				DomainName: pulumi.String("test.domain.com"),
+//				AppName:    pulumi.String("live"),
+//				StartTime:  pulumi.String("2023-09-27T10:28:21Z"),
+//				EndTime:    pulumi.String("2023-09-27T17:28:21Z"),
+//				Operator:   pulumi.String("tf_admin"),
+//				Comment:    pulumi.String("This is a e2e test case."),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			exampleWatermark, err := Css.NewWatermark(ctx, "exampleWatermark", &Css.WatermarkArgs{
+//				PictureUrl:    pulumi.String("picture_url"),
+//				WatermarkName: pulumi.String("watermark_name"),
+//				XPosition:     pulumi.Int(0),
+//				YPosition:     pulumi.Int(0),
+//				Width:         pulumi.Int(0),
+//				Height:        pulumi.Int(0),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_, err = Css.NewWatermarkRuleAttachment(ctx, "watermarkRuleAttachment", &Css.WatermarkRuleAttachmentArgs{
+//				DomainName: examplePullStreamTask.DomainName,
+//				AppName:    examplePullStreamTask.AppName,
+//				StreamName: examplePullStreamTask.StreamName,
+//				TemplateId: exampleWatermark.ID(),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // css watermark_rule_attachment can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Css/watermarkRuleAttachment:WatermarkRuleAttachment watermark_rule domain_name#app_name#stream_name#template_id
+// $ pulumi import tencentcloud:Css/watermarkRuleAttachment:WatermarkRuleAttachment watermark_rule domain_name#app_name#stream_name#template_id
 // ```
 type WatermarkRuleAttachment struct {
 	pulumi.CustomResourceState
@@ -110,7 +117,7 @@ func NewWatermarkRuleAttachment(ctx *pulumi.Context,
 	if args.TemplateId == nil {
 		return nil, errors.New("invalid value for required argument 'TemplateId'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource WatermarkRuleAttachment
 	err := ctx.RegisterResource("tencentcloud:Css/watermarkRuleAttachment:WatermarkRuleAttachment", name, args, &resource, opts...)
 	if err != nil {
@@ -215,7 +222,7 @@ func (i *WatermarkRuleAttachment) ToWatermarkRuleAttachmentOutputWithContext(ctx
 // WatermarkRuleAttachmentArrayInput is an input type that accepts WatermarkRuleAttachmentArray and WatermarkRuleAttachmentArrayOutput values.
 // You can construct a concrete instance of `WatermarkRuleAttachmentArrayInput` via:
 //
-//          WatermarkRuleAttachmentArray{ WatermarkRuleAttachmentArgs{...} }
+//	WatermarkRuleAttachmentArray{ WatermarkRuleAttachmentArgs{...} }
 type WatermarkRuleAttachmentArrayInput interface {
 	pulumi.Input
 
@@ -240,7 +247,7 @@ func (i WatermarkRuleAttachmentArray) ToWatermarkRuleAttachmentArrayOutputWithCo
 // WatermarkRuleAttachmentMapInput is an input type that accepts WatermarkRuleAttachmentMap and WatermarkRuleAttachmentMapOutput values.
 // You can construct a concrete instance of `WatermarkRuleAttachmentMapInput` via:
 //
-//          WatermarkRuleAttachmentMap{ "key": WatermarkRuleAttachmentArgs{...} }
+//	WatermarkRuleAttachmentMap{ "key": WatermarkRuleAttachmentArgs{...} }
 type WatermarkRuleAttachmentMapInput interface {
 	pulumi.Input
 

@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dts.Inputs
 {
 
-    public sealed class MigrateJobDstInfoInfoArgs : Pulumi.ResourceArgs
+    public sealed class MigrateJobDstInfoInfoArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Account.
@@ -67,11 +67,21 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dts.Inputs
         [Input("instanceId")]
         public Input<string>? InstanceId { get; set; }
 
+        [Input("password")]
+        private Input<string>? _password;
+
         /// <summary>
         /// Password.
         /// </summary>
-        [Input("password")]
-        public Input<string>? Password { get; set; }
+        public Input<string>? Password
+        {
+            get => _password;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _password = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
 
         /// <summary>
         /// Port.
@@ -136,5 +146,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dts.Inputs
         public MigrateJobDstInfoInfoArgs()
         {
         }
+        public static new MigrateJobDstInfoInfoArgs Empty => new MigrateJobDstInfoInfoArgs();
     }
 }

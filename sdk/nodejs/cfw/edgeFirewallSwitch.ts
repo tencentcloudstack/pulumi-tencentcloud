@@ -8,35 +8,41 @@ import * as utilities from "../utilities";
  * Provides a resource to create a cfw edgeFirewallSwitch
  *
  * ## Example Usage
+ *
  * ### If not set subnetId
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const exampleEdgeFwSwitches = tencentcloud.Cfw.getEdgeFwSwitches({});
  * const exampleEdgeFirewallSwitch = new tencentcloud.cfw.EdgeFirewallSwitch("exampleEdgeFirewallSwitch", {
- *     publicIp: exampleEdgeFwSwitches.then(exampleEdgeFwSwitches => exampleEdgeFwSwitches.datas?[0]?.publicIp),
+ *     publicIp: exampleEdgeFwSwitches.then(exampleEdgeFwSwitches => exampleEdgeFwSwitches.datas?.[0]?.publicIp),
  *     switchMode: 1,
  *     enable: 0,
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
+ *
  * ### If set subnet id
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const exampleEdgeFwSwitches = tencentcloud.Cfw.getEdgeFwSwitches({});
  * const exampleEdgeFirewallSwitch = new tencentcloud.cfw.EdgeFirewallSwitch("exampleEdgeFirewallSwitch", {
- *     publicIp: exampleEdgeFwSwitches.then(exampleEdgeFwSwitches => exampleEdgeFwSwitches.datas?[0]?.publicIp),
+ *     publicIp: exampleEdgeFwSwitches.then(exampleEdgeFwSwitches => exampleEdgeFwSwitches.datas?.[0]?.publicIp),
  *     subnetId: "subnet-id",
  *     switchMode: 1,
  *     enable: 1,
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export class EdgeFirewallSwitch extends pulumi.CustomResource {
     /**

@@ -9,15 +9,17 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const modifySwitchTimePeriodOperation = new tencentcloud.postgresql.ModifySwitchTimePeriodOperation("modifySwitchTimePeriodOperation", {
  *     dbInstanceId: local.pgsql_id,
  *     switchTag: 0,
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export class ModifySwitchTimePeriodOperation extends pulumi.CustomResource {
     /**

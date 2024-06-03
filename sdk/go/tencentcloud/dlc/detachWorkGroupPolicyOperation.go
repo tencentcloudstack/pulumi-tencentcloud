@@ -7,8 +7,9 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 type DetachWorkGroupPolicyOperation struct {
@@ -30,7 +31,7 @@ func NewDetachWorkGroupPolicyOperation(ctx *pulumi.Context,
 	if args.WorkGroupId == nil {
 		return nil, errors.New("invalid value for required argument 'WorkGroupId'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource DetachWorkGroupPolicyOperation
 	err := ctx.RegisterResource("tencentcloud:Dlc/detachWorkGroupPolicyOperation:DetachWorkGroupPolicyOperation", name, args, &resource, opts...)
 	if err != nil {
@@ -111,7 +112,7 @@ func (i *DetachWorkGroupPolicyOperation) ToDetachWorkGroupPolicyOperationOutputW
 // DetachWorkGroupPolicyOperationArrayInput is an input type that accepts DetachWorkGroupPolicyOperationArray and DetachWorkGroupPolicyOperationArrayOutput values.
 // You can construct a concrete instance of `DetachWorkGroupPolicyOperationArrayInput` via:
 //
-//          DetachWorkGroupPolicyOperationArray{ DetachWorkGroupPolicyOperationArgs{...} }
+//	DetachWorkGroupPolicyOperationArray{ DetachWorkGroupPolicyOperationArgs{...} }
 type DetachWorkGroupPolicyOperationArrayInput interface {
 	pulumi.Input
 
@@ -136,7 +137,7 @@ func (i DetachWorkGroupPolicyOperationArray) ToDetachWorkGroupPolicyOperationArr
 // DetachWorkGroupPolicyOperationMapInput is an input type that accepts DetachWorkGroupPolicyOperationMap and DetachWorkGroupPolicyOperationMapOutput values.
 // You can construct a concrete instance of `DetachWorkGroupPolicyOperationMapInput` via:
 //
-//          DetachWorkGroupPolicyOperationMap{ "key": DetachWorkGroupPolicyOperationArgs{...} }
+//	DetachWorkGroupPolicyOperationMap{ "key": DetachWorkGroupPolicyOperationArgs{...} }
 type DetachWorkGroupPolicyOperationMapInput interface {
 	pulumi.Input
 

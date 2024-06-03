@@ -15,58 +15,52 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cfw
         /// <summary>
         /// Use this data source to query detailed information of cfw edge_fw_switches
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
-        ///     {
-        ///         var example = Output.Create(Tencentcloud.Cfw.GetEdgeFwSwitches.InvokeAsync());
-        ///     }
+        ///     var example = Tencentcloud.Cfw.GetEdgeFwSwitches.Invoke();
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetEdgeFwSwitchesResult> InvokeAsync(GetEdgeFwSwitchesArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetEdgeFwSwitchesResult>("tencentcloud:Cfw/getEdgeFwSwitches:getEdgeFwSwitches", args ?? new GetEdgeFwSwitchesArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetEdgeFwSwitchesResult>("tencentcloud:Cfw/getEdgeFwSwitches:getEdgeFwSwitches", args ?? new GetEdgeFwSwitchesArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of cfw edge_fw_switches
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
-        ///     {
-        ///         var example = Output.Create(Tencentcloud.Cfw.GetEdgeFwSwitches.InvokeAsync());
-        ///     }
+        ///     var example = Tencentcloud.Cfw.GetEdgeFwSwitches.Invoke();
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetEdgeFwSwitchesResult> Invoke(GetEdgeFwSwitchesInvokeArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetEdgeFwSwitchesResult>("tencentcloud:Cfw/getEdgeFwSwitches:getEdgeFwSwitches", args ?? new GetEdgeFwSwitchesInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetEdgeFwSwitchesResult>("tencentcloud:Cfw/getEdgeFwSwitches:getEdgeFwSwitches", args ?? new GetEdgeFwSwitchesInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetEdgeFwSwitchesArgs : Pulumi.InvokeArgs
+    public sealed class GetEdgeFwSwitchesArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Used to save results.
@@ -77,9 +71,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cfw
         public GetEdgeFwSwitchesArgs()
         {
         }
+        public static new GetEdgeFwSwitchesArgs Empty => new GetEdgeFwSwitchesArgs();
     }
 
-    public sealed class GetEdgeFwSwitchesInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetEdgeFwSwitchesInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Used to save results.
@@ -90,6 +85,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cfw
         public GetEdgeFwSwitchesInvokeArgs()
         {
         }
+        public static new GetEdgeFwSwitchesInvokeArgs Empty => new GetEdgeFwSwitchesInvokeArgs();
     }
 
 

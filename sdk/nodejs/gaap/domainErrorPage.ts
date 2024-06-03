@@ -9,9 +9,10 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const fooProxy = new tencentcloud.gaap.Proxy("fooProxy", {
  *     bandwidth: 10,
@@ -38,6 +39,7 @@ import * as utilities from "../utilities";
  *     body: "bad request",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export class DomainErrorPage extends pulumi.CustomResource {
     /**

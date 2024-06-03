@@ -9,9 +9,10 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const exampleInstance = new tencentcloud.tdmq.Instance("exampleInstance", {
  *     clusterName: "tf_example",
@@ -48,13 +49,14 @@ import * as utilities from "../utilities";
  *     autoDeletePolicyTopic: true,
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * tdmq subscription can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Tdmq/subscription:Subscription example pulsar-q4k5898krpqj#tf_example#tf-example-topic#tf-example-subscription#true
+ * $ pulumi import tencentcloud:Tdmq/subscription:Subscription example pulsar-q4k5898krpqj#tf_example#tf-example-topic#tf-example-subscription#true
  * ```
  */
 export class Subscription extends pulumi.CustomResource {

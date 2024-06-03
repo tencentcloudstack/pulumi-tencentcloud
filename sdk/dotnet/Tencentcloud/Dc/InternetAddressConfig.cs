@@ -15,40 +15,42 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dc
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var internetAddress = new Tencentcloud.Dc.InternetAddress("internetAddress", new()
     ///     {
-    ///         var internetAddress = new Tencentcloud.Dc.InternetAddress("internetAddress", new Tencentcloud.Dc.InternetAddressArgs
-    ///         {
-    ///             MaskLen = 30,
-    ///             AddrType = 2,
-    ///             AddrProto = 0,
-    ///         });
-    ///         var internetAddressConfig = new Tencentcloud.Dc.InternetAddressConfig("internetAddressConfig", new Tencentcloud.Dc.InternetAddressConfigArgs
-    ///         {
-    ///             InstanceId = internetAddress.Id,
-    ///             Enable = false,
-    ///         });
-    ///     }
+    ///         MaskLen = 30,
+    ///         AddrType = 2,
+    ///         AddrProto = 0,
+    ///     });
     /// 
-    /// }
+    ///     var internetAddressConfig = new Tencentcloud.Dc.InternetAddressConfig("internetAddressConfig", new()
+    ///     {
+    ///         InstanceId = internetAddress.Id,
+    ///         Enable = false,
+    ///     });
+    /// 
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// dc internet_address_config can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Dc/internetAddressConfig:InternetAddressConfig internet_address_config internet_address_id
+    /// $ pulumi import tencentcloud:Dc/internetAddressConfig:InternetAddressConfig internet_address_config internet_address_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Dc/internetAddressConfig:InternetAddressConfig")]
-    public partial class InternetAddressConfig : Pulumi.CustomResource
+    public partial class InternetAddressConfig : global::Pulumi.CustomResource
     {
         /// <summary>
         /// whether enable internet address.
@@ -107,7 +109,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dc
         }
     }
 
-    public sealed class InternetAddressConfigArgs : Pulumi.ResourceArgs
+    public sealed class InternetAddressConfigArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// whether enable internet address.
@@ -124,9 +126,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dc
         public InternetAddressConfigArgs()
         {
         }
+        public static new InternetAddressConfigArgs Empty => new InternetAddressConfigArgs();
     }
 
-    public sealed class InternetAddressConfigState : Pulumi.ResourceArgs
+    public sealed class InternetAddressConfigState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// whether enable internet address.
@@ -143,5 +146,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dc
         public InternetAddressConfigState()
         {
         }
+        public static new InternetAddressConfigState Empty => new InternetAddressConfigState();
     }
 }

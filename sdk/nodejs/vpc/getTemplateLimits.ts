@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,20 +11,19 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const templateLimits = pulumi.output(tencentcloud.Vpc.getTemplateLimits());
+ * const templateLimits = tencentcloud.Vpc.getTemplateLimits({});
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getTemplateLimits(args?: GetTemplateLimitsArgs, opts?: pulumi.InvokeOptions): Promise<GetTemplateLimitsResult> {
     args = args || {};
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Vpc/getTemplateLimits:getTemplateLimits", {
         "resultOutputFile": args.resultOutputFile,
     }, opts);
@@ -53,9 +53,22 @@ export interface GetTemplateLimitsResult {
      */
     readonly templateLimits: outputs.Vpc.GetTemplateLimitsTemplateLimit[];
 }
-
+/**
+ * Use this data source to query detailed information of vpc templateLimits
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const templateLimits = tencentcloud.Vpc.getTemplateLimits({});
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getTemplateLimitsOutput(args?: GetTemplateLimitsOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetTemplateLimitsResult> {
-    return pulumi.output(args).apply(a => getTemplateLimits(a, opts))
+    return pulumi.output(args).apply((a: any) => getTemplateLimits(a, opts))
 }
 
 /**

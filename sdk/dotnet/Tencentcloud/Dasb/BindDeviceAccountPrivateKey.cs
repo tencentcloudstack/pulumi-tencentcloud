@@ -15,27 +15,41 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dasb
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var exampleDevice = new Tencentcloud.Dasb.Device("exampleDevice", new()
     ///     {
-    ///         var example = new Tencentcloud.Dasb.BindDeviceAccountPrivateKey("example", new Tencentcloud.Dasb.BindDeviceAccountPrivateKeyArgs
-    ///         {
-    ///             DeviceAccountId = 16,
-    ///             PrivateKey = "MIICXAIBAAKBgQCqGKukO1De7zhZj6+H0qtjTkVxwTCpvKe4eCZ0FPqri0cb2JZfXJ/DgYSF6vUpwmJG8wVQZKjeGcjDOL5UlsuusFncCzWBQ7RKNUSesmQRMSGkVb1/3j+skZ6UtW+5u09lHNsj6tQ51s1SPrCBkedbNf0Tp0GbMJDyR4e9T04ZZwIDAQABAoGAFijko56+qGyN8M0RVyaRAXz++xTqHBLh",
-    ///             PrivateKeyPassword = "TerraformPassword",
-    ///         });
-    ///     }
+    ///         OsName = "Linux",
+    ///         Ip = "192.168.0.1",
+    ///         Port = 80,
+    ///     });
     /// 
-    /// }
+    ///     var exampleDeviceAccount = new Tencentcloud.Dasb.DeviceAccount("exampleDeviceAccount", new()
+    ///     {
+    ///         DeviceId = exampleDevice.Id,
+    ///         Account = "root",
+    ///     });
+    /// 
+    ///     var exampleBindDeviceAccountPrivateKey = new Tencentcloud.Dasb.BindDeviceAccountPrivateKey("exampleBindDeviceAccountPrivateKey", new()
+    ///     {
+    ///         DeviceAccountId = exampleDeviceAccount.Id,
+    ///         PrivateKey = "MIICXAIBAAKBgQCqGKukO1De7zhZj6+H0qtjTkVxwTCpvKe4eCZ0FPqri0cb2JZfXJ/DgYSF6vUpwmJG8wVQZKjeGcjDOL5UlsuusFncCzWBQ7RKNUSesmQRMSGkVb1/3j+skZ6UtW+5u09lHNsj6tQ51s1SPrCBkedbNf0Tp0GbMJDyR4e9T04ZZwIDAQABAoGAFijko56+qGyN8M0RVyaRAXz++xTqHBLh",
+    ///         PrivateKeyPassword = "TerraformPassword",
+    ///     });
+    /// 
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Dasb/bindDeviceAccountPrivateKey:BindDeviceAccountPrivateKey")]
-    public partial class BindDeviceAccountPrivateKey : Pulumi.CustomResource
+    public partial class BindDeviceAccountPrivateKey : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Host account ID.
@@ -100,7 +114,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dasb
         }
     }
 
-    public sealed class BindDeviceAccountPrivateKeyArgs : Pulumi.ResourceArgs
+    public sealed class BindDeviceAccountPrivateKeyArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Host account ID.
@@ -123,9 +137,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dasb
         public BindDeviceAccountPrivateKeyArgs()
         {
         }
+        public static new BindDeviceAccountPrivateKeyArgs Empty => new BindDeviceAccountPrivateKeyArgs();
     }
 
-    public sealed class BindDeviceAccountPrivateKeyState : Pulumi.ResourceArgs
+    public sealed class BindDeviceAccountPrivateKeyState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Host account ID.
@@ -148,5 +163,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dasb
         public BindDeviceAccountPrivateKeyState()
         {
         }
+        public static new BindDeviceAccountPrivateKeyState Empty => new BindDeviceAccountPrivateKeyState();
     }
 }

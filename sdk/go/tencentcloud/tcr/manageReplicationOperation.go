@@ -7,13 +7,87 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to start a tcr instance replication operation
 //
 // ## Example Usage
+//
+// ### Sync source tcr instance to target instance
+//
+// Synchronize an existing tcr instance to the destination instance. This operation is often used in the cross-multiple region scenario.
+// Assume you have had two TCR instances before this operation. This example shows how to sync a tcr instance from ap-guangzhou(gz) to ap-shanghai(sh).
+//
+// <!--Start PulumiCodeChooser -->
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tcr"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			// tcr instance on ap-guangzhou
+//			exampleGzInstance, err := Tcr.NewInstance(ctx, "exampleGzInstance", &Tcr.InstanceArgs{
+//				InstanceType: pulumi.String("premium"),
+//				Tags: pulumi.Map{
+//					"createdBy": pulumi.Any("terraform"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_, err = Tcr.NewNamespace(ctx, "exampleGzNamespace", &Tcr.NamespaceArgs{
+//				InstanceId:   exampleGzInstance.ID(),
+//				IsPublic:     pulumi.Bool(true),
+//				IsAutoScan:   pulumi.Bool(true),
+//				IsPreventVul: pulumi.Bool(true),
+//				Severity:     pulumi.String("medium"),
+//				CveWhitelistItems: tcr.NamespaceCveWhitelistItemArray{
+//					&tcr.NamespaceCveWhitelistItemArgs{
+//						CveId: pulumi.String("cve-xxxxx"),
+//					},
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			// tcr instance on ap-shanghai
+//			exampleShInstance, err := Tcr.NewInstance(ctx, "exampleShInstance", &Tcr.InstanceArgs{
+//				InstanceType: pulumi.String("premium"),
+//				DeleteBucket: pulumi.Bool(true),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_, err = Tcr.NewNamespace(ctx, "exampleShNamespace", &Tcr.NamespaceArgs{
+//				InstanceId:   exampleShInstance.ID(),
+//				IsPublic:     pulumi.Bool(true),
+//				IsAutoScan:   pulumi.Bool(true),
+//				IsPreventVul: pulumi.Bool(true),
+//				Severity:     pulumi.String("medium"),
+//				CveWhitelistItems: tcr.NamespaceCveWhitelistItemArray{
+//					&tcr.NamespaceCveWhitelistItemArgs{
+//						CveId: pulumi.String("cve-xxxxx"),
+//					},
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
+// <!--End PulumiCodeChooser -->
 type ManageReplicationOperation struct {
 	pulumi.CustomResourceState
 
@@ -47,7 +121,7 @@ func NewManageReplicationOperation(ctx *pulumi.Context,
 	if args.SourceRegistryId == nil {
 		return nil, errors.New("invalid value for required argument 'SourceRegistryId'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource ManageReplicationOperation
 	err := ctx.RegisterResource("tencentcloud:Tcr/manageReplicationOperation:ManageReplicationOperation", name, args, &resource, opts...)
 	if err != nil {
@@ -160,7 +234,7 @@ func (i *ManageReplicationOperation) ToManageReplicationOperationOutputWithConte
 // ManageReplicationOperationArrayInput is an input type that accepts ManageReplicationOperationArray and ManageReplicationOperationArrayOutput values.
 // You can construct a concrete instance of `ManageReplicationOperationArrayInput` via:
 //
-//          ManageReplicationOperationArray{ ManageReplicationOperationArgs{...} }
+//	ManageReplicationOperationArray{ ManageReplicationOperationArgs{...} }
 type ManageReplicationOperationArrayInput interface {
 	pulumi.Input
 
@@ -185,7 +259,7 @@ func (i ManageReplicationOperationArray) ToManageReplicationOperationArrayOutput
 // ManageReplicationOperationMapInput is an input type that accepts ManageReplicationOperationMap and ManageReplicationOperationMapOutput values.
 // You can construct a concrete instance of `ManageReplicationOperationMapInput` via:
 //
-//          ManageReplicationOperationMap{ "key": ManageReplicationOperationArgs{...} }
+//	ManageReplicationOperationMap{ "key": ManageReplicationOperationArgs{...} }
 type ManageReplicationOperationMapInput interface {
 	pulumi.Input
 

@@ -11,8 +11,11 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Waf.Inputs
 {
 
-    public sealed class SaasDomainPortGetArgs : Pulumi.ResourceArgs
+    public sealed class SaasDomainPortGetArgs : global::Pulumi.ResourceArgs
     {
+        /// <summary>
+        /// Nginx server ID.
+        /// </summary>
         [Input("nginxServerId")]
         public Input<string>? NginxServerId { get; set; }
 
@@ -43,5 +46,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Waf.Inputs
         public SaasDomainPortGetArgs()
         {
         }
+        public static new SaasDomainPortGetArgs Empty => new SaasDomainPortGetArgs();
     }
 }

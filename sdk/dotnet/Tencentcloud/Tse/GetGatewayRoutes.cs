@@ -15,68 +15,62 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tse
         /// <summary>
         /// Use this data source to query detailed information of tse gateway_routes
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var gatewayRoutes = Tencentcloud.Tse.GetGatewayRoutes.Invoke(new()
         ///     {
-        ///         var gatewayRoutes = Output.Create(Tencentcloud.Tse.GetGatewayRoutes.InvokeAsync(new Tencentcloud.Tse.GetGatewayRoutesArgs
-        ///         {
-        ///             GatewayId = "gateway-ddbb709b",
-        ///             RouteName = "keep-routes",
-        ///             ServiceName = "test",
-        ///         }));
-        ///     }
+        ///         GatewayId = "gateway-ddbb709b",
+        ///         RouteName = "keep-routes",
+        ///         ServiceName = "test",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetGatewayRoutesResult> InvokeAsync(GetGatewayRoutesArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetGatewayRoutesResult>("tencentcloud:Tse/getGatewayRoutes:getGatewayRoutes", args ?? new GetGatewayRoutesArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetGatewayRoutesResult>("tencentcloud:Tse/getGatewayRoutes:getGatewayRoutes", args ?? new GetGatewayRoutesArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of tse gateway_routes
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var gatewayRoutes = Tencentcloud.Tse.GetGatewayRoutes.Invoke(new()
         ///     {
-        ///         var gatewayRoutes = Output.Create(Tencentcloud.Tse.GetGatewayRoutes.InvokeAsync(new Tencentcloud.Tse.GetGatewayRoutesArgs
-        ///         {
-        ///             GatewayId = "gateway-ddbb709b",
-        ///             RouteName = "keep-routes",
-        ///             ServiceName = "test",
-        ///         }));
-        ///     }
+        ///         GatewayId = "gateway-ddbb709b",
+        ///         RouteName = "keep-routes",
+        ///         ServiceName = "test",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetGatewayRoutesResult> Invoke(GetGatewayRoutesInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetGatewayRoutesResult>("tencentcloud:Tse/getGatewayRoutes:getGatewayRoutes", args ?? new GetGatewayRoutesInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetGatewayRoutesResult>("tencentcloud:Tse/getGatewayRoutes:getGatewayRoutes", args ?? new GetGatewayRoutesInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetGatewayRoutesArgs : Pulumi.InvokeArgs
+    public sealed class GetGatewayRoutesArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// gateway ID.
@@ -105,9 +99,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tse
         public GetGatewayRoutesArgs()
         {
         }
+        public static new GetGatewayRoutesArgs Empty => new GetGatewayRoutesArgs();
     }
 
-    public sealed class GetGatewayRoutesInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetGatewayRoutesInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// gateway ID.
@@ -136,6 +131,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tse
         public GetGatewayRoutesInvokeArgs()
         {
         }
+        public static new GetGatewayRoutesInvokeArgs Empty => new GetGatewayRoutesInvokeArgs();
     }
 
 

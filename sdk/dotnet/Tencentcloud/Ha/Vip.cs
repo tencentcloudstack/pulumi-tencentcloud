@@ -15,35 +15,36 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ha
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var foo = new Tencentcloud.Ha.Vip("foo", new()
     ///     {
-    ///         var foo = new Tencentcloud.Ha.Vip("foo", new Tencentcloud.Ha.VipArgs
-    ///         {
-    ///             SubnetId = "subnet-4d4m4cd4s",
-    ///             Vip = "10.0.4.16",
-    ///             VpcId = "vpc-gzea3dd7",
-    ///         });
-    ///     }
+    ///         SubnetId = "subnet-4d4m4cd4s",
+    ///         HaVip = "10.0.4.16",
+    ///         VpcId = "vpc-gzea3dd7",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// HA VIP can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Ha/vip:Vip foo havip-kjqwe4ba
+    /// $ pulumi import tencentcloud:Ha/vip:Vip foo havip-kjqwe4ba
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Ha/vip:Vip")]
-    public partial class Vip : Pulumi.CustomResource
+    public partial class Vip : global::Pulumi.CustomResource
     {
         /// <summary>
         /// EIP that is associated.
@@ -144,7 +145,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ha
         }
     }
 
-    public sealed class VipArgs : Pulumi.ResourceArgs
+    public sealed class VipArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Name of the HA VIP. The length of character is limited to 1-60.
@@ -173,9 +174,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ha
         public VipArgs()
         {
         }
+        public static new VipArgs Empty => new VipArgs();
     }
 
-    public sealed class VipState : Pulumi.ResourceArgs
+    public sealed class VipState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// EIP that is associated.
@@ -234,5 +236,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ha
         public VipState()
         {
         }
+        public static new VipState Empty => new VipState();
     }
 }

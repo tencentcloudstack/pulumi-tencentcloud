@@ -15,34 +15,35 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dlc
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var storeLocationConfig = new Tencentcloud.Dlc.StoreLocationConfig("storeLocationConfig", new()
     ///     {
-    ///         var storeLocationConfig = new Tencentcloud.Dlc.StoreLocationConfig("storeLocationConfig", new Tencentcloud.Dlc.StoreLocationConfigArgs
-    ///         {
-    ///             Enable = 1,
-    ///             StoreLocation = "cosn://bucketname/",
-    ///         });
-    ///     }
+    ///         Enable = 1,
+    ///         StoreLocation = "cosn://bucketname/",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// dlc store_location_config can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Dlc/storeLocationConfig:StoreLocationConfig store_location_config store_location_config_id
+    /// $ pulumi import tencentcloud:Dlc/storeLocationConfig:StoreLocationConfig store_location_config store_location_config_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Dlc/storeLocationConfig:StoreLocationConfig")]
-    public partial class StoreLocationConfig : Pulumi.CustomResource
+    public partial class StoreLocationConfig : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Whether to enable advanced settings: 0-no, 1-yes.
@@ -101,7 +102,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dlc
         }
     }
 
-    public sealed class StoreLocationConfigArgs : Pulumi.ResourceArgs
+    public sealed class StoreLocationConfigArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Whether to enable advanced settings: 0-no, 1-yes.
@@ -118,9 +119,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dlc
         public StoreLocationConfigArgs()
         {
         }
+        public static new StoreLocationConfigArgs Empty => new StoreLocationConfigArgs();
     }
 
-    public sealed class StoreLocationConfigState : Pulumi.ResourceArgs
+    public sealed class StoreLocationConfigState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Whether to enable advanced settings: 0-no, 1-yes.
@@ -137,5 +139,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dlc
         public StoreLocationConfigState()
         {
         }
+        public static new StoreLocationConfigState Empty => new StoreLocationConfigState();
     }
 }

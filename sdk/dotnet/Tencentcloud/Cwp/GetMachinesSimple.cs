@@ -15,290 +15,284 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cwp
         /// <summary>
         /// Use this data source to query detailed information of cwp machines_simple
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var example = Tencentcloud.Cwp.GetMachinesSimple.Invoke(new()
         ///     {
-        ///         var example = Output.Create(Tencentcloud.Cwp.GetMachinesSimple.InvokeAsync(new Tencentcloud.Cwp.GetMachinesSimpleArgs
+        ///         MachineRegion = "ap-guangzhou",
+        ///         MachineType = "CVM",
+        ///         ProjectIds = new[]
         ///         {
-        ///             MachineRegion = "ap-guangzhou",
-        ///             MachineType = "CVM",
-        ///             ProjectIds = 
-        ///             {
-        ///                 1210293,
-        ///                 1157652,
-        ///             },
-        ///         }));
-        ///     }
+        ///             1210293,
+        ///             1157652,
+        ///         },
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% example %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
+        /// 
         /// ### Query by Keyword filter
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var example = Tencentcloud.Cwp.GetMachinesSimple.Invoke(new()
         ///     {
-        ///         var example = Output.Create(Tencentcloud.Cwp.GetMachinesSimple.InvokeAsync(new Tencentcloud.Cwp.GetMachinesSimpleArgs
+        ///         Filters = new[]
         ///         {
-        ///             Filters = 
+        ///             new Tencentcloud.Cwp.Inputs.GetMachinesSimpleFilterInputArgs
         ///             {
-        ///                 new Tencentcloud.Cwp.Inputs.GetMachinesSimpleFilterArgs
+        ///                 ExactMatch = true,
+        ///                 Name = "Keywords",
+        ///                 Values = new[]
         ///                 {
-        ///                     ExactMatch = true,
-        ///                     Name = "Keywords",
-        ///                     Values = 
-        ///                     {
-        ///                         "tf_example",
-        ///                     },
+        ///                     "tf_example",
         ///                 },
         ///             },
-        ///             MachineRegion = "ap-guangzhou",
-        ///             MachineType = "CVM",
-        ///             ProjectIds = 
-        ///             {
-        ///                 0,
-        ///             },
-        ///         }));
-        ///     }
+        ///         },
+        ///         MachineRegion = "ap-guangzhou",
+        ///         MachineType = "CVM",
+        ///         ProjectIds = new[]
+        ///         {
+        ///             0,
+        ///         },
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% example %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
+        /// 
         /// ### Query by Version filter
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var example = Tencentcloud.Cwp.GetMachinesSimple.Invoke(new()
         ///     {
-        ///         var example = Output.Create(Tencentcloud.Cwp.GetMachinesSimple.InvokeAsync(new Tencentcloud.Cwp.GetMachinesSimpleArgs
+        ///         Filters = new[]
         ///         {
-        ///             Filters = 
+        ///             new Tencentcloud.Cwp.Inputs.GetMachinesSimpleFilterInputArgs
         ///             {
-        ///                 new Tencentcloud.Cwp.Inputs.GetMachinesSimpleFilterArgs
+        ///                 ExactMatch = true,
+        ///                 Name = "Version",
+        ///                 Values = new[]
         ///                 {
-        ///                     ExactMatch = true,
-        ///                     Name = "Version",
-        ///                     Values = 
-        ///                     {
-        ///                         "BASIC_VERSION",
-        ///                     },
+        ///                     "BASIC_VERSION",
         ///                 },
         ///             },
-        ///             MachineRegion = "ap-guangzhou",
-        ///             MachineType = "CVM",
-        ///             ProjectIds = 
-        ///             {
-        ///                 0,
-        ///             },
-        ///         }));
-        ///     }
+        ///         },
+        ///         MachineRegion = "ap-guangzhou",
+        ///         MachineType = "CVM",
+        ///         ProjectIds = new[]
+        ///         {
+        ///             0,
+        ///         },
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% example %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
+        /// 
         /// ### Query by TagId filter
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var example = Tencentcloud.Cwp.GetMachinesSimple.Invoke(new()
         ///     {
-        ///         var example = Output.Create(Tencentcloud.Cwp.GetMachinesSimple.InvokeAsync(new Tencentcloud.Cwp.GetMachinesSimpleArgs
+        ///         Filters = new[]
         ///         {
-        ///             Filters = 
+        ///             new Tencentcloud.Cwp.Inputs.GetMachinesSimpleFilterInputArgs
         ///             {
-        ///                 new Tencentcloud.Cwp.Inputs.GetMachinesSimpleFilterArgs
+        ///                 ExactMatch = true,
+        ///                 Name = "TagId",
+        ///                 Values = new[]
         ///                 {
-        ///                     ExactMatch = true,
-        ///                     Name = "TagId",
-        ///                     Values = 
-        ///                     {
-        ///                         "13771",
-        ///                     },
+        ///                     "13771",
         ///                 },
         ///             },
-        ///             MachineRegion = "all-regions",
-        ///             MachineType = "ALL",
-        ///         }));
-        ///     }
+        ///         },
+        ///         MachineRegion = "all-regions",
+        ///         MachineType = "ALL",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetMachinesSimpleResult> InvokeAsync(GetMachinesSimpleArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetMachinesSimpleResult>("tencentcloud:Cwp/getMachinesSimple:getMachinesSimple", args ?? new GetMachinesSimpleArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetMachinesSimpleResult>("tencentcloud:Cwp/getMachinesSimple:getMachinesSimple", args ?? new GetMachinesSimpleArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of cwp machines_simple
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var example = Tencentcloud.Cwp.GetMachinesSimple.Invoke(new()
         ///     {
-        ///         var example = Output.Create(Tencentcloud.Cwp.GetMachinesSimple.InvokeAsync(new Tencentcloud.Cwp.GetMachinesSimpleArgs
+        ///         MachineRegion = "ap-guangzhou",
+        ///         MachineType = "CVM",
+        ///         ProjectIds = new[]
         ///         {
-        ///             MachineRegion = "ap-guangzhou",
-        ///             MachineType = "CVM",
-        ///             ProjectIds = 
-        ///             {
-        ///                 1210293,
-        ///                 1157652,
-        ///             },
-        ///         }));
-        ///     }
+        ///             1210293,
+        ///             1157652,
+        ///         },
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% example %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
+        /// 
         /// ### Query by Keyword filter
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var example = Tencentcloud.Cwp.GetMachinesSimple.Invoke(new()
         ///     {
-        ///         var example = Output.Create(Tencentcloud.Cwp.GetMachinesSimple.InvokeAsync(new Tencentcloud.Cwp.GetMachinesSimpleArgs
+        ///         Filters = new[]
         ///         {
-        ///             Filters = 
+        ///             new Tencentcloud.Cwp.Inputs.GetMachinesSimpleFilterInputArgs
         ///             {
-        ///                 new Tencentcloud.Cwp.Inputs.GetMachinesSimpleFilterArgs
+        ///                 ExactMatch = true,
+        ///                 Name = "Keywords",
+        ///                 Values = new[]
         ///                 {
-        ///                     ExactMatch = true,
-        ///                     Name = "Keywords",
-        ///                     Values = 
-        ///                     {
-        ///                         "tf_example",
-        ///                     },
+        ///                     "tf_example",
         ///                 },
         ///             },
-        ///             MachineRegion = "ap-guangzhou",
-        ///             MachineType = "CVM",
-        ///             ProjectIds = 
-        ///             {
-        ///                 0,
-        ///             },
-        ///         }));
-        ///     }
+        ///         },
+        ///         MachineRegion = "ap-guangzhou",
+        ///         MachineType = "CVM",
+        ///         ProjectIds = new[]
+        ///         {
+        ///             0,
+        ///         },
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% example %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
+        /// 
         /// ### Query by Version filter
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var example = Tencentcloud.Cwp.GetMachinesSimple.Invoke(new()
         ///     {
-        ///         var example = Output.Create(Tencentcloud.Cwp.GetMachinesSimple.InvokeAsync(new Tencentcloud.Cwp.GetMachinesSimpleArgs
+        ///         Filters = new[]
         ///         {
-        ///             Filters = 
+        ///             new Tencentcloud.Cwp.Inputs.GetMachinesSimpleFilterInputArgs
         ///             {
-        ///                 new Tencentcloud.Cwp.Inputs.GetMachinesSimpleFilterArgs
+        ///                 ExactMatch = true,
+        ///                 Name = "Version",
+        ///                 Values = new[]
         ///                 {
-        ///                     ExactMatch = true,
-        ///                     Name = "Version",
-        ///                     Values = 
-        ///                     {
-        ///                         "BASIC_VERSION",
-        ///                     },
+        ///                     "BASIC_VERSION",
         ///                 },
         ///             },
-        ///             MachineRegion = "ap-guangzhou",
-        ///             MachineType = "CVM",
-        ///             ProjectIds = 
-        ///             {
-        ///                 0,
-        ///             },
-        ///         }));
-        ///     }
+        ///         },
+        ///         MachineRegion = "ap-guangzhou",
+        ///         MachineType = "CVM",
+        ///         ProjectIds = new[]
+        ///         {
+        ///             0,
+        ///         },
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% example %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
+        /// 
         /// ### Query by TagId filter
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var example = Tencentcloud.Cwp.GetMachinesSimple.Invoke(new()
         ///     {
-        ///         var example = Output.Create(Tencentcloud.Cwp.GetMachinesSimple.InvokeAsync(new Tencentcloud.Cwp.GetMachinesSimpleArgs
+        ///         Filters = new[]
         ///         {
-        ///             Filters = 
+        ///             new Tencentcloud.Cwp.Inputs.GetMachinesSimpleFilterInputArgs
         ///             {
-        ///                 new Tencentcloud.Cwp.Inputs.GetMachinesSimpleFilterArgs
+        ///                 ExactMatch = true,
+        ///                 Name = "TagId",
+        ///                 Values = new[]
         ///                 {
-        ///                     ExactMatch = true,
-        ///                     Name = "TagId",
-        ///                     Values = 
-        ///                     {
-        ///                         "13771",
-        ///                     },
+        ///                     "13771",
         ///                 },
         ///             },
-        ///             MachineRegion = "all-regions",
-        ///             MachineType = "ALL",
-        ///         }));
-        ///     }
+        ///         },
+        ///         MachineRegion = "all-regions",
+        ///         MachineType = "ALL",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetMachinesSimpleResult> Invoke(GetMachinesSimpleInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetMachinesSimpleResult>("tencentcloud:Cwp/getMachinesSimple:getMachinesSimple", args ?? new GetMachinesSimpleInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetMachinesSimpleResult>("tencentcloud:Cwp/getMachinesSimple:getMachinesSimple", args ?? new GetMachinesSimpleInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetMachinesSimpleArgs : Pulumi.InvokeArgs
+    public sealed class GetMachinesSimpleArgs : global::Pulumi.InvokeArgs
     {
         [Input("filters")]
         private List<Inputs.GetMachinesSimpleFilterArgs>? _filters;
@@ -345,9 +339,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cwp
         public GetMachinesSimpleArgs()
         {
         }
+        public static new GetMachinesSimpleArgs Empty => new GetMachinesSimpleArgs();
     }
 
-    public sealed class GetMachinesSimpleInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetMachinesSimpleInvokeArgs : global::Pulumi.InvokeArgs
     {
         [Input("filters")]
         private InputList<Inputs.GetMachinesSimpleFilterInputArgs>? _filters;
@@ -394,6 +389,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cwp
         public GetMachinesSimpleInvokeArgs()
         {
         }
+        public static new GetMachinesSimpleInvokeArgs Empty => new GetMachinesSimpleInvokeArgs();
     }
 
 

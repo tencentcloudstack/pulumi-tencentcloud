@@ -17,110 +17,113 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Pts
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var example = new Tencentcloud.Monitor.AlarmNotice("example", new()
     ///     {
-    ///         var example = new Tencentcloud.Monitor.AlarmNotice("example", new Tencentcloud.Monitor.AlarmNoticeArgs
+    ///         NoticeType = "ALL",
+    ///         NoticeLanguage = "zh-CN",
+    ///         UserNotices = new[]
     ///         {
-    ///             NoticeType = "ALL",
-    ///             NoticeLanguage = "zh-CN",
-    ///             UserNotices = 
+    ///             new Tencentcloud.Monitor.Inputs.AlarmNoticeUserNoticeArgs
     ///             {
-    ///                 new Tencentcloud.Monitor.Inputs.AlarmNoticeUserNoticeArgs
+    ///                 ReceiverType = "USER",
+    ///                 StartTime = 0,
+    ///                 EndTime = 1,
+    ///                 NoticeWays = new[]
     ///                 {
-    ///                     ReceiverType = "USER",
-    ///                     StartTime = 0,
-    ///                     EndTime = 1,
-    ///                     NoticeWays = 
-    ///                     {
-    ///                         "EMAIL",
-    ///                         "SMS",
-    ///                         "WECHAT",
-    ///                     },
-    ///                     UserIds = 
-    ///                     {
-    ///                         10001,
-    ///                     },
-    ///                     GroupIds = {},
-    ///                     PhoneOrders = 
-    ///                     {
-    ///                         10001,
-    ///                     },
-    ///                     PhoneCircleTimes = 2,
-    ///                     PhoneCircleInterval = 50,
-    ///                     PhoneInnerInterval = 60,
-    ///                     NeedPhoneArriveNotice = 1,
-    ///                     PhoneCallType = "CIRCLE",
-    ///                     Weekdays = 
-    ///                     {
-    ///                         1,
-    ///                         2,
-    ///                         3,
-    ///                         4,
-    ///                         5,
-    ///                         6,
-    ///                         7,
-    ///                     },
+    ///                     "EMAIL",
+    ///                     "SMS",
+    ///                     "WECHAT",
+    ///                 },
+    ///                 UserIds = new[]
+    ///                 {
+    ///                     10001,
+    ///                 },
+    ///                 GroupIds = new() { },
+    ///                 PhoneOrders = new[]
+    ///                 {
+    ///                     10001,
+    ///                 },
+    ///                 PhoneCircleTimes = 2,
+    ///                 PhoneCircleInterval = 50,
+    ///                 PhoneInnerInterval = 60,
+    ///                 NeedPhoneArriveNotice = 1,
+    ///                 PhoneCallType = "CIRCLE",
+    ///                 Weekdays = new[]
+    ///                 {
+    ///                     1,
+    ///                     2,
+    ///                     3,
+    ///                     4,
+    ///                     5,
+    ///                     6,
+    ///                     7,
     ///                 },
     ///             },
-    ///             UrlNotices = 
+    ///         },
+    ///         UrlNotices = new[]
+    ///         {
+    ///             new Tencentcloud.Monitor.Inputs.AlarmNoticeUrlNoticeArgs
     ///             {
-    ///                 new Tencentcloud.Monitor.Inputs.AlarmNoticeUrlNoticeArgs
+    ///                 Url = "https://www.mytest.com/validate",
+    ///                 EndTime = 0,
+    ///                 StartTime = 1,
+    ///                 Weekdays = new[]
     ///                 {
-    ///                     Url = "https://www.mytest.com/validate",
-    ///                     EndTime = 0,
-    ///                     StartTime = 1,
-    ///                     Weekdays = 
-    ///                     {
-    ///                         1,
-    ///                         2,
-    ///                         3,
-    ///                         4,
-    ///                         5,
-    ///                         6,
-    ///                         7,
-    ///                     },
+    ///                     1,
+    ///                     2,
+    ///                     3,
+    ///                     4,
+    ///                     5,
+    ///                     6,
+    ///                     7,
     ///                 },
     ///             },
-    ///         });
-    ///         var project = new Tencentcloud.Pts.Project("project", new Tencentcloud.Pts.ProjectArgs
-    ///         {
-    ///             Description = "desc",
-    ///             Tags = 
-    ///             {
-    ///                 new Tencentcloud.Pts.Inputs.ProjectTagArgs
-    ///                 {
-    ///                     TagKey = "createdBy",
-    ///                     TagValue = "terraform",
-    ///                 },
-    ///             },
-    ///         });
-    ///         var alertChannel = new Tencentcloud.Pts.AlertChannel("alertChannel", new Tencentcloud.Pts.AlertChannelArgs
-    ///         {
-    ///             NoticeId = example.Id,
-    ///             ProjectId = project.Id,
-    ///             AmpConsumerId = "Consumer-vvy1xxxxxx",
-    ///         });
-    ///     }
+    ///         },
+    ///     });
     /// 
-    /// }
+    ///     var project = new Tencentcloud.Pts.Project("project", new()
+    ///     {
+    ///         Description = "desc",
+    ///         Tags = new[]
+    ///         {
+    ///             new Tencentcloud.Pts.Inputs.ProjectTagArgs
+    ///             {
+    ///                 TagKey = "createdBy",
+    ///                 TagValue = "terraform",
+    ///             },
+    ///         },
+    ///     });
+    /// 
+    ///     var alertChannel = new Tencentcloud.Pts.AlertChannel("alertChannel", new()
+    ///     {
+    ///         NoticeId = example.Id,
+    ///         ProjectId = project.Id,
+    ///         AmpConsumerId = "Consumer-vvy1xxxxxx",
+    ///     });
+    /// 
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// pts alert_channel can be imported using the project_id#notice_id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Pts/alertChannel:AlertChannel alert_channel project-kww5v8se#notice-kl66t6y9
+    /// $ pulumi import tencentcloud:Pts/alertChannel:AlertChannel alert_channel project-kww5v8se#notice-kl66t6y9
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Pts/alertChannel:AlertChannel")]
-    public partial class AlertChannel : Pulumi.CustomResource
+    public partial class AlertChannel : global::Pulumi.CustomResource
     {
         /// <summary>
         /// AMP Consumer ID.
@@ -221,7 +224,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Pts
         }
     }
 
-    public sealed class AlertChannelArgs : Pulumi.ResourceArgs
+    public sealed class AlertChannelArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// AMP Consumer ID.
@@ -244,9 +247,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Pts
         public AlertChannelArgs()
         {
         }
+        public static new AlertChannelArgs Empty => new AlertChannelArgs();
     }
 
-    public sealed class AlertChannelState : Pulumi.ResourceArgs
+    public sealed class AlertChannelState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// AMP Consumer ID.
@@ -305,5 +309,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Pts
         public AlertChannelState()
         {
         }
+        public static new AlertChannelState Empty => new AlertChannelState();
     }
 }

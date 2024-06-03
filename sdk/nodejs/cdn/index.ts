@@ -5,16 +5,31 @@ import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
 // Export members:
-export * from "./domain";
-export * from "./getDomainVerifier";
-export * from "./getDomains";
-export * from "./urlPurge";
-export * from "./urlPush";
+export { DomainArgs, DomainState } from "./domain";
+export type Domain = import("./domain").Domain;
+export const Domain: typeof import("./domain").Domain = null as any;
+utilities.lazyLoad(exports, ["Domain"], () => require("./domain"));
 
-// Import resources to register:
-import { Domain } from "./domain";
-import { UrlPurge } from "./urlPurge";
-import { UrlPush } from "./urlPush";
+export { GetDomainVerifierArgs, GetDomainVerifierResult, GetDomainVerifierOutputArgs } from "./getDomainVerifier";
+export const getDomainVerifier: typeof import("./getDomainVerifier").getDomainVerifier = null as any;
+export const getDomainVerifierOutput: typeof import("./getDomainVerifier").getDomainVerifierOutput = null as any;
+utilities.lazyLoad(exports, ["getDomainVerifier","getDomainVerifierOutput"], () => require("./getDomainVerifier"));
+
+export { GetDomainsArgs, GetDomainsResult, GetDomainsOutputArgs } from "./getDomains";
+export const getDomains: typeof import("./getDomains").getDomains = null as any;
+export const getDomainsOutput: typeof import("./getDomains").getDomainsOutput = null as any;
+utilities.lazyLoad(exports, ["getDomains","getDomainsOutput"], () => require("./getDomains"));
+
+export { UrlPurgeArgs, UrlPurgeState } from "./urlPurge";
+export type UrlPurge = import("./urlPurge").UrlPurge;
+export const UrlPurge: typeof import("./urlPurge").UrlPurge = null as any;
+utilities.lazyLoad(exports, ["UrlPurge"], () => require("./urlPurge"));
+
+export { UrlPushArgs, UrlPushState } from "./urlPush";
+export type UrlPush = import("./urlPush").UrlPush;
+export const UrlPush: typeof import("./urlPush").UrlPush = null as any;
+utilities.lazyLoad(exports, ["UrlPush"], () => require("./urlPush"));
+
 
 const _module = {
     version: utilities.getVersion(),

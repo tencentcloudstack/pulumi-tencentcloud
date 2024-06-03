@@ -7,36 +7,42 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a dayu DDoS policy attachment.
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dayu"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dayu"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Dayu.NewDdosPolicyAttachment(ctx, "dayuDdosPolicyAttachmentBasic", &Dayu.DdosPolicyAttachmentArgs{
-// 			ResourceType: pulumi.Any(tencentcloud_dayu_ddos_policy.Test_policy.Resource_type),
-// 			ResourceId:   pulumi.String("bgpip-00000294"),
-// 			PolicyId:     pulumi.Any(tencentcloud_dayu_ddos_policy.Test_policy.Policy_id),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Dayu.NewDdosPolicyAttachment(ctx, "dayuDdosPolicyAttachmentBasic", &Dayu.DdosPolicyAttachmentArgs{
+//				ResourceType: pulumi.Any(tencentcloud_dayu_ddos_policy.Test_policy.Resource_type),
+//				ResourceId:   pulumi.String("bgpip-00000294"),
+//				PolicyId:     pulumi.Any(tencentcloud_dayu_ddos_policy.Test_policy.Policy_id),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 type DdosPolicyAttachment struct {
 	pulumi.CustomResourceState
 
@@ -64,7 +70,7 @@ func NewDdosPolicyAttachment(ctx *pulumi.Context,
 	if args.ResourceType == nil {
 		return nil, errors.New("invalid value for required argument 'ResourceType'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource DdosPolicyAttachment
 	err := ctx.RegisterResource("tencentcloud:Dayu/ddosPolicyAttachment:DdosPolicyAttachment", name, args, &resource, opts...)
 	if err != nil {
@@ -153,7 +159,7 @@ func (i *DdosPolicyAttachment) ToDdosPolicyAttachmentOutputWithContext(ctx conte
 // DdosPolicyAttachmentArrayInput is an input type that accepts DdosPolicyAttachmentArray and DdosPolicyAttachmentArrayOutput values.
 // You can construct a concrete instance of `DdosPolicyAttachmentArrayInput` via:
 //
-//          DdosPolicyAttachmentArray{ DdosPolicyAttachmentArgs{...} }
+//	DdosPolicyAttachmentArray{ DdosPolicyAttachmentArgs{...} }
 type DdosPolicyAttachmentArrayInput interface {
 	pulumi.Input
 
@@ -178,7 +184,7 @@ func (i DdosPolicyAttachmentArray) ToDdosPolicyAttachmentArrayOutputWithContext(
 // DdosPolicyAttachmentMapInput is an input type that accepts DdosPolicyAttachmentMap and DdosPolicyAttachmentMapOutput values.
 // You can construct a concrete instance of `DdosPolicyAttachmentMapInput` via:
 //
-//          DdosPolicyAttachmentMap{ "key": DdosPolicyAttachmentArgs{...} }
+//	DdosPolicyAttachmentMap{ "key": DdosPolicyAttachmentArgs{...} }
 type DdosPolicyAttachmentMapInput interface {
 	pulumi.Input
 

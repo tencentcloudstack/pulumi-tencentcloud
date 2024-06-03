@@ -16,7 +16,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Redis
     /// ## Example Usage
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Redis/renewInstanceOperation:RenewInstanceOperation")]
-    public partial class RenewInstanceOperation : Pulumi.CustomResource
+    public partial class RenewInstanceOperation : global::Pulumi.CustomResource
     {
         /// <summary>
         /// The ID of instance.
@@ -81,7 +81,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Redis
         }
     }
 
-    public sealed class RenewInstanceOperationArgs : Pulumi.ResourceArgs
+    public sealed class RenewInstanceOperationArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// The ID of instance.
@@ -104,9 +104,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Redis
         public RenewInstanceOperationArgs()
         {
         }
+        public static new RenewInstanceOperationArgs Empty => new RenewInstanceOperationArgs();
     }
 
-    public sealed class RenewInstanceOperationState : Pulumi.ResourceArgs
+    public sealed class RenewInstanceOperationState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// The ID of instance.
@@ -129,5 +130,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Redis
         public RenewInstanceOperationState()
         {
         }
+        public static new RenewInstanceOperationState Empty => new RenewInstanceOperationState();
     }
 }

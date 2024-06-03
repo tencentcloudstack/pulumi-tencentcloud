@@ -9,24 +9,26 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const user = new tencentcloud.Dlc.User("user", {
+ * const user = new tencentcloud.dlc.User("user", {
  *     userAlias: "terraform-test",
  *     userDescription: "for terraform test",
  *     userId: "100027012454",
  *     userType: "COMMON",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * dlc user can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Dlc/user:User user user_id
+ * $ pulumi import tencentcloud:Dlc/user:User user user_id
  * ```
  */
 export class User extends pulumi.CustomResource {

@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,6 +11,7 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
@@ -20,13 +22,11 @@ import * as utilities from "../utilities";
  *     microserviceNameLists: ["provider-demo"],
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getMicroservice(args: GetMicroserviceArgs, opts?: pulumi.InvokeOptions): Promise<GetMicroserviceResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Tsf/getMicroservice:getMicroservice", {
         "microserviceIdLists": args.microserviceIdLists,
         "microserviceNameLists": args.microserviceNameLists,
@@ -83,9 +83,26 @@ export interface GetMicroserviceResult {
     readonly results: outputs.Tsf.GetMicroserviceResult[];
     readonly statuses?: string[];
 }
-
+/**
+ * Use this data source to query detailed information of tsf microservice
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const microservice = tencentcloud.Tsf.getMicroservice({
+ *     namespaceId: _var.namespace_id,
+ *     microserviceIdLists: ["ms-yq3jo6jd"],
+ *     microserviceNameLists: ["provider-demo"],
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getMicroserviceOutput(args: GetMicroserviceOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetMicroserviceResult> {
-    return pulumi.output(args).apply(a => getMicroservice(a, opts))
+    return pulumi.output(args).apply((a: any) => getMicroservice(a, opts))
 }
 
 /**

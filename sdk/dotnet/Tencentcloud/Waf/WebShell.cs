@@ -15,34 +15,35 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Waf
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var example = new Tencentcloud.Waf.WebShell("example", new()
     ///     {
-    ///         var example = new Tencentcloud.Waf.WebShell("example", new Tencentcloud.Waf.WebShellArgs
-    ///         {
-    ///             Domain = "demo.waf.com",
-    ///             Status = 0,
-    ///         });
-    ///     }
+    ///         Domain = "demo.waf.com",
+    ///         Status = 0,
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// waf web_shell can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Waf/webShell:WebShell example demo.waf.com
+    /// $ pulumi import tencentcloud:Waf/webShell:WebShell example demo.waf.com
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Waf/webShell:WebShell")]
-    public partial class WebShell : Pulumi.CustomResource
+    public partial class WebShell : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Domain.
@@ -101,7 +102,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Waf
         }
     }
 
-    public sealed class WebShellArgs : Pulumi.ResourceArgs
+    public sealed class WebShellArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Domain.
@@ -118,9 +119,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Waf
         public WebShellArgs()
         {
         }
+        public static new WebShellArgs Empty => new WebShellArgs();
     }
 
-    public sealed class WebShellState : Pulumi.ResourceArgs
+    public sealed class WebShellState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Domain.
@@ -137,5 +139,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Waf
         public WebShellState()
         {
         }
+        public static new WebShellState Empty => new WebShellState();
     }
 }

@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,20 +11,19 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const orgAuthNode = pulumi.output(tencentcloud.Organization.getOrgAuthNode());
+ * const orgAuthNode = tencentcloud.Organization.getOrgAuthNode({});
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getOrgAuthNode(args?: GetOrgAuthNodeArgs, opts?: pulumi.InvokeOptions): Promise<GetOrgAuthNodeResult> {
     args = args || {};
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Organization/getOrgAuthNode:getOrgAuthNode", {
         "authName": args.authName,
         "resultOutputFile": args.resultOutputFile,
@@ -62,9 +62,22 @@ export interface GetOrgAuthNodeResult {
     readonly items: outputs.Organization.GetOrgAuthNodeItem[];
     readonly resultOutputFile?: string;
 }
-
+/**
+ * Use this data source to query detailed information of organization orgAuthNode
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const orgAuthNode = tencentcloud.Organization.getOrgAuthNode({});
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getOrgAuthNodeOutput(args?: GetOrgAuthNodeOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetOrgAuthNodeResult> {
-    return pulumi.output(args).apply(a => getOrgAuthNode(a, opts))
+    return pulumi.output(args).apply((a: any) => getOrgAuthNode(a, opts))
 }
 
 /**

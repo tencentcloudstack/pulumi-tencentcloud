@@ -2,18 +2,16 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
  * Use this data source to query detailed information of tcmq subscribe
  */
 export function getSubscribe(args: GetSubscribeArgs, opts?: pulumi.InvokeOptions): Promise<GetSubscribeResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Tcmq/getSubscribe:getSubscribe", {
         "limit": args.limit,
         "offset": args.offset,
@@ -70,9 +68,11 @@ export interface GetSubscribeResult {
     readonly subscriptionName?: string;
     readonly topicName: string;
 }
-
+/**
+ * Use this data source to query detailed information of tcmq subscribe
+ */
 export function getSubscribeOutput(args: GetSubscribeOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetSubscribeResult> {
-    return pulumi.output(args).apply(a => getSubscribe(a, opts))
+    return pulumi.output(args).apply((a: any) => getSubscribe(a, opts))
 }
 
 /**

@@ -15,24 +15,23 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cfs
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
-    ///     {
-    ///         var signUpCfsService = new Tencentcloud.Cfs.SignUpCfsService("signUpCfsService", new Tencentcloud.Cfs.SignUpCfsServiceArgs
-    ///         {
-    ///         });
-    ///     }
+    ///     var signUpCfsService = new Tencentcloud.Cfs.SignUpCfsService("signUpCfsService");
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Cfs/signUpCfsService:SignUpCfsService")]
-    public partial class SignUpCfsService : Pulumi.CustomResource
+    public partial class SignUpCfsService : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Current status of the CFS service for this user. Valid values: creating (activating); created (activated).
@@ -85,14 +84,15 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cfs
         }
     }
 
-    public sealed class SignUpCfsServiceArgs : Pulumi.ResourceArgs
+    public sealed class SignUpCfsServiceArgs : global::Pulumi.ResourceArgs
     {
         public SignUpCfsServiceArgs()
         {
         }
+        public static new SignUpCfsServiceArgs Empty => new SignUpCfsServiceArgs();
     }
 
-    public sealed class SignUpCfsServiceState : Pulumi.ResourceArgs
+    public sealed class SignUpCfsServiceState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Current status of the CFS service for this user. Valid values: creating (activating); created (activated).
@@ -103,5 +103,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cfs
         public SignUpCfsServiceState()
         {
         }
+        public static new SignUpCfsServiceState Empty => new SignUpCfsServiceState();
     }
 }

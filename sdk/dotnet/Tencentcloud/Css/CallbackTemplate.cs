@@ -15,41 +15,42 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Css
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var callbackTemplate = new Tencentcloud.Css.CallbackTemplate("callbackTemplate", new()
     ///     {
-    ///         var callbackTemplate = new Tencentcloud.Css.CallbackTemplate("callbackTemplate", new Tencentcloud.Css.CallbackTemplateArgs
-    ///         {
-    ///             CallbackKey = "adasda131312",
-    ///             Description = "this is demo",
-    ///             PornCensorshipNotifyUrl = "http://www.yourdomain.com/api/notify?action=porn",
-    ///             PushExceptionNotifyUrl = "http://www.yourdomain.com/api/notify?action=pushException",
-    ///             RecordNotifyUrl = "http://www.yourdomain.com/api/notify?action=record",
-    ///             SnapshotNotifyUrl = "http://www.yourdomain.com/api/notify?action=snapshot",
-    ///             StreamBeginNotifyUrl = "http://www.yourdomain.com/api/notify?action=streamBegin",
-    ///             StreamEndNotifyUrl = "http://www.yourdomain.com/api/notify?action=streamEnd",
-    ///             TemplateName = "tf-test",
-    ///         });
-    ///     }
+    ///         CallbackKey = "adasda131312",
+    ///         Description = "this is demo",
+    ///         PornCensorshipNotifyUrl = "http://www.yourdomain.com/api/notify?action=porn",
+    ///         PushExceptionNotifyUrl = "http://www.yourdomain.com/api/notify?action=pushException",
+    ///         RecordNotifyUrl = "http://www.yourdomain.com/api/notify?action=record",
+    ///         SnapshotNotifyUrl = "http://www.yourdomain.com/api/notify?action=snapshot",
+    ///         StreamBeginNotifyUrl = "http://www.yourdomain.com/api/notify?action=streamBegin",
+    ///         StreamEndNotifyUrl = "http://www.yourdomain.com/api/notify?action=streamEnd",
+    ///         TemplateName = "tf-test",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// css callback_template can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Css/callbackTemplate:CallbackTemplate callback_template templateId
+    /// $ pulumi import tencentcloud:Css/callbackTemplate:CallbackTemplate callback_template templateId
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Css/callbackTemplate:CallbackTemplate")]
-    public partial class CallbackTemplate : Pulumi.CustomResource
+    public partial class CallbackTemplate : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Callback Key, public callback URL.
@@ -150,7 +151,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Css
         }
     }
 
-    public sealed class CallbackTemplateArgs : Pulumi.ResourceArgs
+    public sealed class CallbackTemplateArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Callback Key, public callback URL.
@@ -209,9 +210,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Css
         public CallbackTemplateArgs()
         {
         }
+        public static new CallbackTemplateArgs Empty => new CallbackTemplateArgs();
     }
 
-    public sealed class CallbackTemplateState : Pulumi.ResourceArgs
+    public sealed class CallbackTemplateState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Callback Key, public callback URL.
@@ -270,5 +272,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Css
         public CallbackTemplateState()
         {
         }
+        public static new CallbackTemplateState Empty => new CallbackTemplateState();
     }
 }

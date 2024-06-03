@@ -15,66 +15,60 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tat
         /// <summary>
         /// Use this data source to query detailed information of tat command
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var command = Tencentcloud.Tat.GetCommand.Invoke(new()
         ///     {
-        ///         var command = Output.Create(Tencentcloud.Tat.GetCommand.InvokeAsync(new Tencentcloud.Tat.GetCommandArgs
-        ///         {
-        ///             CommandType = "SHELL",
-        ///             CreatedBy = "TAT",
-        ///         }));
-        ///     }
+        ///         CommandType = "SHELL",
+        ///         CreatedBy = "TAT",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetCommandResult> InvokeAsync(GetCommandArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetCommandResult>("tencentcloud:Tat/getCommand:getCommand", args ?? new GetCommandArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetCommandResult>("tencentcloud:Tat/getCommand:getCommand", args ?? new GetCommandArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of tat command
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var command = Tencentcloud.Tat.GetCommand.Invoke(new()
         ///     {
-        ///         var command = Output.Create(Tencentcloud.Tat.GetCommand.InvokeAsync(new Tencentcloud.Tat.GetCommandArgs
-        ///         {
-        ///             CommandType = "SHELL",
-        ///             CreatedBy = "TAT",
-        ///         }));
-        ///     }
+        ///         CommandType = "SHELL",
+        ///         CreatedBy = "TAT",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetCommandResult> Invoke(GetCommandInvokeArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetCommandResult>("tencentcloud:Tat/getCommand:getCommand", args ?? new GetCommandInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetCommandResult>("tencentcloud:Tat/getCommand:getCommand", args ?? new GetCommandInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetCommandArgs : Pulumi.InvokeArgs
+    public sealed class GetCommandArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Command ID.
@@ -109,9 +103,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tat
         public GetCommandArgs()
         {
         }
+        public static new GetCommandArgs Empty => new GetCommandArgs();
     }
 
-    public sealed class GetCommandInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetCommandInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Command ID.
@@ -146,6 +141,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tat
         public GetCommandInvokeArgs()
         {
         }
+        public static new GetCommandInvokeArgs Empty => new GetCommandInvokeArgs();
     }
 
 

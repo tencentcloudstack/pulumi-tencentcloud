@@ -7,55 +7,61 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provide a resource to create a Mongodb sharding instance.
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Mongodb"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Mongodb"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Mongodb.NewShardingInstance(ctx, "mongodb", &Mongodb.ShardingInstanceArgs{
-// 			AvailableZone: pulumi.String("ap-guangzhou-3"),
-// 			EngineVersion: pulumi.String("MONGO_36_WT"),
-// 			InstanceName:  pulumi.String("mongodb"),
-// 			MachineType:   pulumi.String("HIO10G"),
-// 			Memory:        pulumi.Int(4),
-// 			MongosCpu:     pulumi.Int(1),
-// 			MongosMemory:  pulumi.Int(2),
-// 			MongosNodeNum: pulumi.Int(3),
-// 			NodesPerShard: pulumi.Int(3),
-// 			Password:      pulumi.String("password1234"),
-// 			ProjectId:     pulumi.Int(0),
-// 			ShardQuantity: pulumi.Int(2),
-// 			SubnetId:      pulumi.String("subnet-lk0svi3p"),
-// 			Volume:        pulumi.Int(100),
-// 			VpcId:         pulumi.String("vpc-mz3efvbw"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Mongodb.NewShardingInstance(ctx, "mongodb", &Mongodb.ShardingInstanceArgs{
+//				AvailableZone: pulumi.String("ap-guangzhou-3"),
+//				EngineVersion: pulumi.String("MONGO_36_WT"),
+//				InstanceName:  pulumi.String("mongodb"),
+//				MachineType:   pulumi.String("HIO10G"),
+//				Memory:        pulumi.Int(4),
+//				MongosCpu:     pulumi.Int(1),
+//				MongosMemory:  pulumi.Int(2),
+//				MongosNodeNum: pulumi.Int(3),
+//				NodesPerShard: pulumi.Int(3),
+//				Password:      pulumi.String("password1234"),
+//				ProjectId:     pulumi.Int(0),
+//				ShardQuantity: pulumi.Int(2),
+//				SubnetId:      pulumi.String("subnet-lk0svi3p"),
+//				Volume:        pulumi.Int(100),
+//				VpcId:         pulumi.String("vpc-mz3efvbw"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // Mongodb sharding instance can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Mongodb/shardingInstance:ShardingInstance mongodb cmgo-41s6jwy4
+// $ pulumi import tencentcloud:Mongodb/shardingInstance:ShardingInstance mongodb cmgo-41s6jwy4
 // ```
 type ShardingInstance struct {
 	pulumi.CustomResourceState
@@ -149,7 +155,14 @@ func NewShardingInstance(ctx *pulumi.Context,
 	if args.Volume == nil {
 		return nil, errors.New("invalid value for required argument 'Volume'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	if args.Password != nil {
+		args.Password = pulumi.ToSecret(args.Password).(pulumi.StringPtrInput)
+	}
+	secrets := pulumi.AdditionalSecretOutputs([]string{
+		"password",
+	})
+	opts = append(opts, secrets)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource ShardingInstance
 	err := ctx.RegisterResource("tencentcloud:Mongodb/shardingInstance:ShardingInstance", name, args, &resource, opts...)
 	if err != nil {
@@ -422,7 +435,7 @@ func (i *ShardingInstance) ToShardingInstanceOutputWithContext(ctx context.Conte
 // ShardingInstanceArrayInput is an input type that accepts ShardingInstanceArray and ShardingInstanceArrayOutput values.
 // You can construct a concrete instance of `ShardingInstanceArrayInput` via:
 //
-//          ShardingInstanceArray{ ShardingInstanceArgs{...} }
+//	ShardingInstanceArray{ ShardingInstanceArgs{...} }
 type ShardingInstanceArrayInput interface {
 	pulumi.Input
 
@@ -447,7 +460,7 @@ func (i ShardingInstanceArray) ToShardingInstanceArrayOutputWithContext(ctx cont
 // ShardingInstanceMapInput is an input type that accepts ShardingInstanceMap and ShardingInstanceMapOutput values.
 // You can construct a concrete instance of `ShardingInstanceMapInput` via:
 //
-//          ShardingInstanceMap{ "key": ShardingInstanceArgs{...} }
+//	ShardingInstanceMap{ "key": ShardingInstanceArgs{...} }
 type ShardingInstanceMapInput interface {
 	pulumi.Input
 

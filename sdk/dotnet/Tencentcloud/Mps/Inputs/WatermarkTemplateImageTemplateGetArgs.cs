@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps.Inputs
 {
 
-    public sealed class WatermarkTemplateImageTemplateGetArgs : Pulumi.ResourceArgs
+    public sealed class WatermarkTemplateImageTemplateGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// The height of the watermark. Support %, px two formats:When the string ends with %, it means that the watermark Height is the percentage size of the video height, such as 10% means that the Height is 10% of the video height.When the string ends with px, it means that the watermark Height unit is pixel, such as 100px means that the Height is 100 pixels. The value range is 0 or [8, 4096].Default value: 0px. Indicates that Height is scaled according to the aspect ratio of the original watermark image.
@@ -40,5 +40,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps.Inputs
         public WatermarkTemplateImageTemplateGetArgs()
         {
         }
+        public static new WatermarkTemplateImageTemplateGetArgs Empty => new WatermarkTemplateImageTemplateGetArgs();
     }
 }

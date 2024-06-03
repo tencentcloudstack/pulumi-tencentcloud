@@ -15,66 +15,60 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcr
         /// <summary>
         /// Use this data source to query detailed information of TCR namespaces.
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var name = Tencentcloud.Tcr.GetNamespaces.Invoke(new()
         ///     {
-        ///         var name = Output.Create(Tencentcloud.Tcr.GetNamespaces.InvokeAsync(new Tencentcloud.Tcr.GetNamespacesArgs
-        ///         {
-        ///             InstanceId = "cls-satg5125",
-        ///             NamespaceName = "test",
-        ///         }));
-        ///     }
+        ///         InstanceId = "cls-satg5125",
+        ///         NamespaceName = "test",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetNamespacesResult> InvokeAsync(GetNamespacesArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetNamespacesResult>("tencentcloud:Tcr/getNamespaces:getNamespaces", args ?? new GetNamespacesArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetNamespacesResult>("tencentcloud:Tcr/getNamespaces:getNamespaces", args ?? new GetNamespacesArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of TCR namespaces.
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var name = Tencentcloud.Tcr.GetNamespaces.Invoke(new()
         ///     {
-        ///         var name = Output.Create(Tencentcloud.Tcr.GetNamespaces.InvokeAsync(new Tencentcloud.Tcr.GetNamespacesArgs
-        ///         {
-        ///             InstanceId = "cls-satg5125",
-        ///             NamespaceName = "test",
-        ///         }));
-        ///     }
+        ///         InstanceId = "cls-satg5125",
+        ///         NamespaceName = "test",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetNamespacesResult> Invoke(GetNamespacesInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetNamespacesResult>("tencentcloud:Tcr/getNamespaces:getNamespaces", args ?? new GetNamespacesInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetNamespacesResult>("tencentcloud:Tcr/getNamespaces:getNamespaces", args ?? new GetNamespacesInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetNamespacesArgs : Pulumi.InvokeArgs
+    public sealed class GetNamespacesArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// ID of the instance that the namespace belongs to.
@@ -97,9 +91,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcr
         public GetNamespacesArgs()
         {
         }
+        public static new GetNamespacesArgs Empty => new GetNamespacesArgs();
     }
 
-    public sealed class GetNamespacesInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetNamespacesInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// ID of the instance that the namespace belongs to.
@@ -122,6 +117,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcr
         public GetNamespacesInvokeArgs()
         {
         }
+        public static new GetNamespacesInvokeArgs Empty => new GetNamespacesInvokeArgs();
     }
 
 

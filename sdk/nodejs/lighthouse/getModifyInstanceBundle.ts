@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,25 +11,24 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const modifyInstanceBundle = pulumi.output(tencentcloud.Lighthouse.getModifyInstanceBundle({
+ * const modifyInstanceBundle = tencentcloud.Lighthouse.getModifyInstanceBundle({
  *     filters: [{
  *         name: "bundle-id",
  *         values: ["bundle_gen_mc_med2_02"],
  *     }],
  *     instanceId: "lhins-xxxxxx",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getModifyInstanceBundle(args: GetModifyInstanceBundleArgs, opts?: pulumi.InvokeOptions): Promise<GetModifyInstanceBundleResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Lighthouse/getModifyInstanceBundle:getModifyInstanceBundle", {
         "filters": args.filters,
         "instanceId": args.instanceId,
@@ -75,9 +75,28 @@ export interface GetModifyInstanceBundleResult {
     readonly modifyBundleSets: outputs.Lighthouse.GetModifyInstanceBundleModifyBundleSet[];
     readonly resultOutputFile?: string;
 }
-
+/**
+ * Use this data source to query detailed information of lighthouse modifyInstanceBundle
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const modifyInstanceBundle = tencentcloud.Lighthouse.getModifyInstanceBundle({
+ *     filters: [{
+ *         name: "bundle-id",
+ *         values: ["bundle_gen_mc_med2_02"],
+ *     }],
+ *     instanceId: "lhins-xxxxxx",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getModifyInstanceBundleOutput(args: GetModifyInstanceBundleOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetModifyInstanceBundleResult> {
-    return pulumi.output(args).apply(a => getModifyInstanceBundle(a, opts))
+    return pulumi.output(args).apply((a: any) => getModifyInstanceBundle(a, opts))
 }
 
 /**

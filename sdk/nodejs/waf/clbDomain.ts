@@ -2,20 +2,23 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
  * Provides a resource to create a waf clbDomain
  *
  * ## Example Usage
+ *
  * ### Create a basic waf clb domain
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = new tencentcloud.Waf.ClbDomain("example", {
+ * const example = new tencentcloud.waf.ClbDomain("example", {
  *     albType: "clb",
  *     domain: "test.com",
  *     instanceId: "waf_2kxtlbky00b2v1fn",
@@ -35,13 +38,16 @@ import * as utilities from "../utilities";
  *     region: "gz",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
+ *
  * ### Create a complete waf clb domain
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = new tencentcloud.Waf.ClbDomain("example", {
+ * const example = new tencentcloud.waf.ClbDomain("example", {
  *     albType: "clb",
  *     apiSafeStatus: 1,
  *     botStatus: 1,
@@ -72,13 +78,16 @@ import * as utilities from "../utilities";
  *     status: 1,
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
+ *
  * ### Create a complete waf tsegw domain
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = new tencentcloud.Waf.ClbDomain("example", {
+ * const example = new tencentcloud.waf.ClbDomain("example", {
  *     albType: "tsegw",
  *     apiSafeStatus: 0,
  *     botStatus: 0,
@@ -91,13 +100,16 @@ import * as utilities from "../utilities";
  *     status: 1,
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
+ *
  * ### Create a complete waf apisix domain
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = new tencentcloud.Waf.ClbDomain("example", {
+ * const example = new tencentcloud.waf.ClbDomain("example", {
  *     albType: "apisix",
  *     apiSafeStatus: 0,
  *     botStatus: 0,
@@ -110,13 +122,14 @@ import * as utilities from "../utilities";
  *     status: 1,
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * waf clb_domain can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Waf/clbDomain:ClbDomain example waf_2kxtlbky00b2v1fn#test.com#waf-0FSehoRU
+ * $ pulumi import tencentcloud:Waf/clbDomain:ClbDomain example waf_2kxtlbky00b2v1fn#test.com#waf-0FSehoRU
  * ```
  */
 export class ClbDomain extends pulumi.CustomResource {

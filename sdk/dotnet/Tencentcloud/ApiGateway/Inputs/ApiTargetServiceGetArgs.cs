@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway.Inputs
 {
 
-    public sealed class ApiTargetServiceGetArgs : Pulumi.ResourceArgs
+    public sealed class ApiTargetServiceGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// docker ip.
@@ -46,5 +46,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway.Inputs
         public ApiTargetServiceGetArgs()
         {
         }
+        public static new ApiTargetServiceGetArgs Empty => new ApiTargetServiceGetArgs();
     }
 }

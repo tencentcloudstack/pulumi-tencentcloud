@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mariadb.Inputs
 {
 
-    public sealed class ParametersParamArgs : Pulumi.ResourceArgs
+    public sealed class ParametersParamArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// parameter name.
@@ -28,5 +28,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mariadb.Inputs
         public ParametersParamArgs()
         {
         }
+        public static new ParametersParamArgs Empty => new ParametersParamArgs();
     }
 }

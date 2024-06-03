@@ -15,74 +15,68 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dbbrain
         /// <summary>
         /// Use this data source to query detailed information of dbbrain slow_log_top_sqls
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var test = Tencentcloud.Dbbrain.GetSlowLogTopSqls.Invoke(new()
         ///     {
-        ///         var test = Output.Create(Tencentcloud.Dbbrain.GetSlowLogTopSqls.InvokeAsync(new Tencentcloud.Dbbrain.GetSlowLogTopSqlsArgs
-        ///         {
-        ///             EndTime = "%s",
-        ///             InstanceId = "%s",
-        ///             OrderBy = "ASC",
-        ///             Product = "mysql",
-        ///             SortBy = "QueryTimeMax",
-        ///             StartTime = "%s",
-        ///         }));
-        ///     }
+        ///         EndTime = "%s",
+        ///         InstanceId = "%s",
+        ///         OrderBy = "ASC",
+        ///         Product = "mysql",
+        ///         SortBy = "QueryTimeMax",
+        ///         StartTime = "%s",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetSlowLogTopSqlsResult> InvokeAsync(GetSlowLogTopSqlsArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetSlowLogTopSqlsResult>("tencentcloud:Dbbrain/getSlowLogTopSqls:getSlowLogTopSqls", args ?? new GetSlowLogTopSqlsArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetSlowLogTopSqlsResult>("tencentcloud:Dbbrain/getSlowLogTopSqls:getSlowLogTopSqls", args ?? new GetSlowLogTopSqlsArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of dbbrain slow_log_top_sqls
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var test = Tencentcloud.Dbbrain.GetSlowLogTopSqls.Invoke(new()
         ///     {
-        ///         var test = Output.Create(Tencentcloud.Dbbrain.GetSlowLogTopSqls.InvokeAsync(new Tencentcloud.Dbbrain.GetSlowLogTopSqlsArgs
-        ///         {
-        ///             EndTime = "%s",
-        ///             InstanceId = "%s",
-        ///             OrderBy = "ASC",
-        ///             Product = "mysql",
-        ///             SortBy = "QueryTimeMax",
-        ///             StartTime = "%s",
-        ///         }));
-        ///     }
+        ///         EndTime = "%s",
+        ///         InstanceId = "%s",
+        ///         OrderBy = "ASC",
+        ///         Product = "mysql",
+        ///         SortBy = "QueryTimeMax",
+        ///         StartTime = "%s",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetSlowLogTopSqlsResult> Invoke(GetSlowLogTopSqlsInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetSlowLogTopSqlsResult>("tencentcloud:Dbbrain/getSlowLogTopSqls:getSlowLogTopSqls", args ?? new GetSlowLogTopSqlsInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetSlowLogTopSqlsResult>("tencentcloud:Dbbrain/getSlowLogTopSqls:getSlowLogTopSqls", args ?? new GetSlowLogTopSqlsInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetSlowLogTopSqlsArgs : Pulumi.InvokeArgs
+    public sealed class GetSlowLogTopSqlsArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// The deadline, such as `2019-09-11 10:13:14`, the interval between the deadline and the start time is less than 7 days.
@@ -141,9 +135,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dbbrain
         public GetSlowLogTopSqlsArgs()
         {
         }
+        public static new GetSlowLogTopSqlsArgs Empty => new GetSlowLogTopSqlsArgs();
     }
 
-    public sealed class GetSlowLogTopSqlsInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetSlowLogTopSqlsInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// The deadline, such as `2019-09-11 10:13:14`, the interval between the deadline and the start time is less than 7 days.
@@ -202,6 +197,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dbbrain
         public GetSlowLogTopSqlsInvokeArgs()
         {
         }
+        public static new GetSlowLogTopSqlsInvokeArgs Empty => new GetSlowLogTopSqlsInvokeArgs();
     }
 
 

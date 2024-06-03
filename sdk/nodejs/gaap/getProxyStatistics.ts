@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,12 +11,13 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const proxyStatistics = pulumi.output(tencentcloud.Gaap.getProxyStatistics({
- *     endTime: "2023-10-09 23:59:59",
+ * const proxyStatistics = tencentcloud.Gaap.getProxyStatistics({
+ *     endTime: "2024-05-20 23:59:59",
  *     granularity: 300,
  *     metricNames: [
  *         "InBandwidth",
@@ -30,17 +32,15 @@ import * as utilities from "../utilities";
  *         "Latency",
  *         "PacketLoss",
  *     ],
- *     proxyId: "link-8lpyo88p",
- *     startTime: "2023-10-09 00:00:00",
- * }));
+ *     proxyId: "link-m9t4yho9",
+ *     startTime: "2024-05-20 00:00:00",
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getProxyStatistics(args: GetProxyStatisticsArgs, opts?: pulumi.InvokeOptions): Promise<GetProxyStatisticsResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Gaap/getProxyStatistics:getProxyStatistics", {
         "endTime": args.endTime,
         "granularity": args.granularity,
@@ -106,9 +106,40 @@ export interface GetProxyStatisticsResult {
      */
     readonly statisticsDatas: outputs.Gaap.GetProxyStatisticsStatisticsData[];
 }
-
+/**
+ * Use this data source to query detailed information of gaap proxy statistics
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const proxyStatistics = tencentcloud.Gaap.getProxyStatistics({
+ *     endTime: "2024-05-20 23:59:59",
+ *     granularity: 300,
+ *     metricNames: [
+ *         "InBandwidth",
+ *         "OutBandwidth",
+ *         "InFlow",
+ *         "OutFlow",
+ *         "InPackets",
+ *         "OutPackets",
+ *         "Concurrent",
+ *         "HttpQPS",
+ *         "HttpsQPS",
+ *         "Latency",
+ *         "PacketLoss",
+ *     ],
+ *     proxyId: "link-m9t4yho9",
+ *     startTime: "2024-05-20 00:00:00",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getProxyStatisticsOutput(args: GetProxyStatisticsOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetProxyStatisticsResult> {
-    return pulumi.output(args).apply(a => getProxyStatistics(a, opts))
+    return pulumi.output(args).apply((a: any) => getProxyStatistics(a, opts))
 }
 
 /**

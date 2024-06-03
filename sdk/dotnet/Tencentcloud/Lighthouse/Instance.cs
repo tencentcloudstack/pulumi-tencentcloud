@@ -15,127 +15,129 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Lighthouse
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var firewallTemplate = new Tencentcloud.Lighthouse.FirewallTemplate("firewallTemplate", new()
     ///     {
-    ///         var firewallTemplate = new Tencentcloud.Lighthouse.FirewallTemplate("firewallTemplate", new Tencentcloud.Lighthouse.FirewallTemplateArgs
-    ///         {
-    ///             TemplateName = "empty-template",
-    ///         });
-    ///         var lighthouse = new Tencentcloud.Lighthouse.Instance("lighthouse", new Tencentcloud.Lighthouse.InstanceArgs
-    ///         {
-    ///             BundleId = "bundle2022_gen_01",
-    ///             BlueprintId = "lhbp-f1lkcd41",
-    ///             Period = 1,
-    ///             RenewFlag = "NOTIFY_AND_AUTO_RENEW",
-    ///             InstanceName = "hello world",
-    ///             Zone = "ap-guangzhou-3",
-    ///             Containers = 
-    ///             {
-    ///                 new Tencentcloud.Lighthouse.Inputs.InstanceContainerArgs
-    ///                 {
-    ///                     ContainerImage = "ccr.ccs.tencentyun.com/qcloud/nginx",
-    ///                     ContainerName = "nginx",
-    ///                     Envs = 
-    ///                     {
-    ///                         new Tencentcloud.Lighthouse.Inputs.InstanceContainerEnvArgs
-    ///                         {
-    ///                             Key = "key",
-    ///                             Value = "value",
-    ///                         },
-    ///                         new Tencentcloud.Lighthouse.Inputs.InstanceContainerEnvArgs
-    ///                         {
-    ///                             Key = "key2",
-    ///                             Value = "value2",
-    ///                         },
-    ///                     },
-    ///                     PublishPorts = 
-    ///                     {
-    ///                         new Tencentcloud.Lighthouse.Inputs.InstanceContainerPublishPortArgs
-    ///                         {
-    ///                             HostPort = 80,
-    ///                             ContainerPort = 80,
-    ///                             Ip = "127.0.0.1",
-    ///                             Protocol = "tcp",
-    ///                         },
-    ///                         new Tencentcloud.Lighthouse.Inputs.InstanceContainerPublishPortArgs
-    ///                         {
-    ///                             HostPort = 36000,
-    ///                             ContainerPort = 36000,
-    ///                             Ip = "127.0.0.1",
-    ///                             Protocol = "tcp",
-    ///                         },
-    ///                     },
-    ///                     Volumes = 
-    ///                     {
-    ///                         new Tencentcloud.Lighthouse.Inputs.InstanceContainerVolumeArgs
-    ///                         {
-    ///                             ContainerPath = "/data",
-    ///                             HostPath = "/tmp",
-    ///                         },
-    ///                         new Tencentcloud.Lighthouse.Inputs.InstanceContainerVolumeArgs
-    ///                         {
-    ///                             ContainerPath = "/var",
-    ///                             HostPath = "/tmp",
-    ///                         },
-    ///                     },
-    ///                     Command = "ls -l",
-    ///                 },
-    ///                 new Tencentcloud.Lighthouse.Inputs.InstanceContainerArgs
-    ///                 {
-    ///                     ContainerImage = "ccr.ccs.tencentyun.com/qcloud/resty",
-    ///                     ContainerName = "resty",
-    ///                     Envs = 
-    ///                     {
-    ///                         new Tencentcloud.Lighthouse.Inputs.InstanceContainerEnvArgs
-    ///                         {
-    ///                             Key = "key2",
-    ///                             Value = "value2",
-    ///                         },
-    ///                     },
-    ///                     PublishPorts = 
-    ///                     {
-    ///                         new Tencentcloud.Lighthouse.Inputs.InstanceContainerPublishPortArgs
-    ///                         {
-    ///                             HostPort = 80,
-    ///                             ContainerPort = 80,
-    ///                             Ip = "127.0.0.1",
-    ///                             Protocol = "udp",
-    ///                         },
-    ///                     },
-    ///                     Volumes = 
-    ///                     {
-    ///                         new Tencentcloud.Lighthouse.Inputs.InstanceContainerVolumeArgs
-    ///                         {
-    ///                             ContainerPath = "/var",
-    ///                             HostPath = "/tmp",
-    ///                         },
-    ///                     },
-    ///                     Command = "echo \"hello\"",
-    ///                 },
-    ///             },
-    ///             FirewallTemplateId = firewallTemplate.Id,
-    ///         });
-    ///     }
+    ///         TemplateName = "empty-template",
+    ///     });
     /// 
-    /// }
+    ///     var lighthouse = new Tencentcloud.Lighthouse.Instance("lighthouse", new()
+    ///     {
+    ///         BundleId = "bundle2022_gen_01",
+    ///         BlueprintId = "lhbp-f1lkcd41",
+    ///         Period = 1,
+    ///         RenewFlag = "NOTIFY_AND_AUTO_RENEW",
+    ///         InstanceName = "hello world",
+    ///         Zone = "ap-guangzhou-3",
+    ///         Containers = new[]
+    ///         {
+    ///             new Tencentcloud.Lighthouse.Inputs.InstanceContainerArgs
+    ///             {
+    ///                 ContainerImage = "ccr.ccs.tencentyun.com/qcloud/nginx",
+    ///                 ContainerName = "nginx",
+    ///                 Envs = new[]
+    ///                 {
+    ///                     new Tencentcloud.Lighthouse.Inputs.InstanceContainerEnvArgs
+    ///                     {
+    ///                         Key = "key",
+    ///                         Value = "value",
+    ///                     },
+    ///                     new Tencentcloud.Lighthouse.Inputs.InstanceContainerEnvArgs
+    ///                     {
+    ///                         Key = "key2",
+    ///                         Value = "value2",
+    ///                     },
+    ///                 },
+    ///                 PublishPorts = new[]
+    ///                 {
+    ///                     new Tencentcloud.Lighthouse.Inputs.InstanceContainerPublishPortArgs
+    ///                     {
+    ///                         HostPort = 80,
+    ///                         ContainerPort = 80,
+    ///                         Ip = "127.0.0.1",
+    ///                         Protocol = "tcp",
+    ///                     },
+    ///                     new Tencentcloud.Lighthouse.Inputs.InstanceContainerPublishPortArgs
+    ///                     {
+    ///                         HostPort = 36000,
+    ///                         ContainerPort = 36000,
+    ///                         Ip = "127.0.0.1",
+    ///                         Protocol = "tcp",
+    ///                     },
+    ///                 },
+    ///                 Volumes = new[]
+    ///                 {
+    ///                     new Tencentcloud.Lighthouse.Inputs.InstanceContainerVolumeArgs
+    ///                     {
+    ///                         ContainerPath = "/data",
+    ///                         HostPath = "/tmp",
+    ///                     },
+    ///                     new Tencentcloud.Lighthouse.Inputs.InstanceContainerVolumeArgs
+    ///                     {
+    ///                         ContainerPath = "/var",
+    ///                         HostPath = "/tmp",
+    ///                     },
+    ///                 },
+    ///                 Command = "ls -l",
+    ///             },
+    ///             new Tencentcloud.Lighthouse.Inputs.InstanceContainerArgs
+    ///             {
+    ///                 ContainerImage = "ccr.ccs.tencentyun.com/qcloud/resty",
+    ///                 ContainerName = "resty",
+    ///                 Envs = new[]
+    ///                 {
+    ///                     new Tencentcloud.Lighthouse.Inputs.InstanceContainerEnvArgs
+    ///                     {
+    ///                         Key = "key2",
+    ///                         Value = "value2",
+    ///                     },
+    ///                 },
+    ///                 PublishPorts = new[]
+    ///                 {
+    ///                     new Tencentcloud.Lighthouse.Inputs.InstanceContainerPublishPortArgs
+    ///                     {
+    ///                         HostPort = 80,
+    ///                         ContainerPort = 80,
+    ///                         Ip = "127.0.0.1",
+    ///                         Protocol = "udp",
+    ///                     },
+    ///                 },
+    ///                 Volumes = new[]
+    ///                 {
+    ///                     new Tencentcloud.Lighthouse.Inputs.InstanceContainerVolumeArgs
+    ///                     {
+    ///                         ContainerPath = "/var",
+    ///                         HostPath = "/tmp",
+    ///                     },
+    ///                 },
+    ///                 Command = "echo \"hello\"",
+    ///             },
+    ///         },
+    ///         FirewallTemplateId = firewallTemplate.Id,
+    ///     });
+    /// 
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// lighthouse instance can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Lighthouse/instance:Instance lighthouse lhins-xxxxxx
+    /// $ pulumi import tencentcloud:Lighthouse/instance:Instance lighthouse lhins-xxxxxx
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Lighthouse/instance:Instance")]
-    public partial class Instance : Pulumi.CustomResource
+    public partial class Instance : global::Pulumi.CustomResource
     {
         /// <summary>
         /// ID of the Lighthouse image.
@@ -201,13 +203,25 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Lighthouse
         /// Subscription period in months. Valid values: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36, 48, 60.
         /// </summary>
         [Output("period")]
-        public Output<int> Period { get; private set; } = null!;
+        public Output<int?> Period { get; private set; } = null!;
 
         /// <summary>
         /// It has been deprecated from version v1.81.8. Use `tencentcloud.Lighthouse.KeyPairAttachment` manage key pair. Whether to allow login using the default key pair. `YES`: allow login; `NO`: disable login. Default: `YES`.
         /// </summary>
         [Output("permitDefaultKeyPairLogin")]
         public Output<string> PermitDefaultKeyPairLogin { get; private set; } = null!;
+
+        /// <summary>
+        /// Private addresses.
+        /// </summary>
+        [Output("privateAddresses")]
+        public Output<ImmutableArray<string>> PrivateAddresses { get; private set; } = null!;
+
+        /// <summary>
+        /// Public addresses.
+        /// </summary>
+        [Output("publicAddresses")]
+        public Output<ImmutableArray<string>> PublicAddresses { get; private set; } = null!;
 
         /// <summary>
         /// Auto-Renewal flag. Valid values: NOTIFY_AND_AUTO_RENEW: notify upon expiration and renew automatically; NOTIFY_AND_MANUAL_RENEW: notify upon expiration but do not renew automatically. You need to manually renew DISABLE_NOTIFY_AND_AUTO_RENEW: neither notify upon expiration nor renew automatically. Default value: NOTIFY_AND_MANUAL_RENEW.
@@ -219,7 +233,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Lighthouse
         /// List of availability zones. A random AZ is selected by default.
         /// </summary>
         [Output("zone")]
-        public Output<string?> Zone { get; private set; } = null!;
+        public Output<string> Zone { get; private set; } = null!;
 
 
         /// <summary>
@@ -266,7 +280,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Lighthouse
         }
     }
 
-    public sealed class InstanceArgs : Pulumi.ResourceArgs
+    public sealed class InstanceArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// ID of the Lighthouse image.
@@ -337,8 +351,8 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Lighthouse
         /// <summary>
         /// Subscription period in months. Valid values: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36, 48, 60.
         /// </summary>
-        [Input("period", required: true)]
-        public Input<int> Period { get; set; } = null!;
+        [Input("period")]
+        public Input<int>? Period { get; set; }
 
         /// <summary>
         /// It has been deprecated from version v1.81.8. Use `tencentcloud.Lighthouse.KeyPairAttachment` manage key pair. Whether to allow login using the default key pair. `YES`: allow login; `NO`: disable login. Default: `YES`.
@@ -361,9 +375,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Lighthouse
         public InstanceArgs()
         {
         }
+        public static new InstanceArgs Empty => new InstanceArgs();
     }
 
-    public sealed class InstanceState : Pulumi.ResourceArgs
+    public sealed class InstanceState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// ID of the Lighthouse image.
@@ -443,6 +458,30 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Lighthouse
         [Input("permitDefaultKeyPairLogin")]
         public Input<string>? PermitDefaultKeyPairLogin { get; set; }
 
+        [Input("privateAddresses")]
+        private InputList<string>? _privateAddresses;
+
+        /// <summary>
+        /// Private addresses.
+        /// </summary>
+        public InputList<string> PrivateAddresses
+        {
+            get => _privateAddresses ?? (_privateAddresses = new InputList<string>());
+            set => _privateAddresses = value;
+        }
+
+        [Input("publicAddresses")]
+        private InputList<string>? _publicAddresses;
+
+        /// <summary>
+        /// Public addresses.
+        /// </summary>
+        public InputList<string> PublicAddresses
+        {
+            get => _publicAddresses ?? (_publicAddresses = new InputList<string>());
+            set => _publicAddresses = value;
+        }
+
         /// <summary>
         /// Auto-Renewal flag. Valid values: NOTIFY_AND_AUTO_RENEW: notify upon expiration and renew automatically; NOTIFY_AND_MANUAL_RENEW: notify upon expiration but do not renew automatically. You need to manually renew DISABLE_NOTIFY_AND_AUTO_RENEW: neither notify upon expiration nor renew automatically. Default value: NOTIFY_AND_MANUAL_RENEW.
         /// </summary>
@@ -458,5 +497,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Lighthouse
         public InstanceState()
         {
         }
+        public static new InstanceState Empty => new InstanceState();
     }
 }

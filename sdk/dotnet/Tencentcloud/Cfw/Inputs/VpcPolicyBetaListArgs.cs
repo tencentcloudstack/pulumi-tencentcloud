@@ -11,19 +11,29 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cfw.Inputs
 {
 
-    public sealed class VpcPolicyBetaListArgs : Pulumi.ResourceArgs
+    public sealed class VpcPolicyBetaListArgs : global::Pulumi.ResourceArgs
     {
+        /// <summary>
+        /// Last execution time. Note: This field may return null, indicating that no valid value can be obtained.
+        /// </summary>
         [Input("lastTime")]
         public Input<string>? LastTime { get; set; }
 
+        /// <summary>
+        /// Task id. Note: This field may return null, indicating that no valid value can be obtained.
+        /// </summary>
         [Input("taskId")]
         public Input<int>? TaskId { get; set; }
 
+        /// <summary>
+        /// Mission name. Note: This field may return null, indicating that no valid value can be obtained.
+        /// </summary>
         [Input("taskName")]
         public Input<string>? TaskName { get; set; }
 
         public VpcPolicyBetaListArgs()
         {
         }
+        public static new VpcPolicyBetaListArgs Empty => new VpcPolicyBetaListArgs();
     }
 }

@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,25 +11,24 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const errorLog = pulumi.output(tencentcloud.Mysql.getErrorLog({
+ * const errorLog = tencentcloud.Mysql.getErrorLog({
  *     endTime: 1686043908,
  *     instType: "slave",
  *     instanceId: "cdb-fitq5t9h",
  *     keyWords: ["Shutting"],
  *     startTime: 1683538307,
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getErrorLog(args: GetErrorLogArgs, opts?: pulumi.InvokeOptions): Promise<GetErrorLogResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Mysql/getErrorLog:getErrorLog", {
         "endTime": args.endTime,
         "instType": args.instType,
@@ -88,9 +88,28 @@ export interface GetErrorLogResult {
     readonly resultOutputFile?: string;
     readonly startTime: number;
 }
-
+/**
+ * Use this data source to query detailed information of mysql errorLog
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const errorLog = tencentcloud.Mysql.getErrorLog({
+ *     endTime: 1686043908,
+ *     instType: "slave",
+ *     instanceId: "cdb-fitq5t9h",
+ *     keyWords: ["Shutting"],
+ *     startTime: 1683538307,
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getErrorLogOutput(args: GetErrorLogOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetErrorLogResult> {
-    return pulumi.output(args).apply(a => getErrorLog(a, opts))
+    return pulumi.output(args).apply((a: any) => getErrorLog(a, opts))
 }
 
 /**

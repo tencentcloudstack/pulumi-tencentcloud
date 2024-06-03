@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,11 +11,12 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const foo = new tencentcloud.Cvm.LaunchTemplateVersion("foo", {
+ * const foo = new tencentcloud.cvm.LaunchTemplateVersion("foo", {
  *     disableApiTermination: false,
  *     imageId: "img-9qrfy1xt",
  *     instanceType: "S5.MEDIUM4",
@@ -26,13 +28,14 @@ import * as utilities from "../utilities";
  *     },
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * cvm launch_template_version can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Cvm/launchTemplateVersion:LaunchTemplateVersion launch_template_version ${launch_template_id}#${launch_template_version}
+ * $ pulumi import tencentcloud:Cvm/launchTemplateVersion:LaunchTemplateVersion launch_template_version ${launch_template_id}#${launch_template_version}
  * ```
  */
 export class LaunchTemplateVersion extends pulumi.CustomResource {

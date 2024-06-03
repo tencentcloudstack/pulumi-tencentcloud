@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdmq.Inputs
 {
 
-    public sealed class GetProInstancesFilterArgs : Pulumi.InvokeArgs
+    public sealed class GetProInstancesFilterArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// The name of the filter parameter.
@@ -34,5 +34,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdmq.Inputs
         public GetProInstancesFilterArgs()
         {
         }
+        public static new GetProInstancesFilterArgs Empty => new GetProInstancesFilterArgs();
     }
 }

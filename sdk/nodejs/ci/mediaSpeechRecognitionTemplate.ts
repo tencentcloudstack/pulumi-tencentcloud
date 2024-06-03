@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,11 +11,12 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const mediaSpeechRecognitionTemplate = new tencentcloud.Ci.MediaSpeechRecognitionTemplate("media_speech_recognition_template", {
+ * const mediaSpeechRecognitionTemplate = new tencentcloud.ci.MediaSpeechRecognitionTemplate("mediaSpeechRecognitionTemplate", {
  *     bucket: "terraform-ci-1308919341",
  *     speechRecognition: {
  *         channelNum: "1",
@@ -30,13 +32,14 @@ import * as utilities from "../utilities";
  *     },
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * ci media_speech_recognition_template can be imported using the bucket#templateId, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Ci/mediaSpeechRecognitionTemplate:MediaSpeechRecognitionTemplate media_speech_recognition_template terraform-ci-xxxxxx#t1d794430f2f1f4350b11e905ce2c6167e
+ * $ pulumi import tencentcloud:Ci/mediaSpeechRecognitionTemplate:MediaSpeechRecognitionTemplate media_speech_recognition_template terraform-ci-xxxxxx#t1d794430f2f1f4350b11e905ce2c6167e
  * ```
  */
 export class MediaSpeechRecognitionTemplate extends pulumi.CustomResource {

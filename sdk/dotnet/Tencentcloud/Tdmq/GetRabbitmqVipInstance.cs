@@ -13,14 +13,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdmq
     public static class GetRabbitmqVipInstance
     {
         public static Task<GetRabbitmqVipInstanceResult> InvokeAsync(GetRabbitmqVipInstanceArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetRabbitmqVipInstanceResult>("tencentcloud:Tdmq/getRabbitmqVipInstance:getRabbitmqVipInstance", args ?? new GetRabbitmqVipInstanceArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetRabbitmqVipInstanceResult>("tencentcloud:Tdmq/getRabbitmqVipInstance:getRabbitmqVipInstance", args ?? new GetRabbitmqVipInstanceArgs(), options.WithDefaults());
 
         public static Output<GetRabbitmqVipInstanceResult> Invoke(GetRabbitmqVipInstanceInvokeArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetRabbitmqVipInstanceResult>("tencentcloud:Tdmq/getRabbitmqVipInstance:getRabbitmqVipInstance", args ?? new GetRabbitmqVipInstanceInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetRabbitmqVipInstanceResult>("tencentcloud:Tdmq/getRabbitmqVipInstance:getRabbitmqVipInstance", args ?? new GetRabbitmqVipInstanceInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetRabbitmqVipInstanceArgs : Pulumi.InvokeArgs
+    public sealed class GetRabbitmqVipInstanceArgs : global::Pulumi.InvokeArgs
     {
         [Input("filters")]
         private List<Inputs.GetRabbitmqVipInstanceFilterArgs>? _filters;
@@ -36,9 +36,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdmq
         public GetRabbitmqVipInstanceArgs()
         {
         }
+        public static new GetRabbitmqVipInstanceArgs Empty => new GetRabbitmqVipInstanceArgs();
     }
 
-    public sealed class GetRabbitmqVipInstanceInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetRabbitmqVipInstanceInvokeArgs : global::Pulumi.InvokeArgs
     {
         [Input("filters")]
         private InputList<Inputs.GetRabbitmqVipInstanceFilterInputArgs>? _filters;
@@ -54,6 +55,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdmq
         public GetRabbitmqVipInstanceInvokeArgs()
         {
         }
+        public static new GetRabbitmqVipInstanceInvokeArgs Empty => new GetRabbitmqVipInstanceInvokeArgs();
     }
 
 

@@ -15,69 +15,73 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdmq
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var exampleInstance = new Tencentcloud.Tdmq.Instance("exampleInstance", new()
     ///     {
-    ///         var exampleInstance = new Tencentcloud.Tdmq.Instance("exampleInstance", new Tencentcloud.Tdmq.InstanceArgs
+    ///         ClusterName = "tf_example",
+    ///         Remark = "remark.",
+    ///         Tags = 
     ///         {
-    ///             ClusterName = "tf_example",
-    ///             Remark = "remark.",
-    ///             Tags = 
-    ///             {
-    ///                 { "createdBy", "terraform" },
-    ///             },
-    ///         });
-    ///         var exampleNamespace = new Tencentcloud.Tdmq.Namespace("exampleNamespace", new Tencentcloud.Tdmq.NamespaceArgs
-    ///         {
-    ///             EnvironName = "tf_example",
-    ///             MsgTtl = 300,
-    ///             ClusterId = exampleInstance.Id,
-    ///             RetentionPolicy = new Tencentcloud.Tdmq.Inputs.NamespaceRetentionPolicyArgs
-    ///             {
-    ///                 TimeInMinutes = 60,
-    ///                 SizeInMb = 10,
-    ///             },
-    ///             Remark = "remark.",
-    ///         });
-    ///         var exampleTopic = new Tencentcloud.Tdmq.Topic("exampleTopic", new Tencentcloud.Tdmq.TopicArgs
-    ///         {
-    ///             ClusterId = exampleInstance.Id,
-    ///             EnvironId = exampleNamespace.EnvironName,
-    ///             TopicName = "tf-example-topic",
-    ///             Partitions = 1,
-    ///             PulsarTopicType = 3,
-    ///             Remark = "remark.",
-    ///         });
-    ///         var exampleSubscription = new Tencentcloud.Tdmq.Subscription("exampleSubscription", new Tencentcloud.Tdmq.SubscriptionArgs
-    ///         {
-    ///             ClusterId = exampleInstance.Id,
-    ///             EnvironmentId = exampleNamespace.EnvironName,
-    ///             TopicName = exampleTopic.TopicName,
-    ///             SubscriptionName = "tf-example-subscription",
-    ///             Remark = "remark.",
-    ///             AutoCreatePolicyTopic = true,
-    ///             AutoDeletePolicyTopic = true,
-    ///         });
-    ///     }
+    ///             { "createdBy", "terraform" },
+    ///         },
+    ///     });
     /// 
-    /// }
+    ///     var exampleNamespace = new Tencentcloud.Tdmq.Namespace("exampleNamespace", new()
+    ///     {
+    ///         EnvironName = "tf_example",
+    ///         MsgTtl = 300,
+    ///         ClusterId = exampleInstance.Id,
+    ///         RetentionPolicy = new Tencentcloud.Tdmq.Inputs.NamespaceRetentionPolicyArgs
+    ///         {
+    ///             TimeInMinutes = 60,
+    ///             SizeInMb = 10,
+    ///         },
+    ///         Remark = "remark.",
+    ///     });
+    /// 
+    ///     var exampleTopic = new Tencentcloud.Tdmq.Topic("exampleTopic", new()
+    ///     {
+    ///         ClusterId = exampleInstance.Id,
+    ///         EnvironId = exampleNamespace.EnvironName,
+    ///         TopicName = "tf-example-topic",
+    ///         Partitions = 1,
+    ///         PulsarTopicType = 3,
+    ///         Remark = "remark.",
+    ///     });
+    /// 
+    ///     var exampleSubscription = new Tencentcloud.Tdmq.Subscription("exampleSubscription", new()
+    ///     {
+    ///         ClusterId = exampleInstance.Id,
+    ///         EnvironmentId = exampleNamespace.EnvironName,
+    ///         TopicName = exampleTopic.TopicName,
+    ///         SubscriptionName = "tf-example-subscription",
+    ///         Remark = "remark.",
+    ///         AutoCreatePolicyTopic = true,
+    ///         AutoDeletePolicyTopic = true,
+    ///     });
+    /// 
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// tdmq subscription can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Tdmq/subscription:Subscription example pulsar-q4k5898krpqj#tf_example#tf-example-topic#tf-example-subscription#true
+    /// $ pulumi import tencentcloud:Tdmq/subscription:Subscription example pulsar-q4k5898krpqj#tf_example#tf-example-topic#tf-example-subscription#true
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Tdmq/subscription:Subscription")]
-    public partial class Subscription : Pulumi.CustomResource
+    public partial class Subscription : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Whether to automatically create a dead letter topic and a retry letter topic. true: yes; false: no(default value).
@@ -166,7 +170,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdmq
         }
     }
 
-    public sealed class SubscriptionArgs : Pulumi.ResourceArgs
+    public sealed class SubscriptionArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Whether to automatically create a dead letter topic and a retry letter topic. true: yes; false: no(default value).
@@ -213,9 +217,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdmq
         public SubscriptionArgs()
         {
         }
+        public static new SubscriptionArgs Empty => new SubscriptionArgs();
     }
 
-    public sealed class SubscriptionState : Pulumi.ResourceArgs
+    public sealed class SubscriptionState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Whether to automatically create a dead letter topic and a retry letter topic. true: yes; false: no(default value).
@@ -262,5 +267,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdmq
         public SubscriptionState()
         {
         }
+        public static new SubscriptionState Empty => new SubscriptionState();
     }
 }

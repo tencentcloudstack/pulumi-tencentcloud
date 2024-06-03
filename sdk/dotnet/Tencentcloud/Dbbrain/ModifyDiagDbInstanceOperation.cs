@@ -15,60 +15,62 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dbbrain
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var @on = new Tencentcloud.Dbbrain.ModifyDiagDbInstanceOperation("on", new()
     ///     {
-    ///         var @on = new Tencentcloud.Dbbrain.ModifyDiagDbInstanceOperation("on", new Tencentcloud.Dbbrain.ModifyDiagDbInstanceOperationArgs
+    ///         InstanceConfs = new Tencentcloud.Dbbrain.Inputs.ModifyDiagDbInstanceOperationInstanceConfsArgs
     ///         {
-    ///             InstanceConfs = new Tencentcloud.Dbbrain.Inputs.ModifyDiagDbInstanceOperationInstanceConfsArgs
-    ///             {
-    ///                 DailyInspection = "Yes",
-    ///                 OverviewDisplay = "Yes",
-    ///             },
-    ///             InstanceIds = 
-    ///             {
-    ///                 "%s",
-    ///             },
-    ///             Product = "mysql",
-    ///         });
-    ///     }
+    ///             DailyInspection = "Yes",
+    ///             OverviewDisplay = "Yes",
+    ///         },
+    ///         InstanceIds = new[]
+    ///         {
+    ///             "%s",
+    ///         },
+    ///         Product = "mysql",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var off = new Tencentcloud.Dbbrain.ModifyDiagDbInstanceOperation("off", new()
     ///     {
-    ///         var off = new Tencentcloud.Dbbrain.ModifyDiagDbInstanceOperation("off", new Tencentcloud.Dbbrain.ModifyDiagDbInstanceOperationArgs
+    ///         InstanceConfs = new Tencentcloud.Dbbrain.Inputs.ModifyDiagDbInstanceOperationInstanceConfsArgs
     ///         {
-    ///             InstanceConfs = new Tencentcloud.Dbbrain.Inputs.ModifyDiagDbInstanceOperationInstanceConfsArgs
-    ///             {
-    ///                 DailyInspection = "No",
-    ///                 OverviewDisplay = "No",
-    ///             },
-    ///             InstanceIds = 
-    ///             {
-    ///                 "%s",
-    ///             },
-    ///             Product = "mysql",
-    ///         });
-    ///     }
+    ///             DailyInspection = "No",
+    ///             OverviewDisplay = "No",
+    ///         },
+    ///         InstanceIds = new[]
+    ///         {
+    ///             "%s",
+    ///         },
+    ///         Product = "mysql",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Dbbrain/modifyDiagDbInstanceOperation:ModifyDiagDbInstanceOperation")]
-    public partial class ModifyDiagDbInstanceOperation : Pulumi.CustomResource
+    public partial class ModifyDiagDbInstanceOperation : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Instance configuration, including inspection, overview switch, etc.
@@ -139,7 +141,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dbbrain
         }
     }
 
-    public sealed class ModifyDiagDbInstanceOperationArgs : Pulumi.ResourceArgs
+    public sealed class ModifyDiagDbInstanceOperationArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Instance configuration, including inspection, overview switch, etc.
@@ -174,9 +176,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dbbrain
         public ModifyDiagDbInstanceOperationArgs()
         {
         }
+        public static new ModifyDiagDbInstanceOperationArgs Empty => new ModifyDiagDbInstanceOperationArgs();
     }
 
-    public sealed class ModifyDiagDbInstanceOperationState : Pulumi.ResourceArgs
+    public sealed class ModifyDiagDbInstanceOperationState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Instance configuration, including inspection, overview switch, etc.
@@ -211,5 +214,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dbbrain
         public ModifyDiagDbInstanceOperationState()
         {
         }
+        public static new ModifyDiagDbInstanceOperationState Empty => new ModifyDiagDbInstanceOperationState();
     }
 }

@@ -5,24 +5,51 @@ import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
 // Export members:
-export * from "./datasource";
-export * from "./datasourceCloud";
-export * from "./embedIntervalApply";
-export * from "./embedTokenApply";
-export * from "./getProject";
-export * from "./getUserProject";
-export * from "./project";
-export * from "./projectUserRole";
-export * from "./userRole";
+export { DatasourceArgs, DatasourceState } from "./datasource";
+export type Datasource = import("./datasource").Datasource;
+export const Datasource: typeof import("./datasource").Datasource = null as any;
+utilities.lazyLoad(exports, ["Datasource"], () => require("./datasource"));
 
-// Import resources to register:
-import { Datasource } from "./datasource";
-import { DatasourceCloud } from "./datasourceCloud";
-import { EmbedIntervalApply } from "./embedIntervalApply";
-import { EmbedTokenApply } from "./embedTokenApply";
-import { Project } from "./project";
-import { ProjectUserRole } from "./projectUserRole";
-import { UserRole } from "./userRole";
+export { DatasourceCloudArgs, DatasourceCloudState } from "./datasourceCloud";
+export type DatasourceCloud = import("./datasourceCloud").DatasourceCloud;
+export const DatasourceCloud: typeof import("./datasourceCloud").DatasourceCloud = null as any;
+utilities.lazyLoad(exports, ["DatasourceCloud"], () => require("./datasourceCloud"));
+
+export { EmbedIntervalApplyArgs, EmbedIntervalApplyState } from "./embedIntervalApply";
+export type EmbedIntervalApply = import("./embedIntervalApply").EmbedIntervalApply;
+export const EmbedIntervalApply: typeof import("./embedIntervalApply").EmbedIntervalApply = null as any;
+utilities.lazyLoad(exports, ["EmbedIntervalApply"], () => require("./embedIntervalApply"));
+
+export { EmbedTokenApplyArgs, EmbedTokenApplyState } from "./embedTokenApply";
+export type EmbedTokenApply = import("./embedTokenApply").EmbedTokenApply;
+export const EmbedTokenApply: typeof import("./embedTokenApply").EmbedTokenApply = null as any;
+utilities.lazyLoad(exports, ["EmbedTokenApply"], () => require("./embedTokenApply"));
+
+export { GetProjectArgs, GetProjectResult, GetProjectOutputArgs } from "./getProject";
+export const getProject: typeof import("./getProject").getProject = null as any;
+export const getProjectOutput: typeof import("./getProject").getProjectOutput = null as any;
+utilities.lazyLoad(exports, ["getProject","getProjectOutput"], () => require("./getProject"));
+
+export { GetUserProjectArgs, GetUserProjectResult, GetUserProjectOutputArgs } from "./getUserProject";
+export const getUserProject: typeof import("./getUserProject").getUserProject = null as any;
+export const getUserProjectOutput: typeof import("./getUserProject").getUserProjectOutput = null as any;
+utilities.lazyLoad(exports, ["getUserProject","getUserProjectOutput"], () => require("./getUserProject"));
+
+export { ProjectArgs, ProjectState } from "./project";
+export type Project = import("./project").Project;
+export const Project: typeof import("./project").Project = null as any;
+utilities.lazyLoad(exports, ["Project"], () => require("./project"));
+
+export { ProjectUserRoleArgs, ProjectUserRoleState } from "./projectUserRole";
+export type ProjectUserRole = import("./projectUserRole").ProjectUserRole;
+export const ProjectUserRole: typeof import("./projectUserRole").ProjectUserRole = null as any;
+utilities.lazyLoad(exports, ["ProjectUserRole"], () => require("./projectUserRole"));
+
+export { UserRoleArgs, UserRoleState } from "./userRole";
+export type UserRole = import("./userRole").UserRole;
+export const UserRole: typeof import("./userRole").UserRole = null as any;
+utilities.lazyLoad(exports, ["UserRole"], () => require("./userRole"));
+
 
 const _module = {
     version: utilities.getVersion(),

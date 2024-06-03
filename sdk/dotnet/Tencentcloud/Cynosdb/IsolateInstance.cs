@@ -15,30 +15,31 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var account = new Tencentcloud.Cynosdb.Account("account", new()
     ///     {
-    ///         var account = new Tencentcloud.Cynosdb.Account("account", new Tencentcloud.Cynosdb.AccountArgs
-    ///         {
-    ///             AccountName = "terraform_test",
-    ///             AccountPassword = "Password@1234",
-    ///             ClusterId = "cynosdbmysql-bws8h88b",
-    ///             Description = "testx",
-    ///             Host = "%",
-    ///             MaxUserConnections = 2,
-    ///         });
-    ///     }
+    ///         AccountName = "terraform_test",
+    ///         AccountPassword = "Password@1234",
+    ///         ClusterId = "cynosdbmysql-bws8h88b",
+    ///         Description = "testx",
+    ///         Host = "%",
+    ///         MaxUserConnections = 2,
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Cynosdb/isolateInstance:IsolateInstance")]
-    public partial class IsolateInstance : Pulumi.CustomResource
+    public partial class IsolateInstance : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Cluster ID.
@@ -103,7 +104,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
         }
     }
 
-    public sealed class IsolateInstanceArgs : Pulumi.ResourceArgs
+    public sealed class IsolateInstanceArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Cluster ID.
@@ -126,9 +127,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
         public IsolateInstanceArgs()
         {
         }
+        public static new IsolateInstanceArgs Empty => new IsolateInstanceArgs();
     }
 
-    public sealed class IsolateInstanceState : Pulumi.ResourceArgs
+    public sealed class IsolateInstanceState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Cluster ID.
@@ -151,5 +153,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
         public IsolateInstanceState()
         {
         }
+        public static new IsolateInstanceState Empty => new IsolateInstanceState();
     }
 }

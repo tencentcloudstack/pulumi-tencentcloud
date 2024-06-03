@@ -15,114 +15,110 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dbbrain
         /// <summary>
         /// Use this data source to query detailed information of dbbrain top_space_tables
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
+        /// 
         /// ### Sort by PhysicalFileSize
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var topSpaceTables = Tencentcloud.Dbbrain.GetTopSpaceTables.Invoke(new()
         ///     {
-        ///         var topSpaceTables = Output.Create(Tencentcloud.Dbbrain.GetTopSpaceTables.InvokeAsync(new Tencentcloud.Dbbrain.GetTopSpaceTablesArgs
-        ///         {
-        ///             InstanceId = "%s",
-        ///             Product = "mysql",
-        ///             SortBy = "PhysicalFileSize",
-        ///         }));
-        ///     }
+        ///         InstanceId = "%s",
+        ///         Product = "mysql",
+        ///         SortBy = "PhysicalFileSize",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% example %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
+        /// 
         /// ### Sort by TotalLength
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var topSpaceTables = Tencentcloud.Dbbrain.GetTopSpaceTables.Invoke(new()
         ///     {
-        ///         var topSpaceTables = Output.Create(Tencentcloud.Dbbrain.GetTopSpaceTables.InvokeAsync(new Tencentcloud.Dbbrain.GetTopSpaceTablesArgs
-        ///         {
-        ///             InstanceId = "%s",
-        ///             Product = "mysql",
-        ///             SortBy = "PhysicalFileSize",
-        ///         }));
-        ///     }
+        ///         InstanceId = "%s",
+        ///         Product = "mysql",
+        ///         SortBy = "PhysicalFileSize",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetTopSpaceTablesResult> InvokeAsync(GetTopSpaceTablesArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetTopSpaceTablesResult>("tencentcloud:Dbbrain/getTopSpaceTables:getTopSpaceTables", args ?? new GetTopSpaceTablesArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetTopSpaceTablesResult>("tencentcloud:Dbbrain/getTopSpaceTables:getTopSpaceTables", args ?? new GetTopSpaceTablesArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of dbbrain top_space_tables
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
+        /// 
         /// ### Sort by PhysicalFileSize
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var topSpaceTables = Tencentcloud.Dbbrain.GetTopSpaceTables.Invoke(new()
         ///     {
-        ///         var topSpaceTables = Output.Create(Tencentcloud.Dbbrain.GetTopSpaceTables.InvokeAsync(new Tencentcloud.Dbbrain.GetTopSpaceTablesArgs
-        ///         {
-        ///             InstanceId = "%s",
-        ///             Product = "mysql",
-        ///             SortBy = "PhysicalFileSize",
-        ///         }));
-        ///     }
+        ///         InstanceId = "%s",
+        ///         Product = "mysql",
+        ///         SortBy = "PhysicalFileSize",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% example %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
+        /// 
         /// ### Sort by TotalLength
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var topSpaceTables = Tencentcloud.Dbbrain.GetTopSpaceTables.Invoke(new()
         ///     {
-        ///         var topSpaceTables = Output.Create(Tencentcloud.Dbbrain.GetTopSpaceTables.InvokeAsync(new Tencentcloud.Dbbrain.GetTopSpaceTablesArgs
-        ///         {
-        ///             InstanceId = "%s",
-        ///             Product = "mysql",
-        ///             SortBy = "PhysicalFileSize",
-        ///         }));
-        ///     }
+        ///         InstanceId = "%s",
+        ///         Product = "mysql",
+        ///         SortBy = "PhysicalFileSize",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetTopSpaceTablesResult> Invoke(GetTopSpaceTablesInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetTopSpaceTablesResult>("tencentcloud:Dbbrain/getTopSpaceTables:getTopSpaceTables", args ?? new GetTopSpaceTablesInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetTopSpaceTablesResult>("tencentcloud:Dbbrain/getTopSpaceTables:getTopSpaceTables", args ?? new GetTopSpaceTablesInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetTopSpaceTablesArgs : Pulumi.InvokeArgs
+    public sealed class GetTopSpaceTablesArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// instance id.
@@ -157,9 +153,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dbbrain
         public GetTopSpaceTablesArgs()
         {
         }
+        public static new GetTopSpaceTablesArgs Empty => new GetTopSpaceTablesArgs();
     }
 
-    public sealed class GetTopSpaceTablesInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetTopSpaceTablesInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// instance id.
@@ -194,6 +191,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dbbrain
         public GetTopSpaceTablesInvokeArgs()
         {
         }
+        public static new GetTopSpaceTablesInvokeArgs Empty => new GetTopSpaceTablesInvokeArgs();
     }
 
 

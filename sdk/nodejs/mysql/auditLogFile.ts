@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,17 +11,18 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const zones = tencentcloud.Availability.getZonesByProduct({
  *     product: "cdb",
  * });
  * const vpc = new tencentcloud.vpc.Instance("vpc", {cidrBlock: "10.0.0.0/16"});
  * const subnet = new tencentcloud.subnet.Instance("subnet", {
- *     availabilityZone: zones.then(zones => zones.zones?[0]?.name),
+ *     availabilityZone: zones.then(zones => zones.zones?.[0]?.name),
  *     vpcId: vpc.id,
  *     cidrBlock: "10.0.0.0/16",
  *     isMulticast: false,
@@ -32,7 +34,7 @@ import * as utilities from "../utilities";
  *     chargeType: "POSTPAID",
  *     rootPassword: "PassWord123",
  *     slaveDeployMode: 0,
- *     availabilityZone: zones.then(zones => zones.zones?[0]?.name),
+ *     availabilityZone: zones.then(zones => zones.zones?.[0]?.name),
  *     slaveSyncMode: 1,
  *     instanceName: "tf-example-mysql",
  *     memSize: 4000,
@@ -57,11 +59,14 @@ import * as utilities from "../utilities";
  *     orderBy: "timestamp",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
+ *
  * ### Add filter
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const example = new tencentcloud.mysql.AuditLogFile("example", {
  *     instanceId: tencentcloud_mysql_instance.example.id,
@@ -75,6 +80,7 @@ import * as utilities from "../utilities";
  *     },
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export class AuditLogFile extends pulumi.CustomResource {
     /**

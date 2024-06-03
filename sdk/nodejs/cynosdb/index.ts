@@ -5,82 +5,251 @@ import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
 // Export members:
-export * from "./account";
-export * from "./accountPrivileges";
-export * from "./auditLogFile";
-export * from "./binlogSaveDays";
-export * from "./cluster";
-export * from "./clusterDatabases";
-export * from "./clusterPasswordComplexity";
-export * from "./clusterResourcePackagesAttachment";
-export * from "./clusterSlaveZone";
-export * from "./exportInstanceErrorLogs";
-export * from "./exportInstanceSlowQueries";
-export * from "./getAccountAllGrantPrivileges";
-export * from "./getAccounts";
-export * from "./getAuditLogs";
-export * from "./getBackupDownloadUrl";
-export * from "./getBinlogDownloadUrl";
-export * from "./getCluster";
-export * from "./getClusterDetailDatabases";
-export * from "./getClusterInstanceGroups";
-export * from "./getClusterParamLogs";
-export * from "./getClusterParams";
-export * from "./getClusters";
-export * from "./getDescribeInstanceErrorLogs";
-export * from "./getDescribeInstanceSlowQueries";
-export * from "./getInstanceSlowQueries";
-export * from "./getInstances";
-export * from "./getParamTemplates";
-export * from "./getProjectSecurityGroups";
-export * from "./getProxyNode";
-export * from "./getProxyVersion";
-export * from "./getResourcePackageList";
-export * from "./getResourcePackageSaleSpecs";
-export * from "./getRollbackTimeRange";
-export * from "./getZone";
-export * from "./getZoneConfig";
-export * from "./instanceParam";
-export * from "./isolateInstance";
-export * from "./paramTemplate";
-export * from "./proxy";
-export * from "./proxyEndPoint";
-export * from "./readOnlyInstanceExclusiveAccess";
-export * from "./readonlyInstance";
-export * from "./reloadProxyNode";
-export * from "./resourcePackage";
-export * from "./restartInstance";
-export * from "./rollBackCluster";
-export * from "./securityGroup";
-export * from "./upgradeProxyVersion";
-export * from "./wan";
+export { AccountArgs, AccountState } from "./account";
+export type Account = import("./account").Account;
+export const Account: typeof import("./account").Account = null as any;
+utilities.lazyLoad(exports, ["Account"], () => require("./account"));
 
-// Import resources to register:
-import { Account } from "./account";
-import { AccountPrivileges } from "./accountPrivileges";
-import { AuditLogFile } from "./auditLogFile";
-import { BinlogSaveDays } from "./binlogSaveDays";
-import { Cluster } from "./cluster";
-import { ClusterDatabases } from "./clusterDatabases";
-import { ClusterPasswordComplexity } from "./clusterPasswordComplexity";
-import { ClusterResourcePackagesAttachment } from "./clusterResourcePackagesAttachment";
-import { ClusterSlaveZone } from "./clusterSlaveZone";
-import { ExportInstanceErrorLogs } from "./exportInstanceErrorLogs";
-import { ExportInstanceSlowQueries } from "./exportInstanceSlowQueries";
-import { InstanceParam } from "./instanceParam";
-import { IsolateInstance } from "./isolateInstance";
-import { ParamTemplate } from "./paramTemplate";
-import { Proxy } from "./proxy";
-import { ProxyEndPoint } from "./proxyEndPoint";
-import { ReadOnlyInstanceExclusiveAccess } from "./readOnlyInstanceExclusiveAccess";
-import { ReadonlyInstance } from "./readonlyInstance";
-import { ReloadProxyNode } from "./reloadProxyNode";
-import { ResourcePackage } from "./resourcePackage";
-import { RestartInstance } from "./restartInstance";
-import { RollBackCluster } from "./rollBackCluster";
-import { SecurityGroup } from "./securityGroup";
-import { UpgradeProxyVersion } from "./upgradeProxyVersion";
-import { Wan } from "./wan";
+export { AccountPrivilegesArgs, AccountPrivilegesState } from "./accountPrivileges";
+export type AccountPrivileges = import("./accountPrivileges").AccountPrivileges;
+export const AccountPrivileges: typeof import("./accountPrivileges").AccountPrivileges = null as any;
+utilities.lazyLoad(exports, ["AccountPrivileges"], () => require("./accountPrivileges"));
+
+export { AuditLogFileArgs, AuditLogFileState } from "./auditLogFile";
+export type AuditLogFile = import("./auditLogFile").AuditLogFile;
+export const AuditLogFile: typeof import("./auditLogFile").AuditLogFile = null as any;
+utilities.lazyLoad(exports, ["AuditLogFile"], () => require("./auditLogFile"));
+
+export { BinlogSaveDaysArgs, BinlogSaveDaysState } from "./binlogSaveDays";
+export type BinlogSaveDays = import("./binlogSaveDays").BinlogSaveDays;
+export const BinlogSaveDays: typeof import("./binlogSaveDays").BinlogSaveDays = null as any;
+utilities.lazyLoad(exports, ["BinlogSaveDays"], () => require("./binlogSaveDays"));
+
+export { ClusterArgs, ClusterState } from "./cluster";
+export type Cluster = import("./cluster").Cluster;
+export const Cluster: typeof import("./cluster").Cluster = null as any;
+utilities.lazyLoad(exports, ["Cluster"], () => require("./cluster"));
+
+export { ClusterDatabasesArgs, ClusterDatabasesState } from "./clusterDatabases";
+export type ClusterDatabases = import("./clusterDatabases").ClusterDatabases;
+export const ClusterDatabases: typeof import("./clusterDatabases").ClusterDatabases = null as any;
+utilities.lazyLoad(exports, ["ClusterDatabases"], () => require("./clusterDatabases"));
+
+export { ClusterPasswordComplexityArgs, ClusterPasswordComplexityState } from "./clusterPasswordComplexity";
+export type ClusterPasswordComplexity = import("./clusterPasswordComplexity").ClusterPasswordComplexity;
+export const ClusterPasswordComplexity: typeof import("./clusterPasswordComplexity").ClusterPasswordComplexity = null as any;
+utilities.lazyLoad(exports, ["ClusterPasswordComplexity"], () => require("./clusterPasswordComplexity"));
+
+export { ClusterResourcePackagesAttachmentArgs, ClusterResourcePackagesAttachmentState } from "./clusterResourcePackagesAttachment";
+export type ClusterResourcePackagesAttachment = import("./clusterResourcePackagesAttachment").ClusterResourcePackagesAttachment;
+export const ClusterResourcePackagesAttachment: typeof import("./clusterResourcePackagesAttachment").ClusterResourcePackagesAttachment = null as any;
+utilities.lazyLoad(exports, ["ClusterResourcePackagesAttachment"], () => require("./clusterResourcePackagesAttachment"));
+
+export { ClusterSlaveZoneArgs, ClusterSlaveZoneState } from "./clusterSlaveZone";
+export type ClusterSlaveZone = import("./clusterSlaveZone").ClusterSlaveZone;
+export const ClusterSlaveZone: typeof import("./clusterSlaveZone").ClusterSlaveZone = null as any;
+utilities.lazyLoad(exports, ["ClusterSlaveZone"], () => require("./clusterSlaveZone"));
+
+export { ExportInstanceErrorLogsArgs, ExportInstanceErrorLogsState } from "./exportInstanceErrorLogs";
+export type ExportInstanceErrorLogs = import("./exportInstanceErrorLogs").ExportInstanceErrorLogs;
+export const ExportInstanceErrorLogs: typeof import("./exportInstanceErrorLogs").ExportInstanceErrorLogs = null as any;
+utilities.lazyLoad(exports, ["ExportInstanceErrorLogs"], () => require("./exportInstanceErrorLogs"));
+
+export { ExportInstanceSlowQueriesArgs, ExportInstanceSlowQueriesState } from "./exportInstanceSlowQueries";
+export type ExportInstanceSlowQueries = import("./exportInstanceSlowQueries").ExportInstanceSlowQueries;
+export const ExportInstanceSlowQueries: typeof import("./exportInstanceSlowQueries").ExportInstanceSlowQueries = null as any;
+utilities.lazyLoad(exports, ["ExportInstanceSlowQueries"], () => require("./exportInstanceSlowQueries"));
+
+export { GetAccountAllGrantPrivilegesArgs, GetAccountAllGrantPrivilegesResult, GetAccountAllGrantPrivilegesOutputArgs } from "./getAccountAllGrantPrivileges";
+export const getAccountAllGrantPrivileges: typeof import("./getAccountAllGrantPrivileges").getAccountAllGrantPrivileges = null as any;
+export const getAccountAllGrantPrivilegesOutput: typeof import("./getAccountAllGrantPrivileges").getAccountAllGrantPrivilegesOutput = null as any;
+utilities.lazyLoad(exports, ["getAccountAllGrantPrivileges","getAccountAllGrantPrivilegesOutput"], () => require("./getAccountAllGrantPrivileges"));
+
+export { GetAccountsArgs, GetAccountsResult, GetAccountsOutputArgs } from "./getAccounts";
+export const getAccounts: typeof import("./getAccounts").getAccounts = null as any;
+export const getAccountsOutput: typeof import("./getAccounts").getAccountsOutput = null as any;
+utilities.lazyLoad(exports, ["getAccounts","getAccountsOutput"], () => require("./getAccounts"));
+
+export { GetAuditLogsArgs, GetAuditLogsResult, GetAuditLogsOutputArgs } from "./getAuditLogs";
+export const getAuditLogs: typeof import("./getAuditLogs").getAuditLogs = null as any;
+export const getAuditLogsOutput: typeof import("./getAuditLogs").getAuditLogsOutput = null as any;
+utilities.lazyLoad(exports, ["getAuditLogs","getAuditLogsOutput"], () => require("./getAuditLogs"));
+
+export { GetBackupDownloadUrlArgs, GetBackupDownloadUrlResult, GetBackupDownloadUrlOutputArgs } from "./getBackupDownloadUrl";
+export const getBackupDownloadUrl: typeof import("./getBackupDownloadUrl").getBackupDownloadUrl = null as any;
+export const getBackupDownloadUrlOutput: typeof import("./getBackupDownloadUrl").getBackupDownloadUrlOutput = null as any;
+utilities.lazyLoad(exports, ["getBackupDownloadUrl","getBackupDownloadUrlOutput"], () => require("./getBackupDownloadUrl"));
+
+export { GetBinlogDownloadUrlArgs, GetBinlogDownloadUrlResult, GetBinlogDownloadUrlOutputArgs } from "./getBinlogDownloadUrl";
+export const getBinlogDownloadUrl: typeof import("./getBinlogDownloadUrl").getBinlogDownloadUrl = null as any;
+export const getBinlogDownloadUrlOutput: typeof import("./getBinlogDownloadUrl").getBinlogDownloadUrlOutput = null as any;
+utilities.lazyLoad(exports, ["getBinlogDownloadUrl","getBinlogDownloadUrlOutput"], () => require("./getBinlogDownloadUrl"));
+
+export { GetClusterArgs, GetClusterResult, GetClusterOutputArgs } from "./getCluster";
+export const getCluster: typeof import("./getCluster").getCluster = null as any;
+export const getClusterOutput: typeof import("./getCluster").getClusterOutput = null as any;
+utilities.lazyLoad(exports, ["getCluster","getClusterOutput"], () => require("./getCluster"));
+
+export { GetClusterDetailDatabasesArgs, GetClusterDetailDatabasesResult, GetClusterDetailDatabasesOutputArgs } from "./getClusterDetailDatabases";
+export const getClusterDetailDatabases: typeof import("./getClusterDetailDatabases").getClusterDetailDatabases = null as any;
+export const getClusterDetailDatabasesOutput: typeof import("./getClusterDetailDatabases").getClusterDetailDatabasesOutput = null as any;
+utilities.lazyLoad(exports, ["getClusterDetailDatabases","getClusterDetailDatabasesOutput"], () => require("./getClusterDetailDatabases"));
+
+export { GetClusterInstanceGroupsArgs, GetClusterInstanceGroupsResult, GetClusterInstanceGroupsOutputArgs } from "./getClusterInstanceGroups";
+export const getClusterInstanceGroups: typeof import("./getClusterInstanceGroups").getClusterInstanceGroups = null as any;
+export const getClusterInstanceGroupsOutput: typeof import("./getClusterInstanceGroups").getClusterInstanceGroupsOutput = null as any;
+utilities.lazyLoad(exports, ["getClusterInstanceGroups","getClusterInstanceGroupsOutput"], () => require("./getClusterInstanceGroups"));
+
+export { GetClusterParamLogsArgs, GetClusterParamLogsResult, GetClusterParamLogsOutputArgs } from "./getClusterParamLogs";
+export const getClusterParamLogs: typeof import("./getClusterParamLogs").getClusterParamLogs = null as any;
+export const getClusterParamLogsOutput: typeof import("./getClusterParamLogs").getClusterParamLogsOutput = null as any;
+utilities.lazyLoad(exports, ["getClusterParamLogs","getClusterParamLogsOutput"], () => require("./getClusterParamLogs"));
+
+export { GetClusterParamsArgs, GetClusterParamsResult, GetClusterParamsOutputArgs } from "./getClusterParams";
+export const getClusterParams: typeof import("./getClusterParams").getClusterParams = null as any;
+export const getClusterParamsOutput: typeof import("./getClusterParams").getClusterParamsOutput = null as any;
+utilities.lazyLoad(exports, ["getClusterParams","getClusterParamsOutput"], () => require("./getClusterParams"));
+
+export { GetClustersArgs, GetClustersResult, GetClustersOutputArgs } from "./getClusters";
+export const getClusters: typeof import("./getClusters").getClusters = null as any;
+export const getClustersOutput: typeof import("./getClusters").getClustersOutput = null as any;
+utilities.lazyLoad(exports, ["getClusters","getClustersOutput"], () => require("./getClusters"));
+
+export { GetDescribeInstanceErrorLogsArgs, GetDescribeInstanceErrorLogsResult, GetDescribeInstanceErrorLogsOutputArgs } from "./getDescribeInstanceErrorLogs";
+export const getDescribeInstanceErrorLogs: typeof import("./getDescribeInstanceErrorLogs").getDescribeInstanceErrorLogs = null as any;
+export const getDescribeInstanceErrorLogsOutput: typeof import("./getDescribeInstanceErrorLogs").getDescribeInstanceErrorLogsOutput = null as any;
+utilities.lazyLoad(exports, ["getDescribeInstanceErrorLogs","getDescribeInstanceErrorLogsOutput"], () => require("./getDescribeInstanceErrorLogs"));
+
+export { GetDescribeInstanceSlowQueriesArgs, GetDescribeInstanceSlowQueriesResult, GetDescribeInstanceSlowQueriesOutputArgs } from "./getDescribeInstanceSlowQueries";
+export const getDescribeInstanceSlowQueries: typeof import("./getDescribeInstanceSlowQueries").getDescribeInstanceSlowQueries = null as any;
+export const getDescribeInstanceSlowQueriesOutput: typeof import("./getDescribeInstanceSlowQueries").getDescribeInstanceSlowQueriesOutput = null as any;
+utilities.lazyLoad(exports, ["getDescribeInstanceSlowQueries","getDescribeInstanceSlowQueriesOutput"], () => require("./getDescribeInstanceSlowQueries"));
+
+export { GetInstanceSlowQueriesArgs, GetInstanceSlowQueriesResult, GetInstanceSlowQueriesOutputArgs } from "./getInstanceSlowQueries";
+export const getInstanceSlowQueries: typeof import("./getInstanceSlowQueries").getInstanceSlowQueries = null as any;
+export const getInstanceSlowQueriesOutput: typeof import("./getInstanceSlowQueries").getInstanceSlowQueriesOutput = null as any;
+utilities.lazyLoad(exports, ["getInstanceSlowQueries","getInstanceSlowQueriesOutput"], () => require("./getInstanceSlowQueries"));
+
+export { GetInstancesArgs, GetInstancesResult, GetInstancesOutputArgs } from "./getInstances";
+export const getInstances: typeof import("./getInstances").getInstances = null as any;
+export const getInstancesOutput: typeof import("./getInstances").getInstancesOutput = null as any;
+utilities.lazyLoad(exports, ["getInstances","getInstancesOutput"], () => require("./getInstances"));
+
+export { GetParamTemplatesArgs, GetParamTemplatesResult, GetParamTemplatesOutputArgs } from "./getParamTemplates";
+export const getParamTemplates: typeof import("./getParamTemplates").getParamTemplates = null as any;
+export const getParamTemplatesOutput: typeof import("./getParamTemplates").getParamTemplatesOutput = null as any;
+utilities.lazyLoad(exports, ["getParamTemplates","getParamTemplatesOutput"], () => require("./getParamTemplates"));
+
+export { GetProjectSecurityGroupsArgs, GetProjectSecurityGroupsResult, GetProjectSecurityGroupsOutputArgs } from "./getProjectSecurityGroups";
+export const getProjectSecurityGroups: typeof import("./getProjectSecurityGroups").getProjectSecurityGroups = null as any;
+export const getProjectSecurityGroupsOutput: typeof import("./getProjectSecurityGroups").getProjectSecurityGroupsOutput = null as any;
+utilities.lazyLoad(exports, ["getProjectSecurityGroups","getProjectSecurityGroupsOutput"], () => require("./getProjectSecurityGroups"));
+
+export { GetProxyNodeArgs, GetProxyNodeResult, GetProxyNodeOutputArgs } from "./getProxyNode";
+export const getProxyNode: typeof import("./getProxyNode").getProxyNode = null as any;
+export const getProxyNodeOutput: typeof import("./getProxyNode").getProxyNodeOutput = null as any;
+utilities.lazyLoad(exports, ["getProxyNode","getProxyNodeOutput"], () => require("./getProxyNode"));
+
+export { GetProxyVersionArgs, GetProxyVersionResult, GetProxyVersionOutputArgs } from "./getProxyVersion";
+export const getProxyVersion: typeof import("./getProxyVersion").getProxyVersion = null as any;
+export const getProxyVersionOutput: typeof import("./getProxyVersion").getProxyVersionOutput = null as any;
+utilities.lazyLoad(exports, ["getProxyVersion","getProxyVersionOutput"], () => require("./getProxyVersion"));
+
+export { GetResourcePackageListArgs, GetResourcePackageListResult, GetResourcePackageListOutputArgs } from "./getResourcePackageList";
+export const getResourcePackageList: typeof import("./getResourcePackageList").getResourcePackageList = null as any;
+export const getResourcePackageListOutput: typeof import("./getResourcePackageList").getResourcePackageListOutput = null as any;
+utilities.lazyLoad(exports, ["getResourcePackageList","getResourcePackageListOutput"], () => require("./getResourcePackageList"));
+
+export { GetResourcePackageSaleSpecsArgs, GetResourcePackageSaleSpecsResult, GetResourcePackageSaleSpecsOutputArgs } from "./getResourcePackageSaleSpecs";
+export const getResourcePackageSaleSpecs: typeof import("./getResourcePackageSaleSpecs").getResourcePackageSaleSpecs = null as any;
+export const getResourcePackageSaleSpecsOutput: typeof import("./getResourcePackageSaleSpecs").getResourcePackageSaleSpecsOutput = null as any;
+utilities.lazyLoad(exports, ["getResourcePackageSaleSpecs","getResourcePackageSaleSpecsOutput"], () => require("./getResourcePackageSaleSpecs"));
+
+export { GetRollbackTimeRangeArgs, GetRollbackTimeRangeResult, GetRollbackTimeRangeOutputArgs } from "./getRollbackTimeRange";
+export const getRollbackTimeRange: typeof import("./getRollbackTimeRange").getRollbackTimeRange = null as any;
+export const getRollbackTimeRangeOutput: typeof import("./getRollbackTimeRange").getRollbackTimeRangeOutput = null as any;
+utilities.lazyLoad(exports, ["getRollbackTimeRange","getRollbackTimeRangeOutput"], () => require("./getRollbackTimeRange"));
+
+export { GetZoneArgs, GetZoneResult, GetZoneOutputArgs } from "./getZone";
+export const getZone: typeof import("./getZone").getZone = null as any;
+export const getZoneOutput: typeof import("./getZone").getZoneOutput = null as any;
+utilities.lazyLoad(exports, ["getZone","getZoneOutput"], () => require("./getZone"));
+
+export { GetZoneConfigArgs, GetZoneConfigResult, GetZoneConfigOutputArgs } from "./getZoneConfig";
+export const getZoneConfig: typeof import("./getZoneConfig").getZoneConfig = null as any;
+export const getZoneConfigOutput: typeof import("./getZoneConfig").getZoneConfigOutput = null as any;
+utilities.lazyLoad(exports, ["getZoneConfig","getZoneConfigOutput"], () => require("./getZoneConfig"));
+
+export { InstanceParamArgs, InstanceParamState } from "./instanceParam";
+export type InstanceParam = import("./instanceParam").InstanceParam;
+export const InstanceParam: typeof import("./instanceParam").InstanceParam = null as any;
+utilities.lazyLoad(exports, ["InstanceParam"], () => require("./instanceParam"));
+
+export { IsolateInstanceArgs, IsolateInstanceState } from "./isolateInstance";
+export type IsolateInstance = import("./isolateInstance").IsolateInstance;
+export const IsolateInstance: typeof import("./isolateInstance").IsolateInstance = null as any;
+utilities.lazyLoad(exports, ["IsolateInstance"], () => require("./isolateInstance"));
+
+export { ParamTemplateArgs, ParamTemplateState } from "./paramTemplate";
+export type ParamTemplate = import("./paramTemplate").ParamTemplate;
+export const ParamTemplate: typeof import("./paramTemplate").ParamTemplate = null as any;
+utilities.lazyLoad(exports, ["ParamTemplate"], () => require("./paramTemplate"));
+
+export { ProxyArgs, ProxyState } from "./proxy";
+export type Proxy = import("./proxy").Proxy;
+export const Proxy: typeof import("./proxy").Proxy = null as any;
+utilities.lazyLoad(exports, ["Proxy"], () => require("./proxy"));
+
+export { ProxyEndPointArgs, ProxyEndPointState } from "./proxyEndPoint";
+export type ProxyEndPoint = import("./proxyEndPoint").ProxyEndPoint;
+export const ProxyEndPoint: typeof import("./proxyEndPoint").ProxyEndPoint = null as any;
+utilities.lazyLoad(exports, ["ProxyEndPoint"], () => require("./proxyEndPoint"));
+
+export { ReadOnlyInstanceExclusiveAccessArgs, ReadOnlyInstanceExclusiveAccessState } from "./readOnlyInstanceExclusiveAccess";
+export type ReadOnlyInstanceExclusiveAccess = import("./readOnlyInstanceExclusiveAccess").ReadOnlyInstanceExclusiveAccess;
+export const ReadOnlyInstanceExclusiveAccess: typeof import("./readOnlyInstanceExclusiveAccess").ReadOnlyInstanceExclusiveAccess = null as any;
+utilities.lazyLoad(exports, ["ReadOnlyInstanceExclusiveAccess"], () => require("./readOnlyInstanceExclusiveAccess"));
+
+export { ReadonlyInstanceArgs, ReadonlyInstanceState } from "./readonlyInstance";
+export type ReadonlyInstance = import("./readonlyInstance").ReadonlyInstance;
+export const ReadonlyInstance: typeof import("./readonlyInstance").ReadonlyInstance = null as any;
+utilities.lazyLoad(exports, ["ReadonlyInstance"], () => require("./readonlyInstance"));
+
+export { ReloadProxyNodeArgs, ReloadProxyNodeState } from "./reloadProxyNode";
+export type ReloadProxyNode = import("./reloadProxyNode").ReloadProxyNode;
+export const ReloadProxyNode: typeof import("./reloadProxyNode").ReloadProxyNode = null as any;
+utilities.lazyLoad(exports, ["ReloadProxyNode"], () => require("./reloadProxyNode"));
+
+export { ResourcePackageArgs, ResourcePackageState } from "./resourcePackage";
+export type ResourcePackage = import("./resourcePackage").ResourcePackage;
+export const ResourcePackage: typeof import("./resourcePackage").ResourcePackage = null as any;
+utilities.lazyLoad(exports, ["ResourcePackage"], () => require("./resourcePackage"));
+
+export { RestartInstanceArgs, RestartInstanceState } from "./restartInstance";
+export type RestartInstance = import("./restartInstance").RestartInstance;
+export const RestartInstance: typeof import("./restartInstance").RestartInstance = null as any;
+utilities.lazyLoad(exports, ["RestartInstance"], () => require("./restartInstance"));
+
+export { RollBackClusterArgs, RollBackClusterState } from "./rollBackCluster";
+export type RollBackCluster = import("./rollBackCluster").RollBackCluster;
+export const RollBackCluster: typeof import("./rollBackCluster").RollBackCluster = null as any;
+utilities.lazyLoad(exports, ["RollBackCluster"], () => require("./rollBackCluster"));
+
+export { SecurityGroupArgs, SecurityGroupState } from "./securityGroup";
+export type SecurityGroup = import("./securityGroup").SecurityGroup;
+export const SecurityGroup: typeof import("./securityGroup").SecurityGroup = null as any;
+utilities.lazyLoad(exports, ["SecurityGroup"], () => require("./securityGroup"));
+
+export { UpgradeProxyVersionArgs, UpgradeProxyVersionState } from "./upgradeProxyVersion";
+export type UpgradeProxyVersion = import("./upgradeProxyVersion").UpgradeProxyVersion;
+export const UpgradeProxyVersion: typeof import("./upgradeProxyVersion").UpgradeProxyVersion = null as any;
+utilities.lazyLoad(exports, ["UpgradeProxyVersion"], () => require("./upgradeProxyVersion"));
+
+export { WanArgs, WanState } from "./wan";
+export type Wan = import("./wan").Wan;
+export const Wan: typeof import("./wan").Wan = null as any;
+utilities.lazyLoad(exports, ["Wan"], () => require("./wan"));
+
 
 const _module = {
     version: utilities.getVersion(),

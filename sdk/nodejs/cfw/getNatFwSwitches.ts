@@ -2,42 +2,46 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
  * Use this data source to query detailed information of cfw natFwSwitches
  *
  * ## Example Usage
+ *
  * ### Query Nat instance'switch by instance id
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const example = pulumi.output(tencentcloud.Cfw.getNatFwSwitches({
+ * const example = tencentcloud.Cfw.getNatFwSwitches({
  *     natInsId: "cfwnat-18d2ba18",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
+ *
  * ### Or filter by switch status
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const example = pulumi.output(tencentcloud.Cfw.getNatFwSwitches({
+ * const example = tencentcloud.Cfw.getNatFwSwitches({
  *     natInsId: "cfwnat-18d2ba18",
  *     status: 1,
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getNatFwSwitches(args?: GetNatFwSwitchesArgs, opts?: pulumi.InvokeOptions): Promise<GetNatFwSwitchesResult> {
     args = args || {};
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Cfw/getNatFwSwitches:getNatFwSwitches", {
         "natInsId": args.natInsId,
         "resultOutputFile": args.resultOutputFile,
@@ -85,9 +89,40 @@ export interface GetNatFwSwitchesResult {
      */
     readonly status?: number;
 }
-
+/**
+ * Use this data source to query detailed information of cfw natFwSwitches
+ *
+ * ## Example Usage
+ *
+ * ### Query Nat instance'switch by instance id
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const example = tencentcloud.Cfw.getNatFwSwitches({
+ *     natInsId: "cfwnat-18d2ba18",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ *
+ * ### Or filter by switch status
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const example = tencentcloud.Cfw.getNatFwSwitches({
+ *     natInsId: "cfwnat-18d2ba18",
+ *     status: 1,
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getNatFwSwitchesOutput(args?: GetNatFwSwitchesOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetNatFwSwitchesResult> {
-    return pulumi.output(args).apply(a => getNatFwSwitches(a, opts))
+    return pulumi.output(args).apply((a: any) => getNatFwSwitches(a, opts))
 }
 
 /**

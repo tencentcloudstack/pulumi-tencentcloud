@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps.Inputs
 {
 
-    public sealed class ContentReviewTemplateTerrorismConfigureGetArgs : Pulumi.ResourceArgs
+    public sealed class ContentReviewTemplateTerrorismConfigureGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Terrorism image task control parameters.
@@ -28,5 +28,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps.Inputs
         public ContentReviewTemplateTerrorismConfigureGetArgs()
         {
         }
+        public static new ContentReviewTemplateTerrorismConfigureGetArgs Empty => new ContentReviewTemplateTerrorismConfigureGetArgs();
     }
 }

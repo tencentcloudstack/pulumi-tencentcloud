@@ -15,64 +15,58 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Availability
         /// <summary>
         /// Use this data source to get the available zones in current region. Must set product param to fetch the product infomations(e.g. =&gt; cvm, vpc). By default only `AVAILABLE` zones will be returned, but `UNAVAILABLE` zones can also be fetched when `include_unavailable` is specified.
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var all = Tencentcloud.Availability.GetZonesByProduct.Invoke(new()
         ///     {
-        ///         var all = Output.Create(Tencentcloud.Availability.GetZonesByProduct.InvokeAsync(new Tencentcloud.Availability.GetZonesByProductArgs
-        ///         {
-        ///             Product = "cvm",
-        ///         }));
-        ///     }
+        ///         Product = "cvm",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetZonesByProductResult> InvokeAsync(GetZonesByProductArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetZonesByProductResult>("tencentcloud:Availability/getZonesByProduct:getZonesByProduct", args ?? new GetZonesByProductArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetZonesByProductResult>("tencentcloud:Availability/getZonesByProduct:getZonesByProduct", args ?? new GetZonesByProductArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to get the available zones in current region. Must set product param to fetch the product infomations(e.g. =&gt; cvm, vpc). By default only `AVAILABLE` zones will be returned, but `UNAVAILABLE` zones can also be fetched when `include_unavailable` is specified.
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var all = Tencentcloud.Availability.GetZonesByProduct.Invoke(new()
         ///     {
-        ///         var all = Output.Create(Tencentcloud.Availability.GetZonesByProduct.InvokeAsync(new Tencentcloud.Availability.GetZonesByProductArgs
-        ///         {
-        ///             Product = "cvm",
-        ///         }));
-        ///     }
+        ///         Product = "cvm",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetZonesByProductResult> Invoke(GetZonesByProductInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetZonesByProductResult>("tencentcloud:Availability/getZonesByProduct:getZonesByProduct", args ?? new GetZonesByProductInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetZonesByProductResult>("tencentcloud:Availability/getZonesByProduct:getZonesByProduct", args ?? new GetZonesByProductInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetZonesByProductArgs : Pulumi.InvokeArgs
+    public sealed class GetZonesByProductArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// A bool variable indicates that the query will include `UNAVAILABLE` zones.
@@ -101,9 +95,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Availability
         public GetZonesByProductArgs()
         {
         }
+        public static new GetZonesByProductArgs Empty => new GetZonesByProductArgs();
     }
 
-    public sealed class GetZonesByProductInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetZonesByProductInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// A bool variable indicates that the query will include `UNAVAILABLE` zones.
@@ -132,6 +127,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Availability
         public GetZonesByProductInvokeArgs()
         {
         }
+        public static new GetZonesByProductInvokeArgs Empty => new GetZonesByProductInvokeArgs();
     }
 
 

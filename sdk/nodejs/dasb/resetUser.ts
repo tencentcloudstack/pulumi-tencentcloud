@@ -9,14 +9,14 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = new tencentcloud.Dasb.ResetUser("example", {
- *     userId: 16,
- * });
+ * const example = new tencentcloud.dasb.ResetUser("example", {userId: 16});
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export class ResetUser extends pulumi.CustomResource {
     /**

@@ -17,74 +17,68 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Emr
         /// 
         /// The EMR data source fetch proper EMR from user's EMR pool.
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var myEmr = Tencentcloud.Emr.GetInstance.Invoke(new()
         ///     {
-        ///         var myEmr = Output.Create(Tencentcloud.Emr.GetInstance.InvokeAsync(new Tencentcloud.Emr.GetInstanceArgs
+        ///         DisplayStrategy = "clusterList",
+        ///         InstanceIds = new[]
         ///         {
-        ///             DisplayStrategy = "clusterList",
-        ///             InstanceIds = 
-        ///             {
-        ///                 "emr-rnzqrleq",
-        ///             },
-        ///         }));
-        ///     }
+        ///             "emr-rnzqrleq",
+        ///         },
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetInstanceResult> InvokeAsync(GetInstanceArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetInstanceResult>("tencentcloud:Emr/getInstance:getInstance", args ?? new GetInstanceArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetInstanceResult>("tencentcloud:Emr/getInstance:getInstance", args ?? new GetInstanceArgs(), options.WithDefaults());
 
         /// <summary>
         /// Provides an available EMR for the user.
         /// 
         /// The EMR data source fetch proper EMR from user's EMR pool.
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var myEmr = Tencentcloud.Emr.GetInstance.Invoke(new()
         ///     {
-        ///         var myEmr = Output.Create(Tencentcloud.Emr.GetInstance.InvokeAsync(new Tencentcloud.Emr.GetInstanceArgs
+        ///         DisplayStrategy = "clusterList",
+        ///         InstanceIds = new[]
         ///         {
-        ///             DisplayStrategy = "clusterList",
-        ///             InstanceIds = 
-        ///             {
-        ///                 "emr-rnzqrleq",
-        ///             },
-        ///         }));
-        ///     }
+        ///             "emr-rnzqrleq",
+        ///         },
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetInstanceResult> Invoke(GetInstanceInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetInstanceResult>("tencentcloud:Emr/getInstance:getInstance", args ?? new GetInstanceInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetInstanceResult>("tencentcloud:Emr/getInstance:getInstance", args ?? new GetInstanceInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetInstanceArgs : Pulumi.InvokeArgs
+    public sealed class GetInstanceArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Display strategy(e.g.:clusterList, monitorManage).
@@ -119,9 +113,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Emr
         public GetInstanceArgs()
         {
         }
+        public static new GetInstanceArgs Empty => new GetInstanceArgs();
     }
 
-    public sealed class GetInstanceInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetInstanceInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Display strategy(e.g.:clusterList, monitorManage).
@@ -156,6 +151,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Emr
         public GetInstanceInvokeArgs()
         {
         }
+        public static new GetInstanceInvokeArgs Empty => new GetInstanceInvokeArgs();
     }
 
 

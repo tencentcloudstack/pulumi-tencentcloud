@@ -8,42 +8,12 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Use this data source to query detailed information of gaap check proxy create
-//
-// ## Example Usage
-//
-// ```go
-// package main
-//
-// import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Gaap"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Gaap"
-// )
-//
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Gaap.GetCheckProxyCreate(ctx, &gaap.GetCheckProxyCreateArgs{
-// 			AccessRegion:     "Guangzhou",
-// 			Bandwidth:        10,
-// 			Concurrent:       2,
-// 			Http3Supported:   0,
-// 			IpAddressVersion: pulumi.StringRef("IPv4"),
-// 			NetworkType:      pulumi.StringRef("normal"),
-// 			PackageType:      pulumi.StringRef("Thunder"),
-// 			RealServerRegion: "Beijing",
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
-// ```
 func GetCheckProxyCreate(ctx *pulumi.Context, args *GetCheckProxyCreateArgs, opts ...pulumi.InvokeOption) (*GetCheckProxyCreateResult, error) {
-	opts = pkgInvokeDefaultOpts(opts)
+	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetCheckProxyCreateResult
 	err := ctx.Invoke("tencentcloud:Gaap/getCheckProxyCreate:getCheckProxyCreate", args, &rv, opts...)
 	if err != nil {

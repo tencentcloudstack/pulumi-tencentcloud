@@ -7,68 +7,74 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a mps processLiveStreamOperation
 //
 // ## Example Usage
+//
 // ### Process mps live stream through CMQ
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"fmt"
 //
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Mps"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cos"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Mps"
+//	"fmt"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cos"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Mps"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		output, err := Cos.NewBucket(ctx, "output", &Cos.BucketArgs{
-// 			Bucket:     pulumi.String(fmt.Sprintf("%v%v", "tf-bucket-mps-process-live-stream-output-", local.App_id)),
-// 			ForceClean: pulumi.Bool(true),
-// 			Acl:        pulumi.String("public-read"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_, err = Mps.NewProcessLiveStreamOperation(ctx, "operation", &Mps.ProcessLiveStreamOperationArgs{
-// 			Url: pulumi.String("http://www.abc.com/abc.m3u8"),
-// 			TaskNotifyConfig: &mps.ProcessLiveStreamOperationTaskNotifyConfigArgs{
-// 				CmqModel:   pulumi.String("Queue"),
-// 				CmqRegion:  pulumi.String("gz"),
-// 				QueueName:  pulumi.String("test"),
-// 				TopicName:  pulumi.String("test"),
-// 				NotifyType: pulumi.String("CMQ"),
-// 			},
-// 			OutputStorage: &mps.ProcessLiveStreamOperationOutputStorageArgs{
-// 				Type: pulumi.String("COS"),
-// 				CosOutputStorage: &mps.ProcessLiveStreamOperationOutputStorageCosOutputStorageArgs{
-// 					Bucket: output.Bucket,
-// 					Region: pulumi.String(fmt.Sprintf("%v%v", "%", "s")),
-// 				},
-// 			},
-// 			OutputDir: pulumi.String("/output/"),
-// 			AiContentReviewTask: &mps.ProcessLiveStreamOperationAiContentReviewTaskArgs{
-// 				Definition: pulumi.Int(10),
-// 			},
-// 			AiRecognitionTask: &mps.ProcessLiveStreamOperationAiRecognitionTaskArgs{
-// 				Definition: pulumi.Int(10),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			output, err := Cos.NewBucket(ctx, "output", &Cos.BucketArgs{
+//				Bucket:     pulumi.String(fmt.Sprintf("tf-bucket-mps-process-live-stream-output-%v", local.App_id)),
+//				ForceClean: pulumi.Bool(true),
+//				Acl:        pulumi.String("public-read"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_, err = Mps.NewProcessLiveStreamOperation(ctx, "operation", &Mps.ProcessLiveStreamOperationArgs{
+//				Url: pulumi.String("http://www.abc.com/abc.m3u8"),
+//				TaskNotifyConfig: &mps.ProcessLiveStreamOperationTaskNotifyConfigArgs{
+//					CmqModel:   pulumi.String("Queue"),
+//					CmqRegion:  pulumi.String("gz"),
+//					QueueName:  pulumi.String("test"),
+//					TopicName:  pulumi.String("test"),
+//					NotifyType: pulumi.String("CMQ"),
+//				},
+//				OutputStorage: &mps.ProcessLiveStreamOperationOutputStorageArgs{
+//					Type: pulumi.String("COS"),
+//					CosOutputStorage: &mps.ProcessLiveStreamOperationOutputStorageCosOutputStorageArgs{
+//						Bucket: output.Bucket,
+//						Region: pulumi.String("%s"),
+//					},
+//				},
+//				OutputDir: pulumi.String("/output/"),
+//				AiContentReviewTask: &mps.ProcessLiveStreamOperationAiContentReviewTaskArgs{
+//					Definition: pulumi.Int(10),
+//				},
+//				AiRecognitionTask: &mps.ProcessLiveStreamOperationAiRecognitionTaskArgs{
+//					Definition: pulumi.Int(10),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 type ProcessLiveStreamOperation struct {
 	pulumi.CustomResourceState
 
@@ -109,7 +115,7 @@ func NewProcessLiveStreamOperation(ctx *pulumi.Context,
 	if args.Url == nil {
 		return nil, errors.New("invalid value for required argument 'Url'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource ProcessLiveStreamOperation
 	err := ctx.RegisterResource("tencentcloud:Mps/processLiveStreamOperation:ProcessLiveStreamOperation", name, args, &resource, opts...)
 	if err != nil {
@@ -262,7 +268,7 @@ func (i *ProcessLiveStreamOperation) ToProcessLiveStreamOperationOutputWithConte
 // ProcessLiveStreamOperationArrayInput is an input type that accepts ProcessLiveStreamOperationArray and ProcessLiveStreamOperationArrayOutput values.
 // You can construct a concrete instance of `ProcessLiveStreamOperationArrayInput` via:
 //
-//          ProcessLiveStreamOperationArray{ ProcessLiveStreamOperationArgs{...} }
+//	ProcessLiveStreamOperationArray{ ProcessLiveStreamOperationArgs{...} }
 type ProcessLiveStreamOperationArrayInput interface {
 	pulumi.Input
 
@@ -287,7 +293,7 @@ func (i ProcessLiveStreamOperationArray) ToProcessLiveStreamOperationArrayOutput
 // ProcessLiveStreamOperationMapInput is an input type that accepts ProcessLiveStreamOperationMap and ProcessLiveStreamOperationMapOutput values.
 // You can construct a concrete instance of `ProcessLiveStreamOperationMapInput` via:
 //
-//          ProcessLiveStreamOperationMap{ "key": ProcessLiveStreamOperationArgs{...} }
+//	ProcessLiveStreamOperationMap{ "key": ProcessLiveStreamOperationArgs{...} }
 type ProcessLiveStreamOperationMapInput interface {
 	pulumi.Input
 

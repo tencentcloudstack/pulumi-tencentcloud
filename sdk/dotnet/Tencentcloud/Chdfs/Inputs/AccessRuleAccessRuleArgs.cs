@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Chdfs.Inputs
 {
 
-    public sealed class AccessRuleAccessRuleArgs : Pulumi.ResourceArgs
+    public sealed class AccessRuleAccessRuleArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// rule access mode, 1: read only, 2: read &amp;amp; wirte.
@@ -19,6 +19,9 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Chdfs.Inputs
         [Input("accessMode")]
         public Input<int>? AccessMode { get; set; }
 
+        /// <summary>
+        /// single rule id.
+        /// </summary>
         [Input("accessRuleId")]
         public Input<int>? AccessRuleId { get; set; }
 
@@ -28,6 +31,9 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Chdfs.Inputs
         [Input("address")]
         public Input<string>? Address { get; set; }
 
+        /// <summary>
+        /// rule create time.
+        /// </summary>
         [Input("createTime")]
         public Input<string>? CreateTime { get; set; }
 
@@ -40,5 +46,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Chdfs.Inputs
         public AccessRuleAccessRuleArgs()
         {
         }
+        public static new AccessRuleAccessRuleArgs Empty => new AccessRuleAccessRuleArgs();
     }
 }

@@ -8,7 +8,10 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
+
+var _ = internal.GetEnvOrDefault
 
 type InstanceChargeProperties struct {
 	// Charge type, vaild values: PREPAID, POSTPAID_BY_HOUR.
@@ -24,7 +27,7 @@ type InstanceChargeProperties struct {
 // InstanceChargePropertiesInput is an input type that accepts InstanceChargePropertiesArgs and InstanceChargePropertiesOutput values.
 // You can construct a concrete instance of `InstanceChargePropertiesInput` via:
 //
-//          InstanceChargePropertiesArgs{...}
+//	InstanceChargePropertiesArgs{...}
 type InstanceChargePropertiesInput interface {
 	pulumi.Input
 
@@ -66,11 +69,11 @@ func (i InstanceChargePropertiesArgs) ToInstanceChargePropertiesPtrOutputWithCon
 // InstanceChargePropertiesPtrInput is an input type that accepts InstanceChargePropertiesArgs, InstanceChargePropertiesPtr and InstanceChargePropertiesPtrOutput values.
 // You can construct a concrete instance of `InstanceChargePropertiesPtrInput` via:
 //
-//          InstanceChargePropertiesArgs{...}
+//	        InstanceChargePropertiesArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type InstanceChargePropertiesPtrInput interface {
 	pulumi.Input
 
@@ -218,7 +221,7 @@ type InstanceResource struct {
 // InstanceResourceInput is an input type that accepts InstanceResourceArgs and InstanceResourceOutput values.
 // You can construct a concrete instance of `InstanceResourceInput` via:
 //
-//          InstanceResourceArgs{...}
+//	InstanceResourceArgs{...}
 type InstanceResourceInput interface {
 	pulumi.Input
 
@@ -252,7 +255,7 @@ func (i InstanceResourceArgs) ToInstanceResourceOutputWithContext(ctx context.Co
 // InstanceResourceArrayInput is an input type that accepts InstanceResourceArray and InstanceResourceArrayOutput values.
 // You can construct a concrete instance of `InstanceResourceArrayInput` via:
 //
-//          InstanceResourceArray{ InstanceResourceArgs{...} }
+//	InstanceResourceArray{ InstanceResourceArgs{...} }
 type InstanceResourceArrayInput interface {
 	pulumi.Input
 
@@ -340,7 +343,7 @@ type InstanceResourceDiskSpec struct {
 // InstanceResourceDiskSpecInput is an input type that accepts InstanceResourceDiskSpecArgs and InstanceResourceDiskSpecOutput values.
 // You can construct a concrete instance of `InstanceResourceDiskSpecInput` via:
 //
-//          InstanceResourceDiskSpecArgs{...}
+//	InstanceResourceDiskSpecArgs{...}
 type InstanceResourceDiskSpecInput interface {
 	pulumi.Input
 

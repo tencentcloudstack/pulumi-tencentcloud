@@ -15,48 +15,49 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var deployVmGroup = new Tencentcloud.Tsf.DeployVmGroup("deployVmGroup", new()
     ///     {
-    ///         var deployVmGroup = new Tencentcloud.Tsf.DeployVmGroup("deployVmGroup", new Tencentcloud.Tsf.DeployVmGroupArgs
+    ///         DeployDesc = "deploy test",
+    ///         EnableHealthCheck = true,
+    ///         ForceStart = false,
+    ///         GroupId = "group-vzd97zpy",
+    ///         HealthCheckSettings = new Tencentcloud.Tsf.Inputs.DeployVmGroupHealthCheckSettingsArgs
     ///         {
-    ///             DeployDesc = "deploy test",
-    ///             EnableHealthCheck = true,
-    ///             ForceStart = false,
-    ///             GroupId = "group-vzd97zpy",
-    ///             HealthCheckSettings = new Tencentcloud.Tsf.Inputs.DeployVmGroupHealthCheckSettingsArgs
+    ///             ReadinessProbe = new Tencentcloud.Tsf.Inputs.DeployVmGroupHealthCheckSettingsReadinessProbeArgs
     ///             {
-    ///                 ReadinessProbe = new Tencentcloud.Tsf.Inputs.DeployVmGroupHealthCheckSettingsReadinessProbeArgs
-    ///                 {
-    ///                     ActionType = "HTTP",
-    ///                     FailureThreshold = 3,
-    ///                     InitialDelaySeconds = 10,
-    ///                     Path = "/",
-    ///                     PeriodSeconds = 10,
-    ///                     Port = 80,
-    ///                     Scheme = "HTTP",
-    ///                     SuccessThreshold = 1,
-    ///                     TimeoutSeconds = 2,
-    ///                 },
+    ///                 ActionType = "HTTP",
+    ///                 FailureThreshold = 3,
+    ///                 InitialDelaySeconds = 10,
+    ///                 Path = "/",
+    ///                 PeriodSeconds = 10,
+    ///                 Port = 80,
+    ///                 Scheme = "HTTP",
+    ///                 SuccessThreshold = 1,
+    ///                 TimeoutSeconds = 2,
     ///             },
-    ///             JdkName = "konaJDK",
-    ///             JdkVersion = "8",
-    ///             PkgId = "pkg-131bc1d3",
-    ///             StartupParameters = "-Xms128m -Xmx512m -XX:MetaspaceSize=128m -XX:MaxMetaspaceSize=512m",
-    ///             UpdateType = 0,
-    ///         });
-    ///     }
+    ///         },
+    ///         JdkName = "konaJDK",
+    ///         JdkVersion = "8",
+    ///         PkgId = "pkg-131bc1d3",
+    ///         StartupParameters = "-Xms128m -Xmx512m -XX:MetaspaceSize=128m -XX:MaxMetaspaceSize=512m",
+    ///         UpdateType = 0,
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Tsf/deployVmGroup:DeployVmGroup")]
-    public partial class DeployVmGroup : Pulumi.CustomResource
+    public partial class DeployVmGroup : global::Pulumi.CustomResource
     {
         /// <summary>
         /// javaagent info: SERVICE_AGENT/OT_AGENT.
@@ -217,7 +218,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf
         }
     }
 
-    public sealed class DeployVmGroupArgs : Pulumi.ResourceArgs
+    public sealed class DeployVmGroupArgs : global::Pulumi.ResourceArgs
     {
         [Input("agentProfileLists")]
         private InputList<Inputs.DeployVmGroupAgentProfileListArgs>? _agentProfileLists;
@@ -348,9 +349,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf
         public DeployVmGroupArgs()
         {
         }
+        public static new DeployVmGroupArgs Empty => new DeployVmGroupArgs();
     }
 
-    public sealed class DeployVmGroupState : Pulumi.ResourceArgs
+    public sealed class DeployVmGroupState : global::Pulumi.ResourceArgs
     {
         [Input("agentProfileLists")]
         private InputList<Inputs.DeployVmGroupAgentProfileListGetArgs>? _agentProfileLists;
@@ -481,5 +483,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf
         public DeployVmGroupState()
         {
         }
+        public static new DeployVmGroupState Empty => new DeployVmGroupState();
     }
 }

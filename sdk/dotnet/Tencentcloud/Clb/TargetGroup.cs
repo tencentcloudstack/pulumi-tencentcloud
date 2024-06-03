@@ -15,34 +15,35 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var test = new Tencentcloud.Clb.TargetGroup("test", new()
     ///     {
-    ///         var test = new Tencentcloud.Clb.TargetGroup("test", new Tencentcloud.Clb.TargetGroupArgs
-    ///         {
-    ///             Port = 33,
-    ///             TargetGroupName = "test",
-    ///         });
-    ///     }
+    ///         Port = 33,
+    ///         TargetGroupName = "test",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// CLB target group can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Clb/targetGroup:TargetGroup test lbtg-3k3io0i0
+    /// $ pulumi import tencentcloud:Clb/targetGroup:TargetGroup test lbtg-3k3io0i0
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Clb/targetGroup:TargetGroup")]
-    public partial class TargetGroup : Pulumi.CustomResource
+    public partial class TargetGroup : global::Pulumi.CustomResource
     {
         /// <summary>
         /// The default port of target group, add server after can use it.
@@ -113,7 +114,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
         }
     }
 
-    public sealed class TargetGroupArgs : Pulumi.ResourceArgs
+    public sealed class TargetGroupArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// The default port of target group, add server after can use it.
@@ -127,7 +128,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
         /// <summary>
         /// It has been deprecated from version 1.77.3. please use `tencentcloud.Clb.TargetGroupInstanceAttachment` instead. The backend server of target group bind.
         /// </summary>
-        [Obsolete(@"It has been deprecated from version 1.77.3. please use `tencentcloud_clb_target_group_instance_attachment` instead.")]
+        [Obsolete(@"It has been deprecated from version 1.77.3. please use `tencentcloud.Clb.TargetGroupInstanceAttachment` instead.")]
         public InputList<Inputs.TargetGroupTargetGroupInstanceArgs> TargetGroupInstances
         {
             get => _targetGroupInstances ?? (_targetGroupInstances = new InputList<Inputs.TargetGroupTargetGroupInstanceArgs>());
@@ -149,9 +150,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
         public TargetGroupArgs()
         {
         }
+        public static new TargetGroupArgs Empty => new TargetGroupArgs();
     }
 
-    public sealed class TargetGroupState : Pulumi.ResourceArgs
+    public sealed class TargetGroupState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// The default port of target group, add server after can use it.
@@ -165,7 +167,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
         /// <summary>
         /// It has been deprecated from version 1.77.3. please use `tencentcloud.Clb.TargetGroupInstanceAttachment` instead. The backend server of target group bind.
         /// </summary>
-        [Obsolete(@"It has been deprecated from version 1.77.3. please use `tencentcloud_clb_target_group_instance_attachment` instead.")]
+        [Obsolete(@"It has been deprecated from version 1.77.3. please use `tencentcloud.Clb.TargetGroupInstanceAttachment` instead.")]
         public InputList<Inputs.TargetGroupTargetGroupInstanceGetArgs> TargetGroupInstances
         {
             get => _targetGroupInstances ?? (_targetGroupInstances = new InputList<Inputs.TargetGroupTargetGroupInstanceGetArgs>());
@@ -187,5 +189,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
         public TargetGroupState()
         {
         }
+        public static new TargetGroupState Empty => new TargetGroupState();
     }
 }

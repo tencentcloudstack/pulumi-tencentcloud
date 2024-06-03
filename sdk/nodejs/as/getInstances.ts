@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,10 +11,11 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const scalingGroup = new tencentcloud.as.ScalingGroup("scalingGroup", {
  *     scalingGroupName: "tf-as-group-ds-ins-basic",
@@ -33,14 +35,12 @@ import * as utilities from "../utilities";
  *     }],
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getInstances(args?: GetInstancesArgs, opts?: pulumi.InvokeOptions): Promise<GetInstancesResult> {
     args = args || {};
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:As/getInstances:getInstances", {
         "filters": args.filters,
         "instanceIds": args.instanceIds,
@@ -82,9 +82,39 @@ export interface GetInstancesResult {
     readonly instanceLists: outputs.As.GetInstancesInstanceList[];
     readonly resultOutputFile?: string;
 }
-
+/**
+ * Use this data source to query detailed information of as instances
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
+ *
+ * const scalingGroup = new tencentcloud.as.ScalingGroup("scalingGroup", {
+ *     scalingGroupName: "tf-as-group-ds-ins-basic",
+ *     configurationId: "your_launch_configuration_id",
+ *     maxSize: 1,
+ *     minSize: 1,
+ *     vpcId: "your_vpc_id",
+ *     subnetIds: ["your_subnet_id"],
+ *     tags: {
+ *         test: "test",
+ *     },
+ * });
+ * const instances = tencentcloud.As.getInstancesOutput({
+ *     filters: [{
+ *         name: "auto-scaling-group-id",
+ *         values: [scalingGroup.id],
+ *     }],
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getInstancesOutput(args?: GetInstancesOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetInstancesResult> {
-    return pulumi.output(args).apply(a => getInstances(a, opts))
+    return pulumi.output(args).apply((a: any) => getInstances(a, opts))
 }
 
 /**

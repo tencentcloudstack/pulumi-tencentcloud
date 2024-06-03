@@ -15,100 +15,94 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdmq
         /// <summary>
         /// Use this data source to query detailed information of tdmq publishers
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var publishers = Tencentcloud.Tdmq.GetPublishers.Invoke(new()
         ///     {
-        ///         var publishers = Output.Create(Tencentcloud.Tdmq.GetPublishers.InvokeAsync(new Tencentcloud.Tdmq.GetPublishersArgs
+        ///         ClusterId = "pulsar-9n95ax58b9vn",
+        ///         Filters = new[]
         ///         {
-        ///             ClusterId = "pulsar-9n95ax58b9vn",
-        ///             Filters = 
-        ///             {
-        ///                 new Tencentcloud.Tdmq.Inputs.GetPublishersFilterArgs
-        ///                 {
-        ///                     Name = "ProducerName",
-        ///                     Values = 
-        ///                     {
-        ///                         "test",
-        ///                     },
-        ///                 },
-        ///             },
-        ///             Namespace = "keep-ns",
-        ///             Sort = new Tencentcloud.Tdmq.Inputs.GetPublishersSortArgs
+        ///             new Tencentcloud.Tdmq.Inputs.GetPublishersFilterInputArgs
         ///             {
         ///                 Name = "ProducerName",
-        ///                 Order = "DESC",
+        ///                 Values = new[]
+        ///                 {
+        ///                     "test",
+        ///                 },
         ///             },
-        ///             Topic = "keep-topic",
-        ///         }));
-        ///     }
+        ///         },
+        ///         Namespace = "keep-ns",
+        ///         Sort = new Tencentcloud.Tdmq.Inputs.GetPublishersSortInputArgs
+        ///         {
+        ///             Name = "ProducerName",
+        ///             Order = "DESC",
+        ///         },
+        ///         Topic = "keep-topic",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetPublishersResult> InvokeAsync(GetPublishersArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetPublishersResult>("tencentcloud:Tdmq/getPublishers:getPublishers", args ?? new GetPublishersArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetPublishersResult>("tencentcloud:Tdmq/getPublishers:getPublishers", args ?? new GetPublishersArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of tdmq publishers
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var publishers = Tencentcloud.Tdmq.GetPublishers.Invoke(new()
         ///     {
-        ///         var publishers = Output.Create(Tencentcloud.Tdmq.GetPublishers.InvokeAsync(new Tencentcloud.Tdmq.GetPublishersArgs
+        ///         ClusterId = "pulsar-9n95ax58b9vn",
+        ///         Filters = new[]
         ///         {
-        ///             ClusterId = "pulsar-9n95ax58b9vn",
-        ///             Filters = 
-        ///             {
-        ///                 new Tencentcloud.Tdmq.Inputs.GetPublishersFilterArgs
-        ///                 {
-        ///                     Name = "ProducerName",
-        ///                     Values = 
-        ///                     {
-        ///                         "test",
-        ///                     },
-        ///                 },
-        ///             },
-        ///             Namespace = "keep-ns",
-        ///             Sort = new Tencentcloud.Tdmq.Inputs.GetPublishersSortArgs
+        ///             new Tencentcloud.Tdmq.Inputs.GetPublishersFilterInputArgs
         ///             {
         ///                 Name = "ProducerName",
-        ///                 Order = "DESC",
+        ///                 Values = new[]
+        ///                 {
+        ///                     "test",
+        ///                 },
         ///             },
-        ///             Topic = "keep-topic",
-        ///         }));
-        ///     }
+        ///         },
+        ///         Namespace = "keep-ns",
+        ///         Sort = new Tencentcloud.Tdmq.Inputs.GetPublishersSortInputArgs
+        ///         {
+        ///             Name = "ProducerName",
+        ///             Order = "DESC",
+        ///         },
+        ///         Topic = "keep-topic",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetPublishersResult> Invoke(GetPublishersInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetPublishersResult>("tencentcloud:Tdmq/getPublishers:getPublishers", args ?? new GetPublishersInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetPublishersResult>("tencentcloud:Tdmq/getPublishers:getPublishers", args ?? new GetPublishersInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetPublishersArgs : Pulumi.InvokeArgs
+    public sealed class GetPublishersArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Cluster ID.
@@ -155,9 +149,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdmq
         public GetPublishersArgs()
         {
         }
+        public static new GetPublishersArgs Empty => new GetPublishersArgs();
     }
 
-    public sealed class GetPublishersInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetPublishersInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Cluster ID.
@@ -204,6 +199,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdmq
         public GetPublishersInvokeArgs()
         {
         }
+        public static new GetPublishersInvokeArgs Empty => new GetPublishersInvokeArgs();
     }
 
 

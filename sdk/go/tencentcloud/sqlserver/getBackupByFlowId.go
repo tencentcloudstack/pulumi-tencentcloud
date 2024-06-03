@@ -8,108 +8,112 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Use this data source to query detailed information of sqlserver datasourceBackupByFlowId
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Availability"
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Sqlserver"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Availability"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Security"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Sqlserver"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Subnet"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Availability"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Security"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Sqlserver"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Subnet"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		zones, err := Availability.GetZonesByProduct(ctx, &availability.GetZonesByProductArgs{
-// 			Product: "sqlserver",
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		vpc, err := Vpc.NewInstance(ctx, "vpc", &Vpc.InstanceArgs{
-// 			CidrBlock: pulumi.String("10.0.0.0/16"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		subnet, err := Subnet.NewInstance(ctx, "subnet", &Subnet.InstanceArgs{
-// 			AvailabilityZone: pulumi.String(zones.Zones[4].Name),
-// 			VpcId:            vpc.ID(),
-// 			CidrBlock:        pulumi.String("10.0.0.0/16"),
-// 			IsMulticast:      pulumi.Bool(false),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		securityGroup, err := Security.NewGroup(ctx, "securityGroup", &Security.GroupArgs{
-// 			Description: pulumi.String("desc."),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		exampleBasicInstance, err := Sqlserver.NewBasicInstance(ctx, "exampleBasicInstance", &Sqlserver.BasicInstanceArgs{
-// 			AvailabilityZone: pulumi.String(zones.Zones[4].Name),
-// 			ChargeType:       pulumi.String("POSTPAID_BY_HOUR"),
-// 			VpcId:            vpc.ID(),
-// 			SubnetId:         subnet.ID(),
-// 			ProjectId:        pulumi.Int(0),
-// 			Memory:           pulumi.Int(4),
-// 			Storage:          pulumi.Int(100),
-// 			Cpu:              pulumi.Int(2),
-// 			MachineType:      pulumi.String("CLOUD_PREMIUM"),
-// 			MaintenanceWeekSets: pulumi.IntArray{
-// 				pulumi.Int(1),
-// 				pulumi.Int(2),
-// 				pulumi.Int(3),
-// 			},
-// 			MaintenanceStartTime: pulumi.String("09:00"),
-// 			MaintenanceTimeSpan:  pulumi.Int(3),
-// 			SecurityGroups: pulumi.StringArray{
-// 				securityGroup.ID(),
-// 			},
-// 			Tags: pulumi.AnyMap{
-// 				"test": pulumi.Any("test"),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		exampleDb, err := Sqlserver.NewDb(ctx, "exampleDb", &Sqlserver.DbArgs{
-// 			InstanceId: exampleBasicInstance.ID(),
-// 			Charset:    pulumi.String("Chinese_PRC_BIN"),
-// 			Remark:     pulumi.String("test-remark"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		exampleGeneralBackup, err := Sqlserver.NewGeneralBackup(ctx, "exampleGeneralBackup", &Sqlserver.GeneralBackupArgs{
-// 			InstanceId: exampleDb.ID(),
-// 			BackupName: pulumi.String("tf_example_backup"),
-// 			Strategy:   pulumi.Int(0),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_ = Sqlserver.GetBackupByFlowIdOutput(ctx, sqlserver.GetBackupByFlowIdOutputArgs{
-// 			InstanceId: exampleGeneralBackup.InstanceId,
-// 			FlowId:     exampleGeneralBackup.FlowId,
-// 		}, nil)
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			zones, err := Availability.GetZonesByProduct(ctx, &availability.GetZonesByProductArgs{
+//				Product: "sqlserver",
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			vpc, err := Vpc.NewInstance(ctx, "vpc", &Vpc.InstanceArgs{
+//				CidrBlock: pulumi.String("10.0.0.0/16"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			subnet, err := Subnet.NewInstance(ctx, "subnet", &Subnet.InstanceArgs{
+//				AvailabilityZone: pulumi.String(zones.Zones[4].Name),
+//				VpcId:            vpc.ID(),
+//				CidrBlock:        pulumi.String("10.0.0.0/16"),
+//				IsMulticast:      pulumi.Bool(false),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			securityGroup, err := Security.NewGroup(ctx, "securityGroup", &Security.GroupArgs{
+//				Description: pulumi.String("desc."),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			exampleBasicInstance, err := Sqlserver.NewBasicInstance(ctx, "exampleBasicInstance", &Sqlserver.BasicInstanceArgs{
+//				AvailabilityZone: pulumi.String(zones.Zones[4].Name),
+//				ChargeType:       pulumi.String("POSTPAID_BY_HOUR"),
+//				VpcId:            vpc.ID(),
+//				SubnetId:         subnet.ID(),
+//				ProjectId:        pulumi.Int(0),
+//				Memory:           pulumi.Int(4),
+//				Storage:          pulumi.Int(100),
+//				Cpu:              pulumi.Int(2),
+//				MachineType:      pulumi.String("CLOUD_PREMIUM"),
+//				MaintenanceWeekSets: pulumi.IntArray{
+//					pulumi.Int(1),
+//					pulumi.Int(2),
+//					pulumi.Int(3),
+//				},
+//				MaintenanceStartTime: pulumi.String("09:00"),
+//				MaintenanceTimeSpan:  pulumi.Int(3),
+//				SecurityGroups: pulumi.StringArray{
+//					securityGroup.ID(),
+//				},
+//				Tags: pulumi.Map{
+//					"test": pulumi.Any("test"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			exampleDb, err := Sqlserver.NewDb(ctx, "exampleDb", &Sqlserver.DbArgs{
+//				InstanceId: exampleBasicInstance.ID(),
+//				Charset:    pulumi.String("Chinese_PRC_BIN"),
+//				Remark:     pulumi.String("test-remark"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			exampleGeneralBackup, err := Sqlserver.NewGeneralBackup(ctx, "exampleGeneralBackup", &Sqlserver.GeneralBackupArgs{
+//				InstanceId: exampleDb.ID(),
+//				BackupName: pulumi.String("tf_example_backup"),
+//				Strategy:   pulumi.Int(0),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_ = Sqlserver.GetBackupByFlowIdOutput(ctx, sqlserver.GetBackupByFlowIdOutputArgs{
+//				InstanceId: exampleGeneralBackup.InstanceId,
+//				FlowId:     exampleGeneralBackup.FlowId,
+//			}, nil)
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 func GetBackupByFlowId(ctx *pulumi.Context, args *GetBackupByFlowIdArgs, opts ...pulumi.InvokeOption) (*GetBackupByFlowIdResult, error) {
-	opts = pkgInvokeDefaultOpts(opts)
+	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetBackupByFlowIdResult
 	err := ctx.Invoke("tencentcloud:Sqlserver/getBackupByFlowId:getBackupByFlowId", args, &rv, opts...)
 	if err != nil {

@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -12,25 +13,24 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const instances = pulumi.output(tencentcloud.Tdcpg.getInstances({
+ * const instances = tencentcloud.Tdcpg.getInstances({
  *     clusterId: "",
  *     instanceId: "",
  *     instanceName: "",
  *     instanceType: "",
  *     status: "",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getInstances(args: GetInstancesArgs, opts?: pulumi.InvokeOptions): Promise<GetInstancesResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Tdcpg/getInstances:getInstances", {
         "clusterId": args.clusterId,
         "instanceId": args.instanceId,
@@ -105,9 +105,30 @@ export interface GetInstancesResult {
      */
     readonly status?: string;
 }
-
+/**
+ * Use this data source to query detailed information of tdcpg instances.
+ *
+ * > **NOTE:** This data source is still in internal testing. To experience its functions, you need to apply for a whitelist from Tencent Cloud.
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const instances = tencentcloud.Tdcpg.getInstances({
+ *     clusterId: "",
+ *     instanceId: "",
+ *     instanceName: "",
+ *     instanceType: "",
+ *     status: "",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getInstancesOutput(args: GetInstancesOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetInstancesResult> {
-    return pulumi.output(args).apply(a => getInstances(a, opts))
+    return pulumi.output(args).apply((a: any) => getInstances(a, opts))
 }
 
 /**

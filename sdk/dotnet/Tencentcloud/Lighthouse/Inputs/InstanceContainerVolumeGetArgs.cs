@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Lighthouse.Inputs
 {
 
-    public sealed class InstanceContainerVolumeGetArgs : Pulumi.ResourceArgs
+    public sealed class InstanceContainerVolumeGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Container path.
@@ -28,5 +28,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Lighthouse.Inputs
         public InstanceContainerVolumeGetArgs()
         {
         }
+        public static new InstanceContainerVolumeGetArgs Empty => new InstanceContainerVolumeGetArgs();
     }
 }

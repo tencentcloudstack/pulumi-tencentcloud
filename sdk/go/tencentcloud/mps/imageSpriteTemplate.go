@@ -7,49 +7,55 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a mps imageSpriteTemplate
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Mps"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Mps"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Mps.NewImageSpriteTemplate(ctx, "imageSpriteTemplate", &Mps.ImageSpriteTemplateArgs{
-// 			ColumnCount:        pulumi.Int(10),
-// 			FillType:           pulumi.String("stretch"),
-// 			Format:             pulumi.String("jpg"),
-// 			Height:             pulumi.Int(143),
-// 			ResolutionAdaptive: pulumi.String("open"),
-// 			RowCount:           pulumi.Int(10),
-// 			SampleInterval:     pulumi.Int(10),
-// 			SampleType:         pulumi.String("Time"),
-// 			Width:              pulumi.Int(182),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Mps.NewImageSpriteTemplate(ctx, "imageSpriteTemplate", &Mps.ImageSpriteTemplateArgs{
+//				ColumnCount:        pulumi.Int(10),
+//				FillType:           pulumi.String("stretch"),
+//				Format:             pulumi.String("jpg"),
+//				Height:             pulumi.Int(143),
+//				ResolutionAdaptive: pulumi.String("open"),
+//				RowCount:           pulumi.Int(10),
+//				SampleInterval:     pulumi.Int(10),
+//				SampleType:         pulumi.String("Time"),
+//				Width:              pulumi.Int(182),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // mps image_sprite_template can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Mps/imageSpriteTemplate:ImageSpriteTemplate image_sprite_template image_sprite_template_id
+// $ pulumi import tencentcloud:Mps/imageSpriteTemplate:ImageSpriteTemplate image_sprite_template image_sprite_template_id
 // ```
 type ImageSpriteTemplate struct {
 	pulumi.CustomResourceState
@@ -97,7 +103,7 @@ func NewImageSpriteTemplate(ctx *pulumi.Context,
 	if args.SampleType == nil {
 		return nil, errors.New("invalid value for required argument 'SampleType'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource ImageSpriteTemplate
 	err := ctx.RegisterResource("tencentcloud:Mps/imageSpriteTemplate:ImageSpriteTemplate", name, args, &resource, opts...)
 	if err != nil {
@@ -250,7 +256,7 @@ func (i *ImageSpriteTemplate) ToImageSpriteTemplateOutputWithContext(ctx context
 // ImageSpriteTemplateArrayInput is an input type that accepts ImageSpriteTemplateArray and ImageSpriteTemplateArrayOutput values.
 // You can construct a concrete instance of `ImageSpriteTemplateArrayInput` via:
 //
-//          ImageSpriteTemplateArray{ ImageSpriteTemplateArgs{...} }
+//	ImageSpriteTemplateArray{ ImageSpriteTemplateArgs{...} }
 type ImageSpriteTemplateArrayInput interface {
 	pulumi.Input
 
@@ -275,7 +281,7 @@ func (i ImageSpriteTemplateArray) ToImageSpriteTemplateArrayOutputWithContext(ct
 // ImageSpriteTemplateMapInput is an input type that accepts ImageSpriteTemplateMap and ImageSpriteTemplateMapOutput values.
 // You can construct a concrete instance of `ImageSpriteTemplateMapInput` via:
 //
-//          ImageSpriteTemplateMap{ "key": ImageSpriteTemplateArgs{...} }
+//	ImageSpriteTemplateMap{ "key": ImageSpriteTemplateArgs{...} }
 type ImageSpriteTemplateMapInput interface {
 	pulumi.Input
 

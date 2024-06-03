@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,6 +11,7 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
@@ -21,13 +23,11 @@ import * as utilities from "../utilities";
  *     showReplicationLog: false,
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getReplicationInstanceSyncStatus(args: GetReplicationInstanceSyncStatusArgs, opts?: pulumi.InvokeOptions): Promise<GetReplicationInstanceSyncStatusResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Tcr/getReplicationInstanceSyncStatus:getReplicationInstanceSyncStatus", {
         "registryId": args.registryId,
         "replicationRegionId": args.replicationRegionId,
@@ -89,9 +89,27 @@ export interface GetReplicationInstanceSyncStatusResult {
     readonly resultOutputFile?: string;
     readonly showReplicationLog?: boolean;
 }
-
+/**
+ * Use this data source to query detailed information of tcr replicationInstanceSyncStatus
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const syncStatus = tencentcloud.Tcr.getReplicationInstanceSyncStatus({
+ *     registryId: local.src_registry_id,
+ *     replicationRegistryId: local.dst_registry_id,
+ *     replicationRegionId: local.dst_region_id,
+ *     showReplicationLog: false,
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getReplicationInstanceSyncStatusOutput(args: GetReplicationInstanceSyncStatusOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetReplicationInstanceSyncStatusResult> {
-    return pulumi.output(args).apply(a => getReplicationInstanceSyncStatus(a, opts))
+    return pulumi.output(args).apply((a: any) => getReplicationInstanceSyncStatus(a, opts))
 }
 
 /**

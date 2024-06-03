@@ -8,36 +8,41 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Use this data source to query detailed information of antiddos overview index
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Antiddos"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Antiddos"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Antiddos"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Antiddos.GetOverviewIndex(ctx, &antiddos.GetOverviewIndexArgs{
-// 			EndTime:   "2023-11-21 12:32:12",
-// 			StartTime: "2023-11-20 12:32:12",
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Antiddos.GetOverviewIndex(ctx, &antiddos.GetOverviewIndexArgs{
+//				EndTime:   "2023-11-21 12:32:12",
+//				StartTime: "2023-11-20 12:32:12",
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 func GetOverviewIndex(ctx *pulumi.Context, args *GetOverviewIndexArgs, opts ...pulumi.InvokeOption) (*GetOverviewIndexResult, error) {
-	opts = pkgInvokeDefaultOpts(opts)
+	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetOverviewIndexResult
 	err := ctx.Invoke("tencentcloud:Antiddos/getOverviewIndex:getOverviewIndex", args, &rv, opts...)
 	if err != nil {

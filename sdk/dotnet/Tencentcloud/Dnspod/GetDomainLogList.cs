@@ -15,66 +15,60 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dnspod
         /// <summary>
         /// Use this data source to query detailed information of dnspod domain_log_list
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var domainLogList = Tencentcloud.Dnspod.GetDomainLogList.Invoke(new()
         ///     {
-        ///         var domainLogList = Output.Create(Tencentcloud.Dnspod.GetDomainLogList.InvokeAsync(new Tencentcloud.Dnspod.GetDomainLogListArgs
-        ///         {
-        ///             Domain = "iac-tf.cloud",
-        ///             DomainId = 123,
-        ///         }));
-        ///     }
+        ///         Domain = "iac-tf.cloud",
+        ///         DomainId = 123,
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetDomainLogListResult> InvokeAsync(GetDomainLogListArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetDomainLogListResult>("tencentcloud:Dnspod/getDomainLogList:getDomainLogList", args ?? new GetDomainLogListArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetDomainLogListResult>("tencentcloud:Dnspod/getDomainLogList:getDomainLogList", args ?? new GetDomainLogListArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of dnspod domain_log_list
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var domainLogList = Tencentcloud.Dnspod.GetDomainLogList.Invoke(new()
         ///     {
-        ///         var domainLogList = Output.Create(Tencentcloud.Dnspod.GetDomainLogList.InvokeAsync(new Tencentcloud.Dnspod.GetDomainLogListArgs
-        ///         {
-        ///             Domain = "iac-tf.cloud",
-        ///             DomainId = 123,
-        ///         }));
-        ///     }
+        ///         Domain = "iac-tf.cloud",
+        ///         DomainId = 123,
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetDomainLogListResult> Invoke(GetDomainLogListInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetDomainLogListResult>("tencentcloud:Dnspod/getDomainLogList:getDomainLogList", args ?? new GetDomainLogListInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetDomainLogListResult>("tencentcloud:Dnspod/getDomainLogList:getDomainLogList", args ?? new GetDomainLogListInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetDomainLogListArgs : Pulumi.InvokeArgs
+    public sealed class GetDomainLogListArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Domain.
@@ -97,9 +91,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dnspod
         public GetDomainLogListArgs()
         {
         }
+        public static new GetDomainLogListArgs Empty => new GetDomainLogListArgs();
     }
 
-    public sealed class GetDomainLogListInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetDomainLogListInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Domain.
@@ -122,6 +117,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dnspod
         public GetDomainLogListInvokeArgs()
         {
         }
+        public static new GetDomainLogListInvokeArgs Empty => new GetDomainLogListInvokeArgs();
     }
 
 

@@ -15,33 +15,34 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Eip
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var addressTransform = new Tencentcloud.Eip.AddressTransform("addressTransform", new()
     ///     {
-    ///         var addressTransform = new Tencentcloud.Eip.AddressTransform("addressTransform", new Tencentcloud.Eip.AddressTransformArgs
-    ///         {
-    ///             InstanceId = "",
-    ///         });
-    ///     }
+    ///         InstanceId = "",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// eip address_transform can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Eip/addressTransform:AddressTransform address_transform address_transform_id
+    /// $ pulumi import tencentcloud:Eip/addressTransform:AddressTransform address_transform address_transform_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Eip/addressTransform:AddressTransform")]
-    public partial class AddressTransform : Pulumi.CustomResource
+    public partial class AddressTransform : global::Pulumi.CustomResource
     {
         /// <summary>
         /// the instance ID of a normal public network IP to be operated. eg:ins-23mk45jn.
@@ -94,7 +95,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Eip
         }
     }
 
-    public sealed class AddressTransformArgs : Pulumi.ResourceArgs
+    public sealed class AddressTransformArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// the instance ID of a normal public network IP to be operated. eg:ins-23mk45jn.
@@ -105,9 +106,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Eip
         public AddressTransformArgs()
         {
         }
+        public static new AddressTransformArgs Empty => new AddressTransformArgs();
     }
 
-    public sealed class AddressTransformState : Pulumi.ResourceArgs
+    public sealed class AddressTransformState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// the instance ID of a normal public network IP to be operated. eg:ins-23mk45jn.
@@ -118,5 +120,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Eip
         public AddressTransformState()
         {
         }
+        public static new AddressTransformState Empty => new AddressTransformState();
     }
 }

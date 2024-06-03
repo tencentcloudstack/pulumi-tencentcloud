@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,21 +11,20 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const customHeader = pulumi.output(tencentcloud.Gaap.getCustomHeader({
- *     ruleId: "rule-9sdhv655",
- * }));
+ * const customHeader = tencentcloud.Gaap.getCustomHeader({
+ *     ruleId: "rule-hddrxgpd",
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getCustomHeader(args: GetCustomHeaderArgs, opts?: pulumi.InvokeOptions): Promise<GetCustomHeaderResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Gaap/getCustomHeader:getCustomHeader", {
         "resultOutputFile": args.resultOutputFile,
         "ruleId": args.ruleId,
@@ -60,9 +60,24 @@ export interface GetCustomHeaderResult {
     readonly resultOutputFile?: string;
     readonly ruleId: string;
 }
-
+/**
+ * Use this data source to query detailed information of gaap custom header
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const customHeader = tencentcloud.Gaap.getCustomHeader({
+ *     ruleId: "rule-hddrxgpd",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getCustomHeaderOutput(args: GetCustomHeaderOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetCustomHeaderResult> {
-    return pulumi.output(args).apply(a => getCustomHeader(a, opts))
+    return pulumi.output(args).apply((a: any) => getCustomHeader(a, opts))
 }
 
 /**

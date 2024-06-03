@@ -9,25 +9,24 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const performancePage = pulumi.output(tencentcloud.Rum.getPerformancePage({
+ * const performancePage = tencentcloud.Rum.getPerformancePage({
  *     endTime: 1625454840,
  *     level: "1",
  *     projectId: 1,
  *     startTime: 1625444040,
  *     type: "pagepv",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getPerformancePage(args: GetPerformancePageArgs, opts?: pulumi.InvokeOptions): Promise<GetPerformancePageResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Rum/getPerformancePage:getPerformancePage", {
         "area": args.area,
         "brand": args.brand,
@@ -195,9 +194,28 @@ export interface GetPerformancePageResult {
     readonly type: string;
     readonly versionNum?: string;
 }
-
+/**
+ * Use this data source to query detailed information of rum performancePage
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const performancePage = tencentcloud.Rum.getPerformancePage({
+ *     endTime: 1625454840,
+ *     level: "1",
+ *     projectId: 1,
+ *     startTime: 1625444040,
+ *     type: "pagepv",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getPerformancePageOutput(args: GetPerformancePageOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetPerformancePageResult> {
-    return pulumi.output(args).apply(a => getPerformancePage(a, opts))
+    return pulumi.output(args).apply((a: any) => getPerformancePage(a, opts))
 }
 
 /**

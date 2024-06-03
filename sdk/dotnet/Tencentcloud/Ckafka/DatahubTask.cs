@@ -15,59 +15,60 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var datahubTask = new Tencentcloud.Ckafka.DatahubTask("datahubTask", new()
     ///     {
-    ///         var datahubTask = new Tencentcloud.Ckafka.DatahubTask("datahubTask", new Tencentcloud.Ckafka.DatahubTaskArgs
+    ///         SourceResource = new Tencentcloud.Ckafka.Inputs.DatahubTaskSourceResourceArgs
     ///         {
-    ///             SourceResource = new Tencentcloud.Ckafka.Inputs.DatahubTaskSourceResourceArgs
+    ///             PostgreSqlParam = new Tencentcloud.Ckafka.Inputs.DatahubTaskSourceResourcePostgreSqlParamArgs
     ///             {
-    ///                 PostgreSqlParam = new Tencentcloud.Ckafka.Inputs.DatahubTaskSourceResourcePostgreSqlParamArgs
-    ///                 {
-    ///                     Database = "postgres",
-    ///                     IsTableRegular = false,
-    ///                     KeyColumns = "",
-    ///                     PluginName = "decoderbufs",
-    ///                     RecordWithSchema = false,
-    ///                     Resource = "resource-y9nxnw46",
-    ///                     SnapshotMode = "never",
-    ///                     Table = "*",
-    ///                 },
-    ///                 Type = "POSTGRESQL",
+    ///                 Database = "postgres",
+    ///                 IsTableRegular = false,
+    ///                 KeyColumns = "",
+    ///                 PluginName = "decoderbufs",
+    ///                 RecordWithSchema = false,
+    ///                 Resource = "resource-y9nxnw46",
+    ///                 SnapshotMode = "never",
+    ///                 Table = "*",
     ///             },
-    ///             TargetResource = new Tencentcloud.Ckafka.Inputs.DatahubTaskTargetResourceArgs
+    ///             Type = "POSTGRESQL",
+    ///         },
+    ///         TargetResource = new Tencentcloud.Ckafka.Inputs.DatahubTaskTargetResourceArgs
+    ///         {
+    ///             TopicParam = new Tencentcloud.Ckafka.Inputs.DatahubTaskTargetResourceTopicParamArgs
     ///             {
-    ///                 TopicParam = new Tencentcloud.Ckafka.Inputs.DatahubTaskTargetResourceTopicParamArgs
-    ///                 {
-    ///                     CompressionType = "none",
-    ///                     Resource = "1308726196-keep-topic",
-    ///                     UseAutoCreateTopic = false,
-    ///                 },
-    ///                 Type = "TOPIC",
+    ///                 CompressionType = "none",
+    ///                 Resource = "1308726196-keep-topic",
+    ///                 UseAutoCreateTopic = false,
     ///             },
-    ///             TaskName = "test-task123321",
-    ///             TaskType = "SOURCE",
-    ///         });
-    ///     }
+    ///             Type = "TOPIC",
+    ///         },
+    ///         TaskName = "test-task123321",
+    ///         TaskType = "SOURCE",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// ckafka datahub_task can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Ckafka/datahubTask:DatahubTask datahub_task datahub_task_id
+    /// $ pulumi import tencentcloud:Ckafka/datahubTask:DatahubTask datahub_task datahub_task_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Ckafka/datahubTask:DatahubTask")]
-    public partial class DatahubTask : Pulumi.CustomResource
+    public partial class DatahubTask : global::Pulumi.CustomResource
     {
         /// <summary>
         /// SchemaId.
@@ -156,7 +157,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka
         }
     }
 
-    public sealed class DatahubTaskArgs : Pulumi.ResourceArgs
+    public sealed class DatahubTaskArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// SchemaId.
@@ -203,9 +204,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka
         public DatahubTaskArgs()
         {
         }
+        public static new DatahubTaskArgs Empty => new DatahubTaskArgs();
     }
 
-    public sealed class DatahubTaskState : Pulumi.ResourceArgs
+    public sealed class DatahubTaskState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// SchemaId.
@@ -252,5 +254,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka
         public DatahubTaskState()
         {
         }
+        public static new DatahubTaskState Empty => new DatahubTaskState();
     }
 }

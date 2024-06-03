@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway.Inputs
 {
 
-    public sealed class UpstreamK8sServiceExtraLabelArgs : Pulumi.ResourceArgs
+    public sealed class UpstreamK8sServiceExtraLabelArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Key of Label.
@@ -28,5 +28,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway.Inputs
         public UpstreamK8sServiceExtraLabelArgs()
         {
         }
+        public static new UpstreamK8sServiceExtraLabelArgs Empty => new UpstreamK8sServiceExtraLabelArgs();
     }
 }

@@ -15,64 +15,58 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dlc
         /// <summary>
         /// Use this data source to query detailed information of dlc describe_user_type
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var describeUserType = Tencentcloud.Dlc.GetDescribeUserType.Invoke(new()
         ///     {
-        ///         var describeUserType = Output.Create(Tencentcloud.Dlc.GetDescribeUserType.InvokeAsync(new Tencentcloud.Dlc.GetDescribeUserTypeArgs
-        ///         {
-        ///             UserId = "127382378",
-        ///         }));
-        ///     }
+        ///         UserId = "127382378",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetDescribeUserTypeResult> InvokeAsync(GetDescribeUserTypeArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetDescribeUserTypeResult>("tencentcloud:Dlc/getDescribeUserType:getDescribeUserType", args ?? new GetDescribeUserTypeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetDescribeUserTypeResult>("tencentcloud:Dlc/getDescribeUserType:getDescribeUserType", args ?? new GetDescribeUserTypeArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of dlc describe_user_type
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var describeUserType = Tencentcloud.Dlc.GetDescribeUserType.Invoke(new()
         ///     {
-        ///         var describeUserType = Output.Create(Tencentcloud.Dlc.GetDescribeUserType.InvokeAsync(new Tencentcloud.Dlc.GetDescribeUserTypeArgs
-        ///         {
-        ///             UserId = "127382378",
-        ///         }));
-        ///     }
+        ///         UserId = "127382378",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetDescribeUserTypeResult> Invoke(GetDescribeUserTypeInvokeArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetDescribeUserTypeResult>("tencentcloud:Dlc/getDescribeUserType:getDescribeUserType", args ?? new GetDescribeUserTypeInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetDescribeUserTypeResult>("tencentcloud:Dlc/getDescribeUserType:getDescribeUserType", args ?? new GetDescribeUserTypeInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetDescribeUserTypeArgs : Pulumi.InvokeArgs
+    public sealed class GetDescribeUserTypeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Used to save results.
@@ -89,9 +83,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dlc
         public GetDescribeUserTypeArgs()
         {
         }
+        public static new GetDescribeUserTypeArgs Empty => new GetDescribeUserTypeArgs();
     }
 
-    public sealed class GetDescribeUserTypeInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetDescribeUserTypeInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Used to save results.
@@ -108,6 +103,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dlc
         public GetDescribeUserTypeInvokeArgs()
         {
         }
+        public static new GetDescribeUserTypeInvokeArgs Empty => new GetDescribeUserTypeInvokeArgs();
     }
 
 

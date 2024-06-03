@@ -15,40 +15,41 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kms
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var example = new Tencentcloud.Kms.WhiteBoxKey("example", new()
     ///     {
-    ///         var example = new Tencentcloud.Kms.WhiteBoxKey("example", new Tencentcloud.Kms.WhiteBoxKeyArgs
+    ///         Algorithm = "SM4",
+    ///         Alias = "tf_example",
+    ///         Description = "test desc.",
+    ///         Status = "Enabled",
+    ///         Tags = 
     ///         {
-    ///             Algorithm = "SM4",
-    ///             Alias = "tf_example",
-    ///             Description = "test desc.",
-    ///             Status = "Enabled",
-    ///             Tags = 
-    ///             {
-    ///                 { "createdBy", "terraform" },
-    ///             },
-    ///         });
-    ///     }
+    ///             { "createdBy", "terraform" },
+    ///         },
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// kms white_box_key can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Kms/whiteBoxKey:WhiteBoxKey example 244dab8c-6dad-11ea-80c6-5254006d0810
+    /// $ pulumi import tencentcloud:Kms/whiteBoxKey:WhiteBoxKey example 244dab8c-6dad-11ea-80c6-5254006d0810
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Kms/whiteBoxKey:WhiteBoxKey")]
-    public partial class WhiteBoxKey : Pulumi.CustomResource
+    public partial class WhiteBoxKey : global::Pulumi.CustomResource
     {
         /// <summary>
         /// All algorithm types for creating keys, supported values: AES_256, SM4.
@@ -125,7 +126,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kms
         }
     }
 
-    public sealed class WhiteBoxKeyArgs : Pulumi.ResourceArgs
+    public sealed class WhiteBoxKeyArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// All algorithm types for creating keys, supported values: AES_256, SM4.
@@ -166,9 +167,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kms
         public WhiteBoxKeyArgs()
         {
         }
+        public static new WhiteBoxKeyArgs Empty => new WhiteBoxKeyArgs();
     }
 
-    public sealed class WhiteBoxKeyState : Pulumi.ResourceArgs
+    public sealed class WhiteBoxKeyState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// All algorithm types for creating keys, supported values: AES_256, SM4.
@@ -209,5 +211,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kms
         public WhiteBoxKeyState()
         {
         }
+        public static new WhiteBoxKeyState Empty => new WhiteBoxKeyState();
     }
 }

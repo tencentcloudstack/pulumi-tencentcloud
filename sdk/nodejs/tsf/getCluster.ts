@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,25 +11,23 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const cluster = pulumi.output(tencentcloud.Tsf.getCluster({
+ * const cluster = tencentcloud.Tsf.getCluster({
  *     clusterIdLists: ["cluster-vwgj5e6y"],
  *     clusterType: "V",
- *     // search_word = ""
  *     disableProgramAuthCheck: true,
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getCluster(args?: GetClusterArgs, opts?: pulumi.InvokeOptions): Promise<GetClusterResult> {
     args = args || {};
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Tsf/getCluster:getCluster", {
         "clusterIdLists": args.clusterIdLists,
         "clusterType": args.clusterType,
@@ -85,9 +84,26 @@ export interface GetClusterResult {
     readonly results: outputs.Tsf.GetClusterResult[];
     readonly searchWord?: string;
 }
-
+/**
+ * Use this data source to query detailed information of tsf cluster
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const cluster = tencentcloud.Tsf.getCluster({
+ *     clusterIdLists: ["cluster-vwgj5e6y"],
+ *     clusterType: "V",
+ *     disableProgramAuthCheck: true,
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getClusterOutput(args?: GetClusterOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetClusterResult> {
-    return pulumi.output(args).apply(a => getCluster(a, opts))
+    return pulumi.output(args).apply((a: any) => getCluster(a, opts))
 }
 
 /**

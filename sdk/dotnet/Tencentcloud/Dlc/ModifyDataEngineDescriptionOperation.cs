@@ -15,34 +15,35 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dlc
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var modifyDataEngineDescriptionOperation = new Tencentcloud.Dlc.ModifyDataEngineDescriptionOperation("modifyDataEngineDescriptionOperation", new()
     ///     {
-    ///         var modifyDataEngineDescriptionOperation = new Tencentcloud.Dlc.ModifyDataEngineDescriptionOperation("modifyDataEngineDescriptionOperation", new Tencentcloud.Dlc.ModifyDataEngineDescriptionOperationArgs
-    ///         {
-    ///             DataEngineName = "testEngine",
-    ///             Message = "test",
-    ///         });
-    ///     }
+    ///         DataEngineName = "testEngine",
+    ///         Message = "test",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// dlc modify_data_engine_description_operation can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Dlc/modifyDataEngineDescriptionOperation:ModifyDataEngineDescriptionOperation modify_data_engine_description_operation modify_data_engine_description_operation_id
+    /// $ pulumi import tencentcloud:Dlc/modifyDataEngineDescriptionOperation:ModifyDataEngineDescriptionOperation modify_data_engine_description_operation modify_data_engine_description_operation_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Dlc/modifyDataEngineDescriptionOperation:ModifyDataEngineDescriptionOperation")]
-    public partial class ModifyDataEngineDescriptionOperation : Pulumi.CustomResource
+    public partial class ModifyDataEngineDescriptionOperation : global::Pulumi.CustomResource
     {
         /// <summary>
         /// The name of the engine to modify.
@@ -101,7 +102,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dlc
         }
     }
 
-    public sealed class ModifyDataEngineDescriptionOperationArgs : Pulumi.ResourceArgs
+    public sealed class ModifyDataEngineDescriptionOperationArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// The name of the engine to modify.
@@ -118,9 +119,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dlc
         public ModifyDataEngineDescriptionOperationArgs()
         {
         }
+        public static new ModifyDataEngineDescriptionOperationArgs Empty => new ModifyDataEngineDescriptionOperationArgs();
     }
 
-    public sealed class ModifyDataEngineDescriptionOperationState : Pulumi.ResourceArgs
+    public sealed class ModifyDataEngineDescriptionOperationState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// The name of the engine to modify.
@@ -137,5 +139,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dlc
         public ModifyDataEngineDescriptionOperationState()
         {
         }
+        public static new ModifyDataEngineDescriptionOperationState Empty => new ModifyDataEngineDescriptionOperationState();
     }
 }

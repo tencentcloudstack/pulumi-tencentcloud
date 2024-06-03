@@ -12,7 +12,7 @@ import * as utilities from "../utilities";
  * tcmq subscribe can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Tcmq/subscribe:Subscribe subscribe subscribe_id
+ * $ pulumi import tencentcloud:Tcmq/subscribe:Subscribe subscribe subscribe_id
  * ```
  */
 export class Subscribe extends pulumi.CustomResource {

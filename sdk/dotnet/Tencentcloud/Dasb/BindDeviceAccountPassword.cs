@@ -15,26 +15,40 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dasb
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var exampleDevice = new Tencentcloud.Dasb.Device("exampleDevice", new()
     ///     {
-    ///         var example = new Tencentcloud.Dasb.BindDeviceAccountPassword("example", new Tencentcloud.Dasb.BindDeviceAccountPasswordArgs
-    ///         {
-    ///             DeviceAccountId = 16,
-    ///             Password = "TerraformPassword",
-    ///         });
-    ///     }
+    ///         OsName = "Linux",
+    ///         Ip = "192.168.0.1",
+    ///         Port = 80,
+    ///     });
     /// 
-    /// }
+    ///     var exampleDeviceAccount = new Tencentcloud.Dasb.DeviceAccount("exampleDeviceAccount", new()
+    ///     {
+    ///         DeviceId = exampleDevice.Id,
+    ///         Account = "root",
+    ///     });
+    /// 
+    ///     var exampleBindDeviceAccountPassword = new Tencentcloud.Dasb.BindDeviceAccountPassword("exampleBindDeviceAccountPassword", new()
+    ///     {
+    ///         DeviceAccountId = exampleDeviceAccount.Id,
+    ///         Password = "TerraformPassword",
+    ///     });
+    /// 
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Dasb/bindDeviceAccountPassword:BindDeviceAccountPassword")]
-    public partial class BindDeviceAccountPassword : Pulumi.CustomResource
+    public partial class BindDeviceAccountPassword : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Host account ID.
@@ -93,7 +107,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dasb
         }
     }
 
-    public sealed class BindDeviceAccountPasswordArgs : Pulumi.ResourceArgs
+    public sealed class BindDeviceAccountPasswordArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Host account ID.
@@ -110,9 +124,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dasb
         public BindDeviceAccountPasswordArgs()
         {
         }
+        public static new BindDeviceAccountPasswordArgs Empty => new BindDeviceAccountPasswordArgs();
     }
 
-    public sealed class BindDeviceAccountPasswordState : Pulumi.ResourceArgs
+    public sealed class BindDeviceAccountPasswordState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Host account ID.
@@ -129,5 +144,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dasb
         public BindDeviceAccountPasswordState()
         {
         }
+        public static new BindDeviceAccountPasswordState Empty => new BindDeviceAccountPasswordState();
     }
 }

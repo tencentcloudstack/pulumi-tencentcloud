@@ -7,35 +7,41 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a CBS storage set attachment resource.
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cbs"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cbs"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Cbs.NewStorageSetAttachment(ctx, "attachment", &Cbs.StorageSetAttachmentArgs{
-// 			InstanceId: pulumi.String("ins-jqlegd42"),
-// 			StorageId:  pulumi.String("disk-kdt0sq6m"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Cbs.NewStorageSetAttachment(ctx, "attachment", &Cbs.StorageSetAttachmentArgs{
+//				InstanceId: pulumi.String("ins-jqlegd42"),
+//				StorageId:  pulumi.String("disk-kdt0sq6m"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 type StorageSetAttachment struct {
 	pulumi.CustomResourceState
 
@@ -58,7 +64,7 @@ func NewStorageSetAttachment(ctx *pulumi.Context,
 	if args.StorageId == nil {
 		return nil, errors.New("invalid value for required argument 'StorageId'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource StorageSetAttachment
 	err := ctx.RegisterResource("tencentcloud:Cbs/storageSetAttachment:StorageSetAttachment", name, args, &resource, opts...)
 	if err != nil {
@@ -139,7 +145,7 @@ func (i *StorageSetAttachment) ToStorageSetAttachmentOutputWithContext(ctx conte
 // StorageSetAttachmentArrayInput is an input type that accepts StorageSetAttachmentArray and StorageSetAttachmentArrayOutput values.
 // You can construct a concrete instance of `StorageSetAttachmentArrayInput` via:
 //
-//          StorageSetAttachmentArray{ StorageSetAttachmentArgs{...} }
+//	StorageSetAttachmentArray{ StorageSetAttachmentArgs{...} }
 type StorageSetAttachmentArrayInput interface {
 	pulumi.Input
 
@@ -164,7 +170,7 @@ func (i StorageSetAttachmentArray) ToStorageSetAttachmentArrayOutputWithContext(
 // StorageSetAttachmentMapInput is an input type that accepts StorageSetAttachmentMap and StorageSetAttachmentMapOutput values.
 // You can construct a concrete instance of `StorageSetAttachmentMapInput` via:
 //
-//          StorageSetAttachmentMap{ "key": StorageSetAttachmentArgs{...} }
+//	StorageSetAttachmentMap{ "key": StorageSetAttachmentArgs{...} }
 type StorageSetAttachmentMapInput interface {
 	pulumi.Input
 

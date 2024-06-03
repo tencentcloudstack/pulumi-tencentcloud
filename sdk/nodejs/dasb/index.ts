@@ -5,36 +5,76 @@ import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
 // Export members:
-export * from "./acl";
-export * from "./bindDeviceAccountPassword";
-export * from "./bindDeviceAccountPrivateKey";
-export * from "./bindDeviceResource";
-export * from "./cmdTemplate";
-export * from "./device";
-export * from "./deviceAccount";
-export * from "./deviceGroup";
-export * from "./deviceGroupMembers";
-export * from "./resetUser";
-export * from "./resource";
-export * from "./user";
-export * from "./userGroup";
-export * from "./userGroupMembers";
+export { AclArgs, AclState } from "./acl";
+export type Acl = import("./acl").Acl;
+export const Acl: typeof import("./acl").Acl = null as any;
+utilities.lazyLoad(exports, ["Acl"], () => require("./acl"));
 
-// Import resources to register:
-import { Acl } from "./acl";
-import { BindDeviceAccountPassword } from "./bindDeviceAccountPassword";
-import { BindDeviceAccountPrivateKey } from "./bindDeviceAccountPrivateKey";
-import { BindDeviceResource } from "./bindDeviceResource";
-import { CmdTemplate } from "./cmdTemplate";
-import { Device } from "./device";
-import { DeviceAccount } from "./deviceAccount";
-import { DeviceGroup } from "./deviceGroup";
-import { DeviceGroupMembers } from "./deviceGroupMembers";
-import { ResetUser } from "./resetUser";
-import { Resource } from "./resource";
-import { User } from "./user";
-import { UserGroup } from "./userGroup";
-import { UserGroupMembers } from "./userGroupMembers";
+export { BindDeviceAccountPasswordArgs, BindDeviceAccountPasswordState } from "./bindDeviceAccountPassword";
+export type BindDeviceAccountPassword = import("./bindDeviceAccountPassword").BindDeviceAccountPassword;
+export const BindDeviceAccountPassword: typeof import("./bindDeviceAccountPassword").BindDeviceAccountPassword = null as any;
+utilities.lazyLoad(exports, ["BindDeviceAccountPassword"], () => require("./bindDeviceAccountPassword"));
+
+export { BindDeviceAccountPrivateKeyArgs, BindDeviceAccountPrivateKeyState } from "./bindDeviceAccountPrivateKey";
+export type BindDeviceAccountPrivateKey = import("./bindDeviceAccountPrivateKey").BindDeviceAccountPrivateKey;
+export const BindDeviceAccountPrivateKey: typeof import("./bindDeviceAccountPrivateKey").BindDeviceAccountPrivateKey = null as any;
+utilities.lazyLoad(exports, ["BindDeviceAccountPrivateKey"], () => require("./bindDeviceAccountPrivateKey"));
+
+export { BindDeviceResourceArgs, BindDeviceResourceState } from "./bindDeviceResource";
+export type BindDeviceResource = import("./bindDeviceResource").BindDeviceResource;
+export const BindDeviceResource: typeof import("./bindDeviceResource").BindDeviceResource = null as any;
+utilities.lazyLoad(exports, ["BindDeviceResource"], () => require("./bindDeviceResource"));
+
+export { CmdTemplateArgs, CmdTemplateState } from "./cmdTemplate";
+export type CmdTemplate = import("./cmdTemplate").CmdTemplate;
+export const CmdTemplate: typeof import("./cmdTemplate").CmdTemplate = null as any;
+utilities.lazyLoad(exports, ["CmdTemplate"], () => require("./cmdTemplate"));
+
+export { DeviceArgs, DeviceState } from "./device";
+export type Device = import("./device").Device;
+export const Device: typeof import("./device").Device = null as any;
+utilities.lazyLoad(exports, ["Device"], () => require("./device"));
+
+export { DeviceAccountArgs, DeviceAccountState } from "./deviceAccount";
+export type DeviceAccount = import("./deviceAccount").DeviceAccount;
+export const DeviceAccount: typeof import("./deviceAccount").DeviceAccount = null as any;
+utilities.lazyLoad(exports, ["DeviceAccount"], () => require("./deviceAccount"));
+
+export { DeviceGroupArgs, DeviceGroupState } from "./deviceGroup";
+export type DeviceGroup = import("./deviceGroup").DeviceGroup;
+export const DeviceGroup: typeof import("./deviceGroup").DeviceGroup = null as any;
+utilities.lazyLoad(exports, ["DeviceGroup"], () => require("./deviceGroup"));
+
+export { DeviceGroupMembersArgs, DeviceGroupMembersState } from "./deviceGroupMembers";
+export type DeviceGroupMembers = import("./deviceGroupMembers").DeviceGroupMembers;
+export const DeviceGroupMembers: typeof import("./deviceGroupMembers").DeviceGroupMembers = null as any;
+utilities.lazyLoad(exports, ["DeviceGroupMembers"], () => require("./deviceGroupMembers"));
+
+export { ResetUserArgs, ResetUserState } from "./resetUser";
+export type ResetUser = import("./resetUser").ResetUser;
+export const ResetUser: typeof import("./resetUser").ResetUser = null as any;
+utilities.lazyLoad(exports, ["ResetUser"], () => require("./resetUser"));
+
+export { ResourceArgs, ResourceState } from "./resource";
+export type Resource = import("./resource").Resource;
+export const Resource: typeof import("./resource").Resource = null as any;
+utilities.lazyLoad(exports, ["Resource"], () => require("./resource"));
+
+export { UserArgs, UserState } from "./user";
+export type User = import("./user").User;
+export const User: typeof import("./user").User = null as any;
+utilities.lazyLoad(exports, ["User"], () => require("./user"));
+
+export { UserGroupArgs, UserGroupState } from "./userGroup";
+export type UserGroup = import("./userGroup").UserGroup;
+export const UserGroup: typeof import("./userGroup").UserGroup = null as any;
+utilities.lazyLoad(exports, ["UserGroup"], () => require("./userGroup"));
+
+export { UserGroupMembersArgs, UserGroupMembersState } from "./userGroupMembers";
+export type UserGroupMembers = import("./userGroupMembers").UserGroupMembers;
+export const UserGroupMembers: typeof import("./userGroupMembers").UserGroupMembers = null as any;
+utilities.lazyLoad(exports, ["UserGroupMembers"], () => require("./userGroupMembers"));
+
 
 const _module = {
     version: utilities.getVersion(),

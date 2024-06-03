@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka.Inputs
 {
 
-    public sealed class DatahubTaskSourceResourceMySqlParamDropClsGetArgs : Pulumi.ResourceArgs
+    public sealed class DatahubTaskSourceResourceMySqlParamDropClsGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// cls LogSet id.
@@ -46,5 +46,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka.Inputs
         public DatahubTaskSourceResourceMySqlParamDropClsGetArgs()
         {
         }
+        public static new DatahubTaskSourceResourceMySqlParamDropClsGetArgs Empty => new DatahubTaskSourceResourceMySqlParamDropClsGetArgs();
     }
 }

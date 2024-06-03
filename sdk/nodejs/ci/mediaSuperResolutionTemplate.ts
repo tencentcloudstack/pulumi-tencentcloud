@@ -9,24 +9,26 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const mediaSuperResolutionTemplate = new tencentcloud.Ci.MediaSuperResolutionTemplate("media_super_resolution_template", {
+ * const mediaSuperResolutionTemplate = new tencentcloud.ci.MediaSuperResolutionTemplate("mediaSuperResolutionTemplate", {
  *     bucket: "terraform-ci-1308919341",
  *     enableScaleUp: "true",
  *     resolution: "sdtohd",
  *     version: "Enhance",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * ci media_super_resolution_template can be imported using the bucket#templateId, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Ci/mediaSuperResolutionTemplate:MediaSuperResolutionTemplate media_super_resolution_template terraform-ci-xxxxxx#t1d707eb2be3294e22b47123894f85cb8f
+ * $ pulumi import tencentcloud:Ci/mediaSuperResolutionTemplate:MediaSuperResolutionTemplate media_super_resolution_template terraform-ci-xxxxxx#t1d707eb2be3294e22b47123894f85cb8f
  * ```
  */
 export class MediaSuperResolutionTemplate extends pulumi.CustomResource {

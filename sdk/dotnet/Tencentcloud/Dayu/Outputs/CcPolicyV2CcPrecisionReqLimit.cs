@@ -18,6 +18,9 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dayu.Outputs
         /// Domain.
         /// </summary>
         public readonly string Domain;
+        /// <summary>
+        /// Instance id.
+        /// </summary>
         public readonly string? InstanceId;
         /// <summary>
         /// Ip address.

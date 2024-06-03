@@ -7,44 +7,64 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a CAM policy.
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"fmt"
 //
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cam"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cam"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Cam.NewPolicyByName(ctx, "foo", &Cam.PolicyByNameArgs{
-// 			Description: pulumi.String("tf_test"),
-// 			Document:    pulumi.String(fmt.Sprintf("%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v", "{\n", "  \"version\": \"2.0\",\n", "  \"statement\": [\n", "    {\n", "      \"action\": [\n", "        \"name/sts:AssumeRole\"\n", "      ],\n", "      \"effect\": \"allow\",\n", "      \"resource\": [\n", "        \"*\"\n", "      ]\n", "    }\n", "  ]\n", "}\n", "\n")),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Cam.NewPolicyByName(ctx, "foo", &Cam.PolicyByNameArgs{
+//				Description: pulumi.String("tf_test"),
+//				Document: pulumi.String(`{
+//	  "version": "2.0",
+//	  "statement": [
+//	    {
+//	      "action": [
+//	        "name/sts:AssumeRole"
+//	      ],
+//	      "effect": "allow",
+//	      "resource": [
+//	        "*"
+//	      ]
+//	    }
+//	  ]
+//	}
+//
+// `),
+//
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // CAM policy can be imported using the name, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Cam/policyByName:PolicyByName foo name
+// $ pulumi import tencentcloud:Cam/policyByName:PolicyByName foo name
 // ```
 type PolicyByName struct {
 	pulumi.CustomResourceState
@@ -53,10 +73,7 @@ type PolicyByName struct {
 	CreateTime pulumi.StringOutput `pulumi:"createTime"`
 	// Description of the CAM policy.
 	Description pulumi.StringPtrOutput `pulumi:"description"`
-	// Document of the CAM policy. The syntax refers to [CAM
-	// POLICY](https://intl.cloud.tencent.com/document/product/598/10604). There are some notes when using this para in
-	// terraform: 1. The elements in JSON claimed supporting two types as `string` and `array` only support type `array`; 2.
-	// Terraform does not support the `root` syntax, when it appears, it must be replaced with the uin it stands for.
+	// Document of the CAM policy. The syntax refers to CAM POLICY Name of CAM policy.
 	Document pulumi.StringOutput `pulumi:"document"`
 	// Name of CAM policy.
 	Name pulumi.StringOutput `pulumi:"name"`
@@ -76,7 +93,7 @@ func NewPolicyByName(ctx *pulumi.Context,
 	if args.Document == nil {
 		return nil, errors.New("invalid value for required argument 'Document'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource PolicyByName
 	err := ctx.RegisterResource("tencentcloud:Cam/policyByName:PolicyByName", name, args, &resource, opts...)
 	if err != nil {
@@ -103,10 +120,7 @@ type policyByNameState struct {
 	CreateTime *string `pulumi:"createTime"`
 	// Description of the CAM policy.
 	Description *string `pulumi:"description"`
-	// Document of the CAM policy. The syntax refers to [CAM
-	// POLICY](https://intl.cloud.tencent.com/document/product/598/10604). There are some notes when using this para in
-	// terraform: 1. The elements in JSON claimed supporting two types as `string` and `array` only support type `array`; 2.
-	// Terraform does not support the `root` syntax, when it appears, it must be replaced with the uin it stands for.
+	// Document of the CAM policy. The syntax refers to CAM POLICY Name of CAM policy.
 	Document *string `pulumi:"document"`
 	// Name of CAM policy.
 	Name *string `pulumi:"name"`
@@ -121,10 +135,7 @@ type PolicyByNameState struct {
 	CreateTime pulumi.StringPtrInput
 	// Description of the CAM policy.
 	Description pulumi.StringPtrInput
-	// Document of the CAM policy. The syntax refers to [CAM
-	// POLICY](https://intl.cloud.tencent.com/document/product/598/10604). There are some notes when using this para in
-	// terraform: 1. The elements in JSON claimed supporting two types as `string` and `array` only support type `array`; 2.
-	// Terraform does not support the `root` syntax, when it appears, it must be replaced with the uin it stands for.
+	// Document of the CAM policy. The syntax refers to CAM POLICY Name of CAM policy.
 	Document pulumi.StringPtrInput
 	// Name of CAM policy.
 	Name pulumi.StringPtrInput
@@ -141,10 +152,7 @@ func (PolicyByNameState) ElementType() reflect.Type {
 type policyByNameArgs struct {
 	// Description of the CAM policy.
 	Description *string `pulumi:"description"`
-	// Document of the CAM policy. The syntax refers to [CAM
-	// POLICY](https://intl.cloud.tencent.com/document/product/598/10604). There are some notes when using this para in
-	// terraform: 1. The elements in JSON claimed supporting two types as `string` and `array` only support type `array`; 2.
-	// Terraform does not support the `root` syntax, when it appears, it must be replaced with the uin it stands for.
+	// Document of the CAM policy. The syntax refers to CAM POLICY Name of CAM policy.
 	Document string `pulumi:"document"`
 	// Name of CAM policy.
 	Name *string `pulumi:"name"`
@@ -154,10 +162,7 @@ type policyByNameArgs struct {
 type PolicyByNameArgs struct {
 	// Description of the CAM policy.
 	Description pulumi.StringPtrInput
-	// Document of the CAM policy. The syntax refers to [CAM
-	// POLICY](https://intl.cloud.tencent.com/document/product/598/10604). There are some notes when using this para in
-	// terraform: 1. The elements in JSON claimed supporting two types as `string` and `array` only support type `array`; 2.
-	// Terraform does not support the `root` syntax, when it appears, it must be replaced with the uin it stands for.
+	// Document of the CAM policy. The syntax refers to CAM POLICY Name of CAM policy.
 	Document pulumi.StringInput
 	// Name of CAM policy.
 	Name pulumi.StringPtrInput
@@ -189,7 +194,7 @@ func (i *PolicyByName) ToPolicyByNameOutputWithContext(ctx context.Context) Poli
 // PolicyByNameArrayInput is an input type that accepts PolicyByNameArray and PolicyByNameArrayOutput values.
 // You can construct a concrete instance of `PolicyByNameArrayInput` via:
 //
-//          PolicyByNameArray{ PolicyByNameArgs{...} }
+//	PolicyByNameArray{ PolicyByNameArgs{...} }
 type PolicyByNameArrayInput interface {
 	pulumi.Input
 
@@ -214,7 +219,7 @@ func (i PolicyByNameArray) ToPolicyByNameArrayOutputWithContext(ctx context.Cont
 // PolicyByNameMapInput is an input type that accepts PolicyByNameMap and PolicyByNameMapOutput values.
 // You can construct a concrete instance of `PolicyByNameMapInput` via:
 //
-//          PolicyByNameMap{ "key": PolicyByNameArgs{...} }
+//	PolicyByNameMap{ "key": PolicyByNameArgs{...} }
 type PolicyByNameMapInput interface {
 	pulumi.Input
 
@@ -260,10 +265,7 @@ func (o PolicyByNameOutput) Description() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *PolicyByName) pulumi.StringPtrOutput { return v.Description }).(pulumi.StringPtrOutput)
 }
 
-// Document of the CAM policy. The syntax refers to [CAM
-// POLICY](https://intl.cloud.tencent.com/document/product/598/10604). There are some notes when using this para in
-// terraform: 1. The elements in JSON claimed supporting two types as `string` and `array` only support type `array`; 2.
-// Terraform does not support the `root` syntax, when it appears, it must be replaced with the uin it stands for.
+// Document of the CAM policy. The syntax refers to CAM POLICY Name of CAM policy.
 func (o PolicyByNameOutput) Document() pulumi.StringOutput {
 	return o.ApplyT(func(v *PolicyByName) pulumi.StringOutput { return v.Document }).(pulumi.StringOutput)
 }

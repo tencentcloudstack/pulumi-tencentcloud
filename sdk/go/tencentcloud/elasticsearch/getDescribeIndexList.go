@@ -8,36 +8,41 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Use this data source to query detailed information of elasticsearch index list
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Elasticsearch"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Elasticsearch"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Elasticsearch"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Elasticsearch.GetDescribeIndexList(ctx, &elasticsearch.GetDescribeIndexListArgs{
-// 			IndexType:  "normal",
-// 			InstanceId: pulumi.StringRef("es-nni6pm4s"),
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Elasticsearch.GetDescribeIndexList(ctx, &elasticsearch.GetDescribeIndexListArgs{
+//				IndexType:  "normal",
+//				InstanceId: pulumi.StringRef("es-nni6pm4s"),
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 func GetDescribeIndexList(ctx *pulumi.Context, args *GetDescribeIndexListArgs, opts ...pulumi.InvokeOption) (*GetDescribeIndexListResult, error) {
-	opts = pkgInvokeDefaultOpts(opts)
+	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetDescribeIndexListResult
 	err := ctx.Invoke("tencentcloud:Elasticsearch/getDescribeIndexList:getDescribeIndexList", args, &rv, opts...)
 	if err != nil {

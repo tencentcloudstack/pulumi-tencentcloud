@@ -15,86 +15,82 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vod
         /// <summary>
         /// Use this data source to query detailed information of VOD snapshot by time offset templates.
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var fooSnapshotByTimeOffsetTemplate = new Tencentcloud.Vod.SnapshotByTimeOffsetTemplate("fooSnapshotByTimeOffsetTemplate", new()
         ///     {
-        ///         var fooSnapshotByTimeOffsetTemplate = new Tencentcloud.Vod.SnapshotByTimeOffsetTemplate("fooSnapshotByTimeOffsetTemplate", new Tencentcloud.Vod.SnapshotByTimeOffsetTemplateArgs
-        ///         {
-        ///             Width = 130,
-        ///             Height = 128,
-        ///             ResolutionAdaptive = false,
-        ///             Format = "png",
-        ///             Comment = "test",
-        ///             FillType = "white",
-        ///         });
-        ///         var fooSnapshotByTimeOffsetTemplates = Tencentcloud.Vod.GetSnapshotByTimeOffsetTemplates.Invoke(new Tencentcloud.Vod.GetSnapshotByTimeOffsetTemplatesInvokeArgs
-        ///         {
-        ///             Type = "Custom",
-        ///             Definition = fooSnapshotByTimeOffsetTemplate.Id,
-        ///         });
-        ///     }
+        ///         Width = 130,
+        ///         Height = 128,
+        ///         ResolutionAdaptive = false,
+        ///         Format = "png",
+        ///         Comment = "test",
+        ///         FillType = "white",
+        ///     });
         /// 
-        /// }
+        ///     var fooSnapshotByTimeOffsetTemplates = Tencentcloud.Vod.GetSnapshotByTimeOffsetTemplates.Invoke(new()
+        ///     {
+        ///         Type = "Custom",
+        ///         Definition = fooSnapshotByTimeOffsetTemplate.Id,
+        ///     });
+        /// 
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetSnapshotByTimeOffsetTemplatesResult> InvokeAsync(GetSnapshotByTimeOffsetTemplatesArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetSnapshotByTimeOffsetTemplatesResult>("tencentcloud:Vod/getSnapshotByTimeOffsetTemplates:getSnapshotByTimeOffsetTemplates", args ?? new GetSnapshotByTimeOffsetTemplatesArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetSnapshotByTimeOffsetTemplatesResult>("tencentcloud:Vod/getSnapshotByTimeOffsetTemplates:getSnapshotByTimeOffsetTemplates", args ?? new GetSnapshotByTimeOffsetTemplatesArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of VOD snapshot by time offset templates.
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var fooSnapshotByTimeOffsetTemplate = new Tencentcloud.Vod.SnapshotByTimeOffsetTemplate("fooSnapshotByTimeOffsetTemplate", new()
         ///     {
-        ///         var fooSnapshotByTimeOffsetTemplate = new Tencentcloud.Vod.SnapshotByTimeOffsetTemplate("fooSnapshotByTimeOffsetTemplate", new Tencentcloud.Vod.SnapshotByTimeOffsetTemplateArgs
-        ///         {
-        ///             Width = 130,
-        ///             Height = 128,
-        ///             ResolutionAdaptive = false,
-        ///             Format = "png",
-        ///             Comment = "test",
-        ///             FillType = "white",
-        ///         });
-        ///         var fooSnapshotByTimeOffsetTemplates = Tencentcloud.Vod.GetSnapshotByTimeOffsetTemplates.Invoke(new Tencentcloud.Vod.GetSnapshotByTimeOffsetTemplatesInvokeArgs
-        ///         {
-        ///             Type = "Custom",
-        ///             Definition = fooSnapshotByTimeOffsetTemplate.Id,
-        ///         });
-        ///     }
+        ///         Width = 130,
+        ///         Height = 128,
+        ///         ResolutionAdaptive = false,
+        ///         Format = "png",
+        ///         Comment = "test",
+        ///         FillType = "white",
+        ///     });
         /// 
-        /// }
+        ///     var fooSnapshotByTimeOffsetTemplates = Tencentcloud.Vod.GetSnapshotByTimeOffsetTemplates.Invoke(new()
+        ///     {
+        ///         Type = "Custom",
+        ///         Definition = fooSnapshotByTimeOffsetTemplate.Id,
+        ///     });
+        /// 
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetSnapshotByTimeOffsetTemplatesResult> Invoke(GetSnapshotByTimeOffsetTemplatesInvokeArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetSnapshotByTimeOffsetTemplatesResult>("tencentcloud:Vod/getSnapshotByTimeOffsetTemplates:getSnapshotByTimeOffsetTemplates", args ?? new GetSnapshotByTimeOffsetTemplatesInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetSnapshotByTimeOffsetTemplatesResult>("tencentcloud:Vod/getSnapshotByTimeOffsetTemplates:getSnapshotByTimeOffsetTemplates", args ?? new GetSnapshotByTimeOffsetTemplatesInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetSnapshotByTimeOffsetTemplatesArgs : Pulumi.InvokeArgs
+    public sealed class GetSnapshotByTimeOffsetTemplatesArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Unique ID filter of snapshot by time offset template.
@@ -123,9 +119,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vod
         public GetSnapshotByTimeOffsetTemplatesArgs()
         {
         }
+        public static new GetSnapshotByTimeOffsetTemplatesArgs Empty => new GetSnapshotByTimeOffsetTemplatesArgs();
     }
 
-    public sealed class GetSnapshotByTimeOffsetTemplatesInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetSnapshotByTimeOffsetTemplatesInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Unique ID filter of snapshot by time offset template.
@@ -154,6 +151,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vod
         public GetSnapshotByTimeOffsetTemplatesInvokeArgs()
         {
         }
+        public static new GetSnapshotByTimeOffsetTemplatesInvokeArgs Empty => new GetSnapshotByTimeOffsetTemplatesInvokeArgs();
     }
 
 

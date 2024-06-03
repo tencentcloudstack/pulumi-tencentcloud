@@ -9,24 +9,26 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = new tencentcloud.Dasb.Device("example", {
+ * const example = new tencentcloud.dasb.Device("example", {
  *     departmentId: "1.2.3",
  *     ip: "192.168.0.1",
  *     osName: "Linux",
  *     port: 80,
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * dasb device can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Dasb/device:Device example 17
+ * $ pulumi import tencentcloud:Dasb/device:Device example 17
  * ```
  */
 export class Device extends pulumi.CustomResource {
@@ -68,7 +70,7 @@ export class Device extends pulumi.CustomResource {
     /**
      * Asset multi-node: fields ip and port.
      */
-    public readonly ipPortSets!: pulumi.Output<string[] | undefined>;
+    public readonly ipPortSets!: pulumi.Output<string[]>;
     /**
      * Hostname, can be empty.
      */

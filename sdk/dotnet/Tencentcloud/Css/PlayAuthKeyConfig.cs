@@ -15,37 +15,38 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Css
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var playAuthKeyConfig = new Tencentcloud.Css.PlayAuthKeyConfig("playAuthKeyConfig", new()
     ///     {
-    ///         var playAuthKeyConfig = new Tencentcloud.Css.PlayAuthKeyConfig("playAuthKeyConfig", new Tencentcloud.Css.PlayAuthKeyConfigArgs
-    ///         {
-    ///             AuthBackKey = "testbackkey",
-    ///             AuthDelta = 3600,
-    ///             AuthKey = "testauthkey",
-    ///             DomainName = "your_play_domain_name",
-    ///             Enable = 1,
-    ///         });
-    ///     }
+    ///         AuthBackKey = "testbackkey",
+    ///         AuthDelta = 3600,
+    ///         AuthKey = "testauthkey",
+    ///         DomainName = "your_play_domain_name",
+    ///         Enable = 1,
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// css play_auth_key_config can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Css/playAuthKeyConfig:PlayAuthKeyConfig play_auth_key_config play_auth_key_config_id
+    /// $ pulumi import tencentcloud:Css/playAuthKeyConfig:PlayAuthKeyConfig play_auth_key_config play_auth_key_config_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Css/playAuthKeyConfig:PlayAuthKeyConfig")]
-    public partial class PlayAuthKeyConfig : Pulumi.CustomResource
+    public partial class PlayAuthKeyConfig : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Alternate key for authentication. No transfer means that the current value is not modified.
@@ -122,7 +123,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Css
         }
     }
 
-    public sealed class PlayAuthKeyConfigArgs : Pulumi.ResourceArgs
+    public sealed class PlayAuthKeyConfigArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Alternate key for authentication. No transfer means that the current value is not modified.
@@ -157,9 +158,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Css
         public PlayAuthKeyConfigArgs()
         {
         }
+        public static new PlayAuthKeyConfigArgs Empty => new PlayAuthKeyConfigArgs();
     }
 
-    public sealed class PlayAuthKeyConfigState : Pulumi.ResourceArgs
+    public sealed class PlayAuthKeyConfigState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Alternate key for authentication. No transfer means that the current value is not modified.
@@ -194,5 +196,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Css
         public PlayAuthKeyConfigState()
         {
         }
+        public static new PlayAuthKeyConfigState Empty => new PlayAuthKeyConfigState();
     }
 }

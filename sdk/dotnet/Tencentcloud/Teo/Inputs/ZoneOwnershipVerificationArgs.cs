@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Inputs
 {
 
-    public sealed class ZoneOwnershipVerificationArgs : Pulumi.ResourceArgs
+    public sealed class ZoneOwnershipVerificationArgs : global::Pulumi.ResourceArgs
     {
         [Input("dnsVerifications")]
         private InputList<Inputs.ZoneOwnershipVerificationDnsVerificationArgs>? _dnsVerifications;
@@ -28,5 +28,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Inputs
         public ZoneOwnershipVerificationArgs()
         {
         }
+        public static new ZoneOwnershipVerificationArgs Empty => new ZoneOwnershipVerificationArgs();
     }
 }

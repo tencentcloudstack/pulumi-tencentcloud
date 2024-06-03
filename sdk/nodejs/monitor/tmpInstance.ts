@@ -9,9 +9,10 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const config = new pulumi.Config();
  * const availabilityZone = config.get("availabilityZone") || "ap-guangzhou-4";
@@ -32,13 +33,14 @@ import * as utilities from "../utilities";
  *     },
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * monitor tmpInstance can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Monitor/tmpInstance:TmpInstance tmpInstance tmpInstance_id
+ * $ pulumi import tencentcloud:Monitor/tmpInstance:TmpInstance tmpInstance tmpInstance_id
  * ```
  */
 export class TmpInstance extends pulumi.CustomResource {

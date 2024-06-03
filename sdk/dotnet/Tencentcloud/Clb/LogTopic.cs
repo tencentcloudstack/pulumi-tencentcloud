@@ -15,34 +15,35 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var topic = new Tencentcloud.Clb.LogTopic("topic", new()
     ///     {
-    ///         var topic = new Tencentcloud.Clb.LogTopic("topic", new Tencentcloud.Clb.LogTopicArgs
-    ///         {
-    ///             LogSetId = tencentcloud_clb_log_set.Set.Id,
-    ///             TopicName = "clb-topic",
-    ///         });
-    ///     }
+    ///         LogSetId = tencentcloud_clb_log_set.Set.Id,
+    ///         TopicName = "clb-topic",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// CLB log topic can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Clb/logTopic:LogTopic topic lb-7a0t6zqb
+    /// $ pulumi import tencentcloud:Clb/logTopic:LogTopic topic lb-7a0t6zqb
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Clb/logTopic:LogTopic")]
-    public partial class LogTopic : Pulumi.CustomResource
+    public partial class LogTopic : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Log topic creation time.
@@ -113,7 +114,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
         }
     }
 
-    public sealed class LogTopicArgs : Pulumi.ResourceArgs
+    public sealed class LogTopicArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Log topic of CLB instance.
@@ -130,9 +131,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
         public LogTopicArgs()
         {
         }
+        public static new LogTopicArgs Empty => new LogTopicArgs();
     }
 
-    public sealed class LogTopicState : Pulumi.ResourceArgs
+    public sealed class LogTopicState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Log topic creation time.
@@ -161,5 +163,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
         public LogTopicState()
         {
         }
+        public static new LogTopicState Empty => new LogTopicState();
     }
 }

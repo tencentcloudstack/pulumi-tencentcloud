@@ -14,7 +14,7 @@ import * as utilities from "../utilities";
  * vpc net_detect can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Vpc/netDetect:NetDetect net_detect net_detect_id
+ * $ pulumi import tencentcloud:Vpc/netDetect:NetDetect net_detect net_detect_id
  * ```
  */
 export class NetDetect extends pulumi.CustomResource {

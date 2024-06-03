@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps.Inputs
 {
 
-    public sealed class ScheduleActivityActivityParaAiAnalysisTaskGetArgs : Pulumi.ResourceArgs
+    public sealed class ScheduleActivityActivityParaAiAnalysisTaskGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Video content analysis template ID.
@@ -28,5 +28,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps.Inputs
         public ScheduleActivityActivityParaAiAnalysisTaskGetArgs()
         {
         }
+        public static new ScheduleActivityActivityParaAiAnalysisTaskGetArgs Empty => new ScheduleActivityActivityParaAiAnalysisTaskGetArgs();
     }
 }

@@ -9,11 +9,12 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const param = new tencentcloud.Redis.Param("param", {
+ * const param = new tencentcloud.redis.Param("param", {
  *     instanceId: "crs-c1nl9rpv",
  *     instanceParams: {
  *         "cluster-node-timeout": "15000",
@@ -37,13 +38,14 @@ import * as utilities from "../utilities";
  *     },
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * redis param can be imported using the instanceId, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Redis/param:Param param crs-c1nl9rpv
+ * $ pulumi import tencentcloud:Redis/param:Param param crs-c1nl9rpv
  * ```
  */
 export class Param extends pulumi.CustomResource {

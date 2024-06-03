@@ -7,88 +7,93 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a wedata integrationRealtimeTask
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Wedata"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Wedata"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Wedata"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Wedata.NewIntegrationRealtimeTask(ctx, "example", &Wedata.IntegrationRealtimeTaskArgs{
-// 			Description: pulumi.String("description."),
-// 			ProjectId:   pulumi.String("1612982498218618880"),
-// 			SyncType:    pulumi.Int(1),
-// 			TaskInfo: &wedata.IntegrationRealtimeTaskTaskInfoArgs{
-// 				Configs: wedata.IntegrationRealtimeTaskTaskInfoConfigArray{
-// 					&wedata.IntegrationRealtimeTaskTaskInfoConfigArgs{
-// 						Name:  pulumi.String("concurrency"),
-// 						Value: pulumi.String("1"),
-// 					},
-// 					&wedata.IntegrationRealtimeTaskTaskInfoConfigArgs{
-// 						Name:  pulumi.String("TaskManager"),
-// 						Value: pulumi.String("1"),
-// 					},
-// 					&wedata.IntegrationRealtimeTaskTaskInfoConfigArgs{
-// 						Name:  pulumi.String("JobManager"),
-// 						Value: pulumi.String("1"),
-// 					},
-// 					&wedata.IntegrationRealtimeTaskTaskInfoConfigArgs{
-// 						Name:  pulumi.String("TolerateDirtyData"),
-// 						Value: pulumi.String("0"),
-// 					},
-// 					&wedata.IntegrationRealtimeTaskTaskInfoConfigArgs{
-// 						Name:  pulumi.String("CheckpointingInterval"),
-// 						Value: pulumi.String("1"),
-// 					},
-// 					&wedata.IntegrationRealtimeTaskTaskInfoConfigArgs{
-// 						Name:  pulumi.String("CheckpointingIntervalUnit"),
-// 						Value: pulumi.String("min"),
-// 					},
-// 					&wedata.IntegrationRealtimeTaskTaskInfoConfigArgs{
-// 						Name:  pulumi.String("RestartStrategyFixedDelayAttempts"),
-// 						Value: pulumi.String("-1"),
-// 					},
-// 					&wedata.IntegrationRealtimeTaskTaskInfoConfigArgs{
-// 						Name:  pulumi.String("ResourceAllocationType"),
-// 						Value: pulumi.String("0"),
-// 					},
-// 					&wedata.IntegrationRealtimeTaskTaskInfoConfigArgs{
-// 						Name:  pulumi.String("TaskAlarmRegularList"),
-// 						Value: pulumi.String("35"),
-// 					},
-// 				},
-// 				ExecutorId: pulumi.String("20230313175748567418"),
-// 				Incharge:   pulumi.String("100028439226"),
-// 			},
-// 			TaskMode: pulumi.String("1"),
-// 			TaskName: pulumi.String("tf_example"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Wedata.NewIntegrationRealtimeTask(ctx, "example", &Wedata.IntegrationRealtimeTaskArgs{
+//				Description: pulumi.String("description."),
+//				ProjectId:   pulumi.String("1612982498218618880"),
+//				SyncType:    pulumi.Int(1),
+//				TaskInfo: &wedata.IntegrationRealtimeTaskTaskInfoArgs{
+//					Configs: wedata.IntegrationRealtimeTaskTaskInfoConfigArray{
+//						&wedata.IntegrationRealtimeTaskTaskInfoConfigArgs{
+//							Name:  pulumi.String("concurrency"),
+//							Value: pulumi.String("1"),
+//						},
+//						&wedata.IntegrationRealtimeTaskTaskInfoConfigArgs{
+//							Name:  pulumi.String("TaskManager"),
+//							Value: pulumi.String("1"),
+//						},
+//						&wedata.IntegrationRealtimeTaskTaskInfoConfigArgs{
+//							Name:  pulumi.String("JobManager"),
+//							Value: pulumi.String("1"),
+//						},
+//						&wedata.IntegrationRealtimeTaskTaskInfoConfigArgs{
+//							Name:  pulumi.String("TolerateDirtyData"),
+//							Value: pulumi.String("0"),
+//						},
+//						&wedata.IntegrationRealtimeTaskTaskInfoConfigArgs{
+//							Name:  pulumi.String("CheckpointingInterval"),
+//							Value: pulumi.String("1"),
+//						},
+//						&wedata.IntegrationRealtimeTaskTaskInfoConfigArgs{
+//							Name:  pulumi.String("CheckpointingIntervalUnit"),
+//							Value: pulumi.String("min"),
+//						},
+//						&wedata.IntegrationRealtimeTaskTaskInfoConfigArgs{
+//							Name:  pulumi.String("RestartStrategyFixedDelayAttempts"),
+//							Value: pulumi.String("-1"),
+//						},
+//						&wedata.IntegrationRealtimeTaskTaskInfoConfigArgs{
+//							Name:  pulumi.String("ResourceAllocationType"),
+//							Value: pulumi.String("0"),
+//						},
+//						&wedata.IntegrationRealtimeTaskTaskInfoConfigArgs{
+//							Name:  pulumi.String("TaskAlarmRegularList"),
+//							Value: pulumi.String("35"),
+//						},
+//					},
+//					ExecutorId: pulumi.String("20230313175748567418"),
+//					Incharge:   pulumi.String("100028439226"),
+//				},
+//				TaskMode: pulumi.String("1"),
+//				TaskName: pulumi.String("tf_example"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // wedata integration_realtime_task can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Wedata/integrationRealtimeTask:IntegrationRealtimeTask example 1776563389209296896#h9d39630a-ae45-4460-90b2-0b093cbfef5d
+// $ pulumi import tencentcloud:Wedata/integrationRealtimeTask:IntegrationRealtimeTask example 1776563389209296896#h9d39630a-ae45-4460-90b2-0b093cbfef5d
 // ```
 type IntegrationRealtimeTask struct {
 	pulumi.CustomResourceState
@@ -131,7 +136,7 @@ func NewIntegrationRealtimeTask(ctx *pulumi.Context,
 	if args.TaskName == nil {
 		return nil, errors.New("invalid value for required argument 'TaskName'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource IntegrationRealtimeTask
 	err := ctx.RegisterResource("tencentcloud:Wedata/integrationRealtimeTask:IntegrationRealtimeTask", name, args, &resource, opts...)
 	if err != nil {
@@ -248,7 +253,7 @@ func (i *IntegrationRealtimeTask) ToIntegrationRealtimeTaskOutputWithContext(ctx
 // IntegrationRealtimeTaskArrayInput is an input type that accepts IntegrationRealtimeTaskArray and IntegrationRealtimeTaskArrayOutput values.
 // You can construct a concrete instance of `IntegrationRealtimeTaskArrayInput` via:
 //
-//          IntegrationRealtimeTaskArray{ IntegrationRealtimeTaskArgs{...} }
+//	IntegrationRealtimeTaskArray{ IntegrationRealtimeTaskArgs{...} }
 type IntegrationRealtimeTaskArrayInput interface {
 	pulumi.Input
 
@@ -273,7 +278,7 @@ func (i IntegrationRealtimeTaskArray) ToIntegrationRealtimeTaskArrayOutputWithCo
 // IntegrationRealtimeTaskMapInput is an input type that accepts IntegrationRealtimeTaskMap and IntegrationRealtimeTaskMapOutput values.
 // You can construct a concrete instance of `IntegrationRealtimeTaskMapInput` via:
 //
-//          IntegrationRealtimeTaskMap{ "key": IntegrationRealtimeTaskArgs{...} }
+//	IntegrationRealtimeTaskMap{ "key": IntegrationRealtimeTaskArgs{...} }
 type IntegrationRealtimeTaskMapInput interface {
 	pulumi.Input
 

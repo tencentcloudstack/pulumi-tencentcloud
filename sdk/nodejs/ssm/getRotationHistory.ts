@@ -9,21 +9,20 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const example = pulumi.output(tencentcloud.Ssm.getRotationHistory({
+ * const example = tencentcloud.Ssm.getRotationHistory({
  *     secretName: "keep_terraform",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getRotationHistory(args: GetRotationHistoryArgs, opts?: pulumi.InvokeOptions): Promise<GetRotationHistoryResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Ssm/getRotationHistory:getRotationHistory", {
         "resultOutputFile": args.resultOutputFile,
         "secretName": args.secretName,
@@ -59,9 +58,24 @@ export interface GetRotationHistoryResult {
      */
     readonly versionIds: string[];
 }
-
+/**
+ * Use this data source to query detailed information of ssm rotationHistory
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const example = tencentcloud.Ssm.getRotationHistory({
+ *     secretName: "keep_terraform",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getRotationHistoryOutput(args: GetRotationHistoryOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetRotationHistoryResult> {
-    return pulumi.output(args).apply(a => getRotationHistory(a, opts))
+    return pulumi.output(args).apply((a: any) => getRotationHistory(a, opts))
 }
 
 /**

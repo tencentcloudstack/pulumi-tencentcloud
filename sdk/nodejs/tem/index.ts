@@ -5,24 +5,46 @@ import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
 // Export members:
-export * from "./appConfig";
-export * from "./application";
-export * from "./applicationService";
-export * from "./environment";
-export * from "./gateway";
-export * from "./logConfig";
-export * from "./scaleRule";
-export * from "./workload";
+export { AppConfigArgs, AppConfigState } from "./appConfig";
+export type AppConfig = import("./appConfig").AppConfig;
+export const AppConfig: typeof import("./appConfig").AppConfig = null as any;
+utilities.lazyLoad(exports, ["AppConfig"], () => require("./appConfig"));
 
-// Import resources to register:
-import { AppConfig } from "./appConfig";
-import { Application } from "./application";
-import { ApplicationService } from "./applicationService";
-import { Environment } from "./environment";
-import { Gateway } from "./gateway";
-import { LogConfig } from "./logConfig";
-import { ScaleRule } from "./scaleRule";
-import { Workload } from "./workload";
+export { ApplicationArgs, ApplicationState } from "./application";
+export type Application = import("./application").Application;
+export const Application: typeof import("./application").Application = null as any;
+utilities.lazyLoad(exports, ["Application"], () => require("./application"));
+
+export { ApplicationServiceArgs, ApplicationServiceState } from "./applicationService";
+export type ApplicationService = import("./applicationService").ApplicationService;
+export const ApplicationService: typeof import("./applicationService").ApplicationService = null as any;
+utilities.lazyLoad(exports, ["ApplicationService"], () => require("./applicationService"));
+
+export { EnvironmentArgs, EnvironmentState } from "./environment";
+export type Environment = import("./environment").Environment;
+export const Environment: typeof import("./environment").Environment = null as any;
+utilities.lazyLoad(exports, ["Environment"], () => require("./environment"));
+
+export { GatewayArgs, GatewayState } from "./gateway";
+export type Gateway = import("./gateway").Gateway;
+export const Gateway: typeof import("./gateway").Gateway = null as any;
+utilities.lazyLoad(exports, ["Gateway"], () => require("./gateway"));
+
+export { LogConfigArgs, LogConfigState } from "./logConfig";
+export type LogConfig = import("./logConfig").LogConfig;
+export const LogConfig: typeof import("./logConfig").LogConfig = null as any;
+utilities.lazyLoad(exports, ["LogConfig"], () => require("./logConfig"));
+
+export { ScaleRuleArgs, ScaleRuleState } from "./scaleRule";
+export type ScaleRule = import("./scaleRule").ScaleRule;
+export const ScaleRule: typeof import("./scaleRule").ScaleRule = null as any;
+utilities.lazyLoad(exports, ["ScaleRule"], () => require("./scaleRule"));
+
+export { WorkloadArgs, WorkloadState } from "./workload";
+export type Workload = import("./workload").Workload;
+export const Workload: typeof import("./workload").Workload = null as any;
+utilities.lazyLoad(exports, ["Workload"], () => require("./workload"));
+
 
 const _module = {
     version: utilities.getVersion(),

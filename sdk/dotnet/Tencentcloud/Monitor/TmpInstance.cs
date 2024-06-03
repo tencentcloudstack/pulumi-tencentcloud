@@ -15,53 +15,56 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var config = new Config();
+    ///     var availabilityZone = config.Get("availabilityZone") ?? "ap-guangzhou-4";
+    ///     var vpc = new Tencentcloud.Vpc.Instance("vpc", new()
     ///     {
-    ///         var config = new Config();
-    ///         var availabilityZone = config.Get("availabilityZone") ?? "ap-guangzhou-4";
-    ///         var vpc = new Tencentcloud.Vpc.Instance("vpc", new Tencentcloud.Vpc.InstanceArgs
-    ///         {
-    ///             CidrBlock = "10.0.0.0/16",
-    ///         });
-    ///         var subnet = new Tencentcloud.Subnet.Instance("subnet", new Tencentcloud.Subnet.InstanceArgs
-    ///         {
-    ///             VpcId = vpc.Id,
-    ///             AvailabilityZone = availabilityZone,
-    ///             CidrBlock = "10.0.1.0/24",
-    ///         });
-    ///         var foo = new Tencentcloud.Monitor.TmpInstance("foo", new Tencentcloud.Monitor.TmpInstanceArgs
-    ///         {
-    ///             InstanceName = "tf-tmp-instance",
-    ///             VpcId = vpc.Id,
-    ///             SubnetId = subnet.Id,
-    ///             DataRetentionTime = 30,
-    ///             Zone = availabilityZone,
-    ///             Tags = 
-    ///             {
-    ///                 { "createdBy", "terraform" },
-    ///             },
-    ///         });
-    ///     }
+    ///         CidrBlock = "10.0.0.0/16",
+    ///     });
     /// 
-    /// }
+    ///     var subnet = new Tencentcloud.Subnet.Instance("subnet", new()
+    ///     {
+    ///         VpcId = vpc.Id,
+    ///         AvailabilityZone = availabilityZone,
+    ///         CidrBlock = "10.0.1.0/24",
+    ///     });
+    /// 
+    ///     var foo = new Tencentcloud.Monitor.TmpInstance("foo", new()
+    ///     {
+    ///         InstanceName = "tf-tmp-instance",
+    ///         VpcId = vpc.Id,
+    ///         SubnetId = subnet.Id,
+    ///         DataRetentionTime = 30,
+    ///         Zone = availabilityZone,
+    ///         Tags = 
+    ///         {
+    ///             { "createdBy", "terraform" },
+    ///         },
+    ///     });
+    /// 
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// monitor tmpInstance can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Monitor/tmpInstance:TmpInstance tmpInstance tmpInstance_id
+    /// $ pulumi import tencentcloud:Monitor/tmpInstance:TmpInstance tmpInstance tmpInstance_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Monitor/tmpInstance:TmpInstance")]
-    public partial class TmpInstance : Pulumi.CustomResource
+    public partial class TmpInstance : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Prometheus HTTP API root address.
@@ -168,7 +171,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
         }
     }
 
-    public sealed class TmpInstanceArgs : Pulumi.ResourceArgs
+    public sealed class TmpInstanceArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Data retention time.
@@ -215,9 +218,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
         public TmpInstanceArgs()
         {
         }
+        public static new TmpInstanceArgs Empty => new TmpInstanceArgs();
     }
 
-    public sealed class TmpInstanceState : Pulumi.ResourceArgs
+    public sealed class TmpInstanceState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Prometheus HTTP API root address.
@@ -288,5 +292,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
         public TmpInstanceState()
         {
         }
+        public static new TmpInstanceState Empty => new TmpInstanceState();
     }
 }

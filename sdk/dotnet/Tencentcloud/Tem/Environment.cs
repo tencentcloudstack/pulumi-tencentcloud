@@ -15,45 +15,46 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tem
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var environment = new Tencentcloud.Tem.Environment("environment", new()
     ///     {
-    ///         var environment = new Tencentcloud.Tem.Environment("environment", new Tencentcloud.Tem.EnvironmentArgs
+    ///         Description = "demo for test",
+    ///         EnvironmentName = "demo",
+    ///         SubnetIds = new[]
     ///         {
-    ///             Description = "demo for test",
-    ///             EnvironmentName = "demo",
-    ///             SubnetIds = 
-    ///             {
-    ///                 "subnet-rdkj0agk",
-    ///                 "subnet-r1c4pn5m",
-    ///                 "subnet-02hcj95c",
-    ///             },
-    ///             Tags = 
-    ///             {
-    ///                 { "created", "terraform" },
-    ///             },
-    ///             Vpc = "vpc-2hfyray3",
-    ///         });
-    ///     }
+    ///             "subnet-rdkj0agk",
+    ///             "subnet-r1c4pn5m",
+    ///             "subnet-02hcj95c",
+    ///         },
+    ///         Tags = 
+    ///         {
+    ///             { "created", "terraform" },
+    ///         },
+    ///         Vpc = "vpc-2hfyray3",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// tem environment can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Tem/environment:Environment environment environment_id
+    /// $ pulumi import tencentcloud:Tem/environment:Environment environment environment_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Tem/environment:Environment")]
-    public partial class Environment : Pulumi.CustomResource
+    public partial class Environment : global::Pulumi.CustomResource
     {
         /// <summary>
         /// environment description.
@@ -130,7 +131,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tem
         }
     }
 
-    public sealed class EnvironmentArgs : Pulumi.ResourceArgs
+    public sealed class EnvironmentArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// environment description.
@@ -177,9 +178,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tem
         public EnvironmentArgs()
         {
         }
+        public static new EnvironmentArgs Empty => new EnvironmentArgs();
     }
 
-    public sealed class EnvironmentState : Pulumi.ResourceArgs
+    public sealed class EnvironmentState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// environment description.
@@ -226,5 +228,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tem
         public EnvironmentState()
         {
         }
+        public static new EnvironmentState Empty => new EnvironmentState();
     }
 }

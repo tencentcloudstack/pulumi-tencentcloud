@@ -15,74 +15,68 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
         /// <summary>
         /// Use this data source to query detailed information of CLB listener rule
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var foo = Tencentcloud.Clb.GetListenerRules.Invoke(new()
         ///     {
-        ///         var foo = Output.Create(Tencentcloud.Clb.GetListenerRules.InvokeAsync(new Tencentcloud.Clb.GetListenerRulesArgs
-        ///         {
-        ///             ClbId = "lb-k2zjp9lv",
-        ///             Domain = "abc.com",
-        ///             ListenerId = "lbl-mwr6vbtv",
-        ///             RuleId = "loc-inem40hz",
-        ///             Scheduler = "WRR",
-        ///             Url = "/",
-        ///         }));
-        ///     }
+        ///         ClbId = "lb-k2zjp9lv",
+        ///         Domain = "abc.com",
+        ///         ListenerId = "lbl-mwr6vbtv",
+        ///         RuleId = "loc-inem40hz",
+        ///         Scheduler = "WRR",
+        ///         Url = "/",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetListenerRulesResult> InvokeAsync(GetListenerRulesArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetListenerRulesResult>("tencentcloud:Clb/getListenerRules:getListenerRules", args ?? new GetListenerRulesArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetListenerRulesResult>("tencentcloud:Clb/getListenerRules:getListenerRules", args ?? new GetListenerRulesArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of CLB listener rule
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var foo = Tencentcloud.Clb.GetListenerRules.Invoke(new()
         ///     {
-        ///         var foo = Output.Create(Tencentcloud.Clb.GetListenerRules.InvokeAsync(new Tencentcloud.Clb.GetListenerRulesArgs
-        ///         {
-        ///             ClbId = "lb-k2zjp9lv",
-        ///             Domain = "abc.com",
-        ///             ListenerId = "lbl-mwr6vbtv",
-        ///             RuleId = "loc-inem40hz",
-        ///             Scheduler = "WRR",
-        ///             Url = "/",
-        ///         }));
-        ///     }
+        ///         ClbId = "lb-k2zjp9lv",
+        ///         Domain = "abc.com",
+        ///         ListenerId = "lbl-mwr6vbtv",
+        ///         RuleId = "loc-inem40hz",
+        ///         Scheduler = "WRR",
+        ///         Url = "/",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetListenerRulesResult> Invoke(GetListenerRulesInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetListenerRulesResult>("tencentcloud:Clb/getListenerRules:getListenerRules", args ?? new GetListenerRulesInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetListenerRulesResult>("tencentcloud:Clb/getListenerRules:getListenerRules", args ?? new GetListenerRulesInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetListenerRulesArgs : Pulumi.InvokeArgs
+    public sealed class GetListenerRulesArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// ID of the CLB to be queried.
@@ -129,9 +123,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
         public GetListenerRulesArgs()
         {
         }
+        public static new GetListenerRulesArgs Empty => new GetListenerRulesArgs();
     }
 
-    public sealed class GetListenerRulesInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetListenerRulesInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// ID of the CLB to be queried.
@@ -178,6 +173,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
         public GetListenerRulesInvokeArgs()
         {
         }
+        public static new GetListenerRulesInvokeArgs Empty => new GetListenerRulesInvokeArgs();
     }
 
 

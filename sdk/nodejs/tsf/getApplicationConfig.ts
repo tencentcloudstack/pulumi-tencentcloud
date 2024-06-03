@@ -2,34 +2,17 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
  * Use this data source to query detailed information of tsf applicationConfig
- *
- * ## Example Usage
- *
- * ```typescript
- * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
- *
- * const applicationConfig = pulumi.output(tencentcloud.Tsf.getApplicationConfig({
- *     applicationId: "app-123456",
- *     configId: "config-123456",
- *     configIdLists: "",
- *     configName: "test-config",
- *     configVersion: "1.0",
- * }));
- * ```
  */
 export function getApplicationConfig(args?: GetApplicationConfigArgs, opts?: pulumi.InvokeOptions): Promise<GetApplicationConfigResult> {
     args = args || {};
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Tsf/getApplicationConfig:getApplicationConfig", {
         "applicationId": args.applicationId,
         "configId": args.configId,
@@ -101,9 +84,11 @@ export interface GetApplicationConfigResult {
      */
     readonly results: outputs.Tsf.GetApplicationConfigResult[];
 }
-
+/**
+ * Use this data source to query detailed information of tsf applicationConfig
+ */
 export function getApplicationConfigOutput(args?: GetApplicationConfigOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetApplicationConfigResult> {
-    return pulumi.output(args).apply(a => getApplicationConfig(a, opts))
+    return pulumi.output(args).apply((a: any) => getApplicationConfig(a, opts))
 }
 
 /**

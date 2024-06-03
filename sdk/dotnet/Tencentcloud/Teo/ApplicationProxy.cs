@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
 {
     [TencentcloudResourceType("tencentcloud:Teo/applicationProxy:ApplicationProxy")]
-    public partial class ApplicationProxy : Pulumi.CustomResource
+    public partial class ApplicationProxy : global::Pulumi.CustomResource
     {
         /// <summary>
         /// - `0`: Disable acceleration.- `1`: Enable acceleration.
@@ -150,7 +150,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
         }
     }
 
-    public sealed class ApplicationProxyArgs : Pulumi.ResourceArgs
+    public sealed class ApplicationProxyArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// - `0`: Disable acceleration.- `1`: Enable acceleration.
@@ -211,9 +211,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
         public ApplicationProxyArgs()
         {
         }
+        public static new ApplicationProxyArgs Empty => new ApplicationProxyArgs();
     }
 
-    public sealed class ApplicationProxyState : Pulumi.ResourceArgs
+    public sealed class ApplicationProxyState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// - `0`: Disable acceleration.- `1`: Enable acceleration.
@@ -316,5 +317,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
         public ApplicationProxyState()
         {
         }
+        public static new ApplicationProxyState Empty => new ApplicationProxyState();
     }
 }

@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,11 +11,12 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const adaptiveDynamicStreamingTemplate = new tencentcloud.Mps.AdaptiveDynamicStreamingTemplate("adaptive_dynamic_streaming_template", {
+ * const adaptiveDynamicStreamingTemplate = new tencentcloud.mps.AdaptiveDynamicStreamingTemplate("adaptiveDynamicStreamingTemplate", {
  *     comment: "terrraform test",
  *     disableHigherVideoBitrate: 0,
  *     disableHigherVideoResolution: 1,
@@ -65,13 +67,14 @@ import * as utilities from "../utilities";
  *     ],
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * mps adaptive_dynamic_streaming_template can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Mps/adaptiveDynamicStreamingTemplate:AdaptiveDynamicStreamingTemplate adaptive_dynamic_streaming_template adaptive_dynamic_streaming_template_id
+ * $ pulumi import tencentcloud:Mps/adaptiveDynamicStreamingTemplate:AdaptiveDynamicStreamingTemplate adaptive_dynamic_streaming_template adaptive_dynamic_streaming_template_id
  * ```
  */
 export class AdaptiveDynamicStreamingTemplate extends pulumi.CustomResource {

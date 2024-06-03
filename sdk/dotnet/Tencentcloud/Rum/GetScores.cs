@@ -15,70 +15,64 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Rum
         /// <summary>
         /// Use this data source to query detailed information of rum scores
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var scores = Tencentcloud.Rum.GetScores.Invoke(new()
         ///     {
-        ///         var scores = Output.Create(Tencentcloud.Rum.GetScores.InvokeAsync(new Tencentcloud.Rum.GetScoresArgs
-        ///         {
-        ///             EndTime = "2023082215",
-        ///             IsDemo = 1,
-        ///             ProjectId = 1,
-        ///             StartTime = "2023082214",
-        ///         }));
-        ///     }
+        ///         EndTime = "2023082215",
+        ///         IsDemo = 1,
+        ///         ProjectId = 1,
+        ///         StartTime = "2023082214",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetScoresResult> InvokeAsync(GetScoresArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetScoresResult>("tencentcloud:Rum/getScores:getScores", args ?? new GetScoresArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetScoresResult>("tencentcloud:Rum/getScores:getScores", args ?? new GetScoresArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of rum scores
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var scores = Tencentcloud.Rum.GetScores.Invoke(new()
         ///     {
-        ///         var scores = Output.Create(Tencentcloud.Rum.GetScores.InvokeAsync(new Tencentcloud.Rum.GetScoresArgs
-        ///         {
-        ///             EndTime = "2023082215",
-        ///             IsDemo = 1,
-        ///             ProjectId = 1,
-        ///             StartTime = "2023082214",
-        ///         }));
-        ///     }
+        ///         EndTime = "2023082215",
+        ///         IsDemo = 1,
+        ///         ProjectId = 1,
+        ///         StartTime = "2023082214",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetScoresResult> Invoke(GetScoresInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetScoresResult>("tencentcloud:Rum/getScores:getScores", args ?? new GetScoresInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetScoresResult>("tencentcloud:Rum/getScores:getScores", args ?? new GetScoresInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetScoresArgs : Pulumi.InvokeArgs
+    public sealed class GetScoresArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// End time.
@@ -113,9 +107,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Rum
         public GetScoresArgs()
         {
         }
+        public static new GetScoresArgs Empty => new GetScoresArgs();
     }
 
-    public sealed class GetScoresInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetScoresInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// End time.
@@ -150,6 +145,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Rum
         public GetScoresInvokeArgs()
         {
         }
+        public static new GetScoresInvokeArgs Empty => new GetScoresInvokeArgs();
     }
 
 

@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,31 +11,33 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
- * import * from "fs";
+ * import * as fs from "fs";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const watermarkTemplate = new tencentcloud.mps.WatermarkTemplate("watermarkTemplate", {
  *     coordinateOrigin: "TopLeft",
  *     type: "image",
- *     xPos: `12%`,
- *     yPos: `21%`,
+ *     xPos: "12%",
+ *     yPos: "21%",
  *     imageTemplate: {
  *         height: "17px",
- *         imageContent: Buffer.from(fs.readFileSync("./logo.png"), 'binary').toString('base64'),
+ *         imageContent: fs.readFileSync("./logo.png", { encoding: "base64" }),
  *         repeatType: "repeat",
  *         width: "12px",
  *     },
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * mps watermark_template can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Mps/watermarkTemplate:WatermarkTemplate watermark_template watermark_template_id
+ * $ pulumi import tencentcloud:Mps/watermarkTemplate:WatermarkTemplate watermark_template watermark_template_id
  * ```
  */
 export class WatermarkTemplate extends pulumi.CustomResource {

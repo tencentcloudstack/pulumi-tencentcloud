@@ -15,68 +15,62 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
         /// <summary>
         /// Provide a datasource to query PostgreSQL Xlogs.
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var foo = Tencentcloud.Postgresql.GetXlogs.Invoke(new()
         ///     {
-        ///         var foo = Output.Create(Tencentcloud.Postgresql.GetXlogs.InvokeAsync(new Tencentcloud.Postgresql.GetXlogsArgs
-        ///         {
-        ///             EndTime = "2022-01-07 01:02:03",
-        ///             InstanceId = "postgres-xxxxxxxx",
-        ///             StartTime = "2022-01-01 00:00:00",
-        ///         }));
-        ///     }
+        ///         EndTime = "2022-01-07 01:02:03",
+        ///         InstanceId = "postgres-xxxxxxxx",
+        ///         StartTime = "2022-01-01 00:00:00",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetXlogsResult> InvokeAsync(GetXlogsArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetXlogsResult>("tencentcloud:Postgresql/getXlogs:getXlogs", args ?? new GetXlogsArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetXlogsResult>("tencentcloud:Postgresql/getXlogs:getXlogs", args ?? new GetXlogsArgs(), options.WithDefaults());
 
         /// <summary>
         /// Provide a datasource to query PostgreSQL Xlogs.
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var foo = Tencentcloud.Postgresql.GetXlogs.Invoke(new()
         ///     {
-        ///         var foo = Output.Create(Tencentcloud.Postgresql.GetXlogs.InvokeAsync(new Tencentcloud.Postgresql.GetXlogsArgs
-        ///         {
-        ///             EndTime = "2022-01-07 01:02:03",
-        ///             InstanceId = "postgres-xxxxxxxx",
-        ///             StartTime = "2022-01-01 00:00:00",
-        ///         }));
-        ///     }
+        ///         EndTime = "2022-01-07 01:02:03",
+        ///         InstanceId = "postgres-xxxxxxxx",
+        ///         StartTime = "2022-01-01 00:00:00",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetXlogsResult> Invoke(GetXlogsInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetXlogsResult>("tencentcloud:Postgresql/getXlogs:getXlogs", args ?? new GetXlogsInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetXlogsResult>("tencentcloud:Postgresql/getXlogs:getXlogs", args ?? new GetXlogsInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetXlogsArgs : Pulumi.InvokeArgs
+    public sealed class GetXlogsArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Xlog end time, format `yyyy-MM-dd hh:mm:ss`.
@@ -105,9 +99,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
         public GetXlogsArgs()
         {
         }
+        public static new GetXlogsArgs Empty => new GetXlogsArgs();
     }
 
-    public sealed class GetXlogsInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetXlogsInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Xlog end time, format `yyyy-MM-dd hh:mm:ss`.
@@ -136,6 +131,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
         public GetXlogsInvokeArgs()
         {
         }
+        public static new GetXlogsInvokeArgs Empty => new GetXlogsInvokeArgs();
     }
 
 

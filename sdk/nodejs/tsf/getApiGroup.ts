@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,11 +11,12 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const apiGroup = pulumi.output(tencentcloud.Tsf.getApiGroup({
+ * const apiGroup = tencentcloud.Tsf.getApiGroup({
  *     authType: "none",
  *     gatewayInstanceId: "gw-ins-lvdypq5k",
  *     groupType: "ms",
@@ -22,16 +24,14 @@ import * as utilities from "../utilities";
  *     orderType: 0,
  *     searchWord: "xxx01",
  *     status: "released",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getApiGroup(args?: GetApiGroupArgs, opts?: pulumi.InvokeOptions): Promise<GetApiGroupResult> {
     args = args || {};
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Tsf/getApiGroup:getApiGroup", {
         "authType": args.authType,
         "gatewayInstanceId": args.gatewayInstanceId,
@@ -115,9 +115,30 @@ export interface GetApiGroupResult {
      */
     readonly status?: string;
 }
-
+/**
+ * Use this data source to query detailed information of tsf apiGroup
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const apiGroup = tencentcloud.Tsf.getApiGroup({
+ *     authType: "none",
+ *     gatewayInstanceId: "gw-ins-lvdypq5k",
+ *     groupType: "ms",
+ *     orderBy: "created_time",
+ *     orderType: 0,
+ *     searchWord: "xxx01",
+ *     status: "released",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getApiGroupOutput(args?: GetApiGroupOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetApiGroupResult> {
-    return pulumi.output(args).apply(a => getApiGroup(a, opts))
+    return pulumi.output(args).apply((a: any) => getApiGroup(a, opts))
 }
 
 /**

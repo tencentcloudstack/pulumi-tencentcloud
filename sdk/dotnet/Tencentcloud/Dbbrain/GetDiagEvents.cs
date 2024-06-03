@@ -15,86 +15,80 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dbbrain
         /// <summary>
         /// Use this data source to query detailed information of dbbrain diag_events
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var diagEvents = Tencentcloud.Dbbrain.GetDiagEvents.Invoke(new()
         ///     {
-        ///         var diagEvents = Output.Create(Tencentcloud.Dbbrain.GetDiagEvents.InvokeAsync(new Tencentcloud.Dbbrain.GetDiagEventsArgs
+        ///         EndTime = "%s",
+        ///         InstanceIds = new[]
         ///         {
-        ///             EndTime = "%s",
-        ///             InstanceIds = 
-        ///             {
-        ///                 "%s",
-        ///             },
-        ///             Severities = 
-        ///             {
-        ///                 1,
-        ///                 4,
-        ///                 5,
-        ///             },
-        ///             StartTime = "%s",
-        ///         }));
-        ///     }
+        ///             "%s",
+        ///         },
+        ///         Severities = new[]
+        ///         {
+        ///             1,
+        ///             4,
+        ///             5,
+        ///         },
+        ///         StartTime = "%s",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetDiagEventsResult> InvokeAsync(GetDiagEventsArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetDiagEventsResult>("tencentcloud:Dbbrain/getDiagEvents:getDiagEvents", args ?? new GetDiagEventsArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetDiagEventsResult>("tencentcloud:Dbbrain/getDiagEvents:getDiagEvents", args ?? new GetDiagEventsArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of dbbrain diag_events
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var diagEvents = Tencentcloud.Dbbrain.GetDiagEvents.Invoke(new()
         ///     {
-        ///         var diagEvents = Output.Create(Tencentcloud.Dbbrain.GetDiagEvents.InvokeAsync(new Tencentcloud.Dbbrain.GetDiagEventsArgs
+        ///         EndTime = "%s",
+        ///         InstanceIds = new[]
         ///         {
-        ///             EndTime = "%s",
-        ///             InstanceIds = 
-        ///             {
-        ///                 "%s",
-        ///             },
-        ///             Severities = 
-        ///             {
-        ///                 1,
-        ///                 4,
-        ///                 5,
-        ///             },
-        ///             StartTime = "%s",
-        ///         }));
-        ///     }
+        ///             "%s",
+        ///         },
+        ///         Severities = new[]
+        ///         {
+        ///             1,
+        ///             4,
+        ///             5,
+        ///         },
+        ///         StartTime = "%s",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetDiagEventsResult> Invoke(GetDiagEventsInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetDiagEventsResult>("tencentcloud:Dbbrain/getDiagEvents:getDiagEvents", args ?? new GetDiagEventsInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetDiagEventsResult>("tencentcloud:Dbbrain/getDiagEvents:getDiagEvents", args ?? new GetDiagEventsInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetDiagEventsArgs : Pulumi.InvokeArgs
+    public sealed class GetDiagEventsArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// end time.
@@ -141,9 +135,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dbbrain
         public GetDiagEventsArgs()
         {
         }
+        public static new GetDiagEventsArgs Empty => new GetDiagEventsArgs();
     }
 
-    public sealed class GetDiagEventsInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetDiagEventsInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// end time.
@@ -190,6 +185,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dbbrain
         public GetDiagEventsInvokeArgs()
         {
         }
+        public static new GetDiagEventsInvokeArgs Empty => new GetDiagEventsInvokeArgs();
     }
 
 

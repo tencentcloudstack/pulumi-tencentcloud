@@ -9,24 +9,26 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const index = new tencentcloud.Elasticsearch.Index("index", {
+ * const index = new tencentcloud.elasticsearch.Index("index", {
  *     indexMetaJson: "{\"mappings\":{},\"settings\":{\"index.number_of_replicas\":1,\"index.number_of_shards\":1,\"index.refresh_interval\":\"30s\"}}",
  *     indexName: "test-es-index",
  *     indexType: "normal",
  *     instanceId: "es-xxxxxx",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * elasticsearch index can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Elasticsearch/index:Index index index_id
+ * $ pulumi import tencentcloud:Elasticsearch/index:Index index index_id
  * ```
  */
 export class Index extends pulumi.CustomResource {

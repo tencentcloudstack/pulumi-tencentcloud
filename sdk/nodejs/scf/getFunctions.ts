@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,10 +11,11 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const fooFunction = new tencentcloud.scf.Function("fooFunction", {
  *     handler: "main.do_it",
@@ -26,14 +28,12 @@ import * as utilities from "../utilities";
  *     name: fooFunction.name,
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getFunctions(args?: GetFunctionsArgs, opts?: pulumi.InvokeOptions): Promise<GetFunctionsResult> {
     args = args || {};
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Scf/getFunctions:getFunctions", {
         "description": args.description,
         "name": args.name,
@@ -99,9 +99,32 @@ export interface GetFunctionsResult {
      */
     readonly tags?: {[key: string]: any};
 }
-
+/**
+ * Use this data source to query SCF functions.
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
+ *
+ * const fooFunction = new tencentcloud.scf.Function("fooFunction", {
+ *     handler: "main.do_it",
+ *     runtime: "Python3.6",
+ *     cosBucketName: "scf-code-1234567890",
+ *     cosObjectName: "code.zip",
+ *     cosBucketRegion: "ap-guangzhou",
+ * });
+ * const fooFunctions = tencentcloud.Scf.getFunctionsOutput({
+ *     name: fooFunction.name,
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getFunctionsOutput(args?: GetFunctionsOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetFunctionsResult> {
-    return pulumi.output(args).apply(a => getFunctions(a, opts))
+    return pulumi.output(args).apply((a: any) => getFunctions(a, opts))
 }
 
 /**

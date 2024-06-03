@@ -15,33 +15,34 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var foo = new Tencentcloud.Clb.LogSet("foo", new()
     ///     {
-    ///         var foo = new Tencentcloud.Clb.LogSet("foo", new Tencentcloud.Clb.LogSetArgs
-    ///         {
-    ///             Period = 7,
-    ///         });
-    ///     }
+    ///         Period = 7,
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// CLB log set can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Clb/logSet:LogSet foo 4eb9e3a8-9c42-4b32-9ddf-e215e9c92764
+    /// $ pulumi import tencentcloud:Clb/logSet:LogSet foo 4eb9e3a8-9c42-4b32-9ddf-e215e9c92764
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Clb/logSet:LogSet")]
-    public partial class LogSet : Pulumi.CustomResource
+    public partial class LogSet : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Logset creation time.
@@ -112,7 +113,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
         }
     }
 
-    public sealed class LogSetArgs : Pulumi.ResourceArgs
+    public sealed class LogSetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Logset retention period in days. Maximun value is `90`.
@@ -123,9 +124,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
         public LogSetArgs()
         {
         }
+        public static new LogSetArgs Empty => new LogSetArgs();
     }
 
-    public sealed class LogSetState : Pulumi.ResourceArgs
+    public sealed class LogSetState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Logset creation time.
@@ -154,5 +156,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
         public LogSetState()
         {
         }
+        public static new LogSetState Empty => new LogSetState();
     }
 }

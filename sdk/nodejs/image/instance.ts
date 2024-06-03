@@ -9,11 +9,12 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const imageSnap = new tencentcloud.Image.Instance("image_snap", {
+ * const imageSnap = new tencentcloud.image.Instance("imageSnap", {
  *     forcePoweroff: true,
  *     imageDescription: "create image with snapshot",
  *     imageName: "image-snapshot-keep",
@@ -23,13 +24,14 @@ import * as utilities from "../utilities";
  *     ],
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * image instance can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Image/instance:Instance image_snap img-gf7jspk6
+ * $ pulumi import tencentcloud:Image/instance:Instance image_snap img-gf7jspk6
  * ```
  */
 export class Instance extends pulumi.CustomResource {

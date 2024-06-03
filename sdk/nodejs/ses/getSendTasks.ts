@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,24 +11,23 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const sendTasks = pulumi.output(tencentcloud.Ses.getSendTasks({
+ * const sendTasks = tencentcloud.Ses.getSendTasks({
  *     receiverId: 1063742,
  *     status: 10,
  *     taskType: 1,
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getSendTasks(args?: GetSendTasksArgs, opts?: pulumi.InvokeOptions): Promise<GetSendTasksResult> {
     args = args || {};
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Ses/getSendTasks:getSendTasks", {
         "receiverId": args.receiverId,
         "resultOutputFile": args.resultOutputFile,
@@ -81,9 +81,26 @@ export interface GetSendTasksResult {
      */
     readonly taskType?: number;
 }
-
+/**
+ * Use this data source to query detailed information of ses sendTasks
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const sendTasks = tencentcloud.Ses.getSendTasks({
+ *     receiverId: 1063742,
+ *     status: 10,
+ *     taskType: 1,
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getSendTasksOutput(args?: GetSendTasksOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetSendTasksResult> {
-    return pulumi.output(args).apply(a => getSendTasks(a, opts))
+    return pulumi.output(args).apply((a: any) => getSendTasks(a, opts))
 }
 
 /**

@@ -15,80 +15,74 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tse
         /// <summary>
         /// Use this data source to query detailed information of tse gateway_services
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var gatewayServices = Tencentcloud.Tse.GetGatewayServices.Invoke(new()
         ///     {
-        ///         var gatewayServices = Output.Create(Tencentcloud.Tse.GetGatewayServices.InvokeAsync(new Tencentcloud.Tse.GetGatewayServicesArgs
+        ///         Filters = new[]
         ///         {
-        ///             Filters = 
+        ///             new Tencentcloud.Tse.Inputs.GetGatewayServicesFilterInputArgs
         ///             {
-        ///                 new Tencentcloud.Tse.Inputs.GetGatewayServicesFilterArgs
-        ///                 {
-        ///                     Key = "name",
-        ///                     Value = "test",
-        ///                 },
+        ///                 Key = "name",
+        ///                 Value = "test",
         ///             },
-        ///             GatewayId = "gateway-ddbb709b",
-        ///         }));
-        ///     }
+        ///         },
+        ///         GatewayId = "gateway-ddbb709b",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetGatewayServicesResult> InvokeAsync(GetGatewayServicesArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetGatewayServicesResult>("tencentcloud:Tse/getGatewayServices:getGatewayServices", args ?? new GetGatewayServicesArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetGatewayServicesResult>("tencentcloud:Tse/getGatewayServices:getGatewayServices", args ?? new GetGatewayServicesArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of tse gateway_services
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var gatewayServices = Tencentcloud.Tse.GetGatewayServices.Invoke(new()
         ///     {
-        ///         var gatewayServices = Output.Create(Tencentcloud.Tse.GetGatewayServices.InvokeAsync(new Tencentcloud.Tse.GetGatewayServicesArgs
+        ///         Filters = new[]
         ///         {
-        ///             Filters = 
+        ///             new Tencentcloud.Tse.Inputs.GetGatewayServicesFilterInputArgs
         ///             {
-        ///                 new Tencentcloud.Tse.Inputs.GetGatewayServicesFilterArgs
-        ///                 {
-        ///                     Key = "name",
-        ///                     Value = "test",
-        ///                 },
+        ///                 Key = "name",
+        ///                 Value = "test",
         ///             },
-        ///             GatewayId = "gateway-ddbb709b",
-        ///         }));
-        ///     }
+        ///         },
+        ///         GatewayId = "gateway-ddbb709b",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetGatewayServicesResult> Invoke(GetGatewayServicesInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetGatewayServicesResult>("tencentcloud:Tse/getGatewayServices:getGatewayServices", args ?? new GetGatewayServicesInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetGatewayServicesResult>("tencentcloud:Tse/getGatewayServices:getGatewayServices", args ?? new GetGatewayServicesInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetGatewayServicesArgs : Pulumi.InvokeArgs
+    public sealed class GetGatewayServicesArgs : global::Pulumi.InvokeArgs
     {
         [Input("filters")]
         private List<Inputs.GetGatewayServicesFilterArgs>? _filters;
@@ -117,9 +111,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tse
         public GetGatewayServicesArgs()
         {
         }
+        public static new GetGatewayServicesArgs Empty => new GetGatewayServicesArgs();
     }
 
-    public sealed class GetGatewayServicesInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetGatewayServicesInvokeArgs : global::Pulumi.InvokeArgs
     {
         [Input("filters")]
         private InputList<Inputs.GetGatewayServicesFilterInputArgs>? _filters;
@@ -148,6 +143,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tse
         public GetGatewayServicesInvokeArgs()
         {
         }
+        public static new GetGatewayServicesInvokeArgs Empty => new GetGatewayServicesInvokeArgs();
     }
 
 

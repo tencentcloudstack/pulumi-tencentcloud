@@ -2,42 +2,16 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
  * Use this data source to query table groups of the TcaplusDB cluster.
- *
- * ## Example Usage
- *
- * ```typescript
- * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
- *
- * const nullTablegroups = pulumi.output(tencentcloud.Tcaplus.getTablegroups({
- *     clusterId: "19162256624",
- * }));
- * const id = pulumi.output(tencentcloud.Tcaplus.getTablegroups({
- *     clusterId: "19162256624",
- *     tablegroupId: "19162256624:1",
- * }));
- * const name = pulumi.output(tencentcloud.Tcaplus.getTablegroups({
- *     clusterId: "19162256624",
- *     tablegroupName: "test",
- * }));
- * const all = pulumi.output(tencentcloud.Tcaplus.getTablegroups({
- *     clusterId: "19162256624",
- *     tablegroupId: "19162256624:1",
- *     tablegroupName: "test",
- * }));
- * ```
  */
 export function getTablegroups(args: GetTablegroupsArgs, opts?: pulumi.InvokeOptions): Promise<GetTablegroupsResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Tcaplus/getTablegroups:getTablegroups", {
         "clusterId": args.clusterId,
         "resultOutputFile": args.resultOutputFile,
@@ -91,9 +65,11 @@ export interface GetTablegroupsResult {
      */
     readonly tablegroupName?: string;
 }
-
+/**
+ * Use this data source to query table groups of the TcaplusDB cluster.
+ */
 export function getTablegroupsOutput(args: GetTablegroupsOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetTablegroupsResult> {
-    return pulumi.output(args).apply(a => getTablegroups(a, opts))
+    return pulumi.output(args).apply((a: any) => getTablegroups(a, opts))
 }
 
 /**

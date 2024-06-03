@@ -15,46 +15,49 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var key = new Tencentcloud.ApiGateway.ApiKey("key", new()
     ///     {
-    ///         var key = new Tencentcloud.ApiGateway.ApiKey("key", new Tencentcloud.ApiGateway.ApiKeyArgs
-    ///         {
-    ///             SecretName = "my_api_key",
-    ///             Status = "on",
-    ///         });
-    ///         var plan = new Tencentcloud.ApiGateway.UsagePlan("plan", new Tencentcloud.ApiGateway.UsagePlanArgs
-    ///         {
-    ///             UsagePlanName = "my_plan",
-    ///             UsagePlanDesc = "nice plan",
-    ///             MaxRequestNum = 100,
-    ///             MaxRequestNumPreSec = 10,
-    ///         });
-    ///         var attach = new Tencentcloud.ApiGateway.ApiKeyAttachment("attach", new Tencentcloud.ApiGateway.ApiKeyAttachmentArgs
-    ///         {
-    ///             ApiKeyId = key.Id,
-    ///             UsagePlanId = plan.Id,
-    ///         });
-    ///     }
+    ///         SecretName = "my_api_key",
+    ///         Status = "on",
+    ///     });
     /// 
-    /// }
+    ///     var plan = new Tencentcloud.ApiGateway.UsagePlan("plan", new()
+    ///     {
+    ///         UsagePlanName = "my_plan",
+    ///         UsagePlanDesc = "nice plan",
+    ///         MaxRequestNum = 100,
+    ///         MaxRequestNumPreSec = 10,
+    ///     });
+    /// 
+    ///     var attach = new Tencentcloud.ApiGateway.ApiKeyAttachment("attach", new()
+    ///     {
+    ///         ApiKeyId = key.Id,
+    ///         UsagePlanId = plan.Id,
+    ///     });
+    /// 
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// API gateway attach access key can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:ApiGateway/apiKeyAttachment:ApiKeyAttachment attach AKID110b8Rmuw7t0fP1N8bi809n327023Is7xN8f#usagePlan-gyeafpab
+    /// $ pulumi import tencentcloud:ApiGateway/apiKeyAttachment:ApiKeyAttachment attach [your api_key_id]#usagePlan-gyeafpab
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:ApiGateway/apiKeyAttachment:ApiKeyAttachment")]
-    public partial class ApiKeyAttachment : Pulumi.CustomResource
+    public partial class ApiKeyAttachment : global::Pulumi.CustomResource
     {
         /// <summary>
         /// ID of API key.
@@ -113,7 +116,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway
         }
     }
 
-    public sealed class ApiKeyAttachmentArgs : Pulumi.ResourceArgs
+    public sealed class ApiKeyAttachmentArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// ID of API key.
@@ -130,9 +133,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway
         public ApiKeyAttachmentArgs()
         {
         }
+        public static new ApiKeyAttachmentArgs Empty => new ApiKeyAttachmentArgs();
     }
 
-    public sealed class ApiKeyAttachmentState : Pulumi.ResourceArgs
+    public sealed class ApiKeyAttachmentState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// ID of API key.
@@ -149,5 +153,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway
         public ApiKeyAttachmentState()
         {
         }
+        public static new ApiKeyAttachmentState Empty => new ApiKeyAttachmentState();
     }
 }

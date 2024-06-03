@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Elasticsearch.Inputs
 {
 
-    public sealed class InstanceNodeInfoListGetArgs : Pulumi.ResourceArgs
+    public sealed class InstanceNodeInfoListGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Node disk size. Unit is GB, and default value is `100`.
@@ -52,5 +52,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Elasticsearch.Inputs
         public InstanceNodeInfoListGetArgs()
         {
         }
+        public static new InstanceNodeInfoListGetArgs Empty => new InstanceNodeInfoListGetArgs();
     }
 }

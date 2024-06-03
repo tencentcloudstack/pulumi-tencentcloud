@@ -7,36 +7,42 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a cynosdb auditLogFile
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cynosdb"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cynosdb"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Cynosdb.NewAuditLogFile(ctx, "auditLogFile", &Cynosdb.AuditLogFileArgs{
-// 			EndTime:    pulumi.String("2022-08-12 10:29:20"),
-// 			InstanceId: pulumi.String("cynosdbmysql-ins-afqx1hy0"),
-// 			StartTime:  pulumi.String("2022-07-12 10:29:20"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Cynosdb.NewAuditLogFile(ctx, "auditLogFile", &Cynosdb.AuditLogFileArgs{
+//				EndTime:    pulumi.String("2022-08-12 10:29:20"),
+//				InstanceId: pulumi.String("cynosdbmysql-ins-afqx1hy0"),
+//				StartTime:  pulumi.String("2022-07-12 10:29:20"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 type AuditLogFile struct {
 	pulumi.CustomResourceState
 
@@ -83,7 +89,7 @@ func NewAuditLogFile(ctx *pulumi.Context,
 	if args.StartTime == nil {
 		return nil, errors.New("invalid value for required argument 'StartTime'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource AuditLogFile
 	err := ctx.RegisterResource("tencentcloud:Cynosdb/auditLogFile:AuditLogFile", name, args, &resource, opts...)
 	if err != nil {
@@ -228,7 +234,7 @@ func (i *AuditLogFile) ToAuditLogFileOutputWithContext(ctx context.Context) Audi
 // AuditLogFileArrayInput is an input type that accepts AuditLogFileArray and AuditLogFileArrayOutput values.
 // You can construct a concrete instance of `AuditLogFileArrayInput` via:
 //
-//          AuditLogFileArray{ AuditLogFileArgs{...} }
+//	AuditLogFileArray{ AuditLogFileArgs{...} }
 type AuditLogFileArrayInput interface {
 	pulumi.Input
 
@@ -253,7 +259,7 @@ func (i AuditLogFileArray) ToAuditLogFileArrayOutputWithContext(ctx context.Cont
 // AuditLogFileMapInput is an input type that accepts AuditLogFileMap and AuditLogFileMapOutput values.
 // You can construct a concrete instance of `AuditLogFileMapInput` via:
 //
-//          AuditLogFileMap{ "key": AuditLogFileArgs{...} }
+//	AuditLogFileMap{ "key": AuditLogFileArgs{...} }
 type AuditLogFileMapInput interface {
 	pulumi.Input
 

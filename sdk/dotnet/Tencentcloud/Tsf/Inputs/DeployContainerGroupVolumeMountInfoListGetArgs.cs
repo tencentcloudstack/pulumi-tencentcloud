@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf.Inputs
 {
 
-    public sealed class DeployContainerGroupVolumeMountInfoListGetArgs : Pulumi.ResourceArgs
+    public sealed class DeployContainerGroupVolumeMountInfoListGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Read and write access mode. 1: Read-only. 2: Read-write.
@@ -40,5 +40,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf.Inputs
         public DeployContainerGroupVolumeMountInfoListGetArgs()
         {
         }
+        public static new DeployContainerGroupVolumeMountInfoListGetArgs Empty => new DeployContainerGroupVolumeMountInfoListGetArgs();
     }
 }

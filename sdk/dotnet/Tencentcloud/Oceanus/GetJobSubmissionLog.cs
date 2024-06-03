@@ -15,72 +15,66 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Oceanus
         /// <summary>
         /// Use this data source to query detailed information of oceanus job_submission_log
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var example = Tencentcloud.Oceanus.GetJobSubmissionLog.Invoke(new()
         ///     {
-        ///         var example = Output.Create(Tencentcloud.Oceanus.GetJobSubmissionLog.InvokeAsync(new Tencentcloud.Oceanus.GetJobSubmissionLogArgs
-        ///         {
-        ///             EndTime = 1698118169241,
-        ///             JobId = "cql-314rw6w0",
-        ///             OrderType = "desc",
-        ///             RunningOrderId = 0,
-        ///             StartTime = 1696130964345,
-        ///         }));
-        ///     }
+        ///         EndTime = 1698118169241,
+        ///         JobId = "cql-314rw6w0",
+        ///         OrderType = "desc",
+        ///         RunningOrderId = 0,
+        ///         StartTime = 1696130964345,
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetJobSubmissionLogResult> InvokeAsync(GetJobSubmissionLogArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetJobSubmissionLogResult>("tencentcloud:Oceanus/getJobSubmissionLog:getJobSubmissionLog", args ?? new GetJobSubmissionLogArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetJobSubmissionLogResult>("tencentcloud:Oceanus/getJobSubmissionLog:getJobSubmissionLog", args ?? new GetJobSubmissionLogArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of oceanus job_submission_log
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var example = Tencentcloud.Oceanus.GetJobSubmissionLog.Invoke(new()
         ///     {
-        ///         var example = Output.Create(Tencentcloud.Oceanus.GetJobSubmissionLog.InvokeAsync(new Tencentcloud.Oceanus.GetJobSubmissionLogArgs
-        ///         {
-        ///             EndTime = 1698118169241,
-        ///             JobId = "cql-314rw6w0",
-        ///             OrderType = "desc",
-        ///             RunningOrderId = 0,
-        ///             StartTime = 1696130964345,
-        ///         }));
-        ///     }
+        ///         EndTime = 1698118169241,
+        ///         JobId = "cql-314rw6w0",
+        ///         OrderType = "desc",
+        ///         RunningOrderId = 0,
+        ///         StartTime = 1696130964345,
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetJobSubmissionLogResult> Invoke(GetJobSubmissionLogInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetJobSubmissionLogResult>("tencentcloud:Oceanus/getJobSubmissionLog:getJobSubmissionLog", args ?? new GetJobSubmissionLogInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetJobSubmissionLogResult>("tencentcloud:Oceanus/getJobSubmissionLog:getJobSubmissionLog", args ?? new GetJobSubmissionLogInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetJobSubmissionLogArgs : Pulumi.InvokeArgs
+    public sealed class GetJobSubmissionLogArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Cursor, default empty, first request does not need to pass in.
@@ -133,9 +127,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Oceanus
         public GetJobSubmissionLogArgs()
         {
         }
+        public static new GetJobSubmissionLogArgs Empty => new GetJobSubmissionLogArgs();
     }
 
-    public sealed class GetJobSubmissionLogInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetJobSubmissionLogInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Cursor, default empty, first request does not need to pass in.
@@ -188,6 +183,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Oceanus
         public GetJobSubmissionLogInvokeArgs()
         {
         }
+        public static new GetJobSubmissionLogInvokeArgs Empty => new GetJobSubmissionLogInvokeArgs();
     }
 
 

@@ -9,11 +9,12 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const microservice = new tencentcloud.Tsf.Microservice("microservice", {
+ * const microservice = new tencentcloud.tsf.Microservice("microservice", {
  *     microserviceDesc: "desc-microservice",
  *     microserviceName: "test-microservice",
  *     namespaceId: "namespace-vjlkzkgy",
@@ -22,13 +23,14 @@ import * as utilities from "../utilities";
  *     },
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * tsf microservice can be imported using the namespaceId#microserviceId, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Tsf/microservice:Microservice microservice namespace-vjlkzkgy#ms-vjeb43lw
+ * $ pulumi import tencentcloud:Tsf/microservice:Microservice microservice namespace-vjlkzkgy#ms-vjeb43lw
  * ```
  */
 export class Microservice extends pulumi.CustomResource {

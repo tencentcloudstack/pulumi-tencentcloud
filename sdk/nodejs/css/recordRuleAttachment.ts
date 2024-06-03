@@ -9,24 +9,26 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const recordRule = new tencentcloud.Css.RecordRuleAttachment("record_rule", {
+ * const recordRule = new tencentcloud.css.RecordRuleAttachment("recordRule", {
  *     appName: "qqq",
  *     domainName: "177154.push.tlivecloud.com",
  *     streamName: "ppp",
  *     templateId: 1262818,
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * css record_rule can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Css/recordRuleAttachment:RecordRuleAttachment record_rule templateId#domainName
+ * $ pulumi import tencentcloud:Css/recordRuleAttachment:RecordRuleAttachment record_rule templateId#domainName
  * ```
  */
 export class RecordRuleAttachment extends pulumi.CustomResource {

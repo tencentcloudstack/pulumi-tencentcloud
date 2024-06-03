@@ -8,40 +8,45 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Use this data source to query detailed information of monitor alarmConditionsTemplate
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Monitor"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Monitor"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Monitor"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Monitor.GetAlarmConditionsTemplate(ctx, &monitor.GetAlarmConditionsTemplateArgs{
-// 			GroupId:          pulumi.StringRef("7803070"),
-// 			GroupName:        pulumi.StringRef("keep-template"),
-// 			Module:           "monitor",
-// 			PolicyCountOrder: pulumi.StringRef("asc=ascending"),
-// 			UpdateTimeOrder:  pulumi.StringRef("desc=descending"),
-// 			ViewName:         pulumi.StringRef("cvm_device"),
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Monitor.GetAlarmConditionsTemplate(ctx, &monitor.GetAlarmConditionsTemplateArgs{
+//				GroupId:          pulumi.StringRef("7803070"),
+//				GroupName:        pulumi.StringRef("keep-template"),
+//				Module:           "monitor",
+//				PolicyCountOrder: pulumi.StringRef("asc=ascending"),
+//				UpdateTimeOrder:  pulumi.StringRef("desc=descending"),
+//				ViewName:         pulumi.StringRef("cvm_device"),
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 func GetAlarmConditionsTemplate(ctx *pulumi.Context, args *GetAlarmConditionsTemplateArgs, opts ...pulumi.InvokeOption) (*GetAlarmConditionsTemplateResult, error) {
-	opts = pkgInvokeDefaultOpts(opts)
+	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetAlarmConditionsTemplateResult
 	err := ctx.Invoke("tencentcloud:Monitor/getAlarmConditionsTemplate:getAlarmConditionsTemplate", args, &rv, opts...)
 	if err != nil {

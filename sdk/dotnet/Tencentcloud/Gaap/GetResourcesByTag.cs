@@ -15,66 +15,60 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
         /// <summary>
         /// Use this data source to query detailed information of gaap resources by tag
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var resourcesByTag = Tencentcloud.Gaap.GetResourcesByTag.Invoke(new()
         ///     {
-        ///         var resourcesByTag = Output.Create(Tencentcloud.Gaap.GetResourcesByTag.InvokeAsync(new Tencentcloud.Gaap.GetResourcesByTagArgs
-        ///         {
-        ///             TagKey = "tagKey",
-        ///             TagValue = "tagValue",
-        ///         }));
-        ///     }
+        ///         TagKey = "tagKey",
+        ///         TagValue = "tagValue",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetResourcesByTagResult> InvokeAsync(GetResourcesByTagArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetResourcesByTagResult>("tencentcloud:Gaap/getResourcesByTag:getResourcesByTag", args ?? new GetResourcesByTagArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetResourcesByTagResult>("tencentcloud:Gaap/getResourcesByTag:getResourcesByTag", args ?? new GetResourcesByTagArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of gaap resources by tag
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var resourcesByTag = Tencentcloud.Gaap.GetResourcesByTag.Invoke(new()
         ///     {
-        ///         var resourcesByTag = Output.Create(Tencentcloud.Gaap.GetResourcesByTag.InvokeAsync(new Tencentcloud.Gaap.GetResourcesByTagArgs
-        ///         {
-        ///             TagKey = "tagKey",
-        ///             TagValue = "tagValue",
-        ///         }));
-        ///     }
+        ///         TagKey = "tagKey",
+        ///         TagValue = "tagValue",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetResourcesByTagResult> Invoke(GetResourcesByTagInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetResourcesByTagResult>("tencentcloud:Gaap/getResourcesByTag:getResourcesByTag", args ?? new GetResourcesByTagInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetResourcesByTagResult>("tencentcloud:Gaap/getResourcesByTag:getResourcesByTag", args ?? new GetResourcesByTagInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetResourcesByTagArgs : Pulumi.InvokeArgs
+    public sealed class GetResourcesByTagArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Resource type, where:Proxy represents the proxy;ProxyGroup represents a proxy group;RealServer represents the Real Server.If this field is not specified, all resources under the label will be queried.
@@ -103,9 +97,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
         public GetResourcesByTagArgs()
         {
         }
+        public static new GetResourcesByTagArgs Empty => new GetResourcesByTagArgs();
     }
 
-    public sealed class GetResourcesByTagInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetResourcesByTagInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Resource type, where:Proxy represents the proxy;ProxyGroup represents a proxy group;RealServer represents the Real Server.If this field is not specified, all resources under the label will be queried.
@@ -134,6 +129,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
         public GetResourcesByTagInvokeArgs()
         {
         }
+        public static new GetResourcesByTagInvokeArgs Empty => new GetResourcesByTagInvokeArgs();
     }
 
 

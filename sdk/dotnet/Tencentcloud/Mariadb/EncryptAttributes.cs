@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mariadb
 {
     [TencentcloudResourceType("tencentcloud:Mariadb/encryptAttributes:EncryptAttributes")]
-    public partial class EncryptAttributes : Pulumi.CustomResource
+    public partial class EncryptAttributes : global::Pulumi.CustomResource
     {
         /// <summary>
         /// whether to enable data encryption, it is not supported to turn it off after it is turned on. The optional values:
@@ -71,7 +71,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mariadb
         }
     }
 
-    public sealed class EncryptAttributesArgs : Pulumi.ResourceArgs
+    public sealed class EncryptAttributesArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// whether to enable data encryption, it is not supported to turn it off after it is turned on. The optional values:
@@ -89,9 +89,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mariadb
         public EncryptAttributesArgs()
         {
         }
+        public static new EncryptAttributesArgs Empty => new EncryptAttributesArgs();
     }
 
-    public sealed class EncryptAttributesState : Pulumi.ResourceArgs
+    public sealed class EncryptAttributesState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// whether to enable data encryption, it is not supported to turn it off after it is turned on. The optional values:
@@ -109,5 +110,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mariadb
         public EncryptAttributesState()
         {
         }
+        public static new EncryptAttributesState Empty => new EncryptAttributesState();
     }
 }

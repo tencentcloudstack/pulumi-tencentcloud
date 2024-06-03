@@ -15,26 +15,27 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var upgradeProxyVersion = new Tencentcloud.Cynosdb.UpgradeProxyVersion("upgradeProxyVersion", new()
     ///     {
-    ///         var upgradeProxyVersion = new Tencentcloud.Cynosdb.UpgradeProxyVersion("upgradeProxyVersion", new Tencentcloud.Cynosdb.UpgradeProxyVersionArgs
-    ///         {
-    ///             ClusterId = "cynosdbmysql-bws8h88b",
-    ///             DstProxyVersion = "1.3.7",
-    ///         });
-    ///     }
+    ///         ClusterId = "cynosdbmysql-bws8h88b",
+    ///         DstProxyVersion = "1.3.7",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Cynosdb/upgradeProxyVersion:UpgradeProxyVersion")]
-    public partial class UpgradeProxyVersion : Pulumi.CustomResource
+    public partial class UpgradeProxyVersion : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Cluster ID.
@@ -93,7 +94,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
         }
     }
 
-    public sealed class UpgradeProxyVersionArgs : Pulumi.ResourceArgs
+    public sealed class UpgradeProxyVersionArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Cluster ID.
@@ -110,9 +111,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
         public UpgradeProxyVersionArgs()
         {
         }
+        public static new UpgradeProxyVersionArgs Empty => new UpgradeProxyVersionArgs();
     }
 
-    public sealed class UpgradeProxyVersionState : Pulumi.ResourceArgs
+    public sealed class UpgradeProxyVersionState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Cluster ID.
@@ -129,5 +131,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
         public UpgradeProxyVersionState()
         {
         }
+        public static new UpgradeProxyVersionState Empty => new UpgradeProxyVersionState();
     }
 }

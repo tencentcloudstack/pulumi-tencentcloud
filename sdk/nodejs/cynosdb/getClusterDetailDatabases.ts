@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,22 +11,21 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const clusterDetailDatabases = pulumi.output(tencentcloud.Cynosdb.getClusterDetailDatabases({
+ * const clusterDetailDatabases = tencentcloud.Cynosdb.getClusterDetailDatabases({
  *     clusterId: "cynosdbmysql-bws8h88b",
  *     dbName: "users",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getClusterDetailDatabases(args: GetClusterDetailDatabasesArgs, opts?: pulumi.InvokeOptions): Promise<GetClusterDetailDatabasesResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Cynosdb/getClusterDetailDatabases:getClusterDetailDatabases", {
         "clusterId": args.clusterId,
         "dbName": args.dbName,
@@ -73,9 +73,25 @@ export interface GetClusterDetailDatabasesResult {
     readonly id: string;
     readonly resultOutputFile?: string;
 }
-
+/**
+ * Use this data source to query detailed information of cynosdb clusterDetailDatabases
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const clusterDetailDatabases = tencentcloud.Cynosdb.getClusterDetailDatabases({
+ *     clusterId: "cynosdbmysql-bws8h88b",
+ *     dbName: "users",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getClusterDetailDatabasesOutput(args: GetClusterDetailDatabasesOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetClusterDetailDatabasesResult> {
-    return pulumi.output(args).apply(a => getClusterDetailDatabases(a, opts))
+    return pulumi.output(args).apply((a: any) => getClusterDetailDatabases(a, opts))
 }
 
 /**

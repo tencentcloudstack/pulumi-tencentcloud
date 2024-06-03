@@ -13,14 +13,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam
     public static class GetListAttachedUserPolicy
     {
         public static Task<GetListAttachedUserPolicyResult> InvokeAsync(GetListAttachedUserPolicyArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetListAttachedUserPolicyResult>("tencentcloud:Cam/getListAttachedUserPolicy:getListAttachedUserPolicy", args ?? new GetListAttachedUserPolicyArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetListAttachedUserPolicyResult>("tencentcloud:Cam/getListAttachedUserPolicy:getListAttachedUserPolicy", args ?? new GetListAttachedUserPolicyArgs(), options.WithDefaults());
 
         public static Output<GetListAttachedUserPolicyResult> Invoke(GetListAttachedUserPolicyInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetListAttachedUserPolicyResult>("tencentcloud:Cam/getListAttachedUserPolicy:getListAttachedUserPolicy", args ?? new GetListAttachedUserPolicyInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetListAttachedUserPolicyResult>("tencentcloud:Cam/getListAttachedUserPolicy:getListAttachedUserPolicy", args ?? new GetListAttachedUserPolicyInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetListAttachedUserPolicyArgs : Pulumi.InvokeArgs
+    public sealed class GetListAttachedUserPolicyArgs : global::Pulumi.InvokeArgs
     {
         [Input("attachType", required: true)]
         public int AttachType { get; set; }
@@ -40,9 +40,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam
         public GetListAttachedUserPolicyArgs()
         {
         }
+        public static new GetListAttachedUserPolicyArgs Empty => new GetListAttachedUserPolicyArgs();
     }
 
-    public sealed class GetListAttachedUserPolicyInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetListAttachedUserPolicyInvokeArgs : global::Pulumi.InvokeArgs
     {
         [Input("attachType", required: true)]
         public Input<int> AttachType { get; set; } = null!;
@@ -62,6 +63,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam
         public GetListAttachedUserPolicyInvokeArgs()
         {
         }
+        public static new GetListAttachedUserPolicyInvokeArgs Empty => new GetListAttachedUserPolicyInvokeArgs();
     }
 
 

@@ -9,20 +9,19 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const pendingRiskInfo = pulumi.output(tencentcloud.Antiddos.getPendingRiskInfo());
+ * const pendingRiskInfo = tencentcloud.Antiddos.getPendingRiskInfo({});
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getPendingRiskInfo(args?: GetPendingRiskInfoArgs, opts?: pulumi.InvokeOptions): Promise<GetPendingRiskInfoResult> {
     args = args || {};
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Antiddos/getPendingRiskInfo:getPendingRiskInfo", {
         "resultOutputFile": args.resultOutputFile,
     }, opts);
@@ -68,9 +67,22 @@ export interface GetPendingRiskInfoResult {
      */
     readonly total: number;
 }
-
+/**
+ * Use this data source to query detailed information of antiddos pending risk info
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const pendingRiskInfo = tencentcloud.Antiddos.getPendingRiskInfo({});
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getPendingRiskInfoOutput(args?: GetPendingRiskInfoOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetPendingRiskInfoResult> {
-    return pulumi.output(args).apply(a => getPendingRiskInfo(a, opts))
+    return pulumi.output(args).apply((a: any) => getPendingRiskInfo(a, opts))
 }
 
 /**

@@ -9,9 +9,10 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const vpc = new tencentcloud.vpc.Instance("vpc", {cidrBlock: "10.0.0.0/16"});
  * const example = new tencentcloud.vpc.LocalGateway("example", {
@@ -20,13 +21,14 @@ import * as utilities from "../utilities";
  *     cdcId: "cluster-j9gyu1iy",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * vpc local_gateway can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Vpc/localGateway:LocalGateway local_gateway local_gateway_id
+ * $ pulumi import tencentcloud:Vpc/localGateway:LocalGateway local_gateway local_gateway_id
  * ```
  */
 export class LocalGateway extends pulumi.CustomResource {

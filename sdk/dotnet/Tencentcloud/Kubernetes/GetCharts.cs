@@ -15,58 +15,52 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
         /// <summary>
         /// Use this data source to query detailed information of kubernetes cluster addons.
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
-        ///     {
-        ///         var name = Output.Create(Tencentcloud.Kubernetes.GetCharts.InvokeAsync());
-        ///     }
+        ///     var name = Tencentcloud.Kubernetes.GetCharts.Invoke();
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetChartsResult> InvokeAsync(GetChartsArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetChartsResult>("tencentcloud:Kubernetes/getCharts:getCharts", args ?? new GetChartsArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetChartsResult>("tencentcloud:Kubernetes/getCharts:getCharts", args ?? new GetChartsArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of kubernetes cluster addons.
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
-        ///     {
-        ///         var name = Output.Create(Tencentcloud.Kubernetes.GetCharts.InvokeAsync());
-        ///     }
+        ///     var name = Tencentcloud.Kubernetes.GetCharts.Invoke();
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetChartsResult> Invoke(GetChartsInvokeArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetChartsResult>("tencentcloud:Kubernetes/getCharts:getCharts", args ?? new GetChartsInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetChartsResult>("tencentcloud:Kubernetes/getCharts:getCharts", args ?? new GetChartsInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetChartsArgs : Pulumi.InvokeArgs
+    public sealed class GetChartsArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Operation system app supported. Available values: `arm32`, `arm64`, `amd64`.
@@ -95,9 +89,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
         public GetChartsArgs()
         {
         }
+        public static new GetChartsArgs Empty => new GetChartsArgs();
     }
 
-    public sealed class GetChartsInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetChartsInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Operation system app supported. Available values: `arm32`, `arm64`, `amd64`.
@@ -126,6 +121,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
         public GetChartsInvokeArgs()
         {
         }
+        public static new GetChartsInvokeArgs Empty => new GetChartsInvokeArgs();
     }
 
 

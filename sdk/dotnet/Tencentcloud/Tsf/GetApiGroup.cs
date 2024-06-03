@@ -15,76 +15,70 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf
         /// <summary>
         /// Use this data source to query detailed information of tsf api_group
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var apiGroup = Tencentcloud.Tsf.GetApiGroup.Invoke(new()
         ///     {
-        ///         var apiGroup = Output.Create(Tencentcloud.Tsf.GetApiGroup.InvokeAsync(new Tencentcloud.Tsf.GetApiGroupArgs
-        ///         {
-        ///             AuthType = "none",
-        ///             GatewayInstanceId = "gw-ins-lvdypq5k",
-        ///             GroupType = "ms",
-        ///             OrderBy = "created_time",
-        ///             OrderType = 0,
-        ///             SearchWord = "xxx01",
-        ///             Status = "released",
-        ///         }));
-        ///     }
+        ///         AuthType = "none",
+        ///         GatewayInstanceId = "gw-ins-lvdypq5k",
+        ///         GroupType = "ms",
+        ///         OrderBy = "created_time",
+        ///         OrderType = 0,
+        ///         SearchWord = "xxx01",
+        ///         Status = "released",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetApiGroupResult> InvokeAsync(GetApiGroupArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetApiGroupResult>("tencentcloud:Tsf/getApiGroup:getApiGroup", args ?? new GetApiGroupArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetApiGroupResult>("tencentcloud:Tsf/getApiGroup:getApiGroup", args ?? new GetApiGroupArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of tsf api_group
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var apiGroup = Tencentcloud.Tsf.GetApiGroup.Invoke(new()
         ///     {
-        ///         var apiGroup = Output.Create(Tencentcloud.Tsf.GetApiGroup.InvokeAsync(new Tencentcloud.Tsf.GetApiGroupArgs
-        ///         {
-        ///             AuthType = "none",
-        ///             GatewayInstanceId = "gw-ins-lvdypq5k",
-        ///             GroupType = "ms",
-        ///             OrderBy = "created_time",
-        ///             OrderType = 0,
-        ///             SearchWord = "xxx01",
-        ///             Status = "released",
-        ///         }));
-        ///     }
+        ///         AuthType = "none",
+        ///         GatewayInstanceId = "gw-ins-lvdypq5k",
+        ///         GroupType = "ms",
+        ///         OrderBy = "created_time",
+        ///         OrderType = 0,
+        ///         SearchWord = "xxx01",
+        ///         Status = "released",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetApiGroupResult> Invoke(GetApiGroupInvokeArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetApiGroupResult>("tencentcloud:Tsf/getApiGroup:getApiGroup", args ?? new GetApiGroupInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetApiGroupResult>("tencentcloud:Tsf/getApiGroup:getApiGroup", args ?? new GetApiGroupInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetApiGroupArgs : Pulumi.InvokeArgs
+    public sealed class GetApiGroupArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Authentication type. secret: Secret key authentication; none: No authentication.
@@ -137,9 +131,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf
         public GetApiGroupArgs()
         {
         }
+        public static new GetApiGroupArgs Empty => new GetApiGroupArgs();
     }
 
-    public sealed class GetApiGroupInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetApiGroupInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Authentication type. secret: Secret key authentication; none: No authentication.
@@ -192,6 +187,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf
         public GetApiGroupInvokeArgs()
         {
         }
+        public static new GetApiGroupInvokeArgs Empty => new GetApiGroupInvokeArgs();
     }
 
 

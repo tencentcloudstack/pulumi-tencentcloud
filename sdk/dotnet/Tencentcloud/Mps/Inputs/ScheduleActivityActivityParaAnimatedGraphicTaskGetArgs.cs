@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps.Inputs
 {
 
-    public sealed class ScheduleActivityActivityParaAnimatedGraphicTaskGetArgs : Pulumi.ResourceArgs
+    public sealed class ScheduleActivityActivityParaAnimatedGraphicTaskGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Animated image generating template ID.
@@ -46,5 +46,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps.Inputs
         public ScheduleActivityActivityParaAnimatedGraphicTaskGetArgs()
         {
         }
+        public static new ScheduleActivityActivityParaAnimatedGraphicTaskGetArgs Empty => new ScheduleActivityActivityParaAnimatedGraphicTaskGetArgs();
     }
 }

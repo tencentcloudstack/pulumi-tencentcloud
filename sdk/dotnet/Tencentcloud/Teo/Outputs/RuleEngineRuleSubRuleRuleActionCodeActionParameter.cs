@@ -15,15 +15,15 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Outputs
     public sealed class RuleEngineRuleSubRuleRuleActionCodeActionParameter
     {
         /// <summary>
-        /// Target HEADER name.
+        /// Parameter name.
         /// </summary>
         public readonly string Name;
         /// <summary>
-        /// HTTP status code to use.
+        /// The status code.
         /// </summary>
         public readonly int StatusCode;
         /// <summary>
-        /// Parameter Value.
+        /// Parameter value.
         /// </summary>
         public readonly ImmutableArray<string> Values;
 

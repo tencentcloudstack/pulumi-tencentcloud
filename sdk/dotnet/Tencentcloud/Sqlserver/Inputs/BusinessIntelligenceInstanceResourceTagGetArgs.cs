@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver.Inputs
 {
 
-    public sealed class BusinessIntelligenceInstanceResourceTagGetArgs : Pulumi.ResourceArgs
+    public sealed class BusinessIntelligenceInstanceResourceTagGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Tag key.
@@ -28,5 +28,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver.Inputs
         public BusinessIntelligenceInstanceResourceTagGetArgs()
         {
         }
+        public static new BusinessIntelligenceInstanceResourceTagGetArgs Empty => new BusinessIntelligenceInstanceResourceTagGetArgs();
     }
 }

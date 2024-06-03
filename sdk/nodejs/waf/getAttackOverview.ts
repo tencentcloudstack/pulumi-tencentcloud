@@ -8,39 +8,42 @@ import * as utilities from "../utilities";
  * Use this data source to query detailed information of waf attackOverview
  *
  * ## Example Usage
+ *
  * ### Basic Query
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const example = pulumi.output(tencentcloud.Waf.getAttackOverview({
+ * const example = tencentcloud.Waf.getAttackOverview({
  *     fromTime: "2023-09-01 00:00:00",
  *     toTime: "2023-09-07 00:00:00",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
+ *
  * ### Query by filter
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const example = pulumi.output(tencentcloud.Waf.getAttackOverview({
+ * const example = tencentcloud.Waf.getAttackOverview({
  *     appid: 1304251372,
  *     domain: "test.com",
  *     edition: "clb-waf",
  *     fromTime: "2023-09-01 00:00:00",
  *     instanceId: "waf_2kxtlbky00b2v1fn",
  *     toTime: "2023-09-07 00:00:00",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getAttackOverview(args: GetAttackOverviewArgs, opts?: pulumi.InvokeOptions): Promise<GetAttackOverviewResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Waf/getAttackOverview:getAttackOverview", {
         "appid": args.appid,
         "domain": args.domain,
@@ -130,9 +133,45 @@ export interface GetAttackOverviewResult {
     readonly resultOutputFile?: string;
     readonly toTime: string;
 }
-
+/**
+ * Use this data source to query detailed information of waf attackOverview
+ *
+ * ## Example Usage
+ *
+ * ### Basic Query
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const example = tencentcloud.Waf.getAttackOverview({
+ *     fromTime: "2023-09-01 00:00:00",
+ *     toTime: "2023-09-07 00:00:00",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ *
+ * ### Query by filter
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const example = tencentcloud.Waf.getAttackOverview({
+ *     appid: 1304251372,
+ *     domain: "test.com",
+ *     edition: "clb-waf",
+ *     fromTime: "2023-09-01 00:00:00",
+ *     instanceId: "waf_2kxtlbky00b2v1fn",
+ *     toTime: "2023-09-07 00:00:00",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getAttackOverviewOutput(args: GetAttackOverviewOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetAttackOverviewResult> {
-    return pulumi.output(args).apply(a => getAttackOverview(a, opts))
+    return pulumi.output(args).apply((a: any) => getAttackOverview(a, opts))
 }
 
 /**

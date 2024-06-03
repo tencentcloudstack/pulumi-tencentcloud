@@ -9,11 +9,12 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const pushAuthKeyConfig = new tencentcloud.Css.PushAuthKeyConfig("push_auth_key_config", {
+ * const pushAuthKeyConfig = new tencentcloud.css.PushAuthKeyConfig("pushAuthKeyConfig", {
  *     authDelta: 1800,
  *     backupAuthKey: "testbackkey",
  *     domainName: "your_push_domain_name",
@@ -21,13 +22,14 @@ import * as utilities from "../utilities";
  *     masterAuthKey: "testmasterkey",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * css push_auth_key_config can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Css/pushAuthKeyConfig:PushAuthKeyConfig push_auth_key_config push_auth_key_config_id
+ * $ pulumi import tencentcloud:Css/pushAuthKeyConfig:PushAuthKeyConfig push_auth_key_config push_auth_key_config_id
  * ```
  */
 export class PushAuthKeyConfig extends pulumi.CustomResource {

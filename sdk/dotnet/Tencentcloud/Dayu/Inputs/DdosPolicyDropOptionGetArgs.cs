@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dayu.Inputs
 {
 
-    public sealed class DdosPolicyDropOptionGetArgs : Pulumi.ResourceArgs
+    public sealed class DdosPolicyDropOptionGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// The number of new connections based on destination IP that trigger suppression of connections. Valid value ranges: (0~4294967295).
@@ -130,5 +130,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dayu.Inputs
         public DdosPolicyDropOptionGetArgs()
         {
         }
+        public static new DdosPolicyDropOptionGetArgs Empty => new DdosPolicyDropOptionGetArgs();
     }
 }

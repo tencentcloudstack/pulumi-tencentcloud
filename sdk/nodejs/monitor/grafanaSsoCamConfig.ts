@@ -9,22 +9,24 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const grafanaSsoCamConfig = new tencentcloud.Monitor.GrafanaSsoCamConfig("grafana_sso_cam_config", {
+ * const grafanaSsoCamConfig = new tencentcloud.monitor.GrafanaSsoCamConfig("grafanaSsoCamConfig", {
  *     enableSsoCamCheck: false,
  *     instanceId: "grafana-dp2hnnfa",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * monitor grafana_sso_cam_config can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Monitor/grafanaSsoCamConfig:GrafanaSsoCamConfig grafana_sso_cam_config instance_id
+ * $ pulumi import tencentcloud:Monitor/grafanaSsoCamConfig:GrafanaSsoCamConfig grafana_sso_cam_config instance_id
  * ```
  */
 export class GrafanaSsoCamConfig extends pulumi.CustomResource {

@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb.Inputs
 {
 
-    public sealed class TargetGroupAttachmentsAssociationGetArgs : Pulumi.ResourceArgs
+    public sealed class TargetGroupAttachmentsAssociationGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Listener ID.
@@ -40,5 +40,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb.Inputs
         public TargetGroupAttachmentsAssociationGetArgs()
         {
         }
+        public static new TargetGroupAttachmentsAssociationGetArgs Empty => new TargetGroupAttachmentsAssociationGetArgs();
     }
 }

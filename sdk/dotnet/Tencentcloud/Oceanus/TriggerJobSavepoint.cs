@@ -15,27 +15,28 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Oceanus
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var example = new Tencentcloud.Oceanus.TriggerJobSavepoint("example", new()
     ///     {
-    ///         var example = new Tencentcloud.Oceanus.TriggerJobSavepoint("example", new Tencentcloud.Oceanus.TriggerJobSavepointArgs
-    ///         {
-    ///             Description = "description.",
-    ///             JobId = "cql-4xwincyn",
-    ///             WorkSpaceId = "space-2idq8wbr",
-    ///         });
-    ///     }
+    ///         Description = "description.",
+    ///         JobId = "cql-4xwincyn",
+    ///         WorkSpaceId = "space-2idq8wbr",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Oceanus/triggerJobSavepoint:TriggerJobSavepoint")]
-    public partial class TriggerJobSavepoint : Pulumi.CustomResource
+    public partial class TriggerJobSavepoint : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Savepoint description.
@@ -100,7 +101,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Oceanus
         }
     }
 
-    public sealed class TriggerJobSavepointArgs : Pulumi.ResourceArgs
+    public sealed class TriggerJobSavepointArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Savepoint description.
@@ -123,9 +124,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Oceanus
         public TriggerJobSavepointArgs()
         {
         }
+        public static new TriggerJobSavepointArgs Empty => new TriggerJobSavepointArgs();
     }
 
-    public sealed class TriggerJobSavepointState : Pulumi.ResourceArgs
+    public sealed class TriggerJobSavepointState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Savepoint description.
@@ -148,5 +150,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Oceanus
         public TriggerJobSavepointState()
         {
         }
+        public static new TriggerJobSavepointState Empty => new TriggerJobSavepointState();
     }
 }

@@ -15,26 +15,27 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpn
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var vpnConnectionReset = new Tencentcloud.Vpn.ConnectionReset("vpnConnectionReset", new()
     ///     {
-    ///         var vpnConnectionReset = new Tencentcloud.Vpn.ConnectionReset("vpnConnectionReset", new Tencentcloud.Vpn.ConnectionResetArgs
-    ///         {
-    ///             VpnConnectionId = "vpnx-kme2tx8m",
-    ///             VpnGatewayId = "vpngw-gt8bianl",
-    ///         });
-    ///     }
+    ///         VpnConnectionId = "vpnx-kme2tx8m",
+    ///         VpnGatewayId = "vpngw-gt8bianl",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Vpn/connectionReset:ConnectionReset")]
-    public partial class ConnectionReset : Pulumi.CustomResource
+    public partial class ConnectionReset : global::Pulumi.CustomResource
     {
         /// <summary>
         /// VPN CONNECTION INSTANCE ID.
@@ -93,7 +94,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpn
         }
     }
 
-    public sealed class ConnectionResetArgs : Pulumi.ResourceArgs
+    public sealed class ConnectionResetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// VPN CONNECTION INSTANCE ID.
@@ -110,9 +111,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpn
         public ConnectionResetArgs()
         {
         }
+        public static new ConnectionResetArgs Empty => new ConnectionResetArgs();
     }
 
-    public sealed class ConnectionResetState : Pulumi.ResourceArgs
+    public sealed class ConnectionResetState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// VPN CONNECTION INSTANCE ID.
@@ -129,5 +131,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpn
         public ConnectionResetState()
         {
         }
+        public static new ConnectionResetState Empty => new ConnectionResetState();
     }
 }

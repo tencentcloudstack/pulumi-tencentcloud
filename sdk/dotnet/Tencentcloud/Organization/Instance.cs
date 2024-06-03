@@ -15,32 +15,31 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Organization
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
-    ///     {
-    ///         var organization = new Tencentcloud.Organization.Instance("organization", new Tencentcloud.Organization.InstanceArgs
-    ///         {
-    ///         });
-    ///     }
+    ///     var organization = new Tencentcloud.Organization.Instance("organization");
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// organization organization can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Organization/instance:Instance organization organization_id
+    /// $ pulumi import tencentcloud:Organization/instance:Instance organization organization_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Organization/instance:Instance")]
-    public partial class Instance : Pulumi.CustomResource
+    public partial class Instance : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Organize the creation time.Note: This field may return NULL, indicating that the valid value cannot be obtained.
@@ -183,14 +182,15 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Organization
         }
     }
 
-    public sealed class InstanceArgs : Pulumi.ResourceArgs
+    public sealed class InstanceArgs : global::Pulumi.ResourceArgs
     {
         public InstanceArgs()
         {
         }
+        public static new InstanceArgs Empty => new InstanceArgs();
     }
 
-    public sealed class InstanceState : Pulumi.ResourceArgs
+    public sealed class InstanceState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Organize the creation time.Note: This field may return NULL, indicating that the valid value cannot be obtained.
@@ -297,5 +297,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Organization
         public InstanceState()
         {
         }
+        public static new InstanceState Empty => new InstanceState();
     }
 }

@@ -15,34 +15,35 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mariadb
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var logFileRetentionPeriod = new Tencentcloud.Mariadb.LogFileRetentionPeriod("logFileRetentionPeriod", new()
     ///     {
-    ///         var logFileRetentionPeriod = new Tencentcloud.Mariadb.LogFileRetentionPeriod("logFileRetentionPeriod", new Tencentcloud.Mariadb.LogFileRetentionPeriodArgs
-    ///         {
-    ///             Days = 8,
-    ///             InstanceId = "tdsql-4pzs5b67",
-    ///         });
-    ///     }
+    ///         Days = 8,
+    ///         InstanceId = "tdsql-4pzs5b67",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// mariadb log_file_retention_period can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Mariadb/logFileRetentionPeriod:LogFileRetentionPeriod log_file_retention_period tdsql-4pzs5b67
+    /// $ pulumi import tencentcloud:Mariadb/logFileRetentionPeriod:LogFileRetentionPeriod log_file_retention_period tdsql-4pzs5b67
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Mariadb/logFileRetentionPeriod:LogFileRetentionPeriod")]
-    public partial class LogFileRetentionPeriod : Pulumi.CustomResource
+    public partial class LogFileRetentionPeriod : global::Pulumi.CustomResource
     {
         /// <summary>
         /// The number of days to save, cannot exceed 30.
@@ -101,7 +102,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mariadb
         }
     }
 
-    public sealed class LogFileRetentionPeriodArgs : Pulumi.ResourceArgs
+    public sealed class LogFileRetentionPeriodArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// The number of days to save, cannot exceed 30.
@@ -118,9 +119,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mariadb
         public LogFileRetentionPeriodArgs()
         {
         }
+        public static new LogFileRetentionPeriodArgs Empty => new LogFileRetentionPeriodArgs();
     }
 
-    public sealed class LogFileRetentionPeriodState : Pulumi.ResourceArgs
+    public sealed class LogFileRetentionPeriodState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// The number of days to save, cannot exceed 30.
@@ -137,5 +139,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mariadb
         public LogFileRetentionPeriodState()
         {
         }
+        public static new LogFileRetentionPeriodState Empty => new LogFileRetentionPeriodState();
     }
 }

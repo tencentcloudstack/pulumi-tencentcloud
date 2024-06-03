@@ -8,55 +8,68 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Use this data source to query security policy rule.
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Gaap"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Gaap"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Gaap"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		fooProxy, err := Gaap.NewProxy(ctx, "fooProxy", &Gaap.ProxyArgs{
-// 			Bandwidth:        pulumi.Int(10),
-// 			Concurrent:       pulumi.Int(2),
-// 			AccessRegion:     pulumi.String("SouthChina"),
-// 			RealserverRegion: pulumi.String("NorthChina"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		fooSecurityPolicy, err := Gaap.NewSecurityPolicy(ctx, "fooSecurityPolicy", &Gaap.SecurityPolicyArgs{
-// 			ProxyId: fooProxy.ID(),
-// 			Action:  pulumi.String("ACCEPT"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		fooSecurityRule, err := Gaap.NewSecurityRule(ctx, "fooSecurityRule", &Gaap.SecurityRuleArgs{
-// 			PolicyId: fooSecurityPolicy.ID(),
-// 			CidrIp:   pulumi.String("1.1.1.1"),
-// 			Action:   pulumi.String("ACCEPT"),
-// 			Protocol: pulumi.String("TCP"),
-// 			Port:     pulumi.String("80"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			fooProxy, err := Gaap.NewProxy(ctx, "fooProxy", &Gaap.ProxyArgs{
+//				Bandwidth:        pulumi.Int(10),
+//				Concurrent:       pulumi.Int(2),
+//				AccessRegion:     pulumi.String("SouthChina"),
+//				RealserverRegion: pulumi.String("NorthChina"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			fooSecurityPolicy, err := Gaap.NewSecurityPolicy(ctx, "fooSecurityPolicy", &Gaap.SecurityPolicyArgs{
+//				ProxyId: fooProxy.ID(),
+//				Action:  pulumi.String("ACCEPT"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			fooSecurityRule, err := Gaap.NewSecurityRule(ctx, "fooSecurityRule", &Gaap.SecurityRuleArgs{
+//				PolicyId: fooSecurityPolicy.ID(),
+//				CidrIp:   pulumi.String("1.1.1.1"),
+//				Action:   pulumi.String("ACCEPT"),
+//				Protocol: pulumi.String("TCP"),
+//				Port:     pulumi.String("80"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_ = pulumi.All(fooSecurityPolicy.ID(), fooSecurityRule.Protocol).ApplyT(func(_args []interface{}) (gaap.GetSecurityRulesResult, error) {
+//				id := _args[0].(string)
+//				protocol := _args[1].(*string)
+//				return Gaap.GetSecurityRulesOutput(ctx, gaap.GetSecurityRulesOutputArgs{
+//					PolicyId: id,
+//					Protocol: protocol,
+//				}, nil), nil
+//			}).(gaap.GetSecurityRulesResultOutput)
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 func GetSecurityRules(ctx *pulumi.Context, args *GetSecurityRulesArgs, opts ...pulumi.InvokeOption) (*GetSecurityRulesResult, error) {
-	opts = pkgInvokeDefaultOpts(opts)
+	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetSecurityRulesResult
 	err := ctx.Invoke("tencentcloud:Gaap/getSecurityRules:getSecurityRules", args, &rv, opts...)
 	if err != nil {

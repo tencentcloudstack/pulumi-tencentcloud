@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos.Inputs
 {
 
-    public sealed class BucketInventoryScheduleArgs : Pulumi.ResourceArgs
+    public sealed class BucketInventoryScheduleArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Frequency of the inventory job. Enumerated values: Daily, Weekly.
@@ -22,5 +22,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos.Inputs
         public BucketInventoryScheduleArgs()
         {
         }
+        public static new BucketInventoryScheduleArgs Empty => new BucketInventoryScheduleArgs();
     }
 }

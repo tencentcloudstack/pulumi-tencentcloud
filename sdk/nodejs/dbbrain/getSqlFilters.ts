@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,10 +11,11 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const sqlFilter = new tencentcloud.dbbrain.SqlFilter("sqlFilter", {
  *     instanceId: "mysql_ins_id",
@@ -31,13 +33,11 @@ import * as utilities from "../utilities";
  *     filterIds: [sqlFilter.filterId],
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getSqlFilters(args: GetSqlFiltersArgs, opts?: pulumi.InvokeOptions): Promise<GetSqlFiltersResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Dbbrain/getSqlFilters:getSqlFilters", {
         "filterIds": args.filterIds,
         "instanceId": args.instanceId,
@@ -85,9 +85,37 @@ export interface GetSqlFiltersResult {
     readonly resultOutputFile?: string;
     readonly statuses?: string[];
 }
-
+/**
+ * Use this data source to query detailed information of dbbrain sqlFilters
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
+ *
+ * const sqlFilter = new tencentcloud.dbbrain.SqlFilter("sqlFilter", {
+ *     instanceId: "mysql_ins_id",
+ *     sessionToken: {
+ *         user: "user",
+ *         password: "password",
+ *     },
+ *     sqlType: "SELECT",
+ *     filterKey: "test",
+ *     maxConcurrency: 10,
+ *     duration: 3600,
+ * });
+ * const sqlFilters = tencentcloud.Dbbrain.getSqlFiltersOutput({
+ *     instanceId: "mysql_ins_id",
+ *     filterIds: [sqlFilter.filterId],
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getSqlFiltersOutput(args: GetSqlFiltersOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetSqlFiltersResult> {
-    return pulumi.output(args).apply(a => getSqlFilters(a, opts))
+    return pulumi.output(args).apply((a: any) => getSqlFilters(a, opts))
 }
 
 /**

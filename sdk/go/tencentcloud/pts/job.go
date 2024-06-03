@@ -7,44 +7,50 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a pts job
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Pts"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Pts"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Pts.NewJob(ctx, "job", &Pts.JobArgs{
-// 			JobOwner:   pulumi.String("username"),
-// 			Note:       pulumi.String("desc"),
-// 			ProjectId:  pulumi.String("project-45vw7v82"),
-// 			ScenarioId: pulumi.String("scenario-22q19f3k"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Pts.NewJob(ctx, "job", &Pts.JobArgs{
+//				JobOwner:   pulumi.String("username"),
+//				Note:       pulumi.String("desc"),
+//				ProjectId:  pulumi.String("project-45vw7v82"),
+//				ScenarioId: pulumi.String("scenario-22q19f3k"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // pts job can be imported using the projectId#scenarioId#jobId, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Pts/job:Job job project-45vw7v82#scenario-22q19f3k#job-dtm93vx0
+// $ pulumi import tencentcloud:Pts/job:Job job project-45vw7v82#scenario-22q19f3k#job-dtm93vx0
 // ```
 type Job struct {
 	pulumi.CustomResourceState
@@ -131,7 +137,7 @@ func NewJob(ctx *pulumi.Context,
 	if args.ScenarioId == nil {
 		return nil, errors.New("invalid value for required argument 'ScenarioId'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource Job
 	err := ctx.RegisterResource("tencentcloud:Pts/job:Job", name, args, &resource, opts...)
 	if err != nil {
@@ -344,7 +350,7 @@ func (i *Job) ToJobOutputWithContext(ctx context.Context) JobOutput {
 // JobArrayInput is an input type that accepts JobArray and JobArrayOutput values.
 // You can construct a concrete instance of `JobArrayInput` via:
 //
-//          JobArray{ JobArgs{...} }
+//	JobArray{ JobArgs{...} }
 type JobArrayInput interface {
 	pulumi.Input
 
@@ -369,7 +375,7 @@ func (i JobArray) ToJobArrayOutputWithContext(ctx context.Context) JobArrayOutpu
 // JobMapInput is an input type that accepts JobMap and JobMapOutput values.
 // You can construct a concrete instance of `JobMapInput` via:
 //
-//          JobMap{ "key": JobArgs{...} }
+//	JobMap{ "key": JobArgs{...} }
 type JobMapInput interface {
 	pulumi.Input
 

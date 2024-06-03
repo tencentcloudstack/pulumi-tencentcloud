@@ -9,22 +9,24 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const workGroup = new tencentcloud.Dlc.WorkGroup("work_group", {
+ * const workGroup = new tencentcloud.dlc.WorkGroup("workGroup", {
  *     workGroupDescription: "dlc workgroup test",
  *     workGroupName: "tf-demo",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * dlc work_group can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Dlc/workGroup:WorkGroup work_group work_group_id
+ * $ pulumi import tencentcloud:Dlc/workGroup:WorkGroup work_group work_group_id
  * ```
  */
 export class WorkGroup extends pulumi.CustomResource {

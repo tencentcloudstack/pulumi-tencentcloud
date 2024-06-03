@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,24 +11,23 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const scores = pulumi.output(tencentcloud.Rum.getScores({
+ * const scores = tencentcloud.Rum.getScores({
  *     endTime: "2023082215",
  *     isDemo: 1,
  *     projectId: 1,
  *     startTime: "2023082214",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getScores(args: GetScoresArgs, opts?: pulumi.InvokeOptions): Promise<GetScoresResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Rum/getScores:getScores", {
         "endTime": args.endTime,
         "isDemo": args.isDemo,
@@ -84,9 +84,27 @@ export interface GetScoresResult {
     readonly scoreSets: outputs.Rum.GetScoresScoreSet[];
     readonly startTime: string;
 }
-
+/**
+ * Use this data source to query detailed information of rum scores
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const scores = tencentcloud.Rum.getScores({
+ *     endTime: "2023082215",
+ *     isDemo: 1,
+ *     projectId: 1,
+ *     startTime: "2023082214",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getScoresOutput(args: GetScoresOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetScoresResult> {
-    return pulumi.output(args).apply(a => getScores(a, opts))
+    return pulumi.output(args).apply((a: any) => getScores(a, opts))
 }
 
 /**

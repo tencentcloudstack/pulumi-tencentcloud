@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos.Inputs
 {
 
-    public sealed class BucketLifecycleRuleGetArgs : Pulumi.ResourceArgs
+    public sealed class BucketLifecycleRuleGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Set the maximum time a multipart upload is allowed to remain running.
@@ -70,5 +70,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos.Inputs
         public BucketLifecycleRuleGetArgs()
         {
         }
+        public static new BucketLifecycleRuleGetArgs Empty => new BucketLifecycleRuleGetArgs();
     }
 }

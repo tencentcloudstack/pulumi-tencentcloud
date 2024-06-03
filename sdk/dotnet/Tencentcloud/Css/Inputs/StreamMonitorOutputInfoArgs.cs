@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Css.Inputs
 {
 
-    public sealed class StreamMonitorOutputInfoArgs : Pulumi.ResourceArgs
+    public sealed class StreamMonitorOutputInfoArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Monitor task play path.limit 32 bytes.
@@ -46,5 +46,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Css.Inputs
         public StreamMonitorOutputInfoArgs()
         {
         }
+        public static new StreamMonitorOutputInfoArgs Empty => new StreamMonitorOutputInfoArgs();
     }
 }

@@ -15,130 +15,126 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Waf
         /// <summary>
         /// Use this data source to query detailed information of waf attack_log_list
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
+        /// 
         /// ### Obtain the specified domain name attack log list
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var example = Tencentcloud.Waf.GetAttackLogList.Invoke(new()
         ///     {
-        ///         var example = Output.Create(Tencentcloud.Waf.GetAttackLogList.InvokeAsync(new Tencentcloud.Waf.GetAttackLogListArgs
-        ///         {
-        ///             Domain = "domain.com",
-        ///             EndTime = "2023-09-07 00:00:00",
-        ///             Page = 0,
-        ///             QueryCount = 10,
-        ///             QueryString = "method:GET",
-        ///             Sort = "desc",
-        ///             StartTime = "2023-09-01 00:00:00",
-        ///         }));
-        ///     }
+        ///         Domain = "domain.com",
+        ///         EndTime = "2023-09-07 00:00:00",
+        ///         Page = 0,
+        ///         QueryCount = 10,
+        ///         QueryString = "method:GET",
+        ///         Sort = "desc",
+        ///         StartTime = "2023-09-01 00:00:00",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% example %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
+        /// 
         /// ### Obtain all domain name attack log list
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var example = Tencentcloud.Waf.GetAttackLogList.Invoke(new()
         ///     {
-        ///         var example = Output.Create(Tencentcloud.Waf.GetAttackLogList.InvokeAsync(new Tencentcloud.Waf.GetAttackLogListArgs
-        ///         {
-        ///             Domain = "all",
-        ///             EndTime = "2023-09-07 00:00:00",
-        ///             Page = 1,
-        ///             QueryCount = 20,
-        ///             QueryString = "method:GET",
-        ///             Sort = "asc",
-        ///             StartTime = "2023-09-01 00:00:00",
-        ///         }));
-        ///     }
+        ///         Domain = "all",
+        ///         EndTime = "2023-09-07 00:00:00",
+        ///         Page = 1,
+        ///         QueryCount = 20,
+        ///         QueryString = "method:GET",
+        ///         Sort = "asc",
+        ///         StartTime = "2023-09-01 00:00:00",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetAttackLogListResult> InvokeAsync(GetAttackLogListArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetAttackLogListResult>("tencentcloud:Waf/getAttackLogList:getAttackLogList", args ?? new GetAttackLogListArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetAttackLogListResult>("tencentcloud:Waf/getAttackLogList:getAttackLogList", args ?? new GetAttackLogListArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of waf attack_log_list
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
+        /// 
         /// ### Obtain the specified domain name attack log list
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var example = Tencentcloud.Waf.GetAttackLogList.Invoke(new()
         ///     {
-        ///         var example = Output.Create(Tencentcloud.Waf.GetAttackLogList.InvokeAsync(new Tencentcloud.Waf.GetAttackLogListArgs
-        ///         {
-        ///             Domain = "domain.com",
-        ///             EndTime = "2023-09-07 00:00:00",
-        ///             Page = 0,
-        ///             QueryCount = 10,
-        ///             QueryString = "method:GET",
-        ///             Sort = "desc",
-        ///             StartTime = "2023-09-01 00:00:00",
-        ///         }));
-        ///     }
+        ///         Domain = "domain.com",
+        ///         EndTime = "2023-09-07 00:00:00",
+        ///         Page = 0,
+        ///         QueryCount = 10,
+        ///         QueryString = "method:GET",
+        ///         Sort = "desc",
+        ///         StartTime = "2023-09-01 00:00:00",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% example %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
+        /// 
         /// ### Obtain all domain name attack log list
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var example = Tencentcloud.Waf.GetAttackLogList.Invoke(new()
         ///     {
-        ///         var example = Output.Create(Tencentcloud.Waf.GetAttackLogList.InvokeAsync(new Tencentcloud.Waf.GetAttackLogListArgs
-        ///         {
-        ///             Domain = "all",
-        ///             EndTime = "2023-09-07 00:00:00",
-        ///             Page = 1,
-        ///             QueryCount = 20,
-        ///             QueryString = "method:GET",
-        ///             Sort = "asc",
-        ///             StartTime = "2023-09-01 00:00:00",
-        ///         }));
-        ///     }
+        ///         Domain = "all",
+        ///         EndTime = "2023-09-07 00:00:00",
+        ///         Page = 1,
+        ///         QueryCount = 20,
+        ///         QueryString = "method:GET",
+        ///         Sort = "asc",
+        ///         StartTime = "2023-09-01 00:00:00",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetAttackLogListResult> Invoke(GetAttackLogListInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetAttackLogListResult>("tencentcloud:Waf/getAttackLogList:getAttackLogList", args ?? new GetAttackLogListInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetAttackLogListResult>("tencentcloud:Waf/getAttackLogList:getAttackLogList", args ?? new GetAttackLogListInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetAttackLogListArgs : Pulumi.InvokeArgs
+    public sealed class GetAttackLogListArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Domain for query, all domain use all.
@@ -191,9 +187,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Waf
         public GetAttackLogListArgs()
         {
         }
+        public static new GetAttackLogListArgs Empty => new GetAttackLogListArgs();
     }
 
-    public sealed class GetAttackLogListInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetAttackLogListInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Domain for query, all domain use all.
@@ -246,6 +243,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Waf
         public GetAttackLogListInvokeArgs()
         {
         }
+        public static new GetAttackLogListInvokeArgs Empty => new GetAttackLogListInvokeArgs();
     }
 
 

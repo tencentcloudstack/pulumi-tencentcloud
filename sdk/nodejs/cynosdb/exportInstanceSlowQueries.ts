@@ -9,11 +9,12 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const exportInstanceSlowQueries = new tencentcloud.Cynosdb.ExportInstanceSlowQueries("export_instance_slow_queries", {
+ * const exportInstanceSlowQueries = new tencentcloud.cynosdb.ExportInstanceSlowQueries("exportInstanceSlowQueries", {
  *     database: "db1",
  *     endTime: "2022-01-01 14:00:00",
  *     fileType: "csv",
@@ -23,6 +24,7 @@ import * as utilities from "../utilities";
  *     username: "root",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export class ExportInstanceSlowQueries extends pulumi.CustomResource {
     /**

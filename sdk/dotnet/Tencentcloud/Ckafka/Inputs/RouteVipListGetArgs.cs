@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka.Inputs
 {
 
-    public sealed class RouteVipListGetArgs : Pulumi.ResourceArgs
+    public sealed class RouteVipListGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Virtual IP.
@@ -28,5 +28,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka.Inputs
         public RouteVipListGetArgs()
         {
         }
+        public static new RouteVipListGetArgs Empty => new RouteVipListGetArgs();
     }
 }

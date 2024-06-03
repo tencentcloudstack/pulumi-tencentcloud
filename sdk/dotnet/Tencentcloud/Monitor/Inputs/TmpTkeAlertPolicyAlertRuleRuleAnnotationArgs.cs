@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor.Inputs
 {
 
-    public sealed class TmpTkeAlertPolicyAlertRuleRuleAnnotationArgs : Pulumi.ResourceArgs
+    public sealed class TmpTkeAlertPolicyAlertRuleRuleAnnotationArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Name of map.
@@ -28,5 +28,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor.Inputs
         public TmpTkeAlertPolicyAlertRuleRuleAnnotationArgs()
         {
         }
+        public static new TmpTkeAlertPolicyAlertRuleRuleAnnotationArgs Empty => new TmpTkeAlertPolicyAlertRuleRuleAnnotationArgs();
     }
 }

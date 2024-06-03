@@ -9,21 +9,20 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const dbFeatures = pulumi.output(tencentcloud.Mysql.getDbFeatures({
+ * const dbFeatures = tencentcloud.Mysql.getDbFeatures({
  *     instanceId: "cdb-fitq5t9h",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getDbFeatures(args: GetDbFeaturesArgs, opts?: pulumi.InvokeOptions): Promise<GetDbFeaturesResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Mysql/getDbFeatures:getDbFeatures", {
         "instanceId": args.instanceId,
         "resultOutputFile": args.resultOutputFile,
@@ -91,9 +90,24 @@ export interface GetDbFeaturesResult {
      */
     readonly targetSubVersion: string;
 }
-
+/**
+ * Use this data source to query detailed information of mysql dbFeatures
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const dbFeatures = tencentcloud.Mysql.getDbFeatures({
+ *     instanceId: "cdb-fitq5t9h",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getDbFeaturesOutput(args: GetDbFeaturesOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetDbFeaturesResult> {
-    return pulumi.output(args).apply(a => getDbFeatures(a, opts))
+    return pulumi.output(args).apply((a: any) => getDbFeatures(a, opts))
 }
 
 /**

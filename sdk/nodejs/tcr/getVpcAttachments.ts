@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,21 +11,20 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const id = pulumi.output(tencentcloud.Tcr.getVpcAttachments({
+ * const id = tencentcloud.Tcr.getVpcAttachments({
  *     instanceId: "cls-satg5125",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getVpcAttachments(args: GetVpcAttachmentsArgs, opts?: pulumi.InvokeOptions): Promise<GetVpcAttachmentsResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Tcr/getVpcAttachments:getVpcAttachments", {
         "instanceId": args.instanceId,
         "resultOutputFile": args.resultOutputFile,
@@ -78,9 +78,24 @@ export interface GetVpcAttachmentsResult {
      */
     readonly vpcId?: string;
 }
-
+/**
+ * Use this data source to query detailed information of TCR VPC attachment.
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const id = tencentcloud.Tcr.getVpcAttachments({
+ *     instanceId: "cls-satg5125",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getVpcAttachmentsOutput(args: GetVpcAttachmentsOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetVpcAttachmentsResult> {
-    return pulumi.output(args).apply(a => getVpcAttachments(a, opts))
+    return pulumi.output(args).apply((a: any) => getVpcAttachments(a, opts))
 }
 
 /**

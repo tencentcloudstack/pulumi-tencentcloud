@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor.Inputs
 {
 
-    public sealed class TmpTkeConfigPodMonitorArgs : Pulumi.ResourceArgs
+    public sealed class TmpTkeConfigPodMonitorArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Config.
@@ -34,5 +34,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor.Inputs
         public TmpTkeConfigPodMonitorArgs()
         {
         }
+        public static new TmpTkeConfigPodMonitorArgs Empty => new TmpTkeConfigPodMonitorArgs();
     }
 }

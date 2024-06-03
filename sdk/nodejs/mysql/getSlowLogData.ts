@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,11 +11,12 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const slowLogData = pulumi.output(tencentcloud.Mysql.getSlowLogData({
+ * const slowLogData = tencentcloud.Mysql.getSlowLogData({
  *     dataBases: ["tf_ci_test"],
  *     endTime: 1684392459,
  *     instType: "slave",
@@ -24,15 +26,13 @@ import * as utilities from "../utilities";
  *     startTime: 1682664459,
  *     userHosts: ["169.254.128.158"],
  *     userNames: ["keep_dts"],
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getSlowLogData(args: GetSlowLogDataArgs, opts?: pulumi.InvokeOptions): Promise<GetSlowLogDataResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Mysql/getSlowLogData:getSlowLogData", {
         "dataBases": args.dataBases,
         "endTime": args.endTime,
@@ -116,9 +116,32 @@ export interface GetSlowLogDataResult {
     readonly userHosts?: string[];
     readonly userNames?: string[];
 }
-
+/**
+ * Use this data source to query detailed information of mysql slowLogData
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const slowLogData = tencentcloud.Mysql.getSlowLogData({
+ *     dataBases: ["tf_ci_test"],
+ *     endTime: 1684392459,
+ *     instType: "slave",
+ *     instanceId: "cdb-fitq5t9h",
+ *     orderBy: "ASC",
+ *     sortBy: "Timestamp",
+ *     startTime: 1682664459,
+ *     userHosts: ["169.254.128.158"],
+ *     userNames: ["keep_dts"],
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getSlowLogDataOutput(args: GetSlowLogDataOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetSlowLogDataResult> {
-    return pulumi.output(args).apply(a => getSlowLogData(a, opts))
+    return pulumi.output(args).apply((a: any) => getSlowLogData(a, opts))
 }
 
 /**

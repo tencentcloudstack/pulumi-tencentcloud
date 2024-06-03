@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dts.Inputs
 {
 
-    public sealed class SyncConfigObjectsDatabaseGetArgs : Pulumi.ResourceArgs
+    public sealed class SyncConfigObjectsDatabaseGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// DB selection mode: All (for all objects under the current object), Partial (for some objects), when the Mode is Partial, this item is required. Note that synchronization of advanced objects does not depend on this value. Note: This field may return null, indicating that no valid value can be obtained.
@@ -154,5 +154,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dts.Inputs
         public SyncConfigObjectsDatabaseGetArgs()
         {
         }
+        public static new SyncConfigObjectsDatabaseGetArgs Empty => new SyncConfigObjectsDatabaseGetArgs();
     }
 }

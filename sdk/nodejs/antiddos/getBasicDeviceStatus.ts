@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,23 +11,22 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const basicDeviceStatus = pulumi.output(tencentcloud.Antiddos.getBasicDeviceStatus({
+ * const basicDeviceStatus = tencentcloud.Antiddos.getBasicDeviceStatus({
  *     filterRegion: 1,
  *     ipLists: ["127.0.0.1"],
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getBasicDeviceStatus(args?: GetBasicDeviceStatusArgs, opts?: pulumi.InvokeOptions): Promise<GetBasicDeviceStatusResult> {
     args = args || {};
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Antiddos/getBasicDeviceStatus:getBasicDeviceStatus", {
         "filterRegion": args.filterRegion,
         "idLists": args.idLists,
@@ -78,9 +78,25 @@ export interface GetBasicDeviceStatusResult {
     readonly ipLists?: string[];
     readonly resultOutputFile?: string;
 }
-
+/**
+ * Use this data source to query detailed information of antiddos basicDeviceStatus
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const basicDeviceStatus = tencentcloud.Antiddos.getBasicDeviceStatus({
+ *     filterRegion: 1,
+ *     ipLists: ["127.0.0.1"],
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getBasicDeviceStatusOutput(args?: GetBasicDeviceStatusOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetBasicDeviceStatusResult> {
-    return pulumi.output(args).apply(a => getBasicDeviceStatus(a, opts))
+    return pulumi.output(args).apply((a: any) => getBasicDeviceStatus(a, opts))
 }
 
 /**

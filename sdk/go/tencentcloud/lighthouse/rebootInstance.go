@@ -7,34 +7,40 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a lighthouse rebootInstance
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Lighthouse"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Lighthouse"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Lighthouse.NewRebootInstance(ctx, "rebootInstance", &Lighthouse.RebootInstanceArgs{
-// 			InstanceId: pulumi.String("lhins-xxx"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Lighthouse.NewRebootInstance(ctx, "rebootInstance", &Lighthouse.RebootInstanceArgs{
+//				InstanceId: pulumi.String("lhins-xxx"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 type RebootInstance struct {
 	pulumi.CustomResourceState
 
@@ -52,7 +58,7 @@ func NewRebootInstance(ctx *pulumi.Context,
 	if args.InstanceId == nil {
 		return nil, errors.New("invalid value for required argument 'InstanceId'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource RebootInstance
 	err := ctx.RegisterResource("tencentcloud:Lighthouse/rebootInstance:RebootInstance", name, args, &resource, opts...)
 	if err != nil {
@@ -125,7 +131,7 @@ func (i *RebootInstance) ToRebootInstanceOutputWithContext(ctx context.Context) 
 // RebootInstanceArrayInput is an input type that accepts RebootInstanceArray and RebootInstanceArrayOutput values.
 // You can construct a concrete instance of `RebootInstanceArrayInput` via:
 //
-//          RebootInstanceArray{ RebootInstanceArgs{...} }
+//	RebootInstanceArray{ RebootInstanceArgs{...} }
 type RebootInstanceArrayInput interface {
 	pulumi.Input
 
@@ -150,7 +156,7 @@ func (i RebootInstanceArray) ToRebootInstanceArrayOutputWithContext(ctx context.
 // RebootInstanceMapInput is an input type that accepts RebootInstanceMap and RebootInstanceMapOutput values.
 // You can construct a concrete instance of `RebootInstanceMapInput` via:
 //
-//          RebootInstanceMap{ "key": RebootInstanceArgs{...} }
+//	RebootInstanceMap{ "key": RebootInstanceArgs{...} }
 type RebootInstanceMapInput interface {
 	pulumi.Input
 

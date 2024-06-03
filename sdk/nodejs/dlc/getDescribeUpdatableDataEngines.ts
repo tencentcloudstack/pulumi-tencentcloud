@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,21 +11,20 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const describeUpdatableDataEngines = pulumi.output(tencentcloud.Dlc.getDescribeUpdatableDataEngines({
+ * const describeUpdatableDataEngines = tencentcloud.Dlc.getDescribeUpdatableDataEngines({
  *     dataEngineConfigCommand: "UpdateSparkSQLLakefsPath",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getDescribeUpdatableDataEngines(args: GetDescribeUpdatableDataEnginesArgs, opts?: pulumi.InvokeOptions): Promise<GetDescribeUpdatableDataEnginesResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Dlc/getDescribeUpdatableDataEngines:getDescribeUpdatableDataEngines", {
         "dataEngineConfigCommand": args.dataEngineConfigCommand,
         "resultOutputFile": args.resultOutputFile,
@@ -60,9 +60,24 @@ export interface GetDescribeUpdatableDataEnginesResult {
     readonly id: string;
     readonly resultOutputFile?: string;
 }
-
+/**
+ * Use this data source to query detailed information of dlc describeUpdatableDataEngines
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const describeUpdatableDataEngines = tencentcloud.Dlc.getDescribeUpdatableDataEngines({
+ *     dataEngineConfigCommand: "UpdateSparkSQLLakefsPath",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getDescribeUpdatableDataEnginesOutput(args: GetDescribeUpdatableDataEnginesOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetDescribeUpdatableDataEnginesResult> {
-    return pulumi.output(args).apply(a => getDescribeUpdatableDataEngines(a, opts))
+    return pulumi.output(args).apply((a: any) => getDescribeUpdatableDataEngines(a, opts))
 }
 
 /**

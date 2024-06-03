@@ -5,39 +5,111 @@ import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
 // Export members:
-export * from "./folder";
-export * from "./getCheckSavepoint";
-export * from "./getClusters";
-export * from "./getJobEvents";
-export * from "./getJobSubmissionLog";
-export * from "./getMetaTable";
-export * from "./getResourceRelatedJob";
-export * from "./getSavepointList";
-export * from "./getSystemResource";
-export * from "./getTreeJobs";
-export * from "./getTreeResources";
-export * from "./getWorkSpaces";
-export * from "./job";
-export * from "./jobConfig";
-export * from "./jobCopy";
-export * from "./resource";
-export * from "./resourceConfig";
-export * from "./runJob";
-export * from "./stopJob";
-export * from "./triggerJobSavepoint";
-export * from "./workSpace";
+export { FolderArgs, FolderState } from "./folder";
+export type Folder = import("./folder").Folder;
+export const Folder: typeof import("./folder").Folder = null as any;
+utilities.lazyLoad(exports, ["Folder"], () => require("./folder"));
 
-// Import resources to register:
-import { Folder } from "./folder";
-import { Job } from "./job";
-import { JobConfig } from "./jobConfig";
-import { JobCopy } from "./jobCopy";
-import { Resource } from "./resource";
-import { ResourceConfig } from "./resourceConfig";
-import { RunJob } from "./runJob";
-import { StopJob } from "./stopJob";
-import { TriggerJobSavepoint } from "./triggerJobSavepoint";
-import { WorkSpace } from "./workSpace";
+export { GetCheckSavepointArgs, GetCheckSavepointResult, GetCheckSavepointOutputArgs } from "./getCheckSavepoint";
+export const getCheckSavepoint: typeof import("./getCheckSavepoint").getCheckSavepoint = null as any;
+export const getCheckSavepointOutput: typeof import("./getCheckSavepoint").getCheckSavepointOutput = null as any;
+utilities.lazyLoad(exports, ["getCheckSavepoint","getCheckSavepointOutput"], () => require("./getCheckSavepoint"));
+
+export { GetClustersArgs, GetClustersResult, GetClustersOutputArgs } from "./getClusters";
+export const getClusters: typeof import("./getClusters").getClusters = null as any;
+export const getClustersOutput: typeof import("./getClusters").getClustersOutput = null as any;
+utilities.lazyLoad(exports, ["getClusters","getClustersOutput"], () => require("./getClusters"));
+
+export { GetJobEventsArgs, GetJobEventsResult, GetJobEventsOutputArgs } from "./getJobEvents";
+export const getJobEvents: typeof import("./getJobEvents").getJobEvents = null as any;
+export const getJobEventsOutput: typeof import("./getJobEvents").getJobEventsOutput = null as any;
+utilities.lazyLoad(exports, ["getJobEvents","getJobEventsOutput"], () => require("./getJobEvents"));
+
+export { GetJobSubmissionLogArgs, GetJobSubmissionLogResult, GetJobSubmissionLogOutputArgs } from "./getJobSubmissionLog";
+export const getJobSubmissionLog: typeof import("./getJobSubmissionLog").getJobSubmissionLog = null as any;
+export const getJobSubmissionLogOutput: typeof import("./getJobSubmissionLog").getJobSubmissionLogOutput = null as any;
+utilities.lazyLoad(exports, ["getJobSubmissionLog","getJobSubmissionLogOutput"], () => require("./getJobSubmissionLog"));
+
+export { GetMetaTableArgs, GetMetaTableResult, GetMetaTableOutputArgs } from "./getMetaTable";
+export const getMetaTable: typeof import("./getMetaTable").getMetaTable = null as any;
+export const getMetaTableOutput: typeof import("./getMetaTable").getMetaTableOutput = null as any;
+utilities.lazyLoad(exports, ["getMetaTable","getMetaTableOutput"], () => require("./getMetaTable"));
+
+export { GetResourceRelatedJobArgs, GetResourceRelatedJobResult, GetResourceRelatedJobOutputArgs } from "./getResourceRelatedJob";
+export const getResourceRelatedJob: typeof import("./getResourceRelatedJob").getResourceRelatedJob = null as any;
+export const getResourceRelatedJobOutput: typeof import("./getResourceRelatedJob").getResourceRelatedJobOutput = null as any;
+utilities.lazyLoad(exports, ["getResourceRelatedJob","getResourceRelatedJobOutput"], () => require("./getResourceRelatedJob"));
+
+export { GetSavepointListArgs, GetSavepointListResult, GetSavepointListOutputArgs } from "./getSavepointList";
+export const getSavepointList: typeof import("./getSavepointList").getSavepointList = null as any;
+export const getSavepointListOutput: typeof import("./getSavepointList").getSavepointListOutput = null as any;
+utilities.lazyLoad(exports, ["getSavepointList","getSavepointListOutput"], () => require("./getSavepointList"));
+
+export { GetSystemResourceArgs, GetSystemResourceResult, GetSystemResourceOutputArgs } from "./getSystemResource";
+export const getSystemResource: typeof import("./getSystemResource").getSystemResource = null as any;
+export const getSystemResourceOutput: typeof import("./getSystemResource").getSystemResourceOutput = null as any;
+utilities.lazyLoad(exports, ["getSystemResource","getSystemResourceOutput"], () => require("./getSystemResource"));
+
+export { GetTreeJobsArgs, GetTreeJobsResult, GetTreeJobsOutputArgs } from "./getTreeJobs";
+export const getTreeJobs: typeof import("./getTreeJobs").getTreeJobs = null as any;
+export const getTreeJobsOutput: typeof import("./getTreeJobs").getTreeJobsOutput = null as any;
+utilities.lazyLoad(exports, ["getTreeJobs","getTreeJobsOutput"], () => require("./getTreeJobs"));
+
+export { GetTreeResourcesArgs, GetTreeResourcesResult, GetTreeResourcesOutputArgs } from "./getTreeResources";
+export const getTreeResources: typeof import("./getTreeResources").getTreeResources = null as any;
+export const getTreeResourcesOutput: typeof import("./getTreeResources").getTreeResourcesOutput = null as any;
+utilities.lazyLoad(exports, ["getTreeResources","getTreeResourcesOutput"], () => require("./getTreeResources"));
+
+export { GetWorkSpacesArgs, GetWorkSpacesResult, GetWorkSpacesOutputArgs } from "./getWorkSpaces";
+export const getWorkSpaces: typeof import("./getWorkSpaces").getWorkSpaces = null as any;
+export const getWorkSpacesOutput: typeof import("./getWorkSpaces").getWorkSpacesOutput = null as any;
+utilities.lazyLoad(exports, ["getWorkSpaces","getWorkSpacesOutput"], () => require("./getWorkSpaces"));
+
+export { JobArgs, JobState } from "./job";
+export type Job = import("./job").Job;
+export const Job: typeof import("./job").Job = null as any;
+utilities.lazyLoad(exports, ["Job"], () => require("./job"));
+
+export { JobConfigArgs, JobConfigState } from "./jobConfig";
+export type JobConfig = import("./jobConfig").JobConfig;
+export const JobConfig: typeof import("./jobConfig").JobConfig = null as any;
+utilities.lazyLoad(exports, ["JobConfig"], () => require("./jobConfig"));
+
+export { JobCopyArgs, JobCopyState } from "./jobCopy";
+export type JobCopy = import("./jobCopy").JobCopy;
+export const JobCopy: typeof import("./jobCopy").JobCopy = null as any;
+utilities.lazyLoad(exports, ["JobCopy"], () => require("./jobCopy"));
+
+export { ResourceArgs, ResourceState } from "./resource";
+export type Resource = import("./resource").Resource;
+export const Resource: typeof import("./resource").Resource = null as any;
+utilities.lazyLoad(exports, ["Resource"], () => require("./resource"));
+
+export { ResourceConfigArgs, ResourceConfigState } from "./resourceConfig";
+export type ResourceConfig = import("./resourceConfig").ResourceConfig;
+export const ResourceConfig: typeof import("./resourceConfig").ResourceConfig = null as any;
+utilities.lazyLoad(exports, ["ResourceConfig"], () => require("./resourceConfig"));
+
+export { RunJobArgs, RunJobState } from "./runJob";
+export type RunJob = import("./runJob").RunJob;
+export const RunJob: typeof import("./runJob").RunJob = null as any;
+utilities.lazyLoad(exports, ["RunJob"], () => require("./runJob"));
+
+export { StopJobArgs, StopJobState } from "./stopJob";
+export type StopJob = import("./stopJob").StopJob;
+export const StopJob: typeof import("./stopJob").StopJob = null as any;
+utilities.lazyLoad(exports, ["StopJob"], () => require("./stopJob"));
+
+export { TriggerJobSavepointArgs, TriggerJobSavepointState } from "./triggerJobSavepoint";
+export type TriggerJobSavepoint = import("./triggerJobSavepoint").TriggerJobSavepoint;
+export const TriggerJobSavepoint: typeof import("./triggerJobSavepoint").TriggerJobSavepoint = null as any;
+utilities.lazyLoad(exports, ["TriggerJobSavepoint"], () => require("./triggerJobSavepoint"));
+
+export { WorkSpaceArgs, WorkSpaceState } from "./workSpace";
+export type WorkSpace = import("./workSpace").WorkSpace;
+export const WorkSpace: typeof import("./workSpace").WorkSpace = null as any;
+utilities.lazyLoad(exports, ["WorkSpace"], () => require("./workSpace"));
+
 
 const _module = {
     version: utilities.getVersion(),

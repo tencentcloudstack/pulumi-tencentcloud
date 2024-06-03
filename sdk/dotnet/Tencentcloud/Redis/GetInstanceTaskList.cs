@@ -15,110 +15,104 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Redis
         /// <summary>
         /// Use this data source to query detailed information of redis instance_task_list
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var instanceTaskList = Tencentcloud.Redis.GetInstanceTaskList.Invoke(new()
         ///     {
-        ///         var instanceTaskList = Output.Create(Tencentcloud.Redis.GetInstanceTaskList.InvokeAsync(new Tencentcloud.Redis.GetInstanceTaskListArgs
+        ///         BeginTime = "2021-12-30 00:00:00",
+        ///         EndTime = "2021-12-30 00:00:00",
+        ///         InstanceId = "crs-c1nl9rpv",
+        ///         InstanceName = "",
+        ///         OperateUins = new[]
         ///         {
-        ///             BeginTime = "2021-12-30 00:00:00",
-        ///             EndTime = "2021-12-30 00:00:00",
-        ///             InstanceId = "crs-c1nl9rpv",
-        ///             InstanceName = "",
-        ///             OperateUins = 
-        ///             {
-        ///                 "",
-        ///             },
-        ///             ProjectIds = 
-        ///             {
-        ///                 "",
-        ///             },
-        ///             Results = 
-        ///             {
-        ///                 "",
-        ///             },
-        ///             TaskStatuses = 
-        ///             {
-        ///                 "",
-        ///             },
-        ///             TaskTypes = 
-        ///             {
-        ///                 "",
-        ///             },
-        ///         }));
-        ///     }
+        ///             "",
+        ///         },
+        ///         ProjectIds = new[]
+        ///         {
+        ///             "",
+        ///         },
+        ///         Results = new[]
+        ///         {
+        ///             "",
+        ///         },
+        ///         TaskStatuses = new[]
+        ///         {
+        ///             "",
+        ///         },
+        ///         TaskTypes = new[]
+        ///         {
+        ///             "",
+        ///         },
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetInstanceTaskListResult> InvokeAsync(GetInstanceTaskListArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetInstanceTaskListResult>("tencentcloud:Redis/getInstanceTaskList:getInstanceTaskList", args ?? new GetInstanceTaskListArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetInstanceTaskListResult>("tencentcloud:Redis/getInstanceTaskList:getInstanceTaskList", args ?? new GetInstanceTaskListArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of redis instance_task_list
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var instanceTaskList = Tencentcloud.Redis.GetInstanceTaskList.Invoke(new()
         ///     {
-        ///         var instanceTaskList = Output.Create(Tencentcloud.Redis.GetInstanceTaskList.InvokeAsync(new Tencentcloud.Redis.GetInstanceTaskListArgs
+        ///         BeginTime = "2021-12-30 00:00:00",
+        ///         EndTime = "2021-12-30 00:00:00",
+        ///         InstanceId = "crs-c1nl9rpv",
+        ///         InstanceName = "",
+        ///         OperateUins = new[]
         ///         {
-        ///             BeginTime = "2021-12-30 00:00:00",
-        ///             EndTime = "2021-12-30 00:00:00",
-        ///             InstanceId = "crs-c1nl9rpv",
-        ///             InstanceName = "",
-        ///             OperateUins = 
-        ///             {
-        ///                 "",
-        ///             },
-        ///             ProjectIds = 
-        ///             {
-        ///                 "",
-        ///             },
-        ///             Results = 
-        ///             {
-        ///                 "",
-        ///             },
-        ///             TaskStatuses = 
-        ///             {
-        ///                 "",
-        ///             },
-        ///             TaskTypes = 
-        ///             {
-        ///                 "",
-        ///             },
-        ///         }));
-        ///     }
+        ///             "",
+        ///         },
+        ///         ProjectIds = new[]
+        ///         {
+        ///             "",
+        ///         },
+        ///         Results = new[]
+        ///         {
+        ///             "",
+        ///         },
+        ///         TaskStatuses = new[]
+        ///         {
+        ///             "",
+        ///         },
+        ///         TaskTypes = new[]
+        ///         {
+        ///             "",
+        ///         },
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetInstanceTaskListResult> Invoke(GetInstanceTaskListInvokeArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetInstanceTaskListResult>("tencentcloud:Redis/getInstanceTaskList:getInstanceTaskList", args ?? new GetInstanceTaskListInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetInstanceTaskListResult>("tencentcloud:Redis/getInstanceTaskList:getInstanceTaskList", args ?? new GetInstanceTaskListInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetInstanceTaskListArgs : Pulumi.InvokeArgs
+    public sealed class GetInstanceTaskListArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Start time.
@@ -213,9 +207,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Redis
         public GetInstanceTaskListArgs()
         {
         }
+        public static new GetInstanceTaskListArgs Empty => new GetInstanceTaskListArgs();
     }
 
-    public sealed class GetInstanceTaskListInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetInstanceTaskListInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Start time.
@@ -310,6 +305,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Redis
         public GetInstanceTaskListInvokeArgs()
         {
         }
+        public static new GetInstanceTaskListInvokeArgs Empty => new GetInstanceTaskListInvokeArgs();
     }
 
 

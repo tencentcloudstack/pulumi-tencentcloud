@@ -15,50 +15,52 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var example = new Tencentcloud.Postgresql.InstanceHaConfig("example", new()
     ///     {
-    ///         var example = new Tencentcloud.Postgresql.InstanceHaConfig("example", new Tencentcloud.Postgresql.InstanceHaConfigArgs
-    ///         {
-    ///             InstanceId = "postgres-gzg9jb2n",
-    ///             MaxStandbyLag = 10,
-    ///             MaxStandbyLatency = 10737418240,
-    ///             MaxSyncStandbyLag = 5,
-    ///             MaxSyncStandbyLatency = 52428800,
-    ///             SyncMode = "Semi-sync",
-    ///         });
-    ///     }
+    ///         InstanceId = "postgres-gzg9jb2n",
+    ///         MaxStandbyLag = 10,
+    ///         MaxStandbyLatency = 10737418240,
+    ///         MaxSyncStandbyLag = 5,
+    ///         MaxSyncStandbyLatency = 52428800,
+    ///         SyncMode = "Semi-sync",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var example = new Tencentcloud.Postgresql.InstanceHaConfig("example", new()
     ///     {
-    ///         var example = new Tencentcloud.Postgresql.InstanceHaConfig("example", new Tencentcloud.Postgresql.InstanceHaConfigArgs
-    ///         {
-    ///             InstanceId = "postgres-gzg9jb2n",
-    ///             MaxStandbyLag = 10,
-    ///             MaxStandbyLatency = 10737418240,
-    ///             SyncMode = "Async",
-    ///         });
-    ///     }
+    ///         InstanceId = "postgres-gzg9jb2n",
+    ///         MaxStandbyLag = 10,
+    ///         MaxStandbyLatency = 10737418240,
+    ///         SyncMode = "Async",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Postgresql/instanceHaConfig:InstanceHaConfig")]
-    public partial class InstanceHaConfig : Pulumi.CustomResource
+    public partial class InstanceHaConfig : global::Pulumi.CustomResource
     {
         /// <summary>
         /// instance id.
@@ -141,7 +143,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
         }
     }
 
-    public sealed class InstanceHaConfigArgs : Pulumi.ResourceArgs
+    public sealed class InstanceHaConfigArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// instance id.
@@ -182,9 +184,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
         public InstanceHaConfigArgs()
         {
         }
+        public static new InstanceHaConfigArgs Empty => new InstanceHaConfigArgs();
     }
 
-    public sealed class InstanceHaConfigState : Pulumi.ResourceArgs
+    public sealed class InstanceHaConfigState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// instance id.
@@ -225,5 +228,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
         public InstanceHaConfigState()
         {
         }
+        public static new InstanceHaConfigState Empty => new InstanceHaConfigState();
     }
 }

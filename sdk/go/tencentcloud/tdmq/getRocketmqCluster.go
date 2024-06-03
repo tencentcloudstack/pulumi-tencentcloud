@@ -8,42 +8,47 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Use this data source to query detailed information of tdmqRocketmq cluster
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Tdmq"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tdmq"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tdmq"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Tdmq.GetRocketmqCluster(ctx, &tdmq.GetRocketmqClusterArgs{
-// 			NameKeyword: pulumi.StringRef(exampleTdmq / rocketmqClusterRocketmqCluster.ClusterName),
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_, err = Tdmq.NewRocketmqCluster(ctx, "exampleTdmq/rocketmqClusterRocketmqCluster", &Tdmq.RocketmqClusterArgs{
-// 			ClusterName: pulumi.String("tf_example"),
-// 			Remark:      pulumi.String("remark."),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Tdmq.GetRocketmqCluster(ctx, &tdmq.GetRocketmqClusterArgs{
+//				NameKeyword: pulumi.StringRef(exampleTdmq / rocketmqClusterRocketmqCluster.ClusterName),
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			_, err = Tdmq.NewRocketmqCluster(ctx, "exampleTdmq/rocketmqClusterRocketmqCluster", &Tdmq.RocketmqClusterArgs{
+//				ClusterName: pulumi.String("tf_example"),
+//				Remark:      pulumi.String("remark."),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 func LookupRocketmqCluster(ctx *pulumi.Context, args *LookupRocketmqClusterArgs, opts ...pulumi.InvokeOption) (*LookupRocketmqClusterResult, error) {
-	opts = pkgInvokeDefaultOpts(opts)
+	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv LookupRocketmqClusterResult
 	err := ctx.Invoke("tencentcloud:Tdmq/getRocketmqCluster:getRocketmqCluster", args, &rv, opts...)
 	if err != nil {

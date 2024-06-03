@@ -9,43 +9,49 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const accessKey = new tencentcloud.Cam.AccessKey("access_key", {
- *     targetUin: 100033690181,
- * });
+ * const accessKey = new tencentcloud.cam.AccessKey("accessKey", {targetUin: 100033690181});
  * ```
+ * <!--End PulumiCodeChooser -->
+ *
  * ### Update
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const accessKey = new tencentcloud.Cam.AccessKey("access_key", {
+ * const accessKey = new tencentcloud.cam.AccessKey("accessKey", {
  *     status: "Inactive",
  *     targetUin: 100033690181,
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
+ *
  * ### Encrypted
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const accessKey = new tencentcloud.Cam.AccessKey("access_key", {
+ * const accessKey = new tencentcloud.cam.AccessKey("accessKey", {
  *     pgpKey: "keybase:some_person_that_exists",
  *     targetUin: 100033690181,
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * cam access_key can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Cam/accessKey:AccessKey access_key access_key_id
+ * $ pulumi import tencentcloud:Cam/accessKey:AccessKey access_key access_key_id
  * ```
  */
 export class AccessKey extends pulumi.CustomResource {
@@ -138,6 +144,8 @@ export class AccessKey extends pulumi.CustomResource {
             resourceInputs["secretAccessKey"] = undefined /*out*/;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+        const secretOpts = { additionalSecretOutputs: ["secretAccessKey"] };
+        opts = pulumi.mergeOptions(opts, secretOpts);
         super(AccessKey.__pulumiType, name, resourceInputs, opts);
     }
 }

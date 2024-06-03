@@ -23,6 +23,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vod.Outputs
         /// </summary>
         public readonly bool? RemoveAudio;
         /// <summary>
+        /// Whether to remove video stream. Valid values: `false`: no, `true`: yes. `false` by default.
+        /// </summary>
+        public readonly bool? RemoveVideo;
+        /// <summary>
+        /// Extremely fast HD transcoding parameters.
+        /// </summary>
+        public readonly Outputs.AdaptiveDynamicStreamingTemplateStreamInfoTehdConfig? TehdConfig;
+        /// <summary>
         /// Video parameter information.
         /// </summary>
         public readonly Outputs.AdaptiveDynamicStreamingTemplateStreamInfoVideo Video;
@@ -33,10 +41,16 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vod.Outputs
 
             bool? removeAudio,
 
+            bool? removeVideo,
+
+            Outputs.AdaptiveDynamicStreamingTemplateStreamInfoTehdConfig? tehdConfig,
+
             Outputs.AdaptiveDynamicStreamingTemplateStreamInfoVideo video)
         {
             Audio = audio;
             RemoveAudio = removeAudio;
+            RemoveVideo = removeVideo;
+            TehdConfig = tehdConfig;
             Video = video;
         }
     }

@@ -15,37 +15,38 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Wedata
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var example = new Tencentcloud.Wedata.Script("example", new()
     ///     {
-    ///         var example = new Tencentcloud.Wedata.Script("example", new Tencentcloud.Wedata.ScriptArgs
-    ///         {
-    ///             BucketName = "wedata-demo-1257305158",
-    ///             FileExtensionType = "sql",
-    ///             FilePath = "/datastudio/project/tf_example.sql",
-    ///             ProjectId = "1470575647377821696",
-    ///             Region = "ap-guangzhou",
-    ///         });
-    ///     }
+    ///         BucketName = "wedata-demo-1257305158",
+    ///         FileExtensionType = "sql",
+    ///         FilePath = "/datastudio/project/tf_example.sql",
+    ///         ProjectId = "1470575647377821696",
+    ///         Region = "ap-guangzhou",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// wedata script can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Wedata/script:Script example 1470575647377821696#/datastudio/project/tf_example.sql#4147824b-7ba2-432b-8a8b-7e747594c926
+    /// $ pulumi import tencentcloud:Wedata/script:Script example 1470575647377821696#/datastudio/project/tf_example.sql#4147824b-7ba2-432b-8a8b-7e747594c926
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Wedata/script:Script")]
-    public partial class Script : Pulumi.CustomResource
+    public partial class Script : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Cos bucket name.
@@ -128,7 +129,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Wedata
         }
     }
 
-    public sealed class ScriptArgs : Pulumi.ResourceArgs
+    public sealed class ScriptArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Cos bucket name.
@@ -163,9 +164,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Wedata
         public ScriptArgs()
         {
         }
+        public static new ScriptArgs Empty => new ScriptArgs();
     }
 
-    public sealed class ScriptState : Pulumi.ResourceArgs
+    public sealed class ScriptState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Cos bucket name.
@@ -206,5 +208,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Wedata
         public ScriptState()
         {
         }
+        public static new ScriptState Empty => new ScriptState();
     }
 }

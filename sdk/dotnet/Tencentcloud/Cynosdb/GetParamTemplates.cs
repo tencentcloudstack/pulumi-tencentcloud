@@ -15,58 +15,52 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
         /// <summary>
         /// Use this data source to query detailed information of cynosdb param_templates
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
-        ///     {
-        ///         var paramTemplates = Output.Create(Tencentcloud.Cynosdb.GetParamTemplates.InvokeAsync());
-        ///     }
+        ///     var paramTemplates = Tencentcloud.Cynosdb.GetParamTemplates.Invoke();
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetParamTemplatesResult> InvokeAsync(GetParamTemplatesArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetParamTemplatesResult>("tencentcloud:Cynosdb/getParamTemplates:getParamTemplates", args ?? new GetParamTemplatesArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetParamTemplatesResult>("tencentcloud:Cynosdb/getParamTemplates:getParamTemplates", args ?? new GetParamTemplatesArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of cynosdb param_templates
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
-        ///     {
-        ///         var paramTemplates = Output.Create(Tencentcloud.Cynosdb.GetParamTemplates.InvokeAsync());
-        ///     }
+        ///     var paramTemplates = Tencentcloud.Cynosdb.GetParamTemplates.Invoke();
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetParamTemplatesResult> Invoke(GetParamTemplatesInvokeArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetParamTemplatesResult>("tencentcloud:Cynosdb/getParamTemplates:getParamTemplates", args ?? new GetParamTemplatesInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetParamTemplatesResult>("tencentcloud:Cynosdb/getParamTemplates:getParamTemplates", args ?? new GetParamTemplatesInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetParamTemplatesArgs : Pulumi.InvokeArgs
+    public sealed class GetParamTemplatesArgs : global::Pulumi.InvokeArgs
     {
         [Input("dbModes")]
         private List<string>? _dbModes;
@@ -185,9 +179,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
         public GetParamTemplatesArgs()
         {
         }
+        public static new GetParamTemplatesArgs Empty => new GetParamTemplatesArgs();
     }
 
-    public sealed class GetParamTemplatesInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetParamTemplatesInvokeArgs : global::Pulumi.InvokeArgs
     {
         [Input("dbModes")]
         private InputList<string>? _dbModes;
@@ -306,6 +301,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
         public GetParamTemplatesInvokeArgs()
         {
         }
+        public static new GetParamTemplatesInvokeArgs Empty => new GetParamTemplatesInvokeArgs();
     }
 
 

@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam.Inputs
 {
 
-    public sealed class TagRoleAttachmentTagArgs : Pulumi.ResourceArgs
+    public sealed class TagRoleAttachmentTagArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Label.
@@ -28,5 +28,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam.Inputs
         public TagRoleAttachmentTagArgs()
         {
         }
+        public static new TagRoleAttachmentTagArgs Empty => new TagRoleAttachmentTagArgs();
     }
 }

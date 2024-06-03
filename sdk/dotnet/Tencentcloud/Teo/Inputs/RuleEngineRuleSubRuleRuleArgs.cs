@@ -11,13 +11,13 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Inputs
 {
 
-    public sealed class RuleEngineRuleSubRuleRuleArgs : Pulumi.ResourceArgs
+    public sealed class RuleEngineRuleSubRuleRuleArgs : global::Pulumi.ResourceArgs
     {
         [Input("actions", required: true)]
         private InputList<Inputs.RuleEngineRuleSubRuleRuleActionArgs>? _actions;
 
         /// <summary>
-        /// Actions list of the rule. See details in data source `rule_engine_setting`.
+        /// Feature to be executed.
         /// </summary>
         public InputList<Inputs.RuleEngineRuleSubRuleRuleActionArgs> Actions
         {
@@ -40,5 +40,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Inputs
         public RuleEngineRuleSubRuleRuleArgs()
         {
         }
+        public static new RuleEngineRuleSubRuleRuleArgs Empty => new RuleEngineRuleSubRuleRuleArgs();
     }
 }

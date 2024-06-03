@@ -7,55 +7,61 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provide a resource to create a VPC ACL instance.
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		vpc, err := Vpc.NewInstance(ctx, "vpc", &Vpc.InstanceArgs{
-// 			CidrBlock: pulumi.String("10.0.0.0/16"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_, err = Vpc.NewAcl(ctx, "example", &Vpc.AclArgs{
-// 			VpcId: vpc.ID(),
-// 			Ingresses: pulumi.StringArray{
-// 				pulumi.String("ACCEPT#192.168.1.0/24#800#TCP"),
-// 				pulumi.String("ACCEPT#192.168.1.0/24#800-900#TCP"),
-// 			},
-// 			Egresses: pulumi.StringArray{
-// 				pulumi.String("ACCEPT#192.168.1.0/24#800#TCP"),
-// 				pulumi.String("ACCEPT#192.168.1.0/24#800-900#TCP"),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			vpc, err := Vpc.NewInstance(ctx, "vpc", &Vpc.InstanceArgs{
+//				CidrBlock: pulumi.String("10.0.0.0/16"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_, err = Vpc.NewAcl(ctx, "example", &Vpc.AclArgs{
+//				VpcId: vpc.ID(),
+//				Ingresses: pulumi.StringArray{
+//					pulumi.String("ACCEPT#192.168.1.0/24#800#TCP"),
+//					pulumi.String("ACCEPT#192.168.1.0/24#800-900#TCP"),
+//				},
+//				Egresses: pulumi.StringArray{
+//					pulumi.String("ACCEPT#192.168.1.0/24#800#TCP"),
+//					pulumi.String("ACCEPT#192.168.1.0/24#800-900#TCP"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // Vpc ACL can be imported, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Vpc/acl:Acl default acl-id
+// $ pulumi import tencentcloud:Vpc/acl:Acl default acl-id
 // ```
 type Acl struct {
 	pulumi.CustomResourceState
@@ -84,7 +90,7 @@ func NewAcl(ctx *pulumi.Context,
 	if args.VpcId == nil {
 		return nil, errors.New("invalid value for required argument 'VpcId'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource Acl
 	err := ctx.RegisterResource("tencentcloud:Vpc/acl:Acl", name, args, &resource, opts...)
 	if err != nil {
@@ -193,7 +199,7 @@ func (i *Acl) ToAclOutputWithContext(ctx context.Context) AclOutput {
 // AclArrayInput is an input type that accepts AclArray and AclArrayOutput values.
 // You can construct a concrete instance of `AclArrayInput` via:
 //
-//          AclArray{ AclArgs{...} }
+//	AclArray{ AclArgs{...} }
 type AclArrayInput interface {
 	pulumi.Input
 
@@ -218,7 +224,7 @@ func (i AclArray) ToAclArrayOutputWithContext(ctx context.Context) AclArrayOutpu
 // AclMapInput is an input type that accepts AclMap and AclMapOutput values.
 // You can construct a concrete instance of `AclMapInput` via:
 //
-//          AclMap{ "key": AclArgs{...} }
+//	AclMap{ "key": AclArgs{...} }
 type AclMapInput interface {
 	pulumi.Input
 

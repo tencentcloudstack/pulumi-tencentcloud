@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,11 +11,12 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const chcConfig = new tencentcloud.Cvm.ChcConfig("chc_config", {
+ * const chcConfig = new tencentcloud.cvm.ChcConfig("chcConfig", {
  *     bmcSecurityGroupIds: ["sg-xxxxxx"],
  *     bmcUser: "admin",
  *     bmcVirtualPrivateCloud: {
@@ -31,13 +33,14 @@ import * as utilities from "../utilities";
  *     password: "xxxxxx",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * cvm chc_config can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Cvm/chcConfig:ChcConfig chc_config chc_config_id
+ * $ pulumi import tencentcloud:Cvm/chcConfig:ChcConfig chc_config chc_config_id
  * ```
  */
 export class ChcConfig extends pulumi.CustomResource {
@@ -140,9 +143,11 @@ export class ChcConfig extends pulumi.CustomResource {
             resourceInputs["deployVirtualPrivateCloud"] = args ? args.deployVirtualPrivateCloud : undefined;
             resourceInputs["deviceType"] = args ? args.deviceType : undefined;
             resourceInputs["instanceName"] = args ? args.instanceName : undefined;
-            resourceInputs["password"] = args ? args.password : undefined;
+            resourceInputs["password"] = args?.password ? pulumi.secret(args.password) : undefined;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+        const secretOpts = { additionalSecretOutputs: ["password"] };
+        opts = pulumi.mergeOptions(opts, secretOpts);
         super(ChcConfig.__pulumiType, name, resourceInputs, opts);
     }
 }

@@ -15,98 +15,96 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssm
         /// <summary>
         /// Use this data source to query detailed information of SSM secret version
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var exampleSecret = new Tencentcloud.Ssm.Secret("exampleSecret", new()
         ///     {
-        ///         var exampleSecret = new Tencentcloud.Ssm.Secret("exampleSecret", new Tencentcloud.Ssm.SecretArgs
+        ///         SecretName = "tf-example",
+        ///         Description = "desc.",
+        ///         Tags = 
         ///         {
-        ///             SecretName = "tf-example",
-        ///             Description = "desc.",
-        ///             Tags = 
-        ///             {
-        ///                 { "createdBy", "terraform" },
-        ///             },
-        ///         });
-        ///         var v1 = new Tencentcloud.Ssm.SecretVersion("v1", new Tencentcloud.Ssm.SecretVersionArgs
-        ///         {
-        ///             SecretName = exampleSecret.SecretName,
-        ///             VersionId = "v1",
-        ///             SecretBinary = "MTIzMTIzMTIzMTIzMTIzQQ==",
-        ///         });
-        ///         var exampleSecretVersions = Tencentcloud.Ssm.GetSecretVersions.Invoke(new Tencentcloud.Ssm.GetSecretVersionsInvokeArgs
-        ///         {
-        ///             SecretName = v1.SecretName,
-        ///             VersionId = v1.VersionId,
-        ///         });
-        ///     }
+        ///             { "createdBy", "terraform" },
+        ///         },
+        ///     });
         /// 
-        /// }
+        ///     var v1 = new Tencentcloud.Ssm.SecretVersion("v1", new()
+        ///     {
+        ///         SecretName = exampleSecret.SecretName,
+        ///         VersionId = "v1",
+        ///         SecretBinary = "MTIzMTIzMTIzMTIzMTIzQQ==",
+        ///     });
+        /// 
+        ///     var exampleSecretVersions = Tencentcloud.Ssm.GetSecretVersions.Invoke(new()
+        ///     {
+        ///         SecretName = v1.SecretName,
+        ///         VersionId = v1.VersionId,
+        ///     });
+        /// 
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetSecretVersionsResult> InvokeAsync(GetSecretVersionsArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetSecretVersionsResult>("tencentcloud:Ssm/getSecretVersions:getSecretVersions", args ?? new GetSecretVersionsArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetSecretVersionsResult>("tencentcloud:Ssm/getSecretVersions:getSecretVersions", args ?? new GetSecretVersionsArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of SSM secret version
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var exampleSecret = new Tencentcloud.Ssm.Secret("exampleSecret", new()
         ///     {
-        ///         var exampleSecret = new Tencentcloud.Ssm.Secret("exampleSecret", new Tencentcloud.Ssm.SecretArgs
+        ///         SecretName = "tf-example",
+        ///         Description = "desc.",
+        ///         Tags = 
         ///         {
-        ///             SecretName = "tf-example",
-        ///             Description = "desc.",
-        ///             Tags = 
-        ///             {
-        ///                 { "createdBy", "terraform" },
-        ///             },
-        ///         });
-        ///         var v1 = new Tencentcloud.Ssm.SecretVersion("v1", new Tencentcloud.Ssm.SecretVersionArgs
-        ///         {
-        ///             SecretName = exampleSecret.SecretName,
-        ///             VersionId = "v1",
-        ///             SecretBinary = "MTIzMTIzMTIzMTIzMTIzQQ==",
-        ///         });
-        ///         var exampleSecretVersions = Tencentcloud.Ssm.GetSecretVersions.Invoke(new Tencentcloud.Ssm.GetSecretVersionsInvokeArgs
-        ///         {
-        ///             SecretName = v1.SecretName,
-        ///             VersionId = v1.VersionId,
-        ///         });
-        ///     }
+        ///             { "createdBy", "terraform" },
+        ///         },
+        ///     });
         /// 
-        /// }
+        ///     var v1 = new Tencentcloud.Ssm.SecretVersion("v1", new()
+        ///     {
+        ///         SecretName = exampleSecret.SecretName,
+        ///         VersionId = "v1",
+        ///         SecretBinary = "MTIzMTIzMTIzMTIzMTIzQQ==",
+        ///     });
+        /// 
+        ///     var exampleSecretVersions = Tencentcloud.Ssm.GetSecretVersions.Invoke(new()
+        ///     {
+        ///         SecretName = v1.SecretName,
+        ///         VersionId = v1.VersionId,
+        ///     });
+        /// 
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetSecretVersionsResult> Invoke(GetSecretVersionsInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetSecretVersionsResult>("tencentcloud:Ssm/getSecretVersions:getSecretVersions", args ?? new GetSecretVersionsInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetSecretVersionsResult>("tencentcloud:Ssm/getSecretVersions:getSecretVersions", args ?? new GetSecretVersionsInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetSecretVersionsArgs : Pulumi.InvokeArgs
+    public sealed class GetSecretVersionsArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Used to save results.
@@ -129,9 +127,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssm
         public GetSecretVersionsArgs()
         {
         }
+        public static new GetSecretVersionsArgs Empty => new GetSecretVersionsArgs();
     }
 
-    public sealed class GetSecretVersionsInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetSecretVersionsInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Used to save results.
@@ -154,6 +153,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssm
         public GetSecretVersionsInvokeArgs()
         {
         }
+        public static new GetSecretVersionsInvokeArgs Empty => new GetSecretVersionsInvokeArgs();
     }
 
 

@@ -7,8 +7,9 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a vpc bandwidthPackageAttachment
@@ -40,7 +41,7 @@ func NewBandwidthPackageAttachment(ctx *pulumi.Context,
 	if args.ResourceId == nil {
 		return nil, errors.New("invalid value for required argument 'ResourceId'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource BandwidthPackageAttachment
 	err := ctx.RegisterResource("tencentcloud:Vpc/bandwidthPackageAttachment:BandwidthPackageAttachment", name, args, &resource, opts...)
 	if err != nil {
@@ -145,7 +146,7 @@ func (i *BandwidthPackageAttachment) ToBandwidthPackageAttachmentOutputWithConte
 // BandwidthPackageAttachmentArrayInput is an input type that accepts BandwidthPackageAttachmentArray and BandwidthPackageAttachmentArrayOutput values.
 // You can construct a concrete instance of `BandwidthPackageAttachmentArrayInput` via:
 //
-//          BandwidthPackageAttachmentArray{ BandwidthPackageAttachmentArgs{...} }
+//	BandwidthPackageAttachmentArray{ BandwidthPackageAttachmentArgs{...} }
 type BandwidthPackageAttachmentArrayInput interface {
 	pulumi.Input
 
@@ -170,7 +171,7 @@ func (i BandwidthPackageAttachmentArray) ToBandwidthPackageAttachmentArrayOutput
 // BandwidthPackageAttachmentMapInput is an input type that accepts BandwidthPackageAttachmentMap and BandwidthPackageAttachmentMapOutput values.
 // You can construct a concrete instance of `BandwidthPackageAttachmentMapInput` via:
 //
-//          BandwidthPackageAttachmentMap{ "key": BandwidthPackageAttachmentArgs{...} }
+//	BandwidthPackageAttachmentMap{ "key": BandwidthPackageAttachmentArgs{...} }
 type BandwidthPackageAttachmentMapInput interface {
 	pulumi.Input
 

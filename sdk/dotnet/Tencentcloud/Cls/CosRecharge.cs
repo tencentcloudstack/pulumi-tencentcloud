@@ -13,55 +13,56 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls
     /// <summary>
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var cosRecharge = new Tencentcloud.Cls.CosRecharge("cosRecharge", new()
     ///     {
-    ///         var cosRecharge = new Tencentcloud.Cls.CosRecharge("cosRecharge", new Tencentcloud.Cls.CosRechargeArgs
+    ///         Bucket = "cos-lock-1308919341",
+    ///         BucketRegion = "ap-guangzhou",
+    ///         ExtractRuleInfo = new Tencentcloud.Cls.Inputs.CosRechargeExtractRuleInfoArgs
     ///         {
-    ///             Bucket = "cos-lock-1308919341",
-    ///             BucketRegion = "ap-guangzhou",
-    ///             ExtractRuleInfo = new Tencentcloud.Cls.Inputs.CosRechargeExtractRuleInfoArgs
+    ///             Backtracking = 0,
+    ///             FilterKeyRegexes = new[]
     ///             {
-    ///                 Backtracking = 0,
-    ///                 FilterKeyRegexes = 
+    ///                 new Tencentcloud.Cls.Inputs.CosRechargeExtractRuleInfoFilterKeyRegexArgs
     ///                 {
-    ///                     new Tencentcloud.Cls.Inputs.CosRechargeExtractRuleInfoFilterKeyRegexArgs
-    ///                     {
-    ///                         Key = "__CONTENT__",
-    ///                         Regex = "dasd",
-    ///                     },
+    ///                     Key = "__CONTENT__",
+    ///                     Regex = "dasd",
     ///                 },
-    ///                 IsGbk = 0,
-    ///                 JsonStandard = 0,
-    ///                 Keys = {},
-    ///                 MetadataType = 0,
-    ///                 UnMatchUpLoadSwitch = false,
     ///             },
-    ///             LogType = "minimalist_log",
-    ///             LogsetId = "dd426d1a-95bc-4bca-b8c2-baa169261812",
-    ///             Prefix = "test",
-    ///             TopicId = "7e34a3a7-635e-4da8-9005-88106c1fde69",
-    ///         });
-    ///     }
+    ///             IsGbk = 0,
+    ///             JsonStandard = 0,
+    ///             Keys = new() { },
+    ///             MetadataType = 0,
+    ///             UnMatchUpLoadSwitch = false,
+    ///         },
+    ///         LogType = "minimalist_log",
+    ///         LogsetId = "dd426d1a-95bc-4bca-b8c2-baa169261812",
+    ///         Prefix = "test",
+    ///         TopicId = "7e34a3a7-635e-4da8-9005-88106c1fde69",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// cls cos_recharge can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Cls/cosRecharge:CosRecharge cos_recharge topic_id#cos_recharge_id
+    /// $ pulumi import tencentcloud:Cls/cosRecharge:CosRecharge cos_recharge topic_id#cos_recharge_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Cls/cosRecharge:CosRecharge")]
-    public partial class CosRecharge : Pulumi.CustomResource
+    public partial class CosRecharge : global::Pulumi.CustomResource
     {
         /// <summary>
         /// cos bucket.
@@ -162,7 +163,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls
         }
     }
 
-    public sealed class CosRechargeArgs : Pulumi.ResourceArgs
+    public sealed class CosRechargeArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// cos bucket.
@@ -221,9 +222,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls
         public CosRechargeArgs()
         {
         }
+        public static new CosRechargeArgs Empty => new CosRechargeArgs();
     }
 
-    public sealed class CosRechargeState : Pulumi.ResourceArgs
+    public sealed class CosRechargeState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// cos bucket.
@@ -282,5 +284,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls
         public CosRechargeState()
         {
         }
+        public static new CosRechargeState Empty => new CosRechargeState();
     }
 }

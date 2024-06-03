@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver.Inputs
 {
 
-    public sealed class MigrationSourceGetArgs : Pulumi.ResourceArgs
+    public sealed class MigrationSourceGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// ID of the migration source Cvm, used when MigrateType=2 (cloud server self-built SQL Server database).
@@ -82,5 +82,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver.Inputs
         public MigrationSourceGetArgs()
         {
         }
+        public static new MigrationSourceGetArgs Empty => new MigrationSourceGetArgs();
     }
 }

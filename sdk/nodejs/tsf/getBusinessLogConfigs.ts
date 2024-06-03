@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,24 +11,23 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const businessLogConfigs = pulumi.output(tencentcloud.Tsf.getBusinessLogConfigs({
+ * const businessLogConfigs = tencentcloud.Tsf.getBusinessLogConfigs({
  *     configIdLists: ["apm-busi-log-cfg-qv3x3rdv"],
  *     disableProgramAuthCheck: true,
  *     searchWord: "terraform",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getBusinessLogConfigs(args?: GetBusinessLogConfigsArgs, opts?: pulumi.InvokeOptions): Promise<GetBusinessLogConfigsResult> {
     args = args || {};
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Tsf/getBusinessLogConfigs:getBusinessLogConfigs", {
         "configIdLists": args.configIdLists,
         "disableProgramAuthCheck": args.disableProgramAuthCheck,
@@ -75,9 +75,26 @@ export interface GetBusinessLogConfigsResult {
     readonly results: outputs.Tsf.GetBusinessLogConfigsResult[];
     readonly searchWord?: string;
 }
-
+/**
+ * Use this data source to query detailed information of tsf businessLogConfigs
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const businessLogConfigs = tencentcloud.Tsf.getBusinessLogConfigs({
+ *     configIdLists: ["apm-busi-log-cfg-qv3x3rdv"],
+ *     disableProgramAuthCheck: true,
+ *     searchWord: "terraform",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getBusinessLogConfigsOutput(args?: GetBusinessLogConfigsOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetBusinessLogConfigsResult> {
-    return pulumi.output(args).apply(a => getBusinessLogConfigs(a, opts))
+    return pulumi.output(args).apply((a: any) => getBusinessLogConfigs(a, opts))
 }
 
 /**

@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,24 +11,23 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const statisticsReport = pulumi.output(tencentcloud.Ses.getStatisticsReport({
+ * const statisticsReport = tencentcloud.Ses.getStatisticsReport({
  *     domain: "iac-tf.cloud",
  *     endDate: "2023-09-05",
  *     receivingMailboxType: "gmail.com",
  *     startDate: "2020-10-01",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getStatisticsReport(args: GetStatisticsReportArgs, opts?: pulumi.InvokeOptions): Promise<GetStatisticsReportResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Ses/getStatisticsReport:getStatisticsReport", {
         "domain": args.domain,
         "endDate": args.endDate,
@@ -85,9 +85,27 @@ export interface GetStatisticsReportResult {
     readonly resultOutputFile?: string;
     readonly startDate: string;
 }
-
+/**
+ * Use this data source to query detailed information of ses statisticsReport
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const statisticsReport = tencentcloud.Ses.getStatisticsReport({
+ *     domain: "iac-tf.cloud",
+ *     endDate: "2023-09-05",
+ *     receivingMailboxType: "gmail.com",
+ *     startDate: "2020-10-01",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getStatisticsReportOutput(args: GetStatisticsReportOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetStatisticsReportResult> {
-    return pulumi.output(args).apply(a => getStatisticsReport(a, opts))
+    return pulumi.output(args).apply((a: any) => getStatisticsReport(a, opts))
 }
 
 /**

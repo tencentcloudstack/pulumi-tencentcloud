@@ -17,44 +17,46 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdcpg
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var instance1 = new Tencentcloud.Tdcpg.Instance("instance1", new()
     ///     {
-    ///         var instance1 = new Tencentcloud.Tdcpg.Instance("instance1", new Tencentcloud.Tdcpg.InstanceArgs
-    ///         {
-    ///             ClusterId = "cluster_id",
-    ///             Cpu = 1,
-    ///             InstanceName = "instance_name",
-    ///             Memory = 1,
-    ///         });
-    ///         var instance2 = new Tencentcloud.Tdcpg.Instance("instance2", new Tencentcloud.Tdcpg.InstanceArgs
-    ///         {
-    ///             ClusterId = "cluster_id",
-    ///             Cpu = 1,
-    ///             InstanceName = "instance_name",
-    ///             Memory = 2,
-    ///             OperationTiming = "IMMEDIATE",
-    ///         });
-    ///     }
+    ///         ClusterId = "cluster_id",
+    ///         Cpu = 1,
+    ///         InstanceName = "instance_name",
+    ///         Memory = 1,
+    ///     });
     /// 
-    /// }
+    ///     var instance2 = new Tencentcloud.Tdcpg.Instance("instance2", new()
+    ///     {
+    ///         ClusterId = "cluster_id",
+    ///         Cpu = 1,
+    ///         InstanceName = "instance_name",
+    ///         Memory = 2,
+    ///         OperationTiming = "IMMEDIATE",
+    ///     });
+    /// 
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// tdcpg instance can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Tdcpg/instance:Instance instance cluster_id#instance_id
+    /// $ pulumi import tencentcloud:Tdcpg/instance:Instance instance cluster_id#instance_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Tdcpg/instance:Instance")]
-    public partial class Instance : Pulumi.CustomResource
+    public partial class Instance : global::Pulumi.CustomResource
     {
         /// <summary>
         /// cluster id.
@@ -131,7 +133,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdcpg
         }
     }
 
-    public sealed class InstanceArgs : Pulumi.ResourceArgs
+    public sealed class InstanceArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// cluster id.
@@ -166,9 +168,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdcpg
         public InstanceArgs()
         {
         }
+        public static new InstanceArgs Empty => new InstanceArgs();
     }
 
-    public sealed class InstanceState : Pulumi.ResourceArgs
+    public sealed class InstanceState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// cluster id.
@@ -203,5 +206,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdcpg
         public InstanceState()
         {
         }
+        public static new InstanceState Empty => new InstanceState();
     }
 }

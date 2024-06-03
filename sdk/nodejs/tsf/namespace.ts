@@ -9,20 +9,19 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const namespace = new tencentcloud.Tsf.Namespace("namespace", {
- *     // namespace_id = ""
+ * const namespace = new tencentcloud.tsf.Namespace("namespace", {
  *     isHaEnable: "0",
- *     // cluster_id = "cls-xxxx"
  *     namespaceDesc: "namespace desc",
  *     namespaceName: "namespace-name",
- *     // namespace_resource_type = ""
  *     namespaceType: "DEF",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export class Namespace extends pulumi.CustomResource {
     /**

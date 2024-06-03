@@ -8,7 +8,7 @@ import (
 
 	"github.com/blang/semver"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 type module struct {
@@ -29,6 +29,8 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 		r = &ApplicationProxyRule{}
 	case "tencentcloud:Teo/certificateConfig:CertificateConfig":
 		r = &CertificateConfig{}
+	case "tencentcloud:Teo/l4Proxy:L4Proxy":
+		r = &L4Proxy{}
 	case "tencentcloud:Teo/originGroup:OriginGroup":
 		r = &OriginGroup{}
 	case "tencentcloud:Teo/ownershipVerify:OwnershipVerify":
@@ -48,7 +50,7 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 }
 
 func init() {
-	version, err := tencentcloud.PkgVersion()
+	version, err := internal.PkgVersion()
 	if err != nil {
 		version = semver.Version{Major: 1}
 	}
@@ -70,6 +72,11 @@ func init() {
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
 		"Teo/certificateConfig",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Teo/l4Proxy",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(

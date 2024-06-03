@@ -8,57 +8,62 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Use this data source to query forward domain of layer7 listeners.
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Gaap"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Gaap"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Gaap"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		fooProxy, err := Gaap.NewProxy(ctx, "fooProxy", &Gaap.ProxyArgs{
-// 			Bandwidth:        pulumi.Int(10),
-// 			Concurrent:       pulumi.Int(2),
-// 			AccessRegion:     pulumi.String("SouthChina"),
-// 			RealserverRegion: pulumi.String("NorthChina"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		fooLayer7Listener, err := Gaap.NewLayer7Listener(ctx, "fooLayer7Listener", &Gaap.Layer7ListenerArgs{
-// 			Protocol: pulumi.String("HTTP"),
-// 			Port:     pulumi.Int(80),
-// 			ProxyId:  fooProxy.ID(),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		fooHttpDomain, err := Gaap.NewHttpDomain(ctx, "fooHttpDomain", &Gaap.HttpDomainArgs{
-// 			ListenerId: fooLayer7Listener.ID(),
-// 			Domain:     pulumi.String("www.qq.com"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_ = Gaap.GetHttpDomainsOutput(ctx, gaap.GetHttpDomainsOutputArgs{
-// 			ListenerId: fooLayer7Listener.ID(),
-// 			Domain:     fooHttpDomain.Domain,
-// 		}, nil)
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			fooProxy, err := Gaap.NewProxy(ctx, "fooProxy", &Gaap.ProxyArgs{
+//				Bandwidth:        pulumi.Int(10),
+//				Concurrent:       pulumi.Int(2),
+//				AccessRegion:     pulumi.String("SouthChina"),
+//				RealserverRegion: pulumi.String("NorthChina"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			fooLayer7Listener, err := Gaap.NewLayer7Listener(ctx, "fooLayer7Listener", &Gaap.Layer7ListenerArgs{
+//				Protocol: pulumi.String("HTTP"),
+//				Port:     pulumi.Int(80),
+//				ProxyId:  fooProxy.ID(),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			fooHttpDomain, err := Gaap.NewHttpDomain(ctx, "fooHttpDomain", &Gaap.HttpDomainArgs{
+//				ListenerId: fooLayer7Listener.ID(),
+//				Domain:     pulumi.String("www.qq.com"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_ = Gaap.GetHttpDomainsOutput(ctx, gaap.GetHttpDomainsOutputArgs{
+//				ListenerId: fooLayer7Listener.ID(),
+//				Domain:     fooHttpDomain.Domain,
+//			}, nil)
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 func GetHttpDomains(ctx *pulumi.Context, args *GetHttpDomainsArgs, opts ...pulumi.InvokeOption) (*GetHttpDomainsResult, error) {
-	opts = pkgInvokeDefaultOpts(opts)
+	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetHttpDomainsResult
 	err := ctx.Invoke("tencentcloud:Gaap/getHttpDomains:getHttpDomains", args, &rv, opts...)
 	if err != nil {

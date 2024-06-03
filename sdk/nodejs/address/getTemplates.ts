@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,22 +11,21 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const name = pulumi.output(tencentcloud.Address.getTemplates({
+ * const name = tencentcloud.Address.getTemplates({
  *     name: "test",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getTemplates(args?: GetTemplatesArgs, opts?: pulumi.InvokeOptions): Promise<GetTemplatesResult> {
     args = args || {};
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Address/getTemplates:getTemplates", {
         "id": args.id,
         "name": args.name,
@@ -69,9 +69,24 @@ export interface GetTemplatesResult {
      */
     readonly templateLists: outputs.Address.GetTemplatesTemplateList[];
 }
-
+/**
+ * Use this data source to query detailed information of address templates.
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const name = tencentcloud.Address.getTemplates({
+ *     name: "test",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getTemplatesOutput(args?: GetTemplatesOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetTemplatesResult> {
-    return pulumi.output(args).apply(a => getTemplates(a, opts))
+    return pulumi.output(args).apply((a: any) => getTemplates(a, opts))
 }
 
 /**

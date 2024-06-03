@@ -15,68 +15,62 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
         /// <summary>
         /// Use this data source to query detailed information of sqlserver datasource_backup_command
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var example = Tencentcloud.Sqlserver.GetBackupCommands.Invoke(new()
         ///     {
-        ///         var example = Output.Create(Tencentcloud.Sqlserver.GetBackupCommands.InvokeAsync(new Tencentcloud.Sqlserver.GetBackupCommandsArgs
-        ///         {
-        ///             BackupFileType = "FULL",
-        ///             DataBaseName = "keep-publish-instance",
-        ///             IsRecovery = "NO",
-        ///         }));
-        ///     }
+        ///         BackupFileType = "FULL",
+        ///         DataBaseName = "keep-publish-instance",
+        ///         IsRecovery = "NO",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetBackupCommandsResult> InvokeAsync(GetBackupCommandsArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetBackupCommandsResult>("tencentcloud:Sqlserver/getBackupCommands:getBackupCommands", args ?? new GetBackupCommandsArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetBackupCommandsResult>("tencentcloud:Sqlserver/getBackupCommands:getBackupCommands", args ?? new GetBackupCommandsArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of sqlserver datasource_backup_command
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var example = Tencentcloud.Sqlserver.GetBackupCommands.Invoke(new()
         ///     {
-        ///         var example = Output.Create(Tencentcloud.Sqlserver.GetBackupCommands.InvokeAsync(new Tencentcloud.Sqlserver.GetBackupCommandsArgs
-        ///         {
-        ///             BackupFileType = "FULL",
-        ///             DataBaseName = "keep-publish-instance",
-        ///             IsRecovery = "NO",
-        ///         }));
-        ///     }
+        ///         BackupFileType = "FULL",
+        ///         DataBaseName = "keep-publish-instance",
+        ///         IsRecovery = "NO",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetBackupCommandsResult> Invoke(GetBackupCommandsInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetBackupCommandsResult>("tencentcloud:Sqlserver/getBackupCommands:getBackupCommands", args ?? new GetBackupCommandsInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetBackupCommandsResult>("tencentcloud:Sqlserver/getBackupCommands:getBackupCommands", args ?? new GetBackupCommandsInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetBackupCommandsArgs : Pulumi.InvokeArgs
+    public sealed class GetBackupCommandsArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Backup file type. Full: full backup. FULL_LOG: full backup which needs log increments. FULL_DIFF: full backup which needs differential increments. LOG: log backup. DIFF: differential backup.
@@ -111,9 +105,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
         public GetBackupCommandsArgs()
         {
         }
+        public static new GetBackupCommandsArgs Empty => new GetBackupCommandsArgs();
     }
 
-    public sealed class GetBackupCommandsInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetBackupCommandsInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Backup file type. Full: full backup. FULL_LOG: full backup which needs log increments. FULL_DIFF: full backup which needs differential increments. LOG: log backup. DIFF: differential backup.
@@ -148,6 +143,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
         public GetBackupCommandsInvokeArgs()
         {
         }
+        public static new GetBackupCommandsInvokeArgs Empty => new GetBackupCommandsInvokeArgs();
     }
 
 

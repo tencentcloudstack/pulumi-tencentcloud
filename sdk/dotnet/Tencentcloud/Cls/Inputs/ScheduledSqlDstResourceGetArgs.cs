@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls.Inputs
 {
 
-    public sealed class ScheduledSqlDstResourceGetArgs : Pulumi.ResourceArgs
+    public sealed class ScheduledSqlDstResourceGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// topic type.
@@ -40,5 +40,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls.Inputs
         public ScheduledSqlDstResourceGetArgs()
         {
         }
+        public static new ScheduledSqlDstResourceGetArgs Empty => new ScheduledSqlDstResourceGetArgs();
     }
 }

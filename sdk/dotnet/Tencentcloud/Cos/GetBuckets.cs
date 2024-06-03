@@ -15,66 +15,60 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos
         /// <summary>
         /// Use this data source to query the COS buckets of the current Tencent Cloud user.
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var cosBuckets = Tencentcloud.Cos.GetBuckets.Invoke(new()
         ///     {
-        ///         var cosBuckets = Output.Create(Tencentcloud.Cos.GetBuckets.InvokeAsync(new Tencentcloud.Cos.GetBucketsArgs
-        ///         {
-        ///             BucketPrefix = "tf-bucket-",
-        ///             ResultOutputFile = "mytestpath",
-        ///         }));
-        ///     }
+        ///         BucketPrefix = "tf-bucket-",
+        ///         ResultOutputFile = "mytestpath",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetBucketsResult> InvokeAsync(GetBucketsArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetBucketsResult>("tencentcloud:Cos/getBuckets:getBuckets", args ?? new GetBucketsArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetBucketsResult>("tencentcloud:Cos/getBuckets:getBuckets", args ?? new GetBucketsArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query the COS buckets of the current Tencent Cloud user.
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var cosBuckets = Tencentcloud.Cos.GetBuckets.Invoke(new()
         ///     {
-        ///         var cosBuckets = Output.Create(Tencentcloud.Cos.GetBuckets.InvokeAsync(new Tencentcloud.Cos.GetBucketsArgs
-        ///         {
-        ///             BucketPrefix = "tf-bucket-",
-        ///             ResultOutputFile = "mytestpath",
-        ///         }));
-        ///     }
+        ///         BucketPrefix = "tf-bucket-",
+        ///         ResultOutputFile = "mytestpath",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetBucketsResult> Invoke(GetBucketsInvokeArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetBucketsResult>("tencentcloud:Cos/getBuckets:getBuckets", args ?? new GetBucketsInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetBucketsResult>("tencentcloud:Cos/getBuckets:getBuckets", args ?? new GetBucketsInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetBucketsArgs : Pulumi.InvokeArgs
+    public sealed class GetBucketsArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// A prefix string to filter results by bucket name.
@@ -103,9 +97,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos
         public GetBucketsArgs()
         {
         }
+        public static new GetBucketsArgs Empty => new GetBucketsArgs();
     }
 
-    public sealed class GetBucketsInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetBucketsInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// A prefix string to filter results by bucket name.
@@ -134,6 +129,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos
         public GetBucketsInvokeArgs()
         {
         }
+        public static new GetBucketsInvokeArgs Empty => new GetBucketsInvokeArgs();
     }
 
 

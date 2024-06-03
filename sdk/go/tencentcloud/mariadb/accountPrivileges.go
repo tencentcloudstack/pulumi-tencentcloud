@@ -7,54 +7,59 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a mariadb accountPrivileges
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Mariadb"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Mariadb"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Mariadb"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Mariadb.NewAccountPrivileges(ctx, "accountPrivileges", &Mariadb.AccountPrivilegesArgs{
-// 			Accounts: &mariadb.AccountPrivilegesAccountsArgs{
-// 				Host: pulumi.String("127.0.0.1"),
-// 				User: pulumi.String("keep-modify-privileges"),
-// 			},
-// 			GlobalPrivileges: pulumi.StringArray{
-// 				pulumi.String("ALTER"),
-// 				pulumi.String("CREATE"),
-// 				pulumi.String("DELETE"),
-// 				pulumi.String("SELECT"),
-// 				pulumi.String("UPDATE"),
-// 				pulumi.String("DROP"),
-// 			},
-// 			InstanceId: pulumi.String("tdsql-9vqvls95"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Mariadb.NewAccountPrivileges(ctx, "accountPrivileges", &Mariadb.AccountPrivilegesArgs{
+//				Accounts: &mariadb.AccountPrivilegesAccountsArgs{
+//					Host: pulumi.String("127.0.0.1"),
+//					User: pulumi.String("keep-modify-privileges"),
+//				},
+//				GlobalPrivileges: pulumi.StringArray{
+//					pulumi.String("ALTER"),
+//					pulumi.String("CREATE"),
+//					pulumi.String("DELETE"),
+//					pulumi.String("SELECT"),
+//					pulumi.String("UPDATE"),
+//					pulumi.String("DROP"),
+//				},
+//				InstanceId: pulumi.String("tdsql-9vqvls95"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // mariadb account_privileges can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Mariadb/accountPrivileges:AccountPrivileges account_privileges account_privileges_id
+// $ pulumi import tencentcloud:Mariadb/accountPrivileges:AccountPrivileges account_privileges account_privileges_id
 // ```
 type AccountPrivileges struct {
 	pulumi.CustomResourceState
@@ -92,7 +97,7 @@ func NewAccountPrivileges(ctx *pulumi.Context,
 	if args.InstanceId == nil {
 		return nil, errors.New("invalid value for required argument 'InstanceId'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource AccountPrivileges
 	err := ctx.RegisterResource("tencentcloud:Mariadb/accountPrivileges:AccountPrivileges", name, args, &resource, opts...)
 	if err != nil {
@@ -229,7 +234,7 @@ func (i *AccountPrivileges) ToAccountPrivilegesOutputWithContext(ctx context.Con
 // AccountPrivilegesArrayInput is an input type that accepts AccountPrivilegesArray and AccountPrivilegesArrayOutput values.
 // You can construct a concrete instance of `AccountPrivilegesArrayInput` via:
 //
-//          AccountPrivilegesArray{ AccountPrivilegesArgs{...} }
+//	AccountPrivilegesArray{ AccountPrivilegesArgs{...} }
 type AccountPrivilegesArrayInput interface {
 	pulumi.Input
 
@@ -254,7 +259,7 @@ func (i AccountPrivilegesArray) ToAccountPrivilegesArrayOutputWithContext(ctx co
 // AccountPrivilegesMapInput is an input type that accepts AccountPrivilegesMap and AccountPrivilegesMapOutput values.
 // You can construct a concrete instance of `AccountPrivilegesMapInput` via:
 //
-//          AccountPrivilegesMap{ "key": AccountPrivilegesArgs{...} }
+//	AccountPrivilegesMap{ "key": AccountPrivilegesArgs{...} }
 type AccountPrivilegesMapInput interface {
 	pulumi.Input
 

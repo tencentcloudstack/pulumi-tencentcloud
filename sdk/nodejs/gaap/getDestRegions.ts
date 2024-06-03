@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,20 +11,19 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const destRegions = pulumi.output(tencentcloud.Gaap.getDestRegions());
+ * const destRegions = tencentcloud.Gaap.getDestRegions({});
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getDestRegions(args?: GetDestRegionsArgs, opts?: pulumi.InvokeOptions): Promise<GetDestRegionsResult> {
     args = args || {};
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Gaap/getDestRegions:getDestRegions", {
         "resultOutputFile": args.resultOutputFile,
     }, opts);
@@ -53,9 +53,22 @@ export interface GetDestRegionsResult {
     readonly id: string;
     readonly resultOutputFile?: string;
 }
-
+/**
+ * Use this data source to query detailed information of gaap dest regions
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const destRegions = tencentcloud.Gaap.getDestRegions({});
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getDestRegionsOutput(args?: GetDestRegionsOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetDestRegionsResult> {
-    return pulumi.output(args).apply(a => getDestRegions(a, opts))
+    return pulumi.output(args).apply((a: any) => getDestRegions(a, opts))
 }
 
 /**

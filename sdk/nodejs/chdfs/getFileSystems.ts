@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,20 +11,19 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const fileSystems = pulumi.output(tencentcloud.Chdfs.getFileSystems());
+ * const fileSystems = tencentcloud.Chdfs.getFileSystems({});
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getFileSystems(args?: GetFileSystemsArgs, opts?: pulumi.InvokeOptions): Promise<GetFileSystemsResult> {
     args = args || {};
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Chdfs/getFileSystems:getFileSystems", {
         "resultOutputFile": args.resultOutputFile,
     }, opts);
@@ -53,9 +53,22 @@ export interface GetFileSystemsResult {
     readonly id: string;
     readonly resultOutputFile?: string;
 }
-
+/**
+ * Use this data source to query detailed information of chdfs fileSystems
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const fileSystems = tencentcloud.Chdfs.getFileSystems({});
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getFileSystemsOutput(args?: GetFileSystemsOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetFileSystemsResult> {
-    return pulumi.output(args).apply(a => getFileSystems(a, opts))
+    return pulumi.output(args).apply((a: any) => getFileSystems(a, opts))
 }
 
 /**

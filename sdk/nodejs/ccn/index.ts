@@ -5,28 +5,71 @@ import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
 // Export members:
-export * from "./attachment";
-export * from "./bandwidthLimit";
-export * from "./getBandwidthLimits";
-export * from "./getCrossBorderCompliance";
-export * from "./getCrossBorderFlowMonitor";
-export * from "./getCrossBorderRegionBandwidthLimits";
-export * from "./getInstances";
-export * from "./getTenantInstances";
-export * from "./instance";
-export * from "./instancesAcceptAttach";
-export * from "./instancesRejectAttach";
-export * from "./instancesResetAttach";
-export * from "./routes";
+export { AttachmentArgs, AttachmentState } from "./attachment";
+export type Attachment = import("./attachment").Attachment;
+export const Attachment: typeof import("./attachment").Attachment = null as any;
+utilities.lazyLoad(exports, ["Attachment"], () => require("./attachment"));
 
-// Import resources to register:
-import { Attachment } from "./attachment";
-import { BandwidthLimit } from "./bandwidthLimit";
-import { Instance } from "./instance";
-import { InstancesAcceptAttach } from "./instancesAcceptAttach";
-import { InstancesRejectAttach } from "./instancesRejectAttach";
-import { InstancesResetAttach } from "./instancesResetAttach";
-import { Routes } from "./routes";
+export { BandwidthLimitArgs, BandwidthLimitState } from "./bandwidthLimit";
+export type BandwidthLimit = import("./bandwidthLimit").BandwidthLimit;
+export const BandwidthLimit: typeof import("./bandwidthLimit").BandwidthLimit = null as any;
+utilities.lazyLoad(exports, ["BandwidthLimit"], () => require("./bandwidthLimit"));
+
+export { GetBandwidthLimitsArgs, GetBandwidthLimitsResult, GetBandwidthLimitsOutputArgs } from "./getBandwidthLimits";
+export const getBandwidthLimits: typeof import("./getBandwidthLimits").getBandwidthLimits = null as any;
+export const getBandwidthLimitsOutput: typeof import("./getBandwidthLimits").getBandwidthLimitsOutput = null as any;
+utilities.lazyLoad(exports, ["getBandwidthLimits","getBandwidthLimitsOutput"], () => require("./getBandwidthLimits"));
+
+export { GetCrossBorderComplianceArgs, GetCrossBorderComplianceResult, GetCrossBorderComplianceOutputArgs } from "./getCrossBorderCompliance";
+export const getCrossBorderCompliance: typeof import("./getCrossBorderCompliance").getCrossBorderCompliance = null as any;
+export const getCrossBorderComplianceOutput: typeof import("./getCrossBorderCompliance").getCrossBorderComplianceOutput = null as any;
+utilities.lazyLoad(exports, ["getCrossBorderCompliance","getCrossBorderComplianceOutput"], () => require("./getCrossBorderCompliance"));
+
+export { GetCrossBorderFlowMonitorArgs, GetCrossBorderFlowMonitorResult, GetCrossBorderFlowMonitorOutputArgs } from "./getCrossBorderFlowMonitor";
+export const getCrossBorderFlowMonitor: typeof import("./getCrossBorderFlowMonitor").getCrossBorderFlowMonitor = null as any;
+export const getCrossBorderFlowMonitorOutput: typeof import("./getCrossBorderFlowMonitor").getCrossBorderFlowMonitorOutput = null as any;
+utilities.lazyLoad(exports, ["getCrossBorderFlowMonitor","getCrossBorderFlowMonitorOutput"], () => require("./getCrossBorderFlowMonitor"));
+
+export { GetCrossBorderRegionBandwidthLimitsArgs, GetCrossBorderRegionBandwidthLimitsResult, GetCrossBorderRegionBandwidthLimitsOutputArgs } from "./getCrossBorderRegionBandwidthLimits";
+export const getCrossBorderRegionBandwidthLimits: typeof import("./getCrossBorderRegionBandwidthLimits").getCrossBorderRegionBandwidthLimits = null as any;
+export const getCrossBorderRegionBandwidthLimitsOutput: typeof import("./getCrossBorderRegionBandwidthLimits").getCrossBorderRegionBandwidthLimitsOutput = null as any;
+utilities.lazyLoad(exports, ["getCrossBorderRegionBandwidthLimits","getCrossBorderRegionBandwidthLimitsOutput"], () => require("./getCrossBorderRegionBandwidthLimits"));
+
+export { GetInstancesArgs, GetInstancesResult, GetInstancesOutputArgs } from "./getInstances";
+export const getInstances: typeof import("./getInstances").getInstances = null as any;
+export const getInstancesOutput: typeof import("./getInstances").getInstancesOutput = null as any;
+utilities.lazyLoad(exports, ["getInstances","getInstancesOutput"], () => require("./getInstances"));
+
+export { GetTenantInstancesArgs, GetTenantInstancesResult, GetTenantInstancesOutputArgs } from "./getTenantInstances";
+export const getTenantInstances: typeof import("./getTenantInstances").getTenantInstances = null as any;
+export const getTenantInstancesOutput: typeof import("./getTenantInstances").getTenantInstancesOutput = null as any;
+utilities.lazyLoad(exports, ["getTenantInstances","getTenantInstancesOutput"], () => require("./getTenantInstances"));
+
+export { InstanceArgs, InstanceState } from "./instance";
+export type Instance = import("./instance").Instance;
+export const Instance: typeof import("./instance").Instance = null as any;
+utilities.lazyLoad(exports, ["Instance"], () => require("./instance"));
+
+export { InstancesAcceptAttachArgs, InstancesAcceptAttachState } from "./instancesAcceptAttach";
+export type InstancesAcceptAttach = import("./instancesAcceptAttach").InstancesAcceptAttach;
+export const InstancesAcceptAttach: typeof import("./instancesAcceptAttach").InstancesAcceptAttach = null as any;
+utilities.lazyLoad(exports, ["InstancesAcceptAttach"], () => require("./instancesAcceptAttach"));
+
+export { InstancesRejectAttachArgs, InstancesRejectAttachState } from "./instancesRejectAttach";
+export type InstancesRejectAttach = import("./instancesRejectAttach").InstancesRejectAttach;
+export const InstancesRejectAttach: typeof import("./instancesRejectAttach").InstancesRejectAttach = null as any;
+utilities.lazyLoad(exports, ["InstancesRejectAttach"], () => require("./instancesRejectAttach"));
+
+export { InstancesResetAttachArgs, InstancesResetAttachState } from "./instancesResetAttach";
+export type InstancesResetAttach = import("./instancesResetAttach").InstancesResetAttach;
+export const InstancesResetAttach: typeof import("./instancesResetAttach").InstancesResetAttach = null as any;
+utilities.lazyLoad(exports, ["InstancesResetAttach"], () => require("./instancesResetAttach"));
+
+export { RoutesArgs, RoutesState } from "./routes";
+export type Routes = import("./routes").Routes;
+export const Routes: typeof import("./routes").Routes = null as any;
+utilities.lazyLoad(exports, ["Routes"], () => require("./routes"));
+
 
 const _module = {
     version: utilities.getVersion(),

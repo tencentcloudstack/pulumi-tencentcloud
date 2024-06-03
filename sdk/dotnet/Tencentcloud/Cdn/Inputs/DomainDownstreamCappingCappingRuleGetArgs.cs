@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cdn.Inputs
 {
 
-    public sealed class DomainDownstreamCappingCappingRuleGetArgs : Pulumi.ResourceArgs
+    public sealed class DomainDownstreamCappingCappingRuleGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Capping rule kbps threshold.
@@ -40,5 +40,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cdn.Inputs
         public DomainDownstreamCappingCappingRuleGetArgs()
         {
         }
+        public static new DomainDownstreamCappingCappingRuleGetArgs Empty => new DomainDownstreamCappingCappingRuleGetArgs();
     }
 }

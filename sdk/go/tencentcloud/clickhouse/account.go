@@ -7,44 +7,50 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a clickhouse account
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Clickhouse"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Clickhouse"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Clickhouse.NewAccount(ctx, "account", &Clickhouse.AccountArgs{
-// 			Describe:   pulumi.String("xxxxxx"),
-// 			InstanceId: pulumi.String("cdwch-xxxxxx"),
-// 			Password:   pulumi.String("xxxxxx"),
-// 			UserName:   pulumi.String("test"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Clickhouse.NewAccount(ctx, "account", &Clickhouse.AccountArgs{
+//				Describe:   pulumi.String("xxxxxx"),
+//				InstanceId: pulumi.String("cdwch-xxxxxx"),
+//				Password:   pulumi.String("xxxxxx"),
+//				UserName:   pulumi.String("test"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // clickhouse account can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Clickhouse/account:Account account ${instance_id}#${user_name}
+// $ pulumi import tencentcloud:Clickhouse/account:Account account ${instance_id}#${user_name}
 // ```
 type Account struct {
 	pulumi.CustomResourceState
@@ -75,7 +81,14 @@ func NewAccount(ctx *pulumi.Context,
 	if args.UserName == nil {
 		return nil, errors.New("invalid value for required argument 'UserName'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	if args.Password != nil {
+		args.Password = pulumi.ToSecret(args.Password).(pulumi.StringInput)
+	}
+	secrets := pulumi.AdditionalSecretOutputs([]string{
+		"password",
+	})
+	opts = append(opts, secrets)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource Account
 	err := ctx.RegisterResource("tencentcloud:Clickhouse/account:Account", name, args, &resource, opts...)
 	if err != nil {
@@ -172,7 +185,7 @@ func (i *Account) ToAccountOutputWithContext(ctx context.Context) AccountOutput 
 // AccountArrayInput is an input type that accepts AccountArray and AccountArrayOutput values.
 // You can construct a concrete instance of `AccountArrayInput` via:
 //
-//          AccountArray{ AccountArgs{...} }
+//	AccountArray{ AccountArgs{...} }
 type AccountArrayInput interface {
 	pulumi.Input
 
@@ -197,7 +210,7 @@ func (i AccountArray) ToAccountArrayOutputWithContext(ctx context.Context) Accou
 // AccountMapInput is an input type that accepts AccountMap and AccountMapOutput values.
 // You can construct a concrete instance of `AccountMapInput` via:
 //
-//          AccountMap{ "key": AccountArgs{...} }
+//	AccountMap{ "key": AccountArgs{...} }
 type AccountMapInput interface {
 	pulumi.Input
 

@@ -15,68 +15,62 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dbbrain
         /// <summary>
         /// Use this data source to query detailed information of dbbrain health_scores
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var healthScores = Tencentcloud.Dbbrain.GetHealthScores.Invoke(new()
         ///     {
-        ///         var healthScores = Output.Create(Tencentcloud.Dbbrain.GetHealthScores.InvokeAsync(new Tencentcloud.Dbbrain.GetHealthScoresArgs
-        ///         {
-        ///             InstanceId = "",
-        ///             Product = "",
-        ///             Time = "",
-        ///         }));
-        ///     }
+        ///         InstanceId = "",
+        ///         Product = "",
+        ///         Time = "",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetHealthScoresResult> InvokeAsync(GetHealthScoresArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetHealthScoresResult>("tencentcloud:Dbbrain/getHealthScores:getHealthScores", args ?? new GetHealthScoresArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetHealthScoresResult>("tencentcloud:Dbbrain/getHealthScores:getHealthScores", args ?? new GetHealthScoresArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of dbbrain health_scores
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var healthScores = Tencentcloud.Dbbrain.GetHealthScores.Invoke(new()
         ///     {
-        ///         var healthScores = Output.Create(Tencentcloud.Dbbrain.GetHealthScores.InvokeAsync(new Tencentcloud.Dbbrain.GetHealthScoresArgs
-        ///         {
-        ///             InstanceId = "",
-        ///             Product = "",
-        ///             Time = "",
-        ///         }));
-        ///     }
+        ///         InstanceId = "",
+        ///         Product = "",
+        ///         Time = "",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetHealthScoresResult> Invoke(GetHealthScoresInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetHealthScoresResult>("tencentcloud:Dbbrain/getHealthScores:getHealthScores", args ?? new GetHealthScoresInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetHealthScoresResult>("tencentcloud:Dbbrain/getHealthScores:getHealthScores", args ?? new GetHealthScoresInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetHealthScoresArgs : Pulumi.InvokeArgs
+    public sealed class GetHealthScoresArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// The ID of the instance whose health score needs to be obtained.
@@ -105,9 +99,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dbbrain
         public GetHealthScoresArgs()
         {
         }
+        public static new GetHealthScoresArgs Empty => new GetHealthScoresArgs();
     }
 
-    public sealed class GetHealthScoresInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetHealthScoresInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// The ID of the instance whose health score needs to be obtained.
@@ -136,6 +131,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dbbrain
         public GetHealthScoresInvokeArgs()
         {
         }
+        public static new GetHealthScoresInvokeArgs Empty => new GetHealthScoresInvokeArgs();
     }
 
 

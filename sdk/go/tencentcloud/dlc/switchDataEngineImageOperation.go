@@ -7,35 +7,41 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a dlc switchDataEngineImageOperation
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dlc"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dlc"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Dlc.NewSwitchDataEngineImageOperation(ctx, "switchDataEngineImageOperation", &Dlc.SwitchDataEngineImageOperationArgs{
-// 			DataEngineId:      pulumi.String("DataEngine-g5ds87d8"),
-// 			NewImageVersionId: pulumi.String("344ba1c6-b7a9-403a-a255-422fffed6d38"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Dlc.NewSwitchDataEngineImageOperation(ctx, "switchDataEngineImageOperation", &Dlc.SwitchDataEngineImageOperationArgs{
+//				DataEngineId:      pulumi.String("DataEngine-g5ds87d8"),
+//				NewImageVersionId: pulumi.String("344ba1c6-b7a9-403a-a255-422fffed6d38"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 type SwitchDataEngineImageOperation struct {
 	pulumi.CustomResourceState
 
@@ -58,7 +64,7 @@ func NewSwitchDataEngineImageOperation(ctx *pulumi.Context,
 	if args.NewImageVersionId == nil {
 		return nil, errors.New("invalid value for required argument 'NewImageVersionId'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource SwitchDataEngineImageOperation
 	err := ctx.RegisterResource("tencentcloud:Dlc/switchDataEngineImageOperation:SwitchDataEngineImageOperation", name, args, &resource, opts...)
 	if err != nil {
@@ -139,7 +145,7 @@ func (i *SwitchDataEngineImageOperation) ToSwitchDataEngineImageOperationOutputW
 // SwitchDataEngineImageOperationArrayInput is an input type that accepts SwitchDataEngineImageOperationArray and SwitchDataEngineImageOperationArrayOutput values.
 // You can construct a concrete instance of `SwitchDataEngineImageOperationArrayInput` via:
 //
-//          SwitchDataEngineImageOperationArray{ SwitchDataEngineImageOperationArgs{...} }
+//	SwitchDataEngineImageOperationArray{ SwitchDataEngineImageOperationArgs{...} }
 type SwitchDataEngineImageOperationArrayInput interface {
 	pulumi.Input
 
@@ -164,7 +170,7 @@ func (i SwitchDataEngineImageOperationArray) ToSwitchDataEngineImageOperationArr
 // SwitchDataEngineImageOperationMapInput is an input type that accepts SwitchDataEngineImageOperationMap and SwitchDataEngineImageOperationMapOutput values.
 // You can construct a concrete instance of `SwitchDataEngineImageOperationMapInput` via:
 //
-//          SwitchDataEngineImageOperationMap{ "key": SwitchDataEngineImageOperationArgs{...} }
+//	SwitchDataEngineImageOperationMap{ "key": SwitchDataEngineImageOperationArgs{...} }
 type SwitchDataEngineImageOperationMapInput interface {
 	pulumi.Input
 

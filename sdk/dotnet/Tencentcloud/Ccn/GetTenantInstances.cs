@@ -15,78 +15,72 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ccn
         /// <summary>
         /// Use this data source to query detailed information of vpc tenant_ccn
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var tenantCcn = Tencentcloud.Ccn.GetTenantInstances.Invoke(new()
         ///     {
-        ///         var tenantCcn = Output.Create(Tencentcloud.Ccn.GetTenantInstances.InvokeAsync(new Tencentcloud.Ccn.GetTenantInstancesArgs
+        ///         CcnIds = new[]
         ///         {
-        ///             CcnIds = 
-        ///             {
-        ///                 "ccn-39lqkygf",
-        ///             },
-        ///             IsSecurityLocks = 
-        ///             {
-        ///                 "true",
-        ///             },
-        ///         }));
-        ///     }
+        ///             "ccn-39lqkygf",
+        ///         },
+        ///         IsSecurityLocks = new[]
+        ///         {
+        ///             "true",
+        ///         },
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetTenantInstancesResult> InvokeAsync(GetTenantInstancesArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetTenantInstancesResult>("tencentcloud:Ccn/getTenantInstances:getTenantInstances", args ?? new GetTenantInstancesArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetTenantInstancesResult>("tencentcloud:Ccn/getTenantInstances:getTenantInstances", args ?? new GetTenantInstancesArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of vpc tenant_ccn
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var tenantCcn = Tencentcloud.Ccn.GetTenantInstances.Invoke(new()
         ///     {
-        ///         var tenantCcn = Output.Create(Tencentcloud.Ccn.GetTenantInstances.InvokeAsync(new Tencentcloud.Ccn.GetTenantInstancesArgs
+        ///         CcnIds = new[]
         ///         {
-        ///             CcnIds = 
-        ///             {
-        ///                 "ccn-39lqkygf",
-        ///             },
-        ///             IsSecurityLocks = 
-        ///             {
-        ///                 "true",
-        ///             },
-        ///         }));
-        ///     }
+        ///             "ccn-39lqkygf",
+        ///         },
+        ///         IsSecurityLocks = new[]
+        ///         {
+        ///             "true",
+        ///         },
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetTenantInstancesResult> Invoke(GetTenantInstancesInvokeArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetTenantInstancesResult>("tencentcloud:Ccn/getTenantInstances:getTenantInstances", args ?? new GetTenantInstancesInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetTenantInstancesResult>("tencentcloud:Ccn/getTenantInstances:getTenantInstances", args ?? new GetTenantInstancesInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetTenantInstancesArgs : Pulumi.InvokeArgs
+    public sealed class GetTenantInstancesArgs : global::Pulumi.InvokeArgs
     {
         [Input("ccnIds")]
         private List<string>? _ccnIds;
@@ -133,9 +127,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ccn
         public GetTenantInstancesArgs()
         {
         }
+        public static new GetTenantInstancesArgs Empty => new GetTenantInstancesArgs();
     }
 
-    public sealed class GetTenantInstancesInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetTenantInstancesInvokeArgs : global::Pulumi.InvokeArgs
     {
         [Input("ccnIds")]
         private InputList<string>? _ccnIds;
@@ -182,6 +177,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ccn
         public GetTenantInstancesInvokeArgs()
         {
         }
+        public static new GetTenantInstancesInvokeArgs Empty => new GetTenantInstancesInvokeArgs();
     }
 
 

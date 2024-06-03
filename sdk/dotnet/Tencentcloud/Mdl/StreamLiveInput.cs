@@ -15,37 +15,38 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mdl
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var streamLiveInput = new Tencentcloud.Mdl.StreamLiveInput("streamLiveInput", new()
     ///     {
-    ///         var streamLiveInput = new Tencentcloud.Mdl.StreamLiveInput("streamLiveInput", new Tencentcloud.Mdl.StreamLiveInputArgs
+    ///         SecurityGroupIds = new[]
     ///         {
-    ///             SecurityGroupIds = 
-    ///             {
-    ///                 "6405DF9D000007DFB4EC",
-    ///             },
-    ///             Type = "RTP_PUSH",
-    ///         });
-    ///     }
+    ///             "6405DF9D000007DFB4EC",
+    ///         },
+    ///         Type = "RTP_PUSH",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// mdl stream_live_input can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Mdl/streamLiveInput:StreamLiveInput stream_live_input id
+    /// $ pulumi import tencentcloud:Mdl/streamLiveInput:StreamLiveInput stream_live_input id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Mdl/streamLiveInput:StreamLiveInput")]
-    public partial class StreamLiveInput : Pulumi.CustomResource
+    public partial class StreamLiveInput : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Input settings. For the type `RTMP_PUSH`, `RTMP_PULL`, `HLS_PULL`, or `MP4_PULL`, 1 or 2 inputs of the corresponding type can be configured.
@@ -116,7 +117,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mdl
         }
     }
 
-    public sealed class StreamLiveInputArgs : Pulumi.ResourceArgs
+    public sealed class StreamLiveInputArgs : global::Pulumi.ResourceArgs
     {
         [Input("inputSettings")]
         private InputList<Inputs.StreamLiveInputInputSettingArgs>? _inputSettings;
@@ -157,9 +158,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mdl
         public StreamLiveInputArgs()
         {
         }
+        public static new StreamLiveInputArgs Empty => new StreamLiveInputArgs();
     }
 
-    public sealed class StreamLiveInputState : Pulumi.ResourceArgs
+    public sealed class StreamLiveInputState : global::Pulumi.ResourceArgs
     {
         [Input("inputSettings")]
         private InputList<Inputs.StreamLiveInputInputSettingGetArgs>? _inputSettings;
@@ -200,5 +202,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mdl
         public StreamLiveInputState()
         {
         }
+        public static new StreamLiveInputState Empty => new StreamLiveInputState();
     }
 }

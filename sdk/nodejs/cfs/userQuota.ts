@@ -9,11 +9,12 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const userQuota = new tencentcloud.Cfs.UserQuota("user_quota", {
+ * const userQuota = new tencentcloud.cfs.UserQuota("userQuota", {
  *     capacityHardLimit: 10,
  *     fileHardLimit: 10000,
  *     fileSystemId: "cfs-4636029bc",
@@ -21,13 +22,14 @@ import * as utilities from "../utilities";
  *     userType: "Uid",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * cfs user_quota can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Cfs/userQuota:UserQuota user_quota user_quota_id
+ * $ pulumi import tencentcloud:Cfs/userQuota:UserQuota user_quota user_quota_id
  * ```
  */
 export class UserQuota extends pulumi.CustomResource {

@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls.Inputs
 {
 
-    public sealed class ConfigExcludePathGetArgs : Pulumi.ResourceArgs
+    public sealed class ConfigExcludePathGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Type. Valid values: File, Path.
@@ -28,5 +28,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls.Inputs
         public ConfigExcludePathGetArgs()
         {
         }
+        public static new ConfigExcludePathGetArgs Empty => new ConfigExcludePathGetArgs();
     }
 }

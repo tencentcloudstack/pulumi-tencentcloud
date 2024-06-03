@@ -15,70 +15,64 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
         /// <summary>
         /// Use this data source to query detailed information of clb target_health
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var targetHealth = Tencentcloud.Clb.GetTargetHealth.Invoke(new()
         ///     {
-        ///         var targetHealth = Output.Create(Tencentcloud.Clb.GetTargetHealth.InvokeAsync(new Tencentcloud.Clb.GetTargetHealthArgs
+        ///         LoadBalancerIds = new[]
         ///         {
-        ///             LoadBalancerIds = 
-        ///             {
-        ///                 "lb-5dnrkgry",
-        ///             },
-        ///         }));
-        ///     }
+        ///             "lb-5dnrkgry",
+        ///         },
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetTargetHealthResult> InvokeAsync(GetTargetHealthArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetTargetHealthResult>("tencentcloud:Clb/getTargetHealth:getTargetHealth", args ?? new GetTargetHealthArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetTargetHealthResult>("tencentcloud:Clb/getTargetHealth:getTargetHealth", args ?? new GetTargetHealthArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of clb target_health
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var targetHealth = Tencentcloud.Clb.GetTargetHealth.Invoke(new()
         ///     {
-        ///         var targetHealth = Output.Create(Tencentcloud.Clb.GetTargetHealth.InvokeAsync(new Tencentcloud.Clb.GetTargetHealthArgs
+        ///         LoadBalancerIds = new[]
         ///         {
-        ///             LoadBalancerIds = 
-        ///             {
-        ///                 "lb-5dnrkgry",
-        ///             },
-        ///         }));
-        ///     }
+        ///             "lb-5dnrkgry",
+        ///         },
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetTargetHealthResult> Invoke(GetTargetHealthInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetTargetHealthResult>("tencentcloud:Clb/getTargetHealth:getTargetHealth", args ?? new GetTargetHealthInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetTargetHealthResult>("tencentcloud:Clb/getTargetHealth:getTargetHealth", args ?? new GetTargetHealthInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetTargetHealthArgs : Pulumi.InvokeArgs
+    public sealed class GetTargetHealthArgs : global::Pulumi.InvokeArgs
     {
         [Input("loadBalancerIds", required: true)]
         private List<string>? _loadBalancerIds;
@@ -101,9 +95,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
         public GetTargetHealthArgs()
         {
         }
+        public static new GetTargetHealthArgs Empty => new GetTargetHealthArgs();
     }
 
-    public sealed class GetTargetHealthInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetTargetHealthInvokeArgs : global::Pulumi.InvokeArgs
     {
         [Input("loadBalancerIds", required: true)]
         private InputList<string>? _loadBalancerIds;
@@ -126,6 +121,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
         public GetTargetHealthInvokeArgs()
         {
         }
+        public static new GetTargetHealthInvokeArgs Empty => new GetTargetHealthInvokeArgs();
     }
 
 

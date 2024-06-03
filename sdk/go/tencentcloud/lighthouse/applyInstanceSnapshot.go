@@ -7,35 +7,41 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a lighthouse applyInstanceSnapshot
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Lighthouse"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Lighthouse"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Lighthouse.NewApplyInstanceSnapshot(ctx, "applyInstanceSnapshot", &Lighthouse.ApplyInstanceSnapshotArgs{
-// 			InstanceId: pulumi.String("lhins-123456"),
-// 			SnapshotId: pulumi.String("lhsnap-123456"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Lighthouse.NewApplyInstanceSnapshot(ctx, "applyInstanceSnapshot", &Lighthouse.ApplyInstanceSnapshotArgs{
+//				InstanceId: pulumi.String("lhins-123456"),
+//				SnapshotId: pulumi.String("lhsnap-123456"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 type ApplyInstanceSnapshot struct {
 	pulumi.CustomResourceState
 
@@ -58,7 +64,7 @@ func NewApplyInstanceSnapshot(ctx *pulumi.Context,
 	if args.SnapshotId == nil {
 		return nil, errors.New("invalid value for required argument 'SnapshotId'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource ApplyInstanceSnapshot
 	err := ctx.RegisterResource("tencentcloud:Lighthouse/applyInstanceSnapshot:ApplyInstanceSnapshot", name, args, &resource, opts...)
 	if err != nil {
@@ -139,7 +145,7 @@ func (i *ApplyInstanceSnapshot) ToApplyInstanceSnapshotOutputWithContext(ctx con
 // ApplyInstanceSnapshotArrayInput is an input type that accepts ApplyInstanceSnapshotArray and ApplyInstanceSnapshotArrayOutput values.
 // You can construct a concrete instance of `ApplyInstanceSnapshotArrayInput` via:
 //
-//          ApplyInstanceSnapshotArray{ ApplyInstanceSnapshotArgs{...} }
+//	ApplyInstanceSnapshotArray{ ApplyInstanceSnapshotArgs{...} }
 type ApplyInstanceSnapshotArrayInput interface {
 	pulumi.Input
 
@@ -164,7 +170,7 @@ func (i ApplyInstanceSnapshotArray) ToApplyInstanceSnapshotArrayOutputWithContex
 // ApplyInstanceSnapshotMapInput is an input type that accepts ApplyInstanceSnapshotMap and ApplyInstanceSnapshotMapOutput values.
 // You can construct a concrete instance of `ApplyInstanceSnapshotMapInput` via:
 //
-//          ApplyInstanceSnapshotMap{ "key": ApplyInstanceSnapshotArgs{...} }
+//	ApplyInstanceSnapshotMap{ "key": ApplyInstanceSnapshotArgs{...} }
 type ApplyInstanceSnapshotMapInput interface {
 	pulumi.Input
 

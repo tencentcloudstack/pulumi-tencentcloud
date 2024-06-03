@@ -7,8 +7,9 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a sqlserver configInstanceRoGroup
@@ -18,7 +19,7 @@ import (
 // sqlserver config_instance_ro_group can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Sqlserver/configInstanceRoGroup:ConfigInstanceRoGroup example mssql-ds1xhnt9#mssqlro-o6dv2ugx#0#0
+// $ pulumi import tencentcloud:Sqlserver/configInstanceRoGroup:ConfigInstanceRoGroup example mssql-ds1xhnt9#mssqlro-o6dv2ugx#0#0
 // ```
 type ConfigInstanceRoGroup struct {
 	pulumi.CustomResourceState
@@ -56,7 +57,7 @@ func NewConfigInstanceRoGroup(ctx *pulumi.Context,
 	if args.ReadOnlyGroupId == nil {
 		return nil, errors.New("invalid value for required argument 'ReadOnlyGroupId'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource ConfigInstanceRoGroup
 	err := ctx.RegisterResource("tencentcloud:Sqlserver/configInstanceRoGroup:ConfigInstanceRoGroup", name, args, &resource, opts...)
 	if err != nil {
@@ -193,7 +194,7 @@ func (i *ConfigInstanceRoGroup) ToConfigInstanceRoGroupOutputWithContext(ctx con
 // ConfigInstanceRoGroupArrayInput is an input type that accepts ConfigInstanceRoGroupArray and ConfigInstanceRoGroupArrayOutput values.
 // You can construct a concrete instance of `ConfigInstanceRoGroupArrayInput` via:
 //
-//          ConfigInstanceRoGroupArray{ ConfigInstanceRoGroupArgs{...} }
+//	ConfigInstanceRoGroupArray{ ConfigInstanceRoGroupArgs{...} }
 type ConfigInstanceRoGroupArrayInput interface {
 	pulumi.Input
 
@@ -218,7 +219,7 @@ func (i ConfigInstanceRoGroupArray) ToConfigInstanceRoGroupArrayOutputWithContex
 // ConfigInstanceRoGroupMapInput is an input type that accepts ConfigInstanceRoGroupMap and ConfigInstanceRoGroupMapOutput values.
 // You can construct a concrete instance of `ConfigInstanceRoGroupMapInput` via:
 //
-//          ConfigInstanceRoGroupMap{ "key": ConfigInstanceRoGroupArgs{...} }
+//	ConfigInstanceRoGroupMap{ "key": ConfigInstanceRoGroupArgs{...} }
 type ConfigInstanceRoGroupMapInput interface {
 	pulumi.Input
 

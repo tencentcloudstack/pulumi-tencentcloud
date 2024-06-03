@@ -15,76 +15,68 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam
         /// <summary>
         /// Use this data source to query detailed information of cam oidc_config
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var oidcConfig = Tencentcloud.Cam.GetOidcConfig.Invoke(new()
         ///     {
-        ///         var oidcConfig = Output.Create(Tencentcloud.Cam.GetOidcConfig.InvokeAsync(new Tencentcloud.Cam.GetOidcConfigArgs
-        ///         {
-        ///             Name = "cls-kzilgv5m",
-        ///         }));
-        ///         this.IdentityKey = oidcConfig.Apply(oidcConfig =&gt; oidcConfig.IdentityKey);
-        ///         this.IdentityUrl = oidcConfig.Apply(oidcConfig =&gt; oidcConfig.IdentityUrl);
-        ///     }
+        ///         Name = "cls-kzilgv5m",
+        ///     });
         /// 
-        ///     [Output("identityKey")]
-        ///     public Output&lt;string&gt; IdentityKey { get; set; }
-        ///     [Output("identityUrl")]
-        ///     public Output&lt;string&gt; IdentityUrl { get; set; }
-        /// }
+        ///     return new Dictionary&lt;string, object?&gt;
+        ///     {
+        ///         ["identityKey"] = oidcConfig.Apply(getOidcConfigResult =&gt; getOidcConfigResult.IdentityKey),
+        ///         ["identityUrl"] = oidcConfig.Apply(getOidcConfigResult =&gt; getOidcConfigResult.IdentityUrl),
+        ///     };
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetOidcConfigResult> InvokeAsync(GetOidcConfigArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetOidcConfigResult>("tencentcloud:Cam/getOidcConfig:getOidcConfig", args ?? new GetOidcConfigArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetOidcConfigResult>("tencentcloud:Cam/getOidcConfig:getOidcConfig", args ?? new GetOidcConfigArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of cam oidc_config
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var oidcConfig = Tencentcloud.Cam.GetOidcConfig.Invoke(new()
         ///     {
-        ///         var oidcConfig = Output.Create(Tencentcloud.Cam.GetOidcConfig.InvokeAsync(new Tencentcloud.Cam.GetOidcConfigArgs
-        ///         {
-        ///             Name = "cls-kzilgv5m",
-        ///         }));
-        ///         this.IdentityKey = oidcConfig.Apply(oidcConfig =&gt; oidcConfig.IdentityKey);
-        ///         this.IdentityUrl = oidcConfig.Apply(oidcConfig =&gt; oidcConfig.IdentityUrl);
-        ///     }
+        ///         Name = "cls-kzilgv5m",
+        ///     });
         /// 
-        ///     [Output("identityKey")]
-        ///     public Output&lt;string&gt; IdentityKey { get; set; }
-        ///     [Output("identityUrl")]
-        ///     public Output&lt;string&gt; IdentityUrl { get; set; }
-        /// }
+        ///     return new Dictionary&lt;string, object?&gt;
+        ///     {
+        ///         ["identityKey"] = oidcConfig.Apply(getOidcConfigResult =&gt; getOidcConfigResult.IdentityKey),
+        ///         ["identityUrl"] = oidcConfig.Apply(getOidcConfigResult =&gt; getOidcConfigResult.IdentityUrl),
+        ///     };
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetOidcConfigResult> Invoke(GetOidcConfigInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetOidcConfigResult>("tencentcloud:Cam/getOidcConfig:getOidcConfig", args ?? new GetOidcConfigInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetOidcConfigResult>("tencentcloud:Cam/getOidcConfig:getOidcConfig", args ?? new GetOidcConfigInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetOidcConfigArgs : Pulumi.InvokeArgs
+    public sealed class GetOidcConfigArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Name.
@@ -101,9 +93,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam
         public GetOidcConfigArgs()
         {
         }
+        public static new GetOidcConfigArgs Empty => new GetOidcConfigArgs();
     }
 
-    public sealed class GetOidcConfigInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetOidcConfigInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Name.
@@ -120,6 +113,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam
         public GetOidcConfigInvokeArgs()
         {
         }
+        public static new GetOidcConfigInvokeArgs Empty => new GetOidcConfigInvokeArgs();
     }
 
 

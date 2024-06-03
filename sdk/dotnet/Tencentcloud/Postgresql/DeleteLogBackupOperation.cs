@@ -15,26 +15,27 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var deleteLogBackupOperation = new Tencentcloud.Postgresql.DeleteLogBackupOperation("deleteLogBackupOperation", new()
     ///     {
-    ///         var deleteLogBackupOperation = new Tencentcloud.Postgresql.DeleteLogBackupOperation("deleteLogBackupOperation", new Tencentcloud.Postgresql.DeleteLogBackupOperationArgs
-    ///         {
-    ///             DbInstanceId = "local.pg_id",
-    ///             LogBackupId = "local.pg_log_backup_id",
-    ///         });
-    ///     }
+    ///         DbInstanceId = "local.pg_id",
+    ///         LogBackupId = "local.pg_log_backup_id",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Postgresql/deleteLogBackupOperation:DeleteLogBackupOperation")]
-    public partial class DeleteLogBackupOperation : Pulumi.CustomResource
+    public partial class DeleteLogBackupOperation : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Instance ID.
@@ -93,7 +94,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
         }
     }
 
-    public sealed class DeleteLogBackupOperationArgs : Pulumi.ResourceArgs
+    public sealed class DeleteLogBackupOperationArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Instance ID.
@@ -110,9 +111,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
         public DeleteLogBackupOperationArgs()
         {
         }
+        public static new DeleteLogBackupOperationArgs Empty => new DeleteLogBackupOperationArgs();
     }
 
-    public sealed class DeleteLogBackupOperationState : Pulumi.ResourceArgs
+    public sealed class DeleteLogBackupOperationState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Instance ID.
@@ -129,5 +131,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
         public DeleteLogBackupOperationState()
         {
         }
+        public static new DeleteLogBackupOperationState Empty => new DeleteLogBackupOperationState();
     }
 }

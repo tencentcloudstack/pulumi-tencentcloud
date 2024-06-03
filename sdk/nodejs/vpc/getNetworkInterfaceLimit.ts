@@ -9,21 +9,20 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const networkInterfaceLimit = pulumi.output(tencentcloud.Vpc.getNetworkInterfaceLimit({
+ * const networkInterfaceLimit = tencentcloud.Vpc.getNetworkInterfaceLimit({
  *     instanceId: "ins-cr2rfq78",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getNetworkInterfaceLimit(args: GetNetworkInterfaceLimitArgs, opts?: pulumi.InvokeOptions): Promise<GetNetworkInterfaceLimitResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Vpc/getNetworkInterfaceLimit:getNetworkInterfaceLimit", {
         "instanceId": args.instanceId,
         "resultOutputFile": args.resultOutputFile,
@@ -79,9 +78,24 @@ export interface GetNetworkInterfaceLimitResult {
      */
     readonly subEniQuantity: number;
 }
-
+/**
+ * Use this data source to query detailed information of vpc networkInterfaceLimit
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const networkInterfaceLimit = tencentcloud.Vpc.getNetworkInterfaceLimit({
+ *     instanceId: "ins-cr2rfq78",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getNetworkInterfaceLimitOutput(args: GetNetworkInterfaceLimitOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetNetworkInterfaceLimitResult> {
-    return pulumi.output(args).apply(a => getNetworkInterfaceLimit(a, opts))
+    return pulumi.output(args).apply((a: any) => getNetworkInterfaceLimit(a, opts))
 }
 
 /**

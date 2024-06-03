@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.As.Inputs
 {
 
-    public sealed class ScalingConfigHostNameSettingsArgs : Pulumi.ResourceArgs
+    public sealed class ScalingConfigHostNameSettingsArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// The host name of the cloud server; dots (.) and dashes (-) cannot be used as the first and last characters of HostName, and cannot be used consecutively; Windows instances are not supported; other types (Linux, etc.) instances: the character length is [2, 40], it is allowed to support multiple dots, and there is a paragraph between the dots, and each paragraph is allowed to consist of letters (no uppercase and lowercase restrictions), numbers and dashes (-). Pure numbers are not allowed.
@@ -28,5 +28,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.As.Inputs
         public ScalingConfigHostNameSettingsArgs()
         {
         }
+        public static new ScalingConfigHostNameSettingsArgs Empty => new ScalingConfigHostNameSettingsArgs();
     }
 }

@@ -11,10 +11,10 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps.Inputs
 {
 
-    public sealed class ScheduleActivityActivityParaTranscodeTaskOutputStorageS3OutputStorageGetArgs : Pulumi.ResourceArgs
+    public sealed class ScheduleActivityActivityParaTranscodeTaskOutputStorageS3OutputStorageGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// The AWS S3 bucket bound to the scheme.
+        /// The AWS S3 bucket.
         /// </summary>
         [Input("s3Bucket", required: true)]
         public Input<string> S3Bucket { get; set; } = null!;
@@ -26,13 +26,13 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps.Inputs
         public Input<string> S3Region { get; set; } = null!;
 
         /// <summary>
-        /// The key ID of the AWS S3 bucket.Note: This field may return null, indicating that no valid values can be obtained.
+        /// The key ID required to access the AWS S3 object.
         /// </summary>
         [Input("s3SecretId")]
         public Input<string>? S3SecretId { get; set; }
 
         /// <summary>
-        /// The key of the AWS S3 bucket.Note: This field may return null, indicating that no valid values can be obtained.
+        /// The key required to access the AWS S3 object.
         /// </summary>
         [Input("s3SecretKey")]
         public Input<string>? S3SecretKey { get; set; }
@@ -40,5 +40,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps.Inputs
         public ScheduleActivityActivityParaTranscodeTaskOutputStorageS3OutputStorageGetArgs()
         {
         }
+        public static new ScheduleActivityActivityParaTranscodeTaskOutputStorageS3OutputStorageGetArgs Empty => new ScheduleActivityActivityParaTranscodeTaskOutputStorageS3OutputStorageGetArgs();
     }
 }

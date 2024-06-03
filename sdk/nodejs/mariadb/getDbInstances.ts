@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,25 +11,24 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const dbInstances = pulumi.output(tencentcloud.Mariadb.getDbInstances({
+ * const dbInstances = tencentcloud.Mariadb.getDbInstances({
  *     instanceIds: ["tdsql-ijxtqk5p"],
  *     projectIds: [0],
  *     subnetId: "3454730",
  *     vpcId: "5556791",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getDbInstances(args?: GetDbInstancesArgs, opts?: pulumi.InvokeOptions): Promise<GetDbInstancesResult> {
     args = args || {};
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Mariadb/getDbInstances:getDbInstances", {
         "instanceIds": args.instanceIds,
         "projectIds": args.projectIds,
@@ -94,9 +94,27 @@ export interface GetDbInstancesResult {
      */
     readonly vpcId?: string;
 }
-
+/**
+ * Use this data source to query detailed information of mariadb dbInstances
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const dbInstances = tencentcloud.Mariadb.getDbInstances({
+ *     instanceIds: ["tdsql-ijxtqk5p"],
+ *     projectIds: [0],
+ *     subnetId: "3454730",
+ *     vpcId: "5556791",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getDbInstancesOutput(args?: GetDbInstancesOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetDbInstancesResult> {
-    return pulumi.output(args).apply(a => getDbInstances(a, opts))
+    return pulumi.output(args).apply((a: any) => getDbInstances(a, opts))
 }
 
 /**

@@ -14,60 +14,64 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
     /// Provides a resource to create a CLB redirection.
     /// 
     /// ## Example Usage
+    /// 
     /// ### Manual Rewrite
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var foo = new Tencentcloud.Clb.Redirection("foo", new()
     ///     {
-    ///         var foo = new Tencentcloud.Clb.Redirection("foo", new Tencentcloud.Clb.RedirectionArgs
-    ///         {
-    ///             ClbId = "lb-p7olt9e5",
-    ///             SourceListenerId = "lbl-jc1dx6ju",
-    ///             SourceRuleId = "loc-ft8fmngv",
-    ///             TargetListenerId = "lbl-asj1hzuo",
-    ///             TargetRuleId = "loc-4xxr2cy7",
-    ///         });
-    ///     }
+    ///         ClbId = "lb-p7olt9e5",
+    ///         SourceListenerId = "lbl-jc1dx6ju",
+    ///         SourceRuleId = "loc-ft8fmngv",
+    ///         TargetListenerId = "lbl-asj1hzuo",
+    ///         TargetRuleId = "loc-4xxr2cy7",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
+    /// 
     /// ### Auto Rewrite
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var foo = new Tencentcloud.Clb.Redirection("foo", new()
     ///     {
-    ///         var foo = new Tencentcloud.Clb.Redirection("foo", new Tencentcloud.Clb.RedirectionArgs
-    ///         {
-    ///             ClbId = "lb-p7olt9e5",
-    ///             IsAutoRewrite = true,
-    ///             TargetListenerId = "lbl-asj1hzuo",
-    ///             TargetRuleId = "loc-4xxr2cy7",
-    ///         });
-    ///     }
+    ///         ClbId = "lb-p7olt9e5",
+    ///         IsAutoRewrite = true,
+    ///         TargetListenerId = "lbl-asj1hzuo",
+    ///         TargetRuleId = "loc-4xxr2cy7",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// CLB redirection can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Clb/redirection:Redirection foo loc-ft8fmngv#loc-4xxr2cy7#lbl-jc1dx6ju#lbl-asj1hzuo#lb-p7olt9e5
+    /// $ pulumi import tencentcloud:Clb/redirection:Redirection foo loc-ft8fmngv#loc-4xxr2cy7#lbl-jc1dx6ju#lbl-asj1hzuo#lb-p7olt9e5
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Clb/redirection:Redirection")]
-    public partial class Redirection : Pulumi.CustomResource
+    public partial class Redirection : global::Pulumi.CustomResource
     {
         /// <summary>
         /// ID of CLB instance.
@@ -156,7 +160,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
         }
     }
 
-    public sealed class RedirectionArgs : Pulumi.ResourceArgs
+    public sealed class RedirectionArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// ID of CLB instance.
@@ -203,9 +207,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
         public RedirectionArgs()
         {
         }
+        public static new RedirectionArgs Empty => new RedirectionArgs();
     }
 
-    public sealed class RedirectionState : Pulumi.ResourceArgs
+    public sealed class RedirectionState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// ID of CLB instance.
@@ -252,5 +257,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
         public RedirectionState()
         {
         }
+        public static new RedirectionState Empty => new RedirectionState();
     }
 }

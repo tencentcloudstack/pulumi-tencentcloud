@@ -15,66 +15,60 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tse
         /// <summary>
         /// Use this data source to query detailed information of tse gateway_canary_rules
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var gatewayCanaryRules = Tencentcloud.Tse.GetGatewayCanaryRules.Invoke(new()
         ///     {
-        ///         var gatewayCanaryRules = Output.Create(Tencentcloud.Tse.GetGatewayCanaryRules.InvokeAsync(new Tencentcloud.Tse.GetGatewayCanaryRulesArgs
-        ///         {
-        ///             GatewayId = "gateway-xxxxxx",
-        ///             ServiceId = "451a9920-e67a-4519-af41-fccac0e72005",
-        ///         }));
-        ///     }
+        ///         GatewayId = "gateway-xxxxxx",
+        ///         ServiceId = "451a9920-e67a-4519-af41-fccac0e72005",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetGatewayCanaryRulesResult> InvokeAsync(GetGatewayCanaryRulesArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetGatewayCanaryRulesResult>("tencentcloud:Tse/getGatewayCanaryRules:getGatewayCanaryRules", args ?? new GetGatewayCanaryRulesArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetGatewayCanaryRulesResult>("tencentcloud:Tse/getGatewayCanaryRules:getGatewayCanaryRules", args ?? new GetGatewayCanaryRulesArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of tse gateway_canary_rules
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var gatewayCanaryRules = Tencentcloud.Tse.GetGatewayCanaryRules.Invoke(new()
         ///     {
-        ///         var gatewayCanaryRules = Output.Create(Tencentcloud.Tse.GetGatewayCanaryRules.InvokeAsync(new Tencentcloud.Tse.GetGatewayCanaryRulesArgs
-        ///         {
-        ///             GatewayId = "gateway-xxxxxx",
-        ///             ServiceId = "451a9920-e67a-4519-af41-fccac0e72005",
-        ///         }));
-        ///     }
+        ///         GatewayId = "gateway-xxxxxx",
+        ///         ServiceId = "451a9920-e67a-4519-af41-fccac0e72005",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetGatewayCanaryRulesResult> Invoke(GetGatewayCanaryRulesInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetGatewayCanaryRulesResult>("tencentcloud:Tse/getGatewayCanaryRules:getGatewayCanaryRules", args ?? new GetGatewayCanaryRulesInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetGatewayCanaryRulesResult>("tencentcloud:Tse/getGatewayCanaryRules:getGatewayCanaryRules", args ?? new GetGatewayCanaryRulesInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetGatewayCanaryRulesArgs : Pulumi.InvokeArgs
+    public sealed class GetGatewayCanaryRulesArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// gateway ID.
@@ -97,9 +91,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tse
         public GetGatewayCanaryRulesArgs()
         {
         }
+        public static new GetGatewayCanaryRulesArgs Empty => new GetGatewayCanaryRulesArgs();
     }
 
-    public sealed class GetGatewayCanaryRulesInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetGatewayCanaryRulesInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// gateway ID.
@@ -122,6 +117,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tse
         public GetGatewayCanaryRulesInvokeArgs()
         {
         }
+        public static new GetGatewayCanaryRulesInvokeArgs Empty => new GetGatewayCanaryRulesInvokeArgs();
     }
 
 

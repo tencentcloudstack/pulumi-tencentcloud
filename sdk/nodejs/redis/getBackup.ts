@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,26 +11,25 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const backup = pulumi.output(tencentcloud.Redis.getBackup({
+ * const backup = tencentcloud.Redis.getBackup({
  *     beginTime: "2023-04-07 03:57:30",
  *     endTime: "2023-04-07 03:57:56",
  *     instanceId: "crs-c1nl9rpv",
  *     instanceName: "Keep-terraform",
  *     statuses: [2],
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getBackup(args?: GetBackupArgs, opts?: pulumi.InvokeOptions): Promise<GetBackupResult> {
     args = args || {};
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Redis/getBackup:getBackup", {
         "beginTime": args.beginTime,
         "endTime": args.endTime,
@@ -101,9 +101,28 @@ export interface GetBackupResult {
      */
     readonly statuses?: number[];
 }
-
+/**
+ * Use this data source to query detailed information of redis backup
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const backup = tencentcloud.Redis.getBackup({
+ *     beginTime: "2023-04-07 03:57:30",
+ *     endTime: "2023-04-07 03:57:56",
+ *     instanceId: "crs-c1nl9rpv",
+ *     instanceName: "Keep-terraform",
+ *     statuses: [2],
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getBackupOutput(args?: GetBackupOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetBackupResult> {
-    return pulumi.output(args).apply(a => getBackup(a, opts))
+    return pulumi.output(args).apply((a: any) => getBackup(a, opts))
 }
 
 /**

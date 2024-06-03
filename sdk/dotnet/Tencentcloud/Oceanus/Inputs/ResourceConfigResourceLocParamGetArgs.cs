@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Oceanus.Inputs
 {
 
-    public sealed class ResourceConfigResourceLocParamGetArgs : Pulumi.ResourceArgs
+    public sealed class ResourceConfigResourceLocParamGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Resource bucket.
@@ -34,5 +34,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Oceanus.Inputs
         public ResourceConfigResourceLocParamGetArgs()
         {
         }
+        public static new ResourceConfigResourceLocParamGetArgs Empty => new ResourceConfigResourceLocParamGetArgs();
     }
 }

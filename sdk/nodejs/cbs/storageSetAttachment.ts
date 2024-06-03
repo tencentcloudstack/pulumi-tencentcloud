@@ -9,15 +9,17 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const attachment = new tencentcloud.Cbs.StorageSetAttachment("attachment", {
+ * const attachment = new tencentcloud.cbs.StorageSetAttachment("attachment", {
  *     instanceId: "ins-jqlegd42",
  *     storageId: "disk-kdt0sq6m",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export class StorageSetAttachment extends pulumi.CustomResource {
     /**

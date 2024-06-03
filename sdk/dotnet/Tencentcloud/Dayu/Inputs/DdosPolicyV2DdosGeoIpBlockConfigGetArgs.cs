@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dayu.Inputs
 {
 
-    public sealed class DdosPolicyV2DdosGeoIpBlockConfigGetArgs : Pulumi.ResourceArgs
+    public sealed class DdosPolicyV2DdosGeoIpBlockConfigGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Block action, take the value [`drop`, `trans`].
@@ -40,5 +40,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dayu.Inputs
         public DdosPolicyV2DdosGeoIpBlockConfigGetArgs()
         {
         }
+        public static new DdosPolicyV2DdosGeoIpBlockConfigGetArgs Empty => new DdosPolicyV2DdosGeoIpBlockConfigGetArgs();
     }
 }

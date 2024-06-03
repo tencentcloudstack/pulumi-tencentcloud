@@ -15,41 +15,43 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var fooProxy = new Tencentcloud.Gaap.Proxy("fooProxy", new()
     ///     {
-    ///         var fooProxy = new Tencentcloud.Gaap.Proxy("fooProxy", new Tencentcloud.Gaap.ProxyArgs
-    ///         {
-    ///             Bandwidth = 10,
-    ///             Concurrent = 2,
-    ///             AccessRegion = "SouthChina",
-    ///             RealserverRegion = "NorthChina",
-    ///         });
-    ///         var fooSecurityPolicy = new Tencentcloud.Gaap.SecurityPolicy("fooSecurityPolicy", new Tencentcloud.Gaap.SecurityPolicyArgs
-    ///         {
-    ///             ProxyId = fooProxy.Id,
-    ///             Action = "DROP",
-    ///         });
-    ///     }
+    ///         Bandwidth = 10,
+    ///         Concurrent = 2,
+    ///         AccessRegion = "SouthChina",
+    ///         RealserverRegion = "NorthChina",
+    ///     });
     /// 
-    /// }
+    ///     var fooSecurityPolicy = new Tencentcloud.Gaap.SecurityPolicy("fooSecurityPolicy", new()
+    ///     {
+    ///         ProxyId = fooProxy.Id,
+    ///         Action = "DROP",
+    ///     });
+    /// 
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// GAAP security policy can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Gaap/securityPolicy:SecurityPolicy tencentcloud_gaap_security_policy.foo pl-xxxx
+    /// $ pulumi import tencentcloud:Gaap/securityPolicy:SecurityPolicy tencentcloud_gaap_security_policy.foo pl-xxxx
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Gaap/securityPolicy:SecurityPolicy")]
-    public partial class SecurityPolicy : Pulumi.CustomResource
+    public partial class SecurityPolicy : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Default policy. Valid value: `ACCEPT` and `DROP`.
@@ -114,7 +116,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
         }
     }
 
-    public sealed class SecurityPolicyArgs : Pulumi.ResourceArgs
+    public sealed class SecurityPolicyArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Default policy. Valid value: `ACCEPT` and `DROP`.
@@ -137,9 +139,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
         public SecurityPolicyArgs()
         {
         }
+        public static new SecurityPolicyArgs Empty => new SecurityPolicyArgs();
     }
 
-    public sealed class SecurityPolicyState : Pulumi.ResourceArgs
+    public sealed class SecurityPolicyState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Default policy. Valid value: `ACCEPT` and `DROP`.
@@ -162,5 +165,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
         public SecurityPolicyState()
         {
         }
+        public static new SecurityPolicyState Empty => new SecurityPolicyState();
     }
 }

@@ -16,7 +16,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdmq
     /// &gt; **NOTE:** The instance cannot be downgraded, Include parameters `node_count`, `spec`, `storage_size`.
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Tdmq/rocketmqVipInstance:RocketmqVipInstance")]
-    public partial class RocketmqVipInstance : Pulumi.CustomResource
+    public partial class RocketmqVipInstance : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Instance name.
@@ -105,7 +105,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdmq
         }
     }
 
-    public sealed class RocketmqVipInstanceArgs : Pulumi.ResourceArgs
+    public sealed class RocketmqVipInstanceArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Instance name.
@@ -158,9 +158,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdmq
         public RocketmqVipInstanceArgs()
         {
         }
+        public static new RocketmqVipInstanceArgs Empty => new RocketmqVipInstanceArgs();
     }
 
-    public sealed class RocketmqVipInstanceState : Pulumi.ResourceArgs
+    public sealed class RocketmqVipInstanceState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Instance name.
@@ -213,5 +214,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdmq
         public RocketmqVipInstanceState()
         {
         }
+        public static new RocketmqVipInstanceState Empty => new RocketmqVipInstanceState();
     }
 }

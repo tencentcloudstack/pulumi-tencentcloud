@@ -8,11 +8,56 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Use this data source to query detailed information of redis instanceTaskList
+//
+// ## Example Usage
+//
+// <!--Start PulumiCodeChooser -->
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Redis"
+//
+// )
+// func main() {
+// pulumi.Run(func(ctx *pulumi.Context) error {
+// _, err := Redis.GetInstanceTaskList(ctx, &redis.GetInstanceTaskListArgs{
+// BeginTime: pulumi.StringRef("2021-12-30 00:00:00"),
+// EndTime: pulumi.StringRef("2021-12-30 00:00:00"),
+// InstanceId: pulumi.StringRef("crs-c1nl9rpv"),
+// InstanceName: pulumi.StringRef(""),
+// OperateUins: []string{
+// "",
+// },
+// ProjectIds: interface{}{
+// "",
+// },
+// Results: interface{}{
+// "",
+// },
+// TaskStatuses: interface{}{
+// "",
+// },
+// TaskTypes: []string{
+// "",
+// },
+// }, nil);
+// if err != nil {
+// return err
+// }
+// return nil
+// })
+// }
+// ```
+// <!--End PulumiCodeChooser -->
 func GetInstanceTaskList(ctx *pulumi.Context, args *GetInstanceTaskListArgs, opts ...pulumi.InvokeOption) (*GetInstanceTaskListResult, error) {
-	opts = pkgInvokeDefaultOpts(opts)
+	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetInstanceTaskListResult
 	err := ctx.Invoke("tencentcloud:Redis/getInstanceTaskList:getInstanceTaskList", args, &rv, opts...)
 	if err != nil {

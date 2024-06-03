@@ -15,68 +15,62 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cfs
         /// <summary>
         /// Use this data source to query the detail information of cloud file systems(CFS).
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var fileSystems = Tencentcloud.Cfs.GetFileSystems.Invoke(new()
         ///     {
-        ///         var fileSystems = Output.Create(Tencentcloud.Cfs.GetFileSystems.InvokeAsync(new Tencentcloud.Cfs.GetFileSystemsArgs
-        ///         {
-        ///             AvailabilityZone = "ap-guangzhou-3",
-        ///             FileSystemId = "cfs-6hgquxmj",
-        ///             Name = "test",
-        ///         }));
-        ///     }
+        ///         AvailabilityZone = "ap-guangzhou-3",
+        ///         FileSystemId = "cfs-6hgquxmj",
+        ///         Name = "test",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetFileSystemsResult> InvokeAsync(GetFileSystemsArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetFileSystemsResult>("tencentcloud:Cfs/getFileSystems:getFileSystems", args ?? new GetFileSystemsArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetFileSystemsResult>("tencentcloud:Cfs/getFileSystems:getFileSystems", args ?? new GetFileSystemsArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query the detail information of cloud file systems(CFS).
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var fileSystems = Tencentcloud.Cfs.GetFileSystems.Invoke(new()
         ///     {
-        ///         var fileSystems = Output.Create(Tencentcloud.Cfs.GetFileSystems.InvokeAsync(new Tencentcloud.Cfs.GetFileSystemsArgs
-        ///         {
-        ///             AvailabilityZone = "ap-guangzhou-3",
-        ///             FileSystemId = "cfs-6hgquxmj",
-        ///             Name = "test",
-        ///         }));
-        ///     }
+        ///         AvailabilityZone = "ap-guangzhou-3",
+        ///         FileSystemId = "cfs-6hgquxmj",
+        ///         Name = "test",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetFileSystemsResult> Invoke(GetFileSystemsInvokeArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetFileSystemsResult>("tencentcloud:Cfs/getFileSystems:getFileSystems", args ?? new GetFileSystemsInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetFileSystemsResult>("tencentcloud:Cfs/getFileSystems:getFileSystems", args ?? new GetFileSystemsInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetFileSystemsArgs : Pulumi.InvokeArgs
+    public sealed class GetFileSystemsArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// The available zone that the file system locates at.
@@ -117,9 +111,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cfs
         public GetFileSystemsArgs()
         {
         }
+        public static new GetFileSystemsArgs Empty => new GetFileSystemsArgs();
     }
 
-    public sealed class GetFileSystemsInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetFileSystemsInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// The available zone that the file system locates at.
@@ -160,6 +155,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cfs
         public GetFileSystemsInvokeArgs()
         {
         }
+        public static new GetFileSystemsInvokeArgs Empty => new GetFileSystemsInvokeArgs();
     }
 
 

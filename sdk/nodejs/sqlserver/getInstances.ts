@@ -2,52 +2,59 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
  * Use this data source to query SQL Server instances
  *
  * ## Example Usage
+ *
  * ### Filter instance by Id
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const exampleId = pulumi.output(tencentcloud.Sqlserver.getInstances({
+ * const exampleId = tencentcloud.Sqlserver.getInstances({
  *     id: "mssql-3l3fgqn7",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
+ *
  * ### Filter instance by project Id
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const exampleProject = pulumi.output(tencentcloud.Sqlserver.getInstances({
+ * const exampleProject = tencentcloud.Sqlserver.getInstances({
  *     projectId: 0,
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
+ *
  * ### Filter instance by VPC/Subnet
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const exampleVpc = pulumi.output(tencentcloud.Sqlserver.getInstances({
+ * const exampleVpc = tencentcloud.Sqlserver.getInstances({
  *     subnetId: "subnet-nf9n81ps",
  *     vpcId: "vpc-409mvdvv",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getInstances(args?: GetInstancesArgs, opts?: pulumi.InvokeOptions): Promise<GetInstancesResult> {
     args = args || {};
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Sqlserver/getInstances:getInstances", {
         "id": args.id,
         "name": args.name,
@@ -118,9 +125,53 @@ export interface GetInstancesResult {
      */
     readonly vpcId?: string;
 }
-
+/**
+ * Use this data source to query SQL Server instances
+ *
+ * ## Example Usage
+ *
+ * ### Filter instance by Id
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const exampleId = tencentcloud.Sqlserver.getInstances({
+ *     id: "mssql-3l3fgqn7",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ *
+ * ### Filter instance by project Id
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const exampleProject = tencentcloud.Sqlserver.getInstances({
+ *     projectId: 0,
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ *
+ * ### Filter instance by VPC/Subnet
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const exampleVpc = tencentcloud.Sqlserver.getInstances({
+ *     subnetId: "subnet-nf9n81ps",
+ *     vpcId: "vpc-409mvdvv",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getInstancesOutput(args?: GetInstancesOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetInstancesResult> {
-    return pulumi.output(args).apply(a => getInstances(a, opts))
+    return pulumi.output(args).apply((a: any) => getInstances(a, opts))
 }
 
 /**

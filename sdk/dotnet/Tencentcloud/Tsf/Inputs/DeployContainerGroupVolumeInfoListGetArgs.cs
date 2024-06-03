@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf.Inputs
 {
 
-    public sealed class DeployContainerGroupVolumeInfoListGetArgs : Pulumi.ResourceArgs
+    public sealed class DeployContainerGroupVolumeInfoListGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// volume config.
@@ -34,5 +34,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf.Inputs
         public DeployContainerGroupVolumeInfoListGetArgs()
         {
         }
+        public static new DeployContainerGroupVolumeInfoListGetArgs Empty => new DeployContainerGroupVolumeInfoListGetArgs();
     }
 }

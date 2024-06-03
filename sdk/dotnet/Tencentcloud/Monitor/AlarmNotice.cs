@@ -15,90 +15,91 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var example = new Tencentcloud.Monitor.AlarmNotice("example", new()
     ///     {
-    ///         var example = new Tencentcloud.Monitor.AlarmNotice("example", new Tencentcloud.Monitor.AlarmNoticeArgs
+    ///         NoticeLanguage = "zh-CN",
+    ///         NoticeType = "ALL",
+    ///         UrlNotices = new[]
     ///         {
-    ///             NoticeLanguage = "zh-CN",
-    ///             NoticeType = "ALL",
-    ///             UrlNotices = 
+    ///             new Tencentcloud.Monitor.Inputs.AlarmNoticeUrlNoticeArgs
     ///             {
-    ///                 new Tencentcloud.Monitor.Inputs.AlarmNoticeUrlNoticeArgs
+    ///                 EndTime = 86399,
+    ///                 IsValid = 0,
+    ///                 StartTime = 0,
+    ///                 Url = "https://www.mytest.com/validate",
+    ///                 Weekdays = new[]
     ///                 {
-    ///                     EndTime = 86399,
-    ///                     IsValid = 0,
-    ///                     StartTime = 0,
-    ///                     Url = "https://www.mytest.com/validate",
-    ///                     Weekdays = 
-    ///                     {
-    ///                         1,
-    ///                         2,
-    ///                         3,
-    ///                         4,
-    ///                         5,
-    ///                         6,
-    ///                         7,
-    ///                     },
+    ///                     1,
+    ///                     2,
+    ///                     3,
+    ///                     4,
+    ///                     5,
+    ///                     6,
+    ///                     7,
     ///                 },
     ///             },
-    ///             UserNotices = 
+    ///         },
+    ///         UserNotices = new[]
+    ///         {
+    ///             new Tencentcloud.Monitor.Inputs.AlarmNoticeUserNoticeArgs
     ///             {
-    ///                 new Tencentcloud.Monitor.Inputs.AlarmNoticeUserNoticeArgs
+    ///                 EndTime = 86399,
+    ///                 GroupIds = new() { },
+    ///                 NeedPhoneArriveNotice = 1,
+    ///                 NoticeWays = new[]
     ///                 {
-    ///                     EndTime = 86399,
-    ///                     GroupIds = {},
-    ///                     NeedPhoneArriveNotice = 1,
-    ///                     NoticeWays = 
-    ///                     {
-    ///                         "EMAIL",
-    ///                         "SMS",
-    ///                     },
-    ///                     PhoneCallType = "CIRCLE",
-    ///                     PhoneCircleInterval = 180,
-    ///                     PhoneCircleTimes = 2,
-    ///                     PhoneInnerInterval = 180,
-    ///                     PhoneOrders = {},
-    ///                     ReceiverType = "USER",
-    ///                     StartTime = 0,
-    ///                     UserIds = 
-    ///                     {
-    ///                         11082189,
-    ///                         11082190,
-    ///                     },
-    ///                     Weekdays = 
-    ///                     {
-    ///                         1,
-    ///                         2,
-    ///                         3,
-    ///                         4,
-    ///                         5,
-    ///                         6,
-    ///                         7,
-    ///                     },
+    ///                     "EMAIL",
+    ///                     "SMS",
+    ///                 },
+    ///                 PhoneCallType = "CIRCLE",
+    ///                 PhoneCircleInterval = 180,
+    ///                 PhoneCircleTimes = 2,
+    ///                 PhoneInnerInterval = 180,
+    ///                 PhoneOrders = new() { },
+    ///                 ReceiverType = "USER",
+    ///                 StartTime = 0,
+    ///                 UserIds = new[]
+    ///                 {
+    ///                     11082189,
+    ///                     11082190,
+    ///                 },
+    ///                 Weekdays = new[]
+    ///                 {
+    ///                     1,
+    ///                     2,
+    ///                     3,
+    ///                     4,
+    ///                     5,
+    ///                     6,
+    ///                     7,
     ///                 },
     ///             },
-    ///         });
-    ///     }
+    ///         },
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// Monitor Alarm Notice can be imported, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Monitor/alarmNotice:AlarmNotice import-test noticeId
+    /// $ pulumi import tencentcloud:Monitor/alarmNotice:AlarmNotice import-test noticeId
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Monitor/alarmNotice:AlarmNotice")]
-    public partial class AlarmNotice : Pulumi.CustomResource
+    public partial class AlarmNotice : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Amp consumer ID.
@@ -211,7 +212,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
         }
     }
 
-    public sealed class AlarmNoticeArgs : Pulumi.ResourceArgs
+    public sealed class AlarmNoticeArgs : global::Pulumi.ResourceArgs
     {
         [Input("clsNotices")]
         private InputList<Inputs.AlarmNoticeClsNoticeArgs>? _clsNotices;
@@ -270,9 +271,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
         public AlarmNoticeArgs()
         {
         }
+        public static new AlarmNoticeArgs Empty => new AlarmNoticeArgs();
     }
 
-    public sealed class AlarmNoticeState : Pulumi.ResourceArgs
+    public sealed class AlarmNoticeState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Amp consumer ID.
@@ -367,5 +369,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
         public AlarmNoticeState()
         {
         }
+        public static new AlarmNoticeState Empty => new AlarmNoticeState();
     }
 }

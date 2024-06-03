@@ -8,12 +8,14 @@ import * as utilities from "../utilities";
  * Provides a resource for an AS (Auto scaling) lifecycle hook.
  *
  * ## Example Usage
+ *
  * ### Create a basic LifecycleHook
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const zones = tencentcloud.Availability.getZonesByProduct({
  *     product: "as",
@@ -26,11 +28,11 @@ import * as utilities from "../utilities";
  * const subnet = new tencentcloud.subnet.Instance("subnet", {
  *     vpcId: vpc.id,
  *     cidrBlock: "10.0.0.0/16",
- *     availabilityZone: zones.then(zones => zones.zones?[0]?.name),
+ *     availabilityZone: zones.then(zones => zones.zones?.[0]?.name),
  * });
  * const exampleScalingConfig = new tencentcloud.as.ScalingConfig("exampleScalingConfig", {
  *     configurationName: "tf-example",
- *     imageId: image.then(image => image.images?[0]?.imageId),
+ *     imageId: image.then(image => image.images?.[0]?.imageId),
  *     instanceTypes: [
  *         "SA1.SMALL1",
  *         "SA2.SMALL1",
@@ -58,10 +60,12 @@ import * as utilities from "../utilities";
  *     notificationMetadata: "tf test",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const example = new tencentcloud.as.LifecycleHook("example", {
  *     scalingGroupId: tencentcloud_as_scaling_group.example.id,
@@ -74,10 +78,12 @@ import * as utilities from "../utilities";
  *     notificationQueueName: "lifcyclehook",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const example = new tencentcloud.as.LifecycleHook("example", {
  *     scalingGroupId: tencentcloud_as_scaling_group.example.id,
@@ -90,6 +96,7 @@ import * as utilities from "../utilities";
  *     notificationTopicName: "lifcyclehook",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export class LifecycleHook extends pulumi.CustomResource {
     /**

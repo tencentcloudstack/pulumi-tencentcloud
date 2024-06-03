@@ -15,15 +15,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Outputs
     public sealed class ZoneSettingCacheCache
     {
         /// <summary>
-        /// Cache expiration time settings, Unit: second. The maximum value is 365 days. Note: This field may return null, indicating that no valid value can be obtained.
+        /// Cache expiration time settings.
+        /// Unit: second. The maximum value is 365 days. Note: This field may return null, indicating that no valid value can be obtained.
         /// </summary>
         public readonly int? CacheTime;
         /// <summary>
-        /// Specifies whether to enable force cache. Valid values: `on`: Enable; `off`: Disable. Note: This field may return null, indicating that no valid value can be obtained.
-        /// </summary>
-        public readonly string? IgnoreCacheControl;
-        /// <summary>
-        /// Cache configuration switch. Valid values: `on`: Enable; `off`: Disable. Note: This field may return null, indicating that no valid value can be obtained.
+        /// Cache configuration switch.
         /// </summary>
         public readonly string? Switch;
 
@@ -31,12 +28,9 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Outputs
         private ZoneSettingCacheCache(
             int? cacheTime,
 
-            string? ignoreCacheControl,
-
             string? @switch)
         {
             CacheTime = cacheTime;
-            IgnoreCacheControl = ignoreCacheControl;
             Switch = @switch;
         }
     }

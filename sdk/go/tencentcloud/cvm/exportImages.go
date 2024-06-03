@@ -7,36 +7,42 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a cvm exportImages
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cvm"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cvm"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Cvm.NewExportImages(ctx, "exportImages", &Cvm.ExportImagesArgs{
-// 			BucketName:     pulumi.String("xxxxxx"),
-// 			FileNamePrefix: pulumi.String("test-"),
-// 			ImageId:        pulumi.String("img-xxxxxx"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Cvm.NewExportImages(ctx, "exportImages", &Cvm.ExportImagesArgs{
+//				BucketName:     pulumi.String("xxxxxx"),
+//				FileNamePrefix: pulumi.String("test-"),
+//				ImageId:        pulumi.String("img-xxxxxx"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 type ExportImages struct {
 	pulumi.CustomResourceState
 
@@ -72,7 +78,7 @@ func NewExportImages(ctx *pulumi.Context,
 	if args.ImageId == nil {
 		return nil, errors.New("invalid value for required argument 'ImageId'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource ExportImages
 	err := ctx.RegisterResource("tencentcloud:Cvm/exportImages:ExportImages", name, args, &resource, opts...)
 	if err != nil {
@@ -193,7 +199,7 @@ func (i *ExportImages) ToExportImagesOutputWithContext(ctx context.Context) Expo
 // ExportImagesArrayInput is an input type that accepts ExportImagesArray and ExportImagesArrayOutput values.
 // You can construct a concrete instance of `ExportImagesArrayInput` via:
 //
-//          ExportImagesArray{ ExportImagesArgs{...} }
+//	ExportImagesArray{ ExportImagesArgs{...} }
 type ExportImagesArrayInput interface {
 	pulumi.Input
 
@@ -218,7 +224,7 @@ func (i ExportImagesArray) ToExportImagesArrayOutputWithContext(ctx context.Cont
 // ExportImagesMapInput is an input type that accepts ExportImagesMap and ExportImagesMapOutput values.
 // You can construct a concrete instance of `ExportImagesMapInput` via:
 //
-//          ExportImagesMap{ "key": ExportImagesArgs{...} }
+//	ExportImagesMap{ "key": ExportImagesArgs{...} }
 type ExportImagesMapInput interface {
 	pulumi.Input
 

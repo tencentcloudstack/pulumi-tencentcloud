@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,11 +11,12 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const mediaConcatTemplate = new tencentcloud.Ci.MediaConcatTemplate("media_concat_template", {
+ * const mediaConcatTemplate = new tencentcloud.ci.MediaConcatTemplate("mediaConcatTemplate", {
  *     bucket: "terraform-ci-xxxxxx",
  *     concatTemplate: {
  *         audio: {
@@ -62,13 +64,14 @@ import * as utilities from "../utilities";
  *     },
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * ci media_concat_template can be imported using the bucket#templateId, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Ci/mediaConcatTemplate:MediaConcatTemplate media_concat_template id=terraform-ci-xxxxxx#t1cb115dfa1fcc414284f83b7c69bcedcf
+ * $ pulumi import tencentcloud:Ci/mediaConcatTemplate:MediaConcatTemplate media_concat_template id=terraform-ci-xxxxxx#t1cb115dfa1fcc414284f83b7c69bcedcf
  * ```
  */
 export class MediaConcatTemplate extends pulumi.CustomResource {

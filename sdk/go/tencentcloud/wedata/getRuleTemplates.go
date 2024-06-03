@@ -8,11 +8,45 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Use this data source to query detailed information of wedata rule templates
+//
+// ## Example Usage
+//
+// <!--Start PulumiCodeChooser -->
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Wedata"
+//
+// )
+// func main() {
+// pulumi.Run(func(ctx *pulumi.Context) error {
+// _, err := Wedata.GetRuleTemplates(ctx, &wedata.GetRuleTemplatesArgs{
+// ProjectId: pulumi.StringRef("1840731346428280832"),
+// SourceEngineTypes: interface{}{
+// 2,
+// 4,
+// 16,
+// },
+// SourceObjectType: pulumi.IntRef(2),
+// Type: pulumi.IntRef(2),
+// }, nil);
+// if err != nil {
+// return err
+// }
+// return nil
+// })
+// }
+// ```
+// <!--End PulumiCodeChooser -->
 func GetRuleTemplates(ctx *pulumi.Context, args *GetRuleTemplatesArgs, opts ...pulumi.InvokeOption) (*GetRuleTemplatesResult, error) {
-	opts = pkgInvokeDefaultOpts(opts)
+	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetRuleTemplatesResult
 	err := ctx.Invoke("tencentcloud:Wedata/getRuleTemplates:getRuleTemplates", args, &rv, opts...)
 	if err != nil {

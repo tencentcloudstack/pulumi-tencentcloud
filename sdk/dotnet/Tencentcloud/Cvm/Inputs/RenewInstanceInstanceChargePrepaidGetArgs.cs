@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cvm.Inputs
 {
 
-    public sealed class RenewInstanceInstanceChargePrepaidGetArgs : Pulumi.ResourceArgs
+    public sealed class RenewInstanceInstanceChargePrepaidGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Subscription period; unit: month; valid values: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36, 48, 60. Note: This field may return null, indicating that no valid value is found.
@@ -21,10 +21,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cvm.Inputs
 
         /// <summary>
         /// Auto renewal flag. Valid values:
-        /// - `NOTIFY_AND_AUTO_RENEW`: notify upon expiration and renew automatically;
-        /// - `NOTIFY_AND_MANUAL_RENEW`: notify upon expiration but do not renew automatically;
-        /// - `DISABLE_NOTIFY_AND_MANUAL_RENEW`: neither notify upon expiration nor renew automatically;
-        /// Default value: NOTIFY_AND_MANUAL_RENEW. If this parameter is specified as NOTIFY_AND_AUTO_RENEW, the instance will be automatically renewed on a monthly basis if the account balance is sufficient. Note: This field may return null, indicating that no valid value is found.
         /// </summary>
         [Input("renewFlag")]
         public Input<string>? RenewFlag { get; set; }
@@ -32,5 +28,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cvm.Inputs
         public RenewInstanceInstanceChargePrepaidGetArgs()
         {
         }
+        public static new RenewInstanceInstanceChargePrepaidGetArgs Empty => new RenewInstanceInstanceChargePrepaidGetArgs();
     }
 }

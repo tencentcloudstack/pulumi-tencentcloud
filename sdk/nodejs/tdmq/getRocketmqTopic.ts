@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,10 +11,11 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const exampleRocketmqCluster = new tencentcloud.tdmq.RocketmqCluster("exampleRocketmqCluster", {
  *     clusterName: "tf_example",
@@ -37,13 +39,11 @@ import * as utilities from "../utilities";
  *     remark: "remark.",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getRocketmqTopic(args: GetRocketmqTopicArgs, opts?: pulumi.InvokeOptions): Promise<GetRocketmqTopicResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Tdmq/getRocketmqTopic:getRocketmqTopic", {
         "clusterId": args.clusterId,
         "filterName": args.filterName,
@@ -97,9 +97,43 @@ export interface GetRocketmqTopicResult {
      */
     readonly topics: outputs.Tdmq.GetRocketmqTopicTopic[];
 }
-
+/**
+ * Use this data source to query detailed information of tdmqRocketmq topic
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
+ *
+ * const exampleRocketmqCluster = new tencentcloud.tdmq.RocketmqCluster("exampleRocketmqCluster", {
+ *     clusterName: "tf_example",
+ *     remark: "remark.",
+ * });
+ * const exampleRocketmqNamespace = new tencentcloud.tdmq.RocketmqNamespace("exampleRocketmqNamespace", {
+ *     clusterId: exampleRocketmqCluster.clusterId,
+ *     namespaceName: "tf_example",
+ *     remark: "remark.",
+ * });
+ * const exampleRocketmqTopic = tencentcloud.Tdmq.getRocketmqTopicOutput({
+ *     clusterId: exampleRocketmqCluster.clusterId,
+ *     namespaceId: exampleRocketmqNamespace.namespaceName,
+ *     filterName: exampleTdmq / rocketmqTopicRocketmqTopic.topicName,
+ * });
+ * const exampleTdmq_rocketmqTopicRocketmqTopic = new tencentcloud.tdmq.RocketmqTopic("exampleTdmq/rocketmqTopicRocketmqTopic", {
+ *     topicName: "tf_example",
+ *     namespaceName: exampleRocketmqNamespace.namespaceName,
+ *     clusterId: exampleRocketmqCluster.clusterId,
+ *     type: "Normal",
+ *     remark: "remark.",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getRocketmqTopicOutput(args: GetRocketmqTopicOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetRocketmqTopicResult> {
-    return pulumi.output(args).apply(a => getRocketmqTopic(a, opts))
+    return pulumi.output(args).apply((a: any) => getRocketmqTopic(a, opts))
 }
 
 /**

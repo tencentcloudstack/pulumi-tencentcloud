@@ -11,16 +11,19 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Inputs
 {
 
-    public sealed class RuleEngineRuleActionRewriteActionParameterGetArgs : Pulumi.ResourceArgs
+    public sealed class RuleEngineRuleActionRewriteActionParameterGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// Action to take on the HEADER. Valid values: `add`, `del`, `set`.
+        /// Feature parameter name. You can call the [DescribeRulesSetting](https://tcloud4api.woa.com/document/product/1657/79433?!preview&amp;!document=1) API to view the requirements for entering the parameter name, which has three values:
+        /// - add: Add the HTTP header.
+        /// - set: Rewrite the HTTP header.
+        /// - del: Delete the HTTP header.
         /// </summary>
         [Input("action", required: true)]
         public Input<string> Action { get; set; } = null!;
 
         /// <summary>
-        /// Target HEADER name.
+        /// Parameter name.
         /// </summary>
         [Input("name", required: true)]
         public Input<string> Name { get; set; } = null!;
@@ -29,7 +32,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Inputs
         private InputList<string>? _values;
 
         /// <summary>
-        /// Parameter Value.
+        /// Parameter value.
         /// </summary>
         public InputList<string> Values
         {
@@ -40,5 +43,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Inputs
         public RuleEngineRuleActionRewriteActionParameterGetArgs()
         {
         }
+        public static new RuleEngineRuleActionRewriteActionParameterGetArgs Empty => new RuleEngineRuleActionRewriteActionParameterGetArgs();
     }
 }

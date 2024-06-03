@@ -9,15 +9,17 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const applyDiskBackup = new tencentcloud.Lighthouse.ApplyDiskBackup("apply_disk_backup", {
+ * const applyDiskBackup = new tencentcloud.lighthouse.ApplyDiskBackup("applyDiskBackup", {
  *     diskBackupId: "lhbak-xxxxxx",
  *     diskId: "lhdisk-xxxxxx",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export class ApplyDiskBackup extends pulumi.CustomResource {
     /**

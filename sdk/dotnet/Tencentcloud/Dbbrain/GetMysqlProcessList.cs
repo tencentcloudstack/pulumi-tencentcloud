@@ -15,66 +15,60 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dbbrain
         /// <summary>
         /// Use this data source to query detailed information of dbbrain mysql_process_list
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var mysqlProcessList = Tencentcloud.Dbbrain.GetMysqlProcessList.Invoke(new()
         ///     {
-        ///         var mysqlProcessList = Output.Create(Tencentcloud.Dbbrain.GetMysqlProcessList.InvokeAsync(new Tencentcloud.Dbbrain.GetMysqlProcessListArgs
-        ///         {
-        ///             InstanceId = local.Mysql_id,
-        ///             Product = "mysql",
-        ///         }));
-        ///     }
+        ///         InstanceId = local.Mysql_id,
+        ///         Product = "mysql",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetMysqlProcessListResult> InvokeAsync(GetMysqlProcessListArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetMysqlProcessListResult>("tencentcloud:Dbbrain/getMysqlProcessList:getMysqlProcessList", args ?? new GetMysqlProcessListArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetMysqlProcessListResult>("tencentcloud:Dbbrain/getMysqlProcessList:getMysqlProcessList", args ?? new GetMysqlProcessListArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of dbbrain mysql_process_list
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var mysqlProcessList = Tencentcloud.Dbbrain.GetMysqlProcessList.Invoke(new()
         ///     {
-        ///         var mysqlProcessList = Output.Create(Tencentcloud.Dbbrain.GetMysqlProcessList.InvokeAsync(new Tencentcloud.Dbbrain.GetMysqlProcessListArgs
-        ///         {
-        ///             InstanceId = local.Mysql_id,
-        ///             Product = "mysql",
-        ///         }));
-        ///     }
+        ///         InstanceId = local.Mysql_id,
+        ///         Product = "mysql",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetMysqlProcessListResult> Invoke(GetMysqlProcessListInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetMysqlProcessListResult>("tencentcloud:Dbbrain/getMysqlProcessList:getMysqlProcessList", args ?? new GetMysqlProcessListInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetMysqlProcessListResult>("tencentcloud:Dbbrain/getMysqlProcessList:getMysqlProcessList", args ?? new GetMysqlProcessListInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetMysqlProcessListArgs : Pulumi.InvokeArgs
+    public sealed class GetMysqlProcessListArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// The execution type of the thread, used to filter the thread list.
@@ -145,9 +139,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dbbrain
         public GetMysqlProcessListArgs()
         {
         }
+        public static new GetMysqlProcessListArgs Empty => new GetMysqlProcessListArgs();
     }
 
-    public sealed class GetMysqlProcessListInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetMysqlProcessListInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// The execution type of the thread, used to filter the thread list.
@@ -218,6 +213,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dbbrain
         public GetMysqlProcessListInvokeArgs()
         {
         }
+        public static new GetMysqlProcessListInvokeArgs Empty => new GetMysqlProcessListInvokeArgs();
     }
 
 

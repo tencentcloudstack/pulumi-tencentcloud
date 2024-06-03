@@ -11,16 +11,23 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cvm.Inputs
 {
 
-    public sealed class RenewHostHostChargePrepaidGetArgs : Pulumi.ResourceArgs
+    public sealed class RenewHostHostChargePrepaidGetArgs : global::Pulumi.ResourceArgs
     {
+        /// <summary>
+        /// The duration of purchasing an instance, unit: month. Value range: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36.
+        /// </summary>
         [Input("period", required: true)]
         public Input<int> Period { get; set; } = null!;
 
+        /// <summary>
+        /// Auto renewal flag. Valid values:&amp;lt;br&amp;gt;&amp;lt;li&amp;gt;NOTIFY_AND_AUTO_RENEW: notify upon expiration and renew automatically&amp;lt;br&amp;gt;&amp;lt;li&amp;gt;NOTIFY_AND_MANUAL_RENEW: notify upon expiration but do not renew automatically&amp;lt;br&amp;gt;&amp;lt;li&amp;gt;DISABLE_NOTIFY_AND_MANUAL_RENEW: neither notify upon expiration nor renew automatically&amp;lt;br&amp;gt;&amp;lt;br&amp;gt;Default value: NOTIFY_AND_AUTO_RENEW。If this parameter is specified as NOTIFY_AND_AUTO_RENEW, the instance will be automatically renewed on a monthly basis if the account balance is sufficient.
+        /// </summary>
         [Input("renewFlag")]
         public Input<string>? RenewFlag { get; set; }
 
         public RenewHostHostChargePrepaidGetArgs()
         {
         }
+        public static new RenewHostHostChargePrepaidGetArgs Empty => new RenewHostHostChargePrepaidGetArgs();
     }
 }

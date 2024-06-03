@@ -15,62 +15,67 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var clbBasic = new Tencentcloud.Clb.Instance("clbBasic", new()
     ///     {
-    ///         var clbBasic = new Tencentcloud.Clb.Instance("clbBasic", new Tencentcloud.Clb.InstanceArgs
-    ///         {
-    ///             NetworkType = "OPEN",
-    ///             ClbName = "tf-clb-rule-basic",
-    ///         });
-    ///         var listenerBasic = new Tencentcloud.Clb.Listener("listenerBasic", new Tencentcloud.Clb.ListenerArgs
-    ///         {
-    ///             ClbId = clbBasic.Id,
-    ///             Port = 1,
-    ///             Protocol = "HTTP",
-    ///             ListenerName = "listener_basic",
-    ///         });
-    ///         var ruleBasic = new Tencentcloud.Clb.ListenerRule("ruleBasic", new Tencentcloud.Clb.ListenerRuleArgs
-    ///         {
-    ///             ClbId = clbBasic.Id,
-    ///             ListenerId = listenerBasic.ListenerId,
-    ///             Domain = "abc.com",
-    ///             Url = "/",
-    ///             SessionExpireTime = 30,
-    ///             Scheduler = "WRR",
-    ///             TargetType = "TARGETGROUP",
-    ///         });
-    ///         var test = new Tencentcloud.Clb.TargetGroup("test", new Tencentcloud.Clb.TargetGroupArgs
-    ///         {
-    ///             TargetGroupName = "test-target-keep-1",
-    ///         });
-    ///         var @group = new Tencentcloud.Clb.TargetGroupAttachment("group", new Tencentcloud.Clb.TargetGroupAttachmentArgs
-    ///         {
-    ///             ClbId = clbBasic.Id,
-    ///             ListenerId = listenerBasic.ListenerId,
-    ///             RuleId = ruleBasic.RuleId,
-    ///             TargetGroupId = test.Id,
-    ///         });
-    ///     }
+    ///         NetworkType = "OPEN",
+    ///         ClbName = "tf-clb-rule-basic",
+    ///     });
     /// 
-    /// }
+    ///     var listenerBasic = new Tencentcloud.Clb.Listener("listenerBasic", new()
+    ///     {
+    ///         ClbId = clbBasic.Id,
+    ///         Port = 1,
+    ///         Protocol = "HTTP",
+    ///         ListenerName = "listener_basic",
+    ///     });
+    /// 
+    ///     var ruleBasic = new Tencentcloud.Clb.ListenerRule("ruleBasic", new()
+    ///     {
+    ///         ClbId = clbBasic.Id,
+    ///         ListenerId = listenerBasic.ListenerId,
+    ///         Domain = "abc.com",
+    ///         Url = "/",
+    ///         SessionExpireTime = 30,
+    ///         Scheduler = "WRR",
+    ///         TargetType = "TARGETGROUP",
+    ///     });
+    /// 
+    ///     var test = new Tencentcloud.Clb.TargetGroup("test", new()
+    ///     {
+    ///         TargetGroupName = "test-target-keep-1",
+    ///     });
+    /// 
+    ///     var @group = new Tencentcloud.Clb.TargetGroupAttachment("group", new()
+    ///     {
+    ///         ClbId = clbBasic.Id,
+    ///         ListenerId = listenerBasic.ListenerId,
+    ///         RuleId = ruleBasic.RuleId,
+    ///         TargetGroupId = test.Id,
+    ///     });
+    /// 
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// CLB target group attachment can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Clb/targetGroupAttachment:TargetGroupAttachment group lbtg-odareyb2#lbl-bicjmx3i#lb-cv0iz74c#loc-ac6uk7b6
+    /// $ pulumi import tencentcloud:Clb/targetGroupAttachment:TargetGroupAttachment group lbtg-odareyb2#lbl-bicjmx3i#lb-cv0iz74c#loc-ac6uk7b6
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Clb/targetGroupAttachment:TargetGroupAttachment")]
-    public partial class TargetGroupAttachment : Pulumi.CustomResource
+    public partial class TargetGroupAttachment : global::Pulumi.CustomResource
     {
         /// <summary>
         /// ID of the CLB.
@@ -147,7 +152,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
         }
     }
 
-    public sealed class TargetGroupAttachmentArgs : Pulumi.ResourceArgs
+    public sealed class TargetGroupAttachmentArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// ID of the CLB.
@@ -182,9 +187,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
         public TargetGroupAttachmentArgs()
         {
         }
+        public static new TargetGroupAttachmentArgs Empty => new TargetGroupAttachmentArgs();
     }
 
-    public sealed class TargetGroupAttachmentState : Pulumi.ResourceArgs
+    public sealed class TargetGroupAttachmentState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// ID of the CLB.
@@ -219,5 +225,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
         public TargetGroupAttachmentState()
         {
         }
+        public static new TargetGroupAttachmentState Empty => new TargetGroupAttachmentState();
     }
 }

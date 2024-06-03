@@ -9,11 +9,12 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const rabbitmqUser = new tencentcloud.Tdmq.RabbitmqUser("rabbitmq_user", {
+ * const rabbitmqUser = new tencentcloud.tdmq.RabbitmqUser("rabbitmqUser", {
  *     description: "test user",
  *     instanceId: "amqp-kzbe8p3n",
  *     maxChannels: 3,
@@ -26,6 +27,7 @@ import * as utilities from "../utilities";
  *     user: "keep-user",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export class RabbitmqUser extends pulumi.CustomResource {
     /**
@@ -119,11 +121,13 @@ export class RabbitmqUser extends pulumi.CustomResource {
             resourceInputs["instanceId"] = args ? args.instanceId : undefined;
             resourceInputs["maxChannels"] = args ? args.maxChannels : undefined;
             resourceInputs["maxConnections"] = args ? args.maxConnections : undefined;
-            resourceInputs["password"] = args ? args.password : undefined;
+            resourceInputs["password"] = args?.password ? pulumi.secret(args.password) : undefined;
             resourceInputs["tags"] = args ? args.tags : undefined;
             resourceInputs["user"] = args ? args.user : undefined;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+        const secretOpts = { additionalSecretOutputs: ["password"] };
+        opts = pulumi.mergeOptions(opts, secretOpts);
         super(RabbitmqUser.__pulumiType, name, resourceInputs, opts);
     }
 }

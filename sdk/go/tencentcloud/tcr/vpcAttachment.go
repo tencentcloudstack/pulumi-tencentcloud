@@ -7,74 +7,79 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Use this resource to attach tcr instance with the vpc and subnet network.
 //
 // ## Example Usage
+//
 // ### Attach a tcr instance with vpc resource
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Security"
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Security"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tcr"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Security"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tcr"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		vpc, err := Vpc.GetSubnets(ctx, &vpc.GetSubnetsArgs{
-// 			IsDefault:        pulumi.BoolRef(true),
-// 			AvailabilityZone: pulumi.StringRef(_var.Availability_zone),
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		vpcId := vpc.InstanceLists[0].VpcId
-// 		subnetId := vpc.InstanceLists[0].SubnetId
-// 		example, err := Tcr.NewInstance(ctx, "example", &Tcr.InstanceArgs{
-// 			InstanceType: pulumi.String("basic"),
-// 			DeleteBucket: pulumi.Bool(true),
-// 			Tags: pulumi.AnyMap{
-// 				"createdBy": pulumi.Any("terraform"),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		tcrId := example.ID()
-// 		_, err = Security.GetGroups(ctx, &security.GetGroupsArgs{
-// 			Name: pulumi.StringRef("default"),
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_, err = Tcr.NewVpcAttachment(ctx, "foo", &Tcr.VpcAttachmentArgs{
-// 			InstanceId: pulumi.String(tcrId),
-// 			VpcId:      pulumi.String(vpcId),
-// 			SubnetId:   pulumi.String(subnetId),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			vpc, err := Vpc.GetSubnets(ctx, &vpc.GetSubnetsArgs{
+//				IsDefault:        pulumi.BoolRef(true),
+//				AvailabilityZone: pulumi.StringRef(_var.Availability_zone),
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			vpcId := vpc.InstanceLists[0].VpcId
+//			subnetId := vpc.InstanceLists[0].SubnetId
+//			example, err := Tcr.NewInstance(ctx, "example", &Tcr.InstanceArgs{
+//				InstanceType: pulumi.String("basic"),
+//				DeleteBucket: pulumi.Bool(true),
+//				Tags: pulumi.Map{
+//					"createdBy": pulumi.Any("terraform"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			tcrId := example.ID()
+//			_, err = Security.GetGroups(ctx, &security.GetGroupsArgs{
+//				Name: pulumi.StringRef("default"),
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			_, err = Tcr.NewVpcAttachment(ctx, "foo", &Tcr.VpcAttachmentArgs{
+//				InstanceId: pulumi.String(tcrId),
+//				VpcId:      pulumi.String(vpcId),
+//				SubnetId:   pulumi.String(subnetId),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // tcr vpc attachment can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Tcr/vpcAttachment:VpcAttachment foo instance_id#vpc_id#subnet_id
+// $ pulumi import tencentcloud:Tcr/vpcAttachment:VpcAttachment foo instance_id#vpc_id#subnet_id
 // ```
 type VpcAttachment struct {
 	pulumi.CustomResourceState
@@ -89,7 +94,7 @@ type VpcAttachment struct {
 	InstanceId pulumi.StringOutput `pulumi:"instanceId"`
 	// this argument was deprecated, use `regionName` instead. ID of region. Conflict with region_name, can not be set at the same time.
 	//
-	// Deprecated: this argument was deprecated, use `region_name` instead.
+	// Deprecated: this argument was deprecated, use `regionName` instead.
 	RegionId pulumi.IntPtrOutput `pulumi:"regionId"`
 	// Name of region. Conflict with region_id, can not be set at the same time.
 	RegionName pulumi.StringPtrOutput `pulumi:"regionName"`
@@ -117,7 +122,7 @@ func NewVpcAttachment(ctx *pulumi.Context,
 	if args.VpcId == nil {
 		return nil, errors.New("invalid value for required argument 'VpcId'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource VpcAttachment
 	err := ctx.RegisterResource("tencentcloud:Tcr/vpcAttachment:VpcAttachment", name, args, &resource, opts...)
 	if err != nil {
@@ -150,7 +155,7 @@ type vpcAttachmentState struct {
 	InstanceId *string `pulumi:"instanceId"`
 	// this argument was deprecated, use `regionName` instead. ID of region. Conflict with region_name, can not be set at the same time.
 	//
-	// Deprecated: this argument was deprecated, use `region_name` instead.
+	// Deprecated: this argument was deprecated, use `regionName` instead.
 	RegionId *int `pulumi:"regionId"`
 	// Name of region. Conflict with region_id, can not be set at the same time.
 	RegionName *string `pulumi:"regionName"`
@@ -173,7 +178,7 @@ type VpcAttachmentState struct {
 	InstanceId pulumi.StringPtrInput
 	// this argument was deprecated, use `regionName` instead. ID of region. Conflict with region_name, can not be set at the same time.
 	//
-	// Deprecated: this argument was deprecated, use `region_name` instead.
+	// Deprecated: this argument was deprecated, use `regionName` instead.
 	RegionId pulumi.IntPtrInput
 	// Name of region. Conflict with region_id, can not be set at the same time.
 	RegionName pulumi.StringPtrInput
@@ -198,7 +203,7 @@ type vpcAttachmentArgs struct {
 	InstanceId string `pulumi:"instanceId"`
 	// this argument was deprecated, use `regionName` instead. ID of region. Conflict with region_name, can not be set at the same time.
 	//
-	// Deprecated: this argument was deprecated, use `region_name` instead.
+	// Deprecated: this argument was deprecated, use `regionName` instead.
 	RegionId *int `pulumi:"regionId"`
 	// Name of region. Conflict with region_id, can not be set at the same time.
 	RegionName *string `pulumi:"regionName"`
@@ -218,7 +223,7 @@ type VpcAttachmentArgs struct {
 	InstanceId pulumi.StringInput
 	// this argument was deprecated, use `regionName` instead. ID of region. Conflict with region_name, can not be set at the same time.
 	//
-	// Deprecated: this argument was deprecated, use `region_name` instead.
+	// Deprecated: this argument was deprecated, use `regionName` instead.
 	RegionId pulumi.IntPtrInput
 	// Name of region. Conflict with region_id, can not be set at the same time.
 	RegionName pulumi.StringPtrInput
@@ -254,7 +259,7 @@ func (i *VpcAttachment) ToVpcAttachmentOutputWithContext(ctx context.Context) Vp
 // VpcAttachmentArrayInput is an input type that accepts VpcAttachmentArray and VpcAttachmentArrayOutput values.
 // You can construct a concrete instance of `VpcAttachmentArrayInput` via:
 //
-//          VpcAttachmentArray{ VpcAttachmentArgs{...} }
+//	VpcAttachmentArray{ VpcAttachmentArgs{...} }
 type VpcAttachmentArrayInput interface {
 	pulumi.Input
 
@@ -279,7 +284,7 @@ func (i VpcAttachmentArray) ToVpcAttachmentArrayOutputWithContext(ctx context.Co
 // VpcAttachmentMapInput is an input type that accepts VpcAttachmentMap and VpcAttachmentMapOutput values.
 // You can construct a concrete instance of `VpcAttachmentMapInput` via:
 //
-//          VpcAttachmentMap{ "key": VpcAttachmentArgs{...} }
+//	VpcAttachmentMap{ "key": VpcAttachmentArgs{...} }
 type VpcAttachmentMapInput interface {
 	pulumi.Input
 
@@ -337,7 +342,7 @@ func (o VpcAttachmentOutput) InstanceId() pulumi.StringOutput {
 
 // this argument was deprecated, use `regionName` instead. ID of region. Conflict with region_name, can not be set at the same time.
 //
-// Deprecated: this argument was deprecated, use `region_name` instead.
+// Deprecated: this argument was deprecated, use `regionName` instead.
 func (o VpcAttachmentOutput) RegionId() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *VpcAttachment) pulumi.IntPtrOutput { return v.RegionId }).(pulumi.IntPtrOutput)
 }

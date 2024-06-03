@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb.Inputs
 {
 
-    public sealed class GetAuditLogsFilterArgs : Pulumi.InvokeArgs
+    public sealed class GetAuditLogsFilterArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Affects the number of rows. Indicates that filtering affects audit logs with rows greater than this value.
@@ -142,5 +142,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb.Inputs
         public GetAuditLogsFilterArgs()
         {
         }
+        public static new GetAuditLogsFilterArgs Empty => new GetAuditLogsFilterArgs();
     }
 }

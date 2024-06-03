@@ -8,44 +8,49 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Use this data source to query API gateway usage plans.
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/ApiGateway"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/ApiGateway"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/ApiGateway"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		plan, err := ApiGateway.NewUsagePlan(ctx, "plan", &ApiGateway.UsagePlanArgs{
-// 			UsagePlanName:       pulumi.String("my_plan"),
-// 			UsagePlanDesc:       pulumi.String("nice plan"),
-// 			MaxRequestNum:       pulumi.Int(100),
-// 			MaxRequestNumPreSec: pulumi.Int(10),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_ = ApiGateway.GetUsagePlansOutput(ctx, apigateway.GetUsagePlansOutputArgs{
-// 			UsagePlanName: plan.UsagePlanName,
-// 		}, nil)
-// 		_ = ApiGateway.GetUsagePlansOutput(ctx, apigateway.GetUsagePlansOutputArgs{
-// 			UsagePlanId: plan.ID(),
-// 		}, nil)
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			plan, err := ApiGateway.NewUsagePlan(ctx, "plan", &ApiGateway.UsagePlanArgs{
+//				UsagePlanName:       pulumi.String("my_plan"),
+//				UsagePlanDesc:       pulumi.String("nice plan"),
+//				MaxRequestNum:       pulumi.Int(100),
+//				MaxRequestNumPreSec: pulumi.Int(10),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_ = ApiGateway.GetUsagePlansOutput(ctx, apigateway.GetUsagePlansOutputArgs{
+//				UsagePlanName: plan.UsagePlanName,
+//			}, nil)
+//			_ = ApiGateway.GetUsagePlansOutput(ctx, apigateway.GetUsagePlansOutputArgs{
+//				UsagePlanId: plan.ID(),
+//			}, nil)
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 func GetUsagePlans(ctx *pulumi.Context, args *GetUsagePlansArgs, opts ...pulumi.InvokeOption) (*GetUsagePlansResult, error) {
-	opts = pkgInvokeDefaultOpts(opts)
+	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetUsagePlansResult
 	err := ctx.Invoke("tencentcloud:ApiGateway/getUsagePlans:getUsagePlans", args, &rv, opts...)
 	if err != nil {

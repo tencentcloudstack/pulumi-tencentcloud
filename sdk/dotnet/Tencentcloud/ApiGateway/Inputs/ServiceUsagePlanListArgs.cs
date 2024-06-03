@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway.Inputs
 {
 
-    public sealed class ServiceUsagePlanListArgs : Pulumi.ResourceArgs
+    public sealed class ServiceUsagePlanListArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// ID of the API.
@@ -40,5 +40,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway.Inputs
         public ServiceUsagePlanListArgs()
         {
         }
+        public static new ServiceUsagePlanListArgs Empty => new ServiceUsagePlanListArgs();
     }
 }

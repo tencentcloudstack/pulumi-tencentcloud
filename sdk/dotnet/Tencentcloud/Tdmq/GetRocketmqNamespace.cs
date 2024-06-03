@@ -15,90 +15,88 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdmq
         /// <summary>
         /// Use this data source to query detailed information of tdmqRocketmq namespace
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var exampleRocketmqCluster = new Tencentcloud.Tdmq.RocketmqCluster("exampleRocketmqCluster", new()
         ///     {
-        ///         var exampleRocketmqCluster = new Tencentcloud.Tdmq.RocketmqCluster("exampleRocketmqCluster", new Tencentcloud.Tdmq.RocketmqClusterArgs
-        ///         {
-        ///             ClusterName = "tf_example",
-        ///             Remark = "remark.",
-        ///         });
-        ///         var exampleRocketmqNamespace = Tencentcloud.Tdmq.GetRocketmqNamespace.Invoke(new Tencentcloud.Tdmq.GetRocketmqNamespaceInvokeArgs
-        ///         {
-        ///             ClusterId = exampleRocketmqCluster.ClusterId,
-        ///             NameKeyword = exampleTdmq / rocketmqNamespaceRocketmqNamespace.NamespaceName,
-        ///         });
-        ///         var exampleTdmq_rocketmqNamespaceRocketmqNamespace = new Tencentcloud.Tdmq.RocketmqNamespace("exampleTdmq/rocketmqNamespaceRocketmqNamespace", new Tencentcloud.Tdmq.RocketmqNamespaceArgs
-        ///         {
-        ///             ClusterId = exampleRocketmqCluster.ClusterId,
-        ///             NamespaceName = "tf_example",
-        ///             Remark = "remark.",
-        ///         });
-        ///     }
+        ///         ClusterName = "tf_example",
+        ///         Remark = "remark.",
+        ///     });
         /// 
-        /// }
+        ///     var exampleRocketmqNamespace = Tencentcloud.Tdmq.GetRocketmqNamespace.Invoke(new()
+        ///     {
+        ///         ClusterId = exampleRocketmqCluster.ClusterId,
+        ///         NameKeyword = exampleTdmq / rocketmqNamespaceRocketmqNamespace.NamespaceName,
+        ///     });
+        /// 
+        ///     var exampleTdmq_rocketmqNamespaceRocketmqNamespace = new Tencentcloud.Tdmq.RocketmqNamespace("exampleTdmq/rocketmqNamespaceRocketmqNamespace", new()
+        ///     {
+        ///         ClusterId = exampleRocketmqCluster.ClusterId,
+        ///         NamespaceName = "tf_example",
+        ///         Remark = "remark.",
+        ///     });
+        /// 
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetRocketmqNamespaceResult> InvokeAsync(GetRocketmqNamespaceArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetRocketmqNamespaceResult>("tencentcloud:Tdmq/getRocketmqNamespace:getRocketmqNamespace", args ?? new GetRocketmqNamespaceArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetRocketmqNamespaceResult>("tencentcloud:Tdmq/getRocketmqNamespace:getRocketmqNamespace", args ?? new GetRocketmqNamespaceArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of tdmqRocketmq namespace
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var exampleRocketmqCluster = new Tencentcloud.Tdmq.RocketmqCluster("exampleRocketmqCluster", new()
         ///     {
-        ///         var exampleRocketmqCluster = new Tencentcloud.Tdmq.RocketmqCluster("exampleRocketmqCluster", new Tencentcloud.Tdmq.RocketmqClusterArgs
-        ///         {
-        ///             ClusterName = "tf_example",
-        ///             Remark = "remark.",
-        ///         });
-        ///         var exampleRocketmqNamespace = Tencentcloud.Tdmq.GetRocketmqNamespace.Invoke(new Tencentcloud.Tdmq.GetRocketmqNamespaceInvokeArgs
-        ///         {
-        ///             ClusterId = exampleRocketmqCluster.ClusterId,
-        ///             NameKeyword = exampleTdmq / rocketmqNamespaceRocketmqNamespace.NamespaceName,
-        ///         });
-        ///         var exampleTdmq_rocketmqNamespaceRocketmqNamespace = new Tencentcloud.Tdmq.RocketmqNamespace("exampleTdmq/rocketmqNamespaceRocketmqNamespace", new Tencentcloud.Tdmq.RocketmqNamespaceArgs
-        ///         {
-        ///             ClusterId = exampleRocketmqCluster.ClusterId,
-        ///             NamespaceName = "tf_example",
-        ///             Remark = "remark.",
-        ///         });
-        ///     }
+        ///         ClusterName = "tf_example",
+        ///         Remark = "remark.",
+        ///     });
         /// 
-        /// }
+        ///     var exampleRocketmqNamespace = Tencentcloud.Tdmq.GetRocketmqNamespace.Invoke(new()
+        ///     {
+        ///         ClusterId = exampleRocketmqCluster.ClusterId,
+        ///         NameKeyword = exampleTdmq / rocketmqNamespaceRocketmqNamespace.NamespaceName,
+        ///     });
+        /// 
+        ///     var exampleTdmq_rocketmqNamespaceRocketmqNamespace = new Tencentcloud.Tdmq.RocketmqNamespace("exampleTdmq/rocketmqNamespaceRocketmqNamespace", new()
+        ///     {
+        ///         ClusterId = exampleRocketmqCluster.ClusterId,
+        ///         NamespaceName = "tf_example",
+        ///         Remark = "remark.",
+        ///     });
+        /// 
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetRocketmqNamespaceResult> Invoke(GetRocketmqNamespaceInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetRocketmqNamespaceResult>("tencentcloud:Tdmq/getRocketmqNamespace:getRocketmqNamespace", args ?? new GetRocketmqNamespaceInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetRocketmqNamespaceResult>("tencentcloud:Tdmq/getRocketmqNamespace:getRocketmqNamespace", args ?? new GetRocketmqNamespaceInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetRocketmqNamespaceArgs : Pulumi.InvokeArgs
+    public sealed class GetRocketmqNamespaceArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Cluster ID.
@@ -121,9 +119,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdmq
         public GetRocketmqNamespaceArgs()
         {
         }
+        public static new GetRocketmqNamespaceArgs Empty => new GetRocketmqNamespaceArgs();
     }
 
-    public sealed class GetRocketmqNamespaceInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetRocketmqNamespaceInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Cluster ID.
@@ -146,6 +145,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdmq
         public GetRocketmqNamespaceInvokeArgs()
         {
         }
+        public static new GetRocketmqNamespaceInvokeArgs Empty => new GetRocketmqNamespaceInvokeArgs();
     }
 
 

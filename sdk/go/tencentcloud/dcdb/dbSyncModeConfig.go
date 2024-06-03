@@ -7,44 +7,48 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a dcdb dbSyncModeConfig
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"fmt"
 //
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dcdb"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dcdb"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Dcdb.NewDbSyncModeConfig(ctx, "config", &Dcdb.DbSyncModeConfigArgs{
-// 			InstanceId: pulumi.String(fmt.Sprintf("%v%v", "%", "s")),
-// 			SyncMode:   pulumi.Int(2),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Dcdb.NewDbSyncModeConfig(ctx, "config", &Dcdb.DbSyncModeConfigArgs{
+//				InstanceId: pulumi.String("%s"),
+//				SyncMode:   pulumi.Int(2),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // dcdb db_sync_mode_config can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Dcdb/dbSyncModeConfig:DbSyncModeConfig db_sync_mode_config db_sync_mode_config_id
+// $ pulumi import tencentcloud:Dcdb/dbSyncModeConfig:DbSyncModeConfig db_sync_mode_config db_sync_mode_config_id
 // ```
 type DbSyncModeConfig struct {
 	pulumi.CustomResourceState
@@ -68,7 +72,7 @@ func NewDbSyncModeConfig(ctx *pulumi.Context,
 	if args.SyncMode == nil {
 		return nil, errors.New("invalid value for required argument 'SyncMode'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource DbSyncModeConfig
 	err := ctx.RegisterResource("tencentcloud:Dcdb/dbSyncModeConfig:DbSyncModeConfig", name, args, &resource, opts...)
 	if err != nil {
@@ -149,7 +153,7 @@ func (i *DbSyncModeConfig) ToDbSyncModeConfigOutputWithContext(ctx context.Conte
 // DbSyncModeConfigArrayInput is an input type that accepts DbSyncModeConfigArray and DbSyncModeConfigArrayOutput values.
 // You can construct a concrete instance of `DbSyncModeConfigArrayInput` via:
 //
-//          DbSyncModeConfigArray{ DbSyncModeConfigArgs{...} }
+//	DbSyncModeConfigArray{ DbSyncModeConfigArgs{...} }
 type DbSyncModeConfigArrayInput interface {
 	pulumi.Input
 
@@ -174,7 +178,7 @@ func (i DbSyncModeConfigArray) ToDbSyncModeConfigArrayOutputWithContext(ctx cont
 // DbSyncModeConfigMapInput is an input type that accepts DbSyncModeConfigMap and DbSyncModeConfigMapOutput values.
 // You can construct a concrete instance of `DbSyncModeConfigMapInput` via:
 //
-//          DbSyncModeConfigMap{ "key": DbSyncModeConfigArgs{...} }
+//	DbSyncModeConfigMap{ "key": DbSyncModeConfigArgs{...} }
 type DbSyncModeConfigMapInput interface {
 	pulumi.Input
 

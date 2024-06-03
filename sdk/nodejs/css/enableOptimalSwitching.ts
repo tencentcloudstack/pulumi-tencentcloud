@@ -11,23 +11,25 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const enableOptimalSwitching = new tencentcloud.Css.EnableOptimalSwitching("enable_optimal_switching", {
+ * const enableOptimalSwitching = new tencentcloud.css.EnableOptimalSwitching("enableOptimalSwitching", {
  *     enableSwitch: 1,
  *     hostGroupName: "test-group",
  *     streamName: "1308919341_test",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * css domain can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Css/enableOptimalSwitching:EnableOptimalSwitching enable_optimal_switching streamName
+ * $ pulumi import tencentcloud:Css/enableOptimalSwitching:EnableOptimalSwitching enable_optimal_switching streamName
  * ```
  */
 export class EnableOptimalSwitching extends pulumi.CustomResource {

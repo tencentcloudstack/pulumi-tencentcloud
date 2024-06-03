@@ -18,11 +18,11 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
     /// Acl attachment can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Vpc/aclAttachment:AclAttachment attachment acl-eotx5qsg#subnet-91x0geu6
+    /// $ pulumi import tencentcloud:Vpc/aclAttachment:AclAttachment attachment acl-eotx5qsg#subnet-91x0geu6
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Vpc/aclAttachment:AclAttachment")]
-    public partial class AclAttachment : Pulumi.CustomResource
+    public partial class AclAttachment : global::Pulumi.CustomResource
     {
         /// <summary>
         /// ID of the attached ACL.
@@ -81,7 +81,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         }
     }
 
-    public sealed class AclAttachmentArgs : Pulumi.ResourceArgs
+    public sealed class AclAttachmentArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// ID of the attached ACL.
@@ -98,9 +98,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         public AclAttachmentArgs()
         {
         }
+        public static new AclAttachmentArgs Empty => new AclAttachmentArgs();
     }
 
-    public sealed class AclAttachmentState : Pulumi.ResourceArgs
+    public sealed class AclAttachmentState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// ID of the attached ACL.
@@ -117,5 +118,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         public AclAttachmentState()
         {
         }
+        public static new AclAttachmentState Empty => new AclAttachmentState();
     }
 }

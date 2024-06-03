@@ -15,55 +15,56 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var unitRule = new Tencentcloud.Tsf.UnitRule("unitRule", new()
     ///     {
-    ///         var unitRule = new Tencentcloud.Tsf.UnitRule("unitRule", new Tencentcloud.Tsf.UnitRuleArgs
+    ///         Description = "terraform-desc",
+    ///         GatewayInstanceId = "gw-ins-rug79a70",
+    ///         UnitRuleItemLists = new[]
     ///         {
-    ///             Description = "terraform-desc",
-    ///             GatewayInstanceId = "gw-ins-rug79a70",
-    ///             UnitRuleItemLists = 
+    ///             new Tencentcloud.Tsf.Inputs.UnitRuleUnitRuleItemListArgs
     ///             {
-    ///                 new Tencentcloud.Tsf.Inputs.UnitRuleUnitRuleItemListArgs
+    ///                 Description = "rule1-desc",
+    ///                 DestNamespaceId = "namespace-y8p88eka",
+    ///                 DestNamespaceName = "garden-test_default",
+    ///                 Name = "Rule1",
+    ///                 Relationship = "AND",
+    ///                 UnitRuleTagLists = new[]
     ///                 {
-    ///                     Description = "rule1-desc",
-    ///                     DestNamespaceId = "namespace-y8p88eka",
-    ///                     DestNamespaceName = "garden-test_default",
-    ///                     Name = "Rule1",
-    ///                     Relationship = "AND",
-    ///                     UnitRuleTagLists = 
+    ///                     new Tencentcloud.Tsf.Inputs.UnitRuleUnitRuleItemListUnitRuleTagListArgs
     ///                     {
-    ///                         new Tencentcloud.Tsf.Inputs.UnitRuleUnitRuleItemListUnitRuleTagListArgs
-    ///                         {
-    ///                             TagField = "aaa",
-    ///                             TagOperator = "IN",
-    ///                             TagType = "U",
-    ///                             TagValue = "1",
-    ///                         },
+    ///                         TagField = "aaa",
+    ///                         TagOperator = "IN",
+    ///                         TagType = "U",
+    ///                         TagValue = "1",
     ///                     },
     ///                 },
     ///             },
-    ///         });
-    ///     }
+    ///         },
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// tsf unit_rule can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Tsf/unitRule:UnitRule unit_rule unit-rl-zbywqeca
+    /// $ pulumi import tencentcloud:Tsf/unitRule:UnitRule unit_rule unit-rl-zbywqeca
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Tsf/unitRule:UnitRule")]
-    public partial class UnitRule : Pulumi.CustomResource
+    public partial class UnitRule : global::Pulumi.CustomResource
     {
         /// <summary>
         /// rule description.
@@ -146,7 +147,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf
         }
     }
 
-    public sealed class UnitRuleArgs : Pulumi.ResourceArgs
+    public sealed class UnitRuleArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// rule description.
@@ -181,9 +182,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf
         public UnitRuleArgs()
         {
         }
+        public static new UnitRuleArgs Empty => new UnitRuleArgs();
     }
 
-    public sealed class UnitRuleState : Pulumi.ResourceArgs
+    public sealed class UnitRuleState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// rule description.
@@ -230,5 +232,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf
         public UnitRuleState()
         {
         }
+        public static new UnitRuleState Empty => new UnitRuleState();
     }
 }

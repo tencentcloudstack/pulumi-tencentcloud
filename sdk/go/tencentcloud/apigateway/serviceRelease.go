@@ -7,8 +7,9 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Use this resource to create API gateway service release.
@@ -18,7 +19,7 @@ import (
 // API gateway service release can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:ApiGateway/serviceRelease:ServiceRelease service service-jjt3fs3s#release#20201015121916d85fb161-eaec-4dda-a7e0-659aa5f401be
+// $ pulumi import tencentcloud:ApiGateway/serviceRelease:ServiceRelease service service-jjt3fs3s#release#20201015121916d85fb161-eaec-4dda-a7e0-659aa5f401be
 // ```
 type ServiceRelease struct {
 	pulumi.CustomResourceState
@@ -49,7 +50,7 @@ func NewServiceRelease(ctx *pulumi.Context,
 	if args.ServiceId == nil {
 		return nil, errors.New("invalid value for required argument 'ServiceId'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource ServiceRelease
 	err := ctx.RegisterResource("tencentcloud:ApiGateway/serviceRelease:ServiceRelease", name, args, &resource, opts...)
 	if err != nil {
@@ -146,7 +147,7 @@ func (i *ServiceRelease) ToServiceReleaseOutputWithContext(ctx context.Context) 
 // ServiceReleaseArrayInput is an input type that accepts ServiceReleaseArray and ServiceReleaseArrayOutput values.
 // You can construct a concrete instance of `ServiceReleaseArrayInput` via:
 //
-//          ServiceReleaseArray{ ServiceReleaseArgs{...} }
+//	ServiceReleaseArray{ ServiceReleaseArgs{...} }
 type ServiceReleaseArrayInput interface {
 	pulumi.Input
 
@@ -171,7 +172,7 @@ func (i ServiceReleaseArray) ToServiceReleaseArrayOutputWithContext(ctx context.
 // ServiceReleaseMapInput is an input type that accepts ServiceReleaseMap and ServiceReleaseMapOutput values.
 // You can construct a concrete instance of `ServiceReleaseMapInput` via:
 //
-//          ServiceReleaseMap{ "key": ServiceReleaseArgs{...} }
+//	ServiceReleaseMap{ "key": ServiceReleaseArgs{...} }
 type ServiceReleaseMapInput interface {
 	pulumi.Input
 

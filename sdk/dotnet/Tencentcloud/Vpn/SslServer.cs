@@ -15,44 +15,45 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpn
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var server = new Tencentcloud.Vpn.SslServer("server", new()
     ///     {
-    ///         var server = new Tencentcloud.Vpn.SslServer("server", new Tencentcloud.Vpn.SslServerArgs
+    ///         Compress = true,
+    ///         EncryptAlgorithm = "AES-128-CBC",
+    ///         IntegrityAlgorithm = "MD5",
+    ///         LocalAddresses = new[]
     ///         {
-    ///             Compress = true,
-    ///             EncryptAlgorithm = "AES-128-CBC",
-    ///             IntegrityAlgorithm = "MD5",
-    ///             LocalAddresses = 
-    ///             {
-    ///                 "10.0.0.0/17",
-    ///             },
-    ///             RemoteAddress = "11.0.0.0/16",
-    ///             SslVpnPort = 1194,
-    ///             SslVpnProtocol = "UDP",
-    ///             SslVpnServerName = "helloworld",
-    ///             VpnGatewayId = "vpngw-335lwf7d",
-    ///         });
-    ///     }
+    ///             "10.0.0.0/17",
+    ///         },
+    ///         RemoteAddress = "11.0.0.0/16",
+    ///         SslVpnPort = 1194,
+    ///         SslVpnProtocol = "UDP",
+    ///         SslVpnServerName = "helloworld",
+    ///         VpnGatewayId = "vpngw-335lwf7d",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// VPN SSL Server can be imported, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Vpn/sslServer:SslServer server vpn-server-id
+    /// $ pulumi import tencentcloud:Vpn/sslServer:SslServer server vpn-server-id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Vpn/sslServer:SslServer")]
-    public partial class SslServer : Pulumi.CustomResource
+    public partial class SslServer : global::Pulumi.CustomResource
     {
         /// <summary>
         /// need compressed. Default value: False.
@@ -153,7 +154,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpn
         }
     }
 
-    public sealed class SslServerArgs : Pulumi.ResourceArgs
+    public sealed class SslServerArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// need compressed. Default value: False.
@@ -218,9 +219,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpn
         public SslServerArgs()
         {
         }
+        public static new SslServerArgs Empty => new SslServerArgs();
     }
 
-    public sealed class SslServerState : Pulumi.ResourceArgs
+    public sealed class SslServerState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// need compressed. Default value: False.
@@ -285,5 +287,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpn
         public SslServerState()
         {
         }
+        public static new SslServerState Empty => new SslServerState();
     }
 }

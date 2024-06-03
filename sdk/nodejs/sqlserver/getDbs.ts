@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,24 +11,25 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const zones = tencentcloud.Availability.getZonesByProduct({
  *     product: "sqlserver",
  * });
  * const vpc = new tencentcloud.vpc.Instance("vpc", {cidrBlock: "10.0.0.0/16"});
  * const subnet = new tencentcloud.subnet.Instance("subnet", {
- *     availabilityZone: zones.then(zones => zones.zones?[4]?.name),
+ *     availabilityZone: zones.then(zones => zones.zones?.[4]?.name),
  *     vpcId: vpc.id,
  *     cidrBlock: "10.0.0.0/16",
  *     isMulticast: false,
  * });
  * const securityGroup = new tencentcloud.security.Group("securityGroup", {description: "desc."});
  * const exampleBasicInstance = new tencentcloud.sqlserver.BasicInstance("exampleBasicInstance", {
- *     availabilityZone: zones.then(zones => zones.zones?[4]?.name),
+ *     availabilityZone: zones.then(zones => zones.zones?.[4]?.name),
  *     chargeType: "POSTPAID_BY_HOUR",
  *     vpcId: vpc.id,
  *     subnetId: subnet.id,
@@ -57,13 +59,11 @@ import * as utilities from "../utilities";
  *     instanceId: exampleDb.instanceId,
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getDbs(args: GetDbsArgs, opts?: pulumi.InvokeOptions): Promise<GetDbsResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Sqlserver/getDbs:getDbs", {
         "instanceId": args.instanceId,
         "resultOutputFile": args.resultOutputFile,
@@ -102,9 +102,63 @@ export interface GetDbsResult {
     readonly instanceId: string;
     readonly resultOutputFile?: string;
 }
-
+/**
+ * Use this data source to query DB resources for the specific SQL Server instance.
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
+ *
+ * const zones = tencentcloud.Availability.getZonesByProduct({
+ *     product: "sqlserver",
+ * });
+ * const vpc = new tencentcloud.vpc.Instance("vpc", {cidrBlock: "10.0.0.0/16"});
+ * const subnet = new tencentcloud.subnet.Instance("subnet", {
+ *     availabilityZone: zones.then(zones => zones.zones?.[4]?.name),
+ *     vpcId: vpc.id,
+ *     cidrBlock: "10.0.0.0/16",
+ *     isMulticast: false,
+ * });
+ * const securityGroup = new tencentcloud.security.Group("securityGroup", {description: "desc."});
+ * const exampleBasicInstance = new tencentcloud.sqlserver.BasicInstance("exampleBasicInstance", {
+ *     availabilityZone: zones.then(zones => zones.zones?.[4]?.name),
+ *     chargeType: "POSTPAID_BY_HOUR",
+ *     vpcId: vpc.id,
+ *     subnetId: subnet.id,
+ *     projectId: 0,
+ *     memory: 4,
+ *     storage: 100,
+ *     cpu: 2,
+ *     machineType: "CLOUD_PREMIUM",
+ *     maintenanceWeekSets: [
+ *         1,
+ *         2,
+ *         3,
+ *     ],
+ *     maintenanceStartTime: "09:00",
+ *     maintenanceTimeSpan: 3,
+ *     securityGroups: [securityGroup.id],
+ *     tags: {
+ *         test: "test",
+ *     },
+ * });
+ * const exampleDb = new tencentcloud.sqlserver.Db("exampleDb", {
+ *     instanceId: exampleBasicInstance.id,
+ *     charset: "Chinese_PRC_BIN",
+ *     remark: "test-remark",
+ * });
+ * const exampleDbs = tencentcloud.Sqlserver.getDbsOutput({
+ *     instanceId: exampleDb.instanceId,
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getDbsOutput(args: GetDbsOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetDbsResult> {
-    return pulumi.output(args).apply(a => getDbs(a, opts))
+    return pulumi.output(args).apply((a: any) => getDbs(a, opts))
 }
 
 /**

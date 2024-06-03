@@ -12,17 +12,18 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const zones = tencentcloud.Availability.getZonesByProduct({
  *     product: "cdb",
  * });
  * const vpc = new tencentcloud.vpc.Instance("vpc", {cidrBlock: "10.0.0.0/16"});
  * const subnet = new tencentcloud.subnet.Instance("subnet", {
- *     availabilityZone: zones.then(zones => zones.zones?[0]?.name),
+ *     availabilityZone: zones.then(zones => zones.zones?.[0]?.name),
  *     vpcId: vpc.id,
  *     cidrBlock: "10.0.0.0/16",
  *     isMulticast: false,
@@ -34,7 +35,7 @@ import * as utilities from "../utilities";
  *     chargeType: "POSTPAID",
  *     rootPassword: "PassWord123",
  *     slaveDeployMode: 0,
- *     availabilityZone: zones.then(zones => zones.zones?[0]?.name),
+ *     availabilityZone: zones.then(zones => zones.zones?.[0]?.name),
  *     slaveSyncMode: 1,
  *     instanceName: "tf-example-mysql",
  *     memSize: 4000,
@@ -65,13 +66,14 @@ import * as utilities from "../utilities";
  *     },
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * mysql read-only database instances can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Mysql/readonlyInstance:ReadonlyInstance default cdb-dnqksd9f
+ * $ pulumi import tencentcloud:Mysql/readonlyInstance:ReadonlyInstance default cdb-dnqksd9f
  * ```
  */
 export class ReadonlyInstance extends pulumi.CustomResource {
@@ -161,13 +163,13 @@ export class ReadonlyInstance extends pulumi.CustomResource {
     /**
      * It has been deprecated from version 1.36.0. Please use `chargeType` instead. Pay type of instance. Valid values: `0`, `1`. `0`: prepaid, `1`: postpaid.
      *
-     * @deprecated It has been deprecated from version 1.36.0. Please use `charge_type` instead.
+     * @deprecated It has been deprecated from version 1.36.0. Please use `chargeType` instead.
      */
     public readonly payType!: pulumi.Output<number | undefined>;
     /**
      * It has been deprecated from version 1.36.0. Please use `prepaidPeriod` instead. Period of instance. NOTES: Only supported prepaid instance.
      *
-     * @deprecated It has been deprecated from version 1.36.0. Please use `prepaid_period` instead.
+     * @deprecated It has been deprecated from version 1.36.0. Please use `prepaidPeriod` instead.
      */
     public readonly period!: pulumi.Output<number | undefined>;
     /**
@@ -365,13 +367,13 @@ export interface ReadonlyInstanceState {
     /**
      * It has been deprecated from version 1.36.0. Please use `chargeType` instead. Pay type of instance. Valid values: `0`, `1`. `0`: prepaid, `1`: postpaid.
      *
-     * @deprecated It has been deprecated from version 1.36.0. Please use `charge_type` instead.
+     * @deprecated It has been deprecated from version 1.36.0. Please use `chargeType` instead.
      */
     payType?: pulumi.Input<number>;
     /**
      * It has been deprecated from version 1.36.0. Please use `prepaidPeriod` instead. Period of instance. NOTES: Only supported prepaid instance.
      *
-     * @deprecated It has been deprecated from version 1.36.0. Please use `prepaid_period` instead.
+     * @deprecated It has been deprecated from version 1.36.0. Please use `prepaidPeriod` instead.
      */
     period?: pulumi.Input<number>;
     /**
@@ -475,13 +477,13 @@ export interface ReadonlyInstanceArgs {
     /**
      * It has been deprecated from version 1.36.0. Please use `chargeType` instead. Pay type of instance. Valid values: `0`, `1`. `0`: prepaid, `1`: postpaid.
      *
-     * @deprecated It has been deprecated from version 1.36.0. Please use `charge_type` instead.
+     * @deprecated It has been deprecated from version 1.36.0. Please use `chargeType` instead.
      */
     payType?: pulumi.Input<number>;
     /**
      * It has been deprecated from version 1.36.0. Please use `prepaidPeriod` instead. Period of instance. NOTES: Only supported prepaid instance.
      *
-     * @deprecated It has been deprecated from version 1.36.0. Please use `prepaid_period` instead.
+     * @deprecated It has been deprecated from version 1.36.0. Please use `prepaidPeriod` instead.
      */
     period?: pulumi.Input<number>;
     /**

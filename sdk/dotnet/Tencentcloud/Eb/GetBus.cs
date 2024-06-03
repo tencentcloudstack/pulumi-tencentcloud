@@ -15,112 +15,108 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Eb
         /// <summary>
         /// Use this data source to query detailed information of eb bus
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var foo = new Tencentcloud.Eb.EventBus("foo", new()
         ///     {
-        ///         var foo = new Tencentcloud.Eb.EventBus("foo", new Tencentcloud.Eb.EventBusArgs
+        ///         EventBusName = "tf-event_bus",
+        ///         Description = "event bus desc",
+        ///         EnableStore = false,
+        ///         SaveDays = 1,
+        ///         Tags = 
         ///         {
-        ///             EventBusName = "tf-event_bus",
-        ///             Description = "event bus desc",
-        ///             EnableStore = false,
-        ///             SaveDays = 1,
-        ///             Tags = 
-        ///             {
-        ///                 { "createdBy", "terraform" },
-        ///             },
-        ///         });
-        ///         var bus = Output.Create(Tencentcloud.Eb.GetBus.InvokeAsync(new Tencentcloud.Eb.GetBusArgs
-        ///         {
-        ///             OrderBy = "AddTime",
-        ///             Order = "DESC",
-        ///             Filters = 
-        ///             {
-        ///                 new Tencentcloud.Eb.Inputs.GetBusFilterArgs
-        ///                 {
-        ///                     Values = 
-        ///                     {
-        ///                         "Custom",
-        ///                     },
-        ///                     Name = "Type",
-        ///                 },
-        ///             },
-        ///         }));
-        ///     }
+        ///             { "createdBy", "terraform" },
+        ///         },
+        ///     });
         /// 
-        /// }
+        ///     var bus = Tencentcloud.Eb.GetBus.Invoke(new()
+        ///     {
+        ///         OrderBy = "AddTime",
+        ///         Order = "DESC",
+        ///         Filters = new[]
+        ///         {
+        ///             new Tencentcloud.Eb.Inputs.GetBusFilterInputArgs
+        ///             {
+        ///                 Values = new[]
+        ///                 {
+        ///                     "Custom",
+        ///                 },
+        ///                 Name = "Type",
+        ///             },
+        ///         },
+        ///     });
+        /// 
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetBusResult> InvokeAsync(GetBusArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetBusResult>("tencentcloud:Eb/getBus:getBus", args ?? new GetBusArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetBusResult>("tencentcloud:Eb/getBus:getBus", args ?? new GetBusArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of eb bus
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var foo = new Tencentcloud.Eb.EventBus("foo", new()
         ///     {
-        ///         var foo = new Tencentcloud.Eb.EventBus("foo", new Tencentcloud.Eb.EventBusArgs
+        ///         EventBusName = "tf-event_bus",
+        ///         Description = "event bus desc",
+        ///         EnableStore = false,
+        ///         SaveDays = 1,
+        ///         Tags = 
         ///         {
-        ///             EventBusName = "tf-event_bus",
-        ///             Description = "event bus desc",
-        ///             EnableStore = false,
-        ///             SaveDays = 1,
-        ///             Tags = 
-        ///             {
-        ///                 { "createdBy", "terraform" },
-        ///             },
-        ///         });
-        ///         var bus = Output.Create(Tencentcloud.Eb.GetBus.InvokeAsync(new Tencentcloud.Eb.GetBusArgs
-        ///         {
-        ///             OrderBy = "AddTime",
-        ///             Order = "DESC",
-        ///             Filters = 
-        ///             {
-        ///                 new Tencentcloud.Eb.Inputs.GetBusFilterArgs
-        ///                 {
-        ///                     Values = 
-        ///                     {
-        ///                         "Custom",
-        ///                     },
-        ///                     Name = "Type",
-        ///                 },
-        ///             },
-        ///         }));
-        ///     }
+        ///             { "createdBy", "terraform" },
+        ///         },
+        ///     });
         /// 
-        /// }
+        ///     var bus = Tencentcloud.Eb.GetBus.Invoke(new()
+        ///     {
+        ///         OrderBy = "AddTime",
+        ///         Order = "DESC",
+        ///         Filters = new[]
+        ///         {
+        ///             new Tencentcloud.Eb.Inputs.GetBusFilterInputArgs
+        ///             {
+        ///                 Values = new[]
+        ///                 {
+        ///                     "Custom",
+        ///                 },
+        ///                 Name = "Type",
+        ///             },
+        ///         },
+        ///     });
+        /// 
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetBusResult> Invoke(GetBusInvokeArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetBusResult>("tencentcloud:Eb/getBus:getBus", args ?? new GetBusInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetBusResult>("tencentcloud:Eb/getBus:getBus", args ?? new GetBusInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetBusArgs : Pulumi.InvokeArgs
+    public sealed class GetBusArgs : global::Pulumi.InvokeArgs
     {
         [Input("filters")]
         private List<Inputs.GetBusFilterArgs>? _filters;
@@ -155,9 +151,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Eb
         public GetBusArgs()
         {
         }
+        public static new GetBusArgs Empty => new GetBusArgs();
     }
 
-    public sealed class GetBusInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetBusInvokeArgs : global::Pulumi.InvokeArgs
     {
         [Input("filters")]
         private InputList<Inputs.GetBusFilterInputArgs>? _filters;
@@ -192,6 +189,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Eb
         public GetBusInvokeArgs()
         {
         }
+        public static new GetBusInvokeArgs Empty => new GetBusInvokeArgs();
     }
 
 

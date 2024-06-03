@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,26 +11,25 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const foo = pulumi.output(tencentcloud.Cdn.getDomains({
+ * const foo = tencentcloud.Cdn.getDomains({
  *     domain: "xxxx.com",
  *     fullUrlCache: false,
  *     httpsSwitch: "on",
  *     originPullProtocol: "follow",
  *     serviceType: "web",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getDomains(args?: GetDomainsArgs, opts?: pulumi.InvokeOptions): Promise<GetDomainsResult> {
     args = args || {};
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Cdn/getDomains:getDomains", {
         "domain": args.domain,
         "fullUrlCache": args.fullUrlCache,
@@ -104,9 +104,28 @@ export interface GetDomainsResult {
      */
     readonly serviceType?: string;
 }
-
+/**
+ * Use this data source to query the detail information of CDN domain.
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const foo = tencentcloud.Cdn.getDomains({
+ *     domain: "xxxx.com",
+ *     fullUrlCache: false,
+ *     httpsSwitch: "on",
+ *     originPullProtocol: "follow",
+ *     serviceType: "web",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getDomainsOutput(args?: GetDomainsOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetDomainsResult> {
-    return pulumi.output(args).apply(a => getDomains(a, opts))
+    return pulumi.output(args).apply((a: any) => getDomains(a, opts))
 }
 
 /**

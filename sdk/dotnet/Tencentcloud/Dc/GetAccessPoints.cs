@@ -15,64 +15,58 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dc
         /// <summary>
         /// Use this data source to query detailed information of dc access_points
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var accessPoints = Tencentcloud.Dc.GetAccessPoints.Invoke(new()
         ///     {
-        ///         var accessPoints = Output.Create(Tencentcloud.Dc.GetAccessPoints.InvokeAsync(new Tencentcloud.Dc.GetAccessPointsArgs
-        ///         {
-        ///             RegionId = "ap-guangzhou",
-        ///         }));
-        ///     }
+        ///         RegionId = "ap-guangzhou",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetAccessPointsResult> InvokeAsync(GetAccessPointsArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetAccessPointsResult>("tencentcloud:Dc/getAccessPoints:getAccessPoints", args ?? new GetAccessPointsArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetAccessPointsResult>("tencentcloud:Dc/getAccessPoints:getAccessPoints", args ?? new GetAccessPointsArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of dc access_points
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var accessPoints = Tencentcloud.Dc.GetAccessPoints.Invoke(new()
         ///     {
-        ///         var accessPoints = Output.Create(Tencentcloud.Dc.GetAccessPoints.InvokeAsync(new Tencentcloud.Dc.GetAccessPointsArgs
-        ///         {
-        ///             RegionId = "ap-guangzhou",
-        ///         }));
-        ///     }
+        ///         RegionId = "ap-guangzhou",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetAccessPointsResult> Invoke(GetAccessPointsInvokeArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetAccessPointsResult>("tencentcloud:Dc/getAccessPoints:getAccessPoints", args ?? new GetAccessPointsInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetAccessPointsResult>("tencentcloud:Dc/getAccessPoints:getAccessPoints", args ?? new GetAccessPointsInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetAccessPointsArgs : Pulumi.InvokeArgs
+    public sealed class GetAccessPointsArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Access point region, which can be queried through `DescribeRegions`.You can call `DescribeRegions` to get the region ID.
@@ -89,9 +83,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dc
         public GetAccessPointsArgs()
         {
         }
+        public static new GetAccessPointsArgs Empty => new GetAccessPointsArgs();
     }
 
-    public sealed class GetAccessPointsInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetAccessPointsInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Access point region, which can be queried through `DescribeRegions`.You can call `DescribeRegions` to get the region ID.
@@ -108,6 +103,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dc
         public GetAccessPointsInvokeArgs()
         {
         }
+        public static new GetAccessPointsInvokeArgs Empty => new GetAccessPointsInvokeArgs();
     }
 
 

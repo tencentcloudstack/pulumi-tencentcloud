@@ -8,38 +8,43 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Use this data source to query detailed information of rum logUrlStatistics
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Rum"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Rum"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Rum"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Rum.GetLogUrlStatistics(ctx, &rum.GetLogUrlStatisticsArgs{
-// 			EndTime:   1625454840,
-// 			ProjectId: 1,
-// 			StartTime: 1625444040,
-// 			Type:      "analysis",
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Rum.GetLogUrlStatistics(ctx, &rum.GetLogUrlStatisticsArgs{
+//				EndTime:   1625454840,
+//				ProjectId: 1,
+//				StartTime: 1625444040,
+//				Type:      "analysis",
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 func GetLogUrlStatistics(ctx *pulumi.Context, args *GetLogUrlStatisticsArgs, opts ...pulumi.InvokeOption) (*GetLogUrlStatisticsResult, error) {
-	opts = pkgInvokeDefaultOpts(opts)
+	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetLogUrlStatisticsResult
 	err := ctx.Invoke("tencentcloud:Rum/getLogUrlStatistics:getLogUrlStatistics", args, &rv, opts...)
 	if err != nil {

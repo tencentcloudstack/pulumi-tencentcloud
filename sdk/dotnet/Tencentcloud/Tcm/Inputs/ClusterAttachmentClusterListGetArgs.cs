@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcm.Inputs
 {
 
-    public sealed class ClusterAttachmentClusterListGetArgs : Pulumi.ResourceArgs
+    public sealed class ClusterAttachmentClusterListGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// TKE Cluster id.
@@ -52,5 +52,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcm.Inputs
         public ClusterAttachmentClusterListGetArgs()
         {
         }
+        public static new ClusterAttachmentClusterListGetArgs Empty => new ClusterAttachmentClusterListGetArgs();
     }
 }

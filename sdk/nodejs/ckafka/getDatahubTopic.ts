@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,20 +11,19 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const datahubTopic = pulumi.output(tencentcloud.Ckafka.getDatahubTopic());
+ * const datahubTopic = tencentcloud.Ckafka.getDatahubTopic({});
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getDatahubTopic(args?: GetDatahubTopicArgs, opts?: pulumi.InvokeOptions): Promise<GetDatahubTopicResult> {
     args = args || {};
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Ckafka/getDatahubTopic:getDatahubTopic", {
         "limit": args.limit,
         "offset": args.offset,
@@ -71,9 +71,22 @@ export interface GetDatahubTopicResult {
      */
     readonly topicLists: outputs.Ckafka.GetDatahubTopicTopicList[];
 }
-
+/**
+ * Use this data source to query detailed information of ckafka datahubTopic
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const datahubTopic = tencentcloud.Ckafka.getDatahubTopic({});
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getDatahubTopicOutput(args?: GetDatahubTopicOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetDatahubTopicResult> {
-    return pulumi.output(args).apply(a => getDatahubTopic(a, opts))
+    return pulumi.output(args).apply((a: any) => getDatahubTopic(a, opts))
 }
 
 /**

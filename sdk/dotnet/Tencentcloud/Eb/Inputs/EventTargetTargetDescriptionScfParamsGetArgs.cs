@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Eb.Inputs
 {
 
-    public sealed class EventTargetTargetDescriptionScfParamsGetArgs : Pulumi.ResourceArgs
+    public sealed class EventTargetTargetDescriptionScfParamsGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Maximum number of events for batch delivery.
@@ -34,5 +34,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Eb.Inputs
         public EventTargetTargetDescriptionScfParamsGetArgs()
         {
         }
+        public static new EventTargetTargetDescriptionScfParamsGetArgs Empty => new EventTargetTargetDescriptionScfParamsGetArgs();
     }
 }

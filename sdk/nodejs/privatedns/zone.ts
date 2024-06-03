@@ -2,18 +2,21 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
  * Provide a resource to create a Private Dns Zone.
  *
  * ## Example Usage
+ *
  * ### Create a basic Private Dns Zone
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const vpc = new tencentcloud.vpc.Instance("vpc", {cidrBlock: "10.0.0.0/16"});
  * const example = new tencentcloud.privatedns.Zone("example", {
@@ -30,11 +33,14 @@ import * as utilities from "../utilities";
  *     },
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
+ *
  * ### Create a Private Dns Zone domain and bind associated accounts'VPC
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const example = new tencentcloud.privatedns.Zone("example", {
  *     domain: "domain.com",
@@ -56,13 +62,14 @@ import * as utilities from "../utilities";
  *     },
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * Private Dns Zone can be imported, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:PrivateDns/zone:Zone foo zone_id
+ * $ pulumi import tencentcloud:PrivateDns/zone:Zone example zone-6xg5xgky
  * ```
  */
 export class Zone extends pulumi.CustomResource {

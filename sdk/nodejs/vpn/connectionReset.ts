@@ -9,15 +9,17 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const vpnConnectionReset = new tencentcloud.Vpn.ConnectionReset("vpn_connection_reset", {
+ * const vpnConnectionReset = new tencentcloud.vpn.ConnectionReset("vpnConnectionReset", {
  *     vpnConnectionId: "vpnx-kme2tx8m",
  *     vpnGatewayId: "vpngw-gt8bianl",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export class ConnectionReset extends pulumi.CustomResource {
     /**

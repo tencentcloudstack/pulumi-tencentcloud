@@ -7,45 +7,51 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a css playAuthKeyConfig
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Css"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Css"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Css.NewPlayAuthKeyConfig(ctx, "playAuthKeyConfig", &Css.PlayAuthKeyConfigArgs{
-// 			AuthBackKey: pulumi.String("testbackkey"),
-// 			AuthDelta:   pulumi.Int(3600),
-// 			AuthKey:     pulumi.String("testauthkey"),
-// 			DomainName:  pulumi.String("your_play_domain_name"),
-// 			Enable:      pulumi.Int(1),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Css.NewPlayAuthKeyConfig(ctx, "playAuthKeyConfig", &Css.PlayAuthKeyConfigArgs{
+//				AuthBackKey: pulumi.String("testbackkey"),
+//				AuthDelta:   pulumi.Int(3600),
+//				AuthKey:     pulumi.String("testauthkey"),
+//				DomainName:  pulumi.String("your_play_domain_name"),
+//				Enable:      pulumi.Int(1),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // css play_auth_key_config can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Css/playAuthKeyConfig:PlayAuthKeyConfig play_auth_key_config play_auth_key_config_id
+// $ pulumi import tencentcloud:Css/playAuthKeyConfig:PlayAuthKeyConfig play_auth_key_config play_auth_key_config_id
 // ```
 type PlayAuthKeyConfig struct {
 	pulumi.CustomResourceState
@@ -72,7 +78,7 @@ func NewPlayAuthKeyConfig(ctx *pulumi.Context,
 	if args.DomainName == nil {
 		return nil, errors.New("invalid value for required argument 'DomainName'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource PlayAuthKeyConfig
 	err := ctx.RegisterResource("tencentcloud:Css/playAuthKeyConfig:PlayAuthKeyConfig", name, args, &resource, opts...)
 	if err != nil {
@@ -177,7 +183,7 @@ func (i *PlayAuthKeyConfig) ToPlayAuthKeyConfigOutputWithContext(ctx context.Con
 // PlayAuthKeyConfigArrayInput is an input type that accepts PlayAuthKeyConfigArray and PlayAuthKeyConfigArrayOutput values.
 // You can construct a concrete instance of `PlayAuthKeyConfigArrayInput` via:
 //
-//          PlayAuthKeyConfigArray{ PlayAuthKeyConfigArgs{...} }
+//	PlayAuthKeyConfigArray{ PlayAuthKeyConfigArgs{...} }
 type PlayAuthKeyConfigArrayInput interface {
 	pulumi.Input
 
@@ -202,7 +208,7 @@ func (i PlayAuthKeyConfigArray) ToPlayAuthKeyConfigArrayOutputWithContext(ctx co
 // PlayAuthKeyConfigMapInput is an input type that accepts PlayAuthKeyConfigMap and PlayAuthKeyConfigMapOutput values.
 // You can construct a concrete instance of `PlayAuthKeyConfigMapInput` via:
 //
-//          PlayAuthKeyConfigMap{ "key": PlayAuthKeyConfigArgs{...} }
+//	PlayAuthKeyConfigMap{ "key": PlayAuthKeyConfigArgs{...} }
 type PlayAuthKeyConfigMapInput interface {
 	pulumi.Input
 

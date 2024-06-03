@@ -9,22 +9,24 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const wan = new tencentcloud.Cynosdb.Wan("wan", {
+ * const wan = new tencentcloud.cynosdb.Wan("wan", {
  *     clusterId: "cynosdbmysql-bws8h88b",
  *     instanceGrpId: "cynosdbmysql-grp-lxav0p9z",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * cynosdb wan can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Cynosdb/wan:Wan wan cynosdbmysql-bws8h88b#cynosdbmysql-grp-lxav0p9z
+ * $ pulumi import tencentcloud:Cynosdb/wan:Wan wan cynosdbmysql-bws8h88b#cynosdbmysql-grp-lxav0p9z
  * ```
  */
 export class Wan extends pulumi.CustomResource {

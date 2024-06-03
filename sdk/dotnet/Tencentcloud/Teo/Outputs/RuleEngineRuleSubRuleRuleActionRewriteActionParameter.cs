@@ -15,15 +15,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Outputs
     public sealed class RuleEngineRuleSubRuleRuleActionRewriteActionParameter
     {
         /// <summary>
-        /// Action to take on the HEADER. Valid values: `add`, `del`, `set`.
+        /// Feature parameter name. You can call the [DescribeRulesSetting](https://tcloud4api.woa.com/document/product/1657/79433?!preview&amp;!document=1) API to view the requirements for entering the parameter name, which has three values:
+        /// - add: Add the HTTP header.
+        /// - set: Rewrite the HTTP header.
+        /// - del: Delete the HTTP header.
         /// </summary>
         public readonly string Action;
         /// <summary>
-        /// Target HEADER name.
+        /// Parameter name.
         /// </summary>
         public readonly string Name;
         /// <summary>
-        /// Parameter Value.
+        /// Parameter value.
         /// </summary>
         public readonly ImmutableArray<string> Values;
 

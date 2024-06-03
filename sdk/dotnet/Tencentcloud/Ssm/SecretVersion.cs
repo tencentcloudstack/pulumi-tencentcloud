@@ -16,68 +16,73 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssm
     /// &gt; **Note:** A maximum of 10 versions can be supported under one credential. Only new versions can be added to credentials in the enabled and disabled states.
     /// 
     /// ## Example Usage
+    /// 
     /// ### Text type credential information plaintext
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var example = new Tencentcloud.Ssm.Secret("example", new()
     ///     {
-    ///         var example = new Tencentcloud.Ssm.Secret("example", new Tencentcloud.Ssm.SecretArgs
+    ///         SecretName = "tf-example",
+    ///         Description = "desc.",
+    ///         RecoveryWindowInDays = 0,
+    ///         IsEnabled = true,
+    ///         Tags = 
     ///         {
-    ///             SecretName = "tf-example",
-    ///             Description = "desc.",
-    ///             RecoveryWindowInDays = 0,
-    ///             IsEnabled = true,
-    ///             Tags = 
-    ///             {
-    ///                 { "createdBy", "terraform" },
-    ///             },
-    ///         });
-    ///         var v1 = new Tencentcloud.Ssm.SecretVersion("v1", new Tencentcloud.Ssm.SecretVersionArgs
-    ///         {
-    ///             SecretName = example.SecretName,
-    ///             VersionId = "v1",
-    ///             SecretString = "this is secret string",
-    ///         });
-    ///     }
+    ///             { "createdBy", "terraform" },
+    ///         },
+    ///     });
     /// 
-    /// }
+    ///     var v1 = new Tencentcloud.Ssm.SecretVersion("v1", new()
+    ///     {
+    ///         SecretName = example.SecretName,
+    ///         VersionId = "v1",
+    ///         SecretString = "this is secret string",
+    ///     });
+    /// 
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
+    /// 
     /// ### Binary credential information, encoded using base64
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var v2 = new Tencentcloud.Ssm.SecretVersion("v2", new()
     ///     {
-    ///         var v2 = new Tencentcloud.Ssm.SecretVersion("v2", new Tencentcloud.Ssm.SecretVersionArgs
-    ///         {
-    ///             SecretName = tencentcloud_ssm_secret.Example.Secret_name,
-    ///             VersionId = "v2",
-    ///             SecretBinary = "MTIzMTIzMTIzMTIzMTIzQQ==",
-    ///         });
-    ///     }
+    ///         SecretName = tencentcloud_ssm_secret.Example.Secret_name,
+    ///         VersionId = "v2",
+    ///         SecretBinary = "MTIzMTIzMTIzMTIzMTIzQQ==",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// SSM secret version can be imported using the secretName#versionId, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Ssm/secretVersion:SecretVersion v1 test#v1
+    /// $ pulumi import tencentcloud:Ssm/secretVersion:SecretVersion v1 test#v1
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Ssm/secretVersion:SecretVersion")]
-    public partial class SecretVersion : Pulumi.CustomResource
+    public partial class SecretVersion : global::Pulumi.CustomResource
     {
         /// <summary>
         /// The base64-encoded binary secret. secret_binary and secret_string must be set only one, and the maximum support is 4096 bytes. When secret status is `Disabled`, this field will not update anymore.
@@ -148,7 +153,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssm
         }
     }
 
-    public sealed class SecretVersionArgs : Pulumi.ResourceArgs
+    public sealed class SecretVersionArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// The base64-encoded binary secret. secret_binary and secret_string must be set only one, and the maximum support is 4096 bytes. When secret status is `Disabled`, this field will not update anymore.
@@ -177,9 +182,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssm
         public SecretVersionArgs()
         {
         }
+        public static new SecretVersionArgs Empty => new SecretVersionArgs();
     }
 
-    public sealed class SecretVersionState : Pulumi.ResourceArgs
+    public sealed class SecretVersionState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// The base64-encoded binary secret. secret_binary and secret_string must be set only one, and the maximum support is 4096 bytes. When secret status is `Disabled`, this field will not update anymore.
@@ -208,5 +214,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssm
         public SecretVersionState()
         {
         }
+        public static new SecretVersionState Empty => new SecretVersionState();
     }
 }

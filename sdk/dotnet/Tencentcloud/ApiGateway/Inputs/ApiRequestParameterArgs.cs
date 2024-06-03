@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway.Inputs
 {
 
-    public sealed class ApiRequestParameterArgs : Pulumi.ResourceArgs
+    public sealed class ApiRequestParameterArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Parameter default value.
@@ -52,5 +52,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway.Inputs
         public ApiRequestParameterArgs()
         {
         }
+        public static new ApiRequestParameterArgs Empty => new ApiRequestParameterArgs();
     }
 }

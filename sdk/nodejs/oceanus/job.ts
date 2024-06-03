@@ -9,11 +9,12 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = new tencentcloud.Oceanus.Job("example", {
+ * const example = new tencentcloud.oceanus.Job("example", {
  *     clusterId: "cluster-1kcd524h",
  *     clusterType: 2,
  *     cuMem: 4,
@@ -24,6 +25,7 @@ import * as utilities from "../utilities";
  *     workSpaceId: "space-2idq8wbr",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export class Job extends pulumi.CustomResource {
     /**

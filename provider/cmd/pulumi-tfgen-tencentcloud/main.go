@@ -16,14 +16,15 @@ package main
 
 import (
 	"encoding/json"
-	"github.com/pulumi/pulumi-terraform-bridge/v3/pkg/tfgen"
-	"github.com/pulumi/pulumi/pkg/v3/codegen/schema"
-	tencentcloud "github.com/tencentcloudstack/pulumi-tencentcloud/provider"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/provider/pkg/version"
 	"io/ioutil"
 	"log"
 	"regexp"
 	"strings"
+
+	"github.com/pulumi/pulumi-terraform-bridge/v3/pkg/tfgen"
+	"github.com/pulumi/pulumi/pkg/v3/codegen/schema"
+	tencentcloud "github.com/tencentcloudstack/pulumi-tencentcloud/provider"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/provider/pkg/version"
 )
 
 func main() {
@@ -33,7 +34,7 @@ func main() {
 
 // Hacking import statement replacement '@pulumi/tencentcloud' -> '@tencentcloud_iac/pulumi'
 // This function takes NO effect to example of `sdk/nodejs`
-func temporaryReplaceCodeExampleImportStatement()  {
+func temporaryReplaceCodeExampleImportStatement() {
 	schemaPath := "./provider/cmd/pulumi-resource-tencentcloud/schema.json"
 	schemaContents, err := ioutil.ReadFile(schemaPath)
 	if err != nil {

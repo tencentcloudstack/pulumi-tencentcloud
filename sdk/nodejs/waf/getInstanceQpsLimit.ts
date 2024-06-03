@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,21 +11,20 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const example = pulumi.output(tencentcloud.Waf.getInstanceQpsLimit({
+ * const example = tencentcloud.Waf.getInstanceQpsLimit({
  *     instanceId: "waf_2kxtlbky00b3b4qz",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getInstanceQpsLimit(args: GetInstanceQpsLimitArgs, opts?: pulumi.InvokeOptions): Promise<GetInstanceQpsLimitResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Waf/getInstanceQpsLimit:getInstanceQpsLimit", {
         "instanceId": args.instanceId,
         "resultOutputFile": args.resultOutputFile,
@@ -66,9 +66,24 @@ export interface GetInstanceQpsLimitResult {
     readonly resultOutputFile?: string;
     readonly type?: string;
 }
-
+/**
+ * Use this data source to query detailed information of waf instanceQpsLimit
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const example = tencentcloud.Waf.getInstanceQpsLimit({
+ *     instanceId: "waf_2kxtlbky00b3b4qz",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getInstanceQpsLimitOutput(args: GetInstanceQpsLimitOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetInstanceQpsLimitResult> {
-    return pulumi.output(args).apply(a => getInstanceQpsLimit(a, opts))
+    return pulumi.output(args).apply((a: any) => getInstanceQpsLimit(a, opts))
 }
 
 /**

@@ -8,41 +8,12 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Use this data source to query detailed information of VPN gateways.
-//
-// ## Example Usage
-//
-// ```go
-// package main
-//
-// import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Vpn"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpn"
-// )
-//
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Vpn.GetGateways(ctx, &vpn.GetGatewaysArgs{
-// 			DestinationCidrBlock: "vpngw-8ccsnclt",
-// 			InstanceId:           "ap-guangzhou-3",
-// 			InstanceType:         "1.1.1.1",
-// 			Tags: map[string]interface{}{
-// 				"test": "tf",
-// 			},
-// 			VpnGatewayId: "main",
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
-// ```
 func GetGatewayRoutes(ctx *pulumi.Context, args *GetGatewayRoutesArgs, opts ...pulumi.InvokeOption) (*GetGatewayRoutesResult, error) {
-	opts = pkgInvokeDefaultOpts(opts)
+	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetGatewayRoutesResult
 	err := ctx.Invoke("tencentcloud:Vpn/getGatewayRoutes:getGatewayRoutes", args, &rv, opts...)
 	if err != nil {

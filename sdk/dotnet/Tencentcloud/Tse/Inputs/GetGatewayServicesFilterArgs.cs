@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tse.Inputs
 {
 
-    public sealed class GetGatewayServicesFilterInputArgs : Pulumi.ResourceArgs
+    public sealed class GetGatewayServicesFilterInputArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// filter name.
@@ -28,5 +28,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tse.Inputs
         public GetGatewayServicesFilterInputArgs()
         {
         }
+        public static new GetGatewayServicesFilterInputArgs Empty => new GetGatewayServicesFilterInputArgs();
     }
 }

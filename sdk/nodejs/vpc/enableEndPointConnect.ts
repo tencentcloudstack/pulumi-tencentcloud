@@ -9,16 +9,18 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const enableEndPointConnect = new tencentcloud.Vpc.EnableEndPointConnect("enable_end_point_connect", {
+ * const enableEndPointConnect = new tencentcloud.vpc.EnableEndPointConnect("enableEndPointConnect", {
  *     acceptFlag: true,
  *     endPointIds: ["vpce-6q0ftmke"],
  *     endPointServiceId: "vpcsvc-98jddhcz",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export class EnableEndPointConnect extends pulumi.CustomResource {
     /**

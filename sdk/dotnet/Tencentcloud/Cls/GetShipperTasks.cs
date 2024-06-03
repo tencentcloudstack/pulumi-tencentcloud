@@ -15,68 +15,62 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls
         /// <summary>
         /// Use this data source to query detailed information of cls shipper_tasks
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var shipperTasks = Tencentcloud.Cls.GetShipperTasks.Invoke(new()
         ///     {
-        ///         var shipperTasks = Output.Create(Tencentcloud.Cls.GetShipperTasks.InvokeAsync(new Tencentcloud.Cls.GetShipperTasksArgs
-        ///         {
-        ///             EndTime = 160749910800,
-        ///             ShipperId = "dbde3c9b-ea16-4032-bc2a-d8fa65567a8e",
-        ///             StartTime = 160749910700,
-        ///         }));
-        ///     }
+        ///         EndTime = 160749910800,
+        ///         ShipperId = "dbde3c9b-ea16-4032-bc2a-d8fa65567a8e",
+        ///         StartTime = 160749910700,
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetShipperTasksResult> InvokeAsync(GetShipperTasksArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetShipperTasksResult>("tencentcloud:Cls/getShipperTasks:getShipperTasks", args ?? new GetShipperTasksArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetShipperTasksResult>("tencentcloud:Cls/getShipperTasks:getShipperTasks", args ?? new GetShipperTasksArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of cls shipper_tasks
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var shipperTasks = Tencentcloud.Cls.GetShipperTasks.Invoke(new()
         ///     {
-        ///         var shipperTasks = Output.Create(Tencentcloud.Cls.GetShipperTasks.InvokeAsync(new Tencentcloud.Cls.GetShipperTasksArgs
-        ///         {
-        ///             EndTime = 160749910800,
-        ///             ShipperId = "dbde3c9b-ea16-4032-bc2a-d8fa65567a8e",
-        ///             StartTime = 160749910700,
-        ///         }));
-        ///     }
+        ///         EndTime = 160749910800,
+        ///         ShipperId = "dbde3c9b-ea16-4032-bc2a-d8fa65567a8e",
+        ///         StartTime = 160749910700,
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetShipperTasksResult> Invoke(GetShipperTasksInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetShipperTasksResult>("tencentcloud:Cls/getShipperTasks:getShipperTasks", args ?? new GetShipperTasksInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetShipperTasksResult>("tencentcloud:Cls/getShipperTasks:getShipperTasks", args ?? new GetShipperTasksInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetShipperTasksArgs : Pulumi.InvokeArgs
+    public sealed class GetShipperTasksArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// end time(ms).
@@ -105,9 +99,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls
         public GetShipperTasksArgs()
         {
         }
+        public static new GetShipperTasksArgs Empty => new GetShipperTasksArgs();
     }
 
-    public sealed class GetShipperTasksInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetShipperTasksInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// end time(ms).
@@ -136,6 +131,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls
         public GetShipperTasksInvokeArgs()
         {
         }
+        public static new GetShipperTasksInvokeArgs Empty => new GetShipperTasksInvokeArgs();
     }
 
 

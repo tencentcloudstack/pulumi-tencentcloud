@@ -15,68 +15,62 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dcdb
         /// <summary>
         /// Use this data source to query detailed information of dcdb renewal_price
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var renewalPrice = Tencentcloud.Dcdb.GetRenewalPrice.Invoke(new()
         ///     {
-        ///         var renewalPrice = Output.Create(Tencentcloud.Dcdb.GetRenewalPrice.InvokeAsync(new Tencentcloud.Dcdb.GetRenewalPriceArgs
-        ///         {
-        ///             InstanceId = local.Dcdb_id,
-        ///             Period = 1,
-        ///             AmountUnit = "pent",
-        ///         }));
-        ///     }
+        ///         InstanceId = local.Dcdb_id,
+        ///         Period = 1,
+        ///         AmountUnit = "pent",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetRenewalPriceResult> InvokeAsync(GetRenewalPriceArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetRenewalPriceResult>("tencentcloud:Dcdb/getRenewalPrice:getRenewalPrice", args ?? new GetRenewalPriceArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetRenewalPriceResult>("tencentcloud:Dcdb/getRenewalPrice:getRenewalPrice", args ?? new GetRenewalPriceArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of dcdb renewal_price
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var renewalPrice = Tencentcloud.Dcdb.GetRenewalPrice.Invoke(new()
         ///     {
-        ///         var renewalPrice = Output.Create(Tencentcloud.Dcdb.GetRenewalPrice.InvokeAsync(new Tencentcloud.Dcdb.GetRenewalPriceArgs
-        ///         {
-        ///             InstanceId = local.Dcdb_id,
-        ///             Period = 1,
-        ///             AmountUnit = "pent",
-        ///         }));
-        ///     }
+        ///         InstanceId = local.Dcdb_id,
+        ///         Period = 1,
+        ///         AmountUnit = "pent",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetRenewalPriceResult> Invoke(GetRenewalPriceInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetRenewalPriceResult>("tencentcloud:Dcdb/getRenewalPrice:getRenewalPrice", args ?? new GetRenewalPriceInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetRenewalPriceResult>("tencentcloud:Dcdb/getRenewalPrice:getRenewalPrice", args ?? new GetRenewalPriceInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetRenewalPriceArgs : Pulumi.InvokeArgs
+    public sealed class GetRenewalPriceArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Price unit. Valid values: `pent` (cent), `microPent` (microcent).
@@ -105,9 +99,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dcdb
         public GetRenewalPriceArgs()
         {
         }
+        public static new GetRenewalPriceArgs Empty => new GetRenewalPriceArgs();
     }
 
-    public sealed class GetRenewalPriceInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetRenewalPriceInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Price unit. Valid values: `pent` (cent), `microPent` (microcent).
@@ -136,6 +131,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dcdb
         public GetRenewalPriceInvokeArgs()
         {
         }
+        public static new GetRenewalPriceInvokeArgs Empty => new GetRenewalPriceInvokeArgs();
     }
 
 

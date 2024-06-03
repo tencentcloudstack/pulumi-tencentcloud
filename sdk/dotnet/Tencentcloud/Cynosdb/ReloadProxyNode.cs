@@ -15,34 +15,35 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var reloadProxyNode = new Tencentcloud.Cynosdb.ReloadProxyNode("reloadProxyNode", new()
     ///     {
-    ///         var reloadProxyNode = new Tencentcloud.Cynosdb.ReloadProxyNode("reloadProxyNode", new Tencentcloud.Cynosdb.ReloadProxyNodeArgs
-    ///         {
-    ///             ClusterId = "cynosdbmysql-cgd2gpwr",
-    ///             ProxyGroupId = "cynosdbmysql-proxy-8lqtl8pk",
-    ///         });
-    ///     }
+    ///         ClusterId = "cynosdbmysql-cgd2gpwr",
+    ///         ProxyGroupId = "cynosdbmysql-proxy-8lqtl8pk",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// cynosdb reload_proxy_node can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Cynosdb/reloadProxyNode:ReloadProxyNode reload_proxy_node reload_proxy_node_id
+    /// $ pulumi import tencentcloud:Cynosdb/reloadProxyNode:ReloadProxyNode reload_proxy_node reload_proxy_node_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Cynosdb/reloadProxyNode:ReloadProxyNode")]
-    public partial class ReloadProxyNode : Pulumi.CustomResource
+    public partial class ReloadProxyNode : global::Pulumi.CustomResource
     {
         /// <summary>
         /// cluster id.
@@ -101,7 +102,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
         }
     }
 
-    public sealed class ReloadProxyNodeArgs : Pulumi.ResourceArgs
+    public sealed class ReloadProxyNodeArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// cluster id.
@@ -118,9 +119,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
         public ReloadProxyNodeArgs()
         {
         }
+        public static new ReloadProxyNodeArgs Empty => new ReloadProxyNodeArgs();
     }
 
-    public sealed class ReloadProxyNodeState : Pulumi.ResourceArgs
+    public sealed class ReloadProxyNodeState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// cluster id.
@@ -137,5 +139,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
         public ReloadProxyNodeState()
         {
         }
+        public static new ReloadProxyNodeState Empty => new ReloadProxyNodeState();
     }
 }

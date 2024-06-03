@@ -15,80 +15,74 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf
         /// <summary>
         /// Use this data source to query detailed information of tsf config_summary
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var configSummary = Tencentcloud.Tsf.GetConfigSummary.Invoke(new()
         ///     {
-        ///         var configSummary = Output.Create(Tencentcloud.Tsf.GetConfigSummary.InvokeAsync(new Tencentcloud.Tsf.GetConfigSummaryArgs
+        ///         ApplicationId = "application-a24x29xv",
+        ///         ConfigIdLists = new[]
         ///         {
-        ///             ApplicationId = "application-a24x29xv",
-        ///             ConfigIdLists = 
-        ///             {
-        ///                 "dcfg-y54wzk3a",
-        ///             },
-        ///             DisableProgramAuthCheck = true,
-        ///             OrderBy = "last_update_time",
-        ///             OrderType = 0,
-        ///             SearchWord = "terraform",
-        ///         }));
-        ///     }
+        ///             "dcfg-y54wzk3a",
+        ///         },
+        ///         DisableProgramAuthCheck = true,
+        ///         OrderBy = "last_update_time",
+        ///         OrderType = 0,
+        ///         SearchWord = "terraform",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetConfigSummaryResult> InvokeAsync(GetConfigSummaryArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetConfigSummaryResult>("tencentcloud:Tsf/getConfigSummary:getConfigSummary", args ?? new GetConfigSummaryArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetConfigSummaryResult>("tencentcloud:Tsf/getConfigSummary:getConfigSummary", args ?? new GetConfigSummaryArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of tsf config_summary
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var configSummary = Tencentcloud.Tsf.GetConfigSummary.Invoke(new()
         ///     {
-        ///         var configSummary = Output.Create(Tencentcloud.Tsf.GetConfigSummary.InvokeAsync(new Tencentcloud.Tsf.GetConfigSummaryArgs
+        ///         ApplicationId = "application-a24x29xv",
+        ///         ConfigIdLists = new[]
         ///         {
-        ///             ApplicationId = "application-a24x29xv",
-        ///             ConfigIdLists = 
-        ///             {
-        ///                 "dcfg-y54wzk3a",
-        ///             },
-        ///             DisableProgramAuthCheck = true,
-        ///             OrderBy = "last_update_time",
-        ///             OrderType = 0,
-        ///             SearchWord = "terraform",
-        ///         }));
-        ///     }
+        ///             "dcfg-y54wzk3a",
+        ///         },
+        ///         DisableProgramAuthCheck = true,
+        ///         OrderBy = "last_update_time",
+        ///         OrderType = 0,
+        ///         SearchWord = "terraform",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetConfigSummaryResult> Invoke(GetConfigSummaryInvokeArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetConfigSummaryResult>("tencentcloud:Tsf/getConfigSummary:getConfigSummary", args ?? new GetConfigSummaryInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetConfigSummaryResult>("tencentcloud:Tsf/getConfigSummary:getConfigSummary", args ?? new GetConfigSummaryInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetConfigSummaryArgs : Pulumi.InvokeArgs
+    public sealed class GetConfigSummaryArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Application ID. If not passed, the query will be for all.
@@ -153,9 +147,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf
         public GetConfigSummaryArgs()
         {
         }
+        public static new GetConfigSummaryArgs Empty => new GetConfigSummaryArgs();
     }
 
-    public sealed class GetConfigSummaryInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetConfigSummaryInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Application ID. If not passed, the query will be for all.
@@ -220,6 +215,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf
         public GetConfigSummaryInvokeArgs()
         {
         }
+        public static new GetConfigSummaryInvokeArgs Empty => new GetConfigSummaryInvokeArgs();
     }
 
 

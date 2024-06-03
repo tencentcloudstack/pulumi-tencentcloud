@@ -9,15 +9,17 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const restartDataEngine = new tencentcloud.Dlc.RestartDataEngineOperation("restart_data_engine", {
+ * const restartDataEngine = new tencentcloud.dlc.RestartDataEngineOperation("restartDataEngine", {
  *     dataEngineId: "DataEngine-g5ds87d8",
  *     forcedOperation: false,
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export class RestartDataEngineOperation extends pulumi.CustomResource {
     /**

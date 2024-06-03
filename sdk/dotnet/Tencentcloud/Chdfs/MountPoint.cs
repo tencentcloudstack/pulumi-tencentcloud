@@ -15,35 +15,36 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Chdfs
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var mountPoint = new Tencentcloud.Chdfs.MountPoint("mountPoint", new()
     ///     {
-    ///         var mountPoint = new Tencentcloud.Chdfs.MountPoint("mountPoint", new Tencentcloud.Chdfs.MountPointArgs
-    ///         {
-    ///             FileSystemId = "f14mpfy5lh4e",
-    ///             MountPointName = "terraform-test",
-    ///             MountPointStatus = 1,
-    ///         });
-    ///     }
+    ///         FileSystemId = "f14mpfy5lh4e",
+    ///         MountPointName = "terraform-test",
+    ///         MountPointStatus = 1,
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// chdfs mount_point can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Chdfs/mountPoint:MountPoint mount_point mount_point_id
+    /// $ pulumi import tencentcloud:Chdfs/mountPoint:MountPoint mount_point mount_point_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Chdfs/mountPoint:MountPoint")]
-    public partial class MountPoint : Pulumi.CustomResource
+    public partial class MountPoint : global::Pulumi.CustomResource
     {
         /// <summary>
         /// file system id you want to mount.
@@ -108,7 +109,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Chdfs
         }
     }
 
-    public sealed class MountPointArgs : Pulumi.ResourceArgs
+    public sealed class MountPointArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// file system id you want to mount.
@@ -131,9 +132,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Chdfs
         public MountPointArgs()
         {
         }
+        public static new MountPointArgs Empty => new MountPointArgs();
     }
 
-    public sealed class MountPointState : Pulumi.ResourceArgs
+    public sealed class MountPointState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// file system id you want to mount.
@@ -156,5 +158,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Chdfs
         public MountPointState()
         {
         }
+        public static new MountPointState Empty => new MountPointState();
     }
 }

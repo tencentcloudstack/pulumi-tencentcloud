@@ -8,6 +8,7 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides an available image for the user.
@@ -18,37 +19,41 @@ import (
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Image"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Image"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Image"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Image.GetInstance(ctx, &image.GetInstanceArgs{
-// 			Filters: []image.GetInstanceFilter{
-// 				image.GetInstanceFilter{
-// 					Name: "image-type",
-// 					Values: []string{
-// 						"PUBLIC_IMAGE",
-// 					},
-// 				},
-// 			},
-// 			OsName: pulumi.StringRef("centos"),
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Image.GetInstance(ctx, &image.GetInstanceArgs{
+//				Filters: []image.GetInstanceFilter{
+//					{
+//						Name: "image-type",
+//						Values: []string{
+//							"PUBLIC_IMAGE",
+//						},
+//					},
+//				},
+//				OsName: pulumi.StringRef("centos"),
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 func LookupInstance(ctx *pulumi.Context, args *LookupInstanceArgs, opts ...pulumi.InvokeOption) (*LookupInstanceResult, error) {
-	opts = pkgInvokeDefaultOpts(opts)
+	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv LookupInstanceResult
 	err := ctx.Invoke("tencentcloud:Image/getInstance:getInstance", args, &rv, opts...)
 	if err != nil {

@@ -9,10 +9,11 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const zones = tencentcloud.Availability.getZonesByProduct({
  *     product: "nat",
@@ -24,7 +25,7 @@ import * as utilities from "../utilities";
  *     filters: [
  *         {
  *             name: "zone",
- *             values: [zones.zones?[0]?.name],
+ *             values: [zones.zones?.[0]?.name],
  *         },
  *         {
  *             name: "instance-family",
@@ -40,7 +41,7 @@ import * as utilities from "../utilities";
  * const subnet = new tencentcloud.subnet.Instance("subnet", {
  *     vpcId: vpc.id,
  *     cidrBlock: "10.0.0.0/16",
- *     availabilityZone: zones.then(zones => zones.zones?[0]?.name),
+ *     availabilityZone: zones.then(zones => zones.zones?.[0]?.name),
  *     routeTableId: routeTable.id,
  * });
  * const eipExample1 = new tencentcloud.eip.Instance("eipExample1", {});
@@ -76,9 +77,9 @@ import * as utilities from "../utilities";
  * // Create instance
  * const example = new tencentcloud.instance.Instance("example", {
  *     instanceName: "tf_example",
- *     availabilityZone: zones.then(zones => zones.zones?[0]?.name),
- *     imageId: image.then(image => image.images?[0]?.imageId),
- *     instanceType: instanceTypes.then(instanceTypes => instanceTypes.instanceTypes?[0]?.instanceType),
+ *     availabilityZone: zones.then(zones => zones.zones?.[0]?.name),
+ *     imageId: image.then(image => image.images?.[0]?.imageId),
+ *     instanceType: instanceTypes.then(instanceTypes => instanceTypes.instanceTypes?.[0]?.instanceType),
  *     systemDiskType: "CLOUD_PREMIUM",
  *     systemDiskSize: 50,
  *     hostname: "user",
@@ -96,19 +97,21 @@ import * as utilities from "../utilities";
  *     publicIpAddrs: [eipExample1.publicIp],
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
- * VPN gateway route can be imported using the id, the id format must be '{nat_gateway_id}#{resource_id}', resource_id range `subnet_id`, `instance_id`, e.g. SUBNET SNat
+ * VPN gateway route can be imported using the id, the id format must be '{nat_gateway_id}#{resource_id}', resource_id range `subnet_id`, `instance_id`, e.g.
+ *
+ * SUBNET SNat
  *
  * ```sh
- *  $ pulumi import tencentcloud:Nat/gatewaySnat:GatewaySnat my_snat nat-r4ip1cwt#subnet-2ap74y35
+ * $ pulumi import tencentcloud:Nat/gatewaySnat:GatewaySnat my_snat nat-r4ip1cwt#subnet-2ap74y35
  * ```
- *
- *  NETWORKINTERFACT SNat
+ * NETWORKINTERFACT SNat
  *
  * ```sh
- *  $ pulumi import tencentcloud:Nat/gatewaySnat:GatewaySnat my_snat nat-r4ip1cwt#ins-da412f5a
+ * $ pulumi import tencentcloud:Nat/gatewaySnat:GatewaySnat my_snat nat-r4ip1cwt#ins-da412f5a
  * ```
  */
 export class GatewaySnat extends pulumi.CustomResource {

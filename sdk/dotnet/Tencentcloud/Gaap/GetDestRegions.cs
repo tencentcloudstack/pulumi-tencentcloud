@@ -15,58 +15,52 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
         /// <summary>
         /// Use this data source to query detailed information of gaap dest regions
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
-        ///     {
-        ///         var destRegions = Output.Create(Tencentcloud.Gaap.GetDestRegions.InvokeAsync());
-        ///     }
+        ///     var destRegions = Tencentcloud.Gaap.GetDestRegions.Invoke();
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetDestRegionsResult> InvokeAsync(GetDestRegionsArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetDestRegionsResult>("tencentcloud:Gaap/getDestRegions:getDestRegions", args ?? new GetDestRegionsArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetDestRegionsResult>("tencentcloud:Gaap/getDestRegions:getDestRegions", args ?? new GetDestRegionsArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of gaap dest regions
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
-        ///     {
-        ///         var destRegions = Output.Create(Tencentcloud.Gaap.GetDestRegions.InvokeAsync());
-        ///     }
+        ///     var destRegions = Tencentcloud.Gaap.GetDestRegions.Invoke();
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetDestRegionsResult> Invoke(GetDestRegionsInvokeArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetDestRegionsResult>("tencentcloud:Gaap/getDestRegions:getDestRegions", args ?? new GetDestRegionsInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetDestRegionsResult>("tencentcloud:Gaap/getDestRegions:getDestRegions", args ?? new GetDestRegionsInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetDestRegionsArgs : Pulumi.InvokeArgs
+    public sealed class GetDestRegionsArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Used to save results.
@@ -77,9 +71,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
         public GetDestRegionsArgs()
         {
         }
+        public static new GetDestRegionsArgs Empty => new GetDestRegionsArgs();
     }
 
-    public sealed class GetDestRegionsInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetDestRegionsInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Used to save results.
@@ -90,6 +85,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
         public GetDestRegionsInvokeArgs()
         {
         }
+        public static new GetDestRegionsInvokeArgs Empty => new GetDestRegionsInvokeArgs();
     }
 
 

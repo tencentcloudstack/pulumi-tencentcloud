@@ -2,19 +2,22 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
  * Provides a resource to create a mps editMediaOperation
  *
  * ## Example Usage
+ *
  * ### Operation through COS
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const output = new tencentcloud.cos.Bucket("output", {bucket: `tf-bucket-mps-output-${local.app_id}`});
  * const object = tencentcloud.Cos.getBucketObject({
@@ -27,7 +30,7 @@ import * as utilities from "../utilities";
  *             type: "COS",
  *             cosInputInfo: {
  *                 bucket: object.then(object => object.bucket),
- *                 region: `%s`,
+ *                 region: "%s",
  *                 object: object.then(object => object.key),
  *             },
  *         },
@@ -38,12 +41,13 @@ import * as utilities from "../utilities";
  *         type: "COS",
  *         cosOutputStorage: {
  *             bucket: output.bucket,
- *             region: `%s`,
+ *             region: "%s",
  *         },
  *     },
  *     outputObjectPath: "/output",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export class EditMediaOperation extends pulumi.CustomResource {
     /**

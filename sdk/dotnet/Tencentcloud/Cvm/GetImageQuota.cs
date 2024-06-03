@@ -15,58 +15,52 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cvm
         /// <summary>
         /// Use this data source to query detailed information of cvm image_quota
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
-        ///     {
-        ///         var imageQuota = Output.Create(Tencentcloud.Cvm.GetImageQuota.InvokeAsync());
-        ///     }
+        ///     var imageQuota = Tencentcloud.Cvm.GetImageQuota.Invoke();
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetImageQuotaResult> InvokeAsync(GetImageQuotaArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetImageQuotaResult>("tencentcloud:Cvm/getImageQuota:getImageQuota", args ?? new GetImageQuotaArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetImageQuotaResult>("tencentcloud:Cvm/getImageQuota:getImageQuota", args ?? new GetImageQuotaArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of cvm image_quota
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
-        ///     {
-        ///         var imageQuota = Output.Create(Tencentcloud.Cvm.GetImageQuota.InvokeAsync());
-        ///     }
+        ///     var imageQuota = Tencentcloud.Cvm.GetImageQuota.Invoke();
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetImageQuotaResult> Invoke(GetImageQuotaInvokeArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetImageQuotaResult>("tencentcloud:Cvm/getImageQuota:getImageQuota", args ?? new GetImageQuotaInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetImageQuotaResult>("tencentcloud:Cvm/getImageQuota:getImageQuota", args ?? new GetImageQuotaInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetImageQuotaArgs : Pulumi.InvokeArgs
+    public sealed class GetImageQuotaArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Used to save results.
@@ -77,9 +71,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cvm
         public GetImageQuotaArgs()
         {
         }
+        public static new GetImageQuotaArgs Empty => new GetImageQuotaArgs();
     }
 
-    public sealed class GetImageQuotaInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetImageQuotaInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Used to save results.
@@ -90,6 +85,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cvm
         public GetImageQuotaInvokeArgs()
         {
         }
+        public static new GetImageQuotaInvokeArgs Empty => new GetImageQuotaInvokeArgs();
     }
 
 

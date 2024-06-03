@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka.Inputs
 {
 
-    public sealed class ConnectResourceDtsConnectParamArgs : Pulumi.ResourceArgs
+    public sealed class ConnectResourceDtsConnectParamArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Id of the Dts consumption group.
@@ -58,5 +58,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka.Inputs
         public ConnectResourceDtsConnectParamArgs()
         {
         }
+        public static new ConnectResourceDtsConnectParamArgs Empty => new ConnectResourceDtsConnectParamArgs();
     }
 }

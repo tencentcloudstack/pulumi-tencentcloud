@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps.Inputs
 {
 
-    public sealed class ScheduleActivityActivityParaGetArgs : Pulumi.ResourceArgs
+    public sealed class ScheduleActivityActivityParaGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// An adaptive bitrate streaming task.
@@ -70,5 +70,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps.Inputs
         public ScheduleActivityActivityParaGetArgs()
         {
         }
+        public static new ScheduleActivityActivityParaGetArgs Empty => new ScheduleActivityActivityParaGetArgs();
     }
 }

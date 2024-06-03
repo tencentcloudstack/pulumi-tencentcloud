@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcm.Inputs
 {
 
-    public sealed class PrometheusAttachmentPrometheusGetArgs : Pulumi.ResourceArgs
+    public sealed class PrometheusAttachmentPrometheusGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Third party prometheus.
@@ -46,5 +46,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcm.Inputs
         public PrometheusAttachmentPrometheusGetArgs()
         {
         }
+        public static new PrometheusAttachmentPrometheusGetArgs Empty => new PrometheusAttachmentPrometheusGetArgs();
     }
 }

@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,24 +11,23 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const topicFlowRanking = pulumi.output(tencentcloud.Ckafka.getTopicFlowRanking({
+ * const topicFlowRanking = tencentcloud.Ckafka.getTopicFlowRanking({
  *     beginDate: "2023-05-29T00:00:00+08:00",
  *     endDate: "2021-05-29T23:59:59+08:00",
  *     instanceId: "ckafka-xxxxxx",
  *     rankingType: "PRO",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getTopicFlowRanking(args: GetTopicFlowRankingArgs, opts?: pulumi.InvokeOptions): Promise<GetTopicFlowRankingResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Ckafka/getTopicFlowRanking:getTopicFlowRanking", {
         "beginDate": args.beginDate,
         "endDate": args.endDate,
@@ -81,9 +81,27 @@ export interface GetTopicFlowRankingResult {
      */
     readonly results: outputs.Ckafka.GetTopicFlowRankingResult[];
 }
-
+/**
+ * Use this data source to query detailed information of ckafka topicFlowRanking
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const topicFlowRanking = tencentcloud.Ckafka.getTopicFlowRanking({
+ *     beginDate: "2023-05-29T00:00:00+08:00",
+ *     endDate: "2021-05-29T23:59:59+08:00",
+ *     instanceId: "ckafka-xxxxxx",
+ *     rankingType: "PRO",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getTopicFlowRankingOutput(args: GetTopicFlowRankingOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetTopicFlowRankingResult> {
-    return pulumi.output(args).apply(a => getTopicFlowRanking(a, opts))
+    return pulumi.output(args).apply((a: any) => getTopicFlowRanking(a, opts))
 }
 
 /**

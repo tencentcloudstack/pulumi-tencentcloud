@@ -15,29 +15,30 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Elasticsearch
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var restartNodesOperation = new Tencentcloud.Elasticsearch.RestartNodesOperation("restartNodesOperation", new()
     ///     {
-    ///         var restartNodesOperation = new Tencentcloud.Elasticsearch.RestartNodesOperation("restartNodesOperation", new Tencentcloud.Elasticsearch.RestartNodesOperationArgs
+    ///         InstanceId = "es-xxxxxx",
+    ///         NodeNames = new[]
     ///         {
-    ///             InstanceId = "es-xxxxxx",
-    ///             NodeNames = 
-    ///             {
-    ///                 "1648026612002990732",
-    ///             },
-    ///         });
-    ///     }
+    ///             "1648026612002990732",
+    ///         },
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Elasticsearch/restartNodesOperation:RestartNodesOperation")]
-    public partial class RestartNodesOperation : Pulumi.CustomResource
+    public partial class RestartNodesOperation : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Whether to force a restart.
@@ -114,7 +115,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Elasticsearch
         }
     }
 
-    public sealed class RestartNodesOperationArgs : Pulumi.ResourceArgs
+    public sealed class RestartNodesOperationArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Whether to force a restart.
@@ -155,9 +156,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Elasticsearch
         public RestartNodesOperationArgs()
         {
         }
+        public static new RestartNodesOperationArgs Empty => new RestartNodesOperationArgs();
     }
 
-    public sealed class RestartNodesOperationState : Pulumi.ResourceArgs
+    public sealed class RestartNodesOperationState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Whether to force a restart.
@@ -198,5 +200,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Elasticsearch
         public RestartNodesOperationState()
         {
         }
+        public static new RestartNodesOperationState Empty => new RestartNodesOperationState();
     }
 }

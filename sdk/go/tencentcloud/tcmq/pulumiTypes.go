@@ -8,7 +8,10 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
+
+var _ = internal.GetEnvOrDefault
 
 type GetQueueFilter struct {
 	// Filter parameter name.
@@ -20,7 +23,7 @@ type GetQueueFilter struct {
 // GetQueueFilterInput is an input type that accepts GetQueueFilterArgs and GetQueueFilterOutput values.
 // You can construct a concrete instance of `GetQueueFilterInput` via:
 //
-//          GetQueueFilterArgs{...}
+//	GetQueueFilterArgs{...}
 type GetQueueFilterInput interface {
 	pulumi.Input
 
@@ -50,7 +53,7 @@ func (i GetQueueFilterArgs) ToGetQueueFilterOutputWithContext(ctx context.Contex
 // GetQueueFilterArrayInput is an input type that accepts GetQueueFilterArray and GetQueueFilterArrayOutput values.
 // You can construct a concrete instance of `GetQueueFilterArrayInput` via:
 //
-//          GetQueueFilterArray{ GetQueueFilterArgs{...} }
+//	GetQueueFilterArray{ GetQueueFilterArgs{...} }
 type GetQueueFilterArrayInput interface {
 	pulumi.Input
 
@@ -184,7 +187,7 @@ type GetQueueQueueList struct {
 // GetQueueQueueListInput is an input type that accepts GetQueueQueueListArgs and GetQueueQueueListOutput values.
 // You can construct a concrete instance of `GetQueueQueueListInput` via:
 //
-//          GetQueueQueueListArgs{...}
+//	GetQueueQueueListArgs{...}
 type GetQueueQueueListInput interface {
 	pulumi.Input
 
@@ -272,7 +275,7 @@ func (i GetQueueQueueListArgs) ToGetQueueQueueListOutputWithContext(ctx context.
 // GetQueueQueueListArrayInput is an input type that accepts GetQueueQueueListArray and GetQueueQueueListArrayOutput values.
 // You can construct a concrete instance of `GetQueueQueueListArrayInput` via:
 //
-//          GetQueueQueueListArray{ GetQueueQueueListArgs{...} }
+//	GetQueueQueueListArray{ GetQueueQueueListArgs{...} }
 type GetQueueQueueListArrayInput interface {
 	pulumi.Input
 
@@ -497,7 +500,7 @@ type GetQueueQueueListDeadLetterPolicy struct {
 // GetQueueQueueListDeadLetterPolicyInput is an input type that accepts GetQueueQueueListDeadLetterPolicyArgs and GetQueueQueueListDeadLetterPolicyOutput values.
 // You can construct a concrete instance of `GetQueueQueueListDeadLetterPolicyInput` via:
 //
-//          GetQueueQueueListDeadLetterPolicyArgs{...}
+//	GetQueueQueueListDeadLetterPolicyArgs{...}
 type GetQueueQueueListDeadLetterPolicyInput interface {
 	pulumi.Input
 
@@ -531,7 +534,7 @@ func (i GetQueueQueueListDeadLetterPolicyArgs) ToGetQueueQueueListDeadLetterPoli
 // GetQueueQueueListDeadLetterPolicyArrayInput is an input type that accepts GetQueueQueueListDeadLetterPolicyArray and GetQueueQueueListDeadLetterPolicyArrayOutput values.
 // You can construct a concrete instance of `GetQueueQueueListDeadLetterPolicyArrayInput` via:
 //
-//          GetQueueQueueListDeadLetterPolicyArray{ GetQueueQueueListDeadLetterPolicyArgs{...} }
+//	GetQueueQueueListDeadLetterPolicyArray{ GetQueueQueueListDeadLetterPolicyArgs{...} }
 type GetQueueQueueListDeadLetterPolicyArrayInput interface {
 	pulumi.Input
 
@@ -617,7 +620,7 @@ type GetQueueQueueListDeadLetterSource struct {
 // GetQueueQueueListDeadLetterSourceInput is an input type that accepts GetQueueQueueListDeadLetterSourceArgs and GetQueueQueueListDeadLetterSourceOutput values.
 // You can construct a concrete instance of `GetQueueQueueListDeadLetterSourceInput` via:
 //
-//          GetQueueQueueListDeadLetterSourceArgs{...}
+//	GetQueueQueueListDeadLetterSourceArgs{...}
 type GetQueueQueueListDeadLetterSourceInput interface {
 	pulumi.Input
 
@@ -647,7 +650,7 @@ func (i GetQueueQueueListDeadLetterSourceArgs) ToGetQueueQueueListDeadLetterSour
 // GetQueueQueueListDeadLetterSourceArrayInput is an input type that accepts GetQueueQueueListDeadLetterSourceArray and GetQueueQueueListDeadLetterSourceArrayOutput values.
 // You can construct a concrete instance of `GetQueueQueueListDeadLetterSourceArrayInput` via:
 //
-//          GetQueueQueueListDeadLetterSourceArray{ GetQueueQueueListDeadLetterSourceArgs{...} }
+//	GetQueueQueueListDeadLetterSourceArray{ GetQueueQueueListDeadLetterSourceArgs{...} }
 type GetQueueQueueListDeadLetterSourceArrayInput interface {
 	pulumi.Input
 
@@ -723,7 +726,7 @@ type GetQueueQueueListTag struct {
 // GetQueueQueueListTagInput is an input type that accepts GetQueueQueueListTagArgs and GetQueueQueueListTagOutput values.
 // You can construct a concrete instance of `GetQueueQueueListTagInput` via:
 //
-//          GetQueueQueueListTagArgs{...}
+//	GetQueueQueueListTagArgs{...}
 type GetQueueQueueListTagInput interface {
 	pulumi.Input
 
@@ -753,7 +756,7 @@ func (i GetQueueQueueListTagArgs) ToGetQueueQueueListTagOutputWithContext(ctx co
 // GetQueueQueueListTagArrayInput is an input type that accepts GetQueueQueueListTagArray and GetQueueQueueListTagArrayOutput values.
 // You can construct a concrete instance of `GetQueueQueueListTagArrayInput` via:
 //
-//          GetQueueQueueListTagArray{ GetQueueQueueListTagArgs{...} }
+//	GetQueueQueueListTagArray{ GetQueueQueueListTagArgs{...} }
 type GetQueueQueueListTagArrayInput interface {
 	pulumi.Input
 
@@ -829,7 +832,7 @@ type GetQueueQueueListTransactionPolicy struct {
 // GetQueueQueueListTransactionPolicyInput is an input type that accepts GetQueueQueueListTransactionPolicyArgs and GetQueueQueueListTransactionPolicyOutput values.
 // You can construct a concrete instance of `GetQueueQueueListTransactionPolicyInput` via:
 //
-//          GetQueueQueueListTransactionPolicyArgs{...}
+//	GetQueueQueueListTransactionPolicyArgs{...}
 type GetQueueQueueListTransactionPolicyInput interface {
 	pulumi.Input
 
@@ -859,7 +862,7 @@ func (i GetQueueQueueListTransactionPolicyArgs) ToGetQueueQueueListTransactionPo
 // GetQueueQueueListTransactionPolicyArrayInput is an input type that accepts GetQueueQueueListTransactionPolicyArray and GetQueueQueueListTransactionPolicyArrayOutput values.
 // You can construct a concrete instance of `GetQueueQueueListTransactionPolicyArrayInput` via:
 //
-//          GetQueueQueueListTransactionPolicyArray{ GetQueueQueueListTransactionPolicyArgs{...} }
+//	GetQueueQueueListTransactionPolicyArray{ GetQueueQueueListTransactionPolicyArgs{...} }
 type GetQueueQueueListTransactionPolicyArrayInput interface {
 	pulumi.Input
 
@@ -955,7 +958,7 @@ type GetSubscribeSubscriptionList struct {
 // GetSubscribeSubscriptionListInput is an input type that accepts GetSubscribeSubscriptionListArgs and GetSubscribeSubscriptionListOutput values.
 // You can construct a concrete instance of `GetSubscribeSubscriptionListInput` via:
 //
-//          GetSubscribeSubscriptionListArgs{...}
+//	GetSubscribeSubscriptionListArgs{...}
 type GetSubscribeSubscriptionListInput interface {
 	pulumi.Input
 
@@ -1005,7 +1008,7 @@ func (i GetSubscribeSubscriptionListArgs) ToGetSubscribeSubscriptionListOutputWi
 // GetSubscribeSubscriptionListArrayInput is an input type that accepts GetSubscribeSubscriptionListArray and GetSubscribeSubscriptionListArrayOutput values.
 // You can construct a concrete instance of `GetSubscribeSubscriptionListArrayInput` via:
 //
-//          GetSubscribeSubscriptionListArray{ GetSubscribeSubscriptionListArgs{...} }
+//	GetSubscribeSubscriptionListArray{ GetSubscribeSubscriptionListArgs{...} }
 type GetSubscribeSubscriptionListArrayInput interface {
 	pulumi.Input
 
@@ -1131,7 +1134,7 @@ type GetTopicFilter struct {
 // GetTopicFilterInput is an input type that accepts GetTopicFilterArgs and GetTopicFilterOutput values.
 // You can construct a concrete instance of `GetTopicFilterInput` via:
 //
-//          GetTopicFilterArgs{...}
+//	GetTopicFilterArgs{...}
 type GetTopicFilterInput interface {
 	pulumi.Input
 
@@ -1161,7 +1164,7 @@ func (i GetTopicFilterArgs) ToGetTopicFilterOutputWithContext(ctx context.Contex
 // GetTopicFilterArrayInput is an input type that accepts GetTopicFilterArray and GetTopicFilterArrayOutput values.
 // You can construct a concrete instance of `GetTopicFilterArrayInput` via:
 //
-//          GetTopicFilterArray{ GetTopicFilterArgs{...} }
+//	GetTopicFilterArray{ GetTopicFilterArgs{...} }
 type GetTopicFilterArrayInput interface {
 	pulumi.Input
 
@@ -1265,7 +1268,7 @@ type GetTopicTopicList struct {
 // GetTopicTopicListInput is an input type that accepts GetTopicTopicListArgs and GetTopicTopicListOutput values.
 // You can construct a concrete instance of `GetTopicTopicListInput` via:
 //
-//          GetTopicTopicListArgs{...}
+//	GetTopicTopicListArgs{...}
 type GetTopicTopicListInput interface {
 	pulumi.Input
 
@@ -1323,7 +1326,7 @@ func (i GetTopicTopicListArgs) ToGetTopicTopicListOutputWithContext(ctx context.
 // GetTopicTopicListArrayInput is an input type that accepts GetTopicTopicListArray and GetTopicTopicListArrayOutput values.
 // You can construct a concrete instance of `GetTopicTopicListArrayInput` via:
 //
-//          GetTopicTopicListArray{ GetTopicTopicListArgs{...} }
+//	GetTopicTopicListArray{ GetTopicTopicListArgs{...} }
 type GetTopicTopicListArrayInput interface {
 	pulumi.Input
 
@@ -1469,7 +1472,7 @@ type GetTopicTopicListTag struct {
 // GetTopicTopicListTagInput is an input type that accepts GetTopicTopicListTagArgs and GetTopicTopicListTagOutput values.
 // You can construct a concrete instance of `GetTopicTopicListTagInput` via:
 //
-//          GetTopicTopicListTagArgs{...}
+//	GetTopicTopicListTagArgs{...}
 type GetTopicTopicListTagInput interface {
 	pulumi.Input
 
@@ -1499,7 +1502,7 @@ func (i GetTopicTopicListTagArgs) ToGetTopicTopicListTagOutputWithContext(ctx co
 // GetTopicTopicListTagArrayInput is an input type that accepts GetTopicTopicListTagArray and GetTopicTopicListTagArrayOutput values.
 // You can construct a concrete instance of `GetTopicTopicListTagArrayInput` via:
 //
-//          GetTopicTopicListTagArray{ GetTopicTopicListTagArgs{...} }
+//	GetTopicTopicListTagArray{ GetTopicTopicListTagArgs{...} }
 type GetTopicTopicListTagArrayInput interface {
 	pulumi.Input
 

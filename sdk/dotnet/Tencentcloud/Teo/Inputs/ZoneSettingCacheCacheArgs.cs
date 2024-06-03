@@ -11,22 +11,17 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Inputs
 {
 
-    public sealed class ZoneSettingCacheCacheArgs : Pulumi.ResourceArgs
+    public sealed class ZoneSettingCacheCacheArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// Cache expiration time settings, Unit: second. The maximum value is 365 days. Note: This field may return null, indicating that no valid value can be obtained.
+        /// Cache expiration time settings.
+        /// Unit: second. The maximum value is 365 days. Note: This field may return null, indicating that no valid value can be obtained.
         /// </summary>
         [Input("cacheTime")]
         public Input<int>? CacheTime { get; set; }
 
         /// <summary>
-        /// Specifies whether to enable force cache. Valid values: `on`: Enable; `off`: Disable. Note: This field may return null, indicating that no valid value can be obtained.
-        /// </summary>
-        [Input("ignoreCacheControl")]
-        public Input<string>? IgnoreCacheControl { get; set; }
-
-        /// <summary>
-        /// Cache configuration switch. Valid values: `on`: Enable; `off`: Disable. Note: This field may return null, indicating that no valid value can be obtained.
+        /// Cache configuration switch.
         /// </summary>
         [Input("switch")]
         public Input<string>? Switch { get; set; }
@@ -34,5 +29,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Inputs
         public ZoneSettingCacheCacheArgs()
         {
         }
+        public static new ZoneSettingCacheCacheArgs Empty => new ZoneSettingCacheCacheArgs();
     }
 }

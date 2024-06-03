@@ -8,7 +8,10 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
+
+var _ = internal.GetEnvOrDefault
 
 type CommandTag struct {
 	// Tag key.
@@ -20,7 +23,7 @@ type CommandTag struct {
 // CommandTagInput is an input type that accepts CommandTagArgs and CommandTagOutput values.
 // You can construct a concrete instance of `CommandTagInput` via:
 //
-//          CommandTagArgs{...}
+//	CommandTagArgs{...}
 type CommandTagInput interface {
 	pulumi.Input
 
@@ -50,7 +53,7 @@ func (i CommandTagArgs) ToCommandTagOutputWithContext(ctx context.Context) Comma
 // CommandTagArrayInput is an input type that accepts CommandTagArray and CommandTagArrayOutput values.
 // You can construct a concrete instance of `CommandTagArrayInput` via:
 //
-//          CommandTagArray{ CommandTagArgs{...} }
+//	CommandTagArray{ CommandTagArgs{...} }
 type CommandTagArrayInput interface {
 	pulumi.Input
 
@@ -128,7 +131,7 @@ type InvokerScheduleSettings struct {
 // InvokerScheduleSettingsInput is an input type that accepts InvokerScheduleSettingsArgs and InvokerScheduleSettingsOutput values.
 // You can construct a concrete instance of `InvokerScheduleSettingsInput` via:
 //
-//          InvokerScheduleSettingsArgs{...}
+//	InvokerScheduleSettingsArgs{...}
 type InvokerScheduleSettingsInput interface {
 	pulumi.Input
 
@@ -168,11 +171,11 @@ func (i InvokerScheduleSettingsArgs) ToInvokerScheduleSettingsPtrOutputWithConte
 // InvokerScheduleSettingsPtrInput is an input type that accepts InvokerScheduleSettingsArgs, InvokerScheduleSettingsPtr and InvokerScheduleSettingsPtrOutput values.
 // You can construct a concrete instance of `InvokerScheduleSettingsPtrInput` via:
 //
-//          InvokerScheduleSettingsArgs{...}
+//	        InvokerScheduleSettingsArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type InvokerScheduleSettingsPtrInput interface {
 	pulumi.Input
 
@@ -309,7 +312,7 @@ type GetAgentAutomationAgentSet struct {
 // GetAgentAutomationAgentSetInput is an input type that accepts GetAgentAutomationAgentSetArgs and GetAgentAutomationAgentSetOutput values.
 // You can construct a concrete instance of `GetAgentAutomationAgentSetInput` via:
 //
-//          GetAgentAutomationAgentSetArgs{...}
+//	GetAgentAutomationAgentSetArgs{...}
 type GetAgentAutomationAgentSetInput interface {
 	pulumi.Input
 
@@ -347,7 +350,7 @@ func (i GetAgentAutomationAgentSetArgs) ToGetAgentAutomationAgentSetOutputWithCo
 // GetAgentAutomationAgentSetArrayInput is an input type that accepts GetAgentAutomationAgentSetArray and GetAgentAutomationAgentSetArrayOutput values.
 // You can construct a concrete instance of `GetAgentAutomationAgentSetArrayInput` via:
 //
-//          GetAgentAutomationAgentSetArray{ GetAgentAutomationAgentSetArgs{...} }
+//	GetAgentAutomationAgentSetArray{ GetAgentAutomationAgentSetArgs{...} }
 type GetAgentAutomationAgentSetArrayInput interface {
 	pulumi.Input
 
@@ -443,7 +446,7 @@ type GetAgentFilter struct {
 // GetAgentFilterInput is an input type that accepts GetAgentFilterArgs and GetAgentFilterOutput values.
 // You can construct a concrete instance of `GetAgentFilterInput` via:
 //
-//          GetAgentFilterArgs{...}
+//	GetAgentFilterArgs{...}
 type GetAgentFilterInput interface {
 	pulumi.Input
 
@@ -473,7 +476,7 @@ func (i GetAgentFilterArgs) ToGetAgentFilterOutputWithContext(ctx context.Contex
 // GetAgentFilterArrayInput is an input type that accepts GetAgentFilterArray and GetAgentFilterArrayOutput values.
 // You can construct a concrete instance of `GetAgentFilterArrayInput` via:
 //
-//          GetAgentFilterArray{ GetAgentFilterArgs{...} }
+//	GetAgentFilterArray{ GetAgentFilterArgs{...} }
 type GetAgentFilterArrayInput interface {
 	pulumi.Input
 
@@ -579,7 +582,7 @@ type GetCommandCommandSet struct {
 // GetCommandCommandSetInput is an input type that accepts GetCommandCommandSetArgs and GetCommandCommandSetOutput values.
 // You can construct a concrete instance of `GetCommandCommandSetInput` via:
 //
-//          GetCommandCommandSetArgs{...}
+//	GetCommandCommandSetArgs{...}
 type GetCommandCommandSetInput interface {
 	pulumi.Input
 
@@ -639,7 +642,7 @@ func (i GetCommandCommandSetArgs) ToGetCommandCommandSetOutputWithContext(ctx co
 // GetCommandCommandSetArrayInput is an input type that accepts GetCommandCommandSetArray and GetCommandCommandSetArrayOutput values.
 // You can construct a concrete instance of `GetCommandCommandSetArrayInput` via:
 //
-//          GetCommandCommandSetArray{ GetCommandCommandSetArgs{...} }
+//	GetCommandCommandSetArray{ GetCommandCommandSetArgs{...} }
 type GetCommandCommandSetArrayInput interface {
 	pulumi.Input
 
@@ -790,7 +793,7 @@ type GetCommandCommandSetTag struct {
 // GetCommandCommandSetTagInput is an input type that accepts GetCommandCommandSetTagArgs and GetCommandCommandSetTagOutput values.
 // You can construct a concrete instance of `GetCommandCommandSetTagInput` via:
 //
-//          GetCommandCommandSetTagArgs{...}
+//	GetCommandCommandSetTagArgs{...}
 type GetCommandCommandSetTagInput interface {
 	pulumi.Input
 
@@ -820,7 +823,7 @@ func (i GetCommandCommandSetTagArgs) ToGetCommandCommandSetTagOutputWithContext(
 // GetCommandCommandSetTagArrayInput is an input type that accepts GetCommandCommandSetTagArray and GetCommandCommandSetTagArrayOutput values.
 // You can construct a concrete instance of `GetCommandCommandSetTagArrayInput` via:
 //
-//          GetCommandCommandSetTagArray{ GetCommandCommandSetTagArgs{...} }
+//	GetCommandCommandSetTagArray{ GetCommandCommandSetTagArgs{...} }
 type GetCommandCommandSetTagArrayInput interface {
 	pulumi.Input
 
@@ -896,7 +899,7 @@ type GetInvocationTaskFilter struct {
 // GetInvocationTaskFilterInput is an input type that accepts GetInvocationTaskFilterArgs and GetInvocationTaskFilterOutput values.
 // You can construct a concrete instance of `GetInvocationTaskFilterInput` via:
 //
-//          GetInvocationTaskFilterArgs{...}
+//	GetInvocationTaskFilterArgs{...}
 type GetInvocationTaskFilterInput interface {
 	pulumi.Input
 
@@ -926,7 +929,7 @@ func (i GetInvocationTaskFilterArgs) ToGetInvocationTaskFilterOutputWithContext(
 // GetInvocationTaskFilterArrayInput is an input type that accepts GetInvocationTaskFilterArray and GetInvocationTaskFilterArrayOutput values.
 // You can construct a concrete instance of `GetInvocationTaskFilterArrayInput` via:
 //
-//          GetInvocationTaskFilterArray{ GetInvocationTaskFilterArgs{...} }
+//	GetInvocationTaskFilterArray{ GetInvocationTaskFilterArgs{...} }
 type GetInvocationTaskFilterArrayInput interface {
 	pulumi.Input
 
@@ -1024,7 +1027,7 @@ type GetInvocationTaskInvocationTaskSet struct {
 // GetInvocationTaskInvocationTaskSetInput is an input type that accepts GetInvocationTaskInvocationTaskSetArgs and GetInvocationTaskInvocationTaskSetOutput values.
 // You can construct a concrete instance of `GetInvocationTaskInvocationTaskSetInput` via:
 //
-//          GetInvocationTaskInvocationTaskSetArgs{...}
+//	GetInvocationTaskInvocationTaskSetArgs{...}
 type GetInvocationTaskInvocationTaskSetInput interface {
 	pulumi.Input
 
@@ -1076,7 +1079,7 @@ func (i GetInvocationTaskInvocationTaskSetArgs) ToGetInvocationTaskInvocationTas
 // GetInvocationTaskInvocationTaskSetArrayInput is an input type that accepts GetInvocationTaskInvocationTaskSetArray and GetInvocationTaskInvocationTaskSetArrayOutput values.
 // You can construct a concrete instance of `GetInvocationTaskInvocationTaskSetArrayInput` via:
 //
-//          GetInvocationTaskInvocationTaskSetArray{ GetInvocationTaskInvocationTaskSetArgs{...} }
+//	GetInvocationTaskInvocationTaskSetArray{ GetInvocationTaskInvocationTaskSetArgs{...} }
 type GetInvocationTaskInvocationTaskSetArrayInput interface {
 	pulumi.Input
 
@@ -1221,7 +1224,7 @@ type GetInvocationTaskInvocationTaskSetCommandDocument struct {
 // GetInvocationTaskInvocationTaskSetCommandDocumentInput is an input type that accepts GetInvocationTaskInvocationTaskSetCommandDocumentArgs and GetInvocationTaskInvocationTaskSetCommandDocumentOutput values.
 // You can construct a concrete instance of `GetInvocationTaskInvocationTaskSetCommandDocumentInput` via:
 //
-//          GetInvocationTaskInvocationTaskSetCommandDocumentArgs{...}
+//	GetInvocationTaskInvocationTaskSetCommandDocumentArgs{...}
 type GetInvocationTaskInvocationTaskSetCommandDocumentInput interface {
 	pulumi.Input
 
@@ -1261,7 +1264,7 @@ func (i GetInvocationTaskInvocationTaskSetCommandDocumentArgs) ToGetInvocationTa
 // GetInvocationTaskInvocationTaskSetCommandDocumentArrayInput is an input type that accepts GetInvocationTaskInvocationTaskSetCommandDocumentArray and GetInvocationTaskInvocationTaskSetCommandDocumentArrayOutput values.
 // You can construct a concrete instance of `GetInvocationTaskInvocationTaskSetCommandDocumentArrayInput` via:
 //
-//          GetInvocationTaskInvocationTaskSetCommandDocumentArray{ GetInvocationTaskInvocationTaskSetCommandDocumentArgs{...} }
+//	GetInvocationTaskInvocationTaskSetCommandDocumentArray{ GetInvocationTaskInvocationTaskSetCommandDocumentArgs{...} }
 type GetInvocationTaskInvocationTaskSetCommandDocumentArrayInput interface {
 	pulumi.Input
 
@@ -1372,7 +1375,7 @@ type GetInvocationTaskInvocationTaskSetTaskResult struct {
 // GetInvocationTaskInvocationTaskSetTaskResultInput is an input type that accepts GetInvocationTaskInvocationTaskSetTaskResultArgs and GetInvocationTaskInvocationTaskSetTaskResultOutput values.
 // You can construct a concrete instance of `GetInvocationTaskInvocationTaskSetTaskResultInput` via:
 //
-//          GetInvocationTaskInvocationTaskSetTaskResultArgs{...}
+//	GetInvocationTaskInvocationTaskSetTaskResultArgs{...}
 type GetInvocationTaskInvocationTaskSetTaskResultInput interface {
 	pulumi.Input
 
@@ -1412,7 +1415,7 @@ func (i GetInvocationTaskInvocationTaskSetTaskResultArgs) ToGetInvocationTaskInv
 // GetInvocationTaskInvocationTaskSetTaskResultArrayInput is an input type that accepts GetInvocationTaskInvocationTaskSetTaskResultArray and GetInvocationTaskInvocationTaskSetTaskResultArrayOutput values.
 // You can construct a concrete instance of `GetInvocationTaskInvocationTaskSetTaskResultArrayInput` via:
 //
-//          GetInvocationTaskInvocationTaskSetTaskResultArray{ GetInvocationTaskInvocationTaskSetTaskResultArgs{...} }
+//	GetInvocationTaskInvocationTaskSetTaskResultArray{ GetInvocationTaskInvocationTaskSetTaskResultArgs{...} }
 type GetInvocationTaskInvocationTaskSetTaskResultArrayInput interface {
 	pulumi.Input
 
@@ -1531,7 +1534,7 @@ type GetInvokerInvokerSet struct {
 // GetInvokerInvokerSetInput is an input type that accepts GetInvokerInvokerSetArgs and GetInvokerInvokerSetOutput values.
 // You can construct a concrete instance of `GetInvokerInvokerSetInput` via:
 //
-//          GetInvokerInvokerSetArgs{...}
+//	GetInvokerInvokerSetArgs{...}
 type GetInvokerInvokerSetInput interface {
 	pulumi.Input
 
@@ -1579,7 +1582,7 @@ func (i GetInvokerInvokerSetArgs) ToGetInvokerInvokerSetOutputWithContext(ctx co
 // GetInvokerInvokerSetArrayInput is an input type that accepts GetInvokerInvokerSetArray and GetInvokerInvokerSetArrayOutput values.
 // You can construct a concrete instance of `GetInvokerInvokerSetArrayInput` via:
 //
-//          GetInvokerInvokerSetArray{ GetInvokerInvokerSetArgs{...} }
+//	GetInvokerInvokerSetArray{ GetInvokerInvokerSetArgs{...} }
 type GetInvokerInvokerSetArrayInput interface {
 	pulumi.Input
 
@@ -1702,7 +1705,7 @@ type GetInvokerInvokerSetScheduleSetting struct {
 // GetInvokerInvokerSetScheduleSettingInput is an input type that accepts GetInvokerInvokerSetScheduleSettingArgs and GetInvokerInvokerSetScheduleSettingOutput values.
 // You can construct a concrete instance of `GetInvokerInvokerSetScheduleSettingInput` via:
 //
-//          GetInvokerInvokerSetScheduleSettingArgs{...}
+//	GetInvokerInvokerSetScheduleSettingArgs{...}
 type GetInvokerInvokerSetScheduleSettingInput interface {
 	pulumi.Input
 
@@ -1734,7 +1737,7 @@ func (i GetInvokerInvokerSetScheduleSettingArgs) ToGetInvokerInvokerSetScheduleS
 // GetInvokerInvokerSetScheduleSettingArrayInput is an input type that accepts GetInvokerInvokerSetScheduleSettingArray and GetInvokerInvokerSetScheduleSettingArrayOutput values.
 // You can construct a concrete instance of `GetInvokerInvokerSetScheduleSettingArrayInput` via:
 //
-//          GetInvokerInvokerSetScheduleSettingArray{ GetInvokerInvokerSetScheduleSettingArgs{...} }
+//	GetInvokerInvokerSetScheduleSettingArray{ GetInvokerInvokerSetScheduleSettingArgs{...} }
 type GetInvokerInvokerSetScheduleSettingArrayInput interface {
 	pulumi.Input
 
@@ -1821,7 +1824,7 @@ type GetInvokerRecordsInvokerRecordSet struct {
 // GetInvokerRecordsInvokerRecordSetInput is an input type that accepts GetInvokerRecordsInvokerRecordSetArgs and GetInvokerRecordsInvokerRecordSetOutput values.
 // You can construct a concrete instance of `GetInvokerRecordsInvokerRecordSetInput` via:
 //
-//          GetInvokerRecordsInvokerRecordSetArgs{...}
+//	GetInvokerRecordsInvokerRecordSetArgs{...}
 type GetInvokerRecordsInvokerRecordSetInput interface {
 	pulumi.Input
 
@@ -1857,7 +1860,7 @@ func (i GetInvokerRecordsInvokerRecordSetArgs) ToGetInvokerRecordsInvokerRecordS
 // GetInvokerRecordsInvokerRecordSetArrayInput is an input type that accepts GetInvokerRecordsInvokerRecordSetArray and GetInvokerRecordsInvokerRecordSetArrayOutput values.
 // You can construct a concrete instance of `GetInvokerRecordsInvokerRecordSetArrayInput` via:
 //
-//          GetInvokerRecordsInvokerRecordSetArray{ GetInvokerRecordsInvokerRecordSetArgs{...} }
+//	GetInvokerRecordsInvokerRecordSetArray{ GetInvokerRecordsInvokerRecordSetArgs{...} }
 type GetInvokerRecordsInvokerRecordSetArrayInput interface {
 	pulumi.Input
 

@@ -7,34 +7,40 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a dts syncJobStopOperation
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dts"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dts"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Dts.NewSyncJobStopOperation(ctx, "syncJobStopOperation", &Dts.SyncJobStopOperationArgs{
-// 			JobId: pulumi.String("sync-werwfs23"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Dts.NewSyncJobStopOperation(ctx, "syncJobStopOperation", &Dts.SyncJobStopOperationArgs{
+//				JobId: pulumi.String("sync-werwfs23"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 type SyncJobStopOperation struct {
 	pulumi.CustomResourceState
 
@@ -52,7 +58,7 @@ func NewSyncJobStopOperation(ctx *pulumi.Context,
 	if args.JobId == nil {
 		return nil, errors.New("invalid value for required argument 'JobId'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource SyncJobStopOperation
 	err := ctx.RegisterResource("tencentcloud:Dts/syncJobStopOperation:SyncJobStopOperation", name, args, &resource, opts...)
 	if err != nil {
@@ -125,7 +131,7 @@ func (i *SyncJobStopOperation) ToSyncJobStopOperationOutputWithContext(ctx conte
 // SyncJobStopOperationArrayInput is an input type that accepts SyncJobStopOperationArray and SyncJobStopOperationArrayOutput values.
 // You can construct a concrete instance of `SyncJobStopOperationArrayInput` via:
 //
-//          SyncJobStopOperationArray{ SyncJobStopOperationArgs{...} }
+//	SyncJobStopOperationArray{ SyncJobStopOperationArgs{...} }
 type SyncJobStopOperationArrayInput interface {
 	pulumi.Input
 
@@ -150,7 +156,7 @@ func (i SyncJobStopOperationArray) ToSyncJobStopOperationArrayOutputWithContext(
 // SyncJobStopOperationMapInput is an input type that accepts SyncJobStopOperationMap and SyncJobStopOperationMapOutput values.
 // You can construct a concrete instance of `SyncJobStopOperationMapInput` via:
 //
-//          SyncJobStopOperationMap{ "key": SyncJobStopOperationArgs{...} }
+//	SyncJobStopOperationMap{ "key": SyncJobStopOperationArgs{...} }
 type SyncJobStopOperationMapInput interface {
 	pulumi.Input
 

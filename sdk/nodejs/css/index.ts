@@ -5,71 +5,191 @@ import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
 // Export members:
-export * from "./authenticateDomainOwnerOperation";
-export * from "./backupStream";
-export * from "./callbackRuleAttachment";
-export * from "./callbackTemplate";
-export * from "./domain";
-export * from "./domainReferer";
-export * from "./enableOptimalSwitching";
-export * from "./getBackupStream";
-export * from "./getDeliverLogDownList";
-export * from "./getDomains";
-export * from "./getMonitorReport";
-export * from "./getPadTemplates";
-export * from "./getPullStreamTaskStatus";
-export * from "./getStreamMonitorList";
-export * from "./getTimeShiftRecordDetail";
-export * from "./getTimeShiftStreamList";
-export * from "./getWatermarks";
-export * from "./getXp2pDetailInfoList";
-export * from "./liveTranscodeRuleAttachment";
-export * from "./liveTranscodeTemplate";
-export * from "./padRuleAttachment";
-export * from "./padTemplate";
-export * from "./playAuthKeyConfig";
-export * from "./playDomainCertAttachment";
-export * from "./pullStreamTask";
-export * from "./pullStreamTaskRestart";
-export * from "./pushAuthKeyConfig";
-export * from "./recordRuleAttachment";
-export * from "./recordTemplate";
-export * from "./snapshotRuleAttachment";
-export * from "./snapshotTemplate";
-export * from "./startStreamMonitor";
-export * from "./streamMonitor";
-export * from "./timeshiftRuleAttachment";
-export * from "./timeshiftTemplate";
-export * from "./watermark";
-export * from "./watermarkRuleAttachment";
+export { AuthenticateDomainOwnerOperationArgs, AuthenticateDomainOwnerOperationState } from "./authenticateDomainOwnerOperation";
+export type AuthenticateDomainOwnerOperation = import("./authenticateDomainOwnerOperation").AuthenticateDomainOwnerOperation;
+export const AuthenticateDomainOwnerOperation: typeof import("./authenticateDomainOwnerOperation").AuthenticateDomainOwnerOperation = null as any;
+utilities.lazyLoad(exports, ["AuthenticateDomainOwnerOperation"], () => require("./authenticateDomainOwnerOperation"));
 
-// Import resources to register:
-import { AuthenticateDomainOwnerOperation } from "./authenticateDomainOwnerOperation";
-import { BackupStream } from "./backupStream";
-import { CallbackRuleAttachment } from "./callbackRuleAttachment";
-import { CallbackTemplate } from "./callbackTemplate";
-import { Domain } from "./domain";
-import { DomainReferer } from "./domainReferer";
-import { EnableOptimalSwitching } from "./enableOptimalSwitching";
-import { LiveTranscodeRuleAttachment } from "./liveTranscodeRuleAttachment";
-import { LiveTranscodeTemplate } from "./liveTranscodeTemplate";
-import { PadRuleAttachment } from "./padRuleAttachment";
-import { PadTemplate } from "./padTemplate";
-import { PlayAuthKeyConfig } from "./playAuthKeyConfig";
-import { PlayDomainCertAttachment } from "./playDomainCertAttachment";
-import { PullStreamTask } from "./pullStreamTask";
-import { PullStreamTaskRestart } from "./pullStreamTaskRestart";
-import { PushAuthKeyConfig } from "./pushAuthKeyConfig";
-import { RecordRuleAttachment } from "./recordRuleAttachment";
-import { RecordTemplate } from "./recordTemplate";
-import { SnapshotRuleAttachment } from "./snapshotRuleAttachment";
-import { SnapshotTemplate } from "./snapshotTemplate";
-import { StartStreamMonitor } from "./startStreamMonitor";
-import { StreamMonitor } from "./streamMonitor";
-import { TimeshiftRuleAttachment } from "./timeshiftRuleAttachment";
-import { TimeshiftTemplate } from "./timeshiftTemplate";
-import { Watermark } from "./watermark";
-import { WatermarkRuleAttachment } from "./watermarkRuleAttachment";
+export { BackupStreamArgs, BackupStreamState } from "./backupStream";
+export type BackupStream = import("./backupStream").BackupStream;
+export const BackupStream: typeof import("./backupStream").BackupStream = null as any;
+utilities.lazyLoad(exports, ["BackupStream"], () => require("./backupStream"));
+
+export { CallbackRuleAttachmentArgs, CallbackRuleAttachmentState } from "./callbackRuleAttachment";
+export type CallbackRuleAttachment = import("./callbackRuleAttachment").CallbackRuleAttachment;
+export const CallbackRuleAttachment: typeof import("./callbackRuleAttachment").CallbackRuleAttachment = null as any;
+utilities.lazyLoad(exports, ["CallbackRuleAttachment"], () => require("./callbackRuleAttachment"));
+
+export { CallbackTemplateArgs, CallbackTemplateState } from "./callbackTemplate";
+export type CallbackTemplate = import("./callbackTemplate").CallbackTemplate;
+export const CallbackTemplate: typeof import("./callbackTemplate").CallbackTemplate = null as any;
+utilities.lazyLoad(exports, ["CallbackTemplate"], () => require("./callbackTemplate"));
+
+export { DomainArgs, DomainState } from "./domain";
+export type Domain = import("./domain").Domain;
+export const Domain: typeof import("./domain").Domain = null as any;
+utilities.lazyLoad(exports, ["Domain"], () => require("./domain"));
+
+export { DomainRefererArgs, DomainRefererState } from "./domainReferer";
+export type DomainReferer = import("./domainReferer").DomainReferer;
+export const DomainReferer: typeof import("./domainReferer").DomainReferer = null as any;
+utilities.lazyLoad(exports, ["DomainReferer"], () => require("./domainReferer"));
+
+export { EnableOptimalSwitchingArgs, EnableOptimalSwitchingState } from "./enableOptimalSwitching";
+export type EnableOptimalSwitching = import("./enableOptimalSwitching").EnableOptimalSwitching;
+export const EnableOptimalSwitching: typeof import("./enableOptimalSwitching").EnableOptimalSwitching = null as any;
+utilities.lazyLoad(exports, ["EnableOptimalSwitching"], () => require("./enableOptimalSwitching"));
+
+export { GetBackupStreamArgs, GetBackupStreamResult, GetBackupStreamOutputArgs } from "./getBackupStream";
+export const getBackupStream: typeof import("./getBackupStream").getBackupStream = null as any;
+export const getBackupStreamOutput: typeof import("./getBackupStream").getBackupStreamOutput = null as any;
+utilities.lazyLoad(exports, ["getBackupStream","getBackupStreamOutput"], () => require("./getBackupStream"));
+
+export { GetDeliverLogDownListArgs, GetDeliverLogDownListResult, GetDeliverLogDownListOutputArgs } from "./getDeliverLogDownList";
+export const getDeliverLogDownList: typeof import("./getDeliverLogDownList").getDeliverLogDownList = null as any;
+export const getDeliverLogDownListOutput: typeof import("./getDeliverLogDownList").getDeliverLogDownListOutput = null as any;
+utilities.lazyLoad(exports, ["getDeliverLogDownList","getDeliverLogDownListOutput"], () => require("./getDeliverLogDownList"));
+
+export { GetDomainsArgs, GetDomainsResult, GetDomainsOutputArgs } from "./getDomains";
+export const getDomains: typeof import("./getDomains").getDomains = null as any;
+export const getDomainsOutput: typeof import("./getDomains").getDomainsOutput = null as any;
+utilities.lazyLoad(exports, ["getDomains","getDomainsOutput"], () => require("./getDomains"));
+
+export { GetMonitorReportArgs, GetMonitorReportResult, GetMonitorReportOutputArgs } from "./getMonitorReport";
+export const getMonitorReport: typeof import("./getMonitorReport").getMonitorReport = null as any;
+export const getMonitorReportOutput: typeof import("./getMonitorReport").getMonitorReportOutput = null as any;
+utilities.lazyLoad(exports, ["getMonitorReport","getMonitorReportOutput"], () => require("./getMonitorReport"));
+
+export { GetPadTemplatesArgs, GetPadTemplatesResult, GetPadTemplatesOutputArgs } from "./getPadTemplates";
+export const getPadTemplates: typeof import("./getPadTemplates").getPadTemplates = null as any;
+export const getPadTemplatesOutput: typeof import("./getPadTemplates").getPadTemplatesOutput = null as any;
+utilities.lazyLoad(exports, ["getPadTemplates","getPadTemplatesOutput"], () => require("./getPadTemplates"));
+
+export { GetPullStreamTaskStatusArgs, GetPullStreamTaskStatusResult, GetPullStreamTaskStatusOutputArgs } from "./getPullStreamTaskStatus";
+export const getPullStreamTaskStatus: typeof import("./getPullStreamTaskStatus").getPullStreamTaskStatus = null as any;
+export const getPullStreamTaskStatusOutput: typeof import("./getPullStreamTaskStatus").getPullStreamTaskStatusOutput = null as any;
+utilities.lazyLoad(exports, ["getPullStreamTaskStatus","getPullStreamTaskStatusOutput"], () => require("./getPullStreamTaskStatus"));
+
+export { GetStreamMonitorListArgs, GetStreamMonitorListResult, GetStreamMonitorListOutputArgs } from "./getStreamMonitorList";
+export const getStreamMonitorList: typeof import("./getStreamMonitorList").getStreamMonitorList = null as any;
+export const getStreamMonitorListOutput: typeof import("./getStreamMonitorList").getStreamMonitorListOutput = null as any;
+utilities.lazyLoad(exports, ["getStreamMonitorList","getStreamMonitorListOutput"], () => require("./getStreamMonitorList"));
+
+export { GetTimeShiftRecordDetailArgs, GetTimeShiftRecordDetailResult, GetTimeShiftRecordDetailOutputArgs } from "./getTimeShiftRecordDetail";
+export const getTimeShiftRecordDetail: typeof import("./getTimeShiftRecordDetail").getTimeShiftRecordDetail = null as any;
+export const getTimeShiftRecordDetailOutput: typeof import("./getTimeShiftRecordDetail").getTimeShiftRecordDetailOutput = null as any;
+utilities.lazyLoad(exports, ["getTimeShiftRecordDetail","getTimeShiftRecordDetailOutput"], () => require("./getTimeShiftRecordDetail"));
+
+export { GetTimeShiftStreamListArgs, GetTimeShiftStreamListResult, GetTimeShiftStreamListOutputArgs } from "./getTimeShiftStreamList";
+export const getTimeShiftStreamList: typeof import("./getTimeShiftStreamList").getTimeShiftStreamList = null as any;
+export const getTimeShiftStreamListOutput: typeof import("./getTimeShiftStreamList").getTimeShiftStreamListOutput = null as any;
+utilities.lazyLoad(exports, ["getTimeShiftStreamList","getTimeShiftStreamListOutput"], () => require("./getTimeShiftStreamList"));
+
+export { GetWatermarksArgs, GetWatermarksResult, GetWatermarksOutputArgs } from "./getWatermarks";
+export const getWatermarks: typeof import("./getWatermarks").getWatermarks = null as any;
+export const getWatermarksOutput: typeof import("./getWatermarks").getWatermarksOutput = null as any;
+utilities.lazyLoad(exports, ["getWatermarks","getWatermarksOutput"], () => require("./getWatermarks"));
+
+export { GetXp2pDetailInfoListArgs, GetXp2pDetailInfoListResult, GetXp2pDetailInfoListOutputArgs } from "./getXp2pDetailInfoList";
+export const getXp2pDetailInfoList: typeof import("./getXp2pDetailInfoList").getXp2pDetailInfoList = null as any;
+export const getXp2pDetailInfoListOutput: typeof import("./getXp2pDetailInfoList").getXp2pDetailInfoListOutput = null as any;
+utilities.lazyLoad(exports, ["getXp2pDetailInfoList","getXp2pDetailInfoListOutput"], () => require("./getXp2pDetailInfoList"));
+
+export { LiveTranscodeRuleAttachmentArgs, LiveTranscodeRuleAttachmentState } from "./liveTranscodeRuleAttachment";
+export type LiveTranscodeRuleAttachment = import("./liveTranscodeRuleAttachment").LiveTranscodeRuleAttachment;
+export const LiveTranscodeRuleAttachment: typeof import("./liveTranscodeRuleAttachment").LiveTranscodeRuleAttachment = null as any;
+utilities.lazyLoad(exports, ["LiveTranscodeRuleAttachment"], () => require("./liveTranscodeRuleAttachment"));
+
+export { LiveTranscodeTemplateArgs, LiveTranscodeTemplateState } from "./liveTranscodeTemplate";
+export type LiveTranscodeTemplate = import("./liveTranscodeTemplate").LiveTranscodeTemplate;
+export const LiveTranscodeTemplate: typeof import("./liveTranscodeTemplate").LiveTranscodeTemplate = null as any;
+utilities.lazyLoad(exports, ["LiveTranscodeTemplate"], () => require("./liveTranscodeTemplate"));
+
+export { PadRuleAttachmentArgs, PadRuleAttachmentState } from "./padRuleAttachment";
+export type PadRuleAttachment = import("./padRuleAttachment").PadRuleAttachment;
+export const PadRuleAttachment: typeof import("./padRuleAttachment").PadRuleAttachment = null as any;
+utilities.lazyLoad(exports, ["PadRuleAttachment"], () => require("./padRuleAttachment"));
+
+export { PadTemplateArgs, PadTemplateState } from "./padTemplate";
+export type PadTemplate = import("./padTemplate").PadTemplate;
+export const PadTemplate: typeof import("./padTemplate").PadTemplate = null as any;
+utilities.lazyLoad(exports, ["PadTemplate"], () => require("./padTemplate"));
+
+export { PlayAuthKeyConfigArgs, PlayAuthKeyConfigState } from "./playAuthKeyConfig";
+export type PlayAuthKeyConfig = import("./playAuthKeyConfig").PlayAuthKeyConfig;
+export const PlayAuthKeyConfig: typeof import("./playAuthKeyConfig").PlayAuthKeyConfig = null as any;
+utilities.lazyLoad(exports, ["PlayAuthKeyConfig"], () => require("./playAuthKeyConfig"));
+
+export { PlayDomainCertAttachmentArgs, PlayDomainCertAttachmentState } from "./playDomainCertAttachment";
+export type PlayDomainCertAttachment = import("./playDomainCertAttachment").PlayDomainCertAttachment;
+export const PlayDomainCertAttachment: typeof import("./playDomainCertAttachment").PlayDomainCertAttachment = null as any;
+utilities.lazyLoad(exports, ["PlayDomainCertAttachment"], () => require("./playDomainCertAttachment"));
+
+export { PullStreamTaskArgs, PullStreamTaskState } from "./pullStreamTask";
+export type PullStreamTask = import("./pullStreamTask").PullStreamTask;
+export const PullStreamTask: typeof import("./pullStreamTask").PullStreamTask = null as any;
+utilities.lazyLoad(exports, ["PullStreamTask"], () => require("./pullStreamTask"));
+
+export { PullStreamTaskRestartArgs, PullStreamTaskRestartState } from "./pullStreamTaskRestart";
+export type PullStreamTaskRestart = import("./pullStreamTaskRestart").PullStreamTaskRestart;
+export const PullStreamTaskRestart: typeof import("./pullStreamTaskRestart").PullStreamTaskRestart = null as any;
+utilities.lazyLoad(exports, ["PullStreamTaskRestart"], () => require("./pullStreamTaskRestart"));
+
+export { PushAuthKeyConfigArgs, PushAuthKeyConfigState } from "./pushAuthKeyConfig";
+export type PushAuthKeyConfig = import("./pushAuthKeyConfig").PushAuthKeyConfig;
+export const PushAuthKeyConfig: typeof import("./pushAuthKeyConfig").PushAuthKeyConfig = null as any;
+utilities.lazyLoad(exports, ["PushAuthKeyConfig"], () => require("./pushAuthKeyConfig"));
+
+export { RecordRuleAttachmentArgs, RecordRuleAttachmentState } from "./recordRuleAttachment";
+export type RecordRuleAttachment = import("./recordRuleAttachment").RecordRuleAttachment;
+export const RecordRuleAttachment: typeof import("./recordRuleAttachment").RecordRuleAttachment = null as any;
+utilities.lazyLoad(exports, ["RecordRuleAttachment"], () => require("./recordRuleAttachment"));
+
+export { RecordTemplateArgs, RecordTemplateState } from "./recordTemplate";
+export type RecordTemplate = import("./recordTemplate").RecordTemplate;
+export const RecordTemplate: typeof import("./recordTemplate").RecordTemplate = null as any;
+utilities.lazyLoad(exports, ["RecordTemplate"], () => require("./recordTemplate"));
+
+export { SnapshotRuleAttachmentArgs, SnapshotRuleAttachmentState } from "./snapshotRuleAttachment";
+export type SnapshotRuleAttachment = import("./snapshotRuleAttachment").SnapshotRuleAttachment;
+export const SnapshotRuleAttachment: typeof import("./snapshotRuleAttachment").SnapshotRuleAttachment = null as any;
+utilities.lazyLoad(exports, ["SnapshotRuleAttachment"], () => require("./snapshotRuleAttachment"));
+
+export { SnapshotTemplateArgs, SnapshotTemplateState } from "./snapshotTemplate";
+export type SnapshotTemplate = import("./snapshotTemplate").SnapshotTemplate;
+export const SnapshotTemplate: typeof import("./snapshotTemplate").SnapshotTemplate = null as any;
+utilities.lazyLoad(exports, ["SnapshotTemplate"], () => require("./snapshotTemplate"));
+
+export { StartStreamMonitorArgs, StartStreamMonitorState } from "./startStreamMonitor";
+export type StartStreamMonitor = import("./startStreamMonitor").StartStreamMonitor;
+export const StartStreamMonitor: typeof import("./startStreamMonitor").StartStreamMonitor = null as any;
+utilities.lazyLoad(exports, ["StartStreamMonitor"], () => require("./startStreamMonitor"));
+
+export { StreamMonitorArgs, StreamMonitorState } from "./streamMonitor";
+export type StreamMonitor = import("./streamMonitor").StreamMonitor;
+export const StreamMonitor: typeof import("./streamMonitor").StreamMonitor = null as any;
+utilities.lazyLoad(exports, ["StreamMonitor"], () => require("./streamMonitor"));
+
+export { TimeshiftRuleAttachmentArgs, TimeshiftRuleAttachmentState } from "./timeshiftRuleAttachment";
+export type TimeshiftRuleAttachment = import("./timeshiftRuleAttachment").TimeshiftRuleAttachment;
+export const TimeshiftRuleAttachment: typeof import("./timeshiftRuleAttachment").TimeshiftRuleAttachment = null as any;
+utilities.lazyLoad(exports, ["TimeshiftRuleAttachment"], () => require("./timeshiftRuleAttachment"));
+
+export { TimeshiftTemplateArgs, TimeshiftTemplateState } from "./timeshiftTemplate";
+export type TimeshiftTemplate = import("./timeshiftTemplate").TimeshiftTemplate;
+export const TimeshiftTemplate: typeof import("./timeshiftTemplate").TimeshiftTemplate = null as any;
+utilities.lazyLoad(exports, ["TimeshiftTemplate"], () => require("./timeshiftTemplate"));
+
+export { WatermarkArgs, WatermarkState } from "./watermark";
+export type Watermark = import("./watermark").Watermark;
+export const Watermark: typeof import("./watermark").Watermark = null as any;
+utilities.lazyLoad(exports, ["Watermark"], () => require("./watermark"));
+
+export { WatermarkRuleAttachmentArgs, WatermarkRuleAttachmentState } from "./watermarkRuleAttachment";
+export type WatermarkRuleAttachment = import("./watermarkRuleAttachment").WatermarkRuleAttachment;
+export const WatermarkRuleAttachment: typeof import("./watermarkRuleAttachment").WatermarkRuleAttachment = null as any;
+utilities.lazyLoad(exports, ["WatermarkRuleAttachment"], () => require("./watermarkRuleAttachment"));
+
 
 const _module = {
     version: utilities.getVersion(),

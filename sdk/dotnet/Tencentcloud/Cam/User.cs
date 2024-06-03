@@ -15,45 +15,46 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var foo = new Tencentcloud.Cam.User("foo", new()
     ///     {
-    ///         var foo = new Tencentcloud.Cam.User("foo", new Tencentcloud.Cam.UserArgs
+    ///         ConsoleLogin = true,
+    ///         CountryCode = "86",
+    ///         Email = "hello@test.com",
+    ///         ForceDelete = true,
+    ///         NeedResetPassword = true,
+    ///         Password = "Gail@1234",
+    ///         PhoneNum = "12345678910",
+    ///         Remark = "tf_user_test",
+    ///         Tags = 
     ///         {
-    ///             ConsoleLogin = true,
-    ///             CountryCode = "86",
-    ///             Email = "hello@test.com",
-    ///             ForceDelete = true,
-    ///             NeedResetPassword = true,
-    ///             Password = "Gail@1234",
-    ///             PhoneNum = "12345678910",
-    ///             Remark = "tf_user_test",
-    ///             Tags = 
-    ///             {
-    ///                 { "test", "tf_cam_user" },
-    ///             },
-    ///             UseApi = true,
-    ///         });
-    ///     }
+    ///             { "test", "tf_cam_user" },
+    ///         },
+    ///         UseApi = true,
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// CAM user can be imported using the user name, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Cam/user:User foo cam-user-test
+    /// $ pulumi import tencentcloud:Cam/user:User foo cam-user-test
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Cam/user:User")]
-    public partial class User : Pulumi.CustomResource
+    public partial class User : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Indicate whether the CAM user can login to the web console or not.
@@ -169,6 +170,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam
             {
                 Version = Utilities.Version,
                 PluginDownloadURL = "github://api.github.com/tencentcloudstack",
+                AdditionalSecretOutputs =
+                {
+                    "password",
+                    "secretId",
+                    "secretKey",
+                },
             };
             var merged = CustomResourceOptions.Merge(defaultOptions, options);
             // Override the ID if one was specified for consistency with other language SDKs.
@@ -190,7 +197,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam
         }
     }
 
-    public sealed class UserArgs : Pulumi.ResourceArgs
+    public sealed class UserArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Indicate whether the CAM user can login to the web console or not.
@@ -228,11 +235,21 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam
         [Input("needResetPassword")]
         public Input<bool>? NeedResetPassword { get; set; }
 
+        [Input("password")]
+        private Input<string>? _password;
+
         /// <summary>
         /// The password of the CAM user. Password should be at least 8 characters and no more than 32 characters, includes uppercase letters, lowercase letters, numbers and special characters. Only required when `console_login` is true. If not set, a random password will be automatically generated.
         /// </summary>
-        [Input("password")]
-        public Input<string>? Password { get; set; }
+        public Input<string>? Password
+        {
+            get => _password;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _password = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
 
         /// <summary>
         /// Phone number of the CAM user.
@@ -267,9 +284,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam
         public UserArgs()
         {
         }
+        public static new UserArgs Empty => new UserArgs();
     }
 
-    public sealed class UserState : Pulumi.ResourceArgs
+    public sealed class UserState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Indicate whether the CAM user can login to the web console or not.
@@ -307,11 +325,21 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam
         [Input("needResetPassword")]
         public Input<bool>? NeedResetPassword { get; set; }
 
+        [Input("password")]
+        private Input<string>? _password;
+
         /// <summary>
         /// The password of the CAM user. Password should be at least 8 characters and no more than 32 characters, includes uppercase letters, lowercase letters, numbers and special characters. Only required when `console_login` is true. If not set, a random password will be automatically generated.
         /// </summary>
-        [Input("password")]
-        public Input<string>? Password { get; set; }
+        public Input<string>? Password
+        {
+            get => _password;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _password = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
 
         /// <summary>
         /// Phone number of the CAM user.
@@ -325,17 +353,37 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam
         [Input("remark")]
         public Input<string>? Remark { get; set; }
 
+        [Input("secretId")]
+        private Input<string>? _secretId;
+
         /// <summary>
         /// Secret ID of the CAM user.
         /// </summary>
-        [Input("secretId")]
-        public Input<string>? SecretId { get; set; }
+        public Input<string>? SecretId
+        {
+            get => _secretId;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _secretId = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
+
+        [Input("secretKey")]
+        private Input<string>? _secretKey;
 
         /// <summary>
         /// Secret key of the CAM user.
         /// </summary>
-        [Input("secretKey")]
-        public Input<string>? SecretKey { get; set; }
+        public Input<string>? SecretKey
+        {
+            get => _secretKey;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _secretKey = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
 
         [Input("tags")]
         private InputMap<object>? _tags;
@@ -370,5 +418,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam
         public UserState()
         {
         }
+        public static new UserState Empty => new UserState();
     }
 }

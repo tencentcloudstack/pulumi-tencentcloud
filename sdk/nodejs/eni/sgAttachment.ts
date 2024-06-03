@@ -9,58 +9,12 @@ import * as utilities from "../utilities";
  *
  * > **Note:** If this resource is used to bind security groups to eni, it cannot be linked to `tentcloudEni` binding security group for simultaneous use.
  *
- * ## Example Usage
- *
- * ```typescript
- * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
- *
- * const zones = tencentcloud.Availability.getZonesByProduct({
- *     product: "vpc",
- * });
- * const vpc = new tencentcloud.vpc.Instance("vpc", {cidrBlock: "10.0.0.0/16"});
- * const subnet = new tencentcloud.subnet.Instance("subnet", {
- *     availabilityZone: zones.then(zones => zones.zones?[0]?.name),
- *     vpcId: vpc.id,
- *     cidrBlock: "10.0.0.0/16",
- *     isMulticast: false,
- * });
- * const example1 = new tencentcloud.security.Group("example1", {
- *     description: "sg desc.",
- *     projectId: 0,
- *     tags: {
- *         example: "test",
- *     },
- * });
- * const example2 = new tencentcloud.security.Group("example2", {
- *     description: "sg desc.",
- *     projectId: 0,
- *     tags: {
- *         example: "test",
- *     },
- * });
- * const example = new tencentcloud.eni.Instance("example", {
- *     vpcId: vpc.id,
- *     subnetId: subnet.id,
- *     description: "eni desc.",
- *     ipv4Count: 1,
- * });
- * const eniSgAttachment = new tencentcloud.eni.SgAttachment("eniSgAttachment", {
- *     networkInterfaceIds: [example.id],
- *     securityGroupIds: [
- *         example1.id,
- *         example2.id,
- *     ],
- * });
- * ```
- *
  * ## Import
  *
  * vpc eni_sg_attachment can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Eni/sgAttachment:SgAttachment eni_sg_attachment eni_sg_attachment_id
+ * $ pulumi import tencentcloud:Eni/sgAttachment:SgAttachment eni_sg_attachment eni_sg_attachment_id
  * ```
  */
 export class SgAttachment extends pulumi.CustomResource {

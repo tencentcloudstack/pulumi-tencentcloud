@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Scf.Inputs
 {
 
-    public sealed class FunctionAliasRoutingConfigAdditionalVersionWeightArgs : Pulumi.ResourceArgs
+    public sealed class FunctionAliasRoutingConfigAdditionalVersionWeightArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Function version name.
@@ -28,5 +28,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Scf.Inputs
         public FunctionAliasRoutingConfigAdditionalVersionWeightArgs()
         {
         }
+        public static new FunctionAliasRoutingConfigAdditionalVersionWeightArgs Empty => new FunctionAliasRoutingConfigAdditionalVersionWeightArgs();
     }
 }

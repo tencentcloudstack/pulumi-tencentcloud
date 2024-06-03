@@ -8,37 +8,42 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Use this data source to get information about a parameter group of a database instance.
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Mysql"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Mysql"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Mysql"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Mysql.GetParameterList(ctx, &mysql.GetParameterListArgs{
-// 			EngineVersion:    pulumi.StringRef("5.5"),
-// 			MysqlId:          pulumi.StringRef("terraform-test-local-database"),
-// 			ResultOutputFile: pulumi.StringRef("mytestpath"),
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Mysql.GetParameterList(ctx, &mysql.GetParameterListArgs{
+//				EngineVersion:    pulumi.StringRef("5.5"),
+//				MysqlId:          pulumi.StringRef("terraform-test-local-database"),
+//				ResultOutputFile: pulumi.StringRef("mytestpath"),
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 func GetParameterList(ctx *pulumi.Context, args *GetParameterListArgs, opts ...pulumi.InvokeOption) (*GetParameterListResult, error) {
-	opts = pkgInvokeDefaultOpts(opts)
+	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetParameterListResult
 	err := ctx.Invoke("tencentcloud:Mysql/getParameterList:getParameterList", args, &rv, opts...)
 	if err != nil {

@@ -9,15 +9,17 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const switchDataEngineImageOperation = new tencentcloud.Dlc.SwitchDataEngineImageOperation("switch_data_engine_image_operation", {
+ * const switchDataEngineImageOperation = new tencentcloud.dlc.SwitchDataEngineImageOperation("switchDataEngineImageOperation", {
  *     dataEngineId: "DataEngine-g5ds87d8",
  *     newImageVersionId: "344ba1c6-b7a9-403a-a255-422fffed6d38",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export class SwitchDataEngineImageOperation extends pulumi.CustomResource {
     /**

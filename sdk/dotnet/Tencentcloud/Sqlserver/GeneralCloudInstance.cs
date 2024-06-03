@@ -15,87 +15,92 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = Pulumi.Tencentcloud;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var zones = Tencentcloud.Availability.GetZonesByProduct.Invoke(new()
     ///     {
-    ///         var zones = Output.Create(Tencentcloud.Availability.GetZonesByProduct.InvokeAsync(new Tencentcloud.Availability.GetZonesByProductArgs
-    ///         {
-    ///             Product = "sqlserver",
-    ///         }));
-    ///         var vpc = new Tencentcloud.Vpc.Instance("vpc", new Tencentcloud.Vpc.InstanceArgs
-    ///         {
-    ///             CidrBlock = "10.0.0.0/16",
-    ///         });
-    ///         var subnet = new Tencentcloud.Subnet.Instance("subnet", new Tencentcloud.Subnet.InstanceArgs
-    ///         {
-    ///             AvailabilityZone = zones.Apply(zones =&gt; zones.Zones?[4]?.Name),
-    ///             VpcId = vpc.Id,
-    ///             CidrBlock = "10.0.0.0/16",
-    ///             IsMulticast = false,
-    ///         });
-    ///         var securityGroup = new Tencentcloud.Security.Group("securityGroup", new Tencentcloud.Security.GroupArgs
-    ///         {
-    ///             Description = "desc.",
-    ///         });
-    ///         var example = new Tencentcloud.Sqlserver.GeneralCloudInstance("example", new Tencentcloud.Sqlserver.GeneralCloudInstanceArgs
-    ///         {
-    ///             Zone = zones.Apply(zones =&gt; zones.Zones?[4]?.Name),
-    ///             Memory = 4,
-    ///             Storage = 100,
-    ///             Cpu = 2,
-    ///             MachineType = "CLOUD_HSSD",
-    ///             InstanceChargeType = "POSTPAID",
-    ///             ProjectId = 0,
-    ///             SubnetId = subnet.Id,
-    ///             VpcId = vpc.Id,
-    ///             DbVersion = "2008R2",
-    ///             SecurityGroupLists = 
-    ///             {
-    ///                 securityGroup.Id,
-    ///             },
-    ///             Weeklies = 
-    ///             {
-    ///                 1,
-    ///                 2,
-    ///                 3,
-    ///                 5,
-    ///                 6,
-    ///                 7,
-    ///             },
-    ///             StartTime = "00:00",
-    ///             Span = 6,
-    ///             ResourceTags = 
-    ///             {
-    ///                 new Tencentcloud.Sqlserver.Inputs.GeneralCloudInstanceResourceTagArgs
-    ///                 {
-    ///                     TagKey = "test",
-    ///                     TagValue = "test",
-    ///                 },
-    ///             },
-    ///             Collation = "Chinese_PRC_CI_AS",
-    ///             TimeZone = "China Standard Time",
-    ///         });
-    ///     }
+    ///         Product = "sqlserver",
+    ///     });
     /// 
-    /// }
+    ///     var vpc = new Tencentcloud.Vpc.Instance("vpc", new()
+    ///     {
+    ///         CidrBlock = "10.0.0.0/16",
+    ///     });
+    /// 
+    ///     var subnet = new Tencentcloud.Subnet.Instance("subnet", new()
+    ///     {
+    ///         AvailabilityZone = zones.Apply(getZonesByProductResult =&gt; getZonesByProductResult.Zones[4]?.Name),
+    ///         VpcId = vpc.Id,
+    ///         CidrBlock = "10.0.0.0/16",
+    ///         IsMulticast = false,
+    ///     });
+    /// 
+    ///     var securityGroup = new Tencentcloud.Security.Group("securityGroup", new()
+    ///     {
+    ///         Description = "desc.",
+    ///     });
+    /// 
+    ///     var example = new Tencentcloud.Sqlserver.GeneralCloudInstance("example", new()
+    ///     {
+    ///         Zone = zones.Apply(getZonesByProductResult =&gt; getZonesByProductResult.Zones[4]?.Name),
+    ///         Memory = 4,
+    ///         Storage = 100,
+    ///         Cpu = 2,
+    ///         MachineType = "CLOUD_HSSD",
+    ///         InstanceChargeType = "POSTPAID",
+    ///         ProjectId = 0,
+    ///         SubnetId = subnet.Id,
+    ///         VpcId = vpc.Id,
+    ///         DbVersion = "2008R2",
+    ///         SecurityGroupLists = new[]
+    ///         {
+    ///             securityGroup.Id,
+    ///         },
+    ///         Weeklies = new[]
+    ///         {
+    ///             1,
+    ///             2,
+    ///             3,
+    ///             5,
+    ///             6,
+    ///             7,
+    ///         },
+    ///         StartTime = "00:00",
+    ///         Span = 6,
+    ///         ResourceTags = new[]
+    ///         {
+    ///             new Tencentcloud.Sqlserver.Inputs.GeneralCloudInstanceResourceTagArgs
+    ///             {
+    ///                 TagKey = "test",
+    ///                 TagValue = "test",
+    ///             },
+    ///         },
+    ///         Collation = "Chinese_PRC_CI_AS",
+    ///         TimeZone = "China Standard Time",
+    ///     });
+    /// 
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// sqlserver general_cloud_instance can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Sqlserver/generalCloudInstance:GeneralCloudInstance example mssql-i9ma6oy7
+    /// $ pulumi import tencentcloud:Sqlserver/generalCloudInstance:GeneralCloudInstance example mssql-i9ma6oy7
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Sqlserver/generalCloudInstance:GeneralCloudInstance")]
-    public partial class GeneralCloudInstance : Pulumi.CustomResource
+    public partial class GeneralCloudInstance : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Automatic renewal flag: 0-normal renewal 1-automatic renewal, the default is 1 automatic renewal. Valid only when purchasing a prepaid instance. Valid only when the 'instance_charge_type' parameter value is 'PREPAID'.
@@ -268,7 +273,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
         }
     }
 
-    public sealed class GeneralCloudInstanceArgs : Pulumi.ResourceArgs
+    public sealed class GeneralCloudInstanceArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Automatic renewal flag: 0-normal renewal 1-automatic renewal, the default is 1 automatic renewal. Valid only when purchasing a prepaid instance. Valid only when the 'instance_charge_type' parameter value is 'PREPAID'.
@@ -417,9 +422,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
         public GeneralCloudInstanceArgs()
         {
         }
+        public static new GeneralCloudInstanceArgs Empty => new GeneralCloudInstanceArgs();
     }
 
-    public sealed class GeneralCloudInstanceState : Pulumi.ResourceArgs
+    public sealed class GeneralCloudInstanceState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Automatic renewal flag: 0-normal renewal 1-automatic renewal, the default is 1 automatic renewal. Valid only when purchasing a prepaid instance. Valid only when the 'instance_charge_type' parameter value is 'PREPAID'.
@@ -568,5 +574,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
         public GeneralCloudInstanceState()
         {
         }
+        public static new GeneralCloudInstanceState Empty => new GeneralCloudInstanceState();
     }
 }

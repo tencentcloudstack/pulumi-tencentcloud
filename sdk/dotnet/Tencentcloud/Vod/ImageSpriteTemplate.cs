@@ -13,43 +13,16 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vod
     /// <summary>
     /// Provide a resource to create a VOD image sprite template.
     /// 
-    /// ## Example Usage
-    /// 
-    /// ```csharp
-    /// using Pulumi;
-    /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
-    /// 
-    /// class MyStack : Stack
-    /// {
-    ///     public MyStack()
-    ///     {
-    ///         var foo = new Tencentcloud.Vod.ImageSpriteTemplate("foo", new Tencentcloud.Vod.ImageSpriteTemplateArgs
-    ///         {
-    ///             ColumnCount = 3,
-    ///             Comment = "test",
-    ///             FillType = "stretch",
-    ///             Height = 128,
-    ///             ResolutionAdaptive = false,
-    ///             RowCount = 3,
-    ///             SampleInterval = 10,
-    ///             SampleType = "Percent",
-    ///             Width = 128,
-    ///         });
-    ///     }
-    /// 
-    /// }
-    /// ```
-    /// 
     /// ## Import
     /// 
-    /// VOD image sprite template can be imported using the id, e.g.
+    /// VOD image sprite template can be imported using the id($subAppId#$templateId), e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Vod/imageSpriteTemplate:ImageSpriteTemplate foo 51156
+    /// $ pulumi import tencentcloud:Vod/imageSpriteTemplate:ImageSpriteTemplate foo $subAppId#$templateId
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Vod/imageSpriteTemplate:ImageSpriteTemplate")]
-    public partial class ImageSpriteTemplate : Pulumi.CustomResource
+    public partial class ImageSpriteTemplate : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Subimage column count of an image sprite.
@@ -74,6 +47,16 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vod
         /// </summary>
         [Output("fillType")]
         public Output<string?> FillType { get; private set; } = null!;
+
+        /// <summary>
+        /// Image format, Valid values:
+        /// - jpg: jpg format;
+        /// - png: png format;
+        /// - webp: webp format;
+        /// Default value: jpg.
+        /// </summary>
+        [Output("format")]
+        public Output<string> Format { get; private set; } = null!;
 
         /// <summary>
         /// Maximum value of the `height` (or short side) of a screenshot in px. Value range: 0 and [128, 4,096]. If both `width` and `height` are `0`, the resolution will be the same as that of the source video; If `width` is `0`, but `height` is not `0`, `width` will be proportionally scaled; If `width` is not `0`, but `height` is `0`, `height` will be proportionally scaled; If both `width` and `height` are not `0`, the custom resolution will be used. Default value: `0`.
@@ -112,10 +95,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vod
         public Output<string> SampleType { get; private set; } = null!;
 
         /// <summary>
-        /// Subapplication ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+        /// The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.
         /// </summary>
         [Output("subAppId")]
         public Output<int?> SubAppId { get; private set; } = null!;
+
+        /// <summary>
+        /// Template type, value range:
+        /// - Preset: system preset template;
+        /// - Custom: user-defined templates.
+        /// </summary>
+        [Output("type")]
+        public Output<string> Type { get; private set; } = null!;
 
         /// <summary>
         /// Last modified time of template in ISO date format.
@@ -174,7 +165,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vod
         }
     }
 
-    public sealed class ImageSpriteTemplateArgs : Pulumi.ResourceArgs
+    public sealed class ImageSpriteTemplateArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Subimage column count of an image sprite.
@@ -193,6 +184,16 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vod
         /// </summary>
         [Input("fillType")]
         public Input<string>? FillType { get; set; }
+
+        /// <summary>
+        /// Image format, Valid values:
+        /// - jpg: jpg format;
+        /// - png: png format;
+        /// - webp: webp format;
+        /// Default value: jpg.
+        /// </summary>
+        [Input("format")]
+        public Input<string>? Format { get; set; }
 
         /// <summary>
         /// Maximum value of the `height` (or short side) of a screenshot in px. Value range: 0 and [128, 4,096]. If both `width` and `height` are `0`, the resolution will be the same as that of the source video; If `width` is `0`, but `height` is not `0`, `width` will be proportionally scaled; If `width` is not `0`, but `height` is `0`, `height` will be proportionally scaled; If both `width` and `height` are not `0`, the custom resolution will be used. Default value: `0`.
@@ -231,7 +232,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vod
         public Input<string> SampleType { get; set; } = null!;
 
         /// <summary>
-        /// Subapplication ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+        /// The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.
         /// </summary>
         [Input("subAppId")]
         public Input<int>? SubAppId { get; set; }
@@ -245,9 +246,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vod
         public ImageSpriteTemplateArgs()
         {
         }
+        public static new ImageSpriteTemplateArgs Empty => new ImageSpriteTemplateArgs();
     }
 
-    public sealed class ImageSpriteTemplateState : Pulumi.ResourceArgs
+    public sealed class ImageSpriteTemplateState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Subimage column count of an image sprite.
@@ -272,6 +274,16 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vod
         /// </summary>
         [Input("fillType")]
         public Input<string>? FillType { get; set; }
+
+        /// <summary>
+        /// Image format, Valid values:
+        /// - jpg: jpg format;
+        /// - png: png format;
+        /// - webp: webp format;
+        /// Default value: jpg.
+        /// </summary>
+        [Input("format")]
+        public Input<string>? Format { get; set; }
 
         /// <summary>
         /// Maximum value of the `height` (or short side) of a screenshot in px. Value range: 0 and [128, 4,096]. If both `width` and `height` are `0`, the resolution will be the same as that of the source video; If `width` is `0`, but `height` is not `0`, `width` will be proportionally scaled; If `width` is not `0`, but `height` is `0`, `height` will be proportionally scaled; If both `width` and `height` are not `0`, the custom resolution will be used. Default value: `0`.
@@ -310,10 +322,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vod
         public Input<string>? SampleType { get; set; }
 
         /// <summary>
-        /// Subapplication ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+        /// The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.
         /// </summary>
         [Input("subAppId")]
         public Input<int>? SubAppId { get; set; }
+
+        /// <summary>
+        /// Template type, value range:
+        /// - Preset: system preset template;
+        /// - Custom: user-defined templates.
+        /// </summary>
+        [Input("type")]
+        public Input<string>? Type { get; set; }
 
         /// <summary>
         /// Last modified time of template in ISO date format.
@@ -330,5 +350,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vod
         public ImageSpriteTemplateState()
         {
         }
+        public static new ImageSpriteTemplateState Empty => new ImageSpriteTemplateState();
     }
 }

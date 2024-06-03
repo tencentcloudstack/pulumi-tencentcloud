@@ -15,7 +15,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Outputs
     public sealed class RuleEngineRuleOr
     {
         /// <summary>
-        /// AND Conditions list of the rule. Rule would be triggered if all conditions are true.
+        /// Rule engine condition. This condition will be considered met if all items in the array are met.
         /// </summary>
         public readonly ImmutableArray<Outputs.RuleEngineRuleOrAnd> Ands;
 

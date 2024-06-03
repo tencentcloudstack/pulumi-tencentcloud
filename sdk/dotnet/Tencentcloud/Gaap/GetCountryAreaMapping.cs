@@ -15,58 +15,52 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
         /// <summary>
         /// Use this data source to query detailed information of gaap country area mapping
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
-        ///     {
-        ///         var countryAreaMapping = Output.Create(Tencentcloud.Gaap.GetCountryAreaMapping.InvokeAsync());
-        ///     }
+        ///     var countryAreaMapping = Tencentcloud.Gaap.GetCountryAreaMapping.Invoke();
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetCountryAreaMappingResult> InvokeAsync(GetCountryAreaMappingArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetCountryAreaMappingResult>("tencentcloud:Gaap/getCountryAreaMapping:getCountryAreaMapping", args ?? new GetCountryAreaMappingArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetCountryAreaMappingResult>("tencentcloud:Gaap/getCountryAreaMapping:getCountryAreaMapping", args ?? new GetCountryAreaMappingArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of gaap country area mapping
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
-        ///     {
-        ///         var countryAreaMapping = Output.Create(Tencentcloud.Gaap.GetCountryAreaMapping.InvokeAsync());
-        ///     }
+        ///     var countryAreaMapping = Tencentcloud.Gaap.GetCountryAreaMapping.Invoke();
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetCountryAreaMappingResult> Invoke(GetCountryAreaMappingInvokeArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetCountryAreaMappingResult>("tencentcloud:Gaap/getCountryAreaMapping:getCountryAreaMapping", args ?? new GetCountryAreaMappingInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetCountryAreaMappingResult>("tencentcloud:Gaap/getCountryAreaMapping:getCountryAreaMapping", args ?? new GetCountryAreaMappingInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetCountryAreaMappingArgs : Pulumi.InvokeArgs
+    public sealed class GetCountryAreaMappingArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Used to save results.
@@ -77,9 +71,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
         public GetCountryAreaMappingArgs()
         {
         }
+        public static new GetCountryAreaMappingArgs Empty => new GetCountryAreaMappingArgs();
     }
 
-    public sealed class GetCountryAreaMappingInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetCountryAreaMappingInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Used to save results.
@@ -90,6 +85,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
         public GetCountryAreaMappingInvokeArgs()
         {
         }
+        public static new GetCountryAreaMappingInvokeArgs Empty => new GetCountryAreaMappingInvokeArgs();
     }
 
 

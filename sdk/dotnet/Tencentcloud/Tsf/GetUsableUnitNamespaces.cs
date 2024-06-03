@@ -15,64 +15,58 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf
         /// <summary>
         /// Use this data source to query detailed information of tsf usable_unit_namespaces
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var usableUnitNamespaces = Tencentcloud.Tsf.GetUsableUnitNamespaces.Invoke(new()
         ///     {
-        ///         var usableUnitNamespaces = Output.Create(Tencentcloud.Tsf.GetUsableUnitNamespaces.InvokeAsync(new Tencentcloud.Tsf.GetUsableUnitNamespacesArgs
-        ///         {
-        ///             SearchWord = "",
-        ///         }));
-        ///     }
+        ///         SearchWord = "",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetUsableUnitNamespacesResult> InvokeAsync(GetUsableUnitNamespacesArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetUsableUnitNamespacesResult>("tencentcloud:Tsf/getUsableUnitNamespaces:getUsableUnitNamespaces", args ?? new GetUsableUnitNamespacesArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetUsableUnitNamespacesResult>("tencentcloud:Tsf/getUsableUnitNamespaces:getUsableUnitNamespaces", args ?? new GetUsableUnitNamespacesArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of tsf usable_unit_namespaces
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var usableUnitNamespaces = Tencentcloud.Tsf.GetUsableUnitNamespaces.Invoke(new()
         ///     {
-        ///         var usableUnitNamespaces = Output.Create(Tencentcloud.Tsf.GetUsableUnitNamespaces.InvokeAsync(new Tencentcloud.Tsf.GetUsableUnitNamespacesArgs
-        ///         {
-        ///             SearchWord = "",
-        ///         }));
-        ///     }
+        ///         SearchWord = "",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetUsableUnitNamespacesResult> Invoke(GetUsableUnitNamespacesInvokeArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetUsableUnitNamespacesResult>("tencentcloud:Tsf/getUsableUnitNamespaces:getUsableUnitNamespaces", args ?? new GetUsableUnitNamespacesInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetUsableUnitNamespacesResult>("tencentcloud:Tsf/getUsableUnitNamespaces:getUsableUnitNamespaces", args ?? new GetUsableUnitNamespacesInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetUsableUnitNamespacesArgs : Pulumi.InvokeArgs
+    public sealed class GetUsableUnitNamespacesArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Used to save results.
@@ -89,9 +83,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf
         public GetUsableUnitNamespacesArgs()
         {
         }
+        public static new GetUsableUnitNamespacesArgs Empty => new GetUsableUnitNamespacesArgs();
     }
 
-    public sealed class GetUsableUnitNamespacesInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetUsableUnitNamespacesInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Used to save results.
@@ -108,6 +103,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf
         public GetUsableUnitNamespacesInvokeArgs()
         {
         }
+        public static new GetUsableUnitNamespacesInvokeArgs Empty => new GetUsableUnitNamespacesInvokeArgs();
     }
 
 

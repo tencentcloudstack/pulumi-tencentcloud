@@ -7,48 +7,54 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a postgresql rebalanceReadonlyGroupOperation
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Postgresql"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Postgresql"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		groupRebalance, err := Postgresql.NewReadonlyGroup(ctx, "groupRebalance", &Postgresql.ReadonlyGroupArgs{
-// 			MasterDbInstanceId:       pulumi.Any(local.Pgsql_id),
-// 			ProjectId:                pulumi.Int(0),
-// 			VpcId:                    pulumi.String("vpc-86v957zb"),
-// 			SubnetId:                 pulumi.String("subnet-enm92y0m"),
-// 			ReplayLagEliminate:       pulumi.Int(1),
-// 			ReplayLatencyEliminate:   pulumi.Int(1),
-// 			MaxReplayLag:             pulumi.Int(100),
-// 			MaxReplayLatency:         pulumi.Int(512),
-// 			MinDelayEliminateReserve: pulumi.Int(1),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_, err = Postgresql.NewRebalanceReadonlyGroupOperation(ctx, "rebalanceReadonlyGroupOperation", &Postgresql.RebalanceReadonlyGroupOperationArgs{
-// 			ReadOnlyGroupId: groupRebalance.ID(),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			groupRebalance, err := Postgresql.NewReadonlyGroup(ctx, "groupRebalance", &Postgresql.ReadonlyGroupArgs{
+//				MasterDbInstanceId:       pulumi.Any(local.Pgsql_id),
+//				ProjectId:                pulumi.Int(0),
+//				VpcId:                    pulumi.String("vpc-86v957zb"),
+//				SubnetId:                 pulumi.String("subnet-enm92y0m"),
+//				ReplayLagEliminate:       pulumi.Int(1),
+//				ReplayLatencyEliminate:   pulumi.Int(1),
+//				MaxReplayLag:             pulumi.Int(100),
+//				MaxReplayLatency:         pulumi.Int(512),
+//				MinDelayEliminateReserve: pulumi.Int(1),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_, err = Postgresql.NewRebalanceReadonlyGroupOperation(ctx, "rebalanceReadonlyGroupOperation", &Postgresql.RebalanceReadonlyGroupOperationArgs{
+//				ReadOnlyGroupId: groupRebalance.ID(),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 type RebalanceReadonlyGroupOperation struct {
 	pulumi.CustomResourceState
 
@@ -66,7 +72,7 @@ func NewRebalanceReadonlyGroupOperation(ctx *pulumi.Context,
 	if args.ReadOnlyGroupId == nil {
 		return nil, errors.New("invalid value for required argument 'ReadOnlyGroupId'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource RebalanceReadonlyGroupOperation
 	err := ctx.RegisterResource("tencentcloud:Postgresql/rebalanceReadonlyGroupOperation:RebalanceReadonlyGroupOperation", name, args, &resource, opts...)
 	if err != nil {
@@ -139,7 +145,7 @@ func (i *RebalanceReadonlyGroupOperation) ToRebalanceReadonlyGroupOperationOutpu
 // RebalanceReadonlyGroupOperationArrayInput is an input type that accepts RebalanceReadonlyGroupOperationArray and RebalanceReadonlyGroupOperationArrayOutput values.
 // You can construct a concrete instance of `RebalanceReadonlyGroupOperationArrayInput` via:
 //
-//          RebalanceReadonlyGroupOperationArray{ RebalanceReadonlyGroupOperationArgs{...} }
+//	RebalanceReadonlyGroupOperationArray{ RebalanceReadonlyGroupOperationArgs{...} }
 type RebalanceReadonlyGroupOperationArrayInput interface {
 	pulumi.Input
 
@@ -164,7 +170,7 @@ func (i RebalanceReadonlyGroupOperationArray) ToRebalanceReadonlyGroupOperationA
 // RebalanceReadonlyGroupOperationMapInput is an input type that accepts RebalanceReadonlyGroupOperationMap and RebalanceReadonlyGroupOperationMapOutput values.
 // You can construct a concrete instance of `RebalanceReadonlyGroupOperationMapInput` via:
 //
-//          RebalanceReadonlyGroupOperationMap{ "key": RebalanceReadonlyGroupOperationArgs{...} }
+//	RebalanceReadonlyGroupOperationMap{ "key": RebalanceReadonlyGroupOperationArgs{...} }
 type RebalanceReadonlyGroupOperationMapInput interface {
 	pulumi.Input
 

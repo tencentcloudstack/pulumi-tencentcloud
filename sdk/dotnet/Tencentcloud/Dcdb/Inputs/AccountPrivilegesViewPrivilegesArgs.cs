@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dcdb.Inputs
 {
 
-    public sealed class AccountPrivilegesViewPrivilegesArgs : Pulumi.ResourceArgs
+    public sealed class AccountPrivilegesViewPrivilegesArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// The name of database.
@@ -40,5 +40,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dcdb.Inputs
         public AccountPrivilegesViewPrivilegesArgs()
         {
         }
+        public static new AccountPrivilegesViewPrivilegesArgs Empty => new AccountPrivilegesViewPrivilegesArgs();
     }
 }

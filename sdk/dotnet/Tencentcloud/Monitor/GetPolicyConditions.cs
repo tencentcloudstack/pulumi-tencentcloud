@@ -15,66 +15,60 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
         /// <summary>
         /// Use this data source to query monitor policy conditions(There is a lot of data and it is recommended to output to a file)
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var monitorPolicyConditions = Tencentcloud.Monitor.GetPolicyConditions.Invoke(new()
         ///     {
-        ///         var monitorPolicyConditions = Output.Create(Tencentcloud.Monitor.GetPolicyConditions.InvokeAsync(new Tencentcloud.Monitor.GetPolicyConditionsArgs
-        ///         {
-        ///             Name = "Cloud Virtual Machine",
-        ///             ResultOutputFile = "./tencentcloud_monitor_policy_conditions.txt",
-        ///         }));
-        ///     }
+        ///         Name = "Cloud Virtual Machine",
+        ///         ResultOutputFile = "./tencentcloud_monitor_policy_conditions.txt",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetPolicyConditionsResult> InvokeAsync(GetPolicyConditionsArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetPolicyConditionsResult>("tencentcloud:Monitor/getPolicyConditions:getPolicyConditions", args ?? new GetPolicyConditionsArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetPolicyConditionsResult>("tencentcloud:Monitor/getPolicyConditions:getPolicyConditions", args ?? new GetPolicyConditionsArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query monitor policy conditions(There is a lot of data and it is recommended to output to a file)
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var monitorPolicyConditions = Tencentcloud.Monitor.GetPolicyConditions.Invoke(new()
         ///     {
-        ///         var monitorPolicyConditions = Output.Create(Tencentcloud.Monitor.GetPolicyConditions.InvokeAsync(new Tencentcloud.Monitor.GetPolicyConditionsArgs
-        ///         {
-        ///             Name = "Cloud Virtual Machine",
-        ///             ResultOutputFile = "./tencentcloud_monitor_policy_conditions.txt",
-        ///         }));
-        ///     }
+        ///         Name = "Cloud Virtual Machine",
+        ///         ResultOutputFile = "./tencentcloud_monitor_policy_conditions.txt",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetPolicyConditionsResult> Invoke(GetPolicyConditionsInvokeArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetPolicyConditionsResult>("tencentcloud:Monitor/getPolicyConditions:getPolicyConditions", args ?? new GetPolicyConditionsInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetPolicyConditionsResult>("tencentcloud:Monitor/getPolicyConditions:getPolicyConditions", args ?? new GetPolicyConditionsInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetPolicyConditionsArgs : Pulumi.InvokeArgs
+    public sealed class GetPolicyConditionsArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Name of the policy name, support partial matching, eg:`Cloud Virtual Machine`,`Virtual`,`Cloud Load Banlancer-Private CLB Listener`.
@@ -91,9 +85,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
         public GetPolicyConditionsArgs()
         {
         }
+        public static new GetPolicyConditionsArgs Empty => new GetPolicyConditionsArgs();
     }
 
-    public sealed class GetPolicyConditionsInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetPolicyConditionsInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Name of the policy name, support partial matching, eg:`Cloud Virtual Machine`,`Virtual`,`Cloud Load Banlancer-Private CLB Listener`.
@@ -110,6 +105,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
         public GetPolicyConditionsInvokeArgs()
         {
         }
+        public static new GetPolicyConditionsInvokeArgs Empty => new GetPolicyConditionsInvokeArgs();
     }
 
 

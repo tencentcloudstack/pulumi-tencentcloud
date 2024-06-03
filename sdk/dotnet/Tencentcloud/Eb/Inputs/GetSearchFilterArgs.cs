@@ -11,30 +11,47 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Eb.Inputs
 {
 
-    public sealed class GetSearchFilterInputArgs : Pulumi.ResourceArgs
+    public sealed class GetSearchFilterInputArgs : global::Pulumi.ResourceArgs
     {
         [Input("filters")]
         private InputList<Inputs.GetSearchFilterFilterInputArgs>? _filters;
+
+        /// <summary>
+        /// LogFilters array.
+        /// </summary>
         public InputList<Inputs.GetSearchFilterFilterInputArgs> Filters
         {
             get => _filters ?? (_filters = new InputList<Inputs.GetSearchFilterFilterInputArgs>());
             set => _filters = value;
         }
 
+        /// <summary>
+        /// filter field name.
+        /// </summary>
         [Input("key")]
         public Input<string>? Key { get; set; }
 
+        /// <summary>
+        /// operator, congruent eq, not equal neq, similar like, exclude similar not like, less than lt, less than and equal to lte, greater than gt, greater than and equal to gte, in range range, not in range norange.
+        /// </summary>
         [Input("operator")]
         public Input<string>? Operator { get; set; }
 
+        /// <summary>
+        /// The logical relationship of the level filters, the value AND or OR.
+        /// </summary>
         [Input("type")]
         public Input<string>? Type { get; set; }
 
+        /// <summary>
+        /// Filter value, range operation needs to enter two values at the same time, separated by commas.
+        /// </summary>
         [Input("value")]
         public Input<string>? Value { get; set; }
 
         public GetSearchFilterInputArgs()
         {
         }
+        public static new GetSearchFilterInputArgs Empty => new GetSearchFilterInputArgs();
     }
 }

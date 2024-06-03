@@ -8,40 +8,43 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Use this data source to query detailed information of dbbrain slowLogTimeSeriesStats
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"fmt"
 //
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Dbbrain"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dbbrain"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dbbrain"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Dbbrain.GetSlowLogTimeSeriesStats(ctx, &dbbrain.GetSlowLogTimeSeriesStatsArgs{
-// 			EndTime:    fmt.Sprintf("%v%v", "%", "s"),
-// 			InstanceId: fmt.Sprintf("%v%v", "%", "s"),
-// 			Product:    pulumi.StringRef("mysql"),
-// 			StartTime:  fmt.Sprintf("%v%v", "%", "s"),
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Dbbrain.GetSlowLogTimeSeriesStats(ctx, &dbbrain.GetSlowLogTimeSeriesStatsArgs{
+//				EndTime:    "%s",
+//				InstanceId: "%s",
+//				Product:    pulumi.StringRef("mysql"),
+//				StartTime:  "%s",
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 func GetSlowLogTimeSeriesStats(ctx *pulumi.Context, args *GetSlowLogTimeSeriesStatsArgs, opts ...pulumi.InvokeOption) (*GetSlowLogTimeSeriesStatsResult, error) {
-	opts = pkgInvokeDefaultOpts(opts)
+	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetSlowLogTimeSeriesStatsResult
 	err := ctx.Invoke("tencentcloud:Dbbrain/getSlowLogTimeSeriesStats:getSlowLogTimeSeriesStats", args, &rv, opts...)
 	if err != nil {

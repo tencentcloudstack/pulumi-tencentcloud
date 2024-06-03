@@ -15,62 +15,62 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Eb
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
     /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using System.Text.Json;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var foo = new Tencentcloud.Eb.EventBus("foo", new()
     ///     {
-    ///         var foo = new Tencentcloud.Eb.EventBus("foo", new Tencentcloud.Eb.EventBusArgs
+    ///         EventBusName = "tf-event_bus",
+    ///         Description = "event bus desc",
+    ///         EnableStore = false,
+    ///         SaveDays = 1,
+    ///         Tags = 
     ///         {
-    ///             EventBusName = "tf-event_bus",
-    ///             Description = "event bus desc",
-    ///             EnableStore = false,
-    ///             SaveDays = 1,
-    ///             Tags = 
-    ///             {
-    ///                 { "createdBy", "terraform" },
-    ///             },
-    ///         });
-    ///         var eventRule = new Tencentcloud.Eb.EventRule("eventRule", new Tencentcloud.Eb.EventRuleArgs
-    ///         {
-    ///             EventBusId = foo.Id,
-    ///             RuleName = "tf-event_rule",
-    ///             Description = "event rule desc",
-    ///             Enable = true,
-    ///             EventPattern = JsonSerializer.Serialize(new Dictionary&lt;string, object?&gt;
-    ///             {
-    ///                 { "source", "apigw.cloud.tencent" },
-    ///                 { "type", new[]
-    ///                     {
-    ///                         "connector:apigw",
-    ///                     }
-    ///                  },
-    ///             }),
-    ///             Tags = 
-    ///             {
-    ///                 { "createdBy", "terraform" },
-    ///             },
-    ///         });
-    ///     }
+    ///             { "createdBy", "terraform" },
+    ///         },
+    ///     });
     /// 
-    /// }
+    ///     var eventRule = new Tencentcloud.Eb.EventRule("eventRule", new()
+    ///     {
+    ///         EventBusId = foo.Id,
+    ///         RuleName = "tf-event_rule",
+    ///         Description = "event rule desc",
+    ///         Enable = true,
+    ///         EventPattern = JsonSerializer.Serialize(new Dictionary&lt;string, object?&gt;
+    ///         {
+    ///             ["source"] = "apigw.cloud.tencent",
+    ///             ["type"] = new[]
+    ///             {
+    ///                 "connector:apigw",
+    ///             },
+    ///         }),
+    ///         Tags = 
+    ///         {
+    ///             { "createdBy", "terraform" },
+    ///         },
+    ///     });
+    /// 
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// eb event_rule can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Eb/eventRule:EventRule event_rule event_rule_id
+    /// $ pulumi import tencentcloud:Eb/eventRule:EventRule event_rule event_rule_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Eb/eventRule:EventRule")]
-    public partial class EventRule : Pulumi.CustomResource
+    public partial class EventRule : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Event set description, unlimited character type, description within 200 characters.
@@ -159,7 +159,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Eb
         }
     }
 
-    public sealed class EventRuleArgs : Pulumi.ResourceArgs
+    public sealed class EventRuleArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Event set description, unlimited character type, description within 200 characters.
@@ -206,9 +206,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Eb
         public EventRuleArgs()
         {
         }
+        public static new EventRuleArgs Empty => new EventRuleArgs();
     }
 
-    public sealed class EventRuleState : Pulumi.ResourceArgs
+    public sealed class EventRuleState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Event set description, unlimited character type, description within 200 characters.
@@ -261,5 +262,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Eb
         public EventRuleState()
         {
         }
+        public static new EventRuleState Empty => new EventRuleState();
     }
 }

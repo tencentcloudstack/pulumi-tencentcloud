@@ -15,25 +15,26 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Lighthouse
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var startInstance = new Tencentcloud.Lighthouse.StartInstance("startInstance", new()
     ///     {
-    ///         var startInstance = new Tencentcloud.Lighthouse.StartInstance("startInstance", new Tencentcloud.Lighthouse.StartInstanceArgs
-    ///         {
-    ///             InstanceId = "lhins-xxxxxx",
-    ///         });
-    ///     }
+    ///         InstanceId = "lhins-xxxxxx",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Lighthouse/startInstance:StartInstance")]
-    public partial class StartInstance : Pulumi.CustomResource
+    public partial class StartInstance : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Instance ID.
@@ -86,7 +87,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Lighthouse
         }
     }
 
-    public sealed class StartInstanceArgs : Pulumi.ResourceArgs
+    public sealed class StartInstanceArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Instance ID.
@@ -97,9 +98,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Lighthouse
         public StartInstanceArgs()
         {
         }
+        public static new StartInstanceArgs Empty => new StartInstanceArgs();
     }
 
-    public sealed class StartInstanceState : Pulumi.ResourceArgs
+    public sealed class StartInstanceState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Instance ID.
@@ -110,5 +112,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Lighthouse
         public StartInstanceState()
         {
         }
+        public static new StartInstanceState Empty => new StartInstanceState();
     }
 }

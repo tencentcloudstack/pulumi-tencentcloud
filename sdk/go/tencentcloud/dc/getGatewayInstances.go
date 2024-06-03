@@ -8,51 +8,56 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Use this data source to query detailed information of direct connect gateway instances.
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Dc"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ccn"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dc"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ccn"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dc"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		main, err := Ccn.NewInstance(ctx, "main", &Ccn.InstanceArgs{
-// 			Description: pulumi.String("ci-temp-test-ccn-des"),
-// 			Qos:         pulumi.String("AG"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		ccnMain, err := Dc.NewGateway(ctx, "ccnMain", &Dc.GatewayArgs{
-// 			NetworkInstanceId: main.ID(),
-// 			NetworkType:       pulumi.String("CCN"),
-// 			GatewayType:       pulumi.String("NORMAL"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_ = Dc.GetGatewayInstancesOutput(ctx, dc.GetGatewayInstancesOutputArgs{
-// 			Name: ccnMain.Name,
-// 		}, nil)
-// 		_ = Dc.GetGatewayInstancesOutput(ctx, dc.GetGatewayInstancesOutputArgs{
-// 			DcgId: ccnMain.ID(),
-// 		}, nil)
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			main, err := Ccn.NewInstance(ctx, "main", &Ccn.InstanceArgs{
+//				Description: pulumi.String("ci-temp-test-ccn-des"),
+//				Qos:         pulumi.String("AG"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			ccnMain, err := Dc.NewGateway(ctx, "ccnMain", &Dc.GatewayArgs{
+//				NetworkInstanceId: main.ID(),
+//				NetworkType:       pulumi.String("CCN"),
+//				GatewayType:       pulumi.String("NORMAL"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_ = Dc.GetGatewayInstancesOutput(ctx, dc.GetGatewayInstancesOutputArgs{
+//				Name: ccnMain.Name,
+//			}, nil)
+//			_ = Dc.GetGatewayInstancesOutput(ctx, dc.GetGatewayInstancesOutputArgs{
+//				DcgId: ccnMain.ID(),
+//			}, nil)
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 func GetGatewayInstances(ctx *pulumi.Context, args *GetGatewayInstancesArgs, opts ...pulumi.InvokeOption) (*GetGatewayInstancesResult, error) {
-	opts = pkgInvokeDefaultOpts(opts)
+	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetGatewayInstancesResult
 	err := ctx.Invoke("tencentcloud:Dc/getGatewayInstances:getGatewayInstances", args, &rv, opts...)
 	if err != nil {

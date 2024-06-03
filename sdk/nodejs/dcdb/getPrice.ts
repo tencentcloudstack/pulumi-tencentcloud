@@ -9,6 +9,7 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
@@ -25,13 +26,11 @@ import * as utilities from "../utilities";
  *     amountUnit: "pent",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getPrice(args: GetPriceArgs, opts?: pulumi.InvokeOptions): Promise<GetPriceResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Dcdb/getPrice:getPrice", {
         "amountUnit": args.amountUnit,
         "instanceCount": args.instanceCount,
@@ -119,9 +118,32 @@ export interface GetPriceResult {
     readonly shardStorage: number;
     readonly zone: string;
 }
-
+/**
+ * Use this data source to query detailed information of dcdb price
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const price = tencentcloud.Dcdb.getPrice({
+ *     instanceCount: 1,
+ *     zone: _var.default_az,
+ *     period: 1,
+ *     shardNodeCount: 2,
+ *     shardMemory: 2,
+ *     shardStorage: 10,
+ *     shardCount: 2,
+ *     paymode: "postpaid",
+ *     amountUnit: "pent",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getPriceOutput(args: GetPriceOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetPriceResult> {
-    return pulumi.output(args).apply(a => getPrice(a, opts))
+    return pulumi.output(args).apply((a: any) => getPrice(a, opts))
 }
 
 /**

@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdmq.Inputs
 {
 
-    public sealed class ProfessionalClusterVpcGetArgs : Pulumi.ResourceArgs
+    public sealed class ProfessionalClusterVpcGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Id of Subnet.
@@ -28,5 +28,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdmq.Inputs
         public ProfessionalClusterVpcGetArgs()
         {
         }
+        public static new ProfessionalClusterVpcGetArgs Empty => new ProfessionalClusterVpcGetArgs();
     }
 }

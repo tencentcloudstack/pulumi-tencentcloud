@@ -13,14 +13,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
     public static class GetStatisticData
     {
         public static Task<GetStatisticDataResult> InvokeAsync(GetStatisticDataArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetStatisticDataResult>("tencentcloud:Monitor/getStatisticData:getStatisticData", args ?? new GetStatisticDataArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetStatisticDataResult>("tencentcloud:Monitor/getStatisticData:getStatisticData", args ?? new GetStatisticDataArgs(), options.WithDefaults());
 
         public static Output<GetStatisticDataResult> Invoke(GetStatisticDataInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetStatisticDataResult>("tencentcloud:Monitor/getStatisticData:getStatisticData", args ?? new GetStatisticDataInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetStatisticDataResult>("tencentcloud:Monitor/getStatisticData:getStatisticData", args ?? new GetStatisticDataInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetStatisticDataArgs : Pulumi.InvokeArgs
+    public sealed class GetStatisticDataArgs : global::Pulumi.InvokeArgs
     {
         [Input("conditions")]
         private List<Inputs.GetStatisticDataConditionArgs>? _conditions;
@@ -58,9 +58,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
         public GetStatisticDataArgs()
         {
         }
+        public static new GetStatisticDataArgs Empty => new GetStatisticDataArgs();
     }
 
-    public sealed class GetStatisticDataInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetStatisticDataInvokeArgs : global::Pulumi.InvokeArgs
     {
         [Input("conditions")]
         private InputList<Inputs.GetStatisticDataConditionInputArgs>? _conditions;
@@ -98,6 +99,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
         public GetStatisticDataInvokeArgs()
         {
         }
+        public static new GetStatisticDataInvokeArgs Empty => new GetStatisticDataInvokeArgs();
     }
 
 

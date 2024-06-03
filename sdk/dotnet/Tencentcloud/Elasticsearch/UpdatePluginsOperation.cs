@@ -15,31 +15,32 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Elasticsearch
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var updatePluginsOperation = new Tencentcloud.Elasticsearch.UpdatePluginsOperation("updatePluginsOperation", new()
     ///     {
-    ///         var updatePluginsOperation = new Tencentcloud.Elasticsearch.UpdatePluginsOperation("updatePluginsOperation", new Tencentcloud.Elasticsearch.UpdatePluginsOperationArgs
+    ///         ForceRestart = false,
+    ///         ForceUpdate = true,
+    ///         InstallPluginLists = new[]
     ///         {
-    ///             ForceRestart = false,
-    ///             ForceUpdate = true,
-    ///             InstallPluginLists = 
-    ///             {
-    ///                 "analysis-pinyin",
-    ///             },
-    ///             InstanceId = "es-xxxxxx",
-    ///         });
-    ///     }
+    ///             "analysis-pinyin",
+    ///         },
+    ///         InstanceId = "es-xxxxxx",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Elasticsearch/updatePluginsOperation:UpdatePluginsOperation")]
-    public partial class UpdatePluginsOperation : Pulumi.CustomResource
+    public partial class UpdatePluginsOperation : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Whether to force a restart. Default is false.
@@ -122,7 +123,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Elasticsearch
         }
     }
 
-    public sealed class UpdatePluginsOperationArgs : Pulumi.ResourceArgs
+    public sealed class UpdatePluginsOperationArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Whether to force a restart. Default is false.
@@ -175,9 +176,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Elasticsearch
         public UpdatePluginsOperationArgs()
         {
         }
+        public static new UpdatePluginsOperationArgs Empty => new UpdatePluginsOperationArgs();
     }
 
-    public sealed class UpdatePluginsOperationState : Pulumi.ResourceArgs
+    public sealed class UpdatePluginsOperationState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Whether to force a restart. Default is false.
@@ -230,5 +232,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Elasticsearch
         public UpdatePluginsOperationState()
         {
         }
+        public static new UpdatePluginsOperationState Empty => new UpdatePluginsOperationState();
     }
 }

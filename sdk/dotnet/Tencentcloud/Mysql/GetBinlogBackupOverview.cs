@@ -15,64 +15,58 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
         /// <summary>
         /// Use this data source to query detailed information of mysql binlog_backup_overview
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var binlogBackupOverview = Tencentcloud.Mysql.GetBinlogBackupOverview.Invoke(new()
         ///     {
-        ///         var binlogBackupOverview = Output.Create(Tencentcloud.Mysql.GetBinlogBackupOverview.InvokeAsync(new Tencentcloud.Mysql.GetBinlogBackupOverviewArgs
-        ///         {
-        ///             Product = "mysql",
-        ///         }));
-        ///     }
+        ///         Product = "mysql",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetBinlogBackupOverviewResult> InvokeAsync(GetBinlogBackupOverviewArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetBinlogBackupOverviewResult>("tencentcloud:Mysql/getBinlogBackupOverview:getBinlogBackupOverview", args ?? new GetBinlogBackupOverviewArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetBinlogBackupOverviewResult>("tencentcloud:Mysql/getBinlogBackupOverview:getBinlogBackupOverview", args ?? new GetBinlogBackupOverviewArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of mysql binlog_backup_overview
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var binlogBackupOverview = Tencentcloud.Mysql.GetBinlogBackupOverview.Invoke(new()
         ///     {
-        ///         var binlogBackupOverview = Output.Create(Tencentcloud.Mysql.GetBinlogBackupOverview.InvokeAsync(new Tencentcloud.Mysql.GetBinlogBackupOverviewArgs
-        ///         {
-        ///             Product = "mysql",
-        ///         }));
-        ///     }
+        ///         Product = "mysql",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetBinlogBackupOverviewResult> Invoke(GetBinlogBackupOverviewInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetBinlogBackupOverviewResult>("tencentcloud:Mysql/getBinlogBackupOverview:getBinlogBackupOverview", args ?? new GetBinlogBackupOverviewInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetBinlogBackupOverviewResult>("tencentcloud:Mysql/getBinlogBackupOverview:getBinlogBackupOverview", args ?? new GetBinlogBackupOverviewInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetBinlogBackupOverviewArgs : Pulumi.InvokeArgs
+    public sealed class GetBinlogBackupOverviewArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// The type of cloud database product to be queried, currently only supports `mysql`.
@@ -89,9 +83,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
         public GetBinlogBackupOverviewArgs()
         {
         }
+        public static new GetBinlogBackupOverviewArgs Empty => new GetBinlogBackupOverviewArgs();
     }
 
-    public sealed class GetBinlogBackupOverviewInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetBinlogBackupOverviewInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// The type of cloud database product to be queried, currently only supports `mysql`.
@@ -108,6 +103,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
         public GetBinlogBackupOverviewInvokeArgs()
         {
         }
+        public static new GetBinlogBackupOverviewInvokeArgs Empty => new GetBinlogBackupOverviewInvokeArgs();
     }
 
 

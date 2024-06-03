@@ -15,26 +15,27 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Eip
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var publicAddressAdjust = new Tencentcloud.Eip.PublicAddressAdjust("publicAddressAdjust", new()
     ///     {
-    ///         var publicAddressAdjust = new Tencentcloud.Eip.PublicAddressAdjust("publicAddressAdjust", new Tencentcloud.Eip.PublicAddressAdjustArgs
-    ///         {
-    ///             AddressId = "eip-erft45fu",
-    ///             InstanceId = "ins-cr2rfq78",
-    ///         });
-    ///     }
+    ///         AddressId = "eip-erft45fu",
+    ///         InstanceId = "ins-cr2rfq78",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Eip/publicAddressAdjust:PublicAddressAdjust")]
-    public partial class PublicAddressAdjust : Pulumi.CustomResource
+    public partial class PublicAddressAdjust : global::Pulumi.CustomResource
     {
         /// <summary>
         /// A unique ID that identifies an EIP instance. The unique ID of EIP is in the form:`eip-erft45fu`.
@@ -93,7 +94,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Eip
         }
     }
 
-    public sealed class PublicAddressAdjustArgs : Pulumi.ResourceArgs
+    public sealed class PublicAddressAdjustArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// A unique ID that identifies an EIP instance. The unique ID of EIP is in the form:`eip-erft45fu`.
@@ -110,9 +111,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Eip
         public PublicAddressAdjustArgs()
         {
         }
+        public static new PublicAddressAdjustArgs Empty => new PublicAddressAdjustArgs();
     }
 
-    public sealed class PublicAddressAdjustState : Pulumi.ResourceArgs
+    public sealed class PublicAddressAdjustState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// A unique ID that identifies an EIP instance. The unique ID of EIP is in the form:`eip-erft45fu`.
@@ -129,5 +131,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Eip
         public PublicAddressAdjustState()
         {
         }
+        public static new PublicAddressAdjustState Empty => new PublicAddressAdjustState();
     }
 }

@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb.Inputs
 {
 
-    public sealed class InstanceParamInstanceParamListArgs : Pulumi.ResourceArgs
+    public sealed class InstanceParamInstanceParamListArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Current value of parameter.
@@ -28,5 +28,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb.Inputs
         public InstanceParamInstanceParamListArgs()
         {
         }
+        public static new InstanceParamInstanceParamListArgs Empty => new InstanceParamInstanceParamListArgs();
     }
 }

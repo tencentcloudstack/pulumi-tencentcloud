@@ -15,64 +15,58 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
         /// <summary>
         /// Use this data source to query detailed information of clb instance_detail
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var instanceDetail = Tencentcloud.Clb.GetInstanceDetail.Invoke(new()
         ///     {
-        ///         var instanceDetail = Output.Create(Tencentcloud.Clb.GetInstanceDetail.InvokeAsync(new Tencentcloud.Clb.GetInstanceDetailArgs
-        ///         {
-        ///             TargetType = "NODE",
-        ///         }));
-        ///     }
+        ///         TargetType = "NODE",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetInstanceDetailResult> InvokeAsync(GetInstanceDetailArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetInstanceDetailResult>("tencentcloud:Clb/getInstanceDetail:getInstanceDetail", args ?? new GetInstanceDetailArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetInstanceDetailResult>("tencentcloud:Clb/getInstanceDetail:getInstanceDetail", args ?? new GetInstanceDetailArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of clb instance_detail
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var instanceDetail = Tencentcloud.Clb.GetInstanceDetail.Invoke(new()
         ///     {
-        ///         var instanceDetail = Output.Create(Tencentcloud.Clb.GetInstanceDetail.InvokeAsync(new Tencentcloud.Clb.GetInstanceDetailArgs
-        ///         {
-        ///             TargetType = "NODE",
-        ///         }));
-        ///     }
+        ///         TargetType = "NODE",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetInstanceDetailResult> Invoke(GetInstanceDetailInvokeArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetInstanceDetailResult>("tencentcloud:Clb/getInstanceDetail:getInstanceDetail", args ?? new GetInstanceDetailInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetInstanceDetailResult>("tencentcloud:Clb/getInstanceDetail:getInstanceDetail", args ?? new GetInstanceDetailInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetInstanceDetailArgs : Pulumi.InvokeArgs
+    public sealed class GetInstanceDetailArgs : global::Pulumi.InvokeArgs
     {
         [Input("fields")]
         private List<string>? _fields;
@@ -113,9 +107,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
         public GetInstanceDetailArgs()
         {
         }
+        public static new GetInstanceDetailArgs Empty => new GetInstanceDetailArgs();
     }
 
-    public sealed class GetInstanceDetailInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetInstanceDetailInvokeArgs : global::Pulumi.InvokeArgs
     {
         [Input("fields")]
         private InputList<string>? _fields;
@@ -156,6 +151,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
         public GetInstanceDetailInvokeArgs()
         {
         }
+        public static new GetInstanceDetailInvokeArgs Empty => new GetInstanceDetailInvokeArgs();
     }
 
 

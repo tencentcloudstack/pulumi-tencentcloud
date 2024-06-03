@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ci.Inputs
 {
 
-    public sealed class MediaVideoProcessTemplateMsSharpenArgs : Pulumi.ResourceArgs
+    public sealed class MediaVideoProcessTemplateMsSharpenArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Whether detail enhancement is enabled.
@@ -28,5 +28,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ci.Inputs
         public MediaVideoProcessTemplateMsSharpenArgs()
         {
         }
+        public static new MediaVideoProcessTemplateMsSharpenArgs Empty => new MediaVideoProcessTemplateMsSharpenArgs();
     }
 }

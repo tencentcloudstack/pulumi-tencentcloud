@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ci.Inputs
 {
 
-    public sealed class MediaSnapshotTemplateSnapshotArgs : Pulumi.ResourceArgs
+    public sealed class MediaSnapshotTemplateSnapshotArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Screenshot black screen detection parameters, Valid when IsCheckBlack=true, Value reference range [30, 100], indicating the proportion of black pixels, the smaller the value, the smaller the proportion of black pixels, Start&amp;gt;0, the parameter setting is invalid, no filter black screen, Start =0 parameter is valid, the start time of the frame capture is the first frame non-black screen start.
@@ -94,5 +94,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ci.Inputs
         public MediaSnapshotTemplateSnapshotArgs()
         {
         }
+        public static new MediaSnapshotTemplateSnapshotArgs Empty => new MediaSnapshotTemplateSnapshotArgs();
     }
 }

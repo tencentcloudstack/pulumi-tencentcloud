@@ -15,82 +15,80 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcaplus
         /// <summary>
         /// Use this data source to query TcaplusDB clusters.
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var name = Tencentcloud.Tcaplus.GetClusters.Invoke(new()
         ///     {
-        ///         var name = Output.Create(Tencentcloud.Tcaplus.GetClusters.InvokeAsync(new Tencentcloud.Tcaplus.GetClustersArgs
-        ///         {
-        ///             ClusterName = "cluster",
-        ///         }));
-        ///         var id = Output.Create(Tencentcloud.Tcaplus.GetClusters.InvokeAsync(new Tencentcloud.Tcaplus.GetClustersArgs
-        ///         {
-        ///             ClusterId = tencentcloud_tcaplus_cluster.Test.Id,
-        ///         }));
-        ///         var idname = Output.Create(Tencentcloud.Tcaplus.GetClusters.InvokeAsync(new Tencentcloud.Tcaplus.GetClustersArgs
-        ///         {
-        ///             ClusterId = tencentcloud_tcaplus_cluster.Test.Id,
-        ///             ClusterName = "cluster",
-        ///         }));
-        ///     }
+        ///         ClusterName = "cluster",
+        ///     });
         /// 
-        /// }
+        ///     var id = Tencentcloud.Tcaplus.GetClusters.Invoke(new()
+        ///     {
+        ///         ClusterId = tencentcloud_tcaplus_cluster.Test.Id,
+        ///     });
+        /// 
+        ///     var idname = Tencentcloud.Tcaplus.GetClusters.Invoke(new()
+        ///     {
+        ///         ClusterId = tencentcloud_tcaplus_cluster.Test.Id,
+        ///         ClusterName = "cluster",
+        ///     });
+        /// 
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetClustersResult> InvokeAsync(GetClustersArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetClustersResult>("tencentcloud:Tcaplus/getClusters:getClusters", args ?? new GetClustersArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetClustersResult>("tencentcloud:Tcaplus/getClusters:getClusters", args ?? new GetClustersArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query TcaplusDB clusters.
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var name = Tencentcloud.Tcaplus.GetClusters.Invoke(new()
         ///     {
-        ///         var name = Output.Create(Tencentcloud.Tcaplus.GetClusters.InvokeAsync(new Tencentcloud.Tcaplus.GetClustersArgs
-        ///         {
-        ///             ClusterName = "cluster",
-        ///         }));
-        ///         var id = Output.Create(Tencentcloud.Tcaplus.GetClusters.InvokeAsync(new Tencentcloud.Tcaplus.GetClustersArgs
-        ///         {
-        ///             ClusterId = tencentcloud_tcaplus_cluster.Test.Id,
-        ///         }));
-        ///         var idname = Output.Create(Tencentcloud.Tcaplus.GetClusters.InvokeAsync(new Tencentcloud.Tcaplus.GetClustersArgs
-        ///         {
-        ///             ClusterId = tencentcloud_tcaplus_cluster.Test.Id,
-        ///             ClusterName = "cluster",
-        ///         }));
-        ///     }
+        ///         ClusterName = "cluster",
+        ///     });
         /// 
-        /// }
+        ///     var id = Tencentcloud.Tcaplus.GetClusters.Invoke(new()
+        ///     {
+        ///         ClusterId = tencentcloud_tcaplus_cluster.Test.Id,
+        ///     });
+        /// 
+        ///     var idname = Tencentcloud.Tcaplus.GetClusters.Invoke(new()
+        ///     {
+        ///         ClusterId = tencentcloud_tcaplus_cluster.Test.Id,
+        ///         ClusterName = "cluster",
+        ///     });
+        /// 
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetClustersResult> Invoke(GetClustersInvokeArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetClustersResult>("tencentcloud:Tcaplus/getClusters:getClusters", args ?? new GetClustersInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetClustersResult>("tencentcloud:Tcaplus/getClusters:getClusters", args ?? new GetClustersInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetClustersArgs : Pulumi.InvokeArgs
+    public sealed class GetClustersArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// ID of the TcaplusDB cluster to be query.
@@ -113,9 +111,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcaplus
         public GetClustersArgs()
         {
         }
+        public static new GetClustersArgs Empty => new GetClustersArgs();
     }
 
-    public sealed class GetClustersInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetClustersInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// ID of the TcaplusDB cluster to be query.
@@ -138,6 +137,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcaplus
         public GetClustersInvokeArgs()
         {
         }
+        public static new GetClustersInvokeArgs Empty => new GetClustersInvokeArgs();
     }
 
 

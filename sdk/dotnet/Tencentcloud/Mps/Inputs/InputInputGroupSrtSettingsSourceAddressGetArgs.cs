@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps.Inputs
 {
 
-    public sealed class InputInputGroupSrtSettingsSourceAddressGetArgs : Pulumi.ResourceArgs
+    public sealed class InputInputGroupSrtSettingsSourceAddressGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Peer IP.
@@ -28,5 +28,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps.Inputs
         public InputInputGroupSrtSettingsSourceAddressGetArgs()
         {
         }
+        public static new InputInputGroupSrtSettingsSourceAddressGetArgs Empty => new InputInputGroupSrtSettingsSourceAddressGetArgs();
     }
 }

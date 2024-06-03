@@ -15,66 +15,60 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cbs
         /// <summary>
         /// Use this data source to query detailed information of CBS snapshot policies.
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var policies = Tencentcloud.Cbs.GetSnapshotPolicies.Invoke(new()
         ///     {
-        ///         var policies = Output.Create(Tencentcloud.Cbs.GetSnapshotPolicies.InvokeAsync(new Tencentcloud.Cbs.GetSnapshotPoliciesArgs
-        ///         {
-        ///             SnapshotPolicyId = "snap-f3io7adt",
-        ///             SnapshotPolicyName = "test",
-        ///         }));
-        ///     }
+        ///         SnapshotPolicyId = "snap-f3io7adt",
+        ///         SnapshotPolicyName = "test",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetSnapshotPoliciesResult> InvokeAsync(GetSnapshotPoliciesArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetSnapshotPoliciesResult>("tencentcloud:Cbs/getSnapshotPolicies:getSnapshotPolicies", args ?? new GetSnapshotPoliciesArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetSnapshotPoliciesResult>("tencentcloud:Cbs/getSnapshotPolicies:getSnapshotPolicies", args ?? new GetSnapshotPoliciesArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of CBS snapshot policies.
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var policies = Tencentcloud.Cbs.GetSnapshotPolicies.Invoke(new()
         ///     {
-        ///         var policies = Output.Create(Tencentcloud.Cbs.GetSnapshotPolicies.InvokeAsync(new Tencentcloud.Cbs.GetSnapshotPoliciesArgs
-        ///         {
-        ///             SnapshotPolicyId = "snap-f3io7adt",
-        ///             SnapshotPolicyName = "test",
-        ///         }));
-        ///     }
+        ///         SnapshotPolicyId = "snap-f3io7adt",
+        ///         SnapshotPolicyName = "test",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetSnapshotPoliciesResult> Invoke(GetSnapshotPoliciesInvokeArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetSnapshotPoliciesResult>("tencentcloud:Cbs/getSnapshotPolicies:getSnapshotPolicies", args ?? new GetSnapshotPoliciesInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetSnapshotPoliciesResult>("tencentcloud:Cbs/getSnapshotPolicies:getSnapshotPolicies", args ?? new GetSnapshotPoliciesInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetSnapshotPoliciesArgs : Pulumi.InvokeArgs
+    public sealed class GetSnapshotPoliciesArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Used to save results.
@@ -97,9 +91,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cbs
         public GetSnapshotPoliciesArgs()
         {
         }
+        public static new GetSnapshotPoliciesArgs Empty => new GetSnapshotPoliciesArgs();
     }
 
-    public sealed class GetSnapshotPoliciesInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetSnapshotPoliciesInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Used to save results.
@@ -122,6 +117,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cbs
         public GetSnapshotPoliciesInvokeArgs()
         {
         }
+        public static new GetSnapshotPoliciesInvokeArgs Empty => new GetSnapshotPoliciesInvokeArgs();
     }
 
 

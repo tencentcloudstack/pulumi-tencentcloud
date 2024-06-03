@@ -14,27 +14,29 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
     /// Provides a resource to create a mysql rollback_stop
     /// 
     /// ## Example Usage
+    /// 
     /// ### Revoke the ongoing rollback task of the instance
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var example = new Tencentcloud.Mysql.RollbackStop("example", new()
     ///     {
-    ///         var example = new Tencentcloud.Mysql.RollbackStop("example", new Tencentcloud.Mysql.RollbackStopArgs
-    ///         {
-    ///             InstanceId = "cdb-fitq5t9h",
-    ///         });
-    ///     }
+    ///         InstanceId = "cdb-fitq5t9h",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Mysql/rollbackStop:RollbackStop")]
-    public partial class RollbackStop : Pulumi.CustomResource
+    public partial class RollbackStop : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Cloud database instance ID.
@@ -87,7 +89,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
         }
     }
 
-    public sealed class RollbackStopArgs : Pulumi.ResourceArgs
+    public sealed class RollbackStopArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Cloud database instance ID.
@@ -98,9 +100,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
         public RollbackStopArgs()
         {
         }
+        public static new RollbackStopArgs Empty => new RollbackStopArgs();
     }
 
-    public sealed class RollbackStopState : Pulumi.ResourceArgs
+    public sealed class RollbackStopState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Cloud database instance ID.
@@ -111,5 +114,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
         public RollbackStopState()
         {
         }
+        public static new RollbackStopState Empty => new RollbackStopState();
     }
 }

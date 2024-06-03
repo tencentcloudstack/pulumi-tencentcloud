@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb.Inputs
 {
 
-    public sealed class GetProxyNodeFilterArgs : Pulumi.InvokeArgs
+    public sealed class GetProxyNodeFilterArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Exact match or not.
@@ -58,5 +58,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb.Inputs
         public GetProxyNodeFilterArgs()
         {
         }
+        public static new GetProxyNodeFilterArgs Empty => new GetProxyNodeFilterArgs();
     }
 }

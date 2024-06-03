@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cdn.Inputs
 {
 
-    public sealed class DomainAuthenticationGetArgs : Pulumi.ResourceArgs
+    public sealed class DomainAuthenticationGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Authentication switching, available values: `on`, `off`.
@@ -46,5 +46,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cdn.Inputs
         public DomainAuthenticationGetArgs()
         {
         }
+        public static new DomainAuthenticationGetArgs Empty => new DomainAuthenticationGetArgs();
     }
 }

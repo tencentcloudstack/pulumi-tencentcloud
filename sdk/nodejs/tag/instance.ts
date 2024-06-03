@@ -9,22 +9,24 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const tag = new tencentcloud.Tag.Instance("tag", {
+ * const tag = new tencentcloud.tag.Instance("tag", {
  *     tagKey: "test",
  *     tagValue: "Terraform",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * tag tag can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Tag/instance:Instance tag tag_id
+ * $ pulumi import tencentcloud:Tag/instance:Instance tag tag_id
  * ```
  */
 export class Instance extends pulumi.CustomResource {

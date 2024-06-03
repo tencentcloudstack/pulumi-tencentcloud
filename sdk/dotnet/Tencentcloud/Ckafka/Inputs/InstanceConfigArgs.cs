@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka.Inputs
 {
 
-    public sealed class InstanceConfigArgs : Pulumi.ResourceArgs
+    public sealed class InstanceConfigArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Automatic creation. true: enabled, false: not enabled.
@@ -34,5 +34,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka.Inputs
         public InstanceConfigArgs()
         {
         }
+        public static new InstanceConfigArgs Empty => new InstanceConfigArgs();
     }
 }

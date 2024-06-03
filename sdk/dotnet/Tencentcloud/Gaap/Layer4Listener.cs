@@ -15,67 +15,71 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var fooProxy = new Tencentcloud.Gaap.Proxy("fooProxy", new()
     ///     {
-    ///         var fooProxy = new Tencentcloud.Gaap.Proxy("fooProxy", new Tencentcloud.Gaap.ProxyArgs
-    ///         {
-    ///             Bandwidth = 10,
-    ///             Concurrent = 2,
-    ///             AccessRegion = "SouthChina",
-    ///             RealserverRegion = "NorthChina",
-    ///         });
-    ///         var fooRealserver = new Tencentcloud.Gaap.Realserver("fooRealserver", new Tencentcloud.Gaap.RealserverArgs
-    ///         {
-    ///             Ip = "1.1.1.1",
-    ///         });
-    ///         var bar = new Tencentcloud.Gaap.Realserver("bar", new Tencentcloud.Gaap.RealserverArgs
-    ///         {
-    ///             Ip = "119.29.29.29",
-    ///         });
-    ///         var fooLayer4Listener = new Tencentcloud.Gaap.Layer4Listener("fooLayer4Listener", new Tencentcloud.Gaap.Layer4ListenerArgs
-    ///         {
-    ///             Protocol = "TCP",
-    ///             Port = 80,
-    ///             RealserverType = "IP",
-    ///             ProxyId = fooProxy.Id,
-    ///             HealthCheck = true,
-    ///             RealserverBindSets = 
-    ///             {
-    ///                 new Tencentcloud.Gaap.Inputs.Layer4ListenerRealserverBindSetArgs
-    ///                 {
-    ///                     Id = fooRealserver.Id,
-    ///                     Ip = fooRealserver.Ip,
-    ///                     Port = 80,
-    ///                 },
-    ///                 new Tencentcloud.Gaap.Inputs.Layer4ListenerRealserverBindSetArgs
-    ///                 {
-    ///                     Id = bar.Id,
-    ///                     Ip = bar.Ip,
-    ///                     Port = 80,
-    ///                 },
-    ///             },
-    ///         });
-    ///     }
+    ///         Bandwidth = 10,
+    ///         Concurrent = 2,
+    ///         AccessRegion = "SouthChina",
+    ///         RealserverRegion = "NorthChina",
+    ///     });
     /// 
-    /// }
+    ///     var fooRealserver = new Tencentcloud.Gaap.Realserver("fooRealserver", new()
+    ///     {
+    ///         Ip = "1.1.1.1",
+    ///     });
+    /// 
+    ///     var bar = new Tencentcloud.Gaap.Realserver("bar", new()
+    ///     {
+    ///         Ip = "119.29.29.29",
+    ///     });
+    /// 
+    ///     var fooLayer4Listener = new Tencentcloud.Gaap.Layer4Listener("fooLayer4Listener", new()
+    ///     {
+    ///         Protocol = "TCP",
+    ///         Port = 80,
+    ///         RealserverType = "IP",
+    ///         ProxyId = fooProxy.Id,
+    ///         HealthCheck = true,
+    ///         RealserverBindSets = new[]
+    ///         {
+    ///             new Tencentcloud.Gaap.Inputs.Layer4ListenerRealserverBindSetArgs
+    ///             {
+    ///                 Id = fooRealserver.Id,
+    ///                 Ip = fooRealserver.Ip,
+    ///                 Port = 80,
+    ///             },
+    ///             new Tencentcloud.Gaap.Inputs.Layer4ListenerRealserverBindSetArgs
+    ///             {
+    ///                 Id = bar.Id,
+    ///                 Ip = bar.Ip,
+    ///                 Port = 80,
+    ///             },
+    ///         },
+    ///     });
+    /// 
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// GAAP layer4 listener can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Gaap/layer4Listener:Layer4Listener tencentcloud_gaap_layer4_listener.foo listener-11112222
+    /// $ pulumi import tencentcloud:Gaap/layer4Listener:Layer4Listener tencentcloud_gaap_layer4_listener.foo listener-11112222
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Gaap/layer4Listener:Layer4Listener")]
-    public partial class Layer4Listener : Pulumi.CustomResource
+    public partial class Layer4Listener : global::Pulumi.CustomResource
     {
         /// <summary>
         /// The way the listener gets the client IP, 0 for TOA, 1 for Proxy Protocol, default value is 0. NOTES: Only supports listeners of `TCP` protocol.
@@ -200,7 +204,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
         }
     }
 
-    public sealed class Layer4ListenerArgs : Pulumi.ResourceArgs
+    public sealed class Layer4ListenerArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// The way the listener gets the client IP, 0 for TOA, 1 for Proxy Protocol, default value is 0. NOTES: Only supports listeners of `TCP` protocol.
@@ -277,9 +281,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
         public Layer4ListenerArgs()
         {
         }
+        public static new Layer4ListenerArgs Empty => new Layer4ListenerArgs();
     }
 
-    public sealed class Layer4ListenerState : Pulumi.ResourceArgs
+    public sealed class Layer4ListenerState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// The way the listener gets the client IP, 0 for TOA, 1 for Proxy Protocol, default value is 0. NOTES: Only supports listeners of `TCP` protocol.
@@ -368,5 +373,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
         public Layer4ListenerState()
         {
         }
+        public static new Layer4ListenerState Empty => new Layer4ListenerState();
     }
 }

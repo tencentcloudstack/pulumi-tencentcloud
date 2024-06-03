@@ -8,7 +8,10 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
+
+var _ = internal.GetEnvOrDefault
 
 type GetInstanceEipList struct {
 	// Creation time of the EIP.
@@ -34,7 +37,7 @@ type GetInstanceEipList struct {
 // GetInstanceEipListInput is an input type that accepts GetInstanceEipListArgs and GetInstanceEipListOutput values.
 // You can construct a concrete instance of `GetInstanceEipListInput` via:
 //
-//          GetInstanceEipListArgs{...}
+//	GetInstanceEipListArgs{...}
 type GetInstanceEipListInput interface {
 	pulumi.Input
 
@@ -78,7 +81,7 @@ func (i GetInstanceEipListArgs) ToGetInstanceEipListOutputWithContext(ctx contex
 // GetInstanceEipListArrayInput is an input type that accepts GetInstanceEipListArray and GetInstanceEipListArrayOutput values.
 // You can construct a concrete instance of `GetInstanceEipListArrayInput` via:
 //
-//          GetInstanceEipListArray{ GetInstanceEipListArgs{...} }
+//	GetInstanceEipListArray{ GetInstanceEipListArgs{...} }
 type GetInstanceEipListArrayInput interface {
 	pulumi.Input
 

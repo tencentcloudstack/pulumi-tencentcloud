@@ -5,106 +5,311 @@ import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
 // Export members:
-export * from "./account";
-export * from "./accountDbAttachment";
-export * from "./basicInstance";
-export * from "./businessIntelligenceFile";
-export * from "./businessIntelligenceInstance";
-export * from "./completeExpansion";
-export * from "./configBackupStrategy";
-export * from "./configDatabaseCdc";
-export * from "./configDatabaseCt";
-export * from "./configDatabaseMdf";
-export * from "./configInstanceParam";
-export * from "./configInstanceRoGroup";
-export * from "./configInstanceSecurityGroups";
-export * from "./configTerminateDbInstance";
-export * from "./databaseTde";
-export * from "./db";
-export * from "./fullBackupMigration";
-export * from "./generalBackup";
-export * from "./generalClone";
-export * from "./generalCloudInstance";
-export * from "./generalCloudRoInstance";
-export * from "./generalCommunication";
-export * from "./getAccountDbAttachments";
-export * from "./getAccounts";
-export * from "./getBackupByFlowId";
-export * from "./getBackupCommands";
-export * from "./getBackupUploadSize";
-export * from "./getBackups";
-export * from "./getBasicInstances";
-export * from "./getCrossRegionZone";
-export * from "./getDbCharsets";
-export * from "./getDbs";
-export * from "./getDescHaLog";
-export * from "./getInsAttribute";
-export * from "./getInstanceParamRecords";
-export * from "./getInstances";
-export * from "./getProjectSecurityGroups";
-export * from "./getPublishSubscribes";
-export * from "./getQueryXevent";
-export * from "./getReadonlyGroups";
-export * from "./getRegions";
-export * from "./getRollbackTime";
-export * from "./getSlowlogs";
-export * from "./getUploadBackupInfo";
-export * from "./getUploadIncrementalInfo";
-export * from "./getZoneConfig";
-export * from "./increBackupMigration";
-export * from "./instance";
-export * from "./instanceSsl";
-export * from "./instanceTde";
-export * from "./migration";
-export * from "./publishSubscribe";
-export * from "./readonlyInstance";
-export * from "./renewDbInstance";
-export * from "./renewPostpaidDbInstance";
-export * from "./restartDbInstance";
-export * from "./restoreInstance";
-export * from "./rollbackInstance";
-export * from "./startBackupFullMigration";
-export * from "./startBackupIncrementalMigration";
-export * from "./startXevent";
+export { AccountArgs, AccountState } from "./account";
+export type Account = import("./account").Account;
+export const Account: typeof import("./account").Account = null as any;
+utilities.lazyLoad(exports, ["Account"], () => require("./account"));
 
-// Import resources to register:
-import { Account } from "./account";
-import { AccountDbAttachment } from "./accountDbAttachment";
-import { BasicInstance } from "./basicInstance";
-import { BusinessIntelligenceFile } from "./businessIntelligenceFile";
-import { BusinessIntelligenceInstance } from "./businessIntelligenceInstance";
-import { CompleteExpansion } from "./completeExpansion";
-import { ConfigBackupStrategy } from "./configBackupStrategy";
-import { ConfigDatabaseCdc } from "./configDatabaseCdc";
-import { ConfigDatabaseCt } from "./configDatabaseCt";
-import { ConfigDatabaseMdf } from "./configDatabaseMdf";
-import { ConfigInstanceParam } from "./configInstanceParam";
-import { ConfigInstanceRoGroup } from "./configInstanceRoGroup";
-import { ConfigInstanceSecurityGroups } from "./configInstanceSecurityGroups";
-import { ConfigTerminateDbInstance } from "./configTerminateDbInstance";
-import { DatabaseTde } from "./databaseTde";
-import { Db } from "./db";
-import { FullBackupMigration } from "./fullBackupMigration";
-import { GeneralBackup } from "./generalBackup";
-import { GeneralClone } from "./generalClone";
-import { GeneralCloudInstance } from "./generalCloudInstance";
-import { GeneralCloudRoInstance } from "./generalCloudRoInstance";
-import { GeneralCommunication } from "./generalCommunication";
-import { IncreBackupMigration } from "./increBackupMigration";
-import { Instance } from "./instance";
-import { InstanceSsl } from "./instanceSsl";
-import { InstanceTde } from "./instanceTde";
-import { Migration } from "./migration";
-import { PublishSubscribe } from "./publishSubscribe";
-import { ReadonlyInstance } from "./readonlyInstance";
-import { RenewDbInstance } from "./renewDbInstance";
-import { RenewPostpaidDbInstance } from "./renewPostpaidDbInstance";
-import { RestartDbInstance } from "./restartDbInstance";
-import { RestoreInstance } from "./restoreInstance";
-import { RollbackInstance } from "./rollbackInstance";
-import { StartBackupFullMigration } from "./startBackupFullMigration";
-import { StartBackupIncrementalMigration } from "./startBackupIncrementalMigration";
-import { StartXevent } from "./startXevent";
+export { AccountDbAttachmentArgs, AccountDbAttachmentState } from "./accountDbAttachment";
+export type AccountDbAttachment = import("./accountDbAttachment").AccountDbAttachment;
+export const AccountDbAttachment: typeof import("./accountDbAttachment").AccountDbAttachment = null as any;
+utilities.lazyLoad(exports, ["AccountDbAttachment"], () => require("./accountDbAttachment"));
+
+export { BasicInstanceArgs, BasicInstanceState } from "./basicInstance";
+export type BasicInstance = import("./basicInstance").BasicInstance;
+export const BasicInstance: typeof import("./basicInstance").BasicInstance = null as any;
+utilities.lazyLoad(exports, ["BasicInstance"], () => require("./basicInstance"));
+
+export { BusinessIntelligenceFileArgs, BusinessIntelligenceFileState } from "./businessIntelligenceFile";
+export type BusinessIntelligenceFile = import("./businessIntelligenceFile").BusinessIntelligenceFile;
+export const BusinessIntelligenceFile: typeof import("./businessIntelligenceFile").BusinessIntelligenceFile = null as any;
+utilities.lazyLoad(exports, ["BusinessIntelligenceFile"], () => require("./businessIntelligenceFile"));
+
+export { BusinessIntelligenceInstanceArgs, BusinessIntelligenceInstanceState } from "./businessIntelligenceInstance";
+export type BusinessIntelligenceInstance = import("./businessIntelligenceInstance").BusinessIntelligenceInstance;
+export const BusinessIntelligenceInstance: typeof import("./businessIntelligenceInstance").BusinessIntelligenceInstance = null as any;
+utilities.lazyLoad(exports, ["BusinessIntelligenceInstance"], () => require("./businessIntelligenceInstance"));
+
+export { CompleteExpansionArgs, CompleteExpansionState } from "./completeExpansion";
+export type CompleteExpansion = import("./completeExpansion").CompleteExpansion;
+export const CompleteExpansion: typeof import("./completeExpansion").CompleteExpansion = null as any;
+utilities.lazyLoad(exports, ["CompleteExpansion"], () => require("./completeExpansion"));
+
+export { ConfigBackupStrategyArgs, ConfigBackupStrategyState } from "./configBackupStrategy";
+export type ConfigBackupStrategy = import("./configBackupStrategy").ConfigBackupStrategy;
+export const ConfigBackupStrategy: typeof import("./configBackupStrategy").ConfigBackupStrategy = null as any;
+utilities.lazyLoad(exports, ["ConfigBackupStrategy"], () => require("./configBackupStrategy"));
+
+export { ConfigDatabaseCdcArgs, ConfigDatabaseCdcState } from "./configDatabaseCdc";
+export type ConfigDatabaseCdc = import("./configDatabaseCdc").ConfigDatabaseCdc;
+export const ConfigDatabaseCdc: typeof import("./configDatabaseCdc").ConfigDatabaseCdc = null as any;
+utilities.lazyLoad(exports, ["ConfigDatabaseCdc"], () => require("./configDatabaseCdc"));
+
+export { ConfigDatabaseCtArgs, ConfigDatabaseCtState } from "./configDatabaseCt";
+export type ConfigDatabaseCt = import("./configDatabaseCt").ConfigDatabaseCt;
+export const ConfigDatabaseCt: typeof import("./configDatabaseCt").ConfigDatabaseCt = null as any;
+utilities.lazyLoad(exports, ["ConfigDatabaseCt"], () => require("./configDatabaseCt"));
+
+export { ConfigDatabaseMdfArgs, ConfigDatabaseMdfState } from "./configDatabaseMdf";
+export type ConfigDatabaseMdf = import("./configDatabaseMdf").ConfigDatabaseMdf;
+export const ConfigDatabaseMdf: typeof import("./configDatabaseMdf").ConfigDatabaseMdf = null as any;
+utilities.lazyLoad(exports, ["ConfigDatabaseMdf"], () => require("./configDatabaseMdf"));
+
+export { ConfigInstanceParamArgs, ConfigInstanceParamState } from "./configInstanceParam";
+export type ConfigInstanceParam = import("./configInstanceParam").ConfigInstanceParam;
+export const ConfigInstanceParam: typeof import("./configInstanceParam").ConfigInstanceParam = null as any;
+utilities.lazyLoad(exports, ["ConfigInstanceParam"], () => require("./configInstanceParam"));
+
+export { ConfigInstanceRoGroupArgs, ConfigInstanceRoGroupState } from "./configInstanceRoGroup";
+export type ConfigInstanceRoGroup = import("./configInstanceRoGroup").ConfigInstanceRoGroup;
+export const ConfigInstanceRoGroup: typeof import("./configInstanceRoGroup").ConfigInstanceRoGroup = null as any;
+utilities.lazyLoad(exports, ["ConfigInstanceRoGroup"], () => require("./configInstanceRoGroup"));
+
+export { ConfigInstanceSecurityGroupsArgs, ConfigInstanceSecurityGroupsState } from "./configInstanceSecurityGroups";
+export type ConfigInstanceSecurityGroups = import("./configInstanceSecurityGroups").ConfigInstanceSecurityGroups;
+export const ConfigInstanceSecurityGroups: typeof import("./configInstanceSecurityGroups").ConfigInstanceSecurityGroups = null as any;
+utilities.lazyLoad(exports, ["ConfigInstanceSecurityGroups"], () => require("./configInstanceSecurityGroups"));
+
+export { ConfigTerminateDbInstanceArgs, ConfigTerminateDbInstanceState } from "./configTerminateDbInstance";
+export type ConfigTerminateDbInstance = import("./configTerminateDbInstance").ConfigTerminateDbInstance;
+export const ConfigTerminateDbInstance: typeof import("./configTerminateDbInstance").ConfigTerminateDbInstance = null as any;
+utilities.lazyLoad(exports, ["ConfigTerminateDbInstance"], () => require("./configTerminateDbInstance"));
+
+export { DatabaseTdeArgs, DatabaseTdeState } from "./databaseTde";
+export type DatabaseTde = import("./databaseTde").DatabaseTde;
+export const DatabaseTde: typeof import("./databaseTde").DatabaseTde = null as any;
+utilities.lazyLoad(exports, ["DatabaseTde"], () => require("./databaseTde"));
+
+export { DbArgs, DbState } from "./db";
+export type Db = import("./db").Db;
+export const Db: typeof import("./db").Db = null as any;
+utilities.lazyLoad(exports, ["Db"], () => require("./db"));
+
+export { FullBackupMigrationArgs, FullBackupMigrationState } from "./fullBackupMigration";
+export type FullBackupMigration = import("./fullBackupMigration").FullBackupMigration;
+export const FullBackupMigration: typeof import("./fullBackupMigration").FullBackupMigration = null as any;
+utilities.lazyLoad(exports, ["FullBackupMigration"], () => require("./fullBackupMigration"));
+
+export { GeneralBackupArgs, GeneralBackupState } from "./generalBackup";
+export type GeneralBackup = import("./generalBackup").GeneralBackup;
+export const GeneralBackup: typeof import("./generalBackup").GeneralBackup = null as any;
+utilities.lazyLoad(exports, ["GeneralBackup"], () => require("./generalBackup"));
+
+export { GeneralCloneArgs, GeneralCloneState } from "./generalClone";
+export type GeneralClone = import("./generalClone").GeneralClone;
+export const GeneralClone: typeof import("./generalClone").GeneralClone = null as any;
+utilities.lazyLoad(exports, ["GeneralClone"], () => require("./generalClone"));
+
+export { GeneralCloudInstanceArgs, GeneralCloudInstanceState } from "./generalCloudInstance";
+export type GeneralCloudInstance = import("./generalCloudInstance").GeneralCloudInstance;
+export const GeneralCloudInstance: typeof import("./generalCloudInstance").GeneralCloudInstance = null as any;
+utilities.lazyLoad(exports, ["GeneralCloudInstance"], () => require("./generalCloudInstance"));
+
+export { GeneralCloudRoInstanceArgs, GeneralCloudRoInstanceState } from "./generalCloudRoInstance";
+export type GeneralCloudRoInstance = import("./generalCloudRoInstance").GeneralCloudRoInstance;
+export const GeneralCloudRoInstance: typeof import("./generalCloudRoInstance").GeneralCloudRoInstance = null as any;
+utilities.lazyLoad(exports, ["GeneralCloudRoInstance"], () => require("./generalCloudRoInstance"));
+
+export { GeneralCommunicationArgs, GeneralCommunicationState } from "./generalCommunication";
+export type GeneralCommunication = import("./generalCommunication").GeneralCommunication;
+export const GeneralCommunication: typeof import("./generalCommunication").GeneralCommunication = null as any;
+utilities.lazyLoad(exports, ["GeneralCommunication"], () => require("./generalCommunication"));
+
+export { GetAccountDbAttachmentsArgs, GetAccountDbAttachmentsResult, GetAccountDbAttachmentsOutputArgs } from "./getAccountDbAttachments";
+export const getAccountDbAttachments: typeof import("./getAccountDbAttachments").getAccountDbAttachments = null as any;
+export const getAccountDbAttachmentsOutput: typeof import("./getAccountDbAttachments").getAccountDbAttachmentsOutput = null as any;
+utilities.lazyLoad(exports, ["getAccountDbAttachments","getAccountDbAttachmentsOutput"], () => require("./getAccountDbAttachments"));
+
+export { GetAccountsArgs, GetAccountsResult, GetAccountsOutputArgs } from "./getAccounts";
+export const getAccounts: typeof import("./getAccounts").getAccounts = null as any;
+export const getAccountsOutput: typeof import("./getAccounts").getAccountsOutput = null as any;
+utilities.lazyLoad(exports, ["getAccounts","getAccountsOutput"], () => require("./getAccounts"));
+
+export { GetBackupByFlowIdArgs, GetBackupByFlowIdResult, GetBackupByFlowIdOutputArgs } from "./getBackupByFlowId";
+export const getBackupByFlowId: typeof import("./getBackupByFlowId").getBackupByFlowId = null as any;
+export const getBackupByFlowIdOutput: typeof import("./getBackupByFlowId").getBackupByFlowIdOutput = null as any;
+utilities.lazyLoad(exports, ["getBackupByFlowId","getBackupByFlowIdOutput"], () => require("./getBackupByFlowId"));
+
+export { GetBackupCommandsArgs, GetBackupCommandsResult, GetBackupCommandsOutputArgs } from "./getBackupCommands";
+export const getBackupCommands: typeof import("./getBackupCommands").getBackupCommands = null as any;
+export const getBackupCommandsOutput: typeof import("./getBackupCommands").getBackupCommandsOutput = null as any;
+utilities.lazyLoad(exports, ["getBackupCommands","getBackupCommandsOutput"], () => require("./getBackupCommands"));
+
+export { GetBackupUploadSizeArgs, GetBackupUploadSizeResult, GetBackupUploadSizeOutputArgs } from "./getBackupUploadSize";
+export const getBackupUploadSize: typeof import("./getBackupUploadSize").getBackupUploadSize = null as any;
+export const getBackupUploadSizeOutput: typeof import("./getBackupUploadSize").getBackupUploadSizeOutput = null as any;
+utilities.lazyLoad(exports, ["getBackupUploadSize","getBackupUploadSizeOutput"], () => require("./getBackupUploadSize"));
+
+export { GetBackupsArgs, GetBackupsResult, GetBackupsOutputArgs } from "./getBackups";
+export const getBackups: typeof import("./getBackups").getBackups = null as any;
+export const getBackupsOutput: typeof import("./getBackups").getBackupsOutput = null as any;
+utilities.lazyLoad(exports, ["getBackups","getBackupsOutput"], () => require("./getBackups"));
+
+export { GetBasicInstancesArgs, GetBasicInstancesResult, GetBasicInstancesOutputArgs } from "./getBasicInstances";
+export const getBasicInstances: typeof import("./getBasicInstances").getBasicInstances = null as any;
+export const getBasicInstancesOutput: typeof import("./getBasicInstances").getBasicInstancesOutput = null as any;
+utilities.lazyLoad(exports, ["getBasicInstances","getBasicInstancesOutput"], () => require("./getBasicInstances"));
+
+export { GetCrossRegionZoneArgs, GetCrossRegionZoneResult, GetCrossRegionZoneOutputArgs } from "./getCrossRegionZone";
+export const getCrossRegionZone: typeof import("./getCrossRegionZone").getCrossRegionZone = null as any;
+export const getCrossRegionZoneOutput: typeof import("./getCrossRegionZone").getCrossRegionZoneOutput = null as any;
+utilities.lazyLoad(exports, ["getCrossRegionZone","getCrossRegionZoneOutput"], () => require("./getCrossRegionZone"));
+
+export { GetDbCharsetsArgs, GetDbCharsetsResult, GetDbCharsetsOutputArgs } from "./getDbCharsets";
+export const getDbCharsets: typeof import("./getDbCharsets").getDbCharsets = null as any;
+export const getDbCharsetsOutput: typeof import("./getDbCharsets").getDbCharsetsOutput = null as any;
+utilities.lazyLoad(exports, ["getDbCharsets","getDbCharsetsOutput"], () => require("./getDbCharsets"));
+
+export { GetDbsArgs, GetDbsResult, GetDbsOutputArgs } from "./getDbs";
+export const getDbs: typeof import("./getDbs").getDbs = null as any;
+export const getDbsOutput: typeof import("./getDbs").getDbsOutput = null as any;
+utilities.lazyLoad(exports, ["getDbs","getDbsOutput"], () => require("./getDbs"));
+
+export { GetDescHaLogArgs, GetDescHaLogResult, GetDescHaLogOutputArgs } from "./getDescHaLog";
+export const getDescHaLog: typeof import("./getDescHaLog").getDescHaLog = null as any;
+export const getDescHaLogOutput: typeof import("./getDescHaLog").getDescHaLogOutput = null as any;
+utilities.lazyLoad(exports, ["getDescHaLog","getDescHaLogOutput"], () => require("./getDescHaLog"));
+
+export { GetInsAttributeArgs, GetInsAttributeResult, GetInsAttributeOutputArgs } from "./getInsAttribute";
+export const getInsAttribute: typeof import("./getInsAttribute").getInsAttribute = null as any;
+export const getInsAttributeOutput: typeof import("./getInsAttribute").getInsAttributeOutput = null as any;
+utilities.lazyLoad(exports, ["getInsAttribute","getInsAttributeOutput"], () => require("./getInsAttribute"));
+
+export { GetInstanceParamRecordsArgs, GetInstanceParamRecordsResult, GetInstanceParamRecordsOutputArgs } from "./getInstanceParamRecords";
+export const getInstanceParamRecords: typeof import("./getInstanceParamRecords").getInstanceParamRecords = null as any;
+export const getInstanceParamRecordsOutput: typeof import("./getInstanceParamRecords").getInstanceParamRecordsOutput = null as any;
+utilities.lazyLoad(exports, ["getInstanceParamRecords","getInstanceParamRecordsOutput"], () => require("./getInstanceParamRecords"));
+
+export { GetInstancesArgs, GetInstancesResult, GetInstancesOutputArgs } from "./getInstances";
+export const getInstances: typeof import("./getInstances").getInstances = null as any;
+export const getInstancesOutput: typeof import("./getInstances").getInstancesOutput = null as any;
+utilities.lazyLoad(exports, ["getInstances","getInstancesOutput"], () => require("./getInstances"));
+
+export { GetProjectSecurityGroupsArgs, GetProjectSecurityGroupsResult, GetProjectSecurityGroupsOutputArgs } from "./getProjectSecurityGroups";
+export const getProjectSecurityGroups: typeof import("./getProjectSecurityGroups").getProjectSecurityGroups = null as any;
+export const getProjectSecurityGroupsOutput: typeof import("./getProjectSecurityGroups").getProjectSecurityGroupsOutput = null as any;
+utilities.lazyLoad(exports, ["getProjectSecurityGroups","getProjectSecurityGroupsOutput"], () => require("./getProjectSecurityGroups"));
+
+export { GetPublishSubscribesArgs, GetPublishSubscribesResult, GetPublishSubscribesOutputArgs } from "./getPublishSubscribes";
+export const getPublishSubscribes: typeof import("./getPublishSubscribes").getPublishSubscribes = null as any;
+export const getPublishSubscribesOutput: typeof import("./getPublishSubscribes").getPublishSubscribesOutput = null as any;
+utilities.lazyLoad(exports, ["getPublishSubscribes","getPublishSubscribesOutput"], () => require("./getPublishSubscribes"));
+
+export { GetQueryXeventArgs, GetQueryXeventResult, GetQueryXeventOutputArgs } from "./getQueryXevent";
+export const getQueryXevent: typeof import("./getQueryXevent").getQueryXevent = null as any;
+export const getQueryXeventOutput: typeof import("./getQueryXevent").getQueryXeventOutput = null as any;
+utilities.lazyLoad(exports, ["getQueryXevent","getQueryXeventOutput"], () => require("./getQueryXevent"));
+
+export { GetReadonlyGroupsArgs, GetReadonlyGroupsResult, GetReadonlyGroupsOutputArgs } from "./getReadonlyGroups";
+export const getReadonlyGroups: typeof import("./getReadonlyGroups").getReadonlyGroups = null as any;
+export const getReadonlyGroupsOutput: typeof import("./getReadonlyGroups").getReadonlyGroupsOutput = null as any;
+utilities.lazyLoad(exports, ["getReadonlyGroups","getReadonlyGroupsOutput"], () => require("./getReadonlyGroups"));
+
+export { GetRegionsArgs, GetRegionsResult, GetRegionsOutputArgs } from "./getRegions";
+export const getRegions: typeof import("./getRegions").getRegions = null as any;
+export const getRegionsOutput: typeof import("./getRegions").getRegionsOutput = null as any;
+utilities.lazyLoad(exports, ["getRegions","getRegionsOutput"], () => require("./getRegions"));
+
+export { GetRollbackTimeArgs, GetRollbackTimeResult, GetRollbackTimeOutputArgs } from "./getRollbackTime";
+export const getRollbackTime: typeof import("./getRollbackTime").getRollbackTime = null as any;
+export const getRollbackTimeOutput: typeof import("./getRollbackTime").getRollbackTimeOutput = null as any;
+utilities.lazyLoad(exports, ["getRollbackTime","getRollbackTimeOutput"], () => require("./getRollbackTime"));
+
+export { GetSlowlogsArgs, GetSlowlogsResult, GetSlowlogsOutputArgs } from "./getSlowlogs";
+export const getSlowlogs: typeof import("./getSlowlogs").getSlowlogs = null as any;
+export const getSlowlogsOutput: typeof import("./getSlowlogs").getSlowlogsOutput = null as any;
+utilities.lazyLoad(exports, ["getSlowlogs","getSlowlogsOutput"], () => require("./getSlowlogs"));
+
+export { GetUploadBackupInfoArgs, GetUploadBackupInfoResult, GetUploadBackupInfoOutputArgs } from "./getUploadBackupInfo";
+export const getUploadBackupInfo: typeof import("./getUploadBackupInfo").getUploadBackupInfo = null as any;
+export const getUploadBackupInfoOutput: typeof import("./getUploadBackupInfo").getUploadBackupInfoOutput = null as any;
+utilities.lazyLoad(exports, ["getUploadBackupInfo","getUploadBackupInfoOutput"], () => require("./getUploadBackupInfo"));
+
+export { GetUploadIncrementalInfoArgs, GetUploadIncrementalInfoResult, GetUploadIncrementalInfoOutputArgs } from "./getUploadIncrementalInfo";
+export const getUploadIncrementalInfo: typeof import("./getUploadIncrementalInfo").getUploadIncrementalInfo = null as any;
+export const getUploadIncrementalInfoOutput: typeof import("./getUploadIncrementalInfo").getUploadIncrementalInfoOutput = null as any;
+utilities.lazyLoad(exports, ["getUploadIncrementalInfo","getUploadIncrementalInfoOutput"], () => require("./getUploadIncrementalInfo"));
+
+export { GetZoneConfigArgs, GetZoneConfigResult, GetZoneConfigOutputArgs } from "./getZoneConfig";
+export const getZoneConfig: typeof import("./getZoneConfig").getZoneConfig = null as any;
+export const getZoneConfigOutput: typeof import("./getZoneConfig").getZoneConfigOutput = null as any;
+utilities.lazyLoad(exports, ["getZoneConfig","getZoneConfigOutput"], () => require("./getZoneConfig"));
+
+export { IncreBackupMigrationArgs, IncreBackupMigrationState } from "./increBackupMigration";
+export type IncreBackupMigration = import("./increBackupMigration").IncreBackupMigration;
+export const IncreBackupMigration: typeof import("./increBackupMigration").IncreBackupMigration = null as any;
+utilities.lazyLoad(exports, ["IncreBackupMigration"], () => require("./increBackupMigration"));
+
+export { InstanceArgs, InstanceState } from "./instance";
+export type Instance = import("./instance").Instance;
+export const Instance: typeof import("./instance").Instance = null as any;
+utilities.lazyLoad(exports, ["Instance"], () => require("./instance"));
+
+export { InstanceSslArgs, InstanceSslState } from "./instanceSsl";
+export type InstanceSsl = import("./instanceSsl").InstanceSsl;
+export const InstanceSsl: typeof import("./instanceSsl").InstanceSsl = null as any;
+utilities.lazyLoad(exports, ["InstanceSsl"], () => require("./instanceSsl"));
+
+export { InstanceTdeArgs, InstanceTdeState } from "./instanceTde";
+export type InstanceTde = import("./instanceTde").InstanceTde;
+export const InstanceTde: typeof import("./instanceTde").InstanceTde = null as any;
+utilities.lazyLoad(exports, ["InstanceTde"], () => require("./instanceTde"));
+
+export { MigrationArgs, MigrationState } from "./migration";
+export type Migration = import("./migration").Migration;
+export const Migration: typeof import("./migration").Migration = null as any;
+utilities.lazyLoad(exports, ["Migration"], () => require("./migration"));
+
+export { PublishSubscribeArgs, PublishSubscribeState } from "./publishSubscribe";
+export type PublishSubscribe = import("./publishSubscribe").PublishSubscribe;
+export const PublishSubscribe: typeof import("./publishSubscribe").PublishSubscribe = null as any;
+utilities.lazyLoad(exports, ["PublishSubscribe"], () => require("./publishSubscribe"));
+
+export { ReadonlyInstanceArgs, ReadonlyInstanceState } from "./readonlyInstance";
+export type ReadonlyInstance = import("./readonlyInstance").ReadonlyInstance;
+export const ReadonlyInstance: typeof import("./readonlyInstance").ReadonlyInstance = null as any;
+utilities.lazyLoad(exports, ["ReadonlyInstance"], () => require("./readonlyInstance"));
+
+export { RenewDbInstanceArgs, RenewDbInstanceState } from "./renewDbInstance";
+export type RenewDbInstance = import("./renewDbInstance").RenewDbInstance;
+export const RenewDbInstance: typeof import("./renewDbInstance").RenewDbInstance = null as any;
+utilities.lazyLoad(exports, ["RenewDbInstance"], () => require("./renewDbInstance"));
+
+export { RenewPostpaidDbInstanceArgs, RenewPostpaidDbInstanceState } from "./renewPostpaidDbInstance";
+export type RenewPostpaidDbInstance = import("./renewPostpaidDbInstance").RenewPostpaidDbInstance;
+export const RenewPostpaidDbInstance: typeof import("./renewPostpaidDbInstance").RenewPostpaidDbInstance = null as any;
+utilities.lazyLoad(exports, ["RenewPostpaidDbInstance"], () => require("./renewPostpaidDbInstance"));
+
+export { RestartDbInstanceArgs, RestartDbInstanceState } from "./restartDbInstance";
+export type RestartDbInstance = import("./restartDbInstance").RestartDbInstance;
+export const RestartDbInstance: typeof import("./restartDbInstance").RestartDbInstance = null as any;
+utilities.lazyLoad(exports, ["RestartDbInstance"], () => require("./restartDbInstance"));
+
+export { RestoreInstanceArgs, RestoreInstanceState } from "./restoreInstance";
+export type RestoreInstance = import("./restoreInstance").RestoreInstance;
+export const RestoreInstance: typeof import("./restoreInstance").RestoreInstance = null as any;
+utilities.lazyLoad(exports, ["RestoreInstance"], () => require("./restoreInstance"));
+
+export { RollbackInstanceArgs, RollbackInstanceState } from "./rollbackInstance";
+export type RollbackInstance = import("./rollbackInstance").RollbackInstance;
+export const RollbackInstance: typeof import("./rollbackInstance").RollbackInstance = null as any;
+utilities.lazyLoad(exports, ["RollbackInstance"], () => require("./rollbackInstance"));
+
+export { StartBackupFullMigrationArgs, StartBackupFullMigrationState } from "./startBackupFullMigration";
+export type StartBackupFullMigration = import("./startBackupFullMigration").StartBackupFullMigration;
+export const StartBackupFullMigration: typeof import("./startBackupFullMigration").StartBackupFullMigration = null as any;
+utilities.lazyLoad(exports, ["StartBackupFullMigration"], () => require("./startBackupFullMigration"));
+
+export { StartBackupIncrementalMigrationArgs, StartBackupIncrementalMigrationState } from "./startBackupIncrementalMigration";
+export type StartBackupIncrementalMigration = import("./startBackupIncrementalMigration").StartBackupIncrementalMigration;
+export const StartBackupIncrementalMigration: typeof import("./startBackupIncrementalMigration").StartBackupIncrementalMigration = null as any;
+utilities.lazyLoad(exports, ["StartBackupIncrementalMigration"], () => require("./startBackupIncrementalMigration"));
+
+export { StartXeventArgs, StartXeventState } from "./startXevent";
+export type StartXevent = import("./startXevent").StartXevent;
+export const StartXevent: typeof import("./startXevent").StartXevent = null as any;
+utilities.lazyLoad(exports, ["StartXevent"], () => require("./startXevent"));
+
 
 const _module = {
     version: utilities.getVersion(),

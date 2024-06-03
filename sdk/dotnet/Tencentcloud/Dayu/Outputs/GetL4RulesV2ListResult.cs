@@ -58,6 +58,9 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dayu.Outputs
         /// Name of the rule.
         /// </summary>
         public readonly string RuleName;
+        /// <summary>
+        /// Source list of the rule.
+        /// </summary>
         public readonly ImmutableArray<Outputs.GetL4RulesV2ListSourceListResult> SourceLists;
         /// <summary>
         /// The source port of the layer 4 rule.

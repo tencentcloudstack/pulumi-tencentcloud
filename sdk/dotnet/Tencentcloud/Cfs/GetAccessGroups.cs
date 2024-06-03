@@ -15,66 +15,60 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cfs
         /// <summary>
         /// Use this data source to query the detail information of CFS access group.
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var accessGroups = Tencentcloud.Cfs.GetAccessGroups.Invoke(new()
         ///     {
-        ///         var accessGroups = Output.Create(Tencentcloud.Cfs.GetAccessGroups.InvokeAsync(new Tencentcloud.Cfs.GetAccessGroupsArgs
-        ///         {
-        ///             AccessGroupId = "pgroup-7nx89k7l",
-        ///             Name = "test",
-        ///         }));
-        ///     }
+        ///         AccessGroupId = "pgroup-7nx89k7l",
+        ///         Name = "test",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetAccessGroupsResult> InvokeAsync(GetAccessGroupsArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetAccessGroupsResult>("tencentcloud:Cfs/getAccessGroups:getAccessGroups", args ?? new GetAccessGroupsArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetAccessGroupsResult>("tencentcloud:Cfs/getAccessGroups:getAccessGroups", args ?? new GetAccessGroupsArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query the detail information of CFS access group.
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var accessGroups = Tencentcloud.Cfs.GetAccessGroups.Invoke(new()
         ///     {
-        ///         var accessGroups = Output.Create(Tencentcloud.Cfs.GetAccessGroups.InvokeAsync(new Tencentcloud.Cfs.GetAccessGroupsArgs
-        ///         {
-        ///             AccessGroupId = "pgroup-7nx89k7l",
-        ///             Name = "test",
-        ///         }));
-        ///     }
+        ///         AccessGroupId = "pgroup-7nx89k7l",
+        ///         Name = "test",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetAccessGroupsResult> Invoke(GetAccessGroupsInvokeArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetAccessGroupsResult>("tencentcloud:Cfs/getAccessGroups:getAccessGroups", args ?? new GetAccessGroupsInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetAccessGroupsResult>("tencentcloud:Cfs/getAccessGroups:getAccessGroups", args ?? new GetAccessGroupsInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetAccessGroupsArgs : Pulumi.InvokeArgs
+    public sealed class GetAccessGroupsArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// A specified access group ID used to query.
@@ -97,9 +91,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cfs
         public GetAccessGroupsArgs()
         {
         }
+        public static new GetAccessGroupsArgs Empty => new GetAccessGroupsArgs();
     }
 
-    public sealed class GetAccessGroupsInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetAccessGroupsInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// A specified access group ID used to query.
@@ -122,6 +117,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cfs
         public GetAccessGroupsInvokeArgs()
         {
         }
+        public static new GetAccessGroupsInvokeArgs Empty => new GetAccessGroupsInvokeArgs();
     }
 
 

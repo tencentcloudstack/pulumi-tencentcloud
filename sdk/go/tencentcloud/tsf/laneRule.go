@@ -7,46 +7,51 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a tsf laneRule
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Tsf"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tsf"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tsf"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Tsf.NewLaneRule(ctx, "laneRule", &Tsf.LaneRuleArgs{
-// 			Enable:   pulumi.Bool(false),
-// 			LaneId:   pulumi.String("lane-abw5oo5a"),
-// 			Remark:   pulumi.String("terraform-test"),
-// 			RuleName: pulumi.String("terraform-rule-name"),
-// 			RuleTagLists: tsf.LaneRuleRuleTagListArray{
-// 				&tsf.LaneRuleRuleTagListArgs{
-// 					TagName:     pulumi.String("xxx"),
-// 					TagOperator: pulumi.String("EQUAL"),
-// 					TagValue:    pulumi.String("222"),
-// 				},
-// 			},
-// 			RuleTagRelationship: pulumi.String("RELEATION_AND"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Tsf.NewLaneRule(ctx, "laneRule", &Tsf.LaneRuleArgs{
+//				Enable:   pulumi.Bool(false),
+//				LaneId:   pulumi.String("lane-abw5oo5a"),
+//				Remark:   pulumi.String("terraform-test"),
+//				RuleName: pulumi.String("terraform-rule-name"),
+//				RuleTagLists: tsf.LaneRuleRuleTagListArray{
+//					&tsf.LaneRuleRuleTagListArgs{
+//						TagName:     pulumi.String("xxx"),
+//						TagOperator: pulumi.String("EQUAL"),
+//						TagValue:    pulumi.String("222"),
+//					},
+//				},
+//				RuleTagRelationship: pulumi.String("RELEATION_AND"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 type LaneRule struct {
 	pulumi.CustomResourceState
 
@@ -99,7 +104,7 @@ func NewLaneRule(ctx *pulumi.Context,
 	if args.RuleTagRelationship == nil {
 		return nil, errors.New("invalid value for required argument 'RuleTagRelationship'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource LaneRule
 	err := ctx.RegisterResource("tencentcloud:Tsf/laneRule:LaneRule", name, args, &resource, opts...)
 	if err != nil {
@@ -236,7 +241,7 @@ func (i *LaneRule) ToLaneRuleOutputWithContext(ctx context.Context) LaneRuleOutp
 // LaneRuleArrayInput is an input type that accepts LaneRuleArray and LaneRuleArrayOutput values.
 // You can construct a concrete instance of `LaneRuleArrayInput` via:
 //
-//          LaneRuleArray{ LaneRuleArgs{...} }
+//	LaneRuleArray{ LaneRuleArgs{...} }
 type LaneRuleArrayInput interface {
 	pulumi.Input
 
@@ -261,7 +266,7 @@ func (i LaneRuleArray) ToLaneRuleArrayOutputWithContext(ctx context.Context) Lan
 // LaneRuleMapInput is an input type that accepts LaneRuleMap and LaneRuleMapOutput values.
 // You can construct a concrete instance of `LaneRuleMapInput` via:
 //
-//          LaneRuleMap{ "key": LaneRuleArgs{...} }
+//	LaneRuleMap{ "key": LaneRuleArgs{...} }
 type LaneRuleMapInput interface {
 	pulumi.Input
 

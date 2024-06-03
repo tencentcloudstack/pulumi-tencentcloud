@@ -14,7 +14,13 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdmq.Outputs
     [OutputType]
     public sealed class GetRabbitmqNodeListFilterResult
     {
+        /// <summary>
+        /// The name of the filter parameter.
+        /// </summary>
         public readonly string? Name;
+        /// <summary>
+        /// value.
+        /// </summary>
         public readonly ImmutableArray<string> Values;
 
         [OutputConstructor]

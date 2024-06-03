@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps.Inputs
 {
 
-    public sealed class ScheduleTriggerArgs : Pulumi.ResourceArgs
+    public sealed class ScheduleTriggerArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// The AWS S3 trigger. This parameter is valid and required if `Type` is `AwsS3FileUpload`.Note: Currently, the key for the AWS S3 bucket, the trigger SQS queue, and the callback SQS queue must be the same.Note: This field may return null, indicating that no valid values can be obtained.
@@ -34,5 +34,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps.Inputs
         public ScheduleTriggerArgs()
         {
         }
+        public static new ScheduleTriggerArgs Empty => new ScheduleTriggerArgs();
     }
 }

@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,9 +11,10 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const exampleInstance = new tencentcloud.tdmq.Instance("exampleInstance", {
  *     clusterName: "tf_example",
@@ -32,13 +34,14 @@ import * as utilities from "../utilities";
  *     remark: "remark.",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * Tdmq namespace can be imported, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Tdmq/namespace:Namespace test namespace_id
+ * $ pulumi import tencentcloud:Tdmq/namespace:Namespace test namespace_id
  * ```
  */
 export class Namespace extends pulumi.CustomResource {

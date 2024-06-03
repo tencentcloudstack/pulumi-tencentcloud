@@ -8,11 +8,13 @@ import * as utilities from "../utilities";
  * Provides a resource to create a mps enableWorkflowConfig
  *
  * ## Example Usage
+ *
  * ### Enable the mps workflow
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const example = new tencentcloud.mps.Workflow("example", {
  *     outputDir: "/",
@@ -89,24 +91,28 @@ import * as utilities from "../utilities";
  *     enabled: true,
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
+ *
  * ### Disable the mps workflow
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const config = new tencentcloud.mps.EnableWorkflowConfig("config", {
  *     workflowId: tencentcloud_mps_workflow.example.id,
  *     enabled: false,
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * mps enable_workflow_config can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Mps/enableWorkflowConfig:EnableWorkflowConfig enable_workflow_config enable_workflow_config_id
+ * $ pulumi import tencentcloud:Mps/enableWorkflowConfig:EnableWorkflowConfig enable_workflow_config enable_workflow_config_id
  * ```
  */
 export class EnableWorkflowConfig extends pulumi.CustomResource {

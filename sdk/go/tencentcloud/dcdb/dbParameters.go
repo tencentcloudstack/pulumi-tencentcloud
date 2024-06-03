@@ -7,48 +7,51 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a dcdb dbParameters
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"fmt"
 //
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Dcdb"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dcdb"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dcdb"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Dcdb.NewDbParameters(ctx, "dbParameters", &Dcdb.DbParametersArgs{
-// 			InstanceId: pulumi.String(fmt.Sprintf("%v%v", "%", "s")),
-// 			Params: &dcdb.DbParametersParamsArgs{
-// 				Param: pulumi.String("max_connections"),
-// 				Value: pulumi.String("9999"),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Dcdb.NewDbParameters(ctx, "dbParameters", &Dcdb.DbParametersArgs{
+//				InstanceId: pulumi.String("%s"),
+//				Params: &dcdb.DbParametersParamsArgs{
+//					Param: pulumi.String("max_connections"),
+//					Value: pulumi.String("9999"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // dcdb db_parameters can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Dcdb/dbParameters:DbParameters db_parameters instanceId#paramName
+// $ pulumi import tencentcloud:Dcdb/dbParameters:DbParameters db_parameters instanceId#paramName
 // ```
 type DbParameters struct {
 	pulumi.CustomResourceState
@@ -72,7 +75,7 @@ func NewDbParameters(ctx *pulumi.Context,
 	if args.Params == nil {
 		return nil, errors.New("invalid value for required argument 'Params'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource DbParameters
 	err := ctx.RegisterResource("tencentcloud:Dcdb/dbParameters:DbParameters", name, args, &resource, opts...)
 	if err != nil {
@@ -153,7 +156,7 @@ func (i *DbParameters) ToDbParametersOutputWithContext(ctx context.Context) DbPa
 // DbParametersArrayInput is an input type that accepts DbParametersArray and DbParametersArrayOutput values.
 // You can construct a concrete instance of `DbParametersArrayInput` via:
 //
-//          DbParametersArray{ DbParametersArgs{...} }
+//	DbParametersArray{ DbParametersArgs{...} }
 type DbParametersArrayInput interface {
 	pulumi.Input
 
@@ -178,7 +181,7 @@ func (i DbParametersArray) ToDbParametersArrayOutputWithContext(ctx context.Cont
 // DbParametersMapInput is an input type that accepts DbParametersMap and DbParametersMapOutput values.
 // You can construct a concrete instance of `DbParametersMapInput` via:
 //
-//          DbParametersMap{ "key": DbParametersArgs{...} }
+//	DbParametersMap{ "key": DbParametersArgs{...} }
 type DbParametersMapInput interface {
 	pulumi.Input
 

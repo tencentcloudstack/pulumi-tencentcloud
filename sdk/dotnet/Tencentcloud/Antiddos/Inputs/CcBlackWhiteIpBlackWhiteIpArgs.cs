@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Antiddos.Inputs
 {
 
-    public sealed class CcBlackWhiteIpBlackWhiteIpArgs : Pulumi.ResourceArgs
+    public sealed class CcBlackWhiteIpBlackWhiteIpArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// ip address.
@@ -28,5 +28,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Antiddos.Inputs
         public CcBlackWhiteIpBlackWhiteIpArgs()
         {
         }
+        public static new CcBlackWhiteIpBlackWhiteIpArgs Empty => new CcBlackWhiteIpBlackWhiteIpArgs();
     }
 }

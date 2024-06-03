@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,26 +11,25 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const orgFinancialByMember = pulumi.output(tencentcloud.Organization.getOrgFinancialByMember({
+ * const orgFinancialByMember = tencentcloud.Organization.getOrgFinancialByMember({
  *     endMonth: "2023-10",
  *     memberUins: [
  *         100015591986,
  *         100029796005,
  *     ],
  *     month: "2023-05",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getOrgFinancialByMember(args: GetOrgFinancialByMemberArgs, opts?: pulumi.InvokeOptions): Promise<GetOrgFinancialByMemberResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Organization/getOrgFinancialByMember:getOrgFinancialByMember", {
         "endMonth": args.endMonth,
         "memberUins": args.memberUins,
@@ -87,9 +87,29 @@ export interface GetOrgFinancialByMemberResult {
      */
     readonly totalCost: number;
 }
-
+/**
+ * Use this data source to query detailed information of organization orgFinancialByMember
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const orgFinancialByMember = tencentcloud.Organization.getOrgFinancialByMember({
+ *     endMonth: "2023-10",
+ *     memberUins: [
+ *         100015591986,
+ *         100029796005,
+ *     ],
+ *     month: "2023-05",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getOrgFinancialByMemberOutput(args: GetOrgFinancialByMemberOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetOrgFinancialByMemberResult> {
-    return pulumi.output(args).apply(a => getOrgFinancialByMember(a, opts))
+    return pulumi.output(args).apply((a: any) => getOrgFinancialByMember(a, opts))
 }
 
 /**

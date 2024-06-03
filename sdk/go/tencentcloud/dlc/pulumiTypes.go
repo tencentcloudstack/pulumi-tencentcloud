@@ -8,7 +8,10 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
+
+var _ = internal.GetEnvOrDefault
 
 type AddUsersToWorkGroupAttachmentAddInfo struct {
 	// User id set, matched with CAM side uin.
@@ -20,7 +23,7 @@ type AddUsersToWorkGroupAttachmentAddInfo struct {
 // AddUsersToWorkGroupAttachmentAddInfoInput is an input type that accepts AddUsersToWorkGroupAttachmentAddInfoArgs and AddUsersToWorkGroupAttachmentAddInfoOutput values.
 // You can construct a concrete instance of `AddUsersToWorkGroupAttachmentAddInfoInput` via:
 //
-//          AddUsersToWorkGroupAttachmentAddInfoArgs{...}
+//	AddUsersToWorkGroupAttachmentAddInfoArgs{...}
 type AddUsersToWorkGroupAttachmentAddInfoInput interface {
 	pulumi.Input
 
@@ -58,11 +61,11 @@ func (i AddUsersToWorkGroupAttachmentAddInfoArgs) ToAddUsersToWorkGroupAttachmen
 // AddUsersToWorkGroupAttachmentAddInfoPtrInput is an input type that accepts AddUsersToWorkGroupAttachmentAddInfoArgs, AddUsersToWorkGroupAttachmentAddInfoPtr and AddUsersToWorkGroupAttachmentAddInfoPtrOutput values.
 // You can construct a concrete instance of `AddUsersToWorkGroupAttachmentAddInfoPtrInput` via:
 //
-//          AddUsersToWorkGroupAttachmentAddInfoArgs{...}
+//	        AddUsersToWorkGroupAttachmentAddInfoArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type AddUsersToWorkGroupAttachmentAddInfoPtrInput interface {
 	pulumi.Input
 
@@ -167,29 +170,46 @@ func (o AddUsersToWorkGroupAttachmentAddInfoPtrOutput) WorkGroupId() pulumi.IntP
 }
 
 type AttachUserPolicyOperationPolicySet struct {
-	Catalog    string  `pulumi:"catalog"`
-	Column     *string `pulumi:"column"`
+	// For the data source name that requires authorization, only * (representing all resources at this level) is supported under the administrator level; in the case of data source level and database level authentication, only COSDataCatalog or * is supported; in data table level authentication, it is possible Fill in the user-defined data source. If left blank, it defaults to DataLakeCatalog. note: If a user-defined data source is authenticated, the permissions that dlc can manage are a subset of the accounts provided by the user when accessing the data source.
+	Catalog string `pulumi:"catalog"`
+	// For columns that require authorization, fill in * to represent all current columns. When the authorization type is administrator level, only * is allowed.
+	Column *string `pulumi:"column"`
+	// The time when the permission was created. Leave the input parameter blank.
 	CreateTime *string `pulumi:"createTime"`
+	// Data engines that require authorization, fill in * to represent all current engines. when the authorization type is administrator level, only * is allowed.
 	DataEngine *string `pulumi:"dataEngine"`
-	Database   string  `pulumi:"database"`
-	Function   *string `pulumi:"function"`
-	Id         *int    `pulumi:"id"`
-	Mode       *string `pulumi:"mode"`
-	Operation  string  `pulumi:"operation"`
-	Operator   *string `pulumi:"operator"`
+	// Database name that requires authorization, fill in * to represent all databases under the current catalog. When the authorization type is administrator level, only * is allowed to be filled in. when the authorization type is data connection level, only blanks are allowed to be filled in. For other types, the database can be specified arbitrarily.
+	Database string `pulumi:"database"`
+	// For the function name that requires authorization, fill in * to represent all functions under the current catalog. when the authorization type is administrator level, only * is allowed to be filled in. When the authorization type is data connection level, only blanks are allowed to be filled in. in other types, functions can be specified arbitrarily.
+	Function *string `pulumi:"function"`
+	// Policy id.
+	Id *int `pulumi:"id"`
+	// Authorization mode, please leave this parameter blank. COMMON: normal mode; SENIOR: advanced mode.
+	Mode *string `pulumi:"mode"`
+	// Authorized permission operations provide different operations for different levels of authentication. administrator permissions: ALL, default is ALL if left blank; data connection level authentication: CREATE; database level authentication: ALL, CREATE, ALTER, DROP; data table permissions: ALL, SELECT, INSERT, ALTER, DELETE, DROP, UPDATE. note: under data table permissions, only SELECT operations are supported when the specified data source is not COSDataCatalog.
+	Operation string `pulumi:"operation"`
+	// Operator, do not fill in the input parameters.
+	Operator *string `pulumi:"operator"`
+	// Authorization type, currently supports eight authorization types: ADMIN: Administrator level authentication DATASOURCE: data connection level authentication DATABASE: database level authentication TABLE: Table level authentication VIEW: view level authentication FUNCTION: Function level authentication COLUMN: Column level authentication ENGINE: Data engine authentication. if left blank, the default is administrator level authentication.
 	PolicyType *string `pulumi:"policyType"`
-	ReAuth     *bool   `pulumi:"reAuth"`
-	Source     *string `pulumi:"source"`
-	SourceId   *int    `pulumi:"sourceId"`
+	// Whether the user can perform secondary authorization. when it is true, the authorized user can re-authorize the permissions obtained this time to other sub-users. default is false.
+	ReAuth *bool `pulumi:"reAuth"`
+	// Permission source, please leave it blank. USER: permissions come from the user itself; WORKGROUP: permissions come from the bound workgroup.
+	Source *string `pulumi:"source"`
+	// The id of the workgroup to which the permission belongs. this value only exists when the source of the permission is a workgroup. that is, this field has a value only when the value of the Source field is WORKGROUP.
+	SourceId *int `pulumi:"sourceId"`
+	// The name of the workgroup to which the permission belongs. this value only exists when the source of the permission is a workgroup. that is, this field has a value only when the value of the source field is WORKGROUP.
 	SourceName *string `pulumi:"sourceName"`
-	Table      string  `pulumi:"table"`
-	View       *string `pulumi:"view"`
+	// For the table name that requires authorization, fill in * to represent all tables under the current database. when the authorization type is administrator level, only * is allowed to be filled in. when the authorization type is data connection level or database level, only blanks are allowed to be filled in. For other types, data tables can be specified arbitrarily.
+	Table string `pulumi:"table"`
+	// For views that require authorization, fill in * to represent all views under the current database. When the authorization type is administrator level, only * is allowed to be filled in. when the authorization type is data connection level or database level, only blanks are allowed to be filled in. for other types, the view can be specified arbitrarily.
+	View *string `pulumi:"view"`
 }
 
 // AttachUserPolicyOperationPolicySetInput is an input type that accepts AttachUserPolicyOperationPolicySetArgs and AttachUserPolicyOperationPolicySetOutput values.
 // You can construct a concrete instance of `AttachUserPolicyOperationPolicySetInput` via:
 //
-//          AttachUserPolicyOperationPolicySetArgs{...}
+//	AttachUserPolicyOperationPolicySetArgs{...}
 type AttachUserPolicyOperationPolicySetInput interface {
 	pulumi.Input
 
@@ -198,23 +218,40 @@ type AttachUserPolicyOperationPolicySetInput interface {
 }
 
 type AttachUserPolicyOperationPolicySetArgs struct {
-	Catalog    pulumi.StringInput    `pulumi:"catalog"`
-	Column     pulumi.StringPtrInput `pulumi:"column"`
+	// For the data source name that requires authorization, only * (representing all resources at this level) is supported under the administrator level; in the case of data source level and database level authentication, only COSDataCatalog or * is supported; in data table level authentication, it is possible Fill in the user-defined data source. If left blank, it defaults to DataLakeCatalog. note: If a user-defined data source is authenticated, the permissions that dlc can manage are a subset of the accounts provided by the user when accessing the data source.
+	Catalog pulumi.StringInput `pulumi:"catalog"`
+	// For columns that require authorization, fill in * to represent all current columns. When the authorization type is administrator level, only * is allowed.
+	Column pulumi.StringPtrInput `pulumi:"column"`
+	// The time when the permission was created. Leave the input parameter blank.
 	CreateTime pulumi.StringPtrInput `pulumi:"createTime"`
+	// Data engines that require authorization, fill in * to represent all current engines. when the authorization type is administrator level, only * is allowed.
 	DataEngine pulumi.StringPtrInput `pulumi:"dataEngine"`
-	Database   pulumi.StringInput    `pulumi:"database"`
-	Function   pulumi.StringPtrInput `pulumi:"function"`
-	Id         pulumi.IntPtrInput    `pulumi:"id"`
-	Mode       pulumi.StringPtrInput `pulumi:"mode"`
-	Operation  pulumi.StringInput    `pulumi:"operation"`
-	Operator   pulumi.StringPtrInput `pulumi:"operator"`
+	// Database name that requires authorization, fill in * to represent all databases under the current catalog. When the authorization type is administrator level, only * is allowed to be filled in. when the authorization type is data connection level, only blanks are allowed to be filled in. For other types, the database can be specified arbitrarily.
+	Database pulumi.StringInput `pulumi:"database"`
+	// For the function name that requires authorization, fill in * to represent all functions under the current catalog. when the authorization type is administrator level, only * is allowed to be filled in. When the authorization type is data connection level, only blanks are allowed to be filled in. in other types, functions can be specified arbitrarily.
+	Function pulumi.StringPtrInput `pulumi:"function"`
+	// Policy id.
+	Id pulumi.IntPtrInput `pulumi:"id"`
+	// Authorization mode, please leave this parameter blank. COMMON: normal mode; SENIOR: advanced mode.
+	Mode pulumi.StringPtrInput `pulumi:"mode"`
+	// Authorized permission operations provide different operations for different levels of authentication. administrator permissions: ALL, default is ALL if left blank; data connection level authentication: CREATE; database level authentication: ALL, CREATE, ALTER, DROP; data table permissions: ALL, SELECT, INSERT, ALTER, DELETE, DROP, UPDATE. note: under data table permissions, only SELECT operations are supported when the specified data source is not COSDataCatalog.
+	Operation pulumi.StringInput `pulumi:"operation"`
+	// Operator, do not fill in the input parameters.
+	Operator pulumi.StringPtrInput `pulumi:"operator"`
+	// Authorization type, currently supports eight authorization types: ADMIN: Administrator level authentication DATASOURCE: data connection level authentication DATABASE: database level authentication TABLE: Table level authentication VIEW: view level authentication FUNCTION: Function level authentication COLUMN: Column level authentication ENGINE: Data engine authentication. if left blank, the default is administrator level authentication.
 	PolicyType pulumi.StringPtrInput `pulumi:"policyType"`
-	ReAuth     pulumi.BoolPtrInput   `pulumi:"reAuth"`
-	Source     pulumi.StringPtrInput `pulumi:"source"`
-	SourceId   pulumi.IntPtrInput    `pulumi:"sourceId"`
+	// Whether the user can perform secondary authorization. when it is true, the authorized user can re-authorize the permissions obtained this time to other sub-users. default is false.
+	ReAuth pulumi.BoolPtrInput `pulumi:"reAuth"`
+	// Permission source, please leave it blank. USER: permissions come from the user itself; WORKGROUP: permissions come from the bound workgroup.
+	Source pulumi.StringPtrInput `pulumi:"source"`
+	// The id of the workgroup to which the permission belongs. this value only exists when the source of the permission is a workgroup. that is, this field has a value only when the value of the Source field is WORKGROUP.
+	SourceId pulumi.IntPtrInput `pulumi:"sourceId"`
+	// The name of the workgroup to which the permission belongs. this value only exists when the source of the permission is a workgroup. that is, this field has a value only when the value of the source field is WORKGROUP.
 	SourceName pulumi.StringPtrInput `pulumi:"sourceName"`
-	Table      pulumi.StringInput    `pulumi:"table"`
-	View       pulumi.StringPtrInput `pulumi:"view"`
+	// For the table name that requires authorization, fill in * to represent all tables under the current database. when the authorization type is administrator level, only * is allowed to be filled in. when the authorization type is data connection level or database level, only blanks are allowed to be filled in. For other types, data tables can be specified arbitrarily.
+	Table pulumi.StringInput `pulumi:"table"`
+	// For views that require authorization, fill in * to represent all views under the current database. When the authorization type is administrator level, only * is allowed to be filled in. when the authorization type is data connection level or database level, only blanks are allowed to be filled in. for other types, the view can be specified arbitrarily.
+	View pulumi.StringPtrInput `pulumi:"view"`
 }
 
 func (AttachUserPolicyOperationPolicySetArgs) ElementType() reflect.Type {
@@ -232,7 +269,7 @@ func (i AttachUserPolicyOperationPolicySetArgs) ToAttachUserPolicyOperationPolic
 // AttachUserPolicyOperationPolicySetArrayInput is an input type that accepts AttachUserPolicyOperationPolicySetArray and AttachUserPolicyOperationPolicySetArrayOutput values.
 // You can construct a concrete instance of `AttachUserPolicyOperationPolicySetArrayInput` via:
 //
-//          AttachUserPolicyOperationPolicySetArray{ AttachUserPolicyOperationPolicySetArgs{...} }
+//	AttachUserPolicyOperationPolicySetArray{ AttachUserPolicyOperationPolicySetArgs{...} }
 type AttachUserPolicyOperationPolicySetArrayInput interface {
 	pulumi.Input
 
@@ -268,70 +305,87 @@ func (o AttachUserPolicyOperationPolicySetOutput) ToAttachUserPolicyOperationPol
 	return o
 }
 
+// For the data source name that requires authorization, only * (representing all resources at this level) is supported under the administrator level; in the case of data source level and database level authentication, only COSDataCatalog or * is supported; in data table level authentication, it is possible Fill in the user-defined data source. If left blank, it defaults to DataLakeCatalog. note: If a user-defined data source is authenticated, the permissions that dlc can manage are a subset of the accounts provided by the user when accessing the data source.
 func (o AttachUserPolicyOperationPolicySetOutput) Catalog() pulumi.StringOutput {
 	return o.ApplyT(func(v AttachUserPolicyOperationPolicySet) string { return v.Catalog }).(pulumi.StringOutput)
 }
 
+// For columns that require authorization, fill in * to represent all current columns. When the authorization type is administrator level, only * is allowed.
 func (o AttachUserPolicyOperationPolicySetOutput) Column() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v AttachUserPolicyOperationPolicySet) *string { return v.Column }).(pulumi.StringPtrOutput)
 }
 
+// The time when the permission was created. Leave the input parameter blank.
 func (o AttachUserPolicyOperationPolicySetOutput) CreateTime() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v AttachUserPolicyOperationPolicySet) *string { return v.CreateTime }).(pulumi.StringPtrOutput)
 }
 
+// Data engines that require authorization, fill in * to represent all current engines. when the authorization type is administrator level, only * is allowed.
 func (o AttachUserPolicyOperationPolicySetOutput) DataEngine() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v AttachUserPolicyOperationPolicySet) *string { return v.DataEngine }).(pulumi.StringPtrOutput)
 }
 
+// Database name that requires authorization, fill in * to represent all databases under the current catalog. When the authorization type is administrator level, only * is allowed to be filled in. when the authorization type is data connection level, only blanks are allowed to be filled in. For other types, the database can be specified arbitrarily.
 func (o AttachUserPolicyOperationPolicySetOutput) Database() pulumi.StringOutput {
 	return o.ApplyT(func(v AttachUserPolicyOperationPolicySet) string { return v.Database }).(pulumi.StringOutput)
 }
 
+// For the function name that requires authorization, fill in * to represent all functions under the current catalog. when the authorization type is administrator level, only * is allowed to be filled in. When the authorization type is data connection level, only blanks are allowed to be filled in. in other types, functions can be specified arbitrarily.
 func (o AttachUserPolicyOperationPolicySetOutput) Function() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v AttachUserPolicyOperationPolicySet) *string { return v.Function }).(pulumi.StringPtrOutput)
 }
 
+// Policy id.
 func (o AttachUserPolicyOperationPolicySetOutput) Id() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v AttachUserPolicyOperationPolicySet) *int { return v.Id }).(pulumi.IntPtrOutput)
 }
 
+// Authorization mode, please leave this parameter blank. COMMON: normal mode; SENIOR: advanced mode.
 func (o AttachUserPolicyOperationPolicySetOutput) Mode() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v AttachUserPolicyOperationPolicySet) *string { return v.Mode }).(pulumi.StringPtrOutput)
 }
 
+// Authorized permission operations provide different operations for different levels of authentication. administrator permissions: ALL, default is ALL if left blank; data connection level authentication: CREATE; database level authentication: ALL, CREATE, ALTER, DROP; data table permissions: ALL, SELECT, INSERT, ALTER, DELETE, DROP, UPDATE. note: under data table permissions, only SELECT operations are supported when the specified data source is not COSDataCatalog.
 func (o AttachUserPolicyOperationPolicySetOutput) Operation() pulumi.StringOutput {
 	return o.ApplyT(func(v AttachUserPolicyOperationPolicySet) string { return v.Operation }).(pulumi.StringOutput)
 }
 
+// Operator, do not fill in the input parameters.
 func (o AttachUserPolicyOperationPolicySetOutput) Operator() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v AttachUserPolicyOperationPolicySet) *string { return v.Operator }).(pulumi.StringPtrOutput)
 }
 
+// Authorization type, currently supports eight authorization types: ADMIN: Administrator level authentication DATASOURCE: data connection level authentication DATABASE: database level authentication TABLE: Table level authentication VIEW: view level authentication FUNCTION: Function level authentication COLUMN: Column level authentication ENGINE: Data engine authentication. if left blank, the default is administrator level authentication.
 func (o AttachUserPolicyOperationPolicySetOutput) PolicyType() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v AttachUserPolicyOperationPolicySet) *string { return v.PolicyType }).(pulumi.StringPtrOutput)
 }
 
+// Whether the user can perform secondary authorization. when it is true, the authorized user can re-authorize the permissions obtained this time to other sub-users. default is false.
 func (o AttachUserPolicyOperationPolicySetOutput) ReAuth() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v AttachUserPolicyOperationPolicySet) *bool { return v.ReAuth }).(pulumi.BoolPtrOutput)
 }
 
+// Permission source, please leave it blank. USER: permissions come from the user itself; WORKGROUP: permissions come from the bound workgroup.
 func (o AttachUserPolicyOperationPolicySetOutput) Source() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v AttachUserPolicyOperationPolicySet) *string { return v.Source }).(pulumi.StringPtrOutput)
 }
 
+// The id of the workgroup to which the permission belongs. this value only exists when the source of the permission is a workgroup. that is, this field has a value only when the value of the Source field is WORKGROUP.
 func (o AttachUserPolicyOperationPolicySetOutput) SourceId() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v AttachUserPolicyOperationPolicySet) *int { return v.SourceId }).(pulumi.IntPtrOutput)
 }
 
+// The name of the workgroup to which the permission belongs. this value only exists when the source of the permission is a workgroup. that is, this field has a value only when the value of the source field is WORKGROUP.
 func (o AttachUserPolicyOperationPolicySetOutput) SourceName() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v AttachUserPolicyOperationPolicySet) *string { return v.SourceName }).(pulumi.StringPtrOutput)
 }
 
+// For the table name that requires authorization, fill in * to represent all tables under the current database. when the authorization type is administrator level, only * is allowed to be filled in. when the authorization type is data connection level or database level, only blanks are allowed to be filled in. For other types, data tables can be specified arbitrarily.
 func (o AttachUserPolicyOperationPolicySetOutput) Table() pulumi.StringOutput {
 	return o.ApplyT(func(v AttachUserPolicyOperationPolicySet) string { return v.Table }).(pulumi.StringOutput)
 }
 
+// For views that require authorization, fill in * to represent all views under the current database. When the authorization type is administrator level, only * is allowed to be filled in. when the authorization type is data connection level or database level, only blanks are allowed to be filled in. for other types, the view can be specified arbitrarily.
 func (o AttachUserPolicyOperationPolicySetOutput) View() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v AttachUserPolicyOperationPolicySet) *string { return v.View }).(pulumi.StringPtrOutput)
 }
@@ -357,29 +411,46 @@ func (o AttachUserPolicyOperationPolicySetArrayOutput) Index(i pulumi.IntInput) 
 }
 
 type AttachWorkGroupPolicyOperationPolicySet struct {
-	Catalog    string  `pulumi:"catalog"`
-	Column     *string `pulumi:"column"`
+	// For the data source name that requires authorization, only * (representing all resources at this level) is supported under the administrator level; in the case of data source level and database level authentication, only COSDataCatalog or * is supported; in data table level authentication, it is possible Fill in the user-defined data source. If left blank, it defaults to DataLakeCatalog. note: If a user-defined data source is authenticated, the permissions that dlc can manage are a subset of the accounts provided by the user when accessing the data source.
+	Catalog string `pulumi:"catalog"`
+	// For columns that require authorization, fill in * to represent all current columns. When the authorization type is administrator level, only * is allowed.
+	Column *string `pulumi:"column"`
+	// The time when the permission was created. Leave the input parameter blank.
 	CreateTime *string `pulumi:"createTime"`
+	// Data engines that require authorization, fill in * to represent all current engines. when the authorization type is administrator level, only * is allowed.
 	DataEngine *string `pulumi:"dataEngine"`
-	Database   string  `pulumi:"database"`
-	Function   *string `pulumi:"function"`
-	Id         *int    `pulumi:"id"`
-	Mode       *string `pulumi:"mode"`
-	Operation  string  `pulumi:"operation"`
-	Operator   *string `pulumi:"operator"`
+	// Database name that requires authorization, fill in * to represent all databases under the current catalog. When the authorization type is administrator level, only * is allowed to be filled in. when the authorization type is data connection level, only blanks are allowed to be filled in. For other types, the database can be specified arbitrarily.
+	Database string `pulumi:"database"`
+	// For the function name that requires authorization, fill in * to represent all functions under the current catalog. when the authorization type is administrator level, only * is allowed to be filled in. When the authorization type is data connection level, only blanks are allowed to be filled in. in other types, functions can be specified arbitrarily.
+	Function *string `pulumi:"function"`
+	// Policy id.
+	Id *int `pulumi:"id"`
+	// Authorization mode, please leave this parameter blank. COMMON: normal mode; SENIOR: advanced mode.
+	Mode *string `pulumi:"mode"`
+	// Authorized permission operations provide different operations for different levels of authentication. administrator permissions: ALL, default is ALL if left blank; data connection level authentication: CREATE; database level authentication: ALL, CREATE, ALTER, DROP; data table permissions: ALL, SELECT, INSERT, ALTER, DELETE, DROP, UPDATE. note: under data table permissions, only SELECT operations are supported when the specified data source is not COSDataCatalog.
+	Operation string `pulumi:"operation"`
+	// Operator, do not fill in the input parameters.
+	Operator *string `pulumi:"operator"`
+	// Authorization type, currently supports eight authorization types: ADMIN: Administrator level authentication DATASOURCE: data connection level authentication DATABASE: database level authentication TABLE: Table level authentication VIEW: view level authentication FUNCTION: Function level authentication COLUMN: Column level authentication ENGINE: Data engine authentication. if left blank, the default is administrator level authentication.
 	PolicyType *string `pulumi:"policyType"`
-	ReAuth     *bool   `pulumi:"reAuth"`
-	Source     *string `pulumi:"source"`
-	SourceId   *int    `pulumi:"sourceId"`
+	// Whether the user can perform secondary authorization. when it is true, the authorized user can re-authorize the permissions obtained this time to other sub-users. default is false.
+	ReAuth *bool `pulumi:"reAuth"`
+	// Permission source, please leave it blank. USER: permissions come from the user itself; WORKGROUP: permissions come from the bound workgroup.
+	Source *string `pulumi:"source"`
+	// The id of the workgroup to which the permission belongs. this value only exists when the source of the permission is a workgroup. that is, this field has a value only when the value of the Source field is WORKGROUP.
+	SourceId *int `pulumi:"sourceId"`
+	// The name of the workgroup to which the permission belongs. this value only exists when the source of the permission is a workgroup. that is, this field has a value only when the value of the source field is WORKGROUP.
 	SourceName *string `pulumi:"sourceName"`
-	Table      string  `pulumi:"table"`
-	View       *string `pulumi:"view"`
+	// For the table name that requires authorization, fill in * to represent all tables under the current database. when the authorization type is administrator level, only * is allowed to be filled in. when the authorization type is data connection level or database level, only blanks are allowed to be filled in. For other types, data tables can be specified arbitrarily.
+	Table string `pulumi:"table"`
+	// For views that require authorization, fill in * to represent all views under the current database. When the authorization type is administrator level, only * is allowed to be filled in. when the authorization type is data connection level or database level, only blanks are allowed to be filled in. for other types, the view can be specified arbitrarily.
+	View *string `pulumi:"view"`
 }
 
 // AttachWorkGroupPolicyOperationPolicySetInput is an input type that accepts AttachWorkGroupPolicyOperationPolicySetArgs and AttachWorkGroupPolicyOperationPolicySetOutput values.
 // You can construct a concrete instance of `AttachWorkGroupPolicyOperationPolicySetInput` via:
 //
-//          AttachWorkGroupPolicyOperationPolicySetArgs{...}
+//	AttachWorkGroupPolicyOperationPolicySetArgs{...}
 type AttachWorkGroupPolicyOperationPolicySetInput interface {
 	pulumi.Input
 
@@ -388,23 +459,40 @@ type AttachWorkGroupPolicyOperationPolicySetInput interface {
 }
 
 type AttachWorkGroupPolicyOperationPolicySetArgs struct {
-	Catalog    pulumi.StringInput    `pulumi:"catalog"`
-	Column     pulumi.StringPtrInput `pulumi:"column"`
+	// For the data source name that requires authorization, only * (representing all resources at this level) is supported under the administrator level; in the case of data source level and database level authentication, only COSDataCatalog or * is supported; in data table level authentication, it is possible Fill in the user-defined data source. If left blank, it defaults to DataLakeCatalog. note: If a user-defined data source is authenticated, the permissions that dlc can manage are a subset of the accounts provided by the user when accessing the data source.
+	Catalog pulumi.StringInput `pulumi:"catalog"`
+	// For columns that require authorization, fill in * to represent all current columns. When the authorization type is administrator level, only * is allowed.
+	Column pulumi.StringPtrInput `pulumi:"column"`
+	// The time when the permission was created. Leave the input parameter blank.
 	CreateTime pulumi.StringPtrInput `pulumi:"createTime"`
+	// Data engines that require authorization, fill in * to represent all current engines. when the authorization type is administrator level, only * is allowed.
 	DataEngine pulumi.StringPtrInput `pulumi:"dataEngine"`
-	Database   pulumi.StringInput    `pulumi:"database"`
-	Function   pulumi.StringPtrInput `pulumi:"function"`
-	Id         pulumi.IntPtrInput    `pulumi:"id"`
-	Mode       pulumi.StringPtrInput `pulumi:"mode"`
-	Operation  pulumi.StringInput    `pulumi:"operation"`
-	Operator   pulumi.StringPtrInput `pulumi:"operator"`
+	// Database name that requires authorization, fill in * to represent all databases under the current catalog. When the authorization type is administrator level, only * is allowed to be filled in. when the authorization type is data connection level, only blanks are allowed to be filled in. For other types, the database can be specified arbitrarily.
+	Database pulumi.StringInput `pulumi:"database"`
+	// For the function name that requires authorization, fill in * to represent all functions under the current catalog. when the authorization type is administrator level, only * is allowed to be filled in. When the authorization type is data connection level, only blanks are allowed to be filled in. in other types, functions can be specified arbitrarily.
+	Function pulumi.StringPtrInput `pulumi:"function"`
+	// Policy id.
+	Id pulumi.IntPtrInput `pulumi:"id"`
+	// Authorization mode, please leave this parameter blank. COMMON: normal mode; SENIOR: advanced mode.
+	Mode pulumi.StringPtrInput `pulumi:"mode"`
+	// Authorized permission operations provide different operations for different levels of authentication. administrator permissions: ALL, default is ALL if left blank; data connection level authentication: CREATE; database level authentication: ALL, CREATE, ALTER, DROP; data table permissions: ALL, SELECT, INSERT, ALTER, DELETE, DROP, UPDATE. note: under data table permissions, only SELECT operations are supported when the specified data source is not COSDataCatalog.
+	Operation pulumi.StringInput `pulumi:"operation"`
+	// Operator, do not fill in the input parameters.
+	Operator pulumi.StringPtrInput `pulumi:"operator"`
+	// Authorization type, currently supports eight authorization types: ADMIN: Administrator level authentication DATASOURCE: data connection level authentication DATABASE: database level authentication TABLE: Table level authentication VIEW: view level authentication FUNCTION: Function level authentication COLUMN: Column level authentication ENGINE: Data engine authentication. if left blank, the default is administrator level authentication.
 	PolicyType pulumi.StringPtrInput `pulumi:"policyType"`
-	ReAuth     pulumi.BoolPtrInput   `pulumi:"reAuth"`
-	Source     pulumi.StringPtrInput `pulumi:"source"`
-	SourceId   pulumi.IntPtrInput    `pulumi:"sourceId"`
+	// Whether the user can perform secondary authorization. when it is true, the authorized user can re-authorize the permissions obtained this time to other sub-users. default is false.
+	ReAuth pulumi.BoolPtrInput `pulumi:"reAuth"`
+	// Permission source, please leave it blank. USER: permissions come from the user itself; WORKGROUP: permissions come from the bound workgroup.
+	Source pulumi.StringPtrInput `pulumi:"source"`
+	// The id of the workgroup to which the permission belongs. this value only exists when the source of the permission is a workgroup. that is, this field has a value only when the value of the Source field is WORKGROUP.
+	SourceId pulumi.IntPtrInput `pulumi:"sourceId"`
+	// The name of the workgroup to which the permission belongs. this value only exists when the source of the permission is a workgroup. that is, this field has a value only when the value of the source field is WORKGROUP.
 	SourceName pulumi.StringPtrInput `pulumi:"sourceName"`
-	Table      pulumi.StringInput    `pulumi:"table"`
-	View       pulumi.StringPtrInput `pulumi:"view"`
+	// For the table name that requires authorization, fill in * to represent all tables under the current database. when the authorization type is administrator level, only * is allowed to be filled in. when the authorization type is data connection level or database level, only blanks are allowed to be filled in. For other types, data tables can be specified arbitrarily.
+	Table pulumi.StringInput `pulumi:"table"`
+	// For views that require authorization, fill in * to represent all views under the current database. When the authorization type is administrator level, only * is allowed to be filled in. when the authorization type is data connection level or database level, only blanks are allowed to be filled in. for other types, the view can be specified arbitrarily.
+	View pulumi.StringPtrInput `pulumi:"view"`
 }
 
 func (AttachWorkGroupPolicyOperationPolicySetArgs) ElementType() reflect.Type {
@@ -422,7 +510,7 @@ func (i AttachWorkGroupPolicyOperationPolicySetArgs) ToAttachWorkGroupPolicyOper
 // AttachWorkGroupPolicyOperationPolicySetArrayInput is an input type that accepts AttachWorkGroupPolicyOperationPolicySetArray and AttachWorkGroupPolicyOperationPolicySetArrayOutput values.
 // You can construct a concrete instance of `AttachWorkGroupPolicyOperationPolicySetArrayInput` via:
 //
-//          AttachWorkGroupPolicyOperationPolicySetArray{ AttachWorkGroupPolicyOperationPolicySetArgs{...} }
+//	AttachWorkGroupPolicyOperationPolicySetArray{ AttachWorkGroupPolicyOperationPolicySetArgs{...} }
 type AttachWorkGroupPolicyOperationPolicySetArrayInput interface {
 	pulumi.Input
 
@@ -458,70 +546,87 @@ func (o AttachWorkGroupPolicyOperationPolicySetOutput) ToAttachWorkGroupPolicyOp
 	return o
 }
 
+// For the data source name that requires authorization, only * (representing all resources at this level) is supported under the administrator level; in the case of data source level and database level authentication, only COSDataCatalog or * is supported; in data table level authentication, it is possible Fill in the user-defined data source. If left blank, it defaults to DataLakeCatalog. note: If a user-defined data source is authenticated, the permissions that dlc can manage are a subset of the accounts provided by the user when accessing the data source.
 func (o AttachWorkGroupPolicyOperationPolicySetOutput) Catalog() pulumi.StringOutput {
 	return o.ApplyT(func(v AttachWorkGroupPolicyOperationPolicySet) string { return v.Catalog }).(pulumi.StringOutput)
 }
 
+// For columns that require authorization, fill in * to represent all current columns. When the authorization type is administrator level, only * is allowed.
 func (o AttachWorkGroupPolicyOperationPolicySetOutput) Column() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v AttachWorkGroupPolicyOperationPolicySet) *string { return v.Column }).(pulumi.StringPtrOutput)
 }
 
+// The time when the permission was created. Leave the input parameter blank.
 func (o AttachWorkGroupPolicyOperationPolicySetOutput) CreateTime() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v AttachWorkGroupPolicyOperationPolicySet) *string { return v.CreateTime }).(pulumi.StringPtrOutput)
 }
 
+// Data engines that require authorization, fill in * to represent all current engines. when the authorization type is administrator level, only * is allowed.
 func (o AttachWorkGroupPolicyOperationPolicySetOutput) DataEngine() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v AttachWorkGroupPolicyOperationPolicySet) *string { return v.DataEngine }).(pulumi.StringPtrOutput)
 }
 
+// Database name that requires authorization, fill in * to represent all databases under the current catalog. When the authorization type is administrator level, only * is allowed to be filled in. when the authorization type is data connection level, only blanks are allowed to be filled in. For other types, the database can be specified arbitrarily.
 func (o AttachWorkGroupPolicyOperationPolicySetOutput) Database() pulumi.StringOutput {
 	return o.ApplyT(func(v AttachWorkGroupPolicyOperationPolicySet) string { return v.Database }).(pulumi.StringOutput)
 }
 
+// For the function name that requires authorization, fill in * to represent all functions under the current catalog. when the authorization type is administrator level, only * is allowed to be filled in. When the authorization type is data connection level, only blanks are allowed to be filled in. in other types, functions can be specified arbitrarily.
 func (o AttachWorkGroupPolicyOperationPolicySetOutput) Function() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v AttachWorkGroupPolicyOperationPolicySet) *string { return v.Function }).(pulumi.StringPtrOutput)
 }
 
+// Policy id.
 func (o AttachWorkGroupPolicyOperationPolicySetOutput) Id() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v AttachWorkGroupPolicyOperationPolicySet) *int { return v.Id }).(pulumi.IntPtrOutput)
 }
 
+// Authorization mode, please leave this parameter blank. COMMON: normal mode; SENIOR: advanced mode.
 func (o AttachWorkGroupPolicyOperationPolicySetOutput) Mode() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v AttachWorkGroupPolicyOperationPolicySet) *string { return v.Mode }).(pulumi.StringPtrOutput)
 }
 
+// Authorized permission operations provide different operations for different levels of authentication. administrator permissions: ALL, default is ALL if left blank; data connection level authentication: CREATE; database level authentication: ALL, CREATE, ALTER, DROP; data table permissions: ALL, SELECT, INSERT, ALTER, DELETE, DROP, UPDATE. note: under data table permissions, only SELECT operations are supported when the specified data source is not COSDataCatalog.
 func (o AttachWorkGroupPolicyOperationPolicySetOutput) Operation() pulumi.StringOutput {
 	return o.ApplyT(func(v AttachWorkGroupPolicyOperationPolicySet) string { return v.Operation }).(pulumi.StringOutput)
 }
 
+// Operator, do not fill in the input parameters.
 func (o AttachWorkGroupPolicyOperationPolicySetOutput) Operator() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v AttachWorkGroupPolicyOperationPolicySet) *string { return v.Operator }).(pulumi.StringPtrOutput)
 }
 
+// Authorization type, currently supports eight authorization types: ADMIN: Administrator level authentication DATASOURCE: data connection level authentication DATABASE: database level authentication TABLE: Table level authentication VIEW: view level authentication FUNCTION: Function level authentication COLUMN: Column level authentication ENGINE: Data engine authentication. if left blank, the default is administrator level authentication.
 func (o AttachWorkGroupPolicyOperationPolicySetOutput) PolicyType() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v AttachWorkGroupPolicyOperationPolicySet) *string { return v.PolicyType }).(pulumi.StringPtrOutput)
 }
 
+// Whether the user can perform secondary authorization. when it is true, the authorized user can re-authorize the permissions obtained this time to other sub-users. default is false.
 func (o AttachWorkGroupPolicyOperationPolicySetOutput) ReAuth() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v AttachWorkGroupPolicyOperationPolicySet) *bool { return v.ReAuth }).(pulumi.BoolPtrOutput)
 }
 
+// Permission source, please leave it blank. USER: permissions come from the user itself; WORKGROUP: permissions come from the bound workgroup.
 func (o AttachWorkGroupPolicyOperationPolicySetOutput) Source() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v AttachWorkGroupPolicyOperationPolicySet) *string { return v.Source }).(pulumi.StringPtrOutput)
 }
 
+// The id of the workgroup to which the permission belongs. this value only exists when the source of the permission is a workgroup. that is, this field has a value only when the value of the Source field is WORKGROUP.
 func (o AttachWorkGroupPolicyOperationPolicySetOutput) SourceId() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v AttachWorkGroupPolicyOperationPolicySet) *int { return v.SourceId }).(pulumi.IntPtrOutput)
 }
 
+// The name of the workgroup to which the permission belongs. this value only exists when the source of the permission is a workgroup. that is, this field has a value only when the value of the source field is WORKGROUP.
 func (o AttachWorkGroupPolicyOperationPolicySetOutput) SourceName() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v AttachWorkGroupPolicyOperationPolicySet) *string { return v.SourceName }).(pulumi.StringPtrOutput)
 }
 
+// For the table name that requires authorization, fill in * to represent all tables under the current database. when the authorization type is administrator level, only * is allowed to be filled in. when the authorization type is data connection level or database level, only blanks are allowed to be filled in. For other types, data tables can be specified arbitrarily.
 func (o AttachWorkGroupPolicyOperationPolicySetOutput) Table() pulumi.StringOutput {
 	return o.ApplyT(func(v AttachWorkGroupPolicyOperationPolicySet) string { return v.Table }).(pulumi.StringOutput)
 }
 
+// For views that require authorization, fill in * to represent all views under the current database. When the authorization type is administrator level, only * is allowed to be filled in. when the authorization type is data connection level or database level, only blanks are allowed to be filled in. for other types, the view can be specified arbitrarily.
 func (o AttachWorkGroupPolicyOperationPolicySetOutput) View() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v AttachWorkGroupPolicyOperationPolicySet) *string { return v.View }).(pulumi.StringPtrOutput)
 }
@@ -556,7 +661,7 @@ type BindWorkGroupsToUserAttachmentAddInfo struct {
 // BindWorkGroupsToUserAttachmentAddInfoInput is an input type that accepts BindWorkGroupsToUserAttachmentAddInfoArgs and BindWorkGroupsToUserAttachmentAddInfoOutput values.
 // You can construct a concrete instance of `BindWorkGroupsToUserAttachmentAddInfoInput` via:
 //
-//          BindWorkGroupsToUserAttachmentAddInfoArgs{...}
+//	BindWorkGroupsToUserAttachmentAddInfoArgs{...}
 type BindWorkGroupsToUserAttachmentAddInfoInput interface {
 	pulumi.Input
 
@@ -594,11 +699,11 @@ func (i BindWorkGroupsToUserAttachmentAddInfoArgs) ToBindWorkGroupsToUserAttachm
 // BindWorkGroupsToUserAttachmentAddInfoPtrInput is an input type that accepts BindWorkGroupsToUserAttachmentAddInfoArgs, BindWorkGroupsToUserAttachmentAddInfoPtr and BindWorkGroupsToUserAttachmentAddInfoPtrOutput values.
 // You can construct a concrete instance of `BindWorkGroupsToUserAttachmentAddInfoPtrInput` via:
 //
-//          BindWorkGroupsToUserAttachmentAddInfoArgs{...}
+//	        BindWorkGroupsToUserAttachmentAddInfoArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type BindWorkGroupsToUserAttachmentAddInfoPtrInput interface {
 	pulumi.Input
 
@@ -714,7 +819,7 @@ type DataEngineCrontabResumeSuspendStrategy struct {
 // DataEngineCrontabResumeSuspendStrategyInput is an input type that accepts DataEngineCrontabResumeSuspendStrategyArgs and DataEngineCrontabResumeSuspendStrategyOutput values.
 // You can construct a concrete instance of `DataEngineCrontabResumeSuspendStrategyInput` via:
 //
-//          DataEngineCrontabResumeSuspendStrategyArgs{...}
+//	DataEngineCrontabResumeSuspendStrategyArgs{...}
 type DataEngineCrontabResumeSuspendStrategyInput interface {
 	pulumi.Input
 
@@ -754,11 +859,11 @@ func (i DataEngineCrontabResumeSuspendStrategyArgs) ToDataEngineCrontabResumeSus
 // DataEngineCrontabResumeSuspendStrategyPtrInput is an input type that accepts DataEngineCrontabResumeSuspendStrategyArgs, DataEngineCrontabResumeSuspendStrategyPtr and DataEngineCrontabResumeSuspendStrategyPtrOutput values.
 // You can construct a concrete instance of `DataEngineCrontabResumeSuspendStrategyPtrInput` via:
 //
-//          DataEngineCrontabResumeSuspendStrategyArgs{...}
+//	        DataEngineCrontabResumeSuspendStrategyArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type DataEngineCrontabResumeSuspendStrategyPtrInput interface {
 	pulumi.Input
 
@@ -887,7 +992,7 @@ type DataEngineDataEngineConfigPair struct {
 // DataEngineDataEngineConfigPairInput is an input type that accepts DataEngineDataEngineConfigPairArgs and DataEngineDataEngineConfigPairOutput values.
 // You can construct a concrete instance of `DataEngineDataEngineConfigPairInput` via:
 //
-//          DataEngineDataEngineConfigPairArgs{...}
+//	DataEngineDataEngineConfigPairArgs{...}
 type DataEngineDataEngineConfigPairInput interface {
 	pulumi.Input
 
@@ -917,7 +1022,7 @@ func (i DataEngineDataEngineConfigPairArgs) ToDataEngineDataEngineConfigPairOutp
 // DataEngineDataEngineConfigPairArrayInput is an input type that accepts DataEngineDataEngineConfigPairArray and DataEngineDataEngineConfigPairArrayOutput values.
 // You can construct a concrete instance of `DataEngineDataEngineConfigPairArrayInput` via:
 //
-//          DataEngineDataEngineConfigPairArray{ DataEngineDataEngineConfigPairArgs{...} }
+//	DataEngineDataEngineConfigPairArray{ DataEngineDataEngineConfigPairArgs{...} }
 type DataEngineDataEngineConfigPairArrayInput interface {
 	pulumi.Input
 
@@ -997,7 +1102,7 @@ type DataEngineSessionResourceTemplate struct {
 // DataEngineSessionResourceTemplateInput is an input type that accepts DataEngineSessionResourceTemplateArgs and DataEngineSessionResourceTemplateOutput values.
 // You can construct a concrete instance of `DataEngineSessionResourceTemplateInput` via:
 //
-//          DataEngineSessionResourceTemplateArgs{...}
+//	DataEngineSessionResourceTemplateArgs{...}
 type DataEngineSessionResourceTemplateInput interface {
 	pulumi.Input
 
@@ -1039,11 +1144,11 @@ func (i DataEngineSessionResourceTemplateArgs) ToDataEngineSessionResourceTempla
 // DataEngineSessionResourceTemplatePtrInput is an input type that accepts DataEngineSessionResourceTemplateArgs, DataEngineSessionResourceTemplatePtr and DataEngineSessionResourceTemplatePtrOutput values.
 // You can construct a concrete instance of `DataEngineSessionResourceTemplatePtrInput` via:
 //
-//          DataEngineSessionResourceTemplateArgs{...}
+//	        DataEngineSessionResourceTemplateArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type DataEngineSessionResourceTemplatePtrInput interface {
 	pulumi.Input
 
@@ -1178,29 +1283,46 @@ func (o DataEngineSessionResourceTemplatePtrOutput) ExecutorSize() pulumi.String
 }
 
 type DetachUserPolicyOperationPolicySet struct {
-	Catalog    string  `pulumi:"catalog"`
-	Column     *string `pulumi:"column"`
+	// For the data source name that requires authorization, only * (representing all resources at this level) is supported under the administrator level; in the case of data source level and database level authentication, only COSDataCatalog or * is supported; in data table level authentication, it is possible Fill in the user-defined data source. If left blank, it defaults to DataLakeCatalog. note: If a user-defined data source is authenticated, the permissions that dlc can manage are a subset of the accounts provided by the user when accessing the data source.
+	Catalog string `pulumi:"catalog"`
+	// For columns that require authorization, fill in * to represent all current columns. When the authorization type is administrator level, only * is allowed.
+	Column *string `pulumi:"column"`
+	// The time when the permission was created. Leave the input parameter blank.
 	CreateTime *string `pulumi:"createTime"`
+	// Data engines that require authorization, fill in * to represent all current engines. when the authorization type is administrator level, only * is allowed.
 	DataEngine *string `pulumi:"dataEngine"`
-	Database   string  `pulumi:"database"`
-	Function   *string `pulumi:"function"`
-	Id         *int    `pulumi:"id"`
-	Mode       *string `pulumi:"mode"`
-	Operation  string  `pulumi:"operation"`
-	Operator   *string `pulumi:"operator"`
+	// Database name that requires authorization, fill in * to represent all databases under the current catalog. When the authorization type is administrator level, only * is allowed to be filled in. when the authorization type is data connection level, only blanks are allowed to be filled in. For other types, the database can be specified arbitrarily.
+	Database string `pulumi:"database"`
+	// For the function name that requires authorization, fill in * to represent all functions under the current catalog. when the authorization type is administrator level, only * is allowed to be filled in. When the authorization type is data connection level, only blanks are allowed to be filled in. in other types, functions can be specified arbitrarily.
+	Function *string `pulumi:"function"`
+	// Policy id.
+	Id *int `pulumi:"id"`
+	// Authorization mode, please leave this parameter blank. COMMON: normal mode; SENIOR: advanced mode.
+	Mode *string `pulumi:"mode"`
+	// Authorized permission operations provide different operations for different levels of authentication. administrator permissions: ALL, default is ALL if left blank; data connection level authentication: CREATE; database level authentication: ALL, CREATE, ALTER, DROP; data table permissions: ALL, SELECT, INSERT, ALTER, DELETE, DROP, UPDATE. note: under data table permissions, only SELECT operations are supported when the specified data source is not COSDataCatalog.
+	Operation string `pulumi:"operation"`
+	// Operator, do not fill in the input parameters.
+	Operator *string `pulumi:"operator"`
+	// Authorization type, currently supports eight authorization types: ADMIN: Administrator level authentication DATASOURCE: data connection level authentication DATABASE: database level authentication TABLE: Table level authentication VIEW: view level authentication FUNCTION: Function level authentication COLUMN: Column level authentication ENGINE: Data engine authentication. if left blank, the default is administrator level authentication.
 	PolicyType *string `pulumi:"policyType"`
-	ReAuth     *bool   `pulumi:"reAuth"`
-	Source     *string `pulumi:"source"`
-	SourceId   *int    `pulumi:"sourceId"`
+	// Whether the user can perform secondary authorization. when it is true, the authorized user can re-authorize the permissions obtained this time to other sub-users. default is false.
+	ReAuth *bool `pulumi:"reAuth"`
+	// Permission source, please leave it blank. USER: permissions come from the user itself; WORKGROUP: permissions come from the bound workgroup.
+	Source *string `pulumi:"source"`
+	// The id of the workgroup to which the permission belongs. this value only exists when the source of the permission is a workgroup. that is, this field has a value only when the value of the Source field is WORKGROUP.
+	SourceId *int `pulumi:"sourceId"`
+	// The name of the workgroup to which the permission belongs. this value only exists when the source of the permission is a workgroup. that is, this field has a value only when the value of the source field is WORKGROUP.
 	SourceName *string `pulumi:"sourceName"`
-	Table      string  `pulumi:"table"`
-	View       *string `pulumi:"view"`
+	// For the table name that requires authorization, fill in * to represent all tables under the current database. when the authorization type is administrator level, only * is allowed to be filled in. when the authorization type is data connection level or database level, only blanks are allowed to be filled in. For other types, data tables can be specified arbitrarily.
+	Table string `pulumi:"table"`
+	// For views that require authorization, fill in * to represent all views under the current database. When the authorization type is administrator level, only * is allowed to be filled in. when the authorization type is data connection level or database level, only blanks are allowed to be filled in. for other types, the view can be specified arbitrarily.
+	View *string `pulumi:"view"`
 }
 
 // DetachUserPolicyOperationPolicySetInput is an input type that accepts DetachUserPolicyOperationPolicySetArgs and DetachUserPolicyOperationPolicySetOutput values.
 // You can construct a concrete instance of `DetachUserPolicyOperationPolicySetInput` via:
 //
-//          DetachUserPolicyOperationPolicySetArgs{...}
+//	DetachUserPolicyOperationPolicySetArgs{...}
 type DetachUserPolicyOperationPolicySetInput interface {
 	pulumi.Input
 
@@ -1209,23 +1331,40 @@ type DetachUserPolicyOperationPolicySetInput interface {
 }
 
 type DetachUserPolicyOperationPolicySetArgs struct {
-	Catalog    pulumi.StringInput    `pulumi:"catalog"`
-	Column     pulumi.StringPtrInput `pulumi:"column"`
+	// For the data source name that requires authorization, only * (representing all resources at this level) is supported under the administrator level; in the case of data source level and database level authentication, only COSDataCatalog or * is supported; in data table level authentication, it is possible Fill in the user-defined data source. If left blank, it defaults to DataLakeCatalog. note: If a user-defined data source is authenticated, the permissions that dlc can manage are a subset of the accounts provided by the user when accessing the data source.
+	Catalog pulumi.StringInput `pulumi:"catalog"`
+	// For columns that require authorization, fill in * to represent all current columns. When the authorization type is administrator level, only * is allowed.
+	Column pulumi.StringPtrInput `pulumi:"column"`
+	// The time when the permission was created. Leave the input parameter blank.
 	CreateTime pulumi.StringPtrInput `pulumi:"createTime"`
+	// Data engines that require authorization, fill in * to represent all current engines. when the authorization type is administrator level, only * is allowed.
 	DataEngine pulumi.StringPtrInput `pulumi:"dataEngine"`
-	Database   pulumi.StringInput    `pulumi:"database"`
-	Function   pulumi.StringPtrInput `pulumi:"function"`
-	Id         pulumi.IntPtrInput    `pulumi:"id"`
-	Mode       pulumi.StringPtrInput `pulumi:"mode"`
-	Operation  pulumi.StringInput    `pulumi:"operation"`
-	Operator   pulumi.StringPtrInput `pulumi:"operator"`
+	// Database name that requires authorization, fill in * to represent all databases under the current catalog. When the authorization type is administrator level, only * is allowed to be filled in. when the authorization type is data connection level, only blanks are allowed to be filled in. For other types, the database can be specified arbitrarily.
+	Database pulumi.StringInput `pulumi:"database"`
+	// For the function name that requires authorization, fill in * to represent all functions under the current catalog. when the authorization type is administrator level, only * is allowed to be filled in. When the authorization type is data connection level, only blanks are allowed to be filled in. in other types, functions can be specified arbitrarily.
+	Function pulumi.StringPtrInput `pulumi:"function"`
+	// Policy id.
+	Id pulumi.IntPtrInput `pulumi:"id"`
+	// Authorization mode, please leave this parameter blank. COMMON: normal mode; SENIOR: advanced mode.
+	Mode pulumi.StringPtrInput `pulumi:"mode"`
+	// Authorized permission operations provide different operations for different levels of authentication. administrator permissions: ALL, default is ALL if left blank; data connection level authentication: CREATE; database level authentication: ALL, CREATE, ALTER, DROP; data table permissions: ALL, SELECT, INSERT, ALTER, DELETE, DROP, UPDATE. note: under data table permissions, only SELECT operations are supported when the specified data source is not COSDataCatalog.
+	Operation pulumi.StringInput `pulumi:"operation"`
+	// Operator, do not fill in the input parameters.
+	Operator pulumi.StringPtrInput `pulumi:"operator"`
+	// Authorization type, currently supports eight authorization types: ADMIN: Administrator level authentication DATASOURCE: data connection level authentication DATABASE: database level authentication TABLE: Table level authentication VIEW: view level authentication FUNCTION: Function level authentication COLUMN: Column level authentication ENGINE: Data engine authentication. if left blank, the default is administrator level authentication.
 	PolicyType pulumi.StringPtrInput `pulumi:"policyType"`
-	ReAuth     pulumi.BoolPtrInput   `pulumi:"reAuth"`
-	Source     pulumi.StringPtrInput `pulumi:"source"`
-	SourceId   pulumi.IntPtrInput    `pulumi:"sourceId"`
+	// Whether the user can perform secondary authorization. when it is true, the authorized user can re-authorize the permissions obtained this time to other sub-users. default is false.
+	ReAuth pulumi.BoolPtrInput `pulumi:"reAuth"`
+	// Permission source, please leave it blank. USER: permissions come from the user itself; WORKGROUP: permissions come from the bound workgroup.
+	Source pulumi.StringPtrInput `pulumi:"source"`
+	// The id of the workgroup to which the permission belongs. this value only exists when the source of the permission is a workgroup. that is, this field has a value only when the value of the Source field is WORKGROUP.
+	SourceId pulumi.IntPtrInput `pulumi:"sourceId"`
+	// The name of the workgroup to which the permission belongs. this value only exists when the source of the permission is a workgroup. that is, this field has a value only when the value of the source field is WORKGROUP.
 	SourceName pulumi.StringPtrInput `pulumi:"sourceName"`
-	Table      pulumi.StringInput    `pulumi:"table"`
-	View       pulumi.StringPtrInput `pulumi:"view"`
+	// For the table name that requires authorization, fill in * to represent all tables under the current database. when the authorization type is administrator level, only * is allowed to be filled in. when the authorization type is data connection level or database level, only blanks are allowed to be filled in. For other types, data tables can be specified arbitrarily.
+	Table pulumi.StringInput `pulumi:"table"`
+	// For views that require authorization, fill in * to represent all views under the current database. When the authorization type is administrator level, only * is allowed to be filled in. when the authorization type is data connection level or database level, only blanks are allowed to be filled in. for other types, the view can be specified arbitrarily.
+	View pulumi.StringPtrInput `pulumi:"view"`
 }
 
 func (DetachUserPolicyOperationPolicySetArgs) ElementType() reflect.Type {
@@ -1243,7 +1382,7 @@ func (i DetachUserPolicyOperationPolicySetArgs) ToDetachUserPolicyOperationPolic
 // DetachUserPolicyOperationPolicySetArrayInput is an input type that accepts DetachUserPolicyOperationPolicySetArray and DetachUserPolicyOperationPolicySetArrayOutput values.
 // You can construct a concrete instance of `DetachUserPolicyOperationPolicySetArrayInput` via:
 //
-//          DetachUserPolicyOperationPolicySetArray{ DetachUserPolicyOperationPolicySetArgs{...} }
+//	DetachUserPolicyOperationPolicySetArray{ DetachUserPolicyOperationPolicySetArgs{...} }
 type DetachUserPolicyOperationPolicySetArrayInput interface {
 	pulumi.Input
 
@@ -1279,70 +1418,87 @@ func (o DetachUserPolicyOperationPolicySetOutput) ToDetachUserPolicyOperationPol
 	return o
 }
 
+// For the data source name that requires authorization, only * (representing all resources at this level) is supported under the administrator level; in the case of data source level and database level authentication, only COSDataCatalog or * is supported; in data table level authentication, it is possible Fill in the user-defined data source. If left blank, it defaults to DataLakeCatalog. note: If a user-defined data source is authenticated, the permissions that dlc can manage are a subset of the accounts provided by the user when accessing the data source.
 func (o DetachUserPolicyOperationPolicySetOutput) Catalog() pulumi.StringOutput {
 	return o.ApplyT(func(v DetachUserPolicyOperationPolicySet) string { return v.Catalog }).(pulumi.StringOutput)
 }
 
+// For columns that require authorization, fill in * to represent all current columns. When the authorization type is administrator level, only * is allowed.
 func (o DetachUserPolicyOperationPolicySetOutput) Column() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v DetachUserPolicyOperationPolicySet) *string { return v.Column }).(pulumi.StringPtrOutput)
 }
 
+// The time when the permission was created. Leave the input parameter blank.
 func (o DetachUserPolicyOperationPolicySetOutput) CreateTime() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v DetachUserPolicyOperationPolicySet) *string { return v.CreateTime }).(pulumi.StringPtrOutput)
 }
 
+// Data engines that require authorization, fill in * to represent all current engines. when the authorization type is administrator level, only * is allowed.
 func (o DetachUserPolicyOperationPolicySetOutput) DataEngine() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v DetachUserPolicyOperationPolicySet) *string { return v.DataEngine }).(pulumi.StringPtrOutput)
 }
 
+// Database name that requires authorization, fill in * to represent all databases under the current catalog. When the authorization type is administrator level, only * is allowed to be filled in. when the authorization type is data connection level, only blanks are allowed to be filled in. For other types, the database can be specified arbitrarily.
 func (o DetachUserPolicyOperationPolicySetOutput) Database() pulumi.StringOutput {
 	return o.ApplyT(func(v DetachUserPolicyOperationPolicySet) string { return v.Database }).(pulumi.StringOutput)
 }
 
+// For the function name that requires authorization, fill in * to represent all functions under the current catalog. when the authorization type is administrator level, only * is allowed to be filled in. When the authorization type is data connection level, only blanks are allowed to be filled in. in other types, functions can be specified arbitrarily.
 func (o DetachUserPolicyOperationPolicySetOutput) Function() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v DetachUserPolicyOperationPolicySet) *string { return v.Function }).(pulumi.StringPtrOutput)
 }
 
+// Policy id.
 func (o DetachUserPolicyOperationPolicySetOutput) Id() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v DetachUserPolicyOperationPolicySet) *int { return v.Id }).(pulumi.IntPtrOutput)
 }
 
+// Authorization mode, please leave this parameter blank. COMMON: normal mode; SENIOR: advanced mode.
 func (o DetachUserPolicyOperationPolicySetOutput) Mode() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v DetachUserPolicyOperationPolicySet) *string { return v.Mode }).(pulumi.StringPtrOutput)
 }
 
+// Authorized permission operations provide different operations for different levels of authentication. administrator permissions: ALL, default is ALL if left blank; data connection level authentication: CREATE; database level authentication: ALL, CREATE, ALTER, DROP; data table permissions: ALL, SELECT, INSERT, ALTER, DELETE, DROP, UPDATE. note: under data table permissions, only SELECT operations are supported when the specified data source is not COSDataCatalog.
 func (o DetachUserPolicyOperationPolicySetOutput) Operation() pulumi.StringOutput {
 	return o.ApplyT(func(v DetachUserPolicyOperationPolicySet) string { return v.Operation }).(pulumi.StringOutput)
 }
 
+// Operator, do not fill in the input parameters.
 func (o DetachUserPolicyOperationPolicySetOutput) Operator() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v DetachUserPolicyOperationPolicySet) *string { return v.Operator }).(pulumi.StringPtrOutput)
 }
 
+// Authorization type, currently supports eight authorization types: ADMIN: Administrator level authentication DATASOURCE: data connection level authentication DATABASE: database level authentication TABLE: Table level authentication VIEW: view level authentication FUNCTION: Function level authentication COLUMN: Column level authentication ENGINE: Data engine authentication. if left blank, the default is administrator level authentication.
 func (o DetachUserPolicyOperationPolicySetOutput) PolicyType() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v DetachUserPolicyOperationPolicySet) *string { return v.PolicyType }).(pulumi.StringPtrOutput)
 }
 
+// Whether the user can perform secondary authorization. when it is true, the authorized user can re-authorize the permissions obtained this time to other sub-users. default is false.
 func (o DetachUserPolicyOperationPolicySetOutput) ReAuth() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v DetachUserPolicyOperationPolicySet) *bool { return v.ReAuth }).(pulumi.BoolPtrOutput)
 }
 
+// Permission source, please leave it blank. USER: permissions come from the user itself; WORKGROUP: permissions come from the bound workgroup.
 func (o DetachUserPolicyOperationPolicySetOutput) Source() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v DetachUserPolicyOperationPolicySet) *string { return v.Source }).(pulumi.StringPtrOutput)
 }
 
+// The id of the workgroup to which the permission belongs. this value only exists when the source of the permission is a workgroup. that is, this field has a value only when the value of the Source field is WORKGROUP.
 func (o DetachUserPolicyOperationPolicySetOutput) SourceId() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v DetachUserPolicyOperationPolicySet) *int { return v.SourceId }).(pulumi.IntPtrOutput)
 }
 
+// The name of the workgroup to which the permission belongs. this value only exists when the source of the permission is a workgroup. that is, this field has a value only when the value of the source field is WORKGROUP.
 func (o DetachUserPolicyOperationPolicySetOutput) SourceName() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v DetachUserPolicyOperationPolicySet) *string { return v.SourceName }).(pulumi.StringPtrOutput)
 }
 
+// For the table name that requires authorization, fill in * to represent all tables under the current database. when the authorization type is administrator level, only * is allowed to be filled in. when the authorization type is data connection level or database level, only blanks are allowed to be filled in. For other types, data tables can be specified arbitrarily.
 func (o DetachUserPolicyOperationPolicySetOutput) Table() pulumi.StringOutput {
 	return o.ApplyT(func(v DetachUserPolicyOperationPolicySet) string { return v.Table }).(pulumi.StringOutput)
 }
 
+// For views that require authorization, fill in * to represent all views under the current database. When the authorization type is administrator level, only * is allowed to be filled in. when the authorization type is data connection level or database level, only blanks are allowed to be filled in. for other types, the view can be specified arbitrarily.
 func (o DetachUserPolicyOperationPolicySetOutput) View() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v DetachUserPolicyOperationPolicySet) *string { return v.View }).(pulumi.StringPtrOutput)
 }
@@ -1368,29 +1524,46 @@ func (o DetachUserPolicyOperationPolicySetArrayOutput) Index(i pulumi.IntInput) 
 }
 
 type DetachWorkGroupPolicyOperationPolicySet struct {
-	Catalog    string  `pulumi:"catalog"`
-	Column     *string `pulumi:"column"`
+	// For the data source name that requires authorization, only * (representing all resources at this level) is supported under the administrator level; in the case of data source level and database level authentication, only COSDataCatalog or * is supported; in data table level authentication, it is possible Fill in the user-defined data source. If left blank, it defaults to DataLakeCatalog. note: If a user-defined data source is authenticated, the permissions that dlc can manage are a subset of the accounts provided by the user when accessing the data source.
+	Catalog string `pulumi:"catalog"`
+	// For columns that require authorization, fill in * to represent all current columns. When the authorization type is administrator level, only * is allowed.
+	Column *string `pulumi:"column"`
+	// The time when the permission was created. Leave the input parameter blank.
 	CreateTime *string `pulumi:"createTime"`
+	// Data engines that require authorization, fill in * to represent all current engines. when the authorization type is administrator level, only * is allowed.
 	DataEngine *string `pulumi:"dataEngine"`
-	Database   string  `pulumi:"database"`
-	Function   *string `pulumi:"function"`
-	Id         *int    `pulumi:"id"`
-	Mode       *string `pulumi:"mode"`
-	Operation  string  `pulumi:"operation"`
-	Operator   *string `pulumi:"operator"`
+	// Database name that requires authorization, fill in * to represent all databases under the current catalog. When the authorization type is administrator level, only * is allowed to be filled in. when the authorization type is data connection level, only blanks are allowed to be filled in. For other types, the database can be specified arbitrarily.
+	Database string `pulumi:"database"`
+	// For the function name that requires authorization, fill in * to represent all functions under the current catalog. when the authorization type is administrator level, only * is allowed to be filled in. When the authorization type is data connection level, only blanks are allowed to be filled in. in other types, functions can be specified arbitrarily.
+	Function *string `pulumi:"function"`
+	// Policy id.
+	Id *int `pulumi:"id"`
+	// Authorization mode, please leave this parameter blank. COMMON: normal mode; SENIOR: advanced mode.
+	Mode *string `pulumi:"mode"`
+	// Authorized permission operations provide different operations for different levels of authentication. administrator permissions: ALL, default is ALL if left blank; data connection level authentication: CREATE; database level authentication: ALL, CREATE, ALTER, DROP; data table permissions: ALL, SELECT, INSERT, ALTER, DELETE, DROP, UPDATE. note: under data table permissions, only SELECT operations are supported when the specified data source is not COSDataCatalog.
+	Operation string `pulumi:"operation"`
+	// Operator, do not fill in the input parameters.
+	Operator *string `pulumi:"operator"`
+	// Authorization type, currently supports eight authorization types: ADMIN: Administrator level authentication DATASOURCE: data connection level authentication DATABASE: database level authentication TABLE: Table level authentication VIEW: view level authentication FUNCTION: Function level authentication COLUMN: Column level authentication ENGINE: Data engine authentication. if left blank, the default is administrator level authentication.
 	PolicyType *string `pulumi:"policyType"`
-	ReAuth     *bool   `pulumi:"reAuth"`
-	Source     *string `pulumi:"source"`
-	SourceId   *int    `pulumi:"sourceId"`
+	// Whether the user can perform secondary authorization. when it is true, the authorized user can re-authorize the permissions obtained this time to other sub-users. default is false.
+	ReAuth *bool `pulumi:"reAuth"`
+	// Permission source, please leave it blank. USER: permissions come from the user itself; WORKGROUP: permissions come from the bound workgroup.
+	Source *string `pulumi:"source"`
+	// The id of the workgroup to which the permission belongs. this value only exists when the source of the permission is a workgroup. that is, this field has a value only when the value of the Source field is WORKGROUP.
+	SourceId *int `pulumi:"sourceId"`
+	// The name of the workgroup to which the permission belongs. this value only exists when the source of the permission is a workgroup. that is, this field has a value only when the value of the source field is WORKGROUP.
 	SourceName *string `pulumi:"sourceName"`
-	Table      string  `pulumi:"table"`
-	View       *string `pulumi:"view"`
+	// For the table name that requires authorization, fill in * to represent all tables under the current database. when the authorization type is administrator level, only * is allowed to be filled in. when the authorization type is data connection level or database level, only blanks are allowed to be filled in. For other types, data tables can be specified arbitrarily.
+	Table string `pulumi:"table"`
+	// For views that require authorization, fill in * to represent all views under the current database. When the authorization type is administrator level, only * is allowed to be filled in. when the authorization type is data connection level or database level, only blanks are allowed to be filled in. for other types, the view can be specified arbitrarily.
+	View *string `pulumi:"view"`
 }
 
 // DetachWorkGroupPolicyOperationPolicySetInput is an input type that accepts DetachWorkGroupPolicyOperationPolicySetArgs and DetachWorkGroupPolicyOperationPolicySetOutput values.
 // You can construct a concrete instance of `DetachWorkGroupPolicyOperationPolicySetInput` via:
 //
-//          DetachWorkGroupPolicyOperationPolicySetArgs{...}
+//	DetachWorkGroupPolicyOperationPolicySetArgs{...}
 type DetachWorkGroupPolicyOperationPolicySetInput interface {
 	pulumi.Input
 
@@ -1399,23 +1572,40 @@ type DetachWorkGroupPolicyOperationPolicySetInput interface {
 }
 
 type DetachWorkGroupPolicyOperationPolicySetArgs struct {
-	Catalog    pulumi.StringInput    `pulumi:"catalog"`
-	Column     pulumi.StringPtrInput `pulumi:"column"`
+	// For the data source name that requires authorization, only * (representing all resources at this level) is supported under the administrator level; in the case of data source level and database level authentication, only COSDataCatalog or * is supported; in data table level authentication, it is possible Fill in the user-defined data source. If left blank, it defaults to DataLakeCatalog. note: If a user-defined data source is authenticated, the permissions that dlc can manage are a subset of the accounts provided by the user when accessing the data source.
+	Catalog pulumi.StringInput `pulumi:"catalog"`
+	// For columns that require authorization, fill in * to represent all current columns. When the authorization type is administrator level, only * is allowed.
+	Column pulumi.StringPtrInput `pulumi:"column"`
+	// The time when the permission was created. Leave the input parameter blank.
 	CreateTime pulumi.StringPtrInput `pulumi:"createTime"`
+	// Data engines that require authorization, fill in * to represent all current engines. when the authorization type is administrator level, only * is allowed.
 	DataEngine pulumi.StringPtrInput `pulumi:"dataEngine"`
-	Database   pulumi.StringInput    `pulumi:"database"`
-	Function   pulumi.StringPtrInput `pulumi:"function"`
-	Id         pulumi.IntPtrInput    `pulumi:"id"`
-	Mode       pulumi.StringPtrInput `pulumi:"mode"`
-	Operation  pulumi.StringInput    `pulumi:"operation"`
-	Operator   pulumi.StringPtrInput `pulumi:"operator"`
+	// Database name that requires authorization, fill in * to represent all databases under the current catalog. When the authorization type is administrator level, only * is allowed to be filled in. when the authorization type is data connection level, only blanks are allowed to be filled in. For other types, the database can be specified arbitrarily.
+	Database pulumi.StringInput `pulumi:"database"`
+	// For the function name that requires authorization, fill in * to represent all functions under the current catalog. when the authorization type is administrator level, only * is allowed to be filled in. When the authorization type is data connection level, only blanks are allowed to be filled in. in other types, functions can be specified arbitrarily.
+	Function pulumi.StringPtrInput `pulumi:"function"`
+	// Policy id.
+	Id pulumi.IntPtrInput `pulumi:"id"`
+	// Authorization mode, please leave this parameter blank. COMMON: normal mode; SENIOR: advanced mode.
+	Mode pulumi.StringPtrInput `pulumi:"mode"`
+	// Authorized permission operations provide different operations for different levels of authentication. administrator permissions: ALL, default is ALL if left blank; data connection level authentication: CREATE; database level authentication: ALL, CREATE, ALTER, DROP; data table permissions: ALL, SELECT, INSERT, ALTER, DELETE, DROP, UPDATE. note: under data table permissions, only SELECT operations are supported when the specified data source is not COSDataCatalog.
+	Operation pulumi.StringInput `pulumi:"operation"`
+	// Operator, do not fill in the input parameters.
+	Operator pulumi.StringPtrInput `pulumi:"operator"`
+	// Authorization type, currently supports eight authorization types: ADMIN: Administrator level authentication DATASOURCE: data connection level authentication DATABASE: database level authentication TABLE: Table level authentication VIEW: view level authentication FUNCTION: Function level authentication COLUMN: Column level authentication ENGINE: Data engine authentication. if left blank, the default is administrator level authentication.
 	PolicyType pulumi.StringPtrInput `pulumi:"policyType"`
-	ReAuth     pulumi.BoolPtrInput   `pulumi:"reAuth"`
-	Source     pulumi.StringPtrInput `pulumi:"source"`
-	SourceId   pulumi.IntPtrInput    `pulumi:"sourceId"`
+	// Whether the user can perform secondary authorization. when it is true, the authorized user can re-authorize the permissions obtained this time to other sub-users. default is false.
+	ReAuth pulumi.BoolPtrInput `pulumi:"reAuth"`
+	// Permission source, please leave it blank. USER: permissions come from the user itself; WORKGROUP: permissions come from the bound workgroup.
+	Source pulumi.StringPtrInput `pulumi:"source"`
+	// The id of the workgroup to which the permission belongs. this value only exists when the source of the permission is a workgroup. that is, this field has a value only when the value of the Source field is WORKGROUP.
+	SourceId pulumi.IntPtrInput `pulumi:"sourceId"`
+	// The name of the workgroup to which the permission belongs. this value only exists when the source of the permission is a workgroup. that is, this field has a value only when the value of the source field is WORKGROUP.
 	SourceName pulumi.StringPtrInput `pulumi:"sourceName"`
-	Table      pulumi.StringInput    `pulumi:"table"`
-	View       pulumi.StringPtrInput `pulumi:"view"`
+	// For the table name that requires authorization, fill in * to represent all tables under the current database. when the authorization type is administrator level, only * is allowed to be filled in. when the authorization type is data connection level or database level, only blanks are allowed to be filled in. For other types, data tables can be specified arbitrarily.
+	Table pulumi.StringInput `pulumi:"table"`
+	// For views that require authorization, fill in * to represent all views under the current database. When the authorization type is administrator level, only * is allowed to be filled in. when the authorization type is data connection level or database level, only blanks are allowed to be filled in. for other types, the view can be specified arbitrarily.
+	View pulumi.StringPtrInput `pulumi:"view"`
 }
 
 func (DetachWorkGroupPolicyOperationPolicySetArgs) ElementType() reflect.Type {
@@ -1433,7 +1623,7 @@ func (i DetachWorkGroupPolicyOperationPolicySetArgs) ToDetachWorkGroupPolicyOper
 // DetachWorkGroupPolicyOperationPolicySetArrayInput is an input type that accepts DetachWorkGroupPolicyOperationPolicySetArray and DetachWorkGroupPolicyOperationPolicySetArrayOutput values.
 // You can construct a concrete instance of `DetachWorkGroupPolicyOperationPolicySetArrayInput` via:
 //
-//          DetachWorkGroupPolicyOperationPolicySetArray{ DetachWorkGroupPolicyOperationPolicySetArgs{...} }
+//	DetachWorkGroupPolicyOperationPolicySetArray{ DetachWorkGroupPolicyOperationPolicySetArgs{...} }
 type DetachWorkGroupPolicyOperationPolicySetArrayInput interface {
 	pulumi.Input
 
@@ -1469,70 +1659,87 @@ func (o DetachWorkGroupPolicyOperationPolicySetOutput) ToDetachWorkGroupPolicyOp
 	return o
 }
 
+// For the data source name that requires authorization, only * (representing all resources at this level) is supported under the administrator level; in the case of data source level and database level authentication, only COSDataCatalog or * is supported; in data table level authentication, it is possible Fill in the user-defined data source. If left blank, it defaults to DataLakeCatalog. note: If a user-defined data source is authenticated, the permissions that dlc can manage are a subset of the accounts provided by the user when accessing the data source.
 func (o DetachWorkGroupPolicyOperationPolicySetOutput) Catalog() pulumi.StringOutput {
 	return o.ApplyT(func(v DetachWorkGroupPolicyOperationPolicySet) string { return v.Catalog }).(pulumi.StringOutput)
 }
 
+// For columns that require authorization, fill in * to represent all current columns. When the authorization type is administrator level, only * is allowed.
 func (o DetachWorkGroupPolicyOperationPolicySetOutput) Column() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v DetachWorkGroupPolicyOperationPolicySet) *string { return v.Column }).(pulumi.StringPtrOutput)
 }
 
+// The time when the permission was created. Leave the input parameter blank.
 func (o DetachWorkGroupPolicyOperationPolicySetOutput) CreateTime() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v DetachWorkGroupPolicyOperationPolicySet) *string { return v.CreateTime }).(pulumi.StringPtrOutput)
 }
 
+// Data engines that require authorization, fill in * to represent all current engines. when the authorization type is administrator level, only * is allowed.
 func (o DetachWorkGroupPolicyOperationPolicySetOutput) DataEngine() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v DetachWorkGroupPolicyOperationPolicySet) *string { return v.DataEngine }).(pulumi.StringPtrOutput)
 }
 
+// Database name that requires authorization, fill in * to represent all databases under the current catalog. When the authorization type is administrator level, only * is allowed to be filled in. when the authorization type is data connection level, only blanks are allowed to be filled in. For other types, the database can be specified arbitrarily.
 func (o DetachWorkGroupPolicyOperationPolicySetOutput) Database() pulumi.StringOutput {
 	return o.ApplyT(func(v DetachWorkGroupPolicyOperationPolicySet) string { return v.Database }).(pulumi.StringOutput)
 }
 
+// For the function name that requires authorization, fill in * to represent all functions under the current catalog. when the authorization type is administrator level, only * is allowed to be filled in. When the authorization type is data connection level, only blanks are allowed to be filled in. in other types, functions can be specified arbitrarily.
 func (o DetachWorkGroupPolicyOperationPolicySetOutput) Function() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v DetachWorkGroupPolicyOperationPolicySet) *string { return v.Function }).(pulumi.StringPtrOutput)
 }
 
+// Policy id.
 func (o DetachWorkGroupPolicyOperationPolicySetOutput) Id() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v DetachWorkGroupPolicyOperationPolicySet) *int { return v.Id }).(pulumi.IntPtrOutput)
 }
 
+// Authorization mode, please leave this parameter blank. COMMON: normal mode; SENIOR: advanced mode.
 func (o DetachWorkGroupPolicyOperationPolicySetOutput) Mode() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v DetachWorkGroupPolicyOperationPolicySet) *string { return v.Mode }).(pulumi.StringPtrOutput)
 }
 
+// Authorized permission operations provide different operations for different levels of authentication. administrator permissions: ALL, default is ALL if left blank; data connection level authentication: CREATE; database level authentication: ALL, CREATE, ALTER, DROP; data table permissions: ALL, SELECT, INSERT, ALTER, DELETE, DROP, UPDATE. note: under data table permissions, only SELECT operations are supported when the specified data source is not COSDataCatalog.
 func (o DetachWorkGroupPolicyOperationPolicySetOutput) Operation() pulumi.StringOutput {
 	return o.ApplyT(func(v DetachWorkGroupPolicyOperationPolicySet) string { return v.Operation }).(pulumi.StringOutput)
 }
 
+// Operator, do not fill in the input parameters.
 func (o DetachWorkGroupPolicyOperationPolicySetOutput) Operator() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v DetachWorkGroupPolicyOperationPolicySet) *string { return v.Operator }).(pulumi.StringPtrOutput)
 }
 
+// Authorization type, currently supports eight authorization types: ADMIN: Administrator level authentication DATASOURCE: data connection level authentication DATABASE: database level authentication TABLE: Table level authentication VIEW: view level authentication FUNCTION: Function level authentication COLUMN: Column level authentication ENGINE: Data engine authentication. if left blank, the default is administrator level authentication.
 func (o DetachWorkGroupPolicyOperationPolicySetOutput) PolicyType() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v DetachWorkGroupPolicyOperationPolicySet) *string { return v.PolicyType }).(pulumi.StringPtrOutput)
 }
 
+// Whether the user can perform secondary authorization. when it is true, the authorized user can re-authorize the permissions obtained this time to other sub-users. default is false.
 func (o DetachWorkGroupPolicyOperationPolicySetOutput) ReAuth() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v DetachWorkGroupPolicyOperationPolicySet) *bool { return v.ReAuth }).(pulumi.BoolPtrOutput)
 }
 
+// Permission source, please leave it blank. USER: permissions come from the user itself; WORKGROUP: permissions come from the bound workgroup.
 func (o DetachWorkGroupPolicyOperationPolicySetOutput) Source() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v DetachWorkGroupPolicyOperationPolicySet) *string { return v.Source }).(pulumi.StringPtrOutput)
 }
 
+// The id of the workgroup to which the permission belongs. this value only exists when the source of the permission is a workgroup. that is, this field has a value only when the value of the Source field is WORKGROUP.
 func (o DetachWorkGroupPolicyOperationPolicySetOutput) SourceId() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v DetachWorkGroupPolicyOperationPolicySet) *int { return v.SourceId }).(pulumi.IntPtrOutput)
 }
 
+// The name of the workgroup to which the permission belongs. this value only exists when the source of the permission is a workgroup. that is, this field has a value only when the value of the source field is WORKGROUP.
 func (o DetachWorkGroupPolicyOperationPolicySetOutput) SourceName() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v DetachWorkGroupPolicyOperationPolicySet) *string { return v.SourceName }).(pulumi.StringPtrOutput)
 }
 
+// For the table name that requires authorization, fill in * to represent all tables under the current database. when the authorization type is administrator level, only * is allowed to be filled in. when the authorization type is data connection level or database level, only blanks are allowed to be filled in. For other types, data tables can be specified arbitrarily.
 func (o DetachWorkGroupPolicyOperationPolicySetOutput) Table() pulumi.StringOutput {
 	return o.ApplyT(func(v DetachWorkGroupPolicyOperationPolicySet) string { return v.Table }).(pulumi.StringOutput)
 }
 
+// For views that require authorization, fill in * to represent all views under the current database. When the authorization type is administrator level, only * is allowed to be filled in. when the authorization type is data connection level or database level, only blanks are allowed to be filled in. for other types, the view can be specified arbitrarily.
 func (o DetachWorkGroupPolicyOperationPolicySetOutput) View() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v DetachWorkGroupPolicyOperationPolicySet) *string { return v.View }).(pulumi.StringPtrOutput)
 }
@@ -1597,7 +1804,7 @@ type UpdateRowFilterOperationPolicy struct {
 // UpdateRowFilterOperationPolicyInput is an input type that accepts UpdateRowFilterOperationPolicyArgs and UpdateRowFilterOperationPolicyOutput values.
 // You can construct a concrete instance of `UpdateRowFilterOperationPolicyInput` via:
 //
-//          UpdateRowFilterOperationPolicyArgs{...}
+//	UpdateRowFilterOperationPolicyArgs{...}
 type UpdateRowFilterOperationPolicyInput interface {
 	pulumi.Input
 
@@ -1665,11 +1872,11 @@ func (i UpdateRowFilterOperationPolicyArgs) ToUpdateRowFilterOperationPolicyPtrO
 // UpdateRowFilterOperationPolicyPtrInput is an input type that accepts UpdateRowFilterOperationPolicyArgs, UpdateRowFilterOperationPolicyPtr and UpdateRowFilterOperationPolicyPtrOutput values.
 // You can construct a concrete instance of `UpdateRowFilterOperationPolicyPtrInput` via:
 //
-//          UpdateRowFilterOperationPolicyArgs{...}
+//	        UpdateRowFilterOperationPolicyArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type UpdateRowFilterOperationPolicyPtrInput interface {
 	pulumi.Input
 
@@ -2008,7 +2215,7 @@ type UserDataEngineConfigDataEngineConfigPair struct {
 // UserDataEngineConfigDataEngineConfigPairInput is an input type that accepts UserDataEngineConfigDataEngineConfigPairArgs and UserDataEngineConfigDataEngineConfigPairOutput values.
 // You can construct a concrete instance of `UserDataEngineConfigDataEngineConfigPairInput` via:
 //
-//          UserDataEngineConfigDataEngineConfigPairArgs{...}
+//	UserDataEngineConfigDataEngineConfigPairArgs{...}
 type UserDataEngineConfigDataEngineConfigPairInput interface {
 	pulumi.Input
 
@@ -2038,7 +2245,7 @@ func (i UserDataEngineConfigDataEngineConfigPairArgs) ToUserDataEngineConfigData
 // UserDataEngineConfigDataEngineConfigPairArrayInput is an input type that accepts UserDataEngineConfigDataEngineConfigPairArray and UserDataEngineConfigDataEngineConfigPairArrayOutput values.
 // You can construct a concrete instance of `UserDataEngineConfigDataEngineConfigPairArrayInput` via:
 //
-//          UserDataEngineConfigDataEngineConfigPairArray{ UserDataEngineConfigDataEngineConfigPairArgs{...} }
+//	UserDataEngineConfigDataEngineConfigPairArray{ UserDataEngineConfigDataEngineConfigPairArgs{...} }
 type UserDataEngineConfigDataEngineConfigPairArrayInput interface {
 	pulumi.Input
 
@@ -2118,7 +2325,7 @@ type UserDataEngineConfigSessionResourceTemplate struct {
 // UserDataEngineConfigSessionResourceTemplateInput is an input type that accepts UserDataEngineConfigSessionResourceTemplateArgs and UserDataEngineConfigSessionResourceTemplateOutput values.
 // You can construct a concrete instance of `UserDataEngineConfigSessionResourceTemplateInput` via:
 //
-//          UserDataEngineConfigSessionResourceTemplateArgs{...}
+//	UserDataEngineConfigSessionResourceTemplateArgs{...}
 type UserDataEngineConfigSessionResourceTemplateInput interface {
 	pulumi.Input
 
@@ -2160,11 +2367,11 @@ func (i UserDataEngineConfigSessionResourceTemplateArgs) ToUserDataEngineConfigS
 // UserDataEngineConfigSessionResourceTemplatePtrInput is an input type that accepts UserDataEngineConfigSessionResourceTemplateArgs, UserDataEngineConfigSessionResourceTemplatePtr and UserDataEngineConfigSessionResourceTemplatePtrOutput values.
 // You can construct a concrete instance of `UserDataEngineConfigSessionResourceTemplatePtrInput` via:
 //
-//          UserDataEngineConfigSessionResourceTemplateArgs{...}
+//	        UserDataEngineConfigSessionResourceTemplateArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type UserDataEngineConfigSessionResourceTemplatePtrInput interface {
 	pulumi.Input
 
@@ -2308,7 +2515,7 @@ type GetCheckDataEngineConfigPairsValidityDataEngineConfigPair struct {
 // GetCheckDataEngineConfigPairsValidityDataEngineConfigPairInput is an input type that accepts GetCheckDataEngineConfigPairsValidityDataEngineConfigPairArgs and GetCheckDataEngineConfigPairsValidityDataEngineConfigPairOutput values.
 // You can construct a concrete instance of `GetCheckDataEngineConfigPairsValidityDataEngineConfigPairInput` via:
 //
-//          GetCheckDataEngineConfigPairsValidityDataEngineConfigPairArgs{...}
+//	GetCheckDataEngineConfigPairsValidityDataEngineConfigPairArgs{...}
 type GetCheckDataEngineConfigPairsValidityDataEngineConfigPairInput interface {
 	pulumi.Input
 
@@ -2338,7 +2545,7 @@ func (i GetCheckDataEngineConfigPairsValidityDataEngineConfigPairArgs) ToGetChec
 // GetCheckDataEngineConfigPairsValidityDataEngineConfigPairArrayInput is an input type that accepts GetCheckDataEngineConfigPairsValidityDataEngineConfigPairArray and GetCheckDataEngineConfigPairsValidityDataEngineConfigPairArrayOutput values.
 // You can construct a concrete instance of `GetCheckDataEngineConfigPairsValidityDataEngineConfigPairArrayInput` via:
 //
-//          GetCheckDataEngineConfigPairsValidityDataEngineConfigPairArray{ GetCheckDataEngineConfigPairsValidityDataEngineConfigPairArgs{...} }
+//	GetCheckDataEngineConfigPairsValidityDataEngineConfigPairArray{ GetCheckDataEngineConfigPairsValidityDataEngineConfigPairArgs{...} }
 type GetCheckDataEngineConfigPairsValidityDataEngineConfigPairArrayInput interface {
 	pulumi.Input
 
@@ -2500,7 +2707,7 @@ type GetDescribeDataEngineDataEngine struct {
 // GetDescribeDataEngineDataEngineInput is an input type that accepts GetDescribeDataEngineDataEngineArgs and GetDescribeDataEngineDataEngineOutput values.
 // You can construct a concrete instance of `GetDescribeDataEngineDataEngineInput` via:
 //
-//          GetDescribeDataEngineDataEngineArgs{...}
+//	GetDescribeDataEngineDataEngineArgs{...}
 type GetDescribeDataEngineDataEngineInput interface {
 	pulumi.Input
 
@@ -2616,7 +2823,7 @@ func (i GetDescribeDataEngineDataEngineArgs) ToGetDescribeDataEngineDataEngineOu
 // GetDescribeDataEngineDataEngineArrayInput is an input type that accepts GetDescribeDataEngineDataEngineArray and GetDescribeDataEngineDataEngineArrayOutput values.
 // You can construct a concrete instance of `GetDescribeDataEngineDataEngineArrayInput` via:
 //
-//          GetDescribeDataEngineDataEngineArray{ GetDescribeDataEngineDataEngineArgs{...} }
+//	GetDescribeDataEngineDataEngineArray{ GetDescribeDataEngineDataEngineArgs{...} }
 type GetDescribeDataEngineDataEngineArrayInput interface {
 	pulumi.Input
 
@@ -2915,7 +3122,7 @@ type GetDescribeDataEngineDataEngineCrontabResumeSuspendStrategy struct {
 // GetDescribeDataEngineDataEngineCrontabResumeSuspendStrategyInput is an input type that accepts GetDescribeDataEngineDataEngineCrontabResumeSuspendStrategyArgs and GetDescribeDataEngineDataEngineCrontabResumeSuspendStrategyOutput values.
 // You can construct a concrete instance of `GetDescribeDataEngineDataEngineCrontabResumeSuspendStrategyInput` via:
 //
-//          GetDescribeDataEngineDataEngineCrontabResumeSuspendStrategyArgs{...}
+//	GetDescribeDataEngineDataEngineCrontabResumeSuspendStrategyArgs{...}
 type GetDescribeDataEngineDataEngineCrontabResumeSuspendStrategyInput interface {
 	pulumi.Input
 
@@ -2947,7 +3154,7 @@ func (i GetDescribeDataEngineDataEngineCrontabResumeSuspendStrategyArgs) ToGetDe
 // GetDescribeDataEngineDataEngineCrontabResumeSuspendStrategyArrayInput is an input type that accepts GetDescribeDataEngineDataEngineCrontabResumeSuspendStrategyArray and GetDescribeDataEngineDataEngineCrontabResumeSuspendStrategyArrayOutput values.
 // You can construct a concrete instance of `GetDescribeDataEngineDataEngineCrontabResumeSuspendStrategyArrayInput` via:
 //
-//          GetDescribeDataEngineDataEngineCrontabResumeSuspendStrategyArray{ GetDescribeDataEngineDataEngineCrontabResumeSuspendStrategyArgs{...} }
+//	GetDescribeDataEngineDataEngineCrontabResumeSuspendStrategyArray{ GetDescribeDataEngineDataEngineCrontabResumeSuspendStrategyArgs{...} }
 type GetDescribeDataEngineDataEngineCrontabResumeSuspendStrategyArrayInput interface {
 	pulumi.Input
 
@@ -3060,7 +3267,7 @@ type GetDescribeDataEngineDataEngineNetworkConnectionSet struct {
 // GetDescribeDataEngineDataEngineNetworkConnectionSetInput is an input type that accepts GetDescribeDataEngineDataEngineNetworkConnectionSetArgs and GetDescribeDataEngineDataEngineNetworkConnectionSetOutput values.
 // You can construct a concrete instance of `GetDescribeDataEngineDataEngineNetworkConnectionSetInput` via:
 //
-//          GetDescribeDataEngineDataEngineNetworkConnectionSetArgs{...}
+//	GetDescribeDataEngineDataEngineNetworkConnectionSetArgs{...}
 type GetDescribeDataEngineDataEngineNetworkConnectionSetInput interface {
 	pulumi.Input
 
@@ -3122,7 +3329,7 @@ func (i GetDescribeDataEngineDataEngineNetworkConnectionSetArgs) ToGetDescribeDa
 // GetDescribeDataEngineDataEngineNetworkConnectionSetArrayInput is an input type that accepts GetDescribeDataEngineDataEngineNetworkConnectionSetArray and GetDescribeDataEngineDataEngineNetworkConnectionSetArrayOutput values.
 // You can construct a concrete instance of `GetDescribeDataEngineDataEngineNetworkConnectionSetArrayInput` via:
 //
-//          GetDescribeDataEngineDataEngineNetworkConnectionSetArray{ GetDescribeDataEngineDataEngineNetworkConnectionSetArgs{...} }
+//	GetDescribeDataEngineDataEngineNetworkConnectionSetArray{ GetDescribeDataEngineDataEngineNetworkConnectionSetArgs{...} }
 type GetDescribeDataEngineDataEngineNetworkConnectionSetArrayInput interface {
 	pulumi.Input
 
@@ -3288,7 +3495,7 @@ type GetDescribeDataEngineDataEngineSessionResourceTemplate struct {
 // GetDescribeDataEngineDataEngineSessionResourceTemplateInput is an input type that accepts GetDescribeDataEngineDataEngineSessionResourceTemplateArgs and GetDescribeDataEngineDataEngineSessionResourceTemplateOutput values.
 // You can construct a concrete instance of `GetDescribeDataEngineDataEngineSessionResourceTemplateInput` via:
 //
-//          GetDescribeDataEngineDataEngineSessionResourceTemplateArgs{...}
+//	GetDescribeDataEngineDataEngineSessionResourceTemplateArgs{...}
 type GetDescribeDataEngineDataEngineSessionResourceTemplateInput interface {
 	pulumi.Input
 
@@ -3322,7 +3529,7 @@ func (i GetDescribeDataEngineDataEngineSessionResourceTemplateArgs) ToGetDescrib
 // GetDescribeDataEngineDataEngineSessionResourceTemplateArrayInput is an input type that accepts GetDescribeDataEngineDataEngineSessionResourceTemplateArray and GetDescribeDataEngineDataEngineSessionResourceTemplateArrayOutput values.
 // You can construct a concrete instance of `GetDescribeDataEngineDataEngineSessionResourceTemplateArrayInput` via:
 //
-//          GetDescribeDataEngineDataEngineSessionResourceTemplateArray{ GetDescribeDataEngineDataEngineSessionResourceTemplateArgs{...} }
+//	GetDescribeDataEngineDataEngineSessionResourceTemplateArray{ GetDescribeDataEngineDataEngineSessionResourceTemplateArgs{...} }
 type GetDescribeDataEngineDataEngineSessionResourceTemplateArrayInput interface {
 	pulumi.Input
 
@@ -3408,7 +3615,7 @@ type GetDescribeDataEngineDataEngineTagList struct {
 // GetDescribeDataEngineDataEngineTagListInput is an input type that accepts GetDescribeDataEngineDataEngineTagListArgs and GetDescribeDataEngineDataEngineTagListOutput values.
 // You can construct a concrete instance of `GetDescribeDataEngineDataEngineTagListInput` via:
 //
-//          GetDescribeDataEngineDataEngineTagListArgs{...}
+//	GetDescribeDataEngineDataEngineTagListArgs{...}
 type GetDescribeDataEngineDataEngineTagListInput interface {
 	pulumi.Input
 
@@ -3438,7 +3645,7 @@ func (i GetDescribeDataEngineDataEngineTagListArgs) ToGetDescribeDataEngineDataE
 // GetDescribeDataEngineDataEngineTagListArrayInput is an input type that accepts GetDescribeDataEngineDataEngineTagListArray and GetDescribeDataEngineDataEngineTagListArrayOutput values.
 // You can construct a concrete instance of `GetDescribeDataEngineDataEngineTagListArrayInput` via:
 //
-//          GetDescribeDataEngineDataEngineTagListArray{ GetDescribeDataEngineDataEngineTagListArgs{...} }
+//	GetDescribeDataEngineDataEngineTagListArray{ GetDescribeDataEngineDataEngineTagListArgs{...} }
 type GetDescribeDataEngineDataEngineTagListArrayInput interface {
 	pulumi.Input
 
@@ -3516,7 +3723,7 @@ type GetDescribeDataEngineEventsEvent struct {
 // GetDescribeDataEngineEventsEventInput is an input type that accepts GetDescribeDataEngineEventsEventArgs and GetDescribeDataEngineEventsEventOutput values.
 // You can construct a concrete instance of `GetDescribeDataEngineEventsEventInput` via:
 //
-//          GetDescribeDataEngineEventsEventArgs{...}
+//	GetDescribeDataEngineEventsEventArgs{...}
 type GetDescribeDataEngineEventsEventInput interface {
 	pulumi.Input
 
@@ -3548,7 +3755,7 @@ func (i GetDescribeDataEngineEventsEventArgs) ToGetDescribeDataEngineEventsEvent
 // GetDescribeDataEngineEventsEventArrayInput is an input type that accepts GetDescribeDataEngineEventsEventArray and GetDescribeDataEngineEventsEventArrayOutput values.
 // You can construct a concrete instance of `GetDescribeDataEngineEventsEventArrayInput` via:
 //
-//          GetDescribeDataEngineEventsEventArray{ GetDescribeDataEngineEventsEventArgs{...} }
+//	GetDescribeDataEngineEventsEventArray{ GetDescribeDataEngineEventsEventArgs{...} }
 type GetDescribeDataEngineEventsEventArrayInput interface {
 	pulumi.Input
 
@@ -3643,7 +3850,7 @@ type GetDescribeDataEngineImageVersionsImageParentVersion struct {
 // GetDescribeDataEngineImageVersionsImageParentVersionInput is an input type that accepts GetDescribeDataEngineImageVersionsImageParentVersionArgs and GetDescribeDataEngineImageVersionsImageParentVersionOutput values.
 // You can construct a concrete instance of `GetDescribeDataEngineImageVersionsImageParentVersionInput` via:
 //
-//          GetDescribeDataEngineImageVersionsImageParentVersionArgs{...}
+//	GetDescribeDataEngineImageVersionsImageParentVersionArgs{...}
 type GetDescribeDataEngineImageVersionsImageParentVersionInput interface {
 	pulumi.Input
 
@@ -3687,7 +3894,7 @@ func (i GetDescribeDataEngineImageVersionsImageParentVersionArgs) ToGetDescribeD
 // GetDescribeDataEngineImageVersionsImageParentVersionArrayInput is an input type that accepts GetDescribeDataEngineImageVersionsImageParentVersionArray and GetDescribeDataEngineImageVersionsImageParentVersionArrayOutput values.
 // You can construct a concrete instance of `GetDescribeDataEngineImageVersionsImageParentVersionArrayInput` via:
 //
-//          GetDescribeDataEngineImageVersionsImageParentVersionArray{ GetDescribeDataEngineImageVersionsImageParentVersionArgs{...} }
+//	GetDescribeDataEngineImageVersionsImageParentVersionArray{ GetDescribeDataEngineImageVersionsImageParentVersionArgs{...} }
 type GetDescribeDataEngineImageVersionsImageParentVersionArrayInput interface {
 	pulumi.Input
 
@@ -3806,7 +4013,7 @@ type GetDescribeDataEnginePythonSparkImagesPythonSparkImage struct {
 // GetDescribeDataEnginePythonSparkImagesPythonSparkImageInput is an input type that accepts GetDescribeDataEnginePythonSparkImagesPythonSparkImageArgs and GetDescribeDataEnginePythonSparkImagesPythonSparkImageOutput values.
 // You can construct a concrete instance of `GetDescribeDataEnginePythonSparkImagesPythonSparkImageInput` via:
 //
-//          GetDescribeDataEnginePythonSparkImagesPythonSparkImageArgs{...}
+//	GetDescribeDataEnginePythonSparkImagesPythonSparkImageArgs{...}
 type GetDescribeDataEnginePythonSparkImagesPythonSparkImageInput interface {
 	pulumi.Input
 
@@ -3844,7 +4051,7 @@ func (i GetDescribeDataEnginePythonSparkImagesPythonSparkImageArgs) ToGetDescrib
 // GetDescribeDataEnginePythonSparkImagesPythonSparkImageArrayInput is an input type that accepts GetDescribeDataEnginePythonSparkImagesPythonSparkImageArray and GetDescribeDataEnginePythonSparkImagesPythonSparkImageArrayOutput values.
 // You can construct a concrete instance of `GetDescribeDataEnginePythonSparkImagesPythonSparkImageArrayInput` via:
 //
-//          GetDescribeDataEnginePythonSparkImagesPythonSparkImageArray{ GetDescribeDataEnginePythonSparkImagesPythonSparkImageArgs{...} }
+//	GetDescribeDataEnginePythonSparkImagesPythonSparkImageArray{ GetDescribeDataEnginePythonSparkImagesPythonSparkImageArgs{...} }
 type GetDescribeDataEnginePythonSparkImagesPythonSparkImageArrayInput interface {
 	pulumi.Input
 
@@ -3954,7 +4161,7 @@ type GetDescribeUpdatableDataEnginesDataEngineBasicInfo struct {
 // GetDescribeUpdatableDataEnginesDataEngineBasicInfoInput is an input type that accepts GetDescribeUpdatableDataEnginesDataEngineBasicInfoArgs and GetDescribeUpdatableDataEnginesDataEngineBasicInfoOutput values.
 // You can construct a concrete instance of `GetDescribeUpdatableDataEnginesDataEngineBasicInfoInput` via:
 //
-//          GetDescribeUpdatableDataEnginesDataEngineBasicInfoArgs{...}
+//	GetDescribeUpdatableDataEnginesDataEngineBasicInfoArgs{...}
 type GetDescribeUpdatableDataEnginesDataEngineBasicInfoInput interface {
 	pulumi.Input
 
@@ -3998,7 +4205,7 @@ func (i GetDescribeUpdatableDataEnginesDataEngineBasicInfoArgs) ToGetDescribeUpd
 // GetDescribeUpdatableDataEnginesDataEngineBasicInfoArrayInput is an input type that accepts GetDescribeUpdatableDataEnginesDataEngineBasicInfoArray and GetDescribeUpdatableDataEnginesDataEngineBasicInfoArrayOutput values.
 // You can construct a concrete instance of `GetDescribeUpdatableDataEnginesDataEngineBasicInfoArrayInput` via:
 //
-//          GetDescribeUpdatableDataEnginesDataEngineBasicInfoArray{ GetDescribeUpdatableDataEnginesDataEngineBasicInfoArgs{...} }
+//	GetDescribeUpdatableDataEnginesDataEngineBasicInfoArray{ GetDescribeUpdatableDataEnginesDataEngineBasicInfoArgs{...} }
 type GetDescribeUpdatableDataEnginesDataEngineBasicInfoArrayInput interface {
 	pulumi.Input
 
@@ -4109,7 +4316,7 @@ type GetDescribeUserInfoFilter struct {
 // GetDescribeUserInfoFilterInput is an input type that accepts GetDescribeUserInfoFilterArgs and GetDescribeUserInfoFilterOutput values.
 // You can construct a concrete instance of `GetDescribeUserInfoFilterInput` via:
 //
-//          GetDescribeUserInfoFilterArgs{...}
+//	GetDescribeUserInfoFilterArgs{...}
 type GetDescribeUserInfoFilterInput interface {
 	pulumi.Input
 
@@ -4139,7 +4346,7 @@ func (i GetDescribeUserInfoFilterArgs) ToGetDescribeUserInfoFilterOutputWithCont
 // GetDescribeUserInfoFilterArrayInput is an input type that accepts GetDescribeUserInfoFilterArray and GetDescribeUserInfoFilterArrayOutput values.
 // You can construct a concrete instance of `GetDescribeUserInfoFilterArrayInput` via:
 //
-//          GetDescribeUserInfoFilterArray{ GetDescribeUserInfoFilterArgs{...} }
+//	GetDescribeUserInfoFilterArray{ GetDescribeUserInfoFilterArgs{...} }
 type GetDescribeUserInfoFilterArrayInput interface {
 	pulumi.Input
 
@@ -4229,7 +4436,7 @@ type GetDescribeUserInfoUserInfo struct {
 // GetDescribeUserInfoUserInfoInput is an input type that accepts GetDescribeUserInfoUserInfoArgs and GetDescribeUserInfoUserInfoOutput values.
 // You can construct a concrete instance of `GetDescribeUserInfoUserInfoInput` via:
 //
-//          GetDescribeUserInfoUserInfoArgs{...}
+//	GetDescribeUserInfoUserInfoArgs{...}
 type GetDescribeUserInfoUserInfoInput interface {
 	pulumi.Input
 
@@ -4273,7 +4480,7 @@ func (i GetDescribeUserInfoUserInfoArgs) ToGetDescribeUserInfoUserInfoOutputWith
 // GetDescribeUserInfoUserInfoArrayInput is an input type that accepts GetDescribeUserInfoUserInfoArray and GetDescribeUserInfoUserInfoArrayOutput values.
 // You can construct a concrete instance of `GetDescribeUserInfoUserInfoArrayInput` via:
 //
-//          GetDescribeUserInfoUserInfoArray{ GetDescribeUserInfoUserInfoArgs{...} }
+//	GetDescribeUserInfoUserInfoArray{ GetDescribeUserInfoUserInfoArgs{...} }
 type GetDescribeUserInfoUserInfoArrayInput interface {
 	pulumi.Input
 
@@ -4392,7 +4599,7 @@ type GetDescribeUserInfoUserInfoDataPolicyInfo struct {
 // GetDescribeUserInfoUserInfoDataPolicyInfoInput is an input type that accepts GetDescribeUserInfoUserInfoDataPolicyInfoArgs and GetDescribeUserInfoUserInfoDataPolicyInfoOutput values.
 // You can construct a concrete instance of `GetDescribeUserInfoUserInfoDataPolicyInfoInput` via:
 //
-//          GetDescribeUserInfoUserInfoDataPolicyInfoArgs{...}
+//	GetDescribeUserInfoUserInfoDataPolicyInfoArgs{...}
 type GetDescribeUserInfoUserInfoDataPolicyInfoInput interface {
 	pulumi.Input
 
@@ -4422,7 +4629,7 @@ func (i GetDescribeUserInfoUserInfoDataPolicyInfoArgs) ToGetDescribeUserInfoUser
 // GetDescribeUserInfoUserInfoDataPolicyInfoArrayInput is an input type that accepts GetDescribeUserInfoUserInfoDataPolicyInfoArray and GetDescribeUserInfoUserInfoDataPolicyInfoArrayOutput values.
 // You can construct a concrete instance of `GetDescribeUserInfoUserInfoDataPolicyInfoArrayInput` via:
 //
-//          GetDescribeUserInfoUserInfoDataPolicyInfoArray{ GetDescribeUserInfoUserInfoDataPolicyInfoArgs{...} }
+//	GetDescribeUserInfoUserInfoDataPolicyInfoArray{ GetDescribeUserInfoUserInfoDataPolicyInfoArgs{...} }
 type GetDescribeUserInfoUserInfoDataPolicyInfoArrayInput interface {
 	pulumi.Input
 
@@ -4530,7 +4737,7 @@ type GetDescribeUserInfoUserInfoDataPolicyInfoPolicySet struct {
 // GetDescribeUserInfoUserInfoDataPolicyInfoPolicySetInput is an input type that accepts GetDescribeUserInfoUserInfoDataPolicyInfoPolicySetArgs and GetDescribeUserInfoUserInfoDataPolicyInfoPolicySetOutput values.
 // You can construct a concrete instance of `GetDescribeUserInfoUserInfoDataPolicyInfoPolicySetInput` via:
 //
-//          GetDescribeUserInfoUserInfoDataPolicyInfoPolicySetArgs{...}
+//	GetDescribeUserInfoUserInfoDataPolicyInfoPolicySetArgs{...}
 type GetDescribeUserInfoUserInfoDataPolicyInfoPolicySetInput interface {
 	pulumi.Input
 
@@ -4590,7 +4797,7 @@ func (i GetDescribeUserInfoUserInfoDataPolicyInfoPolicySetArgs) ToGetDescribeUse
 // GetDescribeUserInfoUserInfoDataPolicyInfoPolicySetArrayInput is an input type that accepts GetDescribeUserInfoUserInfoDataPolicyInfoPolicySetArray and GetDescribeUserInfoUserInfoDataPolicyInfoPolicySetArrayOutput values.
 // You can construct a concrete instance of `GetDescribeUserInfoUserInfoDataPolicyInfoPolicySetArrayInput` via:
 //
-//          GetDescribeUserInfoUserInfoDataPolicyInfoPolicySetArray{ GetDescribeUserInfoUserInfoDataPolicyInfoPolicySetArgs{...} }
+//	GetDescribeUserInfoUserInfoDataPolicyInfoPolicySetArray{ GetDescribeUserInfoUserInfoDataPolicyInfoPolicySetArgs{...} }
 type GetDescribeUserInfoUserInfoDataPolicyInfoPolicySetArrayInput interface {
 	pulumi.Input
 
@@ -4741,7 +4948,7 @@ type GetDescribeUserInfoUserInfoEnginePolicyInfo struct {
 // GetDescribeUserInfoUserInfoEnginePolicyInfoInput is an input type that accepts GetDescribeUserInfoUserInfoEnginePolicyInfoArgs and GetDescribeUserInfoUserInfoEnginePolicyInfoOutput values.
 // You can construct a concrete instance of `GetDescribeUserInfoUserInfoEnginePolicyInfoInput` via:
 //
-//          GetDescribeUserInfoUserInfoEnginePolicyInfoArgs{...}
+//	GetDescribeUserInfoUserInfoEnginePolicyInfoArgs{...}
 type GetDescribeUserInfoUserInfoEnginePolicyInfoInput interface {
 	pulumi.Input
 
@@ -4771,7 +4978,7 @@ func (i GetDescribeUserInfoUserInfoEnginePolicyInfoArgs) ToGetDescribeUserInfoUs
 // GetDescribeUserInfoUserInfoEnginePolicyInfoArrayInput is an input type that accepts GetDescribeUserInfoUserInfoEnginePolicyInfoArray and GetDescribeUserInfoUserInfoEnginePolicyInfoArrayOutput values.
 // You can construct a concrete instance of `GetDescribeUserInfoUserInfoEnginePolicyInfoArrayInput` via:
 //
-//          GetDescribeUserInfoUserInfoEnginePolicyInfoArray{ GetDescribeUserInfoUserInfoEnginePolicyInfoArgs{...} }
+//	GetDescribeUserInfoUserInfoEnginePolicyInfoArray{ GetDescribeUserInfoUserInfoEnginePolicyInfoArgs{...} }
 type GetDescribeUserInfoUserInfoEnginePolicyInfoArrayInput interface {
 	pulumi.Input
 
@@ -4879,7 +5086,7 @@ type GetDescribeUserInfoUserInfoEnginePolicyInfoPolicySet struct {
 // GetDescribeUserInfoUserInfoEnginePolicyInfoPolicySetInput is an input type that accepts GetDescribeUserInfoUserInfoEnginePolicyInfoPolicySetArgs and GetDescribeUserInfoUserInfoEnginePolicyInfoPolicySetOutput values.
 // You can construct a concrete instance of `GetDescribeUserInfoUserInfoEnginePolicyInfoPolicySetInput` via:
 //
-//          GetDescribeUserInfoUserInfoEnginePolicyInfoPolicySetArgs{...}
+//	GetDescribeUserInfoUserInfoEnginePolicyInfoPolicySetArgs{...}
 type GetDescribeUserInfoUserInfoEnginePolicyInfoPolicySetInput interface {
 	pulumi.Input
 
@@ -4939,7 +5146,7 @@ func (i GetDescribeUserInfoUserInfoEnginePolicyInfoPolicySetArgs) ToGetDescribeU
 // GetDescribeUserInfoUserInfoEnginePolicyInfoPolicySetArrayInput is an input type that accepts GetDescribeUserInfoUserInfoEnginePolicyInfoPolicySetArray and GetDescribeUserInfoUserInfoEnginePolicyInfoPolicySetArrayOutput values.
 // You can construct a concrete instance of `GetDescribeUserInfoUserInfoEnginePolicyInfoPolicySetArrayInput` via:
 //
-//          GetDescribeUserInfoUserInfoEnginePolicyInfoPolicySetArray{ GetDescribeUserInfoUserInfoEnginePolicyInfoPolicySetArgs{...} }
+//	GetDescribeUserInfoUserInfoEnginePolicyInfoPolicySetArray{ GetDescribeUserInfoUserInfoEnginePolicyInfoPolicySetArgs{...} }
 type GetDescribeUserInfoUserInfoEnginePolicyInfoPolicySetArrayInput interface {
 	pulumi.Input
 
@@ -5090,7 +5297,7 @@ type GetDescribeUserInfoUserInfoRowFilterInfo struct {
 // GetDescribeUserInfoUserInfoRowFilterInfoInput is an input type that accepts GetDescribeUserInfoUserInfoRowFilterInfoArgs and GetDescribeUserInfoUserInfoRowFilterInfoOutput values.
 // You can construct a concrete instance of `GetDescribeUserInfoUserInfoRowFilterInfoInput` via:
 //
-//          GetDescribeUserInfoUserInfoRowFilterInfoArgs{...}
+//	GetDescribeUserInfoUserInfoRowFilterInfoArgs{...}
 type GetDescribeUserInfoUserInfoRowFilterInfoInput interface {
 	pulumi.Input
 
@@ -5120,7 +5327,7 @@ func (i GetDescribeUserInfoUserInfoRowFilterInfoArgs) ToGetDescribeUserInfoUserI
 // GetDescribeUserInfoUserInfoRowFilterInfoArrayInput is an input type that accepts GetDescribeUserInfoUserInfoRowFilterInfoArray and GetDescribeUserInfoUserInfoRowFilterInfoArrayOutput values.
 // You can construct a concrete instance of `GetDescribeUserInfoUserInfoRowFilterInfoArrayInput` via:
 //
-//          GetDescribeUserInfoUserInfoRowFilterInfoArray{ GetDescribeUserInfoUserInfoRowFilterInfoArgs{...} }
+//	GetDescribeUserInfoUserInfoRowFilterInfoArray{ GetDescribeUserInfoUserInfoRowFilterInfoArgs{...} }
 type GetDescribeUserInfoUserInfoRowFilterInfoArrayInput interface {
 	pulumi.Input
 
@@ -5228,7 +5435,7 @@ type GetDescribeUserInfoUserInfoRowFilterInfoPolicySet struct {
 // GetDescribeUserInfoUserInfoRowFilterInfoPolicySetInput is an input type that accepts GetDescribeUserInfoUserInfoRowFilterInfoPolicySetArgs and GetDescribeUserInfoUserInfoRowFilterInfoPolicySetOutput values.
 // You can construct a concrete instance of `GetDescribeUserInfoUserInfoRowFilterInfoPolicySetInput` via:
 //
-//          GetDescribeUserInfoUserInfoRowFilterInfoPolicySetArgs{...}
+//	GetDescribeUserInfoUserInfoRowFilterInfoPolicySetArgs{...}
 type GetDescribeUserInfoUserInfoRowFilterInfoPolicySetInput interface {
 	pulumi.Input
 
@@ -5288,7 +5495,7 @@ func (i GetDescribeUserInfoUserInfoRowFilterInfoPolicySetArgs) ToGetDescribeUser
 // GetDescribeUserInfoUserInfoRowFilterInfoPolicySetArrayInput is an input type that accepts GetDescribeUserInfoUserInfoRowFilterInfoPolicySetArray and GetDescribeUserInfoUserInfoRowFilterInfoPolicySetArrayOutput values.
 // You can construct a concrete instance of `GetDescribeUserInfoUserInfoRowFilterInfoPolicySetArrayInput` via:
 //
-//          GetDescribeUserInfoUserInfoRowFilterInfoPolicySetArray{ GetDescribeUserInfoUserInfoRowFilterInfoPolicySetArgs{...} }
+//	GetDescribeUserInfoUserInfoRowFilterInfoPolicySetArray{ GetDescribeUserInfoUserInfoRowFilterInfoPolicySetArgs{...} }
 type GetDescribeUserInfoUserInfoRowFilterInfoPolicySetArrayInput interface {
 	pulumi.Input
 
@@ -5439,7 +5646,7 @@ type GetDescribeUserInfoUserInfoWorkGroupInfo struct {
 // GetDescribeUserInfoUserInfoWorkGroupInfoInput is an input type that accepts GetDescribeUserInfoUserInfoWorkGroupInfoArgs and GetDescribeUserInfoUserInfoWorkGroupInfoOutput values.
 // You can construct a concrete instance of `GetDescribeUserInfoUserInfoWorkGroupInfoInput` via:
 //
-//          GetDescribeUserInfoUserInfoWorkGroupInfoArgs{...}
+//	GetDescribeUserInfoUserInfoWorkGroupInfoArgs{...}
 type GetDescribeUserInfoUserInfoWorkGroupInfoInput interface {
 	pulumi.Input
 
@@ -5469,7 +5676,7 @@ func (i GetDescribeUserInfoUserInfoWorkGroupInfoArgs) ToGetDescribeUserInfoUserI
 // GetDescribeUserInfoUserInfoWorkGroupInfoArrayInput is an input type that accepts GetDescribeUserInfoUserInfoWorkGroupInfoArray and GetDescribeUserInfoUserInfoWorkGroupInfoArrayOutput values.
 // You can construct a concrete instance of `GetDescribeUserInfoUserInfoWorkGroupInfoArrayInput` via:
 //
-//          GetDescribeUserInfoUserInfoWorkGroupInfoArray{ GetDescribeUserInfoUserInfoWorkGroupInfoArgs{...} }
+//	GetDescribeUserInfoUserInfoWorkGroupInfoArray{ GetDescribeUserInfoUserInfoWorkGroupInfoArgs{...} }
 type GetDescribeUserInfoUserInfoWorkGroupInfoArrayInput interface {
 	pulumi.Input
 
@@ -5553,7 +5760,7 @@ type GetDescribeUserInfoUserInfoWorkGroupInfoWorkGroupSet struct {
 // GetDescribeUserInfoUserInfoWorkGroupInfoWorkGroupSetInput is an input type that accepts GetDescribeUserInfoUserInfoWorkGroupInfoWorkGroupSetArgs and GetDescribeUserInfoUserInfoWorkGroupInfoWorkGroupSetOutput values.
 // You can construct a concrete instance of `GetDescribeUserInfoUserInfoWorkGroupInfoWorkGroupSetInput` via:
 //
-//          GetDescribeUserInfoUserInfoWorkGroupInfoWorkGroupSetArgs{...}
+//	GetDescribeUserInfoUserInfoWorkGroupInfoWorkGroupSetArgs{...}
 type GetDescribeUserInfoUserInfoWorkGroupInfoWorkGroupSetInput interface {
 	pulumi.Input
 
@@ -5589,7 +5796,7 @@ func (i GetDescribeUserInfoUserInfoWorkGroupInfoWorkGroupSetArgs) ToGetDescribeU
 // GetDescribeUserInfoUserInfoWorkGroupInfoWorkGroupSetArrayInput is an input type that accepts GetDescribeUserInfoUserInfoWorkGroupInfoWorkGroupSetArray and GetDescribeUserInfoUserInfoWorkGroupInfoWorkGroupSetArrayOutput values.
 // You can construct a concrete instance of `GetDescribeUserInfoUserInfoWorkGroupInfoWorkGroupSetArrayInput` via:
 //
-//          GetDescribeUserInfoUserInfoWorkGroupInfoWorkGroupSetArray{ GetDescribeUserInfoUserInfoWorkGroupInfoWorkGroupSetArgs{...} }
+//	GetDescribeUserInfoUserInfoWorkGroupInfoWorkGroupSetArray{ GetDescribeUserInfoUserInfoWorkGroupInfoWorkGroupSetArgs{...} }
 type GetDescribeUserInfoUserInfoWorkGroupInfoWorkGroupSetArrayInput interface {
 	pulumi.Input
 
@@ -5696,7 +5903,7 @@ type GetDescribeUserRolesUserRole struct {
 // GetDescribeUserRolesUserRoleInput is an input type that accepts GetDescribeUserRolesUserRoleArgs and GetDescribeUserRolesUserRoleOutput values.
 // You can construct a concrete instance of `GetDescribeUserRolesUserRoleInput` via:
 //
-//          GetDescribeUserRolesUserRoleArgs{...}
+//	GetDescribeUserRolesUserRoleArgs{...}
 type GetDescribeUserRolesUserRoleInput interface {
 	pulumi.Input
 
@@ -5742,7 +5949,7 @@ func (i GetDescribeUserRolesUserRoleArgs) ToGetDescribeUserRolesUserRoleOutputWi
 // GetDescribeUserRolesUserRoleArrayInput is an input type that accepts GetDescribeUserRolesUserRoleArray and GetDescribeUserRolesUserRoleArrayOutput values.
 // You can construct a concrete instance of `GetDescribeUserRolesUserRoleArrayInput` via:
 //
-//          GetDescribeUserRolesUserRoleArray{ GetDescribeUserRolesUserRoleArgs{...} }
+//	GetDescribeUserRolesUserRoleArray{ GetDescribeUserRolesUserRoleArgs{...} }
 type GetDescribeUserRolesUserRoleArrayInput interface {
 	pulumi.Input
 
@@ -5860,7 +6067,7 @@ type GetDescribeUserRolesUserRoleCosPermissionList struct {
 // GetDescribeUserRolesUserRoleCosPermissionListInput is an input type that accepts GetDescribeUserRolesUserRoleCosPermissionListArgs and GetDescribeUserRolesUserRoleCosPermissionListOutput values.
 // You can construct a concrete instance of `GetDescribeUserRolesUserRoleCosPermissionListInput` via:
 //
-//          GetDescribeUserRolesUserRoleCosPermissionListArgs{...}
+//	GetDescribeUserRolesUserRoleCosPermissionListArgs{...}
 type GetDescribeUserRolesUserRoleCosPermissionListInput interface {
 	pulumi.Input
 
@@ -5890,7 +6097,7 @@ func (i GetDescribeUserRolesUserRoleCosPermissionListArgs) ToGetDescribeUserRole
 // GetDescribeUserRolesUserRoleCosPermissionListArrayInput is an input type that accepts GetDescribeUserRolesUserRoleCosPermissionListArray and GetDescribeUserRolesUserRoleCosPermissionListArrayOutput values.
 // You can construct a concrete instance of `GetDescribeUserRolesUserRoleCosPermissionListArrayInput` via:
 //
-//          GetDescribeUserRolesUserRoleCosPermissionListArray{ GetDescribeUserRolesUserRoleCosPermissionListArgs{...} }
+//	GetDescribeUserRolesUserRoleCosPermissionListArray{ GetDescribeUserRolesUserRoleCosPermissionListArgs{...} }
 type GetDescribeUserRolesUserRoleCosPermissionListArrayInput interface {
 	pulumi.Input
 
@@ -5966,7 +6173,7 @@ type GetDescribeWorkGroupInfoFilter struct {
 // GetDescribeWorkGroupInfoFilterInput is an input type that accepts GetDescribeWorkGroupInfoFilterArgs and GetDescribeWorkGroupInfoFilterOutput values.
 // You can construct a concrete instance of `GetDescribeWorkGroupInfoFilterInput` via:
 //
-//          GetDescribeWorkGroupInfoFilterArgs{...}
+//	GetDescribeWorkGroupInfoFilterArgs{...}
 type GetDescribeWorkGroupInfoFilterInput interface {
 	pulumi.Input
 
@@ -5996,7 +6203,7 @@ func (i GetDescribeWorkGroupInfoFilterArgs) ToGetDescribeWorkGroupInfoFilterOutp
 // GetDescribeWorkGroupInfoFilterArrayInput is an input type that accepts GetDescribeWorkGroupInfoFilterArray and GetDescribeWorkGroupInfoFilterArrayOutput values.
 // You can construct a concrete instance of `GetDescribeWorkGroupInfoFilterArrayInput` via:
 //
-//          GetDescribeWorkGroupInfoFilterArray{ GetDescribeWorkGroupInfoFilterArgs{...} }
+//	GetDescribeWorkGroupInfoFilterArray{ GetDescribeWorkGroupInfoFilterArgs{...} }
 type GetDescribeWorkGroupInfoFilterArrayInput interface {
 	pulumi.Input
 
@@ -6084,7 +6291,7 @@ type GetDescribeWorkGroupInfoWorkGroupInfo struct {
 // GetDescribeWorkGroupInfoWorkGroupInfoInput is an input type that accepts GetDescribeWorkGroupInfoWorkGroupInfoArgs and GetDescribeWorkGroupInfoWorkGroupInfoOutput values.
 // You can construct a concrete instance of `GetDescribeWorkGroupInfoWorkGroupInfoInput` via:
 //
-//          GetDescribeWorkGroupInfoWorkGroupInfoArgs{...}
+//	GetDescribeWorkGroupInfoWorkGroupInfoArgs{...}
 type GetDescribeWorkGroupInfoWorkGroupInfoInput interface {
 	pulumi.Input
 
@@ -6126,7 +6333,7 @@ func (i GetDescribeWorkGroupInfoWorkGroupInfoArgs) ToGetDescribeWorkGroupInfoWor
 // GetDescribeWorkGroupInfoWorkGroupInfoArrayInput is an input type that accepts GetDescribeWorkGroupInfoWorkGroupInfoArray and GetDescribeWorkGroupInfoWorkGroupInfoArrayOutput values.
 // You can construct a concrete instance of `GetDescribeWorkGroupInfoWorkGroupInfoArrayInput` via:
 //
-//          GetDescribeWorkGroupInfoWorkGroupInfoArray{ GetDescribeWorkGroupInfoWorkGroupInfoArgs{...} }
+//	GetDescribeWorkGroupInfoWorkGroupInfoArray{ GetDescribeWorkGroupInfoWorkGroupInfoArgs{...} }
 type GetDescribeWorkGroupInfoWorkGroupInfoArrayInput interface {
 	pulumi.Input
 
@@ -6240,7 +6447,7 @@ type GetDescribeWorkGroupInfoWorkGroupInfoDataPolicyInfo struct {
 // GetDescribeWorkGroupInfoWorkGroupInfoDataPolicyInfoInput is an input type that accepts GetDescribeWorkGroupInfoWorkGroupInfoDataPolicyInfoArgs and GetDescribeWorkGroupInfoWorkGroupInfoDataPolicyInfoOutput values.
 // You can construct a concrete instance of `GetDescribeWorkGroupInfoWorkGroupInfoDataPolicyInfoInput` via:
 //
-//          GetDescribeWorkGroupInfoWorkGroupInfoDataPolicyInfoArgs{...}
+//	GetDescribeWorkGroupInfoWorkGroupInfoDataPolicyInfoArgs{...}
 type GetDescribeWorkGroupInfoWorkGroupInfoDataPolicyInfoInput interface {
 	pulumi.Input
 
@@ -6270,7 +6477,7 @@ func (i GetDescribeWorkGroupInfoWorkGroupInfoDataPolicyInfoArgs) ToGetDescribeWo
 // GetDescribeWorkGroupInfoWorkGroupInfoDataPolicyInfoArrayInput is an input type that accepts GetDescribeWorkGroupInfoWorkGroupInfoDataPolicyInfoArray and GetDescribeWorkGroupInfoWorkGroupInfoDataPolicyInfoArrayOutput values.
 // You can construct a concrete instance of `GetDescribeWorkGroupInfoWorkGroupInfoDataPolicyInfoArrayInput` via:
 //
-//          GetDescribeWorkGroupInfoWorkGroupInfoDataPolicyInfoArray{ GetDescribeWorkGroupInfoWorkGroupInfoDataPolicyInfoArgs{...} }
+//	GetDescribeWorkGroupInfoWorkGroupInfoDataPolicyInfoArray{ GetDescribeWorkGroupInfoWorkGroupInfoDataPolicyInfoArgs{...} }
 type GetDescribeWorkGroupInfoWorkGroupInfoDataPolicyInfoArrayInput interface {
 	pulumi.Input
 
@@ -6378,7 +6585,7 @@ type GetDescribeWorkGroupInfoWorkGroupInfoDataPolicyInfoPolicySet struct {
 // GetDescribeWorkGroupInfoWorkGroupInfoDataPolicyInfoPolicySetInput is an input type that accepts GetDescribeWorkGroupInfoWorkGroupInfoDataPolicyInfoPolicySetArgs and GetDescribeWorkGroupInfoWorkGroupInfoDataPolicyInfoPolicySetOutput values.
 // You can construct a concrete instance of `GetDescribeWorkGroupInfoWorkGroupInfoDataPolicyInfoPolicySetInput` via:
 //
-//          GetDescribeWorkGroupInfoWorkGroupInfoDataPolicyInfoPolicySetArgs{...}
+//	GetDescribeWorkGroupInfoWorkGroupInfoDataPolicyInfoPolicySetArgs{...}
 type GetDescribeWorkGroupInfoWorkGroupInfoDataPolicyInfoPolicySetInput interface {
 	pulumi.Input
 
@@ -6438,7 +6645,7 @@ func (i GetDescribeWorkGroupInfoWorkGroupInfoDataPolicyInfoPolicySetArgs) ToGetD
 // GetDescribeWorkGroupInfoWorkGroupInfoDataPolicyInfoPolicySetArrayInput is an input type that accepts GetDescribeWorkGroupInfoWorkGroupInfoDataPolicyInfoPolicySetArray and GetDescribeWorkGroupInfoWorkGroupInfoDataPolicyInfoPolicySetArrayOutput values.
 // You can construct a concrete instance of `GetDescribeWorkGroupInfoWorkGroupInfoDataPolicyInfoPolicySetArrayInput` via:
 //
-//          GetDescribeWorkGroupInfoWorkGroupInfoDataPolicyInfoPolicySetArray{ GetDescribeWorkGroupInfoWorkGroupInfoDataPolicyInfoPolicySetArgs{...} }
+//	GetDescribeWorkGroupInfoWorkGroupInfoDataPolicyInfoPolicySetArray{ GetDescribeWorkGroupInfoWorkGroupInfoDataPolicyInfoPolicySetArgs{...} }
 type GetDescribeWorkGroupInfoWorkGroupInfoDataPolicyInfoPolicySetArrayInput interface {
 	pulumi.Input
 
@@ -6589,7 +6796,7 @@ type GetDescribeWorkGroupInfoWorkGroupInfoEnginePolicyInfo struct {
 // GetDescribeWorkGroupInfoWorkGroupInfoEnginePolicyInfoInput is an input type that accepts GetDescribeWorkGroupInfoWorkGroupInfoEnginePolicyInfoArgs and GetDescribeWorkGroupInfoWorkGroupInfoEnginePolicyInfoOutput values.
 // You can construct a concrete instance of `GetDescribeWorkGroupInfoWorkGroupInfoEnginePolicyInfoInput` via:
 //
-//          GetDescribeWorkGroupInfoWorkGroupInfoEnginePolicyInfoArgs{...}
+//	GetDescribeWorkGroupInfoWorkGroupInfoEnginePolicyInfoArgs{...}
 type GetDescribeWorkGroupInfoWorkGroupInfoEnginePolicyInfoInput interface {
 	pulumi.Input
 
@@ -6619,7 +6826,7 @@ func (i GetDescribeWorkGroupInfoWorkGroupInfoEnginePolicyInfoArgs) ToGetDescribe
 // GetDescribeWorkGroupInfoWorkGroupInfoEnginePolicyInfoArrayInput is an input type that accepts GetDescribeWorkGroupInfoWorkGroupInfoEnginePolicyInfoArray and GetDescribeWorkGroupInfoWorkGroupInfoEnginePolicyInfoArrayOutput values.
 // You can construct a concrete instance of `GetDescribeWorkGroupInfoWorkGroupInfoEnginePolicyInfoArrayInput` via:
 //
-//          GetDescribeWorkGroupInfoWorkGroupInfoEnginePolicyInfoArray{ GetDescribeWorkGroupInfoWorkGroupInfoEnginePolicyInfoArgs{...} }
+//	GetDescribeWorkGroupInfoWorkGroupInfoEnginePolicyInfoArray{ GetDescribeWorkGroupInfoWorkGroupInfoEnginePolicyInfoArgs{...} }
 type GetDescribeWorkGroupInfoWorkGroupInfoEnginePolicyInfoArrayInput interface {
 	pulumi.Input
 
@@ -6727,7 +6934,7 @@ type GetDescribeWorkGroupInfoWorkGroupInfoEnginePolicyInfoPolicySet struct {
 // GetDescribeWorkGroupInfoWorkGroupInfoEnginePolicyInfoPolicySetInput is an input type that accepts GetDescribeWorkGroupInfoWorkGroupInfoEnginePolicyInfoPolicySetArgs and GetDescribeWorkGroupInfoWorkGroupInfoEnginePolicyInfoPolicySetOutput values.
 // You can construct a concrete instance of `GetDescribeWorkGroupInfoWorkGroupInfoEnginePolicyInfoPolicySetInput` via:
 //
-//          GetDescribeWorkGroupInfoWorkGroupInfoEnginePolicyInfoPolicySetArgs{...}
+//	GetDescribeWorkGroupInfoWorkGroupInfoEnginePolicyInfoPolicySetArgs{...}
 type GetDescribeWorkGroupInfoWorkGroupInfoEnginePolicyInfoPolicySetInput interface {
 	pulumi.Input
 
@@ -6787,7 +6994,7 @@ func (i GetDescribeWorkGroupInfoWorkGroupInfoEnginePolicyInfoPolicySetArgs) ToGe
 // GetDescribeWorkGroupInfoWorkGroupInfoEnginePolicyInfoPolicySetArrayInput is an input type that accepts GetDescribeWorkGroupInfoWorkGroupInfoEnginePolicyInfoPolicySetArray and GetDescribeWorkGroupInfoWorkGroupInfoEnginePolicyInfoPolicySetArrayOutput values.
 // You can construct a concrete instance of `GetDescribeWorkGroupInfoWorkGroupInfoEnginePolicyInfoPolicySetArrayInput` via:
 //
-//          GetDescribeWorkGroupInfoWorkGroupInfoEnginePolicyInfoPolicySetArray{ GetDescribeWorkGroupInfoWorkGroupInfoEnginePolicyInfoPolicySetArgs{...} }
+//	GetDescribeWorkGroupInfoWorkGroupInfoEnginePolicyInfoPolicySetArray{ GetDescribeWorkGroupInfoWorkGroupInfoEnginePolicyInfoPolicySetArgs{...} }
 type GetDescribeWorkGroupInfoWorkGroupInfoEnginePolicyInfoPolicySetArrayInput interface {
 	pulumi.Input
 
@@ -6938,7 +7145,7 @@ type GetDescribeWorkGroupInfoWorkGroupInfoRowFilterInfo struct {
 // GetDescribeWorkGroupInfoWorkGroupInfoRowFilterInfoInput is an input type that accepts GetDescribeWorkGroupInfoWorkGroupInfoRowFilterInfoArgs and GetDescribeWorkGroupInfoWorkGroupInfoRowFilterInfoOutput values.
 // You can construct a concrete instance of `GetDescribeWorkGroupInfoWorkGroupInfoRowFilterInfoInput` via:
 //
-//          GetDescribeWorkGroupInfoWorkGroupInfoRowFilterInfoArgs{...}
+//	GetDescribeWorkGroupInfoWorkGroupInfoRowFilterInfoArgs{...}
 type GetDescribeWorkGroupInfoWorkGroupInfoRowFilterInfoInput interface {
 	pulumi.Input
 
@@ -6968,7 +7175,7 @@ func (i GetDescribeWorkGroupInfoWorkGroupInfoRowFilterInfoArgs) ToGetDescribeWor
 // GetDescribeWorkGroupInfoWorkGroupInfoRowFilterInfoArrayInput is an input type that accepts GetDescribeWorkGroupInfoWorkGroupInfoRowFilterInfoArray and GetDescribeWorkGroupInfoWorkGroupInfoRowFilterInfoArrayOutput values.
 // You can construct a concrete instance of `GetDescribeWorkGroupInfoWorkGroupInfoRowFilterInfoArrayInput` via:
 //
-//          GetDescribeWorkGroupInfoWorkGroupInfoRowFilterInfoArray{ GetDescribeWorkGroupInfoWorkGroupInfoRowFilterInfoArgs{...} }
+//	GetDescribeWorkGroupInfoWorkGroupInfoRowFilterInfoArray{ GetDescribeWorkGroupInfoWorkGroupInfoRowFilterInfoArgs{...} }
 type GetDescribeWorkGroupInfoWorkGroupInfoRowFilterInfoArrayInput interface {
 	pulumi.Input
 
@@ -7076,7 +7283,7 @@ type GetDescribeWorkGroupInfoWorkGroupInfoRowFilterInfoPolicySet struct {
 // GetDescribeWorkGroupInfoWorkGroupInfoRowFilterInfoPolicySetInput is an input type that accepts GetDescribeWorkGroupInfoWorkGroupInfoRowFilterInfoPolicySetArgs and GetDescribeWorkGroupInfoWorkGroupInfoRowFilterInfoPolicySetOutput values.
 // You can construct a concrete instance of `GetDescribeWorkGroupInfoWorkGroupInfoRowFilterInfoPolicySetInput` via:
 //
-//          GetDescribeWorkGroupInfoWorkGroupInfoRowFilterInfoPolicySetArgs{...}
+//	GetDescribeWorkGroupInfoWorkGroupInfoRowFilterInfoPolicySetArgs{...}
 type GetDescribeWorkGroupInfoWorkGroupInfoRowFilterInfoPolicySetInput interface {
 	pulumi.Input
 
@@ -7136,7 +7343,7 @@ func (i GetDescribeWorkGroupInfoWorkGroupInfoRowFilterInfoPolicySetArgs) ToGetDe
 // GetDescribeWorkGroupInfoWorkGroupInfoRowFilterInfoPolicySetArrayInput is an input type that accepts GetDescribeWorkGroupInfoWorkGroupInfoRowFilterInfoPolicySetArray and GetDescribeWorkGroupInfoWorkGroupInfoRowFilterInfoPolicySetArrayOutput values.
 // You can construct a concrete instance of `GetDescribeWorkGroupInfoWorkGroupInfoRowFilterInfoPolicySetArrayInput` via:
 //
-//          GetDescribeWorkGroupInfoWorkGroupInfoRowFilterInfoPolicySetArray{ GetDescribeWorkGroupInfoWorkGroupInfoRowFilterInfoPolicySetArgs{...} }
+//	GetDescribeWorkGroupInfoWorkGroupInfoRowFilterInfoPolicySetArray{ GetDescribeWorkGroupInfoWorkGroupInfoRowFilterInfoPolicySetArgs{...} }
 type GetDescribeWorkGroupInfoWorkGroupInfoRowFilterInfoPolicySetArrayInput interface {
 	pulumi.Input
 
@@ -7287,7 +7494,7 @@ type GetDescribeWorkGroupInfoWorkGroupInfoUserInfo struct {
 // GetDescribeWorkGroupInfoWorkGroupInfoUserInfoInput is an input type that accepts GetDescribeWorkGroupInfoWorkGroupInfoUserInfoArgs and GetDescribeWorkGroupInfoWorkGroupInfoUserInfoOutput values.
 // You can construct a concrete instance of `GetDescribeWorkGroupInfoWorkGroupInfoUserInfoInput` via:
 //
-//          GetDescribeWorkGroupInfoWorkGroupInfoUserInfoArgs{...}
+//	GetDescribeWorkGroupInfoWorkGroupInfoUserInfoArgs{...}
 type GetDescribeWorkGroupInfoWorkGroupInfoUserInfoInput interface {
 	pulumi.Input
 
@@ -7317,7 +7524,7 @@ func (i GetDescribeWorkGroupInfoWorkGroupInfoUserInfoArgs) ToGetDescribeWorkGrou
 // GetDescribeWorkGroupInfoWorkGroupInfoUserInfoArrayInput is an input type that accepts GetDescribeWorkGroupInfoWorkGroupInfoUserInfoArray and GetDescribeWorkGroupInfoWorkGroupInfoUserInfoArrayOutput values.
 // You can construct a concrete instance of `GetDescribeWorkGroupInfoWorkGroupInfoUserInfoArrayInput` via:
 //
-//          GetDescribeWorkGroupInfoWorkGroupInfoUserInfoArray{ GetDescribeWorkGroupInfoWorkGroupInfoUserInfoArgs{...} }
+//	GetDescribeWorkGroupInfoWorkGroupInfoUserInfoArray{ GetDescribeWorkGroupInfoWorkGroupInfoUserInfoArgs{...} }
 type GetDescribeWorkGroupInfoWorkGroupInfoUserInfoArrayInput interface {
 	pulumi.Input
 
@@ -7401,7 +7608,7 @@ type GetDescribeWorkGroupInfoWorkGroupInfoUserInfoUserSet struct {
 // GetDescribeWorkGroupInfoWorkGroupInfoUserInfoUserSetInput is an input type that accepts GetDescribeWorkGroupInfoWorkGroupInfoUserInfoUserSetArgs and GetDescribeWorkGroupInfoWorkGroupInfoUserInfoUserSetOutput values.
 // You can construct a concrete instance of `GetDescribeWorkGroupInfoWorkGroupInfoUserInfoUserSetInput` via:
 //
-//          GetDescribeWorkGroupInfoWorkGroupInfoUserInfoUserSetArgs{...}
+//	GetDescribeWorkGroupInfoWorkGroupInfoUserInfoUserSetArgs{...}
 type GetDescribeWorkGroupInfoWorkGroupInfoUserInfoUserSetInput interface {
 	pulumi.Input
 
@@ -7437,7 +7644,7 @@ func (i GetDescribeWorkGroupInfoWorkGroupInfoUserInfoUserSetArgs) ToGetDescribeW
 // GetDescribeWorkGroupInfoWorkGroupInfoUserInfoUserSetArrayInput is an input type that accepts GetDescribeWorkGroupInfoWorkGroupInfoUserInfoUserSetArray and GetDescribeWorkGroupInfoWorkGroupInfoUserInfoUserSetArrayOutput values.
 // You can construct a concrete instance of `GetDescribeWorkGroupInfoWorkGroupInfoUserInfoUserSetArrayInput` via:
 //
-//          GetDescribeWorkGroupInfoWorkGroupInfoUserInfoUserSetArray{ GetDescribeWorkGroupInfoWorkGroupInfoUserInfoUserSetArgs{...} }
+//	GetDescribeWorkGroupInfoWorkGroupInfoUserInfoUserSetArray{ GetDescribeWorkGroupInfoWorkGroupInfoUserInfoUserSetArgs{...} }
 type GetDescribeWorkGroupInfoWorkGroupInfoUserInfoUserSetArrayInput interface {
 	pulumi.Input
 

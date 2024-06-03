@@ -15,32 +15,33 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Lighthouse
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var renewDisk = new Tencentcloud.Lighthouse.RenewDisk("renewDisk", new()
     ///     {
-    ///         var renewDisk = new Tencentcloud.Lighthouse.RenewDisk("renewDisk", new Tencentcloud.Lighthouse.RenewDiskArgs
+    ///         AutoVoucher = true,
+    ///         DiskId = "lhdisk-xxxxxx",
+    ///         RenewDiskChargePrepaid = new Tencentcloud.Lighthouse.Inputs.RenewDiskRenewDiskChargePrepaidArgs
     ///         {
-    ///             AutoVoucher = true,
-    ///             DiskId = "lhdisk-xxxxxx",
-    ///             RenewDiskChargePrepaid = new Tencentcloud.Lighthouse.Inputs.RenewDiskRenewDiskChargePrepaidArgs
-    ///             {
-    ///                 Period = 1,
-    ///                 RenewFlag = "NOTIFY_AND_AUTO_RENEW",
-    ///                 TimeUnit = "m",
-    ///             },
-    ///         });
-    ///     }
+    ///             Period = 1,
+    ///             RenewFlag = "NOTIFY_AND_AUTO_RENEW",
+    ///             TimeUnit = "m",
+    ///         },
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Lighthouse/renewDisk:RenewDisk")]
-    public partial class RenewDisk : Pulumi.CustomResource
+    public partial class RenewDisk : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Whether to automatically use the voucher. Not used by default.
@@ -105,7 +106,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Lighthouse
         }
     }
 
-    public sealed class RenewDiskArgs : Pulumi.ResourceArgs
+    public sealed class RenewDiskArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Whether to automatically use the voucher. Not used by default.
@@ -128,9 +129,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Lighthouse
         public RenewDiskArgs()
         {
         }
+        public static new RenewDiskArgs Empty => new RenewDiskArgs();
     }
 
-    public sealed class RenewDiskState : Pulumi.ResourceArgs
+    public sealed class RenewDiskState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Whether to automatically use the voucher. Not used by default.
@@ -153,5 +155,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Lighthouse
         public RenewDiskState()
         {
         }
+        public static new RenewDiskState Empty => new RenewDiskState();
     }
 }

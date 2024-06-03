@@ -15,92 +15,86 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf
         /// <summary>
         /// Use this data source to query detailed information of tsf groups
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var groups = Tencentcloud.Tsf.GetGroups.Invoke(new()
         ///     {
-        ///         var groups = Output.Create(Tencentcloud.Tsf.GetGroups.InvokeAsync(new Tencentcloud.Tsf.GetGroupsArgs
+        ///         ApplicationId = "application-a24x29xv",
+        ///         ClusterId = "cluster-vwgj5e6y",
+        ///         GroupIdLists = new[]
         ///         {
-        ///             ApplicationId = "application-a24x29xv",
-        ///             ClusterId = "cluster-vwgj5e6y",
-        ///             GroupIdLists = 
-        ///             {
-        ///                 "group-yrjkln9v",
-        ///             },
-        ///             GroupResourceTypeLists = 
-        ///             {
-        ///                 "DEF",
-        ///             },
-        ///             NamespaceId = "namespace-aemrg36v",
-        ///             OrderBy = "createTime",
-        ///             OrderType = 0,
-        ///             SearchWord = "keep",
-        ///             Status = "Running",
-        ///         }));
-        ///     }
+        ///             "group-yrjkln9v",
+        ///         },
+        ///         GroupResourceTypeLists = new[]
+        ///         {
+        ///             "DEF",
+        ///         },
+        ///         NamespaceId = "namespace-aemrg36v",
+        ///         OrderBy = "createTime",
+        ///         OrderType = 0,
+        ///         SearchWord = "keep",
+        ///         Status = "Running",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetGroupsResult> InvokeAsync(GetGroupsArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetGroupsResult>("tencentcloud:Tsf/getGroups:getGroups", args ?? new GetGroupsArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetGroupsResult>("tencentcloud:Tsf/getGroups:getGroups", args ?? new GetGroupsArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of tsf groups
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var groups = Tencentcloud.Tsf.GetGroups.Invoke(new()
         ///     {
-        ///         var groups = Output.Create(Tencentcloud.Tsf.GetGroups.InvokeAsync(new Tencentcloud.Tsf.GetGroupsArgs
+        ///         ApplicationId = "application-a24x29xv",
+        ///         ClusterId = "cluster-vwgj5e6y",
+        ///         GroupIdLists = new[]
         ///         {
-        ///             ApplicationId = "application-a24x29xv",
-        ///             ClusterId = "cluster-vwgj5e6y",
-        ///             GroupIdLists = 
-        ///             {
-        ///                 "group-yrjkln9v",
-        ///             },
-        ///             GroupResourceTypeLists = 
-        ///             {
-        ///                 "DEF",
-        ///             },
-        ///             NamespaceId = "namespace-aemrg36v",
-        ///             OrderBy = "createTime",
-        ///             OrderType = 0,
-        ///             SearchWord = "keep",
-        ///             Status = "Running",
-        ///         }));
-        ///     }
+        ///             "group-yrjkln9v",
+        ///         },
+        ///         GroupResourceTypeLists = new[]
+        ///         {
+        ///             "DEF",
+        ///         },
+        ///         NamespaceId = "namespace-aemrg36v",
+        ///         OrderBy = "createTime",
+        ///         OrderType = 0,
+        ///         SearchWord = "keep",
+        ///         Status = "Running",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetGroupsResult> Invoke(GetGroupsInvokeArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetGroupsResult>("tencentcloud:Tsf/getGroups:getGroups", args ?? new GetGroupsInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetGroupsResult>("tencentcloud:Tsf/getGroups:getGroups", args ?? new GetGroupsInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetGroupsArgs : Pulumi.InvokeArgs
+    public sealed class GetGroupsArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// applicationId.
@@ -177,9 +171,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf
         public GetGroupsArgs()
         {
         }
+        public static new GetGroupsArgs Empty => new GetGroupsArgs();
     }
 
-    public sealed class GetGroupsInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetGroupsInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// applicationId.
@@ -256,6 +251,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf
         public GetGroupsInvokeArgs()
         {
         }
+        public static new GetGroupsInvokeArgs Empty => new GetGroupsInvokeArgs();
     }
 
 

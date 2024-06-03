@@ -15,36 +15,37 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ci
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var mediaSuperResolutionTemplate = new Tencentcloud.Ci.MediaSuperResolutionTemplate("mediaSuperResolutionTemplate", new()
     ///     {
-    ///         var mediaSuperResolutionTemplate = new Tencentcloud.Ci.MediaSuperResolutionTemplate("mediaSuperResolutionTemplate", new Tencentcloud.Ci.MediaSuperResolutionTemplateArgs
-    ///         {
-    ///             Bucket = "terraform-ci-1308919341",
-    ///             EnableScaleUp = "true",
-    ///             Resolution = "sdtohd",
-    ///             Version = "Enhance",
-    ///         });
-    ///     }
+    ///         Bucket = "terraform-ci-1308919341",
+    ///         EnableScaleUp = "true",
+    ///         Resolution = "sdtohd",
+    ///         Version = "Enhance",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// ci media_super_resolution_template can be imported using the bucket#templateId, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Ci/mediaSuperResolutionTemplate:MediaSuperResolutionTemplate media_super_resolution_template terraform-ci-xxxxxx#t1d707eb2be3294e22b47123894f85cb8f
+    /// $ pulumi import tencentcloud:Ci/mediaSuperResolutionTemplate:MediaSuperResolutionTemplate media_super_resolution_template terraform-ci-xxxxxx#t1d707eb2be3294e22b47123894f85cb8f
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Ci/mediaSuperResolutionTemplate:MediaSuperResolutionTemplate")]
-    public partial class MediaSuperResolutionTemplate : Pulumi.CustomResource
+    public partial class MediaSuperResolutionTemplate : global::Pulumi.CustomResource
     {
         /// <summary>
         /// bucket name.
@@ -121,7 +122,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ci
         }
     }
 
-    public sealed class MediaSuperResolutionTemplateArgs : Pulumi.ResourceArgs
+    public sealed class MediaSuperResolutionTemplateArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// bucket name.
@@ -156,9 +157,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ci
         public MediaSuperResolutionTemplateArgs()
         {
         }
+        public static new MediaSuperResolutionTemplateArgs Empty => new MediaSuperResolutionTemplateArgs();
     }
 
-    public sealed class MediaSuperResolutionTemplateState : Pulumi.ResourceArgs
+    public sealed class MediaSuperResolutionTemplateState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// bucket name.
@@ -193,5 +195,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ci
         public MediaSuperResolutionTemplateState()
         {
         }
+        public static new MediaSuperResolutionTemplateState Empty => new MediaSuperResolutionTemplateState();
     }
 }

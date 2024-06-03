@@ -15,26 +15,27 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mariadb
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var activateHourDbInstance = new Tencentcloud.Mariadb.OperateHourDbInstance("activateHourDbInstance", new()
     ///     {
-    ///         var activateHourDbInstance = new Tencentcloud.Mariadb.OperateHourDbInstance("activateHourDbInstance", new Tencentcloud.Mariadb.OperateHourDbInstanceArgs
-    ///         {
-    ///             InstanceId = "tdsql-9vqvls95",
-    ///             Operate = "activate",
-    ///         });
-    ///     }
+    ///         InstanceId = "tdsql-9vqvls95",
+    ///         Operate = "activate",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Mariadb/operateHourDbInstance:OperateHourDbInstance")]
-    public partial class OperateHourDbInstance : Pulumi.CustomResource
+    public partial class OperateHourDbInstance : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Instance ID.
@@ -93,7 +94,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mariadb
         }
     }
 
-    public sealed class OperateHourDbInstanceArgs : Pulumi.ResourceArgs
+    public sealed class OperateHourDbInstanceArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Instance ID.
@@ -110,9 +111,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mariadb
         public OperateHourDbInstanceArgs()
         {
         }
+        public static new OperateHourDbInstanceArgs Empty => new OperateHourDbInstanceArgs();
     }
 
-    public sealed class OperateHourDbInstanceState : Pulumi.ResourceArgs
+    public sealed class OperateHourDbInstanceState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Instance ID.
@@ -129,5 +131,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mariadb
         public OperateHourDbInstanceState()
         {
         }
+        public static new OperateHourDbInstanceState Empty => new OperateHourDbInstanceState();
     }
 }

@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Scf.Inputs
 {
 
-    public sealed class FunctionLayerArgs : Pulumi.ResourceArgs
+    public sealed class FunctionLayerArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// The name of Layer.
@@ -28,5 +28,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Scf.Inputs
         public FunctionLayerArgs()
         {
         }
+        public static new FunctionLayerArgs Empty => new FunctionLayerArgs();
     }
 }

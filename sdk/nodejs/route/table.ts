@@ -9,20 +9,22 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const fooInstance = new tencentcloud.vpc.Instance("fooInstance", {cidrBlock: "10.0.0.0/16"});
  * const fooTable = new tencentcloud.route.Table("fooTable", {vpcId: fooInstance.id});
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * Vpc routetable instance can be imported, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Route/table:Table test route_table_id
+ * $ pulumi import tencentcloud:Route/table:Table test route_table_id
  * ```
  */
 export class Table extends pulumi.CustomResource {

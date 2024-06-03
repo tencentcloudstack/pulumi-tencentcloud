@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,11 +11,12 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const group = new tencentcloud.Cls.MachineGroup("group", {
+ * const group = new tencentcloud.cls.MachineGroup("group", {
  *     groupName: "group",
  *     machineGroupType: {
  *         type: "ip",
@@ -31,13 +33,14 @@ import * as utilities from "../utilities";
  *     updateStartTime: "17:05:40",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * cls machine group can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Cls/machineGroup:MachineGroup group caf168e7-32cd-4ac6-bf89-1950a760e09c
+ * $ pulumi import tencentcloud:Cls/machineGroup:MachineGroup group caf168e7-32cd-4ac6-bf89-1950a760e09c
  * ```
  */
 export class MachineGroup extends pulumi.CustomResource {

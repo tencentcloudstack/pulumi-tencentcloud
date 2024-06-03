@@ -9,22 +9,21 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const fileDownloadUrl = pulumi.output(tencentcloud.Mariadb.getFileDownloadUrl({
+ * const fileDownloadUrl = tencentcloud.Mariadb.getFileDownloadUrl({
  *     filePath: "/cos_backup/test.txt",
  *     instanceId: "tdsql-9vqvls95",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getFileDownloadUrl(args: GetFileDownloadUrlArgs, opts?: pulumi.InvokeOptions): Promise<GetFileDownloadUrlResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Mariadb/getFileDownloadUrl:getFileDownloadUrl", {
         "filePath": args.filePath,
         "instanceId": args.instanceId,
@@ -66,9 +65,25 @@ export interface GetFileDownloadUrlResult {
     readonly preSignedUrl: string;
     readonly resultOutputFile?: string;
 }
-
+/**
+ * Use this data source to query detailed information of mariadb fileDownloadUrl
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const fileDownloadUrl = tencentcloud.Mariadb.getFileDownloadUrl({
+ *     filePath: "/cos_backup/test.txt",
+ *     instanceId: "tdsql-9vqvls95",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getFileDownloadUrlOutput(args: GetFileDownloadUrlOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetFileDownloadUrlResult> {
-    return pulumi.output(args).apply(a => getFileDownloadUrl(a, opts))
+    return pulumi.output(args).apply((a: any) => getFileDownloadUrl(a, opts))
 }
 
 /**

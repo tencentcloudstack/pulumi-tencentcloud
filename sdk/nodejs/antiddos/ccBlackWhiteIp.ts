@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,11 +11,12 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const ccBlackWhiteIp = new tencentcloud.Antiddos.CcBlackWhiteIp("cc_black_white_ip", {
+ * const ccBlackWhiteIp = new tencentcloud.antiddos.CcBlackWhiteIp("ccBlackWhiteIp", {
  *     blackWhiteIp: {
  *         ip: "1.2.3.5",
  *         mask: 0,
@@ -26,13 +28,14 @@ import * as utilities from "../utilities";
  *     type: "black",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * antiddos cc_black_white_ip can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Antiddos/ccBlackWhiteIp:CcBlackWhiteIp cc_black_white_ip ${instanceId}#${policyId}#${instanceIp}#${domain}#${protocol}
+ * $ pulumi import tencentcloud:Antiddos/ccBlackWhiteIp:CcBlackWhiteIp cc_black_white_ip ${instanceId}#${policyId}#${instanceIp}#${domain}#${protocol}
  * ```
  */
 export class CcBlackWhiteIp extends pulumi.CustomResource {

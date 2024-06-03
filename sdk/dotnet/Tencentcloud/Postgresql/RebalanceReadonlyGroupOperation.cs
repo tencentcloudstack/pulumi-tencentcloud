@@ -15,37 +15,39 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var groupRebalance = new Tencentcloud.Postgresql.ReadonlyGroup("groupRebalance", new()
     ///     {
-    ///         var groupRebalance = new Tencentcloud.Postgresql.ReadonlyGroup("groupRebalance", new Tencentcloud.Postgresql.ReadonlyGroupArgs
-    ///         {
-    ///             MasterDbInstanceId = local.Pgsql_id,
-    ///             ProjectId = 0,
-    ///             VpcId = "vpc-86v957zb",
-    ///             SubnetId = "subnet-enm92y0m",
-    ///             ReplayLagEliminate = 1,
-    ///             ReplayLatencyEliminate = 1,
-    ///             MaxReplayLag = 100,
-    ///             MaxReplayLatency = 512,
-    ///             MinDelayEliminateReserve = 1,
-    ///         });
-    ///         var rebalanceReadonlyGroupOperation = new Tencentcloud.Postgresql.RebalanceReadonlyGroupOperation("rebalanceReadonlyGroupOperation", new Tencentcloud.Postgresql.RebalanceReadonlyGroupOperationArgs
-    ///         {
-    ///             ReadOnlyGroupId = groupRebalance.Id,
-    ///         });
-    ///     }
+    ///         MasterDbInstanceId = local.Pgsql_id,
+    ///         ProjectId = 0,
+    ///         VpcId = "vpc-86v957zb",
+    ///         SubnetId = "subnet-enm92y0m",
+    ///         ReplayLagEliminate = 1,
+    ///         ReplayLatencyEliminate = 1,
+    ///         MaxReplayLag = 100,
+    ///         MaxReplayLatency = 512,
+    ///         MinDelayEliminateReserve = 1,
+    ///     });
     /// 
-    /// }
+    ///     var rebalanceReadonlyGroupOperation = new Tencentcloud.Postgresql.RebalanceReadonlyGroupOperation("rebalanceReadonlyGroupOperation", new()
+    ///     {
+    ///         ReadOnlyGroupId = groupRebalance.Id,
+    ///     });
+    /// 
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Postgresql/rebalanceReadonlyGroupOperation:RebalanceReadonlyGroupOperation")]
-    public partial class RebalanceReadonlyGroupOperation : Pulumi.CustomResource
+    public partial class RebalanceReadonlyGroupOperation : global::Pulumi.CustomResource
     {
         /// <summary>
         /// readonly Group ID.
@@ -98,7 +100,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
         }
     }
 
-    public sealed class RebalanceReadonlyGroupOperationArgs : Pulumi.ResourceArgs
+    public sealed class RebalanceReadonlyGroupOperationArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// readonly Group ID.
@@ -109,9 +111,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
         public RebalanceReadonlyGroupOperationArgs()
         {
         }
+        public static new RebalanceReadonlyGroupOperationArgs Empty => new RebalanceReadonlyGroupOperationArgs();
     }
 
-    public sealed class RebalanceReadonlyGroupOperationState : Pulumi.ResourceArgs
+    public sealed class RebalanceReadonlyGroupOperationState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// readonly Group ID.
@@ -122,5 +125,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
         public RebalanceReadonlyGroupOperationState()
         {
         }
+        public static new RebalanceReadonlyGroupOperationState Empty => new RebalanceReadonlyGroupOperationState();
     }
 }

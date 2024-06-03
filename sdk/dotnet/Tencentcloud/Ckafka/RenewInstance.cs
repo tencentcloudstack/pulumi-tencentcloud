@@ -15,26 +15,27 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var renewCkafkaInstance = new Tencentcloud.Ckafka.RenewInstance("renewCkafkaInstance", new()
     ///     {
-    ///         var renewCkafkaInstance = new Tencentcloud.Ckafka.RenewInstance("renewCkafkaInstance", new Tencentcloud.Ckafka.RenewInstanceArgs
-    ///         {
-    ///             InstanceId = "InstanceId",
-    ///             TimeSpan = 1,
-    ///         });
-    ///     }
+    ///         InstanceId = "InstanceId",
+    ///         TimeSpan = 1,
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Ckafka/renewInstance:RenewInstance")]
-    public partial class RenewInstance : Pulumi.CustomResource
+    public partial class RenewInstance : global::Pulumi.CustomResource
     {
         /// <summary>
         /// instance id.
@@ -93,7 +94,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka
         }
     }
 
-    public sealed class RenewInstanceArgs : Pulumi.ResourceArgs
+    public sealed class RenewInstanceArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// instance id.
@@ -110,9 +111,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka
         public RenewInstanceArgs()
         {
         }
+        public static new RenewInstanceArgs Empty => new RenewInstanceArgs();
     }
 
-    public sealed class RenewInstanceState : Pulumi.ResourceArgs
+    public sealed class RenewInstanceState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// instance id.
@@ -129,5 +131,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka
         public RenewInstanceState()
         {
         }
+        public static new RenewInstanceState Empty => new RenewInstanceState();
     }
 }

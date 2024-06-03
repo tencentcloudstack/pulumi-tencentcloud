@@ -9,11 +9,12 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const foo = new tencentcloud.Gaap.Proxy("foo", {
+ * const foo = new tencentcloud.gaap.Proxy("foo", {
  *     accessRegion: "SouthChina",
  *     bandwidth: 10,
  *     concurrent: 2,
@@ -23,13 +24,14 @@ import * as utilities from "../utilities";
  *     },
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * GAAP proxy can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Gaap/proxy:Proxy tencentcloud_gaap_proxy.foo link-11112222
+ * $ pulumi import tencentcloud:Gaap/proxy:Proxy tencentcloud_gaap_proxy.foo link-11112222
  * ```
  */
 export class Proxy extends pulumi.CustomResource {

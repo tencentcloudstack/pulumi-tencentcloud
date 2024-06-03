@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,22 +11,21 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const functionAliases = pulumi.output(tencentcloud.Scf.getFunctionAliases({
+ * const functionAliases = tencentcloud.Scf.getFunctionAliases({
  *     functionName: "keep-1676351130",
  *     namespace: "default",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getFunctionAliases(args: GetFunctionAliasesArgs, opts?: pulumi.InvokeOptions): Promise<GetFunctionAliasesResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Scf/getFunctionAliases:getFunctionAliases", {
         "functionName": args.functionName,
         "functionVersion": args.functionVersion,
@@ -76,9 +76,25 @@ export interface GetFunctionAliasesResult {
     readonly namespace?: string;
     readonly resultOutputFile?: string;
 }
-
+/**
+ * Use this data source to query detailed information of scf functionAliases
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const functionAliases = tencentcloud.Scf.getFunctionAliases({
+ *     functionName: "keep-1676351130",
+ *     namespace: "default",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getFunctionAliasesOutput(args: GetFunctionAliasesOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetFunctionAliasesResult> {
-    return pulumi.output(args).apply(a => getFunctionAliases(a, opts))
+    return pulumi.output(args).apply((a: any) => getFunctionAliases(a, opts))
 }
 
 /**

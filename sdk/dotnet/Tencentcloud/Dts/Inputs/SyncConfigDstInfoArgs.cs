@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dts.Inputs
 {
 
-    public sealed class SyncConfigDstInfoArgs : Pulumi.ResourceArgs
+    public sealed class SyncConfigDstInfoArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// The account to which the instance belongs. This field is required if it is a cross-account instance. Note: This field may return null, indicating that no valid value can be obtained.
@@ -85,11 +85,21 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dts.Inputs
         [Input("ip")]
         public Input<string>? Ip { get; set; }
 
+        [Input("password")]
+        private Input<string>? _password;
+
         /// <summary>
         /// Password, required for instances that require username and password authentication for access. Note: This field may return null, indicating that no valid value can be obtained.
         /// </summary>
-        [Input("password")]
-        public Input<string>? Password { get; set; }
+        public Input<string>? Password
+        {
+            get => _password;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _password = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
 
         /// <summary>
         /// Instance port, this item is required when the access type is non-cdb. Note: This field may return null, indicating that no valid value can be obtained.
@@ -172,5 +182,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dts.Inputs
         public SyncConfigDstInfoArgs()
         {
         }
+        public static new SyncConfigDstInfoArgs Empty => new SyncConfigDstInfoArgs();
     }
 }

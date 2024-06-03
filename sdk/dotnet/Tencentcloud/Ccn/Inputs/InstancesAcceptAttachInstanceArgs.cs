@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ccn.Inputs
 {
 
-    public sealed class InstancesAcceptAttachInstanceArgs : Pulumi.ResourceArgs
+    public sealed class InstancesAcceptAttachInstanceArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Description.
@@ -46,5 +46,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ccn.Inputs
         public InstancesAcceptAttachInstanceArgs()
         {
         }
+        public static new InstancesAcceptAttachInstanceArgs Empty => new InstancesAcceptAttachInstanceArgs();
     }
 }

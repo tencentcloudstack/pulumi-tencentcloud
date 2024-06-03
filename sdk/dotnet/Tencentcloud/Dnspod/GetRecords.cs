@@ -15,128 +15,126 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dnspod
         /// <summary>
         /// Use this data source to query dnspod record list.
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var record = Tencentcloud.Dnspod.GetRecords.Invoke(new()
         ///     {
-        ///         var record = Output.Create(Tencentcloud.Dnspod.GetRecords.InvokeAsync(new Tencentcloud.Dnspod.GetRecordsArgs
-        ///         {
-        ///             Domain = "example.com",
-        ///             Subdomain = "www",
-        ///         }));
-        ///         this.Result = record.Apply(record =&gt; record.Results);
-        ///     }
+        ///         Domain = "example.com",
+        ///         Subdomain = "www",
+        ///     });
         /// 
-        ///     [Output("result")]
-        ///     public Output&lt;string&gt; Result { get; set; }
-        /// }
+        ///     return new Dictionary&lt;string, object?&gt;
+        ///     {
+        ///         ["result"] = record.Apply(getRecordsResult =&gt; getRecordsResult.Results),
+        ///     };
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% example %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
+        /// 
         /// ### Use verbose filter
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var record = Tencentcloud.Dnspod.GetRecords.Invoke(new()
         ///     {
-        ///         var record = Output.Create(Tencentcloud.Dnspod.GetRecords.InvokeAsync(new Tencentcloud.Dnspod.GetRecordsArgs
-        ///         {
-        ///             Domain = "example.com",
-        ///             Subdomain = "www",
-        ///             Limit = 100,
-        ///             RecordType = "TXT",
-        ///             SortField = "updated_on",
-        ///             SortType = "DESC",
-        ///         }));
-        ///         this.Result = record.Apply(record =&gt; record.Results);
-        ///     }
+        ///         Domain = "example.com",
+        ///         Subdomain = "www",
+        ///         Limit = 100,
+        ///         RecordType = "TXT",
+        ///         SortField = "updated_on",
+        ///         SortType = "DESC",
+        ///     });
         /// 
-        ///     [Output("result")]
-        ///     public Output&lt;string&gt; Result { get; set; }
-        /// }
+        ///     return new Dictionary&lt;string, object?&gt;
+        ///     {
+        ///         ["result"] = record.Apply(getRecordsResult =&gt; getRecordsResult.Results),
+        ///     };
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetRecordsResult> InvokeAsync(GetRecordsArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetRecordsResult>("tencentcloud:Dnspod/getRecords:getRecords", args ?? new GetRecordsArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetRecordsResult>("tencentcloud:Dnspod/getRecords:getRecords", args ?? new GetRecordsArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query dnspod record list.
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var record = Tencentcloud.Dnspod.GetRecords.Invoke(new()
         ///     {
-        ///         var record = Output.Create(Tencentcloud.Dnspod.GetRecords.InvokeAsync(new Tencentcloud.Dnspod.GetRecordsArgs
-        ///         {
-        ///             Domain = "example.com",
-        ///             Subdomain = "www",
-        ///         }));
-        ///         this.Result = record.Apply(record =&gt; record.Results);
-        ///     }
+        ///         Domain = "example.com",
+        ///         Subdomain = "www",
+        ///     });
         /// 
-        ///     [Output("result")]
-        ///     public Output&lt;string&gt; Result { get; set; }
-        /// }
+        ///     return new Dictionary&lt;string, object?&gt;
+        ///     {
+        ///         ["result"] = record.Apply(getRecordsResult =&gt; getRecordsResult.Results),
+        ///     };
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% example %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
+        /// 
         /// ### Use verbose filter
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var record = Tencentcloud.Dnspod.GetRecords.Invoke(new()
         ///     {
-        ///         var record = Output.Create(Tencentcloud.Dnspod.GetRecords.InvokeAsync(new Tencentcloud.Dnspod.GetRecordsArgs
-        ///         {
-        ///             Domain = "example.com",
-        ///             Subdomain = "www",
-        ///             Limit = 100,
-        ///             RecordType = "TXT",
-        ///             SortField = "updated_on",
-        ///             SortType = "DESC",
-        ///         }));
-        ///         this.Result = record.Apply(record =&gt; record.Results);
-        ///     }
+        ///         Domain = "example.com",
+        ///         Subdomain = "www",
+        ///         Limit = 100,
+        ///         RecordType = "TXT",
+        ///         SortField = "updated_on",
+        ///         SortType = "DESC",
+        ///     });
         /// 
-        ///     [Output("result")]
-        ///     public Output&lt;string&gt; Result { get; set; }
-        /// }
+        ///     return new Dictionary&lt;string, object?&gt;
+        ///     {
+        ///         ["result"] = record.Apply(getRecordsResult =&gt; getRecordsResult.Results),
+        ///     };
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetRecordsResult> Invoke(GetRecordsInvokeArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetRecordsResult>("tencentcloud:Dnspod/getRecords:getRecords", args ?? new GetRecordsInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetRecordsResult>("tencentcloud:Dnspod/getRecords:getRecords", args ?? new GetRecordsInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetRecordsArgs : Pulumi.InvokeArgs
+    public sealed class GetRecordsArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// The domain for which DNS records are to be obtained.
@@ -219,9 +217,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dnspod
         public GetRecordsArgs()
         {
         }
+        public static new GetRecordsArgs Empty => new GetRecordsArgs();
     }
 
-    public sealed class GetRecordsInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetRecordsInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// The domain for which DNS records are to be obtained.
@@ -304,6 +303,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dnspod
         public GetRecordsInvokeArgs()
         {
         }
+        public static new GetRecordsInvokeArgs Empty => new GetRecordsInvokeArgs();
     }
 
 

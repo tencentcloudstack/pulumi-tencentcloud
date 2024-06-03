@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Wedata.Inputs
 {
 
-    public sealed class DqRuleFieldConfigGetArgs : Pulumi.ResourceArgs
+    public sealed class DqRuleFieldConfigGetArgs : global::Pulumi.ResourceArgs
     {
         [Input("tableConfigs")]
         private InputList<Inputs.DqRuleFieldConfigTableConfigGetArgs>? _tableConfigs;
@@ -40,5 +40,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Wedata.Inputs
         public DqRuleFieldConfigGetArgs()
         {
         }
+        public static new DqRuleFieldConfigGetArgs Empty => new DqRuleFieldConfigGetArgs();
     }
 }

@@ -14,66 +14,72 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ccn
     /// Provides a resource to limit CCN bandwidth.
     /// 
     /// ## Example Usage
+    /// 
     /// ### Set the upper limit of regional outbound bandwidth
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var config = new Config();
+    ///     var otherRegion1 = config.Get("otherRegion1") ?? "ap-shanghai";
+    ///     var main = new Tencentcloud.Ccn.Instance("main", new()
     ///     {
-    ///         var config = new Config();
-    ///         var otherRegion1 = config.Get("otherRegion1") ?? "ap-shanghai";
-    ///         var main = new Tencentcloud.Ccn.Instance("main", new Tencentcloud.Ccn.InstanceArgs
-    ///         {
-    ///             Description = "ci-temp-test-ccn-des",
-    ///             Qos = "AG",
-    ///         });
-    ///         var limit1 = new Tencentcloud.Ccn.BandwidthLimit("limit1", new Tencentcloud.Ccn.BandwidthLimitArgs
-    ///         {
-    ///             CcnId = main.Id,
-    ///             Region = otherRegion1,
-    ///             BandwidthLimit = 500,
-    ///         });
-    ///     }
+    ///         Description = "ci-temp-test-ccn-des",
+    ///         Qos = "AG",
+    ///     });
     /// 
-    /// }
+    ///     var limit1 = new Tencentcloud.Ccn.BandwidthLimit("limit1", new()
+    ///     {
+    ///         CcnId = main.Id,
+    ///         Region = otherRegion1,
+    ///         CcnBandwidthLimit = 500,
+    ///     });
+    /// 
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
+    /// 
     /// ### Set the upper limit between regions
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var config = new Config();
+    ///     var otherRegion1 = config.Get("otherRegion1") ?? "ap-shanghai";
+    ///     var otherRegion2 = config.Get("otherRegion2") ?? "ap-nanjing";
+    ///     var main = new Tencentcloud.Ccn.Instance("main", new()
     ///     {
-    ///         var config = new Config();
-    ///         var otherRegion1 = config.Get("otherRegion1") ?? "ap-shanghai";
-    ///         var otherRegion2 = config.Get("otherRegion2") ?? "ap-nanjing";
-    ///         var main = new Tencentcloud.Ccn.Instance("main", new Tencentcloud.Ccn.InstanceArgs
-    ///         {
-    ///             Description = "ci-temp-test-ccn-des",
-    ///             Qos = "AG",
-    ///             BandwidthLimitType = "INTER_REGION_LIMIT",
-    ///         });
-    ///         var limit1 = new Tencentcloud.Ccn.BandwidthLimit("limit1", new Tencentcloud.Ccn.BandwidthLimitArgs
-    ///         {
-    ///             CcnId = main.Id,
-    ///             Region = otherRegion1,
-    ///             DstRegion = otherRegion2,
-    ///             BandwidthLimit = 100,
-    ///         });
-    ///     }
+    ///         Description = "ci-temp-test-ccn-des",
+    ///         Qos = "AG",
+    ///         BandwidthLimitType = "INTER_REGION_LIMIT",
+    ///     });
     /// 
-    /// }
+    ///     var limit1 = new Tencentcloud.Ccn.BandwidthLimit("limit1", new()
+    ///     {
+    ///         CcnId = main.Id,
+    ///         Region = otherRegion1,
+    ///         DstRegion = otherRegion2,
+    ///         CcnBandwidthLimit = 100,
+    ///     });
+    /// 
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Ccn/bandwidthLimit:BandwidthLimit")]
-    public partial class BandwidthLimit : Pulumi.CustomResource
+    public partial class BandwidthLimit : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Limitation of bandwidth. Default is `0`.
@@ -144,7 +150,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ccn
         }
     }
 
-    public sealed class BandwidthLimitArgs : Pulumi.ResourceArgs
+    public sealed class BandwidthLimitArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Limitation of bandwidth. Default is `0`.
@@ -173,9 +179,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ccn
         public BandwidthLimitArgs()
         {
         }
+        public static new BandwidthLimitArgs Empty => new BandwidthLimitArgs();
     }
 
-    public sealed class BandwidthLimitState : Pulumi.ResourceArgs
+    public sealed class BandwidthLimitState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Limitation of bandwidth. Default is `0`.
@@ -204,5 +211,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ccn
         public BandwidthLimitState()
         {
         }
+        public static new BandwidthLimitState Empty => new BandwidthLimitState();
     }
 }

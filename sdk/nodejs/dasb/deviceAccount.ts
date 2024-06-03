@@ -9,22 +9,29 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = new tencentcloud.Dasb.DeviceAccount("example", {
+ * const exampleDevice = new tencentcloud.dasb.Device("exampleDevice", {
+ *     osName: "Linux",
+ *     ip: "192.168.0.1",
+ *     port: 80,
+ * });
+ * const exampleDeviceAccount = new tencentcloud.dasb.DeviceAccount("exampleDeviceAccount", {
+ *     deviceId: exampleDevice.id,
  *     account: "root",
- *     deviceId: 100,
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * dasb device_account can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Dasb/deviceAccount:DeviceAccount example 11
+ * $ pulumi import tencentcloud:Dasb/deviceAccount:DeviceAccount example 11
  * ```
  */
 export class DeviceAccount extends pulumi.CustomResource {

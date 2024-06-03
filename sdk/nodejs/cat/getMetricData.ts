@@ -9,11 +9,12 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const metricData = pulumi.output(tencentcloud.Cat.getMetricData({
+ * const metricData = tencentcloud.Cat.getMetricData({
  *     analyzeTaskType: "AnalyzeTaskType_Network",
  *     field: "avg(\"ping_time\")",
  *     filters: [
@@ -21,15 +22,13 @@ import * as utilities from "../utilities";
  *         "time >= now()-1h",
  *     ],
  *     metricType: "gauge",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getMetricData(args: GetMetricDataArgs, opts?: pulumi.InvokeOptions): Promise<GetMetricDataResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Cat/getMetricData:getMetricData", {
         "analyzeTaskType": args.analyzeTaskType,
         "field": args.field,
@@ -95,9 +94,30 @@ export interface GetMetricDataResult {
     readonly metricType: string;
     readonly resultOutputFile?: string;
 }
-
+/**
+ * Use this data source to query detailed information of cat metricData
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const metricData = tencentcloud.Cat.getMetricData({
+ *     analyzeTaskType: "AnalyzeTaskType_Network",
+ *     field: "avg(\"ping_time\")",
+ *     filters: [
+ *         "\"host\" = 'www.qq.com'",
+ *         "time >= now()-1h",
+ *     ],
+ *     metricType: "gauge",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getMetricDataOutput(args: GetMetricDataOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetMetricDataResult> {
-    return pulumi.output(args).apply(a => getMetricData(a, opts))
+    return pulumi.output(args).apply((a: any) => getMetricData(a, opts))
 }
 
 /**

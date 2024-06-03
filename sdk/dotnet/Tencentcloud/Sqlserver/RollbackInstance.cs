@@ -15,42 +15,43 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var rollbackInstance = new Tencentcloud.Sqlserver.RollbackInstance("rollbackInstance", new()
     ///     {
-    ///         var rollbackInstance = new Tencentcloud.Sqlserver.RollbackInstance("rollbackInstance", new Tencentcloud.Sqlserver.RollbackInstanceArgs
+    ///         InstanceId = "mssql-qelbzgwf",
+    ///         RenameRestores = new[]
     ///         {
-    ///             InstanceId = "mssql-qelbzgwf",
-    ///             RenameRestores = 
+    ///             new Tencentcloud.Sqlserver.Inputs.RollbackInstanceRenameRestoreArgs
     ///             {
-    ///                 new Tencentcloud.Sqlserver.Inputs.RollbackInstanceRenameRestoreArgs
-    ///                 {
-    ///                     NewName = "rollback_pubsub_db3",
-    ///                     OldName = "keep_pubsub_db2",
-    ///                 },
+    ///                 NewName = "rollback_pubsub_db3",
+    ///                 OldName = "keep_pubsub_db2",
     ///             },
-    ///             Time = "2023-05-23 01:00:00",
-    ///         });
-    ///     }
+    ///         },
+    ///         Time = "2023-05-23 01:00:00",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// sqlserver rollback_instance can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Sqlserver/rollbackInstance:RollbackInstance rollback_instance mssql-qelbzgwf#2023-05-23 01:00:00#keep_pubsub_db2#rollback_pubsub_db3
+    /// $ pulumi import tencentcloud:Sqlserver/rollbackInstance:RollbackInstance rollback_instance mssql-qelbzgwf#2023-05-23 01:00:00#keep_pubsub_db2#rollback_pubsub_db3
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Sqlserver/rollbackInstance:RollbackInstance")]
-    public partial class RollbackInstance : Pulumi.CustomResource
+    public partial class RollbackInstance : global::Pulumi.CustomResource
     {
         /// <summary>
         /// TDE encryption, `enable` encrypted, `disable` unencrypted.
@@ -121,7 +122,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
         }
     }
 
-    public sealed class RollbackInstanceArgs : Pulumi.ResourceArgs
+    public sealed class RollbackInstanceArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Instance ID.
@@ -150,9 +151,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
         public RollbackInstanceArgs()
         {
         }
+        public static new RollbackInstanceArgs Empty => new RollbackInstanceArgs();
     }
 
-    public sealed class RollbackInstanceState : Pulumi.ResourceArgs
+    public sealed class RollbackInstanceState : global::Pulumi.ResourceArgs
     {
         [Input("encryptions")]
         private InputList<Inputs.RollbackInstanceEncryptionGetArgs>? _encryptions;
@@ -193,5 +195,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
         public RollbackInstanceState()
         {
         }
+        public static new RollbackInstanceState Empty => new RollbackInstanceState();
     }
 }

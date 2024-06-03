@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps.Inputs
 {
 
-    public sealed class ScheduleTaskNotifyConfigGetArgs : Pulumi.ResourceArgs
+    public sealed class ScheduleTaskNotifyConfigGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// The AWS SQS queue. This parameter is required if `NotifyType` is `AWS-SQS`.Note: This field may return null, indicating that no valid values can be obtained.
@@ -64,5 +64,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps.Inputs
         public ScheduleTaskNotifyConfigGetArgs()
         {
         }
+        public static new ScheduleTaskNotifyConfigGetArgs Empty => new ScheduleTaskNotifyConfigGetArgs();
     }
 }

@@ -13,14 +13,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Rum
     public static class GetLogStatsLogList
     {
         public static Task<GetLogStatsLogListResult> InvokeAsync(GetLogStatsLogListArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetLogStatsLogListResult>("tencentcloud:Rum/getLogStatsLogList:getLogStatsLogList", args ?? new GetLogStatsLogListArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetLogStatsLogListResult>("tencentcloud:Rum/getLogStatsLogList:getLogStatsLogList", args ?? new GetLogStatsLogListArgs(), options.WithDefaults());
 
         public static Output<GetLogStatsLogListResult> Invoke(GetLogStatsLogListInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetLogStatsLogListResult>("tencentcloud:Rum/getLogStatsLogList:getLogStatsLogList", args ?? new GetLogStatsLogListInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetLogStatsLogListResult>("tencentcloud:Rum/getLogStatsLogList:getLogStatsLogList", args ?? new GetLogStatsLogListInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetLogStatsLogListArgs : Pulumi.InvokeArgs
+    public sealed class GetLogStatsLogListArgs : global::Pulumi.InvokeArgs
     {
         [Input("endTime", required: true)]
         public string EndTime { get; set; } = null!;
@@ -40,9 +40,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Rum
         public GetLogStatsLogListArgs()
         {
         }
+        public static new GetLogStatsLogListArgs Empty => new GetLogStatsLogListArgs();
     }
 
-    public sealed class GetLogStatsLogListInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetLogStatsLogListInvokeArgs : global::Pulumi.InvokeArgs
     {
         [Input("endTime", required: true)]
         public Input<string> EndTime { get; set; } = null!;
@@ -62,6 +63,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Rum
         public GetLogStatsLogListInvokeArgs()
         {
         }
+        public static new GetLogStatsLogListInvokeArgs Empty => new GetLogStatsLogListInvokeArgs();
     }
 
 

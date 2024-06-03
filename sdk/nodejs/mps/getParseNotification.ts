@@ -9,21 +9,20 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const parseNotification = pulumi.output(tencentcloud.Mps.getParseNotification({
+ * const parseNotification = tencentcloud.Mps.getParseNotification({
  *     content: "your_content",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getParseNotification(args: GetParseNotificationArgs, opts?: pulumi.InvokeOptions): Promise<GetParseNotificationResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Mps/getParseNotification:getParseNotification", {
         "content": args.content,
         "resultOutputFile": args.resultOutputFile,
@@ -55,9 +54,24 @@ export interface GetParseNotificationResult {
     readonly id: string;
     readonly resultOutputFile?: string;
 }
-
+/**
+ * Use this data source to query detailed information of mps parseNotification
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const parseNotification = tencentcloud.Mps.getParseNotification({
+ *     content: "your_content",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getParseNotificationOutput(args: GetParseNotificationOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetParseNotificationResult> {
-    return pulumi.output(args).apply(a => getParseNotification(a, opts))
+    return pulumi.output(args).apply((a: any) => getParseNotification(a, opts))
 }
 
 /**

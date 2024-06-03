@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,20 +11,19 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const layers = pulumi.output(tencentcloud.Scf.getLayers());
+ * const layers = tencentcloud.Scf.getLayers({});
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getLayers(args?: GetLayersArgs, opts?: pulumi.InvokeOptions): Promise<GetLayersResult> {
     args = args || {};
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Scf/getLayers:getLayers", {
         "compatibleRuntime": args.compatibleRuntime,
         "resultOutputFile": args.resultOutputFile,
@@ -65,9 +65,22 @@ export interface GetLayersResult {
     readonly resultOutputFile?: string;
     readonly searchKey?: string;
 }
-
+/**
+ * Use this data source to query detailed information of scf layers
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const layers = tencentcloud.Scf.getLayers({});
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getLayersOutput(args?: GetLayersOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetLayersResult> {
-    return pulumi.output(args).apply(a => getLayers(a, opts))
+    return pulumi.output(args).apply((a: any) => getLayers(a, opts))
 }
 
 /**

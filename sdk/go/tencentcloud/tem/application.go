@@ -7,43 +7,49 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a tem application
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tem"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tem"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Tem.NewApplication(ctx, "application", &Tem.ApplicationArgs{
-// 			ApplicationName: pulumi.String("demo"),
-// 			CodingLanguage:  pulumi.String("JAVA"),
-// 			Description:     pulumi.String("demo for test"),
-// 			RepoName:        pulumi.String("qcloud/nginx"),
-// 			RepoServer:      pulumi.String("ccr.ccs.tencentyun.com"),
-// 			RepoType:        pulumi.Int(2),
-// 			Tags: pulumi.AnyMap{
-// 				"created": pulumi.Any("terraform"),
-// 			},
-// 			UseDefaultImageService: pulumi.Int(0),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Tem.NewApplication(ctx, "application", &Tem.ApplicationArgs{
+//				ApplicationName: pulumi.String("demo"),
+//				CodingLanguage:  pulumi.String("JAVA"),
+//				Description:     pulumi.String("demo for test"),
+//				RepoName:        pulumi.String("qcloud/nginx"),
+//				RepoServer:      pulumi.String("ccr.ccs.tencentyun.com"),
+//				RepoType:        pulumi.Int(2),
+//				Tags: pulumi.Map{
+//					"created": pulumi.Any("terraform"),
+//				},
+//				UseDefaultImageService: pulumi.Int(0),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 type Application struct {
 	pulumi.CustomResourceState
 
@@ -83,7 +89,7 @@ func NewApplication(ctx *pulumi.Context,
 	if args.Description == nil {
 		return nil, errors.New("invalid value for required argument 'Description'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource Application
 	err := ctx.RegisterResource("tencentcloud:Tem/application:Application", name, args, &resource, opts...)
 	if err != nil {
@@ -220,7 +226,7 @@ func (i *Application) ToApplicationOutputWithContext(ctx context.Context) Applic
 // ApplicationArrayInput is an input type that accepts ApplicationArray and ApplicationArrayOutput values.
 // You can construct a concrete instance of `ApplicationArrayInput` via:
 //
-//          ApplicationArray{ ApplicationArgs{...} }
+//	ApplicationArray{ ApplicationArgs{...} }
 type ApplicationArrayInput interface {
 	pulumi.Input
 
@@ -245,7 +251,7 @@ func (i ApplicationArray) ToApplicationArrayOutputWithContext(ctx context.Contex
 // ApplicationMapInput is an input type that accepts ApplicationMap and ApplicationMapOutput values.
 // You can construct a concrete instance of `ApplicationMapInput` via:
 //
-//          ApplicationMap{ "key": ApplicationArgs{...} }
+//	ApplicationMap{ "key": ApplicationArgs{...} }
 type ApplicationMapInput interface {
 	pulumi.Input
 

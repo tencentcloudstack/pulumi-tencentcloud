@@ -10,24 +10,29 @@ import * as utilities from "../utilities";
  * > **NOTE:** Region only supports `ap-guangzhou` and `ap-seoul`.
  *
  * ## Example Usage
+ *
  * ### Create a basic waf premium clb instance
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = new tencentcloud.Waf.ClbInstance("example", {
+ * const example = new tencentcloud.waf.ClbInstance("example", {
  *     goodsCategory: "premium_clb",
  *     instanceName: "tf-example-clb-waf",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
+ *
  * ### Create a complete waf ultimateClb instance
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = new tencentcloud.Waf.ClbInstance("example", {
+ * const example = new tencentcloud.waf.ClbInstance("example", {
  *     apiSecurity: 1,
  *     autoRenewFlag: 1,
  *     botManagement: 1,
@@ -38,13 +43,16 @@ import * as utilities from "../utilities";
  *     timeUnit: "m",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
+ *
  * ### Set waf ultimateClb instance qps limit
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = new tencentcloud.Waf.ClbInstance("example", {
+ * const example = new tencentcloud.waf.ClbInstance("example", {
  *     apiSecurity: 1,
  *     autoRenewFlag: 1,
  *     botManagement: 1,
@@ -56,6 +64,7 @@ import * as utilities from "../utilities";
  *     timeUnit: "m",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export class ClbInstance extends pulumi.CustomResource {
     /**

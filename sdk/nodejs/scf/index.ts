@@ -5,45 +5,131 @@ import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
 // Export members:
-export * from "./function";
-export * from "./functionAlias";
-export * from "./functionEventInvokeConfig";
-export * from "./functionVersion";
-export * from "./getAccountInfo";
-export * from "./getAsyncEventManagement";
-export * from "./getAsyncEventStatus";
-export * from "./getFunctionAddress";
-export * from "./getFunctionAliases";
-export * from "./getFunctionVersions";
-export * from "./getFunctions";
-export * from "./getLayerVersions";
-export * from "./getLayers";
-export * from "./getLogs";
-export * from "./getNamespaces";
-export * from "./getRequestStatus";
-export * from "./getTriggers";
-export * from "./invokeFunction";
-export * from "./layer";
-export * from "./namespace";
-export * from "./provisionedConcurrencyConfig";
-export * from "./reservedConcurrencyConfig";
-export * from "./syncInvokeFunction";
-export * from "./terminateAsyncEvent";
-export * from "./triggerConfig";
+export { FunctionArgs, FunctionState } from "./function";
+export type Function = import("./function").Function;
+export const Function: typeof import("./function").Function = null as any;
+utilities.lazyLoad(exports, ["Function"], () => require("./function"));
 
-// Import resources to register:
-import { Function } from "./function";
-import { FunctionAlias } from "./functionAlias";
-import { FunctionEventInvokeConfig } from "./functionEventInvokeConfig";
-import { FunctionVersion } from "./functionVersion";
-import { InvokeFunction } from "./invokeFunction";
-import { Layer } from "./layer";
-import { Namespace } from "./namespace";
-import { ProvisionedConcurrencyConfig } from "./provisionedConcurrencyConfig";
-import { ReservedConcurrencyConfig } from "./reservedConcurrencyConfig";
-import { SyncInvokeFunction } from "./syncInvokeFunction";
-import { TerminateAsyncEvent } from "./terminateAsyncEvent";
-import { TriggerConfig } from "./triggerConfig";
+export { FunctionAliasArgs, FunctionAliasState } from "./functionAlias";
+export type FunctionAlias = import("./functionAlias").FunctionAlias;
+export const FunctionAlias: typeof import("./functionAlias").FunctionAlias = null as any;
+utilities.lazyLoad(exports, ["FunctionAlias"], () => require("./functionAlias"));
+
+export { FunctionEventInvokeConfigArgs, FunctionEventInvokeConfigState } from "./functionEventInvokeConfig";
+export type FunctionEventInvokeConfig = import("./functionEventInvokeConfig").FunctionEventInvokeConfig;
+export const FunctionEventInvokeConfig: typeof import("./functionEventInvokeConfig").FunctionEventInvokeConfig = null as any;
+utilities.lazyLoad(exports, ["FunctionEventInvokeConfig"], () => require("./functionEventInvokeConfig"));
+
+export { FunctionVersionArgs, FunctionVersionState } from "./functionVersion";
+export type FunctionVersion = import("./functionVersion").FunctionVersion;
+export const FunctionVersion: typeof import("./functionVersion").FunctionVersion = null as any;
+utilities.lazyLoad(exports, ["FunctionVersion"], () => require("./functionVersion"));
+
+export { GetAccountInfoArgs, GetAccountInfoResult, GetAccountInfoOutputArgs } from "./getAccountInfo";
+export const getAccountInfo: typeof import("./getAccountInfo").getAccountInfo = null as any;
+export const getAccountInfoOutput: typeof import("./getAccountInfo").getAccountInfoOutput = null as any;
+utilities.lazyLoad(exports, ["getAccountInfo","getAccountInfoOutput"], () => require("./getAccountInfo"));
+
+export { GetAsyncEventManagementArgs, GetAsyncEventManagementResult, GetAsyncEventManagementOutputArgs } from "./getAsyncEventManagement";
+export const getAsyncEventManagement: typeof import("./getAsyncEventManagement").getAsyncEventManagement = null as any;
+export const getAsyncEventManagementOutput: typeof import("./getAsyncEventManagement").getAsyncEventManagementOutput = null as any;
+utilities.lazyLoad(exports, ["getAsyncEventManagement","getAsyncEventManagementOutput"], () => require("./getAsyncEventManagement"));
+
+export { GetAsyncEventStatusArgs, GetAsyncEventStatusResult, GetAsyncEventStatusOutputArgs } from "./getAsyncEventStatus";
+export const getAsyncEventStatus: typeof import("./getAsyncEventStatus").getAsyncEventStatus = null as any;
+export const getAsyncEventStatusOutput: typeof import("./getAsyncEventStatus").getAsyncEventStatusOutput = null as any;
+utilities.lazyLoad(exports, ["getAsyncEventStatus","getAsyncEventStatusOutput"], () => require("./getAsyncEventStatus"));
+
+export { GetFunctionAddressArgs, GetFunctionAddressResult, GetFunctionAddressOutputArgs } from "./getFunctionAddress";
+export const getFunctionAddress: typeof import("./getFunctionAddress").getFunctionAddress = null as any;
+export const getFunctionAddressOutput: typeof import("./getFunctionAddress").getFunctionAddressOutput = null as any;
+utilities.lazyLoad(exports, ["getFunctionAddress","getFunctionAddressOutput"], () => require("./getFunctionAddress"));
+
+export { GetFunctionAliasesArgs, GetFunctionAliasesResult, GetFunctionAliasesOutputArgs } from "./getFunctionAliases";
+export const getFunctionAliases: typeof import("./getFunctionAliases").getFunctionAliases = null as any;
+export const getFunctionAliasesOutput: typeof import("./getFunctionAliases").getFunctionAliasesOutput = null as any;
+utilities.lazyLoad(exports, ["getFunctionAliases","getFunctionAliasesOutput"], () => require("./getFunctionAliases"));
+
+export { GetFunctionVersionsArgs, GetFunctionVersionsResult, GetFunctionVersionsOutputArgs } from "./getFunctionVersions";
+export const getFunctionVersions: typeof import("./getFunctionVersions").getFunctionVersions = null as any;
+export const getFunctionVersionsOutput: typeof import("./getFunctionVersions").getFunctionVersionsOutput = null as any;
+utilities.lazyLoad(exports, ["getFunctionVersions","getFunctionVersionsOutput"], () => require("./getFunctionVersions"));
+
+export { GetFunctionsArgs, GetFunctionsResult, GetFunctionsOutputArgs } from "./getFunctions";
+export const getFunctions: typeof import("./getFunctions").getFunctions = null as any;
+export const getFunctionsOutput: typeof import("./getFunctions").getFunctionsOutput = null as any;
+utilities.lazyLoad(exports, ["getFunctions","getFunctionsOutput"], () => require("./getFunctions"));
+
+export { GetLayerVersionsArgs, GetLayerVersionsResult, GetLayerVersionsOutputArgs } from "./getLayerVersions";
+export const getLayerVersions: typeof import("./getLayerVersions").getLayerVersions = null as any;
+export const getLayerVersionsOutput: typeof import("./getLayerVersions").getLayerVersionsOutput = null as any;
+utilities.lazyLoad(exports, ["getLayerVersions","getLayerVersionsOutput"], () => require("./getLayerVersions"));
+
+export { GetLayersArgs, GetLayersResult, GetLayersOutputArgs } from "./getLayers";
+export const getLayers: typeof import("./getLayers").getLayers = null as any;
+export const getLayersOutput: typeof import("./getLayers").getLayersOutput = null as any;
+utilities.lazyLoad(exports, ["getLayers","getLayersOutput"], () => require("./getLayers"));
+
+export { GetLogsArgs, GetLogsResult, GetLogsOutputArgs } from "./getLogs";
+export const getLogs: typeof import("./getLogs").getLogs = null as any;
+export const getLogsOutput: typeof import("./getLogs").getLogsOutput = null as any;
+utilities.lazyLoad(exports, ["getLogs","getLogsOutput"], () => require("./getLogs"));
+
+export { GetNamespacesArgs, GetNamespacesResult, GetNamespacesOutputArgs } from "./getNamespaces";
+export const getNamespaces: typeof import("./getNamespaces").getNamespaces = null as any;
+export const getNamespacesOutput: typeof import("./getNamespaces").getNamespacesOutput = null as any;
+utilities.lazyLoad(exports, ["getNamespaces","getNamespacesOutput"], () => require("./getNamespaces"));
+
+export { GetRequestStatusArgs, GetRequestStatusResult, GetRequestStatusOutputArgs } from "./getRequestStatus";
+export const getRequestStatus: typeof import("./getRequestStatus").getRequestStatus = null as any;
+export const getRequestStatusOutput: typeof import("./getRequestStatus").getRequestStatusOutput = null as any;
+utilities.lazyLoad(exports, ["getRequestStatus","getRequestStatusOutput"], () => require("./getRequestStatus"));
+
+export { GetTriggersArgs, GetTriggersResult, GetTriggersOutputArgs } from "./getTriggers";
+export const getTriggers: typeof import("./getTriggers").getTriggers = null as any;
+export const getTriggersOutput: typeof import("./getTriggers").getTriggersOutput = null as any;
+utilities.lazyLoad(exports, ["getTriggers","getTriggersOutput"], () => require("./getTriggers"));
+
+export { InvokeFunctionArgs, InvokeFunctionState } from "./invokeFunction";
+export type InvokeFunction = import("./invokeFunction").InvokeFunction;
+export const InvokeFunction: typeof import("./invokeFunction").InvokeFunction = null as any;
+utilities.lazyLoad(exports, ["InvokeFunction"], () => require("./invokeFunction"));
+
+export { LayerArgs, LayerState } from "./layer";
+export type Layer = import("./layer").Layer;
+export const Layer: typeof import("./layer").Layer = null as any;
+utilities.lazyLoad(exports, ["Layer"], () => require("./layer"));
+
+export { NamespaceArgs, NamespaceState } from "./namespace";
+export type Namespace = import("./namespace").Namespace;
+export const Namespace: typeof import("./namespace").Namespace = null as any;
+utilities.lazyLoad(exports, ["Namespace"], () => require("./namespace"));
+
+export { ProvisionedConcurrencyConfigArgs, ProvisionedConcurrencyConfigState } from "./provisionedConcurrencyConfig";
+export type ProvisionedConcurrencyConfig = import("./provisionedConcurrencyConfig").ProvisionedConcurrencyConfig;
+export const ProvisionedConcurrencyConfig: typeof import("./provisionedConcurrencyConfig").ProvisionedConcurrencyConfig = null as any;
+utilities.lazyLoad(exports, ["ProvisionedConcurrencyConfig"], () => require("./provisionedConcurrencyConfig"));
+
+export { ReservedConcurrencyConfigArgs, ReservedConcurrencyConfigState } from "./reservedConcurrencyConfig";
+export type ReservedConcurrencyConfig = import("./reservedConcurrencyConfig").ReservedConcurrencyConfig;
+export const ReservedConcurrencyConfig: typeof import("./reservedConcurrencyConfig").ReservedConcurrencyConfig = null as any;
+utilities.lazyLoad(exports, ["ReservedConcurrencyConfig"], () => require("./reservedConcurrencyConfig"));
+
+export { SyncInvokeFunctionArgs, SyncInvokeFunctionState } from "./syncInvokeFunction";
+export type SyncInvokeFunction = import("./syncInvokeFunction").SyncInvokeFunction;
+export const SyncInvokeFunction: typeof import("./syncInvokeFunction").SyncInvokeFunction = null as any;
+utilities.lazyLoad(exports, ["SyncInvokeFunction"], () => require("./syncInvokeFunction"));
+
+export { TerminateAsyncEventArgs, TerminateAsyncEventState } from "./terminateAsyncEvent";
+export type TerminateAsyncEvent = import("./terminateAsyncEvent").TerminateAsyncEvent;
+export const TerminateAsyncEvent: typeof import("./terminateAsyncEvent").TerminateAsyncEvent = null as any;
+utilities.lazyLoad(exports, ["TerminateAsyncEvent"], () => require("./terminateAsyncEvent"));
+
+export { TriggerConfigArgs, TriggerConfigState } from "./triggerConfig";
+export type TriggerConfig = import("./triggerConfig").TriggerConfig;
+export const TriggerConfig: typeof import("./triggerConfig").TriggerConfig = null as any;
+utilities.lazyLoad(exports, ["TriggerConfig"], () => require("./triggerConfig"));
+
 
 const _module = {
     version: utilities.getVersion(),

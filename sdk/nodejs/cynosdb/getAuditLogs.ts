@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,11 +11,12 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const auditLogs = pulumi.output(tencentcloud.Cynosdb.getAuditLogs({
+ * const auditLogs = tencentcloud.Cynosdb.getAuditLogs({
  *     endTime: "2023-06-18 10:00:02",
  *     filter: {
  *         hosts: ["30.50.207.176"],
@@ -27,15 +29,13 @@ import * as utilities from "../utilities";
  *     order: "DESC",
  *     orderBy: "timestamp",
  *     startTime: "2023-06-18 10:00:00",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getAuditLogs(args: GetAuditLogsArgs, opts?: pulumi.InvokeOptions): Promise<GetAuditLogsResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Cynosdb/getAuditLogs:getAuditLogs", {
         "endTime": args.endTime,
         "filter": args.filter,
@@ -101,9 +101,35 @@ export interface GetAuditLogsResult {
     readonly resultOutputFile?: string;
     readonly startTime: string;
 }
-
+/**
+ * Use this data source to query detailed information of cynosdb auditLogs
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const auditLogs = tencentcloud.Cynosdb.getAuditLogs({
+ *     endTime: "2023-06-18 10:00:02",
+ *     filter: {
+ *         hosts: ["30.50.207.176"],
+ *         policyNames: ["default_audit"],
+ *         sql: "SELECT @@max_allowed_packet",
+ *         sqlType: "SELECT",
+ *         users: ["keep_dts"],
+ *     },
+ *     instanceId: "cynosdbmysql-ins-afqx1hy0",
+ *     order: "DESC",
+ *     orderBy: "timestamp",
+ *     startTime: "2023-06-18 10:00:00",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getAuditLogsOutput(args: GetAuditLogsOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetAuditLogsResult> {
-    return pulumi.output(args).apply(a => getAuditLogs(a, opts))
+    return pulumi.output(args).apply((a: any) => getAuditLogs(a, opts))
 }
 
 /**

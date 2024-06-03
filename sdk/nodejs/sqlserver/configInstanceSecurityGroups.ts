@@ -9,11 +9,12 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const configInstanceSecurityGroups = new tencentcloud.Sqlserver.ConfigInstanceSecurityGroups("config_instance_security_groups", {
+ * const configInstanceSecurityGroups = new tencentcloud.sqlserver.ConfigInstanceSecurityGroups("configInstanceSecurityGroups", {
  *     instanceId: "mssql-qelbzgwf",
  *     securityGroupIdSets: [
  *         "sg-mayqdlt1",
@@ -21,13 +22,14 @@ import * as utilities from "../utilities";
  *     ],
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * sqlserver config_instance_security_groups can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Sqlserver/configInstanceSecurityGroups:ConfigInstanceSecurityGroups config_instance_security_groups config_instance_security_groups_id
+ * $ pulumi import tencentcloud:Sqlserver/configInstanceSecurityGroups:ConfigInstanceSecurityGroups config_instance_security_groups config_instance_security_groups_id
  * ```
  */
 export class ConfigInstanceSecurityGroups extends pulumi.CustomResource {

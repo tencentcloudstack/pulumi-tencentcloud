@@ -15,66 +15,60 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mariadb
         /// <summary>
         /// Use this data source to query detailed information of mariadb project_security_groups
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var projectSecurityGroups = Tencentcloud.Mariadb.GetProjectSecurityGroups.Invoke(new()
         ///     {
-        ///         var projectSecurityGroups = Output.Create(Tencentcloud.Mariadb.GetProjectSecurityGroups.InvokeAsync(new Tencentcloud.Mariadb.GetProjectSecurityGroupsArgs
-        ///         {
-        ///             Product = "mariadb",
-        ///             ProjectId = 0,
-        ///         }));
-        ///     }
+        ///         Product = "mariadb",
+        ///         ProjectId = 0,
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetProjectSecurityGroupsResult> InvokeAsync(GetProjectSecurityGroupsArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetProjectSecurityGroupsResult>("tencentcloud:Mariadb/getProjectSecurityGroups:getProjectSecurityGroups", args ?? new GetProjectSecurityGroupsArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetProjectSecurityGroupsResult>("tencentcloud:Mariadb/getProjectSecurityGroups:getProjectSecurityGroups", args ?? new GetProjectSecurityGroupsArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of mariadb project_security_groups
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var projectSecurityGroups = Tencentcloud.Mariadb.GetProjectSecurityGroups.Invoke(new()
         ///     {
-        ///         var projectSecurityGroups = Output.Create(Tencentcloud.Mariadb.GetProjectSecurityGroups.InvokeAsync(new Tencentcloud.Mariadb.GetProjectSecurityGroupsArgs
-        ///         {
-        ///             Product = "mariadb",
-        ///             ProjectId = 0,
-        ///         }));
-        ///     }
+        ///         Product = "mariadb",
+        ///         ProjectId = 0,
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetProjectSecurityGroupsResult> Invoke(GetProjectSecurityGroupsInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetProjectSecurityGroupsResult>("tencentcloud:Mariadb/getProjectSecurityGroups:getProjectSecurityGroups", args ?? new GetProjectSecurityGroupsInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetProjectSecurityGroupsResult>("tencentcloud:Mariadb/getProjectSecurityGroups:getProjectSecurityGroups", args ?? new GetProjectSecurityGroupsInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetProjectSecurityGroupsArgs : Pulumi.InvokeArgs
+    public sealed class GetProjectSecurityGroupsArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Database engine name. Valid value: `mariadb`.
@@ -97,9 +91,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mariadb
         public GetProjectSecurityGroupsArgs()
         {
         }
+        public static new GetProjectSecurityGroupsArgs Empty => new GetProjectSecurityGroupsArgs();
     }
 
-    public sealed class GetProjectSecurityGroupsInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetProjectSecurityGroupsInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Database engine name. Valid value: `mariadb`.
@@ -122,6 +117,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mariadb
         public GetProjectSecurityGroupsInvokeArgs()
         {
         }
+        public static new GetProjectSecurityGroupsInvokeArgs Empty => new GetProjectSecurityGroupsInvokeArgs();
     }
 
 

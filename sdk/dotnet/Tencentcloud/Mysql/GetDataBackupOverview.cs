@@ -15,64 +15,58 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
         /// <summary>
         /// Use this data source to query detailed information of mysql data_backup_overview
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var dataBackupOverview = Tencentcloud.Mysql.GetDataBackupOverview.Invoke(new()
         ///     {
-        ///         var dataBackupOverview = Output.Create(Tencentcloud.Mysql.GetDataBackupOverview.InvokeAsync(new Tencentcloud.Mysql.GetDataBackupOverviewArgs
-        ///         {
-        ///             Product = "mysql",
-        ///         }));
-        ///     }
+        ///         Product = "mysql",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetDataBackupOverviewResult> InvokeAsync(GetDataBackupOverviewArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetDataBackupOverviewResult>("tencentcloud:Mysql/getDataBackupOverview:getDataBackupOverview", args ?? new GetDataBackupOverviewArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetDataBackupOverviewResult>("tencentcloud:Mysql/getDataBackupOverview:getDataBackupOverview", args ?? new GetDataBackupOverviewArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of mysql data_backup_overview
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var dataBackupOverview = Tencentcloud.Mysql.GetDataBackupOverview.Invoke(new()
         ///     {
-        ///         var dataBackupOverview = Output.Create(Tencentcloud.Mysql.GetDataBackupOverview.InvokeAsync(new Tencentcloud.Mysql.GetDataBackupOverviewArgs
-        ///         {
-        ///             Product = "mysql",
-        ///         }));
-        ///     }
+        ///         Product = "mysql",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetDataBackupOverviewResult> Invoke(GetDataBackupOverviewInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetDataBackupOverviewResult>("tencentcloud:Mysql/getDataBackupOverview:getDataBackupOverview", args ?? new GetDataBackupOverviewInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetDataBackupOverviewResult>("tencentcloud:Mysql/getDataBackupOverview:getDataBackupOverview", args ?? new GetDataBackupOverviewInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetDataBackupOverviewArgs : Pulumi.InvokeArgs
+    public sealed class GetDataBackupOverviewArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// The type of cloud database product to be queried, currently only supports `mysql`.
@@ -89,9 +83,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
         public GetDataBackupOverviewArgs()
         {
         }
+        public static new GetDataBackupOverviewArgs Empty => new GetDataBackupOverviewArgs();
     }
 
-    public sealed class GetDataBackupOverviewInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetDataBackupOverviewInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// The type of cloud database product to be queried, currently only supports `mysql`.
@@ -108,6 +103,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
         public GetDataBackupOverviewInvokeArgs()
         {
         }
+        public static new GetDataBackupOverviewInvokeArgs Empty => new GetDataBackupOverviewInvokeArgs();
     }
 
 

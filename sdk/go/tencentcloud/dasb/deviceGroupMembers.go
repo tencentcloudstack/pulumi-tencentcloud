@@ -7,46 +7,62 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a dasb deviceGroupMembers
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dasb"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dasb"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Dasb.NewDeviceGroupMembers(ctx, "example", &Dasb.DeviceGroupMembersArgs{
-// 			DeviceGroupId: pulumi.Int(3),
-// 			MemberIdSets: pulumi.IntArray{
-// 				pulumi.Int(1),
-// 				pulumi.Int(2),
-// 				pulumi.Int(3),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			exampleDevice, err := Dasb.NewDevice(ctx, "exampleDevice", &Dasb.DeviceArgs{
+//				OsName: pulumi.String("Linux"),
+//				Ip:     pulumi.String("192.168.0.1"),
+//				Port:   pulumi.Int(80),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			exampleDeviceGroup, err := Dasb.NewDeviceGroup(ctx, "exampleDeviceGroup", nil)
+//			if err != nil {
+//				return err
+//			}
+//			_, err = Dasb.NewDeviceGroupMembers(ctx, "exampleDeviceGroupMembers", &Dasb.DeviceGroupMembersArgs{
+//				DeviceGroupId: exampleDeviceGroup.ID(),
+//				MemberIdSets: pulumi.IntArray{
+//					exampleDevice.ID(),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // dasb device_group_members can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Dasb/deviceGroupMembers:DeviceGroupMembers example 3#1,2,3
+// $ pulumi import tencentcloud:Dasb/deviceGroupMembers:DeviceGroupMembers example 53#102
 // ```
 type DeviceGroupMembers struct {
 	pulumi.CustomResourceState
@@ -70,7 +86,7 @@ func NewDeviceGroupMembers(ctx *pulumi.Context,
 	if args.MemberIdSets == nil {
 		return nil, errors.New("invalid value for required argument 'MemberIdSets'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource DeviceGroupMembers
 	err := ctx.RegisterResource("tencentcloud:Dasb/deviceGroupMembers:DeviceGroupMembers", name, args, &resource, opts...)
 	if err != nil {
@@ -151,7 +167,7 @@ func (i *DeviceGroupMembers) ToDeviceGroupMembersOutputWithContext(ctx context.C
 // DeviceGroupMembersArrayInput is an input type that accepts DeviceGroupMembersArray and DeviceGroupMembersArrayOutput values.
 // You can construct a concrete instance of `DeviceGroupMembersArrayInput` via:
 //
-//          DeviceGroupMembersArray{ DeviceGroupMembersArgs{...} }
+//	DeviceGroupMembersArray{ DeviceGroupMembersArgs{...} }
 type DeviceGroupMembersArrayInput interface {
 	pulumi.Input
 
@@ -176,7 +192,7 @@ func (i DeviceGroupMembersArray) ToDeviceGroupMembersArrayOutputWithContext(ctx 
 // DeviceGroupMembersMapInput is an input type that accepts DeviceGroupMembersMap and DeviceGroupMembersMapOutput values.
 // You can construct a concrete instance of `DeviceGroupMembersMapInput` via:
 //
-//          DeviceGroupMembersMap{ "key": DeviceGroupMembersArgs{...} }
+//	DeviceGroupMembersMap{ "key": DeviceGroupMembersArgs{...} }
 type DeviceGroupMembersMapInput interface {
 	pulumi.Input
 

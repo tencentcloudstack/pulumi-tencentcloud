@@ -15,36 +15,37 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Organization
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var orgMemberEmail = new Tencentcloud.Organization.OrgMemberEmail("orgMemberEmail", new()
     ///     {
-    ///         var orgMemberEmail = new Tencentcloud.Organization.OrgMemberEmail("orgMemberEmail", new Tencentcloud.Organization.OrgMemberEmailArgs
-    ///         {
-    ///             CountryCode = "86",
-    ///             Email = "iac-example@qq.com",
-    ///             MemberUin = 100033704327,
-    ///             Phone = "12345678901",
-    ///         });
-    ///     }
+    ///         CountryCode = "86",
+    ///         Email = "iac-example@qq.com",
+    ///         MemberUin = 100033704327,
+    ///         Phone = "12345678901",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// organization org_member_email can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Organization/orgMemberEmail:OrgMemberEmail org_member_email org_member_email_id
+    /// $ pulumi import tencentcloud:Organization/orgMemberEmail:OrgMemberEmail org_member_email org_member_email_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Organization/orgMemberEmail:OrgMemberEmail")]
-    public partial class OrgMemberEmail : Pulumi.CustomResource
+    public partial class OrgMemberEmail : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Application timeNote: This field may return NULL, indicating that the valid value cannot be obtained.
@@ -151,7 +152,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Organization
         }
     }
 
-    public sealed class OrgMemberEmailArgs : Pulumi.ResourceArgs
+    public sealed class OrgMemberEmailArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// International region.
@@ -180,9 +181,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Organization
         public OrgMemberEmailArgs()
         {
         }
+        public static new OrgMemberEmailArgs Empty => new OrgMemberEmailArgs();
     }
 
-    public sealed class OrgMemberEmailState : Pulumi.ResourceArgs
+    public sealed class OrgMemberEmailState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Application timeNote: This field may return NULL, indicating that the valid value cannot be obtained.
@@ -247,5 +249,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Organization
         public OrgMemberEmailState()
         {
         }
+        public static new OrgMemberEmailState Empty => new OrgMemberEmailState();
     }
 }

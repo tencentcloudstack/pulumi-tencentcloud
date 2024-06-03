@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Inputs
 {
 
-    public sealed class CertificateConfigServerCertInfoGetArgs : Pulumi.ResourceArgs
+    public sealed class CertificateConfigServerCertInfoGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Alias of the certificate.Note: This field may return null, indicating that no valid values can be obtained.
@@ -58,5 +58,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Inputs
         public CertificateConfigServerCertInfoGetArgs()
         {
         }
+        public static new CertificateConfigServerCertInfoGetArgs Empty => new CertificateConfigServerCertInfoGetArgs();
     }
 }

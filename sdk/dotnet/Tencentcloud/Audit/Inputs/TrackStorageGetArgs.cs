@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Audit.Inputs
 {
 
-    public sealed class TrackStorageGetArgs : Pulumi.ResourceArgs
+    public sealed class TrackStorageGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Track Storage name:- when StorageType is `cls`, StorageName is cls topicId- when StorageType is `cos`, StorageName is cos bucket name that does not contain `-APPID`.
@@ -40,5 +40,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Audit.Inputs
         public TrackStorageGetArgs()
         {
         }
+        public static new TrackStorageGetArgs Empty => new TrackStorageGetArgs();
     }
 }

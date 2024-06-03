@@ -16,44 +16,46 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssl
     /// &gt; **NOTE:** Once certificat created, it cannot be removed within 1 hours.
     /// 
     /// ## Example Usage
+    /// 
     /// ### only support type 2. 2=TrustAsia TLS RSA CA.
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var example = new Tencentcloud.Ssl.FreeCertificate("example", new()
     ///     {
-    ///         var example = new Tencentcloud.Ssl.FreeCertificate("example", new Tencentcloud.Ssl.FreeCertificateArgs
-    ///         {
-    ///             Alias = "example_free_cert",
-    ///             ContactEmail = "test@example.com",
-    ///             ContactPhone = "18352458901",
-    ///             CsrEncryptAlgo = "RSA",
-    ///             CsrKeyParameter = "2048",
-    ///             CsrKeyPassword = "csr_pwd",
-    ///             Domain = "example.com",
-    ///             DvAuthMethod = "DNS_AUTO",
-    ///             PackageType = "2",
-    ///             ValidityPeriod = "12",
-    ///         });
-    ///     }
+    ///         Alias = "example_free_cert",
+    ///         ContactEmail = "test@example.com",
+    ///         ContactPhone = "18352458901",
+    ///         CsrEncryptAlgo = "RSA",
+    ///         CsrKeyParameter = "2048",
+    ///         CsrKeyPassword = "csr_pwd",
+    ///         Domain = "example.com",
+    ///         DvAuthMethod = "DNS_AUTO",
+    ///         PackageType = "2",
+    ///         ValidityPeriod = "12",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// FreeCertificate instance can be imported, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Ssl/freeCertificate:FreeCertificate test free_certificate-id
+    /// $ pulumi import tencentcloud:Ssl/freeCertificate:FreeCertificate test free_certificate-id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Ssl/freeCertificate:FreeCertificate")]
-    public partial class FreeCertificate : Pulumi.CustomResource
+    public partial class FreeCertificate : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Specify alias for remark.
@@ -229,6 +231,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssl
             {
                 Version = Utilities.Version,
                 PluginDownloadURL = "github://api.github.com/tencentcloudstack",
+                AdditionalSecretOutputs =
+                {
+                    "csrKeyPassword",
+                },
             };
             var merged = CustomResourceOptions.Merge(defaultOptions, options);
             // Override the ID if one was specified for consistency with other language SDKs.
@@ -250,7 +256,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssl
         }
     }
 
-    public sealed class FreeCertificateArgs : Pulumi.ResourceArgs
+    public sealed class FreeCertificateArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Specify alias for remark.
@@ -282,11 +288,21 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssl
         [Input("csrKeyParameter")]
         public Input<string>? CsrKeyParameter { get; set; }
 
+        [Input("csrKeyPassword")]
+        private Input<string>? _csrKeyPassword;
+
         /// <summary>
         /// Specify CSR key password.
         /// </summary>
-        [Input("csrKeyPassword")]
-        public Input<string>? CsrKeyPassword { get; set; }
+        public Input<string>? CsrKeyPassword
+        {
+            get => _csrKeyPassword;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _csrKeyPassword = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
 
         /// <summary>
         /// Specify domain name.
@@ -327,9 +343,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssl
         public FreeCertificateArgs()
         {
         }
+        public static new FreeCertificateArgs Empty => new FreeCertificateArgs();
     }
 
-    public sealed class FreeCertificateState : Pulumi.ResourceArgs
+    public sealed class FreeCertificateState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Specify alias for remark.
@@ -385,11 +402,21 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssl
         [Input("csrKeyParameter")]
         public Input<string>? CsrKeyParameter { get; set; }
 
+        [Input("csrKeyPassword")]
+        private Input<string>? _csrKeyPassword;
+
         /// <summary>
         /// Specify CSR key password.
         /// </summary>
-        [Input("csrKeyPassword")]
-        public Input<string>? CsrKeyPassword { get; set; }
+        public Input<string>? CsrKeyPassword
+        {
+            get => _csrKeyPassword;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _csrKeyPassword = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
 
         /// <summary>
         /// Indicates whether the certificate deployable.
@@ -490,5 +517,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssl
         public FreeCertificateState()
         {
         }
+        public static new FreeCertificateState Empty => new FreeCertificateState();
     }
 }

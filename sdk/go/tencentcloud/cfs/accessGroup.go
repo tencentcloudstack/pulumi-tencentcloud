@@ -8,39 +8,45 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a CFS access group.
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cfs"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cfs"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Cfs.NewAccessGroup(ctx, "example", &Cfs.AccessGroupArgs{
-// 			Description: pulumi.String("desc."),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Cfs.NewAccessGroup(ctx, "example", &Cfs.AccessGroupArgs{
+//				Description: pulumi.String("desc."),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // CFS access group can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Cfs/accessGroup:AccessGroup example pgroup-7nx89k7l
+// $ pulumi import tencentcloud:Cfs/accessGroup:AccessGroup example pgroup-7nx89k7l
 // ```
 type AccessGroup struct {
 	pulumi.CustomResourceState
@@ -60,7 +66,7 @@ func NewAccessGroup(ctx *pulumi.Context,
 		args = &AccessGroupArgs{}
 	}
 
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource AccessGroup
 	err := ctx.RegisterResource("tencentcloud:Cfs/accessGroup:AccessGroup", name, args, &resource, opts...)
 	if err != nil {
@@ -145,7 +151,7 @@ func (i *AccessGroup) ToAccessGroupOutputWithContext(ctx context.Context) Access
 // AccessGroupArrayInput is an input type that accepts AccessGroupArray and AccessGroupArrayOutput values.
 // You can construct a concrete instance of `AccessGroupArrayInput` via:
 //
-//          AccessGroupArray{ AccessGroupArgs{...} }
+//	AccessGroupArray{ AccessGroupArgs{...} }
 type AccessGroupArrayInput interface {
 	pulumi.Input
 
@@ -170,7 +176,7 @@ func (i AccessGroupArray) ToAccessGroupArrayOutputWithContext(ctx context.Contex
 // AccessGroupMapInput is an input type that accepts AccessGroupMap and AccessGroupMapOutput values.
 // You can construct a concrete instance of `AccessGroupMapInput` via:
 //
-//          AccessGroupMap{ "key": AccessGroupArgs{...} }
+//	AccessGroupMap{ "key": AccessGroupArgs{...} }
 type AccessGroupMapInput interface {
 	pulumi.Input
 

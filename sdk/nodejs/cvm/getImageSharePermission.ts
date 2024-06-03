@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,21 +11,20 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const imageSharePermission = pulumi.output(tencentcloud.Cvm.getImageSharePermission({
+ * const imageSharePermission = tencentcloud.Cvm.getImageSharePermission({
  *     imageId: "img-xxxxxx",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getImageSharePermission(args: GetImageSharePermissionArgs, opts?: pulumi.InvokeOptions): Promise<GetImageSharePermissionResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Cvm/getImageSharePermission:getImageSharePermission", {
         "imageId": args.imageId,
         "resultOutputFile": args.resultOutputFile,
@@ -60,9 +60,24 @@ export interface GetImageSharePermissionResult {
      */
     readonly sharePermissionSets: outputs.Cvm.GetImageSharePermissionSharePermissionSet[];
 }
-
+/**
+ * Use this data source to query detailed information of cvm imageSharePermission
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const imageSharePermission = tencentcloud.Cvm.getImageSharePermission({
+ *     imageId: "img-xxxxxx",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getImageSharePermissionOutput(args: GetImageSharePermissionOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetImageSharePermissionResult> {
-    return pulumi.output(args).apply(a => getImageSharePermission(a, opts))
+    return pulumi.output(args).apply((a: any) => getImageSharePermission(a, opts))
 }
 
 /**

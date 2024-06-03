@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos.Inputs
 {
 
-    public sealed class BatchManifestLocationGetArgs : Pulumi.ResourceArgs
+    public sealed class BatchManifestLocationGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Specifies the etag of the object list. Length 1-1024 bytes.
@@ -34,5 +34,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos.Inputs
         public BatchManifestLocationGetArgs()
         {
         }
+        public static new BatchManifestLocationGetArgs Empty => new BatchManifestLocationGetArgs();
     }
 }

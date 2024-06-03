@@ -15,30 +15,31 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdmq
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var sendRocketmqMessage = new Tencentcloud.Tdmq.SendRocketmqMessage("sendRocketmqMessage", new()
     ///     {
-    ///         var sendRocketmqMessage = new Tencentcloud.Tdmq.SendRocketmqMessage("sendRocketmqMessage", new Tencentcloud.Tdmq.SendRocketmqMessageArgs
-    ///         {
-    ///             ClusterId = "rocketmq-7k45z9dkpnne",
-    ///             MsgBody = "msg key",
-    ///             MsgKey = "msg tag",
-    ///             MsgTag = "msg value",
-    ///             NamespaceId = "test_ns",
-    ///             TopicName = "test_topic",
-    ///         });
-    ///     }
+    ///         ClusterId = "rocketmq-7k45z9dkpnne",
+    ///         MsgBody = "msg key",
+    ///         MsgKey = "msg tag",
+    ///         MsgTag = "msg value",
+    ///         NamespaceId = "test_ns",
+    ///         TopicName = "test_topic",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Tdmq/sendRocketmqMessage:SendRocketmqMessage")]
-    public partial class SendRocketmqMessage : Pulumi.CustomResource
+    public partial class SendRocketmqMessage : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Cluster id.
@@ -121,7 +122,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdmq
         }
     }
 
-    public sealed class SendRocketmqMessageArgs : Pulumi.ResourceArgs
+    public sealed class SendRocketmqMessageArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Cluster id.
@@ -162,9 +163,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdmq
         public SendRocketmqMessageArgs()
         {
         }
+        public static new SendRocketmqMessageArgs Empty => new SendRocketmqMessageArgs();
     }
 
-    public sealed class SendRocketmqMessageState : Pulumi.ResourceArgs
+    public sealed class SendRocketmqMessageState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Cluster id.
@@ -205,5 +207,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdmq
         public SendRocketmqMessageState()
         {
         }
+        public static new SendRocketmqMessageState Empty => new SendRocketmqMessageState();
     }
 }

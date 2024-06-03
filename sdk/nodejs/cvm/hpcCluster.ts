@@ -9,22 +9,24 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const hpcCluster = new tencentcloud.Cvm.HpcCluster("hpc_cluster", {
+ * const hpcCluster = new tencentcloud.cvm.HpcCluster("hpcCluster", {
  *     remark: "create for test",
  *     zone: "ap-beijing-6",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * cvm hpc_cluster can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Cvm/hpcCluster:HpcCluster hpc_cluster hpc_cluster_id
+ * $ pulumi import tencentcloud:Cvm/hpcCluster:HpcCluster hpc_cluster hpc_cluster_id
  * ```
  */
 export class HpcCluster extends pulumi.CustomResource {

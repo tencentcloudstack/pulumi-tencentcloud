@@ -9,21 +9,21 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const completeCertificate = new tencentcloud.Ssl.CompleteCertificateOperation("complete_certificate", {
- *     certificateId: "9Bfe1IBR",
- * });
+ * const completeCertificate = new tencentcloud.ssl.CompleteCertificateOperation("completeCertificate", {certificateId: "9Bfe1IBR"});
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * ssl complete_certificate can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Ssl/completeCertificateOperation:CompleteCertificateOperation complete_certificate complete_certificate_id
+ * $ pulumi import tencentcloud:Ssl/completeCertificateOperation:CompleteCertificateOperation complete_certificate complete_certificate_id
  * ```
  */
 export class CompleteCertificateOperation extends pulumi.CustomResource {

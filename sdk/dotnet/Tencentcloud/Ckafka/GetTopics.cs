@@ -15,96 +15,60 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka
         /// <summary>
         /// Use this data source to query detailed information of ckafka topic.
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
-        /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+        /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var example = Tencentcloud.Ckafka.GetTopics.Invoke(new()
         ///     {
-        ///         var foo = new Tencentcloud.Ckafka.Topic("foo", new Tencentcloud.Ckafka.TopicArgs
-        ///         {
-        ///             CleanUpPolicy = "delete",
-        ///             EnableWhiteList = true,
-        ///             InstanceId = "ckafka-f9ife4zz",
-        ///             IpWhiteLists = 
-        ///             {
-        ///                 "ip1",
-        ///                 "ip2",
-        ///             },
-        ///             MaxMessageBytes = 1024,
-        ///             Note = "topic note",
-        ///             PartitionNum = 1,
-        ///             ReplicaNum = 2,
-        ///             Retention = 60000,
-        ///             Segment = 3600000,
-        ///             SyncReplicaMinNum = 1,
-        ///             TopicName = "example",
-        ///             UncleanLeaderElectionEnable = false,
-        ///         });
-        ///     }
+        ///         InstanceId = "ckafka-vv7wp5nx",
+        ///         TopicName = "tf_example",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetTopicsResult> InvokeAsync(GetTopicsArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetTopicsResult>("tencentcloud:Ckafka/getTopics:getTopics", args ?? new GetTopicsArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetTopicsResult>("tencentcloud:Ckafka/getTopics:getTopics", args ?? new GetTopicsArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of ckafka topic.
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
-        /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+        /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var example = Tencentcloud.Ckafka.GetTopics.Invoke(new()
         ///     {
-        ///         var foo = new Tencentcloud.Ckafka.Topic("foo", new Tencentcloud.Ckafka.TopicArgs
-        ///         {
-        ///             CleanUpPolicy = "delete",
-        ///             EnableWhiteList = true,
-        ///             InstanceId = "ckafka-f9ife4zz",
-        ///             IpWhiteLists = 
-        ///             {
-        ///                 "ip1",
-        ///                 "ip2",
-        ///             },
-        ///             MaxMessageBytes = 1024,
-        ///             Note = "topic note",
-        ///             PartitionNum = 1,
-        ///             ReplicaNum = 2,
-        ///             Retention = 60000,
-        ///             Segment = 3600000,
-        ///             SyncReplicaMinNum = 1,
-        ///             TopicName = "example",
-        ///             UncleanLeaderElectionEnable = false,
-        ///         });
-        ///     }
+        ///         InstanceId = "ckafka-vv7wp5nx",
+        ///         TopicName = "tf_example",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetTopicsResult> Invoke(GetTopicsInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetTopicsResult>("tencentcloud:Ckafka/getTopics:getTopics", args ?? new GetTopicsInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetTopicsResult>("tencentcloud:Ckafka/getTopics:getTopics", args ?? new GetTopicsInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetTopicsArgs : Pulumi.InvokeArgs
+    public sealed class GetTopicsArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Ckafka instance ID.
@@ -127,9 +91,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka
         public GetTopicsArgs()
         {
         }
+        public static new GetTopicsArgs Empty => new GetTopicsArgs();
     }
 
-    public sealed class GetTopicsInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetTopicsInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Ckafka instance ID.
@@ -152,6 +117,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka
         public GetTopicsInvokeArgs()
         {
         }
+        public static new GetTopicsInvokeArgs Empty => new GetTopicsInvokeArgs();
     }
 
 

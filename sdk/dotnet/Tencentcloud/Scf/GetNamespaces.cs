@@ -15,74 +15,70 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Scf
         /// <summary>
         /// Use this data source to query SCF namespaces.
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var fooNamespace = new Tencentcloud.Scf.Namespace("fooNamespace", new()
         ///     {
-        ///         var fooNamespace = new Tencentcloud.Scf.Namespace("fooNamespace", new Tencentcloud.Scf.NamespaceArgs
-        ///         {
-        ///             Namespace = "ci-test-scf",
-        ///         });
-        ///         var fooNamespaces = Tencentcloud.Scf.GetNamespaces.Invoke(new Tencentcloud.Scf.GetNamespacesInvokeArgs
-        ///         {
-        ///             Namespace = fooNamespace.Id,
-        ///         });
-        ///     }
+        ///         ScfNamespace = "ci-test-scf",
+        ///     });
         /// 
-        /// }
+        ///     var fooNamespaces = Tencentcloud.Scf.GetNamespaces.Invoke(new()
+        ///     {
+        ///         Namespace = fooNamespace.Id,
+        ///     });
+        /// 
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetNamespacesResult> InvokeAsync(GetNamespacesArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetNamespacesResult>("tencentcloud:Scf/getNamespaces:getNamespaces", args ?? new GetNamespacesArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetNamespacesResult>("tencentcloud:Scf/getNamespaces:getNamespaces", args ?? new GetNamespacesArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query SCF namespaces.
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var fooNamespace = new Tencentcloud.Scf.Namespace("fooNamespace", new()
         ///     {
-        ///         var fooNamespace = new Tencentcloud.Scf.Namespace("fooNamespace", new Tencentcloud.Scf.NamespaceArgs
-        ///         {
-        ///             Namespace = "ci-test-scf",
-        ///         });
-        ///         var fooNamespaces = Tencentcloud.Scf.GetNamespaces.Invoke(new Tencentcloud.Scf.GetNamespacesInvokeArgs
-        ///         {
-        ///             Namespace = fooNamespace.Id,
-        ///         });
-        ///     }
+        ///         ScfNamespace = "ci-test-scf",
+        ///     });
         /// 
-        /// }
+        ///     var fooNamespaces = Tencentcloud.Scf.GetNamespaces.Invoke(new()
+        ///     {
+        ///         Namespace = fooNamespace.Id,
+        ///     });
+        /// 
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetNamespacesResult> Invoke(GetNamespacesInvokeArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetNamespacesResult>("tencentcloud:Scf/getNamespaces:getNamespaces", args ?? new GetNamespacesInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetNamespacesResult>("tencentcloud:Scf/getNamespaces:getNamespaces", args ?? new GetNamespacesInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetNamespacesArgs : Pulumi.InvokeArgs
+    public sealed class GetNamespacesArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Description of the SCF namespace to be queried.
@@ -105,9 +101,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Scf
         public GetNamespacesArgs()
         {
         }
+        public static new GetNamespacesArgs Empty => new GetNamespacesArgs();
     }
 
-    public sealed class GetNamespacesInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetNamespacesInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Description of the SCF namespace to be queried.
@@ -130,6 +127,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Scf
         public GetNamespacesInvokeArgs()
         {
         }
+        public static new GetNamespacesInvokeArgs Empty => new GetNamespacesInvokeArgs();
     }
 
 

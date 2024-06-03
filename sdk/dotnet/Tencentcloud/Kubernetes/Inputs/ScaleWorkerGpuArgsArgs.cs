@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes.Inputs
 {
 
-    public sealed class ScaleWorkerGpuArgsArgs : Pulumi.ResourceArgs
+    public sealed class ScaleWorkerGpuArgsArgs : global::Pulumi.ResourceArgs
     {
         [Input("cuda")]
         private InputMap<object>? _cuda;
@@ -70,5 +70,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes.Inputs
         public ScaleWorkerGpuArgsArgs()
         {
         }
+        public static new ScaleWorkerGpuArgsArgs Empty => new ScaleWorkerGpuArgsArgs();
     }
 }

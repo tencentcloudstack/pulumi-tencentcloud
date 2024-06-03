@@ -15,64 +15,58 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Oceanus
         /// <summary>
         /// Use this data source to query detailed information of oceanus tree_jobs
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var example = Tencentcloud.Oceanus.GetTreeJobs.Invoke(new()
         ///     {
-        ///         var example = Output.Create(Tencentcloud.Oceanus.GetTreeJobs.InvokeAsync(new Tencentcloud.Oceanus.GetTreeJobsArgs
-        ///         {
-        ///             WorkSpaceId = "space-2idq8wbr",
-        ///         }));
-        ///     }
+        ///         WorkSpaceId = "space-2idq8wbr",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetTreeJobsResult> InvokeAsync(GetTreeJobsArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetTreeJobsResult>("tencentcloud:Oceanus/getTreeJobs:getTreeJobs", args ?? new GetTreeJobsArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetTreeJobsResult>("tencentcloud:Oceanus/getTreeJobs:getTreeJobs", args ?? new GetTreeJobsArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of oceanus tree_jobs
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var example = Tencentcloud.Oceanus.GetTreeJobs.Invoke(new()
         ///     {
-        ///         var example = Output.Create(Tencentcloud.Oceanus.GetTreeJobs.InvokeAsync(new Tencentcloud.Oceanus.GetTreeJobsArgs
-        ///         {
-        ///             WorkSpaceId = "space-2idq8wbr",
-        ///         }));
-        ///     }
+        ///         WorkSpaceId = "space-2idq8wbr",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetTreeJobsResult> Invoke(GetTreeJobsInvokeArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetTreeJobsResult>("tencentcloud:Oceanus/getTreeJobs:getTreeJobs", args ?? new GetTreeJobsInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetTreeJobsResult>("tencentcloud:Oceanus/getTreeJobs:getTreeJobs", args ?? new GetTreeJobsInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetTreeJobsArgs : Pulumi.InvokeArgs
+    public sealed class GetTreeJobsArgs : global::Pulumi.InvokeArgs
     {
         [Input("filters")]
         private List<Inputs.GetTreeJobsFilterArgs>? _filters;
@@ -101,9 +95,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Oceanus
         public GetTreeJobsArgs()
         {
         }
+        public static new GetTreeJobsArgs Empty => new GetTreeJobsArgs();
     }
 
-    public sealed class GetTreeJobsInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetTreeJobsInvokeArgs : global::Pulumi.InvokeArgs
     {
         [Input("filters")]
         private InputList<Inputs.GetTreeJobsFilterInputArgs>? _filters;
@@ -132,6 +127,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Oceanus
         public GetTreeJobsInvokeArgs()
         {
         }
+        public static new GetTreeJobsInvokeArgs Empty => new GetTreeJobsInvokeArgs();
     }
 
 

@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tse.Inputs
 {
 
-    public sealed class CngwGatewayNodeConfigArgs : Pulumi.ResourceArgs
+    public sealed class CngwGatewayNodeConfigArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// node number, 2-50.
@@ -28,5 +28,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tse.Inputs
         public CngwGatewayNodeConfigArgs()
         {
         }
+        public static new CngwGatewayNodeConfigArgs Empty => new CngwGatewayNodeConfigArgs();
     }
 }

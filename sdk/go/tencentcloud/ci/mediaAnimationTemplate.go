@@ -7,52 +7,57 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a ci mediaAnimationTemplate
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Ci"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ci"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ci"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Ci.NewMediaAnimationTemplate(ctx, "mediaAnimationTemplate", &Ci.MediaAnimationTemplateArgs{
-// 			Bucket: pulumi.String("terraform-ci-1308919341"),
-// 			Container: &ci.MediaAnimationTemplateContainerArgs{
-// 				Format: pulumi.String("gif"),
-// 			},
-// 			TimeInterval: &ci.MediaAnimationTemplateTimeIntervalArgs{
-// 				Duration: pulumi.String("60"),
-// 				Start:    pulumi.String("0"),
-// 			},
-// 			Video: &ci.MediaAnimationTemplateVideoArgs{
-// 				AnimateFramesPerSecond:     pulumi.String(""),
-// 				AnimateOnlyKeepKeyFrame:    pulumi.String("true"),
-// 				AnimateTimeIntervalOfFrame: pulumi.String(""),
-// 				Codec:                      pulumi.String("gif"),
-// 				Fps:                        pulumi.String("20"),
-// 				Height:                     pulumi.String(""),
-// 				Quality:                    pulumi.String(""),
-// 				Width:                      pulumi.String("1280"),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Ci.NewMediaAnimationTemplate(ctx, "mediaAnimationTemplate", &Ci.MediaAnimationTemplateArgs{
+//				Bucket: pulumi.String("terraform-ci-1308919341"),
+//				Container: &ci.MediaAnimationTemplateContainerArgs{
+//					Format: pulumi.String("gif"),
+//				},
+//				TimeInterval: &ci.MediaAnimationTemplateTimeIntervalArgs{
+//					Duration: pulumi.String("60"),
+//					Start:    pulumi.String("0"),
+//				},
+//				Video: &ci.MediaAnimationTemplateVideoArgs{
+//					AnimateFramesPerSecond:     pulumi.String(""),
+//					AnimateOnlyKeepKeyFrame:    pulumi.String("true"),
+//					AnimateTimeIntervalOfFrame: pulumi.String(""),
+//					Codec:                      pulumi.String("gif"),
+//					Fps:                        pulumi.String("20"),
+//					Height:                     pulumi.String(""),
+//					Quality:                    pulumi.String(""),
+//					Width:                      pulumi.String("1280"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 type MediaAnimationTemplate struct {
 	pulumi.CustomResourceState
 
@@ -81,7 +86,7 @@ func NewMediaAnimationTemplate(ctx *pulumi.Context,
 	if args.Container == nil {
 		return nil, errors.New("invalid value for required argument 'Container'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource MediaAnimationTemplate
 	err := ctx.RegisterResource("tencentcloud:Ci/mediaAnimationTemplate:MediaAnimationTemplate", name, args, &resource, opts...)
 	if err != nil {
@@ -186,7 +191,7 @@ func (i *MediaAnimationTemplate) ToMediaAnimationTemplateOutputWithContext(ctx c
 // MediaAnimationTemplateArrayInput is an input type that accepts MediaAnimationTemplateArray and MediaAnimationTemplateArrayOutput values.
 // You can construct a concrete instance of `MediaAnimationTemplateArrayInput` via:
 //
-//          MediaAnimationTemplateArray{ MediaAnimationTemplateArgs{...} }
+//	MediaAnimationTemplateArray{ MediaAnimationTemplateArgs{...} }
 type MediaAnimationTemplateArrayInput interface {
 	pulumi.Input
 
@@ -211,7 +216,7 @@ func (i MediaAnimationTemplateArray) ToMediaAnimationTemplateArrayOutputWithCont
 // MediaAnimationTemplateMapInput is an input type that accepts MediaAnimationTemplateMap and MediaAnimationTemplateMapOutput values.
 // You can construct a concrete instance of `MediaAnimationTemplateMapInput` via:
 //
-//          MediaAnimationTemplateMap{ "key": MediaAnimationTemplateArgs{...} }
+//	MediaAnimationTemplateMap{ "key": MediaAnimationTemplateArgs{...} }
 type MediaAnimationTemplateMapInput interface {
 	pulumi.Input
 

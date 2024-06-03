@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor.Inputs
 {
 
-    public sealed class TmpTkeAlertPolicyAlertRuleRuleArgs : Pulumi.ResourceArgs
+    public sealed class TmpTkeAlertPolicyAlertRuleRuleArgs : global::Pulumi.ResourceArgs
     {
         [Input("annotations")]
         private InputList<Inputs.TmpTkeAlertPolicyAlertRuleRuleAnnotationArgs>? _annotations;
@@ -76,5 +76,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor.Inputs
         public TmpTkeAlertPolicyAlertRuleRuleArgs()
         {
         }
+        public static new TmpTkeAlertPolicyAlertRuleRuleArgs Empty => new TmpTkeAlertPolicyAlertRuleRuleArgs();
     }
 }

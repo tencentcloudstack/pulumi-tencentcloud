@@ -7,75 +7,80 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to configure a tcr tag retention execution.
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Tcr"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tcr"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tcr"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		exampleInstance, err := Tcr.NewInstance(ctx, "exampleInstance", &Tcr.InstanceArgs{
-// 			InstanceType: pulumi.String("basic"),
-// 			DeleteBucket: pulumi.Bool(true),
-// 			Tags: pulumi.AnyMap{
-// 				"createdBy": pulumi.Any("terraform"),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		exampleNamespace, err := Tcr.NewNamespace(ctx, "exampleNamespace", &Tcr.NamespaceArgs{
-// 			InstanceId:   exampleInstance.ID(),
-// 			IsPublic:     pulumi.Bool(true),
-// 			IsAutoScan:   pulumi.Bool(true),
-// 			IsPreventVul: pulumi.Bool(true),
-// 			Severity:     pulumi.String("medium"),
-// 			CveWhitelistItems: tcr.NamespaceCveWhitelistItemArray{
-// 				&tcr.NamespaceCveWhitelistItemArgs{
-// 					CveId: pulumi.String("cve-xxxxx"),
-// 				},
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		exampleTagRetentionRule, err := Tcr.NewTagRetentionRule(ctx, "exampleTagRetentionRule", &Tcr.TagRetentionRuleArgs{
-// 			RegistryId:    exampleInstance.ID(),
-// 			NamespaceName: exampleNamespace.Name,
-// 			RetentionRule: &tcr.TagRetentionRuleRetentionRuleArgs{
-// 				Key:   pulumi.String("nDaysSinceLastPush"),
-// 				Value: pulumi.Int(2),
-// 			},
-// 			CronSetting: pulumi.String("manual"),
-// 			Disabled:    pulumi.Bool(true),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_, err = Tcr.NewTagRetentionExecutionConfig(ctx, "exampleTagRetentionExecutionConfig", &Tcr.TagRetentionExecutionConfigArgs{
-// 			RegistryId:  exampleTagRetentionRule.RegistryId,
-// 			RetentionId: exampleTagRetentionRule.RetentionId,
-// 			DryRun:      pulumi.Bool(false),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			exampleInstance, err := Tcr.NewInstance(ctx, "exampleInstance", &Tcr.InstanceArgs{
+//				InstanceType: pulumi.String("basic"),
+//				DeleteBucket: pulumi.Bool(true),
+//				Tags: pulumi.Map{
+//					"createdBy": pulumi.Any("terraform"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			exampleNamespace, err := Tcr.NewNamespace(ctx, "exampleNamespace", &Tcr.NamespaceArgs{
+//				InstanceId:   exampleInstance.ID(),
+//				IsPublic:     pulumi.Bool(true),
+//				IsAutoScan:   pulumi.Bool(true),
+//				IsPreventVul: pulumi.Bool(true),
+//				Severity:     pulumi.String("medium"),
+//				CveWhitelistItems: tcr.NamespaceCveWhitelistItemArray{
+//					&tcr.NamespaceCveWhitelistItemArgs{
+//						CveId: pulumi.String("cve-xxxxx"),
+//					},
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			exampleTagRetentionRule, err := Tcr.NewTagRetentionRule(ctx, "exampleTagRetentionRule", &Tcr.TagRetentionRuleArgs{
+//				RegistryId:    exampleInstance.ID(),
+//				NamespaceName: exampleNamespace.Name,
+//				RetentionRule: &tcr.TagRetentionRuleRetentionRuleArgs{
+//					Key:   pulumi.String("nDaysSinceLastPush"),
+//					Value: pulumi.Int(2),
+//				},
+//				CronSetting: pulumi.String("manual"),
+//				Disabled:    pulumi.Bool(true),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_, err = Tcr.NewTagRetentionExecutionConfig(ctx, "exampleTagRetentionExecutionConfig", &Tcr.TagRetentionExecutionConfigArgs{
+//				RegistryId:  exampleTagRetentionRule.RegistryId,
+//				RetentionId: exampleTagRetentionRule.RetentionId,
+//				DryRun:      pulumi.Bool(false),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 type TagRetentionExecutionConfig struct {
 	pulumi.CustomResourceState
 
@@ -102,7 +107,7 @@ func NewTagRetentionExecutionConfig(ctx *pulumi.Context,
 	if args.RetentionId == nil {
 		return nil, errors.New("invalid value for required argument 'RetentionId'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource TagRetentionExecutionConfig
 	err := ctx.RegisterResource("tencentcloud:Tcr/tagRetentionExecutionConfig:TagRetentionExecutionConfig", name, args, &resource, opts...)
 	if err != nil {
@@ -195,7 +200,7 @@ func (i *TagRetentionExecutionConfig) ToTagRetentionExecutionConfigOutputWithCon
 // TagRetentionExecutionConfigArrayInput is an input type that accepts TagRetentionExecutionConfigArray and TagRetentionExecutionConfigArrayOutput values.
 // You can construct a concrete instance of `TagRetentionExecutionConfigArrayInput` via:
 //
-//          TagRetentionExecutionConfigArray{ TagRetentionExecutionConfigArgs{...} }
+//	TagRetentionExecutionConfigArray{ TagRetentionExecutionConfigArgs{...} }
 type TagRetentionExecutionConfigArrayInput interface {
 	pulumi.Input
 
@@ -220,7 +225,7 @@ func (i TagRetentionExecutionConfigArray) ToTagRetentionExecutionConfigArrayOutp
 // TagRetentionExecutionConfigMapInput is an input type that accepts TagRetentionExecutionConfigMap and TagRetentionExecutionConfigMapOutput values.
 // You can construct a concrete instance of `TagRetentionExecutionConfigMapInput` via:
 //
-//          TagRetentionExecutionConfigMap{ "key": TagRetentionExecutionConfigArgs{...} }
+//	TagRetentionExecutionConfigMap{ "key": TagRetentionExecutionConfigArgs{...} }
 type TagRetentionExecutionConfigMapInput interface {
 	pulumi.Input
 

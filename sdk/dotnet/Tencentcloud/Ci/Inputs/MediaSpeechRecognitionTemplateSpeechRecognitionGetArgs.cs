@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ci.Inputs
 {
 
-    public sealed class MediaSpeechRecognitionTemplateSpeechRecognitionGetArgs : Pulumi.ResourceArgs
+    public sealed class MediaSpeechRecognitionTemplateSpeechRecognitionGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Number of voice channels: 1 means mono. EngineModelType supports only mono for non-telephone scenarios, and 2 means dual channels (only 8k_zh engine model supports dual channels, which should correspond to both sides of the call).
@@ -76,5 +76,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ci.Inputs
         public MediaSpeechRecognitionTemplateSpeechRecognitionGetArgs()
         {
         }
+        public static new MediaSpeechRecognitionTemplateSpeechRecognitionGetArgs Empty => new MediaSpeechRecognitionTemplateSpeechRecognitionGetArgs();
     }
 }

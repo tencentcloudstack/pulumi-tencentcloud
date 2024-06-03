@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dlc
 {
     [TencentcloudResourceType("tencentcloud:Dlc/detachUserPolicyOperation:DetachUserPolicyOperation")]
-    public partial class DetachUserPolicyOperation : Pulumi.CustomResource
+    public partial class DetachUserPolicyOperation : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Authentication policy collection.
@@ -70,7 +70,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dlc
         }
     }
 
-    public sealed class DetachUserPolicyOperationArgs : Pulumi.ResourceArgs
+    public sealed class DetachUserPolicyOperationArgs : global::Pulumi.ResourceArgs
     {
         [Input("policySets")]
         private InputList<Inputs.DetachUserPolicyOperationPolicySetArgs>? _policySets;
@@ -93,9 +93,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dlc
         public DetachUserPolicyOperationArgs()
         {
         }
+        public static new DetachUserPolicyOperationArgs Empty => new DetachUserPolicyOperationArgs();
     }
 
-    public sealed class DetachUserPolicyOperationState : Pulumi.ResourceArgs
+    public sealed class DetachUserPolicyOperationState : global::Pulumi.ResourceArgs
     {
         [Input("policySets")]
         private InputList<Inputs.DetachUserPolicyOperationPolicySetGetArgs>? _policySets;
@@ -118,5 +119,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dlc
         public DetachUserPolicyOperationState()
         {
         }
+        public static new DetachUserPolicyOperationState Empty => new DetachUserPolicyOperationState();
     }
 }

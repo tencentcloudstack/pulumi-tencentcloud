@@ -15,38 +15,39 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ses
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var sendEmail = new Tencentcloud.Ses.SendEmail("sendEmail", new()
     ///     {
-    ///         var sendEmail = new Tencentcloud.Ses.SendEmail("sendEmail", new Tencentcloud.Ses.SendEmailArgs
+    ///         Destinations = new[]
     ///         {
-    ///             Destinations = 
-    ///             {
-    ///                 "1055482519@qq.com",
-    ///             },
-    ///             FromEmailAddress = "aaa@iac-tf.cloud",
-    ///             ReplyToAddresses = "aaa@iac-tf.cloud",
-    ///             Subject = "test subject",
-    ///             Template = new Tencentcloud.Ses.Inputs.SendEmailTemplateArgs
-    ///             {
-    ///                 TemplateData = "{\"name\":\"xxx\",\"age\":\"xx\"}",
-    ///                 TemplateId = 99629,
-    ///             },
-    ///             TriggerType = 1,
-    ///             Unsubscribe = "1",
-    ///         });
-    ///     }
+    ///             "1055482519@qq.com",
+    ///         },
+    ///         FromEmailAddress = "aaa@iac-tf.cloud",
+    ///         ReplyToAddresses = "aaa@iac-tf.cloud",
+    ///         Subject = "test subject",
+    ///         Template = new Tencentcloud.Ses.Inputs.SendEmailTemplateArgs
+    ///         {
+    ///             TemplateData = "{\"name\":\"xxx\",\"age\":\"xx\"}",
+    ///             TemplateId = 99629,
+    ///         },
+    ///         TriggerType = 1,
+    ///         Unsubscribe = "1",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Ses/sendEmail:SendEmail")]
-    public partial class SendEmail : Pulumi.CustomResource
+    public partial class SendEmail : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Parameters for the attachments to be sent. The TencentCloud API supports a request packet of up to 8 MB in size,and the size of the attachment content will increase by 1.5 times after Base64 encoding. Therefore,you need to keep the total size of all attachments below 4 MB. If the entire request exceeds 8 MB,the API will return an error.
@@ -153,7 +154,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ses
         }
     }
 
-    public sealed class SendEmailArgs : Pulumi.ResourceArgs
+    public sealed class SendEmailArgs : global::Pulumi.ResourceArgs
     {
         [Input("attachments")]
         private InputList<Inputs.SendEmailAttachmentArgs>? _attachments;
@@ -242,9 +243,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ses
         public SendEmailArgs()
         {
         }
+        public static new SendEmailArgs Empty => new SendEmailArgs();
     }
 
-    public sealed class SendEmailState : Pulumi.ResourceArgs
+    public sealed class SendEmailState : global::Pulumi.ResourceArgs
     {
         [Input("attachments")]
         private InputList<Inputs.SendEmailAttachmentGetArgs>? _attachments;
@@ -333,5 +335,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ses
         public SendEmailState()
         {
         }
+        public static new SendEmailState Empty => new SendEmailState();
     }
 }

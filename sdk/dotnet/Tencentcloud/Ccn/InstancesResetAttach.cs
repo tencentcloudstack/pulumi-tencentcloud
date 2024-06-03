@@ -15,35 +15,36 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ccn
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var ccnInstancesResetAttach = new Tencentcloud.Ccn.InstancesResetAttach("ccnInstancesResetAttach", new()
     ///     {
-    ///         var ccnInstancesResetAttach = new Tencentcloud.Ccn.InstancesResetAttach("ccnInstancesResetAttach", new Tencentcloud.Ccn.InstancesResetAttachArgs
+    ///         CcnId = "ccn-39lqkygf",
+    ///         CcnUin = "100022975249",
+    ///         Instances = new[]
     ///         {
-    ///             CcnId = "ccn-39lqkygf",
-    ///             CcnUin = "100022975249",
-    ///             Instances = 
+    ///             new Tencentcloud.Ccn.Inputs.InstancesResetAttachInstanceArgs
     ///             {
-    ///                 new Tencentcloud.Ccn.Inputs.InstancesResetAttachInstanceArgs
-    ///                 {
-    ///                     InstanceId = "vpc-j9yhbzpn",
-    ///                     InstanceRegion = "ap-guangzhou",
-    ///                     InstanceType = "VPC",
-    ///                 },
+    ///                 InstanceId = "vpc-j9yhbzpn",
+    ///                 InstanceRegion = "ap-guangzhou",
+    ///                 InstanceType = "VPC",
     ///             },
-    ///         });
-    ///     }
+    ///         },
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Ccn/instancesResetAttach:InstancesResetAttach")]
-    public partial class InstancesResetAttach : Pulumi.CustomResource
+    public partial class InstancesResetAttach : global::Pulumi.CustomResource
     {
         /// <summary>
         /// CCN Instance ID.
@@ -108,7 +109,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ccn
         }
     }
 
-    public sealed class InstancesResetAttachArgs : Pulumi.ResourceArgs
+    public sealed class InstancesResetAttachArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// CCN Instance ID.
@@ -137,9 +138,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ccn
         public InstancesResetAttachArgs()
         {
         }
+        public static new InstancesResetAttachArgs Empty => new InstancesResetAttachArgs();
     }
 
-    public sealed class InstancesResetAttachState : Pulumi.ResourceArgs
+    public sealed class InstancesResetAttachState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// CCN Instance ID.
@@ -168,5 +170,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ccn
         public InstancesResetAttachState()
         {
         }
+        public static new InstancesResetAttachState Empty => new InstancesResetAttachState();
     }
 }

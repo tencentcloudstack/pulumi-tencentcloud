@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Eb.Inputs
 {
 
-    public sealed class EventTransformTransformationArgs : Pulumi.ResourceArgs
+    public sealed class EventTransformTransformationArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Describe how to filter data.
@@ -34,5 +34,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Eb.Inputs
         public EventTransformTransformationArgs()
         {
         }
+        public static new EventTransformTransformationArgs Empty => new EventTransformTransformationArgs();
     }
 }

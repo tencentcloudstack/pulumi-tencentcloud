@@ -15,86 +15,80 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Oceanus
         /// <summary>
         /// Use this data source to query detailed information of oceanus work_spaces
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var example = Tencentcloud.Oceanus.GetWorkSpaces.Invoke(new()
         ///     {
-        ///         var example = Output.Create(Tencentcloud.Oceanus.GetWorkSpaces.InvokeAsync(new Tencentcloud.Oceanus.GetWorkSpacesArgs
+        ///         Filters = new[]
         ///         {
-        ///             Filters = 
+        ///             new Tencentcloud.Oceanus.Inputs.GetWorkSpacesFilterInputArgs
         ///             {
-        ///                 new Tencentcloud.Oceanus.Inputs.GetWorkSpacesFilterArgs
+        ///                 Name = "WorkSpaceName",
+        ///                 Values = new[]
         ///                 {
-        ///                     Name = "WorkSpaceName",
-        ///                     Values = 
-        ///                     {
-        ///                         "tf_example",
-        ///                     },
+        ///                     "tf_example",
         ///                 },
         ///             },
-        ///             OrderType = 1,
-        ///         }));
-        ///     }
+        ///         },
+        ///         OrderType = 1,
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetWorkSpacesResult> InvokeAsync(GetWorkSpacesArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetWorkSpacesResult>("tencentcloud:Oceanus/getWorkSpaces:getWorkSpaces", args ?? new GetWorkSpacesArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetWorkSpacesResult>("tencentcloud:Oceanus/getWorkSpaces:getWorkSpaces", args ?? new GetWorkSpacesArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of oceanus work_spaces
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var example = Tencentcloud.Oceanus.GetWorkSpaces.Invoke(new()
         ///     {
-        ///         var example = Output.Create(Tencentcloud.Oceanus.GetWorkSpaces.InvokeAsync(new Tencentcloud.Oceanus.GetWorkSpacesArgs
+        ///         Filters = new[]
         ///         {
-        ///             Filters = 
+        ///             new Tencentcloud.Oceanus.Inputs.GetWorkSpacesFilterInputArgs
         ///             {
-        ///                 new Tencentcloud.Oceanus.Inputs.GetWorkSpacesFilterArgs
+        ///                 Name = "WorkSpaceName",
+        ///                 Values = new[]
         ///                 {
-        ///                     Name = "WorkSpaceName",
-        ///                     Values = 
-        ///                     {
-        ///                         "tf_example",
-        ///                     },
+        ///                     "tf_example",
         ///                 },
         ///             },
-        ///             OrderType = 1,
-        ///         }));
-        ///     }
+        ///         },
+        ///         OrderType = 1,
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetWorkSpacesResult> Invoke(GetWorkSpacesInvokeArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetWorkSpacesResult>("tencentcloud:Oceanus/getWorkSpaces:getWorkSpaces", args ?? new GetWorkSpacesInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetWorkSpacesResult>("tencentcloud:Oceanus/getWorkSpaces:getWorkSpaces", args ?? new GetWorkSpacesInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetWorkSpacesArgs : Pulumi.InvokeArgs
+    public sealed class GetWorkSpacesArgs : global::Pulumi.InvokeArgs
     {
         [Input("filters")]
         private List<Inputs.GetWorkSpacesFilterArgs>? _filters;
@@ -123,9 +117,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Oceanus
         public GetWorkSpacesArgs()
         {
         }
+        public static new GetWorkSpacesArgs Empty => new GetWorkSpacesArgs();
     }
 
-    public sealed class GetWorkSpacesInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetWorkSpacesInvokeArgs : global::Pulumi.InvokeArgs
     {
         [Input("filters")]
         private InputList<Inputs.GetWorkSpacesFilterInputArgs>? _filters;
@@ -154,6 +149,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Oceanus
         public GetWorkSpacesInvokeArgs()
         {
         }
+        public static new GetWorkSpacesInvokeArgs Empty => new GetWorkSpacesInvokeArgs();
     }
 
 

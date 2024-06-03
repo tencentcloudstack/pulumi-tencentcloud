@@ -15,38 +15,39 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Protocol
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var foo = new Tencentcloud.Protocol.Template("foo", new()
     ///     {
-    ///         var foo = new Tencentcloud.Protocol.Template("foo", new Tencentcloud.Protocol.TemplateArgs
+    ///         Protocols = new[]
     ///         {
-    ///             Protocols = 
-    ///             {
-    ///                 "tcp:80",
-    ///                 "udp:all",
-    ///                 "icmp:10-30",
-    ///             },
-    ///         });
-    ///     }
+    ///             "tcp:80",
+    ///             "udp:all",
+    ///             "icmp:10-30",
+    ///         },
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// Protocol template can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Protocol/template:Template foo ppm-nwrggd14
+    /// $ pulumi import tencentcloud:Protocol/template:Template foo ppm-nwrggd14
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Protocol/template:Template")]
-    public partial class Template : Pulumi.CustomResource
+    public partial class Template : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Name of the protocol template.
@@ -105,7 +106,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Protocol
         }
     }
 
-    public sealed class TemplateArgs : Pulumi.ResourceArgs
+    public sealed class TemplateArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Name of the protocol template.
@@ -128,9 +129,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Protocol
         public TemplateArgs()
         {
         }
+        public static new TemplateArgs Empty => new TemplateArgs();
     }
 
-    public sealed class TemplateState : Pulumi.ResourceArgs
+    public sealed class TemplateState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Name of the protocol template.
@@ -153,5 +155,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Protocol
         public TemplateState()
         {
         }
+        public static new TemplateState Empty => new TemplateState();
     }
 }

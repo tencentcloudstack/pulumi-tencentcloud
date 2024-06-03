@@ -15,68 +15,62 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Elasticsearch
         /// <summary>
         /// Use this data source to query detailed information of elasticsearch logstash_instance_operations
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var logstashInstanceOperations = Tencentcloud.Elasticsearch.GetLogstashInstanceOperations.Invoke(new()
         ///     {
-        ///         var logstashInstanceOperations = Output.Create(Tencentcloud.Elasticsearch.GetLogstashInstanceOperations.InvokeAsync(new Tencentcloud.Elasticsearch.GetLogstashInstanceOperationsArgs
-        ///         {
-        ///             EndTime = "2023-10-31 10:12:45",
-        ///             InstanceId = "ls-xxxxxx",
-        ///             StartTime = "2018-01-01 00:00:00",
-        ///         }));
-        ///     }
+        ///         EndTime = "2023-10-31 10:12:45",
+        ///         InstanceId = "ls-xxxxxx",
+        ///         StartTime = "2018-01-01 00:00:00",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetLogstashInstanceOperationsResult> InvokeAsync(GetLogstashInstanceOperationsArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetLogstashInstanceOperationsResult>("tencentcloud:Elasticsearch/getLogstashInstanceOperations:getLogstashInstanceOperations", args ?? new GetLogstashInstanceOperationsArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetLogstashInstanceOperationsResult>("tencentcloud:Elasticsearch/getLogstashInstanceOperations:getLogstashInstanceOperations", args ?? new GetLogstashInstanceOperationsArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of elasticsearch logstash_instance_operations
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var logstashInstanceOperations = Tencentcloud.Elasticsearch.GetLogstashInstanceOperations.Invoke(new()
         ///     {
-        ///         var logstashInstanceOperations = Output.Create(Tencentcloud.Elasticsearch.GetLogstashInstanceOperations.InvokeAsync(new Tencentcloud.Elasticsearch.GetLogstashInstanceOperationsArgs
-        ///         {
-        ///             EndTime = "2023-10-31 10:12:45",
-        ///             InstanceId = "ls-xxxxxx",
-        ///             StartTime = "2018-01-01 00:00:00",
-        ///         }));
-        ///     }
+        ///         EndTime = "2023-10-31 10:12:45",
+        ///         InstanceId = "ls-xxxxxx",
+        ///         StartTime = "2018-01-01 00:00:00",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetLogstashInstanceOperationsResult> Invoke(GetLogstashInstanceOperationsInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetLogstashInstanceOperationsResult>("tencentcloud:Elasticsearch/getLogstashInstanceOperations:getLogstashInstanceOperations", args ?? new GetLogstashInstanceOperationsInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetLogstashInstanceOperationsResult>("tencentcloud:Elasticsearch/getLogstashInstanceOperations:getLogstashInstanceOperations", args ?? new GetLogstashInstanceOperationsInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetLogstashInstanceOperationsArgs : Pulumi.InvokeArgs
+    public sealed class GetLogstashInstanceOperationsArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// End time, e.g. 2019-03-30 20:18:03.
@@ -105,9 +99,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Elasticsearch
         public GetLogstashInstanceOperationsArgs()
         {
         }
+        public static new GetLogstashInstanceOperationsArgs Empty => new GetLogstashInstanceOperationsArgs();
     }
 
-    public sealed class GetLogstashInstanceOperationsInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetLogstashInstanceOperationsInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// End time, e.g. 2019-03-30 20:18:03.
@@ -136,6 +131,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Elasticsearch
         public GetLogstashInstanceOperationsInvokeArgs()
         {
         }
+        public static new GetLogstashInstanceOperationsInvokeArgs Empty => new GetLogstashInstanceOperationsInvokeArgs();
     }
 
 

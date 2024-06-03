@@ -15,70 +15,64 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf
         /// <summary>
         /// Use this data source to query detailed information of tsf group_instances
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var groupInstances = Tencentcloud.Tsf.GetGroupInstances.Invoke(new()
         ///     {
-        ///         var groupInstances = Output.Create(Tencentcloud.Tsf.GetGroupInstances.InvokeAsync(new Tencentcloud.Tsf.GetGroupInstancesArgs
-        ///         {
-        ///             GroupId = "group-yrjkln9v",
-        ///             OrderBy = "ASC",
-        ///             OrderType = 0,
-        ///             SearchWord = "testing",
-        ///         }));
-        ///     }
+        ///         GroupId = "group-yrjkln9v",
+        ///         OrderBy = "ASC",
+        ///         OrderType = 0,
+        ///         SearchWord = "testing",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetGroupInstancesResult> InvokeAsync(GetGroupInstancesArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetGroupInstancesResult>("tencentcloud:Tsf/getGroupInstances:getGroupInstances", args ?? new GetGroupInstancesArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetGroupInstancesResult>("tencentcloud:Tsf/getGroupInstances:getGroupInstances", args ?? new GetGroupInstancesArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of tsf group_instances
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var groupInstances = Tencentcloud.Tsf.GetGroupInstances.Invoke(new()
         ///     {
-        ///         var groupInstances = Output.Create(Tencentcloud.Tsf.GetGroupInstances.InvokeAsync(new Tencentcloud.Tsf.GetGroupInstancesArgs
-        ///         {
-        ///             GroupId = "group-yrjkln9v",
-        ///             OrderBy = "ASC",
-        ///             OrderType = 0,
-        ///             SearchWord = "testing",
-        ///         }));
-        ///     }
+        ///         GroupId = "group-yrjkln9v",
+        ///         OrderBy = "ASC",
+        ///         OrderType = 0,
+        ///         SearchWord = "testing",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetGroupInstancesResult> Invoke(GetGroupInstancesInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetGroupInstancesResult>("tencentcloud:Tsf/getGroupInstances:getGroupInstances", args ?? new GetGroupInstancesInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetGroupInstancesResult>("tencentcloud:Tsf/getGroupInstances:getGroupInstances", args ?? new GetGroupInstancesInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetGroupInstancesArgs : Pulumi.InvokeArgs
+    public sealed class GetGroupInstancesArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// group id.
@@ -113,9 +107,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf
         public GetGroupInstancesArgs()
         {
         }
+        public static new GetGroupInstancesArgs Empty => new GetGroupInstancesArgs();
     }
 
-    public sealed class GetGroupInstancesInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetGroupInstancesInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// group id.
@@ -150,6 +145,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf
         public GetGroupInstancesInvokeArgs()
         {
         }
+        public static new GetGroupInstancesInvokeArgs Empty => new GetGroupInstancesInvokeArgs();
     }
 
 

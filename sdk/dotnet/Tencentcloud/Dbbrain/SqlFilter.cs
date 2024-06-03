@@ -15,43 +15,46 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dbbrain
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = Pulumi.Tencentcloud;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var config = new Config();
+    ///     var availabilityZone = config.Get("availabilityZone") ?? "ap-guangzhou-3";
+    ///     var region = config.Get("region") ?? "ap-guangzhou";
+    ///     var mysql = Tencentcloud.Mysql.GetInstance.Invoke(new()
     ///     {
-    ///         var config = new Config();
-    ///         var availabilityZone = config.Get("availabilityZone") ?? "ap-guangzhou-3";
-    ///         var region = config.Get("region") ?? "ap-guangzhou";
-    ///         var mysql = Output.Create(Tencentcloud.Mysql.GetInstance.InvokeAsync(new Tencentcloud.Mysql.GetInstanceArgs
-    ///         {
-    ///             InstanceName = "instance_name",
-    ///         }));
-    ///         var mysqlId = mysql.Apply(mysql =&gt; mysql.InstanceLists?[0]?.MysqlId);
-    ///         var sqlFilter = new Tencentcloud.Dbbrain.SqlFilter("sqlFilter", new Tencentcloud.Dbbrain.SqlFilterArgs
-    ///         {
-    ///             InstanceId = mysqlId,
-    ///             SessionToken = new Tencentcloud.Dbbrain.Inputs.SqlFilterSessionTokenArgs
-    ///             {
-    ///                 User = "test",
-    ///                 Password = "===password===",
-    ///             },
-    ///             SqlType = "SELECT",
-    ///             FilterKey = "filter_key",
-    ///             MaxConcurrency = 10,
-    ///             Duration = 3600,
-    ///         });
-    ///     }
+    ///         InstanceName = "instance_name",
+    ///     });
     /// 
-    /// }
+    ///     var mysqlId = mysql.Apply(getInstanceResult =&gt; getInstanceResult.InstanceLists[0]?.MysqlId);
+    /// 
+    ///     var sqlFilter = new Tencentcloud.Dbbrain.SqlFilter("sqlFilter", new()
+    ///     {
+    ///         InstanceId = mysqlId,
+    ///         SessionToken = new Tencentcloud.Dbbrain.Inputs.SqlFilterSessionTokenArgs
+    ///         {
+    ///             User = "test",
+    ///             Password = "===password===",
+    ///         },
+    ///         SqlType = "SELECT",
+    ///         FilterKey = "filter_key",
+    ///         MaxConcurrency = 10,
+    ///         Duration = 3600,
+    ///     });
+    /// 
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Dbbrain/sqlFilter:SqlFilter")]
-    public partial class SqlFilter : Pulumi.CustomResource
+    public partial class SqlFilter : global::Pulumi.CustomResource
     {
         /// <summary>
         /// filter duration.
@@ -152,7 +155,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dbbrain
         }
     }
 
-    public sealed class SqlFilterArgs : Pulumi.ResourceArgs
+    public sealed class SqlFilterArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// filter duration.
@@ -205,9 +208,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dbbrain
         public SqlFilterArgs()
         {
         }
+        public static new SqlFilterArgs Empty => new SqlFilterArgs();
     }
 
-    public sealed class SqlFilterState : Pulumi.ResourceArgs
+    public sealed class SqlFilterState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// filter duration.
@@ -266,5 +270,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dbbrain
         public SqlFilterState()
         {
         }
+        public static new SqlFilterState Empty => new SqlFilterState();
     }
 }

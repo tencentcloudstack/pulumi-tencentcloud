@@ -7,34 +7,40 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a dts syncCheckJobOperation
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dts"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dts"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Dts.NewSyncCheckJobOperation(ctx, "syncCheckJobOperation", &Dts.SyncCheckJobOperationArgs{
-// 			JobId: pulumi.String(""),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Dts.NewSyncCheckJobOperation(ctx, "syncCheckJobOperation", &Dts.SyncCheckJobOperationArgs{
+//				JobId: pulumi.String(""),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 type SyncCheckJobOperation struct {
 	pulumi.CustomResourceState
 
@@ -52,7 +58,7 @@ func NewSyncCheckJobOperation(ctx *pulumi.Context,
 	if args.JobId == nil {
 		return nil, errors.New("invalid value for required argument 'JobId'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource SyncCheckJobOperation
 	err := ctx.RegisterResource("tencentcloud:Dts/syncCheckJobOperation:SyncCheckJobOperation", name, args, &resource, opts...)
 	if err != nil {
@@ -125,7 +131,7 @@ func (i *SyncCheckJobOperation) ToSyncCheckJobOperationOutputWithContext(ctx con
 // SyncCheckJobOperationArrayInput is an input type that accepts SyncCheckJobOperationArray and SyncCheckJobOperationArrayOutput values.
 // You can construct a concrete instance of `SyncCheckJobOperationArrayInput` via:
 //
-//          SyncCheckJobOperationArray{ SyncCheckJobOperationArgs{...} }
+//	SyncCheckJobOperationArray{ SyncCheckJobOperationArgs{...} }
 type SyncCheckJobOperationArrayInput interface {
 	pulumi.Input
 
@@ -150,7 +156,7 @@ func (i SyncCheckJobOperationArray) ToSyncCheckJobOperationArrayOutputWithContex
 // SyncCheckJobOperationMapInput is an input type that accepts SyncCheckJobOperationMap and SyncCheckJobOperationMapOutput values.
 // You can construct a concrete instance of `SyncCheckJobOperationMapInput` via:
 //
-//          SyncCheckJobOperationMap{ "key": SyncCheckJobOperationArgs{...} }
+//	SyncCheckJobOperationMap{ "key": SyncCheckJobOperationArgs{...} }
 type SyncCheckJobOperationMapInput interface {
 	pulumi.Input
 

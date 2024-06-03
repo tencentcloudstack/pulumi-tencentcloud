@@ -18,11 +18,11 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mariadb
     /// mariadb instance_config can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Mariadb/instanceConfig:InstanceConfig test id
+    /// $ pulumi import tencentcloud:Mariadb/instanceConfig:InstanceConfig test id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Mariadb/instanceConfig:InstanceConfig")]
-    public partial class InstanceConfig : Pulumi.CustomResource
+    public partial class InstanceConfig : global::Pulumi.CustomResource
     {
         /// <summary>
         /// External network status, 0-closed; 1- Opening; Default not enabled.
@@ -87,7 +87,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mariadb
         }
     }
 
-    public sealed class InstanceConfigArgs : Pulumi.ResourceArgs
+    public sealed class InstanceConfigArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// External network status, 0-closed; 1- Opening; Default not enabled.
@@ -110,9 +110,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mariadb
         public InstanceConfigArgs()
         {
         }
+        public static new InstanceConfigArgs Empty => new InstanceConfigArgs();
     }
 
-    public sealed class InstanceConfigState : Pulumi.ResourceArgs
+    public sealed class InstanceConfigState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// External network status, 0-closed; 1- Opening; Default not enabled.
@@ -135,5 +136,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mariadb
         public InstanceConfigState()
         {
         }
+        public static new InstanceConfigState Empty => new InstanceConfigState();
     }
 }

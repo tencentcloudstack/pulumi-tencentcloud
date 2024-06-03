@@ -15,64 +15,58 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Audit
         /// <summary>
         /// Use this data source to query the key alias list specified with region supported by the audit.
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var all = Tencentcloud.Audit.GetKeyAlias.Invoke(new()
         ///     {
-        ///         var all = Output.Create(Tencentcloud.Audit.GetKeyAlias.InvokeAsync(new Tencentcloud.Audit.GetKeyAliasArgs
-        ///         {
-        ///             Region = "ap-hongkong",
-        ///         }));
-        ///     }
+        ///         Region = "ap-hongkong",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetKeyAliasResult> InvokeAsync(GetKeyAliasArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetKeyAliasResult>("tencentcloud:Audit/getKeyAlias:getKeyAlias", args ?? new GetKeyAliasArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetKeyAliasResult>("tencentcloud:Audit/getKeyAlias:getKeyAlias", args ?? new GetKeyAliasArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query the key alias list specified with region supported by the audit.
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var all = Tencentcloud.Audit.GetKeyAlias.Invoke(new()
         ///     {
-        ///         var all = Output.Create(Tencentcloud.Audit.GetKeyAlias.InvokeAsync(new Tencentcloud.Audit.GetKeyAliasArgs
-        ///         {
-        ///             Region = "ap-hongkong",
-        ///         }));
-        ///     }
+        ///         Region = "ap-hongkong",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetKeyAliasResult> Invoke(GetKeyAliasInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetKeyAliasResult>("tencentcloud:Audit/getKeyAlias:getKeyAlias", args ?? new GetKeyAliasInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetKeyAliasResult>("tencentcloud:Audit/getKeyAlias:getKeyAlias", args ?? new GetKeyAliasInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetKeyAliasArgs : Pulumi.InvokeArgs
+    public sealed class GetKeyAliasArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Region.
@@ -89,9 +83,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Audit
         public GetKeyAliasArgs()
         {
         }
+        public static new GetKeyAliasArgs Empty => new GetKeyAliasArgs();
     }
 
-    public sealed class GetKeyAliasInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetKeyAliasInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Region.
@@ -108,6 +103,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Audit
         public GetKeyAliasInvokeArgs()
         {
         }
+        public static new GetKeyAliasInvokeArgs Empty => new GetKeyAliasInvokeArgs();
     }
 
 

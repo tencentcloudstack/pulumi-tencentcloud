@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.As.Inputs
 {
 
-    public sealed class GetInstancesFilterInputArgs : Pulumi.ResourceArgs
+    public sealed class GetInstancesFilterInputArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Fields to be filtered. Valid names: `instance-id`: Filters by instance ID, `auto-scaling-group-id`: Filter by scaling group ID.
@@ -34,5 +34,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.As.Inputs
         public GetInstancesFilterInputArgs()
         {
         }
+        public static new GetInstancesFilterInputArgs Empty => new GetInstancesFilterInputArgs();
     }
 }

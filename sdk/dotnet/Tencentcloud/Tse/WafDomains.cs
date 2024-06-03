@@ -15,34 +15,35 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tse
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var wafDomains = new Tencentcloud.Tse.WafDomains("wafDomains", new()
     ///     {
-    ///         var wafDomains = new Tencentcloud.Tse.WafDomains("wafDomains", new Tencentcloud.Tse.WafDomainsArgs
-    ///         {
-    ///             Domain = "tse.exmaple.com",
-    ///             GatewayId = "gateway-ed63e957",
-    ///         });
-    ///     }
+    ///         Domain = "tse.exmaple.com",
+    ///         GatewayId = "gateway-ed63e957",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// tse waf_domains can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Tse/wafDomains:WafDomains waf_domains waf_domains_id
+    /// $ pulumi import tencentcloud:Tse/wafDomains:WafDomains waf_domains waf_domains_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Tse/wafDomains:WafDomains")]
-    public partial class WafDomains : Pulumi.CustomResource
+    public partial class WafDomains : global::Pulumi.CustomResource
     {
         /// <summary>
         /// The waf protected domain name.
@@ -101,7 +102,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tse
         }
     }
 
-    public sealed class WafDomainsArgs : Pulumi.ResourceArgs
+    public sealed class WafDomainsArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// The waf protected domain name.
@@ -118,9 +119,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tse
         public WafDomainsArgs()
         {
         }
+        public static new WafDomainsArgs Empty => new WafDomainsArgs();
     }
 
-    public sealed class WafDomainsState : Pulumi.ResourceArgs
+    public sealed class WafDomainsState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// The waf protected domain name.
@@ -137,5 +139,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tse
         public WafDomainsState()
         {
         }
+        public static new WafDomainsState Empty => new WafDomainsState();
     }
 }

@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Elasticsearch.Inputs
 {
 
-    public sealed class InstanceMultiZoneInfoArgs : Pulumi.ResourceArgs
+    public sealed class InstanceMultiZoneInfoArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Availability zone.
@@ -28,5 +28,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Elasticsearch.Inputs
         public InstanceMultiZoneInfoArgs()
         {
         }
+        public static new InstanceMultiZoneInfoArgs Empty => new InstanceMultiZoneInfoArgs();
     }
 }

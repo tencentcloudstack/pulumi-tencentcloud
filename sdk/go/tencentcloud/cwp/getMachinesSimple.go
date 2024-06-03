@@ -8,46 +8,159 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Use this data source to query detailed information of cwp machinesSimple
 //
 // ## Example Usage
-// ### Query by TagId filter
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Cwp"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cwp"
-// )
 //
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cwp"
+//
+// )
 // func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Cwp.GetMachinesSimple(ctx, &cwp.GetMachinesSimpleArgs{
-// 			Filters: []cwp.GetMachinesSimpleFilter{
-// 				cwp.GetMachinesSimpleFilter{
-// 					ExactMatch: pulumi.BoolRef(true),
-// 					Name:       "TagId",
-// 					Values: []string{
-// 						"13771",
-// 					},
-// 				},
-// 			},
-// 			MachineRegion: "all-regions",
-// 			MachineType:   "ALL",
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
+// pulumi.Run(func(ctx *pulumi.Context) error {
+// _, err := Cwp.GetMachinesSimple(ctx, &cwp.GetMachinesSimpleArgs{
+// MachineRegion: "ap-guangzhou",
+// MachineType: "CVM",
+// ProjectIds: interface{}{
+// 1210293,
+// 1157652,
+// },
+// }, nil);
+// if err != nil {
+// return err
+// }
+// return nil
+// })
 // }
 // ```
+// <!--End PulumiCodeChooser -->
+//
+// ### Query by Keyword filter
+//
+// <!--Start PulumiCodeChooser -->
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cwp"
+//
+// )
+// func main() {
+// pulumi.Run(func(ctx *pulumi.Context) error {
+// _, err := Cwp.GetMachinesSimple(ctx, &cwp.GetMachinesSimpleArgs{
+// Filters: []cwp.GetMachinesSimpleFilter{
+// {
+// ExactMatch: pulumi.BoolRef(true),
+// Name: "Keywords",
+// Values: []string{
+// "tf_example",
+// },
+// },
+// },
+// MachineRegion: "ap-guangzhou",
+// MachineType: "CVM",
+// ProjectIds: interface{}{
+// 0,
+// },
+// }, nil);
+// if err != nil {
+// return err
+// }
+// return nil
+// })
+// }
+// ```
+// <!--End PulumiCodeChooser -->
+//
+// ### Query by Version filter
+//
+// <!--Start PulumiCodeChooser -->
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cwp"
+//
+// )
+// func main() {
+// pulumi.Run(func(ctx *pulumi.Context) error {
+// _, err := Cwp.GetMachinesSimple(ctx, &cwp.GetMachinesSimpleArgs{
+// Filters: []cwp.GetMachinesSimpleFilter{
+// {
+// ExactMatch: pulumi.BoolRef(true),
+// Name: "Version",
+// Values: []string{
+// "BASIC_VERSION",
+// },
+// },
+// },
+// MachineRegion: "ap-guangzhou",
+// MachineType: "CVM",
+// ProjectIds: interface{}{
+// 0,
+// },
+// }, nil);
+// if err != nil {
+// return err
+// }
+// return nil
+// })
+// }
+// ```
+// <!--End PulumiCodeChooser -->
+//
+// ### Query by TagId filter
+//
+// <!--Start PulumiCodeChooser -->
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cwp"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Cwp.GetMachinesSimple(ctx, &cwp.GetMachinesSimpleArgs{
+//				Filters: []cwp.GetMachinesSimpleFilter{
+//					{
+//						ExactMatch: pulumi.BoolRef(true),
+//						Name:       "TagId",
+//						Values: []string{
+//							"13771",
+//						},
+//					},
+//				},
+//				MachineRegion: "all-regions",
+//				MachineType:   "ALL",
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
+// <!--End PulumiCodeChooser -->
 func GetMachinesSimple(ctx *pulumi.Context, args *GetMachinesSimpleArgs, opts ...pulumi.InvokeOption) (*GetMachinesSimpleResult, error) {
-	opts = pkgInvokeDefaultOpts(opts)
+	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetMachinesSimpleResult
 	err := ctx.Invoke("tencentcloud:Cwp/getMachinesSimple:getMachinesSimple", args, &rv, opts...)
 	if err != nil {

@@ -7,46 +7,52 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a css padTemplate
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Css"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Css"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Css.NewPadTemplate(ctx, "padTemplate", &Css.PadTemplateArgs{
-// 			Description:  pulumi.String("pad template"),
-// 			MaxDuration:  pulumi.Int(120000),
-// 			TemplateName: pulumi.String("tf-pad"),
-// 			Type:         pulumi.Int(1),
-// 			Url:          pulumi.String("https://livewatermark-1251132611.cos.ap-guangzhou.myqcloud.com/1308919341/watermark_img_1698736540399_1441698123618_.pic.jpg"),
-// 			WaitDuration: pulumi.Int(2000),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Css.NewPadTemplate(ctx, "padTemplate", &Css.PadTemplateArgs{
+//				Description:  pulumi.String("pad template"),
+//				MaxDuration:  pulumi.Int(120000),
+//				TemplateName: pulumi.String("tf-pad"),
+//				Type:         pulumi.Int(1),
+//				Url:          pulumi.String("https://livewatermark-1251132611.cos.ap-guangzhou.myqcloud.com/1308919341/watermark_img_1698736540399_1441698123618_.pic.jpg"),
+//				WaitDuration: pulumi.Int(2000),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // css pad_template can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Css/padTemplate:PadTemplate pad_template templateId
+// $ pulumi import tencentcloud:Css/padTemplate:PadTemplate pad_template templateId
 // ```
 type PadTemplate struct {
 	pulumi.CustomResourceState
@@ -78,7 +84,7 @@ func NewPadTemplate(ctx *pulumi.Context,
 	if args.Url == nil {
 		return nil, errors.New("invalid value for required argument 'Url'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource PadTemplate
 	err := ctx.RegisterResource("tencentcloud:Css/padTemplate:PadTemplate", name, args, &resource, opts...)
 	if err != nil {
@@ -191,7 +197,7 @@ func (i *PadTemplate) ToPadTemplateOutputWithContext(ctx context.Context) PadTem
 // PadTemplateArrayInput is an input type that accepts PadTemplateArray and PadTemplateArrayOutput values.
 // You can construct a concrete instance of `PadTemplateArrayInput` via:
 //
-//          PadTemplateArray{ PadTemplateArgs{...} }
+//	PadTemplateArray{ PadTemplateArgs{...} }
 type PadTemplateArrayInput interface {
 	pulumi.Input
 
@@ -216,7 +222,7 @@ func (i PadTemplateArray) ToPadTemplateArrayOutputWithContext(ctx context.Contex
 // PadTemplateMapInput is an input type that accepts PadTemplateMap and PadTemplateMapOutput values.
 // You can construct a concrete instance of `PadTemplateMapInput` via:
 //
-//          PadTemplateMap{ "key": PadTemplateArgs{...} }
+//	PadTemplateMap{ "key": PadTemplateArgs{...} }
 type PadTemplateMapInput interface {
 	pulumi.Input
 

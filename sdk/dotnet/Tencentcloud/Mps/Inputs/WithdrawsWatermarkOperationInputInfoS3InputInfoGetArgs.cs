@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps.Inputs
 {
 
-    public sealed class WithdrawsWatermarkOperationInputInfoS3InputInfoGetArgs : Pulumi.ResourceArgs
+    public sealed class WithdrawsWatermarkOperationInputInfoS3InputInfoGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// The AWS S3 bucket.
@@ -46,5 +46,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps.Inputs
         public WithdrawsWatermarkOperationInputInfoS3InputInfoGetArgs()
         {
         }
+        public static new WithdrawsWatermarkOperationInputInfoS3InputInfoGetArgs Empty => new WithdrawsWatermarkOperationInputInfoS3InputInfoGetArgs();
     }
 }

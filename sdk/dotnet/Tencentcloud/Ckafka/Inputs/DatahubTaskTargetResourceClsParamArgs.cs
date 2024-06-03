@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka.Inputs
 {
 
-    public sealed class DatahubTaskTargetResourceClsParamArgs : Pulumi.ResourceArgs
+    public sealed class DatahubTaskTargetResourceClsParamArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Required when Decode Json is false.
@@ -46,5 +46,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka.Inputs
         public DatahubTaskTargetResourceClsParamArgs()
         {
         }
+        public static new DatahubTaskTargetResourceClsParamArgs Empty => new DatahubTaskTargetResourceClsParamArgs();
     }
 }

@@ -15,66 +15,60 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcr
         /// <summary>
         /// Use this data source to query detailed information of tcr replication_instance_create_tasks
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var createTasks = Tencentcloud.Tcr.GetReplicationInstanceCreateTasks.Invoke(new()
         ///     {
-        ///         var createTasks = Output.Create(Tencentcloud.Tcr.GetReplicationInstanceCreateTasks.InvokeAsync(new Tencentcloud.Tcr.GetReplicationInstanceCreateTasksArgs
-        ///         {
-        ///             ReplicationRegistryId = local.Dst_registry_id,
-        ///             ReplicationRegionId = local.Dst_region_id,
-        ///         }));
-        ///     }
+        ///         ReplicationRegistryId = local.Dst_registry_id,
+        ///         ReplicationRegionId = local.Dst_region_id,
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetReplicationInstanceCreateTasksResult> InvokeAsync(GetReplicationInstanceCreateTasksArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetReplicationInstanceCreateTasksResult>("tencentcloud:Tcr/getReplicationInstanceCreateTasks:getReplicationInstanceCreateTasks", args ?? new GetReplicationInstanceCreateTasksArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetReplicationInstanceCreateTasksResult>("tencentcloud:Tcr/getReplicationInstanceCreateTasks:getReplicationInstanceCreateTasks", args ?? new GetReplicationInstanceCreateTasksArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of tcr replication_instance_create_tasks
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var createTasks = Tencentcloud.Tcr.GetReplicationInstanceCreateTasks.Invoke(new()
         ///     {
-        ///         var createTasks = Output.Create(Tencentcloud.Tcr.GetReplicationInstanceCreateTasks.InvokeAsync(new Tencentcloud.Tcr.GetReplicationInstanceCreateTasksArgs
-        ///         {
-        ///             ReplicationRegistryId = local.Dst_registry_id,
-        ///             ReplicationRegionId = local.Dst_region_id,
-        ///         }));
-        ///     }
+        ///         ReplicationRegistryId = local.Dst_registry_id,
+        ///         ReplicationRegionId = local.Dst_region_id,
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetReplicationInstanceCreateTasksResult> Invoke(GetReplicationInstanceCreateTasksInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetReplicationInstanceCreateTasksResult>("tencentcloud:Tcr/getReplicationInstanceCreateTasks:getReplicationInstanceCreateTasks", args ?? new GetReplicationInstanceCreateTasksInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetReplicationInstanceCreateTasksResult>("tencentcloud:Tcr/getReplicationInstanceCreateTasks:getReplicationInstanceCreateTasks", args ?? new GetReplicationInstanceCreateTasksInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetReplicationInstanceCreateTasksArgs : Pulumi.InvokeArgs
+    public sealed class GetReplicationInstanceCreateTasksArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// synchronization instance region Id, see ReplicationRegionId in DescribeReplicationInstances.
@@ -97,9 +91,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcr
         public GetReplicationInstanceCreateTasksArgs()
         {
         }
+        public static new GetReplicationInstanceCreateTasksArgs Empty => new GetReplicationInstanceCreateTasksArgs();
     }
 
-    public sealed class GetReplicationInstanceCreateTasksInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetReplicationInstanceCreateTasksInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// synchronization instance region Id, see ReplicationRegionId in DescribeReplicationInstances.
@@ -122,6 +117,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcr
         public GetReplicationInstanceCreateTasksInvokeArgs()
         {
         }
+        public static new GetReplicationInstanceCreateTasksInvokeArgs Empty => new GetReplicationInstanceCreateTasksInvokeArgs();
     }
 
 

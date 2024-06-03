@@ -16,7 +16,7 @@ import * as utilities from "../utilities";
  * Eip association can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Eip/association:Association bar eip-41s6jwy4::ins-34jwj3
+ * $ pulumi import tencentcloud:Eip/association:Association bar eip-41s6jwy4::ins-34jwj3
  * ```
  */
 export class Association extends pulumi.CustomResource {

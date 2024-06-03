@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor.Inputs
 {
 
-    public sealed class AlarmPolicyTriggerTaskArgs : Pulumi.ResourceArgs
+    public sealed class AlarmPolicyTriggerTaskArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Configuration information in JSON format.
@@ -28,5 +28,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor.Inputs
         public AlarmPolicyTriggerTaskArgs()
         {
         }
+        public static new AlarmPolicyTriggerTaskArgs Empty => new AlarmPolicyTriggerTaskArgs();
     }
 }

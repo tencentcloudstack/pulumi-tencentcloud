@@ -7,42 +7,48 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a rum instanceStatusConfig
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Rum"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Rum"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Rum.NewInstanceStatusConfig(ctx, "instanceStatusConfig", &Rum.InstanceStatusConfigArgs{
-// 			InstanceId: pulumi.String("rum-pasZKEI3RLgakj"),
-// 			Operate:    pulumi.String("stop"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Rum.NewInstanceStatusConfig(ctx, "instanceStatusConfig", &Rum.InstanceStatusConfigArgs{
+//				InstanceId: pulumi.String("rum-pasZKEI3RLgakj"),
+//				Operate:    pulumi.String("stop"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // rum instance_status_config can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Rum/instanceStatusConfig:InstanceStatusConfig instance_status_config instance_id
+// $ pulumi import tencentcloud:Rum/instanceStatusConfig:InstanceStatusConfig instance_status_config instance_id
 // ```
 type InstanceStatusConfig struct {
 	pulumi.CustomResourceState
@@ -68,7 +74,7 @@ func NewInstanceStatusConfig(ctx *pulumi.Context,
 	if args.Operate == nil {
 		return nil, errors.New("invalid value for required argument 'Operate'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource InstanceStatusConfig
 	err := ctx.RegisterResource("tencentcloud:Rum/instanceStatusConfig:InstanceStatusConfig", name, args, &resource, opts...)
 	if err != nil {
@@ -153,7 +159,7 @@ func (i *InstanceStatusConfig) ToInstanceStatusConfigOutputWithContext(ctx conte
 // InstanceStatusConfigArrayInput is an input type that accepts InstanceStatusConfigArray and InstanceStatusConfigArrayOutput values.
 // You can construct a concrete instance of `InstanceStatusConfigArrayInput` via:
 //
-//          InstanceStatusConfigArray{ InstanceStatusConfigArgs{...} }
+//	InstanceStatusConfigArray{ InstanceStatusConfigArgs{...} }
 type InstanceStatusConfigArrayInput interface {
 	pulumi.Input
 
@@ -178,7 +184,7 @@ func (i InstanceStatusConfigArray) ToInstanceStatusConfigArrayOutputWithContext(
 // InstanceStatusConfigMapInput is an input type that accepts InstanceStatusConfigMap and InstanceStatusConfigMapOutput values.
 // You can construct a concrete instance of `InstanceStatusConfigMapInput` via:
 //
-//          InstanceStatusConfigMap{ "key": InstanceStatusConfigArgs{...} }
+//	InstanceStatusConfigMap{ "key": InstanceStatusConfigArgs{...} }
 type InstanceStatusConfigMapInput interface {
 	pulumi.Input
 

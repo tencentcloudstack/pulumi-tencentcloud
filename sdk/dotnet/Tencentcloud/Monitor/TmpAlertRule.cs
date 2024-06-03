@@ -17,91 +17,96 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var config = new Config();
+    ///     var availabilityZone = config.Get("availabilityZone") ?? "ap-guangzhou-4";
+    ///     var vpc = new Tencentcloud.Vpc.Instance("vpc", new()
     ///     {
-    ///         var config = new Config();
-    ///         var availabilityZone = config.Get("availabilityZone") ?? "ap-guangzhou-4";
-    ///         var vpc = new Tencentcloud.Vpc.Instance("vpc", new Tencentcloud.Vpc.InstanceArgs
-    ///         {
-    ///             CidrBlock = "10.0.0.0/16",
-    ///         });
-    ///         var subnet = new Tencentcloud.Subnet.Instance("subnet", new Tencentcloud.Subnet.InstanceArgs
-    ///         {
-    ///             VpcId = vpc.Id,
-    ///             AvailabilityZone = availabilityZone,
-    ///             CidrBlock = "10.0.1.0/24",
-    ///         });
-    ///         var fooTmpInstance = new Tencentcloud.Monitor.TmpInstance("fooTmpInstance", new Tencentcloud.Monitor.TmpInstanceArgs
-    ///         {
-    ///             InstanceName = "tf-tmp-instance",
-    ///             VpcId = vpc.Id,
-    ///             SubnetId = subnet.Id,
-    ///             DataRetentionTime = 30,
-    ///             Zone = availabilityZone,
-    ///             Tags = 
-    ///             {
-    ///                 { "createdBy", "terraform" },
-    ///             },
-    ///         });
-    ///         var fooTmpCvmAgent = new Tencentcloud.Monitor.TmpCvmAgent("fooTmpCvmAgent", new Tencentcloud.Monitor.TmpCvmAgentArgs
-    ///         {
-    ///             InstanceId = fooTmpInstance.Id,
-    ///         });
-    ///         var fooTmpAlertRule = new Tencentcloud.Monitor.TmpAlertRule("fooTmpAlertRule", new Tencentcloud.Monitor.TmpAlertRuleArgs
-    ///         {
-    ///             Duration = "2m",
-    ///             Expr = "avg by (instance) (mysql_global_status_threads_connected) / avg by (instance) (mysql_global_variables_max_connections)  &gt; 0.8",
-    ///             InstanceId = fooTmpInstance.Id,
-    ///             Receivers = 
-    ///             {
-    ///                 "notice-f2svbu3w",
-    ///             },
-    ///             RuleName = "MySQL 连接数过多",
-    ///             RuleState = 2,
-    ///             Type = "MySQL/MySQL 连接数过多",
-    ///             Annotations = 
-    ///             {
-    ///                 new Tencentcloud.Monitor.Inputs.TmpAlertRuleAnnotationArgs
-    ///                 {
-    ///                     Key = "description",
-    ///                     Value = "MySQL 连接数过多, 实例: {{$labels.instance}}，当前值: {{ $value | humanizePercentage }}。",
-    ///                 },
-    ///                 new Tencentcloud.Monitor.Inputs.TmpAlertRuleAnnotationArgs
-    ///                 {
-    ///                     Key = "summary",
-    ///                     Value = "MySQL 连接数过多(&gt;80%)",
-    ///                 },
-    ///             },
-    ///             Labels = 
-    ///             {
-    ///                 new Tencentcloud.Monitor.Inputs.TmpAlertRuleLabelArgs
-    ///                 {
-    ///                     Key = "severity",
-    ///                     Value = "warning",
-    ///                 },
-    ///             },
-    ///         });
-    ///     }
+    ///         CidrBlock = "10.0.0.0/16",
+    ///     });
     /// 
-    /// }
+    ///     var subnet = new Tencentcloud.Subnet.Instance("subnet", new()
+    ///     {
+    ///         VpcId = vpc.Id,
+    ///         AvailabilityZone = availabilityZone,
+    ///         CidrBlock = "10.0.1.0/24",
+    ///     });
+    /// 
+    ///     var fooTmpInstance = new Tencentcloud.Monitor.TmpInstance("fooTmpInstance", new()
+    ///     {
+    ///         InstanceName = "tf-tmp-instance",
+    ///         VpcId = vpc.Id,
+    ///         SubnetId = subnet.Id,
+    ///         DataRetentionTime = 30,
+    ///         Zone = availabilityZone,
+    ///         Tags = 
+    ///         {
+    ///             { "createdBy", "terraform" },
+    ///         },
+    ///     });
+    /// 
+    ///     var fooTmpCvmAgent = new Tencentcloud.Monitor.TmpCvmAgent("fooTmpCvmAgent", new()
+    ///     {
+    ///         InstanceId = fooTmpInstance.Id,
+    ///     });
+    /// 
+    ///     var fooTmpAlertRule = new Tencentcloud.Monitor.TmpAlertRule("fooTmpAlertRule", new()
+    ///     {
+    ///         Duration = "2m",
+    ///         Expr = "avg by (instance) (mysql_global_status_threads_connected) / avg by (instance) (mysql_global_variables_max_connections)  &gt; 0.8",
+    ///         InstanceId = fooTmpInstance.Id,
+    ///         Receivers = new[]
+    ///         {
+    ///             "notice-f2svbu3w",
+    ///         },
+    ///         RuleName = "MySQL 连接数过多",
+    ///         RuleState = 2,
+    ///         Type = "MySQL/MySQL 连接数过多",
+    ///         Annotations = new[]
+    ///         {
+    ///             new Tencentcloud.Monitor.Inputs.TmpAlertRuleAnnotationArgs
+    ///             {
+    ///                 Key = "description",
+    ///                 Value = "MySQL 连接数过多, 实例: {{$labels.instance}}，当前值: {{ $value | humanizePercentage }}。",
+    ///             },
+    ///             new Tencentcloud.Monitor.Inputs.TmpAlertRuleAnnotationArgs
+    ///             {
+    ///                 Key = "summary",
+    ///                 Value = "MySQL 连接数过多(&gt;80%)",
+    ///             },
+    ///         },
+    ///         Labels = new[]
+    ///         {
+    ///             new Tencentcloud.Monitor.Inputs.TmpAlertRuleLabelArgs
+    ///             {
+    ///                 Key = "severity",
+    ///                 Value = "warning",
+    ///             },
+    ///         },
+    ///     });
+    /// 
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// monitor tmpAlertRule can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Monitor/tmpAlertRule:TmpAlertRule tmpAlertRule instanceId#Rule_id
+    /// $ pulumi import tencentcloud:Monitor/tmpAlertRule:TmpAlertRule tmpAlertRule instanceId#Rule_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Monitor/tmpAlertRule:TmpAlertRule")]
-    public partial class TmpAlertRule : Pulumi.CustomResource
+    public partial class TmpAlertRule : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Rule alarm duration.
@@ -202,7 +207,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
         }
     }
 
-    public sealed class TmpAlertRuleArgs : Pulumi.ResourceArgs
+    public sealed class TmpAlertRuleArgs : global::Pulumi.ResourceArgs
     {
         [Input("annotations")]
         private InputList<Inputs.TmpAlertRuleAnnotationArgs>? _annotations;
@@ -279,9 +284,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
         public TmpAlertRuleArgs()
         {
         }
+        public static new TmpAlertRuleArgs Empty => new TmpAlertRuleArgs();
     }
 
-    public sealed class TmpAlertRuleState : Pulumi.ResourceArgs
+    public sealed class TmpAlertRuleState : global::Pulumi.ResourceArgs
     {
         [Input("annotations")]
         private InputList<Inputs.TmpAlertRuleAnnotationGetArgs>? _annotations;
@@ -358,5 +364,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
         public TmpAlertRuleState()
         {
         }
+        public static new TmpAlertRuleState Empty => new TmpAlertRuleState();
     }
 }

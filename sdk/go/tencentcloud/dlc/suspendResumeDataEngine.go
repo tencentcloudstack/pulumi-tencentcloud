@@ -7,42 +7,48 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a dlc suspendResumeDataEngine
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dlc"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dlc"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Dlc.NewSuspendResumeDataEngine(ctx, "suspendResumeDataEngine", &Dlc.SuspendResumeDataEngineArgs{
-// 			DataEngineName: pulumi.String("example-iac"),
-// 			Operate:        pulumi.String("suspend"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Dlc.NewSuspendResumeDataEngine(ctx, "suspendResumeDataEngine", &Dlc.SuspendResumeDataEngineArgs{
+//				DataEngineName: pulumi.String("example-iac"),
+//				Operate:        pulumi.String("suspend"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // dlc suspend_resume_data_engine can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Dlc/suspendResumeDataEngine:SuspendResumeDataEngine suspend_resume_data_engine suspend_resume_data_engine_id
+// $ pulumi import tencentcloud:Dlc/suspendResumeDataEngine:SuspendResumeDataEngine suspend_resume_data_engine suspend_resume_data_engine_id
 // ```
 type SuspendResumeDataEngine struct {
 	pulumi.CustomResourceState
@@ -66,7 +72,7 @@ func NewSuspendResumeDataEngine(ctx *pulumi.Context,
 	if args.Operate == nil {
 		return nil, errors.New("invalid value for required argument 'Operate'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource SuspendResumeDataEngine
 	err := ctx.RegisterResource("tencentcloud:Dlc/suspendResumeDataEngine:SuspendResumeDataEngine", name, args, &resource, opts...)
 	if err != nil {
@@ -147,7 +153,7 @@ func (i *SuspendResumeDataEngine) ToSuspendResumeDataEngineOutputWithContext(ctx
 // SuspendResumeDataEngineArrayInput is an input type that accepts SuspendResumeDataEngineArray and SuspendResumeDataEngineArrayOutput values.
 // You can construct a concrete instance of `SuspendResumeDataEngineArrayInput` via:
 //
-//          SuspendResumeDataEngineArray{ SuspendResumeDataEngineArgs{...} }
+//	SuspendResumeDataEngineArray{ SuspendResumeDataEngineArgs{...} }
 type SuspendResumeDataEngineArrayInput interface {
 	pulumi.Input
 
@@ -172,7 +178,7 @@ func (i SuspendResumeDataEngineArray) ToSuspendResumeDataEngineArrayOutputWithCo
 // SuspendResumeDataEngineMapInput is an input type that accepts SuspendResumeDataEngineMap and SuspendResumeDataEngineMapOutput values.
 // You can construct a concrete instance of `SuspendResumeDataEngineMapInput` via:
 //
-//          SuspendResumeDataEngineMap{ "key": SuspendResumeDataEngineArgs{...} }
+//	SuspendResumeDataEngineMap{ "key": SuspendResumeDataEngineArgs{...} }
 type SuspendResumeDataEngineMapInput interface {
 	pulumi.Input
 

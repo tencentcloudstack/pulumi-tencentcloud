@@ -15,58 +15,52 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka
         /// <summary>
         /// Use this data source to query detailed information of ckafka connect_resource
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
-        ///     {
-        ///         var connectResource = Output.Create(Tencentcloud.Ckafka.GetConnectResource.InvokeAsync());
-        ///     }
+        ///     var connectResource = Tencentcloud.Ckafka.GetConnectResource.Invoke();
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetConnectResourceResult> InvokeAsync(GetConnectResourceArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetConnectResourceResult>("tencentcloud:Ckafka/getConnectResource:getConnectResource", args ?? new GetConnectResourceArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetConnectResourceResult>("tencentcloud:Ckafka/getConnectResource:getConnectResource", args ?? new GetConnectResourceArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of ckafka connect_resource
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
-        ///     {
-        ///         var connectResource = Output.Create(Tencentcloud.Ckafka.GetConnectResource.InvokeAsync());
-        ///     }
+        ///     var connectResource = Tencentcloud.Ckafka.GetConnectResource.Invoke();
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetConnectResourceResult> Invoke(GetConnectResourceInvokeArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetConnectResourceResult>("tencentcloud:Ckafka/getConnectResource:getConnectResource", args ?? new GetConnectResourceInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetConnectResourceResult>("tencentcloud:Ckafka/getConnectResource:getConnectResource", args ?? new GetConnectResourceInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetConnectResourceArgs : Pulumi.InvokeArgs
+    public sealed class GetConnectResourceArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Return the number, the default is 20, the maximum is 100.
@@ -107,9 +101,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka
         public GetConnectResourceArgs()
         {
         }
+        public static new GetConnectResourceArgs Empty => new GetConnectResourceArgs();
     }
 
-    public sealed class GetConnectResourceInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetConnectResourceInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Return the number, the default is 20, the maximum is 100.
@@ -150,6 +145,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka
         public GetConnectResourceInvokeArgs()
         {
         }
+        public static new GetConnectResourceInvokeArgs Empty => new GetConnectResourceInvokeArgs();
     }
 
 

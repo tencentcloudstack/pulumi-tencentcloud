@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dts.Inputs
 {
 
-    public sealed class SyncConfigOptionsDdlOptionGetArgs : Pulumi.ResourceArgs
+    public sealed class SyncConfigOptionsDdlOptionGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Ddl type, such as Database, Table, View, Index, etc. Note: This field may return null, indicating that no valid value can be obtained.
@@ -34,5 +34,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dts.Inputs
         public SyncConfigOptionsDdlOptionGetArgs()
         {
         }
+        public static new SyncConfigOptionsDdlOptionGetArgs Empty => new SyncConfigOptionsDdlOptionGetArgs();
     }
 }

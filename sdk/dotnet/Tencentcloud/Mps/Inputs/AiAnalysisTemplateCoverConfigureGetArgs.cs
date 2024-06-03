@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps.Inputs
 {
 
-    public sealed class AiAnalysisTemplateCoverConfigureGetArgs : Pulumi.ResourceArgs
+    public sealed class AiAnalysisTemplateCoverConfigureGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Ai cover task switch, optional value:ON/OFF.
@@ -22,5 +22,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps.Inputs
         public AiAnalysisTemplateCoverConfigureGetArgs()
         {
         }
+        public static new AiAnalysisTemplateCoverConfigureGetArgs Empty => new AiAnalysisTemplateCoverConfigureGetArgs();
     }
 }

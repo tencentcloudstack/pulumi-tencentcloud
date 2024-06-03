@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,24 +11,23 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const diagHistory = pulumi.output(tencentcloud.Dbbrain.getDiagHistory({
+ * const diagHistory = tencentcloud.Dbbrain.getDiagHistory({
  *     endTime: "%s",
  *     instanceId: "%s",
  *     product: "mysql",
  *     startTime: "%s",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getDiagHistory(args: GetDiagHistoryArgs, opts?: pulumi.InvokeOptions): Promise<GetDiagHistoryResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Dbbrain/getDiagHistory:getDiagHistory", {
         "endTime": args.endTime,
         "instanceId": args.instanceId,
@@ -90,9 +90,27 @@ export interface GetDiagHistoryResult {
      */
     readonly startTime: string;
 }
-
+/**
+ * Use this data source to query detailed information of dbbrain diagHistory
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const diagHistory = tencentcloud.Dbbrain.getDiagHistory({
+ *     endTime: "%s",
+ *     instanceId: "%s",
+ *     product: "mysql",
+ *     startTime: "%s",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getDiagHistoryOutput(args: GetDiagHistoryOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetDiagHistoryResult> {
-    return pulumi.output(args).apply(a => getDiagHistory(a, opts))
+    return pulumi.output(args).apply((a: any) => getDiagHistory(a, opts))
 }
 
 /**

@@ -7,8 +7,9 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a reserved instance resource.
@@ -17,34 +18,39 @@ import (
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Reserved"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Reserved"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Reserved.NewInstance(ctx, "ri", &Reserved.InstanceArgs{
-// 			ConfigId:      pulumi.String("469043dd-28b9-4d89-b557-74f6a8326259"),
-// 			InstanceCount: pulumi.Int(2),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Reserved.NewInstance(ctx, "ri", &Reserved.InstanceArgs{
+//				ConfigId:      pulumi.String("469043dd-28b9-4d89-b557-74f6a8326259"),
+//				InstanceCount: pulumi.Int(2),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // Reserved instance can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Reserved/instance:Instance foo 6cc16e7c-47d7-4fae-9b44-ce5c0f59a920
+// $ pulumi import tencentcloud:Reserved/instance:Instance foo 6cc16e7c-47d7-4fae-9b44-ce5c0f59a920
 // ```
 type Instance struct {
 	pulumi.CustomResourceState
@@ -78,7 +84,7 @@ func NewInstance(ctx *pulumi.Context,
 	if args.InstanceCount == nil {
 		return nil, errors.New("invalid value for required argument 'InstanceCount'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource Instance
 	err := ctx.RegisterResource("tencentcloud:Reserved/instance:Instance", name, args, &resource, opts...)
 	if err != nil {
@@ -187,7 +193,7 @@ func (i *Instance) ToInstanceOutputWithContext(ctx context.Context) InstanceOutp
 // InstanceArrayInput is an input type that accepts InstanceArray and InstanceArrayOutput values.
 // You can construct a concrete instance of `InstanceArrayInput` via:
 //
-//          InstanceArray{ InstanceArgs{...} }
+//	InstanceArray{ InstanceArgs{...} }
 type InstanceArrayInput interface {
 	pulumi.Input
 
@@ -212,7 +218,7 @@ func (i InstanceArray) ToInstanceArrayOutputWithContext(ctx context.Context) Ins
 // InstanceMapInput is an input type that accepts InstanceMap and InstanceMapOutput values.
 // You can construct a concrete instance of `InstanceMapInput` via:
 //
-//          InstanceMap{ "key": InstanceArgs{...} }
+//	InstanceMap{ "key": InstanceArgs{...} }
 type InstanceMapInput interface {
 	pulumi.Input
 

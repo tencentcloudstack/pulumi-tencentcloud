@@ -15,64 +15,58 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
         /// <summary>
         /// Use this data source to query detailed information of mysql instance_charset
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var instanceCharset = Tencentcloud.Mysql.GetInstanceCharset.Invoke(new()
         ///     {
-        ///         var instanceCharset = Output.Create(Tencentcloud.Mysql.GetInstanceCharset.InvokeAsync(new Tencentcloud.Mysql.GetInstanceCharsetArgs
-        ///         {
-        ///             InstanceId = "",
-        ///         }));
-        ///     }
+        ///         InstanceId = "",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetInstanceCharsetResult> InvokeAsync(GetInstanceCharsetArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetInstanceCharsetResult>("tencentcloud:Mysql/getInstanceCharset:getInstanceCharset", args ?? new GetInstanceCharsetArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetInstanceCharsetResult>("tencentcloud:Mysql/getInstanceCharset:getInstanceCharset", args ?? new GetInstanceCharsetArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of mysql instance_charset
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var instanceCharset = Tencentcloud.Mysql.GetInstanceCharset.Invoke(new()
         ///     {
-        ///         var instanceCharset = Output.Create(Tencentcloud.Mysql.GetInstanceCharset.InvokeAsync(new Tencentcloud.Mysql.GetInstanceCharsetArgs
-        ///         {
-        ///             InstanceId = "",
-        ///         }));
-        ///     }
+        ///         InstanceId = "",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetInstanceCharsetResult> Invoke(GetInstanceCharsetInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetInstanceCharsetResult>("tencentcloud:Mysql/getInstanceCharset:getInstanceCharset", args ?? new GetInstanceCharsetInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetInstanceCharsetResult>("tencentcloud:Mysql/getInstanceCharset:getInstanceCharset", args ?? new GetInstanceCharsetInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetInstanceCharsetArgs : Pulumi.InvokeArgs
+    public sealed class GetInstanceCharsetArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Instance ID, the format is: cdb-c1nl9rpv, which is the same as the instance ID displayed on the cloud database console page, and you can use the [query instance list] (https://cloud.tencent.com/document/api/236/15872) interface Gets the value of the field InstanceId in the output parameter.
@@ -89,9 +83,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
         public GetInstanceCharsetArgs()
         {
         }
+        public static new GetInstanceCharsetArgs Empty => new GetInstanceCharsetArgs();
     }
 
-    public sealed class GetInstanceCharsetInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetInstanceCharsetInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Instance ID, the format is: cdb-c1nl9rpv, which is the same as the instance ID displayed on the cloud database console page, and you can use the [query instance list] (https://cloud.tencent.com/document/api/236/15872) interface Gets the value of the field InstanceId in the output parameter.
@@ -108,6 +103,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
         public GetInstanceCharsetInvokeArgs()
         {
         }
+        public static new GetInstanceCharsetInvokeArgs Empty => new GetInstanceCharsetInvokeArgs();
     }
 
 

@@ -9,15 +9,17 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const operation = new tencentcloud.Cbs.DiskBackupRollbackOperation("operation", {
+ * const operation = new tencentcloud.cbs.DiskBackupRollbackOperation("operation", {
  *     diskBackupId: "dbp-xxx",
  *     diskId: "disk-xxx",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export class DiskBackupRollbackOperation extends pulumi.CustomResource {
     /**

@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Eni.Inputs
 {
 
-    public sealed class InstanceIpv4Args : Pulumi.ResourceArgs
+    public sealed class InstanceIpv4Args : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Description of the IP, maximum length 25.
@@ -34,5 +34,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Eni.Inputs
         public InstanceIpv4Args()
         {
         }
+        public static new InstanceIpv4Args Empty => new InstanceIpv4Args();
     }
 }

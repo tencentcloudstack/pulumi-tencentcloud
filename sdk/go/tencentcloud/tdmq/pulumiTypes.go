@@ -8,7 +8,10 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
+
+var _ = internal.GetEnvOrDefault
 
 type NamespaceRetentionPolicy struct {
 	// the size of message to retain.
@@ -20,7 +23,7 @@ type NamespaceRetentionPolicy struct {
 // NamespaceRetentionPolicyInput is an input type that accepts NamespaceRetentionPolicyArgs and NamespaceRetentionPolicyOutput values.
 // You can construct a concrete instance of `NamespaceRetentionPolicyInput` via:
 //
-//          NamespaceRetentionPolicyArgs{...}
+//	NamespaceRetentionPolicyArgs{...}
 type NamespaceRetentionPolicyInput interface {
 	pulumi.Input
 
@@ -58,11 +61,11 @@ func (i NamespaceRetentionPolicyArgs) ToNamespaceRetentionPolicyPtrOutputWithCon
 // NamespaceRetentionPolicyPtrInput is an input type that accepts NamespaceRetentionPolicyArgs, NamespaceRetentionPolicyPtr and NamespaceRetentionPolicyPtrOutput values.
 // You can construct a concrete instance of `NamespaceRetentionPolicyPtrInput` via:
 //
-//          NamespaceRetentionPolicyArgs{...}
+//	        NamespaceRetentionPolicyArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type NamespaceRetentionPolicyPtrInput interface {
 	pulumi.Input
 
@@ -176,7 +179,7 @@ type ProfessionalClusterVpc struct {
 // ProfessionalClusterVpcInput is an input type that accepts ProfessionalClusterVpcArgs and ProfessionalClusterVpcOutput values.
 // You can construct a concrete instance of `ProfessionalClusterVpcInput` via:
 //
-//          ProfessionalClusterVpcArgs{...}
+//	ProfessionalClusterVpcArgs{...}
 type ProfessionalClusterVpcInput interface {
 	pulumi.Input
 
@@ -214,11 +217,11 @@ func (i ProfessionalClusterVpcArgs) ToProfessionalClusterVpcPtrOutputWithContext
 // ProfessionalClusterVpcPtrInput is an input type that accepts ProfessionalClusterVpcArgs, ProfessionalClusterVpcPtr and ProfessionalClusterVpcPtrOutput values.
 // You can construct a concrete instance of `ProfessionalClusterVpcPtrInput` via:
 //
-//          ProfessionalClusterVpcArgs{...}
+//	        ProfessionalClusterVpcArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type ProfessionalClusterVpcPtrInput interface {
 	pulumi.Input
 
@@ -332,7 +335,7 @@ type RocketmqClusterVpc struct {
 // RocketmqClusterVpcInput is an input type that accepts RocketmqClusterVpcArgs and RocketmqClusterVpcOutput values.
 // You can construct a concrete instance of `RocketmqClusterVpcInput` via:
 //
-//          RocketmqClusterVpcArgs{...}
+//	RocketmqClusterVpcArgs{...}
 type RocketmqClusterVpcInput interface {
 	pulumi.Input
 
@@ -362,7 +365,7 @@ func (i RocketmqClusterVpcArgs) ToRocketmqClusterVpcOutputWithContext(ctx contex
 // RocketmqClusterVpcArrayInput is an input type that accepts RocketmqClusterVpcArray and RocketmqClusterVpcArrayOutput values.
 // You can construct a concrete instance of `RocketmqClusterVpcArrayInput` via:
 //
-//          RocketmqClusterVpcArray{ RocketmqClusterVpcArgs{...} }
+//	RocketmqClusterVpcArray{ RocketmqClusterVpcArgs{...} }
 type RocketmqClusterVpcArrayInput interface {
 	pulumi.Input
 
@@ -438,7 +441,7 @@ type RocketmqVipInstanceVpcInfo struct {
 // RocketmqVipInstanceVpcInfoInput is an input type that accepts RocketmqVipInstanceVpcInfoArgs and RocketmqVipInstanceVpcInfoOutput values.
 // You can construct a concrete instance of `RocketmqVipInstanceVpcInfoInput` via:
 //
-//          RocketmqVipInstanceVpcInfoArgs{...}
+//	RocketmqVipInstanceVpcInfoArgs{...}
 type RocketmqVipInstanceVpcInfoInput interface {
 	pulumi.Input
 
@@ -476,11 +479,11 @@ func (i RocketmqVipInstanceVpcInfoArgs) ToRocketmqVipInstanceVpcInfoPtrOutputWit
 // RocketmqVipInstanceVpcInfoPtrInput is an input type that accepts RocketmqVipInstanceVpcInfoArgs, RocketmqVipInstanceVpcInfoPtr and RocketmqVipInstanceVpcInfoPtrOutput values.
 // You can construct a concrete instance of `RocketmqVipInstanceVpcInfoPtrInput` via:
 //
-//          RocketmqVipInstanceVpcInfoArgs{...}
+//	        RocketmqVipInstanceVpcInfoArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type RocketmqVipInstanceVpcInfoPtrInput interface {
 	pulumi.Input
 
@@ -608,7 +611,7 @@ type GetProInstanceDetailClusterInfo struct {
 // GetProInstanceDetailClusterInfoInput is an input type that accepts GetProInstanceDetailClusterInfoArgs and GetProInstanceDetailClusterInfoOutput values.
 // You can construct a concrete instance of `GetProInstanceDetailClusterInfoInput` via:
 //
-//          GetProInstanceDetailClusterInfoArgs{...}
+//	GetProInstanceDetailClusterInfoArgs{...}
 type GetProInstanceDetailClusterInfoInput interface {
 	pulumi.Input
 
@@ -652,7 +655,7 @@ func (i GetProInstanceDetailClusterInfoArgs) ToGetProInstanceDetailClusterInfoOu
 // GetProInstanceDetailClusterInfoArrayInput is an input type that accepts GetProInstanceDetailClusterInfoArray and GetProInstanceDetailClusterInfoArrayOutput values.
 // You can construct a concrete instance of `GetProInstanceDetailClusterInfoArrayInput` via:
 //
-//          GetProInstanceDetailClusterInfoArray{ GetProInstanceDetailClusterInfoArgs{...} }
+//	GetProInstanceDetailClusterInfoArray{ GetProInstanceDetailClusterInfoArgs{...} }
 type GetProInstanceDetailClusterInfoArrayInput interface {
 	pulumi.Input
 
@@ -767,7 +770,7 @@ type GetProInstanceDetailClusterInfoNodeDistribution struct {
 // GetProInstanceDetailClusterInfoNodeDistributionInput is an input type that accepts GetProInstanceDetailClusterInfoNodeDistributionArgs and GetProInstanceDetailClusterInfoNodeDistributionOutput values.
 // You can construct a concrete instance of `GetProInstanceDetailClusterInfoNodeDistributionInput` via:
 //
-//          GetProInstanceDetailClusterInfoNodeDistributionArgs{...}
+//	GetProInstanceDetailClusterInfoNodeDistributionArgs{...}
 type GetProInstanceDetailClusterInfoNodeDistributionInput interface {
 	pulumi.Input
 
@@ -799,7 +802,7 @@ func (i GetProInstanceDetailClusterInfoNodeDistributionArgs) ToGetProInstanceDet
 // GetProInstanceDetailClusterInfoNodeDistributionArrayInput is an input type that accepts GetProInstanceDetailClusterInfoNodeDistributionArray and GetProInstanceDetailClusterInfoNodeDistributionArrayOutput values.
 // You can construct a concrete instance of `GetProInstanceDetailClusterInfoNodeDistributionArrayInput` via:
 //
-//          GetProInstanceDetailClusterInfoNodeDistributionArray{ GetProInstanceDetailClusterInfoNodeDistributionArgs{...} }
+//	GetProInstanceDetailClusterInfoNodeDistributionArray{ GetProInstanceDetailClusterInfoNodeDistributionArgs{...} }
 type GetProInstanceDetailClusterInfoNodeDistributionArrayInput interface {
 	pulumi.Input
 
@@ -888,7 +891,7 @@ type GetProInstanceDetailClusterSpecInfo struct {
 // GetProInstanceDetailClusterSpecInfoInput is an input type that accepts GetProInstanceDetailClusterSpecInfoArgs and GetProInstanceDetailClusterSpecInfoOutput values.
 // You can construct a concrete instance of `GetProInstanceDetailClusterSpecInfoInput` via:
 //
-//          GetProInstanceDetailClusterSpecInfoArgs{...}
+//	GetProInstanceDetailClusterSpecInfoArgs{...}
 type GetProInstanceDetailClusterSpecInfoInput interface {
 	pulumi.Input
 
@@ -926,7 +929,7 @@ func (i GetProInstanceDetailClusterSpecInfoArgs) ToGetProInstanceDetailClusterSp
 // GetProInstanceDetailClusterSpecInfoArrayInput is an input type that accepts GetProInstanceDetailClusterSpecInfoArray and GetProInstanceDetailClusterSpecInfoArrayOutput values.
 // You can construct a concrete instance of `GetProInstanceDetailClusterSpecInfoArrayInput` via:
 //
-//          GetProInstanceDetailClusterSpecInfoArray{ GetProInstanceDetailClusterSpecInfoArgs{...} }
+//	GetProInstanceDetailClusterSpecInfoArray{ GetProInstanceDetailClusterSpecInfoArgs{...} }
 type GetProInstanceDetailClusterSpecInfoArrayInput interface {
 	pulumi.Input
 
@@ -1028,7 +1031,7 @@ type GetProInstanceDetailNetworkAccessPointInfo struct {
 // GetProInstanceDetailNetworkAccessPointInfoInput is an input type that accepts GetProInstanceDetailNetworkAccessPointInfoArgs and GetProInstanceDetailNetworkAccessPointInfoOutput values.
 // You can construct a concrete instance of `GetProInstanceDetailNetworkAccessPointInfoInput` via:
 //
-//          GetProInstanceDetailNetworkAccessPointInfoArgs{...}
+//	GetProInstanceDetailNetworkAccessPointInfoArgs{...}
 type GetProInstanceDetailNetworkAccessPointInfoInput interface {
 	pulumi.Input
 
@@ -1064,7 +1067,7 @@ func (i GetProInstanceDetailNetworkAccessPointInfoArgs) ToGetProInstanceDetailNe
 // GetProInstanceDetailNetworkAccessPointInfoArrayInput is an input type that accepts GetProInstanceDetailNetworkAccessPointInfoArray and GetProInstanceDetailNetworkAccessPointInfoArrayOutput values.
 // You can construct a concrete instance of `GetProInstanceDetailNetworkAccessPointInfoArrayInput` via:
 //
-//          GetProInstanceDetailNetworkAccessPointInfoArray{ GetProInstanceDetailNetworkAccessPointInfoArgs{...} }
+//	GetProInstanceDetailNetworkAccessPointInfoArray{ GetProInstanceDetailNetworkAccessPointInfoArgs{...} }
 type GetProInstanceDetailNetworkAccessPointInfoArrayInput interface {
 	pulumi.Input
 
@@ -1155,7 +1158,7 @@ type GetProInstancesFilter struct {
 // GetProInstancesFilterInput is an input type that accepts GetProInstancesFilterArgs and GetProInstancesFilterOutput values.
 // You can construct a concrete instance of `GetProInstancesFilterInput` via:
 //
-//          GetProInstancesFilterArgs{...}
+//	GetProInstancesFilterArgs{...}
 type GetProInstancesFilterInput interface {
 	pulumi.Input
 
@@ -1185,7 +1188,7 @@ func (i GetProInstancesFilterArgs) ToGetProInstancesFilterOutputWithContext(ctx 
 // GetProInstancesFilterArrayInput is an input type that accepts GetProInstancesFilterArray and GetProInstancesFilterArrayOutput values.
 // You can construct a concrete instance of `GetProInstancesFilterArrayInput` via:
 //
-//          GetProInstancesFilterArray{ GetProInstancesFilterArgs{...} }
+//	GetProInstancesFilterArray{ GetProInstancesFilterArgs{...} }
 type GetProInstancesFilterArrayInput interface {
 	pulumi.Input
 
@@ -1293,7 +1296,7 @@ type GetProInstancesInstance struct {
 // GetProInstancesInstanceInput is an input type that accepts GetProInstancesInstanceArgs and GetProInstancesInstanceOutput values.
 // You can construct a concrete instance of `GetProInstancesInstanceInput` via:
 //
-//          GetProInstancesInstanceArgs{...}
+//	GetProInstancesInstanceArgs{...}
 type GetProInstancesInstanceInput interface {
 	pulumi.Input
 
@@ -1355,7 +1358,7 @@ func (i GetProInstancesInstanceArgs) ToGetProInstancesInstanceOutputWithContext(
 // GetProInstancesInstanceArrayInput is an input type that accepts GetProInstancesInstanceArray and GetProInstancesInstanceArrayOutput values.
 // You can construct a concrete instance of `GetProInstancesInstanceArrayInput` via:
 //
-//          GetProInstancesInstanceArray{ GetProInstancesInstanceArgs{...} }
+//	GetProInstancesInstanceArray{ GetProInstancesInstanceArgs{...} }
 type GetProInstancesInstanceArrayInput interface {
 	pulumi.Input
 
@@ -1511,7 +1514,7 @@ type GetProInstancesInstanceTag struct {
 // GetProInstancesInstanceTagInput is an input type that accepts GetProInstancesInstanceTagArgs and GetProInstancesInstanceTagOutput values.
 // You can construct a concrete instance of `GetProInstancesInstanceTagInput` via:
 //
-//          GetProInstancesInstanceTagArgs{...}
+//	GetProInstancesInstanceTagArgs{...}
 type GetProInstancesInstanceTagInput interface {
 	pulumi.Input
 
@@ -1541,7 +1544,7 @@ func (i GetProInstancesInstanceTagArgs) ToGetProInstancesInstanceTagOutputWithCo
 // GetProInstancesInstanceTagArrayInput is an input type that accepts GetProInstancesInstanceTagArray and GetProInstancesInstanceTagArrayOutput values.
 // You can construct a concrete instance of `GetProInstancesInstanceTagArrayInput` via:
 //
-//          GetProInstancesInstanceTagArray{ GetProInstancesInstanceTagArgs{...} }
+//	GetProInstancesInstanceTagArray{ GetProInstancesInstanceTagArgs{...} }
 type GetProInstancesInstanceTagArrayInput interface {
 	pulumi.Input
 
@@ -1617,7 +1620,7 @@ type GetPublishersFilter struct {
 // GetPublishersFilterInput is an input type that accepts GetPublishersFilterArgs and GetPublishersFilterOutput values.
 // You can construct a concrete instance of `GetPublishersFilterInput` via:
 //
-//          GetPublishersFilterArgs{...}
+//	GetPublishersFilterArgs{...}
 type GetPublishersFilterInput interface {
 	pulumi.Input
 
@@ -1647,7 +1650,7 @@ func (i GetPublishersFilterArgs) ToGetPublishersFilterOutputWithContext(ctx cont
 // GetPublishersFilterArrayInput is an input type that accepts GetPublishersFilterArray and GetPublishersFilterArrayOutput values.
 // You can construct a concrete instance of `GetPublishersFilterArrayInput` via:
 //
-//          GetPublishersFilterArray{ GetPublishersFilterArgs{...} }
+//	GetPublishersFilterArray{ GetPublishersFilterArgs{...} }
 type GetPublishersFilterArrayInput interface {
 	pulumi.Input
 
@@ -1737,7 +1740,7 @@ type GetPublishersPublisher struct {
 // GetPublishersPublisherInput is an input type that accepts GetPublishersPublisherArgs and GetPublishersPublisherOutput values.
 // You can construct a concrete instance of `GetPublishersPublisherInput` via:
 //
-//          GetPublishersPublisherArgs{...}
+//	GetPublishersPublisherArgs{...}
 type GetPublishersPublisherInput interface {
 	pulumi.Input
 
@@ -1781,7 +1784,7 @@ func (i GetPublishersPublisherArgs) ToGetPublishersPublisherOutputWithContext(ct
 // GetPublishersPublisherArrayInput is an input type that accepts GetPublishersPublisherArray and GetPublishersPublisherArrayOutput values.
 // You can construct a concrete instance of `GetPublishersPublisherArrayInput` via:
 //
-//          GetPublishersPublisherArray{ GetPublishersPublisherArgs{...} }
+//	GetPublishersPublisherArray{ GetPublishersPublisherArgs{...} }
 type GetPublishersPublisherArrayInput interface {
 	pulumi.Input
 
@@ -1892,7 +1895,7 @@ type GetPublishersSort struct {
 // GetPublishersSortInput is an input type that accepts GetPublishersSortArgs and GetPublishersSortOutput values.
 // You can construct a concrete instance of `GetPublishersSortInput` via:
 //
-//          GetPublishersSortArgs{...}
+//	GetPublishersSortArgs{...}
 type GetPublishersSortInput interface {
 	pulumi.Input
 
@@ -1930,11 +1933,11 @@ func (i GetPublishersSortArgs) ToGetPublishersSortPtrOutputWithContext(ctx conte
 // GetPublishersSortPtrInput is an input type that accepts GetPublishersSortArgs, GetPublishersSortPtr and GetPublishersSortPtrOutput values.
 // You can construct a concrete instance of `GetPublishersSortPtrInput` via:
 //
-//          GetPublishersSortArgs{...}
+//	        GetPublishersSortArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type GetPublishersSortPtrInput interface {
 	pulumi.Input
 
@@ -2039,14 +2042,16 @@ func (o GetPublishersSortPtrOutput) Order() pulumi.StringPtrOutput {
 }
 
 type GetRabbitmqNodeListFilter struct {
-	Name   *string  `pulumi:"name"`
+	// The name of the filter parameter.
+	Name *string `pulumi:"name"`
+	// value.
 	Values []string `pulumi:"values"`
 }
 
 // GetRabbitmqNodeListFilterInput is an input type that accepts GetRabbitmqNodeListFilterArgs and GetRabbitmqNodeListFilterOutput values.
 // You can construct a concrete instance of `GetRabbitmqNodeListFilterInput` via:
 //
-//          GetRabbitmqNodeListFilterArgs{...}
+//	GetRabbitmqNodeListFilterArgs{...}
 type GetRabbitmqNodeListFilterInput interface {
 	pulumi.Input
 
@@ -2055,7 +2060,9 @@ type GetRabbitmqNodeListFilterInput interface {
 }
 
 type GetRabbitmqNodeListFilterArgs struct {
-	Name   pulumi.StringPtrInput   `pulumi:"name"`
+	// The name of the filter parameter.
+	Name pulumi.StringPtrInput `pulumi:"name"`
+	// value.
 	Values pulumi.StringArrayInput `pulumi:"values"`
 }
 
@@ -2074,7 +2081,7 @@ func (i GetRabbitmqNodeListFilterArgs) ToGetRabbitmqNodeListFilterOutputWithCont
 // GetRabbitmqNodeListFilterArrayInput is an input type that accepts GetRabbitmqNodeListFilterArray and GetRabbitmqNodeListFilterArrayOutput values.
 // You can construct a concrete instance of `GetRabbitmqNodeListFilterArrayInput` via:
 //
-//          GetRabbitmqNodeListFilterArray{ GetRabbitmqNodeListFilterArgs{...} }
+//	GetRabbitmqNodeListFilterArray{ GetRabbitmqNodeListFilterArgs{...} }
 type GetRabbitmqNodeListFilterArrayInput interface {
 	pulumi.Input
 
@@ -2110,10 +2117,12 @@ func (o GetRabbitmqNodeListFilterOutput) ToGetRabbitmqNodeListFilterOutputWithCo
 	return o
 }
 
+// The name of the filter parameter.
 func (o GetRabbitmqNodeListFilterOutput) Name() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v GetRabbitmqNodeListFilter) *string { return v.Name }).(pulumi.StringPtrOutput)
 }
 
+// value.
 func (o GetRabbitmqNodeListFilterOutput) Values() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v GetRabbitmqNodeListFilter) []string { return v.Values }).(pulumi.StringArrayOutput)
 }
@@ -2139,18 +2148,24 @@ func (o GetRabbitmqNodeListFilterArrayOutput) Index(i pulumi.IntInput) GetRabbit
 }
 
 type GetRabbitmqNodeListNodeList struct {
-	CpuUsage      string `pulumi:"cpuUsage"`
-	DiskUsage     string `pulumi:"diskUsage"`
-	Memory        int    `pulumi:"memory"`
-	NodeName      string `pulumi:"nodeName"`
-	NodeStatus    string `pulumi:"nodeStatus"`
-	ProcessNumber int    `pulumi:"processNumber"`
+	// CPU usageNote: This field may return null, indicating that no valid value can be obtained.
+	CpuUsage string `pulumi:"cpuUsage"`
+	// disk usageNote: This field may return null, indicating that no valid value can be obtained.
+	DiskUsage string `pulumi:"diskUsage"`
+	// Memory usage, in MBNote: This field may return null, indicating that no valid value can be obtained.
+	Memory int `pulumi:"memory"`
+	// node nameNote: This field may return null, indicating that no valid value can be obtained.
+	NodeName string `pulumi:"nodeName"`
+	// node statusNote: This field may return null, indicating that no valid value can be obtained.
+	NodeStatus string `pulumi:"nodeStatus"`
+	// Number of Erlang processes for RabbitmqNote: This field may return null, indicating that no valid value can be obtained.
+	ProcessNumber int `pulumi:"processNumber"`
 }
 
 // GetRabbitmqNodeListNodeListInput is an input type that accepts GetRabbitmqNodeListNodeListArgs and GetRabbitmqNodeListNodeListOutput values.
 // You can construct a concrete instance of `GetRabbitmqNodeListNodeListInput` via:
 //
-//          GetRabbitmqNodeListNodeListArgs{...}
+//	GetRabbitmqNodeListNodeListArgs{...}
 type GetRabbitmqNodeListNodeListInput interface {
 	pulumi.Input
 
@@ -2159,12 +2174,18 @@ type GetRabbitmqNodeListNodeListInput interface {
 }
 
 type GetRabbitmqNodeListNodeListArgs struct {
-	CpuUsage      pulumi.StringInput `pulumi:"cpuUsage"`
-	DiskUsage     pulumi.StringInput `pulumi:"diskUsage"`
-	Memory        pulumi.IntInput    `pulumi:"memory"`
-	NodeName      pulumi.StringInput `pulumi:"nodeName"`
-	NodeStatus    pulumi.StringInput `pulumi:"nodeStatus"`
-	ProcessNumber pulumi.IntInput    `pulumi:"processNumber"`
+	// CPU usageNote: This field may return null, indicating that no valid value can be obtained.
+	CpuUsage pulumi.StringInput `pulumi:"cpuUsage"`
+	// disk usageNote: This field may return null, indicating that no valid value can be obtained.
+	DiskUsage pulumi.StringInput `pulumi:"diskUsage"`
+	// Memory usage, in MBNote: This field may return null, indicating that no valid value can be obtained.
+	Memory pulumi.IntInput `pulumi:"memory"`
+	// node nameNote: This field may return null, indicating that no valid value can be obtained.
+	NodeName pulumi.StringInput `pulumi:"nodeName"`
+	// node statusNote: This field may return null, indicating that no valid value can be obtained.
+	NodeStatus pulumi.StringInput `pulumi:"nodeStatus"`
+	// Number of Erlang processes for RabbitmqNote: This field may return null, indicating that no valid value can be obtained.
+	ProcessNumber pulumi.IntInput `pulumi:"processNumber"`
 }
 
 func (GetRabbitmqNodeListNodeListArgs) ElementType() reflect.Type {
@@ -2182,7 +2203,7 @@ func (i GetRabbitmqNodeListNodeListArgs) ToGetRabbitmqNodeListNodeListOutputWith
 // GetRabbitmqNodeListNodeListArrayInput is an input type that accepts GetRabbitmqNodeListNodeListArray and GetRabbitmqNodeListNodeListArrayOutput values.
 // You can construct a concrete instance of `GetRabbitmqNodeListNodeListArrayInput` via:
 //
-//          GetRabbitmqNodeListNodeListArray{ GetRabbitmqNodeListNodeListArgs{...} }
+//	GetRabbitmqNodeListNodeListArray{ GetRabbitmqNodeListNodeListArgs{...} }
 type GetRabbitmqNodeListNodeListArrayInput interface {
 	pulumi.Input
 
@@ -2218,26 +2239,32 @@ func (o GetRabbitmqNodeListNodeListOutput) ToGetRabbitmqNodeListNodeListOutputWi
 	return o
 }
 
+// CPU usageNote: This field may return null, indicating that no valid value can be obtained.
 func (o GetRabbitmqNodeListNodeListOutput) CpuUsage() pulumi.StringOutput {
 	return o.ApplyT(func(v GetRabbitmqNodeListNodeList) string { return v.CpuUsage }).(pulumi.StringOutput)
 }
 
+// disk usageNote: This field may return null, indicating that no valid value can be obtained.
 func (o GetRabbitmqNodeListNodeListOutput) DiskUsage() pulumi.StringOutput {
 	return o.ApplyT(func(v GetRabbitmqNodeListNodeList) string { return v.DiskUsage }).(pulumi.StringOutput)
 }
 
+// Memory usage, in MBNote: This field may return null, indicating that no valid value can be obtained.
 func (o GetRabbitmqNodeListNodeListOutput) Memory() pulumi.IntOutput {
 	return o.ApplyT(func(v GetRabbitmqNodeListNodeList) int { return v.Memory }).(pulumi.IntOutput)
 }
 
+// node nameNote: This field may return null, indicating that no valid value can be obtained.
 func (o GetRabbitmqNodeListNodeListOutput) NodeName() pulumi.StringOutput {
 	return o.ApplyT(func(v GetRabbitmqNodeListNodeList) string { return v.NodeName }).(pulumi.StringOutput)
 }
 
+// node statusNote: This field may return null, indicating that no valid value can be obtained.
 func (o GetRabbitmqNodeListNodeListOutput) NodeStatus() pulumi.StringOutput {
 	return o.ApplyT(func(v GetRabbitmqNodeListNodeList) string { return v.NodeStatus }).(pulumi.StringOutput)
 }
 
+// Number of Erlang processes for RabbitmqNote: This field may return null, indicating that no valid value can be obtained.
 func (o GetRabbitmqNodeListNodeListOutput) ProcessNumber() pulumi.IntOutput {
 	return o.ApplyT(func(v GetRabbitmqNodeListNodeList) int { return v.ProcessNumber }).(pulumi.IntOutput)
 }
@@ -2263,14 +2290,16 @@ func (o GetRabbitmqNodeListNodeListArrayOutput) Index(i pulumi.IntInput) GetRabb
 }
 
 type GetRabbitmqVipInstanceFilter struct {
-	Name   *string  `pulumi:"name"`
+	// The name of the filter parameter.
+	Name *string `pulumi:"name"`
+	// value.
 	Values []string `pulumi:"values"`
 }
 
 // GetRabbitmqVipInstanceFilterInput is an input type that accepts GetRabbitmqVipInstanceFilterArgs and GetRabbitmqVipInstanceFilterOutput values.
 // You can construct a concrete instance of `GetRabbitmqVipInstanceFilterInput` via:
 //
-//          GetRabbitmqVipInstanceFilterArgs{...}
+//	GetRabbitmqVipInstanceFilterArgs{...}
 type GetRabbitmqVipInstanceFilterInput interface {
 	pulumi.Input
 
@@ -2279,7 +2308,9 @@ type GetRabbitmqVipInstanceFilterInput interface {
 }
 
 type GetRabbitmqVipInstanceFilterArgs struct {
-	Name   pulumi.StringPtrInput   `pulumi:"name"`
+	// The name of the filter parameter.
+	Name pulumi.StringPtrInput `pulumi:"name"`
+	// value.
 	Values pulumi.StringArrayInput `pulumi:"values"`
 }
 
@@ -2298,7 +2329,7 @@ func (i GetRabbitmqVipInstanceFilterArgs) ToGetRabbitmqVipInstanceFilterOutputWi
 // GetRabbitmqVipInstanceFilterArrayInput is an input type that accepts GetRabbitmqVipInstanceFilterArray and GetRabbitmqVipInstanceFilterArrayOutput values.
 // You can construct a concrete instance of `GetRabbitmqVipInstanceFilterArrayInput` via:
 //
-//          GetRabbitmqVipInstanceFilterArray{ GetRabbitmqVipInstanceFilterArgs{...} }
+//	GetRabbitmqVipInstanceFilterArray{ GetRabbitmqVipInstanceFilterArgs{...} }
 type GetRabbitmqVipInstanceFilterArrayInput interface {
 	pulumi.Input
 
@@ -2334,10 +2365,12 @@ func (o GetRabbitmqVipInstanceFilterOutput) ToGetRabbitmqVipInstanceFilterOutput
 	return o
 }
 
+// The name of the filter parameter.
 func (o GetRabbitmqVipInstanceFilterOutput) Name() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v GetRabbitmqVipInstanceFilter) *string { return v.Name }).(pulumi.StringPtrOutput)
 }
 
+// value.
 func (o GetRabbitmqVipInstanceFilterOutput) Values() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v GetRabbitmqVipInstanceFilter) []string { return v.Values }).(pulumi.StringArrayOutput)
 }
@@ -2363,27 +2396,42 @@ func (o GetRabbitmqVipInstanceFilterArrayOutput) Index(i pulumi.IntInput) GetRab
 }
 
 type GetRabbitmqVipInstanceInstance struct {
-	AutoRenewFlag        int    `pulumi:"autoRenewFlag"`
-	ConfigDisplay        string `pulumi:"configDisplay"`
+	// Automatic renewal mark, 0 indicates the default state (the user has not set it, that is, the initial state is manual renewal), 1 indicates automatic renewal, 2 indicates that the automatic renewal is not specified (user setting).
+	AutoRenewFlag int `pulumi:"autoRenewFlag"`
+	// Instance configuration specification name.
+	ConfigDisplay string `pulumi:"configDisplay"`
+	// The cluster is abnormal.Note: This field may return null, indicating that no valid value can be obtained.
 	ExceptionInformation string `pulumi:"exceptionInformation"`
-	ExpireTime           int    `pulumi:"expireTime"`
-	InstanceId           string `pulumi:"instanceId"`
-	InstanceName         string `pulumi:"instanceName"`
-	InstanceVersion      string `pulumi:"instanceVersion"`
-	MaxBandWidth         int    `pulumi:"maxBandWidth"`
-	MaxStorage           int    `pulumi:"maxStorage"`
-	MaxTps               int    `pulumi:"maxTps"`
-	NodeCount            int    `pulumi:"nodeCount"`
-	PayMode              int    `pulumi:"payMode"`
-	Remark               string `pulumi:"remark"`
-	SpecName             string `pulumi:"specName"`
-	Status               int    `pulumi:"status"`
+	// Instance expiration time, in milliseconds.
+	ExpireTime int `pulumi:"expireTime"`
+	// instance id.
+	InstanceId string `pulumi:"instanceId"`
+	// instance name.
+	InstanceName string `pulumi:"instanceName"`
+	// instance versionNote: This field may return null, indicating that no valid value can be obtained.
+	InstanceVersion string `pulumi:"instanceVersion"`
+	// Peak bandwidth, in Mbps.
+	MaxBandWidth int `pulumi:"maxBandWidth"`
+	// Storage capacity, in GB.
+	MaxStorage int `pulumi:"maxStorage"`
+	// Peak TPS.
+	MaxTps int `pulumi:"maxTps"`
+	// Number of nodes.
+	NodeCount int `pulumi:"nodeCount"`
+	// 0-postpaid, 1-prepaid.
+	PayMode int `pulumi:"payMode"`
+	// RemarksNote: This field may return null, indicating that no valid value can be obtained.
+	Remark string `pulumi:"remark"`
+	// Instance Configuration ID.
+	SpecName string `pulumi:"specName"`
+	// Instance status, 0 means creating, 1 means normal, 2 means isolating, 3 means destroyed, 4 - abnormal, 5 - delivery failed.
+	Status int `pulumi:"status"`
 }
 
 // GetRabbitmqVipInstanceInstanceInput is an input type that accepts GetRabbitmqVipInstanceInstanceArgs and GetRabbitmqVipInstanceInstanceOutput values.
 // You can construct a concrete instance of `GetRabbitmqVipInstanceInstanceInput` via:
 //
-//          GetRabbitmqVipInstanceInstanceArgs{...}
+//	GetRabbitmqVipInstanceInstanceArgs{...}
 type GetRabbitmqVipInstanceInstanceInput interface {
 	pulumi.Input
 
@@ -2392,21 +2440,36 @@ type GetRabbitmqVipInstanceInstanceInput interface {
 }
 
 type GetRabbitmqVipInstanceInstanceArgs struct {
-	AutoRenewFlag        pulumi.IntInput    `pulumi:"autoRenewFlag"`
-	ConfigDisplay        pulumi.StringInput `pulumi:"configDisplay"`
+	// Automatic renewal mark, 0 indicates the default state (the user has not set it, that is, the initial state is manual renewal), 1 indicates automatic renewal, 2 indicates that the automatic renewal is not specified (user setting).
+	AutoRenewFlag pulumi.IntInput `pulumi:"autoRenewFlag"`
+	// Instance configuration specification name.
+	ConfigDisplay pulumi.StringInput `pulumi:"configDisplay"`
+	// The cluster is abnormal.Note: This field may return null, indicating that no valid value can be obtained.
 	ExceptionInformation pulumi.StringInput `pulumi:"exceptionInformation"`
-	ExpireTime           pulumi.IntInput    `pulumi:"expireTime"`
-	InstanceId           pulumi.StringInput `pulumi:"instanceId"`
-	InstanceName         pulumi.StringInput `pulumi:"instanceName"`
-	InstanceVersion      pulumi.StringInput `pulumi:"instanceVersion"`
-	MaxBandWidth         pulumi.IntInput    `pulumi:"maxBandWidth"`
-	MaxStorage           pulumi.IntInput    `pulumi:"maxStorage"`
-	MaxTps               pulumi.IntInput    `pulumi:"maxTps"`
-	NodeCount            pulumi.IntInput    `pulumi:"nodeCount"`
-	PayMode              pulumi.IntInput    `pulumi:"payMode"`
-	Remark               pulumi.StringInput `pulumi:"remark"`
-	SpecName             pulumi.StringInput `pulumi:"specName"`
-	Status               pulumi.IntInput    `pulumi:"status"`
+	// Instance expiration time, in milliseconds.
+	ExpireTime pulumi.IntInput `pulumi:"expireTime"`
+	// instance id.
+	InstanceId pulumi.StringInput `pulumi:"instanceId"`
+	// instance name.
+	InstanceName pulumi.StringInput `pulumi:"instanceName"`
+	// instance versionNote: This field may return null, indicating that no valid value can be obtained.
+	InstanceVersion pulumi.StringInput `pulumi:"instanceVersion"`
+	// Peak bandwidth, in Mbps.
+	MaxBandWidth pulumi.IntInput `pulumi:"maxBandWidth"`
+	// Storage capacity, in GB.
+	MaxStorage pulumi.IntInput `pulumi:"maxStorage"`
+	// Peak TPS.
+	MaxTps pulumi.IntInput `pulumi:"maxTps"`
+	// Number of nodes.
+	NodeCount pulumi.IntInput `pulumi:"nodeCount"`
+	// 0-postpaid, 1-prepaid.
+	PayMode pulumi.IntInput `pulumi:"payMode"`
+	// RemarksNote: This field may return null, indicating that no valid value can be obtained.
+	Remark pulumi.StringInput `pulumi:"remark"`
+	// Instance Configuration ID.
+	SpecName pulumi.StringInput `pulumi:"specName"`
+	// Instance status, 0 means creating, 1 means normal, 2 means isolating, 3 means destroyed, 4 - abnormal, 5 - delivery failed.
+	Status pulumi.IntInput `pulumi:"status"`
 }
 
 func (GetRabbitmqVipInstanceInstanceArgs) ElementType() reflect.Type {
@@ -2424,7 +2487,7 @@ func (i GetRabbitmqVipInstanceInstanceArgs) ToGetRabbitmqVipInstanceInstanceOutp
 // GetRabbitmqVipInstanceInstanceArrayInput is an input type that accepts GetRabbitmqVipInstanceInstanceArray and GetRabbitmqVipInstanceInstanceArrayOutput values.
 // You can construct a concrete instance of `GetRabbitmqVipInstanceInstanceArrayInput` via:
 //
-//          GetRabbitmqVipInstanceInstanceArray{ GetRabbitmqVipInstanceInstanceArgs{...} }
+//	GetRabbitmqVipInstanceInstanceArray{ GetRabbitmqVipInstanceInstanceArgs{...} }
 type GetRabbitmqVipInstanceInstanceArrayInput interface {
 	pulumi.Input
 
@@ -2460,62 +2523,77 @@ func (o GetRabbitmqVipInstanceInstanceOutput) ToGetRabbitmqVipInstanceInstanceOu
 	return o
 }
 
+// Automatic renewal mark, 0 indicates the default state (the user has not set it, that is, the initial state is manual renewal), 1 indicates automatic renewal, 2 indicates that the automatic renewal is not specified (user setting).
 func (o GetRabbitmqVipInstanceInstanceOutput) AutoRenewFlag() pulumi.IntOutput {
 	return o.ApplyT(func(v GetRabbitmqVipInstanceInstance) int { return v.AutoRenewFlag }).(pulumi.IntOutput)
 }
 
+// Instance configuration specification name.
 func (o GetRabbitmqVipInstanceInstanceOutput) ConfigDisplay() pulumi.StringOutput {
 	return o.ApplyT(func(v GetRabbitmqVipInstanceInstance) string { return v.ConfigDisplay }).(pulumi.StringOutput)
 }
 
+// The cluster is abnormal.Note: This field may return null, indicating that no valid value can be obtained.
 func (o GetRabbitmqVipInstanceInstanceOutput) ExceptionInformation() pulumi.StringOutput {
 	return o.ApplyT(func(v GetRabbitmqVipInstanceInstance) string { return v.ExceptionInformation }).(pulumi.StringOutput)
 }
 
+// Instance expiration time, in milliseconds.
 func (o GetRabbitmqVipInstanceInstanceOutput) ExpireTime() pulumi.IntOutput {
 	return o.ApplyT(func(v GetRabbitmqVipInstanceInstance) int { return v.ExpireTime }).(pulumi.IntOutput)
 }
 
+// instance id.
 func (o GetRabbitmqVipInstanceInstanceOutput) InstanceId() pulumi.StringOutput {
 	return o.ApplyT(func(v GetRabbitmqVipInstanceInstance) string { return v.InstanceId }).(pulumi.StringOutput)
 }
 
+// instance name.
 func (o GetRabbitmqVipInstanceInstanceOutput) InstanceName() pulumi.StringOutput {
 	return o.ApplyT(func(v GetRabbitmqVipInstanceInstance) string { return v.InstanceName }).(pulumi.StringOutput)
 }
 
+// instance versionNote: This field may return null, indicating that no valid value can be obtained.
 func (o GetRabbitmqVipInstanceInstanceOutput) InstanceVersion() pulumi.StringOutput {
 	return o.ApplyT(func(v GetRabbitmqVipInstanceInstance) string { return v.InstanceVersion }).(pulumi.StringOutput)
 }
 
+// Peak bandwidth, in Mbps.
 func (o GetRabbitmqVipInstanceInstanceOutput) MaxBandWidth() pulumi.IntOutput {
 	return o.ApplyT(func(v GetRabbitmqVipInstanceInstance) int { return v.MaxBandWidth }).(pulumi.IntOutput)
 }
 
+// Storage capacity, in GB.
 func (o GetRabbitmqVipInstanceInstanceOutput) MaxStorage() pulumi.IntOutput {
 	return o.ApplyT(func(v GetRabbitmqVipInstanceInstance) int { return v.MaxStorage }).(pulumi.IntOutput)
 }
 
+// Peak TPS.
 func (o GetRabbitmqVipInstanceInstanceOutput) MaxTps() pulumi.IntOutput {
 	return o.ApplyT(func(v GetRabbitmqVipInstanceInstance) int { return v.MaxTps }).(pulumi.IntOutput)
 }
 
+// Number of nodes.
 func (o GetRabbitmqVipInstanceInstanceOutput) NodeCount() pulumi.IntOutput {
 	return o.ApplyT(func(v GetRabbitmqVipInstanceInstance) int { return v.NodeCount }).(pulumi.IntOutput)
 }
 
+// 0-postpaid, 1-prepaid.
 func (o GetRabbitmqVipInstanceInstanceOutput) PayMode() pulumi.IntOutput {
 	return o.ApplyT(func(v GetRabbitmqVipInstanceInstance) int { return v.PayMode }).(pulumi.IntOutput)
 }
 
+// RemarksNote: This field may return null, indicating that no valid value can be obtained.
 func (o GetRabbitmqVipInstanceInstanceOutput) Remark() pulumi.StringOutput {
 	return o.ApplyT(func(v GetRabbitmqVipInstanceInstance) string { return v.Remark }).(pulumi.StringOutput)
 }
 
+// Instance Configuration ID.
 func (o GetRabbitmqVipInstanceInstanceOutput) SpecName() pulumi.StringOutput {
 	return o.ApplyT(func(v GetRabbitmqVipInstanceInstance) string { return v.SpecName }).(pulumi.StringOutput)
 }
 
+// Instance status, 0 means creating, 1 means normal, 2 means isolating, 3 means destroyed, 4 - abnormal, 5 - delivery failed.
 func (o GetRabbitmqVipInstanceInstanceOutput) Status() pulumi.IntOutput {
 	return o.ApplyT(func(v GetRabbitmqVipInstanceInstance) int { return v.Status }).(pulumi.IntOutput)
 }
@@ -2552,7 +2630,7 @@ type GetRocketmqClusterClusterList struct {
 // GetRocketmqClusterClusterListInput is an input type that accepts GetRocketmqClusterClusterListArgs and GetRocketmqClusterClusterListOutput values.
 // You can construct a concrete instance of `GetRocketmqClusterClusterListInput` via:
 //
-//          GetRocketmqClusterClusterListArgs{...}
+//	GetRocketmqClusterClusterListArgs{...}
 type GetRocketmqClusterClusterListInput interface {
 	pulumi.Input
 
@@ -2584,7 +2662,7 @@ func (i GetRocketmqClusterClusterListArgs) ToGetRocketmqClusterClusterListOutput
 // GetRocketmqClusterClusterListArrayInput is an input type that accepts GetRocketmqClusterClusterListArray and GetRocketmqClusterClusterListArrayOutput values.
 // You can construct a concrete instance of `GetRocketmqClusterClusterListArrayInput` via:
 //
-//          GetRocketmqClusterClusterListArray{ GetRocketmqClusterClusterListArgs{...} }
+//	GetRocketmqClusterClusterListArray{ GetRocketmqClusterClusterListArgs{...} }
 type GetRocketmqClusterClusterListArrayInput interface {
 	pulumi.Input
 
@@ -2679,7 +2757,7 @@ type GetRocketmqClusterClusterListConfig struct {
 // GetRocketmqClusterClusterListConfigInput is an input type that accepts GetRocketmqClusterClusterListConfigArgs and GetRocketmqClusterClusterListConfigOutput values.
 // You can construct a concrete instance of `GetRocketmqClusterClusterListConfigInput` via:
 //
-//          GetRocketmqClusterClusterListConfigArgs{...}
+//	GetRocketmqClusterClusterListConfigArgs{...}
 type GetRocketmqClusterClusterListConfigInput interface {
 	pulumi.Input
 
@@ -2723,7 +2801,7 @@ func (i GetRocketmqClusterClusterListConfigArgs) ToGetRocketmqClusterClusterList
 // GetRocketmqClusterClusterListConfigArrayInput is an input type that accepts GetRocketmqClusterClusterListConfigArray and GetRocketmqClusterClusterListConfigArrayOutput values.
 // You can construct a concrete instance of `GetRocketmqClusterClusterListConfigArrayInput` via:
 //
-//          GetRocketmqClusterClusterListConfigArray{ GetRocketmqClusterClusterListConfigArgs{...} }
+//	GetRocketmqClusterClusterListConfigArray{ GetRocketmqClusterClusterListConfigArgs{...} }
 type GetRocketmqClusterClusterListConfigArrayInput interface {
 	pulumi.Input
 
@@ -2852,7 +2930,7 @@ type GetRocketmqClusterClusterListInfo struct {
 // GetRocketmqClusterClusterListInfoInput is an input type that accepts GetRocketmqClusterClusterListInfoArgs and GetRocketmqClusterClusterListInfoOutput values.
 // You can construct a concrete instance of `GetRocketmqClusterClusterListInfoInput` via:
 //
-//          GetRocketmqClusterClusterListInfoArgs{...}
+//	GetRocketmqClusterClusterListInfoArgs{...}
 type GetRocketmqClusterClusterListInfoInput interface {
 	pulumi.Input
 
@@ -2900,7 +2978,7 @@ func (i GetRocketmqClusterClusterListInfoArgs) ToGetRocketmqClusterClusterListIn
 // GetRocketmqClusterClusterListInfoArrayInput is an input type that accepts GetRocketmqClusterClusterListInfoArray and GetRocketmqClusterClusterListInfoArrayOutput values.
 // You can construct a concrete instance of `GetRocketmqClusterClusterListInfoArrayInput` via:
 //
-//          GetRocketmqClusterClusterListInfoArray{ GetRocketmqClusterClusterListInfoArgs{...} }
+//	GetRocketmqClusterClusterListInfoArray{ GetRocketmqClusterClusterListInfoArgs{...} }
 type GetRocketmqClusterClusterListInfoArrayInput interface {
 	pulumi.Input
 
@@ -3021,7 +3099,7 @@ type GetRocketmqClusterClusterListInfoVpc struct {
 // GetRocketmqClusterClusterListInfoVpcInput is an input type that accepts GetRocketmqClusterClusterListInfoVpcArgs and GetRocketmqClusterClusterListInfoVpcOutput values.
 // You can construct a concrete instance of `GetRocketmqClusterClusterListInfoVpcInput` via:
 //
-//          GetRocketmqClusterClusterListInfoVpcArgs{...}
+//	GetRocketmqClusterClusterListInfoVpcArgs{...}
 type GetRocketmqClusterClusterListInfoVpcInput interface {
 	pulumi.Input
 
@@ -3051,7 +3129,7 @@ func (i GetRocketmqClusterClusterListInfoVpcArgs) ToGetRocketmqClusterClusterLis
 // GetRocketmqClusterClusterListInfoVpcArrayInput is an input type that accepts GetRocketmqClusterClusterListInfoVpcArray and GetRocketmqClusterClusterListInfoVpcArrayOutput values.
 // You can construct a concrete instance of `GetRocketmqClusterClusterListInfoVpcArrayInput` via:
 //
-//          GetRocketmqClusterClusterListInfoVpcArray{ GetRocketmqClusterClusterListInfoVpcArgs{...} }
+//	GetRocketmqClusterClusterListInfoVpcArray{ GetRocketmqClusterClusterListInfoVpcArgs{...} }
 type GetRocketmqClusterClusterListInfoVpcArrayInput interface {
 	pulumi.Input
 
@@ -3149,7 +3227,7 @@ type GetRocketmqGroupGroup struct {
 // GetRocketmqGroupGroupInput is an input type that accepts GetRocketmqGroupGroupArgs and GetRocketmqGroupGroupOutput values.
 // You can construct a concrete instance of `GetRocketmqGroupGroupInput` via:
 //
-//          GetRocketmqGroupGroupArgs{...}
+//	GetRocketmqGroupGroupArgs{...}
 type GetRocketmqGroupGroupInput interface {
 	pulumi.Input
 
@@ -3201,7 +3279,7 @@ func (i GetRocketmqGroupGroupArgs) ToGetRocketmqGroupGroupOutputWithContext(ctx 
 // GetRocketmqGroupGroupArrayInput is an input type that accepts GetRocketmqGroupGroupArray and GetRocketmqGroupGroupArrayOutput values.
 // You can construct a concrete instance of `GetRocketmqGroupGroupArrayInput` via:
 //
-//          GetRocketmqGroupGroupArray{ GetRocketmqGroupGroupArgs{...} }
+//	GetRocketmqGroupGroupArray{ GetRocketmqGroupGroupArgs{...} }
 type GetRocketmqGroupGroupArrayInput interface {
 	pulumi.Input
 
@@ -3336,7 +3414,7 @@ type GetRocketmqMessagesMessageTrack struct {
 // GetRocketmqMessagesMessageTrackInput is an input type that accepts GetRocketmqMessagesMessageTrackArgs and GetRocketmqMessagesMessageTrackOutput values.
 // You can construct a concrete instance of `GetRocketmqMessagesMessageTrackInput` via:
 //
-//          GetRocketmqMessagesMessageTrackArgs{...}
+//	GetRocketmqMessagesMessageTrackArgs{...}
 type GetRocketmqMessagesMessageTrackInput interface {
 	pulumi.Input
 
@@ -3370,7 +3448,7 @@ func (i GetRocketmqMessagesMessageTrackArgs) ToGetRocketmqMessagesMessageTrackOu
 // GetRocketmqMessagesMessageTrackArrayInput is an input type that accepts GetRocketmqMessagesMessageTrackArray and GetRocketmqMessagesMessageTrackArrayOutput values.
 // You can construct a concrete instance of `GetRocketmqMessagesMessageTrackArrayInput` via:
 //
-//          GetRocketmqMessagesMessageTrackArray{ GetRocketmqMessagesMessageTrackArgs{...} }
+//	GetRocketmqMessagesMessageTrackArray{ GetRocketmqMessagesMessageTrackArgs{...} }
 type GetRocketmqMessagesMessageTrackArrayInput interface {
 	pulumi.Input
 
@@ -3464,7 +3542,7 @@ type GetRocketmqNamespaceNamespace struct {
 // GetRocketmqNamespaceNamespaceInput is an input type that accepts GetRocketmqNamespaceNamespaceArgs and GetRocketmqNamespaceNamespaceOutput values.
 // You can construct a concrete instance of `GetRocketmqNamespaceNamespaceInput` via:
 //
-//          GetRocketmqNamespaceNamespaceArgs{...}
+//	GetRocketmqNamespaceNamespaceArgs{...}
 type GetRocketmqNamespaceNamespaceInput interface {
 	pulumi.Input
 
@@ -3502,7 +3580,7 @@ func (i GetRocketmqNamespaceNamespaceArgs) ToGetRocketmqNamespaceNamespaceOutput
 // GetRocketmqNamespaceNamespaceArrayInput is an input type that accepts GetRocketmqNamespaceNamespaceArray and GetRocketmqNamespaceNamespaceArrayOutput values.
 // You can construct a concrete instance of `GetRocketmqNamespaceNamespaceArrayInput` via:
 //
-//          GetRocketmqNamespaceNamespaceArray{ GetRocketmqNamespaceNamespaceArgs{...} }
+//	GetRocketmqNamespaceNamespaceArray{ GetRocketmqNamespaceNamespaceArgs{...} }
 type GetRocketmqNamespaceNamespaceArrayInput interface {
 	pulumi.Input
 
@@ -3604,7 +3682,7 @@ type GetRocketmqRoleRoleSet struct {
 // GetRocketmqRoleRoleSetInput is an input type that accepts GetRocketmqRoleRoleSetArgs and GetRocketmqRoleRoleSetOutput values.
 // You can construct a concrete instance of `GetRocketmqRoleRoleSetInput` via:
 //
-//          GetRocketmqRoleRoleSetArgs{...}
+//	GetRocketmqRoleRoleSetArgs{...}
 type GetRocketmqRoleRoleSetInput interface {
 	pulumi.Input
 
@@ -3640,7 +3718,7 @@ func (i GetRocketmqRoleRoleSetArgs) ToGetRocketmqRoleRoleSetOutputWithContext(ct
 // GetRocketmqRoleRoleSetArrayInput is an input type that accepts GetRocketmqRoleRoleSetArray and GetRocketmqRoleRoleSetArrayOutput values.
 // You can construct a concrete instance of `GetRocketmqRoleRoleSetArrayInput` via:
 //
-//          GetRocketmqRoleRoleSetArray{ GetRocketmqRoleRoleSetArgs{...} }
+//	GetRocketmqRoleRoleSetArray{ GetRocketmqRoleRoleSetArgs{...} }
 type GetRocketmqRoleRoleSetArrayInput interface {
 	pulumi.Input
 
@@ -3737,7 +3815,7 @@ type GetRocketmqTopicTopic struct {
 // GetRocketmqTopicTopicInput is an input type that accepts GetRocketmqTopicTopicArgs and GetRocketmqTopicTopicOutput values.
 // You can construct a concrete instance of `GetRocketmqTopicTopicInput` via:
 //
-//          GetRocketmqTopicTopicArgs{...}
+//	GetRocketmqTopicTopicArgs{...}
 type GetRocketmqTopicTopicInput interface {
 	pulumi.Input
 
@@ -3773,7 +3851,7 @@ func (i GetRocketmqTopicTopicArgs) ToGetRocketmqTopicTopicOutputWithContext(ctx 
 // GetRocketmqTopicTopicArrayInput is an input type that accepts GetRocketmqTopicTopicArray and GetRocketmqTopicTopicArrayOutput values.
 // You can construct a concrete instance of `GetRocketmqTopicTopicArrayInput` via:
 //
-//          GetRocketmqTopicTopicArray{ GetRocketmqTopicTopicArgs{...} }
+//	GetRocketmqTopicTopicArray{ GetRocketmqTopicTopicArgs{...} }
 type GetRocketmqTopicTopicArrayInput interface {
 	pulumi.Input
 
@@ -3855,27 +3933,42 @@ func (o GetRocketmqTopicTopicArrayOutput) Index(i pulumi.IntInput) GetRocketmqTo
 }
 
 type GetVipInstanceClusterInfo struct {
-	ClusterId                string                         `pulumi:"clusterId"`
-	ClusterName              string                         `pulumi:"clusterName"`
-	CreateTime               int                            `pulumi:"createTime"`
-	HttpPublicEndpoint       string                         `pulumi:"httpPublicEndpoint"`
-	HttpVpcEndpoint          string                         `pulumi:"httpVpcEndpoint"`
-	IsVip                    bool                           `pulumi:"isVip"`
-	IsolateTime              int                            `pulumi:"isolateTime"`
-	PublicEndPoint           string                         `pulumi:"publicEndPoint"`
-	Region                   string                         `pulumi:"region"`
-	Remark                   string                         `pulumi:"remark"`
-	RocketMqFlag             bool                           `pulumi:"rocketMqFlag"`
-	Status                   int                            `pulumi:"status"`
-	SupportNamespaceEndpoint bool                           `pulumi:"supportNamespaceEndpoint"`
-	VpcEndPoint              string                         `pulumi:"vpcEndPoint"`
-	Vpcs                     []GetVipInstanceClusterInfoVpc `pulumi:"vpcs"`
+	// Cluster ID.
+	ClusterId string `pulumi:"clusterId"`
+	// Cluster Name.
+	ClusterName string `pulumi:"clusterName"`
+	// Creation time, in milliseconds.
+	CreateTime int `pulumi:"createTime"`
+	// HTTP protocol public network access addressNote: This field may return null, indicating that no valid value can be obtained.
+	HttpPublicEndpoint string `pulumi:"httpPublicEndpoint"`
+	// HTTP protocol VPC access addressNote: This field may return null, indicating that no valid value can be obtained.
+	HttpVpcEndpoint string `pulumi:"httpVpcEndpoint"`
+	// Whether it is a dedicated instanceNote: This field may return null, indicating that no valid value can be obtained.
+	IsVip bool `pulumi:"isVip"`
+	// Overdue suspension time, in millisecondsNote: This field may return null, indicating that no valid value can be obtained.
+	IsolateTime int `pulumi:"isolateTime"`
+	// Public network access address.
+	PublicEndPoint string `pulumi:"publicEndPoint"`
+	// Region.
+	Region string `pulumi:"region"`
+	// Cluster description informationNote: This field may return null, indicating that no valid value can be obtained.
+	Remark string `pulumi:"remark"`
+	// Rocketmq cluster identificationNote: This field may return null, indicating that no valid value can be obtained.
+	RocketMqFlag bool `pulumi:"rocketMqFlag"`
+	// Billing status, 1 means normal, 2 means stopped, 3 means destroyedNote: This field may return null, indicating that no valid value can be obtained.
+	Status int `pulumi:"status"`
+	// Whether namespace access points are supportedNote: This field may return null, indicating that no valid value can be obtained.
+	SupportNamespaceEndpoint bool `pulumi:"supportNamespaceEndpoint"`
+	// VPC access address.
+	VpcEndPoint string `pulumi:"vpcEndPoint"`
+	// VPC informationNote: This field may return null, indicating that no valid value can be obtained.
+	Vpcs []GetVipInstanceClusterInfoVpc `pulumi:"vpcs"`
 }
 
 // GetVipInstanceClusterInfoInput is an input type that accepts GetVipInstanceClusterInfoArgs and GetVipInstanceClusterInfoOutput values.
 // You can construct a concrete instance of `GetVipInstanceClusterInfoInput` via:
 //
-//          GetVipInstanceClusterInfoArgs{...}
+//	GetVipInstanceClusterInfoArgs{...}
 type GetVipInstanceClusterInfoInput interface {
 	pulumi.Input
 
@@ -3884,21 +3977,36 @@ type GetVipInstanceClusterInfoInput interface {
 }
 
 type GetVipInstanceClusterInfoArgs struct {
-	ClusterId                pulumi.StringInput                     `pulumi:"clusterId"`
-	ClusterName              pulumi.StringInput                     `pulumi:"clusterName"`
-	CreateTime               pulumi.IntInput                        `pulumi:"createTime"`
-	HttpPublicEndpoint       pulumi.StringInput                     `pulumi:"httpPublicEndpoint"`
-	HttpVpcEndpoint          pulumi.StringInput                     `pulumi:"httpVpcEndpoint"`
-	IsVip                    pulumi.BoolInput                       `pulumi:"isVip"`
-	IsolateTime              pulumi.IntInput                        `pulumi:"isolateTime"`
-	PublicEndPoint           pulumi.StringInput                     `pulumi:"publicEndPoint"`
-	Region                   pulumi.StringInput                     `pulumi:"region"`
-	Remark                   pulumi.StringInput                     `pulumi:"remark"`
-	RocketMqFlag             pulumi.BoolInput                       `pulumi:"rocketMqFlag"`
-	Status                   pulumi.IntInput                        `pulumi:"status"`
-	SupportNamespaceEndpoint pulumi.BoolInput                       `pulumi:"supportNamespaceEndpoint"`
-	VpcEndPoint              pulumi.StringInput                     `pulumi:"vpcEndPoint"`
-	Vpcs                     GetVipInstanceClusterInfoVpcArrayInput `pulumi:"vpcs"`
+	// Cluster ID.
+	ClusterId pulumi.StringInput `pulumi:"clusterId"`
+	// Cluster Name.
+	ClusterName pulumi.StringInput `pulumi:"clusterName"`
+	// Creation time, in milliseconds.
+	CreateTime pulumi.IntInput `pulumi:"createTime"`
+	// HTTP protocol public network access addressNote: This field may return null, indicating that no valid value can be obtained.
+	HttpPublicEndpoint pulumi.StringInput `pulumi:"httpPublicEndpoint"`
+	// HTTP protocol VPC access addressNote: This field may return null, indicating that no valid value can be obtained.
+	HttpVpcEndpoint pulumi.StringInput `pulumi:"httpVpcEndpoint"`
+	// Whether it is a dedicated instanceNote: This field may return null, indicating that no valid value can be obtained.
+	IsVip pulumi.BoolInput `pulumi:"isVip"`
+	// Overdue suspension time, in millisecondsNote: This field may return null, indicating that no valid value can be obtained.
+	IsolateTime pulumi.IntInput `pulumi:"isolateTime"`
+	// Public network access address.
+	PublicEndPoint pulumi.StringInput `pulumi:"publicEndPoint"`
+	// Region.
+	Region pulumi.StringInput `pulumi:"region"`
+	// Cluster description informationNote: This field may return null, indicating that no valid value can be obtained.
+	Remark pulumi.StringInput `pulumi:"remark"`
+	// Rocketmq cluster identificationNote: This field may return null, indicating that no valid value can be obtained.
+	RocketMqFlag pulumi.BoolInput `pulumi:"rocketMqFlag"`
+	// Billing status, 1 means normal, 2 means stopped, 3 means destroyedNote: This field may return null, indicating that no valid value can be obtained.
+	Status pulumi.IntInput `pulumi:"status"`
+	// Whether namespace access points are supportedNote: This field may return null, indicating that no valid value can be obtained.
+	SupportNamespaceEndpoint pulumi.BoolInput `pulumi:"supportNamespaceEndpoint"`
+	// VPC access address.
+	VpcEndPoint pulumi.StringInput `pulumi:"vpcEndPoint"`
+	// VPC informationNote: This field may return null, indicating that no valid value can be obtained.
+	Vpcs GetVipInstanceClusterInfoVpcArrayInput `pulumi:"vpcs"`
 }
 
 func (GetVipInstanceClusterInfoArgs) ElementType() reflect.Type {
@@ -3916,7 +4024,7 @@ func (i GetVipInstanceClusterInfoArgs) ToGetVipInstanceClusterInfoOutputWithCont
 // GetVipInstanceClusterInfoArrayInput is an input type that accepts GetVipInstanceClusterInfoArray and GetVipInstanceClusterInfoArrayOutput values.
 // You can construct a concrete instance of `GetVipInstanceClusterInfoArrayInput` via:
 //
-//          GetVipInstanceClusterInfoArray{ GetVipInstanceClusterInfoArgs{...} }
+//	GetVipInstanceClusterInfoArray{ GetVipInstanceClusterInfoArgs{...} }
 type GetVipInstanceClusterInfoArrayInput interface {
 	pulumi.Input
 
@@ -3952,62 +4060,77 @@ func (o GetVipInstanceClusterInfoOutput) ToGetVipInstanceClusterInfoOutputWithCo
 	return o
 }
 
+// Cluster ID.
 func (o GetVipInstanceClusterInfoOutput) ClusterId() pulumi.StringOutput {
 	return o.ApplyT(func(v GetVipInstanceClusterInfo) string { return v.ClusterId }).(pulumi.StringOutput)
 }
 
+// Cluster Name.
 func (o GetVipInstanceClusterInfoOutput) ClusterName() pulumi.StringOutput {
 	return o.ApplyT(func(v GetVipInstanceClusterInfo) string { return v.ClusterName }).(pulumi.StringOutput)
 }
 
+// Creation time, in milliseconds.
 func (o GetVipInstanceClusterInfoOutput) CreateTime() pulumi.IntOutput {
 	return o.ApplyT(func(v GetVipInstanceClusterInfo) int { return v.CreateTime }).(pulumi.IntOutput)
 }
 
+// HTTP protocol public network access addressNote: This field may return null, indicating that no valid value can be obtained.
 func (o GetVipInstanceClusterInfoOutput) HttpPublicEndpoint() pulumi.StringOutput {
 	return o.ApplyT(func(v GetVipInstanceClusterInfo) string { return v.HttpPublicEndpoint }).(pulumi.StringOutput)
 }
 
+// HTTP protocol VPC access addressNote: This field may return null, indicating that no valid value can be obtained.
 func (o GetVipInstanceClusterInfoOutput) HttpVpcEndpoint() pulumi.StringOutput {
 	return o.ApplyT(func(v GetVipInstanceClusterInfo) string { return v.HttpVpcEndpoint }).(pulumi.StringOutput)
 }
 
+// Whether it is a dedicated instanceNote: This field may return null, indicating that no valid value can be obtained.
 func (o GetVipInstanceClusterInfoOutput) IsVip() pulumi.BoolOutput {
 	return o.ApplyT(func(v GetVipInstanceClusterInfo) bool { return v.IsVip }).(pulumi.BoolOutput)
 }
 
+// Overdue suspension time, in millisecondsNote: This field may return null, indicating that no valid value can be obtained.
 func (o GetVipInstanceClusterInfoOutput) IsolateTime() pulumi.IntOutput {
 	return o.ApplyT(func(v GetVipInstanceClusterInfo) int { return v.IsolateTime }).(pulumi.IntOutput)
 }
 
+// Public network access address.
 func (o GetVipInstanceClusterInfoOutput) PublicEndPoint() pulumi.StringOutput {
 	return o.ApplyT(func(v GetVipInstanceClusterInfo) string { return v.PublicEndPoint }).(pulumi.StringOutput)
 }
 
+// Region.
 func (o GetVipInstanceClusterInfoOutput) Region() pulumi.StringOutput {
 	return o.ApplyT(func(v GetVipInstanceClusterInfo) string { return v.Region }).(pulumi.StringOutput)
 }
 
+// Cluster description informationNote: This field may return null, indicating that no valid value can be obtained.
 func (o GetVipInstanceClusterInfoOutput) Remark() pulumi.StringOutput {
 	return o.ApplyT(func(v GetVipInstanceClusterInfo) string { return v.Remark }).(pulumi.StringOutput)
 }
 
+// Rocketmq cluster identificationNote: This field may return null, indicating that no valid value can be obtained.
 func (o GetVipInstanceClusterInfoOutput) RocketMqFlag() pulumi.BoolOutput {
 	return o.ApplyT(func(v GetVipInstanceClusterInfo) bool { return v.RocketMqFlag }).(pulumi.BoolOutput)
 }
 
+// Billing status, 1 means normal, 2 means stopped, 3 means destroyedNote: This field may return null, indicating that no valid value can be obtained.
 func (o GetVipInstanceClusterInfoOutput) Status() pulumi.IntOutput {
 	return o.ApplyT(func(v GetVipInstanceClusterInfo) int { return v.Status }).(pulumi.IntOutput)
 }
 
+// Whether namespace access points are supportedNote: This field may return null, indicating that no valid value can be obtained.
 func (o GetVipInstanceClusterInfoOutput) SupportNamespaceEndpoint() pulumi.BoolOutput {
 	return o.ApplyT(func(v GetVipInstanceClusterInfo) bool { return v.SupportNamespaceEndpoint }).(pulumi.BoolOutput)
 }
 
+// VPC access address.
 func (o GetVipInstanceClusterInfoOutput) VpcEndPoint() pulumi.StringOutput {
 	return o.ApplyT(func(v GetVipInstanceClusterInfo) string { return v.VpcEndPoint }).(pulumi.StringOutput)
 }
 
+// VPC informationNote: This field may return null, indicating that no valid value can be obtained.
 func (o GetVipInstanceClusterInfoOutput) Vpcs() GetVipInstanceClusterInfoVpcArrayOutput {
 	return o.ApplyT(func(v GetVipInstanceClusterInfo) []GetVipInstanceClusterInfoVpc { return v.Vpcs }).(GetVipInstanceClusterInfoVpcArrayOutput)
 }
@@ -4033,14 +4156,16 @@ func (o GetVipInstanceClusterInfoArrayOutput) Index(i pulumi.IntInput) GetVipIns
 }
 
 type GetVipInstanceClusterInfoVpc struct {
+	// Subnet Id.
 	SubnetId string `pulumi:"subnetId"`
-	VpcId    string `pulumi:"vpcId"`
+	// VPC ID.
+	VpcId string `pulumi:"vpcId"`
 }
 
 // GetVipInstanceClusterInfoVpcInput is an input type that accepts GetVipInstanceClusterInfoVpcArgs and GetVipInstanceClusterInfoVpcOutput values.
 // You can construct a concrete instance of `GetVipInstanceClusterInfoVpcInput` via:
 //
-//          GetVipInstanceClusterInfoVpcArgs{...}
+//	GetVipInstanceClusterInfoVpcArgs{...}
 type GetVipInstanceClusterInfoVpcInput interface {
 	pulumi.Input
 
@@ -4049,8 +4174,10 @@ type GetVipInstanceClusterInfoVpcInput interface {
 }
 
 type GetVipInstanceClusterInfoVpcArgs struct {
+	// Subnet Id.
 	SubnetId pulumi.StringInput `pulumi:"subnetId"`
-	VpcId    pulumi.StringInput `pulumi:"vpcId"`
+	// VPC ID.
+	VpcId pulumi.StringInput `pulumi:"vpcId"`
 }
 
 func (GetVipInstanceClusterInfoVpcArgs) ElementType() reflect.Type {
@@ -4068,7 +4195,7 @@ func (i GetVipInstanceClusterInfoVpcArgs) ToGetVipInstanceClusterInfoVpcOutputWi
 // GetVipInstanceClusterInfoVpcArrayInput is an input type that accepts GetVipInstanceClusterInfoVpcArray and GetVipInstanceClusterInfoVpcArrayOutput values.
 // You can construct a concrete instance of `GetVipInstanceClusterInfoVpcArrayInput` via:
 //
-//          GetVipInstanceClusterInfoVpcArray{ GetVipInstanceClusterInfoVpcArgs{...} }
+//	GetVipInstanceClusterInfoVpcArray{ GetVipInstanceClusterInfoVpcArgs{...} }
 type GetVipInstanceClusterInfoVpcArrayInput interface {
 	pulumi.Input
 
@@ -4104,10 +4231,12 @@ func (o GetVipInstanceClusterInfoVpcOutput) ToGetVipInstanceClusterInfoVpcOutput
 	return o
 }
 
+// Subnet Id.
 func (o GetVipInstanceClusterInfoVpcOutput) SubnetId() pulumi.StringOutput {
 	return o.ApplyT(func(v GetVipInstanceClusterInfoVpc) string { return v.SubnetId }).(pulumi.StringOutput)
 }
 
+// VPC ID.
 func (o GetVipInstanceClusterInfoVpcOutput) VpcId() pulumi.StringOutput {
 	return o.ApplyT(func(v GetVipInstanceClusterInfoVpc) string { return v.VpcId }).(pulumi.StringOutput)
 }
@@ -4133,24 +4262,36 @@ func (o GetVipInstanceClusterInfoVpcArrayOutput) Index(i pulumi.IntInput) GetVip
 }
 
 type GetVipInstanceInstanceConfig struct {
-	ConfigDisplay      string                                          `pulumi:"configDisplay"`
-	MaxGroupNum        int                                             `pulumi:"maxGroupNum"`
-	MaxNamespaceNum    int                                             `pulumi:"maxNamespaceNum"`
-	MaxQueuesPerTopic  int                                             `pulumi:"maxQueuesPerTopic"`
-	MaxTopicNum        int                                             `pulumi:"maxTopicNum"`
-	MaxTpsPerNamespace int                                             `pulumi:"maxTpsPerNamespace"`
-	NodeCount          int                                             `pulumi:"nodeCount"`
-	NodeDistributions  []GetVipInstanceInstanceConfigNodeDistribution  `pulumi:"nodeDistributions"`
+	// Cluster type.
+	ConfigDisplay string `pulumi:"configDisplay"`
+	// Maximum number of groups.
+	MaxGroupNum int `pulumi:"maxGroupNum"`
+	// Maximum number of namespaces.
+	MaxNamespaceNum int `pulumi:"maxNamespaceNum"`
+	// Maximum number of queues per topicNote: This field may return null, indicating that no valid value can be obtained.
+	MaxQueuesPerTopic int `pulumi:"maxQueuesPerTopic"`
+	// Maximum number of topics.
+	MaxTopicNum int `pulumi:"maxTopicNum"`
+	// Single namespace TPS upper limit.
+	MaxTpsPerNamespace int `pulumi:"maxTpsPerNamespace"`
+	// Number of cluster nodes.
+	NodeCount int `pulumi:"nodeCount"`
+	// Node distribution.
+	NodeDistributions []GetVipInstanceInstanceConfigNodeDistribution `pulumi:"nodeDistributions"`
+	// Topic distribution.
 	TopicDistributions []GetVipInstanceInstanceConfigTopicDistribution `pulumi:"topicDistributions"`
-	UsedGroupNum       int                                             `pulumi:"usedGroupNum"`
-	UsedNamespaceNum   int                                             `pulumi:"usedNamespaceNum"`
-	UsedTopicNum       int                                             `pulumi:"usedTopicNum"`
+	// Number of used groups.
+	UsedGroupNum int `pulumi:"usedGroupNum"`
+	// Number of used namespaces.
+	UsedNamespaceNum int `pulumi:"usedNamespaceNum"`
+	// The number of topics used.
+	UsedTopicNum int `pulumi:"usedTopicNum"`
 }
 
 // GetVipInstanceInstanceConfigInput is an input type that accepts GetVipInstanceInstanceConfigArgs and GetVipInstanceInstanceConfigOutput values.
 // You can construct a concrete instance of `GetVipInstanceInstanceConfigInput` via:
 //
-//          GetVipInstanceInstanceConfigArgs{...}
+//	GetVipInstanceInstanceConfigArgs{...}
 type GetVipInstanceInstanceConfigInput interface {
 	pulumi.Input
 
@@ -4159,18 +4300,30 @@ type GetVipInstanceInstanceConfigInput interface {
 }
 
 type GetVipInstanceInstanceConfigArgs struct {
-	ConfigDisplay      pulumi.StringInput                                      `pulumi:"configDisplay"`
-	MaxGroupNum        pulumi.IntInput                                         `pulumi:"maxGroupNum"`
-	MaxNamespaceNum    pulumi.IntInput                                         `pulumi:"maxNamespaceNum"`
-	MaxQueuesPerTopic  pulumi.IntInput                                         `pulumi:"maxQueuesPerTopic"`
-	MaxTopicNum        pulumi.IntInput                                         `pulumi:"maxTopicNum"`
-	MaxTpsPerNamespace pulumi.IntInput                                         `pulumi:"maxTpsPerNamespace"`
-	NodeCount          pulumi.IntInput                                         `pulumi:"nodeCount"`
-	NodeDistributions  GetVipInstanceInstanceConfigNodeDistributionArrayInput  `pulumi:"nodeDistributions"`
+	// Cluster type.
+	ConfigDisplay pulumi.StringInput `pulumi:"configDisplay"`
+	// Maximum number of groups.
+	MaxGroupNum pulumi.IntInput `pulumi:"maxGroupNum"`
+	// Maximum number of namespaces.
+	MaxNamespaceNum pulumi.IntInput `pulumi:"maxNamespaceNum"`
+	// Maximum number of queues per topicNote: This field may return null, indicating that no valid value can be obtained.
+	MaxQueuesPerTopic pulumi.IntInput `pulumi:"maxQueuesPerTopic"`
+	// Maximum number of topics.
+	MaxTopicNum pulumi.IntInput `pulumi:"maxTopicNum"`
+	// Single namespace TPS upper limit.
+	MaxTpsPerNamespace pulumi.IntInput `pulumi:"maxTpsPerNamespace"`
+	// Number of cluster nodes.
+	NodeCount pulumi.IntInput `pulumi:"nodeCount"`
+	// Node distribution.
+	NodeDistributions GetVipInstanceInstanceConfigNodeDistributionArrayInput `pulumi:"nodeDistributions"`
+	// Topic distribution.
 	TopicDistributions GetVipInstanceInstanceConfigTopicDistributionArrayInput `pulumi:"topicDistributions"`
-	UsedGroupNum       pulumi.IntInput                                         `pulumi:"usedGroupNum"`
-	UsedNamespaceNum   pulumi.IntInput                                         `pulumi:"usedNamespaceNum"`
-	UsedTopicNum       pulumi.IntInput                                         `pulumi:"usedTopicNum"`
+	// Number of used groups.
+	UsedGroupNum pulumi.IntInput `pulumi:"usedGroupNum"`
+	// Number of used namespaces.
+	UsedNamespaceNum pulumi.IntInput `pulumi:"usedNamespaceNum"`
+	// The number of topics used.
+	UsedTopicNum pulumi.IntInput `pulumi:"usedTopicNum"`
 }
 
 func (GetVipInstanceInstanceConfigArgs) ElementType() reflect.Type {
@@ -4188,7 +4341,7 @@ func (i GetVipInstanceInstanceConfigArgs) ToGetVipInstanceInstanceConfigOutputWi
 // GetVipInstanceInstanceConfigArrayInput is an input type that accepts GetVipInstanceInstanceConfigArray and GetVipInstanceInstanceConfigArrayOutput values.
 // You can construct a concrete instance of `GetVipInstanceInstanceConfigArrayInput` via:
 //
-//          GetVipInstanceInstanceConfigArray{ GetVipInstanceInstanceConfigArgs{...} }
+//	GetVipInstanceInstanceConfigArray{ GetVipInstanceInstanceConfigArgs{...} }
 type GetVipInstanceInstanceConfigArrayInput interface {
 	pulumi.Input
 
@@ -4224,54 +4377,66 @@ func (o GetVipInstanceInstanceConfigOutput) ToGetVipInstanceInstanceConfigOutput
 	return o
 }
 
+// Cluster type.
 func (o GetVipInstanceInstanceConfigOutput) ConfigDisplay() pulumi.StringOutput {
 	return o.ApplyT(func(v GetVipInstanceInstanceConfig) string { return v.ConfigDisplay }).(pulumi.StringOutput)
 }
 
+// Maximum number of groups.
 func (o GetVipInstanceInstanceConfigOutput) MaxGroupNum() pulumi.IntOutput {
 	return o.ApplyT(func(v GetVipInstanceInstanceConfig) int { return v.MaxGroupNum }).(pulumi.IntOutput)
 }
 
+// Maximum number of namespaces.
 func (o GetVipInstanceInstanceConfigOutput) MaxNamespaceNum() pulumi.IntOutput {
 	return o.ApplyT(func(v GetVipInstanceInstanceConfig) int { return v.MaxNamespaceNum }).(pulumi.IntOutput)
 }
 
+// Maximum number of queues per topicNote: This field may return null, indicating that no valid value can be obtained.
 func (o GetVipInstanceInstanceConfigOutput) MaxQueuesPerTopic() pulumi.IntOutput {
 	return o.ApplyT(func(v GetVipInstanceInstanceConfig) int { return v.MaxQueuesPerTopic }).(pulumi.IntOutput)
 }
 
+// Maximum number of topics.
 func (o GetVipInstanceInstanceConfigOutput) MaxTopicNum() pulumi.IntOutput {
 	return o.ApplyT(func(v GetVipInstanceInstanceConfig) int { return v.MaxTopicNum }).(pulumi.IntOutput)
 }
 
+// Single namespace TPS upper limit.
 func (o GetVipInstanceInstanceConfigOutput) MaxTpsPerNamespace() pulumi.IntOutput {
 	return o.ApplyT(func(v GetVipInstanceInstanceConfig) int { return v.MaxTpsPerNamespace }).(pulumi.IntOutput)
 }
 
+// Number of cluster nodes.
 func (o GetVipInstanceInstanceConfigOutput) NodeCount() pulumi.IntOutput {
 	return o.ApplyT(func(v GetVipInstanceInstanceConfig) int { return v.NodeCount }).(pulumi.IntOutput)
 }
 
+// Node distribution.
 func (o GetVipInstanceInstanceConfigOutput) NodeDistributions() GetVipInstanceInstanceConfigNodeDistributionArrayOutput {
 	return o.ApplyT(func(v GetVipInstanceInstanceConfig) []GetVipInstanceInstanceConfigNodeDistribution {
 		return v.NodeDistributions
 	}).(GetVipInstanceInstanceConfigNodeDistributionArrayOutput)
 }
 
+// Topic distribution.
 func (o GetVipInstanceInstanceConfigOutput) TopicDistributions() GetVipInstanceInstanceConfigTopicDistributionArrayOutput {
 	return o.ApplyT(func(v GetVipInstanceInstanceConfig) []GetVipInstanceInstanceConfigTopicDistribution {
 		return v.TopicDistributions
 	}).(GetVipInstanceInstanceConfigTopicDistributionArrayOutput)
 }
 
+// Number of used groups.
 func (o GetVipInstanceInstanceConfigOutput) UsedGroupNum() pulumi.IntOutput {
 	return o.ApplyT(func(v GetVipInstanceInstanceConfig) int { return v.UsedGroupNum }).(pulumi.IntOutput)
 }
 
+// Number of used namespaces.
 func (o GetVipInstanceInstanceConfigOutput) UsedNamespaceNum() pulumi.IntOutput {
 	return o.ApplyT(func(v GetVipInstanceInstanceConfig) int { return v.UsedNamespaceNum }).(pulumi.IntOutput)
 }
 
+// The number of topics used.
 func (o GetVipInstanceInstanceConfigOutput) UsedTopicNum() pulumi.IntOutput {
 	return o.ApplyT(func(v GetVipInstanceInstanceConfig) int { return v.UsedTopicNum }).(pulumi.IntOutput)
 }
@@ -4297,15 +4462,18 @@ func (o GetVipInstanceInstanceConfigArrayOutput) Index(i pulumi.IntInput) GetVip
 }
 
 type GetVipInstanceInstanceConfigNodeDistribution struct {
-	NodeCount int    `pulumi:"nodeCount"`
-	ZoneId    string `pulumi:"zoneId"`
-	ZoneName  string `pulumi:"zoneName"`
+	// Number of nodes.
+	NodeCount int `pulumi:"nodeCount"`
+	// Availability zone id.
+	ZoneId string `pulumi:"zoneId"`
+	// Availability zone.
+	ZoneName string `pulumi:"zoneName"`
 }
 
 // GetVipInstanceInstanceConfigNodeDistributionInput is an input type that accepts GetVipInstanceInstanceConfigNodeDistributionArgs and GetVipInstanceInstanceConfigNodeDistributionOutput values.
 // You can construct a concrete instance of `GetVipInstanceInstanceConfigNodeDistributionInput` via:
 //
-//          GetVipInstanceInstanceConfigNodeDistributionArgs{...}
+//	GetVipInstanceInstanceConfigNodeDistributionArgs{...}
 type GetVipInstanceInstanceConfigNodeDistributionInput interface {
 	pulumi.Input
 
@@ -4314,9 +4482,12 @@ type GetVipInstanceInstanceConfigNodeDistributionInput interface {
 }
 
 type GetVipInstanceInstanceConfigNodeDistributionArgs struct {
-	NodeCount pulumi.IntInput    `pulumi:"nodeCount"`
-	ZoneId    pulumi.StringInput `pulumi:"zoneId"`
-	ZoneName  pulumi.StringInput `pulumi:"zoneName"`
+	// Number of nodes.
+	NodeCount pulumi.IntInput `pulumi:"nodeCount"`
+	// Availability zone id.
+	ZoneId pulumi.StringInput `pulumi:"zoneId"`
+	// Availability zone.
+	ZoneName pulumi.StringInput `pulumi:"zoneName"`
 }
 
 func (GetVipInstanceInstanceConfigNodeDistributionArgs) ElementType() reflect.Type {
@@ -4334,7 +4505,7 @@ func (i GetVipInstanceInstanceConfigNodeDistributionArgs) ToGetVipInstanceInstan
 // GetVipInstanceInstanceConfigNodeDistributionArrayInput is an input type that accepts GetVipInstanceInstanceConfigNodeDistributionArray and GetVipInstanceInstanceConfigNodeDistributionArrayOutput values.
 // You can construct a concrete instance of `GetVipInstanceInstanceConfigNodeDistributionArrayInput` via:
 //
-//          GetVipInstanceInstanceConfigNodeDistributionArray{ GetVipInstanceInstanceConfigNodeDistributionArgs{...} }
+//	GetVipInstanceInstanceConfigNodeDistributionArray{ GetVipInstanceInstanceConfigNodeDistributionArgs{...} }
 type GetVipInstanceInstanceConfigNodeDistributionArrayInput interface {
 	pulumi.Input
 
@@ -4370,14 +4541,17 @@ func (o GetVipInstanceInstanceConfigNodeDistributionOutput) ToGetVipInstanceInst
 	return o
 }
 
+// Number of nodes.
 func (o GetVipInstanceInstanceConfigNodeDistributionOutput) NodeCount() pulumi.IntOutput {
 	return o.ApplyT(func(v GetVipInstanceInstanceConfigNodeDistribution) int { return v.NodeCount }).(pulumi.IntOutput)
 }
 
+// Availability zone id.
 func (o GetVipInstanceInstanceConfigNodeDistributionOutput) ZoneId() pulumi.StringOutput {
 	return o.ApplyT(func(v GetVipInstanceInstanceConfigNodeDistribution) string { return v.ZoneId }).(pulumi.StringOutput)
 }
 
+// Availability zone.
 func (o GetVipInstanceInstanceConfigNodeDistributionOutput) ZoneName() pulumi.StringOutput {
 	return o.ApplyT(func(v GetVipInstanceInstanceConfigNodeDistribution) string { return v.ZoneName }).(pulumi.StringOutput)
 }
@@ -4403,14 +4577,16 @@ func (o GetVipInstanceInstanceConfigNodeDistributionArrayOutput) Index(i pulumi.
 }
 
 type GetVipInstanceInstanceConfigTopicDistribution struct {
-	Count     int    `pulumi:"count"`
+	// Number of topics.
+	Count int `pulumi:"count"`
+	// Topic type.
 	TopicType string `pulumi:"topicType"`
 }
 
 // GetVipInstanceInstanceConfigTopicDistributionInput is an input type that accepts GetVipInstanceInstanceConfigTopicDistributionArgs and GetVipInstanceInstanceConfigTopicDistributionOutput values.
 // You can construct a concrete instance of `GetVipInstanceInstanceConfigTopicDistributionInput` via:
 //
-//          GetVipInstanceInstanceConfigTopicDistributionArgs{...}
+//	GetVipInstanceInstanceConfigTopicDistributionArgs{...}
 type GetVipInstanceInstanceConfigTopicDistributionInput interface {
 	pulumi.Input
 
@@ -4419,7 +4595,9 @@ type GetVipInstanceInstanceConfigTopicDistributionInput interface {
 }
 
 type GetVipInstanceInstanceConfigTopicDistributionArgs struct {
-	Count     pulumi.IntInput    `pulumi:"count"`
+	// Number of topics.
+	Count pulumi.IntInput `pulumi:"count"`
+	// Topic type.
 	TopicType pulumi.StringInput `pulumi:"topicType"`
 }
 
@@ -4438,7 +4616,7 @@ func (i GetVipInstanceInstanceConfigTopicDistributionArgs) ToGetVipInstanceInsta
 // GetVipInstanceInstanceConfigTopicDistributionArrayInput is an input type that accepts GetVipInstanceInstanceConfigTopicDistributionArray and GetVipInstanceInstanceConfigTopicDistributionArrayOutput values.
 // You can construct a concrete instance of `GetVipInstanceInstanceConfigTopicDistributionArrayInput` via:
 //
-//          GetVipInstanceInstanceConfigTopicDistributionArray{ GetVipInstanceInstanceConfigTopicDistributionArgs{...} }
+//	GetVipInstanceInstanceConfigTopicDistributionArray{ GetVipInstanceInstanceConfigTopicDistributionArgs{...} }
 type GetVipInstanceInstanceConfigTopicDistributionArrayInput interface {
 	pulumi.Input
 
@@ -4474,10 +4652,12 @@ func (o GetVipInstanceInstanceConfigTopicDistributionOutput) ToGetVipInstanceIns
 	return o
 }
 
+// Number of topics.
 func (o GetVipInstanceInstanceConfigTopicDistributionOutput) Count() pulumi.IntOutput {
 	return o.ApplyT(func(v GetVipInstanceInstanceConfigTopicDistribution) int { return v.Count }).(pulumi.IntOutput)
 }
 
+// Topic type.
 func (o GetVipInstanceInstanceConfigTopicDistributionOutput) TopicType() pulumi.StringOutput {
 	return o.ApplyT(func(v GetVipInstanceInstanceConfigTopicDistribution) string { return v.TopicType }).(pulumi.StringOutput)
 }

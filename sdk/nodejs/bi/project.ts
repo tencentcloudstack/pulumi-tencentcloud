@@ -9,23 +9,25 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const project = new tencentcloud.Bi.Project("project", {
+ * const project = new tencentcloud.bi.Project("project", {
  *     colorCode: "#7BD936",
  *     logo: "TF-test",
  *     mark: "project mark",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * bi project can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Bi/project:Project project project_id
+ * $ pulumi import tencentcloud:Bi/project:Project project project_id
  * ```
  */
 export class Project extends pulumi.CustomResource {

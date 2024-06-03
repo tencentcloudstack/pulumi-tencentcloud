@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,6 +11,7 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
@@ -22,13 +24,11 @@ import * as utilities from "../utilities";
  *     policyId: tencentcloud_cam_policy.foo.id,
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getRolePolicyAttachments(args: GetRolePolicyAttachmentsArgs, opts?: pulumi.InvokeOptions): Promise<GetRolePolicyAttachmentsResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Cam/getRolePolicyAttachments:getRolePolicyAttachments", {
         "createMode": args.createMode,
         "policyId": args.policyId,
@@ -94,9 +94,28 @@ export interface GetRolePolicyAttachmentsResult {
      */
     readonly rolePolicyAttachmentLists: outputs.Cam.GetRolePolicyAttachmentsRolePolicyAttachmentList[];
 }
-
+/**
+ * Use this data source to query detailed information of CAM role policy attachments
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const foo = tencentcloud.Cam.getRolePolicyAttachments({
+ *     roleId: tencentcloud_cam_role.foo.id,
+ * });
+ * const bar = tencentcloud.Cam.getRolePolicyAttachments({
+ *     roleId: tencentcloud_cam_role.foo.id,
+ *     policyId: tencentcloud_cam_policy.foo.id,
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getRolePolicyAttachmentsOutput(args: GetRolePolicyAttachmentsOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetRolePolicyAttachmentsResult> {
-    return pulumi.output(args).apply(a => getRolePolicyAttachments(a, opts))
+    return pulumi.output(args).apply((a: any) => getRolePolicyAttachments(a, opts))
 }
 
 /**

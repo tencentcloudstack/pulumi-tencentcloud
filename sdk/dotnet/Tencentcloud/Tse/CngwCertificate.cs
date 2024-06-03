@@ -15,38 +15,39 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tse
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var cngwCertificate = new Tencentcloud.Tse.CngwCertificate("cngwCertificate", new()
     ///     {
-    ///         var cngwCertificate = new Tencentcloud.Tse.CngwCertificate("cngwCertificate", new Tencentcloud.Tse.CngwCertificateArgs
+    ///         BindDomains = new[]
     ///         {
-    ///             BindDomains = 
-    ///             {
-    ///                 "example1.com",
-    ///             },
-    ///             CertId = "vYSQkJ3K",
-    ///             GatewayId = "gateway-ddbb709b",
-    ///         });
-    ///     }
+    ///             "example1.com",
+    ///         },
+    ///         CertId = "vYSQkJ3K",
+    ///         GatewayId = "gateway-ddbb709b",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// tse cngw_certificate can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Tse/cngwCertificate:CngwCertificate cngw_certificate gatewayId#Id
+    /// $ pulumi import tencentcloud:Tse/cngwCertificate:CngwCertificate cngw_certificate gatewayId#Id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Tse/cngwCertificate:CngwCertificate")]
-    public partial class CngwCertificate : Pulumi.CustomResource
+    public partial class CngwCertificate : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Domains of the binding.
@@ -129,7 +130,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tse
         }
     }
 
-    public sealed class CngwCertificateArgs : Pulumi.ResourceArgs
+    public sealed class CngwCertificateArgs : global::Pulumi.ResourceArgs
     {
         [Input("bindDomains", required: true)]
         private InputList<string>? _bindDomains;
@@ -164,9 +165,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tse
         public CngwCertificateArgs()
         {
         }
+        public static new CngwCertificateArgs Empty => new CngwCertificateArgs();
     }
 
-    public sealed class CngwCertificateState : Pulumi.ResourceArgs
+    public sealed class CngwCertificateState : global::Pulumi.ResourceArgs
     {
         [Input("bindDomains")]
         private InputList<string>? _bindDomains;
@@ -213,5 +215,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tse
         public CngwCertificateState()
         {
         }
+        public static new CngwCertificateState Empty => new CngwCertificateState();
     }
 }

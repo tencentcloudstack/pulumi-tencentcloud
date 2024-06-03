@@ -14,14 +14,41 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam.Outputs
     [OutputType]
     public sealed class GetListAttachedUserPolicyPolicyListResult
     {
+        /// <summary>
+        /// Creation time.
+        /// </summary>
         public readonly string AddTime;
+        /// <summary>
+        /// Creation mode (1 represents policies created by product or project permissions, others represent policies created by policy syntax).
+        /// </summary>
         public readonly string CreateMode;
+        /// <summary>
+        /// Has it been taken offline (0: No 1: Yes)Note: This field may return null, indicating that a valid value cannot be obtained.
+        /// </summary>
         public readonly int Deactived;
+        /// <summary>
+        /// List of offline productsNote: This field may return null, indicating that a valid value cannot be obtained.
+        /// </summary>
         public readonly ImmutableArray<string> DeactivedDetails;
+        /// <summary>
+        /// Policy Description.
+        /// </summary>
         public readonly string Description;
+        /// <summary>
+        /// Associated information with groupNote: This field may return null, indicating that a valid value cannot be obtained.
+        /// </summary>
         public readonly ImmutableArray<Outputs.GetListAttachedUserPolicyPolicyListGroupResult> Groups;
+        /// <summary>
+        /// Policy ID.
+        /// </summary>
         public readonly string PolicyId;
+        /// <summary>
+        /// Policy Name.
+        /// </summary>
         public readonly string PolicyName;
+        /// <summary>
+        /// Policy type (1 represents custom policy, 2 represents preset policy).
+        /// </summary>
         public readonly string StrategyType;
 
         [OutputConstructor]

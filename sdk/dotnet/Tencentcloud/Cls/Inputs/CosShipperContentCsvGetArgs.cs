@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls.Inputs
 {
 
-    public sealed class CosShipperContentCsvGetArgs : Pulumi.ResourceArgs
+    public sealed class CosShipperContentCsvGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Field delimiter.
@@ -52,5 +52,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls.Inputs
         public CosShipperContentCsvGetArgs()
         {
         }
+        public static new CosShipperContentCsvGetArgs Empty => new CosShipperContentCsvGetArgs();
     }
 }

@@ -15,146 +15,148 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
         /// <summary>
         /// Use this data source to query custom GAAP HTTP domain error page info list.
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var fooProxy = new Tencentcloud.Gaap.Proxy("fooProxy", new()
         ///     {
-        ///         var fooProxy = new Tencentcloud.Gaap.Proxy("fooProxy", new Tencentcloud.Gaap.ProxyArgs
-        ///         {
-        ///             Bandwidth = 10,
-        ///             Concurrent = 2,
-        ///             AccessRegion = "SouthChina",
-        ///             RealserverRegion = "NorthChina",
-        ///         });
-        ///         var fooLayer7Listener = new Tencentcloud.Gaap.Layer7Listener("fooLayer7Listener", new Tencentcloud.Gaap.Layer7ListenerArgs
-        ///         {
-        ///             Protocol = "HTTP",
-        ///             Port = 80,
-        ///             ProxyId = "%s",
-        ///         });
-        ///         var fooHttpDomain = new Tencentcloud.Gaap.HttpDomain("fooHttpDomain", new Tencentcloud.Gaap.HttpDomainArgs
-        ///         {
-        ///             ListenerId = fooLayer7Listener.Id,
-        ///             Domain = "www.qq.com",
-        ///         });
-        ///         var fooDomainErrorPage = new Tencentcloud.Gaap.DomainErrorPage("fooDomainErrorPage", new Tencentcloud.Gaap.DomainErrorPageArgs
-        ///         {
-        ///             ListenerId = fooLayer7Listener.Id,
-        ///             Domain = fooHttpDomain.Domain,
-        ///             ErrorCodes = 
-        ///             {
-        ///                 406,
-        ///                 504,
-        ///             },
-        ///             NewErrorCode = 502,
-        ///             Body = "bad request",
-        ///             ClearHeaders = 
-        ///             {
-        ///                 "Content-Length",
-        ///                 "X-TEST",
-        ///             },
-        ///             SetHeaders = 
-        ///             {
-        ///                 { "X-TEST", "test" },
-        ///             },
-        ///         });
-        ///         var fooDomainErrorPages = Tencentcloud.Gaap.GetDomainErrorPages.Invoke(new Tencentcloud.Gaap.GetDomainErrorPagesInvokeArgs
-        ///         {
-        ///             ListenerId = fooDomainErrorPage.ListenerId,
-        ///             Domain = fooDomainErrorPage.Domain,
-        ///         });
-        ///     }
+        ///         Bandwidth = 10,
+        ///         Concurrent = 2,
+        ///         AccessRegion = "SouthChina",
+        ///         RealserverRegion = "NorthChina",
+        ///     });
         /// 
-        /// }
+        ///     var fooLayer7Listener = new Tencentcloud.Gaap.Layer7Listener("fooLayer7Listener", new()
+        ///     {
+        ///         Protocol = "HTTP",
+        ///         Port = 80,
+        ///         ProxyId = "%s",
+        ///     });
+        /// 
+        ///     var fooHttpDomain = new Tencentcloud.Gaap.HttpDomain("fooHttpDomain", new()
+        ///     {
+        ///         ListenerId = fooLayer7Listener.Id,
+        ///         Domain = "www.qq.com",
+        ///     });
+        /// 
+        ///     var fooDomainErrorPage = new Tencentcloud.Gaap.DomainErrorPage("fooDomainErrorPage", new()
+        ///     {
+        ///         ListenerId = fooLayer7Listener.Id,
+        ///         Domain = fooHttpDomain.Domain,
+        ///         ErrorCodes = new[]
+        ///         {
+        ///             406,
+        ///             504,
+        ///         },
+        ///         NewErrorCode = 502,
+        ///         Body = "bad request",
+        ///         ClearHeaders = new[]
+        ///         {
+        ///             "Content-Length",
+        ///             "X-TEST",
+        ///         },
+        ///         SetHeaders = 
+        ///         {
+        ///             { "X-TEST", "test" },
+        ///         },
+        ///     });
+        /// 
+        ///     var fooDomainErrorPages = Tencentcloud.Gaap.GetDomainErrorPages.Invoke(new()
+        ///     {
+        ///         ListenerId = fooDomainErrorPage.ListenerId,
+        ///         Domain = fooDomainErrorPage.Domain,
+        ///     });
+        /// 
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetDomainErrorPagesResult> InvokeAsync(GetDomainErrorPagesArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetDomainErrorPagesResult>("tencentcloud:Gaap/getDomainErrorPages:getDomainErrorPages", args ?? new GetDomainErrorPagesArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetDomainErrorPagesResult>("tencentcloud:Gaap/getDomainErrorPages:getDomainErrorPages", args ?? new GetDomainErrorPagesArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query custom GAAP HTTP domain error page info list.
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var fooProxy = new Tencentcloud.Gaap.Proxy("fooProxy", new()
         ///     {
-        ///         var fooProxy = new Tencentcloud.Gaap.Proxy("fooProxy", new Tencentcloud.Gaap.ProxyArgs
-        ///         {
-        ///             Bandwidth = 10,
-        ///             Concurrent = 2,
-        ///             AccessRegion = "SouthChina",
-        ///             RealserverRegion = "NorthChina",
-        ///         });
-        ///         var fooLayer7Listener = new Tencentcloud.Gaap.Layer7Listener("fooLayer7Listener", new Tencentcloud.Gaap.Layer7ListenerArgs
-        ///         {
-        ///             Protocol = "HTTP",
-        ///             Port = 80,
-        ///             ProxyId = "%s",
-        ///         });
-        ///         var fooHttpDomain = new Tencentcloud.Gaap.HttpDomain("fooHttpDomain", new Tencentcloud.Gaap.HttpDomainArgs
-        ///         {
-        ///             ListenerId = fooLayer7Listener.Id,
-        ///             Domain = "www.qq.com",
-        ///         });
-        ///         var fooDomainErrorPage = new Tencentcloud.Gaap.DomainErrorPage("fooDomainErrorPage", new Tencentcloud.Gaap.DomainErrorPageArgs
-        ///         {
-        ///             ListenerId = fooLayer7Listener.Id,
-        ///             Domain = fooHttpDomain.Domain,
-        ///             ErrorCodes = 
-        ///             {
-        ///                 406,
-        ///                 504,
-        ///             },
-        ///             NewErrorCode = 502,
-        ///             Body = "bad request",
-        ///             ClearHeaders = 
-        ///             {
-        ///                 "Content-Length",
-        ///                 "X-TEST",
-        ///             },
-        ///             SetHeaders = 
-        ///             {
-        ///                 { "X-TEST", "test" },
-        ///             },
-        ///         });
-        ///         var fooDomainErrorPages = Tencentcloud.Gaap.GetDomainErrorPages.Invoke(new Tencentcloud.Gaap.GetDomainErrorPagesInvokeArgs
-        ///         {
-        ///             ListenerId = fooDomainErrorPage.ListenerId,
-        ///             Domain = fooDomainErrorPage.Domain,
-        ///         });
-        ///     }
+        ///         Bandwidth = 10,
+        ///         Concurrent = 2,
+        ///         AccessRegion = "SouthChina",
+        ///         RealserverRegion = "NorthChina",
+        ///     });
         /// 
-        /// }
+        ///     var fooLayer7Listener = new Tencentcloud.Gaap.Layer7Listener("fooLayer7Listener", new()
+        ///     {
+        ///         Protocol = "HTTP",
+        ///         Port = 80,
+        ///         ProxyId = "%s",
+        ///     });
+        /// 
+        ///     var fooHttpDomain = new Tencentcloud.Gaap.HttpDomain("fooHttpDomain", new()
+        ///     {
+        ///         ListenerId = fooLayer7Listener.Id,
+        ///         Domain = "www.qq.com",
+        ///     });
+        /// 
+        ///     var fooDomainErrorPage = new Tencentcloud.Gaap.DomainErrorPage("fooDomainErrorPage", new()
+        ///     {
+        ///         ListenerId = fooLayer7Listener.Id,
+        ///         Domain = fooHttpDomain.Domain,
+        ///         ErrorCodes = new[]
+        ///         {
+        ///             406,
+        ///             504,
+        ///         },
+        ///         NewErrorCode = 502,
+        ///         Body = "bad request",
+        ///         ClearHeaders = new[]
+        ///         {
+        ///             "Content-Length",
+        ///             "X-TEST",
+        ///         },
+        ///         SetHeaders = 
+        ///         {
+        ///             { "X-TEST", "test" },
+        ///         },
+        ///     });
+        /// 
+        ///     var fooDomainErrorPages = Tencentcloud.Gaap.GetDomainErrorPages.Invoke(new()
+        ///     {
+        ///         ListenerId = fooDomainErrorPage.ListenerId,
+        ///         Domain = fooDomainErrorPage.Domain,
+        ///     });
+        /// 
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetDomainErrorPagesResult> Invoke(GetDomainErrorPagesInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetDomainErrorPagesResult>("tencentcloud:Gaap/getDomainErrorPages:getDomainErrorPages", args ?? new GetDomainErrorPagesInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetDomainErrorPagesResult>("tencentcloud:Gaap/getDomainErrorPages:getDomainErrorPages", args ?? new GetDomainErrorPagesInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetDomainErrorPagesArgs : Pulumi.InvokeArgs
+    public sealed class GetDomainErrorPagesArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// HTTP domain to be queried.
@@ -189,9 +191,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
         public GetDomainErrorPagesArgs()
         {
         }
+        public static new GetDomainErrorPagesArgs Empty => new GetDomainErrorPagesArgs();
     }
 
-    public sealed class GetDomainErrorPagesInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetDomainErrorPagesInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// HTTP domain to be queried.
@@ -226,6 +229,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
         public GetDomainErrorPagesInvokeArgs()
         {
         }
+        public static new GetDomainErrorPagesInvokeArgs Empty => new GetDomainErrorPagesInvokeArgs();
     }
 
 

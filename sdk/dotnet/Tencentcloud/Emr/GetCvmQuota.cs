@@ -15,66 +15,60 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Emr
         /// <summary>
         /// Use this data source to query detailed information of emr cvm_quota
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var cvmQuota = Tencentcloud.Emr.GetCvmQuota.Invoke(new()
         ///     {
-        ///         var cvmQuota = Output.Create(Tencentcloud.Emr.GetCvmQuota.InvokeAsync(new Tencentcloud.Emr.GetCvmQuotaArgs
-        ///         {
-        ///             ClusterId = "emr-0ze36vnp",
-        ///             ZoneId = 100003,
-        ///         }));
-        ///     }
+        ///         ClusterId = "emr-0ze36vnp",
+        ///         ZoneId = 100003,
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetCvmQuotaResult> InvokeAsync(GetCvmQuotaArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetCvmQuotaResult>("tencentcloud:Emr/getCvmQuota:getCvmQuota", args ?? new GetCvmQuotaArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetCvmQuotaResult>("tencentcloud:Emr/getCvmQuota:getCvmQuota", args ?? new GetCvmQuotaArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of emr cvm_quota
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var cvmQuota = Tencentcloud.Emr.GetCvmQuota.Invoke(new()
         ///     {
-        ///         var cvmQuota = Output.Create(Tencentcloud.Emr.GetCvmQuota.InvokeAsync(new Tencentcloud.Emr.GetCvmQuotaArgs
-        ///         {
-        ///             ClusterId = "emr-0ze36vnp",
-        ///             ZoneId = 100003,
-        ///         }));
-        ///     }
+        ///         ClusterId = "emr-0ze36vnp",
+        ///         ZoneId = 100003,
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetCvmQuotaResult> Invoke(GetCvmQuotaInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetCvmQuotaResult>("tencentcloud:Emr/getCvmQuota:getCvmQuota", args ?? new GetCvmQuotaInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetCvmQuotaResult>("tencentcloud:Emr/getCvmQuota:getCvmQuota", args ?? new GetCvmQuotaInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetCvmQuotaArgs : Pulumi.InvokeArgs
+    public sealed class GetCvmQuotaArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// EMR cluster ID.
@@ -97,9 +91,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Emr
         public GetCvmQuotaArgs()
         {
         }
+        public static new GetCvmQuotaArgs Empty => new GetCvmQuotaArgs();
     }
 
-    public sealed class GetCvmQuotaInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetCvmQuotaInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// EMR cluster ID.
@@ -122,6 +117,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Emr
         public GetCvmQuotaInvokeArgs()
         {
         }
+        public static new GetCvmQuotaInvokeArgs Empty => new GetCvmQuotaInvokeArgs();
     }
 
 

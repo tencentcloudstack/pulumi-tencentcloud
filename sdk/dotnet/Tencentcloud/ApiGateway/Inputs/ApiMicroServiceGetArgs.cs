@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway.Inputs
 {
 
-    public sealed class ApiMicroServiceGetArgs : Pulumi.ResourceArgs
+    public sealed class ApiMicroServiceGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Micro service cluster.
@@ -34,5 +34,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway.Inputs
         public ApiMicroServiceGetArgs()
         {
         }
+        public static new ApiMicroServiceGetArgs Empty => new ApiMicroServiceGetArgs();
     }
 }

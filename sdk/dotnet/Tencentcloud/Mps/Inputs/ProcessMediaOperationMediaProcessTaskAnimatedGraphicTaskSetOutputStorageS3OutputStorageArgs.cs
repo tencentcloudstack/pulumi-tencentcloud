@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps.Inputs
 {
 
-    public sealed class ProcessMediaOperationMediaProcessTaskAnimatedGraphicTaskSetOutputStorageS3OutputStorageArgs : Pulumi.ResourceArgs
+    public sealed class ProcessMediaOperationMediaProcessTaskAnimatedGraphicTaskSetOutputStorageS3OutputStorageArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// The AWS S3 bucket.
@@ -26,13 +26,13 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps.Inputs
         public Input<string> S3Region { get; set; } = null!;
 
         /// <summary>
-        /// The key ID required to read from/write to the SQS queue.
+        /// The key ID required to access the AWS S3 object.
         /// </summary>
         [Input("s3SecretId")]
         public Input<string>? S3SecretId { get; set; }
 
         /// <summary>
-        /// The key required to read from/write to the SQS queue.
+        /// The key required to access the AWS S3 object.
         /// </summary>
         [Input("s3SecretKey")]
         public Input<string>? S3SecretKey { get; set; }
@@ -40,5 +40,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps.Inputs
         public ProcessMediaOperationMediaProcessTaskAnimatedGraphicTaskSetOutputStorageS3OutputStorageArgs()
         {
         }
+        public static new ProcessMediaOperationMediaProcessTaskAnimatedGraphicTaskSetOutputStorageS3OutputStorageArgs Empty => new ProcessMediaOperationMediaProcessTaskAnimatedGraphicTaskSetOutputStorageS3OutputStorageArgs();
     }
 }

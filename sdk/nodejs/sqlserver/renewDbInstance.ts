@@ -9,24 +9,25 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const zones = tencentcloud.Availability.getZonesByProduct({
  *     product: "sqlserver",
  * });
  * const vpc = new tencentcloud.vpc.Instance("vpc", {cidrBlock: "10.0.0.0/16"});
  * const subnet = new tencentcloud.subnet.Instance("subnet", {
- *     availabilityZone: zones.then(zones => zones.zones?[4]?.name),
+ *     availabilityZone: zones.then(zones => zones.zones?.[4]?.name),
  *     vpcId: vpc.id,
  *     cidrBlock: "10.0.0.0/16",
  *     isMulticast: false,
  * });
  * const securityGroup = new tencentcloud.security.Group("securityGroup", {description: "desc."});
  * const exampleBasicInstance = new tencentcloud.sqlserver.BasicInstance("exampleBasicInstance", {
- *     availabilityZone: zones.then(zones => zones.zones?[4]?.name),
+ *     availabilityZone: zones.then(zones => zones.zones?.[4]?.name),
  *     chargeType: "PREPAID",
  *     vpcId: vpc.id,
  *     subnetId: subnet.id,
@@ -52,13 +53,14 @@ import * as utilities from "../utilities";
  *     period: 1,
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * sqlserver renew_db_instance can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Sqlserver/renewDbInstance:RenewDbInstance example mssql-i9ma6oy7#1
+ * $ pulumi import tencentcloud:Sqlserver/renewDbInstance:RenewDbInstance example mssql-i9ma6oy7#1
  * ```
  */
 export class RenewDbInstance extends pulumi.CustomResource {

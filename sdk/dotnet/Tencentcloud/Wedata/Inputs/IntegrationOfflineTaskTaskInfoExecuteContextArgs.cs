@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Wedata.Inputs
 {
 
-    public sealed class IntegrationOfflineTaskTaskInfoExecuteContextArgs : Pulumi.ResourceArgs
+    public sealed class IntegrationOfflineTaskTaskInfoExecuteContextArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Configuration name.
@@ -28,5 +28,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Wedata.Inputs
         public IntegrationOfflineTaskTaskInfoExecuteContextArgs()
         {
         }
+        public static new IntegrationOfflineTaskTaskInfoExecuteContextArgs Empty => new IntegrationOfflineTaskTaskInfoExecuteContextArgs();
     }
 }

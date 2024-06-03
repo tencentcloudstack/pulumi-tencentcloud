@@ -15,54 +15,55 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dcdb
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var hourdbInstance = new Tencentcloud.Dcdb.HourdbInstance("hourdbInstance", new()
     ///     {
-    ///         var hourdbInstance = new Tencentcloud.Dcdb.HourdbInstance("hourdbInstance", new Tencentcloud.Dcdb.HourdbInstanceArgs
+    ///         InstanceName = "test_dcdc_dc_instance",
+    ///         Zones = new[]
     ///         {
-    ///             InstanceName = "test_dcdc_dc_instance",
-    ///             Zones = 
+    ///             "ap-guangzhou-5",
+    ///             "ap-guangzhou-6",
+    ///         },
+    ///         ShardMemory = 2,
+    ///         ShardStorage = 10,
+    ///         ShardNodeCount = 2,
+    ///         ShardCount = 2,
+    ///         VpcId = local.Vpc_id,
+    ///         SubnetId = local.Subnet_id,
+    ///         SecurityGroupId = local.Sg_id,
+    ///         DbVersionId = "8.0",
+    ///         ResourceTags = new[]
+    ///         {
+    ///             new Tencentcloud.Dcdb.Inputs.HourdbInstanceResourceTagArgs
     ///             {
-    ///                 "ap-guangzhou-5",
-    ///                 "ap-guangzhou-6",
+    ///                 TagKey = "aaa",
+    ///                 TagValue = "bbb",
     ///             },
-    ///             ShardMemory = 2,
-    ///             ShardStorage = 10,
-    ///             ShardNodeCount = 2,
-    ///             ShardCount = 2,
-    ///             VpcId = local.Vpc_id,
-    ///             SubnetId = local.Subnet_id,
-    ///             SecurityGroupId = local.Sg_id,
-    ///             DbVersionId = "8.0",
-    ///             ResourceTags = 
-    ///             {
-    ///                 new Tencentcloud.Dcdb.Inputs.HourdbInstanceResourceTagArgs
-    ///                 {
-    ///                     TagKey = "aaa",
-    ///                     TagValue = "bbb",
-    ///                 },
-    ///             },
-    ///         });
-    ///     }
+    ///         },
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// dcdb hourdb_instance can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Dcdb/hourdbInstance:HourdbInstance hourdb_instance hourdbInstance_id
+    /// $ pulumi import tencentcloud:Dcdb/hourdbInstance:HourdbInstance hourdb_instance hourdbInstance_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Dcdb/hourdbInstance:HourdbInstance")]
-    public partial class HourdbInstance : Pulumi.CustomResource
+    public partial class HourdbInstance : global::Pulumi.CustomResource
     {
         /// <summary>
         /// db engine version, default to Percona 5.7.17.
@@ -223,7 +224,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dcdb
         }
     }
 
-    public sealed class HourdbInstanceArgs : Pulumi.ResourceArgs
+    public sealed class HourdbInstanceArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// db engine version, default to Percona 5.7.17.
@@ -348,9 +349,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dcdb
         public HourdbInstanceArgs()
         {
         }
+        public static new HourdbInstanceArgs Empty => new HourdbInstanceArgs();
     }
 
-    public sealed class HourdbInstanceState : Pulumi.ResourceArgs
+    public sealed class HourdbInstanceState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// db engine version, default to Percona 5.7.17.
@@ -481,5 +483,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dcdb
         public HourdbInstanceState()
         {
         }
+        public static new HourdbInstanceState Empty => new HourdbInstanceState();
     }
 }

@@ -15,33 +15,34 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcmq
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var topic = new Tencentcloud.Tcmq.Topic("topic", new()
     ///     {
-    ///         var topic = new Tencentcloud.Tcmq.Topic("topic", new Tencentcloud.Tcmq.TopicArgs
-    ///         {
-    ///             TopicName = "topic_name",
-    ///         });
-    ///     }
+    ///         TopicName = "topic_name",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// tcmq topic can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Tcmq/topic:Topic topic topic_id
+    /// $ pulumi import tencentcloud:Tcmq/topic:Topic topic topic_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Tcmq/topic:Topic")]
-    public partial class Topic : Pulumi.CustomResource
+    public partial class Topic : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Used to specify the message match policy for the topic. `1`: tag match policy (default value); `2`: routing match policy.
@@ -118,7 +119,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcmq
         }
     }
 
-    public sealed class TopicArgs : Pulumi.ResourceArgs
+    public sealed class TopicArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Used to specify the message match policy for the topic. `1`: tag match policy (default value); `2`: routing match policy.
@@ -153,9 +154,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcmq
         public TopicArgs()
         {
         }
+        public static new TopicArgs Empty => new TopicArgs();
     }
 
-    public sealed class TopicState : Pulumi.ResourceArgs
+    public sealed class TopicState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Used to specify the message match policy for the topic. `1`: tag match policy (default value); `2`: routing match policy.
@@ -190,5 +192,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcmq
         public TopicState()
         {
         }
+        public static new TopicState Empty => new TopicState();
     }
 }

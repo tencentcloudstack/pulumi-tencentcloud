@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cdn.Inputs
 {
 
-    public sealed class DomainMaxAgeArgs : Pulumi.ResourceArgs
+    public sealed class DomainMaxAgeArgs : global::Pulumi.ResourceArgs
     {
         [Input("maxAgeRules")]
         private InputList<Inputs.DomainMaxAgeMaxAgeRuleArgs>? _maxAgeRules;
@@ -34,5 +34,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cdn.Inputs
         public DomainMaxAgeArgs()
         {
         }
+        public static new DomainMaxAgeArgs Empty => new DomainMaxAgeArgs();
     }
 }

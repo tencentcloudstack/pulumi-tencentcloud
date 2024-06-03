@@ -8,6 +8,7 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides an available EMR for the user.
@@ -16,30 +17,34 @@ import (
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Emr"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Emr"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Emr"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Emr.GetNodes(ctx, &emr.GetNodesArgs{
-// 			InstanceId: "emr-rnzqrleq",
-// 			NodeFlag:   "master",
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Emr.GetNodes(ctx, &emr.GetNodesArgs{
+//				InstanceId: "emr-rnzqrleq",
+//				NodeFlag:   "master",
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 func GetNodes(ctx *pulumi.Context, args *GetNodesArgs, opts ...pulumi.InvokeOption) (*GetNodesResult, error) {
-	opts = pkgInvokeDefaultOpts(opts)
+	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetNodesResult
 	err := ctx.Invoke("tencentcloud:Emr/getNodes:getNodes", args, &rv, opts...)
 	if err != nil {
@@ -66,6 +71,8 @@ type GetNodesArgs struct {
 	// - db: Indicates that the cdb information for the normal state is obtained.
 	// - recyle: Indicates that the node information in the Recycle Bin isolation, including the cdb information, is obtained.
 	// - renew: Indicates that all node information to be renewed, including cddb information, is obtained, and the auto-renewal node will not be returned.
+	//
+	// Note: Only the above values are now supported, entering other values will cause an error.
 	NodeFlag string `pulumi:"nodeFlag"`
 	// Page number, with a default value of 0, represents the first page.
 	Offset *int `pulumi:"offset"`
@@ -119,6 +126,8 @@ type GetNodesOutputArgs struct {
 	// - db: Indicates that the cdb information for the normal state is obtained.
 	// - recyle: Indicates that the node information in the Recycle Bin isolation, including the cdb information, is obtained.
 	// - renew: Indicates that all node information to be renewed, including cddb information, is obtained, and the auto-renewal node will not be returned.
+	//
+	// Note: Only the above values are now supported, entering other values will cause an error.
 	NodeFlag pulumi.StringInput `pulumi:"nodeFlag"`
 	// Page number, with a default value of 0, represents the first page.
 	Offset pulumi.IntPtrInput `pulumi:"offset"`

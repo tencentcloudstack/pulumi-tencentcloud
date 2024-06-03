@@ -9,16 +9,18 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const modifyDomainOwner = new tencentcloud.Dnspod.ModifyDomainOwnerOperation("modify_domain_owner", {
+ * const modifyDomainOwner = new tencentcloud.dnspod.ModifyDomainOwnerOperation("modifyDomainOwner", {
  *     account: "xxxxxxxxx",
  *     domain: "dnspod.cn",
  *     domainId: 123,
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export class ModifyDomainOwnerOperation extends pulumi.CustomResource {
     /**

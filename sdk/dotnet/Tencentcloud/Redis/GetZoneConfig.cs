@@ -15,66 +15,60 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Redis
         /// <summary>
         /// Use this data source to query which instance types of Redis are available in a specific region.
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var redislab = Tencentcloud.Redis.GetZoneConfig.Invoke(new()
         ///     {
-        ///         var redislab = Output.Create(Tencentcloud.Redis.GetZoneConfig.InvokeAsync(new Tencentcloud.Redis.GetZoneConfigArgs
-        ///         {
-        ///             Region = "ap-hongkong",
-        ///             ResultOutputFile = "/temp/mytestpath",
-        ///         }));
-        ///     }
+        ///         Region = "ap-hongkong",
+        ///         ResultOutputFile = "/temp/mytestpath",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetZoneConfigResult> InvokeAsync(GetZoneConfigArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetZoneConfigResult>("tencentcloud:Redis/getZoneConfig:getZoneConfig", args ?? new GetZoneConfigArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetZoneConfigResult>("tencentcloud:Redis/getZoneConfig:getZoneConfig", args ?? new GetZoneConfigArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query which instance types of Redis are available in a specific region.
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var redislab = Tencentcloud.Redis.GetZoneConfig.Invoke(new()
         ///     {
-        ///         var redislab = Output.Create(Tencentcloud.Redis.GetZoneConfig.InvokeAsync(new Tencentcloud.Redis.GetZoneConfigArgs
-        ///         {
-        ///             Region = "ap-hongkong",
-        ///             ResultOutputFile = "/temp/mytestpath",
-        ///         }));
-        ///     }
+        ///         Region = "ap-hongkong",
+        ///         ResultOutputFile = "/temp/mytestpath",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetZoneConfigResult> Invoke(GetZoneConfigInvokeArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetZoneConfigResult>("tencentcloud:Redis/getZoneConfig:getZoneConfig", args ?? new GetZoneConfigInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetZoneConfigResult>("tencentcloud:Redis/getZoneConfig:getZoneConfig", args ?? new GetZoneConfigInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetZoneConfigArgs : Pulumi.InvokeArgs
+    public sealed class GetZoneConfigArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Name of a region. If this value is not set, the current region getting from provider's configuration will be used.
@@ -97,9 +91,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Redis
         public GetZoneConfigArgs()
         {
         }
+        public static new GetZoneConfigArgs Empty => new GetZoneConfigArgs();
     }
 
-    public sealed class GetZoneConfigInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetZoneConfigInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Name of a region. If this value is not set, the current region getting from provider's configuration will be used.
@@ -122,6 +117,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Redis
         public GetZoneConfigInvokeArgs()
         {
         }
+        public static new GetZoneConfigInvokeArgs Empty => new GetZoneConfigInvokeArgs();
     }
 
 

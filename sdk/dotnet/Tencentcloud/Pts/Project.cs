@@ -15,41 +15,42 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Pts
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var project = new Tencentcloud.Pts.Project("project", new()
     ///     {
-    ///         var project = new Tencentcloud.Pts.Project("project", new Tencentcloud.Pts.ProjectArgs
+    ///         Description = "desc",
+    ///         Tags = new[]
     ///         {
-    ///             Description = "desc",
-    ///             Tags = 
+    ///             new Tencentcloud.Pts.Inputs.ProjectTagArgs
     ///             {
-    ///                 new Tencentcloud.Pts.Inputs.ProjectTagArgs
-    ///                 {
-    ///                     TagKey = "createdBy",
-    ///                     TagValue = "terraform",
-    ///                 },
+    ///                 TagKey = "createdBy",
+    ///                 TagValue = "terraform",
     ///             },
-    ///         });
-    ///     }
+    ///         },
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// pts project can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Pts/project:Project project project-1ep27k1m
+    /// $ pulumi import tencentcloud:Pts/project:Project project project-1ep27k1m
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Pts/project:Project")]
-    public partial class Project : Pulumi.CustomResource
+    public partial class Project : global::Pulumi.CustomResource
     {
         /// <summary>
         /// App ID.
@@ -150,7 +151,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Pts
         }
     }
 
-    public sealed class ProjectArgs : Pulumi.ResourceArgs
+    public sealed class ProjectArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Pts object description.
@@ -179,9 +180,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Pts
         public ProjectArgs()
         {
         }
+        public static new ProjectArgs Empty => new ProjectArgs();
     }
 
-    public sealed class ProjectState : Pulumi.ResourceArgs
+    public sealed class ProjectState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// App ID.
@@ -246,5 +248,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Pts
         public ProjectState()
         {
         }
+        public static new ProjectState Empty => new ProjectState();
     }
 }

@@ -16,17 +16,17 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcaplus
         /// Use this data source to query table groups of the TcaplusDB cluster.
         /// </summary>
         public static Task<GetTablegroupsResult> InvokeAsync(GetTablegroupsArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetTablegroupsResult>("tencentcloud:Tcaplus/getTablegroups:getTablegroups", args ?? new GetTablegroupsArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetTablegroupsResult>("tencentcloud:Tcaplus/getTablegroups:getTablegroups", args ?? new GetTablegroupsArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query table groups of the TcaplusDB cluster.
         /// </summary>
         public static Output<GetTablegroupsResult> Invoke(GetTablegroupsInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetTablegroupsResult>("tencentcloud:Tcaplus/getTablegroups:getTablegroups", args ?? new GetTablegroupsInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetTablegroupsResult>("tencentcloud:Tcaplus/getTablegroups:getTablegroups", args ?? new GetTablegroupsInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetTablegroupsArgs : Pulumi.InvokeArgs
+    public sealed class GetTablegroupsArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Id of the TcaplusDB cluster to be query.
@@ -55,9 +55,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcaplus
         public GetTablegroupsArgs()
         {
         }
+        public static new GetTablegroupsArgs Empty => new GetTablegroupsArgs();
     }
 
-    public sealed class GetTablegroupsInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetTablegroupsInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Id of the TcaplusDB cluster to be query.
@@ -86,6 +87,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcaplus
         public GetTablegroupsInvokeArgs()
         {
         }
+        public static new GetTablegroupsInvokeArgs Empty => new GetTablegroupsInvokeArgs();
     }
 
 

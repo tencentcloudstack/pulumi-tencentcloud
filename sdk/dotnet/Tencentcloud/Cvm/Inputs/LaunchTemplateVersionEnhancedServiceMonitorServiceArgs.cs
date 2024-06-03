@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cvm.Inputs
 {
 
-    public sealed class LaunchTemplateVersionEnhancedServiceMonitorServiceArgs : Pulumi.ResourceArgs
+    public sealed class LaunchTemplateVersionEnhancedServiceMonitorServiceArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Whether to enable Cloud Monitor.
@@ -22,5 +22,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cvm.Inputs
         public LaunchTemplateVersionEnhancedServiceMonitorServiceArgs()
         {
         }
+        public static new LaunchTemplateVersionEnhancedServiceMonitorServiceArgs Empty => new LaunchTemplateVersionEnhancedServiceMonitorServiceArgs();
     }
 }

@@ -14,19 +14,21 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway
     /// Provides a resource to create a apiGateway import_open_api
     /// 
     /// ## Example Usage
+    /// 
     /// ### Import open Api by YAML
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var example = new Tencentcloud.ApiGateway.ImportOpenApi("example", new()
     ///     {
-    ///         var example = new Tencentcloud.ApiGateway.ImportOpenApi("example", new Tencentcloud.ApiGateway.ImportOpenApiArgs
-    ///         {
-    ///             Content = @"info:
+    ///         Content = @"info:
     ///   title: keep-service
     ///   version: 1.0.1
     /// openapi: 3.0.0
@@ -59,38 +61,40 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway
     ///       x-apigw-service-timeout: 15
     /// 
     /// ",
-    ///             ContentVersion = "openAPI",
-    ///             EncodeType = "YAML",
-    ///             ServiceId = "service-nxz6yync",
-    ///         });
-    ///     }
+    ///         ContentVersion = "openAPI",
+    ///         EncodeType = "YAML",
+    ///         ServiceId = "service-nxz6yync",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
+    /// 
     /// ### Import open Api by JSON
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var example = new Tencentcloud.ApiGateway.ImportOpenApi("example", new()
     ///     {
-    ///         var example = new Tencentcloud.ApiGateway.ImportOpenApi("example", new Tencentcloud.ApiGateway.ImportOpenApiArgs
-    ///         {
-    ///             Content = "{\"openapi\": \"3.0.0\", \"info\": {\"title\": \"keep-service\", \"version\": \"1.0.1\"}, \"paths\": {\"/api/test\": {\"get\": {\"operationId\": \"test\", \"description\": \"desc\", \"responses\": {\"200\": {\"description\": \"200\", \"content\": {\"text/html\": {\"example\": \"200\"}}}, \"default\": {\"content\": {\"text/html\": {\"example\": \"400\"}}, \"description\": \"400\"}}, \"x-apigw-api-type\": \"NORMAL\", \"x-apigw-api-business-type\": \"NORMAL\", \"x-apigw-protocol\": \"HTTP\", \"x-apigw-cors\": false, \"x-apigw-service-timeout\": 15, \"x-apigw-backend\": {\"ServiceType\": \"HTTP\", \"ServiceConfig\": {\"Url\": \"http://domain.com\", \"Path\": \"/test\", \"Method\": \"GET\"}}}}}}",
-    ///             ContentVersion = "openAPI",
-    ///             EncodeType = "JSON",
-    ///             ServiceId = "service-nxz6yync",
-    ///         });
-    ///     }
+    ///         Content = "{\"openapi\": \"3.0.0\", \"info\": {\"title\": \"keep-service\", \"version\": \"1.0.1\"}, \"paths\": {\"/api/test\": {\"get\": {\"operationId\": \"test\", \"description\": \"desc\", \"responses\": {\"200\": {\"description\": \"200\", \"content\": {\"text/html\": {\"example\": \"200\"}}}, \"default\": {\"content\": {\"text/html\": {\"example\": \"400\"}}, \"description\": \"400\"}}, \"x-apigw-api-type\": \"NORMAL\", \"x-apigw-api-business-type\": \"NORMAL\", \"x-apigw-protocol\": \"HTTP\", \"x-apigw-cors\": false, \"x-apigw-service-timeout\": 15, \"x-apigw-backend\": {\"ServiceType\": \"HTTP\", \"ServiceConfig\": {\"Url\": \"http://domain.com\", \"Path\": \"/test\", \"Method\": \"GET\"}}}}}}",
+    ///         ContentVersion = "openAPI",
+    ///         EncodeType = "JSON",
+    ///         ServiceId = "service-nxz6yync",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// </summary>
     [TencentcloudResourceType("tencentcloud:ApiGateway/importOpenApi:ImportOpenApi")]
-    public partial class ImportOpenApi : Pulumi.CustomResource
+    public partial class ImportOpenApi : global::Pulumi.CustomResource
     {
         /// <summary>
         /// When `auth_type` is OAUTH, this field is valid, NORMAL: Business API, OAUTH: Authorization API.
@@ -467,7 +471,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway
         }
     }
 
-    public sealed class ImportOpenApiArgs : Pulumi.ResourceArgs
+    public sealed class ImportOpenApiArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// OpenAPI body content.
@@ -496,9 +500,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway
         public ImportOpenApiArgs()
         {
         }
+        public static new ImportOpenApiArgs Empty => new ImportOpenApiArgs();
     }
 
-    public sealed class ImportOpenApiState : Pulumi.ResourceArgs
+    public sealed class ImportOpenApiState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// When `auth_type` is OAUTH, this field is valid, NORMAL: Business API, OAUTH: Authorization API.
@@ -887,5 +892,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway
         public ImportOpenApiState()
         {
         }
+        public static new ImportOpenApiState Empty => new ImportOpenApiState();
     }
 }

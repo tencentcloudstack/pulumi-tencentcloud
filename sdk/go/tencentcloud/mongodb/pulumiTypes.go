@@ -8,7 +8,10 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
+
+var _ = internal.GetEnvOrDefault
 
 type InstanceAccountAuthRole struct {
 	// Permission information of the current account. 0: No permission. 1: read-only. 2: Write only. 3: Read and write.
@@ -20,7 +23,7 @@ type InstanceAccountAuthRole struct {
 // InstanceAccountAuthRoleInput is an input type that accepts InstanceAccountAuthRoleArgs and InstanceAccountAuthRoleOutput values.
 // You can construct a concrete instance of `InstanceAccountAuthRoleInput` via:
 //
-//          InstanceAccountAuthRoleArgs{...}
+//	InstanceAccountAuthRoleArgs{...}
 type InstanceAccountAuthRoleInput interface {
 	pulumi.Input
 
@@ -50,7 +53,7 @@ func (i InstanceAccountAuthRoleArgs) ToInstanceAccountAuthRoleOutputWithContext(
 // InstanceAccountAuthRoleArrayInput is an input type that accepts InstanceAccountAuthRoleArray and InstanceAccountAuthRoleArrayOutput values.
 // You can construct a concrete instance of `InstanceAccountAuthRoleArrayInput` via:
 //
-//          InstanceAccountAuthRoleArray{ InstanceAccountAuthRoleArgs{...} }
+//	InstanceAccountAuthRoleArray{ InstanceAccountAuthRoleArgs{...} }
 type InstanceAccountAuthRoleArrayInput interface {
 	pulumi.Input
 
@@ -116,14 +119,136 @@ func (o InstanceAccountAuthRoleArrayOutput) Index(i pulumi.IntInput) InstanceAcc
 	}).(InstanceAccountAuthRoleOutput)
 }
 
+type InstanceAddNodeList struct {
+	// The node role that needs to be added.
+	// - SECONDARY: Mongod node;
+	// - READONLY: read-only node;
+	// - MONGOS: Mongos node.
+	Role string `pulumi:"role"`
+	// The availability zone corresponding to the node.
+	// - single availability zone, where all nodes are in the same availability zone;
+	// - multiple availability zones: the current standard specification is the distribution of three availability zones, and the master and slave nodes are not in the same availability zone. You should pay attention to configuring the availability zone corresponding to the new node, and the rule that the number of nodes in any two availability zones is greater than the third availability zone must be met after the addition.
+	Zone string `pulumi:"zone"`
+}
+
+// InstanceAddNodeListInput is an input type that accepts InstanceAddNodeListArgs and InstanceAddNodeListOutput values.
+// You can construct a concrete instance of `InstanceAddNodeListInput` via:
+//
+//	InstanceAddNodeListArgs{...}
+type InstanceAddNodeListInput interface {
+	pulumi.Input
+
+	ToInstanceAddNodeListOutput() InstanceAddNodeListOutput
+	ToInstanceAddNodeListOutputWithContext(context.Context) InstanceAddNodeListOutput
+}
+
+type InstanceAddNodeListArgs struct {
+	// The node role that needs to be added.
+	// - SECONDARY: Mongod node;
+	// - READONLY: read-only node;
+	// - MONGOS: Mongos node.
+	Role pulumi.StringInput `pulumi:"role"`
+	// The availability zone corresponding to the node.
+	// - single availability zone, where all nodes are in the same availability zone;
+	// - multiple availability zones: the current standard specification is the distribution of three availability zones, and the master and slave nodes are not in the same availability zone. You should pay attention to configuring the availability zone corresponding to the new node, and the rule that the number of nodes in any two availability zones is greater than the third availability zone must be met after the addition.
+	Zone pulumi.StringInput `pulumi:"zone"`
+}
+
+func (InstanceAddNodeListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*InstanceAddNodeList)(nil)).Elem()
+}
+
+func (i InstanceAddNodeListArgs) ToInstanceAddNodeListOutput() InstanceAddNodeListOutput {
+	return i.ToInstanceAddNodeListOutputWithContext(context.Background())
+}
+
+func (i InstanceAddNodeListArgs) ToInstanceAddNodeListOutputWithContext(ctx context.Context) InstanceAddNodeListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(InstanceAddNodeListOutput)
+}
+
+// InstanceAddNodeListArrayInput is an input type that accepts InstanceAddNodeListArray and InstanceAddNodeListArrayOutput values.
+// You can construct a concrete instance of `InstanceAddNodeListArrayInput` via:
+//
+//	InstanceAddNodeListArray{ InstanceAddNodeListArgs{...} }
+type InstanceAddNodeListArrayInput interface {
+	pulumi.Input
+
+	ToInstanceAddNodeListArrayOutput() InstanceAddNodeListArrayOutput
+	ToInstanceAddNodeListArrayOutputWithContext(context.Context) InstanceAddNodeListArrayOutput
+}
+
+type InstanceAddNodeListArray []InstanceAddNodeListInput
+
+func (InstanceAddNodeListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]InstanceAddNodeList)(nil)).Elem()
+}
+
+func (i InstanceAddNodeListArray) ToInstanceAddNodeListArrayOutput() InstanceAddNodeListArrayOutput {
+	return i.ToInstanceAddNodeListArrayOutputWithContext(context.Background())
+}
+
+func (i InstanceAddNodeListArray) ToInstanceAddNodeListArrayOutputWithContext(ctx context.Context) InstanceAddNodeListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(InstanceAddNodeListArrayOutput)
+}
+
+type InstanceAddNodeListOutput struct{ *pulumi.OutputState }
+
+func (InstanceAddNodeListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*InstanceAddNodeList)(nil)).Elem()
+}
+
+func (o InstanceAddNodeListOutput) ToInstanceAddNodeListOutput() InstanceAddNodeListOutput {
+	return o
+}
+
+func (o InstanceAddNodeListOutput) ToInstanceAddNodeListOutputWithContext(ctx context.Context) InstanceAddNodeListOutput {
+	return o
+}
+
+// The node role that needs to be added.
+// - SECONDARY: Mongod node;
+// - READONLY: read-only node;
+// - MONGOS: Mongos node.
+func (o InstanceAddNodeListOutput) Role() pulumi.StringOutput {
+	return o.ApplyT(func(v InstanceAddNodeList) string { return v.Role }).(pulumi.StringOutput)
+}
+
+// The availability zone corresponding to the node.
+// - single availability zone, where all nodes are in the same availability zone;
+// - multiple availability zones: the current standard specification is the distribution of three availability zones, and the master and slave nodes are not in the same availability zone. You should pay attention to configuring the availability zone corresponding to the new node, and the rule that the number of nodes in any two availability zones is greater than the third availability zone must be met after the addition.
+func (o InstanceAddNodeListOutput) Zone() pulumi.StringOutput {
+	return o.ApplyT(func(v InstanceAddNodeList) string { return v.Zone }).(pulumi.StringOutput)
+}
+
+type InstanceAddNodeListArrayOutput struct{ *pulumi.OutputState }
+
+func (InstanceAddNodeListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]InstanceAddNodeList)(nil)).Elem()
+}
+
+func (o InstanceAddNodeListArrayOutput) ToInstanceAddNodeListArrayOutput() InstanceAddNodeListArrayOutput {
+	return o
+}
+
+func (o InstanceAddNodeListArrayOutput) ToInstanceAddNodeListArrayOutputWithContext(ctx context.Context) InstanceAddNodeListArrayOutput {
+	return o
+}
+
+func (o InstanceAddNodeListArrayOutput) Index(i pulumi.IntInput) InstanceAddNodeListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) InstanceAddNodeList {
+		return vs[0].([]InstanceAddNodeList)[vs[1].(int)]
+	}).(InstanceAddNodeListOutput)
+}
+
 type InstanceBackupDownloadTaskBackupSet struct {
+	// Replication Id.
 	ReplicaSetId string `pulumi:"replicaSetId"`
 }
 
 // InstanceBackupDownloadTaskBackupSetInput is an input type that accepts InstanceBackupDownloadTaskBackupSetArgs and InstanceBackupDownloadTaskBackupSetOutput values.
 // You can construct a concrete instance of `InstanceBackupDownloadTaskBackupSetInput` via:
 //
-//          InstanceBackupDownloadTaskBackupSetArgs{...}
+//	InstanceBackupDownloadTaskBackupSetArgs{...}
 type InstanceBackupDownloadTaskBackupSetInput interface {
 	pulumi.Input
 
@@ -132,6 +257,7 @@ type InstanceBackupDownloadTaskBackupSetInput interface {
 }
 
 type InstanceBackupDownloadTaskBackupSetArgs struct {
+	// Replication Id.
 	ReplicaSetId pulumi.StringInput `pulumi:"replicaSetId"`
 }
 
@@ -150,7 +276,7 @@ func (i InstanceBackupDownloadTaskBackupSetArgs) ToInstanceBackupDownloadTaskBac
 // InstanceBackupDownloadTaskBackupSetArrayInput is an input type that accepts InstanceBackupDownloadTaskBackupSetArray and InstanceBackupDownloadTaskBackupSetArrayOutput values.
 // You can construct a concrete instance of `InstanceBackupDownloadTaskBackupSetArrayInput` via:
 //
-//          InstanceBackupDownloadTaskBackupSetArray{ InstanceBackupDownloadTaskBackupSetArgs{...} }
+//	InstanceBackupDownloadTaskBackupSetArray{ InstanceBackupDownloadTaskBackupSetArgs{...} }
 type InstanceBackupDownloadTaskBackupSetArrayInput interface {
 	pulumi.Input
 
@@ -186,6 +312,7 @@ func (o InstanceBackupDownloadTaskBackupSetOutput) ToInstanceBackupDownloadTaskB
 	return o
 }
 
+// Replication Id.
 func (o InstanceBackupDownloadTaskBackupSetOutput) ReplicaSetId() pulumi.StringOutput {
 	return o.ApplyT(func(v InstanceBackupDownloadTaskBackupSet) string { return v.ReplicaSetId }).(pulumi.StringOutput)
 }
@@ -210,6 +337,136 @@ func (o InstanceBackupDownloadTaskBackupSetArrayOutput) Index(i pulumi.IntInput)
 	}).(InstanceBackupDownloadTaskBackupSetOutput)
 }
 
+type InstanceRemoveNodeList struct {
+	// The node ID to delete. The shard cluster must specify the name of the node to be deleted by a group of shards, and the rest of the shards should be grouped and aligned.
+	NodeName string `pulumi:"nodeName"`
+	// The node role that needs to be deleted.
+	// - SECONDARY: Mongod node;
+	// - READONLY: read-only node;
+	// - MONGOS: Mongos node.
+	Role string `pulumi:"role"`
+	// The availability zone corresponding to the node.
+	// - single availability zone, where all nodes are in the same availability zone;
+	// - multiple availability zones: the current standard specification is the distribution of three availability zones, and the master and slave nodes are not in the same availability zone. You should pay attention to configuring the availability zone corresponding to the new node, and the rule that the number of nodes in any two availability zones is greater than the third availability zone must be met after the addition.
+	Zone string `pulumi:"zone"`
+}
+
+// InstanceRemoveNodeListInput is an input type that accepts InstanceRemoveNodeListArgs and InstanceRemoveNodeListOutput values.
+// You can construct a concrete instance of `InstanceRemoveNodeListInput` via:
+//
+//	InstanceRemoveNodeListArgs{...}
+type InstanceRemoveNodeListInput interface {
+	pulumi.Input
+
+	ToInstanceRemoveNodeListOutput() InstanceRemoveNodeListOutput
+	ToInstanceRemoveNodeListOutputWithContext(context.Context) InstanceRemoveNodeListOutput
+}
+
+type InstanceRemoveNodeListArgs struct {
+	// The node ID to delete. The shard cluster must specify the name of the node to be deleted by a group of shards, and the rest of the shards should be grouped and aligned.
+	NodeName pulumi.StringInput `pulumi:"nodeName"`
+	// The node role that needs to be deleted.
+	// - SECONDARY: Mongod node;
+	// - READONLY: read-only node;
+	// - MONGOS: Mongos node.
+	Role pulumi.StringInput `pulumi:"role"`
+	// The availability zone corresponding to the node.
+	// - single availability zone, where all nodes are in the same availability zone;
+	// - multiple availability zones: the current standard specification is the distribution of three availability zones, and the master and slave nodes are not in the same availability zone. You should pay attention to configuring the availability zone corresponding to the new node, and the rule that the number of nodes in any two availability zones is greater than the third availability zone must be met after the addition.
+	Zone pulumi.StringInput `pulumi:"zone"`
+}
+
+func (InstanceRemoveNodeListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*InstanceRemoveNodeList)(nil)).Elem()
+}
+
+func (i InstanceRemoveNodeListArgs) ToInstanceRemoveNodeListOutput() InstanceRemoveNodeListOutput {
+	return i.ToInstanceRemoveNodeListOutputWithContext(context.Background())
+}
+
+func (i InstanceRemoveNodeListArgs) ToInstanceRemoveNodeListOutputWithContext(ctx context.Context) InstanceRemoveNodeListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(InstanceRemoveNodeListOutput)
+}
+
+// InstanceRemoveNodeListArrayInput is an input type that accepts InstanceRemoveNodeListArray and InstanceRemoveNodeListArrayOutput values.
+// You can construct a concrete instance of `InstanceRemoveNodeListArrayInput` via:
+//
+//	InstanceRemoveNodeListArray{ InstanceRemoveNodeListArgs{...} }
+type InstanceRemoveNodeListArrayInput interface {
+	pulumi.Input
+
+	ToInstanceRemoveNodeListArrayOutput() InstanceRemoveNodeListArrayOutput
+	ToInstanceRemoveNodeListArrayOutputWithContext(context.Context) InstanceRemoveNodeListArrayOutput
+}
+
+type InstanceRemoveNodeListArray []InstanceRemoveNodeListInput
+
+func (InstanceRemoveNodeListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]InstanceRemoveNodeList)(nil)).Elem()
+}
+
+func (i InstanceRemoveNodeListArray) ToInstanceRemoveNodeListArrayOutput() InstanceRemoveNodeListArrayOutput {
+	return i.ToInstanceRemoveNodeListArrayOutputWithContext(context.Background())
+}
+
+func (i InstanceRemoveNodeListArray) ToInstanceRemoveNodeListArrayOutputWithContext(ctx context.Context) InstanceRemoveNodeListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(InstanceRemoveNodeListArrayOutput)
+}
+
+type InstanceRemoveNodeListOutput struct{ *pulumi.OutputState }
+
+func (InstanceRemoveNodeListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*InstanceRemoveNodeList)(nil)).Elem()
+}
+
+func (o InstanceRemoveNodeListOutput) ToInstanceRemoveNodeListOutput() InstanceRemoveNodeListOutput {
+	return o
+}
+
+func (o InstanceRemoveNodeListOutput) ToInstanceRemoveNodeListOutputWithContext(ctx context.Context) InstanceRemoveNodeListOutput {
+	return o
+}
+
+// The node ID to delete. The shard cluster must specify the name of the node to be deleted by a group of shards, and the rest of the shards should be grouped and aligned.
+func (o InstanceRemoveNodeListOutput) NodeName() pulumi.StringOutput {
+	return o.ApplyT(func(v InstanceRemoveNodeList) string { return v.NodeName }).(pulumi.StringOutput)
+}
+
+// The node role that needs to be deleted.
+// - SECONDARY: Mongod node;
+// - READONLY: read-only node;
+// - MONGOS: Mongos node.
+func (o InstanceRemoveNodeListOutput) Role() pulumi.StringOutput {
+	return o.ApplyT(func(v InstanceRemoveNodeList) string { return v.Role }).(pulumi.StringOutput)
+}
+
+// The availability zone corresponding to the node.
+// - single availability zone, where all nodes are in the same availability zone;
+// - multiple availability zones: the current standard specification is the distribution of three availability zones, and the master and slave nodes are not in the same availability zone. You should pay attention to configuring the availability zone corresponding to the new node, and the rule that the number of nodes in any two availability zones is greater than the third availability zone must be met after the addition.
+func (o InstanceRemoveNodeListOutput) Zone() pulumi.StringOutput {
+	return o.ApplyT(func(v InstanceRemoveNodeList) string { return v.Zone }).(pulumi.StringOutput)
+}
+
+type InstanceRemoveNodeListArrayOutput struct{ *pulumi.OutputState }
+
+func (InstanceRemoveNodeListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]InstanceRemoveNodeList)(nil)).Elem()
+}
+
+func (o InstanceRemoveNodeListArrayOutput) ToInstanceRemoveNodeListArrayOutput() InstanceRemoveNodeListArrayOutput {
+	return o
+}
+
+func (o InstanceRemoveNodeListArrayOutput) ToInstanceRemoveNodeListArrayOutputWithContext(ctx context.Context) InstanceRemoveNodeListArrayOutput {
+	return o
+}
+
+func (o InstanceRemoveNodeListArrayOutput) Index(i pulumi.IntInput) InstanceRemoveNodeListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) InstanceRemoveNodeList {
+		return vs[0].([]InstanceRemoveNodeList)[vs[1].(int)]
+	}).(InstanceRemoveNodeListOutput)
+}
+
 type InstanceStandbyInstanceList struct {
 	// Indicates the ID of standby instance.
 	StandbyInstanceId *string `pulumi:"standbyInstanceId"`
@@ -220,7 +477,7 @@ type InstanceStandbyInstanceList struct {
 // InstanceStandbyInstanceListInput is an input type that accepts InstanceStandbyInstanceListArgs and InstanceStandbyInstanceListOutput values.
 // You can construct a concrete instance of `InstanceStandbyInstanceListInput` via:
 //
-//          InstanceStandbyInstanceListArgs{...}
+//	InstanceStandbyInstanceListArgs{...}
 type InstanceStandbyInstanceListInput interface {
 	pulumi.Input
 
@@ -250,7 +507,7 @@ func (i InstanceStandbyInstanceListArgs) ToInstanceStandbyInstanceListOutputWith
 // InstanceStandbyInstanceListArrayInput is an input type that accepts InstanceStandbyInstanceListArray and InstanceStandbyInstanceListArrayOutput values.
 // You can construct a concrete instance of `InstanceStandbyInstanceListArrayInput` via:
 //
-//          InstanceStandbyInstanceListArray{ InstanceStandbyInstanceListArgs{...} }
+//	InstanceStandbyInstanceListArray{ InstanceStandbyInstanceListArgs{...} }
 type InstanceStandbyInstanceListArrayInput interface {
 	pulumi.Input
 
@@ -340,7 +597,7 @@ type GetInstanceBackupsBackupList struct {
 // GetInstanceBackupsBackupListInput is an input type that accepts GetInstanceBackupsBackupListArgs and GetInstanceBackupsBackupListOutput values.
 // You can construct a concrete instance of `GetInstanceBackupsBackupListInput` via:
 //
-//          GetInstanceBackupsBackupListArgs{...}
+//	GetInstanceBackupsBackupListArgs{...}
 type GetInstanceBackupsBackupListInput interface {
 	pulumi.Input
 
@@ -384,7 +641,7 @@ func (i GetInstanceBackupsBackupListArgs) ToGetInstanceBackupsBackupListOutputWi
 // GetInstanceBackupsBackupListArrayInput is an input type that accepts GetInstanceBackupsBackupListArray and GetInstanceBackupsBackupListArrayOutput values.
 // You can construct a concrete instance of `GetInstanceBackupsBackupListArrayInput` via:
 //
-//          GetInstanceBackupsBackupListArray{ GetInstanceBackupsBackupListArgs{...} }
+//	GetInstanceBackupsBackupListArray{ GetInstanceBackupsBackupListArgs{...} }
 type GetInstanceBackupsBackupListArrayInput interface {
 	pulumi.Input
 
@@ -497,7 +754,7 @@ type GetInstanceConnectionsClient struct {
 // GetInstanceConnectionsClientInput is an input type that accepts GetInstanceConnectionsClientArgs and GetInstanceConnectionsClientOutput values.
 // You can construct a concrete instance of `GetInstanceConnectionsClientInput` via:
 //
-//          GetInstanceConnectionsClientArgs{...}
+//	GetInstanceConnectionsClientArgs{...}
 type GetInstanceConnectionsClientInput interface {
 	pulumi.Input
 
@@ -529,7 +786,7 @@ func (i GetInstanceConnectionsClientArgs) ToGetInstanceConnectionsClientOutputWi
 // GetInstanceConnectionsClientArrayInput is an input type that accepts GetInstanceConnectionsClientArray and GetInstanceConnectionsClientArrayOutput values.
 // You can construct a concrete instance of `GetInstanceConnectionsClientArrayInput` via:
 //
-//          GetInstanceConnectionsClientArray{ GetInstanceConnectionsClientArgs{...} }
+//	GetInstanceConnectionsClientArray{ GetInstanceConnectionsClientArgs{...} }
 type GetInstanceConnectionsClientArrayInput interface {
 	pulumi.Input
 
@@ -624,7 +881,7 @@ type GetInstanceCurrentOpCurrentOp struct {
 // GetInstanceCurrentOpCurrentOpInput is an input type that accepts GetInstanceCurrentOpCurrentOpArgs and GetInstanceCurrentOpCurrentOpOutput values.
 // You can construct a concrete instance of `GetInstanceCurrentOpCurrentOpInput` via:
 //
-//          GetInstanceCurrentOpCurrentOpArgs{...}
+//	GetInstanceCurrentOpCurrentOpArgs{...}
 type GetInstanceCurrentOpCurrentOpInput interface {
 	pulumi.Input
 
@@ -668,7 +925,7 @@ func (i GetInstanceCurrentOpCurrentOpArgs) ToGetInstanceCurrentOpCurrentOpOutput
 // GetInstanceCurrentOpCurrentOpArrayInput is an input type that accepts GetInstanceCurrentOpCurrentOpArray and GetInstanceCurrentOpCurrentOpArrayOutput values.
 // You can construct a concrete instance of `GetInstanceCurrentOpCurrentOpArrayInput` via:
 //
-//          GetInstanceCurrentOpCurrentOpArray{ GetInstanceCurrentOpCurrentOpArgs{...} }
+//	GetInstanceCurrentOpCurrentOpArray{ GetInstanceCurrentOpCurrentOpArgs{...} }
 type GetInstanceCurrentOpCurrentOpArrayInput interface {
 	pulumi.Input
 
@@ -791,7 +1048,7 @@ type GetInstanceParamsInstanceEnumParam struct {
 // GetInstanceParamsInstanceEnumParamInput is an input type that accepts GetInstanceParamsInstanceEnumParamArgs and GetInstanceParamsInstanceEnumParamOutput values.
 // You can construct a concrete instance of `GetInstanceParamsInstanceEnumParamInput` via:
 //
-//          GetInstanceParamsInstanceEnumParamArgs{...}
+//	GetInstanceParamsInstanceEnumParamArgs{...}
 type GetInstanceParamsInstanceEnumParamInput interface {
 	pulumi.Input
 
@@ -833,7 +1090,7 @@ func (i GetInstanceParamsInstanceEnumParamArgs) ToGetInstanceParamsInstanceEnumP
 // GetInstanceParamsInstanceEnumParamArrayInput is an input type that accepts GetInstanceParamsInstanceEnumParamArray and GetInstanceParamsInstanceEnumParamArrayOutput values.
 // You can construct a concrete instance of `GetInstanceParamsInstanceEnumParamArrayInput` via:
 //
-//          GetInstanceParamsInstanceEnumParamArray{ GetInstanceParamsInstanceEnumParamArgs{...} }
+//	GetInstanceParamsInstanceEnumParamArray{ GetInstanceParamsInstanceEnumParamArgs{...} }
 type GetInstanceParamsInstanceEnumParamArrayInput interface {
 	pulumi.Input
 
@@ -953,7 +1210,7 @@ type GetInstanceParamsInstanceIntegerParam struct {
 // GetInstanceParamsInstanceIntegerParamInput is an input type that accepts GetInstanceParamsInstanceIntegerParamArgs and GetInstanceParamsInstanceIntegerParamOutput values.
 // You can construct a concrete instance of `GetInstanceParamsInstanceIntegerParamInput` via:
 //
-//          GetInstanceParamsInstanceIntegerParamArgs{...}
+//	GetInstanceParamsInstanceIntegerParamArgs{...}
 type GetInstanceParamsInstanceIntegerParamInput interface {
 	pulumi.Input
 
@@ -997,7 +1254,7 @@ func (i GetInstanceParamsInstanceIntegerParamArgs) ToGetInstanceParamsInstanceIn
 // GetInstanceParamsInstanceIntegerParamArrayInput is an input type that accepts GetInstanceParamsInstanceIntegerParamArray and GetInstanceParamsInstanceIntegerParamArrayOutput values.
 // You can construct a concrete instance of `GetInstanceParamsInstanceIntegerParamArrayInput` via:
 //
-//          GetInstanceParamsInstanceIntegerParamArray{ GetInstanceParamsInstanceIntegerParamArgs{...} }
+//	GetInstanceParamsInstanceIntegerParamArray{ GetInstanceParamsInstanceIntegerParamArgs{...} }
 type GetInstanceParamsInstanceIntegerParamArrayInput interface {
 	pulumi.Input
 
@@ -1120,7 +1377,7 @@ type GetInstanceParamsInstanceMultiParam struct {
 // GetInstanceParamsInstanceMultiParamInput is an input type that accepts GetInstanceParamsInstanceMultiParamArgs and GetInstanceParamsInstanceMultiParamOutput values.
 // You can construct a concrete instance of `GetInstanceParamsInstanceMultiParamInput` via:
 //
-//          GetInstanceParamsInstanceMultiParamArgs{...}
+//	GetInstanceParamsInstanceMultiParamArgs{...}
 type GetInstanceParamsInstanceMultiParamInput interface {
 	pulumi.Input
 
@@ -1162,7 +1419,7 @@ func (i GetInstanceParamsInstanceMultiParamArgs) ToGetInstanceParamsInstanceMult
 // GetInstanceParamsInstanceMultiParamArrayInput is an input type that accepts GetInstanceParamsInstanceMultiParamArray and GetInstanceParamsInstanceMultiParamArrayOutput values.
 // You can construct a concrete instance of `GetInstanceParamsInstanceMultiParamArrayInput` via:
 //
-//          GetInstanceParamsInstanceMultiParamArray{ GetInstanceParamsInstanceMultiParamArgs{...} }
+//	GetInstanceParamsInstanceMultiParamArray{ GetInstanceParamsInstanceMultiParamArgs{...} }
 type GetInstanceParamsInstanceMultiParamArrayInput interface {
 	pulumi.Input
 
@@ -1280,7 +1537,7 @@ type GetInstanceParamsInstanceTextParam struct {
 // GetInstanceParamsInstanceTextParamInput is an input type that accepts GetInstanceParamsInstanceTextParamArgs and GetInstanceParamsInstanceTextParamOutput values.
 // You can construct a concrete instance of `GetInstanceParamsInstanceTextParamInput` via:
 //
-//          GetInstanceParamsInstanceTextParamArgs{...}
+//	GetInstanceParamsInstanceTextParamArgs{...}
 type GetInstanceParamsInstanceTextParamInput interface {
 	pulumi.Input
 
@@ -1322,7 +1579,7 @@ func (i GetInstanceParamsInstanceTextParamArgs) ToGetInstanceParamsInstanceTextP
 // GetInstanceParamsInstanceTextParamArrayInput is an input type that accepts GetInstanceParamsInstanceTextParamArray and GetInstanceParamsInstanceTextParamArrayOutput values.
 // You can construct a concrete instance of `GetInstanceParamsInstanceTextParamArrayInput` via:
 //
-//          GetInstanceParamsInstanceTextParamArray{ GetInstanceParamsInstanceTextParamArgs{...} }
+//	GetInstanceParamsInstanceTextParamArray{ GetInstanceParamsInstanceTextParamArgs{...} }
 type GetInstanceParamsInstanceTextParamArrayInput interface {
 	pulumi.Input
 
@@ -1464,7 +1721,7 @@ type GetInstancesInstanceList struct {
 // GetInstancesInstanceListInput is an input type that accepts GetInstancesInstanceListArgs and GetInstancesInstanceListOutput values.
 // You can construct a concrete instance of `GetInstancesInstanceListInput` via:
 //
-//          GetInstancesInstanceListArgs{...}
+//	GetInstancesInstanceListArgs{...}
 type GetInstancesInstanceListInput interface {
 	pulumi.Input
 
@@ -1530,7 +1787,7 @@ func (i GetInstancesInstanceListArgs) ToGetInstancesInstanceListOutputWithContex
 // GetInstancesInstanceListArrayInput is an input type that accepts GetInstancesInstanceListArray and GetInstancesInstanceListArrayOutput values.
 // You can construct a concrete instance of `GetInstancesInstanceListArrayInput` via:
 //
-//          GetInstancesInstanceListArray{ GetInstancesInstanceListArgs{...} }
+//	GetInstancesInstanceListArray{ GetInstancesInstanceListArgs{...} }
 type GetInstancesInstanceListArrayInput interface {
 	pulumi.Input
 
@@ -1714,7 +1971,7 @@ type GetZoneConfigList struct {
 // GetZoneConfigListInput is an input type that accepts GetZoneConfigListArgs and GetZoneConfigListOutput values.
 // You can construct a concrete instance of `GetZoneConfigListInput` via:
 //
-//          GetZoneConfigListArgs{...}
+//	GetZoneConfigListArgs{...}
 type GetZoneConfigListInput interface {
 	pulumi.Input
 
@@ -1762,7 +2019,7 @@ func (i GetZoneConfigListArgs) ToGetZoneConfigListOutputWithContext(ctx context.
 // GetZoneConfigListArrayInput is an input type that accepts GetZoneConfigListArray and GetZoneConfigListArrayOutput values.
 // You can construct a concrete instance of `GetZoneConfigListArrayInput` via:
 //
-//          GetZoneConfigListArray{ GetZoneConfigListArgs{...} }
+//	GetZoneConfigListArray{ GetZoneConfigListArgs{...} }
 type GetZoneConfigListArrayInput interface {
 	pulumi.Input
 
@@ -1876,8 +2133,12 @@ func (o GetZoneConfigListArrayOutput) Index(i pulumi.IntInput) GetZoneConfigList
 func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*InstanceAccountAuthRoleInput)(nil)).Elem(), InstanceAccountAuthRoleArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*InstanceAccountAuthRoleArrayInput)(nil)).Elem(), InstanceAccountAuthRoleArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*InstanceAddNodeListInput)(nil)).Elem(), InstanceAddNodeListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*InstanceAddNodeListArrayInput)(nil)).Elem(), InstanceAddNodeListArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*InstanceBackupDownloadTaskBackupSetInput)(nil)).Elem(), InstanceBackupDownloadTaskBackupSetArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*InstanceBackupDownloadTaskBackupSetArrayInput)(nil)).Elem(), InstanceBackupDownloadTaskBackupSetArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*InstanceRemoveNodeListInput)(nil)).Elem(), InstanceRemoveNodeListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*InstanceRemoveNodeListArrayInput)(nil)).Elem(), InstanceRemoveNodeListArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*InstanceStandbyInstanceListInput)(nil)).Elem(), InstanceStandbyInstanceListArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*InstanceStandbyInstanceListArrayInput)(nil)).Elem(), InstanceStandbyInstanceListArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetInstanceBackupsBackupListInput)(nil)).Elem(), GetInstanceBackupsBackupListArgs{})
@@ -1900,8 +2161,12 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*GetZoneConfigListArrayInput)(nil)).Elem(), GetZoneConfigListArray{})
 	pulumi.RegisterOutputType(InstanceAccountAuthRoleOutput{})
 	pulumi.RegisterOutputType(InstanceAccountAuthRoleArrayOutput{})
+	pulumi.RegisterOutputType(InstanceAddNodeListOutput{})
+	pulumi.RegisterOutputType(InstanceAddNodeListArrayOutput{})
 	pulumi.RegisterOutputType(InstanceBackupDownloadTaskBackupSetOutput{})
 	pulumi.RegisterOutputType(InstanceBackupDownloadTaskBackupSetArrayOutput{})
+	pulumi.RegisterOutputType(InstanceRemoveNodeListOutput{})
+	pulumi.RegisterOutputType(InstanceRemoveNodeListArrayOutput{})
 	pulumi.RegisterOutputType(InstanceStandbyInstanceListOutput{})
 	pulumi.RegisterOutputType(InstanceStandbyInstanceListArrayOutput{})
 	pulumi.RegisterOutputType(GetInstanceBackupsBackupListOutput{})

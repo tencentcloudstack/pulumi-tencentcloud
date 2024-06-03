@@ -9,9 +9,10 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const key = new tencentcloud.apigateway.ApiKey("key", {
  *     secretName: "my_api_key",
@@ -28,13 +29,14 @@ import * as utilities from "../utilities";
  *     usagePlanId: plan.id,
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * API gateway attach access key can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:ApiGateway/apiKeyAttachment:ApiKeyAttachment attach AKID110b8Rmuw7t0fP1N8bi809n327023Is7xN8f#usagePlan-gyeafpab
+ * $ pulumi import tencentcloud:ApiGateway/apiKeyAttachment:ApiKeyAttachment attach [your api_key_id]#usagePlan-gyeafpab
  * ```
  */
 export class ApiKeyAttachment extends pulumi.CustomResource {

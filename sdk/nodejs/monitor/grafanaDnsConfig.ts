@@ -9,11 +9,12 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const grafanaDnsConfig = new tencentcloud.Monitor.GrafanaDnsConfig("grafana_dns_config", {
+ * const grafanaDnsConfig = new tencentcloud.monitor.GrafanaDnsConfig("grafanaDnsConfig", {
  *     instanceId: "grafana-dp2hnnfa",
  *     nameServers: [
  *         "10.1.2.1",
@@ -22,13 +23,14 @@ import * as utilities from "../utilities";
  *     ],
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * monitor grafana_dns_config can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Monitor/grafanaDnsConfig:GrafanaDnsConfig grafana_dns_config instance_id
+ * $ pulumi import tencentcloud:Monitor/grafanaDnsConfig:GrafanaDnsConfig grafana_dns_config instance_id
  * ```
  */
 export class GrafanaDnsConfig extends pulumi.CustomResource {

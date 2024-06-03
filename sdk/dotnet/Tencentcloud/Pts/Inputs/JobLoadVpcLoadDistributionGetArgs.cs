@@ -11,27 +11,41 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Pts.Inputs
 {
 
-    public sealed class JobLoadVpcLoadDistributionGetArgs : Pulumi.ResourceArgs
+    public sealed class JobLoadVpcLoadDistributionGetArgs : global::Pulumi.ResourceArgs
     {
+        /// <summary>
+        /// Region.
+        /// </summary>
         [Input("region")]
         public Input<string>? Region { get; set; }
 
+        /// <summary>
+        /// Regional ID.
+        /// </summary>
         [Input("regionId", required: true)]
         public Input<int> RegionId { get; set; } = null!;
 
         [Input("subnetIds")]
         private InputList<string>? _subnetIds;
+
+        /// <summary>
+        /// Subnet ID list.
+        /// </summary>
         public InputList<string> SubnetIds
         {
             get => _subnetIds ?? (_subnetIds = new InputList<string>());
             set => _subnetIds = value;
         }
 
+        /// <summary>
+        /// VPC ID.
+        /// </summary>
         [Input("vpcId")]
         public Input<string>? VpcId { get; set; }
 
         public JobLoadVpcLoadDistributionGetArgs()
         {
         }
+        public static new JobLoadVpcLoadDistributionGetArgs Empty => new JobLoadVpcLoadDistributionGetArgs();
     }
 }

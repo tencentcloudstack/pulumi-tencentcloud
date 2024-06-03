@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,6 +11,7 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
@@ -23,13 +25,11 @@ import * as utilities from "../utilities";
  *     },
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getWebhookTriggerLogs(args: GetWebhookTriggerLogsArgs, opts?: pulumi.InvokeOptions): Promise<GetWebhookTriggerLogsResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Tcr/getWebhookTriggerLogs:getWebhookTriggerLogs", {
         "namespace": args.namespace,
         "registryId": args.registryId,
@@ -86,9 +86,29 @@ export interface GetWebhookTriggerLogsResult {
      */
     readonly triggerId: number;
 }
-
+/**
+ * Use this data source to query detailed information of tencentcloud.Tcr.getWebhookTriggerLogs
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const myLogs = tencentcloud.Tcr.getWebhookTriggerLogs({
+ *     registryId: local.tcr_id,
+ *     namespace: _var.tcr_namespace,
+ *     triggerId: _var.trigger_id,
+ *     tags: {
+ *         createdBy: "terraform",
+ *     },
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getWebhookTriggerLogsOutput(args: GetWebhookTriggerLogsOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetWebhookTriggerLogsResult> {
-    return pulumi.output(args).apply(a => getWebhookTriggerLogs(a, opts))
+    return pulumi.output(args).apply((a: any) => getWebhookTriggerLogs(a, opts))
 }
 
 /**

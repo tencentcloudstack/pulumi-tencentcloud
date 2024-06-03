@@ -15,28 +15,29 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Redis
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var upgradeProxyVersionOperation = new Tencentcloud.Redis.UpgradeProxyVersionOperation("upgradeProxyVersionOperation", new()
     ///     {
-    ///         var upgradeProxyVersionOperation = new Tencentcloud.Redis.UpgradeProxyVersionOperation("upgradeProxyVersionOperation", new Tencentcloud.Redis.UpgradeProxyVersionOperationArgs
-    ///         {
-    ///             CurrentProxyVersion = "5.0.0",
-    ///             InstanceId = "crs-c1nl9rpv",
-    ///             InstanceTypeUpgradeNow = 1,
-    ///             UpgradeProxyVersion = "5.0.0",
-    ///         });
-    ///     }
+    ///         CurrentProxyVersion = "5.0.0",
+    ///         InstanceId = "crs-c1nl9rpv",
+    ///         InstanceTypeUpgradeNow = 1,
+    ///         UpgradeProxyVersion = "5.0.0",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Redis/upgradeProxyVersionOperation:UpgradeProxyVersionOperation")]
-    public partial class UpgradeProxyVersionOperation : Pulumi.CustomResource
+    public partial class UpgradeProxyVersionOperation : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Current proxy version.
@@ -107,7 +108,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Redis
         }
     }
 
-    public sealed class UpgradeProxyVersionOperationArgs : Pulumi.ResourceArgs
+    public sealed class UpgradeProxyVersionOperationArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Current proxy version.
@@ -136,9 +137,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Redis
         public UpgradeProxyVersionOperationArgs()
         {
         }
+        public static new UpgradeProxyVersionOperationArgs Empty => new UpgradeProxyVersionOperationArgs();
     }
 
-    public sealed class UpgradeProxyVersionOperationState : Pulumi.ResourceArgs
+    public sealed class UpgradeProxyVersionOperationState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Current proxy version.
@@ -167,5 +169,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Redis
         public UpgradeProxyVersionOperationState()
         {
         }
+        public static new UpgradeProxyVersionOperationState Empty => new UpgradeProxyVersionOperationState();
     }
 }

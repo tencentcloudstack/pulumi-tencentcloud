@@ -8,7 +8,10 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
+
+var _ = internal.GetEnvOrDefault
 
 type ModifyDiagDbInstanceOperationInstanceConfs struct {
 	// Database inspection switch, Yes/No.
@@ -20,7 +23,7 @@ type ModifyDiagDbInstanceOperationInstanceConfs struct {
 // ModifyDiagDbInstanceOperationInstanceConfsInput is an input type that accepts ModifyDiagDbInstanceOperationInstanceConfsArgs and ModifyDiagDbInstanceOperationInstanceConfsOutput values.
 // You can construct a concrete instance of `ModifyDiagDbInstanceOperationInstanceConfsInput` via:
 //
-//          ModifyDiagDbInstanceOperationInstanceConfsArgs{...}
+//	ModifyDiagDbInstanceOperationInstanceConfsArgs{...}
 type ModifyDiagDbInstanceOperationInstanceConfsInput interface {
 	pulumi.Input
 
@@ -58,11 +61,11 @@ func (i ModifyDiagDbInstanceOperationInstanceConfsArgs) ToModifyDiagDbInstanceOp
 // ModifyDiagDbInstanceOperationInstanceConfsPtrInput is an input type that accepts ModifyDiagDbInstanceOperationInstanceConfsArgs, ModifyDiagDbInstanceOperationInstanceConfsPtr and ModifyDiagDbInstanceOperationInstanceConfsPtrOutput values.
 // You can construct a concrete instance of `ModifyDiagDbInstanceOperationInstanceConfsPtrInput` via:
 //
-//          ModifyDiagDbInstanceOperationInstanceConfsArgs{...}
+//	        ModifyDiagDbInstanceOperationInstanceConfsArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type ModifyDiagDbInstanceOperationInstanceConfsPtrInput interface {
 	pulumi.Input
 
@@ -176,7 +179,7 @@ type SqlFilterSessionToken struct {
 // SqlFilterSessionTokenInput is an input type that accepts SqlFilterSessionTokenArgs and SqlFilterSessionTokenOutput values.
 // You can construct a concrete instance of `SqlFilterSessionTokenInput` via:
 //
-//          SqlFilterSessionTokenArgs{...}
+//	SqlFilterSessionTokenArgs{...}
 type SqlFilterSessionTokenInput interface {
 	pulumi.Input
 
@@ -214,11 +217,11 @@ func (i SqlFilterSessionTokenArgs) ToSqlFilterSessionTokenPtrOutputWithContext(c
 // SqlFilterSessionTokenPtrInput is an input type that accepts SqlFilterSessionTokenArgs, SqlFilterSessionTokenPtr and SqlFilterSessionTokenPtrOutput values.
 // You can construct a concrete instance of `SqlFilterSessionTokenPtrInput` via:
 //
-//          SqlFilterSessionTokenArgs{...}
+//	        SqlFilterSessionTokenArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type SqlFilterSessionTokenPtrInput interface {
 	pulumi.Input
 
@@ -340,7 +343,7 @@ type TdsqlAuditLogFilter struct {
 // TdsqlAuditLogFilterInput is an input type that accepts TdsqlAuditLogFilterArgs and TdsqlAuditLogFilterOutput values.
 // You can construct a concrete instance of `TdsqlAuditLogFilterInput` via:
 //
-//          TdsqlAuditLogFilterArgs{...}
+//	TdsqlAuditLogFilterArgs{...}
 type TdsqlAuditLogFilterInput interface {
 	pulumi.Input
 
@@ -386,11 +389,11 @@ func (i TdsqlAuditLogFilterArgs) ToTdsqlAuditLogFilterPtrOutputWithContext(ctx c
 // TdsqlAuditLogFilterPtrInput is an input type that accepts TdsqlAuditLogFilterArgs, TdsqlAuditLogFilterPtr and TdsqlAuditLogFilterPtrOutput values.
 // You can construct a concrete instance of `TdsqlAuditLogFilterPtrInput` via:
 //
-//          TdsqlAuditLogFilterArgs{...}
+//	        TdsqlAuditLogFilterArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type TdsqlAuditLogFilterPtrInput interface {
 	pulumi.Input
 
@@ -622,7 +625,7 @@ type GetDiagDbInstancesItem struct {
 // GetDiagDbInstancesItemInput is an input type that accepts GetDiagDbInstancesItemArgs and GetDiagDbInstancesItemOutput values.
 // You can construct a concrete instance of `GetDiagDbInstancesItemInput` via:
 //
-//          GetDiagDbInstancesItemArgs{...}
+//	GetDiagDbInstancesItemArgs{...}
 type GetDiagDbInstancesItemInput interface {
 	pulumi.Input
 
@@ -710,7 +713,7 @@ func (i GetDiagDbInstancesItemArgs) ToGetDiagDbInstancesItemOutputWithContext(ct
 // GetDiagDbInstancesItemArrayInput is an input type that accepts GetDiagDbInstancesItemArray and GetDiagDbInstancesItemArrayOutput values.
 // You can construct a concrete instance of `GetDiagDbInstancesItemArrayInput` via:
 //
-//          GetDiagDbInstancesItemArray{ GetDiagDbInstancesItemArgs{...} }
+//	GetDiagDbInstancesItemArray{ GetDiagDbInstancesItemArgs{...} }
 type GetDiagDbInstancesItemArrayInput interface {
 	pulumi.Input
 
@@ -933,7 +936,7 @@ type GetDiagDbInstancesItemInstanceConf struct {
 // GetDiagDbInstancesItemInstanceConfInput is an input type that accepts GetDiagDbInstancesItemInstanceConfArgs and GetDiagDbInstancesItemInstanceConfOutput values.
 // You can construct a concrete instance of `GetDiagDbInstancesItemInstanceConfInput` via:
 //
-//          GetDiagDbInstancesItemInstanceConfArgs{...}
+//	GetDiagDbInstancesItemInstanceConfArgs{...}
 type GetDiagDbInstancesItemInstanceConfInput interface {
 	pulumi.Input
 
@@ -965,7 +968,7 @@ func (i GetDiagDbInstancesItemInstanceConfArgs) ToGetDiagDbInstancesItemInstance
 // GetDiagDbInstancesItemInstanceConfArrayInput is an input type that accepts GetDiagDbInstancesItemInstanceConfArray and GetDiagDbInstancesItemInstanceConfArrayOutput values.
 // You can construct a concrete instance of `GetDiagDbInstancesItemInstanceConfArrayInput` via:
 //
-//          GetDiagDbInstancesItemInstanceConfArray{ GetDiagDbInstancesItemInstanceConfArgs{...} }
+//	GetDiagDbInstancesItemInstanceConfArray{ GetDiagDbInstancesItemInstanceConfArgs{...} }
 type GetDiagDbInstancesItemInstanceConfArrayInput interface {
 	pulumi.Input
 
@@ -1062,7 +1065,7 @@ type GetDiagEventsList struct {
 // GetDiagEventsListInput is an input type that accepts GetDiagEventsListArgs and GetDiagEventsListOutput values.
 // You can construct a concrete instance of `GetDiagEventsListInput` via:
 //
-//          GetDiagEventsListArgs{...}
+//	GetDiagEventsListArgs{...}
 type GetDiagEventsListInput interface {
 	pulumi.Input
 
@@ -1108,7 +1111,7 @@ func (i GetDiagEventsListArgs) ToGetDiagEventsListOutputWithContext(ctx context.
 // GetDiagEventsListArrayInput is an input type that accepts GetDiagEventsListArray and GetDiagEventsListArrayOutput values.
 // You can construct a concrete instance of `GetDiagEventsListArrayInput` via:
 //
-//          GetDiagEventsListArray{ GetDiagEventsListArgs{...} }
+//	GetDiagEventsListArray{ GetDiagEventsListArgs{...} }
 type GetDiagEventsListArrayInput interface {
 	pulumi.Input
 
@@ -1240,7 +1243,7 @@ type GetDiagHistoryEvent struct {
 // GetDiagHistoryEventInput is an input type that accepts GetDiagHistoryEventArgs and GetDiagHistoryEventOutput values.
 // You can construct a concrete instance of `GetDiagHistoryEventInput` via:
 //
-//          GetDiagHistoryEventArgs{...}
+//	GetDiagHistoryEventArgs{...}
 type GetDiagHistoryEventInput interface {
 	pulumi.Input
 
@@ -1286,7 +1289,7 @@ func (i GetDiagHistoryEventArgs) ToGetDiagHistoryEventOutputWithContext(ctx cont
 // GetDiagHistoryEventArrayInput is an input type that accepts GetDiagHistoryEventArray and GetDiagHistoryEventArrayOutput values.
 // You can construct a concrete instance of `GetDiagHistoryEventArrayInput` via:
 //
-//          GetDiagHistoryEventArray{ GetDiagHistoryEventArgs{...} }
+//	GetDiagHistoryEventArray{ GetDiagHistoryEventArgs{...} }
 type GetDiagHistoryEventArrayInput interface {
 	pulumi.Input
 
@@ -1406,7 +1409,7 @@ type GetHealthScoresData struct {
 // GetHealthScoresDataInput is an input type that accepts GetHealthScoresDataArgs and GetHealthScoresDataOutput values.
 // You can construct a concrete instance of `GetHealthScoresDataInput` via:
 //
-//          GetHealthScoresDataArgs{...}
+//	GetHealthScoresDataArgs{...}
 type GetHealthScoresDataInput interface {
 	pulumi.Input
 
@@ -1440,7 +1443,7 @@ func (i GetHealthScoresDataArgs) ToGetHealthScoresDataOutputWithContext(ctx cont
 // GetHealthScoresDataArrayInput is an input type that accepts GetHealthScoresDataArray and GetHealthScoresDataArrayOutput values.
 // You can construct a concrete instance of `GetHealthScoresDataArrayInput` via:
 //
-//          GetHealthScoresDataArray{ GetHealthScoresDataArgs{...} }
+//	GetHealthScoresDataArray{ GetHealthScoresDataArgs{...} }
 type GetHealthScoresDataArrayInput interface {
 	pulumi.Input
 
@@ -1528,7 +1531,7 @@ type GetHealthScoresDataIssueType struct {
 // GetHealthScoresDataIssueTypeInput is an input type that accepts GetHealthScoresDataIssueTypeArgs and GetHealthScoresDataIssueTypeOutput values.
 // You can construct a concrete instance of `GetHealthScoresDataIssueTypeInput` via:
 //
-//          GetHealthScoresDataIssueTypeArgs{...}
+//	GetHealthScoresDataIssueTypeArgs{...}
 type GetHealthScoresDataIssueTypeInput interface {
 	pulumi.Input
 
@@ -1560,7 +1563,7 @@ func (i GetHealthScoresDataIssueTypeArgs) ToGetHealthScoresDataIssueTypeOutputWi
 // GetHealthScoresDataIssueTypeArrayInput is an input type that accepts GetHealthScoresDataIssueTypeArray and GetHealthScoresDataIssueTypeArrayOutput values.
 // You can construct a concrete instance of `GetHealthScoresDataIssueTypeArrayInput` via:
 //
-//          GetHealthScoresDataIssueTypeArray{ GetHealthScoresDataIssueTypeArgs{...} }
+//	GetHealthScoresDataIssueTypeArray{ GetHealthScoresDataIssueTypeArgs{...} }
 type GetHealthScoresDataIssueTypeArrayInput interface {
 	pulumi.Input
 
@@ -1655,7 +1658,7 @@ type GetHealthScoresDataIssueTypeEvent struct {
 // GetHealthScoresDataIssueTypeEventInput is an input type that accepts GetHealthScoresDataIssueTypeEventArgs and GetHealthScoresDataIssueTypeEventOutput values.
 // You can construct a concrete instance of `GetHealthScoresDataIssueTypeEventInput` via:
 //
-//          GetHealthScoresDataIssueTypeEventArgs{...}
+//	GetHealthScoresDataIssueTypeEventArgs{...}
 type GetHealthScoresDataIssueTypeEventInput interface {
 	pulumi.Input
 
@@ -1699,7 +1702,7 @@ func (i GetHealthScoresDataIssueTypeEventArgs) ToGetHealthScoresDataIssueTypeEve
 // GetHealthScoresDataIssueTypeEventArrayInput is an input type that accepts GetHealthScoresDataIssueTypeEventArray and GetHealthScoresDataIssueTypeEventArrayOutput values.
 // You can construct a concrete instance of `GetHealthScoresDataIssueTypeEventArrayInput` via:
 //
-//          GetHealthScoresDataIssueTypeEventArray{ GetHealthScoresDataIssueTypeEventArgs{...} }
+//	GetHealthScoresDataIssueTypeEventArray{ GetHealthScoresDataIssueTypeEventArgs{...} }
 type GetHealthScoresDataIssueTypeEventArrayInput interface {
 	pulumi.Input
 
@@ -1822,7 +1825,7 @@ type GetMysqlProcessListProcessList struct {
 // GetMysqlProcessListProcessListInput is an input type that accepts GetMysqlProcessListProcessListArgs and GetMysqlProcessListProcessListOutput values.
 // You can construct a concrete instance of `GetMysqlProcessListProcessListInput` via:
 //
-//          GetMysqlProcessListProcessListArgs{...}
+//	GetMysqlProcessListProcessListArgs{...}
 type GetMysqlProcessListProcessListInput interface {
 	pulumi.Input
 
@@ -1864,7 +1867,7 @@ func (i GetMysqlProcessListProcessListArgs) ToGetMysqlProcessListProcessListOutp
 // GetMysqlProcessListProcessListArrayInput is an input type that accepts GetMysqlProcessListProcessListArray and GetMysqlProcessListProcessListArrayOutput values.
 // You can construct a concrete instance of `GetMysqlProcessListProcessListArrayInput` via:
 //
-//          GetMysqlProcessListProcessListArray{ GetMysqlProcessListProcessListArgs{...} }
+//	GetMysqlProcessListProcessListArray{ GetMysqlProcessListProcessListArgs{...} }
 type GetMysqlProcessListProcessListArrayInput interface {
 	pulumi.Input
 
@@ -1976,7 +1979,7 @@ type GetNoPrimaryKeyTablesNoPrimaryKeyTable struct {
 // GetNoPrimaryKeyTablesNoPrimaryKeyTableInput is an input type that accepts GetNoPrimaryKeyTablesNoPrimaryKeyTableArgs and GetNoPrimaryKeyTablesNoPrimaryKeyTableOutput values.
 // You can construct a concrete instance of `GetNoPrimaryKeyTablesNoPrimaryKeyTableInput` via:
 //
-//          GetNoPrimaryKeyTablesNoPrimaryKeyTableArgs{...}
+//	GetNoPrimaryKeyTablesNoPrimaryKeyTableArgs{...}
 type GetNoPrimaryKeyTablesNoPrimaryKeyTableInput interface {
 	pulumi.Input
 
@@ -2012,7 +2015,7 @@ func (i GetNoPrimaryKeyTablesNoPrimaryKeyTableArgs) ToGetNoPrimaryKeyTablesNoPri
 // GetNoPrimaryKeyTablesNoPrimaryKeyTableArrayInput is an input type that accepts GetNoPrimaryKeyTablesNoPrimaryKeyTableArray and GetNoPrimaryKeyTablesNoPrimaryKeyTableArrayOutput values.
 // You can construct a concrete instance of `GetNoPrimaryKeyTablesNoPrimaryKeyTableArrayInput` via:
 //
-//          GetNoPrimaryKeyTablesNoPrimaryKeyTableArray{ GetNoPrimaryKeyTablesNoPrimaryKeyTableArgs{...} }
+//	GetNoPrimaryKeyTablesNoPrimaryKeyTableArray{ GetNoPrimaryKeyTablesNoPrimaryKeyTableArgs{...} }
 type GetNoPrimaryKeyTablesNoPrimaryKeyTableArrayInput interface {
 	pulumi.Input
 
@@ -2113,7 +2116,7 @@ type GetRedisTopBigKeysTopKey struct {
 // GetRedisTopBigKeysTopKeyInput is an input type that accepts GetRedisTopBigKeysTopKeyArgs and GetRedisTopBigKeysTopKeyOutput values.
 // You can construct a concrete instance of `GetRedisTopBigKeysTopKeyInput` via:
 //
-//          GetRedisTopBigKeysTopKeyArgs{...}
+//	GetRedisTopBigKeysTopKeyArgs{...}
 type GetRedisTopBigKeysTopKeyInput interface {
 	pulumi.Input
 
@@ -2153,7 +2156,7 @@ func (i GetRedisTopBigKeysTopKeyArgs) ToGetRedisTopBigKeysTopKeyOutputWithContex
 // GetRedisTopBigKeysTopKeyArrayInput is an input type that accepts GetRedisTopBigKeysTopKeyArray and GetRedisTopBigKeysTopKeyArrayOutput values.
 // You can construct a concrete instance of `GetRedisTopBigKeysTopKeyArrayInput` via:
 //
-//          GetRedisTopBigKeysTopKeyArray{ GetRedisTopBigKeysTopKeyArgs{...} }
+//	GetRedisTopBigKeysTopKeyArray{ GetRedisTopBigKeysTopKeyArgs{...} }
 type GetRedisTopBigKeysTopKeyArrayInput interface {
 	pulumi.Input
 
@@ -2262,7 +2265,7 @@ type GetRedisTopKeyPrefixListItem struct {
 // GetRedisTopKeyPrefixListItemInput is an input type that accepts GetRedisTopKeyPrefixListItemArgs and GetRedisTopKeyPrefixListItemOutput values.
 // You can construct a concrete instance of `GetRedisTopKeyPrefixListItemInput` via:
 //
-//          GetRedisTopKeyPrefixListItemArgs{...}
+//	GetRedisTopKeyPrefixListItemArgs{...}
 type GetRedisTopKeyPrefixListItemInput interface {
 	pulumi.Input
 
@@ -2300,7 +2303,7 @@ func (i GetRedisTopKeyPrefixListItemArgs) ToGetRedisTopKeyPrefixListItemOutputWi
 // GetRedisTopKeyPrefixListItemArrayInput is an input type that accepts GetRedisTopKeyPrefixListItemArray and GetRedisTopKeyPrefixListItemArrayOutput values.
 // You can construct a concrete instance of `GetRedisTopKeyPrefixListItemArrayInput` via:
 //
-//          GetRedisTopKeyPrefixListItemArray{ GetRedisTopKeyPrefixListItemArgs{...} }
+//	GetRedisTopKeyPrefixListItemArray{ GetRedisTopKeyPrefixListItemArgs{...} }
 type GetRedisTopKeyPrefixListItemArrayInput interface {
 	pulumi.Input
 
@@ -2412,7 +2415,7 @@ type GetSecurityAuditLogExportTasksList struct {
 // GetSecurityAuditLogExportTasksListInput is an input type that accepts GetSecurityAuditLogExportTasksListArgs and GetSecurityAuditLogExportTasksListOutput values.
 // You can construct a concrete instance of `GetSecurityAuditLogExportTasksListInput` via:
 //
-//          GetSecurityAuditLogExportTasksListArgs{...}
+//	GetSecurityAuditLogExportTasksListArgs{...}
 type GetSecurityAuditLogExportTasksListInput interface {
 	pulumi.Input
 
@@ -2458,7 +2461,7 @@ func (i GetSecurityAuditLogExportTasksListArgs) ToGetSecurityAuditLogExportTasks
 // GetSecurityAuditLogExportTasksListArrayInput is an input type that accepts GetSecurityAuditLogExportTasksListArray and GetSecurityAuditLogExportTasksListArrayOutput values.
 // You can construct a concrete instance of `GetSecurityAuditLogExportTasksListArrayInput` via:
 //
-//          GetSecurityAuditLogExportTasksListArray{ GetSecurityAuditLogExportTasksListArgs{...} }
+//	GetSecurityAuditLogExportTasksListArray{ GetSecurityAuditLogExportTasksListArgs{...} }
 type GetSecurityAuditLogExportTasksListArrayInput interface {
 	pulumi.Input
 
@@ -2574,7 +2577,7 @@ type GetSlowLogTimeSeriesStatsSeriesData struct {
 // GetSlowLogTimeSeriesStatsSeriesDataInput is an input type that accepts GetSlowLogTimeSeriesStatsSeriesDataArgs and GetSlowLogTimeSeriesStatsSeriesDataOutput values.
 // You can construct a concrete instance of `GetSlowLogTimeSeriesStatsSeriesDataInput` via:
 //
-//          GetSlowLogTimeSeriesStatsSeriesDataArgs{...}
+//	GetSlowLogTimeSeriesStatsSeriesDataArgs{...}
 type GetSlowLogTimeSeriesStatsSeriesDataInput interface {
 	pulumi.Input
 
@@ -2604,7 +2607,7 @@ func (i GetSlowLogTimeSeriesStatsSeriesDataArgs) ToGetSlowLogTimeSeriesStatsSeri
 // GetSlowLogTimeSeriesStatsSeriesDataArrayInput is an input type that accepts GetSlowLogTimeSeriesStatsSeriesDataArray and GetSlowLogTimeSeriesStatsSeriesDataArrayOutput values.
 // You can construct a concrete instance of `GetSlowLogTimeSeriesStatsSeriesDataArrayInput` via:
 //
-//          GetSlowLogTimeSeriesStatsSeriesDataArray{ GetSlowLogTimeSeriesStatsSeriesDataArgs{...} }
+//	GetSlowLogTimeSeriesStatsSeriesDataArray{ GetSlowLogTimeSeriesStatsSeriesDataArgs{...} }
 type GetSlowLogTimeSeriesStatsSeriesDataArrayInput interface {
 	pulumi.Input
 
@@ -2684,7 +2687,7 @@ type GetSlowLogTimeSeriesStatsSeriesDataSeries struct {
 // GetSlowLogTimeSeriesStatsSeriesDataSeriesInput is an input type that accepts GetSlowLogTimeSeriesStatsSeriesDataSeriesArgs and GetSlowLogTimeSeriesStatsSeriesDataSeriesOutput values.
 // You can construct a concrete instance of `GetSlowLogTimeSeriesStatsSeriesDataSeriesInput` via:
 //
-//          GetSlowLogTimeSeriesStatsSeriesDataSeriesArgs{...}
+//	GetSlowLogTimeSeriesStatsSeriesDataSeriesArgs{...}
 type GetSlowLogTimeSeriesStatsSeriesDataSeriesInput interface {
 	pulumi.Input
 
@@ -2716,7 +2719,7 @@ func (i GetSlowLogTimeSeriesStatsSeriesDataSeriesArgs) ToGetSlowLogTimeSeriesSta
 // GetSlowLogTimeSeriesStatsSeriesDataSeriesArrayInput is an input type that accepts GetSlowLogTimeSeriesStatsSeriesDataSeriesArray and GetSlowLogTimeSeriesStatsSeriesDataSeriesArrayOutput values.
 // You can construct a concrete instance of `GetSlowLogTimeSeriesStatsSeriesDataSeriesArrayInput` via:
 //
-//          GetSlowLogTimeSeriesStatsSeriesDataSeriesArray{ GetSlowLogTimeSeriesStatsSeriesDataSeriesArgs{...} }
+//	GetSlowLogTimeSeriesStatsSeriesDataSeriesArray{ GetSlowLogTimeSeriesStatsSeriesDataSeriesArgs{...} }
 type GetSlowLogTimeSeriesStatsSeriesDataSeriesArrayInput interface {
 	pulumi.Input
 
@@ -2797,7 +2800,7 @@ type GetSlowLogTimeSeriesStatsTimeSeries struct {
 // GetSlowLogTimeSeriesStatsTimeSeriesInput is an input type that accepts GetSlowLogTimeSeriesStatsTimeSeriesArgs and GetSlowLogTimeSeriesStatsTimeSeriesOutput values.
 // You can construct a concrete instance of `GetSlowLogTimeSeriesStatsTimeSeriesInput` via:
 //
-//          GetSlowLogTimeSeriesStatsTimeSeriesArgs{...}
+//	GetSlowLogTimeSeriesStatsTimeSeriesArgs{...}
 type GetSlowLogTimeSeriesStatsTimeSeriesInput interface {
 	pulumi.Input
 
@@ -2827,7 +2830,7 @@ func (i GetSlowLogTimeSeriesStatsTimeSeriesArgs) ToGetSlowLogTimeSeriesStatsTime
 // GetSlowLogTimeSeriesStatsTimeSeriesArrayInput is an input type that accepts GetSlowLogTimeSeriesStatsTimeSeriesArray and GetSlowLogTimeSeriesStatsTimeSeriesArrayOutput values.
 // You can construct a concrete instance of `GetSlowLogTimeSeriesStatsTimeSeriesArrayInput` via:
 //
-//          GetSlowLogTimeSeriesStatsTimeSeriesArray{ GetSlowLogTimeSeriesStatsTimeSeriesArgs{...} }
+//	GetSlowLogTimeSeriesStatsTimeSeriesArray{ GetSlowLogTimeSeriesStatsTimeSeriesArgs{...} }
 type GetSlowLogTimeSeriesStatsTimeSeriesArrayInput interface {
 	pulumi.Input
 
@@ -2949,7 +2952,7 @@ type GetSlowLogTopSqlsRow struct {
 // GetSlowLogTopSqlsRowInput is an input type that accepts GetSlowLogTopSqlsRowArgs and GetSlowLogTopSqlsRowOutput values.
 // You can construct a concrete instance of `GetSlowLogTopSqlsRowInput` via:
 //
-//          GetSlowLogTopSqlsRowArgs{...}
+//	GetSlowLogTopSqlsRowArgs{...}
 type GetSlowLogTopSqlsRowInput interface {
 	pulumi.Input
 
@@ -3025,7 +3028,7 @@ func (i GetSlowLogTopSqlsRowArgs) ToGetSlowLogTopSqlsRowOutputWithContext(ctx co
 // GetSlowLogTopSqlsRowArrayInput is an input type that accepts GetSlowLogTopSqlsRowArray and GetSlowLogTopSqlsRowArrayOutput values.
 // You can construct a concrete instance of `GetSlowLogTopSqlsRowArrayInput` via:
 //
-//          GetSlowLogTopSqlsRowArray{ GetSlowLogTopSqlsRowArgs{...} }
+//	GetSlowLogTopSqlsRowArray{ GetSlowLogTopSqlsRowArgs{...} }
 type GetSlowLogTopSqlsRowArrayInput interface {
 	pulumi.Input
 
@@ -3214,7 +3217,7 @@ type GetSlowLogTopSqlsSchemaList struct {
 // GetSlowLogTopSqlsSchemaListInput is an input type that accepts GetSlowLogTopSqlsSchemaListArgs and GetSlowLogTopSqlsSchemaListOutput values.
 // You can construct a concrete instance of `GetSlowLogTopSqlsSchemaListInput` via:
 //
-//          GetSlowLogTopSqlsSchemaListArgs{...}
+//	GetSlowLogTopSqlsSchemaListArgs{...}
 type GetSlowLogTopSqlsSchemaListInput interface {
 	pulumi.Input
 
@@ -3242,7 +3245,7 @@ func (i GetSlowLogTopSqlsSchemaListArgs) ToGetSlowLogTopSqlsSchemaListOutputWith
 // GetSlowLogTopSqlsSchemaListArrayInput is an input type that accepts GetSlowLogTopSqlsSchemaListArray and GetSlowLogTopSqlsSchemaListArrayOutput values.
 // You can construct a concrete instance of `GetSlowLogTopSqlsSchemaListArrayInput` via:
 //
-//          GetSlowLogTopSqlsSchemaListArray{ GetSlowLogTopSqlsSchemaListArgs{...} }
+//	GetSlowLogTopSqlsSchemaListArray{ GetSlowLogTopSqlsSchemaListArgs{...} }
 type GetSlowLogTopSqlsSchemaListArrayInput interface {
 	pulumi.Input
 
@@ -3315,7 +3318,7 @@ type GetSlowLogUserHostStatsItem struct {
 // GetSlowLogUserHostStatsItemInput is an input type that accepts GetSlowLogUserHostStatsItemArgs and GetSlowLogUserHostStatsItemOutput values.
 // You can construct a concrete instance of `GetSlowLogUserHostStatsItemInput` via:
 //
-//          GetSlowLogUserHostStatsItemArgs{...}
+//	GetSlowLogUserHostStatsItemArgs{...}
 type GetSlowLogUserHostStatsItemInput interface {
 	pulumi.Input
 
@@ -3347,7 +3350,7 @@ func (i GetSlowLogUserHostStatsItemArgs) ToGetSlowLogUserHostStatsItemOutputWith
 // GetSlowLogUserHostStatsItemArrayInput is an input type that accepts GetSlowLogUserHostStatsItemArray and GetSlowLogUserHostStatsItemArrayOutput values.
 // You can construct a concrete instance of `GetSlowLogUserHostStatsItemArrayInput` via:
 //
-//          GetSlowLogUserHostStatsItemArray{ GetSlowLogUserHostStatsItemArgs{...} }
+//	GetSlowLogUserHostStatsItemArray{ GetSlowLogUserHostStatsItemArgs{...} }
 type GetSlowLogUserHostStatsItemArrayInput interface {
 	pulumi.Input
 
@@ -3442,7 +3445,7 @@ type GetSlowLogsRow struct {
 // GetSlowLogsRowInput is an input type that accepts GetSlowLogsRowArgs and GetSlowLogsRowOutput values.
 // You can construct a concrete instance of `GetSlowLogsRowInput` via:
 //
-//          GetSlowLogsRowArgs{...}
+//	GetSlowLogsRowArgs{...}
 type GetSlowLogsRowInput interface {
 	pulumi.Input
 
@@ -3486,7 +3489,7 @@ func (i GetSlowLogsRowArgs) ToGetSlowLogsRowOutputWithContext(ctx context.Contex
 // GetSlowLogsRowArrayInput is an input type that accepts GetSlowLogsRowArray and GetSlowLogsRowArrayOutput values.
 // You can construct a concrete instance of `GetSlowLogsRowArrayInput` via:
 //
-//          GetSlowLogsRowArray{ GetSlowLogsRowArgs{...} }
+//	GetSlowLogsRowArray{ GetSlowLogsRowArgs{...} }
 type GetSlowLogsRowArrayInput interface {
 	pulumi.Input
 
@@ -3615,7 +3618,7 @@ type GetSqlFiltersList struct {
 // GetSqlFiltersListInput is an input type that accepts GetSqlFiltersListArgs and GetSqlFiltersListOutput values.
 // You can construct a concrete instance of `GetSqlFiltersListInput` via:
 //
-//          GetSqlFiltersListArgs{...}
+//	GetSqlFiltersListArgs{...}
 type GetSqlFiltersListInput interface {
 	pulumi.Input
 
@@ -3663,7 +3666,7 @@ func (i GetSqlFiltersListArgs) ToGetSqlFiltersListOutputWithContext(ctx context.
 // GetSqlFiltersListArrayInput is an input type that accepts GetSqlFiltersListArray and GetSqlFiltersListArrayOutput values.
 // You can construct a concrete instance of `GetSqlFiltersListArrayInput` via:
 //
-//          GetSqlFiltersListArray{ GetSqlFiltersListArgs{...} }
+//	GetSqlFiltersListArray{ GetSqlFiltersListArgs{...} }
 type GetSqlFiltersListArrayInput interface {
 	pulumi.Input
 
@@ -3784,7 +3787,7 @@ type GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeries struct {
 // GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesInput is an input type that accepts GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesArgs and GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesOutput values.
 // You can construct a concrete instance of `GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesInput` via:
 //
-//          GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesArgs{...}
+//	GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesArgs{...}
 type GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesInput interface {
 	pulumi.Input
 
@@ -3814,7 +3817,7 @@ func (i GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesArgs) ToGetTopSpaceSc
 // GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesArrayInput is an input type that accepts GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesArray and GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesArrayOutput values.
 // You can construct a concrete instance of `GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesArrayInput` via:
 //
-//          GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesArray{ GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesArgs{...} }
+//	GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesArray{ GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesArgs{...} }
 type GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesArrayInput interface {
 	pulumi.Input
 
@@ -3892,7 +3895,7 @@ type GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesSeriesData struct {
 // GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesSeriesDataInput is an input type that accepts GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesSeriesDataArgs and GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesSeriesDataOutput values.
 // You can construct a concrete instance of `GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesSeriesDataInput` via:
 //
-//          GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesSeriesDataArgs{...}
+//	GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesSeriesDataArgs{...}
 type GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesSeriesDataInput interface {
 	pulumi.Input
 
@@ -3922,7 +3925,7 @@ func (i GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesSeriesDataArgs) ToGet
 // GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesSeriesDataArrayInput is an input type that accepts GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesSeriesDataArray and GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesSeriesDataArrayOutput values.
 // You can construct a concrete instance of `GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesSeriesDataArrayInput` via:
 //
-//          GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesSeriesDataArray{ GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesSeriesDataArgs{...} }
+//	GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesSeriesDataArray{ GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesSeriesDataArgs{...} }
 type GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesSeriesDataArrayInput interface {
 	pulumi.Input
 
@@ -4002,7 +4005,7 @@ type GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesSeriesDataSeries struct 
 // GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesSeriesDataSeriesInput is an input type that accepts GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesSeriesDataSeriesArgs and GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesSeriesDataSeriesOutput values.
 // You can construct a concrete instance of `GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesSeriesDataSeriesInput` via:
 //
-//          GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesSeriesDataSeriesArgs{...}
+//	GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesSeriesDataSeriesArgs{...}
 type GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesSeriesDataSeriesInput interface {
 	pulumi.Input
 
@@ -4034,7 +4037,7 @@ func (i GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesSeriesDataSeriesArgs)
 // GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesSeriesDataSeriesArrayInput is an input type that accepts GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesSeriesDataSeriesArray and GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesSeriesDataSeriesArrayOutput values.
 // You can construct a concrete instance of `GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesSeriesDataSeriesArrayInput` via:
 //
-//          GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesSeriesDataSeriesArray{ GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesSeriesDataSeriesArgs{...} }
+//	GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesSeriesDataSeriesArray{ GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesSeriesDataSeriesArgs{...} }
 type GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesSeriesDataSeriesArrayInput interface {
 	pulumi.Input
 
@@ -4127,7 +4130,7 @@ type GetTopSpaceSchemasTopSpaceSchema struct {
 // GetTopSpaceSchemasTopSpaceSchemaInput is an input type that accepts GetTopSpaceSchemasTopSpaceSchemaArgs and GetTopSpaceSchemasTopSpaceSchemaOutput values.
 // You can construct a concrete instance of `GetTopSpaceSchemasTopSpaceSchemaInput` via:
 //
-//          GetTopSpaceSchemasTopSpaceSchemaArgs{...}
+//	GetTopSpaceSchemasTopSpaceSchemaArgs{...}
 type GetTopSpaceSchemasTopSpaceSchemaInput interface {
 	pulumi.Input
 
@@ -4169,7 +4172,7 @@ func (i GetTopSpaceSchemasTopSpaceSchemaArgs) ToGetTopSpaceSchemasTopSpaceSchema
 // GetTopSpaceSchemasTopSpaceSchemaArrayInput is an input type that accepts GetTopSpaceSchemasTopSpaceSchemaArray and GetTopSpaceSchemasTopSpaceSchemaArrayOutput values.
 // You can construct a concrete instance of `GetTopSpaceSchemasTopSpaceSchemaArrayInput` via:
 //
-//          GetTopSpaceSchemasTopSpaceSchemaArray{ GetTopSpaceSchemasTopSpaceSchemaArgs{...} }
+//	GetTopSpaceSchemasTopSpaceSchemaArray{ GetTopSpaceSchemasTopSpaceSchemaArgs{...} }
 type GetTopSpaceSchemasTopSpaceSchemaArrayInput interface {
 	pulumi.Input
 
@@ -4279,7 +4282,7 @@ type GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeries struct {
 // GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesInput is an input type that accepts GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesArgs and GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesOutput values.
 // You can construct a concrete instance of `GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesInput` via:
 //
-//          GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesArgs{...}
+//	GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesArgs{...}
 type GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesInput interface {
 	pulumi.Input
 
@@ -4313,7 +4316,7 @@ func (i GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesArgs) ToGetTopSpaceTabl
 // GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesArrayInput is an input type that accepts GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesArray and GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesArrayOutput values.
 // You can construct a concrete instance of `GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesArrayInput` via:
 //
-//          GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesArray{ GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesArgs{...} }
+//	GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesArray{ GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesArgs{...} }
 type GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesArrayInput interface {
 	pulumi.Input
 
@@ -4401,7 +4404,7 @@ type GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesSeriesData struct {
 // GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesSeriesDataInput is an input type that accepts GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesSeriesDataArgs and GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesSeriesDataOutput values.
 // You can construct a concrete instance of `GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesSeriesDataInput` via:
 //
-//          GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesSeriesDataArgs{...}
+//	GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesSeriesDataArgs{...}
 type GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesSeriesDataInput interface {
 	pulumi.Input
 
@@ -4431,7 +4434,7 @@ func (i GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesSeriesDataArgs) ToGetTo
 // GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesSeriesDataArrayInput is an input type that accepts GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesSeriesDataArray and GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesSeriesDataArrayOutput values.
 // You can construct a concrete instance of `GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesSeriesDataArrayInput` via:
 //
-//          GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesSeriesDataArray{ GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesSeriesDataArgs{...} }
+//	GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesSeriesDataArray{ GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesSeriesDataArgs{...} }
 type GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesSeriesDataArrayInput interface {
 	pulumi.Input
 
@@ -4511,7 +4514,7 @@ type GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesSeriesDataSeries struct {
 // GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesSeriesDataSeriesInput is an input type that accepts GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesSeriesDataSeriesArgs and GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesSeriesDataSeriesOutput values.
 // You can construct a concrete instance of `GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesSeriesDataSeriesInput` via:
 //
-//          GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesSeriesDataSeriesArgs{...}
+//	GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesSeriesDataSeriesArgs{...}
 type GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesSeriesDataSeriesInput interface {
 	pulumi.Input
 
@@ -4543,7 +4546,7 @@ func (i GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesSeriesDataSeriesArgs) T
 // GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesSeriesDataSeriesArrayInput is an input type that accepts GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesSeriesDataSeriesArray and GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesSeriesDataSeriesArrayOutput values.
 // You can construct a concrete instance of `GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesSeriesDataSeriesArrayInput` via:
 //
-//          GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesSeriesDataSeriesArray{ GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesSeriesDataSeriesArgs{...} }
+//	GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesSeriesDataSeriesArray{ GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesSeriesDataSeriesArgs{...} }
 type GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesSeriesDataSeriesArrayInput interface {
 	pulumi.Input
 
@@ -4640,7 +4643,7 @@ type GetTopSpaceTablesTopSpaceTable struct {
 // GetTopSpaceTablesTopSpaceTableInput is an input type that accepts GetTopSpaceTablesTopSpaceTableArgs and GetTopSpaceTablesTopSpaceTableOutput values.
 // You can construct a concrete instance of `GetTopSpaceTablesTopSpaceTableInput` via:
 //
-//          GetTopSpaceTablesTopSpaceTableArgs{...}
+//	GetTopSpaceTablesTopSpaceTableArgs{...}
 type GetTopSpaceTablesTopSpaceTableInput interface {
 	pulumi.Input
 
@@ -4686,7 +4689,7 @@ func (i GetTopSpaceTablesTopSpaceTableArgs) ToGetTopSpaceTablesTopSpaceTableOutp
 // GetTopSpaceTablesTopSpaceTableArrayInput is an input type that accepts GetTopSpaceTablesTopSpaceTableArray and GetTopSpaceTablesTopSpaceTableArrayOutput values.
 // You can construct a concrete instance of `GetTopSpaceTablesTopSpaceTableArrayInput` via:
 //
-//          GetTopSpaceTablesTopSpaceTableArray{ GetTopSpaceTablesTopSpaceTableArgs{...} }
+//	GetTopSpaceTablesTopSpaceTableArray{ GetTopSpaceTablesTopSpaceTableArgs{...} }
 type GetTopSpaceTablesTopSpaceTableArrayInput interface {
 	pulumi.Input
 

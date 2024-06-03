@@ -15,70 +15,64 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ses
         /// <summary>
         /// Use this data source to query detailed information of ses black_email_address
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var blackEmailAddress = Tencentcloud.Ses.GetBlackEmailAddress.Invoke(new()
         ///     {
-        ///         var blackEmailAddress = Output.Create(Tencentcloud.Ses.GetBlackEmailAddress.InvokeAsync(new Tencentcloud.Ses.GetBlackEmailAddressArgs
-        ///         {
-        ///             EmailAddress = "xxx@mail.qcloud.com",
-        ///             EndDate = "2020-09-23",
-        ///             StartDate = "2020-09-22",
-        ///             TaskId = "7000",
-        ///         }));
-        ///     }
+        ///         EmailAddress = "xxx@mail.qcloud.com",
+        ///         EndDate = "2020-09-23",
+        ///         StartDate = "2020-09-22",
+        ///         TaskId = "7000",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetBlackEmailAddressResult> InvokeAsync(GetBlackEmailAddressArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetBlackEmailAddressResult>("tencentcloud:Ses/getBlackEmailAddress:getBlackEmailAddress", args ?? new GetBlackEmailAddressArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetBlackEmailAddressResult>("tencentcloud:Ses/getBlackEmailAddress:getBlackEmailAddress", args ?? new GetBlackEmailAddressArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of ses black_email_address
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var blackEmailAddress = Tencentcloud.Ses.GetBlackEmailAddress.Invoke(new()
         ///     {
-        ///         var blackEmailAddress = Output.Create(Tencentcloud.Ses.GetBlackEmailAddress.InvokeAsync(new Tencentcloud.Ses.GetBlackEmailAddressArgs
-        ///         {
-        ///             EmailAddress = "xxx@mail.qcloud.com",
-        ///             EndDate = "2020-09-23",
-        ///             StartDate = "2020-09-22",
-        ///             TaskId = "7000",
-        ///         }));
-        ///     }
+        ///         EmailAddress = "xxx@mail.qcloud.com",
+        ///         EndDate = "2020-09-23",
+        ///         StartDate = "2020-09-22",
+        ///         TaskId = "7000",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetBlackEmailAddressResult> Invoke(GetBlackEmailAddressInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetBlackEmailAddressResult>("tencentcloud:Ses/getBlackEmailAddress:getBlackEmailAddress", args ?? new GetBlackEmailAddressInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetBlackEmailAddressResult>("tencentcloud:Ses/getBlackEmailAddress:getBlackEmailAddress", args ?? new GetBlackEmailAddressInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetBlackEmailAddressArgs : Pulumi.InvokeArgs
+    public sealed class GetBlackEmailAddressArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// You can specify an email address to query.
@@ -113,9 +107,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ses
         public GetBlackEmailAddressArgs()
         {
         }
+        public static new GetBlackEmailAddressArgs Empty => new GetBlackEmailAddressArgs();
     }
 
-    public sealed class GetBlackEmailAddressInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetBlackEmailAddressInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// You can specify an email address to query.
@@ -150,6 +145,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ses
         public GetBlackEmailAddressInvokeArgs()
         {
         }
+        public static new GetBlackEmailAddressInvokeArgs Empty => new GetBlackEmailAddressInvokeArgs();
     }
 
 

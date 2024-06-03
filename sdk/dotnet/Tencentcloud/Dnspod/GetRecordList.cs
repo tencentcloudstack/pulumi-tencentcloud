@@ -15,118 +15,112 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dnspod
         /// <summary>
         /// Use this data source to query detailed information of dnspod record_list
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var recordList = Tencentcloud.Dnspod.GetRecordList.Invoke(new()
         ///     {
-        ///         var recordList = Output.Create(Tencentcloud.Dnspod.GetRecordList.InvokeAsync(new Tencentcloud.Dnspod.GetRecordListArgs
+        ///         Domain = "iac-tf.cloud",
+        ///         GroupIds = new() { },
+        ///         IsExactSubDomain = true,
+        ///         Keyword = "",
+        ///         MxBegin = 0,
+        ///         MxEnd = 10,
+        ///         RecordStatuses = new[]
         ///         {
-        ///             Domain = "iac-tf.cloud",
-        ///             GroupIds = {},
-        ///             IsExactSubDomain = true,
-        ///             Keyword = "",
-        ///             MxBegin = 0,
-        ///             MxEnd = 10,
-        ///             RecordStatuses = 
-        ///             {
-        ///                 "ENABLE",
-        ///             },
-        ///             RecordTypes = 
-        ///             {
-        ///                 "A",
-        ///                 "NS",
-        ///                 "CNAME",
-        ///                 "NS",
-        ///                 "AAAA",
-        ///             },
-        ///             RecordValue = "bicycle.dnspod.net",
-        ///             Remark = "",
-        ///             SortField = "UPDATED_ON",
-        ///             SortType = "DESC",
-        ///             TtlBegin = 1,
-        ///             TtlEnd = 864000,
-        ///             UpdatedAtBegin = "2021-09-07",
-        ///             UpdatedAtEnd = "2023-12-07",
-        ///             WeightBegin = 0,
-        ///             WeightEnd = 100,
-        ///         }));
-        ///     }
+        ///             "ENABLE",
+        ///         },
+        ///         RecordTypes = new[]
+        ///         {
+        ///             "A",
+        ///             "NS",
+        ///             "CNAME",
+        ///             "NS",
+        ///             "AAAA",
+        ///         },
+        ///         RecordValue = "bicycle.dnspod.net",
+        ///         Remark = "",
+        ///         SortField = "UPDATED_ON",
+        ///         SortType = "DESC",
+        ///         TtlBegin = 1,
+        ///         TtlEnd = 864000,
+        ///         UpdatedAtBegin = "2021-09-07",
+        ///         UpdatedAtEnd = "2023-12-07",
+        ///         WeightBegin = 0,
+        ///         WeightEnd = 100,
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetRecordListResult> InvokeAsync(GetRecordListArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetRecordListResult>("tencentcloud:Dnspod/getRecordList:getRecordList", args ?? new GetRecordListArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetRecordListResult>("tencentcloud:Dnspod/getRecordList:getRecordList", args ?? new GetRecordListArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of dnspod record_list
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var recordList = Tencentcloud.Dnspod.GetRecordList.Invoke(new()
         ///     {
-        ///         var recordList = Output.Create(Tencentcloud.Dnspod.GetRecordList.InvokeAsync(new Tencentcloud.Dnspod.GetRecordListArgs
+        ///         Domain = "iac-tf.cloud",
+        ///         GroupIds = new() { },
+        ///         IsExactSubDomain = true,
+        ///         Keyword = "",
+        ///         MxBegin = 0,
+        ///         MxEnd = 10,
+        ///         RecordStatuses = new[]
         ///         {
-        ///             Domain = "iac-tf.cloud",
-        ///             GroupIds = {},
-        ///             IsExactSubDomain = true,
-        ///             Keyword = "",
-        ///             MxBegin = 0,
-        ///             MxEnd = 10,
-        ///             RecordStatuses = 
-        ///             {
-        ///                 "ENABLE",
-        ///             },
-        ///             RecordTypes = 
-        ///             {
-        ///                 "A",
-        ///                 "NS",
-        ///                 "CNAME",
-        ///                 "NS",
-        ///                 "AAAA",
-        ///             },
-        ///             RecordValue = "bicycle.dnspod.net",
-        ///             Remark = "",
-        ///             SortField = "UPDATED_ON",
-        ///             SortType = "DESC",
-        ///             TtlBegin = 1,
-        ///             TtlEnd = 864000,
-        ///             UpdatedAtBegin = "2021-09-07",
-        ///             UpdatedAtEnd = "2023-12-07",
-        ///             WeightBegin = 0,
-        ///             WeightEnd = 100,
-        ///         }));
-        ///     }
+        ///             "ENABLE",
+        ///         },
+        ///         RecordTypes = new[]
+        ///         {
+        ///             "A",
+        ///             "NS",
+        ///             "CNAME",
+        ///             "NS",
+        ///             "AAAA",
+        ///         },
+        ///         RecordValue = "bicycle.dnspod.net",
+        ///         Remark = "",
+        ///         SortField = "UPDATED_ON",
+        ///         SortType = "DESC",
+        ///         TtlBegin = 1,
+        ///         TtlEnd = 864000,
+        ///         UpdatedAtBegin = "2021-09-07",
+        ///         UpdatedAtEnd = "2023-12-07",
+        ///         WeightBegin = 0,
+        ///         WeightEnd = 100,
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetRecordListResult> Invoke(GetRecordListInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetRecordListResult>("tencentcloud:Dnspod/getRecordList:getRecordList", args ?? new GetRecordListInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetRecordListResult>("tencentcloud:Dnspod/getRecordList:getRecordList", args ?? new GetRecordListInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetRecordListArgs : Pulumi.InvokeArgs
+    public sealed class GetRecordListArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// The domain to which the resolution record belongs.
@@ -293,9 +287,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dnspod
         public GetRecordListArgs()
         {
         }
+        public static new GetRecordListArgs Empty => new GetRecordListArgs();
     }
 
-    public sealed class GetRecordListInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetRecordListInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// The domain to which the resolution record belongs.
@@ -462,6 +457,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dnspod
         public GetRecordListInvokeArgs()
         {
         }
+        public static new GetRecordListInvokeArgs Empty => new GetRecordListInvokeArgs();
     }
 
 

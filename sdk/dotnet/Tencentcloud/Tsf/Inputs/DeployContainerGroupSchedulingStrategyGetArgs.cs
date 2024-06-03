@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf.Inputs
 {
 
-    public sealed class DeployContainerGroupSchedulingStrategyGetArgs : Pulumi.ResourceArgs
+    public sealed class DeployContainerGroupSchedulingStrategyGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// NONE: Do not use scheduling strategy; CROSS_AZ: Deploy across availability zones. Note: This field may return null, indicating that no valid values can be obtained.
@@ -22,5 +22,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf.Inputs
         public DeployContainerGroupSchedulingStrategyGetArgs()
         {
         }
+        public static new DeployContainerGroupSchedulingStrategyGetArgs Empty => new DeployContainerGroupSchedulingStrategyGetArgs();
     }
 }

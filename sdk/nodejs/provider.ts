@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "./types";
+import * as inputs from "./types/input";
+import * as outputs from "./types/output";
 import * as utilities from "./utilities";
 
 /**
@@ -23,7 +24,7 @@ export class Provider extends pulumi.ProviderResource {
         if (obj === undefined || obj === null) {
             return false;
         }
-        return obj['__pulumiType'] === Provider.__pulumiType;
+        return obj['__pulumiType'] === "pulumi:providers:" + Provider.__pulumiType;
     }
 
     /**
@@ -83,11 +84,13 @@ export class Provider extends pulumi.ProviderResource {
             resourceInputs["protocol"] = args ? args.protocol : undefined;
             resourceInputs["region"] = (args ? args.region : undefined) ?? utilities.getEnv("TENCENTCLOUD_REGION");
             resourceInputs["secretId"] = (args ? args.secretId : undefined) ?? utilities.getEnv("TENCENTCLOUD_SECRET_ID");
-            resourceInputs["secretKey"] = (args ? args.secretKey : undefined) ?? utilities.getEnv("TENCENTCLOUD_SECRET_KEY");
-            resourceInputs["securityToken"] = (args ? args.securityToken : undefined) ?? utilities.getEnv("TENCENTCLOUD_SECURITY_TOKEN");
+            resourceInputs["secretKey"] = (args?.secretKey ? pulumi.secret(args.secretKey) : undefined) ?? utilities.getEnv("TENCENTCLOUD_SECRET_KEY");
+            resourceInputs["securityToken"] = (args?.securityToken ? pulumi.secret(args.securityToken) : undefined) ?? utilities.getEnv("TENCENTCLOUD_SECURITY_TOKEN");
             resourceInputs["sharedCredentialsDir"] = args ? args.sharedCredentialsDir : undefined;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+        const secretOpts = { additionalSecretOutputs: ["secretKey", "securityToken"] };
+        opts = pulumi.mergeOptions(opts, secretOpts);
         super(Provider.__pulumiType, name, resourceInputs, opts);
     }
 }

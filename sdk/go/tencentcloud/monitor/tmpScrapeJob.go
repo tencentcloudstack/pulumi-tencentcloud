@@ -7,86 +7,90 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a monitor tmpScrapeJob
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"fmt"
 //
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Monitor"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Subnet"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Monitor"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Subnet"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		cfg := config.New(ctx, "")
-// 		availabilityZone := "ap-guangzhou-4"
-// 		if param := cfg.Get("availabilityZone"); param != "" {
-// 			availabilityZone = param
-// 		}
-// 		vpc, err := Vpc.NewInstance(ctx, "vpc", &Vpc.InstanceArgs{
-// 			CidrBlock: pulumi.String("10.0.0.0/16"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		subnet, err := Subnet.NewInstance(ctx, "subnet", &Subnet.InstanceArgs{
-// 			VpcId:            vpc.ID(),
-// 			AvailabilityZone: pulumi.String(availabilityZone),
-// 			CidrBlock:        pulumi.String("10.0.1.0/24"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		fooTmpInstance, err := Monitor.NewTmpInstance(ctx, "fooTmpInstance", &Monitor.TmpInstanceArgs{
-// 			InstanceName:      pulumi.String("tf-tmp-instance"),
-// 			VpcId:             vpc.ID(),
-// 			SubnetId:          subnet.ID(),
-// 			DataRetentionTime: pulumi.Int(30),
-// 			Zone:              pulumi.String(availabilityZone),
-// 			Tags: pulumi.AnyMap{
-// 				"createdBy": pulumi.Any("terraform"),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		fooTmpCvmAgent, err := Monitor.NewTmpCvmAgent(ctx, "fooTmpCvmAgent", &Monitor.TmpCvmAgentArgs{
-// 			InstanceId: fooTmpInstance.ID(),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_, err = Monitor.NewTmpScrapeJob(ctx, "fooTmpScrapeJob", &Monitor.TmpScrapeJobArgs{
-// 			InstanceId: fooTmpInstance.ID(),
-// 			AgentId:    fooTmpCvmAgent.AgentId,
-// 			Config:     pulumi.String(fmt.Sprintf("%v%v%v%v", "job_name: demo-config\n", "honor_timestamps: true\n", "metrics_path: /metrics\n", "scheme: https\n")),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			cfg := config.New(ctx, "")
+//			availabilityZone := "ap-guangzhou-4"
+//			if param := cfg.Get("availabilityZone"); param != "" {
+//				availabilityZone = param
+//			}
+//			vpc, err := Vpc.NewInstance(ctx, "vpc", &Vpc.InstanceArgs{
+//				CidrBlock: pulumi.String("10.0.0.0/16"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			subnet, err := Subnet.NewInstance(ctx, "subnet", &Subnet.InstanceArgs{
+//				VpcId:            vpc.ID(),
+//				AvailabilityZone: pulumi.String(availabilityZone),
+//				CidrBlock:        pulumi.String("10.0.1.0/24"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			fooTmpInstance, err := Monitor.NewTmpInstance(ctx, "fooTmpInstance", &Monitor.TmpInstanceArgs{
+//				InstanceName:      pulumi.String("tf-tmp-instance"),
+//				VpcId:             vpc.ID(),
+//				SubnetId:          subnet.ID(),
+//				DataRetentionTime: pulumi.Int(30),
+//				Zone:              pulumi.String(availabilityZone),
+//				Tags: pulumi.Map{
+//					"createdBy": pulumi.Any("terraform"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			fooTmpCvmAgent, err := Monitor.NewTmpCvmAgent(ctx, "fooTmpCvmAgent", &Monitor.TmpCvmAgentArgs{
+//				InstanceId: fooTmpInstance.ID(),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_, err = Monitor.NewTmpScrapeJob(ctx, "fooTmpScrapeJob", &Monitor.TmpScrapeJobArgs{
+//				InstanceId: fooTmpInstance.ID(),
+//				AgentId:    fooTmpCvmAgent.AgentId,
+//				Config:     pulumi.String("job_name: demo-config\nhonor_timestamps: true\nmetrics_path: /metrics\nscheme: https\n"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // monitor tmpScrapeJob can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Monitor/tmpScrapeJob:TmpScrapeJob tmpScrapeJob tmpScrapeJob_id
+// $ pulumi import tencentcloud:Monitor/tmpScrapeJob:TmpScrapeJob tmpScrapeJob tmpScrapeJob_id
 // ```
 type TmpScrapeJob struct {
 	pulumi.CustomResourceState
@@ -112,7 +116,7 @@ func NewTmpScrapeJob(ctx *pulumi.Context,
 	if args.InstanceId == nil {
 		return nil, errors.New("invalid value for required argument 'InstanceId'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource TmpScrapeJob
 	err := ctx.RegisterResource("tencentcloud:Monitor/tmpScrapeJob:TmpScrapeJob", name, args, &resource, opts...)
 	if err != nil {
@@ -201,7 +205,7 @@ func (i *TmpScrapeJob) ToTmpScrapeJobOutputWithContext(ctx context.Context) TmpS
 // TmpScrapeJobArrayInput is an input type that accepts TmpScrapeJobArray and TmpScrapeJobArrayOutput values.
 // You can construct a concrete instance of `TmpScrapeJobArrayInput` via:
 //
-//          TmpScrapeJobArray{ TmpScrapeJobArgs{...} }
+//	TmpScrapeJobArray{ TmpScrapeJobArgs{...} }
 type TmpScrapeJobArrayInput interface {
 	pulumi.Input
 
@@ -226,7 +230,7 @@ func (i TmpScrapeJobArray) ToTmpScrapeJobArrayOutputWithContext(ctx context.Cont
 // TmpScrapeJobMapInput is an input type that accepts TmpScrapeJobMap and TmpScrapeJobMapOutput values.
 // You can construct a concrete instance of `TmpScrapeJobMapInput` via:
 //
-//          TmpScrapeJobMap{ "key": TmpScrapeJobArgs{...} }
+//	TmpScrapeJobMap{ "key": TmpScrapeJobArgs{...} }
 type TmpScrapeJobMapInput interface {
 	pulumi.Input
 

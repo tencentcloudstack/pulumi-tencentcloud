@@ -8,11 +8,45 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Use this data source to query detailed information of mariadb dbInstances
+//
+// ## Example Usage
+//
+// <!--Start PulumiCodeChooser -->
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Mariadb"
+//
+// )
+// func main() {
+// pulumi.Run(func(ctx *pulumi.Context) error {
+// _, err := Mariadb.GetDbInstances(ctx, &mariadb.GetDbInstancesArgs{
+// InstanceIds: []string{
+// "tdsql-ijxtqk5p",
+// },
+// ProjectIds: interface{}{
+// 0,
+// },
+// SubnetId: pulumi.StringRef("3454730"),
+// VpcId: pulumi.StringRef("5556791"),
+// }, nil);
+// if err != nil {
+// return err
+// }
+// return nil
+// })
+// }
+// ```
+// <!--End PulumiCodeChooser -->
 func GetDbInstances(ctx *pulumi.Context, args *GetDbInstancesArgs, opts ...pulumi.InvokeOption) (*GetDbInstancesResult, error) {
-	opts = pkgInvokeDefaultOpts(opts)
+	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetDbInstancesResult
 	err := ctx.Invoke("tencentcloud:Mariadb/getDbInstances:getDbInstances", args, &rv, opts...)
 	if err != nil {

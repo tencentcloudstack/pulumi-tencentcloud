@@ -9,22 +9,24 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const foo = new tencentcloud.Ci.OriginalImageProtection("foo", {
+ * const foo = new tencentcloud.ci.OriginalImageProtection("foo", {
  *     bucket: "examplebucket-1250000000",
  *     status: "on",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * Resource original image protection can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Ci/originalImageProtection:OriginalImageProtection example examplebucket-1250000000
+ * $ pulumi import tencentcloud:Ci/originalImageProtection:OriginalImageProtection example examplebucket-1250000000
  * ```
  */
 export class OriginalImageProtection extends pulumi.CustomResource {

@@ -15,39 +15,47 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dasb
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var exampleDevice = new Tencentcloud.Dasb.Device("exampleDevice", new()
     ///     {
-    ///         var example = new Tencentcloud.Dasb.DeviceGroupMembers("example", new Tencentcloud.Dasb.DeviceGroupMembersArgs
-    ///         {
-    ///             DeviceGroupId = 3,
-    ///             MemberIdSets = 
-    ///             {
-    ///                 1,
-    ///                 2,
-    ///                 3,
-    ///             },
-    ///         });
-    ///     }
+    ///         OsName = "Linux",
+    ///         Ip = "192.168.0.1",
+    ///         Port = 80,
+    ///     });
     /// 
-    /// }
+    ///     var exampleDeviceGroup = new Tencentcloud.Dasb.DeviceGroup("exampleDeviceGroup");
+    /// 
+    ///     var exampleDeviceGroupMembers = new Tencentcloud.Dasb.DeviceGroupMembers("exampleDeviceGroupMembers", new()
+    ///     {
+    ///         DeviceGroupId = exampleDeviceGroup.Id,
+    ///         MemberIdSets = new[]
+    ///         {
+    ///             exampleDevice.Id,
+    ///         },
+    ///     });
+    /// 
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// dasb device_group_members can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Dasb/deviceGroupMembers:DeviceGroupMembers example 3#1,2,3
+    /// $ pulumi import tencentcloud:Dasb/deviceGroupMembers:DeviceGroupMembers example 53#102
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Dasb/deviceGroupMembers:DeviceGroupMembers")]
-    public partial class DeviceGroupMembers : Pulumi.CustomResource
+    public partial class DeviceGroupMembers : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Device Group ID.
@@ -106,7 +114,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dasb
         }
     }
 
-    public sealed class DeviceGroupMembersArgs : Pulumi.ResourceArgs
+    public sealed class DeviceGroupMembersArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Device Group ID.
@@ -129,9 +137,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dasb
         public DeviceGroupMembersArgs()
         {
         }
+        public static new DeviceGroupMembersArgs Empty => new DeviceGroupMembersArgs();
     }
 
-    public sealed class DeviceGroupMembersState : Pulumi.ResourceArgs
+    public sealed class DeviceGroupMembersState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Device Group ID.
@@ -154,5 +163,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dasb
         public DeviceGroupMembersState()
         {
         }
+        public static new DeviceGroupMembersState Empty => new DeviceGroupMembersState();
     }
 }

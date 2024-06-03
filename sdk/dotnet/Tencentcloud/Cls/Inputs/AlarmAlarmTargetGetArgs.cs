@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls.Inputs
 {
 
-    public sealed class AlarmAlarmTargetGetArgs : Pulumi.ResourceArgs
+    public sealed class AlarmAlarmTargetGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// search end time of offset.
@@ -52,5 +52,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls.Inputs
         public AlarmAlarmTargetGetArgs()
         {
         }
+        public static new AlarmAlarmTargetGetArgs Empty => new AlarmAlarmTargetGetArgs();
     }
 }

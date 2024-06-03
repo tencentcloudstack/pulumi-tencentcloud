@@ -9,22 +9,24 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const downloadCertificate = new tencentcloud.Ssl.DownloadCertificateOperation("download_certificate", {
+ * const downloadCertificate = new tencentcloud.ssl.DownloadCertificateOperation("downloadCertificate", {
  *     certificateId: "8x1eUSSl",
  *     outputPath: "./",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * ssl download_certificate can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Ssl/downloadCertificateOperation:DownloadCertificateOperation download_certificate download_certificate_id
+ * $ pulumi import tencentcloud:Ssl/downloadCertificateOperation:DownloadCertificateOperation download_certificate download_certificate_id
  * ```
  */
 export class DownloadCertificateOperation extends pulumi.CustomResource {

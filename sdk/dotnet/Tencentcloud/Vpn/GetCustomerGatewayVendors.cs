@@ -15,58 +15,52 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpn
         /// <summary>
         /// Use this data source to query detailed information of vpc vpn_customer_gateway_vendors
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
-        ///     {
-        ///         var vpnCustomerGatewayVendors = Output.Create(Tencentcloud.Vpn.GetCustomerGatewayVendors.InvokeAsync());
-        ///     }
+        ///     var vpnCustomerGatewayVendors = Tencentcloud.Vpn.GetCustomerGatewayVendors.Invoke();
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetCustomerGatewayVendorsResult> InvokeAsync(GetCustomerGatewayVendorsArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetCustomerGatewayVendorsResult>("tencentcloud:Vpn/getCustomerGatewayVendors:getCustomerGatewayVendors", args ?? new GetCustomerGatewayVendorsArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetCustomerGatewayVendorsResult>("tencentcloud:Vpn/getCustomerGatewayVendors:getCustomerGatewayVendors", args ?? new GetCustomerGatewayVendorsArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of vpc vpn_customer_gateway_vendors
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
-        ///     {
-        ///         var vpnCustomerGatewayVendors = Output.Create(Tencentcloud.Vpn.GetCustomerGatewayVendors.InvokeAsync());
-        ///     }
+        ///     var vpnCustomerGatewayVendors = Tencentcloud.Vpn.GetCustomerGatewayVendors.Invoke();
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetCustomerGatewayVendorsResult> Invoke(GetCustomerGatewayVendorsInvokeArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetCustomerGatewayVendorsResult>("tencentcloud:Vpn/getCustomerGatewayVendors:getCustomerGatewayVendors", args ?? new GetCustomerGatewayVendorsInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetCustomerGatewayVendorsResult>("tencentcloud:Vpn/getCustomerGatewayVendors:getCustomerGatewayVendors", args ?? new GetCustomerGatewayVendorsInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetCustomerGatewayVendorsArgs : Pulumi.InvokeArgs
+    public sealed class GetCustomerGatewayVendorsArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Used to save results.
@@ -77,9 +71,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpn
         public GetCustomerGatewayVendorsArgs()
         {
         }
+        public static new GetCustomerGatewayVendorsArgs Empty => new GetCustomerGatewayVendorsArgs();
     }
 
-    public sealed class GetCustomerGatewayVendorsInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetCustomerGatewayVendorsInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Used to save results.
@@ -90,6 +85,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpn
         public GetCustomerGatewayVendorsInvokeArgs()
         {
         }
+        public static new GetCustomerGatewayVendorsInvokeArgs Empty => new GetCustomerGatewayVendorsInvokeArgs();
     }
 
 

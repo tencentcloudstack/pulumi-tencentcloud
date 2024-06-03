@@ -7,404 +7,459 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a CLB instance.
 //
 // ## Example Usage
+//
 // ### INTERNAL CLB
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Clb"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Clb"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Clb.NewInstance(ctx, "internalClb", &Clb.InstanceArgs{
-// 			ClbName:     pulumi.String("myclb"),
-// 			NetworkType: pulumi.String("INTERNAL"),
-// 			ProjectId:   pulumi.Int(0),
-// 			SubnetId:    pulumi.String("subnet-12rastkr"),
-// 			Tags: pulumi.AnyMap{
-// 				"test": pulumi.Any("tf"),
-// 			},
-// 			VpcId: pulumi.String("vpc-7007ll7q"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Clb.NewInstance(ctx, "internalClb", &Clb.InstanceArgs{
+//				ClbName:     pulumi.String("myclb"),
+//				NetworkType: pulumi.String("INTERNAL"),
+//				ProjectId:   pulumi.Int(0),
+//				SubnetId:    pulumi.String("subnet-12rastkr"),
+//				Tags: pulumi.Map{
+//					"test": pulumi.Any("tf"),
+//				},
+//				VpcId: pulumi.String("vpc-7007ll7q"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
+//
 // ### LCU-supported CLB
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Clb"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Clb"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Clb.NewInstance(ctx, "internalClb", &Clb.InstanceArgs{
-// 			ClbName:     pulumi.String("myclb"),
-// 			NetworkType: pulumi.String("INTERNAL"),
-// 			ProjectId:   pulumi.Int(0),
-// 			SlaType:     pulumi.String("clb.c3.medium"),
-// 			SubnetId:    pulumi.String("subnet-o3a5nt20"),
-// 			Tags: pulumi.AnyMap{
-// 				"test": pulumi.Any("tf"),
-// 			},
-// 			VpcId: pulumi.String("vpc-2hfyray3"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Clb.NewInstance(ctx, "internalClb", &Clb.InstanceArgs{
+//				ClbName:     pulumi.String("myclb"),
+//				NetworkType: pulumi.String("INTERNAL"),
+//				ProjectId:   pulumi.Int(0),
+//				SlaType:     pulumi.String("clb.c3.medium"),
+//				SubnetId:    pulumi.String("subnet-o3a5nt20"),
+//				Tags: pulumi.Map{
+//					"test": pulumi.Any("tf"),
+//				},
+//				VpcId: pulumi.String("vpc-2hfyray3"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
+//
 // ### OPEN CLB
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Clb"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Clb"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Clb.NewInstance(ctx, "openClb", &Clb.InstanceArgs{
-// 			ClbName:     pulumi.String("myclb"),
-// 			NetworkType: pulumi.String("OPEN"),
-// 			ProjectId:   pulumi.Int(0),
-// 			SecurityGroups: pulumi.StringArray{
-// 				pulumi.String("sg-o0ek7r93"),
-// 			},
-// 			Tags: pulumi.AnyMap{
-// 				"test": pulumi.Any("tf"),
-// 			},
-// 			TargetRegionInfoRegion: pulumi.String("ap-guangzhou"),
-// 			TargetRegionInfoVpcId:  pulumi.String("vpc-da7ffa61"),
-// 			VpcId:                  pulumi.String("vpc-da7ffa61"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Clb.NewInstance(ctx, "openClb", &Clb.InstanceArgs{
+//				ClbName:     pulumi.String("myclb"),
+//				NetworkType: pulumi.String("OPEN"),
+//				ProjectId:   pulumi.Int(0),
+//				SecurityGroups: pulumi.StringArray{
+//					pulumi.String("sg-o0ek7r93"),
+//				},
+//				Tags: pulumi.Map{
+//					"test": pulumi.Any("tf"),
+//				},
+//				TargetRegionInfoRegion: pulumi.String("ap-guangzhou"),
+//				TargetRegionInfoVpcId:  pulumi.String("vpc-da7ffa61"),
+//				VpcId:                  pulumi.String("vpc-da7ffa61"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
+//
 // ### OPNE CLB with VipIsp
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Clb"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Clb"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		example, err := Vpc.NewBandwidthPackage(ctx, "example", &Vpc.BandwidthPackageArgs{
-// 			NetworkType:          pulumi.String("SINGLEISP_CMCC"),
-// 			ChargeType:           pulumi.String("ENHANCED95_POSTPAID_BY_MONTH"),
-// 			BandwidthPackageName: pulumi.String("tf-example"),
-// 			InternetMaxBandwidth: pulumi.Int(300),
-// 			Egress:               pulumi.String("center_egress1"),
-// 			Tags: pulumi.AnyMap{
-// 				"createdBy": pulumi.Any("terraform"),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_, err = Clb.NewInstance(ctx, "openClb", &Clb.InstanceArgs{
-// 			NetworkType:        pulumi.String("OPEN"),
-// 			ClbName:            pulumi.String("my-open-clb"),
-// 			ProjectId:          pulumi.Int(0),
-// 			VpcId:              pulumi.String("vpc-4owdpnwr"),
-// 			VipIsp:             pulumi.String("CMCC"),
-// 			InternetChargeType: pulumi.String("BANDWIDTH_PACKAGE"),
-// 			BandwidthPackageId: example.ID(),
-// 			Tags: pulumi.AnyMap{
-// 				"test": pulumi.Any("open"),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			example, err := Vpc.NewBandwidthPackage(ctx, "example", &Vpc.BandwidthPackageArgs{
+//				NetworkType:          pulumi.String("SINGLEISP_CMCC"),
+//				ChargeType:           pulumi.String("ENHANCED95_POSTPAID_BY_MONTH"),
+//				BandwidthPackageName: pulumi.String("tf-example"),
+//				InternetMaxBandwidth: pulumi.Int(300),
+//				Egress:               pulumi.String("center_egress1"),
+//				Tags: pulumi.Map{
+//					"createdBy": pulumi.Any("terraform"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_, err = Clb.NewInstance(ctx, "openClb", &Clb.InstanceArgs{
+//				NetworkType:        pulumi.String("OPEN"),
+//				ClbName:            pulumi.String("my-open-clb"),
+//				ProjectId:          pulumi.Int(0),
+//				VpcId:              pulumi.String("vpc-4owdpnwr"),
+//				VipIsp:             pulumi.String("CMCC"),
+//				InternetChargeType: pulumi.String("BANDWIDTH_PACKAGE"),
+//				BandwidthPackageId: example.ID(),
+//				Tags: pulumi.Map{
+//					"test": pulumi.Any("open"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
+//
 // ### Dynamic Vip Instance
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Clb"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Security"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Clb"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Security"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		fooGroup, err := Security.NewGroup(ctx, "fooGroup", nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		fooInstance, err := Vpc.NewInstance(ctx, "fooInstance", &Vpc.InstanceArgs{
-// 			CidrBlock: pulumi.String("10.0.0.0/16"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		clbOpen, err := Clb.NewInstance(ctx, "clbOpen", &Clb.InstanceArgs{
-// 			NetworkType:            pulumi.String("OPEN"),
-// 			ClbName:                pulumi.String("clb-instance-open"),
-// 			ProjectId:              pulumi.Int(0),
-// 			VpcId:                  fooInstance.ID(),
-// 			TargetRegionInfoRegion: pulumi.String("ap-guangzhou"),
-// 			TargetRegionInfoVpcId:  fooInstance.ID(),
-// 			SecurityGroups: pulumi.StringArray{
-// 				fooGroup.ID(),
-// 			},
-// 			DynamicVip: pulumi.Bool(true),
-// 			Tags: pulumi.AnyMap{
-// 				"test": pulumi.Any("tf"),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		ctx.Export("domain", clbOpen.Domain)
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			fooGroup, err := Security.NewGroup(ctx, "fooGroup", nil)
+//			if err != nil {
+//				return err
+//			}
+//			fooInstance, err := Vpc.NewInstance(ctx, "fooInstance", &Vpc.InstanceArgs{
+//				CidrBlock: pulumi.String("10.0.0.0/16"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			clbOpen, err := Clb.NewInstance(ctx, "clbOpen", &Clb.InstanceArgs{
+//				NetworkType:            pulumi.String("OPEN"),
+//				ClbName:                pulumi.String("clb-instance-open"),
+//				ProjectId:              pulumi.Int(0),
+//				VpcId:                  fooInstance.ID(),
+//				TargetRegionInfoRegion: pulumi.String("ap-guangzhou"),
+//				TargetRegionInfoVpcId:  fooInstance.ID(),
+//				SecurityGroups: pulumi.StringArray{
+//					fooGroup.ID(),
+//				},
+//				DynamicVip: pulumi.Bool(true),
+//				Tags: pulumi.Map{
+//					"test": pulumi.Any("tf"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			ctx.Export("domain", clbOpen.Domain)
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
+//
 // ### Specified  Vip Instance
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Clb"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Security"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Clb"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Security"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		fooGroup, err := Security.NewGroup(ctx, "fooGroup", nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		fooInstance, err := Vpc.NewInstance(ctx, "fooInstance", &Vpc.InstanceArgs{
-// 			CidrBlock: pulumi.String("10.0.0.0/16"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_, err = Clb.NewInstance(ctx, "clbOpen", &Clb.InstanceArgs{
-// 			NetworkType: pulumi.String("OPEN"),
-// 			ClbName:     pulumi.String("clb-instance-open"),
-// 			ProjectId:   pulumi.Int(0),
-// 			VpcId:       fooInstance.ID(),
-// 			SecurityGroups: pulumi.StringArray{
-// 				fooGroup.ID(),
-// 			},
-// 			Vip: pulumi.String("111.230.4.204"),
-// 			Tags: pulumi.AnyMap{
-// 				"test": pulumi.Any("tf"),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		ctx.Export("domain", tencentcloud_clb_instance.Vip)
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			fooGroup, err := Security.NewGroup(ctx, "fooGroup", nil)
+//			if err != nil {
+//				return err
+//			}
+//			fooInstance, err := Vpc.NewInstance(ctx, "fooInstance", &Vpc.InstanceArgs{
+//				CidrBlock: pulumi.String("10.0.0.0/16"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_, err = Clb.NewInstance(ctx, "clbOpen", &Clb.InstanceArgs{
+//				NetworkType: pulumi.String("OPEN"),
+//				ClbName:     pulumi.String("clb-instance-open"),
+//				ProjectId:   pulumi.Int(0),
+//				VpcId:       fooInstance.ID(),
+//				SecurityGroups: pulumi.StringArray{
+//					fooGroup.ID(),
+//				},
+//				Vip: pulumi.String("111.230.4.204"),
+//				Tags: pulumi.Map{
+//					"test": pulumi.Any("tf"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			ctx.Export("domain", tencentcloud_clb_instance.Vip)
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
+//
 // ### Default enable
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Clb"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Security"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Subnet"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Clb"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Security"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Subnet"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		foo, err := Vpc.NewInstance(ctx, "foo", &Vpc.InstanceArgs{
-// 			CidrBlock: pulumi.String("10.0.0.0/16"),
-// 			Tags: pulumi.AnyMap{
-// 				"test": pulumi.Any("mytest"),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_, err = Subnet.NewInstance(ctx, "subnet", &Subnet.InstanceArgs{
-// 			AvailabilityZone: pulumi.String("ap-guangzhou-1"),
-// 			VpcId:            foo.ID(),
-// 			CidrBlock:        pulumi.String("10.0.20.0/28"),
-// 			IsMulticast:      pulumi.Bool(false),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		sglab, err := Security.NewGroup(ctx, "sglab", &Security.GroupArgs{
-// 			Description: pulumi.String("favourite sg"),
-// 			ProjectId:   pulumi.Int(0),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_, err = Clb.NewInstance(ctx, "openClb", &Clb.InstanceArgs{
-// 			NetworkType:              pulumi.String("OPEN"),
-// 			ClbName:                  pulumi.String("my-open-clb"),
-// 			ProjectId:                pulumi.Int(0),
-// 			VpcId:                    foo.ID(),
-// 			LoadBalancerPassToTarget: pulumi.Bool(true),
-// 			SecurityGroups: pulumi.StringArray{
-// 				sglab.ID(),
-// 			},
-// 			TargetRegionInfoRegion: pulumi.String("ap-guangzhou"),
-// 			TargetRegionInfoVpcId:  foo.ID(),
-// 			Tags: pulumi.AnyMap{
-// 				"test": pulumi.Any("open"),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			foo, err := Vpc.NewInstance(ctx, "foo", &Vpc.InstanceArgs{
+//				CidrBlock: pulumi.String("10.0.0.0/16"),
+//				Tags: pulumi.Map{
+//					"test": pulumi.Any("mytest"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_, err = Subnet.NewInstance(ctx, "subnet", &Subnet.InstanceArgs{
+//				AvailabilityZone: pulumi.String("ap-guangzhou-1"),
+//				VpcId:            foo.ID(),
+//				CidrBlock:        pulumi.String("10.0.20.0/28"),
+//				IsMulticast:      pulumi.Bool(false),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			sglab, err := Security.NewGroup(ctx, "sglab", &Security.GroupArgs{
+//				Description: pulumi.String("favourite sg"),
+//				ProjectId:   pulumi.Int(0),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_, err = Clb.NewInstance(ctx, "openClb", &Clb.InstanceArgs{
+//				NetworkType:              pulumi.String("OPEN"),
+//				ClbName:                  pulumi.String("my-open-clb"),
+//				ProjectId:                pulumi.Int(0),
+//				VpcId:                    foo.ID(),
+//				LoadBalancerPassToTarget: pulumi.Bool(true),
+//				SecurityGroups: pulumi.StringArray{
+//					sglab.ID(),
+//				},
+//				TargetRegionInfoRegion: pulumi.String("ap-guangzhou"),
+//				TargetRegionInfoVpcId:  foo.ID(),
+//				Tags: pulumi.Map{
+//					"test": pulumi.Any("open"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
+//
 // ### CREATE multiple instance
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Clb"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Clb"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Clb.NewInstance(ctx, "openClb1", &Clb.InstanceArgs{
-// 			ClbName:      pulumi.String("hello"),
-// 			MasterZoneId: pulumi.String("ap-guangzhou-3"),
-// 			NetworkType:  pulumi.String("OPEN"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Clb.NewInstance(ctx, "openClb1", &Clb.InstanceArgs{
+//				ClbName:      pulumi.String("hello"),
+//				MasterZoneId: pulumi.String("ap-guangzhou-3"),
+//				NetworkType:  pulumi.String("OPEN"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
+//
 // ### CREATE instance with log
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Clb"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Route"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Subnet"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Clb"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Route"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Subnet"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		vpcTest, err := Vpc.NewInstance(ctx, "vpcTest", &Vpc.InstanceArgs{
-// 			CidrBlock: pulumi.String("10.0.0.0/16"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		rtbTest, err := Route.NewTable(ctx, "rtbTest", &Route.TableArgs{
-// 			VpcId: vpcTest.ID(),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		subnetTest, err := Subnet.NewInstance(ctx, "subnetTest", &Subnet.InstanceArgs{
-// 			AvailabilityZone: pulumi.String("ap-guangzhou-3"),
-// 			CidrBlock:        pulumi.String("10.0.1.0/24"),
-// 			RouteTableId:     rtbTest.ID(),
-// 			VpcId:            vpcTest.ID(),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		set, err := Clb.NewLogSet(ctx, "set", &Clb.LogSetArgs{
-// 			Period: pulumi.Int(7),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		topic, err := Clb.NewLogTopic(ctx, "topic", &Clb.LogTopicArgs{
-// 			LogSetId:  set.ID(),
-// 			TopicName: pulumi.String("clb-topic"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_, err = Clb.NewInstance(ctx, "internalClb", &Clb.InstanceArgs{
-// 			ClbName:                  pulumi.String("myclb"),
-// 			LoadBalancerPassToTarget: pulumi.Bool(true),
-// 			LogSetId:                 set.ID(),
-// 			LogTopicId:               topic.ID(),
-// 			NetworkType:              pulumi.String("INTERNAL"),
-// 			ProjectId:                pulumi.Int(0),
-// 			SubnetId:                 subnetTest.ID(),
-// 			Tags: pulumi.AnyMap{
-// 				"test": pulumi.Any("tf"),
-// 			},
-// 			VpcId: vpcTest.ID(),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			vpcTest, err := Vpc.NewInstance(ctx, "vpcTest", &Vpc.InstanceArgs{
+//				CidrBlock: pulumi.String("10.0.0.0/16"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			rtbTest, err := Route.NewTable(ctx, "rtbTest", &Route.TableArgs{
+//				VpcId: vpcTest.ID(),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			subnetTest, err := Subnet.NewInstance(ctx, "subnetTest", &Subnet.InstanceArgs{
+//				AvailabilityZone: pulumi.String("ap-guangzhou-3"),
+//				CidrBlock:        pulumi.String("10.0.1.0/24"),
+//				RouteTableId:     rtbTest.ID(),
+//				VpcId:            vpcTest.ID(),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			set, err := Clb.NewLogSet(ctx, "set", &Clb.LogSetArgs{
+//				Period: pulumi.Int(7),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			topic, err := Clb.NewLogTopic(ctx, "topic", &Clb.LogTopicArgs{
+//				LogSetId:  set.ID(),
+//				TopicName: pulumi.String("clb-topic"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_, err = Clb.NewInstance(ctx, "internalClb", &Clb.InstanceArgs{
+//				ClbName:                  pulumi.String("myclb"),
+//				LoadBalancerPassToTarget: pulumi.Bool(true),
+//				LogSetId:                 set.ID(),
+//				LogTopicId:               topic.ID(),
+//				NetworkType:              pulumi.String("INTERNAL"),
+//				ProjectId:                pulumi.Int(0),
+//				SubnetId:                 subnetTest.ID(),
+//				Tags: pulumi.Map{
+//					"test": pulumi.Any("tf"),
+//				},
+//				VpcId: vpcTest.ID(),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // CLB instance can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Clb/instance:Instance foo lb-7a0t6zqb
+// $ pulumi import tencentcloud:Clb/instance:Instance foo lb-7a0t6zqb
 // ```
 type Instance struct {
 	pulumi.CustomResourceState
@@ -449,7 +504,7 @@ type Instance struct {
 	SnatIps InstanceSnatIpArrayOutput `pulumi:"snatIps"`
 	// Indicates whether Binding IPs of other VPCs feature switch.
 	SnatPro pulumi.BoolPtrOutput `pulumi:"snatPro"`
-	// Subnet ID of the CLB. Effective only for CLB within the VPC. Only supports `INTERNAL` CLBs. Default is `ipv4`.
+	// In the case of purchasing a `INTERNAL` clb instance, the subnet id must be specified. The VIP of the `INTERNAL` clb instance will be generated from this subnet.
 	SubnetId pulumi.StringPtrOutput `pulumi:"subnetId"`
 	// The available tags within this CLB.
 	Tags pulumi.MapOutput `pulumi:"tags"`
@@ -480,7 +535,7 @@ func NewInstance(ctx *pulumi.Context,
 	if args.NetworkType == nil {
 		return nil, errors.New("invalid value for required argument 'NetworkType'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource Instance
 	err := ctx.RegisterResource("tencentcloud:Clb/instance:Instance", name, args, &resource, opts...)
 	if err != nil {
@@ -543,7 +598,7 @@ type instanceState struct {
 	SnatIps []InstanceSnatIp `pulumi:"snatIps"`
 	// Indicates whether Binding IPs of other VPCs feature switch.
 	SnatPro *bool `pulumi:"snatPro"`
-	// Subnet ID of the CLB. Effective only for CLB within the VPC. Only supports `INTERNAL` CLBs. Default is `ipv4`.
+	// In the case of purchasing a `INTERNAL` clb instance, the subnet id must be specified. The VIP of the `INTERNAL` clb instance will be generated from this subnet.
 	SubnetId *string `pulumi:"subnetId"`
 	// The available tags within this CLB.
 	Tags map[string]interface{} `pulumi:"tags"`
@@ -602,7 +657,7 @@ type InstanceState struct {
 	SnatIps InstanceSnatIpArrayInput
 	// Indicates whether Binding IPs of other VPCs feature switch.
 	SnatPro pulumi.BoolPtrInput
-	// Subnet ID of the CLB. Effective only for CLB within the VPC. Only supports `INTERNAL` CLBs. Default is `ipv4`.
+	// In the case of purchasing a `INTERNAL` clb instance, the subnet id must be specified. The VIP of the `INTERNAL` clb instance will be generated from this subnet.
 	SubnetId pulumi.StringPtrInput
 	// The available tags within this CLB.
 	Tags pulumi.MapInput
@@ -661,7 +716,7 @@ type instanceArgs struct {
 	SnatIps []InstanceSnatIp `pulumi:"snatIps"`
 	// Indicates whether Binding IPs of other VPCs feature switch.
 	SnatPro *bool `pulumi:"snatPro"`
-	// Subnet ID of the CLB. Effective only for CLB within the VPC. Only supports `INTERNAL` CLBs. Default is `ipv4`.
+	// In the case of purchasing a `INTERNAL` clb instance, the subnet id must be specified. The VIP of the `INTERNAL` clb instance will be generated from this subnet.
 	SubnetId *string `pulumi:"subnetId"`
 	// The available tags within this CLB.
 	Tags map[string]interface{} `pulumi:"tags"`
@@ -717,7 +772,7 @@ type InstanceArgs struct {
 	SnatIps InstanceSnatIpArrayInput
 	// Indicates whether Binding IPs of other VPCs feature switch.
 	SnatPro pulumi.BoolPtrInput
-	// Subnet ID of the CLB. Effective only for CLB within the VPC. Only supports `INTERNAL` CLBs. Default is `ipv4`.
+	// In the case of purchasing a `INTERNAL` clb instance, the subnet id must be specified. The VIP of the `INTERNAL` clb instance will be generated from this subnet.
 	SubnetId pulumi.StringPtrInput
 	// The available tags within this CLB.
 	Tags pulumi.MapInput
@@ -761,7 +816,7 @@ func (i *Instance) ToInstanceOutputWithContext(ctx context.Context) InstanceOutp
 // InstanceArrayInput is an input type that accepts InstanceArray and InstanceArrayOutput values.
 // You can construct a concrete instance of `InstanceArrayInput` via:
 //
-//          InstanceArray{ InstanceArgs{...} }
+//	InstanceArray{ InstanceArgs{...} }
 type InstanceArrayInput interface {
 	pulumi.Input
 
@@ -786,7 +841,7 @@ func (i InstanceArray) ToInstanceArrayOutputWithContext(ctx context.Context) Ins
 // InstanceMapInput is an input type that accepts InstanceMap and InstanceMapOutput values.
 // You can construct a concrete instance of `InstanceMapInput` via:
 //
-//          InstanceMap{ "key": InstanceArgs{...} }
+//	InstanceMap{ "key": InstanceArgs{...} }
 type InstanceMapInput interface {
 	pulumi.Input
 
@@ -922,7 +977,7 @@ func (o InstanceOutput) SnatPro() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *Instance) pulumi.BoolPtrOutput { return v.SnatPro }).(pulumi.BoolPtrOutput)
 }
 
-// Subnet ID of the CLB. Effective only for CLB within the VPC. Only supports `INTERNAL` CLBs. Default is `ipv4`.
+// In the case of purchasing a `INTERNAL` clb instance, the subnet id must be specified. The VIP of the `INTERNAL` clb instance will be generated from this subnet.
 func (o InstanceOutput) SubnetId() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *Instance) pulumi.StringPtrOutput { return v.SubnetId }).(pulumi.StringPtrOutput)
 }

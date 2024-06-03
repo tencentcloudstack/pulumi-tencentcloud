@@ -7,11 +7,149 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a as stopInstances
+//
+// ## Example Usage
+//
+// <!--Start PulumiCodeChooser -->
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/As"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Availability"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Images"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Instance"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Subnet"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+//
+// )
+// func main() {
+// pulumi.Run(func(ctx *pulumi.Context) error {
+// zones, err := Availability.GetZonesByProduct(ctx, &availability.GetZonesByProductArgs{
+// Product: "as",
+// }, nil);
+// if err != nil {
+// return err
+// }
+// image, err := Images.GetInstance(ctx, &images.GetInstanceArgs{
+// ImageTypes: []string{
+// "PUBLIC_IMAGE",
+// },
+// OsName: pulumi.StringRef("TencentOS Server 3.2 (Final)"),
+// }, nil);
+// if err != nil {
+// return err
+// }
+// instanceTypes, err := Instance.GetTypes(ctx, &instance.GetTypesArgs{
+// Filters: []instance.GetTypesFilter{
+// {
+// Name: "zone",
+// Values: interface{}{
+// zones.Zones[0].Name,
+// },
+// },
+// {
+// Name: "instance-family",
+// Values: []string{
+// "S5",
+// },
+// },
+// },
+// CpuCoreCount: pulumi.IntRef(2),
+// ExcludeSoldOut: pulumi.BoolRef(true),
+// }, nil);
+// if err != nil {
+// return err
+// }
+// vpc, err := Vpc.NewInstance(ctx, "vpc", &Vpc.InstanceArgs{
+// CidrBlock: pulumi.String("10.0.0.0/16"),
+// })
+// if err != nil {
+// return err
+// }
+// subnet, err := Subnet.NewInstance(ctx, "subnet", &Subnet.InstanceArgs{
+// VpcId: vpc.ID(),
+// CidrBlock: pulumi.String("10.0.0.0/16"),
+// AvailabilityZone: pulumi.String(zones.Zones[0].Name),
+// })
+// if err != nil {
+// return err
+// }
+// exampleScalingConfig, err := As.NewScalingConfig(ctx, "exampleScalingConfig", &As.ScalingConfigArgs{
+// ConfigurationName: pulumi.String("tf-example"),
+// ImageId: pulumi.String(image.Images[0].ImageId),
+// InstanceTypes: pulumi.StringArray{
+// pulumi.String("SA1.SMALL1"),
+// pulumi.String("SA2.SMALL1"),
+// pulumi.String("SA2.SMALL2"),
+// pulumi.String("SA2.SMALL4"),
+// },
+// InstanceNameSettings: &as.ScalingConfigInstanceNameSettingsArgs{
+// InstanceName: pulumi.String("test-ins-name"),
+// },
+// })
+// if err != nil {
+// return err
+// }
+// exampleScalingGroup, err := As.NewScalingGroup(ctx, "exampleScalingGroup", &As.ScalingGroupArgs{
+// ScalingGroupName: pulumi.String("tf-example"),
+// ConfigurationId: exampleScalingConfig.ID(),
+// MaxSize: pulumi.Int(1),
+// MinSize: pulumi.Int(0),
+// VpcId: vpc.ID(),
+// SubnetIds: pulumi.StringArray{
+// subnet.ID(),
+// },
+// })
+// if err != nil {
+// return err
+// }
+// exampleInstance, err := Instance.NewInstance(ctx, "exampleInstance", &Instance.InstanceArgs{
+// InstanceName: pulumi.String("tf_example"),
+// AvailabilityZone: pulumi.String(zones.Zones[0].Name),
+// ImageId: pulumi.String(image.Images[0].ImageId),
+// InstanceType: pulumi.String(instanceTypes.InstanceTypes[0].InstanceType),
+// SystemDiskType: pulumi.String("CLOUD_PREMIUM"),
+// SystemDiskSize: pulumi.Int(50),
+// Hostname: pulumi.String("user"),
+// ProjectId: pulumi.Int(0),
+// VpcId: vpc.ID(),
+// SubnetId: subnet.ID(),
+// })
+// if err != nil {
+// return err
+// }
+// // Attachment Instance
+// attachment, err := As.NewAttachment(ctx, "attachment", &As.AttachmentArgs{
+// ScalingGroupId: exampleScalingGroup.ID(),
+// InstanceIds: pulumi.StringArray{
+// exampleInstance.ID(),
+// },
+// })
+// if err != nil {
+// return err
+// }
+// _, err = As.NewStopInstances(ctx, "stopInstances", &As.StopInstancesArgs{
+// AutoScalingGroupId: exampleScalingGroup.ID(),
+// InstanceIds: attachment.InstanceIds,
+// StoppedMode: pulumi.String("STOP_CHARGING"),
+// })
+// if err != nil {
+// return err
+// }
+// return nil
+// })
+// }
+// ```
+// <!--End PulumiCodeChooser -->
 type StopInstances struct {
 	pulumi.CustomResourceState
 
@@ -36,7 +174,7 @@ func NewStopInstances(ctx *pulumi.Context,
 	if args.InstanceIds == nil {
 		return nil, errors.New("invalid value for required argument 'InstanceIds'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource StopInstances
 	err := ctx.RegisterResource("tencentcloud:As/stopInstances:StopInstances", name, args, &resource, opts...)
 	if err != nil {
@@ -125,7 +263,7 @@ func (i *StopInstances) ToStopInstancesOutputWithContext(ctx context.Context) St
 // StopInstancesArrayInput is an input type that accepts StopInstancesArray and StopInstancesArrayOutput values.
 // You can construct a concrete instance of `StopInstancesArrayInput` via:
 //
-//          StopInstancesArray{ StopInstancesArgs{...} }
+//	StopInstancesArray{ StopInstancesArgs{...} }
 type StopInstancesArrayInput interface {
 	pulumi.Input
 
@@ -150,7 +288,7 @@ func (i StopInstancesArray) ToStopInstancesArrayOutputWithContext(ctx context.Co
 // StopInstancesMapInput is an input type that accepts StopInstancesMap and StopInstancesMapOutput values.
 // You can construct a concrete instance of `StopInstancesMapInput` via:
 //
-//          StopInstancesMap{ "key": StopInstancesArgs{...} }
+//	StopInstancesMap{ "key": StopInstancesArgs{...} }
 type StopInstancesMapInput interface {
 	pulumi.Input
 

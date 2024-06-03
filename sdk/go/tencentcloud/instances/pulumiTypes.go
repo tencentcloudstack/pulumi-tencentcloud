@@ -8,7 +8,10 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
+
+var _ = internal.GetEnvOrDefault
 
 type GetInstanceInstanceList struct {
 	// Indicates whether public ip is assigned.
@@ -43,6 +46,8 @@ type GetInstanceInstanceList struct {
 	InternetMaxBandwidthOut int `pulumi:"internetMaxBandwidthOut"`
 	// Instance memory capacity, unit in GB.
 	Memory int `pulumi:"memory"`
+	// Instance os name.
+	OsName string `pulumi:"osName"`
 	// Private IP of the instance.
 	PrivateIp string `pulumi:"privateIp"`
 	// The project CVM belongs to.
@@ -70,7 +75,7 @@ type GetInstanceInstanceList struct {
 // GetInstanceInstanceListInput is an input type that accepts GetInstanceInstanceListArgs and GetInstanceInstanceListOutput values.
 // You can construct a concrete instance of `GetInstanceInstanceListInput` via:
 //
-//          GetInstanceInstanceListArgs{...}
+//	GetInstanceInstanceListArgs{...}
 type GetInstanceInstanceListInput interface {
 	pulumi.Input
 
@@ -111,6 +116,8 @@ type GetInstanceInstanceListArgs struct {
 	InternetMaxBandwidthOut pulumi.IntInput `pulumi:"internetMaxBandwidthOut"`
 	// Instance memory capacity, unit in GB.
 	Memory pulumi.IntInput `pulumi:"memory"`
+	// Instance os name.
+	OsName pulumi.StringInput `pulumi:"osName"`
 	// Private IP of the instance.
 	PrivateIp pulumi.StringInput `pulumi:"privateIp"`
 	// The project CVM belongs to.
@@ -150,7 +157,7 @@ func (i GetInstanceInstanceListArgs) ToGetInstanceInstanceListOutputWithContext(
 // GetInstanceInstanceListArrayInput is an input type that accepts GetInstanceInstanceListArray and GetInstanceInstanceListArrayOutput values.
 // You can construct a concrete instance of `GetInstanceInstanceListArrayInput` via:
 //
-//          GetInstanceInstanceListArray{ GetInstanceInstanceListArgs{...} }
+//	GetInstanceInstanceListArray{ GetInstanceInstanceListArgs{...} }
 type GetInstanceInstanceListArrayInput interface {
 	pulumi.Input
 
@@ -266,6 +273,11 @@ func (o GetInstanceInstanceListOutput) Memory() pulumi.IntOutput {
 	return o.ApplyT(func(v GetInstanceInstanceList) int { return v.Memory }).(pulumi.IntOutput)
 }
 
+// Instance os name.
+func (o GetInstanceInstanceListOutput) OsName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstanceInstanceList) string { return v.OsName }).(pulumi.StringOutput)
+}
+
 // Private IP of the instance.
 func (o GetInstanceInstanceListOutput) PrivateIp() pulumi.StringOutput {
 	return o.ApplyT(func(v GetInstanceInstanceList) string { return v.PrivateIp }).(pulumi.StringOutput)
@@ -355,7 +367,7 @@ type GetInstanceInstanceListDataDisk struct {
 // GetInstanceInstanceListDataDiskInput is an input type that accepts GetInstanceInstanceListDataDiskArgs and GetInstanceInstanceListDataDiskOutput values.
 // You can construct a concrete instance of `GetInstanceInstanceListDataDiskInput` via:
 //
-//          GetInstanceInstanceListDataDiskArgs{...}
+//	GetInstanceInstanceListDataDiskArgs{...}
 type GetInstanceInstanceListDataDiskInput interface {
 	pulumi.Input
 
@@ -389,7 +401,7 @@ func (i GetInstanceInstanceListDataDiskArgs) ToGetInstanceInstanceListDataDiskOu
 // GetInstanceInstanceListDataDiskArrayInput is an input type that accepts GetInstanceInstanceListDataDiskArray and GetInstanceInstanceListDataDiskArrayOutput values.
 // You can construct a concrete instance of `GetInstanceInstanceListDataDiskArrayInput` via:
 //
-//          GetInstanceInstanceListDataDiskArray{ GetInstanceInstanceListDataDiskArgs{...} }
+//	GetInstanceInstanceListDataDiskArray{ GetInstanceInstanceListDataDiskArgs{...} }
 type GetInstanceInstanceListDataDiskArrayInput interface {
 	pulumi.Input
 
@@ -525,7 +537,7 @@ type GetSetInstanceList struct {
 // GetSetInstanceListInput is an input type that accepts GetSetInstanceListArgs and GetSetInstanceListOutput values.
 // You can construct a concrete instance of `GetSetInstanceListInput` via:
 //
-//          GetSetInstanceListArgs{...}
+//	GetSetInstanceListArgs{...}
 type GetSetInstanceListInput interface {
 	pulumi.Input
 
@@ -605,7 +617,7 @@ func (i GetSetInstanceListArgs) ToGetSetInstanceListOutputWithContext(ctx contex
 // GetSetInstanceListArrayInput is an input type that accepts GetSetInstanceListArray and GetSetInstanceListArrayOutput values.
 // You can construct a concrete instance of `GetSetInstanceListArrayInput` via:
 //
-//          GetSetInstanceListArray{ GetSetInstanceListArgs{...} }
+//	GetSetInstanceListArray{ GetSetInstanceListArgs{...} }
 type GetSetInstanceListArrayInput interface {
 	pulumi.Input
 
@@ -810,7 +822,7 @@ type GetSetInstanceListDataDisk struct {
 // GetSetInstanceListDataDiskInput is an input type that accepts GetSetInstanceListDataDiskArgs and GetSetInstanceListDataDiskOutput values.
 // You can construct a concrete instance of `GetSetInstanceListDataDiskInput` via:
 //
-//          GetSetInstanceListDataDiskArgs{...}
+//	GetSetInstanceListDataDiskArgs{...}
 type GetSetInstanceListDataDiskInput interface {
 	pulumi.Input
 
@@ -844,7 +856,7 @@ func (i GetSetInstanceListDataDiskArgs) ToGetSetInstanceListDataDiskOutputWithCo
 // GetSetInstanceListDataDiskArrayInput is an input type that accepts GetSetInstanceListDataDiskArray and GetSetInstanceListDataDiskArrayOutput values.
 // You can construct a concrete instance of `GetSetInstanceListDataDiskArrayInput` via:
 //
-//          GetSetInstanceListDataDiskArray{ GetSetInstanceListDataDiskArgs{...} }
+//	GetSetInstanceListDataDiskArray{ GetSetInstanceListDataDiskArgs{...} }
 type GetSetInstanceListDataDiskArrayInput interface {
 	pulumi.Input
 

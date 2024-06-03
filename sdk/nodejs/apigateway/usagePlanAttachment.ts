@@ -10,11 +10,13 @@ import * as utilities from "../utilities";
  * > **NOTE:** If the `authType` parameter of API is not `SECRET`, it cannot be bound access key.
  *
  * ## Example Usage
+ *
  * ### Normal creation
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const exampleUsagePlan = new tencentcloud.apigateway.UsagePlan("exampleUsagePlan", {
  *     usagePlanName: "tf_example",
@@ -73,11 +75,14 @@ import * as utilities from "../utilities";
  *     apiId: exampleApi.id,
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
+ *
  * ### Bind the key to a usage plan
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const exampleApiKey = new tencentcloud.apigateway.ApiKey("exampleApiKey", {
  *     secretName: "tf_example",
@@ -92,13 +97,14 @@ import * as utilities from "../utilities";
  *     accessKeyIds: [exampleApiKey.id],
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * API gateway usage plan attachment can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:ApiGateway/usagePlanAttachment:UsagePlanAttachment attach_service usagePlan-pe7fbdgn#service-kuqd6xqk#release#API#api-p8gtanvy
+ * $ pulumi import tencentcloud:ApiGateway/usagePlanAttachment:UsagePlanAttachment attach_service usagePlan-pe7fbdgn#service-kuqd6xqk#release#API#api-p8gtanvy
  * ```
  */
 export class UsagePlanAttachment extends pulumi.CustomResource {

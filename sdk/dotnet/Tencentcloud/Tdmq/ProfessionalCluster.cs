@@ -14,88 +14,92 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdmq
     /// Provides a resource to create a tdmq professional_cluster
     /// 
     /// ## Example Usage
+    /// 
     /// ### single-zone Professional Cluster
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var professionalCluster = new Tencentcloud.Tdmq.ProfessionalCluster("professionalCluster", new()
     ///     {
-    ///         var professionalCluster = new Tencentcloud.Tdmq.ProfessionalCluster("professionalCluster", new Tencentcloud.Tdmq.ProfessionalClusterArgs
+    ///         AutoRenewFlag = 1,
+    ///         ClusterName = "single_zone_cluster",
+    ///         ProductName = "PULSAR.P1.MINI2",
+    ///         StorageSize = 600,
+    ///         Tags = 
     ///         {
-    ///             AutoRenewFlag = 1,
-    ///             ClusterName = "single_zone_cluster",
-    ///             ProductName = "PULSAR.P1.MINI2",
-    ///             StorageSize = 600,
-    ///             Tags = 
-    ///             {
-    ///                 { "createby", "terrafrom" },
-    ///             },
-    ///             Vpc = new Tencentcloud.Tdmq.Inputs.ProfessionalClusterVpcArgs
-    ///             {
-    ///                 SubnetId = "subnet-xxxx",
-    ///                 VpcId = "vpc-xxxx",
-    ///             },
-    ///             ZoneIds = 
-    ///             {
-    ///                 100004,
-    ///             },
-    ///         });
-    ///     }
+    ///             { "createby", "terrafrom" },
+    ///         },
+    ///         Vpc = new Tencentcloud.Tdmq.Inputs.ProfessionalClusterVpcArgs
+    ///         {
+    ///             SubnetId = "subnet-xxxx",
+    ///             VpcId = "vpc-xxxx",
+    ///         },
+    ///         ZoneIds = new[]
+    ///         {
+    ///             100004,
+    ///         },
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
+    /// 
     /// ### Multi-zone Professional Cluster
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var professionalCluster = new Tencentcloud.Tdmq.ProfessionalCluster("professionalCluster", new()
     ///     {
-    ///         var professionalCluster = new Tencentcloud.Tdmq.ProfessionalCluster("professionalCluster", new Tencentcloud.Tdmq.ProfessionalClusterArgs
+    ///         AutoRenewFlag = 1,
+    ///         ClusterName = "multi_zone_cluster",
+    ///         ProductName = "PULSAR.P1.MINI2",
+    ///         StorageSize = 200,
+    ///         Tags = 
     ///         {
-    ///             AutoRenewFlag = 1,
-    ///             ClusterName = "multi_zone_cluster",
-    ///             ProductName = "PULSAR.P1.MINI2",
-    ///             StorageSize = 200,
-    ///             Tags = 
-    ///             {
-    ///                 { "key", "value1" },
-    ///                 { "key2", "value2" },
-    ///             },
-    ///             Vpc = new Tencentcloud.Tdmq.Inputs.ProfessionalClusterVpcArgs
-    ///             {
-    ///                 SubnetId = "subnet-xxxx",
-    ///                 VpcId = "vpc-xxxx",
-    ///             },
-    ///             ZoneIds = 
-    ///             {
-    ///                 330001,
-    ///                 330002,
-    ///                 330003,
-    ///             },
-    ///         });
-    ///     }
+    ///             { "key", "value1" },
+    ///             { "key2", "value2" },
+    ///         },
+    ///         Vpc = new Tencentcloud.Tdmq.Inputs.ProfessionalClusterVpcArgs
+    ///         {
+    ///             SubnetId = "subnet-xxxx",
+    ///             VpcId = "vpc-xxxx",
+    ///         },
+    ///         ZoneIds = new[]
+    ///         {
+    ///             330001,
+    ///             330002,
+    ///             330003,
+    ///         },
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// tdmq professional_cluster can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Tdmq/professionalCluster:ProfessionalCluster professional_cluster professional_cluster_id
+    /// $ pulumi import tencentcloud:Tdmq/professionalCluster:ProfessionalCluster professional_cluster professional_cluster_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Tdmq/professionalCluster:ProfessionalCluster")]
-    public partial class ProfessionalCluster : Pulumi.CustomResource
+    public partial class ProfessionalCluster : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Whether to turn on automatic monthly renewal. `1`: turn on, `0`: turn off.
@@ -196,7 +200,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdmq
         }
     }
 
-    public sealed class ProfessionalClusterArgs : Pulumi.ResourceArgs
+    public sealed class ProfessionalClusterArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Whether to turn on automatic monthly renewal. `1`: turn on, `0`: turn off.
@@ -267,9 +271,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdmq
         public ProfessionalClusterArgs()
         {
         }
+        public static new ProfessionalClusterArgs Empty => new ProfessionalClusterArgs();
     }
 
-    public sealed class ProfessionalClusterState : Pulumi.ResourceArgs
+    public sealed class ProfessionalClusterState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Whether to turn on automatic monthly renewal. `1`: turn on, `0`: turn off.
@@ -340,5 +345,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdmq
         public ProfessionalClusterState()
         {
         }
+        public static new ProfessionalClusterState Empty => new ProfessionalClusterState();
     }
 }

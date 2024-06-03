@@ -9,11 +9,12 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const syncImage = new tencentcloud.Cvm.SyncImage("sync_image", {
+ * const syncImage = new tencentcloud.cvm.SyncImage("syncImage", {
  *     destinationRegions: [
  *         "ap-guangzhou",
  *         "ap-shanghai",
@@ -21,6 +22,7 @@ import * as utilities from "../utilities";
  *     imageId: "img-xxxxxx",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export class SyncImage extends pulumi.CustomResource {
     /**

@@ -8,7 +8,10 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
+
+var _ = internal.GetEnvOrDefault
 
 type GroupRuleSetEgress struct {
 	// Rule policy of security group. Valid values: `ACCEPT` and `DROP`.
@@ -23,7 +26,8 @@ type GroupRuleSetEgress struct {
 	Description *string `pulumi:"description"`
 	// An IPV6 address network or CIDR segment, and conflict with `sourceSecurityId` and `address_template_*`.
 	Ipv6CidrBlock *string `pulumi:"ipv6CidrBlock"`
-	PolicyIndex   *int    `pulumi:"policyIndex"`
+	// The security group rule index number, whose value dynamically changes with changes in security group rules.
+	PolicyIndex *int `pulumi:"policyIndex"`
 	// Range of the port. The available value can be one, multiple or one segment. E.g. `80`, `80,90` and `80-90`. Default to all ports, and conflicts with `service_template_*`.
 	Port *string `pulumi:"port"`
 	// Type of IP protocol. Valid values: `TCP`, `UDP` and `ICMP`. Default to all types protocol, and conflicts with `service_template_*`.
@@ -39,7 +43,7 @@ type GroupRuleSetEgress struct {
 // GroupRuleSetEgressInput is an input type that accepts GroupRuleSetEgressArgs and GroupRuleSetEgressOutput values.
 // You can construct a concrete instance of `GroupRuleSetEgressInput` via:
 //
-//          GroupRuleSetEgressArgs{...}
+//	GroupRuleSetEgressArgs{...}
 type GroupRuleSetEgressInput interface {
 	pulumi.Input
 
@@ -60,7 +64,8 @@ type GroupRuleSetEgressArgs struct {
 	Description pulumi.StringPtrInput `pulumi:"description"`
 	// An IPV6 address network or CIDR segment, and conflict with `sourceSecurityId` and `address_template_*`.
 	Ipv6CidrBlock pulumi.StringPtrInput `pulumi:"ipv6CidrBlock"`
-	PolicyIndex   pulumi.IntPtrInput    `pulumi:"policyIndex"`
+	// The security group rule index number, whose value dynamically changes with changes in security group rules.
+	PolicyIndex pulumi.IntPtrInput `pulumi:"policyIndex"`
 	// Range of the port. The available value can be one, multiple or one segment. E.g. `80`, `80,90` and `80-90`. Default to all ports, and conflicts with `service_template_*`.
 	Port pulumi.StringPtrInput `pulumi:"port"`
 	// Type of IP protocol. Valid values: `TCP`, `UDP` and `ICMP`. Default to all types protocol, and conflicts with `service_template_*`.
@@ -88,7 +93,7 @@ func (i GroupRuleSetEgressArgs) ToGroupRuleSetEgressOutputWithContext(ctx contex
 // GroupRuleSetEgressArrayInput is an input type that accepts GroupRuleSetEgressArray and GroupRuleSetEgressArrayOutput values.
 // You can construct a concrete instance of `GroupRuleSetEgressArrayInput` via:
 //
-//          GroupRuleSetEgressArray{ GroupRuleSetEgressArgs{...} }
+//	GroupRuleSetEgressArray{ GroupRuleSetEgressArgs{...} }
 type GroupRuleSetEgressArrayInput interface {
 	pulumi.Input
 
@@ -154,6 +159,7 @@ func (o GroupRuleSetEgressOutput) Ipv6CidrBlock() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v GroupRuleSetEgress) *string { return v.Ipv6CidrBlock }).(pulumi.StringPtrOutput)
 }
 
+// The security group rule index number, whose value dynamically changes with changes in security group rules.
 func (o GroupRuleSetEgressOutput) PolicyIndex() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v GroupRuleSetEgress) *int { return v.PolicyIndex }).(pulumi.IntPtrOutput)
 }
@@ -216,7 +222,8 @@ type GroupRuleSetIngress struct {
 	Description *string `pulumi:"description"`
 	// An IPV6 address network or CIDR segment, and conflict with `sourceSecurityId` and `address_template_*`.
 	Ipv6CidrBlock *string `pulumi:"ipv6CidrBlock"`
-	PolicyIndex   *int    `pulumi:"policyIndex"`
+	// The security group rule index number, whose value dynamically changes with changes in security group rules.
+	PolicyIndex *int `pulumi:"policyIndex"`
 	// Range of the port. The available value can be one, multiple or one segment. E.g. `80`, `80,90` and `80-90`. Default to all ports, and conflicts with `service_template_*`.
 	Port *string `pulumi:"port"`
 	// Type of IP protocol. Valid values: `TCP`, `UDP` and `ICMP`. Default to all types protocol, and conflicts with `service_template_*`.
@@ -232,7 +239,7 @@ type GroupRuleSetIngress struct {
 // GroupRuleSetIngressInput is an input type that accepts GroupRuleSetIngressArgs and GroupRuleSetIngressOutput values.
 // You can construct a concrete instance of `GroupRuleSetIngressInput` via:
 //
-//          GroupRuleSetIngressArgs{...}
+//	GroupRuleSetIngressArgs{...}
 type GroupRuleSetIngressInput interface {
 	pulumi.Input
 
@@ -253,7 +260,8 @@ type GroupRuleSetIngressArgs struct {
 	Description pulumi.StringPtrInput `pulumi:"description"`
 	// An IPV6 address network or CIDR segment, and conflict with `sourceSecurityId` and `address_template_*`.
 	Ipv6CidrBlock pulumi.StringPtrInput `pulumi:"ipv6CidrBlock"`
-	PolicyIndex   pulumi.IntPtrInput    `pulumi:"policyIndex"`
+	// The security group rule index number, whose value dynamically changes with changes in security group rules.
+	PolicyIndex pulumi.IntPtrInput `pulumi:"policyIndex"`
 	// Range of the port. The available value can be one, multiple or one segment. E.g. `80`, `80,90` and `80-90`. Default to all ports, and conflicts with `service_template_*`.
 	Port pulumi.StringPtrInput `pulumi:"port"`
 	// Type of IP protocol. Valid values: `TCP`, `UDP` and `ICMP`. Default to all types protocol, and conflicts with `service_template_*`.
@@ -281,7 +289,7 @@ func (i GroupRuleSetIngressArgs) ToGroupRuleSetIngressOutputWithContext(ctx cont
 // GroupRuleSetIngressArrayInput is an input type that accepts GroupRuleSetIngressArray and GroupRuleSetIngressArrayOutput values.
 // You can construct a concrete instance of `GroupRuleSetIngressArrayInput` via:
 //
-//          GroupRuleSetIngressArray{ GroupRuleSetIngressArgs{...} }
+//	GroupRuleSetIngressArray{ GroupRuleSetIngressArgs{...} }
 type GroupRuleSetIngressArrayInput interface {
 	pulumi.Input
 
@@ -347,6 +355,7 @@ func (o GroupRuleSetIngressOutput) Ipv6CidrBlock() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v GroupRuleSetIngress) *string { return v.Ipv6CidrBlock }).(pulumi.StringPtrOutput)
 }
 
+// The security group rule index number, whose value dynamically changes with changes in security group rules.
 func (o GroupRuleSetIngressOutput) PolicyIndex() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v GroupRuleSetIngress) *int { return v.PolicyIndex }).(pulumi.IntPtrOutput)
 }
@@ -420,7 +429,7 @@ type GetGroupsSecurityGroup struct {
 // GetGroupsSecurityGroupInput is an input type that accepts GetGroupsSecurityGroupArgs and GetGroupsSecurityGroupOutput values.
 // You can construct a concrete instance of `GetGroupsSecurityGroupInput` via:
 //
-//          GetGroupsSecurityGroupArgs{...}
+//	GetGroupsSecurityGroupArgs{...}
 type GetGroupsSecurityGroupInput interface {
 	pulumi.Input
 
@@ -464,7 +473,7 @@ func (i GetGroupsSecurityGroupArgs) ToGetGroupsSecurityGroupOutputWithContext(ct
 // GetGroupsSecurityGroupArrayInput is an input type that accepts GetGroupsSecurityGroupArray and GetGroupsSecurityGroupArrayOutput values.
 // You can construct a concrete instance of `GetGroupsSecurityGroupArrayInput` via:
 //
-//          GetGroupsSecurityGroupArray{ GetGroupsSecurityGroupArgs{...} }
+//	GetGroupsSecurityGroupArray{ GetGroupsSecurityGroupArgs{...} }
 type GetGroupsSecurityGroupArrayInput interface {
 	pulumi.Input
 

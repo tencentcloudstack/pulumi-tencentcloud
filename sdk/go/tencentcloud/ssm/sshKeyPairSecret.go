@@ -7,63 +7,69 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a ssm ssh key pair secret
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Kms"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ssm"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Kms"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ssm"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		exampleKey, err := Kms.NewKey(ctx, "exampleKey", &Kms.KeyArgs{
-// 			Alias:              pulumi.String("tf-example-kms-key"),
-// 			Description:        pulumi.String("example of kms key"),
-// 			KeyRotationEnabled: pulumi.Bool(false),
-// 			IsEnabled:          pulumi.Bool(true),
-// 			Tags: pulumi.AnyMap{
-// 				"createdBy": pulumi.Any("terraform"),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_, err = Ssm.NewSshKeyPairSecret(ctx, "exampleSshKeyPairSecret", &Ssm.SshKeyPairSecretArgs{
-// 			SecretName:  pulumi.String("tf-example"),
-// 			ProjectId:   pulumi.Int(0),
-// 			Description: pulumi.String("desc."),
-// 			KmsKeyId:    exampleKey.ID(),
-// 			SshKeyName:  pulumi.String("tf_example_ssh"),
-// 			Status:      pulumi.String("Enabled"),
-// 			CleanSshKey: pulumi.Bool(true),
-// 			Tags: pulumi.AnyMap{
-// 				"createdBy": pulumi.Any("terraform"),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			exampleKey, err := Kms.NewKey(ctx, "exampleKey", &Kms.KeyArgs{
+//				Alias:              pulumi.String("tf-example-kms-key"),
+//				Description:        pulumi.String("example of kms key"),
+//				KeyRotationEnabled: pulumi.Bool(false),
+//				IsEnabled:          pulumi.Bool(true),
+//				Tags: pulumi.Map{
+//					"createdBy": pulumi.Any("terraform"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_, err = Ssm.NewSshKeyPairSecret(ctx, "exampleSshKeyPairSecret", &Ssm.SshKeyPairSecretArgs{
+//				SecretName:  pulumi.String("tf-example"),
+//				ProjectId:   pulumi.Int(0),
+//				Description: pulumi.String("desc."),
+//				KmsKeyId:    exampleKey.ID(),
+//				SshKeyName:  pulumi.String("tf_example_ssh"),
+//				Status:      pulumi.String("Enabled"),
+//				CleanSshKey: pulumi.Bool(true),
+//				Tags: pulumi.Map{
+//					"createdBy": pulumi.Any("terraform"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // ssm ssh_key_pair_secret can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Ssm/sshKeyPairSecret:SshKeyPairSecret ssh_key_pair_secret ssh_key_pair_secret_name
+// $ pulumi import tencentcloud:Ssm/sshKeyPairSecret:SshKeyPairSecret ssh_key_pair_secret ssh_key_pair_secret_name
 // ```
 type SshKeyPairSecret struct {
 	pulumi.CustomResourceState
@@ -103,7 +109,7 @@ func NewSshKeyPairSecret(ctx *pulumi.Context,
 	if args.SecretName == nil {
 		return nil, errors.New("invalid value for required argument 'SecretName'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource SshKeyPairSecret
 	err := ctx.RegisterResource("tencentcloud:Ssm/sshKeyPairSecret:SshKeyPairSecret", name, args, &resource, opts...)
 	if err != nil {
@@ -240,7 +246,7 @@ func (i *SshKeyPairSecret) ToSshKeyPairSecretOutputWithContext(ctx context.Conte
 // SshKeyPairSecretArrayInput is an input type that accepts SshKeyPairSecretArray and SshKeyPairSecretArrayOutput values.
 // You can construct a concrete instance of `SshKeyPairSecretArrayInput` via:
 //
-//          SshKeyPairSecretArray{ SshKeyPairSecretArgs{...} }
+//	SshKeyPairSecretArray{ SshKeyPairSecretArgs{...} }
 type SshKeyPairSecretArrayInput interface {
 	pulumi.Input
 
@@ -265,7 +271,7 @@ func (i SshKeyPairSecretArray) ToSshKeyPairSecretArrayOutputWithContext(ctx cont
 // SshKeyPairSecretMapInput is an input type that accepts SshKeyPairSecretMap and SshKeyPairSecretMapOutput values.
 // You can construct a concrete instance of `SshKeyPairSecretMapInput` via:
 //
-//          SshKeyPairSecretMap{ "key": SshKeyPairSecretArgs{...} }
+//	SshKeyPairSecretMap{ "key": SshKeyPairSecretArgs{...} }
 type SshKeyPairSecretMapInput interface {
 	pulumi.Input
 

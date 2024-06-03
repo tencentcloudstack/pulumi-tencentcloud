@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos.Inputs
 {
 
-    public sealed class BucketInventoryOptionalFieldsGetArgs : Pulumi.ResourceArgs
+    public sealed class BucketInventoryOptionalFieldsGetArgs : global::Pulumi.ResourceArgs
     {
         [Input("fields")]
         private InputList<string>? _fields;
@@ -28,5 +28,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos.Inputs
         public BucketInventoryOptionalFieldsGetArgs()
         {
         }
+        public static new BucketInventoryOptionalFieldsGetArgs Empty => new BucketInventoryOptionalFieldsGetArgs();
     }
 }

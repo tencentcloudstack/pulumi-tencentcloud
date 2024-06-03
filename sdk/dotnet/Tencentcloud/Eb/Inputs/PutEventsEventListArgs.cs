@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Eb.Inputs
 {
 
-    public sealed class PutEventsEventListArgs : Pulumi.ResourceArgs
+    public sealed class PutEventsEventListArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Event data, the content is controlled by the system that created the event, the current datacontenttype only supports application/json;charset=utf-8, so this field is a json string.
@@ -46,5 +46,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Eb.Inputs
         public PutEventsEventListArgs()
         {
         }
+        public static new PutEventsEventListArgs Empty => new PutEventsEventListArgs();
     }
 }

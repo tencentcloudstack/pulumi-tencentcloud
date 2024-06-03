@@ -17,34 +17,35 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Reserved
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var ri = new Tencentcloud.Reserved.Instance("ri", new()
     ///     {
-    ///         var ri = new Tencentcloud.Reserved.Instance("ri", new Tencentcloud.Reserved.InstanceArgs
-    ///         {
-    ///             ConfigId = "469043dd-28b9-4d89-b557-74f6a8326259",
-    ///             InstanceCount = 2,
-    ///         });
-    ///     }
+    ///         ConfigId = "469043dd-28b9-4d89-b557-74f6a8326259",
+    ///         InstanceCount = 2,
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// Reserved instance can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Reserved/instance:Instance foo 6cc16e7c-47d7-4fae-9b44-ce5c0f59a920
+    /// $ pulumi import tencentcloud:Reserved/instance:Instance foo 6cc16e7c-47d7-4fae-9b44-ce5c0f59a920
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Reserved/instance:Instance")]
-    public partial class Instance : Pulumi.CustomResource
+    public partial class Instance : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Configuration ID of the reserved instance.
@@ -129,7 +130,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Reserved
         }
     }
 
-    public sealed class InstanceArgs : Pulumi.ResourceArgs
+    public sealed class InstanceArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Configuration ID of the reserved instance.
@@ -154,9 +155,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Reserved
         public InstanceArgs()
         {
         }
+        public static new InstanceArgs Empty => new InstanceArgs();
     }
 
-    public sealed class InstanceState : Pulumi.ResourceArgs
+    public sealed class InstanceState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Configuration ID of the reserved instance.
@@ -199,5 +201,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Reserved
         public InstanceState()
         {
         }
+        public static new InstanceState Empty => new InstanceState();
     }
 }

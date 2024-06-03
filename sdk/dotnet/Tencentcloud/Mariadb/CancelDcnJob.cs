@@ -15,25 +15,26 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mariadb
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var cancelDcnJob = new Tencentcloud.Mariadb.CancelDcnJob("cancelDcnJob", new()
     ///     {
-    ///         var cancelDcnJob = new Tencentcloud.Mariadb.CancelDcnJob("cancelDcnJob", new Tencentcloud.Mariadb.CancelDcnJobArgs
-    ///         {
-    ///             InstanceId = "tdsql-9vqvls95",
-    ///         });
-    ///     }
+    ///         InstanceId = "tdsql-9vqvls95",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Mariadb/cancelDcnJob:CancelDcnJob")]
-    public partial class CancelDcnJob : Pulumi.CustomResource
+    public partial class CancelDcnJob : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Instance ID.
@@ -86,7 +87,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mariadb
         }
     }
 
-    public sealed class CancelDcnJobArgs : Pulumi.ResourceArgs
+    public sealed class CancelDcnJobArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Instance ID.
@@ -97,9 +98,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mariadb
         public CancelDcnJobArgs()
         {
         }
+        public static new CancelDcnJobArgs Empty => new CancelDcnJobArgs();
     }
 
-    public sealed class CancelDcnJobState : Pulumi.ResourceArgs
+    public sealed class CancelDcnJobState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Instance ID.
@@ -110,5 +112,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mariadb
         public CancelDcnJobState()
         {
         }
+        public static new CancelDcnJobState Empty => new CancelDcnJobState();
     }
 }

@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps.Inputs
 {
 
-    public sealed class ScheduleActivityActivityParaTranscodeTaskGetArgs : Pulumi.ResourceArgs
+    public sealed class ScheduleActivityActivityParaTranscodeTaskGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// ID of a video transcoding template.
@@ -100,5 +100,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps.Inputs
         public ScheduleActivityActivityParaTranscodeTaskGetArgs()
         {
         }
+        public static new ScheduleActivityActivityParaTranscodeTaskGetArgs Empty => new ScheduleActivityActivityParaTranscodeTaskGetArgs();
     }
 }

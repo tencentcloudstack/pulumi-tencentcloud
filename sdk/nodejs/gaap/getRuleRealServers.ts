@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,21 +11,20 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const ruleRealServers = pulumi.output(tencentcloud.Gaap.getRuleRealServers({
+ * const ruleRealServers = tencentcloud.Gaap.getRuleRealServers({
  *     ruleId: "rule-xxxxxx",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getRuleRealServers(args: GetRuleRealServersArgs, opts?: pulumi.InvokeOptions): Promise<GetRuleRealServersResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Gaap/getRuleRealServers:getRuleRealServers", {
         "resultOutputFile": args.resultOutputFile,
         "ruleId": args.ruleId,
@@ -64,9 +64,24 @@ export interface GetRuleRealServersResult {
     readonly resultOutputFile?: string;
     readonly ruleId: string;
 }
-
+/**
+ * Use this data source to query detailed information of gaap rule real servers
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const ruleRealServers = tencentcloud.Gaap.getRuleRealServers({
+ *     ruleId: "rule-xxxxxx",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getRuleRealServersOutput(args: GetRuleRealServersOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetRuleRealServersResult> {
-    return pulumi.output(args).apply(a => getRuleRealServers(a, opts))
+    return pulumi.output(args).apply((a: any) => getRuleRealServers(a, opts))
 }
 
 /**

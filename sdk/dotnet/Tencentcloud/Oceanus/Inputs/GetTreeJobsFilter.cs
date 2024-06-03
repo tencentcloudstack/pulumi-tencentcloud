@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Oceanus.Inputs
 {
 
-    public sealed class GetTreeJobsFilterArgs : Pulumi.InvokeArgs
+    public sealed class GetTreeJobsFilterArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Field to be filtered. Can only be set `Zone` or `JobType` or `JobStatus`.
@@ -34,5 +34,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Oceanus.Inputs
         public GetTreeJobsFilterArgs()
         {
         }
+        public static new GetTreeJobsFilterArgs Empty => new GetTreeJobsFilterArgs();
     }
 }

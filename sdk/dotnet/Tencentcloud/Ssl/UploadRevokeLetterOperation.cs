@@ -15,40 +15,43 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssl
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
     /// using System;
+    /// using System.Collections.Generic;
     /// using System.IO;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// 	
+    /// string ReadFileBase64(string path) 
     /// {
-    /// 	private static string ReadFileBase64(string path) {
-    /// 		return Convert.ToBase64String(Encoding.UTF8.GetBytes(File.ReadAllText(path)))
-    /// 	}
-    /// 
-    ///     public MyStack()
-    ///     {
-    ///         var uploadRevokeLetter = new Tencentcloud.Ssl.UploadRevokeLetterOperation("uploadRevokeLetter", new Tencentcloud.Ssl.UploadRevokeLetterOperationArgs
-    ///         {
-    ///             CertificateId = "8xRYdDlc",
-    ///             RevokeLetter = ReadFileBase64("./c.pdf"),
-    ///         });
-    ///     }
-    /// 
+    ///     return Convert.ToBase64String(Encoding.UTF8.GetBytes(File.ReadAllText(path)));
     /// }
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     var uploadRevokeLetter = new Tencentcloud.Ssl.UploadRevokeLetterOperation("uploadRevokeLetter", new()
+    ///     {
+    ///         CertificateId = "8xRYdDlc",
+    ///         RevokeLetter = ReadFileBase64("./c.pdf"),
+    ///     });
+    /// 
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// ssl upload_revoke_letter can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Ssl/uploadRevokeLetterOperation:UploadRevokeLetterOperation upload_revoke_letter upload_revoke_letter_id
+    /// $ pulumi import tencentcloud:Ssl/uploadRevokeLetterOperation:UploadRevokeLetterOperation upload_revoke_letter upload_revoke_letter_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Ssl/uploadRevokeLetterOperation:UploadRevokeLetterOperation")]
-    public partial class UploadRevokeLetterOperation : Pulumi.CustomResource
+    public partial class UploadRevokeLetterOperation : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Certificate ID.
@@ -107,7 +110,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssl
         }
     }
 
-    public sealed class UploadRevokeLetterOperationArgs : Pulumi.ResourceArgs
+    public sealed class UploadRevokeLetterOperationArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Certificate ID.
@@ -124,9 +127,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssl
         public UploadRevokeLetterOperationArgs()
         {
         }
+        public static new UploadRevokeLetterOperationArgs Empty => new UploadRevokeLetterOperationArgs();
     }
 
-    public sealed class UploadRevokeLetterOperationState : Pulumi.ResourceArgs
+    public sealed class UploadRevokeLetterOperationState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Certificate ID.
@@ -143,5 +147,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssl
         public UploadRevokeLetterOperationState()
         {
         }
+        public static new UploadRevokeLetterOperationState Empty => new UploadRevokeLetterOperationState();
     }
 }

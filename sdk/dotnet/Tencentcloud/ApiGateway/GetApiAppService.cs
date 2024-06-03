@@ -15,176 +15,174 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway
         /// <summary>
         /// Use this data source to query detailed information of apigateway api_app_services
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var exampleService = new Tencentcloud.ApiGateway.Service("exampleService", new()
         ///     {
-        ///         var exampleService = new Tencentcloud.ApiGateway.Service("exampleService", new Tencentcloud.ApiGateway.ServiceArgs
+        ///         ServiceName = "tf_example",
+        ///         Protocol = "http&amp;https",
+        ///         ServiceDesc = "desc.",
+        ///         NetTypes = new[]
         ///         {
-        ///             ServiceName = "tf_example",
-        ///             Protocol = "http&amp;https",
-        ///             ServiceDesc = "desc.",
-        ///             NetTypes = 
-        ///             {
-        ///                 "INNER",
-        ///                 "OUTER",
-        ///             },
-        ///             IpVersion = "IPv4",
-        ///         });
-        ///         var exampleApi = new Tencentcloud.ApiGateway.Api("exampleApi", new Tencentcloud.ApiGateway.ApiArgs
-        ///         {
-        ///             ServiceId = exampleService.Id,
-        ///             ApiName = "tf_example",
-        ///             ApiDesc = "my hello api update",
-        ///             AuthType = "APP",
-        ///             Protocol = "HTTP",
-        ///             EnableCors = true,
-        ///             RequestConfigPath = "/user/info",
-        ///             RequestConfigMethod = "POST",
-        ///             RequestParameters = 
-        ///             {
-        ///                 new Tencentcloud.ApiGateway.Inputs.ApiRequestParameterArgs
-        ///                 {
-        ///                     Name = "email",
-        ///                     Position = "QUERY",
-        ///                     Type = "string",
-        ///                     Desc = "desc.",
-        ///                     DefaultValue = "test@qq.com",
-        ///                     Required = true,
-        ///                 },
-        ///             },
-        ///             ServiceConfigType = "HTTP",
-        ///             ServiceConfigTimeout = 10,
-        ///             ServiceConfigUrl = "http://www.tencent.com",
-        ///             ServiceConfigPath = "/user",
-        ///             ServiceConfigMethod = "POST",
-        ///             ResponseType = "XML",
-        ///             ResponseSuccessExample = "&lt;note&gt;success&lt;/note&gt;",
-        ///             ResponseFailExample = "&lt;note&gt;fail&lt;/note&gt;",
-        ///             ResponseErrorCodes = 
-        ///             {
-        ///                 new Tencentcloud.ApiGateway.Inputs.ApiResponseErrorCodeArgs
-        ///                 {
-        ///                     Code = 500,
-        ///                     Msg = "system error",
-        ///                     Desc = "system error code",
-        ///                     ConvertedCode = 5000,
-        ///                     NeedConvert = true,
-        ///                 },
-        ///             },
-        ///         });
-        ///         var exampleApiAppService = Tencentcloud.ApiGateway.GetApiAppService.Invoke(new Tencentcloud.ApiGateway.GetApiAppServiceInvokeArgs
-        ///         {
-        ///             ServiceId = exampleApi.ServiceId,
-        ///             ApiRegion = "ap-guangzhou",
-        ///         });
-        ///     }
+        ///             "INNER",
+        ///             "OUTER",
+        ///         },
+        ///         IpVersion = "IPv4",
+        ///     });
         /// 
-        /// }
+        ///     var exampleApi = new Tencentcloud.ApiGateway.Api("exampleApi", new()
+        ///     {
+        ///         ServiceId = exampleService.Id,
+        ///         ApiName = "tf_example",
+        ///         ApiDesc = "my hello api update",
+        ///         AuthType = "APP",
+        ///         Protocol = "HTTP",
+        ///         EnableCors = true,
+        ///         RequestConfigPath = "/user/info",
+        ///         RequestConfigMethod = "POST",
+        ///         RequestParameters = new[]
+        ///         {
+        ///             new Tencentcloud.ApiGateway.Inputs.ApiRequestParameterArgs
+        ///             {
+        ///                 Name = "email",
+        ///                 Position = "QUERY",
+        ///                 Type = "string",
+        ///                 Desc = "desc.",
+        ///                 DefaultValue = "test@qq.com",
+        ///                 Required = true,
+        ///             },
+        ///         },
+        ///         ServiceConfigType = "HTTP",
+        ///         ServiceConfigTimeout = 10,
+        ///         ServiceConfigUrl = "http://www.tencent.com",
+        ///         ServiceConfigPath = "/user",
+        ///         ServiceConfigMethod = "POST",
+        ///         ResponseType = "XML",
+        ///         ResponseSuccessExample = "&lt;note&gt;success&lt;/note&gt;",
+        ///         ResponseFailExample = "&lt;note&gt;fail&lt;/note&gt;",
+        ///         ResponseErrorCodes = new[]
+        ///         {
+        ///             new Tencentcloud.ApiGateway.Inputs.ApiResponseErrorCodeArgs
+        ///             {
+        ///                 Code = 500,
+        ///                 Msg = "system error",
+        ///                 Desc = "system error code",
+        ///                 ConvertedCode = 5000,
+        ///                 NeedConvert = true,
+        ///             },
+        ///         },
+        ///     });
+        /// 
+        ///     var exampleApiAppService = Tencentcloud.ApiGateway.GetApiAppService.Invoke(new()
+        ///     {
+        ///         ServiceId = exampleApi.ServiceId,
+        ///         ApiRegion = "ap-guangzhou",
+        ///     });
+        /// 
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetApiAppServiceResult> InvokeAsync(GetApiAppServiceArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetApiAppServiceResult>("tencentcloud:ApiGateway/getApiAppService:getApiAppService", args ?? new GetApiAppServiceArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetApiAppServiceResult>("tencentcloud:ApiGateway/getApiAppService:getApiAppService", args ?? new GetApiAppServiceArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of apigateway api_app_services
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var exampleService = new Tencentcloud.ApiGateway.Service("exampleService", new()
         ///     {
-        ///         var exampleService = new Tencentcloud.ApiGateway.Service("exampleService", new Tencentcloud.ApiGateway.ServiceArgs
+        ///         ServiceName = "tf_example",
+        ///         Protocol = "http&amp;https",
+        ///         ServiceDesc = "desc.",
+        ///         NetTypes = new[]
         ///         {
-        ///             ServiceName = "tf_example",
-        ///             Protocol = "http&amp;https",
-        ///             ServiceDesc = "desc.",
-        ///             NetTypes = 
-        ///             {
-        ///                 "INNER",
-        ///                 "OUTER",
-        ///             },
-        ///             IpVersion = "IPv4",
-        ///         });
-        ///         var exampleApi = new Tencentcloud.ApiGateway.Api("exampleApi", new Tencentcloud.ApiGateway.ApiArgs
-        ///         {
-        ///             ServiceId = exampleService.Id,
-        ///             ApiName = "tf_example",
-        ///             ApiDesc = "my hello api update",
-        ///             AuthType = "APP",
-        ///             Protocol = "HTTP",
-        ///             EnableCors = true,
-        ///             RequestConfigPath = "/user/info",
-        ///             RequestConfigMethod = "POST",
-        ///             RequestParameters = 
-        ///             {
-        ///                 new Tencentcloud.ApiGateway.Inputs.ApiRequestParameterArgs
-        ///                 {
-        ///                     Name = "email",
-        ///                     Position = "QUERY",
-        ///                     Type = "string",
-        ///                     Desc = "desc.",
-        ///                     DefaultValue = "test@qq.com",
-        ///                     Required = true,
-        ///                 },
-        ///             },
-        ///             ServiceConfigType = "HTTP",
-        ///             ServiceConfigTimeout = 10,
-        ///             ServiceConfigUrl = "http://www.tencent.com",
-        ///             ServiceConfigPath = "/user",
-        ///             ServiceConfigMethod = "POST",
-        ///             ResponseType = "XML",
-        ///             ResponseSuccessExample = "&lt;note&gt;success&lt;/note&gt;",
-        ///             ResponseFailExample = "&lt;note&gt;fail&lt;/note&gt;",
-        ///             ResponseErrorCodes = 
-        ///             {
-        ///                 new Tencentcloud.ApiGateway.Inputs.ApiResponseErrorCodeArgs
-        ///                 {
-        ///                     Code = 500,
-        ///                     Msg = "system error",
-        ///                     Desc = "system error code",
-        ///                     ConvertedCode = 5000,
-        ///                     NeedConvert = true,
-        ///                 },
-        ///             },
-        ///         });
-        ///         var exampleApiAppService = Tencentcloud.ApiGateway.GetApiAppService.Invoke(new Tencentcloud.ApiGateway.GetApiAppServiceInvokeArgs
-        ///         {
-        ///             ServiceId = exampleApi.ServiceId,
-        ///             ApiRegion = "ap-guangzhou",
-        ///         });
-        ///     }
+        ///             "INNER",
+        ///             "OUTER",
+        ///         },
+        ///         IpVersion = "IPv4",
+        ///     });
         /// 
-        /// }
+        ///     var exampleApi = new Tencentcloud.ApiGateway.Api("exampleApi", new()
+        ///     {
+        ///         ServiceId = exampleService.Id,
+        ///         ApiName = "tf_example",
+        ///         ApiDesc = "my hello api update",
+        ///         AuthType = "APP",
+        ///         Protocol = "HTTP",
+        ///         EnableCors = true,
+        ///         RequestConfigPath = "/user/info",
+        ///         RequestConfigMethod = "POST",
+        ///         RequestParameters = new[]
+        ///         {
+        ///             new Tencentcloud.ApiGateway.Inputs.ApiRequestParameterArgs
+        ///             {
+        ///                 Name = "email",
+        ///                 Position = "QUERY",
+        ///                 Type = "string",
+        ///                 Desc = "desc.",
+        ///                 DefaultValue = "test@qq.com",
+        ///                 Required = true,
+        ///             },
+        ///         },
+        ///         ServiceConfigType = "HTTP",
+        ///         ServiceConfigTimeout = 10,
+        ///         ServiceConfigUrl = "http://www.tencent.com",
+        ///         ServiceConfigPath = "/user",
+        ///         ServiceConfigMethod = "POST",
+        ///         ResponseType = "XML",
+        ///         ResponseSuccessExample = "&lt;note&gt;success&lt;/note&gt;",
+        ///         ResponseFailExample = "&lt;note&gt;fail&lt;/note&gt;",
+        ///         ResponseErrorCodes = new[]
+        ///         {
+        ///             new Tencentcloud.ApiGateway.Inputs.ApiResponseErrorCodeArgs
+        ///             {
+        ///                 Code = 500,
+        ///                 Msg = "system error",
+        ///                 Desc = "system error code",
+        ///                 ConvertedCode = 5000,
+        ///                 NeedConvert = true,
+        ///             },
+        ///         },
+        ///     });
+        /// 
+        ///     var exampleApiAppService = Tencentcloud.ApiGateway.GetApiAppService.Invoke(new()
+        ///     {
+        ///         ServiceId = exampleApi.ServiceId,
+        ///         ApiRegion = "ap-guangzhou",
+        ///     });
+        /// 
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetApiAppServiceResult> Invoke(GetApiAppServiceInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetApiAppServiceResult>("tencentcloud:ApiGateway/getApiAppService:getApiAppService", args ?? new GetApiAppServiceInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetApiAppServiceResult>("tencentcloud:ApiGateway/getApiAppService:getApiAppService", args ?? new GetApiAppServiceInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetApiAppServiceArgs : Pulumi.InvokeArgs
+    public sealed class GetApiAppServiceArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Territory to which the service belongs.
@@ -207,9 +205,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway
         public GetApiAppServiceArgs()
         {
         }
+        public static new GetApiAppServiceArgs Empty => new GetApiAppServiceArgs();
     }
 
-    public sealed class GetApiAppServiceInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetApiAppServiceInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Territory to which the service belongs.
@@ -232,6 +231,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway
         public GetApiAppServiceInvokeArgs()
         {
         }
+        public static new GetApiAppServiceInvokeArgs Empty => new GetApiAppServiceInvokeArgs();
     }
 
 

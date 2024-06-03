@@ -7,113 +7,126 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a NAT gateway.
 //
 // ## Example Usage
+//
 // ### Create a traditional NAT gateway.
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Eip"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Nat"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Eip"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Nat"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		vpc, err := Vpc.NewInstance(ctx, "vpc", &Vpc.InstanceArgs{
-// 			CidrBlock: pulumi.String("10.0.0.0/16"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		eipExample1, err := Eip.NewInstance(ctx, "eipExample1", nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		eipExample2, err := Eip.NewInstance(ctx, "eipExample2", nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_, err = Nat.NewGateway(ctx, "example", &Nat.GatewayArgs{
-// 			VpcId:         vpc.ID(),
-// 			Bandwidth:     pulumi.Int(100),
-// 			MaxConcurrent: pulumi.Int(1000000),
-// 			AssignedEipSets: pulumi.StringArray{
-// 				eipExample1.PublicIp,
-// 				eipExample2.PublicIp,
-// 			},
-// 			Tags: pulumi.AnyMap{
-// 				"tf_tag_key": pulumi.Any("tf_tag_value"),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			vpc, err := Vpc.NewInstance(ctx, "vpc", &Vpc.InstanceArgs{
+//				CidrBlock: pulumi.String("10.0.0.0/16"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			eipExample1, err := Eip.NewInstance(ctx, "eipExample1", nil)
+//			if err != nil {
+//				return err
+//			}
+//			eipExample2, err := Eip.NewInstance(ctx, "eipExample2", nil)
+//			if err != nil {
+//				return err
+//			}
+//			_, err = Nat.NewGateway(ctx, "example", &Nat.GatewayArgs{
+//				VpcId:         vpc.ID(),
+//				Bandwidth:     pulumi.Int(100),
+//				MaxConcurrent: pulumi.Int(1000000),
+//				AssignedEipSets: pulumi.StringArray{
+//					eipExample1.PublicIp,
+//					eipExample2.PublicIp,
+//				},
+//				Tags: pulumi.Map{
+//					"tf_tag_key": pulumi.Any("tf_tag_value"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
+//
 // ### Create a standard NAT gateway.
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Eip"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Nat"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Eip"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Nat"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		vpc, err := Vpc.NewInstance(ctx, "vpc", &Vpc.InstanceArgs{
-// 			CidrBlock: pulumi.String("10.0.0.0/16"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		eipExample1, err := Eip.NewInstance(ctx, "eipExample1", nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		eipExample2, err := Eip.NewInstance(ctx, "eipExample2", nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_, err = Nat.NewGateway(ctx, "example", &Nat.GatewayArgs{
-// 			VpcId: vpc.ID(),
-// 			AssignedEipSets: pulumi.StringArray{
-// 				eipExample1.PublicIp,
-// 				eipExample2.PublicIp,
-// 			},
-// 			NatProductVersion: pulumi.Int(2),
-// 			Tags: pulumi.AnyMap{
-// 				"tf_tag_key": pulumi.Any("tf_tag_value"),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			vpc, err := Vpc.NewInstance(ctx, "vpc", &Vpc.InstanceArgs{
+//				CidrBlock: pulumi.String("10.0.0.0/16"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			eipExample1, err := Eip.NewInstance(ctx, "eipExample1", nil)
+//			if err != nil {
+//				return err
+//			}
+//			eipExample2, err := Eip.NewInstance(ctx, "eipExample2", nil)
+//			if err != nil {
+//				return err
+//			}
+//			_, err = Nat.NewGateway(ctx, "example", &Nat.GatewayArgs{
+//				VpcId: vpc.ID(),
+//				AssignedEipSets: pulumi.StringArray{
+//					eipExample1.PublicIp,
+//					eipExample2.PublicIp,
+//				},
+//				NatProductVersion: pulumi.Int(2),
+//				Tags: pulumi.Map{
+//					"tf_tag_key": pulumi.Any("tf_tag_value"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // NAT gateway can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Nat/gateway:Gateway foo nat-1asg3t63
+// $ pulumi import tencentcloud:Nat/gateway:Gateway foo nat-1asg3t63
 // ```
 type Gateway struct {
 	pulumi.CustomResourceState
@@ -153,7 +166,7 @@ func NewGateway(ctx *pulumi.Context,
 	if args.VpcId == nil {
 		return nil, errors.New("invalid value for required argument 'VpcId'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource Gateway
 	err := ctx.RegisterResource("tencentcloud:Nat/gateway:Gateway", name, args, &resource, opts...)
 	if err != nil {
@@ -294,7 +307,7 @@ func (i *Gateway) ToGatewayOutputWithContext(ctx context.Context) GatewayOutput 
 // GatewayArrayInput is an input type that accepts GatewayArray and GatewayArrayOutput values.
 // You can construct a concrete instance of `GatewayArrayInput` via:
 //
-//          GatewayArray{ GatewayArgs{...} }
+//	GatewayArray{ GatewayArgs{...} }
 type GatewayArrayInput interface {
 	pulumi.Input
 
@@ -319,7 +332,7 @@ func (i GatewayArray) ToGatewayArrayOutputWithContext(ctx context.Context) Gatew
 // GatewayMapInput is an input type that accepts GatewayMap and GatewayMapOutput values.
 // You can construct a concrete instance of `GatewayMapInput` via:
 //
-//          GatewayMap{ "key": GatewayArgs{...} }
+//	GatewayMap{ "key": GatewayArgs{...} }
 type GatewayMapInput interface {
 	pulumi.Input
 

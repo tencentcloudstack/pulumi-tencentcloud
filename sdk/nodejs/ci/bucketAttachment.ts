@@ -9,21 +9,21 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const bucketAttachment = new tencentcloud.Ci.BucketAttachment("bucket_attachment", {
- *     bucket: "terraform-ci-xxxxxx",
- * });
+ * const bucketAttachment = new tencentcloud.ci.BucketAttachment("bucketAttachment", {bucket: "terraform-ci-xxxxxx"});
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * ci bucket can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Ci/bucketAttachment:BucketAttachment bucket_attachment terraform-ci-xxxxxx
+ * $ pulumi import tencentcloud:Ci/bucketAttachment:BucketAttachment bucket_attachment terraform-ci-xxxxxx
  * ```
  */
 export class BucketAttachment extends pulumi.CustomResource {

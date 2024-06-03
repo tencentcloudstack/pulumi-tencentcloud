@@ -14,49 +14,52 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcr
     /// Provides a resource to create a tcr customized domain
     /// 
     /// ## Example Usage
+    /// 
     /// ### Create a tcr customized domain
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var exampleInstance = new Tencentcloud.Tcr.Instance("exampleInstance", new()
     ///     {
-    ///         var exampleInstance = new Tencentcloud.Tcr.Instance("exampleInstance", new Tencentcloud.Tcr.InstanceArgs
+    ///         InstanceType = "premium",
+    ///         Tags = 
     ///         {
-    ///             InstanceType = "premium",
-    ///             Tags = 
-    ///             {
-    ///                 { "createdBy", "terraform" },
-    ///             },
-    ///         });
-    ///         var exampleCustomizedDomain = new Tencentcloud.Tcr.CustomizedDomain("exampleCustomizedDomain", new Tencentcloud.Tcr.CustomizedDomainArgs
-    ///         {
-    ///             RegistryId = exampleInstance.Id,
-    ///             DomainName = "www.test.com",
-    ///             CertificateId = "your_cert_id",
-    ///             Tags = 
-    ///             {
-    ///                 { "createdBy", "terraform" },
-    ///             },
-    ///         });
-    ///     }
+    ///             { "createdBy", "terraform" },
+    ///         },
+    ///     });
     /// 
-    /// }
+    ///     var exampleCustomizedDomain = new Tencentcloud.Tcr.CustomizedDomain("exampleCustomizedDomain", new()
+    ///     {
+    ///         RegistryId = exampleInstance.Id,
+    ///         DomainName = "www.test.com",
+    ///         CertificateId = "your_cert_id",
+    ///         Tags = 
+    ///         {
+    ///             { "createdBy", "terraform" },
+    ///         },
+    ///     });
+    /// 
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// tcr customized_domain can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Tcr/customizedDomain:CustomizedDomain customized_domain customized_domain_id
+    /// $ pulumi import tencentcloud:Tcr/customizedDomain:CustomizedDomain customized_domain customized_domain_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Tcr/customizedDomain:CustomizedDomain")]
-    public partial class CustomizedDomain : Pulumi.CustomResource
+    public partial class CustomizedDomain : global::Pulumi.CustomResource
     {
         /// <summary>
         /// certificate id.
@@ -127,7 +130,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcr
         }
     }
 
-    public sealed class CustomizedDomainArgs : Pulumi.ResourceArgs
+    public sealed class CustomizedDomainArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// certificate id.
@@ -162,9 +165,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcr
         public CustomizedDomainArgs()
         {
         }
+        public static new CustomizedDomainArgs Empty => new CustomizedDomainArgs();
     }
 
-    public sealed class CustomizedDomainState : Pulumi.ResourceArgs
+    public sealed class CustomizedDomainState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// certificate id.
@@ -199,5 +203,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcr
         public CustomizedDomainState()
         {
         }
+        public static new CustomizedDomainState Empty => new CustomizedDomainState();
     }
 }

@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,20 +11,19 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const alarmNoticeCallbacks = pulumi.output(tencentcloud.Monitor.getAlarmNoticeCallbacks());
+ * const alarmNoticeCallbacks = tencentcloud.Monitor.getAlarmNoticeCallbacks({});
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getAlarmNoticeCallbacks(args?: GetAlarmNoticeCallbacksArgs, opts?: pulumi.InvokeOptions): Promise<GetAlarmNoticeCallbacksResult> {
     args = args || {};
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Monitor/getAlarmNoticeCallbacks:getAlarmNoticeCallbacks", {
         "resultOutputFile": args.resultOutputFile,
         "tags": args.tags,
@@ -59,9 +59,22 @@ export interface GetAlarmNoticeCallbacksResult {
      */
     readonly urlNotices: outputs.Monitor.GetAlarmNoticeCallbacksUrlNotice[];
 }
-
+/**
+ * Use this data source to query detailed information of monitor alarmNoticeCallbacks
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const alarmNoticeCallbacks = tencentcloud.Monitor.getAlarmNoticeCallbacks({});
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getAlarmNoticeCallbacksOutput(args?: GetAlarmNoticeCallbacksOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetAlarmNoticeCallbacksResult> {
-    return pulumi.output(args).apply(a => getAlarmNoticeCallbacks(a, opts))
+    return pulumi.output(args).apply((a: any) => getAlarmNoticeCallbacks(a, opts))
 }
 
 /**

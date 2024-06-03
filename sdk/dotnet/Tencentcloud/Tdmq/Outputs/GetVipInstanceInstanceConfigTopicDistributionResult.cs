@@ -14,7 +14,13 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdmq.Outputs
     [OutputType]
     public sealed class GetVipInstanceInstanceConfigTopicDistributionResult
     {
+        /// <summary>
+        /// Number of topics.
+        /// </summary>
         public readonly int Count;
+        /// <summary>
+        /// Topic type.
+        /// </summary>
         public readonly string TopicType;
 
         [OutputConstructor]

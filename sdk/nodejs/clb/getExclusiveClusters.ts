@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,25 +11,24 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const exclusiveClusters = pulumi.output(tencentcloud.Clb.getExclusiveClusters({
+ * const exclusiveClusters = tencentcloud.Clb.getExclusiveClusters({
  *     filters: [{
  *         name: "zone",
  *         values: ["ap-guangzhou-1"],
  *     }],
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getExclusiveClusters(args?: GetExclusiveClustersArgs, opts?: pulumi.InvokeOptions): Promise<GetExclusiveClustersResult> {
     args = args || {};
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Clb/getExclusiveClusters:getExclusiveClusters", {
         "filters": args.filters,
         "resultOutputFile": args.resultOutputFile,
@@ -64,9 +64,27 @@ export interface GetExclusiveClustersResult {
     readonly id: string;
     readonly resultOutputFile?: string;
 }
-
+/**
+ * Use this data source to query detailed information of clb exclusiveClusters
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const exclusiveClusters = tencentcloud.Clb.getExclusiveClusters({
+ *     filters: [{
+ *         name: "zone",
+ *         values: ["ap-guangzhou-1"],
+ *     }],
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getExclusiveClustersOutput(args?: GetExclusiveClustersOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetExclusiveClustersResult> {
-    return pulumi.output(args).apply(a => getExclusiveClusters(a, opts))
+    return pulumi.output(args).apply((a: any) => getExclusiveClusters(a, opts))
 }
 
 /**

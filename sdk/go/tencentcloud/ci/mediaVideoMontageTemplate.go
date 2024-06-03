@@ -7,71 +7,74 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a ci mediaVideoMontageTemplate
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"fmt"
 //
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Ci"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ci"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ci"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Ci.NewMediaVideoMontageTemplate(ctx, "mediaVideoMontageTemplate", &Ci.MediaVideoMontageTemplateArgs{
-// 			Audio: &ci.MediaVideoMontageTemplateAudioArgs{
-// 				Bitrate:    pulumi.String("128"),
-// 				Channels:   pulumi.String("4"),
-// 				Codec:      pulumi.String("aac"),
-// 				Remove:     pulumi.String("false"),
-// 				Samplerate: pulumi.String("44100"),
-// 			},
-// 			AudioMixes: ci.MediaVideoMontageTemplateAudioMixArray{
-// 				&ci.MediaVideoMontageTemplateAudioMixArgs{
-// 					AudioSource: pulumi.String(fmt.Sprintf("%v%v%v", "https://terraform-ci-xxxxx.cos.ap-guangzhou.myqcloud.com/mp3", "%", "2Fnizhan-test.mp3")),
-// 					MixMode:     pulumi.String("Once"),
-// 					Replace:     pulumi.String("true"),
-// 				},
-// 			},
-// 			Bucket: pulumi.String("terraform-ci-xxxxx"),
-// 			Container: &ci.MediaVideoMontageTemplateContainerArgs{
-// 				Format: pulumi.String("mp4"),
-// 			},
-// 			Duration: pulumi.String("10.5"),
-// 			Video: &ci.MediaVideoMontageTemplateVideoArgs{
-// 				Bitrate: pulumi.String("1000"),
-// 				Codec:   pulumi.String("H.264"),
-// 				Crf:     pulumi.String(""),
-// 				Fps:     pulumi.String("25"),
-// 				Height:  pulumi.String(""),
-// 				Remove:  pulumi.String(""),
-// 				Width:   pulumi.String("1280"),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Ci.NewMediaVideoMontageTemplate(ctx, "mediaVideoMontageTemplate", &Ci.MediaVideoMontageTemplateArgs{
+//				Audio: &ci.MediaVideoMontageTemplateAudioArgs{
+//					Bitrate:    pulumi.String("128"),
+//					Channels:   pulumi.String("4"),
+//					Codec:      pulumi.String("aac"),
+//					Remove:     pulumi.String("false"),
+//					Samplerate: pulumi.String("44100"),
+//				},
+//				AudioMixes: ci.MediaVideoMontageTemplateAudioMixArray{
+//					&ci.MediaVideoMontageTemplateAudioMixArgs{
+//						AudioSource: pulumi.String("https://terraform-ci-xxxxx.cos.ap-guangzhou.myqcloud.com/mp3%2Fnizhan-test.mp3"),
+//						MixMode:     pulumi.String("Once"),
+//						Replace:     pulumi.String("true"),
+//					},
+//				},
+//				Bucket: pulumi.String("terraform-ci-xxxxx"),
+//				Container: &ci.MediaVideoMontageTemplateContainerArgs{
+//					Format: pulumi.String("mp4"),
+//				},
+//				Duration: pulumi.String("10.5"),
+//				Video: &ci.MediaVideoMontageTemplateVideoArgs{
+//					Bitrate: pulumi.String("1000"),
+//					Codec:   pulumi.String("H.264"),
+//					Crf:     pulumi.String(""),
+//					Fps:     pulumi.String("25"),
+//					Height:  pulumi.String(""),
+//					Remove:  pulumi.String(""),
+//					Width:   pulumi.String("1280"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // ci media_video_montage_template can be imported using the bucket#templateId, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Ci/mediaVideoMontageTemplate:MediaVideoMontageTemplate media_video_montage_template terraform-ci-xxxxxx#t193e5ecc1b8154e57a8376b4405ad9c63
+// $ pulumi import tencentcloud:Ci/mediaVideoMontageTemplate:MediaVideoMontageTemplate media_video_montage_template terraform-ci-xxxxxx#t193e5ecc1b8154e57a8376b4405ad9c63
 // ```
 type MediaVideoMontageTemplate struct {
 	pulumi.CustomResourceState
@@ -105,7 +108,7 @@ func NewMediaVideoMontageTemplate(ctx *pulumi.Context,
 	if args.Container == nil {
 		return nil, errors.New("invalid value for required argument 'Container'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource MediaVideoMontageTemplate
 	err := ctx.RegisterResource("tencentcloud:Ci/mediaVideoMontageTemplate:MediaVideoMontageTemplate", name, args, &resource, opts...)
 	if err != nil {
@@ -226,7 +229,7 @@ func (i *MediaVideoMontageTemplate) ToMediaVideoMontageTemplateOutputWithContext
 // MediaVideoMontageTemplateArrayInput is an input type that accepts MediaVideoMontageTemplateArray and MediaVideoMontageTemplateArrayOutput values.
 // You can construct a concrete instance of `MediaVideoMontageTemplateArrayInput` via:
 //
-//          MediaVideoMontageTemplateArray{ MediaVideoMontageTemplateArgs{...} }
+//	MediaVideoMontageTemplateArray{ MediaVideoMontageTemplateArgs{...} }
 type MediaVideoMontageTemplateArrayInput interface {
 	pulumi.Input
 
@@ -251,7 +254,7 @@ func (i MediaVideoMontageTemplateArray) ToMediaVideoMontageTemplateArrayOutputWi
 // MediaVideoMontageTemplateMapInput is an input type that accepts MediaVideoMontageTemplateMap and MediaVideoMontageTemplateMapOutput values.
 // You can construct a concrete instance of `MediaVideoMontageTemplateMapInput` via:
 //
-//          MediaVideoMontageTemplateMap{ "key": MediaVideoMontageTemplateArgs{...} }
+//	MediaVideoMontageTemplateMap{ "key": MediaVideoMontageTemplateArgs{...} }
 type MediaVideoMontageTemplateMapInput interface {
 	pulumi.Input
 

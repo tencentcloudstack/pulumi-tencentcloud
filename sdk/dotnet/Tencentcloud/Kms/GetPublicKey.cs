@@ -15,82 +15,78 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kms
         /// <summary>
         /// Use this data source to query detailed information of kms public_key
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var exampleKey = new Tencentcloud.Kms.Key("exampleKey", new()
         ///     {
-        ///         var exampleKey = new Tencentcloud.Kms.Key("exampleKey", new Tencentcloud.Kms.KeyArgs
-        ///         {
-        ///             Alias = "tf-example-kms-key",
-        ///             Description = "example of kms key",
-        ///             KeyUsage = "ASYMMETRIC_DECRYPT_RSA_2048",
-        ///             IsEnabled = true,
-        ///             PendingDeleteWindowInDays = 7,
-        ///         });
-        ///         var examplePublicKey = Tencentcloud.Kms.GetPublicKey.Invoke(new Tencentcloud.Kms.GetPublicKeyInvokeArgs
-        ///         {
-        ///             KeyId = exampleKey.Id,
-        ///         });
-        ///     }
+        ///         Alias = "tf-example-kms-key",
+        ///         Description = "example of kms key",
+        ///         KeyUsage = "ASYMMETRIC_DECRYPT_RSA_2048",
+        ///         IsEnabled = true,
+        ///         PendingDeleteWindowInDays = 7,
+        ///     });
         /// 
-        /// }
+        ///     var examplePublicKey = Tencentcloud.Kms.GetPublicKey.Invoke(new()
+        ///     {
+        ///         KeyId = exampleKey.Id,
+        ///     });
+        /// 
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetPublicKeyResult> InvokeAsync(GetPublicKeyArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetPublicKeyResult>("tencentcloud:Kms/getPublicKey:getPublicKey", args ?? new GetPublicKeyArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetPublicKeyResult>("tencentcloud:Kms/getPublicKey:getPublicKey", args ?? new GetPublicKeyArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of kms public_key
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var exampleKey = new Tencentcloud.Kms.Key("exampleKey", new()
         ///     {
-        ///         var exampleKey = new Tencentcloud.Kms.Key("exampleKey", new Tencentcloud.Kms.KeyArgs
-        ///         {
-        ///             Alias = "tf-example-kms-key",
-        ///             Description = "example of kms key",
-        ///             KeyUsage = "ASYMMETRIC_DECRYPT_RSA_2048",
-        ///             IsEnabled = true,
-        ///             PendingDeleteWindowInDays = 7,
-        ///         });
-        ///         var examplePublicKey = Tencentcloud.Kms.GetPublicKey.Invoke(new Tencentcloud.Kms.GetPublicKeyInvokeArgs
-        ///         {
-        ///             KeyId = exampleKey.Id,
-        ///         });
-        ///     }
+        ///         Alias = "tf-example-kms-key",
+        ///         Description = "example of kms key",
+        ///         KeyUsage = "ASYMMETRIC_DECRYPT_RSA_2048",
+        ///         IsEnabled = true,
+        ///         PendingDeleteWindowInDays = 7,
+        ///     });
         /// 
-        /// }
+        ///     var examplePublicKey = Tencentcloud.Kms.GetPublicKey.Invoke(new()
+        ///     {
+        ///         KeyId = exampleKey.Id,
+        ///     });
+        /// 
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetPublicKeyResult> Invoke(GetPublicKeyInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetPublicKeyResult>("tencentcloud:Kms/getPublicKey:getPublicKey", args ?? new GetPublicKeyInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetPublicKeyResult>("tencentcloud:Kms/getPublicKey:getPublicKey", args ?? new GetPublicKeyInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetPublicKeyArgs : Pulumi.InvokeArgs
+    public sealed class GetPublicKeyArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// CMK unique identifier.
@@ -107,9 +103,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kms
         public GetPublicKeyArgs()
         {
         }
+        public static new GetPublicKeyArgs Empty => new GetPublicKeyArgs();
     }
 
-    public sealed class GetPublicKeyInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetPublicKeyInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// CMK unique identifier.
@@ -126,6 +123,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kms
         public GetPublicKeyInvokeArgs()
         {
         }
+        public static new GetPublicKeyInvokeArgs Empty => new GetPublicKeyInvokeArgs();
     }
 
 

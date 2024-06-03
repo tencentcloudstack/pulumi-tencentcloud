@@ -15,64 +15,58 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
         /// <summary>
         /// Use this data source to query detailed information of mysql supported_privileges
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var supportedPrivileges = Tencentcloud.Mysql.GetSupportedPrivileges.Invoke(new()
         ///     {
-        ///         var supportedPrivileges = Output.Create(Tencentcloud.Mysql.GetSupportedPrivileges.InvokeAsync(new Tencentcloud.Mysql.GetSupportedPrivilegesArgs
-        ///         {
-        ///             InstanceId = "cdb-fitq5t9h",
-        ///         }));
-        ///     }
+        ///         InstanceId = "cdb-fitq5t9h",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetSupportedPrivilegesResult> InvokeAsync(GetSupportedPrivilegesArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetSupportedPrivilegesResult>("tencentcloud:Mysql/getSupportedPrivileges:getSupportedPrivileges", args ?? new GetSupportedPrivilegesArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetSupportedPrivilegesResult>("tencentcloud:Mysql/getSupportedPrivileges:getSupportedPrivileges", args ?? new GetSupportedPrivilegesArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of mysql supported_privileges
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var supportedPrivileges = Tencentcloud.Mysql.GetSupportedPrivileges.Invoke(new()
         ///     {
-        ///         var supportedPrivileges = Output.Create(Tencentcloud.Mysql.GetSupportedPrivileges.InvokeAsync(new Tencentcloud.Mysql.GetSupportedPrivilegesArgs
-        ///         {
-        ///             InstanceId = "cdb-fitq5t9h",
-        ///         }));
-        ///     }
+        ///         InstanceId = "cdb-fitq5t9h",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetSupportedPrivilegesResult> Invoke(GetSupportedPrivilegesInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetSupportedPrivilegesResult>("tencentcloud:Mysql/getSupportedPrivileges:getSupportedPrivileges", args ?? new GetSupportedPrivilegesInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetSupportedPrivilegesResult>("tencentcloud:Mysql/getSupportedPrivileges:getSupportedPrivileges", args ?? new GetSupportedPrivilegesInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetSupportedPrivilegesArgs : Pulumi.InvokeArgs
+    public sealed class GetSupportedPrivilegesArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// The instance ID, in the format: cdb-c1nl9rpv, is the same as the instance ID displayed on the cloud database console page.
@@ -89,9 +83,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
         public GetSupportedPrivilegesArgs()
         {
         }
+        public static new GetSupportedPrivilegesArgs Empty => new GetSupportedPrivilegesArgs();
     }
 
-    public sealed class GetSupportedPrivilegesInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetSupportedPrivilegesInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// The instance ID, in the format: cdb-c1nl9rpv, is the same as the instance ID displayed on the cloud database console page.
@@ -108,6 +103,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
         public GetSupportedPrivilegesInvokeArgs()
         {
         }
+        public static new GetSupportedPrivilegesInvokeArgs Empty => new GetSupportedPrivilegesInvokeArgs();
     }
 
 

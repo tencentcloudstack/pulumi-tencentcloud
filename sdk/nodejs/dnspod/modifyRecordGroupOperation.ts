@@ -9,17 +9,19 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const modifyRecordGroup = new tencentcloud.Dnspod.ModifyRecordGroupOperation("modify_record_group", {
+ * const modifyRecordGroup = new tencentcloud.dnspod.ModifyRecordGroupOperation("modifyRecordGroup", {
  *     domain: "dnspod.cn",
  *     domainId: 123,
  *     groupId: 1,
  *     recordId: "234|345",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export class ModifyRecordGroupOperation extends pulumi.CustomResource {
     /**

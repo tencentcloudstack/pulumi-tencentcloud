@@ -7,66 +7,71 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a cynosdb readOnlyInstanceExclusiveAccess
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cynosdb"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cynosdb"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		cfg := config.New(ctx, "")
-// 		cynosdbClusterId := "default_cynosdb_cluster"
-// 		if param := cfg.Get("cynosdbClusterId"); param != "" {
-// 			cynosdbClusterId = param
-// 		}
-// 		cynosdbClusterInstanceId := "default_cluster_instance"
-// 		if param := cfg.Get("cynosdbClusterInstanceId"); param != "" {
-// 			cynosdbClusterInstanceId = param
-// 		}
-// 		cynosdbClusterSecurityGroupId := "default_security_group_id"
-// 		if param := cfg.Get("cynosdbClusterSecurityGroupId"); param != "" {
-// 			cynosdbClusterSecurityGroupId = param
-// 		}
-// 		gz3, err := Vpc.GetSubnets(ctx, &vpc.GetSubnetsArgs{
-// 			AvailabilityZone: pulumi.StringRef(_var.Default_az),
-// 			IsDefault:        pulumi.BoolRef(true),
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		vpcId := gz3.InstanceLists[0].VpcId
-// 		subnetId := gz3.InstanceLists[0].SubnetId
-// 		_, err = Cynosdb.NewReadOnlyInstanceExclusiveAccess(ctx, "readOnlyInstanceExclusiveAccess", &Cynosdb.ReadOnlyInstanceExclusiveAccessArgs{
-// 			ClusterId:  pulumi.String(cynosdbClusterId),
-// 			InstanceId: pulumi.String(cynosdbClusterInstanceId),
-// 			VpcId:      pulumi.String(vpcId),
-// 			SubnetId:   pulumi.String(subnetId),
-// 			Port:       pulumi.Int(1234),
-// 			SecurityGroupIds: pulumi.StringArray{
-// 				pulumi.String(cynosdbClusterSecurityGroupId),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			cfg := config.New(ctx, "")
+//			cynosdbClusterId := "default_cynosdb_cluster"
+//			if param := cfg.Get("cynosdbClusterId"); param != "" {
+//				cynosdbClusterId = param
+//			}
+//			cynosdbClusterInstanceId := "default_cluster_instance"
+//			if param := cfg.Get("cynosdbClusterInstanceId"); param != "" {
+//				cynosdbClusterInstanceId = param
+//			}
+//			cynosdbClusterSecurityGroupId := "default_security_group_id"
+//			if param := cfg.Get("cynosdbClusterSecurityGroupId"); param != "" {
+//				cynosdbClusterSecurityGroupId = param
+//			}
+//			gz3, err := Vpc.GetSubnets(ctx, &vpc.GetSubnetsArgs{
+//				AvailabilityZone: pulumi.StringRef(_var.Default_az),
+//				IsDefault:        pulumi.BoolRef(true),
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			vpcId := gz3.InstanceLists[0].VpcId
+//			subnetId := gz3.InstanceLists[0].SubnetId
+//			_, err = Cynosdb.NewReadOnlyInstanceExclusiveAccess(ctx, "readOnlyInstanceExclusiveAccess", &Cynosdb.ReadOnlyInstanceExclusiveAccessArgs{
+//				ClusterId:  pulumi.String(cynosdbClusterId),
+//				InstanceId: pulumi.String(cynosdbClusterInstanceId),
+//				VpcId:      pulumi.String(vpcId),
+//				SubnetId:   pulumi.String(subnetId),
+//				Port:       pulumi.Int(1234),
+//				SecurityGroupIds: pulumi.StringArray{
+//					pulumi.String(cynosdbClusterSecurityGroupId),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 type ReadOnlyInstanceExclusiveAccess struct {
 	pulumi.CustomResourceState
 
@@ -106,7 +111,7 @@ func NewReadOnlyInstanceExclusiveAccess(ctx *pulumi.Context,
 	if args.VpcId == nil {
 		return nil, errors.New("invalid value for required argument 'VpcId'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource ReadOnlyInstanceExclusiveAccess
 	err := ctx.RegisterResource("tencentcloud:Cynosdb/readOnlyInstanceExclusiveAccess:ReadOnlyInstanceExclusiveAccess", name, args, &resource, opts...)
 	if err != nil {
@@ -219,7 +224,7 @@ func (i *ReadOnlyInstanceExclusiveAccess) ToReadOnlyInstanceExclusiveAccessOutpu
 // ReadOnlyInstanceExclusiveAccessArrayInput is an input type that accepts ReadOnlyInstanceExclusiveAccessArray and ReadOnlyInstanceExclusiveAccessArrayOutput values.
 // You can construct a concrete instance of `ReadOnlyInstanceExclusiveAccessArrayInput` via:
 //
-//          ReadOnlyInstanceExclusiveAccessArray{ ReadOnlyInstanceExclusiveAccessArgs{...} }
+//	ReadOnlyInstanceExclusiveAccessArray{ ReadOnlyInstanceExclusiveAccessArgs{...} }
 type ReadOnlyInstanceExclusiveAccessArrayInput interface {
 	pulumi.Input
 
@@ -244,7 +249,7 @@ func (i ReadOnlyInstanceExclusiveAccessArray) ToReadOnlyInstanceExclusiveAccessA
 // ReadOnlyInstanceExclusiveAccessMapInput is an input type that accepts ReadOnlyInstanceExclusiveAccessMap and ReadOnlyInstanceExclusiveAccessMapOutput values.
 // You can construct a concrete instance of `ReadOnlyInstanceExclusiveAccessMapInput` via:
 //
-//          ReadOnlyInstanceExclusiveAccessMap{ "key": ReadOnlyInstanceExclusiveAccessArgs{...} }
+//	ReadOnlyInstanceExclusiveAccessMap{ "key": ReadOnlyInstanceExclusiveAccessArgs{...} }
 type ReadOnlyInstanceExclusiveAccessMapInput interface {
 	pulumi.Input
 

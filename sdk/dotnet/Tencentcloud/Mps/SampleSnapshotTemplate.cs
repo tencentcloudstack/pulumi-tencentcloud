@@ -15,39 +15,40 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var sampleSnapshotTemplate = new Tencentcloud.Mps.SampleSnapshotTemplate("sampleSnapshotTemplate", new()
     ///     {
-    ///         var sampleSnapshotTemplate = new Tencentcloud.Mps.SampleSnapshotTemplate("sampleSnapshotTemplate", new Tencentcloud.Mps.SampleSnapshotTemplateArgs
-    ///         {
-    ///             FillType = "stretch",
-    ///             Format = "jpg",
-    ///             Height = 128,
-    ///             ResolutionAdaptive = "open",
-    ///             SampleInterval = 10,
-    ///             SampleType = "Percent",
-    ///             Width = 140,
-    ///         });
-    ///     }
+    ///         FillType = "stretch",
+    ///         Format = "jpg",
+    ///         Height = 128,
+    ///         ResolutionAdaptive = "open",
+    ///         SampleInterval = 10,
+    ///         SampleType = "Percent",
+    ///         Width = 140,
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// mps sample_snapshot_template can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Mps/sampleSnapshotTemplate:SampleSnapshotTemplate sample_snapshot_template sample_snapshot_template_id
+    /// $ pulumi import tencentcloud:Mps/sampleSnapshotTemplate:SampleSnapshotTemplate sample_snapshot_template sample_snapshot_template_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Mps/sampleSnapshotTemplate:SampleSnapshotTemplate")]
-    public partial class SampleSnapshotTemplate : Pulumi.CustomResource
+    public partial class SampleSnapshotTemplate : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Template description information, length limit: 256 characters.
@@ -148,7 +149,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps
         }
     }
 
-    public sealed class SampleSnapshotTemplateArgs : Pulumi.ResourceArgs
+    public sealed class SampleSnapshotTemplateArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Template description information, length limit: 256 characters.
@@ -207,9 +208,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps
         public SampleSnapshotTemplateArgs()
         {
         }
+        public static new SampleSnapshotTemplateArgs Empty => new SampleSnapshotTemplateArgs();
     }
 
-    public sealed class SampleSnapshotTemplateState : Pulumi.ResourceArgs
+    public sealed class SampleSnapshotTemplateState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Template description information, length limit: 256 characters.
@@ -268,5 +270,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps
         public SampleSnapshotTemplateState()
         {
         }
+        public static new SampleSnapshotTemplateState Empty => new SampleSnapshotTemplateState();
     }
 }

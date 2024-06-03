@@ -9,23 +9,25 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const globalDomainDns = new tencentcloud.Gaap.GlobalDomainDns("global_domain_dns", {
+ * const globalDomainDns = new tencentcloud.gaap.GlobalDomainDns("globalDomainDns", {
  *     domainId: "dm-xxxxxx",
  *     nationCountryInnerCodes: ["101001"],
  *     proxyIdLists: ["link-xxxxxx"],
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * gaap global_domain_dns can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Gaap/globalDomainDns:GlobalDomainDns global_domain_dns ${domainId}#${dnsRecordId}
+ * $ pulumi import tencentcloud:Gaap/globalDomainDns:GlobalDomainDns global_domain_dns ${domainId}#${dnsRecordId}
  * ```
  */
 export class GlobalDomainDns extends pulumi.CustomResource {

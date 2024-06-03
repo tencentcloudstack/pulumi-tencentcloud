@@ -9,10 +9,11 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const internal = tencentcloud.Security.getGroups({
  *     name: "default",
@@ -21,11 +22,11 @@ import * as utilities from "../utilities";
  *     name: "Default-VPC",
  * });
  * const subnet = vpc.then(vpc => tencentcloud.Vpc.getSubnets({
- *     vpcId: vpc.instanceLists?[0]?.vpcId,
+ *     vpcId: vpc.instanceLists?.[0]?.vpcId,
  * }));
- * const vpcId = subnet.then(subnet => subnet.instanceLists?[0]?.vpcId);
- * const subnetId = subnet.then(subnet => subnet.instanceLists?[0]?.subnetId);
- * const sgId = internal.then(internal => internal.securityGroups?[0]?.securityGroupId);
+ * const vpcId = subnet.then(subnet => subnet.instanceLists?.[0]?.vpcId);
+ * const subnetId = subnet.then(subnet => subnet.instanceLists?.[0]?.subnetId);
+ * const sgId = internal.then(internal => internal.securityGroups?.[0]?.securityGroupId);
  * const hourdbInstanceDcn = new tencentcloud.dcdb.HourdbInstance("hourdbInstanceDcn", {
  *     instanceName: "test_dcdb_db_hourdb_instance_dcn",
  *     zones: [_var.default_az],
@@ -48,6 +49,7 @@ import * as utilities from "../utilities";
  * const cancelOperation = new tencentcloud.dcdb.CancelDcnJobOperation("cancelOperation", {instanceId: dcnDcdbId});
  * // cancel the dcn/readonly instance
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export class CancelDcnJobOperation extends pulumi.CustomResource {
     /**

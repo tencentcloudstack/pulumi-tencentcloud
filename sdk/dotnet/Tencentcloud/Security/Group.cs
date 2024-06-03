@@ -14,58 +14,62 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Security
     /// Provides a resource to create security group.
     /// 
     /// ## Example Usage
+    /// 
     /// ### Create a basic security group
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var example = new Tencentcloud.Security.Group("example", new()
     ///     {
-    ///         var example = new Tencentcloud.Security.Group("example", new Tencentcloud.Security.GroupArgs
-    ///         {
-    ///             Description = "sg test",
-    ///         });
-    ///     }
+    ///         Description = "sg test",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
+    /// 
     /// ### Create a complete security group
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var example = new Tencentcloud.Security.Group("example", new()
     ///     {
-    ///         var example = new Tencentcloud.Security.Group("example", new Tencentcloud.Security.GroupArgs
+    ///         Description = "sg test",
+    ///         ProjectId = 0,
+    ///         Tags = 
     ///         {
-    ///             Description = "sg test",
-    ///             ProjectId = 0,
-    ///             Tags = 
-    ///             {
-    ///                 { "example", "test" },
-    ///             },
-    ///         });
-    ///     }
+    ///             { "example", "test" },
+    ///         },
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// Security group can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Security/group:Group tencentcloud_security_group.sglab sg-ey3wmiz1
+    /// $ pulumi import tencentcloud:Security/group:Group tencentcloud_security_group.sglab sg-ey3wmiz1
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Security/group:Group")]
-    public partial class Group : Pulumi.CustomResource
+    public partial class Group : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Description of the security group.
@@ -136,7 +140,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Security
         }
     }
 
-    public sealed class GroupArgs : Pulumi.ResourceArgs
+    public sealed class GroupArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Description of the security group.
@@ -171,9 +175,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Security
         public GroupArgs()
         {
         }
+        public static new GroupArgs Empty => new GroupArgs();
     }
 
-    public sealed class GroupState : Pulumi.ResourceArgs
+    public sealed class GroupState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Description of the security group.
@@ -208,5 +213,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Security
         public GroupState()
         {
         }
+        public static new GroupState Empty => new GroupState();
     }
 }

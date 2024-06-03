@@ -8,37 +8,42 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Use this data source to query detailed information of sqlserver slowlogs
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Sqlserver"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Sqlserver"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Sqlserver"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Sqlserver.GetSlowlogs(ctx, &sqlserver.GetSlowlogsArgs{
-// 			EndTime:    "2023-08-07 00:00:00",
-// 			InstanceId: "mssql-qelbzgwf",
-// 			StartTime:  "2023-08-01 00:00:00",
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Sqlserver.GetSlowlogs(ctx, &sqlserver.GetSlowlogsArgs{
+//				EndTime:    "2023-08-07 00:00:00",
+//				InstanceId: "mssql-qelbzgwf",
+//				StartTime:  "2023-08-01 00:00:00",
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 func GetSlowlogs(ctx *pulumi.Context, args *GetSlowlogsArgs, opts ...pulumi.InvokeOption) (*GetSlowlogsResult, error) {
-	opts = pkgInvokeDefaultOpts(opts)
+	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetSlowlogsResult
 	err := ctx.Invoke("tencentcloud:Sqlserver/getSlowlogs:getSlowlogs", args, &rv, opts...)
 	if err != nil {

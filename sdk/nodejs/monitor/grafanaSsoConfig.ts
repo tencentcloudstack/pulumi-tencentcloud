@@ -9,22 +9,24 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const grafanaSsoConfig = new tencentcloud.Monitor.GrafanaSsoConfig("grafana_sso_config", {
+ * const grafanaSsoConfig = new tencentcloud.monitor.GrafanaSsoConfig("grafanaSsoConfig", {
  *     enableSso: false,
  *     instanceId: "grafana-dp2hnnfa",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * monitor grafana_sso_config can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Monitor/grafanaSsoConfig:GrafanaSsoConfig grafana_sso_config instance_id
+ * $ pulumi import tencentcloud:Monitor/grafanaSsoConfig:GrafanaSsoConfig grafana_sso_config instance_id
  * ```
  */
 export class GrafanaSsoConfig extends pulumi.CustomResource {

@@ -15,58 +15,52 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Lighthouse
         /// <summary>
         /// Use this data source to query detailed information of lighthouse bundle
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
-        ///     {
-        ///         var bundle = Output.Create(Tencentcloud.Lighthouse.GetBundle.InvokeAsync());
-        ///     }
+        ///     var bundle = Tencentcloud.Lighthouse.GetBundle.Invoke();
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetBundleResult> InvokeAsync(GetBundleArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetBundleResult>("tencentcloud:Lighthouse/getBundle:getBundle", args ?? new GetBundleArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetBundleResult>("tencentcloud:Lighthouse/getBundle:getBundle", args ?? new GetBundleArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of lighthouse bundle
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
-        ///     {
-        ///         var bundle = Output.Create(Tencentcloud.Lighthouse.GetBundle.InvokeAsync());
-        ///     }
+        ///     var bundle = Tencentcloud.Lighthouse.GetBundle.Invoke();
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetBundleResult> Invoke(GetBundleInvokeArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetBundleResult>("tencentcloud:Lighthouse/getBundle:getBundle", args ?? new GetBundleInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetBundleResult>("tencentcloud:Lighthouse/getBundle:getBundle", args ?? new GetBundleInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetBundleArgs : Pulumi.InvokeArgs
+    public sealed class GetBundleArgs : global::Pulumi.InvokeArgs
     {
         [Input("bundleIds")]
         private List<string>? _bundleIds;
@@ -130,9 +124,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Lighthouse
         public GetBundleArgs()
         {
         }
+        public static new GetBundleArgs Empty => new GetBundleArgs();
     }
 
-    public sealed class GetBundleInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetBundleInvokeArgs : global::Pulumi.InvokeArgs
     {
         [Input("bundleIds")]
         private InputList<string>? _bundleIds;
@@ -196,6 +191,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Lighthouse
         public GetBundleInvokeArgs()
         {
         }
+        public static new GetBundleInvokeArgs Empty => new GetBundleInvokeArgs();
     }
 
 

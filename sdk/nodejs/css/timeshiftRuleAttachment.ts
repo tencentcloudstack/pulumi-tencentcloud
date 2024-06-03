@@ -9,24 +9,26 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const timeshiftRuleAttachment = new tencentcloud.Css.TimeshiftRuleAttachment("timeshift_rule_attachment", {
+ * const timeshiftRuleAttachment = new tencentcloud.css.TimeshiftRuleAttachment("timeshiftRuleAttachment", {
  *     appName: "qqq",
  *     domainName: "177154.push.tlivecloud.com",
  *     streamName: "ppp",
  *     templateId: 252586,
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * css timeshift_rule_attachment can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Css/timeshiftRuleAttachment:TimeshiftRuleAttachment timeshift_rule_attachment templateId#domainName
+ * $ pulumi import tencentcloud:Css/timeshiftRuleAttachment:TimeshiftRuleAttachment timeshift_rule_attachment templateId#domainName
  * ```
  */
 export class TimeshiftRuleAttachment extends pulumi.CustomResource {

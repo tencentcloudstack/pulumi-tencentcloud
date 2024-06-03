@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,20 +11,19 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const instanceTrafficPackage = pulumi.output(tencentcloud.Lighthouse.getInstanceTrafficPackage());
+ * const instanceTrafficPackage = tencentcloud.Lighthouse.getInstanceTrafficPackage({});
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getInstanceTrafficPackage(args?: GetInstanceTrafficPackageArgs, opts?: pulumi.InvokeOptions): Promise<GetInstanceTrafficPackageResult> {
     args = args || {};
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Lighthouse/getInstanceTrafficPackage:getInstanceTrafficPackage", {
         "instanceIds": args.instanceIds,
         "limit": args.limit,
@@ -71,9 +71,22 @@ export interface GetInstanceTrafficPackageResult {
     readonly offset?: number;
     readonly resultOutputFile?: string;
 }
-
+/**
+ * Use this data source to query detailed information of lighthouse instanceTrafficPackage
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const instanceTrafficPackage = tencentcloud.Lighthouse.getInstanceTrafficPackage({});
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getInstanceTrafficPackageOutput(args?: GetInstanceTrafficPackageOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetInstanceTrafficPackageResult> {
-    return pulumi.output(args).apply(a => getInstanceTrafficPackage(a, opts))
+    return pulumi.output(args).apply((a: any) => getInstanceTrafficPackage(a, opts))
 }
 
 /**

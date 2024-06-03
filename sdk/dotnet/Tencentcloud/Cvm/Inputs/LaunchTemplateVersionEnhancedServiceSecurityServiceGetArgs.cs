@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cvm.Inputs
 {
 
-    public sealed class LaunchTemplateVersionEnhancedServiceSecurityServiceGetArgs : Pulumi.ResourceArgs
+    public sealed class LaunchTemplateVersionEnhancedServiceSecurityServiceGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Whether to enable Cloud Security.
@@ -22,5 +22,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cvm.Inputs
         public LaunchTemplateVersionEnhancedServiceSecurityServiceGetArgs()
         {
         }
+        public static new LaunchTemplateVersionEnhancedServiceSecurityServiceGetArgs Empty => new LaunchTemplateVersionEnhancedServiceSecurityServiceGetArgs();
     }
 }

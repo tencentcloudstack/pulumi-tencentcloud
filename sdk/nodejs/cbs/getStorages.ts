@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,22 +11,26 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const storages = pulumi.output(tencentcloud.Cbs.getStorages({
+ * const storages = tencentcloud.Cbs.getStorages({
  *     resultOutputFile: "mytestpath",
  *     storageId: "disk-kdt0sq6m",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
+ *
  * ### The following snippet shows the new supported query params
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const whatsNew = pulumi.output(tencentcloud.Cbs.getStorages({
+ * const whatsNew = tencentcloud.Cbs.getStorages({
  *     chargeTypes: [
  *         "POSTPAID_BY_HOUR",
  *         "PREPAID",
@@ -39,16 +44,14 @@ import * as utilities from "../utilities";
  *         "bar",
  *         "baz",
  *     ],
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getStorages(args?: GetStoragesArgs, opts?: pulumi.InvokeOptions): Promise<GetStoragesResult> {
     args = args || {};
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Cbs/getStorages:getStorages", {
         "availabilityZone": args.availabilityZone,
         "chargeTypes": args.chargeTypes,
@@ -177,9 +180,50 @@ export interface GetStoragesResult {
     readonly tagKeys?: string[];
     readonly tagValues?: string[];
 }
-
+/**
+ * Use this data source to query detailed information of CBS storages.
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const storages = tencentcloud.Cbs.getStorages({
+ *     resultOutputFile: "mytestpath",
+ *     storageId: "disk-kdt0sq6m",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ *
+ * ### The following snippet shows the new supported query params
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const whatsNew = tencentcloud.Cbs.getStorages({
+ *     chargeTypes: [
+ *         "POSTPAID_BY_HOUR",
+ *         "PREPAID",
+ *     ],
+ *     instanceIps: ["10.0.0.2"],
+ *     instanceNames: ["my-instance"],
+ *     portable: true,
+ *     storageStates: ["ATTACHED"],
+ *     tagKeys: ["foo"],
+ *     tagValues: [
+ *         "bar",
+ *         "baz",
+ *     ],
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getStoragesOutput(args?: GetStoragesOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetStoragesResult> {
-    return pulumi.output(args).apply(a => getStorages(a, opts))
+    return pulumi.output(args).apply((a: any) => getStorages(a, opts))
 }
 
 /**

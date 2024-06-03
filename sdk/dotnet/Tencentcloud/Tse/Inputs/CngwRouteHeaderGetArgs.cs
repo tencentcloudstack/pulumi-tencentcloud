@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tse.Inputs
 {
 
-    public sealed class CngwRouteHeaderGetArgs : Pulumi.ResourceArgs
+    public sealed class CngwRouteHeaderGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// key of header.
@@ -28,5 +28,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tse.Inputs
         public CngwRouteHeaderGetArgs()
         {
         }
+        public static new CngwRouteHeaderGetArgs Empty => new CngwRouteHeaderGetArgs();
     }
 }

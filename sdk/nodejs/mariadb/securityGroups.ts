@@ -11,23 +11,25 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const securityGroups = new tencentcloud.Mariadb.SecurityGroups("security_groups", {
+ * const securityGroups = new tencentcloud.mariadb.SecurityGroups("securityGroups", {
  *     instanceId: "tdsql-4pzs5b67",
  *     product: "mariadb",
  *     securityGroupId: "sg-7kpsbxdb",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * mariadb security_groups can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Mariadb/securityGroups:SecurityGroups security_groups tdsql-4pzs5b67#sg-7kpsbxdb#mariadb
+ * $ pulumi import tencentcloud:Mariadb/securityGroups:SecurityGroups security_groups tdsql-4pzs5b67#sg-7kpsbxdb#mariadb
  * ```
  */
 export class SecurityGroups extends pulumi.CustomResource {

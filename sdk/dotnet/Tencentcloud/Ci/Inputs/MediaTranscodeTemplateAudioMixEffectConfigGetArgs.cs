@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ci.Inputs
 {
 
-    public sealed class MediaTranscodeTemplateAudioMixEffectConfigGetArgs : Pulumi.ResourceArgs
+    public sealed class MediaTranscodeTemplateAudioMixEffectConfigGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// bgm transition fade-in duration, support floating point numbers.
@@ -52,5 +52,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ci.Inputs
         public MediaTranscodeTemplateAudioMixEffectConfigGetArgs()
         {
         }
+        public static new MediaTranscodeTemplateAudioMixEffectConfigGetArgs Empty => new MediaTranscodeTemplateAudioMixEffectConfigGetArgs();
     }
 }

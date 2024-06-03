@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,11 +11,12 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const testBgpip = new tencentcloud.Dayu.CcHttpPolicy("test_bgpip", {
+ * const testBgpip = new tencentcloud.dayu.CcHttpPolicy("testBgpip", {
  *     action: "drop",
  *     resourceId: "bgpip-00000294",
  *     resourceType: "bgpip",
@@ -24,9 +26,9 @@ import * as utilities from "../utilities";
  *         value: "123",
  *     }],
  *     smode: "matching",
- *     switch: true,
+ *     "switch": true,
  * });
- * const testNet = new tencentcloud.Dayu.CcHttpPolicy("test_net", {
+ * const testNet = new tencentcloud.dayu.CcHttpPolicy("testNet", {
  *     action: "drop",
  *     resourceId: "net-0000007e",
  *     resourceType: "net",
@@ -36,9 +38,9 @@ import * as utilities from "../utilities";
  *         value: "123",
  *     }],
  *     smode: "matching",
- *     switch: true,
+ *     "switch": true,
  * });
- * const testBgpmultip = new tencentcloud.Dayu.CcHttpPolicy("test_bgpmultip", {
+ * const testBgpmultip = new tencentcloud.dayu.CcHttpPolicy("testBgpmultip", {
  *     action: "alg",
  *     ip: "111.230.178.25",
  *     resourceId: "bgp-0000008o",
@@ -49,9 +51,9 @@ import * as utilities from "../utilities";
  *         value: "123",
  *     }],
  *     smode: "matching",
- *     switch: true,
+ *     "switch": true,
  * });
- * const testBgp = new tencentcloud.Dayu.CcHttpPolicy("test_bgp", {
+ * const testBgp = new tencentcloud.dayu.CcHttpPolicy("testBgp", {
  *     action: "alg",
  *     resourceId: "bgp-000006mq",
  *     resourceType: "bgp",
@@ -61,9 +63,10 @@ import * as utilities from "../utilities";
  *         value: "123",
  *     }],
  *     smode: "matching",
- *     switch: true,
+ *     "switch": true,
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export class CcHttpPolicy extends pulumi.CustomResource {
     /**

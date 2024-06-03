@@ -7,48 +7,55 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a Ckafka Acl.
 //
 // ## Example Usage
+//
 // ### Ckafka Acl
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ckafka"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ckafka"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Ckafka.NewAcl(ctx, "foo", &Ckafka.AclArgs{
-// 			InstanceId:     pulumi.String("ckafka-f9ife4zz"),
-// 			ResourceType:   pulumi.String("TOPIC"),
-// 			ResourceName:   pulumi.String("topic-tf-test"),
-// 			OperationType:  pulumi.String("WRITE"),
-// 			PermissionType: pulumi.String("ALLOW"),
-// 			Host:           pulumi.String("*"),
-// 			Principal:      pulumi.Any(tencentcloud_ckafka_user.Foo.Account_name),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Ckafka.NewAcl(ctx, "foo", &Ckafka.AclArgs{
+//				InstanceId:     pulumi.String("ckafka-f9ife4zz"),
+//				ResourceType:   pulumi.String("TOPIC"),
+//				ResourceName:   pulumi.String("topic-tf-test"),
+//				OperationType:  pulumi.String("WRITE"),
+//				PermissionType: pulumi.String("ALLOW"),
+//				Host:           pulumi.String("*"),
+//				Principal:      pulumi.Any(tencentcloud_ckafka_user.Foo.Account_name),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // Ckafka acl can be imported using the instance_id#permission_type#principal#host#operation_type#resource_type#resource_name, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Ckafka/acl:Acl foo ckafka-f9ife4zz#ALLOW#test#*#WRITE#TOPIC#topic-tf-test
+// $ pulumi import tencentcloud:Ckafka/acl:Acl foo ckafka-f9ife4zz#ALLOW#test#*#WRITE#TOPIC#topic-tf-test
 // ```
 type Acl struct {
 	pulumi.CustomResourceState
@@ -85,7 +92,7 @@ func NewAcl(ctx *pulumi.Context,
 	if args.ResourceName == nil {
 		return nil, errors.New("invalid value for required argument 'ResourceName'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource Acl
 	err := ctx.RegisterResource("tencentcloud:Ckafka/acl:Acl", name, args, &resource, opts...)
 	if err != nil {
@@ -206,7 +213,7 @@ func (i *Acl) ToAclOutputWithContext(ctx context.Context) AclOutput {
 // AclArrayInput is an input type that accepts AclArray and AclArrayOutput values.
 // You can construct a concrete instance of `AclArrayInput` via:
 //
-//          AclArray{ AclArgs{...} }
+//	AclArray{ AclArgs{...} }
 type AclArrayInput interface {
 	pulumi.Input
 
@@ -231,7 +238,7 @@ func (i AclArray) ToAclArrayOutputWithContext(ctx context.Context) AclArrayOutpu
 // AclMapInput is an input type that accepts AclMap and AclMapOutput values.
 // You can construct a concrete instance of `AclMapInput` via:
 //
-//          AclMap{ "key": AclArgs{...} }
+//	AclMap{ "key": AclArgs{...} }
 type AclMapInput interface {
 	pulumi.Input
 

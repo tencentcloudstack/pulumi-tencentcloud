@@ -8,13 +8,15 @@ import * as utilities from "../utilities";
  * Provide a resource to create a VPC.
  *
  * ## Example Usage
+ *
  * ### Create a basic VPC
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const vpc = new tencentcloud.Vpc.Instance("vpc", {
+ * const vpc = new tencentcloud.vpc.Instance("vpc", {
  *     cidrBlock: "10.0.0.0/16",
  *     dnsServers: [
  *         "119.29.29.29",
@@ -26,13 +28,16 @@ import * as utilities from "../utilities";
  *     },
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
+ *
  * ### Using Assistant CIDR
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const vpc = new tencentcloud.Vpc.Instance("vpc", {
+ * const vpc = new tencentcloud.vpc.Instance("vpc", {
  *     assistantCidrs: ["172.16.0.0/24"],
  *     cidrBlock: "10.0.0.0/16",
  *     isMulticast: false,
@@ -41,13 +46,14 @@ import * as utilities from "../utilities";
  *     },
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * Vpc instance can be imported, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Vpc/instance:Instance test vpc-id
+ * $ pulumi import tencentcloud:Vpc/instance:Instance test vpc-id
  * ```
  */
 export class Instance extends pulumi.CustomResource {

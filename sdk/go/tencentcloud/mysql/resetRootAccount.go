@@ -7,95 +7,100 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a mysql resetRootAccount
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Availability"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Availability"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Mysql"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Security"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Subnet"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Availability"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Mysql"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Security"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Subnet"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		zones, err := Availability.GetZonesByProduct(ctx, &availability.GetZonesByProductArgs{
-// 			Product: "cdb",
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		vpc, err := Vpc.NewInstance(ctx, "vpc", &Vpc.InstanceArgs{
-// 			CidrBlock: pulumi.String("10.0.0.0/16"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		subnet, err := Subnet.NewInstance(ctx, "subnet", &Subnet.InstanceArgs{
-// 			AvailabilityZone: pulumi.String(zones.Zones[0].Name),
-// 			VpcId:            vpc.ID(),
-// 			CidrBlock:        pulumi.String("10.0.0.0/16"),
-// 			IsMulticast:      pulumi.Bool(false),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		securityGroup, err := Security.NewGroup(ctx, "securityGroup", &Security.GroupArgs{
-// 			Description: pulumi.String("mysql test"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		exampleInstance, err := Mysql.NewInstance(ctx, "exampleInstance", &Mysql.InstanceArgs{
-// 			InternetService:  pulumi.Int(1),
-// 			EngineVersion:    pulumi.String("5.7"),
-// 			ChargeType:       pulumi.String("POSTPAID"),
-// 			RootPassword:     pulumi.String("PassWord123"),
-// 			SlaveDeployMode:  pulumi.Int(1),
-// 			AvailabilityZone: pulumi.String(zones.Zones[0].Name),
-// 			FirstSlaveZone:   pulumi.String(zones.Zones[1].Name),
-// 			SlaveSyncMode:    pulumi.Int(1),
-// 			InstanceName:     pulumi.String("tf-example-mysql"),
-// 			MemSize:          pulumi.Int(4000),
-// 			VolumeSize:       pulumi.Int(200),
-// 			VpcId:            vpc.ID(),
-// 			SubnetId:         subnet.ID(),
-// 			IntranetPort:     pulumi.Int(3306),
-// 			SecurityGroups: pulumi.StringArray{
-// 				securityGroup.ID(),
-// 			},
-// 			Tags: pulumi.AnyMap{
-// 				"name": pulumi.Any("test"),
-// 			},
-// 			Parameters: pulumi.AnyMap{
-// 				"character_set_server": pulumi.Any("utf8"),
-// 				"max_connections":      pulumi.Any("1000"),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_, err = Mysql.NewResetRootAccount(ctx, "exampleResetRootAccount", &Mysql.ResetRootAccountArgs{
-// 			InstanceId: exampleInstance.ID(),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			zones, err := Availability.GetZonesByProduct(ctx, &availability.GetZonesByProductArgs{
+//				Product: "cdb",
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			vpc, err := Vpc.NewInstance(ctx, "vpc", &Vpc.InstanceArgs{
+//				CidrBlock: pulumi.String("10.0.0.0/16"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			subnet, err := Subnet.NewInstance(ctx, "subnet", &Subnet.InstanceArgs{
+//				AvailabilityZone: pulumi.String(zones.Zones[0].Name),
+//				VpcId:            vpc.ID(),
+//				CidrBlock:        pulumi.String("10.0.0.0/16"),
+//				IsMulticast:      pulumi.Bool(false),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			securityGroup, err := Security.NewGroup(ctx, "securityGroup", &Security.GroupArgs{
+//				Description: pulumi.String("mysql test"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			exampleInstance, err := Mysql.NewInstance(ctx, "exampleInstance", &Mysql.InstanceArgs{
+//				InternetService:  pulumi.Int(1),
+//				EngineVersion:    pulumi.String("5.7"),
+//				ChargeType:       pulumi.String("POSTPAID"),
+//				RootPassword:     pulumi.String("PassWord123"),
+//				SlaveDeployMode:  pulumi.Int(1),
+//				AvailabilityZone: pulumi.String(zones.Zones[0].Name),
+//				FirstSlaveZone:   pulumi.String(zones.Zones[1].Name),
+//				SlaveSyncMode:    pulumi.Int(1),
+//				InstanceName:     pulumi.String("tf-example-mysql"),
+//				MemSize:          pulumi.Int(4000),
+//				VolumeSize:       pulumi.Int(200),
+//				VpcId:            vpc.ID(),
+//				SubnetId:         subnet.ID(),
+//				IntranetPort:     pulumi.Int(3306),
+//				SecurityGroups: pulumi.StringArray{
+//					securityGroup.ID(),
+//				},
+//				Tags: pulumi.Map{
+//					"name": pulumi.Any("test"),
+//				},
+//				Parameters: pulumi.Map{
+//					"character_set_server": pulumi.Any("utf8"),
+//					"max_connections":      pulumi.Any("1000"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_, err = Mysql.NewResetRootAccount(ctx, "exampleResetRootAccount", &Mysql.ResetRootAccountArgs{
+//				InstanceId: exampleInstance.ID(),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 type ResetRootAccount struct {
 	pulumi.CustomResourceState
 
@@ -113,7 +118,7 @@ func NewResetRootAccount(ctx *pulumi.Context,
 	if args.InstanceId == nil {
 		return nil, errors.New("invalid value for required argument 'InstanceId'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource ResetRootAccount
 	err := ctx.RegisterResource("tencentcloud:Mysql/resetRootAccount:ResetRootAccount", name, args, &resource, opts...)
 	if err != nil {
@@ -186,7 +191,7 @@ func (i *ResetRootAccount) ToResetRootAccountOutputWithContext(ctx context.Conte
 // ResetRootAccountArrayInput is an input type that accepts ResetRootAccountArray and ResetRootAccountArrayOutput values.
 // You can construct a concrete instance of `ResetRootAccountArrayInput` via:
 //
-//          ResetRootAccountArray{ ResetRootAccountArgs{...} }
+//	ResetRootAccountArray{ ResetRootAccountArgs{...} }
 type ResetRootAccountArrayInput interface {
 	pulumi.Input
 
@@ -211,7 +216,7 @@ func (i ResetRootAccountArray) ToResetRootAccountArrayOutputWithContext(ctx cont
 // ResetRootAccountMapInput is an input type that accepts ResetRootAccountMap and ResetRootAccountMapOutput values.
 // You can construct a concrete instance of `ResetRootAccountMapInput` via:
 //
-//          ResetRootAccountMap{ "key": ResetRootAccountArgs{...} }
+//	ResetRootAccountMap{ "key": ResetRootAccountArgs{...} }
 type ResetRootAccountMapInput interface {
 	pulumi.Input
 

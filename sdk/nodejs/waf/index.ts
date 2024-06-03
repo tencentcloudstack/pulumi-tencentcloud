@@ -5,56 +5,161 @@ import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
 // Export members:
-export * from "./antiFake";
-export * from "./antiInfoLeak";
-export * from "./autoDenyRules";
-export * from "./cc";
-export * from "./ccAutoStatus";
-export * from "./ccSession";
-export * from "./clbDomain";
-export * from "./clbInstance";
-export * from "./customRule";
-export * from "./customWhiteRule";
-export * from "./getAttackLogHistogram";
-export * from "./getAttackLogList";
-export * from "./getAttackOverview";
-export * from "./getAttackTotalCount";
-export * from "./getCiphers";
-export * from "./getDomains";
-export * from "./getFindDomains";
-export * from "./getInstanceQpsLimit";
-export * from "./getPeakPoints";
-export * from "./getPorts";
-export * from "./getTlsVersions";
-export * from "./getUserClbRegions";
-export * from "./getUserDomains";
-export * from "./getWafInfos";
-export * from "./ipAccessControl";
-export * from "./modifyAccessPeriod";
-export * from "./moduleStatus";
-export * from "./protectionMode";
-export * from "./saasDomain";
-export * from "./saasInstance";
-export * from "./webShell";
+export { AntiFakeArgs, AntiFakeState } from "./antiFake";
+export type AntiFake = import("./antiFake").AntiFake;
+export const AntiFake: typeof import("./antiFake").AntiFake = null as any;
+utilities.lazyLoad(exports, ["AntiFake"], () => require("./antiFake"));
 
-// Import resources to register:
-import { AntiFake } from "./antiFake";
-import { AntiInfoLeak } from "./antiInfoLeak";
-import { AutoDenyRules } from "./autoDenyRules";
-import { Cc } from "./cc";
-import { CcAutoStatus } from "./ccAutoStatus";
-import { CcSession } from "./ccSession";
-import { ClbDomain } from "./clbDomain";
-import { ClbInstance } from "./clbInstance";
-import { CustomRule } from "./customRule";
-import { CustomWhiteRule } from "./customWhiteRule";
-import { IpAccessControl } from "./ipAccessControl";
-import { ModifyAccessPeriod } from "./modifyAccessPeriod";
-import { ModuleStatus } from "./moduleStatus";
-import { ProtectionMode } from "./protectionMode";
-import { SaasDomain } from "./saasDomain";
-import { SaasInstance } from "./saasInstance";
-import { WebShell } from "./webShell";
+export { AntiInfoLeakArgs, AntiInfoLeakState } from "./antiInfoLeak";
+export type AntiInfoLeak = import("./antiInfoLeak").AntiInfoLeak;
+export const AntiInfoLeak: typeof import("./antiInfoLeak").AntiInfoLeak = null as any;
+utilities.lazyLoad(exports, ["AntiInfoLeak"], () => require("./antiInfoLeak"));
+
+export { AutoDenyRulesArgs, AutoDenyRulesState } from "./autoDenyRules";
+export type AutoDenyRules = import("./autoDenyRules").AutoDenyRules;
+export const AutoDenyRules: typeof import("./autoDenyRules").AutoDenyRules = null as any;
+utilities.lazyLoad(exports, ["AutoDenyRules"], () => require("./autoDenyRules"));
+
+export { CcArgs, CcState } from "./cc";
+export type Cc = import("./cc").Cc;
+export const Cc: typeof import("./cc").Cc = null as any;
+utilities.lazyLoad(exports, ["Cc"], () => require("./cc"));
+
+export { CcAutoStatusArgs, CcAutoStatusState } from "./ccAutoStatus";
+export type CcAutoStatus = import("./ccAutoStatus").CcAutoStatus;
+export const CcAutoStatus: typeof import("./ccAutoStatus").CcAutoStatus = null as any;
+utilities.lazyLoad(exports, ["CcAutoStatus"], () => require("./ccAutoStatus"));
+
+export { CcSessionArgs, CcSessionState } from "./ccSession";
+export type CcSession = import("./ccSession").CcSession;
+export const CcSession: typeof import("./ccSession").CcSession = null as any;
+utilities.lazyLoad(exports, ["CcSession"], () => require("./ccSession"));
+
+export { ClbDomainArgs, ClbDomainState } from "./clbDomain";
+export type ClbDomain = import("./clbDomain").ClbDomain;
+export const ClbDomain: typeof import("./clbDomain").ClbDomain = null as any;
+utilities.lazyLoad(exports, ["ClbDomain"], () => require("./clbDomain"));
+
+export { ClbInstanceArgs, ClbInstanceState } from "./clbInstance";
+export type ClbInstance = import("./clbInstance").ClbInstance;
+export const ClbInstance: typeof import("./clbInstance").ClbInstance = null as any;
+utilities.lazyLoad(exports, ["ClbInstance"], () => require("./clbInstance"));
+
+export { CustomRuleArgs, CustomRuleState } from "./customRule";
+export type CustomRule = import("./customRule").CustomRule;
+export const CustomRule: typeof import("./customRule").CustomRule = null as any;
+utilities.lazyLoad(exports, ["CustomRule"], () => require("./customRule"));
+
+export { CustomWhiteRuleArgs, CustomWhiteRuleState } from "./customWhiteRule";
+export type CustomWhiteRule = import("./customWhiteRule").CustomWhiteRule;
+export const CustomWhiteRule: typeof import("./customWhiteRule").CustomWhiteRule = null as any;
+utilities.lazyLoad(exports, ["CustomWhiteRule"], () => require("./customWhiteRule"));
+
+export { GetAttackLogHistogramArgs, GetAttackLogHistogramResult, GetAttackLogHistogramOutputArgs } from "./getAttackLogHistogram";
+export const getAttackLogHistogram: typeof import("./getAttackLogHistogram").getAttackLogHistogram = null as any;
+export const getAttackLogHistogramOutput: typeof import("./getAttackLogHistogram").getAttackLogHistogramOutput = null as any;
+utilities.lazyLoad(exports, ["getAttackLogHistogram","getAttackLogHistogramOutput"], () => require("./getAttackLogHistogram"));
+
+export { GetAttackLogListArgs, GetAttackLogListResult, GetAttackLogListOutputArgs } from "./getAttackLogList";
+export const getAttackLogList: typeof import("./getAttackLogList").getAttackLogList = null as any;
+export const getAttackLogListOutput: typeof import("./getAttackLogList").getAttackLogListOutput = null as any;
+utilities.lazyLoad(exports, ["getAttackLogList","getAttackLogListOutput"], () => require("./getAttackLogList"));
+
+export { GetAttackOverviewArgs, GetAttackOverviewResult, GetAttackOverviewOutputArgs } from "./getAttackOverview";
+export const getAttackOverview: typeof import("./getAttackOverview").getAttackOverview = null as any;
+export const getAttackOverviewOutput: typeof import("./getAttackOverview").getAttackOverviewOutput = null as any;
+utilities.lazyLoad(exports, ["getAttackOverview","getAttackOverviewOutput"], () => require("./getAttackOverview"));
+
+export { GetAttackTotalCountArgs, GetAttackTotalCountResult, GetAttackTotalCountOutputArgs } from "./getAttackTotalCount";
+export const getAttackTotalCount: typeof import("./getAttackTotalCount").getAttackTotalCount = null as any;
+export const getAttackTotalCountOutput: typeof import("./getAttackTotalCount").getAttackTotalCountOutput = null as any;
+utilities.lazyLoad(exports, ["getAttackTotalCount","getAttackTotalCountOutput"], () => require("./getAttackTotalCount"));
+
+export { GetCiphersArgs, GetCiphersResult, GetCiphersOutputArgs } from "./getCiphers";
+export const getCiphers: typeof import("./getCiphers").getCiphers = null as any;
+export const getCiphersOutput: typeof import("./getCiphers").getCiphersOutput = null as any;
+utilities.lazyLoad(exports, ["getCiphers","getCiphersOutput"], () => require("./getCiphers"));
+
+export { GetDomainsArgs, GetDomainsResult, GetDomainsOutputArgs } from "./getDomains";
+export const getDomains: typeof import("./getDomains").getDomains = null as any;
+export const getDomainsOutput: typeof import("./getDomains").getDomainsOutput = null as any;
+utilities.lazyLoad(exports, ["getDomains","getDomainsOutput"], () => require("./getDomains"));
+
+export { GetFindDomainsArgs, GetFindDomainsResult, GetFindDomainsOutputArgs } from "./getFindDomains";
+export const getFindDomains: typeof import("./getFindDomains").getFindDomains = null as any;
+export const getFindDomainsOutput: typeof import("./getFindDomains").getFindDomainsOutput = null as any;
+utilities.lazyLoad(exports, ["getFindDomains","getFindDomainsOutput"], () => require("./getFindDomains"));
+
+export { GetInstanceQpsLimitArgs, GetInstanceQpsLimitResult, GetInstanceQpsLimitOutputArgs } from "./getInstanceQpsLimit";
+export const getInstanceQpsLimit: typeof import("./getInstanceQpsLimit").getInstanceQpsLimit = null as any;
+export const getInstanceQpsLimitOutput: typeof import("./getInstanceQpsLimit").getInstanceQpsLimitOutput = null as any;
+utilities.lazyLoad(exports, ["getInstanceQpsLimit","getInstanceQpsLimitOutput"], () => require("./getInstanceQpsLimit"));
+
+export { GetPeakPointsArgs, GetPeakPointsResult, GetPeakPointsOutputArgs } from "./getPeakPoints";
+export const getPeakPoints: typeof import("./getPeakPoints").getPeakPoints = null as any;
+export const getPeakPointsOutput: typeof import("./getPeakPoints").getPeakPointsOutput = null as any;
+utilities.lazyLoad(exports, ["getPeakPoints","getPeakPointsOutput"], () => require("./getPeakPoints"));
+
+export { GetPortsArgs, GetPortsResult, GetPortsOutputArgs } from "./getPorts";
+export const getPorts: typeof import("./getPorts").getPorts = null as any;
+export const getPortsOutput: typeof import("./getPorts").getPortsOutput = null as any;
+utilities.lazyLoad(exports, ["getPorts","getPortsOutput"], () => require("./getPorts"));
+
+export { GetTlsVersionsArgs, GetTlsVersionsResult, GetTlsVersionsOutputArgs } from "./getTlsVersions";
+export const getTlsVersions: typeof import("./getTlsVersions").getTlsVersions = null as any;
+export const getTlsVersionsOutput: typeof import("./getTlsVersions").getTlsVersionsOutput = null as any;
+utilities.lazyLoad(exports, ["getTlsVersions","getTlsVersionsOutput"], () => require("./getTlsVersions"));
+
+export { GetUserClbRegionsArgs, GetUserClbRegionsResult, GetUserClbRegionsOutputArgs } from "./getUserClbRegions";
+export const getUserClbRegions: typeof import("./getUserClbRegions").getUserClbRegions = null as any;
+export const getUserClbRegionsOutput: typeof import("./getUserClbRegions").getUserClbRegionsOutput = null as any;
+utilities.lazyLoad(exports, ["getUserClbRegions","getUserClbRegionsOutput"], () => require("./getUserClbRegions"));
+
+export { GetUserDomainsArgs, GetUserDomainsResult, GetUserDomainsOutputArgs } from "./getUserDomains";
+export const getUserDomains: typeof import("./getUserDomains").getUserDomains = null as any;
+export const getUserDomainsOutput: typeof import("./getUserDomains").getUserDomainsOutput = null as any;
+utilities.lazyLoad(exports, ["getUserDomains","getUserDomainsOutput"], () => require("./getUserDomains"));
+
+export { GetWafInfosArgs, GetWafInfosResult, GetWafInfosOutputArgs } from "./getWafInfos";
+export const getWafInfos: typeof import("./getWafInfos").getWafInfos = null as any;
+export const getWafInfosOutput: typeof import("./getWafInfos").getWafInfosOutput = null as any;
+utilities.lazyLoad(exports, ["getWafInfos","getWafInfosOutput"], () => require("./getWafInfos"));
+
+export { IpAccessControlArgs, IpAccessControlState } from "./ipAccessControl";
+export type IpAccessControl = import("./ipAccessControl").IpAccessControl;
+export const IpAccessControl: typeof import("./ipAccessControl").IpAccessControl = null as any;
+utilities.lazyLoad(exports, ["IpAccessControl"], () => require("./ipAccessControl"));
+
+export { ModifyAccessPeriodArgs, ModifyAccessPeriodState } from "./modifyAccessPeriod";
+export type ModifyAccessPeriod = import("./modifyAccessPeriod").ModifyAccessPeriod;
+export const ModifyAccessPeriod: typeof import("./modifyAccessPeriod").ModifyAccessPeriod = null as any;
+utilities.lazyLoad(exports, ["ModifyAccessPeriod"], () => require("./modifyAccessPeriod"));
+
+export { ModuleStatusArgs, ModuleStatusState } from "./moduleStatus";
+export type ModuleStatus = import("./moduleStatus").ModuleStatus;
+export const ModuleStatus: typeof import("./moduleStatus").ModuleStatus = null as any;
+utilities.lazyLoad(exports, ["ModuleStatus"], () => require("./moduleStatus"));
+
+export { ProtectionModeArgs, ProtectionModeState } from "./protectionMode";
+export type ProtectionMode = import("./protectionMode").ProtectionMode;
+export const ProtectionMode: typeof import("./protectionMode").ProtectionMode = null as any;
+utilities.lazyLoad(exports, ["ProtectionMode"], () => require("./protectionMode"));
+
+export { SaasDomainArgs, SaasDomainState } from "./saasDomain";
+export type SaasDomain = import("./saasDomain").SaasDomain;
+export const SaasDomain: typeof import("./saasDomain").SaasDomain = null as any;
+utilities.lazyLoad(exports, ["SaasDomain"], () => require("./saasDomain"));
+
+export { SaasInstanceArgs, SaasInstanceState } from "./saasInstance";
+export type SaasInstance = import("./saasInstance").SaasInstance;
+export const SaasInstance: typeof import("./saasInstance").SaasInstance = null as any;
+utilities.lazyLoad(exports, ["SaasInstance"], () => require("./saasInstance"));
+
+export { WebShellArgs, WebShellState } from "./webShell";
+export type WebShell = import("./webShell").WebShell;
+export const WebShell: typeof import("./webShell").WebShell = null as any;
+utilities.lazyLoad(exports, ["WebShell"], () => require("./webShell"));
+
 
 const _module = {
     version: utilities.getVersion(),

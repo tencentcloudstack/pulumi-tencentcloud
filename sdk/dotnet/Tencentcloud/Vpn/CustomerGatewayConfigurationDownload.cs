@@ -15,33 +15,34 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpn
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var vpnCustomerGatewayConfigurationDownload = new Tencentcloud.Vpn.CustomerGatewayConfigurationDownload("vpnCustomerGatewayConfigurationDownload", new()
     ///     {
-    ///         var vpnCustomerGatewayConfigurationDownload = new Tencentcloud.Vpn.CustomerGatewayConfigurationDownload("vpnCustomerGatewayConfigurationDownload", new Tencentcloud.Vpn.CustomerGatewayConfigurationDownloadArgs
+    ///         CustomerGatewayVendor = new Tencentcloud.Vpn.Inputs.CustomerGatewayConfigurationDownloadCustomerGatewayVendorArgs
     ///         {
-    ///             CustomerGatewayVendor = new Tencentcloud.Vpn.Inputs.CustomerGatewayConfigurationDownloadCustomerGatewayVendorArgs
-    ///             {
-    ///                 Platform = "comware",
-    ///                 SoftwareVersion = "V1.0",
-    ///                 VendorName = "h3c",
-    ///             },
-    ///             InterfaceName = "test",
-    ///             VpnConnectionId = "vpnx-kme2tx8m",
-    ///             VpnGatewayId = "vpngw-gt8bianl",
-    ///         });
-    ///     }
+    ///             Platform = "comware",
+    ///             SoftwareVersion = "V1.0",
+    ///             VendorName = "h3c",
+    ///         },
+    ///         InterfaceName = "test",
+    ///         VpnConnectionId = "vpnx-kme2tx8m",
+    ///         VpnGatewayId = "vpngw-gt8bianl",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Vpn/customerGatewayConfigurationDownload:CustomerGatewayConfigurationDownload")]
-    public partial class CustomerGatewayConfigurationDownload : Pulumi.CustomResource
+    public partial class CustomerGatewayConfigurationDownload : global::Pulumi.CustomResource
     {
         /// <summary>
         /// xml configuration.
@@ -118,7 +119,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpn
         }
     }
 
-    public sealed class CustomerGatewayConfigurationDownloadArgs : Pulumi.ResourceArgs
+    public sealed class CustomerGatewayConfigurationDownloadArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Customer Gateway Vendor Info.
@@ -147,9 +148,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpn
         public CustomerGatewayConfigurationDownloadArgs()
         {
         }
+        public static new CustomerGatewayConfigurationDownloadArgs Empty => new CustomerGatewayConfigurationDownloadArgs();
     }
 
-    public sealed class CustomerGatewayConfigurationDownloadState : Pulumi.ResourceArgs
+    public sealed class CustomerGatewayConfigurationDownloadState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// xml configuration.
@@ -184,5 +186,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpn
         public CustomerGatewayConfigurationDownloadState()
         {
         }
+        public static new CustomerGatewayConfigurationDownloadState Empty => new CustomerGatewayConfigurationDownloadState();
     }
 }

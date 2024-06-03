@@ -8,154 +8,185 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // ## Example Usage
+//
 // ### VPC SSL VPN gateway
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpn"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpn"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Vpn.NewGateway(ctx, "myCgw", &Vpn.GatewayArgs{
-// 			Bandwidth: pulumi.Int(5),
-// 			Tags: pulumi.AnyMap{
-// 				"test": pulumi.Any("test"),
-// 			},
-// 			Type:  pulumi.String("SSL"),
-// 			VpcId: pulumi.String("vpc-86v957zb"),
-// 			Zone:  pulumi.String("ap-guangzhou-3"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Vpn.NewGateway(ctx, "myCgw", &Vpn.GatewayArgs{
+//				Bandwidth: pulumi.Int(5),
+//				Tags: pulumi.Map{
+//					"test": pulumi.Any("test"),
+//				},
+//				Type:  pulumi.String("SSL"),
+//				VpcId: pulumi.String("vpc-86v957zb"),
+//				Zone:  pulumi.String("ap-guangzhou-3"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
+//
 // ### CCN IPSEC VPN gateway
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpn"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpn"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Vpn.NewGateway(ctx, "myCgw", &Vpn.GatewayArgs{
-// 			Bandwidth: pulumi.Int(5),
-// 			Tags: pulumi.AnyMap{
-// 				"test": pulumi.Any("test"),
-// 			},
-// 			Type: pulumi.String("IPSEC"),
-// 			Zone: pulumi.String("ap-guangzhou-3"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Vpn.NewGateway(ctx, "myCgw", &Vpn.GatewayArgs{
+//				Bandwidth: pulumi.Int(5),
+//				Tags: pulumi.Map{
+//					"test": pulumi.Any("test"),
+//				},
+//				Type: pulumi.String("IPSEC"),
+//				Zone: pulumi.String("ap-guangzhou-3"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
+//
 // ### CCN SSL VPN gateway
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpn"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpn"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Vpn.NewGateway(ctx, "myCgw", &Vpn.GatewayArgs{
-// 			Bandwidth: pulumi.Int(5),
-// 			Tags: pulumi.AnyMap{
-// 				"test": pulumi.Any("test"),
-// 			},
-// 			Type: pulumi.String("SSL_CCN"),
-// 			Zone: pulumi.String("ap-guangzhou-3"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Vpn.NewGateway(ctx, "myCgw", &Vpn.GatewayArgs{
+//				Bandwidth: pulumi.Int(5),
+//				Tags: pulumi.Map{
+//					"test": pulumi.Any("test"),
+//				},
+//				Type: pulumi.String("SSL_CCN"),
+//				Zone: pulumi.String("ap-guangzhou-3"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
+//
 // ### POSTPAID_BY_HOUR VPN gateway
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpn"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpn"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Vpn.NewGateway(ctx, "myCgw", &Vpn.GatewayArgs{
-// 			Bandwidth: pulumi.Int(5),
-// 			Tags: pulumi.AnyMap{
-// 				"test": pulumi.Any("test"),
-// 			},
-// 			VpcId: pulumi.String("vpc-dk8zmwuf"),
-// 			Zone:  pulumi.String("ap-guangzhou-3"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Vpn.NewGateway(ctx, "myCgw", &Vpn.GatewayArgs{
+//				Bandwidth: pulumi.Int(5),
+//				Tags: pulumi.Map{
+//					"test": pulumi.Any("test"),
+//				},
+//				VpcId: pulumi.String("vpc-dk8zmwuf"),
+//				Zone:  pulumi.String("ap-guangzhou-3"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
+//
 // ### PREPAID VPN gateway
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpn"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpn"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Vpn.NewGateway(ctx, "myCgw", &Vpn.GatewayArgs{
-// 			Bandwidth:     pulumi.Int(5),
-// 			ChargeType:    pulumi.String("PREPAID"),
-// 			PrepaidPeriod: pulumi.Int(1),
-// 			Tags: pulumi.AnyMap{
-// 				"test": pulumi.Any("test"),
-// 			},
-// 			VpcId: pulumi.String("vpc-dk8zmwuf"),
-// 			Zone:  pulumi.String("ap-guangzhou-3"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Vpn.NewGateway(ctx, "myCgw", &Vpn.GatewayArgs{
+//				Bandwidth:     pulumi.Int(5),
+//				ChargeType:    pulumi.String("PREPAID"),
+//				PrepaidPeriod: pulumi.Int(1),
+//				Tags: pulumi.Map{
+//					"test": pulumi.Any("test"),
+//				},
+//				VpcId: pulumi.String("vpc-dk8zmwuf"),
+//				Zone:  pulumi.String("ap-guangzhou-3"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // VPN gateway can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Vpn/gateway:Gateway foo vpngw-8ccsnclt
+// $ pulumi import tencentcloud:Vpn/gateway:Gateway foo vpngw-8ccsnclt
 // ```
 type Gateway struct {
 	pulumi.CustomResourceState
@@ -205,7 +236,7 @@ func NewGateway(ctx *pulumi.Context,
 		args = &GatewayArgs{}
 	}
 
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource Gateway
 	err := ctx.RegisterResource("tencentcloud:Vpn/gateway:Gateway", name, args, &resource, opts...)
 	if err != nil {
@@ -386,7 +417,7 @@ func (i *Gateway) ToGatewayOutputWithContext(ctx context.Context) GatewayOutput 
 // GatewayArrayInput is an input type that accepts GatewayArray and GatewayArrayOutput values.
 // You can construct a concrete instance of `GatewayArrayInput` via:
 //
-//          GatewayArray{ GatewayArgs{...} }
+//	GatewayArray{ GatewayArgs{...} }
 type GatewayArrayInput interface {
 	pulumi.Input
 
@@ -411,7 +442,7 @@ func (i GatewayArray) ToGatewayArrayOutputWithContext(ctx context.Context) Gatew
 // GatewayMapInput is an input type that accepts GatewayMap and GatewayMapOutput values.
 // You can construct a concrete instance of `GatewayMapInput` via:
 //
-//          GatewayMap{ "key": GatewayArgs{...} }
+//	GatewayMap{ "key": GatewayArgs{...} }
 type GatewayMapInput interface {
 	pulumi.Input
 

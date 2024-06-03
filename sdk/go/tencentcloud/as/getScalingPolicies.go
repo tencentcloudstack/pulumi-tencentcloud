@@ -8,36 +8,41 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Use this data source to query detailed information of scaling policy.
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/As"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/As"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/As"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := As.GetScalingPolicies(ctx, &as.GetScalingPoliciesArgs{
-// 			ResultOutputFile: pulumi.StringRef("mytestpath"),
-// 			ScalingPolicyId:  pulumi.StringRef("asg-mvyghxu7"),
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := As.GetScalingPolicies(ctx, &as.GetScalingPoliciesArgs{
+//				ResultOutputFile: pulumi.StringRef("mytestpath"),
+//				ScalingPolicyId:  pulumi.StringRef("asg-mvyghxu7"),
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 func GetScalingPolicies(ctx *pulumi.Context, args *GetScalingPoliciesArgs, opts ...pulumi.InvokeOption) (*GetScalingPoliciesResult, error) {
-	opts = pkgInvokeDefaultOpts(opts)
+	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetScalingPoliciesResult
 	err := ctx.Invoke("tencentcloud:As/getScalingPolicies:getScalingPolicies", args, &rv, opts...)
 	if err != nil {

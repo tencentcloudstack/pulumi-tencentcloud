@@ -8,7 +8,7 @@ import (
 
 	"github.com/blang/semver"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 type module struct {
@@ -29,6 +29,10 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 		r = &CngwGateway{}
 	case "tencentcloud:Tse/cngwGroup:CngwGroup":
 		r = &CngwGroup{}
+	case "tencentcloud:Tse/cngwNetwork:CngwNetwork":
+		r = &CngwNetwork{}
+	case "tencentcloud:Tse/cngwNetworkAccessControl:CngwNetworkAccessControl":
+		r = &CngwNetworkAccessControl{}
 	case "tencentcloud:Tse/cngwRoute:CngwRoute":
 		r = &CngwRoute{}
 	case "tencentcloud:Tse/cngwRouteRateLimit:CngwRouteRateLimit":
@@ -37,6 +41,10 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 		r = &CngwService{}
 	case "tencentcloud:Tse/cngwServiceRateLimit:CngwServiceRateLimit":
 		r = &CngwServiceRateLimit{}
+	case "tencentcloud:Tse/cngwStrategy:CngwStrategy":
+		r = &CngwStrategy{}
+	case "tencentcloud:Tse/cngwStrategyBindGroup:CngwStrategyBindGroup":
+		r = &CngwStrategyBindGroup{}
 	case "tencentcloud:Tse/instance:Instance":
 		r = &Instance{}
 	case "tencentcloud:Tse/wafDomains:WafDomains":
@@ -52,7 +60,7 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 }
 
 func init() {
-	version, err := tencentcloud.PkgVersion()
+	version, err := internal.PkgVersion()
 	if err != nil {
 		version = semver.Version{Major: 1}
 	}
@@ -78,6 +86,16 @@ func init() {
 	)
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
+		"Tse/cngwNetwork",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Tse/cngwNetworkAccessControl",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
 		"Tse/cngwRoute",
 		&module{version},
 	)
@@ -94,6 +112,16 @@ func init() {
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
 		"Tse/cngwServiceRateLimit",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Tse/cngwStrategy",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Tse/cngwStrategyBindGroup",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(

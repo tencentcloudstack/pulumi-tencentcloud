@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos.Inputs
 {
 
-    public sealed class BatchOperationArgs : Pulumi.ResourceArgs
+    public sealed class BatchOperationArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Specifies the specific parameters for the batch restore operation for archive storage type objects in the inventory.
@@ -28,5 +28,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos.Inputs
         public BatchOperationArgs()
         {
         }
+        public static new BatchOperationArgs Empty => new BatchOperationArgs();
     }
 }

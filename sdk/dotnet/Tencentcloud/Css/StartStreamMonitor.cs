@@ -15,37 +15,38 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Css
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var startStreamMonitor = new Tencentcloud.Css.StartStreamMonitor("startStreamMonitor", new()
     ///     {
-    ///         var startStreamMonitor = new Tencentcloud.Css.StartStreamMonitor("startStreamMonitor", new Tencentcloud.Css.StartStreamMonitorArgs
+    ///         AudibleInputIndexLists = new[]
     ///         {
-    ///             AudibleInputIndexLists = 
-    ///             {
-    ///                 1,
-    ///             },
-    ///             MonitorId = "3d5738dd-1ca2-4601-a6e9-004c5ec75c0b",
-    ///         });
-    ///     }
+    ///             1,
+    ///         },
+    ///         MonitorId = "3d5738dd-1ca2-4601-a6e9-004c5ec75c0b",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// css start_stream_monitor can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Css/startStreamMonitor:StartStreamMonitor start_stream_monitor start_stream_monitor_id
+    /// $ pulumi import tencentcloud:Css/startStreamMonitor:StartStreamMonitor start_stream_monitor start_stream_monitor_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Css/startStreamMonitor:StartStreamMonitor")]
-    public partial class StartStreamMonitor : Pulumi.CustomResource
+    public partial class StartStreamMonitor : global::Pulumi.CustomResource
     {
         /// <summary>
         /// The input index for monitoring the screen audio, supports multiple input audio sources.The valid range for InputIndex is that it must already exist.If left blank, there will be no audio output by default.
@@ -104,7 +105,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Css
         }
     }
 
-    public sealed class StartStreamMonitorArgs : Pulumi.ResourceArgs
+    public sealed class StartStreamMonitorArgs : global::Pulumi.ResourceArgs
     {
         [Input("audibleInputIndexLists")]
         private InputList<int>? _audibleInputIndexLists;
@@ -127,9 +128,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Css
         public StartStreamMonitorArgs()
         {
         }
+        public static new StartStreamMonitorArgs Empty => new StartStreamMonitorArgs();
     }
 
-    public sealed class StartStreamMonitorState : Pulumi.ResourceArgs
+    public sealed class StartStreamMonitorState : global::Pulumi.ResourceArgs
     {
         [Input("audibleInputIndexLists")]
         private InputList<int>? _audibleInputIndexLists;
@@ -152,5 +154,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Css
         public StartStreamMonitorState()
         {
         }
+        public static new StartStreamMonitorState Empty => new StartStreamMonitorState();
     }
 }

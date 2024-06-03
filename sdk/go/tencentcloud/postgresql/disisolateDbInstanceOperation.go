@@ -7,38 +7,44 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a postgresql disisolateDbInstanceOperation
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Postgresql"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Postgresql"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Postgresql.NewDisisolateDbInstanceOperation(ctx, "disisolateDbInstanceOperation", &Postgresql.DisisolateDbInstanceOperationArgs{
-// 			DbInstanceIdSets: pulumi.StringArray{
-// 				pulumi.Any(local.Pgsql_id),
-// 			},
-// 			Period:      pulumi.Int(1),
-// 			AutoVoucher: pulumi.Bool(false),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Postgresql.NewDisisolateDbInstanceOperation(ctx, "disisolateDbInstanceOperation", &Postgresql.DisisolateDbInstanceOperationArgs{
+//				DbInstanceIdSets: pulumi.StringArray{
+//					local.Pgsql_id,
+//				},
+//				Period:      pulumi.Int(1),
+//				AutoVoucher: pulumi.Bool(false),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 type DisisolateDbInstanceOperation struct {
 	pulumi.CustomResourceState
 
@@ -62,7 +68,7 @@ func NewDisisolateDbInstanceOperation(ctx *pulumi.Context,
 	if args.DbInstanceIdSets == nil {
 		return nil, errors.New("invalid value for required argument 'DbInstanceIdSets'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource DisisolateDbInstanceOperation
 	err := ctx.RegisterResource("tencentcloud:Postgresql/disisolateDbInstanceOperation:DisisolateDbInstanceOperation", name, args, &resource, opts...)
 	if err != nil {
@@ -159,7 +165,7 @@ func (i *DisisolateDbInstanceOperation) ToDisisolateDbInstanceOperationOutputWit
 // DisisolateDbInstanceOperationArrayInput is an input type that accepts DisisolateDbInstanceOperationArray and DisisolateDbInstanceOperationArrayOutput values.
 // You can construct a concrete instance of `DisisolateDbInstanceOperationArrayInput` via:
 //
-//          DisisolateDbInstanceOperationArray{ DisisolateDbInstanceOperationArgs{...} }
+//	DisisolateDbInstanceOperationArray{ DisisolateDbInstanceOperationArgs{...} }
 type DisisolateDbInstanceOperationArrayInput interface {
 	pulumi.Input
 
@@ -184,7 +190,7 @@ func (i DisisolateDbInstanceOperationArray) ToDisisolateDbInstanceOperationArray
 // DisisolateDbInstanceOperationMapInput is an input type that accepts DisisolateDbInstanceOperationMap and DisisolateDbInstanceOperationMapOutput values.
 // You can construct a concrete instance of `DisisolateDbInstanceOperationMapInput` via:
 //
-//          DisisolateDbInstanceOperationMap{ "key": DisisolateDbInstanceOperationArgs{...} }
+//	DisisolateDbInstanceOperationMap{ "key": DisisolateDbInstanceOperationArgs{...} }
 type DisisolateDbInstanceOperationMapInput interface {
 	pulumi.Input
 

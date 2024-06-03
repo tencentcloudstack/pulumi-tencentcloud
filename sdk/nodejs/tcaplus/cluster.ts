@@ -10,12 +10,14 @@ import * as utilities from "../utilities";
  * > **NOTE:** TcaplusDB now only supports the following regions: `ap-shanghai,ap-hongkong,na-siliconvalley,ap-singapore,ap-seoul,ap-tokyo,eu-frankfurt, and na-ashburn`.
  *
  * ## Example Usage
+ *
  * ### Create a new tcaplus cluster instance
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const config = new pulumi.Config();
  * const availabilityZone = config.get("availabilityZone") || "ap-guangzhou-3";
@@ -23,8 +25,8 @@ import * as utilities from "../utilities";
  *     isDefault: true,
  *     availabilityZone: availabilityZone,
  * });
- * const vpcId = vpc.then(vpc => vpc.instanceLists?[0]?.vpcId);
- * const subnetId = vpc.then(vpc => vpc.instanceLists?[0]?.subnetId);
+ * const vpcId = vpc.then(vpc => vpc.instanceLists?.[0]?.vpcId);
+ * const subnetId = vpc.then(vpc => vpc.instanceLists?.[0]?.subnetId);
  * const example = new tencentcloud.tcaplus.Cluster("example", {
  *     idlType: "PROTO",
  *     clusterName: "tf_example_tcaplus_cluster",
@@ -34,13 +36,14 @@ import * as utilities from "../utilities";
  *     oldPasswordExpireLast: 3600,
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * tcaplus cluster can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Tcaplus/cluster:Cluster example cluster_id
+ * $ pulumi import tencentcloud:Tcaplus/cluster:Cluster example cluster_id
  * ```
  */
 export class Cluster extends pulumi.CustomResource {
@@ -170,7 +173,7 @@ export class Cluster extends pulumi.CustomResource {
             resourceInputs["clusterName"] = args ? args.clusterName : undefined;
             resourceInputs["idlType"] = args ? args.idlType : undefined;
             resourceInputs["oldPasswordExpireLast"] = args ? args.oldPasswordExpireLast : undefined;
-            resourceInputs["password"] = args ? args.password : undefined;
+            resourceInputs["password"] = args?.password ? pulumi.secret(args.password) : undefined;
             resourceInputs["subnetId"] = args ? args.subnetId : undefined;
             resourceInputs["vpcId"] = args ? args.vpcId : undefined;
             resourceInputs["apiAccessId"] = undefined /*out*/;
@@ -182,6 +185,8 @@ export class Cluster extends pulumi.CustomResource {
             resourceInputs["passwordStatus"] = undefined /*out*/;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+        const secretOpts = { additionalSecretOutputs: ["password"] };
+        opts = pulumi.mergeOptions(opts, secretOpts);
         super(Cluster.__pulumiType, name, resourceInputs, opts);
     }
 }

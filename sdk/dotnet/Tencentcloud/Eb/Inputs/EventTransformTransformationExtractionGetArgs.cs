@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Eb.Inputs
 {
 
-    public sealed class EventTransformTransformationExtractionGetArgs : Pulumi.ResourceArgs
+    public sealed class EventTransformTransformationExtractionGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// JsonPath, if not specified, the default value $.
@@ -34,5 +34,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Eb.Inputs
         public EventTransformTransformationExtractionGetArgs()
         {
         }
+        public static new EventTransformTransformationExtractionGetArgs Empty => new EventTransformTransformationExtractionGetArgs();
     }
 }

@@ -15,66 +15,60 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
         /// <summary>
         /// Use this data source to query detailed information of cynosdb binlog_download_url
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var binlogDownloadUrl = Tencentcloud.Cynosdb.GetBinlogDownloadUrl.Invoke(new()
         ///     {
-        ///         var binlogDownloadUrl = Output.Create(Tencentcloud.Cynosdb.GetBinlogDownloadUrl.InvokeAsync(new Tencentcloud.Cynosdb.GetBinlogDownloadUrlArgs
-        ///         {
-        ///             BinlogId = 6202249,
-        ///             ClusterId = "cynosdbmysql-bws8h88b",
-        ///         }));
-        ///     }
+        ///         BinlogId = 6202249,
+        ///         ClusterId = "cynosdbmysql-bws8h88b",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetBinlogDownloadUrlResult> InvokeAsync(GetBinlogDownloadUrlArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetBinlogDownloadUrlResult>("tencentcloud:Cynosdb/getBinlogDownloadUrl:getBinlogDownloadUrl", args ?? new GetBinlogDownloadUrlArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetBinlogDownloadUrlResult>("tencentcloud:Cynosdb/getBinlogDownloadUrl:getBinlogDownloadUrl", args ?? new GetBinlogDownloadUrlArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of cynosdb binlog_download_url
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var binlogDownloadUrl = Tencentcloud.Cynosdb.GetBinlogDownloadUrl.Invoke(new()
         ///     {
-        ///         var binlogDownloadUrl = Output.Create(Tencentcloud.Cynosdb.GetBinlogDownloadUrl.InvokeAsync(new Tencentcloud.Cynosdb.GetBinlogDownloadUrlArgs
-        ///         {
-        ///             BinlogId = 6202249,
-        ///             ClusterId = "cynosdbmysql-bws8h88b",
-        ///         }));
-        ///     }
+        ///         BinlogId = 6202249,
+        ///         ClusterId = "cynosdbmysql-bws8h88b",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetBinlogDownloadUrlResult> Invoke(GetBinlogDownloadUrlInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetBinlogDownloadUrlResult>("tencentcloud:Cynosdb/getBinlogDownloadUrl:getBinlogDownloadUrl", args ?? new GetBinlogDownloadUrlInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetBinlogDownloadUrlResult>("tencentcloud:Cynosdb/getBinlogDownloadUrl:getBinlogDownloadUrl", args ?? new GetBinlogDownloadUrlInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetBinlogDownloadUrlArgs : Pulumi.InvokeArgs
+    public sealed class GetBinlogDownloadUrlArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Binlog file ID.
@@ -97,9 +91,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
         public GetBinlogDownloadUrlArgs()
         {
         }
+        public static new GetBinlogDownloadUrlArgs Empty => new GetBinlogDownloadUrlArgs();
     }
 
-    public sealed class GetBinlogDownloadUrlInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetBinlogDownloadUrlInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Binlog file ID.
@@ -122,6 +117,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
         public GetBinlogDownloadUrlInvokeArgs()
         {
         }
+        public static new GetBinlogDownloadUrlInvokeArgs Empty => new GetBinlogDownloadUrlInvokeArgs();
     }
 
 

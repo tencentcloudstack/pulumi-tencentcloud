@@ -8,39 +8,44 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Use this data source to query detailed information of oceanus jobSubmissionLog
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Oceanus"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Oceanus"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Oceanus"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Oceanus.GetJobSubmissionLog(ctx, &oceanus.GetJobSubmissionLogArgs{
-// 			EndTime:        1698118169241,
-// 			JobId:          "cql-314rw6w0",
-// 			OrderType:      pulumi.StringRef("desc"),
-// 			RunningOrderId: pulumi.IntRef(0),
-// 			StartTime:      1696130964345,
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Oceanus.GetJobSubmissionLog(ctx, &oceanus.GetJobSubmissionLogArgs{
+//				EndTime:        1698118169241,
+//				JobId:          "cql-314rw6w0",
+//				OrderType:      pulumi.StringRef("desc"),
+//				RunningOrderId: pulumi.IntRef(0),
+//				StartTime:      1696130964345,
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 func GetJobSubmissionLog(ctx *pulumi.Context, args *GetJobSubmissionLogArgs, opts ...pulumi.InvokeOption) (*GetJobSubmissionLogResult, error) {
-	opts = pkgInvokeDefaultOpts(opts)
+	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetJobSubmissionLogResult
 	err := ctx.Invoke("tencentcloud:Oceanus/getJobSubmissionLog:getJobSubmissionLog", args, &rv, opts...)
 	if err != nil {

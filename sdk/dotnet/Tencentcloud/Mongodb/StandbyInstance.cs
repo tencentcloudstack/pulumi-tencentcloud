@@ -15,65 +15,68 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mongodb
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var shanghai = new Tencentcloud.Provider("shanghai", new()
     ///     {
-    ///         var shanghai = new Tencentcloud.Provider("shanghai", new Tencentcloud.ProviderArgs
-    ///         {
-    ///             Region = "ap-shanghai",
-    ///         });
-    ///         var mongodbInstance = new Tencentcloud.Mongodb.Instance("mongodbInstance", new Tencentcloud.Mongodb.InstanceArgs
-    ///         {
-    ///             InstanceName = "tf-mongodb-test",
-    ///             Memory = 4,
-    ///             Volume = 100,
-    ///             EngineVersion = "MONGO_40_WT",
-    ///             MachineType = "HIO10G",
-    ///             AvailableZone = @var.Availability_zone,
-    ///             ProjectId = 0,
-    ///             Password = "test1234",
-    ///             Tags = 
-    ///             {
-    ///                 { "test", "test" },
-    ///             },
-    ///         });
-    ///         var mongodbStandbyInstance = new Tencentcloud.Mongodb.StandbyInstance("mongodbStandbyInstance", new Tencentcloud.Mongodb.StandbyInstanceArgs
-    ///         {
-    ///             InstanceName = "tf-mongodb-standby-test",
-    ///             Memory = 4,
-    ///             Volume = 100,
-    ///             AvailableZone = "ap-shanghai-2",
-    ///             ProjectId = 0,
-    ///             FatherInstanceId = mongodbInstance.Id,
-    ///             FatherInstanceRegion = "ap-guangzhou",
-    ///             Tags = 
-    ///             {
-    ///                 { "test", "test" },
-    ///             },
-    ///         }, new CustomResourceOptions
-    ///         {
-    ///             Provider = tencentcloud.Shanghai,
-    ///         });
-    ///     }
+    ///         Region = "ap-shanghai",
+    ///     });
     /// 
-    /// }
+    ///     var mongodbInstance = new Tencentcloud.Mongodb.Instance("mongodbInstance", new()
+    ///     {
+    ///         InstanceName = "tf-mongodb-test",
+    ///         Memory = 4,
+    ///         Volume = 100,
+    ///         EngineVersion = "MONGO_40_WT",
+    ///         MachineType = "HIO10G",
+    ///         AvailableZone = @var.Availability_zone,
+    ///         ProjectId = 0,
+    ///         Password = "test1234",
+    ///         Tags = 
+    ///         {
+    ///             { "test", "test" },
+    ///         },
+    ///     });
+    /// 
+    ///     var mongodbStandbyInstance = new Tencentcloud.Mongodb.StandbyInstance("mongodbStandbyInstance", new()
+    ///     {
+    ///         InstanceName = "tf-mongodb-standby-test",
+    ///         Memory = 4,
+    ///         Volume = 100,
+    ///         AvailableZone = "ap-shanghai-2",
+    ///         ProjectId = 0,
+    ///         FatherInstanceId = mongodbInstance.Id,
+    ///         FatherInstanceRegion = "ap-guangzhou",
+    ///         Tags = 
+    ///         {
+    ///             { "test", "test" },
+    ///         },
+    ///     }, new CustomResourceOptions
+    ///     {
+    ///         Provider = tencentcloud.Shanghai,
+    ///     });
+    /// 
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// Mongodb instance can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Mongodb/standbyInstance:StandbyInstance mongodb cmgo-41s6jwy4
+    /// $ pulumi import tencentcloud:Mongodb/standbyInstance:StandbyInstance mongodb cmgo-41s6jwy4
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Mongodb/standbyInstance:StandbyInstance")]
-    public partial class StandbyInstance : Pulumi.CustomResource
+    public partial class StandbyInstance : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Auto renew flag. Valid values are `0`(NOTIFY_AND_MANUAL_RENEW), `1`(NOTIFY_AND_AUTO_RENEW) and `2`(DISABLE_NOTIFY_AND_MANUAL_RENEW). Default value is `0`. Note: only works for PREPAID instance. Only supports`0` and `1` for creation.
@@ -240,7 +243,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mongodb
         }
     }
 
-    public sealed class StandbyInstanceArgs : Pulumi.ResourceArgs
+    public sealed class StandbyInstanceArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Auto renew flag. Valid values are `0`(NOTIFY_AND_MANUAL_RENEW), `1`(NOTIFY_AND_AUTO_RENEW) and `2`(DISABLE_NOTIFY_AND_MANUAL_RENEW). Default value is `0`. Note: only works for PREPAID instance. Only supports`0` and `1` for creation.
@@ -341,9 +344,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mongodb
         public StandbyInstanceArgs()
         {
         }
+        public static new StandbyInstanceArgs Empty => new StandbyInstanceArgs();
     }
 
-    public sealed class StandbyInstanceState : Pulumi.ResourceArgs
+    public sealed class StandbyInstanceState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Auto renew flag. Valid values are `0`(NOTIFY_AND_MANUAL_RENEW), `1`(NOTIFY_AND_AUTO_RENEW) and `2`(DISABLE_NOTIFY_AND_MANUAL_RENEW). Default value is `0`. Note: only works for PREPAID instance. Only supports`0` and `1` for creation.
@@ -480,5 +484,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mongodb
         public StandbyInstanceState()
         {
         }
+        public static new StandbyInstanceState Empty => new StandbyInstanceState();
     }
 }

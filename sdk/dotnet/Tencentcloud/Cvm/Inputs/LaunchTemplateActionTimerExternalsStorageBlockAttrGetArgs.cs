@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cvm.Inputs
 {
 
-    public sealed class LaunchTemplateActionTimerExternalsStorageBlockAttrGetArgs : Pulumi.ResourceArgs
+    public sealed class LaunchTemplateActionTimerExternalsStorageBlockAttrGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// The maximum capacity of HDD local storage.
@@ -34,5 +34,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cvm.Inputs
         public LaunchTemplateActionTimerExternalsStorageBlockAttrGetArgs()
         {
         }
+        public static new LaunchTemplateActionTimerExternalsStorageBlockAttrGetArgs Empty => new LaunchTemplateActionTimerExternalsStorageBlockAttrGetArgs();
     }
 }

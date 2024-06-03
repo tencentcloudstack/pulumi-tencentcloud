@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tse.Inputs
 {
 
-    public sealed class CngwCanaryRuleCanaryRuleGetArgs : Pulumi.ResourceArgs
+    public sealed class CngwCanaryRuleCanaryRuleGetArgs : global::Pulumi.ResourceArgs
     {
         [Input("balancedServiceLists")]
         private InputList<Inputs.CngwCanaryRuleCanaryRuleBalancedServiceListGetArgs>? _balancedServiceLists;
@@ -64,5 +64,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tse.Inputs
         public CngwCanaryRuleCanaryRuleGetArgs()
         {
         }
+        public static new CngwCanaryRuleCanaryRuleGetArgs Empty => new CngwCanaryRuleCanaryRuleGetArgs();
     }
 }

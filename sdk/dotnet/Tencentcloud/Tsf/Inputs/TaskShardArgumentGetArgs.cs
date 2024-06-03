@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf.Inputs
 {
 
-    public sealed class TaskShardArgumentGetArgs : Pulumi.ResourceArgs
+    public sealed class TaskShardArgumentGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Sharding parameter KEY, integer, range [1,1000].
@@ -28,5 +28,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf.Inputs
         public TaskShardArgumentGetArgs()
         {
         }
+        public static new TaskShardArgumentGetArgs Empty => new TaskShardArgumentGetArgs();
     }
 }

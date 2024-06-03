@@ -11,11 +11,12 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const projectUserRole = new tencentcloud.Bi.ProjectUserRole("project_user_role", {
+ * const projectUserRole = new tencentcloud.bi.ProjectUserRole("projectUserRole", {
  *     areaCode: "+86",
  *     email: "123456@qq.com",
  *     phoneNumber: "13130001000",
@@ -25,13 +26,14 @@ import * as utilities from "../utilities";
  *     userName: "keep-cam-user",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * bi project_user_role can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Bi/projectUserRole:ProjectUserRole project_user_role projectId#userId
+ * $ pulumi import tencentcloud:Bi/projectUserRole:ProjectUserRole project_user_role projectId#userId
  * ```
  */
 export class ProjectUserRole extends pulumi.CustomResource {

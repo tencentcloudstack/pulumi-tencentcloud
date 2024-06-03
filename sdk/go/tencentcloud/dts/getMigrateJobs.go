@@ -8,11 +8,12 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Use this data source to query detailed information of dts migrateJobs
 func GetMigrateJobs(ctx *pulumi.Context, args *GetMigrateJobsArgs, opts ...pulumi.InvokeOption) (*GetMigrateJobsResult, error) {
-	opts = pkgInvokeDefaultOpts(opts)
+	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetMigrateJobsResult
 	err := ctx.Invoke("tencentcloud:Dts/getMigrateJobs:getMigrateJobs", args, &rv, opts...)
 	if err != nil {

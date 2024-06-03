@@ -15,34 +15,35 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Organization
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var orgNode = new Tencentcloud.Organization.OrgNode("orgNode", new()
     ///     {
-    ///         var orgNode = new Tencentcloud.Organization.OrgNode("orgNode", new Tencentcloud.Organization.OrgNodeArgs
-    ///         {
-    ///             ParentNodeId = 2003721,
-    ///             Remark = "for terraform test",
-    ///         });
-    ///     }
+    ///         ParentNodeId = 2003721,
+    ///         Remark = "for terraform test",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// organization org_node can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Organization/orgNode:OrgNode org_node orgNode_id
+    /// $ pulumi import tencentcloud:Organization/orgNode:OrgNode org_node orgNode_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Organization/orgNode:OrgNode")]
-    public partial class OrgNode : Pulumi.CustomResource
+    public partial class OrgNode : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Node creation time.
@@ -119,7 +120,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Organization
         }
     }
 
-    public sealed class OrgNodeArgs : Pulumi.ResourceArgs
+    public sealed class OrgNodeArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Node name.
@@ -142,9 +143,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Organization
         public OrgNodeArgs()
         {
         }
+        public static new OrgNodeArgs Empty => new OrgNodeArgs();
     }
 
-    public sealed class OrgNodeState : Pulumi.ResourceArgs
+    public sealed class OrgNodeState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Node creation time.
@@ -179,5 +181,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Organization
         public OrgNodeState()
         {
         }
+        public static new OrgNodeState Empty => new OrgNodeState();
     }
 }

@@ -2,25 +2,28 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
  * Provides a resource to create a mps flow
  *
  * ## Example Usage
+ *
  * ### Create a mps RTP flow
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const event = new tencentcloud.mps.Event("event", {
- *     eventName: `tf_test_event_srt_%d`,
+ *     eventName: "tf_test_event_srt_%d",
  *     description: "tf test mps event description",
  * });
  * const flow = new tencentcloud.mps.Flow("flow", {
- *     flowName: `tf_test_mps_flow_srt_%d`,
+ *     flowName: "tf_test_mps_flow_srt_%d",
  *     maxBandwidth: 10000000,
  *     inputGroups: [{
  *         inputName: "test_inputname",
@@ -39,18 +42,21 @@ import * as utilities from "../utilities";
  *     eventId: event.id,
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
+ *
  * ### Create a mps RTP flow
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const eventRtp = new tencentcloud.mps.Event("eventRtp", {
- *     eventName: `tf_test_event_rtp_%d`,
+ *     eventName: "tf_test_event_rtp_%d",
  *     description: "tf test mps event description",
  * });
  * const flowRtp = new tencentcloud.mps.Flow("flowRtp", {
- *     flowName: `tf_test_mps_flow_rtp_%d`,
+ *     flowName: "tf_test_mps_flow_rtp_%d",
  *     maxBandwidth: 10000000,
  *     inputGroups: [{
  *         inputName: "test_inputname",
@@ -65,13 +71,16 @@ import * as utilities from "../utilities";
  *     eventId: eventRtp.id,
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
+ *
  * ### Create a mps RTP flow and start it
  *
  * Before you start a mps flow, you need to create a output first.
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const eventRtp = new tencentcloud.mps.Event("eventRtp", {
  *     eventName: "your_event_name",
@@ -116,13 +125,14 @@ import * as utilities from "../utilities";
  *     dependsOn: [output],
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * mps flow can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Mps/flow:Flow flow flow_id
+ * $ pulumi import tencentcloud:Mps/flow:Flow flow flow_id
  * ```
  */
 export class Flow extends pulumi.CustomResource {

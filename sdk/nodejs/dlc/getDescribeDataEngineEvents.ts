@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,21 +11,20 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const describeDataEngineEvents = pulumi.output(tencentcloud.Dlc.getDescribeDataEngineEvents({
+ * const describeDataEngineEvents = tencentcloud.Dlc.getDescribeDataEngineEvents({
  *     dataEngineName: "test",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getDescribeDataEngineEvents(args: GetDescribeDataEngineEventsArgs, opts?: pulumi.InvokeOptions): Promise<GetDescribeDataEngineEventsResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Dlc/getDescribeDataEngineEvents:getDescribeDataEngineEvents", {
         "dataEngineName": args.dataEngineName,
         "resultOutputFile": args.resultOutputFile,
@@ -60,9 +60,24 @@ export interface GetDescribeDataEngineEventsResult {
     readonly id: string;
     readonly resultOutputFile?: string;
 }
-
+/**
+ * Use this data source to query detailed information of dlc describeDataEngineEvents
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const describeDataEngineEvents = tencentcloud.Dlc.getDescribeDataEngineEvents({
+ *     dataEngineName: "test",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getDescribeDataEngineEventsOutput(args: GetDescribeDataEngineEventsOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetDescribeDataEngineEventsResult> {
-    return pulumi.output(args).apply(a => getDescribeDataEngineEvents(a, opts))
+    return pulumi.output(args).apply((a: any) => getDescribeDataEngineEvents(a, opts))
 }
 
 /**

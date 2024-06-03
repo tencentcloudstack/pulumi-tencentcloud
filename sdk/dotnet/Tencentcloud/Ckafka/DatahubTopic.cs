@@ -18,11 +18,11 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka
     /// ckafka datahub_topic can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Ckafka/datahubTopic:DatahubTopic datahub_topic datahub_topic_name
+    /// $ pulumi import tencentcloud:Ckafka/datahubTopic:DatahubTopic datahub_topic datahub_topic_name
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Ckafka/datahubTopic:DatahubTopic")]
-    public partial class DatahubTopic : Pulumi.CustomResource
+    public partial class DatahubTopic : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Name, start with appid, which is a string of no more than 128 characters, must start with a letter, and the rest can contain letters, numbers, and dashes (-).
@@ -99,7 +99,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka
         }
     }
 
-    public sealed class DatahubTopicArgs : Pulumi.ResourceArgs
+    public sealed class DatahubTopicArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Name, start with appid, which is a string of no more than 128 characters, must start with a letter, and the rest can contain letters, numbers, and dashes (-).
@@ -140,9 +140,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka
         public DatahubTopicArgs()
         {
         }
+        public static new DatahubTopicArgs Empty => new DatahubTopicArgs();
     }
 
-    public sealed class DatahubTopicState : Pulumi.ResourceArgs
+    public sealed class DatahubTopicState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Name, start with appid, which is a string of no more than 128 characters, must start with a letter, and the rest can contain letters, numbers, and dashes (-).
@@ -183,5 +184,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka
         public DatahubTopicState()
         {
         }
+        public static new DatahubTopicState Empty => new DatahubTopicState();
     }
 }

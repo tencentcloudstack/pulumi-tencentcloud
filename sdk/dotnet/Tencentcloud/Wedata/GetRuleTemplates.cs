@@ -15,80 +15,74 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Wedata
         /// <summary>
         /// Use this data source to query detailed information of wedata rule templates
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var ruleTemplates = Tencentcloud.Wedata.GetRuleTemplates.Invoke(new()
         ///     {
-        ///         var ruleTemplates = Output.Create(Tencentcloud.Wedata.GetRuleTemplates.InvokeAsync(new Tencentcloud.Wedata.GetRuleTemplatesArgs
+        ///         ProjectId = "1840731346428280832",
+        ///         SourceEngineTypes = new[]
         ///         {
-        ///             ProjectId = "1840731346428280832",
-        ///             SourceEngineTypes = 
-        ///             {
-        ///                 2,
-        ///                 4,
-        ///                 16,
-        ///             },
-        ///             SourceObjectType = 2,
-        ///             Type = 2,
-        ///         }));
-        ///     }
+        ///             2,
+        ///             4,
+        ///             16,
+        ///         },
+        ///         SourceObjectType = 2,
+        ///         Type = 2,
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetRuleTemplatesResult> InvokeAsync(GetRuleTemplatesArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetRuleTemplatesResult>("tencentcloud:Wedata/getRuleTemplates:getRuleTemplates", args ?? new GetRuleTemplatesArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetRuleTemplatesResult>("tencentcloud:Wedata/getRuleTemplates:getRuleTemplates", args ?? new GetRuleTemplatesArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of wedata rule templates
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var ruleTemplates = Tencentcloud.Wedata.GetRuleTemplates.Invoke(new()
         ///     {
-        ///         var ruleTemplates = Output.Create(Tencentcloud.Wedata.GetRuleTemplates.InvokeAsync(new Tencentcloud.Wedata.GetRuleTemplatesArgs
+        ///         ProjectId = "1840731346428280832",
+        ///         SourceEngineTypes = new[]
         ///         {
-        ///             ProjectId = "1840731346428280832",
-        ///             SourceEngineTypes = 
-        ///             {
-        ///                 2,
-        ///                 4,
-        ///                 16,
-        ///             },
-        ///             SourceObjectType = 2,
-        ///             Type = 2,
-        ///         }));
-        ///     }
+        ///             2,
+        ///             4,
+        ///             16,
+        ///         },
+        ///         SourceObjectType = 2,
+        ///         Type = 2,
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetRuleTemplatesResult> Invoke(GetRuleTemplatesInvokeArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetRuleTemplatesResult>("tencentcloud:Wedata/getRuleTemplates:getRuleTemplates", args ?? new GetRuleTemplatesInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetRuleTemplatesResult>("tencentcloud:Wedata/getRuleTemplates:getRuleTemplates", args ?? new GetRuleTemplatesInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetRuleTemplatesArgs : Pulumi.InvokeArgs
+    public sealed class GetRuleTemplatesArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Project ID.
@@ -129,9 +123,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Wedata
         public GetRuleTemplatesArgs()
         {
         }
+        public static new GetRuleTemplatesArgs Empty => new GetRuleTemplatesArgs();
     }
 
-    public sealed class GetRuleTemplatesInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetRuleTemplatesInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Project ID.
@@ -172,6 +167,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Wedata
         public GetRuleTemplatesInvokeArgs()
         {
         }
+        public static new GetRuleTemplatesInvokeArgs Empty => new GetRuleTemplatesInvokeArgs();
     }
 
 

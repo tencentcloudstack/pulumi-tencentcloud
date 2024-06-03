@@ -15,65 +15,66 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ci
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var mediaVideoMontageTemplate = new Tencentcloud.Ci.MediaVideoMontageTemplate("mediaVideoMontageTemplate", new()
     ///     {
-    ///         var mediaVideoMontageTemplate = new Tencentcloud.Ci.MediaVideoMontageTemplate("mediaVideoMontageTemplate", new Tencentcloud.Ci.MediaVideoMontageTemplateArgs
+    ///         Audio = new Tencentcloud.Ci.Inputs.MediaVideoMontageTemplateAudioArgs
     ///         {
-    ///             Audio = new Tencentcloud.Ci.Inputs.MediaVideoMontageTemplateAudioArgs
+    ///             Bitrate = "128",
+    ///             Channels = "4",
+    ///             Codec = "aac",
+    ///             Remove = "false",
+    ///             Samplerate = "44100",
+    ///         },
+    ///         AudioMixes = new[]
+    ///         {
+    ///             new Tencentcloud.Ci.Inputs.MediaVideoMontageTemplateAudioMixArgs
     ///             {
-    ///                 Bitrate = "128",
-    ///                 Channels = "4",
-    ///                 Codec = "aac",
-    ///                 Remove = "false",
-    ///                 Samplerate = "44100",
+    ///                 AudioSource = "https://terraform-ci-xxxxx.cos.ap-guangzhou.myqcloud.com/mp3%2Fnizhan-test.mp3",
+    ///                 MixMode = "Once",
+    ///                 Replace = "true",
     ///             },
-    ///             AudioMixes = 
-    ///             {
-    ///                 new Tencentcloud.Ci.Inputs.MediaVideoMontageTemplateAudioMixArgs
-    ///                 {
-    ///                     AudioSource = "https://terraform-ci-xxxxx.cos.ap-guangzhou.myqcloud.com/mp3%2Fnizhan-test.mp3",
-    ///                     MixMode = "Once",
-    ///                     Replace = "true",
-    ///                 },
-    ///             },
-    ///             Bucket = "terraform-ci-xxxxx",
-    ///             Container = new Tencentcloud.Ci.Inputs.MediaVideoMontageTemplateContainerArgs
-    ///             {
-    ///                 Format = "mp4",
-    ///             },
-    ///             Duration = "10.5",
-    ///             Video = new Tencentcloud.Ci.Inputs.MediaVideoMontageTemplateVideoArgs
-    ///             {
-    ///                 Bitrate = "1000",
-    ///                 Codec = "H.264",
-    ///                 Crf = "",
-    ///                 Fps = "25",
-    ///                 Height = "",
-    ///                 Remove = "",
-    ///                 Width = "1280",
-    ///             },
-    ///         });
-    ///     }
+    ///         },
+    ///         Bucket = "terraform-ci-xxxxx",
+    ///         Container = new Tencentcloud.Ci.Inputs.MediaVideoMontageTemplateContainerArgs
+    ///         {
+    ///             Format = "mp4",
+    ///         },
+    ///         Duration = "10.5",
+    ///         Video = new Tencentcloud.Ci.Inputs.MediaVideoMontageTemplateVideoArgs
+    ///         {
+    ///             Bitrate = "1000",
+    ///             Codec = "H.264",
+    ///             Crf = "",
+    ///             Fps = "25",
+    ///             Height = "",
+    ///             Remove = "",
+    ///             Width = "1280",
+    ///         },
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// ci media_video_montage_template can be imported using the bucket#templateId, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Ci/mediaVideoMontageTemplate:MediaVideoMontageTemplate media_video_montage_template terraform-ci-xxxxxx#t193e5ecc1b8154e57a8376b4405ad9c63
+    /// $ pulumi import tencentcloud:Ci/mediaVideoMontageTemplate:MediaVideoMontageTemplate media_video_montage_template terraform-ci-xxxxxx#t193e5ecc1b8154e57a8376b4405ad9c63
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Ci/mediaVideoMontageTemplate:MediaVideoMontageTemplate")]
-    public partial class MediaVideoMontageTemplate : Pulumi.CustomResource
+    public partial class MediaVideoMontageTemplate : global::Pulumi.CustomResource
     {
         /// <summary>
         /// audio parameters, the target file does not require Audio information, need to set Audio.Remove to true.
@@ -162,7 +163,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ci
         }
     }
 
-    public sealed class MediaVideoMontageTemplateArgs : Pulumi.ResourceArgs
+    public sealed class MediaVideoMontageTemplateArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// audio parameters, the target file does not require Audio information, need to set Audio.Remove to true.
@@ -215,9 +216,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ci
         public MediaVideoMontageTemplateArgs()
         {
         }
+        public static new MediaVideoMontageTemplateArgs Empty => new MediaVideoMontageTemplateArgs();
     }
 
-    public sealed class MediaVideoMontageTemplateState : Pulumi.ResourceArgs
+    public sealed class MediaVideoMontageTemplateState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// audio parameters, the target file does not require Audio information, need to set Audio.Remove to true.
@@ -270,5 +272,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ci
         public MediaVideoMontageTemplateState()
         {
         }
+        public static new MediaVideoMontageTemplateState Empty => new MediaVideoMontageTemplateState();
     }
 }

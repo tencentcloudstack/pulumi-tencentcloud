@@ -42,7 +42,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Elasticsearch.Outputs
         /// Plugin status. Valid values:
         /// - `-2` has been uninstalled
         /// - `-1` has been installed in
-        /// - `0` installation.
         /// </summary>
         public readonly int Status;
 

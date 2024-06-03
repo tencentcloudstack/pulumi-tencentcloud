@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos.Inputs
 {
 
-    public sealed class BucketOriginDomainRuleArgs : Pulumi.ResourceArgs
+    public sealed class BucketOriginDomainRuleArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Specify domain host.
@@ -34,5 +34,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos.Inputs
         public BucketOriginDomainRuleArgs()
         {
         }
+        public static new BucketOriginDomainRuleArgs Empty => new BucketOriginDomainRuleArgs();
     }
 }

@@ -15,45 +15,46 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var connectResource = new Tencentcloud.Ckafka.ConnectResource("connectResource", new()
     ///     {
-    ///         var connectResource = new Tencentcloud.Ckafka.ConnectResource("connectResource", new Tencentcloud.Ckafka.ConnectResourceArgs
+    ///         Description = "for terraform test",
+    ///         MysqlConnectParam = new Tencentcloud.Ckafka.Inputs.ConnectResourceMysqlConnectParamArgs
     ///         {
-    ///             Description = "for terraform test",
-    ///             MysqlConnectParam = new Tencentcloud.Ckafka.Inputs.ConnectResourceMysqlConnectParamArgs
-    ///             {
-    ///                 Password = "xxxxxxxxx",
-    ///                 Port = 3306,
-    ///                 Resource = "cdb-fitq5t9h",
-    ///                 SelfBuilt = false,
-    ///                 ServiceVip = "172.16.80.59",
-    ///                 UniqVpcId = "vpc-4owdpnwr",
-    ///                 UserName = "root",
-    ///             },
-    ///             ResourceName = "terraform-test",
-    ///             Type = "MYSQL",
-    ///         });
-    ///     }
+    ///             Password = "xxxxxxxxx",
+    ///             Port = 3306,
+    ///             Resource = "cdb-fitq5t9h",
+    ///             SelfBuilt = false,
+    ///             ServiceVip = "172.16.80.59",
+    ///             UniqVpcId = "vpc-4owdpnwr",
+    ///             UserName = "root",
+    ///         },
+    ///         ResourceName = "terraform-test",
+    ///         Type = "MYSQL",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// ckafka connect_resource can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Ckafka/connectResource:ConnectResource connect_resource connect_resource_id
+    /// $ pulumi import tencentcloud:Ckafka/connectResource:ConnectResource connect_resource connect_resource_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Ckafka/connectResource:ConnectResource")]
-    public partial class ConnectResource : Pulumi.CustomResource
+    public partial class ConnectResource : global::Pulumi.CustomResource
     {
         /// <summary>
         /// ClickHouse configuration, required when Type is CLICKHOUSE.
@@ -178,7 +179,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka
         }
     }
 
-    public sealed class ConnectResourceArgs : Pulumi.ResourceArgs
+    public sealed class ConnectResourceArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// ClickHouse configuration, required when Type is CLICKHOUSE.
@@ -261,9 +262,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka
         public ConnectResourceArgs()
         {
         }
+        public static new ConnectResourceArgs Empty => new ConnectResourceArgs();
     }
 
-    public sealed class ConnectResourceState : Pulumi.ResourceArgs
+    public sealed class ConnectResourceState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// ClickHouse configuration, required when Type is CLICKHOUSE.
@@ -346,5 +348,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka
         public ConnectResourceState()
         {
         }
+        public static new ConnectResourceState Empty => new ConnectResourceState();
     }
 }

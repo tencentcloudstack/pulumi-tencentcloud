@@ -15,34 +15,35 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dnspod
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var foo = new Tencentcloud.Dnspod.DomainInstance("foo", new()
     ///     {
-    ///         var foo = new Tencentcloud.Dnspod.DomainInstance("foo", new Tencentcloud.Dnspod.DomainInstanceArgs
-    ///         {
-    ///             Domain = "hello.com",
-    ///             Remark = "this is demo",
-    ///         });
-    ///     }
+    ///         Domain = "hello.com",
+    ///         Remark = "this is demo",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// DnsPod Domain instance can be imported, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Dnspod/domainInstance:DomainInstance foo domain
+    /// $ pulumi import tencentcloud:Dnspod/domainInstance:DomainInstance foo domain
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Dnspod/domainInstance:DomainInstance")]
-    public partial class DomainInstance : Pulumi.CustomResource
+    public partial class DomainInstance : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Create time of the domain.
@@ -131,7 +132,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dnspod
         }
     }
 
-    public sealed class DomainInstanceArgs : Pulumi.ResourceArgs
+    public sealed class DomainInstanceArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// The Domain.
@@ -166,9 +167,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dnspod
         public DomainInstanceArgs()
         {
         }
+        public static new DomainInstanceArgs Empty => new DomainInstanceArgs();
     }
 
-    public sealed class DomainInstanceState : Pulumi.ResourceArgs
+    public sealed class DomainInstanceState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Create time of the domain.
@@ -215,5 +217,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dnspod
         public DomainInstanceState()
         {
         }
+        public static new DomainInstanceState Empty => new DomainInstanceState();
     }
 }

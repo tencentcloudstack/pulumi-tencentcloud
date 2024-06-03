@@ -9,24 +9,25 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const zones = tencentcloud.Availability.getZonesByProduct({
  *     product: "sqlserver",
  * });
  * const vpc = new tencentcloud.vpc.Instance("vpc", {cidrBlock: "10.0.0.0/16"});
  * const subnet = new tencentcloud.subnet.Instance("subnet", {
- *     availabilityZone: zones.then(zones => zones.zones?[4]?.name),
+ *     availabilityZone: zones.then(zones => zones.zones?.[4]?.name),
  *     vpcId: vpc.id,
  *     cidrBlock: "10.0.0.0/16",
  *     isMulticast: false,
  * });
  * const securityGroup = new tencentcloud.security.Group("securityGroup", {description: "desc."});
  * const exampleBasicInstance = new tencentcloud.sqlserver.BasicInstance("exampleBasicInstance", {
- *     availabilityZone: zones.then(zones => zones.zones?[4]?.name),
+ *     availabilityZone: zones.then(zones => zones.zones?.[4]?.name),
  *     chargeType: "POSTPAID_BY_HOUR",
  *     vpcId: vpc.id,
  *     subnetId: subnet.id,
@@ -62,13 +63,11 @@ import * as utilities from "../utilities";
  *     flowId: exampleGeneralBackup.flowId,
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getBackupByFlowId(args: GetBackupByFlowIdArgs, opts?: pulumi.InvokeOptions): Promise<GetBackupByFlowIdResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Sqlserver/getBackupByFlowId:getBackupByFlowId", {
         "flowId": args.flowId,
         "instanceId": args.instanceId,
@@ -150,9 +149,69 @@ export interface GetBackupByFlowIdResult {
      */
     readonly strategy: number;
 }
-
+/**
+ * Use this data source to query detailed information of sqlserver datasourceBackupByFlowId
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
+ *
+ * const zones = tencentcloud.Availability.getZonesByProduct({
+ *     product: "sqlserver",
+ * });
+ * const vpc = new tencentcloud.vpc.Instance("vpc", {cidrBlock: "10.0.0.0/16"});
+ * const subnet = new tencentcloud.subnet.Instance("subnet", {
+ *     availabilityZone: zones.then(zones => zones.zones?.[4]?.name),
+ *     vpcId: vpc.id,
+ *     cidrBlock: "10.0.0.0/16",
+ *     isMulticast: false,
+ * });
+ * const securityGroup = new tencentcloud.security.Group("securityGroup", {description: "desc."});
+ * const exampleBasicInstance = new tencentcloud.sqlserver.BasicInstance("exampleBasicInstance", {
+ *     availabilityZone: zones.then(zones => zones.zones?.[4]?.name),
+ *     chargeType: "POSTPAID_BY_HOUR",
+ *     vpcId: vpc.id,
+ *     subnetId: subnet.id,
+ *     projectId: 0,
+ *     memory: 4,
+ *     storage: 100,
+ *     cpu: 2,
+ *     machineType: "CLOUD_PREMIUM",
+ *     maintenanceWeekSets: [
+ *         1,
+ *         2,
+ *         3,
+ *     ],
+ *     maintenanceStartTime: "09:00",
+ *     maintenanceTimeSpan: 3,
+ *     securityGroups: [securityGroup.id],
+ *     tags: {
+ *         test: "test",
+ *     },
+ * });
+ * const exampleDb = new tencentcloud.sqlserver.Db("exampleDb", {
+ *     instanceId: exampleBasicInstance.id,
+ *     charset: "Chinese_PRC_BIN",
+ *     remark: "test-remark",
+ * });
+ * const exampleGeneralBackup = new tencentcloud.sqlserver.GeneralBackup("exampleGeneralBackup", {
+ *     instanceId: exampleDb.id,
+ *     backupName: "tf_example_backup",
+ *     strategy: 0,
+ * });
+ * const exampleBackupByFlowId = tencentcloud.Sqlserver.getBackupByFlowIdOutput({
+ *     instanceId: exampleGeneralBackup.instanceId,
+ *     flowId: exampleGeneralBackup.flowId,
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getBackupByFlowIdOutput(args: GetBackupByFlowIdOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetBackupByFlowIdResult> {
-    return pulumi.output(args).apply(a => getBackupByFlowId(a, opts))
+    return pulumi.output(args).apply((a: any) => getBackupByFlowId(a, opts))
 }
 
 /**

@@ -15,40 +15,41 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Pts
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var cronJob = new Tencentcloud.Pts.CronJob("cronJob", new()
     ///     {
-    ///         var cronJob = new Tencentcloud.Pts.CronJob("cronJob", new Tencentcloud.Pts.CronJobArgs
-    ///         {
-    ///             CronExpression = "* 1 * * *",
-    ///             FrequencyType = 2,
-    ///             JobOwner = "userName",
-    ///             Note = "desc",
-    ///             NoticeId = "notice-vp6i38jt",
-    ///             ProjectId = "project-7qkzxhea",
-    ///             ScenarioId = "scenario-c22lqb1w",
-    ///             ScenarioName = "pts-js(2022-11-10 21:53:53)",
-    ///         });
-    ///     }
+    ///         CronExpression = "* 1 * * *",
+    ///         FrequencyType = 2,
+    ///         JobOwner = "userName",
+    ///         Note = "desc",
+    ///         NoticeId = "notice-vp6i38jt",
+    ///         ProjectId = "project-7qkzxhea",
+    ///         ScenarioId = "scenario-c22lqb1w",
+    ///         ScenarioName = "pts-js(2022-11-10 21:53:53)",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// pts cron_job can be imported using the projectId#cronJobId, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Pts/cronJob:CronJob cron_job project-7qkzxhea#scenario-c22lqb1w
+    /// $ pulumi import tencentcloud:Pts/cronJob:CronJob cron_job project-7qkzxhea#scenario-c22lqb1w
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Pts/cronJob:CronJob")]
-    public partial class CronJob : Pulumi.CustomResource
+    public partial class CronJob : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Reason for suspension.
@@ -203,7 +204,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Pts
         }
     }
 
-    public sealed class CronJobArgs : Pulumi.ResourceArgs
+    public sealed class CronJobArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Cron expression, When setting cron_expression at that time, frequency_type must be greater than 1.
@@ -268,9 +269,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Pts
         public CronJobArgs()
         {
         }
+        public static new CronJobArgs Empty => new CronJobArgs();
     }
 
-    public sealed class CronJobState : Pulumi.ResourceArgs
+    public sealed class CronJobState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Reason for suspension.
@@ -383,5 +385,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Pts
         public CronJobState()
         {
         }
+        public static new CronJobState Empty => new CronJobState();
     }
 }

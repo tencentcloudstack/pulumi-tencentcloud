@@ -9,21 +9,21 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const updateCertificateRecordRollback = new tencentcloud.Ssl.UpdateCertificateRecordRollbackOperation("update_certificate_record_rollback", {
- *     deployRecordId: "1603",
- * });
+ * const updateCertificateRecordRollback = new tencentcloud.ssl.UpdateCertificateRecordRollbackOperation("updateCertificateRecordRollback", {deployRecordId: "1603"});
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * ssl update_certificate_record_rollback can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Ssl/updateCertificateRecordRollbackOperation:UpdateCertificateRecordRollbackOperation update_certificate_record_rollback update_certificate_record_rollback_id
+ * $ pulumi import tencentcloud:Ssl/updateCertificateRecordRollbackOperation:UpdateCertificateRecordRollbackOperation update_certificate_record_rollback update_certificate_record_rollback_id
  * ```
  */
 export class UpdateCertificateRecordRollbackOperation extends pulumi.CustomResource {

@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,22 +11,21 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const storages = pulumi.output(tencentcloud.Cbs.getStoragesSet({
+ * const storages = tencentcloud.Cbs.getStoragesSet({
  *     availabilityZone: "ap-guangzhou-3",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getStoragesSet(args?: GetStoragesSetArgs, opts?: pulumi.InvokeOptions): Promise<GetStoragesSetResult> {
     args = args || {};
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Cbs/getStoragesSet:getStoragesSet", {
         "availabilityZone": args.availabilityZone,
         "chargeTypes": args.chargeTypes,
@@ -154,9 +154,24 @@ export interface GetStoragesSetResult {
     readonly tagKeys?: string[];
     readonly tagValues?: string[];
 }
-
+/**
+ * Use this data source to query detailed information of CBS storages in parallel.
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const storages = tencentcloud.Cbs.getStoragesSet({
+ *     availabilityZone: "ap-guangzhou-3",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getStoragesSetOutput(args?: GetStoragesSetOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetStoragesSetResult> {
-    return pulumi.output(args).apply(a => getStoragesSet(a, opts))
+    return pulumi.output(args).apply((a: any) => getStoragesSet(a, opts))
 }
 
 /**

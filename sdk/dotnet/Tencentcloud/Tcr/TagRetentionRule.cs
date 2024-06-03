@@ -14,59 +14,63 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcr
     /// Provides a resource to create a tcr tag retention rule.
     /// 
     /// ## Example Usage
+    /// 
     /// ### Create a tcr tag retention rule instance
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var exampleInstance = new Tencentcloud.Tcr.Instance("exampleInstance", new()
     ///     {
-    ///         var exampleInstance = new Tencentcloud.Tcr.Instance("exampleInstance", new Tencentcloud.Tcr.InstanceArgs
+    ///         InstanceType = "basic",
+    ///         DeleteBucket = true,
+    ///         Tags = 
     ///         {
-    ///             InstanceType = "basic",
-    ///             DeleteBucket = true,
-    ///             Tags = 
-    ///             {
-    ///                 { "createdBy", "terraform" },
-    ///             },
-    ///         });
-    ///         var exampleNamespace = new Tencentcloud.Tcr.Namespace("exampleNamespace", new Tencentcloud.Tcr.NamespaceArgs
-    ///         {
-    ///             InstanceId = exampleInstance.Id,
-    ///             IsPublic = true,
-    ///             IsAutoScan = true,
-    ///             IsPreventVul = true,
-    ///             Severity = "medium",
-    ///             CveWhitelistItems = 
-    ///             {
-    ///                 new Tencentcloud.Tcr.Inputs.NamespaceCveWhitelistItemArgs
-    ///                 {
-    ///                     CveId = "cve-xxxxx",
-    ///                 },
-    ///             },
-    ///         });
-    ///         var myRule = new Tencentcloud.Tcr.TagRetentionRule("myRule", new Tencentcloud.Tcr.TagRetentionRuleArgs
-    ///         {
-    ///             RegistryId = exampleInstance.Id,
-    ///             NamespaceName = exampleNamespace.Name,
-    ///             RetentionRule = new Tencentcloud.Tcr.Inputs.TagRetentionRuleRetentionRuleArgs
-    ///             {
-    ///                 Key = "nDaysSinceLastPush",
-    ///                 Value = 2,
-    ///             },
-    ///             CronSetting = "daily",
-    ///             Disabled = true,
-    ///         });
-    ///     }
+    ///             { "createdBy", "terraform" },
+    ///         },
+    ///     });
     /// 
-    /// }
+    ///     var exampleNamespace = new Tencentcloud.Tcr.Namespace("exampleNamespace", new()
+    ///     {
+    ///         InstanceId = exampleInstance.Id,
+    ///         IsPublic = true,
+    ///         IsAutoScan = true,
+    ///         IsPreventVul = true,
+    ///         Severity = "medium",
+    ///         CveWhitelistItems = new[]
+    ///         {
+    ///             new Tencentcloud.Tcr.Inputs.NamespaceCveWhitelistItemArgs
+    ///             {
+    ///                 CveId = "cve-xxxxx",
+    ///             },
+    ///         },
+    ///     });
+    /// 
+    ///     var myRule = new Tencentcloud.Tcr.TagRetentionRule("myRule", new()
+    ///     {
+    ///         RegistryId = exampleInstance.Id,
+    ///         NamespaceName = exampleNamespace.Name,
+    ///         RetentionRule = new Tencentcloud.Tcr.Inputs.TagRetentionRuleRetentionRuleArgs
+    ///         {
+    ///             Key = "nDaysSinceLastPush",
+    ///             Value = 2,
+    ///         },
+    ///         CronSetting = "daily",
+    ///         Disabled = true,
+    ///     });
+    /// 
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Tcr/tagRetentionRule:TagRetentionRule")]
-    public partial class TagRetentionRule : Pulumi.CustomResource
+    public partial class TagRetentionRule : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Execution cycle, currently only available selections are: manual; daily; weekly; monthly.
@@ -149,7 +153,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcr
         }
     }
 
-    public sealed class TagRetentionRuleArgs : Pulumi.ResourceArgs
+    public sealed class TagRetentionRuleArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Execution cycle, currently only available selections are: manual; daily; weekly; monthly.
@@ -184,9 +188,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcr
         public TagRetentionRuleArgs()
         {
         }
+        public static new TagRetentionRuleArgs Empty => new TagRetentionRuleArgs();
     }
 
-    public sealed class TagRetentionRuleState : Pulumi.ResourceArgs
+    public sealed class TagRetentionRuleState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Execution cycle, currently only available selections are: manual; daily; weekly; monthly.
@@ -227,5 +232,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcr
         public TagRetentionRuleState()
         {
         }
+        public static new TagRetentionRuleState Empty => new TagRetentionRuleState();
     }
 }

@@ -15,39 +15,40 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Oceanus
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var example = new Tencentcloud.Oceanus.Resource("example", new()
     ///     {
-    ///         var example = new Tencentcloud.Oceanus.Resource("example", new Tencentcloud.Oceanus.ResourceArgs
+    ///         FolderId = "folder-7ctl246z",
+    ///         Remark = "remark.",
+    ///         ResourceConfigRemark = "config remark.",
+    ///         ResourceLoc = new Tencentcloud.Oceanus.Inputs.ResourceResourceLocArgs
     ///         {
-    ///             FolderId = "folder-7ctl246z",
-    ///             Remark = "remark.",
-    ///             ResourceConfigRemark = "config remark.",
-    ///             ResourceLoc = new Tencentcloud.Oceanus.Inputs.ResourceResourceLocArgs
+    ///             Param = new Tencentcloud.Oceanus.Inputs.ResourceResourceLocParamArgs
     ///             {
-    ///                 Param = new Tencentcloud.Oceanus.Inputs.ResourceResourceLocParamArgs
-    ///                 {
-    ///                     Bucket = "keep-terraform-1257058945",
-    ///                     Path = "OceanusResource/junit-4.13.2.jar",
-    ///                     Region = "ap-guangzhou",
-    ///                 },
-    ///                 StorageType = 1,
+    ///                 Bucket = "keep-terraform-1257058945",
+    ///                 Path = "OceanusResource/junit-4.13.2.jar",
+    ///                 Region = "ap-guangzhou",
     ///             },
-    ///             ResourceType = 1,
-    ///             WorkSpaceId = "space-2idq8wbr",
-    ///         });
-    ///     }
+    ///             StorageType = 1,
+    ///         },
+    ///         ResourceType = 1,
+    ///         WorkSpaceId = "space-2idq8wbr",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Oceanus/resource:Resource")]
-    public partial class Resource : Pulumi.CustomResource
+    public partial class Resource : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Folder id.
@@ -148,7 +149,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Oceanus
         }
     }
 
-    public sealed class ResourceArgs : Pulumi.ResourceArgs
+    public sealed class ResourceArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Folder id.
@@ -195,9 +196,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Oceanus
         public ResourceArgs()
         {
         }
+        public static new ResourceArgs Empty => new ResourceArgs();
     }
 
-    public sealed class ResourceState : Pulumi.ResourceArgs
+    public sealed class ResourceState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Folder id.
@@ -256,5 +258,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Oceanus
         public ResourceState()
         {
         }
+        public static new ResourceState Empty => new ResourceState();
     }
 }

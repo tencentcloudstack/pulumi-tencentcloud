@@ -15,84 +15,82 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dayu
         /// <summary>
         /// Use this data source to query detailed information of dayu DDoS policy attachments
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var fooType = Tencentcloud.Dayu.GetDdosPolicyAttachments.Invoke(new()
         ///     {
-        ///         var fooType = Output.Create(Tencentcloud.Dayu.GetDdosPolicyAttachments.InvokeAsync(new Tencentcloud.Dayu.GetDdosPolicyAttachmentsArgs
-        ///         {
-        ///             ResourceType = tencentcloud_dayu_ddos_policy_attachment.Dayu_ddos_policy_attachment.Resource_type,
-        ///         }));
-        ///         var fooResource = Output.Create(Tencentcloud.Dayu.GetDdosPolicyAttachments.InvokeAsync(new Tencentcloud.Dayu.GetDdosPolicyAttachmentsArgs
-        ///         {
-        ///             ResourceId = tencentcloud_dayu_ddos_policy_attachment.Dayu_ddos_policy_attachment.Resource_id,
-        ///             ResourceType = tencentcloud_dayu_ddos_policy_attachment.Dayu_ddos_policy_attachment.Resource_type,
-        ///         }));
-        ///         var fooPolicy = Output.Create(Tencentcloud.Dayu.GetDdosPolicyAttachments.InvokeAsync(new Tencentcloud.Dayu.GetDdosPolicyAttachmentsArgs
-        ///         {
-        ///             ResourceType = tencentcloud_dayu_ddos_policy_attachment.Dayu_ddos_policy_attachment.Resource_type,
-        ///             PolicyId = tencentcloud_dayu_ddos_policy_attachment.Dayu_ddos_policy_attachment.Policy_id,
-        ///         }));
-        ///     }
+        ///         ResourceType = tencentcloud_dayu_ddos_policy_attachment.Dayu_ddos_policy_attachment.Resource_type,
+        ///     });
         /// 
-        /// }
+        ///     var fooResource = Tencentcloud.Dayu.GetDdosPolicyAttachments.Invoke(new()
+        ///     {
+        ///         ResourceId = tencentcloud_dayu_ddos_policy_attachment.Dayu_ddos_policy_attachment.Resource_id,
+        ///         ResourceType = tencentcloud_dayu_ddos_policy_attachment.Dayu_ddos_policy_attachment.Resource_type,
+        ///     });
+        /// 
+        ///     var fooPolicy = Tencentcloud.Dayu.GetDdosPolicyAttachments.Invoke(new()
+        ///     {
+        ///         ResourceType = tencentcloud_dayu_ddos_policy_attachment.Dayu_ddos_policy_attachment.Resource_type,
+        ///         PolicyId = tencentcloud_dayu_ddos_policy_attachment.Dayu_ddos_policy_attachment.Policy_id,
+        ///     });
+        /// 
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetDdosPolicyAttachmentsResult> InvokeAsync(GetDdosPolicyAttachmentsArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetDdosPolicyAttachmentsResult>("tencentcloud:Dayu/getDdosPolicyAttachments:getDdosPolicyAttachments", args ?? new GetDdosPolicyAttachmentsArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetDdosPolicyAttachmentsResult>("tencentcloud:Dayu/getDdosPolicyAttachments:getDdosPolicyAttachments", args ?? new GetDdosPolicyAttachmentsArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of dayu DDoS policy attachments
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var fooType = Tencentcloud.Dayu.GetDdosPolicyAttachments.Invoke(new()
         ///     {
-        ///         var fooType = Output.Create(Tencentcloud.Dayu.GetDdosPolicyAttachments.InvokeAsync(new Tencentcloud.Dayu.GetDdosPolicyAttachmentsArgs
-        ///         {
-        ///             ResourceType = tencentcloud_dayu_ddos_policy_attachment.Dayu_ddos_policy_attachment.Resource_type,
-        ///         }));
-        ///         var fooResource = Output.Create(Tencentcloud.Dayu.GetDdosPolicyAttachments.InvokeAsync(new Tencentcloud.Dayu.GetDdosPolicyAttachmentsArgs
-        ///         {
-        ///             ResourceId = tencentcloud_dayu_ddos_policy_attachment.Dayu_ddos_policy_attachment.Resource_id,
-        ///             ResourceType = tencentcloud_dayu_ddos_policy_attachment.Dayu_ddos_policy_attachment.Resource_type,
-        ///         }));
-        ///         var fooPolicy = Output.Create(Tencentcloud.Dayu.GetDdosPolicyAttachments.InvokeAsync(new Tencentcloud.Dayu.GetDdosPolicyAttachmentsArgs
-        ///         {
-        ///             ResourceType = tencentcloud_dayu_ddos_policy_attachment.Dayu_ddos_policy_attachment.Resource_type,
-        ///             PolicyId = tencentcloud_dayu_ddos_policy_attachment.Dayu_ddos_policy_attachment.Policy_id,
-        ///         }));
-        ///     }
+        ///         ResourceType = tencentcloud_dayu_ddos_policy_attachment.Dayu_ddos_policy_attachment.Resource_type,
+        ///     });
         /// 
-        /// }
+        ///     var fooResource = Tencentcloud.Dayu.GetDdosPolicyAttachments.Invoke(new()
+        ///     {
+        ///         ResourceId = tencentcloud_dayu_ddos_policy_attachment.Dayu_ddos_policy_attachment.Resource_id,
+        ///         ResourceType = tencentcloud_dayu_ddos_policy_attachment.Dayu_ddos_policy_attachment.Resource_type,
+        ///     });
+        /// 
+        ///     var fooPolicy = Tencentcloud.Dayu.GetDdosPolicyAttachments.Invoke(new()
+        ///     {
+        ///         ResourceType = tencentcloud_dayu_ddos_policy_attachment.Dayu_ddos_policy_attachment.Resource_type,
+        ///         PolicyId = tencentcloud_dayu_ddos_policy_attachment.Dayu_ddos_policy_attachment.Policy_id,
+        ///     });
+        /// 
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetDdosPolicyAttachmentsResult> Invoke(GetDdosPolicyAttachmentsInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetDdosPolicyAttachmentsResult>("tencentcloud:Dayu/getDdosPolicyAttachments:getDdosPolicyAttachments", args ?? new GetDdosPolicyAttachmentsInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetDdosPolicyAttachmentsResult>("tencentcloud:Dayu/getDdosPolicyAttachments:getDdosPolicyAttachments", args ?? new GetDdosPolicyAttachmentsInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetDdosPolicyAttachmentsArgs : Pulumi.InvokeArgs
+    public sealed class GetDdosPolicyAttachmentsArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Id of the policy to be queried.
@@ -121,9 +119,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dayu
         public GetDdosPolicyAttachmentsArgs()
         {
         }
+        public static new GetDdosPolicyAttachmentsArgs Empty => new GetDdosPolicyAttachmentsArgs();
     }
 
-    public sealed class GetDdosPolicyAttachmentsInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetDdosPolicyAttachmentsInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Id of the policy to be queried.
@@ -152,6 +151,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dayu
         public GetDdosPolicyAttachmentsInvokeArgs()
         {
         }
+        public static new GetDdosPolicyAttachmentsInvokeArgs Empty => new GetDdosPolicyAttachmentsInvokeArgs();
     }
 
 

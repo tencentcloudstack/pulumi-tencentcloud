@@ -7,68 +7,81 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a COS object resource to put an object(content or file) to the bucket.
 //
 // ## Example Usage
+//
 // ### Uploading a file to a bucket
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cos"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cos"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Cos.NewBucketObject(ctx, "myobject", &Cos.BucketObjectArgs{
-// 			Bucket: pulumi.String("mycos-1258798060"),
-// 			Key:    pulumi.String("new_object_key"),
-// 			Source: pulumi.String("path/to/file"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Cos.NewBucketObject(ctx, "myobject", &Cos.BucketObjectArgs{
+//				Bucket: pulumi.String("mycos-1258798060"),
+//				Key:    pulumi.String("new_object_key"),
+//				Source: pulumi.String("path/to/file"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
+//
 // ### Uploading a content to a bucket
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cos"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cos"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		mycos, err := Cos.NewBucket(ctx, "mycos", &Cos.BucketArgs{
-// 			Bucket: pulumi.String("mycos-1258798060"),
-// 			Acl:    pulumi.String("public-read"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_, err = Cos.NewBucketObject(ctx, "myobject", &Cos.BucketObjectArgs{
-// 			Bucket:  mycos.Bucket,
-// 			Key:     pulumi.String("new_object_key"),
-// 			Content: pulumi.String("the content that you want to upload."),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			mycos, err := Cos.NewBucket(ctx, "mycos", &Cos.BucketArgs{
+//				Bucket: pulumi.String("mycos-1258798060"),
+//				Acl:    pulumi.String("public-read"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_, err = Cos.NewBucketObject(ctx, "myobject", &Cos.BucketObjectArgs{
+//				Bucket:  mycos.Bucket,
+//				Key:     pulumi.String("new_object_key"),
+//				Content: pulumi.String("the content that you want to upload."),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 type BucketObject struct {
 	pulumi.CustomResourceState
 
@@ -111,7 +124,7 @@ func NewBucketObject(ctx *pulumi.Context,
 	if args.Key == nil {
 		return nil, errors.New("invalid value for required argument 'Key'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource BucketObject
 	err := ctx.RegisterResource("tencentcloud:Cos/bucketObject:BucketObject", name, args, &resource, opts...)
 	if err != nil {
@@ -272,7 +285,7 @@ func (i *BucketObject) ToBucketObjectOutputWithContext(ctx context.Context) Buck
 // BucketObjectArrayInput is an input type that accepts BucketObjectArray and BucketObjectArrayOutput values.
 // You can construct a concrete instance of `BucketObjectArrayInput` via:
 //
-//          BucketObjectArray{ BucketObjectArgs{...} }
+//	BucketObjectArray{ BucketObjectArgs{...} }
 type BucketObjectArrayInput interface {
 	pulumi.Input
 
@@ -297,7 +310,7 @@ func (i BucketObjectArray) ToBucketObjectArrayOutputWithContext(ctx context.Cont
 // BucketObjectMapInput is an input type that accepts BucketObjectMap and BucketObjectMapOutput values.
 // You can construct a concrete instance of `BucketObjectMapInput` via:
 //
-//          BucketObjectMap{ "key": BucketObjectArgs{...} }
+//	BucketObjectMap{ "key": BucketObjectArgs{...} }
 type BucketObjectMapInput interface {
 	pulumi.Input
 

@@ -17,59 +17,61 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcm
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var tracingConfig = new Tencentcloud.Tcm.TracingConfig("tracingConfig", new()
     ///     {
-    ///         var tracingConfig = new Tencentcloud.Tcm.TracingConfig("tracingConfig", new Tencentcloud.Tcm.TracingConfigArgs
+    ///         Apm = new Tencentcloud.Tcm.Inputs.TracingConfigApmArgs
     ///         {
-    ///             Apm = new Tencentcloud.Tcm.Inputs.TracingConfigApmArgs
-    ///             {
-    ///                 Enable = true,
-    ///                 InstanceId = "apm-xxx",
-    ///                 Region = "ap-guangzhou",
-    ///             },
     ///             Enable = true,
-    ///             MeshId = "mesh-xxxxxxxx",
-    ///             Sampling = "",
-    ///             Zipkin = new Tencentcloud.Tcm.Inputs.TracingConfigZipkinArgs
-    ///             {
-    ///                 Address = "10.10.10.10:9411",
-    ///             },
-    ///         });
-    ///         var deleteConfig = new Tencentcloud.Tcm.TracingConfig("deleteConfig", new Tencentcloud.Tcm.TracingConfigArgs
+    ///             InstanceId = "apm-xxx",
+    ///             Region = "ap-guangzhou",
+    ///         },
+    ///         Enable = true,
+    ///         MeshId = "mesh-xxxxxxxx",
+    ///         Sampling = 1,
+    ///         Zipkin = new Tencentcloud.Tcm.Inputs.TracingConfigZipkinArgs
     ///         {
-    ///             Apm = new Tencentcloud.Tcm.Inputs.TracingConfigApmArgs
-    ///             {
-    ///                 Enable = false,
-    ///             },
-    ///             Enable = true,
-    ///             MeshId = "mesh-rofjmxxx",
-    ///             Sampling = 0,
-    ///             Zipkin = new Tencentcloud.Tcm.Inputs.TracingConfigZipkinArgs
-    ///             {
-    ///                 Address = "",
-    ///             },
-    ///         });
-    ///     }
+    ///             Address = "10.10.10.10:9411",
+    ///         },
+    ///     });
     /// 
-    /// }
+    ///     var deleteConfig = new Tencentcloud.Tcm.TracingConfig("deleteConfig", new()
+    ///     {
+    ///         Apm = new Tencentcloud.Tcm.Inputs.TracingConfigApmArgs
+    ///         {
+    ///             Enable = false,
+    ///         },
+    ///         Enable = true,
+    ///         MeshId = "mesh-rofjmxxx",
+    ///         Sampling = 0,
+    ///         Zipkin = new Tencentcloud.Tcm.Inputs.TracingConfigZipkinArgs
+    ///         {
+    ///             Address = "",
+    ///         },
+    ///     });
+    /// 
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// tcm tracing_config can be imported using the mesh_id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Tcm/tracingConfig:TracingConfig tracing_config mesh-rofjmxxx
+    /// $ pulumi import tencentcloud:Tcm/tracingConfig:TracingConfig tracing_config mesh-rofjmxxx
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Tcm/tracingConfig:TracingConfig")]
-    public partial class TracingConfig : Pulumi.CustomResource
+    public partial class TracingConfig : global::Pulumi.CustomResource
     {
         /// <summary>
         /// APM config.
@@ -146,7 +148,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcm
         }
     }
 
-    public sealed class TracingConfigArgs : Pulumi.ResourceArgs
+    public sealed class TracingConfigArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// APM config.
@@ -181,9 +183,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcm
         public TracingConfigArgs()
         {
         }
+        public static new TracingConfigArgs Empty => new TracingConfigArgs();
     }
 
-    public sealed class TracingConfigState : Pulumi.ResourceArgs
+    public sealed class TracingConfigState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// APM config.
@@ -218,5 +221,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcm
         public TracingConfigState()
         {
         }
+        public static new TracingConfigState Empty => new TracingConfigState();
     }
 }

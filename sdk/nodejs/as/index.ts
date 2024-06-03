@@ -5,49 +5,126 @@ import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
 // Export members:
-export * from "./attachment";
-export * from "./completeLifecycle";
-export * from "./executeScalingPolicy";
-export * from "./getAdvices";
-export * from "./getInstances";
-export * from "./getLastActivity";
-export * from "./getLimits";
-export * from "./getScalingConfigs";
-export * from "./getScalingGroups";
-export * from "./getScalingPolicies";
-export * from "./lifecycleHook";
-export * from "./loadBalancer";
-export * from "./notification";
-export * from "./protectInstances";
-export * from "./removeInstances";
-export * from "./scaleInInstances";
-export * from "./scaleOutInstances";
-export * from "./scalingConfig";
-export * from "./scalingGroup";
-export * from "./scalingGroupStatus";
-export * from "./scalingPolicy";
-export * from "./schedule";
-export * from "./startInstances";
-export * from "./stopInstances";
+export { AttachmentArgs, AttachmentState } from "./attachment";
+export type Attachment = import("./attachment").Attachment;
+export const Attachment: typeof import("./attachment").Attachment = null as any;
+utilities.lazyLoad(exports, ["Attachment"], () => require("./attachment"));
 
-// Import resources to register:
-import { Attachment } from "./attachment";
-import { CompleteLifecycle } from "./completeLifecycle";
-import { ExecuteScalingPolicy } from "./executeScalingPolicy";
-import { LifecycleHook } from "./lifecycleHook";
-import { LoadBalancer } from "./loadBalancer";
-import { Notification } from "./notification";
-import { ProtectInstances } from "./protectInstances";
-import { RemoveInstances } from "./removeInstances";
-import { ScaleInInstances } from "./scaleInInstances";
-import { ScaleOutInstances } from "./scaleOutInstances";
-import { ScalingConfig } from "./scalingConfig";
-import { ScalingGroup } from "./scalingGroup";
-import { ScalingGroupStatus } from "./scalingGroupStatus";
-import { ScalingPolicy } from "./scalingPolicy";
-import { Schedule } from "./schedule";
-import { StartInstances } from "./startInstances";
-import { StopInstances } from "./stopInstances";
+export { CompleteLifecycleArgs, CompleteLifecycleState } from "./completeLifecycle";
+export type CompleteLifecycle = import("./completeLifecycle").CompleteLifecycle;
+export const CompleteLifecycle: typeof import("./completeLifecycle").CompleteLifecycle = null as any;
+utilities.lazyLoad(exports, ["CompleteLifecycle"], () => require("./completeLifecycle"));
+
+export { ExecuteScalingPolicyArgs, ExecuteScalingPolicyState } from "./executeScalingPolicy";
+export type ExecuteScalingPolicy = import("./executeScalingPolicy").ExecuteScalingPolicy;
+export const ExecuteScalingPolicy: typeof import("./executeScalingPolicy").ExecuteScalingPolicy = null as any;
+utilities.lazyLoad(exports, ["ExecuteScalingPolicy"], () => require("./executeScalingPolicy"));
+
+export { GetAdvicesArgs, GetAdvicesResult, GetAdvicesOutputArgs } from "./getAdvices";
+export const getAdvices: typeof import("./getAdvices").getAdvices = null as any;
+export const getAdvicesOutput: typeof import("./getAdvices").getAdvicesOutput = null as any;
+utilities.lazyLoad(exports, ["getAdvices","getAdvicesOutput"], () => require("./getAdvices"));
+
+export { GetInstancesArgs, GetInstancesResult, GetInstancesOutputArgs } from "./getInstances";
+export const getInstances: typeof import("./getInstances").getInstances = null as any;
+export const getInstancesOutput: typeof import("./getInstances").getInstancesOutput = null as any;
+utilities.lazyLoad(exports, ["getInstances","getInstancesOutput"], () => require("./getInstances"));
+
+export { GetLastActivityArgs, GetLastActivityResult, GetLastActivityOutputArgs } from "./getLastActivity";
+export const getLastActivity: typeof import("./getLastActivity").getLastActivity = null as any;
+export const getLastActivityOutput: typeof import("./getLastActivity").getLastActivityOutput = null as any;
+utilities.lazyLoad(exports, ["getLastActivity","getLastActivityOutput"], () => require("./getLastActivity"));
+
+export { GetLimitsArgs, GetLimitsResult, GetLimitsOutputArgs } from "./getLimits";
+export const getLimits: typeof import("./getLimits").getLimits = null as any;
+export const getLimitsOutput: typeof import("./getLimits").getLimitsOutput = null as any;
+utilities.lazyLoad(exports, ["getLimits","getLimitsOutput"], () => require("./getLimits"));
+
+export { GetScalingConfigsArgs, GetScalingConfigsResult, GetScalingConfigsOutputArgs } from "./getScalingConfigs";
+export const getScalingConfigs: typeof import("./getScalingConfigs").getScalingConfigs = null as any;
+export const getScalingConfigsOutput: typeof import("./getScalingConfigs").getScalingConfigsOutput = null as any;
+utilities.lazyLoad(exports, ["getScalingConfigs","getScalingConfigsOutput"], () => require("./getScalingConfigs"));
+
+export { GetScalingGroupsArgs, GetScalingGroupsResult, GetScalingGroupsOutputArgs } from "./getScalingGroups";
+export const getScalingGroups: typeof import("./getScalingGroups").getScalingGroups = null as any;
+export const getScalingGroupsOutput: typeof import("./getScalingGroups").getScalingGroupsOutput = null as any;
+utilities.lazyLoad(exports, ["getScalingGroups","getScalingGroupsOutput"], () => require("./getScalingGroups"));
+
+export { GetScalingPoliciesArgs, GetScalingPoliciesResult, GetScalingPoliciesOutputArgs } from "./getScalingPolicies";
+export const getScalingPolicies: typeof import("./getScalingPolicies").getScalingPolicies = null as any;
+export const getScalingPoliciesOutput: typeof import("./getScalingPolicies").getScalingPoliciesOutput = null as any;
+utilities.lazyLoad(exports, ["getScalingPolicies","getScalingPoliciesOutput"], () => require("./getScalingPolicies"));
+
+export { LifecycleHookArgs, LifecycleHookState } from "./lifecycleHook";
+export type LifecycleHook = import("./lifecycleHook").LifecycleHook;
+export const LifecycleHook: typeof import("./lifecycleHook").LifecycleHook = null as any;
+utilities.lazyLoad(exports, ["LifecycleHook"], () => require("./lifecycleHook"));
+
+export { LoadBalancerArgs, LoadBalancerState } from "./loadBalancer";
+export type LoadBalancer = import("./loadBalancer").LoadBalancer;
+export const LoadBalancer: typeof import("./loadBalancer").LoadBalancer = null as any;
+utilities.lazyLoad(exports, ["LoadBalancer"], () => require("./loadBalancer"));
+
+export { NotificationArgs, NotificationState } from "./notification";
+export type Notification = import("./notification").Notification;
+export const Notification: typeof import("./notification").Notification = null as any;
+utilities.lazyLoad(exports, ["Notification"], () => require("./notification"));
+
+export { ProtectInstancesArgs, ProtectInstancesState } from "./protectInstances";
+export type ProtectInstances = import("./protectInstances").ProtectInstances;
+export const ProtectInstances: typeof import("./protectInstances").ProtectInstances = null as any;
+utilities.lazyLoad(exports, ["ProtectInstances"], () => require("./protectInstances"));
+
+export { RemoveInstancesArgs, RemoveInstancesState } from "./removeInstances";
+export type RemoveInstances = import("./removeInstances").RemoveInstances;
+export const RemoveInstances: typeof import("./removeInstances").RemoveInstances = null as any;
+utilities.lazyLoad(exports, ["RemoveInstances"], () => require("./removeInstances"));
+
+export { ScaleInInstancesArgs, ScaleInInstancesState } from "./scaleInInstances";
+export type ScaleInInstances = import("./scaleInInstances").ScaleInInstances;
+export const ScaleInInstances: typeof import("./scaleInInstances").ScaleInInstances = null as any;
+utilities.lazyLoad(exports, ["ScaleInInstances"], () => require("./scaleInInstances"));
+
+export { ScaleOutInstancesArgs, ScaleOutInstancesState } from "./scaleOutInstances";
+export type ScaleOutInstances = import("./scaleOutInstances").ScaleOutInstances;
+export const ScaleOutInstances: typeof import("./scaleOutInstances").ScaleOutInstances = null as any;
+utilities.lazyLoad(exports, ["ScaleOutInstances"], () => require("./scaleOutInstances"));
+
+export { ScalingConfigArgs, ScalingConfigState } from "./scalingConfig";
+export type ScalingConfig = import("./scalingConfig").ScalingConfig;
+export const ScalingConfig: typeof import("./scalingConfig").ScalingConfig = null as any;
+utilities.lazyLoad(exports, ["ScalingConfig"], () => require("./scalingConfig"));
+
+export { ScalingGroupArgs, ScalingGroupState } from "./scalingGroup";
+export type ScalingGroup = import("./scalingGroup").ScalingGroup;
+export const ScalingGroup: typeof import("./scalingGroup").ScalingGroup = null as any;
+utilities.lazyLoad(exports, ["ScalingGroup"], () => require("./scalingGroup"));
+
+export { ScalingGroupStatusArgs, ScalingGroupStatusState } from "./scalingGroupStatus";
+export type ScalingGroupStatus = import("./scalingGroupStatus").ScalingGroupStatus;
+export const ScalingGroupStatus: typeof import("./scalingGroupStatus").ScalingGroupStatus = null as any;
+utilities.lazyLoad(exports, ["ScalingGroupStatus"], () => require("./scalingGroupStatus"));
+
+export { ScalingPolicyArgs, ScalingPolicyState } from "./scalingPolicy";
+export type ScalingPolicy = import("./scalingPolicy").ScalingPolicy;
+export const ScalingPolicy: typeof import("./scalingPolicy").ScalingPolicy = null as any;
+utilities.lazyLoad(exports, ["ScalingPolicy"], () => require("./scalingPolicy"));
+
+export { ScheduleArgs, ScheduleState } from "./schedule";
+export type Schedule = import("./schedule").Schedule;
+export const Schedule: typeof import("./schedule").Schedule = null as any;
+utilities.lazyLoad(exports, ["Schedule"], () => require("./schedule"));
+
+export { StartInstancesArgs, StartInstancesState } from "./startInstances";
+export type StartInstances = import("./startInstances").StartInstances;
+export const StartInstances: typeof import("./startInstances").StartInstances = null as any;
+utilities.lazyLoad(exports, ["StartInstances"], () => require("./startInstances"));
+
+export { StopInstancesArgs, StopInstancesState } from "./stopInstances";
+export type StopInstances = import("./stopInstances").StopInstances;
+export const StopInstances: typeof import("./stopInstances").StopInstances = null as any;
+utilities.lazyLoad(exports, ["StopInstances"], () => require("./stopInstances"));
+
 
 const _module = {
     version: utilities.getVersion(),

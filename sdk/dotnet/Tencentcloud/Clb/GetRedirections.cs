@@ -15,74 +15,68 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
         /// <summary>
         /// Use this data source to query detailed information of CLB redirections
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var foo = Tencentcloud.Clb.GetRedirections.Invoke(new()
         ///     {
-        ///         var foo = Output.Create(Tencentcloud.Clb.GetRedirections.InvokeAsync(new Tencentcloud.Clb.GetRedirectionsArgs
-        ///         {
-        ///             ClbId = "lb-p7olt9e5",
-        ///             ResultOutputFile = "mytestpath",
-        ///             SourceListenerId = "lbl-jc1dx6ju",
-        ///             SourceRuleId = "loc-ft8fmngv",
-        ///             TargetListenerId = "lbl-asj1hzuo",
-        ///             TargetRuleId = "loc-4xxr2cy7",
-        ///         }));
-        ///     }
+        ///         ClbId = "lb-p7olt9e5",
+        ///         ResultOutputFile = "mytestpath",
+        ///         SourceListenerId = "lbl-jc1dx6ju",
+        ///         SourceRuleId = "loc-ft8fmngv",
+        ///         TargetListenerId = "lbl-asj1hzuo",
+        ///         TargetRuleId = "loc-4xxr2cy7",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetRedirectionsResult> InvokeAsync(GetRedirectionsArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetRedirectionsResult>("tencentcloud:Clb/getRedirections:getRedirections", args ?? new GetRedirectionsArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetRedirectionsResult>("tencentcloud:Clb/getRedirections:getRedirections", args ?? new GetRedirectionsArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of CLB redirections
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var foo = Tencentcloud.Clb.GetRedirections.Invoke(new()
         ///     {
-        ///         var foo = Output.Create(Tencentcloud.Clb.GetRedirections.InvokeAsync(new Tencentcloud.Clb.GetRedirectionsArgs
-        ///         {
-        ///             ClbId = "lb-p7olt9e5",
-        ///             ResultOutputFile = "mytestpath",
-        ///             SourceListenerId = "lbl-jc1dx6ju",
-        ///             SourceRuleId = "loc-ft8fmngv",
-        ///             TargetListenerId = "lbl-asj1hzuo",
-        ///             TargetRuleId = "loc-4xxr2cy7",
-        ///         }));
-        ///     }
+        ///         ClbId = "lb-p7olt9e5",
+        ///         ResultOutputFile = "mytestpath",
+        ///         SourceListenerId = "lbl-jc1dx6ju",
+        ///         SourceRuleId = "loc-ft8fmngv",
+        ///         TargetListenerId = "lbl-asj1hzuo",
+        ///         TargetRuleId = "loc-4xxr2cy7",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetRedirectionsResult> Invoke(GetRedirectionsInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetRedirectionsResult>("tencentcloud:Clb/getRedirections:getRedirections", args ?? new GetRedirectionsInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetRedirectionsResult>("tencentcloud:Clb/getRedirections:getRedirections", args ?? new GetRedirectionsInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetRedirectionsArgs : Pulumi.InvokeArgs
+    public sealed class GetRedirectionsArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// ID of the CLB to be queried.
@@ -123,9 +117,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
         public GetRedirectionsArgs()
         {
         }
+        public static new GetRedirectionsArgs Empty => new GetRedirectionsArgs();
     }
 
-    public sealed class GetRedirectionsInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetRedirectionsInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// ID of the CLB to be queried.
@@ -166,6 +161,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
         public GetRedirectionsInvokeArgs()
         {
         }
+        public static new GetRedirectionsInvokeArgs Empty => new GetRedirectionsInvokeArgs();
     }
 
 

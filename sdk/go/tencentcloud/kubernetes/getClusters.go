@@ -8,41 +8,46 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Use this data source to query detailed information of kubernetes clusters.
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Kubernetes"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Kubernetes"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Kubernetes"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Kubernetes.GetClusters(ctx, &kubernetes.GetClustersArgs{
-// 			ClusterName: pulumi.StringRef("terraform"),
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_, err = Kubernetes.GetClusters(ctx, &kubernetes.GetClustersArgs{
-// 			ClusterId: pulumi.StringRef("cls-godovr32"),
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Kubernetes.GetClusters(ctx, &kubernetes.GetClustersArgs{
+//				ClusterName: pulumi.StringRef("terraform"),
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			_, err = Kubernetes.GetClusters(ctx, &kubernetes.GetClustersArgs{
+//				ClusterId: pulumi.StringRef("cls-godovr32"),
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 func GetClusters(ctx *pulumi.Context, args *GetClustersArgs, opts ...pulumi.InvokeOption) (*GetClustersResult, error) {
-	opts = pkgInvokeDefaultOpts(opts)
+	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetClustersResult
 	err := ctx.Invoke("tencentcloud:Kubernetes/getClusters:getClusters", args, &rv, opts...)
 	if err != nil {
@@ -57,6 +62,8 @@ type GetClustersArgs struct {
 	ClusterId *string `pulumi:"clusterId"`
 	// Name of the cluster. Conflict with cluster_id, can not be set at the same time.
 	ClusterName *string `pulumi:"clusterName"`
+	// The path prefix of kube config. You can store KubeConfig in a specified directory by specifying this field, such as ~/.kube/k8s, then public network access will use ~/.kube/k8s-clusterID-kubeconfig naming, and intranet access will use ~/.kube /k8s-clusterID-kubeconfig-intranet naming. If this field is not set, the KubeConfig will not be exported.
+	KubeConfigFilePrefix *string `pulumi:"kubeConfigFilePrefix"`
 	// Used to save results.
 	ResultOutputFile *string `pulumi:"resultOutputFile"`
 	// Tags of the cluster.
@@ -70,7 +77,8 @@ type GetClustersResult struct {
 	// Name of the cluster.
 	ClusterName *string `pulumi:"clusterName"`
 	// The provider-assigned unique ID for this managed resource.
-	Id string `pulumi:"id"`
+	Id                   string  `pulumi:"id"`
+	KubeConfigFilePrefix *string `pulumi:"kubeConfigFilePrefix"`
 	// An information list of kubernetes clusters. Each element contains the following attributes:
 	Lists            []GetClustersList `pulumi:"lists"`
 	ResultOutputFile *string           `pulumi:"resultOutputFile"`
@@ -97,6 +105,8 @@ type GetClustersOutputArgs struct {
 	ClusterId pulumi.StringPtrInput `pulumi:"clusterId"`
 	// Name of the cluster. Conflict with cluster_id, can not be set at the same time.
 	ClusterName pulumi.StringPtrInput `pulumi:"clusterName"`
+	// The path prefix of kube config. You can store KubeConfig in a specified directory by specifying this field, such as ~/.kube/k8s, then public network access will use ~/.kube/k8s-clusterID-kubeconfig naming, and intranet access will use ~/.kube /k8s-clusterID-kubeconfig-intranet naming. If this field is not set, the KubeConfig will not be exported.
+	KubeConfigFilePrefix pulumi.StringPtrInput `pulumi:"kubeConfigFilePrefix"`
 	// Used to save results.
 	ResultOutputFile pulumi.StringPtrInput `pulumi:"resultOutputFile"`
 	// Tags of the cluster.
@@ -135,6 +145,10 @@ func (o GetClustersResultOutput) ClusterName() pulumi.StringPtrOutput {
 // The provider-assigned unique ID for this managed resource.
 func (o GetClustersResultOutput) Id() pulumi.StringOutput {
 	return o.ApplyT(func(v GetClustersResult) string { return v.Id }).(pulumi.StringOutput)
+}
+
+func (o GetClustersResultOutput) KubeConfigFilePrefix() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v GetClustersResult) *string { return v.KubeConfigFilePrefix }).(pulumi.StringPtrOutput)
 }
 
 // An information list of kubernetes clusters. Each element contains the following attributes:

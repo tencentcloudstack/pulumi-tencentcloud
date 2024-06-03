@@ -15,64 +15,58 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         /// <summary>
         /// Use this data source to query detailed information of vpc network_interface_limit
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var networkInterfaceLimit = Tencentcloud.Vpc.GetNetworkInterfaceLimit.Invoke(new()
         ///     {
-        ///         var networkInterfaceLimit = Output.Create(Tencentcloud.Vpc.GetNetworkInterfaceLimit.InvokeAsync(new Tencentcloud.Vpc.GetNetworkInterfaceLimitArgs
-        ///         {
-        ///             InstanceId = "ins-cr2rfq78",
-        ///         }));
-        ///     }
+        ///         InstanceId = "ins-cr2rfq78",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetNetworkInterfaceLimitResult> InvokeAsync(GetNetworkInterfaceLimitArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetNetworkInterfaceLimitResult>("tencentcloud:Vpc/getNetworkInterfaceLimit:getNetworkInterfaceLimit", args ?? new GetNetworkInterfaceLimitArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetNetworkInterfaceLimitResult>("tencentcloud:Vpc/getNetworkInterfaceLimit:getNetworkInterfaceLimit", args ?? new GetNetworkInterfaceLimitArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of vpc network_interface_limit
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var networkInterfaceLimit = Tencentcloud.Vpc.GetNetworkInterfaceLimit.Invoke(new()
         ///     {
-        ///         var networkInterfaceLimit = Output.Create(Tencentcloud.Vpc.GetNetworkInterfaceLimit.InvokeAsync(new Tencentcloud.Vpc.GetNetworkInterfaceLimitArgs
-        ///         {
-        ///             InstanceId = "ins-cr2rfq78",
-        ///         }));
-        ///     }
+        ///         InstanceId = "ins-cr2rfq78",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetNetworkInterfaceLimitResult> Invoke(GetNetworkInterfaceLimitInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetNetworkInterfaceLimitResult>("tencentcloud:Vpc/getNetworkInterfaceLimit:getNetworkInterfaceLimit", args ?? new GetNetworkInterfaceLimitInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetNetworkInterfaceLimitResult>("tencentcloud:Vpc/getNetworkInterfaceLimit:getNetworkInterfaceLimit", args ?? new GetNetworkInterfaceLimitInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetNetworkInterfaceLimitArgs : Pulumi.InvokeArgs
+    public sealed class GetNetworkInterfaceLimitArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// ID of a CVM instance or ENI to query.
@@ -89,9 +83,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         public GetNetworkInterfaceLimitArgs()
         {
         }
+        public static new GetNetworkInterfaceLimitArgs Empty => new GetNetworkInterfaceLimitArgs();
     }
 
-    public sealed class GetNetworkInterfaceLimitInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetNetworkInterfaceLimitInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// ID of a CVM instance or ENI to query.
@@ -108,6 +103,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         public GetNetworkInterfaceLimitInvokeArgs()
         {
         }
+        public static new GetNetworkInterfaceLimitInvokeArgs Empty => new GetNetworkInterfaceLimitInvokeArgs();
     }
 
 

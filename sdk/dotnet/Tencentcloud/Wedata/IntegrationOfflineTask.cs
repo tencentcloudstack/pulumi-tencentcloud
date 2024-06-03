@@ -15,86 +15,87 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Wedata
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var example = new Tencentcloud.Wedata.IntegrationOfflineTask("example", new()
     ///     {
-    ///         var example = new Tencentcloud.Wedata.IntegrationOfflineTask("example", new Tencentcloud.Wedata.IntegrationOfflineTaskArgs
+    ///         CycleStep = 1,
+    ///         DelayTime = 0,
+    ///         EndTime = "2099-12-31 00:00:00",
+    ///         Notes = "terraform example demo.",
+    ///         ProjectId = "1612982498218618880",
+    ///         StartTime = "2023-12-31 00:00:00",
+    ///         TaskAction = "2",
+    ///         TaskInfo = new Tencentcloud.Wedata.Inputs.IntegrationOfflineTaskTaskInfoArgs
     ///         {
-    ///             CycleStep = 1,
-    ///             DelayTime = 0,
-    ///             EndTime = "2099-12-31 00:00:00",
-    ///             Notes = "terraform example demo.",
-    ///             ProjectId = "1612982498218618880",
-    ///             StartTime = "2023-12-31 00:00:00",
-    ///             TaskAction = "2",
-    ///             TaskInfo = new Tencentcloud.Wedata.Inputs.IntegrationOfflineTaskTaskInfoArgs
+    ///             Configs = new[]
     ///             {
-    ///                 Configs = 
+    ///                 new Tencentcloud.Wedata.Inputs.IntegrationOfflineTaskTaskInfoConfigArgs
     ///                 {
-    ///                     new Tencentcloud.Wedata.Inputs.IntegrationOfflineTaskTaskInfoConfigArgs
-    ///                     {
-    ///                         Name = "Args",
-    ///                         Value = "args",
-    ///                     },
-    ///                     new Tencentcloud.Wedata.Inputs.IntegrationOfflineTaskTaskInfoConfigArgs
-    ///                     {
-    ///                         Name = "dirtyDataThreshold",
-    ///                         Value = "0",
-    ///                     },
-    ///                     new Tencentcloud.Wedata.Inputs.IntegrationOfflineTaskTaskInfoConfigArgs
-    ///                     {
-    ///                         Name = "concurrency",
-    ///                         Value = "1",
-    ///                     },
-    ///                     new Tencentcloud.Wedata.Inputs.IntegrationOfflineTaskTaskInfoConfigArgs
-    ///                     {
-    ///                         Name = "syncRateLimitUnit",
-    ///                         Value = "0",
-    ///                     },
+    ///                     Name = "Args",
+    ///                     Value = "args",
     ///                 },
-    ///                 ExecutorId = "20230313175748567418",
-    ///                 ExtConfigs = 
+    ///                 new Tencentcloud.Wedata.Inputs.IntegrationOfflineTaskTaskInfoConfigArgs
     ///                 {
-    ///                     new Tencentcloud.Wedata.Inputs.IntegrationOfflineTaskTaskInfoExtConfigArgs
-    ///                     {
-    ///                         Name = "TaskAlarmRegularList",
-    ///                         Value = "73",
-    ///                     },
+    ///                     Name = "dirtyDataThreshold",
+    ///                     Value = "0",
     ///                 },
-    ///                 Incharge = "demo",
-    ///                 OfflineTaskAddEntity = new Tencentcloud.Wedata.Inputs.IntegrationOfflineTaskTaskInfoOfflineTaskAddEntityArgs
+    ///                 new Tencentcloud.Wedata.Inputs.IntegrationOfflineTaskTaskInfoConfigArgs
     ///                 {
-    ///                     CrontabExpression = "0 0 1 * * ?",
-    ///                     CycleType = 3,
-    ///                     Retriable = 1,
-    ///                     RetryWait = 5,
-    ///                     SelfDepend = 1,
-    ///                     TryLimit = 5,
+    ///                     Name = "concurrency",
+    ///                     Value = "1",
+    ///                 },
+    ///                 new Tencentcloud.Wedata.Inputs.IntegrationOfflineTaskTaskInfoConfigArgs
+    ///                 {
+    ///                     Name = "syncRateLimitUnit",
+    ///                     Value = "0",
     ///                 },
     ///             },
-    ///             TaskMode = "1",
-    ///             TaskName = "tf_example",
-    ///         });
-    ///     }
+    ///             ExecutorId = "20230313175748567418",
+    ///             ExtConfigs = new[]
+    ///             {
+    ///                 new Tencentcloud.Wedata.Inputs.IntegrationOfflineTaskTaskInfoExtConfigArgs
+    ///                 {
+    ///                     Name = "TaskAlarmRegularList",
+    ///                     Value = "73",
+    ///                 },
+    ///             },
+    ///             Incharge = "demo",
+    ///             OfflineTaskAddEntity = new Tencentcloud.Wedata.Inputs.IntegrationOfflineTaskTaskInfoOfflineTaskAddEntityArgs
+    ///             {
+    ///                 CrontabExpression = "0 0 1 * * ?",
+    ///                 CycleType = 3,
+    ///                 Retriable = 1,
+    ///                 RetryWait = 5,
+    ///                 SelfDepend = 1,
+    ///                 TryLimit = 5,
+    ///             },
+    ///         },
+    ///         TaskMode = "1",
+    ///         TaskName = "tf_example",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// wedata integration_offline_task can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Wedata/integrationOfflineTask:IntegrationOfflineTask example 1612982498218618880#20231102200955095
+    /// $ pulumi import tencentcloud:Wedata/integrationOfflineTask:IntegrationOfflineTask example 1612982498218618880#20231102200955095
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Wedata/integrationOfflineTask:IntegrationOfflineTask")]
-    public partial class IntegrationOfflineTask : Pulumi.CustomResource
+    public partial class IntegrationOfflineTask : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Interval time of scheduling, the minimum value: 1.
@@ -207,7 +208,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Wedata
         }
     }
 
-    public sealed class IntegrationOfflineTaskArgs : Pulumi.ResourceArgs
+    public sealed class IntegrationOfflineTaskArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Interval time of scheduling, the minimum value: 1.
@@ -272,9 +273,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Wedata
         public IntegrationOfflineTaskArgs()
         {
         }
+        public static new IntegrationOfflineTaskArgs Empty => new IntegrationOfflineTaskArgs();
     }
 
-    public sealed class IntegrationOfflineTaskState : Pulumi.ResourceArgs
+    public sealed class IntegrationOfflineTaskState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Interval time of scheduling, the minimum value: 1.
@@ -345,5 +347,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Wedata
         public IntegrationOfflineTaskState()
         {
         }
+        public static new IntegrationOfflineTaskState Empty => new IntegrationOfflineTaskState();
     }
 }

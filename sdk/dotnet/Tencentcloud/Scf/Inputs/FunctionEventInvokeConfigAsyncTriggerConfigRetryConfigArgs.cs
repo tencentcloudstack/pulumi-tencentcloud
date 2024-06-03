@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Scf.Inputs
 {
 
-    public sealed class FunctionEventInvokeConfigAsyncTriggerConfigRetryConfigArgs : Pulumi.ResourceArgs
+    public sealed class FunctionEventInvokeConfigAsyncTriggerConfigRetryConfigArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Number of retry attempts.
@@ -22,5 +22,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Scf.Inputs
         public FunctionEventInvokeConfigAsyncTriggerConfigRetryConfigArgs()
         {
         }
+        public static new FunctionEventInvokeConfigAsyncTriggerConfigRetryConfigArgs Empty => new FunctionEventInvokeConfigAsyncTriggerConfigRetryConfigArgs();
     }
 }

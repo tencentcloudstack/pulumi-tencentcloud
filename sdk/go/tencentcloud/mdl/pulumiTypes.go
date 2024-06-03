@@ -8,7 +8,10 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
+
+var _ = internal.GetEnvOrDefault
 
 type StreamLiveInputInputSetting struct {
 	// Application name, which is valid if `Type` is `RTMP_PUSH` and can contain 1-32 letters and digitsNote: This field may return `null`, indicating that no valid value was found.
@@ -34,7 +37,7 @@ type StreamLiveInputInputSetting struct {
 // StreamLiveInputInputSettingInput is an input type that accepts StreamLiveInputInputSettingArgs and StreamLiveInputInputSettingOutput values.
 // You can construct a concrete instance of `StreamLiveInputInputSettingInput` via:
 //
-//          StreamLiveInputInputSettingArgs{...}
+//	StreamLiveInputInputSettingArgs{...}
 type StreamLiveInputInputSettingInput interface {
 	pulumi.Input
 
@@ -78,7 +81,7 @@ func (i StreamLiveInputInputSettingArgs) ToStreamLiveInputInputSettingOutputWith
 // StreamLiveInputInputSettingArrayInput is an input type that accepts StreamLiveInputInputSettingArray and StreamLiveInputInputSettingArrayOutput values.
 // You can construct a concrete instance of `StreamLiveInputInputSettingArrayInput` via:
 //
-//          StreamLiveInputInputSettingArray{ StreamLiveInputInputSettingArgs{...} }
+//	StreamLiveInputInputSettingArray{ StreamLiveInputInputSettingArgs{...} }
 type StreamLiveInputInputSettingArrayInput interface {
 	pulumi.Input
 

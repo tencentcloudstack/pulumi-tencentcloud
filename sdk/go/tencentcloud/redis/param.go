@@ -7,61 +7,67 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a redis param
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Redis"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Redis"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Redis.NewParam(ctx, "param", &Redis.ParamArgs{
-// 			InstanceId: pulumi.String("crs-c1nl9rpv"),
-// 			InstanceParams: pulumi.AnyMap{
-// 				"cluster-node-timeout":          pulumi.Any("15000"),
-// 				"disable-command-list":          pulumi.Any("\"\""),
-// 				"hash-max-ziplist-entries":      pulumi.Any("512"),
-// 				"hash-max-ziplist-value":        pulumi.Any("64"),
-// 				"hz":                            pulumi.Any("10"),
-// 				"lazyfree-lazy-eviction":        pulumi.Any("yes"),
-// 				"lazyfree-lazy-expire":          pulumi.Any("yes"),
-// 				"lazyfree-lazy-server-del":      pulumi.Any("yes"),
-// 				"maxmemory-policy":              pulumi.Any("noeviction"),
-// 				"notify-keyspace-events":        pulumi.Any("\"\""),
-// 				"proxy-slowlog-log-slower-than": pulumi.Any("500"),
-// 				"replica-lazy-flush":            pulumi.Any("yes"),
-// 				"sentineauth":                   pulumi.Any("no"),
-// 				"set-max-intset-entries":        pulumi.Any("512"),
-// 				"slowlog-log-slower-than":       pulumi.Any("10"),
-// 				"timeout":                       pulumi.Any("31536000"),
-// 				"zset-max-ziplist-entries":      pulumi.Any("128"),
-// 				"zset-max-ziplist-value":        pulumi.Any("64"),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Redis.NewParam(ctx, "param", &Redis.ParamArgs{
+//				InstanceId: pulumi.String("crs-c1nl9rpv"),
+//				InstanceParams: pulumi.Map{
+//					"cluster-node-timeout":          pulumi.Any("15000"),
+//					"disable-command-list":          pulumi.Any("\"\""),
+//					"hash-max-ziplist-entries":      pulumi.Any("512"),
+//					"hash-max-ziplist-value":        pulumi.Any("64"),
+//					"hz":                            pulumi.Any("10"),
+//					"lazyfree-lazy-eviction":        pulumi.Any("yes"),
+//					"lazyfree-lazy-expire":          pulumi.Any("yes"),
+//					"lazyfree-lazy-server-del":      pulumi.Any("yes"),
+//					"maxmemory-policy":              pulumi.Any("noeviction"),
+//					"notify-keyspace-events":        pulumi.Any("\"\""),
+//					"proxy-slowlog-log-slower-than": pulumi.Any("500"),
+//					"replica-lazy-flush":            pulumi.Any("yes"),
+//					"sentineauth":                   pulumi.Any("no"),
+//					"set-max-intset-entries":        pulumi.Any("512"),
+//					"slowlog-log-slower-than":       pulumi.Any("10"),
+//					"timeout":                       pulumi.Any("31536000"),
+//					"zset-max-ziplist-entries":      pulumi.Any("128"),
+//					"zset-max-ziplist-value":        pulumi.Any("64"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // redis param can be imported using the instanceId, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Redis/param:Param param crs-c1nl9rpv
+// $ pulumi import tencentcloud:Redis/param:Param param crs-c1nl9rpv
 // ```
 type Param struct {
 	pulumi.CustomResourceState
@@ -85,7 +91,7 @@ func NewParam(ctx *pulumi.Context,
 	if args.InstanceParams == nil {
 		return nil, errors.New("invalid value for required argument 'InstanceParams'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource Param
 	err := ctx.RegisterResource("tencentcloud:Redis/param:Param", name, args, &resource, opts...)
 	if err != nil {
@@ -166,7 +172,7 @@ func (i *Param) ToParamOutputWithContext(ctx context.Context) ParamOutput {
 // ParamArrayInput is an input type that accepts ParamArray and ParamArrayOutput values.
 // You can construct a concrete instance of `ParamArrayInput` via:
 //
-//          ParamArray{ ParamArgs{...} }
+//	ParamArray{ ParamArgs{...} }
 type ParamArrayInput interface {
 	pulumi.Input
 
@@ -191,7 +197,7 @@ func (i ParamArray) ToParamArrayOutputWithContext(ctx context.Context) ParamArra
 // ParamMapInput is an input type that accepts ParamMap and ParamMapOutput values.
 // You can construct a concrete instance of `ParamMapInput` via:
 //
-//          ParamMap{ "key": ParamArgs{...} }
+//	ParamMap{ "key": ParamArgs{...} }
 type ParamMapInput interface {
 	pulumi.Input
 

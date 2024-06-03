@@ -15,72 +15,68 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Key
         /// <summary>
         /// Use this data source to query key pairs.
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var foo = Tencentcloud.Key.GetPairs.Invoke(new()
         ///     {
-        ///         var foo = Output.Create(Tencentcloud.Key.GetPairs.InvokeAsync(new Tencentcloud.Key.GetPairsArgs
-        ///         {
-        ///             KeyId = "skey-ie97i3ml",
-        ///         }));
-        ///         var name = Output.Create(Tencentcloud.Key.GetPairs.InvokeAsync(new Tencentcloud.Key.GetPairsArgs
-        ///         {
-        ///             KeyName = "^test$",
-        ///         }));
-        ///     }
+        ///         KeyId = "skey-ie97i3ml",
+        ///     });
         /// 
-        /// }
+        ///     var name = Tencentcloud.Key.GetPairs.Invoke(new()
+        ///     {
+        ///         KeyName = "^test$",
+        ///     });
+        /// 
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetPairsResult> InvokeAsync(GetPairsArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetPairsResult>("tencentcloud:Key/getPairs:getPairs", args ?? new GetPairsArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetPairsResult>("tencentcloud:Key/getPairs:getPairs", args ?? new GetPairsArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query key pairs.
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var foo = Tencentcloud.Key.GetPairs.Invoke(new()
         ///     {
-        ///         var foo = Output.Create(Tencentcloud.Key.GetPairs.InvokeAsync(new Tencentcloud.Key.GetPairsArgs
-        ///         {
-        ///             KeyId = "skey-ie97i3ml",
-        ///         }));
-        ///         var name = Output.Create(Tencentcloud.Key.GetPairs.InvokeAsync(new Tencentcloud.Key.GetPairsArgs
-        ///         {
-        ///             KeyName = "^test$",
-        ///         }));
-        ///     }
+        ///         KeyId = "skey-ie97i3ml",
+        ///     });
         /// 
-        /// }
+        ///     var name = Tencentcloud.Key.GetPairs.Invoke(new()
+        ///     {
+        ///         KeyName = "^test$",
+        ///     });
+        /// 
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetPairsResult> Invoke(GetPairsInvokeArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetPairsResult>("tencentcloud:Key/getPairs:getPairs", args ?? new GetPairsInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetPairsResult>("tencentcloud:Key/getPairs:getPairs", args ?? new GetPairsInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetPairsArgs : Pulumi.InvokeArgs
+    public sealed class GetPairsArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// ID of the key pair to be queried.
@@ -109,9 +105,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Key
         public GetPairsArgs()
         {
         }
+        public static new GetPairsArgs Empty => new GetPairsArgs();
     }
 
-    public sealed class GetPairsInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetPairsInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// ID of the key pair to be queried.
@@ -140,6 +137,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Key
         public GetPairsInvokeArgs()
         {
         }
+        public static new GetPairsInvokeArgs Empty => new GetPairsInvokeArgs();
     }
 
 

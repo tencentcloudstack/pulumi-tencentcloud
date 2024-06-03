@@ -7,8 +7,9 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a Redis instance and set its attributes.
@@ -18,233 +19,71 @@ import (
 // > **NOTE:** Both adding and removing replications in one change is supported but not recommend.
 //
 // ## Example Usage
+//
 // ### Create a base version of redis
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Redis"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Redis"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Subnet"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Redis"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Subnet"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		zone, err := Redis.GetZoneConfig(ctx, &redis.GetZoneConfigArgs{
-// 			TypeId: pulumi.IntRef(7),
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		vpc, err := Vpc.NewInstance(ctx, "vpc", &Vpc.InstanceArgs{
-// 			CidrBlock: pulumi.String("10.0.0.0/16"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		subnet, err := Subnet.NewInstance(ctx, "subnet", &Subnet.InstanceArgs{
-// 			VpcId:            vpc.ID(),
-// 			AvailabilityZone: pulumi.String(zone.Lists[0].Zone),
-// 			CidrBlock:        pulumi.String("10.0.1.0/24"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_, err = Redis.NewInstance(ctx, "foo", &Redis.InstanceArgs{
-// 			AvailabilityZone: pulumi.String(zone.Lists[0].Zone),
-// 			TypeId:           pulumi.Int(zone.Lists[0].TypeId),
-// 			Password:         pulumi.String("test12345789"),
-// 			MemSize:          pulumi.Int(8192),
-// 			RedisShardNum:    pulumi.Int(zone.Lists[0].RedisShardNums[0]),
-// 			RedisReplicasNum: pulumi.Int(zone.Lists[0].RedisReplicasNums[0]),
-// 			Port:             pulumi.Int(6379),
-// 			VpcId:            vpc.ID(),
-// 			SubnetId:         subnet.ID(),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			zone, err := Redis.GetZoneConfig(ctx, &redis.GetZoneConfigArgs{
+//				TypeId: pulumi.IntRef(7),
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			vpc, err := Vpc.NewInstance(ctx, "vpc", &Vpc.InstanceArgs{
+//				CidrBlock: pulumi.String("10.0.0.0/16"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			subnet, err := Subnet.NewInstance(ctx, "subnet", &Subnet.InstanceArgs{
+//				VpcId:            vpc.ID(),
+//				AvailabilityZone: pulumi.String(zone.Lists[0].Zone),
+//				CidrBlock:        pulumi.String("10.0.1.0/24"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_, err = Redis.NewInstance(ctx, "foo", &Redis.InstanceArgs{
+//				AvailabilityZone: pulumi.String(zone.Lists[0].Zone),
+//				TypeId:           pulumi.Int(zone.Lists[0].TypeId),
+//				Password:         pulumi.String("test12345789"),
+//				MemSize:          pulumi.Int(8192),
+//				RedisShardNum:    pulumi.Int(zone.Lists[0].RedisShardNums[0]),
+//				RedisReplicasNum: pulumi.Int(zone.Lists[0].RedisReplicasNums[0]),
+//				Port:             pulumi.Int(6379),
+//				VpcId:            vpc.ID(),
+//				SubnetId:         subnet.ID(),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
-// ### Buy a month of prepaid instances
-//
-// ```go
-// package main
-//
-// import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Redis"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Redis"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Security"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Subnet"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
-// )
-//
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		zone, err := Redis.GetZoneConfig(ctx, &redis.GetZoneConfigArgs{
-// 			TypeId: pulumi.IntRef(7),
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		vpc, err := Vpc.NewInstance(ctx, "vpc", &Vpc.InstanceArgs{
-// 			CidrBlock: pulumi.String("10.0.0.0/16"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		subnet, err := Subnet.NewInstance(ctx, "subnet", &Subnet.InstanceArgs{
-// 			VpcId:            vpc.ID(),
-// 			AvailabilityZone: pulumi.String(zone.Lists[1].Zone),
-// 			CidrBlock:        pulumi.String("10.0.1.0/24"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		fooGroup, err := Security.NewGroup(ctx, "fooGroup", nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_, err = Security.NewGroupLiteRule(ctx, "fooGroupLiteRule", &Security.GroupLiteRuleArgs{
-// 			SecurityGroupId: fooGroup.ID(),
-// 			Ingresses: pulumi.StringArray{
-// 				pulumi.String("ACCEPT#192.168.1.0/24#80#TCP"),
-// 				pulumi.String("DROP#8.8.8.8#80,90#UDP"),
-// 				pulumi.String("DROP#0.0.0.0/0#80-90#TCP"),
-// 			},
-// 			Egresses: pulumi.StringArray{
-// 				pulumi.String("ACCEPT#192.168.0.0/16#ALL#TCP"),
-// 				pulumi.String("ACCEPT#10.0.0.0/8#ALL#ICMP"),
-// 				pulumi.String("DROP#0.0.0.0/0#ALL#ALL"),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_, err = Redis.NewInstance(ctx, "fooInstance", &Redis.InstanceArgs{
-// 			AvailabilityZone: pulumi.String(zone.Lists[0].Zone),
-// 			TypeId:           pulumi.Int(zone.Lists[0].TypeId),
-// 			Password:         pulumi.String("test12345789"),
-// 			MemSize:          pulumi.Int(8192),
-// 			RedisShardNum:    pulumi.Int(zone.Lists[0].RedisShardNums[0]),
-// 			RedisReplicasNum: pulumi.Int(zone.Lists[0].RedisReplicasNums[0]),
-// 			Port:             pulumi.Int(6379),
-// 			VpcId:            vpc.ID(),
-// 			SubnetId:         subnet.ID(),
-// 			SecurityGroups: pulumi.StringArray{
-// 				fooGroup.ID(),
-// 			},
-// 			ChargeType:    pulumi.String("PREPAID"),
-// 			PrepaidPeriod: pulumi.Int(1),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
-// ```
-// ### Create a multi-AZ instance
-//
-// ```go
-// package main
-//
-// import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Redis"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Redis"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Security"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Subnet"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
-// )
-//
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		zone, err := Redis.GetZoneConfig(ctx, &redis.GetZoneConfigArgs{
-// 			TypeId: pulumi.IntRef(7),
-// 			Region: pulumi.StringRef("ap-guangzhou"),
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		cfg := config.New(ctx, "")
-// 		replicaZoneIds := []float64{
-// 			100004,
-// 			100006,
-// 		}
-// 		if param := cfg.GetBool("replicaZoneIds"); param != nil {
-// 			replicaZoneIds = param
-// 		}
-// 		vpc, err := Vpc.NewInstance(ctx, "vpc", &Vpc.InstanceArgs{
-// 			CidrBlock: pulumi.String("10.0.0.0/16"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		subnet, err := Subnet.NewInstance(ctx, "subnet", &Subnet.InstanceArgs{
-// 			VpcId:            vpc.ID(),
-// 			AvailabilityZone: pulumi.String(zone.Lists[2].Zone),
-// 			CidrBlock:        pulumi.String("10.0.1.0/24"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		fooGroup, err := Security.NewGroup(ctx, "fooGroup", nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_, err = Security.NewGroupLiteRule(ctx, "fooGroupLiteRule", &Security.GroupLiteRuleArgs{
-// 			SecurityGroupId: fooGroup.ID(),
-// 			Ingresses: pulumi.StringArray{
-// 				pulumi.String("ACCEPT#192.168.1.0/24#80#TCP"),
-// 				pulumi.String("DROP#8.8.8.8#80,90#UDP"),
-// 				pulumi.String("DROP#0.0.0.0/0#80-90#TCP"),
-// 			},
-// 			Egresses: pulumi.StringArray{
-// 				pulumi.String("ACCEPT#192.168.0.0/16#ALL#TCP"),
-// 				pulumi.String("ACCEPT#10.0.0.0/8#ALL#ICMP"),
-// 				pulumi.String("DROP#0.0.0.0/0#ALL#ALL"),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_, err = Redis.NewInstance(ctx, "fooInstance", &Redis.InstanceArgs{
-// 			AvailabilityZone: pulumi.String(zone.Lists[2].Zone),
-// 			TypeId:           pulumi.Int(zone.Lists[2].TypeId),
-// 			Password:         pulumi.String("test12345789"),
-// 			MemSize:          pulumi.Int(8192),
-// 			RedisShardNum:    pulumi.Int(zone.Lists[2].RedisShardNums[0]),
-// 			RedisReplicasNum: pulumi.Int(2),
-// 			ReplicaZoneIds:   pulumi.Any(replicaZoneIds),
-// 			Port:             pulumi.Int(6379),
-// 			VpcId:            vpc.ID(),
-// 			SubnetId:         subnet.ID(),
-// 			SecurityGroups: pulumi.StringArray{
-// 				fooGroup.ID(),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
-// ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // Redis instance can be imported, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Redis/instance:Instance redislab redis-id
+// $ pulumi import tencentcloud:Redis/instance:Instance redislab redis-id
 // ```
 type Instance struct {
 	pulumi.CustomResourceState
@@ -261,7 +100,7 @@ type Instance struct {
 	ForceDelete pulumi.BoolPtrOutput `pulumi:"forceDelete"`
 	// IP address of an instance. When the `operationNetwork` is `changeVip`, this parameter needs to be configured.
 	Ip pulumi.StringOutput `pulumi:"ip"`
-	// The memory volume of an available instance(in MB), please refer to `tencentcloud_redis_zone_config.list[zone].shard_memories`. When redis is standard type, it represents total memory size of the instance; when Redis is cluster type, it represents memory size of per sharding.
+	// The memory volume of an available instance(in MB), please refer to `tencentcloud_redis_zone_config.list[zone].shard_memories`. When redis is standard type, it represents total memory size of the instance; when Redis is cluster type, it represents memory size of per sharding. `512MB` is supported only in master-slave instance.
 	MemSize pulumi.IntOutput `pulumi:"memSize"`
 	// Instance name.
 	Name pulumi.StringOutput `pulumi:"name"`
@@ -324,7 +163,14 @@ func NewInstance(ctx *pulumi.Context,
 	if args.MemSize == nil {
 		return nil, errors.New("invalid value for required argument 'MemSize'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	if args.Password != nil {
+		args.Password = pulumi.ToSecret(args.Password).(pulumi.StringPtrInput)
+	}
+	secrets := pulumi.AdditionalSecretOutputs([]string{
+		"password",
+	})
+	opts = append(opts, secrets)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource Instance
 	err := ctx.RegisterResource("tencentcloud:Redis/instance:Instance", name, args, &resource, opts...)
 	if err != nil {
@@ -359,7 +205,7 @@ type instanceState struct {
 	ForceDelete *bool `pulumi:"forceDelete"`
 	// IP address of an instance. When the `operationNetwork` is `changeVip`, this parameter needs to be configured.
 	Ip *string `pulumi:"ip"`
-	// The memory volume of an available instance(in MB), please refer to `tencentcloud_redis_zone_config.list[zone].shard_memories`. When redis is standard type, it represents total memory size of the instance; when Redis is cluster type, it represents memory size of per sharding.
+	// The memory volume of an available instance(in MB), please refer to `tencentcloud_redis_zone_config.list[zone].shard_memories`. When redis is standard type, it represents total memory size of the instance; when Redis is cluster type, it represents memory size of per sharding. `512MB` is supported only in master-slave instance.
 	MemSize *int `pulumi:"memSize"`
 	// Instance name.
 	Name *string `pulumi:"name"`
@@ -422,7 +268,7 @@ type InstanceState struct {
 	ForceDelete pulumi.BoolPtrInput
 	// IP address of an instance. When the `operationNetwork` is `changeVip`, this parameter needs to be configured.
 	Ip pulumi.StringPtrInput
-	// The memory volume of an available instance(in MB), please refer to `tencentcloud_redis_zone_config.list[zone].shard_memories`. When redis is standard type, it represents total memory size of the instance; when Redis is cluster type, it represents memory size of per sharding.
+	// The memory volume of an available instance(in MB), please refer to `tencentcloud_redis_zone_config.list[zone].shard_memories`. When redis is standard type, it represents total memory size of the instance; when Redis is cluster type, it represents memory size of per sharding. `512MB` is supported only in master-slave instance.
 	MemSize pulumi.IntPtrInput
 	// Instance name.
 	Name pulumi.StringPtrInput
@@ -487,7 +333,7 @@ type instanceArgs struct {
 	ForceDelete *bool `pulumi:"forceDelete"`
 	// IP address of an instance. When the `operationNetwork` is `changeVip`, this parameter needs to be configured.
 	Ip *string `pulumi:"ip"`
-	// The memory volume of an available instance(in MB), please refer to `tencentcloud_redis_zone_config.list[zone].shard_memories`. When redis is standard type, it represents total memory size of the instance; when Redis is cluster type, it represents memory size of per sharding.
+	// The memory volume of an available instance(in MB), please refer to `tencentcloud_redis_zone_config.list[zone].shard_memories`. When redis is standard type, it represents total memory size of the instance; when Redis is cluster type, it represents memory size of per sharding. `512MB` is supported only in master-slave instance.
 	MemSize int `pulumi:"memSize"`
 	// Instance name.
 	Name *string `pulumi:"name"`
@@ -545,7 +391,7 @@ type InstanceArgs struct {
 	ForceDelete pulumi.BoolPtrInput
 	// IP address of an instance. When the `operationNetwork` is `changeVip`, this parameter needs to be configured.
 	Ip pulumi.StringPtrInput
-	// The memory volume of an available instance(in MB), please refer to `tencentcloud_redis_zone_config.list[zone].shard_memories`. When redis is standard type, it represents total memory size of the instance; when Redis is cluster type, it represents memory size of per sharding.
+	// The memory volume of an available instance(in MB), please refer to `tencentcloud_redis_zone_config.list[zone].shard_memories`. When redis is standard type, it represents total memory size of the instance; when Redis is cluster type, it represents memory size of per sharding. `512MB` is supported only in master-slave instance.
 	MemSize pulumi.IntInput
 	// Instance name.
 	Name pulumi.StringPtrInput
@@ -617,7 +463,7 @@ func (i *Instance) ToInstanceOutputWithContext(ctx context.Context) InstanceOutp
 // InstanceArrayInput is an input type that accepts InstanceArray and InstanceArrayOutput values.
 // You can construct a concrete instance of `InstanceArrayInput` via:
 //
-//          InstanceArray{ InstanceArgs{...} }
+//	InstanceArray{ InstanceArgs{...} }
 type InstanceArrayInput interface {
 	pulumi.Input
 
@@ -642,7 +488,7 @@ func (i InstanceArray) ToInstanceArrayOutputWithContext(ctx context.Context) Ins
 // InstanceMapInput is an input type that accepts InstanceMap and InstanceMapOutput values.
 // You can construct a concrete instance of `InstanceMapInput` via:
 //
-//          InstanceMap{ "key": InstanceArgs{...} }
+//	InstanceMap{ "key": InstanceArgs{...} }
 type InstanceMapInput interface {
 	pulumi.Input
 
@@ -708,7 +554,7 @@ func (o InstanceOutput) Ip() pulumi.StringOutput {
 	return o.ApplyT(func(v *Instance) pulumi.StringOutput { return v.Ip }).(pulumi.StringOutput)
 }
 
-// The memory volume of an available instance(in MB), please refer to `tencentcloud_redis_zone_config.list[zone].shard_memories`. When redis is standard type, it represents total memory size of the instance; when Redis is cluster type, it represents memory size of per sharding.
+// The memory volume of an available instance(in MB), please refer to `tencentcloud_redis_zone_config.list[zone].shard_memories`. When redis is standard type, it represents total memory size of the instance; when Redis is cluster type, it represents memory size of per sharding. `512MB` is supported only in master-slave instance.
 func (o InstanceOutput) MemSize() pulumi.IntOutput {
 	return o.ApplyT(func(v *Instance) pulumi.IntOutput { return v.MemSize }).(pulumi.IntOutput)
 }

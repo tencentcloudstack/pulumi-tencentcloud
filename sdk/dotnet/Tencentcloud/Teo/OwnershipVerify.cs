@@ -15,25 +15,26 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var ownershipVerify = new Tencentcloud.Teo.OwnershipVerify("ownershipVerify", new()
     ///     {
-    ///         var ownershipVerify = new Tencentcloud.Teo.OwnershipVerify("ownershipVerify", new Tencentcloud.Teo.OwnershipVerifyArgs
-    ///         {
-    ///             Domain = "qq.com",
-    ///         });
-    ///     }
+    ///         Domain = "qq.com",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Teo/ownershipVerify:OwnershipVerify")]
-    public partial class OwnershipVerify : Pulumi.CustomResource
+    public partial class OwnershipVerify : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Verify domain name.
@@ -98,7 +99,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
         }
     }
 
-    public sealed class OwnershipVerifyArgs : Pulumi.ResourceArgs
+    public sealed class OwnershipVerifyArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Verify domain name.
@@ -109,9 +110,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
         public OwnershipVerifyArgs()
         {
         }
+        public static new OwnershipVerifyArgs Empty => new OwnershipVerifyArgs();
     }
 
-    public sealed class OwnershipVerifyState : Pulumi.ResourceArgs
+    public sealed class OwnershipVerifyState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Verify domain name.
@@ -134,5 +136,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
         public OwnershipVerifyState()
         {
         }
+        public static new OwnershipVerifyState Empty => new OwnershipVerifyState();
     }
 }

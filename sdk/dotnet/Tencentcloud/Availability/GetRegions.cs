@@ -15,64 +15,58 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Availability
         /// <summary>
         /// Use this data source to get the available regions. By default only `AVAILABLE` regions will be returned, but `UNAVAILABLE` regions can also be fetched when `include_unavailable` is specified.
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var myFavouriteRegion = Tencentcloud.Availability.GetRegions.Invoke(new()
         ///     {
-        ///         var myFavouriteRegion = Output.Create(Tencentcloud.Availability.GetRegions.InvokeAsync(new Tencentcloud.Availability.GetRegionsArgs
-        ///         {
-        ///             Name = "ap-guangzhou",
-        ///         }));
-        ///     }
+        ///         Name = "ap-guangzhou",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetRegionsResult> InvokeAsync(GetRegionsArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetRegionsResult>("tencentcloud:Availability/getRegions:getRegions", args ?? new GetRegionsArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetRegionsResult>("tencentcloud:Availability/getRegions:getRegions", args ?? new GetRegionsArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to get the available regions. By default only `AVAILABLE` regions will be returned, but `UNAVAILABLE` regions can also be fetched when `include_unavailable` is specified.
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var myFavouriteRegion = Tencentcloud.Availability.GetRegions.Invoke(new()
         ///     {
-        ///         var myFavouriteRegion = Output.Create(Tencentcloud.Availability.GetRegions.InvokeAsync(new Tencentcloud.Availability.GetRegionsArgs
-        ///         {
-        ///             Name = "ap-guangzhou",
-        ///         }));
-        ///     }
+        ///         Name = "ap-guangzhou",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetRegionsResult> Invoke(GetRegionsInvokeArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetRegionsResult>("tencentcloud:Availability/getRegions:getRegions", args ?? new GetRegionsInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetRegionsResult>("tencentcloud:Availability/getRegions:getRegions", args ?? new GetRegionsInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetRegionsArgs : Pulumi.InvokeArgs
+    public sealed class GetRegionsArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// A bool variable indicates that the query will include `UNAVAILABLE` regions.
@@ -95,9 +89,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Availability
         public GetRegionsArgs()
         {
         }
+        public static new GetRegionsArgs Empty => new GetRegionsArgs();
     }
 
-    public sealed class GetRegionsInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetRegionsInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// A bool variable indicates that the query will include `UNAVAILABLE` regions.
@@ -120,6 +115,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Availability
         public GetRegionsInvokeArgs()
         {
         }
+        public static new GetRegionsInvokeArgs Empty => new GetRegionsInvokeArgs();
     }
 
 

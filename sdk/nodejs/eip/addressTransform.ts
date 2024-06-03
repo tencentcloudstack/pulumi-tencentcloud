@@ -9,21 +9,21 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const addressTransform = new tencentcloud.Eip.AddressTransform("address_transform", {
- *     instanceId: "",
- * });
+ * const addressTransform = new tencentcloud.eip.AddressTransform("addressTransform", {instanceId: ""});
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * eip address_transform can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Eip/addressTransform:AddressTransform address_transform address_transform_id
+ * $ pulumi import tencentcloud:Eip/addressTransform:AddressTransform address_transform address_transform_id
  * ```
  */
 export class AddressTransform extends pulumi.CustomResource {

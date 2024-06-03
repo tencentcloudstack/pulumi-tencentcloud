@@ -15,58 +15,52 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Eb
         /// <summary>
         /// Use this data source to query detailed information of eb platform_products
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
-        ///     {
-        ///         var platformProducts = Output.Create(Tencentcloud.Eb.GetPlatformProducts.InvokeAsync());
-        ///     }
+        ///     var platformProducts = Tencentcloud.Eb.GetPlatformProducts.Invoke();
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetPlatformProductsResult> InvokeAsync(GetPlatformProductsArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetPlatformProductsResult>("tencentcloud:Eb/getPlatformProducts:getPlatformProducts", args ?? new GetPlatformProductsArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetPlatformProductsResult>("tencentcloud:Eb/getPlatformProducts:getPlatformProducts", args ?? new GetPlatformProductsArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of eb platform_products
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
-        ///     {
-        ///         var platformProducts = Output.Create(Tencentcloud.Eb.GetPlatformProducts.InvokeAsync());
-        ///     }
+        ///     var platformProducts = Tencentcloud.Eb.GetPlatformProducts.Invoke();
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetPlatformProductsResult> Invoke(GetPlatformProductsInvokeArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetPlatformProductsResult>("tencentcloud:Eb/getPlatformProducts:getPlatformProducts", args ?? new GetPlatformProductsInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetPlatformProductsResult>("tencentcloud:Eb/getPlatformProducts:getPlatformProducts", args ?? new GetPlatformProductsInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetPlatformProductsArgs : Pulumi.InvokeArgs
+    public sealed class GetPlatformProductsArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Used to save results.
@@ -77,9 +71,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Eb
         public GetPlatformProductsArgs()
         {
         }
+        public static new GetPlatformProductsArgs Empty => new GetPlatformProductsArgs();
     }
 
-    public sealed class GetPlatformProductsInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetPlatformProductsInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Used to save results.
@@ -90,6 +85,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Eb
         public GetPlatformProductsInvokeArgs()
         {
         }
+        public static new GetPlatformProductsInvokeArgs Empty => new GetPlatformProductsInvokeArgs();
     }
 
 

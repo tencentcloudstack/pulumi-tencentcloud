@@ -7,34 +7,40 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a cynosdb restartInstance
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cynosdb"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cynosdb"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Cynosdb.NewRestartInstance(ctx, "restartInstance", &Cynosdb.RestartInstanceArgs{
-// 			InstanceId: pulumi.String("cynosdbmysql-ins-afqx1hy0"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Cynosdb.NewRestartInstance(ctx, "restartInstance", &Cynosdb.RestartInstanceArgs{
+//				InstanceId: pulumi.String("cynosdbmysql-ins-afqx1hy0"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 type RestartInstance struct {
 	pulumi.CustomResourceState
 
@@ -54,7 +60,7 @@ func NewRestartInstance(ctx *pulumi.Context,
 	if args.InstanceId == nil {
 		return nil, errors.New("invalid value for required argument 'InstanceId'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource RestartInstance
 	err := ctx.RegisterResource("tencentcloud:Cynosdb/restartInstance:RestartInstance", name, args, &resource, opts...)
 	if err != nil {
@@ -131,7 +137,7 @@ func (i *RestartInstance) ToRestartInstanceOutputWithContext(ctx context.Context
 // RestartInstanceArrayInput is an input type that accepts RestartInstanceArray and RestartInstanceArrayOutput values.
 // You can construct a concrete instance of `RestartInstanceArrayInput` via:
 //
-//          RestartInstanceArray{ RestartInstanceArgs{...} }
+//	RestartInstanceArray{ RestartInstanceArgs{...} }
 type RestartInstanceArrayInput interface {
 	pulumi.Input
 
@@ -156,7 +162,7 @@ func (i RestartInstanceArray) ToRestartInstanceArrayOutputWithContext(ctx contex
 // RestartInstanceMapInput is an input type that accepts RestartInstanceMap and RestartInstanceMapOutput values.
 // You can construct a concrete instance of `RestartInstanceMapInput` via:
 //
-//          RestartInstanceMap{ "key": RestartInstanceArgs{...} }
+//	RestartInstanceMap{ "key": RestartInstanceArgs{...} }
 type RestartInstanceMapInput interface {
 	pulumi.Input
 

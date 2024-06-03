@@ -9,23 +9,22 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const tenantCcn = pulumi.output(tencentcloud.Ccn.getTenantInstances({
+ * const tenantCcn = tencentcloud.Ccn.getTenantInstances({
  *     ccnIds: ["ccn-39lqkygf"],
  *     isSecurityLocks: ["true"],
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getTenantInstances(args?: GetTenantInstancesArgs, opts?: pulumi.InvokeOptions): Promise<GetTenantInstancesResult> {
     args = args || {};
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Ccn/getTenantInstances:getTenantInstances", {
         "ccnIds": args.ccnIds,
         "isSecurityLocks": args.isSecurityLocks,
@@ -69,9 +68,25 @@ export interface GetTenantInstancesResult {
     readonly resultOutputFile?: string;
     readonly userAccountIds?: string[];
 }
-
+/**
+ * Use this data source to query detailed information of vpc tenantCcn
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const tenantCcn = tencentcloud.Ccn.getTenantInstances({
+ *     ccnIds: ["ccn-39lqkygf"],
+ *     isSecurityLocks: ["true"],
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getTenantInstancesOutput(args?: GetTenantInstancesOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetTenantInstancesResult> {
-    return pulumi.output(args).apply(a => getTenantInstances(a, opts))
+    return pulumi.output(args).apply((a: any) => getTenantInstances(a, opts))
 }
 
 /**

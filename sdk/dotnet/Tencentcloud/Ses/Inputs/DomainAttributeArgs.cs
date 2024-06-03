@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ses.Inputs
 {
 
-    public sealed class DomainAttributeArgs : Pulumi.ResourceArgs
+    public sealed class DomainAttributeArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Values that need to be configured.
@@ -34,5 +34,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ses.Inputs
         public DomainAttributeArgs()
         {
         }
+        public static new DomainAttributeArgs Empty => new DomainAttributeArgs();
     }
 }

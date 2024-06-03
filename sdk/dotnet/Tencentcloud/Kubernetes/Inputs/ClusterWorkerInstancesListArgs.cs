@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes.Inputs
 {
 
-    public sealed class ClusterWorkerInstancesListArgs : Pulumi.ResourceArgs
+    public sealed class ClusterWorkerInstancesListArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Information of the cvm when it is failed.
@@ -46,5 +46,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes.Inputs
         public ClusterWorkerInstancesListArgs()
         {
         }
+        public static new ClusterWorkerInstancesListArgs Empty => new ClusterWorkerInstancesListArgs();
     }
 }

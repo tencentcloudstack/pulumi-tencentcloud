@@ -15,64 +15,58 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dlc
         /// <summary>
         /// Use this data source to query detailed information of dlc describe_user_roles
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var describeUserRoles = Tencentcloud.Dlc.GetDescribeUserRoles.Invoke(new()
         ///     {
-        ///         var describeUserRoles = Output.Create(Tencentcloud.Dlc.GetDescribeUserRoles.InvokeAsync(new Tencentcloud.Dlc.GetDescribeUserRolesArgs
-        ///         {
-        ///             Fuzzy = "1",
-        ///         }));
-        ///     }
+        ///         Fuzzy = "1",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetDescribeUserRolesResult> InvokeAsync(GetDescribeUserRolesArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetDescribeUserRolesResult>("tencentcloud:Dlc/getDescribeUserRoles:getDescribeUserRoles", args ?? new GetDescribeUserRolesArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetDescribeUserRolesResult>("tencentcloud:Dlc/getDescribeUserRoles:getDescribeUserRoles", args ?? new GetDescribeUserRolesArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of dlc describe_user_roles
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var describeUserRoles = Tencentcloud.Dlc.GetDescribeUserRoles.Invoke(new()
         ///     {
-        ///         var describeUserRoles = Output.Create(Tencentcloud.Dlc.GetDescribeUserRoles.InvokeAsync(new Tencentcloud.Dlc.GetDescribeUserRolesArgs
-        ///         {
-        ///             Fuzzy = "1",
-        ///         }));
-        ///     }
+        ///         Fuzzy = "1",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetDescribeUserRolesResult> Invoke(GetDescribeUserRolesInvokeArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetDescribeUserRolesResult>("tencentcloud:Dlc/getDescribeUserRoles:getDescribeUserRoles", args ?? new GetDescribeUserRolesInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetDescribeUserRolesResult>("tencentcloud:Dlc/getDescribeUserRoles:getDescribeUserRoles", args ?? new GetDescribeUserRolesInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetDescribeUserRolesArgs : Pulumi.InvokeArgs
+    public sealed class GetDescribeUserRolesArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// List according to ARN blur.
@@ -101,9 +95,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dlc
         public GetDescribeUserRolesArgs()
         {
         }
+        public static new GetDescribeUserRolesArgs Empty => new GetDescribeUserRolesArgs();
     }
 
-    public sealed class GetDescribeUserRolesInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetDescribeUserRolesInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// List according to ARN blur.
@@ -132,6 +127,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dlc
         public GetDescribeUserRolesInvokeArgs()
         {
         }
+        public static new GetDescribeUserRolesInvokeArgs Empty => new GetDescribeUserRolesInvokeArgs();
     }
 
 

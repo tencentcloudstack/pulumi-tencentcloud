@@ -15,27 +15,28 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var modifyAccountRemarkOperation = new Tencentcloud.Postgresql.ModifyAccountRemarkOperation("modifyAccountRemarkOperation", new()
     ///     {
-    ///         var modifyAccountRemarkOperation = new Tencentcloud.Postgresql.ModifyAccountRemarkOperation("modifyAccountRemarkOperation", new Tencentcloud.Postgresql.ModifyAccountRemarkOperationArgs
-    ///         {
-    ///             DbInstanceId = local.Pgsql_id,
-    ///             UserName = "root",
-    ///             Remark = "hello_world",
-    ///         });
-    ///     }
+    ///         DbInstanceId = local.Pgsql_id,
+    ///         UserName = "root",
+    ///         Remark = "hello_world",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Postgresql/modifyAccountRemarkOperation:ModifyAccountRemarkOperation")]
-    public partial class ModifyAccountRemarkOperation : Pulumi.CustomResource
+    public partial class ModifyAccountRemarkOperation : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Instance ID in the format of postgres-4wdeb0zv.
@@ -100,7 +101,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
         }
     }
 
-    public sealed class ModifyAccountRemarkOperationArgs : Pulumi.ResourceArgs
+    public sealed class ModifyAccountRemarkOperationArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Instance ID in the format of postgres-4wdeb0zv.
@@ -123,9 +124,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
         public ModifyAccountRemarkOperationArgs()
         {
         }
+        public static new ModifyAccountRemarkOperationArgs Empty => new ModifyAccountRemarkOperationArgs();
     }
 
-    public sealed class ModifyAccountRemarkOperationState : Pulumi.ResourceArgs
+    public sealed class ModifyAccountRemarkOperationState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Instance ID in the format of postgres-4wdeb0zv.
@@ -148,5 +150,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
         public ModifyAccountRemarkOperationState()
         {
         }
+        public static new ModifyAccountRemarkOperationState Empty => new ModifyAccountRemarkOperationState();
     }
 }

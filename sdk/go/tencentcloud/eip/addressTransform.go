@@ -7,41 +7,47 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a eip addressTransform
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Eip"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Eip"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Eip.NewAddressTransform(ctx, "addressTransform", &Eip.AddressTransformArgs{
-// 			InstanceId: pulumi.String(""),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Eip.NewAddressTransform(ctx, "addressTransform", &Eip.AddressTransformArgs{
+//				InstanceId: pulumi.String(""),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // eip address_transform can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Eip/addressTransform:AddressTransform address_transform address_transform_id
+// $ pulumi import tencentcloud:Eip/addressTransform:AddressTransform address_transform address_transform_id
 // ```
 type AddressTransform struct {
 	pulumi.CustomResourceState
@@ -60,7 +66,7 @@ func NewAddressTransform(ctx *pulumi.Context,
 	if args.InstanceId == nil {
 		return nil, errors.New("invalid value for required argument 'InstanceId'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource AddressTransform
 	err := ctx.RegisterResource("tencentcloud:Eip/addressTransform:AddressTransform", name, args, &resource, opts...)
 	if err != nil {
@@ -133,7 +139,7 @@ func (i *AddressTransform) ToAddressTransformOutputWithContext(ctx context.Conte
 // AddressTransformArrayInput is an input type that accepts AddressTransformArray and AddressTransformArrayOutput values.
 // You can construct a concrete instance of `AddressTransformArrayInput` via:
 //
-//          AddressTransformArray{ AddressTransformArgs{...} }
+//	AddressTransformArray{ AddressTransformArgs{...} }
 type AddressTransformArrayInput interface {
 	pulumi.Input
 
@@ -158,7 +164,7 @@ func (i AddressTransformArray) ToAddressTransformArrayOutputWithContext(ctx cont
 // AddressTransformMapInput is an input type that accepts AddressTransformMap and AddressTransformMapOutput values.
 // You can construct a concrete instance of `AddressTransformMapInput` via:
 //
-//          AddressTransformMap{ "key": AddressTransformArgs{...} }
+//	AddressTransformMap{ "key": AddressTransformArgs{...} }
 type AddressTransformMapInput interface {
 	pulumi.Input
 

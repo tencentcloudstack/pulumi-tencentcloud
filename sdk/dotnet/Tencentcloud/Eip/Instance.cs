@@ -14,84 +14,90 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Eip
     /// Provides an EIP resource.
     /// 
     /// ## Example Usage
+    /// 
     /// ### Paid by the bandwidth package
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var foo = new Tencentcloud.Eip.Instance("foo", new()
     ///     {
-    ///         var foo = new Tencentcloud.Eip.Instance("foo", new Tencentcloud.Eip.InstanceArgs
-    ///         {
-    ///             BandwidthPackageId = "bwp-jtvzuky6",
-    ///             InternetChargeType = "BANDWIDTH_PACKAGE",
-    ///             Type = "EIP",
-    ///         });
-    ///     }
+    ///         BandwidthPackageId = "bwp-jtvzuky6",
+    ///         InternetChargeType = "BANDWIDTH_PACKAGE",
+    ///         Type = "EIP",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
+    /// 
     /// ### AntiDDos Eip
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var foo = new Tencentcloud.Eip.Instance("foo", new()
     ///     {
-    ///         var foo = new Tencentcloud.Eip.Instance("foo", new Tencentcloud.Eip.InstanceArgs
+    ///         AntiDdosPackageId = "xxxxxxxx",
+    ///         BandwidthPackageId = "bwp-4ocyia9s",
+    ///         InternetChargeType = "BANDWIDTH_PACKAGE",
+    ///         Tags = 
     ///         {
-    ///             AntiDdosPackageId = "xxxxxxxx",
-    ///             BandwidthPackageId = "bwp-4ocyia9s",
-    ///             InternetChargeType = "BANDWIDTH_PACKAGE",
-    ///             Tags = 
-    ///             {
-    ///                 { "test", "test" },
-    ///             },
-    ///             Type = "AntiDDoSEIP",
-    ///         });
-    ///     }
+    ///             { "test", "test" },
+    ///         },
+    ///         Type = "AntiDDoSEIP",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
+    /// 
     /// ### Eip With Network Egress
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var foo = new Tencentcloud.Eip.Instance("foo", new()
     ///     {
-    ///         var foo = new Tencentcloud.Eip.Instance("foo", new Tencentcloud.Eip.InstanceArgs
-    ///         {
-    ///             Egress = "center_egress2",
-    ///             InternetChargeType = "BANDWIDTH_PACKAGE",
-    ///             InternetMaxBandwidthOut = 1,
-    ///             InternetServiceProvider = "CMCC",
-    ///             Type = "EIP",
-    ///         });
-    ///     }
+    ///         Egress = "center_egress2",
+    ///         InternetChargeType = "BANDWIDTH_PACKAGE",
+    ///         InternetMaxBandwidthOut = 1,
+    ///         InternetServiceProvider = "CMCC",
+    ///         Type = "EIP",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// EIP can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Eip/instance:Instance foo eip-nyvf60va
+    /// $ pulumi import tencentcloud:Eip/instance:Instance foo eip-nyvf60va
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Eip/instance:Instance")]
-    public partial class Instance : Pulumi.CustomResource
+    public partial class Instance : global::Pulumi.CustomResource
     {
         /// <summary>
         /// ID of anti DDos package, it must set when `type` is `AntiDDoSEIP`.
@@ -228,7 +234,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Eip
         }
     }
 
-    public sealed class InstanceArgs : Pulumi.ResourceArgs
+    public sealed class InstanceArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// ID of anti DDos package, it must set when `type` is `AntiDDoSEIP`.
@@ -317,9 +323,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Eip
         public InstanceArgs()
         {
         }
+        public static new InstanceArgs Empty => new InstanceArgs();
     }
 
-    public sealed class InstanceState : Pulumi.ResourceArgs
+    public sealed class InstanceState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// ID of anti DDos package, it must set when `type` is `AntiDDoSEIP`.
@@ -420,5 +427,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Eip
         public InstanceState()
         {
         }
+        public static new InstanceState Empty => new InstanceState();
     }
 }

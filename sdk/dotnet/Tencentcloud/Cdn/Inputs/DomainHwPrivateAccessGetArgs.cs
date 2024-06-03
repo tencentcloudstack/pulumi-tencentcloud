@@ -11,13 +11,23 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cdn.Inputs
 {
 
-    public sealed class DomainHwPrivateAccessGetArgs : Pulumi.ResourceArgs
+    public sealed class DomainHwPrivateAccessGetArgs : global::Pulumi.ResourceArgs
     {
+        [Input("accessKey")]
+        private Input<string>? _accessKey;
+
         /// <summary>
         /// Access ID.
         /// </summary>
-        [Input("accessKey")]
-        public Input<string>? AccessKey { get; set; }
+        public Input<string>? AccessKey
+        {
+            get => _accessKey;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _accessKey = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
 
         /// <summary>
         /// Bucket.
@@ -25,11 +35,21 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cdn.Inputs
         [Input("bucket")]
         public Input<string>? Bucket { get; set; }
 
+        [Input("secretKey")]
+        private Input<string>? _secretKey;
+
         /// <summary>
         /// Key.
         /// </summary>
-        [Input("secretKey")]
-        public Input<string>? SecretKey { get; set; }
+        public Input<string>? SecretKey
+        {
+            get => _secretKey;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _secretKey = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
 
         /// <summary>
         /// Configuration switch, available values: `on`, `off` (default).
@@ -40,5 +60,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cdn.Inputs
         public DomainHwPrivateAccessGetArgs()
         {
         }
+        public static new DomainHwPrivateAccessGetArgs Empty => new DomainHwPrivateAccessGetArgs();
     }
 }

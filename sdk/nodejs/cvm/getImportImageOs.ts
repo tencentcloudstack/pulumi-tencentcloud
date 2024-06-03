@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,20 +11,19 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const importImageOs = pulumi.output(tencentcloud.Cvm.getImportImageOs());
+ * const importImageOs = tencentcloud.Cvm.getImportImageOs({});
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getImportImageOs(args?: GetImportImageOsArgs, opts?: pulumi.InvokeOptions): Promise<GetImportImageOsResult> {
     args = args || {};
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Cvm/getImportImageOs:getImportImageOs", {
         "resultOutputFile": args.resultOutputFile,
     }, opts);
@@ -57,9 +57,22 @@ export interface GetImportImageOsResult {
     readonly importImageOsVersionSets: outputs.Cvm.GetImportImageOsImportImageOsVersionSet[];
     readonly resultOutputFile?: string;
 }
-
+/**
+ * Use this data source to query detailed information of cvm importImageOs
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const importImageOs = tencentcloud.Cvm.getImportImageOs({});
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getImportImageOsOutput(args?: GetImportImageOsOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetImportImageOsResult> {
-    return pulumi.output(args).apply(a => getImportImageOs(a, opts))
+    return pulumi.output(args).apply((a: any) => getImportImageOs(a, opts))
 }
 
 /**

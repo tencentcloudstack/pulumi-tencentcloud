@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Oceanus.Inputs
 {
 
-    public sealed class GetSystemResourceFilterArgs : Pulumi.InvokeArgs
+    public sealed class GetSystemResourceFilterArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Field to be filtered.
@@ -34,5 +34,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Oceanus.Inputs
         public GetSystemResourceFilterArgs()
         {
         }
+        public static new GetSystemResourceFilterArgs Empty => new GetSystemResourceFilterArgs();
     }
 }

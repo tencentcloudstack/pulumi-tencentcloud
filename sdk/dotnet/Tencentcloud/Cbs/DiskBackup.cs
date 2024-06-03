@@ -17,34 +17,35 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cbs
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var diskBackup = new Tencentcloud.Cbs.DiskBackup("diskBackup", new()
     ///     {
-    ///         var diskBackup = new Tencentcloud.Cbs.DiskBackup("diskBackup", new Tencentcloud.Cbs.DiskBackupArgs
-    ///         {
-    ///             DiskBackupName = "xxx",
-    ///             DiskId = "disk-xxx",
-    ///         });
-    ///     }
+    ///         DiskBackupName = "xxx",
+    ///         DiskId = "disk-xxx",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// cbs disk_backup can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Cbs/diskBackup:DiskBackup disk_backup disk_backup_id
+    /// $ pulumi import tencentcloud:Cbs/diskBackup:DiskBackup disk_backup disk_backup_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Cbs/diskBackup:DiskBackup")]
-    public partial class DiskBackup : Pulumi.CustomResource
+    public partial class DiskBackup : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Backup point name.
@@ -103,7 +104,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cbs
         }
     }
 
-    public sealed class DiskBackupArgs : Pulumi.ResourceArgs
+    public sealed class DiskBackupArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Backup point name.
@@ -120,9 +121,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cbs
         public DiskBackupArgs()
         {
         }
+        public static new DiskBackupArgs Empty => new DiskBackupArgs();
     }
 
-    public sealed class DiskBackupState : Pulumi.ResourceArgs
+    public sealed class DiskBackupState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Backup point name.
@@ -139,5 +141,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cbs
         public DiskBackupState()
         {
         }
+        public static new DiskBackupState Empty => new DiskBackupState();
     }
 }

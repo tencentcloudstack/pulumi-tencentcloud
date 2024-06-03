@@ -15,72 +15,66 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Rum
         /// <summary>
         /// Use this data source to query detailed information of rum log_export
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var logExport = Tencentcloud.Rum.GetLogExport.Invoke(new()
         ///     {
-        ///         var logExport = Output.Create(Tencentcloud.Rum.GetLogExport.InvokeAsync(new Tencentcloud.Rum.GetLogExportArgs
-        ///         {
-        ///             EndTime = "1692609240000",
-        ///             Name = "log",
-        ///             ProjectId = 1,
-        ///             Query = "id:123 AND type: \"log\"",
-        ///             StartTime = "1692594840000",
-        ///         }));
-        ///     }
+        ///         EndTime = "1692609240000",
+        ///         Name = "log",
+        ///         ProjectId = 1,
+        ///         Query = "id:123 AND type: \"log\"",
+        ///         StartTime = "1692594840000",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetLogExportResult> InvokeAsync(GetLogExportArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetLogExportResult>("tencentcloud:Rum/getLogExport:getLogExport", args ?? new GetLogExportArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetLogExportResult>("tencentcloud:Rum/getLogExport:getLogExport", args ?? new GetLogExportArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of rum log_export
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var logExport = Tencentcloud.Rum.GetLogExport.Invoke(new()
         ///     {
-        ///         var logExport = Output.Create(Tencentcloud.Rum.GetLogExport.InvokeAsync(new Tencentcloud.Rum.GetLogExportArgs
-        ///         {
-        ///             EndTime = "1692609240000",
-        ///             Name = "log",
-        ///             ProjectId = 1,
-        ///             Query = "id:123 AND type: \"log\"",
-        ///             StartTime = "1692594840000",
-        ///         }));
-        ///     }
+        ///         EndTime = "1692609240000",
+        ///         Name = "log",
+        ///         ProjectId = 1,
+        ///         Query = "id:123 AND type: \"log\"",
+        ///         StartTime = "1692594840000",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetLogExportResult> Invoke(GetLogExportInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetLogExportResult>("tencentcloud:Rum/getLogExport:getLogExport", args ?? new GetLogExportInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetLogExportResult>("tencentcloud:Rum/getLogExport:getLogExport", args ?? new GetLogExportInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetLogExportArgs : Pulumi.InvokeArgs
+    public sealed class GetLogExportArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// End timestamp, in milliseconds.
@@ -133,9 +127,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Rum
         public GetLogExportArgs()
         {
         }
+        public static new GetLogExportArgs Empty => new GetLogExportArgs();
     }
 
-    public sealed class GetLogExportInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetLogExportInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// End timestamp, in milliseconds.
@@ -188,6 +183,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Rum
         public GetLogExportInvokeArgs()
         {
         }
+        public static new GetLogExportInvokeArgs Empty => new GetLogExportInvokeArgs();
     }
 
 

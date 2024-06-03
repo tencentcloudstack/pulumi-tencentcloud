@@ -8,151 +8,174 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provide a resource to create a SCF function.
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Scf"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Scf"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Scf.NewFunction(ctx, "foo", &Scf.FunctionArgs{
-// 			CosBucketName:   pulumi.String("scf-code-1234567890"),
-// 			CosBucketRegion: pulumi.String("ap-guangzhou"),
-// 			CosObjectName:   pulumi.String("code.zip"),
-// 			Handler:         pulumi.String("main.do_it"),
-// 			Runtime:         pulumi.String("Python3.6"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Scf.NewFunction(ctx, "foo", &Scf.FunctionArgs{
+//				CosBucketName:   pulumi.String("scf-code-1234567890"),
+//				CosBucketRegion: pulumi.String("ap-guangzhou"),
+//				CosObjectName:   pulumi.String("code.zip"),
+//				Handler:         pulumi.String("main.do_it"),
+//				Runtime:         pulumi.String("Python3.6"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
+//
 // ### Using Zip file
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Scf"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Scf"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Scf"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Scf.NewFunction(ctx, "foo", &Scf.FunctionArgs{
-// 			DnsCache:        pulumi.Bool(true),
-// 			EnablePublicNet: pulumi.Bool(true),
-// 			Handler:         pulumi.String("first.do_it_first"),
-// 			IntranetConfig: &scf.FunctionIntranetConfigArgs{
-// 				IpFixed: pulumi.String("ENABLE"),
-// 			},
-// 			Runtime:  pulumi.String("Python3.6"),
-// 			SubnetId: pulumi.String("subnet-ljyn7h30"),
-// 			Tags: pulumi.AnyMap{
-// 				"env": pulumi.Any("test"),
-// 			},
-// 			VpcId:   pulumi.String("vpc-391sv4w3"),
-// 			ZipFile: pulumi.String("/scf/first.zip"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Scf.NewFunction(ctx, "foo", &Scf.FunctionArgs{
+//				DnsCache:        pulumi.Bool(true),
+//				EnablePublicNet: pulumi.Bool(true),
+//				Handler:         pulumi.String("first.do_it_first"),
+//				IntranetConfig: &scf.FunctionIntranetConfigArgs{
+//					IpFixed: pulumi.String("ENABLE"),
+//				},
+//				Runtime:  pulumi.String("Python3.6"),
+//				SubnetId: pulumi.String("subnet-ljyn7h30"),
+//				Tags: pulumi.Map{
+//					"env": pulumi.Any("test"),
+//				},
+//				VpcId:   pulumi.String("vpc-391sv4w3"),
+//				ZipFile: pulumi.String("/scf/first.zip"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
+//
 // ### Using CFS config
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Scf"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Scf"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Scf"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Scf.NewFunction(ctx, "foo", &Scf.FunctionArgs{
-// 			CfsConfigs: scf.FunctionCfsConfigArray{
-// 				&scf.FunctionCfsConfigArgs{
-// 					CfsId:          pulumi.String("cfs-xxxxxxxx"),
-// 					LocalMountDir:  pulumi.String("/mnt"),
-// 					MountInsId:     pulumi.String("cfs-xxxxxxxx"),
-// 					RemoteMountDir: pulumi.String("/"),
-// 					UserGroupId:    pulumi.String("10000"),
-// 					UserId:         pulumi.String("10000"),
-// 				},
-// 			},
-// 			Handler: pulumi.String("main.do_it"),
-// 			Runtime: pulumi.String("Python3.6"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Scf.NewFunction(ctx, "foo", &Scf.FunctionArgs{
+//				CfsConfigs: scf.FunctionCfsConfigArray{
+//					&scf.FunctionCfsConfigArgs{
+//						CfsId:          pulumi.String("cfs-xxxxxxxx"),
+//						LocalMountDir:  pulumi.String("/mnt"),
+//						MountInsId:     pulumi.String("cfs-xxxxxxxx"),
+//						RemoteMountDir: pulumi.String("/"),
+//						UserGroupId:    pulumi.String("10000"),
+//						UserId:         pulumi.String("10000"),
+//					},
+//				},
+//				Handler: pulumi.String("main.do_it"),
+//				Runtime: pulumi.String("Python3.6"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
+//
 // ### Using triggers
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Scf"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Scf"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Scf"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Scf.NewFunction(ctx, "foo", &Scf.FunctionArgs{
-// 			EnablePublicNet: pulumi.Bool(true),
-// 			Handler:         pulumi.String("first.do_it_first"),
-// 			Runtime:         pulumi.String("Python3.6"),
-// 			Triggers: scf.FunctionTriggerArray{
-// 				&scf.FunctionTriggerArgs{
-// 					Name:        pulumi.String("tf-test-fn-trigger"),
-// 					TriggerDesc: pulumi.String("*/5 * * * * * *"),
-// 					Type:        pulumi.String("timer"),
-// 				},
-// 				&scf.FunctionTriggerArgs{
-// 					CosRegion:   pulumi.String("ap-guangzhou"),
-// 					Name:        pulumi.String("scf-bucket-1308919341.cos.ap-guangzhou.myqcloud.com"),
-// 					TriggerDesc: pulumi.String("{\"event\":\"cos:ObjectCreated:Put\",\"filter\":{\"Prefix\":\"\",\"Suffix\":\"\"}}"),
-// 					Type:        pulumi.String("cos"),
-// 				},
-// 			},
-// 			ZipFile: pulumi.String("/scf/first.zip"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Scf.NewFunction(ctx, "foo", &Scf.FunctionArgs{
+//				EnablePublicNet: pulumi.Bool(true),
+//				Handler:         pulumi.String("first.do_it_first"),
+//				Runtime:         pulumi.String("Python3.6"),
+//				Triggers: scf.FunctionTriggerArray{
+//					&scf.FunctionTriggerArgs{
+//						Name:        pulumi.String("tf-test-fn-trigger"),
+//						TriggerDesc: pulumi.String("*/5 * * * * * *"),
+//						Type:        pulumi.String("timer"),
+//					},
+//					&scf.FunctionTriggerArgs{
+//						CosRegion:   pulumi.String("ap-guangzhou"),
+//						Name:        pulumi.String("scf-bucket-1308919341.cos.ap-guangzhou.myqcloud.com"),
+//						TriggerDesc: pulumi.String("{\"event\":\"cos:ObjectCreated:Put\",\"filter\":{\"Prefix\":\"\",\"Suffix\":\"\"}}"),
+//						Type:        pulumi.String("cos"),
+//					},
+//				},
+//				ZipFile: pulumi.String("/scf/first.zip"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // SCF function can be imported, e.g.
 //
+// -> __NOTE:__ function id is `<function namespace>+<function name>`
+//
 // ```sh
-//  $ pulumi import tencentcloud:Scf/function:Function test default+test
+// $ pulumi import tencentcloud:Scf/function:Function test default+test
 // ```
 type Function struct {
 	pulumi.CustomResourceState
@@ -195,6 +218,8 @@ type Function struct {
 	ErrNo pulumi.IntOutput `pulumi:"errNo"`
 	// Function type. The default value is Event. Enter Event if you need to create a trigger function. Enter HTTP if you need to create an HTTP function service.
 	FuncType pulumi.StringPtrOutput `pulumi:"funcType"`
+	// function ID.
+	FunctionId pulumi.StringOutput `pulumi:"functionId"`
 	// Handler of the SCF function. The format of name is `<filename>.<method_name>`, and it supports 26 English letters, numbers, connectors, and underscores, it should start with a letter. The last character cannot be `-` or `_`. Available length is 2-60.
 	Handler pulumi.StringPtrOutput `pulumi:"handler"`
 	// SCF function domain name.
@@ -250,7 +275,7 @@ func NewFunction(ctx *pulumi.Context,
 		args = &FunctionArgs{}
 	}
 
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource Function
 	err := ctx.RegisterResource("tencentcloud:Scf/function:Function", name, args, &resource, opts...)
 	if err != nil {
@@ -311,6 +336,8 @@ type functionState struct {
 	ErrNo *int `pulumi:"errNo"`
 	// Function type. The default value is Event. Enter Event if you need to create a trigger function. Enter HTTP if you need to create an HTTP function service.
 	FuncType *string `pulumi:"funcType"`
+	// function ID.
+	FunctionId *string `pulumi:"functionId"`
 	// Handler of the SCF function. The format of name is `<filename>.<method_name>`, and it supports 26 English letters, numbers, connectors, and underscores, it should start with a letter. The last character cannot be `-` or `_`. Available length is 2-60.
 	Handler *string `pulumi:"handler"`
 	// SCF function domain name.
@@ -398,6 +425,8 @@ type FunctionState struct {
 	ErrNo pulumi.IntPtrInput
 	// Function type. The default value is Event. Enter Event if you need to create a trigger function. Enter HTTP if you need to create an HTTP function service.
 	FuncType pulumi.StringPtrInput
+	// function ID.
+	FunctionId pulumi.StringPtrInput
 	// Handler of the SCF function. The format of name is `<filename>.<method_name>`, and it supports 26 English letters, numbers, connectors, and underscores, it should start with a letter. The last character cannot be `-` or `_`. Available length is 2-60.
 	Handler pulumi.StringPtrInput
 	// SCF function domain name.
@@ -599,7 +628,7 @@ func (i *Function) ToFunctionOutputWithContext(ctx context.Context) FunctionOutp
 // FunctionArrayInput is an input type that accepts FunctionArray and FunctionArrayOutput values.
 // You can construct a concrete instance of `FunctionArrayInput` via:
 //
-//          FunctionArray{ FunctionArgs{...} }
+//	FunctionArray{ FunctionArgs{...} }
 type FunctionArrayInput interface {
 	pulumi.Input
 
@@ -624,7 +653,7 @@ func (i FunctionArray) ToFunctionArrayOutputWithContext(ctx context.Context) Fun
 // FunctionMapInput is an input type that accepts FunctionMap and FunctionMapOutput values.
 // You can construct a concrete instance of `FunctionMapInput` via:
 //
-//          FunctionMap{ "key": FunctionArgs{...} }
+//	FunctionMap{ "key": FunctionArgs{...} }
 type FunctionMapInput interface {
 	pulumi.Input
 
@@ -753,6 +782,11 @@ func (o FunctionOutput) ErrNo() pulumi.IntOutput {
 // Function type. The default value is Event. Enter Event if you need to create a trigger function. Enter HTTP if you need to create an HTTP function service.
 func (o FunctionOutput) FuncType() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *Function) pulumi.StringPtrOutput { return v.FuncType }).(pulumi.StringPtrOutput)
+}
+
+// function ID.
+func (o FunctionOutput) FunctionId() pulumi.StringOutput {
+	return o.ApplyT(func(v *Function) pulumi.StringOutput { return v.FunctionId }).(pulumi.StringOutput)
 }
 
 // Handler of the SCF function. The format of name is `<filename>.<method_name>`, and it supports 26 English letters, numbers, connectors, and underscores, it should start with a letter. The last character cannot be `-` or `_`. Available length is 2-60.

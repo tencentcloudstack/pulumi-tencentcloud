@@ -7,79 +7,92 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a postgresql securityGroupConfig
 //
 // ## Example Usage
+//
 // ### Set security group for the sepcified postgres instance
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Postgresql"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Postgresql"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Postgresql.NewSecurityGroupConfig(ctx, "securityGroupConfig", &Postgresql.SecurityGroupConfigArgs{
-// 			SecurityGroupIdSets: pulumi.StringArray{
-// 				pulumi.Any(local.Sg_id),
-// 				pulumi.Any(local.Sg_id2),
-// 			},
-// 			DbInstanceId: pulumi.Any(local.Pgsql_id),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Postgresql.NewSecurityGroupConfig(ctx, "securityGroupConfig", &Postgresql.SecurityGroupConfigArgs{
+//				SecurityGroupIdSets: pulumi.StringArray{
+//					local.Sg_id,
+//					local.Sg_id2,
+//				},
+//				DbInstanceId: pulumi.Any(local.Pgsql_id),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
+//
 // ### Set security group for the specified readonly group
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Postgresql"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Postgresql"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		group, err := Postgresql.NewReadonlyGroup(ctx, "group", &Postgresql.ReadonlyGroupArgs{
-// 			MasterDbInstanceId:       pulumi.Any(local.Pgsql_id),
-// 			ProjectId:                pulumi.Int(0),
-// 			SubnetId:                 pulumi.Any(local.Subnet_id),
-// 			VpcId:                    pulumi.Any(local.Vpc_id),
-// 			ReplayLagEliminate:       pulumi.Int(1),
-// 			ReplayLatencyEliminate:   pulumi.Int(1),
-// 			MaxReplayLag:             pulumi.Int(100),
-// 			MaxReplayLatency:         pulumi.Int(512),
-// 			MinDelayEliminateReserve: pulumi.Int(1),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_, err = Postgresql.NewSecurityGroupConfig(ctx, "securityGroupConfig", &Postgresql.SecurityGroupConfigArgs{
-// 			SecurityGroupIdSets: pulumi.StringArray{
-// 				pulumi.Any(local.Sg_id),
-// 				pulumi.Any(local.Sg_id2),
-// 			},
-// 			ReadOnlyGroupId: group.ID(),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			group, err := Postgresql.NewReadonlyGroup(ctx, "group", &Postgresql.ReadonlyGroupArgs{
+//				MasterDbInstanceId:       pulumi.Any(local.Pgsql_id),
+//				ProjectId:                pulumi.Int(0),
+//				SubnetId:                 pulumi.Any(local.Subnet_id),
+//				VpcId:                    pulumi.Any(local.Vpc_id),
+//				ReplayLagEliminate:       pulumi.Int(1),
+//				ReplayLatencyEliminate:   pulumi.Int(1),
+//				MaxReplayLag:             pulumi.Int(100),
+//				MaxReplayLatency:         pulumi.Int(512),
+//				MinDelayEliminateReserve: pulumi.Int(1),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_, err = Postgresql.NewSecurityGroupConfig(ctx, "securityGroupConfig", &Postgresql.SecurityGroupConfigArgs{
+//				SecurityGroupIdSets: pulumi.StringArray{
+//					local.Sg_id,
+//					local.Sg_id2,
+//				},
+//				ReadOnlyGroupId: group.ID(),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 type SecurityGroupConfig struct {
 	pulumi.CustomResourceState
 
@@ -101,7 +114,7 @@ func NewSecurityGroupConfig(ctx *pulumi.Context,
 	if args.SecurityGroupIdSets == nil {
 		return nil, errors.New("invalid value for required argument 'SecurityGroupIdSets'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource SecurityGroupConfig
 	err := ctx.RegisterResource("tencentcloud:Postgresql/securityGroupConfig:SecurityGroupConfig", name, args, &resource, opts...)
 	if err != nil {
@@ -190,7 +203,7 @@ func (i *SecurityGroupConfig) ToSecurityGroupConfigOutputWithContext(ctx context
 // SecurityGroupConfigArrayInput is an input type that accepts SecurityGroupConfigArray and SecurityGroupConfigArrayOutput values.
 // You can construct a concrete instance of `SecurityGroupConfigArrayInput` via:
 //
-//          SecurityGroupConfigArray{ SecurityGroupConfigArgs{...} }
+//	SecurityGroupConfigArray{ SecurityGroupConfigArgs{...} }
 type SecurityGroupConfigArrayInput interface {
 	pulumi.Input
 
@@ -215,7 +228,7 @@ func (i SecurityGroupConfigArray) ToSecurityGroupConfigArrayOutputWithContext(ct
 // SecurityGroupConfigMapInput is an input type that accepts SecurityGroupConfigMap and SecurityGroupConfigMapOutput values.
 // You can construct a concrete instance of `SecurityGroupConfigMapInput` via:
 //
-//          SecurityGroupConfigMap{ "key": SecurityGroupConfigArgs{...} }
+//	SecurityGroupConfigMap{ "key": SecurityGroupConfigArgs{...} }
 type SecurityGroupConfigMapInput interface {
 	pulumi.Input
 

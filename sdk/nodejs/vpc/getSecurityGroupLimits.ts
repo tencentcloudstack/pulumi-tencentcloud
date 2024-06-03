@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,20 +11,19 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const securityGroupLimits = pulumi.output(tencentcloud.Vpc.getSecurityGroupLimits());
+ * const securityGroupLimits = tencentcloud.Vpc.getSecurityGroupLimits({});
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getSecurityGroupLimits(args?: GetSecurityGroupLimitsArgs, opts?: pulumi.InvokeOptions): Promise<GetSecurityGroupLimitsResult> {
     args = args || {};
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Vpc/getSecurityGroupLimits:getSecurityGroupLimits", {
         "resultOutputFile": args.resultOutputFile,
     }, opts);
@@ -53,9 +53,22 @@ export interface GetSecurityGroupLimitsResult {
      */
     readonly securityGroupLimitSets: outputs.Vpc.GetSecurityGroupLimitsSecurityGroupLimitSet[];
 }
-
+/**
+ * Use this data source to query detailed information of vpc securityGroupLimits
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const securityGroupLimits = tencentcloud.Vpc.getSecurityGroupLimits({});
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getSecurityGroupLimitsOutput(args?: GetSecurityGroupLimitsOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetSecurityGroupLimitsResult> {
-    return pulumi.output(args).apply(a => getSecurityGroupLimits(a, opts))
+    return pulumi.output(args).apply((a: any) => getSecurityGroupLimits(a, opts))
 }
 
 /**

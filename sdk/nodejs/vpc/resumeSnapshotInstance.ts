@@ -8,24 +8,29 @@ import * as utilities from "../utilities";
  * Provides a resource to create a vpc resumeSnapshotInstance
  *
  * ## Example Usage
+ *
  * ### Basic example
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const resumeSnapshotInstance = new tencentcloud.Vpc.ResumeSnapshotInstance("resume_snapshot_instance", {
+ * const resumeSnapshotInstance = new tencentcloud.vpc.ResumeSnapshotInstance("resumeSnapshotInstance", {
  *     instanceId: "ntrgm89v",
  *     snapshotFileId: "ssfile-emtabuwu2z",
  *     snapshotPolicyId: "sspolicy-1t6cobbv",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
+ *
  * ### Complete example
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const exampleSnapshotFiles = tencentcloud.Vpc.getSnapshotFiles({
  *     businessType: "securitygroup",
@@ -61,10 +66,11 @@ import * as utilities from "../utilities";
  * });
  * const exampleResumeSnapshotInstance = new tencentcloud.vpc.ResumeSnapshotInstance("exampleResumeSnapshotInstance", {
  *     snapshotPolicyId: exampleSnapshotPolicy.id,
- *     snapshotFileId: exampleSnapshotFiles.then(exampleSnapshotFiles => exampleSnapshotFiles.snapshotFileSets?[0]?.snapshotFileId),
+ *     snapshotFileId: exampleSnapshotFiles.then(exampleSnapshotFiles => exampleSnapshotFiles.snapshotFileSets?.[0]?.snapshotFileId),
  *     instanceId: "policy-1t6cob",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export class ResumeSnapshotInstance extends pulumi.CustomResource {
     /**

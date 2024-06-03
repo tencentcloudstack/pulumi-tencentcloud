@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Elasticsearch.Inputs
 {
 
-    public sealed class InstanceEsAclGetArgs : Pulumi.ResourceArgs
+    public sealed class InstanceEsAclGetArgs : global::Pulumi.ResourceArgs
     {
         [Input("blackLists")]
         private InputList<string>? _blackLists;
@@ -40,5 +40,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Elasticsearch.Inputs
         public InstanceEsAclGetArgs()
         {
         }
+        public static new InstanceEsAclGetArgs Empty => new InstanceEsAclGetArgs();
     }
 }

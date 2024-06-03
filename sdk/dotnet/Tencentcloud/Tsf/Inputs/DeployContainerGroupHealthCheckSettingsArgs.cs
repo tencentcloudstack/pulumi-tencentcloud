@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf.Inputs
 {
 
-    public sealed class DeployContainerGroupHealthCheckSettingsArgs : Pulumi.ResourceArgs
+    public sealed class DeployContainerGroupHealthCheckSettingsArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Liveness probe. Note: This field may return null, indicating that no valid values can be obtained.
@@ -28,5 +28,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf.Inputs
         public DeployContainerGroupHealthCheckSettingsArgs()
         {
         }
+        public static new DeployContainerGroupHealthCheckSettingsArgs Empty => new DeployContainerGroupHealthCheckSettingsArgs();
     }
 }

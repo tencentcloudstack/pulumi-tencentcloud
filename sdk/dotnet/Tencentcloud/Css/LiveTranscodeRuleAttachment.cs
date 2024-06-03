@@ -15,61 +15,64 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Css
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var task = new Tencentcloud.Css.PullStreamTask("task", new()
     ///     {
-    ///         var task = new Tencentcloud.Css.PullStreamTask("task", new Tencentcloud.Css.PullStreamTaskArgs
+    ///         SourceType = "%s",
+    ///         SourceUrls = new[]
     ///         {
-    ///             SourceType = "%s",
-    ///             SourceUrls = 
-    ///             {
-    ///                 "%s",
-    ///             },
-    ///             DomainName = "%s",
-    ///             AppName = "%s",
-    ///             StreamName = "%s",
-    ///             StartTime = "%s",
-    ///             EndTime = "%s",
-    ///             Operator = "%s",
-    ///             Comment = "This is a demo.",
-    ///         });
-    ///         var temp = new Tencentcloud.Css.LiveTranscodeTemplate("temp", new Tencentcloud.Css.LiveTranscodeTemplateArgs
-    ///         {
-    ///             TemplateName = "xxx",
-    ///             Acodec = "aac",
-    ///             VideoBitrate = 100,
-    ///             Vcodec = "origin",
-    ///             Description = "This_is_a_tf_test_temp.",
-    ///             NeedVideo = 1,
-    ///             NeedAudio = 1,
-    ///         });
-    ///         var liveTranscodeRuleAttachment = new Tencentcloud.Css.LiveTranscodeRuleAttachment("liveTranscodeRuleAttachment", new Tencentcloud.Css.LiveTranscodeRuleAttachmentArgs
-    ///         {
-    ///             DomainName = task.DomainName,
-    ///             AppName = task.AppName,
-    ///             StreamName = task.StreamName,
-    ///             TemplateId = temp.Id,
-    ///         });
-    ///     }
+    ///             "%s",
+    ///         },
+    ///         DomainName = "%s",
+    ///         AppName = "%s",
+    ///         StreamName = "%s",
+    ///         StartTime = "%s",
+    ///         EndTime = "%s",
+    ///         Operator = "%s",
+    ///         Comment = "This is a demo.",
+    ///     });
     /// 
-    /// }
+    ///     var temp = new Tencentcloud.Css.LiveTranscodeTemplate("temp", new()
+    ///     {
+    ///         TemplateName = "xxx",
+    ///         Acodec = "aac",
+    ///         VideoBitrate = 100,
+    ///         Vcodec = "origin",
+    ///         Description = "This_is_a_tf_test_temp.",
+    ///         NeedVideo = 1,
+    ///         NeedAudio = 1,
+    ///     });
+    /// 
+    ///     var liveTranscodeRuleAttachment = new Tencentcloud.Css.LiveTranscodeRuleAttachment("liveTranscodeRuleAttachment", new()
+    ///     {
+    ///         DomainName = task.DomainName,
+    ///         AppName = task.AppName,
+    ///         StreamName = task.StreamName,
+    ///         TemplateId = temp.Id,
+    ///     });
+    /// 
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// css live_transcode_rule_attachment can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Css/liveTranscodeRuleAttachment:LiveTranscodeRuleAttachment live_transcode_rule_attachment liveTranscodeRuleAttachment_id
+    /// $ pulumi import tencentcloud:Css/liveTranscodeRuleAttachment:LiveTranscodeRuleAttachment live_transcode_rule_attachment liveTranscodeRuleAttachment_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Css/liveTranscodeRuleAttachment:LiveTranscodeRuleAttachment")]
-    public partial class LiveTranscodeRuleAttachment : Pulumi.CustomResource
+    public partial class LiveTranscodeRuleAttachment : global::Pulumi.CustomResource
     {
         /// <summary>
         /// app name which you want to bind, can be empty string if not binding specific app name.
@@ -152,7 +155,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Css
         }
     }
 
-    public sealed class LiveTranscodeRuleAttachmentArgs : Pulumi.ResourceArgs
+    public sealed class LiveTranscodeRuleAttachmentArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// app name which you want to bind, can be empty string if not binding specific app name.
@@ -181,9 +184,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Css
         public LiveTranscodeRuleAttachmentArgs()
         {
         }
+        public static new LiveTranscodeRuleAttachmentArgs Empty => new LiveTranscodeRuleAttachmentArgs();
     }
 
-    public sealed class LiveTranscodeRuleAttachmentState : Pulumi.ResourceArgs
+    public sealed class LiveTranscodeRuleAttachmentState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// app name which you want to bind, can be empty string if not binding specific app name.
@@ -224,5 +228,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Css
         public LiveTranscodeRuleAttachmentState()
         {
         }
+        public static new LiveTranscodeRuleAttachmentState Empty => new LiveTranscodeRuleAttachmentState();
     }
 }

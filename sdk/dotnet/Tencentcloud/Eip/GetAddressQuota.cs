@@ -15,58 +15,52 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Eip
         /// <summary>
         /// Use this data source to query detailed information of vpc address_quota
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
-        ///     {
-        ///         var addressQuota = Output.Create(Tencentcloud.Eip.GetAddressQuota.InvokeAsync());
-        ///     }
+        ///     var addressQuota = Tencentcloud.Eip.GetAddressQuota.Invoke();
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetAddressQuotaResult> InvokeAsync(GetAddressQuotaArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetAddressQuotaResult>("tencentcloud:Eip/getAddressQuota:getAddressQuota", args ?? new GetAddressQuotaArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetAddressQuotaResult>("tencentcloud:Eip/getAddressQuota:getAddressQuota", args ?? new GetAddressQuotaArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of vpc address_quota
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
-        ///     {
-        ///         var addressQuota = Output.Create(Tencentcloud.Eip.GetAddressQuota.InvokeAsync());
-        ///     }
+        ///     var addressQuota = Tencentcloud.Eip.GetAddressQuota.Invoke();
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetAddressQuotaResult> Invoke(GetAddressQuotaInvokeArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetAddressQuotaResult>("tencentcloud:Eip/getAddressQuota:getAddressQuota", args ?? new GetAddressQuotaInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetAddressQuotaResult>("tencentcloud:Eip/getAddressQuota:getAddressQuota", args ?? new GetAddressQuotaInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetAddressQuotaArgs : Pulumi.InvokeArgs
+    public sealed class GetAddressQuotaArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Used to save results.
@@ -77,9 +71,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Eip
         public GetAddressQuotaArgs()
         {
         }
+        public static new GetAddressQuotaArgs Empty => new GetAddressQuotaArgs();
     }
 
-    public sealed class GetAddressQuotaInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetAddressQuotaInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Used to save results.
@@ -90,6 +85,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Eip
         public GetAddressQuotaInvokeArgs()
         {
         }
+        public static new GetAddressQuotaInvokeArgs Empty => new GetAddressQuotaInvokeArgs();
     }
 
 

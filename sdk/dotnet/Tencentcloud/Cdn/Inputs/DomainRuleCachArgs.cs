@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cdn.Inputs
 {
 
-    public sealed class DomainRuleCachArgs : Pulumi.ResourceArgs
+    public sealed class DomainRuleCachArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Cache expiration time setting, the unit is second, the maximum can be set to 365 days.
@@ -94,5 +94,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cdn.Inputs
         public DomainRuleCachArgs()
         {
         }
+        public static new DomainRuleCachArgs Empty => new DomainRuleCachArgs();
     }
 }

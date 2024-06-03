@@ -14,88 +14,94 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kms
     /// Provide a resource to create a KMS key.
     /// 
     /// ## Example Usage
+    /// 
     /// ### Create and enable a instance.
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var example = new Tencentcloud.Kms.Key("example", new()
     ///     {
-    ///         var example = new Tencentcloud.Kms.Key("example", new Tencentcloud.Kms.KeyArgs
+    ///         Alias = "tf-example-kms-key",
+    ///         Description = "example of kms key",
+    ///         IsEnabled = true,
+    ///         KeyRotationEnabled = false,
+    ///         Tags = 
     ///         {
-    ///             Alias = "tf-example-kms-key",
-    ///             Description = "example of kms key",
-    ///             IsEnabled = true,
-    ///             KeyRotationEnabled = false,
-    ///             Tags = 
-    ///             {
-    ///                 { "createdBy", "terraform" },
-    ///             },
-    ///         });
-    ///     }
+    ///             { "createdBy", "terraform" },
+    ///         },
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
+    /// 
     /// ### Specify the Key Usage as an asymmetry method.
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var example2 = new Tencentcloud.Kms.Key("example2", new()
     ///     {
-    ///         var example2 = new Tencentcloud.Kms.Key("example2", new Tencentcloud.Kms.KeyArgs
-    ///         {
-    ///             Alias = "tf-example-kms-key",
-    ///             Description = "example of kms key",
-    ///             IsEnabled = false,
-    ///             KeyUsage = "ASYMMETRIC_DECRYPT_RSA_2048",
-    ///         });
-    ///     }
+    ///         Alias = "tf-example-kms-key",
+    ///         Description = "example of kms key",
+    ///         IsEnabled = false,
+    ///         KeyUsage = "ASYMMETRIC_DECRYPT_RSA_2048",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
+    /// 
     /// ### Disable the kms key instance.
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var example3 = new Tencentcloud.Kms.Key("example3", new()
     ///     {
-    ///         var example3 = new Tencentcloud.Kms.Key("example3", new Tencentcloud.Kms.KeyArgs
+    ///         Alias = "tf-example-kms-key",
+    ///         Description = "example of kms key",
+    ///         IsEnabled = false,
+    ///         KeyRotationEnabled = false,
+    ///         Tags = 
     ///         {
-    ///             Alias = "tf-example-kms-key",
-    ///             Description = "example of kms key",
-    ///             IsEnabled = false,
-    ///             KeyRotationEnabled = false,
-    ///             Tags = 
-    ///             {
-    ///                 { "test-tag", "unit-test" },
-    ///             },
-    ///         });
-    ///     }
+    ///             { "test-tag", "unit-test" },
+    ///         },
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// KMS keys can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Kms/key:Key foo 287e8f40-7cbb-11eb-9a3a-5254004f7f94
+    /// $ pulumi import tencentcloud:Kms/key:Key foo 287e8f40-7cbb-11eb-9a3a-5254004f7f94
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Kms/key:Key")]
-    public partial class Key : Pulumi.CustomResource
+    public partial class Key : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Name of CMK. The name can only contain English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.
@@ -196,7 +202,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kms
         }
     }
 
-    public sealed class KeyArgs : Pulumi.ResourceArgs
+    public sealed class KeyArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Name of CMK. The name can only contain English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.
@@ -255,9 +261,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kms
         public KeyArgs()
         {
         }
+        public static new KeyArgs Empty => new KeyArgs();
     }
 
-    public sealed class KeyState : Pulumi.ResourceArgs
+    public sealed class KeyState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Name of CMK. The name can only contain English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.
@@ -322,5 +329,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kms
         public KeyState()
         {
         }
+        public static new KeyState Empty => new KeyState();
     }
 }

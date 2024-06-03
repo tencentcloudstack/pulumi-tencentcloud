@@ -15,30 +15,31 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cvm
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var syncImage = new Tencentcloud.Cvm.SyncImage("syncImage", new()
     ///     {
-    ///         var syncImage = new Tencentcloud.Cvm.SyncImage("syncImage", new Tencentcloud.Cvm.SyncImageArgs
+    ///         DestinationRegions = new[]
     ///         {
-    ///             DestinationRegions = 
-    ///             {
-    ///                 "ap-guangzhou",
-    ///                 "ap-shanghai",
-    ///             },
-    ///             ImageId = "img-xxxxxx",
-    ///         });
-    ///     }
+    ///             "ap-guangzhou",
+    ///             "ap-shanghai",
+    ///         },
+    ///         ImageId = "img-xxxxxx",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Cvm/syncImage:SyncImage")]
-    public partial class SyncImage : Pulumi.CustomResource
+    public partial class SyncImage : global::Pulumi.CustomResource
     {
         /// <summary>
         /// List of destination regions for synchronization. Limits: It must be a valid region. For a custom image, the destination region cannot be the source region. For a shared image, the destination region must be the source region, which indicates to create a copy of the image as a custom image in the same region.
@@ -115,7 +116,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cvm
         }
     }
 
-    public sealed class SyncImageArgs : Pulumi.ResourceArgs
+    public sealed class SyncImageArgs : global::Pulumi.ResourceArgs
     {
         [Input("destinationRegions", required: true)]
         private InputList<string>? _destinationRegions;
@@ -156,9 +157,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cvm
         public SyncImageArgs()
         {
         }
+        public static new SyncImageArgs Empty => new SyncImageArgs();
     }
 
-    public sealed class SyncImageState : Pulumi.ResourceArgs
+    public sealed class SyncImageState : global::Pulumi.ResourceArgs
     {
         [Input("destinationRegions")]
         private InputList<string>? _destinationRegions;
@@ -199,5 +201,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cvm
         public SyncImageState()
         {
         }
+        public static new SyncImageState Empty => new SyncImageState();
     }
 }

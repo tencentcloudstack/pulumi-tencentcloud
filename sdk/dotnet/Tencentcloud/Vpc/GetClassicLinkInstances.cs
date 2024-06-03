@@ -15,84 +15,78 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         /// <summary>
         /// Use this data source to query detailed information of vpc classic_link_instances
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var classicLinkInstances = Tencentcloud.Vpc.GetClassicLinkInstances.Invoke(new()
         ///     {
-        ///         var classicLinkInstances = Output.Create(Tencentcloud.Vpc.GetClassicLinkInstances.InvokeAsync(new Tencentcloud.Vpc.GetClassicLinkInstancesArgs
+        ///         Filters = new[]
         ///         {
-        ///             Filters = 
+        ///             new Tencentcloud.Vpc.Inputs.GetClassicLinkInstancesFilterInputArgs
         ///             {
-        ///                 new Tencentcloud.Vpc.Inputs.GetClassicLinkInstancesFilterArgs
+        ///                 Name = "vpc-id",
+        ///                 Values = new[]
         ///                 {
-        ///                     Name = "vpc-id",
-        ///                     Values = 
-        ///                     {
-        ///                         "vpc-lh4nqig9",
-        ///                     },
+        ///                     "vpc-lh4nqig9",
         ///                 },
         ///             },
-        ///         }));
-        ///     }
+        ///         },
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetClassicLinkInstancesResult> InvokeAsync(GetClassicLinkInstancesArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetClassicLinkInstancesResult>("tencentcloud:Vpc/getClassicLinkInstances:getClassicLinkInstances", args ?? new GetClassicLinkInstancesArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetClassicLinkInstancesResult>("tencentcloud:Vpc/getClassicLinkInstances:getClassicLinkInstances", args ?? new GetClassicLinkInstancesArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of vpc classic_link_instances
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var classicLinkInstances = Tencentcloud.Vpc.GetClassicLinkInstances.Invoke(new()
         ///     {
-        ///         var classicLinkInstances = Output.Create(Tencentcloud.Vpc.GetClassicLinkInstances.InvokeAsync(new Tencentcloud.Vpc.GetClassicLinkInstancesArgs
+        ///         Filters = new[]
         ///         {
-        ///             Filters = 
+        ///             new Tencentcloud.Vpc.Inputs.GetClassicLinkInstancesFilterInputArgs
         ///             {
-        ///                 new Tencentcloud.Vpc.Inputs.GetClassicLinkInstancesFilterArgs
+        ///                 Name = "vpc-id",
+        ///                 Values = new[]
         ///                 {
-        ///                     Name = "vpc-id",
-        ///                     Values = 
-        ///                     {
-        ///                         "vpc-lh4nqig9",
-        ///                     },
+        ///                     "vpc-lh4nqig9",
         ///                 },
         ///             },
-        ///         }));
-        ///     }
+        ///         },
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetClassicLinkInstancesResult> Invoke(GetClassicLinkInstancesInvokeArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetClassicLinkInstancesResult>("tencentcloud:Vpc/getClassicLinkInstances:getClassicLinkInstances", args ?? new GetClassicLinkInstancesInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetClassicLinkInstancesResult>("tencentcloud:Vpc/getClassicLinkInstances:getClassicLinkInstances", args ?? new GetClassicLinkInstancesInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetClassicLinkInstancesArgs : Pulumi.InvokeArgs
+    public sealed class GetClassicLinkInstancesArgs : global::Pulumi.InvokeArgs
     {
         [Input("filters")]
         private List<Inputs.GetClassicLinkInstancesFilterArgs>? _filters;
@@ -115,9 +109,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         public GetClassicLinkInstancesArgs()
         {
         }
+        public static new GetClassicLinkInstancesArgs Empty => new GetClassicLinkInstancesArgs();
     }
 
-    public sealed class GetClassicLinkInstancesInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetClassicLinkInstancesInvokeArgs : global::Pulumi.InvokeArgs
     {
         [Input("filters")]
         private InputList<Inputs.GetClassicLinkInstancesFilterInputArgs>? _filters;
@@ -140,6 +135,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         public GetClassicLinkInstancesInvokeArgs()
         {
         }
+        public static new GetClassicLinkInstancesInvokeArgs Empty => new GetClassicLinkInstancesInvokeArgs();
     }
 
 

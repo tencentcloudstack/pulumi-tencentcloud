@@ -15,30 +15,31 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dasb
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var example = new Tencentcloud.Dasb.BindDeviceResource("example", new()
     ///     {
-    ///         var example = new Tencentcloud.Dasb.BindDeviceResource("example", new Tencentcloud.Dasb.BindDeviceResourceArgs
+    ///         DeviceIdSets = new[]
     ///         {
-    ///             DeviceIdSets = 
-    ///             {
-    ///                 17,
-    ///                 18,
-    ///             },
-    ///             ResourceId = "bh-saas-ocmzo6lgxiv",
-    ///         });
-    ///     }
+    ///             17,
+    ///             18,
+    ///         },
+    ///         ResourceId = "bh-saas-weyosfym",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Dasb/bindDeviceResource:BindDeviceResource")]
-    public partial class BindDeviceResource : Pulumi.CustomResource
+    public partial class BindDeviceResource : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Asset ID collection.
@@ -97,7 +98,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dasb
         }
     }
 
-    public sealed class BindDeviceResourceArgs : Pulumi.ResourceArgs
+    public sealed class BindDeviceResourceArgs : global::Pulumi.ResourceArgs
     {
         [Input("deviceIdSets", required: true)]
         private InputList<int>? _deviceIdSets;
@@ -120,9 +121,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dasb
         public BindDeviceResourceArgs()
         {
         }
+        public static new BindDeviceResourceArgs Empty => new BindDeviceResourceArgs();
     }
 
-    public sealed class BindDeviceResourceState : Pulumi.ResourceArgs
+    public sealed class BindDeviceResourceState : global::Pulumi.ResourceArgs
     {
         [Input("deviceIdSets")]
         private InputList<int>? _deviceIdSets;
@@ -145,5 +147,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dasb
         public BindDeviceResourceState()
         {
         }
+        public static new BindDeviceResourceState Empty => new BindDeviceResourceState();
     }
 }

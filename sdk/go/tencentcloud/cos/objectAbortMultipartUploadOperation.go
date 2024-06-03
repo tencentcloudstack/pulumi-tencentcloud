@@ -7,36 +7,42 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to abort multipart upload
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cos"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cos"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Cos.NewObjectAbortMultipartUploadOperation(ctx, "abortMultipartUpload", &Cos.ObjectAbortMultipartUploadOperationArgs{
-// 			Bucket:   pulumi.String("keep-test-xxxxxx"),
-// 			Key:      pulumi.String("object"),
-// 			UploadId: pulumi.String("xxxxxx"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Cos.NewObjectAbortMultipartUploadOperation(ctx, "abortMultipartUpload", &Cos.ObjectAbortMultipartUploadOperationArgs{
+//				Bucket:   pulumi.String("keep-test-xxxxxx"),
+//				Key:      pulumi.String("object"),
+//				UploadId: pulumi.String("xxxxxx"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 type ObjectAbortMultipartUploadOperation struct {
 	pulumi.CustomResourceState
 
@@ -64,7 +70,7 @@ func NewObjectAbortMultipartUploadOperation(ctx *pulumi.Context,
 	if args.UploadId == nil {
 		return nil, errors.New("invalid value for required argument 'UploadId'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource ObjectAbortMultipartUploadOperation
 	err := ctx.RegisterResource("tencentcloud:Cos/objectAbortMultipartUploadOperation:ObjectAbortMultipartUploadOperation", name, args, &resource, opts...)
 	if err != nil {
@@ -153,7 +159,7 @@ func (i *ObjectAbortMultipartUploadOperation) ToObjectAbortMultipartUploadOperat
 // ObjectAbortMultipartUploadOperationArrayInput is an input type that accepts ObjectAbortMultipartUploadOperationArray and ObjectAbortMultipartUploadOperationArrayOutput values.
 // You can construct a concrete instance of `ObjectAbortMultipartUploadOperationArrayInput` via:
 //
-//          ObjectAbortMultipartUploadOperationArray{ ObjectAbortMultipartUploadOperationArgs{...} }
+//	ObjectAbortMultipartUploadOperationArray{ ObjectAbortMultipartUploadOperationArgs{...} }
 type ObjectAbortMultipartUploadOperationArrayInput interface {
 	pulumi.Input
 
@@ -178,7 +184,7 @@ func (i ObjectAbortMultipartUploadOperationArray) ToObjectAbortMultipartUploadOp
 // ObjectAbortMultipartUploadOperationMapInput is an input type that accepts ObjectAbortMultipartUploadOperationMap and ObjectAbortMultipartUploadOperationMapOutput values.
 // You can construct a concrete instance of `ObjectAbortMultipartUploadOperationMapInput` via:
 //
-//          ObjectAbortMultipartUploadOperationMap{ "key": ObjectAbortMultipartUploadOperationArgs{...} }
+//	ObjectAbortMultipartUploadOperationMap{ "key": ObjectAbortMultipartUploadOperationArgs{...} }
 type ObjectAbortMultipartUploadOperationMapInput interface {
 	pulumi.Input
 

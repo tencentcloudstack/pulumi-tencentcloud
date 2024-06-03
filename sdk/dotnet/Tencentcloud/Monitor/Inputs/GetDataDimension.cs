@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor.Inputs
 {
 
-    public sealed class GetDataDimensionArgs : Pulumi.InvokeArgs
+    public sealed class GetDataDimensionArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Instance dimension name, eg: `InstanceId` for cvm.
@@ -28,5 +28,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor.Inputs
         public GetDataDimensionArgs()
         {
         }
+        public static new GetDataDimensionArgs Empty => new GetDataDimensionArgs();
     }
 }

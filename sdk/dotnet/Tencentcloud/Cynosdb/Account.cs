@@ -15,38 +15,39 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var account = new Tencentcloud.Cynosdb.Account("account", new()
     ///     {
-    ///         var account = new Tencentcloud.Cynosdb.Account("account", new Tencentcloud.Cynosdb.AccountArgs
-    ///         {
-    ///             AccountName = "terraform_test",
-    ///             AccountPassword = "Password@1234",
-    ///             ClusterId = "cynosdbmysql-bws8h88b",
-    ///             Description = "terraform test",
-    ///             Host = "%",
-    ///             MaxUserConnections = 2,
-    ///         });
-    ///     }
+    ///         AccountName = "terraform_test",
+    ///         AccountPassword = "Password@1234",
+    ///         ClusterId = "cynosdbmysql-bws8h88b",
+    ///         Description = "terraform test",
+    ///         Host = "%",
+    ///         MaxUserConnections = 2,
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// cynosdb account can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Cynosdb/account:Account account account_id
+    /// $ pulumi import tencentcloud:Cynosdb/account:Account account account_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Cynosdb/account:Account")]
-    public partial class Account : Pulumi.CustomResource
+    public partial class Account : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Account name, including alphanumeric _, Start with a letter, end with a letter or number, length 1-16.
@@ -108,6 +109,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
             {
                 Version = Utilities.Version,
                 PluginDownloadURL = "github://api.github.com/tencentcloudstack",
+                AdditionalSecretOutputs =
+                {
+                    "accountPassword",
+                },
             };
             var merged = CustomResourceOptions.Merge(defaultOptions, options);
             // Override the ID if one was specified for consistency with other language SDKs.
@@ -129,7 +134,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
         }
     }
 
-    public sealed class AccountArgs : Pulumi.ResourceArgs
+    public sealed class AccountArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Account name, including alphanumeric _, Start with a letter, end with a letter or number, length 1-16.
@@ -137,11 +142,21 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
         [Input("accountName", required: true)]
         public Input<string> AccountName { get; set; } = null!;
 
+        [Input("accountPassword", required: true)]
+        private Input<string>? _accountPassword;
+
         /// <summary>
         /// Password, with a length range of 8 to 64 characters.
         /// </summary>
-        [Input("accountPassword", required: true)]
-        public Input<string> AccountPassword { get; set; } = null!;
+        public Input<string>? AccountPassword
+        {
+            get => _accountPassword;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _accountPassword = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
 
         /// <summary>
         /// Cluster ID.
@@ -170,9 +185,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
         public AccountArgs()
         {
         }
+        public static new AccountArgs Empty => new AccountArgs();
     }
 
-    public sealed class AccountState : Pulumi.ResourceArgs
+    public sealed class AccountState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Account name, including alphanumeric _, Start with a letter, end with a letter or number, length 1-16.
@@ -180,11 +196,21 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
         [Input("accountName")]
         public Input<string>? AccountName { get; set; }
 
+        [Input("accountPassword")]
+        private Input<string>? _accountPassword;
+
         /// <summary>
         /// Password, with a length range of 8 to 64 characters.
         /// </summary>
-        [Input("accountPassword")]
-        public Input<string>? AccountPassword { get; set; }
+        public Input<string>? AccountPassword
+        {
+            get => _accountPassword;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _accountPassword = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
 
         /// <summary>
         /// Cluster ID.
@@ -213,5 +239,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
         public AccountState()
         {
         }
+        public static new AccountState Empty => new AccountState();
     }
 }

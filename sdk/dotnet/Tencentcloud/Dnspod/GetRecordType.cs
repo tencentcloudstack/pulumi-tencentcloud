@@ -15,64 +15,58 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dnspod
         /// <summary>
         /// Use this data source to query detailed information of dnspod record_type
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var recordType = Tencentcloud.Dnspod.GetRecordType.Invoke(new()
         ///     {
-        ///         var recordType = Output.Create(Tencentcloud.Dnspod.GetRecordType.InvokeAsync(new Tencentcloud.Dnspod.GetRecordTypeArgs
-        ///         {
-        ///             DomainGrade = "DP_FREE",
-        ///         }));
-        ///     }
+        ///         DomainGrade = "DP_FREE",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetRecordTypeResult> InvokeAsync(GetRecordTypeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetRecordTypeResult>("tencentcloud:Dnspod/getRecordType:getRecordType", args ?? new GetRecordTypeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetRecordTypeResult>("tencentcloud:Dnspod/getRecordType:getRecordType", args ?? new GetRecordTypeArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of dnspod record_type
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var recordType = Tencentcloud.Dnspod.GetRecordType.Invoke(new()
         ///     {
-        ///         var recordType = Output.Create(Tencentcloud.Dnspod.GetRecordType.InvokeAsync(new Tencentcloud.Dnspod.GetRecordTypeArgs
-        ///         {
-        ///             DomainGrade = "DP_FREE",
-        ///         }));
-        ///     }
+        ///         DomainGrade = "DP_FREE",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetRecordTypeResult> Invoke(GetRecordTypeInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetRecordTypeResult>("tencentcloud:Dnspod/getRecordType:getRecordType", args ?? new GetRecordTypeInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetRecordTypeResult>("tencentcloud:Dnspod/getRecordType:getRecordType", args ?? new GetRecordTypeInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetRecordTypeArgs : Pulumi.InvokeArgs
+    public sealed class GetRecordTypeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Domain level. + Old packages: D_FREE, D_PLUS, D_EXTRA, D_EXPERT, D_ULTRA correspond to free package, personal luxury, enterprise 1, enterprise 2, enterprise 3. + New packages: DP_FREE, DP_PLUS, DP_EXTRA, DP_EXPERT, DP_ULTRA correspond to new free, personal professional, enterprise basic, enterprise standard, enterprise flagship.
@@ -89,9 +83,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dnspod
         public GetRecordTypeArgs()
         {
         }
+        public static new GetRecordTypeArgs Empty => new GetRecordTypeArgs();
     }
 
-    public sealed class GetRecordTypeInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetRecordTypeInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Domain level. + Old packages: D_FREE, D_PLUS, D_EXTRA, D_EXPERT, D_ULTRA correspond to free package, personal luxury, enterprise 1, enterprise 2, enterprise 3. + New packages: DP_FREE, DP_PLUS, DP_EXTRA, DP_EXPERT, DP_ULTRA correspond to new free, personal professional, enterprise basic, enterprise standard, enterprise flagship.
@@ -108,6 +103,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dnspod
         public GetRecordTypeInvokeArgs()
         {
         }
+        public static new GetRecordTypeInvokeArgs Empty => new GetRecordTypeInvokeArgs();
     }
 
 

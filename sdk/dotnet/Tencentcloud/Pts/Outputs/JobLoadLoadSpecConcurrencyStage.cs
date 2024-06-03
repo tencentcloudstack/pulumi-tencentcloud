@@ -14,7 +14,13 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Pts.Outputs
     [OutputType]
     public sealed class JobLoadLoadSpecConcurrencyStage
     {
+        /// <summary>
+        /// Pressure time.
+        /// </summary>
         public readonly int? DurationSeconds;
+        /// <summary>
+        /// Number of virtual users.
+        /// </summary>
         public readonly int? TargetVirtualUsers;
 
         [OutputConstructor]

@@ -8,11 +8,12 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Use this data source to query detailed information of postgresql baseBackups
 func GetBaseBackups(ctx *pulumi.Context, args *GetBaseBackupsArgs, opts ...pulumi.InvokeOption) (*GetBaseBackupsResult, error) {
-	opts = pkgInvokeDefaultOpts(opts)
+	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetBaseBackupsResult
 	err := ctx.Invoke("tencentcloud:Postgresql/getBaseBackups:getBaseBackups", args, &rv, opts...)
 	if err != nil {

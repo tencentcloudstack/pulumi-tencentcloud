@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dayu.Inputs
 {
 
-    public sealed class CcPolicyV2CcPrecisionPolicyArgs : Pulumi.ResourceArgs
+    public sealed class CcPolicyV2CcPrecisionPolicyArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Domain.
@@ -31,6 +31,9 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dayu.Inputs
         [Input("policyAction", required: true)]
         public Input<string> PolicyAction { get; set; } = null!;
 
+        /// <summary>
+        /// Policy Id.
+        /// </summary>
         [Input("policyId")]
         public Input<string>? PolicyId { get; set; }
 
@@ -55,5 +58,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dayu.Inputs
         public CcPolicyV2CcPrecisionPolicyArgs()
         {
         }
+        public static new CcPolicyV2CcPrecisionPolicyArgs Empty => new CcPolicyV2CcPrecisionPolicyArgs();
     }
 }

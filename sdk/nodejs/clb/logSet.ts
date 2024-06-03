@@ -9,21 +9,21 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const foo = new tencentcloud.Clb.LogSet("foo", {
- *     period: 7,
- * });
+ * const foo = new tencentcloud.clb.LogSet("foo", {period: 7});
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * CLB log set can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Clb/logSet:LogSet foo 4eb9e3a8-9c42-4b32-9ddf-e215e9c92764
+ * $ pulumi import tencentcloud:Clb/logSet:LogSet foo 4eb9e3a8-9c42-4b32-9ddf-e215e9c92764
  * ```
  */
 export class LogSet extends pulumi.CustomResource {

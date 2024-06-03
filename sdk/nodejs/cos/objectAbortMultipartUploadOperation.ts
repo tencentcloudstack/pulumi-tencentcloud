@@ -9,16 +9,18 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const abortMultipartUpload = new tencentcloud.Cos.ObjectAbortMultipartUploadOperation("abort_multipart_upload", {
+ * const abortMultipartUpload = new tencentcloud.cos.ObjectAbortMultipartUploadOperation("abortMultipartUpload", {
  *     bucket: "keep-test-xxxxxx",
  *     key: "object",
  *     uploadId: "xxxxxx",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export class ObjectAbortMultipartUploadOperation extends pulumi.CustomResource {
     /**

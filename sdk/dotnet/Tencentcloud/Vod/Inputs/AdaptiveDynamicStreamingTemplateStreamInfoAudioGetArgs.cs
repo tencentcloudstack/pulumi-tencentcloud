@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vod.Inputs
 {
 
-    public sealed class AdaptiveDynamicStreamingTemplateStreamInfoAudioGetArgs : Pulumi.ResourceArgs
+    public sealed class AdaptiveDynamicStreamingTemplateStreamInfoAudioGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Audio channel system. Valid values: mono, dual, stereo. Default value: dual.
@@ -40,5 +40,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vod.Inputs
         public AdaptiveDynamicStreamingTemplateStreamInfoAudioGetArgs()
         {
         }
+        public static new AdaptiveDynamicStreamingTemplateStreamInfoAudioGetArgs Empty => new AdaptiveDynamicStreamingTemplateStreamInfoAudioGetArgs();
     }
 }

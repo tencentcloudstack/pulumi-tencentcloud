@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,21 +11,20 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const mountTargets = pulumi.output(tencentcloud.Cfs.getMountTargets({
+ * const mountTargets = tencentcloud.Cfs.getMountTargets({
  *     fileSystemId: "cfs-iobiaxtj",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getMountTargets(args: GetMountTargetsArgs, opts?: pulumi.InvokeOptions): Promise<GetMountTargetsResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Cfs/getMountTargets:getMountTargets", {
         "fileSystemId": args.fileSystemId,
         "resultOutputFile": args.resultOutputFile,
@@ -63,9 +63,24 @@ export interface GetMountTargetsResult {
     readonly mountTargets: outputs.Cfs.GetMountTargetsMountTarget[];
     readonly resultOutputFile?: string;
 }
-
+/**
+ * Use this data source to query detailed information of cfs mountTargets
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const mountTargets = tencentcloud.Cfs.getMountTargets({
+ *     fileSystemId: "cfs-iobiaxtj",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getMountTargetsOutput(args: GetMountTargetsOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetMountTargetsResult> {
-    return pulumi.output(args).apply(a => getMountTargets(a, opts))
+    return pulumi.output(args).apply((a: any) => getMountTargets(a, opts))
 }
 
 /**

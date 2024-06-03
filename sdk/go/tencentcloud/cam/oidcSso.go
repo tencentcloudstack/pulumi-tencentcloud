@@ -7,51 +7,57 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a CAM-OIDC-SSO.
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cam"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cam"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Cam.NewOidcSso(ctx, "foo", &Cam.OidcSsoArgs{
-// 			AuthorizationEndpoint: pulumi.String("https://login.microsoftonline.com/.../oauth2/v2.0/authorize"),
-// 			ClientId:              pulumi.String("..."),
-// 			IdentityKey:           pulumi.String("..."),
-// 			IdentityUrl:           pulumi.String("https://login.microsoftonline.com/.../v2.0"),
-// 			MappingFiled:          pulumi.String("name"),
-// 			ResponseMode:          pulumi.String("form_post"),
-// 			ResponseType:          pulumi.String("id_token"),
-// 			Scopes: pulumi.StringArray{
-// 				pulumi.String("openid"),
-// 				pulumi.String("email"),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Cam.NewOidcSso(ctx, "foo", &Cam.OidcSsoArgs{
+//				AuthorizationEndpoint: pulumi.String("https://login.microsoftonline.com/.../oauth2/v2.0/authorize"),
+//				ClientId:              pulumi.String("..."),
+//				IdentityKey:           pulumi.String("..."),
+//				IdentityUrl:           pulumi.String("https://login.microsoftonline.com/.../v2.0"),
+//				MappingFiled:          pulumi.String("name"),
+//				ResponseMode:          pulumi.String("form_post"),
+//				ResponseType:          pulumi.String("id_token"),
+//				Scopes: pulumi.StringArray{
+//					pulumi.String("openid"),
+//					pulumi.String("email"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // CAM-OIDC-SSO can be imported using the client_id or any string which can identifier resource, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Cam/oidcSso:OidcSso foo xxxxxxxxxxx
+// $ pulumi import tencentcloud:Cam/oidcSso:OidcSso foo xxxxxxxxxxx
 // ```
 type OidcSso struct {
 	pulumi.CustomResourceState
@@ -102,7 +108,7 @@ func NewOidcSso(ctx *pulumi.Context,
 	if args.ResponseType == nil {
 		return nil, errors.New("invalid value for required argument 'ResponseType'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource OidcSso
 	err := ctx.RegisterResource("tencentcloud:Cam/oidcSso:OidcSso", name, args, &resource, opts...)
 	if err != nil {
@@ -231,7 +237,7 @@ func (i *OidcSso) ToOidcSsoOutputWithContext(ctx context.Context) OidcSsoOutput 
 // OidcSsoArrayInput is an input type that accepts OidcSsoArray and OidcSsoArrayOutput values.
 // You can construct a concrete instance of `OidcSsoArrayInput` via:
 //
-//          OidcSsoArray{ OidcSsoArgs{...} }
+//	OidcSsoArray{ OidcSsoArgs{...} }
 type OidcSsoArrayInput interface {
 	pulumi.Input
 
@@ -256,7 +262,7 @@ func (i OidcSsoArray) ToOidcSsoArrayOutputWithContext(ctx context.Context) OidcS
 // OidcSsoMapInput is an input type that accepts OidcSsoMap and OidcSsoMapOutput values.
 // You can construct a concrete instance of `OidcSsoMapInput` via:
 //
-//          OidcSsoMap{ "key": OidcSsoArgs{...} }
+//	OidcSsoMap{ "key": OidcSsoArgs{...} }
 type OidcSsoMapInput interface {
 	pulumi.Input
 

@@ -8,7 +8,10 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
+
+var _ = internal.GetEnvOrDefault
 
 type ConnectionSecurityGroupPolicy struct {
 	// Local cidr block.
@@ -20,7 +23,7 @@ type ConnectionSecurityGroupPolicy struct {
 // ConnectionSecurityGroupPolicyInput is an input type that accepts ConnectionSecurityGroupPolicyArgs and ConnectionSecurityGroupPolicyOutput values.
 // You can construct a concrete instance of `ConnectionSecurityGroupPolicyInput` via:
 //
-//          ConnectionSecurityGroupPolicyArgs{...}
+//	ConnectionSecurityGroupPolicyArgs{...}
 type ConnectionSecurityGroupPolicyInput interface {
 	pulumi.Input
 
@@ -50,7 +53,7 @@ func (i ConnectionSecurityGroupPolicyArgs) ToConnectionSecurityGroupPolicyOutput
 // ConnectionSecurityGroupPolicyArrayInput is an input type that accepts ConnectionSecurityGroupPolicyArray and ConnectionSecurityGroupPolicyArrayOutput values.
 // You can construct a concrete instance of `ConnectionSecurityGroupPolicyArrayInput` via:
 //
-//          ConnectionSecurityGroupPolicyArray{ ConnectionSecurityGroupPolicyArgs{...} }
+//	ConnectionSecurityGroupPolicyArray{ ConnectionSecurityGroupPolicyArgs{...} }
 type ConnectionSecurityGroupPolicyArrayInput interface {
 	pulumi.Input
 
@@ -128,7 +131,7 @@ type CustomerGatewayConfigurationDownloadCustomerGatewayVendor struct {
 // CustomerGatewayConfigurationDownloadCustomerGatewayVendorInput is an input type that accepts CustomerGatewayConfigurationDownloadCustomerGatewayVendorArgs and CustomerGatewayConfigurationDownloadCustomerGatewayVendorOutput values.
 // You can construct a concrete instance of `CustomerGatewayConfigurationDownloadCustomerGatewayVendorInput` via:
 //
-//          CustomerGatewayConfigurationDownloadCustomerGatewayVendorArgs{...}
+//	CustomerGatewayConfigurationDownloadCustomerGatewayVendorArgs{...}
 type CustomerGatewayConfigurationDownloadCustomerGatewayVendorInput interface {
 	pulumi.Input
 
@@ -168,11 +171,11 @@ func (i CustomerGatewayConfigurationDownloadCustomerGatewayVendorArgs) ToCustome
 // CustomerGatewayConfigurationDownloadCustomerGatewayVendorPtrInput is an input type that accepts CustomerGatewayConfigurationDownloadCustomerGatewayVendorArgs, CustomerGatewayConfigurationDownloadCustomerGatewayVendorPtr and CustomerGatewayConfigurationDownloadCustomerGatewayVendorPtrOutput values.
 // You can construct a concrete instance of `CustomerGatewayConfigurationDownloadCustomerGatewayVendorPtrInput` via:
 //
-//          CustomerGatewayConfigurationDownloadCustomerGatewayVendorArgs{...}
+//	        CustomerGatewayConfigurationDownloadCustomerGatewayVendorArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type CustomerGatewayConfigurationDownloadCustomerGatewayVendorPtrInput interface {
 	pulumi.Input
 
@@ -359,7 +362,7 @@ type GetConnectionsConnectionList struct {
 // GetConnectionsConnectionListInput is an input type that accepts GetConnectionsConnectionListArgs and GetConnectionsConnectionListOutput values.
 // You can construct a concrete instance of `GetConnectionsConnectionListInput` via:
 //
-//          GetConnectionsConnectionListArgs{...}
+//	GetConnectionsConnectionListArgs{...}
 type GetConnectionsConnectionListInput interface {
 	pulumi.Input
 
@@ -447,7 +450,7 @@ func (i GetConnectionsConnectionListArgs) ToGetConnectionsConnectionListOutputWi
 // GetConnectionsConnectionListArrayInput is an input type that accepts GetConnectionsConnectionListArray and GetConnectionsConnectionListArrayOutput values.
 // You can construct a concrete instance of `GetConnectionsConnectionListArrayInput` via:
 //
-//          GetConnectionsConnectionListArray{ GetConnectionsConnectionListArgs{...} }
+//	GetConnectionsConnectionListArray{ GetConnectionsConnectionListArgs{...} }
 type GetConnectionsConnectionListArrayInput interface {
 	pulumi.Input
 
@@ -670,7 +673,7 @@ type GetConnectionsConnectionListSecurityGroupPolicy struct {
 // GetConnectionsConnectionListSecurityGroupPolicyInput is an input type that accepts GetConnectionsConnectionListSecurityGroupPolicyArgs and GetConnectionsConnectionListSecurityGroupPolicyOutput values.
 // You can construct a concrete instance of `GetConnectionsConnectionListSecurityGroupPolicyInput` via:
 //
-//          GetConnectionsConnectionListSecurityGroupPolicyArgs{...}
+//	GetConnectionsConnectionListSecurityGroupPolicyArgs{...}
 type GetConnectionsConnectionListSecurityGroupPolicyInput interface {
 	pulumi.Input
 
@@ -700,7 +703,7 @@ func (i GetConnectionsConnectionListSecurityGroupPolicyArgs) ToGetConnectionsCon
 // GetConnectionsConnectionListSecurityGroupPolicyArrayInput is an input type that accepts GetConnectionsConnectionListSecurityGroupPolicyArray and GetConnectionsConnectionListSecurityGroupPolicyArrayOutput values.
 // You can construct a concrete instance of `GetConnectionsConnectionListSecurityGroupPolicyArrayInput` via:
 //
-//          GetConnectionsConnectionListSecurityGroupPolicyArray{ GetConnectionsConnectionListSecurityGroupPolicyArgs{...} }
+//	GetConnectionsConnectionListSecurityGroupPolicyArray{ GetConnectionsConnectionListSecurityGroupPolicyArgs{...} }
 type GetConnectionsConnectionListSecurityGroupPolicyArrayInput interface {
 	pulumi.Input
 
@@ -778,7 +781,7 @@ type GetCustomerGatewayVendorsCustomerGatewayVendorSet struct {
 // GetCustomerGatewayVendorsCustomerGatewayVendorSetInput is an input type that accepts GetCustomerGatewayVendorsCustomerGatewayVendorSetArgs and GetCustomerGatewayVendorsCustomerGatewayVendorSetOutput values.
 // You can construct a concrete instance of `GetCustomerGatewayVendorsCustomerGatewayVendorSetInput` via:
 //
-//          GetCustomerGatewayVendorsCustomerGatewayVendorSetArgs{...}
+//	GetCustomerGatewayVendorsCustomerGatewayVendorSetArgs{...}
 type GetCustomerGatewayVendorsCustomerGatewayVendorSetInput interface {
 	pulumi.Input
 
@@ -810,7 +813,7 @@ func (i GetCustomerGatewayVendorsCustomerGatewayVendorSetArgs) ToGetCustomerGate
 // GetCustomerGatewayVendorsCustomerGatewayVendorSetArrayInput is an input type that accepts GetCustomerGatewayVendorsCustomerGatewayVendorSetArray and GetCustomerGatewayVendorsCustomerGatewayVendorSetArrayOutput values.
 // You can construct a concrete instance of `GetCustomerGatewayVendorsCustomerGatewayVendorSetArrayInput` via:
 //
-//          GetCustomerGatewayVendorsCustomerGatewayVendorSetArray{ GetCustomerGatewayVendorsCustomerGatewayVendorSetArgs{...} }
+//	GetCustomerGatewayVendorsCustomerGatewayVendorSetArray{ GetCustomerGatewayVendorsCustomerGatewayVendorSetArgs{...} }
 type GetCustomerGatewayVendorsCustomerGatewayVendorSetArrayInput interface {
 	pulumi.Input
 
@@ -897,7 +900,7 @@ type GetCustomerGatewaysGatewayList struct {
 // GetCustomerGatewaysGatewayListInput is an input type that accepts GetCustomerGatewaysGatewayListArgs and GetCustomerGatewaysGatewayListOutput values.
 // You can construct a concrete instance of `GetCustomerGatewaysGatewayListInput` via:
 //
-//          GetCustomerGatewaysGatewayListArgs{...}
+//	GetCustomerGatewaysGatewayListArgs{...}
 type GetCustomerGatewaysGatewayListInput interface {
 	pulumi.Input
 
@@ -933,7 +936,7 @@ func (i GetCustomerGatewaysGatewayListArgs) ToGetCustomerGatewaysGatewayListOutp
 // GetCustomerGatewaysGatewayListArrayInput is an input type that accepts GetCustomerGatewaysGatewayListArray and GetCustomerGatewaysGatewayListArrayOutput values.
 // You can construct a concrete instance of `GetCustomerGatewaysGatewayListArrayInput` via:
 //
-//          GetCustomerGatewaysGatewayListArray{ GetCustomerGatewaysGatewayListArgs{...} }
+//	GetCustomerGatewaysGatewayListArray{ GetCustomerGatewaysGatewayListArgs{...} }
 type GetCustomerGatewaysGatewayListArrayInput interface {
 	pulumi.Input
 
@@ -1016,16 +1019,19 @@ func (o GetCustomerGatewaysGatewayListArrayOutput) Index(i pulumi.IntInput) GetC
 
 type GetGatewayRoutesVpnGatewayRouteList struct {
 	// Create time.
-	CreateTime           string `pulumi:"createTime"`
+	CreateTime string `pulumi:"createTime"`
+	// Destination IDC IP range.
 	DestinationCidrBlock string `pulumi:"destinationCidrBlock"`
 	// Instance ID of the next hop.
 	InstanceId string `pulumi:"instanceId"`
 	// Next hop type (type of the associated instance). Valid values: VPNCONN (VPN tunnel) and CCN (CCN instance).
 	InstanceType string `pulumi:"instanceType"`
-	Priority     int    `pulumi:"priority"`
+	// Priority. Valid values: 0 and 100.
+	Priority int `pulumi:"priority"`
 	// Route ID.
 	RouteId string `pulumi:"routeId"`
-	Status  string `pulumi:"status"`
+	// Status. Valid values: ENABLE and DISABLE.
+	Status string `pulumi:"status"`
 	// Route type. Default value: Static.
 	Type string `pulumi:"type"`
 	// Update time.
@@ -1037,7 +1043,7 @@ type GetGatewayRoutesVpnGatewayRouteList struct {
 // GetGatewayRoutesVpnGatewayRouteListInput is an input type that accepts GetGatewayRoutesVpnGatewayRouteListArgs and GetGatewayRoutesVpnGatewayRouteListOutput values.
 // You can construct a concrete instance of `GetGatewayRoutesVpnGatewayRouteListInput` via:
 //
-//          GetGatewayRoutesVpnGatewayRouteListArgs{...}
+//	GetGatewayRoutesVpnGatewayRouteListArgs{...}
 type GetGatewayRoutesVpnGatewayRouteListInput interface {
 	pulumi.Input
 
@@ -1047,16 +1053,19 @@ type GetGatewayRoutesVpnGatewayRouteListInput interface {
 
 type GetGatewayRoutesVpnGatewayRouteListArgs struct {
 	// Create time.
-	CreateTime           pulumi.StringInput `pulumi:"createTime"`
+	CreateTime pulumi.StringInput `pulumi:"createTime"`
+	// Destination IDC IP range.
 	DestinationCidrBlock pulumi.StringInput `pulumi:"destinationCidrBlock"`
 	// Instance ID of the next hop.
 	InstanceId pulumi.StringInput `pulumi:"instanceId"`
 	// Next hop type (type of the associated instance). Valid values: VPNCONN (VPN tunnel) and CCN (CCN instance).
 	InstanceType pulumi.StringInput `pulumi:"instanceType"`
-	Priority     pulumi.IntInput    `pulumi:"priority"`
+	// Priority. Valid values: 0 and 100.
+	Priority pulumi.IntInput `pulumi:"priority"`
 	// Route ID.
 	RouteId pulumi.StringInput `pulumi:"routeId"`
-	Status  pulumi.StringInput `pulumi:"status"`
+	// Status. Valid values: ENABLE and DISABLE.
+	Status pulumi.StringInput `pulumi:"status"`
 	// Route type. Default value: Static.
 	Type pulumi.StringInput `pulumi:"type"`
 	// Update time.
@@ -1080,7 +1089,7 @@ func (i GetGatewayRoutesVpnGatewayRouteListArgs) ToGetGatewayRoutesVpnGatewayRou
 // GetGatewayRoutesVpnGatewayRouteListArrayInput is an input type that accepts GetGatewayRoutesVpnGatewayRouteListArray and GetGatewayRoutesVpnGatewayRouteListArrayOutput values.
 // You can construct a concrete instance of `GetGatewayRoutesVpnGatewayRouteListArrayInput` via:
 //
-//          GetGatewayRoutesVpnGatewayRouteListArray{ GetGatewayRoutesVpnGatewayRouteListArgs{...} }
+//	GetGatewayRoutesVpnGatewayRouteListArray{ GetGatewayRoutesVpnGatewayRouteListArgs{...} }
 type GetGatewayRoutesVpnGatewayRouteListArrayInput interface {
 	pulumi.Input
 
@@ -1121,6 +1130,7 @@ func (o GetGatewayRoutesVpnGatewayRouteListOutput) CreateTime() pulumi.StringOut
 	return o.ApplyT(func(v GetGatewayRoutesVpnGatewayRouteList) string { return v.CreateTime }).(pulumi.StringOutput)
 }
 
+// Destination IDC IP range.
 func (o GetGatewayRoutesVpnGatewayRouteListOutput) DestinationCidrBlock() pulumi.StringOutput {
 	return o.ApplyT(func(v GetGatewayRoutesVpnGatewayRouteList) string { return v.DestinationCidrBlock }).(pulumi.StringOutput)
 }
@@ -1135,6 +1145,7 @@ func (o GetGatewayRoutesVpnGatewayRouteListOutput) InstanceType() pulumi.StringO
 	return o.ApplyT(func(v GetGatewayRoutesVpnGatewayRouteList) string { return v.InstanceType }).(pulumi.StringOutput)
 }
 
+// Priority. Valid values: 0 and 100.
 func (o GetGatewayRoutesVpnGatewayRouteListOutput) Priority() pulumi.IntOutput {
 	return o.ApplyT(func(v GetGatewayRoutesVpnGatewayRouteList) int { return v.Priority }).(pulumi.IntOutput)
 }
@@ -1144,6 +1155,7 @@ func (o GetGatewayRoutesVpnGatewayRouteListOutput) RouteId() pulumi.StringOutput
 	return o.ApplyT(func(v GetGatewayRoutesVpnGatewayRouteList) string { return v.RouteId }).(pulumi.StringOutput)
 }
 
+// Status. Valid values: ENABLE and DISABLE.
 func (o GetGatewayRoutesVpnGatewayRouteListOutput) Status() pulumi.StringOutput {
 	return o.ApplyT(func(v GetGatewayRoutesVpnGatewayRouteList) string { return v.Status }).(pulumi.StringOutput)
 }
@@ -1221,7 +1233,7 @@ type GetGatewaysGatewayList struct {
 // GetGatewaysGatewayListInput is an input type that accepts GetGatewaysGatewayListArgs and GetGatewaysGatewayListOutput values.
 // You can construct a concrete instance of `GetGatewaysGatewayListInput` via:
 //
-//          GetGatewaysGatewayListArgs{...}
+//	GetGatewaysGatewayListArgs{...}
 type GetGatewaysGatewayListInput interface {
 	pulumi.Input
 
@@ -1279,7 +1291,7 @@ func (i GetGatewaysGatewayListArgs) ToGetGatewaysGatewayListOutputWithContext(ct
 // GetGatewaysGatewayListArrayInput is an input type that accepts GetGatewaysGatewayListArray and GetGatewaysGatewayListArrayOutput values.
 // You can construct a concrete instance of `GetGatewaysGatewayListArrayInput` via:
 //
-//          GetGatewaysGatewayListArray{ GetGatewaysGatewayListArgs{...} }
+//	GetGatewaysGatewayListArray{ GetGatewaysGatewayListArgs{...} }
 type GetGatewaysGatewayListArrayInput interface {
 	pulumi.Input
 

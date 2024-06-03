@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,26 +11,25 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const alarmConditionsTemplate = pulumi.output(tencentcloud.Monitor.getAlarmConditionsTemplate({
+ * const alarmConditionsTemplate = tencentcloud.Monitor.getAlarmConditionsTemplate({
  *     groupId: "7803070",
  *     groupName: "keep-template",
  *     module: "monitor",
  *     policyCountOrder: "asc=ascending",
  *     updateTimeOrder: "desc=descending",
  *     viewName: "cvm_device",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getAlarmConditionsTemplate(args: GetAlarmConditionsTemplateArgs, opts?: pulumi.InvokeOptions): Promise<GetAlarmConditionsTemplateResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Monitor/getAlarmConditionsTemplate:getAlarmConditionsTemplate", {
         "groupId": args.groupId,
         "groupName": args.groupName,
@@ -104,9 +104,29 @@ export interface GetAlarmConditionsTemplateResult {
      */
     readonly viewName?: string;
 }
-
+/**
+ * Use this data source to query detailed information of monitor alarmConditionsTemplate
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const alarmConditionsTemplate = tencentcloud.Monitor.getAlarmConditionsTemplate({
+ *     groupId: "7803070",
+ *     groupName: "keep-template",
+ *     module: "monitor",
+ *     policyCountOrder: "asc=ascending",
+ *     updateTimeOrder: "desc=descending",
+ *     viewName: "cvm_device",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getAlarmConditionsTemplateOutput(args: GetAlarmConditionsTemplateOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetAlarmConditionsTemplateResult> {
-    return pulumi.output(args).apply(a => getAlarmConditionsTemplate(a, opts))
+    return pulumi.output(args).apply((a: any) => getAlarmConditionsTemplate(a, opts))
 }
 
 /**

@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka.Inputs
 {
 
-    public sealed class AclRuleRuleListGetArgs : Pulumi.ResourceArgs
+    public sealed class AclRuleRuleListGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// The default is *, which means that any host can be accessed. Currently, ckafka does not support host and ip network segment.
@@ -40,5 +40,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka.Inputs
         public AclRuleRuleListGetArgs()
         {
         }
+        public static new AclRuleRuleListGetArgs Empty => new AclRuleRuleListGetArgs();
     }
 }

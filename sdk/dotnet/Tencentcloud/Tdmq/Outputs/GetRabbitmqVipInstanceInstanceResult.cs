@@ -14,20 +14,65 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdmq.Outputs
     [OutputType]
     public sealed class GetRabbitmqVipInstanceInstanceResult
     {
+        /// <summary>
+        /// Automatic renewal mark, 0 indicates the default state (the user has not set it, that is, the initial state is manual renewal), 1 indicates automatic renewal, 2 indicates that the automatic renewal is not specified (user setting).
+        /// </summary>
         public readonly int AutoRenewFlag;
+        /// <summary>
+        /// Instance configuration specification name.
+        /// </summary>
         public readonly string ConfigDisplay;
+        /// <summary>
+        /// The cluster is abnormal.Note: This field may return null, indicating that no valid value can be obtained.
+        /// </summary>
         public readonly string ExceptionInformation;
+        /// <summary>
+        /// Instance expiration time, in milliseconds.
+        /// </summary>
         public readonly int ExpireTime;
+        /// <summary>
+        /// instance id.
+        /// </summary>
         public readonly string InstanceId;
+        /// <summary>
+        /// instance name.
+        /// </summary>
         public readonly string InstanceName;
+        /// <summary>
+        /// instance versionNote: This field may return null, indicating that no valid value can be obtained.
+        /// </summary>
         public readonly string InstanceVersion;
+        /// <summary>
+        /// Peak bandwidth, in Mbps.
+        /// </summary>
         public readonly int MaxBandWidth;
+        /// <summary>
+        /// Storage capacity, in GB.
+        /// </summary>
         public readonly int MaxStorage;
+        /// <summary>
+        /// Peak TPS.
+        /// </summary>
         public readonly int MaxTps;
+        /// <summary>
+        /// Number of nodes.
+        /// </summary>
         public readonly int NodeCount;
+        /// <summary>
+        /// 0-postpaid, 1-prepaid.
+        /// </summary>
         public readonly int PayMode;
+        /// <summary>
+        /// RemarksNote: This field may return null, indicating that no valid value can be obtained.
+        /// </summary>
         public readonly string Remark;
+        /// <summary>
+        /// Instance Configuration ID.
+        /// </summary>
         public readonly string SpecName;
+        /// <summary>
+        /// Instance status, 0 means creating, 1 means normal, 2 means isolating, 3 means destroyed, 4 - abnormal, 5 - delivery failed.
+        /// </summary>
         public readonly int Status;
 
         [OutputConstructor]

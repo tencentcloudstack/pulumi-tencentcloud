@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ci.Inputs
 {
 
-    public sealed class MediaWatermarkTemplateWatermarkTextArgs : Pulumi.ResourceArgs
+    public sealed class MediaWatermarkTemplateWatermarkTextArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Font color, format: 0xRRGGBB.
@@ -46,5 +46,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ci.Inputs
         public MediaWatermarkTemplateWatermarkTextArgs()
         {
         }
+        public static new MediaWatermarkTemplateWatermarkTextArgs Empty => new MediaWatermarkTemplateWatermarkTextArgs();
     }
 }

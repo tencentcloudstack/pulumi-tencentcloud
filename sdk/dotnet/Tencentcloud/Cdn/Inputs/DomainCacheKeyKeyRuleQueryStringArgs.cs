@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cdn.Inputs
 {
 
-    public sealed class DomainCacheKeyKeyRuleQueryStringArgs : Pulumi.ResourceArgs
+    public sealed class DomainCacheKeyKeyRuleQueryStringArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Specify key rule QS action, values: `includeCustom`, `excludeCustom`.
@@ -34,5 +34,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cdn.Inputs
         public DomainCacheKeyKeyRuleQueryStringArgs()
         {
         }
+        public static new DomainCacheKeyKeyRuleQueryStringArgs Empty => new DomainCacheKeyKeyRuleQueryStringArgs();
     }
 }

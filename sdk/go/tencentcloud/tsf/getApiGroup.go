@@ -8,41 +8,46 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Use this data source to query detailed information of tsf apiGroup
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Tsf"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tsf"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tsf"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Tsf.GetApiGroup(ctx, &tsf.GetApiGroupArgs{
-// 			AuthType:          pulumi.StringRef("none"),
-// 			GatewayInstanceId: pulumi.StringRef("gw-ins-lvdypq5k"),
-// 			GroupType:         pulumi.StringRef("ms"),
-// 			OrderBy:           pulumi.StringRef("created_time"),
-// 			OrderType:         pulumi.IntRef(0),
-// 			SearchWord:        pulumi.StringRef("xxx01"),
-// 			Status:            pulumi.StringRef("released"),
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Tsf.GetApiGroup(ctx, &tsf.GetApiGroupArgs{
+//				AuthType:          pulumi.StringRef("none"),
+//				GatewayInstanceId: pulumi.StringRef("gw-ins-lvdypq5k"),
+//				GroupType:         pulumi.StringRef("ms"),
+//				OrderBy:           pulumi.StringRef("created_time"),
+//				OrderType:         pulumi.IntRef(0),
+//				SearchWord:        pulumi.StringRef("xxx01"),
+//				Status:            pulumi.StringRef("released"),
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 func LookupApiGroup(ctx *pulumi.Context, args *LookupApiGroupArgs, opts ...pulumi.InvokeOption) (*LookupApiGroupResult, error) {
-	opts = pkgInvokeDefaultOpts(opts)
+	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv LookupApiGroupResult
 	err := ctx.Invoke("tencentcloud:Tsf/getApiGroup:getApiGroup", args, &rv, opts...)
 	if err != nil {

@@ -5,32 +5,81 @@ import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
 // Export members:
-export * from "./account";
-export * from "./accountPermission";
-export * from "./backup";
-export * from "./backupStrategy";
-export * from "./deleteBackupData";
-export * from "./getBackupJobDetail";
-export * from "./getBackupJobs";
-export * from "./getBackupTables";
-export * from "./getInstanceNodes";
-export * from "./getInstanceShards";
-export * from "./getSpec";
-export * from "./instance";
-export * from "./keyvalConfig";
-export * from "./recoverBackupJob";
-export * from "./xmlConfig";
+export { AccountArgs, AccountState } from "./account";
+export type Account = import("./account").Account;
+export const Account: typeof import("./account").Account = null as any;
+utilities.lazyLoad(exports, ["Account"], () => require("./account"));
 
-// Import resources to register:
-import { Account } from "./account";
-import { AccountPermission } from "./accountPermission";
-import { Backup } from "./backup";
-import { BackupStrategy } from "./backupStrategy";
-import { DeleteBackupData } from "./deleteBackupData";
-import { Instance } from "./instance";
-import { KeyvalConfig } from "./keyvalConfig";
-import { RecoverBackupJob } from "./recoverBackupJob";
-import { XmlConfig } from "./xmlConfig";
+export { AccountPermissionArgs, AccountPermissionState } from "./accountPermission";
+export type AccountPermission = import("./accountPermission").AccountPermission;
+export const AccountPermission: typeof import("./accountPermission").AccountPermission = null as any;
+utilities.lazyLoad(exports, ["AccountPermission"], () => require("./accountPermission"));
+
+export { BackupArgs, BackupState } from "./backup";
+export type Backup = import("./backup").Backup;
+export const Backup: typeof import("./backup").Backup = null as any;
+utilities.lazyLoad(exports, ["Backup"], () => require("./backup"));
+
+export { BackupStrategyArgs, BackupStrategyState } from "./backupStrategy";
+export type BackupStrategy = import("./backupStrategy").BackupStrategy;
+export const BackupStrategy: typeof import("./backupStrategy").BackupStrategy = null as any;
+utilities.lazyLoad(exports, ["BackupStrategy"], () => require("./backupStrategy"));
+
+export { DeleteBackupDataArgs, DeleteBackupDataState } from "./deleteBackupData";
+export type DeleteBackupData = import("./deleteBackupData").DeleteBackupData;
+export const DeleteBackupData: typeof import("./deleteBackupData").DeleteBackupData = null as any;
+utilities.lazyLoad(exports, ["DeleteBackupData"], () => require("./deleteBackupData"));
+
+export { GetBackupJobDetailArgs, GetBackupJobDetailResult, GetBackupJobDetailOutputArgs } from "./getBackupJobDetail";
+export const getBackupJobDetail: typeof import("./getBackupJobDetail").getBackupJobDetail = null as any;
+export const getBackupJobDetailOutput: typeof import("./getBackupJobDetail").getBackupJobDetailOutput = null as any;
+utilities.lazyLoad(exports, ["getBackupJobDetail","getBackupJobDetailOutput"], () => require("./getBackupJobDetail"));
+
+export { GetBackupJobsArgs, GetBackupJobsResult, GetBackupJobsOutputArgs } from "./getBackupJobs";
+export const getBackupJobs: typeof import("./getBackupJobs").getBackupJobs = null as any;
+export const getBackupJobsOutput: typeof import("./getBackupJobs").getBackupJobsOutput = null as any;
+utilities.lazyLoad(exports, ["getBackupJobs","getBackupJobsOutput"], () => require("./getBackupJobs"));
+
+export { GetBackupTablesArgs, GetBackupTablesResult, GetBackupTablesOutputArgs } from "./getBackupTables";
+export const getBackupTables: typeof import("./getBackupTables").getBackupTables = null as any;
+export const getBackupTablesOutput: typeof import("./getBackupTables").getBackupTablesOutput = null as any;
+utilities.lazyLoad(exports, ["getBackupTables","getBackupTablesOutput"], () => require("./getBackupTables"));
+
+export { GetInstanceNodesArgs, GetInstanceNodesResult, GetInstanceNodesOutputArgs } from "./getInstanceNodes";
+export const getInstanceNodes: typeof import("./getInstanceNodes").getInstanceNodes = null as any;
+export const getInstanceNodesOutput: typeof import("./getInstanceNodes").getInstanceNodesOutput = null as any;
+utilities.lazyLoad(exports, ["getInstanceNodes","getInstanceNodesOutput"], () => require("./getInstanceNodes"));
+
+export { GetInstanceShardsArgs, GetInstanceShardsResult, GetInstanceShardsOutputArgs } from "./getInstanceShards";
+export const getInstanceShards: typeof import("./getInstanceShards").getInstanceShards = null as any;
+export const getInstanceShardsOutput: typeof import("./getInstanceShards").getInstanceShardsOutput = null as any;
+utilities.lazyLoad(exports, ["getInstanceShards","getInstanceShardsOutput"], () => require("./getInstanceShards"));
+
+export { GetSpecArgs, GetSpecResult, GetSpecOutputArgs } from "./getSpec";
+export const getSpec: typeof import("./getSpec").getSpec = null as any;
+export const getSpecOutput: typeof import("./getSpec").getSpecOutput = null as any;
+utilities.lazyLoad(exports, ["getSpec","getSpecOutput"], () => require("./getSpec"));
+
+export { InstanceArgs, InstanceState } from "./instance";
+export type Instance = import("./instance").Instance;
+export const Instance: typeof import("./instance").Instance = null as any;
+utilities.lazyLoad(exports, ["Instance"], () => require("./instance"));
+
+export { KeyvalConfigArgs, KeyvalConfigState } from "./keyvalConfig";
+export type KeyvalConfig = import("./keyvalConfig").KeyvalConfig;
+export const KeyvalConfig: typeof import("./keyvalConfig").KeyvalConfig = null as any;
+utilities.lazyLoad(exports, ["KeyvalConfig"], () => require("./keyvalConfig"));
+
+export { RecoverBackupJobArgs, RecoverBackupJobState } from "./recoverBackupJob";
+export type RecoverBackupJob = import("./recoverBackupJob").RecoverBackupJob;
+export const RecoverBackupJob: typeof import("./recoverBackupJob").RecoverBackupJob = null as any;
+utilities.lazyLoad(exports, ["RecoverBackupJob"], () => require("./recoverBackupJob"));
+
+export { XmlConfigArgs, XmlConfigState } from "./xmlConfig";
+export type XmlConfig = import("./xmlConfig").XmlConfig;
+export const XmlConfig: typeof import("./xmlConfig").XmlConfig = null as any;
+utilities.lazyLoad(exports, ["XmlConfig"], () => require("./xmlConfig"));
+
 
 const _module = {
     version: utilities.getVersion(),

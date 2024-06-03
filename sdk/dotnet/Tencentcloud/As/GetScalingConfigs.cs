@@ -15,66 +15,60 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.As
         /// <summary>
         /// Use this data source to query scaling configuration information.
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var asConfigs = Tencentcloud.As.GetScalingConfigs.Invoke(new()
         ///     {
-        ///         var asConfigs = Output.Create(Tencentcloud.As.GetScalingConfigs.InvokeAsync(new Tencentcloud.As.GetScalingConfigsArgs
-        ///         {
-        ///             ConfigurationId = "asc-oqio4yyj",
-        ///             ResultOutputFile = "my_test_path",
-        ///         }));
-        ///     }
+        ///         ConfigurationId = "asc-oqio4yyj",
+        ///         ResultOutputFile = "my_test_path",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetScalingConfigsResult> InvokeAsync(GetScalingConfigsArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetScalingConfigsResult>("tencentcloud:As/getScalingConfigs:getScalingConfigs", args ?? new GetScalingConfigsArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetScalingConfigsResult>("tencentcloud:As/getScalingConfigs:getScalingConfigs", args ?? new GetScalingConfigsArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query scaling configuration information.
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var asConfigs = Tencentcloud.As.GetScalingConfigs.Invoke(new()
         ///     {
-        ///         var asConfigs = Output.Create(Tencentcloud.As.GetScalingConfigs.InvokeAsync(new Tencentcloud.As.GetScalingConfigsArgs
-        ///         {
-        ///             ConfigurationId = "asc-oqio4yyj",
-        ///             ResultOutputFile = "my_test_path",
-        ///         }));
-        ///     }
+        ///         ConfigurationId = "asc-oqio4yyj",
+        ///         ResultOutputFile = "my_test_path",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetScalingConfigsResult> Invoke(GetScalingConfigsInvokeArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetScalingConfigsResult>("tencentcloud:As/getScalingConfigs:getScalingConfigs", args ?? new GetScalingConfigsInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetScalingConfigsResult>("tencentcloud:As/getScalingConfigs:getScalingConfigs", args ?? new GetScalingConfigsInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetScalingConfigsArgs : Pulumi.InvokeArgs
+    public sealed class GetScalingConfigsArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Launch configuration ID.
@@ -97,9 +91,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.As
         public GetScalingConfigsArgs()
         {
         }
+        public static new GetScalingConfigsArgs Empty => new GetScalingConfigsArgs();
     }
 
-    public sealed class GetScalingConfigsInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetScalingConfigsInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Launch configuration ID.
@@ -122,6 +117,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.As
         public GetScalingConfigsInvokeArgs()
         {
         }
+        public static new GetScalingConfigsInvokeArgs Empty => new GetScalingConfigsInvokeArgs();
     }
 
 

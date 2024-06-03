@@ -15,44 +15,45 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Waf
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var example = new Tencentcloud.Waf.AntiInfoLeak("example", new()
     ///     {
-    ///         var example = new Tencentcloud.Waf.AntiInfoLeak("example", new Tencentcloud.Waf.AntiInfoLeakArgs
+    ///         ActionType = 0,
+    ///         Domain = "tf.example.com",
+    ///         Status = 1,
+    ///         Strategies = new[]
     ///         {
-    ///             ActionType = 0,
-    ///             Domain = "tf.example.com",
-    ///             Status = 1,
-    ///             Strategies = 
+    ///             new Tencentcloud.Waf.Inputs.AntiInfoLeakStrategyArgs
     ///             {
-    ///                 new Tencentcloud.Waf.Inputs.AntiInfoLeakStrategyArgs
-    ///                 {
-    ///                     Content = "phone",
-    ///                     Field = "information",
-    ///                 },
+    ///                 Content = "phone",
+    ///                 Field = "information",
     ///             },
-    ///             Uri = "/anti_info_leak_url",
-    ///         });
-    ///     }
+    ///         },
+    ///         Uri = "/anti_info_leak_url",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// waf anti_info_leak can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Waf/antiInfoLeak:AntiInfoLeak example 3100077499#tf.example.com
+    /// $ pulumi import tencentcloud:Waf/antiInfoLeak:AntiInfoLeak example 3100077499#tf.example.com
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Waf/antiInfoLeak:AntiInfoLeak")]
-    public partial class AntiInfoLeak : Pulumi.CustomResource
+    public partial class AntiInfoLeak : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Rule Action. 0: alarm; 1: replacement; 2: only displaying the first four digits; 3: only displaying the last four digits; 4: blocking.
@@ -135,7 +136,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Waf
         }
     }
 
-    public sealed class AntiInfoLeakArgs : Pulumi.ResourceArgs
+    public sealed class AntiInfoLeakArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Rule Action. 0: alarm; 1: replacement; 2: only displaying the first four digits; 3: only displaying the last four digits; 4: blocking.
@@ -182,9 +183,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Waf
         public AntiInfoLeakArgs()
         {
         }
+        public static new AntiInfoLeakArgs Empty => new AntiInfoLeakArgs();
     }
 
-    public sealed class AntiInfoLeakState : Pulumi.ResourceArgs
+    public sealed class AntiInfoLeakState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Rule Action. 0: alarm; 1: replacement; 2: only displaying the first four digits; 3: only displaying the last four digits; 4: blocking.
@@ -231,5 +233,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Waf
         public AntiInfoLeakState()
         {
         }
+        public static new AntiInfoLeakState Empty => new AntiInfoLeakState();
     }
 }

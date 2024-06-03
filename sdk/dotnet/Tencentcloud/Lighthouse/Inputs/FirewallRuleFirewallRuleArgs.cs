@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Lighthouse.Inputs
 {
 
-    public sealed class FirewallRuleFirewallRuleArgs : Pulumi.ResourceArgs
+    public sealed class FirewallRuleFirewallRuleArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Valid values are ACCEPT, DROP. Default value is ACCEPT.
@@ -46,5 +46,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Lighthouse.Inputs
         public FirewallRuleFirewallRuleArgs()
         {
         }
+        public static new FirewallRuleFirewallRuleArgs Empty => new FirewallRuleFirewallRuleArgs();
     }
 }

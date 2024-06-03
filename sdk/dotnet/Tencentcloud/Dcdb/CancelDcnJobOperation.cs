@@ -15,69 +15,78 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dcdb
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = Pulumi.Tencentcloud;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var @internal = Tencentcloud.Security.GetGroups.Invoke(new()
     ///     {
-    ///         var @internal = Output.Create(Tencentcloud.Security.GetGroups.InvokeAsync(new Tencentcloud.Security.GetGroupsArgs
-    ///         {
-    ///             Name = "default",
-    ///         }));
-    ///         var vpc = Output.Create(Tencentcloud.Vpc.GetInstances.InvokeAsync(new Tencentcloud.Vpc.GetInstancesArgs
-    ///         {
-    ///             Name = "Default-VPC",
-    ///         }));
-    ///         var subnet = vpc.Apply(vpc =&gt; Output.Create(Tencentcloud.Vpc.GetSubnets.InvokeAsync(new Tencentcloud.Vpc.GetSubnetsArgs
-    ///         {
-    ///             VpcId = vpc.InstanceLists?[0]?.VpcId,
-    ///         })));
-    ///         var vpcId = subnet.Apply(subnet =&gt; subnet.InstanceLists?[0]?.VpcId);
-    ///         var subnetId = subnet.Apply(subnet =&gt; subnet.InstanceLists?[0]?.SubnetId);
-    ///         var sgId = @internal.Apply(@internal =&gt; @internal.SecurityGroups?[0]?.SecurityGroupId);
-    ///         var hourdbInstanceDcn = new Tencentcloud.Dcdb.HourdbInstance("hourdbInstanceDcn", new Tencentcloud.Dcdb.HourdbInstanceArgs
-    ///         {
-    ///             InstanceName = "test_dcdb_db_hourdb_instance_dcn",
-    ///             Zones = 
-    ///             {
-    ///                 @var.Default_az,
-    ///             },
-    ///             ShardMemory = 2,
-    ///             ShardStorage = 10,
-    ///             ShardNodeCount = 2,
-    ///             ShardCount = 2,
-    ///             VpcId = vpcId,
-    ///             SubnetId = subnetId,
-    ///             SecurityGroupId = sgId,
-    ///             DbVersionId = "8.0",
-    ///             DcnRegion = "ap-guangzhou",
-    ///             DcnInstanceId = local.Dcdb_id,
-    ///             ResourceTags = 
-    ///             {
-    ///                 new Tencentcloud.Dcdb.Inputs.HourdbInstanceResourceTagArgs
-    ///                 {
-    ///                     TagKey = "aaa",
-    ///                     TagValue = "bbb",
-    ///                 },
-    ///             },
-    ///         });
-    ///         var dcnDcdbId = hourdbInstanceDcn.Id;
-    ///         var cancelOperation = new Tencentcloud.Dcdb.CancelDcnJobOperation("cancelOperation", new Tencentcloud.Dcdb.CancelDcnJobOperationArgs
-    ///         {
-    ///             InstanceId = dcnDcdbId,
-    ///         });
-    ///         // cancel the dcn/readonly instance
-    ///     }
+    ///         Name = "default",
+    ///     });
     /// 
-    /// }
+    ///     var vpc = Tencentcloud.Vpc.GetInstances.Invoke(new()
+    ///     {
+    ///         Name = "Default-VPC",
+    ///     });
+    /// 
+    ///     var subnet = Tencentcloud.Vpc.GetSubnets.Invoke(new()
+    ///     {
+    ///         VpcId = vpc.Apply(getInstancesResult =&gt; getInstancesResult.InstanceLists[0]?.VpcId),
+    ///     });
+    /// 
+    ///     var vpcId = subnet.Apply(getSubnetsResult =&gt; getSubnetsResult.InstanceLists[0]?.VpcId);
+    /// 
+    ///     var subnetId = subnet.Apply(getSubnetsResult =&gt; getSubnetsResult.InstanceLists[0]?.SubnetId);
+    /// 
+    ///     var sgId = @internal.Apply(@internal =&gt; @internal.Apply(getGroupsResult =&gt; getGroupsResult.SecurityGroups[0]?.SecurityGroupId));
+    /// 
+    ///     var hourdbInstanceDcn = new Tencentcloud.Dcdb.HourdbInstance("hourdbInstanceDcn", new()
+    ///     {
+    ///         InstanceName = "test_dcdb_db_hourdb_instance_dcn",
+    ///         Zones = new[]
+    ///         {
+    ///             @var.Default_az,
+    ///         },
+    ///         ShardMemory = 2,
+    ///         ShardStorage = 10,
+    ///         ShardNodeCount = 2,
+    ///         ShardCount = 2,
+    ///         VpcId = vpcId,
+    ///         SubnetId = subnetId,
+    ///         SecurityGroupId = sgId,
+    ///         DbVersionId = "8.0",
+    ///         DcnRegion = "ap-guangzhou",
+    ///         DcnInstanceId = local.Dcdb_id,
+    ///         ResourceTags = new[]
+    ///         {
+    ///             new Tencentcloud.Dcdb.Inputs.HourdbInstanceResourceTagArgs
+    ///             {
+    ///                 TagKey = "aaa",
+    ///                 TagValue = "bbb",
+    ///             },
+    ///         },
+    ///     });
+    /// 
+    ///     var dcnDcdbId = hourdbInstanceDcn.Id;
+    /// 
+    ///     var cancelOperation = new Tencentcloud.Dcdb.CancelDcnJobOperation("cancelOperation", new()
+    ///     {
+    ///         InstanceId = dcnDcdbId,
+    ///     });
+    /// 
+    ///     // cancel the dcn/readonly instance
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Dcdb/cancelDcnJobOperation:CancelDcnJobOperation")]
-    public partial class CancelDcnJobOperation : Pulumi.CustomResource
+    public partial class CancelDcnJobOperation : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Instance ID.
@@ -130,7 +139,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dcdb
         }
     }
 
-    public sealed class CancelDcnJobOperationArgs : Pulumi.ResourceArgs
+    public sealed class CancelDcnJobOperationArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Instance ID.
@@ -141,9 +150,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dcdb
         public CancelDcnJobOperationArgs()
         {
         }
+        public static new CancelDcnJobOperationArgs Empty => new CancelDcnJobOperationArgs();
     }
 
-    public sealed class CancelDcnJobOperationState : Pulumi.ResourceArgs
+    public sealed class CancelDcnJobOperationState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Instance ID.
@@ -154,5 +164,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dcdb
         public CancelDcnJobOperationState()
         {
         }
+        public static new CancelDcnJobOperationState Empty => new CancelDcnJobOperationState();
     }
 }

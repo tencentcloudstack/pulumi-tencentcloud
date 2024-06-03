@@ -8,40 +8,43 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Use this data source to query detailed information of tcr imageManifests
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"fmt"
 //
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Tcr"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tcr"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tcr"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Tcr.GetImageManifests(ctx, &tcr.GetImageManifestsArgs{
-// 			ImageVersion:   "v1",
-// 			NamespaceName:  fmt.Sprintf("%v%v", "%", "s"),
-// 			RegistryId:     fmt.Sprintf("%v%v", "%", "s"),
-// 			RepositoryName: fmt.Sprintf("%v%v", "%", "s"),
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Tcr.GetImageManifests(ctx, &tcr.GetImageManifestsArgs{
+//				ImageVersion:   "v1",
+//				NamespaceName:  "%s",
+//				RegistryId:     "%s",
+//				RepositoryName: "%s",
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 func GetImageManifests(ctx *pulumi.Context, args *GetImageManifestsArgs, opts ...pulumi.InvokeOption) (*GetImageManifestsResult, error) {
-	opts = pkgInvokeDefaultOpts(opts)
+	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetImageManifestsResult
 	err := ctx.Invoke("tencentcloud:Tcr/getImageManifests:getImageManifests", args, &rv, opts...)
 	if err != nil {

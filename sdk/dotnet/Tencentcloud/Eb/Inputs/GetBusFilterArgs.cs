@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Eb.Inputs
 {
 
-    public sealed class GetBusFilterInputArgs : Pulumi.ResourceArgs
+    public sealed class GetBusFilterInputArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// The name of the filter key.
@@ -34,5 +34,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Eb.Inputs
         public GetBusFilterInputArgs()
         {
         }
+        public static new GetBusFilterInputArgs Empty => new GetBusFilterInputArgs();
     }
 }

@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cvm.Inputs
 {
 
-    public sealed class LaunchTemplateLoginSettingsArgs : Pulumi.ResourceArgs
+    public sealed class LaunchTemplateLoginSettingsArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Keep the original settings of the mirror.
@@ -40,5 +40,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cvm.Inputs
         public LaunchTemplateLoginSettingsArgs()
         {
         }
+        public static new LaunchTemplateLoginSettingsArgs Empty => new LaunchTemplateLoginSettingsArgs();
     }
 }

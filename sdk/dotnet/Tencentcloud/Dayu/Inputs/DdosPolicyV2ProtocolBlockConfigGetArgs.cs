@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dayu.Inputs
 {
 
-    public sealed class DdosPolicyV2ProtocolBlockConfigGetArgs : Pulumi.ResourceArgs
+    public sealed class DdosPolicyV2ProtocolBlockConfigGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// ICMP block, value [0 (block off), 1 (block on)].
@@ -40,5 +40,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dayu.Inputs
         public DdosPolicyV2ProtocolBlockConfigGetArgs()
         {
         }
+        public static new DdosPolicyV2ProtocolBlockConfigGetArgs Empty => new DdosPolicyV2ProtocolBlockConfigGetArgs();
     }
 }

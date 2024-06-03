@@ -7,34 +7,40 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a dcdb flushBinlogOperation
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dcdb"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dcdb"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Dcdb.NewFlushBinlogOperation(ctx, "flushOperation", &Dcdb.FlushBinlogOperationArgs{
-// 			InstanceId: pulumi.Any(local.Dcdb_id),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Dcdb.NewFlushBinlogOperation(ctx, "flushOperation", &Dcdb.FlushBinlogOperationArgs{
+//				InstanceId: pulumi.Any(local.Dcdb_id),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 type FlushBinlogOperation struct {
 	pulumi.CustomResourceState
 
@@ -52,7 +58,7 @@ func NewFlushBinlogOperation(ctx *pulumi.Context,
 	if args.InstanceId == nil {
 		return nil, errors.New("invalid value for required argument 'InstanceId'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource FlushBinlogOperation
 	err := ctx.RegisterResource("tencentcloud:Dcdb/flushBinlogOperation:FlushBinlogOperation", name, args, &resource, opts...)
 	if err != nil {
@@ -125,7 +131,7 @@ func (i *FlushBinlogOperation) ToFlushBinlogOperationOutputWithContext(ctx conte
 // FlushBinlogOperationArrayInput is an input type that accepts FlushBinlogOperationArray and FlushBinlogOperationArrayOutput values.
 // You can construct a concrete instance of `FlushBinlogOperationArrayInput` via:
 //
-//          FlushBinlogOperationArray{ FlushBinlogOperationArgs{...} }
+//	FlushBinlogOperationArray{ FlushBinlogOperationArgs{...} }
 type FlushBinlogOperationArrayInput interface {
 	pulumi.Input
 
@@ -150,7 +156,7 @@ func (i FlushBinlogOperationArray) ToFlushBinlogOperationArrayOutputWithContext(
 // FlushBinlogOperationMapInput is an input type that accepts FlushBinlogOperationMap and FlushBinlogOperationMapOutput values.
 // You can construct a concrete instance of `FlushBinlogOperationMapInput` via:
 //
-//          FlushBinlogOperationMap{ "key": FlushBinlogOperationArgs{...} }
+//	FlushBinlogOperationMap{ "key": FlushBinlogOperationArgs{...} }
 type FlushBinlogOperationMapInput interface {
 	pulumi.Input
 

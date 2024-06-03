@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps.Inputs
 {
 
-    public sealed class InputInputGroupSrtSettingsArgs : Pulumi.ResourceArgs
+    public sealed class InputInputGroupSrtSettingsArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Delay, default 0, unit ms, range [0, 3000].
@@ -76,5 +76,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps.Inputs
         public InputInputGroupSrtSettingsArgs()
         {
         }
+        public static new InputInputGroupSrtSettingsArgs Empty => new InputInputGroupSrtSettingsArgs();
     }
 }

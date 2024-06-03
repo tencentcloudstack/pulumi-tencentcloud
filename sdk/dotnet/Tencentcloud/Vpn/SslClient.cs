@@ -15,34 +15,35 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpn
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var client = new Tencentcloud.Vpn.SslClient("client", new()
     ///     {
-    ///         var client = new Tencentcloud.Vpn.SslClient("client", new Tencentcloud.Vpn.SslClientArgs
-    ///         {
-    ///             SslVpnClientName = "hello",
-    ///             SslVpnServerId = "vpns-aog5xcjj",
-    ///         });
-    ///     }
+    ///         SslVpnClientName = "hello",
+    ///         SslVpnServerId = "vpns-aog5xcjj",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// VPN SSL Client can be imported, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Vpn/sslClient:SslClient client vpn-client-id
+    /// $ pulumi import tencentcloud:Vpn/sslClient:SslClient client vpn-client-id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Vpn/sslClient:SslClient")]
-    public partial class SslClient : Pulumi.CustomResource
+    public partial class SslClient : global::Pulumi.CustomResource
     {
         /// <summary>
         /// The name of ssl vpn client to be created.
@@ -101,7 +102,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpn
         }
     }
 
-    public sealed class SslClientArgs : Pulumi.ResourceArgs
+    public sealed class SslClientArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// The name of ssl vpn client to be created.
@@ -118,9 +119,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpn
         public SslClientArgs()
         {
         }
+        public static new SslClientArgs Empty => new SslClientArgs();
     }
 
-    public sealed class SslClientState : Pulumi.ResourceArgs
+    public sealed class SslClientState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// The name of ssl vpn client to be created.
@@ -137,5 +139,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpn
         public SslClientState()
         {
         }
+        public static new SslClientState Empty => new SslClientState();
     }
 }

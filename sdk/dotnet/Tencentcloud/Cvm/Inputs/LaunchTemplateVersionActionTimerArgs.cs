@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cvm.Inputs
 {
 
-    public sealed class LaunchTemplateVersionActionTimerArgs : Pulumi.ResourceArgs
+    public sealed class LaunchTemplateVersionActionTimerArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Execution time, displayed according to ISO8601 standard, and UTC time is used. The format is YYYY-MM-DDThh:mm:ssZ. For example, 2018-05-29T11:26:40Z, the execution must be at least 5 minutes later than the current time.
@@ -34,5 +34,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cvm.Inputs
         public LaunchTemplateVersionActionTimerArgs()
         {
         }
+        public static new LaunchTemplateVersionActionTimerArgs Empty => new LaunchTemplateVersionActionTimerArgs();
     }
 }

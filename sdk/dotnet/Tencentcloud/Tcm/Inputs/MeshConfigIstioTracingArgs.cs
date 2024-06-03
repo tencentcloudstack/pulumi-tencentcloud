@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcm.Inputs
 {
 
-    public sealed class MeshConfigIstioTracingArgs : Pulumi.ResourceArgs
+    public sealed class MeshConfigIstioTracingArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// APM config.
@@ -40,5 +40,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcm.Inputs
         public MeshConfigIstioTracingArgs()
         {
         }
+        public static new MeshConfigIstioTracingArgs Empty => new MeshConfigIstioTracingArgs();
     }
 }

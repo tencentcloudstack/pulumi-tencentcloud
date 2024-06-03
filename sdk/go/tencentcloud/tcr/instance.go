@@ -7,133 +7,150 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Use this resource to create tcr instance.
 //
 // ## Example Usage
+//
 // ### Create a basic tcr instance.
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tcr"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tcr"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Tcr.NewInstance(ctx, "example", &Tcr.InstanceArgs{
-// 			InstanceType: pulumi.String("basic"),
-// 			Tags: pulumi.AnyMap{
-// 				"createdBy": pulumi.Any("terraform"),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Tcr.NewInstance(ctx, "example", &Tcr.InstanceArgs{
+//				InstanceType: pulumi.String("basic"),
+//				Tags: pulumi.Map{
+//					"createdBy": pulumi.Any("terraform"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
+//
 // ### Create instance with the public network access whitelist.
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Tcr"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tcr"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tcr"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Tcr.NewInstance(ctx, "example", &Tcr.InstanceArgs{
-// 			InstanceType:        pulumi.String("basic"),
-// 			OpenPublicOperation: pulumi.Bool(true),
-// 			SecurityPolicies: tcr.InstanceSecurityPolicyArray{
-// 				&tcr.InstanceSecurityPolicyArgs{
-// 					CidrBlock: pulumi.String("10.0.0.1/24"),
-// 				},
-// 				&tcr.InstanceSecurityPolicyArgs{
-// 					CidrBlock: pulumi.String("192.168.1.1"),
-// 				},
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Tcr.NewInstance(ctx, "example", &Tcr.InstanceArgs{
+//				InstanceType:        pulumi.String("basic"),
+//				OpenPublicOperation: pulumi.Bool(true),
+//				SecurityPolicies: tcr.InstanceSecurityPolicyArray{
+//					&tcr.InstanceSecurityPolicyArgs{
+//						CidrBlock: pulumi.String("10.0.0.1/24"),
+//					},
+//					&tcr.InstanceSecurityPolicyArgs{
+//						CidrBlock: pulumi.String("192.168.1.1"),
+//					},
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
+//
 // ### Create instance with Replications.
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Tcr"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tcr"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tcr"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		cfg := config.New(ctx, "")
-// 		tcrRegionMap := map[string]interface{}{
-// 			"ap-guangzhou":     1,
-// 			"ap-shanghai":      4,
-// 			"ap-hongkong":      5,
-// 			"ap-beijing":       8,
-// 			"ap-singapore":     9,
-// 			"na-siliconvalley": 15,
-// 			"ap-chengdu":       16,
-// 			"eu-frankfurt":     17,
-// 			"ap-seoul":         18,
-// 			"ap-chongqing":     19,
-// 			"ap-mumbai":        21,
-// 			"na-ashburn":       22,
-// 			"ap-bangkok":       23,
-// 			"eu-moscow":        24,
-// 			"ap-tokyo":         25,
-// 			"ap-nanjing":       33,
-// 			"ap-taipei":        39,
-// 			"ap-jakarta":       72,
-// 		}
-// 		if param := cfg.GetBool("tcrRegionMap"); param != nil {
-// 			tcrRegionMap = param
-// 		}
-// 		_, err := Tcr.NewInstance(ctx, "example", &Tcr.InstanceArgs{
-// 			InstanceType: pulumi.String("premium"),
-// 			Replications: tcr.InstanceReplicationArray{
-// 				&tcr.InstanceReplicationArgs{
-// 					RegionId: pulumi.Float64(tcrRegionMap.Ap - guangzhou),
-// 				},
-// 				&tcr.InstanceReplicationArgs{
-// 					RegionId: pulumi.Float64(tcrRegionMap.Ap - singapore),
-// 				},
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			cfg := config.New(ctx, "")
+//			tcrRegionMap := map[string]interface{}{
+//				"ap-guangzhou":     1,
+//				"ap-shanghai":      4,
+//				"ap-hongkong":      5,
+//				"ap-beijing":       8,
+//				"ap-singapore":     9,
+//				"na-siliconvalley": 15,
+//				"ap-chengdu":       16,
+//				"eu-frankfurt":     17,
+//				"ap-seoul":         18,
+//				"ap-chongqing":     19,
+//				"ap-mumbai":        21,
+//				"na-ashburn":       22,
+//				"ap-bangkok":       23,
+//				"eu-moscow":        24,
+//				"ap-tokyo":         25,
+//				"ap-nanjing":       33,
+//				"ap-taipei":        39,
+//				"ap-jakarta":       72,
+//			}
+//			if param := cfg.GetObject("tcrRegionMap"); param != nil {
+//				tcrRegionMap = param
+//			}
+//			_, err := Tcr.NewInstance(ctx, "example", &Tcr.InstanceArgs{
+//				InstanceType: pulumi.String("premium"),
+//				Replications: tcr.InstanceReplicationArray{
+//					&tcr.InstanceReplicationArgs{
+//						RegionId: pulumi.Float64(tcrRegionMap.ApGuangzhou),
+//					},
+//					&tcr.InstanceReplicationArgs{
+//						RegionId: pulumi.Float64(tcrRegionMap.ApSingapore),
+//					},
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // tcr instance can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Tcr/instance:Instance foo instance_id
+// $ pulumi import tencentcloud:Tcr/instance:Instance foo instance_id
 // ```
 type Instance struct {
 	pulumi.CustomResourceState
@@ -180,7 +197,7 @@ func NewInstance(ctx *pulumi.Context,
 	if args.InstanceType == nil {
 		return nil, errors.New("invalid value for required argument 'InstanceType'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource Instance
 	err := ctx.RegisterResource("tencentcloud:Tcr/instance:Instance", name, args, &resource, opts...)
 	if err != nil {
@@ -345,7 +362,7 @@ func (i *Instance) ToInstanceOutputWithContext(ctx context.Context) InstanceOutp
 // InstanceArrayInput is an input type that accepts InstanceArray and InstanceArrayOutput values.
 // You can construct a concrete instance of `InstanceArrayInput` via:
 //
-//          InstanceArray{ InstanceArgs{...} }
+//	InstanceArray{ InstanceArgs{...} }
 type InstanceArrayInput interface {
 	pulumi.Input
 
@@ -370,7 +387,7 @@ func (i InstanceArray) ToInstanceArrayOutputWithContext(ctx context.Context) Ins
 // InstanceMapInput is an input type that accepts InstanceMap and InstanceMapOutput values.
 // You can construct a concrete instance of `InstanceMapInput` via:
 //
-//          InstanceMap{ "key": InstanceArgs{...} }
+//	InstanceMap{ "key": InstanceArgs{...} }
 type InstanceMapInput interface {
 	pulumi.Input
 

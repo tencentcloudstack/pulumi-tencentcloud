@@ -15,76 +15,70 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ccn
         /// <summary>
         /// Use this data source to query detailed information of vpc cross_border_flow_monitor
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var crossBorderFlowMonitor = Tencentcloud.Ccn.GetCrossBorderFlowMonitor.Invoke(new()
         ///     {
-        ///         var crossBorderFlowMonitor = Output.Create(Tencentcloud.Ccn.GetCrossBorderFlowMonitor.InvokeAsync(new Tencentcloud.Ccn.GetCrossBorderFlowMonitorArgs
-        ///         {
-        ///             CcnId = "ccn-39lqkygf",
-        ///             CcnUin = "979137",
-        ///             DestinationRegion = "ap-singapore",
-        ///             EndTime = "2023-01-01 01:00:00",
-        ///             Period = 60,
-        ///             SourceRegion = "ap-guangzhou",
-        ///             StartTime = "2023-01-01 00:00:00",
-        ///         }));
-        ///     }
+        ///         CcnId = "ccn-39lqkygf",
+        ///         CcnUin = "979137",
+        ///         DestinationRegion = "ap-singapore",
+        ///         EndTime = "2023-01-01 01:00:00",
+        ///         Period = 60,
+        ///         SourceRegion = "ap-guangzhou",
+        ///         StartTime = "2023-01-01 00:00:00",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetCrossBorderFlowMonitorResult> InvokeAsync(GetCrossBorderFlowMonitorArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetCrossBorderFlowMonitorResult>("tencentcloud:Ccn/getCrossBorderFlowMonitor:getCrossBorderFlowMonitor", args ?? new GetCrossBorderFlowMonitorArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetCrossBorderFlowMonitorResult>("tencentcloud:Ccn/getCrossBorderFlowMonitor:getCrossBorderFlowMonitor", args ?? new GetCrossBorderFlowMonitorArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of vpc cross_border_flow_monitor
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var crossBorderFlowMonitor = Tencentcloud.Ccn.GetCrossBorderFlowMonitor.Invoke(new()
         ///     {
-        ///         var crossBorderFlowMonitor = Output.Create(Tencentcloud.Ccn.GetCrossBorderFlowMonitor.InvokeAsync(new Tencentcloud.Ccn.GetCrossBorderFlowMonitorArgs
-        ///         {
-        ///             CcnId = "ccn-39lqkygf",
-        ///             CcnUin = "979137",
-        ///             DestinationRegion = "ap-singapore",
-        ///             EndTime = "2023-01-01 01:00:00",
-        ///             Period = 60,
-        ///             SourceRegion = "ap-guangzhou",
-        ///             StartTime = "2023-01-01 00:00:00",
-        ///         }));
-        ///     }
+        ///         CcnId = "ccn-39lqkygf",
+        ///         CcnUin = "979137",
+        ///         DestinationRegion = "ap-singapore",
+        ///         EndTime = "2023-01-01 01:00:00",
+        ///         Period = 60,
+        ///         SourceRegion = "ap-guangzhou",
+        ///         StartTime = "2023-01-01 00:00:00",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetCrossBorderFlowMonitorResult> Invoke(GetCrossBorderFlowMonitorInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetCrossBorderFlowMonitorResult>("tencentcloud:Ccn/getCrossBorderFlowMonitor:getCrossBorderFlowMonitor", args ?? new GetCrossBorderFlowMonitorInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetCrossBorderFlowMonitorResult>("tencentcloud:Ccn/getCrossBorderFlowMonitor:getCrossBorderFlowMonitor", args ?? new GetCrossBorderFlowMonitorInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetCrossBorderFlowMonitorArgs : Pulumi.InvokeArgs
+    public sealed class GetCrossBorderFlowMonitorArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// CcnId.
@@ -137,9 +131,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ccn
         public GetCrossBorderFlowMonitorArgs()
         {
         }
+        public static new GetCrossBorderFlowMonitorArgs Empty => new GetCrossBorderFlowMonitorArgs();
     }
 
-    public sealed class GetCrossBorderFlowMonitorInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetCrossBorderFlowMonitorInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// CcnId.
@@ -192,6 +187,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ccn
         public GetCrossBorderFlowMonitorInvokeArgs()
         {
         }
+        public static new GetCrossBorderFlowMonitorInvokeArgs Empty => new GetCrossBorderFlowMonitorInvokeArgs();
     }
 
 

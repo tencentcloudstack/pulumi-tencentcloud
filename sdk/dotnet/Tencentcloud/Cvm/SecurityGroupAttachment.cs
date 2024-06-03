@@ -15,34 +15,35 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cvm
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var securityGroupAttachment = new Tencentcloud.Cvm.SecurityGroupAttachment("securityGroupAttachment", new()
     ///     {
-    ///         var securityGroupAttachment = new Tencentcloud.Cvm.SecurityGroupAttachment("securityGroupAttachment", new Tencentcloud.Cvm.SecurityGroupAttachmentArgs
-    ///         {
-    ///             InstanceId = "ins-xxxxxxxx",
-    ///             SecurityGroupId = "sg-xxxxxxx",
-    ///         });
-    ///     }
+    ///         InstanceId = "ins-xxxxxxxx",
+    ///         SecurityGroupId = "sg-xxxxxxx",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// cvm security_group_attachment can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Cvm/securityGroupAttachment:SecurityGroupAttachment security_group_attachment ${instance_id}#${security_group_id}
+    /// $ pulumi import tencentcloud:Cvm/securityGroupAttachment:SecurityGroupAttachment security_group_attachment ${instance_id}#${security_group_id}
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Cvm/securityGroupAttachment:SecurityGroupAttachment")]
-    public partial class SecurityGroupAttachment : Pulumi.CustomResource
+    public partial class SecurityGroupAttachment : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Instance id.
@@ -101,7 +102,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cvm
         }
     }
 
-    public sealed class SecurityGroupAttachmentArgs : Pulumi.ResourceArgs
+    public sealed class SecurityGroupAttachmentArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Instance id.
@@ -118,9 +119,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cvm
         public SecurityGroupAttachmentArgs()
         {
         }
+        public static new SecurityGroupAttachmentArgs Empty => new SecurityGroupAttachmentArgs();
     }
 
-    public sealed class SecurityGroupAttachmentState : Pulumi.ResourceArgs
+    public sealed class SecurityGroupAttachmentState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Instance id.
@@ -137,5 +139,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cvm
         public SecurityGroupAttachmentState()
         {
         }
+        public static new SecurityGroupAttachmentState Empty => new SecurityGroupAttachmentState();
     }
 }

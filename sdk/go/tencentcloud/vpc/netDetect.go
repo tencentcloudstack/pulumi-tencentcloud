@@ -7,8 +7,9 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a vpc netDetect
@@ -20,7 +21,7 @@ import (
 // vpc net_detect can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Vpc/netDetect:NetDetect net_detect net_detect_id
+// $ pulumi import tencentcloud:Vpc/netDetect:NetDetect net_detect net_detect_id
 // ```
 type NetDetect struct {
 	pulumi.CustomResourceState
@@ -60,7 +61,7 @@ func NewNetDetect(ctx *pulumi.Context,
 	if args.VpcId == nil {
 		return nil, errors.New("invalid value for required argument 'VpcId'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource NetDetect
 	err := ctx.RegisterResource("tencentcloud:Vpc/netDetect:NetDetect", name, args, &resource, opts...)
 	if err != nil {
@@ -181,7 +182,7 @@ func (i *NetDetect) ToNetDetectOutputWithContext(ctx context.Context) NetDetectO
 // NetDetectArrayInput is an input type that accepts NetDetectArray and NetDetectArrayOutput values.
 // You can construct a concrete instance of `NetDetectArrayInput` via:
 //
-//          NetDetectArray{ NetDetectArgs{...} }
+//	NetDetectArray{ NetDetectArgs{...} }
 type NetDetectArrayInput interface {
 	pulumi.Input
 
@@ -206,7 +207,7 @@ func (i NetDetectArray) ToNetDetectArrayOutputWithContext(ctx context.Context) N
 // NetDetectMapInput is an input type that accepts NetDetectMap and NetDetectMapOutput values.
 // You can construct a concrete instance of `NetDetectMapInput` via:
 //
-//          NetDetectMap{ "key": NetDetectArgs{...} }
+//	NetDetectMap{ "key": NetDetectArgs{...} }
 type NetDetectMapInput interface {
 	pulumi.Input
 

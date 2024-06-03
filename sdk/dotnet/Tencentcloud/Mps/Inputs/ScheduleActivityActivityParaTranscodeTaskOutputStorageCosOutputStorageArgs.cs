@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps.Inputs
 {
 
-    public sealed class ScheduleActivityActivityParaTranscodeTaskOutputStorageCosOutputStorageArgs : Pulumi.ResourceArgs
+    public sealed class ScheduleActivityActivityParaTranscodeTaskOutputStorageCosOutputStorageArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// The bucket to which the output file of media processing is saved, such as `TopRankVideo-125xxx88`. If this parameter is left empty, the value of the upper layer will be inherited.
@@ -28,5 +28,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps.Inputs
         public ScheduleActivityActivityParaTranscodeTaskOutputStorageCosOutputStorageArgs()
         {
         }
+        public static new ScheduleActivityActivityParaTranscodeTaskOutputStorageCosOutputStorageArgs Empty => new ScheduleActivityActivityParaTranscodeTaskOutputStorageCosOutputStorageArgs();
     }
 }

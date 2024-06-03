@@ -7,8 +7,9 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provide a resource to create a KubernetesClusterEndpoint. This resource allows you to create an empty cluster first without any workers. Only all attached node depends create complete, cluster endpoint will finally be enabled.
@@ -20,7 +21,7 @@ import (
 // KubernetesClusterEndpoint instance can be imported by passing cluster id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Kubernetes/clusterEndpoint:ClusterEndpoint test cluster-id
+// $ pulumi import tencentcloud:Kubernetes/clusterEndpoint:ClusterEndpoint test cluster-id
 // ```
 type ClusterEndpoint struct {
 	pulumi.CustomResourceState
@@ -51,7 +52,7 @@ type ClusterEndpoint struct {
 	ExtensiveParameters pulumi.StringPtrOutput `pulumi:"extensiveParameters"`
 	// this argument was deprecated, use `clusterInternetSecurityGroup` instead. Security policies for managed cluster internet, like:'192.168.1.0/24' or '113.116.51.27', '0.0.0.0/0' means all. This field can only set when field `clusterDeployType` is 'MANAGED_CLUSTER' and `clusterInternet` is true. `managedClusterInternetSecurityPolicies` can not delete or empty once be set.
 	//
-	// Deprecated: this argument was deprecated, use `cluster_internet_security_group` instead.
+	// Deprecated: this argument was deprecated, use `clusterInternetSecurityGroup` instead.
 	ManagedClusterInternetSecurityPolicies pulumi.StringArrayOutput `pulumi:"managedClusterInternetSecurityPolicies"`
 	// Password of account.
 	Password pulumi.StringOutput `pulumi:"password"`
@@ -71,7 +72,11 @@ func NewClusterEndpoint(ctx *pulumi.Context,
 	if args.ClusterId == nil {
 		return nil, errors.New("invalid value for required argument 'ClusterId'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	secrets := pulumi.AdditionalSecretOutputs([]string{
+		"password",
+	})
+	opts = append(opts, secrets)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource ClusterEndpoint
 	err := ctx.RegisterResource("tencentcloud:Kubernetes/clusterEndpoint:ClusterEndpoint", name, args, &resource, opts...)
 	if err != nil {
@@ -120,7 +125,7 @@ type clusterEndpointState struct {
 	ExtensiveParameters *string `pulumi:"extensiveParameters"`
 	// this argument was deprecated, use `clusterInternetSecurityGroup` instead. Security policies for managed cluster internet, like:'192.168.1.0/24' or '113.116.51.27', '0.0.0.0/0' means all. This field can only set when field `clusterDeployType` is 'MANAGED_CLUSTER' and `clusterInternet` is true. `managedClusterInternetSecurityPolicies` can not delete or empty once be set.
 	//
-	// Deprecated: this argument was deprecated, use `cluster_internet_security_group` instead.
+	// Deprecated: this argument was deprecated, use `clusterInternetSecurityGroup` instead.
 	ManagedClusterInternetSecurityPolicies []string `pulumi:"managedClusterInternetSecurityPolicies"`
 	// Password of account.
 	Password *string `pulumi:"password"`
@@ -157,7 +162,7 @@ type ClusterEndpointState struct {
 	ExtensiveParameters pulumi.StringPtrInput
 	// this argument was deprecated, use `clusterInternetSecurityGroup` instead. Security policies for managed cluster internet, like:'192.168.1.0/24' or '113.116.51.27', '0.0.0.0/0' means all. This field can only set when field `clusterDeployType` is 'MANAGED_CLUSTER' and `clusterInternet` is true. `managedClusterInternetSecurityPolicies` can not delete or empty once be set.
 	//
-	// Deprecated: this argument was deprecated, use `cluster_internet_security_group` instead.
+	// Deprecated: this argument was deprecated, use `clusterInternetSecurityGroup` instead.
 	ManagedClusterInternetSecurityPolicies pulumi.StringArrayInput
 	// Password of account.
 	Password pulumi.StringPtrInput
@@ -190,7 +195,7 @@ type clusterEndpointArgs struct {
 	ExtensiveParameters *string `pulumi:"extensiveParameters"`
 	// this argument was deprecated, use `clusterInternetSecurityGroup` instead. Security policies for managed cluster internet, like:'192.168.1.0/24' or '113.116.51.27', '0.0.0.0/0' means all. This field can only set when field `clusterDeployType` is 'MANAGED_CLUSTER' and `clusterInternet` is true. `managedClusterInternetSecurityPolicies` can not delete or empty once be set.
 	//
-	// Deprecated: this argument was deprecated, use `cluster_internet_security_group` instead.
+	// Deprecated: this argument was deprecated, use `clusterInternetSecurityGroup` instead.
 	ManagedClusterInternetSecurityPolicies []string `pulumi:"managedClusterInternetSecurityPolicies"`
 }
 
@@ -214,7 +219,7 @@ type ClusterEndpointArgs struct {
 	ExtensiveParameters pulumi.StringPtrInput
 	// this argument was deprecated, use `clusterInternetSecurityGroup` instead. Security policies for managed cluster internet, like:'192.168.1.0/24' or '113.116.51.27', '0.0.0.0/0' means all. This field can only set when field `clusterDeployType` is 'MANAGED_CLUSTER' and `clusterInternet` is true. `managedClusterInternetSecurityPolicies` can not delete or empty once be set.
 	//
-	// Deprecated: this argument was deprecated, use `cluster_internet_security_group` instead.
+	// Deprecated: this argument was deprecated, use `clusterInternetSecurityGroup` instead.
 	ManagedClusterInternetSecurityPolicies pulumi.StringArrayInput
 }
 
@@ -244,7 +249,7 @@ func (i *ClusterEndpoint) ToClusterEndpointOutputWithContext(ctx context.Context
 // ClusterEndpointArrayInput is an input type that accepts ClusterEndpointArray and ClusterEndpointArrayOutput values.
 // You can construct a concrete instance of `ClusterEndpointArrayInput` via:
 //
-//          ClusterEndpointArray{ ClusterEndpointArgs{...} }
+//	ClusterEndpointArray{ ClusterEndpointArgs{...} }
 type ClusterEndpointArrayInput interface {
 	pulumi.Input
 
@@ -269,7 +274,7 @@ func (i ClusterEndpointArray) ToClusterEndpointArrayOutputWithContext(ctx contex
 // ClusterEndpointMapInput is an input type that accepts ClusterEndpointMap and ClusterEndpointMapOutput values.
 // You can construct a concrete instance of `ClusterEndpointMapInput` via:
 //
-//          ClusterEndpointMap{ "key": ClusterEndpointArgs{...} }
+//	ClusterEndpointMap{ "key": ClusterEndpointArgs{...} }
 type ClusterEndpointMapInput interface {
 	pulumi.Input
 
@@ -367,7 +372,7 @@ func (o ClusterEndpointOutput) ExtensiveParameters() pulumi.StringPtrOutput {
 
 // this argument was deprecated, use `clusterInternetSecurityGroup` instead. Security policies for managed cluster internet, like:'192.168.1.0/24' or '113.116.51.27', '0.0.0.0/0' means all. This field can only set when field `clusterDeployType` is 'MANAGED_CLUSTER' and `clusterInternet` is true. `managedClusterInternetSecurityPolicies` can not delete or empty once be set.
 //
-// Deprecated: this argument was deprecated, use `cluster_internet_security_group` instead.
+// Deprecated: this argument was deprecated, use `clusterInternetSecurityGroup` instead.
 func (o ClusterEndpointOutput) ManagedClusterInternetSecurityPolicies() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v *ClusterEndpoint) pulumi.StringArrayOutput { return v.ManagedClusterInternetSecurityPolicies }).(pulumi.StringArrayOutput)
 }

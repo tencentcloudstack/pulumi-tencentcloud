@@ -5,10 +5,11 @@ import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
 // Export members:
-export * from "./streamLiveInput";
+export { StreamLiveInputArgs, StreamLiveInputState } from "./streamLiveInput";
+export type StreamLiveInput = import("./streamLiveInput").StreamLiveInput;
+export const StreamLiveInput: typeof import("./streamLiveInput").StreamLiveInput = null as any;
+utilities.lazyLoad(exports, ["StreamLiveInput"], () => require("./streamLiveInput"));
 
-// Import resources to register:
-import { StreamLiveInput } from "./streamLiveInput";
 
 const _module = {
     version: utilities.getVersion(),

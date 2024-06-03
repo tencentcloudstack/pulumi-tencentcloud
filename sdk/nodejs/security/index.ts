@@ -5,15 +5,21 @@ import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
 // Export members:
-export * from "./getGroups";
-export * from "./group";
-export * from "./groupLiteRule";
-export * from "./groupRuleSet";
+export { GetGroupsArgs, GetGroupsResult, GetGroupsOutputArgs } from "./getGroups";
+export const getGroups: typeof import("./getGroups").getGroups = null as any;
+export const getGroupsOutput: typeof import("./getGroups").getGroupsOutput = null as any;
+utilities.lazyLoad(exports, ["getGroups","getGroupsOutput"], () => require("./getGroups"));
 
-// Import resources to register:
-import { Group } from "./group";
-import { GroupLiteRule } from "./groupLiteRule";
-import { GroupRuleSet } from "./groupRuleSet";
+export { GroupArgs, GroupState } from "./group";
+export type Group = import("./group").Group;
+export const Group: typeof import("./group").Group = null as any;
+utilities.lazyLoad(exports, ["Group"], () => require("./group"));
+
+export { GroupRuleSetArgs, GroupRuleSetState } from "./groupRuleSet";
+export type GroupRuleSet = import("./groupRuleSet").GroupRuleSet;
+export const GroupRuleSet: typeof import("./groupRuleSet").GroupRuleSet = null as any;
+utilities.lazyLoad(exports, ["GroupRuleSet"], () => require("./groupRuleSet"));
+
 
 const _module = {
     version: utilities.getVersion(),
@@ -21,8 +27,6 @@ const _module = {
         switch (type) {
             case "tencentcloud:Security/group:Group":
                 return new Group(name, <any>undefined, { urn })
-            case "tencentcloud:Security/groupLiteRule:GroupLiteRule":
-                return new GroupLiteRule(name, <any>undefined, { urn })
             case "tencentcloud:Security/groupRuleSet:GroupRuleSet":
                 return new GroupRuleSet(name, <any>undefined, { urn })
             default:
@@ -31,5 +35,4 @@ const _module = {
     },
 };
 pulumi.runtime.registerResourceModule("tencentcloud", "Security/group", _module)
-pulumi.runtime.registerResourceModule("tencentcloud", "Security/groupLiteRule", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Security/groupRuleSet", _module)

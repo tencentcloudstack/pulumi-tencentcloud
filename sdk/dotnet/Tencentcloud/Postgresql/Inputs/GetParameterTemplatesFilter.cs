@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql.Inputs
 {
 
-    public sealed class GetParameterTemplatesFilterArgs : Pulumi.InvokeArgs
+    public sealed class GetParameterTemplatesFilterArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Filter name.
@@ -34,5 +34,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql.Inputs
         public GetParameterTemplatesFilterArgs()
         {
         }
+        public static new GetParameterTemplatesFilterArgs Empty => new GetParameterTemplatesFilterArgs();
     }
 }

@@ -9,23 +9,25 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const applicationReleaseConfig = new tencentcloud.Tsf.ApplicationReleaseConfig("application_release_config", {
+ * const applicationReleaseConfig = new tencentcloud.tsf.ApplicationReleaseConfig("applicationReleaseConfig", {
  *     configId: "dcfg-nalqbqwv",
  *     groupId: "group-yxmz72gv",
  *     releaseDesc: "terraform-test",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * tsf application_release_config can be imported using the configId#groupId#configReleaseId, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Tsf/applicationReleaseConfig:ApplicationReleaseConfig application_release_config dcfg-nalqbqwv#group-yxmz72gv#dcfgr-maeeq2ea
+ * $ pulumi import tencentcloud:Tsf/applicationReleaseConfig:ApplicationReleaseConfig application_release_config dcfg-nalqbqwv#group-yxmz72gv#dcfgr-maeeq2ea
  * ```
  */
 export class ApplicationReleaseConfig extends pulumi.CustomResource {

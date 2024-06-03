@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,26 +11,25 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const tawInstance = pulumi.output(tencentcloud.Rum.getTawInstance({
+ * const tawInstance = tencentcloud.Rum.getTawInstance({
  *     areaIds: [1],
  *     chargeStatuses: [1],
  *     chargeTypes: [1],
  *     instanceIds: ["rum-pasZKEI3RLgakj"],
  *     instanceStatuses: [2],
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getTawInstance(args?: GetTawInstanceArgs, opts?: pulumi.InvokeOptions): Promise<GetTawInstanceResult> {
     args = args || {};
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Rum/getTawInstance:getTawInstance", {
         "areaIds": args.areaIds,
         "chargeStatuses": args.chargeStatuses,
@@ -89,9 +89,28 @@ export interface GetTawInstanceResult {
     readonly instanceStatuses?: number[];
     readonly resultOutputFile?: string;
 }
-
+/**
+ * Use this data source to query detailed information of rum tawInstance
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const tawInstance = tencentcloud.Rum.getTawInstance({
+ *     areaIds: [1],
+ *     chargeStatuses: [1],
+ *     chargeTypes: [1],
+ *     instanceIds: ["rum-pasZKEI3RLgakj"],
+ *     instanceStatuses: [2],
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getTawInstanceOutput(args?: GetTawInstanceOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetTawInstanceResult> {
-    return pulumi.output(args).apply(a => getTawInstance(a, opts))
+    return pulumi.output(args).apply((a: any) => getTawInstance(a, opts))
 }
 
 /**

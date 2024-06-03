@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,24 +11,23 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const foo = pulumi.output(tencentcloud.Ckafka.getAcls({
+ * const foo = tencentcloud.Ckafka.getAcls({
  *     host: "2",
  *     instanceId: "ckafka-f9ife4zz",
  *     resourceName: "topic-tf-test",
  *     resourceType: "TOPIC",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getAcls(args: GetAclsArgs, opts?: pulumi.InvokeOptions): Promise<GetAclsResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Ckafka/getAcls:getAcls", {
         "host": args.host,
         "instanceId": args.instanceId,
@@ -90,9 +90,27 @@ export interface GetAclsResult {
     readonly resourceType: string;
     readonly resultOutputFile?: string;
 }
-
+/**
+ * Use this data source to query detailed acl information of Ckafka
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const foo = tencentcloud.Ckafka.getAcls({
+ *     host: "2",
+ *     instanceId: "ckafka-f9ife4zz",
+ *     resourceName: "topic-tf-test",
+ *     resourceType: "TOPIC",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getAclsOutput(args: GetAclsOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetAclsResult> {
-    return pulumi.output(args).apply(a => getAcls(a, opts))
+    return pulumi.output(args).apply((a: any) => getAcls(a, opts))
 }
 
 /**

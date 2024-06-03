@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,16 +11,17 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const updateRowFilterOperation = new tencentcloud.Dlc.UpdateRowFilterOperation("update_row_filter_operation", {
+ * const updateRowFilterOperation = new tencentcloud.dlc.UpdateRowFilterOperation("updateRowFilterOperation", {
  *     policy: {
  *         catalog: "DataLakeCatalog",
  *         column: "",
  *         database: "test_iac_keep",
- *         function: "",
+ *         "function": "",
  *         mode: "SENIOR",
  *         operation: "value!=\"0\"",
  *         policyType: "ROWFILTER",
@@ -31,6 +33,7 @@ import * as utilities from "../utilities";
  *     policyId: 103704,
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export class UpdateRowFilterOperation extends pulumi.CustomResource {
     /**

@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,25 +11,24 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const proInstancesFilter = pulumi.output(tencentcloud.Tdmq.getProInstances({
+ * const proInstancesFilter = tencentcloud.Tdmq.getProInstances({
  *     filters: [{
  *         name: "InstanceName",
  *         values: ["keep"],
  *     }],
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getProInstances(args?: GetProInstancesArgs, opts?: pulumi.InvokeOptions): Promise<GetProInstancesResult> {
     args = args || {};
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Tdmq/getProInstances:getProInstances", {
         "filters": args.filters,
         "resultOutputFile": args.resultOutputFile,
@@ -64,9 +64,27 @@ export interface GetProInstancesResult {
     readonly instances: outputs.Tdmq.GetProInstancesInstance[];
     readonly resultOutputFile?: string;
 }
-
+/**
+ * Use this data source to query detailed information of tdmq proInstances
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const proInstancesFilter = tencentcloud.Tdmq.getProInstances({
+ *     filters: [{
+ *         name: "InstanceName",
+ *         values: ["keep"],
+ *     }],
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getProInstancesOutput(args?: GetProInstancesOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetProInstancesResult> {
-    return pulumi.output(args).apply(a => getProInstances(a, opts))
+    return pulumi.output(args).apply((a: any) => getProInstances(a, opts))
 }
 
 /**

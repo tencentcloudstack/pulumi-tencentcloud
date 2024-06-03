@@ -18,6 +18,9 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor.Outputs
         /// An id identify the cluster, like `cls-xxxxxx`.
         /// </summary>
         public readonly string ClusterId;
+        /// <summary>
+        /// the name of the cluster.
+        /// </summary>
         public readonly string? ClusterName;
         /// <summary>
         /// Type of cluster.
@@ -47,6 +50,9 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor.Outputs
         /// Limitation of region.
         /// </summary>
         public readonly string Region;
+        /// <summary>
+        /// agent state, `normal`, `abnormal`.
+        /// </summary>
         public readonly string? Status;
 
         [OutputConstructor]

@@ -9,11 +9,12 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = new tencentcloud.Cfw.NatPolicy("example", {
+ * const example = new tencentcloud.cfw.NatPolicy("example", {
  *     description: "policy description.",
  *     direction: 1,
  *     enable: "true",
@@ -26,13 +27,14 @@ import * as utilities from "../utilities";
  *     targetType: "net",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * cfw nat_policy can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Cfw/natPolicy:NatPolicy example nat_policy_id
+ * $ pulumi import tencentcloud:Cfw/natPolicy:NatPolicy example nat_policy_id
  * ```
  */
 export class NatPolicy extends pulumi.CustomResource {

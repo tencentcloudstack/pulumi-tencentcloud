@@ -12,140 +12,150 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpn
 {
     /// <summary>
     /// ## Example Usage
+    /// 
     /// ### VPC SSL VPN gateway
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var myCgw = new Tencentcloud.Vpn.Gateway("myCgw", new()
     ///     {
-    ///         var myCgw = new Tencentcloud.Vpn.Gateway("myCgw", new Tencentcloud.Vpn.GatewayArgs
+    ///         Bandwidth = 5,
+    ///         Tags = 
     ///         {
-    ///             Bandwidth = 5,
-    ///             Tags = 
-    ///             {
-    ///                 { "test", "test" },
-    ///             },
-    ///             Type = "SSL",
-    ///             VpcId = "vpc-86v957zb",
-    ///             Zone = "ap-guangzhou-3",
-    ///         });
-    ///     }
+    ///             { "test", "test" },
+    ///         },
+    ///         Type = "SSL",
+    ///         VpcId = "vpc-86v957zb",
+    ///         Zone = "ap-guangzhou-3",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
+    /// 
     /// ### CCN IPSEC VPN gateway
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var myCgw = new Tencentcloud.Vpn.Gateway("myCgw", new()
     ///     {
-    ///         var myCgw = new Tencentcloud.Vpn.Gateway("myCgw", new Tencentcloud.Vpn.GatewayArgs
+    ///         Bandwidth = 5,
+    ///         Tags = 
     ///         {
-    ///             Bandwidth = 5,
-    ///             Tags = 
-    ///             {
-    ///                 { "test", "test" },
-    ///             },
-    ///             Type = "IPSEC",
-    ///             Zone = "ap-guangzhou-3",
-    ///         });
-    ///     }
+    ///             { "test", "test" },
+    ///         },
+    ///         Type = "IPSEC",
+    ///         Zone = "ap-guangzhou-3",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
+    /// 
     /// ### CCN SSL VPN gateway
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var myCgw = new Tencentcloud.Vpn.Gateway("myCgw", new()
     ///     {
-    ///         var myCgw = new Tencentcloud.Vpn.Gateway("myCgw", new Tencentcloud.Vpn.GatewayArgs
+    ///         Bandwidth = 5,
+    ///         Tags = 
     ///         {
-    ///             Bandwidth = 5,
-    ///             Tags = 
-    ///             {
-    ///                 { "test", "test" },
-    ///             },
-    ///             Type = "SSL_CCN",
-    ///             Zone = "ap-guangzhou-3",
-    ///         });
-    ///     }
+    ///             { "test", "test" },
+    ///         },
+    ///         Type = "SSL_CCN",
+    ///         Zone = "ap-guangzhou-3",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
+    /// 
     /// ### POSTPAID_BY_HOUR VPN gateway
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var myCgw = new Tencentcloud.Vpn.Gateway("myCgw", new()
     ///     {
-    ///         var myCgw = new Tencentcloud.Vpn.Gateway("myCgw", new Tencentcloud.Vpn.GatewayArgs
+    ///         Bandwidth = 5,
+    ///         Tags = 
     ///         {
-    ///             Bandwidth = 5,
-    ///             Tags = 
-    ///             {
-    ///                 { "test", "test" },
-    ///             },
-    ///             VpcId = "vpc-dk8zmwuf",
-    ///             Zone = "ap-guangzhou-3",
-    ///         });
-    ///     }
+    ///             { "test", "test" },
+    ///         },
+    ///         VpcId = "vpc-dk8zmwuf",
+    ///         Zone = "ap-guangzhou-3",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
+    /// 
     /// ### PREPAID VPN gateway
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var myCgw = new Tencentcloud.Vpn.Gateway("myCgw", new()
     ///     {
-    ///         var myCgw = new Tencentcloud.Vpn.Gateway("myCgw", new Tencentcloud.Vpn.GatewayArgs
+    ///         Bandwidth = 5,
+    ///         ChargeType = "PREPAID",
+    ///         PrepaidPeriod = 1,
+    ///         Tags = 
     ///         {
-    ///             Bandwidth = 5,
-    ///             ChargeType = "PREPAID",
-    ///             PrepaidPeriod = 1,
-    ///             Tags = 
-    ///             {
-    ///                 { "test", "test" },
-    ///             },
-    ///             VpcId = "vpc-dk8zmwuf",
-    ///             Zone = "ap-guangzhou-3",
-    ///         });
-    ///     }
+    ///             { "test", "test" },
+    ///         },
+    ///         VpcId = "vpc-dk8zmwuf",
+    ///         Zone = "ap-guangzhou-3",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// VPN gateway can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Vpn/gateway:Gateway foo vpngw-8ccsnclt
+    /// $ pulumi import tencentcloud:Vpn/gateway:Gateway foo vpngw-8ccsnclt
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Vpn/gateway:Gateway")]
-    public partial class Gateway : Pulumi.CustomResource
+    public partial class Gateway : global::Pulumi.CustomResource
     {
         /// <summary>
         /// The maximum public network output bandwidth of VPN gateway (unit: Mbps), the available values include: 5,10,20,50,100,200,500,1000. Default is 5. When charge type is `PREPAID`, bandwidth degradation operation is unsupported.
@@ -300,7 +310,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpn
         }
     }
 
-    public sealed class GatewayArgs : Pulumi.ResourceArgs
+    public sealed class GatewayArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// The maximum public network output bandwidth of VPN gateway (unit: Mbps), the available values include: 5,10,20,50,100,200,500,1000. Default is 5. When charge type is `PREPAID`, bandwidth degradation operation is unsupported.
@@ -377,9 +387,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpn
         public GatewayArgs()
         {
         }
+        public static new GatewayArgs Empty => new GatewayArgs();
     }
 
-    public sealed class GatewayState : Pulumi.ResourceArgs
+    public sealed class GatewayState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// The maximum public network output bandwidth of VPN gateway (unit: Mbps), the available values include: 5,10,20,50,100,200,500,1000. Default is 5. When charge type is `PREPAID`, bandwidth degradation operation is unsupported.
@@ -498,5 +509,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpn
         public GatewayState()
         {
         }
+        public static new GatewayState Empty => new GatewayState();
     }
 }

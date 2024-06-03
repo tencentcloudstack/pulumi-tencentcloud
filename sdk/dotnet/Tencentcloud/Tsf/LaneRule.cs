@@ -15,38 +15,39 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var laneRule = new Tencentcloud.Tsf.LaneRule("laneRule", new()
     ///     {
-    ///         var laneRule = new Tencentcloud.Tsf.LaneRule("laneRule", new Tencentcloud.Tsf.LaneRuleArgs
+    ///         Enable = false,
+    ///         LaneId = "lane-abw5oo5a",
+    ///         Remark = "terraform-test",
+    ///         RuleName = "terraform-rule-name",
+    ///         RuleTagLists = new[]
     ///         {
-    ///             Enable = false,
-    ///             LaneId = "lane-abw5oo5a",
-    ///             Remark = "terraform-test",
-    ///             RuleName = "terraform-rule-name",
-    ///             RuleTagLists = 
+    ///             new Tencentcloud.Tsf.Inputs.LaneRuleRuleTagListArgs
     ///             {
-    ///                 new Tencentcloud.Tsf.Inputs.LaneRuleRuleTagListArgs
-    ///                 {
-    ///                     TagName = "xxx",
-    ///                     TagOperator = "EQUAL",
-    ///                     TagValue = "222",
-    ///                 },
+    ///                 TagName = "xxx",
+    ///                 TagOperator = "EQUAL",
+    ///                 TagValue = "222",
     ///             },
-    ///             RuleTagRelationship = "RELEATION_AND",
-    ///         });
-    ///     }
+    ///         },
+    ///         RuleTagRelationship = "RELEATION_AND",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Tsf/laneRule:LaneRule")]
-    public partial class LaneRule : Pulumi.CustomResource
+    public partial class LaneRule : global::Pulumi.CustomResource
     {
         /// <summary>
         /// creation time.
@@ -159,7 +160,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf
         }
     }
 
-    public sealed class LaneRuleArgs : Pulumi.ResourceArgs
+    public sealed class LaneRuleArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// open state, true/false, default: false.
@@ -218,9 +219,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf
         public LaneRuleArgs()
         {
         }
+        public static new LaneRuleArgs Empty => new LaneRuleArgs();
     }
 
-    public sealed class LaneRuleState : Pulumi.ResourceArgs
+    public sealed class LaneRuleState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// creation time.
@@ -303,5 +305,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf
         public LaneRuleState()
         {
         }
+        public static new LaneRuleState Empty => new LaneRuleState();
     }
 }

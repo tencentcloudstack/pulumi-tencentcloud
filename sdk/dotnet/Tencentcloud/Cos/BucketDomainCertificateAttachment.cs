@@ -15,38 +15,39 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var foo = new Tencentcloud.Cos.BucketDomainCertificateAttachment("foo", new()
     ///     {
-    ///         var foo = new Tencentcloud.Cos.BucketDomainCertificateAttachment("foo", new Tencentcloud.Cos.BucketDomainCertificateAttachmentArgs
+    ///         Bucket = "",
+    ///         DomainCertificate = new Tencentcloud.Cos.Inputs.BucketDomainCertificateAttachmentDomainCertificateArgs
     ///         {
-    ///             Bucket = "",
-    ///             DomainCertificate = new Tencentcloud.Cos.Inputs.BucketDomainCertificateAttachmentDomainCertificateArgs
+    ///             Certificate = new Tencentcloud.Cos.Inputs.BucketDomainCertificateAttachmentDomainCertificateCertificateArgs
     ///             {
-    ///                 Certificate = new Tencentcloud.Cos.Inputs.BucketDomainCertificateAttachmentDomainCertificateCertificateArgs
+    ///                 CertType = "CustomCert",
+    ///                 CustomCert = new Tencentcloud.Cos.Inputs.BucketDomainCertificateAttachmentDomainCertificateCertificateCustomCertArgs
     ///                 {
-    ///                     CertType = "CustomCert",
-    ///                     CustomCert = new Tencentcloud.Cos.Inputs.BucketDomainCertificateAttachmentDomainCertificateCertificateCustomCertArgs
-    ///                     {
-    ///                         Cert = "===CERTIFICATE===",
-    ///                         PrivateKey = "===PRIVATE_KEY===",
-    ///                     },
+    ///                     Cert = "===CERTIFICATE===",
+    ///                     PrivateKey = "===PRIVATE_KEY===",
     ///                 },
-    ///                 Domain = "domain_name",
     ///             },
-    ///         });
-    ///     }
+    ///             Domain = "domain_name",
+    ///         },
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Cos/bucketDomainCertificateAttachment:BucketDomainCertificateAttachment")]
-    public partial class BucketDomainCertificateAttachment : Pulumi.CustomResource
+    public partial class BucketDomainCertificateAttachment : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Bucket name.
@@ -105,7 +106,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos
         }
     }
 
-    public sealed class BucketDomainCertificateAttachmentArgs : Pulumi.ResourceArgs
+    public sealed class BucketDomainCertificateAttachmentArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Bucket name.
@@ -122,9 +123,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos
         public BucketDomainCertificateAttachmentArgs()
         {
         }
+        public static new BucketDomainCertificateAttachmentArgs Empty => new BucketDomainCertificateAttachmentArgs();
     }
 
-    public sealed class BucketDomainCertificateAttachmentState : Pulumi.ResourceArgs
+    public sealed class BucketDomainCertificateAttachmentState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Bucket name.
@@ -141,5 +143,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos
         public BucketDomainCertificateAttachmentState()
         {
         }
+        public static new BucketDomainCertificateAttachmentState Empty => new BucketDomainCertificateAttachmentState();
     }
 }

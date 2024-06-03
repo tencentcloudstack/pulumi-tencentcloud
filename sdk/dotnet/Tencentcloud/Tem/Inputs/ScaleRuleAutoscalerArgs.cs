@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tem.Inputs
 {
 
-    public sealed class ScaleRuleAutoscalerArgs : Pulumi.ResourceArgs
+    public sealed class ScaleRuleAutoscalerArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// name.
@@ -70,5 +70,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tem.Inputs
         public ScaleRuleAutoscalerArgs()
         {
         }
+        public static new ScaleRuleAutoscalerArgs Empty => new ScaleRuleAutoscalerArgs();
     }
 }

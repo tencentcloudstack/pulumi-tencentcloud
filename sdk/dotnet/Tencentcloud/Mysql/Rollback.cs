@@ -14,7 +14,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
     /// Provides a resource to create a mysql rollback
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Mysql/rollback:Rollback")]
-    public partial class Rollback : Pulumi.CustomResource
+    public partial class Rollback : global::Pulumi.CustomResource
     {
         /// <summary>
         /// The database information to be archived, indicating that the entire database is archived.
@@ -91,7 +91,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
         }
     }
 
-    public sealed class RollbackArgs : Pulumi.ResourceArgs
+    public sealed class RollbackArgs : global::Pulumi.ResourceArgs
     {
         [Input("databases")]
         private InputList<Inputs.RollbackDatabaseArgs>? _databases;
@@ -138,9 +138,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
         public RollbackArgs()
         {
         }
+        public static new RollbackArgs Empty => new RollbackArgs();
     }
 
-    public sealed class RollbackState : Pulumi.ResourceArgs
+    public sealed class RollbackState : global::Pulumi.ResourceArgs
     {
         [Input("databases")]
         private InputList<Inputs.RollbackDatabaseGetArgs>? _databases;
@@ -187,5 +188,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
         public RollbackState()
         {
         }
+        public static new RollbackState Empty => new RollbackState();
     }
 }

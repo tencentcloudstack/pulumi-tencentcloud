@@ -8,45 +8,51 @@ import * as utilities from "../utilities";
  * Provides a resource to create a cfw natFirewallSwitch
  *
  * ## Example Usage
+ *
  * ### Turn off switch
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const exampleNatFwSwitches = tencentcloud.Cfw.getNatFwSwitches({
  *     natInsId: "cfwnat-18d2ba18",
  * });
  * const exampleNatFirewallSwitch = new tencentcloud.cfw.NatFirewallSwitch("exampleNatFirewallSwitch", {
  *     natInsId: exampleNatFwSwitches.then(exampleNatFwSwitches => exampleNatFwSwitches.id),
- *     subnetId: exampleNatFwSwitches.then(exampleNatFwSwitches => exampleNatFwSwitches.datas?[0]?.subnetId),
+ *     subnetId: exampleNatFwSwitches.then(exampleNatFwSwitches => exampleNatFwSwitches.datas?.[0]?.subnetId),
  *     enable: 0,
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
+ *
  * ### Or turn on switch
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const exampleNatFwSwitches = tencentcloud.Cfw.getNatFwSwitches({
  *     natInsId: "cfwnat-18d2ba18",
  * });
  * const exampleNatFirewallSwitch = new tencentcloud.cfw.NatFirewallSwitch("exampleNatFirewallSwitch", {
  *     natInsId: exampleNatFwSwitches.then(exampleNatFwSwitches => exampleNatFwSwitches.id),
- *     subnetId: exampleNatFwSwitches.then(exampleNatFwSwitches => exampleNatFwSwitches.datas?[0]?.subnetId),
+ *     subnetId: exampleNatFwSwitches.then(exampleNatFwSwitches => exampleNatFwSwitches.datas?.[0]?.subnetId),
  *     enable: 1,
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * cfw nat_firewall_switch can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Cfw/natFirewallSwitch:NatFirewallSwitch example cfwnat-18d2ba18#subnet-ef7wyymr
+ * $ pulumi import tencentcloud:Cfw/natFirewallSwitch:NatFirewallSwitch example cfwnat-18d2ba18#subnet-ef7wyymr
  * ```
  */
 export class NatFirewallSwitch extends pulumi.CustomResource {

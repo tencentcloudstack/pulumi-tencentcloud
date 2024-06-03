@@ -7,56 +7,62 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Use this resource to create ckafka topic.
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ckafka"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ckafka"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Ckafka.NewTopic(ctx, "foo", &Ckafka.TopicArgs{
-// 			CleanUpPolicy:   pulumi.String("delete"),
-// 			EnableWhiteList: pulumi.Bool(true),
-// 			InstanceId:      pulumi.String("ckafka-f9ife4zz"),
-// 			IpWhiteLists: pulumi.StringArray{
-// 				pulumi.String("ip1"),
-// 				pulumi.String("ip2"),
-// 			},
-// 			MaxMessageBytes:             pulumi.Int(0),
-// 			Note:                        pulumi.String("topic note"),
-// 			PartitionNum:                pulumi.Int(1),
-// 			ReplicaNum:                  pulumi.Int(2),
-// 			Retention:                   pulumi.Int(60000),
-// 			Segment:                     pulumi.Int(3600000),
-// 			SyncReplicaMinNum:           pulumi.Int(1),
-// 			TopicName:                   pulumi.String("example"),
-// 			UncleanLeaderElectionEnable: pulumi.Bool(false),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Ckafka.NewTopic(ctx, "foo", &Ckafka.TopicArgs{
+//				CleanUpPolicy:   pulumi.String("delete"),
+//				EnableWhiteList: pulumi.Bool(true),
+//				InstanceId:      pulumi.String("ckafka-f9ife4zz"),
+//				IpWhiteLists: pulumi.StringArray{
+//					pulumi.String("ip1"),
+//					pulumi.String("ip2"),
+//				},
+//				MaxMessageBytes:             pulumi.Int(0),
+//				Note:                        pulumi.String("topic note"),
+//				PartitionNum:                pulumi.Int(1),
+//				ReplicaNum:                  pulumi.Int(2),
+//				Retention:                   pulumi.Int(60000),
+//				Segment:                     pulumi.Int(3600000),
+//				SyncReplicaMinNum:           pulumi.Int(1),
+//				TopicName:                   pulumi.String("example"),
+//				UncleanLeaderElectionEnable: pulumi.Bool(false),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // ckafka topic can be imported using the instance_id#topic_name, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Ckafka/topic:Topic foo ckafka-f9ife4zz#example
+// $ pulumi import tencentcloud:Ckafka/topic:Topic foo ckafka-f9ife4zz#example
 // ```
 type Topic struct {
 	pulumi.CustomResourceState
@@ -120,7 +126,7 @@ func NewTopic(ctx *pulumi.Context,
 	if args.TopicName == nil {
 		return nil, errors.New("invalid value for required argument 'TopicName'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource Topic
 	err := ctx.RegisterResource("tencentcloud:Ckafka/topic:Topic", name, args, &resource, opts...)
 	if err != nil {
@@ -313,7 +319,7 @@ func (i *Topic) ToTopicOutputWithContext(ctx context.Context) TopicOutput {
 // TopicArrayInput is an input type that accepts TopicArray and TopicArrayOutput values.
 // You can construct a concrete instance of `TopicArrayInput` via:
 //
-//          TopicArray{ TopicArgs{...} }
+//	TopicArray{ TopicArgs{...} }
 type TopicArrayInput interface {
 	pulumi.Input
 
@@ -338,7 +344,7 @@ func (i TopicArray) ToTopicArrayOutputWithContext(ctx context.Context) TopicArra
 // TopicMapInput is an input type that accepts TopicMap and TopicMapOutput values.
 // You can construct a concrete instance of `TopicMapInput` via:
 //
-//          TopicMap{ "key": TopicArgs{...} }
+//	TopicMap{ "key": TopicArgs{...} }
 type TopicMapInput interface {
 	pulumi.Input
 

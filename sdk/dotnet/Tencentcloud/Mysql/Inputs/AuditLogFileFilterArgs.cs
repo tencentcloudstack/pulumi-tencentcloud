@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql.Inputs
 {
 
-    public sealed class AuditLogFileFilterArgs : Pulumi.ResourceArgs
+    public sealed class AuditLogFileFilterArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Affects the number of rows. Indicates to filter audit logs whose number of affected rows is greater than this value.
@@ -124,5 +124,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql.Inputs
         public AuditLogFileFilterArgs()
         {
         }
+        public static new AuditLogFileFilterArgs Empty => new AuditLogFileFilterArgs();
     }
 }

@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Scf.Inputs
 {
 
-    public sealed class FunctionTriggerGetArgs : Pulumi.ResourceArgs
+    public sealed class FunctionTriggerGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Region of cos bucket. if `type` is `cos`, `cos_region` is required.
@@ -40,5 +40,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Scf.Inputs
         public FunctionTriggerGetArgs()
         {
         }
+        public static new FunctionTriggerGetArgs Empty => new FunctionTriggerGetArgs();
     }
 }

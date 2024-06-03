@@ -15,47 +15,48 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Audit
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var track = new Tencentcloud.Audit.Track("track", new()
     ///     {
-    ///         var track = new Tencentcloud.Audit.Track("track", new Tencentcloud.Audit.TrackArgs
+    ///         ActionType = "Read",
+    ///         EventNames = new[]
     ///         {
-    ///             ActionType = "Read",
-    ///             EventNames = 
-    ///             {
-    ///                 "*",
-    ///             },
-    ///             ResourceType = "*",
-    ///             Status = 1,
-    ///             Storage = new Tencentcloud.Audit.Inputs.TrackStorageArgs
-    ///             {
-    ///                 StorageName = "db90b92c-91d2-46b0-94ac-debbbb21dc4e",
-    ///                 StoragePrefix = "cloudaudit",
-    ///                 StorageRegion = "ap-guangzhou",
-    ///                 StorageType = "cls",
-    ///             },
-    ///             TrackForAllMembers = 0,
-    ///         });
-    ///     }
+    ///             "*",
+    ///         },
+    ///         ResourceType = "*",
+    ///         Status = 1,
+    ///         Storage = new Tencentcloud.Audit.Inputs.TrackStorageArgs
+    ///         {
+    ///             StorageName = "db90b92c-91d2-46b0-94ac-debbbb21dc4e",
+    ///             StoragePrefix = "cloudaudit",
+    ///             StorageRegion = "ap-guangzhou",
+    ///             StorageType = "cls",
+    ///         },
+    ///         TrackForAllMembers = 0,
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// audit track can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Audit/track:Track track track_id
+    /// $ pulumi import tencentcloud:Audit/track:Track track track_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Audit/track:Track")]
-    public partial class Track : Pulumi.CustomResource
+    public partial class Track : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Track interface type, optional:- `Read`: Read interface- `Write`: Write interface- `*`: All interface.
@@ -150,7 +151,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Audit
         }
     }
 
-    public sealed class TrackArgs : Pulumi.ResourceArgs
+    public sealed class TrackArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Track interface type, optional:- `Read`: Read interface- `Write`: Write interface- `*`: All interface.
@@ -203,9 +204,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Audit
         public TrackArgs()
         {
         }
+        public static new TrackArgs Empty => new TrackArgs();
     }
 
-    public sealed class TrackState : Pulumi.ResourceArgs
+    public sealed class TrackState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Track interface type, optional:- `Read`: Read interface- `Write`: Write interface- `*`: All interface.
@@ -264,5 +266,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Audit
         public TrackState()
         {
         }
+        public static new TrackState Empty => new TrackState();
     }
 }

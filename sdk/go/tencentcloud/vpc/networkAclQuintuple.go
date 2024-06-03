@@ -7,8 +7,9 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 type NetworkAclQuintuple struct {
@@ -33,7 +34,7 @@ func NewNetworkAclQuintuple(ctx *pulumi.Context,
 	if args.NetworkAclQuintupleSet == nil {
 		return nil, errors.New("invalid value for required argument 'NetworkAclQuintupleSet'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource NetworkAclQuintuple
 	err := ctx.RegisterResource("tencentcloud:Vpc/networkAclQuintuple:NetworkAclQuintuple", name, args, &resource, opts...)
 	if err != nil {
@@ -114,7 +115,7 @@ func (i *NetworkAclQuintuple) ToNetworkAclQuintupleOutputWithContext(ctx context
 // NetworkAclQuintupleArrayInput is an input type that accepts NetworkAclQuintupleArray and NetworkAclQuintupleArrayOutput values.
 // You can construct a concrete instance of `NetworkAclQuintupleArrayInput` via:
 //
-//          NetworkAclQuintupleArray{ NetworkAclQuintupleArgs{...} }
+//	NetworkAclQuintupleArray{ NetworkAclQuintupleArgs{...} }
 type NetworkAclQuintupleArrayInput interface {
 	pulumi.Input
 
@@ -139,7 +140,7 @@ func (i NetworkAclQuintupleArray) ToNetworkAclQuintupleArrayOutputWithContext(ct
 // NetworkAclQuintupleMapInput is an input type that accepts NetworkAclQuintupleMap and NetworkAclQuintupleMapOutput values.
 // You can construct a concrete instance of `NetworkAclQuintupleMapInput` via:
 //
-//          NetworkAclQuintupleMap{ "key": NetworkAclQuintupleArgs{...} }
+//	NetworkAclQuintupleMap{ "key": NetworkAclQuintupleArgs{...} }
 type NetworkAclQuintupleMapInput interface {
 	pulumi.Input
 

@@ -9,14 +9,14 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const flushBinlog = new tencentcloud.Mariadb.FlushBinlog("flush_binlog", {
- *     instanceId: "tdsql-9vqvls95",
- * });
+ * const flushBinlog = new tencentcloud.mariadb.FlushBinlog("flushBinlog", {instanceId: "tdsql-9vqvls95"});
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export class FlushBinlog extends pulumi.CustomResource {
     /**

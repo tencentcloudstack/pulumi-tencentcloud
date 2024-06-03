@@ -8,39 +8,44 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Use this data source to query monitor events(There is a lot of data and it is recommended to output to a file)
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Monitor"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Monitor"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Monitor"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Monitor.GetProductEvent(ctx, &monitor.GetProductEventArgs{
-// 			IsAlarmConfig: pulumi.IntRef(0),
-// 			ProductNames: []string{
-// 				"cvm",
-// 			},
-// 			StartTime: pulumi.IntRef(1588700283),
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Monitor.GetProductEvent(ctx, &monitor.GetProductEventArgs{
+//				IsAlarmConfig: pulumi.IntRef(0),
+//				ProductNames: []string{
+//					"cvm",
+//				},
+//				StartTime: pulumi.IntRef(1588700283),
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 func GetProductEvent(ctx *pulumi.Context, args *GetProductEventArgs, opts ...pulumi.InvokeOption) (*GetProductEventResult, error) {
-	opts = pkgInvokeDefaultOpts(opts)
+	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetProductEventResult
 	err := ctx.Invoke("tencentcloud:Monitor/getProductEvent:getProductEvent", args, &rv, opts...)
 	if err != nil {

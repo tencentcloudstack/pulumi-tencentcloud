@@ -8,37 +8,42 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Use this data source to query detailed information of mariadb databaseTable
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Mariadb"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Mariadb"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Mariadb"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Mariadb.GetDatabaseTable(ctx, &mariadb.GetDatabaseTableArgs{
-// 			DbName:     "mysql",
-// 			InstanceId: "tdsql-e9tklsgz",
-// 			Table:      "server_cost",
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Mariadb.GetDatabaseTable(ctx, &mariadb.GetDatabaseTableArgs{
+//				DbName:     "mysql",
+//				InstanceId: "tdsql-e9tklsgz",
+//				Table:      "server_cost",
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 func GetDatabaseTable(ctx *pulumi.Context, args *GetDatabaseTableArgs, opts ...pulumi.InvokeOption) (*GetDatabaseTableResult, error) {
-	opts = pkgInvokeDefaultOpts(opts)
+	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetDatabaseTableResult
 	err := ctx.Invoke("tencentcloud:Mariadb/getDatabaseTable:getDatabaseTable", args, &rv, opts...)
 	if err != nil {

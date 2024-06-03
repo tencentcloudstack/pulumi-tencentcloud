@@ -8,7 +8,10 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
+
+var _ = internal.GetEnvOrDefault
 
 type GetAccessGroupsAccessGroupList struct {
 	// A specified access group ID used to query.
@@ -24,7 +27,7 @@ type GetAccessGroupsAccessGroupList struct {
 // GetAccessGroupsAccessGroupListInput is an input type that accepts GetAccessGroupsAccessGroupListArgs and GetAccessGroupsAccessGroupListOutput values.
 // You can construct a concrete instance of `GetAccessGroupsAccessGroupListInput` via:
 //
-//          GetAccessGroupsAccessGroupListArgs{...}
+//	GetAccessGroupsAccessGroupListArgs{...}
 type GetAccessGroupsAccessGroupListInput interface {
 	pulumi.Input
 
@@ -58,7 +61,7 @@ func (i GetAccessGroupsAccessGroupListArgs) ToGetAccessGroupsAccessGroupListOutp
 // GetAccessGroupsAccessGroupListArrayInput is an input type that accepts GetAccessGroupsAccessGroupListArray and GetAccessGroupsAccessGroupListArrayOutput values.
 // You can construct a concrete instance of `GetAccessGroupsAccessGroupListArrayInput` via:
 //
-//          GetAccessGroupsAccessGroupListArray{ GetAccessGroupsAccessGroupListArgs{...} }
+//	GetAccessGroupsAccessGroupListArray{ GetAccessGroupsAccessGroupListArgs{...} }
 type GetAccessGroupsAccessGroupListArrayInput interface {
 	pulumi.Input
 
@@ -150,7 +153,7 @@ type GetAccessRulesAccessRuleList struct {
 // GetAccessRulesAccessRuleListInput is an input type that accepts GetAccessRulesAccessRuleListArgs and GetAccessRulesAccessRuleListOutput values.
 // You can construct a concrete instance of `GetAccessRulesAccessRuleListInput` via:
 //
-//          GetAccessRulesAccessRuleListArgs{...}
+//	GetAccessRulesAccessRuleListArgs{...}
 type GetAccessRulesAccessRuleListInput interface {
 	pulumi.Input
 
@@ -186,7 +189,7 @@ func (i GetAccessRulesAccessRuleListArgs) ToGetAccessRulesAccessRuleListOutputWi
 // GetAccessRulesAccessRuleListArrayInput is an input type that accepts GetAccessRulesAccessRuleListArray and GetAccessRulesAccessRuleListArrayOutput values.
 // You can construct a concrete instance of `GetAccessRulesAccessRuleListArrayInput` via:
 //
-//          GetAccessRulesAccessRuleListArray{ GetAccessRulesAccessRuleListArgs{...} }
+//	GetAccessRulesAccessRuleListArray{ GetAccessRulesAccessRuleListArgs{...} }
 type GetAccessRulesAccessRuleListArrayInput interface {
 	pulumi.Input
 
@@ -283,7 +286,7 @@ type GetAvailableZoneRegionZone struct {
 // GetAvailableZoneRegionZoneInput is an input type that accepts GetAvailableZoneRegionZoneArgs and GetAvailableZoneRegionZoneOutput values.
 // You can construct a concrete instance of `GetAvailableZoneRegionZoneInput` via:
 //
-//          GetAvailableZoneRegionZoneArgs{...}
+//	GetAvailableZoneRegionZoneArgs{...}
 type GetAvailableZoneRegionZoneInput interface {
 	pulumi.Input
 
@@ -319,7 +322,7 @@ func (i GetAvailableZoneRegionZoneArgs) ToGetAvailableZoneRegionZoneOutputWithCo
 // GetAvailableZoneRegionZoneArrayInput is an input type that accepts GetAvailableZoneRegionZoneArray and GetAvailableZoneRegionZoneArrayOutput values.
 // You can construct a concrete instance of `GetAvailableZoneRegionZoneArrayInput` via:
 //
-//          GetAvailableZoneRegionZoneArray{ GetAvailableZoneRegionZoneArgs{...} }
+//	GetAvailableZoneRegionZoneArray{ GetAvailableZoneRegionZoneArgs{...} }
 type GetAvailableZoneRegionZoneArrayInput interface {
 	pulumi.Input
 
@@ -416,7 +419,7 @@ type GetAvailableZoneRegionZoneZone struct {
 // GetAvailableZoneRegionZoneZoneInput is an input type that accepts GetAvailableZoneRegionZoneZoneArgs and GetAvailableZoneRegionZoneZoneOutput values.
 // You can construct a concrete instance of `GetAvailableZoneRegionZoneZoneInput` via:
 //
-//          GetAvailableZoneRegionZoneZoneArgs{...}
+//	GetAvailableZoneRegionZoneZoneArgs{...}
 type GetAvailableZoneRegionZoneZoneInput interface {
 	pulumi.Input
 
@@ -452,7 +455,7 @@ func (i GetAvailableZoneRegionZoneZoneArgs) ToGetAvailableZoneRegionZoneZoneOutp
 // GetAvailableZoneRegionZoneZoneArrayInput is an input type that accepts GetAvailableZoneRegionZoneZoneArray and GetAvailableZoneRegionZoneZoneArrayOutput values.
 // You can construct a concrete instance of `GetAvailableZoneRegionZoneZoneArrayInput` via:
 //
-//          GetAvailableZoneRegionZoneZoneArray{ GetAvailableZoneRegionZoneZoneArgs{...} }
+//	GetAvailableZoneRegionZoneZoneArray{ GetAvailableZoneRegionZoneZoneArgs{...} }
 type GetAvailableZoneRegionZoneZoneArrayInput interface {
 	pulumi.Input
 
@@ -545,7 +548,7 @@ type GetAvailableZoneRegionZoneZoneType struct {
 // GetAvailableZoneRegionZoneZoneTypeInput is an input type that accepts GetAvailableZoneRegionZoneZoneTypeArgs and GetAvailableZoneRegionZoneZoneTypeOutput values.
 // You can construct a concrete instance of `GetAvailableZoneRegionZoneZoneTypeInput` via:
 //
-//          GetAvailableZoneRegionZoneZoneTypeArgs{...}
+//	GetAvailableZoneRegionZoneZoneTypeArgs{...}
 type GetAvailableZoneRegionZoneZoneTypeInput interface {
 	pulumi.Input
 
@@ -577,7 +580,7 @@ func (i GetAvailableZoneRegionZoneZoneTypeArgs) ToGetAvailableZoneRegionZoneZone
 // GetAvailableZoneRegionZoneZoneTypeArrayInput is an input type that accepts GetAvailableZoneRegionZoneZoneTypeArray and GetAvailableZoneRegionZoneZoneTypeArrayOutput values.
 // You can construct a concrete instance of `GetAvailableZoneRegionZoneZoneTypeArrayInput` via:
 //
-//          GetAvailableZoneRegionZoneZoneTypeArray{ GetAvailableZoneRegionZoneZoneTypeArgs{...} }
+//	GetAvailableZoneRegionZoneZoneTypeArray{ GetAvailableZoneRegionZoneZoneTypeArgs{...} }
 type GetAvailableZoneRegionZoneZoneTypeArrayInput interface {
 	pulumi.Input
 
@@ -660,7 +663,7 @@ type GetAvailableZoneRegionZoneZoneTypeProtocol struct {
 // GetAvailableZoneRegionZoneZoneTypeProtocolInput is an input type that accepts GetAvailableZoneRegionZoneZoneTypeProtocolArgs and GetAvailableZoneRegionZoneZoneTypeProtocolOutput values.
 // You can construct a concrete instance of `GetAvailableZoneRegionZoneZoneTypeProtocolInput` via:
 //
-//          GetAvailableZoneRegionZoneZoneTypeProtocolArgs{...}
+//	GetAvailableZoneRegionZoneZoneTypeProtocolArgs{...}
 type GetAvailableZoneRegionZoneZoneTypeProtocolInput interface {
 	pulumi.Input
 
@@ -690,7 +693,7 @@ func (i GetAvailableZoneRegionZoneZoneTypeProtocolArgs) ToGetAvailableZoneRegion
 // GetAvailableZoneRegionZoneZoneTypeProtocolArrayInput is an input type that accepts GetAvailableZoneRegionZoneZoneTypeProtocolArray and GetAvailableZoneRegionZoneZoneTypeProtocolArrayOutput values.
 // You can construct a concrete instance of `GetAvailableZoneRegionZoneZoneTypeProtocolArrayInput` via:
 //
-//          GetAvailableZoneRegionZoneZoneTypeProtocolArray{ GetAvailableZoneRegionZoneZoneTypeProtocolArgs{...} }
+//	GetAvailableZoneRegionZoneZoneTypeProtocolArray{ GetAvailableZoneRegionZoneZoneTypeProtocolArgs{...} }
 type GetAvailableZoneRegionZoneZoneTypeProtocolArrayInput interface {
 	pulumi.Input
 
@@ -774,7 +777,7 @@ type GetFileSystemClientsClientList struct {
 // GetFileSystemClientsClientListInput is an input type that accepts GetFileSystemClientsClientListArgs and GetFileSystemClientsClientListOutput values.
 // You can construct a concrete instance of `GetFileSystemClientsClientListInput` via:
 //
-//          GetFileSystemClientsClientListArgs{...}
+//	GetFileSystemClientsClientListArgs{...}
 type GetFileSystemClientsClientListInput interface {
 	pulumi.Input
 
@@ -812,7 +815,7 @@ func (i GetFileSystemClientsClientListArgs) ToGetFileSystemClientsClientListOutp
 // GetFileSystemClientsClientListArrayInput is an input type that accepts GetFileSystemClientsClientListArray and GetFileSystemClientsClientListArrayOutput values.
 // You can construct a concrete instance of `GetFileSystemClientsClientListArrayInput` via:
 //
-//          GetFileSystemClientsClientListArray{ GetFileSystemClientsClientListArgs{...} }
+//	GetFileSystemClientsClientListArray{ GetFileSystemClientsClientListArgs{...} }
 type GetFileSystemClientsClientListArrayInput interface {
 	pulumi.Input
 
@@ -928,7 +931,7 @@ type GetFileSystemsFileSystemList struct {
 // GetFileSystemsFileSystemListInput is an input type that accepts GetFileSystemsFileSystemListArgs and GetFileSystemsFileSystemListOutput values.
 // You can construct a concrete instance of `GetFileSystemsFileSystemListInput` via:
 //
-//          GetFileSystemsFileSystemListArgs{...}
+//	GetFileSystemsFileSystemListArgs{...}
 type GetFileSystemsFileSystemListInput interface {
 	pulumi.Input
 
@@ -978,7 +981,7 @@ func (i GetFileSystemsFileSystemListArgs) ToGetFileSystemsFileSystemListOutputWi
 // GetFileSystemsFileSystemListArrayInput is an input type that accepts GetFileSystemsFileSystemListArray and GetFileSystemsFileSystemListArrayOutput values.
 // You can construct a concrete instance of `GetFileSystemsFileSystemListArrayInput` via:
 //
-//          GetFileSystemsFileSystemListArray{ GetFileSystemsFileSystemListArgs{...} }
+//	GetFileSystemsFileSystemListArray{ GetFileSystemsFileSystemListArgs{...} }
 type GetFileSystemsFileSystemListArrayInput interface {
 	pulumi.Input
 
@@ -1124,7 +1127,7 @@ type GetMountTargetsMountTarget struct {
 // GetMountTargetsMountTargetInput is an input type that accepts GetMountTargetsMountTargetArgs and GetMountTargetsMountTargetOutput values.
 // You can construct a concrete instance of `GetMountTargetsMountTargetInput` via:
 //
-//          GetMountTargetsMountTargetArgs{...}
+//	GetMountTargetsMountTargetArgs{...}
 type GetMountTargetsMountTargetInput interface {
 	pulumi.Input
 
@@ -1174,7 +1177,7 @@ func (i GetMountTargetsMountTargetArgs) ToGetMountTargetsMountTargetOutputWithCo
 // GetMountTargetsMountTargetArrayInput is an input type that accepts GetMountTargetsMountTargetArray and GetMountTargetsMountTargetArrayOutput values.
 // You can construct a concrete instance of `GetMountTargetsMountTargetArrayInput` via:
 //
-//          GetMountTargetsMountTargetArray{ GetMountTargetsMountTargetArgs{...} }
+//	GetMountTargetsMountTargetArray{ GetMountTargetsMountTargetArgs{...} }
 type GetMountTargetsMountTargetArrayInput interface {
 	pulumi.Input
 

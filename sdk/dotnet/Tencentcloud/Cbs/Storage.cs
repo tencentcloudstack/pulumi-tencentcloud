@@ -15,42 +15,43 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cbs
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var storage = new Tencentcloud.Cbs.Storage("storage", new()
     ///     {
-    ///         var storage = new Tencentcloud.Cbs.Storage("storage", new Tencentcloud.Cbs.StorageArgs
+    ///         AvailabilityZone = "ap-guangzhou-3",
+    ///         Encrypt = false,
+    ///         ProjectId = 0,
+    ///         StorageName = "mystorage",
+    ///         StorageSize = 100,
+    ///         StorageType = "CLOUD_SSD",
+    ///         Tags = 
     ///         {
-    ///             AvailabilityZone = "ap-guangzhou-3",
-    ///             Encrypt = false,
-    ///             ProjectId = 0,
-    ///             StorageName = "mystorage",
-    ///             StorageSize = 100,
-    ///             StorageType = "CLOUD_SSD",
-    ///             Tags = 
-    ///             {
-    ///                 { "test", "tf" },
-    ///             },
-    ///         });
-    ///     }
+    ///             { "test", "tf" },
+    ///         },
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// CBS storage can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Cbs/storage:Storage storage disk-41s6jwy4
+    /// $ pulumi import tencentcloud:Cbs/storage:Storage storage disk-41s6jwy4
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Cbs/storage:Storage")]
-    public partial class Storage : Pulumi.CustomResource
+    public partial class Storage : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Indicates whether the CBS is mounted the CVM.
@@ -199,7 +200,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cbs
         }
     }
 
-    public sealed class StorageArgs : Pulumi.ResourceArgs
+    public sealed class StorageArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// The available zone that the CBS instance locates at.
@@ -300,9 +301,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cbs
         public StorageArgs()
         {
         }
+        public static new StorageArgs Empty => new StorageArgs();
     }
 
-    public sealed class StorageState : Pulumi.ResourceArgs
+    public sealed class StorageState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Indicates whether the CBS is mounted the CVM.
@@ -415,5 +417,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cbs
         public StorageState()
         {
         }
+        public static new StorageState Empty => new StorageState();
     }
 }

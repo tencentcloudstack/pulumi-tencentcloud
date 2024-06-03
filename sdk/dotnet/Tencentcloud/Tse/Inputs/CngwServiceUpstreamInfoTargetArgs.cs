@@ -11,11 +11,17 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tse.Inputs
 {
 
-    public sealed class CngwServiceUpstreamInfoTargetArgs : Pulumi.ResourceArgs
+    public sealed class CngwServiceUpstreamInfoTargetArgs : global::Pulumi.ResourceArgs
     {
+        /// <summary>
+        /// created time.
+        /// </summary>
         [Input("createdTime")]
         public Input<string>? CreatedTime { get; set; }
 
+        /// <summary>
+        /// health.
+        /// </summary>
         [Input("health")]
         public Input<string>? Health { get; set; }
 
@@ -46,5 +52,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tse.Inputs
         public CngwServiceUpstreamInfoTargetArgs()
         {
         }
+        public static new CngwServiceUpstreamInfoTargetArgs Empty => new CngwServiceUpstreamInfoTargetArgs();
     }
 }

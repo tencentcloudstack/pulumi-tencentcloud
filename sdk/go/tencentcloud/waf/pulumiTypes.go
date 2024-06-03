@@ -8,7 +8,10 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
+
+var _ = internal.GetEnvOrDefault
 
 type AntiInfoLeakStrategy struct {
 	// Matching Content. If field is returncode support: 400, 403, 404, 4xx, 500, 501, 502, 504, 5xx; If field is information support: idcard, phone, bankcard; If field is keywords users input matching content themselves.
@@ -20,7 +23,7 @@ type AntiInfoLeakStrategy struct {
 // AntiInfoLeakStrategyInput is an input type that accepts AntiInfoLeakStrategyArgs and AntiInfoLeakStrategyOutput values.
 // You can construct a concrete instance of `AntiInfoLeakStrategyInput` via:
 //
-//          AntiInfoLeakStrategyArgs{...}
+//	AntiInfoLeakStrategyArgs{...}
 type AntiInfoLeakStrategyInput interface {
 	pulumi.Input
 
@@ -50,7 +53,7 @@ func (i AntiInfoLeakStrategyArgs) ToAntiInfoLeakStrategyOutputWithContext(ctx co
 // AntiInfoLeakStrategyArrayInput is an input type that accepts AntiInfoLeakStrategyArray and AntiInfoLeakStrategyArrayOutput values.
 // You can construct a concrete instance of `AntiInfoLeakStrategyArrayInput` via:
 //
-//          AntiInfoLeakStrategyArray{ AntiInfoLeakStrategyArgs{...} }
+//	AntiInfoLeakStrategyArray{ AntiInfoLeakStrategyArgs{...} }
 type AntiInfoLeakStrategyArrayInput interface {
 	pulumi.Input
 
@@ -144,7 +147,7 @@ type ClbDomainLoadBalancerSet struct {
 // ClbDomainLoadBalancerSetInput is an input type that accepts ClbDomainLoadBalancerSetArgs and ClbDomainLoadBalancerSetOutput values.
 // You can construct a concrete instance of `ClbDomainLoadBalancerSetInput` via:
 //
-//          ClbDomainLoadBalancerSetArgs{...}
+//	ClbDomainLoadBalancerSetArgs{...}
 type ClbDomainLoadBalancerSetInput interface {
 	pulumi.Input
 
@@ -192,7 +195,7 @@ func (i ClbDomainLoadBalancerSetArgs) ToClbDomainLoadBalancerSetOutputWithContex
 // ClbDomainLoadBalancerSetArrayInput is an input type that accepts ClbDomainLoadBalancerSetArray and ClbDomainLoadBalancerSetArrayOutput values.
 // You can construct a concrete instance of `ClbDomainLoadBalancerSetArrayInput` via:
 //
-//          ClbDomainLoadBalancerSetArray{ ClbDomainLoadBalancerSetArgs{...} }
+//	ClbDomainLoadBalancerSetArray{ ClbDomainLoadBalancerSetArgs{...} }
 type ClbDomainLoadBalancerSetArrayInput interface {
 	pulumi.Input
 
@@ -317,7 +320,7 @@ type CustomRuleStrategy struct {
 // CustomRuleStrategyInput is an input type that accepts CustomRuleStrategyArgs and CustomRuleStrategyOutput values.
 // You can construct a concrete instance of `CustomRuleStrategyInput` via:
 //
-//          CustomRuleStrategyArgs{...}
+//	CustomRuleStrategyArgs{...}
 type CustomRuleStrategyInput interface {
 	pulumi.Input
 
@@ -351,7 +354,7 @@ func (i CustomRuleStrategyArgs) ToCustomRuleStrategyOutputWithContext(ctx contex
 // CustomRuleStrategyArrayInput is an input type that accepts CustomRuleStrategyArray and CustomRuleStrategyArrayOutput values.
 // You can construct a concrete instance of `CustomRuleStrategyArrayInput` via:
 //
-//          CustomRuleStrategyArray{ CustomRuleStrategyArgs{...} }
+//	CustomRuleStrategyArray{ CustomRuleStrategyArgs{...} }
 type CustomRuleStrategyArrayInput interface {
 	pulumi.Input
 
@@ -441,7 +444,7 @@ type CustomWhiteRuleStrategy struct {
 // CustomWhiteRuleStrategyInput is an input type that accepts CustomWhiteRuleStrategyArgs and CustomWhiteRuleStrategyOutput values.
 // You can construct a concrete instance of `CustomWhiteRuleStrategyInput` via:
 //
-//          CustomWhiteRuleStrategyArgs{...}
+//	CustomWhiteRuleStrategyArgs{...}
 type CustomWhiteRuleStrategyInput interface {
 	pulumi.Input
 
@@ -475,7 +478,7 @@ func (i CustomWhiteRuleStrategyArgs) ToCustomWhiteRuleStrategyOutputWithContext(
 // CustomWhiteRuleStrategyArrayInput is an input type that accepts CustomWhiteRuleStrategyArray and CustomWhiteRuleStrategyArrayOutput values.
 // You can construct a concrete instance of `CustomWhiteRuleStrategyArrayInput` via:
 //
-//          CustomWhiteRuleStrategyArray{ CustomWhiteRuleStrategyArgs{...} }
+//	CustomWhiteRuleStrategyArray{ CustomWhiteRuleStrategyArgs{...} }
 type CustomWhiteRuleStrategyArrayInput interface {
 	pulumi.Input
 
@@ -559,9 +562,11 @@ type IpAccessControlItem struct {
 	// IP address.
 	Ip string `pulumi:"ip"`
 	// Note info.
-	Note        string  `pulumi:"note"`
-	Source      *string `pulumi:"source"`
-	ValidStatus *int    `pulumi:"validStatus"`
+	Note string `pulumi:"note"`
+	// Source.
+	Source *string `pulumi:"source"`
+	// Valid status.
+	ValidStatus *int `pulumi:"validStatus"`
 	// Effective date, with a second level timestamp value. For example, 1680570420 represents 2023-04-04 09:07:00; 2019571199 means permanently effective.
 	ValidTs int `pulumi:"validTs"`
 }
@@ -569,7 +574,7 @@ type IpAccessControlItem struct {
 // IpAccessControlItemInput is an input type that accepts IpAccessControlItemArgs and IpAccessControlItemOutput values.
 // You can construct a concrete instance of `IpAccessControlItemInput` via:
 //
-//          IpAccessControlItemArgs{...}
+//	IpAccessControlItemArgs{...}
 type IpAccessControlItemInput interface {
 	pulumi.Input
 
@@ -585,9 +590,11 @@ type IpAccessControlItemArgs struct {
 	// IP address.
 	Ip pulumi.StringInput `pulumi:"ip"`
 	// Note info.
-	Note        pulumi.StringInput    `pulumi:"note"`
-	Source      pulumi.StringPtrInput `pulumi:"source"`
-	ValidStatus pulumi.IntPtrInput    `pulumi:"validStatus"`
+	Note pulumi.StringInput `pulumi:"note"`
+	// Source.
+	Source pulumi.StringPtrInput `pulumi:"source"`
+	// Valid status.
+	ValidStatus pulumi.IntPtrInput `pulumi:"validStatus"`
 	// Effective date, with a second level timestamp value. For example, 1680570420 represents 2023-04-04 09:07:00; 2019571199 means permanently effective.
 	ValidTs pulumi.IntInput `pulumi:"validTs"`
 }
@@ -607,7 +614,7 @@ func (i IpAccessControlItemArgs) ToIpAccessControlItemOutputWithContext(ctx cont
 // IpAccessControlItemArrayInput is an input type that accepts IpAccessControlItemArray and IpAccessControlItemArrayOutput values.
 // You can construct a concrete instance of `IpAccessControlItemArrayInput` via:
 //
-//          IpAccessControlItemArray{ IpAccessControlItemArgs{...} }
+//	IpAccessControlItemArray{ IpAccessControlItemArgs{...} }
 type IpAccessControlItemArrayInput interface {
 	pulumi.Input
 
@@ -663,10 +670,12 @@ func (o IpAccessControlItemOutput) Note() pulumi.StringOutput {
 	return o.ApplyT(func(v IpAccessControlItem) string { return v.Note }).(pulumi.StringOutput)
 }
 
+// Source.
 func (o IpAccessControlItemOutput) Source() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v IpAccessControlItem) *string { return v.Source }).(pulumi.StringPtrOutput)
 }
 
+// Valid status.
 func (o IpAccessControlItemOutput) ValidStatus() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v IpAccessControlItem) *int { return v.ValidStatus }).(pulumi.IntPtrOutput)
 }
@@ -697,6 +706,7 @@ func (o IpAccessControlItemArrayOutput) Index(i pulumi.IntInput) IpAccessControl
 }
 
 type SaasDomainPort struct {
+	// Nginx server ID.
 	NginxServerId *string `pulumi:"nginxServerId"`
 	// Listening port.
 	Port string `pulumi:"port"`
@@ -711,7 +721,7 @@ type SaasDomainPort struct {
 // SaasDomainPortInput is an input type that accepts SaasDomainPortArgs and SaasDomainPortOutput values.
 // You can construct a concrete instance of `SaasDomainPortInput` via:
 //
-//          SaasDomainPortArgs{...}
+//	SaasDomainPortArgs{...}
 type SaasDomainPortInput interface {
 	pulumi.Input
 
@@ -720,6 +730,7 @@ type SaasDomainPortInput interface {
 }
 
 type SaasDomainPortArgs struct {
+	// Nginx server ID.
 	NginxServerId pulumi.StringPtrInput `pulumi:"nginxServerId"`
 	// Listening port.
 	Port pulumi.StringInput `pulumi:"port"`
@@ -746,7 +757,7 @@ func (i SaasDomainPortArgs) ToSaasDomainPortOutputWithContext(ctx context.Contex
 // SaasDomainPortArrayInput is an input type that accepts SaasDomainPortArray and SaasDomainPortArrayOutput values.
 // You can construct a concrete instance of `SaasDomainPortArrayInput` via:
 //
-//          SaasDomainPortArray{ SaasDomainPortArgs{...} }
+//	SaasDomainPortArray{ SaasDomainPortArgs{...} }
 type SaasDomainPortArrayInput interface {
 	pulumi.Input
 
@@ -782,6 +793,7 @@ func (o SaasDomainPortOutput) ToSaasDomainPortOutputWithContext(ctx context.Cont
 	return o
 }
 
+// Nginx server ID.
 func (o SaasDomainPortOutput) NginxServerId() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v SaasDomainPort) *string { return v.NginxServerId }).(pulumi.StringPtrOutput)
 }
@@ -836,7 +848,7 @@ type GetAttackLogHistogramData struct {
 // GetAttackLogHistogramDataInput is an input type that accepts GetAttackLogHistogramDataArgs and GetAttackLogHistogramDataOutput values.
 // You can construct a concrete instance of `GetAttackLogHistogramDataInput` via:
 //
-//          GetAttackLogHistogramDataArgs{...}
+//	GetAttackLogHistogramDataArgs{...}
 type GetAttackLogHistogramDataInput interface {
 	pulumi.Input
 
@@ -866,7 +878,7 @@ func (i GetAttackLogHistogramDataArgs) ToGetAttackLogHistogramDataOutputWithCont
 // GetAttackLogHistogramDataArrayInput is an input type that accepts GetAttackLogHistogramDataArray and GetAttackLogHistogramDataArrayOutput values.
 // You can construct a concrete instance of `GetAttackLogHistogramDataArrayInput` via:
 //
-//          GetAttackLogHistogramDataArray{ GetAttackLogHistogramDataArgs{...} }
+//	GetAttackLogHistogramDataArray{ GetAttackLogHistogramDataArgs{...} }
 type GetAttackLogHistogramDataArrayInput interface {
 	pulumi.Input
 
@@ -946,7 +958,7 @@ type GetAttackLogListData struct {
 // GetAttackLogListDataInput is an input type that accepts GetAttackLogListDataArgs and GetAttackLogListDataOutput values.
 // You can construct a concrete instance of `GetAttackLogListDataInput` via:
 //
-//          GetAttackLogListDataArgs{...}
+//	GetAttackLogListDataArgs{...}
 type GetAttackLogListDataInput interface {
 	pulumi.Input
 
@@ -980,7 +992,7 @@ func (i GetAttackLogListDataArgs) ToGetAttackLogListDataOutputWithContext(ctx co
 // GetAttackLogListDataArrayInput is an input type that accepts GetAttackLogListDataArray and GetAttackLogListDataArrayOutput values.
 // You can construct a concrete instance of `GetAttackLogListDataArrayInput` via:
 //
-//          GetAttackLogListDataArray{ GetAttackLogListDataArgs{...} }
+//	GetAttackLogListDataArray{ GetAttackLogListDataArgs{...} }
 type GetAttackLogListDataArrayInput interface {
 	pulumi.Input
 
@@ -1068,7 +1080,7 @@ type GetCiphersCipher struct {
 // GetCiphersCipherInput is an input type that accepts GetCiphersCipherArgs and GetCiphersCipherOutput values.
 // You can construct a concrete instance of `GetCiphersCipherInput` via:
 //
-//          GetCiphersCipherArgs{...}
+//	GetCiphersCipherArgs{...}
 type GetCiphersCipherInput interface {
 	pulumi.Input
 
@@ -1100,7 +1112,7 @@ func (i GetCiphersCipherArgs) ToGetCiphersCipherOutputWithContext(ctx context.Co
 // GetCiphersCipherArrayInput is an input type that accepts GetCiphersCipherArray and GetCiphersCipherArrayOutput values.
 // You can construct a concrete instance of `GetCiphersCipherArrayInput` via:
 //
-//          GetCiphersCipherArray{ GetCiphersCipherArgs{...} }
+//	GetCiphersCipherArray{ GetCiphersCipherArgs{...} }
 type GetCiphersCipherArrayInput interface {
 	pulumi.Input
 
@@ -1235,7 +1247,7 @@ type GetDomainsDomain struct {
 // GetDomainsDomainInput is an input type that accepts GetDomainsDomainArgs and GetDomainsDomainOutput values.
 // You can construct a concrete instance of `GetDomainsDomainInput` via:
 //
-//          GetDomainsDomainArgs{...}
+//	GetDomainsDomainArgs{...}
 type GetDomainsDomainInput interface {
 	pulumi.Input
 
@@ -1319,7 +1331,7 @@ func (i GetDomainsDomainArgs) ToGetDomainsDomainOutputWithContext(ctx context.Co
 // GetDomainsDomainArrayInput is an input type that accepts GetDomainsDomainArray and GetDomainsDomainArrayOutput values.
 // You can construct a concrete instance of `GetDomainsDomainArrayInput` via:
 //
-//          GetDomainsDomainArray{ GetDomainsDomainArgs{...} }
+//	GetDomainsDomainArray{ GetDomainsDomainArgs{...} }
 type GetDomainsDomainArrayInput interface {
 	pulumi.Input
 
@@ -1548,7 +1560,7 @@ type GetDomainsDomainLoadBalancerSet struct {
 // GetDomainsDomainLoadBalancerSetInput is an input type that accepts GetDomainsDomainLoadBalancerSetArgs and GetDomainsDomainLoadBalancerSetOutput values.
 // You can construct a concrete instance of `GetDomainsDomainLoadBalancerSetInput` via:
 //
-//          GetDomainsDomainLoadBalancerSetArgs{...}
+//	GetDomainsDomainLoadBalancerSetArgs{...}
 type GetDomainsDomainLoadBalancerSetInput interface {
 	pulumi.Input
 
@@ -1596,7 +1608,7 @@ func (i GetDomainsDomainLoadBalancerSetArgs) ToGetDomainsDomainLoadBalancerSetOu
 // GetDomainsDomainLoadBalancerSetArrayInput is an input type that accepts GetDomainsDomainLoadBalancerSetArray and GetDomainsDomainLoadBalancerSetArrayOutput values.
 // You can construct a concrete instance of `GetDomainsDomainLoadBalancerSetArrayInput` via:
 //
-//          GetDomainsDomainLoadBalancerSetArray{ GetDomainsDomainLoadBalancerSetArgs{...} }
+//	GetDomainsDomainLoadBalancerSetArray{ GetDomainsDomainLoadBalancerSetArgs{...} }
 type GetDomainsDomainLoadBalancerSetArrayInput interface {
 	pulumi.Input
 
@@ -1723,7 +1735,7 @@ type GetDomainsDomainPort struct {
 // GetDomainsDomainPortInput is an input type that accepts GetDomainsDomainPortArgs and GetDomainsDomainPortOutput values.
 // You can construct a concrete instance of `GetDomainsDomainPortInput` via:
 //
-//          GetDomainsDomainPortArgs{...}
+//	GetDomainsDomainPortArgs{...}
 type GetDomainsDomainPortInput interface {
 	pulumi.Input
 
@@ -1759,7 +1771,7 @@ func (i GetDomainsDomainPortArgs) ToGetDomainsDomainPortOutputWithContext(ctx co
 // GetDomainsDomainPortArrayInput is an input type that accepts GetDomainsDomainPortArray and GetDomainsDomainPortArrayOutput values.
 // You can construct a concrete instance of `GetDomainsDomainPortArrayInput` via:
 //
-//          GetDomainsDomainPortArray{ GetDomainsDomainPortArgs{...} }
+//	GetDomainsDomainPortArray{ GetDomainsDomainPortArgs{...} }
 type GetDomainsDomainPortArrayInput interface {
 	pulumi.Input
 
@@ -1862,7 +1874,7 @@ type GetFindDomainsList struct {
 // GetFindDomainsListInput is an input type that accepts GetFindDomainsListArgs and GetFindDomainsListOutput values.
 // You can construct a concrete instance of `GetFindDomainsListInput` via:
 //
-//          GetFindDomainsListArgs{...}
+//	GetFindDomainsListArgs{...}
 type GetFindDomainsListInput interface {
 	pulumi.Input
 
@@ -1904,7 +1916,7 @@ func (i GetFindDomainsListArgs) ToGetFindDomainsListOutputWithContext(ctx contex
 // GetFindDomainsListArrayInput is an input type that accepts GetFindDomainsListArray and GetFindDomainsListArrayOutput values.
 // You can construct a concrete instance of `GetFindDomainsListArrayInput` via:
 //
-//          GetFindDomainsListArray{ GetFindDomainsListArgs{...} }
+//	GetFindDomainsListArray{ GetFindDomainsListArgs{...} }
 type GetFindDomainsListArrayInput interface {
 	pulumi.Input
 
@@ -2016,7 +2028,7 @@ type GetInstanceQpsLimitQpsData struct {
 // GetInstanceQpsLimitQpsDataInput is an input type that accepts GetInstanceQpsLimitQpsDataArgs and GetInstanceQpsLimitQpsDataOutput values.
 // You can construct a concrete instance of `GetInstanceQpsLimitQpsDataInput` via:
 //
-//          GetInstanceQpsLimitQpsDataArgs{...}
+//	GetInstanceQpsLimitQpsDataArgs{...}
 type GetInstanceQpsLimitQpsDataInput interface {
 	pulumi.Input
 
@@ -2052,7 +2064,7 @@ func (i GetInstanceQpsLimitQpsDataArgs) ToGetInstanceQpsLimitQpsDataOutputWithCo
 // GetInstanceQpsLimitQpsDataArrayInput is an input type that accepts GetInstanceQpsLimitQpsDataArray and GetInstanceQpsLimitQpsDataArrayOutput values.
 // You can construct a concrete instance of `GetInstanceQpsLimitQpsDataArrayInput` via:
 //
-//          GetInstanceQpsLimitQpsDataArray{ GetInstanceQpsLimitQpsDataArgs{...} }
+//	GetInstanceQpsLimitQpsDataArray{ GetInstanceQpsLimitQpsDataArgs{...} }
 type GetInstanceQpsLimitQpsDataArrayInput interface {
 	pulumi.Input
 
@@ -2167,7 +2179,7 @@ type GetPeakPointsPoint struct {
 // GetPeakPointsPointInput is an input type that accepts GetPeakPointsPointArgs and GetPeakPointsPointOutput values.
 // You can construct a concrete instance of `GetPeakPointsPointInput` via:
 //
-//          GetPeakPointsPointArgs{...}
+//	GetPeakPointsPointArgs{...}
 type GetPeakPointsPointInput interface {
 	pulumi.Input
 
@@ -2221,7 +2233,7 @@ func (i GetPeakPointsPointArgs) ToGetPeakPointsPointOutputWithContext(ctx contex
 // GetPeakPointsPointArrayInput is an input type that accepts GetPeakPointsPointArray and GetPeakPointsPointArrayOutput values.
 // You can construct a concrete instance of `GetPeakPointsPointArrayInput` via:
 //
-//          GetPeakPointsPointArray{ GetPeakPointsPointArgs{...} }
+//	GetPeakPointsPointArray{ GetPeakPointsPointArgs{...} }
 type GetPeakPointsPointArrayInput interface {
 	pulumi.Input
 
@@ -2357,7 +2369,7 @@ type GetTlsVersionsTl struct {
 // GetTlsVersionsTlInput is an input type that accepts GetTlsVersionsTlArgs and GetTlsVersionsTlOutput values.
 // You can construct a concrete instance of `GetTlsVersionsTlInput` via:
 //
-//          GetTlsVersionsTlArgs{...}
+//	GetTlsVersionsTlArgs{...}
 type GetTlsVersionsTlInput interface {
 	pulumi.Input
 
@@ -2387,7 +2399,7 @@ func (i GetTlsVersionsTlArgs) ToGetTlsVersionsTlOutputWithContext(ctx context.Co
 // GetTlsVersionsTlArrayInput is an input type that accepts GetTlsVersionsTlArray and GetTlsVersionsTlArrayOutput values.
 // You can construct a concrete instance of `GetTlsVersionsTlArrayInput` via:
 //
-//          GetTlsVersionsTlArray{ GetTlsVersionsTlArgs{...} }
+//	GetTlsVersionsTlArray{ GetTlsVersionsTlArgs{...} }
 type GetTlsVersionsTlArrayInput interface {
 	pulumi.Input
 
@@ -2467,7 +2479,7 @@ type GetUserClbRegionsRichData struct {
 // GetUserClbRegionsRichDataInput is an input type that accepts GetUserClbRegionsRichDataArgs and GetUserClbRegionsRichDataOutput values.
 // You can construct a concrete instance of `GetUserClbRegionsRichDataInput` via:
 //
-//          GetUserClbRegionsRichDataArgs{...}
+//	GetUserClbRegionsRichDataArgs{...}
 type GetUserClbRegionsRichDataInput interface {
 	pulumi.Input
 
@@ -2501,7 +2513,7 @@ func (i GetUserClbRegionsRichDataArgs) ToGetUserClbRegionsRichDataOutputWithCont
 // GetUserClbRegionsRichDataArrayInput is an input type that accepts GetUserClbRegionsRichDataArray and GetUserClbRegionsRichDataArrayOutput values.
 // You can construct a concrete instance of `GetUserClbRegionsRichDataArrayInput` via:
 //
-//          GetUserClbRegionsRichDataArray{ GetUserClbRegionsRichDataArgs{...} }
+//	GetUserClbRegionsRichDataArray{ GetUserClbRegionsRichDataArgs{...} }
 type GetUserClbRegionsRichDataArrayInput interface {
 	pulumi.Input
 
@@ -2601,7 +2613,7 @@ type GetUserDomainsUsersInfo struct {
 // GetUserDomainsUsersInfoInput is an input type that accepts GetUserDomainsUsersInfoArgs and GetUserDomainsUsersInfoOutput values.
 // You can construct a concrete instance of `GetUserDomainsUsersInfoInput` via:
 //
-//          GetUserDomainsUsersInfoArgs{...}
+//	GetUserDomainsUsersInfoArgs{...}
 type GetUserDomainsUsersInfoInput interface {
 	pulumi.Input
 
@@ -2645,7 +2657,7 @@ func (i GetUserDomainsUsersInfoArgs) ToGetUserDomainsUsersInfoOutputWithContext(
 // GetUserDomainsUsersInfoArrayInput is an input type that accepts GetUserDomainsUsersInfoArray and GetUserDomainsUsersInfoArrayOutput values.
 // You can construct a concrete instance of `GetUserDomainsUsersInfoArrayInput` via:
 //
-//          GetUserDomainsUsersInfoArray{ GetUserDomainsUsersInfoArgs{...} }
+//	GetUserDomainsUsersInfoArray{ GetUserDomainsUsersInfoArgs{...} }
 type GetUserDomainsUsersInfoArrayInput interface {
 	pulumi.Input
 
@@ -2747,17 +2759,22 @@ func (o GetUserDomainsUsersInfoArrayOutput) Index(i pulumi.IntInput) GetUserDoma
 }
 
 type GetWafInfosHostList struct {
-	Domain        string                            `pulumi:"domain"`
-	DomainId      string                            `pulumi:"domainId"`
-	FlowMode      int                               `pulumi:"flowMode"`
+	// Domain name.
+	Domain string `pulumi:"domain"`
+	// Domain unique ID.
+	DomainId string `pulumi:"domainId"`
+	// WAF traffic mode, 1 cleaning mode, 0 mirroring mode.
+	FlowMode int `pulumi:"flowMode"`
+	// LoadBalancer info bound by waf.
 	LoadBalancers []GetWafInfosHostListLoadBalancer `pulumi:"loadBalancers"`
-	Status        int                               `pulumi:"status"`
+	// Waf switch,0 off 1 on.
+	Status int `pulumi:"status"`
 }
 
 // GetWafInfosHostListInput is an input type that accepts GetWafInfosHostListArgs and GetWafInfosHostListOutput values.
 // You can construct a concrete instance of `GetWafInfosHostListInput` via:
 //
-//          GetWafInfosHostListArgs{...}
+//	GetWafInfosHostListArgs{...}
 type GetWafInfosHostListInput interface {
 	pulumi.Input
 
@@ -2766,11 +2783,16 @@ type GetWafInfosHostListInput interface {
 }
 
 type GetWafInfosHostListArgs struct {
-	Domain        pulumi.StringInput                        `pulumi:"domain"`
-	DomainId      pulumi.StringInput                        `pulumi:"domainId"`
-	FlowMode      pulumi.IntInput                           `pulumi:"flowMode"`
+	// Domain name.
+	Domain pulumi.StringInput `pulumi:"domain"`
+	// Domain unique ID.
+	DomainId pulumi.StringInput `pulumi:"domainId"`
+	// WAF traffic mode, 1 cleaning mode, 0 mirroring mode.
+	FlowMode pulumi.IntInput `pulumi:"flowMode"`
+	// LoadBalancer info bound by waf.
 	LoadBalancers GetWafInfosHostListLoadBalancerArrayInput `pulumi:"loadBalancers"`
-	Status        pulumi.IntInput                           `pulumi:"status"`
+	// Waf switch,0 off 1 on.
+	Status pulumi.IntInput `pulumi:"status"`
 }
 
 func (GetWafInfosHostListArgs) ElementType() reflect.Type {
@@ -2788,7 +2810,7 @@ func (i GetWafInfosHostListArgs) ToGetWafInfosHostListOutputWithContext(ctx cont
 // GetWafInfosHostListArrayInput is an input type that accepts GetWafInfosHostListArray and GetWafInfosHostListArrayOutput values.
 // You can construct a concrete instance of `GetWafInfosHostListArrayInput` via:
 //
-//          GetWafInfosHostListArray{ GetWafInfosHostListArgs{...} }
+//	GetWafInfosHostListArray{ GetWafInfosHostListArgs{...} }
 type GetWafInfosHostListArrayInput interface {
 	pulumi.Input
 
@@ -2824,22 +2846,27 @@ func (o GetWafInfosHostListOutput) ToGetWafInfosHostListOutputWithContext(ctx co
 	return o
 }
 
+// Domain name.
 func (o GetWafInfosHostListOutput) Domain() pulumi.StringOutput {
 	return o.ApplyT(func(v GetWafInfosHostList) string { return v.Domain }).(pulumi.StringOutput)
 }
 
+// Domain unique ID.
 func (o GetWafInfosHostListOutput) DomainId() pulumi.StringOutput {
 	return o.ApplyT(func(v GetWafInfosHostList) string { return v.DomainId }).(pulumi.StringOutput)
 }
 
+// WAF traffic mode, 1 cleaning mode, 0 mirroring mode.
 func (o GetWafInfosHostListOutput) FlowMode() pulumi.IntOutput {
 	return o.ApplyT(func(v GetWafInfosHostList) int { return v.FlowMode }).(pulumi.IntOutput)
 }
 
+// LoadBalancer info bound by waf.
 func (o GetWafInfosHostListOutput) LoadBalancers() GetWafInfosHostListLoadBalancerArrayOutput {
 	return o.ApplyT(func(v GetWafInfosHostList) []GetWafInfosHostListLoadBalancer { return v.LoadBalancers }).(GetWafInfosHostListLoadBalancerArrayOutput)
 }
 
+// Waf switch,0 off 1 on.
 func (o GetWafInfosHostListOutput) Status() pulumi.IntOutput {
 	return o.ApplyT(func(v GetWafInfosHostList) int { return v.Status }).(pulumi.IntOutput)
 }
@@ -2865,23 +2892,34 @@ func (o GetWafInfosHostListArrayOutput) Index(i pulumi.IntInput) GetWafInfosHost
 }
 
 type GetWafInfosHostListLoadBalancer struct {
-	ListenerId       string `pulumi:"listenerId"`
-	ListenerName     string `pulumi:"listenerName"`
-	LoadBalancerId   string `pulumi:"loadBalancerId"`
+	// Unique ID of listener in LB.
+	ListenerId string `pulumi:"listenerId"`
+	// Listener name.
+	ListenerName string `pulumi:"listenerName"`
+	// LoadBalancer ID.
+	LoadBalancerId string `pulumi:"loadBalancerId"`
+	// LoadBalancer name.
 	LoadBalancerName string `pulumi:"loadBalancerName"`
+	// Network type for load balancerNote: This field may return null, indicating that a valid value cannot be obtained.
 	LoadBalancerType string `pulumi:"loadBalancerType"`
-	NumericalVpcId   int    `pulumi:"numericalVpcId"`
-	Protocol         string `pulumi:"protocol"`
-	Region           string `pulumi:"region"`
-	Vip              string `pulumi:"vip"`
-	Vport            int    `pulumi:"vport"`
-	Zone             string `pulumi:"zone"`
+	// VPCID for load balancer, public network is -1, and internal network is filled in according to actual conditionsNote: This field may return null, indicating that a valid value cannot be obtained.
+	NumericalVpcId int `pulumi:"numericalVpcId"`
+	// Protocol of listener，http or https.
+	Protocol string `pulumi:"protocol"`
+	// LoadBalancer region.
+	Region string `pulumi:"region"`
+	// LoadBalancer IP.
+	Vip string `pulumi:"vip"`
+	// LoadBalancer port.
+	Vport int `pulumi:"vport"`
+	// LoadBalancer zone.
+	Zone string `pulumi:"zone"`
 }
 
 // GetWafInfosHostListLoadBalancerInput is an input type that accepts GetWafInfosHostListLoadBalancerArgs and GetWafInfosHostListLoadBalancerOutput values.
 // You can construct a concrete instance of `GetWafInfosHostListLoadBalancerInput` via:
 //
-//          GetWafInfosHostListLoadBalancerArgs{...}
+//	GetWafInfosHostListLoadBalancerArgs{...}
 type GetWafInfosHostListLoadBalancerInput interface {
 	pulumi.Input
 
@@ -2890,17 +2928,28 @@ type GetWafInfosHostListLoadBalancerInput interface {
 }
 
 type GetWafInfosHostListLoadBalancerArgs struct {
-	ListenerId       pulumi.StringInput `pulumi:"listenerId"`
-	ListenerName     pulumi.StringInput `pulumi:"listenerName"`
-	LoadBalancerId   pulumi.StringInput `pulumi:"loadBalancerId"`
+	// Unique ID of listener in LB.
+	ListenerId pulumi.StringInput `pulumi:"listenerId"`
+	// Listener name.
+	ListenerName pulumi.StringInput `pulumi:"listenerName"`
+	// LoadBalancer ID.
+	LoadBalancerId pulumi.StringInput `pulumi:"loadBalancerId"`
+	// LoadBalancer name.
 	LoadBalancerName pulumi.StringInput `pulumi:"loadBalancerName"`
+	// Network type for load balancerNote: This field may return null, indicating that a valid value cannot be obtained.
 	LoadBalancerType pulumi.StringInput `pulumi:"loadBalancerType"`
-	NumericalVpcId   pulumi.IntInput    `pulumi:"numericalVpcId"`
-	Protocol         pulumi.StringInput `pulumi:"protocol"`
-	Region           pulumi.StringInput `pulumi:"region"`
-	Vip              pulumi.StringInput `pulumi:"vip"`
-	Vport            pulumi.IntInput    `pulumi:"vport"`
-	Zone             pulumi.StringInput `pulumi:"zone"`
+	// VPCID for load balancer, public network is -1, and internal network is filled in according to actual conditionsNote: This field may return null, indicating that a valid value cannot be obtained.
+	NumericalVpcId pulumi.IntInput `pulumi:"numericalVpcId"`
+	// Protocol of listener，http or https.
+	Protocol pulumi.StringInput `pulumi:"protocol"`
+	// LoadBalancer region.
+	Region pulumi.StringInput `pulumi:"region"`
+	// LoadBalancer IP.
+	Vip pulumi.StringInput `pulumi:"vip"`
+	// LoadBalancer port.
+	Vport pulumi.IntInput `pulumi:"vport"`
+	// LoadBalancer zone.
+	Zone pulumi.StringInput `pulumi:"zone"`
 }
 
 func (GetWafInfosHostListLoadBalancerArgs) ElementType() reflect.Type {
@@ -2918,7 +2967,7 @@ func (i GetWafInfosHostListLoadBalancerArgs) ToGetWafInfosHostListLoadBalancerOu
 // GetWafInfosHostListLoadBalancerArrayInput is an input type that accepts GetWafInfosHostListLoadBalancerArray and GetWafInfosHostListLoadBalancerArrayOutput values.
 // You can construct a concrete instance of `GetWafInfosHostListLoadBalancerArrayInput` via:
 //
-//          GetWafInfosHostListLoadBalancerArray{ GetWafInfosHostListLoadBalancerArgs{...} }
+//	GetWafInfosHostListLoadBalancerArray{ GetWafInfosHostListLoadBalancerArgs{...} }
 type GetWafInfosHostListLoadBalancerArrayInput interface {
 	pulumi.Input
 
@@ -2954,46 +3003,57 @@ func (o GetWafInfosHostListLoadBalancerOutput) ToGetWafInfosHostListLoadBalancer
 	return o
 }
 
+// Unique ID of listener in LB.
 func (o GetWafInfosHostListLoadBalancerOutput) ListenerId() pulumi.StringOutput {
 	return o.ApplyT(func(v GetWafInfosHostListLoadBalancer) string { return v.ListenerId }).(pulumi.StringOutput)
 }
 
+// Listener name.
 func (o GetWafInfosHostListLoadBalancerOutput) ListenerName() pulumi.StringOutput {
 	return o.ApplyT(func(v GetWafInfosHostListLoadBalancer) string { return v.ListenerName }).(pulumi.StringOutput)
 }
 
+// LoadBalancer ID.
 func (o GetWafInfosHostListLoadBalancerOutput) LoadBalancerId() pulumi.StringOutput {
 	return o.ApplyT(func(v GetWafInfosHostListLoadBalancer) string { return v.LoadBalancerId }).(pulumi.StringOutput)
 }
 
+// LoadBalancer name.
 func (o GetWafInfosHostListLoadBalancerOutput) LoadBalancerName() pulumi.StringOutput {
 	return o.ApplyT(func(v GetWafInfosHostListLoadBalancer) string { return v.LoadBalancerName }).(pulumi.StringOutput)
 }
 
+// Network type for load balancerNote: This field may return null, indicating that a valid value cannot be obtained.
 func (o GetWafInfosHostListLoadBalancerOutput) LoadBalancerType() pulumi.StringOutput {
 	return o.ApplyT(func(v GetWafInfosHostListLoadBalancer) string { return v.LoadBalancerType }).(pulumi.StringOutput)
 }
 
+// VPCID for load balancer, public network is -1, and internal network is filled in according to actual conditionsNote: This field may return null, indicating that a valid value cannot be obtained.
 func (o GetWafInfosHostListLoadBalancerOutput) NumericalVpcId() pulumi.IntOutput {
 	return o.ApplyT(func(v GetWafInfosHostListLoadBalancer) int { return v.NumericalVpcId }).(pulumi.IntOutput)
 }
 
+// Protocol of listener，http or https.
 func (o GetWafInfosHostListLoadBalancerOutput) Protocol() pulumi.StringOutput {
 	return o.ApplyT(func(v GetWafInfosHostListLoadBalancer) string { return v.Protocol }).(pulumi.StringOutput)
 }
 
+// LoadBalancer region.
 func (o GetWafInfosHostListLoadBalancerOutput) Region() pulumi.StringOutput {
 	return o.ApplyT(func(v GetWafInfosHostListLoadBalancer) string { return v.Region }).(pulumi.StringOutput)
 }
 
+// LoadBalancer IP.
 func (o GetWafInfosHostListLoadBalancerOutput) Vip() pulumi.StringOutput {
 	return o.ApplyT(func(v GetWafInfosHostListLoadBalancer) string { return v.Vip }).(pulumi.StringOutput)
 }
 
+// LoadBalancer port.
 func (o GetWafInfosHostListLoadBalancerOutput) Vport() pulumi.IntOutput {
 	return o.ApplyT(func(v GetWafInfosHostListLoadBalancer) int { return v.Vport }).(pulumi.IntOutput)
 }
 
+// LoadBalancer zone.
 func (o GetWafInfosHostListLoadBalancerOutput) Zone() pulumi.StringOutput {
 	return o.ApplyT(func(v GetWafInfosHostListLoadBalancer) string { return v.Zone }).(pulumi.StringOutput)
 }
@@ -3019,15 +3079,18 @@ func (o GetWafInfosHostListLoadBalancerArrayOutput) Index(i pulumi.IntInput) Get
 }
 
 type GetWafInfosParam struct {
-	DomainId       *string `pulumi:"domainId"`
-	ListenerId     *string `pulumi:"listenerId"`
-	LoadBalancerId string  `pulumi:"loadBalancerId"`
+	// Domain unique ID.
+	DomainId *string `pulumi:"domainId"`
+	// Listener ID of LoadBalancer.
+	ListenerId *string `pulumi:"listenerId"`
+	// Loadbalancer unique ID.If this parameter is not passed, it will operate all listeners of this appid. If this parameter is not empty, it will operate listeners of the LoadBalancer only.
+	LoadBalancerId string `pulumi:"loadBalancerId"`
 }
 
 // GetWafInfosParamInput is an input type that accepts GetWafInfosParamArgs and GetWafInfosParamOutput values.
 // You can construct a concrete instance of `GetWafInfosParamInput` via:
 //
-//          GetWafInfosParamArgs{...}
+//	GetWafInfosParamArgs{...}
 type GetWafInfosParamInput interface {
 	pulumi.Input
 
@@ -3036,9 +3099,12 @@ type GetWafInfosParamInput interface {
 }
 
 type GetWafInfosParamArgs struct {
-	DomainId       pulumi.StringPtrInput `pulumi:"domainId"`
-	ListenerId     pulumi.StringPtrInput `pulumi:"listenerId"`
-	LoadBalancerId pulumi.StringInput    `pulumi:"loadBalancerId"`
+	// Domain unique ID.
+	DomainId pulumi.StringPtrInput `pulumi:"domainId"`
+	// Listener ID of LoadBalancer.
+	ListenerId pulumi.StringPtrInput `pulumi:"listenerId"`
+	// Loadbalancer unique ID.If this parameter is not passed, it will operate all listeners of this appid. If this parameter is not empty, it will operate listeners of the LoadBalancer only.
+	LoadBalancerId pulumi.StringInput `pulumi:"loadBalancerId"`
 }
 
 func (GetWafInfosParamArgs) ElementType() reflect.Type {
@@ -3056,7 +3122,7 @@ func (i GetWafInfosParamArgs) ToGetWafInfosParamOutputWithContext(ctx context.Co
 // GetWafInfosParamArrayInput is an input type that accepts GetWafInfosParamArray and GetWafInfosParamArrayOutput values.
 // You can construct a concrete instance of `GetWafInfosParamArrayInput` via:
 //
-//          GetWafInfosParamArray{ GetWafInfosParamArgs{...} }
+//	GetWafInfosParamArray{ GetWafInfosParamArgs{...} }
 type GetWafInfosParamArrayInput interface {
 	pulumi.Input
 
@@ -3092,14 +3158,17 @@ func (o GetWafInfosParamOutput) ToGetWafInfosParamOutputWithContext(ctx context.
 	return o
 }
 
+// Domain unique ID.
 func (o GetWafInfosParamOutput) DomainId() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v GetWafInfosParam) *string { return v.DomainId }).(pulumi.StringPtrOutput)
 }
 
+// Listener ID of LoadBalancer.
 func (o GetWafInfosParamOutput) ListenerId() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v GetWafInfosParam) *string { return v.ListenerId }).(pulumi.StringPtrOutput)
 }
 
+// Loadbalancer unique ID.If this parameter is not passed, it will operate all listeners of this appid. If this parameter is not empty, it will operate listeners of the LoadBalancer only.
 func (o GetWafInfosParamOutput) LoadBalancerId() pulumi.StringOutput {
 	return o.ApplyT(func(v GetWafInfosParam) string { return v.LoadBalancerId }).(pulumi.StringOutput)
 }

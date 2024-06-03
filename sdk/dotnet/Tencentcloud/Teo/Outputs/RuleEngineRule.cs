@@ -15,7 +15,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Outputs
     public sealed class RuleEngineRule
     {
         /// <summary>
-        /// Actions list of the rule. See details in data source `rule_engine_setting`.
+        /// Feature to be executed.
         /// </summary>
         public readonly ImmutableArray<Outputs.RuleEngineRuleAction> Actions;
         /// <summary>
@@ -23,7 +23,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Outputs
         /// </summary>
         public readonly ImmutableArray<Outputs.RuleEngineRuleOr> Ors;
         /// <summary>
-        /// Actions list of the rule. See details in data source `rule_engine_setting`.
+        /// The nested rule.
         /// </summary>
         public readonly ImmutableArray<Outputs.RuleEngineRuleSubRule> SubRules;
 

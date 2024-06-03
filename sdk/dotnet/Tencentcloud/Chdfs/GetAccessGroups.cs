@@ -15,64 +15,58 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Chdfs
         /// <summary>
         /// Use this data source to query detailed information of chdfs access_groups
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var accessGroups = Tencentcloud.Chdfs.GetAccessGroups.Invoke(new()
         ///     {
-        ///         var accessGroups = Output.Create(Tencentcloud.Chdfs.GetAccessGroups.InvokeAsync(new Tencentcloud.Chdfs.GetAccessGroupsArgs
-        ///         {
-        ///             VpcId = "vpc-pewdpc0d",
-        ///         }));
-        ///     }
+        ///         VpcId = "vpc-pewdpc0d",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetAccessGroupsResult> InvokeAsync(GetAccessGroupsArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetAccessGroupsResult>("tencentcloud:Chdfs/getAccessGroups:getAccessGroups", args ?? new GetAccessGroupsArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetAccessGroupsResult>("tencentcloud:Chdfs/getAccessGroups:getAccessGroups", args ?? new GetAccessGroupsArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of chdfs access_groups
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var accessGroups = Tencentcloud.Chdfs.GetAccessGroups.Invoke(new()
         ///     {
-        ///         var accessGroups = Output.Create(Tencentcloud.Chdfs.GetAccessGroups.InvokeAsync(new Tencentcloud.Chdfs.GetAccessGroupsArgs
-        ///         {
-        ///             VpcId = "vpc-pewdpc0d",
-        ///         }));
-        ///     }
+        ///         VpcId = "vpc-pewdpc0d",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetAccessGroupsResult> Invoke(GetAccessGroupsInvokeArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetAccessGroupsResult>("tencentcloud:Chdfs/getAccessGroups:getAccessGroups", args ?? new GetAccessGroupsInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetAccessGroupsResult>("tencentcloud:Chdfs/getAccessGroups:getAccessGroups", args ?? new GetAccessGroupsInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetAccessGroupsArgs : Pulumi.InvokeArgs
+    public sealed class GetAccessGroupsArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// get groups belongs to the owner uin, must set but only can use one of VpcId and OwnerUin to get the groups.
@@ -95,9 +89,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Chdfs
         public GetAccessGroupsArgs()
         {
         }
+        public static new GetAccessGroupsArgs Empty => new GetAccessGroupsArgs();
     }
 
-    public sealed class GetAccessGroupsInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetAccessGroupsInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// get groups belongs to the owner uin, must set but only can use one of VpcId and OwnerUin to get the groups.
@@ -120,6 +115,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Chdfs
         public GetAccessGroupsInvokeArgs()
         {
         }
+        public static new GetAccessGroupsInvokeArgs Empty => new GetAccessGroupsInvokeArgs();
     }
 
 

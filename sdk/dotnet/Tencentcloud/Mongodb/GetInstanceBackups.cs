@@ -15,66 +15,60 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mongodb
         /// <summary>
         /// Use this data source to query detailed information of mongodb instance_backups
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var instanceBackups = Tencentcloud.Mongodb.GetInstanceBackups.Invoke(new()
         ///     {
-        ///         var instanceBackups = Output.Create(Tencentcloud.Mongodb.GetInstanceBackups.InvokeAsync(new Tencentcloud.Mongodb.GetInstanceBackupsArgs
-        ///         {
-        ///             BackupMethod = 0,
-        ///             InstanceId = "cmgo-9d0p6umb",
-        ///         }));
-        ///     }
+        ///         BackupMethod = 0,
+        ///         InstanceId = "cmgo-9d0p6umb",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetInstanceBackupsResult> InvokeAsync(GetInstanceBackupsArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetInstanceBackupsResult>("tencentcloud:Mongodb/getInstanceBackups:getInstanceBackups", args ?? new GetInstanceBackupsArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetInstanceBackupsResult>("tencentcloud:Mongodb/getInstanceBackups:getInstanceBackups", args ?? new GetInstanceBackupsArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of mongodb instance_backups
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var instanceBackups = Tencentcloud.Mongodb.GetInstanceBackups.Invoke(new()
         ///     {
-        ///         var instanceBackups = Output.Create(Tencentcloud.Mongodb.GetInstanceBackups.InvokeAsync(new Tencentcloud.Mongodb.GetInstanceBackupsArgs
-        ///         {
-        ///             BackupMethod = 0,
-        ///             InstanceId = "cmgo-9d0p6umb",
-        ///         }));
-        ///     }
+        ///         BackupMethod = 0,
+        ///         InstanceId = "cmgo-9d0p6umb",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetInstanceBackupsResult> Invoke(GetInstanceBackupsInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetInstanceBackupsResult>("tencentcloud:Mongodb/getInstanceBackups:getInstanceBackups", args ?? new GetInstanceBackupsInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetInstanceBackupsResult>("tencentcloud:Mongodb/getInstanceBackups:getInstanceBackups", args ?? new GetInstanceBackupsInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetInstanceBackupsArgs : Pulumi.InvokeArgs
+    public sealed class GetInstanceBackupsArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Backup mode, currently supported: 0-logic backup, 1-physical backup, 2-all backups.The default is logical backup.
@@ -97,9 +91,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mongodb
         public GetInstanceBackupsArgs()
         {
         }
+        public static new GetInstanceBackupsArgs Empty => new GetInstanceBackupsArgs();
     }
 
-    public sealed class GetInstanceBackupsInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetInstanceBackupsInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Backup mode, currently supported: 0-logic backup, 1-physical backup, 2-all backups.The default is logical backup.
@@ -122,6 +117,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mongodb
         public GetInstanceBackupsInvokeArgs()
         {
         }
+        public static new GetInstanceBackupsInvokeArgs Empty => new GetInstanceBackupsInvokeArgs();
     }
 
 

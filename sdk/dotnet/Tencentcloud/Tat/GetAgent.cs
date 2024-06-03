@@ -15,84 +15,78 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tat
         /// <summary>
         /// Use this data source to query detailed information of tat agent
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var agent = Tencentcloud.Tat.GetAgent.Invoke(new()
         ///     {
-        ///         var agent = Output.Create(Tencentcloud.Tat.GetAgent.InvokeAsync(new Tencentcloud.Tat.GetAgentArgs
+        ///         Filters = new[]
         ///         {
-        ///             Filters = 
+        ///             new Tencentcloud.Tat.Inputs.GetAgentFilterInputArgs
         ///             {
-        ///                 new Tencentcloud.Tat.Inputs.GetAgentFilterArgs
+        ///                 Name = "environment",
+        ///                 Values = new[]
         ///                 {
-        ///                     Name = "environment",
-        ///                     Values = 
-        ///                     {
-        ///                         "Linux",
-        ///                     },
+        ///                     "Linux",
         ///                 },
         ///             },
-        ///         }));
-        ///     }
+        ///         },
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetAgentResult> InvokeAsync(GetAgentArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetAgentResult>("tencentcloud:Tat/getAgent:getAgent", args ?? new GetAgentArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetAgentResult>("tencentcloud:Tat/getAgent:getAgent", args ?? new GetAgentArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of tat agent
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var agent = Tencentcloud.Tat.GetAgent.Invoke(new()
         ///     {
-        ///         var agent = Output.Create(Tencentcloud.Tat.GetAgent.InvokeAsync(new Tencentcloud.Tat.GetAgentArgs
+        ///         Filters = new[]
         ///         {
-        ///             Filters = 
+        ///             new Tencentcloud.Tat.Inputs.GetAgentFilterInputArgs
         ///             {
-        ///                 new Tencentcloud.Tat.Inputs.GetAgentFilterArgs
+        ///                 Name = "environment",
+        ///                 Values = new[]
         ///                 {
-        ///                     Name = "environment",
-        ///                     Values = 
-        ///                     {
-        ///                         "Linux",
-        ///                     },
+        ///                     "Linux",
         ///                 },
         ///             },
-        ///         }));
-        ///     }
+        ///         },
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetAgentResult> Invoke(GetAgentInvokeArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetAgentResult>("tencentcloud:Tat/getAgent:getAgent", args ?? new GetAgentInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetAgentResult>("tencentcloud:Tat/getAgent:getAgent", args ?? new GetAgentInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetAgentArgs : Pulumi.InvokeArgs
+    public sealed class GetAgentArgs : global::Pulumi.InvokeArgs
     {
         [Input("filters")]
         private List<Inputs.GetAgentFilterArgs>? _filters;
@@ -127,9 +121,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tat
         public GetAgentArgs()
         {
         }
+        public static new GetAgentArgs Empty => new GetAgentArgs();
     }
 
-    public sealed class GetAgentInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetAgentInvokeArgs : global::Pulumi.InvokeArgs
     {
         [Input("filters")]
         private InputList<Inputs.GetAgentFilterInputArgs>? _filters;
@@ -164,6 +159,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tat
         public GetAgentInvokeArgs()
         {
         }
+        public static new GetAgentInvokeArgs Empty => new GetAgentInvokeArgs();
     }
 
 

@@ -15,132 +15,136 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
         /// <summary>
         /// Use this data source to query target group information.
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var clbBasic = new Tencentcloud.Clb.Instance("clbBasic", new()
         ///     {
-        ///         var clbBasic = new Tencentcloud.Clb.Instance("clbBasic", new Tencentcloud.Clb.InstanceArgs
-        ///         {
-        ///             NetworkType = "OPEN",
-        ///             ClbName = "tf-clb-rule-basic",
-        ///         });
-        ///         var listenerBasic = new Tencentcloud.Clb.Listener("listenerBasic", new Tencentcloud.Clb.ListenerArgs
-        ///         {
-        ///             ClbId = clbBasic.Id,
-        ///             Port = 1,
-        ///             Protocol = "HTTP",
-        ///             ListenerName = "listener_basic",
-        ///         });
-        ///         var ruleBasic = new Tencentcloud.Clb.ListenerRule("ruleBasic", new Tencentcloud.Clb.ListenerRuleArgs
-        ///         {
-        ///             ClbId = clbBasic.Id,
-        ///             ListenerId = listenerBasic.ListenerId,
-        ///             Domain = "abc.com",
-        ///             Url = "/",
-        ///             SessionExpireTime = 30,
-        ///             Scheduler = "WRR",
-        ///             TargetType = "TARGETGROUP",
-        ///         });
-        ///         var test = new Tencentcloud.Clb.TargetGroup("test", new Tencentcloud.Clb.TargetGroupArgs
-        ///         {
-        ///             TargetGroupName = "test-target-keep-1",
-        ///         });
-        ///         var @group = new Tencentcloud.Clb.TargetGroupAttachment("group", new Tencentcloud.Clb.TargetGroupAttachmentArgs
-        ///         {
-        ///             ClbId = clbBasic.Id,
-        ///             ListenerId = listenerBasic.ListenerId,
-        ///             RuleId = ruleBasic.RuleId,
-        ///             TargrtGroupId = test.Id,
-        ///         });
-        ///         var targetGroupInfoId = Tencentcloud.Clb.GetTargetGroups.Invoke(new Tencentcloud.Clb.GetTargetGroupsInvokeArgs
-        ///         {
-        ///             TargetGroupId = test.Id,
-        ///         });
-        ///     }
+        ///         NetworkType = "OPEN",
+        ///         ClbName = "tf-clb-rule-basic",
+        ///     });
         /// 
-        /// }
+        ///     var listenerBasic = new Tencentcloud.Clb.Listener("listenerBasic", new()
+        ///     {
+        ///         ClbId = clbBasic.Id,
+        ///         Port = 1,
+        ///         Protocol = "HTTP",
+        ///         ListenerName = "listener_basic",
+        ///     });
+        /// 
+        ///     var ruleBasic = new Tencentcloud.Clb.ListenerRule("ruleBasic", new()
+        ///     {
+        ///         ClbId = clbBasic.Id,
+        ///         ListenerId = listenerBasic.ListenerId,
+        ///         Domain = "abc.com",
+        ///         Url = "/",
+        ///         SessionExpireTime = 30,
+        ///         Scheduler = "WRR",
+        ///         TargetType = "TARGETGROUP",
+        ///     });
+        /// 
+        ///     var test = new Tencentcloud.Clb.TargetGroup("test", new()
+        ///     {
+        ///         TargetGroupName = "test-target-keep-1",
+        ///     });
+        /// 
+        ///     var @group = new Tencentcloud.Clb.TargetGroupAttachment("group", new()
+        ///     {
+        ///         ClbId = clbBasic.Id,
+        ///         ListenerId = listenerBasic.ListenerId,
+        ///         RuleId = ruleBasic.RuleId,
+        ///         TargrtGroupId = test.Id,
+        ///     });
+        /// 
+        ///     var targetGroupInfoId = Tencentcloud.Clb.GetTargetGroups.Invoke(new()
+        ///     {
+        ///         TargetGroupId = test.Id,
+        ///     });
+        /// 
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetTargetGroupsResult> InvokeAsync(GetTargetGroupsArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetTargetGroupsResult>("tencentcloud:Clb/getTargetGroups:getTargetGroups", args ?? new GetTargetGroupsArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetTargetGroupsResult>("tencentcloud:Clb/getTargetGroups:getTargetGroups", args ?? new GetTargetGroupsArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query target group information.
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var clbBasic = new Tencentcloud.Clb.Instance("clbBasic", new()
         ///     {
-        ///         var clbBasic = new Tencentcloud.Clb.Instance("clbBasic", new Tencentcloud.Clb.InstanceArgs
-        ///         {
-        ///             NetworkType = "OPEN",
-        ///             ClbName = "tf-clb-rule-basic",
-        ///         });
-        ///         var listenerBasic = new Tencentcloud.Clb.Listener("listenerBasic", new Tencentcloud.Clb.ListenerArgs
-        ///         {
-        ///             ClbId = clbBasic.Id,
-        ///             Port = 1,
-        ///             Protocol = "HTTP",
-        ///             ListenerName = "listener_basic",
-        ///         });
-        ///         var ruleBasic = new Tencentcloud.Clb.ListenerRule("ruleBasic", new Tencentcloud.Clb.ListenerRuleArgs
-        ///         {
-        ///             ClbId = clbBasic.Id,
-        ///             ListenerId = listenerBasic.ListenerId,
-        ///             Domain = "abc.com",
-        ///             Url = "/",
-        ///             SessionExpireTime = 30,
-        ///             Scheduler = "WRR",
-        ///             TargetType = "TARGETGROUP",
-        ///         });
-        ///         var test = new Tencentcloud.Clb.TargetGroup("test", new Tencentcloud.Clb.TargetGroupArgs
-        ///         {
-        ///             TargetGroupName = "test-target-keep-1",
-        ///         });
-        ///         var @group = new Tencentcloud.Clb.TargetGroupAttachment("group", new Tencentcloud.Clb.TargetGroupAttachmentArgs
-        ///         {
-        ///             ClbId = clbBasic.Id,
-        ///             ListenerId = listenerBasic.ListenerId,
-        ///             RuleId = ruleBasic.RuleId,
-        ///             TargrtGroupId = test.Id,
-        ///         });
-        ///         var targetGroupInfoId = Tencentcloud.Clb.GetTargetGroups.Invoke(new Tencentcloud.Clb.GetTargetGroupsInvokeArgs
-        ///         {
-        ///             TargetGroupId = test.Id,
-        ///         });
-        ///     }
+        ///         NetworkType = "OPEN",
+        ///         ClbName = "tf-clb-rule-basic",
+        ///     });
         /// 
-        /// }
+        ///     var listenerBasic = new Tencentcloud.Clb.Listener("listenerBasic", new()
+        ///     {
+        ///         ClbId = clbBasic.Id,
+        ///         Port = 1,
+        ///         Protocol = "HTTP",
+        ///         ListenerName = "listener_basic",
+        ///     });
+        /// 
+        ///     var ruleBasic = new Tencentcloud.Clb.ListenerRule("ruleBasic", new()
+        ///     {
+        ///         ClbId = clbBasic.Id,
+        ///         ListenerId = listenerBasic.ListenerId,
+        ///         Domain = "abc.com",
+        ///         Url = "/",
+        ///         SessionExpireTime = 30,
+        ///         Scheduler = "WRR",
+        ///         TargetType = "TARGETGROUP",
+        ///     });
+        /// 
+        ///     var test = new Tencentcloud.Clb.TargetGroup("test", new()
+        ///     {
+        ///         TargetGroupName = "test-target-keep-1",
+        ///     });
+        /// 
+        ///     var @group = new Tencentcloud.Clb.TargetGroupAttachment("group", new()
+        ///     {
+        ///         ClbId = clbBasic.Id,
+        ///         ListenerId = listenerBasic.ListenerId,
+        ///         RuleId = ruleBasic.RuleId,
+        ///         TargrtGroupId = test.Id,
+        ///     });
+        /// 
+        ///     var targetGroupInfoId = Tencentcloud.Clb.GetTargetGroups.Invoke(new()
+        ///     {
+        ///         TargetGroupId = test.Id,
+        ///     });
+        /// 
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetTargetGroupsResult> Invoke(GetTargetGroupsInvokeArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetTargetGroupsResult>("tencentcloud:Clb/getTargetGroups:getTargetGroups", args ?? new GetTargetGroupsInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetTargetGroupsResult>("tencentcloud:Clb/getTargetGroups:getTargetGroups", args ?? new GetTargetGroupsInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetTargetGroupsArgs : Pulumi.InvokeArgs
+    public sealed class GetTargetGroupsArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Used to save results.
@@ -169,9 +173,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
         public GetTargetGroupsArgs()
         {
         }
+        public static new GetTargetGroupsArgs Empty => new GetTargetGroupsArgs();
     }
 
-    public sealed class GetTargetGroupsInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetTargetGroupsInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Used to save results.
@@ -200,6 +205,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
         public GetTargetGroupsInvokeArgs()
         {
         }
+        public static new GetTargetGroupsInvokeArgs Empty => new GetTargetGroupsInvokeArgs();
     }
 
 

@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls.Inputs
 {
 
-    public sealed class CosShipperFilterRuleArgs : Pulumi.ResourceArgs
+    public sealed class CosShipperFilterRuleArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Filter rule key.
@@ -34,5 +34,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls.Inputs
         public CosShipperFilterRuleArgs()
         {
         }
+        public static new CosShipperFilterRuleArgs Empty => new CosShipperFilterRuleArgs();
     }
 }

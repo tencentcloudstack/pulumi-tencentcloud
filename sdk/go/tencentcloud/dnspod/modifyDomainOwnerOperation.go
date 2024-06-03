@@ -7,36 +7,42 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a dnspod modifyDomainOwner
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dnspod"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dnspod"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Dnspod.NewModifyDomainOwnerOperation(ctx, "modifyDomainOwner", &Dnspod.ModifyDomainOwnerOperationArgs{
-// 			Account:  pulumi.String("xxxxxxxxx"),
-// 			Domain:   pulumi.String("dnspod.cn"),
-// 			DomainId: pulumi.Int(123),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Dnspod.NewModifyDomainOwnerOperation(ctx, "modifyDomainOwner", &Dnspod.ModifyDomainOwnerOperationArgs{
+//				Account:  pulumi.String("xxxxxxxxx"),
+//				Domain:   pulumi.String("dnspod.cn"),
+//				DomainId: pulumi.Int(123),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 type ModifyDomainOwnerOperation struct {
 	pulumi.CustomResourceState
 
@@ -61,7 +67,7 @@ func NewModifyDomainOwnerOperation(ctx *pulumi.Context,
 	if args.Domain == nil {
 		return nil, errors.New("invalid value for required argument 'Domain'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource ModifyDomainOwnerOperation
 	err := ctx.RegisterResource("tencentcloud:Dnspod/modifyDomainOwnerOperation:ModifyDomainOwnerOperation", name, args, &resource, opts...)
 	if err != nil {
@@ -150,7 +156,7 @@ func (i *ModifyDomainOwnerOperation) ToModifyDomainOwnerOperationOutputWithConte
 // ModifyDomainOwnerOperationArrayInput is an input type that accepts ModifyDomainOwnerOperationArray and ModifyDomainOwnerOperationArrayOutput values.
 // You can construct a concrete instance of `ModifyDomainOwnerOperationArrayInput` via:
 //
-//          ModifyDomainOwnerOperationArray{ ModifyDomainOwnerOperationArgs{...} }
+//	ModifyDomainOwnerOperationArray{ ModifyDomainOwnerOperationArgs{...} }
 type ModifyDomainOwnerOperationArrayInput interface {
 	pulumi.Input
 
@@ -175,7 +181,7 @@ func (i ModifyDomainOwnerOperationArray) ToModifyDomainOwnerOperationArrayOutput
 // ModifyDomainOwnerOperationMapInput is an input type that accepts ModifyDomainOwnerOperationMap and ModifyDomainOwnerOperationMapOutput values.
 // You can construct a concrete instance of `ModifyDomainOwnerOperationMapInput` via:
 //
-//          ModifyDomainOwnerOperationMap{ "key": ModifyDomainOwnerOperationArgs{...} }
+//	ModifyDomainOwnerOperationMap{ "key": ModifyDomainOwnerOperationArgs{...} }
 type ModifyDomainOwnerOperationMapInput interface {
 	pulumi.Input
 

@@ -15,66 +15,60 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Scf
         /// <summary>
         /// Use this data source to query detailed information of scf function_versions
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var functionVersions = Tencentcloud.Scf.GetFunctionVersions.Invoke(new()
         ///     {
-        ///         var functionVersions = Output.Create(Tencentcloud.Scf.GetFunctionVersions.InvokeAsync(new Tencentcloud.Scf.GetFunctionVersionsArgs
-        ///         {
-        ///             FunctionName = "keep-1676351130",
-        ///             Namespace = "default",
-        ///         }));
-        ///     }
+        ///         FunctionName = "keep-1676351130",
+        ///         Namespace = "default",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetFunctionVersionsResult> InvokeAsync(GetFunctionVersionsArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetFunctionVersionsResult>("tencentcloud:Scf/getFunctionVersions:getFunctionVersions", args ?? new GetFunctionVersionsArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetFunctionVersionsResult>("tencentcloud:Scf/getFunctionVersions:getFunctionVersions", args ?? new GetFunctionVersionsArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of scf function_versions
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var functionVersions = Tencentcloud.Scf.GetFunctionVersions.Invoke(new()
         ///     {
-        ///         var functionVersions = Output.Create(Tencentcloud.Scf.GetFunctionVersions.InvokeAsync(new Tencentcloud.Scf.GetFunctionVersionsArgs
-        ///         {
-        ///             FunctionName = "keep-1676351130",
-        ///             Namespace = "default",
-        ///         }));
-        ///     }
+        ///         FunctionName = "keep-1676351130",
+        ///         Namespace = "default",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetFunctionVersionsResult> Invoke(GetFunctionVersionsInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetFunctionVersionsResult>("tencentcloud:Scf/getFunctionVersions:getFunctionVersions", args ?? new GetFunctionVersionsInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetFunctionVersionsResult>("tencentcloud:Scf/getFunctionVersions:getFunctionVersions", args ?? new GetFunctionVersionsInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetFunctionVersionsArgs : Pulumi.InvokeArgs
+    public sealed class GetFunctionVersionsArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Function Name.
@@ -109,9 +103,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Scf
         public GetFunctionVersionsArgs()
         {
         }
+        public static new GetFunctionVersionsArgs Empty => new GetFunctionVersionsArgs();
     }
 
-    public sealed class GetFunctionVersionsInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetFunctionVersionsInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Function Name.
@@ -146,6 +141,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Scf
         public GetFunctionVersionsInvokeArgs()
         {
         }
+        public static new GetFunctionVersionsInvokeArgs Empty => new GetFunctionVersionsInvokeArgs();
     }
 
 

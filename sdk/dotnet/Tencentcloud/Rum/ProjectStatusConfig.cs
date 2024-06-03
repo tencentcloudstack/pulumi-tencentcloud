@@ -15,34 +15,35 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Rum
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var projectStatusConfig = new Tencentcloud.Rum.ProjectStatusConfig("projectStatusConfig", new()
     ///     {
-    ///         var projectStatusConfig = new Tencentcloud.Rum.ProjectStatusConfig("projectStatusConfig", new Tencentcloud.Rum.ProjectStatusConfigArgs
-    ///         {
-    ///             Operate = "stop",
-    ///             ProjectId = 131407,
-    ///         });
-    ///     }
+    ///         Operate = "stop",
+    ///         ProjectId = 131407,
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// rum project_status_config can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Rum/projectStatusConfig:ProjectStatusConfig project_status_config project_id
+    /// $ pulumi import tencentcloud:Rum/projectStatusConfig:ProjectStatusConfig project_status_config project_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Rum/projectStatusConfig:ProjectStatusConfig")]
-    public partial class ProjectStatusConfig : Pulumi.CustomResource
+    public partial class ProjectStatusConfig : global::Pulumi.CustomResource
     {
         /// <summary>
         /// `resume`, `stop`.
@@ -101,7 +102,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Rum
         }
     }
 
-    public sealed class ProjectStatusConfigArgs : Pulumi.ResourceArgs
+    public sealed class ProjectStatusConfigArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// `resume`, `stop`.
@@ -118,9 +119,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Rum
         public ProjectStatusConfigArgs()
         {
         }
+        public static new ProjectStatusConfigArgs Empty => new ProjectStatusConfigArgs();
     }
 
-    public sealed class ProjectStatusConfigState : Pulumi.ResourceArgs
+    public sealed class ProjectStatusConfigState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// `resume`, `stop`.
@@ -137,5 +139,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Rum
         public ProjectStatusConfigState()
         {
         }
+        public static new ProjectStatusConfigState Empty => new ProjectStatusConfigState();
     }
 }

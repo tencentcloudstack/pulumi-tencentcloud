@@ -15,118 +15,114 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Waf
         /// <summary>
         /// Use this data source to query detailed information of waf peak_points
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
+        /// 
         /// ### Basic Query
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var example = Tencentcloud.Waf.GetPeakPoints.Invoke(new()
         ///     {
-        ///         var example = Output.Create(Tencentcloud.Waf.GetPeakPoints.InvokeAsync(new Tencentcloud.Waf.GetPeakPointsArgs
-        ///         {
-        ///             FromTime = "2023-09-01 00:00:00",
-        ///             ToTime = "2023-09-07 00:00:00",
-        ///         }));
-        ///     }
+        ///         FromTime = "2023-09-01 00:00:00",
+        ///         ToTime = "2023-09-07 00:00:00",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% example %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
+        /// 
         /// ### Query by filter
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var example = Tencentcloud.Waf.GetPeakPoints.Invoke(new()
         ///     {
-        ///         var example = Output.Create(Tencentcloud.Waf.GetPeakPoints.InvokeAsync(new Tencentcloud.Waf.GetPeakPointsArgs
-        ///         {
-        ///             Domain = "domain.com",
-        ///             Edition = "clb-waf",
-        ///             FromTime = "2023-09-01 00:00:00",
-        ///             InstanceId = "waf_2kxtlbky00b2v1fn",
-        ///             MetricName = "access",
-        ///             ToTime = "2023-09-07 00:00:00",
-        ///         }));
-        ///     }
+        ///         Domain = "domain.com",
+        ///         Edition = "clb-waf",
+        ///         FromTime = "2023-09-01 00:00:00",
+        ///         InstanceId = "waf_2kxtlbky00b2v1fn",
+        ///         MetricName = "access",
+        ///         ToTime = "2023-09-07 00:00:00",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetPeakPointsResult> InvokeAsync(GetPeakPointsArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetPeakPointsResult>("tencentcloud:Waf/getPeakPoints:getPeakPoints", args ?? new GetPeakPointsArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetPeakPointsResult>("tencentcloud:Waf/getPeakPoints:getPeakPoints", args ?? new GetPeakPointsArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of waf peak_points
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
+        /// 
         /// ### Basic Query
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var example = Tencentcloud.Waf.GetPeakPoints.Invoke(new()
         ///     {
-        ///         var example = Output.Create(Tencentcloud.Waf.GetPeakPoints.InvokeAsync(new Tencentcloud.Waf.GetPeakPointsArgs
-        ///         {
-        ///             FromTime = "2023-09-01 00:00:00",
-        ///             ToTime = "2023-09-07 00:00:00",
-        ///         }));
-        ///     }
+        ///         FromTime = "2023-09-01 00:00:00",
+        ///         ToTime = "2023-09-07 00:00:00",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% example %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
+        /// 
         /// ### Query by filter
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var example = Tencentcloud.Waf.GetPeakPoints.Invoke(new()
         ///     {
-        ///         var example = Output.Create(Tencentcloud.Waf.GetPeakPoints.InvokeAsync(new Tencentcloud.Waf.GetPeakPointsArgs
-        ///         {
-        ///             Domain = "domain.com",
-        ///             Edition = "clb-waf",
-        ///             FromTime = "2023-09-01 00:00:00",
-        ///             InstanceId = "waf_2kxtlbky00b2v1fn",
-        ///             MetricName = "access",
-        ///             ToTime = "2023-09-07 00:00:00",
-        ///         }));
-        ///     }
+        ///         Domain = "domain.com",
+        ///         Edition = "clb-waf",
+        ///         FromTime = "2023-09-01 00:00:00",
+        ///         InstanceId = "waf_2kxtlbky00b2v1fn",
+        ///         MetricName = "access",
+        ///         ToTime = "2023-09-07 00:00:00",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetPeakPointsResult> Invoke(GetPeakPointsInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetPeakPointsResult>("tencentcloud:Waf/getPeakPoints:getPeakPoints", args ?? new GetPeakPointsInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetPeakPointsResult>("tencentcloud:Waf/getPeakPoints:getPeakPoints", args ?? new GetPeakPointsInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetPeakPointsArgs : Pulumi.InvokeArgs
+    public sealed class GetPeakPointsArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// The domain name to be queried. If all domain name data is queried, this parameter is not filled in.
@@ -173,9 +169,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Waf
         public GetPeakPointsArgs()
         {
         }
+        public static new GetPeakPointsArgs Empty => new GetPeakPointsArgs();
     }
 
-    public sealed class GetPeakPointsInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetPeakPointsInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// The domain name to be queried. If all domain name data is queried, this parameter is not filled in.
@@ -222,6 +219,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Waf
         public GetPeakPointsInvokeArgs()
         {
         }
+        public static new GetPeakPointsInvokeArgs Empty => new GetPeakPointsInvokeArgs();
     }
 
 

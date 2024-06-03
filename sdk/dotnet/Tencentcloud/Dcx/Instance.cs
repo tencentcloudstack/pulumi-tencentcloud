@@ -17,60 +17,62 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dcx
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var config = new Config();
+    ///     var dcId = config.Get("dcId") ?? "dc-kax48sg7";
+    ///     var dcgId = config.Get("dcgId") ?? "dcg-dmbhf7jf";
+    ///     var vpcId = config.Get("vpcId") ?? "vpc-4h9v4mo3";
+    ///     var bgpMain = new Tencentcloud.Dcx.Instance("bgpMain", new()
     ///     {
-    ///         var config = new Config();
-    ///         var dcId = config.Get("dcId") ?? "dc-kax48sg7";
-    ///         var dcgId = config.Get("dcgId") ?? "dcg-dmbhf7jf";
-    ///         var vpcId = config.Get("vpcId") ?? "vpc-4h9v4mo3";
-    ///         var bgpMain = new Tencentcloud.Dcx.Instance("bgpMain", new Tencentcloud.Dcx.InstanceArgs
-    ///         {
-    ///             Bandwidth = 900,
-    ///             DcId = dcId,
-    ///             DcgId = dcgId,
-    ///             NetworkType = "VPC",
-    ///             RouteType = "BGP",
-    ///             Vlan = 306,
-    ///             VpcId = vpcId,
-    ///         });
-    ///         var staticMain = new Tencentcloud.Dcx.Instance("staticMain", new Tencentcloud.Dcx.InstanceArgs
-    ///         {
-    ///             Bandwidth = 900,
-    ///             DcId = dcId,
-    ///             DcgId = dcgId,
-    ///             DcOwnerAccount = "xxxxxxxx",
-    ///             NetworkType = "VPC",
-    ///             RouteType = "STATIC",
-    ///             Vlan = 301,
-    ///             VpcId = vpcId,
-    ///             RouteFilterPrefixes = 
-    ///             {
-    ///                 "10.10.10.101/32",
-    ///             },
-    ///             TencentAddress = "100.93.46.1/30",
-    ///             CustomerAddress = "100.93.46.2/30",
-    ///         });
-    ///     }
+    ///         Bandwidth = 900,
+    ///         DcId = dcId,
+    ///         DcgId = dcgId,
+    ///         NetworkType = "VPC",
+    ///         RouteType = "BGP",
+    ///         Vlan = 306,
+    ///         VpcId = vpcId,
+    ///     });
     /// 
-    /// }
+    ///     var staticMain = new Tencentcloud.Dcx.Instance("staticMain", new()
+    ///     {
+    ///         Bandwidth = 900,
+    ///         DcId = dcId,
+    ///         DcgId = dcgId,
+    ///         DcOwnerAccount = "xxxxxxxx",
+    ///         NetworkType = "VPC",
+    ///         RouteType = "STATIC",
+    ///         Vlan = 301,
+    ///         VpcId = vpcId,
+    ///         RouteFilterPrefixes = new[]
+    ///         {
+    ///             "10.10.10.101/32",
+    ///         },
+    ///         TencentAddress = "100.93.46.1/30",
+    ///         CustomerAddress = "100.93.46.2/30",
+    ///     });
+    /// 
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// DCX instance can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Dcx/instance:Instance foo dcx-cbbr1gjk
+    /// $ pulumi import tencentcloud:Dcx/instance:Instance foo dcx-cbbr1gjk
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Dcx/instance:Instance")]
-    public partial class Instance : Pulumi.CustomResource
+    public partial class Instance : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Bandwidth of the DC.
@@ -219,7 +221,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dcx
         }
     }
 
-    public sealed class InstanceArgs : Pulumi.ResourceArgs
+    public sealed class InstanceArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Bandwidth of the DC.
@@ -320,9 +322,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dcx
         public InstanceArgs()
         {
         }
+        public static new InstanceArgs Empty => new InstanceArgs();
     }
 
-    public sealed class InstanceState : Pulumi.ResourceArgs
+    public sealed class InstanceState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Bandwidth of the DC.
@@ -435,5 +438,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dcx
         public InstanceState()
         {
         }
+        public static new InstanceState Empty => new InstanceState();
     }
 }

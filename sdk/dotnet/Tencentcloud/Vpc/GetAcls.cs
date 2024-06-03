@@ -16,17 +16,17 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         /// Use this data source to query VPC Network ACL information.
         /// </summary>
         public static Task<GetAclsResult> InvokeAsync(GetAclsArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetAclsResult>("tencentcloud:Vpc/getAcls:getAcls", args ?? new GetAclsArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetAclsResult>("tencentcloud:Vpc/getAcls:getAcls", args ?? new GetAclsArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query VPC Network ACL information.
         /// </summary>
         public static Output<GetAclsResult> Invoke(GetAclsInvokeArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetAclsResult>("tencentcloud:Vpc/getAcls:getAcls", args ?? new GetAclsInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetAclsResult>("tencentcloud:Vpc/getAcls:getAcls", args ?? new GetAclsInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetAclsArgs : Pulumi.InvokeArgs
+    public sealed class GetAclsArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// ID of the network ACL instance.
@@ -55,9 +55,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         public GetAclsArgs()
         {
         }
+        public static new GetAclsArgs Empty => new GetAclsArgs();
     }
 
-    public sealed class GetAclsInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetAclsInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// ID of the network ACL instance.
@@ -86,6 +87,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         public GetAclsInvokeArgs()
         {
         }
+        public static new GetAclsInvokeArgs Empty => new GetAclsInvokeArgs();
     }
 
 

@@ -9,11 +9,12 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const animatedGraphicsTemplate = new tencentcloud.Mps.AnimatedGraphicsTemplate("animated_graphics_template", {
+ * const animatedGraphicsTemplate = new tencentcloud.mps.AnimatedGraphicsTemplate("animatedGraphicsTemplate", {
  *     format: "gif",
  *     fps: 20,
  *     height: 130,
@@ -22,13 +23,14 @@ import * as utilities from "../utilities";
  *     width: 140,
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * mps animated_graphics_template can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Mps/animatedGraphicsTemplate:AnimatedGraphicsTemplate animated_graphics_template animated_graphics_template_id
+ * $ pulumi import tencentcloud:Mps/animatedGraphicsTemplate:AnimatedGraphicsTemplate animated_graphics_template animated_graphics_template_id
  * ```
  */
 export class AnimatedGraphicsTemplate extends pulumi.CustomResource {

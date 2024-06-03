@@ -8,37 +8,42 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Use this data source to query detailed information of postgresql dbInstanceClasses
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Postgresql"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Postgresql"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Postgresql"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Postgresql.GetDbInstanceClasses(ctx, &postgresql.GetDbInstanceClassesArgs{
-// 			DbEngine:       "postgresql",
-// 			DbMajorVersion: "13",
-// 			Zone:           "ap-guangzhou-7",
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Postgresql.GetDbInstanceClasses(ctx, &postgresql.GetDbInstanceClassesArgs{
+//				DbEngine:       "postgresql",
+//				DbMajorVersion: "13",
+//				Zone:           "ap-guangzhou-7",
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 func GetDbInstanceClasses(ctx *pulumi.Context, args *GetDbInstanceClassesArgs, opts ...pulumi.InvokeOption) (*GetDbInstanceClassesResult, error) {
-	opts = pkgInvokeDefaultOpts(opts)
+	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetDbInstanceClassesResult
 	err := ctx.Invoke("tencentcloud:Postgresql/getDbInstanceClasses:getDbInstanceClasses", args, &rv, opts...)
 	if err != nil {

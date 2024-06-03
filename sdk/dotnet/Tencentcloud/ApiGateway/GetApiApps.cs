@@ -16,17 +16,17 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway
         /// Use this data source to query list information of api_gateway api_app
         /// </summary>
         public static Task<GetApiAppsResult> InvokeAsync(GetApiAppsArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetApiAppsResult>("tencentcloud:ApiGateway/getApiApps:getApiApps", args ?? new GetApiAppsArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetApiAppsResult>("tencentcloud:ApiGateway/getApiApps:getApiApps", args ?? new GetApiAppsArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query list information of api_gateway api_app
         /// </summary>
         public static Output<GetApiAppsResult> Invoke(GetApiAppsInvokeArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetApiAppsResult>("tencentcloud:ApiGateway/getApiApps:getApiApps", args ?? new GetApiAppsInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetApiAppsResult>("tencentcloud:ApiGateway/getApiApps:getApiApps", args ?? new GetApiAppsInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetApiAppsArgs : Pulumi.InvokeArgs
+    public sealed class GetApiAppsArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Api app ID.
@@ -49,9 +49,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway
         public GetApiAppsArgs()
         {
         }
+        public static new GetApiAppsArgs Empty => new GetApiAppsArgs();
     }
 
-    public sealed class GetApiAppsInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetApiAppsInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Api app ID.
@@ -74,6 +75,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway
         public GetApiAppsInvokeArgs()
         {
         }
+        public static new GetApiAppsInvokeArgs Empty => new GetApiAppsInvokeArgs();
     }
 
 

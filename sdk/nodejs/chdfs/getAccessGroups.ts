@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,22 +11,21 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const accessGroups = pulumi.output(tencentcloud.Chdfs.getAccessGroups({
+ * const accessGroups = tencentcloud.Chdfs.getAccessGroups({
  *     vpcId: "vpc-pewdpc0d",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getAccessGroups(args?: GetAccessGroupsArgs, opts?: pulumi.InvokeOptions): Promise<GetAccessGroupsResult> {
     args = args || {};
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Chdfs/getAccessGroups:getAccessGroups", {
         "ownerUin": args.ownerUin,
         "resultOutputFile": args.resultOutputFile,
@@ -70,9 +70,24 @@ export interface GetAccessGroupsResult {
      */
     readonly vpcId?: string;
 }
-
+/**
+ * Use this data source to query detailed information of chdfs accessGroups
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const accessGroups = tencentcloud.Chdfs.getAccessGroups({
+ *     vpcId: "vpc-pewdpc0d",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getAccessGroupsOutput(args?: GetAccessGroupsOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetAccessGroupsResult> {
-    return pulumi.output(args).apply(a => getAccessGroups(a, opts))
+    return pulumi.output(args).apply((a: any) => getAccessGroups(a, opts))
 }
 
 /**

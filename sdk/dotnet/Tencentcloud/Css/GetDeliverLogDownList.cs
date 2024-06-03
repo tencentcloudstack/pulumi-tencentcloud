@@ -13,14 +13,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Css
     public static class GetDeliverLogDownList
     {
         public static Task<GetDeliverLogDownListResult> InvokeAsync(GetDeliverLogDownListArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetDeliverLogDownListResult>("tencentcloud:Css/getDeliverLogDownList:getDeliverLogDownList", args ?? new GetDeliverLogDownListArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetDeliverLogDownListResult>("tencentcloud:Css/getDeliverLogDownList:getDeliverLogDownList", args ?? new GetDeliverLogDownListArgs(), options.WithDefaults());
 
         public static Output<GetDeliverLogDownListResult> Invoke(GetDeliverLogDownListInvokeArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetDeliverLogDownListResult>("tencentcloud:Css/getDeliverLogDownList:getDeliverLogDownList", args ?? new GetDeliverLogDownListInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetDeliverLogDownListResult>("tencentcloud:Css/getDeliverLogDownList:getDeliverLogDownList", args ?? new GetDeliverLogDownListInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetDeliverLogDownListArgs : Pulumi.InvokeArgs
+    public sealed class GetDeliverLogDownListArgs : global::Pulumi.InvokeArgs
     {
         [Input("resultOutputFile")]
         public string? ResultOutputFile { get; set; }
@@ -28,9 +28,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Css
         public GetDeliverLogDownListArgs()
         {
         }
+        public static new GetDeliverLogDownListArgs Empty => new GetDeliverLogDownListArgs();
     }
 
-    public sealed class GetDeliverLogDownListInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetDeliverLogDownListInvokeArgs : global::Pulumi.InvokeArgs
     {
         [Input("resultOutputFile")]
         public Input<string>? ResultOutputFile { get; set; }
@@ -38,6 +39,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Css
         public GetDeliverLogDownListInvokeArgs()
         {
         }
+        public static new GetDeliverLogDownListInvokeArgs Empty => new GetDeliverLogDownListInvokeArgs();
     }
 
 

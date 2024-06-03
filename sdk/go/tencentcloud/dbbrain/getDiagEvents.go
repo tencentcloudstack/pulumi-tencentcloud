@@ -8,11 +8,47 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Use this data source to query detailed information of dbbrain diagEvents
+//
+// ## Example Usage
+//
+// <!--Start PulumiCodeChooser -->
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dbbrain"
+//
+// )
+// func main() {
+// pulumi.Run(func(ctx *pulumi.Context) error {
+// _, err := Dbbrain.GetDiagEvents(ctx, &dbbrain.GetDiagEventsArgs{
+// EndTime: "%s",
+// InstanceIds: []string{
+// "%s",
+// },
+// Severities: interface{}{
+// 1,
+// 4,
+// 5,
+// },
+// StartTime: "%s",
+// }, nil);
+// if err != nil {
+// return err
+// }
+// return nil
+// })
+// }
+// ```
+// <!--End PulumiCodeChooser -->
 func GetDiagEvents(ctx *pulumi.Context, args *GetDiagEventsArgs, opts ...pulumi.InvokeOption) (*GetDiagEventsResult, error) {
-	opts = pkgInvokeDefaultOpts(opts)
+	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetDiagEventsResult
 	err := ctx.Invoke("tencentcloud:Dbbrain/getDiagEvents:getDiagEvents", args, &rv, opts...)
 	if err != nil {

@@ -7,43 +7,49 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Use this resource to create custom domain of API gateway.
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/ApiGateway"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/ApiGateway"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := ApiGateway.NewCustomDomain(ctx, "foo", &ApiGateway.CustomDomainArgs{
-// 			DefaultDomain:    pulumi.String("service-ohxqslqe-1259649581.gz.apigw.tencentcs.com"),
-// 			IsDefaultMapping: pulumi.Bool(false),
-// 			NetType:          pulumi.String("OUTER"),
-// 			PathMappings: pulumi.StringArray{
-// 				pulumi.String("/good#test"),
-// 				pulumi.String("/root#release"),
-// 			},
-// 			Protocol:  pulumi.String("http"),
-// 			ServiceId: pulumi.String("service-ohxqslqe"),
-// 			SubDomain: pulumi.String("tic-test.dnsv1.com"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := ApiGateway.NewCustomDomain(ctx, "foo", &ApiGateway.CustomDomainArgs{
+//				DefaultDomain:    pulumi.String("service-ohxqslqe-1259649581.gz.apigw.tencentcs.com"),
+//				IsDefaultMapping: pulumi.Bool(false),
+//				NetType:          pulumi.String("OUTER"),
+//				PathMappings: pulumi.StringArray{
+//					pulumi.String("/good#test"),
+//					pulumi.String("/root#release"),
+//				},
+//				Protocol:  pulumi.String("http"),
+//				ServiceId: pulumi.String("service-ohxqslqe"),
+//				SubDomain: pulumi.String("tic-test.dnsv1.com"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 type CustomDomain struct {
 	pulumi.CustomResourceState
 
@@ -91,7 +97,7 @@ func NewCustomDomain(ctx *pulumi.Context,
 	if args.SubDomain == nil {
 		return nil, errors.New("invalid value for required argument 'SubDomain'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource CustomDomain
 	err := ctx.RegisterResource("tencentcloud:ApiGateway/customDomain:CustomDomain", name, args, &resource, opts...)
 	if err != nil {
@@ -232,7 +238,7 @@ func (i *CustomDomain) ToCustomDomainOutputWithContext(ctx context.Context) Cust
 // CustomDomainArrayInput is an input type that accepts CustomDomainArray and CustomDomainArrayOutput values.
 // You can construct a concrete instance of `CustomDomainArrayInput` via:
 //
-//          CustomDomainArray{ CustomDomainArgs{...} }
+//	CustomDomainArray{ CustomDomainArgs{...} }
 type CustomDomainArrayInput interface {
 	pulumi.Input
 
@@ -257,7 +263,7 @@ func (i CustomDomainArray) ToCustomDomainArrayOutputWithContext(ctx context.Cont
 // CustomDomainMapInput is an input type that accepts CustomDomainMap and CustomDomainMapOutput values.
 // You can construct a concrete instance of `CustomDomainMapInput` via:
 //
-//          CustomDomainMap{ "key": CustomDomainArgs{...} }
+//	CustomDomainMap{ "key": CustomDomainArgs{...} }
 type CustomDomainMapInput interface {
 	pulumi.Input
 

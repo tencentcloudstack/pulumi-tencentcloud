@@ -7,73 +7,78 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a cos bucket batch.
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Cos"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cos"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cos"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Cos.NewBatch(ctx, "cosBatch", &Cos.BatchArgs{
-// 			Appid:                pulumi.Int(1308919341),
-// 			ConfirmationRequired: pulumi.Bool(true),
-// 			Description:          pulumi.String("cos_batch"),
-// 			Manifest: &cos.BatchManifestArgs{
-// 				Location: &cos.BatchManifestLocationArgs{
-// 					Etag:      pulumi.String("64357de8fd75a3abae2200135a2c9627"),
-// 					ObjectArn: pulumi.String("qcs::cos:ap-guangzhou:uid/1308919341:keep-test-1308919341/cos_bucket_inventory/1308919341/keep-test/test/20230621/manifest.json"),
-// 				},
-// 				Spec: &cos.BatchManifestSpecArgs{
-// 					Format: pulumi.String("COSInventoryReport_CSV_V1"),
-// 				},
-// 			},
-// 			Operation: &cos.BatchOperationArgs{
-// 				CosPutObjectCopy: &cos.BatchOperationCosPutObjectCopyArgs{
-// 					AccessControlDirective: pulumi.String("Copy"),
-// 					MetadataDirective:      pulumi.String("Copy"),
-// 					PrefixReplace:          pulumi.Bool(false),
-// 					StorageClass:           pulumi.String("STANDARD"),
-// 					TaggingDirective:       pulumi.String("Copy"),
-// 					TargetResource:         pulumi.String("qcs::cos:ap-guangzhou:uid/1308919341:cos-lock-1308919341"),
-// 				},
-// 			},
-// 			Priority: pulumi.Int(1),
-// 			Report: &cos.BatchReportArgs{
-// 				Bucket:      pulumi.String("qcs::cos:ap-guangzhou:uid/1308919341:keep-test-1308919341"),
-// 				Enabled:     pulumi.String("true"),
-// 				Format:      pulumi.String("Report_CSV_V1"),
-// 				ReportScope: pulumi.String("AllTasks"),
-// 			},
-// 			RoleArn: pulumi.String("qcs::cam::uin/100022975249:roleName/COSBatch_QCSRole"),
-// 			Status:  pulumi.String("Cancelled"),
-// 			Uin:     pulumi.String("100022975249"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Cos.NewBatch(ctx, "cosBatch", &Cos.BatchArgs{
+//				Appid:                pulumi.Int(1308919341),
+//				ConfirmationRequired: pulumi.Bool(true),
+//				Description:          pulumi.String("cos_batch"),
+//				Manifest: &cos.BatchManifestArgs{
+//					Location: &cos.BatchManifestLocationArgs{
+//						Etag:      pulumi.String("64357de8fd75a3abae2200135a2c9627"),
+//						ObjectArn: pulumi.String("qcs::cos:ap-guangzhou:uid/1308919341:keep-test-1308919341/cos_bucket_inventory/1308919341/keep-test/test/20230621/manifest.json"),
+//					},
+//					Spec: &cos.BatchManifestSpecArgs{
+//						Format: pulumi.String("COSInventoryReport_CSV_V1"),
+//					},
+//				},
+//				Operation: &cos.BatchOperationArgs{
+//					CosPutObjectCopy: &cos.BatchOperationCosPutObjectCopyArgs{
+//						AccessControlDirective: pulumi.String("Copy"),
+//						MetadataDirective:      pulumi.String("Copy"),
+//						PrefixReplace:          pulumi.Bool(false),
+//						StorageClass:           pulumi.String("STANDARD"),
+//						TaggingDirective:       pulumi.String("Copy"),
+//						TargetResource:         pulumi.String("qcs::cos:ap-guangzhou:uid/1308919341:cos-lock-1308919341"),
+//					},
+//				},
+//				Priority: pulumi.Int(1),
+//				Report: &cos.BatchReportArgs{
+//					Bucket:      pulumi.String("qcs::cos:ap-guangzhou:uid/1308919341:keep-test-1308919341"),
+//					Enabled:     pulumi.String("true"),
+//					Format:      pulumi.String("Report_CSV_V1"),
+//					ReportScope: pulumi.String("AllTasks"),
+//				},
+//				RoleArn: pulumi.String("qcs::cam::uin/100022975249:roleName/COSBatch_QCSRole"),
+//				Status:  pulumi.String("Cancelled"),
+//				Uin:     pulumi.String("100022975249"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // cos bucket batch can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Cos/batch:Batch cos_batch ${uin}#${appid}#{job_id}
+// $ pulumi import tencentcloud:Cos/batch:Batch cos_batch ${uin}#${appid}#{job_id}
 // ```
 type Batch struct {
 	pulumi.CustomResourceState
@@ -132,7 +137,7 @@ func NewBatch(ctx *pulumi.Context,
 	if args.Uin == nil {
 		return nil, errors.New("invalid value for required argument 'Uin'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource Batch
 	err := ctx.RegisterResource("tencentcloud:Cos/batch:Batch", name, args, &resource, opts...)
 	if err != nil {
@@ -289,7 +294,7 @@ func (i *Batch) ToBatchOutputWithContext(ctx context.Context) BatchOutput {
 // BatchArrayInput is an input type that accepts BatchArray and BatchArrayOutput values.
 // You can construct a concrete instance of `BatchArrayInput` via:
 //
-//          BatchArray{ BatchArgs{...} }
+//	BatchArray{ BatchArgs{...} }
 type BatchArrayInput interface {
 	pulumi.Input
 
@@ -314,7 +319,7 @@ func (i BatchArray) ToBatchArrayOutputWithContext(ctx context.Context) BatchArra
 // BatchMapInput is an input type that accepts BatchMap and BatchMapOutput values.
 // You can construct a concrete instance of `BatchMapInput` via:
 //
-//          BatchMap{ "key": BatchArgs{...} }
+//	BatchMap{ "key": BatchArgs{...} }
 type BatchMapInput interface {
 	pulumi.Input
 

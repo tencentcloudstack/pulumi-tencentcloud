@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps.Inputs
 {
 
-    public sealed class TranscodeTemplateEnhanceConfigVideoEnhanceScratchRepairArgs : Pulumi.ResourceArgs
+    public sealed class TranscodeTemplateEnhanceConfigVideoEnhanceScratchRepairArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Intensity, value range: 0.0~1.0.Default value: 0.0.Note: This field may return null, indicating that no valid value can be obtained.
@@ -28,5 +28,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps.Inputs
         public TranscodeTemplateEnhanceConfigVideoEnhanceScratchRepairArgs()
         {
         }
+        public static new TranscodeTemplateEnhanceConfigVideoEnhanceScratchRepairArgs Empty => new TranscodeTemplateEnhanceConfigVideoEnhanceScratchRepairArgs();
     }
 }

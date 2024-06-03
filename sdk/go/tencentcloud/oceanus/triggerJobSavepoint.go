@@ -7,36 +7,42 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a oceanus triggerJobSavepoint
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Oceanus"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Oceanus"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Oceanus.NewTriggerJobSavepoint(ctx, "example", &Oceanus.TriggerJobSavepointArgs{
-// 			Description: pulumi.String("description."),
-// 			JobId:       pulumi.String("cql-4xwincyn"),
-// 			WorkSpaceId: pulumi.String("space-2idq8wbr"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Oceanus.NewTriggerJobSavepoint(ctx, "example", &Oceanus.TriggerJobSavepointArgs{
+//				Description: pulumi.String("description."),
+//				JobId:       pulumi.String("cql-4xwincyn"),
+//				WorkSpaceId: pulumi.String("space-2idq8wbr"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 type TriggerJobSavepoint struct {
 	pulumi.CustomResourceState
 
@@ -58,7 +64,7 @@ func NewTriggerJobSavepoint(ctx *pulumi.Context,
 	if args.JobId == nil {
 		return nil, errors.New("invalid value for required argument 'JobId'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource TriggerJobSavepoint
 	err := ctx.RegisterResource("tencentcloud:Oceanus/triggerJobSavepoint:TriggerJobSavepoint", name, args, &resource, opts...)
 	if err != nil {
@@ -147,7 +153,7 @@ func (i *TriggerJobSavepoint) ToTriggerJobSavepointOutputWithContext(ctx context
 // TriggerJobSavepointArrayInput is an input type that accepts TriggerJobSavepointArray and TriggerJobSavepointArrayOutput values.
 // You can construct a concrete instance of `TriggerJobSavepointArrayInput` via:
 //
-//          TriggerJobSavepointArray{ TriggerJobSavepointArgs{...} }
+//	TriggerJobSavepointArray{ TriggerJobSavepointArgs{...} }
 type TriggerJobSavepointArrayInput interface {
 	pulumi.Input
 
@@ -172,7 +178,7 @@ func (i TriggerJobSavepointArray) ToTriggerJobSavepointArrayOutputWithContext(ct
 // TriggerJobSavepointMapInput is an input type that accepts TriggerJobSavepointMap and TriggerJobSavepointMapOutput values.
 // You can construct a concrete instance of `TriggerJobSavepointMapInput` via:
 //
-//          TriggerJobSavepointMap{ "key": TriggerJobSavepointArgs{...} }
+//	TriggerJobSavepointMap{ "key": TriggerJobSavepointArgs{...} }
 type TriggerJobSavepointMapInput interface {
 	pulumi.Input
 

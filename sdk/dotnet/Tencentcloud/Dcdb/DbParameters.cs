@@ -15,38 +15,39 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dcdb
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var dbParameters = new Tencentcloud.Dcdb.DbParameters("dbParameters", new()
     ///     {
-    ///         var dbParameters = new Tencentcloud.Dcdb.DbParameters("dbParameters", new Tencentcloud.Dcdb.DbParametersArgs
+    ///         InstanceId = "%s",
+    ///         Params = new Tencentcloud.Dcdb.Inputs.DbParametersParamsArgs
     ///         {
-    ///             InstanceId = "%s",
-    ///             Params = new Tencentcloud.Dcdb.Inputs.DbParametersParamsArgs
-    ///             {
-    ///                 Param = "max_connections",
-    ///                 Value = "9999",
-    ///             },
-    ///         });
-    ///     }
+    ///             Param = "max_connections",
+    ///             Value = "9999",
+    ///         },
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// dcdb db_parameters can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Dcdb/dbParameters:DbParameters db_parameters instanceId#paramName
+    /// $ pulumi import tencentcloud:Dcdb/dbParameters:DbParameters db_parameters instanceId#paramName
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Dcdb/dbParameters:DbParameters")]
-    public partial class DbParameters : Pulumi.CustomResource
+    public partial class DbParameters : global::Pulumi.CustomResource
     {
         /// <summary>
         /// The ID of instance.
@@ -105,7 +106,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dcdb
         }
     }
 
-    public sealed class DbParametersArgs : Pulumi.ResourceArgs
+    public sealed class DbParametersArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// The ID of instance.
@@ -122,9 +123,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dcdb
         public DbParametersArgs()
         {
         }
+        public static new DbParametersArgs Empty => new DbParametersArgs();
     }
 
-    public sealed class DbParametersState : Pulumi.ResourceArgs
+    public sealed class DbParametersState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// The ID of instance.
@@ -141,5 +143,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dcdb
         public DbParametersState()
         {
         }
+        public static new DbParametersState Empty => new DbParametersState();
     }
 }

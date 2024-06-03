@@ -17,36 +17,37 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Css
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var backupStream = new Tencentcloud.Css.BackupStream("backupStream", new()
     ///     {
-    ///         var backupStream = new Tencentcloud.Css.BackupStream("backupStream", new Tencentcloud.Css.BackupStreamArgs
-    ///         {
-    ///             AppName = "live",
-    ///             PushDomainName = "177154.push.tlivecloud.com",
-    ///             StreamName = "1308919341_test",
-    ///             UpstreamSequence = "2209501773993286139",
-    ///         });
-    ///     }
+    ///         AppName = "live",
+    ///         PushDomainName = "177154.push.tlivecloud.com",
+    ///         StreamName = "1308919341_test",
+    ///         UpstreamSequence = "2209501773993286139",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// css backup_stream can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Css/backupStream:BackupStream backup_stream pushDomainName#appName#streamName
+    /// $ pulumi import tencentcloud:Css/backupStream:BackupStream backup_stream pushDomainName#appName#streamName
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Css/backupStream:BackupStream")]
-    public partial class BackupStream : Pulumi.CustomResource
+    public partial class BackupStream : global::Pulumi.CustomResource
     {
         /// <summary>
         /// App name.
@@ -117,7 +118,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Css
         }
     }
 
-    public sealed class BackupStreamArgs : Pulumi.ResourceArgs
+    public sealed class BackupStreamArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// App name.
@@ -146,9 +147,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Css
         public BackupStreamArgs()
         {
         }
+        public static new BackupStreamArgs Empty => new BackupStreamArgs();
     }
 
-    public sealed class BackupStreamState : Pulumi.ResourceArgs
+    public sealed class BackupStreamState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// App name.
@@ -177,5 +179,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Css
         public BackupStreamState()
         {
         }
+        public static new BackupStreamState Empty => new BackupStreamState();
     }
 }

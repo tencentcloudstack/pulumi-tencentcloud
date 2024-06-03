@@ -43,6 +43,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes.Outputs
         /// </summary>
         public readonly string? MountTarget;
         /// <summary>
+        /// Base64-encoded user script, executed before initializing the node, currently only effective for adding existing nodes.
+        /// </summary>
+        public readonly string? PreStartUserScript;
+        /// <summary>
         /// Base64-encoded User Data text, the length limit is 16KB.
         /// </summary>
         public readonly string? UserData;
@@ -63,6 +67,8 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes.Outputs
 
             string? mountTarget,
 
+            string? preStartUserScript,
+
             string? userData)
         {
             DataDisks = dataDisks;
@@ -72,6 +78,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes.Outputs
             GpuArgs = gpuArgs;
             IsSchedule = isSchedule;
             MountTarget = mountTarget;
+            PreStartUserScript = preStartUserScript;
             UserData = userData;
         }
     }

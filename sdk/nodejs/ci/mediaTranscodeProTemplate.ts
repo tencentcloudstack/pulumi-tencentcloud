@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,11 +11,12 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const mediaTranscodeProTemplate = new tencentcloud.Ci.MediaTranscodeProTemplate("media_transcode_pro_template", {
+ * const mediaTranscodeProTemplate = new tencentcloud.ci.MediaTranscodeProTemplate("mediaTranscodeProTemplate", {
  *     audio: {
  *         codec: "pcm_s24le",
  *         remove: "true",
@@ -49,13 +51,14 @@ import * as utilities from "../utilities";
  *     },
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * ci media_transcode_pro_template can be imported using the bucket#templateId, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Ci/mediaTranscodeProTemplate:MediaTranscodeProTemplate media_transcode_pro_template terraform-ci-xxxxxx#t13ed9af009da0414e9c7c63456ec8f4d2
+ * $ pulumi import tencentcloud:Ci/mediaTranscodeProTemplate:MediaTranscodeProTemplate media_transcode_pro_template terraform-ci-xxxxxx#t13ed9af009da0414e9c7c63456ec8f4d2
  * ```
  */
 export class MediaTranscodeProTemplate extends pulumi.CustomResource {

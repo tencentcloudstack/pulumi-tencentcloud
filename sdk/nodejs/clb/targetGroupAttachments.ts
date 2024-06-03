@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -11,13 +12,15 @@ import * as utilities from "../utilities";
  * This resource supports bidirectional binding (target group binding to the load balancer, load balancer binding to the target group). When choosing either the load balancer or the target group as the binding target, up to 20 combinations can be bound at most.
  *
  * ## Example Usage
+ *
  * ### Load balancer binding to the target group
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const targetGroupAttachments = new tencentcloud.Clb.TargetGroupAttachments("target_group_attachments", {
+ * const targetGroupAttachments = new tencentcloud.clb.TargetGroupAttachments("targetGroupAttachments", {
  *     associations: [{
  *         listenerId: "lbl-m2q6sp9m",
  *         locationId: "loc-jjqr0ric",
@@ -26,13 +29,16 @@ import * as utilities from "../utilities";
  *     loadBalancerId: "lb-phbx2420",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
+ *
  * ### Target group binding to the load balancer
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const targetGroupAttachments = new tencentcloud.Clb.TargetGroupAttachments("target_group_attachments", {
+ * const targetGroupAttachments = new tencentcloud.clb.TargetGroupAttachments("targetGroupAttachments", {
  *     associations: [{
  *         listenerId: "lbl-m2q6sp9m",
  *         loadBalancerId: "lb-phbx2420",
@@ -41,6 +47,7 @@ import * as utilities from "../utilities";
  *     targetGroupId: "lbtg-5xunivs0",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export class TargetGroupAttachments extends pulumi.CustomResource {
     /**

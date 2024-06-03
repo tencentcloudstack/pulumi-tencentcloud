@@ -2,15 +2,13 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 export function getWafInfos(args: GetWafInfosArgs, opts?: pulumi.InvokeOptions): Promise<GetWafInfosResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Waf/getWafInfos:getWafInfos", {
         "params": args.params,
         "resultOutputFile": args.resultOutputFile,
@@ -37,9 +35,8 @@ export interface GetWafInfosResult {
     readonly params: outputs.Waf.GetWafInfosParam[];
     readonly resultOutputFile?: string;
 }
-
 export function getWafInfosOutput(args: GetWafInfosOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetWafInfosResult> {
-    return pulumi.output(args).apply(a => getWafInfos(a, opts))
+    return pulumi.output(args).apply((a: any) => getWafInfos(a, opts))
 }
 
 /**

@@ -11,16 +11,18 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Inputs
 {
 
-    public sealed class ZoneSettingForceRedirectArgs : Pulumi.ResourceArgs
+    public sealed class ZoneSettingForceRedirectArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// Redirection status code.- 301- 302 Note: This field may return null, indicating that no valid value can be obtained.
+        /// Redirection status code.
+        /// - 301
+        /// - 302 Note: This field may return null, indicating that no valid value can be obtained.
         /// </summary>
         [Input("redirectStatusCode")]
         public Input<int>? RedirectStatusCode { get; set; }
 
         /// <summary>
-        /// Whether to enable force redirect.- `on`: Enable.- `off`: Disable.
+        /// Whether to enable force redirect.
         /// </summary>
         [Input("switch", required: true)]
         public Input<string> Switch { get; set; } = null!;
@@ -28,5 +30,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Inputs
         public ZoneSettingForceRedirectArgs()
         {
         }
+        public static new ZoneSettingForceRedirectArgs Empty => new ZoneSettingForceRedirectArgs();
     }
 }

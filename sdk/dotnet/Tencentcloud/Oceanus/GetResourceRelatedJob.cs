@@ -15,70 +15,64 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Oceanus
         /// <summary>
         /// Use this data source to query detailed information of oceanus resource_related_job
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var example = Tencentcloud.Oceanus.GetResourceRelatedJob.Invoke(new()
         ///     {
-        ///         var example = Output.Create(Tencentcloud.Oceanus.GetResourceRelatedJob.InvokeAsync(new Tencentcloud.Oceanus.GetResourceRelatedJobArgs
-        ///         {
-        ///             DescByJobConfigCreateTime = 0,
-        ///             ResourceConfigVersion = 1,
-        ///             ResourceId = "resource-8y9lzcuz",
-        ///             WorkSpaceId = "space-2idq8wbr",
-        ///         }));
-        ///     }
+        ///         DescByJobConfigCreateTime = 0,
+        ///         ResourceConfigVersion = 1,
+        ///         ResourceId = "resource-8y9lzcuz",
+        ///         WorkSpaceId = "space-2idq8wbr",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetResourceRelatedJobResult> InvokeAsync(GetResourceRelatedJobArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetResourceRelatedJobResult>("tencentcloud:Oceanus/getResourceRelatedJob:getResourceRelatedJob", args ?? new GetResourceRelatedJobArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetResourceRelatedJobResult>("tencentcloud:Oceanus/getResourceRelatedJob:getResourceRelatedJob", args ?? new GetResourceRelatedJobArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of oceanus resource_related_job
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var example = Tencentcloud.Oceanus.GetResourceRelatedJob.Invoke(new()
         ///     {
-        ///         var example = Output.Create(Tencentcloud.Oceanus.GetResourceRelatedJob.InvokeAsync(new Tencentcloud.Oceanus.GetResourceRelatedJobArgs
-        ///         {
-        ///             DescByJobConfigCreateTime = 0,
-        ///             ResourceConfigVersion = 1,
-        ///             ResourceId = "resource-8y9lzcuz",
-        ///             WorkSpaceId = "space-2idq8wbr",
-        ///         }));
-        ///     }
+        ///         DescByJobConfigCreateTime = 0,
+        ///         ResourceConfigVersion = 1,
+        ///         ResourceId = "resource-8y9lzcuz",
+        ///         WorkSpaceId = "space-2idq8wbr",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetResourceRelatedJobResult> Invoke(GetResourceRelatedJobInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetResourceRelatedJobResult>("tencentcloud:Oceanus/getResourceRelatedJob:getResourceRelatedJob", args ?? new GetResourceRelatedJobInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetResourceRelatedJobResult>("tencentcloud:Oceanus/getResourceRelatedJob:getResourceRelatedJob", args ?? new GetResourceRelatedJobInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetResourceRelatedJobArgs : Pulumi.InvokeArgs
+    public sealed class GetResourceRelatedJobArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Default:0; 1:sort by job version creation time in descending order.
@@ -113,9 +107,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Oceanus
         public GetResourceRelatedJobArgs()
         {
         }
+        public static new GetResourceRelatedJobArgs Empty => new GetResourceRelatedJobArgs();
     }
 
-    public sealed class GetResourceRelatedJobInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetResourceRelatedJobInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Default:0; 1:sort by job version creation time in descending order.
@@ -150,6 +145,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Oceanus
         public GetResourceRelatedJobInvokeArgs()
         {
         }
+        public static new GetResourceRelatedJobInvokeArgs Empty => new GetResourceRelatedJobInvokeArgs();
     }
 
 

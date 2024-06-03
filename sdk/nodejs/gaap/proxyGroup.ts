@@ -9,11 +9,12 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const proxyGroup = new tencentcloud.Gaap.ProxyGroup("proxy_group", {
+ * const proxyGroup = new tencentcloud.gaap.ProxyGroup("proxyGroup", {
  *     groupName: "tf-test-update",
  *     ipAddressVersion: "IPv4",
  *     packageType: "Thunder",
@@ -21,13 +22,14 @@ import * as utilities from "../utilities";
  *     realServerRegion: "Beijing",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * gaap proxy_group can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Gaap/proxyGroup:ProxyGroup proxy_group proxy_group_id
+ * $ pulumi import tencentcloud:Gaap/proxyGroup:ProxyGroup proxy_group proxy_group_id
  * ```
  */
 export class ProxyGroup extends pulumi.CustomResource {

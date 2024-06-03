@@ -19,42 +19,39 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Image
         /// 
         /// &gt; **NOTE:** This data source will be deprecated, please use `tencentcloud.Images.getInstance` instead.
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var myFavorateImage = Tencentcloud.Image.GetInstance.Invoke(new()
         ///     {
-        ///         var myFavorateImage = Output.Create(Tencentcloud.Image.GetInstance.InvokeAsync(new Tencentcloud.Image.GetInstanceArgs
+        ///         Filters = new[]
         ///         {
-        ///             Filters = 
+        ///             new Tencentcloud.Image.Inputs.GetInstanceFilterInputArgs
         ///             {
-        ///                 new Tencentcloud.Image.Inputs.GetInstanceFilterArgs
+        ///                 Name = "image-type",
+        ///                 Values = new[]
         ///                 {
-        ///                     Name = "image-type",
-        ///                     Values = 
-        ///                     {
-        ///                         "PUBLIC_IMAGE",
-        ///                     },
+        ///                     "PUBLIC_IMAGE",
         ///                 },
         ///             },
-        ///             OsName = "centos",
-        ///         }));
-        ///     }
+        ///         },
+        ///         OsName = "centos",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetInstanceResult> InvokeAsync(GetInstanceArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetInstanceResult>("tencentcloud:Image/getInstance:getInstance", args ?? new GetInstanceArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetInstanceResult>("tencentcloud:Image/getInstance:getInstance", args ?? new GetInstanceArgs(), options.WithDefaults());
 
         /// <summary>
         /// Provides an available image for the user.
@@ -63,46 +60,43 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Image
         /// 
         /// &gt; **NOTE:** This data source will be deprecated, please use `tencentcloud.Images.getInstance` instead.
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var myFavorateImage = Tencentcloud.Image.GetInstance.Invoke(new()
         ///     {
-        ///         var myFavorateImage = Output.Create(Tencentcloud.Image.GetInstance.InvokeAsync(new Tencentcloud.Image.GetInstanceArgs
+        ///         Filters = new[]
         ///         {
-        ///             Filters = 
+        ///             new Tencentcloud.Image.Inputs.GetInstanceFilterInputArgs
         ///             {
-        ///                 new Tencentcloud.Image.Inputs.GetInstanceFilterArgs
+        ///                 Name = "image-type",
+        ///                 Values = new[]
         ///                 {
-        ///                     Name = "image-type",
-        ///                     Values = 
-        ///                     {
-        ///                         "PUBLIC_IMAGE",
-        ///                     },
+        ///                     "PUBLIC_IMAGE",
         ///                 },
         ///             },
-        ///             OsName = "centos",
-        ///         }));
-        ///     }
+        ///         },
+        ///         OsName = "centos",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetInstanceResult> Invoke(GetInstanceInvokeArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetInstanceResult>("tencentcloud:Image/getInstance:getInstance", args ?? new GetInstanceInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetInstanceResult>("tencentcloud:Image/getInstance:getInstance", args ?? new GetInstanceInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetInstanceArgs : Pulumi.InvokeArgs
+    public sealed class GetInstanceArgs : global::Pulumi.InvokeArgs
     {
         [Input("filters")]
         private List<Inputs.GetInstanceFilterArgs>? _filters;
@@ -137,9 +131,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Image
         public GetInstanceArgs()
         {
         }
+        public static new GetInstanceArgs Empty => new GetInstanceArgs();
     }
 
-    public sealed class GetInstanceInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetInstanceInvokeArgs : global::Pulumi.InvokeArgs
     {
         [Input("filters")]
         private InputList<Inputs.GetInstanceFilterInputArgs>? _filters;
@@ -174,6 +169,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Image
         public GetInstanceInvokeArgs()
         {
         }
+        public static new GetInstanceInvokeArgs Empty => new GetInstanceInvokeArgs();
     }
 
 

@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dayu.Inputs
 {
 
-    public sealed class DdosIpAttachmentV2BoundIpListArgs : Pulumi.ResourceArgs
+    public sealed class DdosIpAttachmentV2BoundIpListArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Category of product that can be bound. Valid values: public (CVM and CLB), bm (BM), eni (ENI), vpngw (VPN gateway), natgw (NAT gateway), waf (WAF), fpc (financial products), gaap (GAAP), and other (hosted IP). This field is required when you perform binding.
@@ -40,5 +40,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dayu.Inputs
         public DdosIpAttachmentV2BoundIpListArgs()
         {
         }
+        public static new DdosIpAttachmentV2BoundIpListArgs Empty => new DdosIpAttachmentV2BoundIpListArgs();
     }
 }

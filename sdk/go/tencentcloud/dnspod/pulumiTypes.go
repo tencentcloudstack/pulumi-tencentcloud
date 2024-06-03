@@ -8,7 +8,10 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
+
+var _ = internal.GetEnvOrDefault
 
 type GetDomainAnalyticsAliasData struct {
 	// Subtotal of resolution volume for the current statistical dimension.
@@ -20,7 +23,7 @@ type GetDomainAnalyticsAliasData struct {
 // GetDomainAnalyticsAliasDataInput is an input type that accepts GetDomainAnalyticsAliasDataArgs and GetDomainAnalyticsAliasDataOutput values.
 // You can construct a concrete instance of `GetDomainAnalyticsAliasDataInput` via:
 //
-//          GetDomainAnalyticsAliasDataArgs{...}
+//	GetDomainAnalyticsAliasDataArgs{...}
 type GetDomainAnalyticsAliasDataInput interface {
 	pulumi.Input
 
@@ -50,7 +53,7 @@ func (i GetDomainAnalyticsAliasDataArgs) ToGetDomainAnalyticsAliasDataOutputWith
 // GetDomainAnalyticsAliasDataArrayInput is an input type that accepts GetDomainAnalyticsAliasDataArray and GetDomainAnalyticsAliasDataArrayOutput values.
 // You can construct a concrete instance of `GetDomainAnalyticsAliasDataArrayInput` via:
 //
-//          GetDomainAnalyticsAliasDataArray{ GetDomainAnalyticsAliasDataArgs{...} }
+//	GetDomainAnalyticsAliasDataArray{ GetDomainAnalyticsAliasDataArgs{...} }
 type GetDomainAnalyticsAliasDataArrayInput interface {
 	pulumi.Input
 
@@ -128,7 +131,7 @@ type GetDomainAnalyticsAliasDataData struct {
 // GetDomainAnalyticsAliasDataDataInput is an input type that accepts GetDomainAnalyticsAliasDataDataArgs and GetDomainAnalyticsAliasDataDataOutput values.
 // You can construct a concrete instance of `GetDomainAnalyticsAliasDataDataInput` via:
 //
-//          GetDomainAnalyticsAliasDataDataArgs{...}
+//	GetDomainAnalyticsAliasDataDataArgs{...}
 type GetDomainAnalyticsAliasDataDataInput interface {
 	pulumi.Input
 
@@ -160,7 +163,7 @@ func (i GetDomainAnalyticsAliasDataDataArgs) ToGetDomainAnalyticsAliasDataDataOu
 // GetDomainAnalyticsAliasDataDataArrayInput is an input type that accepts GetDomainAnalyticsAliasDataDataArray and GetDomainAnalyticsAliasDataDataArrayOutput values.
 // You can construct a concrete instance of `GetDomainAnalyticsAliasDataDataArrayInput` via:
 //
-//          GetDomainAnalyticsAliasDataDataArray{ GetDomainAnalyticsAliasDataDataArgs{...} }
+//	GetDomainAnalyticsAliasDataDataArray{ GetDomainAnalyticsAliasDataDataArgs{...} }
 type GetDomainAnalyticsAliasDataDataArrayInput interface {
 	pulumi.Input
 
@@ -247,7 +250,7 @@ type GetDomainAnalyticsAliasDataInfo struct {
 // GetDomainAnalyticsAliasDataInfoInput is an input type that accepts GetDomainAnalyticsAliasDataInfoArgs and GetDomainAnalyticsAliasDataInfoOutput values.
 // You can construct a concrete instance of `GetDomainAnalyticsAliasDataInfoInput` via:
 //
-//          GetDomainAnalyticsAliasDataInfoArgs{...}
+//	GetDomainAnalyticsAliasDataInfoArgs{...}
 type GetDomainAnalyticsAliasDataInfoInput interface {
 	pulumi.Input
 
@@ -283,7 +286,7 @@ func (i GetDomainAnalyticsAliasDataInfoArgs) ToGetDomainAnalyticsAliasDataInfoOu
 // GetDomainAnalyticsAliasDataInfoArrayInput is an input type that accepts GetDomainAnalyticsAliasDataInfoArray and GetDomainAnalyticsAliasDataInfoArrayOutput values.
 // You can construct a concrete instance of `GetDomainAnalyticsAliasDataInfoArrayInput` via:
 //
-//          GetDomainAnalyticsAliasDataInfoArray{ GetDomainAnalyticsAliasDataInfoArgs{...} }
+//	GetDomainAnalyticsAliasDataInfoArray{ GetDomainAnalyticsAliasDataInfoArgs{...} }
 type GetDomainAnalyticsAliasDataInfoArrayInput interface {
 	pulumi.Input
 
@@ -376,7 +379,7 @@ type GetDomainAnalyticsData struct {
 // GetDomainAnalyticsDataInput is an input type that accepts GetDomainAnalyticsDataArgs and GetDomainAnalyticsDataOutput values.
 // You can construct a concrete instance of `GetDomainAnalyticsDataInput` via:
 //
-//          GetDomainAnalyticsDataArgs{...}
+//	GetDomainAnalyticsDataArgs{...}
 type GetDomainAnalyticsDataInput interface {
 	pulumi.Input
 
@@ -408,7 +411,7 @@ func (i GetDomainAnalyticsDataArgs) ToGetDomainAnalyticsDataOutputWithContext(ct
 // GetDomainAnalyticsDataArrayInput is an input type that accepts GetDomainAnalyticsDataArray and GetDomainAnalyticsDataArrayOutput values.
 // You can construct a concrete instance of `GetDomainAnalyticsDataArrayInput` via:
 //
-//          GetDomainAnalyticsDataArray{ GetDomainAnalyticsDataArgs{...} }
+//	GetDomainAnalyticsDataArray{ GetDomainAnalyticsDataArgs{...} }
 type GetDomainAnalyticsDataArrayInput interface {
 	pulumi.Input
 
@@ -495,7 +498,7 @@ type GetDomainAnalyticsInfo struct {
 // GetDomainAnalyticsInfoInput is an input type that accepts GetDomainAnalyticsInfoArgs and GetDomainAnalyticsInfoOutput values.
 // You can construct a concrete instance of `GetDomainAnalyticsInfoInput` via:
 //
-//          GetDomainAnalyticsInfoArgs{...}
+//	GetDomainAnalyticsInfoArgs{...}
 type GetDomainAnalyticsInfoInput interface {
 	pulumi.Input
 
@@ -531,7 +534,7 @@ func (i GetDomainAnalyticsInfoArgs) ToGetDomainAnalyticsInfoOutputWithContext(ct
 // GetDomainAnalyticsInfoArrayInput is an input type that accepts GetDomainAnalyticsInfoArray and GetDomainAnalyticsInfoArrayOutput values.
 // You can construct a concrete instance of `GetDomainAnalyticsInfoArrayInput` via:
 //
-//          GetDomainAnalyticsInfoArray{ GetDomainAnalyticsInfoArgs{...} }
+//	GetDomainAnalyticsInfoArray{ GetDomainAnalyticsInfoArgs{...} }
 type GetDomainAnalyticsInfoArrayInput interface {
 	pulumi.Input
 
@@ -664,7 +667,7 @@ type GetDomainListDomainList struct {
 // GetDomainListDomainListInput is an input type that accepts GetDomainListDomainListArgs and GetDomainListDomainListOutput values.
 // You can construct a concrete instance of `GetDomainListDomainListInput` via:
 //
-//          GetDomainListDomainListArgs{...}
+//	GetDomainListDomainListArgs{...}
 type GetDomainListDomainListInput interface {
 	pulumi.Input
 
@@ -736,7 +739,7 @@ func (i GetDomainListDomainListArgs) ToGetDomainListDomainListOutputWithContext(
 // GetDomainListDomainListArrayInput is an input type that accepts GetDomainListDomainListArray and GetDomainListDomainListArrayOutput values.
 // You can construct a concrete instance of `GetDomainListDomainListArrayInput` via:
 //
-//          GetDomainListDomainListArray{ GetDomainListDomainListArgs{...} }
+//	GetDomainListDomainListArray{ GetDomainListDomainListArgs{...} }
 type GetDomainListDomainListArrayInput interface {
 	pulumi.Input
 
@@ -917,7 +920,7 @@ type GetDomainListDomainListTagList struct {
 // GetDomainListDomainListTagListInput is an input type that accepts GetDomainListDomainListTagListArgs and GetDomainListDomainListTagListOutput values.
 // You can construct a concrete instance of `GetDomainListDomainListTagListInput` via:
 //
-//          GetDomainListDomainListTagListArgs{...}
+//	GetDomainListDomainListTagListArgs{...}
 type GetDomainListDomainListTagListInput interface {
 	pulumi.Input
 
@@ -947,7 +950,7 @@ func (i GetDomainListDomainListTagListArgs) ToGetDomainListDomainListTagListOutp
 // GetDomainListDomainListTagListArrayInput is an input type that accepts GetDomainListDomainListTagListArray and GetDomainListDomainListTagListArrayOutput values.
 // You can construct a concrete instance of `GetDomainListDomainListTagListArrayInput` via:
 //
-//          GetDomainListDomainListTagListArray{ GetDomainListDomainListTagListArgs{...} }
+//	GetDomainListDomainListTagListArray{ GetDomainListDomainListTagListArgs{...} }
 type GetDomainListDomainListTagListArrayInput interface {
 	pulumi.Input
 
@@ -1023,7 +1026,7 @@ type GetDomainListTag struct {
 // GetDomainListTagInput is an input type that accepts GetDomainListTagArgs and GetDomainListTagOutput values.
 // You can construct a concrete instance of `GetDomainListTagInput` via:
 //
-//          GetDomainListTagArgs{...}
+//	GetDomainListTagArgs{...}
 type GetDomainListTagInput interface {
 	pulumi.Input
 
@@ -1053,7 +1056,7 @@ func (i GetDomainListTagArgs) ToGetDomainListTagOutputWithContext(ctx context.Co
 // GetDomainListTagArrayInput is an input type that accepts GetDomainListTagArray and GetDomainListTagArrayOutput values.
 // You can construct a concrete instance of `GetDomainListTagArrayInput` via:
 //
-//          GetDomainListTagArray{ GetDomainListTagArgs{...} }
+//	GetDomainListTagArray{ GetDomainListTagArgs{...} }
 type GetDomainListTagArrayInput interface {
 	pulumi.Input
 
@@ -1129,7 +1132,7 @@ type GetRecordAnalyticsAliasData struct {
 // GetRecordAnalyticsAliasDataInput is an input type that accepts GetRecordAnalyticsAliasDataArgs and GetRecordAnalyticsAliasDataOutput values.
 // You can construct a concrete instance of `GetRecordAnalyticsAliasDataInput` via:
 //
-//          GetRecordAnalyticsAliasDataArgs{...}
+//	GetRecordAnalyticsAliasDataArgs{...}
 type GetRecordAnalyticsAliasDataInput interface {
 	pulumi.Input
 
@@ -1159,7 +1162,7 @@ func (i GetRecordAnalyticsAliasDataArgs) ToGetRecordAnalyticsAliasDataOutputWith
 // GetRecordAnalyticsAliasDataArrayInput is an input type that accepts GetRecordAnalyticsAliasDataArray and GetRecordAnalyticsAliasDataArrayOutput values.
 // You can construct a concrete instance of `GetRecordAnalyticsAliasDataArrayInput` via:
 //
-//          GetRecordAnalyticsAliasDataArray{ GetRecordAnalyticsAliasDataArgs{...} }
+//	GetRecordAnalyticsAliasDataArray{ GetRecordAnalyticsAliasDataArgs{...} }
 type GetRecordAnalyticsAliasDataArrayInput interface {
 	pulumi.Input
 
@@ -1237,7 +1240,7 @@ type GetRecordAnalyticsAliasDataData struct {
 // GetRecordAnalyticsAliasDataDataInput is an input type that accepts GetRecordAnalyticsAliasDataDataArgs and GetRecordAnalyticsAliasDataDataOutput values.
 // You can construct a concrete instance of `GetRecordAnalyticsAliasDataDataInput` via:
 //
-//          GetRecordAnalyticsAliasDataDataArgs{...}
+//	GetRecordAnalyticsAliasDataDataArgs{...}
 type GetRecordAnalyticsAliasDataDataInput interface {
 	pulumi.Input
 
@@ -1269,7 +1272,7 @@ func (i GetRecordAnalyticsAliasDataDataArgs) ToGetRecordAnalyticsAliasDataDataOu
 // GetRecordAnalyticsAliasDataDataArrayInput is an input type that accepts GetRecordAnalyticsAliasDataDataArray and GetRecordAnalyticsAliasDataDataArrayOutput values.
 // You can construct a concrete instance of `GetRecordAnalyticsAliasDataDataArrayInput` via:
 //
-//          GetRecordAnalyticsAliasDataDataArray{ GetRecordAnalyticsAliasDataDataArgs{...} }
+//	GetRecordAnalyticsAliasDataDataArray{ GetRecordAnalyticsAliasDataDataArgs{...} }
 type GetRecordAnalyticsAliasDataDataArrayInput interface {
 	pulumi.Input
 
@@ -1358,7 +1361,7 @@ type GetRecordAnalyticsAliasDataInfo struct {
 // GetRecordAnalyticsAliasDataInfoInput is an input type that accepts GetRecordAnalyticsAliasDataInfoArgs and GetRecordAnalyticsAliasDataInfoOutput values.
 // You can construct a concrete instance of `GetRecordAnalyticsAliasDataInfoInput` via:
 //
-//          GetRecordAnalyticsAliasDataInfoArgs{...}
+//	GetRecordAnalyticsAliasDataInfoArgs{...}
 type GetRecordAnalyticsAliasDataInfoInput interface {
 	pulumi.Input
 
@@ -1396,7 +1399,7 @@ func (i GetRecordAnalyticsAliasDataInfoArgs) ToGetRecordAnalyticsAliasDataInfoOu
 // GetRecordAnalyticsAliasDataInfoArrayInput is an input type that accepts GetRecordAnalyticsAliasDataInfoArray and GetRecordAnalyticsAliasDataInfoArrayOutput values.
 // You can construct a concrete instance of `GetRecordAnalyticsAliasDataInfoArrayInput` via:
 //
-//          GetRecordAnalyticsAliasDataInfoArray{ GetRecordAnalyticsAliasDataInfoArgs{...} }
+//	GetRecordAnalyticsAliasDataInfoArray{ GetRecordAnalyticsAliasDataInfoArgs{...} }
 type GetRecordAnalyticsAliasDataInfoArrayInput interface {
 	pulumi.Input
 
@@ -1494,7 +1497,7 @@ type GetRecordAnalyticsData struct {
 // GetRecordAnalyticsDataInput is an input type that accepts GetRecordAnalyticsDataArgs and GetRecordAnalyticsDataOutput values.
 // You can construct a concrete instance of `GetRecordAnalyticsDataInput` via:
 //
-//          GetRecordAnalyticsDataArgs{...}
+//	GetRecordAnalyticsDataArgs{...}
 type GetRecordAnalyticsDataInput interface {
 	pulumi.Input
 
@@ -1526,7 +1529,7 @@ func (i GetRecordAnalyticsDataArgs) ToGetRecordAnalyticsDataOutputWithContext(ct
 // GetRecordAnalyticsDataArrayInput is an input type that accepts GetRecordAnalyticsDataArray and GetRecordAnalyticsDataArrayOutput values.
 // You can construct a concrete instance of `GetRecordAnalyticsDataArrayInput` via:
 //
-//          GetRecordAnalyticsDataArray{ GetRecordAnalyticsDataArgs{...} }
+//	GetRecordAnalyticsDataArray{ GetRecordAnalyticsDataArgs{...} }
 type GetRecordAnalyticsDataArrayInput interface {
 	pulumi.Input
 
@@ -1615,7 +1618,7 @@ type GetRecordAnalyticsInfo struct {
 // GetRecordAnalyticsInfoInput is an input type that accepts GetRecordAnalyticsInfoArgs and GetRecordAnalyticsInfoOutput values.
 // You can construct a concrete instance of `GetRecordAnalyticsInfoInput` via:
 //
-//          GetRecordAnalyticsInfoArgs{...}
+//	GetRecordAnalyticsInfoArgs{...}
 type GetRecordAnalyticsInfoInput interface {
 	pulumi.Input
 
@@ -1653,7 +1656,7 @@ func (i GetRecordAnalyticsInfoArgs) ToGetRecordAnalyticsInfoOutputWithContext(ct
 // GetRecordAnalyticsInfoArrayInput is an input type that accepts GetRecordAnalyticsInfoArray and GetRecordAnalyticsInfoArrayOutput values.
 // You can construct a concrete instance of `GetRecordAnalyticsInfoArrayInput` via:
 //
-//          GetRecordAnalyticsInfoArray{ GetRecordAnalyticsInfoArgs{...} }
+//	GetRecordAnalyticsInfoArray{ GetRecordAnalyticsInfoArgs{...} }
 type GetRecordAnalyticsInfoArrayInput interface {
 	pulumi.Input
 
@@ -1753,7 +1756,7 @@ type GetRecordLineListLineGroupList struct {
 // GetRecordLineListLineGroupListInput is an input type that accepts GetRecordLineListLineGroupListArgs and GetRecordLineListLineGroupListOutput values.
 // You can construct a concrete instance of `GetRecordLineListLineGroupListInput` via:
 //
-//          GetRecordLineListLineGroupListArgs{...}
+//	GetRecordLineListLineGroupListArgs{...}
 type GetRecordLineListLineGroupListInput interface {
 	pulumi.Input
 
@@ -1787,7 +1790,7 @@ func (i GetRecordLineListLineGroupListArgs) ToGetRecordLineListLineGroupListOutp
 // GetRecordLineListLineGroupListArrayInput is an input type that accepts GetRecordLineListLineGroupListArray and GetRecordLineListLineGroupListArrayOutput values.
 // You can construct a concrete instance of `GetRecordLineListLineGroupListArrayInput` via:
 //
-//          GetRecordLineListLineGroupListArray{ GetRecordLineListLineGroupListArgs{...} }
+//	GetRecordLineListLineGroupListArray{ GetRecordLineListLineGroupListArgs{...} }
 type GetRecordLineListLineGroupListArrayInput interface {
 	pulumi.Input
 
@@ -1873,7 +1876,7 @@ type GetRecordLineListLineList struct {
 // GetRecordLineListLineListInput is an input type that accepts GetRecordLineListLineListArgs and GetRecordLineListLineListOutput values.
 // You can construct a concrete instance of `GetRecordLineListLineListInput` via:
 //
-//          GetRecordLineListLineListArgs{...}
+//	GetRecordLineListLineListArgs{...}
 type GetRecordLineListLineListInput interface {
 	pulumi.Input
 
@@ -1903,7 +1906,7 @@ func (i GetRecordLineListLineListArgs) ToGetRecordLineListLineListOutputWithCont
 // GetRecordLineListLineListArrayInput is an input type that accepts GetRecordLineListLineListArray and GetRecordLineListLineListArrayOutput values.
 // You can construct a concrete instance of `GetRecordLineListLineListArrayInput` via:
 //
-//          GetRecordLineListLineListArray{ GetRecordLineListLineListArgs{...} }
+//	GetRecordLineListLineListArray{ GetRecordLineListLineListArgs{...} }
 type GetRecordLineListLineListArrayInput interface {
 	pulumi.Input
 
@@ -1981,7 +1984,7 @@ type GetRecordListRecordCountInfo struct {
 // GetRecordListRecordCountInfoInput is an input type that accepts GetRecordListRecordCountInfoArgs and GetRecordListRecordCountInfoOutput values.
 // You can construct a concrete instance of `GetRecordListRecordCountInfoInput` via:
 //
-//          GetRecordListRecordCountInfoArgs{...}
+//	GetRecordListRecordCountInfoArgs{...}
 type GetRecordListRecordCountInfoInput interface {
 	pulumi.Input
 
@@ -2013,7 +2016,7 @@ func (i GetRecordListRecordCountInfoArgs) ToGetRecordListRecordCountInfoOutputWi
 // GetRecordListRecordCountInfoArrayInput is an input type that accepts GetRecordListRecordCountInfoArray and GetRecordListRecordCountInfoArrayOutput values.
 // You can construct a concrete instance of `GetRecordListRecordCountInfoArrayInput` via:
 //
-//          GetRecordListRecordCountInfoArray{ GetRecordListRecordCountInfoArgs{...} }
+//	GetRecordListRecordCountInfoArray{ GetRecordListRecordCountInfoArgs{...} }
 type GetRecordListRecordCountInfoArrayInput interface {
 	pulumi.Input
 
@@ -2118,7 +2121,7 @@ type GetRecordListRecordList struct {
 // GetRecordListRecordListInput is an input type that accepts GetRecordListRecordListArgs and GetRecordListRecordListOutput values.
 // You can construct a concrete instance of `GetRecordListRecordListInput` via:
 //
-//          GetRecordListRecordListArgs{...}
+//	GetRecordListRecordListArgs{...}
 type GetRecordListRecordListInput interface {
 	pulumi.Input
 
@@ -2172,7 +2175,7 @@ func (i GetRecordListRecordListArgs) ToGetRecordListRecordListOutputWithContext(
 // GetRecordListRecordListArrayInput is an input type that accepts GetRecordListRecordListArray and GetRecordListRecordListArrayOutput values.
 // You can construct a concrete instance of `GetRecordListRecordListArrayInput` via:
 //
-//          GetRecordListRecordListArray{ GetRecordListRecordListArgs{...} }
+//	GetRecordListRecordListArray{ GetRecordListRecordListArgs{...} }
 type GetRecordListRecordListArrayInput interface {
 	pulumi.Input
 
@@ -2310,7 +2313,7 @@ type GetRecordsRecordCountInfo struct {
 // GetRecordsRecordCountInfoInput is an input type that accepts GetRecordsRecordCountInfoArgs and GetRecordsRecordCountInfoOutput values.
 // You can construct a concrete instance of `GetRecordsRecordCountInfoInput` via:
 //
-//          GetRecordsRecordCountInfoArgs{...}
+//	GetRecordsRecordCountInfoArgs{...}
 type GetRecordsRecordCountInfoInput interface {
 	pulumi.Input
 
@@ -2342,7 +2345,7 @@ func (i GetRecordsRecordCountInfoArgs) ToGetRecordsRecordCountInfoOutputWithCont
 // GetRecordsRecordCountInfoArrayInput is an input type that accepts GetRecordsRecordCountInfoArray and GetRecordsRecordCountInfoArrayOutput values.
 // You can construct a concrete instance of `GetRecordsRecordCountInfoArrayInput` via:
 //
-//          GetRecordsRecordCountInfoArray{ GetRecordsRecordCountInfoArgs{...} }
+//	GetRecordsRecordCountInfoArray{ GetRecordsRecordCountInfoArgs{...} }
 type GetRecordsRecordCountInfoArrayInput interface {
 	pulumi.Input
 
@@ -2446,7 +2449,7 @@ type GetRecordsResult struct {
 // GetRecordsResultInput is an input type that accepts GetRecordsResultArgs and GetRecordsResultOutput values.
 // You can construct a concrete instance of `GetRecordsResultInput` via:
 //
-//          GetRecordsResultArgs{...}
+//	GetRecordsResultArgs{...}
 type GetRecordsResultInput interface {
 	pulumi.Input
 
@@ -2499,7 +2502,7 @@ func (i GetRecordsResultArgs) ToGetRecordsResultOutputWithContext(ctx context.Co
 // GetRecordsResultArrayInput is an input type that accepts GetRecordsResultArray and GetRecordsResultArrayOutput values.
 // You can construct a concrete instance of `GetRecordsResultArrayInput` via:
 //
-//          GetRecordsResultArray{ GetRecordsResultArgs{...} }
+//	GetRecordsResultArray{ GetRecordsResultArgs{...} }
 type GetRecordsResultArrayInput interface {
 	pulumi.Input
 

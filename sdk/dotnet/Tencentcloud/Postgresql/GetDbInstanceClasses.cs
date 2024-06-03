@@ -15,68 +15,62 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
         /// <summary>
         /// Use this data source to query detailed information of postgresql db_instance_classes
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var dbInstanceClasses = Tencentcloud.Postgresql.GetDbInstanceClasses.Invoke(new()
         ///     {
-        ///         var dbInstanceClasses = Output.Create(Tencentcloud.Postgresql.GetDbInstanceClasses.InvokeAsync(new Tencentcloud.Postgresql.GetDbInstanceClassesArgs
-        ///         {
-        ///             DbEngine = "postgresql",
-        ///             DbMajorVersion = "13",
-        ///             Zone = "ap-guangzhou-7",
-        ///         }));
-        ///     }
+        ///         DbEngine = "postgresql",
+        ///         DbMajorVersion = "13",
+        ///         Zone = "ap-guangzhou-7",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetDbInstanceClassesResult> InvokeAsync(GetDbInstanceClassesArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetDbInstanceClassesResult>("tencentcloud:Postgresql/getDbInstanceClasses:getDbInstanceClasses", args ?? new GetDbInstanceClassesArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetDbInstanceClassesResult>("tencentcloud:Postgresql/getDbInstanceClasses:getDbInstanceClasses", args ?? new GetDbInstanceClassesArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of postgresql db_instance_classes
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var dbInstanceClasses = Tencentcloud.Postgresql.GetDbInstanceClasses.Invoke(new()
         ///     {
-        ///         var dbInstanceClasses = Output.Create(Tencentcloud.Postgresql.GetDbInstanceClasses.InvokeAsync(new Tencentcloud.Postgresql.GetDbInstanceClassesArgs
-        ///         {
-        ///             DbEngine = "postgresql",
-        ///             DbMajorVersion = "13",
-        ///             Zone = "ap-guangzhou-7",
-        ///         }));
-        ///     }
+        ///         DbEngine = "postgresql",
+        ///         DbMajorVersion = "13",
+        ///         Zone = "ap-guangzhou-7",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetDbInstanceClassesResult> Invoke(GetDbInstanceClassesInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetDbInstanceClassesResult>("tencentcloud:Postgresql/getDbInstanceClasses:getDbInstanceClasses", args ?? new GetDbInstanceClassesInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetDbInstanceClassesResult>("tencentcloud:Postgresql/getDbInstanceClasses:getDbInstanceClasses", args ?? new GetDbInstanceClassesInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetDbInstanceClassesArgs : Pulumi.InvokeArgs
+    public sealed class GetDbInstanceClassesArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Database engines. Valid values: 1. `postgresql` (TencentDB for PostgreSQL) 2. `mssql_compatible` (MSSQL compatible-TencentDB for PostgreSQL).
@@ -105,9 +99,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
         public GetDbInstanceClassesArgs()
         {
         }
+        public static new GetDbInstanceClassesArgs Empty => new GetDbInstanceClassesArgs();
     }
 
-    public sealed class GetDbInstanceClassesInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetDbInstanceClassesInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Database engines. Valid values: 1. `postgresql` (TencentDB for PostgreSQL) 2. `mssql_compatible` (MSSQL compatible-TencentDB for PostgreSQL).
@@ -136,6 +131,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
         public GetDbInstanceClassesInvokeArgs()
         {
         }
+        public static new GetDbInstanceClassesInvokeArgs Empty => new GetDbInstanceClassesInvokeArgs();
     }
 
 

@@ -7,8 +7,9 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 type DbImportJobOperation struct {
@@ -44,7 +45,7 @@ func NewDbImportJobOperation(ctx *pulumi.Context,
 	if args.User == nil {
 		return nil, errors.New("invalid value for required argument 'User'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource DbImportJobOperation
 	err := ctx.RegisterResource("tencentcloud:Mysql/dbImportJobOperation:DbImportJobOperation", name, args, &resource, opts...)
 	if err != nil {
@@ -165,7 +166,7 @@ func (i *DbImportJobOperation) ToDbImportJobOperationOutputWithContext(ctx conte
 // DbImportJobOperationArrayInput is an input type that accepts DbImportJobOperationArray and DbImportJobOperationArrayOutput values.
 // You can construct a concrete instance of `DbImportJobOperationArrayInput` via:
 //
-//          DbImportJobOperationArray{ DbImportJobOperationArgs{...} }
+//	DbImportJobOperationArray{ DbImportJobOperationArgs{...} }
 type DbImportJobOperationArrayInput interface {
 	pulumi.Input
 
@@ -190,7 +191,7 @@ func (i DbImportJobOperationArray) ToDbImportJobOperationArrayOutputWithContext(
 // DbImportJobOperationMapInput is an input type that accepts DbImportJobOperationMap and DbImportJobOperationMapOutput values.
 // You can construct a concrete instance of `DbImportJobOperationMapInput` via:
 //
-//          DbImportJobOperationMap{ "key": DbImportJobOperationArgs{...} }
+//	DbImportJobOperationMap{ "key": DbImportJobOperationArgs{...} }
 type DbImportJobOperationMapInput interface {
 	pulumi.Input
 

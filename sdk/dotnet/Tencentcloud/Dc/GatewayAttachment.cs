@@ -15,35 +15,36 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dc
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var dcGatewayAttachment = new Tencentcloud.Dc.GatewayAttachment("dcGatewayAttachment", new()
     ///     {
-    ///         var dcGatewayAttachment = new Tencentcloud.Dc.GatewayAttachment("dcGatewayAttachment", new Tencentcloud.Dc.GatewayAttachmentArgs
-    ///         {
-    ///             DirectConnectGatewayId = "dcg-dmbhf7jf",
-    ///             NatGatewayId = "nat-7kanjc6y",
-    ///             VpcId = "vpc-4h9v4mo3",
-    ///         });
-    ///     }
+    ///         DirectConnectGatewayId = "dcg-dmbhf7jf",
+    ///         NatGatewayId = "nat-7kanjc6y",
+    ///         VpcId = "vpc-4h9v4mo3",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// dc_gateway_attachment can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Dc/gatewayAttachment:GatewayAttachment dc_gateway_attachment vpcId#dcgId#ngId
+    /// $ pulumi import tencentcloud:Dc/gatewayAttachment:GatewayAttachment dc_gateway_attachment vpcId#dcgId#ngId
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Dc/gatewayAttachment:GatewayAttachment")]
-    public partial class GatewayAttachment : Pulumi.CustomResource
+    public partial class GatewayAttachment : global::Pulumi.CustomResource
     {
         /// <summary>
         /// DirectConnectGatewayId.
@@ -108,7 +109,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dc
         }
     }
 
-    public sealed class GatewayAttachmentArgs : Pulumi.ResourceArgs
+    public sealed class GatewayAttachmentArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// DirectConnectGatewayId.
@@ -131,9 +132,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dc
         public GatewayAttachmentArgs()
         {
         }
+        public static new GatewayAttachmentArgs Empty => new GatewayAttachmentArgs();
     }
 
-    public sealed class GatewayAttachmentState : Pulumi.ResourceArgs
+    public sealed class GatewayAttachmentState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// DirectConnectGatewayId.
@@ -156,5 +158,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dc
         public GatewayAttachmentState()
         {
         }
+        public static new GatewayAttachmentState Empty => new GatewayAttachmentState();
     }
 }

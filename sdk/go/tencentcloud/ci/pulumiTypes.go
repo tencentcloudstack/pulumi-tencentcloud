@@ -8,7 +8,10 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
+
+var _ = internal.GetEnvOrDefault
 
 type MediaAnimationTemplateContainer struct {
 	// Package format.
@@ -18,7 +21,7 @@ type MediaAnimationTemplateContainer struct {
 // MediaAnimationTemplateContainerInput is an input type that accepts MediaAnimationTemplateContainerArgs and MediaAnimationTemplateContainerOutput values.
 // You can construct a concrete instance of `MediaAnimationTemplateContainerInput` via:
 //
-//          MediaAnimationTemplateContainerArgs{...}
+//	MediaAnimationTemplateContainerArgs{...}
 type MediaAnimationTemplateContainerInput interface {
 	pulumi.Input
 
@@ -54,11 +57,11 @@ func (i MediaAnimationTemplateContainerArgs) ToMediaAnimationTemplateContainerPt
 // MediaAnimationTemplateContainerPtrInput is an input type that accepts MediaAnimationTemplateContainerArgs, MediaAnimationTemplateContainerPtr and MediaAnimationTemplateContainerPtrOutput values.
 // You can construct a concrete instance of `MediaAnimationTemplateContainerPtrInput` via:
 //
-//          MediaAnimationTemplateContainerArgs{...}
+//	        MediaAnimationTemplateContainerArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type MediaAnimationTemplateContainerPtrInput interface {
 	pulumi.Input
 
@@ -157,7 +160,7 @@ type MediaAnimationTemplateTimeInterval struct {
 // MediaAnimationTemplateTimeIntervalInput is an input type that accepts MediaAnimationTemplateTimeIntervalArgs and MediaAnimationTemplateTimeIntervalOutput values.
 // You can construct a concrete instance of `MediaAnimationTemplateTimeIntervalInput` via:
 //
-//          MediaAnimationTemplateTimeIntervalArgs{...}
+//	MediaAnimationTemplateTimeIntervalArgs{...}
 type MediaAnimationTemplateTimeIntervalInput interface {
 	pulumi.Input
 
@@ -195,11 +198,11 @@ func (i MediaAnimationTemplateTimeIntervalArgs) ToMediaAnimationTemplateTimeInte
 // MediaAnimationTemplateTimeIntervalPtrInput is an input type that accepts MediaAnimationTemplateTimeIntervalArgs, MediaAnimationTemplateTimeIntervalPtr and MediaAnimationTemplateTimeIntervalPtrOutput values.
 // You can construct a concrete instance of `MediaAnimationTemplateTimeIntervalPtrInput` via:
 //
-//          MediaAnimationTemplateTimeIntervalArgs{...}
+//	        MediaAnimationTemplateTimeIntervalArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type MediaAnimationTemplateTimeIntervalPtrInput interface {
 	pulumi.Input
 
@@ -325,7 +328,7 @@ type MediaAnimationTemplateVideo struct {
 // MediaAnimationTemplateVideoInput is an input type that accepts MediaAnimationTemplateVideoArgs and MediaAnimationTemplateVideoOutput values.
 // You can construct a concrete instance of `MediaAnimationTemplateVideoInput` via:
 //
-//          MediaAnimationTemplateVideoArgs{...}
+//	MediaAnimationTemplateVideoArgs{...}
 type MediaAnimationTemplateVideoInput interface {
 	pulumi.Input
 
@@ -375,11 +378,11 @@ func (i MediaAnimationTemplateVideoArgs) ToMediaAnimationTemplateVideoPtrOutputW
 // MediaAnimationTemplateVideoPtrInput is an input type that accepts MediaAnimationTemplateVideoArgs, MediaAnimationTemplateVideoPtr and MediaAnimationTemplateVideoPtrOutput values.
 // You can construct a concrete instance of `MediaAnimationTemplateVideoPtrInput` via:
 //
-//          MediaAnimationTemplateVideoArgs{...}
+//	        MediaAnimationTemplateVideoArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type MediaAnimationTemplateVideoPtrInput interface {
 	pulumi.Input
 
@@ -589,7 +592,7 @@ type MediaConcatTemplateConcatTemplate struct {
 // MediaConcatTemplateConcatTemplateInput is an input type that accepts MediaConcatTemplateConcatTemplateArgs and MediaConcatTemplateConcatTemplateOutput values.
 // You can construct a concrete instance of `MediaConcatTemplateConcatTemplateInput` via:
 //
-//          MediaConcatTemplateConcatTemplateArgs{...}
+//	MediaConcatTemplateConcatTemplateArgs{...}
 type MediaConcatTemplateConcatTemplateInput interface {
 	pulumi.Input
 
@@ -633,11 +636,11 @@ func (i MediaConcatTemplateConcatTemplateArgs) ToMediaConcatTemplateConcatTempla
 // MediaConcatTemplateConcatTemplatePtrInput is an input type that accepts MediaConcatTemplateConcatTemplateArgs, MediaConcatTemplateConcatTemplatePtr and MediaConcatTemplateConcatTemplatePtrOutput values.
 // You can construct a concrete instance of `MediaConcatTemplateConcatTemplatePtrInput` via:
 //
-//          MediaConcatTemplateConcatTemplateArgs{...}
+//	        MediaConcatTemplateConcatTemplateArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type MediaConcatTemplateConcatTemplatePtrInput interface {
 	pulumi.Input
 
@@ -806,7 +809,7 @@ type MediaConcatTemplateConcatTemplateAudio struct {
 // MediaConcatTemplateConcatTemplateAudioInput is an input type that accepts MediaConcatTemplateConcatTemplateAudioArgs and MediaConcatTemplateConcatTemplateAudioOutput values.
 // You can construct a concrete instance of `MediaConcatTemplateConcatTemplateAudioInput` via:
 //
-//          MediaConcatTemplateConcatTemplateAudioArgs{...}
+//	MediaConcatTemplateConcatTemplateAudioArgs{...}
 type MediaConcatTemplateConcatTemplateAudioInput interface {
 	pulumi.Input
 
@@ -848,11 +851,11 @@ func (i MediaConcatTemplateConcatTemplateAudioArgs) ToMediaConcatTemplateConcatT
 // MediaConcatTemplateConcatTemplateAudioPtrInput is an input type that accepts MediaConcatTemplateConcatTemplateAudioArgs, MediaConcatTemplateConcatTemplateAudioPtr and MediaConcatTemplateConcatTemplateAudioPtrOutput values.
 // You can construct a concrete instance of `MediaConcatTemplateConcatTemplateAudioPtrInput` via:
 //
-//          MediaConcatTemplateConcatTemplateAudioArgs{...}
+//	        MediaConcatTemplateConcatTemplateAudioArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type MediaConcatTemplateConcatTemplateAudioPtrInput interface {
 	pulumi.Input
 
@@ -1000,7 +1003,7 @@ type MediaConcatTemplateConcatTemplateAudioMix struct {
 // MediaConcatTemplateConcatTemplateAudioMixInput is an input type that accepts MediaConcatTemplateConcatTemplateAudioMixArgs and MediaConcatTemplateConcatTemplateAudioMixOutput values.
 // You can construct a concrete instance of `MediaConcatTemplateConcatTemplateAudioMixInput` via:
 //
-//          MediaConcatTemplateConcatTemplateAudioMixArgs{...}
+//	MediaConcatTemplateConcatTemplateAudioMixArgs{...}
 type MediaConcatTemplateConcatTemplateAudioMixInput interface {
 	pulumi.Input
 
@@ -1034,7 +1037,7 @@ func (i MediaConcatTemplateConcatTemplateAudioMixArgs) ToMediaConcatTemplateConc
 // MediaConcatTemplateConcatTemplateAudioMixArrayInput is an input type that accepts MediaConcatTemplateConcatTemplateAudioMixArray and MediaConcatTemplateConcatTemplateAudioMixArrayOutput values.
 // You can construct a concrete instance of `MediaConcatTemplateConcatTemplateAudioMixArrayInput` via:
 //
-//          MediaConcatTemplateConcatTemplateAudioMixArray{ MediaConcatTemplateConcatTemplateAudioMixArgs{...} }
+//	MediaConcatTemplateConcatTemplateAudioMixArray{ MediaConcatTemplateConcatTemplateAudioMixArgs{...} }
 type MediaConcatTemplateConcatTemplateAudioMixArrayInput interface {
 	pulumi.Input
 
@@ -1130,7 +1133,7 @@ type MediaConcatTemplateConcatTemplateAudioMixEffectConfig struct {
 // MediaConcatTemplateConcatTemplateAudioMixEffectConfigInput is an input type that accepts MediaConcatTemplateConcatTemplateAudioMixEffectConfigArgs and MediaConcatTemplateConcatTemplateAudioMixEffectConfigOutput values.
 // You can construct a concrete instance of `MediaConcatTemplateConcatTemplateAudioMixEffectConfigInput` via:
 //
-//          MediaConcatTemplateConcatTemplateAudioMixEffectConfigArgs{...}
+//	MediaConcatTemplateConcatTemplateAudioMixEffectConfigArgs{...}
 type MediaConcatTemplateConcatTemplateAudioMixEffectConfigInput interface {
 	pulumi.Input
 
@@ -1176,11 +1179,11 @@ func (i MediaConcatTemplateConcatTemplateAudioMixEffectConfigArgs) ToMediaConcat
 // MediaConcatTemplateConcatTemplateAudioMixEffectConfigPtrInput is an input type that accepts MediaConcatTemplateConcatTemplateAudioMixEffectConfigArgs, MediaConcatTemplateConcatTemplateAudioMixEffectConfigPtr and MediaConcatTemplateConcatTemplateAudioMixEffectConfigPtrOutput values.
 // You can construct a concrete instance of `MediaConcatTemplateConcatTemplateAudioMixEffectConfigPtrInput` via:
 //
-//          MediaConcatTemplateConcatTemplateAudioMixEffectConfigArgs{...}
+//	        MediaConcatTemplateConcatTemplateAudioMixEffectConfigArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type MediaConcatTemplateConcatTemplateAudioMixEffectConfigPtrInput interface {
 	pulumi.Input
 
@@ -1354,7 +1357,7 @@ type MediaConcatTemplateConcatTemplateConcatFragment struct {
 // MediaConcatTemplateConcatTemplateConcatFragmentInput is an input type that accepts MediaConcatTemplateConcatTemplateConcatFragmentArgs and MediaConcatTemplateConcatTemplateConcatFragmentOutput values.
 // You can construct a concrete instance of `MediaConcatTemplateConcatTemplateConcatFragmentInput` via:
 //
-//          MediaConcatTemplateConcatTemplateConcatFragmentArgs{...}
+//	MediaConcatTemplateConcatTemplateConcatFragmentArgs{...}
 type MediaConcatTemplateConcatTemplateConcatFragmentInput interface {
 	pulumi.Input
 
@@ -1384,7 +1387,7 @@ func (i MediaConcatTemplateConcatTemplateConcatFragmentArgs) ToMediaConcatTempla
 // MediaConcatTemplateConcatTemplateConcatFragmentArrayInput is an input type that accepts MediaConcatTemplateConcatTemplateConcatFragmentArray and MediaConcatTemplateConcatTemplateConcatFragmentArrayOutput values.
 // You can construct a concrete instance of `MediaConcatTemplateConcatTemplateConcatFragmentArrayInput` via:
 //
-//          MediaConcatTemplateConcatTemplateConcatFragmentArray{ MediaConcatTemplateConcatTemplateConcatFragmentArgs{...} }
+//	MediaConcatTemplateConcatTemplateConcatFragmentArray{ MediaConcatTemplateConcatTemplateConcatFragmentArgs{...} }
 type MediaConcatTemplateConcatTemplateConcatFragmentArrayInput interface {
 	pulumi.Input
 
@@ -1458,7 +1461,7 @@ type MediaConcatTemplateConcatTemplateContainer struct {
 // MediaConcatTemplateConcatTemplateContainerInput is an input type that accepts MediaConcatTemplateConcatTemplateContainerArgs and MediaConcatTemplateConcatTemplateContainerOutput values.
 // You can construct a concrete instance of `MediaConcatTemplateConcatTemplateContainerInput` via:
 //
-//          MediaConcatTemplateConcatTemplateContainerArgs{...}
+//	MediaConcatTemplateConcatTemplateContainerArgs{...}
 type MediaConcatTemplateConcatTemplateContainerInput interface {
 	pulumi.Input
 
@@ -1494,11 +1497,11 @@ func (i MediaConcatTemplateConcatTemplateContainerArgs) ToMediaConcatTemplateCon
 // MediaConcatTemplateConcatTemplateContainerPtrInput is an input type that accepts MediaConcatTemplateConcatTemplateContainerArgs, MediaConcatTemplateConcatTemplateContainerPtr and MediaConcatTemplateConcatTemplateContainerPtrOutput values.
 // You can construct a concrete instance of `MediaConcatTemplateConcatTemplateContainerPtrInput` via:
 //
-//          MediaConcatTemplateConcatTemplateContainerArgs{...}
+//	        MediaConcatTemplateConcatTemplateContainerArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type MediaConcatTemplateConcatTemplateContainerPtrInput interface {
 	pulumi.Input
 
@@ -1609,7 +1612,7 @@ type MediaConcatTemplateConcatTemplateVideo struct {
 // MediaConcatTemplateConcatTemplateVideoInput is an input type that accepts MediaConcatTemplateConcatTemplateVideoArgs and MediaConcatTemplateConcatTemplateVideoOutput values.
 // You can construct a concrete instance of `MediaConcatTemplateConcatTemplateVideoInput` via:
 //
-//          MediaConcatTemplateConcatTemplateVideoArgs{...}
+//	MediaConcatTemplateConcatTemplateVideoArgs{...}
 type MediaConcatTemplateConcatTemplateVideoInput interface {
 	pulumi.Input
 
@@ -1659,11 +1662,11 @@ func (i MediaConcatTemplateConcatTemplateVideoArgs) ToMediaConcatTemplateConcatT
 // MediaConcatTemplateConcatTemplateVideoPtrInput is an input type that accepts MediaConcatTemplateConcatTemplateVideoArgs, MediaConcatTemplateConcatTemplateVideoPtr and MediaConcatTemplateConcatTemplateVideoPtrOutput values.
 // You can construct a concrete instance of `MediaConcatTemplateConcatTemplateVideoPtrInput` via:
 //
-//          MediaConcatTemplateConcatTemplateVideoArgs{...}
+//	        MediaConcatTemplateConcatTemplateVideoArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type MediaConcatTemplateConcatTemplateVideoPtrInput interface {
 	pulumi.Input
 
@@ -1867,7 +1870,7 @@ type MediaPicProcessTemplatePicProcess struct {
 // MediaPicProcessTemplatePicProcessInput is an input type that accepts MediaPicProcessTemplatePicProcessArgs and MediaPicProcessTemplatePicProcessOutput values.
 // You can construct a concrete instance of `MediaPicProcessTemplatePicProcessInput` via:
 //
-//          MediaPicProcessTemplatePicProcessArgs{...}
+//	MediaPicProcessTemplatePicProcessArgs{...}
 type MediaPicProcessTemplatePicProcessInput interface {
 	pulumi.Input
 
@@ -1905,11 +1908,11 @@ func (i MediaPicProcessTemplatePicProcessArgs) ToMediaPicProcessTemplatePicProce
 // MediaPicProcessTemplatePicProcessPtrInput is an input type that accepts MediaPicProcessTemplatePicProcessArgs, MediaPicProcessTemplatePicProcessPtr and MediaPicProcessTemplatePicProcessPtrOutput values.
 // You can construct a concrete instance of `MediaPicProcessTemplatePicProcessPtrInput` via:
 //
-//          MediaPicProcessTemplatePicProcessArgs{...}
+//	        MediaPicProcessTemplatePicProcessArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type MediaPicProcessTemplatePicProcessPtrInput interface {
 	pulumi.Input
 
@@ -2029,7 +2032,7 @@ type MediaSmartCoverTemplateSmartCover struct {
 // MediaSmartCoverTemplateSmartCoverInput is an input type that accepts MediaSmartCoverTemplateSmartCoverArgs and MediaSmartCoverTemplateSmartCoverOutput values.
 // You can construct a concrete instance of `MediaSmartCoverTemplateSmartCoverInput` via:
 //
-//          MediaSmartCoverTemplateSmartCoverArgs{...}
+//	MediaSmartCoverTemplateSmartCoverArgs{...}
 type MediaSmartCoverTemplateSmartCoverInput interface {
 	pulumi.Input
 
@@ -2073,11 +2076,11 @@ func (i MediaSmartCoverTemplateSmartCoverArgs) ToMediaSmartCoverTemplateSmartCov
 // MediaSmartCoverTemplateSmartCoverPtrInput is an input type that accepts MediaSmartCoverTemplateSmartCoverArgs, MediaSmartCoverTemplateSmartCoverPtr and MediaSmartCoverTemplateSmartCoverPtrOutput values.
 // You can construct a concrete instance of `MediaSmartCoverTemplateSmartCoverPtrInput` via:
 //
-//          MediaSmartCoverTemplateSmartCoverArgs{...}
+//	        MediaSmartCoverTemplateSmartCoverArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type MediaSmartCoverTemplateSmartCoverPtrInput interface {
 	pulumi.Input
 
@@ -2258,7 +2261,7 @@ type MediaSnapshotTemplateSnapshot struct {
 // MediaSnapshotTemplateSnapshotInput is an input type that accepts MediaSnapshotTemplateSnapshotArgs and MediaSnapshotTemplateSnapshotOutput values.
 // You can construct a concrete instance of `MediaSnapshotTemplateSnapshotInput` via:
 //
-//          MediaSnapshotTemplateSnapshotArgs{...}
+//	MediaSnapshotTemplateSnapshotArgs{...}
 type MediaSnapshotTemplateSnapshotInput interface {
 	pulumi.Input
 
@@ -2318,11 +2321,11 @@ func (i MediaSnapshotTemplateSnapshotArgs) ToMediaSnapshotTemplateSnapshotPtrOut
 // MediaSnapshotTemplateSnapshotPtrInput is an input type that accepts MediaSnapshotTemplateSnapshotArgs, MediaSnapshotTemplateSnapshotPtr and MediaSnapshotTemplateSnapshotPtrOutput values.
 // You can construct a concrete instance of `MediaSnapshotTemplateSnapshotPtrInput` via:
 //
-//          MediaSnapshotTemplateSnapshotArgs{...}
+//	        MediaSnapshotTemplateSnapshotArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type MediaSnapshotTemplateSnapshotPtrInput interface {
 	pulumi.Input
 
@@ -2613,7 +2616,7 @@ type MediaSnapshotTemplateSnapshotSpriteSnapshotConfig struct {
 // MediaSnapshotTemplateSnapshotSpriteSnapshotConfigInput is an input type that accepts MediaSnapshotTemplateSnapshotSpriteSnapshotConfigArgs and MediaSnapshotTemplateSnapshotSpriteSnapshotConfigOutput values.
 // You can construct a concrete instance of `MediaSnapshotTemplateSnapshotSpriteSnapshotConfigInput` via:
 //
-//          MediaSnapshotTemplateSnapshotSpriteSnapshotConfigArgs{...}
+//	MediaSnapshotTemplateSnapshotSpriteSnapshotConfigArgs{...}
 type MediaSnapshotTemplateSnapshotSpriteSnapshotConfigInput interface {
 	pulumi.Input
 
@@ -2661,11 +2664,11 @@ func (i MediaSnapshotTemplateSnapshotSpriteSnapshotConfigArgs) ToMediaSnapshotTe
 // MediaSnapshotTemplateSnapshotSpriteSnapshotConfigPtrInput is an input type that accepts MediaSnapshotTemplateSnapshotSpriteSnapshotConfigArgs, MediaSnapshotTemplateSnapshotSpriteSnapshotConfigPtr and MediaSnapshotTemplateSnapshotSpriteSnapshotConfigPtrOutput values.
 // You can construct a concrete instance of `MediaSnapshotTemplateSnapshotSpriteSnapshotConfigPtrInput` via:
 //
-//          MediaSnapshotTemplateSnapshotSpriteSnapshotConfigArgs{...}
+//	        MediaSnapshotTemplateSnapshotSpriteSnapshotConfigArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type MediaSnapshotTemplateSnapshotSpriteSnapshotConfigPtrInput interface {
 	pulumi.Input
 
@@ -2870,7 +2873,7 @@ type MediaSpeechRecognitionTemplateSpeechRecognition struct {
 // MediaSpeechRecognitionTemplateSpeechRecognitionInput is an input type that accepts MediaSpeechRecognitionTemplateSpeechRecognitionArgs and MediaSpeechRecognitionTemplateSpeechRecognitionOutput values.
 // You can construct a concrete instance of `MediaSpeechRecognitionTemplateSpeechRecognitionInput` via:
 //
-//          MediaSpeechRecognitionTemplateSpeechRecognitionArgs{...}
+//	MediaSpeechRecognitionTemplateSpeechRecognitionArgs{...}
 type MediaSpeechRecognitionTemplateSpeechRecognitionInput interface {
 	pulumi.Input
 
@@ -2924,11 +2927,11 @@ func (i MediaSpeechRecognitionTemplateSpeechRecognitionArgs) ToMediaSpeechRecogn
 // MediaSpeechRecognitionTemplateSpeechRecognitionPtrInput is an input type that accepts MediaSpeechRecognitionTemplateSpeechRecognitionArgs, MediaSpeechRecognitionTemplateSpeechRecognitionPtr and MediaSpeechRecognitionTemplateSpeechRecognitionPtrOutput values.
 // You can construct a concrete instance of `MediaSpeechRecognitionTemplateSpeechRecognitionPtrInput` via:
 //
-//          MediaSpeechRecognitionTemplateSpeechRecognitionArgs{...}
+//	        MediaSpeechRecognitionTemplateSpeechRecognitionArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type MediaSpeechRecognitionTemplateSpeechRecognitionPtrInput interface {
 	pulumi.Input
 
@@ -3162,7 +3165,7 @@ type MediaTranscodeProTemplateAudio struct {
 // MediaTranscodeProTemplateAudioInput is an input type that accepts MediaTranscodeProTemplateAudioArgs and MediaTranscodeProTemplateAudioOutput values.
 // You can construct a concrete instance of `MediaTranscodeProTemplateAudioInput` via:
 //
-//          MediaTranscodeProTemplateAudioArgs{...}
+//	MediaTranscodeProTemplateAudioArgs{...}
 type MediaTranscodeProTemplateAudioInput interface {
 	pulumi.Input
 
@@ -3200,11 +3203,11 @@ func (i MediaTranscodeProTemplateAudioArgs) ToMediaTranscodeProTemplateAudioPtrO
 // MediaTranscodeProTemplateAudioPtrInput is an input type that accepts MediaTranscodeProTemplateAudioArgs, MediaTranscodeProTemplateAudioPtr and MediaTranscodeProTemplateAudioPtrOutput values.
 // You can construct a concrete instance of `MediaTranscodeProTemplateAudioPtrInput` via:
 //
-//          MediaTranscodeProTemplateAudioArgs{...}
+//	        MediaTranscodeProTemplateAudioArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type MediaTranscodeProTemplateAudioPtrInput interface {
 	pulumi.Input
 
@@ -3318,7 +3321,7 @@ type MediaTranscodeProTemplateContainer struct {
 // MediaTranscodeProTemplateContainerInput is an input type that accepts MediaTranscodeProTemplateContainerArgs and MediaTranscodeProTemplateContainerOutput values.
 // You can construct a concrete instance of `MediaTranscodeProTemplateContainerInput` via:
 //
-//          MediaTranscodeProTemplateContainerArgs{...}
+//	MediaTranscodeProTemplateContainerArgs{...}
 type MediaTranscodeProTemplateContainerInput interface {
 	pulumi.Input
 
@@ -3356,11 +3359,11 @@ func (i MediaTranscodeProTemplateContainerArgs) ToMediaTranscodeProTemplateConta
 // MediaTranscodeProTemplateContainerPtrInput is an input type that accepts MediaTranscodeProTemplateContainerArgs, MediaTranscodeProTemplateContainerPtr and MediaTranscodeProTemplateContainerPtrOutput values.
 // You can construct a concrete instance of `MediaTranscodeProTemplateContainerPtrInput` via:
 //
-//          MediaTranscodeProTemplateContainerArgs{...}
+//	        MediaTranscodeProTemplateContainerArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type MediaTranscodeProTemplateContainerPtrInput interface {
 	pulumi.Input
 
@@ -3474,7 +3477,7 @@ type MediaTranscodeProTemplateContainerClipConfig struct {
 // MediaTranscodeProTemplateContainerClipConfigInput is an input type that accepts MediaTranscodeProTemplateContainerClipConfigArgs and MediaTranscodeProTemplateContainerClipConfigOutput values.
 // You can construct a concrete instance of `MediaTranscodeProTemplateContainerClipConfigInput` via:
 //
-//          MediaTranscodeProTemplateContainerClipConfigArgs{...}
+//	MediaTranscodeProTemplateContainerClipConfigArgs{...}
 type MediaTranscodeProTemplateContainerClipConfigInput interface {
 	pulumi.Input
 
@@ -3510,11 +3513,11 @@ func (i MediaTranscodeProTemplateContainerClipConfigArgs) ToMediaTranscodeProTem
 // MediaTranscodeProTemplateContainerClipConfigPtrInput is an input type that accepts MediaTranscodeProTemplateContainerClipConfigArgs, MediaTranscodeProTemplateContainerClipConfigPtr and MediaTranscodeProTemplateContainerClipConfigPtrOutput values.
 // You can construct a concrete instance of `MediaTranscodeProTemplateContainerClipConfigPtrInput` via:
 //
-//          MediaTranscodeProTemplateContainerClipConfigArgs{...}
+//	        MediaTranscodeProTemplateContainerClipConfigArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type MediaTranscodeProTemplateContainerClipConfigPtrInput interface {
 	pulumi.Input
 
@@ -3613,7 +3616,7 @@ type MediaTranscodeProTemplateTimeInterval struct {
 // MediaTranscodeProTemplateTimeIntervalInput is an input type that accepts MediaTranscodeProTemplateTimeIntervalArgs and MediaTranscodeProTemplateTimeIntervalOutput values.
 // You can construct a concrete instance of `MediaTranscodeProTemplateTimeIntervalInput` via:
 //
-//          MediaTranscodeProTemplateTimeIntervalArgs{...}
+//	MediaTranscodeProTemplateTimeIntervalArgs{...}
 type MediaTranscodeProTemplateTimeIntervalInput interface {
 	pulumi.Input
 
@@ -3651,11 +3654,11 @@ func (i MediaTranscodeProTemplateTimeIntervalArgs) ToMediaTranscodeProTemplateTi
 // MediaTranscodeProTemplateTimeIntervalPtrInput is an input type that accepts MediaTranscodeProTemplateTimeIntervalArgs, MediaTranscodeProTemplateTimeIntervalPtr and MediaTranscodeProTemplateTimeIntervalPtrOutput values.
 // You can construct a concrete instance of `MediaTranscodeProTemplateTimeIntervalPtrInput` via:
 //
-//          MediaTranscodeProTemplateTimeIntervalArgs{...}
+//	        MediaTranscodeProTemplateTimeIntervalArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type MediaTranscodeProTemplateTimeIntervalPtrInput interface {
 	pulumi.Input
 
@@ -3783,7 +3786,7 @@ type MediaTranscodeProTemplateTransConfig struct {
 // MediaTranscodeProTemplateTransConfigInput is an input type that accepts MediaTranscodeProTemplateTransConfigArgs and MediaTranscodeProTemplateTransConfigOutput values.
 // You can construct a concrete instance of `MediaTranscodeProTemplateTransConfigInput` via:
 //
-//          MediaTranscodeProTemplateTransConfigArgs{...}
+//	MediaTranscodeProTemplateTransConfigArgs{...}
 type MediaTranscodeProTemplateTransConfigInput interface {
 	pulumi.Input
 
@@ -3835,11 +3838,11 @@ func (i MediaTranscodeProTemplateTransConfigArgs) ToMediaTranscodeProTemplateTra
 // MediaTranscodeProTemplateTransConfigPtrInput is an input type that accepts MediaTranscodeProTemplateTransConfigArgs, MediaTranscodeProTemplateTransConfigPtr and MediaTranscodeProTemplateTransConfigPtrOutput values.
 // You can construct a concrete instance of `MediaTranscodeProTemplateTransConfigPtrInput` via:
 //
-//          MediaTranscodeProTemplateTransConfigArgs{...}
+//	        MediaTranscodeProTemplateTransConfigArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type MediaTranscodeProTemplateTransConfigPtrInput interface {
 	pulumi.Input
 
@@ -4070,7 +4073,7 @@ type MediaTranscodeProTemplateVideo struct {
 // MediaTranscodeProTemplateVideoInput is an input type that accepts MediaTranscodeProTemplateVideoArgs and MediaTranscodeProTemplateVideoOutput values.
 // You can construct a concrete instance of `MediaTranscodeProTemplateVideoInput` via:
 //
-//          MediaTranscodeProTemplateVideoArgs{...}
+//	MediaTranscodeProTemplateVideoArgs{...}
 type MediaTranscodeProTemplateVideoInput interface {
 	pulumi.Input
 
@@ -4120,11 +4123,11 @@ func (i MediaTranscodeProTemplateVideoArgs) ToMediaTranscodeProTemplateVideoPtrO
 // MediaTranscodeProTemplateVideoPtrInput is an input type that accepts MediaTranscodeProTemplateVideoArgs, MediaTranscodeProTemplateVideoPtr and MediaTranscodeProTemplateVideoPtrOutput values.
 // You can construct a concrete instance of `MediaTranscodeProTemplateVideoPtrInput` via:
 //
-//          MediaTranscodeProTemplateVideoArgs{...}
+//	        MediaTranscodeProTemplateVideoArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type MediaTranscodeProTemplateVideoPtrInput interface {
 	pulumi.Input
 
@@ -4340,7 +4343,7 @@ type MediaTranscodeTemplateAudio struct {
 // MediaTranscodeTemplateAudioInput is an input type that accepts MediaTranscodeTemplateAudioArgs and MediaTranscodeTemplateAudioOutput values.
 // You can construct a concrete instance of `MediaTranscodeTemplateAudioInput` via:
 //
-//          MediaTranscodeTemplateAudioArgs{...}
+//	MediaTranscodeTemplateAudioArgs{...}
 type MediaTranscodeTemplateAudioInput interface {
 	pulumi.Input
 
@@ -4390,11 +4393,11 @@ func (i MediaTranscodeTemplateAudioArgs) ToMediaTranscodeTemplateAudioPtrOutputW
 // MediaTranscodeTemplateAudioPtrInput is an input type that accepts MediaTranscodeTemplateAudioArgs, MediaTranscodeTemplateAudioPtr and MediaTranscodeTemplateAudioPtrOutput values.
 // You can construct a concrete instance of `MediaTranscodeTemplateAudioPtrInput` via:
 //
-//          MediaTranscodeTemplateAudioArgs{...}
+//	        MediaTranscodeTemplateAudioArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type MediaTranscodeTemplateAudioPtrInput interface {
 	pulumi.Input
 
@@ -4602,7 +4605,7 @@ type MediaTranscodeTemplateAudioMix struct {
 // MediaTranscodeTemplateAudioMixInput is an input type that accepts MediaTranscodeTemplateAudioMixArgs and MediaTranscodeTemplateAudioMixOutput values.
 // You can construct a concrete instance of `MediaTranscodeTemplateAudioMixInput` via:
 //
-//          MediaTranscodeTemplateAudioMixArgs{...}
+//	MediaTranscodeTemplateAudioMixArgs{...}
 type MediaTranscodeTemplateAudioMixInput interface {
 	pulumi.Input
 
@@ -4636,7 +4639,7 @@ func (i MediaTranscodeTemplateAudioMixArgs) ToMediaTranscodeTemplateAudioMixOutp
 // MediaTranscodeTemplateAudioMixArrayInput is an input type that accepts MediaTranscodeTemplateAudioMixArray and MediaTranscodeTemplateAudioMixArrayOutput values.
 // You can construct a concrete instance of `MediaTranscodeTemplateAudioMixArrayInput` via:
 //
-//          MediaTranscodeTemplateAudioMixArray{ MediaTranscodeTemplateAudioMixArgs{...} }
+//	MediaTranscodeTemplateAudioMixArray{ MediaTranscodeTemplateAudioMixArgs{...} }
 type MediaTranscodeTemplateAudioMixArrayInput interface {
 	pulumi.Input
 
@@ -4732,7 +4735,7 @@ type MediaTranscodeTemplateAudioMixEffectConfig struct {
 // MediaTranscodeTemplateAudioMixEffectConfigInput is an input type that accepts MediaTranscodeTemplateAudioMixEffectConfigArgs and MediaTranscodeTemplateAudioMixEffectConfigOutput values.
 // You can construct a concrete instance of `MediaTranscodeTemplateAudioMixEffectConfigInput` via:
 //
-//          MediaTranscodeTemplateAudioMixEffectConfigArgs{...}
+//	MediaTranscodeTemplateAudioMixEffectConfigArgs{...}
 type MediaTranscodeTemplateAudioMixEffectConfigInput interface {
 	pulumi.Input
 
@@ -4778,11 +4781,11 @@ func (i MediaTranscodeTemplateAudioMixEffectConfigArgs) ToMediaTranscodeTemplate
 // MediaTranscodeTemplateAudioMixEffectConfigPtrInput is an input type that accepts MediaTranscodeTemplateAudioMixEffectConfigArgs, MediaTranscodeTemplateAudioMixEffectConfigPtr and MediaTranscodeTemplateAudioMixEffectConfigPtrOutput values.
 // You can construct a concrete instance of `MediaTranscodeTemplateAudioMixEffectConfigPtrInput` via:
 //
-//          MediaTranscodeTemplateAudioMixEffectConfigArgs{...}
+//	        MediaTranscodeTemplateAudioMixEffectConfigArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type MediaTranscodeTemplateAudioMixEffectConfigPtrInput interface {
 	pulumi.Input
 
@@ -4956,7 +4959,7 @@ type MediaTranscodeTemplateContainer struct {
 // MediaTranscodeTemplateContainerInput is an input type that accepts MediaTranscodeTemplateContainerArgs and MediaTranscodeTemplateContainerOutput values.
 // You can construct a concrete instance of `MediaTranscodeTemplateContainerInput` via:
 //
-//          MediaTranscodeTemplateContainerArgs{...}
+//	MediaTranscodeTemplateContainerArgs{...}
 type MediaTranscodeTemplateContainerInput interface {
 	pulumi.Input
 
@@ -4994,11 +4997,11 @@ func (i MediaTranscodeTemplateContainerArgs) ToMediaTranscodeTemplateContainerPt
 // MediaTranscodeTemplateContainerPtrInput is an input type that accepts MediaTranscodeTemplateContainerArgs, MediaTranscodeTemplateContainerPtr and MediaTranscodeTemplateContainerPtrOutput values.
 // You can construct a concrete instance of `MediaTranscodeTemplateContainerPtrInput` via:
 //
-//          MediaTranscodeTemplateContainerArgs{...}
+//	        MediaTranscodeTemplateContainerArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type MediaTranscodeTemplateContainerPtrInput interface {
 	pulumi.Input
 
@@ -5112,7 +5115,7 @@ type MediaTranscodeTemplateContainerClipConfig struct {
 // MediaTranscodeTemplateContainerClipConfigInput is an input type that accepts MediaTranscodeTemplateContainerClipConfigArgs and MediaTranscodeTemplateContainerClipConfigOutput values.
 // You can construct a concrete instance of `MediaTranscodeTemplateContainerClipConfigInput` via:
 //
-//          MediaTranscodeTemplateContainerClipConfigArgs{...}
+//	MediaTranscodeTemplateContainerClipConfigArgs{...}
 type MediaTranscodeTemplateContainerClipConfigInput interface {
 	pulumi.Input
 
@@ -5148,11 +5151,11 @@ func (i MediaTranscodeTemplateContainerClipConfigArgs) ToMediaTranscodeTemplateC
 // MediaTranscodeTemplateContainerClipConfigPtrInput is an input type that accepts MediaTranscodeTemplateContainerClipConfigArgs, MediaTranscodeTemplateContainerClipConfigPtr and MediaTranscodeTemplateContainerClipConfigPtrOutput values.
 // You can construct a concrete instance of `MediaTranscodeTemplateContainerClipConfigPtrInput` via:
 //
-//          MediaTranscodeTemplateContainerClipConfigArgs{...}
+//	        MediaTranscodeTemplateContainerClipConfigArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type MediaTranscodeTemplateContainerClipConfigPtrInput interface {
 	pulumi.Input
 
@@ -5251,7 +5254,7 @@ type MediaTranscodeTemplateTimeInterval struct {
 // MediaTranscodeTemplateTimeIntervalInput is an input type that accepts MediaTranscodeTemplateTimeIntervalArgs and MediaTranscodeTemplateTimeIntervalOutput values.
 // You can construct a concrete instance of `MediaTranscodeTemplateTimeIntervalInput` via:
 //
-//          MediaTranscodeTemplateTimeIntervalArgs{...}
+//	MediaTranscodeTemplateTimeIntervalArgs{...}
 type MediaTranscodeTemplateTimeIntervalInput interface {
 	pulumi.Input
 
@@ -5289,11 +5292,11 @@ func (i MediaTranscodeTemplateTimeIntervalArgs) ToMediaTranscodeTemplateTimeInte
 // MediaTranscodeTemplateTimeIntervalPtrInput is an input type that accepts MediaTranscodeTemplateTimeIntervalArgs, MediaTranscodeTemplateTimeIntervalPtr and MediaTranscodeTemplateTimeIntervalPtrOutput values.
 // You can construct a concrete instance of `MediaTranscodeTemplateTimeIntervalPtrInput` via:
 //
-//          MediaTranscodeTemplateTimeIntervalArgs{...}
+//	        MediaTranscodeTemplateTimeIntervalArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type MediaTranscodeTemplateTimeIntervalPtrInput interface {
 	pulumi.Input
 
@@ -5423,7 +5426,7 @@ type MediaTranscodeTemplateTransConfig struct {
 // MediaTranscodeTemplateTransConfigInput is an input type that accepts MediaTranscodeTemplateTransConfigArgs and MediaTranscodeTemplateTransConfigOutput values.
 // You can construct a concrete instance of `MediaTranscodeTemplateTransConfigInput` via:
 //
-//          MediaTranscodeTemplateTransConfigArgs{...}
+//	MediaTranscodeTemplateTransConfigArgs{...}
 type MediaTranscodeTemplateTransConfigInput interface {
 	pulumi.Input
 
@@ -5477,11 +5480,11 @@ func (i MediaTranscodeTemplateTransConfigArgs) ToMediaTranscodeTemplateTransConf
 // MediaTranscodeTemplateTransConfigPtrInput is an input type that accepts MediaTranscodeTemplateTransConfigArgs, MediaTranscodeTemplateTransConfigPtr and MediaTranscodeTemplateTransConfigPtrOutput values.
 // You can construct a concrete instance of `MediaTranscodeTemplateTransConfigPtrInput` via:
 //
-//          MediaTranscodeTemplateTransConfigArgs{...}
+//	        MediaTranscodeTemplateTransConfigArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type MediaTranscodeTemplateTransConfigPtrInput interface {
 	pulumi.Input
 
@@ -5717,7 +5720,7 @@ type MediaTranscodeTemplateTransConfigHlsEncrypt struct {
 // MediaTranscodeTemplateTransConfigHlsEncryptInput is an input type that accepts MediaTranscodeTemplateTransConfigHlsEncryptArgs and MediaTranscodeTemplateTransConfigHlsEncryptOutput values.
 // You can construct a concrete instance of `MediaTranscodeTemplateTransConfigHlsEncryptInput` via:
 //
-//          MediaTranscodeTemplateTransConfigHlsEncryptArgs{...}
+//	MediaTranscodeTemplateTransConfigHlsEncryptArgs{...}
 type MediaTranscodeTemplateTransConfigHlsEncryptInput interface {
 	pulumi.Input
 
@@ -5755,11 +5758,11 @@ func (i MediaTranscodeTemplateTransConfigHlsEncryptArgs) ToMediaTranscodeTemplat
 // MediaTranscodeTemplateTransConfigHlsEncryptPtrInput is an input type that accepts MediaTranscodeTemplateTransConfigHlsEncryptArgs, MediaTranscodeTemplateTransConfigHlsEncryptPtr and MediaTranscodeTemplateTransConfigHlsEncryptPtrOutput values.
 // You can construct a concrete instance of `MediaTranscodeTemplateTransConfigHlsEncryptPtrInput` via:
 //
-//          MediaTranscodeTemplateTransConfigHlsEncryptArgs{...}
+//	        MediaTranscodeTemplateTransConfigHlsEncryptArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type MediaTranscodeTemplateTransConfigHlsEncryptPtrInput interface {
 	pulumi.Input
 
@@ -5899,7 +5902,7 @@ type MediaTranscodeTemplateVideo struct {
 // MediaTranscodeTemplateVideoInput is an input type that accepts MediaTranscodeTemplateVideoArgs and MediaTranscodeTemplateVideoOutput values.
 // You can construct a concrete instance of `MediaTranscodeTemplateVideoInput` via:
 //
-//          MediaTranscodeTemplateVideoArgs{...}
+//	MediaTranscodeTemplateVideoArgs{...}
 type MediaTranscodeTemplateVideoInput interface {
 	pulumi.Input
 
@@ -5963,11 +5966,11 @@ func (i MediaTranscodeTemplateVideoArgs) ToMediaTranscodeTemplateVideoPtrOutputW
 // MediaTranscodeTemplateVideoPtrInput is an input type that accepts MediaTranscodeTemplateVideoArgs, MediaTranscodeTemplateVideoPtr and MediaTranscodeTemplateVideoPtrOutput values.
 // You can construct a concrete instance of `MediaTranscodeTemplateVideoPtrInput` via:
 //
-//          MediaTranscodeTemplateVideoArgs{...}
+//	        MediaTranscodeTemplateVideoArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type MediaTranscodeTemplateVideoPtrInput interface {
 	pulumi.Input
 
@@ -6282,7 +6285,7 @@ type MediaVideoMontageTemplateAudio struct {
 // MediaVideoMontageTemplateAudioInput is an input type that accepts MediaVideoMontageTemplateAudioArgs and MediaVideoMontageTemplateAudioOutput values.
 // You can construct a concrete instance of `MediaVideoMontageTemplateAudioInput` via:
 //
-//          MediaVideoMontageTemplateAudioArgs{...}
+//	MediaVideoMontageTemplateAudioArgs{...}
 type MediaVideoMontageTemplateAudioInput interface {
 	pulumi.Input
 
@@ -6326,11 +6329,11 @@ func (i MediaVideoMontageTemplateAudioArgs) ToMediaVideoMontageTemplateAudioPtrO
 // MediaVideoMontageTemplateAudioPtrInput is an input type that accepts MediaVideoMontageTemplateAudioArgs, MediaVideoMontageTemplateAudioPtr and MediaVideoMontageTemplateAudioPtrOutput values.
 // You can construct a concrete instance of `MediaVideoMontageTemplateAudioPtrInput` via:
 //
-//          MediaVideoMontageTemplateAudioArgs{...}
+//	        MediaVideoMontageTemplateAudioArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type MediaVideoMontageTemplateAudioPtrInput interface {
 	pulumi.Input
 
@@ -6493,7 +6496,7 @@ type MediaVideoMontageTemplateAudioMix struct {
 // MediaVideoMontageTemplateAudioMixInput is an input type that accepts MediaVideoMontageTemplateAudioMixArgs and MediaVideoMontageTemplateAudioMixOutput values.
 // You can construct a concrete instance of `MediaVideoMontageTemplateAudioMixInput` via:
 //
-//          MediaVideoMontageTemplateAudioMixArgs{...}
+//	MediaVideoMontageTemplateAudioMixArgs{...}
 type MediaVideoMontageTemplateAudioMixInput interface {
 	pulumi.Input
 
@@ -6527,7 +6530,7 @@ func (i MediaVideoMontageTemplateAudioMixArgs) ToMediaVideoMontageTemplateAudioM
 // MediaVideoMontageTemplateAudioMixArrayInput is an input type that accepts MediaVideoMontageTemplateAudioMixArray and MediaVideoMontageTemplateAudioMixArrayOutput values.
 // You can construct a concrete instance of `MediaVideoMontageTemplateAudioMixArrayInput` via:
 //
-//          MediaVideoMontageTemplateAudioMixArray{ MediaVideoMontageTemplateAudioMixArgs{...} }
+//	MediaVideoMontageTemplateAudioMixArray{ MediaVideoMontageTemplateAudioMixArgs{...} }
 type MediaVideoMontageTemplateAudioMixArrayInput interface {
 	pulumi.Input
 
@@ -6623,7 +6626,7 @@ type MediaVideoMontageTemplateAudioMixEffectConfig struct {
 // MediaVideoMontageTemplateAudioMixEffectConfigInput is an input type that accepts MediaVideoMontageTemplateAudioMixEffectConfigArgs and MediaVideoMontageTemplateAudioMixEffectConfigOutput values.
 // You can construct a concrete instance of `MediaVideoMontageTemplateAudioMixEffectConfigInput` via:
 //
-//          MediaVideoMontageTemplateAudioMixEffectConfigArgs{...}
+//	MediaVideoMontageTemplateAudioMixEffectConfigArgs{...}
 type MediaVideoMontageTemplateAudioMixEffectConfigInput interface {
 	pulumi.Input
 
@@ -6669,11 +6672,11 @@ func (i MediaVideoMontageTemplateAudioMixEffectConfigArgs) ToMediaVideoMontageTe
 // MediaVideoMontageTemplateAudioMixEffectConfigPtrInput is an input type that accepts MediaVideoMontageTemplateAudioMixEffectConfigArgs, MediaVideoMontageTemplateAudioMixEffectConfigPtr and MediaVideoMontageTemplateAudioMixEffectConfigPtrOutput values.
 // You can construct a concrete instance of `MediaVideoMontageTemplateAudioMixEffectConfigPtrInput` via:
 //
-//          MediaVideoMontageTemplateAudioMixEffectConfigArgs{...}
+//	        MediaVideoMontageTemplateAudioMixEffectConfigArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type MediaVideoMontageTemplateAudioMixEffectConfigPtrInput interface {
 	pulumi.Input
 
@@ -6845,7 +6848,7 @@ type MediaVideoMontageTemplateContainer struct {
 // MediaVideoMontageTemplateContainerInput is an input type that accepts MediaVideoMontageTemplateContainerArgs and MediaVideoMontageTemplateContainerOutput values.
 // You can construct a concrete instance of `MediaVideoMontageTemplateContainerInput` via:
 //
-//          MediaVideoMontageTemplateContainerArgs{...}
+//	MediaVideoMontageTemplateContainerArgs{...}
 type MediaVideoMontageTemplateContainerInput interface {
 	pulumi.Input
 
@@ -6881,11 +6884,11 @@ func (i MediaVideoMontageTemplateContainerArgs) ToMediaVideoMontageTemplateConta
 // MediaVideoMontageTemplateContainerPtrInput is an input type that accepts MediaVideoMontageTemplateContainerArgs, MediaVideoMontageTemplateContainerPtr and MediaVideoMontageTemplateContainerPtrOutput values.
 // You can construct a concrete instance of `MediaVideoMontageTemplateContainerPtrInput` via:
 //
-//          MediaVideoMontageTemplateContainerArgs{...}
+//	        MediaVideoMontageTemplateContainerArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type MediaVideoMontageTemplateContainerPtrInput interface {
 	pulumi.Input
 
@@ -6994,7 +6997,7 @@ type MediaVideoMontageTemplateVideo struct {
 // MediaVideoMontageTemplateVideoInput is an input type that accepts MediaVideoMontageTemplateVideoArgs and MediaVideoMontageTemplateVideoOutput values.
 // You can construct a concrete instance of `MediaVideoMontageTemplateVideoInput` via:
 //
-//          MediaVideoMontageTemplateVideoArgs{...}
+//	MediaVideoMontageTemplateVideoArgs{...}
 type MediaVideoMontageTemplateVideoInput interface {
 	pulumi.Input
 
@@ -7042,11 +7045,11 @@ func (i MediaVideoMontageTemplateVideoArgs) ToMediaVideoMontageTemplateVideoPtrO
 // MediaVideoMontageTemplateVideoPtrInput is an input type that accepts MediaVideoMontageTemplateVideoArgs, MediaVideoMontageTemplateVideoPtr and MediaVideoMontageTemplateVideoPtrOutput values.
 // You can construct a concrete instance of `MediaVideoMontageTemplateVideoPtrInput` via:
 //
-//          MediaVideoMontageTemplateVideoArgs{...}
+//	        MediaVideoMontageTemplateVideoArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type MediaVideoMontageTemplateVideoPtrInput interface {
 	pulumi.Input
 
@@ -7239,7 +7242,7 @@ type MediaVideoProcessTemplateColorEnhance struct {
 // MediaVideoProcessTemplateColorEnhanceInput is an input type that accepts MediaVideoProcessTemplateColorEnhanceArgs and MediaVideoProcessTemplateColorEnhanceOutput values.
 // You can construct a concrete instance of `MediaVideoProcessTemplateColorEnhanceInput` via:
 //
-//          MediaVideoProcessTemplateColorEnhanceArgs{...}
+//	MediaVideoProcessTemplateColorEnhanceArgs{...}
 type MediaVideoProcessTemplateColorEnhanceInput interface {
 	pulumi.Input
 
@@ -7281,11 +7284,11 @@ func (i MediaVideoProcessTemplateColorEnhanceArgs) ToMediaVideoProcessTemplateCo
 // MediaVideoProcessTemplateColorEnhancePtrInput is an input type that accepts MediaVideoProcessTemplateColorEnhanceArgs, MediaVideoProcessTemplateColorEnhancePtr and MediaVideoProcessTemplateColorEnhancePtrOutput values.
 // You can construct a concrete instance of `MediaVideoProcessTemplateColorEnhancePtrInput` via:
 //
-//          MediaVideoProcessTemplateColorEnhanceArgs{...}
+//	        MediaVideoProcessTemplateColorEnhanceArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type MediaVideoProcessTemplateColorEnhancePtrInput interface {
 	pulumi.Input
 
@@ -7429,7 +7432,7 @@ type MediaVideoProcessTemplateMsSharpen struct {
 // MediaVideoProcessTemplateMsSharpenInput is an input type that accepts MediaVideoProcessTemplateMsSharpenArgs and MediaVideoProcessTemplateMsSharpenOutput values.
 // You can construct a concrete instance of `MediaVideoProcessTemplateMsSharpenInput` via:
 //
-//          MediaVideoProcessTemplateMsSharpenArgs{...}
+//	MediaVideoProcessTemplateMsSharpenArgs{...}
 type MediaVideoProcessTemplateMsSharpenInput interface {
 	pulumi.Input
 
@@ -7467,11 +7470,11 @@ func (i MediaVideoProcessTemplateMsSharpenArgs) ToMediaVideoProcessTemplateMsSha
 // MediaVideoProcessTemplateMsSharpenPtrInput is an input type that accepts MediaVideoProcessTemplateMsSharpenArgs, MediaVideoProcessTemplateMsSharpenPtr and MediaVideoProcessTemplateMsSharpenPtrOutput values.
 // You can construct a concrete instance of `MediaVideoProcessTemplateMsSharpenPtrInput` via:
 //
-//          MediaVideoProcessTemplateMsSharpenArgs{...}
+//	        MediaVideoProcessTemplateMsSharpenArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type MediaVideoProcessTemplateMsSharpenPtrInput interface {
 	pulumi.Input
 
@@ -7589,7 +7592,7 @@ type MediaVoiceSeparateTemplateAudioConfig struct {
 // MediaVoiceSeparateTemplateAudioConfigInput is an input type that accepts MediaVoiceSeparateTemplateAudioConfigArgs and MediaVoiceSeparateTemplateAudioConfigOutput values.
 // You can construct a concrete instance of `MediaVoiceSeparateTemplateAudioConfigInput` via:
 //
-//          MediaVoiceSeparateTemplateAudioConfigArgs{...}
+//	MediaVoiceSeparateTemplateAudioConfigArgs{...}
 type MediaVoiceSeparateTemplateAudioConfigInput interface {
 	pulumi.Input
 
@@ -7631,11 +7634,11 @@ func (i MediaVoiceSeparateTemplateAudioConfigArgs) ToMediaVoiceSeparateTemplateA
 // MediaVoiceSeparateTemplateAudioConfigPtrInput is an input type that accepts MediaVoiceSeparateTemplateAudioConfigArgs, MediaVoiceSeparateTemplateAudioConfigPtr and MediaVoiceSeparateTemplateAudioConfigPtrOutput values.
 // You can construct a concrete instance of `MediaVoiceSeparateTemplateAudioConfigPtrInput` via:
 //
-//          MediaVoiceSeparateTemplateAudioConfigArgs{...}
+//	        MediaVoiceSeparateTemplateAudioConfigArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type MediaVoiceSeparateTemplateAudioConfigPtrInput interface {
 	pulumi.Input
 
@@ -7793,7 +7796,7 @@ type MediaWatermarkTemplateWatermark struct {
 // MediaWatermarkTemplateWatermarkInput is an input type that accepts MediaWatermarkTemplateWatermarkArgs and MediaWatermarkTemplateWatermarkOutput values.
 // You can construct a concrete instance of `MediaWatermarkTemplateWatermarkInput` via:
 //
-//          MediaWatermarkTemplateWatermarkArgs{...}
+//	MediaWatermarkTemplateWatermarkArgs{...}
 type MediaWatermarkTemplateWatermarkInput interface {
 	pulumi.Input
 
@@ -7845,11 +7848,11 @@ func (i MediaWatermarkTemplateWatermarkArgs) ToMediaWatermarkTemplateWatermarkPt
 // MediaWatermarkTemplateWatermarkPtrInput is an input type that accepts MediaWatermarkTemplateWatermarkArgs, MediaWatermarkTemplateWatermarkPtr and MediaWatermarkTemplateWatermarkPtrOutput values.
 // You can construct a concrete instance of `MediaWatermarkTemplateWatermarkPtrInput` via:
 //
-//          MediaWatermarkTemplateWatermarkArgs{...}
+//	        MediaWatermarkTemplateWatermarkArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type MediaWatermarkTemplateWatermarkPtrInput interface {
 	pulumi.Input
 
@@ -8076,7 +8079,7 @@ type MediaWatermarkTemplateWatermarkImage struct {
 // MediaWatermarkTemplateWatermarkImageInput is an input type that accepts MediaWatermarkTemplateWatermarkImageArgs and MediaWatermarkTemplateWatermarkImageOutput values.
 // You can construct a concrete instance of `MediaWatermarkTemplateWatermarkImageInput` via:
 //
-//          MediaWatermarkTemplateWatermarkImageArgs{...}
+//	MediaWatermarkTemplateWatermarkImageArgs{...}
 type MediaWatermarkTemplateWatermarkImageInput interface {
 	pulumi.Input
 
@@ -8122,11 +8125,11 @@ func (i MediaWatermarkTemplateWatermarkImageArgs) ToMediaWatermarkTemplateWaterm
 // MediaWatermarkTemplateWatermarkImagePtrInput is an input type that accepts MediaWatermarkTemplateWatermarkImageArgs, MediaWatermarkTemplateWatermarkImagePtr and MediaWatermarkTemplateWatermarkImagePtrOutput values.
 // You can construct a concrete instance of `MediaWatermarkTemplateWatermarkImagePtrInput` via:
 //
-//          MediaWatermarkTemplateWatermarkImageArgs{...}
+//	        MediaWatermarkTemplateWatermarkImageArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type MediaWatermarkTemplateWatermarkImagePtrInput interface {
 	pulumi.Input
 
@@ -8306,7 +8309,7 @@ type MediaWatermarkTemplateWatermarkText struct {
 // MediaWatermarkTemplateWatermarkTextInput is an input type that accepts MediaWatermarkTemplateWatermarkTextArgs and MediaWatermarkTemplateWatermarkTextOutput values.
 // You can construct a concrete instance of `MediaWatermarkTemplateWatermarkTextInput` via:
 //
-//          MediaWatermarkTemplateWatermarkTextArgs{...}
+//	MediaWatermarkTemplateWatermarkTextArgs{...}
 type MediaWatermarkTemplateWatermarkTextInput interface {
 	pulumi.Input
 
@@ -8350,11 +8353,11 @@ func (i MediaWatermarkTemplateWatermarkTextArgs) ToMediaWatermarkTemplateWaterma
 // MediaWatermarkTemplateWatermarkTextPtrInput is an input type that accepts MediaWatermarkTemplateWatermarkTextArgs, MediaWatermarkTemplateWatermarkTextPtr and MediaWatermarkTemplateWatermarkTextPtrOutput values.
 // You can construct a concrete instance of `MediaWatermarkTemplateWatermarkTextPtrInput` via:
 //
-//          MediaWatermarkTemplateWatermarkTextArgs{...}
+//	        MediaWatermarkTemplateWatermarkTextArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type MediaWatermarkTemplateWatermarkTextPtrInput interface {
 	pulumi.Input
 

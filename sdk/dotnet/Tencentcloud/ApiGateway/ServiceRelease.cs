@@ -18,11 +18,11 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway
     /// API gateway service release can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:ApiGateway/serviceRelease:ServiceRelease service service-jjt3fs3s#release#20201015121916d85fb161-eaec-4dda-a7e0-659aa5f401be
+    /// $ pulumi import tencentcloud:ApiGateway/serviceRelease:ServiceRelease service service-jjt3fs3s#release#20201015121916d85fb161-eaec-4dda-a7e0-659aa5f401be
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:ApiGateway/serviceRelease:ServiceRelease")]
-    public partial class ServiceRelease : Pulumi.CustomResource
+    public partial class ServiceRelease : global::Pulumi.CustomResource
     {
         /// <summary>
         /// API gateway service environment name to be released. Valid values: `test`, `prepub`, `release`.
@@ -93,7 +93,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway
         }
     }
 
-    public sealed class ServiceReleaseArgs : Pulumi.ResourceArgs
+    public sealed class ServiceReleaseArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// API gateway service environment name to be released. Valid values: `test`, `prepub`, `release`.
@@ -122,9 +122,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway
         public ServiceReleaseArgs()
         {
         }
+        public static new ServiceReleaseArgs Empty => new ServiceReleaseArgs();
     }
 
-    public sealed class ServiceReleaseState : Pulumi.ResourceArgs
+    public sealed class ServiceReleaseState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// API gateway service environment name to be released. Valid values: `test`, `prepub`, `release`.
@@ -153,5 +154,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway
         public ServiceReleaseState()
         {
         }
+        public static new ServiceReleaseState Empty => new ServiceReleaseState();
     }
 }

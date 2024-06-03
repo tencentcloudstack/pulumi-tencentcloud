@@ -7,34 +7,40 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a tsf releaseApiGroup
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tsf"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tsf"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Tsf.NewReleaseApiGroup(ctx, "releaseApiGroup", &Tsf.ReleaseApiGroupArgs{
-// 			GroupId: pulumi.String("grp-qp0rj3zi"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Tsf.NewReleaseApiGroup(ctx, "releaseApiGroup", &Tsf.ReleaseApiGroupArgs{
+//				GroupId: pulumi.String("grp-qp0rj3zi"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 type ReleaseApiGroup struct {
 	pulumi.CustomResourceState
 
@@ -52,7 +58,7 @@ func NewReleaseApiGroup(ctx *pulumi.Context,
 	if args.GroupId == nil {
 		return nil, errors.New("invalid value for required argument 'GroupId'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource ReleaseApiGroup
 	err := ctx.RegisterResource("tencentcloud:Tsf/releaseApiGroup:ReleaseApiGroup", name, args, &resource, opts...)
 	if err != nil {
@@ -125,7 +131,7 @@ func (i *ReleaseApiGroup) ToReleaseApiGroupOutputWithContext(ctx context.Context
 // ReleaseApiGroupArrayInput is an input type that accepts ReleaseApiGroupArray and ReleaseApiGroupArrayOutput values.
 // You can construct a concrete instance of `ReleaseApiGroupArrayInput` via:
 //
-//          ReleaseApiGroupArray{ ReleaseApiGroupArgs{...} }
+//	ReleaseApiGroupArray{ ReleaseApiGroupArgs{...} }
 type ReleaseApiGroupArrayInput interface {
 	pulumi.Input
 
@@ -150,7 +156,7 @@ func (i ReleaseApiGroupArray) ToReleaseApiGroupArrayOutputWithContext(ctx contex
 // ReleaseApiGroupMapInput is an input type that accepts ReleaseApiGroupMap and ReleaseApiGroupMapOutput values.
 // You can construct a concrete instance of `ReleaseApiGroupMapInput` via:
 //
-//          ReleaseApiGroupMap{ "key": ReleaseApiGroupArgs{...} }
+//	ReleaseApiGroupMap{ "key": ReleaseApiGroupArgs{...} }
 type ReleaseApiGroupMapInput interface {
 	pulumi.Input
 

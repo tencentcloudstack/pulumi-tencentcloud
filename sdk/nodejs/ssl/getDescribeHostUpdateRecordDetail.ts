@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,21 +11,20 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const describeHostUpdateRecordDetail = pulumi.output(tencentcloud.Ssl.getDescribeHostUpdateRecordDetail({
+ * const describeHostUpdateRecordDetail = tencentcloud.Ssl.getDescribeHostUpdateRecordDetail({
  *     deployRecordId: "35364",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getDescribeHostUpdateRecordDetail(args: GetDescribeHostUpdateRecordDetailArgs, opts?: pulumi.InvokeOptions): Promise<GetDescribeHostUpdateRecordDetailResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Ssl/getDescribeHostUpdateRecordDetail:getDescribeHostUpdateRecordDetail", {
         "deployRecordId": args.deployRecordId,
         "resultOutputFile": args.resultOutputFile,
@@ -72,9 +72,24 @@ export interface GetDescribeHostUpdateRecordDetailResult {
      */
     readonly successTotalCount: number;
 }
-
+/**
+ * Use this data source to query detailed information of ssl describeHostUpdateRecordDetail
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const describeHostUpdateRecordDetail = tencentcloud.Ssl.getDescribeHostUpdateRecordDetail({
+ *     deployRecordId: "35364",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getDescribeHostUpdateRecordDetailOutput(args: GetDescribeHostUpdateRecordDetailOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetDescribeHostUpdateRecordDetailResult> {
-    return pulumi.output(args).apply(a => getDescribeHostUpdateRecordDetail(a, opts))
+    return pulumi.output(args).apply((a: any) => getDescribeHostUpdateRecordDetail(a, opts))
 }
 
 /**

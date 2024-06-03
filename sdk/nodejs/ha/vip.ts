@@ -9,23 +9,25 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const foo = new tencentcloud.Ha.Vip("foo", {
+ * const foo = new tencentcloud.ha.Vip("foo", {
  *     subnetId: "subnet-4d4m4cd4s",
  *     vip: "10.0.4.16",
  *     vpcId: "vpc-gzea3dd7",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * HA VIP can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Ha/vip:Vip foo havip-kjqwe4ba
+ * $ pulumi import tencentcloud:Ha/vip:Vip foo havip-kjqwe4ba
  * ```
  */
 export class Vip extends pulumi.CustomResource {

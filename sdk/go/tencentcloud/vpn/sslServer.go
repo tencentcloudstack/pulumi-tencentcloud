@@ -7,51 +7,57 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provide a resource to create a VPN SSL Server.
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpn"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpn"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Vpn.NewSslServer(ctx, "server", &Vpn.SslServerArgs{
-// 			Compress:           pulumi.Bool(true),
-// 			EncryptAlgorithm:   pulumi.String("AES-128-CBC"),
-// 			IntegrityAlgorithm: pulumi.String("MD5"),
-// 			LocalAddresses: pulumi.StringArray{
-// 				pulumi.String("10.0.0.0/17"),
-// 			},
-// 			RemoteAddress:    pulumi.String("11.0.0.0/16"),
-// 			SslVpnPort:       pulumi.Int(1194),
-// 			SslVpnProtocol:   pulumi.String("UDP"),
-// 			SslVpnServerName: pulumi.String("helloworld"),
-// 			VpnGatewayId:     pulumi.String("vpngw-335lwf7d"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Vpn.NewSslServer(ctx, "server", &Vpn.SslServerArgs{
+//				Compress:           pulumi.Bool(true),
+//				EncryptAlgorithm:   pulumi.String("AES-128-CBC"),
+//				IntegrityAlgorithm: pulumi.String("MD5"),
+//				LocalAddresses: pulumi.StringArray{
+//					pulumi.String("10.0.0.0/17"),
+//				},
+//				RemoteAddress:    pulumi.String("11.0.0.0/16"),
+//				SslVpnPort:       pulumi.Int(1194),
+//				SslVpnProtocol:   pulumi.String("UDP"),
+//				SslVpnServerName: pulumi.String("helloworld"),
+//				VpnGatewayId:     pulumi.String("vpngw-335lwf7d"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // VPN SSL Server can be imported, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Vpn/sslServer:SslServer server vpn-server-id
+// $ pulumi import tencentcloud:Vpn/sslServer:SslServer server vpn-server-id
 // ```
 type SslServer struct {
 	pulumi.CustomResourceState
@@ -95,7 +101,7 @@ func NewSslServer(ctx *pulumi.Context,
 	if args.VpnGatewayId == nil {
 		return nil, errors.New("invalid value for required argument 'VpnGatewayId'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource SslServer
 	err := ctx.RegisterResource("tencentcloud:Vpn/sslServer:SslServer", name, args, &resource, opts...)
 	if err != nil {
@@ -232,7 +238,7 @@ func (i *SslServer) ToSslServerOutputWithContext(ctx context.Context) SslServerO
 // SslServerArrayInput is an input type that accepts SslServerArray and SslServerArrayOutput values.
 // You can construct a concrete instance of `SslServerArrayInput` via:
 //
-//          SslServerArray{ SslServerArgs{...} }
+//	SslServerArray{ SslServerArgs{...} }
 type SslServerArrayInput interface {
 	pulumi.Input
 
@@ -257,7 +263,7 @@ func (i SslServerArray) ToSslServerArrayOutputWithContext(ctx context.Context) S
 // SslServerMapInput is an input type that accepts SslServerMap and SslServerMapOutput values.
 // You can construct a concrete instance of `SslServerMapInput` via:
 //
-//          SslServerMap{ "key": SslServerArgs{...} }
+//	SslServerMap{ "key": SslServerArgs{...} }
 type SslServerMapInput interface {
 	pulumi.Input
 

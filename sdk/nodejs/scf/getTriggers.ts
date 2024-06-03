@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,24 +11,23 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const triggers = pulumi.output(tencentcloud.Scf.getTriggers({
+ * const triggers = tencentcloud.Scf.getTriggers({
  *     functionName: "keep-1676351130",
  *     namespace: "default",
  *     order: "DESC",
  *     orderBy: "add_time",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getTriggers(args: GetTriggersArgs, opts?: pulumi.InvokeOptions): Promise<GetTriggersResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Scf/getTriggers:getTriggers", {
         "filters": args.filters,
         "functionName": args.functionName,
@@ -87,9 +87,27 @@ export interface GetTriggersResult {
      */
     readonly triggers: outputs.Scf.GetTriggersTrigger[];
 }
-
+/**
+ * Use this data source to query detailed information of scf triggers
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const triggers = tencentcloud.Scf.getTriggers({
+ *     functionName: "keep-1676351130",
+ *     namespace: "default",
+ *     order: "DESC",
+ *     orderBy: "add_time",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getTriggersOutput(args: GetTriggersOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetTriggersResult> {
-    return pulumi.output(args).apply(a => getTriggers(a, opts))
+    return pulumi.output(args).apply((a: any) => getTriggers(a, opts))
 }
 
 /**

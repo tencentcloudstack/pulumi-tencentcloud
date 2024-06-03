@@ -119,7 +119,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes.Outputs
         /// </summary>
         public readonly string? SystemDiskType;
         /// <summary>
-        /// ase64-encoded User Data text, the length limit is 16KB.
+        /// User data provided to instances, needs to be encoded in base64, and the maximum supported data size is 16KB.
         /// </summary>
         public readonly string? UserData;
 

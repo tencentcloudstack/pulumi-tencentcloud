@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,11 +11,12 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const timeShiftRecordDetail = pulumi.output(tencentcloud.Css.getTimeShiftRecordDetail({
+ * const timeShiftRecordDetail = tencentcloud.Css.getTimeShiftRecordDetail({
  *     appName: "qqq",
  *     domain: "177154.push.tlivecloud.com",
  *     domainGroup: "tf-test",
@@ -22,15 +24,13 @@ import * as utilities from "../utilities";
  *     startTime: 1698768000,
  *     streamName: "live",
  *     transCodeId: 0,
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getTimeShiftRecordDetail(args: GetTimeShiftRecordDetailArgs, opts?: pulumi.InvokeOptions): Promise<GetTimeShiftRecordDetailResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Css/getTimeShiftRecordDetail:getTimeShiftRecordDetail", {
         "appName": args.appName,
         "domain": args.domain,
@@ -108,9 +108,30 @@ export interface GetTimeShiftRecordDetailResult {
     readonly streamName: string;
     readonly transCodeId?: number;
 }
-
+/**
+ * Use this data source to query detailed information of css timeShiftRecordDetail
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const timeShiftRecordDetail = tencentcloud.Css.getTimeShiftRecordDetail({
+ *     appName: "qqq",
+ *     domain: "177154.push.tlivecloud.com",
+ *     domainGroup: "tf-test",
+ *     endTime: 1698820641,
+ *     startTime: 1698768000,
+ *     streamName: "live",
+ *     transCodeId: 0,
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getTimeShiftRecordDetailOutput(args: GetTimeShiftRecordDetailOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetTimeShiftRecordDetailResult> {
-    return pulumi.output(args).apply(a => getTimeShiftRecordDetail(a, opts))
+    return pulumi.output(args).apply((a: any) => getTimeShiftRecordDetail(a, opts))
 }
 
 /**

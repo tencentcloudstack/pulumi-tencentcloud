@@ -8,60 +8,70 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Use this data source to query vpc subnets information.
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Subnet"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Subnet"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		cfg := config.New(ctx, "")
-// 		availabilityZone := "ap-guangzhou-3"
-// 		if param := cfg.Get("availabilityZone"); param != "" {
-// 			availabilityZone = param
-// 		}
-// 		foo, err := Vpc.NewInstance(ctx, "foo", &Vpc.InstanceArgs{
-// 			CidrBlock: pulumi.String("10.0.0.0/16"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		subnet, err := Subnet.NewInstance(ctx, "subnet", &Subnet.InstanceArgs{
-// 			AvailabilityZone: pulumi.String(availabilityZone),
-// 			VpcId:            foo.ID(),
-// 			CidrBlock:        pulumi.String("10.0.20.0/28"),
-// 			IsMulticast:      pulumi.Bool(false),
-// 			Tags: pulumi.AnyMap{
-// 				"test": pulumi.Any("test"),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_ = Vpc.GetSubnetsOutput(ctx, vpc.GetSubnetsOutputArgs{
-// 			SubnetId: subnet.ID(),
-// 		}, nil)
-// 		_ = Vpc.GetSubnetsOutput(ctx, vpc.GetSubnetsOutputArgs{
-// 			Name: subnet.Name,
-// 		}, nil)
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			cfg := config.New(ctx, "")
+//			availabilityZone := "ap-guangzhou-3"
+//			if param := cfg.Get("availabilityZone"); param != "" {
+//				availabilityZone = param
+//			}
+//			foo, err := Vpc.NewInstance(ctx, "foo", &Vpc.InstanceArgs{
+//				CidrBlock: pulumi.String("10.0.0.0/16"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			subnet, err := Subnet.NewInstance(ctx, "subnet", &Subnet.InstanceArgs{
+//				AvailabilityZone: pulumi.String(availabilityZone),
+//				VpcId:            foo.ID(),
+//				CidrBlock:        pulumi.String("10.0.20.0/28"),
+//				IsMulticast:      pulumi.Bool(false),
+//				Tags: pulumi.Map{
+//					"test": pulumi.Any("test"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_ = Vpc.GetSubnetsOutput(ctx, vpc.GetSubnetsOutputArgs{
+//				SubnetId: subnet.ID(),
+//			}, nil)
+//			_ = Vpc.GetSubnetsOutput(ctx, vpc.GetSubnetsOutputArgs{
+//				Name: subnet.Name,
+//			}, nil)
+//			_ = subnet.Tags.ApplyT(func(tags interface{}) (vpc.GetSubnetsResult, error) {
+//				return Vpc.GetSubnetsOutput(ctx, vpc.GetSubnetsOutputArgs{
+//					Tags: tags,
+//				}, nil), nil
+//			}).(vpc.GetSubnetsResultOutput)
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 func GetSubnets(ctx *pulumi.Context, args *GetSubnetsArgs, opts ...pulumi.InvokeOption) (*GetSubnetsResult, error) {
-	opts = pkgInvokeDefaultOpts(opts)
+	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetSubnetsResult
 	err := ctx.Invoke("tencentcloud:Vpc/getSubnets:getSubnets", args, &rv, opts...)
 	if err != nil {

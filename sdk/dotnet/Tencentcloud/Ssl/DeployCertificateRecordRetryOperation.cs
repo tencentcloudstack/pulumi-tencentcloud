@@ -15,33 +15,34 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssl
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var deployCertificateRecordRetry = new Tencentcloud.Ssl.DeployCertificateRecordRetryOperation("deployCertificateRecordRetry", new()
     ///     {
-    ///         var deployCertificateRecordRetry = new Tencentcloud.Ssl.DeployCertificateRecordRetryOperation("deployCertificateRecordRetry", new Tencentcloud.Ssl.DeployCertificateRecordRetryOperationArgs
-    ///         {
-    ///             DeployRecordId = 35474,
-    ///         });
-    ///     }
+    ///         DeployRecordId = 35474,
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// ssl deploy_certificate_record_retry can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Ssl/deployCertificateRecordRetryOperation:DeployCertificateRecordRetryOperation deploy_certificate_record_retry deploy_certificate_record_retry_id
+    /// $ pulumi import tencentcloud:Ssl/deployCertificateRecordRetryOperation:DeployCertificateRecordRetryOperation deploy_certificate_record_retry deploy_certificate_record_retry_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Ssl/deployCertificateRecordRetryOperation:DeployCertificateRecordRetryOperation")]
-    public partial class DeployCertificateRecordRetryOperation : Pulumi.CustomResource
+    public partial class DeployCertificateRecordRetryOperation : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Deployment record details ID to be retried.
@@ -100,7 +101,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssl
         }
     }
 
-    public sealed class DeployCertificateRecordRetryOperationArgs : Pulumi.ResourceArgs
+    public sealed class DeployCertificateRecordRetryOperationArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Deployment record details ID to be retried.
@@ -117,9 +118,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssl
         public DeployCertificateRecordRetryOperationArgs()
         {
         }
+        public static new DeployCertificateRecordRetryOperationArgs Empty => new DeployCertificateRecordRetryOperationArgs();
     }
 
-    public sealed class DeployCertificateRecordRetryOperationState : Pulumi.ResourceArgs
+    public sealed class DeployCertificateRecordRetryOperationState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Deployment record details ID to be retried.
@@ -136,5 +138,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssl
         public DeployCertificateRecordRetryOperationState()
         {
         }
+        public static new DeployCertificateRecordRetryOperationState Empty => new DeployCertificateRecordRetryOperationState();
     }
 }

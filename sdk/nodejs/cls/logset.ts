@@ -9,24 +9,26 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const logset = new tencentcloud.Cls.Logset("logset", {
+ * const logset = new tencentcloud.cls.Logset("logset", {
  *     logsetName: "demo",
  *     tags: {
  *         createdBy: "terraform",
  *     },
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * cls logset can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Cls/logset:Logset logset logset_id
+ * $ pulumi import tencentcloud:Cls/logset:Logset logset logset_id
  * ```
  */
 export class Logset extends pulumi.CustomResource {

@@ -15,38 +15,39 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cfs
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var snapshot = new Tencentcloud.Cfs.Snapshot("snapshot", new()
     ///     {
-    ///         var snapshot = new Tencentcloud.Cfs.Snapshot("snapshot", new Tencentcloud.Cfs.SnapshotArgs
+    ///         FileSystemId = "cfs-iobiaxtj",
+    ///         SnapshotName = "test",
+    ///         Tags = 
     ///         {
-    ///             FileSystemId = "cfs-iobiaxtj",
-    ///             SnapshotName = "test",
-    ///             Tags = 
-    ///             {
-    ///                 { "createdBy", "terraform" },
-    ///             },
-    ///         });
-    ///     }
+    ///             { "createdBy", "terraform" },
+    ///         },
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// cfs snapshot can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Cfs/snapshot:Snapshot snapshot snapshot_id
+    /// $ pulumi import tencentcloud:Cfs/snapshot:Snapshot snapshot snapshot_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Cfs/snapshot:Snapshot")]
-    public partial class Snapshot : Pulumi.CustomResource
+    public partial class Snapshot : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Id of file system.
@@ -111,7 +112,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cfs
         }
     }
 
-    public sealed class SnapshotArgs : Pulumi.ResourceArgs
+    public sealed class SnapshotArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Id of file system.
@@ -140,9 +141,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cfs
         public SnapshotArgs()
         {
         }
+        public static new SnapshotArgs Empty => new SnapshotArgs();
     }
 
-    public sealed class SnapshotState : Pulumi.ResourceArgs
+    public sealed class SnapshotState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Id of file system.
@@ -171,5 +173,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cfs
         public SnapshotState()
         {
         }
+        public static new SnapshotState Empty => new SnapshotState();
     }
 }

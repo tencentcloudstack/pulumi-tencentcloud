@@ -15,41 +15,42 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Css
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var snapshotTemplate = new Tencentcloud.Css.SnapshotTemplate("snapshotTemplate", new()
     ///     {
-    ///         var snapshotTemplate = new Tencentcloud.Css.SnapshotTemplate("snapshotTemplate", new Tencentcloud.Css.SnapshotTemplateArgs
-    ///         {
-    ///             CosAppId = 1308919341,
-    ///             CosBucket = "keep-bucket",
-    ///             CosRegion = "ap-guangzhou",
-    ///             Description = "snapshot template",
-    ///             Height = 0,
-    ///             PornFlag = 0,
-    ///             SnapshotInterval = 2,
-    ///             TemplateName = "tf-snapshot-template",
-    ///             Width = 0,
-    ///         });
-    ///     }
+    ///         CosAppId = 1308919341,
+    ///         CosBucket = "keep-bucket",
+    ///         CosRegion = "ap-guangzhou",
+    ///         Description = "snapshot template",
+    ///         Height = 0,
+    ///         PornFlag = 0,
+    ///         SnapshotInterval = 2,
+    ///         TemplateName = "tf-snapshot-template",
+    ///         Width = 0,
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// css snapshot_template can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Css/snapshotTemplate:SnapshotTemplate snapshot_template templateId
+    /// $ pulumi import tencentcloud:Css/snapshotTemplate:SnapshotTemplate snapshot_template templateId
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Css/snapshotTemplate:SnapshotTemplate")]
-    public partial class SnapshotTemplate : Pulumi.CustomResource
+    public partial class SnapshotTemplate : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Cos application ID.
@@ -162,7 +163,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Css
         }
     }
 
-    public sealed class SnapshotTemplateArgs : Pulumi.ResourceArgs
+    public sealed class SnapshotTemplateArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Cos application ID.
@@ -233,9 +234,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Css
         public SnapshotTemplateArgs()
         {
         }
+        public static new SnapshotTemplateArgs Empty => new SnapshotTemplateArgs();
     }
 
-    public sealed class SnapshotTemplateState : Pulumi.ResourceArgs
+    public sealed class SnapshotTemplateState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Cos application ID.
@@ -306,5 +308,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Css
         public SnapshotTemplateState()
         {
         }
+        public static new SnapshotTemplateState Empty => new SnapshotTemplateState();
     }
 }

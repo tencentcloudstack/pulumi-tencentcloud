@@ -9,9 +9,10 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const config = new pulumi.Config();
  * const region = config.get("region") || "ap-guangzhou";
@@ -43,6 +44,7 @@ import * as utilities from "../utilities";
  *     ccnUin: otheruin,
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export class Attachment extends pulumi.CustomResource {
     /**
@@ -81,7 +83,7 @@ export class Attachment extends pulumi.CustomResource {
      */
     public readonly ccnId!: pulumi.Output<string>;
     /**
-     * Uin of the ccn attached. Default is ``, which means the uin of this account. This parameter is used with case when attaching ccn of other account to the instance of this account. For now only support instance type `VPC`.
+     * Uin of the ccn attached. If not set, which means the uin of this account. This parameter is used with case when attaching ccn of other account to the instance of this account. For now only support instance type `VPC`.
      */
     public readonly ccnUin!: pulumi.Output<string>;
     /**
@@ -179,7 +181,7 @@ export interface AttachmentState {
      */
     ccnId?: pulumi.Input<string>;
     /**
-     * Uin of the ccn attached. Default is ``, which means the uin of this account. This parameter is used with case when attaching ccn of other account to the instance of this account. For now only support instance type `VPC`.
+     * Uin of the ccn attached. If not set, which means the uin of this account. This parameter is used with case when attaching ccn of other account to the instance of this account. For now only support instance type `VPC`.
      */
     ccnUin?: pulumi.Input<string>;
     /**
@@ -221,7 +223,7 @@ export interface AttachmentArgs {
      */
     ccnId: pulumi.Input<string>;
     /**
-     * Uin of the ccn attached. Default is ``, which means the uin of this account. This parameter is used with case when attaching ccn of other account to the instance of this account. For now only support instance type `VPC`.
+     * Uin of the ccn attached. If not set, which means the uin of this account. This parameter is used with case when attaching ccn of other account to the instance of this account. For now only support instance type `VPC`.
      */
     ccnUin?: pulumi.Input<string>;
     /**

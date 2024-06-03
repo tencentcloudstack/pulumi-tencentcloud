@@ -15,72 +15,66 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dbbrain
         /// <summary>
         /// Use this data source to query detailed information of dbbrain top_space_schema_time_series
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var topSpaceSchemaTimeSeries = Tencentcloud.Dbbrain.GetTopSpaceSchemaTimeSeries.Invoke(new()
         ///     {
-        ///         var topSpaceSchemaTimeSeries = Output.Create(Tencentcloud.Dbbrain.GetTopSpaceSchemaTimeSeries.InvokeAsync(new Tencentcloud.Dbbrain.GetTopSpaceSchemaTimeSeriesArgs
-        ///         {
-        ///             EndDate = "%s",
-        ///             InstanceId = "%s",
-        ///             Product = "mysql",
-        ///             SortBy = "DataLength",
-        ///             StartDate = "%s",
-        ///         }));
-        ///     }
+        ///         EndDate = "%s",
+        ///         InstanceId = "%s",
+        ///         Product = "mysql",
+        ///         SortBy = "DataLength",
+        ///         StartDate = "%s",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetTopSpaceSchemaTimeSeriesResult> InvokeAsync(GetTopSpaceSchemaTimeSeriesArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetTopSpaceSchemaTimeSeriesResult>("tencentcloud:Dbbrain/getTopSpaceSchemaTimeSeries:getTopSpaceSchemaTimeSeries", args ?? new GetTopSpaceSchemaTimeSeriesArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetTopSpaceSchemaTimeSeriesResult>("tencentcloud:Dbbrain/getTopSpaceSchemaTimeSeries:getTopSpaceSchemaTimeSeries", args ?? new GetTopSpaceSchemaTimeSeriesArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of dbbrain top_space_schema_time_series
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var topSpaceSchemaTimeSeries = Tencentcloud.Dbbrain.GetTopSpaceSchemaTimeSeries.Invoke(new()
         ///     {
-        ///         var topSpaceSchemaTimeSeries = Output.Create(Tencentcloud.Dbbrain.GetTopSpaceSchemaTimeSeries.InvokeAsync(new Tencentcloud.Dbbrain.GetTopSpaceSchemaTimeSeriesArgs
-        ///         {
-        ///             EndDate = "%s",
-        ///             InstanceId = "%s",
-        ///             Product = "mysql",
-        ///             SortBy = "DataLength",
-        ///             StartDate = "%s",
-        ///         }));
-        ///     }
+        ///         EndDate = "%s",
+        ///         InstanceId = "%s",
+        ///         Product = "mysql",
+        ///         SortBy = "DataLength",
+        ///         StartDate = "%s",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetTopSpaceSchemaTimeSeriesResult> Invoke(GetTopSpaceSchemaTimeSeriesInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetTopSpaceSchemaTimeSeriesResult>("tencentcloud:Dbbrain/getTopSpaceSchemaTimeSeries:getTopSpaceSchemaTimeSeries", args ?? new GetTopSpaceSchemaTimeSeriesInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetTopSpaceSchemaTimeSeriesResult>("tencentcloud:Dbbrain/getTopSpaceSchemaTimeSeries:getTopSpaceSchemaTimeSeries", args ?? new GetTopSpaceSchemaTimeSeriesInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetTopSpaceSchemaTimeSeriesArgs : Pulumi.InvokeArgs
+    public sealed class GetTopSpaceSchemaTimeSeriesArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// The deadline, such as 2021-01-01, the earliest is the 29th day before the current day, and the default is the current day.
@@ -127,9 +121,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dbbrain
         public GetTopSpaceSchemaTimeSeriesArgs()
         {
         }
+        public static new GetTopSpaceSchemaTimeSeriesArgs Empty => new GetTopSpaceSchemaTimeSeriesArgs();
     }
 
-    public sealed class GetTopSpaceSchemaTimeSeriesInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetTopSpaceSchemaTimeSeriesInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// The deadline, such as 2021-01-01, the earliest is the 29th day before the current day, and the default is the current day.
@@ -176,6 +171,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dbbrain
         public GetTopSpaceSchemaTimeSeriesInvokeArgs()
         {
         }
+        public static new GetTopSpaceSchemaTimeSeriesInvokeArgs Empty => new GetTopSpaceSchemaTimeSeriesInvokeArgs();
     }
 
 

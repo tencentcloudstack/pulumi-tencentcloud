@@ -11,43 +11,48 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const example = pulumi.output(tencentcloud.Ssm.getSshKeyPairValue({
+ * const example = tencentcloud.Ssm.getSshKeyPairValue({
  *     secretName: "keep_terraform",
  *     sshKeyId: "skey-2ae2snwd",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
+ *
  * ### Or
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const example = pulumi.output(tencentcloud.Ssm.getSshKeyPairValue({
+ * const example = tencentcloud.Ssm.getSshKeyPairValue({
  *     secretName: "keep_terraform",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
+ *
  * ### Or
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const example = pulumi.output(tencentcloud.Ssm.getSshKeyPairValue({
+ * const example = tencentcloud.Ssm.getSshKeyPairValue({
  *     sshKeyId: "skey-2ae2snwd",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getSshKeyPairValue(args?: GetSshKeyPairValueArgs, opts?: pulumi.InvokeOptions): Promise<GetSshKeyPairValueResult> {
     args = args || {};
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Ssm/getSshKeyPairValue:getSshKeyPairValue", {
         "resultOutputFile": args.resultOutputFile,
         "secretName": args.secretName,
@@ -105,9 +110,53 @@ export interface GetSshKeyPairValueResult {
      */
     readonly sshKeyName: string;
 }
-
+/**
+ * Use this data source to query detailed information of ssm sshKeyPairValue
+ *
+ * > **NOTE:** Must set at least one of `secretName` or `sshKeyId`.
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const example = tencentcloud.Ssm.getSshKeyPairValue({
+ *     secretName: "keep_terraform",
+ *     sshKeyId: "skey-2ae2snwd",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ *
+ * ### Or
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const example = tencentcloud.Ssm.getSshKeyPairValue({
+ *     secretName: "keep_terraform",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ *
+ * ### Or
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const example = tencentcloud.Ssm.getSshKeyPairValue({
+ *     sshKeyId: "skey-2ae2snwd",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getSshKeyPairValueOutput(args?: GetSshKeyPairValueOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetSshKeyPairValueResult> {
-    return pulumi.output(args).apply(a => getSshKeyPairValue(a, opts))
+    return pulumi.output(args).apply((a: any) => getSshKeyPairValue(a, opts))
 }
 
 /**

@@ -7,54 +7,59 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a wedata function
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Wedata"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Wedata"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Wedata"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Wedata.NewFunction(ctx, "example", &Wedata.FunctionArgs{
-// 			ClassName:         pulumi.String("tf_class_example"),
-// 			ClusterIdentifier: pulumi.String("emr-m6u3qgk0"),
-// 			Comment:           pulumi.String("V1"),
-// 			DbName:            pulumi.String("tf_db_example"),
-// 			Description:       pulumi.String("description."),
-// 			Example:           pulumi.String("example info."),
-// 			Kind:              pulumi.String("ANALYSIS"),
-// 			ParamDesc:         pulumi.String("param info."),
-// 			ProjectId:         pulumi.String("1612982498218618880"),
-// 			ResourceLists: wedata.FunctionResourceListArray{
-// 				&wedata.FunctionResourceListArgs{
-// 					Id:   pulumi.String("5b28bcdf-a0e6-4022-927d-927d399c4593"),
-// 					Name: pulumi.String("untitled3-1.0-SNAPSHOT.jar"),
-// 					Path: pulumi.String("/wedata-demo-1314991481/untitled3-1.0-SNAPSHOT.jar"),
-// 					Type: pulumi.String("cos"),
-// 				},
-// 			},
-// 			ReturnDesc: pulumi.String("return value info."),
-// 			Type:       pulumi.String("HIVE"),
-// 			Usage:      pulumi.String("usage info."),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Wedata.NewFunction(ctx, "example", &Wedata.FunctionArgs{
+//				ClassName:         pulumi.String("tf_class_example"),
+//				ClusterIdentifier: pulumi.String("emr-m6u3qgk0"),
+//				Comment:           pulumi.String("V1"),
+//				DbName:            pulumi.String("tf_db_example"),
+//				Description:       pulumi.String("description."),
+//				Example:           pulumi.String("example info."),
+//				Kind:              pulumi.String("ANALYSIS"),
+//				ParamDesc:         pulumi.String("param info."),
+//				ProjectId:         pulumi.String("1612982498218618880"),
+//				ResourceLists: wedata.FunctionResourceListArray{
+//					&wedata.FunctionResourceListArgs{
+//						Id:   pulumi.String("5b28bcdf-a0e6-4022-927d-927d399c4593"),
+//						Name: pulumi.String("untitled3-1.0-SNAPSHOT.jar"),
+//						Path: pulumi.String("/wedata-demo-1314991481/untitled3-1.0-SNAPSHOT.jar"),
+//						Type: pulumi.String("cos"),
+//					},
+//				},
+//				ReturnDesc: pulumi.String("return value info."),
+//				Type:       pulumi.String("HIVE"),
+//				Usage:      pulumi.String("usage info."),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 type Function struct {
 	pulumi.CustomResourceState
 
@@ -136,7 +141,7 @@ func NewFunction(ctx *pulumi.Context,
 	if args.Usage == nil {
 		return nil, errors.New("invalid value for required argument 'Usage'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource Function
 	err := ctx.RegisterResource("tencentcloud:Wedata/function:Function", name, args, &resource, opts...)
 	if err != nil {
@@ -317,7 +322,7 @@ func (i *Function) ToFunctionOutputWithContext(ctx context.Context) FunctionOutp
 // FunctionArrayInput is an input type that accepts FunctionArray and FunctionArrayOutput values.
 // You can construct a concrete instance of `FunctionArrayInput` via:
 //
-//          FunctionArray{ FunctionArgs{...} }
+//	FunctionArray{ FunctionArgs{...} }
 type FunctionArrayInput interface {
 	pulumi.Input
 
@@ -342,7 +347,7 @@ func (i FunctionArray) ToFunctionArrayOutputWithContext(ctx context.Context) Fun
 // FunctionMapInput is an input type that accepts FunctionMap and FunctionMapOutput values.
 // You can construct a concrete instance of `FunctionMapInput` via:
 //
-//          FunctionMap{ "key": FunctionArgs{...} }
+//	FunctionMap{ "key": FunctionArgs{...} }
 type FunctionMapInput interface {
 	pulumi.Input
 

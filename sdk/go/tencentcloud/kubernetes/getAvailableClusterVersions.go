@@ -8,45 +8,50 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Use this data source to query detailed information of kubernetes availableClusterVersions
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Kubernetes"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Kubernetes"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Kubernetes"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		queryById, err := Kubernetes.GetAvailableClusterVersions(ctx, &kubernetes.GetAvailableClusterVersionsArgs{
-// 			ClusterId: pulumi.StringRef("xxx"),
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		ctx.Export("versionsId", queryById.Versions)
-// 		queryByIds, err := Kubernetes.GetAvailableClusterVersions(ctx, &kubernetes.GetAvailableClusterVersionsArgs{
-// 			ClusterIds: []string{
-// 				"xxx",
-// 			},
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		ctx.Export("versionsIds", queryByIds.Clusters)
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			queryById, err := Kubernetes.GetAvailableClusterVersions(ctx, &kubernetes.GetAvailableClusterVersionsArgs{
+//				ClusterId: pulumi.StringRef("xxx"),
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			ctx.Export("versionsId", queryById.Versions)
+//			queryByIds, err := Kubernetes.GetAvailableClusterVersions(ctx, &kubernetes.GetAvailableClusterVersionsArgs{
+//				ClusterIds: []string{
+//					"xxx",
+//				},
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			ctx.Export("versionsIds", queryByIds.Clusters)
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 func GetAvailableClusterVersions(ctx *pulumi.Context, args *GetAvailableClusterVersionsArgs, opts ...pulumi.InvokeOption) (*GetAvailableClusterVersionsResult, error) {
-	opts = pkgInvokeDefaultOpts(opts)
+	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetAvailableClusterVersionsResult
 	err := ctx.Invoke("tencentcloud:Kubernetes/getAvailableClusterVersions:getAvailableClusterVersions", args, &rv, opts...)
 	if err != nil {

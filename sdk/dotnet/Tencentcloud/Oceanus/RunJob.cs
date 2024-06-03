@@ -15,36 +15,37 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Oceanus
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var example = new Tencentcloud.Oceanus.RunJob("example", new()
     ///     {
-    ///         var example = new Tencentcloud.Oceanus.RunJob("example", new Tencentcloud.Oceanus.RunJobArgs
+    ///         RunJobDescriptions = new[]
     ///         {
-    ///             RunJobDescriptions = 
+    ///             new Tencentcloud.Oceanus.Inputs.RunJobRunJobDescriptionArgs
     ///             {
-    ///                 new Tencentcloud.Oceanus.Inputs.RunJobRunJobDescriptionArgs
-    ///                 {
-    ///                     JobConfigVersion = 10,
-    ///                     JobId = "cql-4xwincyn",
-    ///                     RunType = 1,
-    ///                     StartMode = "LATEST",
-    ///                     UseOldSystemConnector = false,
-    ///                 },
+    ///                 JobConfigVersion = 10,
+    ///                 JobId = "cql-4xwincyn",
+    ///                 RunType = 1,
+    ///                 StartMode = "LATEST",
+    ///                 UseOldSystemConnector = false,
     ///             },
-    ///             WorkSpaceId = "space-2idq8wbr",
-    ///         });
-    ///     }
+    ///         },
+    ///         WorkSpaceId = "space-2idq8wbr",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Oceanus/runJob:RunJob")]
-    public partial class RunJob : Pulumi.CustomResource
+    public partial class RunJob : global::Pulumi.CustomResource
     {
         /// <summary>
         /// The description information for batch job startup.
@@ -103,7 +104,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Oceanus
         }
     }
 
-    public sealed class RunJobArgs : Pulumi.ResourceArgs
+    public sealed class RunJobArgs : global::Pulumi.ResourceArgs
     {
         [Input("runJobDescriptions", required: true)]
         private InputList<Inputs.RunJobRunJobDescriptionArgs>? _runJobDescriptions;
@@ -126,9 +127,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Oceanus
         public RunJobArgs()
         {
         }
+        public static new RunJobArgs Empty => new RunJobArgs();
     }
 
-    public sealed class RunJobState : Pulumi.ResourceArgs
+    public sealed class RunJobState : global::Pulumi.ResourceArgs
     {
         [Input("runJobDescriptions")]
         private InputList<Inputs.RunJobRunJobDescriptionGetArgs>? _runJobDescriptions;
@@ -151,5 +153,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Oceanus
         public RunJobState()
         {
         }
+        public static new RunJobState Empty => new RunJobState();
     }
 }

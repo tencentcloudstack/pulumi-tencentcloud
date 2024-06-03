@@ -15,66 +15,60 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
         /// <summary>
         /// Use this data source to query the available database specifications for different regions. And a maximum of 20 requests can be initiated per second for this query.
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var mysql = Tencentcloud.Mysql.GetZoneConfig.Invoke(new()
         ///     {
-        ///         var mysql = Output.Create(Tencentcloud.Mysql.GetZoneConfig.InvokeAsync(new Tencentcloud.Mysql.GetZoneConfigArgs
-        ///         {
-        ///             Region = "ap-guangzhou",
-        ///             ResultOutputFile = "mytestpath",
-        ///         }));
-        ///     }
+        ///         Region = "ap-guangzhou",
+        ///         ResultOutputFile = "mytestpath",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetZoneConfigResult> InvokeAsync(GetZoneConfigArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetZoneConfigResult>("tencentcloud:Mysql/getZoneConfig:getZoneConfig", args ?? new GetZoneConfigArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetZoneConfigResult>("tencentcloud:Mysql/getZoneConfig:getZoneConfig", args ?? new GetZoneConfigArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query the available database specifications for different regions. And a maximum of 20 requests can be initiated per second for this query.
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var mysql = Tencentcloud.Mysql.GetZoneConfig.Invoke(new()
         ///     {
-        ///         var mysql = Output.Create(Tencentcloud.Mysql.GetZoneConfig.InvokeAsync(new Tencentcloud.Mysql.GetZoneConfigArgs
-        ///         {
-        ///             Region = "ap-guangzhou",
-        ///             ResultOutputFile = "mytestpath",
-        ///         }));
-        ///     }
+        ///         Region = "ap-guangzhou",
+        ///         ResultOutputFile = "mytestpath",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetZoneConfigResult> Invoke(GetZoneConfigInvokeArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetZoneConfigResult>("tencentcloud:Mysql/getZoneConfig:getZoneConfig", args ?? new GetZoneConfigInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetZoneConfigResult>("tencentcloud:Mysql/getZoneConfig:getZoneConfig", args ?? new GetZoneConfigInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetZoneConfigArgs : Pulumi.InvokeArgs
+    public sealed class GetZoneConfigArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Region parameter, which is used to identify the region to which the data you want to work with belongs.
@@ -91,9 +85,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
         public GetZoneConfigArgs()
         {
         }
+        public static new GetZoneConfigArgs Empty => new GetZoneConfigArgs();
     }
 
-    public sealed class GetZoneConfigInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetZoneConfigInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Region parameter, which is used to identify the region to which the data you want to work with belongs.
@@ -110,6 +105,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
         public GetZoneConfigInvokeArgs()
         {
         }
+        public static new GetZoneConfigInvokeArgs Empty => new GetZoneConfigInvokeArgs();
     }
 
 

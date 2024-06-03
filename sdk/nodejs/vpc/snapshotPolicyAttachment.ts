@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,9 +11,10 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const exampleBucket = new tencentcloud.cos.Bucket("exampleBucket", {
  *     bucket: "tf-example-1308919341",
@@ -51,13 +53,14 @@ import * as utilities from "../utilities";
  *     }],
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * vpc snapshot_policy_attachment can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Vpc/snapshotPolicyAttachment:SnapshotPolicyAttachment snapshot_policy_attachment snapshot_policy_attachment_id
+ * $ pulumi import tencentcloud:Vpc/snapshotPolicyAttachment:SnapshotPolicyAttachment snapshot_policy_attachment snapshot_policy_attachment_id
  * ```
  */
 export class SnapshotPolicyAttachment extends pulumi.CustomResource {

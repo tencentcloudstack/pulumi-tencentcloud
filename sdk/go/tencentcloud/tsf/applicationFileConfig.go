@@ -7,43 +7,49 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a tsf applicationFileConfig
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tsf"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tsf"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Tsf.NewApplicationFileConfig(ctx, "applicationFileConfig", &Tsf.ApplicationFileConfigArgs{
-// 			ApplicationId:     pulumi.String("application-a24x29xv"),
-// 			ConfigFileCode:    pulumi.String("UTF-8"),
-// 			ConfigFileName:    pulumi.String("application.yaml"),
-// 			ConfigFilePath:    pulumi.String("/etc/nginx"),
-// 			ConfigFileValue:   pulumi.String("test: 1"),
-// 			ConfigName:        pulumi.String("terraform-test"),
-// 			ConfigPostCmd:     pulumi.String("source .bashrc"),
-// 			ConfigVersion:     pulumi.String("1.0"),
-// 			ConfigVersionDesc: pulumi.String("1.0"),
-// 			EncodeWithBase64:  pulumi.Bool(true),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Tsf.NewApplicationFileConfig(ctx, "applicationFileConfig", &Tsf.ApplicationFileConfigArgs{
+//				ApplicationId:     pulumi.String("application-a24x29xv"),
+//				ConfigFileCode:    pulumi.String("UTF-8"),
+//				ConfigFileName:    pulumi.String("application.yaml"),
+//				ConfigFilePath:    pulumi.String("/etc/nginx"),
+//				ConfigFileValue:   pulumi.String("test: 1"),
+//				ConfigName:        pulumi.String("terraform-test"),
+//				ConfigPostCmd:     pulumi.String("source .bashrc"),
+//				ConfigVersion:     pulumi.String("1.0"),
+//				ConfigVersionDesc: pulumi.String("1.0"),
+//				EncodeWithBase64:  pulumi.Bool(true),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 type ApplicationFileConfig struct {
 	pulumi.CustomResourceState
 
@@ -96,7 +102,7 @@ func NewApplicationFileConfig(ctx *pulumi.Context,
 	if args.ConfigVersion == nil {
 		return nil, errors.New("invalid value for required argument 'ConfigVersion'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource ApplicationFileConfig
 	err := ctx.RegisterResource("tencentcloud:Tsf/applicationFileConfig:ApplicationFileConfig", name, args, &resource, opts...)
 	if err != nil {
@@ -249,7 +255,7 @@ func (i *ApplicationFileConfig) ToApplicationFileConfigOutputWithContext(ctx con
 // ApplicationFileConfigArrayInput is an input type that accepts ApplicationFileConfigArray and ApplicationFileConfigArrayOutput values.
 // You can construct a concrete instance of `ApplicationFileConfigArrayInput` via:
 //
-//          ApplicationFileConfigArray{ ApplicationFileConfigArgs{...} }
+//	ApplicationFileConfigArray{ ApplicationFileConfigArgs{...} }
 type ApplicationFileConfigArrayInput interface {
 	pulumi.Input
 
@@ -274,7 +280,7 @@ func (i ApplicationFileConfigArray) ToApplicationFileConfigArrayOutputWithContex
 // ApplicationFileConfigMapInput is an input type that accepts ApplicationFileConfigMap and ApplicationFileConfigMapOutput values.
 // You can construct a concrete instance of `ApplicationFileConfigMapInput` via:
 //
-//          ApplicationFileConfigMap{ "key": ApplicationFileConfigArgs{...} }
+//	ApplicationFileConfigMap{ "key": ApplicationFileConfigArgs{...} }
 type ApplicationFileConfigMapInput interface {
 	pulumi.Input
 

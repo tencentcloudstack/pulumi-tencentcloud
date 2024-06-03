@@ -15,72 +15,66 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ha
         /// <summary>
         /// Use this data source to query detailed information of HA VIPs.
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var havips = Tencentcloud.Ha.GetVips.Invoke(new()
         ///     {
-        ///         var havips = Output.Create(Tencentcloud.Ha.GetVips.InvokeAsync(new Tencentcloud.Ha.GetVipsArgs
-        ///         {
-        ///             AddressIp = "10.0.4.16",
-        ///             Id = "havip-kjqwe4ba",
-        ///             Name = "test",
-        ///             SubnetId = "subnet-4d4m4cd4",
-        ///             VpcId = "vpc-gzea3dd7",
-        ///         }));
-        ///     }
+        ///         AddressIp = "10.0.4.16",
+        ///         Id = "havip-kjqwe4ba",
+        ///         Name = "test",
+        ///         SubnetId = "subnet-4d4m4cd4",
+        ///         VpcId = "vpc-gzea3dd7",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetVipsResult> InvokeAsync(GetVipsArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetVipsResult>("tencentcloud:Ha/getVips:getVips", args ?? new GetVipsArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetVipsResult>("tencentcloud:Ha/getVips:getVips", args ?? new GetVipsArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of HA VIPs.
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var havips = Tencentcloud.Ha.GetVips.Invoke(new()
         ///     {
-        ///         var havips = Output.Create(Tencentcloud.Ha.GetVips.InvokeAsync(new Tencentcloud.Ha.GetVipsArgs
-        ///         {
-        ///             AddressIp = "10.0.4.16",
-        ///             Id = "havip-kjqwe4ba",
-        ///             Name = "test",
-        ///             SubnetId = "subnet-4d4m4cd4",
-        ///             VpcId = "vpc-gzea3dd7",
-        ///         }));
-        ///     }
+        ///         AddressIp = "10.0.4.16",
+        ///         Id = "havip-kjqwe4ba",
+        ///         Name = "test",
+        ///         SubnetId = "subnet-4d4m4cd4",
+        ///         VpcId = "vpc-gzea3dd7",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetVipsResult> Invoke(GetVipsInvokeArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetVipsResult>("tencentcloud:Ha/getVips:getVips", args ?? new GetVipsInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetVipsResult>("tencentcloud:Ha/getVips:getVips", args ?? new GetVipsInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetVipsArgs : Pulumi.InvokeArgs
+    public sealed class GetVipsArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// EIP of the HA VIP to be queried.
@@ -121,9 +115,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ha
         public GetVipsArgs()
         {
         }
+        public static new GetVipsArgs Empty => new GetVipsArgs();
     }
 
-    public sealed class GetVipsInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetVipsInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// EIP of the HA VIP to be queried.
@@ -164,6 +159,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ha
         public GetVipsInvokeArgs()
         {
         }
+        public static new GetVipsInvokeArgs Empty => new GetVipsInvokeArgs();
     }
 
 

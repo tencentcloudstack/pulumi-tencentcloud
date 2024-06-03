@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcr.Inputs
 {
 
-    public sealed class InstanceReplicationGetArgs : Pulumi.ResourceArgs
+    public sealed class InstanceReplicationGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// ID of the resource.
@@ -26,6 +26,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcr.Inputs
         public Input<int>? RegionId { get; set; }
 
         /// <summary>
+        /// Replication region name.
+        /// </summary>
+        [Input("regionName")]
+        public Input<string>? RegionName { get; set; }
+
+        /// <summary>
         /// Specify whether to sync TCR cloud tags to COS Bucket. NOTE: You have to specify when adding, modifying will be ignored for now.
         /// </summary>
         [Input("synTag")]
@@ -34,5 +40,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcr.Inputs
         public InstanceReplicationGetArgs()
         {
         }
+        public static new InstanceReplicationGetArgs Empty => new InstanceReplicationGetArgs();
     }
 }

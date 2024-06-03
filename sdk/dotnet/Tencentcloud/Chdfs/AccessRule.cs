@@ -15,39 +15,40 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Chdfs
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var accessRule = new Tencentcloud.Chdfs.AccessRule("accessRule", new()
     ///     {
-    ///         var accessRule = new Tencentcloud.Chdfs.AccessRule("accessRule", new Tencentcloud.Chdfs.AccessRuleArgs
+    ///         AccessGroupId = "ag-bvmzrbsm",
+    ///         ChdfsAccessRule = new Tencentcloud.Chdfs.Inputs.AccessRuleAccessRuleArgs
     ///         {
-    ///             AccessGroupId = "ag-bvmzrbsm",
-    ///             AccessRule = new Tencentcloud.Chdfs.Inputs.AccessRuleAccessRuleArgs
-    ///             {
-    ///                 AccessMode = 2,
-    ///                 Address = "10.0.1.1",
-    ///                 Priority = 12,
-    ///             },
-    ///         });
-    ///     }
+    ///             AccessMode = 2,
+    ///             Address = "10.0.1.1",
+    ///             Priority = 12,
+    ///         },
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// chdfs access_rule can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Chdfs/accessRule:AccessRule access_rule access_group_id#access_rule_id
+    /// $ pulumi import tencentcloud:Chdfs/accessRule:AccessRule access_rule access_group_id#access_rule_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Chdfs/accessRule:AccessRule")]
-    public partial class AccessRule : Pulumi.CustomResource
+    public partial class AccessRule : global::Pulumi.CustomResource
     {
         /// <summary>
         /// access group id.
@@ -106,7 +107,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Chdfs
         }
     }
 
-    public sealed class AccessRuleArgs : Pulumi.ResourceArgs
+    public sealed class AccessRuleArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// access group id.
@@ -123,9 +124,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Chdfs
         public AccessRuleArgs()
         {
         }
+        public static new AccessRuleArgs Empty => new AccessRuleArgs();
     }
 
-    public sealed class AccessRuleState : Pulumi.ResourceArgs
+    public sealed class AccessRuleState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// access group id.
@@ -142,5 +144,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Chdfs
         public AccessRuleState()
         {
         }
+        public static new AccessRuleState Empty => new AccessRuleState();
     }
 }

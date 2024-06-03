@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps.Inputs
 {
 
-    public sealed class WorkflowMediaProcessTaskTranscodeTaskSetMosaicSetArgs : Pulumi.ResourceArgs
+    public sealed class WorkflowMediaProcessTaskTranscodeTaskSetMosaicSetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Origin position, currently only supports:TopLeft: Indicates that the coordinate origin is located in the upper left corner of the video image, and the origin of the mosaic is the upper left corner of the picture or textDefault: TopLeft.
@@ -58,5 +58,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps.Inputs
         public WorkflowMediaProcessTaskTranscodeTaskSetMosaicSetArgs()
         {
         }
+        public static new WorkflowMediaProcessTaskTranscodeTaskSetMosaicSetArgs Empty => new WorkflowMediaProcessTaskTranscodeTaskSetMosaicSetArgs();
     }
 }

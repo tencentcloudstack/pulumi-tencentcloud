@@ -15,80 +15,76 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dayu
         /// <summary>
         /// Use this data source to query dayu CC https policies
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var nameTest = Tencentcloud.Dayu.GetCcHttpsPolicies.Invoke(new()
         ///     {
-        ///         var nameTest = Output.Create(Tencentcloud.Dayu.GetCcHttpsPolicies.InvokeAsync(new Tencentcloud.Dayu.GetCcHttpsPoliciesArgs
-        ///         {
-        ///             ResourceType = tencentcloud_dayu_cc_https_policy.Test_policy.Resource_type,
-        ///             ResourceId = tencentcloud_dayu_cc_https_policy.Test_policy.Resource_id,
-        ///             Name = tencentcloud_dayu_cc_https_policy.Test_policy.Name,
-        ///         }));
-        ///         var idTest = Output.Create(Tencentcloud.Dayu.GetCcHttpsPolicies.InvokeAsync(new Tencentcloud.Dayu.GetCcHttpsPoliciesArgs
-        ///         {
-        ///             ResourceType = tencentcloud_dayu_cc_https_policy.Test_policy.Resource_type,
-        ///             ResourceId = tencentcloud_dayu_cc_https_policy.Test_policy.Resource_id,
-        ///             PolicyId = tencentcloud_dayu_cc_https_policy.Test_policy.Policy_id,
-        ///         }));
-        ///     }
+        ///         ResourceType = tencentcloud_dayu_cc_https_policy.Test_policy.Resource_type,
+        ///         ResourceId = tencentcloud_dayu_cc_https_policy.Test_policy.Resource_id,
+        ///         Name = tencentcloud_dayu_cc_https_policy.Test_policy.Name,
+        ///     });
         /// 
-        /// }
+        ///     var idTest = Tencentcloud.Dayu.GetCcHttpsPolicies.Invoke(new()
+        ///     {
+        ///         ResourceType = tencentcloud_dayu_cc_https_policy.Test_policy.Resource_type,
+        ///         ResourceId = tencentcloud_dayu_cc_https_policy.Test_policy.Resource_id,
+        ///         PolicyId = tencentcloud_dayu_cc_https_policy.Test_policy.Policy_id,
+        ///     });
+        /// 
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetCcHttpsPoliciesResult> InvokeAsync(GetCcHttpsPoliciesArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetCcHttpsPoliciesResult>("tencentcloud:Dayu/getCcHttpsPolicies:getCcHttpsPolicies", args ?? new GetCcHttpsPoliciesArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetCcHttpsPoliciesResult>("tencentcloud:Dayu/getCcHttpsPolicies:getCcHttpsPolicies", args ?? new GetCcHttpsPoliciesArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query dayu CC https policies
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var nameTest = Tencentcloud.Dayu.GetCcHttpsPolicies.Invoke(new()
         ///     {
-        ///         var nameTest = Output.Create(Tencentcloud.Dayu.GetCcHttpsPolicies.InvokeAsync(new Tencentcloud.Dayu.GetCcHttpsPoliciesArgs
-        ///         {
-        ///             ResourceType = tencentcloud_dayu_cc_https_policy.Test_policy.Resource_type,
-        ///             ResourceId = tencentcloud_dayu_cc_https_policy.Test_policy.Resource_id,
-        ///             Name = tencentcloud_dayu_cc_https_policy.Test_policy.Name,
-        ///         }));
-        ///         var idTest = Output.Create(Tencentcloud.Dayu.GetCcHttpsPolicies.InvokeAsync(new Tencentcloud.Dayu.GetCcHttpsPoliciesArgs
-        ///         {
-        ///             ResourceType = tencentcloud_dayu_cc_https_policy.Test_policy.Resource_type,
-        ///             ResourceId = tencentcloud_dayu_cc_https_policy.Test_policy.Resource_id,
-        ///             PolicyId = tencentcloud_dayu_cc_https_policy.Test_policy.Policy_id,
-        ///         }));
-        ///     }
+        ///         ResourceType = tencentcloud_dayu_cc_https_policy.Test_policy.Resource_type,
+        ///         ResourceId = tencentcloud_dayu_cc_https_policy.Test_policy.Resource_id,
+        ///         Name = tencentcloud_dayu_cc_https_policy.Test_policy.Name,
+        ///     });
         /// 
-        /// }
+        ///     var idTest = Tencentcloud.Dayu.GetCcHttpsPolicies.Invoke(new()
+        ///     {
+        ///         ResourceType = tencentcloud_dayu_cc_https_policy.Test_policy.Resource_type,
+        ///         ResourceId = tencentcloud_dayu_cc_https_policy.Test_policy.Resource_id,
+        ///         PolicyId = tencentcloud_dayu_cc_https_policy.Test_policy.Policy_id,
+        ///     });
+        /// 
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetCcHttpsPoliciesResult> Invoke(GetCcHttpsPoliciesInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetCcHttpsPoliciesResult>("tencentcloud:Dayu/getCcHttpsPolicies:getCcHttpsPolicies", args ?? new GetCcHttpsPoliciesInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetCcHttpsPoliciesResult>("tencentcloud:Dayu/getCcHttpsPolicies:getCcHttpsPolicies", args ?? new GetCcHttpsPoliciesInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetCcHttpsPoliciesArgs : Pulumi.InvokeArgs
+    public sealed class GetCcHttpsPoliciesArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Name of the CC https policy to be queried.
@@ -123,9 +119,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dayu
         public GetCcHttpsPoliciesArgs()
         {
         }
+        public static new GetCcHttpsPoliciesArgs Empty => new GetCcHttpsPoliciesArgs();
     }
 
-    public sealed class GetCcHttpsPoliciesInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetCcHttpsPoliciesInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Name of the CC https policy to be queried.
@@ -160,6 +157,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dayu
         public GetCcHttpsPoliciesInvokeArgs()
         {
         }
+        public static new GetCcHttpsPoliciesInvokeArgs Empty => new GetCcHttpsPoliciesInvokeArgs();
     }
 
 

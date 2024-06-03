@@ -9,23 +9,25 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const backupTime = new tencentcloud.Mariadb.BackupTime("backup_time", {
+ * const backupTime = new tencentcloud.mariadb.BackupTime("backupTime", {
  *     endBackupTime: "04:00",
  *     instanceId: "tdsql-9vqvls95",
  *     startBackupTime: "01:00",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * mariadb backup_time can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Mariadb/backupTime:BackupTime backup_time backup_time_id
+ * $ pulumi import tencentcloud:Mariadb/backupTime:BackupTime backup_time backup_time_id
  * ```
  */
 export class BackupTime extends pulumi.CustomResource {

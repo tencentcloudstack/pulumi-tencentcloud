@@ -8,11 +8,13 @@ import * as utilities from "../utilities";
  * Provides a resource to create a NAT gateway.
  *
  * ## Example Usage
+ *
  * ### Create a traditional NAT gateway.
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const vpc = new tencentcloud.vpc.Instance("vpc", {cidrBlock: "10.0.0.0/16"});
  * const eipExample1 = new tencentcloud.eip.Instance("eipExample1", {});
@@ -30,11 +32,14 @@ import * as utilities from "../utilities";
  *     },
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
+ *
  * ### Create a standard NAT gateway.
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const vpc = new tencentcloud.vpc.Instance("vpc", {cidrBlock: "10.0.0.0/16"});
  * const eipExample1 = new tencentcloud.eip.Instance("eipExample1", {});
@@ -51,13 +56,14 @@ import * as utilities from "../utilities";
  *     },
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * NAT gateway can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Nat/gateway:Gateway foo nat-1asg3t63
+ * $ pulumi import tencentcloud:Nat/gateway:Gateway foo nat-1asg3t63
  * ```
  */
 export class Gateway extends pulumi.CustomResource {

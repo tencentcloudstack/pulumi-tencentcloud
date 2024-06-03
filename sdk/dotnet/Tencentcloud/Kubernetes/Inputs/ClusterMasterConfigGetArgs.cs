@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes.Inputs
 {
 
-    public sealed class ClusterMasterConfigGetArgs : Pulumi.ResourceArgs
+    public sealed class ClusterMasterConfigGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Indicates which availability zone will be used.
@@ -139,11 +139,21 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes.Inputs
         [Input("keyIds")]
         public Input<string>? KeyIds { get; set; }
 
+        [Input("password")]
+        private Input<string>? _password;
+
         /// <summary>
         /// Password to access, should be set if `key_ids` not set.
         /// </summary>
-        [Input("password")]
-        public Input<string>? Password { get; set; }
+        public Input<string>? Password
+        {
+            get => _password;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _password = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
 
         /// <summary>
         /// Specify whether to assign an Internet IP address.
@@ -182,7 +192,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes.Inputs
         public Input<string>? SystemDiskType { get; set; }
 
         /// <summary>
-        /// ase64-encoded User Data text, the length limit is 16KB.
+        /// User data provided to instances, needs to be encoded in base64, and the maximum supported data size is 16KB.
         /// </summary>
         [Input("userData")]
         public Input<string>? UserData { get; set; }
@@ -190,5 +200,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes.Inputs
         public ClusterMasterConfigGetArgs()
         {
         }
+        public static new ClusterMasterConfigGetArgs Empty => new ClusterMasterConfigGetArgs();
     }
 }

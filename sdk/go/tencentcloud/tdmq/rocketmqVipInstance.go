@@ -7,8 +7,9 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a tdmq rocketmqVipInstance
@@ -58,7 +59,7 @@ func NewRocketmqVipInstance(ctx *pulumi.Context,
 	if args.ZoneIds == nil {
 		return nil, errors.New("invalid value for required argument 'ZoneIds'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource RocketmqVipInstance
 	err := ctx.RegisterResource("tencentcloud:Tdmq/rocketmqVipInstance:RocketmqVipInstance", name, args, &resource, opts...)
 	if err != nil {
@@ -179,7 +180,7 @@ func (i *RocketmqVipInstance) ToRocketmqVipInstanceOutputWithContext(ctx context
 // RocketmqVipInstanceArrayInput is an input type that accepts RocketmqVipInstanceArray and RocketmqVipInstanceArrayOutput values.
 // You can construct a concrete instance of `RocketmqVipInstanceArrayInput` via:
 //
-//          RocketmqVipInstanceArray{ RocketmqVipInstanceArgs{...} }
+//	RocketmqVipInstanceArray{ RocketmqVipInstanceArgs{...} }
 type RocketmqVipInstanceArrayInput interface {
 	pulumi.Input
 
@@ -204,7 +205,7 @@ func (i RocketmqVipInstanceArray) ToRocketmqVipInstanceArrayOutputWithContext(ct
 // RocketmqVipInstanceMapInput is an input type that accepts RocketmqVipInstanceMap and RocketmqVipInstanceMapOutput values.
 // You can construct a concrete instance of `RocketmqVipInstanceMapInput` via:
 //
-//          RocketmqVipInstanceMap{ "key": RocketmqVipInstanceArgs{...} }
+//	RocketmqVipInstanceMap{ "key": RocketmqVipInstanceArgs{...} }
 type RocketmqVipInstanceMapInput interface {
 	pulumi.Input
 

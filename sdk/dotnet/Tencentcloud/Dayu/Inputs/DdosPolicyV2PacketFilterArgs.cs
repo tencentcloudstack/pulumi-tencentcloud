@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dayu.Inputs
 {
 
-    public sealed class DdosPolicyV2PacketFilterArgs : Pulumi.ResourceArgs
+    public sealed class DdosPolicyV2PacketFilterArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Action, take the value [drop,transmit,drop_black (discard and black out),drop_rst (Interception),drop_black_rst (intercept and block),forward].
@@ -142,5 +142,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dayu.Inputs
         public DdosPolicyV2PacketFilterArgs()
         {
         }
+        public static new DdosPolicyV2PacketFilterArgs Empty => new DdosPolicyV2PacketFilterArgs();
     }
 }

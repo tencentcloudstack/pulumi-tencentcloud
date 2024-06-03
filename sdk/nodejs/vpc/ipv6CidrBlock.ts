@@ -9,20 +9,22 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const vpc = new tencentcloud.vpc.Instance("vpc", {cidrBlock: "10.0.0.0/16"});
  * const example = new tencentcloud.vpc.Ipv6CidrBlock("example", {vpcId: vpc.id});
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * vpc ipv6_cidr_block can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Vpc/ipv6CidrBlock:Ipv6CidrBlock ipv6_cidr_block vpc_id
+ * $ pulumi import tencentcloud:Vpc/ipv6CidrBlock:Ipv6CidrBlock ipv6_cidr_block vpc_id
  * ```
  */
 export class Ipv6CidrBlock extends pulumi.CustomResource {

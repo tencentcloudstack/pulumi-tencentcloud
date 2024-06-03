@@ -15,66 +15,60 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ses
         /// <summary>
         /// Use this data source to query detailed information of ses receivers
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var receivers = Tencentcloud.Ses.GetReceivers.Invoke(new()
         ///     {
-        ///         var receivers = Output.Create(Tencentcloud.Ses.GetReceivers.InvokeAsync(new Tencentcloud.Ses.GetReceiversArgs
-        ///         {
-        ///             KeyWord = "keep",
-        ///             Status = 3,
-        ///         }));
-        ///     }
+        ///         KeyWord = "keep",
+        ///         Status = 3,
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetReceiversResult> InvokeAsync(GetReceiversArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetReceiversResult>("tencentcloud:Ses/getReceivers:getReceivers", args ?? new GetReceiversArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetReceiversResult>("tencentcloud:Ses/getReceivers:getReceivers", args ?? new GetReceiversArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of ses receivers
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var receivers = Tencentcloud.Ses.GetReceivers.Invoke(new()
         ///     {
-        ///         var receivers = Output.Create(Tencentcloud.Ses.GetReceivers.InvokeAsync(new Tencentcloud.Ses.GetReceiversArgs
-        ///         {
-        ///             KeyWord = "keep",
-        ///             Status = 3,
-        ///         }));
-        ///     }
+        ///         KeyWord = "keep",
+        ///         Status = 3,
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetReceiversResult> Invoke(GetReceiversInvokeArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetReceiversResult>("tencentcloud:Ses/getReceivers:getReceivers", args ?? new GetReceiversInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetReceiversResult>("tencentcloud:Ses/getReceivers:getReceivers", args ?? new GetReceiversInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetReceiversArgs : Pulumi.InvokeArgs
+    public sealed class GetReceiversArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Group name keyword for fuzzy query.
@@ -97,9 +91,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ses
         public GetReceiversArgs()
         {
         }
+        public static new GetReceiversArgs Empty => new GetReceiversArgs();
     }
 
-    public sealed class GetReceiversInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetReceiversInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Group name keyword for fuzzy query.
@@ -122,6 +117,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ses
         public GetReceiversInvokeArgs()
         {
         }
+        public static new GetReceiversInvokeArgs Empty => new GetReceiversInvokeArgs();
     }
 
 

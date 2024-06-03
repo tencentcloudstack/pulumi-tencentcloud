@@ -9,11 +9,12 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const hotLink = new tencentcloud.Ci.HotLink("hot_link", {
+ * const hotLink = new tencentcloud.ci.HotLink("hotLink", {
  *     bucket: "terraform-ci-xxxxxx",
  *     type: "white",
  *     urls: [
@@ -22,13 +23,14 @@ import * as utilities from "../utilities";
  *     ],
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * ci hot_link can be imported using the bucket, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Ci/hotLink:HotLink hot_link terraform-ci-xxxxxx
+ * $ pulumi import tencentcloud:Ci/hotLink:HotLink hot_link terraform-ci-xxxxxx
  * ```
  */
 export class HotLink extends pulumi.CustomResource {

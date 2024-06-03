@@ -15,68 +15,62 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf
         /// <summary>
         /// Use this data source to query detailed information of tsf microservice_api_version
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var microserviceApiVersion = Tencentcloud.Tsf.GetMicroserviceApiVersion.Invoke(new()
         ///     {
-        ///         var microserviceApiVersion = Output.Create(Tencentcloud.Tsf.GetMicroserviceApiVersion.InvokeAsync(new Tencentcloud.Tsf.GetMicroserviceApiVersionArgs
-        ///         {
-        ///             Method = "get",
-        ///             MicroserviceId = "ms-yq3jo6jd",
-        ///             Path = "",
-        ///         }));
-        ///     }
+        ///         Method = "get",
+        ///         MicroserviceId = "ms-yq3jo6jd",
+        ///         Path = "",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetMicroserviceApiVersionResult> InvokeAsync(GetMicroserviceApiVersionArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetMicroserviceApiVersionResult>("tencentcloud:Tsf/getMicroserviceApiVersion:getMicroserviceApiVersion", args ?? new GetMicroserviceApiVersionArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetMicroserviceApiVersionResult>("tencentcloud:Tsf/getMicroserviceApiVersion:getMicroserviceApiVersion", args ?? new GetMicroserviceApiVersionArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of tsf microservice_api_version
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var microserviceApiVersion = Tencentcloud.Tsf.GetMicroserviceApiVersion.Invoke(new()
         ///     {
-        ///         var microserviceApiVersion = Output.Create(Tencentcloud.Tsf.GetMicroserviceApiVersion.InvokeAsync(new Tencentcloud.Tsf.GetMicroserviceApiVersionArgs
-        ///         {
-        ///             Method = "get",
-        ///             MicroserviceId = "ms-yq3jo6jd",
-        ///             Path = "",
-        ///         }));
-        ///     }
+        ///         Method = "get",
+        ///         MicroserviceId = "ms-yq3jo6jd",
+        ///         Path = "",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetMicroserviceApiVersionResult> Invoke(GetMicroserviceApiVersionInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetMicroserviceApiVersionResult>("tencentcloud:Tsf/getMicroserviceApiVersion:getMicroserviceApiVersion", args ?? new GetMicroserviceApiVersionInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetMicroserviceApiVersionResult>("tencentcloud:Tsf/getMicroserviceApiVersion:getMicroserviceApiVersion", args ?? new GetMicroserviceApiVersionInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetMicroserviceApiVersionArgs : Pulumi.InvokeArgs
+    public sealed class GetMicroserviceApiVersionArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// request method.
@@ -105,9 +99,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf
         public GetMicroserviceApiVersionArgs()
         {
         }
+        public static new GetMicroserviceApiVersionArgs Empty => new GetMicroserviceApiVersionArgs();
     }
 
-    public sealed class GetMicroserviceApiVersionInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetMicroserviceApiVersionInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// request method.
@@ -136,6 +131,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf
         public GetMicroserviceApiVersionInvokeArgs()
         {
         }
+        public static new GetMicroserviceApiVersionInvokeArgs Empty => new GetMicroserviceApiVersionInvokeArgs();
     }
 
 

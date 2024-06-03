@@ -15,37 +15,38 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpn
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var foo = new Tencentcloud.Vpn.CustomerGateway("foo", new()
     ///     {
-    ///         var foo = new Tencentcloud.Vpn.CustomerGateway("foo", new Tencentcloud.Vpn.CustomerGatewayArgs
+    ///         PublicIpAddress = "1.1.1.1",
+    ///         Tags = 
     ///         {
-    ///             PublicIpAddress = "1.1.1.1",
-    ///             Tags = 
-    ///             {
-    ///                 { "tag", "test" },
-    ///             },
-    ///         });
-    ///     }
+    ///             { "tag", "test" },
+    ///         },
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// VPN customer gateway can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Vpn/customerGateway:CustomerGateway foo cgw-xfqag
+    /// $ pulumi import tencentcloud:Vpn/customerGateway:CustomerGateway foo cgw-xfqag
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Vpn/customerGateway:CustomerGateway")]
-    public partial class CustomerGateway : Pulumi.CustomResource
+    public partial class CustomerGateway : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Create time of the customer gateway.
@@ -116,7 +117,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpn
         }
     }
 
-    public sealed class CustomerGatewayArgs : Pulumi.ResourceArgs
+    public sealed class CustomerGatewayArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Name of the customer gateway. The length of character is limited to 1-60.
@@ -145,9 +146,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpn
         public CustomerGatewayArgs()
         {
         }
+        public static new CustomerGatewayArgs Empty => new CustomerGatewayArgs();
     }
 
-    public sealed class CustomerGatewayState : Pulumi.ResourceArgs
+    public sealed class CustomerGatewayState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Create time of the customer gateway.
@@ -182,5 +184,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpn
         public CustomerGatewayState()
         {
         }
+        public static new CustomerGatewayState Empty => new CustomerGatewayState();
     }
 }

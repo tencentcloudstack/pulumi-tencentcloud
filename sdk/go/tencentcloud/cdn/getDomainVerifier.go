@@ -8,6 +8,7 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to check or create a cdn Domain Verify Record
@@ -16,33 +17,37 @@ import (
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Cdn"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cdn"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cdn"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Cdn.GetDomainVerifier(ctx, &cdn.GetDomainVerifierArgs{
-// 			Domain:       "www.examplexxx123.com",
-// 			AutoVerify:   pulumi.BoolRef(true),
-// 			FreezeRecord: pulumi.BoolRef(true),
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_ := data.Tencentcloud_cdn_domain_verifier.Record
-// 		_ := data.Tencentcloud_cdn_domain_verifier.Record_type
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Cdn.GetDomainVerifier(ctx, &cdn.GetDomainVerifierArgs{
+//				Domain:       "www.examplexxx123.com",
+//				AutoVerify:   pulumi.BoolRef(true),
+//				FreezeRecord: pulumi.BoolRef(true),
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			_ := data.Tencentcloud_cdn_domain_verifier.Record
+//			_ := data.Tencentcloud_cdn_domain_verifier.Record_type
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 func GetDomainVerifier(ctx *pulumi.Context, args *GetDomainVerifierArgs, opts ...pulumi.InvokeOption) (*GetDomainVerifierResult, error) {
-	opts = pkgInvokeDefaultOpts(opts)
+	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetDomainVerifierResult
 	err := ctx.Invoke("tencentcloud:Cdn/getDomainVerifier:getDomainVerifier", args, &rv, opts...)
 	if err != nil {

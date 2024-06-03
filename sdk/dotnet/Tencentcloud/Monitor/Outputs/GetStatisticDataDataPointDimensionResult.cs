@@ -14,7 +14,13 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor.Outputs
     [OutputType]
     public sealed class GetStatisticDataDataPointDimensionResult
     {
+        /// <summary>
+        /// Instance dimension name.
+        /// </summary>
         public readonly string Name;
+        /// <summary>
+        /// Instance dimension value.
+        /// </summary>
         public readonly string Value;
 
         [OutputConstructor]

@@ -15,25 +15,26 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Lighthouse
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var stopInstance = new Tencentcloud.Lighthouse.StopInstance("stopInstance", new()
     ///     {
-    ///         var stopInstance = new Tencentcloud.Lighthouse.StopInstance("stopInstance", new Tencentcloud.Lighthouse.StopInstanceArgs
-    ///         {
-    ///             InstanceId = "lhins-xxxxxx",
-    ///         });
-    ///     }
+    ///         InstanceId = "lhins-xxxxxx",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Lighthouse/stopInstance:StopInstance")]
-    public partial class StopInstance : Pulumi.CustomResource
+    public partial class StopInstance : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Instance ID.
@@ -86,7 +87,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Lighthouse
         }
     }
 
-    public sealed class StopInstanceArgs : Pulumi.ResourceArgs
+    public sealed class StopInstanceArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Instance ID.
@@ -97,9 +98,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Lighthouse
         public StopInstanceArgs()
         {
         }
+        public static new StopInstanceArgs Empty => new StopInstanceArgs();
     }
 
-    public sealed class StopInstanceState : Pulumi.ResourceArgs
+    public sealed class StopInstanceState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Instance ID.
@@ -110,5 +112,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Lighthouse
         public StopInstanceState()
         {
         }
+        public static new StopInstanceState Empty => new StopInstanceState();
     }
 }

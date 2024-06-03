@@ -15,74 +15,68 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf
         /// <summary>
         /// Use this data source to query detailed information of tsf business_log_configs
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var businessLogConfigs = Tencentcloud.Tsf.GetBusinessLogConfigs.Invoke(new()
         ///     {
-        ///         var businessLogConfigs = Output.Create(Tencentcloud.Tsf.GetBusinessLogConfigs.InvokeAsync(new Tencentcloud.Tsf.GetBusinessLogConfigsArgs
+        ///         ConfigIdLists = new[]
         ///         {
-        ///             ConfigIdLists = 
-        ///             {
-        ///                 "apm-busi-log-cfg-qv3x3rdv",
-        ///             },
-        ///             DisableProgramAuthCheck = true,
-        ///             SearchWord = "terraform",
-        ///         }));
-        ///     }
+        ///             "apm-busi-log-cfg-qv3x3rdv",
+        ///         },
+        ///         DisableProgramAuthCheck = true,
+        ///         SearchWord = "terraform",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetBusinessLogConfigsResult> InvokeAsync(GetBusinessLogConfigsArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetBusinessLogConfigsResult>("tencentcloud:Tsf/getBusinessLogConfigs:getBusinessLogConfigs", args ?? new GetBusinessLogConfigsArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetBusinessLogConfigsResult>("tencentcloud:Tsf/getBusinessLogConfigs:getBusinessLogConfigs", args ?? new GetBusinessLogConfigsArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of tsf business_log_configs
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var businessLogConfigs = Tencentcloud.Tsf.GetBusinessLogConfigs.Invoke(new()
         ///     {
-        ///         var businessLogConfigs = Output.Create(Tencentcloud.Tsf.GetBusinessLogConfigs.InvokeAsync(new Tencentcloud.Tsf.GetBusinessLogConfigsArgs
+        ///         ConfigIdLists = new[]
         ///         {
-        ///             ConfigIdLists = 
-        ///             {
-        ///                 "apm-busi-log-cfg-qv3x3rdv",
-        ///             },
-        ///             DisableProgramAuthCheck = true,
-        ///             SearchWord = "terraform",
-        ///         }));
-        ///     }
+        ///             "apm-busi-log-cfg-qv3x3rdv",
+        ///         },
+        ///         DisableProgramAuthCheck = true,
+        ///         SearchWord = "terraform",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetBusinessLogConfigsResult> Invoke(GetBusinessLogConfigsInvokeArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetBusinessLogConfigsResult>("tencentcloud:Tsf/getBusinessLogConfigs:getBusinessLogConfigs", args ?? new GetBusinessLogConfigsInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetBusinessLogConfigsResult>("tencentcloud:Tsf/getBusinessLogConfigs:getBusinessLogConfigs", args ?? new GetBusinessLogConfigsInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetBusinessLogConfigsArgs : Pulumi.InvokeArgs
+    public sealed class GetBusinessLogConfigsArgs : global::Pulumi.InvokeArgs
     {
         [Input("configIdLists")]
         private List<string>? _configIdLists;
@@ -117,9 +111,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf
         public GetBusinessLogConfigsArgs()
         {
         }
+        public static new GetBusinessLogConfigsArgs Empty => new GetBusinessLogConfigsArgs();
     }
 
-    public sealed class GetBusinessLogConfigsInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetBusinessLogConfigsInvokeArgs : global::Pulumi.InvokeArgs
     {
         [Input("configIdLists")]
         private InputList<string>? _configIdLists;
@@ -154,6 +149,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf
         public GetBusinessLogConfigsInvokeArgs()
         {
         }
+        public static new GetBusinessLogConfigsInvokeArgs Empty => new GetBusinessLogConfigsInvokeArgs();
     }
 
 

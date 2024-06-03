@@ -15,64 +15,58 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dlc
         /// <summary>
         /// Use this data source to query detailed information of dlc describe_data_engine_python_spark_images
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var describeDataEnginePythonSparkImages = Tencentcloud.Dlc.GetDescribeDataEnginePythonSparkImages.Invoke(new()
         ///     {
-        ///         var describeDataEnginePythonSparkImages = Output.Create(Tencentcloud.Dlc.GetDescribeDataEnginePythonSparkImages.InvokeAsync(new Tencentcloud.Dlc.GetDescribeDataEnginePythonSparkImagesArgs
-        ///         {
-        ///             ChildImageVersionId = "d3ftghd4-9a7e-4f64-a3f4-f38507c69742",
-        ///         }));
-        ///     }
+        ///         ChildImageVersionId = "d3ftghd4-9a7e-4f64-a3f4-f38507c69742",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetDescribeDataEnginePythonSparkImagesResult> InvokeAsync(GetDescribeDataEnginePythonSparkImagesArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetDescribeDataEnginePythonSparkImagesResult>("tencentcloud:Dlc/getDescribeDataEnginePythonSparkImages:getDescribeDataEnginePythonSparkImages", args ?? new GetDescribeDataEnginePythonSparkImagesArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetDescribeDataEnginePythonSparkImagesResult>("tencentcloud:Dlc/getDescribeDataEnginePythonSparkImages:getDescribeDataEnginePythonSparkImages", args ?? new GetDescribeDataEnginePythonSparkImagesArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of dlc describe_data_engine_python_spark_images
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var describeDataEnginePythonSparkImages = Tencentcloud.Dlc.GetDescribeDataEnginePythonSparkImages.Invoke(new()
         ///     {
-        ///         var describeDataEnginePythonSparkImages = Output.Create(Tencentcloud.Dlc.GetDescribeDataEnginePythonSparkImages.InvokeAsync(new Tencentcloud.Dlc.GetDescribeDataEnginePythonSparkImagesArgs
-        ///         {
-        ///             ChildImageVersionId = "d3ftghd4-9a7e-4f64-a3f4-f38507c69742",
-        ///         }));
-        ///     }
+        ///         ChildImageVersionId = "d3ftghd4-9a7e-4f64-a3f4-f38507c69742",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetDescribeDataEnginePythonSparkImagesResult> Invoke(GetDescribeDataEnginePythonSparkImagesInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetDescribeDataEnginePythonSparkImagesResult>("tencentcloud:Dlc/getDescribeDataEnginePythonSparkImages:getDescribeDataEnginePythonSparkImages", args ?? new GetDescribeDataEnginePythonSparkImagesInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetDescribeDataEnginePythonSparkImagesResult>("tencentcloud:Dlc/getDescribeDataEnginePythonSparkImages:getDescribeDataEnginePythonSparkImages", args ?? new GetDescribeDataEnginePythonSparkImagesInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetDescribeDataEnginePythonSparkImagesArgs : Pulumi.InvokeArgs
+    public sealed class GetDescribeDataEnginePythonSparkImagesArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Engine Image version id.
@@ -89,9 +83,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dlc
         public GetDescribeDataEnginePythonSparkImagesArgs()
         {
         }
+        public static new GetDescribeDataEnginePythonSparkImagesArgs Empty => new GetDescribeDataEnginePythonSparkImagesArgs();
     }
 
-    public sealed class GetDescribeDataEnginePythonSparkImagesInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetDescribeDataEnginePythonSparkImagesInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Engine Image version id.
@@ -108,6 +103,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dlc
         public GetDescribeDataEnginePythonSparkImagesInvokeArgs()
         {
         }
+        public static new GetDescribeDataEnginePythonSparkImagesInvokeArgs Empty => new GetDescribeDataEnginePythonSparkImagesInvokeArgs();
     }
 
 

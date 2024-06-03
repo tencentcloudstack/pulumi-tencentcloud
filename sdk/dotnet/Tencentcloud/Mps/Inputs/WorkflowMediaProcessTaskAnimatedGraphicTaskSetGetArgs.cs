@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps.Inputs
 {
 
-    public sealed class WorkflowMediaProcessTaskAnimatedGraphicTaskSetGetArgs : Pulumi.ResourceArgs
+    public sealed class WorkflowMediaProcessTaskAnimatedGraphicTaskSetGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Video turntable template id.
@@ -46,5 +46,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps.Inputs
         public WorkflowMediaProcessTaskAnimatedGraphicTaskSetGetArgs()
         {
         }
+        public static new WorkflowMediaProcessTaskAnimatedGraphicTaskSetGetArgs Empty => new WorkflowMediaProcessTaskAnimatedGraphicTaskSetGetArgs();
     }
 }

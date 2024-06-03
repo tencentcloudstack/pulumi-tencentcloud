@@ -8,7 +8,10 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
+
+var _ = internal.GetEnvOrDefault
 
 type AppConfigConfigData struct {
 	// key.
@@ -20,7 +23,7 @@ type AppConfigConfigData struct {
 // AppConfigConfigDataInput is an input type that accepts AppConfigConfigDataArgs and AppConfigConfigDataOutput values.
 // You can construct a concrete instance of `AppConfigConfigDataInput` via:
 //
-//          AppConfigConfigDataArgs{...}
+//	AppConfigConfigDataArgs{...}
 type AppConfigConfigDataInput interface {
 	pulumi.Input
 
@@ -50,7 +53,7 @@ func (i AppConfigConfigDataArgs) ToAppConfigConfigDataOutputWithContext(ctx cont
 // AppConfigConfigDataArrayInput is an input type that accepts AppConfigConfigDataArray and AppConfigConfigDataArrayOutput values.
 // You can construct a concrete instance of `AppConfigConfigDataArrayInput` via:
 //
-//          AppConfigConfigDataArray{ AppConfigConfigDataArgs{...} }
+//	AppConfigConfigDataArray{ AppConfigConfigDataArgs{...} }
 type AppConfigConfigDataArrayInput interface {
 	pulumi.Input
 
@@ -117,6 +120,7 @@ func (o AppConfigConfigDataArrayOutput) Index(i pulumi.IntInput) AppConfigConfig
 }
 
 type ApplicationServiceService struct {
+	// ip address of application service.
 	Ip *string `pulumi:"ip"`
 	// port mapping item list.
 	PortMappingItemLists []ApplicationServiceServicePortMappingItemList `pulumi:"portMappingItemLists"`
@@ -133,7 +137,7 @@ type ApplicationServiceService struct {
 // ApplicationServiceServiceInput is an input type that accepts ApplicationServiceServiceArgs and ApplicationServiceServiceOutput values.
 // You can construct a concrete instance of `ApplicationServiceServiceInput` via:
 //
-//          ApplicationServiceServiceArgs{...}
+//	ApplicationServiceServiceArgs{...}
 type ApplicationServiceServiceInput interface {
 	pulumi.Input
 
@@ -142,6 +146,7 @@ type ApplicationServiceServiceInput interface {
 }
 
 type ApplicationServiceServiceArgs struct {
+	// ip address of application service.
 	Ip pulumi.StringPtrInput `pulumi:"ip"`
 	// port mapping item list.
 	PortMappingItemLists ApplicationServiceServicePortMappingItemListArrayInput `pulumi:"portMappingItemLists"`
@@ -178,11 +183,11 @@ func (i ApplicationServiceServiceArgs) ToApplicationServiceServicePtrOutputWithC
 // ApplicationServiceServicePtrInput is an input type that accepts ApplicationServiceServiceArgs, ApplicationServiceServicePtr and ApplicationServiceServicePtrOutput values.
 // You can construct a concrete instance of `ApplicationServiceServicePtrInput` via:
 //
-//          ApplicationServiceServiceArgs{...}
+//	        ApplicationServiceServiceArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type ApplicationServiceServicePtrInput interface {
 	pulumi.Input
 
@@ -232,6 +237,7 @@ func (o ApplicationServiceServiceOutput) ToApplicationServiceServicePtrOutputWit
 	}).(ApplicationServiceServicePtrOutput)
 }
 
+// ip address of application service.
 func (o ApplicationServiceServiceOutput) Ip() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ApplicationServiceService) *string { return v.Ip }).(pulumi.StringPtrOutput)
 }
@@ -287,6 +293,7 @@ func (o ApplicationServiceServicePtrOutput) Elem() ApplicationServiceServiceOutp
 	}).(ApplicationServiceServiceOutput)
 }
 
+// ip address of application service.
 func (o ApplicationServiceServicePtrOutput) Ip() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ApplicationServiceService) *string {
 		if v == nil {
@@ -358,7 +365,7 @@ type ApplicationServiceServicePortMappingItemList struct {
 // ApplicationServiceServicePortMappingItemListInput is an input type that accepts ApplicationServiceServicePortMappingItemListArgs and ApplicationServiceServicePortMappingItemListOutput values.
 // You can construct a concrete instance of `ApplicationServiceServicePortMappingItemListInput` via:
 //
-//          ApplicationServiceServicePortMappingItemListArgs{...}
+//	ApplicationServiceServicePortMappingItemListArgs{...}
 type ApplicationServiceServicePortMappingItemListInput interface {
 	pulumi.Input
 
@@ -390,7 +397,7 @@ func (i ApplicationServiceServicePortMappingItemListArgs) ToApplicationServiceSe
 // ApplicationServiceServicePortMappingItemListArrayInput is an input type that accepts ApplicationServiceServicePortMappingItemListArray and ApplicationServiceServicePortMappingItemListArrayOutput values.
 // You can construct a concrete instance of `ApplicationServiceServicePortMappingItemListArrayInput` via:
 //
-//          ApplicationServiceServicePortMappingItemListArray{ ApplicationServiceServicePortMappingItemListArgs{...} }
+//	ApplicationServiceServicePortMappingItemListArray{ ApplicationServiceServicePortMappingItemListArgs{...} }
 type ApplicationServiceServicePortMappingItemListArrayInput interface {
 	pulumi.Input
 
@@ -465,7 +472,8 @@ type GatewayIngress struct {
 	// ip version, support IPV4.
 	AddressIpVersion string `pulumi:"addressIpVersion"`
 	// related CLB ID, support binding existing clb, does not support modification.
-	ClbId      *string `pulumi:"clbId"`
+	ClbId *string `pulumi:"clbId"`
+	// creation time.
 	CreateTime *string `pulumi:"createTime"`
 	// environment ID.
 	EnvironmentId string `pulumi:"environmentId"`
@@ -479,13 +487,14 @@ type GatewayIngress struct {
 	Rules []GatewayIngressRule `pulumi:"rules"`
 	// ingress TLS configurations.
 	Tls []GatewayIngressTl `pulumi:"tls"`
-	Vip *string            `pulumi:"vip"`
+	// gateway vip.
+	Vip *string `pulumi:"vip"`
 }
 
 // GatewayIngressInput is an input type that accepts GatewayIngressArgs and GatewayIngressOutput values.
 // You can construct a concrete instance of `GatewayIngressInput` via:
 //
-//          GatewayIngressArgs{...}
+//	GatewayIngressArgs{...}
 type GatewayIngressInput interface {
 	pulumi.Input
 
@@ -497,7 +506,8 @@ type GatewayIngressArgs struct {
 	// ip version, support IPV4.
 	AddressIpVersion pulumi.StringInput `pulumi:"addressIpVersion"`
 	// related CLB ID, support binding existing clb, does not support modification.
-	ClbId      pulumi.StringPtrInput `pulumi:"clbId"`
+	ClbId pulumi.StringPtrInput `pulumi:"clbId"`
+	// creation time.
 	CreateTime pulumi.StringPtrInput `pulumi:"createTime"`
 	// environment ID.
 	EnvironmentId pulumi.StringInput `pulumi:"environmentId"`
@@ -511,7 +521,8 @@ type GatewayIngressArgs struct {
 	Rules GatewayIngressRuleArrayInput `pulumi:"rules"`
 	// ingress TLS configurations.
 	Tls GatewayIngressTlArrayInput `pulumi:"tls"`
-	Vip pulumi.StringPtrInput      `pulumi:"vip"`
+	// gateway vip.
+	Vip pulumi.StringPtrInput `pulumi:"vip"`
 }
 
 func (GatewayIngressArgs) ElementType() reflect.Type {
@@ -537,11 +548,11 @@ func (i GatewayIngressArgs) ToGatewayIngressPtrOutputWithContext(ctx context.Con
 // GatewayIngressPtrInput is an input type that accepts GatewayIngressArgs, GatewayIngressPtr and GatewayIngressPtrOutput values.
 // You can construct a concrete instance of `GatewayIngressPtrInput` via:
 //
-//          GatewayIngressArgs{...}
+//	        GatewayIngressArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type GatewayIngressPtrInput interface {
 	pulumi.Input
 
@@ -601,6 +612,7 @@ func (o GatewayIngressOutput) ClbId() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v GatewayIngress) *string { return v.ClbId }).(pulumi.StringPtrOutput)
 }
 
+// creation time.
 func (o GatewayIngressOutput) CreateTime() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v GatewayIngress) *string { return v.CreateTime }).(pulumi.StringPtrOutput)
 }
@@ -635,6 +647,7 @@ func (o GatewayIngressOutput) Tls() GatewayIngressTlArrayOutput {
 	return o.ApplyT(func(v GatewayIngress) []GatewayIngressTl { return v.Tls }).(GatewayIngressTlArrayOutput)
 }
 
+// gateway vip.
 func (o GatewayIngressOutput) Vip() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v GatewayIngress) *string { return v.Vip }).(pulumi.StringPtrOutput)
 }
@@ -683,6 +696,7 @@ func (o GatewayIngressPtrOutput) ClbId() pulumi.StringPtrOutput {
 	}).(pulumi.StringPtrOutput)
 }
 
+// creation time.
 func (o GatewayIngressPtrOutput) CreateTime() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *GatewayIngress) *string {
 		if v == nil {
@@ -752,6 +766,7 @@ func (o GatewayIngressPtrOutput) Tls() GatewayIngressTlArrayOutput {
 	}).(GatewayIngressTlArrayOutput)
 }
 
+// gateway vip.
 func (o GatewayIngressPtrOutput) Vip() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *GatewayIngress) *string {
 		if v == nil {
@@ -773,7 +788,7 @@ type GatewayIngressRule struct {
 // GatewayIngressRuleInput is an input type that accepts GatewayIngressRuleArgs and GatewayIngressRuleOutput values.
 // You can construct a concrete instance of `GatewayIngressRuleInput` via:
 //
-//          GatewayIngressRuleArgs{...}
+//	GatewayIngressRuleArgs{...}
 type GatewayIngressRuleInput interface {
 	pulumi.Input
 
@@ -805,7 +820,7 @@ func (i GatewayIngressRuleArgs) ToGatewayIngressRuleOutputWithContext(ctx contex
 // GatewayIngressRuleArrayInput is an input type that accepts GatewayIngressRuleArray and GatewayIngressRuleArrayOutput values.
 // You can construct a concrete instance of `GatewayIngressRuleArrayInput` via:
 //
-//          GatewayIngressRuleArray{ GatewayIngressRuleArgs{...} }
+//	GatewayIngressRuleArray{ GatewayIngressRuleArgs{...} }
 type GatewayIngressRuleArrayInput interface {
 	pulumi.Input
 
@@ -884,7 +899,7 @@ type GatewayIngressRuleHttp struct {
 // GatewayIngressRuleHttpInput is an input type that accepts GatewayIngressRuleHttpArgs and GatewayIngressRuleHttpOutput values.
 // You can construct a concrete instance of `GatewayIngressRuleHttpInput` via:
 //
-//          GatewayIngressRuleHttpArgs{...}
+//	GatewayIngressRuleHttpArgs{...}
 type GatewayIngressRuleHttpInput interface {
 	pulumi.Input
 
@@ -938,7 +953,7 @@ type GatewayIngressRuleHttpPath struct {
 // GatewayIngressRuleHttpPathInput is an input type that accepts GatewayIngressRuleHttpPathArgs and GatewayIngressRuleHttpPathOutput values.
 // You can construct a concrete instance of `GatewayIngressRuleHttpPathInput` via:
 //
-//          GatewayIngressRuleHttpPathArgs{...}
+//	GatewayIngressRuleHttpPathArgs{...}
 type GatewayIngressRuleHttpPathInput interface {
 	pulumi.Input
 
@@ -968,7 +983,7 @@ func (i GatewayIngressRuleHttpPathArgs) ToGatewayIngressRuleHttpPathOutputWithCo
 // GatewayIngressRuleHttpPathArrayInput is an input type that accepts GatewayIngressRuleHttpPathArray and GatewayIngressRuleHttpPathArrayOutput values.
 // You can construct a concrete instance of `GatewayIngressRuleHttpPathArrayInput` via:
 //
-//          GatewayIngressRuleHttpPathArray{ GatewayIngressRuleHttpPathArgs{...} }
+//	GatewayIngressRuleHttpPathArray{ GatewayIngressRuleHttpPathArgs{...} }
 type GatewayIngressRuleHttpPathArrayInput interface {
 	pulumi.Input
 
@@ -1044,7 +1059,7 @@ type GatewayIngressRuleHttpPathBackend struct {
 // GatewayIngressRuleHttpPathBackendInput is an input type that accepts GatewayIngressRuleHttpPathBackendArgs and GatewayIngressRuleHttpPathBackendOutput values.
 // You can construct a concrete instance of `GatewayIngressRuleHttpPathBackendInput` via:
 //
-//          GatewayIngressRuleHttpPathBackendArgs{...}
+//	GatewayIngressRuleHttpPathBackendArgs{...}
 type GatewayIngressRuleHttpPathBackendInput interface {
 	pulumi.Input
 
@@ -1107,7 +1122,7 @@ type GatewayIngressTl struct {
 // GatewayIngressTlInput is an input type that accepts GatewayIngressTlArgs and GatewayIngressTlOutput values.
 // You can construct a concrete instance of `GatewayIngressTlInput` via:
 //
-//          GatewayIngressTlArgs{...}
+//	GatewayIngressTlArgs{...}
 type GatewayIngressTlInput interface {
 	pulumi.Input
 
@@ -1139,7 +1154,7 @@ func (i GatewayIngressTlArgs) ToGatewayIngressTlOutputWithContext(ctx context.Co
 // GatewayIngressTlArrayInput is an input type that accepts GatewayIngressTlArray and GatewayIngressTlArrayOutput values.
 // You can construct a concrete instance of `GatewayIngressTlArrayInput` via:
 //
-//          GatewayIngressTlArray{ GatewayIngressTlArgs{...} }
+//	GatewayIngressTlArray{ GatewayIngressTlArgs{...} }
 type GatewayIngressTlArrayInput interface {
 	pulumi.Input
 
@@ -1230,7 +1245,7 @@ type ScaleRuleAutoscaler struct {
 // ScaleRuleAutoscalerInput is an input type that accepts ScaleRuleAutoscalerArgs and ScaleRuleAutoscalerOutput values.
 // You can construct a concrete instance of `ScaleRuleAutoscalerInput` via:
 //
-//          ScaleRuleAutoscalerArgs{...}
+//	ScaleRuleAutoscalerArgs{...}
 type ScaleRuleAutoscalerInput interface {
 	pulumi.Input
 
@@ -1278,11 +1293,11 @@ func (i ScaleRuleAutoscalerArgs) ToScaleRuleAutoscalerPtrOutputWithContext(ctx c
 // ScaleRuleAutoscalerPtrInput is an input type that accepts ScaleRuleAutoscalerArgs, ScaleRuleAutoscalerPtr and ScaleRuleAutoscalerPtrOutput values.
 // You can construct a concrete instance of `ScaleRuleAutoscalerPtrInput` via:
 //
-//          ScaleRuleAutoscalerArgs{...}
+//	        ScaleRuleAutoscalerArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type ScaleRuleAutoscalerPtrInput interface {
 	pulumi.Input
 
@@ -1479,7 +1494,7 @@ type ScaleRuleAutoscalerCronHorizontalAutoscaler struct {
 // ScaleRuleAutoscalerCronHorizontalAutoscalerInput is an input type that accepts ScaleRuleAutoscalerCronHorizontalAutoscalerArgs and ScaleRuleAutoscalerCronHorizontalAutoscalerOutput values.
 // You can construct a concrete instance of `ScaleRuleAutoscalerCronHorizontalAutoscalerInput` via:
 //
-//          ScaleRuleAutoscalerCronHorizontalAutoscalerArgs{...}
+//	ScaleRuleAutoscalerCronHorizontalAutoscalerArgs{...}
 type ScaleRuleAutoscalerCronHorizontalAutoscalerInput interface {
 	pulumi.Input
 
@@ -1515,7 +1530,7 @@ func (i ScaleRuleAutoscalerCronHorizontalAutoscalerArgs) ToScaleRuleAutoscalerCr
 // ScaleRuleAutoscalerCronHorizontalAutoscalerArrayInput is an input type that accepts ScaleRuleAutoscalerCronHorizontalAutoscalerArray and ScaleRuleAutoscalerCronHorizontalAutoscalerArrayOutput values.
 // You can construct a concrete instance of `ScaleRuleAutoscalerCronHorizontalAutoscalerArrayInput` via:
 //
-//          ScaleRuleAutoscalerCronHorizontalAutoscalerArray{ ScaleRuleAutoscalerCronHorizontalAutoscalerArgs{...} }
+//	ScaleRuleAutoscalerCronHorizontalAutoscalerArray{ ScaleRuleAutoscalerCronHorizontalAutoscalerArgs{...} }
 type ScaleRuleAutoscalerCronHorizontalAutoscalerArrayInput interface {
 	pulumi.Input
 
@@ -1608,7 +1623,7 @@ type ScaleRuleAutoscalerCronHorizontalAutoscalerSchedule struct {
 // ScaleRuleAutoscalerCronHorizontalAutoscalerScheduleInput is an input type that accepts ScaleRuleAutoscalerCronHorizontalAutoscalerScheduleArgs and ScaleRuleAutoscalerCronHorizontalAutoscalerScheduleOutput values.
 // You can construct a concrete instance of `ScaleRuleAutoscalerCronHorizontalAutoscalerScheduleInput` via:
 //
-//          ScaleRuleAutoscalerCronHorizontalAutoscalerScheduleArgs{...}
+//	ScaleRuleAutoscalerCronHorizontalAutoscalerScheduleArgs{...}
 type ScaleRuleAutoscalerCronHorizontalAutoscalerScheduleInput interface {
 	pulumi.Input
 
@@ -1638,7 +1653,7 @@ func (i ScaleRuleAutoscalerCronHorizontalAutoscalerScheduleArgs) ToScaleRuleAuto
 // ScaleRuleAutoscalerCronHorizontalAutoscalerScheduleArrayInput is an input type that accepts ScaleRuleAutoscalerCronHorizontalAutoscalerScheduleArray and ScaleRuleAutoscalerCronHorizontalAutoscalerScheduleArrayOutput values.
 // You can construct a concrete instance of `ScaleRuleAutoscalerCronHorizontalAutoscalerScheduleArrayInput` via:
 //
-//          ScaleRuleAutoscalerCronHorizontalAutoscalerScheduleArray{ ScaleRuleAutoscalerCronHorizontalAutoscalerScheduleArgs{...} }
+//	ScaleRuleAutoscalerCronHorizontalAutoscalerScheduleArray{ ScaleRuleAutoscalerCronHorizontalAutoscalerScheduleArgs{...} }
 type ScaleRuleAutoscalerCronHorizontalAutoscalerScheduleArrayInput interface {
 	pulumi.Input
 
@@ -1720,7 +1735,7 @@ type ScaleRuleAutoscalerHorizontalAutoscaler struct {
 // ScaleRuleAutoscalerHorizontalAutoscalerInput is an input type that accepts ScaleRuleAutoscalerHorizontalAutoscalerArgs and ScaleRuleAutoscalerHorizontalAutoscalerOutput values.
 // You can construct a concrete instance of `ScaleRuleAutoscalerHorizontalAutoscalerInput` via:
 //
-//          ScaleRuleAutoscalerHorizontalAutoscalerArgs{...}
+//	ScaleRuleAutoscalerHorizontalAutoscalerArgs{...}
 type ScaleRuleAutoscalerHorizontalAutoscalerInput interface {
 	pulumi.Input
 
@@ -1756,7 +1771,7 @@ func (i ScaleRuleAutoscalerHorizontalAutoscalerArgs) ToScaleRuleAutoscalerHorizo
 // ScaleRuleAutoscalerHorizontalAutoscalerArrayInput is an input type that accepts ScaleRuleAutoscalerHorizontalAutoscalerArray and ScaleRuleAutoscalerHorizontalAutoscalerArrayOutput values.
 // You can construct a concrete instance of `ScaleRuleAutoscalerHorizontalAutoscalerArrayInput` via:
 //
-//          ScaleRuleAutoscalerHorizontalAutoscalerArray{ ScaleRuleAutoscalerHorizontalAutoscalerArgs{...} }
+//	ScaleRuleAutoscalerHorizontalAutoscalerArray{ ScaleRuleAutoscalerHorizontalAutoscalerArgs{...} }
 type ScaleRuleAutoscalerHorizontalAutoscalerArrayInput interface {
 	pulumi.Input
 
@@ -1855,7 +1870,7 @@ type WorkloadDeployStrategyConf struct {
 // WorkloadDeployStrategyConfInput is an input type that accepts WorkloadDeployStrategyConfArgs and WorkloadDeployStrategyConfOutput values.
 // You can construct a concrete instance of `WorkloadDeployStrategyConfInput` via:
 //
-//          WorkloadDeployStrategyConfArgs{...}
+//	WorkloadDeployStrategyConfArgs{...}
 type WorkloadDeployStrategyConfInput interface {
 	pulumi.Input
 
@@ -1901,11 +1916,11 @@ func (i WorkloadDeployStrategyConfArgs) ToWorkloadDeployStrategyConfPtrOutputWit
 // WorkloadDeployStrategyConfPtrInput is an input type that accepts WorkloadDeployStrategyConfArgs, WorkloadDeployStrategyConfPtr and WorkloadDeployStrategyConfPtrOutput values.
 // You can construct a concrete instance of `WorkloadDeployStrategyConfPtrInput` via:
 //
-//          WorkloadDeployStrategyConfArgs{...}
+//	        WorkloadDeployStrategyConfArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type WorkloadDeployStrategyConfPtrInput interface {
 	pulumi.Input
 
@@ -2085,7 +2100,7 @@ type WorkloadEnvConf struct {
 // WorkloadEnvConfInput is an input type that accepts WorkloadEnvConfArgs and WorkloadEnvConfOutput values.
 // You can construct a concrete instance of `WorkloadEnvConfInput` via:
 //
-//          WorkloadEnvConfArgs{...}
+//	WorkloadEnvConfArgs{...}
 type WorkloadEnvConfInput interface {
 	pulumi.Input
 
@@ -2121,7 +2136,7 @@ func (i WorkloadEnvConfArgs) ToWorkloadEnvConfOutputWithContext(ctx context.Cont
 // WorkloadEnvConfArrayInput is an input type that accepts WorkloadEnvConfArray and WorkloadEnvConfArrayOutput values.
 // You can construct a concrete instance of `WorkloadEnvConfArrayInput` via:
 //
-//          WorkloadEnvConfArray{ WorkloadEnvConfArgs{...} }
+//	WorkloadEnvConfArray{ WorkloadEnvConfArgs{...} }
 type WorkloadEnvConfArrayInput interface {
 	pulumi.Input
 
@@ -2224,7 +2239,7 @@ type WorkloadLiveness struct {
 // WorkloadLivenessInput is an input type that accepts WorkloadLivenessArgs and WorkloadLivenessOutput values.
 // You can construct a concrete instance of `WorkloadLivenessInput` via:
 //
-//          WorkloadLivenessArgs{...}
+//	WorkloadLivenessArgs{...}
 type WorkloadLivenessInput interface {
 	pulumi.Input
 
@@ -2274,11 +2289,11 @@ func (i WorkloadLivenessArgs) ToWorkloadLivenessPtrOutputWithContext(ctx context
 // WorkloadLivenessPtrInput is an input type that accepts WorkloadLivenessArgs, WorkloadLivenessPtr and WorkloadLivenessPtrOutput values.
 // You can construct a concrete instance of `WorkloadLivenessPtrInput` via:
 //
-//          WorkloadLivenessArgs{...}
+//	        WorkloadLivenessArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type WorkloadLivenessPtrInput interface {
 	pulumi.Input
 
@@ -2494,7 +2509,7 @@ type WorkloadReadiness struct {
 // WorkloadReadinessInput is an input type that accepts WorkloadReadinessArgs and WorkloadReadinessOutput values.
 // You can construct a concrete instance of `WorkloadReadinessInput` via:
 //
-//          WorkloadReadinessArgs{...}
+//	WorkloadReadinessArgs{...}
 type WorkloadReadinessInput interface {
 	pulumi.Input
 
@@ -2544,11 +2559,11 @@ func (i WorkloadReadinessArgs) ToWorkloadReadinessPtrOutputWithContext(ctx conte
 // WorkloadReadinessPtrInput is an input type that accepts WorkloadReadinessArgs, WorkloadReadinessPtr and WorkloadReadinessPtrOutput values.
 // You can construct a concrete instance of `WorkloadReadinessPtrInput` via:
 //
-//          WorkloadReadinessArgs{...}
+//	        WorkloadReadinessArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type WorkloadReadinessPtrInput interface {
 	pulumi.Input
 
@@ -2764,7 +2779,7 @@ type WorkloadStartupProbe struct {
 // WorkloadStartupProbeInput is an input type that accepts WorkloadStartupProbeArgs and WorkloadStartupProbeOutput values.
 // You can construct a concrete instance of `WorkloadStartupProbeInput` via:
 //
-//          WorkloadStartupProbeArgs{...}
+//	WorkloadStartupProbeArgs{...}
 type WorkloadStartupProbeInput interface {
 	pulumi.Input
 
@@ -2814,11 +2829,11 @@ func (i WorkloadStartupProbeArgs) ToWorkloadStartupProbePtrOutputWithContext(ctx
 // WorkloadStartupProbePtrInput is an input type that accepts WorkloadStartupProbeArgs, WorkloadStartupProbePtr and WorkloadStartupProbePtrOutput values.
 // You can construct a concrete instance of `WorkloadStartupProbePtrInput` via:
 //
-//          WorkloadStartupProbeArgs{...}
+//	        WorkloadStartupProbeArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type WorkloadStartupProbePtrInput interface {
 	pulumi.Input
 
@@ -3024,7 +3039,7 @@ type WorkloadStorageConf struct {
 // WorkloadStorageConfInput is an input type that accepts WorkloadStorageConfArgs and WorkloadStorageConfOutput values.
 // You can construct a concrete instance of `WorkloadStorageConfInput` via:
 //
-//          WorkloadStorageConfArgs{...}
+//	WorkloadStorageConfArgs{...}
 type WorkloadStorageConfInput interface {
 	pulumi.Input
 
@@ -3056,7 +3071,7 @@ func (i WorkloadStorageConfArgs) ToWorkloadStorageConfOutputWithContext(ctx cont
 // WorkloadStorageConfArrayInput is an input type that accepts WorkloadStorageConfArray and WorkloadStorageConfArrayOutput values.
 // You can construct a concrete instance of `WorkloadStorageConfArrayInput` via:
 //
-//          WorkloadStorageConfArray{ WorkloadStorageConfArgs{...} }
+//	WorkloadStorageConfArray{ WorkloadStorageConfArgs{...} }
 type WorkloadStorageConfArrayInput interface {
 	pulumi.Input
 
@@ -3137,7 +3152,7 @@ type WorkloadStorageMountConf struct {
 // WorkloadStorageMountConfInput is an input type that accepts WorkloadStorageMountConfArgs and WorkloadStorageMountConfOutput values.
 // You can construct a concrete instance of `WorkloadStorageMountConfInput` via:
 //
-//          WorkloadStorageMountConfArgs{...}
+//	WorkloadStorageMountConfArgs{...}
 type WorkloadStorageMountConfInput interface {
 	pulumi.Input
 
@@ -3167,7 +3182,7 @@ func (i WorkloadStorageMountConfArgs) ToWorkloadStorageMountConfOutputWithContex
 // WorkloadStorageMountConfArrayInput is an input type that accepts WorkloadStorageMountConfArray and WorkloadStorageMountConfArrayOutput values.
 // You can construct a concrete instance of `WorkloadStorageMountConfArrayInput` via:
 //
-//          WorkloadStorageMountConfArray{ WorkloadStorageMountConfArgs{...} }
+//	WorkloadStorageMountConfArray{ WorkloadStorageMountConfArgs{...} }
 type WorkloadStorageMountConfArrayInput interface {
 	pulumi.Input
 

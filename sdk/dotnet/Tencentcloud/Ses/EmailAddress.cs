@@ -15,34 +15,35 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ses
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var emailAddress = new Tencentcloud.Ses.EmailAddress("emailAddress", new()
     ///     {
-    ///         var emailAddress = new Tencentcloud.Ses.EmailAddress("emailAddress", new Tencentcloud.Ses.EmailAddressArgs
-    ///         {
-    ///             EmailAddress = "aaa@iac-tf.cloud",
-    ///             EmailSenderName = "aaa",
-    ///         });
-    ///     }
+    ///         SesEmailAddress = "aaa@iac-tf.cloud",
+    ///         EmailSenderName = "aaa",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// ses email_address can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Ses/emailAddress:EmailAddress email_address aaa@iac-tf.cloud
+    /// $ pulumi import tencentcloud:Ses/emailAddress:EmailAddress email_address aaa@iac-tf.cloud
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Ses/emailAddress:EmailAddress")]
-    public partial class EmailAddress : Pulumi.CustomResource
+    public partial class EmailAddress : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Your sender address. (You can create up to 10 sender addresses for each domain.).
@@ -101,7 +102,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ses
         }
     }
 
-    public sealed class EmailAddressArgs : Pulumi.ResourceArgs
+    public sealed class EmailAddressArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Your sender address. (You can create up to 10 sender addresses for each domain.).
@@ -118,9 +119,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ses
         public EmailAddressArgs()
         {
         }
+        public static new EmailAddressArgs Empty => new EmailAddressArgs();
     }
 
-    public sealed class EmailAddressState : Pulumi.ResourceArgs
+    public sealed class EmailAddressState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Your sender address. (You can create up to 10 sender addresses for each domain.).
@@ -137,5 +139,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ses
         public EmailAddressState()
         {
         }
+        public static new EmailAddressState Empty => new EmailAddressState();
     }
 }

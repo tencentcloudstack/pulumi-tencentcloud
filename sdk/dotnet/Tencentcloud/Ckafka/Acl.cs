@@ -14,41 +14,43 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka
     /// Provides a resource to create a Ckafka Acl.
     /// 
     /// ## Example Usage
+    /// 
     /// ### Ckafka Acl
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var foo = new Tencentcloud.Ckafka.Acl("foo", new()
     ///     {
-    ///         var foo = new Tencentcloud.Ckafka.Acl("foo", new Tencentcloud.Ckafka.AclArgs
-    ///         {
-    ///             InstanceId = "ckafka-f9ife4zz",
-    ///             ResourceType = "TOPIC",
-    ///             ResourceName = "topic-tf-test",
-    ///             OperationType = "WRITE",
-    ///             PermissionType = "ALLOW",
-    ///             Host = "*",
-    ///             Principal = tencentcloud_ckafka_user.Foo.Account_name,
-    ///         });
-    ///     }
+    ///         InstanceId = "ckafka-f9ife4zz",
+    ///         ResourceType = "TOPIC",
+    ///         ResourceName = "topic-tf-test",
+    ///         OperationType = "WRITE",
+    ///         PermissionType = "ALLOW",
+    ///         Host = "*",
+    ///         Principal = tencentcloud_ckafka_user.Foo.Account_name,
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// Ckafka acl can be imported using the instance_id#permission_type#principal#host#operation_type#resource_type#resource_name, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Ckafka/acl:Acl foo ckafka-f9ife4zz#ALLOW#test#*#WRITE#TOPIC#topic-tf-test
+    /// $ pulumi import tencentcloud:Ckafka/acl:Acl foo ckafka-f9ife4zz#ALLOW#test#*#WRITE#TOPIC#topic-tf-test
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Ckafka/acl:Acl")]
-    public partial class Acl : Pulumi.CustomResource
+    public partial class Acl : global::Pulumi.CustomResource
     {
         /// <summary>
         /// The default is *, which means that any host can access it. Support filling in IP or network segment, and support `;`separation.
@@ -137,7 +139,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka
         }
     }
 
-    public sealed class AclArgs : Pulumi.ResourceArgs
+    public sealed class AclArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// The default is *, which means that any host can access it. Support filling in IP or network segment, and support `;`separation.
@@ -184,9 +186,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka
         public AclArgs()
         {
         }
+        public static new AclArgs Empty => new AclArgs();
     }
 
-    public sealed class AclState : Pulumi.ResourceArgs
+    public sealed class AclState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// The default is *, which means that any host can access it. Support filling in IP or network segment, and support `;`separation.
@@ -233,5 +236,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka
         public AclState()
         {
         }
+        public static new AclState Empty => new AclState();
     }
 }

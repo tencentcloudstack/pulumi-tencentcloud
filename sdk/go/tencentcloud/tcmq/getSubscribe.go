@@ -8,11 +8,12 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Use this data source to query detailed information of tcmq subscribe
 func LookupSubscribe(ctx *pulumi.Context, args *LookupSubscribeArgs, opts ...pulumi.InvokeOption) (*LookupSubscribeResult, error) {
-	opts = pkgInvokeDefaultOpts(opts)
+	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv LookupSubscribeResult
 	err := ctx.Invoke("tencentcloud:Tcmq/getSubscribe:getSubscribe", args, &rv, opts...)
 	if err != nil {

@@ -15,82 +15,78 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Scf
         /// <summary>
         /// Use this data source to query SCF function logs.
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var fooFunction = new Tencentcloud.Scf.Function("fooFunction", new()
         ///     {
-        ///         var fooFunction = new Tencentcloud.Scf.Function("fooFunction", new Tencentcloud.Scf.FunctionArgs
-        ///         {
-        ///             Handler = "main.do_it",
-        ///             Runtime = "Python3.6",
-        ///             CosBucketName = "scf-code-1234567890",
-        ///             CosObjectName = "code.zip",
-        ///             CosBucketRegion = "ap-guangzhou",
-        ///         });
-        ///         var fooLogs = Tencentcloud.Scf.GetLogs.Invoke(new Tencentcloud.Scf.GetLogsInvokeArgs
-        ///         {
-        ///             FunctionName = fooFunction.Name,
-        ///         });
-        ///     }
+        ///         Handler = "main.do_it",
+        ///         Runtime = "Python3.6",
+        ///         CosBucketName = "scf-code-1234567890",
+        ///         CosObjectName = "code.zip",
+        ///         CosBucketRegion = "ap-guangzhou",
+        ///     });
         /// 
-        /// }
+        ///     var fooLogs = Tencentcloud.Scf.GetLogs.Invoke(new()
+        ///     {
+        ///         FunctionName = fooFunction.Name,
+        ///     });
+        /// 
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetLogsResult> InvokeAsync(GetLogsArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetLogsResult>("tencentcloud:Scf/getLogs:getLogs", args ?? new GetLogsArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetLogsResult>("tencentcloud:Scf/getLogs:getLogs", args ?? new GetLogsArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query SCF function logs.
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var fooFunction = new Tencentcloud.Scf.Function("fooFunction", new()
         ///     {
-        ///         var fooFunction = new Tencentcloud.Scf.Function("fooFunction", new Tencentcloud.Scf.FunctionArgs
-        ///         {
-        ///             Handler = "main.do_it",
-        ///             Runtime = "Python3.6",
-        ///             CosBucketName = "scf-code-1234567890",
-        ///             CosObjectName = "code.zip",
-        ///             CosBucketRegion = "ap-guangzhou",
-        ///         });
-        ///         var fooLogs = Tencentcloud.Scf.GetLogs.Invoke(new Tencentcloud.Scf.GetLogsInvokeArgs
-        ///         {
-        ///             FunctionName = fooFunction.Name,
-        ///         });
-        ///     }
+        ///         Handler = "main.do_it",
+        ///         Runtime = "Python3.6",
+        ///         CosBucketName = "scf-code-1234567890",
+        ///         CosObjectName = "code.zip",
+        ///         CosBucketRegion = "ap-guangzhou",
+        ///     });
         /// 
-        /// }
+        ///     var fooLogs = Tencentcloud.Scf.GetLogs.Invoke(new()
+        ///     {
+        ///         FunctionName = fooFunction.Name,
+        ///     });
+        /// 
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetLogsResult> Invoke(GetLogsInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetLogsResult>("tencentcloud:Scf/getLogs:getLogs", args ?? new GetLogsInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetLogsResult>("tencentcloud:Scf/getLogs:getLogs", args ?? new GetLogsInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetLogsArgs : Pulumi.InvokeArgs
+    public sealed class GetLogsArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// The end time of the query, the format is `2017-05-16 20:00:00`, which can only be within one day from `start_time`.
@@ -161,9 +157,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Scf
         public GetLogsArgs()
         {
         }
+        public static new GetLogsArgs Empty => new GetLogsArgs();
     }
 
-    public sealed class GetLogsInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetLogsInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// The end time of the query, the format is `2017-05-16 20:00:00`, which can only be within one day from `start_time`.
@@ -234,6 +231,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Scf
         public GetLogsInvokeArgs()
         {
         }
+        public static new GetLogsInvokeArgs Empty => new GetLogsInvokeArgs();
     }
 
 

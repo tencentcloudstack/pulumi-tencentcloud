@@ -8,67 +8,74 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Use this data source to query detailed information of dbbrain topSpaceTables
 //
 // ## Example Usage
+//
 // ### Sort by PhysicalFileSize
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"fmt"
 //
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Dbbrain"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dbbrain"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dbbrain"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Dbbrain.GetTopSpaceTables(ctx, &dbbrain.GetTopSpaceTablesArgs{
-// 			InstanceId: fmt.Sprintf("%v%v", "%", "s"),
-// 			Product:    pulumi.StringRef("mysql"),
-// 			SortBy:     pulumi.StringRef("PhysicalFileSize"),
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Dbbrain.GetTopSpaceTables(ctx, &dbbrain.GetTopSpaceTablesArgs{
+//				InstanceId: "%s",
+//				Product:    pulumi.StringRef("mysql"),
+//				SortBy:     pulumi.StringRef("PhysicalFileSize"),
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
+//
 // ### Sort by TotalLength
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"fmt"
 //
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Dbbrain"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dbbrain"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dbbrain"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Dbbrain.GetTopSpaceTables(ctx, &dbbrain.GetTopSpaceTablesArgs{
-// 			InstanceId: fmt.Sprintf("%v%v", "%", "s"),
-// 			Product:    pulumi.StringRef("mysql"),
-// 			SortBy:     pulumi.StringRef("PhysicalFileSize"),
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Dbbrain.GetTopSpaceTables(ctx, &dbbrain.GetTopSpaceTablesArgs{
+//				InstanceId: "%s",
+//				Product:    pulumi.StringRef("mysql"),
+//				SortBy:     pulumi.StringRef("PhysicalFileSize"),
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 func GetTopSpaceTables(ctx *pulumi.Context, args *GetTopSpaceTablesArgs, opts ...pulumi.InvokeOption) (*GetTopSpaceTablesResult, error) {
-	opts = pkgInvokeDefaultOpts(opts)
+	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetTopSpaceTablesResult
 	err := ctx.Invoke("tencentcloud:Dbbrain/getTopSpaceTables:getTopSpaceTables", args, &rv, opts...)
 	if err != nil {

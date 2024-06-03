@@ -15,58 +15,52 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Css
         /// <summary>
         /// Use this data source to query detailed information of css watermarks
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
-        ///     {
-        ///         var watermarks = Output.Create(Tencentcloud.Css.GetWatermarks.InvokeAsync());
-        ///     }
+        ///     var watermarks = Tencentcloud.Css.GetWatermarks.Invoke();
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetWatermarksResult> InvokeAsync(GetWatermarksArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetWatermarksResult>("tencentcloud:Css/getWatermarks:getWatermarks", args ?? new GetWatermarksArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetWatermarksResult>("tencentcloud:Css/getWatermarks:getWatermarks", args ?? new GetWatermarksArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of css watermarks
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
-        ///     {
-        ///         var watermarks = Output.Create(Tencentcloud.Css.GetWatermarks.InvokeAsync());
-        ///     }
+        ///     var watermarks = Tencentcloud.Css.GetWatermarks.Invoke();
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetWatermarksResult> Invoke(GetWatermarksInvokeArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetWatermarksResult>("tencentcloud:Css/getWatermarks:getWatermarks", args ?? new GetWatermarksInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetWatermarksResult>("tencentcloud:Css/getWatermarks:getWatermarks", args ?? new GetWatermarksInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetWatermarksArgs : Pulumi.InvokeArgs
+    public sealed class GetWatermarksArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Used to save results.
@@ -77,9 +71,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Css
         public GetWatermarksArgs()
         {
         }
+        public static new GetWatermarksArgs Empty => new GetWatermarksArgs();
     }
 
-    public sealed class GetWatermarksInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetWatermarksInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Used to save results.
@@ -90,6 +85,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Css
         public GetWatermarksInvokeArgs()
         {
         }
+        public static new GetWatermarksInvokeArgs Empty => new GetWatermarksInvokeArgs();
     }
 
 

@@ -15,68 +15,62 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ses
         /// <summary>
         /// Use this data source to query detailed information of ses send_tasks
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var sendTasks = Tencentcloud.Ses.GetSendTasks.Invoke(new()
         ///     {
-        ///         var sendTasks = Output.Create(Tencentcloud.Ses.GetSendTasks.InvokeAsync(new Tencentcloud.Ses.GetSendTasksArgs
-        ///         {
-        ///             ReceiverId = 1063742,
-        ///             Status = 10,
-        ///             TaskType = 1,
-        ///         }));
-        ///     }
+        ///         ReceiverId = 1063742,
+        ///         Status = 10,
+        ///         TaskType = 1,
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetSendTasksResult> InvokeAsync(GetSendTasksArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetSendTasksResult>("tencentcloud:Ses/getSendTasks:getSendTasks", args ?? new GetSendTasksArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetSendTasksResult>("tencentcloud:Ses/getSendTasks:getSendTasks", args ?? new GetSendTasksArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of ses send_tasks
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var sendTasks = Tencentcloud.Ses.GetSendTasks.Invoke(new()
         ///     {
-        ///         var sendTasks = Output.Create(Tencentcloud.Ses.GetSendTasks.InvokeAsync(new Tencentcloud.Ses.GetSendTasksArgs
-        ///         {
-        ///             ReceiverId = 1063742,
-        ///             Status = 10,
-        ///             TaskType = 1,
-        ///         }));
-        ///     }
+        ///         ReceiverId = 1063742,
+        ///         Status = 10,
+        ///         TaskType = 1,
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetSendTasksResult> Invoke(GetSendTasksInvokeArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetSendTasksResult>("tencentcloud:Ses/getSendTasks:getSendTasks", args ?? new GetSendTasksInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetSendTasksResult>("tencentcloud:Ses/getSendTasks:getSendTasks", args ?? new GetSendTasksInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetSendTasksArgs : Pulumi.InvokeArgs
+    public sealed class GetSendTasksArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Recipient group ID.
@@ -105,9 +99,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ses
         public GetSendTasksArgs()
         {
         }
+        public static new GetSendTasksArgs Empty => new GetSendTasksArgs();
     }
 
-    public sealed class GetSendTasksInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetSendTasksInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Recipient group ID.
@@ -136,6 +131,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ses
         public GetSendTasksInvokeArgs()
         {
         }
+        public static new GetSendTasksInvokeArgs Empty => new GetSendTasksInvokeArgs();
     }
 
 

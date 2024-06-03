@@ -9,21 +9,20 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const recordType = pulumi.output(tencentcloud.Dnspod.getRecordType({
+ * const recordType = tencentcloud.Dnspod.getRecordType({
  *     domainGrade: "DP_FREE",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getRecordType(args: GetRecordTypeArgs, opts?: pulumi.InvokeOptions): Promise<GetRecordTypeResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Dnspod/getRecordType:getRecordType", {
         "domainGrade": args.domainGrade,
         "resultOutputFile": args.resultOutputFile,
@@ -59,9 +58,24 @@ export interface GetRecordTypeResult {
      */
     readonly typeLists: string[];
 }
-
+/**
+ * Use this data source to query detailed information of dnspod recordType
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const recordType = tencentcloud.Dnspod.getRecordType({
+ *     domainGrade: "DP_FREE",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getRecordTypeOutput(args: GetRecordTypeOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetRecordTypeResult> {
-    return pulumi.output(args).apply(a => getRecordType(a, opts))
+    return pulumi.output(args).apply((a: any) => getRecordType(a, opts))
 }
 
 /**

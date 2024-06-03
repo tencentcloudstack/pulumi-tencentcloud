@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cvm.Inputs
 {
 
-    public sealed class LaunchTemplateVersionDataDiskArgs : Pulumi.ResourceArgs
+    public sealed class LaunchTemplateVersionDataDiskArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// ID of the dedicated cluster to which the instance belongs.
@@ -70,5 +70,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cvm.Inputs
         public LaunchTemplateVersionDataDiskArgs()
         {
         }
+        public static new LaunchTemplateVersionDataDiskArgs Empty => new LaunchTemplateVersionDataDiskArgs();
     }
 }

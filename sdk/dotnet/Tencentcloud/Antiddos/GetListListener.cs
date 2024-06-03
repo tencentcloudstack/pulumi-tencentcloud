@@ -15,58 +15,52 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Antiddos
         /// <summary>
         /// Use this data source to query detailed information of antiddos list_listener
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
-        ///     {
-        ///         var listListener = Output.Create(Tencentcloud.Antiddos.GetListListener.InvokeAsync());
-        ///     }
+        ///     var listListener = Tencentcloud.Antiddos.GetListListener.Invoke();
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetListListenerResult> InvokeAsync(GetListListenerArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetListListenerResult>("tencentcloud:Antiddos/getListListener:getListListener", args ?? new GetListListenerArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetListListenerResult>("tencentcloud:Antiddos/getListListener:getListListener", args ?? new GetListListenerArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of antiddos list_listener
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
-        ///     {
-        ///         var listListener = Output.Create(Tencentcloud.Antiddos.GetListListener.InvokeAsync());
-        ///     }
+        ///     var listListener = Tencentcloud.Antiddos.GetListListener.Invoke();
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetListListenerResult> Invoke(GetListListenerInvokeArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetListListenerResult>("tencentcloud:Antiddos/getListListener:getListListener", args ?? new GetListListenerInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetListListenerResult>("tencentcloud:Antiddos/getListListener:getListListener", args ?? new GetListListenerInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetListListenerArgs : Pulumi.InvokeArgs
+    public sealed class GetListListenerArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Used to save results.
@@ -77,9 +71,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Antiddos
         public GetListListenerArgs()
         {
         }
+        public static new GetListListenerArgs Empty => new GetListListenerArgs();
     }
 
-    public sealed class GetListListenerInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetListListenerInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Used to save results.
@@ -90,6 +85,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Antiddos
         public GetListListenerInvokeArgs()
         {
         }
+        public static new GetListListenerInvokeArgs Empty => new GetListListenerInvokeArgs();
     }
 
 

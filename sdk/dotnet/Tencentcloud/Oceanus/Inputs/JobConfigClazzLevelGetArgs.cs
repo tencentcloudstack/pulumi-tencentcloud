@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Oceanus.Inputs
 {
 
-    public sealed class JobConfigClazzLevelGetArgs : Pulumi.ResourceArgs
+    public sealed class JobConfigClazzLevelGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Java class full pathNote: This field may return null, indicating that no valid value can be obtained.
@@ -28,5 +28,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Oceanus.Inputs
         public JobConfigClazzLevelGetArgs()
         {
         }
+        public static new JobConfigClazzLevelGetArgs Empty => new JobConfigClazzLevelGetArgs();
     }
 }

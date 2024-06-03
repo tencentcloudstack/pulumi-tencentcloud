@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,11 +11,12 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const bucketInventory = new tencentcloud.Cos.BucketInventory("bucket_inventory", {
+ * const bucketInventory = new tencentcloud.cos.BucketInventory("bucketInventory", {
  *     bucket: "keep-test-xxxxxx",
  *     destination: {
  *         accountId: "",
@@ -40,13 +42,14 @@ import * as utilities from "../utilities";
  *     },
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * cos bucket_inventory can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Cos/bucketInventory:BucketInventory bucket_inventory bucket_inventory_id
+ * $ pulumi import tencentcloud:Cos/bucketInventory:BucketInventory bucket_inventory bucket_inventory_id
  * ```
  */
 export class BucketInventory extends pulumi.CustomResource {

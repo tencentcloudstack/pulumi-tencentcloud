@@ -9,11 +9,12 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = new tencentcloud.Vpc.BandwidthPackage("example", {
+ * const example = new tencentcloud.vpc.BandwidthPackage("example", {
  *     bandwidthPackageName: "tf-example",
  *     chargeType: "TOP5_POSTPAID_BY_MONTH",
  *     networkType: "BGP",
@@ -22,13 +23,16 @@ import * as utilities from "../utilities";
  *     },
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
+ *
  * ### PrePaid Bandwidth Package
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const bandwidthPackage = new tencentcloud.Vpc.BandwidthPackage("bandwidth_package", {
+ * const bandwidthPackage = new tencentcloud.vpc.BandwidthPackage("bandwidthPackage", {
  *     bandwidthPackageName: "test-001",
  *     chargeType: "FIXED_PREPAID_BY_MONTH",
  *     internetMaxBandwidth: 100,
@@ -39,13 +43,16 @@ import * as utilities from "../utilities";
  *     timeSpan: 3,
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
+ *
  * ### Bandwidth Package With Egress
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = new tencentcloud.Vpc.BandwidthPackage("example", {
+ * const example = new tencentcloud.vpc.BandwidthPackage("example", {
  *     bandwidthPackageName: "tf-example",
  *     chargeType: "ENHANCED95_POSTPAID_BY_MONTH",
  *     egress: "center_egress2",
@@ -56,13 +63,14 @@ import * as utilities from "../utilities";
  *     },
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * vpc bandwidth_package can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Vpc/bandwidthPackage:BandwidthPackage bandwidth_package bandwidthPackage_id
+ * $ pulumi import tencentcloud:Vpc/bandwidthPackage:BandwidthPackage bandwidth_package bandwidthPackage_id
  * ```
  */
 export class BandwidthPackage extends pulumi.CustomResource {

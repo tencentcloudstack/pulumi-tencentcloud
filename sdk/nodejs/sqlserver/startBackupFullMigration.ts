@@ -9,15 +9,17 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const startBackupFullMigration = new tencentcloud.Sqlserver.StartBackupFullMigration("start_backup_full_migration", {
+ * const startBackupFullMigration = new tencentcloud.sqlserver.StartBackupFullMigration("startBackupFullMigration", {
  *     backupMigrationId: "mssql-backup-migration-kpl74n9l",
  *     instanceId: "mssql-i1z41iwd",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export class StartBackupFullMigration extends pulumi.CustomResource {
     /**

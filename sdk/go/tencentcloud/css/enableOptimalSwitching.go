@@ -7,8 +7,9 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a css enableOptimalSwitching
@@ -17,35 +18,40 @@ import (
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Css"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Css"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Css.NewEnableOptimalSwitching(ctx, "enableOptimalSwitching", &Css.EnableOptimalSwitchingArgs{
-// 			EnableSwitch:  pulumi.Int(1),
-// 			HostGroupName: pulumi.String("test-group"),
-// 			StreamName:    pulumi.String("1308919341_test"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Css.NewEnableOptimalSwitching(ctx, "enableOptimalSwitching", &Css.EnableOptimalSwitchingArgs{
+//				EnableSwitch:  pulumi.Int(1),
+//				HostGroupName: pulumi.String("test-group"),
+//				StreamName:    pulumi.String("1308919341_test"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // css domain can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Css/enableOptimalSwitching:EnableOptimalSwitching enable_optimal_switching streamName
+// $ pulumi import tencentcloud:Css/enableOptimalSwitching:EnableOptimalSwitching enable_optimal_switching streamName
 // ```
 type EnableOptimalSwitching struct {
 	pulumi.CustomResourceState
@@ -68,7 +74,7 @@ func NewEnableOptimalSwitching(ctx *pulumi.Context,
 	if args.StreamName == nil {
 		return nil, errors.New("invalid value for required argument 'StreamName'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource EnableOptimalSwitching
 	err := ctx.RegisterResource("tencentcloud:Css/enableOptimalSwitching:EnableOptimalSwitching", name, args, &resource, opts...)
 	if err != nil {
@@ -157,7 +163,7 @@ func (i *EnableOptimalSwitching) ToEnableOptimalSwitchingOutputWithContext(ctx c
 // EnableOptimalSwitchingArrayInput is an input type that accepts EnableOptimalSwitchingArray and EnableOptimalSwitchingArrayOutput values.
 // You can construct a concrete instance of `EnableOptimalSwitchingArrayInput` via:
 //
-//          EnableOptimalSwitchingArray{ EnableOptimalSwitchingArgs{...} }
+//	EnableOptimalSwitchingArray{ EnableOptimalSwitchingArgs{...} }
 type EnableOptimalSwitchingArrayInput interface {
 	pulumi.Input
 
@@ -182,7 +188,7 @@ func (i EnableOptimalSwitchingArray) ToEnableOptimalSwitchingArrayOutputWithCont
 // EnableOptimalSwitchingMapInput is an input type that accepts EnableOptimalSwitchingMap and EnableOptimalSwitchingMapOutput values.
 // You can construct a concrete instance of `EnableOptimalSwitchingMapInput` via:
 //
-//          EnableOptimalSwitchingMap{ "key": EnableOptimalSwitchingArgs{...} }
+//	EnableOptimalSwitchingMap{ "key": EnableOptimalSwitchingArgs{...} }
 type EnableOptimalSwitchingMapInput interface {
 	pulumi.Input
 

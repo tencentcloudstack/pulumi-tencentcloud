@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cvm.Inputs
 {
 
-    public sealed class LaunchTemplateVersionTagSpecificationArgs : Pulumi.ResourceArgs
+    public sealed class LaunchTemplateVersionTagSpecificationArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// The type of resource that the tag is bound to.
@@ -34,5 +34,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cvm.Inputs
         public LaunchTemplateVersionTagSpecificationArgs()
         {
         }
+        public static new LaunchTemplateVersionTagSpecificationArgs Empty => new LaunchTemplateVersionTagSpecificationArgs();
     }
 }

@@ -11,10 +11,11 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const config = new pulumi.Config();
  * const availabilityZone = config.get("availabilityZone") || "ap-guangzhou-3";
@@ -29,7 +30,7 @@ import * as utilities from "../utilities";
  *     availabilityZone: availabilityZone,
  * });
  * const managedCluster = new tencentcloud.kubernetes.Cluster("managedCluster", {
- *     vpcId: vpc.then(vpc => vpc.instanceLists?[0]?.vpcId),
+ *     vpcId: vpc.then(vpc => vpc.instanceLists?.[0]?.vpcId),
  *     clusterCidr: "10.31.0.0/16",
  *     clusterMaxPodNum: 32,
  *     clusterName: "keep",
@@ -45,7 +46,7 @@ import * as utilities from "../utilities";
  *         internetChargeType: "TRAFFIC_POSTPAID_BY_HOUR",
  *         internetMaxBandwidthOut: 100,
  *         publicIpAssigned: true,
- *         subnetId: vpc.then(vpc => vpc.instanceLists?[0]?.subnetId),
+ *         subnetId: vpc.then(vpc => vpc.instanceLists?.[0]?.subnetId),
  *         dataDisks: [{
  *             diskType: "CLOUD_PREMIUM",
  *             diskSize: 50,
@@ -64,12 +65,15 @@ import * as utilities from "../utilities";
  *     autoCreateDiscoveryAnonymousAuth: true,
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
+ *
  * ### Use the TKE default issuer and jwksUri
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const config = new pulumi.Config();
  * const availabilityZone = config.get("availabilityZone") || "ap-guangzhou-3";
@@ -84,7 +88,7 @@ import * as utilities from "../utilities";
  *     availabilityZone: availabilityZone,
  * });
  * const managedCluster = new tencentcloud.kubernetes.Cluster("managedCluster", {
- *     vpcId: vpc.then(vpc => vpc.instanceLists?[0]?.vpcId),
+ *     vpcId: vpc.then(vpc => vpc.instanceLists?.[0]?.vpcId),
  *     clusterCidr: "10.31.0.0/16",
  *     clusterMaxPodNum: 32,
  *     clusterName: "keep",
@@ -100,7 +104,7 @@ import * as utilities from "../utilities";
  *         internetChargeType: "TRAFFIC_POSTPAID_BY_HOUR",
  *         internetMaxBandwidthOut: 100,
  *         publicIpAssigned: true,
- *         subnetId: vpc.then(vpc => vpc.instanceLists?[0]?.subnetId),
+ *         subnetId: vpc.then(vpc => vpc.instanceLists?.[0]?.subnetId),
  *         dataDisks: [{
  *             diskType: "CLOUD_PREMIUM",
  *             diskSize: 50,
@@ -119,12 +123,15 @@ import * as utilities from "../utilities";
  *     useTkeDefault: true,
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
+ *
  * ### Use OIDC Config
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const testAuthAttach = new tencentcloud.kubernetes.AuthAttachment("testAuthAttach", {
  *     clusterId: tencentcloud_kubernetes_cluster.managed_cluster.id,
@@ -139,6 +146,7 @@ import * as utilities from "../utilities";
  * export const identityKey = oidcConfig.then(oidcConfig => oidcConfig.identityKey);
  * export const identityUrl = oidcConfig.then(oidcConfig => oidcConfig.identityUrl);
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export class AuthAttachment extends pulumi.CustomResource {
     /**

@@ -8,26 +8,28 @@ import * as utilities from "../utilities";
  * Provides a resource to create a sqlserver completeExpansion
  *
  * ## Example Usage
+ *
  * ### First, Create a basic SQL instance
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const zones = tencentcloud.Availability.getZonesByProduct({
  *     product: "sqlserver",
  * });
  * const vpc = new tencentcloud.vpc.Instance("vpc", {cidrBlock: "10.0.0.0/16"});
  * const subnet = new tencentcloud.subnet.Instance("subnet", {
- *     availabilityZone: zones.then(zones => zones.zones?[4]?.name),
+ *     availabilityZone: zones.then(zones => zones.zones?.[4]?.name),
  *     vpcId: vpc.id,
  *     cidrBlock: "10.0.0.0/16",
  *     isMulticast: false,
  * });
  * const securityGroup = new tencentcloud.security.Group("securityGroup", {description: "desc."});
  * const example = new tencentcloud.sqlserver.Instance("example", {
- *     availabilityZone: zones.then(zones => zones.zones?[4]?.name),
+ *     availabilityZone: zones.then(zones => zones.zones?.[4]?.name),
  *     chargeType: "POSTPAID_BY_HOUR",
  *     vpcId: vpc.id,
  *     subnetId: subnet.id,
@@ -47,11 +49,14 @@ import * as utilities from "../utilities";
  *     },
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
+ *
  * ### Expand the current instance, storage: 20->40, waitSwitch = 1
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const example = new tencentcloud.sqlserver.Instance("example", {
  *     availabilityZone: data.tencentcloud_availability_zones_by_product.zones.zones[4].name,
@@ -75,14 +80,18 @@ import * as utilities from "../utilities";
  *     },
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
+ *
  * ### Complete the expansion task immediately
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const example = new tencentcloud.sqlserver.CompleteExpansion("example", {instanceId: tencentcloud_sqlserver_instance.example.id});
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export class CompleteExpansion extends pulumi.CustomResource {
     /**

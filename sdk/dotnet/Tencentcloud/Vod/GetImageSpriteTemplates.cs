@@ -15,92 +15,88 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vod
         /// <summary>
         /// Use this data source to query detailed information of VOD image sprite templates.
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var fooImageSpriteTemplate = new Tencentcloud.Vod.ImageSpriteTemplate("fooImageSpriteTemplate", new()
         ///     {
-        ///         var fooImageSpriteTemplate = new Tencentcloud.Vod.ImageSpriteTemplate("fooImageSpriteTemplate", new Tencentcloud.Vod.ImageSpriteTemplateArgs
-        ///         {
-        ///             SampleType = "Percent",
-        ///             SampleInterval = 10,
-        ///             RowCount = 3,
-        ///             ColumnCount = 3,
-        ///             Comment = "test",
-        ///             FillType = "stretch",
-        ///             Width = 128,
-        ///             Height = 128,
-        ///             ResolutionAdaptive = false,
-        ///         });
-        ///         var fooImageSpriteTemplates = Tencentcloud.Vod.GetImageSpriteTemplates.Invoke(new Tencentcloud.Vod.GetImageSpriteTemplatesInvokeArgs
-        ///         {
-        ///             Type = "Custom",
-        ///             Definition = fooImageSpriteTemplate.Id,
-        ///         });
-        ///     }
+        ///         SampleType = "Percent",
+        ///         SampleInterval = 10,
+        ///         RowCount = 3,
+        ///         ColumnCount = 3,
+        ///         Comment = "test",
+        ///         FillType = "stretch",
+        ///         Width = 128,
+        ///         Height = 128,
+        ///         ResolutionAdaptive = false,
+        ///     });
         /// 
-        /// }
+        ///     var fooImageSpriteTemplates = Tencentcloud.Vod.GetImageSpriteTemplates.Invoke(new()
+        ///     {
+        ///         Type = "Custom",
+        ///         Definition = fooImageSpriteTemplate.Id,
+        ///     });
+        /// 
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetImageSpriteTemplatesResult> InvokeAsync(GetImageSpriteTemplatesArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetImageSpriteTemplatesResult>("tencentcloud:Vod/getImageSpriteTemplates:getImageSpriteTemplates", args ?? new GetImageSpriteTemplatesArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetImageSpriteTemplatesResult>("tencentcloud:Vod/getImageSpriteTemplates:getImageSpriteTemplates", args ?? new GetImageSpriteTemplatesArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of VOD image sprite templates.
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var fooImageSpriteTemplate = new Tencentcloud.Vod.ImageSpriteTemplate("fooImageSpriteTemplate", new()
         ///     {
-        ///         var fooImageSpriteTemplate = new Tencentcloud.Vod.ImageSpriteTemplate("fooImageSpriteTemplate", new Tencentcloud.Vod.ImageSpriteTemplateArgs
-        ///         {
-        ///             SampleType = "Percent",
-        ///             SampleInterval = 10,
-        ///             RowCount = 3,
-        ///             ColumnCount = 3,
-        ///             Comment = "test",
-        ///             FillType = "stretch",
-        ///             Width = 128,
-        ///             Height = 128,
-        ///             ResolutionAdaptive = false,
-        ///         });
-        ///         var fooImageSpriteTemplates = Tencentcloud.Vod.GetImageSpriteTemplates.Invoke(new Tencentcloud.Vod.GetImageSpriteTemplatesInvokeArgs
-        ///         {
-        ///             Type = "Custom",
-        ///             Definition = fooImageSpriteTemplate.Id,
-        ///         });
-        ///     }
+        ///         SampleType = "Percent",
+        ///         SampleInterval = 10,
+        ///         RowCount = 3,
+        ///         ColumnCount = 3,
+        ///         Comment = "test",
+        ///         FillType = "stretch",
+        ///         Width = 128,
+        ///         Height = 128,
+        ///         ResolutionAdaptive = false,
+        ///     });
         /// 
-        /// }
+        ///     var fooImageSpriteTemplates = Tencentcloud.Vod.GetImageSpriteTemplates.Invoke(new()
+        ///     {
+        ///         Type = "Custom",
+        ///         Definition = fooImageSpriteTemplate.Id,
+        ///     });
+        /// 
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetImageSpriteTemplatesResult> Invoke(GetImageSpriteTemplatesInvokeArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetImageSpriteTemplatesResult>("tencentcloud:Vod/getImageSpriteTemplates:getImageSpriteTemplates", args ?? new GetImageSpriteTemplatesInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetImageSpriteTemplatesResult>("tencentcloud:Vod/getImageSpriteTemplates:getImageSpriteTemplates", args ?? new GetImageSpriteTemplatesInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetImageSpriteTemplatesArgs : Pulumi.InvokeArgs
+    public sealed class GetImageSpriteTemplatesArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Unique ID filter of image sprite template.
@@ -129,9 +125,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vod
         public GetImageSpriteTemplatesArgs()
         {
         }
+        public static new GetImageSpriteTemplatesArgs Empty => new GetImageSpriteTemplatesArgs();
     }
 
-    public sealed class GetImageSpriteTemplatesInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetImageSpriteTemplatesInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Unique ID filter of image sprite template.
@@ -160,6 +157,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vod
         public GetImageSpriteTemplatesInvokeArgs()
         {
         }
+        public static new GetImageSpriteTemplatesInvokeArgs Empty => new GetImageSpriteTemplatesInvokeArgs();
     }
 
 

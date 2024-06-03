@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Scf.Inputs
 {
 
-    public sealed class FunctionImageConfigArgs : Pulumi.ResourceArgs
+    public sealed class FunctionImageConfigArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// the parameters of command.
@@ -64,5 +64,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Scf.Inputs
         public FunctionImageConfigArgs()
         {
         }
+        public static new FunctionImageConfigArgs Empty => new FunctionImageConfigArgs();
     }
 }

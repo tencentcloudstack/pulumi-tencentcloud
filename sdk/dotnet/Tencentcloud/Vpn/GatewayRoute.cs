@@ -15,38 +15,39 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpn
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var route = new Tencentcloud.Vpn.GatewayRoute("route", new()
     ///     {
-    ///         var route = new Tencentcloud.Vpn.GatewayRoute("route", new Tencentcloud.Vpn.GatewayRouteArgs
-    ///         {
-    ///             DestinationCidrBlock = "10.0.0.0/16",
-    ///             InstanceId = "vpnx-5b5dmao3",
-    ///             InstanceType = "VPNCONN",
-    ///             Priority = 100,
-    ///             Status = "DISABLE",
-    ///             VpnGatewayId = "vpngw-ak9sjem2",
-    ///         });
-    ///     }
+    ///         DestinationCidrBlock = "10.0.0.0/16",
+    ///         InstanceId = "vpnx-5b5dmao3",
+    ///         InstanceType = "VPNCONN",
+    ///         Priority = 100,
+    ///         Status = "DISABLE",
+    ///         VpnGatewayId = "vpngw-ak9sjem2",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// VPN gateway route can be imported using the id, the id format must be '{vpn_gateway_id}#{route_id}', e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Vpn/gatewayRoute:GatewayRoute route1 vpngw-ak9sjem2#vpngw-8ccsnclt
+    /// $ pulumi import tencentcloud:Vpn/gatewayRoute:GatewayRoute route1 vpngw-ak9sjem2#vpngw-8ccsnclt
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Vpn/gatewayRoute:GatewayRoute")]
-    public partial class GatewayRoute : Pulumi.CustomResource
+    public partial class GatewayRoute : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Create time.
@@ -153,7 +154,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpn
         }
     }
 
-    public sealed class GatewayRouteArgs : Pulumi.ResourceArgs
+    public sealed class GatewayRouteArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Destination IDC IP range.
@@ -194,9 +195,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpn
         public GatewayRouteArgs()
         {
         }
+        public static new GatewayRouteArgs Empty => new GatewayRouteArgs();
     }
 
-    public sealed class GatewayRouteState : Pulumi.ResourceArgs
+    public sealed class GatewayRouteState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Create time.
@@ -261,5 +263,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpn
         public GatewayRouteState()
         {
         }
+        public static new GatewayRouteState Empty => new GatewayRouteState();
     }
 }

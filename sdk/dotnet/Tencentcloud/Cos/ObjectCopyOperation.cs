@@ -15,27 +15,28 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var objectCopy = new Tencentcloud.Cos.ObjectCopyOperation("objectCopy", new()
     ///     {
-    ///         var objectCopy = new Tencentcloud.Cos.ObjectCopyOperation("objectCopy", new Tencentcloud.Cos.ObjectCopyOperationArgs
-    ///         {
-    ///             Bucket = "keep-copy-xxxxxxx",
-    ///             Key = "copy-acl.txt",
-    ///             SourceUrl = "keep-test-xxxxxx.cos.ap-guangzhou.myqcloud.com/acl.txt",
-    ///         });
-    ///     }
+    ///         Bucket = "keep-copy-xxxxxxx",
+    ///         Key = "copy-acl.txt",
+    ///         SourceUrl = "keep-test-xxxxxx.cos.ap-guangzhou.myqcloud.com/acl.txt",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Cos/objectCopyOperation:ObjectCopyOperation")]
-    public partial class ObjectCopyOperation : Pulumi.CustomResource
+    public partial class ObjectCopyOperation : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Bucket.
@@ -100,7 +101,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos
         }
     }
 
-    public sealed class ObjectCopyOperationArgs : Pulumi.ResourceArgs
+    public sealed class ObjectCopyOperationArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Bucket.
@@ -123,9 +124,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos
         public ObjectCopyOperationArgs()
         {
         }
+        public static new ObjectCopyOperationArgs Empty => new ObjectCopyOperationArgs();
     }
 
-    public sealed class ObjectCopyOperationState : Pulumi.ResourceArgs
+    public sealed class ObjectCopyOperationState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Bucket.
@@ -148,5 +150,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos
         public ObjectCopyOperationState()
         {
         }
+        public static new ObjectCopyOperationState Empty => new ObjectCopyOperationState();
     }
 }

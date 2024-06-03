@@ -8,36 +8,41 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Use this data source to query monitor policy conditions(There is a lot of data and it is recommended to output to a file)
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Monitor"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Monitor"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Monitor"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Monitor.GetPolicyConditions(ctx, &monitor.GetPolicyConditionsArgs{
-// 			Name:             pulumi.StringRef("Cloud Virtual Machine"),
-// 			ResultOutputFile: pulumi.StringRef("./tencentcloud_monitor_policy_conditions.txt"),
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Monitor.GetPolicyConditions(ctx, &monitor.GetPolicyConditionsArgs{
+//				Name:             pulumi.StringRef("Cloud Virtual Machine"),
+//				ResultOutputFile: pulumi.StringRef("./tencentcloud_monitor_policy_conditions.txt"),
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 func GetPolicyConditions(ctx *pulumi.Context, args *GetPolicyConditionsArgs, opts ...pulumi.InvokeOption) (*GetPolicyConditionsResult, error) {
-	opts = pkgInvokeDefaultOpts(opts)
+	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetPolicyConditionsResult
 	err := ctx.Invoke("tencentcloud:Monitor/getPolicyConditions:getPolicyConditions", args, &rv, opts...)
 	if err != nil {

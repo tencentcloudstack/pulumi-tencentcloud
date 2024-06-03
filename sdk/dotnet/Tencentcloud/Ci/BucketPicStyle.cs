@@ -15,35 +15,36 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ci
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var bucketPicStyle = new Tencentcloud.Ci.BucketPicStyle("bucketPicStyle", new()
     ///     {
-    ///         var bucketPicStyle = new Tencentcloud.Ci.BucketPicStyle("bucketPicStyle", new Tencentcloud.Ci.BucketPicStyleArgs
-    ///         {
-    ///             Bucket = "terraform-ci-xxxxxx",
-    ///             StyleBody = "imageMogr2/thumbnail/20x/crop/20x20/gravity/center/interlace/0/quality/100",
-    ///             StyleName = "rayscale_2",
-    ///         });
-    ///     }
+    ///         Bucket = "terraform-ci-xxxxxx",
+    ///         StyleBody = "imageMogr2/thumbnail/20x/crop/20x20/gravity/center/interlace/0/quality/100",
+    ///         StyleName = "rayscale_2",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// ci bucket_pic_style can be imported using the bucket#styleName, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Ci/bucketPicStyle:BucketPicStyle bucket_pic_style terraform-ci-xxxxxx#rayscale_2
+    /// $ pulumi import tencentcloud:Ci/bucketPicStyle:BucketPicStyle bucket_pic_style terraform-ci-xxxxxx#rayscale_2
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Ci/bucketPicStyle:BucketPicStyle")]
-    public partial class BucketPicStyle : Pulumi.CustomResource
+    public partial class BucketPicStyle : global::Pulumi.CustomResource
     {
         /// <summary>
         /// bucket name.
@@ -108,7 +109,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ci
         }
     }
 
-    public sealed class BucketPicStyleArgs : Pulumi.ResourceArgs
+    public sealed class BucketPicStyleArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// bucket name.
@@ -131,9 +132,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ci
         public BucketPicStyleArgs()
         {
         }
+        public static new BucketPicStyleArgs Empty => new BucketPicStyleArgs();
     }
 
-    public sealed class BucketPicStyleState : Pulumi.ResourceArgs
+    public sealed class BucketPicStyleState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// bucket name.
@@ -156,5 +158,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ci
         public BucketPicStyleState()
         {
         }
+        public static new BucketPicStyleState Empty => new BucketPicStyleState();
     }
 }

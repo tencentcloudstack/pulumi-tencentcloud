@@ -15,34 +15,35 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tat
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var invokerConfig = new Tencentcloud.Tat.InvokerConfig("invokerConfig", new()
     ///     {
-    ///         var invokerConfig = new Tencentcloud.Tat.InvokerConfig("invokerConfig", new Tencentcloud.Tat.InvokerConfigArgs
-    ///         {
-    ///             InvokerId = "ivk-cas4upyf",
-    ///             InvokerStatus = "on",
-    ///         });
-    ///     }
+    ///         InvokerId = "ivk-cas4upyf",
+    ///         InvokerStatus = "on",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// tat invoker_config can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Tat/invokerConfig:InvokerConfig invoker_config invoker_config_id
+    /// $ pulumi import tencentcloud:Tat/invokerConfig:InvokerConfig invoker_config invoker_config_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Tat/invokerConfig:InvokerConfig")]
-    public partial class InvokerConfig : Pulumi.CustomResource
+    public partial class InvokerConfig : global::Pulumi.CustomResource
     {
         /// <summary>
         /// ID of the invoker to be enabled.
@@ -101,7 +102,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tat
         }
     }
 
-    public sealed class InvokerConfigArgs : Pulumi.ResourceArgs
+    public sealed class InvokerConfigArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// ID of the invoker to be enabled.
@@ -118,9 +119,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tat
         public InvokerConfigArgs()
         {
         }
+        public static new InvokerConfigArgs Empty => new InvokerConfigArgs();
     }
 
-    public sealed class InvokerConfigState : Pulumi.ResourceArgs
+    public sealed class InvokerConfigState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// ID of the invoker to be enabled.
@@ -137,5 +139,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tat
         public InvokerConfigState()
         {
         }
+        public static new InvokerConfigState Empty => new InvokerConfigState();
     }
 }

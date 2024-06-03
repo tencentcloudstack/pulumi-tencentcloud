@@ -15,48 +15,53 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = Pulumi.Tencentcloud;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
-    ///     {
-    ///         var info = Output.Create(Tencentcloud.User.GetInfo.InvokeAsync());
-    ///         var ownerUin = info.Apply(info =&gt; info.OwnerUin);
-    ///         var vpc = new Tencentcloud.Vpc.Instance("vpc", new Tencentcloud.Vpc.InstanceArgs
-    ///         {
-    ///             CidrBlock = "10.0.0.0/16",
-    ///         });
-    ///         var desVpc = new Tencentcloud.Vpc.Instance("desVpc", new Tencentcloud.Vpc.InstanceArgs
-    ///         {
-    ///             CidrBlock = "172.16.0.0/16",
-    ///         });
-    ///         var peerConnectManager = new Tencentcloud.Vpc.PeerConnectManager("peerConnectManager", new Tencentcloud.Vpc.PeerConnectManagerArgs
-    ///         {
-    ///             SourceVpcId = vpc.Id,
-    ///             PeeringConnectionName = "example-iac",
-    ///             DestinationVpcId = desVpc.Id,
-    ///             DestinationUin = ownerUin,
-    ///             DestinationRegion = "ap-guangzhou",
-    ///         });
-    ///     }
+    ///     var info = Tencentcloud.User.GetInfo.Invoke();
     /// 
-    /// }
+    ///     var ownerUin = info.Apply(getInfoResult =&gt; getInfoResult.OwnerUin);
+    /// 
+    ///     var vpc = new Tencentcloud.Vpc.Instance("vpc", new()
+    ///     {
+    ///         CidrBlock = "10.0.0.0/16",
+    ///     });
+    /// 
+    ///     var desVpc = new Tencentcloud.Vpc.Instance("desVpc", new()
+    ///     {
+    ///         CidrBlock = "172.16.0.0/16",
+    ///     });
+    /// 
+    ///     var peerConnectManager = new Tencentcloud.Vpc.PeerConnectManager("peerConnectManager", new()
+    ///     {
+    ///         SourceVpcId = vpc.Id,
+    ///         PeeringConnectionName = "example-iac",
+    ///         DestinationVpcId = desVpc.Id,
+    ///         DestinationUin = ownerUin,
+    ///         DestinationRegion = "ap-guangzhou",
+    ///     });
+    /// 
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// vpc peer_connect_manager can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Vpc/peerConnectManager:PeerConnectManager peer_connect_manager peer_connect_manager_id
+    /// $ pulumi import tencentcloud:Vpc/peerConnectManager:PeerConnectManager peer_connect_manager peer_connect_manager_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Vpc/peerConnectManager:PeerConnectManager")]
-    public partial class PeerConnectManager : Pulumi.CustomResource
+    public partial class PeerConnectManager : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Bandwidth upper limit, unit Mbps.
@@ -157,7 +162,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         }
     }
 
-    public sealed class PeerConnectManagerArgs : Pulumi.ResourceArgs
+    public sealed class PeerConnectManagerArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Bandwidth upper limit, unit Mbps.
@@ -216,9 +221,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         public PeerConnectManagerArgs()
         {
         }
+        public static new PeerConnectManagerArgs Empty => new PeerConnectManagerArgs();
     }
 
-    public sealed class PeerConnectManagerState : Pulumi.ResourceArgs
+    public sealed class PeerConnectManagerState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Bandwidth upper limit, unit Mbps.
@@ -277,5 +283,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         public PeerConnectManagerState()
         {
         }
+        public static new PeerConnectManagerState Empty => new PeerConnectManagerState();
     }
 }

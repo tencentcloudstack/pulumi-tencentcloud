@@ -15,64 +15,58 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dlc
         /// <summary>
         /// Use this data source to query detailed information of dlc describe_data_engine_image_versions
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var describeDataEngineImageVersions = Tencentcloud.Dlc.GetDescribeDataEngineImageVersions.Invoke(new()
         ///     {
-        ///         var describeDataEngineImageVersions = Output.Create(Tencentcloud.Dlc.GetDescribeDataEngineImageVersions.InvokeAsync(new Tencentcloud.Dlc.GetDescribeDataEngineImageVersionsArgs
-        ///         {
-        ///             EngineType = "SparkBatch",
-        ///         }));
-        ///     }
+        ///         EngineType = "SparkBatch",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetDescribeDataEngineImageVersionsResult> InvokeAsync(GetDescribeDataEngineImageVersionsArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetDescribeDataEngineImageVersionsResult>("tencentcloud:Dlc/getDescribeDataEngineImageVersions:getDescribeDataEngineImageVersions", args ?? new GetDescribeDataEngineImageVersionsArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetDescribeDataEngineImageVersionsResult>("tencentcloud:Dlc/getDescribeDataEngineImageVersions:getDescribeDataEngineImageVersions", args ?? new GetDescribeDataEngineImageVersionsArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of dlc describe_data_engine_image_versions
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var describeDataEngineImageVersions = Tencentcloud.Dlc.GetDescribeDataEngineImageVersions.Invoke(new()
         ///     {
-        ///         var describeDataEngineImageVersions = Output.Create(Tencentcloud.Dlc.GetDescribeDataEngineImageVersions.InvokeAsync(new Tencentcloud.Dlc.GetDescribeDataEngineImageVersionsArgs
-        ///         {
-        ///             EngineType = "SparkBatch",
-        ///         }));
-        ///     }
+        ///         EngineType = "SparkBatch",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetDescribeDataEngineImageVersionsResult> Invoke(GetDescribeDataEngineImageVersionsInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetDescribeDataEngineImageVersionsResult>("tencentcloud:Dlc/getDescribeDataEngineImageVersions:getDescribeDataEngineImageVersions", args ?? new GetDescribeDataEngineImageVersionsInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetDescribeDataEngineImageVersionsResult>("tencentcloud:Dlc/getDescribeDataEngineImageVersions:getDescribeDataEngineImageVersions", args ?? new GetDescribeDataEngineImageVersionsInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetDescribeDataEngineImageVersionsArgs : Pulumi.InvokeArgs
+    public sealed class GetDescribeDataEngineImageVersionsArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Engine type only support: SparkSQL/PrestoSQL/SparkBatch.
@@ -89,9 +83,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dlc
         public GetDescribeDataEngineImageVersionsArgs()
         {
         }
+        public static new GetDescribeDataEngineImageVersionsArgs Empty => new GetDescribeDataEngineImageVersionsArgs();
     }
 
-    public sealed class GetDescribeDataEngineImageVersionsInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetDescribeDataEngineImageVersionsInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Engine type only support: SparkSQL/PrestoSQL/SparkBatch.
@@ -108,6 +103,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dlc
         public GetDescribeDataEngineImageVersionsInvokeArgs()
         {
         }
+        public static new GetDescribeDataEngineImageVersionsInvokeArgs Empty => new GetDescribeDataEngineImageVersionsInvokeArgs();
     }
 
 

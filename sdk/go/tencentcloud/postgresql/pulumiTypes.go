@@ -8,7 +8,10 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
+
+var _ = internal.GetEnvOrDefault
 
 type InstanceBackupPlan struct {
 	// List of backup period per week, available values: `monday`, `tuesday`, `wednesday`, `thursday`, `friday`, `saturday`, `sunday`. NOTE: At least specify two days.
@@ -24,7 +27,7 @@ type InstanceBackupPlan struct {
 // InstanceBackupPlanInput is an input type that accepts InstanceBackupPlanArgs and InstanceBackupPlanOutput values.
 // You can construct a concrete instance of `InstanceBackupPlanInput` via:
 //
-//          InstanceBackupPlanArgs{...}
+//	InstanceBackupPlanArgs{...}
 type InstanceBackupPlanInput interface {
 	pulumi.Input
 
@@ -66,11 +69,11 @@ func (i InstanceBackupPlanArgs) ToInstanceBackupPlanPtrOutputWithContext(ctx con
 // InstanceBackupPlanPtrInput is an input type that accepts InstanceBackupPlanArgs, InstanceBackupPlanPtr and InstanceBackupPlanPtrOutput values.
 // You can construct a concrete instance of `InstanceBackupPlanPtrInput` via:
 //
-//          InstanceBackupPlanArgs{...}
+//	        InstanceBackupPlanArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type InstanceBackupPlanPtrInput interface {
 	pulumi.Input
 
@@ -214,7 +217,7 @@ type InstanceDbNodeSet struct {
 // InstanceDbNodeSetInput is an input type that accepts InstanceDbNodeSetArgs and InstanceDbNodeSetOutput values.
 // You can construct a concrete instance of `InstanceDbNodeSetInput` via:
 //
-//          InstanceDbNodeSetArgs{...}
+//	InstanceDbNodeSetArgs{...}
 type InstanceDbNodeSetInput interface {
 	pulumi.Input
 
@@ -244,7 +247,7 @@ func (i InstanceDbNodeSetArgs) ToInstanceDbNodeSetOutputWithContext(ctx context.
 // InstanceDbNodeSetArrayInput is an input type that accepts InstanceDbNodeSetArray and InstanceDbNodeSetArrayOutput values.
 // You can construct a concrete instance of `InstanceDbNodeSetArrayInput` via:
 //
-//          InstanceDbNodeSetArray{ InstanceDbNodeSetArgs{...} }
+//	InstanceDbNodeSetArray{ InstanceDbNodeSetArgs{...} }
 type InstanceDbNodeSetArrayInput interface {
 	pulumi.Input
 
@@ -320,7 +323,7 @@ type ParameterTemplateModifyParamEntrySet struct {
 // ParameterTemplateModifyParamEntrySetInput is an input type that accepts ParameterTemplateModifyParamEntrySetArgs and ParameterTemplateModifyParamEntrySetOutput values.
 // You can construct a concrete instance of `ParameterTemplateModifyParamEntrySetInput` via:
 //
-//          ParameterTemplateModifyParamEntrySetArgs{...}
+//	ParameterTemplateModifyParamEntrySetArgs{...}
 type ParameterTemplateModifyParamEntrySetInput interface {
 	pulumi.Input
 
@@ -350,7 +353,7 @@ func (i ParameterTemplateModifyParamEntrySetArgs) ToParameterTemplateModifyParam
 // ParameterTemplateModifyParamEntrySetArrayInput is an input type that accepts ParameterTemplateModifyParamEntrySetArray and ParameterTemplateModifyParamEntrySetArrayOutput values.
 // You can construct a concrete instance of `ParameterTemplateModifyParamEntrySetArrayInput` via:
 //
-//          ParameterTemplateModifyParamEntrySetArray{ ParameterTemplateModifyParamEntrySetArgs{...} }
+//	ParameterTemplateModifyParamEntrySetArray{ ParameterTemplateModifyParamEntrySetArgs{...} }
 type ParameterTemplateModifyParamEntrySetArrayInput interface {
 	pulumi.Input
 
@@ -416,6 +419,112 @@ func (o ParameterTemplateModifyParamEntrySetArrayOutput) Index(i pulumi.IntInput
 	}).(ParameterTemplateModifyParamEntrySetOutput)
 }
 
+type ReadonlyGroupNetInfoList struct {
+	// Ip address of the net info.
+	Ip *string `pulumi:"ip"`
+	// Port of the net info.
+	Port *int `pulumi:"port"`
+}
+
+// ReadonlyGroupNetInfoListInput is an input type that accepts ReadonlyGroupNetInfoListArgs and ReadonlyGroupNetInfoListOutput values.
+// You can construct a concrete instance of `ReadonlyGroupNetInfoListInput` via:
+//
+//	ReadonlyGroupNetInfoListArgs{...}
+type ReadonlyGroupNetInfoListInput interface {
+	pulumi.Input
+
+	ToReadonlyGroupNetInfoListOutput() ReadonlyGroupNetInfoListOutput
+	ToReadonlyGroupNetInfoListOutputWithContext(context.Context) ReadonlyGroupNetInfoListOutput
+}
+
+type ReadonlyGroupNetInfoListArgs struct {
+	// Ip address of the net info.
+	Ip pulumi.StringPtrInput `pulumi:"ip"`
+	// Port of the net info.
+	Port pulumi.IntPtrInput `pulumi:"port"`
+}
+
+func (ReadonlyGroupNetInfoListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ReadonlyGroupNetInfoList)(nil)).Elem()
+}
+
+func (i ReadonlyGroupNetInfoListArgs) ToReadonlyGroupNetInfoListOutput() ReadonlyGroupNetInfoListOutput {
+	return i.ToReadonlyGroupNetInfoListOutputWithContext(context.Background())
+}
+
+func (i ReadonlyGroupNetInfoListArgs) ToReadonlyGroupNetInfoListOutputWithContext(ctx context.Context) ReadonlyGroupNetInfoListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ReadonlyGroupNetInfoListOutput)
+}
+
+// ReadonlyGroupNetInfoListArrayInput is an input type that accepts ReadonlyGroupNetInfoListArray and ReadonlyGroupNetInfoListArrayOutput values.
+// You can construct a concrete instance of `ReadonlyGroupNetInfoListArrayInput` via:
+//
+//	ReadonlyGroupNetInfoListArray{ ReadonlyGroupNetInfoListArgs{...} }
+type ReadonlyGroupNetInfoListArrayInput interface {
+	pulumi.Input
+
+	ToReadonlyGroupNetInfoListArrayOutput() ReadonlyGroupNetInfoListArrayOutput
+	ToReadonlyGroupNetInfoListArrayOutputWithContext(context.Context) ReadonlyGroupNetInfoListArrayOutput
+}
+
+type ReadonlyGroupNetInfoListArray []ReadonlyGroupNetInfoListInput
+
+func (ReadonlyGroupNetInfoListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ReadonlyGroupNetInfoList)(nil)).Elem()
+}
+
+func (i ReadonlyGroupNetInfoListArray) ToReadonlyGroupNetInfoListArrayOutput() ReadonlyGroupNetInfoListArrayOutput {
+	return i.ToReadonlyGroupNetInfoListArrayOutputWithContext(context.Background())
+}
+
+func (i ReadonlyGroupNetInfoListArray) ToReadonlyGroupNetInfoListArrayOutputWithContext(ctx context.Context) ReadonlyGroupNetInfoListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ReadonlyGroupNetInfoListArrayOutput)
+}
+
+type ReadonlyGroupNetInfoListOutput struct{ *pulumi.OutputState }
+
+func (ReadonlyGroupNetInfoListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ReadonlyGroupNetInfoList)(nil)).Elem()
+}
+
+func (o ReadonlyGroupNetInfoListOutput) ToReadonlyGroupNetInfoListOutput() ReadonlyGroupNetInfoListOutput {
+	return o
+}
+
+func (o ReadonlyGroupNetInfoListOutput) ToReadonlyGroupNetInfoListOutputWithContext(ctx context.Context) ReadonlyGroupNetInfoListOutput {
+	return o
+}
+
+// Ip address of the net info.
+func (o ReadonlyGroupNetInfoListOutput) Ip() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ReadonlyGroupNetInfoList) *string { return v.Ip }).(pulumi.StringPtrOutput)
+}
+
+// Port of the net info.
+func (o ReadonlyGroupNetInfoListOutput) Port() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v ReadonlyGroupNetInfoList) *int { return v.Port }).(pulumi.IntPtrOutput)
+}
+
+type ReadonlyGroupNetInfoListArrayOutput struct{ *pulumi.OutputState }
+
+func (ReadonlyGroupNetInfoListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ReadonlyGroupNetInfoList)(nil)).Elem()
+}
+
+func (o ReadonlyGroupNetInfoListArrayOutput) ToReadonlyGroupNetInfoListArrayOutput() ReadonlyGroupNetInfoListArrayOutput {
+	return o
+}
+
+func (o ReadonlyGroupNetInfoListArrayOutput) ToReadonlyGroupNetInfoListArrayOutputWithContext(ctx context.Context) ReadonlyGroupNetInfoListArrayOutput {
+	return o
+}
+
+func (o ReadonlyGroupNetInfoListArrayOutput) Index(i pulumi.IntInput) ReadonlyGroupNetInfoListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) ReadonlyGroupNetInfoList {
+		return vs[0].([]ReadonlyGroupNetInfoList)[vs[1].(int)]
+	}).(ReadonlyGroupNetInfoListOutput)
+}
+
 type GetBackupDownloadUrlsBackupDownloadRestriction struct {
 	// Whether IP is allowed. Valid values: `ALLOW` (allow), `DENY` (deny).
 	IpRestrictionEffect *string `pulumi:"ipRestrictionEffect"`
@@ -432,7 +541,7 @@ type GetBackupDownloadUrlsBackupDownloadRestriction struct {
 // GetBackupDownloadUrlsBackupDownloadRestrictionInput is an input type that accepts GetBackupDownloadUrlsBackupDownloadRestrictionArgs and GetBackupDownloadUrlsBackupDownloadRestrictionOutput values.
 // You can construct a concrete instance of `GetBackupDownloadUrlsBackupDownloadRestrictionInput` via:
 //
-//          GetBackupDownloadUrlsBackupDownloadRestrictionArgs{...}
+//	GetBackupDownloadUrlsBackupDownloadRestrictionArgs{...}
 type GetBackupDownloadUrlsBackupDownloadRestrictionInput interface {
 	pulumi.Input
 
@@ -476,11 +585,11 @@ func (i GetBackupDownloadUrlsBackupDownloadRestrictionArgs) ToGetBackupDownloadU
 // GetBackupDownloadUrlsBackupDownloadRestrictionPtrInput is an input type that accepts GetBackupDownloadUrlsBackupDownloadRestrictionArgs, GetBackupDownloadUrlsBackupDownloadRestrictionPtr and GetBackupDownloadUrlsBackupDownloadRestrictionPtrOutput values.
 // You can construct a concrete instance of `GetBackupDownloadUrlsBackupDownloadRestrictionPtrInput` via:
 //
-//          GetBackupDownloadUrlsBackupDownloadRestrictionArgs{...}
+//	        GetBackupDownloadUrlsBackupDownloadRestrictionArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type GetBackupDownloadUrlsBackupDownloadRestrictionPtrInput interface {
 	pulumi.Input
 
@@ -655,7 +764,7 @@ type GetBaseBackupsBaseBackupSet struct {
 // GetBaseBackupsBaseBackupSetInput is an input type that accepts GetBaseBackupsBaseBackupSetArgs and GetBaseBackupsBaseBackupSetOutput values.
 // You can construct a concrete instance of `GetBaseBackupsBaseBackupSetInput` via:
 //
-//          GetBaseBackupsBaseBackupSetArgs{...}
+//	GetBaseBackupsBaseBackupSetArgs{...}
 type GetBaseBackupsBaseBackupSetInput interface {
 	pulumi.Input
 
@@ -701,7 +810,7 @@ func (i GetBaseBackupsBaseBackupSetArgs) ToGetBaseBackupsBaseBackupSetOutputWith
 // GetBaseBackupsBaseBackupSetArrayInput is an input type that accepts GetBaseBackupsBaseBackupSetArray and GetBaseBackupsBaseBackupSetArrayOutput values.
 // You can construct a concrete instance of `GetBaseBackupsBaseBackupSetArrayInput` via:
 //
-//          GetBaseBackupsBaseBackupSetArray{ GetBaseBackupsBaseBackupSetArgs{...} }
+//	GetBaseBackupsBaseBackupSetArray{ GetBaseBackupsBaseBackupSetArgs{...} }
 type GetBaseBackupsBaseBackupSetArrayInput interface {
 	pulumi.Input
 
@@ -817,7 +926,7 @@ type GetBaseBackupsFilter struct {
 // GetBaseBackupsFilterInput is an input type that accepts GetBaseBackupsFilterArgs and GetBaseBackupsFilterOutput values.
 // You can construct a concrete instance of `GetBaseBackupsFilterInput` via:
 //
-//          GetBaseBackupsFilterArgs{...}
+//	GetBaseBackupsFilterArgs{...}
 type GetBaseBackupsFilterInput interface {
 	pulumi.Input
 
@@ -847,7 +956,7 @@ func (i GetBaseBackupsFilterArgs) ToGetBaseBackupsFilterOutputWithContext(ctx co
 // GetBaseBackupsFilterArrayInput is an input type that accepts GetBaseBackupsFilterArray and GetBaseBackupsFilterArrayOutput values.
 // You can construct a concrete instance of `GetBaseBackupsFilterArrayInput` via:
 //
-//          GetBaseBackupsFilterArray{ GetBaseBackupsFilterArgs{...} }
+//	GetBaseBackupsFilterArray{ GetBaseBackupsFilterArgs{...} }
 type GetBaseBackupsFilterArrayInput interface {
 	pulumi.Input
 
@@ -931,7 +1040,7 @@ type GetDbInstanceClassesClassInfoSet struct {
 // GetDbInstanceClassesClassInfoSetInput is an input type that accepts GetDbInstanceClassesClassInfoSetArgs and GetDbInstanceClassesClassInfoSetOutput values.
 // You can construct a concrete instance of `GetDbInstanceClassesClassInfoSetInput` via:
 //
-//          GetDbInstanceClassesClassInfoSetArgs{...}
+//	GetDbInstanceClassesClassInfoSetArgs{...}
 type GetDbInstanceClassesClassInfoSetInput interface {
 	pulumi.Input
 
@@ -969,7 +1078,7 @@ func (i GetDbInstanceClassesClassInfoSetArgs) ToGetDbInstanceClassesClassInfoSet
 // GetDbInstanceClassesClassInfoSetArrayInput is an input type that accepts GetDbInstanceClassesClassInfoSetArray and GetDbInstanceClassesClassInfoSetArrayOutput values.
 // You can construct a concrete instance of `GetDbInstanceClassesClassInfoSetArrayInput` via:
 //
-//          GetDbInstanceClassesClassInfoSetArray{ GetDbInstanceClassesClassInfoSetArgs{...} }
+//	GetDbInstanceClassesClassInfoSetArray{ GetDbInstanceClassesClassInfoSetArgs{...} }
 type GetDbInstanceClassesClassInfoSetArrayInput interface {
 	pulumi.Input
 
@@ -1075,7 +1184,7 @@ type GetDbInstanceVersionsVersionSet struct {
 // GetDbInstanceVersionsVersionSetInput is an input type that accepts GetDbInstanceVersionsVersionSetArgs and GetDbInstanceVersionsVersionSetOutput values.
 // You can construct a concrete instance of `GetDbInstanceVersionsVersionSetInput` via:
 //
-//          GetDbInstanceVersionsVersionSetArgs{...}
+//	GetDbInstanceVersionsVersionSetArgs{...}
 type GetDbInstanceVersionsVersionSetInput interface {
 	pulumi.Input
 
@@ -1115,7 +1224,7 @@ func (i GetDbInstanceVersionsVersionSetArgs) ToGetDbInstanceVersionsVersionSetOu
 // GetDbInstanceVersionsVersionSetArrayInput is an input type that accepts GetDbInstanceVersionsVersionSetArray and GetDbInstanceVersionsVersionSetArrayOutput values.
 // You can construct a concrete instance of `GetDbInstanceVersionsVersionSetArrayInput` via:
 //
-//          GetDbInstanceVersionsVersionSetArray{ GetDbInstanceVersionsVersionSetArgs{...} }
+//	GetDbInstanceVersionsVersionSetArray{ GetDbInstanceVersionsVersionSetArgs{...} }
 type GetDbInstanceVersionsVersionSetArrayInput interface {
 	pulumi.Input
 
@@ -1252,7 +1361,7 @@ type GetDefaultParametersParamInfoSet struct {
 // GetDefaultParametersParamInfoSetInput is an input type that accepts GetDefaultParametersParamInfoSetArgs and GetDefaultParametersParamInfoSetOutput values.
 // You can construct a concrete instance of `GetDefaultParametersParamInfoSetInput` via:
 //
-//          GetDefaultParametersParamInfoSetArgs{...}
+//	GetDefaultParametersParamInfoSetArgs{...}
 type GetDefaultParametersParamInfoSetInput interface {
 	pulumi.Input
 
@@ -1318,7 +1427,7 @@ func (i GetDefaultParametersParamInfoSetArgs) ToGetDefaultParametersParamInfoSet
 // GetDefaultParametersParamInfoSetArrayInput is an input type that accepts GetDefaultParametersParamInfoSetArray and GetDefaultParametersParamInfoSetArrayOutput values.
 // You can construct a concrete instance of `GetDefaultParametersParamInfoSetArrayInput` via:
 //
-//          GetDefaultParametersParamInfoSetArray{ GetDefaultParametersParamInfoSetArgs{...} }
+//	GetDefaultParametersParamInfoSetArray{ GetDefaultParametersParamInfoSetArgs{...} }
 type GetDefaultParametersParamInfoSetArrayInput interface {
 	pulumi.Input
 
@@ -1498,7 +1607,7 @@ type GetDefaultParametersParamInfoSetSpecRelationSet struct {
 // GetDefaultParametersParamInfoSetSpecRelationSetInput is an input type that accepts GetDefaultParametersParamInfoSetSpecRelationSetArgs and GetDefaultParametersParamInfoSetSpecRelationSetOutput values.
 // You can construct a concrete instance of `GetDefaultParametersParamInfoSetSpecRelationSetInput` via:
 //
-//          GetDefaultParametersParamInfoSetSpecRelationSetArgs{...}
+//	GetDefaultParametersParamInfoSetSpecRelationSetArgs{...}
 type GetDefaultParametersParamInfoSetSpecRelationSetInput interface {
 	pulumi.Input
 
@@ -1538,7 +1647,7 @@ func (i GetDefaultParametersParamInfoSetSpecRelationSetArgs) ToGetDefaultParamet
 // GetDefaultParametersParamInfoSetSpecRelationSetArrayInput is an input type that accepts GetDefaultParametersParamInfoSetSpecRelationSetArray and GetDefaultParametersParamInfoSetSpecRelationSetArrayOutput values.
 // You can construct a concrete instance of `GetDefaultParametersParamInfoSetSpecRelationSetArrayInput` via:
 //
-//          GetDefaultParametersParamInfoSetSpecRelationSetArray{ GetDefaultParametersParamInfoSetSpecRelationSetArgs{...} }
+//	GetDefaultParametersParamInfoSetSpecRelationSetArray{ GetDefaultParametersParamInfoSetSpecRelationSetArgs{...} }
 type GetDefaultParametersParamInfoSetSpecRelationSetArrayInput interface {
 	pulumi.Input
 
@@ -1649,7 +1758,7 @@ type GetDefaultParametersParamInfoSetVersionRelationSet struct {
 // GetDefaultParametersParamInfoSetVersionRelationSetInput is an input type that accepts GetDefaultParametersParamInfoSetVersionRelationSetArgs and GetDefaultParametersParamInfoSetVersionRelationSetOutput values.
 // You can construct a concrete instance of `GetDefaultParametersParamInfoSetVersionRelationSetInput` via:
 //
-//          GetDefaultParametersParamInfoSetVersionRelationSetArgs{...}
+//	GetDefaultParametersParamInfoSetVersionRelationSetArgs{...}
 type GetDefaultParametersParamInfoSetVersionRelationSetInput interface {
 	pulumi.Input
 
@@ -1689,7 +1798,7 @@ func (i GetDefaultParametersParamInfoSetVersionRelationSetArgs) ToGetDefaultPara
 // GetDefaultParametersParamInfoSetVersionRelationSetArrayInput is an input type that accepts GetDefaultParametersParamInfoSetVersionRelationSetArray and GetDefaultParametersParamInfoSetVersionRelationSetArrayOutput values.
 // You can construct a concrete instance of `GetDefaultParametersParamInfoSetVersionRelationSetArrayInput` via:
 //
-//          GetDefaultParametersParamInfoSetVersionRelationSetArray{ GetDefaultParametersParamInfoSetVersionRelationSetArgs{...} }
+//	GetDefaultParametersParamInfoSetVersionRelationSetArray{ GetDefaultParametersParamInfoSetVersionRelationSetArgs{...} }
 type GetDefaultParametersParamInfoSetVersionRelationSetArrayInput interface {
 	pulumi.Input
 
@@ -1826,7 +1935,7 @@ type GetInstancesInstanceList struct {
 // GetInstancesInstanceListInput is an input type that accepts GetInstancesInstanceListArgs and GetInstancesInstanceListOutput values.
 // You can construct a concrete instance of `GetInstancesInstanceListInput` via:
 //
-//          GetInstancesInstanceListArgs{...}
+//	GetInstancesInstanceListArgs{...}
 type GetInstancesInstanceListInput interface {
 	pulumi.Input
 
@@ -1892,7 +2001,7 @@ func (i GetInstancesInstanceListArgs) ToGetInstancesInstanceListOutputWithContex
 // GetInstancesInstanceListArrayInput is an input type that accepts GetInstancesInstanceListArray and GetInstancesInstanceListArrayOutput values.
 // You can construct a concrete instance of `GetInstancesInstanceListArrayInput` via:
 //
-//          GetInstancesInstanceListArray{ GetInstancesInstanceListArgs{...} }
+//	GetInstancesInstanceListArray{ GetInstancesInstanceListArgs{...} }
 type GetInstancesInstanceListArrayInput interface {
 	pulumi.Input
 
@@ -2058,7 +2167,7 @@ type GetLogBackupsFilter struct {
 // GetLogBackupsFilterInput is an input type that accepts GetLogBackupsFilterArgs and GetLogBackupsFilterOutput values.
 // You can construct a concrete instance of `GetLogBackupsFilterInput` via:
 //
-//          GetLogBackupsFilterArgs{...}
+//	GetLogBackupsFilterArgs{...}
 type GetLogBackupsFilterInput interface {
 	pulumi.Input
 
@@ -2088,7 +2197,7 @@ func (i GetLogBackupsFilterArgs) ToGetLogBackupsFilterOutputWithContext(ctx cont
 // GetLogBackupsFilterArrayInput is an input type that accepts GetLogBackupsFilterArray and GetLogBackupsFilterArrayOutput values.
 // You can construct a concrete instance of `GetLogBackupsFilterArrayInput` via:
 //
-//          GetLogBackupsFilterArray{ GetLogBackupsFilterArgs{...} }
+//	GetLogBackupsFilterArray{ GetLogBackupsFilterArgs{...} }
 type GetLogBackupsFilterArrayInput interface {
 	pulumi.Input
 
@@ -2180,7 +2289,7 @@ type GetLogBackupsLogBackupSet struct {
 // GetLogBackupsLogBackupSetInput is an input type that accepts GetLogBackupsLogBackupSetArgs and GetLogBackupsLogBackupSetOutput values.
 // You can construct a concrete instance of `GetLogBackupsLogBackupSetInput` via:
 //
-//          GetLogBackupsLogBackupSetArgs{...}
+//	GetLogBackupsLogBackupSetArgs{...}
 type GetLogBackupsLogBackupSetInput interface {
 	pulumi.Input
 
@@ -2226,7 +2335,7 @@ func (i GetLogBackupsLogBackupSetArgs) ToGetLogBackupsLogBackupSetOutputWithCont
 // GetLogBackupsLogBackupSetArrayInput is an input type that accepts GetLogBackupsLogBackupSetArray and GetLogBackupsLogBackupSetArrayOutput values.
 // You can construct a concrete instance of `GetLogBackupsLogBackupSetArrayInput` via:
 //
-//          GetLogBackupsLogBackupSetArray{ GetLogBackupsLogBackupSetArgs{...} }
+//	GetLogBackupsLogBackupSetArray{ GetLogBackupsLogBackupSetArgs{...} }
 type GetLogBackupsLogBackupSetArrayInput interface {
 	pulumi.Input
 
@@ -2342,7 +2451,7 @@ type GetParameterTemplatesFilter struct {
 // GetParameterTemplatesFilterInput is an input type that accepts GetParameterTemplatesFilterArgs and GetParameterTemplatesFilterOutput values.
 // You can construct a concrete instance of `GetParameterTemplatesFilterInput` via:
 //
-//          GetParameterTemplatesFilterArgs{...}
+//	GetParameterTemplatesFilterArgs{...}
 type GetParameterTemplatesFilterInput interface {
 	pulumi.Input
 
@@ -2372,7 +2481,7 @@ func (i GetParameterTemplatesFilterArgs) ToGetParameterTemplatesFilterOutputWith
 // GetParameterTemplatesFilterArrayInput is an input type that accepts GetParameterTemplatesFilterArray and GetParameterTemplatesFilterArrayOutput values.
 // You can construct a concrete instance of `GetParameterTemplatesFilterArrayInput` via:
 //
-//          GetParameterTemplatesFilterArray{ GetParameterTemplatesFilterArgs{...} }
+//	GetParameterTemplatesFilterArray{ GetParameterTemplatesFilterArgs{...} }
 type GetParameterTemplatesFilterArrayInput interface {
 	pulumi.Input
 
@@ -2454,7 +2563,7 @@ type GetParameterTemplatesList struct {
 // GetParameterTemplatesListInput is an input type that accepts GetParameterTemplatesListArgs and GetParameterTemplatesListOutput values.
 // You can construct a concrete instance of `GetParameterTemplatesListInput` via:
 //
-//          GetParameterTemplatesListArgs{...}
+//	GetParameterTemplatesListArgs{...}
 type GetParameterTemplatesListInput interface {
 	pulumi.Input
 
@@ -2490,7 +2599,7 @@ func (i GetParameterTemplatesListArgs) ToGetParameterTemplatesListOutputWithCont
 // GetParameterTemplatesListArrayInput is an input type that accepts GetParameterTemplatesListArray and GetParameterTemplatesListArrayOutput values.
 // You can construct a concrete instance of `GetParameterTemplatesListArrayInput` via:
 //
-//          GetParameterTemplatesListArray{ GetParameterTemplatesListArgs{...} }
+//	GetParameterTemplatesListArray{ GetParameterTemplatesListArgs{...} }
 type GetParameterTemplatesListArrayInput interface {
 	pulumi.Input
 
@@ -2581,7 +2690,7 @@ type GetReadonlyGroupsFilter struct {
 // GetReadonlyGroupsFilterInput is an input type that accepts GetReadonlyGroupsFilterArgs and GetReadonlyGroupsFilterOutput values.
 // You can construct a concrete instance of `GetReadonlyGroupsFilterInput` via:
 //
-//          GetReadonlyGroupsFilterArgs{...}
+//	GetReadonlyGroupsFilterArgs{...}
 type GetReadonlyGroupsFilterInput interface {
 	pulumi.Input
 
@@ -2611,7 +2720,7 @@ func (i GetReadonlyGroupsFilterArgs) ToGetReadonlyGroupsFilterOutputWithContext(
 // GetReadonlyGroupsFilterArrayInput is an input type that accepts GetReadonlyGroupsFilterArray and GetReadonlyGroupsFilterArrayOutput values.
 // You can construct a concrete instance of `GetReadonlyGroupsFilterArrayInput` via:
 //
-//          GetReadonlyGroupsFilterArray{ GetReadonlyGroupsFilterArgs{...} }
+//	GetReadonlyGroupsFilterArray{ GetReadonlyGroupsFilterArgs{...} }
 type GetReadonlyGroupsFilterArrayInput interface {
 	pulumi.Input
 
@@ -2719,7 +2828,7 @@ type GetReadonlyGroupsReadOnlyGroupList struct {
 // GetReadonlyGroupsReadOnlyGroupListInput is an input type that accepts GetReadonlyGroupsReadOnlyGroupListArgs and GetReadonlyGroupsReadOnlyGroupListOutput values.
 // You can construct a concrete instance of `GetReadonlyGroupsReadOnlyGroupListInput` via:
 //
-//          GetReadonlyGroupsReadOnlyGroupListArgs{...}
+//	GetReadonlyGroupsReadOnlyGroupListArgs{...}
 type GetReadonlyGroupsReadOnlyGroupListInput interface {
 	pulumi.Input
 
@@ -2781,7 +2890,7 @@ func (i GetReadonlyGroupsReadOnlyGroupListArgs) ToGetReadonlyGroupsReadOnlyGroup
 // GetReadonlyGroupsReadOnlyGroupListArrayInput is an input type that accepts GetReadonlyGroupsReadOnlyGroupListArray and GetReadonlyGroupsReadOnlyGroupListArrayOutput values.
 // You can construct a concrete instance of `GetReadonlyGroupsReadOnlyGroupListArrayInput` via:
 //
-//          GetReadonlyGroupsReadOnlyGroupListArray{ GetReadonlyGroupsReadOnlyGroupListArgs{...} }
+//	GetReadonlyGroupsReadOnlyGroupListArray{ GetReadonlyGroupsReadOnlyGroupListArgs{...} }
 type GetReadonlyGroupsReadOnlyGroupListArrayInput interface {
 	pulumi.Input
 
@@ -2955,7 +3064,7 @@ type GetReadonlyGroupsReadOnlyGroupListDbInstanceNetInfo struct {
 // GetReadonlyGroupsReadOnlyGroupListDbInstanceNetInfoInput is an input type that accepts GetReadonlyGroupsReadOnlyGroupListDbInstanceNetInfoArgs and GetReadonlyGroupsReadOnlyGroupListDbInstanceNetInfoOutput values.
 // You can construct a concrete instance of `GetReadonlyGroupsReadOnlyGroupListDbInstanceNetInfoInput` via:
 //
-//          GetReadonlyGroupsReadOnlyGroupListDbInstanceNetInfoArgs{...}
+//	GetReadonlyGroupsReadOnlyGroupListDbInstanceNetInfoArgs{...}
 type GetReadonlyGroupsReadOnlyGroupListDbInstanceNetInfoInput interface {
 	pulumi.Input
 
@@ -2997,7 +3106,7 @@ func (i GetReadonlyGroupsReadOnlyGroupListDbInstanceNetInfoArgs) ToGetReadonlyGr
 // GetReadonlyGroupsReadOnlyGroupListDbInstanceNetInfoArrayInput is an input type that accepts GetReadonlyGroupsReadOnlyGroupListDbInstanceNetInfoArray and GetReadonlyGroupsReadOnlyGroupListDbInstanceNetInfoArrayOutput values.
 // You can construct a concrete instance of `GetReadonlyGroupsReadOnlyGroupListDbInstanceNetInfoArrayInput` via:
 //
-//          GetReadonlyGroupsReadOnlyGroupListDbInstanceNetInfoArray{ GetReadonlyGroupsReadOnlyGroupListDbInstanceNetInfoArgs{...} }
+//	GetReadonlyGroupsReadOnlyGroupListDbInstanceNetInfoArray{ GetReadonlyGroupsReadOnlyGroupListDbInstanceNetInfoArgs{...} }
 type GetReadonlyGroupsReadOnlyGroupListDbInstanceNetInfoArrayInput interface {
 	pulumi.Input
 
@@ -3115,7 +3224,7 @@ type GetReadonlyGroupsReadOnlyGroupListNetworkAccessList struct {
 // GetReadonlyGroupsReadOnlyGroupListNetworkAccessListInput is an input type that accepts GetReadonlyGroupsReadOnlyGroupListNetworkAccessListArgs and GetReadonlyGroupsReadOnlyGroupListNetworkAccessListOutput values.
 // You can construct a concrete instance of `GetReadonlyGroupsReadOnlyGroupListNetworkAccessListInput` via:
 //
-//          GetReadonlyGroupsReadOnlyGroupListNetworkAccessListArgs{...}
+//	GetReadonlyGroupsReadOnlyGroupListNetworkAccessListArgs{...}
 type GetReadonlyGroupsReadOnlyGroupListNetworkAccessListInput interface {
 	pulumi.Input
 
@@ -3157,7 +3266,7 @@ func (i GetReadonlyGroupsReadOnlyGroupListNetworkAccessListArgs) ToGetReadonlyGr
 // GetReadonlyGroupsReadOnlyGroupListNetworkAccessListArrayInput is an input type that accepts GetReadonlyGroupsReadOnlyGroupListNetworkAccessListArray and GetReadonlyGroupsReadOnlyGroupListNetworkAccessListArrayOutput values.
 // You can construct a concrete instance of `GetReadonlyGroupsReadOnlyGroupListNetworkAccessListArrayInput` via:
 //
-//          GetReadonlyGroupsReadOnlyGroupListNetworkAccessListArray{ GetReadonlyGroupsReadOnlyGroupListNetworkAccessListArgs{...} }
+//	GetReadonlyGroupsReadOnlyGroupListNetworkAccessListArray{ GetReadonlyGroupsReadOnlyGroupListNetworkAccessListArgs{...} }
 type GetReadonlyGroupsReadOnlyGroupListNetworkAccessListArrayInput interface {
 	pulumi.Input
 
@@ -3337,7 +3446,7 @@ type GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceList struct {
 // GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListInput is an input type that accepts GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListArgs and GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListOutput values.
 // You can construct a concrete instance of `GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListInput` via:
 //
-//          GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListArgs{...}
+//	GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListArgs{...}
 type GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListInput interface {
 	pulumi.Input
 
@@ -3441,7 +3550,7 @@ func (i GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListArgs) ToGetReado
 // GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListArrayInput is an input type that accepts GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListArray and GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListArrayOutput values.
 // You can construct a concrete instance of `GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListArrayInput` via:
 //
-//          GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListArray{ GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListArgs{...} }
+//	GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListArray{ GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListArgs{...} }
 type GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListArrayInput interface {
 	pulumi.Input
 
@@ -3724,7 +3833,7 @@ type GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListDbInstanceNetInfo s
 // GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListDbInstanceNetInfoInput is an input type that accepts GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListDbInstanceNetInfoArgs and GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListDbInstanceNetInfoOutput values.
 // You can construct a concrete instance of `GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListDbInstanceNetInfoInput` via:
 //
-//          GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListDbInstanceNetInfoArgs{...}
+//	GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListDbInstanceNetInfoArgs{...}
 type GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListDbInstanceNetInfoInput interface {
 	pulumi.Input
 
@@ -3766,7 +3875,7 @@ func (i GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListDbInstanceNetInf
 // GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListDbInstanceNetInfoArrayInput is an input type that accepts GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListDbInstanceNetInfoArray and GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListDbInstanceNetInfoArrayOutput values.
 // You can construct a concrete instance of `GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListDbInstanceNetInfoArrayInput` via:
 //
-//          GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListDbInstanceNetInfoArray{ GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListDbInstanceNetInfoArgs{...} }
+//	GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListDbInstanceNetInfoArray{ GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListDbInstanceNetInfoArgs{...} }
 type GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListDbInstanceNetInfoArrayInput interface {
 	pulumi.Input
 
@@ -3884,7 +3993,7 @@ type GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListDbNodeSet struct {
 // GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListDbNodeSetInput is an input type that accepts GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListDbNodeSetArgs and GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListDbNodeSetOutput values.
 // You can construct a concrete instance of `GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListDbNodeSetInput` via:
 //
-//          GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListDbNodeSetArgs{...}
+//	GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListDbNodeSetArgs{...}
 type GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListDbNodeSetInput interface {
 	pulumi.Input
 
@@ -3914,7 +4023,7 @@ func (i GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListDbNodeSetArgs) T
 // GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListDbNodeSetArrayInput is an input type that accepts GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListDbNodeSetArray and GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListDbNodeSetArrayOutput values.
 // You can construct a concrete instance of `GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListDbNodeSetArrayInput` via:
 //
-//          GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListDbNodeSetArray{ GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListDbNodeSetArgs{...} }
+//	GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListDbNodeSetArray{ GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListDbNodeSetArgs{...} }
 type GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListDbNodeSetArrayInput interface {
 	pulumi.Input
 
@@ -4002,7 +4111,7 @@ type GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListNetworkAccessList s
 // GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListNetworkAccessListInput is an input type that accepts GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListNetworkAccessListArgs and GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListNetworkAccessListOutput values.
 // You can construct a concrete instance of `GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListNetworkAccessListInput` via:
 //
-//          GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListNetworkAccessListArgs{...}
+//	GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListNetworkAccessListArgs{...}
 type GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListNetworkAccessListInput interface {
 	pulumi.Input
 
@@ -4044,7 +4153,7 @@ func (i GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListNetworkAccessLis
 // GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListNetworkAccessListArrayInput is an input type that accepts GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListNetworkAccessListArray and GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListNetworkAccessListArrayOutput values.
 // You can construct a concrete instance of `GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListNetworkAccessListArrayInput` via:
 //
-//          GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListNetworkAccessListArray{ GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListNetworkAccessListArgs{...} }
+//	GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListNetworkAccessListArray{ GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListNetworkAccessListArgs{...} }
 type GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListNetworkAccessListArrayInput interface {
 	pulumi.Input
 
@@ -4162,7 +4271,7 @@ type GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListTagList struct {
 // GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListTagListInput is an input type that accepts GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListTagListArgs and GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListTagListOutput values.
 // You can construct a concrete instance of `GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListTagListInput` via:
 //
-//          GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListTagListArgs{...}
+//	GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListTagListArgs{...}
 type GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListTagListInput interface {
 	pulumi.Input
 
@@ -4192,7 +4301,7 @@ func (i GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListTagListArgs) ToG
 // GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListTagListArrayInput is an input type that accepts GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListTagListArray and GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListTagListArrayOutput values.
 // You can construct a concrete instance of `GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListTagListArrayInput` via:
 //
-//          GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListTagListArray{ GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListTagListArgs{...} }
+//	GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListTagListArray{ GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListTagListArgs{...} }
 type GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListTagListArrayInput interface {
 	pulumi.Input
 
@@ -4274,7 +4383,7 @@ type GetRegionsRegionSet struct {
 // GetRegionsRegionSetInput is an input type that accepts GetRegionsRegionSetArgs and GetRegionsRegionSetOutput values.
 // You can construct a concrete instance of `GetRegionsRegionSetInput` via:
 //
-//          GetRegionsRegionSetArgs{...}
+//	GetRegionsRegionSetArgs{...}
 type GetRegionsRegionSetInput interface {
 	pulumi.Input
 
@@ -4310,7 +4419,7 @@ func (i GetRegionsRegionSetArgs) ToGetRegionsRegionSetOutputWithContext(ctx cont
 // GetRegionsRegionSetArrayInput is an input type that accepts GetRegionsRegionSetArray and GetRegionsRegionSetArrayOutput values.
 // You can construct a concrete instance of `GetRegionsRegionSetArrayInput` via:
 //
-//          GetRegionsRegionSetArray{ GetRegionsRegionSetArgs{...} }
+//	GetRegionsRegionSetArray{ GetRegionsRegionSetArgs{...} }
 type GetRegionsRegionSetArrayInput interface {
 	pulumi.Input
 
@@ -4413,7 +4522,7 @@ type GetSpecinfosList struct {
 // GetSpecinfosListInput is an input type that accepts GetSpecinfosListArgs and GetSpecinfosListOutput values.
 // You can construct a concrete instance of `GetSpecinfosListInput` via:
 //
-//          GetSpecinfosListArgs{...}
+//	GetSpecinfosListArgs{...}
 type GetSpecinfosListInput interface {
 	pulumi.Input
 
@@ -4455,7 +4564,7 @@ func (i GetSpecinfosListArgs) ToGetSpecinfosListOutputWithContext(ctx context.Co
 // GetSpecinfosListArrayInput is an input type that accepts GetSpecinfosListArray and GetSpecinfosListArrayOutput values.
 // You can construct a concrete instance of `GetSpecinfosListArrayInput` via:
 //
-//          GetSpecinfosListArray{ GetSpecinfosListArgs{...} }
+//	GetSpecinfosListArray{ GetSpecinfosListArgs{...} }
 type GetSpecinfosListArrayInput interface {
 	pulumi.Input
 
@@ -4569,7 +4678,7 @@ type GetXlogsList struct {
 // GetXlogsListInput is an input type that accepts GetXlogsListArgs and GetXlogsListOutput values.
 // You can construct a concrete instance of `GetXlogsListInput` via:
 //
-//          GetXlogsListArgs{...}
+//	GetXlogsListArgs{...}
 type GetXlogsListInput interface {
 	pulumi.Input
 
@@ -4607,7 +4716,7 @@ func (i GetXlogsListArgs) ToGetXlogsListOutputWithContext(ctx context.Context) G
 // GetXlogsListArrayInput is an input type that accepts GetXlogsListArray and GetXlogsListArrayOutput values.
 // You can construct a concrete instance of `GetXlogsListArrayInput` via:
 //
-//          GetXlogsListArray{ GetXlogsListArgs{...} }
+//	GetXlogsListArray{ GetXlogsListArgs{...} }
 type GetXlogsListArrayInput interface {
 	pulumi.Input
 
@@ -4711,7 +4820,7 @@ type GetZonesZoneSet struct {
 // GetZonesZoneSetInput is an input type that accepts GetZonesZoneSetArgs and GetZonesZoneSetOutput values.
 // You can construct a concrete instance of `GetZonesZoneSetInput` via:
 //
-//          GetZonesZoneSetArgs{...}
+//	GetZonesZoneSetArgs{...}
 type GetZonesZoneSetInput interface {
 	pulumi.Input
 
@@ -4749,7 +4858,7 @@ func (i GetZonesZoneSetArgs) ToGetZonesZoneSetOutputWithContext(ctx context.Cont
 // GetZonesZoneSetArrayInput is an input type that accepts GetZonesZoneSetArray and GetZonesZoneSetArrayOutput values.
 // You can construct a concrete instance of `GetZonesZoneSetArrayInput` via:
 //
-//          GetZonesZoneSetArray{ GetZonesZoneSetArgs{...} }
+//	GetZonesZoneSetArray{ GetZonesZoneSetArgs{...} }
 type GetZonesZoneSetArrayInput interface {
 	pulumi.Input
 
@@ -4842,6 +4951,8 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*InstanceDbNodeSetArrayInput)(nil)).Elem(), InstanceDbNodeSetArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ParameterTemplateModifyParamEntrySetInput)(nil)).Elem(), ParameterTemplateModifyParamEntrySetArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ParameterTemplateModifyParamEntrySetArrayInput)(nil)).Elem(), ParameterTemplateModifyParamEntrySetArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ReadonlyGroupNetInfoListInput)(nil)).Elem(), ReadonlyGroupNetInfoListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ReadonlyGroupNetInfoListArrayInput)(nil)).Elem(), ReadonlyGroupNetInfoListArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetBackupDownloadUrlsBackupDownloadRestrictionInput)(nil)).Elem(), GetBackupDownloadUrlsBackupDownloadRestrictionArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetBackupDownloadUrlsBackupDownloadRestrictionPtrInput)(nil)).Elem(), GetBackupDownloadUrlsBackupDownloadRestrictionArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetBaseBackupsBaseBackupSetInput)(nil)).Elem(), GetBaseBackupsBaseBackupSetArgs{})
@@ -4900,6 +5011,8 @@ func init() {
 	pulumi.RegisterOutputType(InstanceDbNodeSetArrayOutput{})
 	pulumi.RegisterOutputType(ParameterTemplateModifyParamEntrySetOutput{})
 	pulumi.RegisterOutputType(ParameterTemplateModifyParamEntrySetArrayOutput{})
+	pulumi.RegisterOutputType(ReadonlyGroupNetInfoListOutput{})
+	pulumi.RegisterOutputType(ReadonlyGroupNetInfoListArrayOutput{})
 	pulumi.RegisterOutputType(GetBackupDownloadUrlsBackupDownloadRestrictionOutput{})
 	pulumi.RegisterOutputType(GetBackupDownloadUrlsBackupDownloadRestrictionPtrOutput{})
 	pulumi.RegisterOutputType(GetBaseBackupsBaseBackupSetOutput{})

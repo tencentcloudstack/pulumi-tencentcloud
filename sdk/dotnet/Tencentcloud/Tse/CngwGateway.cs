@@ -15,59 +15,62 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tse
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var config = new Config();
+    ///     var availabilityZone = config.Get("availabilityZone") ?? "ap-guangzhou-4";
+    ///     var vpc = new Tencentcloud.Vpc.Instance("vpc", new()
     ///     {
-    ///         var config = new Config();
-    ///         var availabilityZone = config.Get("availabilityZone") ?? "ap-guangzhou-4";
-    ///         var vpc = new Tencentcloud.Vpc.Instance("vpc", new Tencentcloud.Vpc.InstanceArgs
-    ///         {
-    ///             CidrBlock = "10.0.0.0/16",
-    ///         });
-    ///         var subnet = new Tencentcloud.Subnet.Instance("subnet", new Tencentcloud.Subnet.InstanceArgs
-    ///         {
-    ///             VpcId = vpc.Id,
-    ///             AvailabilityZone = availabilityZone,
-    ///             CidrBlock = "10.0.1.0/24",
-    ///         });
-    ///         var cngwGateway = new Tencentcloud.Tse.CngwGateway("cngwGateway", new Tencentcloud.Tse.CngwGatewayArgs
-    ///         {
-    ///             Description = "terraform test1",
-    ///             EnableCls = true,
-    ///             EngineRegion = "ap-guangzhou",
-    ///             FeatureVersion = "STANDARD",
-    ///             GatewayVersion = "2.5.1",
-    ///             IngressClassName = "tse-nginx-ingress",
-    ///             InternetMaxBandwidthOut = 0,
-    ///             TradeType = 0,
-    ///             Type = "kong",
-    ///             NodeConfig = new Tencentcloud.Tse.Inputs.CngwGatewayNodeConfigArgs
-    ///             {
-    ///                 Number = 2,
-    ///                 Specification = "1c2g",
-    ///             },
-    ///             VpcConfig = new Tencentcloud.Tse.Inputs.CngwGatewayVpcConfigArgs
-    ///             {
-    ///                 SubnetId = subnet.Id,
-    ///                 VpcId = vpc.Id,
-    ///             },
-    ///             Tags = 
-    ///             {
-    ///                 { "createdBy", "terraform" },
-    ///             },
-    ///         });
-    ///     }
+    ///         CidrBlock = "10.0.0.0/16",
+    ///     });
     /// 
-    /// }
+    ///     var subnet = new Tencentcloud.Subnet.Instance("subnet", new()
+    ///     {
+    ///         VpcId = vpc.Id,
+    ///         AvailabilityZone = availabilityZone,
+    ///         CidrBlock = "10.0.1.0/24",
+    ///     });
+    /// 
+    ///     var cngwGateway = new Tencentcloud.Tse.CngwGateway("cngwGateway", new()
+    ///     {
+    ///         Description = "terraform test1",
+    ///         EnableCls = true,
+    ///         EngineRegion = "ap-guangzhou",
+    ///         FeatureVersion = "STANDARD",
+    ///         GatewayVersion = "2.5.1",
+    ///         IngressClassName = "tse-nginx-ingress",
+    ///         InternetMaxBandwidthOut = 0,
+    ///         TradeType = 0,
+    ///         Type = "kong",
+    ///         NodeConfig = new Tencentcloud.Tse.Inputs.CngwGatewayNodeConfigArgs
+    ///         {
+    ///             Number = 2,
+    ///             Specification = "1c2g",
+    ///         },
+    ///         VpcConfig = new Tencentcloud.Tse.Inputs.CngwGatewayVpcConfigArgs
+    ///         {
+    ///             SubnetId = subnet.Id,
+    ///             VpcId = vpc.Id,
+    ///         },
+    ///         Tags = 
+    ///         {
+    ///             { "createdBy", "terraform" },
+    ///         },
+    ///     });
+    /// 
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Tse/cngwGateway:CngwGateway")]
-    public partial class CngwGateway : Pulumi.CustomResource
+    public partial class CngwGateway : global::Pulumi.CustomResource
     {
         /// <summary>
         /// description information, up to 120 characters.
@@ -210,7 +213,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tse
         }
     }
 
-    public sealed class CngwGatewayArgs : Pulumi.ResourceArgs
+    public sealed class CngwGatewayArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// description information, up to 120 characters.
@@ -305,9 +308,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tse
         public CngwGatewayArgs()
         {
         }
+        public static new CngwGatewayArgs Empty => new CngwGatewayArgs();
     }
 
-    public sealed class CngwGatewayState : Pulumi.ResourceArgs
+    public sealed class CngwGatewayState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// description information, up to 120 characters.
@@ -426,5 +430,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tse
         public CngwGatewayState()
         {
         }
+        public static new CngwGatewayState Empty => new CngwGatewayState();
     }
 }

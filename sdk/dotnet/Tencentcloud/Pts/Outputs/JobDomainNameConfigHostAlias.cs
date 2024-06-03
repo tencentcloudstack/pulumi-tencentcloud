@@ -14,7 +14,13 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Pts.Outputs
     [OutputType]
     public sealed class JobDomainNameConfigHostAlias
     {
+        /// <summary>
+        /// List of domain names to be bound.
+        /// </summary>
         public readonly ImmutableArray<string> HostNames;
+        /// <summary>
+        /// The IP address to be bound.
+        /// </summary>
         public readonly string? Ip;
 
         [OutputConstructor]

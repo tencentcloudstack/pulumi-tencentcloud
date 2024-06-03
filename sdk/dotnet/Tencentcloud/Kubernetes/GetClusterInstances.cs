@@ -15,96 +15,90 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
         /// <summary>
         /// Use this data source to query detailed information of kubernetes cluster_instances
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var clusterInstances = Tencentcloud.Kubernetes.GetClusterInstances.Invoke(new()
         ///     {
-        ///         var clusterInstances = Output.Create(Tencentcloud.Kubernetes.GetClusterInstances.InvokeAsync(new Tencentcloud.Kubernetes.GetClusterInstancesArgs
+        ///         ClusterId = "cls-ely08ic4",
+        ///         Filters = new[]
         ///         {
-        ///             ClusterId = "cls-ely08ic4",
-        ///             Filters = 
+        ///             new Tencentcloud.Kubernetes.Inputs.GetClusterInstancesFilterInputArgs
         ///             {
-        ///                 new Tencentcloud.Kubernetes.Inputs.GetClusterInstancesFilterArgs
+        ///                 Name = "nodepool-id",
+        ///                 Values = new[]
         ///                 {
-        ///                     Name = "nodepool-id",
-        ///                     Values = 
-        ///                     {
-        ///                         "np-p4e6whqu",
-        ///                     },
+        ///                     "np-p4e6whqu",
         ///                 },
         ///             },
-        ///             InstanceIds = 
-        ///             {
-        ///                 "ins-kqmx8dm2",
-        ///             },
-        ///             InstanceRole = "WORKER",
-        ///         }));
-        ///     }
+        ///         },
+        ///         InstanceIds = new[]
+        ///         {
+        ///             "ins-kqmx8dm2",
+        ///         },
+        ///         InstanceRole = "WORKER",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetClusterInstancesResult> InvokeAsync(GetClusterInstancesArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetClusterInstancesResult>("tencentcloud:Kubernetes/getClusterInstances:getClusterInstances", args ?? new GetClusterInstancesArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetClusterInstancesResult>("tencentcloud:Kubernetes/getClusterInstances:getClusterInstances", args ?? new GetClusterInstancesArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of kubernetes cluster_instances
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var clusterInstances = Tencentcloud.Kubernetes.GetClusterInstances.Invoke(new()
         ///     {
-        ///         var clusterInstances = Output.Create(Tencentcloud.Kubernetes.GetClusterInstances.InvokeAsync(new Tencentcloud.Kubernetes.GetClusterInstancesArgs
+        ///         ClusterId = "cls-ely08ic4",
+        ///         Filters = new[]
         ///         {
-        ///             ClusterId = "cls-ely08ic4",
-        ///             Filters = 
+        ///             new Tencentcloud.Kubernetes.Inputs.GetClusterInstancesFilterInputArgs
         ///             {
-        ///                 new Tencentcloud.Kubernetes.Inputs.GetClusterInstancesFilterArgs
+        ///                 Name = "nodepool-id",
+        ///                 Values = new[]
         ///                 {
-        ///                     Name = "nodepool-id",
-        ///                     Values = 
-        ///                     {
-        ///                         "np-p4e6whqu",
-        ///                     },
+        ///                     "np-p4e6whqu",
         ///                 },
         ///             },
-        ///             InstanceIds = 
-        ///             {
-        ///                 "ins-kqmx8dm2",
-        ///             },
-        ///             InstanceRole = "WORKER",
-        ///         }));
-        ///     }
+        ///         },
+        ///         InstanceIds = new[]
+        ///         {
+        ///             "ins-kqmx8dm2",
+        ///         },
+        ///         InstanceRole = "WORKER",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetClusterInstancesResult> Invoke(GetClusterInstancesInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetClusterInstancesResult>("tencentcloud:Kubernetes/getClusterInstances:getClusterInstances", args ?? new GetClusterInstancesInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetClusterInstancesResult>("tencentcloud:Kubernetes/getClusterInstances:getClusterInstances", args ?? new GetClusterInstancesInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetClusterInstancesArgs : Pulumi.InvokeArgs
+    public sealed class GetClusterInstancesArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// ID of the cluster.
@@ -151,9 +145,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
         public GetClusterInstancesArgs()
         {
         }
+        public static new GetClusterInstancesArgs Empty => new GetClusterInstancesArgs();
     }
 
-    public sealed class GetClusterInstancesInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetClusterInstancesInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// ID of the cluster.
@@ -200,6 +195,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
         public GetClusterInstancesInvokeArgs()
         {
         }
+        public static new GetClusterInstancesInvokeArgs Empty => new GetClusterInstancesInvokeArgs();
     }
 
 

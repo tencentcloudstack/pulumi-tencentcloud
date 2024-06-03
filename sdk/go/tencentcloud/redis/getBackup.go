@@ -8,11 +8,44 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Use this data source to query detailed information of redis backup
+//
+// ## Example Usage
+//
+// <!--Start PulumiCodeChooser -->
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Redis"
+//
+// )
+// func main() {
+// pulumi.Run(func(ctx *pulumi.Context) error {
+// _, err := Redis.GetBackup(ctx, &redis.GetBackupArgs{
+// BeginTime: pulumi.StringRef("2023-04-07 03:57:30"),
+// EndTime: pulumi.StringRef("2023-04-07 03:57:56"),
+// InstanceId: pulumi.StringRef("crs-c1nl9rpv"),
+// InstanceName: pulumi.StringRef("Keep-terraform"),
+// Statuses: interface{}{
+// 2,
+// },
+// }, nil);
+// if err != nil {
+// return err
+// }
+// return nil
+// })
+// }
+// ```
+// <!--End PulumiCodeChooser -->
 func GetBackup(ctx *pulumi.Context, args *GetBackupArgs, opts ...pulumi.InvokeOption) (*GetBackupResult, error) {
-	opts = pkgInvokeDefaultOpts(opts)
+	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetBackupResult
 	err := ctx.Invoke("tencentcloud:Redis/getBackup:getBackup", args, &rv, opts...)
 	if err != nil {

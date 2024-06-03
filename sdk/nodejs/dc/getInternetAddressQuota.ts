@@ -9,20 +9,19 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const internetAddressQuota = pulumi.output(tencentcloud.Dc.getInternetAddressQuota());
+ * const internetAddressQuota = tencentcloud.Dc.getInternetAddressQuota({});
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getInternetAddressQuota(args?: GetInternetAddressQuotaArgs, opts?: pulumi.InvokeOptions): Promise<GetInternetAddressQuotaResult> {
     args = args || {};
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Dc/getInternetAddressQuota:getInternetAddressQuota", {
         "resultOutputFile": args.resultOutputFile,
     }, opts);
@@ -68,9 +67,22 @@ export interface GetInternetAddressQuotaResult {
     readonly ipv6PrefixLen: number;
     readonly resultOutputFile?: string;
 }
-
+/**
+ * Use this data source to query detailed information of dc internetAddressQuota
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const internetAddressQuota = tencentcloud.Dc.getInternetAddressQuota({});
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getInternetAddressQuotaOutput(args?: GetInternetAddressQuotaOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetInternetAddressQuotaResult> {
-    return pulumi.output(args).apply(a => getInternetAddressQuota(a, opts))
+    return pulumi.output(args).apply((a: any) => getInternetAddressQuota(a, opts))
 }
 
 /**

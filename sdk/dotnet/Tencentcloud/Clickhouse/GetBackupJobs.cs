@@ -15,64 +15,58 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clickhouse
         /// <summary>
         /// Use this data source to query detailed information of clickhouse backup jobs
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var backupJobs = Tencentcloud.Clickhouse.GetBackupJobs.Invoke(new()
         ///     {
-        ///         var backupJobs = Output.Create(Tencentcloud.Clickhouse.GetBackupJobs.InvokeAsync(new Tencentcloud.Clickhouse.GetBackupJobsArgs
-        ///         {
-        ///             InstanceId = "cdwch-xxxxxx",
-        ///         }));
-        ///     }
+        ///         InstanceId = "cdwch-xxxxxx",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetBackupJobsResult> InvokeAsync(GetBackupJobsArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetBackupJobsResult>("tencentcloud:Clickhouse/getBackupJobs:getBackupJobs", args ?? new GetBackupJobsArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetBackupJobsResult>("tencentcloud:Clickhouse/getBackupJobs:getBackupJobs", args ?? new GetBackupJobsArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of clickhouse backup jobs
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var backupJobs = Tencentcloud.Clickhouse.GetBackupJobs.Invoke(new()
         ///     {
-        ///         var backupJobs = Output.Create(Tencentcloud.Clickhouse.GetBackupJobs.InvokeAsync(new Tencentcloud.Clickhouse.GetBackupJobsArgs
-        ///         {
-        ///             InstanceId = "cdwch-xxxxxx",
-        ///         }));
-        ///     }
+        ///         InstanceId = "cdwch-xxxxxx",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetBackupJobsResult> Invoke(GetBackupJobsInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetBackupJobsResult>("tencentcloud:Clickhouse/getBackupJobs:getBackupJobs", args ?? new GetBackupJobsInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetBackupJobsResult>("tencentcloud:Clickhouse/getBackupJobs:getBackupJobs", args ?? new GetBackupJobsInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetBackupJobsArgs : Pulumi.InvokeArgs
+    public sealed class GetBackupJobsArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Begin time.
@@ -101,9 +95,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clickhouse
         public GetBackupJobsArgs()
         {
         }
+        public static new GetBackupJobsArgs Empty => new GetBackupJobsArgs();
     }
 
-    public sealed class GetBackupJobsInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetBackupJobsInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Begin time.
@@ -132,6 +127,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clickhouse
         public GetBackupJobsInvokeArgs()
         {
         }
+        public static new GetBackupJobsInvokeArgs Empty => new GetBackupJobsInvokeArgs();
     }
 
 

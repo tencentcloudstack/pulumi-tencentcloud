@@ -9,22 +9,24 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const bindApiGroup = new tencentcloud.Tsf.BindApiGroup("bind_api_group", {
+ * const bindApiGroup = new tencentcloud.tsf.BindApiGroup("bindApiGroup", {
  *     gatewayDeployGroupId: "group-vzd97zpy",
  *     groupId: "grp-qp0rj3zi",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * tsf bind_api_group can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Tsf/bindApiGroup:BindApiGroup bind_api_group bind_api_group_id
+ * $ pulumi import tencentcloud:Tsf/bindApiGroup:BindApiGroup bind_api_group bind_api_group_id
  * ```
  */
 export class BindApiGroup extends pulumi.CustomResource {

@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,22 +11,21 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const describeHostApiGatewayInstanceList = pulumi.output(tencentcloud.Ssl.getDescribeHostApiGatewayInstanceList({
+ * const describeHostApiGatewayInstanceList = tencentcloud.Ssl.getDescribeHostApiGatewayInstanceList({
  *     certificateId: "9Bpk7XOu",
  *     resourceType: "apiGateway",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getDescribeHostApiGatewayInstanceList(args: GetDescribeHostApiGatewayInstanceListArgs, opts?: pulumi.InvokeOptions): Promise<GetDescribeHostApiGatewayInstanceListResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Ssl/getDescribeHostApiGatewayInstanceList:getDescribeHostApiGatewayInstanceList", {
         "certificateId": args.certificateId,
         "filters": args.filters,
@@ -85,9 +85,25 @@ export interface GetDescribeHostApiGatewayInstanceListResult {
     readonly resourceType: string;
     readonly resultOutputFile?: string;
 }
-
+/**
+ * Use this data source to query detailed information of ssl describeHostApiGatewayInstanceList
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const describeHostApiGatewayInstanceList = tencentcloud.Ssl.getDescribeHostApiGatewayInstanceList({
+ *     certificateId: "9Bpk7XOu",
+ *     resourceType: "apiGateway",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getDescribeHostApiGatewayInstanceListOutput(args: GetDescribeHostApiGatewayInstanceListOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetDescribeHostApiGatewayInstanceListResult> {
-    return pulumi.output(args).apply(a => getDescribeHostApiGatewayInstanceList(a, opts))
+    return pulumi.output(args).apply((a: any) => getDescribeHostApiGatewayInstanceList(a, opts))
 }
 
 /**

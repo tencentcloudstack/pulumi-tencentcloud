@@ -15,7 +15,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Outputs
     public sealed class ZoneSettingCacheNoCache
     {
         /// <summary>
-        /// Whether to cache the configuration. Valid values: `on`: Do not cache; `off`: Cache. Note: This field may return null, indicating that no valid value can be obtained.
+        /// Whether to cache the configuration.
         /// </summary>
         public readonly string? Switch;
 

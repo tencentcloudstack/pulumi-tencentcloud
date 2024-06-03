@@ -15,35 +15,36 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Lighthouse
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var blueprint = new Tencentcloud.Lighthouse.Blueprint("blueprint", new()
     ///     {
-    ///         var blueprint = new Tencentcloud.Lighthouse.Blueprint("blueprint", new Tencentcloud.Lighthouse.BlueprintArgs
-    ///         {
-    ///             BlueprintName = "blueprint_name_test",
-    ///             Description = "blueprint_description_test",
-    ///             InstanceId = "lhins-xxxxxx",
-    ///         });
-    ///     }
+    ///         BlueprintName = "blueprint_name_test",
+    ///         Description = "blueprint_description_test",
+    ///         InstanceId = "lhins-xxxxxx",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// lighthouse blueprint can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Lighthouse/blueprint:Blueprint blueprint blueprint_id
+    /// $ pulumi import tencentcloud:Lighthouse/blueprint:Blueprint blueprint blueprint_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Lighthouse/blueprint:Blueprint")]
-    public partial class Blueprint : Pulumi.CustomResource
+    public partial class Blueprint : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Blueprint name, which can contain up to 60 characters.
@@ -108,7 +109,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Lighthouse
         }
     }
 
-    public sealed class BlueprintArgs : Pulumi.ResourceArgs
+    public sealed class BlueprintArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Blueprint name, which can contain up to 60 characters.
@@ -131,9 +132,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Lighthouse
         public BlueprintArgs()
         {
         }
+        public static new BlueprintArgs Empty => new BlueprintArgs();
     }
 
-    public sealed class BlueprintState : Pulumi.ResourceArgs
+    public sealed class BlueprintState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Blueprint name, which can contain up to 60 characters.
@@ -156,5 +158,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Lighthouse
         public BlueprintState()
         {
         }
+        public static new BlueprintState Empty => new BlueprintState();
     }
 }

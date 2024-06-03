@@ -7,45 +7,50 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to attach/detach the corresponding certificate for the domain name in specified cos bucket.
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Cos"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cos"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cos"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Cos.NewBucketDomainCertificateAttachment(ctx, "foo", &Cos.BucketDomainCertificateAttachmentArgs{
-// 			Bucket: pulumi.String(""),
-// 			DomainCertificate: &cos.BucketDomainCertificateAttachmentDomainCertificateArgs{
-// 				Certificate: &cos.BucketDomainCertificateAttachmentDomainCertificateCertificateArgs{
-// 					CertType: pulumi.String("CustomCert"),
-// 					CustomCert: &cos.BucketDomainCertificateAttachmentDomainCertificateCertificateCustomCertArgs{
-// 						Cert:       pulumi.String("===CERTIFICATE==="),
-// 						PrivateKey: pulumi.String("===PRIVATE_KEY==="),
-// 					},
-// 				},
-// 				Domain: pulumi.String("domain_name"),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Cos.NewBucketDomainCertificateAttachment(ctx, "foo", &Cos.BucketDomainCertificateAttachmentArgs{
+//				Bucket: pulumi.String(""),
+//				DomainCertificate: &cos.BucketDomainCertificateAttachmentDomainCertificateArgs{
+//					Certificate: &cos.BucketDomainCertificateAttachmentDomainCertificateCertificateArgs{
+//						CertType: pulumi.String("CustomCert"),
+//						CustomCert: &cos.BucketDomainCertificateAttachmentDomainCertificateCertificateCustomCertArgs{
+//							Cert:       pulumi.String("===CERTIFICATE==="),
+//							PrivateKey: pulumi.String("===PRIVATE_KEY==="),
+//						},
+//					},
+//					Domain: pulumi.String("domain_name"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 type BucketDomainCertificateAttachment struct {
 	pulumi.CustomResourceState
 
@@ -68,7 +73,7 @@ func NewBucketDomainCertificateAttachment(ctx *pulumi.Context,
 	if args.DomainCertificate == nil {
 		return nil, errors.New("invalid value for required argument 'DomainCertificate'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource BucketDomainCertificateAttachment
 	err := ctx.RegisterResource("tencentcloud:Cos/bucketDomainCertificateAttachment:BucketDomainCertificateAttachment", name, args, &resource, opts...)
 	if err != nil {
@@ -149,7 +154,7 @@ func (i *BucketDomainCertificateAttachment) ToBucketDomainCertificateAttachmentO
 // BucketDomainCertificateAttachmentArrayInput is an input type that accepts BucketDomainCertificateAttachmentArray and BucketDomainCertificateAttachmentArrayOutput values.
 // You can construct a concrete instance of `BucketDomainCertificateAttachmentArrayInput` via:
 //
-//          BucketDomainCertificateAttachmentArray{ BucketDomainCertificateAttachmentArgs{...} }
+//	BucketDomainCertificateAttachmentArray{ BucketDomainCertificateAttachmentArgs{...} }
 type BucketDomainCertificateAttachmentArrayInput interface {
 	pulumi.Input
 
@@ -174,7 +179,7 @@ func (i BucketDomainCertificateAttachmentArray) ToBucketDomainCertificateAttachm
 // BucketDomainCertificateAttachmentMapInput is an input type that accepts BucketDomainCertificateAttachmentMap and BucketDomainCertificateAttachmentMapOutput values.
 // You can construct a concrete instance of `BucketDomainCertificateAttachmentMapInput` via:
 //
-//          BucketDomainCertificateAttachmentMap{ "key": BucketDomainCertificateAttachmentArgs{...} }
+//	BucketDomainCertificateAttachmentMap{ "key": BucketDomainCertificateAttachmentArgs{...} }
 type BucketDomainCertificateAttachmentMapInput interface {
 	pulumi.Input
 

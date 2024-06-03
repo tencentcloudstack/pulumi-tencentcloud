@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Inputs
 {
 
-    public sealed class ZoneSettingOriginGetArgs : Pulumi.ResourceArgs
+    public sealed class ZoneSettingOriginGetArgs : global::Pulumi.ResourceArgs
     {
         [Input("backupOrigins")]
         private InputList<string>? _backupOrigins;
@@ -26,13 +26,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Inputs
         }
 
         /// <summary>
-        /// Whether access private cos bucket is allowed when `OriginType` is cos. Note: This field may return null, indicating that no valid value can be obtained.
-        /// </summary>
-        [Input("cosPrivateAccess")]
-        public Input<string>? CosPrivateAccess { get; set; }
-
-        /// <summary>
-        /// Origin-pull protocol.- `http`: Switch HTTPS requests to HTTP.- `follow`: Follow the protocol of the request.- `https`: Switch HTTP requests to HTTPS. This only supports port 443 on the origin server. Note: This field may return null, indicating that no valid value can be obtained.
+        /// Origin-pull protocol.
         /// </summary>
         [Input("originPullProtocol")]
         public Input<string>? OriginPullProtocol { get; set; }
@@ -52,5 +46,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Inputs
         public ZoneSettingOriginGetArgs()
         {
         }
+        public static new ZoneSettingOriginGetArgs Empty => new ZoneSettingOriginGetArgs();
     }
 }

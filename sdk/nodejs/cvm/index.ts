@@ -5,46 +5,121 @@ import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
 // Export members:
-export * from "./chcConfig";
-export * from "./exportImages";
-export * from "./getChcDeniedActions";
-export * from "./getChcHosts";
-export * from "./getDisasterRecoverGroupQuota";
-export * from "./getImageQuota";
-export * from "./getImageSharePermission";
-export * from "./getImportImageOs";
-export * from "./getInstanceVncUrl";
-export * from "./getInstancesModification";
-export * from "./hpcCluster";
-export * from "./imageSharePermission";
-export * from "./importImage";
-export * from "./launchTemplate";
-export * from "./launchTemplateDefaultVersion";
-export * from "./launchTemplateVersion";
-export * from "./modifyInstanceDiskType";
-export * from "./programFpgaImage";
-export * from "./rebootInstance";
-export * from "./renewHost";
-export * from "./renewInstance";
-export * from "./securityGroupAttachment";
-export * from "./syncImage";
+export { ChcConfigArgs, ChcConfigState } from "./chcConfig";
+export type ChcConfig = import("./chcConfig").ChcConfig;
+export const ChcConfig: typeof import("./chcConfig").ChcConfig = null as any;
+utilities.lazyLoad(exports, ["ChcConfig"], () => require("./chcConfig"));
 
-// Import resources to register:
-import { ChcConfig } from "./chcConfig";
-import { ExportImages } from "./exportImages";
-import { HpcCluster } from "./hpcCluster";
-import { ImageSharePermission } from "./imageSharePermission";
-import { ImportImage } from "./importImage";
-import { LaunchTemplate } from "./launchTemplate";
-import { LaunchTemplateDefaultVersion } from "./launchTemplateDefaultVersion";
-import { LaunchTemplateVersion } from "./launchTemplateVersion";
-import { ModifyInstanceDiskType } from "./modifyInstanceDiskType";
-import { ProgramFpgaImage } from "./programFpgaImage";
-import { RebootInstance } from "./rebootInstance";
-import { RenewHost } from "./renewHost";
-import { RenewInstance } from "./renewInstance";
-import { SecurityGroupAttachment } from "./securityGroupAttachment";
-import { SyncImage } from "./syncImage";
+export { ExportImagesArgs, ExportImagesState } from "./exportImages";
+export type ExportImages = import("./exportImages").ExportImages;
+export const ExportImages: typeof import("./exportImages").ExportImages = null as any;
+utilities.lazyLoad(exports, ["ExportImages"], () => require("./exportImages"));
+
+export { GetChcDeniedActionsArgs, GetChcDeniedActionsResult, GetChcDeniedActionsOutputArgs } from "./getChcDeniedActions";
+export const getChcDeniedActions: typeof import("./getChcDeniedActions").getChcDeniedActions = null as any;
+export const getChcDeniedActionsOutput: typeof import("./getChcDeniedActions").getChcDeniedActionsOutput = null as any;
+utilities.lazyLoad(exports, ["getChcDeniedActions","getChcDeniedActionsOutput"], () => require("./getChcDeniedActions"));
+
+export { GetChcHostsArgs, GetChcHostsResult, GetChcHostsOutputArgs } from "./getChcHosts";
+export const getChcHosts: typeof import("./getChcHosts").getChcHosts = null as any;
+export const getChcHostsOutput: typeof import("./getChcHosts").getChcHostsOutput = null as any;
+utilities.lazyLoad(exports, ["getChcHosts","getChcHostsOutput"], () => require("./getChcHosts"));
+
+export { GetDisasterRecoverGroupQuotaArgs, GetDisasterRecoverGroupQuotaResult, GetDisasterRecoverGroupQuotaOutputArgs } from "./getDisasterRecoverGroupQuota";
+export const getDisasterRecoverGroupQuota: typeof import("./getDisasterRecoverGroupQuota").getDisasterRecoverGroupQuota = null as any;
+export const getDisasterRecoverGroupQuotaOutput: typeof import("./getDisasterRecoverGroupQuota").getDisasterRecoverGroupQuotaOutput = null as any;
+utilities.lazyLoad(exports, ["getDisasterRecoverGroupQuota","getDisasterRecoverGroupQuotaOutput"], () => require("./getDisasterRecoverGroupQuota"));
+
+export { GetImageQuotaArgs, GetImageQuotaResult, GetImageQuotaOutputArgs } from "./getImageQuota";
+export const getImageQuota: typeof import("./getImageQuota").getImageQuota = null as any;
+export const getImageQuotaOutput: typeof import("./getImageQuota").getImageQuotaOutput = null as any;
+utilities.lazyLoad(exports, ["getImageQuota","getImageQuotaOutput"], () => require("./getImageQuota"));
+
+export { GetImageSharePermissionArgs, GetImageSharePermissionResult, GetImageSharePermissionOutputArgs } from "./getImageSharePermission";
+export const getImageSharePermission: typeof import("./getImageSharePermission").getImageSharePermission = null as any;
+export const getImageSharePermissionOutput: typeof import("./getImageSharePermission").getImageSharePermissionOutput = null as any;
+utilities.lazyLoad(exports, ["getImageSharePermission","getImageSharePermissionOutput"], () => require("./getImageSharePermission"));
+
+export { GetImportImageOsArgs, GetImportImageOsResult, GetImportImageOsOutputArgs } from "./getImportImageOs";
+export const getImportImageOs: typeof import("./getImportImageOs").getImportImageOs = null as any;
+export const getImportImageOsOutput: typeof import("./getImportImageOs").getImportImageOsOutput = null as any;
+utilities.lazyLoad(exports, ["getImportImageOs","getImportImageOsOutput"], () => require("./getImportImageOs"));
+
+export { GetInstanceVncUrlArgs, GetInstanceVncUrlResult, GetInstanceVncUrlOutputArgs } from "./getInstanceVncUrl";
+export const getInstanceVncUrl: typeof import("./getInstanceVncUrl").getInstanceVncUrl = null as any;
+export const getInstanceVncUrlOutput: typeof import("./getInstanceVncUrl").getInstanceVncUrlOutput = null as any;
+utilities.lazyLoad(exports, ["getInstanceVncUrl","getInstanceVncUrlOutput"], () => require("./getInstanceVncUrl"));
+
+export { GetInstancesModificationArgs, GetInstancesModificationResult, GetInstancesModificationOutputArgs } from "./getInstancesModification";
+export const getInstancesModification: typeof import("./getInstancesModification").getInstancesModification = null as any;
+export const getInstancesModificationOutput: typeof import("./getInstancesModification").getInstancesModificationOutput = null as any;
+utilities.lazyLoad(exports, ["getInstancesModification","getInstancesModificationOutput"], () => require("./getInstancesModification"));
+
+export { HpcClusterArgs, HpcClusterState } from "./hpcCluster";
+export type HpcCluster = import("./hpcCluster").HpcCluster;
+export const HpcCluster: typeof import("./hpcCluster").HpcCluster = null as any;
+utilities.lazyLoad(exports, ["HpcCluster"], () => require("./hpcCluster"));
+
+export { ImageSharePermissionArgs, ImageSharePermissionState } from "./imageSharePermission";
+export type ImageSharePermission = import("./imageSharePermission").ImageSharePermission;
+export const ImageSharePermission: typeof import("./imageSharePermission").ImageSharePermission = null as any;
+utilities.lazyLoad(exports, ["ImageSharePermission"], () => require("./imageSharePermission"));
+
+export { ImportImageArgs, ImportImageState } from "./importImage";
+export type ImportImage = import("./importImage").ImportImage;
+export const ImportImage: typeof import("./importImage").ImportImage = null as any;
+utilities.lazyLoad(exports, ["ImportImage"], () => require("./importImage"));
+
+export { LaunchTemplateArgs, LaunchTemplateState } from "./launchTemplate";
+export type LaunchTemplate = import("./launchTemplate").LaunchTemplate;
+export const LaunchTemplate: typeof import("./launchTemplate").LaunchTemplate = null as any;
+utilities.lazyLoad(exports, ["LaunchTemplate"], () => require("./launchTemplate"));
+
+export { LaunchTemplateDefaultVersionArgs, LaunchTemplateDefaultVersionState } from "./launchTemplateDefaultVersion";
+export type LaunchTemplateDefaultVersion = import("./launchTemplateDefaultVersion").LaunchTemplateDefaultVersion;
+export const LaunchTemplateDefaultVersion: typeof import("./launchTemplateDefaultVersion").LaunchTemplateDefaultVersion = null as any;
+utilities.lazyLoad(exports, ["LaunchTemplateDefaultVersion"], () => require("./launchTemplateDefaultVersion"));
+
+export { LaunchTemplateVersionArgs, LaunchTemplateVersionState } from "./launchTemplateVersion";
+export type LaunchTemplateVersion = import("./launchTemplateVersion").LaunchTemplateVersion;
+export const LaunchTemplateVersion: typeof import("./launchTemplateVersion").LaunchTemplateVersion = null as any;
+utilities.lazyLoad(exports, ["LaunchTemplateVersion"], () => require("./launchTemplateVersion"));
+
+export { ModifyInstanceDiskTypeArgs, ModifyInstanceDiskTypeState } from "./modifyInstanceDiskType";
+export type ModifyInstanceDiskType = import("./modifyInstanceDiskType").ModifyInstanceDiskType;
+export const ModifyInstanceDiskType: typeof import("./modifyInstanceDiskType").ModifyInstanceDiskType = null as any;
+utilities.lazyLoad(exports, ["ModifyInstanceDiskType"], () => require("./modifyInstanceDiskType"));
+
+export { ProgramFpgaImageArgs, ProgramFpgaImageState } from "./programFpgaImage";
+export type ProgramFpgaImage = import("./programFpgaImage").ProgramFpgaImage;
+export const ProgramFpgaImage: typeof import("./programFpgaImage").ProgramFpgaImage = null as any;
+utilities.lazyLoad(exports, ["ProgramFpgaImage"], () => require("./programFpgaImage"));
+
+export { RebootInstanceArgs, RebootInstanceState } from "./rebootInstance";
+export type RebootInstance = import("./rebootInstance").RebootInstance;
+export const RebootInstance: typeof import("./rebootInstance").RebootInstance = null as any;
+utilities.lazyLoad(exports, ["RebootInstance"], () => require("./rebootInstance"));
+
+export { RenewHostArgs, RenewHostState } from "./renewHost";
+export type RenewHost = import("./renewHost").RenewHost;
+export const RenewHost: typeof import("./renewHost").RenewHost = null as any;
+utilities.lazyLoad(exports, ["RenewHost"], () => require("./renewHost"));
+
+export { RenewInstanceArgs, RenewInstanceState } from "./renewInstance";
+export type RenewInstance = import("./renewInstance").RenewInstance;
+export const RenewInstance: typeof import("./renewInstance").RenewInstance = null as any;
+utilities.lazyLoad(exports, ["RenewInstance"], () => require("./renewInstance"));
+
+export { SecurityGroupAttachmentArgs, SecurityGroupAttachmentState } from "./securityGroupAttachment";
+export type SecurityGroupAttachment = import("./securityGroupAttachment").SecurityGroupAttachment;
+export const SecurityGroupAttachment: typeof import("./securityGroupAttachment").SecurityGroupAttachment = null as any;
+utilities.lazyLoad(exports, ["SecurityGroupAttachment"], () => require("./securityGroupAttachment"));
+
+export { SyncImageArgs, SyncImageState } from "./syncImage";
+export type SyncImage = import("./syncImage").SyncImage;
+export const SyncImage: typeof import("./syncImage").SyncImage = null as any;
+utilities.lazyLoad(exports, ["SyncImage"], () => require("./syncImage"));
+
 
 const _module = {
     version: utilities.getVersion(),

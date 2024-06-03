@@ -15,118 +15,114 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Instance
         /// <summary>
         /// Use this data source to query instances type.
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var foo = Tencentcloud.Instance.GetTypes.Invoke(new()
         ///     {
-        ///         var foo = Output.Create(Tencentcloud.Instance.GetTypes.InvokeAsync(new Tencentcloud.Instance.GetTypesArgs
+        ///         AvailabilityZone = "ap-guangzhou-2",
+        ///         CpuCoreCount = 2,
+        ///         MemorySize = 4,
+        ///     });
+        /// 
+        ///     var t1c1g = Tencentcloud.Instance.GetTypes.Invoke(new()
+        ///     {
+        ///         CpuCoreCount = 1,
+        ///         ExcludeSoldOut = true,
+        ///         Filters = new[]
         ///         {
-        ///             AvailabilityZone = "ap-guangzhou-2",
-        ///             CpuCoreCount = 2,
-        ///             MemorySize = 4,
-        ///         }));
-        ///         var t1c1g = Output.Create(Tencentcloud.Instance.GetTypes.InvokeAsync(new Tencentcloud.Instance.GetTypesArgs
-        ///         {
-        ///             CpuCoreCount = 1,
-        ///             ExcludeSoldOut = true,
-        ///             Filters = 
+        ///             new Tencentcloud.Instance.Inputs.GetTypesFilterInputArgs
         ///             {
-        ///                 new Tencentcloud.Instance.Inputs.GetTypesFilterArgs
+        ///                 Name = "instance-charge-type",
+        ///                 Values = new[]
         ///                 {
-        ///                     Name = "instance-charge-type",
-        ///                     Values = 
-        ///                     {
-        ///                         "POSTPAID_BY_HOUR",
-        ///                     },
-        ///                 },
-        ///                 new Tencentcloud.Instance.Inputs.GetTypesFilterArgs
-        ///                 {
-        ///                     Name = "zone",
-        ///                     Values = 
-        ///                     {
-        ///                         "ap-shanghai-2",
-        ///                     },
+        ///                     "POSTPAID_BY_HOUR",
         ///                 },
         ///             },
-        ///             MemorySize = 1,
-        ///         }));
-        ///     }
+        ///             new Tencentcloud.Instance.Inputs.GetTypesFilterInputArgs
+        ///             {
+        ///                 Name = "zone",
+        ///                 Values = new[]
+        ///                 {
+        ///                     "ap-shanghai-2",
+        ///                 },
+        ///             },
+        ///         },
+        ///         MemorySize = 1,
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetTypesResult> InvokeAsync(GetTypesArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetTypesResult>("tencentcloud:Instance/getTypes:getTypes", args ?? new GetTypesArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetTypesResult>("tencentcloud:Instance/getTypes:getTypes", args ?? new GetTypesArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query instances type.
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var foo = Tencentcloud.Instance.GetTypes.Invoke(new()
         ///     {
-        ///         var foo = Output.Create(Tencentcloud.Instance.GetTypes.InvokeAsync(new Tencentcloud.Instance.GetTypesArgs
+        ///         AvailabilityZone = "ap-guangzhou-2",
+        ///         CpuCoreCount = 2,
+        ///         MemorySize = 4,
+        ///     });
+        /// 
+        ///     var t1c1g = Tencentcloud.Instance.GetTypes.Invoke(new()
+        ///     {
+        ///         CpuCoreCount = 1,
+        ///         ExcludeSoldOut = true,
+        ///         Filters = new[]
         ///         {
-        ///             AvailabilityZone = "ap-guangzhou-2",
-        ///             CpuCoreCount = 2,
-        ///             MemorySize = 4,
-        ///         }));
-        ///         var t1c1g = Output.Create(Tencentcloud.Instance.GetTypes.InvokeAsync(new Tencentcloud.Instance.GetTypesArgs
-        ///         {
-        ///             CpuCoreCount = 1,
-        ///             ExcludeSoldOut = true,
-        ///             Filters = 
+        ///             new Tencentcloud.Instance.Inputs.GetTypesFilterInputArgs
         ///             {
-        ///                 new Tencentcloud.Instance.Inputs.GetTypesFilterArgs
+        ///                 Name = "instance-charge-type",
+        ///                 Values = new[]
         ///                 {
-        ///                     Name = "instance-charge-type",
-        ///                     Values = 
-        ///                     {
-        ///                         "POSTPAID_BY_HOUR",
-        ///                     },
-        ///                 },
-        ///                 new Tencentcloud.Instance.Inputs.GetTypesFilterArgs
-        ///                 {
-        ///                     Name = "zone",
-        ///                     Values = 
-        ///                     {
-        ///                         "ap-shanghai-2",
-        ///                     },
+        ///                     "POSTPAID_BY_HOUR",
         ///                 },
         ///             },
-        ///             MemorySize = 1,
-        ///         }));
-        ///     }
+        ///             new Tencentcloud.Instance.Inputs.GetTypesFilterInputArgs
+        ///             {
+        ///                 Name = "zone",
+        ///                 Values = new[]
+        ///                 {
+        ///                     "ap-shanghai-2",
+        ///                 },
+        ///             },
+        ///         },
+        ///         MemorySize = 1,
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetTypesResult> Invoke(GetTypesInvokeArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetTypesResult>("tencentcloud:Instance/getTypes:getTypes", args ?? new GetTypesInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetTypesResult>("tencentcloud:Instance/getTypes:getTypes", args ?? new GetTypesInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetTypesArgs : Pulumi.InvokeArgs
+    public sealed class GetTypesArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// The available zone that the CVM instance locates at. This field is conflict with `filter`.
@@ -179,9 +175,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Instance
         public GetTypesArgs()
         {
         }
+        public static new GetTypesArgs Empty => new GetTypesArgs();
     }
 
-    public sealed class GetTypesInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetTypesInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// The available zone that the CVM instance locates at. This field is conflict with `filter`.
@@ -234,6 +231,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Instance
         public GetTypesInvokeArgs()
         {
         }
+        public static new GetTypesInvokeArgs Empty => new GetTypesInvokeArgs();
     }
 
 

@@ -8,37 +8,43 @@ import * as utilities from "../utilities";
  * Provides a resource to create a cfw addressTemplate
  *
  * ## Example Usage
+ *
  * ### If type is 1
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = new tencentcloud.Cfw.AddressTemplate("example", {
+ * const example = new tencentcloud.cfw.AddressTemplate("example", {
  *     detail: "test template",
  *     ipString: "1.1.1.1,2.2.2.2",
  *     type: 1,
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
+ *
  * ### If type is 5
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = new tencentcloud.Cfw.AddressTemplate("example", {
+ * const example = new tencentcloud.cfw.AddressTemplate("example", {
  *     detail: "test template",
  *     ipString: "www.qq.com,www.tencent.com",
  *     type: 5,
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * cfw address_template can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Cfw/addressTemplate:AddressTemplate example mb_1300846651_1695611353900
+ * $ pulumi import tencentcloud:Cfw/addressTemplate:AddressTemplate example mb_1300846651_1695611353900
  * ```
  */
 export class AddressTemplate extends pulumi.CustomResource {

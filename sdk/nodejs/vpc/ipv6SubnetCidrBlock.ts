@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -13,7 +14,7 @@ import * as utilities from "../utilities";
  * vpc ipv6_subnet_cidr_block can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Vpc/ipv6SubnetCidrBlock:Ipv6SubnetCidrBlock ipv6_subnet_cidr_block ipv6_subnet_cidr_block_id
+ * $ pulumi import tencentcloud:Vpc/ipv6SubnetCidrBlock:Ipv6SubnetCidrBlock ipv6_subnet_cidr_block ipv6_subnet_cidr_block_id
  * ```
  */
 export class Ipv6SubnetCidrBlock extends pulumi.CustomResource {

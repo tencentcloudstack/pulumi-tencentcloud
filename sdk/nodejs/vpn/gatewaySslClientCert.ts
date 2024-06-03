@@ -9,22 +9,24 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const vpnGatewaySslClientCert = new tencentcloud.Vpn.GatewaySslClientCert("vpn_gateway_ssl_client_cert", {
+ * const vpnGatewaySslClientCert = new tencentcloud.vpn.GatewaySslClientCert("vpnGatewaySslClientCert", {
  *     sslVpnClientId: "vpnc-123456",
- *     switch: "off",
+ *     "switch": "off",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * vpc vpn_gateway_ssl_client_cert can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Vpn/gatewaySslClientCert:GatewaySslClientCert vpn_gateway_ssl_client_cert ssl_client_id
+ * $ pulumi import tencentcloud:Vpn/gatewaySslClientCert:GatewaySslClientCert vpn_gateway_ssl_client_cert ssl_client_id
  * ```
  */
 export class GatewaySslClientCert extends pulumi.CustomResource {

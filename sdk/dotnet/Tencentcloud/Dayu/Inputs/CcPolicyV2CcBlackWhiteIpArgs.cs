@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dayu.Inputs
 {
 
-    public sealed class CcPolicyV2CcBlackWhiteIpArgs : Pulumi.ResourceArgs
+    public sealed class CcPolicyV2CcBlackWhiteIpArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Blacklist and whitelist IP addresses.
@@ -52,5 +52,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dayu.Inputs
         public CcPolicyV2CcBlackWhiteIpArgs()
         {
         }
+        public static new CcPolicyV2CcBlackWhiteIpArgs Empty => new CcPolicyV2CcBlackWhiteIpArgs();
     }
 }

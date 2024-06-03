@@ -9,22 +9,24 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const foo = new tencentcloud.Dnspod.DomainInstance("foo", {
+ * const foo = new tencentcloud.dnspod.DomainInstance("foo", {
  *     domain: "hello.com",
  *     remark: "this is demo",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * DnsPod Domain instance can be imported, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Dnspod/domainInstance:DomainInstance foo domain
+ * $ pulumi import tencentcloud:Dnspod/domainInstance:DomainInstance foo domain
  * ```
  */
 export class DomainInstance extends pulumi.CustomResource {

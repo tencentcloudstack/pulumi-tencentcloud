@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps.Inputs
 {
 
-    public sealed class WithdrawsWatermarkOperationTaskNotifyConfigAwsSqsGetArgs : Pulumi.ResourceArgs
+    public sealed class WithdrawsWatermarkOperationTaskNotifyConfigAwsSqsGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// The key ID required to read from/write to the SQS queue.
@@ -40,5 +40,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps.Inputs
         public WithdrawsWatermarkOperationTaskNotifyConfigAwsSqsGetArgs()
         {
         }
+        public static new WithdrawsWatermarkOperationTaskNotifyConfigAwsSqsGetArgs Empty => new WithdrawsWatermarkOperationTaskNotifyConfigAwsSqsGetArgs();
     }
 }

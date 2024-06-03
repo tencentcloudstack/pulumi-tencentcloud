@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Redis.Inputs
 {
 
-    public sealed class ParamTemplateParamDetailGetArgs : Pulumi.ResourceArgs
+    public sealed class ParamTemplateParamDetailGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Current value.
@@ -76,5 +76,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Redis.Inputs
         public ParamTemplateParamDetailGetArgs()
         {
         }
+        public static new ParamTemplateParamDetailGetArgs Empty => new ParamTemplateParamDetailGetArgs();
     }
 }

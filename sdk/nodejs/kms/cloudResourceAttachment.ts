@@ -9,23 +9,25 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = new tencentcloud.Kms.CloudResourceAttachment("example", {
+ * const example = new tencentcloud.kms.CloudResourceAttachment("example", {
  *     keyId: "72688f39-1fe8-11ee-9f1a-525400cf25a4",
  *     productId: "mysql",
  *     resourceId: "cdb-fitq5t9h",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * kms cloud_resource_attachment can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Kms/cloudResourceAttachment:CloudResourceAttachment example 72688f39-1fe8-11ee-9f1a-525400cf25a4#mysql#cdb-fitq5t9h
+ * $ pulumi import tencentcloud:Kms/cloudResourceAttachment:CloudResourceAttachment example 72688f39-1fe8-11ee-9f1a-525400cf25a4#mysql#cdb-fitq5t9h
  * ```
  */
 export class CloudResourceAttachment extends pulumi.CustomResource {

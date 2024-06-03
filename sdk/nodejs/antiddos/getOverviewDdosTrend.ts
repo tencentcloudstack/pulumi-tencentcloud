@@ -9,25 +9,24 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const overviewDdosTrend = pulumi.output(tencentcloud.Antiddos.getOverviewDdosTrend({
+ * const overviewDdosTrend = tencentcloud.Antiddos.getOverviewDdosTrend({
  *     business: "bgpip",
  *     endTime: "2023-11-21 14:16:23",
  *     metricName: "bps",
  *     period: 300,
  *     startTime: "2023-11-20 14:16:23",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getOverviewDdosTrend(args: GetOverviewDdosTrendArgs, opts?: pulumi.InvokeOptions): Promise<GetOverviewDdosTrendResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Antiddos/getOverviewDdosTrend:getOverviewDdosTrend", {
         "business": args.business,
         "endTime": args.endTime,
@@ -93,9 +92,28 @@ export interface GetOverviewDdosTrendResult {
     readonly resultOutputFile?: string;
     readonly startTime: string;
 }
-
+/**
+ * Use this data source to query detailed information of antiddos overview ddos trend
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const overviewDdosTrend = tencentcloud.Antiddos.getOverviewDdosTrend({
+ *     business: "bgpip",
+ *     endTime: "2023-11-21 14:16:23",
+ *     metricName: "bps",
+ *     period: 300,
+ *     startTime: "2023-11-20 14:16:23",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getOverviewDdosTrendOutput(args: GetOverviewDdosTrendOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetOverviewDdosTrendResult> {
-    return pulumi.output(args).apply(a => getOverviewDdosTrend(a, opts))
+    return pulumi.output(args).apply((a: any) => getOverviewDdosTrend(a, opts))
 }
 
 /**

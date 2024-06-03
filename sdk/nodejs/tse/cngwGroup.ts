@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,9 +11,10 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const config = new pulumi.Config();
  * const availabilityZone = config.get("availabilityZone") || "ap-guangzhou-4";
@@ -54,6 +56,7 @@ import * as utilities from "../utilities";
  *     },
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export class CngwGroup extends pulumi.CustomResource {
     /**
@@ -92,6 +95,10 @@ export class CngwGroup extends pulumi.CustomResource {
      */
     public readonly gatewayId!: pulumi.Output<string>;
     /**
+     * gateway group id.
+     */
+    public /*out*/ readonly groupId!: pulumi.Output<string>;
+    /**
      * internet configration.
      */
     public readonly internetConfig!: pulumi.Output<outputs.Tse.CngwGroupInternetConfig | undefined>;
@@ -127,6 +134,7 @@ export class CngwGroup extends pulumi.CustomResource {
             const state = argsOrState as CngwGroupState | undefined;
             resourceInputs["description"] = state ? state.description : undefined;
             resourceInputs["gatewayId"] = state ? state.gatewayId : undefined;
+            resourceInputs["groupId"] = state ? state.groupId : undefined;
             resourceInputs["internetConfig"] = state ? state.internetConfig : undefined;
             resourceInputs["internetMaxBandwidthOut"] = state ? state.internetMaxBandwidthOut : undefined;
             resourceInputs["name"] = state ? state.name : undefined;
@@ -150,6 +158,7 @@ export class CngwGroup extends pulumi.CustomResource {
             resourceInputs["name"] = args ? args.name : undefined;
             resourceInputs["nodeConfig"] = args ? args.nodeConfig : undefined;
             resourceInputs["subnetId"] = args ? args.subnetId : undefined;
+            resourceInputs["groupId"] = undefined /*out*/;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
         super(CngwGroup.__pulumiType, name, resourceInputs, opts);
@@ -168,6 +177,10 @@ export interface CngwGroupState {
      * gateway IDonly postpaid gateway supported.
      */
     gatewayId?: pulumi.Input<string>;
+    /**
+     * gateway group id.
+     */
+    groupId?: pulumi.Input<string>;
     /**
      * internet configration.
      */

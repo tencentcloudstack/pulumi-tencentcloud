@@ -9,9 +9,10 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const fooProxy = new tencentcloud.gaap.Proxy("fooProxy", {
  *     bandwidth: 10,
@@ -30,13 +31,14 @@ import * as utilities from "../utilities";
  *     protocol: "TCP",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * GAAP security rule can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Gaap/securityRule:SecurityRule tencentcloud_gaap_security_rule.foo sr-xxxxxxxx
+ * $ pulumi import tencentcloud:Gaap/securityRule:SecurityRule tencentcloud_gaap_security_rule.foo sr-xxxxxxxx
  * ```
  */
 export class SecurityRule extends pulumi.CustomResource {

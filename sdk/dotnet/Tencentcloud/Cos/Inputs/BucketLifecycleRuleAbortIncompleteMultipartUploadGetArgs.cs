@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos.Inputs
 {
 
-    public sealed class BucketLifecycleRuleAbortIncompleteMultipartUploadGetArgs : Pulumi.ResourceArgs
+    public sealed class BucketLifecycleRuleAbortIncompleteMultipartUploadGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Specifies the number of days after the multipart upload starts that the upload must be completed. The maximum value is 3650.
@@ -22,5 +22,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos.Inputs
         public BucketLifecycleRuleAbortIncompleteMultipartUploadGetArgs()
         {
         }
+        public static new BucketLifecycleRuleAbortIncompleteMultipartUploadGetArgs Empty => new BucketLifecycleRuleAbortIncompleteMultipartUploadGetArgs();
     }
 }

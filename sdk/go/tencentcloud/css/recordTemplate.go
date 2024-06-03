@@ -7,8 +7,9 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 type RecordTemplate struct {
@@ -48,7 +49,7 @@ func NewRecordTemplate(ctx *pulumi.Context,
 	if args.TemplateName == nil {
 		return nil, errors.New("invalid value for required argument 'TemplateName'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource RecordTemplate
 	err := ctx.RegisterResource("tencentcloud:Css/recordTemplate:RecordTemplate", name, args, &resource, opts...)
 	if err != nil {
@@ -201,7 +202,7 @@ func (i *RecordTemplate) ToRecordTemplateOutputWithContext(ctx context.Context) 
 // RecordTemplateArrayInput is an input type that accepts RecordTemplateArray and RecordTemplateArrayOutput values.
 // You can construct a concrete instance of `RecordTemplateArrayInput` via:
 //
-//          RecordTemplateArray{ RecordTemplateArgs{...} }
+//	RecordTemplateArray{ RecordTemplateArgs{...} }
 type RecordTemplateArrayInput interface {
 	pulumi.Input
 
@@ -226,7 +227,7 @@ func (i RecordTemplateArray) ToRecordTemplateArrayOutputWithContext(ctx context.
 // RecordTemplateMapInput is an input type that accepts RecordTemplateMap and RecordTemplateMapOutput values.
 // You can construct a concrete instance of `RecordTemplateMapInput` via:
 //
-//          RecordTemplateMap{ "key": RecordTemplateArgs{...} }
+//	RecordTemplateMap{ "key": RecordTemplateArgs{...} }
 type RecordTemplateMapInput interface {
 	pulumi.Input
 

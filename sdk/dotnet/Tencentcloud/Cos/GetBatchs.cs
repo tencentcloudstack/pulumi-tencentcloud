@@ -15,66 +15,60 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos
         /// <summary>
         /// Use this data source to query the COS batch.
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var cosBatchs = Tencentcloud.Cos.GetBatchs.Invoke(new()
         ///     {
-        ///         var cosBatchs = Output.Create(Tencentcloud.Cos.GetBatchs.InvokeAsync(new Tencentcloud.Cos.GetBatchsArgs
-        ///         {
-        ///             Appid = "xxxxxx",
-        ///             Uin = "xxxxxx",
-        ///         }));
-        ///     }
+        ///         Appid = "xxxxxx",
+        ///         Uin = "xxxxxx",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetBatchsResult> InvokeAsync(GetBatchsArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetBatchsResult>("tencentcloud:Cos/getBatchs:getBatchs", args ?? new GetBatchsArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetBatchsResult>("tencentcloud:Cos/getBatchs:getBatchs", args ?? new GetBatchsArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query the COS batch.
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var cosBatchs = Tencentcloud.Cos.GetBatchs.Invoke(new()
         ///     {
-        ///         var cosBatchs = Output.Create(Tencentcloud.Cos.GetBatchs.InvokeAsync(new Tencentcloud.Cos.GetBatchsArgs
-        ///         {
-        ///             Appid = "xxxxxx",
-        ///             Uin = "xxxxxx",
-        ///         }));
-        ///     }
+        ///         Appid = "xxxxxx",
+        ///         Uin = "xxxxxx",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetBatchsResult> Invoke(GetBatchsInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetBatchsResult>("tencentcloud:Cos/getBatchs:getBatchs", args ?? new GetBatchsInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetBatchsResult>("tencentcloud:Cos/getBatchs:getBatchs", args ?? new GetBatchsInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetBatchsArgs : Pulumi.InvokeArgs
+    public sealed class GetBatchsArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Appid.
@@ -103,9 +97,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos
         public GetBatchsArgs()
         {
         }
+        public static new GetBatchsArgs Empty => new GetBatchsArgs();
     }
 
-    public sealed class GetBatchsInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetBatchsInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Appid.
@@ -134,6 +129,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos
         public GetBatchsInvokeArgs()
         {
         }
+        public static new GetBatchsInvokeArgs Empty => new GetBatchsInvokeArgs();
     }
 
 

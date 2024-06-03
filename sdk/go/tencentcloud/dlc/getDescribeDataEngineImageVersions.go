@@ -8,35 +8,40 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Use this data source to query detailed information of dlc describeDataEngineImageVersions
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Dlc"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dlc"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dlc"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Dlc.GetDescribeDataEngineImageVersions(ctx, &dlc.GetDescribeDataEngineImageVersionsArgs{
-// 			EngineType: "SparkBatch",
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Dlc.GetDescribeDataEngineImageVersions(ctx, &dlc.GetDescribeDataEngineImageVersionsArgs{
+//				EngineType: "SparkBatch",
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 func GetDescribeDataEngineImageVersions(ctx *pulumi.Context, args *GetDescribeDataEngineImageVersionsArgs, opts ...pulumi.InvokeOption) (*GetDescribeDataEngineImageVersionsResult, error) {
-	opts = pkgInvokeDefaultOpts(opts)
+	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetDescribeDataEngineImageVersionsResult
 	err := ctx.Invoke("tencentcloud:Dlc/getDescribeDataEngineImageVersions:getDescribeDataEngineImageVersions", args, &rv, opts...)
 	if err != nil {

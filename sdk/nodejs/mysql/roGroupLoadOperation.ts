@@ -9,10 +9,11 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const zones = tencentcloud.Availability.getZonesByProduct({
  *     product: "cdb",
@@ -22,7 +23,7 @@ import * as utilities from "../utilities";
  * });
  * const vpc = new tencentcloud.vpc.Instance("vpc", {cidrBlock: "10.0.0.0/16"});
  * const subnet = new tencentcloud.subnet.Instance("subnet", {
- *     availabilityZone: zones.then(zones => zones.zones?[1]?.name),
+ *     availabilityZone: zones.then(zones => zones.zones?.[1]?.name),
  *     vpcId: vpc.id,
  *     cidrBlock: "10.0.0.0/16",
  *     isMulticast: false,
@@ -34,7 +35,7 @@ import * as utilities from "../utilities";
  *     chargeType: "POSTPAID",
  *     rootPassword: "PassWord123",
  *     slaveDeployMode: 0,
- *     availabilityZone: zones.then(zones => zones.zones?[1]?.name),
+ *     availabilityZone: zones.then(zones => zones.zones?.[1]?.name),
  *     slaveSyncMode: 1,
  *     instanceName: "tf-example-mysql",
  *     memSize: 4000,
@@ -64,8 +65,9 @@ import * as utilities from "../utilities";
  *         createBy: "terraform",
  *     },
  * });
- * const roGroupLoadOperation = new tencentcloud.mysql.RoGroupLoadOperation("roGroupLoadOperation", {roGroupId: exampleInstance.then(exampleInstance => exampleInstance.instanceLists?[0]?.roGroups?[0]?.groupId)});
+ * const roGroupLoadOperation = new tencentcloud.mysql.RoGroupLoadOperation("roGroupLoadOperation", {roGroupId: exampleInstance.then(exampleInstance => exampleInstance.instanceLists?.[0]?.roGroups?.[0]?.groupId)});
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export class RoGroupLoadOperation extends pulumi.CustomResource {
     /**

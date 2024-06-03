@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ci.Inputs
 {
 
-    public sealed class MediaVideoProcessTemplateColorEnhanceGetArgs : Pulumi.ResourceArgs
+    public sealed class MediaVideoProcessTemplateColorEnhanceGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Contrast, value range: [0, 100], empty string (indicates automatic analysis).
@@ -40,5 +40,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ci.Inputs
         public MediaVideoProcessTemplateColorEnhanceGetArgs()
         {
         }
+        public static new MediaVideoProcessTemplateColorEnhanceGetArgs Empty => new MediaVideoProcessTemplateColorEnhanceGetArgs();
     }
 }

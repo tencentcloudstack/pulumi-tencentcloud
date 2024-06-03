@@ -7,52 +7,58 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to manage CDH instance.
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cdh"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cdh"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		cfg := config.New(ctx, "")
-// 		availabilityZone := "ap-guangzhou-3"
-// 		if param := cfg.Get("availabilityZone"); param != "" {
-// 			availabilityZone = param
-// 		}
-// 		_, err := Cdh.NewInstance(ctx, "foo", &Cdh.InstanceArgs{
-// 			AvailabilityZone: pulumi.String(availabilityZone),
-// 			HostType:         pulumi.String("HC20"),
-// 			ChargeType:       pulumi.String("PREPAID"),
-// 			PrepaidPeriod:    pulumi.Int(1),
-// 			HostName:         pulumi.String("test"),
-// 			PrepaidRenewFlag: pulumi.String("NOTIFY_AND_MANUAL_RENEW"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			cfg := config.New(ctx, "")
+//			availabilityZone := "ap-guangzhou-3"
+//			if param := cfg.Get("availabilityZone"); param != "" {
+//				availabilityZone = param
+//			}
+//			_, err := Cdh.NewInstance(ctx, "foo", &Cdh.InstanceArgs{
+//				AvailabilityZone: pulumi.String(availabilityZone),
+//				HostType:         pulumi.String("HC20"),
+//				ChargeType:       pulumi.String("PREPAID"),
+//				PrepaidPeriod:    pulumi.Int(1),
+//				HostName:         pulumi.String("test"),
+//				PrepaidRenewFlag: pulumi.String("NOTIFY_AND_MANUAL_RENEW"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // CDH instance can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Cdh/instance:Instance foo host-d6s7i5q4
+// $ pulumi import tencentcloud:Cdh/instance:Instance foo host-d6s7i5q4
 // ```
 type Instance struct {
 	pulumi.CustomResourceState
@@ -93,7 +99,7 @@ func NewInstance(ctx *pulumi.Context,
 	if args.AvailabilityZone == nil {
 		return nil, errors.New("invalid value for required argument 'AvailabilityZone'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource Instance
 	err := ctx.RegisterResource("tencentcloud:Cdh/instance:Instance", name, args, &resource, opts...)
 	if err != nil {
@@ -234,7 +240,7 @@ func (i *Instance) ToInstanceOutputWithContext(ctx context.Context) InstanceOutp
 // InstanceArrayInput is an input type that accepts InstanceArray and InstanceArrayOutput values.
 // You can construct a concrete instance of `InstanceArrayInput` via:
 //
-//          InstanceArray{ InstanceArgs{...} }
+//	InstanceArray{ InstanceArgs{...} }
 type InstanceArrayInput interface {
 	pulumi.Input
 
@@ -259,7 +265,7 @@ func (i InstanceArray) ToInstanceArrayOutputWithContext(ctx context.Context) Ins
 // InstanceMapInput is an input type that accepts InstanceMap and InstanceMapOutput values.
 // You can construct a concrete instance of `InstanceMapInput` via:
 //
-//          InstanceMap{ "key": InstanceArgs{...} }
+//	InstanceMap{ "key": InstanceArgs{...} }
 type InstanceMapInput interface {
 	pulumi.Input
 

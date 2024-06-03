@@ -9,22 +9,24 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const grafanaVersionUpgrade = new tencentcloud.Monitor.GrafanaVersionUpgrade("grafana_version_upgrade", {
+ * const grafanaVersionUpgrade = new tencentcloud.monitor.GrafanaVersionUpgrade("grafanaVersionUpgrade", {
  *     alias: "v8.2.7",
  *     instanceId: "grafana-dp2hnnfa",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * monitor grafana_version_upgrade can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Monitor/grafanaVersionUpgrade:GrafanaVersionUpgrade grafana_version_upgrade instance_id
+ * $ pulumi import tencentcloud:Monitor/grafanaVersionUpgrade:GrafanaVersionUpgrade grafana_version_upgrade instance_id
  * ```
  */
 export class GrafanaVersionUpgrade extends pulumi.CustomResource {

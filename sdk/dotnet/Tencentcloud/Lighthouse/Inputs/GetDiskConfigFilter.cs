@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Lighthouse.Inputs
 {
 
-    public sealed class GetDiskConfigFilterArgs : Pulumi.InvokeArgs
+    public sealed class GetDiskConfigFilterArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Field to be filtered.
@@ -34,5 +34,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Lighthouse.Inputs
         public GetDiskConfigFilterArgs()
         {
         }
+        public static new GetDiskConfigFilterArgs Empty => new GetDiskConfigFilterArgs();
     }
 }

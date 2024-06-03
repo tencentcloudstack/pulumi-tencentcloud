@@ -9,14 +9,14 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const cancelDcnJob = new tencentcloud.Mariadb.CancelDcnJob("cancel_dcn_job", {
- *     instanceId: "tdsql-9vqvls95",
- * });
+ * const cancelDcnJob = new tencentcloud.mariadb.CancelDcnJob("cancelDcnJob", {instanceId: "tdsql-9vqvls95"});
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export class CancelDcnJob extends pulumi.CustomResource {
     /**

@@ -26,6 +26,9 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Nat.Outputs
         /// Instance ID.
         /// </summary>
         public readonly string? InstanceId;
+        /// <summary>
+        /// Private IPs of the instance's primary ENI, required when `resource_type` is NETWORKINTERFACE.
+        /// </summary>
         public readonly string? InstancePrivateIpAddr;
         /// <summary>
         /// NAT gateway ID.
@@ -35,11 +38,17 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Nat.Outputs
         /// Elastic IP address pool.
         /// </summary>
         public readonly ImmutableArray<string> PublicIpAddrs;
+        /// <summary>
+        /// Resource type. Valid values: SUBNET, NETWORKINTERFACE.
+        /// </summary>
         public readonly string ResourceType;
         /// <summary>
         /// SNAT rule ID.
         /// </summary>
         public readonly string SnatId;
+        /// <summary>
+        /// The IPv4 CIDR of the subnet, required when `resource_type` is SUBNET.
+        /// </summary>
         public readonly string? SubnetCidrBlock;
         /// <summary>
         /// Subnet instance ID.

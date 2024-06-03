@@ -15,32 +15,33 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var myApiDoc = new Tencentcloud.ApiGateway.ApiDoc("myApiDoc", new()
     ///     {
-    ///         var myApiDoc = new Tencentcloud.ApiGateway.ApiDoc("myApiDoc", new Tencentcloud.ApiGateway.ApiDocArgs
+    ///         ApiDocName = "doc_test1",
+    ///         ApiIds = new[]
     ///         {
-    ///             ApiDocName = "doc_test1",
-    ///             ApiIds = 
-    ///             {
-    ///                 "api-test1",
-    ///                 "api-test2",
-    ///             },
-    ///             Environment = "release",
-    ///             ServiceId = "service_test1",
-    ///         });
-    ///     }
+    ///             "api-test1",
+    ///             "api-test2",
+    ///         },
+    ///         Environment = "release",
+    ///         ServiceId = "service_test1",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// </summary>
     [TencentcloudResourceType("tencentcloud:ApiGateway/apiDoc:ApiDoc")]
-    public partial class ApiDoc : Pulumi.CustomResource
+    public partial class ApiDoc : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Api Document count.
@@ -171,7 +172,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway
         }
     }
 
-    public sealed class ApiDocArgs : Pulumi.ResourceArgs
+    public sealed class ApiDocArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Api Document name.
@@ -206,9 +207,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway
         public ApiDocArgs()
         {
         }
+        public static new ApiDocArgs Empty => new ApiDocArgs();
     }
 
-    public sealed class ApiDocState : Pulumi.ResourceArgs
+    public sealed class ApiDocState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Api Document count.
@@ -309,5 +311,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway
         public ApiDocState()
         {
         }
+        public static new ApiDocState Empty => new ApiDocState();
     }
 }

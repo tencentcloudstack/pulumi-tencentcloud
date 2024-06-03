@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb.Inputs
 {
 
-    public sealed class FunctionTargetsAttachmentFunctionTargetsFunctionArgs : Pulumi.ResourceArgs
+    public sealed class FunctionTargetsAttachmentFunctionTargetsFunctionArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// The name of function.
@@ -40,5 +40,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb.Inputs
         public FunctionTargetsAttachmentFunctionTargetsFunctionArgs()
         {
         }
+        public static new FunctionTargetsAttachmentFunctionTargetsFunctionArgs Empty => new FunctionTargetsAttachmentFunctionTargetsFunctionArgs();
     }
 }

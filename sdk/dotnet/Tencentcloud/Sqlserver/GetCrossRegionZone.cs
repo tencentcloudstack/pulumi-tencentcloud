@@ -15,64 +15,58 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
         /// <summary>
         /// Use this data source to query detailed information of sqlserver datasource_cross_region_zone
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var example = Tencentcloud.Sqlserver.GetCrossRegionZone.Invoke(new()
         ///     {
-        ///         var example = Output.Create(Tencentcloud.Sqlserver.GetCrossRegionZone.InvokeAsync(new Tencentcloud.Sqlserver.GetCrossRegionZoneArgs
-        ///         {
-        ///             InstanceId = "mssql-qelbzgwf",
-        ///         }));
-        ///     }
+        ///         InstanceId = "mssql-qelbzgwf",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetCrossRegionZoneResult> InvokeAsync(GetCrossRegionZoneArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetCrossRegionZoneResult>("tencentcloud:Sqlserver/getCrossRegionZone:getCrossRegionZone", args ?? new GetCrossRegionZoneArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetCrossRegionZoneResult>("tencentcloud:Sqlserver/getCrossRegionZone:getCrossRegionZone", args ?? new GetCrossRegionZoneArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of sqlserver datasource_cross_region_zone
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var example = Tencentcloud.Sqlserver.GetCrossRegionZone.Invoke(new()
         ///     {
-        ///         var example = Output.Create(Tencentcloud.Sqlserver.GetCrossRegionZone.InvokeAsync(new Tencentcloud.Sqlserver.GetCrossRegionZoneArgs
-        ///         {
-        ///             InstanceId = "mssql-qelbzgwf",
-        ///         }));
-        ///     }
+        ///         InstanceId = "mssql-qelbzgwf",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetCrossRegionZoneResult> Invoke(GetCrossRegionZoneInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetCrossRegionZoneResult>("tencentcloud:Sqlserver/getCrossRegionZone:getCrossRegionZone", args ?? new GetCrossRegionZoneInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetCrossRegionZoneResult>("tencentcloud:Sqlserver/getCrossRegionZone:getCrossRegionZone", args ?? new GetCrossRegionZoneInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetCrossRegionZoneArgs : Pulumi.InvokeArgs
+    public sealed class GetCrossRegionZoneArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Instance ID in the format of mssql-j8kv137v.
@@ -89,9 +83,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
         public GetCrossRegionZoneArgs()
         {
         }
+        public static new GetCrossRegionZoneArgs Empty => new GetCrossRegionZoneArgs();
     }
 
-    public sealed class GetCrossRegionZoneInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetCrossRegionZoneInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Instance ID in the format of mssql-j8kv137v.
@@ -108,6 +103,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
         public GetCrossRegionZoneInvokeArgs()
         {
         }
+        public static new GetCrossRegionZoneInvokeArgs Empty => new GetCrossRegionZoneInvokeArgs();
     }
 
 

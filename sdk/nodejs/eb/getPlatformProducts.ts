@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,20 +11,19 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const platformProducts = pulumi.output(tencentcloud.Eb.getPlatformProducts());
+ * const platformProducts = tencentcloud.Eb.getPlatformProducts({});
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getPlatformProducts(args?: GetPlatformProductsArgs, opts?: pulumi.InvokeOptions): Promise<GetPlatformProductsResult> {
     args = args || {};
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Eb/getPlatformProducts:getPlatformProducts", {
         "resultOutputFile": args.resultOutputFile,
     }, opts);
@@ -53,9 +53,22 @@ export interface GetPlatformProductsResult {
     readonly platformProducts: outputs.Eb.GetPlatformProductsPlatformProduct[];
     readonly resultOutputFile?: string;
 }
-
+/**
+ * Use this data source to query detailed information of eb platformProducts
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const platformProducts = tencentcloud.Eb.getPlatformProducts({});
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getPlatformProductsOutput(args?: GetPlatformProductsOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetPlatformProductsResult> {
-    return pulumi.output(args).apply(a => getPlatformProducts(a, opts))
+    return pulumi.output(args).apply((a: any) => getPlatformProducts(a, opts))
 }
 
 /**

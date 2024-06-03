@@ -7,42 +7,48 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a cam serviceLinkedRole
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cam"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cam"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Cam.NewServiceLinkedRole(ctx, "serviceLinkedRole", &Cam.ServiceLinkedRoleArgs{
-// 			CustomSuffix: pulumi.String("tf"),
-// 			Description:  pulumi.String("desc cam"),
-// 			QcsServiceNames: pulumi.StringArray{
-// 				pulumi.String("cvm.qcloud.com"),
-// 				pulumi.String("ekslog.tke.cloud.tencent.com"),
-// 			},
-// 			Tags: pulumi.AnyMap{
-// 				"createdBy": pulumi.Any("terraform"),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Cam.NewServiceLinkedRole(ctx, "serviceLinkedRole", &Cam.ServiceLinkedRoleArgs{
+//				CustomSuffix: pulumi.String("tf"),
+//				Description:  pulumi.String("desc cam"),
+//				QcsServiceNames: pulumi.StringArray{
+//					pulumi.String("cvm.qcloud.com"),
+//					pulumi.String("ekslog.tke.cloud.tencent.com"),
+//				},
+//				Tags: pulumi.Map{
+//					"createdBy": pulumi.Any("terraform"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 type ServiceLinkedRole struct {
 	pulumi.CustomResourceState
 
@@ -66,7 +72,7 @@ func NewServiceLinkedRole(ctx *pulumi.Context,
 	if args.QcsServiceNames == nil {
 		return nil, errors.New("invalid value for required argument 'QcsServiceNames'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource ServiceLinkedRole
 	err := ctx.RegisterResource("tencentcloud:Cam/serviceLinkedRole:ServiceLinkedRole", name, args, &resource, opts...)
 	if err != nil {
@@ -163,7 +169,7 @@ func (i *ServiceLinkedRole) ToServiceLinkedRoleOutputWithContext(ctx context.Con
 // ServiceLinkedRoleArrayInput is an input type that accepts ServiceLinkedRoleArray and ServiceLinkedRoleArrayOutput values.
 // You can construct a concrete instance of `ServiceLinkedRoleArrayInput` via:
 //
-//          ServiceLinkedRoleArray{ ServiceLinkedRoleArgs{...} }
+//	ServiceLinkedRoleArray{ ServiceLinkedRoleArgs{...} }
 type ServiceLinkedRoleArrayInput interface {
 	pulumi.Input
 
@@ -188,7 +194,7 @@ func (i ServiceLinkedRoleArray) ToServiceLinkedRoleArrayOutputWithContext(ctx co
 // ServiceLinkedRoleMapInput is an input type that accepts ServiceLinkedRoleMap and ServiceLinkedRoleMapOutput values.
 // You can construct a concrete instance of `ServiceLinkedRoleMapInput` via:
 //
-//          ServiceLinkedRoleMap{ "key": ServiceLinkedRoleArgs{...} }
+//	ServiceLinkedRoleMap{ "key": ServiceLinkedRoleArgs{...} }
 type ServiceLinkedRoleMapInput interface {
 	pulumi.Input
 

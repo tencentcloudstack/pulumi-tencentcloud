@@ -7,34 +7,40 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a dlc upgradeDataEngineImageOperation
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dlc"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dlc"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Dlc.NewUpgradeDataEngineImageOperation(ctx, "upgradeDataEngineImageOperation", &Dlc.UpgradeDataEngineImageOperationArgs{
-// 			DataEngineId: pulumi.String("DataEngine-g5ds87d8"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Dlc.NewUpgradeDataEngineImageOperation(ctx, "upgradeDataEngineImageOperation", &Dlc.UpgradeDataEngineImageOperationArgs{
+//				DataEngineId: pulumi.String("DataEngine-g5ds87d8"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 type UpgradeDataEngineImageOperation struct {
 	pulumi.CustomResourceState
 
@@ -52,7 +58,7 @@ func NewUpgradeDataEngineImageOperation(ctx *pulumi.Context,
 	if args.DataEngineId == nil {
 		return nil, errors.New("invalid value for required argument 'DataEngineId'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource UpgradeDataEngineImageOperation
 	err := ctx.RegisterResource("tencentcloud:Dlc/upgradeDataEngineImageOperation:UpgradeDataEngineImageOperation", name, args, &resource, opts...)
 	if err != nil {
@@ -125,7 +131,7 @@ func (i *UpgradeDataEngineImageOperation) ToUpgradeDataEngineImageOperationOutpu
 // UpgradeDataEngineImageOperationArrayInput is an input type that accepts UpgradeDataEngineImageOperationArray and UpgradeDataEngineImageOperationArrayOutput values.
 // You can construct a concrete instance of `UpgradeDataEngineImageOperationArrayInput` via:
 //
-//          UpgradeDataEngineImageOperationArray{ UpgradeDataEngineImageOperationArgs{...} }
+//	UpgradeDataEngineImageOperationArray{ UpgradeDataEngineImageOperationArgs{...} }
 type UpgradeDataEngineImageOperationArrayInput interface {
 	pulumi.Input
 
@@ -150,7 +156,7 @@ func (i UpgradeDataEngineImageOperationArray) ToUpgradeDataEngineImageOperationA
 // UpgradeDataEngineImageOperationMapInput is an input type that accepts UpgradeDataEngineImageOperationMap and UpgradeDataEngineImageOperationMapOutput values.
 // You can construct a concrete instance of `UpgradeDataEngineImageOperationMapInput` via:
 //
-//          UpgradeDataEngineImageOperationMap{ "key": UpgradeDataEngineImageOperationArgs{...} }
+//	UpgradeDataEngineImageOperationMap{ "key": UpgradeDataEngineImageOperationArgs{...} }
 type UpgradeDataEngineImageOperationMapInput interface {
 	pulumi.Input
 

@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,21 +11,20 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const all = pulumi.output(tencentcloud.Availability.getZonesByProduct({
+ * const all = tencentcloud.Availability.getZonesByProduct({
  *     product: "cvm",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getZonesByProduct(args: GetZonesByProductArgs, opts?: pulumi.InvokeOptions): Promise<GetZonesByProductResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Availability/getZonesByProduct:getZonesByProduct", {
         "includeUnavailable": args.includeUnavailable,
         "name": args.name,
@@ -75,9 +75,24 @@ export interface GetZonesByProductResult {
      */
     readonly zones: outputs.Availability.GetZonesByProductZone[];
 }
-
+/**
+ * Use this data source to get the available zones in current region. Must set product param to fetch the product infomations(e.g. => cvm, vpc). By default only `AVAILABLE` zones will be returned, but `UNAVAILABLE` zones can also be fetched when `includeUnavailable` is specified.
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const all = tencentcloud.Availability.getZonesByProduct({
+ *     product: "cvm",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getZonesByProductOutput(args: GetZonesByProductOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetZonesByProductResult> {
-    return pulumi.output(args).apply(a => getZonesByProduct(a, opts))
+    return pulumi.output(args).apply((a: any) => getZonesByProduct(a, opts))
 }
 
 /**

@@ -9,21 +9,20 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const example = pulumi.output(tencentcloud.Ssm.getRotationDetail({
+ * const example = tencentcloud.Ssm.getRotationDetail({
  *     secretName: "tf_example",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getRotationDetail(args: GetRotationDetailArgs, opts?: pulumi.InvokeOptions): Promise<GetRotationDetailResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Ssm/getRotationDetail:getRotationDetail", {
         "resultOutputFile": args.resultOutputFile,
         "secretName": args.secretName,
@@ -71,9 +70,24 @@ export interface GetRotationDetailResult {
     readonly resultOutputFile?: string;
     readonly secretName: string;
 }
-
+/**
+ * Use this data source to query detailed information of ssm rotationDetail
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const example = tencentcloud.Ssm.getRotationDetail({
+ *     secretName: "tf_example",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getRotationDetailOutput(args: GetRotationDetailOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetRotationDetailResult> {
-    return pulumi.output(args).apply(a => getRotationDetail(a, opts))
+    return pulumi.output(args).apply((a: any) => getRotationDetail(a, opts))
 }
 
 /**

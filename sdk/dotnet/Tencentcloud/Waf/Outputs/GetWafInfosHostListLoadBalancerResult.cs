@@ -14,16 +14,49 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Waf.Outputs
     [OutputType]
     public sealed class GetWafInfosHostListLoadBalancerResult
     {
+        /// <summary>
+        /// Unique ID of listener in LB.
+        /// </summary>
         public readonly string ListenerId;
+        /// <summary>
+        /// Listener name.
+        /// </summary>
         public readonly string ListenerName;
+        /// <summary>
+        /// LoadBalancer ID.
+        /// </summary>
         public readonly string LoadBalancerId;
+        /// <summary>
+        /// LoadBalancer name.
+        /// </summary>
         public readonly string LoadBalancerName;
+        /// <summary>
+        /// Network type for load balancerNote: This field may return null, indicating that a valid value cannot be obtained.
+        /// </summary>
         public readonly string LoadBalancerType;
+        /// <summary>
+        /// VPCID for load balancer, public network is -1, and internal network is filled in according to actual conditionsNote: This field may return null, indicating that a valid value cannot be obtained.
+        /// </summary>
         public readonly int NumericalVpcId;
+        /// <summary>
+        /// Protocol of listener，http or https.
+        /// </summary>
         public readonly string Protocol;
+        /// <summary>
+        /// LoadBalancer region.
+        /// </summary>
         public readonly string Region;
+        /// <summary>
+        /// LoadBalancer IP.
+        /// </summary>
         public readonly string Vip;
+        /// <summary>
+        /// LoadBalancer port.
+        /// </summary>
         public readonly int Vport;
+        /// <summary>
+        /// LoadBalancer zone.
+        /// </summary>
         public readonly string Zone;
 
         [OutputConstructor]

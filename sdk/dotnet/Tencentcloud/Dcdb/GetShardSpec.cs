@@ -15,58 +15,52 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dcdb
         /// <summary>
         /// Use this data source to query detailed information of dcdb shard_spec
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
-        ///     {
-        ///         var shardSpec = Output.Create(Tencentcloud.Dcdb.GetShardSpec.InvokeAsync());
-        ///     }
+        ///     var shardSpec = Tencentcloud.Dcdb.GetShardSpec.Invoke();
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetShardSpecResult> InvokeAsync(GetShardSpecArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetShardSpecResult>("tencentcloud:Dcdb/getShardSpec:getShardSpec", args ?? new GetShardSpecArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetShardSpecResult>("tencentcloud:Dcdb/getShardSpec:getShardSpec", args ?? new GetShardSpecArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of dcdb shard_spec
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
-        ///     {
-        ///         var shardSpec = Output.Create(Tencentcloud.Dcdb.GetShardSpec.InvokeAsync());
-        ///     }
+        ///     var shardSpec = Tencentcloud.Dcdb.GetShardSpec.Invoke();
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetShardSpecResult> Invoke(GetShardSpecInvokeArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetShardSpecResult>("tencentcloud:Dcdb/getShardSpec:getShardSpec", args ?? new GetShardSpecInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetShardSpecResult>("tencentcloud:Dcdb/getShardSpec:getShardSpec", args ?? new GetShardSpecInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetShardSpecArgs : Pulumi.InvokeArgs
+    public sealed class GetShardSpecArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Used to save results.
@@ -77,9 +71,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dcdb
         public GetShardSpecArgs()
         {
         }
+        public static new GetShardSpecArgs Empty => new GetShardSpecArgs();
     }
 
-    public sealed class GetShardSpecInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetShardSpecInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Used to save results.
@@ -90,6 +85,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dcdb
         public GetShardSpecInvokeArgs()
         {
         }
+        public static new GetShardSpecInvokeArgs Empty => new GetShardSpecInvokeArgs();
     }
 
 

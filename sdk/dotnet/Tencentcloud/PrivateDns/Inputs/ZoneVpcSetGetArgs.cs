@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.PrivateDns.Inputs
 {
 
-    public sealed class ZoneVpcSetGetArgs : Pulumi.ResourceArgs
+    public sealed class ZoneVpcSetGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// VPC REGION.
@@ -28,5 +28,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.PrivateDns.Inputs
         public ZoneVpcSetGetArgs()
         {
         }
+        public static new ZoneVpcSetGetArgs Empty => new ZoneVpcSetGetArgs();
     }
 }

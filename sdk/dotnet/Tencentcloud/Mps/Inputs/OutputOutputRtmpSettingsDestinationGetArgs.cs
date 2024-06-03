@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps.Inputs
 {
 
-    public sealed class OutputOutputRtmpSettingsDestinationGetArgs : Pulumi.ResourceArgs
+    public sealed class OutputOutputRtmpSettingsDestinationGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// relayed StreamKey, in the format: stream?key=value.
@@ -28,5 +28,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps.Inputs
         public OutputOutputRtmpSettingsDestinationGetArgs()
         {
         }
+        public static new OutputOutputRtmpSettingsDestinationGetArgs Empty => new OutputOutputRtmpSettingsDestinationGetArgs();
     }
 }

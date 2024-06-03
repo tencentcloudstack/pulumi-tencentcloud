@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Antiddos.Inputs
 {
 
-    public sealed class DdosSpeedLimitConfigDdosSpeedLimitConfigArgs : Pulumi.ResourceArgs
+    public sealed class DdosSpeedLimitConfigDdosSpeedLimitConfigArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// List of port ranges, up to 8, multiple; Separate and indicate the range with -; This port range must be filled in; Fill in style 1:0-65535, style 2: 80; 443; 1000-2000.
@@ -58,5 +58,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Antiddos.Inputs
         public DdosSpeedLimitConfigDdosSpeedLimitConfigArgs()
         {
         }
+        public static new DdosSpeedLimitConfigDdosSpeedLimitConfigArgs Empty => new DdosSpeedLimitConfigDdosSpeedLimitConfigArgs();
     }
 }

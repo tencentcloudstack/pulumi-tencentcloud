@@ -15,72 +15,66 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cdn
         /// <summary>
         /// Use this data source to query the detail information of CDN domain.
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var foo = Tencentcloud.Cdn.GetDomains.Invoke(new()
         ///     {
-        ///         var foo = Output.Create(Tencentcloud.Cdn.GetDomains.InvokeAsync(new Tencentcloud.Cdn.GetDomainsArgs
-        ///         {
-        ///             Domain = "xxxx.com",
-        ///             FullUrlCache = false,
-        ///             HttpsSwitch = "on",
-        ///             OriginPullProtocol = "follow",
-        ///             ServiceType = "web",
-        ///         }));
-        ///     }
+        ///         Domain = "xxxx.com",
+        ///         FullUrlCache = false,
+        ///         HttpsSwitch = "on",
+        ///         OriginPullProtocol = "follow",
+        ///         ServiceType = "web",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetDomainsResult> InvokeAsync(GetDomainsArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetDomainsResult>("tencentcloud:Cdn/getDomains:getDomains", args ?? new GetDomainsArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetDomainsResult>("tencentcloud:Cdn/getDomains:getDomains", args ?? new GetDomainsArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query the detail information of CDN domain.
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var foo = Tencentcloud.Cdn.GetDomains.Invoke(new()
         ///     {
-        ///         var foo = Output.Create(Tencentcloud.Cdn.GetDomains.InvokeAsync(new Tencentcloud.Cdn.GetDomainsArgs
-        ///         {
-        ///             Domain = "xxxx.com",
-        ///             FullUrlCache = false,
-        ///             HttpsSwitch = "on",
-        ///             OriginPullProtocol = "follow",
-        ///             ServiceType = "web",
-        ///         }));
-        ///     }
+        ///         Domain = "xxxx.com",
+        ///         FullUrlCache = false,
+        ///         HttpsSwitch = "on",
+        ///         OriginPullProtocol = "follow",
+        ///         ServiceType = "web",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetDomainsResult> Invoke(GetDomainsInvokeArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetDomainsResult>("tencentcloud:Cdn/getDomains:getDomains", args ?? new GetDomainsInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetDomainsResult>("tencentcloud:Cdn/getDomains:getDomains", args ?? new GetDomainsInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetDomainsArgs : Pulumi.InvokeArgs
+    public sealed class GetDomainsArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Acceleration domain name.
@@ -121,9 +115,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cdn
         public GetDomainsArgs()
         {
         }
+        public static new GetDomainsArgs Empty => new GetDomainsArgs();
     }
 
-    public sealed class GetDomainsInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetDomainsInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Acceleration domain name.
@@ -164,6 +159,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cdn
         public GetDomainsInvokeArgs()
         {
         }
+        public static new GetDomainsInvokeArgs Empty => new GetDomainsInvokeArgs();
     }
 
 

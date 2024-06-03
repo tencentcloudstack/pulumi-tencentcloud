@@ -9,21 +9,20 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const supportedPrivileges = pulumi.output(tencentcloud.Mysql.getSupportedPrivileges({
+ * const supportedPrivileges = tencentcloud.Mysql.getSupportedPrivileges({
  *     instanceId: "cdb-fitq5t9h",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getSupportedPrivileges(args: GetSupportedPrivilegesArgs, opts?: pulumi.InvokeOptions): Promise<GetSupportedPrivilegesResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Mysql/getSupportedPrivileges:getSupportedPrivileges", {
         "instanceId": args.instanceId,
         "resultOutputFile": args.resultOutputFile,
@@ -71,9 +70,24 @@ export interface GetSupportedPrivilegesResult {
      */
     readonly tableSupportedPrivileges: string[];
 }
-
+/**
+ * Use this data source to query detailed information of mysql supportedPrivileges
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const supportedPrivileges = tencentcloud.Mysql.getSupportedPrivileges({
+ *     instanceId: "cdb-fitq5t9h",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getSupportedPrivilegesOutput(args: GetSupportedPrivilegesOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetSupportedPrivilegesResult> {
-    return pulumi.output(args).apply(a => getSupportedPrivileges(a, opts))
+    return pulumi.output(args).apply((a: any) => getSupportedPrivileges(a, opts))
 }
 
 /**

@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor.Inputs
 {
 
-    public sealed class TmpTkeAlertPolicyAlertRuleNotificationAlertManagerGetArgs : Pulumi.ResourceArgs
+    public sealed class TmpTkeAlertPolicyAlertRuleNotificationAlertManagerGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// The ID of the cluster where the alertmanager is deployed. Note: This field may return null, indicating that a valid value could not be retrieved.
@@ -34,5 +34,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor.Inputs
         public TmpTkeAlertPolicyAlertRuleNotificationAlertManagerGetArgs()
         {
         }
+        public static new TmpTkeAlertPolicyAlertRuleNotificationAlertManagerGetArgs Empty => new TmpTkeAlertPolicyAlertRuleNotificationAlertManagerGetArgs();
     }
 }

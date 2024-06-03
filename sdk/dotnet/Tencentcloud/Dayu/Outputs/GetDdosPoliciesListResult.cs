@@ -14,6 +14,9 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dayu.Outputs
     [OutputType]
     public sealed class GetDdosPoliciesListResult
     {
+        /// <summary>
+        /// Black ip list.
+        /// </summary>
         public readonly ImmutableArray<string> BlackIps;
         /// <summary>
         /// Create time of the DDoS policy.
@@ -51,6 +54,9 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dayu.Outputs
         /// Watermark content.
         /// </summary>
         public readonly ImmutableArray<Outputs.GetDdosPoliciesListWatermarkKeyResult> WatermarkKeys;
+        /// <summary>
+        /// White ip list.
+        /// </summary>
         public readonly ImmutableArray<string> WhiteIps;
 
         [OutputConstructor]

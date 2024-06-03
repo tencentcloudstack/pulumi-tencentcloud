@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps.Inputs
 {
 
-    public sealed class WorkflowTriggerGetArgs : Pulumi.ResourceArgs
+    public sealed class WorkflowTriggerGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Mandatory and valid when Type is CosFileUpload, the rule is triggered for COS.Note: This field may return null, indicating that no valid value can be obtained.
@@ -28,5 +28,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps.Inputs
         public WorkflowTriggerGetArgs()
         {
         }
+        public static new WorkflowTriggerGetArgs Empty => new WorkflowTriggerGetArgs();
     }
 }

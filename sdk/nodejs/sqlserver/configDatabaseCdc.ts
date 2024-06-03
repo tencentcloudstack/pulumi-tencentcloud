@@ -8,26 +8,28 @@ import * as utilities from "../utilities";
  * Provides a resource to create a sqlserver configDatabaseCdc
  *
  * ## Example Usage
+ *
  * ### Turn off database data change capture (CDC)
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const zones = tencentcloud.Availability.getZonesByProduct({
  *     product: "sqlserver",
  * });
  * const vpc = new tencentcloud.vpc.Instance("vpc", {cidrBlock: "10.0.0.0/16"});
  * const subnet = new tencentcloud.subnet.Instance("subnet", {
- *     availabilityZone: zones.then(zones => zones.zones?[4]?.name),
+ *     availabilityZone: zones.then(zones => zones.zones?.[4]?.name),
  *     vpcId: vpc.id,
  *     cidrBlock: "10.0.0.0/16",
  *     isMulticast: false,
  * });
  * const securityGroup = new tencentcloud.security.Group("securityGroup", {description: "desc."});
  * const exampleBasicInstance = new tencentcloud.sqlserver.BasicInstance("exampleBasicInstance", {
- *     availabilityZone: zones.then(zones => zones.zones?[4]?.name),
+ *     availabilityZone: zones.then(zones => zones.zones?.[4]?.name),
  *     chargeType: "POSTPAID_BY_HOUR",
  *     vpcId: vpc.id,
  *     subnetId: subnet.id,
@@ -59,11 +61,14 @@ import * as utilities from "../utilities";
  *     modifyType: "disable",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
+ *
  * ### Enable Database Data Change Capture (CDC)
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const example = new tencentcloud.sqlserver.ConfigDatabaseCdc("example", {
  *     instanceId: tencentcloud_sqlserver_basic_instance.example.id,
@@ -71,13 +76,14 @@ import * as utilities from "../utilities";
  *     modifyType: "enable",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * sqlserver config_database_cdc can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Sqlserver/configDatabaseCdc:ConfigDatabaseCdc example mssql-i9ma6oy7#tf_example_db
+ * $ pulumi import tencentcloud:Sqlserver/configDatabaseCdc:ConfigDatabaseCdc example mssql-i9ma6oy7#tf_example_db
  * ```
  */
 export class ConfigDatabaseCdc extends pulumi.CustomResource {

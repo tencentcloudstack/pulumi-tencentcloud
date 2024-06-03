@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Redis.Inputs
 {
 
-    public sealed class GetBackupDownloadInfoLimitVpcArgs : Pulumi.InvokeArgs
+    public sealed class GetBackupDownloadInfoLimitVpcArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Customize the region of the VPC to which the backup file is downloaded.
@@ -34,5 +34,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Redis.Inputs
         public GetBackupDownloadInfoLimitVpcArgs()
         {
         }
+        public static new GetBackupDownloadInfoLimitVpcArgs Empty => new GetBackupDownloadInfoLimitVpcArgs();
     }
 }

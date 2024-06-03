@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssl.Inputs
 {
 
-    public sealed class UpdateCertificateInstanceOperationResourceTypesRegionGetArgs : Pulumi.ResourceArgs
+    public sealed class UpdateCertificateInstanceOperationResourceTypesRegionGetArgs : global::Pulumi.ResourceArgs
     {
         [Input("regions")]
         private InputList<string>? _regions;
@@ -34,5 +34,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssl.Inputs
         public UpdateCertificateInstanceOperationResourceTypesRegionGetArgs()
         {
         }
+        public static new UpdateCertificateInstanceOperationResourceTypesRegionGetArgs Empty => new UpdateCertificateInstanceOperationResourceTypesRegionGetArgs();
     }
 }

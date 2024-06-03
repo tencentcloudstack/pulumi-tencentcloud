@@ -15,64 +15,58 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dlc
         /// <summary>
         /// Use this data source to query detailed information of dlc describe_data_engine_events
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var describeDataEngineEvents = Tencentcloud.Dlc.GetDescribeDataEngineEvents.Invoke(new()
         ///     {
-        ///         var describeDataEngineEvents = Output.Create(Tencentcloud.Dlc.GetDescribeDataEngineEvents.InvokeAsync(new Tencentcloud.Dlc.GetDescribeDataEngineEventsArgs
-        ///         {
-        ///             DataEngineName = "test",
-        ///         }));
-        ///     }
+        ///         DataEngineName = "test",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetDescribeDataEngineEventsResult> InvokeAsync(GetDescribeDataEngineEventsArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetDescribeDataEngineEventsResult>("tencentcloud:Dlc/getDescribeDataEngineEvents:getDescribeDataEngineEvents", args ?? new GetDescribeDataEngineEventsArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetDescribeDataEngineEventsResult>("tencentcloud:Dlc/getDescribeDataEngineEvents:getDescribeDataEngineEvents", args ?? new GetDescribeDataEngineEventsArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of dlc describe_data_engine_events
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var describeDataEngineEvents = Tencentcloud.Dlc.GetDescribeDataEngineEvents.Invoke(new()
         ///     {
-        ///         var describeDataEngineEvents = Output.Create(Tencentcloud.Dlc.GetDescribeDataEngineEvents.InvokeAsync(new Tencentcloud.Dlc.GetDescribeDataEngineEventsArgs
-        ///         {
-        ///             DataEngineName = "test",
-        ///         }));
-        ///     }
+        ///         DataEngineName = "test",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetDescribeDataEngineEventsResult> Invoke(GetDescribeDataEngineEventsInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetDescribeDataEngineEventsResult>("tencentcloud:Dlc/getDescribeDataEngineEvents:getDescribeDataEngineEvents", args ?? new GetDescribeDataEngineEventsInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetDescribeDataEngineEventsResult>("tencentcloud:Dlc/getDescribeDataEngineEvents:getDescribeDataEngineEvents", args ?? new GetDescribeDataEngineEventsInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetDescribeDataEngineEventsArgs : Pulumi.InvokeArgs
+    public sealed class GetDescribeDataEngineEventsArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Data engine name.
@@ -89,9 +83,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dlc
         public GetDescribeDataEngineEventsArgs()
         {
         }
+        public static new GetDescribeDataEngineEventsArgs Empty => new GetDescribeDataEngineEventsArgs();
     }
 
-    public sealed class GetDescribeDataEngineEventsInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetDescribeDataEngineEventsInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Data engine name.
@@ -108,6 +103,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dlc
         public GetDescribeDataEngineEventsInvokeArgs()
         {
         }
+        public static new GetDescribeDataEngineEventsInvokeArgs Empty => new GetDescribeDataEngineEventsInvokeArgs();
     }
 
 

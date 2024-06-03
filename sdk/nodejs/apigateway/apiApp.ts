@@ -8,24 +8,29 @@ import * as utilities from "../utilities";
  * Provides a resource to create a APIGateway ApiApp
  *
  * ## Example Usage
+ *
  * ### Create a basic apigateway apiApp
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = new tencentcloud.ApiGateway.ApiApp("example", {
+ * const example = new tencentcloud.apigateway.ApiApp("example", {
  *     apiAppDesc: "app desc.",
  *     apiAppName: "tf_example",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
+ *
  * ### Bind Tag
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = new tencentcloud.ApiGateway.ApiApp("example", {
+ * const example = new tencentcloud.apigateway.ApiApp("example", {
  *     apiAppDesc: "app desc.",
  *     apiAppName: "tf_example",
  *     tags: {
@@ -33,13 +38,14 @@ import * as utilities from "../utilities";
  *     },
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * apigateway api_app can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:ApiGateway/apiApp:ApiApp example app-poe0pyex
+ * $ pulumi import tencentcloud:ApiGateway/apiApp:ApiApp example app-poe0pyex
  * ```
  */
 export class ApiApp extends pulumi.CustomResource {

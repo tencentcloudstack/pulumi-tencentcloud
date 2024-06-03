@@ -2,36 +2,12 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
  * Provides a resource to create a tsf instancesAttachment
- *
- * ## Example Usage
- *
- * ```typescript
- * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
- *
- * const instancesAttachment = new tencentcloud.Tsf.InstancesAttachment("instances_attachment", {
- *     clusterId: "cluster-123456",
- *     featureIdLists: "",
- *     imageId: "img-123456",
- *     instanceAdvancedSettings: {
- *         dockerGraphPath: "/var/lib/docker",
- *         mountTarget: "/mnt/data",
- *     },
- *     instanceIdList: [""],
- *     instanceImportMode: "R",
- *     keyId: "key-123456",
- *     osCustomizeType: "my_customize",
- *     osName: "Ubuntu 20.04",
- *     password: "MyP@ssw0rd",
- *     securityGroupIds: [""],
- *     sgId: "sg-123456",
- * });
- * ```
  */
 export class InstancesAttachment extends pulumi.CustomResource {
     /**
@@ -152,11 +128,13 @@ export class InstancesAttachment extends pulumi.CustomResource {
             resourceInputs["keyId"] = args ? args.keyId : undefined;
             resourceInputs["osCustomizeType"] = args ? args.osCustomizeType : undefined;
             resourceInputs["osName"] = args ? args.osName : undefined;
-            resourceInputs["password"] = args ? args.password : undefined;
+            resourceInputs["password"] = args?.password ? pulumi.secret(args.password) : undefined;
             resourceInputs["securityGroupIds"] = args ? args.securityGroupIds : undefined;
             resourceInputs["sgId"] = args ? args.sgId : undefined;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+        const secretOpts = { additionalSecretOutputs: ["password"] };
+        opts = pulumi.mergeOptions(opts, secretOpts);
         super(InstancesAttachment.__pulumiType, name, resourceInputs, opts);
     }
 }

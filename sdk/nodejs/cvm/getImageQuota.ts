@@ -9,20 +9,19 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const imageQuota = pulumi.output(tencentcloud.Cvm.getImageQuota());
+ * const imageQuota = tencentcloud.Cvm.getImageQuota({});
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getImageQuota(args?: GetImageQuotaArgs, opts?: pulumi.InvokeOptions): Promise<GetImageQuotaResult> {
     args = args || {};
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Cvm/getImageQuota:getImageQuota", {
         "resultOutputFile": args.resultOutputFile,
     }, opts);
@@ -52,9 +51,22 @@ export interface GetImageQuotaResult {
     readonly imageNumQuota: number;
     readonly resultOutputFile?: string;
 }
-
+/**
+ * Use this data source to query detailed information of cvm imageQuota
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const imageQuota = tencentcloud.Cvm.getImageQuota({});
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getImageQuotaOutput(args?: GetImageQuotaOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetImageQuotaResult> {
-    return pulumi.output(args).apply(a => getImageQuota(a, opts))
+    return pulumi.output(args).apply((a: any) => getImageQuota(a, opts))
 }
 
 /**

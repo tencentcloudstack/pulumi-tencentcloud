@@ -15,64 +15,58 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kms
         /// <summary>
         /// Use this data source to query detailed information of kms list_keys
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var example = Tencentcloud.Kms.GetListKeys.Invoke(new()
         ///     {
-        ///         var example = Output.Create(Tencentcloud.Kms.GetListKeys.InvokeAsync(new Tencentcloud.Kms.GetListKeysArgs
-        ///         {
-        ///             Role = 1,
-        ///         }));
-        ///     }
+        ///         Role = 1,
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetListKeysResult> InvokeAsync(GetListKeysArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetListKeysResult>("tencentcloud:Kms/getListKeys:getListKeys", args ?? new GetListKeysArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetListKeysResult>("tencentcloud:Kms/getListKeys:getListKeys", args ?? new GetListKeysArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of kms list_keys
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var example = Tencentcloud.Kms.GetListKeys.Invoke(new()
         ///     {
-        ///         var example = Output.Create(Tencentcloud.Kms.GetListKeys.InvokeAsync(new Tencentcloud.Kms.GetListKeysArgs
-        ///         {
-        ///             Role = 1,
-        ///         }));
-        ///     }
+        ///         Role = 1,
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetListKeysResult> Invoke(GetListKeysInvokeArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetListKeysResult>("tencentcloud:Kms/getListKeys:getListKeys", args ?? new GetListKeysInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetListKeysResult>("tencentcloud:Kms/getListKeys:getListKeys", args ?? new GetListKeysInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetListKeysArgs : Pulumi.InvokeArgs
+    public sealed class GetListKeysArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// HSM cluster ID (only valid for KMS exclusive/managed service instances).
@@ -95,9 +89,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kms
         public GetListKeysArgs()
         {
         }
+        public static new GetListKeysArgs Empty => new GetListKeysArgs();
     }
 
-    public sealed class GetListKeysInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetListKeysInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// HSM cluster ID (only valid for KMS exclusive/managed service instances).
@@ -120,6 +115,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kms
         public GetListKeysInvokeArgs()
         {
         }
+        public static new GetListKeysInvokeArgs Empty => new GetListKeysInvokeArgs();
     }
 
 

@@ -15,31 +15,32 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var exportInstanceSlowQueries = new Tencentcloud.Cynosdb.ExportInstanceSlowQueries("exportInstanceSlowQueries", new()
     ///     {
-    ///         var exportInstanceSlowQueries = new Tencentcloud.Cynosdb.ExportInstanceSlowQueries("exportInstanceSlowQueries", new Tencentcloud.Cynosdb.ExportInstanceSlowQueriesArgs
-    ///         {
-    ///             Database = "db1",
-    ///             EndTime = "2022-01-01 14:00:00",
-    ///             FileType = "csv",
-    ///             Host = "10.10.10.10",
-    ///             InstanceId = "cynosdbmysql-ins-123",
-    ///             StartTime = "2022-01-01 12:00:00",
-    ///             Username = "root",
-    ///         });
-    ///     }
+    ///         Database = "db1",
+    ///         EndTime = "2022-01-01 14:00:00",
+    ///         FileType = "csv",
+    ///         Host = "10.10.10.10",
+    ///         InstanceId = "cynosdbmysql-ins-123",
+    ///         StartTime = "2022-01-01 12:00:00",
+    ///         Username = "root",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Cynosdb/exportInstanceSlowQueries:ExportInstanceSlowQueries")]
-    public partial class ExportInstanceSlowQueries : Pulumi.CustomResource
+    public partial class ExportInstanceSlowQueries : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Database name.
@@ -134,7 +135,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
         }
     }
 
-    public sealed class ExportInstanceSlowQueriesArgs : Pulumi.ResourceArgs
+    public sealed class ExportInstanceSlowQueriesArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Database name.
@@ -181,9 +182,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
         public ExportInstanceSlowQueriesArgs()
         {
         }
+        public static new ExportInstanceSlowQueriesArgs Empty => new ExportInstanceSlowQueriesArgs();
     }
 
-    public sealed class ExportInstanceSlowQueriesState : Pulumi.ResourceArgs
+    public sealed class ExportInstanceSlowQueriesState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Database name.
@@ -236,5 +238,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
         public ExportInstanceSlowQueriesState()
         {
         }
+        public static new ExportInstanceSlowQueriesState Empty => new ExportInstanceSlowQueriesState();
     }
 }

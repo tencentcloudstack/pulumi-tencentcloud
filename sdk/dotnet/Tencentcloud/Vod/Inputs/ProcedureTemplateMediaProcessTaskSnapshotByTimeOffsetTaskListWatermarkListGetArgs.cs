@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vod.Inputs
 {
 
-    public sealed class ProcedureTemplateMediaProcessTaskSnapshotByTimeOffsetTaskListWatermarkListGetArgs : Pulumi.ResourceArgs
+    public sealed class ProcedureTemplateMediaProcessTaskSnapshotByTimeOffsetTaskListWatermarkListGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Watermarking template ID.
@@ -46,5 +46,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vod.Inputs
         public ProcedureTemplateMediaProcessTaskSnapshotByTimeOffsetTaskListWatermarkListGetArgs()
         {
         }
+        public static new ProcedureTemplateMediaProcessTaskSnapshotByTimeOffsetTaskListWatermarkListGetArgs Empty => new ProcedureTemplateMediaProcessTaskSnapshotByTimeOffsetTaskListWatermarkListGetArgs();
     }
 }

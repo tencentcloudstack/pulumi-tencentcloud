@@ -7,8 +7,9 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a css backupStream
@@ -17,36 +18,41 @@ import (
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Css"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Css"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Css.NewBackupStream(ctx, "backupStream", &Css.BackupStreamArgs{
-// 			AppName:          pulumi.String("live"),
-// 			PushDomainName:   pulumi.String("177154.push.tlivecloud.com"),
-// 			StreamName:       pulumi.String("1308919341_test"),
-// 			UpstreamSequence: pulumi.String("2209501773993286139"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Css.NewBackupStream(ctx, "backupStream", &Css.BackupStreamArgs{
+//				AppName:          pulumi.String("live"),
+//				PushDomainName:   pulumi.String("177154.push.tlivecloud.com"),
+//				StreamName:       pulumi.String("1308919341_test"),
+//				UpstreamSequence: pulumi.String("2209501773993286139"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // css backup_stream can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Css/backupStream:BackupStream backup_stream pushDomainName#appName#streamName
+// $ pulumi import tencentcloud:Css/backupStream:BackupStream backup_stream pushDomainName#appName#streamName
 // ```
 type BackupStream struct {
 	pulumi.CustomResourceState
@@ -80,7 +86,7 @@ func NewBackupStream(ctx *pulumi.Context,
 	if args.UpstreamSequence == nil {
 		return nil, errors.New("invalid value for required argument 'UpstreamSequence'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource BackupStream
 	err := ctx.RegisterResource("tencentcloud:Css/backupStream:BackupStream", name, args, &resource, opts...)
 	if err != nil {
@@ -177,7 +183,7 @@ func (i *BackupStream) ToBackupStreamOutputWithContext(ctx context.Context) Back
 // BackupStreamArrayInput is an input type that accepts BackupStreamArray and BackupStreamArrayOutput values.
 // You can construct a concrete instance of `BackupStreamArrayInput` via:
 //
-//          BackupStreamArray{ BackupStreamArgs{...} }
+//	BackupStreamArray{ BackupStreamArgs{...} }
 type BackupStreamArrayInput interface {
 	pulumi.Input
 
@@ -202,7 +208,7 @@ func (i BackupStreamArray) ToBackupStreamArrayOutputWithContext(ctx context.Cont
 // BackupStreamMapInput is an input type that accepts BackupStreamMap and BackupStreamMapOutput values.
 // You can construct a concrete instance of `BackupStreamMapInput` via:
 //
-//          BackupStreamMap{ "key": BackupStreamArgs{...} }
+//	BackupStreamMap{ "key": BackupStreamArgs{...} }
 type BackupStreamMapInput interface {
 	pulumi.Input
 

@@ -15,64 +15,58 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mongodb
         /// <summary>
         /// Use this data source to query detailed information of mongodb instance_connections
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var instanceConnections = Tencentcloud.Mongodb.GetInstanceConnections.Invoke(new()
         ///     {
-        ///         var instanceConnections = Output.Create(Tencentcloud.Mongodb.GetInstanceConnections.InvokeAsync(new Tencentcloud.Mongodb.GetInstanceConnectionsArgs
-        ///         {
-        ///             InstanceId = "cmgo-9d0p6umb",
-        ///         }));
-        ///     }
+        ///         InstanceId = "cmgo-9d0p6umb",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetInstanceConnectionsResult> InvokeAsync(GetInstanceConnectionsArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetInstanceConnectionsResult>("tencentcloud:Mongodb/getInstanceConnections:getInstanceConnections", args ?? new GetInstanceConnectionsArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetInstanceConnectionsResult>("tencentcloud:Mongodb/getInstanceConnections:getInstanceConnections", args ?? new GetInstanceConnectionsArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of mongodb instance_connections
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var instanceConnections = Tencentcloud.Mongodb.GetInstanceConnections.Invoke(new()
         ///     {
-        ///         var instanceConnections = Output.Create(Tencentcloud.Mongodb.GetInstanceConnections.InvokeAsync(new Tencentcloud.Mongodb.GetInstanceConnectionsArgs
-        ///         {
-        ///             InstanceId = "cmgo-9d0p6umb",
-        ///         }));
-        ///     }
+        ///         InstanceId = "cmgo-9d0p6umb",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetInstanceConnectionsResult> Invoke(GetInstanceConnectionsInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetInstanceConnectionsResult>("tencentcloud:Mongodb/getInstanceConnections:getInstanceConnections", args ?? new GetInstanceConnectionsInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetInstanceConnectionsResult>("tencentcloud:Mongodb/getInstanceConnections:getInstanceConnections", args ?? new GetInstanceConnectionsInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetInstanceConnectionsArgs : Pulumi.InvokeArgs
+    public sealed class GetInstanceConnectionsArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Instance ID, the format is: cmgo-9d0p6umb.Same as the instance ID displayed in the cloud database console page.
@@ -89,9 +83,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mongodb
         public GetInstanceConnectionsArgs()
         {
         }
+        public static new GetInstanceConnectionsArgs Empty => new GetInstanceConnectionsArgs();
     }
 
-    public sealed class GetInstanceConnectionsInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetInstanceConnectionsInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Instance ID, the format is: cmgo-9d0p6umb.Same as the instance ID displayed in the cloud database console page.
@@ -108,6 +103,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mongodb
         public GetInstanceConnectionsInvokeArgs()
         {
         }
+        public static new GetInstanceConnectionsInvokeArgs Empty => new GetInstanceConnectionsInvokeArgs();
     }
 
 

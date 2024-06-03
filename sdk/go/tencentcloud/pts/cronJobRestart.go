@@ -7,35 +7,41 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a pts cron_job_restart, restart a scheduled task whose status is `JobAborting`
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Pts"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Pts"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Pts.NewCronJobRestart(ctx, "cronJobRestart", &Pts.CronJobRestartArgs{
-// 			CronJobId: pulumi.String("job-dtm93vx0"),
-// 			ProjectId: pulumi.String("project-abc"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Pts.NewCronJobRestart(ctx, "cronJobRestart", &Pts.CronJobRestartArgs{
+//				CronJobId: pulumi.String("job-dtm93vx0"),
+//				ProjectId: pulumi.String("project-abc"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 type CronJobRestart struct {
 	pulumi.CustomResourceState
 
@@ -58,7 +64,7 @@ func NewCronJobRestart(ctx *pulumi.Context,
 	if args.ProjectId == nil {
 		return nil, errors.New("invalid value for required argument 'ProjectId'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource CronJobRestart
 	err := ctx.RegisterResource("tencentcloud:Pts/cronJobRestart:CronJobRestart", name, args, &resource, opts...)
 	if err != nil {
@@ -139,7 +145,7 @@ func (i *CronJobRestart) ToCronJobRestartOutputWithContext(ctx context.Context) 
 // CronJobRestartArrayInput is an input type that accepts CronJobRestartArray and CronJobRestartArrayOutput values.
 // You can construct a concrete instance of `CronJobRestartArrayInput` via:
 //
-//          CronJobRestartArray{ CronJobRestartArgs{...} }
+//	CronJobRestartArray{ CronJobRestartArgs{...} }
 type CronJobRestartArrayInput interface {
 	pulumi.Input
 
@@ -164,7 +170,7 @@ func (i CronJobRestartArray) ToCronJobRestartArrayOutputWithContext(ctx context.
 // CronJobRestartMapInput is an input type that accepts CronJobRestartMap and CronJobRestartMapOutput values.
 // You can construct a concrete instance of `CronJobRestartMapInput` via:
 //
-//          CronJobRestartMap{ "key": CronJobRestartArgs{...} }
+//	CronJobRestartMap{ "key": CronJobRestartArgs{...} }
 type CronJobRestartMapInput interface {
 	pulumi.Input
 

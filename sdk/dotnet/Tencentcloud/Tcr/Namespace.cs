@@ -14,54 +14,57 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcr
     /// Use this resource to create tcr namespace.
     /// 
     /// ## Example Usage
+    /// 
     /// ### Create a tcr namespace instance
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var exampleInstance = new Tencentcloud.Tcr.Instance("exampleInstance", new()
     ///     {
-    ///         var exampleInstance = new Tencentcloud.Tcr.Instance("exampleInstance", new Tencentcloud.Tcr.InstanceArgs
+    ///         InstanceType = "premium",
+    ///         Tags = 
     ///         {
-    ///             InstanceType = "premium",
-    ///             Tags = 
-    ///             {
-    ///                 { "createdBy", "terraform" },
-    ///             },
-    ///         });
-    ///         var exampleNamespace = new Tencentcloud.Tcr.Namespace("exampleNamespace", new Tencentcloud.Tcr.NamespaceArgs
-    ///         {
-    ///             InstanceId = exampleInstance.Id,
-    ///             IsPublic = true,
-    ///             IsAutoScan = true,
-    ///             IsPreventVul = true,
-    ///             Severity = "medium",
-    ///             CveWhitelistItems = 
-    ///             {
-    ///                 new Tencentcloud.Tcr.Inputs.NamespaceCveWhitelistItemArgs
-    ///                 {
-    ///                     CveId = "cve-xxxxx",
-    ///                 },
-    ///             },
-    ///         });
-    ///     }
+    ///             { "createdBy", "terraform" },
+    ///         },
+    ///     });
     /// 
-    /// }
+    ///     var exampleNamespace = new Tencentcloud.Tcr.Namespace("exampleNamespace", new()
+    ///     {
+    ///         InstanceId = exampleInstance.Id,
+    ///         IsPublic = true,
+    ///         IsAutoScan = true,
+    ///         IsPreventVul = true,
+    ///         Severity = "medium",
+    ///         CveWhitelistItems = new[]
+    ///         {
+    ///             new Tencentcloud.Tcr.Inputs.NamespaceCveWhitelistItemArgs
+    ///             {
+    ///                 CveId = "cve-xxxxx",
+    ///             },
+    ///         },
+    ///     });
+    /// 
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// tcr namespace can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Tcr/namespace:Namespace example tcr_instance_id#namespace_name
+    /// $ pulumi import tencentcloud:Tcr/namespace:Namespace example tcr_instance_id#namespace_name
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Tcr/namespace:Namespace")]
-    public partial class Namespace : Pulumi.CustomResource
+    public partial class Namespace : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Vulnerability Whitelist.
@@ -150,7 +153,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcr
         }
     }
 
-    public sealed class NamespaceArgs : Pulumi.ResourceArgs
+    public sealed class NamespaceArgs : global::Pulumi.ResourceArgs
     {
         [Input("cveWhitelistItems")]
         private InputList<Inputs.NamespaceCveWhitelistItemArgs>? _cveWhitelistItems;
@@ -203,9 +206,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcr
         public NamespaceArgs()
         {
         }
+        public static new NamespaceArgs Empty => new NamespaceArgs();
     }
 
-    public sealed class NamespaceState : Pulumi.ResourceArgs
+    public sealed class NamespaceState : global::Pulumi.ResourceArgs
     {
         [Input("cveWhitelistItems")]
         private InputList<Inputs.NamespaceCveWhitelistItemGetArgs>? _cveWhitelistItems;
@@ -258,5 +262,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcr
         public NamespaceState()
         {
         }
+        public static new NamespaceState Empty => new NamespaceState();
     }
 }

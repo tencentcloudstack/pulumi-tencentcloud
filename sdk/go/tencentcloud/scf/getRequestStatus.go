@@ -8,37 +8,42 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Use this data source to query detailed information of scf requestStatus
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Scf"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Scf"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Scf"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Scf.GetRequestStatus(ctx, &scf.GetRequestStatusArgs{
-// 			FunctionName:      "keep-1676351130",
-// 			FunctionRequestId: "9de9405a-e33a-498d-bb59-e80b7bed1191",
-// 			Namespace:         pulumi.StringRef("default"),
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Scf.GetRequestStatus(ctx, &scf.GetRequestStatusArgs{
+//				FunctionName:      "keep-1676351130",
+//				FunctionRequestId: "9de9405a-e33a-498d-bb59-e80b7bed1191",
+//				Namespace:         pulumi.StringRef("default"),
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 func GetRequestStatus(ctx *pulumi.Context, args *GetRequestStatusArgs, opts ...pulumi.InvokeOption) (*GetRequestStatusResult, error) {
-	opts = pkgInvokeDefaultOpts(opts)
+	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetRequestStatusResult
 	err := ctx.Invoke("tencentcloud:Scf/getRequestStatus:getRequestStatus", args, &rv, opts...)
 	if err != nil {

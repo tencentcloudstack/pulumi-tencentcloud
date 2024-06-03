@@ -15,64 +15,68 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var config = new Config();
+    ///     var availabilityZone = config.Get("availabilityZone") ?? "ap-guangzhou-4";
+    ///     var vpc = new Tencentcloud.Vpc.Instance("vpc", new()
     ///     {
-    ///         var config = new Config();
-    ///         var availabilityZone = config.Get("availabilityZone") ?? "ap-guangzhou-4";
-    ///         var vpc = new Tencentcloud.Vpc.Instance("vpc", new Tencentcloud.Vpc.InstanceArgs
+    ///         CidrBlock = "10.0.0.0/16",
+    ///     });
+    /// 
+    ///     var subnet = new Tencentcloud.Subnet.Instance("subnet", new()
+    ///     {
+    ///         VpcId = vpc.Id,
+    ///         AvailabilityZone = availabilityZone,
+    ///         CidrBlock = "10.0.1.0/24",
+    ///     });
+    /// 
+    ///     var foo = new Tencentcloud.Monitor.TmpInstance("foo", new()
+    ///     {
+    ///         InstanceName = "tf-tmp-instance",
+    ///         VpcId = vpc.Id,
+    ///         SubnetId = subnet.Id,
+    ///         DataRetentionTime = 30,
+    ///         Zone = availabilityZone,
+    ///         Tags = 
     ///         {
-    ///             CidrBlock = "10.0.0.0/16",
-    ///         });
-    ///         var subnet = new Tencentcloud.Subnet.Instance("subnet", new Tencentcloud.Subnet.InstanceArgs
-    ///         {
-    ///             VpcId = vpc.Id,
-    ///             AvailabilityZone = availabilityZone,
-    ///             CidrBlock = "10.0.1.0/24",
-    ///         });
-    ///         var foo = new Tencentcloud.Monitor.TmpInstance("foo", new Tencentcloud.Monitor.TmpInstanceArgs
-    ///         {
-    ///             InstanceName = "tf-tmp-instance",
-    ///             VpcId = vpc.Id,
-    ///             SubnetId = subnet.Id,
-    ///             DataRetentionTime = 30,
-    ///             Zone = availabilityZone,
-    ///             Tags = 
-    ///             {
-    ///                 { "createdBy", "terraform" },
-    ///             },
-    ///         });
-    ///         var recordingRule = new Tencentcloud.Monitor.TmpRecordingRule("recordingRule", new Tencentcloud.Monitor.TmpRecordingRuleArgs
-    ///         {
-    ///             InstanceId = foo.Id,
-    ///             RuleState = 2,
-    ///             Group = @"---
+    ///             { "createdBy", "terraform" },
+    ///         },
+    ///     });
+    /// 
+    ///     var recordingRule = new Tencentcloud.Monitor.TmpRecordingRule("recordingRule", new()
+    ///     {
+    ///         InstanceId = foo.Id,
+    ///         RuleState = 2,
+    ///         Group = @"---
     /// name: example-test
     /// rules:
     ///   - record: job:http_inprogress_requests:sum
     ///     expr: sum by (job) (http_inprogress_requests)
     /// ",
-    ///         });
-    ///     }
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// monitor recordingRule can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Monitor/tmpRecordingRule:TmpRecordingRule recordingRule instanceId#recordingRule_id
+    /// $ pulumi import tencentcloud:Monitor/tmpRecordingRule:TmpRecordingRule recordingRule instanceId#recordingRule_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Monitor/tmpRecordingRule:TmpRecordingRule")]
-    public partial class TmpRecordingRule : Pulumi.CustomResource
+    public partial class TmpRecordingRule : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Recording rule group.
@@ -143,7 +147,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
         }
     }
 
-    public sealed class TmpRecordingRuleArgs : Pulumi.ResourceArgs
+    public sealed class TmpRecordingRuleArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Recording rule group.
@@ -172,9 +176,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
         public TmpRecordingRuleArgs()
         {
         }
+        public static new TmpRecordingRuleArgs Empty => new TmpRecordingRuleArgs();
     }
 
-    public sealed class TmpRecordingRuleState : Pulumi.ResourceArgs
+    public sealed class TmpRecordingRuleState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Recording rule group.
@@ -203,5 +208,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
         public TmpRecordingRuleState()
         {
         }
+        public static new TmpRecordingRuleState Empty => new TmpRecordingRuleState();
     }
 }

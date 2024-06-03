@@ -19,11 +19,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Outputs
         /// </summary>
         public readonly ImmutableArray<string> BackupOrigins;
         /// <summary>
-        /// Whether access private cos bucket is allowed when `OriginType` is cos. Note: This field may return null, indicating that no valid value can be obtained.
-        /// </summary>
-        public readonly string? CosPrivateAccess;
-        /// <summary>
-        /// Origin-pull protocol.- `http`: Switch HTTPS requests to HTTP.- `follow`: Follow the protocol of the request.- `https`: Switch HTTP requests to HTTPS. This only supports port 443 on the origin server. Note: This field may return null, indicating that no valid value can be obtained.
+        /// Origin-pull protocol.
         /// </summary>
         public readonly string? OriginPullProtocol;
         /// <summary>
@@ -35,14 +31,11 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Outputs
         private ZoneSettingOrigin(
             ImmutableArray<string> backupOrigins,
 
-            string? cosPrivateAccess,
-
             string? originPullProtocol,
 
             ImmutableArray<string> origins)
         {
             BackupOrigins = backupOrigins;
-            CosPrivateAccess = cosPrivateAccess;
             OriginPullProtocol = originPullProtocol;
             Origins = origins;
         }

@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes.Inputs
 {
 
-    public sealed class NodePoolAutoScalingConfigDataDiskArgs : Pulumi.ResourceArgs
+    public sealed class NodePoolAutoScalingConfigDataDiskArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Indicates whether the disk remove after instance terminated. Default is `false`.
@@ -26,7 +26,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes.Inputs
         public Input<int>? DiskSize { get; set; }
 
         /// <summary>
-        /// Types of disk, available values: `CLOUD_PREMIUM` and `CLOUD_SSD`.
+        /// Types of disk. Valid value: `LOCAL_BASIC`, `LOCAL_SSD`, `CLOUD_BASIC`, `CLOUD_PREMIUM`, `CLOUD_SSD`, `CLOUD_HSSD`, `CLOUD_TSSD` and `CLOUD_BSSD`.
         /// </summary>
         [Input("diskType")]
         public Input<string>? DiskType { get; set; }
@@ -52,5 +52,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes.Inputs
         public NodePoolAutoScalingConfigDataDiskArgs()
         {
         }
+        public static new NodePoolAutoScalingConfigDataDiskArgs Empty => new NodePoolAutoScalingConfigDataDiskArgs();
     }
 }

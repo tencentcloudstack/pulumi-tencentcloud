@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Antiddos.Inputs
 {
 
-    public sealed class PacketFilterConfigPacketFilterConfigArgs : Pulumi.ResourceArgs
+    public sealed class PacketFilterConfigPacketFilterConfigArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Action, value [drop (discard) transmit (release) drop_black (discard and pull black) drop_rst (intercept) drop_black_rst (intercept and pull black) forward (continue protection)].
@@ -148,5 +148,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Antiddos.Inputs
         public PacketFilterConfigPacketFilterConfigArgs()
         {
         }
+        public static new PacketFilterConfigPacketFilterConfigArgs Empty => new PacketFilterConfigPacketFilterConfigArgs();
     }
 }

@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Pts.Inputs
 {
 
-    public sealed class ScenarioLoadLoadSpecConcurrencyStageGetArgs : Pulumi.ResourceArgs
+    public sealed class ScenarioLoadLoadSpecConcurrencyStageGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Pressure time.
@@ -28,5 +28,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Pts.Inputs
         public ScenarioLoadLoadSpecConcurrencyStageGetArgs()
         {
         }
+        public static new ScenarioLoadLoadSpecConcurrencyStageGetArgs Empty => new ScenarioLoadLoadSpecConcurrencyStageGetArgs();
     }
 }

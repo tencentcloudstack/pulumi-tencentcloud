@@ -8,38 +8,43 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Use this data source to query detailed information of dlc describeWorkGroupInfo
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Dlc"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dlc"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dlc"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Dlc.GetDescribeWorkGroupInfo(ctx, &dlc.GetDescribeWorkGroupInfoArgs{
-// 			SortBy:      pulumi.StringRef("create-time"),
-// 			Sorting:     pulumi.StringRef("desc"),
-// 			Type:        pulumi.StringRef("User"),
-// 			WorkGroupId: pulumi.IntRef(23181),
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Dlc.GetDescribeWorkGroupInfo(ctx, &dlc.GetDescribeWorkGroupInfoArgs{
+//				SortBy:      pulumi.StringRef("create-time"),
+//				Sorting:     pulumi.StringRef("desc"),
+//				Type:        pulumi.StringRef("User"),
+//				WorkGroupId: pulumi.IntRef(23181),
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 func GetDescribeWorkGroupInfo(ctx *pulumi.Context, args *GetDescribeWorkGroupInfoArgs, opts ...pulumi.InvokeOption) (*GetDescribeWorkGroupInfoResult, error) {
-	opts = pkgInvokeDefaultOpts(opts)
+	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetDescribeWorkGroupInfoResult
 	err := ctx.Invoke("tencentcloud:Dlc/getDescribeWorkGroupInfo:getDescribeWorkGroupInfo", args, &rv, opts...)
 	if err != nil {

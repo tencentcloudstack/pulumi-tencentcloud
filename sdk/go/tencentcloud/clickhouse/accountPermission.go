@@ -7,67 +7,72 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a clickhouse accountPermission
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Clickhouse"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Clickhouse"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Clickhouse"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Clickhouse.NewAccountPermission(ctx, "accountPermissionAllDatabase", &Clickhouse.AccountPermissionArgs{
-// 			AllDatabase: pulumi.Bool(true),
-// 			Cluster:     pulumi.String("default_cluster"),
-// 			GlobalPrivileges: pulumi.StringArray{
-// 				pulumi.String("SELECT"),
-// 				pulumi.String("ALTER"),
-// 			},
-// 			InstanceId: pulumi.String("cdwch-xxxxxx"),
-// 			UserName:   pulumi.String("user1"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_, err = Clickhouse.NewAccountPermission(ctx, "accountPermissionNotAllDatabase", &Clickhouse.AccountPermissionArgs{
-// 			AllDatabase: pulumi.Bool(false),
-// 			Cluster:     pulumi.String("default_cluster"),
-// 			DatabasePrivilegeLists: clickhouse.AccountPermissionDatabasePrivilegeListArray{
-// 				&clickhouse.AccountPermissionDatabasePrivilegeListArgs{
-// 					DatabaseName: pulumi.String("xxxxxx"),
-// 					DatabasePrivileges: pulumi.StringArray{
-// 						pulumi.String("SELECT"),
-// 						pulumi.String("ALTER"),
-// 					},
-// 				},
-// 			},
-// 			InstanceId: pulumi.String("cdwch-xxxxxx"),
-// 			UserName:   pulumi.String("user2"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Clickhouse.NewAccountPermission(ctx, "accountPermissionAllDatabase", &Clickhouse.AccountPermissionArgs{
+//				AllDatabase: pulumi.Bool(true),
+//				Cluster:     pulumi.String("default_cluster"),
+//				GlobalPrivileges: pulumi.StringArray{
+//					pulumi.String("SELECT"),
+//					pulumi.String("ALTER"),
+//				},
+//				InstanceId: pulumi.String("cdwch-xxxxxx"),
+//				UserName:   pulumi.String("user1"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_, err = Clickhouse.NewAccountPermission(ctx, "accountPermissionNotAllDatabase", &Clickhouse.AccountPermissionArgs{
+//				AllDatabase: pulumi.Bool(false),
+//				Cluster:     pulumi.String("default_cluster"),
+//				DatabasePrivilegeLists: clickhouse.AccountPermissionDatabasePrivilegeListArray{
+//					&clickhouse.AccountPermissionDatabasePrivilegeListArgs{
+//						DatabaseName: pulumi.String("xxxxxx"),
+//						DatabasePrivileges: pulumi.StringArray{
+//							pulumi.String("SELECT"),
+//							pulumi.String("ALTER"),
+//						},
+//					},
+//				},
+//				InstanceId: pulumi.String("cdwch-xxxxxx"),
+//				UserName:   pulumi.String("user2"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // clickhouse account_permission can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Clickhouse/accountPermission:AccountPermission account_permission ${instanceId}#${cluster}#${userName}
+// $ pulumi import tencentcloud:Clickhouse/accountPermission:AccountPermission account_permission ${instanceId}#${cluster}#${userName}
 // ```
 type AccountPermission struct {
 	pulumi.CustomResourceState
@@ -105,7 +110,7 @@ func NewAccountPermission(ctx *pulumi.Context,
 	if args.UserName == nil {
 		return nil, errors.New("invalid value for required argument 'UserName'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource AccountPermission
 	err := ctx.RegisterResource("tencentcloud:Clickhouse/accountPermission:AccountPermission", name, args, &resource, opts...)
 	if err != nil {
@@ -218,7 +223,7 @@ func (i *AccountPermission) ToAccountPermissionOutputWithContext(ctx context.Con
 // AccountPermissionArrayInput is an input type that accepts AccountPermissionArray and AccountPermissionArrayOutput values.
 // You can construct a concrete instance of `AccountPermissionArrayInput` via:
 //
-//          AccountPermissionArray{ AccountPermissionArgs{...} }
+//	AccountPermissionArray{ AccountPermissionArgs{...} }
 type AccountPermissionArrayInput interface {
 	pulumi.Input
 
@@ -243,7 +248,7 @@ func (i AccountPermissionArray) ToAccountPermissionArrayOutputWithContext(ctx co
 // AccountPermissionMapInput is an input type that accepts AccountPermissionMap and AccountPermissionMapOutput values.
 // You can construct a concrete instance of `AccountPermissionMapInput` via:
 //
-//          AccountPermissionMap{ "key": AccountPermissionArgs{...} }
+//	AccountPermissionMap{ "key": AccountPermissionArgs{...} }
 type AccountPermissionMapInput interface {
 	pulumi.Input
 

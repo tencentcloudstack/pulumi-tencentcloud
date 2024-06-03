@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vod.Inputs
 {
 
-    public sealed class ProcedureTemplateMediaProcessTaskArgs : Pulumi.ResourceArgs
+    public sealed class ProcedureTemplateMediaProcessTaskArgs : global::Pulumi.ResourceArgs
     {
         [Input("adaptiveDynamicStreamingTaskLists")]
         private InputList<Inputs.ProcedureTemplateMediaProcessTaskAdaptiveDynamicStreamingTaskListArgs>? _adaptiveDynamicStreamingTaskLists;
@@ -100,5 +100,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vod.Inputs
         public ProcedureTemplateMediaProcessTaskArgs()
         {
         }
+        public static new ProcedureTemplateMediaProcessTaskArgs Empty => new ProcedureTemplateMediaProcessTaskArgs();
     }
 }

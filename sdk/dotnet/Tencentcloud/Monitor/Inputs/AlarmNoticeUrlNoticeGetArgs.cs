@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor.Inputs
 {
 
-    public sealed class AlarmNoticeUrlNoticeGetArgs : Pulumi.ResourceArgs
+    public sealed class AlarmNoticeUrlNoticeGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Notification End Time Seconds at the start of a day.
@@ -58,5 +58,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor.Inputs
         public AlarmNoticeUrlNoticeGetArgs()
         {
         }
+        public static new AlarmNoticeUrlNoticeGetArgs Empty => new AlarmNoticeUrlNoticeGetArgs();
     }
 }

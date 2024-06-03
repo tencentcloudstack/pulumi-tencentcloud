@@ -8,41 +8,46 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Use this data source to query detailed information of CAM groups
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Cam"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cam"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cam"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Cam.GetGroups(ctx, &cam.GetGroupsArgs{
-// 			GroupId: pulumi.StringRef(tencentcloud_cam_group.Foo.Id),
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_, err = Cam.GetGroups(ctx, &cam.GetGroupsArgs{
-// 			Name: pulumi.StringRef("cam-group-test"),
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Cam.GetGroups(ctx, &cam.GetGroupsArgs{
+//				GroupId: pulumi.StringRef(tencentcloud_cam_group.Foo.Id),
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			_, err = Cam.GetGroups(ctx, &cam.GetGroupsArgs{
+//				Name: pulumi.StringRef("cam-group-test"),
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 func GetGroups(ctx *pulumi.Context, args *GetGroupsArgs, opts ...pulumi.InvokeOption) (*GetGroupsResult, error) {
-	opts = pkgInvokeDefaultOpts(opts)
+	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetGroupsResult
 	err := ctx.Invoke("tencentcloud:Cam/getGroups:getGroups", args, &rv, opts...)
 	if err != nil {

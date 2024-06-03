@@ -15,70 +15,64 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Rum
         /// <summary>
         /// Use this data source to query detailed information of rum web_vitals_page
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var webVitalsPage = Tencentcloud.Rum.GetWebVitalsPage.Invoke(new()
         ///     {
-        ///         var webVitalsPage = Output.Create(Tencentcloud.Rum.GetWebVitalsPage.InvokeAsync(new Tencentcloud.Rum.GetWebVitalsPageArgs
-        ///         {
-        ///             EndTime = 1625454840,
-        ///             ProjectId = 1,
-        ///             StartTime = 1625444040,
-        ///             Type = "from",
-        ///         }));
-        ///     }
+        ///         EndTime = 1625454840,
+        ///         ProjectId = 1,
+        ///         StartTime = 1625444040,
+        ///         Type = "from",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetWebVitalsPageResult> InvokeAsync(GetWebVitalsPageArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetWebVitalsPageResult>("tencentcloud:Rum/getWebVitalsPage:getWebVitalsPage", args ?? new GetWebVitalsPageArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetWebVitalsPageResult>("tencentcloud:Rum/getWebVitalsPage:getWebVitalsPage", args ?? new GetWebVitalsPageArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of rum web_vitals_page
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var webVitalsPage = Tencentcloud.Rum.GetWebVitalsPage.Invoke(new()
         ///     {
-        ///         var webVitalsPage = Output.Create(Tencentcloud.Rum.GetWebVitalsPage.InvokeAsync(new Tencentcloud.Rum.GetWebVitalsPageArgs
-        ///         {
-        ///             EndTime = 1625454840,
-        ///             ProjectId = 1,
-        ///             StartTime = 1625444040,
-        ///             Type = "from",
-        ///         }));
-        ///     }
+        ///         EndTime = 1625454840,
+        ///         ProjectId = 1,
+        ///         StartTime = 1625444040,
+        ///         Type = "from",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetWebVitalsPageResult> Invoke(GetWebVitalsPageInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetWebVitalsPageResult>("tencentcloud:Rum/getWebVitalsPage:getWebVitalsPage", args ?? new GetWebVitalsPageInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetWebVitalsPageResult>("tencentcloud:Rum/getWebVitalsPage:getWebVitalsPage", args ?? new GetWebVitalsPageInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetWebVitalsPageArgs : Pulumi.InvokeArgs
+    public sealed class GetWebVitalsPageArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// The region where the data reporting takes place.
@@ -221,9 +215,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Rum
         public GetWebVitalsPageArgs()
         {
         }
+        public static new GetWebVitalsPageArgs Empty => new GetWebVitalsPageArgs();
     }
 
-    public sealed class GetWebVitalsPageInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetWebVitalsPageInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// The region where the data reporting takes place.
@@ -366,6 +361,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Rum
         public GetWebVitalsPageInvokeArgs()
         {
         }
+        public static new GetWebVitalsPageInvokeArgs Empty => new GetWebVitalsPageInvokeArgs();
     }
 
 

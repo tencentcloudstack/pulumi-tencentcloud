@@ -15,87 +15,88 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tem
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var scaleRule = new Tencentcloud.Tem.ScaleRule("scaleRule", new()
     ///     {
-    ///         var scaleRule = new Tencentcloud.Tem.ScaleRule("scaleRule", new Tencentcloud.Tem.ScaleRuleArgs
+    ///         EnvironmentId = "en-o5edaepv",
+    ///         ApplicationId = "app-3j29aa2p",
+    ///         WorkloadId = resource.Tencentcloud_tem_workload.Workload.Id,
+    ///         Autoscaler = new Tencentcloud.Tem.Inputs.ScaleRuleAutoscalerArgs
     ///         {
-    ///             EnvironmentId = "en-o5edaepv",
-    ///             ApplicationId = "app-3j29aa2p",
-    ///             WorkloadId = resource.Tencentcloud_tem_workload.Workload.Id,
-    ///             Autoscaler = new Tencentcloud.Tem.Inputs.ScaleRuleAutoscalerArgs
+    ///             AutoscalerName = "test3123",
+    ///             Description = "test",
+    ///             Enabled = true,
+    ///             MinReplicas = 1,
+    ///             MaxReplicas = 4,
+    ///             CronHorizontalAutoscalers = new[]
     ///             {
-    ///                 AutoscalerName = "test3123",
-    ///                 Description = "test",
-    ///                 Enabled = true,
-    ///                 MinReplicas = 1,
-    ///                 MaxReplicas = 4,
-    ///                 CronHorizontalAutoscalers = 
+    ///                 new Tencentcloud.Tem.Inputs.ScaleRuleAutoscalerCronHorizontalAutoscalerArgs
     ///                 {
-    ///                     new Tencentcloud.Tem.Inputs.ScaleRuleAutoscalerCronHorizontalAutoscalerArgs
+    ///                     Name = "test",
+    ///                     Period = "* * *",
+    ///                     Priority = 1,
+    ///                     Enabled = true,
+    ///                     Schedules = new[]
     ///                     {
-    ///                         Name = "test",
-    ///                         Period = "* * *",
-    ///                         Priority = 1,
-    ///                         Enabled = true,
-    ///                         Schedules = 
+    ///                         new Tencentcloud.Tem.Inputs.ScaleRuleAutoscalerCronHorizontalAutoscalerScheduleArgs
     ///                         {
-    ///                             new Tencentcloud.Tem.Inputs.ScaleRuleAutoscalerCronHorizontalAutoscalerScheduleArgs
-    ///                             {
-    ///                                 StartAt = "03:00",
-    ///                                 TargetReplicas = 1,
-    ///                             },
-    ///                         },
-    ///                     },
-    ///                     new Tencentcloud.Tem.Inputs.ScaleRuleAutoscalerCronHorizontalAutoscalerArgs
-    ///                     {
-    ///                         Name = "test123123",
-    ///                         Period = "* * *",
-    ///                         Priority = 0,
-    ///                         Enabled = true,
-    ///                         Schedules = 
-    ///                         {
-    ///                             new Tencentcloud.Tem.Inputs.ScaleRuleAutoscalerCronHorizontalAutoscalerScheduleArgs
-    ///                             {
-    ///                                 StartAt = "04:13",
-    ///                                 TargetReplicas = 1,
-    ///                             },
+    ///                             StartAt = "03:00",
+    ///                             TargetReplicas = 1,
     ///                         },
     ///                     },
     ///                 },
-    ///                 HorizontalAutoscalers = 
+    ///                 new Tencentcloud.Tem.Inputs.ScaleRuleAutoscalerCronHorizontalAutoscalerArgs
     ///                 {
-    ///                     new Tencentcloud.Tem.Inputs.ScaleRuleAutoscalerHorizontalAutoscalerArgs
+    ///                     Name = "test123123",
+    ///                     Period = "* * *",
+    ///                     Priority = 0,
+    ///                     Enabled = true,
+    ///                     Schedules = new[]
     ///                     {
-    ///                         Metrics = "CPU",
-    ///                         Enabled = true,
-    ///                         MaxReplicas = 4,
-    ///                         MinReplicas = 1,
-    ///                         Threshold = 60,
+    ///                         new Tencentcloud.Tem.Inputs.ScaleRuleAutoscalerCronHorizontalAutoscalerScheduleArgs
+    ///                         {
+    ///                             StartAt = "04:13",
+    ///                             TargetReplicas = 1,
+    ///                         },
     ///                     },
     ///                 },
     ///             },
-    ///         });
-    ///     }
+    ///             HorizontalAutoscalers = new[]
+    ///             {
+    ///                 new Tencentcloud.Tem.Inputs.ScaleRuleAutoscalerHorizontalAutoscalerArgs
+    ///                 {
+    ///                     Metrics = "CPU",
+    ///                     Enabled = true,
+    ///                     MaxReplicas = 4,
+    ///                     MinReplicas = 1,
+    ///                     Threshold = 60,
+    ///                 },
+    ///             },
+    ///         },
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// tem scaleRule can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Tem/scaleRule:ScaleRule scaleRule environmentId#applicationId#scaleRuleId
+    /// $ pulumi import tencentcloud:Tem/scaleRule:ScaleRule scaleRule environmentId#applicationId#scaleRuleId
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Tem/scaleRule:ScaleRule")]
-    public partial class ScaleRule : Pulumi.CustomResource
+    public partial class ScaleRule : global::Pulumi.CustomResource
     {
         /// <summary>
         /// application ID.
@@ -166,7 +167,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tem
         }
     }
 
-    public sealed class ScaleRuleArgs : Pulumi.ResourceArgs
+    public sealed class ScaleRuleArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// application ID.
@@ -195,9 +196,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tem
         public ScaleRuleArgs()
         {
         }
+        public static new ScaleRuleArgs Empty => new ScaleRuleArgs();
     }
 
-    public sealed class ScaleRuleState : Pulumi.ResourceArgs
+    public sealed class ScaleRuleState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// application ID.
@@ -226,5 +228,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tem
         public ScaleRuleState()
         {
         }
+        public static new ScaleRuleState Empty => new ScaleRuleState();
     }
 }

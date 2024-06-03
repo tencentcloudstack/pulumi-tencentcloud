@@ -15,64 +15,58 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Elasticsearch
         /// <summary>
         /// Use this data source to query detailed information of es elasticsearch_instance_logs
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var elasticsearchInstanceLogs = Tencentcloud.Elasticsearch.GetInstanceLogs.Invoke(new()
         ///     {
-        ///         var elasticsearchInstanceLogs = Output.Create(Tencentcloud.Elasticsearch.GetInstanceLogs.InvokeAsync(new Tencentcloud.Elasticsearch.GetInstanceLogsArgs
-        ///         {
-        ///             InstanceId = "es-xxxxxx",
-        ///         }));
-        ///     }
+        ///         InstanceId = "es-xxxxxx",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetInstanceLogsResult> InvokeAsync(GetInstanceLogsArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetInstanceLogsResult>("tencentcloud:Elasticsearch/getInstanceLogs:getInstanceLogs", args ?? new GetInstanceLogsArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetInstanceLogsResult>("tencentcloud:Elasticsearch/getInstanceLogs:getInstanceLogs", args ?? new GetInstanceLogsArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of es elasticsearch_instance_logs
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var elasticsearchInstanceLogs = Tencentcloud.Elasticsearch.GetInstanceLogs.Invoke(new()
         ///     {
-        ///         var elasticsearchInstanceLogs = Output.Create(Tencentcloud.Elasticsearch.GetInstanceLogs.InvokeAsync(new Tencentcloud.Elasticsearch.GetInstanceLogsArgs
-        ///         {
-        ///             InstanceId = "es-xxxxxx",
-        ///         }));
-        ///     }
+        ///         InstanceId = "es-xxxxxx",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetInstanceLogsResult> Invoke(GetInstanceLogsInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetInstanceLogsResult>("tencentcloud:Elasticsearch/getInstanceLogs:getInstanceLogs", args ?? new GetInstanceLogsInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetInstanceLogsResult>("tencentcloud:Elasticsearch/getInstanceLogs:getInstanceLogs", args ?? new GetInstanceLogsInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetInstanceLogsArgs : Pulumi.InvokeArgs
+    public sealed class GetInstanceLogsArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// End time. The format is YYYY-MM-DD HH:MM:SS, such as 2019-01-22 20:15:53.
@@ -125,9 +119,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Elasticsearch
         public GetInstanceLogsArgs()
         {
         }
+        public static new GetInstanceLogsArgs Empty => new GetInstanceLogsArgs();
     }
 
-    public sealed class GetInstanceLogsInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetInstanceLogsInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// End time. The format is YYYY-MM-DD HH:MM:SS, such as 2019-01-22 20:15:53.
@@ -180,6 +175,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Elasticsearch
         public GetInstanceLogsInvokeArgs()
         {
         }
+        public static new GetInstanceLogsInvokeArgs Empty => new GetInstanceLogsInvokeArgs();
     }
 
 

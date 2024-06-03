@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tem.Inputs
 {
 
-    public sealed class WorkloadEnvConfGetArgs : Pulumi.ResourceArgs
+    public sealed class WorkloadEnvConfGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// referenced config name when type=referenced.
@@ -46,5 +46,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tem.Inputs
         public WorkloadEnvConfGetArgs()
         {
         }
+        public static new WorkloadEnvConfGetArgs Empty => new WorkloadEnvConfGetArgs();
     }
 }

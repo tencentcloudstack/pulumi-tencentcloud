@@ -7,43 +7,49 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a dcGatewayAttachment
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dc"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dc"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Dc.NewGatewayAttachment(ctx, "dcGatewayAttachment", &Dc.GatewayAttachmentArgs{
-// 			DirectConnectGatewayId: pulumi.String("dcg-dmbhf7jf"),
-// 			NatGatewayId:           pulumi.String("nat-7kanjc6y"),
-// 			VpcId:                  pulumi.String("vpc-4h9v4mo3"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Dc.NewGatewayAttachment(ctx, "dcGatewayAttachment", &Dc.GatewayAttachmentArgs{
+//				DirectConnectGatewayId: pulumi.String("dcg-dmbhf7jf"),
+//				NatGatewayId:           pulumi.String("nat-7kanjc6y"),
+//				VpcId:                  pulumi.String("vpc-4h9v4mo3"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // dc_gateway_attachment can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Dc/gatewayAttachment:GatewayAttachment dc_gateway_attachment vpcId#dcgId#ngId
+// $ pulumi import tencentcloud:Dc/gatewayAttachment:GatewayAttachment dc_gateway_attachment vpcId#dcgId#ngId
 // ```
 type GatewayAttachment struct {
 	pulumi.CustomResourceState
@@ -72,7 +78,7 @@ func NewGatewayAttachment(ctx *pulumi.Context,
 	if args.VpcId == nil {
 		return nil, errors.New("invalid value for required argument 'VpcId'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource GatewayAttachment
 	err := ctx.RegisterResource("tencentcloud:Dc/gatewayAttachment:GatewayAttachment", name, args, &resource, opts...)
 	if err != nil {
@@ -161,7 +167,7 @@ func (i *GatewayAttachment) ToGatewayAttachmentOutputWithContext(ctx context.Con
 // GatewayAttachmentArrayInput is an input type that accepts GatewayAttachmentArray and GatewayAttachmentArrayOutput values.
 // You can construct a concrete instance of `GatewayAttachmentArrayInput` via:
 //
-//          GatewayAttachmentArray{ GatewayAttachmentArgs{...} }
+//	GatewayAttachmentArray{ GatewayAttachmentArgs{...} }
 type GatewayAttachmentArrayInput interface {
 	pulumi.Input
 
@@ -186,7 +192,7 @@ func (i GatewayAttachmentArray) ToGatewayAttachmentArrayOutputWithContext(ctx co
 // GatewayAttachmentMapInput is an input type that accepts GatewayAttachmentMap and GatewayAttachmentMapOutput values.
 // You can construct a concrete instance of `GatewayAttachmentMapInput` via:
 //
-//          GatewayAttachmentMap{ "key": GatewayAttachmentArgs{...} }
+//	GatewayAttachmentMap{ "key": GatewayAttachmentArgs{...} }
 type GatewayAttachmentMapInput interface {
 	pulumi.Input
 

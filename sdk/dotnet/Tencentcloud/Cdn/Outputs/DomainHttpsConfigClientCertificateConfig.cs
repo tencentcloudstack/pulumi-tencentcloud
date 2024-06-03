@@ -18,7 +18,13 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cdn.Outputs
         /// Client Certificate PEM format, requires Base64 encoding.
         /// </summary>
         public readonly string CertificateContent;
+        /// <summary>
+        /// Client certificate name.
+        /// </summary>
         public readonly string? CertificateName;
+        /// <summary>
+        /// Deploy time of client certificate.
+        /// </summary>
         public readonly string? DeployTime;
         /// <summary>
         /// Signature expiration time in second. The maximum value is 630720000.

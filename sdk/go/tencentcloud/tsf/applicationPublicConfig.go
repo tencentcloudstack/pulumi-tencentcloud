@@ -7,39 +7,45 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a tsf applicationPublicConfig
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tsf"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tsf"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Tsf.NewApplicationPublicConfig(ctx, "applicationPublicConfig", &Tsf.ApplicationPublicConfigArgs{
-// 			ConfigName:        pulumi.String("my_config"),
-// 			ConfigType:        pulumi.String("P"),
-// 			ConfigValue:       pulumi.String("test: 1"),
-// 			ConfigVersion:     pulumi.String("1.0"),
-// 			ConfigVersionDesc: pulumi.String("product version"),
-// 			EncodeWithBase64:  pulumi.Bool(true),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Tsf.NewApplicationPublicConfig(ctx, "applicationPublicConfig", &Tsf.ApplicationPublicConfigArgs{
+//				ConfigName:        pulumi.String("my_config"),
+//				ConfigType:        pulumi.String("P"),
+//				ConfigValue:       pulumi.String("test: 1"),
+//				ConfigVersion:     pulumi.String("1.0"),
+//				ConfigVersionDesc: pulumi.String("product version"),
+//				EncodeWithBase64:  pulumi.Bool(true),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 type ApplicationPublicConfig struct {
 	pulumi.CustomResourceState
 
@@ -75,7 +81,7 @@ func NewApplicationPublicConfig(ctx *pulumi.Context,
 	if args.ConfigVersion == nil {
 		return nil, errors.New("invalid value for required argument 'ConfigVersion'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource ApplicationPublicConfig
 	err := ctx.RegisterResource("tencentcloud:Tsf/applicationPublicConfig:ApplicationPublicConfig", name, args, &resource, opts...)
 	if err != nil {
@@ -196,7 +202,7 @@ func (i *ApplicationPublicConfig) ToApplicationPublicConfigOutputWithContext(ctx
 // ApplicationPublicConfigArrayInput is an input type that accepts ApplicationPublicConfigArray and ApplicationPublicConfigArrayOutput values.
 // You can construct a concrete instance of `ApplicationPublicConfigArrayInput` via:
 //
-//          ApplicationPublicConfigArray{ ApplicationPublicConfigArgs{...} }
+//	ApplicationPublicConfigArray{ ApplicationPublicConfigArgs{...} }
 type ApplicationPublicConfigArrayInput interface {
 	pulumi.Input
 
@@ -221,7 +227,7 @@ func (i ApplicationPublicConfigArray) ToApplicationPublicConfigArrayOutputWithCo
 // ApplicationPublicConfigMapInput is an input type that accepts ApplicationPublicConfigMap and ApplicationPublicConfigMapOutput values.
 // You can construct a concrete instance of `ApplicationPublicConfigMapInput` via:
 //
-//          ApplicationPublicConfigMap{ "key": ApplicationPublicConfigArgs{...} }
+//	ApplicationPublicConfigMap{ "key": ApplicationPublicConfigArgs{...} }
 type ApplicationPublicConfigMapInput interface {
 	pulumi.Input
 

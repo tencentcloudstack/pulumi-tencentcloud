@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor.Inputs
 {
 
-    public sealed class TmpTkeClusterAgentAgentsArgs : Pulumi.ResourceArgs
+    public sealed class TmpTkeClusterAgentAgentsArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// An id identify the cluster, like `cls-xxxxxx`.
@@ -19,6 +19,9 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor.Inputs
         [Input("clusterId", required: true)]
         public Input<string> ClusterId { get; set; } = null!;
 
+        /// <summary>
+        /// the name of the cluster.
+        /// </summary>
         [Input("clusterName")]
         public Input<string>? ClusterName { get; set; }
 
@@ -70,11 +73,15 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor.Inputs
         [Input("region", required: true)]
         public Input<string> Region { get; set; } = null!;
 
+        /// <summary>
+        /// agent state, `normal`, `abnormal`.
+        /// </summary>
         [Input("status")]
         public Input<string>? Status { get; set; }
 
         public TmpTkeClusterAgentAgentsArgs()
         {
         }
+        public static new TmpTkeClusterAgentAgentsArgs Empty => new TmpTkeClusterAgentAgentsArgs();
     }
 }

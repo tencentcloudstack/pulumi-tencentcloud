@@ -9,14 +9,14 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const ownershipVerify = new tencentcloud.Teo.OwnershipVerify("ownership_verify", {
- *     domain: "qq.com",
- * });
+ * const ownershipVerify = new tencentcloud.teo.OwnershipVerify("ownershipVerify", {domain: "qq.com"});
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export class OwnershipVerify extends pulumi.CustomResource {
     /**

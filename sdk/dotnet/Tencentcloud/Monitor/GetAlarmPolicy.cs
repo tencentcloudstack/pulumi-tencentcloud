@@ -15,114 +15,108 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
         /// <summary>
         /// Use this data source to query detailed information of monitor alarm_policy
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var alarmPolicy = Tencentcloud.Monitor.GetAlarmPolicy.Invoke(new()
         ///     {
-        ///         var alarmPolicy = Output.Create(Tencentcloud.Monitor.GetAlarmPolicy.InvokeAsync(new Tencentcloud.Monitor.GetAlarmPolicyArgs
+        ///         Enables = new[]
         ///         {
-        ///             Enables = 
-        ///             {
-        ///                 1,
-        ///             },
-        ///             Module = "monitor",
-        ///             MonitorTypes = 
-        ///             {
-        ///                 "MT_QCE",
-        ///             },
-        ///             Namespaces = 
-        ///             {
-        ///                 "cvm_device",
-        ///             },
-        ///             NoticeIds = 
-        ///             {
-        ///                 "notice-f2svbu3w",
-        ///             },
-        ///             PolicyName = "terraform",
-        ///             ProjectIds = 
-        ///             {
-        ///                 0,
-        ///             },
-        ///             RuleTypes = 
-        ///             {
-        ///                 "STATIC",
-        ///             },
-        ///         }));
-        ///     }
+        ///             1,
+        ///         },
+        ///         Module = "monitor",
+        ///         MonitorTypes = new[]
+        ///         {
+        ///             "MT_QCE",
+        ///         },
+        ///         Namespaces = new[]
+        ///         {
+        ///             "cvm_device",
+        ///         },
+        ///         NoticeIds = new[]
+        ///         {
+        ///             "notice-f2svbu3w",
+        ///         },
+        ///         PolicyName = "terraform",
+        ///         ProjectIds = new[]
+        ///         {
+        ///             0,
+        ///         },
+        ///         RuleTypes = new[]
+        ///         {
+        ///             "STATIC",
+        ///         },
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetAlarmPolicyResult> InvokeAsync(GetAlarmPolicyArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetAlarmPolicyResult>("tencentcloud:Monitor/getAlarmPolicy:getAlarmPolicy", args ?? new GetAlarmPolicyArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetAlarmPolicyResult>("tencentcloud:Monitor/getAlarmPolicy:getAlarmPolicy", args ?? new GetAlarmPolicyArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of monitor alarm_policy
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var alarmPolicy = Tencentcloud.Monitor.GetAlarmPolicy.Invoke(new()
         ///     {
-        ///         var alarmPolicy = Output.Create(Tencentcloud.Monitor.GetAlarmPolicy.InvokeAsync(new Tencentcloud.Monitor.GetAlarmPolicyArgs
+        ///         Enables = new[]
         ///         {
-        ///             Enables = 
-        ///             {
-        ///                 1,
-        ///             },
-        ///             Module = "monitor",
-        ///             MonitorTypes = 
-        ///             {
-        ///                 "MT_QCE",
-        ///             },
-        ///             Namespaces = 
-        ///             {
-        ///                 "cvm_device",
-        ///             },
-        ///             NoticeIds = 
-        ///             {
-        ///                 "notice-f2svbu3w",
-        ///             },
-        ///             PolicyName = "terraform",
-        ///             ProjectIds = 
-        ///             {
-        ///                 0,
-        ///             },
-        ///             RuleTypes = 
-        ///             {
-        ///                 "STATIC",
-        ///             },
-        ///         }));
-        ///     }
+        ///             1,
+        ///         },
+        ///         Module = "monitor",
+        ///         MonitorTypes = new[]
+        ///         {
+        ///             "MT_QCE",
+        ///         },
+        ///         Namespaces = new[]
+        ///         {
+        ///             "cvm_device",
+        ///         },
+        ///         NoticeIds = new[]
+        ///         {
+        ///             "notice-f2svbu3w",
+        ///         },
+        ///         PolicyName = "terraform",
+        ///         ProjectIds = new[]
+        ///         {
+        ///             0,
+        ///         },
+        ///         RuleTypes = new[]
+        ///         {
+        ///             "STATIC",
+        ///         },
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetAlarmPolicyResult> Invoke(GetAlarmPolicyInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetAlarmPolicyResult>("tencentcloud:Monitor/getAlarmPolicy:getAlarmPolicy", args ?? new GetAlarmPolicyInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetAlarmPolicyResult>("tencentcloud:Monitor/getAlarmPolicy:getAlarmPolicy", args ?? new GetAlarmPolicyInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetAlarmPolicyArgs : Pulumi.InvokeArgs
+    public sealed class GetAlarmPolicyArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// The alarm object list, which is a JSON string. The outer array corresponds to multiple instances, and the inner array is the dimension of an object.For example, 'CVM - Basic Monitor' can be written as: [ {Dimensions: {unInstanceId: ins-qr8d555g}}, {Dimensions: {unInstanceId: ins-qr8d555h}} ]You can also refer to the 'Example 2' below.For more information on the parameter samples of different Tencent Cloud services, see [Product Policy Type and Dimension Information](https://www.tencentcloud.com/document/product/248/39565?has_map=1).Note: If 1 is passed in for NeedCorrespondence, the relationship between a policy and an instance needs to be returned. You can pass in up to 20 alarm object dimensions to avoid request timeout.
@@ -343,9 +337,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
         public GetAlarmPolicyArgs()
         {
         }
+        public static new GetAlarmPolicyArgs Empty => new GetAlarmPolicyArgs();
     }
 
-    public sealed class GetAlarmPolicyInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetAlarmPolicyInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// The alarm object list, which is a JSON string. The outer array corresponds to multiple instances, and the inner array is the dimension of an object.For example, 'CVM - Basic Monitor' can be written as: [ {Dimensions: {unInstanceId: ins-qr8d555g}}, {Dimensions: {unInstanceId: ins-qr8d555h}} ]You can also refer to the 'Example 2' below.For more information on the parameter samples of different Tencent Cloud services, see [Product Policy Type and Dimension Information](https://www.tencentcloud.com/document/product/248/39565?has_map=1).Note: If 1 is passed in for NeedCorrespondence, the relationship between a policy and an instance needs to be returned. You can pass in up to 20 alarm object dimensions to avoid request timeout.
@@ -566,6 +561,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
         public GetAlarmPolicyInvokeArgs()
         {
         }
+        public static new GetAlarmPolicyInvokeArgs Empty => new GetAlarmPolicyInvokeArgs();
     }
 
 

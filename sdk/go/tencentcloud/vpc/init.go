@@ -8,7 +8,7 @@ import (
 
 	"github.com/blang/semver"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 type module struct {
@@ -51,8 +51,6 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 		r = &Instance{}
 	case "tencentcloud:Vpc/ipv6CidrBlock:Ipv6CidrBlock":
 		r = &Ipv6CidrBlock{}
-	case "tencentcloud:Vpc/ipv6EniAddress:Ipv6EniAddress":
-		r = &Ipv6EniAddress{}
 	case "tencentcloud:Vpc/ipv6SubnetCidrBlock:Ipv6SubnetCidrBlock":
 		r = &Ipv6SubnetCidrBlock{}
 	case "tencentcloud:Vpc/localGateway:LocalGateway":
@@ -88,7 +86,7 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 }
 
 func init() {
-	version, err := tencentcloud.PkgVersion()
+	version, err := internal.PkgVersion()
 	if err != nil {
 		version = semver.Version{Major: 1}
 	}
@@ -165,11 +163,6 @@ func init() {
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
 		"Vpc/ipv6CidrBlock",
-		&module{version},
-	)
-	pulumi.RegisterResourceModule(
-		"tencentcloud",
-		"Vpc/ipv6EniAddress",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(

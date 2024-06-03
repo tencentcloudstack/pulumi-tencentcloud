@@ -15,74 +15,68 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcr
         /// <summary>
         /// Use this data source to query detailed information of tcr images
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var images = Tencentcloud.Tcr.GetImages.Invoke(new()
         ///     {
-        ///         var images = Output.Create(Tencentcloud.Tcr.GetImages.InvokeAsync(new Tencentcloud.Tcr.GetImagesArgs
-        ///         {
-        ///             Digest = "sha256:xxxxx",
-        ///             ExactMatch = false,
-        ///             ImageVersion = "v1",
-        ///             NamespaceName = "ns",
-        ///             RegistryId = "tcr-xxx",
-        ///             RepositoryName = "repo",
-        ///         }));
-        ///     }
+        ///         Digest = "sha256:xxxxx",
+        ///         ExactMatch = false,
+        ///         ImageVersion = "v1",
+        ///         NamespaceName = "ns",
+        ///         RegistryId = "tcr-xxx",
+        ///         RepositoryName = "repo",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetImagesResult> InvokeAsync(GetImagesArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetImagesResult>("tencentcloud:Tcr/getImages:getImages", args ?? new GetImagesArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetImagesResult>("tencentcloud:Tcr/getImages:getImages", args ?? new GetImagesArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of tcr images
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var images = Tencentcloud.Tcr.GetImages.Invoke(new()
         ///     {
-        ///         var images = Output.Create(Tencentcloud.Tcr.GetImages.InvokeAsync(new Tencentcloud.Tcr.GetImagesArgs
-        ///         {
-        ///             Digest = "sha256:xxxxx",
-        ///             ExactMatch = false,
-        ///             ImageVersion = "v1",
-        ///             NamespaceName = "ns",
-        ///             RegistryId = "tcr-xxx",
-        ///             RepositoryName = "repo",
-        ///         }));
-        ///     }
+        ///         Digest = "sha256:xxxxx",
+        ///         ExactMatch = false,
+        ///         ImageVersion = "v1",
+        ///         NamespaceName = "ns",
+        ///         RegistryId = "tcr-xxx",
+        ///         RepositoryName = "repo",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetImagesResult> Invoke(GetImagesInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetImagesResult>("tencentcloud:Tcr/getImages:getImages", args ?? new GetImagesInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetImagesResult>("tencentcloud:Tcr/getImages:getImages", args ?? new GetImagesInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetImagesArgs : Pulumi.InvokeArgs
+    public sealed class GetImagesArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// specify image digest for lookup.
@@ -129,9 +123,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcr
         public GetImagesArgs()
         {
         }
+        public static new GetImagesArgs Empty => new GetImagesArgs();
     }
 
-    public sealed class GetImagesInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetImagesInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// specify image digest for lookup.
@@ -178,6 +173,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcr
         public GetImagesInvokeArgs()
         {
         }
+        public static new GetImagesInvokeArgs Empty => new GetImagesInvokeArgs();
     }
 
 

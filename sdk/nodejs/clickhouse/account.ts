@@ -9,24 +9,26 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const account = new tencentcloud.Clickhouse.Account("account", {
+ * const account = new tencentcloud.clickhouse.Account("account", {
  *     describe: "xxxxxx",
  *     instanceId: "cdwch-xxxxxx",
  *     password: "xxxxxx",
  *     userName: "test",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * clickhouse account can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Clickhouse/account:Account account ${instance_id}#${user_name}
+ * $ pulumi import tencentcloud:Clickhouse/account:Account account ${instance_id}#${user_name}
  * ```
  */
 export class Account extends pulumi.CustomResource {
@@ -104,10 +106,12 @@ export class Account extends pulumi.CustomResource {
             }
             resourceInputs["describe"] = args ? args.describe : undefined;
             resourceInputs["instanceId"] = args ? args.instanceId : undefined;
-            resourceInputs["password"] = args ? args.password : undefined;
+            resourceInputs["password"] = args?.password ? pulumi.secret(args.password) : undefined;
             resourceInputs["userName"] = args ? args.userName : undefined;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+        const secretOpts = { additionalSecretOutputs: ["password"] };
+        opts = pulumi.mergeOptions(opts, secretOpts);
         super(Account.__pulumiType, name, resourceInputs, opts);
     }
 }

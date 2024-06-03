@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.As.Inputs
 {
 
-    public sealed class ScalingConfigInstanceNameSettingsGetArgs : Pulumi.ResourceArgs
+    public sealed class ScalingConfigInstanceNameSettingsGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// CVM instance name.
@@ -28,5 +28,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.As.Inputs
         public ScalingConfigInstanceNameSettingsGetArgs()
         {
         }
+        public static new ScalingConfigInstanceNameSettingsGetArgs Empty => new ScalingConfigInstanceNameSettingsGetArgs();
     }
 }

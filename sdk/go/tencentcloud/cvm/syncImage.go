@@ -7,38 +7,44 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a cvm syncImage
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cvm"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cvm"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Cvm.NewSyncImage(ctx, "syncImage", &Cvm.SyncImageArgs{
-// 			DestinationRegions: pulumi.StringArray{
-// 				pulumi.String("ap-guangzhou"),
-// 				pulumi.String("ap-shanghai"),
-// 			},
-// 			ImageId: pulumi.String("img-xxxxxx"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Cvm.NewSyncImage(ctx, "syncImage", &Cvm.SyncImageArgs{
+//				DestinationRegions: pulumi.StringArray{
+//					pulumi.String("ap-guangzhou"),
+//					pulumi.String("ap-shanghai"),
+//				},
+//				ImageId: pulumi.String("img-xxxxxx"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 type SyncImage struct {
 	pulumi.CustomResourceState
 
@@ -67,7 +73,7 @@ func NewSyncImage(ctx *pulumi.Context,
 	if args.ImageId == nil {
 		return nil, errors.New("invalid value for required argument 'ImageId'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource SyncImage
 	err := ctx.RegisterResource("tencentcloud:Cvm/syncImage:SyncImage", name, args, &resource, opts...)
 	if err != nil {
@@ -172,7 +178,7 @@ func (i *SyncImage) ToSyncImageOutputWithContext(ctx context.Context) SyncImageO
 // SyncImageArrayInput is an input type that accepts SyncImageArray and SyncImageArrayOutput values.
 // You can construct a concrete instance of `SyncImageArrayInput` via:
 //
-//          SyncImageArray{ SyncImageArgs{...} }
+//	SyncImageArray{ SyncImageArgs{...} }
 type SyncImageArrayInput interface {
 	pulumi.Input
 
@@ -197,7 +203,7 @@ func (i SyncImageArray) ToSyncImageArrayOutputWithContext(ctx context.Context) S
 // SyncImageMapInput is an input type that accepts SyncImageMap and SyncImageMapOutput values.
 // You can construct a concrete instance of `SyncImageMapInput` via:
 //
-//          SyncImageMap{ "key": SyncImageArgs{...} }
+//	SyncImageMap{ "key": SyncImageArgs{...} }
 type SyncImageMapInput interface {
 	pulumi.Input
 

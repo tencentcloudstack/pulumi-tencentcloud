@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ci.Inputs
 {
 
-    public sealed class MediaTranscodeTemplateVideoArgs : Pulumi.ResourceArgs
+    public sealed class MediaTranscodeTemplateVideoArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Bit rate of video output file, value range: [10, 50000], unit: Kbps, auto means adaptive bit rate.
@@ -106,5 +106,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ci.Inputs
         public MediaTranscodeTemplateVideoArgs()
         {
         }
+        public static new MediaTranscodeTemplateVideoArgs Empty => new MediaTranscodeTemplateVideoArgs();
     }
 }

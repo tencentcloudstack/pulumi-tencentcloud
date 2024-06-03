@@ -15,72 +15,66 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Oceanus
         /// <summary>
         /// Use this data source to query detailed information of oceanus check_savepoint
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var example = Tencentcloud.Oceanus.GetCheckSavepoint.Invoke(new()
         ///     {
-        ///         var example = Output.Create(Tencentcloud.Oceanus.GetCheckSavepoint.InvokeAsync(new Tencentcloud.Oceanus.GetCheckSavepointArgs
-        ///         {
-        ///             JobId = "cql-314rw6w0",
-        ///             RecordType = 1,
-        ///             SavepointPath = "cosn://52xkpymp-12345/12345/10000/cql-12345/2/flink-savepoints/savepoint-000000-12334",
-        ///             SerialId = "svp-52xkpymp",
-        ///             WorkSpaceId = "space-2idq8wbr",
-        ///         }));
-        ///     }
+        ///         JobId = "cql-314rw6w0",
+        ///         RecordType = 1,
+        ///         SavepointPath = "cosn://52xkpymp-12345/12345/10000/cql-12345/2/flink-savepoints/savepoint-000000-12334",
+        ///         SerialId = "svp-52xkpymp",
+        ///         WorkSpaceId = "space-2idq8wbr",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetCheckSavepointResult> InvokeAsync(GetCheckSavepointArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetCheckSavepointResult>("tencentcloud:Oceanus/getCheckSavepoint:getCheckSavepoint", args ?? new GetCheckSavepointArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetCheckSavepointResult>("tencentcloud:Oceanus/getCheckSavepoint:getCheckSavepoint", args ?? new GetCheckSavepointArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of oceanus check_savepoint
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var example = Tencentcloud.Oceanus.GetCheckSavepoint.Invoke(new()
         ///     {
-        ///         var example = Output.Create(Tencentcloud.Oceanus.GetCheckSavepoint.InvokeAsync(new Tencentcloud.Oceanus.GetCheckSavepointArgs
-        ///         {
-        ///             JobId = "cql-314rw6w0",
-        ///             RecordType = 1,
-        ///             SavepointPath = "cosn://52xkpymp-12345/12345/10000/cql-12345/2/flink-savepoints/savepoint-000000-12334",
-        ///             SerialId = "svp-52xkpymp",
-        ///             WorkSpaceId = "space-2idq8wbr",
-        ///         }));
-        ///     }
+        ///         JobId = "cql-314rw6w0",
+        ///         RecordType = 1,
+        ///         SavepointPath = "cosn://52xkpymp-12345/12345/10000/cql-12345/2/flink-savepoints/savepoint-000000-12334",
+        ///         SerialId = "svp-52xkpymp",
+        ///         WorkSpaceId = "space-2idq8wbr",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetCheckSavepointResult> Invoke(GetCheckSavepointInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetCheckSavepointResult>("tencentcloud:Oceanus/getCheckSavepoint:getCheckSavepoint", args ?? new GetCheckSavepointInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetCheckSavepointResult>("tencentcloud:Oceanus/getCheckSavepoint:getCheckSavepoint", args ?? new GetCheckSavepointInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetCheckSavepointArgs : Pulumi.InvokeArgs
+    public sealed class GetCheckSavepointArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Job id.
@@ -121,9 +115,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Oceanus
         public GetCheckSavepointArgs()
         {
         }
+        public static new GetCheckSavepointArgs Empty => new GetCheckSavepointArgs();
     }
 
-    public sealed class GetCheckSavepointInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetCheckSavepointInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Job id.
@@ -164,6 +159,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Oceanus
         public GetCheckSavepointInvokeArgs()
         {
         }
+        public static new GetCheckSavepointInvokeArgs Empty => new GetCheckSavepointInvokeArgs();
     }
 
 

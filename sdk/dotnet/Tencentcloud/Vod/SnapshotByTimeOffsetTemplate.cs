@@ -15,38 +15,39 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vod
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var foo = new Tencentcloud.Vod.SnapshotByTimeOffsetTemplate("foo", new()
     ///     {
-    ///         var foo = new Tencentcloud.Vod.SnapshotByTimeOffsetTemplate("foo", new Tencentcloud.Vod.SnapshotByTimeOffsetTemplateArgs
-    ///         {
-    ///             Comment = "test",
-    ///             FillType = "white",
-    ///             Format = "png",
-    ///             Height = 128,
-    ///             ResolutionAdaptive = false,
-    ///             Width = 130,
-    ///         });
-    ///     }
+    ///         Comment = "test",
+    ///         FillType = "white",
+    ///         Format = "png",
+    ///         Height = 128,
+    ///         ResolutionAdaptive = false,
+    ///         Width = 130,
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
-    /// VOD snapshot by time offset template can be imported using the id, e.g.
+    /// VOD snapshot by time offset template can be imported using the id($subAppId#$templateId), e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Vod/snapshotByTimeOffsetTemplate:SnapshotByTimeOffsetTemplate foo 46906
+    /// $ pulumi import tencentcloud:Vod/snapshotByTimeOffsetTemplate:SnapshotByTimeOffsetTemplate foo $subAppId#$templateId
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Vod/snapshotByTimeOffsetTemplate:SnapshotByTimeOffsetTemplate")]
-    public partial class SnapshotByTimeOffsetTemplate : Pulumi.CustomResource
+    public partial class SnapshotByTimeOffsetTemplate : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Template description. Length limit: 256 characters.
@@ -91,10 +92,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vod
         public Output<bool?> ResolutionAdaptive { get; private set; } = null!;
 
         /// <summary>
-        /// Subapplication ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+        /// The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.
         /// </summary>
         [Output("subAppId")]
         public Output<int?> SubAppId { get; private set; } = null!;
+
+        /// <summary>
+        /// Template type, value range:
+        /// - Preset: system preset template;
+        /// - Custom: user-defined templates.
+        /// </summary>
+        [Output("type")]
+        public Output<string> Type { get; private set; } = null!;
 
         /// <summary>
         /// Last modified time of template in ISO date format.
@@ -153,7 +162,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vod
         }
     }
 
-    public sealed class SnapshotByTimeOffsetTemplateArgs : Pulumi.ResourceArgs
+    public sealed class SnapshotByTimeOffsetTemplateArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Template description. Length limit: 256 characters.
@@ -192,7 +201,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vod
         public Input<bool>? ResolutionAdaptive { get; set; }
 
         /// <summary>
-        /// Subapplication ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+        /// The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.
         /// </summary>
         [Input("subAppId")]
         public Input<int>? SubAppId { get; set; }
@@ -206,9 +215,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vod
         public SnapshotByTimeOffsetTemplateArgs()
         {
         }
+        public static new SnapshotByTimeOffsetTemplateArgs Empty => new SnapshotByTimeOffsetTemplateArgs();
     }
 
-    public sealed class SnapshotByTimeOffsetTemplateState : Pulumi.ResourceArgs
+    public sealed class SnapshotByTimeOffsetTemplateState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Template description. Length limit: 256 characters.
@@ -253,10 +263,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vod
         public Input<bool>? ResolutionAdaptive { get; set; }
 
         /// <summary>
-        /// Subapplication ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+        /// The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.
         /// </summary>
         [Input("subAppId")]
         public Input<int>? SubAppId { get; set; }
+
+        /// <summary>
+        /// Template type, value range:
+        /// - Preset: system preset template;
+        /// - Custom: user-defined templates.
+        /// </summary>
+        [Input("type")]
+        public Input<string>? Type { get; set; }
 
         /// <summary>
         /// Last modified time of template in ISO date format.
@@ -273,5 +291,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vod
         public SnapshotByTimeOffsetTemplateState()
         {
         }
+        public static new SnapshotByTimeOffsetTemplateState Empty => new SnapshotByTimeOffsetTemplateState();
     }
 }

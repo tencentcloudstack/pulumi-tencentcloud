@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,11 +11,12 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const parameterTemplates = pulumi.output(tencentcloud.Postgresql.getParameterTemplates({
+ * const parameterTemplates = tencentcloud.Postgresql.getParameterTemplates({
  *     filters: [
  *         {
  *             name: "TemplateName",
@@ -27,16 +29,14 @@ import * as utilities from "../utilities";
  *     ],
  *     orderBy: "CreateTime",
  *     orderByType: "desc",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getParameterTemplates(args?: GetParameterTemplatesArgs, opts?: pulumi.InvokeOptions): Promise<GetParameterTemplatesResult> {
     args = args || {};
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Postgresql/getParameterTemplates:getParameterTemplates", {
         "filters": args.filters,
         "orderBy": args.orderBy,
@@ -84,9 +84,35 @@ export interface GetParameterTemplatesResult {
     readonly orderByType?: string;
     readonly resultOutputFile?: string;
 }
-
+/**
+ * Use this data source to query detailed information of postgresql parameterTemplates
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const parameterTemplates = tencentcloud.Postgresql.getParameterTemplates({
+ *     filters: [
+ *         {
+ *             name: "TemplateName",
+ *             values: ["temp_name"],
+ *         },
+ *         {
+ *             name: "DBEngine",
+ *             values: ["postgresql"],
+ *         },
+ *     ],
+ *     orderBy: "CreateTime",
+ *     orderByType: "desc",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getParameterTemplatesOutput(args?: GetParameterTemplatesOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetParameterTemplatesResult> {
-    return pulumi.output(args).apply(a => getParameterTemplates(a, opts))
+    return pulumi.output(args).apply((a: any) => getParameterTemplates(a, opts))
 }
 
 /**

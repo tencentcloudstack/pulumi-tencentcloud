@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes.Inputs
 {
 
-    public sealed class NodePoolAutoScalingConfigArgs : Pulumi.ResourceArgs
+    public sealed class NodePoolAutoScalingConfigArgs : global::Pulumi.ResourceArgs
     {
         [Input("backupInstanceTypes")]
         private InputList<string>? _backupInstanceTypes;
@@ -139,11 +139,21 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes.Inputs
             set => _orderlySecurityGroupIds = value;
         }
 
+        [Input("password")]
+        private Input<string>? _password;
+
         /// <summary>
         /// Password to access.
         /// </summary>
-        [Input("password")]
-        public Input<string>? Password { get; set; }
+        public Input<string>? Password
+        {
+            get => _password;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _password = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
 
         /// <summary>
         /// Specify whether to assign an Internet IP address.
@@ -183,7 +193,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes.Inputs
         public Input<int>? SystemDiskSize { get; set; }
 
         /// <summary>
-        /// Type of a CVM disk. Valid value: `CLOUD_PREMIUM` and `CLOUD_SSD`. Default is `CLOUD_PREMIUM`.
+        /// Type of a CVM disk. Valid value: `LOCAL_BASIC`, `LOCAL_SSD`, `CLOUD_BASIC`, `CLOUD_PREMIUM`, `CLOUD_SSD`, `CLOUD_HSSD`, `CLOUD_TSSD` and `CLOUD_BSSD`. Default is `CLOUD_PREMIUM`.
         /// </summary>
         [Input("systemDiskType")]
         public Input<string>? SystemDiskType { get; set; }
@@ -191,5 +201,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes.Inputs
         public NodePoolAutoScalingConfigArgs()
         {
         }
+        public static new NodePoolAutoScalingConfigArgs Empty => new NodePoolAutoScalingConfigArgs();
     }
 }

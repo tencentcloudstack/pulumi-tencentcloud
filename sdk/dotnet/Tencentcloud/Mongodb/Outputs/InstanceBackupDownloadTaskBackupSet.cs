@@ -14,6 +14,9 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mongodb.Outputs
     [OutputType]
     public sealed class InstanceBackupDownloadTaskBackupSet
     {
+        /// <summary>
+        /// Replication Id.
+        /// </summary>
         public readonly string ReplicaSetId;
 
         [OutputConstructor]

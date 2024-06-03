@@ -11,11 +11,12 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const testRule = new tencentcloud.Dayu.L7Rule("test_rule", {
+ * const testRule = new tencentcloud.dayu.L7Rule("testRule", {
  *     domain: "zhaoshaona.com",
  *     healthCheckCode: 31,
  *     healthCheckHealthNum: 5,
@@ -33,9 +34,10 @@ import * as utilities from "../utilities";
  *     ],
  *     sourceType: 2,
  *     sslId: "%s",
- *     switch: true,
+ *     "switch": true,
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export class L7Rule extends pulumi.CustomResource {
     /**

@@ -11,10 +11,10 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Inputs
 {
 
-    public sealed class RuleEngineRuleActionNormalActionGetArgs : Pulumi.ResourceArgs
+    public sealed class RuleEngineRuleActionNormalActionGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// Action name.
+        /// Feature name. You can call the [DescribeRulesSetting](https://tcloud4api.woa.com/document/product/1657/79433?!preview&amp;!document=1) API to view the requirements for entering the feature name.
         /// </summary>
         [Input("action", required: true)]
         public Input<string> Action { get; set; } = null!;
@@ -23,7 +23,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Inputs
         private InputList<Inputs.RuleEngineRuleActionNormalActionParameterGetArgs>? _parameters;
 
         /// <summary>
-        /// Action parameters.
+        /// Parameter.
         /// </summary>
         public InputList<Inputs.RuleEngineRuleActionNormalActionParameterGetArgs> Parameters
         {
@@ -34,5 +34,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Inputs
         public RuleEngineRuleActionNormalActionGetArgs()
         {
         }
+        public static new RuleEngineRuleActionNormalActionGetArgs Empty => new RuleEngineRuleActionNormalActionGetArgs();
     }
 }

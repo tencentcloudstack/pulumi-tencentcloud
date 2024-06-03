@@ -15,64 +15,58 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcaplus
         /// <summary>
         /// Use this data source to query  IDL information of the TcaplusDB table.
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var idTest = Tencentcloud.Tcaplus.GetIdls.Invoke(new()
         ///     {
-        ///         var idTest = Output.Create(Tencentcloud.Tcaplus.GetIdls.InvokeAsync(new Tencentcloud.Tcaplus.GetIdlsArgs
-        ///         {
-        ///             ClusterId = "19162256624",
-        ///         }));
-        ///     }
+        ///         ClusterId = "19162256624",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetIdlsResult> InvokeAsync(GetIdlsArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetIdlsResult>("tencentcloud:Tcaplus/getIdls:getIdls", args ?? new GetIdlsArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetIdlsResult>("tencentcloud:Tcaplus/getIdls:getIdls", args ?? new GetIdlsArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query  IDL information of the TcaplusDB table.
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var idTest = Tencentcloud.Tcaplus.GetIdls.Invoke(new()
         ///     {
-        ///         var idTest = Output.Create(Tencentcloud.Tcaplus.GetIdls.InvokeAsync(new Tencentcloud.Tcaplus.GetIdlsArgs
-        ///         {
-        ///             ClusterId = "19162256624",
-        ///         }));
-        ///     }
+        ///         ClusterId = "19162256624",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetIdlsResult> Invoke(GetIdlsInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetIdlsResult>("tencentcloud:Tcaplus/getIdls:getIdls", args ?? new GetIdlsInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetIdlsResult>("tencentcloud:Tcaplus/getIdls:getIdls", args ?? new GetIdlsInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetIdlsArgs : Pulumi.InvokeArgs
+    public sealed class GetIdlsArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// ID of the TcaplusDB cluster to be query.
@@ -89,9 +83,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcaplus
         public GetIdlsArgs()
         {
         }
+        public static new GetIdlsArgs Empty => new GetIdlsArgs();
     }
 
-    public sealed class GetIdlsInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetIdlsInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// ID of the TcaplusDB cluster to be query.
@@ -108,6 +103,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcaplus
         public GetIdlsInvokeArgs()
         {
         }
+        public static new GetIdlsInvokeArgs Empty => new GetIdlsInvokeArgs();
     }
 
 

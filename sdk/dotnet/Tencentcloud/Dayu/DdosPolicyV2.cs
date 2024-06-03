@@ -15,140 +15,141 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dayu
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var ddosV2 = new Tencentcloud.Dayu.DdosPolicyV2("ddosV2", new()
     ///     {
-    ///         var ddosV2 = new Tencentcloud.Dayu.DdosPolicyV2("ddosV2", new Tencentcloud.Dayu.DdosPolicyV2Args
+    ///         Acls = new[]
     ///         {
-    ///             Acls = 
+    ///             new Tencentcloud.Dayu.Inputs.DdosPolicyV2AclArgs
     ///             {
-    ///                 new Tencentcloud.Dayu.Inputs.DdosPolicyV2AclArgs
+    ///                 Action = "transmit",
+    ///                 DPortEnd = 10,
+    ///                 DPortStart = 1,
+    ///                 ForwardProtocol = "all",
+    ///                 Priority = 9,
+    ///                 SPortEnd = 20,
+    ///                 SPortStart = 10,
+    ///             },
+    ///         },
+    ///         BlackWhiteIps = new[]
+    ///         {
+    ///             new Tencentcloud.Dayu.Inputs.DdosPolicyV2BlackWhiteIpArgs
+    ///             {
+    ///                 Ip = "1.2.3.4",
+    ///                 IpType = "black",
+    ///             },
+    ///         },
+    ///         Business = "bgpip",
+    ///         DdosAi = "on",
+    ///         DdosConnectLimit = new Tencentcloud.Dayu.Inputs.DdosPolicyV2DdosConnectLimitArgs
+    ///         {
+    ///             BadConnThreshold = 30,
+    ///             ConnTimeout = 30,
+    ///             DstConnLimit = 21,
+    ///             DstNewLimit = 20,
+    ///             NullConnEnable = 1,
+    ///             SdConnLimit = 11,
+    ///             SdNewLimit = 10,
+    ///             SynLimit = 20,
+    ///             SynRate = 10,
+    ///         },
+    ///         DdosGeoIpBlockConfigs = new[]
+    ///         {
+    ///             new Tencentcloud.Dayu.Inputs.DdosPolicyV2DdosGeoIpBlockConfigArgs
+    ///             {
+    ///                 Action = "drop",
+    ///                 AreaLists = new[]
     ///                 {
-    ///                     Action = "transmit",
-    ///                     DPortEnd = 10,
-    ///                     DPortStart = 1,
-    ///                     ForwardProtocol = "all",
-    ///                     Priority = 9,
-    ///                     SPortEnd = 20,
-    ///                     SPortStart = 10,
+    ///                     100001,
     ///                 },
+    ///                 RegionType = "customized",
     ///             },
-    ///             BlackWhiteIps = 
+    ///         },
+    ///         DdosLevel = "low",
+    ///         DdosSpeedLimitConfigs = new[]
+    ///         {
+    ///             new Tencentcloud.Dayu.Inputs.DdosPolicyV2DdosSpeedLimitConfigArgs
     ///             {
-    ///                 new Tencentcloud.Dayu.Inputs.DdosPolicyV2BlackWhiteIpArgs
+    ///                 Bandwidth = 20,
+    ///                 DstPortList = "10",
+    ///                 Mode = 1,
+    ///                 PacketRate = 10,
+    ///                 ProtocolList = "TCP",
+    ///             },
+    ///         },
+    ///         DdosThreshold = 100,
+    ///         PacketFilters = new[]
+    ///         {
+    ///             new Tencentcloud.Dayu.Inputs.DdosPolicyV2PacketFilterArgs
+    ///             {
+    ///                 Action = "drop",
+    ///                 DPortEnd = 20,
+    ///                 DPortStart = 20,
+    ///                 Depth = 2,
+    ///                 Depth2 = 3,
+    ///                 IsNot = 0,
+    ///                 IsNot2 = 0,
+    ///                 MatchBegin = "begin_l3",
+    ///                 MatchBegin2 = "begin_l3",
+    ///                 MatchLogic = "and",
+    ///                 MatchType = "pcre",
+    ///                 MatchType2 = "pcre",
+    ///                 Offset = 1,
+    ///                 Offset2 = 2,
+    ///                 PktlenMax = 30,
+    ///                 PktlenMin = 30,
+    ///                 Protocol = "all",
+    ///                 SPortEnd = 10,
+    ///                 SPortStart = 10,
+    ///                 Str = "12",
+    ///                 Str2 = "30",
+    ///             },
+    ///         },
+    ///         ProtocolBlockConfigs = new[]
+    ///         {
+    ///             new Tencentcloud.Dayu.Inputs.DdosPolicyV2ProtocolBlockConfigArgs
+    ///             {
+    ///                 DropIcmp = 1,
+    ///                 DropOther = 0,
+    ///                 DropTcp = 0,
+    ///                 DropUdp = 0,
+    ///             },
+    ///         },
+    ///         ResourceId = "bgpip-000004xf",
+    ///         WaterPrintConfigs = new[]
+    ///         {
+    ///             new Tencentcloud.Dayu.Inputs.DdosPolicyV2WaterPrintConfigArgs
+    ///             {
+    ///                 Listeners = new[]
     ///                 {
-    ///                     Ip = "1.2.3.4",
-    ///                     IpType = "black",
-    ///                 },
-    ///             },
-    ///             Business = "bgpip",
-    ///             DdosAi = "on",
-    ///             DdosConnectLimit = new Tencentcloud.Dayu.Inputs.DdosPolicyV2DdosConnectLimitArgs
-    ///             {
-    ///                 BadConnThreshold = 30,
-    ///                 ConnTimeout = 30,
-    ///                 DstConnLimit = 21,
-    ///                 DstNewLimit = 20,
-    ///                 NullConnEnable = 1,
-    ///                 SdConnLimit = 11,
-    ///                 SdNewLimit = 10,
-    ///                 SynLimit = 20,
-    ///                 SynRate = 10,
-    ///             },
-    ///             DdosGeoIpBlockConfigs = 
-    ///             {
-    ///                 new Tencentcloud.Dayu.Inputs.DdosPolicyV2DdosGeoIpBlockConfigArgs
-    ///                 {
-    ///                     Action = "drop",
-    ///                     AreaLists = 
+    ///                     new Tencentcloud.Dayu.Inputs.DdosPolicyV2WaterPrintConfigListenerArgs
     ///                     {
-    ///                         100001,
+    ///                         ForwardProtocol = "TCP",
+    ///                         FrontendPort = 90,
+    ///                         FrontendPortEnd = 90,
     ///                     },
-    ///                     RegionType = "customized",
     ///                 },
+    ///                 Offset = 1,
+    ///                 OpenStatus = 1,
+    ///                 Verify = "checkall",
     ///             },
-    ///             DdosLevel = "low",
-    ///             DdosSpeedLimitConfigs = 
-    ///             {
-    ///                 new Tencentcloud.Dayu.Inputs.DdosPolicyV2DdosSpeedLimitConfigArgs
-    ///                 {
-    ///                     Bandwidth = 20,
-    ///                     DstPortList = "10",
-    ///                     Mode = 1,
-    ///                     PacketRate = 10,
-    ///                     ProtocolList = "TCP",
-    ///                 },
-    ///             },
-    ///             DdosThreshold = 100,
-    ///             PacketFilters = 
-    ///             {
-    ///                 new Tencentcloud.Dayu.Inputs.DdosPolicyV2PacketFilterArgs
-    ///                 {
-    ///                     Action = "drop",
-    ///                     DPortEnd = 20,
-    ///                     DPortStart = 20,
-    ///                     Depth = 2,
-    ///                     Depth2 = 3,
-    ///                     IsNot = 0,
-    ///                     IsNot2 = 0,
-    ///                     MatchBegin = "begin_l3",
-    ///                     MatchBegin2 = "begin_l3",
-    ///                     MatchLogic = "and",
-    ///                     MatchType = "pcre",
-    ///                     MatchType2 = "pcre",
-    ///                     Offset = 1,
-    ///                     Offset2 = 2,
-    ///                     PktlenMax = 30,
-    ///                     PktlenMin = 30,
-    ///                     Protocol = "all",
-    ///                     SPortEnd = 10,
-    ///                     SPortStart = 10,
-    ///                     Str = "12",
-    ///                     Str2 = "30",
-    ///                 },
-    ///             },
-    ///             ProtocolBlockConfigs = 
-    ///             {
-    ///                 new Tencentcloud.Dayu.Inputs.DdosPolicyV2ProtocolBlockConfigArgs
-    ///                 {
-    ///                     DropIcmp = 1,
-    ///                     DropOther = 0,
-    ///                     DropTcp = 0,
-    ///                     DropUdp = 0,
-    ///                 },
-    ///             },
-    ///             ResourceId = "bgpip-000004xf",
-    ///             WaterPrintConfigs = 
-    ///             {
-    ///                 new Tencentcloud.Dayu.Inputs.DdosPolicyV2WaterPrintConfigArgs
-    ///                 {
-    ///                     Listeners = 
-    ///                     {
-    ///                         new Tencentcloud.Dayu.Inputs.DdosPolicyV2WaterPrintConfigListenerArgs
-    ///                         {
-    ///                             ForwardProtocol = "TCP",
-    ///                             FrontendPort = 90,
-    ///                             FrontendPortEnd = 90,
-    ///                         },
-    ///                     },
-    ///                     Offset = 1,
-    ///                     OpenStatus = 1,
-    ///                     Verify = "checkall",
-    ///                 },
-    ///             },
-    ///         });
-    ///     }
+    ///         },
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Dayu/ddosPolicyV2:DdosPolicyV2")]
-    public partial class DdosPolicyV2 : Pulumi.CustomResource
+    public partial class DdosPolicyV2 : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Port ACL policy for DDoS protection.
@@ -273,7 +274,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dayu
         }
     }
 
-    public sealed class DdosPolicyV2Args : Pulumi.ResourceArgs
+    public sealed class DdosPolicyV2Args : global::Pulumi.ResourceArgs
     {
         [Input("acls")]
         private InputList<Inputs.DdosPolicyV2AclArgs>? _acls;
@@ -398,9 +399,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dayu
         public DdosPolicyV2Args()
         {
         }
+        public static new DdosPolicyV2Args Empty => new DdosPolicyV2Args();
     }
 
-    public sealed class DdosPolicyV2State : Pulumi.ResourceArgs
+    public sealed class DdosPolicyV2State : global::Pulumi.ResourceArgs
     {
         [Input("acls")]
         private InputList<Inputs.DdosPolicyV2AclGetArgs>? _acls;
@@ -525,5 +527,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dayu
         public DdosPolicyV2State()
         {
         }
+        public static new DdosPolicyV2State Empty => new DdosPolicyV2State();
     }
 }

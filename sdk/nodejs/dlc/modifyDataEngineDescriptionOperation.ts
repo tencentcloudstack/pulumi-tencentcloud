@@ -9,22 +9,24 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const modifyDataEngineDescriptionOperation = new tencentcloud.Dlc.ModifyDataEngineDescriptionOperation("modify_data_engine_description_operation", {
+ * const modifyDataEngineDescriptionOperation = new tencentcloud.dlc.ModifyDataEngineDescriptionOperation("modifyDataEngineDescriptionOperation", {
  *     dataEngineName: "testEngine",
  *     message: "test",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * dlc modify_data_engine_description_operation can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Dlc/modifyDataEngineDescriptionOperation:ModifyDataEngineDescriptionOperation modify_data_engine_description_operation modify_data_engine_description_operation_id
+ * $ pulumi import tencentcloud:Dlc/modifyDataEngineDescriptionOperation:ModifyDataEngineDescriptionOperation modify_data_engine_description_operation modify_data_engine_description_operation_id
  * ```
  */
 export class ModifyDataEngineDescriptionOperation extends pulumi.CustomResource {

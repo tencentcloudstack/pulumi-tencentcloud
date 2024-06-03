@@ -8,23 +8,28 @@ import * as utilities from "../utilities";
  * Provides a COS object resource to put an object(content or file) to the bucket.
  *
  * ## Example Usage
+ *
  * ### Uploading a file to a bucket
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const myobject = new tencentcloud.Cos.BucketObject("myobject", {
+ * const myobject = new tencentcloud.cos.BucketObject("myobject", {
  *     bucket: "mycos-1258798060",
  *     key: "new_object_key",
  *     source: "path/to/file",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
+ *
  * ### Uploading a content to a bucket
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const mycos = new tencentcloud.cos.Bucket("mycos", {
  *     bucket: "mycos-1258798060",
@@ -36,6 +41,7 @@ import * as utilities from "../utilities";
  *     content: "the content that you want to upload.",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export class BucketObject extends pulumi.CustomResource {
     /**

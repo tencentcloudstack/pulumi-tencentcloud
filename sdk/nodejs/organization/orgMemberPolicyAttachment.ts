@@ -9,11 +9,12 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const orgMemberPolicyAttachment = new tencentcloud.Organization.OrgMemberPolicyAttachment("org_member_policy_attachment", {
+ * const orgMemberPolicyAttachment = new tencentcloud.organization.OrgMemberPolicyAttachment("orgMemberPolicyAttachment", {
  *     identityId: 1,
  *     memberUins: [
  *         100033905366,
@@ -22,13 +23,14 @@ import * as utilities from "../utilities";
  *     policyName: "example-iac",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * organization org_member_policy_attachment can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Organization/orgMemberPolicyAttachment:OrgMemberPolicyAttachment org_member_policy_attachment org_member_policy_attachment_id
+ * $ pulumi import tencentcloud:Organization/orgMemberPolicyAttachment:OrgMemberPolicyAttachment org_member_policy_attachment org_member_policy_attachment_id
  * ```
  */
 export class OrgMemberPolicyAttachment extends pulumi.CustomResource {

@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Emr.Inputs
 {
 
-    public sealed class ClusterResourceSpecCommonResourceSpecGetArgs : Pulumi.ResourceArgs
+    public sealed class ClusterResourceSpecCommonResourceSpecGetArgs : global::Pulumi.ResourceArgs
     {
         [Input("cpu")]
         public Input<int>? Cpu { get; set; }
@@ -37,5 +37,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Emr.Inputs
         public ClusterResourceSpecCommonResourceSpecGetArgs()
         {
         }
+        public static new ClusterResourceSpecCommonResourceSpecGetArgs Empty => new ClusterResourceSpecCommonResourceSpecGetArgs();
     }
 }

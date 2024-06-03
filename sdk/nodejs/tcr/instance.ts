@@ -2,33 +2,39 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
  * Use this resource to create tcr instance.
  *
  * ## Example Usage
+ *
  * ### Create a basic tcr instance.
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = new tencentcloud.Tcr.Instance("example", {
+ * const example = new tencentcloud.tcr.Instance("example", {
  *     instanceType: "basic",
  *     tags: {
  *         createdBy: "terraform",
  *     },
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
+ *
  * ### Create instance with the public network access whitelist.
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = new tencentcloud.Tcr.Instance("example", {
+ * const example = new tencentcloud.tcr.Instance("example", {
  *     instanceType: "basic",
  *     openPublicOperation: true,
  *     securityPolicies: [
@@ -41,14 +47,17 @@ import * as utilities from "../utilities";
  *     ],
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
+ *
  * ### Create instance with Replications.
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const config = new pulumi.Config();
- * const tcrRegionMap = config.getObject("tcrRegionMap") || {
+ * const tcrRegionMap = config.getObject<{ap-bangkok?: number, ap-beijing?: number, ap-chengdu?: number, ap-chongqing?: number, ap-guangzhou?: number, ap-hongkong?: number, ap-jakarta?: number, ap-mumbai?: number, ap-nanjing?: number, ap-seoul?: number, ap-shanghai?: number, ap-singapore?: number, ap-taipei?: number, ap-tokyo?: number, eu-frankfurt?: number, eu-moscow?: number, na-ashburn?: number, na-siliconvalley?: number}>("tcrRegionMap") || {
  *     "ap-guangzhou": 1,
  *     "ap-shanghai": 4,
  *     "ap-hongkong": 5,
@@ -80,13 +89,14 @@ import * as utilities from "../utilities";
  *     ],
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * tcr instance can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Tcr/instance:Instance foo instance_id
+ * $ pulumi import tencentcloud:Tcr/instance:Instance foo instance_id
  * ```
  */
 export class Instance extends pulumi.CustomResource {

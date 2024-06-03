@@ -17,219 +17,231 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var config = new Config();
+    ///     var availabilityZone = config.Get("availabilityZone") ?? "ap-guangzhou-1";
+    ///     // create vpc
+    ///     var vpc = new Tencentcloud.Vpc.Instance("vpc", new()
     ///     {
-    ///         var config = new Config();
-    ///         var availabilityZone = config.Get("availabilityZone") ?? "ap-guangzhou-1";
-    ///         // create vpc
-    ///         var vpc = new Tencentcloud.Vpc.Instance("vpc", new Tencentcloud.Vpc.InstanceArgs
-    ///         {
-    ///             CidrBlock = "10.0.0.0/16",
-    ///         });
-    ///         // create vpc subnet
-    ///         var subnet = new Tencentcloud.Subnet.Instance("subnet", new Tencentcloud.Subnet.InstanceArgs
-    ///         {
-    ///             AvailabilityZone = availabilityZone,
-    ///             VpcId = vpc.Id,
-    ///             CidrBlock = "10.0.20.0/28",
-    ///             IsMulticast = false,
-    ///         });
-    ///         // create postgresql
-    ///         var foo = new Tencentcloud.Postgresql.Instance("foo", new Tencentcloud.Postgresql.InstanceArgs
-    ///         {
-    ///             AvailabilityZone = availabilityZone,
-    ///             ChargeType = "POSTPAID_BY_HOUR",
-    ///             VpcId = vpc.Id,
-    ///             SubnetId = subnet.Id,
-    ///             EngineVersion = "10.4",
-    ///             RootUser = "root123",
-    ///             RootPassword = "Root123$",
-    ///             Charset = "UTF8",
-    ///             ProjectId = 0,
-    ///             Memory = 2,
-    ///             Storage = 10,
-    ///             Tags = 
-    ///             {
-    ///                 { "test", "tf" },
-    ///             },
-    ///         });
-    ///     }
+    ///         CidrBlock = "10.0.0.0/16",
+    ///     });
     /// 
-    /// }
+    ///     // create vpc subnet
+    ///     var subnet = new Tencentcloud.Subnet.Instance("subnet", new()
+    ///     {
+    ///         AvailabilityZone = availabilityZone,
+    ///         VpcId = vpc.Id,
+    ///         CidrBlock = "10.0.20.0/28",
+    ///         IsMulticast = false,
+    ///     });
+    /// 
+    ///     // create postgresql
+    ///     var foo = new Tencentcloud.Postgresql.Instance("foo", new()
+    ///     {
+    ///         AvailabilityZone = availabilityZone,
+    ///         ChargeType = "POSTPAID_BY_HOUR",
+    ///         VpcId = vpc.Id,
+    ///         SubnetId = subnet.Id,
+    ///         EngineVersion = "10.4",
+    ///         RootUser = "root123",
+    ///         RootPassword = "Root123$",
+    ///         Charset = "UTF8",
+    ///         ProjectId = 0,
+    ///         Memory = 2,
+    ///         Storage = 10,
+    ///         Tags = 
+    ///         {
+    ///             { "test", "tf" },
+    ///         },
+    ///     });
+    /// 
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
+    /// 
     /// ### Create a multi available zone bucket
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var config = new Config();
+    ///     var availabilityZone = config.Get("availabilityZone") ?? "ap-guangzhou-6";
+    ///     var standbyAvailabilityZone = config.Get("standbyAvailabilityZone") ?? "ap-guangzhou-7";
+    ///     // create vpc
+    ///     var vpc = new Tencentcloud.Vpc.Instance("vpc", new()
     ///     {
-    ///         var config = new Config();
-    ///         var availabilityZone = config.Get("availabilityZone") ?? "ap-guangzhou-6";
-    ///         var standbyAvailabilityZone = config.Get("standbyAvailabilityZone") ?? "ap-guangzhou-7";
-    ///         // create vpc
-    ///         var vpc = new Tencentcloud.Vpc.Instance("vpc", new Tencentcloud.Vpc.InstanceArgs
-    ///         {
-    ///             CidrBlock = "10.0.0.0/16",
-    ///         });
-    ///         // create vpc subnet
-    ///         var subnet = new Tencentcloud.Subnet.Instance("subnet", new Tencentcloud.Subnet.InstanceArgs
-    ///         {
-    ///             AvailabilityZone = availabilityZone,
-    ///             VpcId = vpc.Id,
-    ///             CidrBlock = "10.0.20.0/28",
-    ///             IsMulticast = false,
-    ///         });
-    ///         // create postgresql
-    ///         var foo = new Tencentcloud.Postgresql.Instance("foo", new Tencentcloud.Postgresql.InstanceArgs
-    ///         {
-    ///             AvailabilityZone = availabilityZone,
-    ///             ChargeType = "POSTPAID_BY_HOUR",
-    ///             VpcId = vpc.Id,
-    ///             SubnetId = subnet.Id,
-    ///             EngineVersion = "10.4",
-    ///             RootUser = "root123",
-    ///             RootPassword = "Root123$",
-    ///             Charset = "UTF8",
-    ///             ProjectId = 0,
-    ///             Memory = 2,
-    ///             Storage = 10,
-    ///             DbNodeSets = 
-    ///             {
-    ///                 new Tencentcloud.Postgresql.Inputs.InstanceDbNodeSetArgs
-    ///                 {
-    ///                     Role = "Primary",
-    ///                     Zone = availabilityZone,
-    ///                 },
-    ///                 new Tencentcloud.Postgresql.Inputs.InstanceDbNodeSetArgs
-    ///                 {
-    ///                     Zone = standbyAvailabilityZone,
-    ///                 },
-    ///             },
-    ///             Tags = 
-    ///             {
-    ///                 { "test", "tf" },
-    ///             },
-    ///         });
-    ///     }
+    ///         CidrBlock = "10.0.0.0/16",
+    ///     });
     /// 
-    /// }
+    ///     // create vpc subnet
+    ///     var subnet = new Tencentcloud.Subnet.Instance("subnet", new()
+    ///     {
+    ///         AvailabilityZone = availabilityZone,
+    ///         VpcId = vpc.Id,
+    ///         CidrBlock = "10.0.20.0/28",
+    ///         IsMulticast = false,
+    ///     });
+    /// 
+    ///     // create postgresql
+    ///     var foo = new Tencentcloud.Postgresql.Instance("foo", new()
+    ///     {
+    ///         AvailabilityZone = availabilityZone,
+    ///         ChargeType = "POSTPAID_BY_HOUR",
+    ///         VpcId = vpc.Id,
+    ///         SubnetId = subnet.Id,
+    ///         EngineVersion = "10.4",
+    ///         RootUser = "root123",
+    ///         RootPassword = "Root123$",
+    ///         Charset = "UTF8",
+    ///         ProjectId = 0,
+    ///         Memory = 2,
+    ///         Cpu = 1,
+    ///         Storage = 10,
+    ///         DbNodeSets = new[]
+    ///         {
+    ///             new Tencentcloud.Postgresql.Inputs.InstanceDbNodeSetArgs
+    ///             {
+    ///                 Role = "Primary",
+    ///                 Zone = availabilityZone,
+    ///             },
+    ///             new Tencentcloud.Postgresql.Inputs.InstanceDbNodeSetArgs
+    ///             {
+    ///                 Zone = standbyAvailabilityZone,
+    ///             },
+    ///         },
+    ///         Tags = 
+    ///         {
+    ///             { "test", "tf" },
+    ///         },
+    ///     });
+    /// 
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
+    /// 
     /// ### create pgsql with kms key
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var pg = new Tencentcloud.Postgresql.Instance("pg", new()
     ///     {
-    ///         var pg = new Tencentcloud.Postgresql.Instance("pg", new Tencentcloud.Postgresql.InstanceArgs
+    ///         AvailabilityZone = "ap-guangzhou-6",
+    ///         BackupPlan = new Tencentcloud.Postgresql.Inputs.InstanceBackupPlanArgs
     ///         {
-    ///             AvailabilityZone = "ap-guangzhou-6",
-    ///             BackupPlan = new Tencentcloud.Postgresql.Inputs.InstanceBackupPlanArgs
+    ///             BackupPeriods = new[]
     ///             {
-    ///                 BackupPeriods = 
-    ///                 {
-    ///                     "tuesday",
-    ///                     "wednesday",
-    ///                 },
-    ///                 BaseBackupRetentionPeriod = 7,
-    ///                 MaxBackupStartTime = "01:10:11",
-    ///                 MinBackupStartTime = "00:10:11",
+    ///                 "tuesday",
+    ///                 "wednesday",
     ///             },
-    ///             ChargeType = "POSTPAID_BY_HOUR",
-    ///             Charset = "LATIN1",
-    ///             DbKernelVersion = "v11.12_r1.3",
-    ///             EngineVersion = "11.12",
-    ///             KmsKeyId = "788c606a-c7b7-11ec-82d1-5254001e5c4e",
-    ///             KmsRegion = "ap-guangzhou",
-    ///             Memory = 4,
-    ///             NeedSupportTde = 1,
-    ///             ProjectId = 0,
-    ///             RootPassword = "xxxxxxxxxx",
-    ///             Storage = 100,
-    ///             SubnetId = "subnet-enm92y0m",
-    ///             Tags = 
-    ///             {
-    ///                 { "tf", "test" },
-    ///             },
-    ///             VpcId = "vpc-86v957zb",
-    ///         });
-    ///     }
+    ///             BaseBackupRetentionPeriod = 7,
+    ///             MaxBackupStartTime = "01:10:11",
+    ///             MinBackupStartTime = "00:10:11",
+    ///         },
+    ///         ChargeType = "POSTPAID_BY_HOUR",
+    ///         Charset = "LATIN1",
+    ///         DbKernelVersion = "v11.12_r1.3",
+    ///         EngineVersion = "11.12",
+    ///         KmsKeyId = "788c606a-c7b7-11ec-82d1-5254001e5c4e",
+    ///         KmsRegion = "ap-guangzhou",
+    ///         Memory = 4,
+    ///         NeedSupportTde = 1,
+    ///         ProjectId = 0,
+    ///         RootPassword = "xxxxxxxxxx",
+    ///         Storage = 100,
+    ///         SubnetId = "subnet-enm92y0m",
+    ///         Tags = 
+    ///         {
+    ///             { "tf", "test" },
+    ///         },
+    ///         VpcId = "vpc-86v957zb",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
+    /// 
     /// ### upgrade kernel version
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var test = new Tencentcloud.Postgresql.Instance("test", new()
     ///     {
-    ///         var test = new Tencentcloud.Postgresql.Instance("test", new Tencentcloud.Postgresql.InstanceArgs
+    ///         AvailabilityZone = data.Tencentcloud_availability_zones_by_product.Zone.Zones[5].Name,
+    ///         ChargeType = "POSTPAID_BY_HOUR",
+    ///         VpcId = local.Vpc_id,
+    ///         SubnetId = local.Subnet_id,
+    ///         EngineVersion = "13.3",
+    ///         RootPassword = "*",
+    ///         Charset = "LATIN1",
+    ///         ProjectId = 0,
+    ///         PublicAccessSwitch = false,
+    ///         SecurityGroups = new[]
     ///         {
-    ///             AvailabilityZone = data.Tencentcloud_availability_zones_by_product.Zone.Zones[5].Name,
-    ///             ChargeType = "POSTPAID_BY_HOUR",
-    ///             VpcId = local.Vpc_id,
-    ///             SubnetId = local.Subnet_id,
-    ///             EngineVersion = "13.3",
-    ///             RootPassword = "*",
-    ///             Charset = "LATIN1",
-    ///             ProjectId = 0,
-    ///             PublicAccessSwitch = false,
-    ///             SecurityGroups = 
+    ///             local.Sg_id,
+    ///         },
+    ///         Memory = 4,
+    ///         Storage = 250,
+    ///         BackupPlan = new Tencentcloud.Postgresql.Inputs.InstanceBackupPlanArgs
+    ///         {
+    ///             MinBackupStartTime = "01:10:11",
+    ///             MaxBackupStartTime = "02:10:11",
+    ///             BaseBackupRetentionPeriod = 5,
+    ///             BackupPeriods = new[]
     ///             {
-    ///                 local.Sg_id,
+    ///                 "monday",
+    ///                 "thursday",
+    ///                 "sunday",
     ///             },
-    ///             Memory = 4,
-    ///             Storage = 250,
-    ///             BackupPlan = new Tencentcloud.Postgresql.Inputs.InstanceBackupPlanArgs
-    ///             {
-    ///                 MinBackupStartTime = "01:10:11",
-    ///                 MaxBackupStartTime = "02:10:11",
-    ///                 BaseBackupRetentionPeriod = 5,
-    ///                 BackupPeriods = 
-    ///                 {
-    ///                     "monday",
-    ///                     "thursday",
-    ///                     "sunday",
-    ///                 },
-    ///             },
-    ///             DbKernelVersion = "v13.3_r1.4",
-    ///             Tags = 
-    ///             {
-    ///                 { "tf", "teest" },
-    ///             },
-    ///         });
-    ///     }
+    ///         },
+    ///         DbKernelVersion = "v13.3_r1.4",
+    ///         Tags = 
+    ///         {
+    ///             { "tf", "teest" },
+    ///         },
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// postgresql instance can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Postgresql/instance:Instance foo postgres-cda1iex1
+    /// $ pulumi import tencentcloud:Postgresql/instance:Instance foo postgres-cda1iex1
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Postgresql/instance:Instance")]
-    public partial class Instance : Pulumi.CustomResource
+    public partial class Instance : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Auto renew flag, `1` for enabled. NOTES: Only support prepaid instance.
@@ -266,6 +278,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
         /// </summary>
         [Output("charset")]
         public Output<string?> Charset { get; private set; } = null!;
+
+        /// <summary>
+        /// Number of CPU cores. Allowed value must be equal `cpu` that data source `tencentcloud.Postgresql.getSpecinfos` provides.
+        /// </summary>
+        [Output("cpu")]
+        public Output<int> Cpu { get; private set; } = null!;
 
         /// <summary>
         /// Create time of the postgresql instance.
@@ -465,6 +483,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
             {
                 Version = Utilities.Version,
                 PluginDownloadURL = "github://api.github.com/tencentcloudstack",
+                AdditionalSecretOutputs =
+                {
+                    "rootPassword",
+                },
             };
             var merged = CustomResourceOptions.Merge(defaultOptions, options);
             // Override the ID if one was specified for consistency with other language SDKs.
@@ -486,7 +508,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
         }
     }
 
-    public sealed class InstanceArgs : Pulumi.ResourceArgs
+    public sealed class InstanceArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Auto renew flag, `1` for enabled. NOTES: Only support prepaid instance.
@@ -523,6 +545,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
         /// </summary>
         [Input("charset")]
         public Input<string>? Charset { get; set; }
+
+        /// <summary>
+        /// Number of CPU cores. Allowed value must be equal `cpu` that data source `tencentcloud.Postgresql.getSpecinfos` provides.
+        /// </summary>
+        [Input("cpu")]
+        public Input<int>? Cpu { get; set; }
 
         /// <summary>
         /// PostgreSQL kernel version number. If it is specified, an instance running kernel DBKernelVersion will be created. It supports updating the minor kernel version immediately.
@@ -620,11 +648,21 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
         [Input("publicAccessSwitch")]
         public Input<bool>? PublicAccessSwitch { get; set; }
 
+        [Input("rootPassword", required: true)]
+        private Input<string>? _rootPassword;
+
         /// <summary>
         /// Password of root account. This parameter can be specified when you purchase master instances, but it should be ignored when you purchase read-only instances or disaster recovery instances.
         /// </summary>
-        [Input("rootPassword", required: true)]
-        public Input<string> RootPassword { get; set; } = null!;
+        public Input<string>? RootPassword
+        {
+            get => _rootPassword;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _rootPassword = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
 
         /// <summary>
         /// Instance root account name. This parameter is optional, Default value is `root`.
@@ -689,9 +727,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
         public InstanceArgs()
         {
         }
+        public static new InstanceArgs Empty => new InstanceArgs();
     }
 
-    public sealed class InstanceState : Pulumi.ResourceArgs
+    public sealed class InstanceState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Auto renew flag, `1` for enabled. NOTES: Only support prepaid instance.
@@ -728,6 +767,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
         /// </summary>
         [Input("charset")]
         public Input<string>? Charset { get; set; }
+
+        /// <summary>
+        /// Number of CPU cores. Allowed value must be equal `cpu` that data source `tencentcloud.Postgresql.getSpecinfos` provides.
+        /// </summary>
+        [Input("cpu")]
+        public Input<int>? Cpu { get; set; }
 
         /// <summary>
         /// Create time of the postgresql instance.
@@ -855,11 +900,21 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
         [Input("publicAccessSwitch")]
         public Input<bool>? PublicAccessSwitch { get; set; }
 
+        [Input("rootPassword")]
+        private Input<string>? _rootPassword;
+
         /// <summary>
         /// Password of root account. This parameter can be specified when you purchase master instances, but it should be ignored when you purchase read-only instances or disaster recovery instances.
         /// </summary>
-        [Input("rootPassword")]
-        public Input<string>? RootPassword { get; set; }
+        public Input<string>? RootPassword
+        {
+            get => _rootPassword;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _rootPassword = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
 
         /// <summary>
         /// Instance root account name. This parameter is optional, Default value is `root`.
@@ -930,5 +985,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
         public InstanceState()
         {
         }
+        public static new InstanceState Empty => new InstanceState();
     }
 }

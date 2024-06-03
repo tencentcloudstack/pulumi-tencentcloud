@@ -15,34 +15,35 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Lighthouse
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var disk = new Tencentcloud.Lighthouse.Disk("disk", new()
     ///     {
-    ///         var disk = new Tencentcloud.Lighthouse.Disk("disk", new Tencentcloud.Lighthouse.DiskArgs
+    ///         DiskChargePrepaid = new Tencentcloud.Lighthouse.Inputs.DiskDiskChargePrepaidArgs
     ///         {
-    ///             DiskChargePrepaid = new Tencentcloud.Lighthouse.Inputs.DiskDiskChargePrepaidArgs
-    ///             {
-    ///                 Period = 1,
-    ///                 RenewFlag = "NOTIFY_AND_AUTO_RENEW",
-    ///                 TimeUnit = "m",
-    ///             },
-    ///             DiskName = "test",
-    ///             DiskSize = 20,
-    ///             DiskType = "CLOUD_SSD",
-    ///             Zone = "ap-hongkong-2",
-    ///         });
-    ///     }
+    ///             Period = 1,
+    ///             RenewFlag = "NOTIFY_AND_AUTO_RENEW",
+    ///             TimeUnit = "m",
+    ///         },
+    ///         DiskName = "test",
+    ///         DiskSize = 20,
+    ///         DiskType = "CLOUD_SSD",
+    ///         Zone = "ap-hongkong-2",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Lighthouse/disk:Disk")]
-    public partial class Disk : Pulumi.CustomResource
+    public partial class Disk : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Automatically mount and initialize data disks.
@@ -143,7 +144,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Lighthouse
         }
     }
 
-    public sealed class DiskArgs : Pulumi.ResourceArgs
+    public sealed class DiskArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Automatically mount and initialize data disks.
@@ -202,9 +203,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Lighthouse
         public DiskArgs()
         {
         }
+        public static new DiskArgs Empty => new DiskArgs();
     }
 
-    public sealed class DiskState : Pulumi.ResourceArgs
+    public sealed class DiskState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Automatically mount and initialize data disks.
@@ -263,5 +265,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Lighthouse
         public DiskState()
         {
         }
+        public static new DiskState Empty => new DiskState();
     }
 }

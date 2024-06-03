@@ -15,150 +15,160 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Nat
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = Pulumi.Tencentcloud;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var zones = Tencentcloud.Availability.GetZonesByProduct.Invoke(new()
     ///     {
-    ///         var zones = Output.Create(Tencentcloud.Availability.GetZonesByProduct.InvokeAsync(new Tencentcloud.Availability.GetZonesByProductArgs
-    ///         {
-    ///             Product = "nat",
-    ///         }));
-    ///         var image = Output.Create(Tencentcloud.Images.GetInstance.InvokeAsync(new Tencentcloud.Images.GetInstanceArgs
-    ///         {
-    ///             OsName = "centos",
-    ///         }));
-    ///         var instanceTypes = zones.Apply(zones =&gt; Output.Create(Tencentcloud.Instance.GetTypes.InvokeAsync(new Tencentcloud.Instance.GetTypesArgs
-    ///         {
-    ///             Filters = 
-    ///             {
-    ///                 new Tencentcloud.Instance.Inputs.GetTypesFilterArgs
-    ///                 {
-    ///                     Name = "zone",
-    ///                     Values = 
-    ///                     {
-    ///                         zones.Zones?[0]?.Name,
-    ///                     },
-    ///                 },
-    ///                 new Tencentcloud.Instance.Inputs.GetTypesFilterArgs
-    ///                 {
-    ///                     Name = "instance-family",
-    ///                     Values = 
-    ///                     {
-    ///                         "S5",
-    ///                     },
-    ///                 },
-    ///             },
-    ///             CpuCoreCount = 2,
-    ///             ExcludeSoldOut = true,
-    ///         })));
-    ///         var vpc = new Tencentcloud.Vpc.Instance("vpc", new Tencentcloud.Vpc.InstanceArgs
-    ///         {
-    ///             CidrBlock = "10.0.0.0/16",
-    ///         });
-    ///         // Create route_table and entry
-    ///         var routeTable = new Tencentcloud.Route.Table("routeTable", new Tencentcloud.Route.TableArgs
-    ///         {
-    ///             VpcId = vpc.Id,
-    ///         });
-    ///         var subnet = new Tencentcloud.Subnet.Instance("subnet", new Tencentcloud.Subnet.InstanceArgs
-    ///         {
-    ///             VpcId = vpc.Id,
-    ///             CidrBlock = "10.0.0.0/16",
-    ///             AvailabilityZone = zones.Apply(zones =&gt; zones.Zones?[0]?.Name),
-    ///             RouteTableId = routeTable.Id,
-    ///         });
-    ///         var eipExample1 = new Tencentcloud.Eip.Instance("eipExample1", new Tencentcloud.Eip.InstanceArgs
-    ///         {
-    ///         });
-    ///         var eipExample2 = new Tencentcloud.Eip.Instance("eipExample2", new Tencentcloud.Eip.InstanceArgs
-    ///         {
-    ///         });
-    ///         // Create NAT Gateway
-    ///         var myNat = new Tencentcloud.Nat.Gateway("myNat", new Tencentcloud.Nat.GatewayArgs
-    ///         {
-    ///             VpcId = vpc.Id,
-    ///             MaxConcurrent = 3000000,
-    ///             Bandwidth = 500,
-    ///             AssignedEipSets = 
-    ///             {
-    ///                 eipExample1.PublicIp,
-    ///                 eipExample2.PublicIp,
-    ///             },
-    ///         });
-    ///         var routeEntry = new Tencentcloud.Route.TableEntry("routeEntry", new Tencentcloud.Route.TableEntryArgs
-    ///         {
-    ///             RouteTableId = routeTable.Id,
-    ///             DestinationCidrBlock = "10.0.0.0/8",
-    ///             NextType = "NAT",
-    ///             NextHub = myNat.Id,
-    ///         });
-    ///         // Subnet Nat gateway snat
-    ///         var subnetSnat = new Tencentcloud.Nat.GatewaySnat("subnetSnat", new Tencentcloud.Nat.GatewaySnatArgs
-    ///         {
-    ///             NatGatewayId = myNat.Id,
-    ///             ResourceType = "SUBNET",
-    ///             SubnetId = subnet.Id,
-    ///             SubnetCidrBlock = subnet.CidrBlock,
-    ///             Description = "terraform test",
-    ///             PublicIpAddrs = 
-    ///             {
-    ///                 eipExample1.PublicIp,
-    ///                 eipExample2.PublicIp,
-    ///             },
-    ///         });
-    ///         // Create instance
-    ///         var example = new Tencentcloud.Instance.Instance("example", new Tencentcloud.Instance.InstanceArgs
-    ///         {
-    ///             InstanceName = "tf_example",
-    ///             AvailabilityZone = zones.Apply(zones =&gt; zones.Zones?[0]?.Name),
-    ///             ImageId = image.Apply(image =&gt; image.Images?[0]?.ImageId),
-    ///             InstanceType = instanceTypes.Apply(instanceTypes =&gt; instanceTypes.InstanceTypes?[0]?.InstanceType),
-    ///             SystemDiskType = "CLOUD_PREMIUM",
-    ///             SystemDiskSize = 50,
-    ///             Hostname = "user",
-    ///             ProjectId = 0,
-    ///             VpcId = vpc.Id,
-    ///             SubnetId = subnet.Id,
-    ///         });
-    ///         // NetWorkInterface Nat gateway snat
-    ///         var myInstanceSnat = new Tencentcloud.Nat.GatewaySnat("myInstanceSnat", new Tencentcloud.Nat.GatewaySnatArgs
-    ///         {
-    ///             NatGatewayId = myNat.Id,
-    ///             ResourceType = "NETWORKINTERFACE",
-    ///             InstanceId = example.Id,
-    ///             InstancePrivateIpAddr = example.PrivateIp,
-    ///             Description = "terraform test",
-    ///             PublicIpAddrs = 
-    ///             {
-    ///                 eipExample1.PublicIp,
-    ///             },
-    ///         });
-    ///     }
+    ///         Product = "nat",
+    ///     });
     /// 
-    /// }
+    ///     var image = Tencentcloud.Images.GetInstance.Invoke(new()
+    ///     {
+    ///         OsName = "centos",
+    ///     });
+    /// 
+    ///     var instanceTypes = Tencentcloud.Instance.GetTypes.Invoke(new()
+    ///     {
+    ///         Filters = new[]
+    ///         {
+    ///             new Tencentcloud.Instance.Inputs.GetTypesFilterInputArgs
+    ///             {
+    ///                 Name = "zone",
+    ///                 Values = new[]
+    ///                 {
+    ///                     zones.Apply(getZonesByProductResult =&gt; getZonesByProductResult.Zones[0]?.Name),
+    ///                 },
+    ///             },
+    ///             new Tencentcloud.Instance.Inputs.GetTypesFilterInputArgs
+    ///             {
+    ///                 Name = "instance-family",
+    ///                 Values = new[]
+    ///                 {
+    ///                     "S5",
+    ///                 },
+    ///             },
+    ///         },
+    ///         CpuCoreCount = 2,
+    ///         ExcludeSoldOut = true,
+    ///     });
+    /// 
+    ///     var vpc = new Tencentcloud.Vpc.Instance("vpc", new()
+    ///     {
+    ///         CidrBlock = "10.0.0.0/16",
+    ///     });
+    /// 
+    ///     // Create route_table and entry
+    ///     var routeTable = new Tencentcloud.Route.Table("routeTable", new()
+    ///     {
+    ///         VpcId = vpc.Id,
+    ///     });
+    /// 
+    ///     var subnet = new Tencentcloud.Subnet.Instance("subnet", new()
+    ///     {
+    ///         VpcId = vpc.Id,
+    ///         CidrBlock = "10.0.0.0/16",
+    ///         AvailabilityZone = zones.Apply(getZonesByProductResult =&gt; getZonesByProductResult.Zones[0]?.Name),
+    ///         RouteTableId = routeTable.Id,
+    ///     });
+    /// 
+    ///     var eipExample1 = new Tencentcloud.Eip.Instance("eipExample1");
+    /// 
+    ///     var eipExample2 = new Tencentcloud.Eip.Instance("eipExample2");
+    /// 
+    ///     // Create NAT Gateway
+    ///     var myNat = new Tencentcloud.Nat.Gateway("myNat", new()
+    ///     {
+    ///         VpcId = vpc.Id,
+    ///         MaxConcurrent = 3000000,
+    ///         Bandwidth = 500,
+    ///         AssignedEipSets = new[]
+    ///         {
+    ///             eipExample1.PublicIp,
+    ///             eipExample2.PublicIp,
+    ///         },
+    ///     });
+    /// 
+    ///     var routeEntry = new Tencentcloud.Route.TableEntry("routeEntry", new()
+    ///     {
+    ///         RouteTableId = routeTable.Id,
+    ///         DestinationCidrBlock = "10.0.0.0/8",
+    ///         NextType = "NAT",
+    ///         NextHub = myNat.Id,
+    ///     });
+    /// 
+    ///     // Subnet Nat gateway snat
+    ///     var subnetSnat = new Tencentcloud.Nat.GatewaySnat("subnetSnat", new()
+    ///     {
+    ///         NatGatewayId = myNat.Id,
+    ///         ResourceType = "SUBNET",
+    ///         SubnetId = subnet.Id,
+    ///         SubnetCidrBlock = subnet.CidrBlock,
+    ///         Description = "terraform test",
+    ///         PublicIpAddrs = new[]
+    ///         {
+    ///             eipExample1.PublicIp,
+    ///             eipExample2.PublicIp,
+    ///         },
+    ///     });
+    /// 
+    ///     // Create instance
+    ///     var example = new Tencentcloud.Instance.Instance("example", new()
+    ///     {
+    ///         InstanceName = "tf_example",
+    ///         AvailabilityZone = zones.Apply(getZonesByProductResult =&gt; getZonesByProductResult.Zones[0]?.Name),
+    ///         ImageId = image.Apply(getInstanceResult =&gt; getInstanceResult.Images[0]?.ImageId),
+    ///         InstanceType = instanceTypes.Apply(getTypesResult =&gt; getTypesResult.InstanceTypes[0]?.InstanceType),
+    ///         SystemDiskType = "CLOUD_PREMIUM",
+    ///         SystemDiskSize = 50,
+    ///         Hostname = "user",
+    ///         ProjectId = 0,
+    ///         VpcId = vpc.Id,
+    ///         SubnetId = subnet.Id,
+    ///     });
+    /// 
+    ///     // NetWorkInterface Nat gateway snat
+    ///     var myInstanceSnat = new Tencentcloud.Nat.GatewaySnat("myInstanceSnat", new()
+    ///     {
+    ///         NatGatewayId = myNat.Id,
+    ///         ResourceType = "NETWORKINTERFACE",
+    ///         InstanceId = example.Id,
+    ///         InstancePrivateIpAddr = example.PrivateIp,
+    ///         Description = "terraform test",
+    ///         PublicIpAddrs = new[]
+    ///         {
+    ///             eipExample1.PublicIp,
+    ///         },
+    ///     });
+    /// 
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
-    /// VPN gateway route can be imported using the id, the id format must be '{nat_gateway_id}#{resource_id}', resource_id range `subnet_id`, `instance_id`, e.g. SUBNET SNat
+    /// VPN gateway route can be imported using the id, the id format must be '{nat_gateway_id}#{resource_id}', resource_id range `subnet_id`, `instance_id`, e.g.
+    /// 
+    /// SUBNET SNat
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Nat/gatewaySnat:GatewaySnat my_snat nat-r4ip1cwt#subnet-2ap74y35
+    /// $ pulumi import tencentcloud:Nat/gatewaySnat:GatewaySnat my_snat nat-r4ip1cwt#subnet-2ap74y35
     /// ```
-    /// 
-    ///  NETWORKINTERFACT SNat
+    /// NETWORKINTERFACT SNat
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Nat/gatewaySnat:GatewaySnat my_snat nat-r4ip1cwt#ins-da412f5a
+    /// $ pulumi import tencentcloud:Nat/gatewaySnat:GatewaySnat my_snat nat-r4ip1cwt#ins-da412f5a
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Nat/gatewaySnat:GatewaySnat")]
-    public partial class GatewaySnat : Pulumi.CustomResource
+    public partial class GatewaySnat : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Create time.
@@ -265,7 +275,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Nat
         }
     }
 
-    public sealed class GatewaySnatArgs : Pulumi.ResourceArgs
+    public sealed class GatewaySnatArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Description.
@@ -324,9 +334,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Nat
         public GatewaySnatArgs()
         {
         }
+        public static new GatewaySnatArgs Empty => new GatewaySnatArgs();
     }
 
-    public sealed class GatewaySnatState : Pulumi.ResourceArgs
+    public sealed class GatewaySnatState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Create time.
@@ -397,5 +408,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Nat
         public GatewaySnatState()
         {
         }
+        public static new GatewaySnatState Empty => new GatewaySnatState();
     }
 }

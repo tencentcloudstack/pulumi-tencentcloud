@@ -15,35 +15,36 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kms
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var example = new Tencentcloud.Kms.CloudResourceAttachment("example", new()
     ///     {
-    ///         var example = new Tencentcloud.Kms.CloudResourceAttachment("example", new Tencentcloud.Kms.CloudResourceAttachmentArgs
-    ///         {
-    ///             KeyId = "72688f39-1fe8-11ee-9f1a-525400cf25a4",
-    ///             ProductId = "mysql",
-    ///             ResourceId = "cdb-fitq5t9h",
-    ///         });
-    ///     }
+    ///         KeyId = "72688f39-1fe8-11ee-9f1a-525400cf25a4",
+    ///         ProductId = "mysql",
+    ///         ResourceId = "cdb-fitq5t9h",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// kms cloud_resource_attachment can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Kms/cloudResourceAttachment:CloudResourceAttachment example 72688f39-1fe8-11ee-9f1a-525400cf25a4#mysql#cdb-fitq5t9h
+    /// $ pulumi import tencentcloud:Kms/cloudResourceAttachment:CloudResourceAttachment example 72688f39-1fe8-11ee-9f1a-525400cf25a4#mysql#cdb-fitq5t9h
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Kms/cloudResourceAttachment:CloudResourceAttachment")]
-    public partial class CloudResourceAttachment : Pulumi.CustomResource
+    public partial class CloudResourceAttachment : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Alias.
@@ -138,7 +139,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kms
         }
     }
 
-    public sealed class CloudResourceAttachmentArgs : Pulumi.ResourceArgs
+    public sealed class CloudResourceAttachmentArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// CMK unique identifier.
@@ -161,9 +162,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kms
         public CloudResourceAttachmentArgs()
         {
         }
+        public static new CloudResourceAttachmentArgs Empty => new CloudResourceAttachmentArgs();
     }
 
-    public sealed class CloudResourceAttachmentState : Pulumi.ResourceArgs
+    public sealed class CloudResourceAttachmentState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Alias.
@@ -216,5 +218,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kms
         public CloudResourceAttachmentState()
         {
         }
+        public static new CloudResourceAttachmentState Empty => new CloudResourceAttachmentState();
     }
 }

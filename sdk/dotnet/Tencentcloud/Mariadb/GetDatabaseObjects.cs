@@ -15,66 +15,60 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mariadb
         /// <summary>
         /// Use this data source to query detailed information of mariadb database_objects
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var databaseObjects = Tencentcloud.Mariadb.GetDatabaseObjects.Invoke(new()
         ///     {
-        ///         var databaseObjects = Output.Create(Tencentcloud.Mariadb.GetDatabaseObjects.InvokeAsync(new Tencentcloud.Mariadb.GetDatabaseObjectsArgs
-        ///         {
-        ///             DbName = "mysql",
-        ///             InstanceId = "tdsql-n2fw7pn3",
-        ///         }));
-        ///     }
+        ///         DbName = "mysql",
+        ///         InstanceId = "tdsql-n2fw7pn3",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetDatabaseObjectsResult> InvokeAsync(GetDatabaseObjectsArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetDatabaseObjectsResult>("tencentcloud:Mariadb/getDatabaseObjects:getDatabaseObjects", args ?? new GetDatabaseObjectsArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetDatabaseObjectsResult>("tencentcloud:Mariadb/getDatabaseObjects:getDatabaseObjects", args ?? new GetDatabaseObjectsArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of mariadb database_objects
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var databaseObjects = Tencentcloud.Mariadb.GetDatabaseObjects.Invoke(new()
         ///     {
-        ///         var databaseObjects = Output.Create(Tencentcloud.Mariadb.GetDatabaseObjects.InvokeAsync(new Tencentcloud.Mariadb.GetDatabaseObjectsArgs
-        ///         {
-        ///             DbName = "mysql",
-        ///             InstanceId = "tdsql-n2fw7pn3",
-        ///         }));
-        ///     }
+        ///         DbName = "mysql",
+        ///         InstanceId = "tdsql-n2fw7pn3",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetDatabaseObjectsResult> Invoke(GetDatabaseObjectsInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetDatabaseObjectsResult>("tencentcloud:Mariadb/getDatabaseObjects:getDatabaseObjects", args ?? new GetDatabaseObjectsInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetDatabaseObjectsResult>("tencentcloud:Mariadb/getDatabaseObjects:getDatabaseObjects", args ?? new GetDatabaseObjectsInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetDatabaseObjectsArgs : Pulumi.InvokeArgs
+    public sealed class GetDatabaseObjectsArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// database name.
@@ -97,9 +91,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mariadb
         public GetDatabaseObjectsArgs()
         {
         }
+        public static new GetDatabaseObjectsArgs Empty => new GetDatabaseObjectsArgs();
     }
 
-    public sealed class GetDatabaseObjectsInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetDatabaseObjectsInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// database name.
@@ -122,6 +117,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mariadb
         public GetDatabaseObjectsInvokeArgs()
         {
         }
+        public static new GetDatabaseObjectsInvokeArgs Empty => new GetDatabaseObjectsInvokeArgs();
     }
 
 

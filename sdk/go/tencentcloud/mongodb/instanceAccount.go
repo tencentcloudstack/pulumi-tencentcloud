@@ -7,45 +7,50 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a mongodb instanceAccount
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Mongodb"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Mongodb"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Mongodb"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Mongodb.NewInstanceAccount(ctx, "instanceAccount", &Mongodb.InstanceAccountArgs{
-// 			AuthRoles: mongodb.InstanceAccountAuthRoleArray{
-// 				&mongodb.InstanceAccountAuthRoleArgs{
-// 					Mask:      pulumi.Int(0),
-// 					Namespace: pulumi.String("*"),
-// 				},
-// 			},
-// 			InstanceId:        pulumi.String("cmgo-lxaz2c9b"),
-// 			MongoUserPassword: pulumi.String("xxxxxxxxx"),
-// 			Password:          pulumi.String("xxxxxxxx"),
-// 			UserDesc:          pulumi.String("test account"),
-// 			UserName:          pulumi.String("test_account"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Mongodb.NewInstanceAccount(ctx, "instanceAccount", &Mongodb.InstanceAccountArgs{
+//				AuthRoles: mongodb.InstanceAccountAuthRoleArray{
+//					&mongodb.InstanceAccountAuthRoleArgs{
+//						Mask:      pulumi.Int(0),
+//						Namespace: pulumi.String("*"),
+//					},
+//				},
+//				InstanceId:        pulumi.String("cmgo-lxaz2c9b"),
+//				MongoUserPassword: pulumi.String("xxxxxxxxx"),
+//				Password:          pulumi.String("xxxxxxxx"),
+//				UserDesc:          pulumi.String("test account"),
+//				UserName:          pulumi.String("test_account"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 type InstanceAccount struct {
 	pulumi.CustomResourceState
 
@@ -54,9 +59,9 @@ type InstanceAccount struct {
 	// Instance ID, the format is: cmgo-9d0p6umb.Same as the instance ID displayed in the cloud database console page.
 	InstanceId pulumi.StringOutput `pulumi:"instanceId"`
 	// The password corresponding to the mongouser account. mongouser is the system default account, which is the password set when creating an instance.
-	MongoUserPassword pulumi.StringOutput `pulumi:"mongoUserPassword"`
+	MongoUserPassword pulumi.StringPtrOutput `pulumi:"mongoUserPassword"`
 	// New account password. Password complexity requirements are as follows: character length range [8,32]. Contains at least letters, numbers and special characters (exclamation point!, at@, pound sign #, percent sign %, caret ^, asterisk *, parentheses (), underscore _).
-	Password pulumi.StringOutput `pulumi:"password"`
+	Password pulumi.StringPtrOutput `pulumi:"password"`
 	// Account remarks.
 	UserDesc pulumi.StringPtrOutput `pulumi:"userDesc"`
 	// The new account name. Its format requirements are as follows: character range [1,32]. Characters in the range of [A,Z], [a,z], [1,9] as well as underscore _ and dash - can be input.
@@ -73,16 +78,21 @@ func NewInstanceAccount(ctx *pulumi.Context,
 	if args.InstanceId == nil {
 		return nil, errors.New("invalid value for required argument 'InstanceId'")
 	}
-	if args.MongoUserPassword == nil {
-		return nil, errors.New("invalid value for required argument 'MongoUserPassword'")
-	}
-	if args.Password == nil {
-		return nil, errors.New("invalid value for required argument 'Password'")
-	}
 	if args.UserName == nil {
 		return nil, errors.New("invalid value for required argument 'UserName'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	if args.MongoUserPassword != nil {
+		args.MongoUserPassword = pulumi.ToSecret(args.MongoUserPassword).(pulumi.StringPtrInput)
+	}
+	if args.Password != nil {
+		args.Password = pulumi.ToSecret(args.Password).(pulumi.StringPtrInput)
+	}
+	secrets := pulumi.AdditionalSecretOutputs([]string{
+		"mongoUserPassword",
+		"password",
+	})
+	opts = append(opts, secrets)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource InstanceAccount
 	err := ctx.RegisterResource("tencentcloud:Mongodb/instanceAccount:InstanceAccount", name, args, &resource, opts...)
 	if err != nil {
@@ -144,9 +154,9 @@ type instanceAccountArgs struct {
 	// Instance ID, the format is: cmgo-9d0p6umb.Same as the instance ID displayed in the cloud database console page.
 	InstanceId string `pulumi:"instanceId"`
 	// The password corresponding to the mongouser account. mongouser is the system default account, which is the password set when creating an instance.
-	MongoUserPassword string `pulumi:"mongoUserPassword"`
+	MongoUserPassword *string `pulumi:"mongoUserPassword"`
 	// New account password. Password complexity requirements are as follows: character length range [8,32]. Contains at least letters, numbers and special characters (exclamation point!, at@, pound sign #, percent sign %, caret ^, asterisk *, parentheses (), underscore _).
-	Password string `pulumi:"password"`
+	Password *string `pulumi:"password"`
 	// Account remarks.
 	UserDesc *string `pulumi:"userDesc"`
 	// The new account name. Its format requirements are as follows: character range [1,32]. Characters in the range of [A,Z], [a,z], [1,9] as well as underscore _ and dash - can be input.
@@ -160,9 +170,9 @@ type InstanceAccountArgs struct {
 	// Instance ID, the format is: cmgo-9d0p6umb.Same as the instance ID displayed in the cloud database console page.
 	InstanceId pulumi.StringInput
 	// The password corresponding to the mongouser account. mongouser is the system default account, which is the password set when creating an instance.
-	MongoUserPassword pulumi.StringInput
+	MongoUserPassword pulumi.StringPtrInput
 	// New account password. Password complexity requirements are as follows: character length range [8,32]. Contains at least letters, numbers and special characters (exclamation point!, at@, pound sign #, percent sign %, caret ^, asterisk *, parentheses (), underscore _).
-	Password pulumi.StringInput
+	Password pulumi.StringPtrInput
 	// Account remarks.
 	UserDesc pulumi.StringPtrInput
 	// The new account name. Its format requirements are as follows: character range [1,32]. Characters in the range of [A,Z], [a,z], [1,9] as well as underscore _ and dash - can be input.
@@ -195,7 +205,7 @@ func (i *InstanceAccount) ToInstanceAccountOutputWithContext(ctx context.Context
 // InstanceAccountArrayInput is an input type that accepts InstanceAccountArray and InstanceAccountArrayOutput values.
 // You can construct a concrete instance of `InstanceAccountArrayInput` via:
 //
-//          InstanceAccountArray{ InstanceAccountArgs{...} }
+//	InstanceAccountArray{ InstanceAccountArgs{...} }
 type InstanceAccountArrayInput interface {
 	pulumi.Input
 
@@ -220,7 +230,7 @@ func (i InstanceAccountArray) ToInstanceAccountArrayOutputWithContext(ctx contex
 // InstanceAccountMapInput is an input type that accepts InstanceAccountMap and InstanceAccountMapOutput values.
 // You can construct a concrete instance of `InstanceAccountMapInput` via:
 //
-//          InstanceAccountMap{ "key": InstanceAccountArgs{...} }
+//	InstanceAccountMap{ "key": InstanceAccountArgs{...} }
 type InstanceAccountMapInput interface {
 	pulumi.Input
 
@@ -267,13 +277,13 @@ func (o InstanceAccountOutput) InstanceId() pulumi.StringOutput {
 }
 
 // The password corresponding to the mongouser account. mongouser is the system default account, which is the password set when creating an instance.
-func (o InstanceAccountOutput) MongoUserPassword() pulumi.StringOutput {
-	return o.ApplyT(func(v *InstanceAccount) pulumi.StringOutput { return v.MongoUserPassword }).(pulumi.StringOutput)
+func (o InstanceAccountOutput) MongoUserPassword() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *InstanceAccount) pulumi.StringPtrOutput { return v.MongoUserPassword }).(pulumi.StringPtrOutput)
 }
 
 // New account password. Password complexity requirements are as follows: character length range [8,32]. Contains at least letters, numbers and special characters (exclamation point!, at@, pound sign #, percent sign %, caret ^, asterisk *, parentheses (), underscore _).
-func (o InstanceAccountOutput) Password() pulumi.StringOutput {
-	return o.ApplyT(func(v *InstanceAccount) pulumi.StringOutput { return v.Password }).(pulumi.StringOutput)
+func (o InstanceAccountOutput) Password() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *InstanceAccount) pulumi.StringPtrOutput { return v.Password }).(pulumi.StringPtrOutput)
 }
 
 // Account remarks.

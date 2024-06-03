@@ -5,13 +5,21 @@ import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
 // Export members:
-export * from "./getMachinesSimple";
-export * from "./licenseBindAttachment";
-export * from "./licenseOrder";
+export { GetMachinesSimpleArgs, GetMachinesSimpleResult, GetMachinesSimpleOutputArgs } from "./getMachinesSimple";
+export const getMachinesSimple: typeof import("./getMachinesSimple").getMachinesSimple = null as any;
+export const getMachinesSimpleOutput: typeof import("./getMachinesSimple").getMachinesSimpleOutput = null as any;
+utilities.lazyLoad(exports, ["getMachinesSimple","getMachinesSimpleOutput"], () => require("./getMachinesSimple"));
 
-// Import resources to register:
-import { LicenseBindAttachment } from "./licenseBindAttachment";
-import { LicenseOrder } from "./licenseOrder";
+export { LicenseBindAttachmentArgs, LicenseBindAttachmentState } from "./licenseBindAttachment";
+export type LicenseBindAttachment = import("./licenseBindAttachment").LicenseBindAttachment;
+export const LicenseBindAttachment: typeof import("./licenseBindAttachment").LicenseBindAttachment = null as any;
+utilities.lazyLoad(exports, ["LicenseBindAttachment"], () => require("./licenseBindAttachment"));
+
+export { LicenseOrderArgs, LicenseOrderState } from "./licenseOrder";
+export type LicenseOrder = import("./licenseOrder").LicenseOrder;
+export const LicenseOrder: typeof import("./licenseOrder").LicenseOrder = null as any;
+utilities.lazyLoad(exports, ["LicenseOrder"], () => require("./licenseOrder"));
+
 
 const _module = {
     version: utilities.getVersion(),

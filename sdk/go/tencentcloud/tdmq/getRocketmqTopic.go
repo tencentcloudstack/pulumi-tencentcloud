@@ -8,59 +8,64 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Use this data source to query detailed information of tdmqRocketmq topic
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Tdmq"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tdmq"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tdmq"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		exampleRocketmqCluster, err := Tdmq.NewRocketmqCluster(ctx, "exampleRocketmqCluster", &Tdmq.RocketmqClusterArgs{
-// 			ClusterName: pulumi.String("tf_example"),
-// 			Remark:      pulumi.String("remark."),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		exampleRocketmqNamespace, err := Tdmq.NewRocketmqNamespace(ctx, "exampleRocketmqNamespace", &Tdmq.RocketmqNamespaceArgs{
-// 			ClusterId:     exampleRocketmqCluster.ClusterId,
-// 			NamespaceName: pulumi.String("tf_example"),
-// 			Remark:        pulumi.String("remark."),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_ = Tdmq.GetRocketmqTopicOutput(ctx, tdmq.GetRocketmqTopicOutputArgs{
-// 			ClusterId:   exampleRocketmqCluster.ClusterId,
-// 			NamespaceId: exampleRocketmqNamespace.NamespaceName,
-// 			FilterName:  exampleTdmq / rocketmqTopicRocketmqTopic.TopicName,
-// 		}, nil)
-// 		_, err = Tdmq.NewRocketmqTopic(ctx, "exampleTdmq/rocketmqTopicRocketmqTopic", &Tdmq.RocketmqTopicArgs{
-// 			TopicName:     pulumi.String("tf_example"),
-// 			NamespaceName: exampleRocketmqNamespace.NamespaceName,
-// 			ClusterId:     exampleRocketmqCluster.ClusterId,
-// 			Type:          pulumi.String("Normal"),
-// 			Remark:        pulumi.String("remark."),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			exampleRocketmqCluster, err := Tdmq.NewRocketmqCluster(ctx, "exampleRocketmqCluster", &Tdmq.RocketmqClusterArgs{
+//				ClusterName: pulumi.String("tf_example"),
+//				Remark:      pulumi.String("remark."),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			exampleRocketmqNamespace, err := Tdmq.NewRocketmqNamespace(ctx, "exampleRocketmqNamespace", &Tdmq.RocketmqNamespaceArgs{
+//				ClusterId:     exampleRocketmqCluster.ClusterId,
+//				NamespaceName: pulumi.String("tf_example"),
+//				Remark:        pulumi.String("remark."),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_ = Tdmq.GetRocketmqTopicOutput(ctx, tdmq.GetRocketmqTopicOutputArgs{
+//				ClusterId:   exampleRocketmqCluster.ClusterId,
+//				NamespaceId: exampleRocketmqNamespace.NamespaceName,
+//				FilterName:  exampleTdmq / rocketmqTopicRocketmqTopic.TopicName,
+//			}, nil)
+//			_, err = Tdmq.NewRocketmqTopic(ctx, "exampleTdmq/rocketmqTopicRocketmqTopic", &Tdmq.RocketmqTopicArgs{
+//				TopicName:     pulumi.String("tf_example"),
+//				NamespaceName: exampleRocketmqNamespace.NamespaceName,
+//				ClusterId:     exampleRocketmqCluster.ClusterId,
+//				Type:          pulumi.String("Normal"),
+//				Remark:        pulumi.String("remark."),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 func LookupRocketmqTopic(ctx *pulumi.Context, args *LookupRocketmqTopicArgs, opts ...pulumi.InvokeOption) (*LookupRocketmqTopicResult, error) {
-	opts = pkgInvokeDefaultOpts(opts)
+	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv LookupRocketmqTopicResult
 	err := ctx.Invoke("tencentcloud:Tdmq/getRocketmqTopic:getRocketmqTopic", args, &rv, opts...)
 	if err != nil {

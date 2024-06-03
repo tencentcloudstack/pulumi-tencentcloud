@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes.Inputs
 {
 
-    public sealed class ClusterMasterConfigDataDiskArgs : Pulumi.ResourceArgs
+    public sealed class ClusterMasterConfigDataDiskArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Indicate whether to auto format and mount or not. Default is `false`.
@@ -70,5 +70,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes.Inputs
         public ClusterMasterConfigDataDiskArgs()
         {
         }
+        public static new ClusterMasterConfigDataDiskArgs Empty => new ClusterMasterConfigDataDiskArgs();
     }
 }

@@ -7,42 +7,48 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a clb instanceMixIpTargetConfig
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Clb"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Clb"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Clb.NewInstanceMixIpTargetConfig(ctx, "instanceMixIpTargetConfig", &Clb.InstanceMixIpTargetConfigArgs{
-// 			LoadBalancerId: pulumi.String("lb-5dnrkgry"),
-// 			MixIpTarget:    pulumi.Bool(false),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Clb.NewInstanceMixIpTargetConfig(ctx, "instanceMixIpTargetConfig", &Clb.InstanceMixIpTargetConfigArgs{
+//				LoadBalancerId: pulumi.String("lb-5dnrkgry"),
+//				MixIpTarget:    pulumi.Bool(false),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // clb instance_mix_ip_target_config can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Clb/instanceMixIpTargetConfig:InstanceMixIpTargetConfig instance_mix_ip_target_config instance_id
+// $ pulumi import tencentcloud:Clb/instanceMixIpTargetConfig:InstanceMixIpTargetConfig instance_mix_ip_target_config instance_id
 // ```
 type InstanceMixIpTargetConfig struct {
 	pulumi.CustomResourceState
@@ -66,7 +72,7 @@ func NewInstanceMixIpTargetConfig(ctx *pulumi.Context,
 	if args.MixIpTarget == nil {
 		return nil, errors.New("invalid value for required argument 'MixIpTarget'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource InstanceMixIpTargetConfig
 	err := ctx.RegisterResource("tencentcloud:Clb/instanceMixIpTargetConfig:InstanceMixIpTargetConfig", name, args, &resource, opts...)
 	if err != nil {
@@ -147,7 +153,7 @@ func (i *InstanceMixIpTargetConfig) ToInstanceMixIpTargetConfigOutputWithContext
 // InstanceMixIpTargetConfigArrayInput is an input type that accepts InstanceMixIpTargetConfigArray and InstanceMixIpTargetConfigArrayOutput values.
 // You can construct a concrete instance of `InstanceMixIpTargetConfigArrayInput` via:
 //
-//          InstanceMixIpTargetConfigArray{ InstanceMixIpTargetConfigArgs{...} }
+//	InstanceMixIpTargetConfigArray{ InstanceMixIpTargetConfigArgs{...} }
 type InstanceMixIpTargetConfigArrayInput interface {
 	pulumi.Input
 
@@ -172,7 +178,7 @@ func (i InstanceMixIpTargetConfigArray) ToInstanceMixIpTargetConfigArrayOutputWi
 // InstanceMixIpTargetConfigMapInput is an input type that accepts InstanceMixIpTargetConfigMap and InstanceMixIpTargetConfigMapOutput values.
 // You can construct a concrete instance of `InstanceMixIpTargetConfigMapInput` via:
 //
-//          InstanceMixIpTargetConfigMap{ "key": InstanceMixIpTargetConfigArgs{...} }
+//	InstanceMixIpTargetConfigMap{ "key": InstanceMixIpTargetConfigArgs{...} }
 type InstanceMixIpTargetConfigMapInput interface {
 	pulumi.Input
 

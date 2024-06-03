@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcm.Inputs
 {
 
-    public sealed class AccessLogConfigClsGetArgs : Pulumi.ResourceArgs
+    public sealed class AccessLogConfigClsGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Whether enable CLS.
@@ -34,5 +34,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcm.Inputs
         public AccessLogConfigClsGetArgs()
         {
         }
+        public static new AccessLogConfigClsGetArgs Empty => new AccessLogConfigClsGetArgs();
     }
 }

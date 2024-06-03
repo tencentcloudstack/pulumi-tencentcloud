@@ -9,15 +9,17 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const operateContainerGroup = new tencentcloud.Tsf.OperateContainerGroup("operate_container_group", {
+ * const operateContainerGroup = new tencentcloud.tsf.OperateContainerGroup("operateContainerGroup", {
  *     groupId: "group-ynd95rea",
  *     operate: "stop",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export class OperateContainerGroup extends pulumi.CustomResource {
     /**

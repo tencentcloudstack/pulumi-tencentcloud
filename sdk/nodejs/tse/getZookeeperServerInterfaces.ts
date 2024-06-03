@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,21 +11,20 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const zookeeperServerInterfaces = pulumi.output(tencentcloud.Tse.getZookeeperServerInterfaces({
+ * const zookeeperServerInterfaces = tencentcloud.Tse.getZookeeperServerInterfaces({
  *     instanceId: "ins-7eb7eea7",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getZookeeperServerInterfaces(args: GetZookeeperServerInterfacesArgs, opts?: pulumi.InvokeOptions): Promise<GetZookeeperServerInterfacesResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Tse/getZookeeperServerInterfaces:getZookeeperServerInterfaces", {
         "instanceId": args.instanceId,
         "resultOutputFile": args.resultOutputFile,
@@ -60,9 +60,24 @@ export interface GetZookeeperServerInterfacesResult {
     readonly instanceId: string;
     readonly resultOutputFile?: string;
 }
-
+/**
+ * Use this data source to query detailed information of tse zookeeperServerInterfaces
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const zookeeperServerInterfaces = tencentcloud.Tse.getZookeeperServerInterfaces({
+ *     instanceId: "ins-7eb7eea7",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getZookeeperServerInterfacesOutput(args: GetZookeeperServerInterfacesOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetZookeeperServerInterfacesResult> {
-    return pulumi.output(args).apply(a => getZookeeperServerInterfaces(a, opts))
+    return pulumi.output(args).apply((a: any) => getZookeeperServerInterfaces(a, opts))
 }
 
 /**

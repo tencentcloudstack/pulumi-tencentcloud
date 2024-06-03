@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -17,7 +18,7 @@ import * as utilities from "../utilities";
  * vpc flow_log can be imported using the flow log Id combine vpc Id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Vpc/flowLog:FlowLog flow_log flow_log_id fl-xxxx1234#vpc-yyyy5678
+ * $ pulumi import tencentcloud:Vpc/flowLog:FlowLog flow_log flow_log_id fl-xxxx1234#vpc-yyyy5678
  * ```
  */
 export class FlowLog extends pulumi.CustomResource {

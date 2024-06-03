@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps.Inputs
 {
 
-    public sealed class ProcessMediaOperationMediaProcessTaskTranscodeTaskSetOverrideParameterAddOnSubtitleSubtitleArgs : Pulumi.ResourceArgs
+    public sealed class ProcessMediaOperationMediaProcessTaskTranscodeTaskSetOverrideParameterAddOnSubtitleSubtitleArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// The information of the COS object to process. This parameter is valid and required when `Type` is `COS`.
@@ -40,5 +40,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps.Inputs
         public ProcessMediaOperationMediaProcessTaskTranscodeTaskSetOverrideParameterAddOnSubtitleSubtitleArgs()
         {
         }
+        public static new ProcessMediaOperationMediaProcessTaskTranscodeTaskSetOverrideParameterAddOnSubtitleSubtitleArgs Empty => new ProcessMediaOperationMediaProcessTaskTranscodeTaskSetOverrideParameterAddOnSubtitleSubtitleArgs();
     }
 }

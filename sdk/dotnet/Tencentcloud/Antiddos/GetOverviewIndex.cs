@@ -15,66 +15,60 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Antiddos
         /// <summary>
         /// Use this data source to query detailed information of antiddos overview index
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var overviewIndex = Tencentcloud.Antiddos.GetOverviewIndex.Invoke(new()
         ///     {
-        ///         var overviewIndex = Output.Create(Tencentcloud.Antiddos.GetOverviewIndex.InvokeAsync(new Tencentcloud.Antiddos.GetOverviewIndexArgs
-        ///         {
-        ///             EndTime = "2023-11-21 12:32:12",
-        ///             StartTime = "2023-11-20 12:32:12",
-        ///         }));
-        ///     }
+        ///         EndTime = "2023-11-21 12:32:12",
+        ///         StartTime = "2023-11-20 12:32:12",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetOverviewIndexResult> InvokeAsync(GetOverviewIndexArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetOverviewIndexResult>("tencentcloud:Antiddos/getOverviewIndex:getOverviewIndex", args ?? new GetOverviewIndexArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetOverviewIndexResult>("tencentcloud:Antiddos/getOverviewIndex:getOverviewIndex", args ?? new GetOverviewIndexArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of antiddos overview index
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var overviewIndex = Tencentcloud.Antiddos.GetOverviewIndex.Invoke(new()
         ///     {
-        ///         var overviewIndex = Output.Create(Tencentcloud.Antiddos.GetOverviewIndex.InvokeAsync(new Tencentcloud.Antiddos.GetOverviewIndexArgs
-        ///         {
-        ///             EndTime = "2023-11-21 12:32:12",
-        ///             StartTime = "2023-11-20 12:32:12",
-        ///         }));
-        ///     }
+        ///         EndTime = "2023-11-21 12:32:12",
+        ///         StartTime = "2023-11-20 12:32:12",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetOverviewIndexResult> Invoke(GetOverviewIndexInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetOverviewIndexResult>("tencentcloud:Antiddos/getOverviewIndex:getOverviewIndex", args ?? new GetOverviewIndexInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetOverviewIndexResult>("tencentcloud:Antiddos/getOverviewIndex:getOverviewIndex", args ?? new GetOverviewIndexInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetOverviewIndexArgs : Pulumi.InvokeArgs
+    public sealed class GetOverviewIndexArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// EndTime.
@@ -97,9 +91,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Antiddos
         public GetOverviewIndexArgs()
         {
         }
+        public static new GetOverviewIndexArgs Empty => new GetOverviewIndexArgs();
     }
 
-    public sealed class GetOverviewIndexInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetOverviewIndexInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// EndTime.
@@ -122,6 +117,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Antiddos
         public GetOverviewIndexInvokeArgs()
         {
         }
+        public static new GetOverviewIndexInvokeArgs Empty => new GetOverviewIndexInvokeArgs();
     }
 
 

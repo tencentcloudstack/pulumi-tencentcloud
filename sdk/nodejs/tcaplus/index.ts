@@ -5,20 +5,46 @@ import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
 // Export members:
-export * from "./cluster";
-export * from "./getClusters";
-export * from "./getIdls";
-export * from "./getTablegroups";
-export * from "./getTables";
-export * from "./idl";
-export * from "./table";
-export * from "./tablegroup";
+export { ClusterArgs, ClusterState } from "./cluster";
+export type Cluster = import("./cluster").Cluster;
+export const Cluster: typeof import("./cluster").Cluster = null as any;
+utilities.lazyLoad(exports, ["Cluster"], () => require("./cluster"));
 
-// Import resources to register:
-import { Cluster } from "./cluster";
-import { Idl } from "./idl";
-import { Table } from "./table";
-import { Tablegroup } from "./tablegroup";
+export { GetClustersArgs, GetClustersResult, GetClustersOutputArgs } from "./getClusters";
+export const getClusters: typeof import("./getClusters").getClusters = null as any;
+export const getClustersOutput: typeof import("./getClusters").getClustersOutput = null as any;
+utilities.lazyLoad(exports, ["getClusters","getClustersOutput"], () => require("./getClusters"));
+
+export { GetIdlsArgs, GetIdlsResult, GetIdlsOutputArgs } from "./getIdls";
+export const getIdls: typeof import("./getIdls").getIdls = null as any;
+export const getIdlsOutput: typeof import("./getIdls").getIdlsOutput = null as any;
+utilities.lazyLoad(exports, ["getIdls","getIdlsOutput"], () => require("./getIdls"));
+
+export { GetTablegroupsArgs, GetTablegroupsResult, GetTablegroupsOutputArgs } from "./getTablegroups";
+export const getTablegroups: typeof import("./getTablegroups").getTablegroups = null as any;
+export const getTablegroupsOutput: typeof import("./getTablegroups").getTablegroupsOutput = null as any;
+utilities.lazyLoad(exports, ["getTablegroups","getTablegroupsOutput"], () => require("./getTablegroups"));
+
+export { GetTablesArgs, GetTablesResult, GetTablesOutputArgs } from "./getTables";
+export const getTables: typeof import("./getTables").getTables = null as any;
+export const getTablesOutput: typeof import("./getTables").getTablesOutput = null as any;
+utilities.lazyLoad(exports, ["getTables","getTablesOutput"], () => require("./getTables"));
+
+export { IdlArgs, IdlState } from "./idl";
+export type Idl = import("./idl").Idl;
+export const Idl: typeof import("./idl").Idl = null as any;
+utilities.lazyLoad(exports, ["Idl"], () => require("./idl"));
+
+export { TableArgs, TableState } from "./table";
+export type Table = import("./table").Table;
+export const Table: typeof import("./table").Table = null as any;
+utilities.lazyLoad(exports, ["Table"], () => require("./table"));
+
+export { TablegroupArgs, TablegroupState } from "./tablegroup";
+export type Tablegroup = import("./tablegroup").Tablegroup;
+export const Tablegroup: typeof import("./tablegroup").Tablegroup = null as any;
+utilities.lazyLoad(exports, ["Tablegroup"], () => require("./tablegroup"));
+
 
 const _module = {
     version: utilities.getVersion(),

@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps.Inputs
 {
 
-    public sealed class ScheduleActivityActivityParaTranscodeTaskRawParameterTehdConfigGetArgs : Pulumi.ResourceArgs
+    public sealed class ScheduleActivityActivityParaTranscodeTaskRawParameterTehdConfigGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Maximum bitrate, which is valid when `Type` is `TESHD`.If this parameter is left empty or 0 is entered, there will be no upper limit for bitrate.
@@ -28,5 +28,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps.Inputs
         public ScheduleActivityActivityParaTranscodeTaskRawParameterTehdConfigGetArgs()
         {
         }
+        public static new ScheduleActivityActivityParaTranscodeTaskRawParameterTehdConfigGetArgs Empty => new ScheduleActivityActivityParaTranscodeTaskRawParameterTehdConfigGetArgs();
     }
 }

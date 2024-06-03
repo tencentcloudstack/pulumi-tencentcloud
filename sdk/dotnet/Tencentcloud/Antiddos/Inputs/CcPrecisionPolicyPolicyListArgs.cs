@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Antiddos.Inputs
 {
 
-    public sealed class CcPrecisionPolicyPolicyListArgs : Pulumi.ResourceArgs
+    public sealed class CcPrecisionPolicyPolicyListArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Configuration fields can take values of cgi, ua, cookie, referer, accept, srcip.
@@ -40,5 +40,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Antiddos.Inputs
         public CcPrecisionPolicyPolicyListArgs()
         {
         }
+        public static new CcPrecisionPolicyPolicyListArgs Empty => new CcPrecisionPolicyPolicyListArgs();
     }
 }

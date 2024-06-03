@@ -7,46 +7,52 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a ssl deployCertificateInstance
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ssl"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ssl"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Ssl.NewDeployCertificateInstanceOperation(ctx, "deployCertificateInstance", &Ssl.DeployCertificateInstanceOperationArgs{
-// 			CertificateId: pulumi.String("8x1eUSSl"),
-// 			InstanceIdLists: pulumi.StringArray{
-// 				pulumi.String("cdndomain1.example.com|on"),
-// 				pulumi.String("cdndomain1.example.com|off"),
-// 			},
-// 			ResourceType: pulumi.String("cdn"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Ssl.NewDeployCertificateInstanceOperation(ctx, "deployCertificateInstance", &Ssl.DeployCertificateInstanceOperationArgs{
+//				CertificateId: pulumi.String("8x1eUSSl"),
+//				InstanceIdLists: pulumi.StringArray{
+//					pulumi.String("cdndomain1.example.com|on"),
+//					pulumi.String("cdndomain1.example.com|off"),
+//				},
+//				ResourceType: pulumi.String("cdn"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // ssl deploy_certificate_instance can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Ssl/deployCertificateInstanceOperation:DeployCertificateInstanceOperation deploy_certificate_instance deploy_certificate_instance_id
+// $ pulumi import tencentcloud:Ssl/deployCertificateInstanceOperation:DeployCertificateInstanceOperation deploy_certificate_instance deploy_certificate_instance_id
 // ```
 type DeployCertificateInstanceOperation struct {
 	pulumi.CustomResourceState
@@ -74,7 +80,7 @@ func NewDeployCertificateInstanceOperation(ctx *pulumi.Context,
 	if args.InstanceIdLists == nil {
 		return nil, errors.New("invalid value for required argument 'InstanceIdLists'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource DeployCertificateInstanceOperation
 	err := ctx.RegisterResource("tencentcloud:Ssl/deployCertificateInstanceOperation:DeployCertificateInstanceOperation", name, args, &resource, opts...)
 	if err != nil {
@@ -171,7 +177,7 @@ func (i *DeployCertificateInstanceOperation) ToDeployCertificateInstanceOperatio
 // DeployCertificateInstanceOperationArrayInput is an input type that accepts DeployCertificateInstanceOperationArray and DeployCertificateInstanceOperationArrayOutput values.
 // You can construct a concrete instance of `DeployCertificateInstanceOperationArrayInput` via:
 //
-//          DeployCertificateInstanceOperationArray{ DeployCertificateInstanceOperationArgs{...} }
+//	DeployCertificateInstanceOperationArray{ DeployCertificateInstanceOperationArgs{...} }
 type DeployCertificateInstanceOperationArrayInput interface {
 	pulumi.Input
 
@@ -196,7 +202,7 @@ func (i DeployCertificateInstanceOperationArray) ToDeployCertificateInstanceOper
 // DeployCertificateInstanceOperationMapInput is an input type that accepts DeployCertificateInstanceOperationMap and DeployCertificateInstanceOperationMapOutput values.
 // You can construct a concrete instance of `DeployCertificateInstanceOperationMapInput` via:
 //
-//          DeployCertificateInstanceOperationMap{ "key": DeployCertificateInstanceOperationArgs{...} }
+//	DeployCertificateInstanceOperationMap{ "key": DeployCertificateInstanceOperationArgs{...} }
 type DeployCertificateInstanceOperationMapInput interface {
 	pulumi.Input
 

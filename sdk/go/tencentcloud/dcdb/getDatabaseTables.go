@@ -8,70 +8,12 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Use this data source to query detailed information of dcdb databaseTables
-//
-// ## Example Usage
-//
-// ```go
-// package main
-//
-// import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Dcdb"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dcdb"
-// )
-//
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Dcdb.GetDatabaseTables(ctx, &dcdb.GetDatabaseTablesArgs{
-// 			Cols: []map[string]interface{}{
-// 				map[string]interface{}{
-// 					"col": "",
-// 					"gt": []map[string]interface{}{
-// 						nil,
-// 						nil,
-// 					},
-// 					"lt": []map[string]interface{}{
-// 						nil,
-// 						nil,
-// 					},
-// 					"nil": []map[string]interface{}{
-// 						nil,
-// 						nil,
-// 					},
-// 					"type": "",
-// 				},
-// 			},
-// 			DbName: "",
-// 			Gt: []map[string]interface{}{
-// 				nil,
-// 				nil,
-// 				nil,
-// 			},
-// 			InstanceId: "dcdbt-ow7t8lmc",
-// 			Lt: []map[string]interface{}{
-// 				nil,
-// 				nil,
-// 				nil,
-// 			},
-// 			Nil: []map[string]interface{}{
-// 				nil,
-// 				nil,
-// 				nil,
-// 			},
-// 			Table: "",
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
-// ```
 func GetDatabaseTables(ctx *pulumi.Context, args *GetDatabaseTablesArgs, opts ...pulumi.InvokeOption) (*GetDatabaseTablesResult, error) {
-	opts = pkgInvokeDefaultOpts(opts)
+	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetDatabaseTablesResult
 	err := ctx.Invoke("tencentcloud:Dcdb/getDatabaseTables:getDatabaseTables", args, &rv, opts...)
 	if err != nil {

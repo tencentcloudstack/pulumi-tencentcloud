@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Antiddos.Inputs
 {
 
-    public sealed class DdosSpeedLimitConfigDdosSpeedLimitConfigDstPortScopeArgs : Pulumi.ResourceArgs
+    public sealed class DdosSpeedLimitConfigDdosSpeedLimitConfigDstPortScopeArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Starting port, ranging from 1 to 65535.
@@ -28,5 +28,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Antiddos.Inputs
         public DdosSpeedLimitConfigDdosSpeedLimitConfigDstPortScopeArgs()
         {
         }
+        public static new DdosSpeedLimitConfigDdosSpeedLimitConfigDstPortScopeArgs Empty => new DdosSpeedLimitConfigDdosSpeedLimitConfigDstPortScopeArgs();
     }
 }

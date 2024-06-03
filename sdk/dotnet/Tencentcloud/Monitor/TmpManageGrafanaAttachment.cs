@@ -15,74 +15,79 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var config = new Config();
+    ///     var availabilityZone = config.Get("availabilityZone") ?? "ap-guangzhou-4";
+    ///     var vpc = new Tencentcloud.Vpc.Instance("vpc", new()
     ///     {
-    ///         var config = new Config();
-    ///         var availabilityZone = config.Get("availabilityZone") ?? "ap-guangzhou-4";
-    ///         var vpc = new Tencentcloud.Vpc.Instance("vpc", new Tencentcloud.Vpc.InstanceArgs
-    ///         {
-    ///             CidrBlock = "10.0.0.0/16",
-    ///         });
-    ///         var subnet = new Tencentcloud.Subnet.Instance("subnet", new Tencentcloud.Subnet.InstanceArgs
-    ///         {
-    ///             VpcId = vpc.Id,
-    ///             AvailabilityZone = availabilityZone,
-    ///             CidrBlock = "10.0.1.0/24",
-    ///         });
-    ///         var fooTmpInstance = new Tencentcloud.Monitor.TmpInstance("fooTmpInstance", new Tencentcloud.Monitor.TmpInstanceArgs
-    ///         {
-    ///             InstanceName = "tf-tmp-instance",
-    ///             VpcId = vpc.Id,
-    ///             SubnetId = subnet.Id,
-    ///             DataRetentionTime = 30,
-    ///             Zone = availabilityZone,
-    ///             Tags = 
-    ///             {
-    ///                 { "createdBy", "terraform" },
-    ///             },
-    ///         });
-    ///         var fooGrafanaInstance = new Tencentcloud.Monitor.GrafanaInstance("fooGrafanaInstance", new Tencentcloud.Monitor.GrafanaInstanceArgs
-    ///         {
-    ///             InstanceName = "tf-grafana",
-    ///             VpcId = vpc.Id,
-    ///             SubnetIds = 
-    ///             {
-    ///                 subnet.Id,
-    ///             },
-    ///             GrafanaInitPassword = "1234567890",
-    ///             EnableInternet = false,
-    ///             IsDestroy = true,
-    ///             Tags = 
-    ///             {
-    ///                 { "createdBy", "test" },
-    ///             },
-    ///         });
-    ///         var fooTmpManageGrafanaAttachment = new Tencentcloud.Monitor.TmpManageGrafanaAttachment("fooTmpManageGrafanaAttachment", new Tencentcloud.Monitor.TmpManageGrafanaAttachmentArgs
-    ///         {
-    ///             GrafanaId = fooGrafanaInstance.Id,
-    ///             InstanceId = fooTmpInstance.Id,
-    ///         });
-    ///     }
+    ///         CidrBlock = "10.0.0.0/16",
+    ///     });
     /// 
-    /// }
+    ///     var subnet = new Tencentcloud.Subnet.Instance("subnet", new()
+    ///     {
+    ///         VpcId = vpc.Id,
+    ///         AvailabilityZone = availabilityZone,
+    ///         CidrBlock = "10.0.1.0/24",
+    ///     });
+    /// 
+    ///     var fooTmpInstance = new Tencentcloud.Monitor.TmpInstance("fooTmpInstance", new()
+    ///     {
+    ///         InstanceName = "tf-tmp-instance",
+    ///         VpcId = vpc.Id,
+    ///         SubnetId = subnet.Id,
+    ///         DataRetentionTime = 30,
+    ///         Zone = availabilityZone,
+    ///         Tags = 
+    ///         {
+    ///             { "createdBy", "terraform" },
+    ///         },
+    ///     });
+    /// 
+    ///     var fooGrafanaInstance = new Tencentcloud.Monitor.GrafanaInstance("fooGrafanaInstance", new()
+    ///     {
+    ///         InstanceName = "tf-grafana",
+    ///         VpcId = vpc.Id,
+    ///         SubnetIds = new[]
+    ///         {
+    ///             subnet.Id,
+    ///         },
+    ///         GrafanaInitPassword = "1234567890",
+    ///         EnableInternet = false,
+    ///         IsDestroy = true,
+    ///         Tags = 
+    ///         {
+    ///             { "createdBy", "test" },
+    ///         },
+    ///     });
+    /// 
+    ///     var fooTmpManageGrafanaAttachment = new Tencentcloud.Monitor.TmpManageGrafanaAttachment("fooTmpManageGrafanaAttachment", new()
+    ///     {
+    ///         GrafanaId = fooGrafanaInstance.Id,
+    ///         InstanceId = fooTmpInstance.Id,
+    ///     });
+    /// 
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// monitor tmp_manage_grafana_attachment can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Monitor/tmpManageGrafanaAttachment:TmpManageGrafanaAttachment manage_grafana_attachment prom-xxxxxxxx
+    /// $ pulumi import tencentcloud:Monitor/tmpManageGrafanaAttachment:TmpManageGrafanaAttachment manage_grafana_attachment prom-xxxxxxxx
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Monitor/tmpManageGrafanaAttachment:TmpManageGrafanaAttachment")]
-    public partial class TmpManageGrafanaAttachment : Pulumi.CustomResource
+    public partial class TmpManageGrafanaAttachment : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Grafana instance ID.
@@ -141,7 +146,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
         }
     }
 
-    public sealed class TmpManageGrafanaAttachmentArgs : Pulumi.ResourceArgs
+    public sealed class TmpManageGrafanaAttachmentArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Grafana instance ID.
@@ -158,9 +163,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
         public TmpManageGrafanaAttachmentArgs()
         {
         }
+        public static new TmpManageGrafanaAttachmentArgs Empty => new TmpManageGrafanaAttachmentArgs();
     }
 
-    public sealed class TmpManageGrafanaAttachmentState : Pulumi.ResourceArgs
+    public sealed class TmpManageGrafanaAttachmentState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Grafana instance ID.
@@ -177,5 +183,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
         public TmpManageGrafanaAttachmentState()
         {
         }
+        public static new TmpManageGrafanaAttachmentState Empty => new TmpManageGrafanaAttachmentState();
     }
 }

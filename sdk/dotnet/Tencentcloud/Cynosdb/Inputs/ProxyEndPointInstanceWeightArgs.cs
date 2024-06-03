@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb.Inputs
 {
 
-    public sealed class ProxyEndPointInstanceWeightArgs : Pulumi.ResourceArgs
+    public sealed class ProxyEndPointInstanceWeightArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Instance Id.
@@ -28,5 +28,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb.Inputs
         public ProxyEndPointInstanceWeightArgs()
         {
         }
+        public static new ProxyEndPointInstanceWeightArgs Empty => new ProxyEndPointInstanceWeightArgs();
     }
 }

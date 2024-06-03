@@ -14,11 +14,17 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dts.Outputs
     [OutputType]
     public sealed class GetCompareTasksListCompareProcessStepErrorResult
     {
+        /// <summary>
+        /// help document.
+        /// </summary>
         public readonly string? HelpDoc;
         /// <summary>
         /// message.
         /// </summary>
         public readonly string? Message;
+        /// <summary>
+        /// solution.
+        /// </summary>
         public readonly string? Solution;
 
         [OutputConstructor]

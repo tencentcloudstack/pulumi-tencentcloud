@@ -15,75 +15,81 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Eni
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = Pulumi.Tencentcloud;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var zones = Tencentcloud.Availability.GetZonesByProduct.Invoke(new()
     ///     {
-    ///         var zones = Output.Create(Tencentcloud.Availability.GetZonesByProduct.InvokeAsync(new Tencentcloud.Availability.GetZonesByProductArgs
-    ///         {
-    ///             Product = "vpc",
-    ///         }));
-    ///         var vpc = new Tencentcloud.Vpc.Instance("vpc", new Tencentcloud.Vpc.InstanceArgs
-    ///         {
-    ///             CidrBlock = "10.0.0.0/16",
-    ///         });
-    ///         var subnet = new Tencentcloud.Subnet.Instance("subnet", new Tencentcloud.Subnet.InstanceArgs
-    ///         {
-    ///             AvailabilityZone = zones.Apply(zones =&gt; zones.Zones?[0]?.Name),
-    ///             VpcId = vpc.Id,
-    ///             CidrBlock = "10.0.0.0/16",
-    ///             IsMulticast = false,
-    ///         });
-    ///         var example1 = new Tencentcloud.Security.Group("example1", new Tencentcloud.Security.GroupArgs
-    ///         {
-    ///             Description = "sg desc.",
-    ///             ProjectId = 0,
-    ///             Tags = 
-    ///             {
-    ///                 { "example", "test" },
-    ///             },
-    ///         });
-    ///         var example2 = new Tencentcloud.Security.Group("example2", new Tencentcloud.Security.GroupArgs
-    ///         {
-    ///             Description = "sg desc.",
-    ///             ProjectId = 0,
-    ///             Tags = 
-    ///             {
-    ///                 { "example", "test" },
-    ///             },
-    ///         });
-    ///         var example = new Tencentcloud.Eni.Instance("example", new Tencentcloud.Eni.InstanceArgs
-    ///         {
-    ///             VpcId = vpc.Id,
-    ///             SubnetId = subnet.Id,
-    ///             Description = "eni desc.",
-    ///             Ipv4Count = 1,
-    ///             SecurityGroups = 
-    ///             {
-    ///                 example1.Id,
-    ///                 example2.Id,
-    ///             },
-    ///         });
-    ///     }
+    ///         Product = "vpc",
+    ///     });
     /// 
-    /// }
+    ///     var vpc = new Tencentcloud.Vpc.Instance("vpc", new()
+    ///     {
+    ///         CidrBlock = "10.0.0.0/16",
+    ///     });
+    /// 
+    ///     var subnet = new Tencentcloud.Subnet.Instance("subnet", new()
+    ///     {
+    ///         AvailabilityZone = zones.Apply(getZonesByProductResult =&gt; getZonesByProductResult.Zones[0]?.Name),
+    ///         VpcId = vpc.Id,
+    ///         CidrBlock = "10.0.0.0/16",
+    ///         IsMulticast = false,
+    ///     });
+    /// 
+    ///     var example1 = new Tencentcloud.Security.Group("example1", new()
+    ///     {
+    ///         Description = "sg desc.",
+    ///         ProjectId = 0,
+    ///         Tags = 
+    ///         {
+    ///             { "example", "test" },
+    ///         },
+    ///     });
+    /// 
+    ///     var example2 = new Tencentcloud.Security.Group("example2", new()
+    ///     {
+    ///         Description = "sg desc.",
+    ///         ProjectId = 0,
+    ///         Tags = 
+    ///         {
+    ///             { "example", "test" },
+    ///         },
+    ///     });
+    /// 
+    ///     var example = new Tencentcloud.Eni.Instance("example", new()
+    ///     {
+    ///         VpcId = vpc.Id,
+    ///         SubnetId = subnet.Id,
+    ///         Description = "eni desc.",
+    ///         Ipv4Count = 1,
+    ///         SecurityGroups = new[]
+    ///         {
+    ///             example1.Id,
+    ///             example2.Id,
+    ///         },
+    ///     });
+    /// 
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// ENI can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Eni/instance:Instance tencentcloud_eni.foo eni-qka182br
+    /// $ pulumi import tencentcloud:Eni/instance:Instance tencentcloud_eni.foo eni-qka182br
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Eni/instance:Instance")]
-    public partial class Instance : Pulumi.CustomResource
+    public partial class Instance : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Creation time of the ENI.
@@ -208,7 +214,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Eni
         }
     }
 
-    public sealed class InstanceArgs : Pulumi.ResourceArgs
+    public sealed class InstanceArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Description of the IP, maximum length 25.
@@ -279,9 +285,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Eni
         public InstanceArgs()
         {
         }
+        public static new InstanceArgs Empty => new InstanceArgs();
     }
 
-    public sealed class InstanceState : Pulumi.ResourceArgs
+    public sealed class InstanceState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Creation time of the ENI.
@@ -388,5 +395,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Eni
         public InstanceState()
         {
         }
+        public static new InstanceState Empty => new InstanceState();
     }
 }

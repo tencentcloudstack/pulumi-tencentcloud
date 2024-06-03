@@ -15,66 +15,60 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
         /// <summary>
         /// Use this data source to query detailed information of mysql inst_tables
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var instTables = Tencentcloud.Mysql.GetInstTables.Invoke(new()
         ///     {
-        ///         var instTables = Output.Create(Tencentcloud.Mysql.GetInstTables.InvokeAsync(new Tencentcloud.Mysql.GetInstTablesArgs
-        ///         {
-        ///             Database = "tf_ci_test",
-        ///             InstanceId = "cdb-fitq5t9h",
-        ///         }));
-        ///     }
+        ///         Database = "tf_ci_test",
+        ///         InstanceId = "cdb-fitq5t9h",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetInstTablesResult> InvokeAsync(GetInstTablesArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetInstTablesResult>("tencentcloud:Mysql/getInstTables:getInstTables", args ?? new GetInstTablesArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetInstTablesResult>("tencentcloud:Mysql/getInstTables:getInstTables", args ?? new GetInstTablesArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of mysql inst_tables
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var instTables = Tencentcloud.Mysql.GetInstTables.Invoke(new()
         ///     {
-        ///         var instTables = Output.Create(Tencentcloud.Mysql.GetInstTables.InvokeAsync(new Tencentcloud.Mysql.GetInstTablesArgs
-        ///         {
-        ///             Database = "tf_ci_test",
-        ///             InstanceId = "cdb-fitq5t9h",
-        ///         }));
-        ///     }
+        ///         Database = "tf_ci_test",
+        ///         InstanceId = "cdb-fitq5t9h",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetInstTablesResult> Invoke(GetInstTablesInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetInstTablesResult>("tencentcloud:Mysql/getInstTables:getInstTables", args ?? new GetInstTablesInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetInstTablesResult>("tencentcloud:Mysql/getInstTables:getInstTables", args ?? new GetInstTablesInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetInstTablesArgs : Pulumi.InvokeArgs
+    public sealed class GetInstTablesArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// The name of the database.
@@ -103,9 +97,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
         public GetInstTablesArgs()
         {
         }
+        public static new GetInstTablesArgs Empty => new GetInstTablesArgs();
     }
 
-    public sealed class GetInstTablesInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetInstTablesInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// The name of the database.
@@ -134,6 +129,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
         public GetInstTablesInvokeArgs()
         {
         }
+        public static new GetInstTablesInvokeArgs Empty => new GetInstTablesInvokeArgs();
     }
 
 

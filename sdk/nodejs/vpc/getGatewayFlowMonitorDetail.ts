@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,24 +11,23 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const gatewayFlowMonitorDetail = pulumi.output(tencentcloud.Vpc.getGatewayFlowMonitorDetail({
+ * const gatewayFlowMonitorDetail = tencentcloud.Vpc.getGatewayFlowMonitorDetail({
  *     orderDirection: "DESC",
  *     orderField: "OutTraffic",
  *     timePoint: "2023-06-02 12:15:20",
  *     vpnId: "vpngw-gt8bianl",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getGatewayFlowMonitorDetail(args: GetGatewayFlowMonitorDetailArgs, opts?: pulumi.InvokeOptions): Promise<GetGatewayFlowMonitorDetailResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Vpc/getGatewayFlowMonitorDetail:getGatewayFlowMonitorDetail", {
         "directConnectGatewayId": args.directConnectGatewayId,
         "natId": args.natId,
@@ -99,9 +99,27 @@ export interface GetGatewayFlowMonitorDetailResult {
     readonly timePoint: string;
     readonly vpnId?: string;
 }
-
+/**
+ * Use this data source to query detailed information of vpc gatewayFlowMonitorDetail
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const gatewayFlowMonitorDetail = tencentcloud.Vpc.getGatewayFlowMonitorDetail({
+ *     orderDirection: "DESC",
+ *     orderField: "OutTraffic",
+ *     timePoint: "2023-06-02 12:15:20",
+ *     vpnId: "vpngw-gt8bianl",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getGatewayFlowMonitorDetailOutput(args: GetGatewayFlowMonitorDetailOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetGatewayFlowMonitorDetailResult> {
-    return pulumi.output(args).apply(a => getGatewayFlowMonitorDetail(a, opts))
+    return pulumi.output(args).apply((a: any) => getGatewayFlowMonitorDetail(a, opts))
 }
 
 /**

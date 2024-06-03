@@ -7,47 +7,78 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provide a resource to create a Private Dns Record.
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/PrivateDns"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/PrivateDns"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := PrivateDns.NewRecord(ctx, "foo", &PrivateDns.RecordArgs{
-// 			Mx:          pulumi.Int(0),
-// 			RecordType:  pulumi.String("A"),
-// 			RecordValue: pulumi.String("192.168.1.2"),
-// 			SubDomain:   pulumi.String("www"),
-// 			Ttl:         pulumi.Int(300),
-// 			Weight:      pulumi.Int(1),
-// 			ZoneId:      pulumi.String("zone-rqndjnki"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			vpc, err := Vpc.NewInstance(ctx, "vpc", &Vpc.InstanceArgs{
+//				CidrBlock: pulumi.String("10.0.0.0/16"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			exampleZone, err := PrivateDns.NewZone(ctx, "exampleZone", &PrivateDns.ZoneArgs{
+//				Domain: pulumi.String("domain.com"),
+//				Remark: pulumi.String("remark."),
+//				VpcSets: privatedns.ZoneVpcSetArray{
+//					&privatedns.ZoneVpcSetArgs{
+//						Region:    pulumi.String("ap-guangzhou"),
+//						UniqVpcId: vpc.ID(),
+//					},
+//				},
+//				DnsForwardStatus:   pulumi.String("DISABLED"),
+//				CnameSpeedupStatus: pulumi.String("ENABLED"),
+//				Tags: pulumi.Map{
+//					"createdBy": pulumi.Any("terraform"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_, err = PrivateDns.NewRecord(ctx, "exampleRecord", &PrivateDns.RecordArgs{
+//				ZoneId:      exampleZone.ID(),
+//				RecordType:  pulumi.String("A"),
+//				RecordValue: pulumi.String("192.168.1.2"),
+//				SubDomain:   pulumi.String("www"),
+//				Ttl:         pulumi.Int(300),
+//				Weight:      pulumi.Int(1),
+//				Mx:          pulumi.Int(0),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // Private Dns Record can be imported, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:PrivateDns/record:Record foo zone_id#record_id
+// $ pulumi import tencentcloud:PrivateDns/record:Record example zone-iza3a33s#1983030
 // ```
 type Record struct {
 	pulumi.CustomResourceState
@@ -56,12 +87,12 @@ type Record struct {
 	Mx pulumi.IntPtrOutput `pulumi:"mx"`
 	// Record type. Valid values: "A", "AAAA", "CNAME", "MX", "TXT", "PTR".
 	RecordType pulumi.StringOutput `pulumi:"recordType"`
-	// Record value, such as IP: 192.168.10.2, CNAME: cname.qcloud.com, and MX: mail.qcloud.com..
+	// Record value, such as IP: 192.168.10.2, CNAME: cname.qcloud.com, and MX: mail.qcloud.com.
 	RecordValue pulumi.StringOutput `pulumi:"recordValue"`
 	// Subdomain, such as "www", "m", and "@".
 	SubDomain pulumi.StringOutput `pulumi:"subDomain"`
 	// Record cache time. The smaller the value, the faster the record will take effect. Value range: 1~86400s.
-	Ttl pulumi.IntPtrOutput `pulumi:"ttl"`
+	Ttl pulumi.IntOutput `pulumi:"ttl"`
 	// Record weight. Value range: 1~100.
 	Weight pulumi.IntPtrOutput `pulumi:"weight"`
 	// Private domain ID.
@@ -87,7 +118,7 @@ func NewRecord(ctx *pulumi.Context,
 	if args.ZoneId == nil {
 		return nil, errors.New("invalid value for required argument 'ZoneId'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource Record
 	err := ctx.RegisterResource("tencentcloud:PrivateDns/record:Record", name, args, &resource, opts...)
 	if err != nil {
@@ -114,7 +145,7 @@ type recordState struct {
 	Mx *int `pulumi:"mx"`
 	// Record type. Valid values: "A", "AAAA", "CNAME", "MX", "TXT", "PTR".
 	RecordType *string `pulumi:"recordType"`
-	// Record value, such as IP: 192.168.10.2, CNAME: cname.qcloud.com, and MX: mail.qcloud.com..
+	// Record value, such as IP: 192.168.10.2, CNAME: cname.qcloud.com, and MX: mail.qcloud.com.
 	RecordValue *string `pulumi:"recordValue"`
 	// Subdomain, such as "www", "m", and "@".
 	SubDomain *string `pulumi:"subDomain"`
@@ -131,7 +162,7 @@ type RecordState struct {
 	Mx pulumi.IntPtrInput
 	// Record type. Valid values: "A", "AAAA", "CNAME", "MX", "TXT", "PTR".
 	RecordType pulumi.StringPtrInput
-	// Record value, such as IP: 192.168.10.2, CNAME: cname.qcloud.com, and MX: mail.qcloud.com..
+	// Record value, such as IP: 192.168.10.2, CNAME: cname.qcloud.com, and MX: mail.qcloud.com.
 	RecordValue pulumi.StringPtrInput
 	// Subdomain, such as "www", "m", and "@".
 	SubDomain pulumi.StringPtrInput
@@ -152,7 +183,7 @@ type recordArgs struct {
 	Mx *int `pulumi:"mx"`
 	// Record type. Valid values: "A", "AAAA", "CNAME", "MX", "TXT", "PTR".
 	RecordType string `pulumi:"recordType"`
-	// Record value, such as IP: 192.168.10.2, CNAME: cname.qcloud.com, and MX: mail.qcloud.com..
+	// Record value, such as IP: 192.168.10.2, CNAME: cname.qcloud.com, and MX: mail.qcloud.com.
 	RecordValue string `pulumi:"recordValue"`
 	// Subdomain, such as "www", "m", and "@".
 	SubDomain string `pulumi:"subDomain"`
@@ -170,7 +201,7 @@ type RecordArgs struct {
 	Mx pulumi.IntPtrInput
 	// Record type. Valid values: "A", "AAAA", "CNAME", "MX", "TXT", "PTR".
 	RecordType pulumi.StringInput
-	// Record value, such as IP: 192.168.10.2, CNAME: cname.qcloud.com, and MX: mail.qcloud.com..
+	// Record value, such as IP: 192.168.10.2, CNAME: cname.qcloud.com, and MX: mail.qcloud.com.
 	RecordValue pulumi.StringInput
 	// Subdomain, such as "www", "m", and "@".
 	SubDomain pulumi.StringInput
@@ -208,7 +239,7 @@ func (i *Record) ToRecordOutputWithContext(ctx context.Context) RecordOutput {
 // RecordArrayInput is an input type that accepts RecordArray and RecordArrayOutput values.
 // You can construct a concrete instance of `RecordArrayInput` via:
 //
-//          RecordArray{ RecordArgs{...} }
+//	RecordArray{ RecordArgs{...} }
 type RecordArrayInput interface {
 	pulumi.Input
 
@@ -233,7 +264,7 @@ func (i RecordArray) ToRecordArrayOutputWithContext(ctx context.Context) RecordA
 // RecordMapInput is an input type that accepts RecordMap and RecordMapOutput values.
 // You can construct a concrete instance of `RecordMapInput` via:
 //
-//          RecordMap{ "key": RecordArgs{...} }
+//	RecordMap{ "key": RecordArgs{...} }
 type RecordMapInput interface {
 	pulumi.Input
 
@@ -279,7 +310,7 @@ func (o RecordOutput) RecordType() pulumi.StringOutput {
 	return o.ApplyT(func(v *Record) pulumi.StringOutput { return v.RecordType }).(pulumi.StringOutput)
 }
 
-// Record value, such as IP: 192.168.10.2, CNAME: cname.qcloud.com, and MX: mail.qcloud.com..
+// Record value, such as IP: 192.168.10.2, CNAME: cname.qcloud.com, and MX: mail.qcloud.com.
 func (o RecordOutput) RecordValue() pulumi.StringOutput {
 	return o.ApplyT(func(v *Record) pulumi.StringOutput { return v.RecordValue }).(pulumi.StringOutput)
 }
@@ -290,8 +321,8 @@ func (o RecordOutput) SubDomain() pulumi.StringOutput {
 }
 
 // Record cache time. The smaller the value, the faster the record will take effect. Value range: 1~86400s.
-func (o RecordOutput) Ttl() pulumi.IntPtrOutput {
-	return o.ApplyT(func(v *Record) pulumi.IntPtrOutput { return v.Ttl }).(pulumi.IntPtrOutput)
+func (o RecordOutput) Ttl() pulumi.IntOutput {
+	return o.ApplyT(func(v *Record) pulumi.IntOutput { return v.Ttl }).(pulumi.IntOutput)
 }
 
 // Record weight. Value range: 1~100.

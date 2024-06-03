@@ -8,14 +8,19 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
+
+var _ = internal.GetEnvOrDefault
 
 type AccessRuleAccessRule struct {
 	// rule access mode, 1: read only, 2: read &amp; wirte.
-	AccessMode   *int `pulumi:"accessMode"`
+	AccessMode *int `pulumi:"accessMode"`
+	// single rule id.
 	AccessRuleId *int `pulumi:"accessRuleId"`
 	// rule address, IP OR IP SEG.
-	Address    *string `pulumi:"address"`
+	Address *string `pulumi:"address"`
+	// rule create time.
 	CreateTime *string `pulumi:"createTime"`
 	// rule priority, range 1 - 100, value less higher priority.
 	Priority *int `pulumi:"priority"`
@@ -24,7 +29,7 @@ type AccessRuleAccessRule struct {
 // AccessRuleAccessRuleInput is an input type that accepts AccessRuleAccessRuleArgs and AccessRuleAccessRuleOutput values.
 // You can construct a concrete instance of `AccessRuleAccessRuleInput` via:
 //
-//          AccessRuleAccessRuleArgs{...}
+//	AccessRuleAccessRuleArgs{...}
 type AccessRuleAccessRuleInput interface {
 	pulumi.Input
 
@@ -34,10 +39,12 @@ type AccessRuleAccessRuleInput interface {
 
 type AccessRuleAccessRuleArgs struct {
 	// rule access mode, 1: read only, 2: read &amp; wirte.
-	AccessMode   pulumi.IntPtrInput `pulumi:"accessMode"`
+	AccessMode pulumi.IntPtrInput `pulumi:"accessMode"`
+	// single rule id.
 	AccessRuleId pulumi.IntPtrInput `pulumi:"accessRuleId"`
 	// rule address, IP OR IP SEG.
-	Address    pulumi.StringPtrInput `pulumi:"address"`
+	Address pulumi.StringPtrInput `pulumi:"address"`
+	// rule create time.
 	CreateTime pulumi.StringPtrInput `pulumi:"createTime"`
 	// rule priority, range 1 - 100, value less higher priority.
 	Priority pulumi.IntPtrInput `pulumi:"priority"`
@@ -66,11 +73,11 @@ func (i AccessRuleAccessRuleArgs) ToAccessRuleAccessRulePtrOutputWithContext(ctx
 // AccessRuleAccessRulePtrInput is an input type that accepts AccessRuleAccessRuleArgs, AccessRuleAccessRulePtr and AccessRuleAccessRulePtrOutput values.
 // You can construct a concrete instance of `AccessRuleAccessRulePtrInput` via:
 //
-//          AccessRuleAccessRuleArgs{...}
+//	        AccessRuleAccessRuleArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type AccessRuleAccessRulePtrInput interface {
 	pulumi.Input
 
@@ -125,6 +132,7 @@ func (o AccessRuleAccessRuleOutput) AccessMode() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v AccessRuleAccessRule) *int { return v.AccessMode }).(pulumi.IntPtrOutput)
 }
 
+// single rule id.
 func (o AccessRuleAccessRuleOutput) AccessRuleId() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v AccessRuleAccessRule) *int { return v.AccessRuleId }).(pulumi.IntPtrOutput)
 }
@@ -134,6 +142,7 @@ func (o AccessRuleAccessRuleOutput) Address() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v AccessRuleAccessRule) *string { return v.Address }).(pulumi.StringPtrOutput)
 }
 
+// rule create time.
 func (o AccessRuleAccessRuleOutput) CreateTime() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v AccessRuleAccessRule) *string { return v.CreateTime }).(pulumi.StringPtrOutput)
 }
@@ -177,6 +186,7 @@ func (o AccessRuleAccessRulePtrOutput) AccessMode() pulumi.IntPtrOutput {
 	}).(pulumi.IntPtrOutput)
 }
 
+// single rule id.
 func (o AccessRuleAccessRulePtrOutput) AccessRuleId() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *AccessRuleAccessRule) *int {
 		if v == nil {
@@ -196,6 +206,7 @@ func (o AccessRuleAccessRulePtrOutput) Address() pulumi.StringPtrOutput {
 	}).(pulumi.StringPtrOutput)
 }
 
+// rule create time.
 func (o AccessRuleAccessRulePtrOutput) CreateTime() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *AccessRuleAccessRule) *string {
 		if v == nil {
@@ -216,8 +227,10 @@ func (o AccessRuleAccessRulePtrOutput) Priority() pulumi.IntPtrOutput {
 }
 
 type LifeCycleRuleLifeCycleRule struct {
-	CreateTime      *string `pulumi:"createTime"`
-	LifeCycleRuleId *int    `pulumi:"lifeCycleRuleId"`
+	// rule create time.
+	CreateTime *string `pulumi:"createTime"`
+	// single rule id.
+	LifeCycleRuleId *int `pulumi:"lifeCycleRuleId"`
 	// rule name.
 	LifeCycleRuleName *string `pulumi:"lifeCycleRuleName"`
 	// rule op path.
@@ -231,7 +244,7 @@ type LifeCycleRuleLifeCycleRule struct {
 // LifeCycleRuleLifeCycleRuleInput is an input type that accepts LifeCycleRuleLifeCycleRuleArgs and LifeCycleRuleLifeCycleRuleOutput values.
 // You can construct a concrete instance of `LifeCycleRuleLifeCycleRuleInput` via:
 //
-//          LifeCycleRuleLifeCycleRuleArgs{...}
+//	LifeCycleRuleLifeCycleRuleArgs{...}
 type LifeCycleRuleLifeCycleRuleInput interface {
 	pulumi.Input
 
@@ -240,8 +253,10 @@ type LifeCycleRuleLifeCycleRuleInput interface {
 }
 
 type LifeCycleRuleLifeCycleRuleArgs struct {
-	CreateTime      pulumi.StringPtrInput `pulumi:"createTime"`
-	LifeCycleRuleId pulumi.IntPtrInput    `pulumi:"lifeCycleRuleId"`
+	// rule create time.
+	CreateTime pulumi.StringPtrInput `pulumi:"createTime"`
+	// single rule id.
+	LifeCycleRuleId pulumi.IntPtrInput `pulumi:"lifeCycleRuleId"`
 	// rule name.
 	LifeCycleRuleName pulumi.StringPtrInput `pulumi:"lifeCycleRuleName"`
 	// rule op path.
@@ -275,11 +290,11 @@ func (i LifeCycleRuleLifeCycleRuleArgs) ToLifeCycleRuleLifeCycleRulePtrOutputWit
 // LifeCycleRuleLifeCycleRulePtrInput is an input type that accepts LifeCycleRuleLifeCycleRuleArgs, LifeCycleRuleLifeCycleRulePtr and LifeCycleRuleLifeCycleRulePtrOutput values.
 // You can construct a concrete instance of `LifeCycleRuleLifeCycleRulePtrInput` via:
 //
-//          LifeCycleRuleLifeCycleRuleArgs{...}
+//	        LifeCycleRuleLifeCycleRuleArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type LifeCycleRuleLifeCycleRulePtrInput interface {
 	pulumi.Input
 
@@ -329,10 +344,12 @@ func (o LifeCycleRuleLifeCycleRuleOutput) ToLifeCycleRuleLifeCycleRulePtrOutputW
 	}).(LifeCycleRuleLifeCycleRulePtrOutput)
 }
 
+// rule create time.
 func (o LifeCycleRuleLifeCycleRuleOutput) CreateTime() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v LifeCycleRuleLifeCycleRule) *string { return v.CreateTime }).(pulumi.StringPtrOutput)
 }
 
+// single rule id.
 func (o LifeCycleRuleLifeCycleRuleOutput) LifeCycleRuleId() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v LifeCycleRuleLifeCycleRule) *int { return v.LifeCycleRuleId }).(pulumi.IntPtrOutput)
 }
@@ -381,6 +398,7 @@ func (o LifeCycleRuleLifeCycleRulePtrOutput) Elem() LifeCycleRuleLifeCycleRuleOu
 	}).(LifeCycleRuleLifeCycleRuleOutput)
 }
 
+// rule create time.
 func (o LifeCycleRuleLifeCycleRulePtrOutput) CreateTime() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *LifeCycleRuleLifeCycleRule) *string {
 		if v == nil {
@@ -390,6 +408,7 @@ func (o LifeCycleRuleLifeCycleRulePtrOutput) CreateTime() pulumi.StringPtrOutput
 	}).(pulumi.StringPtrOutput)
 }
 
+// single rule id.
 func (o LifeCycleRuleLifeCycleRulePtrOutput) LifeCycleRuleId() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *LifeCycleRuleLifeCycleRule) *int {
 		if v == nil {
@@ -449,7 +468,7 @@ type LifeCycleRuleLifeCycleRuleTransition struct {
 // LifeCycleRuleLifeCycleRuleTransitionInput is an input type that accepts LifeCycleRuleLifeCycleRuleTransitionArgs and LifeCycleRuleLifeCycleRuleTransitionOutput values.
 // You can construct a concrete instance of `LifeCycleRuleLifeCycleRuleTransitionInput` via:
 //
-//          LifeCycleRuleLifeCycleRuleTransitionArgs{...}
+//	LifeCycleRuleLifeCycleRuleTransitionArgs{...}
 type LifeCycleRuleLifeCycleRuleTransitionInput interface {
 	pulumi.Input
 
@@ -479,7 +498,7 @@ func (i LifeCycleRuleLifeCycleRuleTransitionArgs) ToLifeCycleRuleLifeCycleRuleTr
 // LifeCycleRuleLifeCycleRuleTransitionArrayInput is an input type that accepts LifeCycleRuleLifeCycleRuleTransitionArray and LifeCycleRuleLifeCycleRuleTransitionArrayOutput values.
 // You can construct a concrete instance of `LifeCycleRuleLifeCycleRuleTransitionArrayInput` via:
 //
-//          LifeCycleRuleLifeCycleRuleTransitionArray{ LifeCycleRuleLifeCycleRuleTransitionArgs{...} }
+//	LifeCycleRuleLifeCycleRuleTransitionArray{ LifeCycleRuleLifeCycleRuleTransitionArgs{...} }
 type LifeCycleRuleLifeCycleRuleTransitionArrayInput interface {
 	pulumi.Input
 
@@ -563,7 +582,7 @@ type GetAccessGroupsAccessGroup struct {
 // GetAccessGroupsAccessGroupInput is an input type that accepts GetAccessGroupsAccessGroupArgs and GetAccessGroupsAccessGroupOutput values.
 // You can construct a concrete instance of `GetAccessGroupsAccessGroupInput` via:
 //
-//          GetAccessGroupsAccessGroupArgs{...}
+//	GetAccessGroupsAccessGroupArgs{...}
 type GetAccessGroupsAccessGroupInput interface {
 	pulumi.Input
 
@@ -601,7 +620,7 @@ func (i GetAccessGroupsAccessGroupArgs) ToGetAccessGroupsAccessGroupOutputWithCo
 // GetAccessGroupsAccessGroupArrayInput is an input type that accepts GetAccessGroupsAccessGroupArray and GetAccessGroupsAccessGroupArrayOutput values.
 // You can construct a concrete instance of `GetAccessGroupsAccessGroupArrayInput` via:
 //
-//          GetAccessGroupsAccessGroupArray{ GetAccessGroupsAccessGroupArgs{...} }
+//	GetAccessGroupsAccessGroupArray{ GetAccessGroupsAccessGroupArgs{...} }
 type GetAccessGroupsAccessGroupArrayInput interface {
 	pulumi.Input
 
@@ -719,7 +738,7 @@ type GetFileSystemsFileSystem struct {
 // GetFileSystemsFileSystemInput is an input type that accepts GetFileSystemsFileSystemArgs and GetFileSystemsFileSystemOutput values.
 // You can construct a concrete instance of `GetFileSystemsFileSystemInput` via:
 //
-//          GetFileSystemsFileSystemArgs{...}
+//	GetFileSystemsFileSystemArgs{...}
 type GetFileSystemsFileSystemInput interface {
 	pulumi.Input
 
@@ -771,7 +790,7 @@ func (i GetFileSystemsFileSystemArgs) ToGetFileSystemsFileSystemOutputWithContex
 // GetFileSystemsFileSystemArrayInput is an input type that accepts GetFileSystemsFileSystemArray and GetFileSystemsFileSystemArrayOutput values.
 // You can construct a concrete instance of `GetFileSystemsFileSystemArrayInput` via:
 //
-//          GetFileSystemsFileSystemArray{ GetFileSystemsFileSystemArgs{...} }
+//	GetFileSystemsFileSystemArray{ GetFileSystemsFileSystemArgs{...} }
 type GetFileSystemsFileSystemArrayInput interface {
 	pulumi.Input
 
@@ -910,7 +929,7 @@ type GetMountPointsMountPoint struct {
 // GetMountPointsMountPointInput is an input type that accepts GetMountPointsMountPointArgs and GetMountPointsMountPointOutput values.
 // You can construct a concrete instance of `GetMountPointsMountPointInput` via:
 //
-//          GetMountPointsMountPointArgs{...}
+//	GetMountPointsMountPointArgs{...}
 type GetMountPointsMountPointInput interface {
 	pulumi.Input
 
@@ -948,7 +967,7 @@ func (i GetMountPointsMountPointArgs) ToGetMountPointsMountPointOutputWithContex
 // GetMountPointsMountPointArrayInput is an input type that accepts GetMountPointsMountPointArray and GetMountPointsMountPointArrayOutput values.
 // You can construct a concrete instance of `GetMountPointsMountPointArrayInput` via:
 //
-//          GetMountPointsMountPointArray{ GetMountPointsMountPointArgs{...} }
+//	GetMountPointsMountPointArray{ GetMountPointsMountPointArgs{...} }
 type GetMountPointsMountPointArrayInput interface {
 	pulumi.Input
 

@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,24 +11,23 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const asScalingGroups = pulumi.output(tencentcloud.As.getScalingGroups({
+ * const asScalingGroups = tencentcloud.As.getScalingGroups({
  *     configurationId: "asc-oqio4yyj",
  *     resultOutputFile: "my_test_path",
  *     scalingGroupName: "myasgroup",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getScalingGroups(args?: GetScalingGroupsArgs, opts?: pulumi.InvokeOptions): Promise<GetScalingGroupsResult> {
     args = args || {};
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:As/getScalingGroups:getScalingGroups", {
         "configurationId": args.configurationId,
         "resultOutputFile": args.resultOutputFile,
@@ -93,9 +93,26 @@ export interface GetScalingGroupsResult {
      */
     readonly tags?: {[key: string]: any};
 }
-
+/**
+ * Use this data source to query the detail information of an existing autoscaling group.
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const asScalingGroups = tencentcloud.As.getScalingGroups({
+ *     configurationId: "asc-oqio4yyj",
+ *     resultOutputFile: "my_test_path",
+ *     scalingGroupName: "myasgroup",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getScalingGroupsOutput(args?: GetScalingGroupsOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetScalingGroupsResult> {
-    return pulumi.output(args).apply(a => getScalingGroups(a, opts))
+    return pulumi.output(args).apply((a: any) => getScalingGroups(a, opts))
 }
 
 /**

@@ -14,92 +14,98 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kms
     /// Provide a resource to create a KMS external key.
     /// 
     /// ## Example Usage
+    /// 
     /// ### Create a basic instance.
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var example = new Tencentcloud.Kms.ExternalKey("example", new()
     ///     {
-    ///         var example = new Tencentcloud.Kms.ExternalKey("example", new Tencentcloud.Kms.ExternalKeyArgs
+    ///         Alias = "tf-example-kms-externalkey",
+    ///         Description = "example of kms external key",
+    ///         Tags = 
     ///         {
-    ///             Alias = "tf-example-kms-externalkey",
-    ///             Description = "example of kms external key",
-    ///             Tags = 
-    ///             {
-    ///                 { "createdBy", "terraform" },
-    ///             },
-    ///         });
-    ///     }
+    ///             { "createdBy", "terraform" },
+    ///         },
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
+    /// 
     /// ### Specify the encryption algorithm and public key.
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var example = new Tencentcloud.Kms.ExternalKey("example", new()
     ///     {
-    ///         var example = new Tencentcloud.Kms.ExternalKey("example", new Tencentcloud.Kms.ExternalKeyArgs
+    ///         Alias = "tf-example-kms-externalkey",
+    ///         Description = "example of kms external key",
+    ///         IsEnabled = true,
+    ///         KeyMaterialBase64 = "your_public_key_base64_encoded",
+    ///         Tags = 
     ///         {
-    ///             Alias = "tf-example-kms-externalkey",
-    ///             Description = "example of kms external key",
-    ///             IsEnabled = true,
-    ///             KeyMaterialBase64 = "your_public_key_base64_encoded",
-    ///             Tags = 
-    ///             {
-    ///                 { "createdBy", "terraform" },
-    ///             },
-    ///             WrappingAlgorithm = "RSAES_PKCS1_V1_5",
-    ///         });
-    ///     }
+    ///             { "createdBy", "terraform" },
+    ///         },
+    ///         WrappingAlgorithm = "RSAES_PKCS1_V1_5",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
+    /// 
     /// ### Disable the external kms key.
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var example = new Tencentcloud.Kms.ExternalKey("example", new()
     ///     {
-    ///         var example = new Tencentcloud.Kms.ExternalKey("example", new Tencentcloud.Kms.ExternalKeyArgs
+    ///         Alias = "tf-example-kms-externalkey",
+    ///         Description = "example of kms external key",
+    ///         IsEnabled = false,
+    ///         KeyMaterialBase64 = "your_public_key_base64_encoded",
+    ///         Tags = 
     ///         {
-    ///             Alias = "tf-example-kms-externalkey",
-    ///             Description = "example of kms external key",
-    ///             IsEnabled = false,
-    ///             KeyMaterialBase64 = "your_public_key_base64_encoded",
-    ///             Tags = 
-    ///             {
-    ///                 { "test-tag", "unit-test" },
-    ///             },
-    ///             WrappingAlgorithm = "RSAES_PKCS1_V1_5",
-    ///         });
-    ///     }
+    ///             { "test-tag", "unit-test" },
+    ///         },
+    ///         WrappingAlgorithm = "RSAES_PKCS1_V1_5",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// KMS external keys can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Kms/externalKey:ExternalKey example 287e8f40-7cbb-11eb-9a3a-xxxxx
+    /// $ pulumi import tencentcloud:Kms/externalKey:ExternalKey example 287e8f40-7cbb-11eb-9a3a-xxxxx
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Kms/externalKey:ExternalKey")]
-    public partial class ExternalKey : Pulumi.CustomResource
+    public partial class ExternalKey : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Name of CMK. The name can only contain English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.
@@ -185,6 +191,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kms
             {
                 Version = Utilities.Version,
                 PluginDownloadURL = "github://api.github.com/tencentcloudstack",
+                AdditionalSecretOutputs =
+                {
+                    "keyMaterialBase64",
+                },
             };
             var merged = CustomResourceOptions.Merge(defaultOptions, options);
             // Override the ID if one was specified for consistency with other language SDKs.
@@ -206,7 +216,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kms
         }
     }
 
-    public sealed class ExternalKeyArgs : Pulumi.ResourceArgs
+    public sealed class ExternalKeyArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Name of CMK. The name can only contain English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.
@@ -232,11 +242,21 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kms
         [Input("isEnabled")]
         public Input<bool>? IsEnabled { get; set; }
 
+        [Input("keyMaterialBase64")]
+        private Input<string>? _keyMaterialBase64;
+
         /// <summary>
         /// The base64-encoded key material encrypted with the public_key. For regions using the national secret version, the length of the imported key material is required to be 128 bits, and for regions using the FIPS version, the length of the imported key material is required to be 256 bits.
         /// </summary>
-        [Input("keyMaterialBase64")]
-        public Input<string>? KeyMaterialBase64 { get; set; }
+        public Input<string>? KeyMaterialBase64
+        {
+            get => _keyMaterialBase64;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _keyMaterialBase64 = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
 
         /// <summary>
         /// Duration in days after which the key is deleted after destruction of the resource, must be between 7 and 30 days. Defaults to 7 days.
@@ -271,9 +291,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kms
         public ExternalKeyArgs()
         {
         }
+        public static new ExternalKeyArgs Empty => new ExternalKeyArgs();
     }
 
-    public sealed class ExternalKeyState : Pulumi.ResourceArgs
+    public sealed class ExternalKeyState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Name of CMK. The name can only contain English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.
@@ -299,11 +320,21 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kms
         [Input("isEnabled")]
         public Input<bool>? IsEnabled { get; set; }
 
+        [Input("keyMaterialBase64")]
+        private Input<string>? _keyMaterialBase64;
+
         /// <summary>
         /// The base64-encoded key material encrypted with the public_key. For regions using the national secret version, the length of the imported key material is required to be 128 bits, and for regions using the FIPS version, the length of the imported key material is required to be 256 bits.
         /// </summary>
-        [Input("keyMaterialBase64")]
-        public Input<string>? KeyMaterialBase64 { get; set; }
+        public Input<string>? KeyMaterialBase64
+        {
+            get => _keyMaterialBase64;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _keyMaterialBase64 = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
 
         /// <summary>
         /// State of CMK.
@@ -344,5 +375,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kms
         public ExternalKeyState()
         {
         }
+        public static new ExternalKeyState Empty => new ExternalKeyState();
     }
 }

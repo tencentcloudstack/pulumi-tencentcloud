@@ -15,58 +15,52 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
         /// <summary>
         /// Use this data source to query detailed information of monitor grafana_plugin_overviews
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
-        ///     {
-        ///         var grafanaPluginOverviews = Output.Create(Tencentcloud.Monitor.GetGrafanaPluginOverviews.InvokeAsync());
-        ///     }
+        ///     var grafanaPluginOverviews = Tencentcloud.Monitor.GetGrafanaPluginOverviews.Invoke();
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetGrafanaPluginOverviewsResult> InvokeAsync(GetGrafanaPluginOverviewsArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetGrafanaPluginOverviewsResult>("tencentcloud:Monitor/getGrafanaPluginOverviews:getGrafanaPluginOverviews", args ?? new GetGrafanaPluginOverviewsArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetGrafanaPluginOverviewsResult>("tencentcloud:Monitor/getGrafanaPluginOverviews:getGrafanaPluginOverviews", args ?? new GetGrafanaPluginOverviewsArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of monitor grafana_plugin_overviews
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
-        ///     {
-        ///         var grafanaPluginOverviews = Output.Create(Tencentcloud.Monitor.GetGrafanaPluginOverviews.InvokeAsync());
-        ///     }
+        ///     var grafanaPluginOverviews = Tencentcloud.Monitor.GetGrafanaPluginOverviews.Invoke();
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetGrafanaPluginOverviewsResult> Invoke(GetGrafanaPluginOverviewsInvokeArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetGrafanaPluginOverviewsResult>("tencentcloud:Monitor/getGrafanaPluginOverviews:getGrafanaPluginOverviews", args ?? new GetGrafanaPluginOverviewsInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetGrafanaPluginOverviewsResult>("tencentcloud:Monitor/getGrafanaPluginOverviews:getGrafanaPluginOverviews", args ?? new GetGrafanaPluginOverviewsInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetGrafanaPluginOverviewsArgs : Pulumi.InvokeArgs
+    public sealed class GetGrafanaPluginOverviewsArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Used to save results.
@@ -77,9 +71,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
         public GetGrafanaPluginOverviewsArgs()
         {
         }
+        public static new GetGrafanaPluginOverviewsArgs Empty => new GetGrafanaPluginOverviewsArgs();
     }
 
-    public sealed class GetGrafanaPluginOverviewsInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetGrafanaPluginOverviewsInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Used to save results.
@@ -90,6 +85,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
         public GetGrafanaPluginOverviewsInvokeArgs()
         {
         }
+        public static new GetGrafanaPluginOverviewsInvokeArgs Empty => new GetGrafanaPluginOverviewsInvokeArgs();
     }
 
 

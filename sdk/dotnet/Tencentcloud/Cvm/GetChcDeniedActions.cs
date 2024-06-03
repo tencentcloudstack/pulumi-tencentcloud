@@ -15,70 +15,64 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cvm
         /// <summary>
         /// Use this data source to query detailed information of cvm chc_denied_actions
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var chcDeniedActions = Tencentcloud.Cvm.GetChcDeniedActions.Invoke(new()
         ///     {
-        ///         var chcDeniedActions = Output.Create(Tencentcloud.Cvm.GetChcDeniedActions.InvokeAsync(new Tencentcloud.Cvm.GetChcDeniedActionsArgs
+        ///         ChcIds = new[]
         ///         {
-        ///             ChcIds = 
-        ///             {
-        ///                 "chc-xxxxx",
-        ///             },
-        ///         }));
-        ///     }
+        ///             "chc-xxxxx",
+        ///         },
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetChcDeniedActionsResult> InvokeAsync(GetChcDeniedActionsArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetChcDeniedActionsResult>("tencentcloud:Cvm/getChcDeniedActions:getChcDeniedActions", args ?? new GetChcDeniedActionsArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetChcDeniedActionsResult>("tencentcloud:Cvm/getChcDeniedActions:getChcDeniedActions", args ?? new GetChcDeniedActionsArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of cvm chc_denied_actions
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var chcDeniedActions = Tencentcloud.Cvm.GetChcDeniedActions.Invoke(new()
         ///     {
-        ///         var chcDeniedActions = Output.Create(Tencentcloud.Cvm.GetChcDeniedActions.InvokeAsync(new Tencentcloud.Cvm.GetChcDeniedActionsArgs
+        ///         ChcIds = new[]
         ///         {
-        ///             ChcIds = 
-        ///             {
-        ///                 "chc-xxxxx",
-        ///             },
-        ///         }));
-        ///     }
+        ///             "chc-xxxxx",
+        ///         },
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetChcDeniedActionsResult> Invoke(GetChcDeniedActionsInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetChcDeniedActionsResult>("tencentcloud:Cvm/getChcDeniedActions:getChcDeniedActions", args ?? new GetChcDeniedActionsInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetChcDeniedActionsResult>("tencentcloud:Cvm/getChcDeniedActions:getChcDeniedActions", args ?? new GetChcDeniedActionsInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetChcDeniedActionsArgs : Pulumi.InvokeArgs
+    public sealed class GetChcDeniedActionsArgs : global::Pulumi.InvokeArgs
     {
         [Input("chcIds", required: true)]
         private List<string>? _chcIds;
@@ -101,9 +95,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cvm
         public GetChcDeniedActionsArgs()
         {
         }
+        public static new GetChcDeniedActionsArgs Empty => new GetChcDeniedActionsArgs();
     }
 
-    public sealed class GetChcDeniedActionsInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetChcDeniedActionsInvokeArgs : global::Pulumi.InvokeArgs
     {
         [Input("chcIds", required: true)]
         private InputList<string>? _chcIds;
@@ -126,6 +121,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cvm
         public GetChcDeniedActionsInvokeArgs()
         {
         }
+        public static new GetChcDeniedActionsInvokeArgs Empty => new GetChcDeniedActionsInvokeArgs();
     }
 
 

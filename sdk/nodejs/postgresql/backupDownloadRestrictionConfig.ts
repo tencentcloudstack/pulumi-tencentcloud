@@ -8,31 +8,35 @@ import * as utilities from "../utilities";
  * Provides a resource to create a postgresql backupDownloadRestrictionConfig
  *
  * ## Example Usage
+ *
  * ### Unlimit the restriction of the backup file download.
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const backupDownloadRestrictionConfig = new tencentcloud.Postgresql.BackupDownloadRestrictionConfig("backup_download_restriction_config", {
- *     restrictionType: "NONE",
- * });
+ * const backupDownloadRestrictionConfig = new tencentcloud.postgresql.BackupDownloadRestrictionConfig("backupDownloadRestrictionConfig", {restrictionType: "NONE"});
  * ```
+ * <!--End PulumiCodeChooser -->
+ *
  * ### Set the download only to allow the intranet downloads.
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const backupDownloadRestrictionConfig = new tencentcloud.Postgresql.BackupDownloadRestrictionConfig("backup_download_restriction_config", {
- *     restrictionType: "INTRANET",
- * });
+ * const backupDownloadRestrictionConfig = new tencentcloud.postgresql.BackupDownloadRestrictionConfig("backupDownloadRestrictionConfig", {restrictionType: "INTRANET"});
  * ```
+ * <!--End PulumiCodeChooser -->
+ *
  * ### Restrict the backup file download by customizing.
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const pgVpc = new tencentcloud.vpc.Instance("pgVpc", {cidrBlock: _var.vpc_cidr});
  * const backupDownloadRestrictionConfig = new tencentcloud.postgresql.BackupDownloadRestrictionConfig("backupDownloadRestrictionConfig", {
@@ -43,13 +47,14 @@ import * as utilities from "../utilities";
  *     ipSets: ["192.168.0.0"],
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * postgresql backup_download_restriction_config can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Postgresql/backupDownloadRestrictionConfig:BackupDownloadRestrictionConfig backup_download_restriction_config backup_download_restriction_config_id
+ * $ pulumi import tencentcloud:Postgresql/backupDownloadRestrictionConfig:BackupDownloadRestrictionConfig backup_download_restriction_config backup_download_restriction_config_id
  * ```
  */
 export class BackupDownloadRestrictionConfig extends pulumi.CustomResource {

@@ -7,45 +7,51 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to manage protocol template.
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Protocol"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Protocol"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Protocol.NewTemplate(ctx, "foo", &Protocol.TemplateArgs{
-// 			Protocols: pulumi.StringArray{
-// 				pulumi.String("tcp:80"),
-// 				pulumi.String("udp:all"),
-// 				pulumi.String("icmp:10-30"),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Protocol.NewTemplate(ctx, "foo", &Protocol.TemplateArgs{
+//				Protocols: pulumi.StringArray{
+//					pulumi.String("tcp:80"),
+//					pulumi.String("udp:all"),
+//					pulumi.String("icmp:10-30"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // Protocol template can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Protocol/template:Template foo ppm-nwrggd14
+// $ pulumi import tencentcloud:Protocol/template:Template foo ppm-nwrggd14
 // ```
 type Template struct {
 	pulumi.CustomResourceState
@@ -66,7 +72,7 @@ func NewTemplate(ctx *pulumi.Context,
 	if args.Protocols == nil {
 		return nil, errors.New("invalid value for required argument 'Protocols'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource Template
 	err := ctx.RegisterResource("tencentcloud:Protocol/template:Template", name, args, &resource, opts...)
 	if err != nil {
@@ -147,7 +153,7 @@ func (i *Template) ToTemplateOutputWithContext(ctx context.Context) TemplateOutp
 // TemplateArrayInput is an input type that accepts TemplateArray and TemplateArrayOutput values.
 // You can construct a concrete instance of `TemplateArrayInput` via:
 //
-//          TemplateArray{ TemplateArgs{...} }
+//	TemplateArray{ TemplateArgs{...} }
 type TemplateArrayInput interface {
 	pulumi.Input
 
@@ -172,7 +178,7 @@ func (i TemplateArray) ToTemplateArrayOutputWithContext(ctx context.Context) Tem
 // TemplateMapInput is an input type that accepts TemplateMap and TemplateMapOutput values.
 // You can construct a concrete instance of `TemplateMapInput` via:
 //
-//          TemplateMap{ "key": TemplateArgs{...} }
+//	TemplateMap{ "key": TemplateArgs{...} }
 type TemplateMapInput interface {
 	pulumi.Input
 

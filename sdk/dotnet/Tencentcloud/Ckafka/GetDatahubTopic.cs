@@ -15,58 +15,52 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka
         /// <summary>
         /// Use this data source to query detailed information of ckafka datahub_topic
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
-        ///     {
-        ///         var datahubTopic = Output.Create(Tencentcloud.Ckafka.GetDatahubTopic.InvokeAsync());
-        ///     }
+        ///     var datahubTopic = Tencentcloud.Ckafka.GetDatahubTopic.Invoke();
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetDatahubTopicResult> InvokeAsync(GetDatahubTopicArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetDatahubTopicResult>("tencentcloud:Ckafka/getDatahubTopic:getDatahubTopic", args ?? new GetDatahubTopicArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetDatahubTopicResult>("tencentcloud:Ckafka/getDatahubTopic:getDatahubTopic", args ?? new GetDatahubTopicArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of ckafka datahub_topic
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
-        ///     {
-        ///         var datahubTopic = Output.Create(Tencentcloud.Ckafka.GetDatahubTopic.InvokeAsync());
-        ///     }
+        ///     var datahubTopic = Tencentcloud.Ckafka.GetDatahubTopic.Invoke();
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetDatahubTopicResult> Invoke(GetDatahubTopicInvokeArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetDatahubTopicResult>("tencentcloud:Ckafka/getDatahubTopic:getDatahubTopic", args ?? new GetDatahubTopicInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetDatahubTopicResult>("tencentcloud:Ckafka/getDatahubTopic:getDatahubTopic", args ?? new GetDatahubTopicInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetDatahubTopicArgs : Pulumi.InvokeArgs
+    public sealed class GetDatahubTopicArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// The maximum number of results returned this time, the default is 50, and the maximum value is 50.
@@ -95,9 +89,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka
         public GetDatahubTopicArgs()
         {
         }
+        public static new GetDatahubTopicArgs Empty => new GetDatahubTopicArgs();
     }
 
-    public sealed class GetDatahubTopicInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetDatahubTopicInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// The maximum number of results returned this time, the default is 50, and the maximum value is 50.
@@ -126,6 +121,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka
         public GetDatahubTopicInvokeArgs()
         {
         }
+        public static new GetDatahubTopicInvokeArgs Empty => new GetDatahubTopicInvokeArgs();
     }
 
 

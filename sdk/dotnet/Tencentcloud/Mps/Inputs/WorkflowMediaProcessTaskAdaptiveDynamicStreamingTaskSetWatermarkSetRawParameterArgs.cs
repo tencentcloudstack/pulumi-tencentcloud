@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps.Inputs
 {
 
-    public sealed class WorkflowMediaProcessTaskAdaptiveDynamicStreamingTaskSetWatermarkSetRawParameterArgs : Pulumi.ResourceArgs
+    public sealed class WorkflowMediaProcessTaskAdaptiveDynamicStreamingTaskSetWatermarkSetRawParameterArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Origin position, currently only supports:TopLeft: Indicates that the origin of the coordinates is at the upper left corner of the video image, and the origin of the watermark is the upper left corner of the picture or text.Default: TopLeft.
@@ -46,5 +46,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps.Inputs
         public WorkflowMediaProcessTaskAdaptiveDynamicStreamingTaskSetWatermarkSetRawParameterArgs()
         {
         }
+        public static new WorkflowMediaProcessTaskAdaptiveDynamicStreamingTaskSetWatermarkSetRawParameterArgs Empty => new WorkflowMediaProcessTaskAdaptiveDynamicStreamingTaskSetWatermarkSetRawParameterArgs();
     }
 }

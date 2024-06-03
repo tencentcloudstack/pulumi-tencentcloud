@@ -15,40 +15,41 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Image
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var imageSnap = new Tencentcloud.Image.Instance("imageSnap", new()
     ///     {
-    ///         var imageSnap = new Tencentcloud.Image.Instance("imageSnap", new Tencentcloud.Image.InstanceArgs
+    ///         ForcePoweroff = true,
+    ///         ImageDescription = "create image with snapshot",
+    ///         ImageName = "image-snapshot-keep",
+    ///         SnapshotIds = new[]
     ///         {
-    ///             ForcePoweroff = true,
-    ///             ImageDescription = "create image with snapshot",
-    ///             ImageName = "image-snapshot-keep",
-    ///             SnapshotIds = 
-    ///             {
-    ///                 "snap-nbp3xy1d",
-    ///                 "snap-nvzu3dmh",
-    ///             },
-    ///         });
-    ///     }
+    ///             "snap-nbp3xy1d",
+    ///             "snap-nvzu3dmh",
+    ///         },
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// image instance can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Image/instance:Instance image_snap img-gf7jspk6
+    /// $ pulumi import tencentcloud:Image/instance:Instance image_snap img-gf7jspk6
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Image/instance:Instance")]
-    public partial class Instance : Pulumi.CustomResource
+    public partial class Instance : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Cloud disk ID list, When creating a whole machine image based on an instance, specify the data disk ID contained in the image.
@@ -143,7 +144,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Image
         }
     }
 
-    public sealed class InstanceArgs : Pulumi.ResourceArgs
+    public sealed class InstanceArgs : global::Pulumi.ResourceArgs
     {
         [Input("dataDiskIds")]
         private InputList<string>? _dataDiskIds;
@@ -214,9 +215,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Image
         public InstanceArgs()
         {
         }
+        public static new InstanceArgs Empty => new InstanceArgs();
     }
 
-    public sealed class InstanceState : Pulumi.ResourceArgs
+    public sealed class InstanceState : global::Pulumi.ResourceArgs
     {
         [Input("dataDiskIds")]
         private InputList<string>? _dataDiskIds;
@@ -287,5 +289,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Image
         public InstanceState()
         {
         }
+        public static new InstanceState Empty => new InstanceState();
     }
 }

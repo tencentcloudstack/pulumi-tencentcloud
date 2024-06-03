@@ -15,58 +15,52 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssm
         /// <summary>
         /// Use this data source to query detailed information of ssm service_status
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
-        ///     {
-        ///         var example = Output.Create(Tencentcloud.Ssm.GetServiceStatus.InvokeAsync());
-        ///     }
+        ///     var example = Tencentcloud.Ssm.GetServiceStatus.Invoke();
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetServiceStatusResult> InvokeAsync(GetServiceStatusArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetServiceStatusResult>("tencentcloud:Ssm/getServiceStatus:getServiceStatus", args ?? new GetServiceStatusArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetServiceStatusResult>("tencentcloud:Ssm/getServiceStatus:getServiceStatus", args ?? new GetServiceStatusArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of ssm service_status
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
-        ///     {
-        ///         var example = Output.Create(Tencentcloud.Ssm.GetServiceStatus.InvokeAsync());
-        ///     }
+        ///     var example = Tencentcloud.Ssm.GetServiceStatus.Invoke();
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetServiceStatusResult> Invoke(GetServiceStatusInvokeArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetServiceStatusResult>("tencentcloud:Ssm/getServiceStatus:getServiceStatus", args ?? new GetServiceStatusInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetServiceStatusResult>("tencentcloud:Ssm/getServiceStatus:getServiceStatus", args ?? new GetServiceStatusInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetServiceStatusArgs : Pulumi.InvokeArgs
+    public sealed class GetServiceStatusArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Used to save results.
@@ -77,9 +71,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssm
         public GetServiceStatusArgs()
         {
         }
+        public static new GetServiceStatusArgs Empty => new GetServiceStatusArgs();
     }
 
-    public sealed class GetServiceStatusInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetServiceStatusInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Used to save results.
@@ -90,6 +85,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssm
         public GetServiceStatusInvokeArgs()
         {
         }
+        public static new GetServiceStatusInvokeArgs Empty => new GetServiceStatusInvokeArgs();
     }
 
 

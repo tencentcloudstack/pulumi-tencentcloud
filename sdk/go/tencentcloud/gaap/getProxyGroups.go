@@ -8,43 +8,48 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Use this data source to query detailed information of gaap proxy groups
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Gaap"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Gaap"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Gaap"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Gaap.GetProxyGroups(ctx, &gaap.GetProxyGroupsArgs{
-// 			Filters: []gaap.GetProxyGroupsFilter{
-// 				gaap.GetProxyGroupsFilter{
-// 					Name: "GroupId",
-// 					Values: []string{
-// 						"lg-5anbbou5",
-// 					},
-// 				},
-// 			},
-// 			ProjectId: 0,
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Gaap.GetProxyGroups(ctx, &gaap.GetProxyGroupsArgs{
+//				Filters: []gaap.GetProxyGroupsFilter{
+//					{
+//						Name: "GroupId",
+//						Values: []string{
+//							"lg-2foz7wjh",
+//						},
+//					},
+//				},
+//				ProjectId: 0,
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 func GetProxyGroups(ctx *pulumi.Context, args *GetProxyGroupsArgs, opts ...pulumi.InvokeOption) (*GetProxyGroupsResult, error) {
-	opts = pkgInvokeDefaultOpts(opts)
+	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetProxyGroupsResult
 	err := ctx.Invoke("tencentcloud:Gaap/getProxyGroups:getProxyGroups", args, &rv, opts...)
 	if err != nil {

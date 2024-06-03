@@ -7,104 +7,19 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a redis ssl
-//
-// ## Example Usage
-//
-// ```go
-// package main
-//
-// import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Redis"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Redis"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Security"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Subnet"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
-// )
-//
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		zone, err := Redis.GetZoneConfig(ctx, &redis.GetZoneConfigArgs{
-// 			TypeId: pulumi.IntRef(7),
-// 			Region: pulumi.StringRef("ap-guangzhou"),
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		vpc, err := Vpc.NewInstance(ctx, "vpc", &Vpc.InstanceArgs{
-// 			CidrBlock: pulumi.String("10.0.0.0/16"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		subnet, err := Subnet.NewInstance(ctx, "subnet", &Subnet.InstanceArgs{
-// 			VpcId:            vpc.ID(),
-// 			AvailabilityZone: pulumi.String(zone.Lists[2].Zone),
-// 			CidrBlock:        pulumi.String("10.0.1.0/24"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		fooGroup, err := Security.NewGroup(ctx, "fooGroup", nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_, err = Security.NewGroupLiteRule(ctx, "fooGroupLiteRule", &Security.GroupLiteRuleArgs{
-// 			SecurityGroupId: fooGroup.ID(),
-// 			Ingresses: pulumi.StringArray{
-// 				pulumi.String("ACCEPT#192.168.1.0/24#80#TCP"),
-// 				pulumi.String("DROP#8.8.8.8#80,90#UDP"),
-// 				pulumi.String("DROP#0.0.0.0/0#80-90#TCP"),
-// 			},
-// 			Egresses: pulumi.StringArray{
-// 				pulumi.String("ACCEPT#192.168.0.0/16#ALL#TCP"),
-// 				pulumi.String("ACCEPT#10.0.0.0/8#ALL#ICMP"),
-// 				pulumi.String("DROP#0.0.0.0/0#ALL#ALL"),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		fooInstance, err := Redis.NewInstance(ctx, "fooInstance", &Redis.InstanceArgs{
-// 			AvailabilityZone: pulumi.String(zone.Lists[2].Zone),
-// 			TypeId:           pulumi.Int(zone.Lists[2].TypeId),
-// 			Password:         pulumi.String("test12345789"),
-// 			MemSize:          pulumi.Int(8192),
-// 			RedisShardNum:    pulumi.Int(zone.Lists[2].RedisShardNums[0]),
-// 			RedisReplicasNum: pulumi.Int(zone.Lists[2].RedisReplicasNums[0]),
-// 			Port:             pulumi.Int(6379),
-// 			VpcId:            vpc.ID(),
-// 			SubnetId:         subnet.ID(),
-// 			SecurityGroups: pulumi.StringArray{
-// 				fooGroup.ID(),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_, err = Redis.NewSsl(ctx, "ssl", &Redis.SslArgs{
-// 			InstanceId: fooInstance.ID(),
-// 			SslConfig:  pulumi.String("disabled"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
-// ```
 //
 // ## Import
 //
 // redis ssl can be imported using the instanceId, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Redis/ssl:Ssl ssl crs-c1nl9rpv
+// $ pulumi import tencentcloud:Redis/ssl:Ssl ssl crs-c1nl9rpv
 // ```
 type Ssl struct {
 	pulumi.CustomResourceState
@@ -128,7 +43,7 @@ func NewSsl(ctx *pulumi.Context,
 	if args.SslConfig == nil {
 		return nil, errors.New("invalid value for required argument 'SslConfig'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource Ssl
 	err := ctx.RegisterResource("tencentcloud:Redis/ssl:Ssl", name, args, &resource, opts...)
 	if err != nil {
@@ -209,7 +124,7 @@ func (i *Ssl) ToSslOutputWithContext(ctx context.Context) SslOutput {
 // SslArrayInput is an input type that accepts SslArray and SslArrayOutput values.
 // You can construct a concrete instance of `SslArrayInput` via:
 //
-//          SslArray{ SslArgs{...} }
+//	SslArray{ SslArgs{...} }
 type SslArrayInput interface {
 	pulumi.Input
 
@@ -234,7 +149,7 @@ func (i SslArray) ToSslArrayOutputWithContext(ctx context.Context) SslArrayOutpu
 // SslMapInput is an input type that accepts SslMap and SslMapOutput values.
 // You can construct a concrete instance of `SslMapInput` via:
 //
-//          SslMap{ "key": SslArgs{...} }
+//	SslMap{ "key": SslArgs{...} }
 type SslMapInput interface {
 	pulumi.Input
 

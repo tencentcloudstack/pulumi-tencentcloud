@@ -15,41 +15,42 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var globalDomainDns = new Tencentcloud.Gaap.GlobalDomainDns("globalDomainDns", new()
     ///     {
-    ///         var globalDomainDns = new Tencentcloud.Gaap.GlobalDomainDns("globalDomainDns", new Tencentcloud.Gaap.GlobalDomainDnsArgs
+    ///         DomainId = "dm-xxxxxx",
+    ///         NationCountryInnerCodes = new[]
     ///         {
-    ///             DomainId = "dm-xxxxxx",
-    ///             NationCountryInnerCodes = 
-    ///             {
-    ///                 "101001",
-    ///             },
-    ///             ProxyIdLists = 
-    ///             {
-    ///                 "link-xxxxxx",
-    ///             },
-    ///         });
-    ///     }
+    ///             "101001",
+    ///         },
+    ///         ProxyIdLists = new[]
+    ///         {
+    ///             "link-xxxxxx",
+    ///         },
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// gaap global_domain_dns can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Gaap/globalDomainDns:GlobalDomainDns global_domain_dns ${domainId}#${dnsRecordId}
+    /// $ pulumi import tencentcloud:Gaap/globalDomainDns:GlobalDomainDns global_domain_dns ${domainId}#${dnsRecordId}
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Gaap/globalDomainDns:GlobalDomainDns")]
-    public partial class GlobalDomainDns : Pulumi.CustomResource
+    public partial class GlobalDomainDns : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Domain Id.
@@ -114,7 +115,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
         }
     }
 
-    public sealed class GlobalDomainDnsArgs : Pulumi.ResourceArgs
+    public sealed class GlobalDomainDnsArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Domain Id.
@@ -149,9 +150,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
         public GlobalDomainDnsArgs()
         {
         }
+        public static new GlobalDomainDnsArgs Empty => new GlobalDomainDnsArgs();
     }
 
-    public sealed class GlobalDomainDnsState : Pulumi.ResourceArgs
+    public sealed class GlobalDomainDnsState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Domain Id.
@@ -186,5 +188,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
         public GlobalDomainDnsState()
         {
         }
+        public static new GlobalDomainDnsState Empty => new GlobalDomainDnsState();
     }
 }

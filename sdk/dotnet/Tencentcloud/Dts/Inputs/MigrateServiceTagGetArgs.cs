@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dts.Inputs
 {
 
-    public sealed class MigrateServiceTagGetArgs : Pulumi.ResourceArgs
+    public sealed class MigrateServiceTagGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// tag key.
@@ -28,5 +28,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dts.Inputs
         public MigrateServiceTagGetArgs()
         {
         }
+        public static new MigrateServiceTagGetArgs Empty => new MigrateServiceTagGetArgs();
     }
 }

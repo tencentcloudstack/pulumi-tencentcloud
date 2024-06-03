@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dayu.Inputs
 {
 
-    public sealed class DdosPolicyWatermarkKeyGetArgs : Pulumi.ResourceArgs
+    public sealed class DdosPolicyWatermarkKeyGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Content of the watermark.
@@ -40,5 +40,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dayu.Inputs
         public DdosPolicyWatermarkKeyGetArgs()
         {
         }
+        public static new DdosPolicyWatermarkKeyGetArgs Empty => new DdosPolicyWatermarkKeyGetArgs();
     }
 }

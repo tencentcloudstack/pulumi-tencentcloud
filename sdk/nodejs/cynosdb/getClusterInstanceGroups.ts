@@ -2,30 +2,16 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
  * Use this data source to query detailed information of cynosdb clusterInstanceGroups
- *
- * ## Example Usage
- *
- * ```typescript
- * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
- *
- * const clusterInstanceGroups = pulumi.output(tencentcloud.Cynosdb.getClusterInstanceGroups({
- *     clusterId: "",
- *     xxxxxx: [{}],
- * }));
- * ```
  */
 export function getClusterInstanceGroups(args: GetClusterInstanceGroupsArgs, opts?: pulumi.InvokeOptions): Promise<GetClusterInstanceGroupsResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Cynosdb/getClusterInstanceGroups:getClusterInstanceGroups", {
         "clusterId": args.clusterId,
         "resultOutputFile": args.resultOutputFile,
@@ -64,9 +50,11 @@ export interface GetClusterInstanceGroupsResult {
     readonly instanceGrpInfoLists: outputs.Cynosdb.GetClusterInstanceGroupsInstanceGrpInfoList[];
     readonly resultOutputFile?: string;
 }
-
+/**
+ * Use this data source to query detailed information of cynosdb clusterInstanceGroups
+ */
 export function getClusterInstanceGroupsOutput(args: GetClusterInstanceGroupsOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetClusterInstanceGroupsResult> {
-    return pulumi.output(args).apply(a => getClusterInstanceGroups(a, opts))
+    return pulumi.output(args).apply((a: any) => getClusterInstanceGroups(a, opts))
 }
 
 /**

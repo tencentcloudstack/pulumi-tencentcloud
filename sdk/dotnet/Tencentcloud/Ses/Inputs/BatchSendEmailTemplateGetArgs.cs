@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ses.Inputs
 {
 
-    public sealed class BatchSendEmailTemplateGetArgs : Pulumi.ResourceArgs
+    public sealed class BatchSendEmailTemplateGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Variable parameters in the template. Please use json.dump to format the JSON object into a string type.The object is a set of key-value pairs. Each key denotes a variable, which is represented by {{key}}. The key will be replaced with the correspondingvalue (represented by {{value}}) when sending the email.Note: The parameter value cannot be data of a complex type such as HTML.Example: {name:xxx,age:xx}.
@@ -28,5 +28,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ses.Inputs
         public BatchSendEmailTemplateGetArgs()
         {
         }
+        public static new BatchSendEmailTemplateGetArgs Empty => new BatchSendEmailTemplateGetArgs();
     }
 }

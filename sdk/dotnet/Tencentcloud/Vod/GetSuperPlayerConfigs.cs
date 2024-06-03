@@ -15,118 +15,114 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vod
         /// <summary>
         /// Use this data source to query detailed information of VOD super player configs.
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var fooSuperPlayerConfig = new Tencentcloud.Vod.SuperPlayerConfig("fooSuperPlayerConfig", new()
         ///     {
-        ///         var fooSuperPlayerConfig = new Tencentcloud.Vod.SuperPlayerConfig("fooSuperPlayerConfig", new Tencentcloud.Vod.SuperPlayerConfigArgs
+        ///         DrmSwitch = true,
+        ///         DrmStreamingInfo = new Tencentcloud.Vod.Inputs.SuperPlayerConfigDrmStreamingInfoArgs
         ///         {
-        ///             DrmSwitch = true,
-        ///             DrmStreamingInfo = new Tencentcloud.Vod.Inputs.SuperPlayerConfigDrmStreamingInfoArgs
-        ///             {
-        ///                 SimpleAesDefinition = tencentcloud_vod_adaptive_dynamic_streaming_template.Foo.Id,
-        ///             },
-        ///             ImageSpriteDefinition = tencentcloud_vod_image_sprite_template.Foo.Id,
-        ///             ResolutionNames = 
-        ///             {
-        ///                 new Tencentcloud.Vod.Inputs.SuperPlayerConfigResolutionNameArgs
-        ///                 {
-        ///                     MinEdgeLength = 889,
-        ///                     Name = "test1",
-        ///                 },
-        ///                 new Tencentcloud.Vod.Inputs.SuperPlayerConfigResolutionNameArgs
-        ///                 {
-        ///                     MinEdgeLength = 890,
-        ///                     Name = "test2",
-        ///                 },
-        ///             },
-        ///             Domain = "Default",
-        ///             Scheme = "Default",
-        ///             Comment = "test",
-        ///         });
-        ///         var fooSuperPlayerConfigs = Output.Create(Tencentcloud.Vod.GetSuperPlayerConfigs.InvokeAsync(new Tencentcloud.Vod.GetSuperPlayerConfigsArgs
+        ///             SimpleAesDefinition = tencentcloud_vod_adaptive_dynamic_streaming_template.Foo.Id,
+        ///         },
+        ///         ImageSpriteDefinition = tencentcloud_vod_image_sprite_template.Foo.Id,
+        ///         ResolutionNames = new[]
         ///         {
-        ///             Type = "Custom",
-        ///             Name = "tf-super-player",
-        ///         }));
-        ///     }
+        ///             new Tencentcloud.Vod.Inputs.SuperPlayerConfigResolutionNameArgs
+        ///             {
+        ///                 MinEdgeLength = 889,
+        ///                 Name = "test1",
+        ///             },
+        ///             new Tencentcloud.Vod.Inputs.SuperPlayerConfigResolutionNameArgs
+        ///             {
+        ///                 MinEdgeLength = 890,
+        ///                 Name = "test2",
+        ///             },
+        ///         },
+        ///         Domain = "Default",
+        ///         Scheme = "Default",
+        ///         Comment = "test",
+        ///     });
         /// 
-        /// }
+        ///     var fooSuperPlayerConfigs = Tencentcloud.Vod.GetSuperPlayerConfigs.Invoke(new()
+        ///     {
+        ///         Type = "Custom",
+        ///         Name = "tf-super-player",
+        ///     });
+        /// 
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetSuperPlayerConfigsResult> InvokeAsync(GetSuperPlayerConfigsArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetSuperPlayerConfigsResult>("tencentcloud:Vod/getSuperPlayerConfigs:getSuperPlayerConfigs", args ?? new GetSuperPlayerConfigsArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetSuperPlayerConfigsResult>("tencentcloud:Vod/getSuperPlayerConfigs:getSuperPlayerConfigs", args ?? new GetSuperPlayerConfigsArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of VOD super player configs.
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var fooSuperPlayerConfig = new Tencentcloud.Vod.SuperPlayerConfig("fooSuperPlayerConfig", new()
         ///     {
-        ///         var fooSuperPlayerConfig = new Tencentcloud.Vod.SuperPlayerConfig("fooSuperPlayerConfig", new Tencentcloud.Vod.SuperPlayerConfigArgs
+        ///         DrmSwitch = true,
+        ///         DrmStreamingInfo = new Tencentcloud.Vod.Inputs.SuperPlayerConfigDrmStreamingInfoArgs
         ///         {
-        ///             DrmSwitch = true,
-        ///             DrmStreamingInfo = new Tencentcloud.Vod.Inputs.SuperPlayerConfigDrmStreamingInfoArgs
-        ///             {
-        ///                 SimpleAesDefinition = tencentcloud_vod_adaptive_dynamic_streaming_template.Foo.Id,
-        ///             },
-        ///             ImageSpriteDefinition = tencentcloud_vod_image_sprite_template.Foo.Id,
-        ///             ResolutionNames = 
-        ///             {
-        ///                 new Tencentcloud.Vod.Inputs.SuperPlayerConfigResolutionNameArgs
-        ///                 {
-        ///                     MinEdgeLength = 889,
-        ///                     Name = "test1",
-        ///                 },
-        ///                 new Tencentcloud.Vod.Inputs.SuperPlayerConfigResolutionNameArgs
-        ///                 {
-        ///                     MinEdgeLength = 890,
-        ///                     Name = "test2",
-        ///                 },
-        ///             },
-        ///             Domain = "Default",
-        ///             Scheme = "Default",
-        ///             Comment = "test",
-        ///         });
-        ///         var fooSuperPlayerConfigs = Output.Create(Tencentcloud.Vod.GetSuperPlayerConfigs.InvokeAsync(new Tencentcloud.Vod.GetSuperPlayerConfigsArgs
+        ///             SimpleAesDefinition = tencentcloud_vod_adaptive_dynamic_streaming_template.Foo.Id,
+        ///         },
+        ///         ImageSpriteDefinition = tencentcloud_vod_image_sprite_template.Foo.Id,
+        ///         ResolutionNames = new[]
         ///         {
-        ///             Type = "Custom",
-        ///             Name = "tf-super-player",
-        ///         }));
-        ///     }
+        ///             new Tencentcloud.Vod.Inputs.SuperPlayerConfigResolutionNameArgs
+        ///             {
+        ///                 MinEdgeLength = 889,
+        ///                 Name = "test1",
+        ///             },
+        ///             new Tencentcloud.Vod.Inputs.SuperPlayerConfigResolutionNameArgs
+        ///             {
+        ///                 MinEdgeLength = 890,
+        ///                 Name = "test2",
+        ///             },
+        ///         },
+        ///         Domain = "Default",
+        ///         Scheme = "Default",
+        ///         Comment = "test",
+        ///     });
         /// 
-        /// }
+        ///     var fooSuperPlayerConfigs = Tencentcloud.Vod.GetSuperPlayerConfigs.Invoke(new()
+        ///     {
+        ///         Type = "Custom",
+        ///         Name = "tf-super-player",
+        ///     });
+        /// 
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetSuperPlayerConfigsResult> Invoke(GetSuperPlayerConfigsInvokeArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetSuperPlayerConfigsResult>("tencentcloud:Vod/getSuperPlayerConfigs:getSuperPlayerConfigs", args ?? new GetSuperPlayerConfigsInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetSuperPlayerConfigsResult>("tencentcloud:Vod/getSuperPlayerConfigs:getSuperPlayerConfigs", args ?? new GetSuperPlayerConfigsInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetSuperPlayerConfigsArgs : Pulumi.InvokeArgs
+    public sealed class GetSuperPlayerConfigsArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Name of super player config.
@@ -155,9 +151,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vod
         public GetSuperPlayerConfigsArgs()
         {
         }
+        public static new GetSuperPlayerConfigsArgs Empty => new GetSuperPlayerConfigsArgs();
     }
 
-    public sealed class GetSuperPlayerConfigsInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetSuperPlayerConfigsInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Name of super player config.
@@ -186,6 +183,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vod
         public GetSuperPlayerConfigsInvokeArgs()
         {
         }
+        public static new GetSuperPlayerConfigsInvokeArgs Empty => new GetSuperPlayerConfigsInvokeArgs();
     }
 
 

@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor.Inputs
 {
 
-    public sealed class TmpTkeGlobalNotificationNotificationGetArgs : Pulumi.ResourceArgs
+    public sealed class TmpTkeGlobalNotificationNotificationGetArgs : global::Pulumi.ResourceArgs
     {
         [Input("alertManagers")]
         private InputList<Inputs.TmpTkeGlobalNotificationNotificationAlertManagerGetArgs>? _alertManagers;
@@ -124,5 +124,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor.Inputs
         public TmpTkeGlobalNotificationNotificationGetArgs()
         {
         }
+        public static new TmpTkeGlobalNotificationNotificationGetArgs Empty => new TmpTkeGlobalNotificationNotificationGetArgs();
     }
 }

@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -11,13 +12,15 @@ import * as utilities from "../utilities";
  * > **NOTE:** It only support create postpaid rocketmq 5.x instance.
  *
  * ## Example Usage
+ *
  * ### Basic Instance
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const rocketmqInstance = new tencentcloud.Trocket.RocketmqInstance("rocketmq_instance", {
+ * const rocketmqInstance = new tencentcloud.trocket.RocketmqInstance("rocketmqInstance", {
  *     instanceType: "EXPERIMENT",
  *     remark: "remark",
  *     skuCode: "experiment_500",
@@ -29,13 +32,16 @@ import * as utilities from "../utilities";
  *     vpcId: "vpc-xxxxxx",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
+ *
  * ### Enable Public Instance
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const rocketmqInstancePublic = new tencentcloud.Trocket.RocketmqInstance("rocketmq_instance_public", {
+ * const rocketmqInstancePublic = new tencentcloud.trocket.RocketmqInstance("rocketmqInstancePublic", {
  *     bandwidth: 1,
  *     enablePublic: true,
  *     instanceType: "EXPERIMENT",
@@ -49,13 +55,14 @@ import * as utilities from "../utilities";
  *     vpcId: "vpc-xxxxxx",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * trocket rocketmq_instance can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Trocket/rocketmqInstance:RocketmqInstance rocketmq_instance rocketmq_instance_id
+ * $ pulumi import tencentcloud:Trocket/rocketmqInstance:RocketmqInstance rocketmq_instance rocketmq_instance_id
  * ```
  */
 export class RocketmqInstance extends pulumi.CustomResource {

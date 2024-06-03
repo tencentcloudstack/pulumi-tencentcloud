@@ -15,58 +15,52 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
         /// <summary>
         /// Use this data source to query detailed information of postgresql db_instance_versions
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
-        ///     {
-        ///         var dbInstanceVersions = Output.Create(Tencentcloud.Postgresql.GetDbInstanceVersions.InvokeAsync());
-        ///     }
+        ///     var dbInstanceVersions = Tencentcloud.Postgresql.GetDbInstanceVersions.Invoke();
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetDbInstanceVersionsResult> InvokeAsync(GetDbInstanceVersionsArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetDbInstanceVersionsResult>("tencentcloud:Postgresql/getDbInstanceVersions:getDbInstanceVersions", args ?? new GetDbInstanceVersionsArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetDbInstanceVersionsResult>("tencentcloud:Postgresql/getDbInstanceVersions:getDbInstanceVersions", args ?? new GetDbInstanceVersionsArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of postgresql db_instance_versions
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
-        ///     {
-        ///         var dbInstanceVersions = Output.Create(Tencentcloud.Postgresql.GetDbInstanceVersions.InvokeAsync());
-        ///     }
+        ///     var dbInstanceVersions = Tencentcloud.Postgresql.GetDbInstanceVersions.Invoke();
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetDbInstanceVersionsResult> Invoke(GetDbInstanceVersionsInvokeArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetDbInstanceVersionsResult>("tencentcloud:Postgresql/getDbInstanceVersions:getDbInstanceVersions", args ?? new GetDbInstanceVersionsInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetDbInstanceVersionsResult>("tencentcloud:Postgresql/getDbInstanceVersions:getDbInstanceVersions", args ?? new GetDbInstanceVersionsInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetDbInstanceVersionsArgs : Pulumi.InvokeArgs
+    public sealed class GetDbInstanceVersionsArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Used to save results.
@@ -77,9 +71,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
         public GetDbInstanceVersionsArgs()
         {
         }
+        public static new GetDbInstanceVersionsArgs Empty => new GetDbInstanceVersionsArgs();
     }
 
-    public sealed class GetDbInstanceVersionsInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetDbInstanceVersionsInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Used to save results.
@@ -90,6 +85,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
         public GetDbInstanceVersionsInvokeArgs()
         {
         }
+        public static new GetDbInstanceVersionsInvokeArgs Empty => new GetDbInstanceVersionsInvokeArgs();
     }
 
 

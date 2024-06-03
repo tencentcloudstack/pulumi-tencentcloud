@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -12,11 +13,12 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const foo = new tencentcloud.Cdn.Domain("foo", {
+ * const foo = new tencentcloud.cdn.Domain("foo", {
  *     area: "mainland",
  *     domain: "xxxx.com",
  *     fullUrlCache: false,
@@ -24,7 +26,7 @@ import * as utilities from "../utilities";
  *         forceRedirect: {
  *             redirectStatusCode: 302,
  *             redirectType: "http",
- *             switch: "on",
+ *             "switch": "on",
  *         },
  *         http2Switch: "off",
  *         httpsSwitch: "off",
@@ -43,15 +45,17 @@ import * as utilities from "../utilities";
  *     },
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
+ *
  * ### Example Usage of cdn uses cache and request headers
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const foo = new tencentcloud.Cdn.Domain("foo", {
+ * const foo = new tencentcloud.cdn.Domain("foo", {
  *     area: "mainland",
- *     // full_url_cache = true # Deprecated, use cache_key below.
  *     cacheKey: {
  *         fullUrlCache: "on",
  *     },
@@ -60,7 +64,7 @@ import * as utilities from "../utilities";
  *         forceRedirect: {
  *             redirectStatusCode: 302,
  *             redirectType: "http",
- *             switch: "on",
+ *             "switch": "on",
  *         },
  *         http2Switch: "off",
  *         httpsSwitch: "off",
@@ -82,7 +86,7 @@ import * as utilities from "../utilities";
  *             rulePaths: ["*"],
  *             ruleType: "all",
  *         }],
- *         switch: "on",
+ *         "switch": "on",
  *     },
  *     ruleCaches: [{
  *         cacheTime: 10000,
@@ -95,11 +99,14 @@ import * as utilities from "../utilities";
  *     },
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
+ *
  * ### Example Usage of COS bucket url as origin
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const bucket = new tencentcloud.cos.Bucket("bucket", {
  *     bucket: "demo-bucket-1251234567",
@@ -129,13 +136,14 @@ import * as utilities from "../utilities";
  *     },
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * CDN domain can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Cdn/domain:Domain foo xxxx.com
+ * $ pulumi import tencentcloud:Cdn/domain:Domain foo xxxx.com
  * ```
  */
 export class Domain extends pulumi.CustomResource {
@@ -229,7 +237,7 @@ export class Domain extends pulumi.CustomResource {
     /**
      * Use `cacheKey` > `fullUrlCache` instead. Whether to enable full-path cache. Default value is `true`.
      *
-     * @deprecated Use `cache_key` -> `full_url_cache` instead.
+     * @deprecated Use `cacheKey` -> `fullUrlCache` instead.
      */
     public readonly fullUrlCache!: pulumi.Output<boolean | undefined>;
     /**
@@ -536,7 +544,7 @@ export interface DomainState {
     /**
      * Use `cacheKey` > `fullUrlCache` instead. Whether to enable full-path cache. Default value is `true`.
      *
-     * @deprecated Use `cache_key` -> `full_url_cache` instead.
+     * @deprecated Use `cacheKey` -> `fullUrlCache` instead.
      */
     fullUrlCache?: pulumi.Input<boolean>;
     /**
@@ -708,7 +716,7 @@ export interface DomainArgs {
     /**
      * Use `cacheKey` > `fullUrlCache` instead. Whether to enable full-path cache. Default value is `true`.
      *
-     * @deprecated Use `cache_key` -> `full_url_cache` instead.
+     * @deprecated Use `cacheKey` -> `fullUrlCache` instead.
      */
     fullUrlCache?: pulumi.Input<boolean>;
     /**

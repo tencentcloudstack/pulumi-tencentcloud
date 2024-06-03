@@ -13,14 +13,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
     public static class GetDescHaLog
     {
         public static Task<GetDescHaLogResult> InvokeAsync(GetDescHaLogArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetDescHaLogResult>("tencentcloud:Sqlserver/getDescHaLog:getDescHaLog", args ?? new GetDescHaLogArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetDescHaLogResult>("tencentcloud:Sqlserver/getDescHaLog:getDescHaLog", args ?? new GetDescHaLogArgs(), options.WithDefaults());
 
         public static Output<GetDescHaLogResult> Invoke(GetDescHaLogInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetDescHaLogResult>("tencentcloud:Sqlserver/getDescHaLog:getDescHaLog", args ?? new GetDescHaLogInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetDescHaLogResult>("tencentcloud:Sqlserver/getDescHaLog:getDescHaLog", args ?? new GetDescHaLogInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetDescHaLogArgs : Pulumi.InvokeArgs
+    public sealed class GetDescHaLogArgs : global::Pulumi.InvokeArgs
     {
         [Input("endTime", required: true)]
         public string EndTime { get; set; } = null!;
@@ -40,9 +40,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
         public GetDescHaLogArgs()
         {
         }
+        public static new GetDescHaLogArgs Empty => new GetDescHaLogArgs();
     }
 
-    public sealed class GetDescHaLogInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetDescHaLogInvokeArgs : global::Pulumi.InvokeArgs
     {
         [Input("endTime", required: true)]
         public Input<string> EndTime { get; set; } = null!;
@@ -62,6 +63,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
         public GetDescHaLogInvokeArgs()
         {
         }
+        public static new GetDescHaLogInvokeArgs Empty => new GetDescHaLogInvokeArgs();
     }
 
 

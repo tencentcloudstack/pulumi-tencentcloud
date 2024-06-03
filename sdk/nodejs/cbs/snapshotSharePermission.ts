@@ -9,11 +9,12 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const snapshotSharePermission = new tencentcloud.Cbs.SnapshotSharePermission("snapshot_share_permission", {
+ * const snapshotSharePermission = new tencentcloud.cbs.SnapshotSharePermission("snapshotSharePermission", {
  *     accountIds: [
  *         "1xxxxxx",
  *         "2xxxxxx",
@@ -21,13 +22,14 @@ import * as utilities from "../utilities";
  *     snapshotId: "snap-xxxxxx",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * cbs snapshot_share_permission can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Cbs/snapshotSharePermission:SnapshotSharePermission snapshot_share_permission snap-xxxxxx
+ * $ pulumi import tencentcloud:Cbs/snapshotSharePermission:SnapshotSharePermission snapshot_share_permission snap-xxxxxx
  * ```
  */
 export class SnapshotSharePermission extends pulumi.CustomResource {

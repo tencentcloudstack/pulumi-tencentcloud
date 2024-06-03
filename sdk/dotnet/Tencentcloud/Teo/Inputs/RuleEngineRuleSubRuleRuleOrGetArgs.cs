@@ -11,13 +11,13 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Inputs
 {
 
-    public sealed class RuleEngineRuleSubRuleRuleOrGetArgs : Pulumi.ResourceArgs
+    public sealed class RuleEngineRuleSubRuleRuleOrGetArgs : global::Pulumi.ResourceArgs
     {
         [Input("ands", required: true)]
         private InputList<Inputs.RuleEngineRuleSubRuleRuleOrAndGetArgs>? _ands;
 
         /// <summary>
-        /// AND Conditions list of the rule. Rule would be triggered if all conditions are true.
+        /// Rule engine condition. This condition will be considered met if all items in the array are met.
         /// </summary>
         public InputList<Inputs.RuleEngineRuleSubRuleRuleOrAndGetArgs> Ands
         {
@@ -28,5 +28,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Inputs
         public RuleEngineRuleSubRuleRuleOrGetArgs()
         {
         }
+        public static new RuleEngineRuleSubRuleRuleOrGetArgs Empty => new RuleEngineRuleSubRuleRuleOrGetArgs();
     }
 }

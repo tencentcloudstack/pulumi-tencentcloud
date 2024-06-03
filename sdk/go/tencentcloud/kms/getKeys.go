@@ -8,38 +8,43 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Use this data source to query detailed information of KMS key
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Kms"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Kms"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Kms"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Kms.GetKeys(ctx, &kms.GetKeysArgs{
-// 			KeyState:       pulumi.IntRef(0),
-// 			KeyUsage:       pulumi.StringRef("ALL"),
-// 			Origin:         pulumi.StringRef("TENCENT_KMS"),
-// 			SearchKeyAlias: pulumi.StringRef("tf_example"),
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Kms.GetKeys(ctx, &kms.GetKeysArgs{
+//				KeyState:       pulumi.IntRef(0),
+//				KeyUsage:       pulumi.StringRef("ALL"),
+//				Origin:         pulumi.StringRef("TENCENT_KMS"),
+//				SearchKeyAlias: pulumi.StringRef("tf_example"),
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 func GetKeys(ctx *pulumi.Context, args *GetKeysArgs, opts ...pulumi.InvokeOption) (*GetKeysResult, error) {
-	opts = pkgInvokeDefaultOpts(opts)
+	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetKeysResult
 	err := ctx.Invoke("tencentcloud:Kms/getKeys:getKeys", args, &rv, opts...)
 	if err != nil {

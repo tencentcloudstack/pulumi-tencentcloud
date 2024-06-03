@@ -15,56 +15,59 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = Pulumi.Tencentcloud;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var config = new Config();
+    ///     var camGroupBasic = config.Get("camGroupBasic") ?? "keep-cam-group";
+    ///     var groups = Tencentcloud.Cam.GetGroups.Invoke(new()
     ///     {
-    ///         var config = new Config();
-    ///         var camGroupBasic = config.Get("camGroupBasic") ?? "keep-cam-group";
-    ///         var groups = Output.Create(Tencentcloud.Cam.GetGroups.InvokeAsync(new Tencentcloud.Cam.GetGroupsArgs
-    ///         {
-    ///             Name = camGroupBasic,
-    ///         }));
-    ///         var foo = new Tencentcloud.Cam.User("foo", new Tencentcloud.Cam.UserArgs
-    ///         {
-    ///             Remark = "tf_user_remark",
-    ///             ConsoleLogin = true,
-    ///             UseApi = true,
-    ///             NeedResetPassword = true,
-    ///             Password = "Gail@1234",
-    ///             PhoneNum = "12345678910",
-    ///             CountryCode = "86",
-    ///             Email = "1234@qq.com",
-    ///             ForceDelete = true,
-    ///         });
-    ///         var groupMembershipBasic = new Tencentcloud.Cam.GroupMembership("groupMembershipBasic", new Tencentcloud.Cam.GroupMembershipArgs
-    ///         {
-    ///             GroupId = groups.Apply(groups =&gt; groups.GroupLists?[0]?.GroupId),
-    ///             UserNames = 
-    ///             {
-    ///                 foo.Id,
-    ///             },
-    ///         });
-    ///     }
+    ///         Name = camGroupBasic,
+    ///     });
     /// 
-    /// }
+    ///     var foo = new Tencentcloud.Cam.User("foo", new()
+    ///     {
+    ///         Remark = "tf_user_remark",
+    ///         ConsoleLogin = true,
+    ///         UseApi = true,
+    ///         NeedResetPassword = true,
+    ///         Password = "Gail@1234",
+    ///         PhoneNum = "12345678910",
+    ///         CountryCode = "86",
+    ///         Email = "1234@qq.com",
+    ///         ForceDelete = true,
+    ///     });
+    /// 
+    ///     var groupMembershipBasic = new Tencentcloud.Cam.GroupMembership("groupMembershipBasic", new()
+    ///     {
+    ///         GroupId = groups.Apply(getGroupsResult =&gt; getGroupsResult.GroupLists[0]?.GroupId),
+    ///         UserNames = new[]
+    ///         {
+    ///             foo.Id,
+    ///         },
+    ///     });
+    /// 
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// CAM group membership can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Cam/groupMembership:GroupMembership foo 12515263
+    /// $ pulumi import tencentcloud:Cam/groupMembership:GroupMembership foo 12515263
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Cam/groupMembership:GroupMembership")]
-    public partial class GroupMembership : Pulumi.CustomResource
+    public partial class GroupMembership : global::Pulumi.CustomResource
     {
         /// <summary>
         /// ID of CAM group.
@@ -129,7 +132,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam
         }
     }
 
-    public sealed class GroupMembershipArgs : Pulumi.ResourceArgs
+    public sealed class GroupMembershipArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// ID of CAM group.
@@ -165,9 +168,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam
         public GroupMembershipArgs()
         {
         }
+        public static new GroupMembershipArgs Empty => new GroupMembershipArgs();
     }
 
-    public sealed class GroupMembershipState : Pulumi.ResourceArgs
+    public sealed class GroupMembershipState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// ID of CAM group.
@@ -203,5 +207,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam
         public GroupMembershipState()
         {
         }
+        public static new GroupMembershipState Empty => new GroupMembershipState();
     }
 }

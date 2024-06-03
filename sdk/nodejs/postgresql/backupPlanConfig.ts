@@ -9,9 +9,10 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const backupPlanConfig = new tencentcloud.postgresql.BackupPlanConfig("backupPlanConfig", {
  *     dbInstanceId: local.pgsql_id,
@@ -25,13 +26,14 @@ import * as utilities from "../utilities";
  *     ],
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * postgres backup_plan_config can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Postgresql/backupPlanConfig:BackupPlanConfig backup_plan_config backup_plan_config_id
+ * $ pulumi import tencentcloud:Postgresql/backupPlanConfig:BackupPlanConfig backup_plan_config backup_plan_config_id
  * ```
  */
 export class BackupPlanConfig extends pulumi.CustomResource {

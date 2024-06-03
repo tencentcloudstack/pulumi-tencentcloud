@@ -15,46 +15,47 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ci
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var mediaSpeechRecognitionTemplate = new Tencentcloud.Ci.MediaSpeechRecognitionTemplate("mediaSpeechRecognitionTemplate", new()
     ///     {
-    ///         var mediaSpeechRecognitionTemplate = new Tencentcloud.Ci.MediaSpeechRecognitionTemplate("mediaSpeechRecognitionTemplate", new Tencentcloud.Ci.MediaSpeechRecognitionTemplateArgs
+    ///         Bucket = "terraform-ci-1308919341",
+    ///         SpeechRecognition = new Tencentcloud.Ci.Inputs.MediaSpeechRecognitionTemplateSpeechRecognitionArgs
     ///         {
-    ///             Bucket = "terraform-ci-1308919341",
-    ///             SpeechRecognition = new Tencentcloud.Ci.Inputs.MediaSpeechRecognitionTemplateSpeechRecognitionArgs
-    ///             {
-    ///                 ChannelNum = "1",
-    ///                 ConvertNumMode = "0",
-    ///                 EngineModelType = "16k_zh",
-    ///                 FilterDirty = "0",
-    ///                 FilterModal = "1",
-    ///                 FilterPunc = "0",
-    ///                 OutputFileType = "txt",
-    ///                 ResTextFormat = "1",
-    ///                 SpeakerDiarization = "1",
-    ///                 SpeakerNumber = "0",
-    ///             },
-    ///         });
-    ///     }
+    ///             ChannelNum = "1",
+    ///             ConvertNumMode = "0",
+    ///             EngineModelType = "16k_zh",
+    ///             FilterDirty = "0",
+    ///             FilterModal = "1",
+    ///             FilterPunc = "0",
+    ///             OutputFileType = "txt",
+    ///             ResTextFormat = "1",
+    ///             SpeakerDiarization = "1",
+    ///             SpeakerNumber = "0",
+    ///         },
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// ci media_speech_recognition_template can be imported using the bucket#templateId, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Ci/mediaSpeechRecognitionTemplate:MediaSpeechRecognitionTemplate media_speech_recognition_template terraform-ci-xxxxxx#t1d794430f2f1f4350b11e905ce2c6167e
+    /// $ pulumi import tencentcloud:Ci/mediaSpeechRecognitionTemplate:MediaSpeechRecognitionTemplate media_speech_recognition_template terraform-ci-xxxxxx#t1d794430f2f1f4350b11e905ce2c6167e
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Ci/mediaSpeechRecognitionTemplate:MediaSpeechRecognitionTemplate")]
-    public partial class MediaSpeechRecognitionTemplate : Pulumi.CustomResource
+    public partial class MediaSpeechRecognitionTemplate : global::Pulumi.CustomResource
     {
         /// <summary>
         /// bucket name.
@@ -119,7 +120,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ci
         }
     }
 
-    public sealed class MediaSpeechRecognitionTemplateArgs : Pulumi.ResourceArgs
+    public sealed class MediaSpeechRecognitionTemplateArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// bucket name.
@@ -142,9 +143,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ci
         public MediaSpeechRecognitionTemplateArgs()
         {
         }
+        public static new MediaSpeechRecognitionTemplateArgs Empty => new MediaSpeechRecognitionTemplateArgs();
     }
 
-    public sealed class MediaSpeechRecognitionTemplateState : Pulumi.ResourceArgs
+    public sealed class MediaSpeechRecognitionTemplateState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// bucket name.
@@ -167,5 +169,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ci
         public MediaSpeechRecognitionTemplateState()
         {
         }
+        public static new MediaSpeechRecognitionTemplateState Empty => new MediaSpeechRecognitionTemplateState();
     }
 }

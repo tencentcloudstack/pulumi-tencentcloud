@@ -11,19 +11,29 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Pts.Inputs
 {
 
-    public sealed class JobLoadLoadSpecScriptOriginGetArgs : Pulumi.ResourceArgs
+    public sealed class JobLoadLoadSpecScriptOriginGetArgs : global::Pulumi.ResourceArgs
     {
+        /// <summary>
+        /// Pressure testing time.
+        /// </summary>
         [Input("durationSeconds", required: true)]
         public Input<int> DurationSeconds { get; set; } = null!;
 
+        /// <summary>
+        /// Number of machines.
+        /// </summary>
         [Input("machineNumber", required: true)]
         public Input<int> MachineNumber { get; set; } = null!;
 
+        /// <summary>
+        /// Machine specification.
+        /// </summary>
         [Input("machineSpecification", required: true)]
         public Input<string> MachineSpecification { get; set; } = null!;
 
         public JobLoadLoadSpecScriptOriginGetArgs()
         {
         }
+        public static new JobLoadLoadSpecScriptOriginGetArgs Empty => new JobLoadLoadSpecScriptOriginGetArgs();
     }
 }

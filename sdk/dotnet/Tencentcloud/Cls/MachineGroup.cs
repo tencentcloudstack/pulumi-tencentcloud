@@ -15,49 +15,50 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var @group = new Tencentcloud.Cls.MachineGroup("group", new()
     ///     {
-    ///         var @group = new Tencentcloud.Cls.MachineGroup("group", new Tencentcloud.Cls.MachineGroupArgs
+    ///         GroupName = "group",
+    ///         MachineGroupType = new Tencentcloud.Cls.Inputs.MachineGroupMachineGroupTypeArgs
     ///         {
-    ///             GroupName = "group",
-    ///             MachineGroupType = new Tencentcloud.Cls.Inputs.MachineGroupMachineGroupTypeArgs
+    ///             Type = "ip",
+    ///             Values = new[]
     ///             {
-    ///                 Type = "ip",
-    ///                 Values = 
-    ///                 {
-    ///                     "192.168.1.1",
-    ///                     "192.168.1.2",
-    ///                 },
+    ///                 "192.168.1.1",
+    ///                 "192.168.1.2",
     ///             },
-    ///             ServiceLogging = true,
-    ///             Tags = 
-    ///             {
-    ///                 { "test", "test1" },
-    ///             },
-    ///             UpdateEndTime = "19:05:40",
-    ///             UpdateStartTime = "17:05:40",
-    ///         });
-    ///     }
+    ///         },
+    ///         ServiceLogging = true,
+    ///         Tags = 
+    ///         {
+    ///             { "test", "test1" },
+    ///         },
+    ///         UpdateEndTime = "19:05:40",
+    ///         UpdateStartTime = "17:05:40",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// cls machine group can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Cls/machineGroup:MachineGroup group caf168e7-32cd-4ac6-bf89-1950a760e09c
+    /// $ pulumi import tencentcloud:Cls/machineGroup:MachineGroup group caf168e7-32cd-4ac6-bf89-1950a760e09c
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Cls/machineGroup:MachineGroup")]
-    public partial class MachineGroup : Pulumi.CustomResource
+    public partial class MachineGroup : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Whether to enable automatic update for the machine group.
@@ -146,7 +147,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls
         }
     }
 
-    public sealed class MachineGroupArgs : Pulumi.ResourceArgs
+    public sealed class MachineGroupArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Whether to enable automatic update for the machine group.
@@ -199,9 +200,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls
         public MachineGroupArgs()
         {
         }
+        public static new MachineGroupArgs Empty => new MachineGroupArgs();
     }
 
-    public sealed class MachineGroupState : Pulumi.ResourceArgs
+    public sealed class MachineGroupState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Whether to enable automatic update for the machine group.
@@ -254,5 +256,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls
         public MachineGroupState()
         {
         }
+        public static new MachineGroupState Empty => new MachineGroupState();
     }
 }

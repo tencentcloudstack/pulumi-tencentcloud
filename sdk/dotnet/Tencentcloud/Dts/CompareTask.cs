@@ -15,56 +15,57 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dts
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var compareTask = new Tencentcloud.Dts.CompareTask("compareTask", new()
     ///     {
-    ///         var compareTask = new Tencentcloud.Dts.CompareTask("compareTask", new Tencentcloud.Dts.CompareTaskArgs
+    ///         JobId = "",
+    ///         ObjectMode = "",
+    ///         Objects = new Tencentcloud.Dts.Inputs.CompareTaskObjectsArgs
     ///         {
-    ///             JobId = "",
-    ///             ObjectMode = "",
-    ///             Objects = new Tencentcloud.Dts.Inputs.CompareTaskObjectsArgs
+    ///             ObjectItems = new[]
     ///             {
-    ///                 ObjectItems = 
+    ///                 new Tencentcloud.Dts.Inputs.CompareTaskObjectsObjectItemArgs
     ///                 {
-    ///                     new Tencentcloud.Dts.Inputs.CompareTaskObjectsObjectItemArgs
+    ///                     DbMode = "",
+    ///                     DbName = "",
+    ///                     SchemaName = "",
+    ///                     TableMode = "",
+    ///                     Tables = new[]
     ///                     {
-    ///                         DbMode = "",
-    ///                         DbName = "",
-    ///                         SchemaName = "",
-    ///                         TableMode = "",
-    ///                         Tables = 
+    ///                         new Tencentcloud.Dts.Inputs.CompareTaskObjectsObjectItemTableArgs
     ///                         {
-    ///                             new Tencentcloud.Dts.Inputs.CompareTaskObjectsObjectItemTableArgs
-    ///                             {
-    ///                                 TableName = "",
-    ///                             },
+    ///                             TableName = "",
     ///                         },
-    ///                         ViewMode = "",
-    ///                         Views = 
+    ///                     },
+    ///                     ViewMode = "",
+    ///                     Views = new[]
+    ///                     {
+    ///                         new Tencentcloud.Dts.Inputs.CompareTaskObjectsObjectItemViewArgs
     ///                         {
-    ///                             new Tencentcloud.Dts.Inputs.CompareTaskObjectsObjectItemViewArgs
-    ///                             {
-    ///                                 ViewName = "",
-    ///                             },
+    ///                             ViewName = "",
     ///                         },
     ///                     },
     ///                 },
-    ///                 ObjectMode = "",
     ///             },
-    ///             TaskName = "",
-    ///         });
-    ///     }
+    ///             ObjectMode = "",
+    ///         },
+    ///         TaskName = "",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Dts/compareTask:CompareTask")]
-    public partial class CompareTask : Pulumi.CustomResource
+    public partial class CompareTask : global::Pulumi.CustomResource
     {
         /// <summary>
         /// compare task id.
@@ -141,7 +142,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dts
         }
     }
 
-    public sealed class CompareTaskArgs : Pulumi.ResourceArgs
+    public sealed class CompareTaskArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// job id.
@@ -170,9 +171,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dts
         public CompareTaskArgs()
         {
         }
+        public static new CompareTaskArgs Empty => new CompareTaskArgs();
     }
 
-    public sealed class CompareTaskState : Pulumi.ResourceArgs
+    public sealed class CompareTaskState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// compare task id.
@@ -207,5 +209,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dts
         public CompareTaskState()
         {
         }
+        public static new CompareTaskState Empty => new CompareTaskState();
     }
 }

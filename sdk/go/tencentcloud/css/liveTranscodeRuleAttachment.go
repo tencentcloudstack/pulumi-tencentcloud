@@ -7,74 +7,78 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a css liveTranscodeRuleAttachment
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"fmt"
 //
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Css"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Css"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		task, err := Css.NewPullStreamTask(ctx, "task", &Css.PullStreamTaskArgs{
-// 			SourceType: pulumi.String(fmt.Sprintf("%v%v", "%", "s")),
-// 			SourceUrls: pulumi.StringArray{
-// 				pulumi.String(fmt.Sprintf("%v%v", "%", "s")),
-// 			},
-// 			DomainName: pulumi.String(fmt.Sprintf("%v%v", "%", "s")),
-// 			AppName:    pulumi.String(fmt.Sprintf("%v%v", "%", "s")),
-// 			StreamName: pulumi.String(fmt.Sprintf("%v%v", "%", "s")),
-// 			StartTime:  pulumi.String(fmt.Sprintf("%v%v", "%", "s")),
-// 			EndTime:    pulumi.String(fmt.Sprintf("%v%v", "%", "s")),
-// 			Operator:   pulumi.String(fmt.Sprintf("%v%v", "%", "s")),
-// 			Comment:    pulumi.String("This is a demo."),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		temp, err := Css.NewLiveTranscodeTemplate(ctx, "temp", &Css.LiveTranscodeTemplateArgs{
-// 			TemplateName: pulumi.String("xxx"),
-// 			Acodec:       pulumi.String("aac"),
-// 			VideoBitrate: pulumi.Int(100),
-// 			Vcodec:       pulumi.String("origin"),
-// 			Description:  pulumi.String("This_is_a_tf_test_temp."),
-// 			NeedVideo:    pulumi.Int(1),
-// 			NeedAudio:    pulumi.Int(1),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_, err = Css.NewLiveTranscodeRuleAttachment(ctx, "liveTranscodeRuleAttachment", &Css.LiveTranscodeRuleAttachmentArgs{
-// 			DomainName: task.DomainName,
-// 			AppName:    task.AppName,
-// 			StreamName: task.StreamName,
-// 			TemplateId: temp.ID(),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			task, err := Css.NewPullStreamTask(ctx, "task", &Css.PullStreamTaskArgs{
+//				SourceType: pulumi.String("%s"),
+//				SourceUrls: pulumi.StringArray{
+//					pulumi.String("%s"),
+//				},
+//				DomainName: pulumi.String("%s"),
+//				AppName:    pulumi.String("%s"),
+//				StreamName: pulumi.String("%s"),
+//				StartTime:  pulumi.String("%s"),
+//				EndTime:    pulumi.String("%s"),
+//				Operator:   pulumi.String("%s"),
+//				Comment:    pulumi.String("This is a demo."),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			temp, err := Css.NewLiveTranscodeTemplate(ctx, "temp", &Css.LiveTranscodeTemplateArgs{
+//				TemplateName: pulumi.String("xxx"),
+//				Acodec:       pulumi.String("aac"),
+//				VideoBitrate: pulumi.Int(100),
+//				Vcodec:       pulumi.String("origin"),
+//				Description:  pulumi.String("This_is_a_tf_test_temp."),
+//				NeedVideo:    pulumi.Int(1),
+//				NeedAudio:    pulumi.Int(1),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_, err = Css.NewLiveTranscodeRuleAttachment(ctx, "liveTranscodeRuleAttachment", &Css.LiveTranscodeRuleAttachmentArgs{
+//				DomainName: task.DomainName,
+//				AppName:    task.AppName,
+//				StreamName: task.StreamName,
+//				TemplateId: temp.ID(),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // css live_transcode_rule_attachment can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Css/liveTranscodeRuleAttachment:LiveTranscodeRuleAttachment live_transcode_rule_attachment liveTranscodeRuleAttachment_id
+// $ pulumi import tencentcloud:Css/liveTranscodeRuleAttachment:LiveTranscodeRuleAttachment live_transcode_rule_attachment liveTranscodeRuleAttachment_id
 // ```
 type LiveTranscodeRuleAttachment struct {
 	pulumi.CustomResourceState
@@ -112,7 +116,7 @@ func NewLiveTranscodeRuleAttachment(ctx *pulumi.Context,
 	if args.TemplateId == nil {
 		return nil, errors.New("invalid value for required argument 'TemplateId'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource LiveTranscodeRuleAttachment
 	err := ctx.RegisterResource("tencentcloud:Css/liveTranscodeRuleAttachment:LiveTranscodeRuleAttachment", name, args, &resource, opts...)
 	if err != nil {
@@ -217,7 +221,7 @@ func (i *LiveTranscodeRuleAttachment) ToLiveTranscodeRuleAttachmentOutputWithCon
 // LiveTranscodeRuleAttachmentArrayInput is an input type that accepts LiveTranscodeRuleAttachmentArray and LiveTranscodeRuleAttachmentArrayOutput values.
 // You can construct a concrete instance of `LiveTranscodeRuleAttachmentArrayInput` via:
 //
-//          LiveTranscodeRuleAttachmentArray{ LiveTranscodeRuleAttachmentArgs{...} }
+//	LiveTranscodeRuleAttachmentArray{ LiveTranscodeRuleAttachmentArgs{...} }
 type LiveTranscodeRuleAttachmentArrayInput interface {
 	pulumi.Input
 
@@ -242,7 +246,7 @@ func (i LiveTranscodeRuleAttachmentArray) ToLiveTranscodeRuleAttachmentArrayOutp
 // LiveTranscodeRuleAttachmentMapInput is an input type that accepts LiveTranscodeRuleAttachmentMap and LiveTranscodeRuleAttachmentMapOutput values.
 // You can construct a concrete instance of `LiveTranscodeRuleAttachmentMapInput` via:
 //
-//          LiveTranscodeRuleAttachmentMap{ "key": LiveTranscodeRuleAttachmentArgs{...} }
+//	LiveTranscodeRuleAttachmentMap{ "key": LiveTranscodeRuleAttachmentArgs{...} }
 type LiveTranscodeRuleAttachmentMapInput interface {
 	pulumi.Input
 

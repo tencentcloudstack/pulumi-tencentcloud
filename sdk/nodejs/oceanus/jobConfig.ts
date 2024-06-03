@@ -2,20 +2,23 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
  * Provides a resource to create a oceanus jobConfig
  *
  * ## Example Usage
+ *
  * ### is 2
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = new tencentcloud.Oceanus.JobConfig("example", {
+ * const example = new tencentcloud.oceanus.JobConfig("example", {
  *     autoRecover: 1,
  *     clsLogsetId: "cd9adbb5-6b7d-48d2-9870-77658959c7a4",
  *     clsTopicId: "cec4c2f1-0bf3-470e-b1a5-b1c451e88838",
@@ -42,13 +45,16 @@ import * as utilities from "../utilities";
  *     workSpaceId: "space-2idq8wbr",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
+ *
  * ### is 3
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = new tencentcloud.Oceanus.JobConfig("example", {
+ * const example = new tencentcloud.oceanus.JobConfig("example", {
  *     autoRecover: 1,
  *     clsLogsetId: "cd9adbb5-6b7d-48d2-9870-77658959c7a4",
  *     clsTopicId: "cec4c2f1-0bf3-470e-b1a5-b1c451e88838",
@@ -76,6 +82,7 @@ import * as utilities from "../utilities";
  *     workSpaceId: "space-2idq8wbr",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export class JobConfig extends pulumi.CustomResource {
     /**

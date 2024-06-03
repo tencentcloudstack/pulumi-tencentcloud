@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,17 +11,18 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const aiRecognitionTemplate = new tencentcloud.Mps.AiRecognitionTemplate("ai_recognition_template", {
+ * const aiRecognitionTemplate = new tencentcloud.mps.AiRecognitionTemplate("aiRecognitionTemplate", {
  *     asrFullTextConfigure: {
- *         switch: "OFF",
+ *         "switch": "OFF",
  *     },
  *     asrWordsConfigure: {
  *         labelSets: [],
- *         switch: "OFF",
+ *         "switch": "OFF",
  *     },
  *     faceConfigure: {
  *         defaultLibraryLabelSets: [
@@ -29,25 +31,26 @@ import * as utilities from "../utilities";
  *         ],
  *         faceLibrary: "All",
  *         score: 85,
- *         switch: "ON",
+ *         "switch": "ON",
  *         userDefineLibraryLabelSets: [],
  *     },
  *     ocrFullTextConfigure: {
- *         switch: "OFF",
+ *         "switch": "OFF",
  *     },
  *     ocrWordsConfigure: {
  *         labelSets: [],
- *         switch: "OFF",
+ *         "switch": "OFF",
  *     },
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * mps ai_recognition_template can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Mps/aiRecognitionTemplate:AiRecognitionTemplate ai_recognition_template ai_recognition_template_id
+ * $ pulumi import tencentcloud:Mps/aiRecognitionTemplate:AiRecognitionTemplate ai_recognition_template ai_recognition_template_id
  * ```
  */
 export class AiRecognitionTemplate extends pulumi.CustomResource {

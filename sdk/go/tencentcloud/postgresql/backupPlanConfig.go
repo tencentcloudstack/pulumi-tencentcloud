@@ -7,49 +7,55 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a postgres backupPlanConfig
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Postgresql"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Postgresql"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Postgresql.NewBackupPlanConfig(ctx, "backupPlanConfig", &Postgresql.BackupPlanConfigArgs{
-// 			DbInstanceId:              pulumi.Any(local.Pgsql_id),
-// 			MinBackupStartTime:        pulumi.String("01:00:00"),
-// 			MaxBackupStartTime:        pulumi.String("02:00:00"),
-// 			BaseBackupRetentionPeriod: pulumi.Int(7),
-// 			BackupPeriods: pulumi.StringArray{
-// 				pulumi.String("monday"),
-// 				pulumi.String("wednesday"),
-// 				pulumi.String("friday"),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Postgresql.NewBackupPlanConfig(ctx, "backupPlanConfig", &Postgresql.BackupPlanConfigArgs{
+//				DbInstanceId:              pulumi.Any(local.Pgsql_id),
+//				MinBackupStartTime:        pulumi.String("01:00:00"),
+//				MaxBackupStartTime:        pulumi.String("02:00:00"),
+//				BaseBackupRetentionPeriod: pulumi.Int(7),
+//				BackupPeriods: pulumi.StringArray{
+//					pulumi.String("monday"),
+//					pulumi.String("wednesday"),
+//					pulumi.String("friday"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // postgres backup_plan_config can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Postgresql/backupPlanConfig:BackupPlanConfig backup_plan_config backup_plan_config_id
+// $ pulumi import tencentcloud:Postgresql/backupPlanConfig:BackupPlanConfig backup_plan_config backup_plan_config_id
 // ```
 type BackupPlanConfig struct {
 	pulumi.CustomResourceState
@@ -76,7 +82,7 @@ func NewBackupPlanConfig(ctx *pulumi.Context,
 	if args.DbInstanceId == nil {
 		return nil, errors.New("invalid value for required argument 'DbInstanceId'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource BackupPlanConfig
 	err := ctx.RegisterResource("tencentcloud:Postgresql/backupPlanConfig:BackupPlanConfig", name, args, &resource, opts...)
 	if err != nil {
@@ -181,7 +187,7 @@ func (i *BackupPlanConfig) ToBackupPlanConfigOutputWithContext(ctx context.Conte
 // BackupPlanConfigArrayInput is an input type that accepts BackupPlanConfigArray and BackupPlanConfigArrayOutput values.
 // You can construct a concrete instance of `BackupPlanConfigArrayInput` via:
 //
-//          BackupPlanConfigArray{ BackupPlanConfigArgs{...} }
+//	BackupPlanConfigArray{ BackupPlanConfigArgs{...} }
 type BackupPlanConfigArrayInput interface {
 	pulumi.Input
 
@@ -206,7 +212,7 @@ func (i BackupPlanConfigArray) ToBackupPlanConfigArrayOutputWithContext(ctx cont
 // BackupPlanConfigMapInput is an input type that accepts BackupPlanConfigMap and BackupPlanConfigMapOutput values.
 // You can construct a concrete instance of `BackupPlanConfigMapInput` via:
 //
-//          BackupPlanConfigMap{ "key": BackupPlanConfigArgs{...} }
+//	BackupPlanConfigMap{ "key": BackupPlanConfigArgs{...} }
 type BackupPlanConfigMapInput interface {
 	pulumi.Input
 

@@ -15,39 +15,40 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dlc
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var updateRowFilterOperation = new Tencentcloud.Dlc.UpdateRowFilterOperation("updateRowFilterOperation", new()
     ///     {
-    ///         var updateRowFilterOperation = new Tencentcloud.Dlc.UpdateRowFilterOperation("updateRowFilterOperation", new Tencentcloud.Dlc.UpdateRowFilterOperationArgs
+    ///         Policy = new Tencentcloud.Dlc.Inputs.UpdateRowFilterOperationPolicyArgs
     ///         {
-    ///             Policy = new Tencentcloud.Dlc.Inputs.UpdateRowFilterOperationPolicyArgs
-    ///             {
-    ///                 Catalog = "DataLakeCatalog",
-    ///                 Column = "",
-    ///                 Database = "test_iac_keep",
-    ///                 Function = "",
-    ///                 Mode = "SENIOR",
-    ///                 Operation = "value!=\"0\"",
-    ///                 PolicyType = "ROWFILTER",
-    ///                 ReAuth = false,
-    ///                 Source = "USER",
-    ///                 Table = "test_table",
-    ///                 View = "",
-    ///             },
-    ///             PolicyId = 103704,
-    ///         });
-    ///     }
+    ///             Catalog = "DataLakeCatalog",
+    ///             Column = "",
+    ///             Database = "test_iac_keep",
+    ///             Function = "",
+    ///             Mode = "SENIOR",
+    ///             Operation = "value!=\"0\"",
+    ///             PolicyType = "ROWFILTER",
+    ///             ReAuth = false,
+    ///             Source = "USER",
+    ///             Table = "test_table",
+    ///             View = "",
+    ///         },
+    ///         PolicyId = 103704,
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Dlc/updateRowFilterOperation:UpdateRowFilterOperation")]
-    public partial class UpdateRowFilterOperation : Pulumi.CustomResource
+    public partial class UpdateRowFilterOperation : global::Pulumi.CustomResource
     {
         /// <summary>
         /// New filtering strategy.
@@ -106,7 +107,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dlc
         }
     }
 
-    public sealed class UpdateRowFilterOperationArgs : Pulumi.ResourceArgs
+    public sealed class UpdateRowFilterOperationArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// New filtering strategy.
@@ -123,9 +124,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dlc
         public UpdateRowFilterOperationArgs()
         {
         }
+        public static new UpdateRowFilterOperationArgs Empty => new UpdateRowFilterOperationArgs();
     }
 
-    public sealed class UpdateRowFilterOperationState : Pulumi.ResourceArgs
+    public sealed class UpdateRowFilterOperationState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// New filtering strategy.
@@ -142,5 +144,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dlc
         public UpdateRowFilterOperationState()
         {
         }
+        public static new UpdateRowFilterOperationState Empty => new UpdateRowFilterOperationState();
     }
 }

@@ -15,39 +15,40 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dts
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var syncJob = new Tencentcloud.Dts.SyncJob("syncJob", new()
     ///     {
-    ///         var syncJob = new Tencentcloud.Dts.SyncJob("syncJob", new Tencentcloud.Dts.SyncJobArgs
+    ///         AutoRenew = 0,
+    ///         DstDatabaseType = "cynosdbmysql",
+    ///         DstRegion = "ap-guangzhou",
+    ///         InstanceClass = "micro",
+    ///         PayMode = "PostPay",
+    ///         SrcDatabaseType = "mysql",
+    ///         SrcRegion = "ap-guangzhou",
+    ///         Tags = new[]
     ///         {
-    ///             AutoRenew = 0,
-    ///             DstDatabaseType = "cynosdbmysql",
-    ///             DstRegion = "ap-guangzhou",
-    ///             InstanceClass = "micro",
-    ///             PayMode = "PostPay",
-    ///             SrcDatabaseType = "mysql",
-    ///             SrcRegion = "ap-guangzhou",
-    ///             Tags = 
+    ///             new Tencentcloud.Dts.Inputs.SyncJobTagArgs
     ///             {
-    ///                 new Tencentcloud.Dts.Inputs.SyncJobTagArgs
-    ///                 {
-    ///                     TagKey = "aaa",
-    ///                     TagValue = "bbb",
-    ///                 },
+    ///                 TagKey = "aaa",
+    ///                 TagValue = "bbb",
     ///             },
-    ///         });
-    ///     }
+    ///         },
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Dts/syncJob:SyncJob")]
-    public partial class SyncJob : Pulumi.CustomResource
+    public partial class SyncJob : global::Pulumi.CustomResource
     {
         /// <summary>
         /// auto renew.
@@ -166,7 +167,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dts
         }
     }
 
-    public sealed class SyncJobArgs : Pulumi.ResourceArgs
+    public sealed class SyncJobArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// auto renew.
@@ -243,9 +244,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dts
         public SyncJobArgs()
         {
         }
+        public static new SyncJobArgs Empty => new SyncJobArgs();
     }
 
-    public sealed class SyncJobState : Pulumi.ResourceArgs
+    public sealed class SyncJobState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// auto renew.
@@ -328,5 +330,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dts
         public SyncJobState()
         {
         }
+        public static new SyncJobState Empty => new SyncJobState();
     }
 }

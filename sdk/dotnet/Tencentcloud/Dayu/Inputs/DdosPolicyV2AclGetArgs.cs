@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dayu.Inputs
 {
 
-    public sealed class DdosPolicyV2AclGetArgs : Pulumi.ResourceArgs
+    public sealed class DdosPolicyV2AclGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Action, optional values: drop, transmit, forward.
@@ -58,5 +58,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dayu.Inputs
         public DdosPolicyV2AclGetArgs()
         {
         }
+        public static new DdosPolicyV2AclGetArgs Empty => new DdosPolicyV2AclGetArgs();
     }
 }

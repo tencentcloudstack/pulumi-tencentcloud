@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb.Inputs
 {
 
-    public sealed class GetListenersByTargetsBackendArgs : Pulumi.InvokeArgs
+    public sealed class GetListenersByTargetsBackendArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Private network IP to be queried, which can be of the CVM or ENI.
@@ -28,5 +28,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb.Inputs
         public GetListenersByTargetsBackendArgs()
         {
         }
+        public static new GetListenersByTargetsBackendArgs Empty => new GetListenersByTargetsBackendArgs();
     }
 }

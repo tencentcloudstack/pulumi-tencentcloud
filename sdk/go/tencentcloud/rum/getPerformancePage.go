@@ -8,39 +8,44 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Use this data source to query detailed information of rum performancePage
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Rum"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Rum"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Rum"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Rum.GetPerformancePage(ctx, &rum.GetPerformancePageArgs{
-// 			EndTime:   1625454840,
-// 			Level:     pulumi.StringRef("1"),
-// 			ProjectId: 1,
-// 			StartTime: 1625444040,
-// 			Type:      "pagepv",
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Rum.GetPerformancePage(ctx, &rum.GetPerformancePageArgs{
+//				EndTime:   1625454840,
+//				Level:     pulumi.StringRef("1"),
+//				ProjectId: 1,
+//				StartTime: 1625444040,
+//				Type:      "pagepv",
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 func GetPerformancePage(ctx *pulumi.Context, args *GetPerformancePageArgs, opts ...pulumi.InvokeOption) (*GetPerformancePageResult, error) {
-	opts = pkgInvokeDefaultOpts(opts)
+	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetPerformancePageResult
 	err := ctx.Invoke("tencentcloud:Rum/getPerformancePage:getPerformancePage", args, &rv, opts...)
 	if err != nil {

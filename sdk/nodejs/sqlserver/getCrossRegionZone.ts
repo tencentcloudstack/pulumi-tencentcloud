@@ -9,21 +9,20 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const example = pulumi.output(tencentcloud.Sqlserver.getCrossRegionZone({
+ * const example = tencentcloud.Sqlserver.getCrossRegionZone({
  *     instanceId: "mssql-qelbzgwf",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getCrossRegionZone(args: GetCrossRegionZoneArgs, opts?: pulumi.InvokeOptions): Promise<GetCrossRegionZoneResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Sqlserver/getCrossRegionZone:getCrossRegionZone", {
         "instanceId": args.instanceId,
         "resultOutputFile": args.resultOutputFile,
@@ -63,9 +62,24 @@ export interface GetCrossRegionZoneResult {
      */
     readonly zone: string;
 }
-
+/**
+ * Use this data source to query detailed information of sqlserver datasourceCrossRegionZone
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const example = tencentcloud.Sqlserver.getCrossRegionZone({
+ *     instanceId: "mssql-qelbzgwf",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getCrossRegionZoneOutput(args: GetCrossRegionZoneOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetCrossRegionZoneResult> {
-    return pulumi.output(args).apply(a => getCrossRegionZone(a, opts))
+    return pulumi.output(args).apply((a: any) => getCrossRegionZone(a, opts))
 }
 
 /**

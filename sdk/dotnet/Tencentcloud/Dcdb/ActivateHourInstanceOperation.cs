@@ -15,25 +15,26 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dcdb
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var activateHourInstanceOperation = new Tencentcloud.Dcdb.ActivateHourInstanceOperation("activateHourInstanceOperation", new()
     ///     {
-    ///         var activateHourInstanceOperation = new Tencentcloud.Dcdb.ActivateHourInstanceOperation("activateHourInstanceOperation", new Tencentcloud.Dcdb.ActivateHourInstanceOperationArgs
-    ///         {
-    ///             InstanceId = local.Dcdb_id,
-    ///         });
-    ///     }
+    ///         InstanceId = local.Dcdb_id,
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Dcdb/activateHourInstanceOperation:ActivateHourInstanceOperation")]
-    public partial class ActivateHourInstanceOperation : Pulumi.CustomResource
+    public partial class ActivateHourInstanceOperation : global::Pulumi.CustomResource
     {
         /// <summary>
         /// instance ID in the format of dcdbt-ow728lmc, which can be obtained through the `DescribeDCDBInstances` API.
@@ -86,7 +87,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dcdb
         }
     }
 
-    public sealed class ActivateHourInstanceOperationArgs : Pulumi.ResourceArgs
+    public sealed class ActivateHourInstanceOperationArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// instance ID in the format of dcdbt-ow728lmc, which can be obtained through the `DescribeDCDBInstances` API.
@@ -97,9 +98,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dcdb
         public ActivateHourInstanceOperationArgs()
         {
         }
+        public static new ActivateHourInstanceOperationArgs Empty => new ActivateHourInstanceOperationArgs();
     }
 
-    public sealed class ActivateHourInstanceOperationState : Pulumi.ResourceArgs
+    public sealed class ActivateHourInstanceOperationState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// instance ID in the format of dcdbt-ow728lmc, which can be obtained through the `DescribeDCDBInstances` API.
@@ -110,5 +112,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dcdb
         public ActivateHourInstanceOperationState()
         {
         }
+        public static new ActivateHourInstanceOperationState Empty => new ActivateHourInstanceOperationState();
     }
 }

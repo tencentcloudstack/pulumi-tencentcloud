@@ -9,27 +9,30 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const foo = new tencentcloud.Clb.CustomizedConfig("foo", {
+ * const foo = new tencentcloud.clb.CustomizedConfig("foo", {
  *     configContent: `client_max_body_size 224M;
- * client_body_timeout 60s;`,
+ * client_body_timeout 60s;
+ * `,
  *     configName: "helloWorld",
  *     loadBalancerIds: [
- *         tencentcloud_clb_instance_internal_clb.id,
- *         tencentcloud_clb_instance_internal_clb2.id,
+ *         tencentcloud_clb_instance.internal_clb.id,
+ *         tencentcloud_clb_instance.internal_clb2.id,
  *     ],
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * CLB customized config can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Clb/customizedConfig:CustomizedConfig foo pz-diowqstq
+ * $ pulumi import tencentcloud:Clb/customizedConfig:CustomizedConfig foo pz-diowqstq
  * ```
  */
 export class CustomizedConfig extends pulumi.CustomResource {

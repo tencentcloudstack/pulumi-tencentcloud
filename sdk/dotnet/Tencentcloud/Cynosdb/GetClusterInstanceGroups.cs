@@ -14,73 +14,19 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
     {
         /// <summary>
         /// Use this data source to query detailed information of cynosdb cluster_instance_groups
-        /// 
-        /// {{% examples %}}
-        /// ## Example Usage
-        /// {{% example %}}
-        /// 
-        /// ```csharp
-        /// using Pulumi;
-        /// using Tencentcloud = Pulumi.Tencentcloud;
-        /// 
-        /// class MyStack : Stack
-        /// {
-        ///     public MyStack()
-        ///     {
-        ///         var clusterInstanceGroups = Output.Create(Tencentcloud.Cynosdb.GetClusterInstanceGroups.InvokeAsync(new Tencentcloud.Cynosdb.GetClusterInstanceGroupsArgs
-        ///         {
-        ///             ClusterId = "",
-        ///             Xxxxxx = 
-        ///             {
-        ///                 ,
-        ///             },
-        ///         }));
-        ///     }
-        /// 
-        /// }
-        /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
         /// </summary>
         public static Task<GetClusterInstanceGroupsResult> InvokeAsync(GetClusterInstanceGroupsArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetClusterInstanceGroupsResult>("tencentcloud:Cynosdb/getClusterInstanceGroups:getClusterInstanceGroups", args ?? new GetClusterInstanceGroupsArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetClusterInstanceGroupsResult>("tencentcloud:Cynosdb/getClusterInstanceGroups:getClusterInstanceGroups", args ?? new GetClusterInstanceGroupsArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of cynosdb cluster_instance_groups
-        /// 
-        /// {{% examples %}}
-        /// ## Example Usage
-        /// {{% example %}}
-        /// 
-        /// ```csharp
-        /// using Pulumi;
-        /// using Tencentcloud = Pulumi.Tencentcloud;
-        /// 
-        /// class MyStack : Stack
-        /// {
-        ///     public MyStack()
-        ///     {
-        ///         var clusterInstanceGroups = Output.Create(Tencentcloud.Cynosdb.GetClusterInstanceGroups.InvokeAsync(new Tencentcloud.Cynosdb.GetClusterInstanceGroupsArgs
-        ///         {
-        ///             ClusterId = "",
-        ///             Xxxxxx = 
-        ///             {
-        ///                 ,
-        ///             },
-        ///         }));
-        ///     }
-        /// 
-        /// }
-        /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
         /// </summary>
         public static Output<GetClusterInstanceGroupsResult> Invoke(GetClusterInstanceGroupsInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetClusterInstanceGroupsResult>("tencentcloud:Cynosdb/getClusterInstanceGroups:getClusterInstanceGroups", args ?? new GetClusterInstanceGroupsInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetClusterInstanceGroupsResult>("tencentcloud:Cynosdb/getClusterInstanceGroups:getClusterInstanceGroups", args ?? new GetClusterInstanceGroupsInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetClusterInstanceGroupsArgs : Pulumi.InvokeArgs
+    public sealed class GetClusterInstanceGroupsArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// The ID of cluster.
@@ -97,9 +43,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
         public GetClusterInstanceGroupsArgs()
         {
         }
+        public static new GetClusterInstanceGroupsArgs Empty => new GetClusterInstanceGroupsArgs();
     }
 
-    public sealed class GetClusterInstanceGroupsInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetClusterInstanceGroupsInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// The ID of cluster.
@@ -116,6 +63,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
         public GetClusterInstanceGroupsInvokeArgs()
         {
         }
+        public static new GetClusterInstanceGroupsInvokeArgs Empty => new GetClusterInstanceGroupsInvokeArgs();
     }
 
 

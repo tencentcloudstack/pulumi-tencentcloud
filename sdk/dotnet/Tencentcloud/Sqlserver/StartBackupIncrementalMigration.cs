@@ -15,27 +15,28 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var startBackupIncrementalMigration = new Tencentcloud.Sqlserver.StartBackupIncrementalMigration("startBackupIncrementalMigration", new()
     ///     {
-    ///         var startBackupIncrementalMigration = new Tencentcloud.Sqlserver.StartBackupIncrementalMigration("startBackupIncrementalMigration", new Tencentcloud.Sqlserver.StartBackupIncrementalMigrationArgs
-    ///         {
-    ///             BackupMigrationId = "mssql-backup-migration-cg0ffgqt",
-    ///             IncrementalMigrationId = "mssql-incremental-migration-kp7bgv8p",
-    ///             InstanceId = "mssql-i1z41iwd",
-    ///         });
-    ///     }
+    ///         BackupMigrationId = "mssql-backup-migration-cg0ffgqt",
+    ///         IncrementalMigrationId = "mssql-incremental-migration-kp7bgv8p",
+    ///         InstanceId = "mssql-i1z41iwd",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Sqlserver/startBackupIncrementalMigration:StartBackupIncrementalMigration")]
-    public partial class StartBackupIncrementalMigration : Pulumi.CustomResource
+    public partial class StartBackupIncrementalMigration : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Backup import task ID, returned by the CreateBackupMigration interface.
@@ -100,7 +101,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
         }
     }
 
-    public sealed class StartBackupIncrementalMigrationArgs : Pulumi.ResourceArgs
+    public sealed class StartBackupIncrementalMigrationArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Backup import task ID, returned by the CreateBackupMigration interface.
@@ -123,9 +124,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
         public StartBackupIncrementalMigrationArgs()
         {
         }
+        public static new StartBackupIncrementalMigrationArgs Empty => new StartBackupIncrementalMigrationArgs();
     }
 
-    public sealed class StartBackupIncrementalMigrationState : Pulumi.ResourceArgs
+    public sealed class StartBackupIncrementalMigrationState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Backup import task ID, returned by the CreateBackupMigration interface.
@@ -148,5 +150,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
         public StartBackupIncrementalMigrationState()
         {
         }
+        public static new StartBackupIncrementalMigrationState Empty => new StartBackupIncrementalMigrationState();
     }
 }

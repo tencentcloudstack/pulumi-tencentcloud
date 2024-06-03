@@ -15,68 +15,62 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
         /// <summary>
         /// Use this data source to query detailed information of mysql backup_summaries
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var backupSummaries = Tencentcloud.Mysql.GetBackupSummaries.Invoke(new()
         ///     {
-        ///         var backupSummaries = Output.Create(Tencentcloud.Mysql.GetBackupSummaries.InvokeAsync(new Tencentcloud.Mysql.GetBackupSummariesArgs
-        ///         {
-        ///             OrderBy = "BackupVolume",
-        ///             OrderDirection = "ASC",
-        ///             Product = "mysql",
-        ///         }));
-        ///     }
+        ///         OrderBy = "BackupVolume",
+        ///         OrderDirection = "ASC",
+        ///         Product = "mysql",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetBackupSummariesResult> InvokeAsync(GetBackupSummariesArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetBackupSummariesResult>("tencentcloud:Mysql/getBackupSummaries:getBackupSummaries", args ?? new GetBackupSummariesArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetBackupSummariesResult>("tencentcloud:Mysql/getBackupSummaries:getBackupSummaries", args ?? new GetBackupSummariesArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of mysql backup_summaries
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var backupSummaries = Tencentcloud.Mysql.GetBackupSummaries.Invoke(new()
         ///     {
-        ///         var backupSummaries = Output.Create(Tencentcloud.Mysql.GetBackupSummaries.InvokeAsync(new Tencentcloud.Mysql.GetBackupSummariesArgs
-        ///         {
-        ///             OrderBy = "BackupVolume",
-        ///             OrderDirection = "ASC",
-        ///             Product = "mysql",
-        ///         }));
-        ///     }
+        ///         OrderBy = "BackupVolume",
+        ///         OrderDirection = "ASC",
+        ///         Product = "mysql",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetBackupSummariesResult> Invoke(GetBackupSummariesInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetBackupSummariesResult>("tencentcloud:Mysql/getBackupSummaries:getBackupSummaries", args ?? new GetBackupSummariesInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetBackupSummariesResult>("tencentcloud:Mysql/getBackupSummaries:getBackupSummaries", args ?? new GetBackupSummariesInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetBackupSummariesArgs : Pulumi.InvokeArgs
+    public sealed class GetBackupSummariesArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Specify to sort by a certain item, the optional values include: BackupVolume: backup volume, DataBackupVolume: data backup volume, BinlogBackupVolume: log backup volume, AutoBackupVolume: automatic backup volume, ManualBackupVolume: manual backup volume. By default, they are sorted by BackupVolume.
@@ -105,9 +99,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
         public GetBackupSummariesArgs()
         {
         }
+        public static new GetBackupSummariesArgs Empty => new GetBackupSummariesArgs();
     }
 
-    public sealed class GetBackupSummariesInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetBackupSummariesInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Specify to sort by a certain item, the optional values include: BackupVolume: backup volume, DataBackupVolume: data backup volume, BinlogBackupVolume: log backup volume, AutoBackupVolume: automatic backup volume, ManualBackupVolume: manual backup volume. By default, they are sorted by BackupVolume.
@@ -136,6 +131,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
         public GetBackupSummariesInvokeArgs()
         {
         }
+        public static new GetBackupSummariesInvokeArgs Empty => new GetBackupSummariesInvokeArgs();
     }
 
 

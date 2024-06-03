@@ -15,57 +15,61 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var config = new Config();
+    ///     var availabilityZone = config.Get("availabilityZone") ?? "ap-guangzhou-4";
+    ///     var vpc = new Tencentcloud.Vpc.Instance("vpc", new()
     ///     {
-    ///         var config = new Config();
-    ///         var availabilityZone = config.Get("availabilityZone") ?? "ap-guangzhou-4";
-    ///         var vpc = new Tencentcloud.Vpc.Instance("vpc", new Tencentcloud.Vpc.InstanceArgs
-    ///         {
-    ///             CidrBlock = "10.0.0.0/16",
-    ///         });
-    ///         var subnet = new Tencentcloud.Subnet.Instance("subnet", new Tencentcloud.Subnet.InstanceArgs
-    ///         {
-    ///             VpcId = vpc.Id,
-    ///             AvailabilityZone = availabilityZone,
-    ///             CidrBlock = "10.0.1.0/24",
-    ///         });
-    ///         var fooTmpInstance = new Tencentcloud.Monitor.TmpInstance("fooTmpInstance", new Tencentcloud.Monitor.TmpInstanceArgs
-    ///         {
-    ///             InstanceName = "tf-tmp-instance",
-    ///             VpcId = vpc.Id,
-    ///             SubnetId = subnet.Id,
-    ///             DataRetentionTime = 30,
-    ///             Zone = availabilityZone,
-    ///             Tags = 
-    ///             {
-    ///                 { "createdBy", "terraform" },
-    ///             },
-    ///         });
-    ///         var fooTmpCvmAgent = new Tencentcloud.Monitor.TmpCvmAgent("fooTmpCvmAgent", new Tencentcloud.Monitor.TmpCvmAgentArgs
-    ///         {
-    ///             InstanceId = fooTmpInstance.Id,
-    ///         });
-    ///     }
+    ///         CidrBlock = "10.0.0.0/16",
+    ///     });
     /// 
-    /// }
+    ///     var subnet = new Tencentcloud.Subnet.Instance("subnet", new()
+    ///     {
+    ///         VpcId = vpc.Id,
+    ///         AvailabilityZone = availabilityZone,
+    ///         CidrBlock = "10.0.1.0/24",
+    ///     });
+    /// 
+    ///     var fooTmpInstance = new Tencentcloud.Monitor.TmpInstance("fooTmpInstance", new()
+    ///     {
+    ///         InstanceName = "tf-tmp-instance",
+    ///         VpcId = vpc.Id,
+    ///         SubnetId = subnet.Id,
+    ///         DataRetentionTime = 30,
+    ///         Zone = availabilityZone,
+    ///         Tags = 
+    ///         {
+    ///             { "createdBy", "terraform" },
+    ///         },
+    ///     });
+    /// 
+    ///     var fooTmpCvmAgent = new Tencentcloud.Monitor.TmpCvmAgent("fooTmpCvmAgent", new()
+    ///     {
+    ///         InstanceId = fooTmpInstance.Id,
+    ///     });
+    /// 
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// monitor tmpCvmAgent can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Monitor/tmpCvmAgent:TmpCvmAgent tmpCvmAgent instance_id#agent_id
+    /// $ pulumi import tencentcloud:Monitor/tmpCvmAgent:TmpCvmAgent tmpCvmAgent instance_id#agent_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Monitor/tmpCvmAgent:TmpCvmAgent")]
-    public partial class TmpCvmAgent : Pulumi.CustomResource
+    public partial class TmpCvmAgent : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Agent id.
@@ -130,7 +134,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
         }
     }
 
-    public sealed class TmpCvmAgentArgs : Pulumi.ResourceArgs
+    public sealed class TmpCvmAgentArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Instance id.
@@ -147,9 +151,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
         public TmpCvmAgentArgs()
         {
         }
+        public static new TmpCvmAgentArgs Empty => new TmpCvmAgentArgs();
     }
 
-    public sealed class TmpCvmAgentState : Pulumi.ResourceArgs
+    public sealed class TmpCvmAgentState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Agent id.
@@ -172,5 +177,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
         public TmpCvmAgentState()
         {
         }
+        public static new TmpCvmAgentState Empty => new TmpCvmAgentState();
     }
 }

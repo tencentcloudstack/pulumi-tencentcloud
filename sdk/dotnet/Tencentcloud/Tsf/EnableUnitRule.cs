@@ -15,34 +15,35 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var enableUnitRule = new Tencentcloud.Tsf.EnableUnitRule("enableUnitRule", new()
     ///     {
-    ///         var enableUnitRule = new Tencentcloud.Tsf.EnableUnitRule("enableUnitRule", new Tencentcloud.Tsf.EnableUnitRuleArgs
-    ///         {
-    ///             RuleId = "unit-rl-is9m4nxz",
-    ///             Switch = "enabled",
-    ///         });
-    ///     }
+    ///         RuleId = "unit-rl-is9m4nxz",
+    ///         Switch = "enabled",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// tsf enable_unit_rule can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Tsf/enableUnitRule:EnableUnitRule enable_unit_rule enable_unit_rule_id
+    /// $ pulumi import tencentcloud:Tsf/enableUnitRule:EnableUnitRule enable_unit_rule enable_unit_rule_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Tsf/enableUnitRule:EnableUnitRule")]
-    public partial class EnableUnitRule : Pulumi.CustomResource
+    public partial class EnableUnitRule : global::Pulumi.CustomResource
     {
         /// <summary>
         /// api ID.
@@ -101,7 +102,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf
         }
     }
 
-    public sealed class EnableUnitRuleArgs : Pulumi.ResourceArgs
+    public sealed class EnableUnitRuleArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// api ID.
@@ -118,9 +119,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf
         public EnableUnitRuleArgs()
         {
         }
+        public static new EnableUnitRuleArgs Empty => new EnableUnitRuleArgs();
     }
 
-    public sealed class EnableUnitRuleState : Pulumi.ResourceArgs
+    public sealed class EnableUnitRuleState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// api ID.
@@ -137,5 +139,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf
         public EnableUnitRuleState()
         {
         }
+        public static new EnableUnitRuleState Empty => new EnableUnitRuleState();
     }
 }

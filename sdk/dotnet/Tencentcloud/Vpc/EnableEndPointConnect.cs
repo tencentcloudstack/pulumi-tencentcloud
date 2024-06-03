@@ -15,30 +15,31 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var enableEndPointConnect = new Tencentcloud.Vpc.EnableEndPointConnect("enableEndPointConnect", new()
     ///     {
-    ///         var enableEndPointConnect = new Tencentcloud.Vpc.EnableEndPointConnect("enableEndPointConnect", new Tencentcloud.Vpc.EnableEndPointConnectArgs
+    ///         AcceptFlag = true,
+    ///         EndPointIds = new[]
     ///         {
-    ///             AcceptFlag = true,
-    ///             EndPointIds = 
-    ///             {
-    ///                 "vpce-6q0ftmke",
-    ///             },
-    ///             EndPointServiceId = "vpcsvc-98jddhcz",
-    ///         });
-    ///     }
+    ///             "vpce-6q0ftmke",
+    ///         },
+    ///         EndPointServiceId = "vpcsvc-98jddhcz",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Vpc/enableEndPointConnect:EnableEndPointConnect")]
-    public partial class EnableEndPointConnect : Pulumi.CustomResource
+    public partial class EnableEndPointConnect : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Whether to accept endpoint connection requests. `true`: Accept automatically. `false`: Do not automatically accept.
@@ -103,7 +104,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         }
     }
 
-    public sealed class EnableEndPointConnectArgs : Pulumi.ResourceArgs
+    public sealed class EnableEndPointConnectArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Whether to accept endpoint connection requests. `true`: Accept automatically. `false`: Do not automatically accept.
@@ -132,9 +133,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         public EnableEndPointConnectArgs()
         {
         }
+        public static new EnableEndPointConnectArgs Empty => new EnableEndPointConnectArgs();
     }
 
-    public sealed class EnableEndPointConnectState : Pulumi.ResourceArgs
+    public sealed class EnableEndPointConnectState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Whether to accept endpoint connection requests. `true`: Accept automatically. `false`: Do not automatically accept.
@@ -163,5 +165,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         public EnableEndPointConnectState()
         {
         }
+        public static new EnableEndPointConnectState Empty => new EnableEndPointConnectState();
     }
 }

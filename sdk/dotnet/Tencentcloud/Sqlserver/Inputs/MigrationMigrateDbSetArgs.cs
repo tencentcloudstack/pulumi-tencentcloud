@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver.Inputs
 {
 
-    public sealed class MigrationMigrateDbSetArgs : Pulumi.ResourceArgs
+    public sealed class MigrationMigrateDbSetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Name of the migration database.
@@ -22,5 +22,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver.Inputs
         public MigrationMigrateDbSetArgs()
         {
         }
+        public static new MigrationMigrateDbSetArgs Empty => new MigrationMigrateDbSetArgs();
     }
 }

@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cdwpg.Inputs
 {
 
-    public sealed class InstanceResourceDiskSpecGetArgs : Pulumi.ResourceArgs
+    public sealed class InstanceResourceDiskSpecGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// disk count.
@@ -34,5 +34,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cdwpg.Inputs
         public InstanceResourceDiskSpecGetArgs()
         {
         }
+        public static new InstanceResourceDiskSpecGetArgs Empty => new InstanceResourceDiskSpecGetArgs();
     }
 }

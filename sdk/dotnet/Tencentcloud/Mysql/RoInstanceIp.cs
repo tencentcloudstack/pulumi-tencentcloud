@@ -15,43 +15,47 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = Pulumi.Tencentcloud;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var zones = Tencentcloud.Availability.GetZonesByProduct.Invoke(new()
     ///     {
-    ///         var zones = Output.Create(Tencentcloud.Availability.GetZonesByProduct.InvokeAsync(new Tencentcloud.Availability.GetZonesByProductArgs
-    ///         {
-    ///             Product = "cdb",
-    ///         }));
-    ///         var vpc = new Tencentcloud.Vpc.Instance("vpc", new Tencentcloud.Vpc.InstanceArgs
-    ///         {
-    ///             CidrBlock = "10.0.0.0/16",
-    ///         });
-    ///         var subnet = new Tencentcloud.Subnet.Instance("subnet", new Tencentcloud.Subnet.InstanceArgs
-    ///         {
-    ///             AvailabilityZone = zones.Apply(zones =&gt; zones.Zones?[0]?.Name),
-    ///             VpcId = vpc.Id,
-    ///             CidrBlock = "10.0.0.0/16",
-    ///             IsMulticast = false,
-    ///         });
-    ///         var example = new Tencentcloud.Mysql.RoInstanceIp("example", new Tencentcloud.Mysql.RoInstanceIpArgs
-    ///         {
-    ///             InstanceId = "cdbro-bdlvcfpj",
-    ///             UniqSubnetId = subnet.Id,
-    ///             UniqVpcId = vpc.Id,
-    ///         });
-    ///     }
+    ///         Product = "cdb",
+    ///     });
     /// 
-    /// }
+    ///     var vpc = new Tencentcloud.Vpc.Instance("vpc", new()
+    ///     {
+    ///         CidrBlock = "10.0.0.0/16",
+    ///     });
+    /// 
+    ///     var subnet = new Tencentcloud.Subnet.Instance("subnet", new()
+    ///     {
+    ///         AvailabilityZone = zones.Apply(getZonesByProductResult =&gt; getZonesByProductResult.Zones[0]?.Name),
+    ///         VpcId = vpc.Id,
+    ///         CidrBlock = "10.0.0.0/16",
+    ///         IsMulticast = false,
+    ///     });
+    /// 
+    ///     var example = new Tencentcloud.Mysql.RoInstanceIp("example", new()
+    ///     {
+    ///         InstanceId = "cdbro-bdlvcfpj",
+    ///         UniqSubnetId = subnet.Id,
+    ///         UniqVpcId = vpc.Id,
+    ///     });
+    /// 
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Mysql/roInstanceIp:RoInstanceIp")]
-    public partial class RoInstanceIp : Pulumi.CustomResource
+    public partial class RoInstanceIp : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Read-only instance ID, in the format: cdbro-3i70uj0k, which is the same as the read-only instance ID displayed on the cloud database console page.
@@ -128,7 +132,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
         }
     }
 
-    public sealed class RoInstanceIpArgs : Pulumi.ResourceArgs
+    public sealed class RoInstanceIpArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Read-only instance ID, in the format: cdbro-3i70uj0k, which is the same as the read-only instance ID displayed on the cloud database console page.
@@ -151,9 +155,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
         public RoInstanceIpArgs()
         {
         }
+        public static new RoInstanceIpArgs Empty => new RoInstanceIpArgs();
     }
 
-    public sealed class RoInstanceIpState : Pulumi.ResourceArgs
+    public sealed class RoInstanceIpState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Read-only instance ID, in the format: cdbro-3i70uj0k, which is the same as the read-only instance ID displayed on the cloud database console page.
@@ -188,5 +193,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
         public RoInstanceIpState()
         {
         }
+        public static new RoInstanceIpState Empty => new RoInstanceIpState();
     }
 }

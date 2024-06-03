@@ -15,26 +15,27 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cvm
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var rebootInstance = new Tencentcloud.Cvm.RebootInstance("rebootInstance", new()
     ///     {
-    ///         var rebootInstance = new Tencentcloud.Cvm.RebootInstance("rebootInstance", new Tencentcloud.Cvm.RebootInstanceArgs
-    ///         {
-    ///             InstanceId = "ins-f9jr4bd2",
-    ///             StopType = "SOFT_FIRST",
-    ///         });
-    ///     }
+    ///         InstanceId = "ins-f9jr4bd2",
+    ///         StopType = "SOFT_FIRST",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Cvm/rebootInstance:RebootInstance")]
-    public partial class RebootInstance : Pulumi.CustomResource
+    public partial class RebootInstance : global::Pulumi.CustomResource
     {
         /// <summary>
         /// It has been deprecated from version 1.81.21. Please use `stop_type` instead. This parameter has been disused. We recommend using StopType instead. Note that ForceReboot and StopType parameters cannot be specified at the same time. Whether to forcibly restart an instance after a normal restart fails. Valid values are `TRUE` and `FALSE`. Default value: FALSE.
@@ -99,7 +100,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cvm
         }
     }
 
-    public sealed class RebootInstanceArgs : Pulumi.ResourceArgs
+    public sealed class RebootInstanceArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// It has been deprecated from version 1.81.21. Please use `stop_type` instead. This parameter has been disused. We recommend using StopType instead. Note that ForceReboot and StopType parameters cannot be specified at the same time. Whether to forcibly restart an instance after a normal restart fails. Valid values are `TRUE` and `FALSE`. Default value: FALSE.
@@ -122,9 +123,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cvm
         public RebootInstanceArgs()
         {
         }
+        public static new RebootInstanceArgs Empty => new RebootInstanceArgs();
     }
 
-    public sealed class RebootInstanceState : Pulumi.ResourceArgs
+    public sealed class RebootInstanceState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// It has been deprecated from version 1.81.21. Please use `stop_type` instead. This parameter has been disused. We recommend using StopType instead. Note that ForceReboot and StopType parameters cannot be specified at the same time. Whether to forcibly restart an instance after a normal restart fails. Valid values are `TRUE` and `FALSE`. Default value: FALSE.
@@ -147,5 +149,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cvm
         public RebootInstanceState()
         {
         }
+        public static new RebootInstanceState Empty => new RebootInstanceState();
     }
 }

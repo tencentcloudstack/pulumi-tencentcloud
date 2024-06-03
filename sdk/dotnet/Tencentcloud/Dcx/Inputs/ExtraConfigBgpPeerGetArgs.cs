@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dcx.Inputs
 {
 
-    public sealed class ExtraConfigBgpPeerGetArgs : Pulumi.ResourceArgs
+    public sealed class ExtraConfigBgpPeerGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// user idc BGP Asn.
@@ -28,5 +28,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dcx.Inputs
         public ExtraConfigBgpPeerGetArgs()
         {
         }
+        public static new ExtraConfigBgpPeerGetArgs Empty => new ExtraConfigBgpPeerGetArgs();
     }
 }

@@ -9,11 +9,12 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const dedicatedclusterDbInstance = new tencentcloud.Mariadb.DedicatedclusterDbInstance("dedicatedcluster_db_instance", {
+ * const dedicatedclusterDbInstance = new tencentcloud.mariadb.DedicatedclusterDbInstance("dedicatedclusterDbInstance", {
  *     clusterId: "dbdc-24odnuhr",
  *     dbVersionId: "8.0",
  *     goodsNum: 1,
@@ -24,13 +25,14 @@ import * as utilities from "../utilities";
  *     vpcId: "vpc-ii1jfbhl",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * mariadb dedicatedcluster_db_instance can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Mariadb/dedicatedclusterDbInstance:DedicatedclusterDbInstance dedicatedcluster_db_instance tdsql-050g3fmv
+ * $ pulumi import tencentcloud:Mariadb/dedicatedclusterDbInstance:DedicatedclusterDbInstance dedicatedcluster_db_instance tdsql-050g3fmv
  * ```
  */
 export class DedicatedclusterDbInstance extends pulumi.CustomResource {

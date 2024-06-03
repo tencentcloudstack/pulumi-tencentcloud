@@ -17,37 +17,38 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dnspod
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var demo = new Tencentcloud.Dnspod.Record("demo", new()
     ///     {
-    ///         var demo = new Tencentcloud.Dnspod.Record("demo", new Tencentcloud.Dnspod.RecordArgs
-    ///         {
-    ///             Domain = "mikatong.com",
-    ///             RecordLine = "默认",
-    ///             RecordType = "A",
-    ///             SubDomain = "demo",
-    ///             Value = "1.2.3.9",
-    ///         });
-    ///     }
+    ///         Domain = "mikatong.com",
+    ///         RecordLine = "默认",
+    ///         RecordType = "A",
+    ///         SubDomain = "demo",
+    ///         Value = "1.2.3.9",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// DnsPod Domain record can be imported using the Domain#RecordId, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Dnspod/record:Record demo arunma.com#1194109872
+    /// $ pulumi import tencentcloud:Dnspod/record:Record demo arunma.com#1194109872
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Dnspod/record:Record")]
-    public partial class Record : Pulumi.CustomResource
+    public partial class Record : global::Pulumi.CustomResource
     {
         /// <summary>
         /// The Domain.
@@ -160,7 +161,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dnspod
         }
     }
 
-    public sealed class RecordArgs : Pulumi.ResourceArgs
+    public sealed class RecordArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// The Domain.
@@ -225,9 +226,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dnspod
         public RecordArgs()
         {
         }
+        public static new RecordArgs Empty => new RecordArgs();
     }
 
-    public sealed class RecordState : Pulumi.ResourceArgs
+    public sealed class RecordState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// The Domain.
@@ -298,5 +300,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dnspod
         public RecordState()
         {
         }
+        public static new RecordState Empty => new RecordState();
     }
 }

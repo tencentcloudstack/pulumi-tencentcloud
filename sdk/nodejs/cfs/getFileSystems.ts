@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,24 +11,23 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const fileSystems = pulumi.output(tencentcloud.Cfs.getFileSystems({
+ * const fileSystems = tencentcloud.Cfs.getFileSystems({
  *     availabilityZone: "ap-guangzhou-3",
  *     fileSystemId: "cfs-6hgquxmj",
  *     name: "test",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getFileSystems(args?: GetFileSystemsArgs, opts?: pulumi.InvokeOptions): Promise<GetFileSystemsResult> {
     args = args || {};
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Cfs/getFileSystems:getFileSystems", {
         "availabilityZone": args.availabilityZone,
         "fileSystemId": args.fileSystemId,
@@ -96,9 +96,26 @@ export interface GetFileSystemsResult {
     readonly subnetId?: string;
     readonly vpcId?: string;
 }
-
+/**
+ * Use this data source to query the detail information of cloud file systems(CFS).
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const fileSystems = tencentcloud.Cfs.getFileSystems({
+ *     availabilityZone: "ap-guangzhou-3",
+ *     fileSystemId: "cfs-6hgquxmj",
+ *     name: "test",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getFileSystemsOutput(args?: GetFileSystemsOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetFileSystemsResult> {
-    return pulumi.output(args).apply(a => getFileSystems(a, opts))
+    return pulumi.output(args).apply((a: any) => getFileSystems(a, opts))
 }
 
 /**

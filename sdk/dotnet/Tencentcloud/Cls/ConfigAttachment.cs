@@ -18,11 +18,11 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls
     /// cls config_attachment can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Cls/configAttachment:ConfigAttachment attach config_id#group_id
+    /// $ pulumi import tencentcloud:Cls/configAttachment:ConfigAttachment attach config_id#group_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Cls/configAttachment:ConfigAttachment")]
-    public partial class ConfigAttachment : Pulumi.CustomResource
+    public partial class ConfigAttachment : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Collection configuration id.
@@ -81,7 +81,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls
         }
     }
 
-    public sealed class ConfigAttachmentArgs : Pulumi.ResourceArgs
+    public sealed class ConfigAttachmentArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Collection configuration id.
@@ -98,9 +98,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls
         public ConfigAttachmentArgs()
         {
         }
+        public static new ConfigAttachmentArgs Empty => new ConfigAttachmentArgs();
     }
 
-    public sealed class ConfigAttachmentState : Pulumi.ResourceArgs
+    public sealed class ConfigAttachmentState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Collection configuration id.
@@ -117,5 +118,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls
         public ConfigAttachmentState()
         {
         }
+        public static new ConfigAttachmentState Empty => new ConfigAttachmentState();
     }
 }

@@ -7,64 +7,70 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Use this resource to create TcaplusDB table group.
 //
 // ## Example Usage
+//
 // ### Create a tcaplusdb table group
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tcaplus"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tcaplus"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		cfg := config.New(ctx, "")
-// 		availabilityZone := "ap-guangzhou-3"
-// 		if param := cfg.Get("availabilityZone"); param != "" {
-// 			availabilityZone = param
-// 		}
-// 		vpc, err := Vpc.GetSubnets(ctx, &vpc.GetSubnetsArgs{
-// 			IsDefault:        pulumi.BoolRef(true),
-// 			AvailabilityZone: pulumi.StringRef(availabilityZone),
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		vpcId := vpc.InstanceLists[0].VpcId
-// 		subnetId := vpc.InstanceLists[0].SubnetId
-// 		exampleCluster, err := Tcaplus.NewCluster(ctx, "exampleCluster", &Tcaplus.ClusterArgs{
-// 			IdlType:               pulumi.String("PROTO"),
-// 			ClusterName:           pulumi.String("tf_example_tcaplus_cluster"),
-// 			VpcId:                 pulumi.String(vpcId),
-// 			SubnetId:              pulumi.String(subnetId),
-// 			Password:              pulumi.String("your_pw_123111"),
-// 			OldPasswordExpireLast: pulumi.Int(3600),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_, err = Tcaplus.NewTablegroup(ctx, "exampleTablegroup", &Tcaplus.TablegroupArgs{
-// 			ClusterId:      exampleCluster.ID(),
-// 			TablegroupName: pulumi.String("tf_example_group_name"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			cfg := config.New(ctx, "")
+//			availabilityZone := "ap-guangzhou-3"
+//			if param := cfg.Get("availabilityZone"); param != "" {
+//				availabilityZone = param
+//			}
+//			vpc, err := Vpc.GetSubnets(ctx, &vpc.GetSubnetsArgs{
+//				IsDefault:        pulumi.BoolRef(true),
+//				AvailabilityZone: pulumi.StringRef(availabilityZone),
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			vpcId := vpc.InstanceLists[0].VpcId
+//			subnetId := vpc.InstanceLists[0].SubnetId
+//			exampleCluster, err := Tcaplus.NewCluster(ctx, "exampleCluster", &Tcaplus.ClusterArgs{
+//				IdlType:               pulumi.String("PROTO"),
+//				ClusterName:           pulumi.String("tf_example_tcaplus_cluster"),
+//				VpcId:                 pulumi.String(vpcId),
+//				SubnetId:              pulumi.String(subnetId),
+//				Password:              pulumi.String("your_pw_123111"),
+//				OldPasswordExpireLast: pulumi.Int(3600),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_, err = Tcaplus.NewTablegroup(ctx, "exampleTablegroup", &Tcaplus.TablegroupArgs{
+//				ClusterId:      exampleCluster.ID(),
+//				TablegroupName: pulumi.String("tf_example_group_name"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 type Tablegroup struct {
 	pulumi.CustomResourceState
 
@@ -93,7 +99,7 @@ func NewTablegroup(ctx *pulumi.Context,
 	if args.TablegroupName == nil {
 		return nil, errors.New("invalid value for required argument 'TablegroupName'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource Tablegroup
 	err := ctx.RegisterResource("tencentcloud:Tcaplus/tablegroup:Tablegroup", name, args, &resource, opts...)
 	if err != nil {
@@ -186,7 +192,7 @@ func (i *Tablegroup) ToTablegroupOutputWithContext(ctx context.Context) Tablegro
 // TablegroupArrayInput is an input type that accepts TablegroupArray and TablegroupArrayOutput values.
 // You can construct a concrete instance of `TablegroupArrayInput` via:
 //
-//          TablegroupArray{ TablegroupArgs{...} }
+//	TablegroupArray{ TablegroupArgs{...} }
 type TablegroupArrayInput interface {
 	pulumi.Input
 
@@ -211,7 +217,7 @@ func (i TablegroupArray) ToTablegroupArrayOutputWithContext(ctx context.Context)
 // TablegroupMapInput is an input type that accepts TablegroupMap and TablegroupMapOutput values.
 // You can construct a concrete instance of `TablegroupMapInput` via:
 //
-//          TablegroupMap{ "key": TablegroupArgs{...} }
+//	TablegroupMap{ "key": TablegroupArgs{...} }
 type TablegroupMapInput interface {
 	pulumi.Input
 

@@ -15,41 +15,42 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ci
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var mediaSmartCoverTemplate = new Tencentcloud.Ci.MediaSmartCoverTemplate("mediaSmartCoverTemplate", new()
     ///     {
-    ///         var mediaSmartCoverTemplate = new Tencentcloud.Ci.MediaSmartCoverTemplate("mediaSmartCoverTemplate", new Tencentcloud.Ci.MediaSmartCoverTemplateArgs
+    ///         Bucket = "terraform-ci-xxxxxx",
+    ///         SmartCover = new Tencentcloud.Ci.Inputs.MediaSmartCoverTemplateSmartCoverArgs
     ///         {
-    ///             Bucket = "terraform-ci-xxxxxx",
-    ///             SmartCover = new Tencentcloud.Ci.Inputs.MediaSmartCoverTemplateSmartCoverArgs
-    ///             {
-    ///                 Count = "10",
-    ///                 DeleteDuplicates = "true",
-    ///                 Format = "jpg",
-    ///                 Height = "960",
-    ///                 Width = "1280",
-    ///             },
-    ///         });
-    ///     }
+    ///             Count = "10",
+    ///             DeleteDuplicates = "true",
+    ///             Format = "jpg",
+    ///             Height = "960",
+    ///             Width = "1280",
+    ///         },
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// ci media_smart_cover_template can be imported using the bucket#templateId, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Ci/mediaSmartCoverTemplate:MediaSmartCoverTemplate media_smart_cover_template terraform-ci-xxxxxx#t1ede83acc305e423799d638044d859fb7
+    /// $ pulumi import tencentcloud:Ci/mediaSmartCoverTemplate:MediaSmartCoverTemplate media_smart_cover_template terraform-ci-xxxxxx#t1ede83acc305e423799d638044d859fb7
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Ci/mediaSmartCoverTemplate:MediaSmartCoverTemplate")]
-    public partial class MediaSmartCoverTemplate : Pulumi.CustomResource
+    public partial class MediaSmartCoverTemplate : global::Pulumi.CustomResource
     {
         /// <summary>
         /// bucket name.
@@ -114,7 +115,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ci
         }
     }
 
-    public sealed class MediaSmartCoverTemplateArgs : Pulumi.ResourceArgs
+    public sealed class MediaSmartCoverTemplateArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// bucket name.
@@ -137,9 +138,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ci
         public MediaSmartCoverTemplateArgs()
         {
         }
+        public static new MediaSmartCoverTemplateArgs Empty => new MediaSmartCoverTemplateArgs();
     }
 
-    public sealed class MediaSmartCoverTemplateState : Pulumi.ResourceArgs
+    public sealed class MediaSmartCoverTemplateState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// bucket name.
@@ -162,5 +164,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ci
         public MediaSmartCoverTemplateState()
         {
         }
+        public static new MediaSmartCoverTemplateState Empty => new MediaSmartCoverTemplateState();
     }
 }

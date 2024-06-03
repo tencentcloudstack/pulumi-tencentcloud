@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,10 +11,11 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const foo = new tencentcloud.apigateway.CustomDomain("foo", {
  *     serviceId: "service-ohxqslqe",
@@ -31,13 +33,11 @@ import * as utilities from "../utilities";
  *     serviceId: foo.serviceId,
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getCustomerDomains(args: GetCustomerDomainsArgs, opts?: pulumi.InvokeOptions): Promise<GetCustomerDomainsResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:ApiGateway/getCustomerDomains:getCustomerDomains", {
         "resultOutputFile": args.resultOutputFile,
         "serviceId": args.serviceId,
@@ -73,9 +73,37 @@ export interface GetCustomerDomainsResult {
     readonly resultOutputFile?: string;
     readonly serviceId: string;
 }
-
+/**
+ * Use this data source to query API gateway domain list.
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
+ *
+ * const foo = new tencentcloud.apigateway.CustomDomain("foo", {
+ *     serviceId: "service-ohxqslqe",
+ *     subDomain: "tic-test.dnsv1.com",
+ *     protocol: "http",
+ *     netType: "OUTER",
+ *     isDefaultMapping: false,
+ *     defaultDomain: "service-ohxqslqe-1259649581.gz.apigw.tencentcs.com",
+ *     pathMappings: [
+ *         "/good#test",
+ *         "/root#release",
+ *     ],
+ * });
+ * const id = tencentcloud.ApiGateway.getCustomerDomainsOutput({
+ *     serviceId: foo.serviceId,
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getCustomerDomainsOutput(args: GetCustomerDomainsOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetCustomerDomainsResult> {
-    return pulumi.output(args).apply(a => getCustomerDomains(a, opts))
+    return pulumi.output(args).apply((a: any) => getCustomerDomains(a, opts))
 }
 
 /**

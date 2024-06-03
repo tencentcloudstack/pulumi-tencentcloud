@@ -15,40 +15,41 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dc
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var instance = new Tencentcloud.Dc.Instance("instance", new()
     ///     {
-    ///         var instance = new Tencentcloud.Dc.Instance("instance", new Tencentcloud.Dc.InstanceArgs
-    ///         {
-    ///             AccessPointId = "ap-shenzhen-b-ft",
-    ///             Bandwidth = 10,
-    ///             CustomerContactNumber = "0",
-    ///             DirectConnectName = "terraform-for-test",
-    ///             LineOperator = "In-houseWiring",
-    ///             PortType = "10GBase-LR",
-    ///             SignLaw = true,
-    ///             Vlan = -1,
-    ///         });
-    ///     }
+    ///         AccessPointId = "ap-shenzhen-b-ft",
+    ///         Bandwidth = 10,
+    ///         CustomerContactNumber = "0",
+    ///         DirectConnectName = "terraform-for-test",
+    ///         LineOperator = "In-houseWiring",
+    ///         PortType = "10GBase-LR",
+    ///         SignLaw = true,
+    ///         Vlan = -1,
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// dc instance can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Dc/instance:Instance instance dc_id
+    /// $ pulumi import tencentcloud:Dc/instance:Instance instance dc_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Dc/instance:Instance")]
-    public partial class Instance : Pulumi.CustomResource
+    public partial class Instance : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Access point of connection.You can call `DescribeAccessPoints` to get the region ID. The selected access point must exist and be available.
@@ -197,7 +198,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dc
         }
     }
 
-    public sealed class InstanceArgs : Pulumi.ResourceArgs
+    public sealed class InstanceArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Access point of connection.You can call `DescribeAccessPoints` to get the region ID. The selected access point must exist and be available.
@@ -304,9 +305,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dc
         public InstanceArgs()
         {
         }
+        public static new InstanceArgs Empty => new InstanceArgs();
     }
 
-    public sealed class InstanceState : Pulumi.ResourceArgs
+    public sealed class InstanceState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Access point of connection.You can call `DescribeAccessPoints` to get the region ID. The selected access point must exist and be available.
@@ -413,5 +415,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dc
         public InstanceState()
         {
         }
+        public static new InstanceState Empty => new InstanceState();
     }
 }

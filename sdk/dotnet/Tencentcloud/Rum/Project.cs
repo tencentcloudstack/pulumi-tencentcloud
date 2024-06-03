@@ -15,39 +15,40 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Rum
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var project = new Tencentcloud.Rum.Project("project", new()
     ///     {
-    ///         var project = new Tencentcloud.Rum.Project("project", new Tencentcloud.Rum.ProjectArgs
-    ///         {
-    ///             Desc = "projectDesc-1",
-    ///             EnableUrlGroup = 0,
-    ///             InstanceId = "rum-pasZKEI3RLgakj",
-    ///             Rate = "100",
-    ///             Repo = "",
-    ///             Type = "web",
-    ///             Url = "iac-tf.com",
-    ///         });
-    ///     }
+    ///         Desc = "projectDesc-1",
+    ///         EnableUrlGroup = 0,
+    ///         InstanceId = "rum-pasZKEI3RLgakj",
+    ///         Rate = "100",
+    ///         Repo = "",
+    ///         Type = "web",
+    ///         Url = "iac-tf.com",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// rum project can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Rum/project:Project project project_id
+    /// $ pulumi import tencentcloud:Rum/project:Project project project_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Rum/project:Project")]
-    public partial class Project : Pulumi.CustomResource
+    public partial class Project : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Creata Time.
@@ -184,7 +185,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Rum
         }
     }
 
-    public sealed class ProjectArgs : Pulumi.ResourceArgs
+    public sealed class ProjectArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Description of the created project (optional and up to 1,000 characters).
@@ -237,9 +238,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Rum
         public ProjectArgs()
         {
         }
+        public static new ProjectArgs Empty => new ProjectArgs();
     }
 
-    public sealed class ProjectState : Pulumi.ResourceArgs
+    public sealed class ProjectState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Creata Time.
@@ -334,5 +336,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Rum
         public ProjectState()
         {
         }
+        public static new ProjectState Empty => new ProjectState();
     }
 }

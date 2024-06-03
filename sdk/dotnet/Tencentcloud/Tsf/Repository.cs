@@ -15,38 +15,39 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var repository = new Tencentcloud.Tsf.Repository("repository", new()
     ///     {
-    ///         var repository = new Tencentcloud.Tsf.Repository("repository", new Tencentcloud.Tsf.RepositoryArgs
-    ///         {
-    ///             BucketName = "",
-    ///             BucketRegion = "",
-    ///             Directory = "",
-    ///             RepositoryDesc = "",
-    ///             RepositoryName = "",
-    ///             RepositoryType = "",
-    ///         });
-    ///     }
+    ///         BucketName = "",
+    ///         BucketRegion = "",
+    ///         Directory = "",
+    ///         RepositoryDesc = "",
+    ///         RepositoryName = "",
+    ///         RepositoryType = "",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// tsf repository can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Tsf/repository:Repository repository repository_id
+    /// $ pulumi import tencentcloud:Tsf/repository:Repository repository repository_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Tsf/repository:Repository")]
-    public partial class Repository : Pulumi.CustomResource
+    public partial class Repository : global::Pulumi.CustomResource
     {
         /// <summary>
         /// the name of the bucket where the warehouse is located.
@@ -147,7 +148,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf
         }
     }
 
-    public sealed class RepositoryArgs : Pulumi.ResourceArgs
+    public sealed class RepositoryArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// the name of the bucket where the warehouse is located.
@@ -188,9 +189,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf
         public RepositoryArgs()
         {
         }
+        public static new RepositoryArgs Empty => new RepositoryArgs();
     }
 
-    public sealed class RepositoryState : Pulumi.ResourceArgs
+    public sealed class RepositoryState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// the name of the bucket where the warehouse is located.
@@ -249,5 +251,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf
         public RepositoryState()
         {
         }
+        public static new RepositoryState Empty => new RepositoryState();
     }
 }

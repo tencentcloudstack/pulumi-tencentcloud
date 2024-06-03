@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps.Inputs
 {
 
-    public sealed class ScheduleActivityActivityParaSampleSnapshotTaskWatermarkSetRawParameterImageTemplateImageContentUrlInputInfoGetArgs : Pulumi.ResourceArgs
+    public sealed class ScheduleActivityActivityParaSampleSnapshotTaskWatermarkSetRawParameterImageTemplateImageContentUrlInputInfoGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// URL of a video.
@@ -22,5 +22,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps.Inputs
         public ScheduleActivityActivityParaSampleSnapshotTaskWatermarkSetRawParameterImageTemplateImageContentUrlInputInfoGetArgs()
         {
         }
+        public static new ScheduleActivityActivityParaSampleSnapshotTaskWatermarkSetRawParameterImageTemplateImageContentUrlInputInfoGetArgs Empty => new ScheduleActivityActivityParaSampleSnapshotTaskWatermarkSetRawParameterImageTemplateImageContentUrlInputInfoGetArgs();
     }
 }

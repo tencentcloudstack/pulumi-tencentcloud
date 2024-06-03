@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos.Inputs
 {
 
-    public sealed class BatchOperationCosInitiateRestoreObjectGetArgs : Pulumi.ResourceArgs
+    public sealed class BatchOperationCosInitiateRestoreObjectGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Sets the number of days after which the copy will be automatically expired and deleted, an integer in the range of 1-365.
@@ -28,5 +28,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos.Inputs
         public BatchOperationCosInitiateRestoreObjectGetArgs()
         {
         }
+        public static new BatchOperationCosInitiateRestoreObjectGetArgs Empty => new BatchOperationCosInitiateRestoreObjectGetArgs();
     }
 }

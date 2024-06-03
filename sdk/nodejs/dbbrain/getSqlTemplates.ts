@@ -9,24 +9,23 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const sqlTemplates = pulumi.output(tencentcloud.Dbbrain.getSqlTemplates({
+ * const sqlTemplates = tencentcloud.Dbbrain.getSqlTemplates({
  *     instanceId: "",
  *     product: "",
  *     schema: "",
  *     sqlText: "",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getSqlTemplates(args: GetSqlTemplatesArgs, opts?: pulumi.InvokeOptions): Promise<GetSqlTemplatesResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Dbbrain/getSqlTemplates:getSqlTemplates", {
         "instanceId": args.instanceId,
         "product": args.product,
@@ -88,9 +87,27 @@ export interface GetSqlTemplatesResult {
      */
     readonly sqlType: string;
 }
-
+/**
+ * Use this data source to query detailed information of dbbrain sqlTemplates
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const sqlTemplates = tencentcloud.Dbbrain.getSqlTemplates({
+ *     instanceId: "",
+ *     product: "",
+ *     schema: "",
+ *     sqlText: "",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getSqlTemplatesOutput(args: GetSqlTemplatesOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetSqlTemplatesResult> {
-    return pulumi.output(args).apply(a => getSqlTemplates(a, opts))
+    return pulumi.output(args).apply((a: any) => getSqlTemplates(a, opts))
 }
 
 /**

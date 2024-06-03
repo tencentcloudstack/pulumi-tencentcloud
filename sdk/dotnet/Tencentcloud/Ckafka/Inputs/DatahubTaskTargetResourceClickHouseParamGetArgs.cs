@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka.Inputs
 {
 
-    public sealed class DatahubTaskTargetResourceClickHouseParamGetArgs : Pulumi.ResourceArgs
+    public sealed class DatahubTaskTargetResourceClickHouseParamGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// ClickHouse cluster.
@@ -112,5 +112,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka.Inputs
         public DatahubTaskTargetResourceClickHouseParamGetArgs()
         {
         }
+        public static new DatahubTaskTargetResourceClickHouseParamGetArgs Empty => new DatahubTaskTargetResourceClickHouseParamGetArgs();
     }
 }

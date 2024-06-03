@@ -15,27 +15,28 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ipv6
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var ipv6AddressBandwidth = new Tencentcloud.Ipv6.AddressBandwidth("ipv6AddressBandwidth", new()
     ///     {
-    ///         var ipv6AddressBandwidth = new Tencentcloud.Ipv6.AddressBandwidth("ipv6AddressBandwidth", new Tencentcloud.Ipv6.AddressBandwidthArgs
-    ///         {
-    ///             InternetChargeType = "TRAFFIC_POSTPAID_BY_HOUR",
-    ///             InternetMaxBandwidthOut = 6,
-    ///             Ipv6Address = "2402:4e00:1019:9400:0:9905:a90b:2ef0",
-    ///         });
-    ///     }
+    ///         InternetChargeType = "TRAFFIC_POSTPAID_BY_HOUR",
+    ///         InternetMaxBandwidthOut = 6,
+    ///         Ipv6Address = "2402:4e00:1019:9400:0:9905:a90b:2ef0",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Ipv6/addressBandwidth:AddressBandwidth")]
-    public partial class AddressBandwidth : Pulumi.CustomResource
+    public partial class AddressBandwidth : global::Pulumi.CustomResource
     {
         /// <summary>
         /// The bandwidth package id, the Legacy account and the ipv6 address to apply for the bandwidth package charge type need to be passed in.
@@ -106,7 +107,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ipv6
         }
     }
 
-    public sealed class AddressBandwidthArgs : Pulumi.ResourceArgs
+    public sealed class AddressBandwidthArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// The bandwidth package id, the Legacy account and the ipv6 address to apply for the bandwidth package charge type need to be passed in.
@@ -135,9 +136,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ipv6
         public AddressBandwidthArgs()
         {
         }
+        public static new AddressBandwidthArgs Empty => new AddressBandwidthArgs();
     }
 
-    public sealed class AddressBandwidthState : Pulumi.ResourceArgs
+    public sealed class AddressBandwidthState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// The bandwidth package id, the Legacy account and the ipv6 address to apply for the bandwidth package charge type need to be passed in.
@@ -166,5 +168,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ipv6
         public AddressBandwidthState()
         {
         }
+        public static new AddressBandwidthState Empty => new AddressBandwidthState();
     }
 }

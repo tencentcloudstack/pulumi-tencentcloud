@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,11 +11,12 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const unitRule = new tencentcloud.Tsf.UnitRule("unit_rule", {
+ * const unitRule = new tencentcloud.tsf.UnitRule("unitRule", {
  *     description: "terraform-desc",
  *     gatewayInstanceId: "gw-ins-rug79a70",
  *     unitRuleItemLists: [{
@@ -32,13 +34,14 @@ import * as utilities from "../utilities";
  *     }],
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * tsf unit_rule can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Tsf/unitRule:UnitRule unit_rule unit-rl-zbywqeca
+ * $ pulumi import tencentcloud:Tsf/unitRule:UnitRule unit_rule unit-rl-zbywqeca
  * ```
  */
 export class UnitRule extends pulumi.CustomResource {

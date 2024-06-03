@@ -7,52 +7,57 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a tem appConfig
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Tem"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tem"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tem"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Tem.NewAppConfig(ctx, "appConfig", &Tem.AppConfigArgs{
-// 			ConfigDatas: tem.AppConfigConfigDataArray{
-// 				&tem.AppConfigConfigDataArgs{
-// 					Key:   pulumi.String("key"),
-// 					Value: pulumi.String("value"),
-// 				},
-// 				&tem.AppConfigConfigDataArgs{
-// 					Key:   pulumi.String("key1"),
-// 					Value: pulumi.String("value1"),
-// 				},
-// 			},
-// 			EnvironmentId: pulumi.String("en-o5edaepv"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Tem.NewAppConfig(ctx, "appConfig", &Tem.AppConfigArgs{
+//				ConfigDatas: tem.AppConfigConfigDataArray{
+//					&tem.AppConfigConfigDataArgs{
+//						Key:   pulumi.String("key"),
+//						Value: pulumi.String("value"),
+//					},
+//					&tem.AppConfigConfigDataArgs{
+//						Key:   pulumi.String("key1"),
+//						Value: pulumi.String("value1"),
+//					},
+//				},
+//				EnvironmentId: pulumi.String("en-o5edaepv"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // tem appConfig can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Tem/appConfig:AppConfig appConfig environmentId#name
+// $ pulumi import tencentcloud:Tem/appConfig:AppConfig appConfig environmentId#name
 // ```
 type AppConfig struct {
 	pulumi.CustomResourceState
@@ -78,7 +83,7 @@ func NewAppConfig(ctx *pulumi.Context,
 	if args.EnvironmentId == nil {
 		return nil, errors.New("invalid value for required argument 'EnvironmentId'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource AppConfig
 	err := ctx.RegisterResource("tencentcloud:Tem/appConfig:AppConfig", name, args, &resource, opts...)
 	if err != nil {
@@ -167,7 +172,7 @@ func (i *AppConfig) ToAppConfigOutputWithContext(ctx context.Context) AppConfigO
 // AppConfigArrayInput is an input type that accepts AppConfigArray and AppConfigArrayOutput values.
 // You can construct a concrete instance of `AppConfigArrayInput` via:
 //
-//          AppConfigArray{ AppConfigArgs{...} }
+//	AppConfigArray{ AppConfigArgs{...} }
 type AppConfigArrayInput interface {
 	pulumi.Input
 
@@ -192,7 +197,7 @@ func (i AppConfigArray) ToAppConfigArrayOutputWithContext(ctx context.Context) A
 // AppConfigMapInput is an input type that accepts AppConfigMap and AppConfigMapOutput values.
 // You can construct a concrete instance of `AppConfigMapInput` via:
 //
-//          AppConfigMap{ "key": AppConfigArgs{...} }
+//	AppConfigMap{ "key": AppConfigArgs{...} }
 type AppConfigMapInput interface {
 	pulumi.Input
 

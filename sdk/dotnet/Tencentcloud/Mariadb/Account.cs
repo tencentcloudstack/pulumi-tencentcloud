@@ -15,38 +15,39 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mariadb
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var account = new Tencentcloud.Mariadb.Account("account", new()
     ///     {
-    ///         var account = new Tencentcloud.Mariadb.Account("account", new Tencentcloud.Mariadb.AccountArgs
-    ///         {
-    ///             Description = "desc",
-    ///             Host = "10.101.202.22",
-    ///             InstanceId = "tdsql-4pzs5b67",
-    ///             Password = "Password123.",
-    ///             ReadOnly = 0,
-    ///             UserName = "account-test",
-    ///         });
-    ///     }
+    ///         Description = "desc",
+    ///         Host = "10.101.202.22",
+    ///         InstanceId = "tdsql-4pzs5b67",
+    ///         Password = "Password123.",
+    ///         ReadOnly = 0,
+    ///         UserName = "account-test",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// mariadb account can be imported using the instance_id#user_name#host, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Mariadb/account:Account account tdsql-4pzs5b67#account-test#10.101.202.22
+    /// $ pulumi import tencentcloud:Mariadb/account:Account account tdsql-4pzs5b67#account-test#10.101.202.22
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Mariadb/account:Account")]
-    public partial class Account : Pulumi.CustomResource
+    public partial class Account : global::Pulumi.CustomResource
     {
         /// <summary>
         /// account description.
@@ -108,6 +109,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mariadb
             {
                 Version = Utilities.Version,
                 PluginDownloadURL = "github://api.github.com/tencentcloudstack",
+                AdditionalSecretOutputs =
+                {
+                    "password",
+                },
             };
             var merged = CustomResourceOptions.Merge(defaultOptions, options);
             // Override the ID if one was specified for consistency with other language SDKs.
@@ -129,7 +134,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mariadb
         }
     }
 
-    public sealed class AccountArgs : Pulumi.ResourceArgs
+    public sealed class AccountArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// account description.
@@ -149,11 +154,21 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mariadb
         [Input("instanceId", required: true)]
         public Input<string> InstanceId { get; set; } = null!;
 
+        [Input("password", required: true)]
+        private Input<string>? _password;
+
         /// <summary>
         /// account password.
         /// </summary>
-        [Input("password", required: true)]
-        public Input<string> Password { get; set; } = null!;
+        public Input<string>? Password
+        {
+            get => _password;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _password = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
 
         /// <summary>
         /// wether account is read only, 0 means not a read only account.
@@ -170,9 +185,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mariadb
         public AccountArgs()
         {
         }
+        public static new AccountArgs Empty => new AccountArgs();
     }
 
-    public sealed class AccountState : Pulumi.ResourceArgs
+    public sealed class AccountState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// account description.
@@ -192,11 +208,21 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mariadb
         [Input("instanceId")]
         public Input<string>? InstanceId { get; set; }
 
+        [Input("password")]
+        private Input<string>? _password;
+
         /// <summary>
         /// account password.
         /// </summary>
-        [Input("password")]
-        public Input<string>? Password { get; set; }
+        public Input<string>? Password
+        {
+            get => _password;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _password = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
 
         /// <summary>
         /// wether account is read only, 0 means not a read only account.
@@ -213,5 +239,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mariadb
         public AccountState()
         {
         }
+        public static new AccountState Empty => new AccountState();
     }
 }

@@ -7,52 +7,57 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a ci mediaVideoProcessTemplate
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Ci"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ci"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ci"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Ci.NewMediaVideoProcessTemplate(ctx, "mediaVideoProcessTemplate", &Ci.MediaVideoProcessTemplateArgs{
-// 			Bucket: pulumi.String("terraform-ci-xxxxxx"),
-// 			ColorEnhance: &ci.MediaVideoProcessTemplateColorEnhanceArgs{
-// 				Contrast:   pulumi.String(""),
-// 				Correction: pulumi.String(""),
-// 				Enable:     pulumi.String("true"),
-// 				Saturation: pulumi.String(""),
-// 			},
-// 			MsSharpen: &ci.MediaVideoProcessTemplateMsSharpenArgs{
-// 				Enable:       pulumi.String("false"),
-// 				SharpenLevel: pulumi.String(""),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Ci.NewMediaVideoProcessTemplate(ctx, "mediaVideoProcessTemplate", &Ci.MediaVideoProcessTemplateArgs{
+//				Bucket: pulumi.String("terraform-ci-xxxxxx"),
+//				ColorEnhance: &ci.MediaVideoProcessTemplateColorEnhanceArgs{
+//					Contrast:   pulumi.String(""),
+//					Correction: pulumi.String(""),
+//					Enable:     pulumi.String("true"),
+//					Saturation: pulumi.String(""),
+//				},
+//				MsSharpen: &ci.MediaVideoProcessTemplateMsSharpenArgs{
+//					Enable:       pulumi.String("false"),
+//					SharpenLevel: pulumi.String(""),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // ci media_video_process_template can be imported using the bucket#templateId, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Ci/mediaVideoProcessTemplate:MediaVideoProcessTemplate media_video_process_template terraform-ci-xxxxxx#t1d5694d87639a4593a9fd7e9025d26f52
+// $ pulumi import tencentcloud:Ci/mediaVideoProcessTemplate:MediaVideoProcessTemplate media_video_process_template terraform-ci-xxxxxx#t1d5694d87639a4593a9fd7e9025d26f52
 // ```
 type MediaVideoProcessTemplate struct {
 	pulumi.CustomResourceState
@@ -77,7 +82,7 @@ func NewMediaVideoProcessTemplate(ctx *pulumi.Context,
 	if args.Bucket == nil {
 		return nil, errors.New("invalid value for required argument 'Bucket'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource MediaVideoProcessTemplate
 	err := ctx.RegisterResource("tencentcloud:Ci/mediaVideoProcessTemplate:MediaVideoProcessTemplate", name, args, &resource, opts...)
 	if err != nil {
@@ -174,7 +179,7 @@ func (i *MediaVideoProcessTemplate) ToMediaVideoProcessTemplateOutputWithContext
 // MediaVideoProcessTemplateArrayInput is an input type that accepts MediaVideoProcessTemplateArray and MediaVideoProcessTemplateArrayOutput values.
 // You can construct a concrete instance of `MediaVideoProcessTemplateArrayInput` via:
 //
-//          MediaVideoProcessTemplateArray{ MediaVideoProcessTemplateArgs{...} }
+//	MediaVideoProcessTemplateArray{ MediaVideoProcessTemplateArgs{...} }
 type MediaVideoProcessTemplateArrayInput interface {
 	pulumi.Input
 
@@ -199,7 +204,7 @@ func (i MediaVideoProcessTemplateArray) ToMediaVideoProcessTemplateArrayOutputWi
 // MediaVideoProcessTemplateMapInput is an input type that accepts MediaVideoProcessTemplateMap and MediaVideoProcessTemplateMapOutput values.
 // You can construct a concrete instance of `MediaVideoProcessTemplateMapInput` via:
 //
-//          MediaVideoProcessTemplateMap{ "key": MediaVideoProcessTemplateArgs{...} }
+//	MediaVideoProcessTemplateMap{ "key": MediaVideoProcessTemplateArgs{...} }
 type MediaVideoProcessTemplateMapInput interface {
 	pulumi.Input
 

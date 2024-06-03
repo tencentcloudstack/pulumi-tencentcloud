@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Elasticsearch.Inputs
 {
 
-    public sealed class InstanceWebNodeTypeInfoArgs : Pulumi.ResourceArgs
+    public sealed class InstanceWebNodeTypeInfoArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Visual node number.
@@ -28,5 +28,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Elasticsearch.Inputs
         public InstanceWebNodeTypeInfoArgs()
         {
         }
+        public static new InstanceWebNodeTypeInfoArgs Empty => new InstanceWebNodeTypeInfoArgs();
     }
 }

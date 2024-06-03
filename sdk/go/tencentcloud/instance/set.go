@@ -7,10 +7,18 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
+// Provides a CVM instance set resource.
+//
+// > **NOTE:** You can launch an CVM instance for a VPC network via specifying parameter `vpcId`. One instance can only belong to one VPC.
+//
+// > **NOTE:** This resource is designed to cater for the scenario of creating CVM in large batches.
+//
+// > **NOTE:** After run command `pulumi up`, must wait all cvms is ready, then run command `pulumi preview`, either it will cause state change.
 type Set struct {
 	pulumi.CustomResourceState
 
@@ -97,7 +105,14 @@ func NewSet(ctx *pulumi.Context,
 	if args.ImageId == nil {
 		return nil, errors.New("invalid value for required argument 'ImageId'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	if args.Password != nil {
+		args.Password = pulumi.ToSecret(args.Password).(pulumi.StringPtrInput)
+	}
+	secrets := pulumi.AdditionalSecretOutputs([]string{
+		"password",
+	})
+	opts = append(opts, secrets)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource Set
 	err := ctx.RegisterResource("tencentcloud:Instance/set:Set", name, args, &resource, opts...)
 	if err != nil {
@@ -414,7 +429,7 @@ func (i *Set) ToSetOutputWithContext(ctx context.Context) SetOutput {
 // SetArrayInput is an input type that accepts SetArray and SetArrayOutput values.
 // You can construct a concrete instance of `SetArrayInput` via:
 //
-//          SetArray{ SetArgs{...} }
+//	SetArray{ SetArgs{...} }
 type SetArrayInput interface {
 	pulumi.Input
 
@@ -439,7 +454,7 @@ func (i SetArray) ToSetArrayOutputWithContext(ctx context.Context) SetArrayOutpu
 // SetMapInput is an input type that accepts SetMap and SetMapOutput values.
 // You can construct a concrete instance of `SetMapInput` via:
 //
-//          SetMap{ "key": SetArgs{...} }
+//	SetMap{ "key": SetArgs{...} }
 type SetMapInput interface {
 	pulumi.Input
 

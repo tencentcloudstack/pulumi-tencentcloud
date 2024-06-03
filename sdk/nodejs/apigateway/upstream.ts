@@ -2,19 +2,22 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
  * Provides a resource to create a apigateway upstream
  *
  * ## Example Usage
+ *
  * ### Create a basic VPC channel
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const zones = tencentcloud.Availability.getZonesByProduct({
  *     product: "cvm",
@@ -33,16 +36,16 @@ import * as utilities from "../utilities";
  * });
  * const vpc = new tencentcloud.vpc.Instance("vpc", {cidrBlock: "10.0.0.0/16"});
  * const subnet = new tencentcloud.subnet.Instance("subnet", {
- *     availabilityZone: zones.then(zones => zones.zones?[3]?.name),
+ *     availabilityZone: zones.then(zones => zones.zones?.[3]?.name),
  *     vpcId: vpc.id,
  *     cidrBlock: "10.0.0.0/16",
  *     isMulticast: false,
  * });
  * const exampleInstance = new tencentcloud.instance.Instance("exampleInstance", {
  *     instanceName: "tf_example",
- *     availabilityZone: zones.then(zones => zones.zones?[3]?.name),
- *     imageId: images.then(images => images.images?[0]?.imageId),
- *     instanceType: instanceTypes.then(instanceTypes => instanceTypes.instanceTypes?[0]?.instanceType),
+ *     availabilityZone: zones.then(zones => zones.zones?.[3]?.name),
+ *     imageId: images.then(images => images.images?.[0]?.imageId),
+ *     instanceType: instanceTypes.then(instanceTypes => instanceTypes.instanceTypes?.[0]?.instanceType),
  *     systemDiskType: "CLOUD_PREMIUM",
  *     systemDiskSize: 50,
  *     hostname: "terraform",
@@ -78,11 +81,14 @@ import * as utilities from "../utilities";
  *     },
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
+ *
  * ### Create a complete VPC channel
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const example = new tencentcloud.apigateway.Upstream("example", {
  *     scheme: "HTTP",
@@ -117,13 +123,14 @@ import * as utilities from "../utilities";
  *     },
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * apigateway upstream can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:ApiGateway/upstream:Upstream upstream upstream_id
+ * $ pulumi import tencentcloud:ApiGateway/upstream:Upstream upstream upstream_id
  * ```
  */
 export class Upstream extends pulumi.CustomResource {

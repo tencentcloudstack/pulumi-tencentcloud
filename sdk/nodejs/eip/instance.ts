@@ -8,25 +8,30 @@ import * as utilities from "../utilities";
  * Provides an EIP resource.
  *
  * ## Example Usage
+ *
  * ### Paid by the bandwidth package
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const foo = new tencentcloud.Eip.Instance("foo", {
+ * const foo = new tencentcloud.eip.Instance("foo", {
  *     bandwidthPackageId: "bwp-jtvzuky6",
  *     internetChargeType: "BANDWIDTH_PACKAGE",
  *     type: "EIP",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
+ *
  * ### AntiDDos Eip
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const foo = new tencentcloud.Eip.Instance("foo", {
+ * const foo = new tencentcloud.eip.Instance("foo", {
  *     antiDdosPackageId: "xxxxxxxx",
  *     bandwidthPackageId: "bwp-4ocyia9s",
  *     internetChargeType: "BANDWIDTH_PACKAGE",
@@ -36,13 +41,16 @@ import * as utilities from "../utilities";
  *     type: "AntiDDoSEIP",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
+ *
  * ### Eip With Network Egress
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const foo = new tencentcloud.Eip.Instance("foo", {
+ * const foo = new tencentcloud.eip.Instance("foo", {
  *     egress: "center_egress2",
  *     internetChargeType: "BANDWIDTH_PACKAGE",
  *     internetMaxBandwidthOut: 1,
@@ -50,13 +58,14 @@ import * as utilities from "../utilities";
  *     type: "EIP",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * EIP can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Eip/instance:Instance foo eip-nyvf60va
+ * $ pulumi import tencentcloud:Eip/instance:Instance foo eip-nyvf60va
  * ```
  */
 export class Instance extends pulumi.CustomResource {

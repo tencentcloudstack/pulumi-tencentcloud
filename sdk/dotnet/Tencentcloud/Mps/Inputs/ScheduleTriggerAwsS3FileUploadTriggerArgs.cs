@@ -11,16 +11,16 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps.Inputs
 {
 
-    public sealed class ScheduleTriggerAwsS3FileUploadTriggerArgs : Pulumi.ResourceArgs
+    public sealed class ScheduleTriggerAwsS3FileUploadTriggerArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// The SQS queue of the AWS S3 bucket.Note: The queue must be in the same region as the bucket.Note: This field may return null, indicating that no valid values can be obtained.
+        /// The AWS SQS queue. This parameter is required if `NotifyType` is `AWS-SQS`.Note: This field may return null, indicating that no valid values can be obtained.
         /// </summary>
         [Input("awsSqs")]
         public Input<Inputs.ScheduleTriggerAwsS3FileUploadTriggerAwsSqsArgs>? AwsSqs { get; set; }
 
         /// <summary>
-        /// The bucket directory bound. It must be an absolute path that starts and ends with `/`, such as `/movie/201907/`. If you do not specify this, the root directory will be bound.	.
+        /// Input path directory bound to a workflow, such as `/movie/201907/`. If this parameter is left empty, the `/` root directory will be used.
         /// </summary>
         [Input("dir")]
         public Input<string>? Dir { get; set; }
@@ -29,7 +29,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps.Inputs
         private InputList<string>? _formats;
 
         /// <summary>
-        /// The file formats that will trigger the scheme, such as [mp4, flv, mov]. If you do not specify this, the upload of files in any format will trigger the scheme.	.
+        /// Format list of files that can trigger a workflow, such as [mp4, flv, mov]. If this parameter is left empty, files in all formats can trigger the workflow.
         /// </summary>
         public InputList<string> Formats
         {
@@ -38,7 +38,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps.Inputs
         }
 
         /// <summary>
-        /// The AWS S3 bucket bound to the scheme.
+        /// The AWS S3 bucket.
         /// </summary>
         [Input("s3Bucket", required: true)]
         public Input<string> S3Bucket { get; set; } = null!;
@@ -50,13 +50,13 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps.Inputs
         public Input<string> S3Region { get; set; } = null!;
 
         /// <summary>
-        /// The key ID of the AWS S3 bucket.Note: This field may return null, indicating that no valid values can be obtained.
+        /// The key ID required to access the AWS S3 object.
         /// </summary>
         [Input("s3SecretId")]
         public Input<string>? S3SecretId { get; set; }
 
         /// <summary>
-        /// The key of the AWS S3 bucket.Note: This field may return null, indicating that no valid values can be obtained.
+        /// The key required to access the AWS S3 object.
         /// </summary>
         [Input("s3SecretKey")]
         public Input<string>? S3SecretKey { get; set; }
@@ -64,5 +64,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps.Inputs
         public ScheduleTriggerAwsS3FileUploadTriggerArgs()
         {
         }
+        public static new ScheduleTriggerAwsS3FileUploadTriggerArgs Empty => new ScheduleTriggerAwsS3FileUploadTriggerArgs();
     }
 }

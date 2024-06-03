@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Lighthouse.Inputs
 {
 
-    public sealed class InstanceContainerEnvArgs : Pulumi.ResourceArgs
+    public sealed class InstanceContainerEnvArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Environment variable key.
@@ -28,5 +28,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Lighthouse.Inputs
         public InstanceContainerEnvArgs()
         {
         }
+        public static new InstanceContainerEnvArgs Empty => new InstanceContainerEnvArgs();
     }
 }

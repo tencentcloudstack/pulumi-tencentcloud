@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mdl.Inputs
 {
 
-    public sealed class StreamLiveInputInputSettingGetArgs : Pulumi.ResourceArgs
+    public sealed class StreamLiveInputInputSettingGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Application name, which is valid if `Type` is `RTMP_PUSH` and can contain 1-32 letters and digitsNote: This field may return `null`, indicating that no valid value was found.
@@ -70,5 +70,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mdl.Inputs
         public StreamLiveInputInputSettingGetArgs()
         {
         }
+        public static new StreamLiveInputInputSettingGetArgs Empty => new StreamLiveInputInputSettingGetArgs();
     }
 }

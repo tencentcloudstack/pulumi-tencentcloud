@@ -7,47 +7,53 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a tem logConfig
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tem"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tem"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Tem.NewLogConfig(ctx, "logConfig", &Tem.LogConfigArgs{
-// 			EnvironmentId: pulumi.String("en-o5edaepv"),
-// 			ApplicationId: pulumi.String("app-3j29aa2p"),
-// 			WorkloadId:    pulumi.Any(resource.Tencentcloud_tem_workload.Workload.Id),
-// 			LogsetId:      pulumi.String("b5824781-8d5b-4029-a2f7-d03c37f72bdf"),
-// 			TopicId:       pulumi.String("5a85bb6d-8e41-4e04-b7bd-c05e04782f94"),
-// 			InputType:     pulumi.String("container_stdout"),
-// 			LogType:       pulumi.String("minimalist_log"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Tem.NewLogConfig(ctx, "logConfig", &Tem.LogConfigArgs{
+//				EnvironmentId: pulumi.String("en-o5edaepv"),
+//				ApplicationId: pulumi.String("app-3j29aa2p"),
+//				WorkloadId:    pulumi.Any(resource.Tencentcloud_tem_workload.Workload.Id),
+//				LogsetId:      pulumi.String("b5824781-8d5b-4029-a2f7-d03c37f72bdf"),
+//				TopicId:       pulumi.String("5a85bb6d-8e41-4e04-b7bd-c05e04782f94"),
+//				InputType:     pulumi.String("container_stdout"),
+//				LogType:       pulumi.String("minimalist_log"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // tem logConfig can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Tem/logConfig:LogConfig logConfig environmentId#applicationId#name
+// $ pulumi import tencentcloud:Tem/logConfig:LogConfig logConfig environmentId#applicationId#name
 // ```
 type LogConfig struct {
 	pulumi.CustomResourceState
@@ -104,7 +110,7 @@ func NewLogConfig(ctx *pulumi.Context,
 	if args.WorkloadId == nil {
 		return nil, errors.New("invalid value for required argument 'WorkloadId'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource LogConfig
 	err := ctx.RegisterResource("tencentcloud:Tem/logConfig:LogConfig", name, args, &resource, opts...)
 	if err != nil {
@@ -257,7 +263,7 @@ func (i *LogConfig) ToLogConfigOutputWithContext(ctx context.Context) LogConfigO
 // LogConfigArrayInput is an input type that accepts LogConfigArray and LogConfigArrayOutput values.
 // You can construct a concrete instance of `LogConfigArrayInput` via:
 //
-//          LogConfigArray{ LogConfigArgs{...} }
+//	LogConfigArray{ LogConfigArgs{...} }
 type LogConfigArrayInput interface {
 	pulumi.Input
 
@@ -282,7 +288,7 @@ func (i LogConfigArray) ToLogConfigArrayOutputWithContext(ctx context.Context) L
 // LogConfigMapInput is an input type that accepts LogConfigMap and LogConfigMapOutput values.
 // You can construct a concrete instance of `LogConfigMapInput` via:
 //
-//          LogConfigMap{ "key": LogConfigArgs{...} }
+//	LogConfigMap{ "key": LogConfigArgs{...} }
 type LogConfigMapInput interface {
 	pulumi.Input
 

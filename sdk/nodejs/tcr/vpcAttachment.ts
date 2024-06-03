@@ -8,19 +8,21 @@ import * as utilities from "../utilities";
  * Use this resource to attach tcr instance with the vpc and subnet network.
  *
  * ## Example Usage
+ *
  * ### Attach a tcr instance with vpc resource
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const vpc = tencentcloud.Vpc.getSubnets({
  *     isDefault: true,
  *     availabilityZone: _var.availability_zone,
  * });
- * const vpcId = vpc.then(vpc => vpc.instanceLists?[0]?.vpcId);
- * const subnetId = vpc.then(vpc => vpc.instanceLists?[0]?.subnetId);
+ * const vpcId = vpc.then(vpc => vpc.instanceLists?.[0]?.vpcId);
+ * const subnetId = vpc.then(vpc => vpc.instanceLists?.[0]?.subnetId);
  * const example = new tencentcloud.tcr.Instance("example", {
  *     instanceType: "basic",
  *     deleteBucket: true,
@@ -38,13 +40,14 @@ import * as utilities from "../utilities";
  *     subnetId: subnetId,
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * tcr vpc attachment can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Tcr/vpcAttachment:VpcAttachment foo instance_id#vpc_id#subnet_id
+ * $ pulumi import tencentcloud:Tcr/vpcAttachment:VpcAttachment foo instance_id#vpc_id#subnet_id
  * ```
  */
 export class VpcAttachment extends pulumi.CustomResource {
@@ -94,7 +97,7 @@ export class VpcAttachment extends pulumi.CustomResource {
     /**
      * this argument was deprecated, use `regionName` instead. ID of region. Conflict with region_name, can not be set at the same time.
      *
-     * @deprecated this argument was deprecated, use `region_name` instead.
+     * @deprecated this argument was deprecated, use `regionName` instead.
      */
     public readonly regionId!: pulumi.Output<number | undefined>;
     /**
@@ -185,7 +188,7 @@ export interface VpcAttachmentState {
     /**
      * this argument was deprecated, use `regionName` instead. ID of region. Conflict with region_name, can not be set at the same time.
      *
-     * @deprecated this argument was deprecated, use `region_name` instead.
+     * @deprecated this argument was deprecated, use `regionName` instead.
      */
     regionId?: pulumi.Input<number>;
     /**
@@ -225,7 +228,7 @@ export interface VpcAttachmentArgs {
     /**
      * this argument was deprecated, use `regionName` instead. ID of region. Conflict with region_name, can not be set at the same time.
      *
-     * @deprecated this argument was deprecated, use `region_name` instead.
+     * @deprecated this argument was deprecated, use `regionName` instead.
      */
     regionId?: pulumi.Input<number>;
     /**

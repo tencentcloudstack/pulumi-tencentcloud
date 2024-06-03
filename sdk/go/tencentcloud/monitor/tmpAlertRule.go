@@ -7,8 +7,9 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a monitor tmpAlertRule
@@ -17,101 +18,103 @@ import (
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"fmt"
 //
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Monitor"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Monitor"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Subnet"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Monitor"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Subnet"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		cfg := config.New(ctx, "")
-// 		availabilityZone := "ap-guangzhou-4"
-// 		if param := cfg.Get("availabilityZone"); param != "" {
-// 			availabilityZone = param
-// 		}
-// 		vpc, err := Vpc.NewInstance(ctx, "vpc", &Vpc.InstanceArgs{
-// 			CidrBlock: pulumi.String("10.0.0.0/16"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		subnet, err := Subnet.NewInstance(ctx, "subnet", &Subnet.InstanceArgs{
-// 			VpcId:            vpc.ID(),
-// 			AvailabilityZone: pulumi.String(availabilityZone),
-// 			CidrBlock:        pulumi.String("10.0.1.0/24"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		fooTmpInstance, err := Monitor.NewTmpInstance(ctx, "fooTmpInstance", &Monitor.TmpInstanceArgs{
-// 			InstanceName:      pulumi.String("tf-tmp-instance"),
-// 			VpcId:             vpc.ID(),
-// 			SubnetId:          subnet.ID(),
-// 			DataRetentionTime: pulumi.Int(30),
-// 			Zone:              pulumi.String(availabilityZone),
-// 			Tags: pulumi.AnyMap{
-// 				"createdBy": pulumi.Any("terraform"),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_, err = Monitor.NewTmpCvmAgent(ctx, "fooTmpCvmAgent", &Monitor.TmpCvmAgentArgs{
-// 			InstanceId: fooTmpInstance.ID(),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_, err = Monitor.NewTmpAlertRule(ctx, "fooTmpAlertRule", &Monitor.TmpAlertRuleArgs{
-// 			Duration:   pulumi.String("2m"),
-// 			Expr:       pulumi.String("avg by (instance) (mysql_global_status_threads_connected) / avg by (instance) (mysql_global_variables_max_connections)  > 0.8"),
-// 			InstanceId: fooTmpInstance.ID(),
-// 			Receivers: pulumi.StringArray{
-// 				pulumi.String("notice-f2svbu3w"),
-// 			},
-// 			RuleName:  pulumi.String("MySQL 连接数过多"),
-// 			RuleState: pulumi.Int(2),
-// 			Type:      pulumi.String("MySQL/MySQL 连接数过多"),
-// 			Annotations: monitor.TmpAlertRuleAnnotationArray{
-// 				&monitor.TmpAlertRuleAnnotationArgs{
-// 					Key:   pulumi.String("description"),
-// 					Value: pulumi.String(fmt.Sprintf("%v%v%v%v%v", "MySQL 连接数过多, 实例: {{", "$", "labels.instance}}，当前值: {{ ", "$", "value | humanizePercentage }}。")),
-// 				},
-// 				&monitor.TmpAlertRuleAnnotationArgs{
-// 					Key:   pulumi.String("summary"),
-// 					Value: pulumi.String(fmt.Sprintf("%v%v%v", "MySQL 连接数过多(>80", "%", ")")),
-// 				},
-// 			},
-// 			Labels: monitor.TmpAlertRuleLabelArray{
-// 				&monitor.TmpAlertRuleLabelArgs{
-// 					Key:   pulumi.String("severity"),
-// 					Value: pulumi.String("warning"),
-// 				},
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			cfg := config.New(ctx, "")
+//			availabilityZone := "ap-guangzhou-4"
+//			if param := cfg.Get("availabilityZone"); param != "" {
+//				availabilityZone = param
+//			}
+//			vpc, err := Vpc.NewInstance(ctx, "vpc", &Vpc.InstanceArgs{
+//				CidrBlock: pulumi.String("10.0.0.0/16"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			subnet, err := Subnet.NewInstance(ctx, "subnet", &Subnet.InstanceArgs{
+//				VpcId:            vpc.ID(),
+//				AvailabilityZone: pulumi.String(availabilityZone),
+//				CidrBlock:        pulumi.String("10.0.1.0/24"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			fooTmpInstance, err := Monitor.NewTmpInstance(ctx, "fooTmpInstance", &Monitor.TmpInstanceArgs{
+//				InstanceName:      pulumi.String("tf-tmp-instance"),
+//				VpcId:             vpc.ID(),
+//				SubnetId:          subnet.ID(),
+//				DataRetentionTime: pulumi.Int(30),
+//				Zone:              pulumi.String(availabilityZone),
+//				Tags: pulumi.Map{
+//					"createdBy": pulumi.Any("terraform"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_, err = Monitor.NewTmpCvmAgent(ctx, "fooTmpCvmAgent", &Monitor.TmpCvmAgentArgs{
+//				InstanceId: fooTmpInstance.ID(),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_, err = Monitor.NewTmpAlertRule(ctx, "fooTmpAlertRule", &Monitor.TmpAlertRuleArgs{
+//				Duration:   pulumi.String("2m"),
+//				Expr:       pulumi.String("avg by (instance) (mysql_global_status_threads_connected) / avg by (instance) (mysql_global_variables_max_connections)  > 0.8"),
+//				InstanceId: fooTmpInstance.ID(),
+//				Receivers: pulumi.StringArray{
+//					pulumi.String("notice-f2svbu3w"),
+//				},
+//				RuleName:  pulumi.String("MySQL 连接数过多"),
+//				RuleState: pulumi.Int(2),
+//				Type:      pulumi.String("MySQL/MySQL 连接数过多"),
+//				Annotations: monitor.TmpAlertRuleAnnotationArray{
+//					&monitor.TmpAlertRuleAnnotationArgs{
+//						Key:   pulumi.String("description"),
+//						Value: pulumi.String("MySQL 连接数过多, 实例: {{$labels.instance}}，当前值: {{ $value | humanizePercentage }}。"),
+//					},
+//					&monitor.TmpAlertRuleAnnotationArgs{
+//						Key:   pulumi.String("summary"),
+//						Value: pulumi.String("MySQL 连接数过多(>80%)"),
+//					},
+//				},
+//				Labels: monitor.TmpAlertRuleLabelArray{
+//					&monitor.TmpAlertRuleLabelArgs{
+//						Key:   pulumi.String("severity"),
+//						Value: pulumi.String("warning"),
+//					},
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // monitor tmpAlertRule can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Monitor/tmpAlertRule:TmpAlertRule tmpAlertRule instanceId#Rule_id
+// $ pulumi import tencentcloud:Monitor/tmpAlertRule:TmpAlertRule tmpAlertRule instanceId#Rule_id
 // ```
 type TmpAlertRule struct {
 	pulumi.CustomResourceState
@@ -155,7 +158,7 @@ func NewTmpAlertRule(ctx *pulumi.Context,
 	if args.RuleName == nil {
 		return nil, errors.New("invalid value for required argument 'RuleName'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource TmpAlertRule
 	err := ctx.RegisterResource("tencentcloud:Monitor/tmpAlertRule:TmpAlertRule", name, args, &resource, opts...)
 	if err != nil {
@@ -292,7 +295,7 @@ func (i *TmpAlertRule) ToTmpAlertRuleOutputWithContext(ctx context.Context) TmpA
 // TmpAlertRuleArrayInput is an input type that accepts TmpAlertRuleArray and TmpAlertRuleArrayOutput values.
 // You can construct a concrete instance of `TmpAlertRuleArrayInput` via:
 //
-//          TmpAlertRuleArray{ TmpAlertRuleArgs{...} }
+//	TmpAlertRuleArray{ TmpAlertRuleArgs{...} }
 type TmpAlertRuleArrayInput interface {
 	pulumi.Input
 
@@ -317,7 +320,7 @@ func (i TmpAlertRuleArray) ToTmpAlertRuleArrayOutputWithContext(ctx context.Cont
 // TmpAlertRuleMapInput is an input type that accepts TmpAlertRuleMap and TmpAlertRuleMapOutput values.
 // You can construct a concrete instance of `TmpAlertRuleMapInput` via:
 //
-//          TmpAlertRuleMap{ "key": TmpAlertRuleArgs{...} }
+//	TmpAlertRuleMap{ "key": TmpAlertRuleArgs{...} }
 type TmpAlertRuleMapInput interface {
 	pulumi.Input
 

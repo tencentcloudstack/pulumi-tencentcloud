@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos.Inputs
 {
 
-    public sealed class BatchReportGetArgs : Pulumi.ResourceArgs
+    public sealed class BatchReportGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Delivery bucket for task completion reports.
@@ -46,5 +46,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos.Inputs
         public BatchReportGetArgs()
         {
         }
+        public static new BatchReportGetArgs Empty => new BatchReportGetArgs();
     }
 }

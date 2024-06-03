@@ -7,56 +7,77 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a cls topic.
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cls"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cls"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Cls.NewTopic(ctx, "topic", &Cls.TopicArgs{
-// 			AutoSplit:          pulumi.Bool(false),
-// 			LogsetId:           pulumi.String("5cd3a17e-fb0b-418c-afd7-77b365397426"),
-// 			MaxSplitPartitions: pulumi.Int(20),
-// 			PartitionCount:     pulumi.Int(1),
-// 			Period:             pulumi.Int(10),
-// 			StorageType:        pulumi.String("hot"),
-// 			Tags: pulumi.AnyMap{
-// 				"test": pulumi.Any("test"),
-// 			},
-// 			TopicName: pulumi.String("topic"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			exampleLogset, err := Cls.NewLogset(ctx, "exampleLogset", &Cls.LogsetArgs{
+//				LogsetName: pulumi.String("tf_example"),
+//				Tags: pulumi.Map{
+//					"demo": pulumi.Any("test"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_, err = Cls.NewTopic(ctx, "exampleTopic", &Cls.TopicArgs{
+//				TopicName:          pulumi.String("tf_example"),
+//				LogsetId:           exampleLogset.ID(),
+//				AutoSplit:          pulumi.Bool(false),
+//				MaxSplitPartitions: pulumi.Int(20),
+//				PartitionCount:     pulumi.Int(1),
+//				Period:             pulumi.Int(30),
+//				StorageType:        pulumi.String("hot"),
+//				Describes:          pulumi.String("Test Demo."),
+//				HotPeriod:          pulumi.Int(10),
+//				Tags: pulumi.Map{
+//					"test": pulumi.Any("test"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // cls topic can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Cls/topic:Topic topic 2f5764c1-c833-44c5-84c7-950979b2a278
+// $ pulumi import tencentcloud:Cls/topic:Topic example 2f5764c1-c833-44c5-84c7-950979b2a278
 // ```
 type Topic struct {
 	pulumi.CustomResourceState
 
 	// Whether to enable automatic split. Default value: true.
 	AutoSplit pulumi.BoolOutput `pulumi:"autoSplit"`
+	// Log Topic Description.
+	Describes pulumi.StringPtrOutput `pulumi:"describes"`
+	// 0: Turn off log sinking. Non 0: The number of days of standard storage after enabling log settling. HotPeriod needs to be greater than or equal to 7 and less than Period. Only effective when StorageType is hot.
+	HotPeriod pulumi.IntOutput `pulumi:"hotPeriod"`
 	// Logset ID.
 	LogsetId pulumi.StringOutput `pulumi:"logsetId"`
 	// Maximum number of partitions to split into for this topic if automatic split is enabled. Default value: 50.
@@ -65,7 +86,7 @@ type Topic struct {
 	PartitionCount pulumi.IntOutput `pulumi:"partitionCount"`
 	// Lifecycle in days. Value range: 1~366. Default value: 30.
 	Period pulumi.IntOutput `pulumi:"period"`
-	// Log topic storage class. Valid values: hot: real-time storage; cold: offline storage. Default value: hot. If cold is passed in, please contact the customer service to add the log topic to the allowlist first..
+	// Log topic storage class. Valid values: hot: real-time storage; cold: offline storage. Default value: hot. If cold is passed in, please contact the customer service to add the log topic to the allowlist first.
 	StorageType pulumi.StringOutput `pulumi:"storageType"`
 	// Tag description list. Up to 10 tag key-value pairs are supported and must be unique.
 	Tags pulumi.MapOutput `pulumi:"tags"`
@@ -86,7 +107,7 @@ func NewTopic(ctx *pulumi.Context,
 	if args.TopicName == nil {
 		return nil, errors.New("invalid value for required argument 'TopicName'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource Topic
 	err := ctx.RegisterResource("tencentcloud:Cls/topic:Topic", name, args, &resource, opts...)
 	if err != nil {
@@ -111,6 +132,10 @@ func GetTopic(ctx *pulumi.Context,
 type topicState struct {
 	// Whether to enable automatic split. Default value: true.
 	AutoSplit *bool `pulumi:"autoSplit"`
+	// Log Topic Description.
+	Describes *string `pulumi:"describes"`
+	// 0: Turn off log sinking. Non 0: The number of days of standard storage after enabling log settling. HotPeriod needs to be greater than or equal to 7 and less than Period. Only effective when StorageType is hot.
+	HotPeriod *int `pulumi:"hotPeriod"`
 	// Logset ID.
 	LogsetId *string `pulumi:"logsetId"`
 	// Maximum number of partitions to split into for this topic if automatic split is enabled. Default value: 50.
@@ -119,7 +144,7 @@ type topicState struct {
 	PartitionCount *int `pulumi:"partitionCount"`
 	// Lifecycle in days. Value range: 1~366. Default value: 30.
 	Period *int `pulumi:"period"`
-	// Log topic storage class. Valid values: hot: real-time storage; cold: offline storage. Default value: hot. If cold is passed in, please contact the customer service to add the log topic to the allowlist first..
+	// Log topic storage class. Valid values: hot: real-time storage; cold: offline storage. Default value: hot. If cold is passed in, please contact the customer service to add the log topic to the allowlist first.
 	StorageType *string `pulumi:"storageType"`
 	// Tag description list. Up to 10 tag key-value pairs are supported and must be unique.
 	Tags map[string]interface{} `pulumi:"tags"`
@@ -130,6 +155,10 @@ type topicState struct {
 type TopicState struct {
 	// Whether to enable automatic split. Default value: true.
 	AutoSplit pulumi.BoolPtrInput
+	// Log Topic Description.
+	Describes pulumi.StringPtrInput
+	// 0: Turn off log sinking. Non 0: The number of days of standard storage after enabling log settling. HotPeriod needs to be greater than or equal to 7 and less than Period. Only effective when StorageType is hot.
+	HotPeriod pulumi.IntPtrInput
 	// Logset ID.
 	LogsetId pulumi.StringPtrInput
 	// Maximum number of partitions to split into for this topic if automatic split is enabled. Default value: 50.
@@ -138,7 +167,7 @@ type TopicState struct {
 	PartitionCount pulumi.IntPtrInput
 	// Lifecycle in days. Value range: 1~366. Default value: 30.
 	Period pulumi.IntPtrInput
-	// Log topic storage class. Valid values: hot: real-time storage; cold: offline storage. Default value: hot. If cold is passed in, please contact the customer service to add the log topic to the allowlist first..
+	// Log topic storage class. Valid values: hot: real-time storage; cold: offline storage. Default value: hot. If cold is passed in, please contact the customer service to add the log topic to the allowlist first.
 	StorageType pulumi.StringPtrInput
 	// Tag description list. Up to 10 tag key-value pairs are supported and must be unique.
 	Tags pulumi.MapInput
@@ -153,6 +182,10 @@ func (TopicState) ElementType() reflect.Type {
 type topicArgs struct {
 	// Whether to enable automatic split. Default value: true.
 	AutoSplit *bool `pulumi:"autoSplit"`
+	// Log Topic Description.
+	Describes *string `pulumi:"describes"`
+	// 0: Turn off log sinking. Non 0: The number of days of standard storage after enabling log settling. HotPeriod needs to be greater than or equal to 7 and less than Period. Only effective when StorageType is hot.
+	HotPeriod *int `pulumi:"hotPeriod"`
 	// Logset ID.
 	LogsetId string `pulumi:"logsetId"`
 	// Maximum number of partitions to split into for this topic if automatic split is enabled. Default value: 50.
@@ -161,7 +194,7 @@ type topicArgs struct {
 	PartitionCount *int `pulumi:"partitionCount"`
 	// Lifecycle in days. Value range: 1~366. Default value: 30.
 	Period *int `pulumi:"period"`
-	// Log topic storage class. Valid values: hot: real-time storage; cold: offline storage. Default value: hot. If cold is passed in, please contact the customer service to add the log topic to the allowlist first..
+	// Log topic storage class. Valid values: hot: real-time storage; cold: offline storage. Default value: hot. If cold is passed in, please contact the customer service to add the log topic to the allowlist first.
 	StorageType *string `pulumi:"storageType"`
 	// Tag description list. Up to 10 tag key-value pairs are supported and must be unique.
 	Tags map[string]interface{} `pulumi:"tags"`
@@ -173,6 +206,10 @@ type topicArgs struct {
 type TopicArgs struct {
 	// Whether to enable automatic split. Default value: true.
 	AutoSplit pulumi.BoolPtrInput
+	// Log Topic Description.
+	Describes pulumi.StringPtrInput
+	// 0: Turn off log sinking. Non 0: The number of days of standard storage after enabling log settling. HotPeriod needs to be greater than or equal to 7 and less than Period. Only effective when StorageType is hot.
+	HotPeriod pulumi.IntPtrInput
 	// Logset ID.
 	LogsetId pulumi.StringInput
 	// Maximum number of partitions to split into for this topic if automatic split is enabled. Default value: 50.
@@ -181,7 +218,7 @@ type TopicArgs struct {
 	PartitionCount pulumi.IntPtrInput
 	// Lifecycle in days. Value range: 1~366. Default value: 30.
 	Period pulumi.IntPtrInput
-	// Log topic storage class. Valid values: hot: real-time storage; cold: offline storage. Default value: hot. If cold is passed in, please contact the customer service to add the log topic to the allowlist first..
+	// Log topic storage class. Valid values: hot: real-time storage; cold: offline storage. Default value: hot. If cold is passed in, please contact the customer service to add the log topic to the allowlist first.
 	StorageType pulumi.StringPtrInput
 	// Tag description list. Up to 10 tag key-value pairs are supported and must be unique.
 	Tags pulumi.MapInput
@@ -215,7 +252,7 @@ func (i *Topic) ToTopicOutputWithContext(ctx context.Context) TopicOutput {
 // TopicArrayInput is an input type that accepts TopicArray and TopicArrayOutput values.
 // You can construct a concrete instance of `TopicArrayInput` via:
 //
-//          TopicArray{ TopicArgs{...} }
+//	TopicArray{ TopicArgs{...} }
 type TopicArrayInput interface {
 	pulumi.Input
 
@@ -240,7 +277,7 @@ func (i TopicArray) ToTopicArrayOutputWithContext(ctx context.Context) TopicArra
 // TopicMapInput is an input type that accepts TopicMap and TopicMapOutput values.
 // You can construct a concrete instance of `TopicMapInput` via:
 //
-//          TopicMap{ "key": TopicArgs{...} }
+//	TopicMap{ "key": TopicArgs{...} }
 type TopicMapInput interface {
 	pulumi.Input
 
@@ -281,6 +318,16 @@ func (o TopicOutput) AutoSplit() pulumi.BoolOutput {
 	return o.ApplyT(func(v *Topic) pulumi.BoolOutput { return v.AutoSplit }).(pulumi.BoolOutput)
 }
 
+// Log Topic Description.
+func (o TopicOutput) Describes() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *Topic) pulumi.StringPtrOutput { return v.Describes }).(pulumi.StringPtrOutput)
+}
+
+// 0: Turn off log sinking. Non 0: The number of days of standard storage after enabling log settling. HotPeriod needs to be greater than or equal to 7 and less than Period. Only effective when StorageType is hot.
+func (o TopicOutput) HotPeriod() pulumi.IntOutput {
+	return o.ApplyT(func(v *Topic) pulumi.IntOutput { return v.HotPeriod }).(pulumi.IntOutput)
+}
+
 // Logset ID.
 func (o TopicOutput) LogsetId() pulumi.StringOutput {
 	return o.ApplyT(func(v *Topic) pulumi.StringOutput { return v.LogsetId }).(pulumi.StringOutput)
@@ -301,7 +348,7 @@ func (o TopicOutput) Period() pulumi.IntOutput {
 	return o.ApplyT(func(v *Topic) pulumi.IntOutput { return v.Period }).(pulumi.IntOutput)
 }
 
-// Log topic storage class. Valid values: hot: real-time storage; cold: offline storage. Default value: hot. If cold is passed in, please contact the customer service to add the log topic to the allowlist first..
+// Log topic storage class. Valid values: hot: real-time storage; cold: offline storage. Default value: hot. If cold is passed in, please contact the customer service to add the log topic to the allowlist first.
 func (o TopicOutput) StorageType() pulumi.StringOutput {
 	return o.ApplyT(func(v *Topic) pulumi.StringOutput { return v.StorageType }).(pulumi.StringOutput)
 }

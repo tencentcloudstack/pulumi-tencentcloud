@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps.Inputs
 {
 
-    public sealed class ContentReviewTemplateUserDefineConfigureGetArgs : Pulumi.ResourceArgs
+    public sealed class ContentReviewTemplateUserDefineConfigureGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// User-defined asr text review control parameters.
@@ -34,5 +34,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps.Inputs
         public ContentReviewTemplateUserDefineConfigureGetArgs()
         {
         }
+        public static new ContentReviewTemplateUserDefineConfigureGetArgs Empty => new ContentReviewTemplateUserDefineConfigureGetArgs();
     }
 }

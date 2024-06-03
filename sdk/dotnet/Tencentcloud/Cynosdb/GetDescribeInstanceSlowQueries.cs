@@ -15,68 +15,62 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
         /// <summary>
         /// Use this data source to query detailed information of cynosdb describe_instance_slow_queries
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var describeInstanceSlowQueries = Tencentcloud.Cynosdb.GetDescribeInstanceSlowQueries.Invoke(new()
         ///     {
-        ///         var describeInstanceSlowQueries = Output.Create(Tencentcloud.Cynosdb.GetDescribeInstanceSlowQueries.InvokeAsync(new Tencentcloud.Cynosdb.GetDescribeInstanceSlowQueriesArgs
-        ///         {
-        ///             ClusterId = "cynosdbmysql-bws8h88b",
-        ///             EndTime = "2023-06-19 14:00:00",
-        ///             StartTime = "2023-06-01 12:00:00",
-        ///         }));
-        ///     }
+        ///         ClusterId = "cynosdbmysql-bws8h88b",
+        ///         EndTime = "2023-06-19 14:00:00",
+        ///         StartTime = "2023-06-01 12:00:00",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetDescribeInstanceSlowQueriesResult> InvokeAsync(GetDescribeInstanceSlowQueriesArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetDescribeInstanceSlowQueriesResult>("tencentcloud:Cynosdb/getDescribeInstanceSlowQueries:getDescribeInstanceSlowQueries", args ?? new GetDescribeInstanceSlowQueriesArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetDescribeInstanceSlowQueriesResult>("tencentcloud:Cynosdb/getDescribeInstanceSlowQueries:getDescribeInstanceSlowQueries", args ?? new GetDescribeInstanceSlowQueriesArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of cynosdb describe_instance_slow_queries
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var describeInstanceSlowQueries = Tencentcloud.Cynosdb.GetDescribeInstanceSlowQueries.Invoke(new()
         ///     {
-        ///         var describeInstanceSlowQueries = Output.Create(Tencentcloud.Cynosdb.GetDescribeInstanceSlowQueries.InvokeAsync(new Tencentcloud.Cynosdb.GetDescribeInstanceSlowQueriesArgs
-        ///         {
-        ///             ClusterId = "cynosdbmysql-bws8h88b",
-        ///             EndTime = "2023-06-19 14:00:00",
-        ///             StartTime = "2023-06-01 12:00:00",
-        ///         }));
-        ///     }
+        ///         ClusterId = "cynosdbmysql-bws8h88b",
+        ///         EndTime = "2023-06-19 14:00:00",
+        ///         StartTime = "2023-06-01 12:00:00",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetDescribeInstanceSlowQueriesResult> Invoke(GetDescribeInstanceSlowQueriesInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetDescribeInstanceSlowQueriesResult>("tencentcloud:Cynosdb/getDescribeInstanceSlowQueries:getDescribeInstanceSlowQueries", args ?? new GetDescribeInstanceSlowQueriesInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetDescribeInstanceSlowQueriesResult>("tencentcloud:Cynosdb/getDescribeInstanceSlowQueries:getDescribeInstanceSlowQueries", args ?? new GetDescribeInstanceSlowQueriesInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetDescribeInstanceSlowQueriesArgs : Pulumi.InvokeArgs
+    public sealed class GetDescribeInstanceSlowQueriesArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Cluster ID.
@@ -105,9 +99,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
         public GetDescribeInstanceSlowQueriesArgs()
         {
         }
+        public static new GetDescribeInstanceSlowQueriesArgs Empty => new GetDescribeInstanceSlowQueriesArgs();
     }
 
-    public sealed class GetDescribeInstanceSlowQueriesInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetDescribeInstanceSlowQueriesInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Cluster ID.
@@ -136,6 +131,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
         public GetDescribeInstanceSlowQueriesInvokeArgs()
         {
         }
+        public static new GetDescribeInstanceSlowQueriesInvokeArgs Empty => new GetDescribeInstanceSlowQueriesInvokeArgs();
     }
 
 

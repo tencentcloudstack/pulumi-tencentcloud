@@ -15,58 +15,52 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
         /// <summary>
         /// Use this data source to query which instance types of Redis are available in a specific region.
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
-        ///     {
-        ///         var foo = Output.Create(Tencentcloud.Cynosdb.GetZoneConfig.InvokeAsync());
-        ///     }
+        ///     var foo = Tencentcloud.Cynosdb.GetZoneConfig.Invoke();
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetZoneConfigResult> InvokeAsync(GetZoneConfigArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetZoneConfigResult>("tencentcloud:Cynosdb/getZoneConfig:getZoneConfig", args ?? new GetZoneConfigArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetZoneConfigResult>("tencentcloud:Cynosdb/getZoneConfig:getZoneConfig", args ?? new GetZoneConfigArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query which instance types of Redis are available in a specific region.
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
-        ///     {
-        ///         var foo = Output.Create(Tencentcloud.Cynosdb.GetZoneConfig.InvokeAsync());
-        ///     }
+        ///     var foo = Tencentcloud.Cynosdb.GetZoneConfig.Invoke();
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetZoneConfigResult> Invoke(GetZoneConfigInvokeArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetZoneConfigResult>("tencentcloud:Cynosdb/getZoneConfig:getZoneConfig", args ?? new GetZoneConfigInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetZoneConfigResult>("tencentcloud:Cynosdb/getZoneConfig:getZoneConfig", args ?? new GetZoneConfigInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetZoneConfigArgs : Pulumi.InvokeArgs
+    public sealed class GetZoneConfigArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Used to save results.
@@ -77,9 +71,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
         public GetZoneConfigArgs()
         {
         }
+        public static new GetZoneConfigArgs Empty => new GetZoneConfigArgs();
     }
 
-    public sealed class GetZoneConfigInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetZoneConfigInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Used to save results.
@@ -90,6 +85,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
         public GetZoneConfigInvokeArgs()
         {
         }
+        public static new GetZoneConfigInvokeArgs Empty => new GetZoneConfigInvokeArgs();
     }
 
 

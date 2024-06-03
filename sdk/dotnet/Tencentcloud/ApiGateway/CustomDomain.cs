@@ -15,35 +15,36 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var foo = new Tencentcloud.ApiGateway.CustomDomain("foo", new()
     ///     {
-    ///         var foo = new Tencentcloud.ApiGateway.CustomDomain("foo", new Tencentcloud.ApiGateway.CustomDomainArgs
+    ///         DefaultDomain = "service-ohxqslqe-1259649581.gz.apigw.tencentcs.com",
+    ///         IsDefaultMapping = false,
+    ///         NetType = "OUTER",
+    ///         PathMappings = new[]
     ///         {
-    ///             DefaultDomain = "service-ohxqslqe-1259649581.gz.apigw.tencentcs.com",
-    ///             IsDefaultMapping = false,
-    ///             NetType = "OUTER",
-    ///             PathMappings = 
-    ///             {
-    ///                 "/good#test",
-    ///                 "/root#release",
-    ///             },
-    ///             Protocol = "http",
-    ///             ServiceId = "service-ohxqslqe",
-    ///             SubDomain = "tic-test.dnsv1.com",
-    ///         });
-    ///     }
+    ///             "/good#test",
+    ///             "/root#release",
+    ///         },
+    ///         Protocol = "http",
+    ///         ServiceId = "service-ohxqslqe",
+    ///         SubDomain = "tic-test.dnsv1.com",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// </summary>
     [TencentcloudResourceType("tencentcloud:ApiGateway/customDomain:CustomDomain")]
-    public partial class CustomDomain : Pulumi.CustomResource
+    public partial class CustomDomain : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Unique certificate ID of the custom domain name to be bound. You can choose to upload for the `protocol` attribute value `https` or `http&amp;https`.
@@ -150,7 +151,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway
         }
     }
 
-    public sealed class CustomDomainArgs : Pulumi.ResourceArgs
+    public sealed class CustomDomainArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Unique certificate ID of the custom domain name to be bound. You can choose to upload for the `protocol` attribute value `https` or `http&amp;https`.
@@ -215,9 +216,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway
         public CustomDomainArgs()
         {
         }
+        public static new CustomDomainArgs Empty => new CustomDomainArgs();
     }
 
-    public sealed class CustomDomainState : Pulumi.ResourceArgs
+    public sealed class CustomDomainState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Unique certificate ID of the custom domain name to be bound. You can choose to upload for the `protocol` attribute value `https` or `http&amp;https`.
@@ -288,5 +290,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway
         public CustomDomainState()
         {
         }
+        public static new CustomDomainState Empty => new CustomDomainState();
     }
 }

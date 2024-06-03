@@ -7,8 +7,9 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a CLB target group instance attachment.
@@ -18,7 +19,7 @@ import (
 // CLB target group instance attachment can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Clb/targetGroupInstanceAttachment:TargetGroupInstanceAttachment test lbtg-3k3io0i0#172.16.48.18#222
+// $ pulumi import tencentcloud:Clb/targetGroupInstanceAttachment:TargetGroupInstanceAttachment test lbtg-3k3io0i0#172.16.48.18#222
 // ```
 type TargetGroupInstanceAttachment struct {
 	pulumi.CustomResourceState
@@ -52,7 +53,7 @@ func NewTargetGroupInstanceAttachment(ctx *pulumi.Context,
 	if args.Weight == nil {
 		return nil, errors.New("invalid value for required argument 'Weight'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource TargetGroupInstanceAttachment
 	err := ctx.RegisterResource("tencentcloud:Clb/targetGroupInstanceAttachment:TargetGroupInstanceAttachment", name, args, &resource, opts...)
 	if err != nil {
@@ -149,7 +150,7 @@ func (i *TargetGroupInstanceAttachment) ToTargetGroupInstanceAttachmentOutputWit
 // TargetGroupInstanceAttachmentArrayInput is an input type that accepts TargetGroupInstanceAttachmentArray and TargetGroupInstanceAttachmentArrayOutput values.
 // You can construct a concrete instance of `TargetGroupInstanceAttachmentArrayInput` via:
 //
-//          TargetGroupInstanceAttachmentArray{ TargetGroupInstanceAttachmentArgs{...} }
+//	TargetGroupInstanceAttachmentArray{ TargetGroupInstanceAttachmentArgs{...} }
 type TargetGroupInstanceAttachmentArrayInput interface {
 	pulumi.Input
 
@@ -174,7 +175,7 @@ func (i TargetGroupInstanceAttachmentArray) ToTargetGroupInstanceAttachmentArray
 // TargetGroupInstanceAttachmentMapInput is an input type that accepts TargetGroupInstanceAttachmentMap and TargetGroupInstanceAttachmentMapOutput values.
 // You can construct a concrete instance of `TargetGroupInstanceAttachmentMapInput` via:
 //
-//          TargetGroupInstanceAttachmentMap{ "key": TargetGroupInstanceAttachmentArgs{...} }
+//	TargetGroupInstanceAttachmentMap{ "key": TargetGroupInstanceAttachmentArgs{...} }
 type TargetGroupInstanceAttachmentMapInput interface {
 	pulumi.Input
 

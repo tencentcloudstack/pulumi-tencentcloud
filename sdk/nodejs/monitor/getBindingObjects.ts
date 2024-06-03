@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,6 +11,7 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
@@ -18,16 +20,14 @@ import * as utilities from "../utilities";
  *     name: "test",
  * });
  * const objects = name.then(name => tencentcloud.Monitor.getBindingObjects({
- *     groupId: name.lists?[0]?.groupId,
+ *     groupId: name.lists?.[0]?.groupId,
  * }));
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getBindingObjects(args: GetBindingObjectsArgs, opts?: pulumi.InvokeOptions): Promise<GetBindingObjectsResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Monitor/getBindingObjects:getBindingObjects", {
         "groupId": args.groupId,
         "resultOutputFile": args.resultOutputFile,
@@ -63,9 +63,27 @@ export interface GetBindingObjectsResult {
     readonly lists: outputs.Monitor.GetBindingObjectsList[];
     readonly resultOutputFile?: string;
 }
-
+/**
+ * Use this data source to query policy group binding objects.
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const name = tencentcloud.Monitor.getPolicyGroups({
+ *     name: "test",
+ * });
+ * const objects = name.then(name => tencentcloud.Monitor.getBindingObjects({
+ *     groupId: name.lists?.[0]?.groupId,
+ * }));
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getBindingObjectsOutput(args: GetBindingObjectsOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetBindingObjectsResult> {
-    return pulumi.output(args).apply(a => getBindingObjects(a, opts))
+    return pulumi.output(args).apply((a: any) => getBindingObjects(a, opts))
 }
 
 /**

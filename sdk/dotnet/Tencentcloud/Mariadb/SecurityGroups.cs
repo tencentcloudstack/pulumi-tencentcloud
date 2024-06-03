@@ -17,35 +17,36 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mariadb
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var securityGroups = new Tencentcloud.Mariadb.SecurityGroups("securityGroups", new()
     ///     {
-    ///         var securityGroups = new Tencentcloud.Mariadb.SecurityGroups("securityGroups", new Tencentcloud.Mariadb.SecurityGroupsArgs
-    ///         {
-    ///             InstanceId = "tdsql-4pzs5b67",
-    ///             Product = "mariadb",
-    ///             SecurityGroupId = "sg-7kpsbxdb",
-    ///         });
-    ///     }
+    ///         InstanceId = "tdsql-4pzs5b67",
+    ///         Product = "mariadb",
+    ///         SecurityGroupId = "sg-7kpsbxdb",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// mariadb security_groups can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Mariadb/securityGroups:SecurityGroups security_groups tdsql-4pzs5b67#sg-7kpsbxdb#mariadb
+    /// $ pulumi import tencentcloud:Mariadb/securityGroups:SecurityGroups security_groups tdsql-4pzs5b67#sg-7kpsbxdb#mariadb
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Mariadb/securityGroups:SecurityGroups")]
-    public partial class SecurityGroups : Pulumi.CustomResource
+    public partial class SecurityGroups : global::Pulumi.CustomResource
     {
         /// <summary>
         /// instance id.
@@ -110,7 +111,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mariadb
         }
     }
 
-    public sealed class SecurityGroupsArgs : Pulumi.ResourceArgs
+    public sealed class SecurityGroupsArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// instance id.
@@ -133,9 +134,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mariadb
         public SecurityGroupsArgs()
         {
         }
+        public static new SecurityGroupsArgs Empty => new SecurityGroupsArgs();
     }
 
-    public sealed class SecurityGroupsState : Pulumi.ResourceArgs
+    public sealed class SecurityGroupsState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// instance id.
@@ -158,5 +160,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mariadb
         public SecurityGroupsState()
         {
         }
+        public static new SecurityGroupsState Empty => new SecurityGroupsState();
     }
 }

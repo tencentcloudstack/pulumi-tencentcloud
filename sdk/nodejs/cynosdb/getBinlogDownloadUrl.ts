@@ -9,22 +9,21 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const binlogDownloadUrl = pulumi.output(tencentcloud.Cynosdb.getBinlogDownloadUrl({
+ * const binlogDownloadUrl = tencentcloud.Cynosdb.getBinlogDownloadUrl({
  *     binlogId: 6202249,
  *     clusterId: "cynosdbmysql-bws8h88b",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getBinlogDownloadUrl(args: GetBinlogDownloadUrlArgs, opts?: pulumi.InvokeOptions): Promise<GetBinlogDownloadUrlResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Cynosdb/getBinlogDownloadUrl:getBinlogDownloadUrl", {
         "binlogId": args.binlogId,
         "clusterId": args.clusterId,
@@ -66,9 +65,25 @@ export interface GetBinlogDownloadUrlResult {
     readonly id: string;
     readonly resultOutputFile?: string;
 }
-
+/**
+ * Use this data source to query detailed information of cynosdb binlogDownloadUrl
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const binlogDownloadUrl = tencentcloud.Cynosdb.getBinlogDownloadUrl({
+ *     binlogId: 6202249,
+ *     clusterId: "cynosdbmysql-bws8h88b",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getBinlogDownloadUrlOutput(args: GetBinlogDownloadUrlOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetBinlogDownloadUrlResult> {
-    return pulumi.output(args).apply(a => getBinlogDownloadUrl(a, opts))
+    return pulumi.output(args).apply((a: any) => getBinlogDownloadUrl(a, opts))
 }
 
 /**

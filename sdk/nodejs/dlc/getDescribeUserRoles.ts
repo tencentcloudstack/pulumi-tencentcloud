@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,22 +11,21 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const describeUserRoles = pulumi.output(tencentcloud.Dlc.getDescribeUserRoles({
+ * const describeUserRoles = tencentcloud.Dlc.getDescribeUserRoles({
  *     fuzzy: "1",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getDescribeUserRoles(args?: GetDescribeUserRolesArgs, opts?: pulumi.InvokeOptions): Promise<GetDescribeUserRolesResult> {
     args = args || {};
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Dlc/getDescribeUserRoles:getDescribeUserRoles", {
         "fuzzy": args.fuzzy,
         "resultOutputFile": args.resultOutputFile,
@@ -73,9 +73,24 @@ export interface GetDescribeUserRolesResult {
      */
     readonly userRoles: outputs.Dlc.GetDescribeUserRolesUserRole[];
 }
-
+/**
+ * Use this data source to query detailed information of dlc describeUserRoles
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const describeUserRoles = tencentcloud.Dlc.getDescribeUserRoles({
+ *     fuzzy: "1",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getDescribeUserRolesOutput(args?: GetDescribeUserRolesOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetDescribeUserRolesResult> {
-    return pulumi.output(args).apply(a => getDescribeUserRoles(a, opts))
+    return pulumi.output(args).apply((a: any) => getDescribeUserRoles(a, opts))
 }
 
 /**

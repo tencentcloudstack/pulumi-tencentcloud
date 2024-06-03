@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tse.Inputs
 {
 
-    public sealed class InstanceEngineRegionInfoGetArgs : Pulumi.ResourceArgs
+    public sealed class InstanceEngineRegionInfoGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Engine node region.
@@ -40,5 +40,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tse.Inputs
         public InstanceEngineRegionInfoGetArgs()
         {
         }
+        public static new InstanceEngineRegionInfoGetArgs Empty => new InstanceEngineRegionInfoGetArgs();
     }
 }

@@ -15,58 +15,52 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
         /// <summary>
         /// Use this data source to query detailed information of gaap access regions
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
-        ///     {
-        ///         var accessRegions = Output.Create(Tencentcloud.Gaap.GetAccessRegions.InvokeAsync());
-        ///     }
+        ///     var accessRegions = Tencentcloud.Gaap.GetAccessRegions.Invoke();
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetAccessRegionsResult> InvokeAsync(GetAccessRegionsArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetAccessRegionsResult>("tencentcloud:Gaap/getAccessRegions:getAccessRegions", args ?? new GetAccessRegionsArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetAccessRegionsResult>("tencentcloud:Gaap/getAccessRegions:getAccessRegions", args ?? new GetAccessRegionsArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of gaap access regions
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
-        ///     {
-        ///         var accessRegions = Output.Create(Tencentcloud.Gaap.GetAccessRegions.InvokeAsync());
-        ///     }
+        ///     var accessRegions = Tencentcloud.Gaap.GetAccessRegions.Invoke();
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetAccessRegionsResult> Invoke(GetAccessRegionsInvokeArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetAccessRegionsResult>("tencentcloud:Gaap/getAccessRegions:getAccessRegions", args ?? new GetAccessRegionsInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetAccessRegionsResult>("tencentcloud:Gaap/getAccessRegions:getAccessRegions", args ?? new GetAccessRegionsInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetAccessRegionsArgs : Pulumi.InvokeArgs
+    public sealed class GetAccessRegionsArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Used to save results.
@@ -77,9 +71,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
         public GetAccessRegionsArgs()
         {
         }
+        public static new GetAccessRegionsArgs Empty => new GetAccessRegionsArgs();
     }
 
-    public sealed class GetAccessRegionsInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetAccessRegionsInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Used to save results.
@@ -90,6 +85,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
         public GetAccessRegionsInvokeArgs()
         {
         }
+        public static new GetAccessRegionsInvokeArgs Empty => new GetAccessRegionsInvokeArgs();
     }
 
 

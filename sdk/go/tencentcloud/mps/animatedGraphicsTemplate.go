@@ -7,46 +7,52 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a mps animatedGraphicsTemplate
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Mps"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Mps"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Mps.NewAnimatedGraphicsTemplate(ctx, "animatedGraphicsTemplate", &Mps.AnimatedGraphicsTemplateArgs{
-// 			Format:             pulumi.String("gif"),
-// 			Fps:                pulumi.Int(20),
-// 			Height:             pulumi.Int(130),
-// 			Quality:            pulumi.Float64(75),
-// 			ResolutionAdaptive: pulumi.String("open"),
-// 			Width:              pulumi.Int(140),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Mps.NewAnimatedGraphicsTemplate(ctx, "animatedGraphicsTemplate", &Mps.AnimatedGraphicsTemplateArgs{
+//				Format:             pulumi.String("gif"),
+//				Fps:                pulumi.Int(20),
+//				Height:             pulumi.Int(130),
+//				Quality:            pulumi.Float64(75),
+//				ResolutionAdaptive: pulumi.String("open"),
+//				Width:              pulumi.Int(140),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // mps animated_graphics_template can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Mps/animatedGraphicsTemplate:AnimatedGraphicsTemplate animated_graphics_template animated_graphics_template_id
+// $ pulumi import tencentcloud:Mps/animatedGraphicsTemplate:AnimatedGraphicsTemplate animated_graphics_template animated_graphics_template_id
 // ```
 type AnimatedGraphicsTemplate struct {
 	pulumi.CustomResourceState
@@ -79,7 +85,7 @@ func NewAnimatedGraphicsTemplate(ctx *pulumi.Context,
 	if args.Fps == nil {
 		return nil, errors.New("invalid value for required argument 'Fps'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource AnimatedGraphicsTemplate
 	err := ctx.RegisterResource("tencentcloud:Mps/animatedGraphicsTemplate:AnimatedGraphicsTemplate", name, args, &resource, opts...)
 	if err != nil {
@@ -208,7 +214,7 @@ func (i *AnimatedGraphicsTemplate) ToAnimatedGraphicsTemplateOutputWithContext(c
 // AnimatedGraphicsTemplateArrayInput is an input type that accepts AnimatedGraphicsTemplateArray and AnimatedGraphicsTemplateArrayOutput values.
 // You can construct a concrete instance of `AnimatedGraphicsTemplateArrayInput` via:
 //
-//          AnimatedGraphicsTemplateArray{ AnimatedGraphicsTemplateArgs{...} }
+//	AnimatedGraphicsTemplateArray{ AnimatedGraphicsTemplateArgs{...} }
 type AnimatedGraphicsTemplateArrayInput interface {
 	pulumi.Input
 
@@ -233,7 +239,7 @@ func (i AnimatedGraphicsTemplateArray) ToAnimatedGraphicsTemplateArrayOutputWith
 // AnimatedGraphicsTemplateMapInput is an input type that accepts AnimatedGraphicsTemplateMap and AnimatedGraphicsTemplateMapOutput values.
 // You can construct a concrete instance of `AnimatedGraphicsTemplateMapInput` via:
 //
-//          AnimatedGraphicsTemplateMap{ "key": AnimatedGraphicsTemplateArgs{...} }
+//	AnimatedGraphicsTemplateMap{ "key": AnimatedGraphicsTemplateArgs{...} }
 type AnimatedGraphicsTemplateMapInput interface {
 	pulumi.Input
 

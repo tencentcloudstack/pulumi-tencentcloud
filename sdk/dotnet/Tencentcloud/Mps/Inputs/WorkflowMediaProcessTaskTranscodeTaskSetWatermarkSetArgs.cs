@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps.Inputs
 {
 
-    public sealed class WorkflowMediaProcessTaskTranscodeTaskSetWatermarkSetArgs : Pulumi.ResourceArgs
+    public sealed class WorkflowMediaProcessTaskTranscodeTaskSetWatermarkSetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Watermark Template ID.
@@ -52,5 +52,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps.Inputs
         public WorkflowMediaProcessTaskTranscodeTaskSetWatermarkSetArgs()
         {
         }
+        public static new WorkflowMediaProcessTaskTranscodeTaskSetWatermarkSetArgs Empty => new WorkflowMediaProcessTaskTranscodeTaskSetWatermarkSetArgs();
     }
 }

@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps.Inputs
 {
 
-    public sealed class WorkflowMediaProcessTaskSnapshotByTimeOffsetTaskSetOutputStorageArgs : Pulumi.ResourceArgs
+    public sealed class WorkflowMediaProcessTaskSnapshotByTimeOffsetTaskSetOutputStorageArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Valid when Type is COS, this item is required, indicating the media processing COS output location.Note: This field may return null, indicating that no valid value can be obtained.
@@ -28,5 +28,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps.Inputs
         public WorkflowMediaProcessTaskSnapshotByTimeOffsetTaskSetOutputStorageArgs()
         {
         }
+        public static new WorkflowMediaProcessTaskSnapshotByTimeOffsetTaskSetOutputStorageArgs Empty => new WorkflowMediaProcessTaskSnapshotByTimeOffsetTaskSetOutputStorageArgs();
     }
 }

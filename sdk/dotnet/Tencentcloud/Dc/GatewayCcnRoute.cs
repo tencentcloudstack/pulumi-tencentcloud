@@ -15,42 +15,46 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dc
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var main = new Tencentcloud.Ccn.Instance("main", new()
     ///     {
-    ///         var main = new Tencentcloud.Ccn.Instance("main", new Tencentcloud.Ccn.InstanceArgs
-    ///         {
-    ///             Description = "ci-temp-test-ccn-des",
-    ///             Qos = "AG",
-    ///         });
-    ///         var ccnMain = new Tencentcloud.Dc.Gateway("ccnMain", new Tencentcloud.Dc.GatewayArgs
-    ///         {
-    ///             NetworkInstanceId = main.Id,
-    ///             NetworkType = "CCN",
-    ///             GatewayType = "NORMAL",
-    ///         });
-    ///         var route1 = new Tencentcloud.Dc.GatewayCcnRoute("route1", new Tencentcloud.Dc.GatewayCcnRouteArgs
-    ///         {
-    ///             DcgId = ccnMain.Id,
-    ///             CidrBlock = "10.1.1.0/32",
-    ///         });
-    ///         var route2 = new Tencentcloud.Dc.GatewayCcnRoute("route2", new Tencentcloud.Dc.GatewayCcnRouteArgs
-    ///         {
-    ///             DcgId = ccnMain.Id,
-    ///             CidrBlock = "192.1.1.0/32",
-    ///         });
-    ///     }
+    ///         Description = "ci-temp-test-ccn-des",
+    ///         Qos = "AG",
+    ///     });
     /// 
-    /// }
+    ///     var ccnMain = new Tencentcloud.Dc.Gateway("ccnMain", new()
+    ///     {
+    ///         NetworkInstanceId = main.Id,
+    ///         NetworkType = "CCN",
+    ///         GatewayType = "NORMAL",
+    ///     });
+    /// 
+    ///     var route1 = new Tencentcloud.Dc.GatewayCcnRoute("route1", new()
+    ///     {
+    ///         DcgId = ccnMain.Id,
+    ///         CidrBlock = "10.1.1.0/32",
+    ///     });
+    /// 
+    ///     var route2 = new Tencentcloud.Dc.GatewayCcnRoute("route2", new()
+    ///     {
+    ///         DcgId = ccnMain.Id,
+    ///         CidrBlock = "192.1.1.0/32",
+    ///     });
+    /// 
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Dc/gatewayCcnRoute:GatewayCcnRoute")]
-    public partial class GatewayCcnRoute : Pulumi.CustomResource
+    public partial class GatewayCcnRoute : global::Pulumi.CustomResource
     {
         /// <summary>
         /// As path list of the BGP.
@@ -115,7 +119,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dc
         }
     }
 
-    public sealed class GatewayCcnRouteArgs : Pulumi.ResourceArgs
+    public sealed class GatewayCcnRouteArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// A network address segment of IDC.
@@ -132,9 +136,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dc
         public GatewayCcnRouteArgs()
         {
         }
+        public static new GatewayCcnRouteArgs Empty => new GatewayCcnRouteArgs();
     }
 
-    public sealed class GatewayCcnRouteState : Pulumi.ResourceArgs
+    public sealed class GatewayCcnRouteState : global::Pulumi.ResourceArgs
     {
         [Input("asPaths")]
         private InputList<string>? _asPaths;
@@ -163,5 +168,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dc
         public GatewayCcnRouteState()
         {
         }
+        public static new GatewayCcnRouteState Empty => new GatewayCcnRouteState();
     }
 }

@@ -15,31 +15,32 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tse
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var wafProtection = new Tencentcloud.Tse.WafProtection("wafProtection", new()
     ///     {
-    ///         var wafProtection = new Tencentcloud.Tse.WafProtection("wafProtection", new Tencentcloud.Tse.WafProtectionArgs
+    ///         GatewayId = "gateway-ed63e957",
+    ///         Lists = new[]
     ///         {
-    ///             GatewayId = "gateway-ed63e957",
-    ///             Lists = 
-    ///             {
-    ///                 "7324a769-9d87-48ce-a904-48c3defc4abd",
-    ///             },
-    ///             Operate = "open",
-    ///             Type = "Route",
-    ///         });
-    ///     }
+    ///             "7324a769-9d87-48ce-a904-48c3defc4abd",
+    ///         },
+    ///         Operate = "open",
+    ///         Type = "Route",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Tse/wafProtection:WafProtection")]
-    public partial class WafProtection : Pulumi.CustomResource
+    public partial class WafProtection : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Gateway ID.
@@ -116,7 +117,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tse
         }
     }
 
-    public sealed class WafProtectionArgs : Pulumi.ResourceArgs
+    public sealed class WafProtectionArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Gateway ID.
@@ -151,9 +152,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tse
         public WafProtectionArgs()
         {
         }
+        public static new WafProtectionArgs Empty => new WafProtectionArgs();
     }
 
-    public sealed class WafProtectionState : Pulumi.ResourceArgs
+    public sealed class WafProtectionState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Gateway ID.
@@ -194,5 +196,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tse
         public WafProtectionState()
         {
         }
+        public static new WafProtectionState Empty => new WafProtectionState();
     }
 }

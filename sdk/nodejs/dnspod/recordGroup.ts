@@ -9,22 +9,24 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const recordGroup = new tencentcloud.Dnspod.RecordGroup("record_group", {
+ * const recordGroup = new tencentcloud.dnspod.RecordGroup("recordGroup", {
  *     domain: "dnspod.cn",
  *     groupName: "group_demo",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * dnspod record_group can be imported using the domain#groupId, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Dnspod/recordGroup:RecordGroup record_group domain#groupId
+ * $ pulumi import tencentcloud:Dnspod/recordGroup:RecordGroup record_group domain#groupId
  * ```
  */
 export class RecordGroup extends pulumi.CustomResource {

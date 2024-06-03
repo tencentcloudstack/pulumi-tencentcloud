@@ -9,11 +9,12 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const domain = new tencentcloud.Css.Domain("domain", {
+ * const domain = new tencentcloud.css.Domain("domain", {
  *     domainName: "iac-tf.cloud",
  *     domainType: 0,
  *     isDelayLive: 0,
@@ -22,13 +23,14 @@ import * as utilities from "../utilities";
  *     verifyOwnerType: "dbCheck",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * css domain can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Css/domain:Domain domain domain_name
+ * $ pulumi import tencentcloud:Css/domain:Domain domain domain_name
  * ```
  */
 export class Domain extends pulumi.CustomResource {

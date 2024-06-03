@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,26 +11,25 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const redislab = pulumi.output(tencentcloud.Redis.getInstances({
+ * const redislab = tencentcloud.Redis.getInstances({
  *     limit: 20,
  *     projectId: 0,
  *     resultOutputFile: "/tmp/redis_instances",
  *     searchKey: "myredis",
  *     zone: "ap-hongkong-1",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getInstances(args?: GetInstancesArgs, opts?: pulumi.InvokeOptions): Promise<GetInstancesResult> {
     args = args || {};
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Redis/getInstances:getInstances", {
         "limit": args.limit,
         "projectId": args.projectId,
@@ -98,9 +98,28 @@ export interface GetInstancesResult {
      */
     readonly zone?: string;
 }
-
+/**
+ * Use this data source to query the detail information of redis instance.
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const redislab = tencentcloud.Redis.getInstances({
+ *     limit: 20,
+ *     projectId: 0,
+ *     resultOutputFile: "/tmp/redis_instances",
+ *     searchKey: "myredis",
+ *     zone: "ap-hongkong-1",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getInstancesOutput(args?: GetInstancesOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetInstancesResult> {
-    return pulumi.output(args).apply(a => getInstances(a, opts))
+    return pulumi.output(args).apply((a: any) => getInstances(a, opts))
 }
 
 /**

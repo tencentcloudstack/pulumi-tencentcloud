@@ -8,12 +8,14 @@ import * as utilities from "../utilities";
  * Provides a resource to set as scalingGroup status
  *
  * ## Example Usage
+ *
  * ### Deactivate Scaling Group
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const zones = tencentcloud.Availability.getZonesByProduct({
  *     product: "as",
@@ -26,11 +28,11 @@ import * as utilities from "../utilities";
  * const subnet = new tencentcloud.subnet.Instance("subnet", {
  *     vpcId: vpc.id,
  *     cidrBlock: "10.0.0.0/16",
- *     availabilityZone: zones.then(zones => zones.zones?[0]?.name),
+ *     availabilityZone: zones.then(zones => zones.zones?.[0]?.name),
  * });
  * const exampleScalingConfig = new tencentcloud.as.ScalingConfig("exampleScalingConfig", {
  *     configurationName: "tf-example",
- *     imageId: image.then(image => image.images?[0]?.imageId),
+ *     imageId: image.then(image => image.images?.[0]?.imageId),
  *     instanceTypes: [
  *         "SA1.SMALL1",
  *         "SA2.SMALL1",
@@ -54,24 +56,28 @@ import * as utilities from "../utilities";
  *     enable: false,
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
+ *
  * ### Enable Scaling Group
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const scalingGroupStatus = new tencentcloud.as.ScalingGroupStatus("scalingGroupStatus", {
  *     autoScalingGroupId: tencentcloud_as_scaling_group.example.id,
  *     enable: true,
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * as scaling_group_status can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:As/scalingGroupStatus:ScalingGroupStatus scaling_group_status scaling_group_id
+ * $ pulumi import tencentcloud:As/scalingGroupStatus:ScalingGroupStatus scaling_group_status scaling_group_id
  * ```
  */
 export class ScalingGroupStatus extends pulumi.CustomResource {

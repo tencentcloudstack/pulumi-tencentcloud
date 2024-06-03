@@ -15,64 +15,58 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
         /// <summary>
         /// Use this data source to query detailed information of mysql slow_log
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var slowLog = Tencentcloud.Mysql.GetSlowLog.Invoke(new()
         ///     {
-        ///         var slowLog = Output.Create(Tencentcloud.Mysql.GetSlowLog.InvokeAsync(new Tencentcloud.Mysql.GetSlowLogArgs
-        ///         {
-        ///             InstanceId = "cdb-fitq5t9h",
-        ///         }));
-        ///     }
+        ///         InstanceId = "cdb-fitq5t9h",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetSlowLogResult> InvokeAsync(GetSlowLogArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetSlowLogResult>("tencentcloud:Mysql/getSlowLog:getSlowLog", args ?? new GetSlowLogArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetSlowLogResult>("tencentcloud:Mysql/getSlowLog:getSlowLog", args ?? new GetSlowLogArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of mysql slow_log
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var slowLog = Tencentcloud.Mysql.GetSlowLog.Invoke(new()
         ///     {
-        ///         var slowLog = Output.Create(Tencentcloud.Mysql.GetSlowLog.InvokeAsync(new Tencentcloud.Mysql.GetSlowLogArgs
-        ///         {
-        ///             InstanceId = "cdb-fitq5t9h",
-        ///         }));
-        ///     }
+        ///         InstanceId = "cdb-fitq5t9h",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetSlowLogResult> Invoke(GetSlowLogInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetSlowLogResult>("tencentcloud:Mysql/getSlowLog:getSlowLog", args ?? new GetSlowLogInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetSlowLogResult>("tencentcloud:Mysql/getSlowLog:getSlowLog", args ?? new GetSlowLogInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetSlowLogArgs : Pulumi.InvokeArgs
+    public sealed class GetSlowLogArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Instance ID, in the format: cdb-c1nl9rpv. Same instance ID as displayed in the ApsaraDB for Console page.
@@ -89,9 +83,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
         public GetSlowLogArgs()
         {
         }
+        public static new GetSlowLogArgs Empty => new GetSlowLogArgs();
     }
 
-    public sealed class GetSlowLogInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetSlowLogInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Instance ID, in the format: cdb-c1nl9rpv. Same instance ID as displayed in the ApsaraDB for Console page.
@@ -108,6 +103,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
         public GetSlowLogInvokeArgs()
         {
         }
+        public static new GetSlowLogInvokeArgs Empty => new GetSlowLogInvokeArgs();
     }
 
 

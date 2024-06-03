@@ -7,111 +7,116 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a SQL Server instance resource to create read-only database instances.
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Availability"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Availability"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Security"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Sqlserver"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Subnet"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Availability"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Security"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Sqlserver"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Subnet"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		zones, err := Availability.GetZonesByProduct(ctx, &availability.GetZonesByProductArgs{
-// 			Product: "sqlserver",
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		vpc, err := Vpc.NewInstance(ctx, "vpc", &Vpc.InstanceArgs{
-// 			CidrBlock: pulumi.String("10.0.0.0/16"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		subnet, err := Subnet.NewInstance(ctx, "subnet", &Subnet.InstanceArgs{
-// 			AvailabilityZone: pulumi.String(zones.Zones[4].Name),
-// 			VpcId:            vpc.ID(),
-// 			CidrBlock:        pulumi.String("10.0.0.0/16"),
-// 			IsMulticast:      pulumi.Bool(false),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		securityGroup, err := Security.NewGroup(ctx, "securityGroup", &Security.GroupArgs{
-// 			Description: pulumi.String("desc."),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		exampleBasicInstance, err := Sqlserver.NewBasicInstance(ctx, "exampleBasicInstance", &Sqlserver.BasicInstanceArgs{
-// 			AvailabilityZone: pulumi.String(zones.Zones[4].Name),
-// 			ChargeType:       pulumi.String("POSTPAID_BY_HOUR"),
-// 			VpcId:            vpc.ID(),
-// 			SubnetId:         subnet.ID(),
-// 			ProjectId:        pulumi.Int(0),
-// 			Memory:           pulumi.Int(4),
-// 			Storage:          pulumi.Int(100),
-// 			Cpu:              pulumi.Int(2),
-// 			MachineType:      pulumi.String("CLOUD_PREMIUM"),
-// 			MaintenanceWeekSets: pulumi.IntArray{
-// 				pulumi.Int(1),
-// 				pulumi.Int(2),
-// 				pulumi.Int(3),
-// 			},
-// 			MaintenanceStartTime: pulumi.String("09:00"),
-// 			MaintenanceTimeSpan:  pulumi.Int(3),
-// 			SecurityGroups: pulumi.StringArray{
-// 				securityGroup.ID(),
-// 			},
-// 			Tags: pulumi.AnyMap{
-// 				"test": pulumi.Any("test"),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_, err = Sqlserver.NewReadonlyInstance(ctx, "exampleReadonlyInstance", &Sqlserver.ReadonlyInstanceArgs{
-// 			AvailabilityZone:  pulumi.String(zones.Zones[4].Name),
-// 			ChargeType:        pulumi.String("POSTPAID_BY_HOUR"),
-// 			VpcId:             vpc.ID(),
-// 			SubnetId:          subnet.ID(),
-// 			Memory:            pulumi.Int(4),
-// 			Storage:           pulumi.Int(20),
-// 			MasterInstanceId:  exampleBasicInstance.ID(),
-// 			ReadonlyGroupType: pulumi.Int(1),
-// 			ForceUpgrade:      pulumi.Bool(true),
-// 			Tags: pulumi.AnyMap{
-// 				"test": pulumi.Any("test"),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			zones, err := Availability.GetZonesByProduct(ctx, &availability.GetZonesByProductArgs{
+//				Product: "sqlserver",
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			vpc, err := Vpc.NewInstance(ctx, "vpc", &Vpc.InstanceArgs{
+//				CidrBlock: pulumi.String("10.0.0.0/16"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			subnet, err := Subnet.NewInstance(ctx, "subnet", &Subnet.InstanceArgs{
+//				AvailabilityZone: pulumi.String(zones.Zones[4].Name),
+//				VpcId:            vpc.ID(),
+//				CidrBlock:        pulumi.String("10.0.0.0/16"),
+//				IsMulticast:      pulumi.Bool(false),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			securityGroup, err := Security.NewGroup(ctx, "securityGroup", &Security.GroupArgs{
+//				Description: pulumi.String("desc."),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			exampleBasicInstance, err := Sqlserver.NewBasicInstance(ctx, "exampleBasicInstance", &Sqlserver.BasicInstanceArgs{
+//				AvailabilityZone: pulumi.String(zones.Zones[4].Name),
+//				ChargeType:       pulumi.String("POSTPAID_BY_HOUR"),
+//				VpcId:            vpc.ID(),
+//				SubnetId:         subnet.ID(),
+//				ProjectId:        pulumi.Int(0),
+//				Memory:           pulumi.Int(4),
+//				Storage:          pulumi.Int(100),
+//				Cpu:              pulumi.Int(2),
+//				MachineType:      pulumi.String("CLOUD_PREMIUM"),
+//				MaintenanceWeekSets: pulumi.IntArray{
+//					pulumi.Int(1),
+//					pulumi.Int(2),
+//					pulumi.Int(3),
+//				},
+//				MaintenanceStartTime: pulumi.String("09:00"),
+//				MaintenanceTimeSpan:  pulumi.Int(3),
+//				SecurityGroups: pulumi.StringArray{
+//					securityGroup.ID(),
+//				},
+//				Tags: pulumi.Map{
+//					"test": pulumi.Any("test"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_, err = Sqlserver.NewReadonlyInstance(ctx, "exampleReadonlyInstance", &Sqlserver.ReadonlyInstanceArgs{
+//				AvailabilityZone:  pulumi.String(zones.Zones[4].Name),
+//				ChargeType:        pulumi.String("POSTPAID_BY_HOUR"),
+//				VpcId:             vpc.ID(),
+//				SubnetId:          subnet.ID(),
+//				Memory:            pulumi.Int(4),
+//				Storage:           pulumi.Int(20),
+//				MasterInstanceId:  exampleBasicInstance.ID(),
+//				ReadonlyGroupType: pulumi.Int(1),
+//				ForceUpgrade:      pulumi.Bool(true),
+//				Tags: pulumi.Map{
+//					"test": pulumi.Any("test"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // SQL Server readonly instance can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Sqlserver/readonlyInstance:ReadonlyInstance example mssqlro-3cdq7kx5
+// $ pulumi import tencentcloud:Sqlserver/readonlyInstance:ReadonlyInstance example mssqlro-3cdq7kx5
 // ```
 type ReadonlyInstance struct {
 	pulumi.CustomResourceState
@@ -191,7 +196,7 @@ func NewReadonlyInstance(ctx *pulumi.Context,
 	if args.Storage == nil {
 		return nil, errors.New("invalid value for required argument 'Storage'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource ReadonlyInstance
 	err := ctx.RegisterResource("tencentcloud:Sqlserver/readonlyInstance:ReadonlyInstance", name, args, &resource, opts...)
 	if err != nil {
@@ -452,7 +457,7 @@ func (i *ReadonlyInstance) ToReadonlyInstanceOutputWithContext(ctx context.Conte
 // ReadonlyInstanceArrayInput is an input type that accepts ReadonlyInstanceArray and ReadonlyInstanceArrayOutput values.
 // You can construct a concrete instance of `ReadonlyInstanceArrayInput` via:
 //
-//          ReadonlyInstanceArray{ ReadonlyInstanceArgs{...} }
+//	ReadonlyInstanceArray{ ReadonlyInstanceArgs{...} }
 type ReadonlyInstanceArrayInput interface {
 	pulumi.Input
 
@@ -477,7 +482,7 @@ func (i ReadonlyInstanceArray) ToReadonlyInstanceArrayOutputWithContext(ctx cont
 // ReadonlyInstanceMapInput is an input type that accepts ReadonlyInstanceMap and ReadonlyInstanceMapOutput values.
 // You can construct a concrete instance of `ReadonlyInstanceMapInput` via:
 //
-//          ReadonlyInstanceMap{ "key": ReadonlyInstanceArgs{...} }
+//	ReadonlyInstanceMap{ "key": ReadonlyInstanceArgs{...} }
 type ReadonlyInstanceMapInput interface {
 	pulumi.Input
 

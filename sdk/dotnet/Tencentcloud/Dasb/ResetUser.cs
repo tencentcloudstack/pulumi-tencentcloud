@@ -15,25 +15,26 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dasb
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var example = new Tencentcloud.Dasb.ResetUser("example", new()
     ///     {
-    ///         var example = new Tencentcloud.Dasb.ResetUser("example", new Tencentcloud.Dasb.ResetUserArgs
-    ///         {
-    ///             UserId = 16,
-    ///         });
-    ///     }
+    ///         UserId = 16,
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Dasb/resetUser:ResetUser")]
-    public partial class ResetUser : Pulumi.CustomResource
+    public partial class ResetUser : global::Pulumi.CustomResource
     {
         /// <summary>
         /// User Id.
@@ -86,7 +87,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dasb
         }
     }
 
-    public sealed class ResetUserArgs : Pulumi.ResourceArgs
+    public sealed class ResetUserArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// User Id.
@@ -97,9 +98,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dasb
         public ResetUserArgs()
         {
         }
+        public static new ResetUserArgs Empty => new ResetUserArgs();
     }
 
-    public sealed class ResetUserState : Pulumi.ResourceArgs
+    public sealed class ResetUserState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// User Id.
@@ -110,5 +112,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dasb
         public ResetUserState()
         {
         }
+        public static new ResetUserState Empty => new ResetUserState();
     }
 }

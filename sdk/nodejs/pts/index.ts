@@ -5,29 +5,61 @@ import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
 // Export members:
-export * from "./alertChannel";
-export * from "./cronJob";
-export * from "./cronJobAbort";
-export * from "./cronJobRestart";
-export * from "./file";
-export * from "./getScenarioWithJobs";
-export * from "./job";
-export * from "./jobAbort";
-export * from "./project";
-export * from "./scenario";
-export * from "./tmpKeyGenerate";
+export { AlertChannelArgs, AlertChannelState } from "./alertChannel";
+export type AlertChannel = import("./alertChannel").AlertChannel;
+export const AlertChannel: typeof import("./alertChannel").AlertChannel = null as any;
+utilities.lazyLoad(exports, ["AlertChannel"], () => require("./alertChannel"));
 
-// Import resources to register:
-import { AlertChannel } from "./alertChannel";
-import { CronJob } from "./cronJob";
-import { CronJobAbort } from "./cronJobAbort";
-import { CronJobRestart } from "./cronJobRestart";
-import { File } from "./file";
-import { Job } from "./job";
-import { JobAbort } from "./jobAbort";
-import { Project } from "./project";
-import { Scenario } from "./scenario";
-import { TmpKeyGenerate } from "./tmpKeyGenerate";
+export { CronJobArgs, CronJobState } from "./cronJob";
+export type CronJob = import("./cronJob").CronJob;
+export const CronJob: typeof import("./cronJob").CronJob = null as any;
+utilities.lazyLoad(exports, ["CronJob"], () => require("./cronJob"));
+
+export { CronJobAbortArgs, CronJobAbortState } from "./cronJobAbort";
+export type CronJobAbort = import("./cronJobAbort").CronJobAbort;
+export const CronJobAbort: typeof import("./cronJobAbort").CronJobAbort = null as any;
+utilities.lazyLoad(exports, ["CronJobAbort"], () => require("./cronJobAbort"));
+
+export { CronJobRestartArgs, CronJobRestartState } from "./cronJobRestart";
+export type CronJobRestart = import("./cronJobRestart").CronJobRestart;
+export const CronJobRestart: typeof import("./cronJobRestart").CronJobRestart = null as any;
+utilities.lazyLoad(exports, ["CronJobRestart"], () => require("./cronJobRestart"));
+
+export { FileArgs, FileState } from "./file";
+export type File = import("./file").File;
+export const File: typeof import("./file").File = null as any;
+utilities.lazyLoad(exports, ["File"], () => require("./file"));
+
+export { GetScenarioWithJobsArgs, GetScenarioWithJobsResult, GetScenarioWithJobsOutputArgs } from "./getScenarioWithJobs";
+export const getScenarioWithJobs: typeof import("./getScenarioWithJobs").getScenarioWithJobs = null as any;
+export const getScenarioWithJobsOutput: typeof import("./getScenarioWithJobs").getScenarioWithJobsOutput = null as any;
+utilities.lazyLoad(exports, ["getScenarioWithJobs","getScenarioWithJobsOutput"], () => require("./getScenarioWithJobs"));
+
+export { JobArgs, JobState } from "./job";
+export type Job = import("./job").Job;
+export const Job: typeof import("./job").Job = null as any;
+utilities.lazyLoad(exports, ["Job"], () => require("./job"));
+
+export { JobAbortArgs, JobAbortState } from "./jobAbort";
+export type JobAbort = import("./jobAbort").JobAbort;
+export const JobAbort: typeof import("./jobAbort").JobAbort = null as any;
+utilities.lazyLoad(exports, ["JobAbort"], () => require("./jobAbort"));
+
+export { ProjectArgs, ProjectState } from "./project";
+export type Project = import("./project").Project;
+export const Project: typeof import("./project").Project = null as any;
+utilities.lazyLoad(exports, ["Project"], () => require("./project"));
+
+export { ScenarioArgs, ScenarioState } from "./scenario";
+export type Scenario = import("./scenario").Scenario;
+export const Scenario: typeof import("./scenario").Scenario = null as any;
+utilities.lazyLoad(exports, ["Scenario"], () => require("./scenario"));
+
+export { TmpKeyGenerateArgs, TmpKeyGenerateState } from "./tmpKeyGenerate";
+export type TmpKeyGenerate = import("./tmpKeyGenerate").TmpKeyGenerate;
+export const TmpKeyGenerate: typeof import("./tmpKeyGenerate").TmpKeyGenerate = null as any;
+utilities.lazyLoad(exports, ["TmpKeyGenerate"], () => require("./tmpKeyGenerate"));
+
 
 const _module = {
     version: utilities.getVersion(),

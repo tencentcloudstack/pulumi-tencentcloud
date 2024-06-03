@@ -8,38 +8,43 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Use this data source to query detailed information of css xp2pDetailInfoList
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Css"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Css"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Css"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Css.GetXp2pDetailInfoList(ctx, &css.GetXp2pDetailInfoListArgs{
-// 			QueryTime: pulumi.StringRef("2023-11-01T14:55:01+08:00"),
-// 			Types: []string{
-// 				"live",
-// 			},
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Css.GetXp2pDetailInfoList(ctx, &css.GetXp2pDetailInfoListArgs{
+//				QueryTime: pulumi.StringRef("2023-11-01T14:55:01+08:00"),
+//				Types: []string{
+//					"live",
+//				},
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 func GetXp2pDetailInfoList(ctx *pulumi.Context, args *GetXp2pDetailInfoListArgs, opts ...pulumi.InvokeOption) (*GetXp2pDetailInfoListResult, error) {
-	opts = pkgInvokeDefaultOpts(opts)
+	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetXp2pDetailInfoListResult
 	err := ctx.Invoke("tencentcloud:Css/getXp2pDetailInfoList:getXp2pDetailInfoList", args, &rv, opts...)
 	if err != nil {

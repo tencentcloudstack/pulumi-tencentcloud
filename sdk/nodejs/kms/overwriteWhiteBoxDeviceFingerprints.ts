@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,14 +11,14 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = new tencentcloud.Kms.OverwriteWhiteBoxDeviceFingerprints("example", {
- *     keyId: "23e80852-1e38-11e9-b129-5cb9019b4b01",
- * });
+ * const example = new tencentcloud.kms.OverwriteWhiteBoxDeviceFingerprints("example", {keyId: "23e80852-1e38-11e9-b129-5cb9019b4b01"});
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export class OverwriteWhiteBoxDeviceFingerprints extends pulumi.CustomResource {
     /**

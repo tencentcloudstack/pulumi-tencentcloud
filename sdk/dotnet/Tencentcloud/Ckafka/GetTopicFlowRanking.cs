@@ -15,70 +15,64 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka
         /// <summary>
         /// Use this data source to query detailed information of ckafka topic_flow_ranking
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var topicFlowRanking = Tencentcloud.Ckafka.GetTopicFlowRanking.Invoke(new()
         ///     {
-        ///         var topicFlowRanking = Output.Create(Tencentcloud.Ckafka.GetTopicFlowRanking.InvokeAsync(new Tencentcloud.Ckafka.GetTopicFlowRankingArgs
-        ///         {
-        ///             BeginDate = "2023-05-29T00:00:00+08:00",
-        ///             EndDate = "2021-05-29T23:59:59+08:00",
-        ///             InstanceId = "ckafka-xxxxxx",
-        ///             RankingType = "PRO",
-        ///         }));
-        ///     }
+        ///         BeginDate = "2023-05-29T00:00:00+08:00",
+        ///         EndDate = "2021-05-29T23:59:59+08:00",
+        ///         InstanceId = "ckafka-xxxxxx",
+        ///         RankingType = "PRO",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetTopicFlowRankingResult> InvokeAsync(GetTopicFlowRankingArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetTopicFlowRankingResult>("tencentcloud:Ckafka/getTopicFlowRanking:getTopicFlowRanking", args ?? new GetTopicFlowRankingArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetTopicFlowRankingResult>("tencentcloud:Ckafka/getTopicFlowRanking:getTopicFlowRanking", args ?? new GetTopicFlowRankingArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of ckafka topic_flow_ranking
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var topicFlowRanking = Tencentcloud.Ckafka.GetTopicFlowRanking.Invoke(new()
         ///     {
-        ///         var topicFlowRanking = Output.Create(Tencentcloud.Ckafka.GetTopicFlowRanking.InvokeAsync(new Tencentcloud.Ckafka.GetTopicFlowRankingArgs
-        ///         {
-        ///             BeginDate = "2023-05-29T00:00:00+08:00",
-        ///             EndDate = "2021-05-29T23:59:59+08:00",
-        ///             InstanceId = "ckafka-xxxxxx",
-        ///             RankingType = "PRO",
-        ///         }));
-        ///     }
+        ///         BeginDate = "2023-05-29T00:00:00+08:00",
+        ///         EndDate = "2021-05-29T23:59:59+08:00",
+        ///         InstanceId = "ckafka-xxxxxx",
+        ///         RankingType = "PRO",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetTopicFlowRankingResult> Invoke(GetTopicFlowRankingInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetTopicFlowRankingResult>("tencentcloud:Ckafka/getTopicFlowRanking:getTopicFlowRanking", args ?? new GetTopicFlowRankingInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetTopicFlowRankingResult>("tencentcloud:Ckafka/getTopicFlowRanking:getTopicFlowRanking", args ?? new GetTopicFlowRankingInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetTopicFlowRankingArgs : Pulumi.InvokeArgs
+    public sealed class GetTopicFlowRankingArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// BeginDate.
@@ -113,9 +107,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka
         public GetTopicFlowRankingArgs()
         {
         }
+        public static new GetTopicFlowRankingArgs Empty => new GetTopicFlowRankingArgs();
     }
 
-    public sealed class GetTopicFlowRankingInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetTopicFlowRankingInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// BeginDate.
@@ -150,6 +145,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka
         public GetTopicFlowRankingInvokeArgs()
         {
         }
+        public static new GetTopicFlowRankingInvokeArgs Empty => new GetTopicFlowRankingInvokeArgs();
     }
 
 

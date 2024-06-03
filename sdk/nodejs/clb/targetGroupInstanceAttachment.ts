@@ -12,7 +12,7 @@ import * as utilities from "../utilities";
  * CLB target group instance attachment can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Clb/targetGroupInstanceAttachment:TargetGroupInstanceAttachment test lbtg-3k3io0i0#172.16.48.18#222
+ * $ pulumi import tencentcloud:Clb/targetGroupInstanceAttachment:TargetGroupInstanceAttachment test lbtg-3k3io0i0#172.16.48.18#222
  * ```
  */
 export class TargetGroupInstanceAttachment extends pulumi.CustomResource {

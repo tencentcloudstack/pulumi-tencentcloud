@@ -7,42 +7,48 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provide a resource to create a VOD sub application.
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vod"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vod"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Vod.NewSubApplication(ctx, "foo", &Vod.SubApplicationArgs{
-// 			Description: pulumi.String("this is sub application"),
-// 			Status:      pulumi.String("On"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Vod.NewSubApplication(ctx, "foo", &Vod.SubApplicationArgs{
+//				Description: pulumi.String("this is sub application"),
+//				Status:      pulumi.String("On"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // VOD super player config can be imported using the name+, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Vod/subApplication:SubApplication foo name+"#"+id
+// $ pulumi import tencentcloud:Vod/subApplication:SubApplication foo name+"#"+id
 // ```
 type SubApplication struct {
 	pulumi.CustomResourceState
@@ -67,7 +73,7 @@ func NewSubApplication(ctx *pulumi.Context,
 	if args.Status == nil {
 		return nil, errors.New("invalid value for required argument 'Status'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource SubApplication
 	err := ctx.RegisterResource("tencentcloud:Vod/subApplication:SubApplication", name, args, &resource, opts...)
 	if err != nil {
@@ -160,7 +166,7 @@ func (i *SubApplication) ToSubApplicationOutputWithContext(ctx context.Context) 
 // SubApplicationArrayInput is an input type that accepts SubApplicationArray and SubApplicationArrayOutput values.
 // You can construct a concrete instance of `SubApplicationArrayInput` via:
 //
-//          SubApplicationArray{ SubApplicationArgs{...} }
+//	SubApplicationArray{ SubApplicationArgs{...} }
 type SubApplicationArrayInput interface {
 	pulumi.Input
 
@@ -185,7 +191,7 @@ func (i SubApplicationArray) ToSubApplicationArrayOutputWithContext(ctx context.
 // SubApplicationMapInput is an input type that accepts SubApplicationMap and SubApplicationMapOutput values.
 // You can construct a concrete instance of `SubApplicationMapInput` via:
 //
-//          SubApplicationMap{ "key": SubApplicationArgs{...} }
+//	SubApplicationMap{ "key": SubApplicationArgs{...} }
 type SubApplicationMapInput interface {
 	pulumi.Input
 

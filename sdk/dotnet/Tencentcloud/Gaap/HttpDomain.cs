@@ -15,47 +15,50 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var fooProxy = new Tencentcloud.Gaap.Proxy("fooProxy", new()
     ///     {
-    ///         var fooProxy = new Tencentcloud.Gaap.Proxy("fooProxy", new Tencentcloud.Gaap.ProxyArgs
-    ///         {
-    ///             Bandwidth = 10,
-    ///             Concurrent = 2,
-    ///             AccessRegion = "SouthChina",
-    ///             RealserverRegion = "NorthChina",
-    ///         });
-    ///         var fooLayer7Listener = new Tencentcloud.Gaap.Layer7Listener("fooLayer7Listener", new Tencentcloud.Gaap.Layer7ListenerArgs
-    ///         {
-    ///             Protocol = "HTTP",
-    ///             Port = 80,
-    ///             ProxyId = fooProxy.Id,
-    ///         });
-    ///         var fooHttpDomain = new Tencentcloud.Gaap.HttpDomain("fooHttpDomain", new Tencentcloud.Gaap.HttpDomainArgs
-    ///         {
-    ///             ListenerId = fooLayer7Listener.Id,
-    ///             Domain = "www.qq.com",
-    ///         });
-    ///     }
+    ///         Bandwidth = 10,
+    ///         Concurrent = 2,
+    ///         AccessRegion = "SouthChina",
+    ///         RealserverRegion = "NorthChina",
+    ///     });
     /// 
-    /// }
+    ///     var fooLayer7Listener = new Tencentcloud.Gaap.Layer7Listener("fooLayer7Listener", new()
+    ///     {
+    ///         Protocol = "HTTP",
+    ///         Port = 80,
+    ///         ProxyId = fooProxy.Id,
+    ///     });
+    /// 
+    ///     var fooHttpDomain = new Tencentcloud.Gaap.HttpDomain("fooHttpDomain", new()
+    ///     {
+    ///         ListenerId = fooLayer7Listener.Id,
+    ///         Domain = "www.qq.com",
+    ///     });
+    /// 
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// GAAP http domain can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Gaap/httpDomain:HttpDomain tencentcloud_gaap_http_domain.foo listener-11112222+HTTP+www.qq.com
+    /// $ pulumi import tencentcloud:Gaap/httpDomain:HttpDomain tencentcloud_gaap_http_domain.foo listener-11112222+HTTP+www.qq.com
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Gaap/httpDomain:HttpDomain")]
-    public partial class HttpDomain : Pulumi.CustomResource
+    public partial class HttpDomain : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Indicates whether basic authentication is enable, default value is `false`.
@@ -180,7 +183,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
         }
     }
 
-    public sealed class HttpDomainArgs : Pulumi.ResourceArgs
+    public sealed class HttpDomainArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Indicates whether basic authentication is enable, default value is `false`.
@@ -275,9 +278,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
         public HttpDomainArgs()
         {
         }
+        public static new HttpDomainArgs Empty => new HttpDomainArgs();
     }
 
-    public sealed class HttpDomainState : Pulumi.ResourceArgs
+    public sealed class HttpDomainState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Indicates whether basic authentication is enable, default value is `false`.
@@ -372,5 +376,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
         public HttpDomainState()
         {
         }
+        public static new HttpDomainState Empty => new HttpDomainState();
     }
 }

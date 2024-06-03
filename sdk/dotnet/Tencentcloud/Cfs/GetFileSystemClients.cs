@@ -15,64 +15,58 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cfs
         /// <summary>
         /// Use this data source to query detailed information of cfs file_system_clients
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var fileSystemClients = Tencentcloud.Cfs.GetFileSystemClients.Invoke(new()
         ///     {
-        ///         var fileSystemClients = Output.Create(Tencentcloud.Cfs.GetFileSystemClients.InvokeAsync(new Tencentcloud.Cfs.GetFileSystemClientsArgs
-        ///         {
-        ///             FileSystemId = "cfs-iobiaxtj",
-        ///         }));
-        ///     }
+        ///         FileSystemId = "cfs-iobiaxtj",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetFileSystemClientsResult> InvokeAsync(GetFileSystemClientsArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetFileSystemClientsResult>("tencentcloud:Cfs/getFileSystemClients:getFileSystemClients", args ?? new GetFileSystemClientsArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetFileSystemClientsResult>("tencentcloud:Cfs/getFileSystemClients:getFileSystemClients", args ?? new GetFileSystemClientsArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of cfs file_system_clients
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var fileSystemClients = Tencentcloud.Cfs.GetFileSystemClients.Invoke(new()
         ///     {
-        ///         var fileSystemClients = Output.Create(Tencentcloud.Cfs.GetFileSystemClients.InvokeAsync(new Tencentcloud.Cfs.GetFileSystemClientsArgs
-        ///         {
-        ///             FileSystemId = "cfs-iobiaxtj",
-        ///         }));
-        ///     }
+        ///         FileSystemId = "cfs-iobiaxtj",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetFileSystemClientsResult> Invoke(GetFileSystemClientsInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetFileSystemClientsResult>("tencentcloud:Cfs/getFileSystemClients:getFileSystemClients", args ?? new GetFileSystemClientsInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetFileSystemClientsResult>("tencentcloud:Cfs/getFileSystemClients:getFileSystemClients", args ?? new GetFileSystemClientsInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetFileSystemClientsArgs : Pulumi.InvokeArgs
+    public sealed class GetFileSystemClientsArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// File system ID.
@@ -89,9 +83,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cfs
         public GetFileSystemClientsArgs()
         {
         }
+        public static new GetFileSystemClientsArgs Empty => new GetFileSystemClientsArgs();
     }
 
-    public sealed class GetFileSystemClientsInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetFileSystemClientsInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// File system ID.
@@ -108,6 +103,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cfs
         public GetFileSystemClientsInvokeArgs()
         {
         }
+        public static new GetFileSystemClientsInvokeArgs Empty => new GetFileSystemClientsInvokeArgs();
     }
 
 

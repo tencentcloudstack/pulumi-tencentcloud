@@ -15,64 +15,58 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Redis
         /// <summary>
         /// Use this data source to query detailed information of redis param records
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var paramRecords = Tencentcloud.Redis.GetParamRecords.Invoke(new()
         ///     {
-        ///         var paramRecords = Output.Create(Tencentcloud.Redis.GetParamRecords.InvokeAsync(new Tencentcloud.Redis.GetParamRecordsArgs
-        ///         {
-        ///             InstanceId = "crs-c1nl9rpv",
-        ///         }));
-        ///     }
+        ///         InstanceId = "crs-c1nl9rpv",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetParamRecordsResult> InvokeAsync(GetParamRecordsArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetParamRecordsResult>("tencentcloud:Redis/getParamRecords:getParamRecords", args ?? new GetParamRecordsArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetParamRecordsResult>("tencentcloud:Redis/getParamRecords:getParamRecords", args ?? new GetParamRecordsArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of redis param records
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var paramRecords = Tencentcloud.Redis.GetParamRecords.Invoke(new()
         ///     {
-        ///         var paramRecords = Output.Create(Tencentcloud.Redis.GetParamRecords.InvokeAsync(new Tencentcloud.Redis.GetParamRecordsArgs
-        ///         {
-        ///             InstanceId = "crs-c1nl9rpv",
-        ///         }));
-        ///     }
+        ///         InstanceId = "crs-c1nl9rpv",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetParamRecordsResult> Invoke(GetParamRecordsInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetParamRecordsResult>("tencentcloud:Redis/getParamRecords:getParamRecords", args ?? new GetParamRecordsInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetParamRecordsResult>("tencentcloud:Redis/getParamRecords:getParamRecords", args ?? new GetParamRecordsInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetParamRecordsArgs : Pulumi.InvokeArgs
+    public sealed class GetParamRecordsArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// The ID of instance.
@@ -89,9 +83,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Redis
         public GetParamRecordsArgs()
         {
         }
+        public static new GetParamRecordsArgs Empty => new GetParamRecordsArgs();
     }
 
-    public sealed class GetParamRecordsInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetParamRecordsInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// The ID of instance.
@@ -108,6 +103,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Redis
         public GetParamRecordsInvokeArgs()
         {
         }
+        public static new GetParamRecordsInvokeArgs Empty => new GetParamRecordsInvokeArgs();
     }
 
 

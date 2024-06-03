@@ -15,66 +15,60 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Oceanus
         /// <summary>
         /// Use this data source to query detailed information of oceanus savepoint_list
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var example = Tencentcloud.Oceanus.GetSavepointList.Invoke(new()
         ///     {
-        ///         var example = Output.Create(Tencentcloud.Oceanus.GetSavepointList.InvokeAsync(new Tencentcloud.Oceanus.GetSavepointListArgs
-        ///         {
-        ///             JobId = "cql-314rw6w0",
-        ///             WorkSpaceId = "space-2idq8wbr",
-        ///         }));
-        ///     }
+        ///         JobId = "cql-314rw6w0",
+        ///         WorkSpaceId = "space-2idq8wbr",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetSavepointListResult> InvokeAsync(GetSavepointListArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetSavepointListResult>("tencentcloud:Oceanus/getSavepointList:getSavepointList", args ?? new GetSavepointListArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetSavepointListResult>("tencentcloud:Oceanus/getSavepointList:getSavepointList", args ?? new GetSavepointListArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of oceanus savepoint_list
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var example = Tencentcloud.Oceanus.GetSavepointList.Invoke(new()
         ///     {
-        ///         var example = Output.Create(Tencentcloud.Oceanus.GetSavepointList.InvokeAsync(new Tencentcloud.Oceanus.GetSavepointListArgs
-        ///         {
-        ///             JobId = "cql-314rw6w0",
-        ///             WorkSpaceId = "space-2idq8wbr",
-        ///         }));
-        ///     }
+        ///         JobId = "cql-314rw6w0",
+        ///         WorkSpaceId = "space-2idq8wbr",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetSavepointListResult> Invoke(GetSavepointListInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetSavepointListResult>("tencentcloud:Oceanus/getSavepointList:getSavepointList", args ?? new GetSavepointListInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetSavepointListResult>("tencentcloud:Oceanus/getSavepointList:getSavepointList", args ?? new GetSavepointListInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetSavepointListArgs : Pulumi.InvokeArgs
+    public sealed class GetSavepointListArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Job SerialId.
@@ -97,9 +91,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Oceanus
         public GetSavepointListArgs()
         {
         }
+        public static new GetSavepointListArgs Empty => new GetSavepointListArgs();
     }
 
-    public sealed class GetSavepointListInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetSavepointListInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Job SerialId.
@@ -122,6 +117,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Oceanus
         public GetSavepointListInvokeArgs()
         {
         }
+        public static new GetSavepointListInvokeArgs Empty => new GetSavepointListInvokeArgs();
     }
 
 

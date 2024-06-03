@@ -9,11 +9,12 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const endPoint = new tencentcloud.Vpc.EndPoint("end_point", {
+ * const endPoint = new tencentcloud.vpc.EndPoint("endPoint", {
  *     endPointName: "terraform-test",
  *     endPointServiceId: "vpcsvc-69y13tdb",
  *     endPointVip: "10.0.2.1",
@@ -26,13 +27,14 @@ import * as utilities from "../utilities";
  *     vpcId: "vpc-391sv4w3",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * vpc end_point can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Vpc/endPoint:EndPoint end_point end_point_id
+ * $ pulumi import tencentcloud:Vpc/endPoint:EndPoint end_point end_point_id
  * ```
  */
 export class EndPoint extends pulumi.CustomResource {

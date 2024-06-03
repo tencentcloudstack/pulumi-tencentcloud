@@ -15,39 +15,40 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Organization
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var orgMemberPolicyAttachment = new Tencentcloud.Organization.OrgMemberPolicyAttachment("orgMemberPolicyAttachment", new()
     ///     {
-    ///         var orgMemberPolicyAttachment = new Tencentcloud.Organization.OrgMemberPolicyAttachment("orgMemberPolicyAttachment", new Tencentcloud.Organization.OrgMemberPolicyAttachmentArgs
+    ///         IdentityId = 1,
+    ///         MemberUins = new[]
     ///         {
-    ///             IdentityId = 1,
-    ///             MemberUins = 
-    ///             {
-    ///                 100033905366,
-    ///                 100033905356,
-    ///             },
-    ///             PolicyName = "example-iac",
-    ///         });
-    ///     }
+    ///             100033905366,
+    ///             100033905356,
+    ///         },
+    ///         PolicyName = "example-iac",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// organization org_member_policy_attachment can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Organization/orgMemberPolicyAttachment:OrgMemberPolicyAttachment org_member_policy_attachment org_member_policy_attachment_id
+    /// $ pulumi import tencentcloud:Organization/orgMemberPolicyAttachment:OrgMemberPolicyAttachment org_member_policy_attachment org_member_policy_attachment_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Organization/orgMemberPolicyAttachment:OrgMemberPolicyAttachment")]
-    public partial class OrgMemberPolicyAttachment : Pulumi.CustomResource
+    public partial class OrgMemberPolicyAttachment : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Notes.The maximum length is 128 characters.
@@ -118,7 +119,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Organization
         }
     }
 
-    public sealed class OrgMemberPolicyAttachmentArgs : Pulumi.ResourceArgs
+    public sealed class OrgMemberPolicyAttachmentArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Notes.The maximum length is 128 characters.
@@ -153,9 +154,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Organization
         public OrgMemberPolicyAttachmentArgs()
         {
         }
+        public static new OrgMemberPolicyAttachmentArgs Empty => new OrgMemberPolicyAttachmentArgs();
     }
 
-    public sealed class OrgMemberPolicyAttachmentState : Pulumi.ResourceArgs
+    public sealed class OrgMemberPolicyAttachmentState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Notes.The maximum length is 128 characters.
@@ -190,5 +192,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Organization
         public OrgMemberPolicyAttachmentState()
         {
         }
+        public static new OrgMemberPolicyAttachmentState Empty => new OrgMemberPolicyAttachmentState();
     }
 }

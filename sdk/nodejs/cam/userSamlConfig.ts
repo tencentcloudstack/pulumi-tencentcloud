@@ -9,21 +9,21 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const userSamlConfig = new tencentcloud.Cam.UserSamlConfig("user_saml_config", {
- *     samlMetadataDocument: "./metadataDocument.xml",
- * });
+ * const userSamlConfig = new tencentcloud.cam.UserSamlConfig("userSamlConfig", {samlMetadataDocument: "./metadataDocument.xml"});
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * cam user_saml_config can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Cam/userSamlConfig:UserSamlConfig user_saml_config user_id
+ * $ pulumi import tencentcloud:Cam/userSamlConfig:UserSamlConfig user_saml_config user_id
  * ```
  */
 export class UserSamlConfig extends pulumi.CustomResource {

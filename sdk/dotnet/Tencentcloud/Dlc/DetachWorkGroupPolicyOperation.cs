@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dlc
 {
     [TencentcloudResourceType("tencentcloud:Dlc/detachWorkGroupPolicyOperation:DetachWorkGroupPolicyOperation")]
-    public partial class DetachWorkGroupPolicyOperation : Pulumi.CustomResource
+    public partial class DetachWorkGroupPolicyOperation : global::Pulumi.CustomResource
     {
         /// <summary>
         /// The set of policies to be bound.
@@ -70,7 +70,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dlc
         }
     }
 
-    public sealed class DetachWorkGroupPolicyOperationArgs : Pulumi.ResourceArgs
+    public sealed class DetachWorkGroupPolicyOperationArgs : global::Pulumi.ResourceArgs
     {
         [Input("policySets")]
         private InputList<Inputs.DetachWorkGroupPolicyOperationPolicySetArgs>? _policySets;
@@ -93,9 +93,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dlc
         public DetachWorkGroupPolicyOperationArgs()
         {
         }
+        public static new DetachWorkGroupPolicyOperationArgs Empty => new DetachWorkGroupPolicyOperationArgs();
     }
 
-    public sealed class DetachWorkGroupPolicyOperationState : Pulumi.ResourceArgs
+    public sealed class DetachWorkGroupPolicyOperationState : global::Pulumi.ResourceArgs
     {
         [Input("policySets")]
         private InputList<Inputs.DetachWorkGroupPolicyOperationPolicySetGetArgs>? _policySets;
@@ -118,5 +119,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dlc
         public DetachWorkGroupPolicyOperationState()
         {
         }
+        public static new DetachWorkGroupPolicyOperationState Empty => new DetachWorkGroupPolicyOperationState();
     }
 }

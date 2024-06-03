@@ -15,47 +15,48 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Chdfs
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var lifeCycleRule = new Tencentcloud.Chdfs.LifeCycleRule("lifeCycleRule", new()
     ///     {
-    ///         var lifeCycleRule = new Tencentcloud.Chdfs.LifeCycleRule("lifeCycleRule", new Tencentcloud.Chdfs.LifeCycleRuleArgs
+    ///         FileSystemId = "f14mpfy5lh4e",
+    ///         ChdfsLifeCycleRule = new Tencentcloud.Chdfs.Inputs.LifeCycleRuleLifeCycleRuleArgs
     ///         {
-    ///             FileSystemId = "f14mpfy5lh4e",
-    ///             LifeCycleRule = new Tencentcloud.Chdfs.Inputs.LifeCycleRuleLifeCycleRuleArgs
+    ///             LifeCycleRuleName = "terraform-test",
+    ///             Path = "/test",
+    ///             Status = 1,
+    ///             Transitions = new[]
     ///             {
-    ///                 LifeCycleRuleName = "terraform-test",
-    ///                 Path = "/test",
-    ///                 Status = 1,
-    ///                 Transitions = 
+    ///                 new Tencentcloud.Chdfs.Inputs.LifeCycleRuleLifeCycleRuleTransitionArgs
     ///                 {
-    ///                     new Tencentcloud.Chdfs.Inputs.LifeCycleRuleLifeCycleRuleTransitionArgs
-    ///                     {
-    ///                         Days = 30,
-    ///                         Type = 1,
-    ///                     },
+    ///                     Days = 30,
+    ///                     Type = 1,
     ///                 },
     ///             },
-    ///         });
-    ///     }
+    ///         },
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// chdfs life_cycle_rule can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Chdfs/lifeCycleRule:LifeCycleRule life_cycle_rule file_system_id#life_cycle_rule_id
+    /// $ pulumi import tencentcloud:Chdfs/lifeCycleRule:LifeCycleRule life_cycle_rule file_system_id#life_cycle_rule_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Chdfs/lifeCycleRule:LifeCycleRule")]
-    public partial class LifeCycleRule : Pulumi.CustomResource
+    public partial class LifeCycleRule : global::Pulumi.CustomResource
     {
         /// <summary>
         /// file system id.
@@ -114,7 +115,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Chdfs
         }
     }
 
-    public sealed class LifeCycleRuleArgs : Pulumi.ResourceArgs
+    public sealed class LifeCycleRuleArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// file system id.
@@ -131,9 +132,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Chdfs
         public LifeCycleRuleArgs()
         {
         }
+        public static new LifeCycleRuleArgs Empty => new LifeCycleRuleArgs();
     }
 
-    public sealed class LifeCycleRuleState : Pulumi.ResourceArgs
+    public sealed class LifeCycleRuleState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// file system id.
@@ -150,5 +152,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Chdfs
         public LifeCycleRuleState()
         {
         }
+        public static new LifeCycleRuleState Empty => new LifeCycleRuleState();
     }
 }

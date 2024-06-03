@@ -9,22 +9,21 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const example = pulumi.output(tencentcloud.Sqlserver.getUploadBackupInfo({
+ * const example = tencentcloud.Sqlserver.getUploadBackupInfo({
  *     backupMigrationId: "mssql-backup-migration-8a0f3eht",
  *     instanceId: "mssql-qelbzgwf",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getUploadBackupInfo(args: GetUploadBackupInfoArgs, opts?: pulumi.InvokeOptions): Promise<GetUploadBackupInfoResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Sqlserver/getUploadBackupInfo:getUploadBackupInfo", {
         "backupMigrationId": args.backupMigrationId,
         "instanceId": args.instanceId,
@@ -94,9 +93,25 @@ export interface GetUploadBackupInfoResult {
      */
     readonly xCosSecurityToken: string;
 }
-
+/**
+ * Use this data source to query detailed information of sqlserver uploadBackupInfo
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const example = tencentcloud.Sqlserver.getUploadBackupInfo({
+ *     backupMigrationId: "mssql-backup-migration-8a0f3eht",
+ *     instanceId: "mssql-qelbzgwf",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getUploadBackupInfoOutput(args: GetUploadBackupInfoOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetUploadBackupInfoResult> {
-    return pulumi.output(args).apply(a => getUploadBackupInfo(a, opts))
+    return pulumi.output(args).apply((a: any) => getUploadBackupInfo(a, opts))
 }
 
 /**

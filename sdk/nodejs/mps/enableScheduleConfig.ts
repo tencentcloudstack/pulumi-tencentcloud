@@ -8,12 +8,14 @@ import * as utilities from "../utilities";
  * Provides a resource to create a mps enableScheduleConfig
  *
  * ## Example Usage
+ *
  * ### Enable the mps schedule
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const object = tencentcloud.Cos.getBucketObject({
  *     bucket: `keep-bucket-${local.app_id}`,
@@ -30,7 +32,7 @@ import * as utilities from "../utilities";
  *         type: "CosFileUpload",
  *         cosFileUploadTrigger: {
  *             bucket: object.then(object => object.bucket),
- *             region: `%s`,
+ *             region: "%s",
  *             dir: "/upload/",
  *             formats: [
  *                 "flv",
@@ -141,7 +143,7 @@ import * as utilities from "../utilities";
  *         type: "COS",
  *         cosOutputStorage: {
  *             bucket: output.bucket,
- *             region: `%s`,
+ *             region: "%s",
  *         },
  *     },
  *     outputDir: "output/",
@@ -151,24 +153,28 @@ import * as utilities from "../utilities";
  *     enabled: true,
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
+ *
  * ### Disable the mps schedule
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const config = new tencentcloud.mps.EnableScheduleConfig("config", {
  *     scheduleId: tencentcloud_mps_schedule.example.id,
  *     enabled: false,
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * mps enable_schedule_config can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Mps/enableScheduleConfig:EnableScheduleConfig enable_schedule_config enable_schedule_config_id
+ * $ pulumi import tencentcloud:Mps/enableScheduleConfig:EnableScheduleConfig enable_schedule_config enable_schedule_config_id
  * ```
  */
 export class EnableScheduleConfig extends pulumi.CustomResource {

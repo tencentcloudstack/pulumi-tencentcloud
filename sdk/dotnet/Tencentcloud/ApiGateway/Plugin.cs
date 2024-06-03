@@ -15,42 +15,42 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
     /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using System.Text.Json;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var example = new Tencentcloud.ApiGateway.Plugin("example", new()
     ///     {
-    ///         var example = new Tencentcloud.ApiGateway.Plugin("example", new Tencentcloud.ApiGateway.PluginArgs
+    ///         PluginName = "tf-example",
+    ///         PluginType = "IPControl",
+    ///         PluginData = JsonSerializer.Serialize(new Dictionary&lt;string, object?&gt;
     ///         {
-    ///             PluginName = "tf-example",
-    ///             PluginType = "IPControl",
-    ///             PluginData = JsonSerializer.Serialize(new Dictionary&lt;string, object?&gt;
-    ///             {
-    ///                 { "type", "white_list" },
-    ///                 { "blocks", "1.1.1.1" },
-    ///             }),
-    ///             Description = "desc.",
-    ///         });
-    ///     }
+    ///             ["type"] = "white_list",
+    ///             ["blocks"] = "1.1.1.1",
+    ///         }),
+    ///         Description = "desc.",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// apiGateway plugin can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:ApiGateway/plugin:Plugin plugin plugin_id
+    /// $ pulumi import tencentcloud:ApiGateway/plugin:Plugin plugin plugin_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:ApiGateway/plugin:Plugin")]
-    public partial class Plugin : Pulumi.CustomResource
+    public partial class Plugin : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Description of plugin.
@@ -121,7 +121,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway
         }
     }
 
-    public sealed class PluginArgs : Pulumi.ResourceArgs
+    public sealed class PluginArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Description of plugin.
@@ -150,9 +150,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway
         public PluginArgs()
         {
         }
+        public static new PluginArgs Empty => new PluginArgs();
     }
 
-    public sealed class PluginState : Pulumi.ResourceArgs
+    public sealed class PluginState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Description of plugin.
@@ -181,5 +182,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway
         public PluginState()
         {
         }
+        public static new PluginState Empty => new PluginState();
     }
 }

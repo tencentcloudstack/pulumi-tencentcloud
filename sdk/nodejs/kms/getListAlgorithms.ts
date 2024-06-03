@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,20 +11,19 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const example = pulumi.output(tencentcloud.Kms.getListAlgorithms());
+ * const example = tencentcloud.Kms.getListAlgorithms({});
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getListAlgorithms(args?: GetListAlgorithmsArgs, opts?: pulumi.InvokeOptions): Promise<GetListAlgorithmsResult> {
     args = args || {};
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Kms/getListAlgorithms:getListAlgorithms", {
         "resultOutputFile": args.resultOutputFile,
     }, opts);
@@ -61,9 +61,22 @@ export interface GetListAlgorithmsResult {
      */
     readonly symmetricAlgorithms: outputs.Kms.GetListAlgorithmsSymmetricAlgorithm[];
 }
-
+/**
+ * Use this data source to query detailed information of kms listAlgorithms
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const example = tencentcloud.Kms.getListAlgorithms({});
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getListAlgorithmsOutput(args?: GetListAlgorithmsOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetListAlgorithmsResult> {
-    return pulumi.output(args).apply(a => getListAlgorithms(a, opts))
+    return pulumi.output(args).apply((a: any) => getListAlgorithms(a, opts))
 }
 
 /**

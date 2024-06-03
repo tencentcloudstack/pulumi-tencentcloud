@@ -16,131 +16,139 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway
     /// &gt; **NOTE:** If the `auth_type` parameter of API is not `SECRET`, it cannot be bound access key.
     /// 
     /// ## Example Usage
+    /// 
     /// ### Normal creation
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var exampleUsagePlan = new Tencentcloud.ApiGateway.UsagePlan("exampleUsagePlan", new()
     ///     {
-    ///         var exampleUsagePlan = new Tencentcloud.ApiGateway.UsagePlan("exampleUsagePlan", new Tencentcloud.ApiGateway.UsagePlanArgs
-    ///         {
-    ///             UsagePlanName = "tf_example",
-    ///             UsagePlanDesc = "desc.",
-    ///             MaxRequestNum = 100,
-    ///             MaxRequestNumPreSec = 10,
-    ///         });
-    ///         var exampleService = new Tencentcloud.ApiGateway.Service("exampleService", new Tencentcloud.ApiGateway.ServiceArgs
-    ///         {
-    ///             ServiceName = "tf_example",
-    ///             Protocol = "http&amp;https",
-    ///             ServiceDesc = "desc.",
-    ///             NetTypes = 
-    ///             {
-    ///                 "INNER",
-    ///                 "OUTER",
-    ///             },
-    ///             IpVersion = "IPv4",
-    ///         });
-    ///         var exampleApi = new Tencentcloud.ApiGateway.Api("exampleApi", new Tencentcloud.ApiGateway.ApiArgs
-    ///         {
-    ///             ServiceId = exampleService.Id,
-    ///             ApiName = "tf_example",
-    ///             ApiDesc = "my hello api update",
-    ///             AuthType = "SECRET",
-    ///             Protocol = "HTTP",
-    ///             EnableCors = true,
-    ///             RequestConfigPath = "/user/info",
-    ///             RequestConfigMethod = "POST",
-    ///             RequestParameters = 
-    ///             {
-    ///                 new Tencentcloud.ApiGateway.Inputs.ApiRequestParameterArgs
-    ///                 {
-    ///                     Name = "email",
-    ///                     Position = "QUERY",
-    ///                     Type = "string",
-    ///                     Desc = "desc.",
-    ///                     DefaultValue = "test@qq.com",
-    ///                     Required = true,
-    ///                 },
-    ///             },
-    ///             ServiceConfigType = "HTTP",
-    ///             ServiceConfigTimeout = 10,
-    ///             ServiceConfigUrl = "http://www.tencent.com",
-    ///             ServiceConfigPath = "/user",
-    ///             ServiceConfigMethod = "POST",
-    ///             ResponseType = "XML",
-    ///             ResponseSuccessExample = "&lt;note&gt;success&lt;/note&gt;",
-    ///             ResponseFailExample = "&lt;note&gt;fail&lt;/note&gt;",
-    ///             ResponseErrorCodes = 
-    ///             {
-    ///                 new Tencentcloud.ApiGateway.Inputs.ApiResponseErrorCodeArgs
-    ///                 {
-    ///                     Code = 500,
-    ///                     Msg = "system error",
-    ///                     Desc = "system error code",
-    ///                     ConvertedCode = 5000,
-    ///                     NeedConvert = true,
-    ///                 },
-    ///             },
-    ///         });
-    ///         var exampleUsagePlanAttachment = new Tencentcloud.ApiGateway.UsagePlanAttachment("exampleUsagePlanAttachment", new Tencentcloud.ApiGateway.UsagePlanAttachmentArgs
-    ///         {
-    ///             UsagePlanId = exampleUsagePlan.Id,
-    ///             ServiceId = exampleService.Id,
-    ///             Environment = "release",
-    ///             BindType = "API",
-    ///             ApiId = exampleApi.Id,
-    ///         });
-    ///     }
+    ///         UsagePlanName = "tf_example",
+    ///         UsagePlanDesc = "desc.",
+    ///         MaxRequestNum = 100,
+    ///         MaxRequestNumPreSec = 10,
+    ///     });
     /// 
-    /// }
+    ///     var exampleService = new Tencentcloud.ApiGateway.Service("exampleService", new()
+    ///     {
+    ///         ServiceName = "tf_example",
+    ///         Protocol = "http&amp;https",
+    ///         ServiceDesc = "desc.",
+    ///         NetTypes = new[]
+    ///         {
+    ///             "INNER",
+    ///             "OUTER",
+    ///         },
+    ///         IpVersion = "IPv4",
+    ///     });
+    /// 
+    ///     var exampleApi = new Tencentcloud.ApiGateway.Api("exampleApi", new()
+    ///     {
+    ///         ServiceId = exampleService.Id,
+    ///         ApiName = "tf_example",
+    ///         ApiDesc = "my hello api update",
+    ///         AuthType = "SECRET",
+    ///         Protocol = "HTTP",
+    ///         EnableCors = true,
+    ///         RequestConfigPath = "/user/info",
+    ///         RequestConfigMethod = "POST",
+    ///         RequestParameters = new[]
+    ///         {
+    ///             new Tencentcloud.ApiGateway.Inputs.ApiRequestParameterArgs
+    ///             {
+    ///                 Name = "email",
+    ///                 Position = "QUERY",
+    ///                 Type = "string",
+    ///                 Desc = "desc.",
+    ///                 DefaultValue = "test@qq.com",
+    ///                 Required = true,
+    ///             },
+    ///         },
+    ///         ServiceConfigType = "HTTP",
+    ///         ServiceConfigTimeout = 10,
+    ///         ServiceConfigUrl = "http://www.tencent.com",
+    ///         ServiceConfigPath = "/user",
+    ///         ServiceConfigMethod = "POST",
+    ///         ResponseType = "XML",
+    ///         ResponseSuccessExample = "&lt;note&gt;success&lt;/note&gt;",
+    ///         ResponseFailExample = "&lt;note&gt;fail&lt;/note&gt;",
+    ///         ResponseErrorCodes = new[]
+    ///         {
+    ///             new Tencentcloud.ApiGateway.Inputs.ApiResponseErrorCodeArgs
+    ///             {
+    ///                 Code = 500,
+    ///                 Msg = "system error",
+    ///                 Desc = "system error code",
+    ///                 ConvertedCode = 5000,
+    ///                 NeedConvert = true,
+    ///             },
+    ///         },
+    ///     });
+    /// 
+    ///     var exampleUsagePlanAttachment = new Tencentcloud.ApiGateway.UsagePlanAttachment("exampleUsagePlanAttachment", new()
+    ///     {
+    ///         UsagePlanId = exampleUsagePlan.Id,
+    ///         ServiceId = exampleService.Id,
+    ///         Environment = "release",
+    ///         BindType = "API",
+    ///         ApiId = exampleApi.Id,
+    ///     });
+    /// 
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
+    /// 
     /// ### Bind the key to a usage plan
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var exampleApiKey = new Tencentcloud.ApiGateway.ApiKey("exampleApiKey", new()
     ///     {
-    ///         var exampleApiKey = new Tencentcloud.ApiGateway.ApiKey("exampleApiKey", new Tencentcloud.ApiGateway.ApiKeyArgs
-    ///         {
-    ///             SecretName = "tf_example",
-    ///             Status = "on",
-    ///         });
-    ///         var exampleUsagePlanAttachment = new Tencentcloud.ApiGateway.UsagePlanAttachment("exampleUsagePlanAttachment", new Tencentcloud.ApiGateway.UsagePlanAttachmentArgs
-    ///         {
-    ///             UsagePlanId = tencentcloud_api_gateway_usage_plan.Example.Id,
-    ///             ServiceId = tencentcloud_api_gateway_service.Example.Id,
-    ///             Environment = "release",
-    ///             BindType = "API",
-    ///             ApiId = tencentcloud_api_gateway_api.Example.Id,
-    ///             AccessKeyIds = 
-    ///             {
-    ///                 exampleApiKey.Id,
-    ///             },
-    ///         });
-    ///     }
+    ///         SecretName = "tf_example",
+    ///         Status = "on",
+    ///     });
     /// 
-    /// }
+    ///     var exampleUsagePlanAttachment = new Tencentcloud.ApiGateway.UsagePlanAttachment("exampleUsagePlanAttachment", new()
+    ///     {
+    ///         UsagePlanId = tencentcloud_api_gateway_usage_plan.Example.Id,
+    ///         ServiceId = tencentcloud_api_gateway_service.Example.Id,
+    ///         Environment = "release",
+    ///         BindType = "API",
+    ///         ApiId = tencentcloud_api_gateway_api.Example.Id,
+    ///         AccessKeyIds = new[]
+    ///         {
+    ///             exampleApiKey.Id,
+    ///         },
+    ///     });
+    /// 
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// API gateway usage plan attachment can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:ApiGateway/usagePlanAttachment:UsagePlanAttachment attach_service usagePlan-pe7fbdgn#service-kuqd6xqk#release#API#api-p8gtanvy
+    /// $ pulumi import tencentcloud:ApiGateway/usagePlanAttachment:UsagePlanAttachment attach_service usagePlan-pe7fbdgn#service-kuqd6xqk#release#API#api-p8gtanvy
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:ApiGateway/usagePlanAttachment:UsagePlanAttachment")]
-    public partial class UsagePlanAttachment : Pulumi.CustomResource
+    public partial class UsagePlanAttachment : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Array of key IDs to be bound.
@@ -223,7 +231,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway
         }
     }
 
-    public sealed class UsagePlanAttachmentArgs : Pulumi.ResourceArgs
+    public sealed class UsagePlanAttachmentArgs : global::Pulumi.ResourceArgs
     {
         [Input("accessKeyIds")]
         private InputList<string>? _accessKeyIds;
@@ -270,9 +278,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway
         public UsagePlanAttachmentArgs()
         {
         }
+        public static new UsagePlanAttachmentArgs Empty => new UsagePlanAttachmentArgs();
     }
 
-    public sealed class UsagePlanAttachmentState : Pulumi.ResourceArgs
+    public sealed class UsagePlanAttachmentState : global::Pulumi.ResourceArgs
     {
         [Input("accessKeyIds")]
         private InputList<string>? _accessKeyIds;
@@ -319,5 +328,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway
         public UsagePlanAttachmentState()
         {
         }
+        public static new UsagePlanAttachmentState Empty => new UsagePlanAttachmentState();
     }
 }

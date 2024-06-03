@@ -2,100 +2,19 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
  * Provide a resource to create a VOD procedure template.
- *
- * ## Example Usage
- *
- * ```typescript
- * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
- *
- * const fooAdaptiveDynamicStreamingTemplate = new tencentcloud.vod.AdaptiveDynamicStreamingTemplate("fooAdaptiveDynamicStreamingTemplate", {
- *     format: "HLS",
- *     drmType: "SimpleAES",
- *     disableHigherVideoBitrate: false,
- *     disableHigherVideoResolution: false,
- *     comment: "test",
- *     streamInfos: [
- *         {
- *             video: {
- *                 codec: "libx265",
- *                 fps: 4,
- *                 bitrate: 129,
- *                 resolutionAdaptive: false,
- *                 width: 128,
- *                 height: 128,
- *                 fillType: "stretch",
- *             },
- *             audio: {
- *                 codec: "libmp3lame",
- *                 bitrate: 129,
- *                 sampleRate: 44100,
- *                 audioChannel: "dual",
- *             },
- *             removeAudio: false,
- *         },
- *         {
- *             video: {
- *                 codec: "libx264",
- *                 fps: 4,
- *                 bitrate: 256,
- *             },
- *             audio: {
- *                 codec: "libfdk_aac",
- *                 bitrate: 256,
- *                 sampleRate: 44100,
- *             },
- *             removeAudio: true,
- *         },
- *     ],
- * });
- * const fooSnapshotByTimeOffsetTemplate = new tencentcloud.vod.SnapshotByTimeOffsetTemplate("fooSnapshotByTimeOffsetTemplate", {
- *     width: 130,
- *     height: 128,
- *     resolutionAdaptive: false,
- *     format: "png",
- *     comment: "test",
- *     fillType: "white",
- * });
- * const fooImageSpriteTemplate = new tencentcloud.vod.ImageSpriteTemplate("fooImageSpriteTemplate", {
- *     sampleType: "Percent",
- *     sampleInterval: 10,
- *     rowCount: 3,
- *     columnCount: 3,
- *     comment: "test",
- *     fillType: "stretch",
- *     width: 128,
- *     height: 128,
- *     resolutionAdaptive: false,
- * });
- * const fooProcedureTemplate = new tencentcloud.vod.ProcedureTemplate("fooProcedureTemplate", {
- *     comment: "test",
- *     mediaProcessTask: {
- *         adaptiveDynamicStreamingTaskLists: [{
- *             definition: fooAdaptiveDynamicStreamingTemplate.id,
- *         }],
- *         snapshotByTimeOffsetTaskLists: [{
- *             definition: fooSnapshotByTimeOffsetTemplate.id,
- *             extTimeOffsetLists: ["3.5s"],
- *         }],
- *         imageSpriteTaskLists: [{
- *             definition: fooImageSpriteTemplate.id,
- *         }],
- *     },
- * });
- * ```
  *
  * ## Import
  *
  * VOD procedure template can be imported using the name, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Vod/procedureTemplate:ProcedureTemplate foo tf-procedure
+ * $ pulumi import tencentcloud:Vod/procedureTemplate:ProcedureTemplate foo tf-procedure
  * ```
  */
 export class ProcedureTemplate extends pulumi.CustomResource {
@@ -127,6 +46,14 @@ export class ProcedureTemplate extends pulumi.CustomResource {
     }
 
     /**
+     * Parameter of AI-based content analysis task.
+     */
+    public readonly aiAnalysisTask!: pulumi.Output<outputs.Vod.ProcedureTemplateAiAnalysisTask>;
+    /**
+     * Type parameter of AI-based content recognition task.
+     */
+    public readonly aiRecognitionTask!: pulumi.Output<outputs.Vod.ProcedureTemplateAiRecognitionTask>;
+    /**
      * Template description. Length limit: 256 characters.
      */
     public readonly comment!: pulumi.Output<string | undefined>;
@@ -143,9 +70,19 @@ export class ProcedureTemplate extends pulumi.CustomResource {
      */
     public readonly name!: pulumi.Output<string>;
     /**
-     * Subapplication ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+     * Type parameter of AI-based content recognition task.
+     */
+    public readonly reviewAudioVideoTask!: pulumi.Output<outputs.Vod.ProcedureTemplateReviewAudioVideoTask>;
+    /**
+     * The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.
      */
     public readonly subAppId!: pulumi.Output<number | undefined>;
+    /**
+     * Template type, value range:
+     * - Preset: system preset template;
+     * - Custom: user-defined templates.
+     */
+    public /*out*/ readonly type!: pulumi.Output<string>;
     /**
      * Last modified time of template in ISO date format.
      */
@@ -164,19 +101,27 @@ export class ProcedureTemplate extends pulumi.CustomResource {
         opts = opts || {};
         if (opts.id) {
             const state = argsOrState as ProcedureTemplateState | undefined;
+            resourceInputs["aiAnalysisTask"] = state ? state.aiAnalysisTask : undefined;
+            resourceInputs["aiRecognitionTask"] = state ? state.aiRecognitionTask : undefined;
             resourceInputs["comment"] = state ? state.comment : undefined;
             resourceInputs["createTime"] = state ? state.createTime : undefined;
             resourceInputs["mediaProcessTask"] = state ? state.mediaProcessTask : undefined;
             resourceInputs["name"] = state ? state.name : undefined;
+            resourceInputs["reviewAudioVideoTask"] = state ? state.reviewAudioVideoTask : undefined;
             resourceInputs["subAppId"] = state ? state.subAppId : undefined;
+            resourceInputs["type"] = state ? state.type : undefined;
             resourceInputs["updateTime"] = state ? state.updateTime : undefined;
         } else {
             const args = argsOrState as ProcedureTemplateArgs | undefined;
+            resourceInputs["aiAnalysisTask"] = args ? args.aiAnalysisTask : undefined;
+            resourceInputs["aiRecognitionTask"] = args ? args.aiRecognitionTask : undefined;
             resourceInputs["comment"] = args ? args.comment : undefined;
             resourceInputs["mediaProcessTask"] = args ? args.mediaProcessTask : undefined;
             resourceInputs["name"] = args ? args.name : undefined;
+            resourceInputs["reviewAudioVideoTask"] = args ? args.reviewAudioVideoTask : undefined;
             resourceInputs["subAppId"] = args ? args.subAppId : undefined;
             resourceInputs["createTime"] = undefined /*out*/;
+            resourceInputs["type"] = undefined /*out*/;
             resourceInputs["updateTime"] = undefined /*out*/;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
@@ -188,6 +133,14 @@ export class ProcedureTemplate extends pulumi.CustomResource {
  * Input properties used for looking up and filtering ProcedureTemplate resources.
  */
 export interface ProcedureTemplateState {
+    /**
+     * Parameter of AI-based content analysis task.
+     */
+    aiAnalysisTask?: pulumi.Input<inputs.Vod.ProcedureTemplateAiAnalysisTask>;
+    /**
+     * Type parameter of AI-based content recognition task.
+     */
+    aiRecognitionTask?: pulumi.Input<inputs.Vod.ProcedureTemplateAiRecognitionTask>;
     /**
      * Template description. Length limit: 256 characters.
      */
@@ -205,9 +158,19 @@ export interface ProcedureTemplateState {
      */
     name?: pulumi.Input<string>;
     /**
-     * Subapplication ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+     * Type parameter of AI-based content recognition task.
+     */
+    reviewAudioVideoTask?: pulumi.Input<inputs.Vod.ProcedureTemplateReviewAudioVideoTask>;
+    /**
+     * The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.
      */
     subAppId?: pulumi.Input<number>;
+    /**
+     * Template type, value range:
+     * - Preset: system preset template;
+     * - Custom: user-defined templates.
+     */
+    type?: pulumi.Input<string>;
     /**
      * Last modified time of template in ISO date format.
      */
@@ -218,6 +181,14 @@ export interface ProcedureTemplateState {
  * The set of arguments for constructing a ProcedureTemplate resource.
  */
 export interface ProcedureTemplateArgs {
+    /**
+     * Parameter of AI-based content analysis task.
+     */
+    aiAnalysisTask?: pulumi.Input<inputs.Vod.ProcedureTemplateAiAnalysisTask>;
+    /**
+     * Type parameter of AI-based content recognition task.
+     */
+    aiRecognitionTask?: pulumi.Input<inputs.Vod.ProcedureTemplateAiRecognitionTask>;
     /**
      * Template description. Length limit: 256 characters.
      */
@@ -231,7 +202,11 @@ export interface ProcedureTemplateArgs {
      */
     name?: pulumi.Input<string>;
     /**
-     * Subapplication ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+     * Type parameter of AI-based content recognition task.
+     */
+    reviewAudioVideoTask?: pulumi.Input<inputs.Vod.ProcedureTemplateReviewAudioVideoTask>;
+    /**
+     * The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.
      */
     subAppId?: pulumi.Input<number>;
 }

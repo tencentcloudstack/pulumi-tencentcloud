@@ -15,64 +15,58 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway
         /// <summary>
         /// Use this data source to query detailed information of apiGateway service_environment_list
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var example = Tencentcloud.ApiGateway.GetServiceEnvironmentList.Invoke(new()
         ///     {
-        ///         var example = Output.Create(Tencentcloud.ApiGateway.GetServiceEnvironmentList.InvokeAsync(new Tencentcloud.ApiGateway.GetServiceEnvironmentListArgs
-        ///         {
-        ///             ServiceId = "service-nxz6yync",
-        ///         }));
-        ///     }
+        ///         ServiceId = "service-nxz6yync",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetServiceEnvironmentListResult> InvokeAsync(GetServiceEnvironmentListArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetServiceEnvironmentListResult>("tencentcloud:ApiGateway/getServiceEnvironmentList:getServiceEnvironmentList", args ?? new GetServiceEnvironmentListArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetServiceEnvironmentListResult>("tencentcloud:ApiGateway/getServiceEnvironmentList:getServiceEnvironmentList", args ?? new GetServiceEnvironmentListArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of apiGateway service_environment_list
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var example = Tencentcloud.ApiGateway.GetServiceEnvironmentList.Invoke(new()
         ///     {
-        ///         var example = Output.Create(Tencentcloud.ApiGateway.GetServiceEnvironmentList.InvokeAsync(new Tencentcloud.ApiGateway.GetServiceEnvironmentListArgs
-        ///         {
-        ///             ServiceId = "service-nxz6yync",
-        ///         }));
-        ///     }
+        ///         ServiceId = "service-nxz6yync",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetServiceEnvironmentListResult> Invoke(GetServiceEnvironmentListInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetServiceEnvironmentListResult>("tencentcloud:ApiGateway/getServiceEnvironmentList:getServiceEnvironmentList", args ?? new GetServiceEnvironmentListInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetServiceEnvironmentListResult>("tencentcloud:ApiGateway/getServiceEnvironmentList:getServiceEnvironmentList", args ?? new GetServiceEnvironmentListInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetServiceEnvironmentListArgs : Pulumi.InvokeArgs
+    public sealed class GetServiceEnvironmentListArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Used to save results.
@@ -89,9 +83,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway
         public GetServiceEnvironmentListArgs()
         {
         }
+        public static new GetServiceEnvironmentListArgs Empty => new GetServiceEnvironmentListArgs();
     }
 
-    public sealed class GetServiceEnvironmentListInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetServiceEnvironmentListInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Used to save results.
@@ -108,6 +103,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway
         public GetServiceEnvironmentListInvokeArgs()
         {
         }
+        public static new GetServiceEnvironmentListInvokeArgs Empty => new GetServiceEnvironmentListInvokeArgs();
     }
 
 

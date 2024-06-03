@@ -12,9 +12,17 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdmq
 {
     /// <summary>
     /// Provides a resource to create a tdmq rabbitmq_vip_instance
+    /// 
+    /// ## Import
+    /// 
+    /// tdmq rabbitmq_vip_instance can be imported using the id, e.g.
+    /// 
+    /// ```sh
+    /// $ pulumi import tencentcloud:Tdmq/rabbitmqVipInstance:RabbitmqVipInstance example amqp-mok52gmn
+    /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Tdmq/rabbitmqVipInstance:RabbitmqVipInstance")]
-    public partial class RabbitmqVipInstance : Pulumi.CustomResource
+    public partial class RabbitmqVipInstance : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Automatic renewal, the default is true.
@@ -121,7 +129,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdmq
         }
     }
 
-    public sealed class RabbitmqVipInstanceArgs : Pulumi.ResourceArgs
+    public sealed class RabbitmqVipInstanceArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Automatic renewal, the default is true.
@@ -192,9 +200,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdmq
         public RabbitmqVipInstanceArgs()
         {
         }
+        public static new RabbitmqVipInstanceArgs Empty => new RabbitmqVipInstanceArgs();
     }
 
-    public sealed class RabbitmqVipInstanceState : Pulumi.ResourceArgs
+    public sealed class RabbitmqVipInstanceState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Automatic renewal, the default is true.
@@ -265,5 +274,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdmq
         public RabbitmqVipInstanceState()
         {
         }
+        public static new RabbitmqVipInstanceState Empty => new RabbitmqVipInstanceState();
     }
 }

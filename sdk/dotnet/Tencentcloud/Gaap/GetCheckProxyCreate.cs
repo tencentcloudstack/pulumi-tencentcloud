@@ -14,79 +14,19 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
     {
         /// <summary>
         /// Use this data source to query detailed information of gaap check proxy create
-        /// 
-        /// {{% examples %}}
-        /// ## Example Usage
-        /// {{% example %}}
-        /// 
-        /// ```csharp
-        /// using Pulumi;
-        /// using Tencentcloud = Pulumi.Tencentcloud;
-        /// 
-        /// class MyStack : Stack
-        /// {
-        ///     public MyStack()
-        ///     {
-        ///         var checkProxyCreate = Output.Create(Tencentcloud.Gaap.GetCheckProxyCreate.InvokeAsync(new Tencentcloud.Gaap.GetCheckProxyCreateArgs
-        ///         {
-        ///             AccessRegion = "Guangzhou",
-        ///             Bandwidth = 10,
-        ///             Concurrent = 2,
-        ///             Http3Supported = 0,
-        ///             IpAddressVersion = "IPv4",
-        ///             NetworkType = "normal",
-        ///             PackageType = "Thunder",
-        ///             RealServerRegion = "Beijing",
-        ///         }));
-        ///     }
-        /// 
-        /// }
-        /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
         /// </summary>
         public static Task<GetCheckProxyCreateResult> InvokeAsync(GetCheckProxyCreateArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetCheckProxyCreateResult>("tencentcloud:Gaap/getCheckProxyCreate:getCheckProxyCreate", args ?? new GetCheckProxyCreateArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetCheckProxyCreateResult>("tencentcloud:Gaap/getCheckProxyCreate:getCheckProxyCreate", args ?? new GetCheckProxyCreateArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of gaap check proxy create
-        /// 
-        /// {{% examples %}}
-        /// ## Example Usage
-        /// {{% example %}}
-        /// 
-        /// ```csharp
-        /// using Pulumi;
-        /// using Tencentcloud = Pulumi.Tencentcloud;
-        /// 
-        /// class MyStack : Stack
-        /// {
-        ///     public MyStack()
-        ///     {
-        ///         var checkProxyCreate = Output.Create(Tencentcloud.Gaap.GetCheckProxyCreate.InvokeAsync(new Tencentcloud.Gaap.GetCheckProxyCreateArgs
-        ///         {
-        ///             AccessRegion = "Guangzhou",
-        ///             Bandwidth = 10,
-        ///             Concurrent = 2,
-        ///             Http3Supported = 0,
-        ///             IpAddressVersion = "IPv4",
-        ///             NetworkType = "normal",
-        ///             PackageType = "Thunder",
-        ///             RealServerRegion = "Beijing",
-        ///         }));
-        ///     }
-        /// 
-        /// }
-        /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
         /// </summary>
         public static Output<GetCheckProxyCreateResult> Invoke(GetCheckProxyCreateInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetCheckProxyCreateResult>("tencentcloud:Gaap/getCheckProxyCreate:getCheckProxyCreate", args ?? new GetCheckProxyCreateInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetCheckProxyCreateResult>("tencentcloud:Gaap/getCheckProxyCreate:getCheckProxyCreate", args ?? new GetCheckProxyCreateInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetCheckProxyCreateArgs : Pulumi.InvokeArgs
+    public sealed class GetCheckProxyCreateArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// The access (acceleration) area of the proxy. The value can be obtained through the interface DescribeAccessRegionsByDestRegion.
@@ -145,9 +85,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
         public GetCheckProxyCreateArgs()
         {
         }
+        public static new GetCheckProxyCreateArgs Empty => new GetCheckProxyCreateArgs();
     }
 
-    public sealed class GetCheckProxyCreateInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetCheckProxyCreateInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// The access (acceleration) area of the proxy. The value can be obtained through the interface DescribeAccessRegionsByDestRegion.
@@ -206,6 +147,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
         public GetCheckProxyCreateInvokeArgs()
         {
         }
+        public static new GetCheckProxyCreateInvokeArgs Empty => new GetCheckProxyCreateInvokeArgs();
     }
 
 

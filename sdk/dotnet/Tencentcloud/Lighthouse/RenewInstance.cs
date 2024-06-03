@@ -15,32 +15,33 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Lighthouse
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var renewInstance = new Tencentcloud.Lighthouse.RenewInstance("renewInstance", new()
     ///     {
-    ///         var renewInstance = new Tencentcloud.Lighthouse.RenewInstance("renewInstance", new Tencentcloud.Lighthouse.RenewInstanceArgs
+    ///         AutoVoucher = false,
+    ///         InstanceChargePrepaid = new Tencentcloud.Lighthouse.Inputs.RenewInstanceInstanceChargePrepaidArgs
     ///         {
-    ///             AutoVoucher = false,
-    ///             InstanceChargePrepaid = new Tencentcloud.Lighthouse.Inputs.RenewInstanceInstanceChargePrepaidArgs
-    ///             {
-    ///                 Period = 1,
-    ///                 RenewFlag = "NOTIFY_AND_MANUAL_RENEW",
-    ///             },
-    ///             InstanceId = "",
-    ///             RenewDataDisk = true,
-    ///         });
-    ///     }
+    ///             Period = 1,
+    ///             RenewFlag = "NOTIFY_AND_MANUAL_RENEW",
+    ///         },
+    ///         InstanceId = "lhins-xxxxxxx",
+    ///         RenewDataDisk = true,
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Lighthouse/renewInstance:RenewInstance")]
-    public partial class RenewInstance : Pulumi.CustomResource
+    public partial class RenewInstance : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Whether to automatically deduct vouchers. Valid values:
@@ -113,7 +114,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Lighthouse
         }
     }
 
-    public sealed class RenewInstanceArgs : Pulumi.ResourceArgs
+    public sealed class RenewInstanceArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Whether to automatically deduct vouchers. Valid values:
@@ -144,9 +145,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Lighthouse
         public RenewInstanceArgs()
         {
         }
+        public static new RenewInstanceArgs Empty => new RenewInstanceArgs();
     }
 
-    public sealed class RenewInstanceState : Pulumi.ResourceArgs
+    public sealed class RenewInstanceState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Whether to automatically deduct vouchers. Valid values:
@@ -177,5 +179,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Lighthouse
         public RenewInstanceState()
         {
         }
+        public static new RenewInstanceState Empty => new RenewInstanceState();
     }
 }

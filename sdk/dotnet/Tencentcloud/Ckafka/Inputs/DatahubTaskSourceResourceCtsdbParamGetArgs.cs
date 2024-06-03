@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka.Inputs
 {
 
-    public sealed class DatahubTaskSourceResourceCtsdbParamGetArgs : Pulumi.ResourceArgs
+    public sealed class DatahubTaskSourceResourceCtsdbParamGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Ctsdb metric.
@@ -28,5 +28,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka.Inputs
         public DatahubTaskSourceResourceCtsdbParamGetArgs()
         {
         }
+        public static new DatahubTaskSourceResourceCtsdbParamGetArgs Empty => new DatahubTaskSourceResourceCtsdbParamGetArgs();
     }
 }

@@ -15,92 +15,86 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cvm
         /// <summary>
         /// Use this data source to query detailed information of cvm chc_hosts
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var chcHosts = Tencentcloud.Cvm.GetChcHosts.Invoke(new()
         ///     {
-        ///         var chcHosts = Output.Create(Tencentcloud.Cvm.GetChcHosts.InvokeAsync(new Tencentcloud.Cvm.GetChcHostsArgs
+        ///         ChcIds = new[]
         ///         {
-        ///             ChcIds = 
+        ///             "chc-xxxxxx",
+        ///         },
+        ///         Filters = new[]
+        ///         {
+        ///             new Tencentcloud.Cvm.Inputs.GetChcHostsFilterInputArgs
         ///             {
-        ///                 "chc-xxxxxx",
-        ///             },
-        ///             Filters = 
-        ///             {
-        ///                 new Tencentcloud.Cvm.Inputs.GetChcHostsFilterArgs
+        ///                 Name = "zone",
+        ///                 Values = new[]
         ///                 {
-        ///                     Name = "zone",
-        ///                     Values = 
-        ///                     {
-        ///                         "ap-guangzhou-7",
-        ///                     },
+        ///                     "ap-guangzhou-7",
         ///                 },
         ///             },
-        ///         }));
-        ///     }
+        ///         },
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetChcHostsResult> InvokeAsync(GetChcHostsArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetChcHostsResult>("tencentcloud:Cvm/getChcHosts:getChcHosts", args ?? new GetChcHostsArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetChcHostsResult>("tencentcloud:Cvm/getChcHosts:getChcHosts", args ?? new GetChcHostsArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of cvm chc_hosts
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var chcHosts = Tencentcloud.Cvm.GetChcHosts.Invoke(new()
         ///     {
-        ///         var chcHosts = Output.Create(Tencentcloud.Cvm.GetChcHosts.InvokeAsync(new Tencentcloud.Cvm.GetChcHostsArgs
+        ///         ChcIds = new[]
         ///         {
-        ///             ChcIds = 
+        ///             "chc-xxxxxx",
+        ///         },
+        ///         Filters = new[]
+        ///         {
+        ///             new Tencentcloud.Cvm.Inputs.GetChcHostsFilterInputArgs
         ///             {
-        ///                 "chc-xxxxxx",
-        ///             },
-        ///             Filters = 
-        ///             {
-        ///                 new Tencentcloud.Cvm.Inputs.GetChcHostsFilterArgs
+        ///                 Name = "zone",
+        ///                 Values = new[]
         ///                 {
-        ///                     Name = "zone",
-        ///                     Values = 
-        ///                     {
-        ///                         "ap-guangzhou-7",
-        ///                     },
+        ///                     "ap-guangzhou-7",
         ///                 },
         ///             },
-        ///         }));
-        ///     }
+        ///         },
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetChcHostsResult> Invoke(GetChcHostsInvokeArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetChcHostsResult>("tencentcloud:Cvm/getChcHosts:getChcHosts", args ?? new GetChcHostsInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetChcHostsResult>("tencentcloud:Cvm/getChcHosts:getChcHosts", args ?? new GetChcHostsInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetChcHostsArgs : Pulumi.InvokeArgs
+    public sealed class GetChcHostsArgs : global::Pulumi.InvokeArgs
     {
         [Input("chcIds")]
         private List<string>? _chcIds;
@@ -118,7 +112,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cvm
         private List<Inputs.GetChcHostsFilterArgs>? _filters;
 
         /// <summary>
-        /// - `zone` Filter by the availability zone, such as ap-guangzhou-1. Valid values: See [Regions and Availability Zones](https://www.tencentcloud.com/document/product/213/6091?from_cn_redirect=1).
+        /// `zone` Filter by the availability zone, such as ap-guangzhou-1. Valid values: See [Regions and Availability Zones](https://www.tencentcloud.com/document/product/213/6091?from_cn_redirect=1).
         /// - `instance-name` Filter by the instance name.
         /// - `instance-state` Filter by the instance status. For status details, see [InstanceStatus](https://www.tencentcloud.com/document/api/213/15753?from_cn_redirect=1#InstanceStatus).
         /// - `device-type` Filter by the device type.
@@ -140,9 +134,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cvm
         public GetChcHostsArgs()
         {
         }
+        public static new GetChcHostsArgs Empty => new GetChcHostsArgs();
     }
 
-    public sealed class GetChcHostsInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetChcHostsInvokeArgs : global::Pulumi.InvokeArgs
     {
         [Input("chcIds")]
         private InputList<string>? _chcIds;
@@ -160,7 +155,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cvm
         private InputList<Inputs.GetChcHostsFilterInputArgs>? _filters;
 
         /// <summary>
-        /// - `zone` Filter by the availability zone, such as ap-guangzhou-1. Valid values: See [Regions and Availability Zones](https://www.tencentcloud.com/document/product/213/6091?from_cn_redirect=1).
+        /// `zone` Filter by the availability zone, such as ap-guangzhou-1. Valid values: See [Regions and Availability Zones](https://www.tencentcloud.com/document/product/213/6091?from_cn_redirect=1).
         /// - `instance-name` Filter by the instance name.
         /// - `instance-state` Filter by the instance status. For status details, see [InstanceStatus](https://www.tencentcloud.com/document/api/213/15753?from_cn_redirect=1#InstanceStatus).
         /// - `device-type` Filter by the device type.
@@ -182,6 +177,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cvm
         public GetChcHostsInvokeArgs()
         {
         }
+        public static new GetChcHostsInvokeArgs Empty => new GetChcHostsInvokeArgs();
     }
 
 

@@ -15,40 +15,42 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cvm
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = Pulumi.Tencentcloud;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var myFavoriteImage = Tencentcloud.Images.GetInstance.Invoke(new()
     ///     {
-    ///         var myFavoriteImage = Output.Create(Tencentcloud.Images.GetInstance.InvokeAsync(new Tencentcloud.Images.GetInstanceArgs
+    ///         ImageTypes = new[]
     ///         {
-    ///             ImageTypes = 
-    ///             {
-    ///                 "PUBLIC_IMAGE",
-    ///             },
-    ///             ImageNameRegex = "Final",
-    ///         }));
-    ///         var demo = new Tencentcloud.Cvm.LaunchTemplate("demo", new Tencentcloud.Cvm.LaunchTemplateArgs
-    ///         {
-    ///             LaunchTemplateName = "test",
-    ///             Placement = new Tencentcloud.Cvm.Inputs.LaunchTemplatePlacementArgs
-    ///             {
-    ///                 Zone = "ap-guangzhou-6",
-    ///                 ProjectId = 0,
-    ///             },
-    ///             ImageId = myFavoriteImage.Apply(myFavoriteImage =&gt; myFavoriteImage.Images?[0]?.ImageId),
-    ///         });
-    ///     }
+    ///             "PUBLIC_IMAGE",
+    ///         },
+    ///         ImageNameRegex = "Final",
+    ///     });
     /// 
-    /// }
+    ///     var demo = new Tencentcloud.Cvm.LaunchTemplate("demo", new()
+    ///     {
+    ///         LaunchTemplateName = "test",
+    ///         Placement = new Tencentcloud.Cvm.Inputs.LaunchTemplatePlacementArgs
+    ///         {
+    ///             Zone = "ap-guangzhou-6",
+    ///             ProjectId = 0,
+    ///         },
+    ///         ImageId = myFavoriteImage.Apply(getInstanceResult =&gt; getInstanceResult.Images[0]?.ImageId),
+    ///     });
+    /// 
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Cvm/launchTemplate:LaunchTemplate")]
-    public partial class LaunchTemplate : Pulumi.CustomResource
+    public partial class LaunchTemplate : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Timed task.
@@ -263,7 +265,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cvm
         }
     }
 
-    public sealed class LaunchTemplateArgs : Pulumi.ResourceArgs
+    public sealed class LaunchTemplateArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Timed task.
@@ -466,9 +468,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cvm
         public LaunchTemplateArgs()
         {
         }
+        public static new LaunchTemplateArgs Empty => new LaunchTemplateArgs();
     }
 
-    public sealed class LaunchTemplateState : Pulumi.ResourceArgs
+    public sealed class LaunchTemplateState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Timed task.
@@ -671,5 +674,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cvm
         public LaunchTemplateState()
         {
         }
+        public static new LaunchTemplateState Empty => new LaunchTemplateState();
     }
 }

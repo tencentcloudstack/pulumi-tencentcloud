@@ -12,91 +12,9 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Redis
 {
     /// <summary>
     /// Provides a resource to create a redis switch_master
-    /// 
-    /// ## Example Usage
-    /// 
-    /// ```csharp
-    /// using Pulumi;
-    /// using Tencentcloud = Pulumi.Tencentcloud;
-    /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
-    /// 
-    /// class MyStack : Stack
-    /// {
-    ///     public MyStack()
-    ///     {
-    ///         var zone = Output.Create(Tencentcloud.Redis.GetZoneConfig.InvokeAsync(new Tencentcloud.Redis.GetZoneConfigArgs
-    ///         {
-    ///             TypeId = 7,
-    ///             Region = "ap-guangzhou",
-    ///         }));
-    ///         var config = new Config();
-    ///         var replicaZoneIds = config.GetObject&lt;dynamic&gt;("replicaZoneIds") ?? 
-    ///         {
-    ///             100004,
-    ///             100006,
-    ///         };
-    ///         var vpc = new Tencentcloud.Vpc.Instance("vpc", new Tencentcloud.Vpc.InstanceArgs
-    ///         {
-    ///             CidrBlock = "10.0.0.0/16",
-    ///         });
-    ///         var subnet = new Tencentcloud.Subnet.Instance("subnet", new Tencentcloud.Subnet.InstanceArgs
-    ///         {
-    ///             VpcId = vpc.Id,
-    ///             AvailabilityZone = zone.Apply(zone =&gt; zone.Lists?[2]?.Zone),
-    ///             CidrBlock = "10.0.1.0/24",
-    ///         });
-    ///         var fooGroup = new Tencentcloud.Security.Group("fooGroup", new Tencentcloud.Security.GroupArgs
-    ///         {
-    ///         });
-    ///         var fooGroupLiteRule = new Tencentcloud.Security.GroupLiteRule("fooGroupLiteRule", new Tencentcloud.Security.GroupLiteRuleArgs
-    ///         {
-    ///             SecurityGroupId = fooGroup.Id,
-    ///             Ingresses = 
-    ///             {
-    ///                 "ACCEPT#192.168.1.0/24#80#TCP",
-    ///                 "DROP#8.8.8.8#80,90#UDP",
-    ///                 "DROP#0.0.0.0/0#80-90#TCP",
-    ///             },
-    ///             Egresses = 
-    ///             {
-    ///                 "ACCEPT#192.168.0.0/16#ALL#TCP",
-    ///                 "ACCEPT#10.0.0.0/8#ALL#ICMP",
-    ///                 "DROP#0.0.0.0/0#ALL#ALL",
-    ///             },
-    ///         });
-    ///         var fooInstance = new Tencentcloud.Redis.Instance("fooInstance", new Tencentcloud.Redis.InstanceArgs
-    ///         {
-    ///             AvailabilityZone = zone.Apply(zone =&gt; zone.Lists?[2]?.Zone),
-    ///             TypeId = zone.Apply(zone =&gt; zone.Lists?[2]?.TypeId),
-    ///             Password = "test12345789",
-    ///             MemSize = 8192,
-    ///             RedisShardNum = zone.Apply(zone =&gt; zone.Lists?[2]?.RedisShardNums?[0]),
-    ///             RedisReplicasNum = 2,
-    ///             ReplicaZoneIds = replicaZoneIds,
-    ///             Port = 6379,
-    ///             VpcId = vpc.Id,
-    ///             SubnetId = subnet.Id,
-    ///             SecurityGroups = 
-    ///             {
-    ///                 fooGroup.Id,
-    ///             },
-    ///         });
-    ///         var fooInstanceZoneInfo = Tencentcloud.Redis.GetInstanceZoneInfo.Invoke(new Tencentcloud.Redis.GetInstanceZoneInfoInvokeArgs
-    ///         {
-    ///             InstanceId = fooInstance.Id,
-    ///         });
-    ///         var switchMaster = new Tencentcloud.Redis.SwitchMaster("switchMaster", new Tencentcloud.Redis.SwitchMasterArgs
-    ///         {
-    ///             InstanceId = fooInstance.Id,
-    ///             GroupId = fooInstanceZoneInfo.Apply(fooInstanceZoneInfo =&gt; fooInstanceZoneInfo.ReplicaGroups?[1]?.GroupId),
-    ///         });
-    ///     }
-    /// 
-    /// }
-    /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Redis/switchMaster:SwitchMaster")]
-    public partial class SwitchMaster : Pulumi.CustomResource
+    public partial class SwitchMaster : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Replication group ID, required for multi-AZ instances.
@@ -155,7 +73,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Redis
         }
     }
 
-    public sealed class SwitchMasterArgs : Pulumi.ResourceArgs
+    public sealed class SwitchMasterArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Replication group ID, required for multi-AZ instances.
@@ -172,9 +90,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Redis
         public SwitchMasterArgs()
         {
         }
+        public static new SwitchMasterArgs Empty => new SwitchMasterArgs();
     }
 
-    public sealed class SwitchMasterState : Pulumi.ResourceArgs
+    public sealed class SwitchMasterState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Replication group ID, required for multi-AZ instances.
@@ -191,5 +110,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Redis
         public SwitchMasterState()
         {
         }
+        public static new SwitchMasterState Empty => new SwitchMasterState();
     }
 }

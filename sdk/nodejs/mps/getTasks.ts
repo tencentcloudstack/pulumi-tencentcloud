@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,22 +11,21 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const tasks = pulumi.output(tencentcloud.Mps.getTasks({
+ * const tasks = tencentcloud.Mps.getTasks({
  *     limit: 20,
  *     status: "FINISH",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getTasks(args: GetTasksArgs, opts?: pulumi.InvokeOptions): Promise<GetTasksResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Mps/getTasks:getTasks", {
         "limit": args.limit,
         "resultOutputFile": args.resultOutputFile,
@@ -73,9 +73,25 @@ export interface GetTasksResult {
      */
     readonly taskSets: outputs.Mps.GetTasksTaskSet[];
 }
-
+/**
+ * Use this data source to query detailed information of mps tasks
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const tasks = tencentcloud.Mps.getTasks({
+ *     limit: 20,
+ *     status: "FINISH",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getTasksOutput(args: GetTasksOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetTasksResult> {
-    return pulumi.output(args).apply(a => getTasks(a, opts))
+    return pulumi.output(args).apply((a: any) => getTasks(a, opts))
 }
 
 /**

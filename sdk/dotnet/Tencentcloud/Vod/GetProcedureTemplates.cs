@@ -15,132 +15,128 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vod
         /// <summary>
         /// Use this data source to query detailed information of VOD procedure templates.
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var fooProcedureTemplate = new Tencentcloud.Vod.ProcedureTemplate("fooProcedureTemplate", new()
         ///     {
-        ///         var fooProcedureTemplate = new Tencentcloud.Vod.ProcedureTemplate("fooProcedureTemplate", new Tencentcloud.Vod.ProcedureTemplateArgs
+        ///         Comment = "test",
+        ///         MediaProcessTask = new Tencentcloud.Vod.Inputs.ProcedureTemplateMediaProcessTaskArgs
         ///         {
-        ///             Comment = "test",
-        ///             MediaProcessTask = new Tencentcloud.Vod.Inputs.ProcedureTemplateMediaProcessTaskArgs
+        ///             AdaptiveDynamicStreamingTaskLists = new[]
         ///             {
-        ///                 AdaptiveDynamicStreamingTaskLists = 
+        ///                 new Tencentcloud.Vod.Inputs.ProcedureTemplateMediaProcessTaskAdaptiveDynamicStreamingTaskListArgs
         ///                 {
-        ///                     new Tencentcloud.Vod.Inputs.ProcedureTemplateMediaProcessTaskAdaptiveDynamicStreamingTaskListArgs
-        ///                     {
-        ///                         Definition = tencentcloud_vod_adaptive_dynamic_streaming_template.Foo.Id,
-        ///                     },
+        ///                     Definition = tencentcloud_vod_adaptive_dynamic_streaming_template.Foo.Id,
         ///                 },
-        ///                 SnapshotByTimeOffsetTaskLists = 
+        ///             },
+        ///             SnapshotByTimeOffsetTaskLists = new[]
+        ///             {
+        ///                 new Tencentcloud.Vod.Inputs.ProcedureTemplateMediaProcessTaskSnapshotByTimeOffsetTaskListArgs
         ///                 {
-        ///                     new Tencentcloud.Vod.Inputs.ProcedureTemplateMediaProcessTaskSnapshotByTimeOffsetTaskListArgs
+        ///                     Definition = tencentcloud_vod_snapshot_by_time_offset_template.Foo.Id,
+        ///                     ExtTimeOffsetLists = new[]
         ///                     {
-        ///                         Definition = tencentcloud_vod_snapshot_by_time_offset_template.Foo.Id,
-        ///                         ExtTimeOffsetLists = 
-        ///                         {
-        ///                             "3.5s",
-        ///                         },
-        ///                     },
-        ///                 },
-        ///                 ImageSpriteTaskLists = 
-        ///                 {
-        ///                     new Tencentcloud.Vod.Inputs.ProcedureTemplateMediaProcessTaskImageSpriteTaskListArgs
-        ///                     {
-        ///                         Definition = tencentcloud_vod_image_sprite_template.Foo.Id,
+        ///                         "3.5s",
         ///                     },
         ///                 },
         ///             },
-        ///         });
-        ///         var fooProcedureTemplates = Tencentcloud.Vod.GetProcedureTemplates.Invoke(new Tencentcloud.Vod.GetProcedureTemplatesInvokeArgs
-        ///         {
-        ///             Type = "Custom",
-        ///             Name = fooProcedureTemplate.Id,
-        ///         });
-        ///     }
+        ///             ImageSpriteTaskLists = new[]
+        ///             {
+        ///                 new Tencentcloud.Vod.Inputs.ProcedureTemplateMediaProcessTaskImageSpriteTaskListArgs
+        ///                 {
+        ///                     Definition = tencentcloud_vod_image_sprite_template.Foo.Id,
+        ///                 },
+        ///             },
+        ///         },
+        ///     });
         /// 
-        /// }
+        ///     var fooProcedureTemplates = Tencentcloud.Vod.GetProcedureTemplates.Invoke(new()
+        ///     {
+        ///         Type = "Custom",
+        ///         Name = fooProcedureTemplate.Id,
+        ///     });
+        /// 
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetProcedureTemplatesResult> InvokeAsync(GetProcedureTemplatesArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetProcedureTemplatesResult>("tencentcloud:Vod/getProcedureTemplates:getProcedureTemplates", args ?? new GetProcedureTemplatesArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetProcedureTemplatesResult>("tencentcloud:Vod/getProcedureTemplates:getProcedureTemplates", args ?? new GetProcedureTemplatesArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of VOD procedure templates.
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var fooProcedureTemplate = new Tencentcloud.Vod.ProcedureTemplate("fooProcedureTemplate", new()
         ///     {
-        ///         var fooProcedureTemplate = new Tencentcloud.Vod.ProcedureTemplate("fooProcedureTemplate", new Tencentcloud.Vod.ProcedureTemplateArgs
+        ///         Comment = "test",
+        ///         MediaProcessTask = new Tencentcloud.Vod.Inputs.ProcedureTemplateMediaProcessTaskArgs
         ///         {
-        ///             Comment = "test",
-        ///             MediaProcessTask = new Tencentcloud.Vod.Inputs.ProcedureTemplateMediaProcessTaskArgs
+        ///             AdaptiveDynamicStreamingTaskLists = new[]
         ///             {
-        ///                 AdaptiveDynamicStreamingTaskLists = 
+        ///                 new Tencentcloud.Vod.Inputs.ProcedureTemplateMediaProcessTaskAdaptiveDynamicStreamingTaskListArgs
         ///                 {
-        ///                     new Tencentcloud.Vod.Inputs.ProcedureTemplateMediaProcessTaskAdaptiveDynamicStreamingTaskListArgs
-        ///                     {
-        ///                         Definition = tencentcloud_vod_adaptive_dynamic_streaming_template.Foo.Id,
-        ///                     },
+        ///                     Definition = tencentcloud_vod_adaptive_dynamic_streaming_template.Foo.Id,
         ///                 },
-        ///                 SnapshotByTimeOffsetTaskLists = 
+        ///             },
+        ///             SnapshotByTimeOffsetTaskLists = new[]
+        ///             {
+        ///                 new Tencentcloud.Vod.Inputs.ProcedureTemplateMediaProcessTaskSnapshotByTimeOffsetTaskListArgs
         ///                 {
-        ///                     new Tencentcloud.Vod.Inputs.ProcedureTemplateMediaProcessTaskSnapshotByTimeOffsetTaskListArgs
+        ///                     Definition = tencentcloud_vod_snapshot_by_time_offset_template.Foo.Id,
+        ///                     ExtTimeOffsetLists = new[]
         ///                     {
-        ///                         Definition = tencentcloud_vod_snapshot_by_time_offset_template.Foo.Id,
-        ///                         ExtTimeOffsetLists = 
-        ///                         {
-        ///                             "3.5s",
-        ///                         },
-        ///                     },
-        ///                 },
-        ///                 ImageSpriteTaskLists = 
-        ///                 {
-        ///                     new Tencentcloud.Vod.Inputs.ProcedureTemplateMediaProcessTaskImageSpriteTaskListArgs
-        ///                     {
-        ///                         Definition = tencentcloud_vod_image_sprite_template.Foo.Id,
+        ///                         "3.5s",
         ///                     },
         ///                 },
         ///             },
-        ///         });
-        ///         var fooProcedureTemplates = Tencentcloud.Vod.GetProcedureTemplates.Invoke(new Tencentcloud.Vod.GetProcedureTemplatesInvokeArgs
-        ///         {
-        ///             Type = "Custom",
-        ///             Name = fooProcedureTemplate.Id,
-        ///         });
-        ///     }
+        ///             ImageSpriteTaskLists = new[]
+        ///             {
+        ///                 new Tencentcloud.Vod.Inputs.ProcedureTemplateMediaProcessTaskImageSpriteTaskListArgs
+        ///                 {
+        ///                     Definition = tencentcloud_vod_image_sprite_template.Foo.Id,
+        ///                 },
+        ///             },
+        ///         },
+        ///     });
         /// 
-        /// }
+        ///     var fooProcedureTemplates = Tencentcloud.Vod.GetProcedureTemplates.Invoke(new()
+        ///     {
+        ///         Type = "Custom",
+        ///         Name = fooProcedureTemplate.Id,
+        ///     });
+        /// 
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetProcedureTemplatesResult> Invoke(GetProcedureTemplatesInvokeArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetProcedureTemplatesResult>("tencentcloud:Vod/getProcedureTemplates:getProcedureTemplates", args ?? new GetProcedureTemplatesInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetProcedureTemplatesResult>("tencentcloud:Vod/getProcedureTemplates:getProcedureTemplates", args ?? new GetProcedureTemplatesInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetProcedureTemplatesArgs : Pulumi.InvokeArgs
+    public sealed class GetProcedureTemplatesArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Name of procedure template.
@@ -169,9 +165,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vod
         public GetProcedureTemplatesArgs()
         {
         }
+        public static new GetProcedureTemplatesArgs Empty => new GetProcedureTemplatesArgs();
     }
 
-    public sealed class GetProcedureTemplatesInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetProcedureTemplatesInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Name of procedure template.
@@ -200,6 +197,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vod
         public GetProcedureTemplatesInvokeArgs()
         {
         }
+        public static new GetProcedureTemplatesInvokeArgs Empty => new GetProcedureTemplatesInvokeArgs();
     }
 
 

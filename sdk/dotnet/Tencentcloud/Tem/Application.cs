@@ -15,35 +15,36 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tem
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var application = new Tencentcloud.Tem.Application("application", new()
     ///     {
-    ///         var application = new Tencentcloud.Tem.Application("application", new Tencentcloud.Tem.ApplicationArgs
+    ///         ApplicationName = "demo",
+    ///         CodingLanguage = "JAVA",
+    ///         Description = "demo for test",
+    ///         RepoName = "qcloud/nginx",
+    ///         RepoServer = "ccr.ccs.tencentyun.com",
+    ///         RepoType = 2,
+    ///         Tags = 
     ///         {
-    ///             ApplicationName = "demo",
-    ///             CodingLanguage = "JAVA",
-    ///             Description = "demo for test",
-    ///             RepoName = "qcloud/nginx",
-    ///             RepoServer = "ccr.ccs.tencentyun.com",
-    ///             RepoType = 2,
-    ///             Tags = 
-    ///             {
-    ///                 { "created", "terraform" },
-    ///             },
-    ///             UseDefaultImageService = 0,
-    ///         });
-    ///     }
+    ///             { "created", "terraform" },
+    ///         },
+    ///         UseDefaultImageService = 0,
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Tem/application:Application")]
-    public partial class Application : Pulumi.CustomResource
+    public partial class Application : global::Pulumi.CustomResource
     {
         /// <summary>
         /// application name.
@@ -144,7 +145,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tem
         }
     }
 
-    public sealed class ApplicationArgs : Pulumi.ResourceArgs
+    public sealed class ApplicationArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// application name.
@@ -209,9 +210,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tem
         public ApplicationArgs()
         {
         }
+        public static new ApplicationArgs Empty => new ApplicationArgs();
     }
 
-    public sealed class ApplicationState : Pulumi.ResourceArgs
+    public sealed class ApplicationState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// application name.
@@ -276,5 +278,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tem
         public ApplicationState()
         {
         }
+        public static new ApplicationState Empty => new ApplicationState();
     }
 }

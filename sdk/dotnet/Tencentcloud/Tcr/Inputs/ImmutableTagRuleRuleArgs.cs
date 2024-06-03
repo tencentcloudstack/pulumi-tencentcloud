@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcr.Inputs
 {
 
-    public sealed class ImmutableTagRuleRuleArgs : Pulumi.ResourceArgs
+    public sealed class ImmutableTagRuleRuleArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// disable rule.
@@ -25,6 +25,9 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcr.Inputs
         [Input("id")]
         public Input<int>? Id { get; set; }
 
+        /// <summary>
+        /// namespace name.
+        /// </summary>
         [Input("nsName")]
         public Input<string>? NsName { get; set; }
 
@@ -55,5 +58,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcr.Inputs
         public ImmutableTagRuleRuleArgs()
         {
         }
+        public static new ImmutableTagRuleRuleArgs Empty => new ImmutableTagRuleRuleArgs();
     }
 }

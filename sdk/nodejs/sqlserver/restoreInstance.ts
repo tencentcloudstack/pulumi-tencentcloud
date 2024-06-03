@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,11 +11,12 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const restoreInstance = new tencentcloud.Sqlserver.RestoreInstance("restore_instance", {
+ * const restoreInstance = new tencentcloud.sqlserver.RestoreInstance("restoreInstance", {
  *     backupId: 3482091273,
  *     instanceId: "mssql-qelbzgwf",
  *     renameRestores: [{
@@ -23,13 +25,14 @@ import * as utilities from "../utilities";
  *     }],
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * sqlserver restore_instance can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Sqlserver/restoreInstance:RestoreInstance restore_instance mssql-qelbzgwf#3482091273#keep_pubsub_db2#restore_keep_pubsub_db2
+ * $ pulumi import tencentcloud:Sqlserver/restoreInstance:RestoreInstance restore_instance mssql-qelbzgwf#3482091273#keep_pubsub_db2#restore_keep_pubsub_db2
  * ```
  */
 export class RestoreInstance extends pulumi.CustomResource {

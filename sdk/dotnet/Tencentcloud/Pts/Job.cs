@@ -15,36 +15,37 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Pts
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var job = new Tencentcloud.Pts.Job("job", new()
     ///     {
-    ///         var job = new Tencentcloud.Pts.Job("job", new Tencentcloud.Pts.JobArgs
-    ///         {
-    ///             JobOwner = "username",
-    ///             Note = "desc",
-    ///             ProjectId = "project-45vw7v82",
-    ///             ScenarioId = "scenario-22q19f3k",
-    ///         });
-    ///     }
+    ///         JobOwner = "username",
+    ///         Note = "desc",
+    ///         ProjectId = "project-45vw7v82",
+    ///         ScenarioId = "scenario-22q19f3k",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// pts job can be imported using the projectId#scenarioId#jobId, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Pts/job:Job job project-45vw7v82#scenario-22q19f3k#job-dtm93vx0
+    /// $ pulumi import tencentcloud:Pts/job:Job job project-45vw7v82#scenario-22q19f3k#job-dtm93vx0
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Pts/job:Job")]
-    public partial class Job : Pulumi.CustomResource
+    public partial class Job : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Cause of interruption.
@@ -283,7 +284,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Pts
         }
     }
 
-    public sealed class JobArgs : Pulumi.ResourceArgs
+    public sealed class JobArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Whether to debug.
@@ -318,9 +319,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Pts
         public JobArgs()
         {
         }
+        public static new JobArgs Empty => new JobArgs();
     }
 
-    public sealed class JobState : Pulumi.ResourceArgs
+    public sealed class JobState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Cause of interruption.
@@ -559,5 +561,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Pts
         public JobState()
         {
         }
+        public static new JobState Empty => new JobState();
     }
 }

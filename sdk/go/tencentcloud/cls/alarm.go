@@ -7,83 +7,91 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a cls alarm
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Cls"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cls"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cls"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Cls.NewAlarm(ctx, "alarm", &Cls.AlarmArgs{
-// 			AlarmNoticeIds: pulumi.StringArray{
-// 				pulumi.String("notice-0850756b-245d-4bc7-bb27-2a58fffc780b"),
-// 			},
-// 			AlarmPeriod: pulumi.Int(15),
-// 			AlarmTargets: cls.AlarmAlarmTargetArray{
-// 				&cls.AlarmAlarmTargetArgs{
-// 					EndTimeOffset:   pulumi.Int(0),
-// 					LogsetId:        pulumi.String("33aaf0ae-6163-411b-a415-9f27450f68db"),
-// 					Number:          pulumi.Int(1),
-// 					Query:           pulumi.String("status:>500 | select count(*) as errorCounts"),
-// 					StartTimeOffset: -15,
-// 					TopicId:         pulumi.String("88735a07-bea4-4985-8763-e9deb6da4fad"),
-// 				},
-// 			},
-// 			Analyses: cls.AlarmAnalysisArray{
-// 				&cls.AlarmAnalysisArgs{
-// 					ConfigInfos: cls.AlarmAnalysisConfigInfoArray{
-// 						&cls.AlarmAnalysisConfigInfoArgs{
-// 							Key:   pulumi.String("QueryIndex"),
-// 							Value: pulumi.String("1"),
-// 						},
-// 					},
-// 					Content: pulumi.String("__FILENAME__"),
-// 					Name:    pulumi.String("terraform"),
-// 					Type:    pulumi.String("field"),
-// 				},
-// 			},
-// 			Condition:       pulumi.String("test"),
-// 			MessageTemplate: pulumi.String("{{.Label}}"),
-// 			MonitorTime: &cls.AlarmMonitorTimeArgs{
-// 				Time: pulumi.Int(1),
-// 				Type: pulumi.String("Period"),
-// 			},
-// 			Status: pulumi.Bool(true),
-// 			Tags: pulumi.AnyMap{
-// 				"createdBy": pulumi.Any("terraform"),
-// 			},
-// 			TriggerCount: pulumi.Int(1),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Cls.NewAlarm(ctx, "example", &Cls.AlarmArgs{
+//				AlarmLevel: pulumi.Int(0),
+//				AlarmNoticeIds: pulumi.StringArray{
+//					pulumi.String("notice-0850756b-245d-4bc7-bb27-2a58fffc780b"),
+//				},
+//				AlarmPeriod: pulumi.Int(15),
+//				AlarmTargets: cls.AlarmAlarmTargetArray{
+//					&cls.AlarmAlarmTargetArgs{
+//						EndTimeOffset:   pulumi.Int(0),
+//						LogsetId:        pulumi.String("33aaf0ae-6163-411b-a415-9f27450f68db"),
+//						Number:          pulumi.Int(1),
+//						Query:           pulumi.String("status:>500 | select count(*) as errorCounts"),
+//						StartTimeOffset: -15,
+//						TopicId:         pulumi.String("88735a07-bea4-4985-8763-e9deb6da4fad"),
+//					},
+//				},
+//				Analyses: cls.AlarmAnalysisArray{
+//					&cls.AlarmAnalysisArgs{
+//						ConfigInfos: cls.AlarmAnalysisConfigInfoArray{
+//							&cls.AlarmAnalysisConfigInfoArgs{
+//								Key:   pulumi.String("QueryIndex"),
+//								Value: pulumi.String("1"),
+//							},
+//						},
+//						Content: pulumi.String("__FILENAME__"),
+//						Name:    pulumi.String("terraform"),
+//						Type:    pulumi.String("field"),
+//					},
+//				},
+//				Condition:       pulumi.String("test"),
+//				MessageTemplate: pulumi.String("{{.Label}}"),
+//				MonitorTime: &cls.AlarmMonitorTimeArgs{
+//					Time: pulumi.Int(1),
+//					Type: pulumi.String("Period"),
+//				},
+//				Status: pulumi.Bool(true),
+//				Tags: pulumi.Map{
+//					"createdBy": pulumi.Any("terraform"),
+//				},
+//				TriggerCount: pulumi.Int(1),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // cls alarm can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Cls/alarm:Alarm alarm alarm_id
+// $ pulumi import tencentcloud:Cls/alarm:Alarm example alarm-d8529662-e10f-440c-ba80-50f3dcf215a3
 // ```
 type Alarm struct {
 	pulumi.CustomResourceState
 
+	// Alarm level. 0: Warning; 1: Info; 2: Critical. Default is 0.
+	AlarmLevel pulumi.IntOutput `pulumi:"alarmLevel"`
 	// list of alarm notice id.
 	AlarmNoticeIds pulumi.StringArrayOutput `pulumi:"alarmNoticeIds"`
 	// alarm repeat cycle.
@@ -93,7 +101,7 @@ type Alarm struct {
 	// multidimensional analysis.
 	Analyses AlarmAnalysisArrayOutput `pulumi:"analyses"`
 	// user define callback.
-	CallBack AlarmCallBackPtrOutput `pulumi:"callBack"`
+	CallBack AlarmCallBackOutput `pulumi:"callBack"`
 	// triggering conditions.
 	Condition pulumi.StringOutput `pulumi:"condition"`
 	// user define alarm notice.
@@ -103,7 +111,7 @@ type Alarm struct {
 	// log alarm name.
 	Name pulumi.StringOutput `pulumi:"name"`
 	// whether to enable the alarm policy.
-	Status pulumi.BoolPtrOutput `pulumi:"status"`
+	Status pulumi.BoolOutput `pulumi:"status"`
 	// Tag description list.
 	Tags pulumi.MapOutput `pulumi:"tags"`
 	// continuous cycle.
@@ -135,7 +143,7 @@ func NewAlarm(ctx *pulumi.Context,
 	if args.TriggerCount == nil {
 		return nil, errors.New("invalid value for required argument 'TriggerCount'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource Alarm
 	err := ctx.RegisterResource("tencentcloud:Cls/alarm:Alarm", name, args, &resource, opts...)
 	if err != nil {
@@ -158,6 +166,8 @@ func GetAlarm(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering Alarm resources.
 type alarmState struct {
+	// Alarm level. 0: Warning; 1: Info; 2: Critical. Default is 0.
+	AlarmLevel *int `pulumi:"alarmLevel"`
 	// list of alarm notice id.
 	AlarmNoticeIds []string `pulumi:"alarmNoticeIds"`
 	// alarm repeat cycle.
@@ -185,6 +195,8 @@ type alarmState struct {
 }
 
 type AlarmState struct {
+	// Alarm level. 0: Warning; 1: Info; 2: Critical. Default is 0.
+	AlarmLevel pulumi.IntPtrInput
 	// list of alarm notice id.
 	AlarmNoticeIds pulumi.StringArrayInput
 	// alarm repeat cycle.
@@ -216,6 +228,8 @@ func (AlarmState) ElementType() reflect.Type {
 }
 
 type alarmArgs struct {
+	// Alarm level. 0: Warning; 1: Info; 2: Critical. Default is 0.
+	AlarmLevel *int `pulumi:"alarmLevel"`
 	// list of alarm notice id.
 	AlarmNoticeIds []string `pulumi:"alarmNoticeIds"`
 	// alarm repeat cycle.
@@ -244,6 +258,8 @@ type alarmArgs struct {
 
 // The set of arguments for constructing a Alarm resource.
 type AlarmArgs struct {
+	// Alarm level. 0: Warning; 1: Info; 2: Critical. Default is 0.
+	AlarmLevel pulumi.IntPtrInput
 	// list of alarm notice id.
 	AlarmNoticeIds pulumi.StringArrayInput
 	// alarm repeat cycle.
@@ -296,7 +312,7 @@ func (i *Alarm) ToAlarmOutputWithContext(ctx context.Context) AlarmOutput {
 // AlarmArrayInput is an input type that accepts AlarmArray and AlarmArrayOutput values.
 // You can construct a concrete instance of `AlarmArrayInput` via:
 //
-//          AlarmArray{ AlarmArgs{...} }
+//	AlarmArray{ AlarmArgs{...} }
 type AlarmArrayInput interface {
 	pulumi.Input
 
@@ -321,7 +337,7 @@ func (i AlarmArray) ToAlarmArrayOutputWithContext(ctx context.Context) AlarmArra
 // AlarmMapInput is an input type that accepts AlarmMap and AlarmMapOutput values.
 // You can construct a concrete instance of `AlarmMapInput` via:
 //
-//          AlarmMap{ "key": AlarmArgs{...} }
+//	AlarmMap{ "key": AlarmArgs{...} }
 type AlarmMapInput interface {
 	pulumi.Input
 
@@ -357,6 +373,11 @@ func (o AlarmOutput) ToAlarmOutputWithContext(ctx context.Context) AlarmOutput {
 	return o
 }
 
+// Alarm level. 0: Warning; 1: Info; 2: Critical. Default is 0.
+func (o AlarmOutput) AlarmLevel() pulumi.IntOutput {
+	return o.ApplyT(func(v *Alarm) pulumi.IntOutput { return v.AlarmLevel }).(pulumi.IntOutput)
+}
+
 // list of alarm notice id.
 func (o AlarmOutput) AlarmNoticeIds() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v *Alarm) pulumi.StringArrayOutput { return v.AlarmNoticeIds }).(pulumi.StringArrayOutput)
@@ -378,8 +399,8 @@ func (o AlarmOutput) Analyses() AlarmAnalysisArrayOutput {
 }
 
 // user define callback.
-func (o AlarmOutput) CallBack() AlarmCallBackPtrOutput {
-	return o.ApplyT(func(v *Alarm) AlarmCallBackPtrOutput { return v.CallBack }).(AlarmCallBackPtrOutput)
+func (o AlarmOutput) CallBack() AlarmCallBackOutput {
+	return o.ApplyT(func(v *Alarm) AlarmCallBackOutput { return v.CallBack }).(AlarmCallBackOutput)
 }
 
 // triggering conditions.
@@ -403,8 +424,8 @@ func (o AlarmOutput) Name() pulumi.StringOutput {
 }
 
 // whether to enable the alarm policy.
-func (o AlarmOutput) Status() pulumi.BoolPtrOutput {
-	return o.ApplyT(func(v *Alarm) pulumi.BoolPtrOutput { return v.Status }).(pulumi.BoolPtrOutput)
+func (o AlarmOutput) Status() pulumi.BoolOutput {
+	return o.ApplyT(func(v *Alarm) pulumi.BoolOutput { return v.Status }).(pulumi.BoolOutput)
 }
 
 // Tag description list.

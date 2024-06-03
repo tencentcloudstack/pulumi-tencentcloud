@@ -12,7 +12,7 @@ import * as utilities from "../utilities";
  * vpc dhcp_ip can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Vpc/dhcpIp:DhcpIp dhcp_ip dhcp_ip_id
+ * $ pulumi import tencentcloud:Vpc/dhcpIp:DhcpIp dhcp_ip dhcp_ip_id
  * ```
  */
 export class DhcpIp extends pulumi.CustomResource {

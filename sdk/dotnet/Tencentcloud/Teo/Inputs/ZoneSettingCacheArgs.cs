@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Inputs
 {
 
-    public sealed class ZoneSettingCacheArgs : Pulumi.ResourceArgs
+    public sealed class ZoneSettingCacheArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Cache configuration. Note: This field may return null, indicating that no valid value can be obtained.
@@ -34,5 +34,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Inputs
         public ZoneSettingCacheArgs()
         {
         }
+        public static new ZoneSettingCacheArgs Empty => new ZoneSettingCacheArgs();
     }
 }

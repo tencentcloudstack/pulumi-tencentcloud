@@ -15,26 +15,27 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var operation = new Tencentcloud.Mps.ExecuteFunctionOperation("operation", new()
     ///     {
-    ///         var operation = new Tencentcloud.Mps.ExecuteFunctionOperation("operation", new Tencentcloud.Mps.ExecuteFunctionOperationArgs
-    ///         {
-    ///             FunctionArg = "arg1",
-    ///             FunctionName = "ExampleFunc",
-    ///         });
-    ///     }
+    ///         FunctionArg = "arg1",
+    ///         FunctionName = "ExampleFunc",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Mps/executeFunctionOperation:ExecuteFunctionOperation")]
-    public partial class ExecuteFunctionOperation : Pulumi.CustomResource
+    public partial class ExecuteFunctionOperation : global::Pulumi.CustomResource
     {
         /// <summary>
         /// API parameter. Parameter format will depend on the actual function definition.
@@ -93,7 +94,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps
         }
     }
 
-    public sealed class ExecuteFunctionOperationArgs : Pulumi.ResourceArgs
+    public sealed class ExecuteFunctionOperationArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// API parameter. Parameter format will depend on the actual function definition.
@@ -110,9 +111,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps
         public ExecuteFunctionOperationArgs()
         {
         }
+        public static new ExecuteFunctionOperationArgs Empty => new ExecuteFunctionOperationArgs();
     }
 
-    public sealed class ExecuteFunctionOperationState : Pulumi.ResourceArgs
+    public sealed class ExecuteFunctionOperationState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// API parameter. Parameter format will depend on the actual function definition.
@@ -129,5 +131,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps
         public ExecuteFunctionOperationState()
         {
         }
+        public static new ExecuteFunctionOperationState Empty => new ExecuteFunctionOperationState();
     }
 }

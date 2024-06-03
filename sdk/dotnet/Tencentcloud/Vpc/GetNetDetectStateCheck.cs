@@ -15,78 +15,72 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         /// <summary>
         /// Use this data source to query detailed information of vpc net_detect_state_check
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var netDetectStateCheck = Tencentcloud.Vpc.GetNetDetectStateCheck.Invoke(new()
         ///     {
-        ///         var netDetectStateCheck = Output.Create(Tencentcloud.Vpc.GetNetDetectStateCheck.InvokeAsync(new Tencentcloud.Vpc.GetNetDetectStateCheckArgs
+        ///         DetectDestinationIps = new[]
         ///         {
-        ///             DetectDestinationIps = 
-        ///             {
-        ///                 "10.0.0.3",
-        ///                 "10.0.0.2",
-        ///             },
-        ///             NetDetectId = "netd-12345678",
-        ///             NextHopDestination = "10.0.0.4",
-        ///             NextHopType = "NORMAL_CVM",
-        ///         }));
-        ///     }
+        ///             "10.0.0.3",
+        ///             "10.0.0.2",
+        ///         },
+        ///         NetDetectId = "netd-12345678",
+        ///         NextHopDestination = "10.0.0.4",
+        ///         NextHopType = "NORMAL_CVM",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetNetDetectStateCheckResult> InvokeAsync(GetNetDetectStateCheckArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetNetDetectStateCheckResult>("tencentcloud:Vpc/getNetDetectStateCheck:getNetDetectStateCheck", args ?? new GetNetDetectStateCheckArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetNetDetectStateCheckResult>("tencentcloud:Vpc/getNetDetectStateCheck:getNetDetectStateCheck", args ?? new GetNetDetectStateCheckArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of vpc net_detect_state_check
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var netDetectStateCheck = Tencentcloud.Vpc.GetNetDetectStateCheck.Invoke(new()
         ///     {
-        ///         var netDetectStateCheck = Output.Create(Tencentcloud.Vpc.GetNetDetectStateCheck.InvokeAsync(new Tencentcloud.Vpc.GetNetDetectStateCheckArgs
+        ///         DetectDestinationIps = new[]
         ///         {
-        ///             DetectDestinationIps = 
-        ///             {
-        ///                 "10.0.0.3",
-        ///                 "10.0.0.2",
-        ///             },
-        ///             NetDetectId = "netd-12345678",
-        ///             NextHopDestination = "10.0.0.4",
-        ///             NextHopType = "NORMAL_CVM",
-        ///         }));
-        ///     }
+        ///             "10.0.0.3",
+        ///             "10.0.0.2",
+        ///         },
+        ///         NetDetectId = "netd-12345678",
+        ///         NextHopDestination = "10.0.0.4",
+        ///         NextHopType = "NORMAL_CVM",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetNetDetectStateCheckResult> Invoke(GetNetDetectStateCheckInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetNetDetectStateCheckResult>("tencentcloud:Vpc/getNetDetectStateCheck:getNetDetectStateCheck", args ?? new GetNetDetectStateCheckInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetNetDetectStateCheckResult>("tencentcloud:Vpc/getNetDetectStateCheck:getNetDetectStateCheck", args ?? new GetNetDetectStateCheckInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetNetDetectStateCheckArgs : Pulumi.InvokeArgs
+    public sealed class GetNetDetectStateCheckArgs : global::Pulumi.InvokeArgs
     {
         [Input("detectDestinationIps", required: true)]
         private List<string>? _detectDestinationIps;
@@ -145,9 +139,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         public GetNetDetectStateCheckArgs()
         {
         }
+        public static new GetNetDetectStateCheckArgs Empty => new GetNetDetectStateCheckArgs();
     }
 
-    public sealed class GetNetDetectStateCheckInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetNetDetectStateCheckInvokeArgs : global::Pulumi.InvokeArgs
     {
         [Input("detectDestinationIps", required: true)]
         private InputList<string>? _detectDestinationIps;
@@ -206,6 +201,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         public GetNetDetectStateCheckInvokeArgs()
         {
         }
+        public static new GetNetDetectStateCheckInvokeArgs Empty => new GetNetDetectStateCheckInvokeArgs();
     }
 
 

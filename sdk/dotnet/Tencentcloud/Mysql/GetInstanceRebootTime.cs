@@ -15,70 +15,64 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
         /// <summary>
         /// Use this data source to query detailed information of mysql instance_reboot_time
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var instanceRebootTime = Tencentcloud.Mysql.GetInstanceRebootTime.Invoke(new()
         ///     {
-        ///         var instanceRebootTime = Output.Create(Tencentcloud.Mysql.GetInstanceRebootTime.InvokeAsync(new Tencentcloud.Mysql.GetInstanceRebootTimeArgs
+        ///         InstanceIds = new[]
         ///         {
-        ///             InstanceIds = 
-        ///             {
-        ///                 "cdb-fitq5t9h",
-        ///             },
-        ///         }));
-        ///     }
+        ///             "cdb-fitq5t9h",
+        ///         },
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetInstanceRebootTimeResult> InvokeAsync(GetInstanceRebootTimeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetInstanceRebootTimeResult>("tencentcloud:Mysql/getInstanceRebootTime:getInstanceRebootTime", args ?? new GetInstanceRebootTimeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetInstanceRebootTimeResult>("tencentcloud:Mysql/getInstanceRebootTime:getInstanceRebootTime", args ?? new GetInstanceRebootTimeArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of mysql instance_reboot_time
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var instanceRebootTime = Tencentcloud.Mysql.GetInstanceRebootTime.Invoke(new()
         ///     {
-        ///         var instanceRebootTime = Output.Create(Tencentcloud.Mysql.GetInstanceRebootTime.InvokeAsync(new Tencentcloud.Mysql.GetInstanceRebootTimeArgs
+        ///         InstanceIds = new[]
         ///         {
-        ///             InstanceIds = 
-        ///             {
-        ///                 "cdb-fitq5t9h",
-        ///             },
-        ///         }));
-        ///     }
+        ///             "cdb-fitq5t9h",
+        ///         },
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetInstanceRebootTimeResult> Invoke(GetInstanceRebootTimeInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetInstanceRebootTimeResult>("tencentcloud:Mysql/getInstanceRebootTime:getInstanceRebootTime", args ?? new GetInstanceRebootTimeInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetInstanceRebootTimeResult>("tencentcloud:Mysql/getInstanceRebootTime:getInstanceRebootTime", args ?? new GetInstanceRebootTimeInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetInstanceRebootTimeArgs : Pulumi.InvokeArgs
+    public sealed class GetInstanceRebootTimeArgs : global::Pulumi.InvokeArgs
     {
         [Input("instanceIds", required: true)]
         private List<string>? _instanceIds;
@@ -101,9 +95,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
         public GetInstanceRebootTimeArgs()
         {
         }
+        public static new GetInstanceRebootTimeArgs Empty => new GetInstanceRebootTimeArgs();
     }
 
-    public sealed class GetInstanceRebootTimeInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetInstanceRebootTimeInvokeArgs : global::Pulumi.InvokeArgs
     {
         [Input("instanceIds", required: true)]
         private InputList<string>? _instanceIds;
@@ -126,6 +121,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
         public GetInstanceRebootTimeInvokeArgs()
         {
         }
+        public static new GetInstanceRebootTimeInvokeArgs Empty => new GetInstanceRebootTimeInvokeArgs();
     }
 
 

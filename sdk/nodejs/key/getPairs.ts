@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,25 +11,24 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const foo = pulumi.output(tencentcloud.Key.getPairs({
+ * const foo = tencentcloud.Key.getPairs({
  *     keyId: "skey-ie97i3ml",
- * }));
- * const name = pulumi.output(tencentcloud.Key.getPairs({
+ * });
+ * const name = tencentcloud.Key.getPairs({
  *     keyName: "^test$",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getPairs(args?: GetPairsArgs, opts?: pulumi.InvokeOptions): Promise<GetPairsResult> {
     args = args || {};
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Key/getPairs:getPairs", {
         "keyId": args.keyId,
         "keyName": args.keyName,
@@ -85,9 +85,27 @@ export interface GetPairsResult {
     readonly projectId?: number;
     readonly resultOutputFile?: string;
 }
-
+/**
+ * Use this data source to query key pairs.
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const foo = tencentcloud.Key.getPairs({
+ *     keyId: "skey-ie97i3ml",
+ * });
+ * const name = tencentcloud.Key.getPairs({
+ *     keyName: "^test$",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getPairsOutput(args?: GetPairsOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetPairsResult> {
-    return pulumi.output(args).apply(a => getPairs(a, opts))
+    return pulumi.output(args).apply((a: any) => getPairs(a, opts))
 }
 
 /**

@@ -8,10 +8,11 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 func GetRabbitmqNodeList(ctx *pulumi.Context, args *GetRabbitmqNodeListArgs, opts ...pulumi.InvokeOption) (*GetRabbitmqNodeListResult, error) {
-	opts = pkgInvokeDefaultOpts(opts)
+	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetRabbitmqNodeListResult
 	err := ctx.Invoke("tencentcloud:Tdmq/getRabbitmqNodeList:getRabbitmqNodeList", args, &rv, opts...)
 	if err != nil {

@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,22 +11,21 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const securityGroups = pulumi.output(tencentcloud.Mariadb.getSecurityGroups({
+ * const securityGroups = tencentcloud.Mariadb.getSecurityGroups({
  *     instanceId: "tdsql-4pzs5b67",
  *     product: "mariadb",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getSecurityGroups(args: GetSecurityGroupsArgs, opts?: pulumi.InvokeOptions): Promise<GetSecurityGroupsResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Mariadb/getSecurityGroups:getSecurityGroups", {
         "instanceId": args.instanceId,
         "product": args.product,
@@ -67,9 +67,25 @@ export interface GetSecurityGroupsResult {
     readonly product: string;
     readonly resultOutputFile?: string;
 }
-
+/**
+ * Use this data source to query detailed information of mariadb securityGroups
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const securityGroups = tencentcloud.Mariadb.getSecurityGroups({
+ *     instanceId: "tdsql-4pzs5b67",
+ *     product: "mariadb",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getSecurityGroupsOutput(args: GetSecurityGroupsOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetSecurityGroupsResult> {
-    return pulumi.output(args).apply(a => getSecurityGroups(a, opts))
+    return pulumi.output(args).apply((a: any) => getSecurityGroups(a, opts))
 }
 
 /**

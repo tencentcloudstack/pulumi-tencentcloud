@@ -15,78 +15,72 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
         /// <summary>
         /// Use this data source to query detailed information of mysql error_log
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var errorLog = Tencentcloud.Mysql.GetErrorLog.Invoke(new()
         ///     {
-        ///         var errorLog = Output.Create(Tencentcloud.Mysql.GetErrorLog.InvokeAsync(new Tencentcloud.Mysql.GetErrorLogArgs
+        ///         EndTime = 1686043908,
+        ///         InstType = "slave",
+        ///         InstanceId = "cdb-fitq5t9h",
+        ///         KeyWords = new[]
         ///         {
-        ///             EndTime = 1686043908,
-        ///             InstType = "slave",
-        ///             InstanceId = "cdb-fitq5t9h",
-        ///             KeyWords = 
-        ///             {
-        ///                 "Shutting",
-        ///             },
-        ///             StartTime = 1683538307,
-        ///         }));
-        ///     }
+        ///             "Shutting",
+        ///         },
+        ///         StartTime = 1683538307,
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetErrorLogResult> InvokeAsync(GetErrorLogArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetErrorLogResult>("tencentcloud:Mysql/getErrorLog:getErrorLog", args ?? new GetErrorLogArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetErrorLogResult>("tencentcloud:Mysql/getErrorLog:getErrorLog", args ?? new GetErrorLogArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of mysql error_log
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var errorLog = Tencentcloud.Mysql.GetErrorLog.Invoke(new()
         ///     {
-        ///         var errorLog = Output.Create(Tencentcloud.Mysql.GetErrorLog.InvokeAsync(new Tencentcloud.Mysql.GetErrorLogArgs
+        ///         EndTime = 1686043908,
+        ///         InstType = "slave",
+        ///         InstanceId = "cdb-fitq5t9h",
+        ///         KeyWords = new[]
         ///         {
-        ///             EndTime = 1686043908,
-        ///             InstType = "slave",
-        ///             InstanceId = "cdb-fitq5t9h",
-        ///             KeyWords = 
-        ///             {
-        ///                 "Shutting",
-        ///             },
-        ///             StartTime = 1683538307,
-        ///         }));
-        ///     }
+        ///             "Shutting",
+        ///         },
+        ///         StartTime = 1683538307,
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetErrorLogResult> Invoke(GetErrorLogInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetErrorLogResult>("tencentcloud:Mysql/getErrorLog:getErrorLog", args ?? new GetErrorLogInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetErrorLogResult>("tencentcloud:Mysql/getErrorLog:getErrorLog", args ?? new GetErrorLogInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetErrorLogArgs : Pulumi.InvokeArgs
+    public sealed class GetErrorLogArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// End timestamp. For example 1585142640.
@@ -133,9 +127,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
         public GetErrorLogArgs()
         {
         }
+        public static new GetErrorLogArgs Empty => new GetErrorLogArgs();
     }
 
-    public sealed class GetErrorLogInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetErrorLogInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// End timestamp. For example 1585142640.
@@ -182,6 +177,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
         public GetErrorLogInvokeArgs()
         {
         }
+        public static new GetErrorLogInvokeArgs Empty => new GetErrorLogInvokeArgs();
     }
 
 

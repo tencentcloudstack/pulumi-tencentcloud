@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,22 +11,24 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const test = new tencentcloud.Clb.TargetGroup("test", {
+ * const test = new tencentcloud.clb.TargetGroup("test", {
  *     port: 33,
  *     targetGroupName: "test",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * CLB target group can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Clb/targetGroup:TargetGroup test lbtg-3k3io0i0
+ * $ pulumi import tencentcloud:Clb/targetGroup:TargetGroup test lbtg-3k3io0i0
  * ```
  */
 export class TargetGroup extends pulumi.CustomResource {
@@ -63,7 +66,7 @@ export class TargetGroup extends pulumi.CustomResource {
     /**
      * It has been deprecated from version 1.77.3. please use `tencentcloud.Clb.TargetGroupInstanceAttachment` instead. The backend server of target group bind.
      *
-     * @deprecated It has been deprecated from version 1.77.3. please use `tencentcloud_clb_target_group_instance_attachment` instead.
+     * @deprecated It has been deprecated from version 1.77.3. please use `tencentcloud.Clb.TargetGroupInstanceAttachment` instead.
      */
     public readonly targetGroupInstances!: pulumi.Output<outputs.Clb.TargetGroupTargetGroupInstance[] | undefined>;
     /**
@@ -115,7 +118,7 @@ export interface TargetGroupState {
     /**
      * It has been deprecated from version 1.77.3. please use `tencentcloud.Clb.TargetGroupInstanceAttachment` instead. The backend server of target group bind.
      *
-     * @deprecated It has been deprecated from version 1.77.3. please use `tencentcloud_clb_target_group_instance_attachment` instead.
+     * @deprecated It has been deprecated from version 1.77.3. please use `tencentcloud.Clb.TargetGroupInstanceAttachment` instead.
      */
     targetGroupInstances?: pulumi.Input<pulumi.Input<inputs.Clb.TargetGroupTargetGroupInstance>[]>;
     /**
@@ -139,7 +142,7 @@ export interface TargetGroupArgs {
     /**
      * It has been deprecated from version 1.77.3. please use `tencentcloud.Clb.TargetGroupInstanceAttachment` instead. The backend server of target group bind.
      *
-     * @deprecated It has been deprecated from version 1.77.3. please use `tencentcloud_clb_target_group_instance_attachment` instead.
+     * @deprecated It has been deprecated from version 1.77.3. please use `tencentcloud.Clb.TargetGroupInstanceAttachment` instead.
      */
     targetGroupInstances?: pulumi.Input<pulumi.Input<inputs.Clb.TargetGroupTargetGroupInstance>[]>;
     /**

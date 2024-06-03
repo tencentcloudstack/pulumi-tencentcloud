@@ -7,8 +7,9 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a tcm prometheusAttachment
@@ -18,40 +19,44 @@ import (
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Tcm"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tcm"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tcm"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Tcm.NewPrometheusAttachment(ctx, "prometheusAttachment", &Tcm.PrometheusAttachmentArgs{
-// 			MeshId: pulumi.String("mesh-rofjmxxx"),
-// 			Prometheus: &tcm.PrometheusAttachmentPrometheusArgs{
-// 				InstanceId: pulumi.String(""),
-// 				Region:     pulumi.String("ap-guangzhou"),
-// 				SubnetId:   pulumi.String("subnet-driddxxx"),
-// 				VpcId:      pulumi.String("vpc-pewdpxxx"),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Tcm.NewPrometheusAttachment(ctx, "prometheusAttachment", &Tcm.PrometheusAttachmentArgs{
+//				MeshId: pulumi.String("mesh-rofjmxxx"),
+//				Prometheus: &tcm.PrometheusAttachmentPrometheusArgs{
+//					InstanceId: pulumi.String(""),
+//					Region:     pulumi.String("ap-guangzhou"),
+//					SubnetId:   pulumi.String("subnet-driddxxx"),
+//					VpcId:      pulumi.String("vpc-pewdpxxx"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // tcm prometheus_attachment can be imported using the mesh_id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Tcm/prometheusAttachment:PrometheusAttachment prometheus_attachment mesh-rofjmxxx
+// $ pulumi import tencentcloud:Tcm/prometheusAttachment:PrometheusAttachment prometheus_attachment mesh-rofjmxxx
 // ```
 type PrometheusAttachment struct {
 	pulumi.CustomResourceState
@@ -75,7 +80,7 @@ func NewPrometheusAttachment(ctx *pulumi.Context,
 	if args.Prometheus == nil {
 		return nil, errors.New("invalid value for required argument 'Prometheus'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource PrometheusAttachment
 	err := ctx.RegisterResource("tencentcloud:Tcm/prometheusAttachment:PrometheusAttachment", name, args, &resource, opts...)
 	if err != nil {
@@ -156,7 +161,7 @@ func (i *PrometheusAttachment) ToPrometheusAttachmentOutputWithContext(ctx conte
 // PrometheusAttachmentArrayInput is an input type that accepts PrometheusAttachmentArray and PrometheusAttachmentArrayOutput values.
 // You can construct a concrete instance of `PrometheusAttachmentArrayInput` via:
 //
-//          PrometheusAttachmentArray{ PrometheusAttachmentArgs{...} }
+//	PrometheusAttachmentArray{ PrometheusAttachmentArgs{...} }
 type PrometheusAttachmentArrayInput interface {
 	pulumi.Input
 
@@ -181,7 +186,7 @@ func (i PrometheusAttachmentArray) ToPrometheusAttachmentArrayOutputWithContext(
 // PrometheusAttachmentMapInput is an input type that accepts PrometheusAttachmentMap and PrometheusAttachmentMapOutput values.
 // You can construct a concrete instance of `PrometheusAttachmentMapInput` via:
 //
-//          PrometheusAttachmentMap{ "key": PrometheusAttachmentArgs{...} }
+//	PrometheusAttachmentMap{ "key": PrometheusAttachmentArgs{...} }
 type PrometheusAttachmentMapInput interface {
 	pulumi.Input
 

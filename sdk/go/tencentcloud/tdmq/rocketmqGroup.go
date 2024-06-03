@@ -7,61 +7,67 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a tdmqRocketmq group
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tdmq"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tdmq"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		exampleRocketmqCluster, err := Tdmq.NewRocketmqCluster(ctx, "exampleRocketmqCluster", &Tdmq.RocketmqClusterArgs{
-// 			ClusterName: pulumi.String("tf_example"),
-// 			Remark:      pulumi.String("remark."),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		exampleRocketmqNamespace, err := Tdmq.NewRocketmqNamespace(ctx, "exampleRocketmqNamespace", &Tdmq.RocketmqNamespaceArgs{
-// 			ClusterId:     exampleRocketmqCluster.ClusterId,
-// 			NamespaceName: pulumi.String("tf_example"),
-// 			Remark:        pulumi.String("remark."),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_, err = Tdmq.NewRocketmqGroup(ctx, "exampleRocketmqGroup", &Tdmq.RocketmqGroupArgs{
-// 			GroupName:       pulumi.String("tf_example"),
-// 			ClusterId:       exampleRocketmqCluster.ClusterId,
-// 			Namespace:       exampleRocketmqNamespace.NamespaceName,
-// 			ReadEnable:      pulumi.Bool(true),
-// 			BroadcastEnable: pulumi.Bool(true),
-// 			Remark:          pulumi.String("remark."),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			exampleRocketmqCluster, err := Tdmq.NewRocketmqCluster(ctx, "exampleRocketmqCluster", &Tdmq.RocketmqClusterArgs{
+//				ClusterName: pulumi.String("tf_example"),
+//				Remark:      pulumi.String("remark."),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			exampleRocketmqNamespace, err := Tdmq.NewRocketmqNamespace(ctx, "exampleRocketmqNamespace", &Tdmq.RocketmqNamespaceArgs{
+//				ClusterId:     exampleRocketmqCluster.ClusterId,
+//				NamespaceName: pulumi.String("tf_example"),
+//				Remark:        pulumi.String("remark."),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_, err = Tdmq.NewRocketmqGroup(ctx, "exampleRocketmqGroup", &Tdmq.RocketmqGroupArgs{
+//				GroupName:       pulumi.String("tf_example"),
+//				ClusterId:       exampleRocketmqCluster.ClusterId,
+//				Namespace:       exampleRocketmqNamespace.NamespaceName,
+//				ReadEnable:      pulumi.Bool(true),
+//				BroadcastEnable: pulumi.Bool(true),
+//				Remark:          pulumi.String("remark."),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // tdmqRocketmq group can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Tdmq/rocketmqGroup:RocketmqGroup group group_id
+// $ pulumi import tencentcloud:Tdmq/rocketmqGroup:RocketmqGroup group group_id
 // ```
 type RocketmqGroup struct {
 	pulumi.CustomResourceState
@@ -120,7 +126,7 @@ func NewRocketmqGroup(ctx *pulumi.Context,
 	if args.ReadEnable == nil {
 		return nil, errors.New("invalid value for required argument 'ReadEnable'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource RocketmqGroup
 	err := ctx.RegisterResource("tencentcloud:Tdmq/rocketmqGroup:RocketmqGroup", name, args, &resource, opts...)
 	if err != nil {
@@ -269,7 +275,7 @@ func (i *RocketmqGroup) ToRocketmqGroupOutputWithContext(ctx context.Context) Ro
 // RocketmqGroupArrayInput is an input type that accepts RocketmqGroupArray and RocketmqGroupArrayOutput values.
 // You can construct a concrete instance of `RocketmqGroupArrayInput` via:
 //
-//          RocketmqGroupArray{ RocketmqGroupArgs{...} }
+//	RocketmqGroupArray{ RocketmqGroupArgs{...} }
 type RocketmqGroupArrayInput interface {
 	pulumi.Input
 
@@ -294,7 +300,7 @@ func (i RocketmqGroupArray) ToRocketmqGroupArrayOutputWithContext(ctx context.Co
 // RocketmqGroupMapInput is an input type that accepts RocketmqGroupMap and RocketmqGroupMapOutput values.
 // You can construct a concrete instance of `RocketmqGroupMapInput` via:
 //
-//          RocketmqGroupMap{ "key": RocketmqGroupArgs{...} }
+//	RocketmqGroupMap{ "key": RocketmqGroupArgs{...} }
 type RocketmqGroupMapInput interface {
 	pulumi.Input
 

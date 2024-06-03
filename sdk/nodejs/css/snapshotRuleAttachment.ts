@@ -9,24 +9,26 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const snapshotRule = new tencentcloud.Css.SnapshotRuleAttachment("snapshot_rule", {
+ * const snapshotRule = new tencentcloud.css.SnapshotRuleAttachment("snapshotRule", {
  *     appName: "qqq",
  *     domainName: "177154.push.tlivecloud.com",
  *     streamName: "ppp",
  *     templateId: 12838073,
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * css snapshot_rule can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Css/snapshotRuleAttachment:SnapshotRuleAttachment snapshot_rule templateId#domainName
+ * $ pulumi import tencentcloud:Css/snapshotRuleAttachment:SnapshotRuleAttachment snapshot_rule templateId#domainName
  * ```
  */
 export class SnapshotRuleAttachment extends pulumi.CustomResource {

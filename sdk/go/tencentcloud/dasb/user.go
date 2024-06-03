@@ -7,48 +7,54 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a dasb user
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dasb"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dasb"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Dasb.NewUser(ctx, "example", &Dasb.UserArgs{
-// 			AuthType:     pulumi.Int(0),
-// 			DepartmentId: pulumi.String("1.2"),
-// 			Email:        pulumi.String("demo@tencent.com"),
-// 			Phone:        pulumi.String("+86|18345678782"),
-// 			RealName:     pulumi.String("terraform"),
-// 			UserName:     pulumi.String("tf_example"),
-// 			ValidateFrom: pulumi.String("2023-09-22T02:00:00+08:00"),
-// 			ValidateTo:   pulumi.String("2023-09-23T03:00:00+08:00"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Dasb.NewUser(ctx, "example", &Dasb.UserArgs{
+//				AuthType:     pulumi.Int(0),
+//				DepartmentId: pulumi.String("1.2"),
+//				Email:        pulumi.String("demo@tencent.com"),
+//				Phone:        pulumi.String("+86|18345678782"),
+//				RealName:     pulumi.String("terraform"),
+//				UserName:     pulumi.String("tf_example"),
+//				ValidateFrom: pulumi.String("2023-09-22T02:00:00+08:00"),
+//				ValidateTo:   pulumi.String("2023-09-23T03:00:00+08:00"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // dasb user can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Dasb/user:User example 134
+// $ pulumi import tencentcloud:Dasb/user:User example 134
 // ```
 type User struct {
 	pulumi.CustomResourceState
@@ -68,11 +74,11 @@ type User struct {
 	// Username, 3-20 characters, must start with an English letter and cannot contain characters other than letters, numbers, '.', '_', '-'.
 	UserName pulumi.StringOutput `pulumi:"userName"`
 	// User effective time, such as: 2021-09-22T00:00:00+00:00If the effective and expiry time are not filled in, the user will be valid for a long time.
-	ValidateFrom pulumi.StringPtrOutput `pulumi:"validateFrom"`
+	ValidateFrom pulumi.StringOutput `pulumi:"validateFrom"`
 	// Access time period limit, a string composed of 0 and 1, length 168 (7 * 24), representing the time period the user is allowed to access in a week. The Nth character in the string represents the Nth hour of the week, 0 - means access is not allowed, 1 - means access is allowed.
 	ValidateTime pulumi.StringPtrOutput `pulumi:"validateTime"`
 	// User expiration time, such as: 2021-09-23T00:00:00+00:00If the effective and expiry time are not filled in, the user will be valid for a long time.
-	ValidateTo pulumi.StringPtrOutput `pulumi:"validateTo"`
+	ValidateTo pulumi.StringOutput `pulumi:"validateTo"`
 }
 
 // NewUser registers a new resource with the given unique name, arguments, and options.
@@ -88,7 +94,7 @@ func NewUser(ctx *pulumi.Context,
 	if args.UserName == nil {
 		return nil, errors.New("invalid value for required argument 'UserName'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource User
 	err := ctx.RegisterResource("tencentcloud:Dasb/user:User", name, args, &resource, opts...)
 	if err != nil {
@@ -233,7 +239,7 @@ func (i *User) ToUserOutputWithContext(ctx context.Context) UserOutput {
 // UserArrayInput is an input type that accepts UserArray and UserArrayOutput values.
 // You can construct a concrete instance of `UserArrayInput` via:
 //
-//          UserArray{ UserArgs{...} }
+//	UserArray{ UserArgs{...} }
 type UserArrayInput interface {
 	pulumi.Input
 
@@ -258,7 +264,7 @@ func (i UserArray) ToUserArrayOutputWithContext(ctx context.Context) UserArrayOu
 // UserMapInput is an input type that accepts UserMap and UserMapOutput values.
 // You can construct a concrete instance of `UserMapInput` via:
 //
-//          UserMap{ "key": UserArgs{...} }
+//	UserMap{ "key": UserArgs{...} }
 type UserMapInput interface {
 	pulumi.Input
 
@@ -330,8 +336,8 @@ func (o UserOutput) UserName() pulumi.StringOutput {
 }
 
 // User effective time, such as: 2021-09-22T00:00:00+00:00If the effective and expiry time are not filled in, the user will be valid for a long time.
-func (o UserOutput) ValidateFrom() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *User) pulumi.StringPtrOutput { return v.ValidateFrom }).(pulumi.StringPtrOutput)
+func (o UserOutput) ValidateFrom() pulumi.StringOutput {
+	return o.ApplyT(func(v *User) pulumi.StringOutput { return v.ValidateFrom }).(pulumi.StringOutput)
 }
 
 // Access time period limit, a string composed of 0 and 1, length 168 (7 * 24), representing the time period the user is allowed to access in a week. The Nth character in the string represents the Nth hour of the week, 0 - means access is not allowed, 1 - means access is allowed.
@@ -340,8 +346,8 @@ func (o UserOutput) ValidateTime() pulumi.StringPtrOutput {
 }
 
 // User expiration time, such as: 2021-09-23T00:00:00+00:00If the effective and expiry time are not filled in, the user will be valid for a long time.
-func (o UserOutput) ValidateTo() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *User) pulumi.StringPtrOutput { return v.ValidateTo }).(pulumi.StringPtrOutput)
+func (o UserOutput) ValidateTo() pulumi.StringOutput {
+	return o.ApplyT(func(v *User) pulumi.StringOutput { return v.ValidateTo }).(pulumi.StringOutput)
 }
 
 type UserArrayOutput struct{ *pulumi.OutputState }

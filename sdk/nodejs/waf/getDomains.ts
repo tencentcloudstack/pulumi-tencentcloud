@@ -2,40 +2,44 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
  * Use this data source to query detailed information of waf domains
  *
  * ## Example Usage
+ *
  * ### Find all domains
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const example = pulumi.output(tencentcloud.Waf.getDomains());
+ * const example = tencentcloud.Waf.getDomains({});
  * ```
+ * <!--End PulumiCodeChooser -->
+ *
  * ### Find domains by filter
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const example = pulumi.output(tencentcloud.Waf.getDomains({
+ * const example = tencentcloud.Waf.getDomains({
  *     domain: "tf.example.com",
  *     instanceId: "waf_2kxtlbky01b3wceb",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getDomains(args?: GetDomainsArgs, opts?: pulumi.InvokeOptions): Promise<GetDomainsResult> {
     args = args || {};
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Waf/getDomains:getDomains", {
         "domain": args.domain,
         "instanceId": args.instanceId,
@@ -83,9 +87,38 @@ export interface GetDomainsResult {
     readonly instanceId?: string;
     readonly resultOutputFile?: string;
 }
-
+/**
+ * Use this data source to query detailed information of waf domains
+ *
+ * ## Example Usage
+ *
+ * ### Find all domains
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const example = tencentcloud.Waf.getDomains({});
+ * ```
+ * <!--End PulumiCodeChooser -->
+ *
+ * ### Find domains by filter
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const example = tencentcloud.Waf.getDomains({
+ *     domain: "tf.example.com",
+ *     instanceId: "waf_2kxtlbky01b3wceb",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getDomainsOutput(args?: GetDomainsOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetDomainsResult> {
-    return pulumi.output(args).apply(a => getDomains(a, opts))
+    return pulumi.output(args).apply((a: any) => getDomains(a, opts))
 }
 
 /**

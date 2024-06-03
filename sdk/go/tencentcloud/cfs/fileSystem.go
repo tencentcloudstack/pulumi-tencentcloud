@@ -7,131 +7,156 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a cloud file system(CFS).
 //
 // ## Example Usage
+//
 // ### Standard Nfs CFS
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cfs"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cfs"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Cfs.NewFileSystem(ctx, "foo", &Cfs.FileSystemArgs{
-// 			AccessGroupId:    pulumi.String("pgroup-7nx89k7l"),
-// 			AvailabilityZone: pulumi.String("ap-guangzhou-3"),
-// 			Protocol:         pulumi.String("NFS"),
-// 			SubnetId:         pulumi.String("subnet-9mu2t9iw"),
-// 			VpcId:            pulumi.String("vpc-ah9fbkap"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Cfs.NewFileSystem(ctx, "foo", &Cfs.FileSystemArgs{
+//				AccessGroupId:    pulumi.String("pgroup-7nx89k7l"),
+//				AvailabilityZone: pulumi.String("ap-guangzhou-3"),
+//				Protocol:         pulumi.String("NFS"),
+//				SubnetId:         pulumi.String("subnet-9mu2t9iw"),
+//				VpcId:            pulumi.String("vpc-ah9fbkap"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
+//
 // ### High-Performance Nfs CFS
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cfs"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cfs"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Cfs.NewFileSystem(ctx, "foo", &Cfs.FileSystemArgs{
-// 			AccessGroupId:    pulumi.String("pgroup-drwt29od"),
-// 			AvailabilityZone: pulumi.String("ap-guangzhou-6"),
-// 			Protocol:         pulumi.String("NFS"),
-// 			StorageType:      pulumi.String("HP"),
-// 			SubnetId:         pulumi.String("subnet-enm92y0m"),
-// 			VpcId:            pulumi.String("vpc-86v957zb"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Cfs.NewFileSystem(ctx, "foo", &Cfs.FileSystemArgs{
+//				AccessGroupId:    pulumi.String("pgroup-drwt29od"),
+//				AvailabilityZone: pulumi.String("ap-guangzhou-6"),
+//				Protocol:         pulumi.String("NFS"),
+//				StorageType:      pulumi.String("HP"),
+//				SubnetId:         pulumi.String("subnet-enm92y0m"),
+//				VpcId:            pulumi.String("vpc-86v957zb"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
+//
 // ### Standard Turbo CFS
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cfs"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cfs"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Cfs.NewFileSystem(ctx, "foo", &Cfs.FileSystemArgs{
-// 			AccessGroupId:    pulumi.String("pgroup-drwt29od"),
-// 			AvailabilityZone: pulumi.String("ap-guangzhou-6"),
-// 			Capacity:         pulumi.Int(20480),
-// 			CcnId:            pulumi.String("ccn-39lqkygf"),
-// 			CidrBlock:        pulumi.String("11.0.0.0/24"),
-// 			NetInterface:     pulumi.String("CCN"),
-// 			Protocol:         pulumi.String("TURBO"),
-// 			StorageType:      pulumi.String("TB"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Cfs.NewFileSystem(ctx, "foo", &Cfs.FileSystemArgs{
+//				AccessGroupId:    pulumi.String("pgroup-drwt29od"),
+//				AvailabilityZone: pulumi.String("ap-guangzhou-6"),
+//				Capacity:         pulumi.Int(20480),
+//				CcnId:            pulumi.String("ccn-39lqkygf"),
+//				CidrBlock:        pulumi.String("11.0.0.0/24"),
+//				NetInterface:     pulumi.String("CCN"),
+//				Protocol:         pulumi.String("TURBO"),
+//				StorageType:      pulumi.String("TB"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
+//
 // ### High-Performance Turbo CFS
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cfs"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cfs"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Cfs.NewFileSystem(ctx, "foo", &Cfs.FileSystemArgs{
-// 			AccessGroupId:    pulumi.String("pgroup-drwt29od"),
-// 			AvailabilityZone: pulumi.String("ap-guangzhou-6"),
-// 			Capacity:         pulumi.Int(10240),
-// 			CcnId:            pulumi.String("ccn-39lqkygf"),
-// 			CidrBlock:        pulumi.String("11.0.0.0/24"),
-// 			NetInterface:     pulumi.String("CCN"),
-// 			Protocol:         pulumi.String("TURBO"),
-// 			StorageType:      pulumi.String("TP"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Cfs.NewFileSystem(ctx, "foo", &Cfs.FileSystemArgs{
+//				AccessGroupId:    pulumi.String("pgroup-drwt29od"),
+//				AvailabilityZone: pulumi.String("ap-guangzhou-6"),
+//				Capacity:         pulumi.Int(10240),
+//				CcnId:            pulumi.String("ccn-39lqkygf"),
+//				CidrBlock:        pulumi.String("11.0.0.0/24"),
+//				NetInterface:     pulumi.String("CCN"),
+//				Protocol:         pulumi.String("TURBO"),
+//				StorageType:      pulumi.String("TP"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // Cloud file system can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Cfs/fileSystem:FileSystem foo cfs-6hgquxmj
+// $ pulumi import tencentcloud:Cfs/fileSystem:FileSystem foo cfs-6hgquxmj
 // ```
 type FileSystem struct {
 	pulumi.CustomResourceState
@@ -181,7 +206,7 @@ func NewFileSystem(ctx *pulumi.Context,
 	if args.AvailabilityZone == nil {
 		return nil, errors.New("invalid value for required argument 'AvailabilityZone'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource FileSystem
 	err := ctx.RegisterResource("tencentcloud:Cfs/fileSystem:FileSystem", name, args, &resource, opts...)
 	if err != nil {
@@ -358,7 +383,7 @@ func (i *FileSystem) ToFileSystemOutputWithContext(ctx context.Context) FileSyst
 // FileSystemArrayInput is an input type that accepts FileSystemArray and FileSystemArrayOutput values.
 // You can construct a concrete instance of `FileSystemArrayInput` via:
 //
-//          FileSystemArray{ FileSystemArgs{...} }
+//	FileSystemArray{ FileSystemArgs{...} }
 type FileSystemArrayInput interface {
 	pulumi.Input
 
@@ -383,7 +408,7 @@ func (i FileSystemArray) ToFileSystemArrayOutputWithContext(ctx context.Context)
 // FileSystemMapInput is an input type that accepts FileSystemMap and FileSystemMapOutput values.
 // You can construct a concrete instance of `FileSystemMapInput` via:
 //
-//          FileSystemMap{ "key": FileSystemArgs{...} }
+//	FileSystemMap{ "key": FileSystemArgs{...} }
 type FileSystemMapInput interface {
 	pulumi.Input
 

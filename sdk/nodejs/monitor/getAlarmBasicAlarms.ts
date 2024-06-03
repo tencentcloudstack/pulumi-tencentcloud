@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,11 +11,12 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const alarms = pulumi.output(tencentcloud.Monitor.getAlarmBasicAlarms({
+ * const alarms = tencentcloud.Monitor.getAlarmBasicAlarms({
  *     alarmStatuses: [1],
  *     endTime: 1697098903,
  *     instanceGroupIds: [5497073],
@@ -24,15 +26,13 @@ import * as utilities from "../utilities";
  *     projectIds: [0],
  *     startTime: 1696990903,
  *     viewNames: ["cvm_device"],
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getAlarmBasicAlarms(args: GetAlarmBasicAlarmsArgs, opts?: pulumi.InvokeOptions): Promise<GetAlarmBasicAlarmsResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Monitor/getAlarmBasicAlarms:getAlarmBasicAlarms", {
         "alarmStatuses": args.alarmStatuses,
         "endTime": args.endTime,
@@ -129,9 +129,32 @@ export interface GetAlarmBasicAlarmsResult {
      */
     readonly warning: string;
 }
-
+/**
+ * Use this data source to query detailed information of monitor basicAlarms
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const alarms = tencentcloud.Monitor.getAlarmBasicAlarms({
+ *     alarmStatuses: [1],
+ *     endTime: 1697098903,
+ *     instanceGroupIds: [5497073],
+ *     metricNames: ["cpu_usage"],
+ *     module: "monitor",
+ *     occurTimeOrder: "DESC",
+ *     projectIds: [0],
+ *     startTime: 1696990903,
+ *     viewNames: ["cvm_device"],
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getAlarmBasicAlarmsOutput(args: GetAlarmBasicAlarmsOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetAlarmBasicAlarmsResult> {
-    return pulumi.output(args).apply(a => getAlarmBasicAlarms(a, opts))
+    return pulumi.output(args).apply((a: any) => getAlarmBasicAlarms(a, opts))
 }
 
 /**

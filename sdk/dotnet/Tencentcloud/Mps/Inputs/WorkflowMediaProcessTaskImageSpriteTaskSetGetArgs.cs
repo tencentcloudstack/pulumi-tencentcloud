@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps.Inputs
 {
 
-    public sealed class WorkflowMediaProcessTaskImageSpriteTaskSetGetArgs : Pulumi.ResourceArgs
+    public sealed class WorkflowMediaProcessTaskImageSpriteTaskSetGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Sprite Illustration Template ID.
@@ -46,5 +46,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps.Inputs
         public WorkflowMediaProcessTaskImageSpriteTaskSetGetArgs()
         {
         }
+        public static new WorkflowMediaProcessTaskImageSpriteTaskSetGetArgs Empty => new WorkflowMediaProcessTaskImageSpriteTaskSetGetArgs();
     }
 }

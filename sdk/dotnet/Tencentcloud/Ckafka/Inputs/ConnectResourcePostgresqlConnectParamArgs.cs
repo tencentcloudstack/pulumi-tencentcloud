@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka.Inputs
 {
 
-    public sealed class ConnectResourcePostgresqlConnectParamArgs : Pulumi.ResourceArgs
+    public sealed class ConnectResourcePostgresqlConnectParamArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Required when type is TDSQL C_POSTGRESQL.
@@ -70,5 +70,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka.Inputs
         public ConnectResourcePostgresqlConnectParamArgs()
         {
         }
+        public static new ConnectResourcePostgresqlConnectParamArgs Empty => new ConnectResourcePostgresqlConnectParamArgs();
     }
 }

@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,21 +11,20 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const example = pulumi.output(tencentcloud.Kms.getWhiteBoxDeviceFingerprints({
+ * const example = tencentcloud.Kms.getWhiteBoxDeviceFingerprints({
  *     keyId: "244dab8c-6dad-11ea-80c6-5254006d0810",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getWhiteBoxDeviceFingerprints(args: GetWhiteBoxDeviceFingerprintsArgs, opts?: pulumi.InvokeOptions): Promise<GetWhiteBoxDeviceFingerprintsResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Kms/getWhiteBoxDeviceFingerprints:getWhiteBoxDeviceFingerprints", {
         "keyId": args.keyId,
         "resultOutputFile": args.resultOutputFile,
@@ -60,9 +60,24 @@ export interface GetWhiteBoxDeviceFingerprintsResult {
     readonly lists: outputs.Kms.GetWhiteBoxDeviceFingerprintsList[];
     readonly resultOutputFile?: string;
 }
-
+/**
+ * Use this data source to query detailed information of kms whiteBoxDeviceFingerprints
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const example = tencentcloud.Kms.getWhiteBoxDeviceFingerprints({
+ *     keyId: "244dab8c-6dad-11ea-80c6-5254006d0810",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getWhiteBoxDeviceFingerprintsOutput(args: GetWhiteBoxDeviceFingerprintsOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetWhiteBoxDeviceFingerprintsResult> {
-    return pulumi.output(args).apply(a => getWhiteBoxDeviceFingerprints(a, opts))
+    return pulumi.output(args).apply((a: any) => getWhiteBoxDeviceFingerprints(a, opts))
 }
 
 /**

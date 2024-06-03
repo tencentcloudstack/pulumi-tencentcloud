@@ -9,22 +9,24 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const projectStatusConfig = new tencentcloud.Rum.ProjectStatusConfig("project_status_config", {
+ * const projectStatusConfig = new tencentcloud.rum.ProjectStatusConfig("projectStatusConfig", {
  *     operate: "stop",
  *     projectId: 131407,
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * rum project_status_config can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Rum/projectStatusConfig:ProjectStatusConfig project_status_config project_id
+ * $ pulumi import tencentcloud:Rum/projectStatusConfig:ProjectStatusConfig project_status_config project_id
  * ```
  */
 export class ProjectStatusConfig extends pulumi.CustomResource {

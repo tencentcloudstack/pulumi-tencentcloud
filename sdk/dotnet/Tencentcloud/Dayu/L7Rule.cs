@@ -17,43 +17,44 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dayu
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var testRule = new Tencentcloud.Dayu.L7Rule("testRule", new()
     ///     {
-    ///         var testRule = new Tencentcloud.Dayu.L7Rule("testRule", new Tencentcloud.Dayu.L7RuleArgs
+    ///         Domain = "zhaoshaona.com",
+    ///         HealthCheckCode = 31,
+    ///         HealthCheckHealthNum = 5,
+    ///         HealthCheckInterval = 30,
+    ///         HealthCheckMethod = "GET",
+    ///         HealthCheckPath = "/",
+    ///         HealthCheckSwitch = true,
+    ///         HealthCheckUnhealthNum = 10,
+    ///         Protocol = "https",
+    ///         ResourceId = "bgpip-00000294",
+    ///         ResourceType = "bgpip",
+    ///         SourceLists = new[]
     ///         {
-    ///             Domain = "zhaoshaona.com",
-    ///             HealthCheckCode = 31,
-    ///             HealthCheckHealthNum = 5,
-    ///             HealthCheckInterval = 30,
-    ///             HealthCheckMethod = "GET",
-    ///             HealthCheckPath = "/",
-    ///             HealthCheckSwitch = true,
-    ///             HealthCheckUnhealthNum = 10,
-    ///             Protocol = "https",
-    ///             ResourceId = "bgpip-00000294",
-    ///             ResourceType = "bgpip",
-    ///             SourceLists = 
-    ///             {
-    ///                 "1.1.1.1:80",
-    ///                 "2.2.2.2",
-    ///             },
-    ///             SourceType = 2,
-    ///             SslId = "%s",
-    ///             Switch = true,
-    ///         });
-    ///     }
+    ///             "1.1.1.1:80",
+    ///             "2.2.2.2",
+    ///         },
+    ///         SourceType = 2,
+    ///         SslId = "%s",
+    ///         Switch = true,
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Dayu/l7Rule:L7Rule")]
-    public partial class L7Rule : Pulumi.CustomResource
+    public partial class L7Rule : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Domain that the layer 7 rule works for. Valid string length ranges from 0 to 80.
@@ -208,7 +209,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dayu
         }
     }
 
-    public sealed class L7RuleArgs : Pulumi.ResourceArgs
+    public sealed class L7RuleArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Domain that the layer 7 rule works for. Valid string length ranges from 0 to 80.
@@ -315,9 +316,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dayu
         public L7RuleArgs()
         {
         }
+        public static new L7RuleArgs Empty => new L7RuleArgs();
     }
 
-    public sealed class L7RuleState : Pulumi.ResourceArgs
+    public sealed class L7RuleState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Domain that the layer 7 rule works for. Valid string length ranges from 0 to 80.
@@ -436,5 +438,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dayu
         public L7RuleState()
         {
         }
+        public static new L7RuleState Empty => new L7RuleState();
     }
 }

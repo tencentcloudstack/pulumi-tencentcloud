@@ -15,38 +15,39 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ci
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var mediaPicProcessTemplate = new Tencentcloud.Ci.MediaPicProcessTemplate("mediaPicProcessTemplate", new()
     ///     {
-    ///         var mediaPicProcessTemplate = new Tencentcloud.Ci.MediaPicProcessTemplate("mediaPicProcessTemplate", new Tencentcloud.Ci.MediaPicProcessTemplateArgs
+    ///         Bucket = "terraform-ci-xxxxxx",
+    ///         PicProcess = new Tencentcloud.Ci.Inputs.MediaPicProcessTemplatePicProcessArgs
     ///         {
-    ///             Bucket = "terraform-ci-xxxxxx",
-    ///             PicProcess = new Tencentcloud.Ci.Inputs.MediaPicProcessTemplatePicProcessArgs
-    ///             {
-    ///                 IsPicInfo = "true",
-    ///                 ProcessRule = "imageMogr2/rotate/90",
-    ///             },
-    ///         });
-    ///     }
+    ///             IsPicInfo = "true",
+    ///             ProcessRule = "imageMogr2/rotate/90",
+    ///         },
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// ci media_pic_process_template can be imported using the bucket#templateId, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Ci/mediaPicProcessTemplate:MediaPicProcessTemplate media_pic_process_template terraform-ci-xxxxx#t184a8a26da4674c80bf260c1e34131a65
+    /// $ pulumi import tencentcloud:Ci/mediaPicProcessTemplate:MediaPicProcessTemplate media_pic_process_template terraform-ci-xxxxx#t184a8a26da4674c80bf260c1e34131a65
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Ci/mediaPicProcessTemplate:MediaPicProcessTemplate")]
-    public partial class MediaPicProcessTemplate : Pulumi.CustomResource
+    public partial class MediaPicProcessTemplate : global::Pulumi.CustomResource
     {
         /// <summary>
         /// bucket name.
@@ -111,7 +112,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ci
         }
     }
 
-    public sealed class MediaPicProcessTemplateArgs : Pulumi.ResourceArgs
+    public sealed class MediaPicProcessTemplateArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// bucket name.
@@ -134,9 +135,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ci
         public MediaPicProcessTemplateArgs()
         {
         }
+        public static new MediaPicProcessTemplateArgs Empty => new MediaPicProcessTemplateArgs();
     }
 
-    public sealed class MediaPicProcessTemplateState : Pulumi.ResourceArgs
+    public sealed class MediaPicProcessTemplateState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// bucket name.
@@ -159,5 +161,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ci
         public MediaPicProcessTemplateState()
         {
         }
+        public static new MediaPicProcessTemplateState Empty => new MediaPicProcessTemplateState();
     }
 }

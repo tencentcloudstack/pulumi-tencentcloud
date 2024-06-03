@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Css.Inputs
 {
 
-    public sealed class PullStreamTaskWatermarkListGetArgs : Pulumi.ResourceArgs
+    public sealed class PullStreamTaskWatermarkListGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// pic height.
@@ -52,5 +52,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Css.Inputs
         public PullStreamTaskWatermarkListGetArgs()
         {
         }
+        public static new PullStreamTaskWatermarkListGetArgs Empty => new PullStreamTaskWatermarkListGetArgs();
     }
 }

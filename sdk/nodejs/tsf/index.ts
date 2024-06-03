@@ -5,92 +5,281 @@ import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
 // Export members:
-export * from "./apiGroup";
-export * from "./apiRateLimitRule";
-export * from "./application";
-export * from "./applicationConfig";
-export * from "./applicationFileConfig";
-export * from "./applicationFileConfigRelease";
-export * from "./applicationPublicConfig";
-export * from "./applicationPublicConfigRelease";
-export * from "./applicationReleaseConfig";
-export * from "./bindApiGroup";
-export * from "./cluster";
-export * from "./configTemplate";
-export * from "./deployContainerGroup";
-export * from "./deployVmGroup";
-export * from "./enableUnitRule";
-export * from "./getApiDetail";
-export * from "./getApiGroup";
-export * from "./getApplication";
-export * from "./getApplicationAttribute";
-export * from "./getApplicationConfig";
-export * from "./getApplicationFileConfig";
-export * from "./getApplicationPublicConfig";
-export * from "./getBusinessLogConfigs";
-export * from "./getCluster";
-export * from "./getConfigSummary";
-export * from "./getContainerGroup";
-export * from "./getDeliveryConfigByGroupId";
-export * from "./getDeliveryConfigs";
-export * from "./getGatewayAllGroupApis";
-export * from "./getGroupConfigRelease";
-export * from "./getGroupGateways";
-export * from "./getGroupInstances";
-export * from "./getGroups";
-export * from "./getMicroservice";
-export * from "./getMicroserviceApiVersion";
-export * from "./getMsApiList";
-export * from "./getPodInstances";
-export * from "./getPublicConfigSummary";
-export * from "./getRepository";
-export * from "./getUnitRules";
-export * from "./getUsableUnitNamespaces";
-export * from "./group";
-export * from "./instancesAttachment";
-export * from "./lane";
-export * from "./laneRule";
-export * from "./microservice";
-export * from "./namespace";
-export * from "./operateContainerGroup";
-export * from "./operateGroup";
-export * from "./pathRewrite";
-export * from "./releaseApiGroup";
-export * from "./repository";
-export * from "./task";
-export * from "./unitNamespace";
-export * from "./unitRule";
+export { ApiGroupArgs, ApiGroupState } from "./apiGroup";
+export type ApiGroup = import("./apiGroup").ApiGroup;
+export const ApiGroup: typeof import("./apiGroup").ApiGroup = null as any;
+utilities.lazyLoad(exports, ["ApiGroup"], () => require("./apiGroup"));
 
-// Import resources to register:
-import { ApiGroup } from "./apiGroup";
-import { ApiRateLimitRule } from "./apiRateLimitRule";
-import { Application } from "./application";
-import { ApplicationConfig } from "./applicationConfig";
-import { ApplicationFileConfig } from "./applicationFileConfig";
-import { ApplicationFileConfigRelease } from "./applicationFileConfigRelease";
-import { ApplicationPublicConfig } from "./applicationPublicConfig";
-import { ApplicationPublicConfigRelease } from "./applicationPublicConfigRelease";
-import { ApplicationReleaseConfig } from "./applicationReleaseConfig";
-import { BindApiGroup } from "./bindApiGroup";
-import { Cluster } from "./cluster";
-import { ConfigTemplate } from "./configTemplate";
-import { DeployContainerGroup } from "./deployContainerGroup";
-import { DeployVmGroup } from "./deployVmGroup";
-import { EnableUnitRule } from "./enableUnitRule";
-import { Group } from "./group";
-import { InstancesAttachment } from "./instancesAttachment";
-import { Lane } from "./lane";
-import { LaneRule } from "./laneRule";
-import { Microservice } from "./microservice";
-import { Namespace } from "./namespace";
-import { OperateContainerGroup } from "./operateContainerGroup";
-import { OperateGroup } from "./operateGroup";
-import { PathRewrite } from "./pathRewrite";
-import { ReleaseApiGroup } from "./releaseApiGroup";
-import { Repository } from "./repository";
-import { Task } from "./task";
-import { UnitNamespace } from "./unitNamespace";
-import { UnitRule } from "./unitRule";
+export { ApiRateLimitRuleArgs, ApiRateLimitRuleState } from "./apiRateLimitRule";
+export type ApiRateLimitRule = import("./apiRateLimitRule").ApiRateLimitRule;
+export const ApiRateLimitRule: typeof import("./apiRateLimitRule").ApiRateLimitRule = null as any;
+utilities.lazyLoad(exports, ["ApiRateLimitRule"], () => require("./apiRateLimitRule"));
+
+export { ApplicationArgs, ApplicationState } from "./application";
+export type Application = import("./application").Application;
+export const Application: typeof import("./application").Application = null as any;
+utilities.lazyLoad(exports, ["Application"], () => require("./application"));
+
+export { ApplicationConfigArgs, ApplicationConfigState } from "./applicationConfig";
+export type ApplicationConfig = import("./applicationConfig").ApplicationConfig;
+export const ApplicationConfig: typeof import("./applicationConfig").ApplicationConfig = null as any;
+utilities.lazyLoad(exports, ["ApplicationConfig"], () => require("./applicationConfig"));
+
+export { ApplicationFileConfigArgs, ApplicationFileConfigState } from "./applicationFileConfig";
+export type ApplicationFileConfig = import("./applicationFileConfig").ApplicationFileConfig;
+export const ApplicationFileConfig: typeof import("./applicationFileConfig").ApplicationFileConfig = null as any;
+utilities.lazyLoad(exports, ["ApplicationFileConfig"], () => require("./applicationFileConfig"));
+
+export { ApplicationFileConfigReleaseArgs, ApplicationFileConfigReleaseState } from "./applicationFileConfigRelease";
+export type ApplicationFileConfigRelease = import("./applicationFileConfigRelease").ApplicationFileConfigRelease;
+export const ApplicationFileConfigRelease: typeof import("./applicationFileConfigRelease").ApplicationFileConfigRelease = null as any;
+utilities.lazyLoad(exports, ["ApplicationFileConfigRelease"], () => require("./applicationFileConfigRelease"));
+
+export { ApplicationPublicConfigArgs, ApplicationPublicConfigState } from "./applicationPublicConfig";
+export type ApplicationPublicConfig = import("./applicationPublicConfig").ApplicationPublicConfig;
+export const ApplicationPublicConfig: typeof import("./applicationPublicConfig").ApplicationPublicConfig = null as any;
+utilities.lazyLoad(exports, ["ApplicationPublicConfig"], () => require("./applicationPublicConfig"));
+
+export { ApplicationPublicConfigReleaseArgs, ApplicationPublicConfigReleaseState } from "./applicationPublicConfigRelease";
+export type ApplicationPublicConfigRelease = import("./applicationPublicConfigRelease").ApplicationPublicConfigRelease;
+export const ApplicationPublicConfigRelease: typeof import("./applicationPublicConfigRelease").ApplicationPublicConfigRelease = null as any;
+utilities.lazyLoad(exports, ["ApplicationPublicConfigRelease"], () => require("./applicationPublicConfigRelease"));
+
+export { ApplicationReleaseConfigArgs, ApplicationReleaseConfigState } from "./applicationReleaseConfig";
+export type ApplicationReleaseConfig = import("./applicationReleaseConfig").ApplicationReleaseConfig;
+export const ApplicationReleaseConfig: typeof import("./applicationReleaseConfig").ApplicationReleaseConfig = null as any;
+utilities.lazyLoad(exports, ["ApplicationReleaseConfig"], () => require("./applicationReleaseConfig"));
+
+export { BindApiGroupArgs, BindApiGroupState } from "./bindApiGroup";
+export type BindApiGroup = import("./bindApiGroup").BindApiGroup;
+export const BindApiGroup: typeof import("./bindApiGroup").BindApiGroup = null as any;
+utilities.lazyLoad(exports, ["BindApiGroup"], () => require("./bindApiGroup"));
+
+export { ClusterArgs, ClusterState } from "./cluster";
+export type Cluster = import("./cluster").Cluster;
+export const Cluster: typeof import("./cluster").Cluster = null as any;
+utilities.lazyLoad(exports, ["Cluster"], () => require("./cluster"));
+
+export { ConfigTemplateArgs, ConfigTemplateState } from "./configTemplate";
+export type ConfigTemplate = import("./configTemplate").ConfigTemplate;
+export const ConfigTemplate: typeof import("./configTemplate").ConfigTemplate = null as any;
+utilities.lazyLoad(exports, ["ConfigTemplate"], () => require("./configTemplate"));
+
+export { DeployContainerGroupArgs, DeployContainerGroupState } from "./deployContainerGroup";
+export type DeployContainerGroup = import("./deployContainerGroup").DeployContainerGroup;
+export const DeployContainerGroup: typeof import("./deployContainerGroup").DeployContainerGroup = null as any;
+utilities.lazyLoad(exports, ["DeployContainerGroup"], () => require("./deployContainerGroup"));
+
+export { DeployVmGroupArgs, DeployVmGroupState } from "./deployVmGroup";
+export type DeployVmGroup = import("./deployVmGroup").DeployVmGroup;
+export const DeployVmGroup: typeof import("./deployVmGroup").DeployVmGroup = null as any;
+utilities.lazyLoad(exports, ["DeployVmGroup"], () => require("./deployVmGroup"));
+
+export { EnableUnitRuleArgs, EnableUnitRuleState } from "./enableUnitRule";
+export type EnableUnitRule = import("./enableUnitRule").EnableUnitRule;
+export const EnableUnitRule: typeof import("./enableUnitRule").EnableUnitRule = null as any;
+utilities.lazyLoad(exports, ["EnableUnitRule"], () => require("./enableUnitRule"));
+
+export { GetApiDetailArgs, GetApiDetailResult, GetApiDetailOutputArgs } from "./getApiDetail";
+export const getApiDetail: typeof import("./getApiDetail").getApiDetail = null as any;
+export const getApiDetailOutput: typeof import("./getApiDetail").getApiDetailOutput = null as any;
+utilities.lazyLoad(exports, ["getApiDetail","getApiDetailOutput"], () => require("./getApiDetail"));
+
+export { GetApiGroupArgs, GetApiGroupResult, GetApiGroupOutputArgs } from "./getApiGroup";
+export const getApiGroup: typeof import("./getApiGroup").getApiGroup = null as any;
+export const getApiGroupOutput: typeof import("./getApiGroup").getApiGroupOutput = null as any;
+utilities.lazyLoad(exports, ["getApiGroup","getApiGroupOutput"], () => require("./getApiGroup"));
+
+export { GetApplicationArgs, GetApplicationResult, GetApplicationOutputArgs } from "./getApplication";
+export const getApplication: typeof import("./getApplication").getApplication = null as any;
+export const getApplicationOutput: typeof import("./getApplication").getApplicationOutput = null as any;
+utilities.lazyLoad(exports, ["getApplication","getApplicationOutput"], () => require("./getApplication"));
+
+export { GetApplicationAttributeArgs, GetApplicationAttributeResult, GetApplicationAttributeOutputArgs } from "./getApplicationAttribute";
+export const getApplicationAttribute: typeof import("./getApplicationAttribute").getApplicationAttribute = null as any;
+export const getApplicationAttributeOutput: typeof import("./getApplicationAttribute").getApplicationAttributeOutput = null as any;
+utilities.lazyLoad(exports, ["getApplicationAttribute","getApplicationAttributeOutput"], () => require("./getApplicationAttribute"));
+
+export { GetApplicationConfigArgs, GetApplicationConfigResult, GetApplicationConfigOutputArgs } from "./getApplicationConfig";
+export const getApplicationConfig: typeof import("./getApplicationConfig").getApplicationConfig = null as any;
+export const getApplicationConfigOutput: typeof import("./getApplicationConfig").getApplicationConfigOutput = null as any;
+utilities.lazyLoad(exports, ["getApplicationConfig","getApplicationConfigOutput"], () => require("./getApplicationConfig"));
+
+export { GetApplicationFileConfigArgs, GetApplicationFileConfigResult, GetApplicationFileConfigOutputArgs } from "./getApplicationFileConfig";
+export const getApplicationFileConfig: typeof import("./getApplicationFileConfig").getApplicationFileConfig = null as any;
+export const getApplicationFileConfigOutput: typeof import("./getApplicationFileConfig").getApplicationFileConfigOutput = null as any;
+utilities.lazyLoad(exports, ["getApplicationFileConfig","getApplicationFileConfigOutput"], () => require("./getApplicationFileConfig"));
+
+export { GetApplicationPublicConfigArgs, GetApplicationPublicConfigResult, GetApplicationPublicConfigOutputArgs } from "./getApplicationPublicConfig";
+export const getApplicationPublicConfig: typeof import("./getApplicationPublicConfig").getApplicationPublicConfig = null as any;
+export const getApplicationPublicConfigOutput: typeof import("./getApplicationPublicConfig").getApplicationPublicConfigOutput = null as any;
+utilities.lazyLoad(exports, ["getApplicationPublicConfig","getApplicationPublicConfigOutput"], () => require("./getApplicationPublicConfig"));
+
+export { GetBusinessLogConfigsArgs, GetBusinessLogConfigsResult, GetBusinessLogConfigsOutputArgs } from "./getBusinessLogConfigs";
+export const getBusinessLogConfigs: typeof import("./getBusinessLogConfigs").getBusinessLogConfigs = null as any;
+export const getBusinessLogConfigsOutput: typeof import("./getBusinessLogConfigs").getBusinessLogConfigsOutput = null as any;
+utilities.lazyLoad(exports, ["getBusinessLogConfigs","getBusinessLogConfigsOutput"], () => require("./getBusinessLogConfigs"));
+
+export { GetClusterArgs, GetClusterResult, GetClusterOutputArgs } from "./getCluster";
+export const getCluster: typeof import("./getCluster").getCluster = null as any;
+export const getClusterOutput: typeof import("./getCluster").getClusterOutput = null as any;
+utilities.lazyLoad(exports, ["getCluster","getClusterOutput"], () => require("./getCluster"));
+
+export { GetConfigSummaryArgs, GetConfigSummaryResult, GetConfigSummaryOutputArgs } from "./getConfigSummary";
+export const getConfigSummary: typeof import("./getConfigSummary").getConfigSummary = null as any;
+export const getConfigSummaryOutput: typeof import("./getConfigSummary").getConfigSummaryOutput = null as any;
+utilities.lazyLoad(exports, ["getConfigSummary","getConfigSummaryOutput"], () => require("./getConfigSummary"));
+
+export { GetContainerGroupArgs, GetContainerGroupResult, GetContainerGroupOutputArgs } from "./getContainerGroup";
+export const getContainerGroup: typeof import("./getContainerGroup").getContainerGroup = null as any;
+export const getContainerGroupOutput: typeof import("./getContainerGroup").getContainerGroupOutput = null as any;
+utilities.lazyLoad(exports, ["getContainerGroup","getContainerGroupOutput"], () => require("./getContainerGroup"));
+
+export { GetDeliveryConfigByGroupIdArgs, GetDeliveryConfigByGroupIdResult, GetDeliveryConfigByGroupIdOutputArgs } from "./getDeliveryConfigByGroupId";
+export const getDeliveryConfigByGroupId: typeof import("./getDeliveryConfigByGroupId").getDeliveryConfigByGroupId = null as any;
+export const getDeliveryConfigByGroupIdOutput: typeof import("./getDeliveryConfigByGroupId").getDeliveryConfigByGroupIdOutput = null as any;
+utilities.lazyLoad(exports, ["getDeliveryConfigByGroupId","getDeliveryConfigByGroupIdOutput"], () => require("./getDeliveryConfigByGroupId"));
+
+export { GetDeliveryConfigsArgs, GetDeliveryConfigsResult, GetDeliveryConfigsOutputArgs } from "./getDeliveryConfigs";
+export const getDeliveryConfigs: typeof import("./getDeliveryConfigs").getDeliveryConfigs = null as any;
+export const getDeliveryConfigsOutput: typeof import("./getDeliveryConfigs").getDeliveryConfigsOutput = null as any;
+utilities.lazyLoad(exports, ["getDeliveryConfigs","getDeliveryConfigsOutput"], () => require("./getDeliveryConfigs"));
+
+export { GetGatewayAllGroupApisArgs, GetGatewayAllGroupApisResult, GetGatewayAllGroupApisOutputArgs } from "./getGatewayAllGroupApis";
+export const getGatewayAllGroupApis: typeof import("./getGatewayAllGroupApis").getGatewayAllGroupApis = null as any;
+export const getGatewayAllGroupApisOutput: typeof import("./getGatewayAllGroupApis").getGatewayAllGroupApisOutput = null as any;
+utilities.lazyLoad(exports, ["getGatewayAllGroupApis","getGatewayAllGroupApisOutput"], () => require("./getGatewayAllGroupApis"));
+
+export { GetGroupConfigReleaseArgs, GetGroupConfigReleaseResult, GetGroupConfigReleaseOutputArgs } from "./getGroupConfigRelease";
+export const getGroupConfigRelease: typeof import("./getGroupConfigRelease").getGroupConfigRelease = null as any;
+export const getGroupConfigReleaseOutput: typeof import("./getGroupConfigRelease").getGroupConfigReleaseOutput = null as any;
+utilities.lazyLoad(exports, ["getGroupConfigRelease","getGroupConfigReleaseOutput"], () => require("./getGroupConfigRelease"));
+
+export { GetGroupGatewaysArgs, GetGroupGatewaysResult, GetGroupGatewaysOutputArgs } from "./getGroupGateways";
+export const getGroupGateways: typeof import("./getGroupGateways").getGroupGateways = null as any;
+export const getGroupGatewaysOutput: typeof import("./getGroupGateways").getGroupGatewaysOutput = null as any;
+utilities.lazyLoad(exports, ["getGroupGateways","getGroupGatewaysOutput"], () => require("./getGroupGateways"));
+
+export { GetGroupInstancesArgs, GetGroupInstancesResult, GetGroupInstancesOutputArgs } from "./getGroupInstances";
+export const getGroupInstances: typeof import("./getGroupInstances").getGroupInstances = null as any;
+export const getGroupInstancesOutput: typeof import("./getGroupInstances").getGroupInstancesOutput = null as any;
+utilities.lazyLoad(exports, ["getGroupInstances","getGroupInstancesOutput"], () => require("./getGroupInstances"));
+
+export { GetGroupsArgs, GetGroupsResult, GetGroupsOutputArgs } from "./getGroups";
+export const getGroups: typeof import("./getGroups").getGroups = null as any;
+export const getGroupsOutput: typeof import("./getGroups").getGroupsOutput = null as any;
+utilities.lazyLoad(exports, ["getGroups","getGroupsOutput"], () => require("./getGroups"));
+
+export { GetMicroserviceArgs, GetMicroserviceResult, GetMicroserviceOutputArgs } from "./getMicroservice";
+export const getMicroservice: typeof import("./getMicroservice").getMicroservice = null as any;
+export const getMicroserviceOutput: typeof import("./getMicroservice").getMicroserviceOutput = null as any;
+utilities.lazyLoad(exports, ["getMicroservice","getMicroserviceOutput"], () => require("./getMicroservice"));
+
+export { GetMicroserviceApiVersionArgs, GetMicroserviceApiVersionResult, GetMicroserviceApiVersionOutputArgs } from "./getMicroserviceApiVersion";
+export const getMicroserviceApiVersion: typeof import("./getMicroserviceApiVersion").getMicroserviceApiVersion = null as any;
+export const getMicroserviceApiVersionOutput: typeof import("./getMicroserviceApiVersion").getMicroserviceApiVersionOutput = null as any;
+utilities.lazyLoad(exports, ["getMicroserviceApiVersion","getMicroserviceApiVersionOutput"], () => require("./getMicroserviceApiVersion"));
+
+export { GetMsApiListArgs, GetMsApiListResult, GetMsApiListOutputArgs } from "./getMsApiList";
+export const getMsApiList: typeof import("./getMsApiList").getMsApiList = null as any;
+export const getMsApiListOutput: typeof import("./getMsApiList").getMsApiListOutput = null as any;
+utilities.lazyLoad(exports, ["getMsApiList","getMsApiListOutput"], () => require("./getMsApiList"));
+
+export { GetPodInstancesArgs, GetPodInstancesResult, GetPodInstancesOutputArgs } from "./getPodInstances";
+export const getPodInstances: typeof import("./getPodInstances").getPodInstances = null as any;
+export const getPodInstancesOutput: typeof import("./getPodInstances").getPodInstancesOutput = null as any;
+utilities.lazyLoad(exports, ["getPodInstances","getPodInstancesOutput"], () => require("./getPodInstances"));
+
+export { GetPublicConfigSummaryArgs, GetPublicConfigSummaryResult, GetPublicConfigSummaryOutputArgs } from "./getPublicConfigSummary";
+export const getPublicConfigSummary: typeof import("./getPublicConfigSummary").getPublicConfigSummary = null as any;
+export const getPublicConfigSummaryOutput: typeof import("./getPublicConfigSummary").getPublicConfigSummaryOutput = null as any;
+utilities.lazyLoad(exports, ["getPublicConfigSummary","getPublicConfigSummaryOutput"], () => require("./getPublicConfigSummary"));
+
+export { GetRepositoryArgs, GetRepositoryResult, GetRepositoryOutputArgs } from "./getRepository";
+export const getRepository: typeof import("./getRepository").getRepository = null as any;
+export const getRepositoryOutput: typeof import("./getRepository").getRepositoryOutput = null as any;
+utilities.lazyLoad(exports, ["getRepository","getRepositoryOutput"], () => require("./getRepository"));
+
+export { GetUnitRulesArgs, GetUnitRulesResult, GetUnitRulesOutputArgs } from "./getUnitRules";
+export const getUnitRules: typeof import("./getUnitRules").getUnitRules = null as any;
+export const getUnitRulesOutput: typeof import("./getUnitRules").getUnitRulesOutput = null as any;
+utilities.lazyLoad(exports, ["getUnitRules","getUnitRulesOutput"], () => require("./getUnitRules"));
+
+export { GetUsableUnitNamespacesArgs, GetUsableUnitNamespacesResult, GetUsableUnitNamespacesOutputArgs } from "./getUsableUnitNamespaces";
+export const getUsableUnitNamespaces: typeof import("./getUsableUnitNamespaces").getUsableUnitNamespaces = null as any;
+export const getUsableUnitNamespacesOutput: typeof import("./getUsableUnitNamespaces").getUsableUnitNamespacesOutput = null as any;
+utilities.lazyLoad(exports, ["getUsableUnitNamespaces","getUsableUnitNamespacesOutput"], () => require("./getUsableUnitNamespaces"));
+
+export { GroupArgs, GroupState } from "./group";
+export type Group = import("./group").Group;
+export const Group: typeof import("./group").Group = null as any;
+utilities.lazyLoad(exports, ["Group"], () => require("./group"));
+
+export { InstancesAttachmentArgs, InstancesAttachmentState } from "./instancesAttachment";
+export type InstancesAttachment = import("./instancesAttachment").InstancesAttachment;
+export const InstancesAttachment: typeof import("./instancesAttachment").InstancesAttachment = null as any;
+utilities.lazyLoad(exports, ["InstancesAttachment"], () => require("./instancesAttachment"));
+
+export { LaneArgs, LaneState } from "./lane";
+export type Lane = import("./lane").Lane;
+export const Lane: typeof import("./lane").Lane = null as any;
+utilities.lazyLoad(exports, ["Lane"], () => require("./lane"));
+
+export { LaneRuleArgs, LaneRuleState } from "./laneRule";
+export type LaneRule = import("./laneRule").LaneRule;
+export const LaneRule: typeof import("./laneRule").LaneRule = null as any;
+utilities.lazyLoad(exports, ["LaneRule"], () => require("./laneRule"));
+
+export { MicroserviceArgs, MicroserviceState } from "./microservice";
+export type Microservice = import("./microservice").Microservice;
+export const Microservice: typeof import("./microservice").Microservice = null as any;
+utilities.lazyLoad(exports, ["Microservice"], () => require("./microservice"));
+
+export { NamespaceArgs, NamespaceState } from "./namespace";
+export type Namespace = import("./namespace").Namespace;
+export const Namespace: typeof import("./namespace").Namespace = null as any;
+utilities.lazyLoad(exports, ["Namespace"], () => require("./namespace"));
+
+export { OperateContainerGroupArgs, OperateContainerGroupState } from "./operateContainerGroup";
+export type OperateContainerGroup = import("./operateContainerGroup").OperateContainerGroup;
+export const OperateContainerGroup: typeof import("./operateContainerGroup").OperateContainerGroup = null as any;
+utilities.lazyLoad(exports, ["OperateContainerGroup"], () => require("./operateContainerGroup"));
+
+export { OperateGroupArgs, OperateGroupState } from "./operateGroup";
+export type OperateGroup = import("./operateGroup").OperateGroup;
+export const OperateGroup: typeof import("./operateGroup").OperateGroup = null as any;
+utilities.lazyLoad(exports, ["OperateGroup"], () => require("./operateGroup"));
+
+export { PathRewriteArgs, PathRewriteState } from "./pathRewrite";
+export type PathRewrite = import("./pathRewrite").PathRewrite;
+export const PathRewrite: typeof import("./pathRewrite").PathRewrite = null as any;
+utilities.lazyLoad(exports, ["PathRewrite"], () => require("./pathRewrite"));
+
+export { ReleaseApiGroupArgs, ReleaseApiGroupState } from "./releaseApiGroup";
+export type ReleaseApiGroup = import("./releaseApiGroup").ReleaseApiGroup;
+export const ReleaseApiGroup: typeof import("./releaseApiGroup").ReleaseApiGroup = null as any;
+utilities.lazyLoad(exports, ["ReleaseApiGroup"], () => require("./releaseApiGroup"));
+
+export { RepositoryArgs, RepositoryState } from "./repository";
+export type Repository = import("./repository").Repository;
+export const Repository: typeof import("./repository").Repository = null as any;
+utilities.lazyLoad(exports, ["Repository"], () => require("./repository"));
+
+export { TaskArgs, TaskState } from "./task";
+export type Task = import("./task").Task;
+export const Task: typeof import("./task").Task = null as any;
+utilities.lazyLoad(exports, ["Task"], () => require("./task"));
+
+export { UnitNamespaceArgs, UnitNamespaceState } from "./unitNamespace";
+export type UnitNamespace = import("./unitNamespace").UnitNamespace;
+export const UnitNamespace: typeof import("./unitNamespace").UnitNamespace = null as any;
+utilities.lazyLoad(exports, ["UnitNamespace"], () => require("./unitNamespace"));
+
+export { UnitRuleArgs, UnitRuleState } from "./unitRule";
+export type UnitRule = import("./unitRule").UnitRule;
+export const UnitRule: typeof import("./unitRule").UnitRule = null as any;
+utilities.lazyLoad(exports, ["UnitRule"], () => require("./unitRule"));
+
 
 const _module = {
     version: utilities.getVersion(),

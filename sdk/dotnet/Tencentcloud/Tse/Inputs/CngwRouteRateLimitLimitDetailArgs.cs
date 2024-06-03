@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tse.Inputs
 {
 
-    public sealed class CngwRouteRateLimitLimitDetailArgs : Pulumi.ResourceArgs
+    public sealed class CngwRouteRateLimitLimitDetailArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// status of service rate limit.
@@ -100,5 +100,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tse.Inputs
         public CngwRouteRateLimitLimitDetailArgs()
         {
         }
+        public static new CngwRouteRateLimitLimitDetailArgs Empty => new CngwRouteRateLimitLimitDetailArgs();
     }
 }

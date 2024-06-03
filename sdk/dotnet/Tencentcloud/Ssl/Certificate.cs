@@ -17,17 +17,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssl
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = Pulumi.Tencentcloud;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
-    ///     {
-    ///         var config = new Config();
-    ///         var ca = config.Get("ca") ?? @"-----BEGIN CERTIFICATE-----
+    ///     var config = new Config();
+    ///     var ca = config.Get("ca") ?? @"-----BEGIN CERTIFICATE-----
     /// MIIEDjCCAnagAwIBAgIBATANBgkqhkiG9w0BAQsFADAoMQ0wCwYDVQQDEwR0ZXN0
     /// MRcwFQYDVQQKEw50ZXJyYWZvcm0gdGVzdDAeFw0xOTA4MTMwMzA4MjBaFw0yOTA4
     /// MTAwMzA4MjBaMCgxDTALBgNVBAMTBHRlc3QxFzAVBgNVBAoTDnRlcnJhZm9ybSB0
@@ -51,31 +52,33 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssl
     /// OIfJHQeJFLryn6GxiSYmYs6dgUJiiTV+I/2Y5X7ZFdb5FC1J/WmvoCv6yO7NiirY
     /// BSgfV0lp5CuV8SfiSClpYfrM28NbNgxveUqET642BJOPLQ==
     /// -----END CERTIFICATE-----";
-    ///         var caCertificate = new Tencentcloud.Ssl.Certificate("caCertificate", new Tencentcloud.Ssl.CertificateArgs
-    ///         {
-    ///             Type = "CA",
-    ///             Cert = ca,
-    ///         });
-    ///         var caCertificates = Tencentcloud.Ssl.GetCertificates.Invoke(new Tencentcloud.Ssl.GetCertificatesInvokeArgs
-    ///         {
-    ///             Name = caCertificate.Name,
-    ///         });
-    ///     }
+    ///     var caCertificate = new Tencentcloud.Ssl.Certificate("caCertificate", new()
+    ///     {
+    ///         Type = "CA",
+    ///         Cert = ca,
+    ///     });
     /// 
-    /// }
+    ///     var caCertificates = Tencentcloud.Ssl.GetCertificates.Invoke(new()
+    ///     {
+    ///         Name = caCertificate.Name,
+    ///     });
+    /// 
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = Pulumi.Tencentcloud;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
-    ///     {
-    ///         var config = new Config();
-    ///         var cert = config.Get("cert") ?? @"-----BEGIN CERTIFICATE-----
+    ///     var config = new Config();
+    ///     var cert = config.Get("cert") ?? @"-----BEGIN CERTIFICATE-----
     /// MIIERzCCAq+gAwIBAgIBAjANBgkqhkiG9w0BAQsFADAoMQ0wCwYDVQQDEwR0ZXN0
     /// MRcwFQYDVQQKEw50ZXJyYWZvcm0gdGVzdDAeFw0xOTA4MTMwMzE5MzlaFw0yOTA4
     /// MTAwMzE5MzlaMC4xEzARBgNVBAMTCnNlcnZlciBzc2wxFzAVBgNVBAoTDnRlcnJh
@@ -100,7 +103,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssl
     /// jCbLMjNjtM5KriCaR7wDARgHiG0gBEPOEW1PIjZ9UOH+LtIxbNZ4eEIIINLHnBHf
     /// L+doVeZtS/gJc4G4Adr5HYuaS9ZxJ0W2uy0eQlOHzjyxR6Mf/rpnilJlcQ==
     /// -----END CERTIFICATE-----";
-    ///         var key = config.Get("key") ?? @"Public Key Info:
+    ///     var key = config.Get("key") ?? @"Public Key Info:
     /// 	Public Key Algorithm: RSA
     /// 	Key Security Level: High (3072 bits)
     /// 
@@ -282,31 +285,32 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssl
     /// kFd+TUHWSimBkuuJW0WF3bkWIGPLWfYGWcHdO2uSCl5eY0rxp9UWuYts2K12Di08
     /// 4LNz4G2v1KK8S/1sLdddTc0oA2Sy75odgo1TQMX4+/Nj3o4aIbY1FA==
     /// -----END RSA PRIVATE KEY-----";
-    ///         var svrCertificate = new Tencentcloud.Ssl.Certificate("svrCertificate", new Tencentcloud.Ssl.CertificateArgs
-    ///         {
-    ///             Type = "SVR",
-    ///             Cert = cert,
-    ///             Key = key,
-    ///         });
-    ///         var svrCertificates = Tencentcloud.Ssl.GetCertificates.Invoke(new Tencentcloud.Ssl.GetCertificatesInvokeArgs
-    ///         {
-    ///             Name = svrCertificate.Name,
-    ///         });
-    ///     }
+    ///     var svrCertificate = new Tencentcloud.Ssl.Certificate("svrCertificate", new()
+    ///     {
+    ///         Type = "SVR",
+    ///         Cert = cert,
+    ///         Key = key,
+    ///     });
     /// 
-    /// }
+    ///     var svrCertificates = Tencentcloud.Ssl.GetCertificates.Invoke(new()
+    ///     {
+    ///         Name = svrCertificate.Name,
+    ///     });
+    /// 
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// ssl certificate can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Ssl/certificate:Certificate tencentcloud_ssl_certificate.cert GjTNRoK7
+    /// $ pulumi import tencentcloud:Ssl/certificate:Certificate tencentcloud_ssl_certificate.cert GjTNRoK7
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Ssl/certificate:Certificate")]
-    public partial class Certificate : Pulumi.CustomResource
+    public partial class Certificate : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Beginning time of the SSL certificate.
@@ -410,6 +414,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssl
             {
                 Version = Utilities.Version,
                 PluginDownloadURL = "github://api.github.com/tencentcloudstack",
+                AdditionalSecretOutputs =
+                {
+                    "key",
+                },
             };
             var merged = CustomResourceOptions.Merge(defaultOptions, options);
             // Override the ID if one was specified for consistency with other language SDKs.
@@ -431,7 +439,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssl
         }
     }
 
-    public sealed class CertificateArgs : Pulumi.ResourceArgs
+    public sealed class CertificateArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Content of the SSL certificate. Not allowed newline at the start and end.
@@ -439,11 +447,21 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssl
         [Input("cert", required: true)]
         public Input<string> Cert { get; set; } = null!;
 
+        [Input("key")]
+        private Input<string>? _key;
+
         /// <summary>
         /// Key of the SSL certificate and required when certificate type is `SVR`. Not allowed newline at the start and end.
         /// </summary>
-        [Input("key")]
-        public Input<string>? Key { get; set; }
+        public Input<string>? Key
+        {
+            get => _key;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _key = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
 
         /// <summary>
         /// Name of the SSL certificate.
@@ -478,9 +496,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssl
         public CertificateArgs()
         {
         }
+        public static new CertificateArgs Empty => new CertificateArgs();
     }
 
-    public sealed class CertificateState : Pulumi.ResourceArgs
+    public sealed class CertificateState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Beginning time of the SSL certificate.
@@ -512,11 +531,21 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssl
         [Input("endTime")]
         public Input<string>? EndTime { get; set; }
 
+        [Input("key")]
+        private Input<string>? _key;
+
         /// <summary>
         /// Key of the SSL certificate and required when certificate type is `SVR`. Not allowed newline at the start and end.
         /// </summary>
-        [Input("key")]
-        public Input<string>? Key { get; set; }
+        public Input<string>? Key
+        {
+            get => _key;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _key = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
 
         /// <summary>
         /// Name of the SSL certificate.
@@ -575,5 +604,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssl
         public CertificateState()
         {
         }
+        public static new CertificateState Empty => new CertificateState();
     }
 }

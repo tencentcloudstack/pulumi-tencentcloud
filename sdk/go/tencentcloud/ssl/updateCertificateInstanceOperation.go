@@ -7,76 +7,88 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a ssl updateCertificateInstance
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ssl"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ssl"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Ssl.NewUpdateCertificateInstanceOperation(ctx, "updateCertificateInstance", &Ssl.UpdateCertificateInstanceOperationArgs{
-// 			CertificateId:    pulumi.String("8x1eUSSl"),
-// 			OldCertificateId: pulumi.String("8xNdi2ig"),
-// 			ResourceTypes: pulumi.StringArray{
-// 				pulumi.String("cdn"),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Ssl.NewUpdateCertificateInstanceOperation(ctx, "updateCertificateInstance", &Ssl.UpdateCertificateInstanceOperationArgs{
+//				CertificateId:    pulumi.String("8x1eUSSl"),
+//				OldCertificateId: pulumi.String("8xNdi2ig"),
+//				ResourceTypes: pulumi.StringArray{
+//					pulumi.String("cdn"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
+//
 // ### Upload certificate
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"io/ioutil"
 //
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ssl"
+//	"os"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ssl"
+//
 // )
 //
-// func readFileOrPanic(path string) pulumi.StringPtrInput {
-// 	data, err := ioutil.ReadFile(path)
-// 	if err != nil {
-// 		panic(err.Error())
-// 	}
-// 	return pulumi.String(string(data))
-// }
+//	func readFileOrPanic(path string) pulumi.StringPtrInput {
+//		data, err := os.ReadFile(path)
+//		if err != nil {
+//			panic(err.Error())
+//		}
+//		return pulumi.String(string(data))
+//	}
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Ssl.NewUpdateCertificateInstanceOperation(ctx, "updateCertificateInstance", &Ssl.UpdateCertificateInstanceOperationArgs{
-// 			OldCertificateId:      pulumi.String("xxx"),
-// 			CertificatePublicKey:  readFileOrPanic("xxx.crt"),
-// 			CertificatePrivateKey: readFileOrPanic("xxx.key"),
-// 			Repeatable:            pulumi.Bool(true),
-// 			ResourceTypes: pulumi.StringArray{
-// 				pulumi.String("cdn"),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Ssl.NewUpdateCertificateInstanceOperation(ctx, "updateCertificateInstance", &Ssl.UpdateCertificateInstanceOperationArgs{
+//				OldCertificateId:      pulumi.String("xxx"),
+//				CertificatePublicKey:  readFileOrPanic("xxx.crt"),
+//				CertificatePrivateKey: readFileOrPanic("xxx.key"),
+//				Repeatable:            pulumi.Bool(true),
+//				ResourceTypes: pulumi.StringArray{
+//					pulumi.String("cdn"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 type UpdateCertificateInstanceOperation struct {
 	pulumi.CustomResourceState
 
@@ -115,7 +127,18 @@ func NewUpdateCertificateInstanceOperation(ctx *pulumi.Context,
 	if args.ResourceTypes == nil {
 		return nil, errors.New("invalid value for required argument 'ResourceTypes'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	if args.CertificatePrivateKey != nil {
+		args.CertificatePrivateKey = pulumi.ToSecret(args.CertificatePrivateKey).(pulumi.StringPtrInput)
+	}
+	if args.CertificatePublicKey != nil {
+		args.CertificatePublicKey = pulumi.ToSecret(args.CertificatePublicKey).(pulumi.StringPtrInput)
+	}
+	secrets := pulumi.AdditionalSecretOutputs([]string{
+		"certificatePrivateKey",
+		"certificatePublicKey",
+	})
+	opts = append(opts, secrets)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource UpdateCertificateInstanceOperation
 	err := ctx.RegisterResource("tencentcloud:Ssl/updateCertificateInstanceOperation:UpdateCertificateInstanceOperation", name, args, &resource, opts...)
 	if err != nil {
@@ -260,7 +283,7 @@ func (i *UpdateCertificateInstanceOperation) ToUpdateCertificateInstanceOperatio
 // UpdateCertificateInstanceOperationArrayInput is an input type that accepts UpdateCertificateInstanceOperationArray and UpdateCertificateInstanceOperationArrayOutput values.
 // You can construct a concrete instance of `UpdateCertificateInstanceOperationArrayInput` via:
 //
-//          UpdateCertificateInstanceOperationArray{ UpdateCertificateInstanceOperationArgs{...} }
+//	UpdateCertificateInstanceOperationArray{ UpdateCertificateInstanceOperationArgs{...} }
 type UpdateCertificateInstanceOperationArrayInput interface {
 	pulumi.Input
 
@@ -285,7 +308,7 @@ func (i UpdateCertificateInstanceOperationArray) ToUpdateCertificateInstanceOper
 // UpdateCertificateInstanceOperationMapInput is an input type that accepts UpdateCertificateInstanceOperationMap and UpdateCertificateInstanceOperationMapOutput values.
 // You can construct a concrete instance of `UpdateCertificateInstanceOperationMapInput` via:
 //
-//          UpdateCertificateInstanceOperationMap{ "key": UpdateCertificateInstanceOperationArgs{...} }
+//	UpdateCertificateInstanceOperationMap{ "key": UpdateCertificateInstanceOperationArgs{...} }
 type UpdateCertificateInstanceOperationMapInput interface {
 	pulumi.Input
 

@@ -15,43 +15,44 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cbs
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var snapshotPolicy = new Tencentcloud.Cbs.SnapshotPolicy("snapshotPolicy", new()
     ///     {
-    ///         var snapshotPolicy = new Tencentcloud.Cbs.SnapshotPolicy("snapshotPolicy", new Tencentcloud.Cbs.SnapshotPolicyArgs
+    ///         RepeatHours = new[]
     ///         {
-    ///             RepeatHours = 
-    ///             {
-    ///                 1,
-    ///             },
-    ///             RepeatWeekdays = 
-    ///             {
-    ///                 1,
-    ///                 4,
-    ///             },
-    ///             RetentionDays = 7,
-    ///             SnapshotPolicyName = "mysnapshotpolicyname",
-    ///         });
-    ///     }
+    ///             1,
+    ///         },
+    ///         RepeatWeekdays = new[]
+    ///         {
+    ///             1,
+    ///             4,
+    ///         },
+    ///         RetentionDays = 7,
+    ///         SnapshotPolicyName = "mysnapshotpolicyname",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// CBS snapshot policy can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Cbs/snapshotPolicy:SnapshotPolicy snapshot_policy asp-jliex1tn
+    /// $ pulumi import tencentcloud:Cbs/snapshotPolicy:SnapshotPolicy snapshot_policy asp-jliex1tn
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Cbs/snapshotPolicy:SnapshotPolicy")]
-    public partial class SnapshotPolicy : Pulumi.CustomResource
+    public partial class SnapshotPolicy : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Trigger times of periodic snapshot. Valid value ranges: (0~23). The 0 means 00:00, and so on.
@@ -122,7 +123,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cbs
         }
     }
 
-    public sealed class SnapshotPolicyArgs : Pulumi.ResourceArgs
+    public sealed class SnapshotPolicyArgs : global::Pulumi.ResourceArgs
     {
         [Input("repeatHours", required: true)]
         private InputList<int>? _repeatHours;
@@ -163,9 +164,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cbs
         public SnapshotPolicyArgs()
         {
         }
+        public static new SnapshotPolicyArgs Empty => new SnapshotPolicyArgs();
     }
 
-    public sealed class SnapshotPolicyState : Pulumi.ResourceArgs
+    public sealed class SnapshotPolicyState : global::Pulumi.ResourceArgs
     {
         [Input("repeatHours")]
         private InputList<int>? _repeatHours;
@@ -206,5 +208,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cbs
         public SnapshotPolicyState()
         {
         }
+        public static new SnapshotPolicyState Empty => new SnapshotPolicyState();
     }
 }

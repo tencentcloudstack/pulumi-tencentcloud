@@ -7,64 +7,67 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a cls cos shipper.
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"fmt"
 //
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Cls"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cls"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cls"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Cls.NewCosShipper(ctx, "shipper", &Cls.CosShipperArgs{
-// 			Bucket: pulumi.String("preset-scf-bucket-1308919341"),
-// 			Compress: &cls.CosShipperCompressArgs{
-// 				Format: pulumi.String("lzop"),
-// 			},
-// 			Content: &cls.CosShipperContentArgs{
-// 				Format: pulumi.String("json"),
-// 				Json: &cls.CosShipperContentJsonArgs{
-// 					EnableTag: pulumi.Bool(true),
-// 					MetaFields: pulumi.StringArray{
-// 						pulumi.String("__FILENAME__"),
-// 						pulumi.String("__SOURCE__"),
-// 						pulumi.String("__TIMESTAMP__"),
-// 					},
-// 				},
-// 			},
-// 			Interval:    pulumi.Int(300),
-// 			MaxSize:     pulumi.Int(200),
-// 			Partition:   pulumi.String(fmt.Sprintf("%v%v%v%v%v%v%v%v%v", "/", "%", "Y/", "%", "m/", "%", "d/", "%", "H/")),
-// 			Prefix:      pulumi.String("ap-guangzhou-fffsasad-1649734752"),
-// 			ShipperName: pulumi.String("ap-guangzhou-fffsasad-1649734752"),
-// 			TopicId:     pulumi.String("4d07fba0-b93e-4e0b-9a7f-d58542560bbb"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Cls.NewCosShipper(ctx, "shipper", &Cls.CosShipperArgs{
+//				Bucket: pulumi.String("preset-scf-bucket-1308919341"),
+//				Compress: &cls.CosShipperCompressArgs{
+//					Format: pulumi.String("lzop"),
+//				},
+//				Content: &cls.CosShipperContentArgs{
+//					Format: pulumi.String("json"),
+//					Json: &cls.CosShipperContentJsonArgs{
+//						EnableTag: pulumi.Bool(true),
+//						MetaFields: pulumi.StringArray{
+//							pulumi.String("__FILENAME__"),
+//							pulumi.String("__SOURCE__"),
+//							pulumi.String("__TIMESTAMP__"),
+//						},
+//					},
+//				},
+//				Interval:    pulumi.Int(300),
+//				MaxSize:     pulumi.Int(200),
+//				Partition:   pulumi.String("/%Y/%m/%d/%H/"),
+//				Prefix:      pulumi.String("ap-guangzhou-fffsasad-1649734752"),
+//				ShipperName: pulumi.String("ap-guangzhou-fffsasad-1649734752"),
+//				TopicId:     pulumi.String("4d07fba0-b93e-4e0b-9a7f-d58542560bbb"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // cls cos shipper can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Cls/cosShipper:CosShipper shipper 5d1b7b2a-c163-4c48-bb01-9ee00584d761
+// $ pulumi import tencentcloud:Cls/cosShipper:CosShipper shipper 5d1b7b2a-c163-4c48-bb01-9ee00584d761
 // ```
 type CosShipper struct {
 	pulumi.CustomResourceState
@@ -110,7 +113,7 @@ func NewCosShipper(ctx *pulumi.Context,
 	if args.TopicId == nil {
 		return nil, errors.New("invalid value for required argument 'TopicId'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource CosShipper
 	err := ctx.RegisterResource("tencentcloud:Cls/cosShipper:CosShipper", name, args, &resource, opts...)
 	if err != nil {
@@ -255,7 +258,7 @@ func (i *CosShipper) ToCosShipperOutputWithContext(ctx context.Context) CosShipp
 // CosShipperArrayInput is an input type that accepts CosShipperArray and CosShipperArrayOutput values.
 // You can construct a concrete instance of `CosShipperArrayInput` via:
 //
-//          CosShipperArray{ CosShipperArgs{...} }
+//	CosShipperArray{ CosShipperArgs{...} }
 type CosShipperArrayInput interface {
 	pulumi.Input
 
@@ -280,7 +283,7 @@ func (i CosShipperArray) ToCosShipperArrayOutputWithContext(ctx context.Context)
 // CosShipperMapInput is an input type that accepts CosShipperMap and CosShipperMapOutput values.
 // You can construct a concrete instance of `CosShipperMapInput` via:
 //
-//          CosShipperMap{ "key": CosShipperArgs{...} }
+//	CosShipperMap{ "key": CosShipperArgs{...} }
 type CosShipperMapInput interface {
 	pulumi.Input
 

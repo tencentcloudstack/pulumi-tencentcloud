@@ -9,10 +9,11 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const exampleMachinesSimple = tencentcloud.Cwp.getMachinesSimple({
  *     machineType: "CVM",
@@ -38,16 +39,17 @@ import * as utilities from "../utilities";
  *     resourceId: exampleLicenseOrder.resourceId,
  *     licenseId: exampleLicenseOrder.licenseId,
  *     licenseType: 0,
- *     quuid: exampleMachinesSimple.then(exampleMachinesSimple => exampleMachinesSimple.machines?[0]?.quuid),
+ *     quuid: exampleMachinesSimple.then(exampleMachinesSimple => exampleMachinesSimple.machines?.[0]?.quuid),
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * cwp license_bind_attachment can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Cwp/licenseBindAttachment:LicenseBindAttachment example cwplic-ab3edffa#44#2c7e5cce-1cec-4456-8d18-018f160dd987#0
+ * $ pulumi import tencentcloud:Cwp/licenseBindAttachment:LicenseBindAttachment example cwplic-ab3edffa#44#2c7e5cce-1cec-4456-8d18-018f160dd987#0
  * ```
  */
 export class LicenseBindAttachment extends pulumi.CustomResource {

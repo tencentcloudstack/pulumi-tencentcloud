@@ -11,8 +11,7 @@
     "repository": "https://github.com/tencentcloudstack/pulumi-tencentcloud",
     "license": "Apache-2.0",
     "scripts": {
-        "build": "tsc",
-        "install": "node scripts/install-pulumi-plugin.js resource tencentcloud ${VERSION}"
+        "build": "tsc"
     },
     "dependencies": {
         "@pulumi/pulumi": "^3.0.0"
@@ -24,6 +23,7 @@
     },
     "pulumi": {
         "resource": true,
-        "pluginDownloadURL": "github://api.github.com/tencentcloudstack"
+        "name": "tencentcloud",
+        "server": "github://api.github.com/tencentcloudstack"
     }
 }

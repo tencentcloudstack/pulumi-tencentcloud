@@ -15,35 +15,36 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Organization
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var policySubAccountAttachment = new Tencentcloud.Organization.PolicySubAccountAttachment("policySubAccountAttachment", new()
     ///     {
-    ///         var policySubAccountAttachment = new Tencentcloud.Organization.PolicySubAccountAttachment("policySubAccountAttachment", new Tencentcloud.Organization.PolicySubAccountAttachmentArgs
-    ///         {
-    ///             MemberUin = 100028582828,
-    ///             OrgSubAccountUin = 100028223737,
-    ///             PolicyId = 144256499,
-    ///         });
-    ///     }
+    ///         MemberUin = 100028582828,
+    ///         OrgSubAccountUin = 100028223737,
+    ///         PolicyId = 144256499,
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// organization policy_sub_account_attachment can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Organization/policySubAccountAttachment:PolicySubAccountAttachment policy_sub_account_attachment policyId#memberUin#orgSubAccountUin
+    /// $ pulumi import tencentcloud:Organization/policySubAccountAttachment:PolicySubAccountAttachment policy_sub_account_attachment policyId#memberUin#orgSubAccountUin
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Organization/policySubAccountAttachment:PolicySubAccountAttachment")]
-    public partial class PolicySubAccountAttachment : Pulumi.CustomResource
+    public partial class PolicySubAccountAttachment : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Creation time.
@@ -150,7 +151,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Organization
         }
     }
 
-    public sealed class PolicySubAccountAttachmentArgs : Pulumi.ResourceArgs
+    public sealed class PolicySubAccountAttachmentArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Organization member uin.
@@ -173,9 +174,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Organization
         public PolicySubAccountAttachmentArgs()
         {
         }
+        public static new PolicySubAccountAttachmentArgs Empty => new PolicySubAccountAttachmentArgs();
     }
 
-    public sealed class PolicySubAccountAttachmentState : Pulumi.ResourceArgs
+    public sealed class PolicySubAccountAttachmentState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Creation time.
@@ -240,5 +242,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Organization
         public PolicySubAccountAttachmentState()
         {
         }
+        public static new PolicySubAccountAttachmentState Empty => new PolicySubAccountAttachmentState();
     }
 }

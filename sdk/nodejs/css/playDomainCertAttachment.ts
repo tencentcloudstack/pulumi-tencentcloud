@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,29 +11,31 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const foo = tencentcloud.Ssl.getCertificates({
  *     name: "your_ssl_cert",
  * });
  * const playDomainCertAttachment = new tencentcloud.css.PlayDomainCertAttachment("playDomainCertAttachment", {
- *     cloudCertId: foo.then(foo => foo.certificates?[0]?.id),
+ *     cloudCertId: foo.then(foo => foo.certificates?.[0]?.id),
  *     domainInfo: {
  *         domainName: "your_domain_name",
  *         status: 1,
  *     },
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * css play_domain_cert_attachment can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Css/playDomainCertAttachment:PlayDomainCertAttachment play_domain_cert_attachment domainName#cloudCertId
+ * $ pulumi import tencentcloud:Css/playDomainCertAttachment:PlayDomainCertAttachment play_domain_cert_attachment domainName#cloudCertId
  * ```
  */
 export class PlayDomainCertAttachment extends pulumi.CustomResource {

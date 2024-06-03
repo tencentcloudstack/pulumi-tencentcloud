@@ -9,22 +9,24 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const clusterResourcePackagesAttachment = new tencentcloud.Cynosdb.ClusterResourcePackagesAttachment("cluster_resource_packages_attachment", {
+ * const clusterResourcePackagesAttachment = new tencentcloud.cynosdb.ClusterResourcePackagesAttachment("clusterResourcePackagesAttachment", {
  *     clusterId: "cynosdbmysql-q1d8151n",
  *     packageIds: ["package-hy4d2ppl"],
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * cynosdb cluster_resource_packages_attachment can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Cynosdb/clusterResourcePackagesAttachment:ClusterResourcePackagesAttachment cluster_resource_packages_attachment cluster_resource_packages_attachment_id
+ * $ pulumi import tencentcloud:Cynosdb/clusterResourcePackagesAttachment:ClusterResourcePackagesAttachment cluster_resource_packages_attachment cluster_resource_packages_attachment_id
  * ```
  */
 export class ClusterResourcePackagesAttachment extends pulumi.CustomResource {

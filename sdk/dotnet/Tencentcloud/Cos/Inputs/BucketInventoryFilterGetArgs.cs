@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos.Inputs
 {
 
-    public sealed class BucketInventoryFilterGetArgs : Pulumi.ResourceArgs
+    public sealed class BucketInventoryFilterGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Creation time range of the objects to analyze.
@@ -28,5 +28,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos.Inputs
         public BucketInventoryFilterGetArgs()
         {
         }
+        public static new BucketInventoryFilterGetArgs Empty => new BucketInventoryFilterGetArgs();
     }
 }

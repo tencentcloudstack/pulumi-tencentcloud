@@ -15,45 +15,46 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcm
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var clusterAttachment = new Tencentcloud.Tcm.ClusterAttachment("clusterAttachment", new()
     ///     {
-    ///         var clusterAttachment = new Tencentcloud.Tcm.ClusterAttachment("clusterAttachment", new Tencentcloud.Tcm.ClusterAttachmentArgs
+    ///         ClusterLists = new[]
     ///         {
-    ///             ClusterLists = 
+    ///             new Tencentcloud.Tcm.Inputs.ClusterAttachmentClusterListArgs
     ///             {
-    ///                 new Tencentcloud.Tcm.Inputs.ClusterAttachmentClusterListArgs
-    ///                 {
-    ///                     ClusterId = "cls-rc5uy6dy",
-    ///                     Region = "ap-guangzhou",
-    ///                     Role = "REMOTE",
-    ///                     SubnetId = "subnet-lkyb3ayc",
-    ///                     Type = "TKE",
-    ///                     VpcId = "vpc-a1jycmbx",
-    ///                 },
+    ///                 ClusterId = "cls-rc5uy6dy",
+    ///                 Region = "ap-guangzhou",
+    ///                 Role = "REMOTE",
+    ///                 SubnetId = "subnet-lkyb3ayc",
+    ///                 Type = "TKE",
+    ///                 VpcId = "vpc-a1jycmbx",
     ///             },
-    ///             MeshId = "mesh-b9q6vf9l",
-    ///         });
-    ///     }
+    ///         },
+    ///         MeshId = "mesh-b9q6vf9l",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// tcm cluster_attachment can be imported using the mesh_id#cluster_id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Tcm/clusterAttachment:ClusterAttachment cluster_attachment mesh-b9q6vf9l#cls-rc5uy6dy
+    /// $ pulumi import tencentcloud:Tcm/clusterAttachment:ClusterAttachment cluster_attachment mesh-b9q6vf9l#cls-rc5uy6dy
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Tcm/clusterAttachment:ClusterAttachment")]
-    public partial class ClusterAttachment : Pulumi.CustomResource
+    public partial class ClusterAttachment : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Cluster list.
@@ -112,7 +113,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcm
         }
     }
 
-    public sealed class ClusterAttachmentArgs : Pulumi.ResourceArgs
+    public sealed class ClusterAttachmentArgs : global::Pulumi.ResourceArgs
     {
         [Input("clusterLists")]
         private InputList<Inputs.ClusterAttachmentClusterListArgs>? _clusterLists;
@@ -135,9 +136,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcm
         public ClusterAttachmentArgs()
         {
         }
+        public static new ClusterAttachmentArgs Empty => new ClusterAttachmentArgs();
     }
 
-    public sealed class ClusterAttachmentState : Pulumi.ResourceArgs
+    public sealed class ClusterAttachmentState : global::Pulumi.ResourceArgs
     {
         [Input("clusterLists")]
         private InputList<Inputs.ClusterAttachmentClusterListGetArgs>? _clusterLists;
@@ -160,5 +162,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcm
         public ClusterAttachmentState()
         {
         }
+        public static new ClusterAttachmentState Empty => new ClusterAttachmentState();
     }
 }

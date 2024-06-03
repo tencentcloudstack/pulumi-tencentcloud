@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls.Inputs
 {
 
-    public sealed class ConfigExtraContainerStdoutGetArgs : Pulumi.ResourceArgs
+    public sealed class ConfigExtraContainerStdoutGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Is all containers.
@@ -70,5 +70,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls.Inputs
         public ConfigExtraContainerStdoutGetArgs()
         {
         }
+        public static new ConfigExtraContainerStdoutGetArgs Empty => new ConfigExtraContainerStdoutGetArgs();
     }
 }

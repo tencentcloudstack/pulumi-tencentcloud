@@ -15,48 +15,49 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tem
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var applicationService = new Tencentcloud.Tem.ApplicationService("applicationService", new()
     ///     {
-    ///         var applicationService = new Tencentcloud.Tem.ApplicationService("applicationService", new Tencentcloud.Tem.ApplicationServiceArgs
+    ///         ApplicationId = "app-jrl3346j",
+    ///         EnvironmentId = "en-dpxyydl5",
+    ///         Service = new Tencentcloud.Tem.Inputs.ApplicationServiceServiceArgs
     ///         {
-    ///             ApplicationId = "app-jrl3346j",
-    ///             EnvironmentId = "en-dpxyydl5",
-    ///             Service = new Tencentcloud.Tem.Inputs.ApplicationServiceServiceArgs
+    ///             PortMappingItemLists = new[]
     ///             {
-    ///                 PortMappingItemLists = 
+    ///                 new Tencentcloud.Tem.Inputs.ApplicationServiceServicePortMappingItemListArgs
     ///                 {
-    ///                     new Tencentcloud.Tem.Inputs.ApplicationServiceServicePortMappingItemListArgs
-    ///                     {
-    ///                         Port = 80,
-    ///                         Protocol = "TCP",
-    ///                         TargetPort = 80,
-    ///                     },
+    ///                     Port = 80,
+    ///                     Protocol = "TCP",
+    ///                     TargetPort = 80,
     ///                 },
-    ///                 ServiceName = "test0-1",
-    ///                 Type = "CLUSTER",
     ///             },
-    ///         });
-    ///     }
+    ///             ServiceName = "test0-1",
+    ///             Type = "CLUSTER",
+    ///         },
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// tem application_service can be imported using the environmentId#applicationId#serviceName, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Tem/applicationService:ApplicationService application_service en-dpxyydl5#app-jrl3346j#test0-1
+    /// $ pulumi import tencentcloud:Tem/applicationService:ApplicationService application_service en-dpxyydl5#app-jrl3346j#test0-1
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Tem/applicationService:ApplicationService")]
-    public partial class ApplicationService : Pulumi.CustomResource
+    public partial class ApplicationService : global::Pulumi.CustomResource
     {
         /// <summary>
         /// application ID.
@@ -121,7 +122,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tem
         }
     }
 
-    public sealed class ApplicationServiceArgs : Pulumi.ResourceArgs
+    public sealed class ApplicationServiceArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// application ID.
@@ -144,9 +145,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tem
         public ApplicationServiceArgs()
         {
         }
+        public static new ApplicationServiceArgs Empty => new ApplicationServiceArgs();
     }
 
-    public sealed class ApplicationServiceState : Pulumi.ResourceArgs
+    public sealed class ApplicationServiceState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// application ID.
@@ -169,5 +171,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tem
         public ApplicationServiceState()
         {
         }
+        public static new ApplicationServiceState Empty => new ApplicationServiceState();
     }
 }

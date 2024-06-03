@@ -15,48 +15,49 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dlc
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var userDataEngineConfig = new Tencentcloud.Dlc.UserDataEngineConfig("userDataEngineConfig", new()
     ///     {
-    ///         var userDataEngineConfig = new Tencentcloud.Dlc.UserDataEngineConfig("userDataEngineConfig", new Tencentcloud.Dlc.UserDataEngineConfigArgs
+    ///         DataEngineConfigPairs = new[]
     ///         {
-    ///             DataEngineConfigPairs = 
+    ///             new Tencentcloud.Dlc.Inputs.UserDataEngineConfigDataEngineConfigPairArgs
     ///             {
-    ///                 new Tencentcloud.Dlc.Inputs.UserDataEngineConfigDataEngineConfigPairArgs
-    ///                 {
-    ///                     ConfigItem = "qq",
-    ///                     ConfigValue = "ff",
-    ///                 },
+    ///                 ConfigItem = "qq",
+    ///                 ConfigValue = "ff",
     ///             },
-    ///             DataEngineId = "DataEngine-cgkvbas6",
-    ///             SessionResourceTemplate = new Tencentcloud.Dlc.Inputs.UserDataEngineConfigSessionResourceTemplateArgs
-    ///             {
-    ///                 DriverSize = "small",
-    ///                 ExecutorMaxNumbers = 1,
-    ///                 ExecutorNums = 1,
-    ///                 ExecutorSize = "small",
-    ///             },
-    ///         });
-    ///     }
+    ///         },
+    ///         DataEngineId = "DataEngine-cgkvbas6",
+    ///         SessionResourceTemplate = new Tencentcloud.Dlc.Inputs.UserDataEngineConfigSessionResourceTemplateArgs
+    ///         {
+    ///             DriverSize = "small",
+    ///             ExecutorMaxNumbers = 1,
+    ///             ExecutorNums = 1,
+    ///             ExecutorSize = "small",
+    ///         },
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// dlc user_data_engine_config can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Dlc/userDataEngineConfig:UserDataEngineConfig user_data_engine_config user_data_engine_config_id
+    /// $ pulumi import tencentcloud:Dlc/userDataEngineConfig:UserDataEngineConfig user_data_engine_config user_data_engine_config_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Dlc/userDataEngineConfig:UserDataEngineConfig")]
-    public partial class UserDataEngineConfig : Pulumi.CustomResource
+    public partial class UserDataEngineConfig : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Engine configuration items.
@@ -121,7 +122,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dlc
         }
     }
 
-    public sealed class UserDataEngineConfigArgs : Pulumi.ResourceArgs
+    public sealed class UserDataEngineConfigArgs : global::Pulumi.ResourceArgs
     {
         [Input("dataEngineConfigPairs")]
         private InputList<Inputs.UserDataEngineConfigDataEngineConfigPairArgs>? _dataEngineConfigPairs;
@@ -150,9 +151,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dlc
         public UserDataEngineConfigArgs()
         {
         }
+        public static new UserDataEngineConfigArgs Empty => new UserDataEngineConfigArgs();
     }
 
-    public sealed class UserDataEngineConfigState : Pulumi.ResourceArgs
+    public sealed class UserDataEngineConfigState : global::Pulumi.ResourceArgs
     {
         [Input("dataEngineConfigPairs")]
         private InputList<Inputs.UserDataEngineConfigDataEngineConfigPairGetArgs>? _dataEngineConfigPairs;
@@ -181,5 +183,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dlc
         public UserDataEngineConfigState()
         {
         }
+        public static new UserDataEngineConfigState Empty => new UserDataEngineConfigState();
     }
 }

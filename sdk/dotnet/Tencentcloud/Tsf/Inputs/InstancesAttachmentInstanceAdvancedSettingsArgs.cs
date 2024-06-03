@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf.Inputs
 {
 
-    public sealed class InstancesAttachmentInstanceAdvancedSettingsArgs : Pulumi.ResourceArgs
+    public sealed class InstancesAttachmentInstanceAdvancedSettingsArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Dockerd --graph specifies the value, default is /var/lib/docker Note: This field may return null, indicating that no valid values can be obtained.
@@ -28,5 +28,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf.Inputs
         public InstancesAttachmentInstanceAdvancedSettingsArgs()
         {
         }
+        public static new InstancesAttachmentInstanceAdvancedSettingsArgs Empty => new InstancesAttachmentInstanceAdvancedSettingsArgs();
     }
 }

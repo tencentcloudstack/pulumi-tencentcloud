@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps.Inputs
 {
 
-    public sealed class GetMediaMetaDataInputInfoS3InputInfoInputArgs : Pulumi.ResourceArgs
+    public sealed class GetMediaMetaDataInputInfoS3InputInfoInputArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// The AWS S3 bucket.
@@ -46,5 +46,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps.Inputs
         public GetMediaMetaDataInputInfoS3InputInfoInputArgs()
         {
         }
+        public static new GetMediaMetaDataInputInfoS3InputInfoInputArgs Empty => new GetMediaMetaDataInputInfoS3InputInfoInputArgs();
     }
 }

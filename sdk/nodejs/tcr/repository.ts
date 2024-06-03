@@ -8,11 +8,13 @@ import * as utilities from "../utilities";
  * Use this resource to create tcr repository.
  *
  * ## Example Usage
+ *
  * ### Create a tcr repository instance
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const exampleInstance = new tencentcloud.tcr.Instance("exampleInstance", {
  *     instanceType: "premium",
@@ -35,13 +37,14 @@ import * as utilities from "../utilities";
  *     description: "111111111111111111111111111111111111",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * tcr repository can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Tcr/repository:Repository foo instance_id#namespace_name#repository_name
+ * $ pulumi import tencentcloud:Tcr/repository:Repository foo instance_id#namespace_name#repository_name
  * ```
  */
 export class Repository extends pulumi.CustomResource {

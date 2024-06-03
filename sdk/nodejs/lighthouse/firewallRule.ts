@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -12,11 +13,12 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const firewallRule = new tencentcloud.Lighthouse.FirewallRule("firewall_rule", {
+ * const firewallRule = new tencentcloud.lighthouse.FirewallRule("firewallRule", {
  *     firewallRules: [
  *         {
  *             action: "ACCEPT",
@@ -36,13 +38,14 @@ import * as utilities from "../utilities";
  *     instanceId: "lhins-xxxxxxx",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * lighthouse firewall_rule can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Lighthouse/firewallRule:FirewallRule firewall_rule lighthouse_instance_id
+ * $ pulumi import tencentcloud:Lighthouse/firewallRule:FirewallRule firewall_rule lighthouse_instance_id
  * ```
  */
 export class FirewallRule extends pulumi.CustomResource {

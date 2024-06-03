@@ -16,17 +16,17 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
         /// Use this data source to query detailed information of postgresql base_backups
         /// </summary>
         public static Task<GetBaseBackupsResult> InvokeAsync(GetBaseBackupsArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetBaseBackupsResult>("tencentcloud:Postgresql/getBaseBackups:getBaseBackups", args ?? new GetBaseBackupsArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetBaseBackupsResult>("tencentcloud:Postgresql/getBaseBackups:getBaseBackups", args ?? new GetBaseBackupsArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of postgresql base_backups
         /// </summary>
         public static Output<GetBaseBackupsResult> Invoke(GetBaseBackupsInvokeArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetBaseBackupsResult>("tencentcloud:Postgresql/getBaseBackups:getBaseBackups", args ?? new GetBaseBackupsInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetBaseBackupsResult>("tencentcloud:Postgresql/getBaseBackups:getBaseBackups", args ?? new GetBaseBackupsInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetBaseBackupsArgs : Pulumi.InvokeArgs
+    public sealed class GetBaseBackupsArgs : global::Pulumi.InvokeArgs
     {
         [Input("filters")]
         private List<Inputs.GetBaseBackupsFilterArgs>? _filters;
@@ -73,9 +73,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
         public GetBaseBackupsArgs()
         {
         }
+        public static new GetBaseBackupsArgs Empty => new GetBaseBackupsArgs();
     }
 
-    public sealed class GetBaseBackupsInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetBaseBackupsInvokeArgs : global::Pulumi.InvokeArgs
     {
         [Input("filters")]
         private InputList<Inputs.GetBaseBackupsFilterInputArgs>? _filters;
@@ -122,6 +123,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
         public GetBaseBackupsInvokeArgs()
         {
         }
+        public static new GetBaseBackupsInvokeArgs Empty => new GetBaseBackupsInvokeArgs();
     }
 
 

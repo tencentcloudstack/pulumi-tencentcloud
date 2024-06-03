@@ -2,20 +2,23 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
  * Provides a resource to create a tse instance
  *
  * ## Example Usage
+ *
  * ### Create zookeeper standard version
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const zookeeperStandard = new tencentcloud.Tse.Instance("zookeeper_standard", {
+ * const zookeeperStandard = new tencentcloud.tse.Instance("zookeeperStandard", {
  *     engineName: "zookeeper-test",
  *     engineNodeNum: 3,
  *     engineProductVersion: "STANDARD",
@@ -31,13 +34,16 @@ import * as utilities from "../utilities";
  *     vpcId: "vpc-4owdpnwr",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
+ *
  * ### Create zookeeper professional version
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const zookeeperProfessional = new tencentcloud.Tse.Instance("zookeeper_professional", {
+ * const zookeeperProfessional = new tencentcloud.tse.Instance("zookeeperProfessional", {
  *     engineName: "zookeeper-test",
  *     engineNodeNum: 3,
  *     engineProductVersion: "PROFESSIONAL",
@@ -67,13 +73,16 @@ import * as utilities from "../utilities";
  *     vpcId: "vpc-4owdpnwr",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
+ *
  * ### Create nacos standard version
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const nacos = new tencentcloud.Tse.Instance("nacos", {
+ * const nacos = new tencentcloud.tse.Instance("nacos", {
  *     enableClientInternetAccess: false,
  *     engineName: "test",
  *     engineNodeNum: 3,
@@ -90,13 +99,16 @@ import * as utilities from "../utilities";
  *     vpcId: "vpc-99xmasf9",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
+ *
  * ### Create polaris base version
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const polaris = new tencentcloud.Tse.Instance("polaris", {
+ * const polaris = new tencentcloud.tse.Instance("polaris", {
  *     enableClientInternetAccess: false,
  *     engineName: "test",
  *     engineNodeNum: 2,
@@ -113,13 +125,14 @@ import * as utilities from "../utilities";
  *     vpcId: "vpc-99xmasf9",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * tse instance can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Tse/instance:Instance instance instance_id
+ * $ pulumi import tencentcloud:Tse/instance:Instance instance instance_id
  * ```
  */
 export class Instance extends pulumi.CustomResource {

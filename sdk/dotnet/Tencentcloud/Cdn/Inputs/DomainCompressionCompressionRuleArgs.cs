@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cdn.Inputs
 {
 
-    public sealed class DomainCompressionCompressionRuleArgs : Pulumi.ResourceArgs
+    public sealed class DomainCompressionCompressionRuleArgs : global::Pulumi.ResourceArgs
     {
         [Input("algorithms", required: true)]
         private InputList<string>? _algorithms;
@@ -76,5 +76,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cdn.Inputs
         public DomainCompressionCompressionRuleArgs()
         {
         }
+        public static new DomainCompressionCompressionRuleArgs Empty => new DomainCompressionCompressionRuleArgs();
     }
 }

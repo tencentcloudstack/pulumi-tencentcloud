@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,20 +11,19 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const example = pulumi.output(tencentcloud.Waf.getTlsVersions());
+ * const example = tencentcloud.Waf.getTlsVersions({});
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getTlsVersions(args?: GetTlsVersionsArgs, opts?: pulumi.InvokeOptions): Promise<GetTlsVersionsResult> {
     args = args || {};
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Waf/getTlsVersions:getTlsVersions", {
         "resultOutputFile": args.resultOutputFile,
     }, opts);
@@ -53,9 +53,22 @@ export interface GetTlsVersionsResult {
      */
     readonly tls: outputs.Waf.GetTlsVersionsTl[];
 }
-
+/**
+ * Use this data source to query detailed information of waf tlsVersions
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const example = tencentcloud.Waf.getTlsVersions({});
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getTlsVersionsOutput(args?: GetTlsVersionsOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetTlsVersionsResult> {
-    return pulumi.output(args).apply(a => getTlsVersions(a, opts))
+    return pulumi.output(args).apply((a: any) => getTlsVersions(a, opts))
 }
 
 /**

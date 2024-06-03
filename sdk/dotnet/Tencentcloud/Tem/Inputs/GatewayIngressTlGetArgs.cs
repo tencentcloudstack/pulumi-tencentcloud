@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tem.Inputs
 {
 
-    public sealed class GatewayIngressTlGetArgs : Pulumi.ResourceArgs
+    public sealed class GatewayIngressTlGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// certificate ID.
@@ -40,5 +40,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tem.Inputs
         public GatewayIngressTlGetArgs()
         {
         }
+        public static new GatewayIngressTlGetArgs Empty => new GatewayIngressTlGetArgs();
     }
 }

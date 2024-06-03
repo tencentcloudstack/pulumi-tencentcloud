@@ -18,11 +18,11 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dcdb
     /// dcdb account_privileges can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Dcdb/accountPrivileges:AccountPrivileges account_privileges instanceId#userName#host#dbName#tabName#viewName#colName
+    /// $ pulumi import tencentcloud:Dcdb/accountPrivileges:AccountPrivileges account_privileges instanceId#userName#host#dbName#tabName#viewName#colName
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Dcdb/accountPrivileges:AccountPrivileges")]
-    public partial class AccountPrivileges : Pulumi.CustomResource
+    public partial class AccountPrivileges : global::Pulumi.CustomResource
     {
         /// <summary>
         /// The account of the database, including username and host.
@@ -111,7 +111,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dcdb
         }
     }
 
-    public sealed class AccountPrivilegesArgs : Pulumi.ResourceArgs
+    public sealed class AccountPrivilegesArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// The account of the database, including username and host.
@@ -164,9 +164,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dcdb
         public AccountPrivilegesArgs()
         {
         }
+        public static new AccountPrivilegesArgs Empty => new AccountPrivilegesArgs();
     }
 
-    public sealed class AccountPrivilegesState : Pulumi.ResourceArgs
+    public sealed class AccountPrivilegesState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// The account of the database, including username and host.
@@ -219,5 +220,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dcdb
         public AccountPrivilegesState()
         {
         }
+        public static new AccountPrivilegesState Empty => new AccountPrivilegesState();
     }
 }

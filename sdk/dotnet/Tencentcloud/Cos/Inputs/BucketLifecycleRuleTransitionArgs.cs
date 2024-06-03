@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos.Inputs
 {
 
-    public sealed class BucketLifecycleRuleTransitionArgs : Pulumi.ResourceArgs
+    public sealed class BucketLifecycleRuleTransitionArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Specifies the date after which you want the corresponding action to take effect.
@@ -34,5 +34,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos.Inputs
         public BucketLifecycleRuleTransitionArgs()
         {
         }
+        public static new BucketLifecycleRuleTransitionArgs Empty => new BucketLifecycleRuleTransitionArgs();
     }
 }

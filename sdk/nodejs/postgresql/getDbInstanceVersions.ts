@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,20 +11,19 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const dbInstanceVersions = pulumi.output(tencentcloud.Postgresql.getDbInstanceVersions());
+ * const dbInstanceVersions = tencentcloud.Postgresql.getDbInstanceVersions({});
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getDbInstanceVersions(args?: GetDbInstanceVersionsArgs, opts?: pulumi.InvokeOptions): Promise<GetDbInstanceVersionsResult> {
     args = args || {};
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Postgresql/getDbInstanceVersions:getDbInstanceVersions", {
         "resultOutputFile": args.resultOutputFile,
     }, opts);
@@ -53,9 +53,22 @@ export interface GetDbInstanceVersionsResult {
      */
     readonly versionSets: outputs.Postgresql.GetDbInstanceVersionsVersionSet[];
 }
-
+/**
+ * Use this data source to query detailed information of postgresql dbInstanceVersions
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const dbInstanceVersions = tencentcloud.Postgresql.getDbInstanceVersions({});
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getDbInstanceVersionsOutput(args?: GetDbInstanceVersionsOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetDbInstanceVersionsResult> {
-    return pulumi.output(args).apply(a => getDbInstanceVersions(a, opts))
+    return pulumi.output(args).apply((a: any) => getDbInstanceVersions(a, opts))
 }
 
 /**

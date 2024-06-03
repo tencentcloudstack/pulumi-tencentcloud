@@ -14,54 +14,60 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cfw
     /// Provides a resource to create a cfw edge_firewall_switch
     /// 
     /// ## Example Usage
+    /// 
     /// ### If not set subnet_id
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = Pulumi.Tencentcloud;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
-    ///     {
-    ///         var exampleEdgeFwSwitches = Output.Create(Tencentcloud.Cfw.GetEdgeFwSwitches.InvokeAsync());
-    ///         var exampleEdgeFirewallSwitch = new Tencentcloud.Cfw.EdgeFirewallSwitch("exampleEdgeFirewallSwitch", new Tencentcloud.Cfw.EdgeFirewallSwitchArgs
-    ///         {
-    ///             PublicIp = exampleEdgeFwSwitches.Apply(exampleEdgeFwSwitches =&gt; exampleEdgeFwSwitches.Datas?[0]?.PublicIp),
-    ///             SwitchMode = 1,
-    ///             Enable = 0,
-    ///         });
-    ///     }
+    ///     var exampleEdgeFwSwitches = Tencentcloud.Cfw.GetEdgeFwSwitches.Invoke();
     /// 
-    /// }
+    ///     var exampleEdgeFirewallSwitch = new Tencentcloud.Cfw.EdgeFirewallSwitch("exampleEdgeFirewallSwitch", new()
+    ///     {
+    ///         PublicIp = exampleEdgeFwSwitches.Apply(getEdgeFwSwitchesResult =&gt; getEdgeFwSwitchesResult.Datas[0]?.PublicIp),
+    ///         SwitchMode = 1,
+    ///         Enable = 0,
+    ///     });
+    /// 
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
+    /// 
     /// ### If set subnet id
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = Pulumi.Tencentcloud;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
-    ///     {
-    ///         var exampleEdgeFwSwitches = Output.Create(Tencentcloud.Cfw.GetEdgeFwSwitches.InvokeAsync());
-    ///         var exampleEdgeFirewallSwitch = new Tencentcloud.Cfw.EdgeFirewallSwitch("exampleEdgeFirewallSwitch", new Tencentcloud.Cfw.EdgeFirewallSwitchArgs
-    ///         {
-    ///             PublicIp = exampleEdgeFwSwitches.Apply(exampleEdgeFwSwitches =&gt; exampleEdgeFwSwitches.Datas?[0]?.PublicIp),
-    ///             SubnetId = "subnet-id",
-    ///             SwitchMode = 1,
-    ///             Enable = 1,
-    ///         });
-    ///     }
+    ///     var exampleEdgeFwSwitches = Tencentcloud.Cfw.GetEdgeFwSwitches.Invoke();
     /// 
-    /// }
+    ///     var exampleEdgeFirewallSwitch = new Tencentcloud.Cfw.EdgeFirewallSwitch("exampleEdgeFirewallSwitch", new()
+    ///     {
+    ///         PublicIp = exampleEdgeFwSwitches.Apply(getEdgeFwSwitchesResult =&gt; getEdgeFwSwitchesResult.Datas[0]?.PublicIp),
+    ///         SubnetId = "subnet-id",
+    ///         SwitchMode = 1,
+    ///         Enable = 1,
+    ///     });
+    /// 
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Cfw/edgeFirewallSwitch:EdgeFirewallSwitch")]
-    public partial class EdgeFirewallSwitch : Pulumi.CustomResource
+    public partial class EdgeFirewallSwitch : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Switch, 0: off, 1: on.
@@ -132,7 +138,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cfw
         }
     }
 
-    public sealed class EdgeFirewallSwitchArgs : Pulumi.ResourceArgs
+    public sealed class EdgeFirewallSwitchArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Switch, 0: off, 1: on.
@@ -161,9 +167,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cfw
         public EdgeFirewallSwitchArgs()
         {
         }
+        public static new EdgeFirewallSwitchArgs Empty => new EdgeFirewallSwitchArgs();
     }
 
-    public sealed class EdgeFirewallSwitchState : Pulumi.ResourceArgs
+    public sealed class EdgeFirewallSwitchState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Switch, 0: off, 1: on.
@@ -192,5 +199,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cfw
         public EdgeFirewallSwitchState()
         {
         }
+        public static new EdgeFirewallSwitchState Empty => new EdgeFirewallSwitchState();
     }
 }

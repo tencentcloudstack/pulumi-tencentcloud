@@ -15,74 +15,70 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam
         /// <summary>
         /// Use this data source to query detailed information of CAM policies
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var foo = Tencentcloud.Cam.GetPolicies.Invoke(new()
         ///     {
-        ///         var foo = Output.Create(Tencentcloud.Cam.GetPolicies.InvokeAsync(new Tencentcloud.Cam.GetPoliciesArgs
-        ///         {
-        ///             PolicyId = tencentcloud_cam_policy.Foo.Id,
-        ///         }));
-        ///         var bar = Output.Create(Tencentcloud.Cam.GetPolicies.InvokeAsync(new Tencentcloud.Cam.GetPoliciesArgs
-        ///         {
-        ///             PolicyId = tencentcloud_cam_policy.Foo.Id,
-        ///             Name = "tf-auto-test",
-        ///         }));
-        ///     }
+        ///         PolicyId = tencentcloud_cam_policy.Foo.Id,
+        ///     });
         /// 
-        /// }
+        ///     var bar = Tencentcloud.Cam.GetPolicies.Invoke(new()
+        ///     {
+        ///         PolicyId = tencentcloud_cam_policy.Foo.Id,
+        ///         Name = "tf-auto-test",
+        ///     });
+        /// 
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetPoliciesResult> InvokeAsync(GetPoliciesArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetPoliciesResult>("tencentcloud:Cam/getPolicies:getPolicies", args ?? new GetPoliciesArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetPoliciesResult>("tencentcloud:Cam/getPolicies:getPolicies", args ?? new GetPoliciesArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of CAM policies
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var foo = Tencentcloud.Cam.GetPolicies.Invoke(new()
         ///     {
-        ///         var foo = Output.Create(Tencentcloud.Cam.GetPolicies.InvokeAsync(new Tencentcloud.Cam.GetPoliciesArgs
-        ///         {
-        ///             PolicyId = tencentcloud_cam_policy.Foo.Id,
-        ///         }));
-        ///         var bar = Output.Create(Tencentcloud.Cam.GetPolicies.InvokeAsync(new Tencentcloud.Cam.GetPoliciesArgs
-        ///         {
-        ///             PolicyId = tencentcloud_cam_policy.Foo.Id,
-        ///             Name = "tf-auto-test",
-        ///         }));
-        ///     }
+        ///         PolicyId = tencentcloud_cam_policy.Foo.Id,
+        ///     });
         /// 
-        /// }
+        ///     var bar = Tencentcloud.Cam.GetPolicies.Invoke(new()
+        ///     {
+        ///         PolicyId = tencentcloud_cam_policy.Foo.Id,
+        ///         Name = "tf-auto-test",
+        ///     });
+        /// 
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetPoliciesResult> Invoke(GetPoliciesInvokeArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetPoliciesResult>("tencentcloud:Cam/getPolicies:getPolicies", args ?? new GetPoliciesInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetPoliciesResult>("tencentcloud:Cam/getPolicies:getPolicies", args ?? new GetPoliciesInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetPoliciesArgs : Pulumi.InvokeArgs
+    public sealed class GetPoliciesArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Mode of creation of policy strategy. Valid values: `1`, `2`. `1` means policy was created with console, and `2` means it was created by strategies.
@@ -123,9 +119,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam
         public GetPoliciesArgs()
         {
         }
+        public static new GetPoliciesArgs Empty => new GetPoliciesArgs();
     }
 
-    public sealed class GetPoliciesInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetPoliciesInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Mode of creation of policy strategy. Valid values: `1`, `2`. `1` means policy was created with console, and `2` means it was created by strategies.
@@ -166,6 +163,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam
         public GetPoliciesInvokeArgs()
         {
         }
+        public static new GetPoliciesInvokeArgs Empty => new GetPoliciesInvokeArgs();
     }
 
 

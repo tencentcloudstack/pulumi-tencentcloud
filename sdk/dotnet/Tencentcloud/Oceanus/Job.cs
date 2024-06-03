@@ -15,32 +15,33 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Oceanus
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var example = new Tencentcloud.Oceanus.Job("example", new()
     ///     {
-    ///         var example = new Tencentcloud.Oceanus.Job("example", new Tencentcloud.Oceanus.JobArgs
-    ///         {
-    ///             ClusterId = "cluster-1kcd524h",
-    ///             ClusterType = 2,
-    ///             CuMem = 4,
-    ///             FlinkVersion = "Flink-1.16",
-    ///             FolderId = "folder-7ctl246z",
-    ///             JobType = 1,
-    ///             Remark = "remark.",
-    ///             WorkSpaceId = "space-2idq8wbr",
-    ///         });
-    ///     }
+    ///         ClusterId = "cluster-1kcd524h",
+    ///         ClusterType = 2,
+    ///         CuMem = 4,
+    ///         FlinkVersion = "Flink-1.16",
+    ///         FolderId = "folder-7ctl246z",
+    ///         JobType = 1,
+    ///         Remark = "remark.",
+    ///         WorkSpaceId = "space-2idq8wbr",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Oceanus/job:Job")]
-    public partial class Job : Pulumi.CustomResource
+    public partial class Job : global::Pulumi.CustomResource
     {
         /// <summary>
         /// When ClusterType=2, it is required to specify the ID of the exclusive cluster to which the job is submitted.
@@ -141,7 +142,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Oceanus
         }
     }
 
-    public sealed class JobArgs : Pulumi.ResourceArgs
+    public sealed class JobArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// When ClusterType=2, it is required to specify the ID of the exclusive cluster to which the job is submitted.
@@ -200,9 +201,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Oceanus
         public JobArgs()
         {
         }
+        public static new JobArgs Empty => new JobArgs();
     }
 
-    public sealed class JobState : Pulumi.ResourceArgs
+    public sealed class JobState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// When ClusterType=2, it is required to specify the ID of the exclusive cluster to which the job is submitted.
@@ -261,5 +263,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Oceanus
         public JobState()
         {
         }
+        public static new JobState Empty => new JobState();
     }
 }

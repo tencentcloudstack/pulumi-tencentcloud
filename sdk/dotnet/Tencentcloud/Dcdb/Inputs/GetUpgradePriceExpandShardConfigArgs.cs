@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dcdb.Inputs
 {
 
-    public sealed class GetUpgradePriceExpandShardConfigInputArgs : Pulumi.ResourceArgs
+    public sealed class GetUpgradePriceExpandShardConfigInputArgs : global::Pulumi.ResourceArgs
     {
         [Input("shardInstanceIds", required: true)]
         private InputList<string>? _shardInstanceIds;
@@ -46,5 +46,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dcdb.Inputs
         public GetUpgradePriceExpandShardConfigInputArgs()
         {
         }
+        public static new GetUpgradePriceExpandShardConfigInputArgs Empty => new GetUpgradePriceExpandShardConfigInputArgs();
     }
 }

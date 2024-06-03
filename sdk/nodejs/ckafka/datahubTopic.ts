@@ -12,7 +12,7 @@ import * as utilities from "../utilities";
  * ckafka datahub_topic can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Ckafka/datahubTopic:DatahubTopic datahub_topic datahub_topic_name
+ * $ pulumi import tencentcloud:Ckafka/datahubTopic:DatahubTopic datahub_topic datahub_topic_name
  * ```
  */
 export class DatahubTopic extends pulumi.CustomResource {

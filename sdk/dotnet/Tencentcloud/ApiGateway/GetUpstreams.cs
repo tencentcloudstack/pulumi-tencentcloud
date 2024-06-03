@@ -15,64 +15,58 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway
         /// <summary>
         /// Use this data source to query detailed information of apigateway upstream
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var example = Tencentcloud.ApiGateway.GetUpstreams.Invoke(new()
         ///     {
-        ///         var example = Output.Create(Tencentcloud.ApiGateway.GetUpstreams.InvokeAsync(new Tencentcloud.ApiGateway.GetUpstreamsArgs
-        ///         {
-        ///             UpstreamId = "upstream-4n5bfklc",
-        ///         }));
-        ///     }
+        ///         UpstreamId = "upstream-4n5bfklc",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetUpstreamsResult> InvokeAsync(GetUpstreamsArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetUpstreamsResult>("tencentcloud:ApiGateway/getUpstreams:getUpstreams", args ?? new GetUpstreamsArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetUpstreamsResult>("tencentcloud:ApiGateway/getUpstreams:getUpstreams", args ?? new GetUpstreamsArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of apigateway upstream
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var example = Tencentcloud.ApiGateway.GetUpstreams.Invoke(new()
         ///     {
-        ///         var example = Output.Create(Tencentcloud.ApiGateway.GetUpstreams.InvokeAsync(new Tencentcloud.ApiGateway.GetUpstreamsArgs
-        ///         {
-        ///             UpstreamId = "upstream-4n5bfklc",
-        ///         }));
-        ///     }
+        ///         UpstreamId = "upstream-4n5bfklc",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetUpstreamsResult> Invoke(GetUpstreamsInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetUpstreamsResult>("tencentcloud:ApiGateway/getUpstreams:getUpstreams", args ?? new GetUpstreamsInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetUpstreamsResult>("tencentcloud:ApiGateway/getUpstreams:getUpstreams", args ?? new GetUpstreamsInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetUpstreamsArgs : Pulumi.InvokeArgs
+    public sealed class GetUpstreamsArgs : global::Pulumi.InvokeArgs
     {
         [Input("filters")]
         private List<Inputs.GetUpstreamsFilterArgs>? _filters;
@@ -101,9 +95,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway
         public GetUpstreamsArgs()
         {
         }
+        public static new GetUpstreamsArgs Empty => new GetUpstreamsArgs();
     }
 
-    public sealed class GetUpstreamsInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetUpstreamsInvokeArgs : global::Pulumi.InvokeArgs
     {
         [Input("filters")]
         private InputList<Inputs.GetUpstreamsFilterInputArgs>? _filters;
@@ -132,6 +127,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway
         public GetUpstreamsInvokeArgs()
         {
         }
+        public static new GetUpstreamsInvokeArgs Empty => new GetUpstreamsInvokeArgs();
     }
 
 

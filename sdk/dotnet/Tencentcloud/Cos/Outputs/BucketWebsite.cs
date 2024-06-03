@@ -14,6 +14,9 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos.Outputs
     [OutputType]
     public sealed class BucketWebsite
     {
+        /// <summary>
+        /// `Endpoint` of the static website.
+        /// </summary>
         public readonly string? Endpoint;
         /// <summary>
         /// An absolute path to the document to return in case of a 4XX error.

@@ -15,52 +15,53 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Lighthouse
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var firewallTemplate = new Tencentcloud.Lighthouse.FirewallTemplate("firewallTemplate", new()
     ///     {
-    ///         var firewallTemplate = new Tencentcloud.Lighthouse.FirewallTemplate("firewallTemplate", new Tencentcloud.Lighthouse.FirewallTemplateArgs
+    ///         TemplateName = "firewall-template-test",
+    ///         TemplateRules = new[]
     ///         {
-    ///             TemplateName = "firewall-template-test",
-    ///             TemplateRules = 
+    ///             new Tencentcloud.Lighthouse.Inputs.FirewallTemplateTemplateRuleArgs
     ///             {
-    ///                 new Tencentcloud.Lighthouse.Inputs.FirewallTemplateTemplateRuleArgs
-    ///                 {
-    ///                     Action = "ACCEPT",
-    ///                     CidrBlock = "127.0.0.1",
-    ///                     FirewallRuleDescription = "test description",
-    ///                     Port = "8080",
-    ///                     Protocol = "TCP",
-    ///                 },
-    ///                 new Tencentcloud.Lighthouse.Inputs.FirewallTemplateTemplateRuleArgs
-    ///                 {
-    ///                     Action = "DROP",
-    ///                     CidrBlock = "127.0.0.0/24",
-    ///                     FirewallRuleDescription = "test description",
-    ///                     Port = "8090",
-    ///                     Protocol = "TCP",
-    ///                 },
+    ///                 Action = "ACCEPT",
+    ///                 CidrBlock = "127.0.0.1",
+    ///                 FirewallRuleDescription = "test description",
+    ///                 Port = "8080",
+    ///                 Protocol = "TCP",
     ///             },
-    ///         });
-    ///     }
+    ///             new Tencentcloud.Lighthouse.Inputs.FirewallTemplateTemplateRuleArgs
+    ///             {
+    ///                 Action = "DROP",
+    ///                 CidrBlock = "127.0.0.0/24",
+    ///                 FirewallRuleDescription = "test description",
+    ///                 Port = "8090",
+    ///                 Protocol = "TCP",
+    ///             },
+    ///         },
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// lighthouse firewall_template can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Lighthouse/firewallTemplate:FirewallTemplate firewall_template firewall_template_id
+    /// $ pulumi import tencentcloud:Lighthouse/firewallTemplate:FirewallTemplate firewall_template firewall_template_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Lighthouse/firewallTemplate:FirewallTemplate")]
-    public partial class FirewallTemplate : Pulumi.CustomResource
+    public partial class FirewallTemplate : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Template name.
@@ -119,7 +120,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Lighthouse
         }
     }
 
-    public sealed class FirewallTemplateArgs : Pulumi.ResourceArgs
+    public sealed class FirewallTemplateArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Template name.
@@ -142,9 +143,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Lighthouse
         public FirewallTemplateArgs()
         {
         }
+        public static new FirewallTemplateArgs Empty => new FirewallTemplateArgs();
     }
 
-    public sealed class FirewallTemplateState : Pulumi.ResourceArgs
+    public sealed class FirewallTemplateState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Template name.
@@ -167,5 +169,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Lighthouse
         public FirewallTemplateState()
         {
         }
+        public static new FirewallTemplateState Empty => new FirewallTemplateState();
     }
 }

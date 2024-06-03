@@ -15,28 +15,29 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var objectRestore = new Tencentcloud.Cos.ObjectRestoreOperation("objectRestore", new()
     ///     {
-    ///         var objectRestore = new Tencentcloud.Cos.ObjectRestoreOperation("objectRestore", new Tencentcloud.Cos.ObjectRestoreOperationArgs
-    ///         {
-    ///             Bucket = "keep-test-1308919341",
-    ///             Days = 2,
-    ///             Key = "test-restore.txt",
-    ///             Tier = "Expedited",
-    ///         });
-    ///     }
+    ///         Bucket = "keep-test-1308919341",
+    ///         Days = 2,
+    ///         Key = "test-restore.txt",
+    ///         Tier = "Expedited",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Cos/objectRestoreOperation:ObjectRestoreOperation")]
-    public partial class ObjectRestoreOperation : Pulumi.CustomResource
+    public partial class ObjectRestoreOperation : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Bucket.
@@ -114,7 +115,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos
         }
     }
 
-    public sealed class ObjectRestoreOperationArgs : Pulumi.ResourceArgs
+    public sealed class ObjectRestoreOperationArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Bucket.
@@ -150,9 +151,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos
         public ObjectRestoreOperationArgs()
         {
         }
+        public static new ObjectRestoreOperationArgs Empty => new ObjectRestoreOperationArgs();
     }
 
-    public sealed class ObjectRestoreOperationState : Pulumi.ResourceArgs
+    public sealed class ObjectRestoreOperationState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Bucket.
@@ -188,5 +190,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos
         public ObjectRestoreOperationState()
         {
         }
+        public static new ObjectRestoreOperationState Empty => new ObjectRestoreOperationState();
     }
 }

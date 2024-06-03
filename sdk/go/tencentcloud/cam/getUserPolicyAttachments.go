@@ -8,42 +8,47 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Use this data source to query detailed information of CAM user policy attachments
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Cam"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cam"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cam"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Cam.GetUserPolicyAttachments(ctx, &cam.GetUserPolicyAttachmentsArgs{
-// 			UserId: pulumi.StringRef(tencentcloud_cam_user.Foo.Id),
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_, err = Cam.GetUserPolicyAttachments(ctx, &cam.GetUserPolicyAttachmentsArgs{
-// 			UserId:   pulumi.StringRef(tencentcloud_cam_user.Foo.Id),
-// 			PolicyId: pulumi.StringRef(tencentcloud_cam_policy.Foo.Id),
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Cam.GetUserPolicyAttachments(ctx, &cam.GetUserPolicyAttachmentsArgs{
+//				UserId: pulumi.StringRef(tencentcloud_cam_user.Foo.Id),
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			_, err = Cam.GetUserPolicyAttachments(ctx, &cam.GetUserPolicyAttachmentsArgs{
+//				UserId:   pulumi.StringRef(tencentcloud_cam_user.Foo.Id),
+//				PolicyId: pulumi.StringRef(tencentcloud_cam_policy.Foo.Id),
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 func GetUserPolicyAttachments(ctx *pulumi.Context, args *GetUserPolicyAttachmentsArgs, opts ...pulumi.InvokeOption) (*GetUserPolicyAttachmentsResult, error) {
-	opts = pkgInvokeDefaultOpts(opts)
+	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetUserPolicyAttachmentsResult
 	err := ctx.Invoke("tencentcloud:Cam/getUserPolicyAttachments:getUserPolicyAttachments", args, &rv, opts...)
 	if err != nil {
@@ -64,7 +69,7 @@ type GetUserPolicyAttachmentsArgs struct {
 	ResultOutputFile *string `pulumi:"resultOutputFile"`
 	// It has been deprecated from version 1.59.6. Use `userName` instead. ID of the attached CAM user to be queried.
 	//
-	// Deprecated: It has been deprecated from version 1.59.6. Use `user_name` instead.
+	// Deprecated: It has been deprecated from version 1.59.6. Use `userName` instead.
 	UserId *string `pulumi:"userId"`
 	// Name of the attached CAM user as unique key to be queried.
 	UserName *string `pulumi:"userName"`
@@ -83,7 +88,7 @@ type GetUserPolicyAttachmentsResult struct {
 	ResultOutputFile *string `pulumi:"resultOutputFile"`
 	// (**Deprecated**) It has been deprecated from version 1.59.6. Use `userName` instead. ID of CAM user.
 	//
-	// Deprecated: It has been deprecated from version 1.59.6. Use `user_name` instead.
+	// Deprecated: It has been deprecated from version 1.59.6. Use `userName` instead.
 	UserId *string `pulumi:"userId"`
 	// Name of CAM user as unique key.
 	UserName *string `pulumi:"userName"`
@@ -116,7 +121,7 @@ type GetUserPolicyAttachmentsOutputArgs struct {
 	ResultOutputFile pulumi.StringPtrInput `pulumi:"resultOutputFile"`
 	// It has been deprecated from version 1.59.6. Use `userName` instead. ID of the attached CAM user to be queried.
 	//
-	// Deprecated: It has been deprecated from version 1.59.6. Use `user_name` instead.
+	// Deprecated: It has been deprecated from version 1.59.6. Use `userName` instead.
 	UserId pulumi.StringPtrInput `pulumi:"userId"`
 	// Name of the attached CAM user as unique key to be queried.
 	UserName pulumi.StringPtrInput `pulumi:"userName"`
@@ -167,7 +172,7 @@ func (o GetUserPolicyAttachmentsResultOutput) ResultOutputFile() pulumi.StringPt
 
 // (**Deprecated**) It has been deprecated from version 1.59.6. Use `userName` instead. ID of CAM user.
 //
-// Deprecated: It has been deprecated from version 1.59.6. Use `user_name` instead.
+// Deprecated: It has been deprecated from version 1.59.6. Use `userName` instead.
 func (o GetUserPolicyAttachmentsResultOutput) UserId() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v GetUserPolicyAttachmentsResult) *string { return v.UserId }).(pulumi.StringPtrOutput)
 }

@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Eb.Inputs
 {
 
-    public sealed class EventConnectorConnectionDescriptionCkafkaParamsArgs : Pulumi.ResourceArgs
+    public sealed class EventConnectorConnectionDescriptionCkafkaParamsArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// kafka offset.
@@ -28,5 +28,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Eb.Inputs
         public EventConnectorConnectionDescriptionCkafkaParamsArgs()
         {
         }
+        public static new EventConnectorConnectionDescriptionCkafkaParamsArgs Empty => new EventConnectorConnectionDescriptionCkafkaParamsArgs();
     }
 }

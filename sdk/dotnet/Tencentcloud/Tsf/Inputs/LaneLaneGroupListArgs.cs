@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf.Inputs
 {
 
-    public sealed class LaneLaneGroupListArgs : Pulumi.ResourceArgs
+    public sealed class LaneLaneGroupListArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// application ID.
@@ -88,5 +88,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf.Inputs
         public LaneLaneGroupListArgs()
         {
         }
+        public static new LaneLaneGroupListArgs Empty => new LaneLaneGroupListArgs();
     }
 }

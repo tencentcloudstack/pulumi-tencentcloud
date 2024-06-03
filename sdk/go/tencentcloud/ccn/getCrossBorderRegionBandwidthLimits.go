@@ -8,6 +8,7 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Use this data source to query detailed information of ccnCrossBorderRegionBandwidthLimits
@@ -16,42 +17,46 @@ import (
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Ccn"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ccn"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ccn"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Ccn.GetCrossBorderRegionBandwidthLimits(ctx, &ccn.GetCrossBorderRegionBandwidthLimitsArgs{
-// 			Filters: []ccn.GetCrossBorderRegionBandwidthLimitsFilter{
-// 				ccn.GetCrossBorderRegionBandwidthLimitsFilter{
-// 					Name: "source-region",
-// 					Values: []string{
-// 						"ap-guangzhou",
-// 					},
-// 				},
-// 				ccn.GetCrossBorderRegionBandwidthLimitsFilter{
-// 					Name: "destination-region",
-// 					Values: []string{
-// 						"ap-shanghai",
-// 					},
-// 				},
-// 			},
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Ccn.GetCrossBorderRegionBandwidthLimits(ctx, &ccn.GetCrossBorderRegionBandwidthLimitsArgs{
+//				Filters: []ccn.GetCrossBorderRegionBandwidthLimitsFilter{
+//					{
+//						Name: "source-region",
+//						Values: []string{
+//							"ap-guangzhou",
+//						},
+//					},
+//					{
+//						Name: "destination-region",
+//						Values: []string{
+//							"ap-shanghai",
+//						},
+//					},
+//				},
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 func GetCrossBorderRegionBandwidthLimits(ctx *pulumi.Context, args *GetCrossBorderRegionBandwidthLimitsArgs, opts ...pulumi.InvokeOption) (*GetCrossBorderRegionBandwidthLimitsResult, error) {
-	opts = pkgInvokeDefaultOpts(opts)
+	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetCrossBorderRegionBandwidthLimitsResult
 	err := ctx.Invoke("tencentcloud:Ccn/getCrossBorderRegionBandwidthLimits:getCrossBorderRegionBandwidthLimits", args, &rv, opts...)
 	if err != nil {

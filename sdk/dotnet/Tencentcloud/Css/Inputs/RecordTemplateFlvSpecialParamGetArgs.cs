@@ -11,13 +11,17 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Css.Inputs
 {
 
-    public sealed class RecordTemplateFlvSpecialParamGetArgs : Pulumi.ResourceArgs
+    public sealed class RecordTemplateFlvSpecialParamGetArgs : global::Pulumi.ResourceArgs
     {
+        /// <summary>
+        /// Whether to enable the transfer while recording is valid only in the flv format.
+        /// </summary>
         [Input("uploadInRecording")]
         public Input<bool>? UploadInRecording { get; set; }
 
         public RecordTemplateFlvSpecialParamGetArgs()
         {
         }
+        public static new RecordTemplateFlvSpecialParamGetArgs Empty => new RecordTemplateFlvSpecialParamGetArgs();
     }
 }

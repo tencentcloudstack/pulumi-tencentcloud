@@ -15,70 +15,64 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Rum
         /// <summary>
         /// Use this data source to query detailed information of rum fetch_url_info
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var fetchUrlInfo = Tencentcloud.Rum.GetFetchUrlInfo.Invoke(new()
         ///     {
-        ///         var fetchUrlInfo = Output.Create(Tencentcloud.Rum.GetFetchUrlInfo.InvokeAsync(new Tencentcloud.Rum.GetFetchUrlInfoArgs
-        ///         {
-        ///             EndTime = 1625454840,
-        ///             ProjectId = 1,
-        ///             StartTime = 1625444040,
-        ///             Type = "top",
-        ///         }));
-        ///     }
+        ///         EndTime = 1625454840,
+        ///         ProjectId = 1,
+        ///         StartTime = 1625444040,
+        ///         Type = "top",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetFetchUrlInfoResult> InvokeAsync(GetFetchUrlInfoArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetFetchUrlInfoResult>("tencentcloud:Rum/getFetchUrlInfo:getFetchUrlInfo", args ?? new GetFetchUrlInfoArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetFetchUrlInfoResult>("tencentcloud:Rum/getFetchUrlInfo:getFetchUrlInfo", args ?? new GetFetchUrlInfoArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of rum fetch_url_info
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var fetchUrlInfo = Tencentcloud.Rum.GetFetchUrlInfo.Invoke(new()
         ///     {
-        ///         var fetchUrlInfo = Output.Create(Tencentcloud.Rum.GetFetchUrlInfo.InvokeAsync(new Tencentcloud.Rum.GetFetchUrlInfoArgs
-        ///         {
-        ///             EndTime = 1625454840,
-        ///             ProjectId = 1,
-        ///             StartTime = 1625444040,
-        ///             Type = "top",
-        ///         }));
-        ///     }
+        ///         EndTime = 1625454840,
+        ///         ProjectId = 1,
+        ///         StartTime = 1625444040,
+        ///         Type = "top",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetFetchUrlInfoResult> Invoke(GetFetchUrlInfoInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetFetchUrlInfoResult>("tencentcloud:Rum/getFetchUrlInfo:getFetchUrlInfo", args ?? new GetFetchUrlInfoInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetFetchUrlInfoResult>("tencentcloud:Rum/getFetchUrlInfo:getFetchUrlInfo", args ?? new GetFetchUrlInfoInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetFetchUrlInfoArgs : Pulumi.InvokeArgs
+    public sealed class GetFetchUrlInfoArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// The region where the data reporting takes place.
@@ -227,9 +221,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Rum
         public GetFetchUrlInfoArgs()
         {
         }
+        public static new GetFetchUrlInfoArgs Empty => new GetFetchUrlInfoArgs();
     }
 
-    public sealed class GetFetchUrlInfoInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetFetchUrlInfoInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// The region where the data reporting takes place.
@@ -378,6 +373,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Rum
         public GetFetchUrlInfoInvokeArgs()
         {
         }
+        public static new GetFetchUrlInfoInvokeArgs Empty => new GetFetchUrlInfoInvokeArgs();
     }
 
 

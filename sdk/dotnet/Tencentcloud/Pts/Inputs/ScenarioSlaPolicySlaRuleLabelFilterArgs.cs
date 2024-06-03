@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Pts.Inputs
 {
 
-    public sealed class ScenarioSlaPolicySlaRuleLabelFilterArgs : Pulumi.ResourceArgs
+    public sealed class ScenarioSlaPolicySlaRuleLabelFilterArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Label name.
@@ -28,5 +28,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Pts.Inputs
         public ScenarioSlaPolicySlaRuleLabelFilterArgs()
         {
         }
+        public static new ScenarioSlaPolicySlaRuleLabelFilterArgs Empty => new ScenarioSlaPolicySlaRuleLabelFilterArgs();
     }
 }

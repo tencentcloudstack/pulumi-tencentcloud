@@ -9,11 +9,12 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const mediaTtsTemplate = new tencentcloud.Ci.MediaTtsTemplate("media_tts_template", {
+ * const mediaTtsTemplate = new tencentcloud.ci.MediaTtsTemplate("mediaTtsTemplate", {
  *     bucket: "terraform-ci-xxxxxx",
  *     codec: "pcm",
  *     mode: "Asyc",
@@ -22,13 +23,14 @@ import * as utilities from "../utilities";
  *     volume: "0",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * ci media_tts_template can be imported using the bucket#templateId, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Ci/mediaTtsTemplate:MediaTtsTemplate media_tts_template terraform-ci-xxxxxx#t1ed421df8bd2140b6b73474f70f99b0f8
+ * $ pulumi import tencentcloud:Ci/mediaTtsTemplate:MediaTtsTemplate media_tts_template terraform-ci-xxxxxx#t1ed421df8bd2140b6b73474f70f99b0f8
  * ```
  */
 export class MediaTtsTemplate extends pulumi.CustomResource {

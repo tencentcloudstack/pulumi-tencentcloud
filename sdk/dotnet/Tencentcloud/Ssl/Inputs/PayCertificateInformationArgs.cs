@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssl.Inputs
 {
 
-    public sealed class PayCertificateInformationArgs : Pulumi.ResourceArgs
+    public sealed class PayCertificateInformationArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// The administrator's email address.
@@ -172,5 +172,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssl.Inputs
         public PayCertificateInformationArgs()
         {
         }
+        public static new PayCertificateInformationArgs Empty => new PayCertificateInformationArgs();
     }
 }

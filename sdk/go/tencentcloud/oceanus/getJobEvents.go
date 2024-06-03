@@ -8,42 +8,47 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Use this data source to query detailed information of oceanus jobEvents
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Oceanus"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Oceanus"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Oceanus"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Oceanus.GetJobEvents(ctx, &oceanus.GetJobEventsArgs{
-// 			EndTimestamp:   1631232466,
-// 			JobId:          "cql-6w8eab6f",
-// 			StartTimestamp: 1630932161,
-// 			Types: []string{
-// 				"1",
-// 				"2",
-// 			},
-// 			WorkSpaceId: "space-6w8eab6f",
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Oceanus.GetJobEvents(ctx, &oceanus.GetJobEventsArgs{
+//				EndTimestamp:   1631232466,
+//				JobId:          "cql-6w8eab6f",
+//				StartTimestamp: 1630932161,
+//				Types: []string{
+//					"1",
+//					"2",
+//				},
+//				WorkSpaceId: "space-6w8eab6f",
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 func GetJobEvents(ctx *pulumi.Context, args *GetJobEventsArgs, opts ...pulumi.InvokeOption) (*GetJobEventsResult, error) {
-	opts = pkgInvokeDefaultOpts(opts)
+	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetJobEventsResult
 	err := ctx.Invoke("tencentcloud:Oceanus/getJobEvents:getJobEvents", args, &rv, opts...)
 	if err != nil {

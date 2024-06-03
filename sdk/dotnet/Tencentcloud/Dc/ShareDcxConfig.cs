@@ -15,34 +15,35 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dc
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var shareDcxConfig = new Tencentcloud.Dc.ShareDcxConfig("shareDcxConfig", new()
     ///     {
-    ///         var shareDcxConfig = new Tencentcloud.Dc.ShareDcxConfig("shareDcxConfig", new Tencentcloud.Dc.ShareDcxConfigArgs
-    ///         {
-    ///             DirectConnectTunnelId = "dcx-4z49tnws",
-    ///             Enable = false,
-    ///         });
-    ///     }
+    ///         DirectConnectTunnelId = "dcx-4z49tnws",
+    ///         Enable = false,
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// dc share_dcx_config can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Dc/shareDcxConfig:ShareDcxConfig share_dcx_config dcx_id
+    /// $ pulumi import tencentcloud:Dc/shareDcxConfig:ShareDcxConfig share_dcx_config dcx_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Dc/shareDcxConfig:ShareDcxConfig")]
-    public partial class ShareDcxConfig : Pulumi.CustomResource
+    public partial class ShareDcxConfig : global::Pulumi.CustomResource
     {
         /// <summary>
         /// the direct connect owner accept or reject the apply of direct connect tunnel.
@@ -101,7 +102,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dc
         }
     }
 
-    public sealed class ShareDcxConfigArgs : Pulumi.ResourceArgs
+    public sealed class ShareDcxConfigArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// the direct connect owner accept or reject the apply of direct connect tunnel.
@@ -118,9 +119,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dc
         public ShareDcxConfigArgs()
         {
         }
+        public static new ShareDcxConfigArgs Empty => new ShareDcxConfigArgs();
     }
 
-    public sealed class ShareDcxConfigState : Pulumi.ResourceArgs
+    public sealed class ShareDcxConfigState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// the direct connect owner accept or reject the apply of direct connect tunnel.
@@ -137,5 +139,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dc
         public ShareDcxConfigState()
         {
         }
+        public static new ShareDcxConfigState Empty => new ShareDcxConfigState();
     }
 }

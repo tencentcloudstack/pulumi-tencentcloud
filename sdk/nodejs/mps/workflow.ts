@@ -2,96 +2,19 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
  * Provides a resource to create a mps workflow
- *
- * ## Example Usage
- *
- * ```typescript
- * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
- *
- * const workflow = new tencentcloud.Mps.Workflow("workflow", {
- *     aiAnalysisTask: {
- *         definition: 20,
- *     },
- *     aiContentReviewTask: {
- *         definition: 20,
- *     },
- *     aiRecognitionTask: {
- *         definition: 20,
- *     },
- *     mediaProcessTask: {
- *         adaptiveDynamicStreamingTaskSets: [{
- *             definition: 12,
- *             outputObjectPath: "/out",
- *             outputStorage: {
- *                 cosOutputStorage: {
- *                     bucket: "cos-lock-1308919341",
- *                     region: "ap-guangzhou",
- *                 },
- *                 type: "COS",
- *             },
- *             segmentObjectName: "/out",
- *             subStreamObjectName: "/out/out/",
- *         }],
- *         animatedGraphicTaskSets: [{
- *             definition: 20000,
- *             endTimeOffset: 0,
- *             outputObjectPath: "/test/",
- *             outputStorage: {
- *                 cosOutputStorage: {
- *                     bucket: "cos-lock-1308919341",
- *                     region: "ap-guangzhou",
- *                 },
- *                 type: "COS",
- *             },
- *             startTimeOffset: 0,
- *         }],
- *         snapshotByTimeOffsetTaskSets: [{
- *             definition: 10,
- *             extTimeOffsetSets: ["1s"],
- *             outputObjectPath: "/snapshot/",
- *             outputStorage: {
- *                 cosOutputStorage: {
- *                     bucket: "cos-lock-1308919341",
- *                     region: "ap-guangzhou",
- *                 },
- *                 type: "COS",
- *             },
- *             timeOffsetSets: [],
- *         }],
- *     },
- *     outputDir: "/",
- *     outputStorage: {
- *         cosOutputStorage: {
- *             bucket: "cos-lock-1308919341",
- *             region: "ap-guangzhou",
- *         },
- *         type: "COS",
- *     },
- *     taskPriority: 0,
- *     trigger: {
- *         cosFileUploadTrigger: {
- *             bucket: "cos-lock-1308919341",
- *             dir: "/",
- *             region: "ap-guangzhou",
- *         },
- *         type: "CosFileUpload",
- *     },
- *     workflowName: "tf-workflow",
- * });
- * ```
  *
  * ## Import
  *
  * mps workflow can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Mps/workflow:Workflow workflow workflow_id
+ * $ pulumi import tencentcloud:Mps/workflow:Workflow workflow workflow_id
  * ```
  */
 export class Workflow extends pulumi.CustomResource {

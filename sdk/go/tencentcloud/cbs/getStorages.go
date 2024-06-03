@@ -8,79 +8,89 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Use this data source to query detailed information of CBS storages.
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Cbs"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cbs"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cbs"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Cbs.GetStorages(ctx, &cbs.GetStoragesArgs{
-// 			ResultOutputFile: pulumi.StringRef("mytestpath"),
-// 			StorageId:        pulumi.StringRef("disk-kdt0sq6m"),
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Cbs.GetStorages(ctx, &cbs.GetStoragesArgs{
+//				ResultOutputFile: pulumi.StringRef("mytestpath"),
+//				StorageId:        pulumi.StringRef("disk-kdt0sq6m"),
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
+//
 // ### The following snippet shows the new supported query params
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Cbs"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cbs"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cbs"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Cbs.GetStorages(ctx, &cbs.GetStoragesArgs{
-// 			ChargeTypes: []string{
-// 				"POSTPAID_BY_HOUR",
-// 				"PREPAID",
-// 			},
-// 			InstanceIps: []string{
-// 				"10.0.0.2",
-// 			},
-// 			InstanceNames: []string{
-// 				"my-instance",
-// 			},
-// 			Portable: pulumi.BoolRef(true),
-// 			StorageStates: []string{
-// 				"ATTACHED",
-// 			},
-// 			TagKeys: []string{
-// 				"foo",
-// 			},
-// 			TagValues: []string{
-// 				"bar",
-// 				"baz",
-// 			},
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Cbs.GetStorages(ctx, &cbs.GetStoragesArgs{
+//				ChargeTypes: []string{
+//					"POSTPAID_BY_HOUR",
+//					"PREPAID",
+//				},
+//				InstanceIps: []string{
+//					"10.0.0.2",
+//				},
+//				InstanceNames: []string{
+//					"my-instance",
+//				},
+//				Portable: pulumi.BoolRef(true),
+//				StorageStates: []string{
+//					"ATTACHED",
+//				},
+//				TagKeys: []string{
+//					"foo",
+//				},
+//				TagValues: []string{
+//					"bar",
+//					"baz",
+//				},
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 func GetStorages(ctx *pulumi.Context, args *GetStoragesArgs, opts ...pulumi.InvokeOption) (*GetStoragesResult, error) {
-	opts = pkgInvokeDefaultOpts(opts)
+	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetStoragesResult
 	err := ctx.Invoke("tencentcloud:Cbs/getStorages:getStorages", args, &rv, opts...)
 	if err != nil {

@@ -15,37 +15,38 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mongodb
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var instanceAccount = new Tencentcloud.Mongodb.InstanceAccount("instanceAccount", new()
     ///     {
-    ///         var instanceAccount = new Tencentcloud.Mongodb.InstanceAccount("instanceAccount", new Tencentcloud.Mongodb.InstanceAccountArgs
+    ///         AuthRoles = new[]
     ///         {
-    ///             AuthRoles = 
+    ///             new Tencentcloud.Mongodb.Inputs.InstanceAccountAuthRoleArgs
     ///             {
-    ///                 new Tencentcloud.Mongodb.Inputs.InstanceAccountAuthRoleArgs
-    ///                 {
-    ///                     Mask = 0,
-    ///                     Namespace = "*",
-    ///                 },
+    ///                 Mask = 0,
+    ///                 Namespace = "*",
     ///             },
-    ///             InstanceId = "cmgo-lxaz2c9b",
-    ///             MongoUserPassword = "xxxxxxxxx",
-    ///             Password = "xxxxxxxx",
-    ///             UserDesc = "test account",
-    ///             UserName = "test_account",
-    ///         });
-    ///     }
+    ///         },
+    ///         InstanceId = "cmgo-lxaz2c9b",
+    ///         MongoUserPassword = "xxxxxxxxx",
+    ///         Password = "xxxxxxxx",
+    ///         UserDesc = "test account",
+    ///         UserName = "test_account",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Mongodb/instanceAccount:InstanceAccount")]
-    public partial class InstanceAccount : Pulumi.CustomResource
+    public partial class InstanceAccount : global::Pulumi.CustomResource
     {
         /// <summary>
         /// The read and write permission information of the account.
@@ -63,13 +64,13 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mongodb
         /// The password corresponding to the mongouser account. mongouser is the system default account, which is the password set when creating an instance.
         /// </summary>
         [Output("mongoUserPassword")]
-        public Output<string> MongoUserPassword { get; private set; } = null!;
+        public Output<string?> MongoUserPassword { get; private set; } = null!;
 
         /// <summary>
         /// New account password. Password complexity requirements are as follows: character length range [8,32]. Contains at least letters, numbers and special characters (exclamation point!, at@, pound sign #, percent sign %, caret ^, asterisk *, parentheses (), underscore _).
         /// </summary>
         [Output("password")]
-        public Output<string> Password { get; private set; } = null!;
+        public Output<string?> Password { get; private set; } = null!;
 
         /// <summary>
         /// Account remarks.
@@ -107,6 +108,11 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mongodb
             {
                 Version = Utilities.Version,
                 PluginDownloadURL = "github://api.github.com/tencentcloudstack",
+                AdditionalSecretOutputs =
+                {
+                    "mongoUserPassword",
+                    "password",
+                },
             };
             var merged = CustomResourceOptions.Merge(defaultOptions, options);
             // Override the ID if one was specified for consistency with other language SDKs.
@@ -128,7 +134,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mongodb
         }
     }
 
-    public sealed class InstanceAccountArgs : Pulumi.ResourceArgs
+    public sealed class InstanceAccountArgs : global::Pulumi.ResourceArgs
     {
         [Input("authRoles")]
         private InputList<Inputs.InstanceAccountAuthRoleArgs>? _authRoles;
@@ -148,17 +154,37 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mongodb
         [Input("instanceId", required: true)]
         public Input<string> InstanceId { get; set; } = null!;
 
+        [Input("mongoUserPassword")]
+        private Input<string>? _mongoUserPassword;
+
         /// <summary>
         /// The password corresponding to the mongouser account. mongouser is the system default account, which is the password set when creating an instance.
         /// </summary>
-        [Input("mongoUserPassword", required: true)]
-        public Input<string> MongoUserPassword { get; set; } = null!;
+        public Input<string>? MongoUserPassword
+        {
+            get => _mongoUserPassword;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _mongoUserPassword = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
+
+        [Input("password")]
+        private Input<string>? _password;
 
         /// <summary>
         /// New account password. Password complexity requirements are as follows: character length range [8,32]. Contains at least letters, numbers and special characters (exclamation point!, at@, pound sign #, percent sign %, caret ^, asterisk *, parentheses (), underscore _).
         /// </summary>
-        [Input("password", required: true)]
-        public Input<string> Password { get; set; } = null!;
+        public Input<string>? Password
+        {
+            get => _password;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _password = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
 
         /// <summary>
         /// Account remarks.
@@ -175,9 +201,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mongodb
         public InstanceAccountArgs()
         {
         }
+        public static new InstanceAccountArgs Empty => new InstanceAccountArgs();
     }
 
-    public sealed class InstanceAccountState : Pulumi.ResourceArgs
+    public sealed class InstanceAccountState : global::Pulumi.ResourceArgs
     {
         [Input("authRoles")]
         private InputList<Inputs.InstanceAccountAuthRoleGetArgs>? _authRoles;
@@ -197,17 +224,37 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mongodb
         [Input("instanceId")]
         public Input<string>? InstanceId { get; set; }
 
+        [Input("mongoUserPassword")]
+        private Input<string>? _mongoUserPassword;
+
         /// <summary>
         /// The password corresponding to the mongouser account. mongouser is the system default account, which is the password set when creating an instance.
         /// </summary>
-        [Input("mongoUserPassword")]
-        public Input<string>? MongoUserPassword { get; set; }
+        public Input<string>? MongoUserPassword
+        {
+            get => _mongoUserPassword;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _mongoUserPassword = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
+
+        [Input("password")]
+        private Input<string>? _password;
 
         /// <summary>
         /// New account password. Password complexity requirements are as follows: character length range [8,32]. Contains at least letters, numbers and special characters (exclamation point!, at@, pound sign #, percent sign %, caret ^, asterisk *, parentheses (), underscore _).
         /// </summary>
-        [Input("password")]
-        public Input<string>? Password { get; set; }
+        public Input<string>? Password
+        {
+            get => _password;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _password = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
 
         /// <summary>
         /// Account remarks.
@@ -224,5 +271,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mongodb
         public InstanceAccountState()
         {
         }
+        public static new InstanceAccountState Empty => new InstanceAccountState();
     }
 }

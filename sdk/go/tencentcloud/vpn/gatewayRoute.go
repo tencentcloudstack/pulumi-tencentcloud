@@ -7,46 +7,52 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a VPN gateway route.
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpn"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpn"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Vpn.NewGatewayRoute(ctx, "route", &Vpn.GatewayRouteArgs{
-// 			DestinationCidrBlock: pulumi.String("10.0.0.0/16"),
-// 			InstanceId:           pulumi.String("vpnx-5b5dmao3"),
-// 			InstanceType:         pulumi.String("VPNCONN"),
-// 			Priority:             pulumi.Int(100),
-// 			Status:               pulumi.String("DISABLE"),
-// 			VpnGatewayId:         pulumi.String("vpngw-ak9sjem2"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Vpn.NewGatewayRoute(ctx, "route", &Vpn.GatewayRouteArgs{
+//				DestinationCidrBlock: pulumi.String("10.0.0.0/16"),
+//				InstanceId:           pulumi.String("vpnx-5b5dmao3"),
+//				InstanceType:         pulumi.String("VPNCONN"),
+//				Priority:             pulumi.Int(100),
+//				Status:               pulumi.String("DISABLE"),
+//				VpnGatewayId:         pulumi.String("vpngw-ak9sjem2"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // VPN gateway route can be imported using the id, the id format must be '{vpn_gateway_id}#{route_id}', e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Vpn/gatewayRoute:GatewayRoute route1 vpngw-ak9sjem2#vpngw-8ccsnclt
+// $ pulumi import tencentcloud:Vpn/gatewayRoute:GatewayRoute route1 vpngw-ak9sjem2#vpngw-8ccsnclt
 // ```
 type GatewayRoute struct {
 	pulumi.CustomResourceState
@@ -98,7 +104,7 @@ func NewGatewayRoute(ctx *pulumi.Context,
 	if args.VpnGatewayId == nil {
 		return nil, errors.New("invalid value for required argument 'VpnGatewayId'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource GatewayRoute
 	err := ctx.RegisterResource("tencentcloud:Vpn/gatewayRoute:GatewayRoute", name, args, &resource, opts...)
 	if err != nil {
@@ -227,7 +233,7 @@ func (i *GatewayRoute) ToGatewayRouteOutputWithContext(ctx context.Context) Gate
 // GatewayRouteArrayInput is an input type that accepts GatewayRouteArray and GatewayRouteArrayOutput values.
 // You can construct a concrete instance of `GatewayRouteArrayInput` via:
 //
-//          GatewayRouteArray{ GatewayRouteArgs{...} }
+//	GatewayRouteArray{ GatewayRouteArgs{...} }
 type GatewayRouteArrayInput interface {
 	pulumi.Input
 
@@ -252,7 +258,7 @@ func (i GatewayRouteArray) ToGatewayRouteArrayOutputWithContext(ctx context.Cont
 // GatewayRouteMapInput is an input type that accepts GatewayRouteMap and GatewayRouteMapOutput values.
 // You can construct a concrete instance of `GatewayRouteMapInput` via:
 //
-//          GatewayRouteMap{ "key": GatewayRouteArgs{...} }
+//	GatewayRouteMap{ "key": GatewayRouteArgs{...} }
 type GatewayRouteMapInput interface {
 	pulumi.Input
 

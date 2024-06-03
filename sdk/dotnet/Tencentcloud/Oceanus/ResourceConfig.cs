@@ -15,55 +15,57 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Oceanus
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var exampleResource = new Tencentcloud.Oceanus.Resource("exampleResource", new()
     ///     {
-    ///         var exampleResource = new Tencentcloud.Oceanus.Resource("exampleResource", new Tencentcloud.Oceanus.ResourceArgs
+    ///         ResourceLoc = new Tencentcloud.Oceanus.Inputs.ResourceResourceLocArgs
     ///         {
-    ///             ResourceLoc = new Tencentcloud.Oceanus.Inputs.ResourceResourceLocArgs
+    ///             StorageType = 1,
+    ///             Param = new Tencentcloud.Oceanus.Inputs.ResourceResourceLocParamArgs
     ///             {
-    ///                 StorageType = 1,
-    ///                 Param = new Tencentcloud.Oceanus.Inputs.ResourceResourceLocParamArgs
-    ///                 {
-    ///                     Bucket = "keep-terraform-1257058945",
-    ///                     Path = "OceanusResource/junit-4.13.1.jar",
-    ///                     Region = "ap-guangzhou",
-    ///                 },
+    ///                 Bucket = "keep-terraform-1257058945",
+    ///                 Path = "OceanusResource/junit-4.13.1.jar",
+    ///                 Region = "ap-guangzhou",
     ///             },
-    ///             ResourceType = 1,
-    ///             Remark = "remark.",
-    ///             ResourceConfigRemark = "config remark.",
-    ///             FolderId = "folder-7ctl246z",
-    ///             WorkSpaceId = "space-2idq8wbr",
-    ///         });
-    ///         var exampleResourceConfig = new Tencentcloud.Oceanus.ResourceConfig("exampleResourceConfig", new Tencentcloud.Oceanus.ResourceConfigArgs
-    ///         {
-    ///             ResourceId = exampleResource.ResourceId,
-    ///             ResourceLoc = new Tencentcloud.Oceanus.Inputs.ResourceConfigResourceLocArgs
-    ///             {
-    ///                 StorageType = 1,
-    ///                 Param = new Tencentcloud.Oceanus.Inputs.ResourceConfigResourceLocParamArgs
-    ///                 {
-    ///                     Bucket = "keep-terraform-1257058945",
-    ///                     Path = "OceanusResource/junit-4.13.2.jar",
-    ///                     Region = "ap-guangzhou",
-    ///                 },
-    ///             },
-    ///             Remark = "config remark.",
-    ///             WorkSpaceId = "space-2idq8wbr",
-    ///         });
-    ///     }
+    ///         },
+    ///         ResourceType = 1,
+    ///         Remark = "remark.",
+    ///         ResourceConfigRemark = "config remark.",
+    ///         FolderId = "folder-7ctl246z",
+    ///         WorkSpaceId = "space-2idq8wbr",
+    ///     });
     /// 
-    /// }
+    ///     var exampleResourceConfig = new Tencentcloud.Oceanus.ResourceConfig("exampleResourceConfig", new()
+    ///     {
+    ///         ResourceId = exampleResource.ResourceId,
+    ///         ResourceLoc = new Tencentcloud.Oceanus.Inputs.ResourceConfigResourceLocArgs
+    ///         {
+    ///             StorageType = 1,
+    ///             Param = new Tencentcloud.Oceanus.Inputs.ResourceConfigResourceLocParamArgs
+    ///             {
+    ///                 Bucket = "keep-terraform-1257058945",
+    ///                 Path = "OceanusResource/junit-4.13.2.jar",
+    ///                 Region = "ap-guangzhou",
+    ///             },
+    ///         },
+    ///         Remark = "config remark.",
+    ///         WorkSpaceId = "space-2idq8wbr",
+    ///     });
+    /// 
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Oceanus/resourceConfig:ResourceConfig")]
-    public partial class ResourceConfig : Pulumi.CustomResource
+    public partial class ResourceConfig : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Resource description.
@@ -140,7 +142,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Oceanus
         }
     }
 
-    public sealed class ResourceConfigArgs : Pulumi.ResourceArgs
+    public sealed class ResourceConfigArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Resource description.
@@ -169,9 +171,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Oceanus
         public ResourceConfigArgs()
         {
         }
+        public static new ResourceConfigArgs Empty => new ResourceConfigArgs();
     }
 
-    public sealed class ResourceConfigState : Pulumi.ResourceArgs
+    public sealed class ResourceConfigState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Resource description.
@@ -206,5 +209,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Oceanus
         public ResourceConfigState()
         {
         }
+        public static new ResourceConfigState Empty => new ResourceConfigState();
     }
 }

@@ -7,35 +7,41 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a dts syncJobResizeOperation
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dts"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dts"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Dts.NewSyncJobResizeOperation(ctx, "syncJobResizeOperation", &Dts.SyncJobResizeOperationArgs{
-// 			JobId:            pulumi.String("sync-werwfs23"),
-// 			NewInstanceClass: pulumi.String("large"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Dts.NewSyncJobResizeOperation(ctx, "syncJobResizeOperation", &Dts.SyncJobResizeOperationArgs{
+//				JobId:            pulumi.String("sync-werwfs23"),
+//				NewInstanceClass: pulumi.String("large"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 type SyncJobResizeOperation struct {
 	pulumi.CustomResourceState
 
@@ -58,7 +64,7 @@ func NewSyncJobResizeOperation(ctx *pulumi.Context,
 	if args.NewInstanceClass == nil {
 		return nil, errors.New("invalid value for required argument 'NewInstanceClass'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource SyncJobResizeOperation
 	err := ctx.RegisterResource("tencentcloud:Dts/syncJobResizeOperation:SyncJobResizeOperation", name, args, &resource, opts...)
 	if err != nil {
@@ -139,7 +145,7 @@ func (i *SyncJobResizeOperation) ToSyncJobResizeOperationOutputWithContext(ctx c
 // SyncJobResizeOperationArrayInput is an input type that accepts SyncJobResizeOperationArray and SyncJobResizeOperationArrayOutput values.
 // You can construct a concrete instance of `SyncJobResizeOperationArrayInput` via:
 //
-//          SyncJobResizeOperationArray{ SyncJobResizeOperationArgs{...} }
+//	SyncJobResizeOperationArray{ SyncJobResizeOperationArgs{...} }
 type SyncJobResizeOperationArrayInput interface {
 	pulumi.Input
 
@@ -164,7 +170,7 @@ func (i SyncJobResizeOperationArray) ToSyncJobResizeOperationArrayOutputWithCont
 // SyncJobResizeOperationMapInput is an input type that accepts SyncJobResizeOperationMap and SyncJobResizeOperationMapOutput values.
 // You can construct a concrete instance of `SyncJobResizeOperationMapInput` via:
 //
-//          SyncJobResizeOperationMap{ "key": SyncJobResizeOperationArgs{...} }
+//	SyncJobResizeOperationMap{ "key": SyncJobResizeOperationArgs{...} }
 type SyncJobResizeOperationMapInput interface {
 	pulumi.Input
 

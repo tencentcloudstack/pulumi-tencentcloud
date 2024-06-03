@@ -5,48 +5,116 @@ import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
 // Export members:
-export * from "./compareTask";
-export * from "./compareTaskStopOperation";
-export * from "./getCompareTasks";
-export * from "./getMigrateDbInstances";
-export * from "./getMigrateJobs";
-export * from "./getSyncJobs";
-export * from "./migrateJob";
-export * from "./migrateJobConfig";
-export * from "./migrateJobResumeOperation";
-export * from "./migrateJobStartOperation";
-export * from "./migrateService";
-export * from "./syncCheckJobOperation";
-export * from "./syncConfig";
-export * from "./syncJob";
-export * from "./syncJobContinueOperation";
-export * from "./syncJobIsolateOperation";
-export * from "./syncJobPauseOperation";
-export * from "./syncJobRecoverOperation";
-export * from "./syncJobResizeOperation";
-export * from "./syncJobResumeOperation";
-export * from "./syncJobStartOperation";
-export * from "./syncJobStopOperation";
+export { CompareTaskArgs, CompareTaskState } from "./compareTask";
+export type CompareTask = import("./compareTask").CompareTask;
+export const CompareTask: typeof import("./compareTask").CompareTask = null as any;
+utilities.lazyLoad(exports, ["CompareTask"], () => require("./compareTask"));
 
-// Import resources to register:
-import { CompareTask } from "./compareTask";
-import { CompareTaskStopOperation } from "./compareTaskStopOperation";
-import { MigrateJob } from "./migrateJob";
-import { MigrateJobConfig } from "./migrateJobConfig";
-import { MigrateJobResumeOperation } from "./migrateJobResumeOperation";
-import { MigrateJobStartOperation } from "./migrateJobStartOperation";
-import { MigrateService } from "./migrateService";
-import { SyncCheckJobOperation } from "./syncCheckJobOperation";
-import { SyncConfig } from "./syncConfig";
-import { SyncJob } from "./syncJob";
-import { SyncJobContinueOperation } from "./syncJobContinueOperation";
-import { SyncJobIsolateOperation } from "./syncJobIsolateOperation";
-import { SyncJobPauseOperation } from "./syncJobPauseOperation";
-import { SyncJobRecoverOperation } from "./syncJobRecoverOperation";
-import { SyncJobResizeOperation } from "./syncJobResizeOperation";
-import { SyncJobResumeOperation } from "./syncJobResumeOperation";
-import { SyncJobStartOperation } from "./syncJobStartOperation";
-import { SyncJobStopOperation } from "./syncJobStopOperation";
+export { CompareTaskStopOperationArgs, CompareTaskStopOperationState } from "./compareTaskStopOperation";
+export type CompareTaskStopOperation = import("./compareTaskStopOperation").CompareTaskStopOperation;
+export const CompareTaskStopOperation: typeof import("./compareTaskStopOperation").CompareTaskStopOperation = null as any;
+utilities.lazyLoad(exports, ["CompareTaskStopOperation"], () => require("./compareTaskStopOperation"));
+
+export { GetCompareTasksArgs, GetCompareTasksResult, GetCompareTasksOutputArgs } from "./getCompareTasks";
+export const getCompareTasks: typeof import("./getCompareTasks").getCompareTasks = null as any;
+export const getCompareTasksOutput: typeof import("./getCompareTasks").getCompareTasksOutput = null as any;
+utilities.lazyLoad(exports, ["getCompareTasks","getCompareTasksOutput"], () => require("./getCompareTasks"));
+
+export { GetMigrateDbInstancesArgs, GetMigrateDbInstancesResult, GetMigrateDbInstancesOutputArgs } from "./getMigrateDbInstances";
+export const getMigrateDbInstances: typeof import("./getMigrateDbInstances").getMigrateDbInstances = null as any;
+export const getMigrateDbInstancesOutput: typeof import("./getMigrateDbInstances").getMigrateDbInstancesOutput = null as any;
+utilities.lazyLoad(exports, ["getMigrateDbInstances","getMigrateDbInstancesOutput"], () => require("./getMigrateDbInstances"));
+
+export { GetMigrateJobsArgs, GetMigrateJobsResult, GetMigrateJobsOutputArgs } from "./getMigrateJobs";
+export const getMigrateJobs: typeof import("./getMigrateJobs").getMigrateJobs = null as any;
+export const getMigrateJobsOutput: typeof import("./getMigrateJobs").getMigrateJobsOutput = null as any;
+utilities.lazyLoad(exports, ["getMigrateJobs","getMigrateJobsOutput"], () => require("./getMigrateJobs"));
+
+export { GetSyncJobsArgs, GetSyncJobsResult, GetSyncJobsOutputArgs } from "./getSyncJobs";
+export const getSyncJobs: typeof import("./getSyncJobs").getSyncJobs = null as any;
+export const getSyncJobsOutput: typeof import("./getSyncJobs").getSyncJobsOutput = null as any;
+utilities.lazyLoad(exports, ["getSyncJobs","getSyncJobsOutput"], () => require("./getSyncJobs"));
+
+export { MigrateJobArgs, MigrateJobState } from "./migrateJob";
+export type MigrateJob = import("./migrateJob").MigrateJob;
+export const MigrateJob: typeof import("./migrateJob").MigrateJob = null as any;
+utilities.lazyLoad(exports, ["MigrateJob"], () => require("./migrateJob"));
+
+export { MigrateJobConfigArgs, MigrateJobConfigState } from "./migrateJobConfig";
+export type MigrateJobConfig = import("./migrateJobConfig").MigrateJobConfig;
+export const MigrateJobConfig: typeof import("./migrateJobConfig").MigrateJobConfig = null as any;
+utilities.lazyLoad(exports, ["MigrateJobConfig"], () => require("./migrateJobConfig"));
+
+export { MigrateJobResumeOperationArgs, MigrateJobResumeOperationState } from "./migrateJobResumeOperation";
+export type MigrateJobResumeOperation = import("./migrateJobResumeOperation").MigrateJobResumeOperation;
+export const MigrateJobResumeOperation: typeof import("./migrateJobResumeOperation").MigrateJobResumeOperation = null as any;
+utilities.lazyLoad(exports, ["MigrateJobResumeOperation"], () => require("./migrateJobResumeOperation"));
+
+export { MigrateJobStartOperationArgs, MigrateJobStartOperationState } from "./migrateJobStartOperation";
+export type MigrateJobStartOperation = import("./migrateJobStartOperation").MigrateJobStartOperation;
+export const MigrateJobStartOperation: typeof import("./migrateJobStartOperation").MigrateJobStartOperation = null as any;
+utilities.lazyLoad(exports, ["MigrateJobStartOperation"], () => require("./migrateJobStartOperation"));
+
+export { MigrateServiceArgs, MigrateServiceState } from "./migrateService";
+export type MigrateService = import("./migrateService").MigrateService;
+export const MigrateService: typeof import("./migrateService").MigrateService = null as any;
+utilities.lazyLoad(exports, ["MigrateService"], () => require("./migrateService"));
+
+export { SyncCheckJobOperationArgs, SyncCheckJobOperationState } from "./syncCheckJobOperation";
+export type SyncCheckJobOperation = import("./syncCheckJobOperation").SyncCheckJobOperation;
+export const SyncCheckJobOperation: typeof import("./syncCheckJobOperation").SyncCheckJobOperation = null as any;
+utilities.lazyLoad(exports, ["SyncCheckJobOperation"], () => require("./syncCheckJobOperation"));
+
+export { SyncConfigArgs, SyncConfigState } from "./syncConfig";
+export type SyncConfig = import("./syncConfig").SyncConfig;
+export const SyncConfig: typeof import("./syncConfig").SyncConfig = null as any;
+utilities.lazyLoad(exports, ["SyncConfig"], () => require("./syncConfig"));
+
+export { SyncJobArgs, SyncJobState } from "./syncJob";
+export type SyncJob = import("./syncJob").SyncJob;
+export const SyncJob: typeof import("./syncJob").SyncJob = null as any;
+utilities.lazyLoad(exports, ["SyncJob"], () => require("./syncJob"));
+
+export { SyncJobContinueOperationArgs, SyncJobContinueOperationState } from "./syncJobContinueOperation";
+export type SyncJobContinueOperation = import("./syncJobContinueOperation").SyncJobContinueOperation;
+export const SyncJobContinueOperation: typeof import("./syncJobContinueOperation").SyncJobContinueOperation = null as any;
+utilities.lazyLoad(exports, ["SyncJobContinueOperation"], () => require("./syncJobContinueOperation"));
+
+export { SyncJobIsolateOperationArgs, SyncJobIsolateOperationState } from "./syncJobIsolateOperation";
+export type SyncJobIsolateOperation = import("./syncJobIsolateOperation").SyncJobIsolateOperation;
+export const SyncJobIsolateOperation: typeof import("./syncJobIsolateOperation").SyncJobIsolateOperation = null as any;
+utilities.lazyLoad(exports, ["SyncJobIsolateOperation"], () => require("./syncJobIsolateOperation"));
+
+export { SyncJobPauseOperationArgs, SyncJobPauseOperationState } from "./syncJobPauseOperation";
+export type SyncJobPauseOperation = import("./syncJobPauseOperation").SyncJobPauseOperation;
+export const SyncJobPauseOperation: typeof import("./syncJobPauseOperation").SyncJobPauseOperation = null as any;
+utilities.lazyLoad(exports, ["SyncJobPauseOperation"], () => require("./syncJobPauseOperation"));
+
+export { SyncJobRecoverOperationArgs, SyncJobRecoverOperationState } from "./syncJobRecoverOperation";
+export type SyncJobRecoverOperation = import("./syncJobRecoverOperation").SyncJobRecoverOperation;
+export const SyncJobRecoverOperation: typeof import("./syncJobRecoverOperation").SyncJobRecoverOperation = null as any;
+utilities.lazyLoad(exports, ["SyncJobRecoverOperation"], () => require("./syncJobRecoverOperation"));
+
+export { SyncJobResizeOperationArgs, SyncJobResizeOperationState } from "./syncJobResizeOperation";
+export type SyncJobResizeOperation = import("./syncJobResizeOperation").SyncJobResizeOperation;
+export const SyncJobResizeOperation: typeof import("./syncJobResizeOperation").SyncJobResizeOperation = null as any;
+utilities.lazyLoad(exports, ["SyncJobResizeOperation"], () => require("./syncJobResizeOperation"));
+
+export { SyncJobResumeOperationArgs, SyncJobResumeOperationState } from "./syncJobResumeOperation";
+export type SyncJobResumeOperation = import("./syncJobResumeOperation").SyncJobResumeOperation;
+export const SyncJobResumeOperation: typeof import("./syncJobResumeOperation").SyncJobResumeOperation = null as any;
+utilities.lazyLoad(exports, ["SyncJobResumeOperation"], () => require("./syncJobResumeOperation"));
+
+export { SyncJobStartOperationArgs, SyncJobStartOperationState } from "./syncJobStartOperation";
+export type SyncJobStartOperation = import("./syncJobStartOperation").SyncJobStartOperation;
+export const SyncJobStartOperation: typeof import("./syncJobStartOperation").SyncJobStartOperation = null as any;
+utilities.lazyLoad(exports, ["SyncJobStartOperation"], () => require("./syncJobStartOperation"));
+
+export { SyncJobStopOperationArgs, SyncJobStopOperationState } from "./syncJobStopOperation";
+export type SyncJobStopOperation = import("./syncJobStopOperation").SyncJobStopOperation;
+export const SyncJobStopOperation: typeof import("./syncJobStopOperation").SyncJobStopOperation = null as any;
+utilities.lazyLoad(exports, ["SyncJobStopOperation"], () => require("./syncJobStopOperation"));
+
 
 const _module = {
     version: utilities.getVersion(),

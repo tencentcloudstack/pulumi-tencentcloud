@@ -15,66 +15,70 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcr
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var exampleInstance = new Tencentcloud.Tcr.Instance("exampleInstance", new()
     ///     {
-    ///         var exampleInstance = new Tencentcloud.Tcr.Instance("exampleInstance", new Tencentcloud.Tcr.InstanceArgs
+    ///         InstanceType = "premium",
+    ///         Tags = 
     ///         {
-    ///             InstanceType = "premium",
-    ///             Tags = 
-    ///             {
-    ///                 { "createdBy", "terraform" },
-    ///             },
-    ///         });
-    ///         var exampleNamespace = new Tencentcloud.Tcr.Namespace("exampleNamespace", new Tencentcloud.Tcr.NamespaceArgs
-    ///         {
-    ///             InstanceId = exampleInstance.Id,
-    ///             IsPublic = true,
-    ///             IsAutoScan = true,
-    ///             IsPreventVul = true,
-    ///             Severity = "medium",
-    ///             CveWhitelistItems = 
-    ///             {
-    ///                 new Tencentcloud.Tcr.Inputs.NamespaceCveWhitelistItemArgs
-    ///                 {
-    ///                     CveId = "cve-xxxxx",
-    ///                 },
-    ///             },
-    ///         });
-    ///         var exampleRepository = new Tencentcloud.Tcr.Repository("exampleRepository", new Tencentcloud.Tcr.RepositoryArgs
-    ///         {
-    ///             InstanceId = exampleInstance.Id,
-    ///             NamespaceName = exampleNamespace.Name,
-    ///             BriefDesc = "111",
-    ///             Description = "111111111111111111111111111111111111",
-    ///         });
-    ///         var exampleCreateImageSignatureOperation = new Tencentcloud.Tcr.CreateImageSignatureOperation("exampleCreateImageSignatureOperation", new Tencentcloud.Tcr.CreateImageSignatureOperationArgs
-    ///         {
-    ///             RegistryId = exampleInstance.Id,
-    ///             NamespaceName = exampleNamespace.Name,
-    ///             RepositoryName = exampleRepository.Name,
-    ///             ImageVersion = "v1",
-    ///         });
-    ///     }
+    ///             { "createdBy", "terraform" },
+    ///         },
+    ///     });
     /// 
-    /// }
+    ///     var exampleNamespace = new Tencentcloud.Tcr.Namespace("exampleNamespace", new()
+    ///     {
+    ///         InstanceId = exampleInstance.Id,
+    ///         IsPublic = true,
+    ///         IsAutoScan = true,
+    ///         IsPreventVul = true,
+    ///         Severity = "medium",
+    ///         CveWhitelistItems = new[]
+    ///         {
+    ///             new Tencentcloud.Tcr.Inputs.NamespaceCveWhitelistItemArgs
+    ///             {
+    ///                 CveId = "cve-xxxxx",
+    ///             },
+    ///         },
+    ///     });
+    /// 
+    ///     var exampleRepository = new Tencentcloud.Tcr.Repository("exampleRepository", new()
+    ///     {
+    ///         InstanceId = exampleInstance.Id,
+    ///         NamespaceName = exampleNamespace.Name,
+    ///         BriefDesc = "111",
+    ///         Description = "111111111111111111111111111111111111",
+    ///     });
+    /// 
+    ///     var exampleCreateImageSignatureOperation = new Tencentcloud.Tcr.CreateImageSignatureOperation("exampleCreateImageSignatureOperation", new()
+    ///     {
+    ///         RegistryId = exampleInstance.Id,
+    ///         NamespaceName = exampleNamespace.Name,
+    ///         RepositoryName = exampleRepository.Name,
+    ///         ImageVersion = "v1",
+    ///     });
+    /// 
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// tcr image_signature_operation can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Tcr/createImageSignatureOperation:CreateImageSignatureOperation image_signature_operation image_signature_operation_id
+    /// $ pulumi import tencentcloud:Tcr/createImageSignatureOperation:CreateImageSignatureOperation image_signature_operation image_signature_operation_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Tcr/createImageSignatureOperation:CreateImageSignatureOperation")]
-    public partial class CreateImageSignatureOperation : Pulumi.CustomResource
+    public partial class CreateImageSignatureOperation : global::Pulumi.CustomResource
     {
         /// <summary>
         /// image version name.
@@ -145,7 +149,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcr
         }
     }
 
-    public sealed class CreateImageSignatureOperationArgs : Pulumi.ResourceArgs
+    public sealed class CreateImageSignatureOperationArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// image version name.
@@ -174,9 +178,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcr
         public CreateImageSignatureOperationArgs()
         {
         }
+        public static new CreateImageSignatureOperationArgs Empty => new CreateImageSignatureOperationArgs();
     }
 
-    public sealed class CreateImageSignatureOperationState : Pulumi.ResourceArgs
+    public sealed class CreateImageSignatureOperationState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// image version name.
@@ -205,5 +210,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcr
         public CreateImageSignatureOperationState()
         {
         }
+        public static new CreateImageSignatureOperationState Empty => new CreateImageSignatureOperationState();
     }
 }

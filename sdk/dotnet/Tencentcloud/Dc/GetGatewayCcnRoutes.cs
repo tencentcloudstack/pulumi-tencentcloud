@@ -15,108 +15,110 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dc
         /// <summary>
         /// Use this data source to query detailed information of direct connect gateway route entries.
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var main = new Tencentcloud.Ccn.Instance("main", new()
         ///     {
-        ///         var main = new Tencentcloud.Ccn.Instance("main", new Tencentcloud.Ccn.InstanceArgs
-        ///         {
-        ///             Description = "ci-temp-test-ccn-des",
-        ///             Qos = "AG",
-        ///         });
-        ///         var ccnMain = new Tencentcloud.Dc.Gateway("ccnMain", new Tencentcloud.Dc.GatewayArgs
-        ///         {
-        ///             NetworkInstanceId = main.Id,
-        ///             NetworkType = "CCN",
-        ///             GatewayType = "NORMAL",
-        ///         });
-        ///         var route1 = new Tencentcloud.Dc.GatewayCcnRoute("route1", new Tencentcloud.Dc.GatewayCcnRouteArgs
-        ///         {
-        ///             DcgId = ccnMain.Id,
-        ///             CidrBlock = "10.1.1.0/32",
-        ///         });
-        ///         var route2 = new Tencentcloud.Dc.GatewayCcnRoute("route2", new Tencentcloud.Dc.GatewayCcnRouteArgs
-        ///         {
-        ///             DcgId = ccnMain.Id,
-        ///             CidrBlock = "192.1.1.0/32",
-        ///         });
-        ///         var test = Tencentcloud.Dc.GetGatewayCcnRoutes.Invoke(new Tencentcloud.Dc.GetGatewayCcnRoutesInvokeArgs
-        ///         {
-        ///             DcgId = ccnMain.Id,
-        ///         });
-        ///     }
+        ///         Description = "ci-temp-test-ccn-des",
+        ///         Qos = "AG",
+        ///     });
         /// 
-        /// }
+        ///     var ccnMain = new Tencentcloud.Dc.Gateway("ccnMain", new()
+        ///     {
+        ///         NetworkInstanceId = main.Id,
+        ///         NetworkType = "CCN",
+        ///         GatewayType = "NORMAL",
+        ///     });
+        /// 
+        ///     var route1 = new Tencentcloud.Dc.GatewayCcnRoute("route1", new()
+        ///     {
+        ///         DcgId = ccnMain.Id,
+        ///         CidrBlock = "10.1.1.0/32",
+        ///     });
+        /// 
+        ///     var route2 = new Tencentcloud.Dc.GatewayCcnRoute("route2", new()
+        ///     {
+        ///         DcgId = ccnMain.Id,
+        ///         CidrBlock = "192.1.1.0/32",
+        ///     });
+        /// 
+        ///     var test = Tencentcloud.Dc.GetGatewayCcnRoutes.Invoke(new()
+        ///     {
+        ///         DcgId = ccnMain.Id,
+        ///     });
+        /// 
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetGatewayCcnRoutesResult> InvokeAsync(GetGatewayCcnRoutesArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetGatewayCcnRoutesResult>("tencentcloud:Dc/getGatewayCcnRoutes:getGatewayCcnRoutes", args ?? new GetGatewayCcnRoutesArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetGatewayCcnRoutesResult>("tencentcloud:Dc/getGatewayCcnRoutes:getGatewayCcnRoutes", args ?? new GetGatewayCcnRoutesArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of direct connect gateway route entries.
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var main = new Tencentcloud.Ccn.Instance("main", new()
         ///     {
-        ///         var main = new Tencentcloud.Ccn.Instance("main", new Tencentcloud.Ccn.InstanceArgs
-        ///         {
-        ///             Description = "ci-temp-test-ccn-des",
-        ///             Qos = "AG",
-        ///         });
-        ///         var ccnMain = new Tencentcloud.Dc.Gateway("ccnMain", new Tencentcloud.Dc.GatewayArgs
-        ///         {
-        ///             NetworkInstanceId = main.Id,
-        ///             NetworkType = "CCN",
-        ///             GatewayType = "NORMAL",
-        ///         });
-        ///         var route1 = new Tencentcloud.Dc.GatewayCcnRoute("route1", new Tencentcloud.Dc.GatewayCcnRouteArgs
-        ///         {
-        ///             DcgId = ccnMain.Id,
-        ///             CidrBlock = "10.1.1.0/32",
-        ///         });
-        ///         var route2 = new Tencentcloud.Dc.GatewayCcnRoute("route2", new Tencentcloud.Dc.GatewayCcnRouteArgs
-        ///         {
-        ///             DcgId = ccnMain.Id,
-        ///             CidrBlock = "192.1.1.0/32",
-        ///         });
-        ///         var test = Tencentcloud.Dc.GetGatewayCcnRoutes.Invoke(new Tencentcloud.Dc.GetGatewayCcnRoutesInvokeArgs
-        ///         {
-        ///             DcgId = ccnMain.Id,
-        ///         });
-        ///     }
+        ///         Description = "ci-temp-test-ccn-des",
+        ///         Qos = "AG",
+        ///     });
         /// 
-        /// }
+        ///     var ccnMain = new Tencentcloud.Dc.Gateway("ccnMain", new()
+        ///     {
+        ///         NetworkInstanceId = main.Id,
+        ///         NetworkType = "CCN",
+        ///         GatewayType = "NORMAL",
+        ///     });
+        /// 
+        ///     var route1 = new Tencentcloud.Dc.GatewayCcnRoute("route1", new()
+        ///     {
+        ///         DcgId = ccnMain.Id,
+        ///         CidrBlock = "10.1.1.0/32",
+        ///     });
+        /// 
+        ///     var route2 = new Tencentcloud.Dc.GatewayCcnRoute("route2", new()
+        ///     {
+        ///         DcgId = ccnMain.Id,
+        ///         CidrBlock = "192.1.1.0/32",
+        ///     });
+        /// 
+        ///     var test = Tencentcloud.Dc.GetGatewayCcnRoutes.Invoke(new()
+        ///     {
+        ///         DcgId = ccnMain.Id,
+        ///     });
+        /// 
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetGatewayCcnRoutesResult> Invoke(GetGatewayCcnRoutesInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetGatewayCcnRoutesResult>("tencentcloud:Dc/getGatewayCcnRoutes:getGatewayCcnRoutes", args ?? new GetGatewayCcnRoutesInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetGatewayCcnRoutesResult>("tencentcloud:Dc/getGatewayCcnRoutes:getGatewayCcnRoutes", args ?? new GetGatewayCcnRoutesInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetGatewayCcnRoutesArgs : Pulumi.InvokeArgs
+    public sealed class GetGatewayCcnRoutesArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// ID of the DCG to be queried.
@@ -133,9 +135,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dc
         public GetGatewayCcnRoutesArgs()
         {
         }
+        public static new GetGatewayCcnRoutesArgs Empty => new GetGatewayCcnRoutesArgs();
     }
 
-    public sealed class GetGatewayCcnRoutesInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetGatewayCcnRoutesInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// ID of the DCG to be queried.
@@ -152,6 +155,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dc
         public GetGatewayCcnRoutesInvokeArgs()
         {
         }
+        public static new GetGatewayCcnRoutesInvokeArgs Empty => new GetGatewayCcnRoutesInvokeArgs();
     }
 
 

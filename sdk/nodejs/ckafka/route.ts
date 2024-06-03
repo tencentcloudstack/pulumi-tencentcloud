@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,18 +11,28 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const route = new tencentcloud.Ckafka.Route("route", {
+ * const example = new tencentcloud.ckafka.Route("example", {
  *     accessType: 0,
- *     instanceId: "ckafka-xxxxxx",
+ *     instanceId: "ckafka-8j4rodrr",
  *     publicNetwork: 3,
- *     subnetId: "subnet-xxxxxx",
+ *     subnetId: "subnet-j5vja918",
  *     vipType: 3,
- *     vpcId: "vpc-xxxxxx",
+ *     vpcId: "vpc-axrsmmrv",
  * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ *
+ * ## Import
+ *
+ * ckafka route can be imported using the id, e.g.
+ *
+ * ```sh
+ * $ pulumi import tencentcloud:Ckafka/route:Route example ckafka-8j4rodrr#135912
  * ```
  */
 export class Route extends pulumi.CustomResource {

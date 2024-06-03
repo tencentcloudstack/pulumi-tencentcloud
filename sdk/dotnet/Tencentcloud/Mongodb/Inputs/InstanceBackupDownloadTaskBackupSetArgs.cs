@@ -11,13 +11,17 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mongodb.Inputs
 {
 
-    public sealed class InstanceBackupDownloadTaskBackupSetArgs : Pulumi.ResourceArgs
+    public sealed class InstanceBackupDownloadTaskBackupSetArgs : global::Pulumi.ResourceArgs
     {
+        /// <summary>
+        /// Replication Id.
+        /// </summary>
         [Input("replicaSetId", required: true)]
         public Input<string> ReplicaSetId { get; set; } = null!;
 
         public InstanceBackupDownloadTaskBackupSetArgs()
         {
         }
+        public static new InstanceBackupDownloadTaskBackupSetArgs Empty => new InstanceBackupDownloadTaskBackupSetArgs();
     }
 }

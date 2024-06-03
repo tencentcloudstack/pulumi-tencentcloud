@@ -15,50 +15,52 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdmq
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var exampleInstance = new Tencentcloud.Tdmq.Instance("exampleInstance", new()
     ///     {
-    ///         var exampleInstance = new Tencentcloud.Tdmq.Instance("exampleInstance", new Tencentcloud.Tdmq.InstanceArgs
+    ///         ClusterName = "tf_example",
+    ///         Remark = "remark.",
+    ///         Tags = 
     ///         {
-    ///             ClusterName = "tf_example",
-    ///             Remark = "remark.",
-    ///             Tags = 
-    ///             {
-    ///                 { "createdBy", "terraform" },
-    ///             },
-    ///         });
-    ///         var exampleNamespace = new Tencentcloud.Tdmq.Namespace("exampleNamespace", new Tencentcloud.Tdmq.NamespaceArgs
-    ///         {
-    ///             EnvironName = "tf_example",
-    ///             MsgTtl = 300,
-    ///             ClusterId = exampleInstance.Id,
-    ///             RetentionPolicy = new Tencentcloud.Tdmq.Inputs.NamespaceRetentionPolicyArgs
-    ///             {
-    ///                 TimeInMinutes = 60,
-    ///                 SizeInMb = 10,
-    ///             },
-    ///             Remark = "remark.",
-    ///         });
-    ///     }
+    ///             { "createdBy", "terraform" },
+    ///         },
+    ///     });
     /// 
-    /// }
+    ///     var exampleNamespace = new Tencentcloud.Tdmq.Namespace("exampleNamespace", new()
+    ///     {
+    ///         EnvironName = "tf_example",
+    ///         MsgTtl = 300,
+    ///         ClusterId = exampleInstance.Id,
+    ///         RetentionPolicy = new Tencentcloud.Tdmq.Inputs.NamespaceRetentionPolicyArgs
+    ///         {
+    ///             TimeInMinutes = 60,
+    ///             SizeInMb = 10,
+    ///         },
+    ///         Remark = "remark.",
+    ///     });
+    /// 
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// Tdmq namespace can be imported, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Tdmq/namespace:Namespace test namespace_id
+    /// $ pulumi import tencentcloud:Tdmq/namespace:Namespace test namespace_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Tdmq/namespace:Namespace")]
-    public partial class Namespace : Pulumi.CustomResource
+    public partial class Namespace : global::Pulumi.CustomResource
     {
         /// <summary>
         /// The Dedicated Cluster Id.
@@ -135,7 +137,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdmq
         }
     }
 
-    public sealed class NamespaceArgs : Pulumi.ResourceArgs
+    public sealed class NamespaceArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// The Dedicated Cluster Id.
@@ -170,9 +172,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdmq
         public NamespaceArgs()
         {
         }
+        public static new NamespaceArgs Empty => new NamespaceArgs();
     }
 
-    public sealed class NamespaceState : Pulumi.ResourceArgs
+    public sealed class NamespaceState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// The Dedicated Cluster Id.
@@ -207,5 +210,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdmq
         public NamespaceState()
         {
         }
+        public static new NamespaceState Empty => new NamespaceState();
     }
 }

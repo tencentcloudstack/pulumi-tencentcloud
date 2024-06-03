@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,25 +11,21 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const accessAddress = pulumi.output(tencentcloud.Tse.getAccessAddress({
- *     // vpc_id = "vpc-xxxxxx"
- *     // subnet_id = "subnet-xxxxxx"
- *     // workload = "pushgateway"
+ * const accessAddress = tencentcloud.Tse.getAccessAddress({
  *     engineRegion: "ap-guangzhou",
  *     instanceId: "ins-7eb7eea7",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getAccessAddress(args: GetAccessAddressArgs, opts?: pulumi.InvokeOptions): Promise<GetAccessAddressResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Tse/getAccessAddress:getAccessAddress", {
         "engineRegion": args.engineRegion,
         "instanceId": args.instanceId,
@@ -116,9 +113,25 @@ export interface GetAccessAddressResult {
     readonly vpcId?: string;
     readonly workload?: string;
 }
-
+/**
+ * Use this data source to query detailed information of tse accessAddress
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const accessAddress = tencentcloud.Tse.getAccessAddress({
+ *     engineRegion: "ap-guangzhou",
+ *     instanceId: "ins-7eb7eea7",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getAccessAddressOutput(args: GetAccessAddressOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetAccessAddressResult> {
-    return pulumi.output(args).apply(a => getAccessAddress(a, opts))
+    return pulumi.output(args).apply((a: any) => getAccessAddress(a, opts))
 }
 
 /**

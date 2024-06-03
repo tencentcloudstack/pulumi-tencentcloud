@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Lighthouse.Inputs
 {
 
-    public sealed class FirewallTemplateTemplateRuleArgs : Pulumi.ResourceArgs
+    public sealed class FirewallTemplateTemplateRuleArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Action. Values: ACCEPT, DROP. The default is `ACCEPT`.
@@ -46,5 +46,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Lighthouse.Inputs
         public FirewallTemplateTemplateRuleArgs()
         {
         }
+        public static new FirewallTemplateTemplateRuleArgs Empty => new FirewallTemplateTemplateRuleArgs();
     }
 }

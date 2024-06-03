@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dayu.Inputs
 {
 
-    public sealed class L4RuleSourceListGetArgs : Pulumi.ResourceArgs
+    public sealed class L4RuleSourceListGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Source IP or domain, valid format of ip is like `1.1.1.1` and valid format of host source is like `abc.com`.
@@ -28,5 +28,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dayu.Inputs
         public L4RuleSourceListGetArgs()
         {
         }
+        public static new L4RuleSourceListGetArgs Empty => new L4RuleSourceListGetArgs();
     }
 }

@@ -7,54 +7,60 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a teo applicationProxyRule
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Teo"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Teo"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Teo.NewApplicationProxyRule(ctx, "applicationProxyRule", &Teo.ApplicationProxyRuleArgs{
-// 			ForwardClientIp: pulumi.String("TOA"),
-// 			OriginPort:      pulumi.String("8083"),
-// 			OriginType:      pulumi.String("custom"),
-// 			OriginValues: pulumi.StringArray{
-// 				pulumi.String("127.0.0.1"),
-// 			},
-// 			Ports: pulumi.StringArray{
-// 				pulumi.String("8083"),
-// 			},
-// 			Proto:          pulumi.String("TCP"),
-// 			ProxyId:        pulumi.String("proxy-6972528a-373a-11ed-afca-52540044a456"),
-// 			SessionPersist: pulumi.Bool(false),
-// 			Status:         pulumi.String("online"),
-// 			ZoneId:         pulumi.String("zone-2983wizgxqvm"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Teo.NewApplicationProxyRule(ctx, "applicationProxyRule", &Teo.ApplicationProxyRuleArgs{
+//				ForwardClientIp: pulumi.String("TOA"),
+//				OriginPort:      pulumi.String("8083"),
+//				OriginType:      pulumi.String("custom"),
+//				OriginValues: pulumi.StringArray{
+//					pulumi.String("127.0.0.1"),
+//				},
+//				Ports: pulumi.StringArray{
+//					pulumi.String("8083"),
+//				},
+//				Proto:          pulumi.String("TCP"),
+//				ProxyId:        pulumi.String("proxy-6972528a-373a-11ed-afca-52540044a456"),
+//				SessionPersist: pulumi.Bool(false),
+//				Status:         pulumi.String("online"),
+//				ZoneId:         pulumi.String("zone-2983wizgxqvm"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // teo application_proxy_rule can be imported using the zoneId#proxyId#ruleId, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Teo/applicationProxyRule:ApplicationProxyRule application_proxy_rule zone-2983wizgxqvm#proxy-6972528a-373a-11ed-afca-52540044a456#rule-90b13bb4-373a-11ed-8794-525400eddfed
+// $ pulumi import tencentcloud:Teo/applicationProxyRule:ApplicationProxyRule application_proxy_rule zone-2983wizgxqvm#proxy-6972528a-373a-11ed-afca-52540044a456#rule-90b13bb4-373a-11ed-8794-525400eddfed
 // ```
 type ApplicationProxyRule struct {
 	pulumi.CustomResourceState
@@ -111,7 +117,7 @@ func NewApplicationProxyRule(ctx *pulumi.Context,
 	if args.ZoneId == nil {
 		return nil, errors.New("invalid value for required argument 'ZoneId'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource ApplicationProxyRule
 	err := ctx.RegisterResource("tencentcloud:Teo/applicationProxyRule:ApplicationProxyRule", name, args, &resource, opts...)
 	if err != nil {
@@ -260,7 +266,7 @@ func (i *ApplicationProxyRule) ToApplicationProxyRuleOutputWithContext(ctx conte
 // ApplicationProxyRuleArrayInput is an input type that accepts ApplicationProxyRuleArray and ApplicationProxyRuleArrayOutput values.
 // You can construct a concrete instance of `ApplicationProxyRuleArrayInput` via:
 //
-//          ApplicationProxyRuleArray{ ApplicationProxyRuleArgs{...} }
+//	ApplicationProxyRuleArray{ ApplicationProxyRuleArgs{...} }
 type ApplicationProxyRuleArrayInput interface {
 	pulumi.Input
 
@@ -285,7 +291,7 @@ func (i ApplicationProxyRuleArray) ToApplicationProxyRuleArrayOutputWithContext(
 // ApplicationProxyRuleMapInput is an input type that accepts ApplicationProxyRuleMap and ApplicationProxyRuleMapOutput values.
 // You can construct a concrete instance of `ApplicationProxyRuleMapInput` via:
 //
-//          ApplicationProxyRuleMap{ "key": ApplicationProxyRuleArgs{...} }
+//	ApplicationProxyRuleMap{ "key": ApplicationProxyRuleArgs{...} }
 type ApplicationProxyRuleMapInput interface {
 	pulumi.Input
 

@@ -2,35 +2,16 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
  * Use this data source to query detailed information of VPN gateways.
- *
- * ## Example Usage
- *
- * ```typescript
- * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
- *
- * const foo = pulumi.output(tencentcloud.Vpn.getGateways({
- *     destinationCidrBlock: "vpngw-8ccsnclt",
- *     instanceId: "ap-guangzhou-3",
- *     instanceType: "1.1.1.1",
- *     tags: {
- *         test: "tf",
- *     },
- *     vpnGatewayId: "main",
- * }));
- * ```
  */
 export function getGatewayRoutes(args: GetGatewayRoutesArgs, opts?: pulumi.InvokeOptions): Promise<GetGatewayRoutesResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Vpn/getGatewayRoutes:getGatewayRoutes", {
         "destinationCidr": args.destinationCidr,
         "instanceId": args.instanceId,
@@ -84,9 +65,11 @@ export interface GetGatewayRoutesResult {
      */
     readonly vpnGatewayRouteLists: outputs.Vpn.GetGatewayRoutesVpnGatewayRouteList[];
 }
-
+/**
+ * Use this data source to query detailed information of VPN gateways.
+ */
 export function getGatewayRoutesOutput(args: GetGatewayRoutesOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetGatewayRoutesResult> {
-    return pulumi.output(args).apply(a => getGatewayRoutes(a, opts))
+    return pulumi.output(args).apply((a: any) => getGatewayRoutes(a, opts))
 }
 
 /**

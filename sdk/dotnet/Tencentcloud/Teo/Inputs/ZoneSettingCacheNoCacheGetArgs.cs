@@ -11,10 +11,10 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Inputs
 {
 
-    public sealed class ZoneSettingCacheNoCacheGetArgs : Pulumi.ResourceArgs
+    public sealed class ZoneSettingCacheNoCacheGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// Whether to cache the configuration. Valid values: `on`: Do not cache; `off`: Cache. Note: This field may return null, indicating that no valid value can be obtained.
+        /// Whether to cache the configuration.
         /// </summary>
         [Input("switch")]
         public Input<string>? Switch { get; set; }
@@ -22,5 +22,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Inputs
         public ZoneSettingCacheNoCacheGetArgs()
         {
         }
+        public static new ZoneSettingCacheNoCacheGetArgs Empty => new ZoneSettingCacheNoCacheGetArgs();
     }
 }

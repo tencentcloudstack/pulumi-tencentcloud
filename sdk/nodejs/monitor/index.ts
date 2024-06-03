@@ -5,93 +5,266 @@ import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
 // Export members:
-export * from "./alarmNotice";
-export * from "./alarmPolicy";
-export * from "./alarmPolicySetDefault";
-export * from "./bindingReceiver";
-export * from "./getAlarmAllNamespaces";
-export * from "./getAlarmBasicAlarms";
-export * from "./getAlarmBasicMetric";
-export * from "./getAlarmConditionsTemplate";
-export * from "./getAlarmHistory";
-export * from "./getAlarmMetric";
-export * from "./getAlarmMonitorType";
-export * from "./getAlarmNoticeCallbacks";
-export * from "./getAlarmNotices";
-export * from "./getAlarmPolicy";
-export * from "./getBindingObjects";
-export * from "./getData";
-export * from "./getGrafanaPluginOverviews";
-export * from "./getPolicyConditions";
-export * from "./getPolicyGroups";
-export * from "./getProductEvent";
-export * from "./getProductNamespace";
-export * from "./getStatisticData";
-export * from "./getTmpRegions";
-export * from "./grafanaDnsConfig";
-export * from "./grafanaEnvConfig";
-export * from "./grafanaInstance";
-export * from "./grafanaIntegration";
-export * from "./grafanaNotificationChannel";
-export * from "./grafanaPlugin";
-export * from "./grafanaSsoAccount";
-export * from "./grafanaSsoCamConfig";
-export * from "./grafanaSsoConfig";
-export * from "./grafanaVersionUpgrade";
-export * from "./grafanaWhitelistConfig";
-export * from "./policyBindingObject";
-export * from "./tmpAlertGroup";
-export * from "./tmpAlertRule";
-export * from "./tmpCvmAgent";
-export * from "./tmpExporterIntegration";
-export * from "./tmpGrafanaConfig";
-export * from "./tmpInstance";
-export * from "./tmpManageGrafanaAttachment";
-export * from "./tmpRecordingRule";
-export * from "./tmpScrapeJob";
-export * from "./tmpTkeAlertPolicy";
-export * from "./tmpTkeBasicConfig";
-export * from "./tmpTkeClusterAgent";
-export * from "./tmpTkeConfig";
-export * from "./tmpTkeGlobalNotification";
-export * from "./tmpTkeRecordRuleYaml";
-export * from "./tmpTkeTemplate";
-export * from "./tmpTkeTemplateAttachment";
+export { AlarmNoticeArgs, AlarmNoticeState } from "./alarmNotice";
+export type AlarmNotice = import("./alarmNotice").AlarmNotice;
+export const AlarmNotice: typeof import("./alarmNotice").AlarmNotice = null as any;
+utilities.lazyLoad(exports, ["AlarmNotice"], () => require("./alarmNotice"));
 
-// Import resources to register:
-import { AlarmNotice } from "./alarmNotice";
-import { AlarmPolicy } from "./alarmPolicy";
-import { AlarmPolicySetDefault } from "./alarmPolicySetDefault";
-import { BindingReceiver } from "./bindingReceiver";
-import { GrafanaDnsConfig } from "./grafanaDnsConfig";
-import { GrafanaEnvConfig } from "./grafanaEnvConfig";
-import { GrafanaInstance } from "./grafanaInstance";
-import { GrafanaIntegration } from "./grafanaIntegration";
-import { GrafanaNotificationChannel } from "./grafanaNotificationChannel";
-import { GrafanaPlugin } from "./grafanaPlugin";
-import { GrafanaSsoAccount } from "./grafanaSsoAccount";
-import { GrafanaSsoCamConfig } from "./grafanaSsoCamConfig";
-import { GrafanaSsoConfig } from "./grafanaSsoConfig";
-import { GrafanaVersionUpgrade } from "./grafanaVersionUpgrade";
-import { GrafanaWhitelistConfig } from "./grafanaWhitelistConfig";
-import { PolicyBindingObject } from "./policyBindingObject";
-import { TmpAlertGroup } from "./tmpAlertGroup";
-import { TmpAlertRule } from "./tmpAlertRule";
-import { TmpCvmAgent } from "./tmpCvmAgent";
-import { TmpExporterIntegration } from "./tmpExporterIntegration";
-import { TmpGrafanaConfig } from "./tmpGrafanaConfig";
-import { TmpInstance } from "./tmpInstance";
-import { TmpManageGrafanaAttachment } from "./tmpManageGrafanaAttachment";
-import { TmpRecordingRule } from "./tmpRecordingRule";
-import { TmpScrapeJob } from "./tmpScrapeJob";
-import { TmpTkeAlertPolicy } from "./tmpTkeAlertPolicy";
-import { TmpTkeBasicConfig } from "./tmpTkeBasicConfig";
-import { TmpTkeClusterAgent } from "./tmpTkeClusterAgent";
-import { TmpTkeConfig } from "./tmpTkeConfig";
-import { TmpTkeGlobalNotification } from "./tmpTkeGlobalNotification";
-import { TmpTkeRecordRuleYaml } from "./tmpTkeRecordRuleYaml";
-import { TmpTkeTemplate } from "./tmpTkeTemplate";
-import { TmpTkeTemplateAttachment } from "./tmpTkeTemplateAttachment";
+export { AlarmPolicyArgs, AlarmPolicyState } from "./alarmPolicy";
+export type AlarmPolicy = import("./alarmPolicy").AlarmPolicy;
+export const AlarmPolicy: typeof import("./alarmPolicy").AlarmPolicy = null as any;
+utilities.lazyLoad(exports, ["AlarmPolicy"], () => require("./alarmPolicy"));
+
+export { AlarmPolicySetDefaultArgs, AlarmPolicySetDefaultState } from "./alarmPolicySetDefault";
+export type AlarmPolicySetDefault = import("./alarmPolicySetDefault").AlarmPolicySetDefault;
+export const AlarmPolicySetDefault: typeof import("./alarmPolicySetDefault").AlarmPolicySetDefault = null as any;
+utilities.lazyLoad(exports, ["AlarmPolicySetDefault"], () => require("./alarmPolicySetDefault"));
+
+export { BindingReceiverArgs, BindingReceiverState } from "./bindingReceiver";
+export type BindingReceiver = import("./bindingReceiver").BindingReceiver;
+export const BindingReceiver: typeof import("./bindingReceiver").BindingReceiver = null as any;
+utilities.lazyLoad(exports, ["BindingReceiver"], () => require("./bindingReceiver"));
+
+export { GetAlarmAllNamespacesArgs, GetAlarmAllNamespacesResult, GetAlarmAllNamespacesOutputArgs } from "./getAlarmAllNamespaces";
+export const getAlarmAllNamespaces: typeof import("./getAlarmAllNamespaces").getAlarmAllNamespaces = null as any;
+export const getAlarmAllNamespacesOutput: typeof import("./getAlarmAllNamespaces").getAlarmAllNamespacesOutput = null as any;
+utilities.lazyLoad(exports, ["getAlarmAllNamespaces","getAlarmAllNamespacesOutput"], () => require("./getAlarmAllNamespaces"));
+
+export { GetAlarmBasicAlarmsArgs, GetAlarmBasicAlarmsResult, GetAlarmBasicAlarmsOutputArgs } from "./getAlarmBasicAlarms";
+export const getAlarmBasicAlarms: typeof import("./getAlarmBasicAlarms").getAlarmBasicAlarms = null as any;
+export const getAlarmBasicAlarmsOutput: typeof import("./getAlarmBasicAlarms").getAlarmBasicAlarmsOutput = null as any;
+utilities.lazyLoad(exports, ["getAlarmBasicAlarms","getAlarmBasicAlarmsOutput"], () => require("./getAlarmBasicAlarms"));
+
+export { GetAlarmBasicMetricArgs, GetAlarmBasicMetricResult, GetAlarmBasicMetricOutputArgs } from "./getAlarmBasicMetric";
+export const getAlarmBasicMetric: typeof import("./getAlarmBasicMetric").getAlarmBasicMetric = null as any;
+export const getAlarmBasicMetricOutput: typeof import("./getAlarmBasicMetric").getAlarmBasicMetricOutput = null as any;
+utilities.lazyLoad(exports, ["getAlarmBasicMetric","getAlarmBasicMetricOutput"], () => require("./getAlarmBasicMetric"));
+
+export { GetAlarmConditionsTemplateArgs, GetAlarmConditionsTemplateResult, GetAlarmConditionsTemplateOutputArgs } from "./getAlarmConditionsTemplate";
+export const getAlarmConditionsTemplate: typeof import("./getAlarmConditionsTemplate").getAlarmConditionsTemplate = null as any;
+export const getAlarmConditionsTemplateOutput: typeof import("./getAlarmConditionsTemplate").getAlarmConditionsTemplateOutput = null as any;
+utilities.lazyLoad(exports, ["getAlarmConditionsTemplate","getAlarmConditionsTemplateOutput"], () => require("./getAlarmConditionsTemplate"));
+
+export { GetAlarmHistoryArgs, GetAlarmHistoryResult, GetAlarmHistoryOutputArgs } from "./getAlarmHistory";
+export const getAlarmHistory: typeof import("./getAlarmHistory").getAlarmHistory = null as any;
+export const getAlarmHistoryOutput: typeof import("./getAlarmHistory").getAlarmHistoryOutput = null as any;
+utilities.lazyLoad(exports, ["getAlarmHistory","getAlarmHistoryOutput"], () => require("./getAlarmHistory"));
+
+export { GetAlarmMetricArgs, GetAlarmMetricResult, GetAlarmMetricOutputArgs } from "./getAlarmMetric";
+export const getAlarmMetric: typeof import("./getAlarmMetric").getAlarmMetric = null as any;
+export const getAlarmMetricOutput: typeof import("./getAlarmMetric").getAlarmMetricOutput = null as any;
+utilities.lazyLoad(exports, ["getAlarmMetric","getAlarmMetricOutput"], () => require("./getAlarmMetric"));
+
+export { GetAlarmMonitorTypeArgs, GetAlarmMonitorTypeResult, GetAlarmMonitorTypeOutputArgs } from "./getAlarmMonitorType";
+export const getAlarmMonitorType: typeof import("./getAlarmMonitorType").getAlarmMonitorType = null as any;
+export const getAlarmMonitorTypeOutput: typeof import("./getAlarmMonitorType").getAlarmMonitorTypeOutput = null as any;
+utilities.lazyLoad(exports, ["getAlarmMonitorType","getAlarmMonitorTypeOutput"], () => require("./getAlarmMonitorType"));
+
+export { GetAlarmNoticeCallbacksArgs, GetAlarmNoticeCallbacksResult, GetAlarmNoticeCallbacksOutputArgs } from "./getAlarmNoticeCallbacks";
+export const getAlarmNoticeCallbacks: typeof import("./getAlarmNoticeCallbacks").getAlarmNoticeCallbacks = null as any;
+export const getAlarmNoticeCallbacksOutput: typeof import("./getAlarmNoticeCallbacks").getAlarmNoticeCallbacksOutput = null as any;
+utilities.lazyLoad(exports, ["getAlarmNoticeCallbacks","getAlarmNoticeCallbacksOutput"], () => require("./getAlarmNoticeCallbacks"));
+
+export { GetAlarmNoticesArgs, GetAlarmNoticesResult, GetAlarmNoticesOutputArgs } from "./getAlarmNotices";
+export const getAlarmNotices: typeof import("./getAlarmNotices").getAlarmNotices = null as any;
+export const getAlarmNoticesOutput: typeof import("./getAlarmNotices").getAlarmNoticesOutput = null as any;
+utilities.lazyLoad(exports, ["getAlarmNotices","getAlarmNoticesOutput"], () => require("./getAlarmNotices"));
+
+export { GetAlarmPolicyArgs, GetAlarmPolicyResult, GetAlarmPolicyOutputArgs } from "./getAlarmPolicy";
+export const getAlarmPolicy: typeof import("./getAlarmPolicy").getAlarmPolicy = null as any;
+export const getAlarmPolicyOutput: typeof import("./getAlarmPolicy").getAlarmPolicyOutput = null as any;
+utilities.lazyLoad(exports, ["getAlarmPolicy","getAlarmPolicyOutput"], () => require("./getAlarmPolicy"));
+
+export { GetBindingObjectsArgs, GetBindingObjectsResult, GetBindingObjectsOutputArgs } from "./getBindingObjects";
+export const getBindingObjects: typeof import("./getBindingObjects").getBindingObjects = null as any;
+export const getBindingObjectsOutput: typeof import("./getBindingObjects").getBindingObjectsOutput = null as any;
+utilities.lazyLoad(exports, ["getBindingObjects","getBindingObjectsOutput"], () => require("./getBindingObjects"));
+
+export { GetDataArgs, GetDataResult, GetDataOutputArgs } from "./getData";
+export const getData: typeof import("./getData").getData = null as any;
+export const getDataOutput: typeof import("./getData").getDataOutput = null as any;
+utilities.lazyLoad(exports, ["getData","getDataOutput"], () => require("./getData"));
+
+export { GetGrafanaPluginOverviewsArgs, GetGrafanaPluginOverviewsResult, GetGrafanaPluginOverviewsOutputArgs } from "./getGrafanaPluginOverviews";
+export const getGrafanaPluginOverviews: typeof import("./getGrafanaPluginOverviews").getGrafanaPluginOverviews = null as any;
+export const getGrafanaPluginOverviewsOutput: typeof import("./getGrafanaPluginOverviews").getGrafanaPluginOverviewsOutput = null as any;
+utilities.lazyLoad(exports, ["getGrafanaPluginOverviews","getGrafanaPluginOverviewsOutput"], () => require("./getGrafanaPluginOverviews"));
+
+export { GetPolicyConditionsArgs, GetPolicyConditionsResult, GetPolicyConditionsOutputArgs } from "./getPolicyConditions";
+export const getPolicyConditions: typeof import("./getPolicyConditions").getPolicyConditions = null as any;
+export const getPolicyConditionsOutput: typeof import("./getPolicyConditions").getPolicyConditionsOutput = null as any;
+utilities.lazyLoad(exports, ["getPolicyConditions","getPolicyConditionsOutput"], () => require("./getPolicyConditions"));
+
+export { GetPolicyGroupsArgs, GetPolicyGroupsResult, GetPolicyGroupsOutputArgs } from "./getPolicyGroups";
+export const getPolicyGroups: typeof import("./getPolicyGroups").getPolicyGroups = null as any;
+export const getPolicyGroupsOutput: typeof import("./getPolicyGroups").getPolicyGroupsOutput = null as any;
+utilities.lazyLoad(exports, ["getPolicyGroups","getPolicyGroupsOutput"], () => require("./getPolicyGroups"));
+
+export { GetProductEventArgs, GetProductEventResult, GetProductEventOutputArgs } from "./getProductEvent";
+export const getProductEvent: typeof import("./getProductEvent").getProductEvent = null as any;
+export const getProductEventOutput: typeof import("./getProductEvent").getProductEventOutput = null as any;
+utilities.lazyLoad(exports, ["getProductEvent","getProductEventOutput"], () => require("./getProductEvent"));
+
+export { GetProductNamespaceArgs, GetProductNamespaceResult, GetProductNamespaceOutputArgs } from "./getProductNamespace";
+export const getProductNamespace: typeof import("./getProductNamespace").getProductNamespace = null as any;
+export const getProductNamespaceOutput: typeof import("./getProductNamespace").getProductNamespaceOutput = null as any;
+utilities.lazyLoad(exports, ["getProductNamespace","getProductNamespaceOutput"], () => require("./getProductNamespace"));
+
+export { GetStatisticDataArgs, GetStatisticDataResult, GetStatisticDataOutputArgs } from "./getStatisticData";
+export const getStatisticData: typeof import("./getStatisticData").getStatisticData = null as any;
+export const getStatisticDataOutput: typeof import("./getStatisticData").getStatisticDataOutput = null as any;
+utilities.lazyLoad(exports, ["getStatisticData","getStatisticDataOutput"], () => require("./getStatisticData"));
+
+export { GetTmpRegionsArgs, GetTmpRegionsResult, GetTmpRegionsOutputArgs } from "./getTmpRegions";
+export const getTmpRegions: typeof import("./getTmpRegions").getTmpRegions = null as any;
+export const getTmpRegionsOutput: typeof import("./getTmpRegions").getTmpRegionsOutput = null as any;
+utilities.lazyLoad(exports, ["getTmpRegions","getTmpRegionsOutput"], () => require("./getTmpRegions"));
+
+export { GrafanaDnsConfigArgs, GrafanaDnsConfigState } from "./grafanaDnsConfig";
+export type GrafanaDnsConfig = import("./grafanaDnsConfig").GrafanaDnsConfig;
+export const GrafanaDnsConfig: typeof import("./grafanaDnsConfig").GrafanaDnsConfig = null as any;
+utilities.lazyLoad(exports, ["GrafanaDnsConfig"], () => require("./grafanaDnsConfig"));
+
+export { GrafanaEnvConfigArgs, GrafanaEnvConfigState } from "./grafanaEnvConfig";
+export type GrafanaEnvConfig = import("./grafanaEnvConfig").GrafanaEnvConfig;
+export const GrafanaEnvConfig: typeof import("./grafanaEnvConfig").GrafanaEnvConfig = null as any;
+utilities.lazyLoad(exports, ["GrafanaEnvConfig"], () => require("./grafanaEnvConfig"));
+
+export { GrafanaInstanceArgs, GrafanaInstanceState } from "./grafanaInstance";
+export type GrafanaInstance = import("./grafanaInstance").GrafanaInstance;
+export const GrafanaInstance: typeof import("./grafanaInstance").GrafanaInstance = null as any;
+utilities.lazyLoad(exports, ["GrafanaInstance"], () => require("./grafanaInstance"));
+
+export { GrafanaIntegrationArgs, GrafanaIntegrationState } from "./grafanaIntegration";
+export type GrafanaIntegration = import("./grafanaIntegration").GrafanaIntegration;
+export const GrafanaIntegration: typeof import("./grafanaIntegration").GrafanaIntegration = null as any;
+utilities.lazyLoad(exports, ["GrafanaIntegration"], () => require("./grafanaIntegration"));
+
+export { GrafanaNotificationChannelArgs, GrafanaNotificationChannelState } from "./grafanaNotificationChannel";
+export type GrafanaNotificationChannel = import("./grafanaNotificationChannel").GrafanaNotificationChannel;
+export const GrafanaNotificationChannel: typeof import("./grafanaNotificationChannel").GrafanaNotificationChannel = null as any;
+utilities.lazyLoad(exports, ["GrafanaNotificationChannel"], () => require("./grafanaNotificationChannel"));
+
+export { GrafanaPluginArgs, GrafanaPluginState } from "./grafanaPlugin";
+export type GrafanaPlugin = import("./grafanaPlugin").GrafanaPlugin;
+export const GrafanaPlugin: typeof import("./grafanaPlugin").GrafanaPlugin = null as any;
+utilities.lazyLoad(exports, ["GrafanaPlugin"], () => require("./grafanaPlugin"));
+
+export { GrafanaSsoAccountArgs, GrafanaSsoAccountState } from "./grafanaSsoAccount";
+export type GrafanaSsoAccount = import("./grafanaSsoAccount").GrafanaSsoAccount;
+export const GrafanaSsoAccount: typeof import("./grafanaSsoAccount").GrafanaSsoAccount = null as any;
+utilities.lazyLoad(exports, ["GrafanaSsoAccount"], () => require("./grafanaSsoAccount"));
+
+export { GrafanaSsoCamConfigArgs, GrafanaSsoCamConfigState } from "./grafanaSsoCamConfig";
+export type GrafanaSsoCamConfig = import("./grafanaSsoCamConfig").GrafanaSsoCamConfig;
+export const GrafanaSsoCamConfig: typeof import("./grafanaSsoCamConfig").GrafanaSsoCamConfig = null as any;
+utilities.lazyLoad(exports, ["GrafanaSsoCamConfig"], () => require("./grafanaSsoCamConfig"));
+
+export { GrafanaSsoConfigArgs, GrafanaSsoConfigState } from "./grafanaSsoConfig";
+export type GrafanaSsoConfig = import("./grafanaSsoConfig").GrafanaSsoConfig;
+export const GrafanaSsoConfig: typeof import("./grafanaSsoConfig").GrafanaSsoConfig = null as any;
+utilities.lazyLoad(exports, ["GrafanaSsoConfig"], () => require("./grafanaSsoConfig"));
+
+export { GrafanaVersionUpgradeArgs, GrafanaVersionUpgradeState } from "./grafanaVersionUpgrade";
+export type GrafanaVersionUpgrade = import("./grafanaVersionUpgrade").GrafanaVersionUpgrade;
+export const GrafanaVersionUpgrade: typeof import("./grafanaVersionUpgrade").GrafanaVersionUpgrade = null as any;
+utilities.lazyLoad(exports, ["GrafanaVersionUpgrade"], () => require("./grafanaVersionUpgrade"));
+
+export { GrafanaWhitelistConfigArgs, GrafanaWhitelistConfigState } from "./grafanaWhitelistConfig";
+export type GrafanaWhitelistConfig = import("./grafanaWhitelistConfig").GrafanaWhitelistConfig;
+export const GrafanaWhitelistConfig: typeof import("./grafanaWhitelistConfig").GrafanaWhitelistConfig = null as any;
+utilities.lazyLoad(exports, ["GrafanaWhitelistConfig"], () => require("./grafanaWhitelistConfig"));
+
+export { PolicyBindingObjectArgs, PolicyBindingObjectState } from "./policyBindingObject";
+export type PolicyBindingObject = import("./policyBindingObject").PolicyBindingObject;
+export const PolicyBindingObject: typeof import("./policyBindingObject").PolicyBindingObject = null as any;
+utilities.lazyLoad(exports, ["PolicyBindingObject"], () => require("./policyBindingObject"));
+
+export { TmpAlertGroupArgs, TmpAlertGroupState } from "./tmpAlertGroup";
+export type TmpAlertGroup = import("./tmpAlertGroup").TmpAlertGroup;
+export const TmpAlertGroup: typeof import("./tmpAlertGroup").TmpAlertGroup = null as any;
+utilities.lazyLoad(exports, ["TmpAlertGroup"], () => require("./tmpAlertGroup"));
+
+export { TmpAlertRuleArgs, TmpAlertRuleState } from "./tmpAlertRule";
+export type TmpAlertRule = import("./tmpAlertRule").TmpAlertRule;
+export const TmpAlertRule: typeof import("./tmpAlertRule").TmpAlertRule = null as any;
+utilities.lazyLoad(exports, ["TmpAlertRule"], () => require("./tmpAlertRule"));
+
+export { TmpCvmAgentArgs, TmpCvmAgentState } from "./tmpCvmAgent";
+export type TmpCvmAgent = import("./tmpCvmAgent").TmpCvmAgent;
+export const TmpCvmAgent: typeof import("./tmpCvmAgent").TmpCvmAgent = null as any;
+utilities.lazyLoad(exports, ["TmpCvmAgent"], () => require("./tmpCvmAgent"));
+
+export { TmpExporterIntegrationArgs, TmpExporterIntegrationState } from "./tmpExporterIntegration";
+export type TmpExporterIntegration = import("./tmpExporterIntegration").TmpExporterIntegration;
+export const TmpExporterIntegration: typeof import("./tmpExporterIntegration").TmpExporterIntegration = null as any;
+utilities.lazyLoad(exports, ["TmpExporterIntegration"], () => require("./tmpExporterIntegration"));
+
+export { TmpGrafanaConfigArgs, TmpGrafanaConfigState } from "./tmpGrafanaConfig";
+export type TmpGrafanaConfig = import("./tmpGrafanaConfig").TmpGrafanaConfig;
+export const TmpGrafanaConfig: typeof import("./tmpGrafanaConfig").TmpGrafanaConfig = null as any;
+utilities.lazyLoad(exports, ["TmpGrafanaConfig"], () => require("./tmpGrafanaConfig"));
+
+export { TmpInstanceArgs, TmpInstanceState } from "./tmpInstance";
+export type TmpInstance = import("./tmpInstance").TmpInstance;
+export const TmpInstance: typeof import("./tmpInstance").TmpInstance = null as any;
+utilities.lazyLoad(exports, ["TmpInstance"], () => require("./tmpInstance"));
+
+export { TmpManageGrafanaAttachmentArgs, TmpManageGrafanaAttachmentState } from "./tmpManageGrafanaAttachment";
+export type TmpManageGrafanaAttachment = import("./tmpManageGrafanaAttachment").TmpManageGrafanaAttachment;
+export const TmpManageGrafanaAttachment: typeof import("./tmpManageGrafanaAttachment").TmpManageGrafanaAttachment = null as any;
+utilities.lazyLoad(exports, ["TmpManageGrafanaAttachment"], () => require("./tmpManageGrafanaAttachment"));
+
+export { TmpRecordingRuleArgs, TmpRecordingRuleState } from "./tmpRecordingRule";
+export type TmpRecordingRule = import("./tmpRecordingRule").TmpRecordingRule;
+export const TmpRecordingRule: typeof import("./tmpRecordingRule").TmpRecordingRule = null as any;
+utilities.lazyLoad(exports, ["TmpRecordingRule"], () => require("./tmpRecordingRule"));
+
+export { TmpScrapeJobArgs, TmpScrapeJobState } from "./tmpScrapeJob";
+export type TmpScrapeJob = import("./tmpScrapeJob").TmpScrapeJob;
+export const TmpScrapeJob: typeof import("./tmpScrapeJob").TmpScrapeJob = null as any;
+utilities.lazyLoad(exports, ["TmpScrapeJob"], () => require("./tmpScrapeJob"));
+
+export { TmpTkeAlertPolicyArgs, TmpTkeAlertPolicyState } from "./tmpTkeAlertPolicy";
+export type TmpTkeAlertPolicy = import("./tmpTkeAlertPolicy").TmpTkeAlertPolicy;
+export const TmpTkeAlertPolicy: typeof import("./tmpTkeAlertPolicy").TmpTkeAlertPolicy = null as any;
+utilities.lazyLoad(exports, ["TmpTkeAlertPolicy"], () => require("./tmpTkeAlertPolicy"));
+
+export { TmpTkeBasicConfigArgs, TmpTkeBasicConfigState } from "./tmpTkeBasicConfig";
+export type TmpTkeBasicConfig = import("./tmpTkeBasicConfig").TmpTkeBasicConfig;
+export const TmpTkeBasicConfig: typeof import("./tmpTkeBasicConfig").TmpTkeBasicConfig = null as any;
+utilities.lazyLoad(exports, ["TmpTkeBasicConfig"], () => require("./tmpTkeBasicConfig"));
+
+export { TmpTkeClusterAgentArgs, TmpTkeClusterAgentState } from "./tmpTkeClusterAgent";
+export type TmpTkeClusterAgent = import("./tmpTkeClusterAgent").TmpTkeClusterAgent;
+export const TmpTkeClusterAgent: typeof import("./tmpTkeClusterAgent").TmpTkeClusterAgent = null as any;
+utilities.lazyLoad(exports, ["TmpTkeClusterAgent"], () => require("./tmpTkeClusterAgent"));
+
+export { TmpTkeConfigArgs, TmpTkeConfigState } from "./tmpTkeConfig";
+export type TmpTkeConfig = import("./tmpTkeConfig").TmpTkeConfig;
+export const TmpTkeConfig: typeof import("./tmpTkeConfig").TmpTkeConfig = null as any;
+utilities.lazyLoad(exports, ["TmpTkeConfig"], () => require("./tmpTkeConfig"));
+
+export { TmpTkeGlobalNotificationArgs, TmpTkeGlobalNotificationState } from "./tmpTkeGlobalNotification";
+export type TmpTkeGlobalNotification = import("./tmpTkeGlobalNotification").TmpTkeGlobalNotification;
+export const TmpTkeGlobalNotification: typeof import("./tmpTkeGlobalNotification").TmpTkeGlobalNotification = null as any;
+utilities.lazyLoad(exports, ["TmpTkeGlobalNotification"], () => require("./tmpTkeGlobalNotification"));
+
+export { TmpTkeRecordRuleYamlArgs, TmpTkeRecordRuleYamlState } from "./tmpTkeRecordRuleYaml";
+export type TmpTkeRecordRuleYaml = import("./tmpTkeRecordRuleYaml").TmpTkeRecordRuleYaml;
+export const TmpTkeRecordRuleYaml: typeof import("./tmpTkeRecordRuleYaml").TmpTkeRecordRuleYaml = null as any;
+utilities.lazyLoad(exports, ["TmpTkeRecordRuleYaml"], () => require("./tmpTkeRecordRuleYaml"));
+
+export { TmpTkeTemplateArgs, TmpTkeTemplateState } from "./tmpTkeTemplate";
+export type TmpTkeTemplate = import("./tmpTkeTemplate").TmpTkeTemplate;
+export const TmpTkeTemplate: typeof import("./tmpTkeTemplate").TmpTkeTemplate = null as any;
+utilities.lazyLoad(exports, ["TmpTkeTemplate"], () => require("./tmpTkeTemplate"));
+
+export { TmpTkeTemplateAttachmentArgs, TmpTkeTemplateAttachmentState } from "./tmpTkeTemplateAttachment";
+export type TmpTkeTemplateAttachment = import("./tmpTkeTemplateAttachment").TmpTkeTemplateAttachment;
+export const TmpTkeTemplateAttachment: typeof import("./tmpTkeTemplateAttachment").TmpTkeTemplateAttachment = null as any;
+utilities.lazyLoad(exports, ["TmpTkeTemplateAttachment"], () => require("./tmpTkeTemplateAttachment"));
+
 
 const _module = {
     version: utilities.getVersion(),

@@ -8,42 +8,47 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Use this data source to query detailed information of CAM group policy attachments
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Cam"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cam"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cam"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Cam.GetGroupPolicyAttachments(ctx, &cam.GetGroupPolicyAttachmentsArgs{
-// 			GroupId: tencentcloud_cam_group.Foo.Id,
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_, err = Cam.GetGroupPolicyAttachments(ctx, &cam.GetGroupPolicyAttachmentsArgs{
-// 			GroupId:  tencentcloud_cam_group.Foo.Id,
-// 			PolicyId: pulumi.StringRef(tencentcloud_cam_policy.Foo.Id),
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Cam.GetGroupPolicyAttachments(ctx, &cam.GetGroupPolicyAttachmentsArgs{
+//				GroupId: tencentcloud_cam_group.Foo.Id,
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			_, err = Cam.GetGroupPolicyAttachments(ctx, &cam.GetGroupPolicyAttachmentsArgs{
+//				GroupId:  tencentcloud_cam_group.Foo.Id,
+//				PolicyId: pulumi.StringRef(tencentcloud_cam_policy.Foo.Id),
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 func GetGroupPolicyAttachments(ctx *pulumi.Context, args *GetGroupPolicyAttachmentsArgs, opts ...pulumi.InvokeOption) (*GetGroupPolicyAttachmentsResult, error) {
-	opts = pkgInvokeDefaultOpts(opts)
+	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetGroupPolicyAttachmentsResult
 	err := ctx.Invoke("tencentcloud:Cam/getGroupPolicyAttachments:getGroupPolicyAttachments", args, &rv, opts...)
 	if err != nil {

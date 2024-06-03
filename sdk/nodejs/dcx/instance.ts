@@ -11,9 +11,10 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const config = new pulumi.Config();
  * const dcId = config.get("dcId") || "dc-kax48sg7";
@@ -42,13 +43,14 @@ import * as utilities from "../utilities";
  *     customerAddress: "100.93.46.2/30",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * DCX instance can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Dcx/instance:Instance foo dcx-cbbr1gjk
+ * $ pulumi import tencentcloud:Dcx/instance:Instance foo dcx-cbbr1gjk
  * ```
  */
 export class Instance extends pulumi.CustomResource {

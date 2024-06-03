@@ -9,11 +9,12 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const sendRocketmqMessage = new tencentcloud.Tdmq.SendRocketmqMessage("send_rocketmq_message", {
+ * const sendRocketmqMessage = new tencentcloud.tdmq.SendRocketmqMessage("sendRocketmqMessage", {
  *     clusterId: "rocketmq-7k45z9dkpnne",
  *     msgBody: "msg key",
  *     msgKey: "msg tag",
@@ -22,6 +23,7 @@ import * as utilities from "../utilities";
  *     topicName: "test_topic",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export class SendRocketmqMessage extends pulumi.CustomResource {
     /**

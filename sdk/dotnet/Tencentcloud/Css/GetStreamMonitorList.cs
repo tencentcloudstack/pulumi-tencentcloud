@@ -15,58 +15,52 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Css
         /// <summary>
         /// Use this data source to query detailed information of css stream_monitor_list
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
-        ///     {
-        ///         var streamMonitorList = Output.Create(Tencentcloud.Css.GetStreamMonitorList.InvokeAsync());
-        ///     }
+        ///     var streamMonitorList = Tencentcloud.Css.GetStreamMonitorList.Invoke();
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetStreamMonitorListResult> InvokeAsync(GetStreamMonitorListArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetStreamMonitorListResult>("tencentcloud:Css/getStreamMonitorList:getStreamMonitorList", args ?? new GetStreamMonitorListArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetStreamMonitorListResult>("tencentcloud:Css/getStreamMonitorList:getStreamMonitorList", args ?? new GetStreamMonitorListArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of css stream_monitor_list
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
-        ///     {
-        ///         var streamMonitorList = Output.Create(Tencentcloud.Css.GetStreamMonitorList.InvokeAsync());
-        ///     }
+        ///     var streamMonitorList = Tencentcloud.Css.GetStreamMonitorList.Invoke();
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetStreamMonitorListResult> Invoke(GetStreamMonitorListInvokeArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetStreamMonitorListResult>("tencentcloud:Css/getStreamMonitorList:getStreamMonitorList", args ?? new GetStreamMonitorListInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetStreamMonitorListResult>("tencentcloud:Css/getStreamMonitorList:getStreamMonitorList", args ?? new GetStreamMonitorListInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetStreamMonitorListArgs : Pulumi.InvokeArgs
+    public sealed class GetStreamMonitorListArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Used to save results.
@@ -77,9 +71,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Css
         public GetStreamMonitorListArgs()
         {
         }
+        public static new GetStreamMonitorListArgs Empty => new GetStreamMonitorListArgs();
     }
 
-    public sealed class GetStreamMonitorListInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetStreamMonitorListInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Used to save results.
@@ -90,6 +85,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Css
         public GetStreamMonitorListInvokeArgs()
         {
         }
+        public static new GetStreamMonitorListInvokeArgs Empty => new GetStreamMonitorListInvokeArgs();
     }
 
 

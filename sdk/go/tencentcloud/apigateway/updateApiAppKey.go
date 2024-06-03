@@ -7,35 +7,41 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a apiGateway updateApiAppKey
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/ApiGateway"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/ApiGateway"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := ApiGateway.NewUpdateApiAppKey(ctx, "example", &ApiGateway.UpdateApiAppKeyArgs{
-// 			ApiAppId:  pulumi.String("app-krljp4wn"),
-// 			ApiAppKey: pulumi.String("APID6JmG21yRCc03h4z16hlsTqj1wpO3dB3ZQcUP"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := ApiGateway.NewUpdateApiAppKey(ctx, "example", &ApiGateway.UpdateApiAppKeyArgs{
+//				ApiAppId:  pulumi.String("app-krljp4wn"),
+//				ApiAppKey: pulumi.String("APID6JmG21yRCc03h4z16hlsTqj1wpO3dB3ZQcUP"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 type UpdateApiAppKey struct {
 	pulumi.CustomResourceState
 
@@ -58,7 +64,7 @@ func NewUpdateApiAppKey(ctx *pulumi.Context,
 	if args.ApiAppKey == nil {
 		return nil, errors.New("invalid value for required argument 'ApiAppKey'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource UpdateApiAppKey
 	err := ctx.RegisterResource("tencentcloud:ApiGateway/updateApiAppKey:UpdateApiAppKey", name, args, &resource, opts...)
 	if err != nil {
@@ -139,7 +145,7 @@ func (i *UpdateApiAppKey) ToUpdateApiAppKeyOutputWithContext(ctx context.Context
 // UpdateApiAppKeyArrayInput is an input type that accepts UpdateApiAppKeyArray and UpdateApiAppKeyArrayOutput values.
 // You can construct a concrete instance of `UpdateApiAppKeyArrayInput` via:
 //
-//          UpdateApiAppKeyArray{ UpdateApiAppKeyArgs{...} }
+//	UpdateApiAppKeyArray{ UpdateApiAppKeyArgs{...} }
 type UpdateApiAppKeyArrayInput interface {
 	pulumi.Input
 
@@ -164,7 +170,7 @@ func (i UpdateApiAppKeyArray) ToUpdateApiAppKeyArrayOutputWithContext(ctx contex
 // UpdateApiAppKeyMapInput is an input type that accepts UpdateApiAppKeyMap and UpdateApiAppKeyMapOutput values.
 // You can construct a concrete instance of `UpdateApiAppKeyMapInput` via:
 //
-//          UpdateApiAppKeyMap{ "key": UpdateApiAppKeyArgs{...} }
+//	UpdateApiAppKeyMap{ "key": UpdateApiAppKeyArgs{...} }
 type UpdateApiAppKeyMapInput interface {
 	pulumi.Input
 

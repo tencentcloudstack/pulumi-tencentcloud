@@ -8,7 +8,10 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
+
+var _ = internal.GetEnvOrDefault
 
 type NatInstanceNewModeItems struct {
 	// List of egress elastic public network IPs bound in the new mode.
@@ -20,7 +23,7 @@ type NatInstanceNewModeItems struct {
 // NatInstanceNewModeItemsInput is an input type that accepts NatInstanceNewModeItemsArgs and NatInstanceNewModeItemsOutput values.
 // You can construct a concrete instance of `NatInstanceNewModeItemsInput` via:
 //
-//          NatInstanceNewModeItemsArgs{...}
+//	NatInstanceNewModeItemsArgs{...}
 type NatInstanceNewModeItemsInput interface {
 	pulumi.Input
 
@@ -58,11 +61,11 @@ func (i NatInstanceNewModeItemsArgs) ToNatInstanceNewModeItemsPtrOutputWithConte
 // NatInstanceNewModeItemsPtrInput is an input type that accepts NatInstanceNewModeItemsArgs, NatInstanceNewModeItemsPtr and NatInstanceNewModeItemsPtrOutput values.
 // You can construct a concrete instance of `NatInstanceNewModeItemsPtrInput` via:
 //
-//          NatInstanceNewModeItemsArgs{...}
+//	        NatInstanceNewModeItemsArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type NatInstanceNewModeItemsPtrInput interface {
 	pulumi.Input
 
@@ -169,7 +172,8 @@ func (o NatInstanceNewModeItemsPtrOutput) VpcLists() pulumi.StringArrayOutput {
 type VpcInstanceVpcFwInstance struct {
 	// Deploy regional information.
 	FwDeploy VpcInstanceVpcFwInstanceFwDeploy `pulumi:"fwDeploy"`
-	FwInsId  *string                          `pulumi:"fwInsId"`
+	// Firewall instance ID (passed in editing scenario).
+	FwInsId *string `pulumi:"fwInsId"`
 	// Firewall instance name.
 	Name string `pulumi:"name"`
 	// List of VpcIds accessed in private network mode; only used in private network mode.
@@ -179,7 +183,7 @@ type VpcInstanceVpcFwInstance struct {
 // VpcInstanceVpcFwInstanceInput is an input type that accepts VpcInstanceVpcFwInstanceArgs and VpcInstanceVpcFwInstanceOutput values.
 // You can construct a concrete instance of `VpcInstanceVpcFwInstanceInput` via:
 //
-//          VpcInstanceVpcFwInstanceArgs{...}
+//	VpcInstanceVpcFwInstanceArgs{...}
 type VpcInstanceVpcFwInstanceInput interface {
 	pulumi.Input
 
@@ -190,7 +194,8 @@ type VpcInstanceVpcFwInstanceInput interface {
 type VpcInstanceVpcFwInstanceArgs struct {
 	// Deploy regional information.
 	FwDeploy VpcInstanceVpcFwInstanceFwDeployInput `pulumi:"fwDeploy"`
-	FwInsId  pulumi.StringPtrInput                 `pulumi:"fwInsId"`
+	// Firewall instance ID (passed in editing scenario).
+	FwInsId pulumi.StringPtrInput `pulumi:"fwInsId"`
 	// Firewall instance name.
 	Name pulumi.StringInput `pulumi:"name"`
 	// List of VpcIds accessed in private network mode; only used in private network mode.
@@ -212,7 +217,7 @@ func (i VpcInstanceVpcFwInstanceArgs) ToVpcInstanceVpcFwInstanceOutputWithContex
 // VpcInstanceVpcFwInstanceArrayInput is an input type that accepts VpcInstanceVpcFwInstanceArray and VpcInstanceVpcFwInstanceArrayOutput values.
 // You can construct a concrete instance of `VpcInstanceVpcFwInstanceArrayInput` via:
 //
-//          VpcInstanceVpcFwInstanceArray{ VpcInstanceVpcFwInstanceArgs{...} }
+//	VpcInstanceVpcFwInstanceArray{ VpcInstanceVpcFwInstanceArgs{...} }
 type VpcInstanceVpcFwInstanceArrayInput interface {
 	pulumi.Input
 
@@ -253,6 +258,7 @@ func (o VpcInstanceVpcFwInstanceOutput) FwDeploy() VpcInstanceVpcFwInstanceFwDep
 	return o.ApplyT(func(v VpcInstanceVpcFwInstance) VpcInstanceVpcFwInstanceFwDeploy { return v.FwDeploy }).(VpcInstanceVpcFwInstanceFwDeployOutput)
 }
 
+// Firewall instance ID (passed in editing scenario).
 func (o VpcInstanceVpcFwInstanceOutput) FwInsId() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v VpcInstanceVpcFwInstance) *string { return v.FwInsId }).(pulumi.StringPtrOutput)
 }
@@ -301,7 +307,7 @@ type VpcInstanceVpcFwInstanceFwDeploy struct {
 // VpcInstanceVpcFwInstanceFwDeployInput is an input type that accepts VpcInstanceVpcFwInstanceFwDeployArgs and VpcInstanceVpcFwInstanceFwDeployOutput values.
 // You can construct a concrete instance of `VpcInstanceVpcFwInstanceFwDeployInput` via:
 //
-//          VpcInstanceVpcFwInstanceFwDeployArgs{...}
+//	VpcInstanceVpcFwInstanceFwDeployArgs{...}
 type VpcInstanceVpcFwInstanceFwDeployInput interface {
 	pulumi.Input
 
@@ -367,15 +373,18 @@ func (o VpcInstanceVpcFwInstanceFwDeployOutput) ZoneSets() pulumi.StringArrayOut
 }
 
 type VpcPolicyBetaList struct {
+	// Last execution time. Note: This field may return null, indicating that no valid value can be obtained.
 	LastTime *string `pulumi:"lastTime"`
-	TaskId   *int    `pulumi:"taskId"`
+	// Task id. Note: This field may return null, indicating that no valid value can be obtained.
+	TaskId *int `pulumi:"taskId"`
+	// Mission name. Note: This field may return null, indicating that no valid value can be obtained.
 	TaskName *string `pulumi:"taskName"`
 }
 
 // VpcPolicyBetaListInput is an input type that accepts VpcPolicyBetaListArgs and VpcPolicyBetaListOutput values.
 // You can construct a concrete instance of `VpcPolicyBetaListInput` via:
 //
-//          VpcPolicyBetaListArgs{...}
+//	VpcPolicyBetaListArgs{...}
 type VpcPolicyBetaListInput interface {
 	pulumi.Input
 
@@ -384,8 +393,11 @@ type VpcPolicyBetaListInput interface {
 }
 
 type VpcPolicyBetaListArgs struct {
+	// Last execution time. Note: This field may return null, indicating that no valid value can be obtained.
 	LastTime pulumi.StringPtrInput `pulumi:"lastTime"`
-	TaskId   pulumi.IntPtrInput    `pulumi:"taskId"`
+	// Task id. Note: This field may return null, indicating that no valid value can be obtained.
+	TaskId pulumi.IntPtrInput `pulumi:"taskId"`
+	// Mission name. Note: This field may return null, indicating that no valid value can be obtained.
 	TaskName pulumi.StringPtrInput `pulumi:"taskName"`
 }
 
@@ -404,7 +416,7 @@ func (i VpcPolicyBetaListArgs) ToVpcPolicyBetaListOutputWithContext(ctx context.
 // VpcPolicyBetaListArrayInput is an input type that accepts VpcPolicyBetaListArray and VpcPolicyBetaListArrayOutput values.
 // You can construct a concrete instance of `VpcPolicyBetaListArrayInput` via:
 //
-//          VpcPolicyBetaListArray{ VpcPolicyBetaListArgs{...} }
+//	VpcPolicyBetaListArray{ VpcPolicyBetaListArgs{...} }
 type VpcPolicyBetaListArrayInput interface {
 	pulumi.Input
 
@@ -440,14 +452,17 @@ func (o VpcPolicyBetaListOutput) ToVpcPolicyBetaListOutputWithContext(ctx contex
 	return o
 }
 
+// Last execution time. Note: This field may return null, indicating that no valid value can be obtained.
 func (o VpcPolicyBetaListOutput) LastTime() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v VpcPolicyBetaList) *string { return v.LastTime }).(pulumi.StringPtrOutput)
 }
 
+// Task id. Note: This field may return null, indicating that no valid value can be obtained.
 func (o VpcPolicyBetaListOutput) TaskId() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v VpcPolicyBetaList) *int { return v.TaskId }).(pulumi.IntPtrOutput)
 }
 
+// Mission name. Note: This field may return null, indicating that no valid value can be obtained.
 func (o VpcPolicyBetaListOutput) TaskName() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v VpcPolicyBetaList) *string { return v.TaskName }).(pulumi.StringPtrOutput)
 }
@@ -498,7 +513,7 @@ type GetEdgeFwSwitchesData struct {
 // GetEdgeFwSwitchesDataInput is an input type that accepts GetEdgeFwSwitchesDataArgs and GetEdgeFwSwitchesDataOutput values.
 // You can construct a concrete instance of `GetEdgeFwSwitchesDataInput` via:
 //
-//          GetEdgeFwSwitchesDataArgs{...}
+//	GetEdgeFwSwitchesDataArgs{...}
 type GetEdgeFwSwitchesDataInput interface {
 	pulumi.Input
 
@@ -544,7 +559,7 @@ func (i GetEdgeFwSwitchesDataArgs) ToGetEdgeFwSwitchesDataOutputWithContext(ctx 
 // GetEdgeFwSwitchesDataArrayInput is an input type that accepts GetEdgeFwSwitchesDataArray and GetEdgeFwSwitchesDataArrayOutput values.
 // You can construct a concrete instance of `GetEdgeFwSwitchesDataArrayInput` via:
 //
-//          GetEdgeFwSwitchesDataArray{ GetEdgeFwSwitchesDataArgs{...} }
+//	GetEdgeFwSwitchesDataArray{ GetEdgeFwSwitchesDataArgs{...} }
 type GetEdgeFwSwitchesDataArrayInput interface {
 	pulumi.Input
 
@@ -690,7 +705,7 @@ type GetNatFwSwitchesData struct {
 // GetNatFwSwitchesDataInput is an input type that accepts GetNatFwSwitchesDataArgs and GetNatFwSwitchesDataOutput values.
 // You can construct a concrete instance of `GetNatFwSwitchesDataInput` via:
 //
-//          GetNatFwSwitchesDataArgs{...}
+//	GetNatFwSwitchesDataArgs{...}
 type GetNatFwSwitchesDataInput interface {
 	pulumi.Input
 
@@ -750,7 +765,7 @@ func (i GetNatFwSwitchesDataArgs) ToGetNatFwSwitchesDataOutputWithContext(ctx co
 // GetNatFwSwitchesDataArrayInput is an input type that accepts GetNatFwSwitchesDataArray and GetNatFwSwitchesDataArrayOutput values.
 // You can construct a concrete instance of `GetNatFwSwitchesDataArrayInput` via:
 //
-//          GetNatFwSwitchesDataArray{ GetNatFwSwitchesDataArgs{...} }
+//	GetNatFwSwitchesDataArray{ GetNatFwSwitchesDataArgs{...} }
 type GetNatFwSwitchesDataArrayInput interface {
 	pulumi.Input
 
@@ -907,7 +922,7 @@ type GetVpcFwSwitchesSwitchList struct {
 // GetVpcFwSwitchesSwitchListInput is an input type that accepts GetVpcFwSwitchesSwitchListArgs and GetVpcFwSwitchesSwitchListOutput values.
 // You can construct a concrete instance of `GetVpcFwSwitchesSwitchListInput` via:
 //
-//          GetVpcFwSwitchesSwitchListArgs{...}
+//	GetVpcFwSwitchesSwitchListArgs{...}
 type GetVpcFwSwitchesSwitchListInput interface {
 	pulumi.Input
 
@@ -943,7 +958,7 @@ func (i GetVpcFwSwitchesSwitchListArgs) ToGetVpcFwSwitchesSwitchListOutputWithCo
 // GetVpcFwSwitchesSwitchListArrayInput is an input type that accepts GetVpcFwSwitchesSwitchListArray and GetVpcFwSwitchesSwitchListArrayOutput values.
 // You can construct a concrete instance of `GetVpcFwSwitchesSwitchListArrayInput` via:
 //
-//          GetVpcFwSwitchesSwitchListArray{ GetVpcFwSwitchesSwitchListArgs{...} }
+//	GetVpcFwSwitchesSwitchListArray{ GetVpcFwSwitchesSwitchListArgs{...} }
 type GetVpcFwSwitchesSwitchListArrayInput interface {
 	pulumi.Input
 

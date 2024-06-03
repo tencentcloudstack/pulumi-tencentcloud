@@ -8,7 +8,7 @@ import (
 
 	"github.com/blang/semver"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 type module struct {
@@ -25,6 +25,12 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 		r = &Instance{}
 	case "tencentcloud:Organization/orgIdentity:OrgIdentity":
 		r = &OrgIdentity{}
+	case "tencentcloud:Organization/orgManagePolicy:OrgManagePolicy":
+		r = &OrgManagePolicy{}
+	case "tencentcloud:Organization/orgManagePolicyConfig:OrgManagePolicyConfig":
+		r = &OrgManagePolicyConfig{}
+	case "tencentcloud:Organization/orgManagePolicyTarget:OrgManagePolicyTarget":
+		r = &OrgManagePolicyTarget{}
 	case "tencentcloud:Organization/orgMember:OrgMember":
 		r = &OrgMember{}
 	case "tencentcloud:Organization/orgMemberAuthIdentityAttachment:OrgMemberAuthIdentityAttachment":
@@ -35,6 +41,10 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 		r = &OrgMemberPolicyAttachment{}
 	case "tencentcloud:Organization/orgNode:OrgNode":
 		r = &OrgNode{}
+	case "tencentcloud:Organization/orgShareUnit:OrgShareUnit":
+		r = &OrgShareUnit{}
+	case "tencentcloud:Organization/orgShareUnitMember:OrgShareUnitMember":
+		r = &OrgShareUnitMember{}
 	case "tencentcloud:Organization/policySubAccountAttachment:PolicySubAccountAttachment":
 		r = &PolicySubAccountAttachment{}
 	case "tencentcloud:Organization/quitOrganizationOperation:QuitOrganizationOperation":
@@ -48,7 +58,7 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 }
 
 func init() {
-	version, err := tencentcloud.PkgVersion()
+	version, err := internal.PkgVersion()
 	if err != nil {
 		version = semver.Version{Major: 1}
 	}
@@ -60,6 +70,21 @@ func init() {
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
 		"Organization/orgIdentity",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Organization/orgManagePolicy",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Organization/orgManagePolicyConfig",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Organization/orgManagePolicyTarget",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(
@@ -85,6 +110,16 @@ func init() {
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
 		"Organization/orgNode",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Organization/orgShareUnit",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Organization/orgShareUnitMember",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(

@@ -8,11 +8,49 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Use this data source to query detailed information of postgresql logBackups
+//
+// ## Example Usage
+//
+// <!--Start PulumiCodeChooser -->
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Postgresql"
+//
+// )
+// func main() {
+// pulumi.Run(func(ctx *pulumi.Context) error {
+// _, err := Postgresql.GetLogBackups(ctx, &postgresql.GetLogBackupsArgs{
+// MinFinishTime: pulumi.StringRef("%s"),
+// MaxFinishTime: pulumi.StringRef("%s"),
+// Filters: []postgresql.GetLogBackupsFilter{
+// {
+// Name: pulumi.StringRef("db-instance-id"),
+// Values: interface{}{
+// local.Pgsql_id,
+// },
+// },
+// },
+// OrderBy: pulumi.StringRef("StartTime"),
+// OrderByType: pulumi.StringRef("desc"),
+// }, nil);
+// if err != nil {
+// return err
+// }
+// return nil
+// })
+// }
+// ```
+// <!--End PulumiCodeChooser -->
 func GetLogBackups(ctx *pulumi.Context, args *GetLogBackupsArgs, opts ...pulumi.InvokeOption) (*GetLogBackupsResult, error) {
-	opts = pkgInvokeDefaultOpts(opts)
+	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetLogBackupsResult
 	err := ctx.Invoke("tencentcloud:Postgresql/getLogBackups:getLogBackups", args, &rv, opts...)
 	if err != nil {

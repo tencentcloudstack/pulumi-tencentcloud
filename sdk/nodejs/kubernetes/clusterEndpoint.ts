@@ -14,7 +14,7 @@ import * as utilities from "../utilities";
  * KubernetesClusterEndpoint instance can be imported by passing cluster id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Kubernetes/clusterEndpoint:ClusterEndpoint test cluster-id
+ * $ pulumi import tencentcloud:Kubernetes/clusterEndpoint:ClusterEndpoint test cluster-id
  * ```
  */
 export class ClusterEndpoint extends pulumi.CustomResource {
@@ -96,7 +96,7 @@ export class ClusterEndpoint extends pulumi.CustomResource {
     /**
      * this argument was deprecated, use `clusterInternetSecurityGroup` instead. Security policies for managed cluster internet, like:'192.168.1.0/24' or '113.116.51.27', '0.0.0.0/0' means all. This field can only set when field `clusterDeployType` is 'MANAGED_CLUSTER' and `clusterInternet` is true. `managedClusterInternetSecurityPolicies` can not delete or empty once be set.
      *
-     * @deprecated this argument was deprecated, use `cluster_internet_security_group` instead.
+     * @deprecated this argument was deprecated, use `clusterInternetSecurityGroup` instead.
      */
     public readonly managedClusterInternetSecurityPolicies!: pulumi.Output<string[] | undefined>;
     /**
@@ -164,6 +164,8 @@ export class ClusterEndpoint extends pulumi.CustomResource {
             resourceInputs["userName"] = undefined /*out*/;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+        const secretOpts = { additionalSecretOutputs: ["password"] };
+        opts = pulumi.mergeOptions(opts, secretOpts);
         super(ClusterEndpoint.__pulumiType, name, resourceInputs, opts);
     }
 }
@@ -223,7 +225,7 @@ export interface ClusterEndpointState {
     /**
      * this argument was deprecated, use `clusterInternetSecurityGroup` instead. Security policies for managed cluster internet, like:'192.168.1.0/24' or '113.116.51.27', '0.0.0.0/0' means all. This field can only set when field `clusterDeployType` is 'MANAGED_CLUSTER' and `clusterInternet` is true. `managedClusterInternetSecurityPolicies` can not delete or empty once be set.
      *
-     * @deprecated this argument was deprecated, use `cluster_internet_security_group` instead.
+     * @deprecated this argument was deprecated, use `clusterInternetSecurityGroup` instead.
      */
     managedClusterInternetSecurityPolicies?: pulumi.Input<pulumi.Input<string>[]>;
     /**
@@ -279,7 +281,7 @@ export interface ClusterEndpointArgs {
     /**
      * this argument was deprecated, use `clusterInternetSecurityGroup` instead. Security policies for managed cluster internet, like:'192.168.1.0/24' or '113.116.51.27', '0.0.0.0/0' means all. This field can only set when field `clusterDeployType` is 'MANAGED_CLUSTER' and `clusterInternet` is true. `managedClusterInternetSecurityPolicies` can not delete or empty once be set.
      *
-     * @deprecated this argument was deprecated, use `cluster_internet_security_group` instead.
+     * @deprecated this argument was deprecated, use `clusterInternetSecurityGroup` instead.
      */
     managedClusterInternetSecurityPolicies?: pulumi.Input<pulumi.Input<string>[]>;
 }

@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Scf.Inputs
 {
 
-    public sealed class ProvisionedConcurrencyConfigTriggerActionArgs : Pulumi.ResourceArgs
+    public sealed class ProvisionedConcurrencyConfigTriggerActionArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// The provision type. Value: Default Note: This field may return null, indicating that no valid value can be found.
@@ -40,5 +40,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Scf.Inputs
         public ProvisionedConcurrencyConfigTriggerActionArgs()
         {
         }
+        public static new ProvisionedConcurrencyConfigTriggerActionArgs Empty => new ProvisionedConcurrencyConfigTriggerActionArgs();
     }
 }

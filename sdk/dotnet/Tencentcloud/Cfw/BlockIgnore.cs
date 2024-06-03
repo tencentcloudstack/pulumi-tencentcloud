@@ -16,69 +16,75 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cfw
     /// &gt; **NOTE:** If create domain rule, `RuleType` not support set 2.
     /// 
     /// ## Example Usage
+    /// 
     /// ### If create ip rule
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var example = new Tencentcloud.Cfw.BlockIgnore("example", new()
     ///     {
-    ///         var example = new Tencentcloud.Cfw.BlockIgnore("example", new Tencentcloud.Cfw.BlockIgnoreArgs
-    ///         {
-    ///             Comment = "remark.",
-    ///             Direction = "0",
-    ///             EndTime = "2023-10-01 00:00:00",
-    ///             Ip = "1.1.1.1",
-    ///             RuleType = 1,
-    ///             StartTime = "2023-09-01 00:00:00",
-    ///         });
-    ///     }
+    ///         Comment = "remark.",
+    ///         Direction = "0",
+    ///         EndTime = "2023-10-01 00:00:00",
+    ///         Ip = "1.1.1.1",
+    ///         RuleType = 1,
+    ///         StartTime = "2023-09-01 00:00:00",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
+    /// 
     /// ### If create domain rule
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var example = new Tencentcloud.Cfw.BlockIgnore("example", new()
     ///     {
-    ///         var example = new Tencentcloud.Cfw.BlockIgnore("example", new Tencentcloud.Cfw.BlockIgnoreArgs
-    ///         {
-    ///             Comment = "remark.",
-    ///             Direction = "1",
-    ///             Domain = "domain.com",
-    ///             EndTime = "2023-10-01 00:00:00",
-    ///             RuleType = 1,
-    ///             StartTime = "2023-09-01 00:00:00",
-    ///         });
-    ///     }
+    ///         Comment = "remark.",
+    ///         Direction = "1",
+    ///         Domain = "domain.com",
+    ///         EndTime = "2023-10-01 00:00:00",
+    ///         RuleType = 1,
+    ///         StartTime = "2023-09-01 00:00:00",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
-    /// cfw block_ignore_list can be imported using the id, e.g. If import ip rule
+    /// cfw block_ignore_list can be imported using the id, e.g.
+    /// 
+    /// If import ip rule
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Cfw/blockIgnore:BlockIgnore example 1.1.1.1##0#1
+    /// $ pulumi import tencentcloud:Cfw/blockIgnore:BlockIgnore example 1.1.1.1##0#1
     /// ```
     /// 
-    ///  If import domain rule
+    /// If import domain rule
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Cfw/blockIgnore:BlockIgnore example domain.com##0#1
+    /// $ pulumi import tencentcloud:Cfw/blockIgnore:BlockIgnore example domain.com##0#1
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Cfw/blockIgnore:BlockIgnore")]
-    public partial class BlockIgnore : Pulumi.CustomResource
+    public partial class BlockIgnore : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Remarks information, length cannot exceed 50.
@@ -167,7 +173,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cfw
         }
     }
 
-    public sealed class BlockIgnoreArgs : Pulumi.ResourceArgs
+    public sealed class BlockIgnoreArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Remarks information, length cannot exceed 50.
@@ -214,9 +220,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cfw
         public BlockIgnoreArgs()
         {
         }
+        public static new BlockIgnoreArgs Empty => new BlockIgnoreArgs();
     }
 
-    public sealed class BlockIgnoreState : Pulumi.ResourceArgs
+    public sealed class BlockIgnoreState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Remarks information, length cannot exceed 50.
@@ -263,5 +270,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cfw
         public BlockIgnoreState()
         {
         }
+        public static new BlockIgnoreState Empty => new BlockIgnoreState();
     }
 }

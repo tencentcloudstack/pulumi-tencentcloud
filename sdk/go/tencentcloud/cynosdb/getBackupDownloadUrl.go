@@ -8,10 +8,11 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 func GetBackupDownloadUrl(ctx *pulumi.Context, args *GetBackupDownloadUrlArgs, opts ...pulumi.InvokeOption) (*GetBackupDownloadUrlResult, error) {
-	opts = pkgInvokeDefaultOpts(opts)
+	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetBackupDownloadUrlResult
 	err := ctx.Invoke("tencentcloud:Cynosdb/getBackupDownloadUrl:getBackupDownloadUrl", args, &rv, opts...)
 	if err != nil {

@@ -7,75 +7,112 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a CAM role.
 //
 // ## Example Usage
+//
 // ### Create normally
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"fmt"
 //
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cam"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cam"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Cam.NewRoleByName(ctx, "foo", &Cam.RoleByNameArgs{
-// 			ConsoleLogin: pulumi.Bool(true),
-// 			Description:  pulumi.String("test"),
-// 			Document:     pulumi.String(fmt.Sprintf("%v%v%v%v%v%v%v%v%v%v%v%v%v", "{\n", "  \"version\": \"2.0\",\n", "  \"statement\": [\n", "    {\n", "      \"action\": [\"name/sts:AssumeRole\"],\n", "      \"effect\": \"allow\",\n", "      \"principal\": {\n", "        \"qcs\": [\"qcs::cam::uin/<your-account-id>:uin/<your-account-id>\"]\n", "      }\n", "    }\n", "  ]\n", "}\n", "\n")),
-// 			Tags: pulumi.AnyMap{
-// 				"test": pulumi.Any("tf-cam-role"),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Cam.NewRoleByName(ctx, "foo", &Cam.RoleByNameArgs{
+//				ConsoleLogin: pulumi.Bool(true),
+//				Description:  pulumi.String("test"),
+//				Document: pulumi.String(`{
+//	  "version": "2.0",
+//	  "statement": [
+//	    {
+//	      "action": ["name/sts:AssumeRole"],
+//	      "effect": "allow",
+//	      "principal": {
+//	        "qcs": ["qcs::cam::uin/<your-account-id>:uin/<your-account-id>"]
+//	      }
+//	    }
+//	  ]
+//	}
+//
+// `),
+//
+//				Tags: pulumi.Map{
+//					"test": pulumi.Any("tf-cam-role"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
+//
 // ### Create with SAML provider
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"fmt"
 //
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cam"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cam"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Cam.NewRoleByName(ctx, "boo", &Cam.RoleByNameArgs{
-// 			ConsoleLogin: pulumi.Bool(true),
-// 			Description:  pulumi.String("test"),
-// 			Document:     pulumi.String(fmt.Sprintf("%v%v%v%v%v%v%v%v%v%v%v%v%v", "{\n", "  \"version\": \"2.0\",\n", "  \"statement\": [\n", "    {\n", "      \"action\": [\"name/sts:AssumeRole\", \"name/sts:AssumeRoleWithWebIdentity\"],\n", "      \"effect\": \"allow\",\n", "      \"principal\": {\n", "        \"federated\": [\"qcs::cam::uin/<your-account-id>:saml-provider/<your-name>\"]\n", "      }\n", "    }\n", "  ]\n", "}\n", "\n")),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Cam.NewRoleByName(ctx, "boo", &Cam.RoleByNameArgs{
+//				ConsoleLogin: pulumi.Bool(true),
+//				Description:  pulumi.String("test"),
+//				Document: pulumi.String(`{
+//	  "version": "2.0",
+//	  "statement": [
+//	    {
+//	      "action": ["name/sts:AssumeRole", "name/sts:AssumeRoleWithWebIdentity"],
+//	      "effect": "allow",
+//	      "principal": {
+//	        "federated": ["qcs::cam::uin/<your-account-id>:saml-provider/<your-name>"]
+//	      }
+//	    }
+//	  ]
+//	}
+//
+// `),
+//
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // CAM role can be imported using the name, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Cam/roleByName:RoleByName foo cam-role-test
+// $ pulumi import tencentcloud:Cam/roleByName:RoleByName foo cam-role-test
 // ```
 type RoleByName struct {
 	pulumi.CustomResourceState
@@ -86,10 +123,7 @@ type RoleByName struct {
 	CreateTime pulumi.StringOutput `pulumi:"createTime"`
 	// Description of the CAM role.
 	Description pulumi.StringPtrOutput `pulumi:"description"`
-	// Document of the CAM role. The syntax refers to [CAM POLICY](https://intl.cloud.tencent.com/document/product/598/10604).
-	// There are some notes when using this para in terraform: 1. The elements in json claimed supporting two types as `string`
-	// and `array` only support type `array`; 2. Terraform does not support the `root` syntax, when appears, it must be
-	// replaced with the uin it stands for.
+	// Document of the CAM role. The syntax refers to CAM POLICY Name of CAM role.
 	Document pulumi.StringOutput `pulumi:"document"`
 	// Name of CAM role.
 	Name pulumi.StringOutput `pulumi:"name"`
@@ -109,7 +143,7 @@ func NewRoleByName(ctx *pulumi.Context,
 	if args.Document == nil {
 		return nil, errors.New("invalid value for required argument 'Document'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource RoleByName
 	err := ctx.RegisterResource("tencentcloud:Cam/roleByName:RoleByName", name, args, &resource, opts...)
 	if err != nil {
@@ -138,10 +172,7 @@ type roleByNameState struct {
 	CreateTime *string `pulumi:"createTime"`
 	// Description of the CAM role.
 	Description *string `pulumi:"description"`
-	// Document of the CAM role. The syntax refers to [CAM POLICY](https://intl.cloud.tencent.com/document/product/598/10604).
-	// There are some notes when using this para in terraform: 1. The elements in json claimed supporting two types as `string`
-	// and `array` only support type `array`; 2. Terraform does not support the `root` syntax, when appears, it must be
-	// replaced with the uin it stands for.
+	// Document of the CAM role. The syntax refers to CAM POLICY Name of CAM role.
 	Document *string `pulumi:"document"`
 	// Name of CAM role.
 	Name *string `pulumi:"name"`
@@ -158,10 +189,7 @@ type RoleByNameState struct {
 	CreateTime pulumi.StringPtrInput
 	// Description of the CAM role.
 	Description pulumi.StringPtrInput
-	// Document of the CAM role. The syntax refers to [CAM POLICY](https://intl.cloud.tencent.com/document/product/598/10604).
-	// There are some notes when using this para in terraform: 1. The elements in json claimed supporting two types as `string`
-	// and `array` only support type `array`; 2. Terraform does not support the `root` syntax, when appears, it must be
-	// replaced with the uin it stands for.
+	// Document of the CAM role. The syntax refers to CAM POLICY Name of CAM role.
 	Document pulumi.StringPtrInput
 	// Name of CAM role.
 	Name pulumi.StringPtrInput
@@ -180,10 +208,7 @@ type roleByNameArgs struct {
 	ConsoleLogin *bool `pulumi:"consoleLogin"`
 	// Description of the CAM role.
 	Description *string `pulumi:"description"`
-	// Document of the CAM role. The syntax refers to [CAM POLICY](https://intl.cloud.tencent.com/document/product/598/10604).
-	// There are some notes when using this para in terraform: 1. The elements in json claimed supporting two types as `string`
-	// and `array` only support type `array`; 2. Terraform does not support the `root` syntax, when appears, it must be
-	// replaced with the uin it stands for.
+	// Document of the CAM role. The syntax refers to CAM POLICY Name of CAM role.
 	Document string `pulumi:"document"`
 	// Name of CAM role.
 	Name *string `pulumi:"name"`
@@ -197,10 +222,7 @@ type RoleByNameArgs struct {
 	ConsoleLogin pulumi.BoolPtrInput
 	// Description of the CAM role.
 	Description pulumi.StringPtrInput
-	// Document of the CAM role. The syntax refers to [CAM POLICY](https://intl.cloud.tencent.com/document/product/598/10604).
-	// There are some notes when using this para in terraform: 1. The elements in json claimed supporting two types as `string`
-	// and `array` only support type `array`; 2. Terraform does not support the `root` syntax, when appears, it must be
-	// replaced with the uin it stands for.
+	// Document of the CAM role. The syntax refers to CAM POLICY Name of CAM role.
 	Document pulumi.StringInput
 	// Name of CAM role.
 	Name pulumi.StringPtrInput
@@ -234,7 +256,7 @@ func (i *RoleByName) ToRoleByNameOutputWithContext(ctx context.Context) RoleByNa
 // RoleByNameArrayInput is an input type that accepts RoleByNameArray and RoleByNameArrayOutput values.
 // You can construct a concrete instance of `RoleByNameArrayInput` via:
 //
-//          RoleByNameArray{ RoleByNameArgs{...} }
+//	RoleByNameArray{ RoleByNameArgs{...} }
 type RoleByNameArrayInput interface {
 	pulumi.Input
 
@@ -259,7 +281,7 @@ func (i RoleByNameArray) ToRoleByNameArrayOutputWithContext(ctx context.Context)
 // RoleByNameMapInput is an input type that accepts RoleByNameMap and RoleByNameMapOutput values.
 // You can construct a concrete instance of `RoleByNameMapInput` via:
 //
-//          RoleByNameMap{ "key": RoleByNameArgs{...} }
+//	RoleByNameMap{ "key": RoleByNameArgs{...} }
 type RoleByNameMapInput interface {
 	pulumi.Input
 
@@ -310,10 +332,7 @@ func (o RoleByNameOutput) Description() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *RoleByName) pulumi.StringPtrOutput { return v.Description }).(pulumi.StringPtrOutput)
 }
 
-// Document of the CAM role. The syntax refers to [CAM POLICY](https://intl.cloud.tencent.com/document/product/598/10604).
-// There are some notes when using this para in terraform: 1. The elements in json claimed supporting two types as `string`
-// and `array` only support type `array`; 2. Terraform does not support the `root` syntax, when appears, it must be
-// replaced with the uin it stands for.
+// Document of the CAM role. The syntax refers to CAM POLICY Name of CAM role.
 func (o RoleByNameOutput) Document() pulumi.StringOutput {
 	return o.ApplyT(func(v *RoleByName) pulumi.StringOutput { return v.Document }).(pulumi.StringOutput)
 }

@@ -15,34 +15,35 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Elasticsearch
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var diagnose = new Tencentcloud.Elasticsearch.Diagnose("diagnose", new()
     ///     {
-    ///         var diagnose = new Tencentcloud.Elasticsearch.Diagnose("diagnose", new Tencentcloud.Elasticsearch.DiagnoseArgs
-    ///         {
-    ///             CronTime = "15:00:00",
-    ///             InstanceId = "es-xxxxxx",
-    ///         });
-    ///     }
+    ///         CronTime = "15:00:00",
+    ///         InstanceId = "es-xxxxxx",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// es diagnose can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Elasticsearch/diagnose:Diagnose diagnose diagnose_id
+    /// $ pulumi import tencentcloud:Elasticsearch/diagnose:Diagnose diagnose diagnose_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Elasticsearch/diagnose:Diagnose")]
-    public partial class Diagnose : Pulumi.CustomResource
+    public partial class Diagnose : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Intelligent operation and maintenance staff regularly patrol the inspection time every day, the time format is HH:00:00, such as 15:00:00.
@@ -113,7 +114,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Elasticsearch
         }
     }
 
-    public sealed class DiagnoseArgs : Pulumi.ResourceArgs
+    public sealed class DiagnoseArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Intelligent operation and maintenance staff regularly patrol the inspection time every day, the time format is HH:00:00, such as 15:00:00.
@@ -130,9 +131,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Elasticsearch
         public DiagnoseArgs()
         {
         }
+        public static new DiagnoseArgs Empty => new DiagnoseArgs();
     }
 
-    public sealed class DiagnoseState : Pulumi.ResourceArgs
+    public sealed class DiagnoseState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Intelligent operation and maintenance staff regularly patrol the inspection time every day, the time format is HH:00:00, such as 15:00:00.
@@ -167,5 +169,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Elasticsearch
         public DiagnoseState()
         {
         }
+        public static new DiagnoseState Empty => new DiagnoseState();
     }
 }

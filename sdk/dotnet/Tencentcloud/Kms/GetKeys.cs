@@ -15,70 +15,64 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kms
         /// <summary>
         /// Use this data source to query detailed information of KMS key
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var example = Tencentcloud.Kms.GetKeys.Invoke(new()
         ///     {
-        ///         var example = Output.Create(Tencentcloud.Kms.GetKeys.InvokeAsync(new Tencentcloud.Kms.GetKeysArgs
-        ///         {
-        ///             KeyState = 0,
-        ///             KeyUsage = "ALL",
-        ///             Origin = "TENCENT_KMS",
-        ///             SearchKeyAlias = "tf_example",
-        ///         }));
-        ///     }
+        ///         KeyState = 0,
+        ///         KeyUsage = "ALL",
+        ///         Origin = "TENCENT_KMS",
+        ///         SearchKeyAlias = "tf_example",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetKeysResult> InvokeAsync(GetKeysArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetKeysResult>("tencentcloud:Kms/getKeys:getKeys", args ?? new GetKeysArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetKeysResult>("tencentcloud:Kms/getKeys:getKeys", args ?? new GetKeysArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of KMS key
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var example = Tencentcloud.Kms.GetKeys.Invoke(new()
         ///     {
-        ///         var example = Output.Create(Tencentcloud.Kms.GetKeys.InvokeAsync(new Tencentcloud.Kms.GetKeysArgs
-        ///         {
-        ///             KeyState = 0,
-        ///             KeyUsage = "ALL",
-        ///             Origin = "TENCENT_KMS",
-        ///             SearchKeyAlias = "tf_example",
-        ///         }));
-        ///     }
+        ///         KeyState = 0,
+        ///         KeyUsage = "ALL",
+        ///         Origin = "TENCENT_KMS",
+        ///         SearchKeyAlias = "tf_example",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetKeysResult> Invoke(GetKeysInvokeArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetKeysResult>("tencentcloud:Kms/getKeys:getKeys", args ?? new GetKeysInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetKeysResult>("tencentcloud:Kms/getKeys:getKeys", args ?? new GetKeysInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetKeysArgs : Pulumi.InvokeArgs
+    public sealed class GetKeysArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Filter by state of CMK. `0` - all CMKs are queried, `1` - only Enabled CMKs are queried, `2` - only Disabled CMKs are queried, `3` - only PendingDelete CMKs are queried, `4` - only PendingImport CMKs are queried, `5` - only Archived CMKs are queried.
@@ -137,9 +131,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kms
         public GetKeysArgs()
         {
         }
+        public static new GetKeysArgs Empty => new GetKeysArgs();
     }
 
-    public sealed class GetKeysInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetKeysInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Filter by state of CMK. `0` - all CMKs are queried, `1` - only Enabled CMKs are queried, `2` - only Disabled CMKs are queried, `3` - only PendingDelete CMKs are queried, `4` - only PendingImport CMKs are queried, `5` - only Archived CMKs are queried.
@@ -198,6 +193,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kms
         public GetKeysInvokeArgs()
         {
         }
+        public static new GetKeysInvokeArgs Empty => new GetKeysInvokeArgs();
     }
 
 

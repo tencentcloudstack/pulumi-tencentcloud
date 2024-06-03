@@ -15,41 +15,42 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dlc
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var bindWorkGroupsToUser = new Tencentcloud.Dlc.BindWorkGroupsToUserAttachment("bindWorkGroupsToUser", new()
     ///     {
-    ///         var bindWorkGroupsToUser = new Tencentcloud.Dlc.BindWorkGroupsToUserAttachment("bindWorkGroupsToUser", new Tencentcloud.Dlc.BindWorkGroupsToUserAttachmentArgs
+    ///         AddInfo = new Tencentcloud.Dlc.Inputs.BindWorkGroupsToUserAttachmentAddInfoArgs
     ///         {
-    ///             AddInfo = new Tencentcloud.Dlc.Inputs.BindWorkGroupsToUserAttachmentAddInfoArgs
+    ///             UserId = "100032772113",
+    ///             WorkGroupIds = new[]
     ///             {
-    ///                 UserId = "100032772113",
-    ///                 WorkGroupIds = 
-    ///                 {
-    ///                     23184,
-    ///                     23181,
-    ///                 },
+    ///                 23184,
+    ///                 23181,
     ///             },
-    ///         });
-    ///     }
+    ///         },
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// dlc bind_work_groups_to_user can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Dlc/bindWorkGroupsToUserAttachment:BindWorkGroupsToUserAttachment bind_work_groups_to_user bind_work_groups_to_user_id
+    /// $ pulumi import tencentcloud:Dlc/bindWorkGroupsToUserAttachment:BindWorkGroupsToUserAttachment bind_work_groups_to_user bind_work_groups_to_user_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Dlc/bindWorkGroupsToUserAttachment:BindWorkGroupsToUserAttachment")]
-    public partial class BindWorkGroupsToUserAttachment : Pulumi.CustomResource
+    public partial class BindWorkGroupsToUserAttachment : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Bind user and workgroup information.
@@ -102,7 +103,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dlc
         }
     }
 
-    public sealed class BindWorkGroupsToUserAttachmentArgs : Pulumi.ResourceArgs
+    public sealed class BindWorkGroupsToUserAttachmentArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Bind user and workgroup information.
@@ -113,9 +114,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dlc
         public BindWorkGroupsToUserAttachmentArgs()
         {
         }
+        public static new BindWorkGroupsToUserAttachmentArgs Empty => new BindWorkGroupsToUserAttachmentArgs();
     }
 
-    public sealed class BindWorkGroupsToUserAttachmentState : Pulumi.ResourceArgs
+    public sealed class BindWorkGroupsToUserAttachmentState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Bind user and workgroup information.
@@ -126,5 +128,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dlc
         public BindWorkGroupsToUserAttachmentState()
         {
         }
+        public static new BindWorkGroupsToUserAttachmentState Empty => new BindWorkGroupsToUserAttachmentState();
     }
 }

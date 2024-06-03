@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,21 +11,20 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const publicDirectConnectTunnelRoutes = pulumi.output(tencentcloud.Dc.getPublicDirectConnectTunnelRoutes({
+ * const publicDirectConnectTunnelRoutes = tencentcloud.Dc.getPublicDirectConnectTunnelRoutes({
  *     directConnectTunnelId: "dcx-4z49tnws",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getPublicDirectConnectTunnelRoutes(args: GetPublicDirectConnectTunnelRoutesArgs, opts?: pulumi.InvokeOptions): Promise<GetPublicDirectConnectTunnelRoutesResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Dc/getPublicDirectConnectTunnelRoutes:getPublicDirectConnectTunnelRoutes", {
         "directConnectTunnelId": args.directConnectTunnelId,
         "filters": args.filters,
@@ -66,9 +66,24 @@ export interface GetPublicDirectConnectTunnelRoutesResult {
      */
     readonly routes: outputs.Dc.GetPublicDirectConnectTunnelRoutesRoute[];
 }
-
+/**
+ * Use this data source to query detailed information of dc publicDirectConnectTunnelRoutes
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const publicDirectConnectTunnelRoutes = tencentcloud.Dc.getPublicDirectConnectTunnelRoutes({
+ *     directConnectTunnelId: "dcx-4z49tnws",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getPublicDirectConnectTunnelRoutesOutput(args: GetPublicDirectConnectTunnelRoutesOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetPublicDirectConnectTunnelRoutesResult> {
-    return pulumi.output(args).apply(a => getPublicDirectConnectTunnelRoutes(a, opts))
+    return pulumi.output(args).apply((a: any) => getPublicDirectConnectTunnelRoutes(a, opts))
 }
 
 /**

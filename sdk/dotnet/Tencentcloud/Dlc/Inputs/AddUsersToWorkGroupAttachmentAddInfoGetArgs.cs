@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dlc.Inputs
 {
 
-    public sealed class AddUsersToWorkGroupAttachmentAddInfoGetArgs : Pulumi.ResourceArgs
+    public sealed class AddUsersToWorkGroupAttachmentAddInfoGetArgs : global::Pulumi.ResourceArgs
     {
         [Input("userIds", required: true)]
         private InputList<string>? _userIds;
@@ -34,5 +34,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dlc.Inputs
         public AddUsersToWorkGroupAttachmentAddInfoGetArgs()
         {
         }
+        public static new AddUsersToWorkGroupAttachmentAddInfoGetArgs Empty => new AddUsersToWorkGroupAttachmentAddInfoGetArgs();
     }
 }

@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes.Inputs
 {
 
-    public sealed class GetClusterNodePoolsFilterInputArgs : Pulumi.ResourceArgs
+    public sealed class GetClusterNodePoolsFilterInputArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// The attribute name, if there are multiple filters, the relationship between the filters is a logical AND relationship.
@@ -34,5 +34,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes.Inputs
         public GetClusterNodePoolsFilterInputArgs()
         {
         }
+        public static new GetClusterNodePoolsFilterInputArgs Empty => new GetClusterNodePoolsFilterInputArgs();
     }
 }

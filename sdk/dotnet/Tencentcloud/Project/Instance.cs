@@ -13,34 +13,35 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Project
     /// <summary>
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var project = new Tencentcloud.Project.Instance("project", new()
     ///     {
-    ///         var project = new Tencentcloud.Project.Instance("project", new Tencentcloud.Project.InstanceArgs
-    ///         {
-    ///             Info = "for terraform test",
-    ///             ProjectName = "terraform-test",
-    ///         });
-    ///     }
+    ///         Info = "for terraform test",
+    ///         ProjectName = "terraform-test",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// tag project can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Project/instance:Instance project project_id
+    /// $ pulumi import tencentcloud:Project/instance:Instance project project_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Project/instance:Instance")]
-    public partial class Instance : Pulumi.CustomResource
+    public partial class Instance : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Create time.
@@ -117,7 +118,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Project
         }
     }
 
-    public sealed class InstanceArgs : Pulumi.ResourceArgs
+    public sealed class InstanceArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// If disable project. 1 means disable, 0 means enable. Default 0.
@@ -140,9 +141,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Project
         public InstanceArgs()
         {
         }
+        public static new InstanceArgs Empty => new InstanceArgs();
     }
 
-    public sealed class InstanceState : Pulumi.ResourceArgs
+    public sealed class InstanceState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Create time.
@@ -177,5 +179,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Project
         public InstanceState()
         {
         }
+        public static new InstanceState Empty => new InstanceState();
     }
 }

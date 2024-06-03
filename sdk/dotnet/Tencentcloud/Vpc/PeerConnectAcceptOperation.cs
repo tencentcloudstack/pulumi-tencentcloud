@@ -15,25 +15,26 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var peerConnectAcceptOperation = new Tencentcloud.Vpc.PeerConnectAcceptOperation("peerConnectAcceptOperation", new()
     ///     {
-    ///         var peerConnectAcceptOperation = new Tencentcloud.Vpc.PeerConnectAcceptOperation("peerConnectAcceptOperation", new Tencentcloud.Vpc.PeerConnectAcceptOperationArgs
-    ///         {
-    ///             PeeringConnectionId = "pcx-abced",
-    ///         });
-    ///     }
+    ///         PeeringConnectionId = "pcx-abced",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Vpc/peerConnectAcceptOperation:PeerConnectAcceptOperation")]
-    public partial class PeerConnectAcceptOperation : Pulumi.CustomResource
+    public partial class PeerConnectAcceptOperation : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Peer connection unique ID.
@@ -86,7 +87,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         }
     }
 
-    public sealed class PeerConnectAcceptOperationArgs : Pulumi.ResourceArgs
+    public sealed class PeerConnectAcceptOperationArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Peer connection unique ID.
@@ -97,9 +98,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         public PeerConnectAcceptOperationArgs()
         {
         }
+        public static new PeerConnectAcceptOperationArgs Empty => new PeerConnectAcceptOperationArgs();
     }
 
-    public sealed class PeerConnectAcceptOperationState : Pulumi.ResourceArgs
+    public sealed class PeerConnectAcceptOperationState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Peer connection unique ID.
@@ -110,5 +112,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         public PeerConnectAcceptOperationState()
         {
         }
+        public static new PeerConnectAcceptOperationState Empty => new PeerConnectAcceptOperationState();
     }
 }

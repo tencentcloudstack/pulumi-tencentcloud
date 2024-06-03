@@ -9,9 +9,10 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const main = new tencentcloud.ccn.Instance("main", {
  *     description: "ci-temp-test-ccn-des",
@@ -31,6 +32,7 @@ import * as utilities from "../utilities";
  *     cidrBlock: "192.1.1.0/32",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export class GatewayCcnRoute extends pulumi.CustomResource {
     /**

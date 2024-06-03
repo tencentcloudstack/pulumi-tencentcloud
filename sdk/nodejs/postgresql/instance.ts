@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -12,9 +13,10 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const config = new pulumi.Config();
  * const availabilityZone = config.get("availabilityZone") || "ap-guangzhou-1";
@@ -35,7 +37,7 @@ import * as utilities from "../utilities";
  *     subnetId: subnet.id,
  *     engineVersion: "10.4",
  *     rootUser: "root123",
- *     rootPassword: `Root123$`,
+ *     rootPassword: "Root123$",
  *     charset: "UTF8",
  *     projectId: 0,
  *     memory: 2,
@@ -45,11 +47,14 @@ import * as utilities from "../utilities";
  *     },
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
+ *
  * ### Create a multi available zone bucket
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const config = new pulumi.Config();
  * const availabilityZone = config.get("availabilityZone") || "ap-guangzhou-6";
@@ -71,10 +76,11 @@ import * as utilities from "../utilities";
  *     subnetId: subnet.id,
  *     engineVersion: "10.4",
  *     rootUser: "root123",
- *     rootPassword: `Root123$`,
+ *     rootPassword: "Root123$",
  *     charset: "UTF8",
  *     projectId: 0,
  *     memory: 2,
+ *     cpu: 1,
  *     storage: 10,
  *     dbNodeSets: [
  *         {
@@ -90,13 +96,16 @@ import * as utilities from "../utilities";
  *     },
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
+ *
  * ### create pgsql with kms key
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const pg = new tencentcloud.Postgresql.Instance("pg", {
+ * const pg = new tencentcloud.postgresql.Instance("pg", {
  *     availabilityZone: "ap-guangzhou-6",
  *     backupPlan: {
  *         backupPeriods: [
@@ -109,7 +118,6 @@ import * as utilities from "../utilities";
  *     },
  *     chargeType: "POSTPAID_BY_HOUR",
  *     charset: "LATIN1",
- *     //  db_major_vesion   = "11"
  *     dbKernelVersion: "v11.12_r1.3",
  *     engineVersion: "11.12",
  *     kmsKeyId: "788c606a-c7b7-11ec-82d1-5254001e5c4e",
@@ -126,11 +134,14 @@ import * as utilities from "../utilities";
  *     vpcId: "vpc-86v957zb",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
+ *
  * ### upgrade kernel version
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const test = new tencentcloud.postgresql.Instance("test", {
  *     availabilityZone: data.tencentcloud_availability_zones_by_product.zone.zones[5].name,
@@ -161,13 +172,14 @@ import * as utilities from "../utilities";
  *     },
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * postgresql instance can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Postgresql/instance:Instance foo postgres-cda1iex1
+ * $ pulumi import tencentcloud:Postgresql/instance:Instance foo postgres-cda1iex1
  * ```
  */
 export class Instance extends pulumi.CustomResource {
@@ -223,6 +235,10 @@ export class Instance extends pulumi.CustomResource {
      */
     public readonly charset!: pulumi.Output<string | undefined>;
     /**
+     * Number of CPU cores. Allowed value must be equal `cpu` that data source `tencentcloud.Postgresql.getSpecinfos` provides.
+     */
+    public readonly cpu!: pulumi.Output<number>;
+    /**
      * Create time of the postgresql instance.
      */
     public /*out*/ readonly createTime!: pulumi.Output<string>;
@@ -237,7 +253,7 @@ export class Instance extends pulumi.CustomResource {
     /**
      * `dbMajorVesion` will be deprecated, use `dbMajorVersion` instead. PostgreSQL major version number. Valid values: 10, 11, 12, 13. If it is specified, an instance running the latest kernel of PostgreSQL DBMajorVersion will be created.
      *
-     * @deprecated `db_major_vesion` will be deprecated, use `db_major_version` instead.
+     * @deprecated `dbMajorVesion` will be deprecated, use `dbMajorVersion` instead.
      */
     public readonly dbMajorVesion!: pulumi.Output<string>;
     /**
@@ -360,6 +376,7 @@ export class Instance extends pulumi.CustomResource {
             resourceInputs["backupPlan"] = state ? state.backupPlan : undefined;
             resourceInputs["chargeType"] = state ? state.chargeType : undefined;
             resourceInputs["charset"] = state ? state.charset : undefined;
+            resourceInputs["cpu"] = state ? state.cpu : undefined;
             resourceInputs["createTime"] = state ? state.createTime : undefined;
             resourceInputs["dbKernelVersion"] = state ? state.dbKernelVersion : undefined;
             resourceInputs["dbMajorVersion"] = state ? state.dbMajorVersion : undefined;
@@ -415,6 +432,7 @@ export class Instance extends pulumi.CustomResource {
             resourceInputs["backupPlan"] = args ? args.backupPlan : undefined;
             resourceInputs["chargeType"] = args ? args.chargeType : undefined;
             resourceInputs["charset"] = args ? args.charset : undefined;
+            resourceInputs["cpu"] = args ? args.cpu : undefined;
             resourceInputs["dbKernelVersion"] = args ? args.dbKernelVersion : undefined;
             resourceInputs["dbMajorVersion"] = args ? args.dbMajorVersion : undefined;
             resourceInputs["dbMajorVesion"] = args ? args.dbMajorVesion : undefined;
@@ -430,7 +448,7 @@ export class Instance extends pulumi.CustomResource {
             resourceInputs["period"] = args ? args.period : undefined;
             resourceInputs["projectId"] = args ? args.projectId : undefined;
             resourceInputs["publicAccessSwitch"] = args ? args.publicAccessSwitch : undefined;
-            resourceInputs["rootPassword"] = args ? args.rootPassword : undefined;
+            resourceInputs["rootPassword"] = args?.rootPassword ? pulumi.secret(args.rootPassword) : undefined;
             resourceInputs["rootUser"] = args ? args.rootUser : undefined;
             resourceInputs["securityGroups"] = args ? args.securityGroups : undefined;
             resourceInputs["storage"] = args ? args.storage : undefined;
@@ -446,6 +464,8 @@ export class Instance extends pulumi.CustomResource {
             resourceInputs["uid"] = undefined /*out*/;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+        const secretOpts = { additionalSecretOutputs: ["rootPassword"] };
+        opts = pulumi.mergeOptions(opts, secretOpts);
         super(Instance.__pulumiType, name, resourceInputs, opts);
     }
 }
@@ -479,6 +499,10 @@ export interface InstanceState {
      */
     charset?: pulumi.Input<string>;
     /**
+     * Number of CPU cores. Allowed value must be equal `cpu` that data source `tencentcloud.Postgresql.getSpecinfos` provides.
+     */
+    cpu?: pulumi.Input<number>;
+    /**
      * Create time of the postgresql instance.
      */
     createTime?: pulumi.Input<string>;
@@ -493,7 +517,7 @@ export interface InstanceState {
     /**
      * `dbMajorVesion` will be deprecated, use `dbMajorVersion` instead. PostgreSQL major version number. Valid values: 10, 11, 12, 13. If it is specified, an instance running the latest kernel of PostgreSQL DBMajorVersion will be created.
      *
-     * @deprecated `db_major_vesion` will be deprecated, use `db_major_version` instead.
+     * @deprecated `dbMajorVesion` will be deprecated, use `dbMajorVersion` instead.
      */
     dbMajorVesion?: pulumi.Input<string>;
     /**
@@ -627,6 +651,10 @@ export interface InstanceArgs {
      */
     charset?: pulumi.Input<string>;
     /**
+     * Number of CPU cores. Allowed value must be equal `cpu` that data source `tencentcloud.Postgresql.getSpecinfos` provides.
+     */
+    cpu?: pulumi.Input<number>;
+    /**
      * PostgreSQL kernel version number. If it is specified, an instance running kernel DBKernelVersion will be created. It supports updating the minor kernel version immediately.
      */
     dbKernelVersion?: pulumi.Input<string>;
@@ -637,7 +665,7 @@ export interface InstanceArgs {
     /**
      * `dbMajorVesion` will be deprecated, use `dbMajorVersion` instead. PostgreSQL major version number. Valid values: 10, 11, 12, 13. If it is specified, an instance running the latest kernel of PostgreSQL DBMajorVersion will be created.
      *
-     * @deprecated `db_major_vesion` will be deprecated, use `db_major_version` instead.
+     * @deprecated `dbMajorVesion` will be deprecated, use `dbMajorVersion` instead.
      */
     dbMajorVesion?: pulumi.Input<string>;
     /**

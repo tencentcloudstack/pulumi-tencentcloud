@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tse.Inputs
 {
 
-    public sealed class CngwServiceRateLimitLimitDetailExternalRedisGetArgs : Pulumi.ResourceArgs
+    public sealed class CngwServiceRateLimitLimitDetailExternalRedisGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// redis ip, maybe null.
@@ -40,5 +40,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tse.Inputs
         public CngwServiceRateLimitLimitDetailExternalRedisGetArgs()
         {
         }
+        public static new CngwServiceRateLimitLimitDetailExternalRedisGetArgs Empty => new CngwServiceRateLimitLimitDetailExternalRedisGetArgs();
     }
 }

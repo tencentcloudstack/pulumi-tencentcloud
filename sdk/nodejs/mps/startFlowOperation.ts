@@ -8,28 +8,34 @@ import * as utilities from "../utilities";
  * Provides a resource to create a mps startFlowOperation
  *
  * ## Example Usage
+ *
  * ### Start flow
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const operation = new tencentcloud.mps.StartFlowOperation("operation", {
  *     flowId: tencentcloud_mps_flow.flow_rtp.id,
  *     start: true,
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
+ *
  * ### Stop flow
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const operation = new tencentcloud.mps.StartFlowOperation("operation", {
  *     flowId: tencentcloud_mps_flow.flow_rtp.id,
  *     start: false,
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export class StartFlowOperation extends pulumi.CustomResource {
     /**

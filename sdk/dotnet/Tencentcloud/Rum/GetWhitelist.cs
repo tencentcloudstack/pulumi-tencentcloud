@@ -15,64 +15,58 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Rum
         /// <summary>
         /// Use this data source to query detailed information of rum whitelist
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var whitelist = Tencentcloud.Rum.GetWhitelist.Invoke(new()
         ///     {
-        ///         var whitelist = Output.Create(Tencentcloud.Rum.GetWhitelist.InvokeAsync(new Tencentcloud.Rum.GetWhitelistArgs
-        ///         {
-        ///             InstanceId = "rum-pasZKEI3RLgakj",
-        ///         }));
-        ///     }
+        ///         InstanceId = "rum-pasZKEI3RLgakj",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetWhitelistResult> InvokeAsync(GetWhitelistArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetWhitelistResult>("tencentcloud:Rum/getWhitelist:getWhitelist", args ?? new GetWhitelistArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetWhitelistResult>("tencentcloud:Rum/getWhitelist:getWhitelist", args ?? new GetWhitelistArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of rum whitelist
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var whitelist = Tencentcloud.Rum.GetWhitelist.Invoke(new()
         ///     {
-        ///         var whitelist = Output.Create(Tencentcloud.Rum.GetWhitelist.InvokeAsync(new Tencentcloud.Rum.GetWhitelistArgs
-        ///         {
-        ///             InstanceId = "rum-pasZKEI3RLgakj",
-        ///         }));
-        ///     }
+        ///         InstanceId = "rum-pasZKEI3RLgakj",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetWhitelistResult> Invoke(GetWhitelistInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetWhitelistResult>("tencentcloud:Rum/getWhitelist:getWhitelist", args ?? new GetWhitelistInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetWhitelistResult>("tencentcloud:Rum/getWhitelist:getWhitelist", args ?? new GetWhitelistInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetWhitelistArgs : Pulumi.InvokeArgs
+    public sealed class GetWhitelistArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Instance ID, such as taw-123.
@@ -89,9 +83,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Rum
         public GetWhitelistArgs()
         {
         }
+        public static new GetWhitelistArgs Empty => new GetWhitelistArgs();
     }
 
-    public sealed class GetWhitelistInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetWhitelistInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Instance ID, such as taw-123.
@@ -108,6 +103,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Rum
         public GetWhitelistInvokeArgs()
         {
         }
+        public static new GetWhitelistInvokeArgs Empty => new GetWhitelistInvokeArgs();
     }
 
 

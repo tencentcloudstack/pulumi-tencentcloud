@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos.Inputs
 {
 
-    public sealed class BucketDomainCertificateAttachmentDomainCertificateCertificateGetArgs : Pulumi.ResourceArgs
+    public sealed class BucketDomainCertificateAttachmentDomainCertificateCertificateGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Certificate type.
@@ -28,5 +28,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos.Inputs
         public BucketDomainCertificateAttachmentDomainCertificateCertificateGetArgs()
         {
         }
+        public static new BucketDomainCertificateAttachmentDomainCertificateCertificateGetArgs Empty => new BucketDomainCertificateAttachmentDomainCertificateCertificateGetArgs();
     }
 }

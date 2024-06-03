@@ -15,80 +15,80 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cat
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
     /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using System.Text.Json;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var taskSet = new Tencentcloud.Cat.TaskSet("taskSet", new()
     ///     {
-    ///         var taskSet = new Tencentcloud.Cat.TaskSet("taskSet", new Tencentcloud.Cat.TaskSetArgs
+    ///         BatchTasks = new Tencentcloud.Cat.Inputs.TaskSetBatchTasksArgs
     ///         {
-    ///             BatchTasks = new Tencentcloud.Cat.Inputs.TaskSetBatchTasksArgs
-    ///             {
-    ///                 Name = "demo",
-    ///                 TargetAddress = "http://www.baidu.com",
-    ///             },
-    ///             TaskType = 5,
-    ///             Nodes = 
-    ///             {
-    ///                 "12136",
-    ///                 "12137",
-    ///                 "12138",
-    ///                 "12141",
-    ///                 "12144",
-    ///             },
-    ///             Interval = 6,
-    ///             Parameters = JsonSerializer.Serialize(new Dictionary&lt;string, object?&gt;
-    ///             {
-    ///                 { "ipType", 0 },
-    ///                 { "grabBag", 0 },
-    ///                 { "filterIp", 0 },
-    ///                 { "netIcmpOn", 1 },
-    ///                 { "netIcmpActivex", 0 },
-    ///                 { "netIcmpTimeout", 20 },
-    ///                 { "netIcmpInterval", 0.5 },
-    ///                 { "netIcmpNum", 20 },
-    ///                 { "netIcmpSize", 32 },
-    ///                 { "netIcmpDataCut", 1 },
-    ///                 { "netDnsOn", 1 },
-    ///                 { "netDnsTimeout", 5 },
-    ///                 { "netDnsQuerymethod", 1 },
-    ///                 { "netDnsNs", "" },
-    ///                 { "netDigOn", 1 },
-    ///                 { "netDnsServer", 2 },
-    ///                 { "netTracertOn", 1 },
-    ///                 { "netTracertTimeout", 60 },
-    ///                 { "netTracertNum", 30 },
-    ///                 { "whiteList", "" },
-    ///                 { "blackList", "" },
-    ///                 { "netIcmpActivexStr", "" },
-    ///             }),
-    ///             TaskCategory = 1,
-    ///             Cron = "* 0-6 * * *",
-    ///             Tags = 
-    ///             {
-    ///                 { "createdBy", "terraform" },
-    ///             },
-    ///         });
-    ///     }
+    ///             Name = "demo",
+    ///             TargetAddress = "http://www.baidu.com",
+    ///         },
+    ///         TaskType = 5,
+    ///         Nodes = new[]
+    ///         {
+    ///             "12136",
+    ///             "12137",
+    ///             "12138",
+    ///             "12141",
+    ///             "12144",
+    ///         },
+    ///         Interval = 6,
+    ///         Parameters = JsonSerializer.Serialize(new Dictionary&lt;string, object?&gt;
+    ///         {
+    ///             ["ipType"] = 0,
+    ///             ["grabBag"] = 0,
+    ///             ["filterIp"] = 0,
+    ///             ["netIcmpOn"] = 1,
+    ///             ["netIcmpActivex"] = 0,
+    ///             ["netIcmpTimeout"] = 20,
+    ///             ["netIcmpInterval"] = 0.5,
+    ///             ["netIcmpNum"] = 20,
+    ///             ["netIcmpSize"] = 32,
+    ///             ["netIcmpDataCut"] = 1,
+    ///             ["netDnsOn"] = 1,
+    ///             ["netDnsTimeout"] = 5,
+    ///             ["netDnsQuerymethod"] = 1,
+    ///             ["netDnsNs"] = "",
+    ///             ["netDigOn"] = 1,
+    ///             ["netDnsServer"] = 2,
+    ///             ["netTracertOn"] = 1,
+    ///             ["netTracertTimeout"] = 60,
+    ///             ["netTracertNum"] = 30,
+    ///             ["whiteList"] = "",
+    ///             ["blackList"] = "",
+    ///             ["netIcmpActivexStr"] = "",
+    ///         }),
+    ///         TaskCategory = 1,
+    ///         Cron = "* 0-6 * * *",
+    ///         Tags = 
+    ///         {
+    ///             { "createdBy", "terraform" },
+    ///         },
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// cat task_set can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Cat/taskSet:TaskSet task_set taskSet_id
+    /// $ pulumi import tencentcloud:Cat/taskSet:TaskSet task_set taskSet_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Cat/taskSet:TaskSet")]
-    public partial class TaskSet : Pulumi.CustomResource
+    public partial class TaskSet : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Batch task name address.
@@ -207,7 +207,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cat
         }
     }
 
-    public sealed class TaskSetArgs : Pulumi.ResourceArgs
+    public sealed class TaskSetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Batch task name address.
@@ -284,9 +284,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cat
         public TaskSetArgs()
         {
         }
+        public static new TaskSetArgs Empty => new TaskSetArgs();
     }
 
-    public sealed class TaskSetState : Pulumi.ResourceArgs
+    public sealed class TaskSetState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Batch task name address.
@@ -375,5 +376,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cat
         public TaskSetState()
         {
         }
+        public static new TaskSetState Empty => new TaskSetState();
     }
 }

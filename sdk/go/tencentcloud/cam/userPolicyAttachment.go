@@ -7,18 +7,99 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a CAM user policy attachment.
+//
+// ## Example Usage
+//
+// <!--Start PulumiCodeChooser -->
+// ```go
+// package main
+//
+// import (
+//
+//	"encoding/json"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cam"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			cfg := config.New(ctx, "")
+//			camUserBasic := "keep-cam-user"
+//			if param := cfg.Get("camUserBasic"); param != "" {
+//				camUserBasic = param
+//			}
+//			tmpJSON0, err := json.Marshal(map[string]interface{}{
+//				"version": "2.0",
+//				"statement": []map[string]interface{}{
+//					map[string]interface{}{
+//						"action": []string{
+//							"cos:*",
+//						},
+//						"resource": []string{
+//							"*",
+//						},
+//						"effect": "allow",
+//					},
+//					map[string]interface{}{
+//						"effect": "allow",
+//						"action": []string{
+//							"monitor:*",
+//							"cam:ListUsersForGroup",
+//							"cam:ListGroups",
+//							"cam:GetGroup",
+//						},
+//						"resource": []string{
+//							"*",
+//						},
+//					},
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			json0 := string(tmpJSON0)
+//			policyBasic, err := Cam.NewPolicy(ctx, "policyBasic", &Cam.PolicyArgs{
+//				Document:    pulumi.String(json0),
+//				Description: pulumi.String("tf_test"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			users, err := Cam.GetUsers(ctx, &cam.GetUsersArgs{
+//				Name: pulumi.StringRef(camUserBasic),
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			_, err = Cam.NewUserPolicyAttachment(ctx, "userPolicyAttachmentBasic", &Cam.UserPolicyAttachmentArgs{
+//				UserName: pulumi.String(users.UserLists[0].UserId),
+//				PolicyId: policyBasic.ID(),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // CAM user policy attachment can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Cam/userPolicyAttachment:UserPolicyAttachment foo cam-test#26800353
+// $ pulumi import tencentcloud:Cam/userPolicyAttachment:UserPolicyAttachment foo cam-test#26800353
 // ```
 type UserPolicyAttachment struct {
 	pulumi.CustomResourceState
@@ -35,7 +116,7 @@ type UserPolicyAttachment struct {
 	PolicyType pulumi.StringOutput `pulumi:"policyType"`
 	// It has been deprecated from version 1.59.5. Use `userName` instead. ID of the attached CAM user.
 	//
-	// Deprecated: It has been deprecated from version 1.59.5. Use `user_name` instead.
+	// Deprecated: It has been deprecated from version 1.59.5. Use `userName` instead.
 	UserId pulumi.StringPtrOutput `pulumi:"userId"`
 	// Name of the attached CAM user as uniq key.
 	UserName pulumi.StringPtrOutput `pulumi:"userName"`
@@ -51,7 +132,7 @@ func NewUserPolicyAttachment(ctx *pulumi.Context,
 	if args.PolicyId == nil {
 		return nil, errors.New("invalid value for required argument 'PolicyId'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource UserPolicyAttachment
 	err := ctx.RegisterResource("tencentcloud:Cam/userPolicyAttachment:UserPolicyAttachment", name, args, &resource, opts...)
 	if err != nil {
@@ -86,7 +167,7 @@ type userPolicyAttachmentState struct {
 	PolicyType *string `pulumi:"policyType"`
 	// It has been deprecated from version 1.59.5. Use `userName` instead. ID of the attached CAM user.
 	//
-	// Deprecated: It has been deprecated from version 1.59.5. Use `user_name` instead.
+	// Deprecated: It has been deprecated from version 1.59.5. Use `userName` instead.
 	UserId *string `pulumi:"userId"`
 	// Name of the attached CAM user as uniq key.
 	UserName *string `pulumi:"userName"`
@@ -105,7 +186,7 @@ type UserPolicyAttachmentState struct {
 	PolicyType pulumi.StringPtrInput
 	// It has been deprecated from version 1.59.5. Use `userName` instead. ID of the attached CAM user.
 	//
-	// Deprecated: It has been deprecated from version 1.59.5. Use `user_name` instead.
+	// Deprecated: It has been deprecated from version 1.59.5. Use `userName` instead.
 	UserId pulumi.StringPtrInput
 	// Name of the attached CAM user as uniq key.
 	UserName pulumi.StringPtrInput
@@ -120,7 +201,7 @@ type userPolicyAttachmentArgs struct {
 	PolicyId string `pulumi:"policyId"`
 	// It has been deprecated from version 1.59.5. Use `userName` instead. ID of the attached CAM user.
 	//
-	// Deprecated: It has been deprecated from version 1.59.5. Use `user_name` instead.
+	// Deprecated: It has been deprecated from version 1.59.5. Use `userName` instead.
 	UserId *string `pulumi:"userId"`
 	// Name of the attached CAM user as uniq key.
 	UserName *string `pulumi:"userName"`
@@ -132,7 +213,7 @@ type UserPolicyAttachmentArgs struct {
 	PolicyId pulumi.StringInput
 	// It has been deprecated from version 1.59.5. Use `userName` instead. ID of the attached CAM user.
 	//
-	// Deprecated: It has been deprecated from version 1.59.5. Use `user_name` instead.
+	// Deprecated: It has been deprecated from version 1.59.5. Use `userName` instead.
 	UserId pulumi.StringPtrInput
 	// Name of the attached CAM user as uniq key.
 	UserName pulumi.StringPtrInput
@@ -164,7 +245,7 @@ func (i *UserPolicyAttachment) ToUserPolicyAttachmentOutputWithContext(ctx conte
 // UserPolicyAttachmentArrayInput is an input type that accepts UserPolicyAttachmentArray and UserPolicyAttachmentArrayOutput values.
 // You can construct a concrete instance of `UserPolicyAttachmentArrayInput` via:
 //
-//          UserPolicyAttachmentArray{ UserPolicyAttachmentArgs{...} }
+//	UserPolicyAttachmentArray{ UserPolicyAttachmentArgs{...} }
 type UserPolicyAttachmentArrayInput interface {
 	pulumi.Input
 
@@ -189,7 +270,7 @@ func (i UserPolicyAttachmentArray) ToUserPolicyAttachmentArrayOutputWithContext(
 // UserPolicyAttachmentMapInput is an input type that accepts UserPolicyAttachmentMap and UserPolicyAttachmentMapOutput values.
 // You can construct a concrete instance of `UserPolicyAttachmentMapInput` via:
 //
-//          UserPolicyAttachmentMap{ "key": UserPolicyAttachmentArgs{...} }
+//	UserPolicyAttachmentMap{ "key": UserPolicyAttachmentArgs{...} }
 type UserPolicyAttachmentMapInput interface {
 	pulumi.Input
 
@@ -252,7 +333,7 @@ func (o UserPolicyAttachmentOutput) PolicyType() pulumi.StringOutput {
 
 // It has been deprecated from version 1.59.5. Use `userName` instead. ID of the attached CAM user.
 //
-// Deprecated: It has been deprecated from version 1.59.5. Use `user_name` instead.
+// Deprecated: It has been deprecated from version 1.59.5. Use `userName` instead.
 func (o UserPolicyAttachmentOutput) UserId() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *UserPolicyAttachment) pulumi.StringPtrOutput { return v.UserId }).(pulumi.StringPtrOutput)
 }

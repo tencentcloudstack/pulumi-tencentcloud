@@ -15,64 +15,58 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tse
         /// <summary>
         /// Use this data source to query detailed information of tse nacos_replicas
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var nacosReplicas = Tencentcloud.Tse.GetNacosReplicas.Invoke(new()
         ///     {
-        ///         var nacosReplicas = Output.Create(Tencentcloud.Tse.GetNacosReplicas.InvokeAsync(new Tencentcloud.Tse.GetNacosReplicasArgs
-        ///         {
-        ///             InstanceId = "ins-8078da86",
-        ///         }));
-        ///     }
+        ///         InstanceId = "ins-8078da86",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetNacosReplicasResult> InvokeAsync(GetNacosReplicasArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetNacosReplicasResult>("tencentcloud:Tse/getNacosReplicas:getNacosReplicas", args ?? new GetNacosReplicasArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetNacosReplicasResult>("tencentcloud:Tse/getNacosReplicas:getNacosReplicas", args ?? new GetNacosReplicasArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of tse nacos_replicas
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var nacosReplicas = Tencentcloud.Tse.GetNacosReplicas.Invoke(new()
         ///     {
-        ///         var nacosReplicas = Output.Create(Tencentcloud.Tse.GetNacosReplicas.InvokeAsync(new Tencentcloud.Tse.GetNacosReplicasArgs
-        ///         {
-        ///             InstanceId = "ins-8078da86",
-        ///         }));
-        ///     }
+        ///         InstanceId = "ins-8078da86",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetNacosReplicasResult> Invoke(GetNacosReplicasInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetNacosReplicasResult>("tencentcloud:Tse/getNacosReplicas:getNacosReplicas", args ?? new GetNacosReplicasInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetNacosReplicasResult>("tencentcloud:Tse/getNacosReplicas:getNacosReplicas", args ?? new GetNacosReplicasInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetNacosReplicasArgs : Pulumi.InvokeArgs
+    public sealed class GetNacosReplicasArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// engine instance ID.
@@ -89,9 +83,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tse
         public GetNacosReplicasArgs()
         {
         }
+        public static new GetNacosReplicasArgs Empty => new GetNacosReplicasArgs();
     }
 
-    public sealed class GetNacosReplicasInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetNacosReplicasInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// engine instance ID.
@@ -108,6 +103,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tse
         public GetNacosReplicasInvokeArgs()
         {
         }
+        public static new GetNacosReplicasInvokeArgs Empty => new GetNacosReplicasInvokeArgs();
     }
 
 

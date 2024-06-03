@@ -15,39 +15,40 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clickhouse
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var xmlConfig = new Tencentcloud.Clickhouse.XmlConfig("xmlConfig", new()
     ///     {
-    ///         var xmlConfig = new Tencentcloud.Clickhouse.XmlConfig("xmlConfig", new Tencentcloud.Clickhouse.XmlConfigArgs
+    ///         InstanceId = "cdwch-datuhk3z",
+    ///         ModifyConfContext = new Tencentcloud.Clickhouse.Inputs.XmlConfigModifyConfContextArgs
     ///         {
-    ///             InstanceId = "cdwch-datuhk3z",
-    ///             ModifyConfContext = new Tencentcloud.Clickhouse.Inputs.XmlConfigModifyConfContextArgs
-    ///             {
-    ///                 FileName = "metrika.xml",
-    ///                 FilePath = "/etc/clickhouse-server",
-    ///                 NewConfValue = "PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHlhbmRleD4KICAgIDx6b29rZWVwZXItc2VydmVycz4KICAgIDwvem9va2VlcGVyLXNlcnZlcnM+CjwveWFuZGV4Pgo=",
-    ///             },
-    ///         });
-    ///     }
+    ///             FileName = "metrika.xml",
+    ///             FilePath = "/etc/clickhouse-server",
+    ///             NewConfValue = "PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHlhbmRleD4KICAgIDx6b29rZWVwZXItc2VydmVycz4KICAgIDwvem9va2VlcGVyLXNlcnZlcnM+CjwveWFuZGV4Pgo=",
+    ///         },
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// clickhouse xml_config can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Clickhouse/xmlConfig:XmlConfig xml_config cdwch-datuhk3z#metrika.xml
+    /// $ pulumi import tencentcloud:Clickhouse/xmlConfig:XmlConfig xml_config cdwch-datuhk3z#metrika.xml
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Clickhouse/xmlConfig:XmlConfig")]
-    public partial class XmlConfig : Pulumi.CustomResource
+    public partial class XmlConfig : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Cluster ID.
@@ -106,7 +107,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clickhouse
         }
     }
 
-    public sealed class XmlConfigArgs : Pulumi.ResourceArgs
+    public sealed class XmlConfigArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Cluster ID.
@@ -123,9 +124,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clickhouse
         public XmlConfigArgs()
         {
         }
+        public static new XmlConfigArgs Empty => new XmlConfigArgs();
     }
 
-    public sealed class XmlConfigState : Pulumi.ResourceArgs
+    public sealed class XmlConfigState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Cluster ID.
@@ -142,5 +144,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clickhouse
         public XmlConfigState()
         {
         }
+        public static new XmlConfigState Empty => new XmlConfigState();
     }
 }

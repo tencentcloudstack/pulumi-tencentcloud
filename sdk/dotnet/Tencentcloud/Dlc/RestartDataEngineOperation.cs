@@ -15,26 +15,27 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dlc
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var restartDataEngine = new Tencentcloud.Dlc.RestartDataEngineOperation("restartDataEngine", new()
     ///     {
-    ///         var restartDataEngine = new Tencentcloud.Dlc.RestartDataEngineOperation("restartDataEngine", new Tencentcloud.Dlc.RestartDataEngineOperationArgs
-    ///         {
-    ///             DataEngineId = "DataEngine-g5ds87d8",
-    ///             ForcedOperation = false,
-    ///         });
-    ///     }
+    ///         DataEngineId = "DataEngine-g5ds87d8",
+    ///         ForcedOperation = false,
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Dlc/restartDataEngineOperation:RestartDataEngineOperation")]
-    public partial class RestartDataEngineOperation : Pulumi.CustomResource
+    public partial class RestartDataEngineOperation : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Engine unique id.
@@ -93,7 +94,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dlc
         }
     }
 
-    public sealed class RestartDataEngineOperationArgs : Pulumi.ResourceArgs
+    public sealed class RestartDataEngineOperationArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Engine unique id.
@@ -110,9 +111,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dlc
         public RestartDataEngineOperationArgs()
         {
         }
+        public static new RestartDataEngineOperationArgs Empty => new RestartDataEngineOperationArgs();
     }
 
-    public sealed class RestartDataEngineOperationState : Pulumi.ResourceArgs
+    public sealed class RestartDataEngineOperationState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Engine unique id.
@@ -129,5 +131,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dlc
         public RestartDataEngineOperationState()
         {
         }
+        public static new RestartDataEngineOperationState Empty => new RestartDataEngineOperationState();
     }
 }

@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,24 +11,23 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const alarmAllNamespaces = pulumi.output(tencentcloud.Monitor.getAlarmAllNamespaces({
+ * const alarmAllNamespaces = tencentcloud.Monitor.getAlarmAllNamespaces({
  *     ids: ["qaap_tunnel_l4_listeners"],
  *     module: "monitor",
  *     monitorTypes: ["MT_QCE"],
  *     sceneType: "ST_ALARM",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getAlarmAllNamespaces(args: GetAlarmAllNamespacesArgs, opts?: pulumi.InvokeOptions): Promise<GetAlarmAllNamespacesResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Monitor/getAlarmAllNamespaces:getAlarmAllNamespaces", {
         "ids": args.ids,
         "module": args.module,
@@ -89,9 +89,27 @@ export interface GetAlarmAllNamespacesResult {
     readonly resultOutputFile?: string;
     readonly sceneType: string;
 }
-
+/**
+ * Use this data source to query detailed information of monitor alarmAllNamespaces
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const alarmAllNamespaces = tencentcloud.Monitor.getAlarmAllNamespaces({
+ *     ids: ["qaap_tunnel_l4_listeners"],
+ *     module: "monitor",
+ *     monitorTypes: ["MT_QCE"],
+ *     sceneType: "ST_ALARM",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getAlarmAllNamespacesOutput(args: GetAlarmAllNamespacesOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetAlarmAllNamespacesResult> {
-    return pulumi.output(args).apply(a => getAlarmAllNamespaces(a, opts))
+    return pulumi.output(args).apply((a: any) => getAlarmAllNamespaces(a, opts))
 }
 
 /**

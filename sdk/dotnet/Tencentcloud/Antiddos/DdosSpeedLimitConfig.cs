@@ -15,52 +15,53 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Antiddos
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var ddosSpeedLimitConfig = new Tencentcloud.Antiddos.DdosSpeedLimitConfig("ddosSpeedLimitConfig", new()
     ///     {
-    ///         var ddosSpeedLimitConfig = new Tencentcloud.Antiddos.DdosSpeedLimitConfig("ddosSpeedLimitConfig", new Tencentcloud.Antiddos.DdosSpeedLimitConfigArgs
+    ///         AntiddosDdosSpeedLimitConfig = new Tencentcloud.Antiddos.Inputs.DdosSpeedLimitConfigDdosSpeedLimitConfigArgs
     ///         {
-    ///             DdosSpeedLimitConfig = new Tencentcloud.Antiddos.Inputs.DdosSpeedLimitConfigDdosSpeedLimitConfigArgs
+    ///             DstPortList = "8000",
+    ///             Mode = 1,
+    ///             ProtocolList = "ALL",
+    ///             SpeedValues = new[]
     ///             {
-    ///                 DstPortList = "8000",
-    ///                 Mode = 1,
-    ///                 ProtocolList = "ALL",
-    ///                 SpeedValues = 
+    ///                 new Tencentcloud.Antiddos.Inputs.DdosSpeedLimitConfigDdosSpeedLimitConfigSpeedValueArgs
     ///                 {
-    ///                     new Tencentcloud.Antiddos.Inputs.DdosSpeedLimitConfigDdosSpeedLimitConfigSpeedValueArgs
-    ///                     {
-    ///                         Type = 1,
-    ///                         Value = 1,
-    ///                     },
-    ///                     new Tencentcloud.Antiddos.Inputs.DdosSpeedLimitConfigDdosSpeedLimitConfigSpeedValueArgs
-    ///                     {
-    ///                         Type = 2,
-    ///                         Value = 2,
-    ///                     },
+    ///                     Type = 1,
+    ///                     Value = 1,
+    ///                 },
+    ///                 new Tencentcloud.Antiddos.Inputs.DdosSpeedLimitConfigDdosSpeedLimitConfigSpeedValueArgs
+    ///                 {
+    ///                     Type = 2,
+    ///                     Value = 2,
     ///                 },
     ///             },
-    ///             InstanceId = "bgp-xxxxxx",
-    ///         });
-    ///     }
+    ///         },
+    ///         InstanceId = "bgp-xxxxxx",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// antiddos ddos_speed_limit_config can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Antiddos/ddosSpeedLimitConfig:DdosSpeedLimitConfig ddos_speed_limit_config ${instanceId}#${configId}s
+    /// $ pulumi import tencentcloud:Antiddos/ddosSpeedLimitConfig:DdosSpeedLimitConfig ddos_speed_limit_config ${instanceId}#${configId}s
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Antiddos/ddosSpeedLimitConfig:DdosSpeedLimitConfig")]
-    public partial class DdosSpeedLimitConfig : Pulumi.CustomResource
+    public partial class DdosSpeedLimitConfig : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Accessing speed limit configuration, the configuration ID cannot be empty when filling in parameters.
@@ -119,7 +120,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Antiddos
         }
     }
 
-    public sealed class DdosSpeedLimitConfigArgs : Pulumi.ResourceArgs
+    public sealed class DdosSpeedLimitConfigArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Accessing speed limit configuration, the configuration ID cannot be empty when filling in parameters.
@@ -136,9 +137,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Antiddos
         public DdosSpeedLimitConfigArgs()
         {
         }
+        public static new DdosSpeedLimitConfigArgs Empty => new DdosSpeedLimitConfigArgs();
     }
 
-    public sealed class DdosSpeedLimitConfigState : Pulumi.ResourceArgs
+    public sealed class DdosSpeedLimitConfigState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Accessing speed limit configuration, the configuration ID cannot be empty when filling in parameters.
@@ -155,5 +157,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Antiddos
         public DdosSpeedLimitConfigState()
         {
         }
+        public static new DdosSpeedLimitConfigState Empty => new DdosSpeedLimitConfigState();
     }
 }

@@ -7,8 +7,9 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a pts alertChannel
@@ -17,106 +18,109 @@ import (
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Monitor"
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Pts"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Monitor"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Pts"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Monitor"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Pts"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		example, err := Monitor.NewAlarmNotice(ctx, "example", &Monitor.AlarmNoticeArgs{
-// 			NoticeType:     pulumi.String("ALL"),
-// 			NoticeLanguage: pulumi.String("zh-CN"),
-// 			UserNotices: monitor.AlarmNoticeUserNoticeArray{
-// 				&monitor.AlarmNoticeUserNoticeArgs{
-// 					ReceiverType: pulumi.String("USER"),
-// 					StartTime:    pulumi.Int(0),
-// 					EndTime:      pulumi.Int(1),
-// 					NoticeWays: pulumi.StringArray{
-// 						pulumi.String("EMAIL"),
-// 						pulumi.String("SMS"),
-// 						pulumi.String("WECHAT"),
-// 					},
-// 					UserIds: pulumi.IntArray{
-// 						pulumi.Int(10001),
-// 					},
-// 					GroupIds: pulumi.IntArray{},
-// 					PhoneOrders: pulumi.IntArray{
-// 						pulumi.Int(10001),
-// 					},
-// 					PhoneCircleTimes:      pulumi.Int(2),
-// 					PhoneCircleInterval:   pulumi.Int(50),
-// 					PhoneInnerInterval:    pulumi.Int(60),
-// 					NeedPhoneArriveNotice: pulumi.Int(1),
-// 					PhoneCallType:         pulumi.String("CIRCLE"),
-// 					Weekdays: pulumi.IntArray{
-// 						pulumi.Int(1),
-// 						pulumi.Int(2),
-// 						pulumi.Int(3),
-// 						pulumi.Int(4),
-// 						pulumi.Int(5),
-// 						pulumi.Int(6),
-// 						pulumi.Int(7),
-// 					},
-// 				},
-// 			},
-// 			UrlNotices: monitor.AlarmNoticeUrlNoticeArray{
-// 				&monitor.AlarmNoticeUrlNoticeArgs{
-// 					Url:       pulumi.String("https://www.mytest.com/validate"),
-// 					EndTime:   pulumi.Int(0),
-// 					StartTime: pulumi.Int(1),
-// 					Weekdays: pulumi.IntArray{
-// 						pulumi.Int(1),
-// 						pulumi.Int(2),
-// 						pulumi.Int(3),
-// 						pulumi.Int(4),
-// 						pulumi.Int(5),
-// 						pulumi.Int(6),
-// 						pulumi.Int(7),
-// 					},
-// 				},
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		project, err := Pts.NewProject(ctx, "project", &Pts.ProjectArgs{
-// 			Description: pulumi.String("desc"),
-// 			Tags: pts.ProjectTagArray{
-// 				&pts.ProjectTagArgs{
-// 					TagKey:   pulumi.String("createdBy"),
-// 					TagValue: pulumi.String("terraform"),
-// 				},
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_, err = Pts.NewAlertChannel(ctx, "alertChannel", &Pts.AlertChannelArgs{
-// 			NoticeId:      example.ID(),
-// 			ProjectId:     project.ID(),
-// 			AmpConsumerId: pulumi.String("Consumer-vvy1xxxxxx"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			example, err := Monitor.NewAlarmNotice(ctx, "example", &Monitor.AlarmNoticeArgs{
+//				NoticeType:     pulumi.String("ALL"),
+//				NoticeLanguage: pulumi.String("zh-CN"),
+//				UserNotices: monitor.AlarmNoticeUserNoticeArray{
+//					&monitor.AlarmNoticeUserNoticeArgs{
+//						ReceiverType: pulumi.String("USER"),
+//						StartTime:    pulumi.Int(0),
+//						EndTime:      pulumi.Int(1),
+//						NoticeWays: pulumi.StringArray{
+//							pulumi.String("EMAIL"),
+//							pulumi.String("SMS"),
+//							pulumi.String("WECHAT"),
+//						},
+//						UserIds: pulumi.IntArray{
+//							pulumi.Int(10001),
+//						},
+//						GroupIds: pulumi.IntArray{},
+//						PhoneOrders: pulumi.IntArray{
+//							pulumi.Int(10001),
+//						},
+//						PhoneCircleTimes:      pulumi.Int(2),
+//						PhoneCircleInterval:   pulumi.Int(50),
+//						PhoneInnerInterval:    pulumi.Int(60),
+//						NeedPhoneArriveNotice: pulumi.Int(1),
+//						PhoneCallType:         pulumi.String("CIRCLE"),
+//						Weekdays: pulumi.IntArray{
+//							pulumi.Int(1),
+//							pulumi.Int(2),
+//							pulumi.Int(3),
+//							pulumi.Int(4),
+//							pulumi.Int(5),
+//							pulumi.Int(6),
+//							pulumi.Int(7),
+//						},
+//					},
+//				},
+//				UrlNotices: monitor.AlarmNoticeUrlNoticeArray{
+//					&monitor.AlarmNoticeUrlNoticeArgs{
+//						Url:       pulumi.String("https://www.mytest.com/validate"),
+//						EndTime:   pulumi.Int(0),
+//						StartTime: pulumi.Int(1),
+//						Weekdays: pulumi.IntArray{
+//							pulumi.Int(1),
+//							pulumi.Int(2),
+//							pulumi.Int(3),
+//							pulumi.Int(4),
+//							pulumi.Int(5),
+//							pulumi.Int(6),
+//							pulumi.Int(7),
+//						},
+//					},
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			project, err := Pts.NewProject(ctx, "project", &Pts.ProjectArgs{
+//				Description: pulumi.String("desc"),
+//				Tags: pts.ProjectTagArray{
+//					&pts.ProjectTagArgs{
+//						TagKey:   pulumi.String("createdBy"),
+//						TagValue: pulumi.String("terraform"),
+//					},
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_, err = Pts.NewAlertChannel(ctx, "alertChannel", &Pts.AlertChannelArgs{
+//				NoticeId:      example.ID(),
+//				ProjectId:     project.ID(),
+//				AmpConsumerId: pulumi.String("Consumer-vvy1xxxxxx"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // pts alert_channel can be imported using the project_id#notice_id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Pts/alertChannel:AlertChannel alert_channel project-kww5v8se#notice-kl66t6y9
+// $ pulumi import tencentcloud:Pts/alertChannel:AlertChannel alert_channel project-kww5v8se#notice-kl66t6y9
 // ```
 type AlertChannel struct {
 	pulumi.CustomResourceState
@@ -154,7 +158,7 @@ func NewAlertChannel(ctx *pulumi.Context,
 	if args.ProjectId == nil {
 		return nil, errors.New("invalid value for required argument 'ProjectId'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource AlertChannel
 	err := ctx.RegisterResource("tencentcloud:Pts/alertChannel:AlertChannel", name, args, &resource, opts...)
 	if err != nil {
@@ -267,7 +271,7 @@ func (i *AlertChannel) ToAlertChannelOutputWithContext(ctx context.Context) Aler
 // AlertChannelArrayInput is an input type that accepts AlertChannelArray and AlertChannelArrayOutput values.
 // You can construct a concrete instance of `AlertChannelArrayInput` via:
 //
-//          AlertChannelArray{ AlertChannelArgs{...} }
+//	AlertChannelArray{ AlertChannelArgs{...} }
 type AlertChannelArrayInput interface {
 	pulumi.Input
 
@@ -292,7 +296,7 @@ func (i AlertChannelArray) ToAlertChannelArrayOutputWithContext(ctx context.Cont
 // AlertChannelMapInput is an input type that accepts AlertChannelMap and AlertChannelMapOutput values.
 // You can construct a concrete instance of `AlertChannelMapInput` via:
 //
-//          AlertChannelMap{ "key": AlertChannelArgs{...} }
+//	AlertChannelMap{ "key": AlertChannelArgs{...} }
 type AlertChannelMapInput interface {
 	pulumi.Input
 

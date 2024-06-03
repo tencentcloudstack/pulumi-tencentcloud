@@ -15,80 +15,74 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Emr
         /// <summary>
         /// Use this data source to query detailed information of emr auto_scale_records
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var autoScaleRecords = Tencentcloud.Emr.GetAutoScaleRecords.Invoke(new()
         ///     {
-        ///         var autoScaleRecords = Output.Create(Tencentcloud.Emr.GetAutoScaleRecords.InvokeAsync(new Tencentcloud.Emr.GetAutoScaleRecordsArgs
+        ///         Filters = new[]
         ///         {
-        ///             Filters = 
+        ///             new Tencentcloud.Emr.Inputs.GetAutoScaleRecordsFilterInputArgs
         ///             {
-        ///                 new Tencentcloud.Emr.Inputs.GetAutoScaleRecordsFilterArgs
-        ///                 {
-        ///                     Key = "StartTime",
-        ///                     Value = "2006-01-02 15:04:05",
-        ///                 },
+        ///                 Key = "StartTime",
+        ///                 Value = "2006-01-02 15:04:05",
         ///             },
-        ///             InstanceId = "emr-bpum4pad",
-        ///         }));
-        ///     }
+        ///         },
+        ///         InstanceId = "emr-bpum4pad",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetAutoScaleRecordsResult> InvokeAsync(GetAutoScaleRecordsArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetAutoScaleRecordsResult>("tencentcloud:Emr/getAutoScaleRecords:getAutoScaleRecords", args ?? new GetAutoScaleRecordsArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetAutoScaleRecordsResult>("tencentcloud:Emr/getAutoScaleRecords:getAutoScaleRecords", args ?? new GetAutoScaleRecordsArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of emr auto_scale_records
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var autoScaleRecords = Tencentcloud.Emr.GetAutoScaleRecords.Invoke(new()
         ///     {
-        ///         var autoScaleRecords = Output.Create(Tencentcloud.Emr.GetAutoScaleRecords.InvokeAsync(new Tencentcloud.Emr.GetAutoScaleRecordsArgs
+        ///         Filters = new[]
         ///         {
-        ///             Filters = 
+        ///             new Tencentcloud.Emr.Inputs.GetAutoScaleRecordsFilterInputArgs
         ///             {
-        ///                 new Tencentcloud.Emr.Inputs.GetAutoScaleRecordsFilterArgs
-        ///                 {
-        ///                     Key = "StartTime",
-        ///                     Value = "2006-01-02 15:04:05",
-        ///                 },
+        ///                 Key = "StartTime",
+        ///                 Value = "2006-01-02 15:04:05",
         ///             },
-        ///             InstanceId = "emr-bpum4pad",
-        ///         }));
-        ///     }
+        ///         },
+        ///         InstanceId = "emr-bpum4pad",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetAutoScaleRecordsResult> Invoke(GetAutoScaleRecordsInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetAutoScaleRecordsResult>("tencentcloud:Emr/getAutoScaleRecords:getAutoScaleRecords", args ?? new GetAutoScaleRecordsInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetAutoScaleRecordsResult>("tencentcloud:Emr/getAutoScaleRecords:getAutoScaleRecords", args ?? new GetAutoScaleRecordsInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetAutoScaleRecordsArgs : Pulumi.InvokeArgs
+    public sealed class GetAutoScaleRecordsArgs : global::Pulumi.InvokeArgs
     {
         [Input("filters")]
         private List<Inputs.GetAutoScaleRecordsFilterArgs>? _filters;
@@ -117,9 +111,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Emr
         public GetAutoScaleRecordsArgs()
         {
         }
+        public static new GetAutoScaleRecordsArgs Empty => new GetAutoScaleRecordsArgs();
     }
 
-    public sealed class GetAutoScaleRecordsInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetAutoScaleRecordsInvokeArgs : global::Pulumi.InvokeArgs
     {
         [Input("filters")]
         private InputList<Inputs.GetAutoScaleRecordsFilterInputArgs>? _filters;
@@ -148,6 +143,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Emr
         public GetAutoScaleRecordsInvokeArgs()
         {
         }
+        public static new GetAutoScaleRecordsInvokeArgs Empty => new GetAutoScaleRecordsInvokeArgs();
     }
 
 

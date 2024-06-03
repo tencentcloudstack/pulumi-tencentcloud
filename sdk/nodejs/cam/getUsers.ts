@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,31 +11,27 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * // query by name
- * const foo = pulumi.output(tencentcloud.Cam.getUsers({
+ * const foo = tencentcloud.Cam.getUsers({
  *     name: "cam-user-test",
- * }));
- * // query by email
- * const bar = pulumi.output(tencentcloud.Cam.getUsers({
+ * });
+ * const bar = tencentcloud.Cam.getUsers({
  *     email: "hello@test.com",
- * }));
- * // query by phone
- * const far = pulumi.output(tencentcloud.Cam.getUsers({
+ * });
+ * const far = tencentcloud.Cam.getUsers({
  *     phoneNum: "12345678910",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getUsers(args?: GetUsersArgs, opts?: pulumi.InvokeOptions): Promise<GetUsersResult> {
     args = args || {};
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Cam/getUsers:getUsers", {
         "consoleLogin": args.consoleLogin,
         "countryCode": args.countryCode,
@@ -133,9 +130,30 @@ export interface GetUsersResult {
      */
     readonly userLists: outputs.Cam.GetUsersUserList[];
 }
-
+/**
+ * Use this data source to query detailed information of CAM users
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const foo = tencentcloud.Cam.getUsers({
+ *     name: "cam-user-test",
+ * });
+ * const bar = tencentcloud.Cam.getUsers({
+ *     email: "hello@test.com",
+ * });
+ * const far = tencentcloud.Cam.getUsers({
+ *     phoneNum: "12345678910",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getUsersOutput(args?: GetUsersOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetUsersResult> {
-    return pulumi.output(args).apply(a => getUsers(a, opts))
+    return pulumi.output(args).apply((a: any) => getUsers(a, opts))
 }
 
 /**

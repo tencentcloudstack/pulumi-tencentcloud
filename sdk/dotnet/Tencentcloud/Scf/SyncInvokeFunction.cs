@@ -15,27 +15,28 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Scf
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var invokeFunction = new Tencentcloud.Scf.SyncInvokeFunction("invokeFunction", new()
     ///     {
-    ///         var invokeFunction = new Tencentcloud.Scf.SyncInvokeFunction("invokeFunction", new Tencentcloud.Scf.SyncInvokeFunctionArgs
-    ///         {
-    ///             FunctionName = "keep-1676351130",
-    ///             Namespace = "default",
-    ///             Qualifier = "2",
-    ///         });
-    ///     }
+    ///         FunctionName = "keep-1676351130",
+    ///         Namespace = "default",
+    ///         Qualifier = "2",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Scf/syncInvokeFunction:SyncInvokeFunction")]
-    public partial class SyncInvokeFunction : Pulumi.CustomResource
+    public partial class SyncInvokeFunction : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Function running parameter, which is in the JSON format. Maximum parameter size is 6 MB. This field corresponds to event input parameter.
@@ -118,7 +119,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Scf
         }
     }
 
-    public sealed class SyncInvokeFunctionArgs : Pulumi.ResourceArgs
+    public sealed class SyncInvokeFunctionArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Function running parameter, which is in the JSON format. Maximum parameter size is 6 MB. This field corresponds to event input parameter.
@@ -159,9 +160,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Scf
         public SyncInvokeFunctionArgs()
         {
         }
+        public static new SyncInvokeFunctionArgs Empty => new SyncInvokeFunctionArgs();
     }
 
-    public sealed class SyncInvokeFunctionState : Pulumi.ResourceArgs
+    public sealed class SyncInvokeFunctionState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Function running parameter, which is in the JSON format. Maximum parameter size is 6 MB. This field corresponds to event input parameter.
@@ -202,5 +204,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Scf
         public SyncInvokeFunctionState()
         {
         }
+        public static new SyncInvokeFunctionState Empty => new SyncInvokeFunctionState();
     }
 }

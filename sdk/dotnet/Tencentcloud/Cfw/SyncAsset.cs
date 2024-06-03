@@ -15,24 +15,23 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cfw
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
-    ///     {
-    ///         var example = new Tencentcloud.Cfw.SyncAsset("example", new Tencentcloud.Cfw.SyncAssetArgs
-    ///         {
-    ///         });
-    ///     }
+    ///     var example = new Tencentcloud.Cfw.SyncAsset("example");
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Cfw/syncAsset:SyncAsset")]
-    public partial class SyncAsset : Pulumi.CustomResource
+    public partial class SyncAsset : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Create a SyncAsset resource with the given unique name, arguments, and options.
@@ -78,17 +77,19 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cfw
         }
     }
 
-    public sealed class SyncAssetArgs : Pulumi.ResourceArgs
+    public sealed class SyncAssetArgs : global::Pulumi.ResourceArgs
     {
         public SyncAssetArgs()
         {
         }
+        public static new SyncAssetArgs Empty => new SyncAssetArgs();
     }
 
-    public sealed class SyncAssetState : Pulumi.ResourceArgs
+    public sealed class SyncAssetState : global::Pulumi.ResourceArgs
     {
         public SyncAssetState()
         {
         }
+        public static new SyncAssetState Empty => new SyncAssetState();
     }
 }

@@ -8,10 +8,11 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 func GetStatisticData(ctx *pulumi.Context, args *GetStatisticDataArgs, opts ...pulumi.InvokeOption) (*GetStatisticDataResult, error) {
-	opts = pkgInvokeDefaultOpts(opts)
+	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetStatisticDataResult
 	err := ctx.Invoke("tencentcloud:Monitor/getStatisticData:getStatisticData", args, &rv, opts...)
 	if err != nil {

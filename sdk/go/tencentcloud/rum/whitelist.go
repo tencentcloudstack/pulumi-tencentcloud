@@ -7,43 +7,49 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a rum whitelist
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Rum"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Rum"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Rum.NewWhitelist(ctx, "whitelist", &Rum.WhitelistArgs{
-// 			InstanceId:   pulumi.String("rum-pasZKEI3RLgakj"),
-// 			Remark:       pulumi.String("white list remark"),
-// 			WhitelistUin: pulumi.String("20221122"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Rum.NewWhitelist(ctx, "whitelist", &Rum.WhitelistArgs{
+//				InstanceId:   pulumi.String("rum-pasZKEI3RLgakj"),
+//				Remark:       pulumi.String("white list remark"),
+//				WhitelistUin: pulumi.String("20221122"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // rum whitelist can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Rum/whitelist:Whitelist whitelist whitelist_id
+// $ pulumi import tencentcloud:Rum/whitelist:Whitelist whitelist whitelist_id
 // ```
 type Whitelist struct {
 	pulumi.CustomResourceState
@@ -82,7 +88,7 @@ func NewWhitelist(ctx *pulumi.Context,
 	if args.WhitelistUin == nil {
 		return nil, errors.New("invalid value for required argument 'WhitelistUin'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource Whitelist
 	err := ctx.RegisterResource("tencentcloud:Rum/whitelist:Whitelist", name, args, &resource, opts...)
 	if err != nil {
@@ -195,7 +201,7 @@ func (i *Whitelist) ToWhitelistOutputWithContext(ctx context.Context) WhitelistO
 // WhitelistArrayInput is an input type that accepts WhitelistArray and WhitelistArrayOutput values.
 // You can construct a concrete instance of `WhitelistArrayInput` via:
 //
-//          WhitelistArray{ WhitelistArgs{...} }
+//	WhitelistArray{ WhitelistArgs{...} }
 type WhitelistArrayInput interface {
 	pulumi.Input
 
@@ -220,7 +226,7 @@ func (i WhitelistArray) ToWhitelistArrayOutputWithContext(ctx context.Context) W
 // WhitelistMapInput is an input type that accepts WhitelistMap and WhitelistMapOutput values.
 // You can construct a concrete instance of `WhitelistMapInput` via:
 //
-//          WhitelistMap{ "key": WhitelistArgs{...} }
+//	WhitelistMap{ "key": WhitelistArgs{...} }
 type WhitelistMapInput interface {
 	pulumi.Input
 

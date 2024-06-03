@@ -15,39 +15,40 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Css
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var timeshiftTemplate = new Tencentcloud.Css.TimeshiftTemplate("timeshiftTemplate", new()
     ///     {
-    ///         var timeshiftTemplate = new Tencentcloud.Css.TimeshiftTemplate("timeshiftTemplate", new Tencentcloud.Css.TimeshiftTemplateArgs
-    ///         {
-    ///             Area = "Mainland",
-    ///             Description = "timeshift template",
-    ///             Duration = 604800,
-    ///             ItemDuration = 5,
-    ///             RemoveWatermark = true,
-    ///             TemplateName = "tf-test",
-    ///             TranscodeTemplateIds = {},
-    ///         });
-    ///     }
+    ///         Area = "Mainland",
+    ///         Description = "timeshift template",
+    ///         Duration = 604800,
+    ///         ItemDuration = 5,
+    ///         RemoveWatermark = true,
+    ///         TemplateName = "tf-test",
+    ///         TranscodeTemplateIds = new[] {},
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// css timeshift_template can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Css/timeshiftTemplate:TimeshiftTemplate timeshift_template templateId
+    /// $ pulumi import tencentcloud:Css/timeshiftTemplate:TimeshiftTemplate timeshift_template templateId
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Css/timeshiftTemplate:TimeshiftTemplate")]
-    public partial class TimeshiftTemplate : Pulumi.CustomResource
+    public partial class TimeshiftTemplate : global::Pulumi.CustomResource
     {
         /// <summary>
         /// The region.`Mainland`: The Chinese mainland.`Overseas`: Outside the Chinese mainland.Default value: `Mainland`.
@@ -136,7 +137,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Css
         }
     }
 
-    public sealed class TimeshiftTemplateArgs : Pulumi.ResourceArgs
+    public sealed class TimeshiftTemplateArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// The region.`Mainland`: The Chinese mainland.`Overseas`: Outside the Chinese mainland.Default value: `Mainland`.
@@ -189,9 +190,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Css
         public TimeshiftTemplateArgs()
         {
         }
+        public static new TimeshiftTemplateArgs Empty => new TimeshiftTemplateArgs();
     }
 
-    public sealed class TimeshiftTemplateState : Pulumi.ResourceArgs
+    public sealed class TimeshiftTemplateState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// The region.`Mainland`: The Chinese mainland.`Overseas`: Outside the Chinese mainland.Default value: `Mainland`.
@@ -244,5 +246,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Css
         public TimeshiftTemplateState()
         {
         }
+        public static new TimeshiftTemplateState Empty => new TimeshiftTemplateState();
     }
 }

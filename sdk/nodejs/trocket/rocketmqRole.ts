@@ -9,9 +9,10 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const rocketmqInstance = new tencentcloud.trocket.RocketmqInstance("rocketmqInstance", {
  *     instanceType: "EXPERIMENT",
@@ -34,13 +35,14 @@ import * as utilities from "../utilities";
  * export const accessKey = rocketmqRole.accessKey;
  * export const secretKey = rocketmqRole.secretKey;
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * trocket rocketmq_role can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Trocket/rocketmqRole:RocketmqRole rocketmq_role instanceId#role
+ * $ pulumi import tencentcloud:Trocket/rocketmqRole:RocketmqRole rocketmq_role instanceId#role
  * ```
  */
 export class RocketmqRole extends pulumi.CustomResource {

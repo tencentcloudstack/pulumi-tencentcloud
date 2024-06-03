@@ -15,70 +15,64 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dlc
         /// <summary>
         /// Use this data source to query detailed information of dlc describe_user_info
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var describeUserInfo = Tencentcloud.Dlc.GetDescribeUserInfo.Invoke(new()
         ///     {
-        ///         var describeUserInfo = Output.Create(Tencentcloud.Dlc.GetDescribeUserInfo.InvokeAsync(new Tencentcloud.Dlc.GetDescribeUserInfoArgs
-        ///         {
-        ///             SortBy = "create-time",
-        ///             Sorting = "desc",
-        ///             Type = "Group",
-        ///             UserId = "100032772113",
-        ///         }));
-        ///     }
+        ///         SortBy = "create-time",
+        ///         Sorting = "desc",
+        ///         Type = "Group",
+        ///         UserId = "100032772113",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetDescribeUserInfoResult> InvokeAsync(GetDescribeUserInfoArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetDescribeUserInfoResult>("tencentcloud:Dlc/getDescribeUserInfo:getDescribeUserInfo", args ?? new GetDescribeUserInfoArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetDescribeUserInfoResult>("tencentcloud:Dlc/getDescribeUserInfo:getDescribeUserInfo", args ?? new GetDescribeUserInfoArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of dlc describe_user_info
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var describeUserInfo = Tencentcloud.Dlc.GetDescribeUserInfo.Invoke(new()
         ///     {
-        ///         var describeUserInfo = Output.Create(Tencentcloud.Dlc.GetDescribeUserInfo.InvokeAsync(new Tencentcloud.Dlc.GetDescribeUserInfoArgs
-        ///         {
-        ///             SortBy = "create-time",
-        ///             Sorting = "desc",
-        ///             Type = "Group",
-        ///             UserId = "100032772113",
-        ///         }));
-        ///     }
+        ///         SortBy = "create-time",
+        ///         Sorting = "desc",
+        ///         Type = "Group",
+        ///         UserId = "100032772113",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetDescribeUserInfoResult> Invoke(GetDescribeUserInfoInvokeArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetDescribeUserInfoResult>("tencentcloud:Dlc/getDescribeUserInfo:getDescribeUserInfo", args ?? new GetDescribeUserInfoInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetDescribeUserInfoResult>("tencentcloud:Dlc/getDescribeUserInfo:getDescribeUserInfo", args ?? new GetDescribeUserInfoInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetDescribeUserInfoArgs : Pulumi.InvokeArgs
+    public sealed class GetDescribeUserInfoArgs : global::Pulumi.InvokeArgs
     {
         [Input("filters")]
         private List<Inputs.GetDescribeUserInfoFilterArgs>? _filters;
@@ -125,9 +119,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dlc
         public GetDescribeUserInfoArgs()
         {
         }
+        public static new GetDescribeUserInfoArgs Empty => new GetDescribeUserInfoArgs();
     }
 
-    public sealed class GetDescribeUserInfoInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetDescribeUserInfoInvokeArgs : global::Pulumi.InvokeArgs
     {
         [Input("filters")]
         private InputList<Inputs.GetDescribeUserInfoFilterInputArgs>? _filters;
@@ -174,6 +169,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dlc
         public GetDescribeUserInfoInvokeArgs()
         {
         }
+        public static new GetDescribeUserInfoInvokeArgs Empty => new GetDescribeUserInfoInvokeArgs();
     }
 
 

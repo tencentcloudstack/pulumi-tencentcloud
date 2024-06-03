@@ -15,70 +15,74 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var config = new Config();
+    ///     var availabilityZone = config.Get("availabilityZone") ?? "ap-guangzhou-6";
+    ///     var vpc = new Tencentcloud.Vpc.Instance("vpc", new()
     ///     {
-    ///         var config = new Config();
-    ///         var availabilityZone = config.Get("availabilityZone") ?? "ap-guangzhou-6";
-    ///         var vpc = new Tencentcloud.Vpc.Instance("vpc", new Tencentcloud.Vpc.InstanceArgs
-    ///         {
-    ///             CidrBlock = "10.0.0.0/16",
-    ///         });
-    ///         var subnet = new Tencentcloud.Subnet.Instance("subnet", new Tencentcloud.Subnet.InstanceArgs
-    ///         {
-    ///             VpcId = vpc.Id,
-    ///             AvailabilityZone = availabilityZone,
-    ///             CidrBlock = "10.0.1.0/24",
-    ///         });
-    ///         var foo = new Tencentcloud.Monitor.GrafanaInstance("foo", new Tencentcloud.Monitor.GrafanaInstanceArgs
-    ///         {
-    ///             InstanceName = "test-grafana",
-    ///             VpcId = vpc.Id,
-    ///             SubnetIds = 
-    ///             {
-    ///                 subnet.Id,
-    ///             },
-    ///             GrafanaInitPassword = "1234567890",
-    ///             EnableInternet = false,
-    ///             Tags = 
-    ///             {
-    ///                 { "createdBy", "test" },
-    ///             },
-    ///         });
-    ///         var ssoAccount = new Tencentcloud.Monitor.GrafanaSsoAccount("ssoAccount", new Tencentcloud.Monitor.GrafanaSsoAccountArgs
-    ///         {
-    ///             InstanceId = foo.Id,
-    ///             UserId = "111",
-    ///             Notes = "desc12222",
-    ///             Roles = 
-    ///             {
-    ///                 new Tencentcloud.Monitor.Inputs.GrafanaSsoAccountRoleArgs
-    ///                 {
-    ///                     Organization = "Main Org.",
-    ///                     Role = "Admin",
-    ///                 },
-    ///             },
-    ///         });
-    ///     }
+    ///         CidrBlock = "10.0.0.0/16",
+    ///     });
     /// 
-    /// }
+    ///     var subnet = new Tencentcloud.Subnet.Instance("subnet", new()
+    ///     {
+    ///         VpcId = vpc.Id,
+    ///         AvailabilityZone = availabilityZone,
+    ///         CidrBlock = "10.0.1.0/24",
+    ///     });
+    /// 
+    ///     var foo = new Tencentcloud.Monitor.GrafanaInstance("foo", new()
+    ///     {
+    ///         InstanceName = "test-grafana",
+    ///         VpcId = vpc.Id,
+    ///         SubnetIds = new[]
+    ///         {
+    ///             subnet.Id,
+    ///         },
+    ///         GrafanaInitPassword = "1234567890",
+    ///         EnableInternet = false,
+    ///         Tags = 
+    ///         {
+    ///             { "createdBy", "test" },
+    ///         },
+    ///     });
+    /// 
+    ///     var ssoAccount = new Tencentcloud.Monitor.GrafanaSsoAccount("ssoAccount", new()
+    ///     {
+    ///         InstanceId = foo.Id,
+    ///         UserId = "111",
+    ///         Notes = "desc12222",
+    ///         Roles = new[]
+    ///         {
+    ///             new Tencentcloud.Monitor.Inputs.GrafanaSsoAccountRoleArgs
+    ///             {
+    ///                 Organization = "Main Org.",
+    ///                 Role = "Admin",
+    ///             },
+    ///         },
+    ///     });
+    /// 
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// monitor grafana ssoAccount can be imported using the instance_id#user_id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Monitor/grafanaSsoAccount:GrafanaSsoAccount ssoAccount grafana-50nj6v00#111
+    /// $ pulumi import tencentcloud:Monitor/grafanaSsoAccount:GrafanaSsoAccount ssoAccount grafana-50nj6v00#111
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Monitor/grafanaSsoAccount:GrafanaSsoAccount")]
-    public partial class GrafanaSsoAccount : Pulumi.CustomResource
+    public partial class GrafanaSsoAccount : global::Pulumi.CustomResource
     {
         /// <summary>
         /// grafana instance id.
@@ -149,7 +153,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
         }
     }
 
-    public sealed class GrafanaSsoAccountArgs : Pulumi.ResourceArgs
+    public sealed class GrafanaSsoAccountArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// grafana instance id.
@@ -184,9 +188,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
         public GrafanaSsoAccountArgs()
         {
         }
+        public static new GrafanaSsoAccountArgs Empty => new GrafanaSsoAccountArgs();
     }
 
-    public sealed class GrafanaSsoAccountState : Pulumi.ResourceArgs
+    public sealed class GrafanaSsoAccountState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// grafana instance id.
@@ -221,5 +226,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
         public GrafanaSsoAccountState()
         {
         }
+        public static new GrafanaSsoAccountState Empty => new GrafanaSsoAccountState();
     }
 }

@@ -8,43 +8,49 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a wedata script
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Wedata"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Wedata"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Wedata.NewScript(ctx, "example", &Wedata.ScriptArgs{
-// 			BucketName:        pulumi.String("wedata-demo-1257305158"),
-// 			FileExtensionType: pulumi.String("sql"),
-// 			FilePath:          pulumi.String("/datastudio/project/tf_example.sql"),
-// 			ProjectId:         pulumi.String("1470575647377821696"),
-// 			Region:            pulumi.String("ap-guangzhou"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Wedata.NewScript(ctx, "example", &Wedata.ScriptArgs{
+//				BucketName:        pulumi.String("wedata-demo-1257305158"),
+//				FileExtensionType: pulumi.String("sql"),
+//				FilePath:          pulumi.String("/datastudio/project/tf_example.sql"),
+//				ProjectId:         pulumi.String("1470575647377821696"),
+//				Region:            pulumi.String("ap-guangzhou"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // wedata script can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Wedata/script:Script example 1470575647377821696#/datastudio/project/tf_example.sql#4147824b-7ba2-432b-8a8b-7e747594c926
+// $ pulumi import tencentcloud:Wedata/script:Script example 1470575647377821696#/datastudio/project/tf_example.sql#4147824b-7ba2-432b-8a8b-7e747594c926
 // ```
 type Script struct {
 	pulumi.CustomResourceState
@@ -70,7 +76,7 @@ func NewScript(ctx *pulumi.Context,
 		args = &ScriptArgs{}
 	}
 
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource Script
 	err := ctx.RegisterResource("tencentcloud:Wedata/script:Script", name, args, &resource, opts...)
 	if err != nil {
@@ -179,7 +185,7 @@ func (i *Script) ToScriptOutputWithContext(ctx context.Context) ScriptOutput {
 // ScriptArrayInput is an input type that accepts ScriptArray and ScriptArrayOutput values.
 // You can construct a concrete instance of `ScriptArrayInput` via:
 //
-//          ScriptArray{ ScriptArgs{...} }
+//	ScriptArray{ ScriptArgs{...} }
 type ScriptArrayInput interface {
 	pulumi.Input
 
@@ -204,7 +210,7 @@ func (i ScriptArray) ToScriptArrayOutputWithContext(ctx context.Context) ScriptA
 // ScriptMapInput is an input type that accepts ScriptMap and ScriptMapOutput values.
 // You can construct a concrete instance of `ScriptMapInput` via:
 //
-//          ScriptMap{ "key": ScriptArgs{...} }
+//	ScriptMap{ "key": ScriptArgs{...} }
 type ScriptMapInput interface {
 	pulumi.Input
 

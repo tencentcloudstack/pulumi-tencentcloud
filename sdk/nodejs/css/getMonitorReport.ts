@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,21 +11,20 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const monitorReport = pulumi.output(tencentcloud.Css.getMonitorReport({
+ * const monitorReport = tencentcloud.Css.getMonitorReport({
  *     monitorId: "0e8a12b5-df2a-4a1b-aa98-97d5610aa142",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getMonitorReport(args: GetMonitorReportArgs, opts?: pulumi.InvokeOptions): Promise<GetMonitorReportResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Css/getMonitorReport:getMonitorReport", {
         "monitorId": args.monitorId,
         "resultOutputFile": args.resultOutputFile,
@@ -64,9 +64,24 @@ export interface GetMonitorReportResult {
     readonly mpsResults: outputs.Css.GetMonitorReportMpsResult[];
     readonly resultOutputFile?: string;
 }
-
+/**
+ * Use this data source to query detailed information of css monitorReport
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const monitorReport = tencentcloud.Css.getMonitorReport({
+ *     monitorId: "0e8a12b5-df2a-4a1b-aa98-97d5610aa142",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getMonitorReportOutput(args: GetMonitorReportOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetMonitorReportResult> {
-    return pulumi.output(args).apply(a => getMonitorReport(a, opts))
+    return pulumi.output(args).apply((a: any) => getMonitorReport(a, opts))
 }
 
 /**

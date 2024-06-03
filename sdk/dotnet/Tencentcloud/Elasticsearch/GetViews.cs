@@ -15,64 +15,58 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Elasticsearch
         /// <summary>
         /// Use this data source to query detailed information of elasticsearch views
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var views = Tencentcloud.Elasticsearch.GetViews.Invoke(new()
         ///     {
-        ///         var views = Output.Create(Tencentcloud.Elasticsearch.GetViews.InvokeAsync(new Tencentcloud.Elasticsearch.GetViewsArgs
-        ///         {
-        ///             InstanceId = "es-xxxxxx",
-        ///         }));
-        ///     }
+        ///         InstanceId = "es-xxxxxx",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetViewsResult> InvokeAsync(GetViewsArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetViewsResult>("tencentcloud:Elasticsearch/getViews:getViews", args ?? new GetViewsArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetViewsResult>("tencentcloud:Elasticsearch/getViews:getViews", args ?? new GetViewsArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of elasticsearch views
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var views = Tencentcloud.Elasticsearch.GetViews.Invoke(new()
         ///     {
-        ///         var views = Output.Create(Tencentcloud.Elasticsearch.GetViews.InvokeAsync(new Tencentcloud.Elasticsearch.GetViewsArgs
-        ///         {
-        ///             InstanceId = "es-xxxxxx",
-        ///         }));
-        ///     }
+        ///         InstanceId = "es-xxxxxx",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetViewsResult> Invoke(GetViewsInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetViewsResult>("tencentcloud:Elasticsearch/getViews:getViews", args ?? new GetViewsInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetViewsResult>("tencentcloud:Elasticsearch/getViews:getViews", args ?? new GetViewsInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetViewsArgs : Pulumi.InvokeArgs
+    public sealed class GetViewsArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Instance id.
@@ -89,9 +83,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Elasticsearch
         public GetViewsArgs()
         {
         }
+        public static new GetViewsArgs Empty => new GetViewsArgs();
     }
 
-    public sealed class GetViewsInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetViewsInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Instance id.
@@ -108,6 +103,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Elasticsearch
         public GetViewsInvokeArgs()
         {
         }
+        public static new GetViewsInvokeArgs Empty => new GetViewsInvokeArgs();
     }
 
 

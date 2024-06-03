@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,26 +11,25 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const images = pulumi.output(tencentcloud.Tcr.getImages({
+ * const images = tencentcloud.Tcr.getImages({
  *     digest: "sha256:xxxxx",
  *     exactMatch: false,
  *     imageVersion: "v1",
  *     namespaceName: "ns",
  *     registryId: "tcr-xxx",
  *     repositoryName: "repo",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getImages(args: GetImagesArgs, opts?: pulumi.InvokeOptions): Promise<GetImagesResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Tcr/getImages:getImages", {
         "digest": args.digest,
         "exactMatch": args.exactMatch,
@@ -101,9 +101,29 @@ export interface GetImagesResult {
     readonly repositoryName: string;
     readonly resultOutputFile?: string;
 }
-
+/**
+ * Use this data source to query detailed information of tcr images
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const images = tencentcloud.Tcr.getImages({
+ *     digest: "sha256:xxxxx",
+ *     exactMatch: false,
+ *     imageVersion: "v1",
+ *     namespaceName: "ns",
+ *     registryId: "tcr-xxx",
+ *     repositoryName: "repo",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getImagesOutput(args: GetImagesOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetImagesResult> {
-    return pulumi.output(args).apply(a => getImages(a, opts))
+    return pulumi.output(args).apply((a: any) => getImages(a, opts))
 }
 
 /**

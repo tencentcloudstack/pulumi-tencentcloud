@@ -9,15 +9,17 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const domainLock = new tencentcloud.Dnspod.DomainLock("domain_lock", {
+ * const domainLock = new tencentcloud.dnspod.DomainLock("domainLock", {
  *     domain: "dnspod.cn",
  *     lockDays: 30,
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export class DomainLock extends pulumi.CustomResource {
     /**

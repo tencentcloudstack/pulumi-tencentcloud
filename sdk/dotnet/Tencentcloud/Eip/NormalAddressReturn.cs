@@ -15,25 +15,29 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Eip
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var normalAddressReturn = new Tencentcloud.Eip.NormalAddressReturn("normalAddressReturn", new()
     ///     {
-    ///         var normalAddressReturn = new Tencentcloud.Eip.NormalAddressReturn("normalAddressReturn", new Tencentcloud.Eip.NormalAddressReturnArgs
+    ///         AddressIps = new[]
     ///         {
-    ///             AddressIps = "",
-    ///         });
-    ///     }
+    ///             "172.16.17.32",
+    ///         },
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Eip/normalAddressReturn:NormalAddressReturn")]
-    public partial class NormalAddressReturn : Pulumi.CustomResource
+    public partial class NormalAddressReturn : global::Pulumi.CustomResource
     {
         /// <summary>
         /// The IP address of the EIP, example: 101.35.139.183.
@@ -86,7 +90,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Eip
         }
     }
 
-    public sealed class NormalAddressReturnArgs : Pulumi.ResourceArgs
+    public sealed class NormalAddressReturnArgs : global::Pulumi.ResourceArgs
     {
         [Input("addressIps")]
         private InputList<string>? _addressIps;
@@ -103,9 +107,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Eip
         public NormalAddressReturnArgs()
         {
         }
+        public static new NormalAddressReturnArgs Empty => new NormalAddressReturnArgs();
     }
 
-    public sealed class NormalAddressReturnState : Pulumi.ResourceArgs
+    public sealed class NormalAddressReturnState : global::Pulumi.ResourceArgs
     {
         [Input("addressIps")]
         private InputList<string>? _addressIps;
@@ -122,5 +127,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Eip
         public NormalAddressReturnState()
         {
         }
+        public static new NormalAddressReturnState Empty => new NormalAddressReturnState();
     }
 }

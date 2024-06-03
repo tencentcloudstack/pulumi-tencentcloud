@@ -7,80 +7,85 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a dcdb dbInstance
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Dcdb"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dcdb"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dcdb"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Dcdb.NewDbInstance(ctx, "dbInstance", &Dcdb.DbInstanceArgs{
-// 			InstanceName: pulumi.String("test_dcdb_db_instance"),
-// 			Zones: pulumi.StringArray{
-// 				pulumi.String("ap-guangzhou-5"),
-// 			},
-// 			Period:         pulumi.Int(1),
-// 			ShardMemory:    pulumi.Int(2),
-// 			ShardStorage:   pulumi.Int(10),
-// 			ShardNodeCount: pulumi.Int(2),
-// 			ShardCount:     pulumi.Int(2),
-// 			VpcId:          pulumi.Any(local.Vpc_id),
-// 			SubnetId:       pulumi.Any(local.Subnet_id),
-// 			DbVersionId:    pulumi.String("8.0"),
-// 			ResourceTags: dcdb.DbInstanceResourceTagArray{
-// 				&dcdb.DbInstanceResourceTagArgs{
-// 					TagKey:   pulumi.String("aaa"),
-// 					TagValue: pulumi.String("bbb"),
-// 				},
-// 			},
-// 			InitParams: dcdb.DbInstanceInitParamArray{
-// 				&dcdb.DbInstanceInitParamArgs{
-// 					Param: pulumi.String("character_set_server"),
-// 					Value: pulumi.String("utf8mb4"),
-// 				},
-// 				&dcdb.DbInstanceInitParamArgs{
-// 					Param: pulumi.String("lower_case_table_names"),
-// 					Value: pulumi.String("1"),
-// 				},
-// 				&dcdb.DbInstanceInitParamArgs{
-// 					Param: pulumi.String("sync_mode"),
-// 					Value: pulumi.String("2"),
-// 				},
-// 				&dcdb.DbInstanceInitParamArgs{
-// 					Param: pulumi.String("innodb_page_size"),
-// 					Value: pulumi.String("16384"),
-// 				},
-// 			},
-// 			SecurityGroupIds: pulumi.StringArray{
-// 				pulumi.Any(local.Sg_id),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Dcdb.NewDbInstance(ctx, "dbInstance", &Dcdb.DbInstanceArgs{
+//				InstanceName: pulumi.String("test_dcdb_db_instance"),
+//				Zones: pulumi.StringArray{
+//					pulumi.String("ap-guangzhou-5"),
+//				},
+//				Period:         pulumi.Int(1),
+//				ShardMemory:    pulumi.Int(2),
+//				ShardStorage:   pulumi.Int(10),
+//				ShardNodeCount: pulumi.Int(2),
+//				ShardCount:     pulumi.Int(2),
+//				VpcId:          pulumi.Any(local.Vpc_id),
+//				SubnetId:       pulumi.Any(local.Subnet_id),
+//				DbVersionId:    pulumi.String("8.0"),
+//				ResourceTags: dcdb.DbInstanceResourceTagArray{
+//					&dcdb.DbInstanceResourceTagArgs{
+//						TagKey:   pulumi.String("aaa"),
+//						TagValue: pulumi.String("bbb"),
+//					},
+//				},
+//				InitParams: dcdb.DbInstanceInitParamArray{
+//					&dcdb.DbInstanceInitParamArgs{
+//						Param: pulumi.String("character_set_server"),
+//						Value: pulumi.String("utf8mb4"),
+//					},
+//					&dcdb.DbInstanceInitParamArgs{
+//						Param: pulumi.String("lower_case_table_names"),
+//						Value: pulumi.String("1"),
+//					},
+//					&dcdb.DbInstanceInitParamArgs{
+//						Param: pulumi.String("sync_mode"),
+//						Value: pulumi.String("2"),
+//					},
+//					&dcdb.DbInstanceInitParamArgs{
+//						Param: pulumi.String("innodb_page_size"),
+//						Value: pulumi.String("16384"),
+//					},
+//				},
+//				SecurityGroupIds: pulumi.StringArray{
+//					local.Sg_id,
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // dcdb db_instance can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Dcdb/dbInstance:DbInstance db_instance db_instance_id
+// $ pulumi import tencentcloud:Dcdb/dbInstance:DbInstance db_instance db_instance_id
 // ```
 type DbInstance struct {
 	pulumi.CustomResourceState
@@ -160,7 +165,7 @@ func NewDbInstance(ctx *pulumi.Context,
 	if args.Zones == nil {
 		return nil, errors.New("invalid value for required argument 'Zones'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource DbInstance
 	err := ctx.RegisterResource("tencentcloud:Dcdb/dbInstance:DbInstance", name, args, &resource, opts...)
 	if err != nil {
@@ -413,7 +418,7 @@ func (i *DbInstance) ToDbInstanceOutputWithContext(ctx context.Context) DbInstan
 // DbInstanceArrayInput is an input type that accepts DbInstanceArray and DbInstanceArrayOutput values.
 // You can construct a concrete instance of `DbInstanceArrayInput` via:
 //
-//          DbInstanceArray{ DbInstanceArgs{...} }
+//	DbInstanceArray{ DbInstanceArgs{...} }
 type DbInstanceArrayInput interface {
 	pulumi.Input
 
@@ -438,7 +443,7 @@ func (i DbInstanceArray) ToDbInstanceArrayOutputWithContext(ctx context.Context)
 // DbInstanceMapInput is an input type that accepts DbInstanceMap and DbInstanceMapOutput values.
 // You can construct a concrete instance of `DbInstanceMapInput` via:
 //
-//          DbInstanceMap{ "key": DbInstanceArgs{...} }
+//	DbInstanceMap{ "key": DbInstanceArgs{...} }
 type DbInstanceMapInput interface {
 	pulumi.Input
 

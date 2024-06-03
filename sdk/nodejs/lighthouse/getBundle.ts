@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,20 +11,19 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const bundle = pulumi.output(tencentcloud.Lighthouse.getBundle());
+ * const bundle = tencentcloud.Lighthouse.getBundle({});
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getBundle(args?: GetBundleArgs, opts?: pulumi.InvokeOptions): Promise<GetBundleResult> {
     args = args || {};
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Lighthouse/getBundle:getBundle", {
         "bundleIds": args.bundleIds,
         "filters": args.filters,
@@ -88,9 +88,22 @@ export interface GetBundleResult {
     readonly resultOutputFile?: string;
     readonly zones?: string[];
 }
-
+/**
+ * Use this data source to query detailed information of lighthouse bundle
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const bundle = tencentcloud.Lighthouse.getBundle({});
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getBundleOutput(args?: GetBundleOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetBundleResult> {
-    return pulumi.output(args).apply(a => getBundle(a, opts))
+    return pulumi.output(args).apply((a: any) => getBundle(a, opts))
 }
 
 /**

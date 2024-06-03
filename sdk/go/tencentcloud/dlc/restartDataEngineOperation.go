@@ -7,35 +7,41 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a dlc restartDataEngine
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dlc"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dlc"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Dlc.NewRestartDataEngineOperation(ctx, "restartDataEngine", &Dlc.RestartDataEngineOperationArgs{
-// 			DataEngineId:    pulumi.String("DataEngine-g5ds87d8"),
-// 			ForcedOperation: pulumi.Bool(false),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Dlc.NewRestartDataEngineOperation(ctx, "restartDataEngine", &Dlc.RestartDataEngineOperationArgs{
+//				DataEngineId:    pulumi.String("DataEngine-g5ds87d8"),
+//				ForcedOperation: pulumi.Bool(false),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 type RestartDataEngineOperation struct {
 	pulumi.CustomResourceState
 
@@ -55,7 +61,7 @@ func NewRestartDataEngineOperation(ctx *pulumi.Context,
 	if args.DataEngineId == nil {
 		return nil, errors.New("invalid value for required argument 'DataEngineId'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource RestartDataEngineOperation
 	err := ctx.RegisterResource("tencentcloud:Dlc/restartDataEngineOperation:RestartDataEngineOperation", name, args, &resource, opts...)
 	if err != nil {
@@ -136,7 +142,7 @@ func (i *RestartDataEngineOperation) ToRestartDataEngineOperationOutputWithConte
 // RestartDataEngineOperationArrayInput is an input type that accepts RestartDataEngineOperationArray and RestartDataEngineOperationArrayOutput values.
 // You can construct a concrete instance of `RestartDataEngineOperationArrayInput` via:
 //
-//          RestartDataEngineOperationArray{ RestartDataEngineOperationArgs{...} }
+//	RestartDataEngineOperationArray{ RestartDataEngineOperationArgs{...} }
 type RestartDataEngineOperationArrayInput interface {
 	pulumi.Input
 
@@ -161,7 +167,7 @@ func (i RestartDataEngineOperationArray) ToRestartDataEngineOperationArrayOutput
 // RestartDataEngineOperationMapInput is an input type that accepts RestartDataEngineOperationMap and RestartDataEngineOperationMapOutput values.
 // You can construct a concrete instance of `RestartDataEngineOperationMapInput` via:
 //
-//          RestartDataEngineOperationMap{ "key": RestartDataEngineOperationArgs{...} }
+//	RestartDataEngineOperationMap{ "key": RestartDataEngineOperationArgs{...} }
 type RestartDataEngineOperationMapInput interface {
 	pulumi.Input
 

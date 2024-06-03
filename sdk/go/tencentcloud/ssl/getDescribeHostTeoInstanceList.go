@@ -8,36 +8,41 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Use this data source to query detailed information of ssl describeHostTeoInstanceList
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Ssl"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ssl"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ssl"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Ssl.GetDescribeHostTeoInstanceList(ctx, &ssl.GetDescribeHostTeoInstanceListArgs{
-// 			CertificateId: "8u8DII0l",
-// 			ResourceType:  "teo",
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Ssl.GetDescribeHostTeoInstanceList(ctx, &ssl.GetDescribeHostTeoInstanceListArgs{
+//				CertificateId: "8u8DII0l",
+//				ResourceType:  "teo",
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 func GetDescribeHostTeoInstanceList(ctx *pulumi.Context, args *GetDescribeHostTeoInstanceListArgs, opts ...pulumi.InvokeOption) (*GetDescribeHostTeoInstanceListResult, error) {
-	opts = pkgInvokeDefaultOpts(opts)
+	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetDescribeHostTeoInstanceListResult
 	err := ctx.Invoke("tencentcloud:Ssl/getDescribeHostTeoInstanceList:getDescribeHostTeoInstanceList", args, &rv, opts...)
 	if err != nil {

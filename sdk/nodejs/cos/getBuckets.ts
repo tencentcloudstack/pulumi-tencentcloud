@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,23 +11,22 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const cosBuckets = pulumi.output(tencentcloud.Cos.getBuckets({
+ * const cosBuckets = tencentcloud.Cos.getBuckets({
  *     bucketPrefix: "tf-bucket-",
  *     resultOutputFile: "mytestpath",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getBuckets(args?: GetBucketsArgs, opts?: pulumi.InvokeOptions): Promise<GetBucketsResult> {
     args = args || {};
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Cos/getBuckets:getBuckets", {
         "bucketPrefix": args.bucketPrefix,
         "resultOutputFile": args.resultOutputFile,
@@ -71,9 +71,25 @@ export interface GetBucketsResult {
      */
     readonly tags?: {[key: string]: any};
 }
-
+/**
+ * Use this data source to query the COS buckets of the current Tencent Cloud user.
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const cosBuckets = tencentcloud.Cos.getBuckets({
+ *     bucketPrefix: "tf-bucket-",
+ *     resultOutputFile: "mytestpath",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getBucketsOutput(args?: GetBucketsOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetBucketsResult> {
-    return pulumi.output(args).apply(a => getBuckets(a, opts))
+    return pulumi.output(args).apply((a: any) => getBuckets(a, opts))
 }
 
 /**

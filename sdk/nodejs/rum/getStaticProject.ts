@@ -9,24 +9,23 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const staticProject = pulumi.output(tencentcloud.Rum.getStaticProject({
+ * const staticProject = tencentcloud.Rum.getStaticProject({
  *     endTime: 1625454840,
  *     projectId: 1,
  *     startTime: 1625444040,
  *     type: "allcount",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getStaticProject(args: GetStaticProjectArgs, opts?: pulumi.InvokeOptions): Promise<GetStaticProjectResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Rum/getStaticProject:getStaticProject", {
         "area": args.area,
         "brand": args.brand,
@@ -194,9 +193,27 @@ export interface GetStaticProjectResult {
     readonly url?: string;
     readonly versionNum?: string;
 }
-
+/**
+ * Use this data source to query detailed information of rum staticProject
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const staticProject = tencentcloud.Rum.getStaticProject({
+ *     endTime: 1625454840,
+ *     projectId: 1,
+ *     startTime: 1625444040,
+ *     type: "allcount",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getStaticProjectOutput(args: GetStaticProjectOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetStaticProjectResult> {
-    return pulumi.output(args).apply(a => getStaticProject(a, opts))
+    return pulumi.output(args).apply((a: any) => getStaticProject(a, opts))
 }
 
 /**

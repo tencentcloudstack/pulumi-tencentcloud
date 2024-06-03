@@ -9,15 +9,17 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const stopLogstashPipelineOperation = new tencentcloud.Elasticsearch.StopLogstashPipelineOperation("stop_logstash_pipeline_operation", {
+ * const stopLogstashPipelineOperation = new tencentcloud.elasticsearch.StopLogstashPipelineOperation("stopLogstashPipelineOperation", {
  *     instanceId: "ls-xxxxxx",
  *     pipelineId: "xxxxxx",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export class StopLogstashPipelineOperation extends pulumi.CustomResource {
     /**

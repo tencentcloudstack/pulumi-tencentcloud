@@ -9,24 +9,23 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const customUrl = pulumi.output(tencentcloud.Rum.getCustomUrl({
+ * const customUrl = tencentcloud.Rum.getCustomUrl({
  *     endTime: 1625454840,
  *     projectId: 1,
  *     startTime: 1625444040,
  *     type: "top",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getCustomUrl(args: GetCustomUrlArgs, opts?: pulumi.InvokeOptions): Promise<GetCustomUrlResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Rum/getCustomUrl:getCustomUrl", {
         "area": args.area,
         "brand": args.brand,
@@ -194,9 +193,27 @@ export interface GetCustomUrlResult {
     readonly url?: string;
     readonly versionNum?: string;
 }
-
+/**
+ * Use this data source to query detailed information of rum customUrl
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const customUrl = tencentcloud.Rum.getCustomUrl({
+ *     endTime: 1625454840,
+ *     projectId: 1,
+ *     startTime: 1625444040,
+ *     type: "top",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getCustomUrlOutput(args: GetCustomUrlOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetCustomUrlResult> {
-    return pulumi.output(args).apply(a => getCustomUrl(a, opts))
+    return pulumi.output(args).apply((a: any) => getCustomUrl(a, opts))
 }
 
 /**

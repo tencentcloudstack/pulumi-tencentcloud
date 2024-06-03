@@ -7,8 +7,9 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a waf clb instance
@@ -16,88 +17,106 @@ import (
 // > **NOTE:** Region only supports `ap-guangzhou` and `ap-seoul`.
 //
 // ## Example Usage
+//
 // ### Create a basic waf premium clb instance
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Waf"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Waf"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Waf.NewClbInstance(ctx, "example", &Waf.ClbInstanceArgs{
-// 			GoodsCategory: pulumi.String("premium_clb"),
-// 			InstanceName:  pulumi.String("tf-example-clb-waf"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Waf.NewClbInstance(ctx, "example", &Waf.ClbInstanceArgs{
+//				GoodsCategory: pulumi.String("premium_clb"),
+//				InstanceName:  pulumi.String("tf-example-clb-waf"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
+//
 // ### Create a complete waf ultimateClb instance
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Waf"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Waf"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Waf.NewClbInstance(ctx, "example", &Waf.ClbInstanceArgs{
-// 			ApiSecurity:   pulumi.Int(1),
-// 			AutoRenewFlag: pulumi.Int(1),
-// 			BotManagement: pulumi.Int(1),
-// 			ElasticMode:   pulumi.Int(1),
-// 			GoodsCategory: pulumi.String("ultimate_clb"),
-// 			InstanceName:  pulumi.String("tf-example-clb-waf"),
-// 			TimeSpan:      pulumi.Int(1),
-// 			TimeUnit:      pulumi.String("m"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Waf.NewClbInstance(ctx, "example", &Waf.ClbInstanceArgs{
+//				ApiSecurity:   pulumi.Int(1),
+//				AutoRenewFlag: pulumi.Int(1),
+//				BotManagement: pulumi.Int(1),
+//				ElasticMode:   pulumi.Int(1),
+//				GoodsCategory: pulumi.String("ultimate_clb"),
+//				InstanceName:  pulumi.String("tf-example-clb-waf"),
+//				TimeSpan:      pulumi.Int(1),
+//				TimeUnit:      pulumi.String("m"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
+//
 // ### Set waf ultimateClb instance qps limit
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Waf"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Waf"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Waf.NewClbInstance(ctx, "example", &Waf.ClbInstanceArgs{
-// 			ApiSecurity:   pulumi.Int(1),
-// 			AutoRenewFlag: pulumi.Int(1),
-// 			BotManagement: pulumi.Int(1),
-// 			ElasticMode:   pulumi.Int(1),
-// 			GoodsCategory: pulumi.String("ultimate_clb"),
-// 			InstanceName:  pulumi.String("tf-example-clb-waf"),
-// 			QpsLimit:      pulumi.Int(200000),
-// 			TimeSpan:      pulumi.Int(1),
-// 			TimeUnit:      pulumi.String("m"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Waf.NewClbInstance(ctx, "example", &Waf.ClbInstanceArgs{
+//				ApiSecurity:   pulumi.Int(1),
+//				AutoRenewFlag: pulumi.Int(1),
+//				BotManagement: pulumi.Int(1),
+//				ElasticMode:   pulumi.Int(1),
+//				GoodsCategory: pulumi.String("ultimate_clb"),
+//				InstanceName:  pulumi.String("tf-example-clb-waf"),
+//				QpsLimit:      pulumi.Int(200000),
+//				TimeSpan:      pulumi.Int(1),
+//				TimeUnit:      pulumi.String("m"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 type ClbInstance struct {
 	pulumi.CustomResourceState
 
@@ -141,7 +160,7 @@ func NewClbInstance(ctx *pulumi.Context,
 	if args.GoodsCategory == nil {
 		return nil, errors.New("invalid value for required argument 'GoodsCategory'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource ClbInstance
 	err := ctx.RegisterResource("tencentcloud:Waf/clbInstance:ClbInstance", name, args, &resource, opts...)
 	if err != nil {
@@ -298,7 +317,7 @@ func (i *ClbInstance) ToClbInstanceOutputWithContext(ctx context.Context) ClbIns
 // ClbInstanceArrayInput is an input type that accepts ClbInstanceArray and ClbInstanceArrayOutput values.
 // You can construct a concrete instance of `ClbInstanceArrayInput` via:
 //
-//          ClbInstanceArray{ ClbInstanceArgs{...} }
+//	ClbInstanceArray{ ClbInstanceArgs{...} }
 type ClbInstanceArrayInput interface {
 	pulumi.Input
 
@@ -323,7 +342,7 @@ func (i ClbInstanceArray) ToClbInstanceArrayOutputWithContext(ctx context.Contex
 // ClbInstanceMapInput is an input type that accepts ClbInstanceMap and ClbInstanceMapOutput values.
 // You can construct a concrete instance of `ClbInstanceMapInput` via:
 //
-//          ClbInstanceMap{ "key": ClbInstanceArgs{...} }
+//	ClbInstanceMap{ "key": ClbInstanceArgs{...} }
 type ClbInstanceMapInput interface {
 	pulumi.Input
 

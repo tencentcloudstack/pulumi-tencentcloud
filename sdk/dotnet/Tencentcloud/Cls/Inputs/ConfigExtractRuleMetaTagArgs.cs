@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls.Inputs
 {
 
-    public sealed class ConfigExtractRuleMetaTagArgs : Pulumi.ResourceArgs
+    public sealed class ConfigExtractRuleMetaTagArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// tag key.
@@ -28,5 +28,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls.Inputs
         public ConfigExtractRuleMetaTagArgs()
         {
         }
+        public static new ConfigExtractRuleMetaTagArgs Empty => new ConfigExtractRuleMetaTagArgs();
     }
 }

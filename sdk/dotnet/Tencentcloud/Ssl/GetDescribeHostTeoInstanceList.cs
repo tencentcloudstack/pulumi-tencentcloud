@@ -15,66 +15,60 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssl
         /// <summary>
         /// Use this data source to query detailed information of ssl describe_host_teo_instance_list
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var describeHostTeoInstanceList = Tencentcloud.Ssl.GetDescribeHostTeoInstanceList.Invoke(new()
         ///     {
-        ///         var describeHostTeoInstanceList = Output.Create(Tencentcloud.Ssl.GetDescribeHostTeoInstanceList.InvokeAsync(new Tencentcloud.Ssl.GetDescribeHostTeoInstanceListArgs
-        ///         {
-        ///             CertificateId = "8u8DII0l",
-        ///             ResourceType = "teo",
-        ///         }));
-        ///     }
+        ///         CertificateId = "8u8DII0l",
+        ///         ResourceType = "teo",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetDescribeHostTeoInstanceListResult> InvokeAsync(GetDescribeHostTeoInstanceListArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetDescribeHostTeoInstanceListResult>("tencentcloud:Ssl/getDescribeHostTeoInstanceList:getDescribeHostTeoInstanceList", args ?? new GetDescribeHostTeoInstanceListArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetDescribeHostTeoInstanceListResult>("tencentcloud:Ssl/getDescribeHostTeoInstanceList:getDescribeHostTeoInstanceList", args ?? new GetDescribeHostTeoInstanceListArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of ssl describe_host_teo_instance_list
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var describeHostTeoInstanceList = Tencentcloud.Ssl.GetDescribeHostTeoInstanceList.Invoke(new()
         ///     {
-        ///         var describeHostTeoInstanceList = Output.Create(Tencentcloud.Ssl.GetDescribeHostTeoInstanceList.InvokeAsync(new Tencentcloud.Ssl.GetDescribeHostTeoInstanceListArgs
-        ///         {
-        ///             CertificateId = "8u8DII0l",
-        ///             ResourceType = "teo",
-        ///         }));
-        ///     }
+        ///         CertificateId = "8u8DII0l",
+        ///         ResourceType = "teo",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetDescribeHostTeoInstanceListResult> Invoke(GetDescribeHostTeoInstanceListInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetDescribeHostTeoInstanceListResult>("tencentcloud:Ssl/getDescribeHostTeoInstanceList:getDescribeHostTeoInstanceList", args ?? new GetDescribeHostTeoInstanceListInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetDescribeHostTeoInstanceListResult>("tencentcloud:Ssl/getDescribeHostTeoInstanceList:getDescribeHostTeoInstanceList", args ?? new GetDescribeHostTeoInstanceListInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetDescribeHostTeoInstanceListArgs : Pulumi.InvokeArgs
+    public sealed class GetDescribeHostTeoInstanceListArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Certificate ID to be deployed.
@@ -121,9 +115,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssl
         public GetDescribeHostTeoInstanceListArgs()
         {
         }
+        public static new GetDescribeHostTeoInstanceListArgs Empty => new GetDescribeHostTeoInstanceListArgs();
     }
 
-    public sealed class GetDescribeHostTeoInstanceListInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetDescribeHostTeoInstanceListInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Certificate ID to be deployed.
@@ -170,6 +165,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssl
         public GetDescribeHostTeoInstanceListInvokeArgs()
         {
         }
+        public static new GetDescribeHostTeoInstanceListInvokeArgs Empty => new GetDescribeHostTeoInstanceListInvokeArgs();
     }
 
 

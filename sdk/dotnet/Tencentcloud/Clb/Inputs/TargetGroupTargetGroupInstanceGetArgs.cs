@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb.Inputs
 {
 
-    public sealed class TargetGroupTargetGroupInstanceGetArgs : Pulumi.ResourceArgs
+    public sealed class TargetGroupTargetGroupInstanceGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// The internal ip of target group instance.
@@ -40,5 +40,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb.Inputs
         public TargetGroupTargetGroupInstanceGetArgs()
         {
         }
+        public static new TargetGroupTargetGroupInstanceGetArgs Empty => new TargetGroupTargetGroupInstanceGetArgs();
     }
 }

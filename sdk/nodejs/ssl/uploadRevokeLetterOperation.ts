@@ -9,23 +9,25 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
- * import * from "fs";
+ * import * as fs from "fs";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const uploadRevokeLetter = new tencentcloud.ssl.UploadRevokeLetterOperation("uploadRevokeLetter", {
  *     certificateId: "8xRYdDlc",
- *     revokeLetter: Buffer.from(fs.readFileSync("./c.pdf"), 'binary').toString('base64'),
+ *     revokeLetter: fs.readFileSync("./c.pdf", { encoding: "base64" }),
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * ssl upload_revoke_letter can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Ssl/uploadRevokeLetterOperation:UploadRevokeLetterOperation upload_revoke_letter upload_revoke_letter_id
+ * $ pulumi import tencentcloud:Ssl/uploadRevokeLetterOperation:UploadRevokeLetterOperation upload_revoke_letter upload_revoke_letter_id
  * ```
  */
 export class UploadRevokeLetterOperation extends pulumi.CustomResource {

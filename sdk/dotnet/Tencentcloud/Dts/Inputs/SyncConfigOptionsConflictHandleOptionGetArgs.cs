@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dts.Inputs
 {
 
-    public sealed class SyncConfigOptionsConflictHandleOptionGetArgs : Pulumi.ResourceArgs
+    public sealed class SyncConfigOptionsConflictHandleOptionGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Columns covered by the condition. Note: This field may return null, indicating that no valid value can be obtained.
@@ -34,5 +34,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dts.Inputs
         public SyncConfigOptionsConflictHandleOptionGetArgs()
         {
         }
+        public static new SyncConfigOptionsConflictHandleOptionGetArgs Empty => new SyncConfigOptionsConflictHandleOptionGetArgs();
     }
 }

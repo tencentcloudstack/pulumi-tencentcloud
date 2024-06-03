@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc.Inputs
 {
 
-    public sealed class SnapshotPolicyBackupPolicyArgs : Pulumi.ResourceArgs
+    public sealed class SnapshotPolicyBackupPolicyArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Backup cycle time, the value can be monday, tuesday, wednesday, thursday, friday, saturday, sunday.
@@ -28,5 +28,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc.Inputs
         public SnapshotPolicyBackupPolicyArgs()
         {
         }
+        public static new SnapshotPolicyBackupPolicyArgs Empty => new SnapshotPolicyBackupPolicyArgs();
     }
 }

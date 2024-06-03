@@ -7,42 +7,48 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a oceanus workSpace
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Oceanus"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Oceanus"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Oceanus.NewWorkSpace(ctx, "example", &Oceanus.WorkSpaceArgs{
-// 			Description:   pulumi.String("example description."),
-// 			WorkSpaceName: pulumi.String("tf_example"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Oceanus.NewWorkSpace(ctx, "example", &Oceanus.WorkSpaceArgs{
+//				Description:   pulumi.String("example description."),
+//				WorkSpaceName: pulumi.String("tf_example"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // oceanus work_space can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Oceanus/workSpace:WorkSpace example space-0dan3yux#tf_example
+// $ pulumi import tencentcloud:Oceanus/workSpace:WorkSpace example space-0dan3yux#tf_example
 // ```
 type WorkSpace struct {
 	pulumi.CustomResourceState
@@ -83,7 +89,7 @@ func NewWorkSpace(ctx *pulumi.Context,
 	if args.WorkSpaceName == nil {
 		return nil, errors.New("invalid value for required argument 'WorkSpaceName'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource WorkSpace
 	err := ctx.RegisterResource("tencentcloud:Oceanus/workSpace:WorkSpace", name, args, &resource, opts...)
 	if err != nil {
@@ -204,7 +210,7 @@ func (i *WorkSpace) ToWorkSpaceOutputWithContext(ctx context.Context) WorkSpaceO
 // WorkSpaceArrayInput is an input type that accepts WorkSpaceArray and WorkSpaceArrayOutput values.
 // You can construct a concrete instance of `WorkSpaceArrayInput` via:
 //
-//          WorkSpaceArray{ WorkSpaceArgs{...} }
+//	WorkSpaceArray{ WorkSpaceArgs{...} }
 type WorkSpaceArrayInput interface {
 	pulumi.Input
 
@@ -229,7 +235,7 @@ func (i WorkSpaceArray) ToWorkSpaceArrayOutputWithContext(ctx context.Context) W
 // WorkSpaceMapInput is an input type that accepts WorkSpaceMap and WorkSpaceMapOutput values.
 // You can construct a concrete instance of `WorkSpaceMapInput` via:
 //
-//          WorkSpaceMap{ "key": WorkSpaceArgs{...} }
+//	WorkSpaceMap{ "key": WorkSpaceArgs{...} }
 type WorkSpaceMapInput interface {
 	pulumi.Input
 

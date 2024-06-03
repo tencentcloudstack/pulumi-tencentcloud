@@ -9,15 +9,17 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const restartPushTask = new tencentcloud.Css.PullStreamTaskRestart("restart_push_task", {
+ * const restartPushTask = new tencentcloud.css.PullStreamTaskRestart("restartPushTask", {
  *     operator: "tf-test",
  *     taskId: "3573",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export class PullStreamTaskRestart extends pulumi.CustomResource {
     /**

@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,25 +11,24 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const project = pulumi.output(tencentcloud.Bi.getProject({
+ * const project = tencentcloud.Bi.getProject({
  *     allPage: true,
  *     keyword: "abc",
  *     moduleCollection: "sys_common_user",
  *     pageNo: 1,
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getProject(args?: GetProjectArgs, opts?: pulumi.InvokeOptions): Promise<GetProjectResult> {
     args = args || {};
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Bi/getProject:getProject", {
         "allPage": args.allPage,
         "keyword": args.keyword,
@@ -90,9 +90,27 @@ export interface GetProjectResult {
     readonly pageNo?: number;
     readonly resultOutputFile?: string;
 }
-
+/**
+ * Use this data source to query detailed information of bi project
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const project = tencentcloud.Bi.getProject({
+ *     allPage: true,
+ *     keyword: "abc",
+ *     moduleCollection: "sys_common_user",
+ *     pageNo: 1,
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getProjectOutput(args?: GetProjectOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetProjectResult> {
-    return pulumi.output(args).apply(a => getProject(a, opts))
+    return pulumi.output(args).apply((a: any) => getProject(a, opts))
 }
 
 /**

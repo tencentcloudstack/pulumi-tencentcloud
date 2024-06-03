@@ -7,60 +7,65 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a cls alarmNotice
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Cls"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cls"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cls"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Cls.NewAlarmNotice(ctx, "alarmNotice", &Cls.AlarmNoticeArgs{
-// 			NoticeReceivers: cls.AlarmNoticeNoticeReceiverArray{
-// 				&cls.AlarmNoticeNoticeReceiverArgs{
-// 					EndTime: pulumi.String("23:59:59"),
-// 					Index:   pulumi.Int(0),
-// 					ReceiverChannels: pulumi.StringArray{
-// 						pulumi.String("Sms"),
-// 					},
-// 					ReceiverIds: pulumi.IntArray{
-// 						pulumi.Int(13478043),
-// 						pulumi.Int(15972111),
-// 					},
-// 					ReceiverType: pulumi.String("Uin"),
-// 					StartTime:    pulumi.String("00:00:00"),
-// 				},
-// 			},
-// 			Tags: pulumi.AnyMap{
-// 				"createdBy": pulumi.Any("terraform"),
-// 			},
-// 			Type: pulumi.String("All"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Cls.NewAlarmNotice(ctx, "alarmNotice", &Cls.AlarmNoticeArgs{
+//				NoticeReceivers: cls.AlarmNoticeNoticeReceiverArray{
+//					&cls.AlarmNoticeNoticeReceiverArgs{
+//						EndTime: pulumi.String("23:59:59"),
+//						Index:   pulumi.Int(0),
+//						ReceiverChannels: pulumi.StringArray{
+//							pulumi.String("Sms"),
+//						},
+//						ReceiverIds: pulumi.IntArray{
+//							pulumi.Int(13478043),
+//							pulumi.Int(15972111),
+//						},
+//						ReceiverType: pulumi.String("Uin"),
+//						StartTime:    pulumi.String("00:00:00"),
+//					},
+//				},
+//				Tags: pulumi.Map{
+//					"createdBy": pulumi.Any("terraform"),
+//				},
+//				Type: pulumi.String("All"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // cls alarm_notice can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Cls/alarmNotice:AlarmNotice alarm_notice alarm_notice_id
+// $ pulumi import tencentcloud:Cls/alarmNotice:AlarmNotice alarm_notice alarm_notice_id
 // ```
 type AlarmNotice struct {
 	pulumi.CustomResourceState
@@ -87,7 +92,7 @@ func NewAlarmNotice(ctx *pulumi.Context,
 	if args.Type == nil {
 		return nil, errors.New("invalid value for required argument 'Type'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource AlarmNotice
 	err := ctx.RegisterResource("tencentcloud:Cls/alarmNotice:AlarmNotice", name, args, &resource, opts...)
 	if err != nil {
@@ -192,7 +197,7 @@ func (i *AlarmNotice) ToAlarmNoticeOutputWithContext(ctx context.Context) AlarmN
 // AlarmNoticeArrayInput is an input type that accepts AlarmNoticeArray and AlarmNoticeArrayOutput values.
 // You can construct a concrete instance of `AlarmNoticeArrayInput` via:
 //
-//          AlarmNoticeArray{ AlarmNoticeArgs{...} }
+//	AlarmNoticeArray{ AlarmNoticeArgs{...} }
 type AlarmNoticeArrayInput interface {
 	pulumi.Input
 
@@ -217,7 +222,7 @@ func (i AlarmNoticeArray) ToAlarmNoticeArrayOutputWithContext(ctx context.Contex
 // AlarmNoticeMapInput is an input type that accepts AlarmNoticeMap and AlarmNoticeMapOutput values.
 // You can construct a concrete instance of `AlarmNoticeMapInput` via:
 //
-//          AlarmNoticeMap{ "key": AlarmNoticeArgs{...} }
+//	AlarmNoticeMap{ "key": AlarmNoticeArgs{...} }
 type AlarmNoticeMapInput interface {
 	pulumi.Input
 

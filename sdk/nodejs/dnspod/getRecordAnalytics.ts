@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,25 +11,24 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const recordAnalytics = pulumi.output(tencentcloud.Dnspod.getRecordAnalytics({
+ * const recordAnalytics = tencentcloud.Dnspod.getRecordAnalytics({
  *     dnsFormat: "HOUR",
  *     domain: "iac-tf.cloud",
  *     endDate: "2023-11-07",
  *     startDate: "2023-09-07",
  *     subdomain: "www",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getRecordAnalytics(args: GetRecordAnalyticsArgs, opts?: pulumi.InvokeOptions): Promise<GetRecordAnalyticsResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Dnspod/getRecordAnalytics:getRecordAnalytics", {
         "dnsFormat": args.dnsFormat,
         "domain": args.domain,
@@ -117,9 +117,28 @@ export interface GetRecordAnalyticsResult {
      */
     readonly subdomain: string;
 }
-
+/**
+ * Use this data source to query detailed information of dnspod recordAnalytics
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const recordAnalytics = tencentcloud.Dnspod.getRecordAnalytics({
+ *     dnsFormat: "HOUR",
+ *     domain: "iac-tf.cloud",
+ *     endDate: "2023-11-07",
+ *     startDate: "2023-09-07",
+ *     subdomain: "www",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getRecordAnalyticsOutput(args: GetRecordAnalyticsOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetRecordAnalyticsResult> {
-    return pulumi.output(args).apply(a => getRecordAnalytics(a, opts))
+    return pulumi.output(args).apply((a: any) => getRecordAnalytics(a, opts))
 }
 
 /**

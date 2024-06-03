@@ -7,8 +7,9 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a tat invocationCommandAttachment
@@ -60,7 +61,7 @@ func NewInvocationCommandAttachment(ctx *pulumi.Context,
 	if args.InstanceId == nil {
 		return nil, errors.New("invalid value for required argument 'InstanceId'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource InvocationCommandAttachment
 	err := ctx.RegisterResource("tencentcloud:Tat/invocationCommandAttachment:InvocationCommandAttachment", name, args, &resource, opts...)
 	if err != nil {
@@ -241,7 +242,7 @@ func (i *InvocationCommandAttachment) ToInvocationCommandAttachmentOutputWithCon
 // InvocationCommandAttachmentArrayInput is an input type that accepts InvocationCommandAttachmentArray and InvocationCommandAttachmentArrayOutput values.
 // You can construct a concrete instance of `InvocationCommandAttachmentArrayInput` via:
 //
-//          InvocationCommandAttachmentArray{ InvocationCommandAttachmentArgs{...} }
+//	InvocationCommandAttachmentArray{ InvocationCommandAttachmentArgs{...} }
 type InvocationCommandAttachmentArrayInput interface {
 	pulumi.Input
 
@@ -266,7 +267,7 @@ func (i InvocationCommandAttachmentArray) ToInvocationCommandAttachmentArrayOutp
 // InvocationCommandAttachmentMapInput is an input type that accepts InvocationCommandAttachmentMap and InvocationCommandAttachmentMapOutput values.
 // You can construct a concrete instance of `InvocationCommandAttachmentMapInput` via:
 //
-//          InvocationCommandAttachmentMap{ "key": InvocationCommandAttachmentArgs{...} }
+//	InvocationCommandAttachmentMap{ "key": InvocationCommandAttachmentArgs{...} }
 type InvocationCommandAttachmentMapInput interface {
 	pulumi.Input
 

@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos.Inputs
 {
 
-    public sealed class BatchOperationCosPutObjectCopyNewObjectMetadataUserMetadataArgs : Pulumi.ResourceArgs
+    public sealed class BatchOperationCosPutObjectCopyNewObjectMetadataUserMetadataArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// key.
@@ -28,5 +28,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos.Inputs
         public BatchOperationCosPutObjectCopyNewObjectMetadataUserMetadataArgs()
         {
         }
+        public static new BatchOperationCosPutObjectCopyNewObjectMetadataUserMetadataArgs Empty => new BatchOperationCosPutObjectCopyNewObjectMetadataUserMetadataArgs();
     }
 }

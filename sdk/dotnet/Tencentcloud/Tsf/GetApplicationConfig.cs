@@ -16,17 +16,17 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf
         /// Use this data source to query detailed information of tsf application_config
         /// </summary>
         public static Task<GetApplicationConfigResult> InvokeAsync(GetApplicationConfigArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetApplicationConfigResult>("tencentcloud:Tsf/getApplicationConfig:getApplicationConfig", args ?? new GetApplicationConfigArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetApplicationConfigResult>("tencentcloud:Tsf/getApplicationConfig:getApplicationConfig", args ?? new GetApplicationConfigArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of tsf application_config
         /// </summary>
         public static Output<GetApplicationConfigResult> Invoke(GetApplicationConfigInvokeArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetApplicationConfigResult>("tencentcloud:Tsf/getApplicationConfig:getApplicationConfig", args ?? new GetApplicationConfigInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetApplicationConfigResult>("tencentcloud:Tsf/getApplicationConfig:getApplicationConfig", args ?? new GetApplicationConfigInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetApplicationConfigArgs : Pulumi.InvokeArgs
+    public sealed class GetApplicationConfigArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Application ID, query all when not provided.
@@ -73,9 +73,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf
         public GetApplicationConfigArgs()
         {
         }
+        public static new GetApplicationConfigArgs Empty => new GetApplicationConfigArgs();
     }
 
-    public sealed class GetApplicationConfigInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetApplicationConfigInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Application ID, query all when not provided.
@@ -122,6 +123,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf
         public GetApplicationConfigInvokeArgs()
         {
         }
+        public static new GetApplicationConfigInvokeArgs Empty => new GetApplicationConfigInvokeArgs();
     }
 
 

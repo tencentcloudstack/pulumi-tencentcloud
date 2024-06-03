@@ -15,64 +15,58 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Redis
         /// <summary>
         /// Use this data source to query detailed information of redis instance_zone_info
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var instanceZoneInfo = Tencentcloud.Redis.GetInstanceZoneInfo.Invoke(new()
         ///     {
-        ///         var instanceZoneInfo = Output.Create(Tencentcloud.Redis.GetInstanceZoneInfo.InvokeAsync(new Tencentcloud.Redis.GetInstanceZoneInfoArgs
-        ///         {
-        ///             InstanceId = "crs-c1nl9rpv",
-        ///         }));
-        ///     }
+        ///         InstanceId = "crs-c1nl9rpv",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetInstanceZoneInfoResult> InvokeAsync(GetInstanceZoneInfoArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetInstanceZoneInfoResult>("tencentcloud:Redis/getInstanceZoneInfo:getInstanceZoneInfo", args ?? new GetInstanceZoneInfoArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetInstanceZoneInfoResult>("tencentcloud:Redis/getInstanceZoneInfo:getInstanceZoneInfo", args ?? new GetInstanceZoneInfoArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of redis instance_zone_info
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var instanceZoneInfo = Tencentcloud.Redis.GetInstanceZoneInfo.Invoke(new()
         ///     {
-        ///         var instanceZoneInfo = Output.Create(Tencentcloud.Redis.GetInstanceZoneInfo.InvokeAsync(new Tencentcloud.Redis.GetInstanceZoneInfoArgs
-        ///         {
-        ///             InstanceId = "crs-c1nl9rpv",
-        ///         }));
-        ///     }
+        ///         InstanceId = "crs-c1nl9rpv",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetInstanceZoneInfoResult> Invoke(GetInstanceZoneInfoInvokeArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetInstanceZoneInfoResult>("tencentcloud:Redis/getInstanceZoneInfo:getInstanceZoneInfo", args ?? new GetInstanceZoneInfoInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetInstanceZoneInfoResult>("tencentcloud:Redis/getInstanceZoneInfo:getInstanceZoneInfo", args ?? new GetInstanceZoneInfoInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetInstanceZoneInfoArgs : Pulumi.InvokeArgs
+    public sealed class GetInstanceZoneInfoArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// The ID of instance.
@@ -89,9 +83,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Redis
         public GetInstanceZoneInfoArgs()
         {
         }
+        public static new GetInstanceZoneInfoArgs Empty => new GetInstanceZoneInfoArgs();
     }
 
-    public sealed class GetInstanceZoneInfoInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetInstanceZoneInfoInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// The ID of instance.
@@ -108,6 +103,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Redis
         public GetInstanceZoneInfoInvokeArgs()
         {
         }
+        public static new GetInstanceZoneInfoInvokeArgs Empty => new GetInstanceZoneInfoInvokeArgs();
     }
 
 

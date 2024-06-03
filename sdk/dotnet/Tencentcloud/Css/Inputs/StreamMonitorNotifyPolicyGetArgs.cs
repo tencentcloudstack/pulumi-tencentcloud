@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Css.Inputs
 {
 
-    public sealed class StreamMonitorNotifyPolicyGetArgs : Pulumi.ResourceArgs
+    public sealed class StreamMonitorNotifyPolicyGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Callback url.limit [0,512].only http or https.
@@ -28,5 +28,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Css.Inputs
         public StreamMonitorNotifyPolicyGetArgs()
         {
         }
+        public static new StreamMonitorNotifyPolicyGetArgs Empty => new StreamMonitorNotifyPolicyGetArgs();
     }
 }

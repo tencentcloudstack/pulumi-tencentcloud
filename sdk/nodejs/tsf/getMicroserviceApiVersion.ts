@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,23 +11,22 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const microserviceApiVersion = pulumi.output(tencentcloud.Tsf.getMicroserviceApiVersion({
+ * const microserviceApiVersion = tencentcloud.Tsf.getMicroserviceApiVersion({
  *     method: "get",
  *     microserviceId: "ms-yq3jo6jd",
  *     path: "",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getMicroserviceApiVersion(args: GetMicroserviceApiVersionArgs, opts?: pulumi.InvokeOptions): Promise<GetMicroserviceApiVersionResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Tsf/getMicroserviceApiVersion:getMicroserviceApiVersion", {
         "method": args.method,
         "microserviceId": args.microserviceId,
@@ -74,9 +74,26 @@ export interface GetMicroserviceApiVersionResult {
      */
     readonly results: outputs.Tsf.GetMicroserviceApiVersionResult[];
 }
-
+/**
+ * Use this data source to query detailed information of tsf microserviceApiVersion
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const microserviceApiVersion = tencentcloud.Tsf.getMicroserviceApiVersion({
+ *     method: "get",
+ *     microserviceId: "ms-yq3jo6jd",
+ *     path: "",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getMicroserviceApiVersionOutput(args: GetMicroserviceApiVersionOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetMicroserviceApiVersionResult> {
-    return pulumi.output(args).apply(a => getMicroserviceApiVersion(a, opts))
+    return pulumi.output(args).apply((a: any) => getMicroserviceApiVersion(a, opts))
 }
 
 /**

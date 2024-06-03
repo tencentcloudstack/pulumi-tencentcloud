@@ -11,22 +11,22 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Inputs
 {
 
-    public sealed class RuleEngineRuleActionArgs : Pulumi.ResourceArgs
+    public sealed class RuleEngineRuleActionArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// Define a code action.
+        /// Feature operation with a status code. Features of this type include:
         /// </summary>
         [Input("codeAction")]
         public Input<Inputs.RuleEngineRuleActionCodeActionArgs>? CodeAction { get; set; }
 
         /// <summary>
-        /// Define a normal action.
+        /// Common operation. Values:
         /// </summary>
         [Input("normalAction")]
         public Input<Inputs.RuleEngineRuleActionNormalActionArgs>? NormalAction { get; set; }
 
         /// <summary>
-        /// Define a rewrite action.
+        /// Feature operation with a request/response header. Features of this type include:
         /// </summary>
         [Input("rewriteAction")]
         public Input<Inputs.RuleEngineRuleActionRewriteActionArgs>? RewriteAction { get; set; }
@@ -34,5 +34,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Inputs
         public RuleEngineRuleActionArgs()
         {
         }
+        public static new RuleEngineRuleActionArgs Empty => new RuleEngineRuleActionArgs();
     }
 }

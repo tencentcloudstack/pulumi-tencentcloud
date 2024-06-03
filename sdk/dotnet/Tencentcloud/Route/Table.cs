@@ -15,37 +15,39 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Route
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var fooInstance = new Tencentcloud.Vpc.Instance("fooInstance", new()
     ///     {
-    ///         var fooInstance = new Tencentcloud.Vpc.Instance("fooInstance", new Tencentcloud.Vpc.InstanceArgs
-    ///         {
-    ///             CidrBlock = "10.0.0.0/16",
-    ///         });
-    ///         var fooTable = new Tencentcloud.Route.Table("fooTable", new Tencentcloud.Route.TableArgs
-    ///         {
-    ///             VpcId = fooInstance.Id,
-    ///         });
-    ///     }
+    ///         CidrBlock = "10.0.0.0/16",
+    ///     });
     /// 
-    /// }
+    ///     var fooTable = new Tencentcloud.Route.Table("fooTable", new()
+    ///     {
+    ///         VpcId = fooInstance.Id,
+    ///     });
+    /// 
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// Vpc routetable instance can be imported, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Route/table:Table test route_table_id
+    /// $ pulumi import tencentcloud:Route/table:Table test route_table_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Route/table:Table")]
-    public partial class Table : Pulumi.CustomResource
+    public partial class Table : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Creation time of the routing table.
@@ -134,7 +136,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Route
         }
     }
 
-    public sealed class TableArgs : Pulumi.ResourceArgs
+    public sealed class TableArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// The name of routing table.
@@ -163,9 +165,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Route
         public TableArgs()
         {
         }
+        public static new TableArgs Empty => new TableArgs();
     }
 
-    public sealed class TableState : Pulumi.ResourceArgs
+    public sealed class TableState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Creation time of the routing table.
@@ -230,5 +233,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Route
         public TableState()
         {
         }
+        public static new TableState Empty => new TableState();
     }
 }

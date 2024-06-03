@@ -7,98 +7,103 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Availability"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Availability"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Mysql"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Security"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Subnet"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Availability"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Mysql"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Security"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Subnet"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		zones, err := Availability.GetZonesByProduct(ctx, &availability.GetZonesByProductArgs{
-// 			Product: "cdb",
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		vpc, err := Vpc.NewInstance(ctx, "vpc", &Vpc.InstanceArgs{
-// 			CidrBlock: pulumi.String("10.0.0.0/16"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		subnet, err := Subnet.NewInstance(ctx, "subnet", &Subnet.InstanceArgs{
-// 			AvailabilityZone: pulumi.String(zones.Zones[0].Name),
-// 			VpcId:            vpc.ID(),
-// 			CidrBlock:        pulumi.String("10.0.0.0/16"),
-// 			IsMulticast:      pulumi.Bool(false),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		securityGroup, err := Security.NewGroup(ctx, "securityGroup", &Security.GroupArgs{
-// 			Description: pulumi.String("mysql test"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		exampleInstance, err := Mysql.NewInstance(ctx, "exampleInstance", &Mysql.InstanceArgs{
-// 			InternetService:  pulumi.Int(1),
-// 			EngineVersion:    pulumi.String("5.7"),
-// 			ChargeType:       pulumi.String("POSTPAID"),
-// 			RootPassword:     pulumi.String("PassWord123"),
-// 			SlaveDeployMode:  pulumi.Int(0),
-// 			AvailabilityZone: pulumi.String(zones.Zones[0].Name),
-// 			SlaveSyncMode:    pulumi.Int(1),
-// 			InstanceName:     pulumi.String("tf-example-mysql"),
-// 			MemSize:          pulumi.Int(4000),
-// 			VolumeSize:       pulumi.Int(200),
-// 			VpcId:            vpc.ID(),
-// 			SubnetId:         subnet.ID(),
-// 			IntranetPort:     pulumi.Int(3306),
-// 			SecurityGroups: pulumi.StringArray{
-// 				securityGroup.ID(),
-// 			},
-// 			Tags: pulumi.AnyMap{
-// 				"name": pulumi.Any("test"),
-// 			},
-// 			Parameters: pulumi.AnyMap{
-// 				"character_set_server": pulumi.Any("utf8"),
-// 				"max_connections":      pulumi.Any("1000"),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_, err = Mysql.NewBackupPolicy(ctx, "exampleBackupPolicy", &Mysql.BackupPolicyArgs{
-// 			MysqlId:             exampleInstance.ID(),
-// 			RetentionPeriod:     pulumi.Int(7),
-// 			BackupModel:         pulumi.String("physical"),
-// 			BackupTime:          pulumi.String("22:00-02:00"),
-// 			BinlogPeriod:        pulumi.Int(32),
-// 			EnableBinlogStandby: pulumi.String("off"),
-// 			BinlogStandbyDays:   pulumi.Int(31),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			zones, err := Availability.GetZonesByProduct(ctx, &availability.GetZonesByProductArgs{
+//				Product: "cdb",
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			vpc, err := Vpc.NewInstance(ctx, "vpc", &Vpc.InstanceArgs{
+//				CidrBlock: pulumi.String("10.0.0.0/16"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			subnet, err := Subnet.NewInstance(ctx, "subnet", &Subnet.InstanceArgs{
+//				AvailabilityZone: pulumi.String(zones.Zones[0].Name),
+//				VpcId:            vpc.ID(),
+//				CidrBlock:        pulumi.String("10.0.0.0/16"),
+//				IsMulticast:      pulumi.Bool(false),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			securityGroup, err := Security.NewGroup(ctx, "securityGroup", &Security.GroupArgs{
+//				Description: pulumi.String("mysql test"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			exampleInstance, err := Mysql.NewInstance(ctx, "exampleInstance", &Mysql.InstanceArgs{
+//				InternetService:  pulumi.Int(1),
+//				EngineVersion:    pulumi.String("5.7"),
+//				ChargeType:       pulumi.String("POSTPAID"),
+//				RootPassword:     pulumi.String("PassWord123"),
+//				SlaveDeployMode:  pulumi.Int(0),
+//				AvailabilityZone: pulumi.String(zones.Zones[0].Name),
+//				SlaveSyncMode:    pulumi.Int(1),
+//				InstanceName:     pulumi.String("tf-example-mysql"),
+//				MemSize:          pulumi.Int(4000),
+//				VolumeSize:       pulumi.Int(200),
+//				VpcId:            vpc.ID(),
+//				SubnetId:         subnet.ID(),
+//				IntranetPort:     pulumi.Int(3306),
+//				SecurityGroups: pulumi.StringArray{
+//					securityGroup.ID(),
+//				},
+//				Tags: pulumi.Map{
+//					"name": pulumi.Any("test"),
+//				},
+//				Parameters: pulumi.Map{
+//					"character_set_server": pulumi.Any("utf8"),
+//					"max_connections":      pulumi.Any("1000"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_, err = Mysql.NewBackupPolicy(ctx, "exampleBackupPolicy", &Mysql.BackupPolicyArgs{
+//				MysqlId:             exampleInstance.ID(),
+//				RetentionPeriod:     pulumi.Int(7),
+//				BackupModel:         pulumi.String("physical"),
+//				BackupTime:          pulumi.String("22:00-02:00"),
+//				BinlogPeriod:        pulumi.Int(32),
+//				EnableBinlogStandby: pulumi.String("off"),
+//				BinlogStandbyDays:   pulumi.Int(31),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 type BackupPolicy struct {
 	pulumi.CustomResourceState
 
@@ -128,7 +133,7 @@ func NewBackupPolicy(ctx *pulumi.Context,
 	if args.MysqlId == nil {
 		return nil, errors.New("invalid value for required argument 'MysqlId'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource BackupPolicy
 	err := ctx.RegisterResource("tencentcloud:Mysql/backupPolicy:BackupPolicy", name, args, &resource, opts...)
 	if err != nil {
@@ -249,7 +254,7 @@ func (i *BackupPolicy) ToBackupPolicyOutputWithContext(ctx context.Context) Back
 // BackupPolicyArrayInput is an input type that accepts BackupPolicyArray and BackupPolicyArrayOutput values.
 // You can construct a concrete instance of `BackupPolicyArrayInput` via:
 //
-//          BackupPolicyArray{ BackupPolicyArgs{...} }
+//	BackupPolicyArray{ BackupPolicyArgs{...} }
 type BackupPolicyArrayInput interface {
 	pulumi.Input
 
@@ -274,7 +279,7 @@ func (i BackupPolicyArray) ToBackupPolicyArrayOutputWithContext(ctx context.Cont
 // BackupPolicyMapInput is an input type that accepts BackupPolicyMap and BackupPolicyMapOutput values.
 // You can construct a concrete instance of `BackupPolicyMapInput` via:
 //
-//          BackupPolicyMap{ "key": BackupPolicyArgs{...} }
+//	BackupPolicyMap{ "key": BackupPolicyArgs{...} }
 type BackupPolicyMapInput interface {
 	pulumi.Input
 

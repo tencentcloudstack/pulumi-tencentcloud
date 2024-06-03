@@ -15,37 +15,38 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var pathRewrite = new Tencentcloud.Tsf.PathRewrite("pathRewrite", new()
     ///     {
-    ///         var pathRewrite = new Tencentcloud.Tsf.PathRewrite("pathRewrite", new Tencentcloud.Tsf.PathRewriteArgs
-    ///         {
-    ///             Blocked = "N",
-    ///             GatewayGroupId = "group-a2j9zxpv",
-    ///             Order = 2,
-    ///             Regex = "/test",
-    ///             Replacement = "/tt",
-    ///         });
-    ///     }
+    ///         Blocked = "N",
+    ///         GatewayGroupId = "group-a2j9zxpv",
+    ///         Order = 2,
+    ///         Regex = "/test",
+    ///         Replacement = "/tt",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// tsf path_rewrite can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Tsf/pathRewrite:PathRewrite path_rewrite rewrite-nygq33v2
+    /// $ pulumi import tencentcloud:Tsf/pathRewrite:PathRewrite path_rewrite rewrite-nygq33v2
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Tsf/pathRewrite:PathRewrite")]
-    public partial class PathRewrite : Pulumi.CustomResource
+    public partial class PathRewrite : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Whether to shield the mapped path, Y: Yes N: No.
@@ -128,7 +129,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf
         }
     }
 
-    public sealed class PathRewriteArgs : Pulumi.ResourceArgs
+    public sealed class PathRewriteArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Whether to shield the mapped path, Y: Yes N: No.
@@ -163,9 +164,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf
         public PathRewriteArgs()
         {
         }
+        public static new PathRewriteArgs Empty => new PathRewriteArgs();
     }
 
-    public sealed class PathRewriteState : Pulumi.ResourceArgs
+    public sealed class PathRewriteState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Whether to shield the mapped path, Y: Yes N: No.
@@ -206,5 +208,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf
         public PathRewriteState()
         {
         }
+        public static new PathRewriteState Empty => new PathRewriteState();
     }
 }

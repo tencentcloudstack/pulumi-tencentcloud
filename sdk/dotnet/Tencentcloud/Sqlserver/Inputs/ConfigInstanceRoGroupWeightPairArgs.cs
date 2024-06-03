@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver.Inputs
 {
 
-    public sealed class ConfigInstanceRoGroupWeightPairArgs : Pulumi.ResourceArgs
+    public sealed class ConfigInstanceRoGroupWeightPairArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Read-only instance ID, in the format: mssqlro-3l3fgqn7.
@@ -28,5 +28,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver.Inputs
         public ConfigInstanceRoGroupWeightPairArgs()
         {
         }
+        public static new ConfigInstanceRoGroupWeightPairArgs Empty => new ConfigInstanceRoGroupWeightPairArgs();
     }
 }

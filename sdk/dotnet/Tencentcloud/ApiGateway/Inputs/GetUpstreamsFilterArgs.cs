@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway.Inputs
 {
 
-    public sealed class GetUpstreamsFilterInputArgs : Pulumi.ResourceArgs
+    public sealed class GetUpstreamsFilterInputArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Fields that need to be filtered.
@@ -34,5 +34,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway.Inputs
         public GetUpstreamsFilterInputArgs()
         {
         }
+        public static new GetUpstreamsFilterInputArgs Empty => new GetUpstreamsFilterInputArgs();
     }
 }

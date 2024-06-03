@@ -7,57 +7,62 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a antiddos ddos speed limit config
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Antiddos"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Antiddos"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Antiddos"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Antiddos.NewDdosSpeedLimitConfig(ctx, "ddosSpeedLimitConfig", &Antiddos.DdosSpeedLimitConfigArgs{
-// 			DdosSpeedLimitConfig: &antiddos.DdosSpeedLimitConfigDdosSpeedLimitConfigArgs{
-// 				DstPortList:  pulumi.String("8000"),
-// 				Mode:         pulumi.Int(1),
-// 				ProtocolList: pulumi.String("ALL"),
-// 				SpeedValues: antiddos.DdosSpeedLimitConfigDdosSpeedLimitConfigSpeedValueArray{
-// 					&antiddos.DdosSpeedLimitConfigDdosSpeedLimitConfigSpeedValueArgs{
-// 						Type:  pulumi.Int(1),
-// 						Value: pulumi.Int(1),
-// 					},
-// 					&antiddos.DdosSpeedLimitConfigDdosSpeedLimitConfigSpeedValueArgs{
-// 						Type:  pulumi.Int(2),
-// 						Value: pulumi.Int(2),
-// 					},
-// 				},
-// 			},
-// 			InstanceId: pulumi.String("bgp-xxxxxx"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Antiddos.NewDdosSpeedLimitConfig(ctx, "ddosSpeedLimitConfig", &Antiddos.DdosSpeedLimitConfigArgs{
+//				DdosSpeedLimitConfig: &antiddos.DdosSpeedLimitConfigDdosSpeedLimitConfigArgs{
+//					DstPortList:  pulumi.String("8000"),
+//					Mode:         pulumi.Int(1),
+//					ProtocolList: pulumi.String("ALL"),
+//					SpeedValues: antiddos.DdosSpeedLimitConfigDdosSpeedLimitConfigSpeedValueArray{
+//						&antiddos.DdosSpeedLimitConfigDdosSpeedLimitConfigSpeedValueArgs{
+//							Type:  pulumi.Int(1),
+//							Value: pulumi.Int(1),
+//						},
+//						&antiddos.DdosSpeedLimitConfigDdosSpeedLimitConfigSpeedValueArgs{
+//							Type:  pulumi.Int(2),
+//							Value: pulumi.Int(2),
+//						},
+//					},
+//				},
+//				InstanceId: pulumi.String("bgp-xxxxxx"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // antiddos ddos_speed_limit_config can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Antiddos/ddosSpeedLimitConfig:DdosSpeedLimitConfig ddos_speed_limit_config ${instanceId}#${configId}s
+// $ pulumi import tencentcloud:Antiddos/ddosSpeedLimitConfig:DdosSpeedLimitConfig ddos_speed_limit_config ${instanceId}#${configId}s
 // ```
 type DdosSpeedLimitConfig struct {
 	pulumi.CustomResourceState
@@ -81,7 +86,7 @@ func NewDdosSpeedLimitConfig(ctx *pulumi.Context,
 	if args.InstanceId == nil {
 		return nil, errors.New("invalid value for required argument 'InstanceId'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource DdosSpeedLimitConfig
 	err := ctx.RegisterResource("tencentcloud:Antiddos/ddosSpeedLimitConfig:DdosSpeedLimitConfig", name, args, &resource, opts...)
 	if err != nil {
@@ -162,7 +167,7 @@ func (i *DdosSpeedLimitConfig) ToDdosSpeedLimitConfigOutputWithContext(ctx conte
 // DdosSpeedLimitConfigArrayInput is an input type that accepts DdosSpeedLimitConfigArray and DdosSpeedLimitConfigArrayOutput values.
 // You can construct a concrete instance of `DdosSpeedLimitConfigArrayInput` via:
 //
-//          DdosSpeedLimitConfigArray{ DdosSpeedLimitConfigArgs{...} }
+//	DdosSpeedLimitConfigArray{ DdosSpeedLimitConfigArgs{...} }
 type DdosSpeedLimitConfigArrayInput interface {
 	pulumi.Input
 
@@ -187,7 +192,7 @@ func (i DdosSpeedLimitConfigArray) ToDdosSpeedLimitConfigArrayOutputWithContext(
 // DdosSpeedLimitConfigMapInput is an input type that accepts DdosSpeedLimitConfigMap and DdosSpeedLimitConfigMapOutput values.
 // You can construct a concrete instance of `DdosSpeedLimitConfigMapInput` via:
 //
-//          DdosSpeedLimitConfigMap{ "key": DdosSpeedLimitConfigArgs{...} }
+//	DdosSpeedLimitConfigMap{ "key": DdosSpeedLimitConfigArgs{...} }
 type DdosSpeedLimitConfigMapInput interface {
 	pulumi.Input
 

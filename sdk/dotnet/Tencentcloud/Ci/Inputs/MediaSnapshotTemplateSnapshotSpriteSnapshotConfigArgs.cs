@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ci.Inputs
 {
 
-    public sealed class MediaSnapshotTemplateSnapshotSpriteSnapshotConfigArgs : Pulumi.ResourceArgs
+    public sealed class MediaSnapshotTemplateSnapshotSpriteSnapshotConfigArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Single image height Value range: [8, 4096], Unit: px.
@@ -58,5 +58,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ci.Inputs
         public MediaSnapshotTemplateSnapshotSpriteSnapshotConfigArgs()
         {
         }
+        public static new MediaSnapshotTemplateSnapshotSpriteSnapshotConfigArgs Empty => new MediaSnapshotTemplateSnapshotSpriteSnapshotConfigArgs();
     }
 }

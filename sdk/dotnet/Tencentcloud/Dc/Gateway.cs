@@ -15,39 +15,41 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dc
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var main = new Tencentcloud.Vpc.Instance("main", new()
     ///     {
-    ///         var main = new Tencentcloud.Vpc.Instance("main", new Tencentcloud.Vpc.InstanceArgs
-    ///         {
-    ///             CidrBlock = "10.0.0.0/16",
-    ///         });
-    ///         var vpcMain = new Tencentcloud.Dc.Gateway("vpcMain", new Tencentcloud.Dc.GatewayArgs
-    ///         {
-    ///             NetworkInstanceId = main.Id,
-    ///             NetworkType = "VPC",
-    ///             GatewayType = "NAT",
-    ///         });
-    ///     }
+    ///         CidrBlock = "10.0.0.0/16",
+    ///     });
     /// 
-    /// }
+    ///     var vpcMain = new Tencentcloud.Dc.Gateway("vpcMain", new()
+    ///     {
+    ///         NetworkInstanceId = main.Id,
+    ///         NetworkType = "VPC",
+    ///         GatewayType = "NAT",
+    ///     });
+    /// 
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// Direct connect gateway instance can be imported, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Dc/gateway:Gateway instance dcg-id
+    /// $ pulumi import tencentcloud:Dc/gateway:Gateway instance dcg-id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Dc/gateway:Gateway")]
-    public partial class Gateway : Pulumi.CustomResource
+    public partial class Gateway : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Type of CCN route. Valid value: `BGP` and `STATIC`. The property is available when the DCG type is CCN gateway and BGP enabled.
@@ -136,7 +138,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dc
         }
     }
 
-    public sealed class GatewayArgs : Pulumi.ResourceArgs
+    public sealed class GatewayArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Type of the gateway. Valid value: `NORMAL` and `NAT`. Default is `NORMAL`. NOTES: CCN only supports `NORMAL` and a VPC can create two DCGs, the one is NAT type and the other is non-NAT type.
@@ -165,9 +167,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dc
         public GatewayArgs()
         {
         }
+        public static new GatewayArgs Empty => new GatewayArgs();
     }
 
-    public sealed class GatewayState : Pulumi.ResourceArgs
+    public sealed class GatewayState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Type of CCN route. Valid value: `BGP` and `STATIC`. The property is available when the DCG type is CCN gateway and BGP enabled.
@@ -214,5 +217,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dc
         public GatewayState()
         {
         }
+        public static new GatewayState Empty => new GatewayState();
     }
 }

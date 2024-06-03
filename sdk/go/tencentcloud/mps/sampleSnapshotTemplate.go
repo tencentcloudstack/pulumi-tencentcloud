@@ -7,47 +7,53 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a mps sampleSnapshotTemplate
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Mps"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Mps"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Mps.NewSampleSnapshotTemplate(ctx, "sampleSnapshotTemplate", &Mps.SampleSnapshotTemplateArgs{
-// 			FillType:           pulumi.String("stretch"),
-// 			Format:             pulumi.String("jpg"),
-// 			Height:             pulumi.Int(128),
-// 			ResolutionAdaptive: pulumi.String("open"),
-// 			SampleInterval:     pulumi.Int(10),
-// 			SampleType:         pulumi.String("Percent"),
-// 			Width:              pulumi.Int(140),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Mps.NewSampleSnapshotTemplate(ctx, "sampleSnapshotTemplate", &Mps.SampleSnapshotTemplateArgs{
+//				FillType:           pulumi.String("stretch"),
+//				Format:             pulumi.String("jpg"),
+//				Height:             pulumi.Int(128),
+//				ResolutionAdaptive: pulumi.String("open"),
+//				SampleInterval:     pulumi.Int(10),
+//				SampleType:         pulumi.String("Percent"),
+//				Width:              pulumi.Int(140),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // mps sample_snapshot_template can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Mps/sampleSnapshotTemplate:SampleSnapshotTemplate sample_snapshot_template sample_snapshot_template_id
+// $ pulumi import tencentcloud:Mps/sampleSnapshotTemplate:SampleSnapshotTemplate sample_snapshot_template sample_snapshot_template_id
 // ```
 type SampleSnapshotTemplate struct {
 	pulumi.CustomResourceState
@@ -85,7 +91,7 @@ func NewSampleSnapshotTemplate(ctx *pulumi.Context,
 	if args.SampleType == nil {
 		return nil, errors.New("invalid value for required argument 'SampleType'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource SampleSnapshotTemplate
 	err := ctx.RegisterResource("tencentcloud:Mps/sampleSnapshotTemplate:SampleSnapshotTemplate", name, args, &resource, opts...)
 	if err != nil {
@@ -222,7 +228,7 @@ func (i *SampleSnapshotTemplate) ToSampleSnapshotTemplateOutputWithContext(ctx c
 // SampleSnapshotTemplateArrayInput is an input type that accepts SampleSnapshotTemplateArray and SampleSnapshotTemplateArrayOutput values.
 // You can construct a concrete instance of `SampleSnapshotTemplateArrayInput` via:
 //
-//          SampleSnapshotTemplateArray{ SampleSnapshotTemplateArgs{...} }
+//	SampleSnapshotTemplateArray{ SampleSnapshotTemplateArgs{...} }
 type SampleSnapshotTemplateArrayInput interface {
 	pulumi.Input
 
@@ -247,7 +253,7 @@ func (i SampleSnapshotTemplateArray) ToSampleSnapshotTemplateArrayOutputWithCont
 // SampleSnapshotTemplateMapInput is an input type that accepts SampleSnapshotTemplateMap and SampleSnapshotTemplateMapOutput values.
 // You can construct a concrete instance of `SampleSnapshotTemplateMapInput` via:
 //
-//          SampleSnapshotTemplateMap{ "key": SampleSnapshotTemplateArgs{...} }
+//	SampleSnapshotTemplateMap{ "key": SampleSnapshotTemplateArgs{...} }
 type SampleSnapshotTemplateMapInput interface {
 	pulumi.Input
 

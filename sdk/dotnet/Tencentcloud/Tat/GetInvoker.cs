@@ -15,58 +15,52 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tat
         /// <summary>
         /// Use this data source to query detailed information of tat invoker
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
-        ///     {
-        ///         var invoker = Output.Create(Tencentcloud.Tat.GetInvoker.InvokeAsync());
-        ///     }
+        ///     var invoker = Tencentcloud.Tat.GetInvoker.Invoke();
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetInvokerResult> InvokeAsync(GetInvokerArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetInvokerResult>("tencentcloud:Tat/getInvoker:getInvoker", args ?? new GetInvokerArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetInvokerResult>("tencentcloud:Tat/getInvoker:getInvoker", args ?? new GetInvokerArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of tat invoker
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
-        ///     {
-        ///         var invoker = Output.Create(Tencentcloud.Tat.GetInvoker.InvokeAsync());
-        ///     }
+        ///     var invoker = Tencentcloud.Tat.GetInvoker.Invoke();
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetInvokerResult> Invoke(GetInvokerInvokeArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetInvokerResult>("tencentcloud:Tat/getInvoker:getInvoker", args ?? new GetInvokerInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetInvokerResult>("tencentcloud:Tat/getInvoker:getInvoker", args ?? new GetInvokerInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetInvokerArgs : Pulumi.InvokeArgs
+    public sealed class GetInvokerArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Command ID.
@@ -95,9 +89,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tat
         public GetInvokerArgs()
         {
         }
+        public static new GetInvokerArgs Empty => new GetInvokerArgs();
     }
 
-    public sealed class GetInvokerInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetInvokerInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Command ID.
@@ -126,6 +121,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tat
         public GetInvokerInvokeArgs()
         {
         }
+        public static new GetInvokerInvokeArgs Empty => new GetInvokerInvokeArgs();
     }
 
 

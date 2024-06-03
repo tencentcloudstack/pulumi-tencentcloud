@@ -8,11 +8,12 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Use this data source to query detailed information of tsf publicConfigSummary
 func LookupPublicConfigSummary(ctx *pulumi.Context, args *LookupPublicConfigSummaryArgs, opts ...pulumi.InvokeOption) (*LookupPublicConfigSummaryResult, error) {
-	opts = pkgInvokeDefaultOpts(opts)
+	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv LookupPublicConfigSummaryResult
 	err := ctx.Invoke("tencentcloud:Tsf/getPublicConfigSummary:getPublicConfigSummary", args, &rv, opts...)
 	if err != nil {

@@ -7,175 +7,199 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a tse instance
 //
 // ## Example Usage
+//
 // ### Create zookeeper standard version
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tse"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tse"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Tse.NewInstance(ctx, "zookeeperStandard", &Tse.InstanceArgs{
-// 			EngineName:           pulumi.String("zookeeper-test"),
-// 			EngineNodeNum:        pulumi.Int(3),
-// 			EngineProductVersion: pulumi.String("STANDARD"),
-// 			EngineRegion:         pulumi.String("ap-guangzhou"),
-// 			EngineResourceSpec:   pulumi.String("spec-qvj6k7t4q"),
-// 			EngineType:           pulumi.String("zookeeper"),
-// 			EngineVersion:        pulumi.String("3.5.9.4"),
-// 			SubnetId:             pulumi.String("subnet-dwj7ipnc"),
-// 			Tags: pulumi.AnyMap{
-// 				"createdBy": pulumi.Any("terraform"),
-// 			},
-// 			TradeType: pulumi.Int(0),
-// 			VpcId:     pulumi.String("vpc-4owdpnwr"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Tse.NewInstance(ctx, "zookeeperStandard", &Tse.InstanceArgs{
+//				EngineName:           pulumi.String("zookeeper-test"),
+//				EngineNodeNum:        pulumi.Int(3),
+//				EngineProductVersion: pulumi.String("STANDARD"),
+//				EngineRegion:         pulumi.String("ap-guangzhou"),
+//				EngineResourceSpec:   pulumi.String("spec-qvj6k7t4q"),
+//				EngineType:           pulumi.String("zookeeper"),
+//				EngineVersion:        pulumi.String("3.5.9.4"),
+//				SubnetId:             pulumi.String("subnet-dwj7ipnc"),
+//				Tags: pulumi.Map{
+//					"createdBy": pulumi.Any("terraform"),
+//				},
+//				TradeType: pulumi.Int(0),
+//				VpcId:     pulumi.String("vpc-4owdpnwr"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
+//
 // ### Create zookeeper professional version
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Tse"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tse"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tse"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Tse.NewInstance(ctx, "zookeeperProfessional", &Tse.InstanceArgs{
-// 			EngineName:           pulumi.String("zookeeper-test"),
-// 			EngineNodeNum:        pulumi.Int(3),
-// 			EngineProductVersion: pulumi.String("PROFESSIONAL"),
-// 			EngineRegion:         pulumi.String("ap-guangzhou"),
-// 			EngineRegionInfos: tse.InstanceEngineRegionInfoArray{
-// 				&tse.InstanceEngineRegionInfoArgs{
-// 					EngineRegion: pulumi.String("ap-guangzhou"),
-// 					Replica:      pulumi.Int(3),
-// 					VpcInfos: tse.InstanceEngineRegionInfoVpcInfoArray{
-// 						&tse.InstanceEngineRegionInfoVpcInfoArgs{
-// 							SubnetId: pulumi.String("subnet-dwj7ipnc"),
-// 							VpcId:    pulumi.String("vpc-4owdpnwr"),
-// 						},
-// 						&tse.InstanceEngineRegionInfoVpcInfoArgs{
-// 							SubnetId: pulumi.String("subnet-403mgks4"),
-// 							VpcId:    pulumi.String("vpc-b1puef4z"),
-// 						},
-// 					},
-// 				},
-// 			},
-// 			EngineResourceSpec: pulumi.String("spec-qvj6k7t4q"),
-// 			EngineType:         pulumi.String("zookeeper"),
-// 			EngineVersion:      pulumi.String("3.5.9.4"),
-// 			SubnetId:           pulumi.String("subnet-dwj7ipnc"),
-// 			Tags: pulumi.AnyMap{
-// 				"createdBy": pulumi.Any("terraform"),
-// 			},
-// 			TradeType: pulumi.Int(0),
-// 			VpcId:     pulumi.String("vpc-4owdpnwr"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Tse.NewInstance(ctx, "zookeeperProfessional", &Tse.InstanceArgs{
+//				EngineName:           pulumi.String("zookeeper-test"),
+//				EngineNodeNum:        pulumi.Int(3),
+//				EngineProductVersion: pulumi.String("PROFESSIONAL"),
+//				EngineRegion:         pulumi.String("ap-guangzhou"),
+//				EngineRegionInfos: tse.InstanceEngineRegionInfoArray{
+//					&tse.InstanceEngineRegionInfoArgs{
+//						EngineRegion: pulumi.String("ap-guangzhou"),
+//						Replica:      pulumi.Int(3),
+//						VpcInfos: tse.InstanceEngineRegionInfoVpcInfoArray{
+//							&tse.InstanceEngineRegionInfoVpcInfoArgs{
+//								SubnetId: pulumi.String("subnet-dwj7ipnc"),
+//								VpcId:    pulumi.String("vpc-4owdpnwr"),
+//							},
+//							&tse.InstanceEngineRegionInfoVpcInfoArgs{
+//								SubnetId: pulumi.String("subnet-403mgks4"),
+//								VpcId:    pulumi.String("vpc-b1puef4z"),
+//							},
+//						},
+//					},
+//				},
+//				EngineResourceSpec: pulumi.String("spec-qvj6k7t4q"),
+//				EngineType:         pulumi.String("zookeeper"),
+//				EngineVersion:      pulumi.String("3.5.9.4"),
+//				SubnetId:           pulumi.String("subnet-dwj7ipnc"),
+//				Tags: pulumi.Map{
+//					"createdBy": pulumi.Any("terraform"),
+//				},
+//				TradeType: pulumi.Int(0),
+//				VpcId:     pulumi.String("vpc-4owdpnwr"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
+//
 // ### Create nacos standard version
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tse"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tse"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Tse.NewInstance(ctx, "nacos", &Tse.InstanceArgs{
-// 			EnableClientInternetAccess: pulumi.Bool(false),
-// 			EngineName:                 pulumi.String("test"),
-// 			EngineNodeNum:              pulumi.Int(3),
-// 			EngineProductVersion:       pulumi.String("STANDARD"),
-// 			EngineRegion:               pulumi.String("ap-guangzhou"),
-// 			EngineResourceSpec:         pulumi.String("spec-1160a35a"),
-// 			EngineType:                 pulumi.String("nacos"),
-// 			EngineVersion:              pulumi.String("2.0.3.4"),
-// 			SubnetId:                   pulumi.String("subnet-5vpegquy"),
-// 			Tags: pulumi.AnyMap{
-// 				"createdBy": pulumi.Any("terraform"),
-// 			},
-// 			TradeType: pulumi.Int(0),
-// 			VpcId:     pulumi.String("vpc-99xmasf9"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Tse.NewInstance(ctx, "nacos", &Tse.InstanceArgs{
+//				EnableClientInternetAccess: pulumi.Bool(false),
+//				EngineName:                 pulumi.String("test"),
+//				EngineNodeNum:              pulumi.Int(3),
+//				EngineProductVersion:       pulumi.String("STANDARD"),
+//				EngineRegion:               pulumi.String("ap-guangzhou"),
+//				EngineResourceSpec:         pulumi.String("spec-1160a35a"),
+//				EngineType:                 pulumi.String("nacos"),
+//				EngineVersion:              pulumi.String("2.0.3.4"),
+//				SubnetId:                   pulumi.String("subnet-5vpegquy"),
+//				Tags: pulumi.Map{
+//					"createdBy": pulumi.Any("terraform"),
+//				},
+//				TradeType: pulumi.Int(0),
+//				VpcId:     pulumi.String("vpc-99xmasf9"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
+//
 // ### Create polaris base version
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tse"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tse"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Tse.NewInstance(ctx, "polaris", &Tse.InstanceArgs{
-// 			EnableClientInternetAccess: pulumi.Bool(false),
-// 			EngineName:                 pulumi.String("test"),
-// 			EngineNodeNum:              pulumi.Int(2),
-// 			EngineProductVersion:       pulumi.String("BASE"),
-// 			EngineRegion:               pulumi.String("ap-guangzhou"),
-// 			EngineResourceSpec:         pulumi.String("spec-c160bas1"),
-// 			EngineType:                 pulumi.String("polaris"),
-// 			EngineVersion:              pulumi.String("1.16.0.1"),
-// 			SubnetId:                   pulumi.String("subnet-5vpegquy"),
-// 			Tags: pulumi.AnyMap{
-// 				"createdBy": pulumi.Any("terraform"),
-// 			},
-// 			TradeType: pulumi.Int(0),
-// 			VpcId:     pulumi.String("vpc-99xmasf9"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Tse.NewInstance(ctx, "polaris", &Tse.InstanceArgs{
+//				EnableClientInternetAccess: pulumi.Bool(false),
+//				EngineName:                 pulumi.String("test"),
+//				EngineNodeNum:              pulumi.Int(2),
+//				EngineProductVersion:       pulumi.String("BASE"),
+//				EngineRegion:               pulumi.String("ap-guangzhou"),
+//				EngineResourceSpec:         pulumi.String("spec-c160bas1"),
+//				EngineType:                 pulumi.String("polaris"),
+//				EngineVersion:              pulumi.String("1.16.0.1"),
+//				SubnetId:                   pulumi.String("subnet-5vpegquy"),
+//				Tags: pulumi.Map{
+//					"createdBy": pulumi.Any("terraform"),
+//				},
+//				TradeType: pulumi.Int(0),
+//				VpcId:     pulumi.String("vpc-99xmasf9"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // tse instance can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Tse/instance:Instance instance instance_id
+// $ pulumi import tencentcloud:Tse/instance:Instance instance instance_id
 // ```
 type Instance struct {
 	pulumi.CustomResourceState
@@ -237,7 +261,7 @@ func NewInstance(ctx *pulumi.Context,
 	if args.TradeType == nil {
 		return nil, errors.New("invalid value for required argument 'TradeType'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource Instance
 	err := ctx.RegisterResource("tencentcloud:Tse/instance:Instance", name, args, &resource, opts...)
 	if err != nil {
@@ -422,7 +446,7 @@ func (i *Instance) ToInstanceOutputWithContext(ctx context.Context) InstanceOutp
 // InstanceArrayInput is an input type that accepts InstanceArray and InstanceArrayOutput values.
 // You can construct a concrete instance of `InstanceArrayInput` via:
 //
-//          InstanceArray{ InstanceArgs{...} }
+//	InstanceArray{ InstanceArgs{...} }
 type InstanceArrayInput interface {
 	pulumi.Input
 
@@ -447,7 +471,7 @@ func (i InstanceArray) ToInstanceArrayOutputWithContext(ctx context.Context) Ins
 // InstanceMapInput is an input type that accepts InstanceMap and InstanceMapOutput values.
 // You can construct a concrete instance of `InstanceMapInput` via:
 //
-//          InstanceMap{ "key": InstanceArgs{...} }
+//	InstanceMap{ "key": InstanceArgs{...} }
 type InstanceMapInput interface {
 	pulumi.Input
 

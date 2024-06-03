@@ -9,21 +9,20 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const instanceShards = pulumi.output(tencentcloud.Clickhouse.getInstanceShards({
+ * const instanceShards = tencentcloud.Clickhouse.getInstanceShards({
  *     instanceId: "cdwch-datuhk3z",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getInstanceShards(args: GetInstanceShardsArgs, opts?: pulumi.InvokeOptions): Promise<GetInstanceShardsResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Clickhouse/getInstanceShards:getInstanceShards", {
         "instanceId": args.instanceId,
         "resultOutputFile": args.resultOutputFile,
@@ -59,9 +58,24 @@ export interface GetInstanceShardsResult {
     readonly instanceShardsList: string;
     readonly resultOutputFile?: string;
 }
-
+/**
+ * Use this data source to query detailed information of clickhouse instanceShards
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const instanceShards = tencentcloud.Clickhouse.getInstanceShards({
+ *     instanceId: "cdwch-datuhk3z",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getInstanceShardsOutput(args: GetInstanceShardsOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetInstanceShardsResult> {
-    return pulumi.output(args).apply(a => getInstanceShards(a, opts))
+    return pulumi.output(args).apply((a: any) => getInstanceShards(a, opts))
 }
 
 /**

@@ -9,20 +9,19 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const blackHeader = pulumi.output(tencentcloud.Gaap.getBlackHeader());
+ * const blackHeader = tencentcloud.Gaap.getBlackHeader({});
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getBlackHeader(args?: GetBlackHeaderArgs, opts?: pulumi.InvokeOptions): Promise<GetBlackHeaderResult> {
     args = args || {};
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Gaap/getBlackHeader:getBlackHeader", {
         "resultOutputFile": args.resultOutputFile,
     }, opts);
@@ -52,9 +51,22 @@ export interface GetBlackHeaderResult {
     readonly id: string;
     readonly resultOutputFile?: string;
 }
-
+/**
+ * Use this data source to query detailed information of gaap black header
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const blackHeader = tencentcloud.Gaap.getBlackHeader({});
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getBlackHeaderOutput(args?: GetBlackHeaderOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetBlackHeaderResult> {
-    return pulumi.output(args).apply(a => getBlackHeader(a, opts))
+    return pulumi.output(args).apply((a: any) => getBlackHeader(a, opts))
 }
 
 /**

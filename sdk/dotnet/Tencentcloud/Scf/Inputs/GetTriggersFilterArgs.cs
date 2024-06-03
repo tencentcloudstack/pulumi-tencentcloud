@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Scf.Inputs
 {
 
-    public sealed class GetTriggersFilterInputArgs : Pulumi.ResourceArgs
+    public sealed class GetTriggersFilterInputArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Fields to be filtered. Up to 10 conditions allowed.Values of Name: VpcId, SubnetId, ClsTopicId, ClsLogsetId, Role, CfsId, CfsMountInsId, Eip. Values limit: 1.Name options: Status, Runtime, FunctionType, PublicNetStatus, AsyncRunEnable, TraceEnable. Values limit: 20.When Name is Runtime, CustomImage refers to the image type function.
@@ -34,5 +34,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Scf.Inputs
         public GetTriggersFilterInputArgs()
         {
         }
+        public static new GetTriggersFilterInputArgs Empty => new GetTriggersFilterInputArgs();
     }
 }

@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcm.Inputs
 {
 
-    public sealed class MeshConfigPrometheusCustomPromArgs : Pulumi.ResourceArgs
+    public sealed class MeshConfigPrometheusCustomPromArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Authentication type of the prometheus.
@@ -52,5 +52,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcm.Inputs
         public MeshConfigPrometheusCustomPromArgs()
         {
         }
+        public static new MeshConfigPrometheusCustomPromArgs Empty => new MeshConfigPrometheusCustomPromArgs();
     }
 }

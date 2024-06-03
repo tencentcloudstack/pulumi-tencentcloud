@@ -14,8 +14,17 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cfw.Outputs
     [OutputType]
     public sealed class VpcPolicyBetaList
     {
+        /// <summary>
+        /// Last execution time. Note: This field may return null, indicating that no valid value can be obtained.
+        /// </summary>
         public readonly string? LastTime;
+        /// <summary>
+        /// Task id. Note: This field may return null, indicating that no valid value can be obtained.
+        /// </summary>
         public readonly int? TaskId;
+        /// <summary>
+        /// Mission name. Note: This field may return null, indicating that no valid value can be obtained.
+        /// </summary>
         public readonly string? TaskName;
 
         [OutputConstructor]

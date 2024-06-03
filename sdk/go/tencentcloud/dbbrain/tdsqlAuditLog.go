@@ -7,51 +7,54 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a dbbrain tdsqlAuditLog
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"fmt"
 //
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Dbbrain"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dbbrain"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dbbrain"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Dbbrain.NewTdsqlAuditLog(ctx, "myLog", &Dbbrain.TdsqlAuditLogArgs{
-// 			EndTime: pulumi.String(fmt.Sprintf("%v%v", "%", "s")),
-// 			Filter: &dbbrain.TdsqlAuditLogFilterArgs{
-// 				Hosts: pulumi.StringArray{
-// 					pulumi.String(fmt.Sprintf("%v%v", "%", "%")),
-// 					pulumi.String("127.0.0.1"),
-// 				},
-// 				Users: pulumi.StringArray{
-// 					pulumi.String("tf_test"),
-// 					pulumi.String("mysql"),
-// 				},
-// 			},
-// 			InstanceId:      pulumi.String(fmt.Sprintf("%v%v", "%", "s")),
-// 			NodeRequestType: pulumi.String("dcdb"),
-// 			Product:         pulumi.String("dcdb"),
-// 			StartTime:       pulumi.String(fmt.Sprintf("%v%v", "%", "s")),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Dbbrain.NewTdsqlAuditLog(ctx, "myLog", &Dbbrain.TdsqlAuditLogArgs{
+//				EndTime: pulumi.String("%s"),
+//				Filter: &dbbrain.TdsqlAuditLogFilterArgs{
+//					Hosts: pulumi.StringArray{
+//						pulumi.String("%%"),
+//						pulumi.String("127.0.0.1"),
+//					},
+//					Users: pulumi.StringArray{
+//						pulumi.String("tf_test"),
+//						pulumi.String("mysql"),
+//					},
+//				},
+//				InstanceId:      pulumi.String("%s"),
+//				NodeRequestType: pulumi.String("dcdb"),
+//				Product:         pulumi.String("dcdb"),
+//				StartTime:       pulumi.String("%s"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 type TdsqlAuditLog struct {
 	pulumi.CustomResourceState
 
@@ -91,7 +94,7 @@ func NewTdsqlAuditLog(ctx *pulumi.Context,
 	if args.StartTime == nil {
 		return nil, errors.New("invalid value for required argument 'StartTime'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource TdsqlAuditLog
 	err := ctx.RegisterResource("tencentcloud:Dbbrain/tdsqlAuditLog:TdsqlAuditLog", name, args, &resource, opts...)
 	if err != nil {
@@ -204,7 +207,7 @@ func (i *TdsqlAuditLog) ToTdsqlAuditLogOutputWithContext(ctx context.Context) Td
 // TdsqlAuditLogArrayInput is an input type that accepts TdsqlAuditLogArray and TdsqlAuditLogArrayOutput values.
 // You can construct a concrete instance of `TdsqlAuditLogArrayInput` via:
 //
-//          TdsqlAuditLogArray{ TdsqlAuditLogArgs{...} }
+//	TdsqlAuditLogArray{ TdsqlAuditLogArgs{...} }
 type TdsqlAuditLogArrayInput interface {
 	pulumi.Input
 
@@ -229,7 +232,7 @@ func (i TdsqlAuditLogArray) ToTdsqlAuditLogArrayOutputWithContext(ctx context.Co
 // TdsqlAuditLogMapInput is an input type that accepts TdsqlAuditLogMap and TdsqlAuditLogMapOutput values.
 // You can construct a concrete instance of `TdsqlAuditLogMapInput` via:
 //
-//          TdsqlAuditLogMap{ "key": TdsqlAuditLogArgs{...} }
+//	TdsqlAuditLogMap{ "key": TdsqlAuditLogArgs{...} }
 type TdsqlAuditLogMapInput interface {
 	pulumi.Input
 

@@ -9,15 +9,17 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const cronJobRestart = new tencentcloud.Pts.CronJobRestart("cron_job_restart", {
+ * const cronJobRestart = new tencentcloud.pts.CronJobRestart("cronJobRestart", {
  *     cronJobId: "job-dtm93vx0",
  *     projectId: "project-abc",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export class CronJobRestart extends pulumi.CustomResource {
     /**

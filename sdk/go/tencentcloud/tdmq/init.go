@@ -8,7 +8,7 @@ import (
 
 	"github.com/blang/semver"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 type module struct {
@@ -57,6 +57,8 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 		r = &Subscription{}
 	case "tencentcloud:Tdmq/topic:Topic":
 		r = &Topic{}
+	case "tencentcloud:Tdmq/topicWithFullId:TopicWithFullId":
+		r = &TopicWithFullId{}
 	default:
 		return nil, fmt.Errorf("unknown resource type: %s", typ)
 	}
@@ -66,7 +68,7 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 }
 
 func init() {
-	version, err := tencentcloud.PkgVersion()
+	version, err := internal.PkgVersion()
 	if err != nil {
 		version = semver.Version{Major: 1}
 	}
@@ -158,6 +160,11 @@ func init() {
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
 		"Tdmq/topic",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Tdmq/topicWithFullId",
 		&module{version},
 	)
 }

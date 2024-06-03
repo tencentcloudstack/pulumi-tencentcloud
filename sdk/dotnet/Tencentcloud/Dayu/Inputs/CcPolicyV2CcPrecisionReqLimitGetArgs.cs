@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dayu.Inputs
 {
 
-    public sealed class CcPolicyV2CcPrecisionReqLimitGetArgs : Pulumi.ResourceArgs
+    public sealed class CcPolicyV2CcPrecisionReqLimitGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Domain.
@@ -19,6 +19,9 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dayu.Inputs
         [Input("domain", required: true)]
         public Input<string> Domain { get; set; } = null!;
 
+        /// <summary>
+        /// Instance id.
+        /// </summary>
         [Input("instanceId")]
         public Input<string>? InstanceId { get; set; }
 
@@ -55,5 +58,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dayu.Inputs
         public CcPolicyV2CcPrecisionReqLimitGetArgs()
         {
         }
+        public static new CcPolicyV2CcPrecisionReqLimitGetArgs Empty => new CcPolicyV2CcPrecisionReqLimitGetArgs();
     }
 }

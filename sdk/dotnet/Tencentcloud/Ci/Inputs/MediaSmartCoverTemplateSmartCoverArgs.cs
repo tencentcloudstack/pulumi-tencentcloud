@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ci.Inputs
 {
 
-    public sealed class MediaSmartCoverTemplateSmartCoverArgs : Pulumi.ResourceArgs
+    public sealed class MediaSmartCoverTemplateSmartCoverArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Number of screenshots, [1,10].
@@ -46,5 +46,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ci.Inputs
         public MediaSmartCoverTemplateSmartCoverArgs()
         {
         }
+        public static new MediaSmartCoverTemplateSmartCoverArgs Empty => new MediaSmartCoverTemplateSmartCoverArgs();
     }
 }

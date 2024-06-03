@@ -7,50 +7,55 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a scf provisionedConcurrencyConfig
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Scf"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Scf"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Scf"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Scf.NewProvisionedConcurrencyConfig(ctx, "provisionedConcurrencyConfig", &Scf.ProvisionedConcurrencyConfigArgs{
-// 			FunctionName:    pulumi.String("keep-1676351130"),
-// 			MaxCapacity:     pulumi.Int(2),
-// 			MinCapacity:     pulumi.Int(1),
-// 			Namespace:       pulumi.String("default"),
-// 			ProvisionedType: pulumi.String("Default"),
-// 			Qualifier:       pulumi.String("2"),
-// 			TrackingTarget:  pulumi.Float64(0.5),
-// 			TriggerActions: scf.ProvisionedConcurrencyConfigTriggerActionArray{
-// 				&scf.ProvisionedConcurrencyConfigTriggerActionArgs{
-// 					ProvisionedType:                  pulumi.String("Default"),
-// 					TriggerCronConfig:                pulumi.String("29 45 12 29 05 * 2023"),
-// 					TriggerName:                      pulumi.String("test"),
-// 					TriggerProvisionedConcurrencyNum: pulumi.Int(2),
-// 				},
-// 			},
-// 			VersionProvisionedConcurrencyNum: pulumi.Int(2),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Scf.NewProvisionedConcurrencyConfig(ctx, "provisionedConcurrencyConfig", &Scf.ProvisionedConcurrencyConfigArgs{
+//				FunctionName:    pulumi.String("keep-1676351130"),
+//				MaxCapacity:     pulumi.Int(2),
+//				MinCapacity:     pulumi.Int(1),
+//				Namespace:       pulumi.String("default"),
+//				ProvisionedType: pulumi.String("Default"),
+//				Qualifier:       pulumi.String("2"),
+//				TrackingTarget:  pulumi.Float64(0.5),
+//				TriggerActions: scf.ProvisionedConcurrencyConfigTriggerActionArray{
+//					&scf.ProvisionedConcurrencyConfigTriggerActionArgs{
+//						ProvisionedType:                  pulumi.String("Default"),
+//						TriggerCronConfig:                pulumi.String("29 45 12 29 05 * 2023"),
+//						TriggerName:                      pulumi.String("test"),
+//						TriggerProvisionedConcurrencyNum: pulumi.Int(2),
+//					},
+//				},
+//				VersionProvisionedConcurrencyNum: pulumi.Int(2),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 type ProvisionedConcurrencyConfig struct {
 	pulumi.CustomResourceState
 
@@ -90,7 +95,7 @@ func NewProvisionedConcurrencyConfig(ctx *pulumi.Context,
 	if args.VersionProvisionedConcurrencyNum == nil {
 		return nil, errors.New("invalid value for required argument 'VersionProvisionedConcurrencyNum'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource ProvisionedConcurrencyConfig
 	err := ctx.RegisterResource("tencentcloud:Scf/provisionedConcurrencyConfig:ProvisionedConcurrencyConfig", name, args, &resource, opts...)
 	if err != nil {
@@ -227,7 +232,7 @@ func (i *ProvisionedConcurrencyConfig) ToProvisionedConcurrencyConfigOutputWithC
 // ProvisionedConcurrencyConfigArrayInput is an input type that accepts ProvisionedConcurrencyConfigArray and ProvisionedConcurrencyConfigArrayOutput values.
 // You can construct a concrete instance of `ProvisionedConcurrencyConfigArrayInput` via:
 //
-//          ProvisionedConcurrencyConfigArray{ ProvisionedConcurrencyConfigArgs{...} }
+//	ProvisionedConcurrencyConfigArray{ ProvisionedConcurrencyConfigArgs{...} }
 type ProvisionedConcurrencyConfigArrayInput interface {
 	pulumi.Input
 
@@ -252,7 +257,7 @@ func (i ProvisionedConcurrencyConfigArray) ToProvisionedConcurrencyConfigArrayOu
 // ProvisionedConcurrencyConfigMapInput is an input type that accepts ProvisionedConcurrencyConfigMap and ProvisionedConcurrencyConfigMapOutput values.
 // You can construct a concrete instance of `ProvisionedConcurrencyConfigMapInput` via:
 //
-//          ProvisionedConcurrencyConfigMap{ "key": ProvisionedConcurrencyConfigArgs{...} }
+//	ProvisionedConcurrencyConfigMap{ "key": ProvisionedConcurrencyConfigArgs{...} }
 type ProvisionedConcurrencyConfigMapInput interface {
 	pulumi.Input
 

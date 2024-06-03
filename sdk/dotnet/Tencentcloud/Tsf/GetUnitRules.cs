@@ -15,66 +15,60 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf
         /// <summary>
         /// Use this data source to query detailed information of tsf unit_rules
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var unitRules = Tencentcloud.Tsf.GetUnitRules.Invoke(new()
         ///     {
-        ///         var unitRules = Output.Create(Tencentcloud.Tsf.GetUnitRules.InvokeAsync(new Tencentcloud.Tsf.GetUnitRulesArgs
-        ///         {
-        ///             GatewayInstanceId = "gw-ins-lvdypq5k",
-        ///             Status = "disabled",
-        ///         }));
-        ///     }
+        ///         GatewayInstanceId = "gw-ins-lvdypq5k",
+        ///         Status = "disabled",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetUnitRulesResult> InvokeAsync(GetUnitRulesArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetUnitRulesResult>("tencentcloud:Tsf/getUnitRules:getUnitRules", args ?? new GetUnitRulesArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetUnitRulesResult>("tencentcloud:Tsf/getUnitRules:getUnitRules", args ?? new GetUnitRulesArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of tsf unit_rules
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var unitRules = Tencentcloud.Tsf.GetUnitRules.Invoke(new()
         ///     {
-        ///         var unitRules = Output.Create(Tencentcloud.Tsf.GetUnitRules.InvokeAsync(new Tencentcloud.Tsf.GetUnitRulesArgs
-        ///         {
-        ///             GatewayInstanceId = "gw-ins-lvdypq5k",
-        ///             Status = "disabled",
-        ///         }));
-        ///     }
+        ///         GatewayInstanceId = "gw-ins-lvdypq5k",
+        ///         Status = "disabled",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetUnitRulesResult> Invoke(GetUnitRulesInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetUnitRulesResult>("tencentcloud:Tsf/getUnitRules:getUnitRules", args ?? new GetUnitRulesInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetUnitRulesResult>("tencentcloud:Tsf/getUnitRules:getUnitRules", args ?? new GetUnitRulesInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetUnitRulesArgs : Pulumi.InvokeArgs
+    public sealed class GetUnitRulesArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// gateway instance id.
@@ -97,9 +91,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf
         public GetUnitRulesArgs()
         {
         }
+        public static new GetUnitRulesArgs Empty => new GetUnitRulesArgs();
     }
 
-    public sealed class GetUnitRulesInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetUnitRulesInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// gateway instance id.
@@ -122,6 +117,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf
         public GetUnitRulesInvokeArgs()
         {
         }
+        public static new GetUnitRulesInvokeArgs Empty => new GetUnitRulesInvokeArgs();
     }
 
 

@@ -9,22 +9,24 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const config = new tencentcloud.Dcdb.DbSyncModeConfig("config", {
+ * const config = new tencentcloud.dcdb.DbSyncModeConfig("config", {
  *     instanceId: "%s",
  *     syncMode: 2,
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * dcdb db_sync_mode_config can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Dcdb/dbSyncModeConfig:DbSyncModeConfig db_sync_mode_config db_sync_mode_config_id
+ * $ pulumi import tencentcloud:Dcdb/dbSyncModeConfig:DbSyncModeConfig db_sync_mode_config db_sync_mode_config_id
  * ```
  */
 export class DbSyncModeConfig extends pulumi.CustomResource {

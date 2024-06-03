@@ -9,10 +9,11 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const info = tencentcloud.User.getInfo({});
  * const ownerUin = info.then(info => info.ownerUin);
@@ -26,13 +27,14 @@ import * as utilities from "../utilities";
  *     destinationRegion: "ap-guangzhou",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * vpc peer_connect_manager can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Vpc/peerConnectManager:PeerConnectManager peer_connect_manager peer_connect_manager_id
+ * $ pulumi import tencentcloud:Vpc/peerConnectManager:PeerConnectManager peer_connect_manager peer_connect_manager_id
  * ```
  */
 export class PeerConnectManager extends pulumi.CustomResource {

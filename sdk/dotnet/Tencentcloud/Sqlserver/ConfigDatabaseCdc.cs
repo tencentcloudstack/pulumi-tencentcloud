@@ -14,111 +14,121 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
     /// Provides a resource to create a sqlserver config_database_cdc
     /// 
     /// ## Example Usage
+    /// 
     /// ### Turn off database data change capture (CDC)
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = Pulumi.Tencentcloud;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var zones = Tencentcloud.Availability.GetZonesByProduct.Invoke(new()
     ///     {
-    ///         var zones = Output.Create(Tencentcloud.Availability.GetZonesByProduct.InvokeAsync(new Tencentcloud.Availability.GetZonesByProductArgs
-    ///         {
-    ///             Product = "sqlserver",
-    ///         }));
-    ///         var vpc = new Tencentcloud.Vpc.Instance("vpc", new Tencentcloud.Vpc.InstanceArgs
-    ///         {
-    ///             CidrBlock = "10.0.0.0/16",
-    ///         });
-    ///         var subnet = new Tencentcloud.Subnet.Instance("subnet", new Tencentcloud.Subnet.InstanceArgs
-    ///         {
-    ///             AvailabilityZone = zones.Apply(zones =&gt; zones.Zones?[4]?.Name),
-    ///             VpcId = vpc.Id,
-    ///             CidrBlock = "10.0.0.0/16",
-    ///             IsMulticast = false,
-    ///         });
-    ///         var securityGroup = new Tencentcloud.Security.Group("securityGroup", new Tencentcloud.Security.GroupArgs
-    ///         {
-    ///             Description = "desc.",
-    ///         });
-    ///         var exampleBasicInstance = new Tencentcloud.Sqlserver.BasicInstance("exampleBasicInstance", new Tencentcloud.Sqlserver.BasicInstanceArgs
-    ///         {
-    ///             AvailabilityZone = zones.Apply(zones =&gt; zones.Zones?[4]?.Name),
-    ///             ChargeType = "POSTPAID_BY_HOUR",
-    ///             VpcId = vpc.Id,
-    ///             SubnetId = subnet.Id,
-    ///             ProjectId = 0,
-    ///             Memory = 4,
-    ///             Storage = 100,
-    ///             Cpu = 2,
-    ///             MachineType = "CLOUD_PREMIUM",
-    ///             MaintenanceWeekSets = 
-    ///             {
-    ///                 1,
-    ///                 2,
-    ///                 3,
-    ///             },
-    ///             MaintenanceStartTime = "09:00",
-    ///             MaintenanceTimeSpan = 3,
-    ///             SecurityGroups = 
-    ///             {
-    ///                 securityGroup.Id,
-    ///             },
-    ///             Tags = 
-    ///             {
-    ///                 { "test", "test" },
-    ///             },
-    ///         });
-    ///         var exampleDb = new Tencentcloud.Sqlserver.Db("exampleDb", new Tencentcloud.Sqlserver.DbArgs
-    ///         {
-    ///             InstanceId = exampleBasicInstance.Id,
-    ///             Charset = "Chinese_PRC_BIN",
-    ///             Remark = "test-remark",
-    ///         });
-    ///         var exampleConfigDatabaseCdc = new Tencentcloud.Sqlserver.ConfigDatabaseCdc("exampleConfigDatabaseCdc", new Tencentcloud.Sqlserver.ConfigDatabaseCdcArgs
-    ///         {
-    ///             InstanceId = exampleBasicInstance.Id,
-    ///             DbName = exampleDb.Name,
-    ///             ModifyType = "disable",
-    ///         });
-    ///     }
+    ///         Product = "sqlserver",
+    ///     });
     /// 
-    /// }
+    ///     var vpc = new Tencentcloud.Vpc.Instance("vpc", new()
+    ///     {
+    ///         CidrBlock = "10.0.0.0/16",
+    ///     });
+    /// 
+    ///     var subnet = new Tencentcloud.Subnet.Instance("subnet", new()
+    ///     {
+    ///         AvailabilityZone = zones.Apply(getZonesByProductResult =&gt; getZonesByProductResult.Zones[4]?.Name),
+    ///         VpcId = vpc.Id,
+    ///         CidrBlock = "10.0.0.0/16",
+    ///         IsMulticast = false,
+    ///     });
+    /// 
+    ///     var securityGroup = new Tencentcloud.Security.Group("securityGroup", new()
+    ///     {
+    ///         Description = "desc.",
+    ///     });
+    /// 
+    ///     var exampleBasicInstance = new Tencentcloud.Sqlserver.BasicInstance("exampleBasicInstance", new()
+    ///     {
+    ///         AvailabilityZone = zones.Apply(getZonesByProductResult =&gt; getZonesByProductResult.Zones[4]?.Name),
+    ///         ChargeType = "POSTPAID_BY_HOUR",
+    ///         VpcId = vpc.Id,
+    ///         SubnetId = subnet.Id,
+    ///         ProjectId = 0,
+    ///         Memory = 4,
+    ///         Storage = 100,
+    ///         Cpu = 2,
+    ///         MachineType = "CLOUD_PREMIUM",
+    ///         MaintenanceWeekSets = new[]
+    ///         {
+    ///             1,
+    ///             2,
+    ///             3,
+    ///         },
+    ///         MaintenanceStartTime = "09:00",
+    ///         MaintenanceTimeSpan = 3,
+    ///         SecurityGroups = new[]
+    ///         {
+    ///             securityGroup.Id,
+    ///         },
+    ///         Tags = 
+    ///         {
+    ///             { "test", "test" },
+    ///         },
+    ///     });
+    /// 
+    ///     var exampleDb = new Tencentcloud.Sqlserver.Db("exampleDb", new()
+    ///     {
+    ///         InstanceId = exampleBasicInstance.Id,
+    ///         Charset = "Chinese_PRC_BIN",
+    ///         Remark = "test-remark",
+    ///     });
+    /// 
+    ///     var exampleConfigDatabaseCdc = new Tencentcloud.Sqlserver.ConfigDatabaseCdc("exampleConfigDatabaseCdc", new()
+    ///     {
+    ///         InstanceId = exampleBasicInstance.Id,
+    ///         DbName = exampleDb.Name,
+    ///         ModifyType = "disable",
+    ///     });
+    /// 
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
+    /// 
     /// ### Enable Database Data Change Capture (CDC)
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var example = new Tencentcloud.Sqlserver.ConfigDatabaseCdc("example", new()
     ///     {
-    ///         var example = new Tencentcloud.Sqlserver.ConfigDatabaseCdc("example", new Tencentcloud.Sqlserver.ConfigDatabaseCdcArgs
-    ///         {
-    ///             InstanceId = tencentcloud_sqlserver_basic_instance.Example.Id,
-    ///             DbName = tencentcloud_sqlserver_db.Example.Name,
-    ///             ModifyType = "enable",
-    ///         });
-    ///     }
+    ///         InstanceId = tencentcloud_sqlserver_basic_instance.Example.Id,
+    ///         DbName = tencentcloud_sqlserver_db.Example.Name,
+    ///         ModifyType = "enable",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// sqlserver config_database_cdc can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Sqlserver/configDatabaseCdc:ConfigDatabaseCdc example mssql-i9ma6oy7#tf_example_db
+    /// $ pulumi import tencentcloud:Sqlserver/configDatabaseCdc:ConfigDatabaseCdc example mssql-i9ma6oy7#tf_example_db
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Sqlserver/configDatabaseCdc:ConfigDatabaseCdc")]
-    public partial class ConfigDatabaseCdc : Pulumi.CustomResource
+    public partial class ConfigDatabaseCdc : global::Pulumi.CustomResource
     {
         /// <summary>
         /// database name.
@@ -183,7 +193,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
         }
     }
 
-    public sealed class ConfigDatabaseCdcArgs : Pulumi.ResourceArgs
+    public sealed class ConfigDatabaseCdcArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// database name.
@@ -206,9 +216,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
         public ConfigDatabaseCdcArgs()
         {
         }
+        public static new ConfigDatabaseCdcArgs Empty => new ConfigDatabaseCdcArgs();
     }
 
-    public sealed class ConfigDatabaseCdcState : Pulumi.ResourceArgs
+    public sealed class ConfigDatabaseCdcState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// database name.
@@ -231,5 +242,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
         public ConfigDatabaseCdcState()
         {
         }
+        public static new ConfigDatabaseCdcState Empty => new ConfigDatabaseCdcState();
     }
 }

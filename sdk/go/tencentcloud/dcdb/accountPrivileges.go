@@ -7,8 +7,9 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a dcdb accountPrivileges
@@ -18,7 +19,7 @@ import (
 // dcdb account_privileges can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Dcdb/accountPrivileges:AccountPrivileges account_privileges instanceId#userName#host#dbName#tabName#viewName#colName
+// $ pulumi import tencentcloud:Dcdb/accountPrivileges:AccountPrivileges account_privileges instanceId#userName#host#dbName#tabName#viewName#colName
 // ```
 type AccountPrivileges struct {
 	pulumi.CustomResourceState
@@ -52,7 +53,7 @@ func NewAccountPrivileges(ctx *pulumi.Context,
 	if args.InstanceId == nil {
 		return nil, errors.New("invalid value for required argument 'InstanceId'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource AccountPrivileges
 	err := ctx.RegisterResource("tencentcloud:Dcdb/accountPrivileges:AccountPrivileges", name, args, &resource, opts...)
 	if err != nil {
@@ -173,7 +174,7 @@ func (i *AccountPrivileges) ToAccountPrivilegesOutputWithContext(ctx context.Con
 // AccountPrivilegesArrayInput is an input type that accepts AccountPrivilegesArray and AccountPrivilegesArrayOutput values.
 // You can construct a concrete instance of `AccountPrivilegesArrayInput` via:
 //
-//          AccountPrivilegesArray{ AccountPrivilegesArgs{...} }
+//	AccountPrivilegesArray{ AccountPrivilegesArgs{...} }
 type AccountPrivilegesArrayInput interface {
 	pulumi.Input
 
@@ -198,7 +199,7 @@ func (i AccountPrivilegesArray) ToAccountPrivilegesArrayOutputWithContext(ctx co
 // AccountPrivilegesMapInput is an input type that accepts AccountPrivilegesMap and AccountPrivilegesMapOutput values.
 // You can construct a concrete instance of `AccountPrivilegesMapInput` via:
 //
-//          AccountPrivilegesMap{ "key": AccountPrivilegesArgs{...} }
+//	AccountPrivilegesMap{ "key": AccountPrivilegesArgs{...} }
 type AccountPrivilegesMapInput interface {
 	pulumi.Input
 

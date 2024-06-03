@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps.Inputs
 {
 
-    public sealed class ContentReviewTemplatePornConfigureGetArgs : Pulumi.ResourceArgs
+    public sealed class ContentReviewTemplatePornConfigureGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Voice pornography control parameters.
@@ -34,5 +34,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps.Inputs
         public ContentReviewTemplatePornConfigureGetArgs()
         {
         }
+        public static new ContentReviewTemplatePornConfigureGetArgs Empty => new ContentReviewTemplatePornConfigureGetArgs();
     }
 }

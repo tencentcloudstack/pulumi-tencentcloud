@@ -9,20 +9,19 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const networkAccountType = pulumi.output(tencentcloud.Eip.getNetworkAccountType());
+ * const networkAccountType = tencentcloud.Eip.getNetworkAccountType({});
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getNetworkAccountType(args?: GetNetworkAccountTypeArgs, opts?: pulumi.InvokeOptions): Promise<GetNetworkAccountTypeResult> {
     args = args || {};
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Eip/getNetworkAccountType:getNetworkAccountType", {
         "resultOutputFile": args.resultOutputFile,
     }, opts);
@@ -52,9 +51,22 @@ export interface GetNetworkAccountTypeResult {
     readonly networkAccountType: string;
     readonly resultOutputFile?: string;
 }
-
+/**
+ * Use this data source to query detailed information of eip networkAccountType
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const networkAccountType = tencentcloud.Eip.getNetworkAccountType({});
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getNetworkAccountTypeOutput(args?: GetNetworkAccountTypeOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetNetworkAccountTypeResult> {
-    return pulumi.output(args).apply(a => getNetworkAccountType(a, opts))
+    return pulumi.output(args).apply((a: any) => getNetworkAccountType(a, opts))
 }
 
 /**

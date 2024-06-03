@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,21 +11,20 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const proInstanceDetail = pulumi.output(tencentcloud.Tdmq.getProInstanceDetail({
+ * const proInstanceDetail = tencentcloud.Tdmq.getProInstanceDetail({
  *     clusterId: "pulsar-9n95ax58b9vn",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getProInstanceDetail(args: GetProInstanceDetailArgs, opts?: pulumi.InvokeOptions): Promise<GetProInstanceDetailResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Tdmq/getProInstanceDetail:getProInstanceDetail", {
         "clusterId": args.clusterId,
         "resultOutputFile": args.resultOutputFile,
@@ -71,9 +71,24 @@ export interface GetProInstanceDetailResult {
     readonly networkAccessPointInfos: outputs.Tdmq.GetProInstanceDetailNetworkAccessPointInfo[];
     readonly resultOutputFile?: string;
 }
-
+/**
+ * Use this data source to query detailed information of tdmq proInstanceDetail
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const proInstanceDetail = tencentcloud.Tdmq.getProInstanceDetail({
+ *     clusterId: "pulsar-9n95ax58b9vn",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getProInstanceDetailOutput(args: GetProInstanceDetailOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetProInstanceDetailResult> {
-    return pulumi.output(args).apply(a => getProInstanceDetail(a, opts))
+    return pulumi.output(args).apply((a: any) => getProInstanceDetail(a, opts))
 }
 
 /**

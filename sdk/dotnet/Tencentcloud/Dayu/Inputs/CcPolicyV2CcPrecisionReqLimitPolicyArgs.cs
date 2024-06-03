@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dayu.Inputs
 {
 
-    public sealed class CcPolicyV2CcPrecisionReqLimitPolicyArgs : Pulumi.ResourceArgs
+    public sealed class CcPolicyV2CcPrecisionReqLimitPolicyArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// The frequency limit policy mode, the optional value of arg indicates the verification code, and drop indicates the discard.
@@ -64,5 +64,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dayu.Inputs
         public CcPolicyV2CcPrecisionReqLimitPolicyArgs()
         {
         }
+        public static new CcPolicyV2CcPrecisionReqLimitPolicyArgs Empty => new CcPolicyV2CcPrecisionReqLimitPolicyArgs();
     }
 }

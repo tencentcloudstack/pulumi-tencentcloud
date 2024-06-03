@@ -20,10 +20,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Lighthouse.Outputs
         public readonly int Period;
         /// <summary>
         /// Automatic renewal logo. Values:
-        /// - `NOTIFY_AND_AUTO_RENEW`: notify expiration and renew automatically;
-        /// - `NOTIFY_AND_MANUAL_RENEW`: notification of expiration does not renew automatically. Users need to renew manually;
-        /// - `DISABLE_NOTIFY_AND_AUTO_RENEW`: no automatic renewal and no notification;
-        /// Default value: `NOTIFY_AND_MANUAL_RENEW`. If this parameter is specified as `NOTIFY_AND_AUTO_RENEW`, the instance will be automatically renewed on a monthly basis after expiration, when the account balance is sufficient.
         /// </summary>
         public readonly string? RenewFlag;
 

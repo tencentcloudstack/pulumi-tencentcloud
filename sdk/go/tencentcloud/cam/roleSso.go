@@ -7,46 +7,52 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a CAM-ROLE-SSO (Only support OIDC).
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cam"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cam"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Cam.NewRoleSso(ctx, "foo", &Cam.RoleSsoArgs{
-// 			ClientIds: pulumi.StringArray{
-// 				pulumi.String("..."),
-// 			},
-// 			Description: pulumi.String("this is a description"),
-// 			IdentityKey: pulumi.String("..."),
-// 			IdentityUrl: pulumi.String("https://login.microsoftonline.com/.../v2.0"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Cam.NewRoleSso(ctx, "foo", &Cam.RoleSsoArgs{
+//				ClientIds: pulumi.StringArray{
+//					pulumi.String("..."),
+//				},
+//				Description: pulumi.String("this is a description"),
+//				IdentityKey: pulumi.String("..."),
+//				IdentityUrl: pulumi.String("https://login.microsoftonline.com/.../v2.0"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // CAM-ROLE-SSO can be imported using the `name`, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Cam/roleSso:RoleSso foo "test"
+// $ pulumi import tencentcloud:Cam/roleSso:RoleSso foo "test"
 // ```
 type RoleSso struct {
 	pulumi.CustomResourceState
@@ -79,7 +85,7 @@ func NewRoleSso(ctx *pulumi.Context,
 	if args.IdentityUrl == nil {
 		return nil, errors.New("invalid value for required argument 'IdentityUrl'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource RoleSso
 	err := ctx.RegisterResource("tencentcloud:Cam/roleSso:RoleSso", name, args, &resource, opts...)
 	if err != nil {
@@ -184,7 +190,7 @@ func (i *RoleSso) ToRoleSsoOutputWithContext(ctx context.Context) RoleSsoOutput 
 // RoleSsoArrayInput is an input type that accepts RoleSsoArray and RoleSsoArrayOutput values.
 // You can construct a concrete instance of `RoleSsoArrayInput` via:
 //
-//          RoleSsoArray{ RoleSsoArgs{...} }
+//	RoleSsoArray{ RoleSsoArgs{...} }
 type RoleSsoArrayInput interface {
 	pulumi.Input
 
@@ -209,7 +215,7 @@ func (i RoleSsoArray) ToRoleSsoArrayOutputWithContext(ctx context.Context) RoleS
 // RoleSsoMapInput is an input type that accepts RoleSsoMap and RoleSsoMapOutput values.
 // You can construct a concrete instance of `RoleSsoMapInput` via:
 //
-//          RoleSsoMap{ "key": RoleSsoArgs{...} }
+//	RoleSsoMap{ "key": RoleSsoArgs{...} }
 type RoleSsoMapInput interface {
 	pulumi.Input
 

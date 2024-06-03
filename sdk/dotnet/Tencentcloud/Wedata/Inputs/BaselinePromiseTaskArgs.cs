@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Wedata.Inputs
 {
 
-    public sealed class BaselinePromiseTaskArgs : Pulumi.ResourceArgs
+    public sealed class BaselinePromiseTaskArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Project ID.
@@ -64,5 +64,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Wedata.Inputs
         public BaselinePromiseTaskArgs()
         {
         }
+        public static new BaselinePromiseTaskArgs Empty => new BaselinePromiseTaskArgs();
     }
 }

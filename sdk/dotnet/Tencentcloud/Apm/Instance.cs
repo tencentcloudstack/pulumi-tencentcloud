@@ -17,39 +17,40 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Apm
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var instance = new Tencentcloud.Apm.Instance("instance", new()
     ///     {
-    ///         var instance = new Tencentcloud.Apm.Instance("instance", new Tencentcloud.Apm.InstanceArgs
+    ///         Description = "for terraform test",
+    ///         SpanDailyCounters = 20,
+    ///         Tags = 
     ///         {
-    ///             Description = "for terraform test",
-    ///             SpanDailyCounters = 20,
-    ///             Tags = 
-    ///             {
-    ///                 { "createdBy", "terraform" },
-    ///             },
-    ///             TraceDuration = 15,
-    ///         });
-    ///     }
+    ///             { "createdBy", "terraform" },
+    ///         },
+    ///         TraceDuration = 15,
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// apm instance can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Apm/instance:Instance instance instance_id
+    /// $ pulumi import tencentcloud:Apm/instance:Instance instance instance_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Apm/instance:Instance")]
-    public partial class Instance : Pulumi.CustomResource
+    public partial class Instance : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Description Of Instance.
@@ -132,7 +133,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Apm
         }
     }
 
-    public sealed class InstanceArgs : Pulumi.ResourceArgs
+    public sealed class InstanceArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Description Of Instance.
@@ -179,9 +180,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Apm
         public InstanceArgs()
         {
         }
+        public static new InstanceArgs Empty => new InstanceArgs();
     }
 
-    public sealed class InstanceState : Pulumi.ResourceArgs
+    public sealed class InstanceState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Description Of Instance.
@@ -228,5 +230,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Apm
         public InstanceState()
         {
         }
+        public static new InstanceState Empty => new InstanceState();
     }
 }

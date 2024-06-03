@@ -8,14 +8,16 @@ import * as utilities from "../utilities";
  * Use this resource to create TcaplusDB table.
  *
  * ## Example Usage
+ *
  * ### Create a tcaplus database table
  *
  * The tcaplus database table should be pre-defined in the idl file.
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const config = new pulumi.Config();
  * const availabilityZone = config.get("availabilityZone") || "ap-guangzhou-3";
@@ -23,8 +25,8 @@ import * as utilities from "../utilities";
  *     isDefault: true,
  *     availabilityZone: availabilityZone,
  * });
- * const vpcId = vpc.then(vpc => vpc.instanceLists?[0]?.vpcId);
- * const subnetId = vpc.then(vpc => vpc.instanceLists?[0]?.subnetId);
+ * const vpcId = vpc.then(vpc => vpc.instanceLists?.[0]?.vpcId);
+ * const subnetId = vpc.then(vpc => vpc.instanceLists?.[0]?.subnetId);
  * const exampleCluster = new tencentcloud.tcaplus.Cluster("exampleCluster", {
  *     idlType: "PROTO",
  *     clusterName: "tf_example_tcaplus_cluster",
@@ -83,6 +85,7 @@ import * as utilities from "../utilities";
  *     reservedVolume: 1,
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export class Table extends pulumi.CustomResource {
     /**

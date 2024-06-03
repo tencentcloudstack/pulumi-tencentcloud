@@ -15,41 +15,42 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tem
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var workload = new Tencentcloud.Tem.Workload("workload", new()
     ///     {
-    ///         var workload = new Tencentcloud.Tem.Workload("workload", new Tencentcloud.Tem.WorkloadArgs
-    ///         {
-    ///             ApplicationId = "app-j4d3x6kj",
-    ///             CpuSpec = 1,
-    ///             DeployMode = "IMAGE",
-    ///             DeployVersion = "hello-world",
-    ///             EnvironmentId = "en-85377m6j",
-    ///             ImgRepo = "tem_demo/tem_demo",
-    ///             InitPodNum = 1,
-    ///             MemorySpec = 1,
-    ///             RepoServer = "ccr.ccs.tencentyun.com",
-    ///         });
-    ///     }
+    ///         ApplicationId = "app-j4d3x6kj",
+    ///         CpuSpec = 1,
+    ///         DeployMode = "IMAGE",
+    ///         DeployVersion = "hello-world",
+    ///         EnvironmentId = "en-85377m6j",
+    ///         ImgRepo = "tem_demo/tem_demo",
+    ///         InitPodNum = 1,
+    ///         MemorySpec = 1,
+    ///         RepoServer = "ccr.ccs.tencentyun.com",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// tem workload can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Tem/workload:Workload workload envirnomentId#applicationId
+    /// $ pulumi import tencentcloud:Tem/workload:Workload workload envirnomentId#applicationId
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Tem/workload:Workload")]
-    public partial class Workload : Pulumi.CustomResource
+    public partial class Workload : global::Pulumi.CustomResource
     {
         /// <summary>
         /// application ID.
@@ -222,7 +223,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tem
         }
     }
 
-    public sealed class WorkloadArgs : Pulumi.ResourceArgs
+    public sealed class WorkloadArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// application ID.
@@ -377,9 +378,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tem
         public WorkloadArgs()
         {
         }
+        public static new WorkloadArgs Empty => new WorkloadArgs();
     }
 
-    public sealed class WorkloadState : Pulumi.ResourceArgs
+    public sealed class WorkloadState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// application ID.
@@ -534,5 +536,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tem
         public WorkloadState()
         {
         }
+        public static new WorkloadState Empty => new WorkloadState();
     }
 }

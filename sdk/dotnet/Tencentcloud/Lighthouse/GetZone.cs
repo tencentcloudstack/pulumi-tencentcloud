@@ -15,66 +15,60 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Lighthouse
         /// <summary>
         /// Use this data source to query detailed information of lighthouse zone
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var zone = Tencentcloud.Lighthouse.GetZone.Invoke(new()
         ///     {
-        ///         var zone = Output.Create(Tencentcloud.Lighthouse.GetZone.InvokeAsync(new Tencentcloud.Lighthouse.GetZoneArgs
-        ///         {
-        ///             Order = "ASC",
-        ///             OrderField = "ZONE",
-        ///         }));
-        ///     }
+        ///         Order = "ASC",
+        ///         OrderField = "ZONE",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetZoneResult> InvokeAsync(GetZoneArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetZoneResult>("tencentcloud:Lighthouse/getZone:getZone", args ?? new GetZoneArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetZoneResult>("tencentcloud:Lighthouse/getZone:getZone", args ?? new GetZoneArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of lighthouse zone
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var zone = Tencentcloud.Lighthouse.GetZone.Invoke(new()
         ///     {
-        ///         var zone = Output.Create(Tencentcloud.Lighthouse.GetZone.InvokeAsync(new Tencentcloud.Lighthouse.GetZoneArgs
-        ///         {
-        ///             Order = "ASC",
-        ///             OrderField = "ZONE",
-        ///         }));
-        ///     }
+        ///         Order = "ASC",
+        ///         OrderField = "ZONE",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetZoneResult> Invoke(GetZoneInvokeArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetZoneResult>("tencentcloud:Lighthouse/getZone:getZone", args ?? new GetZoneInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetZoneResult>("tencentcloud:Lighthouse/getZone:getZone", args ?? new GetZoneInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetZoneArgs : Pulumi.InvokeArgs
+    public sealed class GetZoneArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Specifies how availability zones are listed. Valid values:
@@ -103,9 +97,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Lighthouse
         public GetZoneArgs()
         {
         }
+        public static new GetZoneArgs Empty => new GetZoneArgs();
     }
 
-    public sealed class GetZoneInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetZoneInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Specifies how availability zones are listed. Valid values:
@@ -134,6 +129,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Lighthouse
         public GetZoneInvokeArgs()
         {
         }
+        public static new GetZoneInvokeArgs Empty => new GetZoneInvokeArgs();
     }
 
 

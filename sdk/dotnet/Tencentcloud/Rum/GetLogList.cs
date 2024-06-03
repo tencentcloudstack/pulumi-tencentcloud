@@ -13,14 +13,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Rum
     public static class GetLogList
     {
         public static Task<GetLogListResult> InvokeAsync(GetLogListArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetLogListResult>("tencentcloud:Rum/getLogList:getLogList", args ?? new GetLogListArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetLogListResult>("tencentcloud:Rum/getLogList:getLogList", args ?? new GetLogListArgs(), options.WithDefaults());
 
         public static Output<GetLogListResult> Invoke(GetLogListInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetLogListResult>("tencentcloud:Rum/getLogList:getLogList", args ?? new GetLogListInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetLogListResult>("tencentcloud:Rum/getLogList:getLogList", args ?? new GetLogListInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetLogListArgs : Pulumi.InvokeArgs
+    public sealed class GetLogListArgs : global::Pulumi.InvokeArgs
     {
         [Input("endTime", required: true)]
         public string EndTime { get; set; } = null!;
@@ -43,9 +43,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Rum
         public GetLogListArgs()
         {
         }
+        public static new GetLogListArgs Empty => new GetLogListArgs();
     }
 
-    public sealed class GetLogListInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetLogListInvokeArgs : global::Pulumi.InvokeArgs
     {
         [Input("endTime", required: true)]
         public Input<string> EndTime { get; set; } = null!;
@@ -68,6 +69,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Rum
         public GetLogListInvokeArgs()
         {
         }
+        public static new GetLogListInvokeArgs Empty => new GetLogListInvokeArgs();
     }
 
 

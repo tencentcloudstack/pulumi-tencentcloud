@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,6 +11,7 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
@@ -18,14 +20,12 @@ import * as utilities from "../utilities";
  *     groupId: tencentcloud_cam_group.foo.id,
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getGroupMemberships(args?: GetGroupMembershipsArgs, opts?: pulumi.InvokeOptions): Promise<GetGroupMembershipsResult> {
     args = args || {};
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Cam/getGroupMemberships:getGroupMemberships", {
         "groupId": args.groupId,
         "resultOutputFile": args.resultOutputFile,
@@ -64,9 +64,24 @@ export interface GetGroupMembershipsResult {
     readonly membershipLists: outputs.Cam.GetGroupMembershipsMembershipList[];
     readonly resultOutputFile?: string;
 }
-
+/**
+ * Use this data source to query detailed information of CAM group memberships
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const foo = tencentcloud.Cam.getGroupMemberships({
+ *     groupId: tencentcloud_cam_group.foo.id,
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getGroupMembershipsOutput(args?: GetGroupMembershipsOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetGroupMembershipsResult> {
-    return pulumi.output(args).apply(a => getGroupMemberships(a, opts))
+    return pulumi.output(args).apply((a: any) => getGroupMemberships(a, opts))
 }
 
 /**

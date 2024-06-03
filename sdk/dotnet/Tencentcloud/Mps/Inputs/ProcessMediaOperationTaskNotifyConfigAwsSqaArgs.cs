@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps.Inputs
 {
 
-    public sealed class ProcessMediaOperationTaskNotifyConfigAwsSqaArgs : Pulumi.ResourceArgs
+    public sealed class ProcessMediaOperationTaskNotifyConfigAwsSqaArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// The key ID required to read from/write to the SQS queue.
@@ -40,5 +40,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps.Inputs
         public ProcessMediaOperationTaskNotifyConfigAwsSqaArgs()
         {
         }
+        public static new ProcessMediaOperationTaskNotifyConfigAwsSqaArgs Empty => new ProcessMediaOperationTaskNotifyConfigAwsSqaArgs();
     }
 }

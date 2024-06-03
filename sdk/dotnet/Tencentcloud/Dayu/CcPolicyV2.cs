@@ -15,95 +15,96 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dayu
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var demo = new Tencentcloud.Dayu.CcPolicyV2("demo", new()
     ///     {
-    ///         var demo = new Tencentcloud.Dayu.CcPolicyV2("demo", new Tencentcloud.Dayu.CcPolicyV2Args
+    ///         Business = "bgpip",
+    ///         CcBlackWhiteIps = new[]
     ///         {
-    ///             Business = "bgpip",
-    ///             CcBlackWhiteIps = 
+    ///             new Tencentcloud.Dayu.Inputs.CcPolicyV2CcBlackWhiteIpArgs
     ///             {
-    ///                 new Tencentcloud.Dayu.Inputs.CcPolicyV2CcBlackWhiteIpArgs
-    ///                 {
-    ///                     BlackWhiteIp = "1.2.3.4",
-    ///                     Domain = "12.com",
-    ///                     Protocol = "http",
-    ///                     Type = "black",
-    ///                 },
+    ///                 BlackWhiteIp = "1.2.3.4",
+    ///                 Domain = "12.com",
+    ///                 Protocol = "http",
+    ///                 Type = "black",
     ///             },
-    ///             CcGeoIpPolicys = 
+    ///         },
+    ///         CcGeoIpPolicys = new[]
+    ///         {
+    ///             new Tencentcloud.Dayu.Inputs.CcPolicyV2CcGeoIpPolicyArgs
     ///             {
-    ///                 new Tencentcloud.Dayu.Inputs.CcPolicyV2CcGeoIpPolicyArgs
-    ///                 {
-    ///                     Action = "drop",
-    ///                     Domain = "12.com",
-    ///                     Protocol = "http",
-    ///                     RegionType = "china",
-    ///                 },
+    ///                 Action = "drop",
+    ///                 Domain = "12.com",
+    ///                 Protocol = "http",
+    ///                 RegionType = "china",
     ///             },
-    ///             CcPrecisionPolicys = 
+    ///         },
+    ///         CcPrecisionPolicys = new[]
+    ///         {
+    ///             new Tencentcloud.Dayu.Inputs.CcPolicyV2CcPrecisionPolicyArgs
     ///             {
-    ///                 new Tencentcloud.Dayu.Inputs.CcPolicyV2CcPrecisionPolicyArgs
+    ///                 Domain = "1.com",
+    ///                 Ip = "162.62.163.34",
+    ///                 PolicyAction = "drop",
+    ///                 Policys = new[]
     ///                 {
-    ///                     Domain = "1.com",
-    ///                     Ip = "162.62.163.34",
-    ///                     PolicyAction = "drop",
-    ///                     Policys = 
+    ///                     new Tencentcloud.Dayu.Inputs.CcPolicyV2CcPrecisionPolicyPolicyArgs
     ///                     {
-    ///                         new Tencentcloud.Dayu.Inputs.CcPolicyV2CcPrecisionPolicyPolicyArgs
-    ///                         {
-    ///                             FieldName = "cgi",
-    ///                             FieldType = "value",
-    ///                             Value = "12123.com",
-    ///                             ValueOperator = "equal",
-    ///                         },
+    ///                         FieldName = "cgi",
+    ///                         FieldType = "value",
+    ///                         Value = "12123.com",
+    ///                         ValueOperator = "equal",
     ///                     },
-    ///                     Protocol = "http",
     ///                 },
+    ///                 Protocol = "http",
     ///             },
-    ///             CcPrecisionReqLimits = 
+    ///         },
+    ///         CcPrecisionReqLimits = new[]
+    ///         {
+    ///             new Tencentcloud.Dayu.Inputs.CcPolicyV2CcPrecisionReqLimitArgs
     ///             {
-    ///                 new Tencentcloud.Dayu.Inputs.CcPolicyV2CcPrecisionReqLimitArgs
+    ///                 Domain = "11.com",
+    ///                 Level = "loose",
+    ///                 Policys = new[]
     ///                 {
-    ///                     Domain = "11.com",
-    ///                     Level = "loose",
-    ///                     Policys = 
+    ///                     new Tencentcloud.Dayu.Inputs.CcPolicyV2CcPrecisionReqLimitPolicyArgs
     ///                     {
-    ///                         new Tencentcloud.Dayu.Inputs.CcPolicyV2CcPrecisionReqLimitPolicyArgs
-    ///                         {
-    ///                             Action = "alg",
-    ///                             ExecuteDuration = 2,
-    ///                             Mode = "equal",
-    ///                             Period = 5,
-    ///                             RequestNum = 12,
-    ///                             Uri = "15.com",
-    ///                         },
+    ///                         Action = "alg",
+    ///                         ExecuteDuration = 2,
+    ///                         Mode = "equal",
+    ///                         Period = 5,
+    ///                         RequestNum = 12,
+    ///                         Uri = "15.com",
     ///                     },
-    ///                     Protocol = "http",
     ///                 },
+    ///                 Protocol = "http",
     ///             },
-    ///             ResourceId = "bgpip-000004xf",
-    ///             Thresholds = 
+    ///         },
+    ///         ResourceId = "bgpip-000004xf",
+    ///         Thresholds = new[]
+    ///         {
+    ///             new Tencentcloud.Dayu.Inputs.CcPolicyV2ThresholdArgs
     ///             {
-    ///                 new Tencentcloud.Dayu.Inputs.CcPolicyV2ThresholdArgs
-    ///                 {
-    ///                     Domain = "12.com",
-    ///                     Threshold = 0,
-    ///                 },
+    ///                 Domain = "12.com",
+    ///                 Threshold = 0,
     ///             },
-    ///         });
-    ///     }
+    ///         },
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Dayu/ccPolicyV2:CcPolicyV2")]
-    public partial class CcPolicyV2 : Pulumi.CustomResource
+    public partial class CcPolicyV2 : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Business of resource instance. bgpip indicates anti-anti-ip ip; bgp means exclusive package; bgp-multip means shared packet; net indicates anti-anti-ip pro version.
@@ -192,7 +193,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dayu
         }
     }
 
-    public sealed class CcPolicyV2Args : Pulumi.ResourceArgs
+    public sealed class CcPolicyV2Args : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Business of resource instance. bgpip indicates anti-anti-ip ip; bgp means exclusive package; bgp-multip means shared packet; net indicates anti-anti-ip pro version.
@@ -269,9 +270,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dayu
         public CcPolicyV2Args()
         {
         }
+        public static new CcPolicyV2Args Empty => new CcPolicyV2Args();
     }
 
-    public sealed class CcPolicyV2State : Pulumi.ResourceArgs
+    public sealed class CcPolicyV2State : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Business of resource instance. bgpip indicates anti-anti-ip ip; bgp means exclusive package; bgp-multip means shared packet; net indicates anti-anti-ip pro version.
@@ -348,5 +350,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dayu
         public CcPolicyV2State()
         {
         }
+        public static new CcPolicyV2State Empty => new CcPolicyV2State();
     }
 }

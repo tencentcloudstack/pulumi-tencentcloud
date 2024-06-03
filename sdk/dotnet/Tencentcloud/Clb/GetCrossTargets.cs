@@ -15,84 +15,78 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
         /// <summary>
         /// Use this data source to query detailed information of clb cross_targets
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var crossTargets = Tencentcloud.Clb.GetCrossTargets.Invoke(new()
         ///     {
-        ///         var crossTargets = Output.Create(Tencentcloud.Clb.GetCrossTargets.InvokeAsync(new Tencentcloud.Clb.GetCrossTargetsArgs
+        ///         Filters = new[]
         ///         {
-        ///             Filters = 
+        ///             new Tencentcloud.Clb.Inputs.GetCrossTargetsFilterInputArgs
         ///             {
-        ///                 new Tencentcloud.Clb.Inputs.GetCrossTargetsFilterArgs
+        ///                 Name = "vpc-id",
+        ///                 Values = new[]
         ///                 {
-        ///                     Name = "vpc-id",
-        ///                     Values = 
-        ///                     {
-        ///                         "vpc-4owdpnwr",
-        ///                     },
+        ///                     "vpc-4owdpnwr",
         ///                 },
         ///             },
-        ///         }));
-        ///     }
+        ///         },
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetCrossTargetsResult> InvokeAsync(GetCrossTargetsArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetCrossTargetsResult>("tencentcloud:Clb/getCrossTargets:getCrossTargets", args ?? new GetCrossTargetsArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetCrossTargetsResult>("tencentcloud:Clb/getCrossTargets:getCrossTargets", args ?? new GetCrossTargetsArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of clb cross_targets
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var crossTargets = Tencentcloud.Clb.GetCrossTargets.Invoke(new()
         ///     {
-        ///         var crossTargets = Output.Create(Tencentcloud.Clb.GetCrossTargets.InvokeAsync(new Tencentcloud.Clb.GetCrossTargetsArgs
+        ///         Filters = new[]
         ///         {
-        ///             Filters = 
+        ///             new Tencentcloud.Clb.Inputs.GetCrossTargetsFilterInputArgs
         ///             {
-        ///                 new Tencentcloud.Clb.Inputs.GetCrossTargetsFilterArgs
+        ///                 Name = "vpc-id",
+        ///                 Values = new[]
         ///                 {
-        ///                     Name = "vpc-id",
-        ///                     Values = 
-        ///                     {
-        ///                         "vpc-4owdpnwr",
-        ///                     },
+        ///                     "vpc-4owdpnwr",
         ///                 },
         ///             },
-        ///         }));
-        ///     }
+        ///         },
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetCrossTargetsResult> Invoke(GetCrossTargetsInvokeArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetCrossTargetsResult>("tencentcloud:Clb/getCrossTargets:getCrossTargets", args ?? new GetCrossTargetsInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetCrossTargetsResult>("tencentcloud:Clb/getCrossTargets:getCrossTargets", args ?? new GetCrossTargetsInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetCrossTargetsArgs : Pulumi.InvokeArgs
+    public sealed class GetCrossTargetsArgs : global::Pulumi.InvokeArgs
     {
         [Input("filters")]
         private List<Inputs.GetCrossTargetsFilterArgs>? _filters;
@@ -115,9 +109,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
         public GetCrossTargetsArgs()
         {
         }
+        public static new GetCrossTargetsArgs Empty => new GetCrossTargetsArgs();
     }
 
-    public sealed class GetCrossTargetsInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetCrossTargetsInvokeArgs : global::Pulumi.InvokeArgs
     {
         [Input("filters")]
         private InputList<Inputs.GetCrossTargetsFilterInputArgs>? _filters;
@@ -140,6 +135,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
         public GetCrossTargetsInvokeArgs()
         {
         }
+        public static new GetCrossTargetsInvokeArgs Empty => new GetCrossTargetsInvokeArgs();
     }
 
 

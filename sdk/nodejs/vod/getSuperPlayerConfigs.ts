@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,10 +11,11 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const fooSuperPlayerConfig = new tencentcloud.vod.SuperPlayerConfig("fooSuperPlayerConfig", {
  *     drmSwitch: true,
@@ -40,14 +42,12 @@ import * as utilities from "../utilities";
  *     name: "tf-super-player",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getSuperPlayerConfigs(args?: GetSuperPlayerConfigsArgs, opts?: pulumi.InvokeOptions): Promise<GetSuperPlayerConfigsResult> {
     args = args || {};
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Vod/getSuperPlayerConfigs:getSuperPlayerConfigs", {
         "name": args.name,
         "resultOutputFile": args.resultOutputFile,
@@ -101,9 +101,46 @@ export interface GetSuperPlayerConfigsResult {
      */
     readonly type?: string;
 }
-
+/**
+ * Use this data source to query detailed information of VOD super player configs.
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
+ *
+ * const fooSuperPlayerConfig = new tencentcloud.vod.SuperPlayerConfig("fooSuperPlayerConfig", {
+ *     drmSwitch: true,
+ *     drmStreamingInfo: {
+ *         simpleAesDefinition: tencentcloud_vod_adaptive_dynamic_streaming_template.foo.id,
+ *     },
+ *     imageSpriteDefinition: tencentcloud_vod_image_sprite_template.foo.id,
+ *     resolutionNames: [
+ *         {
+ *             minEdgeLength: 889,
+ *             name: "test1",
+ *         },
+ *         {
+ *             minEdgeLength: 890,
+ *             name: "test2",
+ *         },
+ *     ],
+ *     domain: "Default",
+ *     scheme: "Default",
+ *     comment: "test",
+ * });
+ * const fooSuperPlayerConfigs = tencentcloud.Vod.getSuperPlayerConfigs({
+ *     type: "Custom",
+ *     name: "tf-super-player",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getSuperPlayerConfigsOutput(args?: GetSuperPlayerConfigsOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetSuperPlayerConfigsResult> {
-    return pulumi.output(args).apply(a => getSuperPlayerConfigs(a, opts))
+    return pulumi.output(args).apply((a: any) => getSuperPlayerConfigs(a, opts))
 }
 
 /**

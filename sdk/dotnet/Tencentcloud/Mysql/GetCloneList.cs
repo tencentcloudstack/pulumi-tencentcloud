@@ -15,64 +15,58 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
         /// <summary>
         /// Use this data source to query detailed information of mysql clone_list
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var cloneList = Tencentcloud.Mysql.GetCloneList.Invoke(new()
         ///     {
-        ///         var cloneList = Output.Create(Tencentcloud.Mysql.GetCloneList.InvokeAsync(new Tencentcloud.Mysql.GetCloneListArgs
-        ///         {
-        ///             InstanceId = "cdb-fitq5t9h",
-        ///         }));
-        ///     }
+        ///         InstanceId = "cdb-fitq5t9h",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetCloneListResult> InvokeAsync(GetCloneListArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetCloneListResult>("tencentcloud:Mysql/getCloneList:getCloneList", args ?? new GetCloneListArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetCloneListResult>("tencentcloud:Mysql/getCloneList:getCloneList", args ?? new GetCloneListArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of mysql clone_list
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var cloneList = Tencentcloud.Mysql.GetCloneList.Invoke(new()
         ///     {
-        ///         var cloneList = Output.Create(Tencentcloud.Mysql.GetCloneList.InvokeAsync(new Tencentcloud.Mysql.GetCloneListArgs
-        ///         {
-        ///             InstanceId = "cdb-fitq5t9h",
-        ///         }));
-        ///     }
+        ///         InstanceId = "cdb-fitq5t9h",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetCloneListResult> Invoke(GetCloneListInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetCloneListResult>("tencentcloud:Mysql/getCloneList:getCloneList", args ?? new GetCloneListInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetCloneListResult>("tencentcloud:Mysql/getCloneList:getCloneList", args ?? new GetCloneListInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetCloneListArgs : Pulumi.InvokeArgs
+    public sealed class GetCloneListArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Query the list of cloning tasks for the specified source instance.
@@ -89,9 +83,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
         public GetCloneListArgs()
         {
         }
+        public static new GetCloneListArgs Empty => new GetCloneListArgs();
     }
 
-    public sealed class GetCloneListInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetCloneListInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Query the list of cloning tasks for the specified source instance.
@@ -108,6 +103,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
         public GetCloneListInvokeArgs()
         {
         }
+        public static new GetCloneListInvokeArgs Empty => new GetCloneListInvokeArgs();
     }
 
 

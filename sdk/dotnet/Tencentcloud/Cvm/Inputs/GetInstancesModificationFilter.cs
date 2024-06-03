@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cvm.Inputs
 {
 
-    public sealed class GetInstancesModificationFilterArgs : Pulumi.InvokeArgs
+    public sealed class GetInstancesModificationFilterArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Fields to be filtered.
@@ -34,5 +34,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cvm.Inputs
         public GetInstancesModificationFilterArgs()
         {
         }
+        public static new GetInstancesModificationFilterArgs Empty => new GetInstancesModificationFilterArgs();
     }
 }

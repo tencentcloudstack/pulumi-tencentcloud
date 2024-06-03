@@ -4,6 +4,15 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
+/**
+ * Provides a CVM instance set resource.
+ *
+ * > **NOTE:** You can launch an CVM instance for a VPC network via specifying parameter `vpcId`. One instance can only belong to one VPC.
+ *
+ * > **NOTE:** This resource is designed to cater for the scenario of creating CVM in large batches.
+ *
+ * > **NOTE:** After run command `pulumi up`, must wait all cvms is ready, then run command `pulumi preview`, either it will cause state change.
+ */
 export class Set extends pulumi.CustomResource {
     /**
      * Get an existing Set resource's state with the given name, ID, and optional extra
@@ -241,7 +250,7 @@ export class Set extends pulumi.CustomResource {
             resourceInputs["internetMaxBandwidthOut"] = args ? args.internetMaxBandwidthOut : undefined;
             resourceInputs["keepImageLogin"] = args ? args.keepImageLogin : undefined;
             resourceInputs["keyName"] = args ? args.keyName : undefined;
-            resourceInputs["password"] = args ? args.password : undefined;
+            resourceInputs["password"] = args?.password ? pulumi.secret(args.password) : undefined;
             resourceInputs["placementGroupId"] = args ? args.placementGroupId : undefined;
             resourceInputs["privateIp"] = args ? args.privateIp : undefined;
             resourceInputs["projectId"] = args ? args.projectId : undefined;
@@ -260,6 +269,8 @@ export class Set extends pulumi.CustomResource {
             resourceInputs["publicIp"] = undefined /*out*/;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+        const secretOpts = { additionalSecretOutputs: ["password"] };
+        opts = pulumi.mergeOptions(opts, secretOpts);
         super(Set.__pulumiType, name, resourceInputs, opts);
     }
 }

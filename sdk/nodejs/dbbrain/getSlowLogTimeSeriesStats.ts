@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,24 +11,23 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const test = pulumi.output(tencentcloud.Dbbrain.getSlowLogTimeSeriesStats({
+ * const test = tencentcloud.Dbbrain.getSlowLogTimeSeriesStats({
  *     endTime: "%s",
  *     instanceId: "%s",
  *     product: "mysql",
  *     startTime: "%s",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getSlowLogTimeSeriesStats(args: GetSlowLogTimeSeriesStatsArgs, opts?: pulumi.InvokeOptions): Promise<GetSlowLogTimeSeriesStatsResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Dbbrain/getSlowLogTimeSeriesStats:getSlowLogTimeSeriesStats", {
         "endTime": args.endTime,
         "instanceId": args.instanceId,
@@ -89,9 +89,27 @@ export interface GetSlowLogTimeSeriesStatsResult {
      */
     readonly timeSeries: outputs.Dbbrain.GetSlowLogTimeSeriesStatsTimeSeries[];
 }
-
+/**
+ * Use this data source to query detailed information of dbbrain slowLogTimeSeriesStats
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const test = tencentcloud.Dbbrain.getSlowLogTimeSeriesStats({
+ *     endTime: "%s",
+ *     instanceId: "%s",
+ *     product: "mysql",
+ *     startTime: "%s",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getSlowLogTimeSeriesStatsOutput(args: GetSlowLogTimeSeriesStatsOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetSlowLogTimeSeriesStatsResult> {
-    return pulumi.output(args).apply(a => getSlowLogTimeSeriesStats(a, opts))
+    return pulumi.output(args).apply((a: any) => getSlowLogTimeSeriesStats(a, opts))
 }
 
 /**

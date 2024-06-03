@@ -9,6 +9,7 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
@@ -19,13 +20,11 @@ import * as utilities from "../utilities";
  *     amountUnit: "pent",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getRenewalPrice(args: GetRenewalPriceArgs, opts?: pulumi.InvokeOptions): Promise<GetRenewalPriceResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Dcdb/getRenewalPrice:getRenewalPrice", {
         "amountUnit": args.amountUnit,
         "instanceId": args.instanceId,
@@ -77,9 +76,26 @@ export interface GetRenewalPriceResult {
     readonly price: number;
     readonly resultOutputFile?: string;
 }
-
+/**
+ * Use this data source to query detailed information of dcdb renewalPrice
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const renewalPrice = tencentcloud.Dcdb.getRenewalPrice({
+ *     instanceId: local.dcdb_id,
+ *     period: 1,
+ *     amountUnit: "pent",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getRenewalPriceOutput(args: GetRenewalPriceOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetRenewalPriceResult> {
-    return pulumi.output(args).apply(a => getRenewalPrice(a, opts))
+    return pulumi.output(args).apply((a: any) => getRenewalPrice(a, opts))
 }
 
 /**

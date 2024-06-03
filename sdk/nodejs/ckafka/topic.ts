@@ -9,11 +9,12 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const foo = new tencentcloud.Ckafka.Topic("foo", {
+ * const foo = new tencentcloud.ckafka.Topic("foo", {
  *     cleanUpPolicy: "delete",
  *     enableWhiteList: true,
  *     instanceId: "ckafka-f9ife4zz",
@@ -32,13 +33,14 @@ import * as utilities from "../utilities";
  *     uncleanLeaderElectionEnable: false,
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * ckafka topic can be imported using the instance_id#topic_name, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Ckafka/topic:Topic foo ckafka-f9ife4zz#example
+ * $ pulumi import tencentcloud:Ckafka/topic:Topic foo ckafka-f9ife4zz#example
  * ```
  */
 export class Topic extends pulumi.CustomResource {

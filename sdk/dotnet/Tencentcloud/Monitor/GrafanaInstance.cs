@@ -15,57 +15,60 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var config = new Config();
+    ///     var availabilityZone = config.Get("availabilityZone") ?? "ap-guangzhou-6";
+    ///     var vpc = new Tencentcloud.Vpc.Instance("vpc", new()
     ///     {
-    ///         var config = new Config();
-    ///         var availabilityZone = config.Get("availabilityZone") ?? "ap-guangzhou-6";
-    ///         var vpc = new Tencentcloud.Vpc.Instance("vpc", new Tencentcloud.Vpc.InstanceArgs
-    ///         {
-    ///             CidrBlock = "10.0.0.0/16",
-    ///         });
-    ///         var subnet = new Tencentcloud.Subnet.Instance("subnet", new Tencentcloud.Subnet.InstanceArgs
-    ///         {
-    ///             VpcId = vpc.Id,
-    ///             AvailabilityZone = availabilityZone,
-    ///             CidrBlock = "10.0.1.0/24",
-    ///         });
-    ///         var foo = new Tencentcloud.Monitor.GrafanaInstance("foo", new Tencentcloud.Monitor.GrafanaInstanceArgs
-    ///         {
-    ///             InstanceName = "test-grafana",
-    ///             VpcId = vpc.Id,
-    ///             SubnetIds = 
-    ///             {
-    ///                 subnet.Id,
-    ///             },
-    ///             GrafanaInitPassword = "1234567890",
-    ///             EnableInternet = false,
-    ///             IsDestroy = true,
-    ///             Tags = 
-    ///             {
-    ///                 { "createdBy", "test" },
-    ///             },
-    ///         });
-    ///     }
+    ///         CidrBlock = "10.0.0.0/16",
+    ///     });
     /// 
-    /// }
+    ///     var subnet = new Tencentcloud.Subnet.Instance("subnet", new()
+    ///     {
+    ///         VpcId = vpc.Id,
+    ///         AvailabilityZone = availabilityZone,
+    ///         CidrBlock = "10.0.1.0/24",
+    ///     });
+    /// 
+    ///     var foo = new Tencentcloud.Monitor.GrafanaInstance("foo", new()
+    ///     {
+    ///         InstanceName = "test-grafana",
+    ///         VpcId = vpc.Id,
+    ///         SubnetIds = new[]
+    ///         {
+    ///             subnet.Id,
+    ///         },
+    ///         GrafanaInitPassword = "1234567890",
+    ///         EnableInternet = false,
+    ///         IsDestroy = true,
+    ///         Tags = 
+    ///         {
+    ///             { "createdBy", "test" },
+    ///         },
+    ///     });
+    /// 
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// monitor grafanaInstance can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Monitor/grafanaInstance:GrafanaInstance foo grafanaInstance_id
+    /// $ pulumi import tencentcloud:Monitor/grafanaInstance:GrafanaInstance foo grafanaInstance_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Monitor/grafanaInstance:GrafanaInstance")]
-    public partial class GrafanaInstance : Pulumi.CustomResource
+    public partial class GrafanaInstance : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Whether to automatically use vouchers.
@@ -196,7 +199,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
         }
     }
 
-    public sealed class GrafanaInstanceArgs : Pulumi.ResourceArgs
+    public sealed class GrafanaInstanceArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Whether to automatically use vouchers.
@@ -267,9 +270,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
         public GrafanaInstanceArgs()
         {
         }
+        public static new GrafanaInstanceArgs Empty => new GrafanaInstanceArgs();
     }
 
-    public sealed class GrafanaInstanceState : Pulumi.ResourceArgs
+    public sealed class GrafanaInstanceState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Whether to automatically use vouchers.
@@ -370,5 +374,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
         public GrafanaInstanceState()
         {
         }
+        public static new GrafanaInstanceState Empty => new GrafanaInstanceState();
     }
 }

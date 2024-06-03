@@ -15,82 +15,78 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Scf
         /// <summary>
         /// Use this data source to query SCF functions.
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var fooFunction = new Tencentcloud.Scf.Function("fooFunction", new()
         ///     {
-        ///         var fooFunction = new Tencentcloud.Scf.Function("fooFunction", new Tencentcloud.Scf.FunctionArgs
-        ///         {
-        ///             Handler = "main.do_it",
-        ///             Runtime = "Python3.6",
-        ///             CosBucketName = "scf-code-1234567890",
-        ///             CosObjectName = "code.zip",
-        ///             CosBucketRegion = "ap-guangzhou",
-        ///         });
-        ///         var fooFunctions = Tencentcloud.Scf.GetFunctions.Invoke(new Tencentcloud.Scf.GetFunctionsInvokeArgs
-        ///         {
-        ///             Name = fooFunction.Name,
-        ///         });
-        ///     }
+        ///         Handler = "main.do_it",
+        ///         Runtime = "Python3.6",
+        ///         CosBucketName = "scf-code-1234567890",
+        ///         CosObjectName = "code.zip",
+        ///         CosBucketRegion = "ap-guangzhou",
+        ///     });
         /// 
-        /// }
+        ///     var fooFunctions = Tencentcloud.Scf.GetFunctions.Invoke(new()
+        ///     {
+        ///         Name = fooFunction.Name,
+        ///     });
+        /// 
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetFunctionsResult> InvokeAsync(GetFunctionsArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetFunctionsResult>("tencentcloud:Scf/getFunctions:getFunctions", args ?? new GetFunctionsArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetFunctionsResult>("tencentcloud:Scf/getFunctions:getFunctions", args ?? new GetFunctionsArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query SCF functions.
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var fooFunction = new Tencentcloud.Scf.Function("fooFunction", new()
         ///     {
-        ///         var fooFunction = new Tencentcloud.Scf.Function("fooFunction", new Tencentcloud.Scf.FunctionArgs
-        ///         {
-        ///             Handler = "main.do_it",
-        ///             Runtime = "Python3.6",
-        ///             CosBucketName = "scf-code-1234567890",
-        ///             CosObjectName = "code.zip",
-        ///             CosBucketRegion = "ap-guangzhou",
-        ///         });
-        ///         var fooFunctions = Tencentcloud.Scf.GetFunctions.Invoke(new Tencentcloud.Scf.GetFunctionsInvokeArgs
-        ///         {
-        ///             Name = fooFunction.Name,
-        ///         });
-        ///     }
+        ///         Handler = "main.do_it",
+        ///         Runtime = "Python3.6",
+        ///         CosBucketName = "scf-code-1234567890",
+        ///         CosObjectName = "code.zip",
+        ///         CosBucketRegion = "ap-guangzhou",
+        ///     });
         /// 
-        /// }
+        ///     var fooFunctions = Tencentcloud.Scf.GetFunctions.Invoke(new()
+        ///     {
+        ///         Name = fooFunction.Name,
+        ///     });
+        /// 
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetFunctionsResult> Invoke(GetFunctionsInvokeArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetFunctionsResult>("tencentcloud:Scf/getFunctions:getFunctions", args ?? new GetFunctionsInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetFunctionsResult>("tencentcloud:Scf/getFunctions:getFunctions", args ?? new GetFunctionsInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetFunctionsArgs : Pulumi.InvokeArgs
+    public sealed class GetFunctionsArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Description of the SCF function to be queried.
@@ -131,9 +127,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Scf
         public GetFunctionsArgs()
         {
         }
+        public static new GetFunctionsArgs Empty => new GetFunctionsArgs();
     }
 
-    public sealed class GetFunctionsInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetFunctionsInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Description of the SCF function to be queried.
@@ -174,6 +171,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Scf
         public GetFunctionsInvokeArgs()
         {
         }
+        public static new GetFunctionsInvokeArgs Empty => new GetFunctionsInvokeArgs();
     }
 
 

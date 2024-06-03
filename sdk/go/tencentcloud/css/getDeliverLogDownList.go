@@ -8,10 +8,11 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 func GetDeliverLogDownList(ctx *pulumi.Context, args *GetDeliverLogDownListArgs, opts ...pulumi.InvokeOption) (*GetDeliverLogDownListResult, error) {
-	opts = pkgInvokeDefaultOpts(opts)
+	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetDeliverLogDownListResult
 	err := ctx.Invoke("tencentcloud:Css/getDeliverLogDownList:getDeliverLogDownList", args, &rv, opts...)
 	if err != nil {

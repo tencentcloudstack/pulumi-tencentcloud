@@ -5,19 +5,36 @@ import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
 // Export members:
-export * from "./accessLogConfig";
-export * from "./clusterAttachment";
-export * from "./getMesh";
-export * from "./mesh";
-export * from "./prometheusAttachment";
-export * from "./tracingConfig";
+export { AccessLogConfigArgs, AccessLogConfigState } from "./accessLogConfig";
+export type AccessLogConfig = import("./accessLogConfig").AccessLogConfig;
+export const AccessLogConfig: typeof import("./accessLogConfig").AccessLogConfig = null as any;
+utilities.lazyLoad(exports, ["AccessLogConfig"], () => require("./accessLogConfig"));
 
-// Import resources to register:
-import { AccessLogConfig } from "./accessLogConfig";
-import { ClusterAttachment } from "./clusterAttachment";
-import { Mesh } from "./mesh";
-import { PrometheusAttachment } from "./prometheusAttachment";
-import { TracingConfig } from "./tracingConfig";
+export { ClusterAttachmentArgs, ClusterAttachmentState } from "./clusterAttachment";
+export type ClusterAttachment = import("./clusterAttachment").ClusterAttachment;
+export const ClusterAttachment: typeof import("./clusterAttachment").ClusterAttachment = null as any;
+utilities.lazyLoad(exports, ["ClusterAttachment"], () => require("./clusterAttachment"));
+
+export { GetMeshArgs, GetMeshResult, GetMeshOutputArgs } from "./getMesh";
+export const getMesh: typeof import("./getMesh").getMesh = null as any;
+export const getMeshOutput: typeof import("./getMesh").getMeshOutput = null as any;
+utilities.lazyLoad(exports, ["getMesh","getMeshOutput"], () => require("./getMesh"));
+
+export { MeshArgs, MeshState } from "./mesh";
+export type Mesh = import("./mesh").Mesh;
+export const Mesh: typeof import("./mesh").Mesh = null as any;
+utilities.lazyLoad(exports, ["Mesh"], () => require("./mesh"));
+
+export { PrometheusAttachmentArgs, PrometheusAttachmentState } from "./prometheusAttachment";
+export type PrometheusAttachment = import("./prometheusAttachment").PrometheusAttachment;
+export const PrometheusAttachment: typeof import("./prometheusAttachment").PrometheusAttachment = null as any;
+utilities.lazyLoad(exports, ["PrometheusAttachment"], () => require("./prometheusAttachment"));
+
+export { TracingConfigArgs, TracingConfigState } from "./tracingConfig";
+export type TracingConfig = import("./tracingConfig").TracingConfig;
+export const TracingConfig: typeof import("./tracingConfig").TracingConfig = null as any;
+utilities.lazyLoad(exports, ["TracingConfig"], () => require("./tracingConfig"));
+
 
 const _module = {
     version: utilities.getVersion(),

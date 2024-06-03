@@ -15,41 +15,42 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Waf
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var example = new Tencentcloud.Waf.CcSession("example", new()
     ///     {
-    ///         var example = new Tencentcloud.Waf.CcSession("example", new Tencentcloud.Waf.CcSessionArgs
-    ///         {
-    ///             Category = "match",
-    ///             Domain = "www.demo.com",
-    ///             Edition = "sparta-waf",
-    ///             EndMat = "&amp;",
-    ///             EndOffset = "-1",
-    ///             KeyOrStartMat = "key_a=123",
-    ///             SessionName = "terraformDemo",
-    ///             Source = "get",
-    ///             StartOffset = "-1",
-    ///         });
-    ///     }
+    ///         Category = "match",
+    ///         Domain = "www.demo.com",
+    ///         Edition = "sparta-waf",
+    ///         EndMat = "&amp;",
+    ///         EndOffset = "-1",
+    ///         KeyOrStartMat = "key_a=123",
+    ///         SessionName = "terraformDemo",
+    ///         Source = "get",
+    ///         StartOffset = "-1",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// waf cc_session can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Waf/ccSession:CcSession example www.demo.com#sparta-waf#2000000253
+    /// $ pulumi import tencentcloud:Waf/ccSession:CcSession example www.demo.com#sparta-waf#2000000253
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Waf/ccSession:CcSession")]
-    public partial class CcSession : Pulumi.CustomResource
+    public partial class CcSession : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Session match pattern, Optional patterns are match, location.
@@ -156,7 +157,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Waf
         }
     }
 
-    public sealed class CcSessionArgs : Pulumi.ResourceArgs
+    public sealed class CcSessionArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Session match pattern, Optional patterns are match, location.
@@ -215,9 +216,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Waf
         public CcSessionArgs()
         {
         }
+        public static new CcSessionArgs Empty => new CcSessionArgs();
     }
 
-    public sealed class CcSessionState : Pulumi.ResourceArgs
+    public sealed class CcSessionState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Session match pattern, Optional patterns are match, location.
@@ -282,5 +284,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Waf
         public CcSessionState()
         {
         }
+        public static new CcSessionState Empty => new CcSessionState();
     }
 }

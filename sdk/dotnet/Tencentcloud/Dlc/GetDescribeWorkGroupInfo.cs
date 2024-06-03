@@ -15,70 +15,64 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dlc
         /// <summary>
         /// Use this data source to query detailed information of dlc describe_work_group_info
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var describeWorkGroupInfo = Tencentcloud.Dlc.GetDescribeWorkGroupInfo.Invoke(new()
         ///     {
-        ///         var describeWorkGroupInfo = Output.Create(Tencentcloud.Dlc.GetDescribeWorkGroupInfo.InvokeAsync(new Tencentcloud.Dlc.GetDescribeWorkGroupInfoArgs
-        ///         {
-        ///             SortBy = "create-time",
-        ///             Sorting = "desc",
-        ///             Type = "User",
-        ///             WorkGroupId = 23181,
-        ///         }));
-        ///     }
+        ///         SortBy = "create-time",
+        ///         Sorting = "desc",
+        ///         Type = "User",
+        ///         WorkGroupId = 23181,
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetDescribeWorkGroupInfoResult> InvokeAsync(GetDescribeWorkGroupInfoArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetDescribeWorkGroupInfoResult>("tencentcloud:Dlc/getDescribeWorkGroupInfo:getDescribeWorkGroupInfo", args ?? new GetDescribeWorkGroupInfoArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetDescribeWorkGroupInfoResult>("tencentcloud:Dlc/getDescribeWorkGroupInfo:getDescribeWorkGroupInfo", args ?? new GetDescribeWorkGroupInfoArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of dlc describe_work_group_info
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var describeWorkGroupInfo = Tencentcloud.Dlc.GetDescribeWorkGroupInfo.Invoke(new()
         ///     {
-        ///         var describeWorkGroupInfo = Output.Create(Tencentcloud.Dlc.GetDescribeWorkGroupInfo.InvokeAsync(new Tencentcloud.Dlc.GetDescribeWorkGroupInfoArgs
-        ///         {
-        ///             SortBy = "create-time",
-        ///             Sorting = "desc",
-        ///             Type = "User",
-        ///             WorkGroupId = 23181,
-        ///         }));
-        ///     }
+        ///         SortBy = "create-time",
+        ///         Sorting = "desc",
+        ///         Type = "User",
+        ///         WorkGroupId = 23181,
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetDescribeWorkGroupInfoResult> Invoke(GetDescribeWorkGroupInfoInvokeArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetDescribeWorkGroupInfoResult>("tencentcloud:Dlc/getDescribeWorkGroupInfo:getDescribeWorkGroupInfo", args ?? new GetDescribeWorkGroupInfoInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetDescribeWorkGroupInfoResult>("tencentcloud:Dlc/getDescribeWorkGroupInfo:getDescribeWorkGroupInfo", args ?? new GetDescribeWorkGroupInfoInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetDescribeWorkGroupInfoArgs : Pulumi.InvokeArgs
+    public sealed class GetDescribeWorkGroupInfoArgs : global::Pulumi.InvokeArgs
     {
         [Input("filters")]
         private List<Inputs.GetDescribeWorkGroupInfoFilterArgs>? _filters;
@@ -125,9 +119,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dlc
         public GetDescribeWorkGroupInfoArgs()
         {
         }
+        public static new GetDescribeWorkGroupInfoArgs Empty => new GetDescribeWorkGroupInfoArgs();
     }
 
-    public sealed class GetDescribeWorkGroupInfoInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetDescribeWorkGroupInfoInvokeArgs : global::Pulumi.InvokeArgs
     {
         [Input("filters")]
         private InputList<Inputs.GetDescribeWorkGroupInfoFilterInputArgs>? _filters;
@@ -174,6 +169,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dlc
         public GetDescribeWorkGroupInfoInvokeArgs()
         {
         }
+        public static new GetDescribeWorkGroupInfoInvokeArgs Empty => new GetDescribeWorkGroupInfoInvokeArgs();
     }
 
 

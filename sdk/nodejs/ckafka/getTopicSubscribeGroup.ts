@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,22 +11,21 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const topicSubscribeGroup = pulumi.output(tencentcloud.Ckafka.getTopicSubscribeGroup({
+ * const topicSubscribeGroup = tencentcloud.Ckafka.getTopicSubscribeGroup({
  *     instanceId: "ckafka-xxxxxx",
  *     topicName: "xxxxxx",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getTopicSubscribeGroup(args: GetTopicSubscribeGroupArgs, opts?: pulumi.InvokeOptions): Promise<GetTopicSubscribeGroupResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Ckafka/getTopicSubscribeGroup:getTopicSubscribeGroup", {
         "instanceId": args.instanceId,
         "resultOutputFile": args.resultOutputFile,
@@ -67,9 +67,25 @@ export interface GetTopicSubscribeGroupResult {
     readonly resultOutputFile?: string;
     readonly topicName: string;
 }
-
+/**
+ * Use this data source to query detailed information of ckafka topicSubscribeGroup
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const topicSubscribeGroup = tencentcloud.Ckafka.getTopicSubscribeGroup({
+ *     instanceId: "ckafka-xxxxxx",
+ *     topicName: "xxxxxx",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getTopicSubscribeGroupOutput(args: GetTopicSubscribeGroupOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetTopicSubscribeGroupResult> {
-    return pulumi.output(args).apply(a => getTopicSubscribeGroup(a, opts))
+    return pulumi.output(args).apply((a: any) => getTopicSubscribeGroup(a, opts))
 }
 
 /**

@@ -15,114 +15,114 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway
         /// <summary>
         /// Use this data source to query API gateway IP strategy.
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var service = new Tencentcloud.ApiGateway.Service("service", new()
         ///     {
-        ///         var service = new Tencentcloud.ApiGateway.Service("service", new Tencentcloud.ApiGateway.ServiceArgs
+        ///         ServiceName = "ck",
+        ///         Protocol = "http&amp;https",
+        ///         ServiceDesc = "your nice service",
+        ///         NetTypes = new[]
         ///         {
-        ///             ServiceName = "ck",
-        ///             Protocol = "http&amp;https",
-        ///             ServiceDesc = "your nice service",
-        ///             NetTypes = 
-        ///             {
-        ///                 "INNER",
-        ///                 "OUTER",
-        ///             },
-        ///             IpVersion = "IPv4",
-        ///         });
-        ///         var test = new Tencentcloud.ApiGateway.IpStrategy("test", new Tencentcloud.ApiGateway.IpStrategyArgs
-        ///         {
-        ///             ServiceId = service.Id,
-        ///             StrategyName = "tf_test",
-        ///             StrategyType = "BLACK",
-        ///             StrategyData = "9.9.9.9",
-        ///         });
-        ///         var id = Tencentcloud.ApiGateway.GetIpStrategies.Invoke(new Tencentcloud.ApiGateway.GetIpStrategiesInvokeArgs
-        ///         {
-        ///             ServiceId = test.ServiceId,
-        ///         });
-        ///         var name = Tencentcloud.ApiGateway.GetIpStrategies.Invoke(new Tencentcloud.ApiGateway.GetIpStrategiesInvokeArgs
-        ///         {
-        ///             ServiceId = test.ServiceId,
-        ///             StrategyName = test.StrategyName,
-        ///         });
-        ///     }
+        ///             "INNER",
+        ///             "OUTER",
+        ///         },
+        ///         IpVersion = "IPv4",
+        ///     });
         /// 
-        /// }
+        ///     var test = new Tencentcloud.ApiGateway.IpStrategy("test", new()
+        ///     {
+        ///         ServiceId = service.Id,
+        ///         StrategyName = "tf_test",
+        ///         StrategyType = "BLACK",
+        ///         StrategyData = "9.9.9.9",
+        ///     });
+        /// 
+        ///     var id = Tencentcloud.ApiGateway.GetIpStrategies.Invoke(new()
+        ///     {
+        ///         ServiceId = test.ServiceId,
+        ///     });
+        /// 
+        ///     var name = Tencentcloud.ApiGateway.GetIpStrategies.Invoke(new()
+        ///     {
+        ///         ServiceId = test.ServiceId,
+        ///         StrategyName = test.StrategyName,
+        ///     });
+        /// 
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetIpStrategiesResult> InvokeAsync(GetIpStrategiesArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetIpStrategiesResult>("tencentcloud:ApiGateway/getIpStrategies:getIpStrategies", args ?? new GetIpStrategiesArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetIpStrategiesResult>("tencentcloud:ApiGateway/getIpStrategies:getIpStrategies", args ?? new GetIpStrategiesArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query API gateway IP strategy.
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var service = new Tencentcloud.ApiGateway.Service("service", new()
         ///     {
-        ///         var service = new Tencentcloud.ApiGateway.Service("service", new Tencentcloud.ApiGateway.ServiceArgs
+        ///         ServiceName = "ck",
+        ///         Protocol = "http&amp;https",
+        ///         ServiceDesc = "your nice service",
+        ///         NetTypes = new[]
         ///         {
-        ///             ServiceName = "ck",
-        ///             Protocol = "http&amp;https",
-        ///             ServiceDesc = "your nice service",
-        ///             NetTypes = 
-        ///             {
-        ///                 "INNER",
-        ///                 "OUTER",
-        ///             },
-        ///             IpVersion = "IPv4",
-        ///         });
-        ///         var test = new Tencentcloud.ApiGateway.IpStrategy("test", new Tencentcloud.ApiGateway.IpStrategyArgs
-        ///         {
-        ///             ServiceId = service.Id,
-        ///             StrategyName = "tf_test",
-        ///             StrategyType = "BLACK",
-        ///             StrategyData = "9.9.9.9",
-        ///         });
-        ///         var id = Tencentcloud.ApiGateway.GetIpStrategies.Invoke(new Tencentcloud.ApiGateway.GetIpStrategiesInvokeArgs
-        ///         {
-        ///             ServiceId = test.ServiceId,
-        ///         });
-        ///         var name = Tencentcloud.ApiGateway.GetIpStrategies.Invoke(new Tencentcloud.ApiGateway.GetIpStrategiesInvokeArgs
-        ///         {
-        ///             ServiceId = test.ServiceId,
-        ///             StrategyName = test.StrategyName,
-        ///         });
-        ///     }
+        ///             "INNER",
+        ///             "OUTER",
+        ///         },
+        ///         IpVersion = "IPv4",
+        ///     });
         /// 
-        /// }
+        ///     var test = new Tencentcloud.ApiGateway.IpStrategy("test", new()
+        ///     {
+        ///         ServiceId = service.Id,
+        ///         StrategyName = "tf_test",
+        ///         StrategyType = "BLACK",
+        ///         StrategyData = "9.9.9.9",
+        ///     });
+        /// 
+        ///     var id = Tencentcloud.ApiGateway.GetIpStrategies.Invoke(new()
+        ///     {
+        ///         ServiceId = test.ServiceId,
+        ///     });
+        /// 
+        ///     var name = Tencentcloud.ApiGateway.GetIpStrategies.Invoke(new()
+        ///     {
+        ///         ServiceId = test.ServiceId,
+        ///         StrategyName = test.StrategyName,
+        ///     });
+        /// 
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetIpStrategiesResult> Invoke(GetIpStrategiesInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetIpStrategiesResult>("tencentcloud:ApiGateway/getIpStrategies:getIpStrategies", args ?? new GetIpStrategiesInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetIpStrategiesResult>("tencentcloud:ApiGateway/getIpStrategies:getIpStrategies", args ?? new GetIpStrategiesInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetIpStrategiesArgs : Pulumi.InvokeArgs
+    public sealed class GetIpStrategiesArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Used to save results.
@@ -145,9 +145,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway
         public GetIpStrategiesArgs()
         {
         }
+        public static new GetIpStrategiesArgs Empty => new GetIpStrategiesArgs();
     }
 
-    public sealed class GetIpStrategiesInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetIpStrategiesInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Used to save results.
@@ -170,6 +171,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway
         public GetIpStrategiesInvokeArgs()
         {
         }
+        public static new GetIpStrategiesInvokeArgs Empty => new GetIpStrategiesInvokeArgs();
     }
 
 

@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cfw.Inputs
 {
 
-    public sealed class VpcInstanceVpcFwInstanceGetArgs : Pulumi.ResourceArgs
+    public sealed class VpcInstanceVpcFwInstanceGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Deploy regional information.
@@ -19,6 +19,9 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cfw.Inputs
         [Input("fwDeploy", required: true)]
         public Input<Inputs.VpcInstanceVpcFwInstanceFwDeployGetArgs> FwDeploy { get; set; } = null!;
 
+        /// <summary>
+        /// Firewall instance ID (passed in editing scenario).
+        /// </summary>
         [Input("fwInsId")]
         public Input<string>? FwInsId { get; set; }
 
@@ -43,5 +46,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cfw.Inputs
         public VpcInstanceVpcFwInstanceGetArgs()
         {
         }
+        public static new VpcInstanceVpcFwInstanceGetArgs Empty => new VpcInstanceVpcFwInstanceGetArgs();
     }
 }

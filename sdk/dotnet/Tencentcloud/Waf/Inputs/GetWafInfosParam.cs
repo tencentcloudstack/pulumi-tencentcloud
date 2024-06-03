@@ -11,19 +11,29 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Waf.Inputs
 {
 
-    public sealed class GetWafInfosParamArgs : Pulumi.InvokeArgs
+    public sealed class GetWafInfosParamArgs : global::Pulumi.InvokeArgs
     {
+        /// <summary>
+        /// Domain unique ID.
+        /// </summary>
         [Input("domainId")]
         public string? DomainId { get; set; }
 
+        /// <summary>
+        /// Listener ID of LoadBalancer.
+        /// </summary>
         [Input("listenerId")]
         public string? ListenerId { get; set; }
 
+        /// <summary>
+        /// Loadbalancer unique ID.If this parameter is not passed, it will operate all listeners of this appid. If this parameter is not empty, it will operate listeners of the LoadBalancer only.
+        /// </summary>
         [Input("loadBalancerId", required: true)]
         public string LoadBalancerId { get; set; } = null!;
 
         public GetWafInfosParamArgs()
         {
         }
+        public static new GetWafInfosParamArgs Empty => new GetWafInfosParamArgs();
     }
 }

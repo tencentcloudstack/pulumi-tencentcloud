@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cvm.Inputs
 {
 
-    public sealed class LaunchTemplateVersionEnhancedServiceGetArgs : Pulumi.ResourceArgs
+    public sealed class LaunchTemplateVersionEnhancedServiceGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Whether to enable the TAT service. If this parameter is not specified, the TAT service is enabled for public images and disabled for other images by default.
@@ -34,5 +34,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cvm.Inputs
         public LaunchTemplateVersionEnhancedServiceGetArgs()
         {
         }
+        public static new LaunchTemplateVersionEnhancedServiceGetArgs Empty => new LaunchTemplateVersionEnhancedServiceGetArgs();
     }
 }

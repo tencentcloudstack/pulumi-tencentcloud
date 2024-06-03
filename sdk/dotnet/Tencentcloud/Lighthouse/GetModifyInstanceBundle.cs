@@ -15,86 +15,80 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Lighthouse
         /// <summary>
         /// Use this data source to query detailed information of lighthouse modify_instance_bundle
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var modifyInstanceBundle = Tencentcloud.Lighthouse.GetModifyInstanceBundle.Invoke(new()
         ///     {
-        ///         var modifyInstanceBundle = Output.Create(Tencentcloud.Lighthouse.GetModifyInstanceBundle.InvokeAsync(new Tencentcloud.Lighthouse.GetModifyInstanceBundleArgs
+        ///         Filters = new[]
         ///         {
-        ///             Filters = 
+        ///             new Tencentcloud.Lighthouse.Inputs.GetModifyInstanceBundleFilterInputArgs
         ///             {
-        ///                 new Tencentcloud.Lighthouse.Inputs.GetModifyInstanceBundleFilterArgs
+        ///                 Name = "bundle-id",
+        ///                 Values = new[]
         ///                 {
-        ///                     Name = "bundle-id",
-        ///                     Values = 
-        ///                     {
-        ///                         "bundle_gen_mc_med2_02",
-        ///                     },
+        ///                     "bundle_gen_mc_med2_02",
         ///                 },
         ///             },
-        ///             InstanceId = "lhins-xxxxxx",
-        ///         }));
-        ///     }
+        ///         },
+        ///         InstanceId = "lhins-xxxxxx",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetModifyInstanceBundleResult> InvokeAsync(GetModifyInstanceBundleArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetModifyInstanceBundleResult>("tencentcloud:Lighthouse/getModifyInstanceBundle:getModifyInstanceBundle", args ?? new GetModifyInstanceBundleArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetModifyInstanceBundleResult>("tencentcloud:Lighthouse/getModifyInstanceBundle:getModifyInstanceBundle", args ?? new GetModifyInstanceBundleArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of lighthouse modify_instance_bundle
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var modifyInstanceBundle = Tencentcloud.Lighthouse.GetModifyInstanceBundle.Invoke(new()
         ///     {
-        ///         var modifyInstanceBundle = Output.Create(Tencentcloud.Lighthouse.GetModifyInstanceBundle.InvokeAsync(new Tencentcloud.Lighthouse.GetModifyInstanceBundleArgs
+        ///         Filters = new[]
         ///         {
-        ///             Filters = 
+        ///             new Tencentcloud.Lighthouse.Inputs.GetModifyInstanceBundleFilterInputArgs
         ///             {
-        ///                 new Tencentcloud.Lighthouse.Inputs.GetModifyInstanceBundleFilterArgs
+        ///                 Name = "bundle-id",
+        ///                 Values = new[]
         ///                 {
-        ///                     Name = "bundle-id",
-        ///                     Values = 
-        ///                     {
-        ///                         "bundle_gen_mc_med2_02",
-        ///                     },
+        ///                     "bundle_gen_mc_med2_02",
         ///                 },
         ///             },
-        ///             InstanceId = "lhins-xxxxxx",
-        ///         }));
-        ///     }
+        ///         },
+        ///         InstanceId = "lhins-xxxxxx",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetModifyInstanceBundleResult> Invoke(GetModifyInstanceBundleInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetModifyInstanceBundleResult>("tencentcloud:Lighthouse/getModifyInstanceBundle:getModifyInstanceBundle", args ?? new GetModifyInstanceBundleInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetModifyInstanceBundleResult>("tencentcloud:Lighthouse/getModifyInstanceBundle:getModifyInstanceBundle", args ?? new GetModifyInstanceBundleInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetModifyInstanceBundleArgs : Pulumi.InvokeArgs
+    public sealed class GetModifyInstanceBundleArgs : global::Pulumi.InvokeArgs
     {
         [Input("filters")]
         private List<Inputs.GetModifyInstanceBundleFilterArgs>? _filters;
@@ -128,9 +122,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Lighthouse
         public GetModifyInstanceBundleArgs()
         {
         }
+        public static new GetModifyInstanceBundleArgs Empty => new GetModifyInstanceBundleArgs();
     }
 
-    public sealed class GetModifyInstanceBundleInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetModifyInstanceBundleInvokeArgs : global::Pulumi.InvokeArgs
     {
         [Input("filters")]
         private InputList<Inputs.GetModifyInstanceBundleFilterInputArgs>? _filters;
@@ -164,6 +159,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Lighthouse
         public GetModifyInstanceBundleInvokeArgs()
         {
         }
+        public static new GetModifyInstanceBundleInvokeArgs Empty => new GetModifyInstanceBundleInvokeArgs();
     }
 
 

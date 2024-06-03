@@ -11,11 +11,12 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const cluster = new tencentcloud.Tdcpg.Cluster("cluster", {
+ * const cluster = new tencentcloud.tdcpg.Cluster("cluster", {
  *     clusterName: "cluster_name",
  *     cpu: 1,
  *     dbVersion: "10.17",
@@ -30,13 +31,14 @@ import * as utilities from "../utilities";
  *     zone: "ap-guangzhou-3",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * tdcpg cluster can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Tdcpg/cluster:Cluster cluster cluster_id
+ * $ pulumi import tencentcloud:Tdcpg/cluster:Cluster cluster cluster_id
  * ```
  */
 export class Cluster extends pulumi.CustomResource {
@@ -173,7 +175,7 @@ export class Cluster extends pulumi.CustomResource {
             resourceInputs["cpu"] = args ? args.cpu : undefined;
             resourceInputs["dbVersion"] = args ? args.dbVersion : undefined;
             resourceInputs["instanceCount"] = args ? args.instanceCount : undefined;
-            resourceInputs["masterUserPassword"] = args ? args.masterUserPassword : undefined;
+            resourceInputs["masterUserPassword"] = args?.masterUserPassword ? pulumi.secret(args.masterUserPassword) : undefined;
             resourceInputs["memory"] = args ? args.memory : undefined;
             resourceInputs["payMode"] = args ? args.payMode : undefined;
             resourceInputs["period"] = args ? args.period : undefined;
@@ -184,6 +186,8 @@ export class Cluster extends pulumi.CustomResource {
             resourceInputs["zone"] = args ? args.zone : undefined;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+        const secretOpts = { additionalSecretOutputs: ["masterUserPassword"] };
+        opts = pulumi.mergeOptions(opts, secretOpts);
         super(Cluster.__pulumiType, name, resourceInputs, opts);
     }
 }

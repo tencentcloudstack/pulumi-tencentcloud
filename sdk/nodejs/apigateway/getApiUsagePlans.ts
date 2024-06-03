@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,10 +11,11 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const exampleUsagePlan = new tencentcloud.apigateway.UsagePlan("exampleUsagePlan", {
  *     usagePlanName: "tf_example",
@@ -75,13 +77,11 @@ import * as utilities from "../utilities";
  *     serviceId: exampleUsagePlanAttachment.serviceId,
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getApiUsagePlans(args: GetApiUsagePlansArgs, opts?: pulumi.InvokeOptions): Promise<GetApiUsagePlansResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:ApiGateway/getApiUsagePlans:getApiUsagePlans", {
         "resultOutputFile": args.resultOutputFile,
         "serviceId": args.serviceId,
@@ -120,9 +120,81 @@ export interface GetApiUsagePlansResult {
      */
     readonly serviceId: string;
 }
-
+/**
+ * Use this data source to query detailed information of apigateway apiUsagePlan
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
+ *
+ * const exampleUsagePlan = new tencentcloud.apigateway.UsagePlan("exampleUsagePlan", {
+ *     usagePlanName: "tf_example",
+ *     usagePlanDesc: "desc.",
+ *     maxRequestNum: 100,
+ *     maxRequestNumPreSec: 10,
+ * });
+ * const exampleService = new tencentcloud.apigateway.Service("exampleService", {
+ *     serviceName: "tf_example",
+ *     protocol: "http&https",
+ *     serviceDesc: "desc.",
+ *     netTypes: [
+ *         "INNER",
+ *         "OUTER",
+ *     ],
+ *     ipVersion: "IPv4",
+ * });
+ * const exampleApi = new tencentcloud.apigateway.Api("exampleApi", {
+ *     serviceId: exampleService.id,
+ *     apiName: "tf_example",
+ *     apiDesc: "my hello api update",
+ *     authType: "SECRET",
+ *     protocol: "HTTP",
+ *     enableCors: true,
+ *     requestConfigPath: "/user/info",
+ *     requestConfigMethod: "POST",
+ *     requestParameters: [{
+ *         name: "email",
+ *         position: "QUERY",
+ *         type: "string",
+ *         desc: "desc.",
+ *         defaultValue: "test@qq.com",
+ *         required: true,
+ *     }],
+ *     serviceConfigType: "HTTP",
+ *     serviceConfigTimeout: 10,
+ *     serviceConfigUrl: "http://www.tencent.com",
+ *     serviceConfigPath: "/user",
+ *     serviceConfigMethod: "POST",
+ *     responseType: "XML",
+ *     responseSuccessExample: "<note>success</note>",
+ *     responseFailExample: "<note>fail</note>",
+ *     responseErrorCodes: [{
+ *         code: 500,
+ *         msg: "system error",
+ *         desc: "system error code",
+ *         convertedCode: 5000,
+ *         needConvert: true,
+ *     }],
+ * });
+ * const exampleUsagePlanAttachment = new tencentcloud.apigateway.UsagePlanAttachment("exampleUsagePlanAttachment", {
+ *     usagePlanId: exampleUsagePlan.id,
+ *     serviceId: exampleService.id,
+ *     environment: "release",
+ *     bindType: "API",
+ *     apiId: exampleApi.id,
+ * });
+ * const exampleApiUsagePlans = tencentcloud.ApiGateway.getApiUsagePlansOutput({
+ *     serviceId: exampleUsagePlanAttachment.serviceId,
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getApiUsagePlansOutput(args: GetApiUsagePlansOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetApiUsagePlansResult> {
-    return pulumi.output(args).apply(a => getApiUsagePlans(a, opts))
+    return pulumi.output(args).apply((a: any) => getApiUsagePlans(a, opts))
 }
 
 /**

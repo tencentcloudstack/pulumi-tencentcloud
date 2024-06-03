@@ -8,7 +8,7 @@ import (
 
 	"github.com/blang/semver"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 type module struct {
@@ -23,16 +23,24 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 	switch typ {
 	case "tencentcloud:Vod/adaptiveDynamicStreamingTemplate:AdaptiveDynamicStreamingTemplate":
 		r = &AdaptiveDynamicStreamingTemplate{}
+	case "tencentcloud:Vod/eventConfig:EventConfig":
+		r = &EventConfig{}
 	case "tencentcloud:Vod/imageSpriteTemplate:ImageSpriteTemplate":
 		r = &ImageSpriteTemplate{}
 	case "tencentcloud:Vod/procedureTemplate:ProcedureTemplate":
 		r = &ProcedureTemplate{}
+	case "tencentcloud:Vod/sampleSnapshotTemplate:SampleSnapshotTemplate":
+		r = &SampleSnapshotTemplate{}
 	case "tencentcloud:Vod/snapshotByTimeOffsetTemplate:SnapshotByTimeOffsetTemplate":
 		r = &SnapshotByTimeOffsetTemplate{}
 	case "tencentcloud:Vod/subApplication:SubApplication":
 		r = &SubApplication{}
 	case "tencentcloud:Vod/superPlayerConfig:SuperPlayerConfig":
 		r = &SuperPlayerConfig{}
+	case "tencentcloud:Vod/transcodeTemplate:TranscodeTemplate":
+		r = &TranscodeTemplate{}
+	case "tencentcloud:Vod/watermarkTemplate:WatermarkTemplate":
+		r = &WatermarkTemplate{}
 	default:
 		return nil, fmt.Errorf("unknown resource type: %s", typ)
 	}
@@ -42,7 +50,7 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 }
 
 func init() {
-	version, err := tencentcloud.PkgVersion()
+	version, err := internal.PkgVersion()
 	if err != nil {
 		version = semver.Version{Major: 1}
 	}
@@ -53,12 +61,22 @@ func init() {
 	)
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
+		"Vod/eventConfig",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
 		"Vod/imageSpriteTemplate",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
 		"Vod/procedureTemplate",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Vod/sampleSnapshotTemplate",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(
@@ -74,6 +92,16 @@ func init() {
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
 		"Vod/superPlayerConfig",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Vod/transcodeTemplate",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Vod/watermarkTemplate",
 		&module{version},
 	)
 }

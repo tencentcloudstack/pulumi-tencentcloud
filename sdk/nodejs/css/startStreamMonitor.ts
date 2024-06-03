@@ -9,22 +9,24 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const startStreamMonitor = new tencentcloud.Css.StartStreamMonitor("start_stream_monitor", {
+ * const startStreamMonitor = new tencentcloud.css.StartStreamMonitor("startStreamMonitor", {
  *     audibleInputIndexLists: [1],
  *     monitorId: "3d5738dd-1ca2-4601-a6e9-004c5ec75c0b",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * css start_stream_monitor can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Css/startStreamMonitor:StartStreamMonitor start_stream_monitor start_stream_monitor_id
+ * $ pulumi import tencentcloud:Css/startStreamMonitor:StartStreamMonitor start_stream_monitor start_stream_monitor_id
  * ```
  */
 export class StartStreamMonitor extends pulumi.CustomResource {

@@ -15,70 +15,64 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tat
         /// <summary>
         /// Use this data source to query detailed information of tat invoker_records
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var invokerRecords = Tencentcloud.Tat.GetInvokerRecords.Invoke(new()
         ///     {
-        ///         var invokerRecords = Output.Create(Tencentcloud.Tat.GetInvokerRecords.InvokeAsync(new Tencentcloud.Tat.GetInvokerRecordsArgs
+        ///         InvokerIds = new[]
         ///         {
-        ///             InvokerIds = 
-        ///             {
-        ///                 "ivk-cas4upyf",
-        ///             },
-        ///         }));
-        ///     }
+        ///             "ivk-cas4upyf",
+        ///         },
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetInvokerRecordsResult> InvokeAsync(GetInvokerRecordsArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetInvokerRecordsResult>("tencentcloud:Tat/getInvokerRecords:getInvokerRecords", args ?? new GetInvokerRecordsArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetInvokerRecordsResult>("tencentcloud:Tat/getInvokerRecords:getInvokerRecords", args ?? new GetInvokerRecordsArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of tat invoker_records
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var invokerRecords = Tencentcloud.Tat.GetInvokerRecords.Invoke(new()
         ///     {
-        ///         var invokerRecords = Output.Create(Tencentcloud.Tat.GetInvokerRecords.InvokeAsync(new Tencentcloud.Tat.GetInvokerRecordsArgs
+        ///         InvokerIds = new[]
         ///         {
-        ///             InvokerIds = 
-        ///             {
-        ///                 "ivk-cas4upyf",
-        ///             },
-        ///         }));
-        ///     }
+        ///             "ivk-cas4upyf",
+        ///         },
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetInvokerRecordsResult> Invoke(GetInvokerRecordsInvokeArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetInvokerRecordsResult>("tencentcloud:Tat/getInvokerRecords:getInvokerRecords", args ?? new GetInvokerRecordsInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetInvokerRecordsResult>("tencentcloud:Tat/getInvokerRecords:getInvokerRecords", args ?? new GetInvokerRecordsInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetInvokerRecordsArgs : Pulumi.InvokeArgs
+    public sealed class GetInvokerRecordsArgs : global::Pulumi.InvokeArgs
     {
         [Input("invokerIds")]
         private List<string>? _invokerIds;
@@ -101,9 +95,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tat
         public GetInvokerRecordsArgs()
         {
         }
+        public static new GetInvokerRecordsArgs Empty => new GetInvokerRecordsArgs();
     }
 
-    public sealed class GetInvokerRecordsInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetInvokerRecordsInvokeArgs : global::Pulumi.InvokeArgs
     {
         [Input("invokerIds")]
         private InputList<string>? _invokerIds;
@@ -126,6 +121,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tat
         public GetInvokerRecordsInvokeArgs()
         {
         }
+        public static new GetInvokerRecordsInvokeArgs Empty => new GetInvokerRecordsInvokeArgs();
     }
 
 

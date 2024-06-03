@@ -15,41 +15,42 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cwp
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var example = new Tencentcloud.Cwp.LicenseOrder("example", new()
     ///     {
-    ///         var example = new Tencentcloud.Cwp.LicenseOrder("example", new Tencentcloud.Cwp.LicenseOrderArgs
+    ///         Alias = "tf_example",
+    ///         LicenseNum = 1,
+    ///         LicenseType = 0,
+    ///         ProjectId = 0,
+    ///         RegionId = 1,
+    ///         Tags = 
     ///         {
-    ///             Alias = "tf_example",
-    ///             LicenseNum = 1,
-    ///             LicenseType = 0,
-    ///             ProjectId = 0,
-    ///             RegionId = 1,
-    ///             Tags = 
-    ///             {
-    ///                 { "createdBy", "terraform" },
-    ///             },
-    ///         });
-    ///     }
+    ///             { "createdBy", "terraform" },
+    ///         },
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// cwp license_order can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Cwp/licenseOrder:LicenseOrder example cwplic-130715d2#1
+    /// $ pulumi import tencentcloud:Cwp/licenseOrder:LicenseOrder example cwplic-130715d2#1
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Cwp/licenseOrder:LicenseOrder")]
-    public partial class LicenseOrder : Pulumi.CustomResource
+    public partial class LicenseOrder : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Resource alias.
@@ -144,7 +145,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cwp
         }
     }
 
-    public sealed class LicenseOrderArgs : Pulumi.ResourceArgs
+    public sealed class LicenseOrderArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Resource alias.
@@ -191,9 +192,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cwp
         public LicenseOrderArgs()
         {
         }
+        public static new LicenseOrderArgs Empty => new LicenseOrderArgs();
     }
 
-    public sealed class LicenseOrderState : Pulumi.ResourceArgs
+    public sealed class LicenseOrderState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Resource alias.
@@ -252,5 +254,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cwp
         public LicenseOrderState()
         {
         }
+        public static new LicenseOrderState Empty => new LicenseOrderState();
     }
 }

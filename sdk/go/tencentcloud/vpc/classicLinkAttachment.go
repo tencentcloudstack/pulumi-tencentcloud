@@ -7,8 +7,9 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 type ClassicLinkAttachment struct {
@@ -33,7 +34,7 @@ func NewClassicLinkAttachment(ctx *pulumi.Context,
 	if args.VpcId == nil {
 		return nil, errors.New("invalid value for required argument 'VpcId'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource ClassicLinkAttachment
 	err := ctx.RegisterResource("tencentcloud:Vpc/classicLinkAttachment:ClassicLinkAttachment", name, args, &resource, opts...)
 	if err != nil {
@@ -114,7 +115,7 @@ func (i *ClassicLinkAttachment) ToClassicLinkAttachmentOutputWithContext(ctx con
 // ClassicLinkAttachmentArrayInput is an input type that accepts ClassicLinkAttachmentArray and ClassicLinkAttachmentArrayOutput values.
 // You can construct a concrete instance of `ClassicLinkAttachmentArrayInput` via:
 //
-//          ClassicLinkAttachmentArray{ ClassicLinkAttachmentArgs{...} }
+//	ClassicLinkAttachmentArray{ ClassicLinkAttachmentArgs{...} }
 type ClassicLinkAttachmentArrayInput interface {
 	pulumi.Input
 
@@ -139,7 +140,7 @@ func (i ClassicLinkAttachmentArray) ToClassicLinkAttachmentArrayOutputWithContex
 // ClassicLinkAttachmentMapInput is an input type that accepts ClassicLinkAttachmentMap and ClassicLinkAttachmentMapOutput values.
 // You can construct a concrete instance of `ClassicLinkAttachmentMapInput` via:
 //
-//          ClassicLinkAttachmentMap{ "key": ClassicLinkAttachmentArgs{...} }
+//	ClassicLinkAttachmentMap{ "key": ClassicLinkAttachmentArgs{...} }
 type ClassicLinkAttachmentMapInput interface {
 	pulumi.Input
 

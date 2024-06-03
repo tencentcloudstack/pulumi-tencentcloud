@@ -8,7 +8,7 @@ import (
 
 	"github.com/blang/semver"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 type module struct {
@@ -41,8 +41,6 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 		r = &DataTransform{}
 	case "tencentcloud:Cls/export:Export":
 		r = &Export{}
-	case "tencentcloud:Cls/index:Index":
-		r = &Index{}
 	case "tencentcloud:Cls/kafkaRecharge:KafkaRecharge":
 		r = &KafkaRecharge{}
 	case "tencentcloud:Cls/logset:Logset":
@@ -62,7 +60,7 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 }
 
 func init() {
-	version, err := tencentcloud.PkgVersion()
+	version, err := internal.PkgVersion()
 	if err != nil {
 		version = semver.Version{Major: 1}
 	}
@@ -114,11 +112,6 @@ func init() {
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
 		"Cls/export",
-		&module{version},
-	)
-	pulumi.RegisterResourceModule(
-		"tencentcloud",
-		"Cls/index",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(

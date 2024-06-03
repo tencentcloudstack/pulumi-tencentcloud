@@ -15,44 +15,46 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdmq
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var exampleInstance = new Tencentcloud.Tdmq.Instance("exampleInstance", new()
     ///     {
-    ///         var exampleInstance = new Tencentcloud.Tdmq.Instance("exampleInstance", new Tencentcloud.Tdmq.InstanceArgs
+    ///         ClusterName = "tf_example",
+    ///         Remark = "remark.",
+    ///         Tags = 
     ///         {
-    ///             ClusterName = "tf_example",
-    ///             Remark = "remark.",
-    ///             Tags = 
-    ///             {
-    ///                 { "createdBy", "terraform" },
-    ///             },
-    ///         });
-    ///         var exampleRole = new Tencentcloud.Tdmq.Role("exampleRole", new Tencentcloud.Tdmq.RoleArgs
-    ///         {
-    ///             RoleName = "tf_example",
-    ///             ClusterId = exampleInstance.Id,
-    ///             Remark = "remark.",
-    ///         });
-    ///     }
+    ///             { "createdBy", "terraform" },
+    ///         },
+    ///     });
     /// 
-    /// }
+    ///     var exampleRole = new Tencentcloud.Tdmq.Role("exampleRole", new()
+    ///     {
+    ///         RoleName = "tf_example",
+    ///         ClusterId = exampleInstance.Id,
+    ///         Remark = "remark.",
+    ///     });
+    /// 
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// Tdmq instance can be imported, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Tdmq/role:Role test tdmq_id
+    /// $ pulumi import tencentcloud:Tdmq/role:Role test tdmq_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Tdmq/role:Role")]
-    public partial class Role : Pulumi.CustomResource
+    public partial class Role : global::Pulumi.CustomResource
     {
         /// <summary>
         /// The id of tdmq cluster.
@@ -117,7 +119,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdmq
         }
     }
 
-    public sealed class RoleArgs : Pulumi.ResourceArgs
+    public sealed class RoleArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// The id of tdmq cluster.
@@ -140,9 +142,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdmq
         public RoleArgs()
         {
         }
+        public static new RoleArgs Empty => new RoleArgs();
     }
 
-    public sealed class RoleState : Pulumi.ResourceArgs
+    public sealed class RoleState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// The id of tdmq cluster.
@@ -165,5 +168,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdmq
         public RoleState()
         {
         }
+        public static new RoleState Empty => new RoleState();
     }
 }

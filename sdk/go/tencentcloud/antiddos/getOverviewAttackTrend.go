@@ -8,39 +8,44 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Use this data source to query detailed information of antiddos overviewAttackTrend
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Antiddos"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Antiddos"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Antiddos"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Antiddos.GetOverviewAttackTrend(ctx, &antiddos.GetOverviewAttackTrendArgs{
-// 			Dimension: "attackcount",
-// 			EndTime:   "2023-11-22 10:28:31",
-// 			Period:    86400,
-// 			StartTime: "2023-11-21 10:28:31",
-// 			Type:      "ddos",
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Antiddos.GetOverviewAttackTrend(ctx, &antiddos.GetOverviewAttackTrendArgs{
+//				Dimension: "attackcount",
+//				EndTime:   "2023-11-22 10:28:31",
+//				Period:    86400,
+//				StartTime: "2023-11-21 10:28:31",
+//				Type:      "ddos",
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 func GetOverviewAttackTrend(ctx *pulumi.Context, args *GetOverviewAttackTrendArgs, opts ...pulumi.InvokeOption) (*GetOverviewAttackTrendResult, error) {
-	opts = pkgInvokeDefaultOpts(opts)
+	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetOverviewAttackTrendResult
 	err := ctx.Invoke("tencentcloud:Antiddos/getOverviewAttackTrend:getOverviewAttackTrend", args, &rv, opts...)
 	if err != nil {

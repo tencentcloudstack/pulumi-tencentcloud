@@ -15,95 +15,99 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var exampleApiApp = new Tencentcloud.ApiGateway.ApiApp("exampleApiApp", new()
     ///     {
-    ///         var exampleApiApp = new Tencentcloud.ApiGateway.ApiApp("exampleApiApp", new Tencentcloud.ApiGateway.ApiAppArgs
-    ///         {
-    ///             ApiAppName = "tf_example",
-    ///             ApiAppDesc = "app desc.",
-    ///         });
-    ///         var exampleService = new Tencentcloud.ApiGateway.Service("exampleService", new Tencentcloud.ApiGateway.ServiceArgs
-    ///         {
-    ///             ServiceName = "tf_example_service",
-    ///             Protocol = "http&amp;https",
-    ///             ServiceDesc = "your nice service",
-    ///             NetTypes = 
-    ///             {
-    ///                 "INNER",
-    ///                 "OUTER",
-    ///             },
-    ///             IpVersion = "IPv4",
-    ///         });
-    ///         var exampleApi = new Tencentcloud.ApiGateway.Api("exampleApi", new Tencentcloud.ApiGateway.ApiArgs
-    ///         {
-    ///             ServiceId = exampleService.Id,
-    ///             ApiName = "tf_example_api",
-    ///             ApiDesc = "desc.",
-    ///             AuthType = "APP",
-    ///             Protocol = "HTTP",
-    ///             EnableCors = true,
-    ///             RequestConfigPath = "/user/info",
-    ///             RequestConfigMethod = "GET",
-    ///             RequestParameters = 
-    ///             {
-    ///                 new Tencentcloud.ApiGateway.Inputs.ApiRequestParameterArgs
-    ///                 {
-    ///                     Name = "name",
-    ///                     Position = "QUERY",
-    ///                     Type = "string",
-    ///                     Desc = "desc.",
-    ///                     DefaultValue = "terraform",
-    ///                     Required = true,
-    ///                 },
-    ///             },
-    ///             ServiceConfigType = "HTTP",
-    ///             ServiceConfigTimeout = 15,
-    ///             ServiceConfigUrl = "https://www.qq.com",
-    ///             ServiceConfigPath = "/user",
-    ///             ServiceConfigMethod = "GET",
-    ///             ResponseType = "HTML",
-    ///             ResponseSuccessExample = "success",
-    ///             ResponseFailExample = "fail",
-    ///             ResponseErrorCodes = 
-    ///             {
-    ///                 new Tencentcloud.ApiGateway.Inputs.ApiResponseErrorCodeArgs
-    ///                 {
-    ///                     Code = 400,
-    ///                     Msg = "system error msg.",
-    ///                     Desc = "system error desc.",
-    ///                     ConvertedCode = 407,
-    ///                     NeedConvert = true,
-    ///                 },
-    ///             },
-    ///         });
-    ///         var exampleApiAppAttachment = new Tencentcloud.ApiGateway.ApiAppAttachment("exampleApiAppAttachment", new Tencentcloud.ApiGateway.ApiAppAttachmentArgs
-    ///         {
-    ///             ApiAppId = exampleApiApp.Id,
-    ///             Environment = "test",
-    ///             ServiceId = exampleService.Id,
-    ///             ApiId = exampleApi.Id,
-    ///         });
-    ///     }
+    ///         ApiAppName = "tf_example",
+    ///         ApiAppDesc = "app desc.",
+    ///     });
     /// 
-    /// }
+    ///     var exampleService = new Tencentcloud.ApiGateway.Service("exampleService", new()
+    ///     {
+    ///         ServiceName = "tf_example_service",
+    ///         Protocol = "http&amp;https",
+    ///         ServiceDesc = "your nice service",
+    ///         NetTypes = new[]
+    ///         {
+    ///             "INNER",
+    ///             "OUTER",
+    ///         },
+    ///         IpVersion = "IPv4",
+    ///     });
+    /// 
+    ///     var exampleApi = new Tencentcloud.ApiGateway.Api("exampleApi", new()
+    ///     {
+    ///         ServiceId = exampleService.Id,
+    ///         ApiName = "tf_example_api",
+    ///         ApiDesc = "desc.",
+    ///         AuthType = "APP",
+    ///         Protocol = "HTTP",
+    ///         EnableCors = true,
+    ///         RequestConfigPath = "/user/info",
+    ///         RequestConfigMethod = "GET",
+    ///         RequestParameters = new[]
+    ///         {
+    ///             new Tencentcloud.ApiGateway.Inputs.ApiRequestParameterArgs
+    ///             {
+    ///                 Name = "name",
+    ///                 Position = "QUERY",
+    ///                 Type = "string",
+    ///                 Desc = "desc.",
+    ///                 DefaultValue = "terraform",
+    ///                 Required = true,
+    ///             },
+    ///         },
+    ///         ServiceConfigType = "HTTP",
+    ///         ServiceConfigTimeout = 15,
+    ///         ServiceConfigUrl = "https://www.qq.com",
+    ///         ServiceConfigPath = "/user",
+    ///         ServiceConfigMethod = "GET",
+    ///         ResponseType = "HTML",
+    ///         ResponseSuccessExample = "success",
+    ///         ResponseFailExample = "fail",
+    ///         ResponseErrorCodes = new[]
+    ///         {
+    ///             new Tencentcloud.ApiGateway.Inputs.ApiResponseErrorCodeArgs
+    ///             {
+    ///                 Code = 400,
+    ///                 Msg = "system error msg.",
+    ///                 Desc = "system error desc.",
+    ///                 ConvertedCode = 407,
+    ///                 NeedConvert = true,
+    ///             },
+    ///         },
+    ///     });
+    /// 
+    ///     var exampleApiAppAttachment = new Tencentcloud.ApiGateway.ApiAppAttachment("exampleApiAppAttachment", new()
+    ///     {
+    ///         ApiAppId = exampleApiApp.Id,
+    ///         Environment = "test",
+    ///         ServiceId = exampleService.Id,
+    ///         ApiId = exampleApi.Id,
+    ///     });
+    /// 
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// apigateway api_app_attachment can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:ApiGateway/apiAppAttachment:ApiAppAttachment example app-f2dxx0lv#test#service-h0trno8e#api-grsomg0w
+    /// $ pulumi import tencentcloud:ApiGateway/apiAppAttachment:ApiAppAttachment example app-f2dxx0lv#test#service-h0trno8e#api-grsomg0w
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:ApiGateway/apiAppAttachment:ApiAppAttachment")]
-    public partial class ApiAppAttachment : Pulumi.CustomResource
+    public partial class ApiAppAttachment : global::Pulumi.CustomResource
     {
         /// <summary>
         /// The unique ID of the application to be bound.
@@ -174,7 +178,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway
         }
     }
 
-    public sealed class ApiAppAttachmentArgs : Pulumi.ResourceArgs
+    public sealed class ApiAppAttachmentArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// The unique ID of the application to be bound.
@@ -203,9 +207,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway
         public ApiAppAttachmentArgs()
         {
         }
+        public static new ApiAppAttachmentArgs Empty => new ApiAppAttachmentArgs();
     }
 
-    public sealed class ApiAppAttachmentState : Pulumi.ResourceArgs
+    public sealed class ApiAppAttachmentState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// The unique ID of the application to be bound.
@@ -234,5 +239,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway
         public ApiAppAttachmentState()
         {
         }
+        public static new ApiAppAttachmentState Empty => new ApiAppAttachmentState();
     }
 }

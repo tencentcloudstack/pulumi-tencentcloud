@@ -7,210 +7,12 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a tke tmpRecordRule
-//
-// ## Example Usage
-//
-// ```go
-// package main
-//
-// import (
-// 	"fmt"
-//
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Images"
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Kubernetes"
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Monitor"
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Images"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Kubernetes"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Monitor"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Security"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
-// )
-//
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		cfg := config.New(ctx, "")
-// 		defaultInstanceType := "SA1.MEDIUM2"
-// 		if param := cfg.Get("defaultInstanceType"); param != "" {
-// 			defaultInstanceType = param
-// 		}
-// 		availabilityZoneFirst := "ap-guangzhou-3"
-// 		if param := cfg.Get("availabilityZoneFirst"); param != "" {
-// 			availabilityZoneFirst = param
-// 		}
-// 		availabilityZoneSecond := "ap-guangzhou-4"
-// 		if param := cfg.Get("availabilityZoneSecond"); param != "" {
-// 			availabilityZoneSecond = param
-// 		}
-// 		exampleClusterCidr := "10.31.0.0/16"
-// 		if param := cfg.Get("exampleClusterCidr"); param != "" {
-// 			exampleClusterCidr = param
-// 		}
-// 		vpcOne, err := Vpc.GetSubnets(ctx, &vpc.GetSubnetsArgs{
-// 			IsDefault:        pulumi.BoolRef(true),
-// 			AvailabilityZone: pulumi.StringRef(availabilityZoneFirst),
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		firstVpcId := vpcOne.InstanceLists[0].VpcId
-// 		firstSubnetId := vpcOne.InstanceLists[0].SubnetId
-// 		vpcTwo, err := Vpc.GetSubnets(ctx, &vpc.GetSubnetsArgs{
-// 			IsDefault:        pulumi.BoolRef(true),
-// 			AvailabilityZone: pulumi.StringRef(availabilityZoneSecond),
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_ := vpcTwo.InstanceLists[0].VpcId
-// 		secondSubnetId := vpcTwo.InstanceLists[0].SubnetId
-// 		sg, err := Security.NewGroup(ctx, "sg", nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		sgId := sg.ID()
-// 		_default, err := Images.GetInstance(ctx, &images.GetInstanceArgs{
-// 			ImageTypes: []string{
-// 				"PUBLIC_IMAGE",
-// 			},
-// 			ImageNameRegex: pulumi.StringRef("Final"),
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		imageId := _default.ImageId
-// 		_, err = Security.NewGroupLiteRule(ctx, "sgRule", &Security.GroupLiteRuleArgs{
-// 			SecurityGroupId: sg.ID(),
-// 			Ingresses: pulumi.StringArray{
-// 				pulumi.String("ACCEPT#10.0.0.0/16#ALL#ALL"),
-// 				pulumi.String("ACCEPT#172.16.0.0/22#ALL#ALL"),
-// 				pulumi.String("DROP#0.0.0.0/0#ALL#ALL"),
-// 			},
-// 			Egresses: pulumi.StringArray{
-// 				pulumi.String("ACCEPT#172.16.0.0/22#ALL#ALL"),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		example, err := Kubernetes.NewCluster(ctx, "example", &Kubernetes.ClusterArgs{
-// 			VpcId:                        pulumi.String(firstVpcId),
-// 			ClusterCidr:                  pulumi.String(exampleClusterCidr),
-// 			ClusterMaxPodNum:             pulumi.Int(32),
-// 			ClusterName:                  pulumi.String("tf_example_cluster"),
-// 			ClusterDesc:                  pulumi.String("example for tke cluster"),
-// 			ClusterMaxServiceNum:         pulumi.Int(32),
-// 			ClusterInternet:              pulumi.Bool(false),
-// 			ClusterInternetSecurityGroup: pulumi.String(sgId),
-// 			ClusterVersion:               pulumi.String("1.22.5"),
-// 			ClusterDeployType:            pulumi.String("MANAGED_CLUSTER"),
-// 			WorkerConfigs: kubernetes.ClusterWorkerConfigArray{
-// 				&kubernetes.ClusterWorkerConfigArgs{
-// 					Count:                   pulumi.Int(1),
-// 					AvailabilityZone:        pulumi.String(availabilityZoneFirst),
-// 					InstanceType:            pulumi.String(defaultInstanceType),
-// 					SystemDiskType:          pulumi.String("CLOUD_SSD"),
-// 					SystemDiskSize:          pulumi.Int(60),
-// 					InternetChargeType:      pulumi.String("TRAFFIC_POSTPAID_BY_HOUR"),
-// 					InternetMaxBandwidthOut: pulumi.Int(100),
-// 					PublicIpAssigned:        pulumi.Bool(true),
-// 					SubnetId:                pulumi.String(firstSubnetId),
-// 					ImgId:                   pulumi.String(imageId),
-// 					DataDisks: kubernetes.ClusterWorkerConfigDataDiskArray{
-// 						&kubernetes.ClusterWorkerConfigDataDiskArgs{
-// 							DiskType: pulumi.String("CLOUD_PREMIUM"),
-// 							DiskSize: pulumi.Int(50),
-// 						},
-// 					},
-// 					EnhancedSecurityService: pulumi.Bool(false),
-// 					EnhancedMonitorService:  pulumi.Bool(false),
-// 					UserData:                pulumi.String("dGVzdA=="),
-// 					Password:                pulumi.String("ZZXXccvv1212"),
-// 				},
-// 				&kubernetes.ClusterWorkerConfigArgs{
-// 					Count:                   pulumi.Int(1),
-// 					AvailabilityZone:        pulumi.String(availabilityZoneSecond),
-// 					InstanceType:            pulumi.String(defaultInstanceType),
-// 					SystemDiskType:          pulumi.String("CLOUD_SSD"),
-// 					SystemDiskSize:          pulumi.Int(60),
-// 					InternetChargeType:      pulumi.String("TRAFFIC_POSTPAID_BY_HOUR"),
-// 					InternetMaxBandwidthOut: pulumi.Int(100),
-// 					PublicIpAssigned:        pulumi.Bool(true),
-// 					SubnetId:                pulumi.String(secondSubnetId),
-// 					DataDisks: kubernetes.ClusterWorkerConfigDataDiskArray{
-// 						&kubernetes.ClusterWorkerConfigDataDiskArgs{
-// 							DiskType: pulumi.String("CLOUD_PREMIUM"),
-// 							DiskSize: pulumi.Int(50),
-// 						},
-// 					},
-// 					EnhancedSecurityService: pulumi.Bool(false),
-// 					EnhancedMonitorService:  pulumi.Bool(false),
-// 					UserData:                pulumi.String("dGVzdA=="),
-// 					CamRoleName:             pulumi.String("CVM_QcsRole"),
-// 					Password:                pulumi.String("ZZXXccvv1212"),
-// 				},
-// 			},
-// 			Labels: pulumi.AnyMap{
-// 				"test1": pulumi.Any("test1"),
-// 				"test2": pulumi.Any("test2"),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		zone := "ap-guangzhou"
-// 		if param := cfg.Get("zone"); param != "" {
-// 			zone = param
-// 		}
-// 		clusterType := "tke"
-// 		if param := cfg.Get("clusterType"); param != "" {
-// 			clusterType = param
-// 		}
-// 		fooTmpInstance, err := Monitor.NewTmpInstance(ctx, "fooTmpInstance", &Monitor.TmpInstanceArgs{
-// 			InstanceName:      pulumi.String("tf-tmp-instance"),
-// 			VpcId:             pulumi.String(firstVpcId),
-// 			SubnetId:          pulumi.String(firstSubnetId),
-// 			DataRetentionTime: pulumi.Int(30),
-// 			Zone:              pulumi.String(availabilityZoneSecond),
-// 			Tags: pulumi.AnyMap{
-// 				"createdBy": pulumi.Any("terraform"),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		fooTmpTkeClusterAgent, err := Monitor.NewTmpTkeClusterAgent(ctx, "fooTmpTkeClusterAgent", &Monitor.TmpTkeClusterAgentArgs{
-// 			InstanceId: fooTmpInstance.ID(),
-// 			Agents: &monitor.TmpTkeClusterAgentAgentsArgs{
-// 				Region:         pulumi.String(zone),
-// 				ClusterType:    pulumi.String(clusterType),
-// 				ClusterId:      example.ID(),
-// 				EnableExternal: pulumi.Bool(false),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_, err = Monitor.NewTmpTkeRecordRuleYaml(ctx, "fooTmpTkeRecordRuleYaml", &Monitor.TmpTkeRecordRuleYamlArgs{
-// 			InstanceId: fooTmpInstance.ID(),
-// 			Content:    pulumi.String(fmt.Sprintf("%v%v%v%v%v%v%v%v%v%v%v%v", "apiVersion: monitoring.coreos.com/v1\n", "kind: PrometheusRule\n", "metadata:\n", "  name: example-record\n", "spec:\n", "  groups:\n", "    - name: kube-apiserver.rules\n", "      rules:\n", "        - expr: sum(metrics_test)\n", "          labels:\n", "            verb: read\n", "          record: 'apiserver_request:burnrate1d'\n")),
-// 		}, pulumi.DependsOn([]pulumi.Resource{
-// 			fooTmpTkeClusterAgent,
-// 		}))
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
-// ```
 type TmpTkeRecordRuleYaml struct {
 	pulumi.CustomResourceState
 
@@ -241,7 +43,7 @@ func NewTmpTkeRecordRuleYaml(ctx *pulumi.Context,
 	if args.InstanceId == nil {
 		return nil, errors.New("invalid value for required argument 'InstanceId'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource TmpTkeRecordRuleYaml
 	err := ctx.RegisterResource("tencentcloud:Monitor/tmpTkeRecordRuleYaml:TmpTkeRecordRuleYaml", name, args, &resource, opts...)
 	if err != nil {
@@ -338,7 +140,7 @@ func (i *TmpTkeRecordRuleYaml) ToTmpTkeRecordRuleYamlOutputWithContext(ctx conte
 // TmpTkeRecordRuleYamlArrayInput is an input type that accepts TmpTkeRecordRuleYamlArray and TmpTkeRecordRuleYamlArrayOutput values.
 // You can construct a concrete instance of `TmpTkeRecordRuleYamlArrayInput` via:
 //
-//          TmpTkeRecordRuleYamlArray{ TmpTkeRecordRuleYamlArgs{...} }
+//	TmpTkeRecordRuleYamlArray{ TmpTkeRecordRuleYamlArgs{...} }
 type TmpTkeRecordRuleYamlArrayInput interface {
 	pulumi.Input
 
@@ -363,7 +165,7 @@ func (i TmpTkeRecordRuleYamlArray) ToTmpTkeRecordRuleYamlArrayOutputWithContext(
 // TmpTkeRecordRuleYamlMapInput is an input type that accepts TmpTkeRecordRuleYamlMap and TmpTkeRecordRuleYamlMapOutput values.
 // You can construct a concrete instance of `TmpTkeRecordRuleYamlMapInput` via:
 //
-//          TmpTkeRecordRuleYamlMap{ "key": TmpTkeRecordRuleYamlArgs{...} }
+//	TmpTkeRecordRuleYamlMap{ "key": TmpTkeRecordRuleYamlArgs{...} }
 type TmpTkeRecordRuleYamlMapInput interface {
 	pulumi.Input
 

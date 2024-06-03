@@ -15,25 +15,26 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var restartInstance = new Tencentcloud.Cynosdb.RestartInstance("restartInstance", new()
     ///     {
-    ///         var restartInstance = new Tencentcloud.Cynosdb.RestartInstance("restartInstance", new Tencentcloud.Cynosdb.RestartInstanceArgs
-    ///         {
-    ///             InstanceId = "cynosdbmysql-ins-afqx1hy0",
-    ///         });
-    ///     }
+    ///         InstanceId = "cynosdbmysql-ins-afqx1hy0",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Cynosdb/restartInstance:RestartInstance")]
-    public partial class RestartInstance : Pulumi.CustomResource
+    public partial class RestartInstance : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Instance ID.
@@ -92,7 +93,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
         }
     }
 
-    public sealed class RestartInstanceArgs : Pulumi.ResourceArgs
+    public sealed class RestartInstanceArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Instance ID.
@@ -103,9 +104,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
         public RestartInstanceArgs()
         {
         }
+        public static new RestartInstanceArgs Empty => new RestartInstanceArgs();
     }
 
-    public sealed class RestartInstanceState : Pulumi.ResourceArgs
+    public sealed class RestartInstanceState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Instance ID.
@@ -122,5 +124,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
         public RestartInstanceState()
         {
         }
+        public static new RestartInstanceState Empty => new RestartInstanceState();
     }
 }

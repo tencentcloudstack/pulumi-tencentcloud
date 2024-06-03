@@ -9,11 +9,12 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const foo = new tencentcloud.Cfs.AccessRule("foo", {
+ * const foo = new tencentcloud.cfs.AccessRule("foo", {
  *     accessGroupId: "pgroup-7nx89k7l",
  *     authClientIp: "10.10.1.0/24",
  *     priority: 1,
@@ -21,6 +22,7 @@ import * as utilities from "../utilities";
  *     userPermission: "root_squash",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export class AccessRule extends pulumi.CustomResource {
     /**

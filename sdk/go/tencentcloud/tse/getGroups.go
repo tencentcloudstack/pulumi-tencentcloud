@@ -8,43 +8,48 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Use this data source to query detailed information of tse groups
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Tse"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tse"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tse"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Tse.GetGroups(ctx, &tse.GetGroupsArgs{
-// 			Filters: []tse.GetGroupsFilter{
-// 				tse.GetGroupsFilter{
-// 					Name: "GroupId",
-// 					Values: []string{
-// 						"group-013c0d8e",
-// 					},
-// 				},
-// 			},
-// 			GatewayId: "gateway-ddbb709b",
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Tse.GetGroups(ctx, &tse.GetGroupsArgs{
+//				Filters: []tse.GetGroupsFilter{
+//					{
+//						Name: "GroupId",
+//						Values: []string{
+//							"group-013c0d8e",
+//						},
+//					},
+//				},
+//				GatewayId: "gateway-ddbb709b",
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 func LookupGroups(ctx *pulumi.Context, args *LookupGroupsArgs, opts ...pulumi.InvokeOption) (*LookupGroupsResult, error) {
-	opts = pkgInvokeDefaultOpts(opts)
+	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv LookupGroupsResult
 	err := ctx.Invoke("tencentcloud:Tse/getGroups:getGroups", args, &rv, opts...)
 	if err != nil {

@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,10 +11,11 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const exampleService = new tencentcloud.apigateway.Service("exampleService", {
  *     serviceName: "tf_example",
@@ -63,13 +65,11 @@ import * as utilities from "../utilities";
  *     apiRegion: "ap-guangzhou",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getApiAppService(args: GetApiAppServiceArgs, opts?: pulumi.InvokeOptions): Promise<GetApiAppServiceResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:ApiGateway/getApiAppService:getApiAppService", {
         "apiRegion": args.apiRegion,
         "resultOutputFile": args.resultOutputFile,
@@ -182,9 +182,69 @@ export interface GetApiAppServiceResult {
      */
     readonly userType: string;
 }
-
+/**
+ * Use this data source to query detailed information of apigateway apiAppServices
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
+ *
+ * const exampleService = new tencentcloud.apigateway.Service("exampleService", {
+ *     serviceName: "tf_example",
+ *     protocol: "http&https",
+ *     serviceDesc: "desc.",
+ *     netTypes: [
+ *         "INNER",
+ *         "OUTER",
+ *     ],
+ *     ipVersion: "IPv4",
+ * });
+ * const exampleApi = new tencentcloud.apigateway.Api("exampleApi", {
+ *     serviceId: exampleService.id,
+ *     apiName: "tf_example",
+ *     apiDesc: "my hello api update",
+ *     authType: "APP",
+ *     protocol: "HTTP",
+ *     enableCors: true,
+ *     requestConfigPath: "/user/info",
+ *     requestConfigMethod: "POST",
+ *     requestParameters: [{
+ *         name: "email",
+ *         position: "QUERY",
+ *         type: "string",
+ *         desc: "desc.",
+ *         defaultValue: "test@qq.com",
+ *         required: true,
+ *     }],
+ *     serviceConfigType: "HTTP",
+ *     serviceConfigTimeout: 10,
+ *     serviceConfigUrl: "http://www.tencent.com",
+ *     serviceConfigPath: "/user",
+ *     serviceConfigMethod: "POST",
+ *     responseType: "XML",
+ *     responseSuccessExample: "<note>success</note>",
+ *     responseFailExample: "<note>fail</note>",
+ *     responseErrorCodes: [{
+ *         code: 500,
+ *         msg: "system error",
+ *         desc: "system error code",
+ *         convertedCode: 5000,
+ *         needConvert: true,
+ *     }],
+ * });
+ * const exampleApiAppService = tencentcloud.ApiGateway.getApiAppServiceOutput({
+ *     serviceId: exampleApi.serviceId,
+ *     apiRegion: "ap-guangzhou",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getApiAppServiceOutput(args: GetApiAppServiceOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetApiAppServiceResult> {
-    return pulumi.output(args).apply(a => getApiAppService(a, opts))
+    return pulumi.output(args).apply((a: any) => getApiAppService(a, opts))
 }
 
 /**

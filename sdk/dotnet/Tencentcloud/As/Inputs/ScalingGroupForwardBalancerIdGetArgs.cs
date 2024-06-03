@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.As.Inputs
 {
 
-    public sealed class ScalingGroupForwardBalancerIdGetArgs : Pulumi.ResourceArgs
+    public sealed class ScalingGroupForwardBalancerIdGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Listener ID for application load balancers.
@@ -46,5 +46,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.As.Inputs
         public ScalingGroupForwardBalancerIdGetArgs()
         {
         }
+        public static new ScalingGroupForwardBalancerIdGetArgs Empty => new ScalingGroupForwardBalancerIdGetArgs();
     }
 }

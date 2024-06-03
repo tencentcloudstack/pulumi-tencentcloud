@@ -9,22 +9,24 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const foo = new tencentcloud.Gaap.Certificate("foo", {
+ * const foo = new tencentcloud.gaap.Certificate("foo", {
  *     content: "test:tx2KGdo3zJg/.",
  *     type: "BASIC",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * GAAP certificate can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Gaap/certificate:Certificate tencentcloud_gaap_certificate.foo cert-d5y6ei3b
+ * $ pulumi import tencentcloud:Gaap/certificate:Certificate tencentcloud_gaap_certificate.foo cert-d5y6ei3b
  * ```
  */
 export class Certificate extends pulumi.CustomResource {
@@ -123,7 +125,7 @@ export class Certificate extends pulumi.CustomResource {
                 throw new Error("Missing required property 'type'");
             }
             resourceInputs["content"] = args ? args.content : undefined;
-            resourceInputs["key"] = args ? args.key : undefined;
+            resourceInputs["key"] = args?.key ? pulumi.secret(args.key) : undefined;
             resourceInputs["name"] = args ? args.name : undefined;
             resourceInputs["type"] = args ? args.type : undefined;
             resourceInputs["beginTime"] = undefined /*out*/;
@@ -133,6 +135,8 @@ export class Certificate extends pulumi.CustomResource {
             resourceInputs["subjectCn"] = undefined /*out*/;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+        const secretOpts = { additionalSecretOutputs: ["key"] };
+        opts = pulumi.mergeOptions(opts, secretOpts);
         super(Certificate.__pulumiType, name, resourceInputs, opts);
     }
 }

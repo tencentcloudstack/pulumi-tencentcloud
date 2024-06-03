@@ -15,38 +15,39 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Chdfs
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var mountPointAttachment = new Tencentcloud.Chdfs.MountPointAttachment("mountPointAttachment", new()
     ///     {
-    ///         var mountPointAttachment = new Tencentcloud.Chdfs.MountPointAttachment("mountPointAttachment", new Tencentcloud.Chdfs.MountPointAttachmentArgs
+    ///         AccessGroupIds = new[]
     ///         {
-    ///             AccessGroupIds = 
-    ///             {
-    ///                 "ag-bvmzrbsm",
-    ///                 "ag-lairqrgr",
-    ///             },
-    ///             MountPointId = "f14mpfy5lh4e-KuiL",
-    ///         });
-    ///     }
+    ///             "ag-bvmzrbsm",
+    ///             "ag-lairqrgr",
+    ///         },
+    ///         MountPointId = "f14mpfy5lh4e-KuiL",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// chdfs mount_point_attachment can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Chdfs/mountPointAttachment:MountPointAttachment mount_point_attachment mount_point_id
+    /// $ pulumi import tencentcloud:Chdfs/mountPointAttachment:MountPointAttachment mount_point_attachment mount_point_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Chdfs/mountPointAttachment:MountPointAttachment")]
-    public partial class MountPointAttachment : Pulumi.CustomResource
+    public partial class MountPointAttachment : global::Pulumi.CustomResource
     {
         /// <summary>
         /// associate access group id.
@@ -105,7 +106,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Chdfs
         }
     }
 
-    public sealed class MountPointAttachmentArgs : Pulumi.ResourceArgs
+    public sealed class MountPointAttachmentArgs : global::Pulumi.ResourceArgs
     {
         [Input("accessGroupIds", required: true)]
         private InputList<string>? _accessGroupIds;
@@ -128,9 +129,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Chdfs
         public MountPointAttachmentArgs()
         {
         }
+        public static new MountPointAttachmentArgs Empty => new MountPointAttachmentArgs();
     }
 
-    public sealed class MountPointAttachmentState : Pulumi.ResourceArgs
+    public sealed class MountPointAttachmentState : global::Pulumi.ResourceArgs
     {
         [Input("accessGroupIds")]
         private InputList<string>? _accessGroupIds;
@@ -153,5 +155,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Chdfs
         public MountPointAttachmentState()
         {
         }
+        public static new MountPointAttachmentState Empty => new MountPointAttachmentState();
     }
 }

@@ -15,56 +15,59 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssl
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var updateCertificateInstance = new Tencentcloud.Ssl.UpdateCertificateInstanceOperation("updateCertificateInstance", new()
     ///     {
-    ///         var updateCertificateInstance = new Tencentcloud.Ssl.UpdateCertificateInstanceOperation("updateCertificateInstance", new Tencentcloud.Ssl.UpdateCertificateInstanceOperationArgs
+    ///         CertificateId = "8x1eUSSl",
+    ///         OldCertificateId = "8xNdi2ig",
+    ///         ResourceTypes = new[]
     ///         {
-    ///             CertificateId = "8x1eUSSl",
-    ///             OldCertificateId = "8xNdi2ig",
-    ///             ResourceTypes = 
-    ///             {
-    ///                 "cdn",
-    ///             },
-    ///         });
-    ///     }
+    ///             "cdn",
+    ///         },
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
+    /// 
     /// ### Upload certificate
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
     /// using System.IO;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var updateCertificateInstance = new Tencentcloud.Ssl.UpdateCertificateInstanceOperation("updateCertificateInstance", new()
     ///     {
-    ///         var updateCertificateInstance = new Tencentcloud.Ssl.UpdateCertificateInstanceOperation("updateCertificateInstance", new Tencentcloud.Ssl.UpdateCertificateInstanceOperationArgs
+    ///         OldCertificateId = "xxx",
+    ///         CertificatePublicKey = File.ReadAllText("xxx.crt"),
+    ///         CertificatePrivateKey = File.ReadAllText("xxx.key"),
+    ///         Repeatable = true,
+    ///         ResourceTypes = new[]
     ///         {
-    ///             OldCertificateId = "xxx",
-    ///             CertificatePublicKey = File.ReadAllText("xxx.crt"),
-    ///             CertificatePrivateKey = File.ReadAllText("xxx.key"),
-    ///             Repeatable = true,
-    ///             ResourceTypes = 
-    ///             {
-    ///                 "cdn",
-    ///             },
-    ///         });
-    ///     }
+    ///             "cdn",
+    ///         },
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Ssl/updateCertificateInstanceOperation:UpdateCertificateInstanceOperation")]
-    public partial class UpdateCertificateInstanceOperation : Pulumi.CustomResource
+    public partial class UpdateCertificateInstanceOperation : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Whether to allow downloading, if you choose to upload the certificate, you can configure this parameter.
@@ -150,6 +153,11 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssl
             {
                 Version = Utilities.Version,
                 PluginDownloadURL = "github://api.github.com/tencentcloudstack",
+                AdditionalSecretOutputs =
+                {
+                    "certificatePrivateKey",
+                    "certificatePublicKey",
+                },
             };
             var merged = CustomResourceOptions.Merge(defaultOptions, options);
             // Override the ID if one was specified for consistency with other language SDKs.
@@ -171,7 +179,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssl
         }
     }
 
-    public sealed class UpdateCertificateInstanceOperationArgs : Pulumi.ResourceArgs
+    public sealed class UpdateCertificateInstanceOperationArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Whether to allow downloading, if you choose to upload the certificate, you can configure this parameter.
@@ -185,17 +193,37 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssl
         [Input("certificateId")]
         public Input<string>? CertificateId { get; set; }
 
+        [Input("certificatePrivateKey")]
+        private Input<string>? _certificatePrivateKey;
+
         /// <summary>
         /// Certificate private key. If you upload the certificate public key, CertificateId does not need to be passed.
         /// </summary>
-        [Input("certificatePrivateKey")]
-        public Input<string>? CertificatePrivateKey { get; set; }
+        public Input<string>? CertificatePrivateKey
+        {
+            get => _certificatePrivateKey;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _certificatePrivateKey = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
+
+        [Input("certificatePublicKey")]
+        private Input<string>? _certificatePublicKey;
 
         /// <summary>
         /// Certificate public key. If you upload the certificate public key, CertificateId does not need to be passed.
         /// </summary>
-        [Input("certificatePublicKey")]
-        public Input<string>? CertificatePublicKey { get; set; }
+        public Input<string>? CertificatePublicKey
+        {
+            get => _certificatePublicKey;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _certificatePublicKey = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
 
         /// <summary>
         /// Whether to ignore expiration reminders for old certificates 0: Do not ignore notifications. 1: Ignore the notification and ignore the OldCertificateId expiration reminder.
@@ -248,9 +276,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssl
         public UpdateCertificateInstanceOperationArgs()
         {
         }
+        public static new UpdateCertificateInstanceOperationArgs Empty => new UpdateCertificateInstanceOperationArgs();
     }
 
-    public sealed class UpdateCertificateInstanceOperationState : Pulumi.ResourceArgs
+    public sealed class UpdateCertificateInstanceOperationState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Whether to allow downloading, if you choose to upload the certificate, you can configure this parameter.
@@ -264,17 +293,37 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssl
         [Input("certificateId")]
         public Input<string>? CertificateId { get; set; }
 
+        [Input("certificatePrivateKey")]
+        private Input<string>? _certificatePrivateKey;
+
         /// <summary>
         /// Certificate private key. If you upload the certificate public key, CertificateId does not need to be passed.
         /// </summary>
-        [Input("certificatePrivateKey")]
-        public Input<string>? CertificatePrivateKey { get; set; }
+        public Input<string>? CertificatePrivateKey
+        {
+            get => _certificatePrivateKey;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _certificatePrivateKey = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
+
+        [Input("certificatePublicKey")]
+        private Input<string>? _certificatePublicKey;
 
         /// <summary>
         /// Certificate public key. If you upload the certificate public key, CertificateId does not need to be passed.
         /// </summary>
-        [Input("certificatePublicKey")]
-        public Input<string>? CertificatePublicKey { get; set; }
+        public Input<string>? CertificatePublicKey
+        {
+            get => _certificatePublicKey;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _certificatePublicKey = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
 
         /// <summary>
         /// Whether to ignore expiration reminders for old certificates 0: Do not ignore notifications. 1: Ignore the notification and ignore the OldCertificateId expiration reminder.
@@ -327,5 +376,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssl
         public UpdateCertificateInstanceOperationState()
         {
         }
+        public static new UpdateCertificateInstanceOperationState Empty => new UpdateCertificateInstanceOperationState();
     }
 }

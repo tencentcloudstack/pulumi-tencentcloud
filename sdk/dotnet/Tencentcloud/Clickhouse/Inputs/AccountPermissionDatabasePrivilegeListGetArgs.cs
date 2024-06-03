@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clickhouse.Inputs
 {
 
-    public sealed class AccountPermissionDatabasePrivilegeListGetArgs : Pulumi.ResourceArgs
+    public sealed class AccountPermissionDatabasePrivilegeListGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Database name.
@@ -46,5 +46,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clickhouse.Inputs
         public AccountPermissionDatabasePrivilegeListGetArgs()
         {
         }
+        public static new AccountPermissionDatabasePrivilegeListGetArgs Empty => new AccountPermissionDatabasePrivilegeListGetArgs();
     }
 }

@@ -9,11 +9,12 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const task = new tencentcloud.Dbbrain.SecurityAuditLogExportTask("task", {
+ * const task = new tencentcloud.dbbrain.SecurityAuditLogExportTask("task", {
  *     dangerLevels: [
  *         0,
  *         1,
@@ -25,6 +26,7 @@ import * as utilities from "../utilities";
  *     startTime: "2020-12-28 00:00:00",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export class SecurityAuditLogExportTask extends pulumi.CustomResource {
     /**

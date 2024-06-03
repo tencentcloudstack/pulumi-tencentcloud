@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,10 +11,11 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const exampleService = new tencentcloud.apigateway.Service("exampleService", {
  *     serviceName: "tf_example",
@@ -84,13 +86,11 @@ import * as utilities from "../utilities";
  *     environmentName: "release",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getPlugins(args: GetPluginsArgs, opts?: pulumi.InvokeOptions): Promise<GetPluginsResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:ApiGateway/getPlugins:getPlugins", {
         "environmentName": args.environmentName,
         "pluginId": args.pluginId,
@@ -138,9 +138,90 @@ export interface GetPluginsResult {
     readonly results: outputs.ApiGateway.GetPluginsResult[];
     readonly serviceId: string;
 }
-
+/**
+ * Use this data source to query detailed information of apigateway plugin
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
+ *
+ * const exampleService = new tencentcloud.apigateway.Service("exampleService", {
+ *     serviceName: "tf_example",
+ *     protocol: "http&https",
+ *     serviceDesc: "desc.",
+ *     netTypes: [
+ *         "INNER",
+ *         "OUTER",
+ *     ],
+ *     ipVersion: "IPv4",
+ *     tags: {
+ *         testKey: "testValue",
+ *     },
+ *     releaseLimit: 500,
+ *     preLimit: 500,
+ *     testLimit: 500,
+ * });
+ * const exampleApi = new tencentcloud.apigateway.Api("exampleApi", {
+ *     serviceId: exampleService.id,
+ *     apiName: "hello",
+ *     apiDesc: "my hello api",
+ *     authType: "NONE",
+ *     protocol: "HTTP",
+ *     enableCors: true,
+ *     requestConfigPath: "/user/info",
+ *     requestConfigMethod: "GET",
+ *     requestParameters: [{
+ *         name: "name",
+ *         position: "QUERY",
+ *         type: "string",
+ *         desc: "who are you?",
+ *         defaultValue: "tom",
+ *         required: true,
+ *     }],
+ *     serviceConfigType: "HTTP",
+ *     serviceConfigTimeout: 15,
+ *     serviceConfigUrl: "http://www.qq.com",
+ *     serviceConfigPath: "/user",
+ *     serviceConfigMethod: "GET",
+ *     responseType: "HTML",
+ *     responseSuccessExample: "success",
+ *     responseFailExample: "fail",
+ *     responseErrorCodes: [{
+ *         code: 500,
+ *         msg: "system error",
+ *         desc: "system error code",
+ *         convertedCode: 5000,
+ *         needConvert: true,
+ *     }],
+ * });
+ * const exampleServiceRelease = new tencentcloud.apigateway.ServiceRelease("exampleServiceRelease", {
+ *     serviceId: exampleApi.serviceId,
+ *     environmentName: "release",
+ *     releaseDesc: "desc.",
+ * });
+ * const examplePlugin = new tencentcloud.apigateway.Plugin("examplePlugin", {
+ *     pluginName: "tf-example",
+ *     pluginType: "IPControl",
+ *     pluginData: JSON.stringify({
+ *         type: "white_list",
+ *         blocks: "1.1.1.1",
+ *     }),
+ *     description: "desc.",
+ * });
+ * const examplePlugins = tencentcloud.ApiGateway.getPluginsOutput({
+ *     serviceId: exampleServiceRelease.serviceId,
+ *     pluginId: examplePlugin.id,
+ *     environmentName: "release",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getPluginsOutput(args: GetPluginsOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetPluginsResult> {
-    return pulumi.output(args).apply(a => getPlugins(a, opts))
+    return pulumi.output(args).apply((a: any) => getPlugins(a, opts))
 }
 
 /**

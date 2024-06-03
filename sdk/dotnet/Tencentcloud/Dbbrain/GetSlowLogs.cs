@@ -15,72 +15,66 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dbbrain
         /// <summary>
         /// Use this data source to query detailed information of dbbrain slow_logs
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var slowLogs = Tencentcloud.Dbbrain.GetSlowLogs.Invoke(new()
         ///     {
-        ///         var slowLogs = Output.Create(Tencentcloud.Dbbrain.GetSlowLogs.InvokeAsync(new Tencentcloud.Dbbrain.GetSlowLogsArgs
-        ///         {
-        ///             EndTime = "%s",
-        ///             InstanceId = "%s",
-        ///             Md5 = "4961208426639258265",
-        ///             Product = "mysql",
-        ///             StartTime = "%s",
-        ///         }));
-        ///     }
+        ///         EndTime = "%s",
+        ///         InstanceId = "%s",
+        ///         Md5 = "4961208426639258265",
+        ///         Product = "mysql",
+        ///         StartTime = "%s",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetSlowLogsResult> InvokeAsync(GetSlowLogsArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetSlowLogsResult>("tencentcloud:Dbbrain/getSlowLogs:getSlowLogs", args ?? new GetSlowLogsArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetSlowLogsResult>("tencentcloud:Dbbrain/getSlowLogs:getSlowLogs", args ?? new GetSlowLogsArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of dbbrain slow_logs
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var slowLogs = Tencentcloud.Dbbrain.GetSlowLogs.Invoke(new()
         ///     {
-        ///         var slowLogs = Output.Create(Tencentcloud.Dbbrain.GetSlowLogs.InvokeAsync(new Tencentcloud.Dbbrain.GetSlowLogsArgs
-        ///         {
-        ///             EndTime = "%s",
-        ///             InstanceId = "%s",
-        ///             Md5 = "4961208426639258265",
-        ///             Product = "mysql",
-        ///             StartTime = "%s",
-        ///         }));
-        ///     }
+        ///         EndTime = "%s",
+        ///         InstanceId = "%s",
+        ///         Md5 = "4961208426639258265",
+        ///         Product = "mysql",
+        ///         StartTime = "%s",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetSlowLogsResult> Invoke(GetSlowLogsInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetSlowLogsResult>("tencentcloud:Dbbrain/getSlowLogs:getSlowLogs", args ?? new GetSlowLogsInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetSlowLogsResult>("tencentcloud:Dbbrain/getSlowLogs:getSlowLogs", args ?? new GetSlowLogsInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetSlowLogsArgs : Pulumi.InvokeArgs
+    public sealed class GetSlowLogsArgs : global::Pulumi.InvokeArgs
     {
         [Input("dbs")]
         private List<string>? _dbs;
@@ -181,9 +175,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dbbrain
         public GetSlowLogsArgs()
         {
         }
+        public static new GetSlowLogsArgs Empty => new GetSlowLogsArgs();
     }
 
-    public sealed class GetSlowLogsInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetSlowLogsInvokeArgs : global::Pulumi.InvokeArgs
     {
         [Input("dbs")]
         private InputList<string>? _dbs;
@@ -284,6 +279,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dbbrain
         public GetSlowLogsInvokeArgs()
         {
         }
+        public static new GetSlowLogsInvokeArgs Empty => new GetSlowLogsInvokeArgs();
     }
 
 

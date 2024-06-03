@@ -9,22 +9,21 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const proxyVersion = pulumi.output(tencentcloud.Cynosdb.getProxyVersion({
+ * const proxyVersion = tencentcloud.Cynosdb.getProxyVersion({
  *     clusterId: "cynosdbmysql-bws8h88b",
  *     proxyGroupId: "cynosdbmysql-proxy-l6zf9t30",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getProxyVersion(args: GetProxyVersionArgs, opts?: pulumi.InvokeOptions): Promise<GetProxyVersionResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Cynosdb/getProxyVersion:getProxyVersion", {
         "clusterId": args.clusterId,
         "proxyGroupId": args.proxyGroupId,
@@ -70,9 +69,25 @@ export interface GetProxyVersionResult {
      */
     readonly supportProxyVersions: string[];
 }
-
+/**
+ * Use this data source to query detailed information of cynosdb proxyVersion
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const proxyVersion = tencentcloud.Cynosdb.getProxyVersion({
+ *     clusterId: "cynosdbmysql-bws8h88b",
+ *     proxyGroupId: "cynosdbmysql-proxy-l6zf9t30",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getProxyVersionOutput(args: GetProxyVersionOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetProxyVersionResult> {
-    return pulumi.output(args).apply(a => getProxyVersion(a, opts))
+    return pulumi.output(args).apply((a: any) => getProxyVersion(a, opts))
 }
 
 /**

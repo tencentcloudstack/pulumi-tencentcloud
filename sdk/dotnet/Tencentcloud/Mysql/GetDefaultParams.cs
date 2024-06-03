@@ -16,17 +16,17 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
         /// Provide a datasource to query default mysql parameters.
         /// </summary>
         public static Task<GetDefaultParamsResult> InvokeAsync(GetDefaultParamsArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetDefaultParamsResult>("tencentcloud:Mysql/getDefaultParams:getDefaultParams", args ?? new GetDefaultParamsArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetDefaultParamsResult>("tencentcloud:Mysql/getDefaultParams:getDefaultParams", args ?? new GetDefaultParamsArgs(), options.WithDefaults());
 
         /// <summary>
         /// Provide a datasource to query default mysql parameters.
         /// </summary>
         public static Output<GetDefaultParamsResult> Invoke(GetDefaultParamsInvokeArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetDefaultParamsResult>("tencentcloud:Mysql/getDefaultParams:getDefaultParams", args ?? new GetDefaultParamsInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetDefaultParamsResult>("tencentcloud:Mysql/getDefaultParams:getDefaultParams", args ?? new GetDefaultParamsInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetDefaultParamsArgs : Pulumi.InvokeArgs
+    public sealed class GetDefaultParamsArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// MySQL database version.
@@ -43,9 +43,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
         public GetDefaultParamsArgs()
         {
         }
+        public static new GetDefaultParamsArgs Empty => new GetDefaultParamsArgs();
     }
 
-    public sealed class GetDefaultParamsInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetDefaultParamsInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// MySQL database version.
@@ -62,6 +63,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
         public GetDefaultParamsInvokeArgs()
         {
         }
+        public static new GetDefaultParamsInvokeArgs Empty => new GetDefaultParamsInvokeArgs();
     }
 
 

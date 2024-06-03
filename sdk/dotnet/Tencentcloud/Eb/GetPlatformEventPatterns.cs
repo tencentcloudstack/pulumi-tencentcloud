@@ -15,64 +15,58 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Eb
         /// <summary>
         /// Use this data source to query detailed information of eb platform_event_patterns
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var platformEventPatterns = Tencentcloud.Eb.GetPlatformEventPatterns.Invoke(new()
         ///     {
-        ///         var platformEventPatterns = Output.Create(Tencentcloud.Eb.GetPlatformEventPatterns.InvokeAsync(new Tencentcloud.Eb.GetPlatformEventPatternsArgs
-        ///         {
-        ///             ProductType = "",
-        ///         }));
-        ///     }
+        ///         ProductType = "",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetPlatformEventPatternsResult> InvokeAsync(GetPlatformEventPatternsArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetPlatformEventPatternsResult>("tencentcloud:Eb/getPlatformEventPatterns:getPlatformEventPatterns", args ?? new GetPlatformEventPatternsArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetPlatformEventPatternsResult>("tencentcloud:Eb/getPlatformEventPatterns:getPlatformEventPatterns", args ?? new GetPlatformEventPatternsArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of eb platform_event_patterns
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var platformEventPatterns = Tencentcloud.Eb.GetPlatformEventPatterns.Invoke(new()
         ///     {
-        ///         var platformEventPatterns = Output.Create(Tencentcloud.Eb.GetPlatformEventPatterns.InvokeAsync(new Tencentcloud.Eb.GetPlatformEventPatternsArgs
-        ///         {
-        ///             ProductType = "",
-        ///         }));
-        ///     }
+        ///         ProductType = "",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetPlatformEventPatternsResult> Invoke(GetPlatformEventPatternsInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetPlatformEventPatternsResult>("tencentcloud:Eb/getPlatformEventPatterns:getPlatformEventPatterns", args ?? new GetPlatformEventPatternsInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetPlatformEventPatternsResult>("tencentcloud:Eb/getPlatformEventPatterns:getPlatformEventPatterns", args ?? new GetPlatformEventPatternsInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetPlatformEventPatternsArgs : Pulumi.InvokeArgs
+    public sealed class GetPlatformEventPatternsArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Platform product type.
@@ -89,9 +83,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Eb
         public GetPlatformEventPatternsArgs()
         {
         }
+        public static new GetPlatformEventPatternsArgs Empty => new GetPlatformEventPatternsArgs();
     }
 
-    public sealed class GetPlatformEventPatternsInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetPlatformEventPatternsInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Platform product type.
@@ -108,6 +103,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Eb
         public GetPlatformEventPatternsInvokeArgs()
         {
         }
+        public static new GetPlatformEventPatternsInvokeArgs Empty => new GetPlatformEventPatternsInvokeArgs();
     }
 
 

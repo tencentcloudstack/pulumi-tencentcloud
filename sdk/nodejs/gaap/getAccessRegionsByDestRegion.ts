@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,21 +11,20 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const accessRegionsByDestRegion = pulumi.output(tencentcloud.Gaap.getAccessRegionsByDestRegion({
+ * const accessRegionsByDestRegion = tencentcloud.Gaap.getAccessRegionsByDestRegion({
  *     destRegion: "SouthChina",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getAccessRegionsByDestRegion(args: GetAccessRegionsByDestRegionArgs, opts?: pulumi.InvokeOptions): Promise<GetAccessRegionsByDestRegionResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Gaap/getAccessRegionsByDestRegion:getAccessRegionsByDestRegion", {
         "destRegion": args.destRegion,
         "ipAddressVersion": args.ipAddressVersion,
@@ -72,9 +72,24 @@ export interface GetAccessRegionsByDestRegionResult {
     readonly packageType?: string;
     readonly resultOutputFile?: string;
 }
-
+/**
+ * Use this data source to query detailed information of gaap access regions by dest region
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const accessRegionsByDestRegion = tencentcloud.Gaap.getAccessRegionsByDestRegion({
+ *     destRegion: "SouthChina",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getAccessRegionsByDestRegionOutput(args: GetAccessRegionsByDestRegionOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetAccessRegionsByDestRegionResult> {
-    return pulumi.output(args).apply(a => getAccessRegionsByDestRegion(a, opts))
+    return pulumi.output(args).apply((a: any) => getAccessRegionsByDestRegion(a, opts))
 }
 
 /**

@@ -7,88 +7,93 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a tse cngwGroup
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Tse"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Subnet"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tse"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Subnet"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tse"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		cfg := config.New(ctx, "")
-// 		availabilityZone := "ap-guangzhou-4"
-// 		if param := cfg.Get("availabilityZone"); param != "" {
-// 			availabilityZone = param
-// 		}
-// 		vpc, err := Vpc.NewInstance(ctx, "vpc", &Vpc.InstanceArgs{
-// 			CidrBlock: pulumi.String("10.0.0.0/16"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		subnet, err := Subnet.NewInstance(ctx, "subnet", &Subnet.InstanceArgs{
-// 			VpcId:            vpc.ID(),
-// 			AvailabilityZone: pulumi.String(availabilityZone),
-// 			CidrBlock:        pulumi.String("10.0.1.0/24"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		cngwGateway, err := Tse.NewCngwGateway(ctx, "cngwGateway", &Tse.CngwGatewayArgs{
-// 			Description:             pulumi.String("terraform test1"),
-// 			EnableCls:               pulumi.Bool(true),
-// 			EngineRegion:            pulumi.String("ap-guangzhou"),
-// 			FeatureVersion:          pulumi.String("STANDARD"),
-// 			GatewayVersion:          pulumi.String("2.5.1"),
-// 			IngressClassName:        pulumi.String("tse-nginx-ingress"),
-// 			InternetMaxBandwidthOut: pulumi.Int(0),
-// 			TradeType:               pulumi.Int(0),
-// 			Type:                    pulumi.String("kong"),
-// 			NodeConfig: &tse.CngwGatewayNodeConfigArgs{
-// 				Number:        pulumi.Int(2),
-// 				Specification: pulumi.String("1c2g"),
-// 			},
-// 			VpcConfig: &tse.CngwGatewayVpcConfigArgs{
-// 				SubnetId: subnet.ID(),
-// 				VpcId:    vpc.ID(),
-// 			},
-// 			Tags: pulumi.AnyMap{
-// 				"createdBy": pulumi.Any("terraform"),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_, err = Tse.NewCngwGroup(ctx, "cngwGroup", &Tse.CngwGroupArgs{
-// 			Description: pulumi.String("terraform desc"),
-// 			GatewayId:   cngwGateway.ID(),
-// 			SubnetId:    subnet.ID(),
-// 			NodeConfig: &tse.CngwGroupNodeConfigArgs{
-// 				Number:        pulumi.Int(2),
-// 				Specification: pulumi.String("1c2g"),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			cfg := config.New(ctx, "")
+//			availabilityZone := "ap-guangzhou-4"
+//			if param := cfg.Get("availabilityZone"); param != "" {
+//				availabilityZone = param
+//			}
+//			vpc, err := Vpc.NewInstance(ctx, "vpc", &Vpc.InstanceArgs{
+//				CidrBlock: pulumi.String("10.0.0.0/16"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			subnet, err := Subnet.NewInstance(ctx, "subnet", &Subnet.InstanceArgs{
+//				VpcId:            vpc.ID(),
+//				AvailabilityZone: pulumi.String(availabilityZone),
+//				CidrBlock:        pulumi.String("10.0.1.0/24"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			cngwGateway, err := Tse.NewCngwGateway(ctx, "cngwGateway", &Tse.CngwGatewayArgs{
+//				Description:             pulumi.String("terraform test1"),
+//				EnableCls:               pulumi.Bool(true),
+//				EngineRegion:            pulumi.String("ap-guangzhou"),
+//				FeatureVersion:          pulumi.String("STANDARD"),
+//				GatewayVersion:          pulumi.String("2.5.1"),
+//				IngressClassName:        pulumi.String("tse-nginx-ingress"),
+//				InternetMaxBandwidthOut: pulumi.Int(0),
+//				TradeType:               pulumi.Int(0),
+//				Type:                    pulumi.String("kong"),
+//				NodeConfig: &tse.CngwGatewayNodeConfigArgs{
+//					Number:        pulumi.Int(2),
+//					Specification: pulumi.String("1c2g"),
+//				},
+//				VpcConfig: &tse.CngwGatewayVpcConfigArgs{
+//					SubnetId: subnet.ID(),
+//					VpcId:    vpc.ID(),
+//				},
+//				Tags: pulumi.Map{
+//					"createdBy": pulumi.Any("terraform"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_, err = Tse.NewCngwGroup(ctx, "cngwGroup", &Tse.CngwGroupArgs{
+//				Description: pulumi.String("terraform desc"),
+//				GatewayId:   cngwGateway.ID(),
+//				SubnetId:    subnet.ID(),
+//				NodeConfig: &tse.CngwGroupNodeConfigArgs{
+//					Number:        pulumi.Int(2),
+//					Specification: pulumi.String("1c2g"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 type CngwGroup struct {
 	pulumi.CustomResourceState
 
@@ -96,6 +101,8 @@ type CngwGroup struct {
 	Description pulumi.StringPtrOutput `pulumi:"description"`
 	// gateway IDonly postpaid gateway supported.
 	GatewayId pulumi.StringOutput `pulumi:"gatewayId"`
+	// gateway group id.
+	GroupId pulumi.StringOutput `pulumi:"groupId"`
 	// internet configration.
 	InternetConfig CngwGroupInternetConfigPtrOutput `pulumi:"internetConfig"`
 	// public network outbound traffic bandwidth,[1,2048]Mbps.
@@ -124,7 +131,7 @@ func NewCngwGroup(ctx *pulumi.Context,
 	if args.SubnetId == nil {
 		return nil, errors.New("invalid value for required argument 'SubnetId'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource CngwGroup
 	err := ctx.RegisterResource("tencentcloud:Tse/cngwGroup:CngwGroup", name, args, &resource, opts...)
 	if err != nil {
@@ -151,6 +158,8 @@ type cngwGroupState struct {
 	Description *string `pulumi:"description"`
 	// gateway IDonly postpaid gateway supported.
 	GatewayId *string `pulumi:"gatewayId"`
+	// gateway group id.
+	GroupId *string `pulumi:"groupId"`
 	// internet configration.
 	InternetConfig *CngwGroupInternetConfig `pulumi:"internetConfig"`
 	// public network outbound traffic bandwidth,[1,2048]Mbps.
@@ -168,6 +177,8 @@ type CngwGroupState struct {
 	Description pulumi.StringPtrInput
 	// gateway IDonly postpaid gateway supported.
 	GatewayId pulumi.StringPtrInput
+	// gateway group id.
+	GroupId pulumi.StringPtrInput
 	// internet configration.
 	InternetConfig CngwGroupInternetConfigPtrInput
 	// public network outbound traffic bandwidth,[1,2048]Mbps.
@@ -245,7 +256,7 @@ func (i *CngwGroup) ToCngwGroupOutputWithContext(ctx context.Context) CngwGroupO
 // CngwGroupArrayInput is an input type that accepts CngwGroupArray and CngwGroupArrayOutput values.
 // You can construct a concrete instance of `CngwGroupArrayInput` via:
 //
-//          CngwGroupArray{ CngwGroupArgs{...} }
+//	CngwGroupArray{ CngwGroupArgs{...} }
 type CngwGroupArrayInput interface {
 	pulumi.Input
 
@@ -270,7 +281,7 @@ func (i CngwGroupArray) ToCngwGroupArrayOutputWithContext(ctx context.Context) C
 // CngwGroupMapInput is an input type that accepts CngwGroupMap and CngwGroupMapOutput values.
 // You can construct a concrete instance of `CngwGroupMapInput` via:
 //
-//          CngwGroupMap{ "key": CngwGroupArgs{...} }
+//	CngwGroupMap{ "key": CngwGroupArgs{...} }
 type CngwGroupMapInput interface {
 	pulumi.Input
 
@@ -314,6 +325,11 @@ func (o CngwGroupOutput) Description() pulumi.StringPtrOutput {
 // gateway IDonly postpaid gateway supported.
 func (o CngwGroupOutput) GatewayId() pulumi.StringOutput {
 	return o.ApplyT(func(v *CngwGroup) pulumi.StringOutput { return v.GatewayId }).(pulumi.StringOutput)
+}
+
+// gateway group id.
+func (o CngwGroupOutput) GroupId() pulumi.StringOutput {
+	return o.ApplyT(func(v *CngwGroup) pulumi.StringOutput { return v.GroupId }).(pulumi.StringOutput)
 }
 
 // internet configration.

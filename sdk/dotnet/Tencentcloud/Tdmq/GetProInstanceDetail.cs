@@ -15,64 +15,58 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdmq
         /// <summary>
         /// Use this data source to query detailed information of tdmq pro_instance_detail
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var proInstanceDetail = Tencentcloud.Tdmq.GetProInstanceDetail.Invoke(new()
         ///     {
-        ///         var proInstanceDetail = Output.Create(Tencentcloud.Tdmq.GetProInstanceDetail.InvokeAsync(new Tencentcloud.Tdmq.GetProInstanceDetailArgs
-        ///         {
-        ///             ClusterId = "pulsar-9n95ax58b9vn",
-        ///         }));
-        ///     }
+        ///         ClusterId = "pulsar-9n95ax58b9vn",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetProInstanceDetailResult> InvokeAsync(GetProInstanceDetailArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetProInstanceDetailResult>("tencentcloud:Tdmq/getProInstanceDetail:getProInstanceDetail", args ?? new GetProInstanceDetailArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetProInstanceDetailResult>("tencentcloud:Tdmq/getProInstanceDetail:getProInstanceDetail", args ?? new GetProInstanceDetailArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of tdmq pro_instance_detail
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var proInstanceDetail = Tencentcloud.Tdmq.GetProInstanceDetail.Invoke(new()
         ///     {
-        ///         var proInstanceDetail = Output.Create(Tencentcloud.Tdmq.GetProInstanceDetail.InvokeAsync(new Tencentcloud.Tdmq.GetProInstanceDetailArgs
-        ///         {
-        ///             ClusterId = "pulsar-9n95ax58b9vn",
-        ///         }));
-        ///     }
+        ///         ClusterId = "pulsar-9n95ax58b9vn",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetProInstanceDetailResult> Invoke(GetProInstanceDetailInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetProInstanceDetailResult>("tencentcloud:Tdmq/getProInstanceDetail:getProInstanceDetail", args ?? new GetProInstanceDetailInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetProInstanceDetailResult>("tencentcloud:Tdmq/getProInstanceDetail:getProInstanceDetail", args ?? new GetProInstanceDetailInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetProInstanceDetailArgs : Pulumi.InvokeArgs
+    public sealed class GetProInstanceDetailArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Cluster Id.
@@ -89,9 +83,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdmq
         public GetProInstanceDetailArgs()
         {
         }
+        public static new GetProInstanceDetailArgs Empty => new GetProInstanceDetailArgs();
     }
 
-    public sealed class GetProInstanceDetailInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetProInstanceDetailInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Cluster Id.
@@ -108,6 +103,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdmq
         public GetProInstanceDetailInvokeArgs()
         {
         }
+        public static new GetProInstanceDetailInvokeArgs Empty => new GetProInstanceDetailInvokeArgs();
     }
 
 

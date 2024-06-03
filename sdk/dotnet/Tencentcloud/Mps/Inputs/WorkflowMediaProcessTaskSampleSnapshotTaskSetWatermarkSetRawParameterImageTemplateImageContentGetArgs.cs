@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps.Inputs
 {
 
-    public sealed class WorkflowMediaProcessTaskSampleSnapshotTaskSetWatermarkSetRawParameterImageTemplateImageContentGetArgs : Pulumi.ResourceArgs
+    public sealed class WorkflowMediaProcessTaskSampleSnapshotTaskSetWatermarkSetRawParameterImageTemplateImageContentGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Valid when Type is COS, this item is required, indicating media processing COS object information.
@@ -34,5 +34,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps.Inputs
         public WorkflowMediaProcessTaskSampleSnapshotTaskSetWatermarkSetRawParameterImageTemplateImageContentGetArgs()
         {
         }
+        public static new WorkflowMediaProcessTaskSampleSnapshotTaskSetWatermarkSetRawParameterImageTemplateImageContentGetArgs Empty => new WorkflowMediaProcessTaskSampleSnapshotTaskSetWatermarkSetRawParameterImageTemplateImageContentGetArgs();
     }
 }

@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Instance.Inputs
 {
 
-    public sealed class InstanceDataDiskArgs : Pulumi.ResourceArgs
+    public sealed class InstanceDataDiskArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Data disk ID used to initialize the data disk. When data disk type is `LOCAL_BASIC` and `LOCAL_SSD`, disk id is not supported.
@@ -58,5 +58,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Instance.Inputs
         public InstanceDataDiskArgs()
         {
         }
+        public static new InstanceDataDiskArgs Empty => new InstanceDataDiskArgs();
     }
 }

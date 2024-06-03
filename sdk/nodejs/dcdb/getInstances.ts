@@ -2,47 +2,17 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
  * Use this data source to query detailed information of dcdb instances
- *
- * ## Example Usage
- *
- * ```typescript
- * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
- *
- * const instances1 = pulumi.output(tencentcloud.Dcdb.getInstances({
- *     exclusterType: 0,
- *     instanceIds: "your_dcdb_instance1_id",
- *     isFilterExcluster: true,
- *     isFilterVpc: true,
- *     projectIds: [0],
- *     searchKey: "search_key",
- *     searchName: "instancename",
- *     subnetId: "your_subnet_id",
- *     vpcId: "your_vpc_id",
- * }));
- * const instances2 = pulumi.output(tencentcloud.Dcdb.getInstances({
- *     instanceIds: ["your_dcdb_instance2_id"],
- * }));
- * const instances3 = pulumi.output(tencentcloud.Dcdb.getInstances({
- *     exclusterType: 2,
- *     isFilterExcluster: false,
- *     searchKey: "instances3",
- *     searchName: "instancename",
- * }));
- * ```
  */
 export function getInstances(args?: GetInstancesArgs, opts?: pulumi.InvokeOptions): Promise<GetInstancesResult> {
     args = args || {};
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Dcdb/getInstances:getInstances", {
         "exclusterType": args.exclusterType,
         "instanceIds": args.instanceIds,
@@ -132,9 +102,11 @@ export interface GetInstancesResult {
      */
     readonly vpcId: string;
 }
-
+/**
+ * Use this data source to query detailed information of dcdb instances
+ */
 export function getInstancesOutput(args?: GetInstancesOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetInstancesResult> {
-    return pulumi.output(args).apply(a => getInstances(a, opts))
+    return pulumi.output(args).apply((a: any) => getInstances(a, opts))
 }
 
 /**

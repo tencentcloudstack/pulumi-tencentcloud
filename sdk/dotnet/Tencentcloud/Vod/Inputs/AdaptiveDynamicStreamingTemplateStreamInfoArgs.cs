@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vod.Inputs
 {
 
-    public sealed class AdaptiveDynamicStreamingTemplateStreamInfoArgs : Pulumi.ResourceArgs
+    public sealed class AdaptiveDynamicStreamingTemplateStreamInfoArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Audio parameter information.
@@ -26,6 +26,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vod.Inputs
         public Input<bool>? RemoveAudio { get; set; }
 
         /// <summary>
+        /// Whether to remove video stream. Valid values: `false`: no, `true`: yes. `false` by default.
+        /// </summary>
+        [Input("removeVideo")]
+        public Input<bool>? RemoveVideo { get; set; }
+
+        /// <summary>
+        /// Extremely fast HD transcoding parameters.
+        /// </summary>
+        [Input("tehdConfig")]
+        public Input<Inputs.AdaptiveDynamicStreamingTemplateStreamInfoTehdConfigArgs>? TehdConfig { get; set; }
+
+        /// <summary>
         /// Video parameter information.
         /// </summary>
         [Input("video", required: true)]
@@ -34,5 +46,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vod.Inputs
         public AdaptiveDynamicStreamingTemplateStreamInfoArgs()
         {
         }
+        public static new AdaptiveDynamicStreamingTemplateStreamInfoArgs Empty => new AdaptiveDynamicStreamingTemplateStreamInfoArgs();
     }
 }

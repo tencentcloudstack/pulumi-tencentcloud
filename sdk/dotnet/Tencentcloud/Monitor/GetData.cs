@@ -15,132 +15,130 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
         /// <summary>
         /// Use this data source to query monitor data. for complex queries, use (https://github.com/tencentyun/tencentcloud-exporter)
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
-        ///     {
-        ///         var instances = Output.Create(Tencentcloud.Instances.GetInstance.InvokeAsync());
-        ///         var cvmMonitorData = instances.Apply(instances =&gt; Output.Create(Tencentcloud.Monitor.GetData.InvokeAsync(new Tencentcloud.Monitor.GetDataArgs
-        ///         {
-        ///             Namespace = "QCE/CVM",
-        ///             MetricName = "CPUUsage",
-        ///             Dimensions = 
-        ///             {
-        ///                 new Tencentcloud.Monitor.Inputs.GetDataDimensionArgs
-        ///                 {
-        ///                     Name = "InstanceId",
-        ///                     Value = instances.InstanceLists?[0]?.InstanceId,
-        ///                 },
-        ///             },
-        ///             Period = 300,
-        ///             StartTime = "2020-04-28T18:45:00+08:00",
-        ///             EndTime = "2020-04-28T19:00:00+08:00",
-        ///         })));
-        ///         var cosMonitorData = Output.Create(Tencentcloud.Monitor.GetData.InvokeAsync(new Tencentcloud.Monitor.GetDataArgs
-        ///         {
-        ///             Namespace = "QCE/COS",
-        ///             MetricName = "InternetTraffic",
-        ///             Dimensions = 
-        ///             {
-        ///                 new Tencentcloud.Monitor.Inputs.GetDataDimensionArgs
-        ///                 {
-        ///                     Name = "appid",
-        ///                     Value = "1258798060",
-        ///                 },
-        ///                 new Tencentcloud.Monitor.Inputs.GetDataDimensionArgs
-        ///                 {
-        ///                     Name = "bucket",
-        ///                     Value = "test-1258798060",
-        ///                 },
-        ///             },
-        ///             Period = 300,
-        ///             StartTime = "2020-04-28T18:30:00+08:00",
-        ///             EndTime = "2020-04-28T19:00:00+08:00",
-        ///         }));
-        ///     }
+        ///     var instances = Tencentcloud.Instances.GetInstance.Invoke();
         /// 
-        /// }
+        ///     var cvmMonitorData = Tencentcloud.Monitor.GetData.Invoke(new()
+        ///     {
+        ///         Namespace = "QCE/CVM",
+        ///         MetricName = "CPUUsage",
+        ///         Dimensions = new[]
+        ///         {
+        ///             new Tencentcloud.Monitor.Inputs.GetDataDimensionInputArgs
+        ///             {
+        ///                 Name = "InstanceId",
+        ///                 Value = instances.Apply(getInstanceResult =&gt; getInstanceResult.InstanceLists[0]?.InstanceId),
+        ///             },
+        ///         },
+        ///         Period = 300,
+        ///         StartTime = "2020-04-28T18:45:00+08:00",
+        ///         EndTime = "2020-04-28T19:00:00+08:00",
+        ///     });
+        /// 
+        ///     var cosMonitorData = Tencentcloud.Monitor.GetData.Invoke(new()
+        ///     {
+        ///         Namespace = "QCE/COS",
+        ///         MetricName = "InternetTraffic",
+        ///         Dimensions = new[]
+        ///         {
+        ///             new Tencentcloud.Monitor.Inputs.GetDataDimensionInputArgs
+        ///             {
+        ///                 Name = "appid",
+        ///                 Value = "1258798060",
+        ///             },
+        ///             new Tencentcloud.Monitor.Inputs.GetDataDimensionInputArgs
+        ///             {
+        ///                 Name = "bucket",
+        ///                 Value = "test-1258798060",
+        ///             },
+        ///         },
+        ///         Period = 300,
+        ///         StartTime = "2020-04-28T18:30:00+08:00",
+        ///         EndTime = "2020-04-28T19:00:00+08:00",
+        ///     });
+        /// 
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetDataResult> InvokeAsync(GetDataArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetDataResult>("tencentcloud:Monitor/getData:getData", args ?? new GetDataArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetDataResult>("tencentcloud:Monitor/getData:getData", args ?? new GetDataArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query monitor data. for complex queries, use (https://github.com/tencentyun/tencentcloud-exporter)
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
-        ///     {
-        ///         var instances = Output.Create(Tencentcloud.Instances.GetInstance.InvokeAsync());
-        ///         var cvmMonitorData = instances.Apply(instances =&gt; Output.Create(Tencentcloud.Monitor.GetData.InvokeAsync(new Tencentcloud.Monitor.GetDataArgs
-        ///         {
-        ///             Namespace = "QCE/CVM",
-        ///             MetricName = "CPUUsage",
-        ///             Dimensions = 
-        ///             {
-        ///                 new Tencentcloud.Monitor.Inputs.GetDataDimensionArgs
-        ///                 {
-        ///                     Name = "InstanceId",
-        ///                     Value = instances.InstanceLists?[0]?.InstanceId,
-        ///                 },
-        ///             },
-        ///             Period = 300,
-        ///             StartTime = "2020-04-28T18:45:00+08:00",
-        ///             EndTime = "2020-04-28T19:00:00+08:00",
-        ///         })));
-        ///         var cosMonitorData = Output.Create(Tencentcloud.Monitor.GetData.InvokeAsync(new Tencentcloud.Monitor.GetDataArgs
-        ///         {
-        ///             Namespace = "QCE/COS",
-        ///             MetricName = "InternetTraffic",
-        ///             Dimensions = 
-        ///             {
-        ///                 new Tencentcloud.Monitor.Inputs.GetDataDimensionArgs
-        ///                 {
-        ///                     Name = "appid",
-        ///                     Value = "1258798060",
-        ///                 },
-        ///                 new Tencentcloud.Monitor.Inputs.GetDataDimensionArgs
-        ///                 {
-        ///                     Name = "bucket",
-        ///                     Value = "test-1258798060",
-        ///                 },
-        ///             },
-        ///             Period = 300,
-        ///             StartTime = "2020-04-28T18:30:00+08:00",
-        ///             EndTime = "2020-04-28T19:00:00+08:00",
-        ///         }));
-        ///     }
+        ///     var instances = Tencentcloud.Instances.GetInstance.Invoke();
         /// 
-        /// }
+        ///     var cvmMonitorData = Tencentcloud.Monitor.GetData.Invoke(new()
+        ///     {
+        ///         Namespace = "QCE/CVM",
+        ///         MetricName = "CPUUsage",
+        ///         Dimensions = new[]
+        ///         {
+        ///             new Tencentcloud.Monitor.Inputs.GetDataDimensionInputArgs
+        ///             {
+        ///                 Name = "InstanceId",
+        ///                 Value = instances.Apply(getInstanceResult =&gt; getInstanceResult.InstanceLists[0]?.InstanceId),
+        ///             },
+        ///         },
+        ///         Period = 300,
+        ///         StartTime = "2020-04-28T18:45:00+08:00",
+        ///         EndTime = "2020-04-28T19:00:00+08:00",
+        ///     });
+        /// 
+        ///     var cosMonitorData = Tencentcloud.Monitor.GetData.Invoke(new()
+        ///     {
+        ///         Namespace = "QCE/COS",
+        ///         MetricName = "InternetTraffic",
+        ///         Dimensions = new[]
+        ///         {
+        ///             new Tencentcloud.Monitor.Inputs.GetDataDimensionInputArgs
+        ///             {
+        ///                 Name = "appid",
+        ///                 Value = "1258798060",
+        ///             },
+        ///             new Tencentcloud.Monitor.Inputs.GetDataDimensionInputArgs
+        ///             {
+        ///                 Name = "bucket",
+        ///                 Value = "test-1258798060",
+        ///             },
+        ///         },
+        ///         Period = 300,
+        ///         StartTime = "2020-04-28T18:30:00+08:00",
+        ///         EndTime = "2020-04-28T19:00:00+08:00",
+        ///     });
+        /// 
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetDataResult> Invoke(GetDataInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetDataResult>("tencentcloud:Monitor/getData:getData", args ?? new GetDataInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetDataResult>("tencentcloud:Monitor/getData:getData", args ?? new GetDataInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetDataArgs : Pulumi.InvokeArgs
+    public sealed class GetDataArgs : global::Pulumi.InvokeArgs
     {
         [Input("dimensions", required: true)]
         private List<Inputs.GetDataDimensionArgs>? _dimensions;
@@ -193,9 +191,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
         public GetDataArgs()
         {
         }
+        public static new GetDataArgs Empty => new GetDataArgs();
     }
 
-    public sealed class GetDataInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetDataInvokeArgs : global::Pulumi.InvokeArgs
     {
         [Input("dimensions", required: true)]
         private InputList<Inputs.GetDataDimensionInputArgs>? _dimensions;
@@ -248,6 +247,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
         public GetDataInvokeArgs()
         {
         }
+        public static new GetDataInvokeArgs Empty => new GetDataInvokeArgs();
     }
 
 

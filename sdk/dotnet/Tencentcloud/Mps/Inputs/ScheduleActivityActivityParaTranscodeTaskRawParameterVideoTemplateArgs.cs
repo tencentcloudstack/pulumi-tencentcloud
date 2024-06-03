@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps.Inputs
 {
 
-    public sealed class ScheduleActivityActivityParaTranscodeTaskRawParameterVideoTemplateArgs : Pulumi.ResourceArgs
+    public sealed class ScheduleActivityActivityParaTranscodeTaskRawParameterVideoTemplateArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// The video bitrate (Kbps). Value range: 0 and [128, 35000].If the value is 0, the bitrate of the video will be the same as that of the source video.
@@ -70,5 +70,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps.Inputs
         public ScheduleActivityActivityParaTranscodeTaskRawParameterVideoTemplateArgs()
         {
         }
+        public static new ScheduleActivityActivityParaTranscodeTaskRawParameterVideoTemplateArgs Empty => new ScheduleActivityActivityParaTranscodeTaskRawParameterVideoTemplateArgs();
     }
 }

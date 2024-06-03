@@ -8,7 +8,10 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
+
+var _ = internal.GetEnvOrDefault
 
 type PlayDomainCertAttachmentDomainInfo struct {
 	// domain name.
@@ -20,7 +23,7 @@ type PlayDomainCertAttachmentDomainInfo struct {
 // PlayDomainCertAttachmentDomainInfoInput is an input type that accepts PlayDomainCertAttachmentDomainInfoArgs and PlayDomainCertAttachmentDomainInfoOutput values.
 // You can construct a concrete instance of `PlayDomainCertAttachmentDomainInfoInput` via:
 //
-//          PlayDomainCertAttachmentDomainInfoArgs{...}
+//	PlayDomainCertAttachmentDomainInfoArgs{...}
 type PlayDomainCertAttachmentDomainInfoInput interface {
 	pulumi.Input
 
@@ -58,11 +61,11 @@ func (i PlayDomainCertAttachmentDomainInfoArgs) ToPlayDomainCertAttachmentDomain
 // PlayDomainCertAttachmentDomainInfoPtrInput is an input type that accepts PlayDomainCertAttachmentDomainInfoArgs, PlayDomainCertAttachmentDomainInfoPtr and PlayDomainCertAttachmentDomainInfoPtrOutput values.
 // You can construct a concrete instance of `PlayDomainCertAttachmentDomainInfoPtrInput` via:
 //
-//          PlayDomainCertAttachmentDomainInfoArgs{...}
+//	        PlayDomainCertAttachmentDomainInfoArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type PlayDomainCertAttachmentDomainInfoPtrInput interface {
 	pulumi.Input
 
@@ -184,7 +187,7 @@ type PullStreamTaskWatermarkList struct {
 // PullStreamTaskWatermarkListInput is an input type that accepts PullStreamTaskWatermarkListArgs and PullStreamTaskWatermarkListOutput values.
 // You can construct a concrete instance of `PullStreamTaskWatermarkListInput` via:
 //
-//          PullStreamTaskWatermarkListArgs{...}
+//	PullStreamTaskWatermarkListArgs{...}
 type PullStreamTaskWatermarkListInput interface {
 	pulumi.Input
 
@@ -222,7 +225,7 @@ func (i PullStreamTaskWatermarkListArgs) ToPullStreamTaskWatermarkListOutputWith
 // PullStreamTaskWatermarkListArrayInput is an input type that accepts PullStreamTaskWatermarkListArray and PullStreamTaskWatermarkListArrayOutput values.
 // You can construct a concrete instance of `PullStreamTaskWatermarkListArrayInput` via:
 //
-//          PullStreamTaskWatermarkListArray{ PullStreamTaskWatermarkListArgs{...} }
+//	PullStreamTaskWatermarkListArray{ PullStreamTaskWatermarkListArgs{...} }
 type PullStreamTaskWatermarkListArrayInput interface {
 	pulumi.Input
 
@@ -309,20 +312,28 @@ func (o PullStreamTaskWatermarkListArrayOutput) Index(i pulumi.IntInput) PullStr
 }
 
 type RecordTemplateAacParam struct {
-	ClassId        *int    `pulumi:"classId"`
-	Enable         *int    `pulumi:"enable"`
-	Procedure      *string `pulumi:"procedure"`
-	RecordInterval *int    `pulumi:"recordInterval"`
-	StorageMode    *string `pulumi:"storageMode"`
-	StorageTime    *int    `pulumi:"storageTime"`
-	VodFileName    *string `pulumi:"vodFileName"`
-	VodSubAppId    *int    `pulumi:"vodSubAppId"`
+	// Classification of on-demand applications. This field may return null, indicating that no valid value can be obtained.
+	ClassId *int `pulumi:"classId"`
+	// Whether to enable recording in the current format. The default value is 0. 0: No, 1: Yes.
+	Enable *int `pulumi:"enable"`
+	// Task flow. Note: This field may return null, indicating that no valid value can be obtained.
+	Procedure *string `pulumi:"procedure"`
+	// Recording interval. Unit: second, default: 1800. Value range: 30-7200. This parameter is invalid for HLS. When recording HLS, a file is generated from streaming to streaming.
+	RecordInterval *int `pulumi:"recordInterval"`
+	// Video storage strategy. Normal: standard storage. Cold: low frequency storage. Note: This field may return null, indicating that no valid value can be obtained.
+	StorageMode *string `pulumi:"storageMode"`
+	// Recording storage duration. Unit: second. Value range: 0 - 1500 days. 0: indicates permanent storage.
+	StorageTime *int `pulumi:"storageTime"`
+	// Record file name.Special placeholders supported are: `StreamID`: Stream ID,`StartYear`: Start time - year,`StartMonth`: Start time - month,`StartDay`: Start time - day,`StartHour`: Start time - hour,`StartMinute`: Start time - minutes,`StartSecond`: Start time - seconds,`StartMillisecond`: Start time - milliseconds,`EndYear`: End time - year,`EndMonth`: End time - month,`EndDay`: End time - day,`EndHour`: End time - hour,`EndMinute`: End time - minutes,`EndSecond`: End time - seconds,`EndMillisecond`: End time - millisecondsIf the default recording file name is not set as ,`StreamID`,`StartYear`,`StartMonth`,`StartDay`,`StartHour`,`StartMinute`,`StartSecond`,`EndYear`,`EndMonth`,`EndDay`,`EndHour`,`EndMinute`,`EndSecond`.
+	VodFileName *string `pulumi:"vodFileName"`
+	// The ID of the on-demand sub app.
+	VodSubAppId *int `pulumi:"vodSubAppId"`
 }
 
 // RecordTemplateAacParamInput is an input type that accepts RecordTemplateAacParamArgs and RecordTemplateAacParamOutput values.
 // You can construct a concrete instance of `RecordTemplateAacParamInput` via:
 //
-//          RecordTemplateAacParamArgs{...}
+//	RecordTemplateAacParamArgs{...}
 type RecordTemplateAacParamInput interface {
 	pulumi.Input
 
@@ -331,14 +342,22 @@ type RecordTemplateAacParamInput interface {
 }
 
 type RecordTemplateAacParamArgs struct {
-	ClassId        pulumi.IntPtrInput    `pulumi:"classId"`
-	Enable         pulumi.IntPtrInput    `pulumi:"enable"`
-	Procedure      pulumi.StringPtrInput `pulumi:"procedure"`
-	RecordInterval pulumi.IntPtrInput    `pulumi:"recordInterval"`
-	StorageMode    pulumi.StringPtrInput `pulumi:"storageMode"`
-	StorageTime    pulumi.IntPtrInput    `pulumi:"storageTime"`
-	VodFileName    pulumi.StringPtrInput `pulumi:"vodFileName"`
-	VodSubAppId    pulumi.IntPtrInput    `pulumi:"vodSubAppId"`
+	// Classification of on-demand applications. This field may return null, indicating that no valid value can be obtained.
+	ClassId pulumi.IntPtrInput `pulumi:"classId"`
+	// Whether to enable recording in the current format. The default value is 0. 0: No, 1: Yes.
+	Enable pulumi.IntPtrInput `pulumi:"enable"`
+	// Task flow. Note: This field may return null, indicating that no valid value can be obtained.
+	Procedure pulumi.StringPtrInput `pulumi:"procedure"`
+	// Recording interval. Unit: second, default: 1800. Value range: 30-7200. This parameter is invalid for HLS. When recording HLS, a file is generated from streaming to streaming.
+	RecordInterval pulumi.IntPtrInput `pulumi:"recordInterval"`
+	// Video storage strategy. Normal: standard storage. Cold: low frequency storage. Note: This field may return null, indicating that no valid value can be obtained.
+	StorageMode pulumi.StringPtrInput `pulumi:"storageMode"`
+	// Recording storage duration. Unit: second. Value range: 0 - 1500 days. 0: indicates permanent storage.
+	StorageTime pulumi.IntPtrInput `pulumi:"storageTime"`
+	// Record file name.Special placeholders supported are: `StreamID`: Stream ID,`StartYear`: Start time - year,`StartMonth`: Start time - month,`StartDay`: Start time - day,`StartHour`: Start time - hour,`StartMinute`: Start time - minutes,`StartSecond`: Start time - seconds,`StartMillisecond`: Start time - milliseconds,`EndYear`: End time - year,`EndMonth`: End time - month,`EndDay`: End time - day,`EndHour`: End time - hour,`EndMinute`: End time - minutes,`EndSecond`: End time - seconds,`EndMillisecond`: End time - millisecondsIf the default recording file name is not set as ,`StreamID`,`StartYear`,`StartMonth`,`StartDay`,`StartHour`,`StartMinute`,`StartSecond`,`EndYear`,`EndMonth`,`EndDay`,`EndHour`,`EndMinute`,`EndSecond`.
+	VodFileName pulumi.StringPtrInput `pulumi:"vodFileName"`
+	// The ID of the on-demand sub app.
+	VodSubAppId pulumi.IntPtrInput `pulumi:"vodSubAppId"`
 }
 
 func (RecordTemplateAacParamArgs) ElementType() reflect.Type {
@@ -364,11 +383,11 @@ func (i RecordTemplateAacParamArgs) ToRecordTemplateAacParamPtrOutputWithContext
 // RecordTemplateAacParamPtrInput is an input type that accepts RecordTemplateAacParamArgs, RecordTemplateAacParamPtr and RecordTemplateAacParamPtrOutput values.
 // You can construct a concrete instance of `RecordTemplateAacParamPtrInput` via:
 //
-//          RecordTemplateAacParamArgs{...}
+//	        RecordTemplateAacParamArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type RecordTemplateAacParamPtrInput interface {
 	pulumi.Input
 
@@ -418,34 +437,42 @@ func (o RecordTemplateAacParamOutput) ToRecordTemplateAacParamPtrOutputWithConte
 	}).(RecordTemplateAacParamPtrOutput)
 }
 
+// Classification of on-demand applications. This field may return null, indicating that no valid value can be obtained.
 func (o RecordTemplateAacParamOutput) ClassId() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v RecordTemplateAacParam) *int { return v.ClassId }).(pulumi.IntPtrOutput)
 }
 
+// Whether to enable recording in the current format. The default value is 0. 0: No, 1: Yes.
 func (o RecordTemplateAacParamOutput) Enable() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v RecordTemplateAacParam) *int { return v.Enable }).(pulumi.IntPtrOutput)
 }
 
+// Task flow. Note: This field may return null, indicating that no valid value can be obtained.
 func (o RecordTemplateAacParamOutput) Procedure() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v RecordTemplateAacParam) *string { return v.Procedure }).(pulumi.StringPtrOutput)
 }
 
+// Recording interval. Unit: second, default: 1800. Value range: 30-7200. This parameter is invalid for HLS. When recording HLS, a file is generated from streaming to streaming.
 func (o RecordTemplateAacParamOutput) RecordInterval() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v RecordTemplateAacParam) *int { return v.RecordInterval }).(pulumi.IntPtrOutput)
 }
 
+// Video storage strategy. Normal: standard storage. Cold: low frequency storage. Note: This field may return null, indicating that no valid value can be obtained.
 func (o RecordTemplateAacParamOutput) StorageMode() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v RecordTemplateAacParam) *string { return v.StorageMode }).(pulumi.StringPtrOutput)
 }
 
+// Recording storage duration. Unit: second. Value range: 0 - 1500 days. 0: indicates permanent storage.
 func (o RecordTemplateAacParamOutput) StorageTime() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v RecordTemplateAacParam) *int { return v.StorageTime }).(pulumi.IntPtrOutput)
 }
 
+// Record file name.Special placeholders supported are: `StreamID`: Stream ID,`StartYear`: Start time - year,`StartMonth`: Start time - month,`StartDay`: Start time - day,`StartHour`: Start time - hour,`StartMinute`: Start time - minutes,`StartSecond`: Start time - seconds,`StartMillisecond`: Start time - milliseconds,`EndYear`: End time - year,`EndMonth`: End time - month,`EndDay`: End time - day,`EndHour`: End time - hour,`EndMinute`: End time - minutes,`EndSecond`: End time - seconds,`EndMillisecond`: End time - millisecondsIf the default recording file name is not set as ,`StreamID`,`StartYear`,`StartMonth`,`StartDay`,`StartHour`,`StartMinute`,`StartSecond`,`EndYear`,`EndMonth`,`EndDay`,`EndHour`,`EndMinute`,`EndSecond`.
 func (o RecordTemplateAacParamOutput) VodFileName() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v RecordTemplateAacParam) *string { return v.VodFileName }).(pulumi.StringPtrOutput)
 }
 
+// The ID of the on-demand sub app.
 func (o RecordTemplateAacParamOutput) VodSubAppId() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v RecordTemplateAacParam) *int { return v.VodSubAppId }).(pulumi.IntPtrOutput)
 }
@@ -474,6 +501,7 @@ func (o RecordTemplateAacParamPtrOutput) Elem() RecordTemplateAacParamOutput {
 	}).(RecordTemplateAacParamOutput)
 }
 
+// Classification of on-demand applications. This field may return null, indicating that no valid value can be obtained.
 func (o RecordTemplateAacParamPtrOutput) ClassId() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *RecordTemplateAacParam) *int {
 		if v == nil {
@@ -483,6 +511,7 @@ func (o RecordTemplateAacParamPtrOutput) ClassId() pulumi.IntPtrOutput {
 	}).(pulumi.IntPtrOutput)
 }
 
+// Whether to enable recording in the current format. The default value is 0. 0: No, 1: Yes.
 func (o RecordTemplateAacParamPtrOutput) Enable() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *RecordTemplateAacParam) *int {
 		if v == nil {
@@ -492,6 +521,7 @@ func (o RecordTemplateAacParamPtrOutput) Enable() pulumi.IntPtrOutput {
 	}).(pulumi.IntPtrOutput)
 }
 
+// Task flow. Note: This field may return null, indicating that no valid value can be obtained.
 func (o RecordTemplateAacParamPtrOutput) Procedure() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *RecordTemplateAacParam) *string {
 		if v == nil {
@@ -501,6 +531,7 @@ func (o RecordTemplateAacParamPtrOutput) Procedure() pulumi.StringPtrOutput {
 	}).(pulumi.StringPtrOutput)
 }
 
+// Recording interval. Unit: second, default: 1800. Value range: 30-7200. This parameter is invalid for HLS. When recording HLS, a file is generated from streaming to streaming.
 func (o RecordTemplateAacParamPtrOutput) RecordInterval() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *RecordTemplateAacParam) *int {
 		if v == nil {
@@ -510,6 +541,7 @@ func (o RecordTemplateAacParamPtrOutput) RecordInterval() pulumi.IntPtrOutput {
 	}).(pulumi.IntPtrOutput)
 }
 
+// Video storage strategy. Normal: standard storage. Cold: low frequency storage. Note: This field may return null, indicating that no valid value can be obtained.
 func (o RecordTemplateAacParamPtrOutput) StorageMode() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *RecordTemplateAacParam) *string {
 		if v == nil {
@@ -519,6 +551,7 @@ func (o RecordTemplateAacParamPtrOutput) StorageMode() pulumi.StringPtrOutput {
 	}).(pulumi.StringPtrOutput)
 }
 
+// Recording storage duration. Unit: second. Value range: 0 - 1500 days. 0: indicates permanent storage.
 func (o RecordTemplateAacParamPtrOutput) StorageTime() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *RecordTemplateAacParam) *int {
 		if v == nil {
@@ -528,6 +561,7 @@ func (o RecordTemplateAacParamPtrOutput) StorageTime() pulumi.IntPtrOutput {
 	}).(pulumi.IntPtrOutput)
 }
 
+// Record file name.Special placeholders supported are: `StreamID`: Stream ID,`StartYear`: Start time - year,`StartMonth`: Start time - month,`StartDay`: Start time - day,`StartHour`: Start time - hour,`StartMinute`: Start time - minutes,`StartSecond`: Start time - seconds,`StartMillisecond`: Start time - milliseconds,`EndYear`: End time - year,`EndMonth`: End time - month,`EndDay`: End time - day,`EndHour`: End time - hour,`EndMinute`: End time - minutes,`EndSecond`: End time - seconds,`EndMillisecond`: End time - millisecondsIf the default recording file name is not set as ,`StreamID`,`StartYear`,`StartMonth`,`StartDay`,`StartHour`,`StartMinute`,`StartSecond`,`EndYear`,`EndMonth`,`EndDay`,`EndHour`,`EndMinute`,`EndSecond`.
 func (o RecordTemplateAacParamPtrOutput) VodFileName() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *RecordTemplateAacParam) *string {
 		if v == nil {
@@ -537,6 +571,7 @@ func (o RecordTemplateAacParamPtrOutput) VodFileName() pulumi.StringPtrOutput {
 	}).(pulumi.StringPtrOutput)
 }
 
+// The ID of the on-demand sub app.
 func (o RecordTemplateAacParamPtrOutput) VodSubAppId() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *RecordTemplateAacParam) *int {
 		if v == nil {
@@ -547,20 +582,28 @@ func (o RecordTemplateAacParamPtrOutput) VodSubAppId() pulumi.IntPtrOutput {
 }
 
 type RecordTemplateFlvParam struct {
-	ClassId        *int    `pulumi:"classId"`
-	Enable         *int    `pulumi:"enable"`
-	Procedure      *string `pulumi:"procedure"`
-	RecordInterval *int    `pulumi:"recordInterval"`
-	StorageMode    *string `pulumi:"storageMode"`
-	StorageTime    *int    `pulumi:"storageTime"`
-	VodFileName    *string `pulumi:"vodFileName"`
-	VodSubAppId    *int    `pulumi:"vodSubAppId"`
+	// Classification of on-demand applications. Note: This field may return null, indicating that no valid value can be obtained.
+	ClassId *int `pulumi:"classId"`
+	// Whether to enable recording in the current format. The default value is 0. 0: No, 1: Yes.
+	Enable *int `pulumi:"enable"`
+	// Task flow. This field may return null, indicating that no valid value can be obtained.
+	Procedure *string `pulumi:"procedure"`
+	// Recording interval.  Unit: second, default: 1800.  Value range: 30-7200.  This parameter is invalid for HLS. When recording HLS, a file is generated from streaming to streaming.
+	RecordInterval *int `pulumi:"recordInterval"`
+	// Video storage strategy. Normal: standard storage. Cold: low frequency storage. This field may return null, indicating that no valid value can be obtained.
+	StorageMode *string `pulumi:"storageMode"`
+	// Recording storage duration.  Unit: second. Value range: 0 - 1500 days.  0: indicates permanent storage.
+	StorageTime *int `pulumi:"storageTime"`
+	// Record file name.Special placeholders supported are: `StreamID`: Stream ID,`StartYear`: Start time - year,`StartMonth`: Start time - month,`StartDay`: Start time - day,`StartHour`: Start time - hour,`StartMinute`: Start time - minutes,`StartSecond`: Start time - seconds,`StartMillisecond`: Start time - milliseconds,`EndYear`: End time - year,`EndMonth`: End time - month,`EndDay`: End time - day,`EndHour`: End time - hour,`EndMinute`: End time - minutes,`EndSecond`: End time - seconds,`EndMillisecond`: End time - millisecondsIf the default recording file name is not set as ,`StreamID`_ ,`StartYear`-,`StartMonth`-,`StartDay`-,`StartHour`-,`StartMinute`-,`StartSecond`_ ,`EndYear`-,`EndMonth`-,`EndDay`-,`EndHour`-,`EndMinute`-,`EndSecond`.
+	VodFileName *string `pulumi:"vodFileName"`
+	// The ID of the vodSub app.
+	VodSubAppId *int `pulumi:"vodSubAppId"`
 }
 
 // RecordTemplateFlvParamInput is an input type that accepts RecordTemplateFlvParamArgs and RecordTemplateFlvParamOutput values.
 // You can construct a concrete instance of `RecordTemplateFlvParamInput` via:
 //
-//          RecordTemplateFlvParamArgs{...}
+//	RecordTemplateFlvParamArgs{...}
 type RecordTemplateFlvParamInput interface {
 	pulumi.Input
 
@@ -569,14 +612,22 @@ type RecordTemplateFlvParamInput interface {
 }
 
 type RecordTemplateFlvParamArgs struct {
-	ClassId        pulumi.IntPtrInput    `pulumi:"classId"`
-	Enable         pulumi.IntPtrInput    `pulumi:"enable"`
-	Procedure      pulumi.StringPtrInput `pulumi:"procedure"`
-	RecordInterval pulumi.IntPtrInput    `pulumi:"recordInterval"`
-	StorageMode    pulumi.StringPtrInput `pulumi:"storageMode"`
-	StorageTime    pulumi.IntPtrInput    `pulumi:"storageTime"`
-	VodFileName    pulumi.StringPtrInput `pulumi:"vodFileName"`
-	VodSubAppId    pulumi.IntPtrInput    `pulumi:"vodSubAppId"`
+	// Classification of on-demand applications. Note: This field may return null, indicating that no valid value can be obtained.
+	ClassId pulumi.IntPtrInput `pulumi:"classId"`
+	// Whether to enable recording in the current format. The default value is 0. 0: No, 1: Yes.
+	Enable pulumi.IntPtrInput `pulumi:"enable"`
+	// Task flow. This field may return null, indicating that no valid value can be obtained.
+	Procedure pulumi.StringPtrInput `pulumi:"procedure"`
+	// Recording interval.  Unit: second, default: 1800.  Value range: 30-7200.  This parameter is invalid for HLS. When recording HLS, a file is generated from streaming to streaming.
+	RecordInterval pulumi.IntPtrInput `pulumi:"recordInterval"`
+	// Video storage strategy. Normal: standard storage. Cold: low frequency storage. This field may return null, indicating that no valid value can be obtained.
+	StorageMode pulumi.StringPtrInput `pulumi:"storageMode"`
+	// Recording storage duration.  Unit: second. Value range: 0 - 1500 days.  0: indicates permanent storage.
+	StorageTime pulumi.IntPtrInput `pulumi:"storageTime"`
+	// Record file name.Special placeholders supported are: `StreamID`: Stream ID,`StartYear`: Start time - year,`StartMonth`: Start time - month,`StartDay`: Start time - day,`StartHour`: Start time - hour,`StartMinute`: Start time - minutes,`StartSecond`: Start time - seconds,`StartMillisecond`: Start time - milliseconds,`EndYear`: End time - year,`EndMonth`: End time - month,`EndDay`: End time - day,`EndHour`: End time - hour,`EndMinute`: End time - minutes,`EndSecond`: End time - seconds,`EndMillisecond`: End time - millisecondsIf the default recording file name is not set as ,`StreamID`_ ,`StartYear`-,`StartMonth`-,`StartDay`-,`StartHour`-,`StartMinute`-,`StartSecond`_ ,`EndYear`-,`EndMonth`-,`EndDay`-,`EndHour`-,`EndMinute`-,`EndSecond`.
+	VodFileName pulumi.StringPtrInput `pulumi:"vodFileName"`
+	// The ID of the vodSub app.
+	VodSubAppId pulumi.IntPtrInput `pulumi:"vodSubAppId"`
 }
 
 func (RecordTemplateFlvParamArgs) ElementType() reflect.Type {
@@ -602,11 +653,11 @@ func (i RecordTemplateFlvParamArgs) ToRecordTemplateFlvParamPtrOutputWithContext
 // RecordTemplateFlvParamPtrInput is an input type that accepts RecordTemplateFlvParamArgs, RecordTemplateFlvParamPtr and RecordTemplateFlvParamPtrOutput values.
 // You can construct a concrete instance of `RecordTemplateFlvParamPtrInput` via:
 //
-//          RecordTemplateFlvParamArgs{...}
+//	        RecordTemplateFlvParamArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type RecordTemplateFlvParamPtrInput interface {
 	pulumi.Input
 
@@ -656,34 +707,42 @@ func (o RecordTemplateFlvParamOutput) ToRecordTemplateFlvParamPtrOutputWithConte
 	}).(RecordTemplateFlvParamPtrOutput)
 }
 
+// Classification of on-demand applications. Note: This field may return null, indicating that no valid value can be obtained.
 func (o RecordTemplateFlvParamOutput) ClassId() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v RecordTemplateFlvParam) *int { return v.ClassId }).(pulumi.IntPtrOutput)
 }
 
+// Whether to enable recording in the current format. The default value is 0. 0: No, 1: Yes.
 func (o RecordTemplateFlvParamOutput) Enable() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v RecordTemplateFlvParam) *int { return v.Enable }).(pulumi.IntPtrOutput)
 }
 
+// Task flow. This field may return null, indicating that no valid value can be obtained.
 func (o RecordTemplateFlvParamOutput) Procedure() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v RecordTemplateFlvParam) *string { return v.Procedure }).(pulumi.StringPtrOutput)
 }
 
+// Recording interval.  Unit: second, default: 1800.  Value range: 30-7200.  This parameter is invalid for HLS. When recording HLS, a file is generated from streaming to streaming.
 func (o RecordTemplateFlvParamOutput) RecordInterval() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v RecordTemplateFlvParam) *int { return v.RecordInterval }).(pulumi.IntPtrOutput)
 }
 
+// Video storage strategy. Normal: standard storage. Cold: low frequency storage. This field may return null, indicating that no valid value can be obtained.
 func (o RecordTemplateFlvParamOutput) StorageMode() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v RecordTemplateFlvParam) *string { return v.StorageMode }).(pulumi.StringPtrOutput)
 }
 
+// Recording storage duration.  Unit: second. Value range: 0 - 1500 days.  0: indicates permanent storage.
 func (o RecordTemplateFlvParamOutput) StorageTime() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v RecordTemplateFlvParam) *int { return v.StorageTime }).(pulumi.IntPtrOutput)
 }
 
+// Record file name.Special placeholders supported are: `StreamID`: Stream ID,`StartYear`: Start time - year,`StartMonth`: Start time - month,`StartDay`: Start time - day,`StartHour`: Start time - hour,`StartMinute`: Start time - minutes,`StartSecond`: Start time - seconds,`StartMillisecond`: Start time - milliseconds,`EndYear`: End time - year,`EndMonth`: End time - month,`EndDay`: End time - day,`EndHour`: End time - hour,`EndMinute`: End time - minutes,`EndSecond`: End time - seconds,`EndMillisecond`: End time - millisecondsIf the default recording file name is not set as ,`StreamID`_ ,`StartYear`-,`StartMonth`-,`StartDay`-,`StartHour`-,`StartMinute`-,`StartSecond`_ ,`EndYear`-,`EndMonth`-,`EndDay`-,`EndHour`-,`EndMinute`-,`EndSecond`.
 func (o RecordTemplateFlvParamOutput) VodFileName() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v RecordTemplateFlvParam) *string { return v.VodFileName }).(pulumi.StringPtrOutput)
 }
 
+// The ID of the vodSub app.
 func (o RecordTemplateFlvParamOutput) VodSubAppId() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v RecordTemplateFlvParam) *int { return v.VodSubAppId }).(pulumi.IntPtrOutput)
 }
@@ -712,6 +771,7 @@ func (o RecordTemplateFlvParamPtrOutput) Elem() RecordTemplateFlvParamOutput {
 	}).(RecordTemplateFlvParamOutput)
 }
 
+// Classification of on-demand applications. Note: This field may return null, indicating that no valid value can be obtained.
 func (o RecordTemplateFlvParamPtrOutput) ClassId() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *RecordTemplateFlvParam) *int {
 		if v == nil {
@@ -721,6 +781,7 @@ func (o RecordTemplateFlvParamPtrOutput) ClassId() pulumi.IntPtrOutput {
 	}).(pulumi.IntPtrOutput)
 }
 
+// Whether to enable recording in the current format. The default value is 0. 0: No, 1: Yes.
 func (o RecordTemplateFlvParamPtrOutput) Enable() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *RecordTemplateFlvParam) *int {
 		if v == nil {
@@ -730,6 +791,7 @@ func (o RecordTemplateFlvParamPtrOutput) Enable() pulumi.IntPtrOutput {
 	}).(pulumi.IntPtrOutput)
 }
 
+// Task flow. This field may return null, indicating that no valid value can be obtained.
 func (o RecordTemplateFlvParamPtrOutput) Procedure() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *RecordTemplateFlvParam) *string {
 		if v == nil {
@@ -739,6 +801,7 @@ func (o RecordTemplateFlvParamPtrOutput) Procedure() pulumi.StringPtrOutput {
 	}).(pulumi.StringPtrOutput)
 }
 
+// Recording interval.  Unit: second, default: 1800.  Value range: 30-7200.  This parameter is invalid for HLS. When recording HLS, a file is generated from streaming to streaming.
 func (o RecordTemplateFlvParamPtrOutput) RecordInterval() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *RecordTemplateFlvParam) *int {
 		if v == nil {
@@ -748,6 +811,7 @@ func (o RecordTemplateFlvParamPtrOutput) RecordInterval() pulumi.IntPtrOutput {
 	}).(pulumi.IntPtrOutput)
 }
 
+// Video storage strategy. Normal: standard storage. Cold: low frequency storage. This field may return null, indicating that no valid value can be obtained.
 func (o RecordTemplateFlvParamPtrOutput) StorageMode() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *RecordTemplateFlvParam) *string {
 		if v == nil {
@@ -757,6 +821,7 @@ func (o RecordTemplateFlvParamPtrOutput) StorageMode() pulumi.StringPtrOutput {
 	}).(pulumi.StringPtrOutput)
 }
 
+// Recording storage duration.  Unit: second. Value range: 0 - 1500 days.  0: indicates permanent storage.
 func (o RecordTemplateFlvParamPtrOutput) StorageTime() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *RecordTemplateFlvParam) *int {
 		if v == nil {
@@ -766,6 +831,7 @@ func (o RecordTemplateFlvParamPtrOutput) StorageTime() pulumi.IntPtrOutput {
 	}).(pulumi.IntPtrOutput)
 }
 
+// Record file name.Special placeholders supported are: `StreamID`: Stream ID,`StartYear`: Start time - year,`StartMonth`: Start time - month,`StartDay`: Start time - day,`StartHour`: Start time - hour,`StartMinute`: Start time - minutes,`StartSecond`: Start time - seconds,`StartMillisecond`: Start time - milliseconds,`EndYear`: End time - year,`EndMonth`: End time - month,`EndDay`: End time - day,`EndHour`: End time - hour,`EndMinute`: End time - minutes,`EndSecond`: End time - seconds,`EndMillisecond`: End time - millisecondsIf the default recording file name is not set as ,`StreamID`_ ,`StartYear`-,`StartMonth`-,`StartDay`-,`StartHour`-,`StartMinute`-,`StartSecond`_ ,`EndYear`-,`EndMonth`-,`EndDay`-,`EndHour`-,`EndMinute`-,`EndSecond`.
 func (o RecordTemplateFlvParamPtrOutput) VodFileName() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *RecordTemplateFlvParam) *string {
 		if v == nil {
@@ -775,6 +841,7 @@ func (o RecordTemplateFlvParamPtrOutput) VodFileName() pulumi.StringPtrOutput {
 	}).(pulumi.StringPtrOutput)
 }
 
+// The ID of the vodSub app.
 func (o RecordTemplateFlvParamPtrOutput) VodSubAppId() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *RecordTemplateFlvParam) *int {
 		if v == nil {
@@ -785,13 +852,14 @@ func (o RecordTemplateFlvParamPtrOutput) VodSubAppId() pulumi.IntPtrOutput {
 }
 
 type RecordTemplateFlvSpecialParam struct {
+	// Whether to enable the transfer while recording is valid only in the flv format.
 	UploadInRecording *bool `pulumi:"uploadInRecording"`
 }
 
 // RecordTemplateFlvSpecialParamInput is an input type that accepts RecordTemplateFlvSpecialParamArgs and RecordTemplateFlvSpecialParamOutput values.
 // You can construct a concrete instance of `RecordTemplateFlvSpecialParamInput` via:
 //
-//          RecordTemplateFlvSpecialParamArgs{...}
+//	RecordTemplateFlvSpecialParamArgs{...}
 type RecordTemplateFlvSpecialParamInput interface {
 	pulumi.Input
 
@@ -800,6 +868,7 @@ type RecordTemplateFlvSpecialParamInput interface {
 }
 
 type RecordTemplateFlvSpecialParamArgs struct {
+	// Whether to enable the transfer while recording is valid only in the flv format.
 	UploadInRecording pulumi.BoolPtrInput `pulumi:"uploadInRecording"`
 }
 
@@ -826,11 +895,11 @@ func (i RecordTemplateFlvSpecialParamArgs) ToRecordTemplateFlvSpecialParamPtrOut
 // RecordTemplateFlvSpecialParamPtrInput is an input type that accepts RecordTemplateFlvSpecialParamArgs, RecordTemplateFlvSpecialParamPtr and RecordTemplateFlvSpecialParamPtrOutput values.
 // You can construct a concrete instance of `RecordTemplateFlvSpecialParamPtrInput` via:
 //
-//          RecordTemplateFlvSpecialParamArgs{...}
+//	        RecordTemplateFlvSpecialParamArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type RecordTemplateFlvSpecialParamPtrInput interface {
 	pulumi.Input
 
@@ -880,6 +949,7 @@ func (o RecordTemplateFlvSpecialParamOutput) ToRecordTemplateFlvSpecialParamPtrO
 	}).(RecordTemplateFlvSpecialParamPtrOutput)
 }
 
+// Whether to enable the transfer while recording is valid only in the flv format.
 func (o RecordTemplateFlvSpecialParamOutput) UploadInRecording() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v RecordTemplateFlvSpecialParam) *bool { return v.UploadInRecording }).(pulumi.BoolPtrOutput)
 }
@@ -908,6 +978,7 @@ func (o RecordTemplateFlvSpecialParamPtrOutput) Elem() RecordTemplateFlvSpecialP
 	}).(RecordTemplateFlvSpecialParamOutput)
 }
 
+// Whether to enable the transfer while recording is valid only in the flv format.
 func (o RecordTemplateFlvSpecialParamPtrOutput) UploadInRecording() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *RecordTemplateFlvSpecialParam) *bool {
 		if v == nil {
@@ -918,20 +989,28 @@ func (o RecordTemplateFlvSpecialParamPtrOutput) UploadInRecording() pulumi.BoolP
 }
 
 type RecordTemplateHlsParam struct {
-	ClassId        *int    `pulumi:"classId"`
-	Enable         *int    `pulumi:"enable"`
-	Procedure      *string `pulumi:"procedure"`
-	RecordInterval *int    `pulumi:"recordInterval"`
-	StorageMode    *string `pulumi:"storageMode"`
-	StorageTime    *int    `pulumi:"storageTime"`
-	VodFileName    *string `pulumi:"vodFileName"`
-	VodSubAppId    *int    `pulumi:"vodSubAppId"`
+	// Classification of on-demand applications. Note: This field may return null, indicating that no valid value can be obtained.
+	ClassId *int `pulumi:"classId"`
+	// Whether to enable recording in the current format. The default value is 0. 0: No, 1: Yes.
+	Enable *int `pulumi:"enable"`
+	// Task flow. Note: This field may return null, indicating that no valid value can be obtained.
+	Procedure *string `pulumi:"procedure"`
+	// Recording interval. Unit: second, default: 1800. Value range: 30-7200. This parameter is invalid for HLS. When recording HLS, a file is generated from streaming to streaming.
+	RecordInterval *int `pulumi:"recordInterval"`
+	// Video storage strategy. Normal: standard storage. Cold: low frequency storage. Note: This field may return null, indicating that no valid value can be obtained.
+	StorageMode *string `pulumi:"storageMode"`
+	// Recording storage duration. Unit: second. Value range: 0 - 1500 days. 0: indicates permanent storage.
+	StorageTime *int `pulumi:"storageTime"`
+	// Record file name.Special placeholders supported are: `StreamID`: Stream ID,`StartYear`: Start time - year,`StartMonth`: Start time - month,`StartDay`: Start time - day,`StartHour`: Start time - hour,`StartMinute`: Start time - minutes,`StartSecond`: Start time - seconds,`StartMillisecond`: Start time - milliseconds,`EndYear`: End time - year,`EndMonth`: End time - month,`EndDay`: End time - day,`EndHour`: End time - hour,`EndMinute`: End time - minutes,`EndSecond`: End time - seconds,`EndMillisecond`: End time - millisecondsIf the default recording file name is not set as ,`StreamID`,`StartYear`,`StartMonth`,`StartDay`,`StartHour`,`StartMinute`,`StartSecond`,`EndYear`,`EndMonth`,`EndDay`,`EndHour`,`EndMinute`,`EndSecond`.
+	VodFileName *string `pulumi:"vodFileName"`
+	// The ID of the vodSub app.
+	VodSubAppId *int `pulumi:"vodSubAppId"`
 }
 
 // RecordTemplateHlsParamInput is an input type that accepts RecordTemplateHlsParamArgs and RecordTemplateHlsParamOutput values.
 // You can construct a concrete instance of `RecordTemplateHlsParamInput` via:
 //
-//          RecordTemplateHlsParamArgs{...}
+//	RecordTemplateHlsParamArgs{...}
 type RecordTemplateHlsParamInput interface {
 	pulumi.Input
 
@@ -940,14 +1019,22 @@ type RecordTemplateHlsParamInput interface {
 }
 
 type RecordTemplateHlsParamArgs struct {
-	ClassId        pulumi.IntPtrInput    `pulumi:"classId"`
-	Enable         pulumi.IntPtrInput    `pulumi:"enable"`
-	Procedure      pulumi.StringPtrInput `pulumi:"procedure"`
-	RecordInterval pulumi.IntPtrInput    `pulumi:"recordInterval"`
-	StorageMode    pulumi.StringPtrInput `pulumi:"storageMode"`
-	StorageTime    pulumi.IntPtrInput    `pulumi:"storageTime"`
-	VodFileName    pulumi.StringPtrInput `pulumi:"vodFileName"`
-	VodSubAppId    pulumi.IntPtrInput    `pulumi:"vodSubAppId"`
+	// Classification of on-demand applications. Note: This field may return null, indicating that no valid value can be obtained.
+	ClassId pulumi.IntPtrInput `pulumi:"classId"`
+	// Whether to enable recording in the current format. The default value is 0. 0: No, 1: Yes.
+	Enable pulumi.IntPtrInput `pulumi:"enable"`
+	// Task flow. Note: This field may return null, indicating that no valid value can be obtained.
+	Procedure pulumi.StringPtrInput `pulumi:"procedure"`
+	// Recording interval. Unit: second, default: 1800. Value range: 30-7200. This parameter is invalid for HLS. When recording HLS, a file is generated from streaming to streaming.
+	RecordInterval pulumi.IntPtrInput `pulumi:"recordInterval"`
+	// Video storage strategy. Normal: standard storage. Cold: low frequency storage. Note: This field may return null, indicating that no valid value can be obtained.
+	StorageMode pulumi.StringPtrInput `pulumi:"storageMode"`
+	// Recording storage duration. Unit: second. Value range: 0 - 1500 days. 0: indicates permanent storage.
+	StorageTime pulumi.IntPtrInput `pulumi:"storageTime"`
+	// Record file name.Special placeholders supported are: `StreamID`: Stream ID,`StartYear`: Start time - year,`StartMonth`: Start time - month,`StartDay`: Start time - day,`StartHour`: Start time - hour,`StartMinute`: Start time - minutes,`StartSecond`: Start time - seconds,`StartMillisecond`: Start time - milliseconds,`EndYear`: End time - year,`EndMonth`: End time - month,`EndDay`: End time - day,`EndHour`: End time - hour,`EndMinute`: End time - minutes,`EndSecond`: End time - seconds,`EndMillisecond`: End time - millisecondsIf the default recording file name is not set as ,`StreamID`,`StartYear`,`StartMonth`,`StartDay`,`StartHour`,`StartMinute`,`StartSecond`,`EndYear`,`EndMonth`,`EndDay`,`EndHour`,`EndMinute`,`EndSecond`.
+	VodFileName pulumi.StringPtrInput `pulumi:"vodFileName"`
+	// The ID of the vodSub app.
+	VodSubAppId pulumi.IntPtrInput `pulumi:"vodSubAppId"`
 }
 
 func (RecordTemplateHlsParamArgs) ElementType() reflect.Type {
@@ -973,11 +1060,11 @@ func (i RecordTemplateHlsParamArgs) ToRecordTemplateHlsParamPtrOutputWithContext
 // RecordTemplateHlsParamPtrInput is an input type that accepts RecordTemplateHlsParamArgs, RecordTemplateHlsParamPtr and RecordTemplateHlsParamPtrOutput values.
 // You can construct a concrete instance of `RecordTemplateHlsParamPtrInput` via:
 //
-//          RecordTemplateHlsParamArgs{...}
+//	        RecordTemplateHlsParamArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type RecordTemplateHlsParamPtrInput interface {
 	pulumi.Input
 
@@ -1027,34 +1114,42 @@ func (o RecordTemplateHlsParamOutput) ToRecordTemplateHlsParamPtrOutputWithConte
 	}).(RecordTemplateHlsParamPtrOutput)
 }
 
+// Classification of on-demand applications. Note: This field may return null, indicating that no valid value can be obtained.
 func (o RecordTemplateHlsParamOutput) ClassId() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v RecordTemplateHlsParam) *int { return v.ClassId }).(pulumi.IntPtrOutput)
 }
 
+// Whether to enable recording in the current format. The default value is 0. 0: No, 1: Yes.
 func (o RecordTemplateHlsParamOutput) Enable() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v RecordTemplateHlsParam) *int { return v.Enable }).(pulumi.IntPtrOutput)
 }
 
+// Task flow. Note: This field may return null, indicating that no valid value can be obtained.
 func (o RecordTemplateHlsParamOutput) Procedure() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v RecordTemplateHlsParam) *string { return v.Procedure }).(pulumi.StringPtrOutput)
 }
 
+// Recording interval. Unit: second, default: 1800. Value range: 30-7200. This parameter is invalid for HLS. When recording HLS, a file is generated from streaming to streaming.
 func (o RecordTemplateHlsParamOutput) RecordInterval() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v RecordTemplateHlsParam) *int { return v.RecordInterval }).(pulumi.IntPtrOutput)
 }
 
+// Video storage strategy. Normal: standard storage. Cold: low frequency storage. Note: This field may return null, indicating that no valid value can be obtained.
 func (o RecordTemplateHlsParamOutput) StorageMode() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v RecordTemplateHlsParam) *string { return v.StorageMode }).(pulumi.StringPtrOutput)
 }
 
+// Recording storage duration. Unit: second. Value range: 0 - 1500 days. 0: indicates permanent storage.
 func (o RecordTemplateHlsParamOutput) StorageTime() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v RecordTemplateHlsParam) *int { return v.StorageTime }).(pulumi.IntPtrOutput)
 }
 
+// Record file name.Special placeholders supported are: `StreamID`: Stream ID,`StartYear`: Start time - year,`StartMonth`: Start time - month,`StartDay`: Start time - day,`StartHour`: Start time - hour,`StartMinute`: Start time - minutes,`StartSecond`: Start time - seconds,`StartMillisecond`: Start time - milliseconds,`EndYear`: End time - year,`EndMonth`: End time - month,`EndDay`: End time - day,`EndHour`: End time - hour,`EndMinute`: End time - minutes,`EndSecond`: End time - seconds,`EndMillisecond`: End time - millisecondsIf the default recording file name is not set as ,`StreamID`,`StartYear`,`StartMonth`,`StartDay`,`StartHour`,`StartMinute`,`StartSecond`,`EndYear`,`EndMonth`,`EndDay`,`EndHour`,`EndMinute`,`EndSecond`.
 func (o RecordTemplateHlsParamOutput) VodFileName() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v RecordTemplateHlsParam) *string { return v.VodFileName }).(pulumi.StringPtrOutput)
 }
 
+// The ID of the vodSub app.
 func (o RecordTemplateHlsParamOutput) VodSubAppId() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v RecordTemplateHlsParam) *int { return v.VodSubAppId }).(pulumi.IntPtrOutput)
 }
@@ -1083,6 +1178,7 @@ func (o RecordTemplateHlsParamPtrOutput) Elem() RecordTemplateHlsParamOutput {
 	}).(RecordTemplateHlsParamOutput)
 }
 
+// Classification of on-demand applications. Note: This field may return null, indicating that no valid value can be obtained.
 func (o RecordTemplateHlsParamPtrOutput) ClassId() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *RecordTemplateHlsParam) *int {
 		if v == nil {
@@ -1092,6 +1188,7 @@ func (o RecordTemplateHlsParamPtrOutput) ClassId() pulumi.IntPtrOutput {
 	}).(pulumi.IntPtrOutput)
 }
 
+// Whether to enable recording in the current format. The default value is 0. 0: No, 1: Yes.
 func (o RecordTemplateHlsParamPtrOutput) Enable() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *RecordTemplateHlsParam) *int {
 		if v == nil {
@@ -1101,6 +1198,7 @@ func (o RecordTemplateHlsParamPtrOutput) Enable() pulumi.IntPtrOutput {
 	}).(pulumi.IntPtrOutput)
 }
 
+// Task flow. Note: This field may return null, indicating that no valid value can be obtained.
 func (o RecordTemplateHlsParamPtrOutput) Procedure() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *RecordTemplateHlsParam) *string {
 		if v == nil {
@@ -1110,6 +1208,7 @@ func (o RecordTemplateHlsParamPtrOutput) Procedure() pulumi.StringPtrOutput {
 	}).(pulumi.StringPtrOutput)
 }
 
+// Recording interval. Unit: second, default: 1800. Value range: 30-7200. This parameter is invalid for HLS. When recording HLS, a file is generated from streaming to streaming.
 func (o RecordTemplateHlsParamPtrOutput) RecordInterval() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *RecordTemplateHlsParam) *int {
 		if v == nil {
@@ -1119,6 +1218,7 @@ func (o RecordTemplateHlsParamPtrOutput) RecordInterval() pulumi.IntPtrOutput {
 	}).(pulumi.IntPtrOutput)
 }
 
+// Video storage strategy. Normal: standard storage. Cold: low frequency storage. Note: This field may return null, indicating that no valid value can be obtained.
 func (o RecordTemplateHlsParamPtrOutput) StorageMode() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *RecordTemplateHlsParam) *string {
 		if v == nil {
@@ -1128,6 +1228,7 @@ func (o RecordTemplateHlsParamPtrOutput) StorageMode() pulumi.StringPtrOutput {
 	}).(pulumi.StringPtrOutput)
 }
 
+// Recording storage duration. Unit: second. Value range: 0 - 1500 days. 0: indicates permanent storage.
 func (o RecordTemplateHlsParamPtrOutput) StorageTime() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *RecordTemplateHlsParam) *int {
 		if v == nil {
@@ -1137,6 +1238,7 @@ func (o RecordTemplateHlsParamPtrOutput) StorageTime() pulumi.IntPtrOutput {
 	}).(pulumi.IntPtrOutput)
 }
 
+// Record file name.Special placeholders supported are: `StreamID`: Stream ID,`StartYear`: Start time - year,`StartMonth`: Start time - month,`StartDay`: Start time - day,`StartHour`: Start time - hour,`StartMinute`: Start time - minutes,`StartSecond`: Start time - seconds,`StartMillisecond`: Start time - milliseconds,`EndYear`: End time - year,`EndMonth`: End time - month,`EndDay`: End time - day,`EndHour`: End time - hour,`EndMinute`: End time - minutes,`EndSecond`: End time - seconds,`EndMillisecond`: End time - millisecondsIf the default recording file name is not set as ,`StreamID`,`StartYear`,`StartMonth`,`StartDay`,`StartHour`,`StartMinute`,`StartSecond`,`EndYear`,`EndMonth`,`EndDay`,`EndHour`,`EndMinute`,`EndSecond`.
 func (o RecordTemplateHlsParamPtrOutput) VodFileName() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *RecordTemplateHlsParam) *string {
 		if v == nil {
@@ -1146,6 +1248,7 @@ func (o RecordTemplateHlsParamPtrOutput) VodFileName() pulumi.StringPtrOutput {
 	}).(pulumi.StringPtrOutput)
 }
 
+// The ID of the vodSub app.
 func (o RecordTemplateHlsParamPtrOutput) VodSubAppId() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *RecordTemplateHlsParam) *int {
 		if v == nil {
@@ -1156,13 +1259,14 @@ func (o RecordTemplateHlsParamPtrOutput) VodSubAppId() pulumi.IntPtrOutput {
 }
 
 type RecordTemplateHlsSpecialParam struct {
+	// HLS freewheeling timeout. Value range [0, 1800].
 	FlowContinueDuration *int `pulumi:"flowContinueDuration"`
 }
 
 // RecordTemplateHlsSpecialParamInput is an input type that accepts RecordTemplateHlsSpecialParamArgs and RecordTemplateHlsSpecialParamOutput values.
 // You can construct a concrete instance of `RecordTemplateHlsSpecialParamInput` via:
 //
-//          RecordTemplateHlsSpecialParamArgs{...}
+//	RecordTemplateHlsSpecialParamArgs{...}
 type RecordTemplateHlsSpecialParamInput interface {
 	pulumi.Input
 
@@ -1171,6 +1275,7 @@ type RecordTemplateHlsSpecialParamInput interface {
 }
 
 type RecordTemplateHlsSpecialParamArgs struct {
+	// HLS freewheeling timeout. Value range [0, 1800].
 	FlowContinueDuration pulumi.IntPtrInput `pulumi:"flowContinueDuration"`
 }
 
@@ -1197,11 +1302,11 @@ func (i RecordTemplateHlsSpecialParamArgs) ToRecordTemplateHlsSpecialParamPtrOut
 // RecordTemplateHlsSpecialParamPtrInput is an input type that accepts RecordTemplateHlsSpecialParamArgs, RecordTemplateHlsSpecialParamPtr and RecordTemplateHlsSpecialParamPtrOutput values.
 // You can construct a concrete instance of `RecordTemplateHlsSpecialParamPtrInput` via:
 //
-//          RecordTemplateHlsSpecialParamArgs{...}
+//	        RecordTemplateHlsSpecialParamArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type RecordTemplateHlsSpecialParamPtrInput interface {
 	pulumi.Input
 
@@ -1251,6 +1356,7 @@ func (o RecordTemplateHlsSpecialParamOutput) ToRecordTemplateHlsSpecialParamPtrO
 	}).(RecordTemplateHlsSpecialParamPtrOutput)
 }
 
+// HLS freewheeling timeout. Value range [0, 1800].
 func (o RecordTemplateHlsSpecialParamOutput) FlowContinueDuration() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v RecordTemplateHlsSpecialParam) *int { return v.FlowContinueDuration }).(pulumi.IntPtrOutput)
 }
@@ -1279,6 +1385,7 @@ func (o RecordTemplateHlsSpecialParamPtrOutput) Elem() RecordTemplateHlsSpecialP
 	}).(RecordTemplateHlsSpecialParamOutput)
 }
 
+// HLS freewheeling timeout. Value range [0, 1800].
 func (o RecordTemplateHlsSpecialParamPtrOutput) FlowContinueDuration() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *RecordTemplateHlsSpecialParam) *int {
 		if v == nil {
@@ -1289,20 +1396,28 @@ func (o RecordTemplateHlsSpecialParamPtrOutput) FlowContinueDuration() pulumi.In
 }
 
 type RecordTemplateMp3Param struct {
-	ClassId        *int    `pulumi:"classId"`
-	Enable         *int    `pulumi:"enable"`
-	Procedure      *string `pulumi:"procedure"`
-	RecordInterval *int    `pulumi:"recordInterval"`
-	StorageMode    *string `pulumi:"storageMode"`
-	StorageTime    *int    `pulumi:"storageTime"`
-	VodFileName    *string `pulumi:"vodFileName"`
-	VodSubAppId    *int    `pulumi:"vodSubAppId"`
+	// Classification of vod applications. Note: This field may return null, indicating that no valid value can be obtained.
+	ClassId *int `pulumi:"classId"`
+	// Whether to enable recording in the current format. The default value is 0. 0: No, 1: Yes.
+	Enable *int `pulumi:"enable"`
+	// Task flow. Note: This field may return null, indicating that no valid value can be obtained.
+	Procedure *string `pulumi:"procedure"`
+	// Recording interval. Unit: second, default: 1800. Value range: 30-7200. This parameter is invalid for HLS. When recording HLS, a file is generated from streaming to streaming.
+	RecordInterval *int `pulumi:"recordInterval"`
+	// Video storage strategy. Normal: standard storage. Cold: low frequency storage. Note: This field may return null, indicating that no valid value can be obtained.
+	StorageMode *string `pulumi:"storageMode"`
+	// Recording storage duration. Unit: second. Value range: 0 - 1500 days. 0: indicates permanent storage.
+	StorageTime *int `pulumi:"storageTime"`
+	// Record file name.Special placeholders supported are: `StreamID`: Stream ID,`StartYear`: Start time - year,`StartMonth`: Start time - month,`StartDay`: Start time - day,`StartHour`: Start time - hour,`StartMinute`: Start time - minutes,`StartSecond`: Start time - seconds,`StartMillisecond`: Start time - milliseconds,`EndYear`: End time - year,`EndMonth`: End time - month,`EndDay`: End time - day,`EndHour`: End time - hour,`EndMinute`: End time - minutes,`EndSecond`: End time - seconds,`EndMillisecond`: End time - millisecondsIf the default recording file name is not set as ,`StreamID`,`StartYear`,`StartMonth`,`StartDay`,`StartHour`,`StartMinute`, `StartSecond`,`EndYear`,`EndMonth`,`EndDay`,`EndHour`,`EndMinute`,`EndSecond`.
+	VodFileName *string `pulumi:"vodFileName"`
+	// The ID of the on-demand sub app.
+	VodSubAppId *int `pulumi:"vodSubAppId"`
 }
 
 // RecordTemplateMp3ParamInput is an input type that accepts RecordTemplateMp3ParamArgs and RecordTemplateMp3ParamOutput values.
 // You can construct a concrete instance of `RecordTemplateMp3ParamInput` via:
 //
-//          RecordTemplateMp3ParamArgs{...}
+//	RecordTemplateMp3ParamArgs{...}
 type RecordTemplateMp3ParamInput interface {
 	pulumi.Input
 
@@ -1311,14 +1426,22 @@ type RecordTemplateMp3ParamInput interface {
 }
 
 type RecordTemplateMp3ParamArgs struct {
-	ClassId        pulumi.IntPtrInput    `pulumi:"classId"`
-	Enable         pulumi.IntPtrInput    `pulumi:"enable"`
-	Procedure      pulumi.StringPtrInput `pulumi:"procedure"`
-	RecordInterval pulumi.IntPtrInput    `pulumi:"recordInterval"`
-	StorageMode    pulumi.StringPtrInput `pulumi:"storageMode"`
-	StorageTime    pulumi.IntPtrInput    `pulumi:"storageTime"`
-	VodFileName    pulumi.StringPtrInput `pulumi:"vodFileName"`
-	VodSubAppId    pulumi.IntPtrInput    `pulumi:"vodSubAppId"`
+	// Classification of vod applications. Note: This field may return null, indicating that no valid value can be obtained.
+	ClassId pulumi.IntPtrInput `pulumi:"classId"`
+	// Whether to enable recording in the current format. The default value is 0. 0: No, 1: Yes.
+	Enable pulumi.IntPtrInput `pulumi:"enable"`
+	// Task flow. Note: This field may return null, indicating that no valid value can be obtained.
+	Procedure pulumi.StringPtrInput `pulumi:"procedure"`
+	// Recording interval. Unit: second, default: 1800. Value range: 30-7200. This parameter is invalid for HLS. When recording HLS, a file is generated from streaming to streaming.
+	RecordInterval pulumi.IntPtrInput `pulumi:"recordInterval"`
+	// Video storage strategy. Normal: standard storage. Cold: low frequency storage. Note: This field may return null, indicating that no valid value can be obtained.
+	StorageMode pulumi.StringPtrInput `pulumi:"storageMode"`
+	// Recording storage duration. Unit: second. Value range: 0 - 1500 days. 0: indicates permanent storage.
+	StorageTime pulumi.IntPtrInput `pulumi:"storageTime"`
+	// Record file name.Special placeholders supported are: `StreamID`: Stream ID,`StartYear`: Start time - year,`StartMonth`: Start time - month,`StartDay`: Start time - day,`StartHour`: Start time - hour,`StartMinute`: Start time - minutes,`StartSecond`: Start time - seconds,`StartMillisecond`: Start time - milliseconds,`EndYear`: End time - year,`EndMonth`: End time - month,`EndDay`: End time - day,`EndHour`: End time - hour,`EndMinute`: End time - minutes,`EndSecond`: End time - seconds,`EndMillisecond`: End time - millisecondsIf the default recording file name is not set as ,`StreamID`,`StartYear`,`StartMonth`,`StartDay`,`StartHour`,`StartMinute`, `StartSecond`,`EndYear`,`EndMonth`,`EndDay`,`EndHour`,`EndMinute`,`EndSecond`.
+	VodFileName pulumi.StringPtrInput `pulumi:"vodFileName"`
+	// The ID of the on-demand sub app.
+	VodSubAppId pulumi.IntPtrInput `pulumi:"vodSubAppId"`
 }
 
 func (RecordTemplateMp3ParamArgs) ElementType() reflect.Type {
@@ -1344,11 +1467,11 @@ func (i RecordTemplateMp3ParamArgs) ToRecordTemplateMp3ParamPtrOutputWithContext
 // RecordTemplateMp3ParamPtrInput is an input type that accepts RecordTemplateMp3ParamArgs, RecordTemplateMp3ParamPtr and RecordTemplateMp3ParamPtrOutput values.
 // You can construct a concrete instance of `RecordTemplateMp3ParamPtrInput` via:
 //
-//          RecordTemplateMp3ParamArgs{...}
+//	        RecordTemplateMp3ParamArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type RecordTemplateMp3ParamPtrInput interface {
 	pulumi.Input
 
@@ -1398,34 +1521,42 @@ func (o RecordTemplateMp3ParamOutput) ToRecordTemplateMp3ParamPtrOutputWithConte
 	}).(RecordTemplateMp3ParamPtrOutput)
 }
 
+// Classification of vod applications. Note: This field may return null, indicating that no valid value can be obtained.
 func (o RecordTemplateMp3ParamOutput) ClassId() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v RecordTemplateMp3Param) *int { return v.ClassId }).(pulumi.IntPtrOutput)
 }
 
+// Whether to enable recording in the current format. The default value is 0. 0: No, 1: Yes.
 func (o RecordTemplateMp3ParamOutput) Enable() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v RecordTemplateMp3Param) *int { return v.Enable }).(pulumi.IntPtrOutput)
 }
 
+// Task flow. Note: This field may return null, indicating that no valid value can be obtained.
 func (o RecordTemplateMp3ParamOutput) Procedure() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v RecordTemplateMp3Param) *string { return v.Procedure }).(pulumi.StringPtrOutput)
 }
 
+// Recording interval. Unit: second, default: 1800. Value range: 30-7200. This parameter is invalid for HLS. When recording HLS, a file is generated from streaming to streaming.
 func (o RecordTemplateMp3ParamOutput) RecordInterval() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v RecordTemplateMp3Param) *int { return v.RecordInterval }).(pulumi.IntPtrOutput)
 }
 
+// Video storage strategy. Normal: standard storage. Cold: low frequency storage. Note: This field may return null, indicating that no valid value can be obtained.
 func (o RecordTemplateMp3ParamOutput) StorageMode() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v RecordTemplateMp3Param) *string { return v.StorageMode }).(pulumi.StringPtrOutput)
 }
 
+// Recording storage duration. Unit: second. Value range: 0 - 1500 days. 0: indicates permanent storage.
 func (o RecordTemplateMp3ParamOutput) StorageTime() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v RecordTemplateMp3Param) *int { return v.StorageTime }).(pulumi.IntPtrOutput)
 }
 
+// Record file name.Special placeholders supported are: `StreamID`: Stream ID,`StartYear`: Start time - year,`StartMonth`: Start time - month,`StartDay`: Start time - day,`StartHour`: Start time - hour,`StartMinute`: Start time - minutes,`StartSecond`: Start time - seconds,`StartMillisecond`: Start time - milliseconds,`EndYear`: End time - year,`EndMonth`: End time - month,`EndDay`: End time - day,`EndHour`: End time - hour,`EndMinute`: End time - minutes,`EndSecond`: End time - seconds,`EndMillisecond`: End time - millisecondsIf the default recording file name is not set as ,`StreamID`,`StartYear`,`StartMonth`,`StartDay`,`StartHour`,`StartMinute`, `StartSecond`,`EndYear`,`EndMonth`,`EndDay`,`EndHour`,`EndMinute`,`EndSecond`.
 func (o RecordTemplateMp3ParamOutput) VodFileName() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v RecordTemplateMp3Param) *string { return v.VodFileName }).(pulumi.StringPtrOutput)
 }
 
+// The ID of the on-demand sub app.
 func (o RecordTemplateMp3ParamOutput) VodSubAppId() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v RecordTemplateMp3Param) *int { return v.VodSubAppId }).(pulumi.IntPtrOutput)
 }
@@ -1454,6 +1585,7 @@ func (o RecordTemplateMp3ParamPtrOutput) Elem() RecordTemplateMp3ParamOutput {
 	}).(RecordTemplateMp3ParamOutput)
 }
 
+// Classification of vod applications. Note: This field may return null, indicating that no valid value can be obtained.
 func (o RecordTemplateMp3ParamPtrOutput) ClassId() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *RecordTemplateMp3Param) *int {
 		if v == nil {
@@ -1463,6 +1595,7 @@ func (o RecordTemplateMp3ParamPtrOutput) ClassId() pulumi.IntPtrOutput {
 	}).(pulumi.IntPtrOutput)
 }
 
+// Whether to enable recording in the current format. The default value is 0. 0: No, 1: Yes.
 func (o RecordTemplateMp3ParamPtrOutput) Enable() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *RecordTemplateMp3Param) *int {
 		if v == nil {
@@ -1472,6 +1605,7 @@ func (o RecordTemplateMp3ParamPtrOutput) Enable() pulumi.IntPtrOutput {
 	}).(pulumi.IntPtrOutput)
 }
 
+// Task flow. Note: This field may return null, indicating that no valid value can be obtained.
 func (o RecordTemplateMp3ParamPtrOutput) Procedure() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *RecordTemplateMp3Param) *string {
 		if v == nil {
@@ -1481,6 +1615,7 @@ func (o RecordTemplateMp3ParamPtrOutput) Procedure() pulumi.StringPtrOutput {
 	}).(pulumi.StringPtrOutput)
 }
 
+// Recording interval. Unit: second, default: 1800. Value range: 30-7200. This parameter is invalid for HLS. When recording HLS, a file is generated from streaming to streaming.
 func (o RecordTemplateMp3ParamPtrOutput) RecordInterval() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *RecordTemplateMp3Param) *int {
 		if v == nil {
@@ -1490,6 +1625,7 @@ func (o RecordTemplateMp3ParamPtrOutput) RecordInterval() pulumi.IntPtrOutput {
 	}).(pulumi.IntPtrOutput)
 }
 
+// Video storage strategy. Normal: standard storage. Cold: low frequency storage. Note: This field may return null, indicating that no valid value can be obtained.
 func (o RecordTemplateMp3ParamPtrOutput) StorageMode() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *RecordTemplateMp3Param) *string {
 		if v == nil {
@@ -1499,6 +1635,7 @@ func (o RecordTemplateMp3ParamPtrOutput) StorageMode() pulumi.StringPtrOutput {
 	}).(pulumi.StringPtrOutput)
 }
 
+// Recording storage duration. Unit: second. Value range: 0 - 1500 days. 0: indicates permanent storage.
 func (o RecordTemplateMp3ParamPtrOutput) StorageTime() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *RecordTemplateMp3Param) *int {
 		if v == nil {
@@ -1508,6 +1645,7 @@ func (o RecordTemplateMp3ParamPtrOutput) StorageTime() pulumi.IntPtrOutput {
 	}).(pulumi.IntPtrOutput)
 }
 
+// Record file name.Special placeholders supported are: `StreamID`: Stream ID,`StartYear`: Start time - year,`StartMonth`: Start time - month,`StartDay`: Start time - day,`StartHour`: Start time - hour,`StartMinute`: Start time - minutes,`StartSecond`: Start time - seconds,`StartMillisecond`: Start time - milliseconds,`EndYear`: End time - year,`EndMonth`: End time - month,`EndDay`: End time - day,`EndHour`: End time - hour,`EndMinute`: End time - minutes,`EndSecond`: End time - seconds,`EndMillisecond`: End time - millisecondsIf the default recording file name is not set as ,`StreamID`,`StartYear`,`StartMonth`,`StartDay`,`StartHour`,`StartMinute`, `StartSecond`,`EndYear`,`EndMonth`,`EndDay`,`EndHour`,`EndMinute`,`EndSecond`.
 func (o RecordTemplateMp3ParamPtrOutput) VodFileName() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *RecordTemplateMp3Param) *string {
 		if v == nil {
@@ -1517,6 +1655,7 @@ func (o RecordTemplateMp3ParamPtrOutput) VodFileName() pulumi.StringPtrOutput {
 	}).(pulumi.StringPtrOutput)
 }
 
+// The ID of the on-demand sub app.
 func (o RecordTemplateMp3ParamPtrOutput) VodSubAppId() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *RecordTemplateMp3Param) *int {
 		if v == nil {
@@ -1527,20 +1666,28 @@ func (o RecordTemplateMp3ParamPtrOutput) VodSubAppId() pulumi.IntPtrOutput {
 }
 
 type RecordTemplateMp4Param struct {
-	ClassId        *int    `pulumi:"classId"`
-	Enable         *int    `pulumi:"enable"`
-	Procedure      *string `pulumi:"procedure"`
-	RecordInterval *int    `pulumi:"recordInterval"`
-	StorageMode    *string `pulumi:"storageMode"`
-	StorageTime    *int    `pulumi:"storageTime"`
-	VodFileName    *string `pulumi:"vodFileName"`
-	VodSubAppId    *int    `pulumi:"vodSubAppId"`
+	// Classification of on-demand applications. Note: This field may return null, indicating that no valid value can be obtained.
+	ClassId *int `pulumi:"classId"`
+	// Whether to enable recording in the current format. The default value is 0. 0: No, 1: Yes.
+	Enable *int `pulumi:"enable"`
+	// Task flow. Note: This field may return null, indicating that no valid value can be obtained.
+	Procedure *string `pulumi:"procedure"`
+	// Recording interval. Unit: second, default: 1800. Value range: 30-7200. This parameter is invalid for HLS. When recording HLS, a file is generated from streaming to streaming.
+	RecordInterval *int `pulumi:"recordInterval"`
+	// Video storage strategy. Normal: standard storage. Cold: low frequency storage. Note: This field may return null, indicating that no valid value can be obtained.
+	StorageMode *string `pulumi:"storageMode"`
+	// Recording storage duration. Unit: second. Value range: 0 - 1500 days. 0: indicates permanent storage.
+	StorageTime *int `pulumi:"storageTime"`
+	// Record file name.Special placeholders supported are: `StreamID`: Stream ID,`StartYear`: Start time - year,`StartMonth`: Start time - month,`StartDay`: Start time - day,`StartHour`: Start time - hour,`StartMinute`: Start time - minutes,`StartSecond`: Start time - seconds,`StartMillisecond`: Start time - milliseconds,`EndYear`: End time - year,`EndMonth`: End time - month,`EndDay`: End time - day,`EndHour`: End time - hour,`EndMinute`: End time - minutes,`EndSecond`: End time - seconds,`EndMillisecond`: End time - millisecondsIf the default recording file name is not set as ,`StreamID`,`StartYear`,`StartMonth`,`StartDay`,`StartHour`,`StartMinute`,`StartSecond`,`EndYear`,`EndMonth`,`EndDay`,`EndHour`,`EndMinute`,`EndSecond`.
+	VodFileName *string `pulumi:"vodFileName"`
+	// The ID of the on-demand sub app.
+	VodSubAppId *int `pulumi:"vodSubAppId"`
 }
 
 // RecordTemplateMp4ParamInput is an input type that accepts RecordTemplateMp4ParamArgs and RecordTemplateMp4ParamOutput values.
 // You can construct a concrete instance of `RecordTemplateMp4ParamInput` via:
 //
-//          RecordTemplateMp4ParamArgs{...}
+//	RecordTemplateMp4ParamArgs{...}
 type RecordTemplateMp4ParamInput interface {
 	pulumi.Input
 
@@ -1549,14 +1696,22 @@ type RecordTemplateMp4ParamInput interface {
 }
 
 type RecordTemplateMp4ParamArgs struct {
-	ClassId        pulumi.IntPtrInput    `pulumi:"classId"`
-	Enable         pulumi.IntPtrInput    `pulumi:"enable"`
-	Procedure      pulumi.StringPtrInput `pulumi:"procedure"`
-	RecordInterval pulumi.IntPtrInput    `pulumi:"recordInterval"`
-	StorageMode    pulumi.StringPtrInput `pulumi:"storageMode"`
-	StorageTime    pulumi.IntPtrInput    `pulumi:"storageTime"`
-	VodFileName    pulumi.StringPtrInput `pulumi:"vodFileName"`
-	VodSubAppId    pulumi.IntPtrInput    `pulumi:"vodSubAppId"`
+	// Classification of on-demand applications. Note: This field may return null, indicating that no valid value can be obtained.
+	ClassId pulumi.IntPtrInput `pulumi:"classId"`
+	// Whether to enable recording in the current format. The default value is 0. 0: No, 1: Yes.
+	Enable pulumi.IntPtrInput `pulumi:"enable"`
+	// Task flow. Note: This field may return null, indicating that no valid value can be obtained.
+	Procedure pulumi.StringPtrInput `pulumi:"procedure"`
+	// Recording interval. Unit: second, default: 1800. Value range: 30-7200. This parameter is invalid for HLS. When recording HLS, a file is generated from streaming to streaming.
+	RecordInterval pulumi.IntPtrInput `pulumi:"recordInterval"`
+	// Video storage strategy. Normal: standard storage. Cold: low frequency storage. Note: This field may return null, indicating that no valid value can be obtained.
+	StorageMode pulumi.StringPtrInput `pulumi:"storageMode"`
+	// Recording storage duration. Unit: second. Value range: 0 - 1500 days. 0: indicates permanent storage.
+	StorageTime pulumi.IntPtrInput `pulumi:"storageTime"`
+	// Record file name.Special placeholders supported are: `StreamID`: Stream ID,`StartYear`: Start time - year,`StartMonth`: Start time - month,`StartDay`: Start time - day,`StartHour`: Start time - hour,`StartMinute`: Start time - minutes,`StartSecond`: Start time - seconds,`StartMillisecond`: Start time - milliseconds,`EndYear`: End time - year,`EndMonth`: End time - month,`EndDay`: End time - day,`EndHour`: End time - hour,`EndMinute`: End time - minutes,`EndSecond`: End time - seconds,`EndMillisecond`: End time - millisecondsIf the default recording file name is not set as ,`StreamID`,`StartYear`,`StartMonth`,`StartDay`,`StartHour`,`StartMinute`,`StartSecond`,`EndYear`,`EndMonth`,`EndDay`,`EndHour`,`EndMinute`,`EndSecond`.
+	VodFileName pulumi.StringPtrInput `pulumi:"vodFileName"`
+	// The ID of the on-demand sub app.
+	VodSubAppId pulumi.IntPtrInput `pulumi:"vodSubAppId"`
 }
 
 func (RecordTemplateMp4ParamArgs) ElementType() reflect.Type {
@@ -1582,11 +1737,11 @@ func (i RecordTemplateMp4ParamArgs) ToRecordTemplateMp4ParamPtrOutputWithContext
 // RecordTemplateMp4ParamPtrInput is an input type that accepts RecordTemplateMp4ParamArgs, RecordTemplateMp4ParamPtr and RecordTemplateMp4ParamPtrOutput values.
 // You can construct a concrete instance of `RecordTemplateMp4ParamPtrInput` via:
 //
-//          RecordTemplateMp4ParamArgs{...}
+//	        RecordTemplateMp4ParamArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type RecordTemplateMp4ParamPtrInput interface {
 	pulumi.Input
 
@@ -1636,34 +1791,42 @@ func (o RecordTemplateMp4ParamOutput) ToRecordTemplateMp4ParamPtrOutputWithConte
 	}).(RecordTemplateMp4ParamPtrOutput)
 }
 
+// Classification of on-demand applications. Note: This field may return null, indicating that no valid value can be obtained.
 func (o RecordTemplateMp4ParamOutput) ClassId() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v RecordTemplateMp4Param) *int { return v.ClassId }).(pulumi.IntPtrOutput)
 }
 
+// Whether to enable recording in the current format. The default value is 0. 0: No, 1: Yes.
 func (o RecordTemplateMp4ParamOutput) Enable() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v RecordTemplateMp4Param) *int { return v.Enable }).(pulumi.IntPtrOutput)
 }
 
+// Task flow. Note: This field may return null, indicating that no valid value can be obtained.
 func (o RecordTemplateMp4ParamOutput) Procedure() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v RecordTemplateMp4Param) *string { return v.Procedure }).(pulumi.StringPtrOutput)
 }
 
+// Recording interval. Unit: second, default: 1800. Value range: 30-7200. This parameter is invalid for HLS. When recording HLS, a file is generated from streaming to streaming.
 func (o RecordTemplateMp4ParamOutput) RecordInterval() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v RecordTemplateMp4Param) *int { return v.RecordInterval }).(pulumi.IntPtrOutput)
 }
 
+// Video storage strategy. Normal: standard storage. Cold: low frequency storage. Note: This field may return null, indicating that no valid value can be obtained.
 func (o RecordTemplateMp4ParamOutput) StorageMode() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v RecordTemplateMp4Param) *string { return v.StorageMode }).(pulumi.StringPtrOutput)
 }
 
+// Recording storage duration. Unit: second. Value range: 0 - 1500 days. 0: indicates permanent storage.
 func (o RecordTemplateMp4ParamOutput) StorageTime() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v RecordTemplateMp4Param) *int { return v.StorageTime }).(pulumi.IntPtrOutput)
 }
 
+// Record file name.Special placeholders supported are: `StreamID`: Stream ID,`StartYear`: Start time - year,`StartMonth`: Start time - month,`StartDay`: Start time - day,`StartHour`: Start time - hour,`StartMinute`: Start time - minutes,`StartSecond`: Start time - seconds,`StartMillisecond`: Start time - milliseconds,`EndYear`: End time - year,`EndMonth`: End time - month,`EndDay`: End time - day,`EndHour`: End time - hour,`EndMinute`: End time - minutes,`EndSecond`: End time - seconds,`EndMillisecond`: End time - millisecondsIf the default recording file name is not set as ,`StreamID`,`StartYear`,`StartMonth`,`StartDay`,`StartHour`,`StartMinute`,`StartSecond`,`EndYear`,`EndMonth`,`EndDay`,`EndHour`,`EndMinute`,`EndSecond`.
 func (o RecordTemplateMp4ParamOutput) VodFileName() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v RecordTemplateMp4Param) *string { return v.VodFileName }).(pulumi.StringPtrOutput)
 }
 
+// The ID of the on-demand sub app.
 func (o RecordTemplateMp4ParamOutput) VodSubAppId() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v RecordTemplateMp4Param) *int { return v.VodSubAppId }).(pulumi.IntPtrOutput)
 }
@@ -1692,6 +1855,7 @@ func (o RecordTemplateMp4ParamPtrOutput) Elem() RecordTemplateMp4ParamOutput {
 	}).(RecordTemplateMp4ParamOutput)
 }
 
+// Classification of on-demand applications. Note: This field may return null, indicating that no valid value can be obtained.
 func (o RecordTemplateMp4ParamPtrOutput) ClassId() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *RecordTemplateMp4Param) *int {
 		if v == nil {
@@ -1701,6 +1865,7 @@ func (o RecordTemplateMp4ParamPtrOutput) ClassId() pulumi.IntPtrOutput {
 	}).(pulumi.IntPtrOutput)
 }
 
+// Whether to enable recording in the current format. The default value is 0. 0: No, 1: Yes.
 func (o RecordTemplateMp4ParamPtrOutput) Enable() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *RecordTemplateMp4Param) *int {
 		if v == nil {
@@ -1710,6 +1875,7 @@ func (o RecordTemplateMp4ParamPtrOutput) Enable() pulumi.IntPtrOutput {
 	}).(pulumi.IntPtrOutput)
 }
 
+// Task flow. Note: This field may return null, indicating that no valid value can be obtained.
 func (o RecordTemplateMp4ParamPtrOutput) Procedure() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *RecordTemplateMp4Param) *string {
 		if v == nil {
@@ -1719,6 +1885,7 @@ func (o RecordTemplateMp4ParamPtrOutput) Procedure() pulumi.StringPtrOutput {
 	}).(pulumi.StringPtrOutput)
 }
 
+// Recording interval. Unit: second, default: 1800. Value range: 30-7200. This parameter is invalid for HLS. When recording HLS, a file is generated from streaming to streaming.
 func (o RecordTemplateMp4ParamPtrOutput) RecordInterval() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *RecordTemplateMp4Param) *int {
 		if v == nil {
@@ -1728,6 +1895,7 @@ func (o RecordTemplateMp4ParamPtrOutput) RecordInterval() pulumi.IntPtrOutput {
 	}).(pulumi.IntPtrOutput)
 }
 
+// Video storage strategy. Normal: standard storage. Cold: low frequency storage. Note: This field may return null, indicating that no valid value can be obtained.
 func (o RecordTemplateMp4ParamPtrOutput) StorageMode() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *RecordTemplateMp4Param) *string {
 		if v == nil {
@@ -1737,6 +1905,7 @@ func (o RecordTemplateMp4ParamPtrOutput) StorageMode() pulumi.StringPtrOutput {
 	}).(pulumi.StringPtrOutput)
 }
 
+// Recording storage duration. Unit: second. Value range: 0 - 1500 days. 0: indicates permanent storage.
 func (o RecordTemplateMp4ParamPtrOutput) StorageTime() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *RecordTemplateMp4Param) *int {
 		if v == nil {
@@ -1746,6 +1915,7 @@ func (o RecordTemplateMp4ParamPtrOutput) StorageTime() pulumi.IntPtrOutput {
 	}).(pulumi.IntPtrOutput)
 }
 
+// Record file name.Special placeholders supported are: `StreamID`: Stream ID,`StartYear`: Start time - year,`StartMonth`: Start time - month,`StartDay`: Start time - day,`StartHour`: Start time - hour,`StartMinute`: Start time - minutes,`StartSecond`: Start time - seconds,`StartMillisecond`: Start time - milliseconds,`EndYear`: End time - year,`EndMonth`: End time - month,`EndDay`: End time - day,`EndHour`: End time - hour,`EndMinute`: End time - minutes,`EndSecond`: End time - seconds,`EndMillisecond`: End time - millisecondsIf the default recording file name is not set as ,`StreamID`,`StartYear`,`StartMonth`,`StartDay`,`StartHour`,`StartMinute`,`StartSecond`,`EndYear`,`EndMonth`,`EndDay`,`EndHour`,`EndMinute`,`EndSecond`.
 func (o RecordTemplateMp4ParamPtrOutput) VodFileName() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *RecordTemplateMp4Param) *string {
 		if v == nil {
@@ -1755,6 +1925,7 @@ func (o RecordTemplateMp4ParamPtrOutput) VodFileName() pulumi.StringPtrOutput {
 	}).(pulumi.StringPtrOutput)
 }
 
+// The ID of the on-demand sub app.
 func (o RecordTemplateMp4ParamPtrOutput) VodSubAppId() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *RecordTemplateMp4Param) *int {
 		if v == nil {
@@ -1780,7 +1951,7 @@ type StreamMonitorInputList struct {
 // StreamMonitorInputListInput is an input type that accepts StreamMonitorInputListArgs and StreamMonitorInputListOutput values.
 // You can construct a concrete instance of `StreamMonitorInputListInput` via:
 //
-//          StreamMonitorInputListArgs{...}
+//	StreamMonitorInputListArgs{...}
 type StreamMonitorInputListInput interface {
 	pulumi.Input
 
@@ -1816,7 +1987,7 @@ func (i StreamMonitorInputListArgs) ToStreamMonitorInputListOutputWithContext(ct
 // StreamMonitorInputListArrayInput is an input type that accepts StreamMonitorInputListArray and StreamMonitorInputListArrayOutput values.
 // You can construct a concrete instance of `StreamMonitorInputListArrayInput` via:
 //
-//          StreamMonitorInputListArray{ StreamMonitorInputListArgs{...} }
+//	StreamMonitorInputListArray{ StreamMonitorInputListArgs{...} }
 type StreamMonitorInputListArrayInput interface {
 	pulumi.Input
 
@@ -1907,7 +2078,7 @@ type StreamMonitorNotifyPolicy struct {
 // StreamMonitorNotifyPolicyInput is an input type that accepts StreamMonitorNotifyPolicyArgs and StreamMonitorNotifyPolicyOutput values.
 // You can construct a concrete instance of `StreamMonitorNotifyPolicyInput` via:
 //
-//          StreamMonitorNotifyPolicyArgs{...}
+//	StreamMonitorNotifyPolicyArgs{...}
 type StreamMonitorNotifyPolicyInput interface {
 	pulumi.Input
 
@@ -1945,11 +2116,11 @@ func (i StreamMonitorNotifyPolicyArgs) ToStreamMonitorNotifyPolicyPtrOutputWithC
 // StreamMonitorNotifyPolicyPtrInput is an input type that accepts StreamMonitorNotifyPolicyArgs, StreamMonitorNotifyPolicyPtr and StreamMonitorNotifyPolicyPtrOutput values.
 // You can construct a concrete instance of `StreamMonitorNotifyPolicyPtrInput` via:
 //
-//          StreamMonitorNotifyPolicyArgs{...}
+//	        StreamMonitorNotifyPolicyArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type StreamMonitorNotifyPolicyPtrInput interface {
 	pulumi.Input
 
@@ -2069,7 +2240,7 @@ type StreamMonitorOutputInfo struct {
 // StreamMonitorOutputInfoInput is an input type that accepts StreamMonitorOutputInfoArgs and StreamMonitorOutputInfoOutput values.
 // You can construct a concrete instance of `StreamMonitorOutputInfoInput` via:
 //
-//          StreamMonitorOutputInfoArgs{...}
+//	StreamMonitorOutputInfoArgs{...}
 type StreamMonitorOutputInfoInput interface {
 	pulumi.Input
 
@@ -2113,11 +2284,11 @@ func (i StreamMonitorOutputInfoArgs) ToStreamMonitorOutputInfoPtrOutputWithConte
 // StreamMonitorOutputInfoPtrInput is an input type that accepts StreamMonitorOutputInfoArgs, StreamMonitorOutputInfoPtr and StreamMonitorOutputInfoPtrOutput values.
 // You can construct a concrete instance of `StreamMonitorOutputInfoPtrInput` via:
 //
-//          StreamMonitorOutputInfoArgs{...}
+//	        StreamMonitorOutputInfoArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type StreamMonitorOutputInfoPtrInput interface {
 	pulumi.Input
 
@@ -2280,7 +2451,7 @@ type GetBackupStreamStreamInfoList struct {
 // GetBackupStreamStreamInfoListInput is an input type that accepts GetBackupStreamStreamInfoListArgs and GetBackupStreamStreamInfoListOutput values.
 // You can construct a concrete instance of `GetBackupStreamStreamInfoListInput` via:
 //
-//          GetBackupStreamStreamInfoListArgs{...}
+//	GetBackupStreamStreamInfoListArgs{...}
 type GetBackupStreamStreamInfoListInput interface {
 	pulumi.Input
 
@@ -2314,7 +2485,7 @@ func (i GetBackupStreamStreamInfoListArgs) ToGetBackupStreamStreamInfoListOutput
 // GetBackupStreamStreamInfoListArrayInput is an input type that accepts GetBackupStreamStreamInfoListArray and GetBackupStreamStreamInfoListArrayOutput values.
 // You can construct a concrete instance of `GetBackupStreamStreamInfoListArrayInput` via:
 //
-//          GetBackupStreamStreamInfoListArray{ GetBackupStreamStreamInfoListArgs{...} }
+//	GetBackupStreamStreamInfoListArray{ GetBackupStreamStreamInfoListArgs{...} }
 type GetBackupStreamStreamInfoListArrayInput interface {
 	pulumi.Input
 
@@ -2408,7 +2579,7 @@ type GetBackupStreamStreamInfoListBackupList struct {
 // GetBackupStreamStreamInfoListBackupListInput is an input type that accepts GetBackupStreamStreamInfoListBackupListArgs and GetBackupStreamStreamInfoListBackupListOutput values.
 // You can construct a concrete instance of `GetBackupStreamStreamInfoListBackupListInput` via:
 //
-//          GetBackupStreamStreamInfoListBackupListArgs{...}
+//	GetBackupStreamStreamInfoListBackupListArgs{...}
 type GetBackupStreamStreamInfoListBackupListInput interface {
 	pulumi.Input
 
@@ -2446,7 +2617,7 @@ func (i GetBackupStreamStreamInfoListBackupListArgs) ToGetBackupStreamStreamInfo
 // GetBackupStreamStreamInfoListBackupListArrayInput is an input type that accepts GetBackupStreamStreamInfoListBackupListArray and GetBackupStreamStreamInfoListBackupListArrayOutput values.
 // You can construct a concrete instance of `GetBackupStreamStreamInfoListBackupListArrayInput` via:
 //
-//          GetBackupStreamStreamInfoListBackupListArray{ GetBackupStreamStreamInfoListBackupListArgs{...} }
+//	GetBackupStreamStreamInfoListBackupListArray{ GetBackupStreamStreamInfoListBackupListArgs{...} }
 type GetBackupStreamStreamInfoListBackupListArrayInput interface {
 	pulumi.Input
 
@@ -2533,16 +2704,20 @@ func (o GetBackupStreamStreamInfoListBackupListArrayOutput) Index(i pulumi.IntIn
 }
 
 type GetDeliverLogDownListLogInfoList struct {
-	FileSize int    `pulumi:"fileSize"`
-	LogName  string `pulumi:"logName"`
-	LogTime  string `pulumi:"logTime"`
-	LogUrl   string `pulumi:"logUrl"`
+	// File size, in bytes.
+	FileSize int `pulumi:"fileSize"`
+	// Log name.
+	LogName string `pulumi:"logName"`
+	// Log time. UTC format, for example: 2018-11-29T19:00:00Z.Note:Beijing time is UTC time + 8 hours, formatted according to the ISO 8601 standard, see ISO date format description for details.
+	LogTime string `pulumi:"logTime"`
+	// Log download address.
+	LogUrl string `pulumi:"logUrl"`
 }
 
 // GetDeliverLogDownListLogInfoListInput is an input type that accepts GetDeliverLogDownListLogInfoListArgs and GetDeliverLogDownListLogInfoListOutput values.
 // You can construct a concrete instance of `GetDeliverLogDownListLogInfoListInput` via:
 //
-//          GetDeliverLogDownListLogInfoListArgs{...}
+//	GetDeliverLogDownListLogInfoListArgs{...}
 type GetDeliverLogDownListLogInfoListInput interface {
 	pulumi.Input
 
@@ -2551,10 +2726,14 @@ type GetDeliverLogDownListLogInfoListInput interface {
 }
 
 type GetDeliverLogDownListLogInfoListArgs struct {
-	FileSize pulumi.IntInput    `pulumi:"fileSize"`
-	LogName  pulumi.StringInput `pulumi:"logName"`
-	LogTime  pulumi.StringInput `pulumi:"logTime"`
-	LogUrl   pulumi.StringInput `pulumi:"logUrl"`
+	// File size, in bytes.
+	FileSize pulumi.IntInput `pulumi:"fileSize"`
+	// Log name.
+	LogName pulumi.StringInput `pulumi:"logName"`
+	// Log time. UTC format, for example: 2018-11-29T19:00:00Z.Note:Beijing time is UTC time + 8 hours, formatted according to the ISO 8601 standard, see ISO date format description for details.
+	LogTime pulumi.StringInput `pulumi:"logTime"`
+	// Log download address.
+	LogUrl pulumi.StringInput `pulumi:"logUrl"`
 }
 
 func (GetDeliverLogDownListLogInfoListArgs) ElementType() reflect.Type {
@@ -2572,7 +2751,7 @@ func (i GetDeliverLogDownListLogInfoListArgs) ToGetDeliverLogDownListLogInfoList
 // GetDeliverLogDownListLogInfoListArrayInput is an input type that accepts GetDeliverLogDownListLogInfoListArray and GetDeliverLogDownListLogInfoListArrayOutput values.
 // You can construct a concrete instance of `GetDeliverLogDownListLogInfoListArrayInput` via:
 //
-//          GetDeliverLogDownListLogInfoListArray{ GetDeliverLogDownListLogInfoListArgs{...} }
+//	GetDeliverLogDownListLogInfoListArray{ GetDeliverLogDownListLogInfoListArgs{...} }
 type GetDeliverLogDownListLogInfoListArrayInput interface {
 	pulumi.Input
 
@@ -2608,18 +2787,22 @@ func (o GetDeliverLogDownListLogInfoListOutput) ToGetDeliverLogDownListLogInfoLi
 	return o
 }
 
+// File size, in bytes.
 func (o GetDeliverLogDownListLogInfoListOutput) FileSize() pulumi.IntOutput {
 	return o.ApplyT(func(v GetDeliverLogDownListLogInfoList) int { return v.FileSize }).(pulumi.IntOutput)
 }
 
+// Log name.
 func (o GetDeliverLogDownListLogInfoListOutput) LogName() pulumi.StringOutput {
 	return o.ApplyT(func(v GetDeliverLogDownListLogInfoList) string { return v.LogName }).(pulumi.StringOutput)
 }
 
+// Log time. UTC format, for example: 2018-11-29T19:00:00Z.Note:Beijing time is UTC time + 8 hours, formatted according to the ISO 8601 standard, see ISO date format description for details.
 func (o GetDeliverLogDownListLogInfoListOutput) LogTime() pulumi.StringOutput {
 	return o.ApplyT(func(v GetDeliverLogDownListLogInfoList) string { return v.LogTime }).(pulumi.StringOutput)
 }
 
+// Log download address.
 func (o GetDeliverLogDownListLogInfoListOutput) LogUrl() pulumi.StringOutput {
 	return o.ApplyT(func(v GetDeliverLogDownListLogInfoList) string { return v.LogUrl }).(pulumi.StringOutput)
 }
@@ -2674,7 +2857,7 @@ type GetDomainsDomainList struct {
 // GetDomainsDomainListInput is an input type that accepts GetDomainsDomainListArgs and GetDomainsDomainListOutput values.
 // You can construct a concrete instance of `GetDomainsDomainListInput` via:
 //
-//          GetDomainsDomainListArgs{...}
+//	GetDomainsDomainListArgs{...}
 type GetDomainsDomainListInput interface {
 	pulumi.Input
 
@@ -2724,7 +2907,7 @@ func (i GetDomainsDomainListArgs) ToGetDomainsDomainListOutputWithContext(ctx co
 // GetDomainsDomainListArrayInput is an input type that accepts GetDomainsDomainListArray and GetDomainsDomainListArrayOutput values.
 // You can construct a concrete instance of `GetDomainsDomainListArrayInput` via:
 //
-//          GetDomainsDomainListArray{ GetDomainsDomainListArgs{...} }
+//	GetDomainsDomainListArray{ GetDomainsDomainListArgs{...} }
 type GetDomainsDomainListArrayInput interface {
 	pulumi.Input
 
@@ -2852,7 +3035,7 @@ type GetMonitorReportDiagnoseResult struct {
 // GetMonitorReportDiagnoseResultInput is an input type that accepts GetMonitorReportDiagnoseResultArgs and GetMonitorReportDiagnoseResultOutput values.
 // You can construct a concrete instance of `GetMonitorReportDiagnoseResultInput` via:
 //
-//          GetMonitorReportDiagnoseResultArgs{...}
+//	GetMonitorReportDiagnoseResultArgs{...}
 type GetMonitorReportDiagnoseResultInput interface {
 	pulumi.Input
 
@@ -2884,7 +3067,7 @@ func (i GetMonitorReportDiagnoseResultArgs) ToGetMonitorReportDiagnoseResultOutp
 // GetMonitorReportDiagnoseResultArrayInput is an input type that accepts GetMonitorReportDiagnoseResultArray and GetMonitorReportDiagnoseResultArrayOutput values.
 // You can construct a concrete instance of `GetMonitorReportDiagnoseResultArrayInput` via:
 //
-//          GetMonitorReportDiagnoseResultArray{ GetMonitorReportDiagnoseResultArgs{...} }
+//	GetMonitorReportDiagnoseResultArray{ GetMonitorReportDiagnoseResultArgs{...} }
 type GetMonitorReportDiagnoseResultArrayInput interface {
 	pulumi.Input
 
@@ -2965,7 +3148,7 @@ type GetMonitorReportMpsResult struct {
 // GetMonitorReportMpsResultInput is an input type that accepts GetMonitorReportMpsResultArgs and GetMonitorReportMpsResultOutput values.
 // You can construct a concrete instance of `GetMonitorReportMpsResultInput` via:
 //
-//          GetMonitorReportMpsResultArgs{...}
+//	GetMonitorReportMpsResultArgs{...}
 type GetMonitorReportMpsResultInput interface {
 	pulumi.Input
 
@@ -2995,7 +3178,7 @@ func (i GetMonitorReportMpsResultArgs) ToGetMonitorReportMpsResultOutputWithCont
 // GetMonitorReportMpsResultArrayInput is an input type that accepts GetMonitorReportMpsResultArray and GetMonitorReportMpsResultArrayOutput values.
 // You can construct a concrete instance of `GetMonitorReportMpsResultArrayInput` via:
 //
-//          GetMonitorReportMpsResultArray{ GetMonitorReportMpsResultArgs{...} }
+//	GetMonitorReportMpsResultArray{ GetMonitorReportMpsResultArgs{...} }
 type GetMonitorReportMpsResultArrayInput interface {
 	pulumi.Input
 
@@ -3085,7 +3268,7 @@ type GetPadTemplatesTemplate struct {
 // GetPadTemplatesTemplateInput is an input type that accepts GetPadTemplatesTemplateArgs and GetPadTemplatesTemplateOutput values.
 // You can construct a concrete instance of `GetPadTemplatesTemplateInput` via:
 //
-//          GetPadTemplatesTemplateArgs{...}
+//	GetPadTemplatesTemplateArgs{...}
 type GetPadTemplatesTemplateInput interface {
 	pulumi.Input
 
@@ -3129,7 +3312,7 @@ func (i GetPadTemplatesTemplateArgs) ToGetPadTemplatesTemplateOutputWithContext(
 // GetPadTemplatesTemplateArrayInput is an input type that accepts GetPadTemplatesTemplateArray and GetPadTemplatesTemplateArrayOutput values.
 // You can construct a concrete instance of `GetPadTemplatesTemplateArrayInput` via:
 //
-//          GetPadTemplatesTemplateArray{ GetPadTemplatesTemplateArgs{...} }
+//	GetPadTemplatesTemplateArray{ GetPadTemplatesTemplateArgs{...} }
 type GetPadTemplatesTemplateArrayInput interface {
 	pulumi.Input
 
@@ -3250,7 +3433,7 @@ type GetPullStreamTaskStatusTaskStatusInfo struct {
 // GetPullStreamTaskStatusTaskStatusInfoInput is an input type that accepts GetPullStreamTaskStatusTaskStatusInfoArgs and GetPullStreamTaskStatusTaskStatusInfoOutput values.
 // You can construct a concrete instance of `GetPullStreamTaskStatusTaskStatusInfoInput` via:
 //
-//          GetPullStreamTaskStatusTaskStatusInfoArgs{...}
+//	GetPullStreamTaskStatusTaskStatusInfoArgs{...}
 type GetPullStreamTaskStatusTaskStatusInfoInput interface {
 	pulumi.Input
 
@@ -3290,7 +3473,7 @@ func (i GetPullStreamTaskStatusTaskStatusInfoArgs) ToGetPullStreamTaskStatusTask
 // GetPullStreamTaskStatusTaskStatusInfoArrayInput is an input type that accepts GetPullStreamTaskStatusTaskStatusInfoArray and GetPullStreamTaskStatusTaskStatusInfoArrayOutput values.
 // You can construct a concrete instance of `GetPullStreamTaskStatusTaskStatusInfoArrayInput` via:
 //
-//          GetPullStreamTaskStatusTaskStatusInfoArray{ GetPullStreamTaskStatusTaskStatusInfoArgs{...} }
+//	GetPullStreamTaskStatusTaskStatusInfoArray{ GetPullStreamTaskStatusTaskStatusInfoArgs{...} }
 type GetPullStreamTaskStatusTaskStatusInfoArrayInput interface {
 	pulumi.Input
 
@@ -3425,7 +3608,7 @@ type GetStreamMonitorListLiveStreamMonitor struct {
 // GetStreamMonitorListLiveStreamMonitorInput is an input type that accepts GetStreamMonitorListLiveStreamMonitorArgs and GetStreamMonitorListLiveStreamMonitorOutput values.
 // You can construct a concrete instance of `GetStreamMonitorListLiveStreamMonitorInput` via:
 //
-//          GetStreamMonitorListLiveStreamMonitorArgs{...}
+//	GetStreamMonitorListLiveStreamMonitorArgs{...}
 type GetStreamMonitorListLiveStreamMonitorInput interface {
 	pulumi.Input
 
@@ -3489,7 +3672,7 @@ func (i GetStreamMonitorListLiveStreamMonitorArgs) ToGetStreamMonitorListLiveStr
 // GetStreamMonitorListLiveStreamMonitorArrayInput is an input type that accepts GetStreamMonitorListLiveStreamMonitorArray and GetStreamMonitorListLiveStreamMonitorArrayOutput values.
 // You can construct a concrete instance of `GetStreamMonitorListLiveStreamMonitorArrayInput` via:
 //
-//          GetStreamMonitorListLiveStreamMonitorArray{ GetStreamMonitorListLiveStreamMonitorArgs{...} }
+//	GetStreamMonitorListLiveStreamMonitorArray{ GetStreamMonitorListLiveStreamMonitorArgs{...} }
 type GetStreamMonitorListLiveStreamMonitorArrayInput interface {
 	pulumi.Input
 
@@ -3662,7 +3845,7 @@ type GetStreamMonitorListLiveStreamMonitorInputList struct {
 // GetStreamMonitorListLiveStreamMonitorInputListInput is an input type that accepts GetStreamMonitorListLiveStreamMonitorInputListArgs and GetStreamMonitorListLiveStreamMonitorInputListOutput values.
 // You can construct a concrete instance of `GetStreamMonitorListLiveStreamMonitorInputListInput` via:
 //
-//          GetStreamMonitorListLiveStreamMonitorInputListArgs{...}
+//	GetStreamMonitorListLiveStreamMonitorInputListArgs{...}
 type GetStreamMonitorListLiveStreamMonitorInputListInput interface {
 	pulumi.Input
 
@@ -3698,7 +3881,7 @@ func (i GetStreamMonitorListLiveStreamMonitorInputListArgs) ToGetStreamMonitorLi
 // GetStreamMonitorListLiveStreamMonitorInputListArrayInput is an input type that accepts GetStreamMonitorListLiveStreamMonitorInputListArray and GetStreamMonitorListLiveStreamMonitorInputListArrayOutput values.
 // You can construct a concrete instance of `GetStreamMonitorListLiveStreamMonitorInputListArrayInput` via:
 //
-//          GetStreamMonitorListLiveStreamMonitorInputListArray{ GetStreamMonitorListLiveStreamMonitorInputListArgs{...} }
+//	GetStreamMonitorListLiveStreamMonitorInputListArray{ GetStreamMonitorListLiveStreamMonitorInputListArgs{...} }
 type GetStreamMonitorListLiveStreamMonitorInputListArrayInput interface {
 	pulumi.Input
 
@@ -3789,7 +3972,7 @@ type GetStreamMonitorListLiveStreamMonitorNotifyPolicy struct {
 // GetStreamMonitorListLiveStreamMonitorNotifyPolicyInput is an input type that accepts GetStreamMonitorListLiveStreamMonitorNotifyPolicyArgs and GetStreamMonitorListLiveStreamMonitorNotifyPolicyOutput values.
 // You can construct a concrete instance of `GetStreamMonitorListLiveStreamMonitorNotifyPolicyInput` via:
 //
-//          GetStreamMonitorListLiveStreamMonitorNotifyPolicyArgs{...}
+//	GetStreamMonitorListLiveStreamMonitorNotifyPolicyArgs{...}
 type GetStreamMonitorListLiveStreamMonitorNotifyPolicyInput interface {
 	pulumi.Input
 
@@ -3819,7 +4002,7 @@ func (i GetStreamMonitorListLiveStreamMonitorNotifyPolicyArgs) ToGetStreamMonito
 // GetStreamMonitorListLiveStreamMonitorNotifyPolicyArrayInput is an input type that accepts GetStreamMonitorListLiveStreamMonitorNotifyPolicyArray and GetStreamMonitorListLiveStreamMonitorNotifyPolicyArrayOutput values.
 // You can construct a concrete instance of `GetStreamMonitorListLiveStreamMonitorNotifyPolicyArrayInput` via:
 //
-//          GetStreamMonitorListLiveStreamMonitorNotifyPolicyArray{ GetStreamMonitorListLiveStreamMonitorNotifyPolicyArgs{...} }
+//	GetStreamMonitorListLiveStreamMonitorNotifyPolicyArray{ GetStreamMonitorListLiveStreamMonitorNotifyPolicyArgs{...} }
 type GetStreamMonitorListLiveStreamMonitorNotifyPolicyArrayInput interface {
 	pulumi.Input
 
@@ -3901,7 +4084,7 @@ type GetStreamMonitorListLiveStreamMonitorOutputInfo struct {
 // GetStreamMonitorListLiveStreamMonitorOutputInfoInput is an input type that accepts GetStreamMonitorListLiveStreamMonitorOutputInfoArgs and GetStreamMonitorListLiveStreamMonitorOutputInfoOutput values.
 // You can construct a concrete instance of `GetStreamMonitorListLiveStreamMonitorOutputInfoInput` via:
 //
-//          GetStreamMonitorListLiveStreamMonitorOutputInfoArgs{...}
+//	GetStreamMonitorListLiveStreamMonitorOutputInfoArgs{...}
 type GetStreamMonitorListLiveStreamMonitorOutputInfoInput interface {
 	pulumi.Input
 
@@ -3937,7 +4120,7 @@ func (i GetStreamMonitorListLiveStreamMonitorOutputInfoArgs) ToGetStreamMonitorL
 // GetStreamMonitorListLiveStreamMonitorOutputInfoArrayInput is an input type that accepts GetStreamMonitorListLiveStreamMonitorOutputInfoArray and GetStreamMonitorListLiveStreamMonitorOutputInfoArrayOutput values.
 // You can construct a concrete instance of `GetStreamMonitorListLiveStreamMonitorOutputInfoArrayInput` via:
 //
-//          GetStreamMonitorListLiveStreamMonitorOutputInfoArray{ GetStreamMonitorListLiveStreamMonitorOutputInfoArgs{...} }
+//	GetStreamMonitorListLiveStreamMonitorOutputInfoArray{ GetStreamMonitorListLiveStreamMonitorOutputInfoArgs{...} }
 type GetStreamMonitorListLiveStreamMonitorOutputInfoArrayInput interface {
 	pulumi.Input
 
@@ -4030,7 +4213,7 @@ type GetTimeShiftRecordDetailRecordList struct {
 // GetTimeShiftRecordDetailRecordListInput is an input type that accepts GetTimeShiftRecordDetailRecordListArgs and GetTimeShiftRecordDetailRecordListOutput values.
 // You can construct a concrete instance of `GetTimeShiftRecordDetailRecordListInput` via:
 //
-//          GetTimeShiftRecordDetailRecordListArgs{...}
+//	GetTimeShiftRecordDetailRecordListArgs{...}
 type GetTimeShiftRecordDetailRecordListInput interface {
 	pulumi.Input
 
@@ -4062,7 +4245,7 @@ func (i GetTimeShiftRecordDetailRecordListArgs) ToGetTimeShiftRecordDetailRecord
 // GetTimeShiftRecordDetailRecordListArrayInput is an input type that accepts GetTimeShiftRecordDetailRecordListArray and GetTimeShiftRecordDetailRecordListArrayOutput values.
 // You can construct a concrete instance of `GetTimeShiftRecordDetailRecordListArrayInput` via:
 //
-//          GetTimeShiftRecordDetailRecordListArray{ GetTimeShiftRecordDetailRecordListArgs{...} }
+//	GetTimeShiftRecordDetailRecordListArray{ GetTimeShiftRecordDetailRecordListArgs{...} }
 type GetTimeShiftRecordDetailRecordListArrayInput interface {
 	pulumi.Input
 
@@ -4157,7 +4340,7 @@ type GetTimeShiftStreamListStreamList struct {
 // GetTimeShiftStreamListStreamListInput is an input type that accepts GetTimeShiftStreamListStreamListArgs and GetTimeShiftStreamListStreamListOutput values.
 // You can construct a concrete instance of `GetTimeShiftStreamListStreamListInput` via:
 //
-//          GetTimeShiftStreamListStreamListArgs{...}
+//	GetTimeShiftStreamListStreamListArgs{...}
 type GetTimeShiftStreamListStreamListInput interface {
 	pulumi.Input
 
@@ -4201,7 +4384,7 @@ func (i GetTimeShiftStreamListStreamListArgs) ToGetTimeShiftStreamListStreamList
 // GetTimeShiftStreamListStreamListArrayInput is an input type that accepts GetTimeShiftStreamListStreamListArray and GetTimeShiftStreamListStreamListArrayOutput values.
 // You can construct a concrete instance of `GetTimeShiftStreamListStreamListArrayInput` via:
 //
-//          GetTimeShiftStreamListStreamListArray{ GetTimeShiftStreamListStreamListArgs{...} }
+//	GetTimeShiftStreamListStreamListArray{ GetTimeShiftStreamListStreamListArgs{...} }
 type GetTimeShiftStreamListStreamListArrayInput interface {
 	pulumi.Input
 
@@ -4326,7 +4509,7 @@ type GetWatermarksWatermarkList struct {
 // GetWatermarksWatermarkListInput is an input type that accepts GetWatermarksWatermarkListArgs and GetWatermarksWatermarkListOutput values.
 // You can construct a concrete instance of `GetWatermarksWatermarkListInput` via:
 //
-//          GetWatermarksWatermarkListArgs{...}
+//	GetWatermarksWatermarkListArgs{...}
 type GetWatermarksWatermarkListInput interface {
 	pulumi.Input
 
@@ -4370,7 +4553,7 @@ func (i GetWatermarksWatermarkListArgs) ToGetWatermarksWatermarkListOutputWithCo
 // GetWatermarksWatermarkListArrayInput is an input type that accepts GetWatermarksWatermarkListArray and GetWatermarksWatermarkListArrayOutput values.
 // You can construct a concrete instance of `GetWatermarksWatermarkListArrayInput` via:
 //
-//          GetWatermarksWatermarkListArray{ GetWatermarksWatermarkListArgs{...} }
+//	GetWatermarksWatermarkListArray{ GetWatermarksWatermarkListArgs{...} }
 type GetWatermarksWatermarkListArrayInput interface {
 	pulumi.Input
 
@@ -4499,7 +4682,7 @@ type GetXp2pDetailInfoListDataInfoList struct {
 // GetXp2pDetailInfoListDataInfoListInput is an input type that accepts GetXp2pDetailInfoListDataInfoListArgs and GetXp2pDetailInfoListDataInfoListOutput values.
 // You can construct a concrete instance of `GetXp2pDetailInfoListDataInfoListInput` via:
 //
-//          GetXp2pDetailInfoListDataInfoListArgs{...}
+//	GetXp2pDetailInfoListDataInfoListArgs{...}
 type GetXp2pDetailInfoListDataInfoListInput interface {
 	pulumi.Input
 
@@ -4547,7 +4730,7 @@ func (i GetXp2pDetailInfoListDataInfoListArgs) ToGetXp2pDetailInfoListDataInfoLi
 // GetXp2pDetailInfoListDataInfoListArrayInput is an input type that accepts GetXp2pDetailInfoListDataInfoListArray and GetXp2pDetailInfoListDataInfoListArrayOutput values.
 // You can construct a concrete instance of `GetXp2pDetailInfoListDataInfoListArrayInput` via:
 //
-//          GetXp2pDetailInfoListDataInfoListArray{ GetXp2pDetailInfoListDataInfoListArgs{...} }
+//	GetXp2pDetailInfoListDataInfoListArray{ GetXp2pDetailInfoListDataInfoListArgs{...} }
 type GetXp2pDetailInfoListDataInfoListArrayInput interface {
 	pulumi.Input
 

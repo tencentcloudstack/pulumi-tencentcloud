@@ -2,18 +2,21 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
  * Provides a resource to create a redis backupDownloadRestriction
  *
  * ## Example Usage
+ *
  * ### Modify the network information and address of the current region backup file download
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const foo = new tencentcloud.redis.BackupDownloadRestriction("foo", {
  *     limitType: "Customize",
@@ -29,13 +32,14 @@ import * as utilities from "../utilities";
  *     ],
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * redis backup_download_restriction can be imported using the region, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Redis/backupDownloadRestriction:BackupDownloadRestriction foo ap-guangzhou
+ * $ pulumi import tencentcloud:Redis/backupDownloadRestriction:BackupDownloadRestriction foo ap-guangzhou
  * ```
  */
 export class BackupDownloadRestriction extends pulumi.CustomResource {

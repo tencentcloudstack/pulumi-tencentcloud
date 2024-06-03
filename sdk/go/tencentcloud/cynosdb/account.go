@@ -7,46 +7,52 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a cynosdb account
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cynosdb"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cynosdb"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Cynosdb.NewAccount(ctx, "account", &Cynosdb.AccountArgs{
-// 			AccountName:        pulumi.String("terraform_test"),
-// 			AccountPassword:    pulumi.String("Password@1234"),
-// 			ClusterId:          pulumi.String("cynosdbmysql-bws8h88b"),
-// 			Description:        pulumi.String("terraform test"),
-// 			Host:               pulumi.String("%"),
-// 			MaxUserConnections: pulumi.Int(2),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Cynosdb.NewAccount(ctx, "account", &Cynosdb.AccountArgs{
+//				AccountName:        pulumi.String("terraform_test"),
+//				AccountPassword:    pulumi.String("Password@1234"),
+//				ClusterId:          pulumi.String("cynosdbmysql-bws8h88b"),
+//				Description:        pulumi.String("terraform test"),
+//				Host:               pulumi.String("%"),
+//				MaxUserConnections: pulumi.Int(2),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // cynosdb account can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Cynosdb/account:Account account account_id
+// $ pulumi import tencentcloud:Cynosdb/account:Account account account_id
 // ```
 type Account struct {
 	pulumi.CustomResourceState
@@ -84,7 +90,14 @@ func NewAccount(ctx *pulumi.Context,
 	if args.Host == nil {
 		return nil, errors.New("invalid value for required argument 'Host'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	if args.AccountPassword != nil {
+		args.AccountPassword = pulumi.ToSecret(args.AccountPassword).(pulumi.StringInput)
+	}
+	secrets := pulumi.AdditionalSecretOutputs([]string{
+		"accountPassword",
+	})
+	opts = append(opts, secrets)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource Account
 	err := ctx.RegisterResource("tencentcloud:Cynosdb/account:Account", name, args, &resource, opts...)
 	if err != nil {
@@ -197,7 +210,7 @@ func (i *Account) ToAccountOutputWithContext(ctx context.Context) AccountOutput 
 // AccountArrayInput is an input type that accepts AccountArray and AccountArrayOutput values.
 // You can construct a concrete instance of `AccountArrayInput` via:
 //
-//          AccountArray{ AccountArgs{...} }
+//	AccountArray{ AccountArgs{...} }
 type AccountArrayInput interface {
 	pulumi.Input
 
@@ -222,7 +235,7 @@ func (i AccountArray) ToAccountArrayOutputWithContext(ctx context.Context) Accou
 // AccountMapInput is an input type that accepts AccountMap and AccountMapOutput values.
 // You can construct a concrete instance of `AccountMapInput` via:
 //
-//          AccountMap{ "key": AccountArgs{...} }
+//	AccountMap{ "key": AccountArgs{...} }
 type AccountMapInput interface {
 	pulumi.Input
 

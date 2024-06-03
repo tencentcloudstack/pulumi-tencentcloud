@@ -7,138 +7,142 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provide a resource to create a emr cluster.
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"fmt"
 //
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Emr"
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Instance"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Emr"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Instance"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Security"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Subnet"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+//	"fmt"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Emr"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Instance"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Security"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Subnet"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		cfg := config.New(ctx, "")
-// 		availabilityZone := "ap-guangzhou-3"
-// 		if param := cfg.Get("availabilityZone"); param != "" {
-// 			availabilityZone = param
-// 		}
-// 		cvm4c8m, err := Instance.GetTypes(ctx, &instance.GetTypesArgs{
-// 			ExcludeSoldOut: pulumi.BoolRef(true),
-// 			CpuCoreCount:   pulumi.IntRef(4),
-// 			MemorySize:     pulumi.IntRef(8),
-// 			Filters: []instance.GetTypesFilter{
-// 				instance.GetTypesFilter{
-// 					Name: "instance-charge-type",
-// 					Values: []string{
-// 						"POSTPAID_BY_HOUR",
-// 					},
-// 				},
-// 				instance.GetTypesFilter{
-// 					Name: "zone",
-// 					Values: []string{
-// 						availabilityZone,
-// 					},
-// 				},
-// 			},
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		emrVpc, err := Vpc.NewInstance(ctx, "emrVpc", &Vpc.InstanceArgs{
-// 			CidrBlock: pulumi.String("10.0.0.0/16"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		emrSubnet, err := Subnet.NewInstance(ctx, "emrSubnet", &Subnet.InstanceArgs{
-// 			AvailabilityZone: pulumi.String(availabilityZone),
-// 			VpcId:            emrVpc.ID(),
-// 			CidrBlock:        pulumi.String("10.0.20.0/28"),
-// 			IsMulticast:      pulumi.Bool(false),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		emrSg, err := Security.NewGroup(ctx, "emrSg", &Security.GroupArgs{
-// 			Description: pulumi.String("emr sg"),
-// 			ProjectId:   pulumi.Int(0),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_, err = Emr.NewCluster(ctx, "emrCluster", &Emr.ClusterArgs{
-// 			ProductId: pulumi.Int(38),
-// 			VpcSettings: pulumi.AnyMap{
-// 				"vpc_id":    emrVpc.ID(),
-// 				"subnet_id": emrSubnet.ID(),
-// 			},
-// 			Softwares: pulumi.StringArray{
-// 				pulumi.String("hdfs-2.8.5"),
-// 				pulumi.String("knox-1.6.1"),
-// 				pulumi.String("openldap-2.4.44"),
-// 				pulumi.String("yarn-2.8.5"),
-// 				pulumi.String("zookeeper-3.6.3"),
-// 			},
-// 			SupportHa:    pulumi.Int(0),
-// 			InstanceName: pulumi.String("emr-cluster-test"),
-// 			ResourceSpec: &emr.ClusterResourceSpecArgs{
-// 				MasterResourceSpec: &emr.ClusterResourceSpecMasterResourceSpecArgs{
-// 					MemSize:     pulumi.Int(8192),
-// 					Cpu:         pulumi.Int(4),
-// 					DiskSize:    pulumi.Int(100),
-// 					DiskType:    pulumi.String("CLOUD_PREMIUM"),
-// 					Spec:        pulumi.String(fmt.Sprintf("%v%v", "CVM.", cvm4c8m.InstanceTypes[0].Family)),
-// 					StorageType: pulumi.Int(5),
-// 					RootSize:    pulumi.Int(50),
-// 				},
-// 				CoreResourceSpec: &emr.ClusterResourceSpecCoreResourceSpecArgs{
-// 					MemSize:     pulumi.Int(8192),
-// 					Cpu:         pulumi.Int(4),
-// 					DiskSize:    pulumi.Int(100),
-// 					DiskType:    pulumi.String("CLOUD_PREMIUM"),
-// 					Spec:        pulumi.String(fmt.Sprintf("%v%v", "CVM.", cvm4c8m.InstanceTypes[0].Family)),
-// 					StorageType: pulumi.Int(5),
-// 					RootSize:    pulumi.Int(50),
-// 				},
-// 				MasterCount: pulumi.Int(1),
-// 				CoreCount:   pulumi.Int(2),
-// 			},
-// 			LoginSettings: pulumi.AnyMap{
-// 				"password": pulumi.Any("Tencent@cloud123"),
-// 			},
-// 			TimeSpan: pulumi.Int(3600),
-// 			TimeUnit: pulumi.String("s"),
-// 			PayMode:  pulumi.Int(0),
-// 			PlacementInfo: &emr.ClusterPlacementInfoArgs{
-// 				Zone:      pulumi.String(availabilityZone),
-// 				ProjectId: pulumi.Int(0),
-// 			},
-// 			SgId: emrSg.ID(),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			cfg := config.New(ctx, "")
+//			availabilityZone := "ap-guangzhou-3"
+//			if param := cfg.Get("availabilityZone"); param != "" {
+//				availabilityZone = param
+//			}
+//			cvm4c8m, err := Instance.GetTypes(ctx, &instance.GetTypesArgs{
+//				ExcludeSoldOut: pulumi.BoolRef(true),
+//				CpuCoreCount:   pulumi.IntRef(4),
+//				MemorySize:     pulumi.IntRef(8),
+//				Filters: []instance.GetTypesFilter{
+//					{
+//						Name: "instance-charge-type",
+//						Values: []string{
+//							"POSTPAID_BY_HOUR",
+//						},
+//					},
+//					{
+//						Name: "zone",
+//						Values: []string{
+//							availabilityZone,
+//						},
+//					},
+//				},
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			emrVpc, err := Vpc.NewInstance(ctx, "emrVpc", &Vpc.InstanceArgs{
+//				CidrBlock: pulumi.String("10.0.0.0/16"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			emrSubnet, err := Subnet.NewInstance(ctx, "emrSubnet", &Subnet.InstanceArgs{
+//				AvailabilityZone: pulumi.String(availabilityZone),
+//				VpcId:            emrVpc.ID(),
+//				CidrBlock:        pulumi.String("10.0.20.0/28"),
+//				IsMulticast:      pulumi.Bool(false),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			emrSg, err := Security.NewGroup(ctx, "emrSg", &Security.GroupArgs{
+//				Description: pulumi.String("emr sg"),
+//				ProjectId:   pulumi.Int(0),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_, err = Emr.NewCluster(ctx, "emrCluster", &Emr.ClusterArgs{
+//				ProductId: pulumi.Int(38),
+//				VpcSettings: pulumi.Map{
+//					"vpc_id":    emrVpc.ID(),
+//					"subnet_id": emrSubnet.ID(),
+//				},
+//				Softwares: pulumi.StringArray{
+//					pulumi.String("hdfs-2.8.5"),
+//					pulumi.String("knox-1.6.1"),
+//					pulumi.String("openldap-2.4.44"),
+//					pulumi.String("yarn-2.8.5"),
+//					pulumi.String("zookeeper-3.6.3"),
+//				},
+//				SupportHa:    pulumi.Int(0),
+//				InstanceName: pulumi.String("emr-cluster-test"),
+//				ResourceSpec: &emr.ClusterResourceSpecArgs{
+//					MasterResourceSpec: &emr.ClusterResourceSpecMasterResourceSpecArgs{
+//						MemSize:     pulumi.Int(8192),
+//						Cpu:         pulumi.Int(4),
+//						DiskSize:    pulumi.Int(100),
+//						DiskType:    pulumi.String("CLOUD_PREMIUM"),
+//						Spec:        pulumi.String(fmt.Sprintf("CVM.%v", cvm4c8m.InstanceTypes[0].Family)),
+//						StorageType: pulumi.Int(5),
+//						RootSize:    pulumi.Int(50),
+//					},
+//					CoreResourceSpec: &emr.ClusterResourceSpecCoreResourceSpecArgs{
+//						MemSize:     pulumi.Int(8192),
+//						Cpu:         pulumi.Int(4),
+//						DiskSize:    pulumi.Int(100),
+//						DiskType:    pulumi.String("CLOUD_PREMIUM"),
+//						Spec:        pulumi.String(fmt.Sprintf("CVM.%v", cvm4c8m.InstanceTypes[0].Family)),
+//						StorageType: pulumi.Int(5),
+//						RootSize:    pulumi.Int(50),
+//					},
+//					MasterCount: pulumi.Int(1),
+//					CoreCount:   pulumi.Int(2),
+//				},
+//				LoginSettings: pulumi.Map{
+//					"password": pulumi.Any("Tencent@cloud123"),
+//				},
+//				TimeSpan: pulumi.Int(3600),
+//				TimeUnit: pulumi.String("s"),
+//				PayMode:  pulumi.Int(0),
+//				PlacementInfo: &emr.ClusterPlacementInfoArgs{
+//					Zone:      pulumi.String(availabilityZone),
+//					ProjectId: pulumi.Int(0),
+//				},
+//				SgId: emrSg.ID(),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 type Cluster struct {
 	pulumi.CustomResourceState
 
@@ -152,7 +156,7 @@ type Cluster struct {
 	InstanceId pulumi.StringOutput `pulumi:"instanceId"`
 	// Name of the instance, which can contain 6 to 36 English letters, Chinese characters, digits, dashes(-), or underscores(_).
 	InstanceName pulumi.StringOutput `pulumi:"instanceName"`
-	// Instance login settings.
+	// Instance login settings. There are two optional fields:- password: Instance login password: 8-16 characters, including uppercase letters, lowercase letters, numbers and special characters. Special symbols only support! @% ^ *. The first bit of the password cannot be a special character;- public_key_id: Public key id. After the key is associated, the instance can be accessed through the corresponding private key.
 	LoginSettings pulumi.MapOutput `pulumi:"loginSettings"`
 	// Whether to enable the cluster Master node public network. Value range:
 	// - NEED_MASTER_WAN: Indicates that the cluster Master node public network is enabled.
@@ -163,7 +167,7 @@ type Cluster struct {
 	PayMode pulumi.IntOutput `pulumi:"payMode"`
 	// It will be deprecated in later versions. Use `placementInfo` instead. The location of the instance.
 	//
-	// Deprecated: It will be deprecated in later versions. Use `placement_info` instead.
+	// Deprecated: It will be deprecated in later versions. Use `placementInfo` instead.
 	Placement pulumi.MapOutput `pulumi:"placement"`
 	// The location of the instance.
 	PlacementInfo ClusterPlacementInfoOutput `pulumi:"placementInfo"`
@@ -225,7 +229,14 @@ func NewCluster(ctx *pulumi.Context,
 	if args.VpcSettings == nil {
 		return nil, errors.New("invalid value for required argument 'VpcSettings'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	if args.LoginSettings != nil {
+		args.LoginSettings = pulumi.ToSecret(args.LoginSettings).(pulumi.MapInput)
+	}
+	secrets := pulumi.AdditionalSecretOutputs([]string{
+		"loginSettings",
+	})
+	opts = append(opts, secrets)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource Cluster
 	err := ctx.RegisterResource("tencentcloud:Emr/cluster:Cluster", name, args, &resource, opts...)
 	if err != nil {
@@ -258,7 +269,7 @@ type clusterState struct {
 	InstanceId *string `pulumi:"instanceId"`
 	// Name of the instance, which can contain 6 to 36 English letters, Chinese characters, digits, dashes(-), or underscores(_).
 	InstanceName *string `pulumi:"instanceName"`
-	// Instance login settings.
+	// Instance login settings. There are two optional fields:- password: Instance login password: 8-16 characters, including uppercase letters, lowercase letters, numbers and special characters. Special symbols only support! @% ^ *. The first bit of the password cannot be a special character;- public_key_id: Public key id. After the key is associated, the instance can be accessed through the corresponding private key.
 	LoginSettings map[string]interface{} `pulumi:"loginSettings"`
 	// Whether to enable the cluster Master node public network. Value range:
 	// - NEED_MASTER_WAN: Indicates that the cluster Master node public network is enabled.
@@ -269,7 +280,7 @@ type clusterState struct {
 	PayMode *int `pulumi:"payMode"`
 	// It will be deprecated in later versions. Use `placementInfo` instead. The location of the instance.
 	//
-	// Deprecated: It will be deprecated in later versions. Use `placement_info` instead.
+	// Deprecated: It will be deprecated in later versions. Use `placementInfo` instead.
 	Placement map[string]interface{} `pulumi:"placement"`
 	// The location of the instance.
 	PlacementInfo *ClusterPlacementInfo `pulumi:"placementInfo"`
@@ -317,7 +328,7 @@ type ClusterState struct {
 	InstanceId pulumi.StringPtrInput
 	// Name of the instance, which can contain 6 to 36 English letters, Chinese characters, digits, dashes(-), or underscores(_).
 	InstanceName pulumi.StringPtrInput
-	// Instance login settings.
+	// Instance login settings. There are two optional fields:- password: Instance login password: 8-16 characters, including uppercase letters, lowercase letters, numbers and special characters. Special symbols only support! @% ^ *. The first bit of the password cannot be a special character;- public_key_id: Public key id. After the key is associated, the instance can be accessed through the corresponding private key.
 	LoginSettings pulumi.MapInput
 	// Whether to enable the cluster Master node public network. Value range:
 	// - NEED_MASTER_WAN: Indicates that the cluster Master node public network is enabled.
@@ -328,7 +339,7 @@ type ClusterState struct {
 	PayMode pulumi.IntPtrInput
 	// It will be deprecated in later versions. Use `placementInfo` instead. The location of the instance.
 	//
-	// Deprecated: It will be deprecated in later versions. Use `placement_info` instead.
+	// Deprecated: It will be deprecated in later versions. Use `placementInfo` instead.
 	Placement pulumi.MapInput
 	// The location of the instance.
 	PlacementInfo ClusterPlacementInfoPtrInput
@@ -378,7 +389,7 @@ type clusterArgs struct {
 	ExtendFsField *string `pulumi:"extendFsField"`
 	// Name of the instance, which can contain 6 to 36 English letters, Chinese characters, digits, dashes(-), or underscores(_).
 	InstanceName string `pulumi:"instanceName"`
-	// Instance login settings.
+	// Instance login settings. There are two optional fields:- password: Instance login password: 8-16 characters, including uppercase letters, lowercase letters, numbers and special characters. Special symbols only support! @% ^ *. The first bit of the password cannot be a special character;- public_key_id: Public key id. After the key is associated, the instance can be accessed through the corresponding private key.
 	LoginSettings map[string]interface{} `pulumi:"loginSettings"`
 	// Whether to enable the cluster Master node public network. Value range:
 	// - NEED_MASTER_WAN: Indicates that the cluster Master node public network is enabled.
@@ -389,7 +400,7 @@ type clusterArgs struct {
 	PayMode int `pulumi:"payMode"`
 	// It will be deprecated in later versions. Use `placementInfo` instead. The location of the instance.
 	//
-	// Deprecated: It will be deprecated in later versions. Use `placement_info` instead.
+	// Deprecated: It will be deprecated in later versions. Use `placementInfo` instead.
 	Placement map[string]interface{} `pulumi:"placement"`
 	// The location of the instance.
 	PlacementInfo *ClusterPlacementInfo `pulumi:"placementInfo"`
@@ -436,7 +447,7 @@ type ClusterArgs struct {
 	ExtendFsField pulumi.StringPtrInput
 	// Name of the instance, which can contain 6 to 36 English letters, Chinese characters, digits, dashes(-), or underscores(_).
 	InstanceName pulumi.StringInput
-	// Instance login settings.
+	// Instance login settings. There are two optional fields:- password: Instance login password: 8-16 characters, including uppercase letters, lowercase letters, numbers and special characters. Special symbols only support! @% ^ *. The first bit of the password cannot be a special character;- public_key_id: Public key id. After the key is associated, the instance can be accessed through the corresponding private key.
 	LoginSettings pulumi.MapInput
 	// Whether to enable the cluster Master node public network. Value range:
 	// - NEED_MASTER_WAN: Indicates that the cluster Master node public network is enabled.
@@ -447,7 +458,7 @@ type ClusterArgs struct {
 	PayMode pulumi.IntInput
 	// It will be deprecated in later versions. Use `placementInfo` instead. The location of the instance.
 	//
-	// Deprecated: It will be deprecated in later versions. Use `placement_info` instead.
+	// Deprecated: It will be deprecated in later versions. Use `placementInfo` instead.
 	Placement pulumi.MapInput
 	// The location of the instance.
 	PlacementInfo ClusterPlacementInfoPtrInput
@@ -510,7 +521,7 @@ func (i *Cluster) ToClusterOutputWithContext(ctx context.Context) ClusterOutput 
 // ClusterArrayInput is an input type that accepts ClusterArray and ClusterArrayOutput values.
 // You can construct a concrete instance of `ClusterArrayInput` via:
 //
-//          ClusterArray{ ClusterArgs{...} }
+//	ClusterArray{ ClusterArgs{...} }
 type ClusterArrayInput interface {
 	pulumi.Input
 
@@ -535,7 +546,7 @@ func (i ClusterArray) ToClusterArrayOutputWithContext(ctx context.Context) Clust
 // ClusterMapInput is an input type that accepts ClusterMap and ClusterMapOutput values.
 // You can construct a concrete instance of `ClusterMapInput` via:
 //
-//          ClusterMap{ "key": ClusterArgs{...} }
+//	ClusterMap{ "key": ClusterArgs{...} }
 type ClusterMapInput interface {
 	pulumi.Input
 
@@ -593,15 +604,15 @@ func (o ClusterOutput) InstanceName() pulumi.StringOutput {
 	return o.ApplyT(func(v *Cluster) pulumi.StringOutput { return v.InstanceName }).(pulumi.StringOutput)
 }
 
-// Instance login settings.
+// Instance login settings. There are two optional fields:- password: Instance login password: 8-16 characters, including uppercase letters, lowercase letters, numbers and special characters. Special symbols only support! @% ^ *. The first bit of the password cannot be a special character;- public_key_id: Public key id. After the key is associated, the instance can be accessed through the corresponding private key.
 func (o ClusterOutput) LoginSettings() pulumi.MapOutput {
 	return o.ApplyT(func(v *Cluster) pulumi.MapOutput { return v.LoginSettings }).(pulumi.MapOutput)
 }
 
 // Whether to enable the cluster Master node public network. Value range:
-// - NEED_MASTER_WAN: Indicates that the cluster Master node public network is enabled.
-// - NOT_NEED_MASTER_WAN: Indicates that it is not turned on.
-//   By default, the cluster Master node internet is enabled.
+//   - NEED_MASTER_WAN: Indicates that the cluster Master node public network is enabled.
+//   - NOT_NEED_MASTER_WAN: Indicates that it is not turned on.
+//     By default, the cluster Master node internet is enabled.
 func (o ClusterOutput) NeedMasterWan() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *Cluster) pulumi.StringPtrOutput { return v.NeedMasterWan }).(pulumi.StringPtrOutput)
 }
@@ -613,7 +624,7 @@ func (o ClusterOutput) PayMode() pulumi.IntOutput {
 
 // It will be deprecated in later versions. Use `placementInfo` instead. The location of the instance.
 //
-// Deprecated: It will be deprecated in later versions. Use `placement_info` instead.
+// Deprecated: It will be deprecated in later versions. Use `placementInfo` instead.
 func (o ClusterOutput) Placement() pulumi.MapOutput {
 	return o.ApplyT(func(v *Cluster) pulumi.MapOutput { return v.Placement }).(pulumi.MapOutput)
 }

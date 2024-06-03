@@ -7,42 +7,48 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a lighthouse keyPairAttachment
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Lighthouse"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Lighthouse"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Lighthouse.NewKeyPairAttachment(ctx, "keyPairAttachment", &Lighthouse.KeyPairAttachmentArgs{
-// 			InstanceId: pulumi.String("lhins-xxxxxx"),
-// 			KeyId:      pulumi.String("lhkp-xxxxxx"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Lighthouse.NewKeyPairAttachment(ctx, "keyPairAttachment", &Lighthouse.KeyPairAttachmentArgs{
+//				InstanceId: pulumi.String("lhins-xxxxxx"),
+//				KeyId:      pulumi.String("lhkp-xxxxxx"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // lighthouse key_pair_attachment can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Lighthouse/keyPairAttachment:KeyPairAttachment key_pair_attachment key_pair_attachment_id
+// $ pulumi import tencentcloud:Lighthouse/keyPairAttachment:KeyPairAttachment key_pair_attachment key_pair_attachment_id
 // ```
 type KeyPairAttachment struct {
 	pulumi.CustomResourceState
@@ -66,7 +72,7 @@ func NewKeyPairAttachment(ctx *pulumi.Context,
 	if args.KeyId == nil {
 		return nil, errors.New("invalid value for required argument 'KeyId'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource KeyPairAttachment
 	err := ctx.RegisterResource("tencentcloud:Lighthouse/keyPairAttachment:KeyPairAttachment", name, args, &resource, opts...)
 	if err != nil {
@@ -147,7 +153,7 @@ func (i *KeyPairAttachment) ToKeyPairAttachmentOutputWithContext(ctx context.Con
 // KeyPairAttachmentArrayInput is an input type that accepts KeyPairAttachmentArray and KeyPairAttachmentArrayOutput values.
 // You can construct a concrete instance of `KeyPairAttachmentArrayInput` via:
 //
-//          KeyPairAttachmentArray{ KeyPairAttachmentArgs{...} }
+//	KeyPairAttachmentArray{ KeyPairAttachmentArgs{...} }
 type KeyPairAttachmentArrayInput interface {
 	pulumi.Input
 
@@ -172,7 +178,7 @@ func (i KeyPairAttachmentArray) ToKeyPairAttachmentArrayOutputWithContext(ctx co
 // KeyPairAttachmentMapInput is an input type that accepts KeyPairAttachmentMap and KeyPairAttachmentMapOutput values.
 // You can construct a concrete instance of `KeyPairAttachmentMapInput` via:
 //
-//          KeyPairAttachmentMap{ "key": KeyPairAttachmentArgs{...} }
+//	KeyPairAttachmentMap{ "key": KeyPairAttachmentArgs{...} }
 type KeyPairAttachmentMapInput interface {
 	pulumi.Input
 

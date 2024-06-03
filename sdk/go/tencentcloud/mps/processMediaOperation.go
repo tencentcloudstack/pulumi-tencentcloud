@@ -7,83 +7,88 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a mps processMediaOperation
 //
 // ## Example Usage
+//
 // ### Process mps media through CMQ
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"fmt"
 //
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Cos"
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Mps"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cos"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Mps"
+//	"fmt"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cos"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Mps"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		output, err := Cos.NewBucket(ctx, "output", &Cos.BucketArgs{
-// 			Bucket:     pulumi.String(fmt.Sprintf("%v%v", "tf-bucket-mps-edit-media-output-", local.App_id)),
-// 			ForceClean: pulumi.Bool(true),
-// 			Acl:        pulumi.String("public-read"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		object, err := Cos.GetBucketObject(ctx, &cos.GetBucketObjectArgs{
-// 			Bucket: fmt.Sprintf("%v%v", "keep-bucket-", local.App_id),
-// 			Key:    "/mps-test/test.mov",
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_, err = Mps.NewProcessMediaOperation(ctx, "operation", &Mps.ProcessMediaOperationArgs{
-// 			InputInfo: &mps.ProcessMediaOperationInputInfoArgs{
-// 				Type: pulumi.String("COS"),
-// 				CosInputInfo: &mps.ProcessMediaOperationInputInfoCosInputInfoArgs{
-// 					Bucket: pulumi.String(object.Bucket),
-// 					Region: pulumi.String(fmt.Sprintf("%v%v", "%", "s")),
-// 					Object: pulumi.String(object.Key),
-// 				},
-// 			},
-// 			OutputStorage: &mps.ProcessMediaOperationOutputStorageArgs{
-// 				Type: pulumi.String("COS"),
-// 				CosOutputStorage: &mps.ProcessMediaOperationOutputStorageCosOutputStorageArgs{
-// 					Bucket: output.Bucket,
-// 					Region: pulumi.String(fmt.Sprintf("%v%v", "%", "s")),
-// 				},
-// 			},
-// 			OutputDir: pulumi.String("output/"),
-// 			AiContentReviewTask: &mps.ProcessMediaOperationAiContentReviewTaskArgs{
-// 				Definition: pulumi.Int(10),
-// 			},
-// 			AiRecognitionTask: &mps.ProcessMediaOperationAiRecognitionTaskArgs{
-// 				Definition: pulumi.Int(10),
-// 			},
-// 			TaskNotifyConfig: &mps.ProcessMediaOperationTaskNotifyConfigArgs{
-// 				CmqModel:   pulumi.String("Queue"),
-// 				CmqRegion:  pulumi.String("gz"),
-// 				QueueName:  pulumi.String("test"),
-// 				TopicName:  pulumi.String("test"),
-// 				NotifyType: pulumi.String("CMQ"),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			output, err := Cos.NewBucket(ctx, "output", &Cos.BucketArgs{
+//				Bucket:     pulumi.String(fmt.Sprintf("tf-bucket-mps-edit-media-output-%v", local.App_id)),
+//				ForceClean: pulumi.Bool(true),
+//				Acl:        pulumi.String("public-read"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			object, err := Cos.GetBucketObject(ctx, &cos.GetBucketObjectArgs{
+//				Bucket: fmt.Sprintf("keep-bucket-%v", local.App_id),
+//				Key:    "/mps-test/test.mov",
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			_, err = Mps.NewProcessMediaOperation(ctx, "operation", &Mps.ProcessMediaOperationArgs{
+//				InputInfo: &mps.ProcessMediaOperationInputInfoArgs{
+//					Type: pulumi.String("COS"),
+//					CosInputInfo: &mps.ProcessMediaOperationInputInfoCosInputInfoArgs{
+//						Bucket: pulumi.String(object.Bucket),
+//						Region: pulumi.String("%s"),
+//						Object: pulumi.String(object.Key),
+//					},
+//				},
+//				OutputStorage: &mps.ProcessMediaOperationOutputStorageArgs{
+//					Type: pulumi.String("COS"),
+//					CosOutputStorage: &mps.ProcessMediaOperationOutputStorageCosOutputStorageArgs{
+//						Bucket: output.Bucket,
+//						Region: pulumi.String("%s"),
+//					},
+//				},
+//				OutputDir: pulumi.String("output/"),
+//				AiContentReviewTask: &mps.ProcessMediaOperationAiContentReviewTaskArgs{
+//					Definition: pulumi.Int(10),
+//				},
+//				AiRecognitionTask: &mps.ProcessMediaOperationAiRecognitionTaskArgs{
+//					Definition: pulumi.Int(10),
+//				},
+//				TaskNotifyConfig: &mps.ProcessMediaOperationTaskNotifyConfigArgs{
+//					CmqModel:   pulumi.String("Queue"),
+//					CmqRegion:  pulumi.String("gz"),
+//					QueueName:  pulumi.String("test"),
+//					TopicName:  pulumi.String("test"),
+//					NotifyType: pulumi.String("CMQ"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 type ProcessMediaOperation struct {
 	pulumi.CustomResourceState
 
@@ -127,7 +132,7 @@ func NewProcessMediaOperation(ctx *pulumi.Context,
 	if args.InputInfo == nil {
 		return nil, errors.New("invalid value for required argument 'InputInfo'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource ProcessMediaOperation
 	err := ctx.RegisterResource("tencentcloud:Mps/processMediaOperation:ProcessMediaOperation", name, args, &resource, opts...)
 	if err != nil {
@@ -304,7 +309,7 @@ func (i *ProcessMediaOperation) ToProcessMediaOperationOutputWithContext(ctx con
 // ProcessMediaOperationArrayInput is an input type that accepts ProcessMediaOperationArray and ProcessMediaOperationArrayOutput values.
 // You can construct a concrete instance of `ProcessMediaOperationArrayInput` via:
 //
-//          ProcessMediaOperationArray{ ProcessMediaOperationArgs{...} }
+//	ProcessMediaOperationArray{ ProcessMediaOperationArgs{...} }
 type ProcessMediaOperationArrayInput interface {
 	pulumi.Input
 
@@ -329,7 +334,7 @@ func (i ProcessMediaOperationArray) ToProcessMediaOperationArrayOutputWithContex
 // ProcessMediaOperationMapInput is an input type that accepts ProcessMediaOperationMap and ProcessMediaOperationMapOutput values.
 // You can construct a concrete instance of `ProcessMediaOperationMapInput` via:
 //
-//          ProcessMediaOperationMap{ "key": ProcessMediaOperationArgs{...} }
+//	ProcessMediaOperationMap{ "key": ProcessMediaOperationArgs{...} }
 type ProcessMediaOperationMapInput interface {
 	pulumi.Input
 

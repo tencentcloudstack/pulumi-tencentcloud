@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Wedata.Inputs
 {
 
-    public sealed class BaselineAlarmRuleDtoGetArgs : Pulumi.ResourceArgs
+    public sealed class BaselineAlarmRuleDtoGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Important;Urgent;Normal.
@@ -28,5 +28,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Wedata.Inputs
         public BaselineAlarmRuleDtoGetArgs()
         {
         }
+        public static new BaselineAlarmRuleDtoGetArgs Empty => new BaselineAlarmRuleDtoGetArgs();
     }
 }

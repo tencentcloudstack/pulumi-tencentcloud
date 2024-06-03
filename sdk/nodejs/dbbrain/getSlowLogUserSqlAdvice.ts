@@ -9,23 +9,22 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const test = pulumi.output(tencentcloud.Dbbrain.getSlowLogUserSqlAdvice({
+ * const test = tencentcloud.Dbbrain.getSlowLogUserSqlAdvice({
  *     instanceId: "%s",
  *     product: "mysql",
  *     sqlText: "%s",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getSlowLogUserSqlAdvice(args: GetSlowLogUserSqlAdviceArgs, opts?: pulumi.InvokeOptions): Promise<GetSlowLogUserSqlAdviceResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Dbbrain/getSlowLogUserSqlAdvice:getSlowLogUserSqlAdvice", {
         "instanceId": args.instanceId,
         "product": args.product,
@@ -99,9 +98,26 @@ export interface GetSlowLogUserSqlAdviceResult {
      */
     readonly tables: string;
 }
-
+/**
+ * Use this data source to query detailed information of dbbrain slowLogUserSqlAdvice
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const test = tencentcloud.Dbbrain.getSlowLogUserSqlAdvice({
+ *     instanceId: "%s",
+ *     product: "mysql",
+ *     sqlText: "%s",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getSlowLogUserSqlAdviceOutput(args: GetSlowLogUserSqlAdviceOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetSlowLogUserSqlAdviceResult> {
-    return pulumi.output(args).apply(a => getSlowLogUserSqlAdvice(a, opts))
+    return pulumi.output(args).apply((a: any) => getSlowLogUserSqlAdvice(a, opts))
 }
 
 /**

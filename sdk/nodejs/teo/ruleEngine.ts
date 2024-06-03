@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,9 +11,10 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const rule1 = new tencentcloud.teo.RuleEngine("rule1", {
  *     zoneId: tencentcloud_teo_zone.example.id,
@@ -117,13 +119,14 @@ import * as utilities from "../utilities";
  *     }],
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * teo rule_engine can be imported using the id#rule_id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Teo/ruleEngine:RuleEngine rule_engine zone-297z8rf93cfw#rule-ajol584a
+ * $ pulumi import tencentcloud:Teo/ruleEngine:RuleEngine rule_engine zone-297z8rf93cfw#rule-ajol584a
  * ```
  */
 export class RuleEngine extends pulumi.CustomResource {
@@ -167,7 +170,7 @@ export class RuleEngine extends pulumi.CustomResource {
      */
     public readonly rules!: pulumi.Output<outputs.Teo.RuleEngineRule[]>;
     /**
-     * Rule status. Values: `enable`: Enabled; `disable`: Disabled.
+     * Rule status. Values:
      */
     public readonly status!: pulumi.Output<string>;
     /**
@@ -241,7 +244,7 @@ export interface RuleEngineState {
      */
     rules?: pulumi.Input<pulumi.Input<inputs.Teo.RuleEngineRule>[]>;
     /**
-     * Rule status. Values: `enable`: Enabled; `disable`: Disabled.
+     * Rule status. Values:
      */
     status?: pulumi.Input<string>;
     /**
@@ -267,7 +270,7 @@ export interface RuleEngineArgs {
      */
     rules: pulumi.Input<pulumi.Input<inputs.Teo.RuleEngineRule>[]>;
     /**
-     * Rule status. Values: `enable`: Enabled; `disable`: Disabled.
+     * Rule status. Values:
      */
     status: pulumi.Input<string>;
     /**

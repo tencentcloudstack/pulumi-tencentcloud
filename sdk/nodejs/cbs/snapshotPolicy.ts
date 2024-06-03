@@ -9,11 +9,12 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const snapshotPolicy = new tencentcloud.Cbs.SnapshotPolicy("snapshot_policy", {
+ * const snapshotPolicy = new tencentcloud.cbs.SnapshotPolicy("snapshotPolicy", {
  *     repeatHours: [1],
  *     repeatWeekdays: [
  *         1,
@@ -23,13 +24,14 @@ import * as utilities from "../utilities";
  *     snapshotPolicyName: "mysnapshotpolicyname",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * CBS snapshot policy can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Cbs/snapshotPolicy:SnapshotPolicy snapshot_policy asp-jliex1tn
+ * $ pulumi import tencentcloud:Cbs/snapshotPolicy:SnapshotPolicy snapshot_policy asp-jliex1tn
  * ```
  */
 export class SnapshotPolicy extends pulumi.CustomResource {

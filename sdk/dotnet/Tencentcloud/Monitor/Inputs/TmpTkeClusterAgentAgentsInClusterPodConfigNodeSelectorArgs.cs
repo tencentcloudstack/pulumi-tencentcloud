@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor.Inputs
 {
 
-    public sealed class TmpTkeClusterAgentAgentsInClusterPodConfigNodeSelectorArgs : Pulumi.ResourceArgs
+    public sealed class TmpTkeClusterAgentAgentsInClusterPodConfigNodeSelectorArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// The pod configuration name of the component deployed in the cluster.
@@ -28,5 +28,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor.Inputs
         public TmpTkeClusterAgentAgentsInClusterPodConfigNodeSelectorArgs()
         {
         }
+        public static new TmpTkeClusterAgentAgentsInClusterPodConfigNodeSelectorArgs Empty => new TmpTkeClusterAgentAgentsInClusterPodConfigNodeSelectorArgs();
     }
 }

@@ -9,15 +9,17 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const upgradeMultiZoneOperation = new tencentcloud.Redis.UpgradeMultiZoneOperation("upgrade_multi_zone_operation", {
+ * const upgradeMultiZoneOperation = new tencentcloud.redis.UpgradeMultiZoneOperation("upgradeMultiZoneOperation", {
  *     instanceId: "crs-c1nl9rpv",
  *     upgradeProxyAndRedisServer: true,
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export class UpgradeMultiZoneOperation extends pulumi.CustomResource {
     /**

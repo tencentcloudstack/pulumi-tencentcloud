@@ -14,80 +14,86 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cfs
     /// Provides a resource to create a cfs auto_snapshot_policy
     /// 
     /// ## Example Usage
+    /// 
     /// ### use day of week
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var autoSnapshotPolicy = new Tencentcloud.Cfs.AutoSnapshotPolicy("autoSnapshotPolicy", new()
     ///     {
-    ///         var autoSnapshotPolicy = new Tencentcloud.Cfs.AutoSnapshotPolicy("autoSnapshotPolicy", new Tencentcloud.Cfs.AutoSnapshotPolicyArgs
-    ///         {
-    ///             AliveDays = 7,
-    ///             DayOfWeek = "1,2",
-    ///             Hour = "2,3",
-    ///             PolicyName = "policy_name",
-    ///         });
-    ///     }
+    ///         AliveDays = 7,
+    ///         DayOfWeek = "1,2",
+    ///         Hour = "2,3",
+    ///         PolicyName = "policy_name",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
+    /// 
     /// ### use day of month
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var autoSnapshotPolicy = new Tencentcloud.Cfs.AutoSnapshotPolicy("autoSnapshotPolicy", new()
     ///     {
-    ///         var autoSnapshotPolicy = new Tencentcloud.Cfs.AutoSnapshotPolicy("autoSnapshotPolicy", new Tencentcloud.Cfs.AutoSnapshotPolicyArgs
-    ///         {
-    ///             AliveDays = 7,
-    ///             DayOfMonth = "2,3,4",
-    ///             Hour = "2,3",
-    ///             PolicyName = "policy_name",
-    ///         });
-    ///     }
+    ///         AliveDays = 7,
+    ///         DayOfMonth = "2,3,4",
+    ///         Hour = "2,3",
+    ///         PolicyName = "policy_name",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
+    /// 
     /// ### use interval days
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var autoSnapshotPolicy = new Tencentcloud.Cfs.AutoSnapshotPolicy("autoSnapshotPolicy", new()
     ///     {
-    ///         var autoSnapshotPolicy = new Tencentcloud.Cfs.AutoSnapshotPolicy("autoSnapshotPolicy", new Tencentcloud.Cfs.AutoSnapshotPolicyArgs
-    ///         {
-    ///             AliveDays = 7,
-    ///             Hour = "2,3",
-    ///             IntervalDays = 1,
-    ///             PolicyName = "policy_name",
-    ///         });
-    ///     }
+    ///         AliveDays = 7,
+    ///         Hour = "2,3",
+    ///         IntervalDays = 1,
+    ///         PolicyName = "policy_name",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// cfs auto_snapshot_policy can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Cfs/autoSnapshotPolicy:AutoSnapshotPolicy auto_snapshot_policy auto_snapshot_policy_id
+    /// $ pulumi import tencentcloud:Cfs/autoSnapshotPolicy:AutoSnapshotPolicy auto_snapshot_policy auto_snapshot_policy_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Cfs/autoSnapshotPolicy:AutoSnapshotPolicy")]
-    public partial class AutoSnapshotPolicy : Pulumi.CustomResource
+    public partial class AutoSnapshotPolicy : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Snapshot retention period.
@@ -170,7 +176,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cfs
         }
     }
 
-    public sealed class AutoSnapshotPolicyArgs : Pulumi.ResourceArgs
+    public sealed class AutoSnapshotPolicyArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Snapshot retention period.
@@ -211,9 +217,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cfs
         public AutoSnapshotPolicyArgs()
         {
         }
+        public static new AutoSnapshotPolicyArgs Empty => new AutoSnapshotPolicyArgs();
     }
 
-    public sealed class AutoSnapshotPolicyState : Pulumi.ResourceArgs
+    public sealed class AutoSnapshotPolicyState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Snapshot retention period.
@@ -254,5 +261,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cfs
         public AutoSnapshotPolicyState()
         {
         }
+        public static new AutoSnapshotPolicyState Empty => new AutoSnapshotPolicyState();
     }
 }

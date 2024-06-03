@@ -15,86 +15,93 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.As
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = Pulumi.Tencentcloud;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var zones = Tencentcloud.Availability.GetZonesByProduct.Invoke(new()
     ///     {
-    ///         var zones = Output.Create(Tencentcloud.Availability.GetZonesByProduct.InvokeAsync(new Tencentcloud.Availability.GetZonesByProductArgs
-    ///         {
-    ///             Product = "as",
-    ///         }));
-    ///         var image = Output.Create(Tencentcloud.Images.GetInstance.InvokeAsync(new Tencentcloud.Images.GetInstanceArgs
-    ///         {
-    ///             ImageTypes = 
-    ///             {
-    ///                 "PUBLIC_IMAGE",
-    ///             },
-    ///             OsName = "TencentOS Server 3.2 (Final)",
-    ///         }));
-    ///         var vpc = new Tencentcloud.Vpc.Instance("vpc", new Tencentcloud.Vpc.InstanceArgs
-    ///         {
-    ///             CidrBlock = "10.0.0.0/16",
-    ///         });
-    ///         var subnet = new Tencentcloud.Subnet.Instance("subnet", new Tencentcloud.Subnet.InstanceArgs
-    ///         {
-    ///             VpcId = vpc.Id,
-    ///             CidrBlock = "10.0.0.0/16",
-    ///             AvailabilityZone = zones.Apply(zones =&gt; zones.Zones?[0]?.Name),
-    ///         });
-    ///         var exampleScalingConfig = new Tencentcloud.As.ScalingConfig("exampleScalingConfig", new Tencentcloud.As.ScalingConfigArgs
-    ///         {
-    ///             ConfigurationName = "tf-example",
-    ///             ImageId = image.Apply(image =&gt; image.Images?[0]?.ImageId),
-    ///             InstanceTypes = 
-    ///             {
-    ///                 "SA1.SMALL1",
-    ///                 "SA2.SMALL1",
-    ///                 "SA2.SMALL2",
-    ///                 "SA2.SMALL4",
-    ///             },
-    ///             InstanceNameSettings = new Tencentcloud.As.Inputs.ScalingConfigInstanceNameSettingsArgs
-    ///             {
-    ///                 InstanceName = "test-ins-name",
-    ///             },
-    ///         });
-    ///         var exampleScalingGroup = new Tencentcloud.As.ScalingGroup("exampleScalingGroup", new Tencentcloud.As.ScalingGroupArgs
-    ///         {
-    ///             ScalingGroupName = "tf-example",
-    ///             ConfigurationId = exampleScalingConfig.Id,
-    ///             MaxSize = 4,
-    ///             MinSize = 0,
-    ///             DesiredCapacity = 2,
-    ///             VpcId = vpc.Id,
-    ///             SubnetIds = 
-    ///             {
-    ///                 subnet.Id,
-    ///             },
-    ///         });
-    ///         var scaleOutInstances = new Tencentcloud.As.ScaleOutInstances("scaleOutInstances", new Tencentcloud.As.ScaleOutInstancesArgs
-    ///         {
-    ///             AutoScalingGroupId = exampleScalingGroup.Id,
-    ///             ScaleOutNumber = 2,
-    ///         });
-    ///     }
+    ///         Product = "as",
+    ///     });
     /// 
-    /// }
+    ///     var image = Tencentcloud.Images.GetInstance.Invoke(new()
+    ///     {
+    ///         ImageTypes = new[]
+    ///         {
+    ///             "PUBLIC_IMAGE",
+    ///         },
+    ///         OsName = "TencentOS Server 3.2 (Final)",
+    ///     });
+    /// 
+    ///     var vpc = new Tencentcloud.Vpc.Instance("vpc", new()
+    ///     {
+    ///         CidrBlock = "10.0.0.0/16",
+    ///     });
+    /// 
+    ///     var subnet = new Tencentcloud.Subnet.Instance("subnet", new()
+    ///     {
+    ///         VpcId = vpc.Id,
+    ///         CidrBlock = "10.0.0.0/16",
+    ///         AvailabilityZone = zones.Apply(getZonesByProductResult =&gt; getZonesByProductResult.Zones[0]?.Name),
+    ///     });
+    /// 
+    ///     var exampleScalingConfig = new Tencentcloud.As.ScalingConfig("exampleScalingConfig", new()
+    ///     {
+    ///         ConfigurationName = "tf-example",
+    ///         ImageId = image.Apply(getInstanceResult =&gt; getInstanceResult.Images[0]?.ImageId),
+    ///         InstanceTypes = new[]
+    ///         {
+    ///             "SA1.SMALL1",
+    ///             "SA2.SMALL1",
+    ///             "SA2.SMALL2",
+    ///             "SA2.SMALL4",
+    ///         },
+    ///         InstanceNameSettings = new Tencentcloud.As.Inputs.ScalingConfigInstanceNameSettingsArgs
+    ///         {
+    ///             InstanceName = "test-ins-name",
+    ///         },
+    ///     });
+    /// 
+    ///     var exampleScalingGroup = new Tencentcloud.As.ScalingGroup("exampleScalingGroup", new()
+    ///     {
+    ///         ScalingGroupName = "tf-example",
+    ///         ConfigurationId = exampleScalingConfig.Id,
+    ///         MaxSize = 4,
+    ///         MinSize = 0,
+    ///         DesiredCapacity = 2,
+    ///         VpcId = vpc.Id,
+    ///         SubnetIds = new[]
+    ///         {
+    ///             subnet.Id,
+    ///         },
+    ///     });
+    /// 
+    ///     var scaleOutInstances = new Tencentcloud.As.ScaleOutInstances("scaleOutInstances", new()
+    ///     {
+    ///         AutoScalingGroupId = exampleScalingGroup.Id,
+    ///         ScaleOutNumber = 2,
+    ///     });
+    /// 
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// as scale_out_instances can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:As/scaleOutInstances:ScaleOutInstances scale_out_instances scale_out_instances_id
+    /// $ pulumi import tencentcloud:As/scaleOutInstances:ScaleOutInstances scale_out_instances scale_out_instances_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:As/scaleOutInstances:ScaleOutInstances")]
-    public partial class ScaleOutInstances : Pulumi.CustomResource
+    public partial class ScaleOutInstances : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Scaling group ID.
@@ -153,7 +160,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.As
         }
     }
 
-    public sealed class ScaleOutInstancesArgs : Pulumi.ResourceArgs
+    public sealed class ScaleOutInstancesArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Scaling group ID.
@@ -170,9 +177,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.As
         public ScaleOutInstancesArgs()
         {
         }
+        public static new ScaleOutInstancesArgs Empty => new ScaleOutInstancesArgs();
     }
 
-    public sealed class ScaleOutInstancesState : Pulumi.ResourceArgs
+    public sealed class ScaleOutInstancesState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Scaling group ID.
@@ -189,5 +197,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.As
         public ScaleOutInstancesState()
         {
         }
+        public static new ScaleOutInstancesState Empty => new ScaleOutInstancesState();
     }
 }

@@ -5,34 +5,86 @@ import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
 // Export members:
-export * from "./connection";
-export * from "./connectionReset";
-export * from "./customerGateway";
-export * from "./customerGatewayConfigurationDownload";
-export * from "./gateway";
-export * from "./gatewayCcnRoutes";
-export * from "./gatewayRoute";
-export * from "./gatewaySslClientCert";
-export * from "./getConnections";
-export * from "./getCustomerGatewayVendors";
-export * from "./getCustomerGateways";
-export * from "./getDefaultHealthCheckIp";
-export * from "./getGatewayRoutes";
-export * from "./getGateways";
-export * from "./sslClient";
-export * from "./sslServer";
+export { ConnectionArgs, ConnectionState } from "./connection";
+export type Connection = import("./connection").Connection;
+export const Connection: typeof import("./connection").Connection = null as any;
+utilities.lazyLoad(exports, ["Connection"], () => require("./connection"));
 
-// Import resources to register:
-import { Connection } from "./connection";
-import { ConnectionReset } from "./connectionReset";
-import { CustomerGateway } from "./customerGateway";
-import { CustomerGatewayConfigurationDownload } from "./customerGatewayConfigurationDownload";
-import { Gateway } from "./gateway";
-import { GatewayCcnRoutes } from "./gatewayCcnRoutes";
-import { GatewayRoute } from "./gatewayRoute";
-import { GatewaySslClientCert } from "./gatewaySslClientCert";
-import { SslClient } from "./sslClient";
-import { SslServer } from "./sslServer";
+export { ConnectionResetArgs, ConnectionResetState } from "./connectionReset";
+export type ConnectionReset = import("./connectionReset").ConnectionReset;
+export const ConnectionReset: typeof import("./connectionReset").ConnectionReset = null as any;
+utilities.lazyLoad(exports, ["ConnectionReset"], () => require("./connectionReset"));
+
+export { CustomerGatewayArgs, CustomerGatewayState } from "./customerGateway";
+export type CustomerGateway = import("./customerGateway").CustomerGateway;
+export const CustomerGateway: typeof import("./customerGateway").CustomerGateway = null as any;
+utilities.lazyLoad(exports, ["CustomerGateway"], () => require("./customerGateway"));
+
+export { CustomerGatewayConfigurationDownloadArgs, CustomerGatewayConfigurationDownloadState } from "./customerGatewayConfigurationDownload";
+export type CustomerGatewayConfigurationDownload = import("./customerGatewayConfigurationDownload").CustomerGatewayConfigurationDownload;
+export const CustomerGatewayConfigurationDownload: typeof import("./customerGatewayConfigurationDownload").CustomerGatewayConfigurationDownload = null as any;
+utilities.lazyLoad(exports, ["CustomerGatewayConfigurationDownload"], () => require("./customerGatewayConfigurationDownload"));
+
+export { GatewayArgs, GatewayState } from "./gateway";
+export type Gateway = import("./gateway").Gateway;
+export const Gateway: typeof import("./gateway").Gateway = null as any;
+utilities.lazyLoad(exports, ["Gateway"], () => require("./gateway"));
+
+export { GatewayCcnRoutesArgs, GatewayCcnRoutesState } from "./gatewayCcnRoutes";
+export type GatewayCcnRoutes = import("./gatewayCcnRoutes").GatewayCcnRoutes;
+export const GatewayCcnRoutes: typeof import("./gatewayCcnRoutes").GatewayCcnRoutes = null as any;
+utilities.lazyLoad(exports, ["GatewayCcnRoutes"], () => require("./gatewayCcnRoutes"));
+
+export { GatewayRouteArgs, GatewayRouteState } from "./gatewayRoute";
+export type GatewayRoute = import("./gatewayRoute").GatewayRoute;
+export const GatewayRoute: typeof import("./gatewayRoute").GatewayRoute = null as any;
+utilities.lazyLoad(exports, ["GatewayRoute"], () => require("./gatewayRoute"));
+
+export { GatewaySslClientCertArgs, GatewaySslClientCertState } from "./gatewaySslClientCert";
+export type GatewaySslClientCert = import("./gatewaySslClientCert").GatewaySslClientCert;
+export const GatewaySslClientCert: typeof import("./gatewaySslClientCert").GatewaySslClientCert = null as any;
+utilities.lazyLoad(exports, ["GatewaySslClientCert"], () => require("./gatewaySslClientCert"));
+
+export { GetConnectionsArgs, GetConnectionsResult, GetConnectionsOutputArgs } from "./getConnections";
+export const getConnections: typeof import("./getConnections").getConnections = null as any;
+export const getConnectionsOutput: typeof import("./getConnections").getConnectionsOutput = null as any;
+utilities.lazyLoad(exports, ["getConnections","getConnectionsOutput"], () => require("./getConnections"));
+
+export { GetCustomerGatewayVendorsArgs, GetCustomerGatewayVendorsResult, GetCustomerGatewayVendorsOutputArgs } from "./getCustomerGatewayVendors";
+export const getCustomerGatewayVendors: typeof import("./getCustomerGatewayVendors").getCustomerGatewayVendors = null as any;
+export const getCustomerGatewayVendorsOutput: typeof import("./getCustomerGatewayVendors").getCustomerGatewayVendorsOutput = null as any;
+utilities.lazyLoad(exports, ["getCustomerGatewayVendors","getCustomerGatewayVendorsOutput"], () => require("./getCustomerGatewayVendors"));
+
+export { GetCustomerGatewaysArgs, GetCustomerGatewaysResult, GetCustomerGatewaysOutputArgs } from "./getCustomerGateways";
+export const getCustomerGateways: typeof import("./getCustomerGateways").getCustomerGateways = null as any;
+export const getCustomerGatewaysOutput: typeof import("./getCustomerGateways").getCustomerGatewaysOutput = null as any;
+utilities.lazyLoad(exports, ["getCustomerGateways","getCustomerGatewaysOutput"], () => require("./getCustomerGateways"));
+
+export { GetDefaultHealthCheckIpArgs, GetDefaultHealthCheckIpResult, GetDefaultHealthCheckIpOutputArgs } from "./getDefaultHealthCheckIp";
+export const getDefaultHealthCheckIp: typeof import("./getDefaultHealthCheckIp").getDefaultHealthCheckIp = null as any;
+export const getDefaultHealthCheckIpOutput: typeof import("./getDefaultHealthCheckIp").getDefaultHealthCheckIpOutput = null as any;
+utilities.lazyLoad(exports, ["getDefaultHealthCheckIp","getDefaultHealthCheckIpOutput"], () => require("./getDefaultHealthCheckIp"));
+
+export { GetGatewayRoutesArgs, GetGatewayRoutesResult, GetGatewayRoutesOutputArgs } from "./getGatewayRoutes";
+export const getGatewayRoutes: typeof import("./getGatewayRoutes").getGatewayRoutes = null as any;
+export const getGatewayRoutesOutput: typeof import("./getGatewayRoutes").getGatewayRoutesOutput = null as any;
+utilities.lazyLoad(exports, ["getGatewayRoutes","getGatewayRoutesOutput"], () => require("./getGatewayRoutes"));
+
+export { GetGatewaysArgs, GetGatewaysResult, GetGatewaysOutputArgs } from "./getGateways";
+export const getGateways: typeof import("./getGateways").getGateways = null as any;
+export const getGatewaysOutput: typeof import("./getGateways").getGatewaysOutput = null as any;
+utilities.lazyLoad(exports, ["getGateways","getGatewaysOutput"], () => require("./getGateways"));
+
+export { SslClientArgs, SslClientState } from "./sslClient";
+export type SslClient = import("./sslClient").SslClient;
+export const SslClient: typeof import("./sslClient").SslClient = null as any;
+utilities.lazyLoad(exports, ["SslClient"], () => require("./sslClient"));
+
+export { SslServerArgs, SslServerState } from "./sslServer";
+export type SslServer = import("./sslServer").SslServer;
+export const SslServer: typeof import("./sslServer").SslServer = null as any;
+utilities.lazyLoad(exports, ["SslServer"], () => require("./sslServer"));
+
 
 const _module = {
     version: utilities.getVersion(),

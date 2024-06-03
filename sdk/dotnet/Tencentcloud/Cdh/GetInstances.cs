@@ -15,72 +15,66 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cdh
         /// <summary>
         /// Use this data source to query CDH instances.
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var list = Tencentcloud.Cdh.GetInstances.Invoke(new()
         ///     {
-        ///         var list = Output.Create(Tencentcloud.Cdh.GetInstances.InvokeAsync(new Tencentcloud.Cdh.GetInstancesArgs
-        ///         {
-        ///             AvailabilityZone = "ap-guangzhou-3",
-        ///             HostId = "host-d6s7i5q4",
-        ///             HostName = "test",
-        ///             HostState = "RUNNING",
-        ///             ProjectId = 1154137,
-        ///         }));
-        ///     }
+        ///         AvailabilityZone = "ap-guangzhou-3",
+        ///         HostId = "host-d6s7i5q4",
+        ///         HostName = "test",
+        ///         HostState = "RUNNING",
+        ///         ProjectId = 1154137,
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetInstancesResult> InvokeAsync(GetInstancesArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetInstancesResult>("tencentcloud:Cdh/getInstances:getInstances", args ?? new GetInstancesArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetInstancesResult>("tencentcloud:Cdh/getInstances:getInstances", args ?? new GetInstancesArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query CDH instances.
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var list = Tencentcloud.Cdh.GetInstances.Invoke(new()
         ///     {
-        ///         var list = Output.Create(Tencentcloud.Cdh.GetInstances.InvokeAsync(new Tencentcloud.Cdh.GetInstancesArgs
-        ///         {
-        ///             AvailabilityZone = "ap-guangzhou-3",
-        ///             HostId = "host-d6s7i5q4",
-        ///             HostName = "test",
-        ///             HostState = "RUNNING",
-        ///             ProjectId = 1154137,
-        ///         }));
-        ///     }
+        ///         AvailabilityZone = "ap-guangzhou-3",
+        ///         HostId = "host-d6s7i5q4",
+        ///         HostName = "test",
+        ///         HostState = "RUNNING",
+        ///         ProjectId = 1154137,
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetInstancesResult> Invoke(GetInstancesInvokeArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetInstancesResult>("tencentcloud:Cdh/getInstances:getInstances", args ?? new GetInstancesInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetInstancesResult>("tencentcloud:Cdh/getInstances:getInstances", args ?? new GetInstancesInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetInstancesArgs : Pulumi.InvokeArgs
+    public sealed class GetInstancesArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// The available zone that the CDH instance locates at.
@@ -121,9 +115,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cdh
         public GetInstancesArgs()
         {
         }
+        public static new GetInstancesArgs Empty => new GetInstancesArgs();
     }
 
-    public sealed class GetInstancesInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetInstancesInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// The available zone that the CDH instance locates at.
@@ -164,6 +159,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cdh
         public GetInstancesInvokeArgs()
         {
         }
+        public static new GetInstancesInvokeArgs Empty => new GetInstancesInvokeArgs();
     }
 
 

@@ -9,23 +9,22 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const sign = pulumi.output(tencentcloud.Rum.getSign({
+ * const sign = tencentcloud.Rum.getSign({
  *     fileType: 1,
  *     timeout: 1800,
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getSign(args?: GetSignArgs, opts?: pulumi.InvokeOptions): Promise<GetSignResult> {
     args = args || {};
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Rum/getSign:getSign", {
         "fileType": args.fileType,
         "resultOutputFile": args.resultOutputFile,
@@ -83,9 +82,25 @@ export interface GetSignResult {
     readonly startTime: number;
     readonly timeout?: number;
 }
-
+/**
+ * Use this data source to query detailed information of rum sign
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const sign = tencentcloud.Rum.getSign({
+ *     fileType: 1,
+ *     timeout: 1800,
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getSignOutput(args?: GetSignOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetSignResult> {
-    return pulumi.output(args).apply(a => getSign(a, opts))
+    return pulumi.output(args).apply((a: any) => getSign(a, opts))
 }
 
 /**

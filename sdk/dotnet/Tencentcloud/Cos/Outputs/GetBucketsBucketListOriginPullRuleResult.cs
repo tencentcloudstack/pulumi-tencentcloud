@@ -14,14 +14,41 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos.Outputs
     [OutputType]
     public sealed class GetBucketsBucketListOriginPullRuleResult
     {
+        /// <summary>
+        /// Specifies the custom headers that you can add for COS to access your origin server.
+        /// </summary>
         public readonly ImmutableDictionary<string, object>? CustomHttpHeaders;
+        /// <summary>
+        /// Specifies the pass through headers when accessing the origin server.
+        /// </summary>
         public readonly ImmutableArray<string> FollowHttpHeaders;
+        /// <summary>
+        /// Specifies whether to pass through COS request query string when accessing the origin server.
+        /// </summary>
         public readonly bool? FollowQueryString;
+        /// <summary>
+        /// Specifies whether to follow 3XX redirect to another origin server to pull data from.
+        /// </summary>
         public readonly bool? FollowRedirection;
+        /// <summary>
+        /// Allows only a domain name or IP address. You can optionally append a port number to the address.
+        /// </summary>
         public readonly string Host;
+        /// <summary>
+        /// Triggers the origin-pull rule when the requested file name matches this prefix.
+        /// </summary>
         public readonly string? Prefix;
+        /// <summary>
+        /// Priority of origin-pull rules, do not set the same value for multiple rules.
+        /// </summary>
         public readonly int Priority;
+        /// <summary>
+        /// the protocol used for COS to access the specified origin server. The available value include `HTTP`, `HTTPS` and `FOLLOW`.
+        /// </summary>
         public readonly string? Protocol;
+        /// <summary>
+        /// If `true`, COS will not return 3XX status code when pulling data from an origin server. Currently available zone: ap-beijing, ap-shanghai, ap-singapore, ap-mumbai.
+        /// </summary>
         public readonly bool? SyncBackToSource;
 
         [OutputConstructor]

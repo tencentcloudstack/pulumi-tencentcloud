@@ -15,34 +15,35 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ci
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var foo = new Tencentcloud.Ci.Guetzli("foo", new()
     ///     {
-    ///         var foo = new Tencentcloud.Ci.Guetzli("foo", new Tencentcloud.Ci.GuetzliArgs
-    ///         {
-    ///             Bucket = "examplebucket-1250000000",
-    ///             Status = "on",
-    ///         });
-    ///     }
+    ///         Bucket = "examplebucket-1250000000",
+    ///         Status = "on",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// Resource guetzli can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Ci/guetzli:Guetzli example examplebucket-1250000000
+    /// $ pulumi import tencentcloud:Ci/guetzli:Guetzli example examplebucket-1250000000
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Ci/guetzli:Guetzli")]
-    public partial class Guetzli : Pulumi.CustomResource
+    public partial class Guetzli : global::Pulumi.CustomResource
     {
         /// <summary>
         /// The name of a bucket, the format should be [custom name]-[appid], for example `mycos-1258798060`.
@@ -101,7 +102,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ci
         }
     }
 
-    public sealed class GuetzliArgs : Pulumi.ResourceArgs
+    public sealed class GuetzliArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// The name of a bucket, the format should be [custom name]-[appid], for example `mycos-1258798060`.
@@ -118,9 +119,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ci
         public GuetzliArgs()
         {
         }
+        public static new GuetzliArgs Empty => new GuetzliArgs();
     }
 
-    public sealed class GuetzliState : Pulumi.ResourceArgs
+    public sealed class GuetzliState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// The name of a bucket, the format should be [custom name]-[appid], for example `mycos-1258798060`.
@@ -137,5 +139,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ci
         public GuetzliState()
         {
         }
+        public static new GuetzliState Empty => new GuetzliState();
     }
 }

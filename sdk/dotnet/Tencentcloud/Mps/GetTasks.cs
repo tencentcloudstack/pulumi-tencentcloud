@@ -15,66 +15,60 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps
         /// <summary>
         /// Use this data source to query detailed information of mps tasks
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var tasks = Tencentcloud.Mps.GetTasks.Invoke(new()
         ///     {
-        ///         var tasks = Output.Create(Tencentcloud.Mps.GetTasks.InvokeAsync(new Tencentcloud.Mps.GetTasksArgs
-        ///         {
-        ///             Limit = 20,
-        ///             Status = "FINISH",
-        ///         }));
-        ///     }
+        ///         Limit = 20,
+        ///         Status = "FINISH",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetTasksResult> InvokeAsync(GetTasksArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetTasksResult>("tencentcloud:Mps/getTasks:getTasks", args ?? new GetTasksArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetTasksResult>("tencentcloud:Mps/getTasks:getTasks", args ?? new GetTasksArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of mps tasks
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var tasks = Tencentcloud.Mps.GetTasks.Invoke(new()
         ///     {
-        ///         var tasks = Output.Create(Tencentcloud.Mps.GetTasks.InvokeAsync(new Tencentcloud.Mps.GetTasksArgs
-        ///         {
-        ///             Limit = 20,
-        ///             Status = "FINISH",
-        ///         }));
-        ///     }
+        ///         Limit = 20,
+        ///         Status = "FINISH",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetTasksResult> Invoke(GetTasksInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetTasksResult>("tencentcloud:Mps/getTasks:getTasks", args ?? new GetTasksInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetTasksResult>("tencentcloud:Mps/getTasks:getTasks", args ?? new GetTasksInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetTasksArgs : Pulumi.InvokeArgs
+    public sealed class GetTasksArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Return the number of records, default value: 10, maximum value: 100.
@@ -103,9 +97,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps
         public GetTasksArgs()
         {
         }
+        public static new GetTasksArgs Empty => new GetTasksArgs();
     }
 
-    public sealed class GetTasksInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetTasksInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Return the number of records, default value: 10, maximum value: 100.
@@ -134,6 +129,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps
         public GetTasksInvokeArgs()
         {
         }
+        public static new GetTasksInvokeArgs Empty => new GetTasksInvokeArgs();
     }
 
 

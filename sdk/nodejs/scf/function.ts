@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,11 +11,12 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const foo = new tencentcloud.Scf.Function("foo", {
+ * const foo = new tencentcloud.scf.Function("foo", {
  *     cosBucketName: "scf-code-1234567890",
  *     cosBucketRegion: "ap-guangzhou",
  *     cosObjectName: "code.zip",
@@ -22,13 +24,16 @@ import * as utilities from "../utilities";
  *     runtime: "Python3.6",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
+ *
  * ### Using Zip file
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const foo = new tencentcloud.Scf.Function("foo", {
+ * const foo = new tencentcloud.scf.Function("foo", {
  *     dnsCache: true,
  *     enablePublicNet: true,
  *     handler: "first.do_it_first",
@@ -44,13 +49,16 @@ import * as utilities from "../utilities";
  *     zipFile: "/scf/first.zip",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
+ *
  * ### Using CFS config
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const foo = new tencentcloud.Scf.Function("foo", {
+ * const foo = new tencentcloud.scf.Function("foo", {
  *     cfsConfigs: [{
  *         cfsId: "cfs-xxxxxxxx",
  *         localMountDir: "/mnt",
@@ -63,13 +71,16 @@ import * as utilities from "../utilities";
  *     runtime: "Python3.6",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
+ *
  * ### Using triggers
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const foo = new tencentcloud.Scf.Function("foo", {
+ * const foo = new tencentcloud.scf.Function("foo", {
  *     enablePublicNet: true,
  *     handler: "first.do_it_first",
  *     runtime: "Python3.6",
@@ -89,13 +100,16 @@ import * as utilities from "../utilities";
  *     zipFile: "/scf/first.zip",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * SCF function can be imported, e.g.
  *
+ * -> __NOTE:__ function id is `<function namespace>+<function name>`
+ *
  * ```sh
- *  $ pulumi import tencentcloud:Scf/function:Function test default+test
+ * $ pulumi import tencentcloud:Scf/function:Function test default+test
  * ```
  */
 export class Function extends pulumi.CustomResource {
@@ -202,6 +216,10 @@ export class Function extends pulumi.CustomResource {
      * Function type. The default value is Event. Enter Event if you need to create a trigger function. Enter HTTP if you need to create an HTTP function service.
      */
     public readonly funcType!: pulumi.Output<string | undefined>;
+    /**
+     * function ID.
+     */
+    public /*out*/ readonly functionId!: pulumi.Output<string>;
     /**
      * Handler of the SCF function. The format of name is `<filename>.<method_name>`, and it supports 26 English letters, numbers, connectors, and underscores, it should start with a letter. The last character cannot be `-` or `_`. Available length is 2-60.
      */
@@ -327,6 +345,7 @@ export class Function extends pulumi.CustomResource {
             resourceInputs["environment"] = state ? state.environment : undefined;
             resourceInputs["errNo"] = state ? state.errNo : undefined;
             resourceInputs["funcType"] = state ? state.funcType : undefined;
+            resourceInputs["functionId"] = state ? state.functionId : undefined;
             resourceInputs["handler"] = state ? state.handler : undefined;
             resourceInputs["host"] = state ? state.host : undefined;
             resourceInputs["imageConfigs"] = state ? state.imageConfigs : undefined;
@@ -387,6 +406,7 @@ export class Function extends pulumi.CustomResource {
             resourceInputs["eipFixed"] = undefined /*out*/;
             resourceInputs["eips"] = undefined /*out*/;
             resourceInputs["errNo"] = undefined /*out*/;
+            resourceInputs["functionId"] = undefined /*out*/;
             resourceInputs["host"] = undefined /*out*/;
             resourceInputs["installDependency"] = undefined /*out*/;
             resourceInputs["modifyTime"] = undefined /*out*/;
@@ -480,6 +500,10 @@ export interface FunctionState {
      * Function type. The default value is Event. Enter Event if you need to create a trigger function. Enter HTTP if you need to create an HTTP function service.
      */
     funcType?: pulumi.Input<string>;
+    /**
+     * function ID.
+     */
+    functionId?: pulumi.Input<string>;
     /**
      * Handler of the SCF function. The format of name is `<filename>.<method_name>`, and it supports 26 English letters, numbers, connectors, and underscores, it should start with a letter. The last character cannot be `-` or `_`. Available length is 2-60.
      */

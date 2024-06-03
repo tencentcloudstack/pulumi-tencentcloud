@@ -18,7 +18,6 @@ from .export import *
 from .get_machine_group_configs import *
 from .get_machines import *
 from .get_shipper_tasks import *
-from .index import *
 from .kafka_recharge import *
 from .logset import *
 from .machine_group import *

@@ -15,64 +15,58 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dcdb
         /// <summary>
         /// Use this data source to query detailed information of dcdb parameters
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var parameters = Tencentcloud.Dcdb.GetParameters.Invoke(new()
         ///     {
-        ///         var parameters = Output.Create(Tencentcloud.Dcdb.GetParameters.InvokeAsync(new Tencentcloud.Dcdb.GetParametersArgs
-        ///         {
-        ///             InstanceId = "your_instance_id",
-        ///         }));
-        ///     }
+        ///         InstanceId = "your_instance_id",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetParametersResult> InvokeAsync(GetParametersArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetParametersResult>("tencentcloud:Dcdb/getParameters:getParameters", args ?? new GetParametersArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetParametersResult>("tencentcloud:Dcdb/getParameters:getParameters", args ?? new GetParametersArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of dcdb parameters
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var parameters = Tencentcloud.Dcdb.GetParameters.Invoke(new()
         ///     {
-        ///         var parameters = Output.Create(Tencentcloud.Dcdb.GetParameters.InvokeAsync(new Tencentcloud.Dcdb.GetParametersArgs
-        ///         {
-        ///             InstanceId = "your_instance_id",
-        ///         }));
-        ///     }
+        ///         InstanceId = "your_instance_id",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetParametersResult> Invoke(GetParametersInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetParametersResult>("tencentcloud:Dcdb/getParameters:getParameters", args ?? new GetParametersInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetParametersResult>("tencentcloud:Dcdb/getParameters:getParameters", args ?? new GetParametersInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetParametersArgs : Pulumi.InvokeArgs
+    public sealed class GetParametersArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// instance id.
@@ -89,9 +83,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dcdb
         public GetParametersArgs()
         {
         }
+        public static new GetParametersArgs Empty => new GetParametersArgs();
     }
 
-    public sealed class GetParametersInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetParametersInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// instance id.
@@ -108,6 +103,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dcdb
         public GetParametersInvokeArgs()
         {
         }
+        public static new GetParametersInvokeArgs Empty => new GetParametersInvokeArgs();
     }
 
 

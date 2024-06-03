@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps.Inputs
 {
 
-    public sealed class ScheduleActivityActivityParaSampleSnapshotTaskWatermarkSetRawParameterImageTemplateArgs : Pulumi.ResourceArgs
+    public sealed class ScheduleActivityActivityParaSampleSnapshotTaskWatermarkSetRawParameterImageTemplateArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Watermark height. % and px formats are supported: If the string ends in %, the `Height` of the watermark will be the specified percentage of the video height; for example, `10%` means that `Height` is 10% of the video height; If the string ends in px, the `Height` of the watermark will be in px; for example, `100px` means that `Height` is 100 px.Default value: 0 px, which means that `Height` will be proportionally scaled according to the aspect ratio of the original watermark image.
@@ -40,5 +40,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps.Inputs
         public ScheduleActivityActivityParaSampleSnapshotTaskWatermarkSetRawParameterImageTemplateArgs()
         {
         }
+        public static new ScheduleActivityActivityParaSampleSnapshotTaskWatermarkSetRawParameterImageTemplateArgs Empty => new ScheduleActivityActivityParaSampleSnapshotTaskWatermarkSetRawParameterImageTemplateArgs();
     }
 }

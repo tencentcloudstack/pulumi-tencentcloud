@@ -9,29 +9,32 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = new tencentcloud.Dasb.UserGroup("example", {});
+ * const example = new tencentcloud.dasb.UserGroup("example", {});
  * ```
+ * <!--End PulumiCodeChooser -->
+ *
  * ### Or
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = new tencentcloud.Dasb.UserGroup("example", {
- *     departmentId: "1.2",
- * });
+ * const example = new tencentcloud.dasb.UserGroup("example", {departmentId: "1.2"});
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * dasb user_group can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Dasb/userGroup:UserGroup example 16
+ * $ pulumi import tencentcloud:Dasb/userGroup:UserGroup example 16
  * ```
  */
 export class UserGroup extends pulumi.CustomResource {

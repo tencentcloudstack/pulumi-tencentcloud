@@ -15,66 +15,60 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tse
         /// <summary>
         /// Use this data source to query detailed information of tse gateway_nodes
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var gatewayNodes = Tencentcloud.Tse.GetGatewayNodes.Invoke(new()
         ///     {
-        ///         var gatewayNodes = Output.Create(Tencentcloud.Tse.GetGatewayNodes.InvokeAsync(new Tencentcloud.Tse.GetGatewayNodesArgs
-        ///         {
-        ///             GatewayId = "gateway-ddbb709b",
-        ///             GroupId = "group-013c0d8e",
-        ///         }));
-        ///     }
+        ///         GatewayId = "gateway-ddbb709b",
+        ///         GroupId = "group-013c0d8e",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetGatewayNodesResult> InvokeAsync(GetGatewayNodesArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetGatewayNodesResult>("tencentcloud:Tse/getGatewayNodes:getGatewayNodes", args ?? new GetGatewayNodesArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetGatewayNodesResult>("tencentcloud:Tse/getGatewayNodes:getGatewayNodes", args ?? new GetGatewayNodesArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of tse gateway_nodes
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var gatewayNodes = Tencentcloud.Tse.GetGatewayNodes.Invoke(new()
         ///     {
-        ///         var gatewayNodes = Output.Create(Tencentcloud.Tse.GetGatewayNodes.InvokeAsync(new Tencentcloud.Tse.GetGatewayNodesArgs
-        ///         {
-        ///             GatewayId = "gateway-ddbb709b",
-        ///             GroupId = "group-013c0d8e",
-        ///         }));
-        ///     }
+        ///         GatewayId = "gateway-ddbb709b",
+        ///         GroupId = "group-013c0d8e",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetGatewayNodesResult> Invoke(GetGatewayNodesInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetGatewayNodesResult>("tencentcloud:Tse/getGatewayNodes:getGatewayNodes", args ?? new GetGatewayNodesInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetGatewayNodesResult>("tencentcloud:Tse/getGatewayNodes:getGatewayNodes", args ?? new GetGatewayNodesInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetGatewayNodesArgs : Pulumi.InvokeArgs
+    public sealed class GetGatewayNodesArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// gateway ID.
@@ -97,9 +91,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tse
         public GetGatewayNodesArgs()
         {
         }
+        public static new GetGatewayNodesArgs Empty => new GetGatewayNodesArgs();
     }
 
-    public sealed class GetGatewayNodesInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetGatewayNodesInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// gateway ID.
@@ -122,6 +117,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tse
         public GetGatewayNodesInvokeArgs()
         {
         }
+        public static new GetGatewayNodesInvokeArgs Empty => new GetGatewayNodesInvokeArgs();
     }
 
 

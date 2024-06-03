@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb.Inputs
 {
 
-    public sealed class ClusterRoGroupAddrGetArgs : Pulumi.ResourceArgs
+    public sealed class ClusterRoGroupAddrGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// IP address for read-write connection.
@@ -28,5 +28,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb.Inputs
         public ClusterRoGroupAddrGetArgs()
         {
         }
+        public static new ClusterRoGroupAddrGetArgs Empty => new ClusterRoGroupAddrGetArgs();
     }
 }

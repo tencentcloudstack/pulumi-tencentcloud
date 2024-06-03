@@ -14,254 +14,271 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
     /// Provides a resource to create a CLB listener.
     /// 
     /// ## Example Usage
+    /// 
     /// ### HTTP Listener
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var hTTPListener = new Tencentcloud.Clb.Listener("hTTPListener", new()
     ///     {
-    ///         var hTTPListener = new Tencentcloud.Clb.Listener("hTTPListener", new Tencentcloud.Clb.ListenerArgs
-    ///         {
-    ///             ClbId = "lb-0lh5au7v",
-    ///             ListenerName = "test_listener",
-    ///             Port = 80,
-    ///             Protocol = "HTTP",
-    ///         });
-    ///     }
+    ///         ClbId = "lb-0lh5au7v",
+    ///         ListenerName = "test_listener",
+    ///         Port = 80,
+    ///         Protocol = "HTTP",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
+    /// 
     /// ### TCP/UDP Listener
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var tCPListener = new Tencentcloud.Clb.Listener("tCPListener", new()
     ///     {
-    ///         var tCPListener = new Tencentcloud.Clb.Listener("tCPListener", new Tencentcloud.Clb.ListenerArgs
-    ///         {
-    ///             ClbId = "lb-0lh5au7v",
-    ///             HealthCheckHealthNum = 3,
-    ///             HealthCheckHttpCode = 2,
-    ///             HealthCheckHttpMethod = "GET",
-    ///             HealthCheckHttpVersion = "HTTP/1.0",
-    ///             HealthCheckIntervalTime = 5,
-    ///             HealthCheckPort = 200,
-    ///             HealthCheckSwitch = true,
-    ///             HealthCheckTimeOut = 2,
-    ///             HealthCheckType = "HTTP",
-    ///             HealthCheckUnhealthNum = 3,
-    ///             ListenerName = "test_listener",
-    ///             Port = 80,
-    ///             Protocol = "TCP",
-    ///             Scheduler = "WRR",
-    ///             SessionExpireTime = 30,
-    ///         });
-    ///     }
+    ///         ClbId = "lb-0lh5au7v",
+    ///         HealthCheckHealthNum = 3,
+    ///         HealthCheckHttpCode = 2,
+    ///         HealthCheckHttpMethod = "GET",
+    ///         HealthCheckHttpVersion = "HTTP/1.0",
+    ///         HealthCheckIntervalTime = 5,
+    ///         HealthCheckPort = 200,
+    ///         HealthCheckSwitch = true,
+    ///         HealthCheckTimeOut = 2,
+    ///         HealthCheckType = "HTTP",
+    ///         HealthCheckUnhealthNum = 3,
+    ///         ListenerName = "test_listener",
+    ///         Port = 80,
+    ///         Protocol = "TCP",
+    ///         Scheduler = "WRR",
+    ///         SessionExpireTime = 30,
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
+    /// 
     /// ### TCP/UDP Listener with tcp health check
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var listenerTcp = new Tencentcloud.Clb.Listener("listenerTcp", new()
     ///     {
-    ///         var listenerTcp = new Tencentcloud.Clb.Listener("listenerTcp", new Tencentcloud.Clb.ListenerArgs
-    ///         {
-    ///             ClbId = tencentcloud_clb_instance.Clb_basic.Id,
-    ///             ListenerName = "listener_tcp",
-    ///             Port = 44,
-    ///             Protocol = "TCP",
-    ///             HealthCheckSwitch = true,
-    ///             HealthCheckTimeOut = 30,
-    ///             HealthCheckIntervalTime = 100,
-    ///             HealthCheckHealthNum = 2,
-    ///             HealthCheckUnhealthNum = 2,
-    ///             SessionExpireTime = 30,
-    ///             Scheduler = "WRR",
-    ///             HealthCheckType = "TCP",
-    ///             HealthCheckPort = 200,
-    ///         });
-    ///     }
+    ///         ClbId = tencentcloud_clb_instance.Clb_basic.Id,
+    ///         ListenerName = "listener_tcp",
+    ///         Port = 44,
+    ///         Protocol = "TCP",
+    ///         HealthCheckSwitch = true,
+    ///         HealthCheckTimeOut = 30,
+    ///         HealthCheckIntervalTime = 100,
+    ///         HealthCheckHealthNum = 2,
+    ///         HealthCheckUnhealthNum = 2,
+    ///         SessionExpireTime = 30,
+    ///         Scheduler = "WRR",
+    ///         HealthCheckType = "TCP",
+    ///         HealthCheckPort = 200,
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
+    /// 
     /// ### TCP/UDP Listener with http health check
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var listenerTcp = new Tencentcloud.Clb.Listener("listenerTcp", new()
     ///     {
-    ///         var listenerTcp = new Tencentcloud.Clb.Listener("listenerTcp", new Tencentcloud.Clb.ListenerArgs
-    ///         {
-    ///             ClbId = tencentcloud_clb_instance.Clb_basic.Id,
-    ///             ListenerName = "listener_tcp",
-    ///             Port = 44,
-    ///             Protocol = "TCP",
-    ///             HealthCheckSwitch = true,
-    ///             HealthCheckTimeOut = 30,
-    ///             HealthCheckIntervalTime = 100,
-    ///             HealthCheckHealthNum = 2,
-    ///             HealthCheckUnhealthNum = 2,
-    ///             SessionExpireTime = 30,
-    ///             Scheduler = "WRR",
-    ///             HealthCheckType = "HTTP",
-    ///             HealthCheckHttpDomain = "www.tencent.com",
-    ///             HealthCheckHttpCode = 16,
-    ///             HealthCheckHttpVersion = "HTTP/1.1",
-    ///             HealthCheckHttpMethod = "HEAD",
-    ///             HealthCheckHttpPath = "/",
-    ///         });
-    ///     }
+    ///         ClbId = tencentcloud_clb_instance.Clb_basic.Id,
+    ///         ListenerName = "listener_tcp",
+    ///         Port = 44,
+    ///         Protocol = "TCP",
+    ///         HealthCheckSwitch = true,
+    ///         HealthCheckTimeOut = 30,
+    ///         HealthCheckIntervalTime = 100,
+    ///         HealthCheckHealthNum = 2,
+    ///         HealthCheckUnhealthNum = 2,
+    ///         SessionExpireTime = 30,
+    ///         Scheduler = "WRR",
+    ///         HealthCheckType = "HTTP",
+    ///         HealthCheckHttpDomain = "www.tencent.com",
+    ///         HealthCheckHttpCode = 16,
+    ///         HealthCheckHttpVersion = "HTTP/1.1",
+    ///         HealthCheckHttpMethod = "HEAD",
+    ///         HealthCheckHttpPath = "/",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
+    /// 
     /// ### TCP/UDP Listener with customer health check
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var listenerTcp = new Tencentcloud.Clb.Listener("listenerTcp", new()
     ///     {
-    ///         var listenerTcp = new Tencentcloud.Clb.Listener("listenerTcp", new Tencentcloud.Clb.ListenerArgs
-    ///         {
-    ///             ClbId = tencentcloud_clb_instance.Clb_basic.Id,
-    ///             ListenerName = "listener_tcp",
-    ///             Port = 44,
-    ///             Protocol = "TCP",
-    ///             HealthCheckSwitch = true,
-    ///             HealthCheckTimeOut = 30,
-    ///             HealthCheckIntervalTime = 100,
-    ///             HealthCheckHealthNum = 2,
-    ///             HealthCheckUnhealthNum = 2,
-    ///             SessionExpireTime = 30,
-    ///             Scheduler = "WRR",
-    ///             HealthCheckType = "CUSTOM",
-    ///             HealthCheckContextType = "HEX",
-    ///             HealthCheckSendContext = "0123456789ABCDEF",
-    ///             HealthCheckRecvContext = "ABCD",
-    ///             TargetType = "TARGETGROUP",
-    ///         });
-    ///     }
+    ///         ClbId = tencentcloud_clb_instance.Clb_basic.Id,
+    ///         ListenerName = "listener_tcp",
+    ///         Port = 44,
+    ///         Protocol = "TCP",
+    ///         HealthCheckSwitch = true,
+    ///         HealthCheckTimeOut = 30,
+    ///         HealthCheckIntervalTime = 100,
+    ///         HealthCheckHealthNum = 2,
+    ///         HealthCheckUnhealthNum = 2,
+    ///         SessionExpireTime = 30,
+    ///         Scheduler = "WRR",
+    ///         HealthCheckType = "CUSTOM",
+    ///         HealthCheckContextType = "HEX",
+    ///         HealthCheckSendContext = "0123456789ABCDEF",
+    ///         HealthCheckRecvContext = "ABCD",
+    ///         TargetType = "TARGETGROUP",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
+    /// 
     /// ### HTTPS Listener
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var hTTPSListener = new Tencentcloud.Clb.Listener("hTTPSListener", new()
     ///     {
-    ///         var hTTPSListener = new Tencentcloud.Clb.Listener("hTTPSListener", new Tencentcloud.Clb.ListenerArgs
-    ///         {
-    ///             CertificateCaId = "VfqO4zkB",
-    ///             CertificateId = "VjANRdz8",
-    ///             CertificateSslMode = "MUTUAL",
-    ///             ClbId = "lb-0lh5au7v",
-    ///             ListenerName = "test_listener",
-    ///             Port = 80,
-    ///             Protocol = "HTTPS",
-    ///             SniSwitch = true,
-    ///         });
-    ///     }
+    ///         CertificateCaId = "VfqO4zkB",
+    ///         CertificateId = "VjANRdz8",
+    ///         CertificateSslMode = "MUTUAL",
+    ///         ClbId = "lb-0lh5au7v",
+    ///         ListenerName = "test_listener",
+    ///         Port = 80,
+    ///         Protocol = "HTTPS",
+    ///         SniSwitch = true,
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
+    /// 
     /// ### TCP SSL Listener
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var tCPSSLListener = new Tencentcloud.Clb.Listener("tCPSSLListener", new()
     ///     {
-    ///         var tCPSSLListener = new Tencentcloud.Clb.Listener("tCPSSLListener", new Tencentcloud.Clb.ListenerArgs
-    ///         {
-    ///             CertificateCaId = "VfqO4zkB",
-    ///             CertificateId = "VjANRdz8",
-    ///             CertificateSslMode = "MUTUAL",
-    ///             ClbId = "lb-0lh5au7v",
-    ///             HealthCheckHealthNum = 3,
-    ///             HealthCheckIntervalTime = 5,
-    ///             HealthCheckSwitch = true,
-    ///             HealthCheckTimeOut = 2,
-    ///             HealthCheckUnhealthNum = 3,
-    ///             ListenerName = "test_listener",
-    ///             Port = 80,
-    ///             Protocol = "TCP_SSL",
-    ///             Scheduler = "WRR",
-    ///             TargetType = "TARGETGROUP",
-    ///         });
-    ///     }
+    ///         CertificateCaId = "VfqO4zkB",
+    ///         CertificateId = "VjANRdz8",
+    ///         CertificateSslMode = "MUTUAL",
+    ///         ClbId = "lb-0lh5au7v",
+    ///         HealthCheckHealthNum = 3,
+    ///         HealthCheckIntervalTime = 5,
+    ///         HealthCheckSwitch = true,
+    ///         HealthCheckTimeOut = 2,
+    ///         HealthCheckUnhealthNum = 3,
+    ///         ListenerName = "test_listener",
+    ///         Port = 80,
+    ///         Protocol = "TCP_SSL",
+    ///         Scheduler = "WRR",
+    ///         TargetType = "TARGETGROUP",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
+    /// 
     /// ### Port Range Listener
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var clbBasic = new Tencentcloud.Clb.Instance("clbBasic", new()
     ///     {
-    ///         var clbBasic = new Tencentcloud.Clb.Instance("clbBasic", new Tencentcloud.Clb.InstanceArgs
-    ///         {
-    ///             NetworkType = "OPEN",
-    ///             ClbName = "tf-listener-test",
-    ///         });
-    ///         var listenerBasic = new Tencentcloud.Clb.Listener("listenerBasic", new Tencentcloud.Clb.ListenerArgs
-    ///         {
-    ///             ClbId = clbBasic.Id,
-    ///             Port = 1,
-    ///             EndPort = 6,
-    ///             Protocol = "TCP",
-    ///             ListenerName = "listener_basic",
-    ///             SessionExpireTime = 30,
-    ///             Scheduler = "WRR",
-    ///             TargetType = "NODE",
-    ///         });
-    ///     }
+    ///         NetworkType = "OPEN",
+    ///         ClbName = "tf-listener-test",
+    ///     });
     /// 
-    /// }
+    ///     var listenerBasic = new Tencentcloud.Clb.Listener("listenerBasic", new()
+    ///     {
+    ///         ClbId = clbBasic.Id,
+    ///         Port = 1,
+    ///         EndPort = 6,
+    ///         Protocol = "TCP",
+    ///         ListenerName = "listener_basic",
+    ///         SessionExpireTime = 30,
+    ///         Scheduler = "WRR",
+    ///         TargetType = "NODE",
+    ///     });
+    /// 
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// CLB listener can be imported using the id (version &gt;= 1.47.0), e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Clb/listener:Listener foo lb-7a0t6zqb#lbl-hh141sn9
+    /// $ pulumi import tencentcloud:Clb/listener:Listener foo lb-7a0t6zqb#lbl-hh141sn9
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Clb/listener:Listener")]
-    public partial class Listener : Pulumi.CustomResource
+    public partial class Listener : global::Pulumi.CustomResource
     {
         /// <summary>
         /// ID of the client certificate. NOTES: Only supports listeners of `HTTPS` and `TCP_SSL` protocol and must be set when the ssl mode is `MUTUAL`.
@@ -494,7 +511,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
         }
     }
 
-    public sealed class ListenerArgs : Pulumi.ResourceArgs
+    public sealed class ListenerArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// ID of the client certificate. NOTES: Only supports listeners of `HTTPS` and `TCP_SSL` protocol and must be set when the ssl mode is `MUTUAL`.
@@ -679,9 +696,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
         public ListenerArgs()
         {
         }
+        public static new ListenerArgs Empty => new ListenerArgs();
     }
 
-    public sealed class ListenerState : Pulumi.ResourceArgs
+    public sealed class ListenerState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// ID of the client certificate. NOTES: Only supports listeners of `HTTPS` and `TCP_SSL` protocol and must be set when the ssl mode is `MUTUAL`.
@@ -872,5 +890,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
         public ListenerState()
         {
         }
+        public static new ListenerState Empty => new ListenerState();
     }
 }

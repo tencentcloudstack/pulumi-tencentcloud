@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ci.Inputs
 {
 
-    public sealed class MediaAnimationTemplateVideoGetArgs : Pulumi.ResourceArgs
+    public sealed class MediaAnimationTemplateVideoGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Animation per second frame number, Priority: AnimateFramesPerSecond &amp;gt; AnimateOnlyKeepKeyFrame &amp;gt; AnimateTimeIntervalOfFrame.
@@ -64,5 +64,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ci.Inputs
         public MediaAnimationTemplateVideoGetArgs()
         {
         }
+        public static new MediaAnimationTemplateVideoGetArgs Empty => new MediaAnimationTemplateVideoGetArgs();
     }
 }

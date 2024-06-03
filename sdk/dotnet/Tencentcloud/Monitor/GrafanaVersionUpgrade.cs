@@ -15,34 +15,35 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var grafanaVersionUpgrade = new Tencentcloud.Monitor.GrafanaVersionUpgrade("grafanaVersionUpgrade", new()
     ///     {
-    ///         var grafanaVersionUpgrade = new Tencentcloud.Monitor.GrafanaVersionUpgrade("grafanaVersionUpgrade", new Tencentcloud.Monitor.GrafanaVersionUpgradeArgs
-    ///         {
-    ///             Alias = "v8.2.7",
-    ///             InstanceId = "grafana-dp2hnnfa",
-    ///         });
-    ///     }
+    ///         Alias = "v8.2.7",
+    ///         InstanceId = "grafana-dp2hnnfa",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// monitor grafana_version_upgrade can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Monitor/grafanaVersionUpgrade:GrafanaVersionUpgrade grafana_version_upgrade instance_id
+    /// $ pulumi import tencentcloud:Monitor/grafanaVersionUpgrade:GrafanaVersionUpgrade grafana_version_upgrade instance_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Monitor/grafanaVersionUpgrade:GrafanaVersionUpgrade")]
-    public partial class GrafanaVersionUpgrade : Pulumi.CustomResource
+    public partial class GrafanaVersionUpgrade : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Version alias.
@@ -101,7 +102,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
         }
     }
 
-    public sealed class GrafanaVersionUpgradeArgs : Pulumi.ResourceArgs
+    public sealed class GrafanaVersionUpgradeArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Version alias.
@@ -118,9 +119,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
         public GrafanaVersionUpgradeArgs()
         {
         }
+        public static new GrafanaVersionUpgradeArgs Empty => new GrafanaVersionUpgradeArgs();
     }
 
-    public sealed class GrafanaVersionUpgradeState : Pulumi.ResourceArgs
+    public sealed class GrafanaVersionUpgradeState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Version alias.
@@ -137,5 +139,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
         public GrafanaVersionUpgradeState()
         {
         }
+        public static new GrafanaVersionUpgradeState Empty => new GrafanaVersionUpgradeState();
     }
 }

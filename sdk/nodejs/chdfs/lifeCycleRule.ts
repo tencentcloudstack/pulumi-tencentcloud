@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,11 +11,12 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const lifeCycleRule = new tencentcloud.Chdfs.LifeCycleRule("life_cycle_rule", {
+ * const lifeCycleRule = new tencentcloud.chdfs.LifeCycleRule("lifeCycleRule", {
  *     fileSystemId: "f14mpfy5lh4e",
  *     lifeCycleRule: {
  *         lifeCycleRuleName: "terraform-test",
@@ -27,13 +29,14 @@ import * as utilities from "../utilities";
  *     },
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * chdfs life_cycle_rule can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Chdfs/lifeCycleRule:LifeCycleRule life_cycle_rule file_system_id#life_cycle_rule_id
+ * $ pulumi import tencentcloud:Chdfs/lifeCycleRule:LifeCycleRule life_cycle_rule file_system_id#life_cycle_rule_id
  * ```
  */
 export class LifeCycleRule extends pulumi.CustomResource {

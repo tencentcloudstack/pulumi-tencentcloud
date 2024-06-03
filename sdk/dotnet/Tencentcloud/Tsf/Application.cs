@@ -15,49 +15,50 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var application = new Tencentcloud.Tsf.Application("application", new()
     ///     {
-    ///         var application = new Tencentcloud.Tsf.Application("application", new Tencentcloud.Tsf.ApplicationArgs
+    ///         ApplicationDesc = "This is my application",
+    ///         ApplicationName = "my-app",
+    ///         ApplicationRuntimeType = "Java",
+    ///         ApplicationType = "C",
+    ///         IgnoreCreateImageRepository = true,
+    ///         MicroserviceType = "M",
+    ///         ServiceConfigLists = new[]
     ///         {
-    ///             ApplicationDesc = "This is my application",
-    ///             ApplicationName = "my-app",
-    ///             ApplicationRuntimeType = "Java",
-    ///             ApplicationType = "C",
-    ///             IgnoreCreateImageRepository = true,
-    ///             MicroserviceType = "M",
-    ///             ServiceConfigLists = 
+    ///             new Tencentcloud.Tsf.Inputs.ApplicationServiceConfigListArgs
     ///             {
-    ///                 new Tencentcloud.Tsf.Inputs.ApplicationServiceConfigListArgs
+    ///                 HealthCheck = new Tencentcloud.Tsf.Inputs.ApplicationServiceConfigListHealthCheckArgs
     ///                 {
-    ///                     HealthCheck = new Tencentcloud.Tsf.Inputs.ApplicationServiceConfigListHealthCheckArgs
+    ///                     Path = "/health",
+    ///                 },
+    ///                 Name = "my-service",
+    ///                 Ports = new[]
+    ///                 {
+    ///                     new Tencentcloud.Tsf.Inputs.ApplicationServiceConfigListPortArgs
     ///                     {
-    ///                         Path = "/health",
-    ///                     },
-    ///                     Name = "my-service",
-    ///                     Ports = 
-    ///                     {
-    ///                         new Tencentcloud.Tsf.Inputs.ApplicationServiceConfigListPortArgs
-    ///                         {
-    ///                             Protocol = "HTTP",
-    ///                             TargetPort = 8080,
-    ///                         },
+    ///                         Protocol = "HTTP",
+    ///                         TargetPort = 8080,
     ///                     },
     ///                 },
     ///             },
-    ///         });
-    ///     }
+    ///         },
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Tsf/application:Application")]
-    public partial class Application : Pulumi.CustomResource
+    public partial class Application : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Application description.
@@ -170,7 +171,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf
         }
     }
 
-    public sealed class ApplicationArgs : Pulumi.ResourceArgs
+    public sealed class ApplicationArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Application description.
@@ -253,9 +254,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf
         public ApplicationArgs()
         {
         }
+        public static new ApplicationArgs Empty => new ApplicationArgs();
     }
 
-    public sealed class ApplicationState : Pulumi.ResourceArgs
+    public sealed class ApplicationState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Application description.
@@ -338,5 +340,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf
         public ApplicationState()
         {
         }
+        public static new ApplicationState Empty => new ApplicationState();
     }
 }

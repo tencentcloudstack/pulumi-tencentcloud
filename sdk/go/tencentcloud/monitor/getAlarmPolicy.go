@@ -8,11 +8,57 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Use this data source to query detailed information of monitor alarmPolicy
+//
+// ## Example Usage
+//
+// <!--Start PulumiCodeChooser -->
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Monitor"
+//
+// )
+// func main() {
+// pulumi.Run(func(ctx *pulumi.Context) error {
+// _, err := Monitor.GetAlarmPolicy(ctx, &monitor.GetAlarmPolicyArgs{
+// Enables: interface{}{
+// 1,
+// },
+// Module: "monitor",
+// MonitorTypes: []string{
+// "MT_QCE",
+// },
+// Namespaces: []string{
+// "cvm_device",
+// },
+// NoticeIds: []string{
+// "notice-f2svbu3w",
+// },
+// PolicyName: pulumi.StringRef("terraform"),
+// ProjectIds: interface{}{
+// 0,
+// },
+// RuleTypes: []string{
+// "STATIC",
+// },
+// }, nil);
+// if err != nil {
+// return err
+// }
+// return nil
+// })
+// }
+// ```
+// <!--End PulumiCodeChooser -->
 func LookupAlarmPolicy(ctx *pulumi.Context, args *LookupAlarmPolicyArgs, opts ...pulumi.InvokeOption) (*LookupAlarmPolicyResult, error) {
-	opts = pkgInvokeDefaultOpts(opts)
+	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv LookupAlarmPolicyResult
 	err := ctx.Invoke("tencentcloud:Monitor/getAlarmPolicy:getAlarmPolicy", args, &rv, opts...)
 	if err != nil {

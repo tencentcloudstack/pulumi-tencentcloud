@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dayu
 {
     [TencentcloudResourceType("tencentcloud:Dayu/l4RuleV2:L4RuleV2")]
-    public partial class L4RuleV2 : Pulumi.CustomResource
+    public partial class L4RuleV2 : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Business of the resource that the layer 4 rule works for. Valid values: `bgpip` and `net`.
@@ -88,7 +88,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dayu
         }
     }
 
-    public sealed class L4RuleV2Args : Pulumi.ResourceArgs
+    public sealed class L4RuleV2Args : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Business of the resource that the layer 4 rule works for. Valid values: `bgpip` and `net`.
@@ -123,9 +123,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dayu
         public L4RuleV2Args()
         {
         }
+        public static new L4RuleV2Args Empty => new L4RuleV2Args();
     }
 
-    public sealed class L4RuleV2State : Pulumi.ResourceArgs
+    public sealed class L4RuleV2State : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Business of the resource that the layer 4 rule works for. Valid values: `bgpip` and `net`.
@@ -160,5 +161,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dayu
         public L4RuleV2State()
         {
         }
+        public static new L4RuleV2State Empty => new L4RuleV2State();
     }
 }

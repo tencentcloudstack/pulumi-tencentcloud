@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dts.Inputs
 {
 
-    public sealed class GetMigrateJobsTagFilterArgs : Pulumi.InvokeArgs
+    public sealed class GetMigrateJobsTagFilterArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// tag key.
@@ -28,5 +28,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dts.Inputs
         public GetMigrateJobsTagFilterArgs()
         {
         }
+        public static new GetMigrateJobsTagFilterArgs Empty => new GetMigrateJobsTagFilterArgs();
     }
 }

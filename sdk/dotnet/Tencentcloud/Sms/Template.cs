@@ -14,31 +14,33 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sms
     /// Provides a resource to create a sms template
     /// 
     /// ## Example Usage
+    /// 
     /// ### Create a sms template
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var template = new Tencentcloud.Sms.Template("template", new()
     ///     {
-    ///         var template = new Tencentcloud.Sms.Template("template", new Tencentcloud.Sms.TemplateArgs
-    ///         {
-    ///             International = 0,
-    ///             Remark = "terraform example",
-    ///             SmsType = 0,
-    ///             TemplateContent = "example for sms template",
-    ///             TemplateName = "tf_example_sms_template",
-    ///         });
-    ///     }
+    ///         International = 0,
+    ///         Remark = "terraform example",
+    ///         SmsType = 0,
+    ///         TemplateContent = "example for sms template",
+    ///         TemplateName = "tf_example_sms_template",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Sms/template:Template")]
-    public partial class Template : Pulumi.CustomResource
+    public partial class Template : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Whether it is Global SMS: 0: Mainland China SMS; 1: Global SMS.
@@ -115,7 +117,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sms
         }
     }
 
-    public sealed class TemplateArgs : Pulumi.ResourceArgs
+    public sealed class TemplateArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Whether it is Global SMS: 0: Mainland China SMS; 1: Global SMS.
@@ -150,9 +152,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sms
         public TemplateArgs()
         {
         }
+        public static new TemplateArgs Empty => new TemplateArgs();
     }
 
-    public sealed class TemplateState : Pulumi.ResourceArgs
+    public sealed class TemplateState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Whether it is Global SMS: 0: Mainland China SMS; 1: Global SMS.
@@ -187,5 +190,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sms
         public TemplateState()
         {
         }
+        public static new TemplateState Empty => new TemplateState();
     }
 }

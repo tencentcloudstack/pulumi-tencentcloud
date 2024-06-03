@@ -14,79 +14,19 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpn
     {
         /// <summary>
         /// Use this data source to query detailed information of VPN gateways.
-        /// 
-        /// {{% examples %}}
-        /// ## Example Usage
-        /// {{% example %}}
-        /// 
-        /// ```csharp
-        /// using Pulumi;
-        /// using Tencentcloud = Pulumi.Tencentcloud;
-        /// 
-        /// class MyStack : Stack
-        /// {
-        ///     public MyStack()
-        ///     {
-        ///         var foo = Output.Create(Tencentcloud.Vpn.GetGateways.InvokeAsync(new Tencentcloud.Vpn.GetGatewaysArgs
-        ///         {
-        ///             DestinationCidrBlock = "vpngw-8ccsnclt",
-        ///             InstanceId = "ap-guangzhou-3",
-        ///             InstanceType = "1.1.1.1",
-        ///             Tags = 
-        ///             {
-        ///                 { "test", "tf" },
-        ///             },
-        ///             VpnGatewayId = "main",
-        ///         }));
-        ///     }
-        /// 
-        /// }
-        /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
         /// </summary>
         public static Task<GetGatewayRoutesResult> InvokeAsync(GetGatewayRoutesArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetGatewayRoutesResult>("tencentcloud:Vpn/getGatewayRoutes:getGatewayRoutes", args ?? new GetGatewayRoutesArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetGatewayRoutesResult>("tencentcloud:Vpn/getGatewayRoutes:getGatewayRoutes", args ?? new GetGatewayRoutesArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of VPN gateways.
-        /// 
-        /// {{% examples %}}
-        /// ## Example Usage
-        /// {{% example %}}
-        /// 
-        /// ```csharp
-        /// using Pulumi;
-        /// using Tencentcloud = Pulumi.Tencentcloud;
-        /// 
-        /// class MyStack : Stack
-        /// {
-        ///     public MyStack()
-        ///     {
-        ///         var foo = Output.Create(Tencentcloud.Vpn.GetGateways.InvokeAsync(new Tencentcloud.Vpn.GetGatewaysArgs
-        ///         {
-        ///             DestinationCidrBlock = "vpngw-8ccsnclt",
-        ///             InstanceId = "ap-guangzhou-3",
-        ///             InstanceType = "1.1.1.1",
-        ///             Tags = 
-        ///             {
-        ///                 { "test", "tf" },
-        ///             },
-        ///             VpnGatewayId = "main",
-        ///         }));
-        ///     }
-        /// 
-        /// }
-        /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
         /// </summary>
         public static Output<GetGatewayRoutesResult> Invoke(GetGatewayRoutesInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetGatewayRoutesResult>("tencentcloud:Vpn/getGatewayRoutes:getGatewayRoutes", args ?? new GetGatewayRoutesInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetGatewayRoutesResult>("tencentcloud:Vpn/getGatewayRoutes:getGatewayRoutes", args ?? new GetGatewayRoutesInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetGatewayRoutesArgs : Pulumi.InvokeArgs
+    public sealed class GetGatewayRoutesArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Destination IDC IP range.
@@ -121,9 +61,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpn
         public GetGatewayRoutesArgs()
         {
         }
+        public static new GetGatewayRoutesArgs Empty => new GetGatewayRoutesArgs();
     }
 
-    public sealed class GetGatewayRoutesInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetGatewayRoutesInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Destination IDC IP range.
@@ -158,6 +99,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpn
         public GetGatewayRoutesInvokeArgs()
         {
         }
+        public static new GetGatewayRoutesInvokeArgs Empty => new GetGatewayRoutesInvokeArgs();
     }
 
 

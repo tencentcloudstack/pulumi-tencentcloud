@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Inputs
 {
 
-    public sealed class ZoneSettingCompressionGetArgs : Pulumi.ResourceArgs
+    public sealed class ZoneSettingCompressionGetArgs : global::Pulumi.ResourceArgs
     {
         [Input("algorithms")]
         private InputList<string>? _algorithms;
@@ -26,7 +26,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Inputs
         }
 
         /// <summary>
-        /// Whether to enable Smart compression.- `on`: Enable.- `off`: Disable.
+        /// Whether to enable Smart compression.
         /// </summary>
         [Input("switch", required: true)]
         public Input<string> Switch { get; set; } = null!;
@@ -34,5 +34,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Inputs
         public ZoneSettingCompressionGetArgs()
         {
         }
+        public static new ZoneSettingCompressionGetArgs Empty => new ZoneSettingCompressionGetArgs();
     }
 }

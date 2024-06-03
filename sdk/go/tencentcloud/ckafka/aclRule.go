@@ -7,55 +7,60 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a ckafka aclRule
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Ckafka"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ckafka"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ckafka"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Ckafka.NewAclRule(ctx, "aclRule", &Ckafka.AclRuleArgs{
-// 			InstanceId:   pulumi.String("ckafka-xxx"),
-// 			IsApplied:    pulumi.Int(1),
-// 			Pattern:      pulumi.String("prefix"),
-// 			PatternType:  pulumi.String("PREFIXED"),
-// 			ResourceType: pulumi.String("Topic"),
-// 			RuleLists: ckafka.AclRuleRuleListArray{
-// 				&ckafka.AclRuleRuleListArgs{
-// 					Host:           pulumi.String("*"),
-// 					Operation:      pulumi.String("All"),
-// 					PermissionType: pulumi.String("Deny"),
-// 					Principal:      pulumi.String("User:*"),
-// 				},
-// 			},
-// 			RuleName: pulumi.String("RuleName"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Ckafka.NewAclRule(ctx, "aclRule", &Ckafka.AclRuleArgs{
+//				InstanceId:   pulumi.String("ckafka-xxx"),
+//				IsApplied:    pulumi.Int(1),
+//				Pattern:      pulumi.String("prefix"),
+//				PatternType:  pulumi.String("PREFIXED"),
+//				ResourceType: pulumi.String("Topic"),
+//				RuleLists: ckafka.AclRuleRuleListArray{
+//					&ckafka.AclRuleRuleListArgs{
+//						Host:           pulumi.String("*"),
+//						Operation:      pulumi.String("All"),
+//						PermissionType: pulumi.String("Deny"),
+//						Principal:      pulumi.String("User:*"),
+//					},
+//				},
+//				RuleName: pulumi.String("RuleName"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // ckafka acl_rule can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Ckafka/aclRule:AclRule acl_rule acl_rule_id
+// $ pulumi import tencentcloud:Ckafka/aclRule:AclRule acl_rule acl_rule_id
 // ```
 type AclRule struct {
 	pulumi.CustomResourceState
@@ -98,7 +103,7 @@ func NewAclRule(ctx *pulumi.Context,
 	if args.RuleName == nil {
 		return nil, errors.New("invalid value for required argument 'RuleName'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource AclRule
 	err := ctx.RegisterResource("tencentcloud:Ckafka/aclRule:AclRule", name, args, &resource, opts...)
 	if err != nil {
@@ -219,7 +224,7 @@ func (i *AclRule) ToAclRuleOutputWithContext(ctx context.Context) AclRuleOutput 
 // AclRuleArrayInput is an input type that accepts AclRuleArray and AclRuleArrayOutput values.
 // You can construct a concrete instance of `AclRuleArrayInput` via:
 //
-//          AclRuleArray{ AclRuleArgs{...} }
+//	AclRuleArray{ AclRuleArgs{...} }
 type AclRuleArrayInput interface {
 	pulumi.Input
 
@@ -244,7 +249,7 @@ func (i AclRuleArray) ToAclRuleArrayOutputWithContext(ctx context.Context) AclRu
 // AclRuleMapInput is an input type that accepts AclRuleMap and AclRuleMapOutput values.
 // You can construct a concrete instance of `AclRuleMapInput` via:
 //
-//          AclRuleMap{ "key": AclRuleArgs{...} }
+//	AclRuleMap{ "key": AclRuleArgs{...} }
 type AclRuleMapInput interface {
 	pulumi.Input
 

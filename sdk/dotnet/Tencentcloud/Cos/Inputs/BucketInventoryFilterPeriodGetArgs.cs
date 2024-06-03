@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos.Inputs
 {
 
-    public sealed class BucketInventoryFilterPeriodGetArgs : Pulumi.ResourceArgs
+    public sealed class BucketInventoryFilterPeriodGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Creation end time of the objects to analyze. The parameter is a timestamp in seconds, for example, 1568688762.
@@ -28,5 +28,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos.Inputs
         public BucketInventoryFilterPeriodGetArgs()
         {
         }
+        public static new BucketInventoryFilterPeriodGetArgs Empty => new BucketInventoryFilterPeriodGetArgs();
     }
 }

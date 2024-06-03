@@ -7,35 +7,41 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a redis upgradeMultiZoneOperation
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Redis"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Redis"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Redis.NewUpgradeMultiZoneOperation(ctx, "upgradeMultiZoneOperation", &Redis.UpgradeMultiZoneOperationArgs{
-// 			InstanceId:                 pulumi.String("crs-c1nl9rpv"),
-// 			UpgradeProxyAndRedisServer: pulumi.Bool(true),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Redis.NewUpgradeMultiZoneOperation(ctx, "upgradeMultiZoneOperation", &Redis.UpgradeMultiZoneOperationArgs{
+//				InstanceId:                 pulumi.String("crs-c1nl9rpv"),
+//				UpgradeProxyAndRedisServer: pulumi.Bool(true),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 type UpgradeMultiZoneOperation struct {
 	pulumi.CustomResourceState
 
@@ -55,7 +61,7 @@ func NewUpgradeMultiZoneOperation(ctx *pulumi.Context,
 	if args.InstanceId == nil {
 		return nil, errors.New("invalid value for required argument 'InstanceId'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource UpgradeMultiZoneOperation
 	err := ctx.RegisterResource("tencentcloud:Redis/upgradeMultiZoneOperation:UpgradeMultiZoneOperation", name, args, &resource, opts...)
 	if err != nil {
@@ -136,7 +142,7 @@ func (i *UpgradeMultiZoneOperation) ToUpgradeMultiZoneOperationOutputWithContext
 // UpgradeMultiZoneOperationArrayInput is an input type that accepts UpgradeMultiZoneOperationArray and UpgradeMultiZoneOperationArrayOutput values.
 // You can construct a concrete instance of `UpgradeMultiZoneOperationArrayInput` via:
 //
-//          UpgradeMultiZoneOperationArray{ UpgradeMultiZoneOperationArgs{...} }
+//	UpgradeMultiZoneOperationArray{ UpgradeMultiZoneOperationArgs{...} }
 type UpgradeMultiZoneOperationArrayInput interface {
 	pulumi.Input
 
@@ -161,7 +167,7 @@ func (i UpgradeMultiZoneOperationArray) ToUpgradeMultiZoneOperationArrayOutputWi
 // UpgradeMultiZoneOperationMapInput is an input type that accepts UpgradeMultiZoneOperationMap and UpgradeMultiZoneOperationMapOutput values.
 // You can construct a concrete instance of `UpgradeMultiZoneOperationMapInput` via:
 //
-//          UpgradeMultiZoneOperationMap{ "key": UpgradeMultiZoneOperationArgs{...} }
+//	UpgradeMultiZoneOperationMap{ "key": UpgradeMultiZoneOperationArgs{...} }
 type UpgradeMultiZoneOperationMapInput interface {
 	pulumi.Input
 

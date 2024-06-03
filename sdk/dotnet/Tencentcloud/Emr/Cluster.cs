@@ -15,122 +15,127 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Emr
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = Pulumi.Tencentcloud;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var config = new Config();
+    ///     var availabilityZone = config.Get("availabilityZone") ?? "ap-guangzhou-3";
+    ///     var cvm4c8m = Tencentcloud.Instance.GetTypes.Invoke(new()
     ///     {
-    ///         var config = new Config();
-    ///         var availabilityZone = config.Get("availabilityZone") ?? "ap-guangzhou-3";
-    ///         var cvm4c8m = Output.Create(Tencentcloud.Instance.GetTypes.InvokeAsync(new Tencentcloud.Instance.GetTypesArgs
+    ///         ExcludeSoldOut = true,
+    ///         CpuCoreCount = 4,
+    ///         MemorySize = 8,
+    ///         Filters = new[]
     ///         {
-    ///             ExcludeSoldOut = true,
-    ///             CpuCoreCount = 4,
-    ///             MemorySize = 8,
-    ///             Filters = 
+    ///             new Tencentcloud.Instance.Inputs.GetTypesFilterInputArgs
     ///             {
-    ///                 new Tencentcloud.Instance.Inputs.GetTypesFilterArgs
+    ///                 Name = "instance-charge-type",
+    ///                 Values = new[]
     ///                 {
-    ///                     Name = "instance-charge-type",
-    ///                     Values = 
-    ///                     {
-    ///                         "POSTPAID_BY_HOUR",
-    ///                     },
-    ///                 },
-    ///                 new Tencentcloud.Instance.Inputs.GetTypesFilterArgs
-    ///                 {
-    ///                     Name = "zone",
-    ///                     Values = 
-    ///                     {
-    ///                         availabilityZone,
-    ///                     },
+    ///                     "POSTPAID_BY_HOUR",
     ///                 },
     ///             },
-    ///         }));
-    ///         var emrVpc = new Tencentcloud.Vpc.Instance("emrVpc", new Tencentcloud.Vpc.InstanceArgs
-    ///         {
-    ///             CidrBlock = "10.0.0.0/16",
-    ///         });
-    ///         var emrSubnet = new Tencentcloud.Subnet.Instance("emrSubnet", new Tencentcloud.Subnet.InstanceArgs
-    ///         {
-    ///             AvailabilityZone = availabilityZone,
-    ///             VpcId = emrVpc.Id,
-    ///             CidrBlock = "10.0.20.0/28",
-    ///             IsMulticast = false,
-    ///         });
-    ///         var emrSg = new Tencentcloud.Security.Group("emrSg", new Tencentcloud.Security.GroupArgs
-    ///         {
-    ///             Description = "emr sg",
-    ///             ProjectId = 0,
-    ///         });
-    ///         var emrCluster = new Tencentcloud.Emr.Cluster("emrCluster", new Tencentcloud.Emr.ClusterArgs
-    ///         {
-    ///             ProductId = 38,
-    ///             VpcSettings = 
+    ///             new Tencentcloud.Instance.Inputs.GetTypesFilterInputArgs
     ///             {
-    ///                 { "vpc_id", emrVpc.Id },
-    ///                 { "subnet_id", emrSubnet.Id },
-    ///             },
-    ///             Softwares = 
-    ///             {
-    ///                 "hdfs-2.8.5",
-    ///                 "knox-1.6.1",
-    ///                 "openldap-2.4.44",
-    ///                 "yarn-2.8.5",
-    ///                 "zookeeper-3.6.3",
-    ///             },
-    ///             SupportHa = 0,
-    ///             InstanceName = "emr-cluster-test",
-    ///             ResourceSpec = new Tencentcloud.Emr.Inputs.ClusterResourceSpecArgs
-    ///             {
-    ///                 MasterResourceSpec = new Tencentcloud.Emr.Inputs.ClusterResourceSpecMasterResourceSpecArgs
+    ///                 Name = "zone",
+    ///                 Values = new[]
     ///                 {
-    ///                     MemSize = 8192,
-    ///                     Cpu = 4,
-    ///                     DiskSize = 100,
-    ///                     DiskType = "CLOUD_PREMIUM",
-    ///                     Spec = cvm4c8m.Apply(cvm4c8m =&gt; $"CVM.{cvm4c8m.InstanceTypes?[0]?.Family}"),
-    ///                     StorageType = 5,
-    ///                     RootSize = 50,
+    ///                     availabilityZone,
     ///                 },
-    ///                 CoreResourceSpec = new Tencentcloud.Emr.Inputs.ClusterResourceSpecCoreResourceSpecArgs
-    ///                 {
-    ///                     MemSize = 8192,
-    ///                     Cpu = 4,
-    ///                     DiskSize = 100,
-    ///                     DiskType = "CLOUD_PREMIUM",
-    ///                     Spec = cvm4c8m.Apply(cvm4c8m =&gt; $"CVM.{cvm4c8m.InstanceTypes?[0]?.Family}"),
-    ///                     StorageType = 5,
-    ///                     RootSize = 50,
-    ///                 },
-    ///                 MasterCount = 1,
-    ///                 CoreCount = 2,
     ///             },
-    ///             LoginSettings = 
-    ///             {
-    ///                 { "password", "Tencent@cloud123" },
-    ///             },
-    ///             TimeSpan = 3600,
-    ///             TimeUnit = "s",
-    ///             PayMode = 0,
-    ///             PlacementInfo = new Tencentcloud.Emr.Inputs.ClusterPlacementInfoArgs
-    ///             {
-    ///                 Zone = availabilityZone,
-    ///                 ProjectId = 0,
-    ///             },
-    ///             SgId = emrSg.Id,
-    ///         });
-    ///     }
+    ///         },
+    ///     });
     /// 
-    /// }
+    ///     var emrVpc = new Tencentcloud.Vpc.Instance("emrVpc", new()
+    ///     {
+    ///         CidrBlock = "10.0.0.0/16",
+    ///     });
+    /// 
+    ///     var emrSubnet = new Tencentcloud.Subnet.Instance("emrSubnet", new()
+    ///     {
+    ///         AvailabilityZone = availabilityZone,
+    ///         VpcId = emrVpc.Id,
+    ///         CidrBlock = "10.0.20.0/28",
+    ///         IsMulticast = false,
+    ///     });
+    /// 
+    ///     var emrSg = new Tencentcloud.Security.Group("emrSg", new()
+    ///     {
+    ///         Description = "emr sg",
+    ///         ProjectId = 0,
+    ///     });
+    /// 
+    ///     var emrCluster = new Tencentcloud.Emr.Cluster("emrCluster", new()
+    ///     {
+    ///         ProductId = 38,
+    ///         VpcSettings = 
+    ///         {
+    ///             { "vpc_id", emrVpc.Id },
+    ///             { "subnet_id", emrSubnet.Id },
+    ///         },
+    ///         Softwares = new[]
+    ///         {
+    ///             "hdfs-2.8.5",
+    ///             "knox-1.6.1",
+    ///             "openldap-2.4.44",
+    ///             "yarn-2.8.5",
+    ///             "zookeeper-3.6.3",
+    ///         },
+    ///         SupportHa = 0,
+    ///         InstanceName = "emr-cluster-test",
+    ///         ResourceSpec = new Tencentcloud.Emr.Inputs.ClusterResourceSpecArgs
+    ///         {
+    ///             MasterResourceSpec = new Tencentcloud.Emr.Inputs.ClusterResourceSpecMasterResourceSpecArgs
+    ///             {
+    ///                 MemSize = 8192,
+    ///                 Cpu = 4,
+    ///                 DiskSize = 100,
+    ///                 DiskType = "CLOUD_PREMIUM",
+    ///                 Spec = $"CVM.{cvm4c8m.Apply(getTypesResult =&gt; getTypesResult.InstanceTypes[0]?.Family)}",
+    ///                 StorageType = 5,
+    ///                 RootSize = 50,
+    ///             },
+    ///             CoreResourceSpec = new Tencentcloud.Emr.Inputs.ClusterResourceSpecCoreResourceSpecArgs
+    ///             {
+    ///                 MemSize = 8192,
+    ///                 Cpu = 4,
+    ///                 DiskSize = 100,
+    ///                 DiskType = "CLOUD_PREMIUM",
+    ///                 Spec = $"CVM.{cvm4c8m.Apply(getTypesResult =&gt; getTypesResult.InstanceTypes[0]?.Family)}",
+    ///                 StorageType = 5,
+    ///                 RootSize = 50,
+    ///             },
+    ///             MasterCount = 1,
+    ///             CoreCount = 2,
+    ///         },
+    ///         LoginSettings = 
+    ///         {
+    ///             { "password", "Tencent@cloud123" },
+    ///         },
+    ///         TimeSpan = 3600,
+    ///         TimeUnit = "s",
+    ///         PayMode = 0,
+    ///         PlacementInfo = new Tencentcloud.Emr.Inputs.ClusterPlacementInfoArgs
+    ///         {
+    ///             Zone = availabilityZone,
+    ///             ProjectId = 0,
+    ///         },
+    ///         SgId = emrSg.Id,
+    ///     });
+    /// 
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Emr/cluster:Cluster")]
-    public partial class Cluster : Pulumi.CustomResource
+    public partial class Cluster : global::Pulumi.CustomResource
     {
         /// <summary>
         /// It will be deprecated in later versions. Display strategy of EMR instance.
@@ -157,7 +162,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Emr
         public Output<string> InstanceName { get; private set; } = null!;
 
         /// <summary>
-        /// Instance login settings.
+        /// Instance login settings. There are two optional fields:- password: Instance login password: 8-16 characters, including uppercase letters, lowercase letters, numbers and special characters. Special symbols only support! @% ^ *. The first bit of the password cannot be a special character;- public_key_id: Public key id. After the key is associated, the instance can be accessed through the corresponding private key.
         /// </summary>
         [Output("loginSettings")]
         public Output<ImmutableDictionary<string, object>?> LoginSettings { get; private set; } = null!;
@@ -280,6 +285,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Emr
             {
                 Version = Utilities.Version,
                 PluginDownloadURL = "github://api.github.com/tencentcloudstack",
+                AdditionalSecretOutputs =
+                {
+                    "loginSettings",
+                },
             };
             var merged = CustomResourceOptions.Merge(defaultOptions, options);
             // Override the ID if one was specified for consistency with other language SDKs.
@@ -301,7 +310,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Emr
         }
     }
 
-    public sealed class ClusterArgs : Pulumi.ResourceArgs
+    public sealed class ClusterArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// It will be deprecated in later versions. Display strategy of EMR instance.
@@ -325,12 +334,16 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Emr
         private InputMap<object>? _loginSettings;
 
         /// <summary>
-        /// Instance login settings.
+        /// Instance login settings. There are two optional fields:- password: Instance login password: 8-16 characters, including uppercase letters, lowercase letters, numbers and special characters. Special symbols only support! @% ^ *. The first bit of the password cannot be a special character;- public_key_id: Public key id. After the key is associated, the instance can be accessed through the corresponding private key.
         /// </summary>
         public InputMap<object> LoginSettings
         {
             get => _loginSettings ?? (_loginSettings = new InputMap<object>());
-            set => _loginSettings = value;
+            set
+            {
+                var emptySecret = Output.CreateSecret(ImmutableDictionary.Create<string, object>());
+                _loginSettings = Output.All(value, emptySecret).Apply(v => v[0]);
+            }
         }
 
         /// <summary>
@@ -455,9 +468,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Emr
         public ClusterArgs()
         {
         }
+        public static new ClusterArgs Empty => new ClusterArgs();
     }
 
-    public sealed class ClusterState : Pulumi.ResourceArgs
+    public sealed class ClusterState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// It will be deprecated in later versions. Display strategy of EMR instance.
@@ -487,12 +501,16 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Emr
         private InputMap<object>? _loginSettings;
 
         /// <summary>
-        /// Instance login settings.
+        /// Instance login settings. There are two optional fields:- password: Instance login password: 8-16 characters, including uppercase letters, lowercase letters, numbers and special characters. Special symbols only support! @% ^ *. The first bit of the password cannot be a special character;- public_key_id: Public key id. After the key is associated, the instance can be accessed through the corresponding private key.
         /// </summary>
         public InputMap<object> LoginSettings
         {
             get => _loginSettings ?? (_loginSettings = new InputMap<object>());
-            set => _loginSettings = value;
+            set
+            {
+                var emptySecret = Output.CreateSecret(ImmutableDictionary.Create<string, object>());
+                _loginSettings = Output.All(value, emptySecret).Apply(v => v[0]);
+            }
         }
 
         /// <summary>
@@ -617,5 +635,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Emr
         public ClusterState()
         {
         }
+        public static new ClusterState Empty => new ClusterState();
     }
 }

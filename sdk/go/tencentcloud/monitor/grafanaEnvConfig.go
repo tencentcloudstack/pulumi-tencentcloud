@@ -7,45 +7,51 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a monitor grafanaEnvConfig
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Monitor"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Monitor"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Monitor.NewGrafanaEnvConfig(ctx, "grafanaEnvConfig", &Monitor.GrafanaEnvConfigArgs{
-// 			Envs: pulumi.AnyMap{
-// 				"aaa": pulumi.Any("ccc"),
-// 				"bbb": pulumi.Any("ccc"),
-// 			},
-// 			InstanceId: pulumi.String("grafana-dp2hnnfa"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Monitor.NewGrafanaEnvConfig(ctx, "grafanaEnvConfig", &Monitor.GrafanaEnvConfigArgs{
+//				Envs: pulumi.Map{
+//					"aaa": pulumi.Any("ccc"),
+//					"bbb": pulumi.Any("ccc"),
+//				},
+//				InstanceId: pulumi.String("grafana-dp2hnnfa"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // monitor grafana_env_config can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Monitor/grafanaEnvConfig:GrafanaEnvConfig grafana_env_config instance_id
+// $ pulumi import tencentcloud:Monitor/grafanaEnvConfig:GrafanaEnvConfig grafana_env_config instance_id
 // ```
 type GrafanaEnvConfig struct {
 	pulumi.CustomResourceState
@@ -66,7 +72,7 @@ func NewGrafanaEnvConfig(ctx *pulumi.Context,
 	if args.InstanceId == nil {
 		return nil, errors.New("invalid value for required argument 'InstanceId'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource GrafanaEnvConfig
 	err := ctx.RegisterResource("tencentcloud:Monitor/grafanaEnvConfig:GrafanaEnvConfig", name, args, &resource, opts...)
 	if err != nil {
@@ -147,7 +153,7 @@ func (i *GrafanaEnvConfig) ToGrafanaEnvConfigOutputWithContext(ctx context.Conte
 // GrafanaEnvConfigArrayInput is an input type that accepts GrafanaEnvConfigArray and GrafanaEnvConfigArrayOutput values.
 // You can construct a concrete instance of `GrafanaEnvConfigArrayInput` via:
 //
-//          GrafanaEnvConfigArray{ GrafanaEnvConfigArgs{...} }
+//	GrafanaEnvConfigArray{ GrafanaEnvConfigArgs{...} }
 type GrafanaEnvConfigArrayInput interface {
 	pulumi.Input
 
@@ -172,7 +178,7 @@ func (i GrafanaEnvConfigArray) ToGrafanaEnvConfigArrayOutputWithContext(ctx cont
 // GrafanaEnvConfigMapInput is an input type that accepts GrafanaEnvConfigMap and GrafanaEnvConfigMapOutput values.
 // You can construct a concrete instance of `GrafanaEnvConfigMapInput` via:
 //
-//          GrafanaEnvConfigMap{ "key": GrafanaEnvConfigArgs{...} }
+//	GrafanaEnvConfigMap{ "key": GrafanaEnvConfigArgs{...} }
 type GrafanaEnvConfigMapInput interface {
 	pulumi.Input
 

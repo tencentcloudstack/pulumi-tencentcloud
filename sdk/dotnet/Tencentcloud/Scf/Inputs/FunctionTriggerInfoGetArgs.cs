@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Scf.Inputs
 {
 
-    public sealed class FunctionTriggerInfoGetArgs : Pulumi.ResourceArgs
+    public sealed class FunctionTriggerInfoGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Create time of SCF function trigger.
@@ -58,5 +58,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Scf.Inputs
         public FunctionTriggerInfoGetArgs()
         {
         }
+        public static new FunctionTriggerInfoGetArgs Empty => new FunctionTriggerInfoGetArgs();
     }
 }

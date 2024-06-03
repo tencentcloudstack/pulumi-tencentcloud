@@ -15,72 +15,66 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mariadb
         /// <summary>
         /// Use this data source to query detailed information of mariadb slow_logs
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var slowLogs = Tencentcloud.Mariadb.GetSlowLogs.Invoke(new()
         ///     {
-        ///         var slowLogs = Output.Create(Tencentcloud.Mariadb.GetSlowLogs.InvokeAsync(new Tencentcloud.Mariadb.GetSlowLogsArgs
-        ///         {
-        ///             InstanceId = "tdsql-9vqvls95",
-        ///             OrderBy = "query_time_sum",
-        ///             OrderByType = "desc",
-        ///             Slave = 0,
-        ///             StartTime = "2023-06-01 14:55:20",
-        ///         }));
-        ///     }
+        ///         InstanceId = "tdsql-9vqvls95",
+        ///         OrderBy = "query_time_sum",
+        ///         OrderByType = "desc",
+        ///         Slave = 0,
+        ///         StartTime = "2023-06-01 14:55:20",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetSlowLogsResult> InvokeAsync(GetSlowLogsArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetSlowLogsResult>("tencentcloud:Mariadb/getSlowLogs:getSlowLogs", args ?? new GetSlowLogsArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetSlowLogsResult>("tencentcloud:Mariadb/getSlowLogs:getSlowLogs", args ?? new GetSlowLogsArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of mariadb slow_logs
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var slowLogs = Tencentcloud.Mariadb.GetSlowLogs.Invoke(new()
         ///     {
-        ///         var slowLogs = Output.Create(Tencentcloud.Mariadb.GetSlowLogs.InvokeAsync(new Tencentcloud.Mariadb.GetSlowLogsArgs
-        ///         {
-        ///             InstanceId = "tdsql-9vqvls95",
-        ///             OrderBy = "query_time_sum",
-        ///             OrderByType = "desc",
-        ///             Slave = 0,
-        ///             StartTime = "2023-06-01 14:55:20",
-        ///         }));
-        ///     }
+        ///         InstanceId = "tdsql-9vqvls95",
+        ///         OrderBy = "query_time_sum",
+        ///         OrderByType = "desc",
+        ///         Slave = 0,
+        ///         StartTime = "2023-06-01 14:55:20",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetSlowLogsResult> Invoke(GetSlowLogsInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetSlowLogsResult>("tencentcloud:Mariadb/getSlowLogs:getSlowLogs", args ?? new GetSlowLogsInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetSlowLogsResult>("tencentcloud:Mariadb/getSlowLogs:getSlowLogs", args ?? new GetSlowLogsInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetSlowLogsArgs : Pulumi.InvokeArgs
+    public sealed class GetSlowLogsArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Specific name of the database to be queried.
@@ -133,9 +127,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mariadb
         public GetSlowLogsArgs()
         {
         }
+        public static new GetSlowLogsArgs Empty => new GetSlowLogsArgs();
     }
 
-    public sealed class GetSlowLogsInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetSlowLogsInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Specific name of the database to be queried.
@@ -188,6 +183,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mariadb
         public GetSlowLogsInvokeArgs()
         {
         }
+        public static new GetSlowLogsInvokeArgs Empty => new GetSlowLogsInvokeArgs();
     }
 
 

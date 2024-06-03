@@ -7,48 +7,53 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a dlc bindWorkGroupsToUser
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Dlc"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dlc"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dlc"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Dlc.NewBindWorkGroupsToUserAttachment(ctx, "bindWorkGroupsToUser", &Dlc.BindWorkGroupsToUserAttachmentArgs{
-// 			AddInfo: &dlc.BindWorkGroupsToUserAttachmentAddInfoArgs{
-// 				UserId: pulumi.String("100032772113"),
-// 				WorkGroupIds: pulumi.IntArray{
-// 					pulumi.Int(23184),
-// 					pulumi.Int(23181),
-// 				},
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Dlc.NewBindWorkGroupsToUserAttachment(ctx, "bindWorkGroupsToUser", &Dlc.BindWorkGroupsToUserAttachmentArgs{
+//				AddInfo: &dlc.BindWorkGroupsToUserAttachmentAddInfoArgs{
+//					UserId: pulumi.String("100032772113"),
+//					WorkGroupIds: pulumi.IntArray{
+//						pulumi.Int(23184),
+//						pulumi.Int(23181),
+//					},
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // dlc bind_work_groups_to_user can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Dlc/bindWorkGroupsToUserAttachment:BindWorkGroupsToUserAttachment bind_work_groups_to_user bind_work_groups_to_user_id
+// $ pulumi import tencentcloud:Dlc/bindWorkGroupsToUserAttachment:BindWorkGroupsToUserAttachment bind_work_groups_to_user bind_work_groups_to_user_id
 // ```
 type BindWorkGroupsToUserAttachment struct {
 	pulumi.CustomResourceState
@@ -67,7 +72,7 @@ func NewBindWorkGroupsToUserAttachment(ctx *pulumi.Context,
 	if args.AddInfo == nil {
 		return nil, errors.New("invalid value for required argument 'AddInfo'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource BindWorkGroupsToUserAttachment
 	err := ctx.RegisterResource("tencentcloud:Dlc/bindWorkGroupsToUserAttachment:BindWorkGroupsToUserAttachment", name, args, &resource, opts...)
 	if err != nil {
@@ -140,7 +145,7 @@ func (i *BindWorkGroupsToUserAttachment) ToBindWorkGroupsToUserAttachmentOutputW
 // BindWorkGroupsToUserAttachmentArrayInput is an input type that accepts BindWorkGroupsToUserAttachmentArray and BindWorkGroupsToUserAttachmentArrayOutput values.
 // You can construct a concrete instance of `BindWorkGroupsToUserAttachmentArrayInput` via:
 //
-//          BindWorkGroupsToUserAttachmentArray{ BindWorkGroupsToUserAttachmentArgs{...} }
+//	BindWorkGroupsToUserAttachmentArray{ BindWorkGroupsToUserAttachmentArgs{...} }
 type BindWorkGroupsToUserAttachmentArrayInput interface {
 	pulumi.Input
 
@@ -165,7 +170,7 @@ func (i BindWorkGroupsToUserAttachmentArray) ToBindWorkGroupsToUserAttachmentArr
 // BindWorkGroupsToUserAttachmentMapInput is an input type that accepts BindWorkGroupsToUserAttachmentMap and BindWorkGroupsToUserAttachmentMapOutput values.
 // You can construct a concrete instance of `BindWorkGroupsToUserAttachmentMapInput` via:
 //
-//          BindWorkGroupsToUserAttachmentMap{ "key": BindWorkGroupsToUserAttachmentArgs{...} }
+//	BindWorkGroupsToUserAttachmentMap{ "key": BindWorkGroupsToUserAttachmentArgs{...} }
 type BindWorkGroupsToUserAttachmentMapInput interface {
 	pulumi.Input
 

@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cdn.Inputs
 {
 
-    public sealed class DomainOriginGetArgs : Pulumi.ResourceArgs
+    public sealed class DomainOriginGetArgs : global::Pulumi.ResourceArgs
     {
         [Input("backupOriginLists")]
         private InputList<string>? _backupOriginLists;
@@ -76,5 +76,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cdn.Inputs
         public DomainOriginGetArgs()
         {
         }
+        public static new DomainOriginGetArgs Empty => new DomainOriginGetArgs();
     }
 }

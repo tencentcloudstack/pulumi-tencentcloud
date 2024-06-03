@@ -10,13 +10,15 @@ import * as utilities from "../utilities";
  * > **NOTE:** If you only want to upgrade the exporter version with same config, you can set `version` under `instanceSpec` with any value to trigger the change.
  *
  * ## Example Usage
+ *
  * ### Use blackbox-exporter
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const tmpExporterIntegration = new tencentcloud.Monitor.TmpExporterIntegration("tmpExporterIntegration", {
+ * const tmpExporterIntegration = new tencentcloud.monitor.TmpExporterIntegration("tmpExporterIntegration", {
  *     clusterId: "cls-bmuaukfu",
  *     content: "{\"name\":\"test\",\"kind\":\"blackbox-exporter\",\"spec\":{\"instanceSpec\":{\"module\":\"http_get\",\"urls\":[\"xx\"]}}}",
  *     instanceId: "prom-dko9d0nu",
@@ -24,11 +26,14 @@ import * as utilities from "../utilities";
  *     kubeType: 1,
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
+ *
  * ### Use es-exporter
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const tmpExporterIntegrationEs = new tencentcloud.monitor.TmpExporterIntegration("tmpExporterIntegrationEs", {
  *     instanceId: tencentcloud_monitor_tmp_instance.tmpInstance.id,
@@ -59,6 +64,66 @@ import * as utilities from "../utilities";
  *     kubeType: 3,
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
+ *
+ * ### Integration Center: CVM Scrape Job
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
+ *
+ * const vpc = new tencentcloud.vpc.Instance("vpc", {cidrBlock: "10.2.0.0/16"});
+ * const sub = new tencentcloud.subnet.Instance("sub", {
+ *     vpcId: vpc.id,
+ *     cidrBlock: "10.2.11.0/24",
+ *     availabilityZone: "ap-guangzhou-3",
+ * });
+ * const tmpInstance = new tencentcloud.monitor.TmpInstance("tmpInstance", {
+ *     instanceName: "tf-test-tmp",
+ *     vpcId: vpc.id,
+ *     subnetId: sub.id,
+ *     dataRetentionTime: 15,
+ *     zone: "ap-guangzhou-3",
+ *     tags: {
+ *         createdBy: "terraform",
+ *     },
+ * });
+ * // Integration Center: CVM Scrape Job
+ * const tmpExporterIntegration = new tencentcloud.monitor.TmpExporterIntegration("tmpExporterIntegration", {
+ *     instanceId: tmpInstance.id,
+ *     kind: "cvm-http-sd-exporter",
+ *     content: JSON.stringify({
+ *         kind: "cvm-http-sd-exporter",
+ *         spec: {
+ *             job: `job_name: example-cvm-job-name
+ * metrics_path: /metrics
+ * cvm_sd_configs:
+ * - region: ap-guangzhou
+ *   ports:
+ *     - 9100
+ *   filters:         
+ *     - name: tag:YOUR_TAG_KEY
+ *       values: 
+ *       - YOUR_TAG_VALUE
+ * relabel_configs: 
+ *   - source_labels: [__meta_cvm_instance_state]
+ *     regex: RUNNING
+ *     action: keep
+ *   - regex: __meta_cvm_tag_(.*)
+ *     replacement: $1
+ *     action: labelmap
+ *   - source_labels: [__meta_cvm_region]
+ *     target_label: region
+ *     action: replace
+ * `,
+ *         },
+ *     }),
+ *     kubeType: 3,
+ *     clusterId: "",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
  */
 export class TmpExporterIntegration extends pulumi.CustomResource {
     /**

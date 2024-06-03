@@ -13,6 +13,7 @@ from .backup_policy import *
 from .database import *
 from .db_import_job_operation import *
 from .deploy_group import *
+from .dr_instance import *
 from .dr_instance_to_mater import *
 from .get_backup_list import *
 from .get_backup_overview import *

@@ -15,33 +15,34 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssl
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var revokeCertificate = new Tencentcloud.Ssl.RevokeCertificateOperation("revokeCertificate", new()
     ///     {
-    ///         var revokeCertificate = new Tencentcloud.Ssl.RevokeCertificateOperation("revokeCertificate", new Tencentcloud.Ssl.RevokeCertificateOperationArgs
-    ///         {
-    ///             CertificateId = "7zUGkVab",
-    ///         });
-    ///     }
+    ///         CertificateId = "7zUGkVab",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// ssl revoke_certificate can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Ssl/revokeCertificateOperation:RevokeCertificateOperation revoke_certificate revoke_certificate_id
+    /// $ pulumi import tencentcloud:Ssl/revokeCertificateOperation:RevokeCertificateOperation revoke_certificate revoke_certificate_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Ssl/revokeCertificateOperation:RevokeCertificateOperation")]
-    public partial class RevokeCertificateOperation : Pulumi.CustomResource
+    public partial class RevokeCertificateOperation : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Certificate ID.
@@ -100,7 +101,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssl
         }
     }
 
-    public sealed class RevokeCertificateOperationArgs : Pulumi.ResourceArgs
+    public sealed class RevokeCertificateOperationArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Certificate ID.
@@ -117,9 +118,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssl
         public RevokeCertificateOperationArgs()
         {
         }
+        public static new RevokeCertificateOperationArgs Empty => new RevokeCertificateOperationArgs();
     }
 
-    public sealed class RevokeCertificateOperationState : Pulumi.ResourceArgs
+    public sealed class RevokeCertificateOperationState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Certificate ID.
@@ -136,5 +138,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssl
         public RevokeCertificateOperationState()
         {
         }
+        public static new RevokeCertificateOperationState Empty => new RevokeCertificateOperationState();
     }
 }

@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dlc.Inputs
 {
 
-    public sealed class GetDescribeWorkGroupInfoFilterInputArgs : Pulumi.ResourceArgs
+    public sealed class GetDescribeWorkGroupInfoFilterInputArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Attribute name. If there are multiple Filters, the relationship between filters is a logical or (OR) relationship.
@@ -34,5 +34,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dlc.Inputs
         public GetDescribeWorkGroupInfoFilterInputArgs()
         {
         }
+        public static new GetDescribeWorkGroupInfoFilterInputArgs Empty => new GetDescribeWorkGroupInfoFilterInputArgs();
     }
 }

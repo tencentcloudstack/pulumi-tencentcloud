@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,20 +11,19 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const example = pulumi.output(tencentcloud.Cfw.getEdgeFwSwitches());
+ * const example = tencentcloud.Cfw.getEdgeFwSwitches({});
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getEdgeFwSwitches(args?: GetEdgeFwSwitchesArgs, opts?: pulumi.InvokeOptions): Promise<GetEdgeFwSwitchesResult> {
     args = args || {};
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Cfw/getEdgeFwSwitches:getEdgeFwSwitches", {
         "resultOutputFile": args.resultOutputFile,
     }, opts);
@@ -53,9 +53,22 @@ export interface GetEdgeFwSwitchesResult {
     readonly id: string;
     readonly resultOutputFile?: string;
 }
-
+/**
+ * Use this data source to query detailed information of cfw edgeFwSwitches
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const example = tencentcloud.Cfw.getEdgeFwSwitches({});
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getEdgeFwSwitchesOutput(args?: GetEdgeFwSwitchesOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetEdgeFwSwitchesResult> {
-    return pulumi.output(args).apply(a => getEdgeFwSwitches(a, opts))
+    return pulumi.output(args).apply((a: any) => getEdgeFwSwitches(a, opts))
 }
 
 /**

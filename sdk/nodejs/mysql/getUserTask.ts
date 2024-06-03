@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,27 +11,26 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const userTask = pulumi.output(tencentcloud.Mysql.getUserTask({
+ * const userTask = tencentcloud.Mysql.getUserTask({
  *     asyncRequestId: "f2fe828c-773af816-0a08f542-94bb2a9c",
  *     instanceId: "cdb-fitq5t9h",
  *     startTimeBegin: "2017-12-31 10:40:01",
  *     startTimeEnd: "2017-12-31 10:40:01",
  *     taskStatuses: ["2"],
  *     taskTypes: ["5"],
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getUserTask(args?: GetUserTaskArgs, opts?: pulumi.InvokeOptions): Promise<GetUserTaskResult> {
     args = args || {};
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Mysql/getUserTask:getUserTask", {
         "asyncRequestId": args.asyncRequestId,
         "instanceId": args.instanceId,
@@ -102,9 +102,29 @@ export interface GetUserTaskResult {
     readonly taskStatuses?: string[];
     readonly taskTypes?: string[];
 }
-
+/**
+ * Use this data source to query detailed information of mysql userTask
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const userTask = tencentcloud.Mysql.getUserTask({
+ *     asyncRequestId: "f2fe828c-773af816-0a08f542-94bb2a9c",
+ *     instanceId: "cdb-fitq5t9h",
+ *     startTimeBegin: "2017-12-31 10:40:01",
+ *     startTimeEnd: "2017-12-31 10:40:01",
+ *     taskStatuses: ["2"],
+ *     taskTypes: ["5"],
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getUserTaskOutput(args?: GetUserTaskOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetUserTaskResult> {
-    return pulumi.output(args).apply(a => getUserTask(a, opts))
+    return pulumi.output(args).apply((a: any) => getUserTask(a, opts))
 }
 
 /**

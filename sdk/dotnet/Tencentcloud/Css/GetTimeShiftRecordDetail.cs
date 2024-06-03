@@ -15,76 +15,70 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Css
         /// <summary>
         /// Use this data source to query detailed information of css time_shift_record_detail
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var timeShiftRecordDetail = Tencentcloud.Css.GetTimeShiftRecordDetail.Invoke(new()
         ///     {
-        ///         var timeShiftRecordDetail = Output.Create(Tencentcloud.Css.GetTimeShiftRecordDetail.InvokeAsync(new Tencentcloud.Css.GetTimeShiftRecordDetailArgs
-        ///         {
-        ///             AppName = "qqq",
-        ///             Domain = "177154.push.tlivecloud.com",
-        ///             DomainGroup = "tf-test",
-        ///             EndTime = 1698820641,
-        ///             StartTime = 1698768000,
-        ///             StreamName = "live",
-        ///             TransCodeId = 0,
-        ///         }));
-        ///     }
+        ///         AppName = "qqq",
+        ///         Domain = "177154.push.tlivecloud.com",
+        ///         DomainGroup = "tf-test",
+        ///         EndTime = 1698820641,
+        ///         StartTime = 1698768000,
+        ///         StreamName = "live",
+        ///         TransCodeId = 0,
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetTimeShiftRecordDetailResult> InvokeAsync(GetTimeShiftRecordDetailArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetTimeShiftRecordDetailResult>("tencentcloud:Css/getTimeShiftRecordDetail:getTimeShiftRecordDetail", args ?? new GetTimeShiftRecordDetailArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetTimeShiftRecordDetailResult>("tencentcloud:Css/getTimeShiftRecordDetail:getTimeShiftRecordDetail", args ?? new GetTimeShiftRecordDetailArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of css time_shift_record_detail
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var timeShiftRecordDetail = Tencentcloud.Css.GetTimeShiftRecordDetail.Invoke(new()
         ///     {
-        ///         var timeShiftRecordDetail = Output.Create(Tencentcloud.Css.GetTimeShiftRecordDetail.InvokeAsync(new Tencentcloud.Css.GetTimeShiftRecordDetailArgs
-        ///         {
-        ///             AppName = "qqq",
-        ///             Domain = "177154.push.tlivecloud.com",
-        ///             DomainGroup = "tf-test",
-        ///             EndTime = 1698820641,
-        ///             StartTime = 1698768000,
-        ///             StreamName = "live",
-        ///             TransCodeId = 0,
-        ///         }));
-        ///     }
+        ///         AppName = "qqq",
+        ///         Domain = "177154.push.tlivecloud.com",
+        ///         DomainGroup = "tf-test",
+        ///         EndTime = 1698820641,
+        ///         StartTime = 1698768000,
+        ///         StreamName = "live",
+        ///         TransCodeId = 0,
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetTimeShiftRecordDetailResult> Invoke(GetTimeShiftRecordDetailInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetTimeShiftRecordDetailResult>("tencentcloud:Css/getTimeShiftRecordDetail:getTimeShiftRecordDetail", args ?? new GetTimeShiftRecordDetailInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetTimeShiftRecordDetailResult>("tencentcloud:Css/getTimeShiftRecordDetail:getTimeShiftRecordDetail", args ?? new GetTimeShiftRecordDetailInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetTimeShiftRecordDetailArgs : Pulumi.InvokeArgs
+    public sealed class GetTimeShiftRecordDetailArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Push path.
@@ -137,9 +131,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Css
         public GetTimeShiftRecordDetailArgs()
         {
         }
+        public static new GetTimeShiftRecordDetailArgs Empty => new GetTimeShiftRecordDetailArgs();
     }
 
-    public sealed class GetTimeShiftRecordDetailInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetTimeShiftRecordDetailInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Push path.
@@ -192,6 +187,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Css
         public GetTimeShiftRecordDetailInvokeArgs()
         {
         }
+        public static new GetTimeShiftRecordDetailInvokeArgs Empty => new GetTimeShiftRecordDetailInvokeArgs();
     }
 
 

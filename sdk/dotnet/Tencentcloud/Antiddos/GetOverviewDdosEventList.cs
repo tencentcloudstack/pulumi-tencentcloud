@@ -15,68 +15,62 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Antiddos
         /// <summary>
         /// Use this data source to query detailed information of antiddos overview_ddos_event_list
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var overviewDdosEventList = Tencentcloud.Antiddos.GetOverviewDdosEventList.Invoke(new()
         ///     {
-        ///         var overviewDdosEventList = Output.Create(Tencentcloud.Antiddos.GetOverviewDdosEventList.InvokeAsync(new Tencentcloud.Antiddos.GetOverviewDdosEventListArgs
-        ///         {
-        ///             AttackStatus = "end",
-        ///             EndTime = "2023-11-21 00:00:00",
-        ///             StartTime = "2023-11-20 00:00:00",
-        ///         }));
-        ///     }
+        ///         AttackStatus = "end",
+        ///         EndTime = "2023-11-21 00:00:00",
+        ///         StartTime = "2023-11-20 00:00:00",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetOverviewDdosEventListResult> InvokeAsync(GetOverviewDdosEventListArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetOverviewDdosEventListResult>("tencentcloud:Antiddos/getOverviewDdosEventList:getOverviewDdosEventList", args ?? new GetOverviewDdosEventListArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetOverviewDdosEventListResult>("tencentcloud:Antiddos/getOverviewDdosEventList:getOverviewDdosEventList", args ?? new GetOverviewDdosEventListArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of antiddos overview_ddos_event_list
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var overviewDdosEventList = Tencentcloud.Antiddos.GetOverviewDdosEventList.Invoke(new()
         ///     {
-        ///         var overviewDdosEventList = Output.Create(Tencentcloud.Antiddos.GetOverviewDdosEventList.InvokeAsync(new Tencentcloud.Antiddos.GetOverviewDdosEventListArgs
-        ///         {
-        ///             AttackStatus = "end",
-        ///             EndTime = "2023-11-21 00:00:00",
-        ///             StartTime = "2023-11-20 00:00:00",
-        ///         }));
-        ///     }
+        ///         AttackStatus = "end",
+        ///         EndTime = "2023-11-21 00:00:00",
+        ///         StartTime = "2023-11-20 00:00:00",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetOverviewDdosEventListResult> Invoke(GetOverviewDdosEventListInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetOverviewDdosEventListResult>("tencentcloud:Antiddos/getOverviewDdosEventList:getOverviewDdosEventList", args ?? new GetOverviewDdosEventListInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetOverviewDdosEventListResult>("tencentcloud:Antiddos/getOverviewDdosEventList:getOverviewDdosEventList", args ?? new GetOverviewDdosEventListInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetOverviewDdosEventListArgs : Pulumi.InvokeArgs
+    public sealed class GetOverviewDdosEventListArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// filter event by attack status, start: attacking; end: attack end.
@@ -105,9 +99,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Antiddos
         public GetOverviewDdosEventListArgs()
         {
         }
+        public static new GetOverviewDdosEventListArgs Empty => new GetOverviewDdosEventListArgs();
     }
 
-    public sealed class GetOverviewDdosEventListInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetOverviewDdosEventListInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// filter event by attack status, start: attacking; end: attack end.
@@ -136,6 +131,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Antiddos
         public GetOverviewDdosEventListInvokeArgs()
         {
         }
+        public static new GetOverviewDdosEventListInvokeArgs Empty => new GetOverviewDdosEventListInvokeArgs();
     }
 
 

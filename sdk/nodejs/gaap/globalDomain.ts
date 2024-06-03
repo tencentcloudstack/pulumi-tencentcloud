@@ -9,11 +9,12 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const globalDomain = new tencentcloud.Gaap.GlobalDomain("global_domain", {
+ * const globalDomain = new tencentcloud.gaap.GlobalDomain("globalDomain", {
  *     alias: "demo",
  *     defaultValue: "xxxxxx.com",
  *     projectId: 0,
@@ -22,13 +23,14 @@ import * as utilities from "../utilities";
  *     },
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * gaap global_domain can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Gaap/globalDomain:GlobalDomain global_domain ${projectId}#${domainId}
+ * $ pulumi import tencentcloud:Gaap/globalDomain:GlobalDomain global_domain ${projectId}#${domainId}
  * ```
  */
 export class GlobalDomain extends pulumi.CustomResource {

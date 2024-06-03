@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,25 +11,23 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const application = pulumi.output(tencentcloud.Tsf.getApplication({
- *     // application_resource_type_list = [""]
+ * const application = tencentcloud.Tsf.getApplication({
  *     applicationIdLists: ["application-a24x29xv"],
  *     applicationType: "V",
  *     microserviceType: "N",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getApplication(args?: GetApplicationArgs, opts?: pulumi.InvokeOptions): Promise<GetApplicationResult> {
     args = args || {};
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Tsf/getApplication:getApplication", {
         "applicationIdLists": args.applicationIdLists,
         "applicationResourceTypeLists": args.applicationResourceTypeLists,
@@ -88,9 +87,26 @@ export interface GetApplicationResult {
      */
     readonly results: outputs.Tsf.GetApplicationResult[];
 }
-
+/**
+ * Use this data source to query detailed information of tsf application
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const application = tencentcloud.Tsf.getApplication({
+ *     applicationIdLists: ["application-a24x29xv"],
+ *     applicationType: "V",
+ *     microserviceType: "N",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getApplicationOutput(args?: GetApplicationOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetApplicationResult> {
-    return pulumi.output(args).apply(a => getApplication(a, opts))
+    return pulumi.output(args).apply((a: any) => getApplication(a, opts))
 }
 
 /**

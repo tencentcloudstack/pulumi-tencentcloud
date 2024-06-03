@@ -15,95 +15,97 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tse
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var cngwService = new Tencentcloud.Tse.CngwService("cngwService", new()
     ///     {
-    ///         var cngwService = new Tencentcloud.Tse.CngwService("cngwService", new Tencentcloud.Tse.CngwServiceArgs
+    ///         GatewayId = "gateway-ddbb709b",
+    ///         Path = "/test",
+    ///         Protocol = "http",
+    ///         Retries = 5,
+    ///         Tags = 
     ///         {
-    ///             GatewayId = "gateway-ddbb709b",
-    ///             Path = "/test",
-    ///             Protocol = "http",
-    ///             Retries = 5,
-    ///             Tags = 
-    ///             {
-    ///                 { "created", "terraform" },
-    ///             },
-    ///             Timeout = 6000,
-    ///             UpstreamType = "IPList",
-    ///             UpstreamInfo = new Tencentcloud.Tse.Inputs.CngwServiceUpstreamInfoArgs
-    ///             {
-    ///                 Algorithm = "round-robin",
-    ///                 AutoScalingCvmPort = 80,
-    ///                 AutoScalingGroupId = "asg-519acdug",
-    ///                 AutoScalingHookStatus = "Normal",
-    ///                 AutoScalingTatCmdStatus = "Normal",
-    ///                 Port = 0,
-    ///                 SlowStart = 20,
-    ///                 Targets = 
-    ///                 {
-    ///                     new Tencentcloud.Tse.Inputs.CngwServiceUpstreamInfoTargetArgs
-    ///                     {
-    ///                         Health = "HEALTHCHECKS_OFF",
-    ///                         Host = "192.168.0.1",
-    ///                         Port = 80,
-    ///                         Weight = 100,
-    ///                     },
-    ///                 },
-    ///             },
-    ///         });
-    ///         var cngwCanaryRule = new Tencentcloud.Tse.CngwCanaryRule("cngwCanaryRule", new Tencentcloud.Tse.CngwCanaryRuleArgs
+    ///             { "created", "terraform" },
+    ///         },
+    ///         Timeout = 6000,
+    ///         UpstreamType = "IPList",
+    ///         UpstreamInfo = new Tencentcloud.Tse.Inputs.CngwServiceUpstreamInfoArgs
     ///         {
-    ///             GatewayId = cngwService.GatewayId,
-    ///             ServiceId = cngwService.ServiceId,
-    ///             Tags = 
+    ///             Algorithm = "round-robin",
+    ///             AutoScalingCvmPort = 80,
+    ///             AutoScalingGroupId = "asg-519acdug",
+    ///             AutoScalingHookStatus = "Normal",
+    ///             AutoScalingTatCmdStatus = "Normal",
+    ///             Port = 0,
+    ///             SlowStart = 20,
+    ///             Targets = new[]
     ///             {
-    ///                 { "created", "terraform" },
-    ///             },
-    ///             CanaryRule = new Tencentcloud.Tse.Inputs.CngwCanaryRuleCanaryRuleArgs
-    ///             {
-    ///                 Enabled = true,
-    ///                 Priority = 100,
-    ///                 BalancedServiceLists = 
+    ///                 new Tencentcloud.Tse.Inputs.CngwServiceUpstreamInfoTargetArgs
     ///                 {
-    ///                     new Tencentcloud.Tse.Inputs.CngwCanaryRuleCanaryRuleBalancedServiceListArgs
-    ///                     {
-    ///                         Percent = 100,
-    ///                         ServiceId = cngwService.ServiceId,
-    ///                         ServiceName = cngwService.Name,
-    ///                     },
-    ///                 },
-    ///                 ConditionLists = 
-    ///                 {
-    ///                     new Tencentcloud.Tse.Inputs.CngwCanaryRuleCanaryRuleConditionListArgs
-    ///                     {
-    ///                         Key = "test",
-    ///                         Operator = "eq",
-    ///                         Type = "query",
-    ///                         Value = "1",
-    ///                     },
+    ///                     Health = "HEALTHCHECKS_OFF",
+    ///                     Host = "192.168.0.1",
+    ///                     Port = 80,
+    ///                     Weight = 100,
     ///                 },
     ///             },
-    ///         });
-    ///     }
+    ///         },
+    ///     });
     /// 
-    /// }
+    ///     var cngwCanaryRule = new Tencentcloud.Tse.CngwCanaryRule("cngwCanaryRule", new()
+    ///     {
+    ///         GatewayId = cngwService.GatewayId,
+    ///         ServiceId = cngwService.ServiceId,
+    ///         Tags = 
+    ///         {
+    ///             { "created", "terraform" },
+    ///         },
+    ///         CanaryRule = new Tencentcloud.Tse.Inputs.CngwCanaryRuleCanaryRuleArgs
+    ///         {
+    ///             Enabled = true,
+    ///             Priority = 100,
+    ///             BalancedServiceLists = new[]
+    ///             {
+    ///                 new Tencentcloud.Tse.Inputs.CngwCanaryRuleCanaryRuleBalancedServiceListArgs
+    ///                 {
+    ///                     Percent = 100,
+    ///                     ServiceId = cngwService.ServiceId,
+    ///                     ServiceName = cngwService.Name,
+    ///                 },
+    ///             },
+    ///             ConditionLists = new[]
+    ///             {
+    ///                 new Tencentcloud.Tse.Inputs.CngwCanaryRuleCanaryRuleConditionListArgs
+    ///                 {
+    ///                     Key = "test",
+    ///                     Operator = "eq",
+    ///                     Type = "query",
+    ///                     Value = "1",
+    ///                 },
+    ///             },
+    ///         },
+    ///     });
+    /// 
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// tse cngw_canary_rule can be imported using the gatewayId#serviceId#priority, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Tse/cngwCanaryRule:CngwCanaryRule cngw_canary_rule gateway-ddbb709b#b6017eaf-2363-481e-9e93-8d65aaf498cd#100
+    /// $ pulumi import tencentcloud:Tse/cngwCanaryRule:CngwCanaryRule cngw_canary_rule gateway-ddbb709b#b6017eaf-2363-481e-9e93-8d65aaf498cd#100
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Tse/cngwCanaryRule:CngwCanaryRule")]
-    public partial class CngwCanaryRule : Pulumi.CustomResource
+    public partial class CngwCanaryRule : global::Pulumi.CustomResource
     {
         /// <summary>
         /// canary rule configuration.
@@ -174,7 +176,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tse
         }
     }
 
-    public sealed class CngwCanaryRuleArgs : Pulumi.ResourceArgs
+    public sealed class CngwCanaryRuleArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// canary rule configuration.
@@ -209,9 +211,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tse
         public CngwCanaryRuleArgs()
         {
         }
+        public static new CngwCanaryRuleArgs Empty => new CngwCanaryRuleArgs();
     }
 
-    public sealed class CngwCanaryRuleState : Pulumi.ResourceArgs
+    public sealed class CngwCanaryRuleState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// canary rule configuration.
@@ -246,5 +249,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tse
         public CngwCanaryRuleState()
         {
         }
+        public static new CngwCanaryRuleState Empty => new CngwCanaryRuleState();
     }
 }

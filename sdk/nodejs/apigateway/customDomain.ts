@@ -9,11 +9,12 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const foo = new tencentcloud.ApiGateway.CustomDomain("foo", {
+ * const foo = new tencentcloud.apigateway.CustomDomain("foo", {
  *     defaultDomain: "service-ohxqslqe-1259649581.gz.apigw.tencentcs.com",
  *     isDefaultMapping: false,
  *     netType: "OUTER",
@@ -26,6 +27,7 @@ import * as utilities from "../utilities";
  *     subDomain: "tic-test.dnsv1.com",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export class CustomDomain extends pulumi.CustomResource {
     /**

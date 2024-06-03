@@ -2,29 +2,16 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
  * Use this data source to query detailed information of TCR repositories.
- *
- * ## Example Usage
- *
- * ```typescript
- * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
- *
- * const name = pulumi.output(tencentcloud.Tcr.getRepositories({
- *     name: "test",
- * }));
- * ```
  */
 export function getRepositories(args: GetRepositoriesArgs, opts?: pulumi.InvokeOptions): Promise<GetRepositoriesResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Tcr/getRepositories:getRepositories", {
         "instanceId": args.instanceId,
         "namespaceName": args.namespaceName,
@@ -75,9 +62,11 @@ export interface GetRepositoriesResult {
     readonly repositoryName?: string;
     readonly resultOutputFile?: string;
 }
-
+/**
+ * Use this data source to query detailed information of TCR repositories.
+ */
 export function getRepositoriesOutput(args: GetRepositoriesOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetRepositoriesResult> {
-    return pulumi.output(args).apply(a => getRepositories(a, opts))
+    return pulumi.output(args).apply((a: any) => getRepositories(a, opts))
 }
 
 /**

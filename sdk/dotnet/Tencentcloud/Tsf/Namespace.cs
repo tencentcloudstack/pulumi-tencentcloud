@@ -15,28 +15,29 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var @namespace = new Tencentcloud.Tsf.Namespace("namespace", new()
     ///     {
-    ///         var @namespace = new Tencentcloud.Tsf.Namespace("namespace", new Tencentcloud.Tsf.NamespaceArgs
-    ///         {
-    ///             IsHaEnable = "0",
-    ///             NamespaceDesc = "namespace desc",
-    ///             NamespaceName = "namespace-name",
-    ///             NamespaceType = "DEF",
-    ///         });
-    ///     }
+    ///         IsHaEnable = "0",
+    ///         NamespaceDesc = "namespace desc",
+    ///         NamespaceName = "namespace-name",
+    ///         NamespaceType = "DEF",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Tsf/namespace:Namespace")]
-    public partial class Namespace : Pulumi.CustomResource
+    public partial class Namespace : global::Pulumi.CustomResource
     {
         /// <summary>
         /// cluster ID.
@@ -179,7 +180,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf
         }
     }
 
-    public sealed class NamespaceArgs : Pulumi.ResourceArgs
+    public sealed class NamespaceArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// cluster ID.
@@ -244,9 +245,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf
         public NamespaceArgs()
         {
         }
+        public static new NamespaceArgs Empty => new NamespaceArgs();
     }
 
-    public sealed class NamespaceState : Pulumi.ResourceArgs
+    public sealed class NamespaceState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// cluster ID.
@@ -353,5 +355,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf
         public NamespaceState()
         {
         }
+        public static new NamespaceState Empty => new NamespaceState();
     }
 }

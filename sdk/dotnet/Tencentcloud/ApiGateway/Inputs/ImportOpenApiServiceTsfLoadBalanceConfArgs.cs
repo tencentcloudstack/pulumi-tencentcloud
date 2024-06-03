@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway.Inputs
 {
 
-    public sealed class ImportOpenApiServiceTsfLoadBalanceConfArgs : Pulumi.ResourceArgs
+    public sealed class ImportOpenApiServiceTsfLoadBalanceConfArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Is load balancing enabled.Note: This field may return null, indicating that a valid value cannot be obtained.
@@ -40,5 +40,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway.Inputs
         public ImportOpenApiServiceTsfLoadBalanceConfArgs()
         {
         }
+        public static new ImportOpenApiServiceTsfLoadBalanceConfArgs Empty => new ImportOpenApiServiceTsfLoadBalanceConfArgs();
     }
 }

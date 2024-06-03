@@ -11,21 +11,29 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Pts.Inputs
 {
 
-    public sealed class JobDomainNameConfigHostAliasArgs : Pulumi.ResourceArgs
+    public sealed class JobDomainNameConfigHostAliasArgs : global::Pulumi.ResourceArgs
     {
         [Input("hostNames")]
         private InputList<string>? _hostNames;
+
+        /// <summary>
+        /// List of domain names to be bound.
+        /// </summary>
         public InputList<string> HostNames
         {
             get => _hostNames ?? (_hostNames = new InputList<string>());
             set => _hostNames = value;
         }
 
+        /// <summary>
+        /// The IP address to be bound.
+        /// </summary>
         [Input("ip")]
         public Input<string>? Ip { get; set; }
 
         public JobDomainNameConfigHostAliasArgs()
         {
         }
+        public static new JobDomainNameConfigHostAliasArgs Empty => new JobDomainNameConfigHostAliasArgs();
     }
 }

@@ -9,11 +9,12 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const triggerConfig = new tencentcloud.Scf.TriggerConfig("trigger_config", {
+ * const triggerConfig = new tencentcloud.scf.TriggerConfig("triggerConfig", {
  *     customArgument: "Information",
  *     description: "func",
  *     enable: "OPEN",
@@ -25,13 +26,14 @@ import * as utilities from "../utilities";
  *     type: "timer",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * scf trigger_config can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Scf/triggerConfig:TriggerConfig trigger_config functionName#namespace#triggerName
+ * $ pulumi import tencentcloud:Scf/triggerConfig:TriggerConfig trigger_config functionName#namespace#triggerName
  * ```
  */
 export class TriggerConfig extends pulumi.CustomResource {

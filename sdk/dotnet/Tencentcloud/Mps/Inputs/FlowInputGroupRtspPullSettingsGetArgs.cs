@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps.Inputs
 {
 
-    public sealed class FlowInputGroupRtspPullSettingsGetArgs : Pulumi.ResourceArgs
+    public sealed class FlowInputGroupRtspPullSettingsGetArgs : global::Pulumi.ResourceArgs
     {
         [Input("sourceAddresses", required: true)]
         private InputList<Inputs.FlowInputGroupRtspPullSettingsSourceAddressGetArgs>? _sourceAddresses;
@@ -28,5 +28,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps.Inputs
         public FlowInputGroupRtspPullSettingsGetArgs()
         {
         }
+        public static new FlowInputGroupRtspPullSettingsGetArgs Empty => new FlowInputGroupRtspPullSettingsGetArgs();
     }
 }

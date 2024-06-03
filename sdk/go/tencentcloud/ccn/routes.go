@@ -7,43 +7,49 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a vpc ccnRoutes
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ccn"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ccn"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Ccn.NewRoutes(ctx, "ccnRoutes", &Ccn.RoutesArgs{
-// 			CcnId:   pulumi.String("ccn-39lqkygf"),
-// 			RouteId: pulumi.String("ccnr-3o0dfyuw"),
-// 			Switch:  pulumi.String("on"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Ccn.NewRoutes(ctx, "ccnRoutes", &Ccn.RoutesArgs{
+//				CcnId:   pulumi.String("ccn-39lqkygf"),
+//				RouteId: pulumi.String("ccnr-3o0dfyuw"),
+//				Switch:  pulumi.String("on"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // vpc ccn_routes can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Ccn/routes:Routes ccn_routes ccnId#routesId
+// $ pulumi import tencentcloud:Ccn/routes:Routes ccn_routes ccnId#routesId
 // ```
 type Routes struct {
 	pulumi.CustomResourceState
@@ -72,7 +78,7 @@ func NewRoutes(ctx *pulumi.Context,
 	if args.Switch == nil {
 		return nil, errors.New("invalid value for required argument 'Switch'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource Routes
 	err := ctx.RegisterResource("tencentcloud:Ccn/routes:Routes", name, args, &resource, opts...)
 	if err != nil {
@@ -161,7 +167,7 @@ func (i *Routes) ToRoutesOutputWithContext(ctx context.Context) RoutesOutput {
 // RoutesArrayInput is an input type that accepts RoutesArray and RoutesArrayOutput values.
 // You can construct a concrete instance of `RoutesArrayInput` via:
 //
-//          RoutesArray{ RoutesArgs{...} }
+//	RoutesArray{ RoutesArgs{...} }
 type RoutesArrayInput interface {
 	pulumi.Input
 
@@ -186,7 +192,7 @@ func (i RoutesArray) ToRoutesArrayOutputWithContext(ctx context.Context) RoutesA
 // RoutesMapInput is an input type that accepts RoutesMap and RoutesMapOutput values.
 // You can construct a concrete instance of `RoutesMapInput` via:
 //
-//          RoutesMap{ "key": RoutesArgs{...} }
+//	RoutesMap{ "key": RoutesArgs{...} }
 type RoutesMapInput interface {
 	pulumi.Input
 

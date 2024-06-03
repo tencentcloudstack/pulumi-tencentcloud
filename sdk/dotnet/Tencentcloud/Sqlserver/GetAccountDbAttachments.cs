@@ -16,17 +16,17 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
         /// Use this data source to query the list of SQL Server account DB privileges.
         /// </summary>
         public static Task<GetAccountDbAttachmentsResult> InvokeAsync(GetAccountDbAttachmentsArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetAccountDbAttachmentsResult>("tencentcloud:Sqlserver/getAccountDbAttachments:getAccountDbAttachments", args ?? new GetAccountDbAttachmentsArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetAccountDbAttachmentsResult>("tencentcloud:Sqlserver/getAccountDbAttachments:getAccountDbAttachments", args ?? new GetAccountDbAttachmentsArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query the list of SQL Server account DB privileges.
         /// </summary>
         public static Output<GetAccountDbAttachmentsResult> Invoke(GetAccountDbAttachmentsInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetAccountDbAttachmentsResult>("tencentcloud:Sqlserver/getAccountDbAttachments:getAccountDbAttachments", args ?? new GetAccountDbAttachmentsInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetAccountDbAttachmentsResult>("tencentcloud:Sqlserver/getAccountDbAttachments:getAccountDbAttachments", args ?? new GetAccountDbAttachmentsInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetAccountDbAttachmentsArgs : Pulumi.InvokeArgs
+    public sealed class GetAccountDbAttachmentsArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Name of the SQL Server account to be queried.
@@ -55,9 +55,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
         public GetAccountDbAttachmentsArgs()
         {
         }
+        public static new GetAccountDbAttachmentsArgs Empty => new GetAccountDbAttachmentsArgs();
     }
 
-    public sealed class GetAccountDbAttachmentsInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetAccountDbAttachmentsInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Name of the SQL Server account to be queried.
@@ -86,6 +87,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
         public GetAccountDbAttachmentsInvokeArgs()
         {
         }
+        public static new GetAccountDbAttachmentsInvokeArgs Empty => new GetAccountDbAttachmentsInvokeArgs();
     }
 
 

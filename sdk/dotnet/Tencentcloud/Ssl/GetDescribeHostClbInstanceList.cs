@@ -15,64 +15,58 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssl
         /// <summary>
         /// Use this data source to query detailed information of ssl describe_host_clb_instance_list
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var describeHostClbInstanceList = Tencentcloud.Ssl.GetDescribeHostClbInstanceList.Invoke(new()
         ///     {
-        ///         var describeHostClbInstanceList = Output.Create(Tencentcloud.Ssl.GetDescribeHostClbInstanceList.InvokeAsync(new Tencentcloud.Ssl.GetDescribeHostClbInstanceListArgs
-        ///         {
-        ///             CertificateId = "8u8DII0l",
-        ///         }));
-        ///     }
+        ///         CertificateId = "8u8DII0l",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetDescribeHostClbInstanceListResult> InvokeAsync(GetDescribeHostClbInstanceListArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetDescribeHostClbInstanceListResult>("tencentcloud:Ssl/getDescribeHostClbInstanceList:getDescribeHostClbInstanceList", args ?? new GetDescribeHostClbInstanceListArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetDescribeHostClbInstanceListResult>("tencentcloud:Ssl/getDescribeHostClbInstanceList:getDescribeHostClbInstanceList", args ?? new GetDescribeHostClbInstanceListArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of ssl describe_host_clb_instance_list
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var describeHostClbInstanceList = Tencentcloud.Ssl.GetDescribeHostClbInstanceList.Invoke(new()
         ///     {
-        ///         var describeHostClbInstanceList = Output.Create(Tencentcloud.Ssl.GetDescribeHostClbInstanceList.InvokeAsync(new Tencentcloud.Ssl.GetDescribeHostClbInstanceListArgs
-        ///         {
-        ///             CertificateId = "8u8DII0l",
-        ///         }));
-        ///     }
+        ///         CertificateId = "8u8DII0l",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetDescribeHostClbInstanceListResult> Invoke(GetDescribeHostClbInstanceListInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetDescribeHostClbInstanceListResult>("tencentcloud:Ssl/getDescribeHostClbInstanceList:getDescribeHostClbInstanceList", args ?? new GetDescribeHostClbInstanceListInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetDescribeHostClbInstanceListResult>("tencentcloud:Ssl/getDescribeHostClbInstanceList:getDescribeHostClbInstanceList", args ?? new GetDescribeHostClbInstanceListInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetDescribeHostClbInstanceListArgs : Pulumi.InvokeArgs
+    public sealed class GetDescribeHostClbInstanceListArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Whether to cache asynchronous.
@@ -119,9 +113,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssl
         public GetDescribeHostClbInstanceListArgs()
         {
         }
+        public static new GetDescribeHostClbInstanceListArgs Empty => new GetDescribeHostClbInstanceListArgs();
     }
 
-    public sealed class GetDescribeHostClbInstanceListInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetDescribeHostClbInstanceListInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Whether to cache asynchronous.
@@ -168,6 +163,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssl
         public GetDescribeHostClbInstanceListInvokeArgs()
         {
         }
+        public static new GetDescribeHostClbInstanceListInvokeArgs Empty => new GetDescribeHostClbInstanceListInvokeArgs();
     }
 
 

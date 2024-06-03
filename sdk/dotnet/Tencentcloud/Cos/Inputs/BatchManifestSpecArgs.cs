@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos.Inputs
 {
 
-    public sealed class BatchManifestSpecArgs : Pulumi.ResourceArgs
+    public sealed class BatchManifestSpecArgs : global::Pulumi.ResourceArgs
     {
         [Input("fields")]
         private InputList<string>? _fields;
@@ -34,5 +34,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos.Inputs
         public BatchManifestSpecArgs()
         {
         }
+        public static new BatchManifestSpecArgs Empty => new BatchManifestSpecArgs();
     }
 }

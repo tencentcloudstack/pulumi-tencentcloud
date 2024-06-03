@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,21 +11,20 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const instancePluginList = pulumi.output(tencentcloud.Elasticsearch.getInstancePluginList({
+ * const instancePluginList = tencentcloud.Elasticsearch.getInstancePluginList({
  *     instanceId: "es-xxxxxx",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getInstancePluginList(args: GetInstancePluginListArgs, opts?: pulumi.InvokeOptions): Promise<GetInstancePluginListResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Elasticsearch/getInstancePluginList:getInstancePluginList", {
         "instanceId": args.instanceId,
         "orderBy": args.orderBy,
@@ -83,9 +83,24 @@ export interface GetInstancePluginListResult {
     readonly pluginType?: number;
     readonly resultOutputFile?: string;
 }
-
+/**
+ * Use this data source to query detailed information of elasticsearch instance plugin list
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const instancePluginList = tencentcloud.Elasticsearch.getInstancePluginList({
+ *     instanceId: "es-xxxxxx",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getInstancePluginListOutput(args: GetInstancePluginListOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetInstancePluginListResult> {
-    return pulumi.output(args).apply(a => getInstancePluginList(a, opts))
+    return pulumi.output(args).apply((a: any) => getInstancePluginList(a, opts))
 }
 
 /**

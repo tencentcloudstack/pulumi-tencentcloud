@@ -9,22 +9,24 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const wafDomains = new tencentcloud.Tse.WafDomains("waf_domains", {
+ * const wafDomains = new tencentcloud.tse.WafDomains("wafDomains", {
  *     domain: "tse.exmaple.com",
  *     gatewayId: "gateway-ed63e957",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * tse waf_domains can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Tse/wafDomains:WafDomains waf_domains waf_domains_id
+ * $ pulumi import tencentcloud:Tse/wafDomains:WafDomains waf_domains waf_domains_id
  * ```
  */
 export class WafDomains extends pulumi.CustomResource {

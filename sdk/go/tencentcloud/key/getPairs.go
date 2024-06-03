@@ -8,43 +8,46 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Use this data source to query key pairs.
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"fmt"
 //
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Key"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Key"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Key"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Key.GetPairs(ctx, &key.GetPairsArgs{
-// 			KeyId: pulumi.StringRef("skey-ie97i3ml"),
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_, err = Key.GetPairs(ctx, &key.GetPairsArgs{
-// 			KeyName: pulumi.StringRef(fmt.Sprintf("%v%v", "^test", "$")),
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Key.GetPairs(ctx, &key.GetPairsArgs{
+//				KeyId: pulumi.StringRef("skey-ie97i3ml"),
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			_, err = Key.GetPairs(ctx, &key.GetPairsArgs{
+//				KeyName: pulumi.StringRef("^test$"),
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 func GetPairs(ctx *pulumi.Context, args *GetPairsArgs, opts ...pulumi.InvokeOption) (*GetPairsResult, error) {
-	opts = pkgInvokeDefaultOpts(opts)
+	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetPairsResult
 	err := ctx.Invoke("tencentcloud:Key/getPairs:getPairs", args, &rv, opts...)
 	if err != nil {

@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcm.Inputs
 {
 
-    public sealed class PrometheusAttachmentPrometheusCustomPromGetArgs : Pulumi.ResourceArgs
+    public sealed class PrometheusAttachmentPrometheusCustomPromGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Authentication type of the prometheus.
@@ -25,11 +25,21 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcm.Inputs
         [Input("isPublicAddr")]
         public Input<bool>? IsPublicAddr { get; set; }
 
+        [Input("password")]
+        private Input<string>? _password;
+
         /// <summary>
         /// Password of the prometheus, used in basic authentication type.
         /// </summary>
-        [Input("password")]
-        public Input<string>? Password { get; set; }
+        public Input<string>? Password
+        {
+            get => _password;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _password = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
 
         /// <summary>
         /// Url of the prometheus.
@@ -52,5 +62,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcm.Inputs
         public PrometheusAttachmentPrometheusCustomPromGetArgs()
         {
         }
+        public static new PrometheusAttachmentPrometheusCustomPromGetArgs Empty => new PrometheusAttachmentPrometheusCustomPromGetArgs();
     }
 }

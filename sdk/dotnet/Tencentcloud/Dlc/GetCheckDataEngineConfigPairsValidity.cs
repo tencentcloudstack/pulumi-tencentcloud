@@ -15,64 +15,58 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dlc
         /// <summary>
         /// Use this data source to query detailed information of dlc check_data_engine_config_pairs_validity
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var checkDataEngineConfigPairsValidity = Tencentcloud.Dlc.GetCheckDataEngineConfigPairsValidity.Invoke(new()
         ///     {
-        ///         var checkDataEngineConfigPairsValidity = Output.Create(Tencentcloud.Dlc.GetCheckDataEngineConfigPairsValidity.InvokeAsync(new Tencentcloud.Dlc.GetCheckDataEngineConfigPairsValidityArgs
-        ///         {
-        ///             ChildImageVersionId = "d3ftghd4-9a7e-4f64-a3f4-f38507c69742",
-        ///         }));
-        ///     }
+        ///         ChildImageVersionId = "d3ftghd4-9a7e-4f64-a3f4-f38507c69742",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetCheckDataEngineConfigPairsValidityResult> InvokeAsync(GetCheckDataEngineConfigPairsValidityArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetCheckDataEngineConfigPairsValidityResult>("tencentcloud:Dlc/getCheckDataEngineConfigPairsValidity:getCheckDataEngineConfigPairsValidity", args ?? new GetCheckDataEngineConfigPairsValidityArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetCheckDataEngineConfigPairsValidityResult>("tencentcloud:Dlc/getCheckDataEngineConfigPairsValidity:getCheckDataEngineConfigPairsValidity", args ?? new GetCheckDataEngineConfigPairsValidityArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of dlc check_data_engine_config_pairs_validity
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var checkDataEngineConfigPairsValidity = Tencentcloud.Dlc.GetCheckDataEngineConfigPairsValidity.Invoke(new()
         ///     {
-        ///         var checkDataEngineConfigPairsValidity = Output.Create(Tencentcloud.Dlc.GetCheckDataEngineConfigPairsValidity.InvokeAsync(new Tencentcloud.Dlc.GetCheckDataEngineConfigPairsValidityArgs
-        ///         {
-        ///             ChildImageVersionId = "d3ftghd4-9a7e-4f64-a3f4-f38507c69742",
-        ///         }));
-        ///     }
+        ///         ChildImageVersionId = "d3ftghd4-9a7e-4f64-a3f4-f38507c69742",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetCheckDataEngineConfigPairsValidityResult> Invoke(GetCheckDataEngineConfigPairsValidityInvokeArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetCheckDataEngineConfigPairsValidityResult>("tencentcloud:Dlc/getCheckDataEngineConfigPairsValidity:getCheckDataEngineConfigPairsValidity", args ?? new GetCheckDataEngineConfigPairsValidityInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetCheckDataEngineConfigPairsValidityResult>("tencentcloud:Dlc/getCheckDataEngineConfigPairsValidity:getCheckDataEngineConfigPairsValidity", args ?? new GetCheckDataEngineConfigPairsValidityInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetCheckDataEngineConfigPairsValidityArgs : Pulumi.InvokeArgs
+    public sealed class GetCheckDataEngineConfigPairsValidityArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Engine Image version id.
@@ -107,9 +101,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dlc
         public GetCheckDataEngineConfigPairsValidityArgs()
         {
         }
+        public static new GetCheckDataEngineConfigPairsValidityArgs Empty => new GetCheckDataEngineConfigPairsValidityArgs();
     }
 
-    public sealed class GetCheckDataEngineConfigPairsValidityInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetCheckDataEngineConfigPairsValidityInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Engine Image version id.
@@ -144,6 +139,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dlc
         public GetCheckDataEngineConfigPairsValidityInvokeArgs()
         {
         }
+        public static new GetCheckDataEngineConfigPairsValidityInvokeArgs Empty => new GetCheckDataEngineConfigPairsValidityInvokeArgs();
     }
 
 

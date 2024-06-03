@@ -15,68 +15,62 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
         /// <summary>
         /// Use this data source to query the list of SQL Server backups.
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var foo = Tencentcloud.Sqlserver.GetBackups.Invoke(new()
         ///     {
-        ///         var foo = Output.Create(Tencentcloud.Sqlserver.GetBackups.InvokeAsync(new Tencentcloud.Sqlserver.GetBackupsArgs
-        ///         {
-        ///             EndTime = "2020-06-22 00:00:00",
-        ///             InstanceId = "mssql-3cdq7kx5",
-        ///             StartTime = "2020-06-17 00:00:00",
-        ///         }));
-        ///     }
+        ///         EndTime = "2020-06-22 00:00:00",
+        ///         InstanceId = "mssql-3cdq7kx5",
+        ///         StartTime = "2020-06-17 00:00:00",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetBackupsResult> InvokeAsync(GetBackupsArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetBackupsResult>("tencentcloud:Sqlserver/getBackups:getBackups", args ?? new GetBackupsArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetBackupsResult>("tencentcloud:Sqlserver/getBackups:getBackups", args ?? new GetBackupsArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query the list of SQL Server backups.
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var foo = Tencentcloud.Sqlserver.GetBackups.Invoke(new()
         ///     {
-        ///         var foo = Output.Create(Tencentcloud.Sqlserver.GetBackups.InvokeAsync(new Tencentcloud.Sqlserver.GetBackupsArgs
-        ///         {
-        ///             EndTime = "2020-06-22 00:00:00",
-        ///             InstanceId = "mssql-3cdq7kx5",
-        ///             StartTime = "2020-06-17 00:00:00",
-        ///         }));
-        ///     }
+        ///         EndTime = "2020-06-22 00:00:00",
+        ///         InstanceId = "mssql-3cdq7kx5",
+        ///         StartTime = "2020-06-17 00:00:00",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetBackupsResult> Invoke(GetBackupsInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetBackupsResult>("tencentcloud:Sqlserver/getBackups:getBackups", args ?? new GetBackupsInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetBackupsResult>("tencentcloud:Sqlserver/getBackups:getBackups", args ?? new GetBackupsInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetBackupsArgs : Pulumi.InvokeArgs
+    public sealed class GetBackupsArgs : global::Pulumi.InvokeArgs
     {
         [Input("backupName")]
         public string? BackupName { get; set; }
@@ -108,9 +102,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
         public GetBackupsArgs()
         {
         }
+        public static new GetBackupsArgs Empty => new GetBackupsArgs();
     }
 
-    public sealed class GetBackupsInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetBackupsInvokeArgs : global::Pulumi.InvokeArgs
     {
         [Input("backupName")]
         public Input<string>? BackupName { get; set; }
@@ -142,6 +137,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
         public GetBackupsInvokeArgs()
         {
         }
+        public static new GetBackupsInvokeArgs Empty => new GetBackupsInvokeArgs();
     }
 
 

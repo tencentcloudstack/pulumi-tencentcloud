@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Lighthouse.Inputs
 {
 
-    public sealed class GetDisksFilterInputArgs : Pulumi.ResourceArgs
+    public sealed class GetDisksFilterInputArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Fields to be filtered. Valid names: `disk-id`: Filters by disk id; `instance-id`: Filter by instance id; `disk-name`: Filter by disk name; `zone`: Filter by zone; `disk-usage`: Filter by disk usage(Values: `SYSTEM_DISK` or `DATA_DISK`); `disk-state`: Filter by disk state.
@@ -34,5 +34,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Lighthouse.Inputs
         public GetDisksFilterInputArgs()
         {
         }
+        public static new GetDisksFilterInputArgs Empty => new GetDisksFilterInputArgs();
     }
 }

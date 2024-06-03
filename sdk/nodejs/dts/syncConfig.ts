@@ -2,18 +2,21 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
  * Provides a resource to create a dts syncConfig
  *
  * ## Example Usage
+ *
  * ### Sync mysql database to cynosdb through cdb access type
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const foo = new tencentcloud.cynosdb.Cluster("foo", {
  *     availableZone: _var.availability_zone,
@@ -110,28 +113,31 @@ import * as utilities from "../utilities";
  *     autoRetryTimeRangeMinutes: 0,
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
+ *
  * ### Sync mysql database using CCN to route from ap-shanghai to ap-guangzhou
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const vpcIdSh = "vpc-evtcyb3g";
  * const subnetIdSh = "subnet-1t83cxkp";
  * const srcMysql = tencentcloud.Mysql.getInstance({
  *     instanceName: "your_user_name_mysql_src",
  * });
- * const srcIp = srcMysql.then(srcMysql => srcMysql.instanceLists?[0]?.intranetIp);
- * const srcPort = srcMysql.then(srcMysql => srcMysql.instanceLists?[0]?.intranetPort);
+ * const srcIp = srcMysql.then(srcMysql => srcMysql.instanceLists?.[0]?.intranetIp);
+ * const srcPort = srcMysql.then(srcMysql => srcMysql.instanceLists?.[0]?.intranetPort);
  * const ccns = tencentcloud.Ccn.getInstances({
  *     name: "keep-ccn-dts-sh",
  * });
- * const ccnId = ccns.then(ccns => ccns.instanceLists?[0]?.ccnId);
+ * const ccnId = ccns.then(ccns => ccns.instanceLists?.[0]?.ccnId);
  * const dstMysql = tencentcloud.Mysql.getInstance({
  *     instanceName: "your_user_name_mysql_src",
  * });
- * const dstMysqlId = dstMysql.then(dstMysql => dstMysql.instanceLists?[0]?.mysqlId);
+ * const dstMysqlId = dstMysql.then(dstMysql => dstMysql.instanceLists?.[0]?.mysqlId);
  * const config = new pulumi.Config();
  * const srcAzSh = config.get("srcAzSh") || "ap-shanghai";
  * const dstAzGz = config.get("dstAzGz") || "ap-guangzhou";
@@ -139,7 +145,7 @@ import * as utilities from "../utilities";
  *     jobName: "keep_sync_config_ccn_2_cdb",
  * });
  * const syncConfig = new tencentcloud.dts.SyncConfig("syncConfig", {
- *     jobId: syncJobs.then(syncJobs => syncJobs.lists?[0]?.jobId),
+ *     jobId: syncJobs.then(syncJobs => syncJobs.lists?.[0]?.jobId),
  *     srcAccessType: "ccn",
  *     dstAccessType: "cdb",
  *     jobMode: "liteMode",
@@ -177,13 +183,14 @@ import * as utilities from "../utilities";
  *     autoRetryTimeRangeMinutes: 0,
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * dts sync_config can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Dts/syncConfig:SyncConfig sync_config sync_config_id
+ * $ pulumi import tencentcloud:Dts/syncConfig:SyncConfig sync_config sync_config_id
  * ```
  */
 export class SyncConfig extends pulumi.CustomResource {

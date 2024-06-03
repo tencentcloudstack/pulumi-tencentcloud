@@ -13,34 +13,35 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dnspod
     /// <summary>
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var customLine = new Tencentcloud.Dnspod.CustomLine("customLine", new()
     ///     {
-    ///         var customLine = new Tencentcloud.Dnspod.CustomLine("customLine", new Tencentcloud.Dnspod.CustomLineArgs
-    ///         {
-    ///             Area = "6.6.6.1-6.6.6.2",
-    ///             Domain = "dnspod.com",
-    ///         });
-    ///     }
+    ///         Area = "6.6.6.1-6.6.6.2",
+    ///         Domain = "dnspod.com",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// dnspod custom_line can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Dnspod/customLine:CustomLine custom_line domain#name
+    /// $ pulumi import tencentcloud:Dnspod/customLine:CustomLine custom_line domain#name
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Dnspod/customLine:CustomLine")]
-    public partial class CustomLine : Pulumi.CustomResource
+    public partial class CustomLine : global::Pulumi.CustomResource
     {
         /// <summary>
         /// The IP segment of custom line, split with `-`.
@@ -105,7 +106,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dnspod
         }
     }
 
-    public sealed class CustomLineArgs : Pulumi.ResourceArgs
+    public sealed class CustomLineArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// The IP segment of custom line, split with `-`.
@@ -128,9 +129,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dnspod
         public CustomLineArgs()
         {
         }
+        public static new CustomLineArgs Empty => new CustomLineArgs();
     }
 
-    public sealed class CustomLineState : Pulumi.ResourceArgs
+    public sealed class CustomLineState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// The IP segment of custom line, split with `-`.
@@ -153,5 +155,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dnspod
         public CustomLineState()
         {
         }
+        public static new CustomLineState Empty => new CustomLineState();
     }
 }

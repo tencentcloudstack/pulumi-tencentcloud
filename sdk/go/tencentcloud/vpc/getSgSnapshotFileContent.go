@@ -8,37 +8,42 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Use this data source to query detailed information of vpc sgSnapshotFileContent
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Vpc.GetSgSnapshotFileContent(ctx, &vpc.GetSgSnapshotFileContentArgs{
-// 			SecurityGroupId:  "sg-ntrgm89v",
-// 			SnapshotFileId:   "ssfile-017gepjxpr",
-// 			SnapshotPolicyId: "sspolicy-ebjofe71",
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Vpc.GetSgSnapshotFileContent(ctx, &vpc.GetSgSnapshotFileContentArgs{
+//				SecurityGroupId:  "sg-ntrgm89v",
+//				SnapshotFileId:   "ssfile-017gepjxpr",
+//				SnapshotPolicyId: "sspolicy-ebjofe71",
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 func GetSgSnapshotFileContent(ctx *pulumi.Context, args *GetSgSnapshotFileContentArgs, opts ...pulumi.InvokeOption) (*GetSgSnapshotFileContentResult, error) {
-	opts = pkgInvokeDefaultOpts(opts)
+	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetSgSnapshotFileContentResult
 	err := ctx.Invoke("tencentcloud:Vpc/getSgSnapshotFileContent:getSgSnapshotFileContent", args, &rv, opts...)
 	if err != nil {

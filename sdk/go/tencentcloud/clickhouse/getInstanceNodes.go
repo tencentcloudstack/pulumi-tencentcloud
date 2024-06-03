@@ -8,38 +8,43 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Use this data source to query detailed information of clickhouse instanceNodes
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Clickhouse"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Clickhouse"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Clickhouse"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Clickhouse.GetInstanceNodes(ctx, &clickhouse.GetInstanceNodesArgs{
-// 			DisplayPolicy: pulumi.StringRef("all"),
-// 			ForceAll:      pulumi.BoolRef(true),
-// 			InstanceId:    "cdwch-mvfjh373",
-// 			NodeRole:      pulumi.StringRef("data"),
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Clickhouse.GetInstanceNodes(ctx, &clickhouse.GetInstanceNodesArgs{
+//				DisplayPolicy: pulumi.StringRef("all"),
+//				ForceAll:      pulumi.BoolRef(true),
+//				InstanceId:    "cdwch-mvfjh373",
+//				NodeRole:      pulumi.StringRef("data"),
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 func GetInstanceNodes(ctx *pulumi.Context, args *GetInstanceNodesArgs, opts ...pulumi.InvokeOption) (*GetInstanceNodesResult, error) {
-	opts = pkgInvokeDefaultOpts(opts)
+	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetInstanceNodesResult
 	err := ctx.Invoke("tencentcloud:Clickhouse/getInstanceNodes:getInstanceNodes", args, &rv, opts...)
 	if err != nil {

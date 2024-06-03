@@ -14,59 +14,63 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway
     /// Provides a resource to create a APIGateway ApiApp
     /// 
     /// ## Example Usage
+    /// 
     /// ### Create a basic apigateway api_app
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var example = new Tencentcloud.ApiGateway.ApiApp("example", new()
     ///     {
-    ///         var example = new Tencentcloud.ApiGateway.ApiApp("example", new Tencentcloud.ApiGateway.ApiAppArgs
-    ///         {
-    ///             ApiAppDesc = "app desc.",
-    ///             ApiAppName = "tf_example",
-    ///         });
-    ///     }
+    ///         ApiAppDesc = "app desc.",
+    ///         ApiAppName = "tf_example",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
+    /// 
     /// ### Bind Tag
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var example = new Tencentcloud.ApiGateway.ApiApp("example", new()
     ///     {
-    ///         var example = new Tencentcloud.ApiGateway.ApiApp("example", new Tencentcloud.ApiGateway.ApiAppArgs
+    ///         ApiAppDesc = "app desc.",
+    ///         ApiAppName = "tf_example",
+    ///         Tags = 
     ///         {
-    ///             ApiAppDesc = "app desc.",
-    ///             ApiAppName = "tf_example",
-    ///             Tags = 
-    ///             {
-    ///                 { "createdBy", "terraform" },
-    ///             },
-    ///         });
-    ///     }
+    ///             { "createdBy", "terraform" },
+    ///         },
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// apigateway api_app can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:ApiGateway/apiApp:ApiApp example app-poe0pyex
+    /// $ pulumi import tencentcloud:ApiGateway/apiApp:ApiApp example app-poe0pyex
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:ApiGateway/apiApp:ApiApp")]
-    public partial class ApiApp : Pulumi.CustomResource
+    public partial class ApiApp : global::Pulumi.CustomResource
     {
         /// <summary>
         /// App description.
@@ -161,7 +165,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway
         }
     }
 
-    public sealed class ApiAppArgs : Pulumi.ResourceArgs
+    public sealed class ApiAppArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// App description.
@@ -190,9 +194,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway
         public ApiAppArgs()
         {
         }
+        public static new ApiAppArgs Empty => new ApiAppArgs();
     }
 
-    public sealed class ApiAppState : Pulumi.ResourceArgs
+    public sealed class ApiAppState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// App description.
@@ -251,5 +256,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway
         public ApiAppState()
         {
         }
+        public static new ApiAppState Empty => new ApiAppState();
     }
 }

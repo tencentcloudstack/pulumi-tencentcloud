@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver.Inputs
 {
 
-    public sealed class RestoreInstanceEncryptionArgs : Pulumi.ResourceArgs
+    public sealed class RestoreInstanceEncryptionArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Database name.
@@ -28,5 +28,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver.Inputs
         public RestoreInstanceEncryptionArgs()
         {
         }
+        public static new RestoreInstanceEncryptionArgs Empty => new RestoreInstanceEncryptionArgs();
     }
 }

@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,23 +11,22 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const alarmMetric = pulumi.output(tencentcloud.Monitor.getAlarmMetric({
+ * const alarmMetric = tencentcloud.Monitor.getAlarmMetric({
  *     module: "monitor",
  *     monitorType: "Monitoring",
  *     namespace: "cvm_device",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getAlarmMetric(args: GetAlarmMetricArgs, opts?: pulumi.InvokeOptions): Promise<GetAlarmMetricResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Monitor/getAlarmMetric:getAlarmMetric", {
         "module": args.module,
         "monitorType": args.monitorType,
@@ -77,9 +77,26 @@ export interface GetAlarmMetricResult {
     readonly namespace: string;
     readonly resultOutputFile?: string;
 }
-
+/**
+ * Use this data source to query detailed information of monitor alarmMetric
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const alarmMetric = tencentcloud.Monitor.getAlarmMetric({
+ *     module: "monitor",
+ *     monitorType: "Monitoring",
+ *     namespace: "cvm_device",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getAlarmMetricOutput(args: GetAlarmMetricOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetAlarmMetricResult> {
-    return pulumi.output(args).apply(a => getAlarmMetric(a, opts))
+    return pulumi.output(args).apply((a: any) => getAlarmMetric(a, opts))
 }
 
 /**

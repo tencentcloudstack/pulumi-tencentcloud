@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,10 +11,11 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const fooProxy = new tencentcloud.gaap.Proxy("fooProxy", {
  *     bandwidth: 10,
@@ -44,13 +46,11 @@ import * as utilities from "../utilities";
  *     domain: fooHttpRule.domain,
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getHttpRules(args: GetHttpRulesArgs, opts?: pulumi.InvokeOptions): Promise<GetHttpRulesResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Gaap/getHttpRules:getHttpRules", {
         "domain": args.domain,
         "forwardHost": args.forwardHost,
@@ -116,9 +116,50 @@ export interface GetHttpRulesResult {
      */
     readonly rules: outputs.Gaap.GetHttpRulesRule[];
 }
-
+/**
+ * Use this data source to query forward rule of layer7 listeners.
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
+ *
+ * const fooProxy = new tencentcloud.gaap.Proxy("fooProxy", {
+ *     bandwidth: 10,
+ *     concurrent: 2,
+ *     accessRegion: "SouthChina",
+ *     realserverRegion: "NorthChina",
+ * });
+ * const fooLayer7Listener = new tencentcloud.gaap.Layer7Listener("fooLayer7Listener", {
+ *     protocol: "HTTP",
+ *     port: 80,
+ *     proxyId: fooProxy.id,
+ * });
+ * const fooRealserver = new tencentcloud.gaap.Realserver("fooRealserver", {ip: "1.1.1.1"});
+ * const fooHttpRule = new tencentcloud.gaap.HttpRule("fooHttpRule", {
+ *     listenerId: fooLayer7Listener.id,
+ *     domain: "www.qq.com",
+ *     path: "/",
+ *     realserverType: "IP",
+ *     healthCheck: true,
+ *     realservers: [{
+ *         id: fooRealserver.id,
+ *         ip: fooRealserver.ip,
+ *         port: 80,
+ *     }],
+ * });
+ * const fooHttpRules = tencentcloud.Gaap.getHttpRulesOutput({
+ *     listenerId: fooLayer7Listener.id,
+ *     domain: fooHttpRule.domain,
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getHttpRulesOutput(args: GetHttpRulesOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetHttpRulesResult> {
-    return pulumi.output(args).apply(a => getHttpRules(a, opts))
+    return pulumi.output(args).apply((a: any) => getHttpRules(a, opts))
 }
 
 /**

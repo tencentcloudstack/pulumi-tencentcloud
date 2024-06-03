@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Antiddos.Inputs
 {
 
-    public sealed class DdosGeoIpBlockConfigDdosGeoIpBlockConfigGetArgs : Pulumi.ResourceArgs
+    public sealed class DdosGeoIpBlockConfigDdosGeoIpBlockConfigGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Blocking action, value [drop (intercept) trans (release)].
@@ -40,5 +40,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Antiddos.Inputs
         public DdosGeoIpBlockConfigDdosGeoIpBlockConfigGetArgs()
         {
         }
+        public static new DdosGeoIpBlockConfigDdosGeoIpBlockConfigGetArgs Empty => new DdosGeoIpBlockConfigDdosGeoIpBlockConfigGetArgs();
     }
 }

@@ -15,26 +15,27 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var operateContainerGroup = new Tencentcloud.Tsf.OperateContainerGroup("operateContainerGroup", new()
     ///     {
-    ///         var operateContainerGroup = new Tencentcloud.Tsf.OperateContainerGroup("operateContainerGroup", new Tencentcloud.Tsf.OperateContainerGroupArgs
-    ///         {
-    ///             GroupId = "group-ynd95rea",
-    ///             Operate = "stop",
-    ///         });
-    ///     }
+    ///         GroupId = "group-ynd95rea",
+    ///         Operate = "stop",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Tsf/operateContainerGroup:OperateContainerGroup")]
-    public partial class OperateContainerGroup : Pulumi.CustomResource
+    public partial class OperateContainerGroup : global::Pulumi.CustomResource
     {
         /// <summary>
         /// group Id.
@@ -93,7 +94,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf
         }
     }
 
-    public sealed class OperateContainerGroupArgs : Pulumi.ResourceArgs
+    public sealed class OperateContainerGroupArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// group Id.
@@ -110,9 +111,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf
         public OperateContainerGroupArgs()
         {
         }
+        public static new OperateContainerGroupArgs Empty => new OperateContainerGroupArgs();
     }
 
-    public sealed class OperateContainerGroupState : Pulumi.ResourceArgs
+    public sealed class OperateContainerGroupState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// group Id.
@@ -129,5 +131,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf
         public OperateContainerGroupState()
         {
         }
+        public static new OperateContainerGroupState Empty => new OperateContainerGroupState();
     }
 }

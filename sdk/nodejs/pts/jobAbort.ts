@@ -9,16 +9,18 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const jobAbort = new tencentcloud.Pts.JobAbort("job_abort", {
+ * const jobAbort = new tencentcloud.pts.JobAbort("jobAbort", {
  *     jobId: "job-my644ozi",
  *     projectId: "project-45vw7v82",
  *     scenarioId: "scenario-22q19f3k",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export class JobAbort extends pulumi.CustomResource {
     /**

@@ -7,42 +7,48 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a dlc storeLocationConfig
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dlc"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dlc"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Dlc.NewStoreLocationConfig(ctx, "storeLocationConfig", &Dlc.StoreLocationConfigArgs{
-// 			Enable:        pulumi.Int(1),
-// 			StoreLocation: pulumi.String("cosn://bucketname/"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Dlc.NewStoreLocationConfig(ctx, "storeLocationConfig", &Dlc.StoreLocationConfigArgs{
+//				Enable:        pulumi.Int(1),
+//				StoreLocation: pulumi.String("cosn://bucketname/"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // dlc store_location_config can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Dlc/storeLocationConfig:StoreLocationConfig store_location_config store_location_config_id
+// $ pulumi import tencentcloud:Dlc/storeLocationConfig:StoreLocationConfig store_location_config store_location_config_id
 // ```
 type StoreLocationConfig struct {
 	pulumi.CustomResourceState
@@ -66,7 +72,7 @@ func NewStoreLocationConfig(ctx *pulumi.Context,
 	if args.StoreLocation == nil {
 		return nil, errors.New("invalid value for required argument 'StoreLocation'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource StoreLocationConfig
 	err := ctx.RegisterResource("tencentcloud:Dlc/storeLocationConfig:StoreLocationConfig", name, args, &resource, opts...)
 	if err != nil {
@@ -147,7 +153,7 @@ func (i *StoreLocationConfig) ToStoreLocationConfigOutputWithContext(ctx context
 // StoreLocationConfigArrayInput is an input type that accepts StoreLocationConfigArray and StoreLocationConfigArrayOutput values.
 // You can construct a concrete instance of `StoreLocationConfigArrayInput` via:
 //
-//          StoreLocationConfigArray{ StoreLocationConfigArgs{...} }
+//	StoreLocationConfigArray{ StoreLocationConfigArgs{...} }
 type StoreLocationConfigArrayInput interface {
 	pulumi.Input
 
@@ -172,7 +178,7 @@ func (i StoreLocationConfigArray) ToStoreLocationConfigArrayOutputWithContext(ct
 // StoreLocationConfigMapInput is an input type that accepts StoreLocationConfigMap and StoreLocationConfigMapOutput values.
 // You can construct a concrete instance of `StoreLocationConfigMapInput` via:
 //
-//          StoreLocationConfigMap{ "key": StoreLocationConfigArgs{...} }
+//	StoreLocationConfigMap{ "key": StoreLocationConfigArgs{...} }
 type StoreLocationConfigMapInput interface {
 	pulumi.Input
 

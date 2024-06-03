@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dbbrain.Inputs
 {
 
-    public sealed class ModifyDiagDbInstanceOperationInstanceConfsArgs : Pulumi.ResourceArgs
+    public sealed class ModifyDiagDbInstanceOperationInstanceConfsArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Database inspection switch, Yes/No.
@@ -28,5 +28,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dbbrain.Inputs
         public ModifyDiagDbInstanceOperationInstanceConfsArgs()
         {
         }
+        public static new ModifyDiagDbInstanceOperationInstanceConfsArgs Empty => new ModifyDiagDbInstanceOperationInstanceConfsArgs();
     }
 }

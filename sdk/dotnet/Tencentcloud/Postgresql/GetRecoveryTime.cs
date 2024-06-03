@@ -15,64 +15,58 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
         /// <summary>
         /// Use this data source to query detailed information of postgresql recovery_time
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var recoveryTime = Tencentcloud.Postgresql.GetRecoveryTime.Invoke(new()
         ///     {
-        ///         var recoveryTime = Output.Create(Tencentcloud.Postgresql.GetRecoveryTime.InvokeAsync(new Tencentcloud.Postgresql.GetRecoveryTimeArgs
-        ///         {
-        ///             DbInstanceId = local.Pgsql_id,
-        ///         }));
-        ///     }
+        ///         DbInstanceId = local.Pgsql_id,
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetRecoveryTimeResult> InvokeAsync(GetRecoveryTimeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetRecoveryTimeResult>("tencentcloud:Postgresql/getRecoveryTime:getRecoveryTime", args ?? new GetRecoveryTimeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetRecoveryTimeResult>("tencentcloud:Postgresql/getRecoveryTime:getRecoveryTime", args ?? new GetRecoveryTimeArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of postgresql recovery_time
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var recoveryTime = Tencentcloud.Postgresql.GetRecoveryTime.Invoke(new()
         ///     {
-        ///         var recoveryTime = Output.Create(Tencentcloud.Postgresql.GetRecoveryTime.InvokeAsync(new Tencentcloud.Postgresql.GetRecoveryTimeArgs
-        ///         {
-        ///             DbInstanceId = local.Pgsql_id,
-        ///         }));
-        ///     }
+        ///         DbInstanceId = local.Pgsql_id,
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetRecoveryTimeResult> Invoke(GetRecoveryTimeInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetRecoveryTimeResult>("tencentcloud:Postgresql/getRecoveryTime:getRecoveryTime", args ?? new GetRecoveryTimeInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetRecoveryTimeResult>("tencentcloud:Postgresql/getRecoveryTime:getRecoveryTime", args ?? new GetRecoveryTimeInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetRecoveryTimeArgs : Pulumi.InvokeArgs
+    public sealed class GetRecoveryTimeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Instance ID.
@@ -89,9 +83,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
         public GetRecoveryTimeArgs()
         {
         }
+        public static new GetRecoveryTimeArgs Empty => new GetRecoveryTimeArgs();
     }
 
-    public sealed class GetRecoveryTimeInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetRecoveryTimeInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Instance ID.
@@ -108,6 +103,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
         public GetRecoveryTimeInvokeArgs()
         {
         }
+        public static new GetRecoveryTimeInvokeArgs Empty => new GetRecoveryTimeInvokeArgs();
     }
 
 

@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,19 +11,21 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const renewInstance = new tencentcloud.Cvm.RenewInstance("renew_instance", {
+ * const renewInstance = new tencentcloud.cvm.RenewInstance("renewInstance", {
  *     instanceChargePrepaid: {
  *         period: 1,
  *         renewFlag: "NOTIFY_AND_AUTO_RENEW",
  *     },
- *     instanceIds: "",
+ *     instanceId: "ins-f9jr4bd2",
  *     renewPortableDataDisk: true,
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export class RenewInstance extends pulumi.CustomResource {
     /**
@@ -62,9 +65,6 @@ export class RenewInstance extends pulumi.CustomResource {
     public readonly instanceId!: pulumi.Output<string>;
     /**
      * Whether to renew the elastic data disk. Valid values:
-     * - `TRUE`: Indicates to renew the subscription instance and renew the attached elastic data disk at the same time
-     * - `FALSE`: Indicates that the subscription instance will be renewed and the elastic data disk attached to it will not be renewed
-     * Default value: TRUE.
      */
     public readonly renewPortableDataDisk!: pulumi.Output<boolean | undefined>;
 
@@ -112,9 +112,6 @@ export interface RenewInstanceState {
     instanceId?: pulumi.Input<string>;
     /**
      * Whether to renew the elastic data disk. Valid values:
-     * - `TRUE`: Indicates to renew the subscription instance and renew the attached elastic data disk at the same time
-     * - `FALSE`: Indicates that the subscription instance will be renewed and the elastic data disk attached to it will not be renewed
-     * Default value: TRUE.
      */
     renewPortableDataDisk?: pulumi.Input<boolean>;
 }
@@ -133,9 +130,6 @@ export interface RenewInstanceArgs {
     instanceId: pulumi.Input<string>;
     /**
      * Whether to renew the elastic data disk. Valid values:
-     * - `TRUE`: Indicates to renew the subscription instance and renew the attached elastic data disk at the same time
-     * - `FALSE`: Indicates that the subscription instance will be renewed and the elastic data disk attached to it will not be renewed
-     * Default value: TRUE.
      */
     renewPortableDataDisk?: pulumi.Input<boolean>;
 }

@@ -15,70 +15,64 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dnspod
         /// <summary>
         /// Use this data source to query detailed information of dnspod domain_analytics
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var domainAnalytics = Tencentcloud.Dnspod.GetDomainAnalytics.Invoke(new()
         ///     {
-        ///         var domainAnalytics = Output.Create(Tencentcloud.Dnspod.GetDomainAnalytics.InvokeAsync(new Tencentcloud.Dnspod.GetDomainAnalyticsArgs
-        ///         {
-        ///             DnsFormat = "HOUR",
-        ///             Domain = "dnspod.cn",
-        ///             EndDate = "2023-10-12",
-        ///             StartDate = "2023-10-07",
-        ///         }));
-        ///     }
+        ///         DnsFormat = "HOUR",
+        ///         Domain = "dnspod.cn",
+        ///         EndDate = "2023-10-12",
+        ///         StartDate = "2023-10-07",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetDomainAnalyticsResult> InvokeAsync(GetDomainAnalyticsArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetDomainAnalyticsResult>("tencentcloud:Dnspod/getDomainAnalytics:getDomainAnalytics", args ?? new GetDomainAnalyticsArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetDomainAnalyticsResult>("tencentcloud:Dnspod/getDomainAnalytics:getDomainAnalytics", args ?? new GetDomainAnalyticsArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of dnspod domain_analytics
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var domainAnalytics = Tencentcloud.Dnspod.GetDomainAnalytics.Invoke(new()
         ///     {
-        ///         var domainAnalytics = Output.Create(Tencentcloud.Dnspod.GetDomainAnalytics.InvokeAsync(new Tencentcloud.Dnspod.GetDomainAnalyticsArgs
-        ///         {
-        ///             DnsFormat = "HOUR",
-        ///             Domain = "dnspod.cn",
-        ///             EndDate = "2023-10-12",
-        ///             StartDate = "2023-10-07",
-        ///         }));
-        ///     }
+        ///         DnsFormat = "HOUR",
+        ///         Domain = "dnspod.cn",
+        ///         EndDate = "2023-10-12",
+        ///         StartDate = "2023-10-07",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetDomainAnalyticsResult> Invoke(GetDomainAnalyticsInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetDomainAnalyticsResult>("tencentcloud:Dnspod/getDomainAnalytics:getDomainAnalytics", args ?? new GetDomainAnalyticsInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetDomainAnalyticsResult>("tencentcloud:Dnspod/getDomainAnalytics:getDomainAnalytics", args ?? new GetDomainAnalyticsInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetDomainAnalyticsArgs : Pulumi.InvokeArgs
+    public sealed class GetDomainAnalyticsArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// DATE: Statistics by day dimension HOUR: Statistics by hour dimension.
@@ -119,9 +113,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dnspod
         public GetDomainAnalyticsArgs()
         {
         }
+        public static new GetDomainAnalyticsArgs Empty => new GetDomainAnalyticsArgs();
     }
 
-    public sealed class GetDomainAnalyticsInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetDomainAnalyticsInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// DATE: Statistics by day dimension HOUR: Statistics by hour dimension.
@@ -162,6 +157,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dnspod
         public GetDomainAnalyticsInvokeArgs()
         {
         }
+        public static new GetDomainAnalyticsInvokeArgs Empty => new GetDomainAnalyticsInvokeArgs();
     }
 
 

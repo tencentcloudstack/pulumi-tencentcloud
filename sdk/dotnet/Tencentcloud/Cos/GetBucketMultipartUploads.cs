@@ -15,64 +15,58 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos
         /// <summary>
         /// Use this data source to query the COS bucket multipart uploads.
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var cosBucketMultipartUploads = Tencentcloud.Cos.GetBucketMultipartUploads.Invoke(new()
         ///     {
-        ///         var cosBucketMultipartUploads = Output.Create(Tencentcloud.Cos.GetBucketMultipartUploads.InvokeAsync(new Tencentcloud.Cos.GetBucketMultipartUploadsArgs
-        ///         {
-        ///             Bucket = "xxxxxx",
-        ///         }));
-        ///     }
+        ///         Bucket = "xxxxxx",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetBucketMultipartUploadsResult> InvokeAsync(GetBucketMultipartUploadsArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetBucketMultipartUploadsResult>("tencentcloud:Cos/getBucketMultipartUploads:getBucketMultipartUploads", args ?? new GetBucketMultipartUploadsArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetBucketMultipartUploadsResult>("tencentcloud:Cos/getBucketMultipartUploads:getBucketMultipartUploads", args ?? new GetBucketMultipartUploadsArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query the COS bucket multipart uploads.
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var cosBucketMultipartUploads = Tencentcloud.Cos.GetBucketMultipartUploads.Invoke(new()
         ///     {
-        ///         var cosBucketMultipartUploads = Output.Create(Tencentcloud.Cos.GetBucketMultipartUploads.InvokeAsync(new Tencentcloud.Cos.GetBucketMultipartUploadsArgs
-        ///         {
-        ///             Bucket = "xxxxxx",
-        ///         }));
-        ///     }
+        ///         Bucket = "xxxxxx",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetBucketMultipartUploadsResult> Invoke(GetBucketMultipartUploadsInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetBucketMultipartUploadsResult>("tencentcloud:Cos/getBucketMultipartUploads:getBucketMultipartUploads", args ?? new GetBucketMultipartUploadsInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetBucketMultipartUploadsResult>("tencentcloud:Cos/getBucketMultipartUploads:getBucketMultipartUploads", args ?? new GetBucketMultipartUploadsInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetBucketMultipartUploadsArgs : Pulumi.InvokeArgs
+    public sealed class GetBucketMultipartUploadsArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Bucket.
@@ -107,9 +101,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos
         public GetBucketMultipartUploadsArgs()
         {
         }
+        public static new GetBucketMultipartUploadsArgs Empty => new GetBucketMultipartUploadsArgs();
     }
 
-    public sealed class GetBucketMultipartUploadsInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetBucketMultipartUploadsInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Bucket.
@@ -144,6 +139,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos
         public GetBucketMultipartUploadsInvokeArgs()
         {
         }
+        public static new GetBucketMultipartUploadsInvokeArgs Empty => new GetBucketMultipartUploadsInvokeArgs();
     }
 
 

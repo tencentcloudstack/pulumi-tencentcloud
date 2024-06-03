@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap.Inputs
 {
 
-    public sealed class GetProxyGroupsFilterInputArgs : Pulumi.ResourceArgs
+    public sealed class GetProxyGroupsFilterInputArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Filter conditions.
@@ -34,5 +34,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap.Inputs
         public GetProxyGroupsFilterInputArgs()
         {
         }
+        public static new GetProxyGroupsFilterInputArgs Empty => new GetProxyGroupsFilterInputArgs();
     }
 }

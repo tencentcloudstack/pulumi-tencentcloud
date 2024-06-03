@@ -15,64 +15,60 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
         /// <summary>
         /// Provide a datasource to query TKE cluster levels.
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
-        ///     {
-        ///         var foo = Output.Create(Tencentcloud.Kubernetes.GetClusterLevels.InvokeAsync());
-        ///         this.Level5 = foo.Apply(foo =&gt; foo.Lists?[0]?.Alias);
-        ///     }
+        ///     var foo = Tencentcloud.Kubernetes.GetClusterLevels.Invoke();
         /// 
-        ///     [Output("level5")]
-        ///     public Output&lt;string&gt; Level5 { get; set; }
-        /// }
+        ///     return new Dictionary&lt;string, object?&gt;
+        ///     {
+        ///         ["level5"] = foo.Apply(getClusterLevelsResult =&gt; getClusterLevelsResult.Lists[0]?.Alias),
+        ///     };
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetClusterLevelsResult> InvokeAsync(GetClusterLevelsArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetClusterLevelsResult>("tencentcloud:Kubernetes/getClusterLevels:getClusterLevels", args ?? new GetClusterLevelsArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetClusterLevelsResult>("tencentcloud:Kubernetes/getClusterLevels:getClusterLevels", args ?? new GetClusterLevelsArgs(), options.WithDefaults());
 
         /// <summary>
         /// Provide a datasource to query TKE cluster levels.
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
-        ///     {
-        ///         var foo = Output.Create(Tencentcloud.Kubernetes.GetClusterLevels.InvokeAsync());
-        ///         this.Level5 = foo.Apply(foo =&gt; foo.Lists?[0]?.Alias);
-        ///     }
+        ///     var foo = Tencentcloud.Kubernetes.GetClusterLevels.Invoke();
         /// 
-        ///     [Output("level5")]
-        ///     public Output&lt;string&gt; Level5 { get; set; }
-        /// }
+        ///     return new Dictionary&lt;string, object?&gt;
+        ///     {
+        ///         ["level5"] = foo.Apply(getClusterLevelsResult =&gt; getClusterLevelsResult.Lists[0]?.Alias),
+        ///     };
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetClusterLevelsResult> Invoke(GetClusterLevelsInvokeArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetClusterLevelsResult>("tencentcloud:Kubernetes/getClusterLevels:getClusterLevels", args ?? new GetClusterLevelsInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetClusterLevelsResult>("tencentcloud:Kubernetes/getClusterLevels:getClusterLevels", args ?? new GetClusterLevelsInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetClusterLevelsArgs : Pulumi.InvokeArgs
+    public sealed class GetClusterLevelsArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Specify cluster Id, if set will only query current cluster's available levels.
@@ -81,7 +77,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
         public string? ClusterId { get; set; }
 
         /// <summary>
-        /// Used for save result.
+        /// Used to save results.
         /// </summary>
         [Input("resultOutputFile")]
         public string? ResultOutputFile { get; set; }
@@ -89,9 +85,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
         public GetClusterLevelsArgs()
         {
         }
+        public static new GetClusterLevelsArgs Empty => new GetClusterLevelsArgs();
     }
 
-    public sealed class GetClusterLevelsInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetClusterLevelsInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Specify cluster Id, if set will only query current cluster's available levels.
@@ -100,7 +97,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
         public Input<string>? ClusterId { get; set; }
 
         /// <summary>
-        /// Used for save result.
+        /// Used to save results.
         /// </summary>
         [Input("resultOutputFile")]
         public Input<string>? ResultOutputFile { get; set; }
@@ -108,6 +105,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
         public GetClusterLevelsInvokeArgs()
         {
         }
+        public static new GetClusterLevelsInvokeArgs Empty => new GetClusterLevelsInvokeArgs();
     }
 
 

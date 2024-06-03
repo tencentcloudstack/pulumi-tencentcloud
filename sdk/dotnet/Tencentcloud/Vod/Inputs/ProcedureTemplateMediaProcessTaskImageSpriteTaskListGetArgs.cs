@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vod.Inputs
 {
 
-    public sealed class ProcedureTemplateMediaProcessTaskImageSpriteTaskListGetArgs : Pulumi.ResourceArgs
+    public sealed class ProcedureTemplateMediaProcessTaskImageSpriteTaskListGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Image sprite generating template ID.
@@ -22,5 +22,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vod.Inputs
         public ProcedureTemplateMediaProcessTaskImageSpriteTaskListGetArgs()
         {
         }
+        public static new ProcedureTemplateMediaProcessTaskImageSpriteTaskListGetArgs Empty => new ProcedureTemplateMediaProcessTaskImageSpriteTaskListGetArgs();
     }
 }

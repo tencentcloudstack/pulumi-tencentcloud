@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb.Inputs
 {
 
-    public sealed class GetClusterResourcesFilterArgs : Pulumi.InvokeArgs
+    public sealed class GetClusterResourcesFilterArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Filter name.
@@ -34,5 +34,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb.Inputs
         public GetClusterResourcesFilterArgs()
         {
         }
+        public static new GetClusterResourcesFilterArgs Empty => new GetClusterResourcesFilterArgs();
     }
 }

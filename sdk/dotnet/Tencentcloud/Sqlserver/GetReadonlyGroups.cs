@@ -15,64 +15,58 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
         /// <summary>
         /// Use this data source to query the list of SQL Server readonly groups.
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var example = Tencentcloud.Sqlserver.GetDbs.Invoke(new()
         ///     {
-        ///         var example = Output.Create(Tencentcloud.Sqlserver.GetDbs.InvokeAsync(new Tencentcloud.Sqlserver.GetDbsArgs
-        ///         {
-        ///             InstanceId = "mssql-ds1xhnt9",
-        ///         }));
-        ///     }
+        ///         InstanceId = "mssql-ds1xhnt9",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetReadonlyGroupsResult> InvokeAsync(GetReadonlyGroupsArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetReadonlyGroupsResult>("tencentcloud:Sqlserver/getReadonlyGroups:getReadonlyGroups", args ?? new GetReadonlyGroupsArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetReadonlyGroupsResult>("tencentcloud:Sqlserver/getReadonlyGroups:getReadonlyGroups", args ?? new GetReadonlyGroupsArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query the list of SQL Server readonly groups.
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var example = Tencentcloud.Sqlserver.GetDbs.Invoke(new()
         ///     {
-        ///         var example = Output.Create(Tencentcloud.Sqlserver.GetDbs.InvokeAsync(new Tencentcloud.Sqlserver.GetDbsArgs
-        ///         {
-        ///             InstanceId = "mssql-ds1xhnt9",
-        ///         }));
-        ///     }
+        ///         InstanceId = "mssql-ds1xhnt9",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetReadonlyGroupsResult> Invoke(GetReadonlyGroupsInvokeArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetReadonlyGroupsResult>("tencentcloud:Sqlserver/getReadonlyGroups:getReadonlyGroups", args ?? new GetReadonlyGroupsInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetReadonlyGroupsResult>("tencentcloud:Sqlserver/getReadonlyGroups:getReadonlyGroups", args ?? new GetReadonlyGroupsInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetReadonlyGroupsArgs : Pulumi.InvokeArgs
+    public sealed class GetReadonlyGroupsArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Master SQL Server instance ID.
@@ -89,9 +83,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
         public GetReadonlyGroupsArgs()
         {
         }
+        public static new GetReadonlyGroupsArgs Empty => new GetReadonlyGroupsArgs();
     }
 
-    public sealed class GetReadonlyGroupsInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetReadonlyGroupsInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Master SQL Server instance ID.
@@ -108,6 +103,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
         public GetReadonlyGroupsInvokeArgs()
         {
         }
+        public static new GetReadonlyGroupsInvokeArgs Empty => new GetReadonlyGroupsInvokeArgs();
     }
 
 

@@ -16,90 +16,95 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway
     /// &gt; **NOTE:** After setting `uniq_vpc_id`, it cannot be modified.
     /// 
     /// ## Example Usage
+    /// 
     /// ### Shared Service
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var vpc = new Tencentcloud.Vpc.Instance("vpc", new()
     ///     {
-    ///         var vpc = new Tencentcloud.Vpc.Instance("vpc", new Tencentcloud.Vpc.InstanceArgs
-    ///         {
-    ///             CidrBlock = "10.0.0.0/16",
-    ///         });
-    ///         var example = new Tencentcloud.ApiGateway.Service("example", new Tencentcloud.ApiGateway.ServiceArgs
-    ///         {
-    ///             ServiceName = "tf-example",
-    ///             Protocol = "http&amp;https",
-    ///             ServiceDesc = "desc.",
-    ///             NetTypes = 
-    ///             {
-    ///                 "INNER",
-    ///                 "OUTER",
-    ///             },
-    ///             IpVersion = "IPv4",
-    ///             UniqVpcId = vpc.Id,
-    ///             Tags = 
-    ///             {
-    ///                 { "createdBy", "terraform" },
-    ///             },
-    ///             ReleaseLimit = 500,
-    ///             PreLimit = 500,
-    ///             TestLimit = 500,
-    ///         });
-    ///     }
+    ///         CidrBlock = "10.0.0.0/16",
+    ///     });
     /// 
-    /// }
+    ///     var example = new Tencentcloud.ApiGateway.Service("example", new()
+    ///     {
+    ///         ServiceName = "tf-example",
+    ///         Protocol = "http&amp;https",
+    ///         ServiceDesc = "desc.",
+    ///         NetTypes = new[]
+    ///         {
+    ///             "INNER",
+    ///             "OUTER",
+    ///         },
+    ///         IpVersion = "IPv4",
+    ///         UniqVpcId = vpc.Id,
+    ///         Tags = 
+    ///         {
+    ///             { "createdBy", "terraform" },
+    ///         },
+    ///         ReleaseLimit = 500,
+    ///         PreLimit = 500,
+    ///         TestLimit = 500,
+    ///     });
+    /// 
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
+    /// 
     /// ### Exclusive Service
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var example = new Tencentcloud.ApiGateway.Service("example", new()
     ///     {
-    ///         var example = new Tencentcloud.ApiGateway.Service("example", new Tencentcloud.ApiGateway.ServiceArgs
+    ///         ServiceName = "tf-example",
+    ///         Protocol = "http&amp;https",
+    ///         ServiceDesc = "desc.",
+    ///         NetTypes = new[]
     ///         {
-    ///             ServiceName = "tf-example",
-    ///             Protocol = "http&amp;https",
-    ///             ServiceDesc = "desc.",
-    ///             NetTypes = 
-    ///             {
-    ///                 "INNER",
-    ///                 "OUTER",
-    ///             },
-    ///             IpVersion = "IPv4",
-    ///             UniqVpcId = tencentcloud_vpc.Vpc.Id,
-    ///             InstanceId = "instance-rc6fcv4e",
-    ///             Tags = 
-    ///             {
-    ///                 { "createdBy", "terraform" },
-    ///             },
-    ///             ReleaseLimit = 500,
-    ///             PreLimit = 500,
-    ///             TestLimit = 500,
-    ///         });
-    ///     }
+    ///             "INNER",
+    ///             "OUTER",
+    ///         },
+    ///         IpVersion = "IPv4",
+    ///         UniqVpcId = tencentcloud_vpc.Vpc.Id,
+    ///         InstanceId = "instance-rc6fcv4e",
+    ///         Tags = 
+    ///         {
+    ///             { "createdBy", "terraform" },
+    ///         },
+    ///         ReleaseLimit = 500,
+    ///         PreLimit = 500,
+    ///         TestLimit = 500,
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// API gateway service can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:ApiGateway/service:Service service service-pg6ud8pa
+    /// $ pulumi import tencentcloud:ApiGateway/service:Service service service-pg6ud8pa
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:ApiGateway/service:Service")]
-    public partial class Service : Pulumi.CustomResource
+    public partial class Service : global::Pulumi.CustomResource
     {
         /// <summary>
         /// A list of APIs.
@@ -266,7 +271,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway
         }
     }
 
-    public sealed class ServiceArgs : Pulumi.ResourceArgs
+    public sealed class ServiceArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// It has been deprecated from version 1.81.9. Self-deployed cluster name, which is used to specify the self-deployed cluster where the service is to be created.
@@ -355,9 +360,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway
         public ServiceArgs()
         {
         }
+        public static new ServiceArgs Empty => new ServiceArgs();
     }
 
-    public sealed class ServiceState : Pulumi.ResourceArgs
+    public sealed class ServiceState : global::Pulumi.ResourceArgs
     {
         [Input("apiLists")]
         private InputList<Inputs.ServiceApiListGetArgs>? _apiLists;
@@ -506,5 +512,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway
         public ServiceState()
         {
         }
+        public static new ServiceState Empty => new ServiceState();
     }
 }

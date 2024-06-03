@@ -15,34 +15,35 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Waf
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var example = new Tencentcloud.Waf.CcAutoStatus("example", new()
     ///     {
-    ///         var example = new Tencentcloud.Waf.CcAutoStatus("example", new Tencentcloud.Waf.CcAutoStatusArgs
-    ///         {
-    ///             Domain = "www.demo.com",
-    ///             Edition = "sparta-waf",
-    ///         });
-    ///     }
+    ///         Domain = "www.demo.com",
+    ///         Edition = "sparta-waf",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// waf cc_auto_status can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Waf/ccAutoStatus:CcAutoStatus example www.demo.com#sparta-waf
+    /// $ pulumi import tencentcloud:Waf/ccAutoStatus:CcAutoStatus example www.demo.com#sparta-waf
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Waf/ccAutoStatus:CcAutoStatus")]
-    public partial class CcAutoStatus : Pulumi.CustomResource
+    public partial class CcAutoStatus : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Domain.
@@ -107,7 +108,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Waf
         }
     }
 
-    public sealed class CcAutoStatusArgs : Pulumi.ResourceArgs
+    public sealed class CcAutoStatusArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Domain.
@@ -124,9 +125,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Waf
         public CcAutoStatusArgs()
         {
         }
+        public static new CcAutoStatusArgs Empty => new CcAutoStatusArgs();
     }
 
-    public sealed class CcAutoStatusState : Pulumi.ResourceArgs
+    public sealed class CcAutoStatusState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Domain.
@@ -149,5 +151,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Waf
         public CcAutoStatusState()
         {
         }
+        public static new CcAutoStatusState Empty => new CcAutoStatusState();
     }
 }

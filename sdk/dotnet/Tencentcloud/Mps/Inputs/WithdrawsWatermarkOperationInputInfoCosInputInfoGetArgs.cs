@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps.Inputs
 {
 
-    public sealed class WithdrawsWatermarkOperationInputInfoCosInputInfoGetArgs : Pulumi.ResourceArgs
+    public sealed class WithdrawsWatermarkOperationInputInfoCosInputInfoGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// The COS bucket of the object to process, such as `TopRankVideo-125xxx88`.
@@ -34,5 +34,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps.Inputs
         public WithdrawsWatermarkOperationInputInfoCosInputInfoGetArgs()
         {
         }
+        public static new WithdrawsWatermarkOperationInputInfoCosInputInfoGetArgs Empty => new WithdrawsWatermarkOperationInputInfoCosInputInfoGetArgs();
     }
 }

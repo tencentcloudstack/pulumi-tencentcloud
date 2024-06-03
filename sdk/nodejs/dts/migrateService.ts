@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,11 +11,12 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const migrateService = new tencentcloud.Dts.MigrateService("migrate_service", {
+ * const migrateService = new tencentcloud.dts.MigrateService("migrateService", {
  *     dstDatabaseType: "cynosdbmysql",
  *     dstRegion: "ap-guangzhou",
  *     instanceClass: "small",
@@ -27,13 +29,14 @@ import * as utilities from "../utilities";
  *     }],
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * dts migrate_service can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Dts/migrateService:MigrateService migrate_service migrateService_id
+ * $ pulumi import tencentcloud:Dts/migrateService:MigrateService migrate_service migrateService_id
  * ```
  */
 export class MigrateService extends pulumi.CustomResource {

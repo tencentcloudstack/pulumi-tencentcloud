@@ -15,86 +15,82 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
         /// <summary>
         /// Use this data source to query gaap proxies.
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var fooProxy = new Tencentcloud.Gaap.Proxy("fooProxy", new()
         ///     {
-        ///         var fooProxy = new Tencentcloud.Gaap.Proxy("fooProxy", new Tencentcloud.Gaap.ProxyArgs
-        ///         {
-        ///             Bandwidth = 10,
-        ///             Concurrent = 2,
-        ///             AccessRegion = "SouthChina",
-        ///             RealserverRegion = "NorthChina",
-        ///         });
-        ///         var fooProxies = Tencentcloud.Gaap.GetProxies.Invoke(new Tencentcloud.Gaap.GetProxiesInvokeArgs
-        ///         {
-        ///             Ids = 
-        ///             {
-        ///                 fooProxy.Id,
-        ///             },
-        ///         });
-        ///     }
+        ///         Bandwidth = 10,
+        ///         Concurrent = 2,
+        ///         AccessRegion = "SouthChina",
+        ///         RealserverRegion = "NorthChina",
+        ///     });
         /// 
-        /// }
+        ///     var fooProxies = Tencentcloud.Gaap.GetProxies.Invoke(new()
+        ///     {
+        ///         Ids = new[]
+        ///         {
+        ///             fooProxy.Id,
+        ///         },
+        ///     });
+        /// 
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetProxiesResult> InvokeAsync(GetProxiesArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetProxiesResult>("tencentcloud:Gaap/getProxies:getProxies", args ?? new GetProxiesArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetProxiesResult>("tencentcloud:Gaap/getProxies:getProxies", args ?? new GetProxiesArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query gaap proxies.
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var fooProxy = new Tencentcloud.Gaap.Proxy("fooProxy", new()
         ///     {
-        ///         var fooProxy = new Tencentcloud.Gaap.Proxy("fooProxy", new Tencentcloud.Gaap.ProxyArgs
-        ///         {
-        ///             Bandwidth = 10,
-        ///             Concurrent = 2,
-        ///             AccessRegion = "SouthChina",
-        ///             RealserverRegion = "NorthChina",
-        ///         });
-        ///         var fooProxies = Tencentcloud.Gaap.GetProxies.Invoke(new Tencentcloud.Gaap.GetProxiesInvokeArgs
-        ///         {
-        ///             Ids = 
-        ///             {
-        ///                 fooProxy.Id,
-        ///             },
-        ///         });
-        ///     }
+        ///         Bandwidth = 10,
+        ///         Concurrent = 2,
+        ///         AccessRegion = "SouthChina",
+        ///         RealserverRegion = "NorthChina",
+        ///     });
         /// 
-        /// }
+        ///     var fooProxies = Tencentcloud.Gaap.GetProxies.Invoke(new()
+        ///     {
+        ///         Ids = new[]
+        ///         {
+        ///             fooProxy.Id,
+        ///         },
+        ///     });
+        /// 
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetProxiesResult> Invoke(GetProxiesInvokeArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetProxiesResult>("tencentcloud:Gaap/getProxies:getProxies", args ?? new GetProxiesInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetProxiesResult>("tencentcloud:Gaap/getProxies:getProxies", args ?? new GetProxiesInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetProxiesArgs : Pulumi.InvokeArgs
+    public sealed class GetProxiesArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Access region of the GAAP proxy to be queried. Conflict with `ids`.
@@ -147,9 +143,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
         public GetProxiesArgs()
         {
         }
+        public static new GetProxiesArgs Empty => new GetProxiesArgs();
     }
 
-    public sealed class GetProxiesInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetProxiesInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Access region of the GAAP proxy to be queried. Conflict with `ids`.
@@ -202,6 +199,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
         public GetProxiesInvokeArgs()
         {
         }
+        public static new GetProxiesInvokeArgs Empty => new GetProxiesInvokeArgs();
     }
 
 

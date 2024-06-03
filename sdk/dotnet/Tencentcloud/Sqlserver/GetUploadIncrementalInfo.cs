@@ -15,68 +15,62 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
         /// <summary>
         /// Use this data source to query detailed information of sqlserver upload_incremental_info
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var example = Tencentcloud.Sqlserver.GetUploadIncrementalInfo.Invoke(new()
         ///     {
-        ///         var example = Output.Create(Tencentcloud.Sqlserver.GetUploadIncrementalInfo.InvokeAsync(new Tencentcloud.Sqlserver.GetUploadIncrementalInfoArgs
-        ///         {
-        ///             BackupMigrationId = "mssql-backup-migration-83t5u3tv",
-        ///             IncrementalMigrationId = "mssql-incremental-migration-h36gkdxn",
-        ///             InstanceId = "mssql-4tgeyeeh",
-        ///         }));
-        ///     }
+        ///         BackupMigrationId = "mssql-backup-migration-83t5u3tv",
+        ///         IncrementalMigrationId = "mssql-incremental-migration-h36gkdxn",
+        ///         InstanceId = "mssql-4tgeyeeh",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetUploadIncrementalInfoResult> InvokeAsync(GetUploadIncrementalInfoArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetUploadIncrementalInfoResult>("tencentcloud:Sqlserver/getUploadIncrementalInfo:getUploadIncrementalInfo", args ?? new GetUploadIncrementalInfoArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetUploadIncrementalInfoResult>("tencentcloud:Sqlserver/getUploadIncrementalInfo:getUploadIncrementalInfo", args ?? new GetUploadIncrementalInfoArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of sqlserver upload_incremental_info
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var example = Tencentcloud.Sqlserver.GetUploadIncrementalInfo.Invoke(new()
         ///     {
-        ///         var example = Output.Create(Tencentcloud.Sqlserver.GetUploadIncrementalInfo.InvokeAsync(new Tencentcloud.Sqlserver.GetUploadIncrementalInfoArgs
-        ///         {
-        ///             BackupMigrationId = "mssql-backup-migration-83t5u3tv",
-        ///             IncrementalMigrationId = "mssql-incremental-migration-h36gkdxn",
-        ///             InstanceId = "mssql-4tgeyeeh",
-        ///         }));
-        ///     }
+        ///         BackupMigrationId = "mssql-backup-migration-83t5u3tv",
+        ///         IncrementalMigrationId = "mssql-incremental-migration-h36gkdxn",
+        ///         InstanceId = "mssql-4tgeyeeh",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetUploadIncrementalInfoResult> Invoke(GetUploadIncrementalInfoInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetUploadIncrementalInfoResult>("tencentcloud:Sqlserver/getUploadIncrementalInfo:getUploadIncrementalInfo", args ?? new GetUploadIncrementalInfoInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetUploadIncrementalInfoResult>("tencentcloud:Sqlserver/getUploadIncrementalInfo:getUploadIncrementalInfo", args ?? new GetUploadIncrementalInfoInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetUploadIncrementalInfoArgs : Pulumi.InvokeArgs
+    public sealed class GetUploadIncrementalInfoArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Backup import task ID, which is returned through the API CreateBackupMigration.
@@ -105,9 +99,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
         public GetUploadIncrementalInfoArgs()
         {
         }
+        public static new GetUploadIncrementalInfoArgs Empty => new GetUploadIncrementalInfoArgs();
     }
 
-    public sealed class GetUploadIncrementalInfoInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetUploadIncrementalInfoInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Backup import task ID, which is returned through the API CreateBackupMigration.
@@ -136,6 +131,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
         public GetUploadIncrementalInfoInvokeArgs()
         {
         }
+        public static new GetUploadIncrementalInfoInvokeArgs Empty => new GetUploadIncrementalInfoInvokeArgs();
     }
 
 

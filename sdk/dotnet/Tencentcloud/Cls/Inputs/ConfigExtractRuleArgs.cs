@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls.Inputs
 {
 
-    public sealed class ConfigExtractRuleArgs : Pulumi.ResourceArgs
+    public sealed class ConfigExtractRuleArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// syslog system log collection specifies the address and port that the collector listens to.
@@ -142,5 +142,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls.Inputs
         public ConfigExtractRuleArgs()
         {
         }
+        public static new ConfigExtractRuleArgs Empty => new ConfigExtractRuleArgs();
     }
 }

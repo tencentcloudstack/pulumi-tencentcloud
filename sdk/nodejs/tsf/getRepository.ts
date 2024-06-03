@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,23 +11,22 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const repository = pulumi.output(tencentcloud.Tsf.getRepository({
+ * const repository = tencentcloud.Tsf.getRepository({
  *     repositoryType: "default",
  *     searchWord: "test",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getRepository(args?: GetRepositoryArgs, opts?: pulumi.InvokeOptions): Promise<GetRepositoryResult> {
     args = args || {};
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Tsf/getRepository:getRepository", {
         "repositoryType": args.repositoryType,
         "resultOutputFile": args.resultOutputFile,
@@ -71,9 +71,25 @@ export interface GetRepositoryResult {
     readonly results: outputs.Tsf.GetRepositoryResult[];
     readonly searchWord?: string;
 }
-
+/**
+ * Use this data source to query detailed information of tsf repository
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const repository = tencentcloud.Tsf.getRepository({
+ *     repositoryType: "default",
+ *     searchWord: "test",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getRepositoryOutput(args?: GetRepositoryOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetRepositoryResult> {
-    return pulumi.output(args).apply(a => getRepository(a, opts))
+    return pulumi.output(args).apply((a: any) => getRepository(a, opts))
 }
 
 /**

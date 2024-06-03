@@ -14,48 +14,52 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps
     /// Provides a resource to create a mps withdraws_watermark_operation
     /// 
     /// ## Example Usage
+    /// 
     /// ### Withdraw the watermark from COS
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var exampleBucket = new Tencentcloud.Cos.Bucket("exampleBucket", new()
     ///     {
-    ///         var exampleBucket = new Tencentcloud.Cos.Bucket("exampleBucket", new Tencentcloud.Cos.BucketArgs
-    ///         {
-    ///             Bucket = $"tf-test-mps-wm-{local.App_id}",
-    ///             Acl = "public-read",
-    ///         });
-    ///         var exampleBucketObject = new Tencentcloud.Cos.BucketObject("exampleBucketObject", new Tencentcloud.Cos.BucketObjectArgs
-    ///         {
-    ///             Bucket = exampleBucket.CosBucket,
-    ///             Key = "/test-file/test.mov",
-    ///             Source = "/Users/luoyin/Downloads/file_example_MOV_480_700kB.mov",
-    ///         });
-    ///         var operation = new Tencentcloud.Mps.WithdrawsWatermarkOperation("operation", new Tencentcloud.Mps.WithdrawsWatermarkOperationArgs
-    ///         {
-    ///             InputInfo = new Tencentcloud.Mps.Inputs.WithdrawsWatermarkOperationInputInfoArgs
-    ///             {
-    ///                 Type = "COS",
-    ///                 CosInputInfo = new Tencentcloud.Mps.Inputs.WithdrawsWatermarkOperationInputInfoCosInputInfoArgs
-    ///                 {
-    ///                     Bucket = exampleBucketObject.Bucket,
-    ///                     Region = "%s",
-    ///                     Object = exampleBucketObject.Key,
-    ///                 },
-    ///             },
-    ///             SessionContext = "this is a example session context",
-    ///         });
-    ///     }
+    ///         CosBucket = $"tf-test-mps-wm-{local.App_id}",
+    ///         Acl = "public-read",
+    ///     });
     /// 
-    /// }
+    ///     var exampleBucketObject = new Tencentcloud.Cos.BucketObject("exampleBucketObject", new()
+    ///     {
+    ///         Bucket = exampleBucket.CosBucket,
+    ///         Key = "/test-file/test.mov",
+    ///         Source = "/Users/luoyin/Downloads/file_example_MOV_480_700kB.mov",
+    ///     });
+    /// 
+    ///     var operation = new Tencentcloud.Mps.WithdrawsWatermarkOperation("operation", new()
+    ///     {
+    ///         InputInfo = new Tencentcloud.Mps.Inputs.WithdrawsWatermarkOperationInputInfoArgs
+    ///         {
+    ///             Type = "COS",
+    ///             CosInputInfo = new Tencentcloud.Mps.Inputs.WithdrawsWatermarkOperationInputInfoCosInputInfoArgs
+    ///             {
+    ///                 Bucket = exampleBucketObject.Bucket,
+    ///                 Region = "%s",
+    ///                 Object = exampleBucketObject.Key,
+    ///             },
+    ///         },
+    ///         SessionContext = "this is a example session context",
+    ///     });
+    /// 
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Mps/withdrawsWatermarkOperation:WithdrawsWatermarkOperation")]
-    public partial class WithdrawsWatermarkOperation : Pulumi.CustomResource
+    public partial class WithdrawsWatermarkOperation : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Input information of file for metadata getting.
@@ -120,7 +124,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps
         }
     }
 
-    public sealed class WithdrawsWatermarkOperationArgs : Pulumi.ResourceArgs
+    public sealed class WithdrawsWatermarkOperationArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Input information of file for metadata getting.
@@ -143,9 +147,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps
         public WithdrawsWatermarkOperationArgs()
         {
         }
+        public static new WithdrawsWatermarkOperationArgs Empty => new WithdrawsWatermarkOperationArgs();
     }
 
-    public sealed class WithdrawsWatermarkOperationState : Pulumi.ResourceArgs
+    public sealed class WithdrawsWatermarkOperationState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Input information of file for metadata getting.
@@ -168,5 +173,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps
         public WithdrawsWatermarkOperationState()
         {
         }
+        public static new WithdrawsWatermarkOperationState Empty => new WithdrawsWatermarkOperationState();
     }
 }

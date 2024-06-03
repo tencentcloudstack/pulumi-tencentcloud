@@ -15,37 +15,38 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cvm
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var imageSharePermission = new Tencentcloud.Cvm.ImageSharePermission("imageSharePermission", new()
     ///     {
-    ///         var imageSharePermission = new Tencentcloud.Cvm.ImageSharePermission("imageSharePermission", new Tencentcloud.Cvm.ImageSharePermissionArgs
+    ///         AccountIds = new[]
     ///         {
-    ///             AccountIds = 
-    ///             {
-    ///                 "xxxxxx",
-    ///             },
-    ///             ImageId = "img-xxxxxx",
-    ///         });
-    ///     }
+    ///             "xxxxxx",
+    ///         },
+    ///         ImageId = "img-xxxxxx",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// cvm image_share_permission can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Cvm/imageSharePermission:ImageSharePermission image_share_permission image_share_permission_id
+    /// $ pulumi import tencentcloud:Cvm/imageSharePermission:ImageSharePermission image_share_permission image_share_permission_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Cvm/imageSharePermission:ImageSharePermission")]
-    public partial class ImageSharePermission : Pulumi.CustomResource
+    public partial class ImageSharePermission : global::Pulumi.CustomResource
     {
         /// <summary>
         /// List of account IDs with which an image is shared.
@@ -104,7 +105,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cvm
         }
     }
 
-    public sealed class ImageSharePermissionArgs : Pulumi.ResourceArgs
+    public sealed class ImageSharePermissionArgs : global::Pulumi.ResourceArgs
     {
         [Input("accountIds", required: true)]
         private InputList<string>? _accountIds;
@@ -127,9 +128,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cvm
         public ImageSharePermissionArgs()
         {
         }
+        public static new ImageSharePermissionArgs Empty => new ImageSharePermissionArgs();
     }
 
-    public sealed class ImageSharePermissionState : Pulumi.ResourceArgs
+    public sealed class ImageSharePermissionState : global::Pulumi.ResourceArgs
     {
         [Input("accountIds")]
         private InputList<string>? _accountIds;
@@ -152,5 +154,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cvm
         public ImageSharePermissionState()
         {
         }
+        public static new ImageSharePermissionState Empty => new ImageSharePermissionState();
     }
 }

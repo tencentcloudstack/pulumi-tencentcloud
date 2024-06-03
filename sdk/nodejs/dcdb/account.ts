@@ -9,11 +9,12 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const account = new tencentcloud.Dcdb.Account("account", {
+ * const account = new tencentcloud.dcdb.Account("account", {
  *     description: "this is a test account",
  *     host: "127.0.0.1",
  *     instanceId: "tdsqlshard-kkpoxvnv",
@@ -23,13 +24,14 @@ import * as utilities from "../utilities";
  *     userName: "mysql",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * dcdb account can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Dcdb/account:Account account account_id
+ * $ pulumi import tencentcloud:Dcdb/account:Account account account_id
  * ```
  */
 export class Account extends pulumi.CustomResource {
@@ -127,11 +129,13 @@ export class Account extends pulumi.CustomResource {
             resourceInputs["host"] = args ? args.host : undefined;
             resourceInputs["instanceId"] = args ? args.instanceId : undefined;
             resourceInputs["maxUserConnections"] = args ? args.maxUserConnections : undefined;
-            resourceInputs["password"] = args ? args.password : undefined;
+            resourceInputs["password"] = args?.password ? pulumi.secret(args.password) : undefined;
             resourceInputs["readOnly"] = args ? args.readOnly : undefined;
             resourceInputs["userName"] = args ? args.userName : undefined;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+        const secretOpts = { additionalSecretOutputs: ["password"] };
+        opts = pulumi.mergeOptions(opts, secretOpts);
         super(Account.__pulumiType, name, resourceInputs, opts);
     }
 }

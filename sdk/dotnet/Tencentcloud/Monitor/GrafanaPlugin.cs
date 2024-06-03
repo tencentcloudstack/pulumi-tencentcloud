@@ -15,62 +15,66 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var config = new Config();
+    ///     var availabilityZone = config.Get("availabilityZone") ?? "ap-guangzhou-6";
+    ///     var vpc = new Tencentcloud.Vpc.Instance("vpc", new()
     ///     {
-    ///         var config = new Config();
-    ///         var availabilityZone = config.Get("availabilityZone") ?? "ap-guangzhou-6";
-    ///         var vpc = new Tencentcloud.Vpc.Instance("vpc", new Tencentcloud.Vpc.InstanceArgs
-    ///         {
-    ///             CidrBlock = "10.0.0.0/16",
-    ///         });
-    ///         var subnet = new Tencentcloud.Subnet.Instance("subnet", new Tencentcloud.Subnet.InstanceArgs
-    ///         {
-    ///             VpcId = vpc.Id,
-    ///             AvailabilityZone = availabilityZone,
-    ///             CidrBlock = "10.0.1.0/24",
-    ///         });
-    ///         var foo = new Tencentcloud.Monitor.GrafanaInstance("foo", new Tencentcloud.Monitor.GrafanaInstanceArgs
-    ///         {
-    ///             InstanceName = "test-grafana",
-    ///             VpcId = vpc.Id,
-    ///             SubnetIds = 
-    ///             {
-    ///                 subnet.Id,
-    ///             },
-    ///             GrafanaInitPassword = "1234567890",
-    ///             EnableInternet = false,
-    ///             Tags = 
-    ///             {
-    ///                 { "createdBy", "test" },
-    ///             },
-    ///         });
-    ///         var grafanaPlugin = new Tencentcloud.Monitor.GrafanaPlugin("grafanaPlugin", new Tencentcloud.Monitor.GrafanaPluginArgs
-    ///         {
-    ///             InstanceId = foo.Id,
-    ///             PluginId = "grafana-piechart-panel",
-    ///             Version = "1.6.2",
-    ///         });
-    ///     }
+    ///         CidrBlock = "10.0.0.0/16",
+    ///     });
     /// 
-    /// }
+    ///     var subnet = new Tencentcloud.Subnet.Instance("subnet", new()
+    ///     {
+    ///         VpcId = vpc.Id,
+    ///         AvailabilityZone = availabilityZone,
+    ///         CidrBlock = "10.0.1.0/24",
+    ///     });
+    /// 
+    ///     var foo = new Tencentcloud.Monitor.GrafanaInstance("foo", new()
+    ///     {
+    ///         InstanceName = "test-grafana",
+    ///         VpcId = vpc.Id,
+    ///         SubnetIds = new[]
+    ///         {
+    ///             subnet.Id,
+    ///         },
+    ///         GrafanaInitPassword = "1234567890",
+    ///         EnableInternet = false,
+    ///         Tags = 
+    ///         {
+    ///             { "createdBy", "test" },
+    ///         },
+    ///     });
+    /// 
+    ///     var grafanaPlugin = new Tencentcloud.Monitor.GrafanaPlugin("grafanaPlugin", new()
+    ///     {
+    ///         InstanceId = foo.Id,
+    ///         PluginId = "grafana-piechart-panel",
+    ///         Version = "1.6.2",
+    ///     });
+    /// 
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// monitor grafanaPlugin can be imported using the instance_id#plugin_id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Monitor/grafanaPlugin:GrafanaPlugin grafanaPlugin grafana-50nj6v00#grafana-piechart-panel
+    /// $ pulumi import tencentcloud:Monitor/grafanaPlugin:GrafanaPlugin grafanaPlugin grafana-50nj6v00#grafana-piechart-panel
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Monitor/grafanaPlugin:GrafanaPlugin")]
-    public partial class GrafanaPlugin : Pulumi.CustomResource
+    public partial class GrafanaPlugin : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Grafana instance id.
@@ -135,7 +139,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
         }
     }
 
-    public sealed class GrafanaPluginArgs : Pulumi.ResourceArgs
+    public sealed class GrafanaPluginArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Grafana instance id.
@@ -158,9 +162,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
         public GrafanaPluginArgs()
         {
         }
+        public static new GrafanaPluginArgs Empty => new GrafanaPluginArgs();
     }
 
-    public sealed class GrafanaPluginState : Pulumi.ResourceArgs
+    public sealed class GrafanaPluginState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Grafana instance id.
@@ -183,5 +188,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
         public GrafanaPluginState()
         {
         }
+        public static new GrafanaPluginState Empty => new GrafanaPluginState();
     }
 }

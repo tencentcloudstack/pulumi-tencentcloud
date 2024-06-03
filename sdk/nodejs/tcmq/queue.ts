@@ -9,21 +9,21 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const queue = new tencentcloud.Tcmq.Queue("queue", {
- *     queueName: "queue_name",
- * });
+ * const queue = new tencentcloud.tcmq.Queue("queue", {queueName: "queue_name"});
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * tcmq queue can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Tcmq/queue:Queue queue queue_id
+ * $ pulumi import tencentcloud:Tcmq/queue:Queue queue queue_id
  * ```
  */
 export class Queue extends pulumi.CustomResource {

@@ -14,67 +14,72 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
     /// Provides a resource to create a postgresql security_group_config
     /// 
     /// ## Example Usage
+    /// 
     /// ### Set security group for the sepcified postgres instance
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var securityGroupConfig = new Tencentcloud.Postgresql.SecurityGroupConfig("securityGroupConfig", new()
     ///     {
-    ///         var securityGroupConfig = new Tencentcloud.Postgresql.SecurityGroupConfig("securityGroupConfig", new Tencentcloud.Postgresql.SecurityGroupConfigArgs
+    ///         SecurityGroupIdSets = new[]
     ///         {
-    ///             SecurityGroupIdSets = 
-    ///             {
-    ///                 local.Sg_id,
-    ///                 local.Sg_id2,
-    ///             },
-    ///             DbInstanceId = local.Pgsql_id,
-    ///         });
-    ///     }
+    ///             local.Sg_id,
+    ///             local.Sg_id2,
+    ///         },
+    ///         DbInstanceId = local.Pgsql_id,
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
+    /// 
     /// ### Set security group for the specified readonly group
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var @group = new Tencentcloud.Postgresql.ReadonlyGroup("group", new()
     ///     {
-    ///         var @group = new Tencentcloud.Postgresql.ReadonlyGroup("group", new Tencentcloud.Postgresql.ReadonlyGroupArgs
-    ///         {
-    ///             MasterDbInstanceId = local.Pgsql_id,
-    ///             ProjectId = 0,
-    ///             SubnetId = local.Subnet_id,
-    ///             VpcId = local.Vpc_id,
-    ///             ReplayLagEliminate = 1,
-    ///             ReplayLatencyEliminate = 1,
-    ///             MaxReplayLag = 100,
-    ///             MaxReplayLatency = 512,
-    ///             MinDelayEliminateReserve = 1,
-    ///         });
-    ///         var securityGroupConfig = new Tencentcloud.Postgresql.SecurityGroupConfig("securityGroupConfig", new Tencentcloud.Postgresql.SecurityGroupConfigArgs
-    ///         {
-    ///             SecurityGroupIdSets = 
-    ///             {
-    ///                 local.Sg_id,
-    ///                 local.Sg_id2,
-    ///             },
-    ///             ReadOnlyGroupId = @group.Id,
-    ///         });
-    ///     }
+    ///         MasterDbInstanceId = local.Pgsql_id,
+    ///         ProjectId = 0,
+    ///         SubnetId = local.Subnet_id,
+    ///         VpcId = local.Vpc_id,
+    ///         ReplayLagEliminate = 1,
+    ///         ReplayLatencyEliminate = 1,
+    ///         MaxReplayLag = 100,
+    ///         MaxReplayLatency = 512,
+    ///         MinDelayEliminateReserve = 1,
+    ///     });
     /// 
-    /// }
+    ///     var securityGroupConfig = new Tencentcloud.Postgresql.SecurityGroupConfig("securityGroupConfig", new()
+    ///     {
+    ///         SecurityGroupIdSets = new[]
+    ///         {
+    ///             local.Sg_id,
+    ///             local.Sg_id2,
+    ///         },
+    ///         ReadOnlyGroupId = @group.Id,
+    ///     });
+    /// 
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Postgresql/securityGroupConfig:SecurityGroupConfig")]
-    public partial class SecurityGroupConfig : Pulumi.CustomResource
+    public partial class SecurityGroupConfig : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Instance ID. Either this parameter or ReadOnlyGroupId must be passed in. If both parameters are passed in, ReadOnlyGroupId will be ignored.
@@ -139,7 +144,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
         }
     }
 
-    public sealed class SecurityGroupConfigArgs : Pulumi.ResourceArgs
+    public sealed class SecurityGroupConfigArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Instance ID. Either this parameter or ReadOnlyGroupId must be passed in. If both parameters are passed in, ReadOnlyGroupId will be ignored.
@@ -168,9 +173,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
         public SecurityGroupConfigArgs()
         {
         }
+        public static new SecurityGroupConfigArgs Empty => new SecurityGroupConfigArgs();
     }
 
-    public sealed class SecurityGroupConfigState : Pulumi.ResourceArgs
+    public sealed class SecurityGroupConfigState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Instance ID. Either this parameter or ReadOnlyGroupId must be passed in. If both parameters are passed in, ReadOnlyGroupId will be ignored.
@@ -199,5 +205,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
         public SecurityGroupConfigState()
         {
         }
+        public static new SecurityGroupConfigState Empty => new SecurityGroupConfigState();
     }
 }

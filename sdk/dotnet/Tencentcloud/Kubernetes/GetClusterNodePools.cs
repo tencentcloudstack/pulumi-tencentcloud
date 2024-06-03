@@ -15,102 +15,96 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
         /// <summary>
         /// Use this data source to query detailed information of kubernetes cluster_node_pools
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var clusterNodePools = Tencentcloud.Kubernetes.GetClusterNodePools.Invoke(new()
         ///     {
-        ///         var clusterNodePools = Output.Create(Tencentcloud.Kubernetes.GetClusterNodePools.InvokeAsync(new Tencentcloud.Kubernetes.GetClusterNodePoolsArgs
+        ///         ClusterId = "cls-kzilgv5m",
+        ///         Filters = new[]
         ///         {
-        ///             ClusterId = "cls-kzilgv5m",
-        ///             Filters = 
+        ///             new Tencentcloud.Kubernetes.Inputs.GetClusterNodePoolsFilterInputArgs
         ///             {
-        ///                 new Tencentcloud.Kubernetes.Inputs.GetClusterNodePoolsFilterArgs
+        ///                 Name = "NodePoolsName",
+        ///                 Values = new[]
         ///                 {
-        ///                     Name = "NodePoolsName",
-        ///                     Values = 
-        ///                     {
-        ///                         "mynodepool_xxxx",
-        ///                     },
-        ///                 },
-        ///                 new Tencentcloud.Kubernetes.Inputs.GetClusterNodePoolsFilterArgs
-        ///                 {
-        ///                     Name = "NodePoolsId",
-        ///                     Values = 
-        ///                     {
-        ///                         "np-ngjwhdv4",
-        ///                     },
+        ///                     "mynodepool_xxxx",
         ///                 },
         ///             },
-        ///         }));
-        ///     }
+        ///             new Tencentcloud.Kubernetes.Inputs.GetClusterNodePoolsFilterInputArgs
+        ///             {
+        ///                 Name = "NodePoolsId",
+        ///                 Values = new[]
+        ///                 {
+        ///                     "np-ngjwhdv4",
+        ///                 },
+        ///             },
+        ///         },
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetClusterNodePoolsResult> InvokeAsync(GetClusterNodePoolsArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetClusterNodePoolsResult>("tencentcloud:Kubernetes/getClusterNodePools:getClusterNodePools", args ?? new GetClusterNodePoolsArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetClusterNodePoolsResult>("tencentcloud:Kubernetes/getClusterNodePools:getClusterNodePools", args ?? new GetClusterNodePoolsArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of kubernetes cluster_node_pools
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var clusterNodePools = Tencentcloud.Kubernetes.GetClusterNodePools.Invoke(new()
         ///     {
-        ///         var clusterNodePools = Output.Create(Tencentcloud.Kubernetes.GetClusterNodePools.InvokeAsync(new Tencentcloud.Kubernetes.GetClusterNodePoolsArgs
+        ///         ClusterId = "cls-kzilgv5m",
+        ///         Filters = new[]
         ///         {
-        ///             ClusterId = "cls-kzilgv5m",
-        ///             Filters = 
+        ///             new Tencentcloud.Kubernetes.Inputs.GetClusterNodePoolsFilterInputArgs
         ///             {
-        ///                 new Tencentcloud.Kubernetes.Inputs.GetClusterNodePoolsFilterArgs
+        ///                 Name = "NodePoolsName",
+        ///                 Values = new[]
         ///                 {
-        ///                     Name = "NodePoolsName",
-        ///                     Values = 
-        ///                     {
-        ///                         "mynodepool_xxxx",
-        ///                     },
-        ///                 },
-        ///                 new Tencentcloud.Kubernetes.Inputs.GetClusterNodePoolsFilterArgs
-        ///                 {
-        ///                     Name = "NodePoolsId",
-        ///                     Values = 
-        ///                     {
-        ///                         "np-ngjwhdv4",
-        ///                     },
+        ///                     "mynodepool_xxxx",
         ///                 },
         ///             },
-        ///         }));
-        ///     }
+        ///             new Tencentcloud.Kubernetes.Inputs.GetClusterNodePoolsFilterInputArgs
+        ///             {
+        ///                 Name = "NodePoolsId",
+        ///                 Values = new[]
+        ///                 {
+        ///                     "np-ngjwhdv4",
+        ///                 },
+        ///             },
+        ///         },
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetClusterNodePoolsResult> Invoke(GetClusterNodePoolsInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetClusterNodePoolsResult>("tencentcloud:Kubernetes/getClusterNodePools:getClusterNodePools", args ?? new GetClusterNodePoolsInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetClusterNodePoolsResult>("tencentcloud:Kubernetes/getClusterNodePools:getClusterNodePools", args ?? new GetClusterNodePoolsInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetClusterNodePoolsArgs : Pulumi.InvokeArgs
+    public sealed class GetClusterNodePoolsArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// ID of the cluster.
@@ -139,9 +133,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
         public GetClusterNodePoolsArgs()
         {
         }
+        public static new GetClusterNodePoolsArgs Empty => new GetClusterNodePoolsArgs();
     }
 
-    public sealed class GetClusterNodePoolsInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetClusterNodePoolsInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// ID of the cluster.
@@ -170,6 +165,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
         public GetClusterNodePoolsInvokeArgs()
         {
         }
+        public static new GetClusterNodePoolsInvokeArgs Empty => new GetClusterNodePoolsInvokeArgs();
     }
 
 

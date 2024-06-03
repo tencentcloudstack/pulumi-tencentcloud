@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,11 +11,12 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const deployContainerGroup = new tencentcloud.Tsf.DeployContainerGroup("deploy_container_group", {
+ * const deployContainerGroup = new tencentcloud.tsf.DeployContainerGroup("deployContainerGroup", {
  *     agentCpuLimit: "0.2",
  *     agentCpuRequest: "0.1",
  *     agentMemLimit: "400",
@@ -74,6 +76,7 @@ import * as utilities from "../utilities";
  *     },
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export class DeployContainerGroup extends pulumi.CustomResource {
     /**

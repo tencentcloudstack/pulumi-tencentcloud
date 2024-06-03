@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,22 +11,21 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const describeHostDdosInstanceList = pulumi.output(tencentcloud.Ssl.getDescribeHostDdosInstanceList({
+ * const describeHostDdosInstanceList = tencentcloud.Ssl.getDescribeHostDdosInstanceList({
  *     certificateId: "8u8DII0l",
  *     resourceType: "ddos",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getDescribeHostDdosInstanceList(args: GetDescribeHostDdosInstanceListArgs, opts?: pulumi.InvokeOptions): Promise<GetDescribeHostDdosInstanceListResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Ssl/getDescribeHostDdosInstanceList:getDescribeHostDdosInstanceList", {
         "certificateId": args.certificateId,
         "filters": args.filters,
@@ -85,9 +85,25 @@ export interface GetDescribeHostDdosInstanceListResult {
     readonly resourceType: string;
     readonly resultOutputFile?: string;
 }
-
+/**
+ * Use this data source to query detailed information of ssl describeHostDdosInstanceList
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const describeHostDdosInstanceList = tencentcloud.Ssl.getDescribeHostDdosInstanceList({
+ *     certificateId: "8u8DII0l",
+ *     resourceType: "ddos",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getDescribeHostDdosInstanceListOutput(args: GetDescribeHostDdosInstanceListOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetDescribeHostDdosInstanceListResult> {
-    return pulumi.output(args).apply(a => getDescribeHostDdosInstanceList(a, opts))
+    return pulumi.output(args).apply((a: any) => getDescribeHostDdosInstanceList(a, opts))
 }
 
 /**

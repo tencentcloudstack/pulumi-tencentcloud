@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls.Inputs
 {
 
-    public sealed class CosRechargeExtractRuleInfoGetArgs : Pulumi.ResourceArgs
+    public sealed class CosRechargeExtractRuleInfoGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// syslog address.
@@ -142,5 +142,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls.Inputs
         public CosRechargeExtractRuleInfoGetArgs()
         {
         }
+        public static new CosRechargeExtractRuleInfoGetArgs Empty => new CosRechargeExtractRuleInfoGetArgs();
     }
 }

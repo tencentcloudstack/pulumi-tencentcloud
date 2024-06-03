@@ -15,39 +15,40 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var grafanaDnsConfig = new Tencentcloud.Monitor.GrafanaDnsConfig("grafanaDnsConfig", new()
     ///     {
-    ///         var grafanaDnsConfig = new Tencentcloud.Monitor.GrafanaDnsConfig("grafanaDnsConfig", new Tencentcloud.Monitor.GrafanaDnsConfigArgs
+    ///         InstanceId = "grafana-dp2hnnfa",
+    ///         NameServers = new[]
     ///         {
-    ///             InstanceId = "grafana-dp2hnnfa",
-    ///             NameServers = 
-    ///             {
-    ///                 "10.1.2.1",
-    ///                 "10.1.2.2",
-    ///                 "10.1.2.3",
-    ///             },
-    ///         });
-    ///     }
+    ///             "10.1.2.1",
+    ///             "10.1.2.2",
+    ///             "10.1.2.3",
+    ///         },
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// monitor grafana_dns_config can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Monitor/grafanaDnsConfig:GrafanaDnsConfig grafana_dns_config instance_id
+    /// $ pulumi import tencentcloud:Monitor/grafanaDnsConfig:GrafanaDnsConfig grafana_dns_config instance_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Monitor/grafanaDnsConfig:GrafanaDnsConfig")]
-    public partial class GrafanaDnsConfig : Pulumi.CustomResource
+    public partial class GrafanaDnsConfig : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Grafana instance ID.
@@ -106,7 +107,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
         }
     }
 
-    public sealed class GrafanaDnsConfigArgs : Pulumi.ResourceArgs
+    public sealed class GrafanaDnsConfigArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Grafana instance ID.
@@ -129,9 +130,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
         public GrafanaDnsConfigArgs()
         {
         }
+        public static new GrafanaDnsConfigArgs Empty => new GrafanaDnsConfigArgs();
     }
 
-    public sealed class GrafanaDnsConfigState : Pulumi.ResourceArgs
+    public sealed class GrafanaDnsConfigState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Grafana instance ID.
@@ -154,5 +156,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
         public GrafanaDnsConfigState()
         {
         }
+        public static new GrafanaDnsConfigState Empty => new GrafanaDnsConfigState();
     }
 }

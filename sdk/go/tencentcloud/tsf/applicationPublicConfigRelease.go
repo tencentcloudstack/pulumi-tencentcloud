@@ -7,43 +7,49 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a tsf applicationPublicConfigRelease
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tsf"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tsf"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Tsf.NewApplicationPublicConfigRelease(ctx, "applicationPublicConfigRelease", &Tsf.ApplicationPublicConfigReleaseArgs{
-// 			ConfigId:    pulumi.String("dcfg-p-123456"),
-// 			NamespaceId: pulumi.String("namespace-123456"),
-// 			ReleaseDesc: pulumi.String("product version"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Tsf.NewApplicationPublicConfigRelease(ctx, "applicationPublicConfigRelease", &Tsf.ApplicationPublicConfigReleaseArgs{
+//				ConfigId:    pulumi.String("dcfg-p-123456"),
+//				NamespaceId: pulumi.String("namespace-123456"),
+//				ReleaseDesc: pulumi.String("product version"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // tsf application_public_config_release can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Tsf/applicationPublicConfigRelease:ApplicationPublicConfigRelease application_public_config_release application_public_config_attachment_id
+// $ pulumi import tencentcloud:Tsf/applicationPublicConfigRelease:ApplicationPublicConfigRelease application_public_config_release application_public_config_attachment_id
 // ```
 type ApplicationPublicConfigRelease struct {
 	pulumi.CustomResourceState
@@ -69,7 +75,7 @@ func NewApplicationPublicConfigRelease(ctx *pulumi.Context,
 	if args.NamespaceId == nil {
 		return nil, errors.New("invalid value for required argument 'NamespaceId'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource ApplicationPublicConfigRelease
 	err := ctx.RegisterResource("tencentcloud:Tsf/applicationPublicConfigRelease:ApplicationPublicConfigRelease", name, args, &resource, opts...)
 	if err != nil {
@@ -158,7 +164,7 @@ func (i *ApplicationPublicConfigRelease) ToApplicationPublicConfigReleaseOutputW
 // ApplicationPublicConfigReleaseArrayInput is an input type that accepts ApplicationPublicConfigReleaseArray and ApplicationPublicConfigReleaseArrayOutput values.
 // You can construct a concrete instance of `ApplicationPublicConfigReleaseArrayInput` via:
 //
-//          ApplicationPublicConfigReleaseArray{ ApplicationPublicConfigReleaseArgs{...} }
+//	ApplicationPublicConfigReleaseArray{ ApplicationPublicConfigReleaseArgs{...} }
 type ApplicationPublicConfigReleaseArrayInput interface {
 	pulumi.Input
 
@@ -183,7 +189,7 @@ func (i ApplicationPublicConfigReleaseArray) ToApplicationPublicConfigReleaseArr
 // ApplicationPublicConfigReleaseMapInput is an input type that accepts ApplicationPublicConfigReleaseMap and ApplicationPublicConfigReleaseMapOutput values.
 // You can construct a concrete instance of `ApplicationPublicConfigReleaseMapInput` via:
 //
-//          ApplicationPublicConfigReleaseMap{ "key": ApplicationPublicConfigReleaseArgs{...} }
+//	ApplicationPublicConfigReleaseMap{ "key": ApplicationPublicConfigReleaseArgs{...} }
 type ApplicationPublicConfigReleaseMapInput interface {
 	pulumi.Input
 

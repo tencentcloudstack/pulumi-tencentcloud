@@ -9,24 +9,26 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const foo = new tencentcloud.Cam.RoleSso("foo", {
+ * const foo = new tencentcloud.cam.RoleSso("foo", {
  *     clientIds: ["..."],
  *     description: "this is a description",
  *     identityKey: "...",
  *     identityUrl: "https://login.microsoftonline.com/.../v2.0",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * CAM-ROLE-SSO can be imported using the `name`, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Cam/roleSso:RoleSso foo "test"
+ * $ pulumi import tencentcloud:Cam/roleSso:RoleSso foo "test"
  * ```
  */
 export class RoleSso extends pulumi.CustomResource {

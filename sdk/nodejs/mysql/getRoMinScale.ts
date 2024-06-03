@@ -9,23 +9,21 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const roMinScale = pulumi.output(tencentcloud.Mysql.getRoMinScale({
- *     // ro_instance_id = ""
+ * const roMinScale = tencentcloud.Mysql.getRoMinScale({
  *     masterInstanceId: "cdb-fitq5t9h",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getRoMinScale(args?: GetRoMinScaleArgs, opts?: pulumi.InvokeOptions): Promise<GetRoMinScaleResult> {
     args = args || {};
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Mysql/getRoMinScale:getRoMinScale", {
         "masterInstanceId": args.masterInstanceId,
         "resultOutputFile": args.resultOutputFile,
@@ -71,9 +69,24 @@ export interface GetRoMinScaleResult {
      */
     readonly volume: number;
 }
-
+/**
+ * Use this data source to query detailed information of mysql roMinScale
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const roMinScale = tencentcloud.Mysql.getRoMinScale({
+ *     masterInstanceId: "cdb-fitq5t9h",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getRoMinScaleOutput(args?: GetRoMinScaleOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetRoMinScaleResult> {
-    return pulumi.output(args).apply(a => getRoMinScale(a, opts))
+    return pulumi.output(args).apply((a: any) => getRoMinScale(a, opts))
 }
 
 /**

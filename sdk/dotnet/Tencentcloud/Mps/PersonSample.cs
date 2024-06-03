@@ -15,47 +15,50 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
     /// using System;
+    /// using System.Collections.Generic;
     /// using System.IO;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// 	
+    /// string ReadFileBase64(string path) 
     /// {
-    /// 	private static string ReadFileBase64(string path) {
-    /// 		return Convert.ToBase64String(Encoding.UTF8.GetBytes(File.ReadAllText(path)))
-    /// 	}
-    /// 
-    ///     public MyStack()
-    ///     {
-    ///         var personSample = new Tencentcloud.Mps.PersonSample("personSample", new Tencentcloud.Mps.PersonSampleArgs
-    ///         {
-    ///             Usages = 
-    ///             {
-    ///                 "Review.Face",
-    ///             },
-    ///             Description = "test",
-    ///             FaceContents = 
-    ///             {
-    ///                 ReadFileBase64("./person.png"),
-    ///             },
-    ///         });
-    ///     }
-    /// 
+    ///     return Convert.ToBase64String(Encoding.UTF8.GetBytes(File.ReadAllText(path)));
     /// }
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     var personSample = new Tencentcloud.Mps.PersonSample("personSample", new()
+    ///     {
+    ///         Usages = new[]
+    ///         {
+    ///             "Review.Face",
+    ///         },
+    ///         Description = "test",
+    ///         FaceContents = new[]
+    ///         {
+    ///             ReadFileBase64("./person.png"),
+    ///         },
+    ///     });
+    /// 
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// mps person_sample can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Mps/personSample:PersonSample person_sample person_sample_id
+    /// $ pulumi import tencentcloud:Mps/personSample:PersonSample person_sample person_sample_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Mps/personSample:PersonSample")]
-    public partial class PersonSample : Pulumi.CustomResource
+    public partial class PersonSample : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Material description, length limit: 1024 characters.
@@ -126,7 +129,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps
         }
     }
 
-    public sealed class PersonSampleArgs : Pulumi.ResourceArgs
+    public sealed class PersonSampleArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Material description, length limit: 1024 characters.
@@ -167,9 +170,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps
         public PersonSampleArgs()
         {
         }
+        public static new PersonSampleArgs Empty => new PersonSampleArgs();
     }
 
-    public sealed class PersonSampleState : Pulumi.ResourceArgs
+    public sealed class PersonSampleState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Material description, length limit: 1024 characters.
@@ -210,5 +214,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps
         public PersonSampleState()
         {
         }
+        public static new PersonSampleState Empty => new PersonSampleState();
     }
 }

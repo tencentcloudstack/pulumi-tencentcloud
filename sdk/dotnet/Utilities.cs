@@ -75,7 +75,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud
         }
     }
 
-    internal sealed class TencentcloudResourceTypeAttribute : Pulumi.ResourceTypeAttribute
+    internal sealed class TencentcloudResourceTypeAttribute : global::Pulumi.ResourceTypeAttribute
     {
         public TencentcloudResourceTypeAttribute(string type) : base(type, Utilities.Version)
         {

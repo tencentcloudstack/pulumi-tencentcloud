@@ -11,10 +11,14 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Pts.Inputs
 {
 
-    public sealed class JobDomainNameConfigDnsConfigArgs : Pulumi.ResourceArgs
+    public sealed class JobDomainNameConfigDnsConfigArgs : global::Pulumi.ResourceArgs
     {
         [Input("nameservers")]
         private InputList<string>? _nameservers;
+
+        /// <summary>
+        /// DNS IP List.
+        /// </summary>
         public InputList<string> Nameservers
         {
             get => _nameservers ?? (_nameservers = new InputList<string>());
@@ -24,5 +28,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Pts.Inputs
         public JobDomainNameConfigDnsConfigArgs()
         {
         }
+        public static new JobDomainNameConfigDnsConfigArgs Empty => new JobDomainNameConfigDnsConfigArgs();
     }
 }

@@ -17,50 +17,51 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dayu
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var testRule = new Tencentcloud.Dayu.L4Rule("testRule", new()
     ///     {
-    ///         var testRule = new Tencentcloud.Dayu.L4Rule("testRule", new Tencentcloud.Dayu.L4RuleArgs
+    ///         DPort = 60,
+    ///         HealthCheckHealthNum = 5,
+    ///         HealthCheckInterval = 35,
+    ///         HealthCheckSwitch = true,
+    ///         HealthCheckTimeout = 30,
+    ///         HealthCheckUnhealthNum = 10,
+    ///         Protocol = "TCP",
+    ///         ResourceId = "bgpip-00000294",
+    ///         ResourceType = "bgpip",
+    ///         SPort = 80,
+    ///         SessionSwitch = false,
+    ///         SessionTime = 300,
+    ///         SourceLists = new[]
     ///         {
-    ///             DPort = 60,
-    ///             HealthCheckHealthNum = 5,
-    ///             HealthCheckInterval = 35,
-    ///             HealthCheckSwitch = true,
-    ///             HealthCheckTimeout = 30,
-    ///             HealthCheckUnhealthNum = 10,
-    ///             Protocol = "TCP",
-    ///             ResourceId = "bgpip-00000294",
-    ///             ResourceType = "bgpip",
-    ///             SPort = 80,
-    ///             SessionSwitch = false,
-    ///             SessionTime = 300,
-    ///             SourceLists = 
+    ///             new Tencentcloud.Dayu.Inputs.L4RuleSourceListArgs
     ///             {
-    ///                 new Tencentcloud.Dayu.Inputs.L4RuleSourceListArgs
-    ///                 {
-    ///                     Source = "1.1.1.1",
-    ///                     Weight = 100,
-    ///                 },
-    ///                 new Tencentcloud.Dayu.Inputs.L4RuleSourceListArgs
-    ///                 {
-    ///                     Source = "2.2.2.2",
-    ///                     Weight = 50,
-    ///                 },
+    ///                 Source = "1.1.1.1",
+    ///                 Weight = 100,
     ///             },
-    ///             SourceType = 2,
-    ///         });
-    ///     }
+    ///             new Tencentcloud.Dayu.Inputs.L4RuleSourceListArgs
+    ///             {
+    ///                 Source = "2.2.2.2",
+    ///                 Weight = 50,
+    ///             },
+    ///         },
+    ///         SourceType = 2,
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Dayu/l4Rule:L4Rule")]
-    public partial class L4Rule : Pulumi.CustomResource
+    public partial class L4Rule : global::Pulumi.CustomResource
     {
         /// <summary>
         /// The destination port of the L4 rule.
@@ -209,7 +210,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dayu
         }
     }
 
-    public sealed class L4RuleArgs : Pulumi.ResourceArgs
+    public sealed class L4RuleArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// The destination port of the L4 rule.
@@ -310,9 +311,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dayu
         public L4RuleArgs()
         {
         }
+        public static new L4RuleArgs Empty => new L4RuleArgs();
     }
 
-    public sealed class L4RuleState : Pulumi.ResourceArgs
+    public sealed class L4RuleState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// The destination port of the L4 rule.
@@ -425,5 +427,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dayu
         public L4RuleState()
         {
         }
+        public static new L4RuleState Empty => new L4RuleState();
     }
 }

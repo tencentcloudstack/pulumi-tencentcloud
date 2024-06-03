@@ -15,58 +15,52 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Waf
         /// <summary>
         /// Use this data source to query detailed information of waf user_clb_regions
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
-        ///     {
-        ///         var example = Output.Create(Tencentcloud.Waf.GetUserClbRegions.InvokeAsync());
-        ///     }
+        ///     var example = Tencentcloud.Waf.GetUserClbRegions.Invoke();
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetUserClbRegionsResult> InvokeAsync(GetUserClbRegionsArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetUserClbRegionsResult>("tencentcloud:Waf/getUserClbRegions:getUserClbRegions", args ?? new GetUserClbRegionsArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetUserClbRegionsResult>("tencentcloud:Waf/getUserClbRegions:getUserClbRegions", args ?? new GetUserClbRegionsArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of waf user_clb_regions
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
-        ///     {
-        ///         var example = Output.Create(Tencentcloud.Waf.GetUserClbRegions.InvokeAsync());
-        ///     }
+        ///     var example = Tencentcloud.Waf.GetUserClbRegions.Invoke();
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetUserClbRegionsResult> Invoke(GetUserClbRegionsInvokeArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetUserClbRegionsResult>("tencentcloud:Waf/getUserClbRegions:getUserClbRegions", args ?? new GetUserClbRegionsInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetUserClbRegionsResult>("tencentcloud:Waf/getUserClbRegions:getUserClbRegions", args ?? new GetUserClbRegionsInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetUserClbRegionsArgs : Pulumi.InvokeArgs
+    public sealed class GetUserClbRegionsArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Used to save results.
@@ -77,9 +71,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Waf
         public GetUserClbRegionsArgs()
         {
         }
+        public static new GetUserClbRegionsArgs Empty => new GetUserClbRegionsArgs();
     }
 
-    public sealed class GetUserClbRegionsInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetUserClbRegionsInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Used to save results.
@@ -90,6 +85,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Waf
         public GetUserClbRegionsInvokeArgs()
         {
         }
+        public static new GetUserClbRegionsInvokeArgs Empty => new GetUserClbRegionsInvokeArgs();
     }
 
 

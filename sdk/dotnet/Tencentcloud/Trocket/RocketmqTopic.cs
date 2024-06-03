@@ -15,50 +15,52 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Trocket
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var rocketmqInstance = new Tencentcloud.Trocket.RocketmqInstance("rocketmqInstance", new()
     ///     {
-    ///         var rocketmqInstance = new Tencentcloud.Trocket.RocketmqInstance("rocketmqInstance", new Tencentcloud.Trocket.RocketmqInstanceArgs
+    ///         InstanceType = "EXPERIMENT",
+    ///         SkuCode = "experiment_500",
+    ///         Remark = "test",
+    ///         VpcId = "vpc-xxxxx",
+    ///         SubnetId = "subnet-xxxxx",
+    ///         Tags = 
     ///         {
-    ///             InstanceType = "EXPERIMENT",
-    ///             SkuCode = "experiment_500",
-    ///             Remark = "test",
-    ///             VpcId = "vpc-xxxxx",
-    ///             SubnetId = "subnet-xxxxx",
-    ///             Tags = 
-    ///             {
-    ///                 { "tag_key", "rocketmq" },
-    ///                 { "tag_value", "5.x" },
-    ///             },
-    ///         });
-    ///         var rocketmqTopic = new Tencentcloud.Trocket.RocketmqTopic("rocketmqTopic", new Tencentcloud.Trocket.RocketmqTopicArgs
-    ///         {
-    ///             InstanceId = rocketmqInstance.Id,
-    ///             Topic = "test_topic",
-    ///             TopicType = "NORMAL",
-    ///             QueueNum = 4,
-    ///             Remark = "test for terraform",
-    ///         });
-    ///     }
+    ///             { "tag_key", "rocketmq" },
+    ///             { "tag_value", "5.x" },
+    ///         },
+    ///     });
     /// 
-    /// }
+    ///     var rocketmqTopic = new Tencentcloud.Trocket.RocketmqTopic("rocketmqTopic", new()
+    ///     {
+    ///         InstanceId = rocketmqInstance.Id,
+    ///         Topic = "test_topic",
+    ///         TopicType = "NORMAL",
+    ///         QueueNum = 4,
+    ///         Remark = "test for terraform",
+    ///     });
+    /// 
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// trocket rocketmq_topic can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Trocket/rocketmqTopic:RocketmqTopic rocketmq_topic instanceId#topic
+    /// $ pulumi import tencentcloud:Trocket/rocketmqTopic:RocketmqTopic rocketmq_topic instanceId#topic
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Trocket/rocketmqTopic:RocketmqTopic")]
-    public partial class RocketmqTopic : Pulumi.CustomResource
+    public partial class RocketmqTopic : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Instance Id.
@@ -135,7 +137,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Trocket
         }
     }
 
-    public sealed class RocketmqTopicArgs : Pulumi.ResourceArgs
+    public sealed class RocketmqTopicArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Instance Id.
@@ -170,9 +172,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Trocket
         public RocketmqTopicArgs()
         {
         }
+        public static new RocketmqTopicArgs Empty => new RocketmqTopicArgs();
     }
 
-    public sealed class RocketmqTopicState : Pulumi.ResourceArgs
+    public sealed class RocketmqTopicState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Instance Id.
@@ -207,5 +210,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Trocket
         public RocketmqTopicState()
         {
         }
+        public static new RocketmqTopicState Empty => new RocketmqTopicState();
     }
 }

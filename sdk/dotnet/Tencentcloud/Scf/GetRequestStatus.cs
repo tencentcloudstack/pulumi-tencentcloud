@@ -15,68 +15,62 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Scf
         /// <summary>
         /// Use this data source to query detailed information of scf request_status
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var requestStatus = Tencentcloud.Scf.GetRequestStatus.Invoke(new()
         ///     {
-        ///         var requestStatus = Output.Create(Tencentcloud.Scf.GetRequestStatus.InvokeAsync(new Tencentcloud.Scf.GetRequestStatusArgs
-        ///         {
-        ///             FunctionName = "keep-1676351130",
-        ///             FunctionRequestId = "9de9405a-e33a-498d-bb59-e80b7bed1191",
-        ///             Namespace = "default",
-        ///         }));
-        ///     }
+        ///         FunctionName = "keep-1676351130",
+        ///         FunctionRequestId = "9de9405a-e33a-498d-bb59-e80b7bed1191",
+        ///         Namespace = "default",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetRequestStatusResult> InvokeAsync(GetRequestStatusArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetRequestStatusResult>("tencentcloud:Scf/getRequestStatus:getRequestStatus", args ?? new GetRequestStatusArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetRequestStatusResult>("tencentcloud:Scf/getRequestStatus:getRequestStatus", args ?? new GetRequestStatusArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of scf request_status
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var requestStatus = Tencentcloud.Scf.GetRequestStatus.Invoke(new()
         ///     {
-        ///         var requestStatus = Output.Create(Tencentcloud.Scf.GetRequestStatus.InvokeAsync(new Tencentcloud.Scf.GetRequestStatusArgs
-        ///         {
-        ///             FunctionName = "keep-1676351130",
-        ///             FunctionRequestId = "9de9405a-e33a-498d-bb59-e80b7bed1191",
-        ///             Namespace = "default",
-        ///         }));
-        ///     }
+        ///         FunctionName = "keep-1676351130",
+        ///         FunctionRequestId = "9de9405a-e33a-498d-bb59-e80b7bed1191",
+        ///         Namespace = "default",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetRequestStatusResult> Invoke(GetRequestStatusInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetRequestStatusResult>("tencentcloud:Scf/getRequestStatus:getRequestStatus", args ?? new GetRequestStatusInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetRequestStatusResult>("tencentcloud:Scf/getRequestStatus:getRequestStatus", args ?? new GetRequestStatusInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetRequestStatusArgs : Pulumi.InvokeArgs
+    public sealed class GetRequestStatusArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// End time of the query. such as `2017-05-16 20:59:59`. If `StartTime` is not specified, `EndTime` defaults to the current time. If `StartTime` is specified, `EndTime` is required, and it need to be later than the `StartTime`.
@@ -117,9 +111,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Scf
         public GetRequestStatusArgs()
         {
         }
+        public static new GetRequestStatusArgs Empty => new GetRequestStatusArgs();
     }
 
-    public sealed class GetRequestStatusInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetRequestStatusInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// End time of the query. such as `2017-05-16 20:59:59`. If `StartTime` is not specified, `EndTime` defaults to the current time. If `StartTime` is specified, `EndTime` is required, and it need to be later than the `StartTime`.
@@ -160,6 +155,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Scf
         public GetRequestStatusInvokeArgs()
         {
         }
+        public static new GetRequestStatusInvokeArgs Empty => new GetRequestStatusInvokeArgs();
     }
 
 

@@ -9,24 +9,23 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const upgradePrice = pulumi.output(tencentcloud.Mariadb.getUpgradePrice({
+ * const upgradePrice = tencentcloud.Mariadb.getUpgradePrice({
  *     instanceId: "tdsql-9vqvls95",
  *     memory: 4,
  *     nodeCount: 2,
  *     storage: 40,
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getUpgradePrice(args: GetUpgradePriceArgs, opts?: pulumi.InvokeOptions): Promise<GetUpgradePriceResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Mariadb/getUpgradePrice:getUpgradePrice", {
         "amountUnit": args.amountUnit,
         "instanceId": args.instanceId,
@@ -94,9 +93,27 @@ export interface GetUpgradePriceResult {
     readonly resultOutputFile?: string;
     readonly storage: number;
 }
-
+/**
+ * Use this data source to query detailed information of mariadb upgradePrice
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const upgradePrice = tencentcloud.Mariadb.getUpgradePrice({
+ *     instanceId: "tdsql-9vqvls95",
+ *     memory: 4,
+ *     nodeCount: 2,
+ *     storage: 40,
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getUpgradePriceOutput(args: GetUpgradePriceOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetUpgradePriceResult> {
-    return pulumi.output(args).apply(a => getUpgradePrice(a, opts))
+    return pulumi.output(args).apply((a: any) => getUpgradePrice(a, opts))
 }
 
 /**

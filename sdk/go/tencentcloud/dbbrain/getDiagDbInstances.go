@@ -8,39 +8,44 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Use this data source to query detailed information of dbbrain diagDbInstances
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Dbbrain"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dbbrain"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dbbrain"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Dbbrain.GetDiagDbInstances(ctx, &dbbrain.GetDiagDbInstancesArgs{
-// 			InstanceNames: []string{
-// 				"keep_preset_mysql",
-// 			},
-// 			IsSupported: true,
-// 			Product:     "mysql",
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Dbbrain.GetDiagDbInstances(ctx, &dbbrain.GetDiagDbInstancesArgs{
+//				InstanceNames: []string{
+//					"keep_preset_mysql",
+//				},
+//				IsSupported: true,
+//				Product:     "mysql",
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 func GetDiagDbInstances(ctx *pulumi.Context, args *GetDiagDbInstancesArgs, opts ...pulumi.InvokeOption) (*GetDiagDbInstancesResult, error) {
-	opts = pkgInvokeDefaultOpts(opts)
+	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetDiagDbInstancesResult
 	err := ctx.Invoke("tencentcloud:Dbbrain/getDiagDbInstances:getDiagDbInstances", args, &rv, opts...)
 	if err != nil {

@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dcdb.Inputs
 {
 
-    public sealed class AccountPrivilegesAccountArgs : Pulumi.ResourceArgs
+    public sealed class AccountPrivilegesAccountArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// account host.
@@ -28,5 +28,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dcdb.Inputs
         public AccountPrivilegesAccountArgs()
         {
         }
+        public static new AccountPrivilegesAccountArgs Empty => new AccountPrivilegesAccountArgs();
     }
 }

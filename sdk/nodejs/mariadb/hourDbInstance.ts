@@ -9,11 +9,12 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const basic = new tencentcloud.Mariadb.HourDbInstance("basic", {
+ * const basic = new tencentcloud.mariadb.HourDbInstance("basic", {
  *     dbVersionId: "10.0",
  *     instanceName: "db-test-del",
  *     memory: 2,
@@ -31,13 +32,14 @@ import * as utilities from "../utilities";
  *     ],
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * mariadb hour_db_instance can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Mariadb/hourDbInstance:HourDbInstance hour_db_instance tdsql-kjqih9nn
+ * $ pulumi import tencentcloud:Mariadb/hourDbInstance:HourDbInstance hour_db_instance tdsql-kjqih9nn
  * ```
  */
 export class HourDbInstance extends pulumi.CustomResource {

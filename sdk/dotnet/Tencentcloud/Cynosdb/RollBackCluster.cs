@@ -15,52 +15,53 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var rollBackCluster = new Tencentcloud.Cynosdb.RollBackCluster("rollBackCluster", new()
     ///     {
-    ///         var rollBackCluster = new Tencentcloud.Cynosdb.RollBackCluster("rollBackCluster", new Tencentcloud.Cynosdb.RollBackClusterArgs
+    ///         ClusterId = "cynosdbmysql-bws8h88b",
+    ///         ExpectTimeThresh = 0,
+    ///         RollbackDatabases = new[]
     ///         {
-    ///             ClusterId = "cynosdbmysql-bws8h88b",
-    ///             ExpectTimeThresh = 0,
-    ///             RollbackDatabases = 
+    ///             new Tencentcloud.Cynosdb.Inputs.RollBackClusterRollbackDatabaseArgs
     ///             {
-    ///                 new Tencentcloud.Cynosdb.Inputs.RollBackClusterRollbackDatabaseArgs
-    ///                 {
-    ///                     NewDatabase = "users_bak_1",
-    ///                     OldDatabase = "users",
-    ///                 },
+    ///                 NewDatabase = "users_bak_1",
+    ///                 OldDatabase = "users",
     ///             },
-    ///             RollbackId = 732725,
-    ///             RollbackMode = "full",
-    ///             RollbackStrategy = "snapRollback",
-    ///             RollbackTables = 
+    ///         },
+    ///         RollbackId = 732725,
+    ///         RollbackMode = "full",
+    ///         RollbackStrategy = "snapRollback",
+    ///         RollbackTables = new[]
+    ///         {
+    ///             new Tencentcloud.Cynosdb.Inputs.RollBackClusterRollbackTableArgs
     ///             {
-    ///                 new Tencentcloud.Cynosdb.Inputs.RollBackClusterRollbackTableArgs
+    ///                 Database = "tf_ci_test",
+    ///                 Tables = new[]
     ///                 {
-    ///                     Database = "tf_ci_test",
-    ///                     Tables = 
+    ///                     new Tencentcloud.Cynosdb.Inputs.RollBackClusterRollbackTableTableArgs
     ///                     {
-    ///                         new Tencentcloud.Cynosdb.Inputs.RollBackClusterRollbackTableTableArgs
-    ///                         {
-    ///                             NewTable = "test_bak_111",
-    ///                             OldTable = "test",
-    ///                         },
+    ///                         NewTable = "test_bak_111",
+    ///                         OldTable = "test",
     ///                     },
     ///                 },
     ///             },
-    ///         });
-    ///     }
+    ///         },
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Cynosdb/rollBackCluster:RollBackCluster")]
-    public partial class RollBackCluster : Pulumi.CustomResource
+    public partial class RollBackCluster : global::Pulumi.CustomResource
     {
         /// <summary>
         /// The ID of cluster.
@@ -155,7 +156,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
         }
     }
 
-    public sealed class RollBackClusterArgs : Pulumi.ResourceArgs
+    public sealed class RollBackClusterArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// The ID of cluster.
@@ -220,9 +221,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
         public RollBackClusterArgs()
         {
         }
+        public static new RollBackClusterArgs Empty => new RollBackClusterArgs();
     }
 
-    public sealed class RollBackClusterState : Pulumi.ResourceArgs
+    public sealed class RollBackClusterState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// The ID of cluster.
@@ -287,5 +289,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
         public RollBackClusterState()
         {
         }
+        public static new RollBackClusterState Empty => new RollBackClusterState();
     }
 }

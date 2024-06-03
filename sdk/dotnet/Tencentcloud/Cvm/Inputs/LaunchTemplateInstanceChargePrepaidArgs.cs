@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cvm.Inputs
 {
 
-    public sealed class LaunchTemplateInstanceChargePrepaidArgs : Pulumi.ResourceArgs
+    public sealed class LaunchTemplateInstanceChargePrepaidArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// The period of purchasing instances.
@@ -28,5 +28,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cvm.Inputs
         public LaunchTemplateInstanceChargePrepaidArgs()
         {
         }
+        public static new LaunchTemplateInstanceChargePrepaidArgs Empty => new LaunchTemplateInstanceChargePrepaidArgs();
     }
 }

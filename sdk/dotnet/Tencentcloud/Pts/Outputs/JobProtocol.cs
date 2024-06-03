@@ -14,13 +14,25 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Pts.Outputs
     [OutputType]
     public sealed class JobProtocol
     {
+        /// <summary>
+        /// File ID.
+        /// </summary>
         public readonly string? FileId;
+        /// <summary>
+        /// Protocol name.
+        /// </summary>
         public readonly string? Name;
+        /// <summary>
+        /// File name.
+        /// </summary>
         public readonly int? Size;
         /// <summary>
         /// Scene Type.
         /// </summary>
         public readonly string? Type;
+        /// <summary>
+        /// Update time.
+        /// </summary>
         public readonly string? UpdatedAt;
 
         [OutputConstructor]

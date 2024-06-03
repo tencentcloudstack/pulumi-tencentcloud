@@ -7,54 +7,59 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a ci mediaSpeechRecognitionTemplate
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Ci"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ci"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ci"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Ci.NewMediaSpeechRecognitionTemplate(ctx, "mediaSpeechRecognitionTemplate", &Ci.MediaSpeechRecognitionTemplateArgs{
-// 			Bucket: pulumi.String("terraform-ci-1308919341"),
-// 			SpeechRecognition: &ci.MediaSpeechRecognitionTemplateSpeechRecognitionArgs{
-// 				ChannelNum:         pulumi.String("1"),
-// 				ConvertNumMode:     pulumi.String("0"),
-// 				EngineModelType:    pulumi.String("16k_zh"),
-// 				FilterDirty:        pulumi.String("0"),
-// 				FilterModal:        pulumi.String("1"),
-// 				FilterPunc:         pulumi.String("0"),
-// 				OutputFileType:     pulumi.String("txt"),
-// 				ResTextFormat:      pulumi.String("1"),
-// 				SpeakerDiarization: pulumi.String("1"),
-// 				SpeakerNumber:      pulumi.String("0"),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Ci.NewMediaSpeechRecognitionTemplate(ctx, "mediaSpeechRecognitionTemplate", &Ci.MediaSpeechRecognitionTemplateArgs{
+//				Bucket: pulumi.String("terraform-ci-1308919341"),
+//				SpeechRecognition: &ci.MediaSpeechRecognitionTemplateSpeechRecognitionArgs{
+//					ChannelNum:         pulumi.String("1"),
+//					ConvertNumMode:     pulumi.String("0"),
+//					EngineModelType:    pulumi.String("16k_zh"),
+//					FilterDirty:        pulumi.String("0"),
+//					FilterModal:        pulumi.String("1"),
+//					FilterPunc:         pulumi.String("0"),
+//					OutputFileType:     pulumi.String("txt"),
+//					ResTextFormat:      pulumi.String("1"),
+//					SpeakerDiarization: pulumi.String("1"),
+//					SpeakerNumber:      pulumi.String("0"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // ci media_speech_recognition_template can be imported using the bucket#templateId, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Ci/mediaSpeechRecognitionTemplate:MediaSpeechRecognitionTemplate media_speech_recognition_template terraform-ci-xxxxxx#t1d794430f2f1f4350b11e905ce2c6167e
+// $ pulumi import tencentcloud:Ci/mediaSpeechRecognitionTemplate:MediaSpeechRecognitionTemplate media_speech_recognition_template terraform-ci-xxxxxx#t1d794430f2f1f4350b11e905ce2c6167e
 // ```
 type MediaSpeechRecognitionTemplate struct {
 	pulumi.CustomResourceState
@@ -80,7 +85,7 @@ func NewMediaSpeechRecognitionTemplate(ctx *pulumi.Context,
 	if args.SpeechRecognition == nil {
 		return nil, errors.New("invalid value for required argument 'SpeechRecognition'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource MediaSpeechRecognitionTemplate
 	err := ctx.RegisterResource("tencentcloud:Ci/mediaSpeechRecognitionTemplate:MediaSpeechRecognitionTemplate", name, args, &resource, opts...)
 	if err != nil {
@@ -169,7 +174,7 @@ func (i *MediaSpeechRecognitionTemplate) ToMediaSpeechRecognitionTemplateOutputW
 // MediaSpeechRecognitionTemplateArrayInput is an input type that accepts MediaSpeechRecognitionTemplateArray and MediaSpeechRecognitionTemplateArrayOutput values.
 // You can construct a concrete instance of `MediaSpeechRecognitionTemplateArrayInput` via:
 //
-//          MediaSpeechRecognitionTemplateArray{ MediaSpeechRecognitionTemplateArgs{...} }
+//	MediaSpeechRecognitionTemplateArray{ MediaSpeechRecognitionTemplateArgs{...} }
 type MediaSpeechRecognitionTemplateArrayInput interface {
 	pulumi.Input
 
@@ -194,7 +199,7 @@ func (i MediaSpeechRecognitionTemplateArray) ToMediaSpeechRecognitionTemplateArr
 // MediaSpeechRecognitionTemplateMapInput is an input type that accepts MediaSpeechRecognitionTemplateMap and MediaSpeechRecognitionTemplateMapOutput values.
 // You can construct a concrete instance of `MediaSpeechRecognitionTemplateMapInput` via:
 //
-//          MediaSpeechRecognitionTemplateMap{ "key": MediaSpeechRecognitionTemplateArgs{...} }
+//	MediaSpeechRecognitionTemplateMap{ "key": MediaSpeechRecognitionTemplateArgs{...} }
 type MediaSpeechRecognitionTemplateMapInput interface {
 	pulumi.Input
 

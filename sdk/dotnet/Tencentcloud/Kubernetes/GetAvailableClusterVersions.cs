@@ -15,90 +15,84 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
         /// <summary>
         /// Use this data source to query detailed information of kubernetes available_cluster_versions
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var queryById = Tencentcloud.Kubernetes.GetAvailableClusterVersions.Invoke(new()
         ///     {
-        ///         var queryById = Output.Create(Tencentcloud.Kubernetes.GetAvailableClusterVersions.InvokeAsync(new Tencentcloud.Kubernetes.GetAvailableClusterVersionsArgs
-        ///         {
-        ///             ClusterId = "xxx",
-        ///         }));
-        ///         this.VersionsId = queryById.Apply(queryById =&gt; queryById.Versions);
-        ///         var queryByIds = Output.Create(Tencentcloud.Kubernetes.GetAvailableClusterVersions.InvokeAsync(new Tencentcloud.Kubernetes.GetAvailableClusterVersionsArgs
-        ///         {
-        ///             ClusterIds = 
-        ///             {
-        ///                 "xxx",
-        ///             },
-        ///         }));
-        ///         this.VersionsIds = queryByIds.Apply(queryByIds =&gt; queryByIds.Clusters);
-        ///     }
+        ///         ClusterId = "xxx",
+        ///     });
         /// 
-        ///     [Output("versionsId")]
-        ///     public Output&lt;string&gt; VersionsId { get; set; }
-        ///     [Output("versionsIds")]
-        ///     public Output&lt;string&gt; VersionsIds { get; set; }
-        /// }
+        ///     var queryByIds = Tencentcloud.Kubernetes.GetAvailableClusterVersions.Invoke(new()
+        ///     {
+        ///         ClusterIds = new[]
+        ///         {
+        ///             "xxx",
+        ///         },
+        ///     });
+        /// 
+        ///     return new Dictionary&lt;string, object?&gt;
+        ///     {
+        ///         ["versionsId"] = queryById.Apply(getAvailableClusterVersionsResult =&gt; getAvailableClusterVersionsResult.Versions),
+        ///         ["versionsIds"] = queryByIds.Apply(getAvailableClusterVersionsResult =&gt; getAvailableClusterVersionsResult.Clusters),
+        ///     };
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetAvailableClusterVersionsResult> InvokeAsync(GetAvailableClusterVersionsArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetAvailableClusterVersionsResult>("tencentcloud:Kubernetes/getAvailableClusterVersions:getAvailableClusterVersions", args ?? new GetAvailableClusterVersionsArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetAvailableClusterVersionsResult>("tencentcloud:Kubernetes/getAvailableClusterVersions:getAvailableClusterVersions", args ?? new GetAvailableClusterVersionsArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of kubernetes available_cluster_versions
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var queryById = Tencentcloud.Kubernetes.GetAvailableClusterVersions.Invoke(new()
         ///     {
-        ///         var queryById = Output.Create(Tencentcloud.Kubernetes.GetAvailableClusterVersions.InvokeAsync(new Tencentcloud.Kubernetes.GetAvailableClusterVersionsArgs
-        ///         {
-        ///             ClusterId = "xxx",
-        ///         }));
-        ///         this.VersionsId = queryById.Apply(queryById =&gt; queryById.Versions);
-        ///         var queryByIds = Output.Create(Tencentcloud.Kubernetes.GetAvailableClusterVersions.InvokeAsync(new Tencentcloud.Kubernetes.GetAvailableClusterVersionsArgs
-        ///         {
-        ///             ClusterIds = 
-        ///             {
-        ///                 "xxx",
-        ///             },
-        ///         }));
-        ///         this.VersionsIds = queryByIds.Apply(queryByIds =&gt; queryByIds.Clusters);
-        ///     }
+        ///         ClusterId = "xxx",
+        ///     });
         /// 
-        ///     [Output("versionsId")]
-        ///     public Output&lt;string&gt; VersionsId { get; set; }
-        ///     [Output("versionsIds")]
-        ///     public Output&lt;string&gt; VersionsIds { get; set; }
-        /// }
+        ///     var queryByIds = Tencentcloud.Kubernetes.GetAvailableClusterVersions.Invoke(new()
+        ///     {
+        ///         ClusterIds = new[]
+        ///         {
+        ///             "xxx",
+        ///         },
+        ///     });
+        /// 
+        ///     return new Dictionary&lt;string, object?&gt;
+        ///     {
+        ///         ["versionsId"] = queryById.Apply(getAvailableClusterVersionsResult =&gt; getAvailableClusterVersionsResult.Versions),
+        ///         ["versionsIds"] = queryByIds.Apply(getAvailableClusterVersionsResult =&gt; getAvailableClusterVersionsResult.Clusters),
+        ///     };
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetAvailableClusterVersionsResult> Invoke(GetAvailableClusterVersionsInvokeArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetAvailableClusterVersionsResult>("tencentcloud:Kubernetes/getAvailableClusterVersions:getAvailableClusterVersions", args ?? new GetAvailableClusterVersionsInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetAvailableClusterVersionsResult>("tencentcloud:Kubernetes/getAvailableClusterVersions:getAvailableClusterVersions", args ?? new GetAvailableClusterVersionsInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetAvailableClusterVersionsArgs : Pulumi.InvokeArgs
+    public sealed class GetAvailableClusterVersionsArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Cluster Id.
@@ -127,9 +121,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
         public GetAvailableClusterVersionsArgs()
         {
         }
+        public static new GetAvailableClusterVersionsArgs Empty => new GetAvailableClusterVersionsArgs();
     }
 
-    public sealed class GetAvailableClusterVersionsInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetAvailableClusterVersionsInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Cluster Id.
@@ -158,6 +153,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
         public GetAvailableClusterVersionsInvokeArgs()
         {
         }
+        public static new GetAvailableClusterVersionsInvokeArgs Empty => new GetAvailableClusterVersionsInvokeArgs();
     }
 
 

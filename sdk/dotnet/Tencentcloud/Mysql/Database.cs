@@ -15,35 +15,36 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var database = new Tencentcloud.Mysql.Database("database", new()
     ///     {
-    ///         var database = new Tencentcloud.Mysql.Database("database", new Tencentcloud.Mysql.DatabaseArgs
-    ///         {
-    ///             CharacterSetName = "utf8",
-    ///             DbName = "for_tf_test",
-    ///             InstanceId = "cdb-i9xfdf7z",
-    ///         });
-    ///     }
+    ///         CharacterSetName = "utf8",
+    ///         DbName = "for_tf_test",
+    ///         InstanceId = "cdb-i9xfdf7z",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// mysql database can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Mysql/database:Database database instanceId#dbName
+    /// $ pulumi import tencentcloud:Mysql/database:Database database instanceId#dbName
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Mysql/database:Database")]
-    public partial class Database : Pulumi.CustomResource
+    public partial class Database : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Character set. Valid values:  `utf8`, `gbk`, `latin1`, `utf8mb4`.
@@ -108,7 +109,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
         }
     }
 
-    public sealed class DatabaseArgs : Pulumi.ResourceArgs
+    public sealed class DatabaseArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Character set. Valid values:  `utf8`, `gbk`, `latin1`, `utf8mb4`.
@@ -131,9 +132,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
         public DatabaseArgs()
         {
         }
+        public static new DatabaseArgs Empty => new DatabaseArgs();
     }
 
-    public sealed class DatabaseState : Pulumi.ResourceArgs
+    public sealed class DatabaseState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Character set. Valid values:  `utf8`, `gbk`, `latin1`, `utf8mb4`.
@@ -156,5 +158,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
         public DatabaseState()
         {
         }
+        public static new DatabaseState Empty => new DatabaseState();
     }
 }

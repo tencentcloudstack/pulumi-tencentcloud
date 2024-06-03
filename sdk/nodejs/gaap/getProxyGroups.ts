@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,25 +11,24 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const proxyGroups = pulumi.output(tencentcloud.Gaap.getProxyGroups({
+ * const proxyGroups = tencentcloud.Gaap.getProxyGroups({
  *     filters: [{
  *         name: "GroupId",
- *         values: ["lg-5anbbou5"],
+ *         values: ["lg-2foz7wjh"],
  *     }],
  *     projectId: 0,
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getProxyGroups(args: GetProxyGroupsArgs, opts?: pulumi.InvokeOptions): Promise<GetProxyGroupsResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Gaap/getProxyGroups:getProxyGroups", {
         "filters": args.filters,
         "projectId": args.projectId,
@@ -82,9 +82,28 @@ export interface GetProxyGroupsResult {
      */
     readonly tagSets?: outputs.Gaap.GetProxyGroupsTagSet[];
 }
-
+/**
+ * Use this data source to query detailed information of gaap proxy groups
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const proxyGroups = tencentcloud.Gaap.getProxyGroups({
+ *     filters: [{
+ *         name: "GroupId",
+ *         values: ["lg-2foz7wjh"],
+ *     }],
+ *     projectId: 0,
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getProxyGroupsOutput(args: GetProxyGroupsOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetProxyGroupsResult> {
-    return pulumi.output(args).apply(a => getProxyGroups(a, opts))
+    return pulumi.output(args).apply((a: any) => getProxyGroups(a, opts))
 }
 
 /**

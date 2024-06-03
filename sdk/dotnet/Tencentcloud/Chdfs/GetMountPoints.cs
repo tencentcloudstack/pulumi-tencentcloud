@@ -15,64 +15,58 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Chdfs
         /// <summary>
         /// Use this data source to query detailed information of chdfs mount_points
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var mountPoints = Tencentcloud.Chdfs.GetMountPoints.Invoke(new()
         ///     {
-        ///         var mountPoints = Output.Create(Tencentcloud.Chdfs.GetMountPoints.InvokeAsync(new Tencentcloud.Chdfs.GetMountPointsArgs
-        ///         {
-        ///             FileSystemId = "f14mpfy5lh4e",
-        ///         }));
-        ///     }
+        ///         FileSystemId = "f14mpfy5lh4e",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetMountPointsResult> InvokeAsync(GetMountPointsArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetMountPointsResult>("tencentcloud:Chdfs/getMountPoints:getMountPoints", args ?? new GetMountPointsArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetMountPointsResult>("tencentcloud:Chdfs/getMountPoints:getMountPoints", args ?? new GetMountPointsArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of chdfs mount_points
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var mountPoints = Tencentcloud.Chdfs.GetMountPoints.Invoke(new()
         ///     {
-        ///         var mountPoints = Output.Create(Tencentcloud.Chdfs.GetMountPoints.InvokeAsync(new Tencentcloud.Chdfs.GetMountPointsArgs
-        ///         {
-        ///             FileSystemId = "f14mpfy5lh4e",
-        ///         }));
-        ///     }
+        ///         FileSystemId = "f14mpfy5lh4e",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetMountPointsResult> Invoke(GetMountPointsInvokeArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetMountPointsResult>("tencentcloud:Chdfs/getMountPoints:getMountPoints", args ?? new GetMountPointsInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetMountPointsResult>("tencentcloud:Chdfs/getMountPoints:getMountPoints", args ?? new GetMountPointsInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetMountPointsArgs : Pulumi.InvokeArgs
+    public sealed class GetMountPointsArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// get mount points belongs to access group id, only can use one of the AccessGroupId,FileSystemId,OwnerUin parameters.
@@ -101,9 +95,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Chdfs
         public GetMountPointsArgs()
         {
         }
+        public static new GetMountPointsArgs Empty => new GetMountPointsArgs();
     }
 
-    public sealed class GetMountPointsInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetMountPointsInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// get mount points belongs to access group id, only can use one of the AccessGroupId,FileSystemId,OwnerUin parameters.
@@ -132,6 +127,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Chdfs
         public GetMountPointsInvokeArgs()
         {
         }
+        public static new GetMountPointsInvokeArgs Empty => new GetMountPointsInvokeArgs();
     }
 
 

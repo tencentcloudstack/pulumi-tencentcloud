@@ -14,56 +14,61 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
     /// Provides a resource to create a monitor grafanaIntegration
     /// 
     /// ## Example Usage
+    /// 
     /// ### Create a grafan instance and integrate the configuration
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var config = new Config();
+    ///     var availabilityZone = config.Get("availabilityZone") ?? "ap-guangzhou-6";
+    ///     var vpc = new Tencentcloud.Vpc.Instance("vpc", new()
     ///     {
-    ///         var config = new Config();
-    ///         var availabilityZone = config.Get("availabilityZone") ?? "ap-guangzhou-6";
-    ///         var vpc = new Tencentcloud.Vpc.Instance("vpc", new Tencentcloud.Vpc.InstanceArgs
-    ///         {
-    ///             CidrBlock = "10.0.0.0/16",
-    ///         });
-    ///         var subnet = new Tencentcloud.Subnet.Instance("subnet", new Tencentcloud.Subnet.InstanceArgs
-    ///         {
-    ///             VpcId = vpc.Id,
-    ///             AvailabilityZone = availabilityZone,
-    ///             CidrBlock = "10.0.1.0/24",
-    ///         });
-    ///         var foo = new Tencentcloud.Monitor.GrafanaInstance("foo", new Tencentcloud.Monitor.GrafanaInstanceArgs
-    ///         {
-    ///             InstanceName = "test-grafana",
-    ///             VpcId = vpc.Id,
-    ///             SubnetIds = 
-    ///             {
-    ///                 subnet.Id,
-    ///             },
-    ///             GrafanaInitPassword = "1234567890",
-    ///             EnableInternet = false,
-    ///             Tags = 
-    ///             {
-    ///                 { "createdBy", "test" },
-    ///             },
-    ///         });
-    ///         var grafanaIntegration = new Tencentcloud.Monitor.GrafanaIntegration("grafanaIntegration", new Tencentcloud.Monitor.GrafanaIntegrationArgs
-    ///         {
-    ///             InstanceId = foo.Id,
-    ///             Kind = "tencentcloud-monitor-app",
-    ///             Content = "{\"kind\":\"tencentcloud-monitor-app\",\"spec\":{\"dataSourceSpec\":{\"authProvider\":{\"__anyOf\":\"使用密钥\",\"useRole\":true,\"secretId\":\"arunma@tencent.com\",\"secretKey\":\"12345678\"},\"name\":\"uint-test\"},\"grafanaSpec\":{\"organizationIds\":[]}}}",
-    ///         });
-    ///     }
+    ///         CidrBlock = "10.0.0.0/16",
+    ///     });
     /// 
-    /// }
+    ///     var subnet = new Tencentcloud.Subnet.Instance("subnet", new()
+    ///     {
+    ///         VpcId = vpc.Id,
+    ///         AvailabilityZone = availabilityZone,
+    ///         CidrBlock = "10.0.1.0/24",
+    ///     });
+    /// 
+    ///     var foo = new Tencentcloud.Monitor.GrafanaInstance("foo", new()
+    ///     {
+    ///         InstanceName = "test-grafana",
+    ///         VpcId = vpc.Id,
+    ///         SubnetIds = new[]
+    ///         {
+    ///             subnet.Id,
+    ///         },
+    ///         GrafanaInitPassword = "1234567890",
+    ///         EnableInternet = false,
+    ///         Tags = 
+    ///         {
+    ///             { "createdBy", "test" },
+    ///         },
+    ///     });
+    /// 
+    ///     var grafanaIntegration = new Tencentcloud.Monitor.GrafanaIntegration("grafanaIntegration", new()
+    ///     {
+    ///         InstanceId = foo.Id,
+    ///         Kind = "tencentcloud-monitor-app",
+    ///         Content = "{\"kind\":\"tencentcloud-monitor-app\",\"spec\":{\"dataSourceSpec\":{\"authProvider\":{\"__anyOf\":\"使用密钥\",\"useRole\":true,\"secretId\":\"arunma@tencent.com\",\"secretKey\":\"12345678\"},\"name\":\"uint-test\"},\"grafanaSpec\":{\"organizationIds\":[]}}}",
+    ///     });
+    /// 
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Monitor/grafanaIntegration:GrafanaIntegration")]
-    public partial class GrafanaIntegration : Pulumi.CustomResource
+    public partial class GrafanaIntegration : global::Pulumi.CustomResource
     {
         /// <summary>
         /// generated json string of given integration json schema.
@@ -140,7 +145,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
         }
     }
 
-    public sealed class GrafanaIntegrationArgs : Pulumi.ResourceArgs
+    public sealed class GrafanaIntegrationArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// generated json string of given integration json schema.
@@ -169,9 +174,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
         public GrafanaIntegrationArgs()
         {
         }
+        public static new GrafanaIntegrationArgs Empty => new GrafanaIntegrationArgs();
     }
 
-    public sealed class GrafanaIntegrationState : Pulumi.ResourceArgs
+    public sealed class GrafanaIntegrationState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// generated json string of given integration json schema.
@@ -206,5 +212,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
         public GrafanaIntegrationState()
         {
         }
+        public static new GrafanaIntegrationState Empty => new GrafanaIntegrationState();
     }
 }

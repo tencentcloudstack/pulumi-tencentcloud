@@ -15,26 +15,27 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Lighthouse
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var applyDiskBackup = new Tencentcloud.Lighthouse.ApplyDiskBackup("applyDiskBackup", new()
     ///     {
-    ///         var applyDiskBackup = new Tencentcloud.Lighthouse.ApplyDiskBackup("applyDiskBackup", new Tencentcloud.Lighthouse.ApplyDiskBackupArgs
-    ///         {
-    ///             DiskBackupId = "lhbak-xxxxxx",
-    ///             DiskId = "lhdisk-xxxxxx",
-    ///         });
-    ///     }
+    ///         DiskBackupId = "lhbak-xxxxxx",
+    ///         DiskId = "lhdisk-xxxxxx",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Lighthouse/applyDiskBackup:ApplyDiskBackup")]
-    public partial class ApplyDiskBackup : Pulumi.CustomResource
+    public partial class ApplyDiskBackup : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Disk backup ID.
@@ -93,7 +94,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Lighthouse
         }
     }
 
-    public sealed class ApplyDiskBackupArgs : Pulumi.ResourceArgs
+    public sealed class ApplyDiskBackupArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Disk backup ID.
@@ -110,9 +111,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Lighthouse
         public ApplyDiskBackupArgs()
         {
         }
+        public static new ApplyDiskBackupArgs Empty => new ApplyDiskBackupArgs();
     }
 
-    public sealed class ApplyDiskBackupState : Pulumi.ResourceArgs
+    public sealed class ApplyDiskBackupState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Disk backup ID.
@@ -129,5 +131,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Lighthouse
         public ApplyDiskBackupState()
         {
         }
+        public static new ApplyDiskBackupState Empty => new ApplyDiskBackupState();
     }
 }

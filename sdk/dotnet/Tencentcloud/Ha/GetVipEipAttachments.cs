@@ -15,66 +15,60 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ha
         /// <summary>
         /// Use this data source to query detailed information of HA VIP EIP attachments
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var foo = Tencentcloud.Ha.GetVipEipAttachments.Invoke(new()
         ///     {
-        ///         var foo = Output.Create(Tencentcloud.Ha.GetVipEipAttachments.InvokeAsync(new Tencentcloud.Ha.GetVipEipAttachmentsArgs
-        ///         {
-        ///             AddressIp = "1.1.1.1",
-        ///             HavipId = "havip-kjqwe4ba",
-        ///         }));
-        ///     }
+        ///         AddressIp = "1.1.1.1",
+        ///         HavipId = "havip-kjqwe4ba",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetVipEipAttachmentsResult> InvokeAsync(GetVipEipAttachmentsArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetVipEipAttachmentsResult>("tencentcloud:Ha/getVipEipAttachments:getVipEipAttachments", args ?? new GetVipEipAttachmentsArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetVipEipAttachmentsResult>("tencentcloud:Ha/getVipEipAttachments:getVipEipAttachments", args ?? new GetVipEipAttachmentsArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of HA VIP EIP attachments
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var foo = Tencentcloud.Ha.GetVipEipAttachments.Invoke(new()
         ///     {
-        ///         var foo = Output.Create(Tencentcloud.Ha.GetVipEipAttachments.InvokeAsync(new Tencentcloud.Ha.GetVipEipAttachmentsArgs
-        ///         {
-        ///             AddressIp = "1.1.1.1",
-        ///             HavipId = "havip-kjqwe4ba",
-        ///         }));
-        ///     }
+        ///         AddressIp = "1.1.1.1",
+        ///         HavipId = "havip-kjqwe4ba",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetVipEipAttachmentsResult> Invoke(GetVipEipAttachmentsInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetVipEipAttachmentsResult>("tencentcloud:Ha/getVipEipAttachments:getVipEipAttachments", args ?? new GetVipEipAttachmentsInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetVipEipAttachmentsResult>("tencentcloud:Ha/getVipEipAttachments:getVipEipAttachments", args ?? new GetVipEipAttachmentsInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetVipEipAttachmentsArgs : Pulumi.InvokeArgs
+    public sealed class GetVipEipAttachmentsArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Public IP address of EIP to be queried.
@@ -97,9 +91,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ha
         public GetVipEipAttachmentsArgs()
         {
         }
+        public static new GetVipEipAttachmentsArgs Empty => new GetVipEipAttachmentsArgs();
     }
 
-    public sealed class GetVipEipAttachmentsInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetVipEipAttachmentsInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Public IP address of EIP to be queried.
@@ -122,6 +117,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ha
         public GetVipEipAttachmentsInvokeArgs()
         {
         }
+        public static new GetVipEipAttachmentsInvokeArgs Empty => new GetVipEipAttachmentsInvokeArgs();
     }
 
 

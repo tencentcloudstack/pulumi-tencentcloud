@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Inputs
 {
 
-    public sealed class ZoneSettingHttpsGetArgs : Pulumi.ResourceArgs
+    public sealed class ZoneSettingHttpsGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// HSTS Configuration. Note: This field may return null, indicating that no valid value can be obtained.
@@ -20,13 +20,13 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Inputs
         public Input<Inputs.ZoneSettingHttpsHstsGetArgs>? Hsts { get; set; }
 
         /// <summary>
-        /// HTTP2 configuration switch.- `on`: Enable.- `off`: Disable. Note: This field may return null, indicating that no valid value can be obtained.
+        /// HTTP2 configuration switch.
         /// </summary>
         [Input("http2")]
         public Input<string>? Http2 { get; set; }
 
         /// <summary>
-        /// OCSP configuration switch.- `on`: Enable.- `off`: Disable.It is disabled by default. Note: This field may return null, indicating that no valid value can be obtained.
+        /// OCSP configuration switch.
         /// </summary>
         [Input("ocspStapling")]
         public Input<string>? OcspStapling { get; set; }
@@ -35,7 +35,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Inputs
         private InputList<string>? _tlsVersions;
 
         /// <summary>
-        /// TLS version settings. Valid values: `TLSv1`, `TLSV1.1`, `TLSV1.2`, and `TLSv1.3`.Only consecutive versions can be enabled at the same time. Note: This field may return null, indicating that no valid value can be obtained.
+        /// TLS version settings. Valid values: `TLSv1`, `TLSV1.1`, `TLSV1.2`, and `TLSv1.3`.
+        /// Only consecutive versions can be enabled at the same time. Note: This field may return null, indicating that no valid value can be obtained.
+        /// 
+        /// The `ipv6` object supports the following:
         /// </summary>
         public InputList<string> TlsVersions
         {
@@ -46,5 +49,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Inputs
         public ZoneSettingHttpsGetArgs()
         {
         }
+        public static new ZoneSettingHttpsGetArgs Empty => new ZoneSettingHttpsGetArgs();
     }
 }

@@ -15,66 +15,60 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam
         /// <summary>
         /// Use this data source to query detailed information of cam policy_granting_service_access
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var policyGrantingServiceAccess = Tencentcloud.Cam.GetPolicyGrantingServiceAccess.Invoke(new()
         ///     {
-        ///         var policyGrantingServiceAccess = Output.Create(Tencentcloud.Cam.GetPolicyGrantingServiceAccess.InvokeAsync(new Tencentcloud.Cam.GetPolicyGrantingServiceAccessArgs
-        ///         {
-        ///             RoleId = 4611686018436804608,
-        ///             ServiceType = "cam",
-        ///         }));
-        ///     }
+        ///         RoleId = 4611686018436804608,
+        ///         ServiceType = "cam",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetPolicyGrantingServiceAccessResult> InvokeAsync(GetPolicyGrantingServiceAccessArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetPolicyGrantingServiceAccessResult>("tencentcloud:Cam/getPolicyGrantingServiceAccess:getPolicyGrantingServiceAccess", args ?? new GetPolicyGrantingServiceAccessArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetPolicyGrantingServiceAccessResult>("tencentcloud:Cam/getPolicyGrantingServiceAccess:getPolicyGrantingServiceAccess", args ?? new GetPolicyGrantingServiceAccessArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of cam policy_granting_service_access
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var policyGrantingServiceAccess = Tencentcloud.Cam.GetPolicyGrantingServiceAccess.Invoke(new()
         ///     {
-        ///         var policyGrantingServiceAccess = Output.Create(Tencentcloud.Cam.GetPolicyGrantingServiceAccess.InvokeAsync(new Tencentcloud.Cam.GetPolicyGrantingServiceAccessArgs
-        ///         {
-        ///             RoleId = 4611686018436804608,
-        ///             ServiceType = "cam",
-        ///         }));
-        ///     }
+        ///         RoleId = 4611686018436804608,
+        ///         ServiceType = "cam",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetPolicyGrantingServiceAccessResult> Invoke(GetPolicyGrantingServiceAccessInvokeArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetPolicyGrantingServiceAccessResult>("tencentcloud:Cam/getPolicyGrantingServiceAccess:getPolicyGrantingServiceAccess", args ?? new GetPolicyGrantingServiceAccessInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetPolicyGrantingServiceAccessResult>("tencentcloud:Cam/getPolicyGrantingServiceAccess:getPolicyGrantingServiceAccess", args ?? new GetPolicyGrantingServiceAccessInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetPolicyGrantingServiceAccessArgs : Pulumi.InvokeArgs
+    public sealed class GetPolicyGrantingServiceAccessArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Group Id, one of the three (TargetUin, RoleId, GroupId) must be passed.
@@ -109,9 +103,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam
         public GetPolicyGrantingServiceAccessArgs()
         {
         }
+        public static new GetPolicyGrantingServiceAccessArgs Empty => new GetPolicyGrantingServiceAccessArgs();
     }
 
-    public sealed class GetPolicyGrantingServiceAccessInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetPolicyGrantingServiceAccessInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Group Id, one of the three (TargetUin, RoleId, GroupId) must be passed.
@@ -146,6 +141,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam
         public GetPolicyGrantingServiceAccessInvokeArgs()
         {
         }
+        public static new GetPolicyGrantingServiceAccessInvokeArgs Empty => new GetPolicyGrantingServiceAccessInvokeArgs();
     }
 
 

@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Elasticsearch.Inputs
 {
 
-    public sealed class DiagnoseDiagnoseJobMetaArgs : Pulumi.ResourceArgs
+    public sealed class DiagnoseDiagnoseJobMetaArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Intelligent operation and maintenance diagnostic item description.
@@ -34,5 +34,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Elasticsearch.Inputs
         public DiagnoseDiagnoseJobMetaArgs()
         {
         }
+        public static new DiagnoseDiagnoseJobMetaArgs Empty => new DiagnoseDiagnoseJobMetaArgs();
     }
 }

@@ -8,13 +8,15 @@ import * as utilities from "../utilities";
  * Provide a resource to create a SSM secret.
  *
  * ## Example Usage
+ *
  * ### Create user defined secret
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = new tencentcloud.Ssm.Secret("example", {
+ * const example = new tencentcloud.ssm.Secret("example", {
  *     description: "desc.",
  *     isEnabled: true,
  *     recoveryWindowInDays: 0,
@@ -24,12 +26,15 @@ import * as utilities from "../utilities";
  *     },
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
+ *
  * ### Create redis secret
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const zone = tencentcloud.Redis.getZoneConfig({
  *     typeId: 8,
@@ -37,16 +42,16 @@ import * as utilities from "../utilities";
  * const vpc = new tencentcloud.vpc.Instance("vpc", {cidrBlock: "10.0.0.0/16"});
  * const subnet = new tencentcloud.subnet.Instance("subnet", {
  *     vpcId: vpc.id,
- *     availabilityZone: zone.then(zone => zone.lists?[3]?.zone),
+ *     availabilityZone: zone.then(zone => zone.lists?.[3]?.zone),
  *     cidrBlock: "10.0.0.0/16",
  * });
  * const exampleInstance = new tencentcloud.redis.Instance("exampleInstance", {
- *     availabilityZone: zone.then(zone => zone.lists?[3]?.zone),
- *     typeId: zone.then(zone => zone.lists?[3]?.typeId),
+ *     availabilityZone: zone.then(zone => zone.lists?.[3]?.zone),
+ *     typeId: zone.then(zone => zone.lists?.[3]?.typeId),
  *     password: "Qwer@234",
- *     memSize: zone.then(zone => zone.lists?[3]?.memSizes?[0]),
- *     redisShardNum: zone.then(zone => zone.lists?[3]?.redisShardNums?[0]),
- *     redisReplicasNum: zone.then(zone => zone.lists?[3]?.redisReplicasNums?[0]),
+ *     memSize: zone.then(zone => zone.lists?.[3]?.memSizes?.[0]),
+ *     redisShardNum: zone.then(zone => zone.lists?.[3]?.redisShardNums?.[0]),
+ *     redisReplicasNum: zone.then(zone => zone.lists?.[3]?.redisReplicasNums?.[0]),
  *     port: 6379,
  *     vpcId: vpc.id,
  *     subnetId: subnet.id,
@@ -56,26 +61,27 @@ import * as utilities from "../utilities";
  *     description: "redis desc.",
  *     isEnabled: true,
  *     secretType: 4,
- *     additionalConfig: exampleInstance.id.apply(id => JSON.stringify({
+ *     additionalConfig: pulumi.jsonStringify({
  *         Region: "ap-guangzhou",
  *         Privilege: "r",
- *         InstanceId: id,
+ *         InstanceId: exampleInstance.id,
  *         ReadonlyPolicy: ["master"],
  *         Remark: "for tf test",
- *     })),
+ *     }),
  *     tags: {
  *         createdBy: "terraform",
  *     },
  *     recoveryWindowInDays: 0,
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * SSM secret can be imported using the secretName, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Ssm/secret:Secret foo test
+ * $ pulumi import tencentcloud:Ssm/secret:Secret foo test
  * ```
  */
 export class Secret extends pulumi.CustomResource {

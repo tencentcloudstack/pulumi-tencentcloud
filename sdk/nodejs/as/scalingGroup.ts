@@ -2,19 +2,22 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
  * Provides a resource to create a group of AS (Auto scaling) instances.
  *
  * ## Example Usage
+ *
  * ### Create a basic Scaling Group
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const zones = tencentcloud.Availability.getZonesByProduct({
  *     product: "as",
@@ -27,11 +30,11 @@ import * as utilities from "../utilities";
  * const subnet = new tencentcloud.subnet.Instance("subnet", {
  *     vpcId: vpc.id,
  *     cidrBlock: "10.0.0.0/16",
- *     availabilityZone: zones.then(zones => zones.zones?[0]?.name),
+ *     availabilityZone: zones.then(zones => zones.zones?.[0]?.name),
  * });
  * const exampleScalingConfig = new tencentcloud.as.ScalingConfig("exampleScalingConfig", {
  *     configurationName: "tf-example",
- *     imageId: image.then(image => image.images?[0]?.imageId),
+ *     imageId: image.then(image => image.images?.[0]?.imageId),
  *     instanceTypes: [
  *         "SA1.SMALL1",
  *         "SA2.SMALL1",
@@ -51,67 +54,14 @@ import * as utilities from "../utilities";
  *     subnetIds: [subnet.id],
  * });
  * ```
- * ### Create a complete Scaling Group
- *
- * ```typescript
- * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
- *
- * const exampleInstance = new tencentcloud.clb.Instance("exampleInstance", {
- *     networkType: "INTERNAL",
- *     clbName: "clb-example",
- *     projectId: 0,
- *     vpcId: tencentcloud_vpc.vpc.id,
- *     subnetId: tencentcloud_subnet.subnet.id,
- *     tags: {
- *         test: "tf",
- *     },
- * });
- * const exampleListener = new tencentcloud.clb.Listener("exampleListener", {
- *     clbId: exampleInstance.id,
- *     listenerName: "listener-example",
- *     port: 80,
- *     protocol: "HTTP",
- * });
- * const exampleListenerRule = new tencentcloud.clb.ListenerRule("exampleListenerRule", {
- *     listenerId: exampleListener.listenerId,
- *     clbId: exampleInstance.id,
- *     domain: "foo.net",
- *     url: "/bar",
- * });
- * const exampleScalingGroup = new tencentcloud.as.ScalingGroup("exampleScalingGroup", {
- *     scalingGroupName: "tf-example",
- *     configurationId: tencentcloud_as_scaling_config.example.id,
- *     maxSize: 1,
- *     minSize: 0,
- *     vpcId: tencentcloud_vpc.vpc.id,
- *     subnetIds: [tencentcloud_subnet.subnet.id],
- *     projectId: 0,
- *     defaultCooldown: 400,
- *     desiredCapacity: 1,
- *     terminationPolicies: ["NEWEST_INSTANCE"],
- *     retryPolicy: "INCREMENTAL_INTERVALS",
- *     forwardBalancerIds: [{
- *         loadBalancerId: exampleInstance.id,
- *         listenerId: exampleListener.listenerId,
- *         ruleId: exampleListenerRule.ruleId,
- *         targetAttributes: [{
- *             port: 80,
- *             weight: 90,
- *         }],
- *     }],
- *     tags: {
- *         createBy: "tfExample",
- *     },
- * });
- * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * AutoScaling Groups can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:As/scalingGroup:ScalingGroup scaling_group asg-n32ymck2
+ * $ pulumi import tencentcloud:As/scalingGroup:ScalingGroup scaling_group asg-n32ymck2
  * ```
  */
 export class ScalingGroup extends pulumi.CustomResource {

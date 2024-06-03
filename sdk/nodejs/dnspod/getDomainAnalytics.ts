@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,24 +11,23 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const domainAnalytics = pulumi.output(tencentcloud.Dnspod.getDomainAnalytics({
+ * const domainAnalytics = tencentcloud.Dnspod.getDomainAnalytics({
  *     dnsFormat: "HOUR",
  *     domain: "dnspod.cn",
  *     endDate: "2023-10-12",
  *     startDate: "2023-10-07",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getDomainAnalytics(args: GetDomainAnalyticsArgs, opts?: pulumi.InvokeOptions): Promise<GetDomainAnalyticsResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Dnspod/getDomainAnalytics:getDomainAnalytics", {
         "dnsFormat": args.dnsFormat,
         "domain": args.domain,
@@ -107,9 +107,27 @@ export interface GetDomainAnalyticsResult {
      */
     readonly startDate: string;
 }
-
+/**
+ * Use this data source to query detailed information of dnspod domainAnalytics
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const domainAnalytics = tencentcloud.Dnspod.getDomainAnalytics({
+ *     dnsFormat: "HOUR",
+ *     domain: "dnspod.cn",
+ *     endDate: "2023-10-12",
+ *     startDate: "2023-10-07",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getDomainAnalyticsOutput(args: GetDomainAnalyticsOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetDomainAnalyticsResult> {
-    return pulumi.output(args).apply(a => getDomainAnalytics(a, opts))
+    return pulumi.output(args).apply((a: any) => getDomainAnalytics(a, opts))
 }
 
 /**

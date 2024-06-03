@@ -9,25 +9,24 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const instanceSlowLog = pulumi.output(tencentcloud.Mongodb.getInstanceSlowLog({
+ * const instanceSlowLog = tencentcloud.Mongodb.getInstanceSlowLog({
  *     endTime: "2019-06-02 12:00:00",
  *     format: "json",
  *     instanceId: "cmgo-9d0p6umb",
  *     slowMS: 100,
  *     startTime: "2019-06-01 10:00:00",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getInstanceSlowLog(args: GetInstanceSlowLogArgs, opts?: pulumi.InvokeOptions): Promise<GetInstanceSlowLogResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Mongodb/getInstanceSlowLog:getInstanceSlowLog", {
         "endTime": args.endTime,
         "format": args.format,
@@ -87,9 +86,28 @@ export interface GetInstanceSlowLogResult {
     readonly slowMs: number;
     readonly startTime: string;
 }
-
+/**
+ * Use this data source to query detailed information of mongodb instanceSlowLog
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const instanceSlowLog = tencentcloud.Mongodb.getInstanceSlowLog({
+ *     endTime: "2019-06-02 12:00:00",
+ *     format: "json",
+ *     instanceId: "cmgo-9d0p6umb",
+ *     slowMS: 100,
+ *     startTime: "2019-06-01 10:00:00",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getInstanceSlowLogOutput(args: GetInstanceSlowLogOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetInstanceSlowLogResult> {
-    return pulumi.output(args).apply(a => getInstanceSlowLog(a, opts))
+    return pulumi.output(args).apply((a: any) => getInstanceSlowLog(a, opts))
 }
 
 /**

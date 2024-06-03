@@ -9,22 +9,24 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const shareDcxConfig = new tencentcloud.Dc.ShareDcxConfig("share_dcx_config", {
+ * const shareDcxConfig = new tencentcloud.dc.ShareDcxConfig("shareDcxConfig", {
  *     directConnectTunnelId: "dcx-4z49tnws",
  *     enable: false,
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * dc share_dcx_config can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Dc/shareDcxConfig:ShareDcxConfig share_dcx_config dcx_id
+ * $ pulumi import tencentcloud:Dc/shareDcxConfig:ShareDcxConfig share_dcx_config dcx_id
  * ```
  */
 export class ShareDcxConfig extends pulumi.CustomResource {

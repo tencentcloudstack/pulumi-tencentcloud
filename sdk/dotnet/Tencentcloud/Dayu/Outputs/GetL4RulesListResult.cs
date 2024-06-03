@@ -66,6 +66,9 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dayu.Outputs
         /// Session keep time, only valid when `session_switch` is true, the available value ranges from 1 to 300 and unit is second.
         /// </summary>
         public readonly int SessionTime;
+        /// <summary>
+        /// Source list of the rule.
+        /// </summary>
         public readonly ImmutableArray<Outputs.GetL4RulesListSourceListResult> SourceLists;
         /// <summary>
         /// Source type, `1` for source of host, `2` for source of IP.

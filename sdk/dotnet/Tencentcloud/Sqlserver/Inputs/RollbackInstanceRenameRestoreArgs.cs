@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver.Inputs
 {
 
-    public sealed class RollbackInstanceRenameRestoreArgs : Pulumi.ResourceArgs
+    public sealed class RollbackInstanceRenameRestoreArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// New database name.
@@ -28,5 +28,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver.Inputs
         public RollbackInstanceRenameRestoreArgs()
         {
         }
+        public static new RollbackInstanceRenameRestoreArgs Empty => new RollbackInstanceRenameRestoreArgs();
     }
 }

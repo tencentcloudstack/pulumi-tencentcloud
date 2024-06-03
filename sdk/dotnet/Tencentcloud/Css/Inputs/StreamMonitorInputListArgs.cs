@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Css.Inputs
 {
 
-    public sealed class StreamMonitorInputListArgs : Pulumi.ResourceArgs
+    public sealed class StreamMonitorInputListArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Description content.limit 256 bytes.
@@ -46,5 +46,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Css.Inputs
         public StreamMonitorInputListArgs()
         {
         }
+        public static new StreamMonitorInputListArgs Empty => new StreamMonitorInputListArgs();
     }
 }

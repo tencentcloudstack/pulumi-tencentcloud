@@ -18,6 +18,9 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor.Outputs
         /// Represents a collection of dimensions of an object instance, json format.eg:'{"unInstanceId":"ins-ot3cq4bi"}'.
         /// </summary>
         public readonly string DimensionsJson;
+        /// <summary>
+        /// Object unique ID.
+        /// </summary>
         public readonly string? UniqueId;
 
         [OutputConstructor]

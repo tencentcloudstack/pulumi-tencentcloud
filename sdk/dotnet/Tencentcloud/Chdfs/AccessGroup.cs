@@ -15,36 +15,37 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Chdfs
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var accessGroup = new Tencentcloud.Chdfs.AccessGroup("accessGroup", new()
     ///     {
-    ///         var accessGroup = new Tencentcloud.Chdfs.AccessGroup("accessGroup", new Tencentcloud.Chdfs.AccessGroupArgs
-    ///         {
-    ///             AccessGroupName = "testAccessGroup",
-    ///             Description = "test access group",
-    ///             VpcId = "vpc-4owdpnwr",
-    ///             VpcType = 1,
-    ///         });
-    ///     }
+    ///         AccessGroupName = "testAccessGroup",
+    ///         Description = "test access group",
+    ///         VpcId = "vpc-4owdpnwr",
+    ///         VpcType = 1,
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// chdfs access_group can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Chdfs/accessGroup:AccessGroup access_group access_group_id
+    /// $ pulumi import tencentcloud:Chdfs/accessGroup:AccessGroup access_group access_group_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Chdfs/accessGroup:AccessGroup")]
-    public partial class AccessGroup : Pulumi.CustomResource
+    public partial class AccessGroup : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Permission group name.
@@ -115,7 +116,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Chdfs
         }
     }
 
-    public sealed class AccessGroupArgs : Pulumi.ResourceArgs
+    public sealed class AccessGroupArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Permission group name.
@@ -144,9 +145,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Chdfs
         public AccessGroupArgs()
         {
         }
+        public static new AccessGroupArgs Empty => new AccessGroupArgs();
     }
 
-    public sealed class AccessGroupState : Pulumi.ResourceArgs
+    public sealed class AccessGroupState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Permission group name.
@@ -175,5 +177,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Chdfs
         public AccessGroupState()
         {
         }
+        public static new AccessGroupState Empty => new AccessGroupState();
     }
 }

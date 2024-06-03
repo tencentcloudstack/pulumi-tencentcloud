@@ -8,32 +8,34 @@ import * as utilities from "../utilities";
  * Provides a resource to create a cynosdb cluster slave zone.
  *
  * ## Example Usage
+ *
  * ### Set a new slave zone for a cynosdb cluster.
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const gz3 = tencentcloud.Vpc.getSubnets({
  *     availabilityZone: _var.default_az,
  *     isDefault: true,
  * });
- * const vpcId = gz3.then(gz3 => gz3.instanceLists?[0]?.vpcId);
- * const subnetId = gz3.then(gz3 => gz3.instanceLists?[0]?.subnetId);
+ * const vpcId = gz3.then(gz3 => gz3.instanceLists?.[0]?.vpcId);
+ * const subnetId = gz3.then(gz3 => gz3.instanceLists?.[0]?.subnetId);
  * const config = new pulumi.Config();
- * const fixedTags = config.getObject("fixedTags") || {
+ * const fixedTags = config.getObject<{fixed_resource?: string}>("fixedTags") || {
  *     fixed_resource: "do_not_remove",
  * };
  * const internal = tencentcloud.Security.getGroups({
  *     name: "default",
  *     tags: fixedTags,
  * });
- * const sgId = internal.then(internal => internal.securityGroups?[0]?.securityGroupId);
+ * const sgId = internal.then(internal => internal.securityGroups?.[0]?.securityGroupId);
  * const exclusive = tencentcloud.Security.getGroups({
  *     name: "test_preset_sg",
  * });
- * const sgId2 = exclusive.then(exclusive => exclusive.securityGroups?[0]?.securityGroupId);
+ * const sgId2 = exclusive.then(exclusive => exclusive.securityGroups?.[0]?.securityGroupId);
  * const availabilityZone = config.get("availabilityZone") || "ap-guangzhou-4";
  * const newAvailabilityZone = config.get("newAvailabilityZone") || "ap-guangzhou-6";
  * const myParamTemplate = config.get("myParamTemplate") || "15765";
@@ -79,13 +81,14 @@ import * as utilities from "../utilities";
  *     slaveZone: newAvailabilityZone,
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * cynosdb cluster_slave_zone can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Cynosdb/clusterSlaveZone:ClusterSlaveZone cluster_slave_zone cluster_id#slave_zone
+ * $ pulumi import tencentcloud:Cynosdb/clusterSlaveZone:ClusterSlaveZone cluster_slave_zone cluster_id#slave_zone
  * ```
  */
 export class ClusterSlaveZone extends pulumi.CustomResource {

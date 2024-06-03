@@ -15,34 +15,35 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var instanceMixIpTargetConfig = new Tencentcloud.Clb.InstanceMixIpTargetConfig("instanceMixIpTargetConfig", new()
     ///     {
-    ///         var instanceMixIpTargetConfig = new Tencentcloud.Clb.InstanceMixIpTargetConfig("instanceMixIpTargetConfig", new Tencentcloud.Clb.InstanceMixIpTargetConfigArgs
-    ///         {
-    ///             LoadBalancerId = "lb-5dnrkgry",
-    ///             MixIpTarget = false,
-    ///         });
-    ///     }
+    ///         LoadBalancerId = "lb-5dnrkgry",
+    ///         MixIpTarget = false,
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// clb instance_mix_ip_target_config can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Clb/instanceMixIpTargetConfig:InstanceMixIpTargetConfig instance_mix_ip_target_config instance_id
+    /// $ pulumi import tencentcloud:Clb/instanceMixIpTargetConfig:InstanceMixIpTargetConfig instance_mix_ip_target_config instance_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Clb/instanceMixIpTargetConfig:InstanceMixIpTargetConfig")]
-    public partial class InstanceMixIpTargetConfig : Pulumi.CustomResource
+    public partial class InstanceMixIpTargetConfig : global::Pulumi.CustomResource
     {
         /// <summary>
         /// ID of CLB instances to be queried.
@@ -101,7 +102,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
         }
     }
 
-    public sealed class InstanceMixIpTargetConfigArgs : Pulumi.ResourceArgs
+    public sealed class InstanceMixIpTargetConfigArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// ID of CLB instances to be queried.
@@ -118,9 +119,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
         public InstanceMixIpTargetConfigArgs()
         {
         }
+        public static new InstanceMixIpTargetConfigArgs Empty => new InstanceMixIpTargetConfigArgs();
     }
 
-    public sealed class InstanceMixIpTargetConfigState : Pulumi.ResourceArgs
+    public sealed class InstanceMixIpTargetConfigState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// ID of CLB instances to be queried.
@@ -137,5 +139,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
         public InstanceMixIpTargetConfigState()
         {
         }
+        public static new InstanceMixIpTargetConfigState Empty => new InstanceMixIpTargetConfigState();
     }
 }

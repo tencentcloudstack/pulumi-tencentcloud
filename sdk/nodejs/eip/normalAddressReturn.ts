@@ -9,14 +9,14 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const normalAddressReturn = new tencentcloud.Eip.NormalAddressReturn("normal_address_return", {
- *     addressIps: "",
- * });
+ * const normalAddressReturn = new tencentcloud.eip.NormalAddressReturn("normalAddressReturn", {addressIps: ["172.16.17.32"]});
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export class NormalAddressReturn extends pulumi.CustomResource {
     /**

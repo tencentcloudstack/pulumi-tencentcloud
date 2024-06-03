@@ -14,7 +14,13 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb.Outputs
     [OutputType]
     public sealed class ProxyRoInstance
     {
+        /// <summary>
+        /// instance id.
+        /// </summary>
         public readonly string? InstanceId;
+        /// <summary>
+        /// weight.
+        /// </summary>
         public readonly int? Weight;
 
         [OutputConstructor]

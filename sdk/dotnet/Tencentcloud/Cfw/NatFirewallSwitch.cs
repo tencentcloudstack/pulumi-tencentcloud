@@ -14,67 +14,73 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cfw
     /// Provides a resource to create a cfw nat_firewall_switch
     /// 
     /// ## Example Usage
+    /// 
     /// ### Turn off switch
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = Pulumi.Tencentcloud;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var exampleNatFwSwitches = Tencentcloud.Cfw.GetNatFwSwitches.Invoke(new()
     ///     {
-    ///         var exampleNatFwSwitches = Output.Create(Tencentcloud.Cfw.GetNatFwSwitches.InvokeAsync(new Tencentcloud.Cfw.GetNatFwSwitchesArgs
-    ///         {
-    ///             NatInsId = "cfwnat-18d2ba18",
-    ///         }));
-    ///         var exampleNatFirewallSwitch = new Tencentcloud.Cfw.NatFirewallSwitch("exampleNatFirewallSwitch", new Tencentcloud.Cfw.NatFirewallSwitchArgs
-    ///         {
-    ///             NatInsId = exampleNatFwSwitches.Apply(exampleNatFwSwitches =&gt; exampleNatFwSwitches.Id),
-    ///             SubnetId = exampleNatFwSwitches.Apply(exampleNatFwSwitches =&gt; exampleNatFwSwitches.Datas?[0]?.SubnetId),
-    ///             Enable = 0,
-    ///         });
-    ///     }
+    ///         NatInsId = "cfwnat-18d2ba18",
+    ///     });
     /// 
-    /// }
+    ///     var exampleNatFirewallSwitch = new Tencentcloud.Cfw.NatFirewallSwitch("exampleNatFirewallSwitch", new()
+    ///     {
+    ///         NatInsId = exampleNatFwSwitches.Apply(getNatFwSwitchesResult =&gt; getNatFwSwitchesResult.Id),
+    ///         SubnetId = exampleNatFwSwitches.Apply(getNatFwSwitchesResult =&gt; getNatFwSwitchesResult.Datas[0]?.SubnetId),
+    ///         Enable = 0,
+    ///     });
+    /// 
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
+    /// 
     /// ### Or turn on switch
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = Pulumi.Tencentcloud;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var exampleNatFwSwitches = Tencentcloud.Cfw.GetNatFwSwitches.Invoke(new()
     ///     {
-    ///         var exampleNatFwSwitches = Output.Create(Tencentcloud.Cfw.GetNatFwSwitches.InvokeAsync(new Tencentcloud.Cfw.GetNatFwSwitchesArgs
-    ///         {
-    ///             NatInsId = "cfwnat-18d2ba18",
-    ///         }));
-    ///         var exampleNatFirewallSwitch = new Tencentcloud.Cfw.NatFirewallSwitch("exampleNatFirewallSwitch", new Tencentcloud.Cfw.NatFirewallSwitchArgs
-    ///         {
-    ///             NatInsId = exampleNatFwSwitches.Apply(exampleNatFwSwitches =&gt; exampleNatFwSwitches.Id),
-    ///             SubnetId = exampleNatFwSwitches.Apply(exampleNatFwSwitches =&gt; exampleNatFwSwitches.Datas?[0]?.SubnetId),
-    ///             Enable = 1,
-    ///         });
-    ///     }
+    ///         NatInsId = "cfwnat-18d2ba18",
+    ///     });
     /// 
-    /// }
+    ///     var exampleNatFirewallSwitch = new Tencentcloud.Cfw.NatFirewallSwitch("exampleNatFirewallSwitch", new()
+    ///     {
+    ///         NatInsId = exampleNatFwSwitches.Apply(getNatFwSwitchesResult =&gt; getNatFwSwitchesResult.Id),
+    ///         SubnetId = exampleNatFwSwitches.Apply(getNatFwSwitchesResult =&gt; getNatFwSwitchesResult.Datas[0]?.SubnetId),
+    ///         Enable = 1,
+    ///     });
+    /// 
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// cfw nat_firewall_switch can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Cfw/natFirewallSwitch:NatFirewallSwitch example cfwnat-18d2ba18#subnet-ef7wyymr
+    /// $ pulumi import tencentcloud:Cfw/natFirewallSwitch:NatFirewallSwitch example cfwnat-18d2ba18#subnet-ef7wyymr
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Cfw/natFirewallSwitch:NatFirewallSwitch")]
-    public partial class NatFirewallSwitch : Pulumi.CustomResource
+    public partial class NatFirewallSwitch : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Switch, 0: off, 1: on.
@@ -139,7 +145,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cfw
         }
     }
 
-    public sealed class NatFirewallSwitchArgs : Pulumi.ResourceArgs
+    public sealed class NatFirewallSwitchArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Switch, 0: off, 1: on.
@@ -162,9 +168,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cfw
         public NatFirewallSwitchArgs()
         {
         }
+        public static new NatFirewallSwitchArgs Empty => new NatFirewallSwitchArgs();
     }
 
-    public sealed class NatFirewallSwitchState : Pulumi.ResourceArgs
+    public sealed class NatFirewallSwitchState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Switch, 0: off, 1: on.
@@ -187,5 +194,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cfw
         public NatFirewallSwitchState()
         {
         }
+        public static new NatFirewallSwitchState Empty => new NatFirewallSwitchState();
     }
 }

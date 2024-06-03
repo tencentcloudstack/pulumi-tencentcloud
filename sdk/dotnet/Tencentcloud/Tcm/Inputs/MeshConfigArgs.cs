@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcm.Inputs
 {
 
-    public sealed class MeshConfigArgs : Pulumi.ResourceArgs
+    public sealed class MeshConfigArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Sidecar inject configuration.
@@ -46,5 +46,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcm.Inputs
         public MeshConfigArgs()
         {
         }
+        public static new MeshConfigArgs Empty => new MeshConfigArgs();
     }
 }

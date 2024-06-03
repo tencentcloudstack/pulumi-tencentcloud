@@ -15,38 +15,39 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var animatedGraphicsTemplate = new Tencentcloud.Mps.AnimatedGraphicsTemplate("animatedGraphicsTemplate", new()
     ///     {
-    ///         var animatedGraphicsTemplate = new Tencentcloud.Mps.AnimatedGraphicsTemplate("animatedGraphicsTemplate", new Tencentcloud.Mps.AnimatedGraphicsTemplateArgs
-    ///         {
-    ///             Format = "gif",
-    ///             Fps = 20,
-    ///             Height = 130,
-    ///             Quality = 75,
-    ///             ResolutionAdaptive = "open",
-    ///             Width = 140,
-    ///         });
-    ///     }
+    ///         Format = "gif",
+    ///         Fps = 20,
+    ///         Height = 130,
+    ///         Quality = 75,
+    ///         ResolutionAdaptive = "open",
+    ///         Width = 140,
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// mps animated_graphics_template can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Mps/animatedGraphicsTemplate:AnimatedGraphicsTemplate animated_graphics_template animated_graphics_template_id
+    /// $ pulumi import tencentcloud:Mps/animatedGraphicsTemplate:AnimatedGraphicsTemplate animated_graphics_template animated_graphics_template_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Mps/animatedGraphicsTemplate:AnimatedGraphicsTemplate")]
-    public partial class AnimatedGraphicsTemplate : Pulumi.CustomResource
+    public partial class AnimatedGraphicsTemplate : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Template description information, length limit: 256 characters.
@@ -141,7 +142,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps
         }
     }
 
-    public sealed class AnimatedGraphicsTemplateArgs : Pulumi.ResourceArgs
+    public sealed class AnimatedGraphicsTemplateArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Template description information, length limit: 256 characters.
@@ -194,9 +195,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps
         public AnimatedGraphicsTemplateArgs()
         {
         }
+        public static new AnimatedGraphicsTemplateArgs Empty => new AnimatedGraphicsTemplateArgs();
     }
 
-    public sealed class AnimatedGraphicsTemplateState : Pulumi.ResourceArgs
+    public sealed class AnimatedGraphicsTemplateState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Template description information, length limit: 256 characters.
@@ -249,5 +251,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps
         public AnimatedGraphicsTemplateState()
         {
         }
+        public static new AnimatedGraphicsTemplateState Empty => new AnimatedGraphicsTemplateState();
     }
 }

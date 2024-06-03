@@ -9,17 +9,19 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const wafProtection = new tencentcloud.Tse.WafProtection("waf_protection", {
+ * const wafProtection = new tencentcloud.tse.WafProtection("wafProtection", {
  *     gatewayId: "gateway-ed63e957",
  *     lists: ["7324a769-9d87-48ce-a904-48c3defc4abd"],
  *     operate: "open",
  *     type: "Route",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export class WafProtection extends pulumi.CustomResource {
     /**

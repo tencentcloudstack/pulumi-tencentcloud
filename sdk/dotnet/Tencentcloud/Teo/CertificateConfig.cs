@@ -15,62 +15,65 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var certificate = new Tencentcloud.Teo.CertificateConfig("certificate", new()
     ///     {
-    ///         var certificate = new Tencentcloud.Teo.CertificateConfig("certificate", new Tencentcloud.Teo.CertificateConfigArgs
-    ///         {
-    ///             Host = "test.tencentcloud-terraform-provider.cn",
-    ///             Mode = "eofreecert",
-    ///             ZoneId = "zone-2o1t24kgy362",
-    ///         });
-    ///     }
+    ///         Host = "test.tencentcloud-terraform-provider.cn",
+    ///         Mode = "eofreecert",
+    ///         ZoneId = "zone-2o1t24kgy362",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
+    /// 
     /// ### Configure SSL certificate
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var certificate = new Tencentcloud.Teo.CertificateConfig("certificate", new()
     ///     {
-    ///         var certificate = new Tencentcloud.Teo.CertificateConfig("certificate", new Tencentcloud.Teo.CertificateConfigArgs
+    ///         Host = "test.tencentcloud-terraform-provider.cn",
+    ///         Mode = "sslcert",
+    ///         ServerCertInfos = new[]
     ///         {
-    ///             Host = "test.tencentcloud-terraform-provider.cn",
-    ///             Mode = "sslcert",
-    ///             ServerCertInfos = 
+    ///             new Tencentcloud.Teo.Inputs.CertificateConfigServerCertInfoArgs
     ///             {
-    ///                 new Tencentcloud.Teo.Inputs.CertificateConfigServerCertInfoArgs
-    ///                 {
-    ///                     CertId = "8xiUJIJd",
-    ///                 },
+    ///                 CertId = "8xiUJIJd",
     ///             },
-    ///             ZoneId = "zone-2o1t24kgy362",
-    ///         });
-    ///     }
+    ///         },
+    ///         ZoneId = "zone-2o1t24kgy362",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// teo certificate can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Teo/certificateConfig:CertificateConfig certificate zone_id#host#cert_id
+    /// $ pulumi import tencentcloud:Teo/certificateConfig:CertificateConfig certificate zone_id#host#cert_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Teo/certificateConfig:CertificateConfig")]
-    public partial class CertificateConfig : Pulumi.CustomResource
+    public partial class CertificateConfig : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Acceleration domain name that needs to modify the certificate configuration.
@@ -141,7 +144,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
         }
     }
 
-    public sealed class CertificateConfigArgs : Pulumi.ResourceArgs
+    public sealed class CertificateConfigArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Acceleration domain name that needs to modify the certificate configuration.
@@ -176,9 +179,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
         public CertificateConfigArgs()
         {
         }
+        public static new CertificateConfigArgs Empty => new CertificateConfigArgs();
     }
 
-    public sealed class CertificateConfigState : Pulumi.ResourceArgs
+    public sealed class CertificateConfigState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Acceleration domain name that needs to modify the certificate configuration.
@@ -213,5 +217,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
         public CertificateConfigState()
         {
         }
+        public static new CertificateConfigState Empty => new CertificateConfigState();
     }
 }

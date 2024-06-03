@@ -7,131 +7,141 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to set as scalingGroup status
 //
 // ## Example Usage
+//
 // ### Deactivate Scaling Group
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/As"
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Availability"
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Images"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/As"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Availability"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Images"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Subnet"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/As"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Availability"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Images"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Subnet"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		zones, err := Availability.GetZonesByProduct(ctx, &availability.GetZonesByProductArgs{
-// 			Product: "as",
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		image, err := Images.GetInstance(ctx, &images.GetInstanceArgs{
-// 			ImageTypes: []string{
-// 				"PUBLIC_IMAGE",
-// 			},
-// 			OsName: pulumi.StringRef("TencentOS Server 3.2 (Final)"),
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		vpc, err := Vpc.NewInstance(ctx, "vpc", &Vpc.InstanceArgs{
-// 			CidrBlock: pulumi.String("10.0.0.0/16"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		subnet, err := Subnet.NewInstance(ctx, "subnet", &Subnet.InstanceArgs{
-// 			VpcId:            vpc.ID(),
-// 			CidrBlock:        pulumi.String("10.0.0.0/16"),
-// 			AvailabilityZone: pulumi.String(zones.Zones[0].Name),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		exampleScalingConfig, err := As.NewScalingConfig(ctx, "exampleScalingConfig", &As.ScalingConfigArgs{
-// 			ConfigurationName: pulumi.String("tf-example"),
-// 			ImageId:           pulumi.String(image.Images[0].ImageId),
-// 			InstanceTypes: pulumi.StringArray{
-// 				pulumi.String("SA1.SMALL1"),
-// 				pulumi.String("SA2.SMALL1"),
-// 				pulumi.String("SA2.SMALL2"),
-// 				pulumi.String("SA2.SMALL4"),
-// 			},
-// 			InstanceNameSettings: &as.ScalingConfigInstanceNameSettingsArgs{
-// 				InstanceName: pulumi.String("test-ins-name"),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		exampleScalingGroup, err := As.NewScalingGroup(ctx, "exampleScalingGroup", &As.ScalingGroupArgs{
-// 			ScalingGroupName: pulumi.String("tf-example"),
-// 			ConfigurationId:  exampleScalingConfig.ID(),
-// 			MaxSize:          pulumi.Int(1),
-// 			MinSize:          pulumi.Int(0),
-// 			VpcId:            vpc.ID(),
-// 			SubnetIds: pulumi.StringArray{
-// 				subnet.ID(),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_, err = As.NewScalingGroupStatus(ctx, "scalingGroupStatus", &As.ScalingGroupStatusArgs{
-// 			AutoScalingGroupId: exampleScalingGroup.ID(),
-// 			Enable:             pulumi.Bool(false),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			zones, err := Availability.GetZonesByProduct(ctx, &availability.GetZonesByProductArgs{
+//				Product: "as",
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			image, err := Images.GetInstance(ctx, &images.GetInstanceArgs{
+//				ImageTypes: []string{
+//					"PUBLIC_IMAGE",
+//				},
+//				OsName: pulumi.StringRef("TencentOS Server 3.2 (Final)"),
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			vpc, err := Vpc.NewInstance(ctx, "vpc", &Vpc.InstanceArgs{
+//				CidrBlock: pulumi.String("10.0.0.0/16"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			subnet, err := Subnet.NewInstance(ctx, "subnet", &Subnet.InstanceArgs{
+//				VpcId:            vpc.ID(),
+//				CidrBlock:        pulumi.String("10.0.0.0/16"),
+//				AvailabilityZone: pulumi.String(zones.Zones[0].Name),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			exampleScalingConfig, err := As.NewScalingConfig(ctx, "exampleScalingConfig", &As.ScalingConfigArgs{
+//				ConfigurationName: pulumi.String("tf-example"),
+//				ImageId:           pulumi.String(image.Images[0].ImageId),
+//				InstanceTypes: pulumi.StringArray{
+//					pulumi.String("SA1.SMALL1"),
+//					pulumi.String("SA2.SMALL1"),
+//					pulumi.String("SA2.SMALL2"),
+//					pulumi.String("SA2.SMALL4"),
+//				},
+//				InstanceNameSettings: &as.ScalingConfigInstanceNameSettingsArgs{
+//					InstanceName: pulumi.String("test-ins-name"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			exampleScalingGroup, err := As.NewScalingGroup(ctx, "exampleScalingGroup", &As.ScalingGroupArgs{
+//				ScalingGroupName: pulumi.String("tf-example"),
+//				ConfigurationId:  exampleScalingConfig.ID(),
+//				MaxSize:          pulumi.Int(1),
+//				MinSize:          pulumi.Int(0),
+//				VpcId:            vpc.ID(),
+//				SubnetIds: pulumi.StringArray{
+//					subnet.ID(),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_, err = As.NewScalingGroupStatus(ctx, "scalingGroupStatus", &As.ScalingGroupStatusArgs{
+//				AutoScalingGroupId: exampleScalingGroup.ID(),
+//				Enable:             pulumi.Bool(false),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
+//
 // ### Enable Scaling Group
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/As"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/As"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := As.NewScalingGroupStatus(ctx, "scalingGroupStatus", &As.ScalingGroupStatusArgs{
-// 			AutoScalingGroupId: pulumi.Any(tencentcloud_as_scaling_group.Example.Id),
-// 			Enable:             pulumi.Bool(true),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := As.NewScalingGroupStatus(ctx, "scalingGroupStatus", &As.ScalingGroupStatusArgs{
+//				AutoScalingGroupId: pulumi.Any(tencentcloud_as_scaling_group.Example.Id),
+//				Enable:             pulumi.Bool(true),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // as scaling_group_status can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:As/scalingGroupStatus:ScalingGroupStatus scaling_group_status scaling_group_id
+// $ pulumi import tencentcloud:As/scalingGroupStatus:ScalingGroupStatus scaling_group_status scaling_group_id
 // ```
 type ScalingGroupStatus struct {
 	pulumi.CustomResourceState
@@ -155,7 +165,7 @@ func NewScalingGroupStatus(ctx *pulumi.Context,
 	if args.Enable == nil {
 		return nil, errors.New("invalid value for required argument 'Enable'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource ScalingGroupStatus
 	err := ctx.RegisterResource("tencentcloud:As/scalingGroupStatus:ScalingGroupStatus", name, args, &resource, opts...)
 	if err != nil {
@@ -236,7 +246,7 @@ func (i *ScalingGroupStatus) ToScalingGroupStatusOutputWithContext(ctx context.C
 // ScalingGroupStatusArrayInput is an input type that accepts ScalingGroupStatusArray and ScalingGroupStatusArrayOutput values.
 // You can construct a concrete instance of `ScalingGroupStatusArrayInput` via:
 //
-//          ScalingGroupStatusArray{ ScalingGroupStatusArgs{...} }
+//	ScalingGroupStatusArray{ ScalingGroupStatusArgs{...} }
 type ScalingGroupStatusArrayInput interface {
 	pulumi.Input
 
@@ -261,7 +271,7 @@ func (i ScalingGroupStatusArray) ToScalingGroupStatusArrayOutputWithContext(ctx 
 // ScalingGroupStatusMapInput is an input type that accepts ScalingGroupStatusMap and ScalingGroupStatusMapOutput values.
 // You can construct a concrete instance of `ScalingGroupStatusMapInput` via:
 //
-//          ScalingGroupStatusMap{ "key": ScalingGroupStatusArgs{...} }
+//	ScalingGroupStatusMap{ "key": ScalingGroupStatusArgs{...} }
 type ScalingGroupStatusMapInput interface {
 	pulumi.Input
 

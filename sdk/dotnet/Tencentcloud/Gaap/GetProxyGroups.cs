@@ -15,86 +15,80 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
         /// <summary>
         /// Use this data source to query detailed information of gaap proxy groups
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var proxyGroups = Tencentcloud.Gaap.GetProxyGroups.Invoke(new()
         ///     {
-        ///         var proxyGroups = Output.Create(Tencentcloud.Gaap.GetProxyGroups.InvokeAsync(new Tencentcloud.Gaap.GetProxyGroupsArgs
+        ///         Filters = new[]
         ///         {
-        ///             Filters = 
+        ///             new Tencentcloud.Gaap.Inputs.GetProxyGroupsFilterInputArgs
         ///             {
-        ///                 new Tencentcloud.Gaap.Inputs.GetProxyGroupsFilterArgs
+        ///                 Name = "GroupId",
+        ///                 Values = new[]
         ///                 {
-        ///                     Name = "GroupId",
-        ///                     Values = 
-        ///                     {
-        ///                         "lg-5anbbou5",
-        ///                     },
+        ///                     "lg-2foz7wjh",
         ///                 },
         ///             },
-        ///             ProjectId = 0,
-        ///         }));
-        ///     }
+        ///         },
+        ///         ProjectId = 0,
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetProxyGroupsResult> InvokeAsync(GetProxyGroupsArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetProxyGroupsResult>("tencentcloud:Gaap/getProxyGroups:getProxyGroups", args ?? new GetProxyGroupsArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetProxyGroupsResult>("tencentcloud:Gaap/getProxyGroups:getProxyGroups", args ?? new GetProxyGroupsArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of gaap proxy groups
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var proxyGroups = Tencentcloud.Gaap.GetProxyGroups.Invoke(new()
         ///     {
-        ///         var proxyGroups = Output.Create(Tencentcloud.Gaap.GetProxyGroups.InvokeAsync(new Tencentcloud.Gaap.GetProxyGroupsArgs
+        ///         Filters = new[]
         ///         {
-        ///             Filters = 
+        ///             new Tencentcloud.Gaap.Inputs.GetProxyGroupsFilterInputArgs
         ///             {
-        ///                 new Tencentcloud.Gaap.Inputs.GetProxyGroupsFilterArgs
+        ///                 Name = "GroupId",
+        ///                 Values = new[]
         ///                 {
-        ///                     Name = "GroupId",
-        ///                     Values = 
-        ///                     {
-        ///                         "lg-5anbbou5",
-        ///                     },
+        ///                     "lg-2foz7wjh",
         ///                 },
         ///             },
-        ///             ProjectId = 0,
-        ///         }));
-        ///     }
+        ///         },
+        ///         ProjectId = 0,
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetProxyGroupsResult> Invoke(GetProxyGroupsInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetProxyGroupsResult>("tencentcloud:Gaap/getProxyGroups:getProxyGroups", args ?? new GetProxyGroupsInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetProxyGroupsResult>("tencentcloud:Gaap/getProxyGroups:getProxyGroups", args ?? new GetProxyGroupsInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetProxyGroupsArgs : Pulumi.InvokeArgs
+    public sealed class GetProxyGroupsArgs : global::Pulumi.InvokeArgs
     {
         [Input("filters")]
         private List<Inputs.GetProxyGroupsFilterArgs>? _filters;
@@ -135,9 +129,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
         public GetProxyGroupsArgs()
         {
         }
+        public static new GetProxyGroupsArgs Empty => new GetProxyGroupsArgs();
     }
 
-    public sealed class GetProxyGroupsInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetProxyGroupsInvokeArgs : global::Pulumi.InvokeArgs
     {
         [Input("filters")]
         private InputList<Inputs.GetProxyGroupsFilterInputArgs>? _filters;
@@ -178,6 +173,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
         public GetProxyGroupsInvokeArgs()
         {
         }
+        public static new GetProxyGroupsInvokeArgs Empty => new GetProxyGroupsInvokeArgs();
     }
 
 

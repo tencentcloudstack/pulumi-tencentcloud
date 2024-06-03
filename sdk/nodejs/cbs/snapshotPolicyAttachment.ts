@@ -9,15 +9,17 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const foo = new tencentcloud.cbs.SnapshotPolicyAttachment("foo", {
  *     storageId: tencentcloud_cbs_storage.foo.id,
  *     snapshotPolicyId: tencentcloud_cbs_snapshot_policy.policy.id,
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export class SnapshotPolicyAttachment extends pulumi.CustomResource {
     /**

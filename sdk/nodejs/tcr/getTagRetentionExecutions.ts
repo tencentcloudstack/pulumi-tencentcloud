@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,22 +11,21 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const tagRetentionExecutions = pulumi.output(tencentcloud.Tcr.getTagRetentionExecutions({
+ * const tagRetentionExecutions = tencentcloud.Tcr.getTagRetentionExecutions({
  *     registryId: "tcr_ins_id",
  *     retentionId: 1,
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getTagRetentionExecutions(args: GetTagRetentionExecutionsArgs, opts?: pulumi.InvokeOptions): Promise<GetTagRetentionExecutionsResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Tcr/getTagRetentionExecutions:getTagRetentionExecutions", {
         "registryId": args.registryId,
         "resultOutputFile": args.resultOutputFile,
@@ -70,9 +70,25 @@ export interface GetTagRetentionExecutionsResult {
      */
     readonly retentionId: number;
 }
-
+/**
+ * Use this data source to query detailed information of tcr tagRetentionExecutions
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const tagRetentionExecutions = tencentcloud.Tcr.getTagRetentionExecutions({
+ *     registryId: "tcr_ins_id",
+ *     retentionId: 1,
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getTagRetentionExecutionsOutput(args: GetTagRetentionExecutionsOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetTagRetentionExecutionsResult> {
-    return pulumi.output(args).apply(a => getTagRetentionExecutions(a, opts))
+    return pulumi.output(args).apply((a: any) => getTagRetentionExecutions(a, opts))
 }
 
 /**

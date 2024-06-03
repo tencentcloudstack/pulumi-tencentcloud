@@ -9,27 +9,43 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const foo = new tencentcloud.PrivateDns.Record("foo", {
- *     mx: 0,
+ * const vpc = new tencentcloud.vpc.Instance("vpc", {cidrBlock: "10.0.0.0/16"});
+ * const exampleZone = new tencentcloud.privatedns.Zone("exampleZone", {
+ *     domain: "domain.com",
+ *     remark: "remark.",
+ *     vpcSets: [{
+ *         region: "ap-guangzhou",
+ *         uniqVpcId: vpc.id,
+ *     }],
+ *     dnsForwardStatus: "DISABLED",
+ *     cnameSpeedupStatus: "ENABLED",
+ *     tags: {
+ *         createdBy: "terraform",
+ *     },
+ * });
+ * const exampleRecord = new tencentcloud.privatedns.Record("exampleRecord", {
+ *     zoneId: exampleZone.id,
  *     recordType: "A",
  *     recordValue: "192.168.1.2",
  *     subDomain: "www",
  *     ttl: 300,
  *     weight: 1,
- *     zoneId: "zone-rqndjnki",
+ *     mx: 0,
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * Private Dns Record can be imported, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:PrivateDns/record:Record foo zone_id#record_id
+ * $ pulumi import tencentcloud:PrivateDns/record:Record example zone-iza3a33s#1983030
  * ```
  */
 export class Record extends pulumi.CustomResource {
@@ -69,7 +85,7 @@ export class Record extends pulumi.CustomResource {
      */
     public readonly recordType!: pulumi.Output<string>;
     /**
-     * Record value, such as IP: 192.168.10.2, CNAME: cname.qcloud.com, and MX: mail.qcloud.com..
+     * Record value, such as IP: 192.168.10.2, CNAME: cname.qcloud.com, and MX: mail.qcloud.com.
      */
     public readonly recordValue!: pulumi.Output<string>;
     /**
@@ -79,7 +95,7 @@ export class Record extends pulumi.CustomResource {
     /**
      * Record cache time. The smaller the value, the faster the record will take effect. Value range: 1~86400s.
      */
-    public readonly ttl!: pulumi.Output<number | undefined>;
+    public readonly ttl!: pulumi.Output<number>;
     /**
      * Record weight. Value range: 1~100.
      */
@@ -149,7 +165,7 @@ export interface RecordState {
      */
     recordType?: pulumi.Input<string>;
     /**
-     * Record value, such as IP: 192.168.10.2, CNAME: cname.qcloud.com, and MX: mail.qcloud.com..
+     * Record value, such as IP: 192.168.10.2, CNAME: cname.qcloud.com, and MX: mail.qcloud.com.
      */
     recordValue?: pulumi.Input<string>;
     /**
@@ -183,7 +199,7 @@ export interface RecordArgs {
      */
     recordType: pulumi.Input<string>;
     /**
-     * Record value, such as IP: 192.168.10.2, CNAME: cname.qcloud.com, and MX: mail.qcloud.com..
+     * Record value, such as IP: 192.168.10.2, CNAME: cname.qcloud.com, and MX: mail.qcloud.com.
      */
     recordValue: pulumi.Input<string>;
     /**

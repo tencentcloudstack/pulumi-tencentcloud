@@ -7,51 +7,139 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a CLB attachment.
 //
+// > **NOTE:** This resource is designed to manage the entire set of binding relationships associated with a particular CLB (Cloud Load Balancer). As such, it does not allow the simultaneous use of this resource for the same CLB across different contexts or environments.
+//
 // ## Example Usage
 //
+// ### Bind a Cvm instance
+//
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Clb"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Clb"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Clb"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Clb.NewAttachment(ctx, "foo", &Clb.AttachmentArgs{
-// 			ClbId:      pulumi.String("lb-k2zjp9lv"),
-// 			ListenerId: pulumi.String("lbl-hh141sn9"),
-// 			RuleId:     pulumi.String("loc-4xxr2cy7"),
-// 			Targets: clb.AttachmentTargetArray{
-// 				&clb.AttachmentTargetArgs{
-// 					InstanceId: pulumi.String("ins-1flbqyp8"),
-// 					Port:       pulumi.Int(80),
-// 					Weight:     pulumi.Int(10),
-// 				},
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Clb.NewAttachment(ctx, "foo", &Clb.AttachmentArgs{
+//				ClbId:      pulumi.String("lb-k2zjp9lv"),
+//				ListenerId: pulumi.String("lbl-hh141sn9"),
+//				RuleId:     pulumi.String("loc-4xxr2cy7"),
+//				Targets: clb.AttachmentTargetArray{
+//					&clb.AttachmentTargetArgs{
+//						InstanceId: pulumi.String("ins-1flbqyp8"),
+//						Port:       pulumi.Int(80),
+//						Weight:     pulumi.Int(10),
+//					},
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
+//
+// ### Bind multiple Cvm instances
+//
+// <!--Start PulumiCodeChooser -->
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Clb"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Clb.NewAttachment(ctx, "foo", &Clb.AttachmentArgs{
+//				ClbId:      pulumi.String("lb-k2zjp9lv"),
+//				ListenerId: pulumi.String("lbl-hh141sn9"),
+//				RuleId:     pulumi.String("loc-4xxr2cy7"),
+//				Targets: clb.AttachmentTargetArray{
+//					&clb.AttachmentTargetArgs{
+//						InstanceId: pulumi.String("ins-1flbqyp8"),
+//						Port:       pulumi.Int(80),
+//						Weight:     pulumi.Int(10),
+//					},
+//					&clb.AttachmentTargetArgs{
+//						InstanceId: pulumi.String("ins-ekloqpa1"),
+//						Port:       pulumi.Int(81),
+//						Weight:     pulumi.Int(10),
+//					},
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
+// <!--End PulumiCodeChooser -->
+//
+// ### Bind backend target is ENI
+//
+// <!--Start PulumiCodeChooser -->
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Clb"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Clb.NewAttachment(ctx, "foo", &Clb.AttachmentArgs{
+//				ClbId:      pulumi.String("lb-k2zjp9lv"),
+//				ListenerId: pulumi.String("lbl-hh141sn9"),
+//				RuleId:     pulumi.String("loc-4xxr2cy7"),
+//				Targets: clb.AttachmentTargetArray{
+//					&clb.AttachmentTargetArgs{
+//						EniIp:  pulumi.String("example-ip"),
+//						Port:   pulumi.Int(23),
+//						Weight: pulumi.Int(50),
+//					},
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // CLB attachment can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Clb/attachment:Attachment foo loc-4xxr2cy7#lbl-hh141sn9#lb-7a0t6zqb
+// $ pulumi import tencentcloud:Clb/attachment:Attachment foo loc-4xxr2cy7#lbl-hh141sn9#lb-7a0t6zqb
 // ```
 type Attachment struct {
 	pulumi.CustomResourceState
@@ -84,7 +172,7 @@ func NewAttachment(ctx *pulumi.Context,
 	if args.Targets == nil {
 		return nil, errors.New("invalid value for required argument 'Targets'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource Attachment
 	err := ctx.RegisterResource("tencentcloud:Clb/attachment:Attachment", name, args, &resource, opts...)
 	if err != nil {
@@ -185,7 +273,7 @@ func (i *Attachment) ToAttachmentOutputWithContext(ctx context.Context) Attachme
 // AttachmentArrayInput is an input type that accepts AttachmentArray and AttachmentArrayOutput values.
 // You can construct a concrete instance of `AttachmentArrayInput` via:
 //
-//          AttachmentArray{ AttachmentArgs{...} }
+//	AttachmentArray{ AttachmentArgs{...} }
 type AttachmentArrayInput interface {
 	pulumi.Input
 
@@ -210,7 +298,7 @@ func (i AttachmentArray) ToAttachmentArrayOutputWithContext(ctx context.Context)
 // AttachmentMapInput is an input type that accepts AttachmentMap and AttachmentMapOutput values.
 // You can construct a concrete instance of `AttachmentMapInput` via:
 //
-//          AttachmentMap{ "key": AttachmentArgs{...} }
+//	AttachmentMap{ "key": AttachmentArgs{...} }
 type AttachmentMapInput interface {
 	pulumi.Input
 

@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos.Inputs
 {
 
-    public sealed class BucketLifecycleRuleExpirationGetArgs : Pulumi.ResourceArgs
+    public sealed class BucketLifecycleRuleExpirationGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Specifies the date after which you want the corresponding action to take effect.
@@ -34,5 +34,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos.Inputs
         public BucketLifecycleRuleExpirationGetArgs()
         {
         }
+        public static new BucketLifecycleRuleExpirationGetArgs Empty => new BucketLifecycleRuleExpirationGetArgs();
     }
 }

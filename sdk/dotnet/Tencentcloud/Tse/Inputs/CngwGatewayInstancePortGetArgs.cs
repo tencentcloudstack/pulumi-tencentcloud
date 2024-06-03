@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tse.Inputs
 {
 
-    public sealed class CngwGatewayInstancePortGetArgs : Pulumi.ResourceArgs
+    public sealed class CngwGatewayInstancePortGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Http port range.
@@ -40,5 +40,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tse.Inputs
         public CngwGatewayInstancePortGetArgs()
         {
         }
+        public static new CngwGatewayInstancePortGetArgs Empty => new CngwGatewayInstancePortGetArgs();
     }
 }

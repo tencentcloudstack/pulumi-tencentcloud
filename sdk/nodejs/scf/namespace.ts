@@ -9,21 +9,21 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const foo = new tencentcloud.Scf.Namespace("foo", {
- *     namespace: "ci-test-scf",
- * });
+ * const foo = new tencentcloud.scf.Namespace("foo", {namespace: "ci-test-scf"});
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * SCF namespace can be imported, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Scf/namespace:Namespace test default
+ * $ pulumi import tencentcloud:Scf/namespace:Namespace test default
  * ```
  */
 export class Namespace extends pulumi.CustomResource {

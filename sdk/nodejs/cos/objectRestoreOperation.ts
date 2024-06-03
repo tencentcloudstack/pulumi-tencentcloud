@@ -9,17 +9,19 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const objectRestore = new tencentcloud.Cos.ObjectRestoreOperation("object_restore", {
+ * const objectRestore = new tencentcloud.cos.ObjectRestoreOperation("objectRestore", {
  *     bucket: "keep-test-1308919341",
  *     days: 2,
  *     key: "test-restore.txt",
  *     tier: "Expedited",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export class ObjectRestoreOperation extends pulumi.CustomResource {
     /**

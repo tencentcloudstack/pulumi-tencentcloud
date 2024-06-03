@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,22 +11,21 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const describeHostLighthouseInstanceList = pulumi.output(tencentcloud.Ssl.getDescribeHostLighthouseInstanceList({
+ * const describeHostLighthouseInstanceList = tencentcloud.Ssl.getDescribeHostLighthouseInstanceList({
  *     certificateId: "8tvMCvGF",
  *     resourceType: "lighthouse",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getDescribeHostLighthouseInstanceList(args: GetDescribeHostLighthouseInstanceListArgs, opts?: pulumi.InvokeOptions): Promise<GetDescribeHostLighthouseInstanceListResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Ssl/getDescribeHostLighthouseInstanceList:getDescribeHostLighthouseInstanceList", {
         "certificateId": args.certificateId,
         "filters": args.filters,
@@ -79,9 +79,25 @@ export interface GetDescribeHostLighthouseInstanceListResult {
     readonly resourceType: string;
     readonly resultOutputFile?: string;
 }
-
+/**
+ * Use this data source to query detailed information of ssl describeHostLighthouseInstanceList
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const describeHostLighthouseInstanceList = tencentcloud.Ssl.getDescribeHostLighthouseInstanceList({
+ *     certificateId: "8tvMCvGF",
+ *     resourceType: "lighthouse",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getDescribeHostLighthouseInstanceListOutput(args: GetDescribeHostLighthouseInstanceListOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetDescribeHostLighthouseInstanceListResult> {
-    return pulumi.output(args).apply(a => getDescribeHostLighthouseInstanceList(a, opts))
+    return pulumi.output(args).apply((a: any) => getDescribeHostLighthouseInstanceList(a, opts))
 }
 
 /**

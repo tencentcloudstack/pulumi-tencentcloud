@@ -9,23 +9,25 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const database = new tencentcloud.Mysql.Database("database", {
+ * const database = new tencentcloud.mysql.Database("database", {
  *     characterSetName: "utf8",
  *     dbName: "for_tf_test",
  *     instanceId: "cdb-i9xfdf7z",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * mysql database can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Mysql/database:Database database instanceId#dbName
+ * $ pulumi import tencentcloud:Mysql/database:Database database instanceId#dbName
  * ```
  */
 export class Database extends pulumi.CustomResource {

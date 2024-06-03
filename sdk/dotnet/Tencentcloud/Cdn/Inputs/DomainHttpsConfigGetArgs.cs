@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cdn.Inputs
 {
 
-    public sealed class DomainHttpsConfigGetArgs : Pulumi.ResourceArgs
+    public sealed class DomainHttpsConfigGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Client certificate configuration information.
@@ -76,5 +76,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cdn.Inputs
         public DomainHttpsConfigGetArgs()
         {
         }
+        public static new DomainHttpsConfigGetArgs Empty => new DomainHttpsConfigGetArgs();
     }
 }

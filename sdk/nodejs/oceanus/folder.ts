@@ -9,24 +9,26 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = new tencentcloud.Oceanus.Folder("example", {
+ * const example = new tencentcloud.oceanus.Folder("example", {
  *     folderName: "tf_example",
  *     folderType: 0,
  *     parentId: "folder-lfqkt11s",
  *     workSpaceId: "space-125703345ap-shenzhen-fsi",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * oceanus folder can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Oceanus/folder:Folder example space-125703345ap-shenzhen-fsi#folder-f40fq79g#0
+ * $ pulumi import tencentcloud:Oceanus/folder:Folder example space-125703345ap-shenzhen-fsi#folder-f40fq79g#0
  * ```
  */
 export class Folder extends pulumi.CustomResource {

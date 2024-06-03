@@ -17,49 +17,50 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dayu
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var tencentcloudDayuL7RuleV2 = new Tencentcloud.Dayu.L7RuleV2("tencentcloudDayuL7RuleV2", new()
     ///     {
-    ///         var tencentcloudDayuL7RuleV2 = new Tencentcloud.Dayu.L7RuleV2("tencentcloudDayuL7RuleV2", new Tencentcloud.Dayu.L7RuleV2Args
+    ///         ResourceId = "bgpip-000004xe",
+    ///         ResourceIp = "119.28.217.162",
+    ///         ResourceType = "bgpip",
+    ///         Rule = new Tencentcloud.Dayu.Inputs.L7RuleV2RuleArgs
     ///         {
-    ///             ResourceId = "bgpip-000004xe",
-    ///             ResourceIp = "119.28.217.162",
-    ///             ResourceType = "bgpip",
-    ///             Rule = new Tencentcloud.Dayu.Inputs.L7RuleV2RuleArgs
+    ///             Domain = "github.com",
+    ///             KeepEnable = false,
+    ///             Keeptime = 0,
+    ///             LbType = 1,
+    ///             Protocol = "http",
+    ///             SourceLists = new[]
     ///             {
-    ///                 Domain = "github.com",
-    ///                 KeepEnable = false,
-    ///                 Keeptime = 0,
-    ///                 LbType = 1,
-    ///                 Protocol = "http",
-    ///                 SourceLists = 
+    ///                 new Tencentcloud.Dayu.Inputs.L7RuleV2RuleSourceListArgs
     ///                 {
-    ///                     new Tencentcloud.Dayu.Inputs.L7RuleV2RuleSourceListArgs
-    ///                     {
-    ///                         Source = "1.2.3.5",
-    ///                         Weight = 100,
-    ///                     },
-    ///                     new Tencentcloud.Dayu.Inputs.L7RuleV2RuleSourceListArgs
-    ///                     {
-    ///                         Source = "1.2.3.6",
-    ///                         Weight = 100,
-    ///                     },
+    ///                     Source = "1.2.3.5",
+    ///                     Weight = 100,
     ///                 },
-    ///                 SourceType = 2,
+    ///                 new Tencentcloud.Dayu.Inputs.L7RuleV2RuleSourceListArgs
+    ///                 {
+    ///                     Source = "1.2.3.6",
+    ///                     Weight = 100,
+    ///                 },
     ///             },
-    ///         });
-    ///     }
+    ///             SourceType = 2,
+    ///         },
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Dayu/l7RuleV2:L7RuleV2")]
-    public partial class L7RuleV2 : Pulumi.CustomResource
+    public partial class L7RuleV2 : global::Pulumi.CustomResource
     {
         /// <summary>
         /// ID of the resource that the layer 7 rule works for.
@@ -130,7 +131,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dayu
         }
     }
 
-    public sealed class L7RuleV2Args : Pulumi.ResourceArgs
+    public sealed class L7RuleV2Args : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// ID of the resource that the layer 7 rule works for.
@@ -159,9 +160,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dayu
         public L7RuleV2Args()
         {
         }
+        public static new L7RuleV2Args Empty => new L7RuleV2Args();
     }
 
-    public sealed class L7RuleV2State : Pulumi.ResourceArgs
+    public sealed class L7RuleV2State : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// ID of the resource that the layer 7 rule works for.
@@ -190,5 +192,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dayu
         public L7RuleV2State()
         {
         }
+        public static new L7RuleV2State Empty => new L7RuleV2State();
     }
 }

@@ -9,11 +9,12 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const account = new tencentcloud.Cynosdb.Account("account", {
+ * const account = new tencentcloud.cynosdb.Account("account", {
  *     accountName: "terraform_test",
  *     accountPassword: "Password@1234",
  *     clusterId: "cynosdbmysql-bws8h88b",
@@ -22,6 +23,7 @@ import * as utilities from "../utilities";
  *     maxUserConnections: 2,
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export class IsolateInstance extends pulumi.CustomResource {
     /**

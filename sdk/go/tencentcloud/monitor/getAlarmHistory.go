@@ -8,11 +8,58 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Use this data source to query detailed information of monitor alarmHistory
+//
+// ## Example Usage
+//
+// <!--Start PulumiCodeChooser -->
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Monitor"
+//
+// )
+// func main() {
+// pulumi.Run(func(ctx *pulumi.Context) error {
+// _, err := Monitor.GetAlarmHistory(ctx, &monitor.GetAlarmHistoryArgs{
+// Content: pulumi.StringRef("CPU利用率 > 3%"),
+// EndTime: pulumi.IntRef(1697212799),
+// Module: "monitor",
+// MonitorTypes: []string{
+// "MT_QCE",
+// },
+// Namespaces: []monitor.GetAlarmHistoryNamespace{
+// {
+// MonitorType: "CpuUsage",
+// Namespace: "cvm_device",
+// },
+// },
+// Order: pulumi.StringRef("DESC"),
+// PolicyIds: []string{
+// "policy-iejtp4ue",
+// },
+// PolicyName: pulumi.StringRef("terraform_test"),
+// ProjectIds: interface{}{
+// 0,
+// },
+// StartTime: pulumi.IntRef(1696608000),
+// }, nil);
+// if err != nil {
+// return err
+// }
+// return nil
+// })
+// }
+// ```
+// <!--End PulumiCodeChooser -->
 func GetAlarmHistory(ctx *pulumi.Context, args *GetAlarmHistoryArgs, opts ...pulumi.InvokeOption) (*GetAlarmHistoryResult, error) {
-	opts = pkgInvokeDefaultOpts(opts)
+	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetAlarmHistoryResult
 	err := ctx.Invoke("tencentcloud:Monitor/getAlarmHistory:getAlarmHistory", args, &rv, opts...)
 	if err != nil {

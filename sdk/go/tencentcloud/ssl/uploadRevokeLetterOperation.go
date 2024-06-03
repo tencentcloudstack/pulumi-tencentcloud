@@ -7,53 +7,59 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a ssl uploadRevokeLetter
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"encoding/base64"
-// 	"io/ioutil"
 //
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ssl"
+//	"encoding/base64"
+//	"os"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ssl"
+//
 // )
 //
-// func filebase64OrPanic(path string) pulumi.StringPtrInput {
-// 	if fileData, err := ioutil.ReadFile(path); err == nil {
-// 		return pulumi.String(base64.StdEncoding.EncodeToString(fileData[:]))
-// 	} else {
-// 		panic(err.Error())
-// 	}
-// }
+//	func filebase64OrPanic(path string) string {
+//		if fileData, err := os.ReadFile(path); err == nil {
+//			return base64.StdEncoding.EncodeToString(fileData[:])
+//		} else {
+//			panic(err.Error())
+//		}
+//	}
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Ssl.NewUploadRevokeLetterOperation(ctx, "uploadRevokeLetter", &Ssl.UploadRevokeLetterOperationArgs{
-// 			CertificateId: pulumi.String("8xRYdDlc"),
-// 			RevokeLetter:  filebase64OrPanic("./c.pdf"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Ssl.NewUploadRevokeLetterOperation(ctx, "uploadRevokeLetter", &Ssl.UploadRevokeLetterOperationArgs{
+//				CertificateId: pulumi.String("8xRYdDlc"),
+//				RevokeLetter:  filebase64OrPanic("./c.pdf"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // ssl upload_revoke_letter can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Ssl/uploadRevokeLetterOperation:UploadRevokeLetterOperation upload_revoke_letter upload_revoke_letter_id
+// $ pulumi import tencentcloud:Ssl/uploadRevokeLetterOperation:UploadRevokeLetterOperation upload_revoke_letter upload_revoke_letter_id
 // ```
 type UploadRevokeLetterOperation struct {
 	pulumi.CustomResourceState
@@ -77,7 +83,7 @@ func NewUploadRevokeLetterOperation(ctx *pulumi.Context,
 	if args.RevokeLetter == nil {
 		return nil, errors.New("invalid value for required argument 'RevokeLetter'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource UploadRevokeLetterOperation
 	err := ctx.RegisterResource("tencentcloud:Ssl/uploadRevokeLetterOperation:UploadRevokeLetterOperation", name, args, &resource, opts...)
 	if err != nil {
@@ -158,7 +164,7 @@ func (i *UploadRevokeLetterOperation) ToUploadRevokeLetterOperationOutputWithCon
 // UploadRevokeLetterOperationArrayInput is an input type that accepts UploadRevokeLetterOperationArray and UploadRevokeLetterOperationArrayOutput values.
 // You can construct a concrete instance of `UploadRevokeLetterOperationArrayInput` via:
 //
-//          UploadRevokeLetterOperationArray{ UploadRevokeLetterOperationArgs{...} }
+//	UploadRevokeLetterOperationArray{ UploadRevokeLetterOperationArgs{...} }
 type UploadRevokeLetterOperationArrayInput interface {
 	pulumi.Input
 
@@ -183,7 +189,7 @@ func (i UploadRevokeLetterOperationArray) ToUploadRevokeLetterOperationArrayOutp
 // UploadRevokeLetterOperationMapInput is an input type that accepts UploadRevokeLetterOperationMap and UploadRevokeLetterOperationMapOutput values.
 // You can construct a concrete instance of `UploadRevokeLetterOperationMapInput` via:
 //
-//          UploadRevokeLetterOperationMap{ "key": UploadRevokeLetterOperationArgs{...} }
+//	UploadRevokeLetterOperationMap{ "key": UploadRevokeLetterOperationArgs{...} }
 type UploadRevokeLetterOperationMapInput interface {
 	pulumi.Input
 

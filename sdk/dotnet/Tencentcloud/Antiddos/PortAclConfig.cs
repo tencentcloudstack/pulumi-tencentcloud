@@ -15,43 +15,44 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Antiddos
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var portAclConfig = new Tencentcloud.Antiddos.PortAclConfig("portAclConfig", new()
     ///     {
-    ///         var portAclConfig = new Tencentcloud.Antiddos.PortAclConfig("portAclConfig", new Tencentcloud.Antiddos.PortAclConfigArgs
+    ///         AclConfig = new Tencentcloud.Antiddos.Inputs.PortAclConfigAclConfigArgs
     ///         {
-    ///             AclConfig = new Tencentcloud.Antiddos.Inputs.PortAclConfigAclConfigArgs
-    ///             {
-    ///                 Action = "drop",
-    ///                 DPortEnd = 23,
-    ///                 DPortStart = 22,
-    ///                 ForwardProtocol = "all",
-    ///                 Priority = 2,
-    ///                 SPortEnd = 23,
-    ///                 SPortStart = 22,
-    ///             },
-    ///             InstanceId = "bgp-xxxxxx",
-    ///         });
-    ///     }
+    ///             Action = "drop",
+    ///             DPortEnd = 23,
+    ///             DPortStart = 22,
+    ///             ForwardProtocol = "all",
+    ///             Priority = 2,
+    ///             SPortEnd = 23,
+    ///             SPortStart = 22,
+    ///         },
+    ///         InstanceId = "bgp-xxxxxx",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// antiddos port_acl_config can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Antiddos/portAclConfig:PortAclConfig port_acl_config ${instanceId}#${configJson}
+    /// $ pulumi import tencentcloud:Antiddos/portAclConfig:PortAclConfig port_acl_config ${instanceId}#${configJson}
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Antiddos/portAclConfig:PortAclConfig")]
-    public partial class PortAclConfig : Pulumi.CustomResource
+    public partial class PortAclConfig : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Port ACL Policy.
@@ -110,7 +111,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Antiddos
         }
     }
 
-    public sealed class PortAclConfigArgs : Pulumi.ResourceArgs
+    public sealed class PortAclConfigArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Port ACL Policy.
@@ -127,9 +128,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Antiddos
         public PortAclConfigArgs()
         {
         }
+        public static new PortAclConfigArgs Empty => new PortAclConfigArgs();
     }
 
-    public sealed class PortAclConfigState : Pulumi.ResourceArgs
+    public sealed class PortAclConfigState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Port ACL Policy.
@@ -146,5 +148,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Antiddos
         public PortAclConfigState()
         {
         }
+        public static new PortAclConfigState Empty => new PortAclConfigState();
     }
 }

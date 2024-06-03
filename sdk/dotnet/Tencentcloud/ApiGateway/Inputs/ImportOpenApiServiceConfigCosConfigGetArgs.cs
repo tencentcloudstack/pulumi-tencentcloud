@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway.Inputs
 {
 
-    public sealed class ImportOpenApiServiceConfigCosConfigGetArgs : Pulumi.ResourceArgs
+    public sealed class ImportOpenApiServiceConfigCosConfigGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// The API calls the backend COS method, and the optional values for the front-end request method and Action are:GET: GetObjectPUT: PutObjectPOST: PostObject, AppendObjectHEAD: HeadObjectDELETE: DeleteObject.Note: This field may return null, indicating that a valid value cannot be obtained.
@@ -40,5 +40,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway.Inputs
         public ImportOpenApiServiceConfigCosConfigGetArgs()
         {
         }
+        public static new ImportOpenApiServiceConfigCosConfigGetArgs Empty => new ImportOpenApiServiceConfigCosConfigGetArgs();
     }
 }

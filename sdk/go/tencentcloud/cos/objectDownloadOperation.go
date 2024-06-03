@@ -7,36 +7,42 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to download object
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cos"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cos"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Cos.NewObjectDownloadOperation(ctx, "objectDownload", &Cos.ObjectDownloadOperationArgs{
-// 			Bucket:       pulumi.String("xxxxxxx"),
-// 			DownloadPath: pulumi.String("/tmp/test.txt"),
-// 			Key:          pulumi.String("test.txt"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Cos.NewObjectDownloadOperation(ctx, "objectDownload", &Cos.ObjectDownloadOperationArgs{
+//				Bucket:       pulumi.String("xxxxxxx"),
+//				DownloadPath: pulumi.String("/tmp/test.txt"),
+//				Key:          pulumi.String("test.txt"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 type ObjectDownloadOperation struct {
 	pulumi.CustomResourceState
 
@@ -64,7 +70,7 @@ func NewObjectDownloadOperation(ctx *pulumi.Context,
 	if args.Key == nil {
 		return nil, errors.New("invalid value for required argument 'Key'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource ObjectDownloadOperation
 	err := ctx.RegisterResource("tencentcloud:Cos/objectDownloadOperation:ObjectDownloadOperation", name, args, &resource, opts...)
 	if err != nil {
@@ -153,7 +159,7 @@ func (i *ObjectDownloadOperation) ToObjectDownloadOperationOutputWithContext(ctx
 // ObjectDownloadOperationArrayInput is an input type that accepts ObjectDownloadOperationArray and ObjectDownloadOperationArrayOutput values.
 // You can construct a concrete instance of `ObjectDownloadOperationArrayInput` via:
 //
-//          ObjectDownloadOperationArray{ ObjectDownloadOperationArgs{...} }
+//	ObjectDownloadOperationArray{ ObjectDownloadOperationArgs{...} }
 type ObjectDownloadOperationArrayInput interface {
 	pulumi.Input
 
@@ -178,7 +184,7 @@ func (i ObjectDownloadOperationArray) ToObjectDownloadOperationArrayOutputWithCo
 // ObjectDownloadOperationMapInput is an input type that accepts ObjectDownloadOperationMap and ObjectDownloadOperationMapOutput values.
 // You can construct a concrete instance of `ObjectDownloadOperationMapInput` via:
 //
-//          ObjectDownloadOperationMap{ "key": ObjectDownloadOperationArgs{...} }
+//	ObjectDownloadOperationMap{ "key": ObjectDownloadOperationArgs{...} }
 type ObjectDownloadOperationMapInput interface {
 	pulumi.Input
 

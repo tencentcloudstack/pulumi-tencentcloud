@@ -14,6 +14,9 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dts.Outputs
     [OutputType]
     public sealed class GetCompareTasksListConfigObjectItemTableResult
     {
+        /// <summary>
+        /// table name.
+        /// </summary>
         public readonly string? TableName;
 
         [OutputConstructor]

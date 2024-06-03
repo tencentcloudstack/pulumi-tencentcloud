@@ -15,58 +15,52 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Antiddos
         /// <summary>
         /// Use this data source to query detailed information of antiddos pending risk info
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
-        ///     {
-        ///         var pendingRiskInfo = Output.Create(Tencentcloud.Antiddos.GetPendingRiskInfo.InvokeAsync());
-        ///     }
+        ///     var pendingRiskInfo = Tencentcloud.Antiddos.GetPendingRiskInfo.Invoke();
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetPendingRiskInfoResult> InvokeAsync(GetPendingRiskInfoArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetPendingRiskInfoResult>("tencentcloud:Antiddos/getPendingRiskInfo:getPendingRiskInfo", args ?? new GetPendingRiskInfoArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetPendingRiskInfoResult>("tencentcloud:Antiddos/getPendingRiskInfo:getPendingRiskInfo", args ?? new GetPendingRiskInfoArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of antiddos pending risk info
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
-        ///     {
-        ///         var pendingRiskInfo = Output.Create(Tencentcloud.Antiddos.GetPendingRiskInfo.InvokeAsync());
-        ///     }
+        ///     var pendingRiskInfo = Tencentcloud.Antiddos.GetPendingRiskInfo.Invoke();
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetPendingRiskInfoResult> Invoke(GetPendingRiskInfoInvokeArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetPendingRiskInfoResult>("tencentcloud:Antiddos/getPendingRiskInfo:getPendingRiskInfo", args ?? new GetPendingRiskInfoInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetPendingRiskInfoResult>("tencentcloud:Antiddos/getPendingRiskInfo:getPendingRiskInfo", args ?? new GetPendingRiskInfoInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetPendingRiskInfoArgs : Pulumi.InvokeArgs
+    public sealed class GetPendingRiskInfoArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Used to save results.
@@ -77,9 +71,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Antiddos
         public GetPendingRiskInfoArgs()
         {
         }
+        public static new GetPendingRiskInfoArgs Empty => new GetPendingRiskInfoArgs();
     }
 
-    public sealed class GetPendingRiskInfoInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetPendingRiskInfoInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Used to save results.
@@ -90,6 +85,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Antiddos
         public GetPendingRiskInfoInvokeArgs()
         {
         }
+        public static new GetPendingRiskInfoInvokeArgs Empty => new GetPendingRiskInfoInvokeArgs();
     }
 
 

@@ -7,133 +7,138 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a eb ebTransform
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"encoding/json"
 //
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Eb"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Eb"
+//	"encoding/json"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Eb"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		fooEventBus, err := Eb.NewEventBus(ctx, "fooEventBus", &Eb.EventBusArgs{
-// 			EventBusName: pulumi.String("tf-event_bus"),
-// 			Description:  pulumi.String("event bus desc"),
-// 			EnableStore:  pulumi.Bool(false),
-// 			SaveDays:     pulumi.Int(1),
-// 			Tags: pulumi.AnyMap{
-// 				"createdBy": pulumi.Any("terraform"),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		tmpJSON0, err := json.Marshal(map[string]interface{}{
-// 			"source": "apigw.cloud.tencent",
-// 			"type": []string{
-// 				"connector:apigw",
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		json0 := string(tmpJSON0)
-// 		fooEventRule, err := Eb.NewEventRule(ctx, "fooEventRule", &Eb.EventRuleArgs{
-// 			EventBusId:   fooEventBus.ID(),
-// 			RuleName:     pulumi.String("tf-event_rule"),
-// 			Description:  pulumi.String("event rule desc"),
-// 			Enable:       pulumi.Bool(true),
-// 			EventPattern: pulumi.String(json0),
-// 			Tags: pulumi.AnyMap{
-// 				"createdBy": pulumi.Any("terraform"),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		tmpJSON1, err := json.Marshal(map[string]interface{}{
-// 			"Partition": 1,
-// 			"msgBody":   "Hello from Ckafka again!",
-// 			"msgKey":    "test",
-// 			"offset":    37,
-// 			"topic":     "test-topic",
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		json1 := string(tmpJSON1)
-// 		_, err = Eb.NewEventTransform(ctx, "fooEventTransform", &Eb.EventTransformArgs{
-// 			EventBusId: fooEventBus.ID(),
-// 			RuleId:     fooEventRule.RuleId,
-// 			Transformations: eb.EventTransformTransformationArray{
-// 				&eb.EventTransformTransformationArgs{
-// 					Extraction: &eb.EventTransformTransformationExtractionArgs{
-// 						ExtractionInputPath: pulumi.String("$"),
-// 						Format:              pulumi.String("JSON"),
-// 					},
-// 					Transform: &eb.EventTransformTransformationTransformArgs{
-// 						OutputStructs: eb.EventTransformTransformationTransformOutputStructArray{
-// 							&eb.EventTransformTransformationTransformOutputStructArgs{
-// 								Key:       pulumi.String("type"),
-// 								Value:     pulumi.String("connector:ckafka"),
-// 								ValueType: pulumi.String("STRING"),
-// 							},
-// 							&eb.EventTransformTransformationTransformOutputStructArgs{
-// 								Key:       pulumi.String("source"),
-// 								Value:     pulumi.String("ckafka.cloud.tencent"),
-// 								ValueType: pulumi.String("STRING"),
-// 							},
-// 							&eb.EventTransformTransformationTransformOutputStructArgs{
-// 								Key:       pulumi.String("region"),
-// 								Value:     pulumi.String("ap-guangzhou"),
-// 								ValueType: pulumi.String("STRING"),
-// 							},
-// 							&eb.EventTransformTransformationTransformOutputStructArgs{
-// 								Key:       pulumi.String("datacontenttype"),
-// 								Value:     pulumi.String("application/json;charset=utf-8"),
-// 								ValueType: pulumi.String("STRING"),
-// 							},
-// 							&eb.EventTransformTransformationTransformOutputStructArgs{
-// 								Key:       pulumi.String("status"),
-// 								Value:     pulumi.String("-"),
-// 								ValueType: pulumi.String("STRING"),
-// 							},
-// 							&eb.EventTransformTransformationTransformOutputStructArgs{
-// 								Key:       pulumi.String("data"),
-// 								Value:     pulumi.String(json1),
-// 								ValueType: pulumi.String("STRING"),
-// 							},
-// 						},
-// 					},
-// 				},
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			fooEventBus, err := Eb.NewEventBus(ctx, "fooEventBus", &Eb.EventBusArgs{
+//				EventBusName: pulumi.String("tf-event_bus"),
+//				Description:  pulumi.String("event bus desc"),
+//				EnableStore:  pulumi.Bool(false),
+//				SaveDays:     pulumi.Int(1),
+//				Tags: pulumi.Map{
+//					"createdBy": pulumi.Any("terraform"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			tmpJSON0, err := json.Marshal(map[string]interface{}{
+//				"source": "apigw.cloud.tencent",
+//				"type": []string{
+//					"connector:apigw",
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			json0 := string(tmpJSON0)
+//			fooEventRule, err := Eb.NewEventRule(ctx, "fooEventRule", &Eb.EventRuleArgs{
+//				EventBusId:   fooEventBus.ID(),
+//				RuleName:     pulumi.String("tf-event_rule"),
+//				Description:  pulumi.String("event rule desc"),
+//				Enable:       pulumi.Bool(true),
+//				EventPattern: pulumi.String(json0),
+//				Tags: pulumi.Map{
+//					"createdBy": pulumi.Any("terraform"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			tmpJSON1, err := json.Marshal(map[string]interface{}{
+//				"Partition": 1,
+//				"msgBody":   "Hello from Ckafka again!",
+//				"msgKey":    "test",
+//				"offset":    37,
+//				"topic":     "test-topic",
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			json1 := string(tmpJSON1)
+//			_, err = Eb.NewEventTransform(ctx, "fooEventTransform", &Eb.EventTransformArgs{
+//				EventBusId: fooEventBus.ID(),
+//				RuleId:     fooEventRule.RuleId,
+//				Transformations: eb.EventTransformTransformationArray{
+//					&eb.EventTransformTransformationArgs{
+//						Extraction: &eb.EventTransformTransformationExtractionArgs{
+//							ExtractionInputPath: pulumi.String("$"),
+//							Format:              pulumi.String("JSON"),
+//						},
+//						Transform: &eb.EventTransformTransformationTransformArgs{
+//							OutputStructs: eb.EventTransformTransformationTransformOutputStructArray{
+//								&eb.EventTransformTransformationTransformOutputStructArgs{
+//									Key:       pulumi.String("type"),
+//									Value:     pulumi.String("connector:ckafka"),
+//									ValueType: pulumi.String("STRING"),
+//								},
+//								&eb.EventTransformTransformationTransformOutputStructArgs{
+//									Key:       pulumi.String("source"),
+//									Value:     pulumi.String("ckafka.cloud.tencent"),
+//									ValueType: pulumi.String("STRING"),
+//								},
+//								&eb.EventTransformTransformationTransformOutputStructArgs{
+//									Key:       pulumi.String("region"),
+//									Value:     pulumi.String("ap-guangzhou"),
+//									ValueType: pulumi.String("STRING"),
+//								},
+//								&eb.EventTransformTransformationTransformOutputStructArgs{
+//									Key:       pulumi.String("datacontenttype"),
+//									Value:     pulumi.String("application/json;charset=utf-8"),
+//									ValueType: pulumi.String("STRING"),
+//								},
+//								&eb.EventTransformTransformationTransformOutputStructArgs{
+//									Key:       pulumi.String("status"),
+//									Value:     pulumi.String("-"),
+//									ValueType: pulumi.String("STRING"),
+//								},
+//								&eb.EventTransformTransformationTransformOutputStructArgs{
+//									Key:       pulumi.String("data"),
+//									Value:     pulumi.String(json1),
+//									ValueType: pulumi.String("STRING"),
+//								},
+//							},
+//						},
+//					},
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // eb eb_transform can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Eb/eventTransform:EventTransform eb_transform eb_transform_id
+// $ pulumi import tencentcloud:Eb/eventTransform:EventTransform eb_transform eb_transform_id
 // ```
 type EventTransform struct {
 	pulumi.CustomResourceState
@@ -162,7 +167,7 @@ func NewEventTransform(ctx *pulumi.Context,
 	if args.Transformations == nil {
 		return nil, errors.New("invalid value for required argument 'Transformations'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource EventTransform
 	err := ctx.RegisterResource("tencentcloud:Eb/eventTransform:EventTransform", name, args, &resource, opts...)
 	if err != nil {
@@ -251,7 +256,7 @@ func (i *EventTransform) ToEventTransformOutputWithContext(ctx context.Context) 
 // EventTransformArrayInput is an input type that accepts EventTransformArray and EventTransformArrayOutput values.
 // You can construct a concrete instance of `EventTransformArrayInput` via:
 //
-//          EventTransformArray{ EventTransformArgs{...} }
+//	EventTransformArray{ EventTransformArgs{...} }
 type EventTransformArrayInput interface {
 	pulumi.Input
 
@@ -276,7 +281,7 @@ func (i EventTransformArray) ToEventTransformArrayOutputWithContext(ctx context.
 // EventTransformMapInput is an input type that accepts EventTransformMap and EventTransformMapOutput values.
 // You can construct a concrete instance of `EventTransformMapInput` via:
 //
-//          EventTransformMap{ "key": EventTransformArgs{...} }
+//	EventTransformMap{ "key": EventTransformArgs{...} }
 type EventTransformMapInput interface {
 	pulumi.Input
 

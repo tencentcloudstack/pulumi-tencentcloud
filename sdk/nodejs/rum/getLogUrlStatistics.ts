@@ -9,24 +9,23 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const logUrlStatistics = pulumi.output(tencentcloud.Rum.getLogUrlStatistics({
+ * const logUrlStatistics = tencentcloud.Rum.getLogUrlStatistics({
  *     endTime: 1625454840,
  *     projectId: 1,
  *     startTime: 1625444040,
  *     type: "analysis",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getLogUrlStatistics(args: GetLogUrlStatisticsArgs, opts?: pulumi.InvokeOptions): Promise<GetLogUrlStatisticsResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Rum/getLogUrlStatistics:getLogUrlStatistics", {
         "area": args.area,
         "brand": args.brand,
@@ -182,9 +181,27 @@ export interface GetLogUrlStatisticsResult {
     readonly type: string;
     readonly versionNum?: string;
 }
-
+/**
+ * Use this data source to query detailed information of rum logUrlStatistics
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const logUrlStatistics = tencentcloud.Rum.getLogUrlStatistics({
+ *     endTime: 1625454840,
+ *     projectId: 1,
+ *     startTime: 1625444040,
+ *     type: "analysis",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getLogUrlStatisticsOutput(args: GetLogUrlStatisticsOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetLogUrlStatisticsResult> {
-    return pulumi.output(args).apply(a => getLogUrlStatistics(a, opts))
+    return pulumi.output(args).apply((a: any) => getLogUrlStatistics(a, opts))
 }
 
 /**

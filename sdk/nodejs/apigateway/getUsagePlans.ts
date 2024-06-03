@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,10 +11,11 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const plan = new tencentcloud.apigateway.UsagePlan("plan", {
  *     usagePlanName: "my_plan",
@@ -28,14 +30,12 @@ import * as utilities from "../utilities";
  *     usagePlanId: plan.id,
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getUsagePlans(args?: GetUsagePlansArgs, opts?: pulumi.InvokeOptions): Promise<GetUsagePlansResult> {
     args = args || {};
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:ApiGateway/getUsagePlans:getUsagePlans", {
         "resultOutputFile": args.resultOutputFile,
         "usagePlanId": args.usagePlanId,
@@ -83,9 +83,34 @@ export interface GetUsagePlansResult {
      */
     readonly usagePlanName?: string;
 }
-
+/**
+ * Use this data source to query API gateway usage plans.
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
+ *
+ * const plan = new tencentcloud.apigateway.UsagePlan("plan", {
+ *     usagePlanName: "my_plan",
+ *     usagePlanDesc: "nice plan",
+ *     maxRequestNum: 100,
+ *     maxRequestNumPreSec: 10,
+ * });
+ * const name = tencentcloud.ApiGateway.getUsagePlansOutput({
+ *     usagePlanName: plan.usagePlanName,
+ * });
+ * const id = tencentcloud.ApiGateway.getUsagePlansOutput({
+ *     usagePlanId: plan.id,
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getUsagePlansOutput(args?: GetUsagePlansOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetUsagePlansResult> {
-    return pulumi.output(args).apply(a => getUsagePlans(a, opts))
+    return pulumi.output(args).apply((a: any) => getUsagePlans(a, opts))
 }
 
 /**

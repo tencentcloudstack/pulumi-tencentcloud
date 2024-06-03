@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,22 +11,21 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const clusterParams = pulumi.output(tencentcloud.Cynosdb.getClusterParams({
+ * const clusterParams = tencentcloud.Cynosdb.getClusterParams({
  *     clusterId: "cynosdbmysql-bws8h88b",
  *     paramName: "innodb_checksum_algorithm",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getClusterParams(args: GetClusterParamsArgs, opts?: pulumi.InvokeOptions): Promise<GetClusterParamsResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Cynosdb/getClusterParams:getClusterParams", {
         "clusterId": args.clusterId,
         "paramName": args.paramName,
@@ -70,9 +70,25 @@ export interface GetClusterParamsResult {
     readonly paramName?: string;
     readonly resultOutputFile?: string;
 }
-
+/**
+ * Use this data source to query detailed information of cynosdb clusterParams
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const clusterParams = tencentcloud.Cynosdb.getClusterParams({
+ *     clusterId: "cynosdbmysql-bws8h88b",
+ *     paramName: "innodb_checksum_algorithm",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getClusterParamsOutput(args: GetClusterParamsOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetClusterParamsResult> {
-    return pulumi.output(args).apply(a => getClusterParams(a, opts))
+    return pulumi.output(args).apply((a: any) => getClusterParams(a, opts))
 }
 
 /**

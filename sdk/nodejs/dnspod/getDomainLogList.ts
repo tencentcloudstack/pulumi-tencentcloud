@@ -9,22 +9,21 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const domainLogList = pulumi.output(tencentcloud.Dnspod.getDomainLogList({
+ * const domainLogList = tencentcloud.Dnspod.getDomainLogList({
  *     domain: "iac-tf.cloud",
  *     domainId: 123,
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getDomainLogList(args: GetDomainLogListArgs, opts?: pulumi.InvokeOptions): Promise<GetDomainLogListResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Dnspod/getDomainLogList:getDomainLogList", {
         "domain": args.domain,
         "domainId": args.domainId,
@@ -66,9 +65,25 @@ export interface GetDomainLogListResult {
     readonly logLists: string[];
     readonly resultOutputFile?: string;
 }
-
+/**
+ * Use this data source to query detailed information of dnspod domainLogList
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const domainLogList = tencentcloud.Dnspod.getDomainLogList({
+ *     domain: "iac-tf.cloud",
+ *     domainId: 123,
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getDomainLogListOutput(args: GetDomainLogListOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetDomainLogListResult> {
-    return pulumi.output(args).apply(a => getDomainLogList(a, opts))
+    return pulumi.output(args).apply((a: any) => getDomainLogList(a, opts))
 }
 
 /**

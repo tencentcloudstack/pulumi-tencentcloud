@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver.Inputs
 {
 
-    public sealed class RestoreInstanceRenameRestoreArgs : Pulumi.ResourceArgs
+    public sealed class RestoreInstanceRenameRestoreArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// New database name. In offline migration, OldName will be used if NewName is left empty (OldName and NewName cannot be both empty). In database cloning, OldName and NewName must be both specified and cannot have the same value.
@@ -28,5 +28,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver.Inputs
         public RestoreInstanceRenameRestoreArgs()
         {
         }
+        public static new RestoreInstanceRenameRestoreArgs Empty => new RestoreInstanceRenameRestoreArgs();
     }
 }

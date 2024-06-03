@@ -15,74 +15,68 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
         /// <summary>
         /// Provide a datasource to query cluster CommonNames.
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var foo = Tencentcloud.Kubernetes.GetClusterCommonNames.Invoke(new()
         ///     {
-        ///         var foo = Output.Create(Tencentcloud.Kubernetes.GetClusterCommonNames.InvokeAsync(new Tencentcloud.Kubernetes.GetClusterCommonNamesArgs
+        ///         ClusterId = "cls-12345678",
+        ///         SubaccountUins = new[]
         ///         {
-        ///             ClusterId = "cls-12345678",
-        ///             SubaccountUins = 
-        ///             {
-        ///                 "1234567890",
-        ///                 "0987654321",
-        ///             },
-        ///         }));
-        ///     }
+        ///             "1234567890",
+        ///             "0987654321",
+        ///         },
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetClusterCommonNamesResult> InvokeAsync(GetClusterCommonNamesArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetClusterCommonNamesResult>("tencentcloud:Kubernetes/getClusterCommonNames:getClusterCommonNames", args ?? new GetClusterCommonNamesArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetClusterCommonNamesResult>("tencentcloud:Kubernetes/getClusterCommonNames:getClusterCommonNames", args ?? new GetClusterCommonNamesArgs(), options.WithDefaults());
 
         /// <summary>
         /// Provide a datasource to query cluster CommonNames.
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var foo = Tencentcloud.Kubernetes.GetClusterCommonNames.Invoke(new()
         ///     {
-        ///         var foo = Output.Create(Tencentcloud.Kubernetes.GetClusterCommonNames.InvokeAsync(new Tencentcloud.Kubernetes.GetClusterCommonNamesArgs
+        ///         ClusterId = "cls-12345678",
+        ///         SubaccountUins = new[]
         ///         {
-        ///             ClusterId = "cls-12345678",
-        ///             SubaccountUins = 
-        ///             {
-        ///                 "1234567890",
-        ///                 "0987654321",
-        ///             },
-        ///         }));
-        ///     }
+        ///             "1234567890",
+        ///             "0987654321",
+        ///         },
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetClusterCommonNamesResult> Invoke(GetClusterCommonNamesInvokeArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetClusterCommonNamesResult>("tencentcloud:Kubernetes/getClusterCommonNames:getClusterCommonNames", args ?? new GetClusterCommonNamesInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetClusterCommonNamesResult>("tencentcloud:Kubernetes/getClusterCommonNames:getClusterCommonNames", args ?? new GetClusterCommonNamesInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetClusterCommonNamesArgs : Pulumi.InvokeArgs
+    public sealed class GetClusterCommonNamesArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Cluster ID.
@@ -91,7 +85,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
         public string? ClusterId { get; set; }
 
         /// <summary>
-        /// Used for save result.
+        /// Used to save results.
         /// </summary>
         [Input("resultOutputFile")]
         public string? ResultOutputFile { get; set; }
@@ -123,9 +117,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
         public GetClusterCommonNamesArgs()
         {
         }
+        public static new GetClusterCommonNamesArgs Empty => new GetClusterCommonNamesArgs();
     }
 
-    public sealed class GetClusterCommonNamesInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetClusterCommonNamesInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Cluster ID.
@@ -134,7 +129,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
         public Input<string>? ClusterId { get; set; }
 
         /// <summary>
-        /// Used for save result.
+        /// Used to save results.
         /// </summary>
         [Input("resultOutputFile")]
         public Input<string>? ResultOutputFile { get; set; }
@@ -166,6 +161,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
         public GetClusterCommonNamesInvokeArgs()
         {
         }
+        public static new GetClusterCommonNamesInvokeArgs Empty => new GetClusterCommonNamesInvokeArgs();
     }
 
 

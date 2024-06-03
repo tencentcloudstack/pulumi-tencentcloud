@@ -15,68 +15,62 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
         /// <summary>
         /// Use this data source to query detailed information of sqlserver slowlogs
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var example = Tencentcloud.Sqlserver.GetSlowlogs.Invoke(new()
         ///     {
-        ///         var example = Output.Create(Tencentcloud.Sqlserver.GetSlowlogs.InvokeAsync(new Tencentcloud.Sqlserver.GetSlowlogsArgs
-        ///         {
-        ///             EndTime = "2023-08-07 00:00:00",
-        ///             InstanceId = "mssql-qelbzgwf",
-        ///             StartTime = "2023-08-01 00:00:00",
-        ///         }));
-        ///     }
+        ///         EndTime = "2023-08-07 00:00:00",
+        ///         InstanceId = "mssql-qelbzgwf",
+        ///         StartTime = "2023-08-01 00:00:00",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetSlowlogsResult> InvokeAsync(GetSlowlogsArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetSlowlogsResult>("tencentcloud:Sqlserver/getSlowlogs:getSlowlogs", args ?? new GetSlowlogsArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetSlowlogsResult>("tencentcloud:Sqlserver/getSlowlogs:getSlowlogs", args ?? new GetSlowlogsArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of sqlserver slowlogs
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var example = Tencentcloud.Sqlserver.GetSlowlogs.Invoke(new()
         ///     {
-        ///         var example = Output.Create(Tencentcloud.Sqlserver.GetSlowlogs.InvokeAsync(new Tencentcloud.Sqlserver.GetSlowlogsArgs
-        ///         {
-        ///             EndTime = "2023-08-07 00:00:00",
-        ///             InstanceId = "mssql-qelbzgwf",
-        ///             StartTime = "2023-08-01 00:00:00",
-        ///         }));
-        ///     }
+        ///         EndTime = "2023-08-07 00:00:00",
+        ///         InstanceId = "mssql-qelbzgwf",
+        ///         StartTime = "2023-08-01 00:00:00",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetSlowlogsResult> Invoke(GetSlowlogsInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetSlowlogsResult>("tencentcloud:Sqlserver/getSlowlogs:getSlowlogs", args ?? new GetSlowlogsInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetSlowlogsResult>("tencentcloud:Sqlserver/getSlowlogs:getSlowlogs", args ?? new GetSlowlogsInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetSlowlogsArgs : Pulumi.InvokeArgs
+    public sealed class GetSlowlogsArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Query end time.
@@ -105,9 +99,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
         public GetSlowlogsArgs()
         {
         }
+        public static new GetSlowlogsArgs Empty => new GetSlowlogsArgs();
     }
 
-    public sealed class GetSlowlogsInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetSlowlogsInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Query end time.
@@ -136,6 +131,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
         public GetSlowlogsInvokeArgs()
         {
         }
+        public static new GetSlowlogsInvokeArgs Empty => new GetSlowlogsInvokeArgs();
     }
 
 

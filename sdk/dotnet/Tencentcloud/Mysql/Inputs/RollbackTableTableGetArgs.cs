@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql.Inputs
 {
 
-    public sealed class RollbackTableTableGetArgs : Pulumi.ResourceArgs
+    public sealed class RollbackTableTableGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// New database table name after rollback.
@@ -28,5 +28,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql.Inputs
         public RollbackTableTableGetArgs()
         {
         }
+        public static new RollbackTableTableGetArgs Empty => new RollbackTableTableGetArgs();
     }
 }

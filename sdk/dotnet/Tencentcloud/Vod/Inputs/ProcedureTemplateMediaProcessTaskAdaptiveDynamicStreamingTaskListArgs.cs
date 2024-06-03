@@ -11,13 +11,25 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vod.Inputs
 {
 
-    public sealed class ProcedureTemplateMediaProcessTaskAdaptiveDynamicStreamingTaskListArgs : Pulumi.ResourceArgs
+    public sealed class ProcedureTemplateMediaProcessTaskAdaptiveDynamicStreamingTaskListArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Adaptive bitrate streaming template ID.
         /// </summary>
         [Input("definition", required: true)]
         public Input<string> Definition { get; set; } = null!;
+
+        [Input("subtitleLists")]
+        private InputList<string>? _subtitleLists;
+
+        /// <summary>
+        /// Subtitle list, element is subtitle ID, support multiple subtitles, up to 16.
+        /// </summary>
+        public InputList<string> SubtitleLists
+        {
+            get => _subtitleLists ?? (_subtitleLists = new InputList<string>());
+            set => _subtitleLists = value;
+        }
 
         [Input("watermarkLists")]
         private InputList<Inputs.ProcedureTemplateMediaProcessTaskAdaptiveDynamicStreamingTaskListWatermarkListArgs>? _watermarkLists;
@@ -34,5 +46,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vod.Inputs
         public ProcedureTemplateMediaProcessTaskAdaptiveDynamicStreamingTaskListArgs()
         {
         }
+        public static new ProcedureTemplateMediaProcessTaskAdaptiveDynamicStreamingTaskListArgs Empty => new ProcedureTemplateMediaProcessTaskAdaptiveDynamicStreamingTaskListArgs();
     }
 }

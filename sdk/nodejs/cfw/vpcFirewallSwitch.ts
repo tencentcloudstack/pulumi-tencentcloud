@@ -8,45 +8,51 @@ import * as utilities from "../utilities";
  * Provides a resource to create a cfw vpcFirewallSwitch
  *
  * ## Example Usage
+ *
  * ### Turn off switch
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const exampleVpcFwSwitches = tencentcloud.Cfw.getVpcFwSwitches({
  *     vpcInsId: "cfwg-c8c2de41",
  * });
  * const exampleVpcFirewallSwitch = new tencentcloud.cfw.VpcFirewallSwitch("exampleVpcFirewallSwitch", {
  *     vpcInsId: exampleVpcFwSwitches.then(exampleVpcFwSwitches => exampleVpcFwSwitches.id),
- *     switchId: exampleVpcFwSwitches.then(exampleVpcFwSwitches => exampleVpcFwSwitches.switchLists?[0]?.switchId),
+ *     switchId: exampleVpcFwSwitches.then(exampleVpcFwSwitches => exampleVpcFwSwitches.switchLists?.[0]?.switchId),
  *     enable: 0,
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
+ *
  * ### Or turn on switch
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const exampleVpcFwSwitches = tencentcloud.Cfw.getVpcFwSwitches({
  *     vpcInsId: "cfwg-c8c2de41",
  * });
  * const exampleVpcFirewallSwitch = new tencentcloud.cfw.VpcFirewallSwitch("exampleVpcFirewallSwitch", {
  *     vpcInsId: exampleVpcFwSwitches.then(exampleVpcFwSwitches => exampleVpcFwSwitches.id),
- *     switchId: exampleVpcFwSwitches.then(exampleVpcFwSwitches => exampleVpcFwSwitches.switchLists?[0]?.switchId),
+ *     switchId: exampleVpcFwSwitches.then(exampleVpcFwSwitches => exampleVpcFwSwitches.switchLists?.[0]?.switchId),
  *     enable: 1,
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * cfw vpc_firewall_switch can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Cfw/vpcFirewallSwitch:VpcFirewallSwitch example cfwg-c8c2de41#cfws-f2c63ded84
+ * $ pulumi import tencentcloud:Cfw/vpcFirewallSwitch:VpcFirewallSwitch example cfwg-c8c2de41#cfws-f2c63ded84
  * ```
  */
 export class VpcFirewallSwitch extends pulumi.CustomResource {

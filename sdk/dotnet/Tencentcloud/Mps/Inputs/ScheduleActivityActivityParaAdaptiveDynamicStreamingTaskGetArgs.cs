@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps.Inputs
 {
 
-    public sealed class ScheduleActivityActivityParaAdaptiveDynamicStreamingTaskGetArgs : Pulumi.ResourceArgs
+    public sealed class ScheduleActivityActivityParaAdaptiveDynamicStreamingTaskGetArgs : global::Pulumi.ResourceArgs
     {
         [Input("addOnSubtitles")]
         private InputList<Inputs.ScheduleActivityActivityParaAdaptiveDynamicStreamingTaskAddOnSubtitleGetArgs>? _addOnSubtitles;
@@ -70,5 +70,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps.Inputs
         public ScheduleActivityActivityParaAdaptiveDynamicStreamingTaskGetArgs()
         {
         }
+        public static new ScheduleActivityActivityParaAdaptiveDynamicStreamingTaskGetArgs Empty => new ScheduleActivityActivityParaAdaptiveDynamicStreamingTaskGetArgs();
     }
 }

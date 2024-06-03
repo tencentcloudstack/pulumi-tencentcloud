@@ -5,6 +5,7 @@
 from .. import _utilities
 import typing
 # Export this package's modules as members:
+from .addon import *
 from .addon_attachment import *
 from .auth_attachment import *
 from .backup_storage_location import *

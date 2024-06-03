@@ -2,112 +2,19 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
  * Provides a resource to create a teo zoneSetting
- *
- * ## Example Usage
- *
- * ```typescript
- * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
- *
- * const zoneSetting = new tencentcloud.Teo.ZoneSetting("zone_setting", {
- *     cache: {
- *         followOrigin: {
- *             switch: "on",
- *         },
- *         noCache: {
- *             switch: "off",
- *         },
- *     },
- *     cacheKey: {
- *         fullUrlCache: "on",
- *         ignoreCase: "off",
- *         queryString: {
- *             action: "includeCustom",
- *             switch: "off",
- *             values: [],
- *         },
- *     },
- *     cachePrefresh: {
- *         percent: 90,
- *         switch: "off",
- *     },
- *     clientIpHeader: {
- *         switch: "off",
- *     },
- *     compression: {
- *         algorithms: [
- *             "brotli",
- *             "gzip",
- *         ],
- *         switch: "on",
- *     },
- *     forceRedirect: {
- *         redirectStatusCode: 302,
- *         switch: "off",
- *     },
- *     https: {
- *         hsts: {
- *             includeSubDomains: "off",
- *             maxAge: 0,
- *             preload: "off",
- *             switch: "off",
- *         },
- *         http2: "on",
- *         ocspStapling: "off",
- *         tlsVersions: [
- *             "TLSv1",
- *             "TLSv1.1",
- *             "TLSv1.2",
- *             "TLSv1.3",
- *         ],
- *     },
- *     ipv6: {
- *         switch: "off",
- *     },
- *     maxAge: {
- *         followOrigin: "on",
- *         maxAgeTime: 0,
- *     },
- *     offlineCache: {
- *         switch: "on",
- *     },
- *     origin: {
- *         backupOrigins: [],
- *         originPullProtocol: "follow",
- *         origins: [],
- *     },
- *     postMaxSize: {
- *         maxSize: 524288000,
- *         switch: "on",
- *     },
- *     quic: {
- *         switch: "off",
- *     },
- *     smartRouting: {
- *         switch: "off",
- *     },
- *     upstreamHttp2: {
- *         switch: "off",
- *     },
- *     webSocket: {
- *         switch: "off",
- *         timeout: 30,
- *     },
- *     zoneId: "zone-297z8rf93cfw",
- * });
- * ```
  *
  * ## Import
  *
  * teo zone_setting can be imported using the zone_id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Teo/zoneSetting:ZoneSetting zone_setting zone-297z8rf93cfw#
+ * $ pulumi import tencentcloud:Teo/zoneSetting:ZoneSetting zone_setting zone-297z8rf93cfw#
  * ```
  */
 export class ZoneSetting extends pulumi.CustomResource {

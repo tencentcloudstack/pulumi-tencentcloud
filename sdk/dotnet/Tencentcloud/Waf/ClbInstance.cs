@@ -16,79 +16,85 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Waf
     /// &gt; **NOTE:** Region only supports `ap-guangzhou` and `ap-seoul`.
     /// 
     /// ## Example Usage
+    /// 
     /// ### Create a basic waf premium clb instance
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var example = new Tencentcloud.Waf.ClbInstance("example", new()
     ///     {
-    ///         var example = new Tencentcloud.Waf.ClbInstance("example", new Tencentcloud.Waf.ClbInstanceArgs
-    ///         {
-    ///             GoodsCategory = "premium_clb",
-    ///             InstanceName = "tf-example-clb-waf",
-    ///         });
-    ///     }
+    ///         GoodsCategory = "premium_clb",
+    ///         InstanceName = "tf-example-clb-waf",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
+    /// 
     /// ### Create a complete waf ultimate_clb instance
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var example = new Tencentcloud.Waf.ClbInstance("example", new()
     ///     {
-    ///         var example = new Tencentcloud.Waf.ClbInstance("example", new Tencentcloud.Waf.ClbInstanceArgs
-    ///         {
-    ///             ApiSecurity = 1,
-    ///             AutoRenewFlag = 1,
-    ///             BotManagement = 1,
-    ///             ElasticMode = 1,
-    ///             GoodsCategory = "ultimate_clb",
-    ///             InstanceName = "tf-example-clb-waf",
-    ///             TimeSpan = 1,
-    ///             TimeUnit = "m",
-    ///         });
-    ///     }
+    ///         ApiSecurity = 1,
+    ///         AutoRenewFlag = 1,
+    ///         BotManagement = 1,
+    ///         ElasticMode = 1,
+    ///         GoodsCategory = "ultimate_clb",
+    ///         InstanceName = "tf-example-clb-waf",
+    ///         TimeSpan = 1,
+    ///         TimeUnit = "m",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
+    /// 
     /// ### Set waf ultimate_clb instance qps limit
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var example = new Tencentcloud.Waf.ClbInstance("example", new()
     ///     {
-    ///         var example = new Tencentcloud.Waf.ClbInstance("example", new Tencentcloud.Waf.ClbInstanceArgs
-    ///         {
-    ///             ApiSecurity = 1,
-    ///             AutoRenewFlag = 1,
-    ///             BotManagement = 1,
-    ///             ElasticMode = 1,
-    ///             GoodsCategory = "ultimate_clb",
-    ///             InstanceName = "tf-example-clb-waf",
-    ///             QpsLimit = 200000,
-    ///             TimeSpan = 1,
-    ///             TimeUnit = "m",
-    ///         });
-    ///     }
+    ///         ApiSecurity = 1,
+    ///         AutoRenewFlag = 1,
+    ///         BotManagement = 1,
+    ///         ElasticMode = 1,
+    ///         GoodsCategory = "ultimate_clb",
+    ///         InstanceName = "tf-example-clb-waf",
+    ///         QpsLimit = 200000,
+    ///         TimeSpan = 1,
+    ///         TimeUnit = "m",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Waf/clbInstance:ClbInstance")]
-    public partial class ClbInstance : Pulumi.CustomResource
+    public partial class ClbInstance : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Whether to purchase API Security, 1: yes, 0: no. Default is 0.
@@ -219,7 +225,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Waf
         }
     }
 
-    public sealed class ClbInstanceArgs : Pulumi.ResourceArgs
+    public sealed class ClbInstanceArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Whether to purchase API Security, 1: yes, 0: no. Default is 0.
@@ -278,9 +284,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Waf
         public ClbInstanceArgs()
         {
         }
+        public static new ClbInstanceArgs Empty => new ClbInstanceArgs();
     }
 
-    public sealed class ClbInstanceState : Pulumi.ResourceArgs
+    public sealed class ClbInstanceState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Whether to purchase API Security, 1: yes, 0: no. Default is 0.
@@ -369,5 +376,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Waf
         public ClbInstanceState()
         {
         }
+        public static new ClbInstanceState Empty => new ClbInstanceState();
     }
 }

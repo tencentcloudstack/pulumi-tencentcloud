@@ -8,11 +8,64 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Use this data source to query detailed information of dnspod domainList
+//
+// ## Example Usage
+//
+// <!--Start PulumiCodeChooser -->
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dnspod"
+//
+// )
+// func main() {
+// pulumi.Run(func(ctx *pulumi.Context) error {
+// _, err := Dnspod.GetDomainList(ctx, &dnspod.GetDomainListArgs{
+// GroupIds: interface{}{
+// 1,
+// },
+// Keyword: pulumi.StringRef(""),
+// Packages: []string{
+// "",
+// },
+// ProjectId: pulumi.IntRef(-1),
+// RecordCountBegin: pulumi.IntRef(0),
+// RecordCountEnd: pulumi.IntRef(100),
+// Remark: pulumi.StringRef(""),
+// SortField: pulumi.StringRef("UPDATED_ON"),
+// SortType: pulumi.StringRef("DESC"),
+// Statuses: []string{
+// "PAUSE",
+// },
+// Tags: []dnspod.GetDomainListTag{
+// {
+// TagKey: "created_by",
+// TagValues: []string{
+// "terraform",
+// },
+// },
+// },
+// Type: "ALL",
+// UpdatedAtBegin: pulumi.StringRef("2021-05-01 03:00:00"),
+// UpdatedAtEnd: pulumi.StringRef("2024-05-10 20:00:00"),
+// }, nil);
+// if err != nil {
+// return err
+// }
+// return nil
+// })
+// }
+// ```
+// <!--End PulumiCodeChooser -->
 func GetDomainList(ctx *pulumi.Context, args *GetDomainListArgs, opts ...pulumi.InvokeOption) (*GetDomainListResult, error) {
-	opts = pkgInvokeDefaultOpts(opts)
+	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetDomainListResult
 	err := ctx.Invoke("tencentcloud:Dnspod/getDomainList:getDomainList", args, &rv, opts...)
 	if err != nil {

@@ -8,7 +8,10 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
+
+var _ = internal.GetEnvOrDefault
 
 type AccessLogConfigCls struct {
 	// Whether enable CLS.
@@ -22,7 +25,7 @@ type AccessLogConfigCls struct {
 // AccessLogConfigClsInput is an input type that accepts AccessLogConfigClsArgs and AccessLogConfigClsOutput values.
 // You can construct a concrete instance of `AccessLogConfigClsInput` via:
 //
-//          AccessLogConfigClsArgs{...}
+//	AccessLogConfigClsArgs{...}
 type AccessLogConfigClsInput interface {
 	pulumi.Input
 
@@ -62,11 +65,11 @@ func (i AccessLogConfigClsArgs) ToAccessLogConfigClsPtrOutputWithContext(ctx con
 // AccessLogConfigClsPtrInput is an input type that accepts AccessLogConfigClsArgs, AccessLogConfigClsPtr and AccessLogConfigClsPtrOutput values.
 // You can construct a concrete instance of `AccessLogConfigClsPtrInput` via:
 //
-//          AccessLogConfigClsArgs{...}
+//	        AccessLogConfigClsArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type AccessLogConfigClsPtrInput interface {
 	pulumi.Input
 
@@ -195,7 +198,7 @@ type AccessLogConfigSelectedRange struct {
 // AccessLogConfigSelectedRangeInput is an input type that accepts AccessLogConfigSelectedRangeArgs and AccessLogConfigSelectedRangeOutput values.
 // You can construct a concrete instance of `AccessLogConfigSelectedRangeInput` via:
 //
-//          AccessLogConfigSelectedRangeArgs{...}
+//	AccessLogConfigSelectedRangeArgs{...}
 type AccessLogConfigSelectedRangeInput interface {
 	pulumi.Input
 
@@ -233,11 +236,11 @@ func (i AccessLogConfigSelectedRangeArgs) ToAccessLogConfigSelectedRangePtrOutpu
 // AccessLogConfigSelectedRangePtrInput is an input type that accepts AccessLogConfigSelectedRangeArgs, AccessLogConfigSelectedRangePtr and AccessLogConfigSelectedRangePtrOutput values.
 // You can construct a concrete instance of `AccessLogConfigSelectedRangePtrInput` via:
 //
-//          AccessLogConfigSelectedRangeArgs{...}
+//	        AccessLogConfigSelectedRangeArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type AccessLogConfigSelectedRangePtrInput interface {
 	pulumi.Input
 
@@ -351,7 +354,7 @@ type AccessLogConfigSelectedRangeItem struct {
 // AccessLogConfigSelectedRangeItemInput is an input type that accepts AccessLogConfigSelectedRangeItemArgs and AccessLogConfigSelectedRangeItemOutput values.
 // You can construct a concrete instance of `AccessLogConfigSelectedRangeItemInput` via:
 //
-//          AccessLogConfigSelectedRangeItemArgs{...}
+//	AccessLogConfigSelectedRangeItemArgs{...}
 type AccessLogConfigSelectedRangeItemInput interface {
 	pulumi.Input
 
@@ -381,7 +384,7 @@ func (i AccessLogConfigSelectedRangeItemArgs) ToAccessLogConfigSelectedRangeItem
 // AccessLogConfigSelectedRangeItemArrayInput is an input type that accepts AccessLogConfigSelectedRangeItemArray and AccessLogConfigSelectedRangeItemArrayOutput values.
 // You can construct a concrete instance of `AccessLogConfigSelectedRangeItemArrayInput` via:
 //
-//          AccessLogConfigSelectedRangeItemArray{ AccessLogConfigSelectedRangeItemArgs{...} }
+//	AccessLogConfigSelectedRangeItemArray{ AccessLogConfigSelectedRangeItemArgs{...} }
 type AccessLogConfigSelectedRangeItemArrayInput interface {
 	pulumi.Input
 
@@ -465,7 +468,7 @@ type ClusterAttachmentClusterList struct {
 // ClusterAttachmentClusterListInput is an input type that accepts ClusterAttachmentClusterListArgs and ClusterAttachmentClusterListOutput values.
 // You can construct a concrete instance of `ClusterAttachmentClusterListInput` via:
 //
-//          ClusterAttachmentClusterListArgs{...}
+//	ClusterAttachmentClusterListArgs{...}
 type ClusterAttachmentClusterListInput interface {
 	pulumi.Input
 
@@ -503,7 +506,7 @@ func (i ClusterAttachmentClusterListArgs) ToClusterAttachmentClusterListOutputWi
 // ClusterAttachmentClusterListArrayInput is an input type that accepts ClusterAttachmentClusterListArray and ClusterAttachmentClusterListArrayOutput values.
 // You can construct a concrete instance of `ClusterAttachmentClusterListArrayInput` via:
 //
-//          ClusterAttachmentClusterListArray{ ClusterAttachmentClusterListArgs{...} }
+//	ClusterAttachmentClusterListArray{ ClusterAttachmentClusterListArgs{...} }
 type ClusterAttachmentClusterListArrayInput interface {
 	pulumi.Input
 
@@ -605,7 +608,7 @@ type MeshConfig struct {
 // MeshConfigInput is an input type that accepts MeshConfigArgs and MeshConfigOutput values.
 // You can construct a concrete instance of `MeshConfigInput` via:
 //
-//          MeshConfigArgs{...}
+//	MeshConfigArgs{...}
 type MeshConfigInput interface {
 	pulumi.Input
 
@@ -649,11 +652,11 @@ func (i MeshConfigArgs) ToMeshConfigPtrOutputWithContext(ctx context.Context) Me
 // MeshConfigPtrInput is an input type that accepts MeshConfigArgs, MeshConfigPtr and MeshConfigPtrOutput values.
 // You can construct a concrete instance of `MeshConfigPtrInput` via:
 //
-//          MeshConfigArgs{...}
+//	        MeshConfigArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type MeshConfigPtrInput interface {
 	pulumi.Input
 
@@ -814,7 +817,7 @@ type MeshConfigInject struct {
 // MeshConfigInjectInput is an input type that accepts MeshConfigInjectArgs and MeshConfigInjectOutput values.
 // You can construct a concrete instance of `MeshConfigInjectInput` via:
 //
-//          MeshConfigInjectArgs{...}
+//	MeshConfigInjectArgs{...}
 type MeshConfigInjectInput interface {
 	pulumi.Input
 
@@ -854,11 +857,11 @@ func (i MeshConfigInjectArgs) ToMeshConfigInjectPtrOutputWithContext(ctx context
 // MeshConfigInjectPtrInput is an input type that accepts MeshConfigInjectArgs, MeshConfigInjectPtr and MeshConfigInjectPtrOutput values.
 // You can construct a concrete instance of `MeshConfigInjectPtrInput` via:
 //
-//          MeshConfigInjectArgs{...}
+//	        MeshConfigInjectArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type MeshConfigInjectPtrInput interface {
 	pulumi.Input
 
@@ -995,7 +998,7 @@ type MeshConfigIstio struct {
 // MeshConfigIstioInput is an input type that accepts MeshConfigIstioArgs and MeshConfigIstioOutput values.
 // You can construct a concrete instance of `MeshConfigIstioInput` via:
 //
-//          MeshConfigIstioArgs{...}
+//	MeshConfigIstioArgs{...}
 type MeshConfigIstioInput interface {
 	pulumi.Input
 
@@ -1041,11 +1044,11 @@ func (i MeshConfigIstioArgs) ToMeshConfigIstioPtrOutputWithContext(ctx context.C
 // MeshConfigIstioPtrInput is an input type that accepts MeshConfigIstioArgs, MeshConfigIstioPtr and MeshConfigIstioPtrOutput values.
 // You can construct a concrete instance of `MeshConfigIstioPtrInput` via:
 //
-//          MeshConfigIstioArgs{...}
+//	        MeshConfigIstioArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type MeshConfigIstioPtrInput interface {
 	pulumi.Input
 
@@ -1219,7 +1222,7 @@ type MeshConfigIstioSmartDns struct {
 // MeshConfigIstioSmartDnsInput is an input type that accepts MeshConfigIstioSmartDnsArgs and MeshConfigIstioSmartDnsOutput values.
 // You can construct a concrete instance of `MeshConfigIstioSmartDnsInput` via:
 //
-//          MeshConfigIstioSmartDnsArgs{...}
+//	MeshConfigIstioSmartDnsArgs{...}
 type MeshConfigIstioSmartDnsInput interface {
 	pulumi.Input
 
@@ -1257,11 +1260,11 @@ func (i MeshConfigIstioSmartDnsArgs) ToMeshConfigIstioSmartDnsPtrOutputWithConte
 // MeshConfigIstioSmartDnsPtrInput is an input type that accepts MeshConfigIstioSmartDnsArgs, MeshConfigIstioSmartDnsPtr and MeshConfigIstioSmartDnsPtrOutput values.
 // You can construct a concrete instance of `MeshConfigIstioSmartDnsPtrInput` via:
 //
-//          MeshConfigIstioSmartDnsArgs{...}
+//	        MeshConfigIstioSmartDnsArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type MeshConfigIstioSmartDnsPtrInput interface {
 	pulumi.Input
 
@@ -1379,7 +1382,7 @@ type MeshConfigIstioTracing struct {
 // MeshConfigIstioTracingInput is an input type that accepts MeshConfigIstioTracingArgs and MeshConfigIstioTracingOutput values.
 // You can construct a concrete instance of `MeshConfigIstioTracingInput` via:
 //
-//          MeshConfigIstioTracingArgs{...}
+//	MeshConfigIstioTracingArgs{...}
 type MeshConfigIstioTracingInput interface {
 	pulumi.Input
 
@@ -1421,11 +1424,11 @@ func (i MeshConfigIstioTracingArgs) ToMeshConfigIstioTracingPtrOutputWithContext
 // MeshConfigIstioTracingPtrInput is an input type that accepts MeshConfigIstioTracingArgs, MeshConfigIstioTracingPtr and MeshConfigIstioTracingPtrOutput values.
 // You can construct a concrete instance of `MeshConfigIstioTracingPtrInput` via:
 //
-//          MeshConfigIstioTracingArgs{...}
+//	        MeshConfigIstioTracingArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type MeshConfigIstioTracingPtrInput interface {
 	pulumi.Input
 
@@ -1571,7 +1574,7 @@ type MeshConfigIstioTracingApm struct {
 // MeshConfigIstioTracingApmInput is an input type that accepts MeshConfigIstioTracingApmArgs and MeshConfigIstioTracingApmOutput values.
 // You can construct a concrete instance of `MeshConfigIstioTracingApmInput` via:
 //
-//          MeshConfigIstioTracingApmArgs{...}
+//	MeshConfigIstioTracingApmArgs{...}
 type MeshConfigIstioTracingApmInput interface {
 	pulumi.Input
 
@@ -1611,11 +1614,11 @@ func (i MeshConfigIstioTracingApmArgs) ToMeshConfigIstioTracingApmPtrOutputWithC
 // MeshConfigIstioTracingApmPtrInput is an input type that accepts MeshConfigIstioTracingApmArgs, MeshConfigIstioTracingApmPtr and MeshConfigIstioTracingApmPtrOutput values.
 // You can construct a concrete instance of `MeshConfigIstioTracingApmPtrInput` via:
 //
-//          MeshConfigIstioTracingApmArgs{...}
+//	        MeshConfigIstioTracingApmArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type MeshConfigIstioTracingApmPtrInput interface {
 	pulumi.Input
 
@@ -1742,7 +1745,7 @@ type MeshConfigIstioTracingZipkin struct {
 // MeshConfigIstioTracingZipkinInput is an input type that accepts MeshConfigIstioTracingZipkinArgs and MeshConfigIstioTracingZipkinOutput values.
 // You can construct a concrete instance of `MeshConfigIstioTracingZipkinInput` via:
 //
-//          MeshConfigIstioTracingZipkinArgs{...}
+//	MeshConfigIstioTracingZipkinArgs{...}
 type MeshConfigIstioTracingZipkinInput interface {
 	pulumi.Input
 
@@ -1778,11 +1781,11 @@ func (i MeshConfigIstioTracingZipkinArgs) ToMeshConfigIstioTracingZipkinPtrOutpu
 // MeshConfigIstioTracingZipkinPtrInput is an input type that accepts MeshConfigIstioTracingZipkinArgs, MeshConfigIstioTracingZipkinPtr and MeshConfigIstioTracingZipkinPtrOutput values.
 // You can construct a concrete instance of `MeshConfigIstioTracingZipkinPtrInput` via:
 //
-//          MeshConfigIstioTracingZipkinArgs{...}
+//	        MeshConfigIstioTracingZipkinArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type MeshConfigIstioTracingZipkinPtrInput interface {
 	pulumi.Input
 
@@ -1887,7 +1890,7 @@ type MeshConfigPrometheus struct {
 // MeshConfigPrometheusInput is an input type that accepts MeshConfigPrometheusArgs and MeshConfigPrometheusOutput values.
 // You can construct a concrete instance of `MeshConfigPrometheusInput` via:
 //
-//          MeshConfigPrometheusArgs{...}
+//	MeshConfigPrometheusArgs{...}
 type MeshConfigPrometheusInput interface {
 	pulumi.Input
 
@@ -1931,11 +1934,11 @@ func (i MeshConfigPrometheusArgs) ToMeshConfigPrometheusPtrOutputWithContext(ctx
 // MeshConfigPrometheusPtrInput is an input type that accepts MeshConfigPrometheusArgs, MeshConfigPrometheusPtr and MeshConfigPrometheusPtrOutput values.
 // You can construct a concrete instance of `MeshConfigPrometheusPtrInput` via:
 //
-//          MeshConfigPrometheusArgs{...}
+//	        MeshConfigPrometheusArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type MeshConfigPrometheusPtrInput interface {
 	pulumi.Input
 
@@ -2102,7 +2105,7 @@ type MeshConfigPrometheusCustomProm struct {
 // MeshConfigPrometheusCustomPromInput is an input type that accepts MeshConfigPrometheusCustomPromArgs and MeshConfigPrometheusCustomPromOutput values.
 // You can construct a concrete instance of `MeshConfigPrometheusCustomPromInput` via:
 //
-//          MeshConfigPrometheusCustomPromArgs{...}
+//	MeshConfigPrometheusCustomPromArgs{...}
 type MeshConfigPrometheusCustomPromInput interface {
 	pulumi.Input
 
@@ -2148,11 +2151,11 @@ func (i MeshConfigPrometheusCustomPromArgs) ToMeshConfigPrometheusCustomPromPtrO
 // MeshConfigPrometheusCustomPromPtrInput is an input type that accepts MeshConfigPrometheusCustomPromArgs, MeshConfigPrometheusCustomPromPtr and MeshConfigPrometheusCustomPromPtrOutput values.
 // You can construct a concrete instance of `MeshConfigPrometheusCustomPromPtrInput` via:
 //
-//          MeshConfigPrometheusCustomPromArgs{...}
+//	        MeshConfigPrometheusCustomPromArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type MeshConfigPrometheusCustomPromPtrInput interface {
 	pulumi.Input
 
@@ -2326,7 +2329,7 @@ type MeshConfigSidecarResources struct {
 // MeshConfigSidecarResourcesInput is an input type that accepts MeshConfigSidecarResourcesArgs and MeshConfigSidecarResourcesOutput values.
 // You can construct a concrete instance of `MeshConfigSidecarResourcesInput` via:
 //
-//          MeshConfigSidecarResourcesArgs{...}
+//	MeshConfigSidecarResourcesArgs{...}
 type MeshConfigSidecarResourcesInput interface {
 	pulumi.Input
 
@@ -2364,11 +2367,11 @@ func (i MeshConfigSidecarResourcesArgs) ToMeshConfigSidecarResourcesPtrOutputWit
 // MeshConfigSidecarResourcesPtrInput is an input type that accepts MeshConfigSidecarResourcesArgs, MeshConfigSidecarResourcesPtr and MeshConfigSidecarResourcesPtrOutput values.
 // You can construct a concrete instance of `MeshConfigSidecarResourcesPtrInput` via:
 //
-//          MeshConfigSidecarResourcesArgs{...}
+//	        MeshConfigSidecarResourcesArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type MeshConfigSidecarResourcesPtrInput interface {
 	pulumi.Input
 
@@ -2482,7 +2485,7 @@ type MeshConfigSidecarResourcesLimit struct {
 // MeshConfigSidecarResourcesLimitInput is an input type that accepts MeshConfigSidecarResourcesLimitArgs and MeshConfigSidecarResourcesLimitOutput values.
 // You can construct a concrete instance of `MeshConfigSidecarResourcesLimitInput` via:
 //
-//          MeshConfigSidecarResourcesLimitArgs{...}
+//	MeshConfigSidecarResourcesLimitArgs{...}
 type MeshConfigSidecarResourcesLimitInput interface {
 	pulumi.Input
 
@@ -2512,7 +2515,7 @@ func (i MeshConfigSidecarResourcesLimitArgs) ToMeshConfigSidecarResourcesLimitOu
 // MeshConfigSidecarResourcesLimitArrayInput is an input type that accepts MeshConfigSidecarResourcesLimitArray and MeshConfigSidecarResourcesLimitArrayOutput values.
 // You can construct a concrete instance of `MeshConfigSidecarResourcesLimitArrayInput` via:
 //
-//          MeshConfigSidecarResourcesLimitArray{ MeshConfigSidecarResourcesLimitArgs{...} }
+//	MeshConfigSidecarResourcesLimitArray{ MeshConfigSidecarResourcesLimitArgs{...} }
 type MeshConfigSidecarResourcesLimitArrayInput interface {
 	pulumi.Input
 
@@ -2588,7 +2591,7 @@ type MeshConfigSidecarResourcesRequest struct {
 // MeshConfigSidecarResourcesRequestInput is an input type that accepts MeshConfigSidecarResourcesRequestArgs and MeshConfigSidecarResourcesRequestOutput values.
 // You can construct a concrete instance of `MeshConfigSidecarResourcesRequestInput` via:
 //
-//          MeshConfigSidecarResourcesRequestArgs{...}
+//	MeshConfigSidecarResourcesRequestArgs{...}
 type MeshConfigSidecarResourcesRequestInput interface {
 	pulumi.Input
 
@@ -2618,7 +2621,7 @@ func (i MeshConfigSidecarResourcesRequestArgs) ToMeshConfigSidecarResourcesReque
 // MeshConfigSidecarResourcesRequestArrayInput is an input type that accepts MeshConfigSidecarResourcesRequestArray and MeshConfigSidecarResourcesRequestArrayOutput values.
 // You can construct a concrete instance of `MeshConfigSidecarResourcesRequestArrayInput` via:
 //
-//          MeshConfigSidecarResourcesRequestArray{ MeshConfigSidecarResourcesRequestArgs{...} }
+//	MeshConfigSidecarResourcesRequestArray{ MeshConfigSidecarResourcesRequestArgs{...} }
 type MeshConfigSidecarResourcesRequestArrayInput interface {
 	pulumi.Input
 
@@ -2698,7 +2701,7 @@ type MeshConfigTracing struct {
 // MeshConfigTracingInput is an input type that accepts MeshConfigTracingArgs and MeshConfigTracingOutput values.
 // You can construct a concrete instance of `MeshConfigTracingInput` via:
 //
-//          MeshConfigTracingArgs{...}
+//	MeshConfigTracingArgs{...}
 type MeshConfigTracingInput interface {
 	pulumi.Input
 
@@ -2740,11 +2743,11 @@ func (i MeshConfigTracingArgs) ToMeshConfigTracingPtrOutputWithContext(ctx conte
 // MeshConfigTracingPtrInput is an input type that accepts MeshConfigTracingArgs, MeshConfigTracingPtr and MeshConfigTracingPtrOutput values.
 // You can construct a concrete instance of `MeshConfigTracingPtrInput` via:
 //
-//          MeshConfigTracingArgs{...}
+//	        MeshConfigTracingArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type MeshConfigTracingPtrInput interface {
 	pulumi.Input
 
@@ -2890,7 +2893,7 @@ type MeshConfigTracingApm struct {
 // MeshConfigTracingApmInput is an input type that accepts MeshConfigTracingApmArgs and MeshConfigTracingApmOutput values.
 // You can construct a concrete instance of `MeshConfigTracingApmInput` via:
 //
-//          MeshConfigTracingApmArgs{...}
+//	MeshConfigTracingApmArgs{...}
 type MeshConfigTracingApmInput interface {
 	pulumi.Input
 
@@ -2930,11 +2933,11 @@ func (i MeshConfigTracingApmArgs) ToMeshConfigTracingApmPtrOutputWithContext(ctx
 // MeshConfigTracingApmPtrInput is an input type that accepts MeshConfigTracingApmArgs, MeshConfigTracingApmPtr and MeshConfigTracingApmPtrOutput values.
 // You can construct a concrete instance of `MeshConfigTracingApmPtrInput` via:
 //
-//          MeshConfigTracingApmArgs{...}
+//	        MeshConfigTracingApmArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type MeshConfigTracingApmPtrInput interface {
 	pulumi.Input
 
@@ -3061,7 +3064,7 @@ type MeshConfigTracingZipkin struct {
 // MeshConfigTracingZipkinInput is an input type that accepts MeshConfigTracingZipkinArgs and MeshConfigTracingZipkinOutput values.
 // You can construct a concrete instance of `MeshConfigTracingZipkinInput` via:
 //
-//          MeshConfigTracingZipkinArgs{...}
+//	MeshConfigTracingZipkinArgs{...}
 type MeshConfigTracingZipkinInput interface {
 	pulumi.Input
 
@@ -3097,11 +3100,11 @@ func (i MeshConfigTracingZipkinArgs) ToMeshConfigTracingZipkinPtrOutputWithConte
 // MeshConfigTracingZipkinPtrInput is an input type that accepts MeshConfigTracingZipkinArgs, MeshConfigTracingZipkinPtr and MeshConfigTracingZipkinPtrOutput values.
 // You can construct a concrete instance of `MeshConfigTracingZipkinPtrInput` via:
 //
-//          MeshConfigTracingZipkinArgs{...}
+//	        MeshConfigTracingZipkinArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type MeshConfigTracingZipkinPtrInput interface {
 	pulumi.Input
 
@@ -3202,7 +3205,7 @@ type MeshTagList struct {
 // MeshTagListInput is an input type that accepts MeshTagListArgs and MeshTagListOutput values.
 // You can construct a concrete instance of `MeshTagListInput` via:
 //
-//          MeshTagListArgs{...}
+//	MeshTagListArgs{...}
 type MeshTagListInput interface {
 	pulumi.Input
 
@@ -3234,7 +3237,7 @@ func (i MeshTagListArgs) ToMeshTagListOutputWithContext(ctx context.Context) Mes
 // MeshTagListArrayInput is an input type that accepts MeshTagListArray and MeshTagListArrayOutput values.
 // You can construct a concrete instance of `MeshTagListArrayInput` via:
 //
-//          MeshTagListArray{ MeshTagListArgs{...} }
+//	MeshTagListArray{ MeshTagListArgs{...} }
 type MeshTagListArrayInput interface {
 	pulumi.Input
 
@@ -3321,7 +3324,7 @@ type PrometheusAttachmentPrometheus struct {
 // PrometheusAttachmentPrometheusInput is an input type that accepts PrometheusAttachmentPrometheusArgs and PrometheusAttachmentPrometheusOutput values.
 // You can construct a concrete instance of `PrometheusAttachmentPrometheusInput` via:
 //
-//          PrometheusAttachmentPrometheusArgs{...}
+//	PrometheusAttachmentPrometheusArgs{...}
 type PrometheusAttachmentPrometheusInput interface {
 	pulumi.Input
 
@@ -3365,11 +3368,11 @@ func (i PrometheusAttachmentPrometheusArgs) ToPrometheusAttachmentPrometheusPtrO
 // PrometheusAttachmentPrometheusPtrInput is an input type that accepts PrometheusAttachmentPrometheusArgs, PrometheusAttachmentPrometheusPtr and PrometheusAttachmentPrometheusPtrOutput values.
 // You can construct a concrete instance of `PrometheusAttachmentPrometheusPtrInput` via:
 //
-//          PrometheusAttachmentPrometheusArgs{...}
+//	        PrometheusAttachmentPrometheusArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type PrometheusAttachmentPrometheusPtrInput interface {
 	pulumi.Input
 
@@ -3536,7 +3539,7 @@ type PrometheusAttachmentPrometheusCustomProm struct {
 // PrometheusAttachmentPrometheusCustomPromInput is an input type that accepts PrometheusAttachmentPrometheusCustomPromArgs and PrometheusAttachmentPrometheusCustomPromOutput values.
 // You can construct a concrete instance of `PrometheusAttachmentPrometheusCustomPromInput` via:
 //
-//          PrometheusAttachmentPrometheusCustomPromArgs{...}
+//	PrometheusAttachmentPrometheusCustomPromArgs{...}
 type PrometheusAttachmentPrometheusCustomPromInput interface {
 	pulumi.Input
 
@@ -3582,11 +3585,11 @@ func (i PrometheusAttachmentPrometheusCustomPromArgs) ToPrometheusAttachmentProm
 // PrometheusAttachmentPrometheusCustomPromPtrInput is an input type that accepts PrometheusAttachmentPrometheusCustomPromArgs, PrometheusAttachmentPrometheusCustomPromPtr and PrometheusAttachmentPrometheusCustomPromPtrOutput values.
 // You can construct a concrete instance of `PrometheusAttachmentPrometheusCustomPromPtrInput` via:
 //
-//          PrometheusAttachmentPrometheusCustomPromArgs{...}
+//	        PrometheusAttachmentPrometheusCustomPromArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type PrometheusAttachmentPrometheusCustomPromPtrInput interface {
 	pulumi.Input
 
@@ -3762,7 +3765,7 @@ type TracingConfigApm struct {
 // TracingConfigApmInput is an input type that accepts TracingConfigApmArgs and TracingConfigApmOutput values.
 // You can construct a concrete instance of `TracingConfigApmInput` via:
 //
-//          TracingConfigApmArgs{...}
+//	TracingConfigApmArgs{...}
 type TracingConfigApmInput interface {
 	pulumi.Input
 
@@ -3802,11 +3805,11 @@ func (i TracingConfigApmArgs) ToTracingConfigApmPtrOutputWithContext(ctx context
 // TracingConfigApmPtrInput is an input type that accepts TracingConfigApmArgs, TracingConfigApmPtr and TracingConfigApmPtrOutput values.
 // You can construct a concrete instance of `TracingConfigApmPtrInput` via:
 //
-//          TracingConfigApmArgs{...}
+//	        TracingConfigApmArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type TracingConfigApmPtrInput interface {
 	pulumi.Input
 
@@ -3933,7 +3936,7 @@ type TracingConfigZipkin struct {
 // TracingConfigZipkinInput is an input type that accepts TracingConfigZipkinArgs and TracingConfigZipkinOutput values.
 // You can construct a concrete instance of `TracingConfigZipkinInput` via:
 //
-//          TracingConfigZipkinArgs{...}
+//	TracingConfigZipkinArgs{...}
 type TracingConfigZipkinInput interface {
 	pulumi.Input
 
@@ -3969,11 +3972,11 @@ func (i TracingConfigZipkinArgs) ToTracingConfigZipkinPtrOutputWithContext(ctx c
 // TracingConfigZipkinPtrInput is an input type that accepts TracingConfigZipkinArgs, TracingConfigZipkinPtr and TracingConfigZipkinPtrOutput values.
 // You can construct a concrete instance of `TracingConfigZipkinPtrInput` via:
 //
-//          TracingConfigZipkinArgs{...}
+//	        TracingConfigZipkinArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type TracingConfigZipkinPtrInput interface {
 	pulumi.Input
 
@@ -4080,7 +4083,7 @@ type GetMeshMeshList struct {
 // GetMeshMeshListInput is an input type that accepts GetMeshMeshListArgs and GetMeshMeshListOutput values.
 // You can construct a concrete instance of `GetMeshMeshListInput` via:
 //
-//          GetMeshMeshListArgs{...}
+//	GetMeshMeshListArgs{...}
 type GetMeshMeshListInput interface {
 	pulumi.Input
 
@@ -4118,7 +4121,7 @@ func (i GetMeshMeshListArgs) ToGetMeshMeshListOutputWithContext(ctx context.Cont
 // GetMeshMeshListArrayInput is an input type that accepts GetMeshMeshListArray and GetMeshMeshListArrayOutput values.
 // You can construct a concrete instance of `GetMeshMeshListArrayInput` via:
 //
-//          GetMeshMeshListArray{ GetMeshMeshListArgs{...} }
+//	GetMeshMeshListArray{ GetMeshMeshListArgs{...} }
 type GetMeshMeshListArrayInput interface {
 	pulumi.Input
 
@@ -4212,7 +4215,7 @@ type GetMeshMeshListConfig struct {
 // GetMeshMeshListConfigInput is an input type that accepts GetMeshMeshListConfigArgs and GetMeshMeshListConfigOutput values.
 // You can construct a concrete instance of `GetMeshMeshListConfigInput` via:
 //
-//          GetMeshMeshListConfigArgs{...}
+//	GetMeshMeshListConfigArgs{...}
 type GetMeshMeshListConfigInput interface {
 	pulumi.Input
 
@@ -4240,7 +4243,7 @@ func (i GetMeshMeshListConfigArgs) ToGetMeshMeshListConfigOutputWithContext(ctx 
 // GetMeshMeshListConfigArrayInput is an input type that accepts GetMeshMeshListConfigArray and GetMeshMeshListConfigArrayOutput values.
 // You can construct a concrete instance of `GetMeshMeshListConfigArrayInput` via:
 //
-//          GetMeshMeshListConfigArray{ GetMeshMeshListConfigArgs{...} }
+//	GetMeshMeshListConfigArray{ GetMeshMeshListConfigArgs{...} }
 type GetMeshMeshListConfigArrayInput interface {
 	pulumi.Input
 
@@ -4317,7 +4320,7 @@ type GetMeshMeshListConfigIstio struct {
 // GetMeshMeshListConfigIstioInput is an input type that accepts GetMeshMeshListConfigIstioArgs and GetMeshMeshListConfigIstioOutput values.
 // You can construct a concrete instance of `GetMeshMeshListConfigIstioInput` via:
 //
-//          GetMeshMeshListConfigIstioArgs{...}
+//	GetMeshMeshListConfigIstioArgs{...}
 type GetMeshMeshListConfigIstioInput interface {
 	pulumi.Input
 
@@ -4353,7 +4356,7 @@ func (i GetMeshMeshListConfigIstioArgs) ToGetMeshMeshListConfigIstioOutputWithCo
 // GetMeshMeshListConfigIstioArrayInput is an input type that accepts GetMeshMeshListConfigIstioArray and GetMeshMeshListConfigIstioArrayOutput values.
 // You can construct a concrete instance of `GetMeshMeshListConfigIstioArrayInput` via:
 //
-//          GetMeshMeshListConfigIstioArray{ GetMeshMeshListConfigIstioArgs{...} }
+//	GetMeshMeshListConfigIstioArray{ GetMeshMeshListConfigIstioArgs{...} }
 type GetMeshMeshListConfigIstioArrayInput interface {
 	pulumi.Input
 
@@ -4444,7 +4447,7 @@ type GetMeshMeshListConfigIstioSmartDn struct {
 // GetMeshMeshListConfigIstioSmartDnInput is an input type that accepts GetMeshMeshListConfigIstioSmartDnArgs and GetMeshMeshListConfigIstioSmartDnOutput values.
 // You can construct a concrete instance of `GetMeshMeshListConfigIstioSmartDnInput` via:
 //
-//          GetMeshMeshListConfigIstioSmartDnArgs{...}
+//	GetMeshMeshListConfigIstioSmartDnArgs{...}
 type GetMeshMeshListConfigIstioSmartDnInput interface {
 	pulumi.Input
 
@@ -4474,7 +4477,7 @@ func (i GetMeshMeshListConfigIstioSmartDnArgs) ToGetMeshMeshListConfigIstioSmart
 // GetMeshMeshListConfigIstioSmartDnArrayInput is an input type that accepts GetMeshMeshListConfigIstioSmartDnArray and GetMeshMeshListConfigIstioSmartDnArrayOutput values.
 // You can construct a concrete instance of `GetMeshMeshListConfigIstioSmartDnArrayInput` via:
 //
-//          GetMeshMeshListConfigIstioSmartDnArray{ GetMeshMeshListConfigIstioSmartDnArgs{...} }
+//	GetMeshMeshListConfigIstioSmartDnArray{ GetMeshMeshListConfigIstioSmartDnArgs{...} }
 type GetMeshMeshListConfigIstioSmartDnArrayInput interface {
 	pulumi.Input
 
@@ -4552,7 +4555,7 @@ type GetMeshMeshListTagList struct {
 // GetMeshMeshListTagListInput is an input type that accepts GetMeshMeshListTagListArgs and GetMeshMeshListTagListOutput values.
 // You can construct a concrete instance of `GetMeshMeshListTagListInput` via:
 //
-//          GetMeshMeshListTagListArgs{...}
+//	GetMeshMeshListTagListArgs{...}
 type GetMeshMeshListTagListInput interface {
 	pulumi.Input
 
@@ -4584,7 +4587,7 @@ func (i GetMeshMeshListTagListArgs) ToGetMeshMeshListTagListOutputWithContext(ct
 // GetMeshMeshListTagListArrayInput is an input type that accepts GetMeshMeshListTagListArray and GetMeshMeshListTagListArrayOutput values.
 // You can construct a concrete instance of `GetMeshMeshListTagListArrayInput` via:
 //
-//          GetMeshMeshListTagListArray{ GetMeshMeshListTagListArgs{...} }
+//	GetMeshMeshListTagListArray{ GetMeshMeshListTagListArgs{...} }
 type GetMeshMeshListTagListArrayInput interface {
 	pulumi.Input
 

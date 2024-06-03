@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcm.Inputs
 {
 
-    public sealed class MeshConfigSidecarResourcesRequestGetArgs : Pulumi.ResourceArgs
+    public sealed class MeshConfigSidecarResourcesRequestGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Resource type name, `cpu/memory`.
@@ -28,5 +28,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcm.Inputs
         public MeshConfigSidecarResourcesRequestGetArgs()
         {
         }
+        public static new MeshConfigSidecarResourcesRequestGetArgs Empty => new MeshConfigSidecarResourcesRequestGetArgs();
     }
 }

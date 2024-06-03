@@ -17,35 +17,36 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Css
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var enableOptimalSwitching = new Tencentcloud.Css.EnableOptimalSwitching("enableOptimalSwitching", new()
     ///     {
-    ///         var enableOptimalSwitching = new Tencentcloud.Css.EnableOptimalSwitching("enableOptimalSwitching", new Tencentcloud.Css.EnableOptimalSwitchingArgs
-    ///         {
-    ///             EnableSwitch = 1,
-    ///             HostGroupName = "test-group",
-    ///             StreamName = "1308919341_test",
-    ///         });
-    ///     }
+    ///         EnableSwitch = 1,
+    ///         HostGroupName = "test-group",
+    ///         StreamName = "1308919341_test",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// css domain can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Css/enableOptimalSwitching:EnableOptimalSwitching enable_optimal_switching streamName
+    /// $ pulumi import tencentcloud:Css/enableOptimalSwitching:EnableOptimalSwitching enable_optimal_switching streamName
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Css/enableOptimalSwitching:EnableOptimalSwitching")]
-    public partial class EnableOptimalSwitching : Pulumi.CustomResource
+    public partial class EnableOptimalSwitching : global::Pulumi.CustomResource
     {
         /// <summary>
         /// `0`:disabled, `1`:enable.
@@ -110,7 +111,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Css
         }
     }
 
-    public sealed class EnableOptimalSwitchingArgs : Pulumi.ResourceArgs
+    public sealed class EnableOptimalSwitchingArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// `0`:disabled, `1`:enable.
@@ -133,9 +134,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Css
         public EnableOptimalSwitchingArgs()
         {
         }
+        public static new EnableOptimalSwitchingArgs Empty => new EnableOptimalSwitchingArgs();
     }
 
-    public sealed class EnableOptimalSwitchingState : Pulumi.ResourceArgs
+    public sealed class EnableOptimalSwitchingState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// `0`:disabled, `1`:enable.
@@ -158,5 +160,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Css
         public EnableOptimalSwitchingState()
         {
         }
+        public static new EnableOptimalSwitchingState Empty => new EnableOptimalSwitchingState();
     }
 }

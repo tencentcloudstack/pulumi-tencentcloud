@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Css
 {
     [TencentcloudResourceType("tencentcloud:Css/recordTemplate:RecordTemplate")]
-    public partial class RecordTemplate : Pulumi.CustomResource
+    public partial class RecordTemplate : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Aac recording parameters are set when Aac recording is enabled.
@@ -124,7 +124,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Css
         }
     }
 
-    public sealed class RecordTemplateArgs : Pulumi.ResourceArgs
+    public sealed class RecordTemplateArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Aac recording parameters are set when Aac recording is enabled.
@@ -195,9 +195,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Css
         public RecordTemplateArgs()
         {
         }
+        public static new RecordTemplateArgs Empty => new RecordTemplateArgs();
     }
 
-    public sealed class RecordTemplateState : Pulumi.ResourceArgs
+    public sealed class RecordTemplateState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Aac recording parameters are set when Aac recording is enabled.
@@ -268,5 +269,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Css
         public RecordTemplateState()
         {
         }
+        public static new RecordTemplateState Empty => new RecordTemplateState();
     }
 }

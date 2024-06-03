@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cvm
 {
     [TencentcloudResourceType("tencentcloud:Cvm/modifyInstanceDiskType:ModifyInstanceDiskType")]
-    public partial class ModifyInstanceDiskType : Pulumi.CustomResource
+    public partial class ModifyInstanceDiskType : global::Pulumi.CustomResource
     {
         /// <summary>
         /// For instance data disk configuration information, you only need to specify the media type of the target cloud disk to be
@@ -79,7 +79,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cvm
         }
     }
 
-    public sealed class ModifyInstanceDiskTypeArgs : Pulumi.ResourceArgs
+    public sealed class ModifyInstanceDiskTypeArgs : global::Pulumi.ResourceArgs
     {
         [Input("dataDisks")]
         private InputList<Inputs.ModifyInstanceDiskTypeDataDiskArgs>? _dataDisks;
@@ -111,9 +111,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cvm
         public ModifyInstanceDiskTypeArgs()
         {
         }
+        public static new ModifyInstanceDiskTypeArgs Empty => new ModifyInstanceDiskTypeArgs();
     }
 
-    public sealed class ModifyInstanceDiskTypeState : Pulumi.ResourceArgs
+    public sealed class ModifyInstanceDiskTypeState : global::Pulumi.ResourceArgs
     {
         [Input("dataDisks")]
         private InputList<Inputs.ModifyInstanceDiskTypeDataDiskGetArgs>? _dataDisks;
@@ -145,5 +146,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cvm
         public ModifyInstanceDiskTypeState()
         {
         }
+        public static new ModifyInstanceDiskTypeState Empty => new ModifyInstanceDiskTypeState();
     }
 }

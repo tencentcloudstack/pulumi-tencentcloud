@@ -15,72 +15,66 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdmq
         /// <summary>
         /// Use this data source to query detailed information of tdmq message
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var message = Tencentcloud.Tdmq.GetRocketmqMessages.Invoke(new()
         ///     {
-        ///         var message = Output.Create(Tencentcloud.Tdmq.GetRocketmqMessages.InvokeAsync(new Tencentcloud.Tdmq.GetRocketmqMessagesArgs
-        ///         {
-        ///             ClusterId = "rocketmq-rkrbm52djmro",
-        ///             EnvironmentId = "keep_ns",
-        ///             MsgId = "A9FE8D0567FE15DB97425FC08EEF0000",
-        ///             QueryDlqMsg = false,
-        ///             TopicName = "keep-topic",
-        ///         }));
-        ///     }
+        ///         ClusterId = "rocketmq-rkrbm52djmro",
+        ///         EnvironmentId = "keep_ns",
+        ///         MsgId = "A9FE8D0567FE15DB97425FC08EEF0000",
+        ///         QueryDlqMsg = false,
+        ///         TopicName = "keep-topic",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetRocketmqMessagesResult> InvokeAsync(GetRocketmqMessagesArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetRocketmqMessagesResult>("tencentcloud:Tdmq/getRocketmqMessages:getRocketmqMessages", args ?? new GetRocketmqMessagesArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetRocketmqMessagesResult>("tencentcloud:Tdmq/getRocketmqMessages:getRocketmqMessages", args ?? new GetRocketmqMessagesArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of tdmq message
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var message = Tencentcloud.Tdmq.GetRocketmqMessages.Invoke(new()
         ///     {
-        ///         var message = Output.Create(Tencentcloud.Tdmq.GetRocketmqMessages.InvokeAsync(new Tencentcloud.Tdmq.GetRocketmqMessagesArgs
-        ///         {
-        ///             ClusterId = "rocketmq-rkrbm52djmro",
-        ///             EnvironmentId = "keep_ns",
-        ///             MsgId = "A9FE8D0567FE15DB97425FC08EEF0000",
-        ///             QueryDlqMsg = false,
-        ///             TopicName = "keep-topic",
-        ///         }));
-        ///     }
+        ///         ClusterId = "rocketmq-rkrbm52djmro",
+        ///         EnvironmentId = "keep_ns",
+        ///         MsgId = "A9FE8D0567FE15DB97425FC08EEF0000",
+        ///         QueryDlqMsg = false,
+        ///         TopicName = "keep-topic",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetRocketmqMessagesResult> Invoke(GetRocketmqMessagesInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetRocketmqMessagesResult>("tencentcloud:Tdmq/getRocketmqMessages:getRocketmqMessages", args ?? new GetRocketmqMessagesInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetRocketmqMessagesResult>("tencentcloud:Tdmq/getRocketmqMessages:getRocketmqMessages", args ?? new GetRocketmqMessagesInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetRocketmqMessagesArgs : Pulumi.InvokeArgs
+    public sealed class GetRocketmqMessagesArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Cluster id.
@@ -121,9 +115,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdmq
         public GetRocketmqMessagesArgs()
         {
         }
+        public static new GetRocketmqMessagesArgs Empty => new GetRocketmqMessagesArgs();
     }
 
-    public sealed class GetRocketmqMessagesInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetRocketmqMessagesInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Cluster id.
@@ -164,6 +159,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdmq
         public GetRocketmqMessagesInvokeArgs()
         {
         }
+        public static new GetRocketmqMessagesInvokeArgs Empty => new GetRocketmqMessagesInvokeArgs();
     }
 
 

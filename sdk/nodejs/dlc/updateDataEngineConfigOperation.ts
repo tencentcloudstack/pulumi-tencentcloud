@@ -9,15 +9,17 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const updateDataEngineConfigOperation = new tencentcloud.Dlc.UpdateDataEngineConfigOperation("update_data_engine_config_operation", {
+ * const updateDataEngineConfigOperation = new tencentcloud.dlc.UpdateDataEngineConfigOperation("updateDataEngineConfigOperation", {
  *     dataEngineConfigCommand: "UpdateSparkSQLLakefsPath",
  *     dataEngineId: "DataEngine-o3lzpqpo",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export class UpdateDataEngineConfigOperation extends pulumi.CustomResource {
     /**

@@ -15,64 +15,58 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Scf
         /// <summary>
         /// Use this data source to query detailed information of scf async_event_status
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var asyncEventStatus = Tencentcloud.Scf.GetAsyncEventStatus.Invoke(new()
         ///     {
-        ///         var asyncEventStatus = Output.Create(Tencentcloud.Scf.GetAsyncEventStatus.InvokeAsync(new Tencentcloud.Scf.GetAsyncEventStatusArgs
-        ///         {
-        ///             InvokeRequestId = "9de9405a-e33a-498d-bb59-e80b7bed1191",
-        ///         }));
-        ///     }
+        ///         InvokeRequestId = "9de9405a-e33a-498d-bb59-e80b7bed1191",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetAsyncEventStatusResult> InvokeAsync(GetAsyncEventStatusArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetAsyncEventStatusResult>("tencentcloud:Scf/getAsyncEventStatus:getAsyncEventStatus", args ?? new GetAsyncEventStatusArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetAsyncEventStatusResult>("tencentcloud:Scf/getAsyncEventStatus:getAsyncEventStatus", args ?? new GetAsyncEventStatusArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of scf async_event_status
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var asyncEventStatus = Tencentcloud.Scf.GetAsyncEventStatus.Invoke(new()
         ///     {
-        ///         var asyncEventStatus = Output.Create(Tencentcloud.Scf.GetAsyncEventStatus.InvokeAsync(new Tencentcloud.Scf.GetAsyncEventStatusArgs
-        ///         {
-        ///             InvokeRequestId = "9de9405a-e33a-498d-bb59-e80b7bed1191",
-        ///         }));
-        ///     }
+        ///         InvokeRequestId = "9de9405a-e33a-498d-bb59-e80b7bed1191",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetAsyncEventStatusResult> Invoke(GetAsyncEventStatusInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetAsyncEventStatusResult>("tencentcloud:Scf/getAsyncEventStatus:getAsyncEventStatus", args ?? new GetAsyncEventStatusInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetAsyncEventStatusResult>("tencentcloud:Scf/getAsyncEventStatus:getAsyncEventStatus", args ?? new GetAsyncEventStatusInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetAsyncEventStatusArgs : Pulumi.InvokeArgs
+    public sealed class GetAsyncEventStatusArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// ID of the async execution request.
@@ -89,9 +83,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Scf
         public GetAsyncEventStatusArgs()
         {
         }
+        public static new GetAsyncEventStatusArgs Empty => new GetAsyncEventStatusArgs();
     }
 
-    public sealed class GetAsyncEventStatusInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetAsyncEventStatusInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// ID of the async execution request.
@@ -108,6 +103,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Scf
         public GetAsyncEventStatusInvokeArgs()
         {
         }
+        public static new GetAsyncEventStatusInvokeArgs Empty => new GetAsyncEventStatusInvokeArgs();
     }
 
 

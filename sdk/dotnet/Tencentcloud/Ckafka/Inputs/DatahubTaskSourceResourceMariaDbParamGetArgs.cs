@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka.Inputs
 {
 
-    public sealed class DatahubTaskSourceResourceMariaDbParamGetArgs : Pulumi.ResourceArgs
+    public sealed class DatahubTaskSourceResourceMariaDbParamGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// MariaDB database name, * for all database.
@@ -76,5 +76,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka.Inputs
         public DatahubTaskSourceResourceMariaDbParamGetArgs()
         {
         }
+        public static new DatahubTaskSourceResourceMariaDbParamGetArgs Empty => new DatahubTaskSourceResourceMariaDbParamGetArgs();
     }
 }

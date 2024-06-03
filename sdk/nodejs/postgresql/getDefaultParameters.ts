@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,22 +11,21 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const defaultParameters = pulumi.output(tencentcloud.Postgresql.getDefaultParameters({
+ * const defaultParameters = tencentcloud.Postgresql.getDefaultParameters({
  *     dbEngine: "postgresql",
  *     dbMajorVersion: "13",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getDefaultParameters(args: GetDefaultParametersArgs, opts?: pulumi.InvokeOptions): Promise<GetDefaultParametersResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Postgresql/getDefaultParameters:getDefaultParameters", {
         "dbEngine": args.dbEngine,
         "dbMajorVersion": args.dbMajorVersion,
@@ -67,9 +67,25 @@ export interface GetDefaultParametersResult {
     readonly paramInfoSets: outputs.Postgresql.GetDefaultParametersParamInfoSet[];
     readonly resultOutputFile?: string;
 }
-
+/**
+ * Use this data source to query detailed information of postgresql defaultParameters
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const defaultParameters = tencentcloud.Postgresql.getDefaultParameters({
+ *     dbEngine: "postgresql",
+ *     dbMajorVersion: "13",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getDefaultParametersOutput(args: GetDefaultParametersOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetDefaultParametersResult> {
-    return pulumi.output(args).apply(a => getDefaultParameters(a, opts))
+    return pulumi.output(args).apply((a: any) => getDefaultParameters(a, opts))
 }
 
 /**

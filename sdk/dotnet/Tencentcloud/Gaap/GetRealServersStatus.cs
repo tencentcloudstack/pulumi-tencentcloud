@@ -15,70 +15,64 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
         /// <summary>
         /// Use this data source to query detailed information of gaap real servers status
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var realServersStatus = Tencentcloud.Gaap.GetRealServersStatus.Invoke(new()
         ///     {
-        ///         var realServersStatus = Output.Create(Tencentcloud.Gaap.GetRealServersStatus.InvokeAsync(new Tencentcloud.Gaap.GetRealServersStatusArgs
+        ///         RealServerIds = new[]
         ///         {
-        ///             RealServerIds = 
-        ///             {
-        ///                 "rs-qcygnwpd",
-        ///             },
-        ///         }));
-        ///     }
+        ///             "rs-3mlpbuut",
+        ///         },
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetRealServersStatusResult> InvokeAsync(GetRealServersStatusArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetRealServersStatusResult>("tencentcloud:Gaap/getRealServersStatus:getRealServersStatus", args ?? new GetRealServersStatusArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetRealServersStatusResult>("tencentcloud:Gaap/getRealServersStatus:getRealServersStatus", args ?? new GetRealServersStatusArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of gaap real servers status
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var realServersStatus = Tencentcloud.Gaap.GetRealServersStatus.Invoke(new()
         ///     {
-        ///         var realServersStatus = Output.Create(Tencentcloud.Gaap.GetRealServersStatus.InvokeAsync(new Tencentcloud.Gaap.GetRealServersStatusArgs
+        ///         RealServerIds = new[]
         ///         {
-        ///             RealServerIds = 
-        ///             {
-        ///                 "rs-qcygnwpd",
-        ///             },
-        ///         }));
-        ///     }
+        ///             "rs-3mlpbuut",
+        ///         },
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetRealServersStatusResult> Invoke(GetRealServersStatusInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetRealServersStatusResult>("tencentcloud:Gaap/getRealServersStatus:getRealServersStatus", args ?? new GetRealServersStatusInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetRealServersStatusResult>("tencentcloud:Gaap/getRealServersStatus:getRealServersStatus", args ?? new GetRealServersStatusInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetRealServersStatusArgs : Pulumi.InvokeArgs
+    public sealed class GetRealServersStatusArgs : global::Pulumi.InvokeArgs
     {
         [Input("realServerIds", required: true)]
         private List<string>? _realServerIds;
@@ -101,9 +95,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
         public GetRealServersStatusArgs()
         {
         }
+        public static new GetRealServersStatusArgs Empty => new GetRealServersStatusArgs();
     }
 
-    public sealed class GetRealServersStatusInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetRealServersStatusInvokeArgs : global::Pulumi.InvokeArgs
     {
         [Input("realServerIds", required: true)]
         private InputList<string>? _realServerIds;
@@ -126,6 +121,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
         public GetRealServersStatusInvokeArgs()
         {
         }
+        public static new GetRealServersStatusInvokeArgs Empty => new GetRealServersStatusInvokeArgs();
     }
 
 

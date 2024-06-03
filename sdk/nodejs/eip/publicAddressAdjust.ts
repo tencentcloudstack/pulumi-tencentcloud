@@ -9,15 +9,17 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const publicAddressAdjust = new tencentcloud.Eip.PublicAddressAdjust("public_address_adjust", {
+ * const publicAddressAdjust = new tencentcloud.eip.PublicAddressAdjust("publicAddressAdjust", {
  *     addressId: "eip-erft45fu",
  *     instanceId: "ins-cr2rfq78",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export class PublicAddressAdjust extends pulumi.CustomResource {
     /**

@@ -17,109 +17,114 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.As
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = Pulumi.Tencentcloud;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var exampleInstance = Tencentcloud.Images.GetInstance.Invoke(new()
     ///     {
-    ///         var exampleInstance = Output.Create(Tencentcloud.Images.GetInstance.InvokeAsync(new Tencentcloud.Images.GetInstanceArgs
+    ///         ImageTypes = new[]
     ///         {
-    ///             ImageTypes = 
-    ///             {
-    ///                 "PUBLIC_IMAGE",
-    ///             },
-    ///             OsName = "TencentOS Server 3.2 (Final)",
-    ///         }));
-    ///         var exampleScalingConfig = new Tencentcloud.As.ScalingConfig("exampleScalingConfig", new Tencentcloud.As.ScalingConfigArgs
-    ///         {
-    ///             ConfigurationName = "example-launch-configuration",
-    ///             ImageId = exampleInstance.Apply(exampleInstance =&gt; exampleInstance.Images?[0]?.ImageId),
-    ///             InstanceTypes = 
-    ///             {
-    ///                 "SA1.SMALL1",
-    ///             },
-    ///             ProjectId = 0,
-    ///             SystemDiskType = "CLOUD_PREMIUM",
-    ///             SystemDiskSize = 50,
-    ///             DataDisks = 
-    ///             {
-    ///                 new Tencentcloud.As.Inputs.ScalingConfigDataDiskArgs
-    ///                 {
-    ///                     DiskType = "CLOUD_PREMIUM",
-    ///                     DiskSize = 50,
-    ///                 },
-    ///             },
-    ///             InternetChargeType = "TRAFFIC_POSTPAID_BY_HOUR",
-    ///             InternetMaxBandwidthOut = 10,
-    ///             PublicIpAssigned = true,
-    ///             Password = "Test@123#",
-    ///             EnhancedSecurityService = false,
-    ///             EnhancedMonitorService = false,
-    ///             UserData = "dGVzdA==",
-    ///             HostNameSettings = new Tencentcloud.As.Inputs.ScalingConfigHostNameSettingsArgs
-    ///             {
-    ///                 HostName = "host-name-test",
-    ///                 HostNameStyle = "UNIQUE",
-    ///             },
-    ///             InstanceTags = 
-    ///             {
-    ///                 { "tag", "example" },
-    ///             },
-    ///         });
-    ///     }
+    ///             "PUBLIC_IMAGE",
+    ///         },
+    ///         OsName = "TencentOS Server 3.2 (Final)",
+    ///     });
     /// 
-    /// }
+    ///     var exampleScalingConfig = new Tencentcloud.As.ScalingConfig("exampleScalingConfig", new()
+    ///     {
+    ///         ConfigurationName = "example-launch-configuration",
+    ///         ImageId = exampleInstance.Apply(getInstanceResult =&gt; getInstanceResult.Images[0]?.ImageId),
+    ///         InstanceTypes = new[]
+    ///         {
+    ///             "SA1.SMALL1",
+    ///         },
+    ///         ProjectId = 0,
+    ///         SystemDiskType = "CLOUD_PREMIUM",
+    ///         SystemDiskSize = 50,
+    ///         DataDisks = new[]
+    ///         {
+    ///             new Tencentcloud.As.Inputs.ScalingConfigDataDiskArgs
+    ///             {
+    ///                 DiskType = "CLOUD_PREMIUM",
+    ///                 DiskSize = 50,
+    ///             },
+    ///         },
+    ///         InternetChargeType = "TRAFFIC_POSTPAID_BY_HOUR",
+    ///         InternetMaxBandwidthOut = 10,
+    ///         PublicIpAssigned = true,
+    ///         Password = "Test@123#",
+    ///         EnhancedSecurityService = false,
+    ///         EnhancedMonitorService = false,
+    ///         UserData = "dGVzdA==",
+    ///         HostNameSettings = new Tencentcloud.As.Inputs.ScalingConfigHostNameSettingsArgs
+    ///         {
+    ///             HostName = "host-name-test",
+    ///             HostNameStyle = "UNIQUE",
+    ///         },
+    ///         InstanceTags = 
+    ///         {
+    ///             { "tag", "example" },
+    ///         },
+    ///     });
+    /// 
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
+    /// 
     /// ### charge type
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = Pulumi.Tencentcloud;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var exampleInstance = Tencentcloud.Images.GetInstance.Invoke(new()
     ///     {
-    ///         var exampleInstance = Output.Create(Tencentcloud.Images.GetInstance.InvokeAsync(new Tencentcloud.Images.GetInstanceArgs
+    ///         ImageTypes = new[]
     ///         {
-    ///             ImageTypes = 
-    ///             {
-    ///                 "PUBLIC_IMAGE",
-    ///             },
-    ///             OsName = "TencentOS Server 3.2 (Final)",
-    ///         }));
-    ///         var exampleScalingConfig = new Tencentcloud.As.ScalingConfig("exampleScalingConfig", new Tencentcloud.As.ScalingConfigArgs
-    ///         {
-    ///             ConfigurationName = "launch-configuration",
-    ///             ImageId = exampleInstance.Apply(exampleInstance =&gt; exampleInstance.Images?[0]?.ImageId),
-    ///             InstanceTypes = 
-    ///             {
-    ///                 "SA1.SMALL1",
-    ///             },
-    ///             InstanceChargeType = "SPOTPAID",
-    ///             SpotInstanceType = "one-time",
-    ///             SpotMaxPrice = "1000",
-    ///         });
-    ///     }
+    ///             "PUBLIC_IMAGE",
+    ///         },
+    ///         OsName = "TencentOS Server 3.2 (Final)",
+    ///     });
     /// 
-    /// }
+    ///     var exampleScalingConfig = new Tencentcloud.As.ScalingConfig("exampleScalingConfig", new()
+    ///     {
+    ///         ConfigurationName = "launch-configuration",
+    ///         ImageId = exampleInstance.Apply(getInstanceResult =&gt; getInstanceResult.Images[0]?.ImageId),
+    ///         InstanceTypes = new[]
+    ///         {
+    ///             "SA1.SMALL1",
+    ///         },
+    ///         InstanceChargeType = "SPOTPAID",
+    ///         SpotInstanceType = "one-time",
+    ///         SpotMaxPrice = "1000",
+    ///     });
+    /// 
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// AutoScaling Configuration can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:As/scalingConfig:ScalingConfig example asc-n32ymck2
+    /// $ pulumi import tencentcloud:As/scalingConfig:ScalingConfig example asc-n32ymck2
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:As/scalingConfig:ScalingConfig")]
-    public partial class ScalingConfig : Pulumi.CustomResource
+    public partial class ScalingConfig : global::Pulumi.CustomResource
     {
         /// <summary>
         /// CAM role name authorized to access.
@@ -319,6 +324,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.As
             {
                 Version = Utilities.Version,
                 PluginDownloadURL = "github://api.github.com/tencentcloudstack",
+                AdditionalSecretOutputs =
+                {
+                    "password",
+                },
             };
             var merged = CustomResourceOptions.Merge(defaultOptions, options);
             // Override the ID if one was specified for consistency with other language SDKs.
@@ -340,7 +349,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.As
         }
     }
 
-    public sealed class ScalingConfigArgs : Pulumi.ResourceArgs
+    public sealed class ScalingConfigArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// CAM role name authorized to access.
@@ -474,11 +483,21 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.As
             set => _keyIds = value;
         }
 
+        [Input("password")]
+        private Input<string>? _password;
+
         /// <summary>
         /// Password to access.
         /// </summary>
-        [Input("password")]
-        public Input<string>? Password { get; set; }
+        public Input<string>? Password
+        {
+            get => _password;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _password = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
 
         /// <summary>
         /// Specifys to which project the configuration belongs.
@@ -537,9 +556,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.As
         public ScalingConfigArgs()
         {
         }
+        public static new ScalingConfigArgs Empty => new ScalingConfigArgs();
     }
 
-    public sealed class ScalingConfigState : Pulumi.ResourceArgs
+    public sealed class ScalingConfigState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// CAM role name authorized to access.
@@ -679,11 +699,21 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.As
             set => _keyIds = value;
         }
 
+        [Input("password")]
+        private Input<string>? _password;
+
         /// <summary>
         /// Password to access.
         /// </summary>
-        [Input("password")]
-        public Input<string>? Password { get; set; }
+        public Input<string>? Password
+        {
+            get => _password;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _password = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
 
         /// <summary>
         /// Specifys to which project the configuration belongs.
@@ -748,5 +778,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.As
         public ScalingConfigState()
         {
         }
+        public static new ScalingConfigState Empty => new ScalingConfigState();
     }
 }

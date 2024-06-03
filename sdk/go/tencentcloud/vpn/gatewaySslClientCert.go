@@ -7,42 +7,48 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a vpc vpnGatewaySslClientCert
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpn"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpn"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Vpn.NewGatewaySslClientCert(ctx, "vpnGatewaySslClientCert", &Vpn.GatewaySslClientCertArgs{
-// 			SslVpnClientId: pulumi.String("vpnc-123456"),
-// 			Switch:         pulumi.String("off"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Vpn.NewGatewaySslClientCert(ctx, "vpnGatewaySslClientCert", &Vpn.GatewaySslClientCertArgs{
+//				SslVpnClientId: pulumi.String("vpnc-123456"),
+//				Switch:         pulumi.String("off"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // vpc vpn_gateway_ssl_client_cert can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Vpn/gatewaySslClientCert:GatewaySslClientCert vpn_gateway_ssl_client_cert ssl_client_id
+// $ pulumi import tencentcloud:Vpn/gatewaySslClientCert:GatewaySslClientCert vpn_gateway_ssl_client_cert ssl_client_id
 // ```
 type GatewaySslClientCert struct {
 	pulumi.CustomResourceState
@@ -63,7 +69,7 @@ func NewGatewaySslClientCert(ctx *pulumi.Context,
 	if args.SslVpnClientId == nil {
 		return nil, errors.New("invalid value for required argument 'SslVpnClientId'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource GatewaySslClientCert
 	err := ctx.RegisterResource("tencentcloud:Vpn/gatewaySslClientCert:GatewaySslClientCert", name, args, &resource, opts...)
 	if err != nil {
@@ -144,7 +150,7 @@ func (i *GatewaySslClientCert) ToGatewaySslClientCertOutputWithContext(ctx conte
 // GatewaySslClientCertArrayInput is an input type that accepts GatewaySslClientCertArray and GatewaySslClientCertArrayOutput values.
 // You can construct a concrete instance of `GatewaySslClientCertArrayInput` via:
 //
-//          GatewaySslClientCertArray{ GatewaySslClientCertArgs{...} }
+//	GatewaySslClientCertArray{ GatewaySslClientCertArgs{...} }
 type GatewaySslClientCertArrayInput interface {
 	pulumi.Input
 
@@ -169,7 +175,7 @@ func (i GatewaySslClientCertArray) ToGatewaySslClientCertArrayOutputWithContext(
 // GatewaySslClientCertMapInput is an input type that accepts GatewaySslClientCertMap and GatewaySslClientCertMapOutput values.
 // You can construct a concrete instance of `GatewaySslClientCertMapInput` via:
 //
-//          GatewaySslClientCertMap{ "key": GatewaySslClientCertArgs{...} }
+//	GatewaySslClientCertMap{ "key": GatewaySslClientCertArgs{...} }
 type GatewaySslClientCertMapInput interface {
 	pulumi.Input
 

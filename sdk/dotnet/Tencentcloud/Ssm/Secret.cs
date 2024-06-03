@@ -14,109 +14,115 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssm
     /// Provide a resource to create a SSM secret.
     /// 
     /// ## Example Usage
+    /// 
     /// ### Create user defined secret
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var example = new Tencentcloud.Ssm.Secret("example", new()
     ///     {
-    ///         var example = new Tencentcloud.Ssm.Secret("example", new Tencentcloud.Ssm.SecretArgs
+    ///         Description = "desc.",
+    ///         IsEnabled = true,
+    ///         RecoveryWindowInDays = 0,
+    ///         SecretName = "tf-example",
+    ///         Tags = 
     ///         {
-    ///             Description = "desc.",
-    ///             IsEnabled = true,
-    ///             RecoveryWindowInDays = 0,
-    ///             SecretName = "tf-example",
-    ///             Tags = 
-    ///             {
-    ///                 { "createBy", "terraform" },
-    ///             },
-    ///         });
-    ///     }
+    ///             { "createBy", "terraform" },
+    ///         },
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
+    /// 
     /// ### Create redis secret
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
     /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using System.Text.Json;
     /// using Pulumi;
     /// using Tencentcloud = Pulumi.Tencentcloud;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var zone = Tencentcloud.Redis.GetZoneConfig.Invoke(new()
     ///     {
-    ///         var zone = Output.Create(Tencentcloud.Redis.GetZoneConfig.InvokeAsync(new Tencentcloud.Redis.GetZoneConfigArgs
-    ///         {
-    ///             TypeId = 8,
-    ///         }));
-    ///         var vpc = new Tencentcloud.Vpc.Instance("vpc", new Tencentcloud.Vpc.InstanceArgs
-    ///         {
-    ///             CidrBlock = "10.0.0.0/16",
-    ///         });
-    ///         var subnet = new Tencentcloud.Subnet.Instance("subnet", new Tencentcloud.Subnet.InstanceArgs
-    ///         {
-    ///             VpcId = vpc.Id,
-    ///             AvailabilityZone = zone.Apply(zone =&gt; zone.Lists?[3]?.Zone),
-    ///             CidrBlock = "10.0.0.0/16",
-    ///         });
-    ///         var exampleInstance = new Tencentcloud.Redis.Instance("exampleInstance", new Tencentcloud.Redis.InstanceArgs
-    ///         {
-    ///             AvailabilityZone = zone.Apply(zone =&gt; zone.Lists?[3]?.Zone),
-    ///             TypeId = zone.Apply(zone =&gt; zone.Lists?[3]?.TypeId),
-    ///             Password = "Qwer@234",
-    ///             MemSize = zone.Apply(zone =&gt; zone.Lists?[3]?.MemSizes?[0]),
-    ///             RedisShardNum = zone.Apply(zone =&gt; zone.Lists?[3]?.RedisShardNums?[0]),
-    ///             RedisReplicasNum = zone.Apply(zone =&gt; zone.Lists?[3]?.RedisReplicasNums?[0]),
-    ///             Port = 6379,
-    ///             VpcId = vpc.Id,
-    ///             SubnetId = subnet.Id,
-    ///         });
-    ///         var exampleSecret = new Tencentcloud.Ssm.Secret("exampleSecret", new Tencentcloud.Ssm.SecretArgs
-    ///         {
-    ///             SecretName = "tf-example",
-    ///             Description = "redis desc.",
-    ///             IsEnabled = true,
-    ///             SecretType = 4,
-    ///             AdditionalConfig = exampleInstance.Id.Apply(id =&gt; JsonSerializer.Serialize(new Dictionary&lt;string, object?&gt;
-    ///             {
-    ///                 { "Region", "ap-guangzhou" },
-    ///                 { "Privilege", "r" },
-    ///                 { "InstanceId", id },
-    ///                 { "ReadonlyPolicy", new[]
-    ///                     {
-    ///                         "master",
-    ///                     }
-    ///                  },
-    ///                 { "Remark", "for tf test" },
-    ///             })),
-    ///             Tags = 
-    ///             {
-    ///                 { "createdBy", "terraform" },
-    ///             },
-    ///             RecoveryWindowInDays = 0,
-    ///         });
-    ///     }
+    ///         TypeId = 8,
+    ///     });
     /// 
-    /// }
+    ///     var vpc = new Tencentcloud.Vpc.Instance("vpc", new()
+    ///     {
+    ///         CidrBlock = "10.0.0.0/16",
+    ///     });
+    /// 
+    ///     var subnet = new Tencentcloud.Subnet.Instance("subnet", new()
+    ///     {
+    ///         VpcId = vpc.Id,
+    ///         AvailabilityZone = zone.Apply(getZoneConfigResult =&gt; getZoneConfigResult.Lists[3]?.Zone),
+    ///         CidrBlock = "10.0.0.0/16",
+    ///     });
+    /// 
+    ///     var exampleInstance = new Tencentcloud.Redis.Instance("exampleInstance", new()
+    ///     {
+    ///         AvailabilityZone = zone.Apply(getZoneConfigResult =&gt; getZoneConfigResult.Lists[3]?.Zone),
+    ///         TypeId = zone.Apply(getZoneConfigResult =&gt; getZoneConfigResult.Lists[3]?.TypeId),
+    ///         Password = "Qwer@234",
+    ///         MemSize = zone.Apply(getZoneConfigResult =&gt; getZoneConfigResult.Lists[3]?.MemSizes[0]),
+    ///         RedisShardNum = zone.Apply(getZoneConfigResult =&gt; getZoneConfigResult.Lists[3]?.RedisShardNums[0]),
+    ///         RedisReplicasNum = zone.Apply(getZoneConfigResult =&gt; getZoneConfigResult.Lists[3]?.RedisReplicasNums[0]),
+    ///         Port = 6379,
+    ///         VpcId = vpc.Id,
+    ///         SubnetId = subnet.Id,
+    ///     });
+    /// 
+    ///     var exampleSecret = new Tencentcloud.Ssm.Secret("exampleSecret", new()
+    ///     {
+    ///         SecretName = "tf-example",
+    ///         Description = "redis desc.",
+    ///         IsEnabled = true,
+    ///         SecretType = 4,
+    ///         AdditionalConfig = Output.JsonSerialize(Output.Create(new Dictionary&lt;string, object?&gt;
+    ///         {
+    ///             ["Region"] = "ap-guangzhou",
+    ///             ["Privilege"] = "r",
+    ///             ["InstanceId"] = exampleInstance.Id,
+    ///             ["ReadonlyPolicy"] = new[]
+    ///             {
+    ///                 "master",
+    ///             },
+    ///             ["Remark"] = "for tf test",
+    ///         })),
+    ///         Tags = 
+    ///         {
+    ///             { "createdBy", "terraform" },
+    ///         },
+    ///         RecoveryWindowInDays = 0,
+    ///     });
+    /// 
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// SSM secret can be imported using the secretName, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Ssm/secret:Secret foo test
+    /// $ pulumi import tencentcloud:Ssm/secret:Secret foo test
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Ssm/secret:Secret")]
-    public partial class Secret : Pulumi.CustomResource
+    public partial class Secret : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Additional config for specific secret types in JSON string format.
@@ -217,7 +223,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssm
         }
     }
 
-    public sealed class SecretArgs : Pulumi.ResourceArgs
+    public sealed class SecretArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Additional config for specific secret types in JSON string format.
@@ -276,9 +282,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssm
         public SecretArgs()
         {
         }
+        public static new SecretArgs Empty => new SecretArgs();
     }
 
-    public sealed class SecretState : Pulumi.ResourceArgs
+    public sealed class SecretState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Additional config for specific secret types in JSON string format.
@@ -343,5 +350,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssm
         public SecretState()
         {
         }
+        public static new SecretState Empty => new SecretState();
     }
 }

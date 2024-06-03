@@ -15,45 +15,46 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ci
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var mediaAnimationTemplate = new Tencentcloud.Ci.MediaAnimationTemplate("mediaAnimationTemplate", new()
     ///     {
-    ///         var mediaAnimationTemplate = new Tencentcloud.Ci.MediaAnimationTemplate("mediaAnimationTemplate", new Tencentcloud.Ci.MediaAnimationTemplateArgs
+    ///         Bucket = "terraform-ci-1308919341",
+    ///         Container = new Tencentcloud.Ci.Inputs.MediaAnimationTemplateContainerArgs
     ///         {
-    ///             Bucket = "terraform-ci-1308919341",
-    ///             Container = new Tencentcloud.Ci.Inputs.MediaAnimationTemplateContainerArgs
-    ///             {
-    ///                 Format = "gif",
-    ///             },
-    ///             TimeInterval = new Tencentcloud.Ci.Inputs.MediaAnimationTemplateTimeIntervalArgs
-    ///             {
-    ///                 Duration = "60",
-    ///                 Start = "0",
-    ///             },
-    ///             Video = new Tencentcloud.Ci.Inputs.MediaAnimationTemplateVideoArgs
-    ///             {
-    ///                 AnimateFramesPerSecond = "",
-    ///                 AnimateOnlyKeepKeyFrame = "true",
-    ///                 AnimateTimeIntervalOfFrame = "",
-    ///                 Codec = "gif",
-    ///                 Fps = "20",
-    ///                 Height = "",
-    ///                 Quality = "",
-    ///                 Width = "1280",
-    ///             },
-    ///         });
-    ///     }
+    ///             Format = "gif",
+    ///         },
+    ///         TimeInterval = new Tencentcloud.Ci.Inputs.MediaAnimationTemplateTimeIntervalArgs
+    ///         {
+    ///             Duration = "60",
+    ///             Start = "0",
+    ///         },
+    ///         Video = new Tencentcloud.Ci.Inputs.MediaAnimationTemplateVideoArgs
+    ///         {
+    ///             AnimateFramesPerSecond = "",
+    ///             AnimateOnlyKeepKeyFrame = "true",
+    ///             AnimateTimeIntervalOfFrame = "",
+    ///             Codec = "gif",
+    ///             Fps = "20",
+    ///             Height = "",
+    ///             Quality = "",
+    ///             Width = "1280",
+    ///         },
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Ci/mediaAnimationTemplate:MediaAnimationTemplate")]
-    public partial class MediaAnimationTemplate : Pulumi.CustomResource
+    public partial class MediaAnimationTemplate : global::Pulumi.CustomResource
     {
         /// <summary>
         /// bucket name.
@@ -130,7 +131,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ci
         }
     }
 
-    public sealed class MediaAnimationTemplateArgs : Pulumi.ResourceArgs
+    public sealed class MediaAnimationTemplateArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// bucket name.
@@ -165,9 +166,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ci
         public MediaAnimationTemplateArgs()
         {
         }
+        public static new MediaAnimationTemplateArgs Empty => new MediaAnimationTemplateArgs();
     }
 
-    public sealed class MediaAnimationTemplateState : Pulumi.ResourceArgs
+    public sealed class MediaAnimationTemplateState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// bucket name.
@@ -202,5 +204,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ci
         public MediaAnimationTemplateState()
         {
         }
+        public static new MediaAnimationTemplateState Empty => new MediaAnimationTemplateState();
     }
 }

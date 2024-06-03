@@ -9,20 +9,21 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const applicationConfig = new tencentcloud.Tsf.ApplicationConfig("application_config", {
+ * const applicationConfig = new tencentcloud.tsf.ApplicationConfig("applicationConfig", {
  *     applicationId: "application-ym9mxmza",
  *     configName: "test-2",
  *     configValue: "name: \"name\"",
  *     configVersion: "1.0",
  *     configVersionDesc: "test2",
- *     // config_type = ""
  *     encodeWithBase64: false,
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export class ApplicationConfig extends pulumi.CustomResource {
     /**

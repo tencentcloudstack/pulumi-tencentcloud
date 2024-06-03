@@ -15,28 +15,29 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Scf
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var terminateAsyncEvent = new Tencentcloud.Scf.TerminateAsyncEvent("terminateAsyncEvent", new()
     ///     {
-    ///         var terminateAsyncEvent = new Tencentcloud.Scf.TerminateAsyncEvent("terminateAsyncEvent", new Tencentcloud.Scf.TerminateAsyncEventArgs
-    ///         {
-    ///             FunctionName = "keep-1676351130",
-    ///             GraceShutdown = true,
-    ///             InvokeRequestId = "9de9405a-e33a-498d-bb59-e80b7bed1191",
-    ///             Namespace = "default",
-    ///         });
-    ///     }
+    ///         FunctionName = "keep-1676351130",
+    ///         GraceShutdown = true,
+    ///         InvokeRequestId = "9de9405a-e33a-498d-bb59-e80b7bed1191",
+    ///         Namespace = "default",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Scf/terminateAsyncEvent:TerminateAsyncEvent")]
-    public partial class TerminateAsyncEvent : Pulumi.CustomResource
+    public partial class TerminateAsyncEvent : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Function name.
@@ -107,7 +108,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Scf
         }
     }
 
-    public sealed class TerminateAsyncEventArgs : Pulumi.ResourceArgs
+    public sealed class TerminateAsyncEventArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Function name.
@@ -136,9 +137,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Scf
         public TerminateAsyncEventArgs()
         {
         }
+        public static new TerminateAsyncEventArgs Empty => new TerminateAsyncEventArgs();
     }
 
-    public sealed class TerminateAsyncEventState : Pulumi.ResourceArgs
+    public sealed class TerminateAsyncEventState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Function name.
@@ -167,5 +169,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Scf
         public TerminateAsyncEventState()
         {
         }
+        public static new TerminateAsyncEventState Empty => new TerminateAsyncEventState();
     }
 }

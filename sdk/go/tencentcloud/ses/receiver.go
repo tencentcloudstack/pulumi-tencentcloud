@@ -7,84 +7,93 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a ses receiver
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Ses"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ses"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ses"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Ses.NewReceiver(ctx, "receiver", &Ses.ReceiverArgs{
-// 			Datas: ses.ReceiverDataArray{
-// 				&ses.ReceiverDataArgs{
-// 					Email: pulumi.String("abc@abc.com"),
-// 				},
-// 				&ses.ReceiverDataArgs{
-// 					Email: pulumi.String("abcd@abcd.com"),
-// 				},
-// 			},
-// 			Desc:          pulumi.String("description"),
-// 			ReceiversName: pulumi.String("terraform_test"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
-// ```
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Ses.NewReceiver(ctx, "receiver", &Ses.ReceiverArgs{
+//				Datas: ses.ReceiverDataArray{
+//					&ses.ReceiverDataArgs{
+//						Email: pulumi.String("abc@abc.com"),
+//					},
+//					&ses.ReceiverDataArgs{
+//						Email: pulumi.String("abcd@abcd.com"),
+//					},
+//				},
+//				Desc:          pulumi.String("description"),
+//				ReceiversName: pulumi.String("terraform_test"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
 //
+// ```
+// <!--End PulumiCodeChooser -->
+//
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Ses"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ses"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ses"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Ses.NewReceiver(ctx, "receiver", &Ses.ReceiverArgs{
-// 			Datas: ses.ReceiverDataArray{
-// 				&ses.ReceiverDataArgs{
-// 					Email:        pulumi.String("abc@abc.com"),
-// 					TemplateData: pulumi.String("{\"name\":\"xxx\",\"age\":\"xx\"}"),
-// 				},
-// 				&ses.ReceiverDataArgs{
-// 					Email:        pulumi.String("abcd@abcd.com"),
-// 					TemplateData: pulumi.String("{\"name\":\"xxx\",\"age\":\"xx\"}"),
-// 				},
-// 			},
-// 			Desc:          pulumi.String("description"),
-// 			ReceiversName: pulumi.String("terraform_test"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Ses.NewReceiver(ctx, "receiver", &Ses.ReceiverArgs{
+//				Datas: ses.ReceiverDataArray{
+//					&ses.ReceiverDataArgs{
+//						Email:        pulumi.String("abc@abc.com"),
+//						TemplateData: pulumi.String("{\"name\":\"xxx\",\"age\":\"xx\"}"),
+//					},
+//					&ses.ReceiverDataArgs{
+//						Email:        pulumi.String("abcd@abcd.com"),
+//						TemplateData: pulumi.String("{\"name\":\"xxx\",\"age\":\"xx\"}"),
+//					},
+//				},
+//				Desc:          pulumi.String("description"),
+//				ReceiversName: pulumi.String("terraform_test"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // ses email_address can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Ses/receiver:Receiver receiver receiverId
+// $ pulumi import tencentcloud:Ses/receiver:Receiver receiver receiverId
 // ```
 type Receiver struct {
 	pulumi.CustomResourceState
@@ -110,7 +119,7 @@ func NewReceiver(ctx *pulumi.Context,
 	if args.ReceiversName == nil {
 		return nil, errors.New("invalid value for required argument 'ReceiversName'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource Receiver
 	err := ctx.RegisterResource("tencentcloud:Ses/receiver:Receiver", name, args, &resource, opts...)
 	if err != nil {
@@ -199,7 +208,7 @@ func (i *Receiver) ToReceiverOutputWithContext(ctx context.Context) ReceiverOutp
 // ReceiverArrayInput is an input type that accepts ReceiverArray and ReceiverArrayOutput values.
 // You can construct a concrete instance of `ReceiverArrayInput` via:
 //
-//          ReceiverArray{ ReceiverArgs{...} }
+//	ReceiverArray{ ReceiverArgs{...} }
 type ReceiverArrayInput interface {
 	pulumi.Input
 
@@ -224,7 +233,7 @@ func (i ReceiverArray) ToReceiverArrayOutputWithContext(ctx context.Context) Rec
 // ReceiverMapInput is an input type that accepts ReceiverMap and ReceiverMapOutput values.
 // You can construct a concrete instance of `ReceiverMapInput` via:
 //
-//          ReceiverMap{ "key": ReceiverArgs{...} }
+//	ReceiverMap{ "key": ReceiverArgs{...} }
 type ReceiverMapInput interface {
 	pulumi.Input
 

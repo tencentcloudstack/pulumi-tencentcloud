@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Antiddos.Inputs
 {
 
-    public sealed class DefaultAlarmThresholdDefaultAlarmConfigArgs : Pulumi.ResourceArgs
+    public sealed class DefaultAlarmThresholdDefaultAlarmConfigArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Alarm threshold, in Mbps, with a value of&amp;gt;=0; When used as an input parameter, setting 0 will delete the alarm threshold configuration;.
@@ -28,5 +28,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Antiddos.Inputs
         public DefaultAlarmThresholdDefaultAlarmConfigArgs()
         {
         }
+        public static new DefaultAlarmThresholdDefaultAlarmConfigArgs Empty => new DefaultAlarmThresholdDefaultAlarmConfigArgs();
     }
 }

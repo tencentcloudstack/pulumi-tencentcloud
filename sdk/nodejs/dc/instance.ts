@@ -9,11 +9,12 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const instance = new tencentcloud.Dc.Instance("instance", {
+ * const instance = new tencentcloud.dc.Instance("instance", {
  *     accessPointId: "ap-shenzhen-b-ft",
  *     bandwidth: 10,
  *     customerContactNumber: "0",
@@ -24,13 +25,14 @@ import * as utilities from "../utilities";
  *     vlan: -1,
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * dc instance can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Dc/instance:Instance instance dc_id
+ * $ pulumi import tencentcloud:Dc/instance:Instance instance dc_id
  * ```
  */
 export class Instance extends pulumi.CustomResource {

@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssm.Inputs
 {
 
-    public sealed class ProductSecretPrivilegesListGetArgs : Pulumi.ResourceArgs
+    public sealed class ProductSecretPrivilegesListGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// This value takes effect only when `PrivilegeName` is `ColumnPrivileges`, and the following parameters are required in this case:Database: explicitly indicate the database instance.TableName: explicitly indicate the table.
@@ -52,5 +52,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssm.Inputs
         public ProductSecretPrivilegesListGetArgs()
         {
         }
+        public static new ProductSecretPrivilegesListGetArgs Empty => new ProductSecretPrivilegesListGetArgs();
     }
 }

@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,22 +11,21 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const logFiles = pulumi.output(tencentcloud.Mariadb.getLogFiles({
+ * const logFiles = tencentcloud.Mariadb.getLogFiles({
  *     instanceId: "tdsql-9vqvls95",
  *     type: 1,
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getLogFiles(args: GetLogFilesArgs, opts?: pulumi.InvokeOptions): Promise<GetLogFilesResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Mariadb/getLogFiles:getLogFiles", {
         "instanceId": args.instanceId,
         "resultOutputFile": args.resultOutputFile,
@@ -75,9 +75,25 @@ export interface GetLogFilesResult {
      */
     readonly vpcPrefix: string;
 }
-
+/**
+ * Use this data source to query detailed information of mariadb logFiles
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const logFiles = tencentcloud.Mariadb.getLogFiles({
+ *     instanceId: "tdsql-9vqvls95",
+ *     type: 1,
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getLogFilesOutput(args: GetLogFilesOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetLogFilesResult> {
-    return pulumi.output(args).apply(a => getLogFiles(a, opts))
+    return pulumi.output(args).apply((a: any) => getLogFiles(a, opts))
 }
 
 /**

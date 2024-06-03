@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,11 +11,12 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const shipper = new tencentcloud.Cls.CosShipper("shipper", {
+ * const shipper = new tencentcloud.cls.CosShipper("shipper", {
  *     bucket: "preset-scf-bucket-1308919341",
  *     compress: {
  *         format: "lzop",
@@ -38,13 +40,14 @@ import * as utilities from "../utilities";
  *     topicId: "4d07fba0-b93e-4e0b-9a7f-d58542560bbb",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * cls cos shipper can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Cls/cosShipper:CosShipper shipper 5d1b7b2a-c163-4c48-bb01-9ee00584d761
+ * $ pulumi import tencentcloud:Cls/cosShipper:CosShipper shipper 5d1b7b2a-c163-4c48-bb01-9ee00584d761
  * ```
  */
 export class CosShipper extends pulumi.CustomResource {

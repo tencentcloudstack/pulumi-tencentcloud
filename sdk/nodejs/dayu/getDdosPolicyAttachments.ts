@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,6 +11,7 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
@@ -26,13 +28,11 @@ import * as utilities from "../utilities";
  *     policyId: tencentcloud_dayu_ddos_policy_attachment.dayu_ddos_policy_attachment.policy_id,
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getDdosPolicyAttachments(args: GetDdosPolicyAttachmentsArgs, opts?: pulumi.InvokeOptions): Promise<GetDdosPolicyAttachmentsResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Dayu/getDdosPolicyAttachments:getDdosPolicyAttachments", {
         "policyId": args.policyId,
         "resourceId": args.resourceId,
@@ -89,9 +89,32 @@ export interface GetDdosPolicyAttachmentsResult {
     readonly resourceType: string;
     readonly resultOutputFile?: string;
 }
-
+/**
+ * Use this data source to query detailed information of dayu DDoS policy attachments
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const fooType = tencentcloud.Dayu.getDdosPolicyAttachments({
+ *     resourceType: tencentcloud_dayu_ddos_policy_attachment.dayu_ddos_policy_attachment.resource_type,
+ * });
+ * const fooResource = tencentcloud.Dayu.getDdosPolicyAttachments({
+ *     resourceId: tencentcloud_dayu_ddos_policy_attachment.dayu_ddos_policy_attachment.resource_id,
+ *     resourceType: tencentcloud_dayu_ddos_policy_attachment.dayu_ddos_policy_attachment.resource_type,
+ * });
+ * const fooPolicy = tencentcloud.Dayu.getDdosPolicyAttachments({
+ *     resourceType: tencentcloud_dayu_ddos_policy_attachment.dayu_ddos_policy_attachment.resource_type,
+ *     policyId: tencentcloud_dayu_ddos_policy_attachment.dayu_ddos_policy_attachment.policy_id,
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getDdosPolicyAttachmentsOutput(args: GetDdosPolicyAttachmentsOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetDdosPolicyAttachmentsResult> {
-    return pulumi.output(args).apply(a => getDdosPolicyAttachments(a, opts))
+    return pulumi.output(args).apply((a: any) => getDdosPolicyAttachments(a, opts))
 }
 
 /**

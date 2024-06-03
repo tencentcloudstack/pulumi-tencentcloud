@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Wedata.Inputs
 {
 
-    public sealed class FunctionResourceListGetArgs : Pulumi.ResourceArgs
+    public sealed class FunctionResourceListGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Resource ID.
@@ -46,5 +46,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Wedata.Inputs
         public FunctionResourceListGetArgs()
         {
         }
+        public static new FunctionResourceListGetArgs Empty => new FunctionResourceListGetArgs();
     }
 }

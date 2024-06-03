@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -14,26 +15,25 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const myFavorateImage = pulumi.output(tencentcloud.Image.getInstance({
+ * const myFavorateImage = tencentcloud.Image.getInstance({
  *     filters: [{
  *         name: "image-type",
  *         values: ["PUBLIC_IMAGE"],
  *     }],
  *     osName: "centos",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getInstance(args?: GetInstanceArgs, opts?: pulumi.InvokeOptions): Promise<GetInstanceResult> {
     args = args || {};
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Image/getInstance:getInstance", {
         "filters": args.filters,
         "imageNameRegex": args.imageNameRegex,
@@ -85,9 +85,32 @@ export interface GetInstanceResult {
     readonly osName?: string;
     readonly resultOutputFile?: string;
 }
-
+/**
+ * Provides an available image for the user.
+ *
+ * The Images data source fetch proper image, which could be one of the private images of the user and images of system resources provided by TencentCloud, as well as other public images and those available on the image market.
+ *
+ * > **NOTE:** This data source will be deprecated, please use `tencentcloud.Images.getInstance` instead.
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const myFavorateImage = tencentcloud.Image.getInstance({
+ *     filters: [{
+ *         name: "image-type",
+ *         values: ["PUBLIC_IMAGE"],
+ *     }],
+ *     osName: "centos",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getInstanceOutput(args?: GetInstanceOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetInstanceResult> {
-    return pulumi.output(args).apply(a => getInstance(a, opts))
+    return pulumi.output(args).apply((a: any) => getInstance(a, opts))
 }
 
 /**

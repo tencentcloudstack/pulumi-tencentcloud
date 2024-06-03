@@ -7,42 +7,48 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a cam rolePermissionBoundaryAttachment
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cam"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cam"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Cam.NewRolePermissionBoundaryAttachment(ctx, "rolePermissionBoundaryAttachment", &Cam.RolePermissionBoundaryAttachmentArgs{
-// 			PolicyId: pulumi.Int(1),
-// 			RoleName: pulumi.String("test-cam-tag"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Cam.NewRolePermissionBoundaryAttachment(ctx, "rolePermissionBoundaryAttachment", &Cam.RolePermissionBoundaryAttachmentArgs{
+//				PolicyId: pulumi.Int(1),
+//				RoleName: pulumi.String("test-cam-tag"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // cam role_permission_boundary_attachment can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Cam/rolePermissionBoundaryAttachment:RolePermissionBoundaryAttachment role_permission_boundary_attachment role_permission_boundary_attachment_id
+// $ pulumi import tencentcloud:Cam/rolePermissionBoundaryAttachment:RolePermissionBoundaryAttachment role_permission_boundary_attachment role_permission_boundary_attachment_id
 // ```
 type RolePermissionBoundaryAttachment struct {
 	pulumi.CustomResourceState
@@ -65,7 +71,7 @@ func NewRolePermissionBoundaryAttachment(ctx *pulumi.Context,
 	if args.PolicyId == nil {
 		return nil, errors.New("invalid value for required argument 'PolicyId'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource RolePermissionBoundaryAttachment
 	err := ctx.RegisterResource("tencentcloud:Cam/rolePermissionBoundaryAttachment:RolePermissionBoundaryAttachment", name, args, &resource, opts...)
 	if err != nil {
@@ -154,7 +160,7 @@ func (i *RolePermissionBoundaryAttachment) ToRolePermissionBoundaryAttachmentOut
 // RolePermissionBoundaryAttachmentArrayInput is an input type that accepts RolePermissionBoundaryAttachmentArray and RolePermissionBoundaryAttachmentArrayOutput values.
 // You can construct a concrete instance of `RolePermissionBoundaryAttachmentArrayInput` via:
 //
-//          RolePermissionBoundaryAttachmentArray{ RolePermissionBoundaryAttachmentArgs{...} }
+//	RolePermissionBoundaryAttachmentArray{ RolePermissionBoundaryAttachmentArgs{...} }
 type RolePermissionBoundaryAttachmentArrayInput interface {
 	pulumi.Input
 
@@ -179,7 +185,7 @@ func (i RolePermissionBoundaryAttachmentArray) ToRolePermissionBoundaryAttachmen
 // RolePermissionBoundaryAttachmentMapInput is an input type that accepts RolePermissionBoundaryAttachmentMap and RolePermissionBoundaryAttachmentMapOutput values.
 // You can construct a concrete instance of `RolePermissionBoundaryAttachmentMapInput` via:
 //
-//          RolePermissionBoundaryAttachmentMap{ "key": RolePermissionBoundaryAttachmentArgs{...} }
+//	RolePermissionBoundaryAttachmentMap{ "key": RolePermissionBoundaryAttachmentArgs{...} }
 type RolePermissionBoundaryAttachmentMapInput interface {
 	pulumi.Input
 

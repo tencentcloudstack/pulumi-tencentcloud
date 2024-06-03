@@ -7,34 +7,40 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a dcdb activateHourInstanceOperation
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dcdb"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dcdb"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Dcdb.NewActivateHourInstanceOperation(ctx, "activateHourInstanceOperation", &Dcdb.ActivateHourInstanceOperationArgs{
-// 			InstanceId: pulumi.Any(local.Dcdb_id),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Dcdb.NewActivateHourInstanceOperation(ctx, "activateHourInstanceOperation", &Dcdb.ActivateHourInstanceOperationArgs{
+//				InstanceId: pulumi.Any(local.Dcdb_id),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 type ActivateHourInstanceOperation struct {
 	pulumi.CustomResourceState
 
@@ -52,7 +58,7 @@ func NewActivateHourInstanceOperation(ctx *pulumi.Context,
 	if args.InstanceId == nil {
 		return nil, errors.New("invalid value for required argument 'InstanceId'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource ActivateHourInstanceOperation
 	err := ctx.RegisterResource("tencentcloud:Dcdb/activateHourInstanceOperation:ActivateHourInstanceOperation", name, args, &resource, opts...)
 	if err != nil {
@@ -125,7 +131,7 @@ func (i *ActivateHourInstanceOperation) ToActivateHourInstanceOperationOutputWit
 // ActivateHourInstanceOperationArrayInput is an input type that accepts ActivateHourInstanceOperationArray and ActivateHourInstanceOperationArrayOutput values.
 // You can construct a concrete instance of `ActivateHourInstanceOperationArrayInput` via:
 //
-//          ActivateHourInstanceOperationArray{ ActivateHourInstanceOperationArgs{...} }
+//	ActivateHourInstanceOperationArray{ ActivateHourInstanceOperationArgs{...} }
 type ActivateHourInstanceOperationArrayInput interface {
 	pulumi.Input
 
@@ -150,7 +156,7 @@ func (i ActivateHourInstanceOperationArray) ToActivateHourInstanceOperationArray
 // ActivateHourInstanceOperationMapInput is an input type that accepts ActivateHourInstanceOperationMap and ActivateHourInstanceOperationMapOutput values.
 // You can construct a concrete instance of `ActivateHourInstanceOperationMapInput` via:
 //
-//          ActivateHourInstanceOperationMap{ "key": ActivateHourInstanceOperationArgs{...} }
+//	ActivateHourInstanceOperationMap{ "key": ActivateHourInstanceOperationArgs{...} }
 type ActivateHourInstanceOperationMapInput interface {
 	pulumi.Input
 

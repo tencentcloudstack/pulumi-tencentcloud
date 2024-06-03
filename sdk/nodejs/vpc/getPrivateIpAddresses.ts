@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,22 +11,21 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const privateIpAddresses = pulumi.output(tencentcloud.Vpc.getPrivateIpAddresses({
+ * const privateIpAddresses = tencentcloud.Vpc.getPrivateIpAddresses({
  *     privateIpAddresses: ["10.0.0.1"],
  *     vpcId: "vpc-l0dw94uh",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getPrivateIpAddresses(args: GetPrivateIpAddressesArgs, opts?: pulumi.InvokeOptions): Promise<GetPrivateIpAddressesResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Vpc/getPrivateIpAddresses:getPrivateIpAddresses", {
         "privateIpAddresses": args.privateIpAddresses,
         "resultOutputFile": args.resultOutputFile,
@@ -67,9 +67,25 @@ export interface GetPrivateIpAddressesResult {
      */
     readonly vpcPrivateIpAddressSets: outputs.Vpc.GetPrivateIpAddressesVpcPrivateIpAddressSet[];
 }
-
+/**
+ * Use this data source to query detailed information of vpc privateIpAddresses
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const privateIpAddresses = tencentcloud.Vpc.getPrivateIpAddresses({
+ *     privateIpAddresses: ["10.0.0.1"],
+ *     vpcId: "vpc-l0dw94uh",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getPrivateIpAddressesOutput(args: GetPrivateIpAddressesOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetPrivateIpAddressesResult> {
-    return pulumi.output(args).apply(a => getPrivateIpAddresses(a, opts))
+    return pulumi.output(args).apply((a: any) => getPrivateIpAddresses(a, opts))
 }
 
 /**

@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,21 +11,20 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const test = pulumi.output(tencentcloud.Dayu.getEip({
+ * const test = tencentcloud.Dayu.getEip({
  *     resourceId: "bgpip-000004xg",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getEip(args: GetEipArgs, opts?: pulumi.InvokeOptions): Promise<GetEipResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Dayu/getEip:getEip", {
         "bindStatuses": args.bindStatuses,
         "limit": args.limit,
@@ -78,9 +78,24 @@ export interface GetEipResult {
     readonly resourceId: string;
     readonly resultOutputFile?: string;
 }
-
+/**
+ * Use this data source to query dayu eip rules
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const test = tencentcloud.Dayu.getEip({
+ *     resourceId: "bgpip-000004xg",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getEipOutput(args: GetEipOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetEipResult> {
-    return pulumi.output(args).apply(a => getEip(a, opts))
+    return pulumi.output(args).apply((a: any) => getEip(a, opts))
 }
 
 /**

@@ -7,100 +7,105 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a cls dataTransform
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Cls"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cls"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cls"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		logsetSrc, err := Cls.NewLogset(ctx, "logsetSrc", &Cls.LogsetArgs{
-// 			LogsetName: pulumi.String("tf-example-src"),
-// 			Tags: pulumi.AnyMap{
-// 				"createdBy": pulumi.Any("terraform"),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		topicSrc, err := Cls.NewTopic(ctx, "topicSrc", &Cls.TopicArgs{
-// 			TopicName:          pulumi.String("tf-example_src"),
-// 			LogsetId:           logsetSrc.ID(),
-// 			AutoSplit:          pulumi.Bool(false),
-// 			MaxSplitPartitions: pulumi.Int(20),
-// 			PartitionCount:     pulumi.Int(1),
-// 			Period:             pulumi.Int(10),
-// 			StorageType:        pulumi.String("hot"),
-// 			Tags: pulumi.AnyMap{
-// 				"test": pulumi.Any("test"),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		logsetDst, err := Cls.NewLogset(ctx, "logsetDst", &Cls.LogsetArgs{
-// 			LogsetName: pulumi.String("tf-example-dst"),
-// 			Tags: pulumi.AnyMap{
-// 				"createdBy": pulumi.Any("terraform"),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		topicDst, err := Cls.NewTopic(ctx, "topicDst", &Cls.TopicArgs{
-// 			TopicName:          pulumi.String("tf-example-dst"),
-// 			LogsetId:           logsetDst.ID(),
-// 			AutoSplit:          pulumi.Bool(false),
-// 			MaxSplitPartitions: pulumi.Int(20),
-// 			PartitionCount:     pulumi.Int(1),
-// 			Period:             pulumi.Int(10),
-// 			StorageType:        pulumi.String("hot"),
-// 			Tags: pulumi.AnyMap{
-// 				"test": pulumi.Any("test"),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_, err = Cls.NewDataTransform(ctx, "dataTransform", &Cls.DataTransformArgs{
-// 			FuncType:   pulumi.Int(1),
-// 			SrcTopicId: topicSrc.ID(),
-// 			EtlContent: pulumi.String("ext_sep(\"content\", \"f1, f2, f3\", sep=\",\", quote=\"\", restrict=False, mode=\"overwrite\")fields_drop(\"content\")"),
-// 			TaskType:   pulumi.Int(3),
-// 			EnableFlag: pulumi.Int(1),
-// 			DstResources: cls.DataTransformDstResourceArray{
-// 				&cls.DataTransformDstResourceArgs{
-// 					TopicId: topicDst.ID(),
-// 					Alias:   pulumi.String("iac-test-dst"),
-// 				},
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			logsetSrc, err := Cls.NewLogset(ctx, "logsetSrc", &Cls.LogsetArgs{
+//				LogsetName: pulumi.String("tf-example-src"),
+//				Tags: pulumi.Map{
+//					"createdBy": pulumi.Any("terraform"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			topicSrc, err := Cls.NewTopic(ctx, "topicSrc", &Cls.TopicArgs{
+//				TopicName:          pulumi.String("tf-example_src"),
+//				LogsetId:           logsetSrc.ID(),
+//				AutoSplit:          pulumi.Bool(false),
+//				MaxSplitPartitions: pulumi.Int(20),
+//				PartitionCount:     pulumi.Int(1),
+//				Period:             pulumi.Int(10),
+//				StorageType:        pulumi.String("hot"),
+//				Tags: pulumi.Map{
+//					"test": pulumi.Any("test"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			logsetDst, err := Cls.NewLogset(ctx, "logsetDst", &Cls.LogsetArgs{
+//				LogsetName: pulumi.String("tf-example-dst"),
+//				Tags: pulumi.Map{
+//					"createdBy": pulumi.Any("terraform"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			topicDst, err := Cls.NewTopic(ctx, "topicDst", &Cls.TopicArgs{
+//				TopicName:          pulumi.String("tf-example-dst"),
+//				LogsetId:           logsetDst.ID(),
+//				AutoSplit:          pulumi.Bool(false),
+//				MaxSplitPartitions: pulumi.Int(20),
+//				PartitionCount:     pulumi.Int(1),
+//				Period:             pulumi.Int(10),
+//				StorageType:        pulumi.String("hot"),
+//				Tags: pulumi.Map{
+//					"test": pulumi.Any("test"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_, err = Cls.NewDataTransform(ctx, "dataTransform", &Cls.DataTransformArgs{
+//				FuncType:   pulumi.Int(1),
+//				SrcTopicId: topicSrc.ID(),
+//				EtlContent: pulumi.String("ext_sep(\"content\", \"f1, f2, f3\", sep=\",\", quote=\"\", restrict=False, mode=\"overwrite\")fields_drop(\"content\")"),
+//				TaskType:   pulumi.Int(3),
+//				EnableFlag: pulumi.Int(1),
+//				DstResources: cls.DataTransformDstResourceArray{
+//					&cls.DataTransformDstResourceArgs{
+//						TopicId: topicDst.ID(),
+//						Alias:   pulumi.String("iac-test-dst"),
+//					},
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // cls data_transform can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Cls/dataTransform:DataTransform data_transform data_transform_id
+// $ pulumi import tencentcloud:Cls/dataTransform:DataTransform data_transform data_transform_id
 // ```
 type DataTransform struct {
 	pulumi.CustomResourceState
@@ -140,7 +145,7 @@ func NewDataTransform(ctx *pulumi.Context,
 	if args.TaskType == nil {
 		return nil, errors.New("invalid value for required argument 'TaskType'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource DataTransform
 	err := ctx.RegisterResource("tencentcloud:Cls/dataTransform:DataTransform", name, args, &resource, opts...)
 	if err != nil {
@@ -261,7 +266,7 @@ func (i *DataTransform) ToDataTransformOutputWithContext(ctx context.Context) Da
 // DataTransformArrayInput is an input type that accepts DataTransformArray and DataTransformArrayOutput values.
 // You can construct a concrete instance of `DataTransformArrayInput` via:
 //
-//          DataTransformArray{ DataTransformArgs{...} }
+//	DataTransformArray{ DataTransformArgs{...} }
 type DataTransformArrayInput interface {
 	pulumi.Input
 
@@ -286,7 +291,7 @@ func (i DataTransformArray) ToDataTransformArrayOutputWithContext(ctx context.Co
 // DataTransformMapInput is an input type that accepts DataTransformMap and DataTransformMapOutput values.
 // You can construct a concrete instance of `DataTransformMapInput` via:
 //
-//          DataTransformMap{ "key": DataTransformArgs{...} }
+//	DataTransformMap{ "key": DataTransformArgs{...} }
 type DataTransformMapInput interface {
 	pulumi.Input
 

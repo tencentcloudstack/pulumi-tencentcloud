@@ -9,21 +9,21 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const topic = new tencentcloud.Tcmq.Topic("topic", {
- *     topicName: "topic_name",
- * });
+ * const topic = new tencentcloud.tcmq.Topic("topic", {topicName: "topic_name"});
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * tcmq topic can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Tcmq/topic:Topic topic topic_id
+ * $ pulumi import tencentcloud:Tcmq/topic:Topic topic topic_id
  * ```
  */
 export class Topic extends pulumi.CustomResource {

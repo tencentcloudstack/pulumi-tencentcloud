@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
 {
     [TencentcloudResourceType("tencentcloud:Cynosdb/resourcePackage:ResourcePackage")]
-    public partial class ResourcePackage : Pulumi.CustomResource
+    public partial class ResourcePackage : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Validity period of resource package, in days.
@@ -107,7 +107,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
         }
     }
 
-    public sealed class ResourcePackageArgs : Pulumi.ResourceArgs
+    public sealed class ResourcePackageArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Validity period of resource package, in days.
@@ -161,9 +161,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
         public ResourcePackageArgs()
         {
         }
+        public static new ResourcePackageArgs Empty => new ResourcePackageArgs();
     }
 
-    public sealed class ResourcePackageState : Pulumi.ResourceArgs
+    public sealed class ResourcePackageState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Validity period of resource package, in days.
@@ -217,5 +218,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
         public ResourcePackageState()
         {
         }
+        public static new ResourcePackageState Empty => new ResourcePackageState();
     }
 }

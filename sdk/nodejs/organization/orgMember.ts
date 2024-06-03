@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,11 +11,12 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const orgMember = new tencentcloud.Organization.OrgMember("org_member", {
+ * const orgMember = new tencentcloud.organization.OrgMember("orgMember", {
  *     nodeId: 2003721,
  *     permissionIds: [
  *         1,
@@ -26,13 +28,14 @@ import * as utilities from "../utilities";
  *     remark: "for terraform test",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * organization org_member can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Organization/orgMember:OrgMember org_member orgMember_id
+ * $ pulumi import tencentcloud:Organization/orgMember:OrgMember org_member orgMember_id
  * ```
  */
 export class OrgMember extends pulumi.CustomResource {

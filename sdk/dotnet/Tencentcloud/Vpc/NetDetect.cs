@@ -20,11 +20,11 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
     /// vpc net_detect can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Vpc/netDetect:NetDetect net_detect net_detect_id
+    /// $ pulumi import tencentcloud:Vpc/netDetect:NetDetect net_detect net_detect_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Vpc/netDetect:NetDetect")]
-    public partial class NetDetect : Pulumi.CustomResource
+    public partial class NetDetect : global::Pulumi.CustomResource
     {
         /// <summary>
         /// An array of probe destination IPv4 addresses. Up to two.
@@ -113,7 +113,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         }
     }
 
-    public sealed class NetDetectArgs : Pulumi.ResourceArgs
+    public sealed class NetDetectArgs : global::Pulumi.ResourceArgs
     {
         [Input("detectDestinationIps", required: true)]
         private InputList<string>? _detectDestinationIps;
@@ -166,9 +166,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         public NetDetectArgs()
         {
         }
+        public static new NetDetectArgs Empty => new NetDetectArgs();
     }
 
-    public sealed class NetDetectState : Pulumi.ResourceArgs
+    public sealed class NetDetectState : global::Pulumi.ResourceArgs
     {
         [Input("detectDestinationIps")]
         private InputList<string>? _detectDestinationIps;
@@ -221,5 +222,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         public NetDetectState()
         {
         }
+        public static new NetDetectState Empty => new NetDetectState();
     }
 }

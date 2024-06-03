@@ -15,140 +15,146 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tse
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var config = new Config();
+    ///     var availabilityZone = config.Get("availabilityZone") ?? "ap-guangzhou-4";
+    ///     var vpc = new Tencentcloud.Vpc.Instance("vpc", new()
     ///     {
-    ///         var config = new Config();
-    ///         var availabilityZone = config.Get("availabilityZone") ?? "ap-guangzhou-4";
-    ///         var vpc = new Tencentcloud.Vpc.Instance("vpc", new Tencentcloud.Vpc.InstanceArgs
-    ///         {
-    ///             CidrBlock = "10.0.0.0/16",
-    ///         });
-    ///         var subnet = new Tencentcloud.Subnet.Instance("subnet", new Tencentcloud.Subnet.InstanceArgs
-    ///         {
-    ///             VpcId = vpc.Id,
-    ///             AvailabilityZone = availabilityZone,
-    ///             CidrBlock = "10.0.1.0/24",
-    ///         });
-    ///         var cngwGateway = new Tencentcloud.Tse.CngwGateway("cngwGateway", new Tencentcloud.Tse.CngwGatewayArgs
-    ///         {
-    ///             Description = "terraform test1",
-    ///             EnableCls = true,
-    ///             EngineRegion = "ap-guangzhou",
-    ///             FeatureVersion = "STANDARD",
-    ///             GatewayVersion = "2.5.1",
-    ///             IngressClassName = "tse-nginx-ingress",
-    ///             InternetMaxBandwidthOut = 0,
-    ///             TradeType = 0,
-    ///             Type = "kong",
-    ///             NodeConfig = new Tencentcloud.Tse.Inputs.CngwGatewayNodeConfigArgs
-    ///             {
-    ///                 Number = 2,
-    ///                 Specification = "1c2g",
-    ///             },
-    ///             VpcConfig = new Tencentcloud.Tse.Inputs.CngwGatewayVpcConfigArgs
-    ///             {
-    ///                 SubnetId = subnet.Id,
-    ///                 VpcId = vpc.Id,
-    ///             },
-    ///             Tags = 
-    ///             {
-    ///                 { "createdBy", "terraform" },
-    ///             },
-    ///         });
-    ///         var cngwService = new Tencentcloud.Tse.CngwService("cngwService", new Tencentcloud.Tse.CngwServiceArgs
-    ///         {
-    ///             GatewayId = cngwGateway.Id,
-    ///             Path = "/test",
-    ///             Protocol = "http",
-    ///             Retries = 5,
-    ///             Timeout = 60000,
-    ///             UpstreamType = "HostIP",
-    ///             UpstreamInfo = new Tencentcloud.Tse.Inputs.CngwServiceUpstreamInfoArgs
-    ///             {
-    ///                 Algorithm = "round-robin",
-    ///                 AutoScalingCvmPort = 0,
-    ///                 Host = "arunma.cn",
-    ///                 Port = 8012,
-    ///                 SlowStart = 0,
-    ///             },
-    ///         });
-    ///         var cngwRoute = new Tencentcloud.Tse.CngwRoute("cngwRoute", new Tencentcloud.Tse.CngwRouteArgs
-    ///         {
-    ///             DestinationPorts = {},
-    ///             ForceHttps = false,
-    ///             GatewayId = cngwGateway.Id,
-    ///             Hosts = 
-    ///             {
-    ///                 "192.168.0.1:9090",
-    ///             },
-    ///             HttpsRedirectStatusCode = 426,
-    ///             Paths = 
-    ///             {
-    ///                 "/user",
-    ///             },
-    ///             Headers = 
-    ///             {
-    ///                 new Tencentcloud.Tse.Inputs.CngwRouteHeaderArgs
-    ///                 {
-    ///                     Key = "req",
-    ///                     Value = "terraform",
-    ///                 },
-    ///             },
-    ///             PreserveHost = false,
-    ///             Protocols = 
-    ///             {
-    ///                 "http",
-    ///                 "https",
-    ///             },
-    ///             RouteName = "terraform-route",
-    ///             ServiceId = cngwService.ServiceId,
-    ///             StripPath = true,
-    ///         });
-    ///         var cngwRouteRateLimit = new Tencentcloud.Tse.CngwRouteRateLimit("cngwRouteRateLimit", new Tencentcloud.Tse.CngwRouteRateLimitArgs
-    ///         {
-    ///             GatewayId = cngwGateway.Id,
-    ///             RouteId = cngwRoute.RouteId,
-    ///             LimitDetail = new Tencentcloud.Tse.Inputs.CngwRouteRateLimitLimitDetailArgs
-    ///             {
-    ///                 Enabled = true,
-    ///                 Header = "req",
-    ///                 HideClientHeaders = true,
-    ///                 IsDelay = true,
-    ///                 LimitBy = "header",
-    ///                 LineUpTime = 10,
-    ///                 Policy = "redis",
-    ///                 ResponseType = "default",
-    ///                 QpsThresholds = 
-    ///                 {
-    ///                     new Tencentcloud.Tse.Inputs.CngwRouteRateLimitLimitDetailQpsThresholdArgs
-    ///                     {
-    ///                         Max = 10,
-    ///                         Unit = "minute",
-    ///                     },
-    ///                 },
-    ///             },
-    ///         });
-    ///     }
+    ///         CidrBlock = "10.0.0.0/16",
+    ///     });
     /// 
-    /// }
+    ///     var subnet = new Tencentcloud.Subnet.Instance("subnet", new()
+    ///     {
+    ///         VpcId = vpc.Id,
+    ///         AvailabilityZone = availabilityZone,
+    ///         CidrBlock = "10.0.1.0/24",
+    ///     });
+    /// 
+    ///     var cngwGateway = new Tencentcloud.Tse.CngwGateway("cngwGateway", new()
+    ///     {
+    ///         Description = "terraform test1",
+    ///         EnableCls = true,
+    ///         EngineRegion = "ap-guangzhou",
+    ///         FeatureVersion = "STANDARD",
+    ///         GatewayVersion = "2.5.1",
+    ///         IngressClassName = "tse-nginx-ingress",
+    ///         InternetMaxBandwidthOut = 0,
+    ///         TradeType = 0,
+    ///         Type = "kong",
+    ///         NodeConfig = new Tencentcloud.Tse.Inputs.CngwGatewayNodeConfigArgs
+    ///         {
+    ///             Number = 2,
+    ///             Specification = "1c2g",
+    ///         },
+    ///         VpcConfig = new Tencentcloud.Tse.Inputs.CngwGatewayVpcConfigArgs
+    ///         {
+    ///             SubnetId = subnet.Id,
+    ///             VpcId = vpc.Id,
+    ///         },
+    ///         Tags = 
+    ///         {
+    ///             { "createdBy", "terraform" },
+    ///         },
+    ///     });
+    /// 
+    ///     var cngwService = new Tencentcloud.Tse.CngwService("cngwService", new()
+    ///     {
+    ///         GatewayId = cngwGateway.Id,
+    ///         Path = "/test",
+    ///         Protocol = "http",
+    ///         Retries = 5,
+    ///         Timeout = 60000,
+    ///         UpstreamType = "HostIP",
+    ///         UpstreamInfo = new Tencentcloud.Tse.Inputs.CngwServiceUpstreamInfoArgs
+    ///         {
+    ///             Algorithm = "round-robin",
+    ///             AutoScalingCvmPort = 0,
+    ///             Host = "arunma.cn",
+    ///             Port = 8012,
+    ///             SlowStart = 0,
+    ///         },
+    ///     });
+    /// 
+    ///     var cngwRoute = new Tencentcloud.Tse.CngwRoute("cngwRoute", new()
+    ///     {
+    ///         DestinationPorts = new[] {},
+    ///         ForceHttps = false,
+    ///         GatewayId = cngwGateway.Id,
+    ///         Hosts = new[]
+    ///         {
+    ///             "192.168.0.1:9090",
+    ///         },
+    ///         HttpsRedirectStatusCode = 426,
+    ///         Paths = new[]
+    ///         {
+    ///             "/user",
+    ///         },
+    ///         Headers = new[]
+    ///         {
+    ///             new Tencentcloud.Tse.Inputs.CngwRouteHeaderArgs
+    ///             {
+    ///                 Key = "req",
+    ///                 Value = "terraform",
+    ///             },
+    ///         },
+    ///         PreserveHost = false,
+    ///         Protocols = new[]
+    ///         {
+    ///             "http",
+    ///             "https",
+    ///         },
+    ///         RouteName = "terraform-route",
+    ///         ServiceId = cngwService.ServiceId,
+    ///         StripPath = true,
+    ///     });
+    /// 
+    ///     var cngwRouteRateLimit = new Tencentcloud.Tse.CngwRouteRateLimit("cngwRouteRateLimit", new()
+    ///     {
+    ///         GatewayId = cngwGateway.Id,
+    ///         RouteId = cngwRoute.RouteId,
+    ///         LimitDetail = new Tencentcloud.Tse.Inputs.CngwRouteRateLimitLimitDetailArgs
+    ///         {
+    ///             Enabled = true,
+    ///             Header = "req",
+    ///             HideClientHeaders = true,
+    ///             IsDelay = true,
+    ///             LimitBy = "header",
+    ///             LineUpTime = 10,
+    ///             Policy = "redis",
+    ///             ResponseType = "default",
+    ///             QpsThresholds = new[]
+    ///             {
+    ///                 new Tencentcloud.Tse.Inputs.CngwRouteRateLimitLimitDetailQpsThresholdArgs
+    ///                 {
+    ///                     Max = 10,
+    ///                     Unit = "minute",
+    ///                 },
+    ///             },
+    ///         },
+    ///     });
+    /// 
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// tse cngw_route_rate_limit can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Tse/cngwRouteRateLimit:CngwRouteRateLimit cngw_route_rate_limit gatewayId#routeId
+    /// $ pulumi import tencentcloud:Tse/cngwRouteRateLimit:CngwRouteRateLimit cngw_route_rate_limit gatewayId#routeId
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Tse/cngwRouteRateLimit:CngwRouteRateLimit")]
-    public partial class CngwRouteRateLimit : Pulumi.CustomResource
+    public partial class CngwRouteRateLimit : global::Pulumi.CustomResource
     {
         /// <summary>
         /// gateway ID.
@@ -213,7 +219,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tse
         }
     }
 
-    public sealed class CngwRouteRateLimitArgs : Pulumi.ResourceArgs
+    public sealed class CngwRouteRateLimitArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// gateway ID.
@@ -236,9 +242,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tse
         public CngwRouteRateLimitArgs()
         {
         }
+        public static new CngwRouteRateLimitArgs Empty => new CngwRouteRateLimitArgs();
     }
 
-    public sealed class CngwRouteRateLimitState : Pulumi.ResourceArgs
+    public sealed class CngwRouteRateLimitState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// gateway ID.
@@ -261,5 +268,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tse
         public CngwRouteRateLimitState()
         {
         }
+        public static new CngwRouteRateLimitState Empty => new CngwRouteRateLimitState();
     }
 }

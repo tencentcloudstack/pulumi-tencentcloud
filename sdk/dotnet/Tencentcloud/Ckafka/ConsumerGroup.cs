@@ -15,38 +15,39 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var consumerGroup = new Tencentcloud.Ckafka.ConsumerGroup("consumerGroup", new()
     ///     {
-    ///         var consumerGroup = new Tencentcloud.Ckafka.ConsumerGroup("consumerGroup", new Tencentcloud.Ckafka.ConsumerGroupArgs
+    ///         GroupName = "GroupName",
+    ///         InstanceId = "InstanceId",
+    ///         TopicNameLists = new[]
     ///         {
-    ///             GroupName = "GroupName",
-    ///             InstanceId = "InstanceId",
-    ///             TopicNameLists = 
-    ///             {
-    ///                 "xxxxxx",
-    ///             },
-    ///         });
-    ///     }
+    ///             "xxxxxx",
+    ///         },
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// ckafka consumer_group can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Ckafka/consumerGroup:ConsumerGroup consumer_group consumer_group_id
+    /// $ pulumi import tencentcloud:Ckafka/consumerGroup:ConsumerGroup consumer_group consumer_group_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Ckafka/consumerGroup:ConsumerGroup")]
-    public partial class ConsumerGroup : Pulumi.CustomResource
+    public partial class ConsumerGroup : global::Pulumi.CustomResource
     {
         /// <summary>
         /// GroupName.
@@ -111,7 +112,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka
         }
     }
 
-    public sealed class ConsumerGroupArgs : Pulumi.ResourceArgs
+    public sealed class ConsumerGroupArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// GroupName.
@@ -140,9 +141,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka
         public ConsumerGroupArgs()
         {
         }
+        public static new ConsumerGroupArgs Empty => new ConsumerGroupArgs();
     }
 
-    public sealed class ConsumerGroupState : Pulumi.ResourceArgs
+    public sealed class ConsumerGroupState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// GroupName.
@@ -171,5 +173,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka
         public ConsumerGroupState()
         {
         }
+        public static new ConsumerGroupState Empty => new ConsumerGroupState();
     }
 }

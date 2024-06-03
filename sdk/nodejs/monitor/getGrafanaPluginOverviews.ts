@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,20 +11,19 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const grafanaPluginOverviews = pulumi.output(tencentcloud.Monitor.getGrafanaPluginOverviews());
+ * const grafanaPluginOverviews = tencentcloud.Monitor.getGrafanaPluginOverviews({});
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getGrafanaPluginOverviews(args?: GetGrafanaPluginOverviewsArgs, opts?: pulumi.InvokeOptions): Promise<GetGrafanaPluginOverviewsResult> {
     args = args || {};
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Monitor/getGrafanaPluginOverviews:getGrafanaPluginOverviews", {
         "resultOutputFile": args.resultOutputFile,
     }, opts);
@@ -53,9 +53,22 @@ export interface GetGrafanaPluginOverviewsResult {
     readonly pluginSets: outputs.Monitor.GetGrafanaPluginOverviewsPluginSet[];
     readonly resultOutputFile?: string;
 }
-
+/**
+ * Use this data source to query detailed information of monitor grafanaPluginOverviews
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const grafanaPluginOverviews = tencentcloud.Monitor.getGrafanaPluginOverviews({});
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getGrafanaPluginOverviewsOutput(args?: GetGrafanaPluginOverviewsOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetGrafanaPluginOverviewsResult> {
-    return pulumi.output(args).apply(a => getGrafanaPluginOverviews(a, opts))
+    return pulumi.output(args).apply((a: any) => getGrafanaPluginOverviews(a, opts))
 }
 
 /**

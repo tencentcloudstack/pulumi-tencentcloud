@@ -9,22 +9,24 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const diskAttachment = new tencentcloud.Lighthouse.DiskAttachment("disk_attachment", {
+ * const diskAttachment = new tencentcloud.lighthouse.DiskAttachment("diskAttachment", {
  *     diskId: "lhdisk-xxxxxx",
  *     instanceId: "lhins-xxxxxx",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * lighthouse disk_attachment can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Lighthouse/diskAttachment:DiskAttachment disk_attachment disk_attachment_id
+ * $ pulumi import tencentcloud:Lighthouse/diskAttachment:DiskAttachment disk_attachment disk_attachment_id
  * ```
  */
 export class DiskAttachment extends pulumi.CustomResource {

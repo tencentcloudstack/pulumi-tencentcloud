@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,6 +11,7 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
@@ -47,13 +49,11 @@ import * as utilities from "../utilities";
  *     amountUnit: "pent",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getUpgradePrice(args: GetUpgradePriceArgs, opts?: pulumi.InvokeOptions): Promise<GetUpgradePriceResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Dcdb/getUpgradePrice:getUpgradePrice", {
         "addShardConfig": args.addShardConfig,
         "amountUnit": args.amountUnit,
@@ -127,9 +127,53 @@ export interface GetUpgradePriceResult {
     readonly splitShardConfig?: outputs.Dcdb.GetUpgradePriceSplitShardConfig;
     readonly upgradeType: string;
 }
-
+/**
+ * Use this data source to query detailed information of dcdb upgradePrice
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const addUpgradePrice = tencentcloud.Dcdb.getUpgradePrice({
+ *     instanceId: local.dcdb_id,
+ *     upgradeType: "ADD",
+ *     addShardConfig: {
+ *         shardCount: 2,
+ *         shardMemory: 2,
+ *         shardStorage: 100,
+ *     },
+ *     amountUnit: "pent",
+ * });
+ * const expandUpgradePrice = tencentcloud.Dcdb.getUpgradePrice({
+ *     instanceId: local.dcdb_id,
+ *     upgradeType: "EXPAND",
+ *     expandShardConfig: {
+ *         shardInstanceIds: ["shard-1b5r04az"],
+ *         shardMemory: 2,
+ *         shardStorage: 40,
+ *         shardNodeCount: 2,
+ *     },
+ *     amountUnit: "pent",
+ * });
+ * const splitUpgradePrice = tencentcloud.Dcdb.getUpgradePrice({
+ *     instanceId: local.dcdb_id,
+ *     upgradeType: "SPLIT",
+ *     splitShardConfig: {
+ *         shardInstanceIds: ["shard-1b5r04az"],
+ *         splitRate: 50,
+ *         shardMemory: 2,
+ *         shardStorage: 100,
+ *     },
+ *     amountUnit: "pent",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getUpgradePriceOutput(args: GetUpgradePriceOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetUpgradePriceResult> {
-    return pulumi.output(args).apply(a => getUpgradePrice(a, opts))
+    return pulumi.output(args).apply((a: any) => getUpgradePrice(a, opts))
 }
 
 /**

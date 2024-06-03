@@ -15,72 +15,66 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Organization
         /// <summary>
         /// Use this data source to query detailed information of organization org_financial_by_month
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var orgFinancialByMonth = Tencentcloud.Organization.GetOrgFinancialByMonth.Invoke(new()
         ///     {
-        ///         var orgFinancialByMonth = Output.Create(Tencentcloud.Organization.GetOrgFinancialByMonth.InvokeAsync(new Tencentcloud.Organization.GetOrgFinancialByMonthArgs
+        ///         EndMonth = "2023-05",
+        ///         MemberUins = new[]
         ///         {
-        ///             EndMonth = "2023-05",
-        ///             MemberUins = 
-        ///             {
-        ///                 100026517717,
-        ///             },
-        ///         }));
-        ///     }
+        ///             100026517717,
+        ///         },
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetOrgFinancialByMonthResult> InvokeAsync(GetOrgFinancialByMonthArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetOrgFinancialByMonthResult>("tencentcloud:Organization/getOrgFinancialByMonth:getOrgFinancialByMonth", args ?? new GetOrgFinancialByMonthArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetOrgFinancialByMonthResult>("tencentcloud:Organization/getOrgFinancialByMonth:getOrgFinancialByMonth", args ?? new GetOrgFinancialByMonthArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of organization org_financial_by_month
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var orgFinancialByMonth = Tencentcloud.Organization.GetOrgFinancialByMonth.Invoke(new()
         ///     {
-        ///         var orgFinancialByMonth = Output.Create(Tencentcloud.Organization.GetOrgFinancialByMonth.InvokeAsync(new Tencentcloud.Organization.GetOrgFinancialByMonthArgs
+        ///         EndMonth = "2023-05",
+        ///         MemberUins = new[]
         ///         {
-        ///             EndMonth = "2023-05",
-        ///             MemberUins = 
-        ///             {
-        ///                 100026517717,
-        ///             },
-        ///         }));
-        ///     }
+        ///             100026517717,
+        ///         },
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetOrgFinancialByMonthResult> Invoke(GetOrgFinancialByMonthInvokeArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetOrgFinancialByMonthResult>("tencentcloud:Organization/getOrgFinancialByMonth:getOrgFinancialByMonth", args ?? new GetOrgFinancialByMonthInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetOrgFinancialByMonthResult>("tencentcloud:Organization/getOrgFinancialByMonth:getOrgFinancialByMonth", args ?? new GetOrgFinancialByMonthInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetOrgFinancialByMonthArgs : Pulumi.InvokeArgs
+    public sealed class GetOrgFinancialByMonthArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Query for the end month. Format:yyyy-mm, for example:2021-01.
@@ -121,9 +115,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Organization
         public GetOrgFinancialByMonthArgs()
         {
         }
+        public static new GetOrgFinancialByMonthArgs Empty => new GetOrgFinancialByMonthArgs();
     }
 
-    public sealed class GetOrgFinancialByMonthInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetOrgFinancialByMonthInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Query for the end month. Format:yyyy-mm, for example:2021-01.
@@ -164,6 +159,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Organization
         public GetOrgFinancialByMonthInvokeArgs()
         {
         }
+        public static new GetOrgFinancialByMonthInvokeArgs Empty => new GetOrgFinancialByMonthInvokeArgs();
     }
 
 

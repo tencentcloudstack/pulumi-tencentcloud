@@ -15,80 +15,76 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dayu
         /// <summary>
         /// Use this data source to query dayu layer 7 rules
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var domainTest = Tencentcloud.Dayu.GetL7Rules.Invoke(new()
         ///     {
-        ///         var domainTest = Output.Create(Tencentcloud.Dayu.GetL7Rules.InvokeAsync(new Tencentcloud.Dayu.GetL7RulesArgs
-        ///         {
-        ///             ResourceType = tencentcloud_dayu_l7_rule.Test_rule.Resource_type,
-        ///             ResourceId = tencentcloud_dayu_l7_rule.Test_rule.Resource_id,
-        ///             Domain = tencentcloud_dayu_l7_rule.Test_rule.Domain,
-        ///         }));
-        ///         var idTest = Output.Create(Tencentcloud.Dayu.GetL7Rules.InvokeAsync(new Tencentcloud.Dayu.GetL7RulesArgs
-        ///         {
-        ///             ResourceType = tencentcloud_dayu_l7_rule.Test_rule.Resource_type,
-        ///             ResourceId = tencentcloud_dayu_l7_rule.Test_rule.Resource_id,
-        ///             RuleId = tencentcloud_dayu_l7_rule.Test_rule.Rule_id,
-        ///         }));
-        ///     }
+        ///         ResourceType = tencentcloud_dayu_l7_rule.Test_rule.Resource_type,
+        ///         ResourceId = tencentcloud_dayu_l7_rule.Test_rule.Resource_id,
+        ///         Domain = tencentcloud_dayu_l7_rule.Test_rule.Domain,
+        ///     });
         /// 
-        /// }
+        ///     var idTest = Tencentcloud.Dayu.GetL7Rules.Invoke(new()
+        ///     {
+        ///         ResourceType = tencentcloud_dayu_l7_rule.Test_rule.Resource_type,
+        ///         ResourceId = tencentcloud_dayu_l7_rule.Test_rule.Resource_id,
+        ///         RuleId = tencentcloud_dayu_l7_rule.Test_rule.Rule_id,
+        ///     });
+        /// 
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetL7RulesResult> InvokeAsync(GetL7RulesArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetL7RulesResult>("tencentcloud:Dayu/getL7Rules:getL7Rules", args ?? new GetL7RulesArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetL7RulesResult>("tencentcloud:Dayu/getL7Rules:getL7Rules", args ?? new GetL7RulesArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query dayu layer 7 rules
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var domainTest = Tencentcloud.Dayu.GetL7Rules.Invoke(new()
         ///     {
-        ///         var domainTest = Output.Create(Tencentcloud.Dayu.GetL7Rules.InvokeAsync(new Tencentcloud.Dayu.GetL7RulesArgs
-        ///         {
-        ///             ResourceType = tencentcloud_dayu_l7_rule.Test_rule.Resource_type,
-        ///             ResourceId = tencentcloud_dayu_l7_rule.Test_rule.Resource_id,
-        ///             Domain = tencentcloud_dayu_l7_rule.Test_rule.Domain,
-        ///         }));
-        ///         var idTest = Output.Create(Tencentcloud.Dayu.GetL7Rules.InvokeAsync(new Tencentcloud.Dayu.GetL7RulesArgs
-        ///         {
-        ///             ResourceType = tencentcloud_dayu_l7_rule.Test_rule.Resource_type,
-        ///             ResourceId = tencentcloud_dayu_l7_rule.Test_rule.Resource_id,
-        ///             RuleId = tencentcloud_dayu_l7_rule.Test_rule.Rule_id,
-        ///         }));
-        ///     }
+        ///         ResourceType = tencentcloud_dayu_l7_rule.Test_rule.Resource_type,
+        ///         ResourceId = tencentcloud_dayu_l7_rule.Test_rule.Resource_id,
+        ///         Domain = tencentcloud_dayu_l7_rule.Test_rule.Domain,
+        ///     });
         /// 
-        /// }
+        ///     var idTest = Tencentcloud.Dayu.GetL7Rules.Invoke(new()
+        ///     {
+        ///         ResourceType = tencentcloud_dayu_l7_rule.Test_rule.Resource_type,
+        ///         ResourceId = tencentcloud_dayu_l7_rule.Test_rule.Resource_id,
+        ///         RuleId = tencentcloud_dayu_l7_rule.Test_rule.Rule_id,
+        ///     });
+        /// 
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetL7RulesResult> Invoke(GetL7RulesInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetL7RulesResult>("tencentcloud:Dayu/getL7Rules:getL7Rules", args ?? new GetL7RulesInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetL7RulesResult>("tencentcloud:Dayu/getL7Rules:getL7Rules", args ?? new GetL7RulesInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetL7RulesArgs : Pulumi.InvokeArgs
+    public sealed class GetL7RulesArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Domain of the layer 7 rule to be queried.
@@ -123,9 +119,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dayu
         public GetL7RulesArgs()
         {
         }
+        public static new GetL7RulesArgs Empty => new GetL7RulesArgs();
     }
 
-    public sealed class GetL7RulesInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetL7RulesInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Domain of the layer 7 rule to be queried.
@@ -160,6 +157,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dayu
         public GetL7RulesInvokeArgs()
         {
         }
+        public static new GetL7RulesInvokeArgs Empty => new GetL7RulesInvokeArgs();
     }
 
 

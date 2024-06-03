@@ -8,11 +8,13 @@ import * as utilities from "../utilities";
  * Provides a resource to create a monitor grafanaIntegration
  *
  * ## Example Usage
+ *
  * ### Create a grafan instance and integrate the configuration
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const config = new pulumi.Config();
  * const availabilityZone = config.get("availabilityZone") || "ap-guangzhou-6";
@@ -38,6 +40,7 @@ import * as utilities from "../utilities";
  *     content: "{\"kind\":\"tencentcloud-monitor-app\",\"spec\":{\"dataSourceSpec\":{\"authProvider\":{\"__anyOf\":\"使用密钥\",\"useRole\":true,\"secretId\":\"arunma@tencent.com\",\"secretKey\":\"12345678\"},\"name\":\"uint-test\"},\"grafanaSpec\":{\"organizationIds\":[]}}}",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export class GrafanaIntegration extends pulumi.CustomResource {
     /**

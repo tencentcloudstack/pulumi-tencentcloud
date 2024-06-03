@@ -11,19 +11,29 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Eb.Inputs
 {
 
-    public sealed class GetSearchFilterFilterInputArgs : Pulumi.ResourceArgs
+    public sealed class GetSearchFilterFilterInputArgs : global::Pulumi.ResourceArgs
     {
+        /// <summary>
+        /// filter field name.
+        /// </summary>
         [Input("key", required: true)]
         public Input<string> Key { get; set; } = null!;
 
+        /// <summary>
+        /// operator, congruent eq, not equal neq, similar like, exclude similar not like, less than lt, less than and equal to lte, greater than gt, greater than and equal to gte, within range range, not within range norange.
+        /// </summary>
         [Input("operator", required: true)]
         public Input<string> Operator { get; set; } = null!;
 
+        /// <summary>
+        /// Filter values, range operations need to enter two values at the same time, separated by commas.
+        /// </summary>
         [Input("value", required: true)]
         public Input<string> Value { get; set; } = null!;
 
         public GetSearchFilterFilterInputArgs()
         {
         }
+        public static new GetSearchFilterFilterInputArgs Empty => new GetSearchFilterFilterInputArgs();
     }
 }

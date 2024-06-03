@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,24 +11,23 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const blackEmailAddress = pulumi.output(tencentcloud.Ses.getBlackEmailAddress({
+ * const blackEmailAddress = tencentcloud.Ses.getBlackEmailAddress({
  *     emailAddress: "xxx@mail.qcloud.com",
  *     endDate: "2020-09-23",
  *     startDate: "2020-09-22",
  *     taskId: "7000",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getBlackEmailAddress(args: GetBlackEmailAddressArgs, opts?: pulumi.InvokeOptions): Promise<GetBlackEmailAddressResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Ses/getBlackEmailAddress:getBlackEmailAddress", {
         "emailAddress": args.emailAddress,
         "endDate": args.endDate,
@@ -84,9 +84,27 @@ export interface GetBlackEmailAddressResult {
     readonly startDate: string;
     readonly taskId?: string;
 }
-
+/**
+ * Use this data source to query detailed information of ses blackEmailAddress
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const blackEmailAddress = tencentcloud.Ses.getBlackEmailAddress({
+ *     emailAddress: "xxx@mail.qcloud.com",
+ *     endDate: "2020-09-23",
+ *     startDate: "2020-09-22",
+ *     taskId: "7000",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getBlackEmailAddressOutput(args: GetBlackEmailAddressOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetBlackEmailAddressResult> {
-    return pulumi.output(args).apply(a => getBlackEmailAddress(a, opts))
+    return pulumi.output(args).apply((a: any) => getBlackEmailAddress(a, opts))
 }
 
 /**

@@ -14,6 +14,9 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Pts.Outputs
     [OutputType]
     public sealed class JobDomainNameConfigDnsConfig
     {
+        /// <summary>
+        /// DNS IP List.
+        /// </summary>
         public readonly ImmutableArray<string> Nameservers;
 
         [OutputConstructor]

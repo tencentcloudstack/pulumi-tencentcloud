@@ -15,100 +15,94 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Waf
         /// <summary>
         /// Use this data source to query detailed information of waf ports
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
-        ///     {
-        ///         var example = Output.Create(Tencentcloud.Waf.GetPorts.InvokeAsync());
-        ///     }
+        ///     var example = Tencentcloud.Waf.GetPorts.Invoke();
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% example %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
+        /// 
         /// ### Or
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var example = Tencentcloud.Waf.GetPorts.Invoke(new()
         ///     {
-        ///         var example = Output.Create(Tencentcloud.Waf.GetPorts.InvokeAsync(new Tencentcloud.Waf.GetPortsArgs
-        ///         {
-        ///             Edition = "clb-waf",
-        ///             InstanceId = "waf_2kxtlbky00b2v1fn",
-        ///         }));
-        ///     }
+        ///         Edition = "clb-waf",
+        ///         InstanceId = "waf_2kxtlbky00b2v1fn",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetPortsResult> InvokeAsync(GetPortsArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetPortsResult>("tencentcloud:Waf/getPorts:getPorts", args ?? new GetPortsArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetPortsResult>("tencentcloud:Waf/getPorts:getPorts", args ?? new GetPortsArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of waf ports
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
-        ///     {
-        ///         var example = Output.Create(Tencentcloud.Waf.GetPorts.InvokeAsync());
-        ///     }
+        ///     var example = Tencentcloud.Waf.GetPorts.Invoke();
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% example %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
+        /// 
         /// ### Or
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var example = Tencentcloud.Waf.GetPorts.Invoke(new()
         ///     {
-        ///         var example = Output.Create(Tencentcloud.Waf.GetPorts.InvokeAsync(new Tencentcloud.Waf.GetPortsArgs
-        ///         {
-        ///             Edition = "clb-waf",
-        ///             InstanceId = "waf_2kxtlbky00b2v1fn",
-        ///         }));
-        ///     }
+        ///         Edition = "clb-waf",
+        ///         InstanceId = "waf_2kxtlbky00b2v1fn",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetPortsResult> Invoke(GetPortsInvokeArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetPortsResult>("tencentcloud:Waf/getPorts:getPorts", args ?? new GetPortsInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetPortsResult>("tencentcloud:Waf/getPorts:getPorts", args ?? new GetPortsInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetPortsArgs : Pulumi.InvokeArgs
+    public sealed class GetPortsArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Instance type, sparta-waf represents SAAS WAF, clb-waf represents CLB WAF.
@@ -131,9 +125,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Waf
         public GetPortsArgs()
         {
         }
+        public static new GetPortsArgs Empty => new GetPortsArgs();
     }
 
-    public sealed class GetPortsInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetPortsInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Instance type, sparta-waf represents SAAS WAF, clb-waf represents CLB WAF.
@@ -156,6 +151,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Waf
         public GetPortsInvokeArgs()
         {
         }
+        public static new GetPortsInvokeArgs Empty => new GetPortsInvokeArgs();
     }
 
 

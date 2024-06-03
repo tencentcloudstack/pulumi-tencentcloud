@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcr.Inputs
 {
 
-    public sealed class WebhookTriggerTriggerTargetHeaderGetArgs : Pulumi.ResourceArgs
+    public sealed class WebhookTriggerTriggerTargetHeaderGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Header Key.
@@ -34,5 +34,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcr.Inputs
         public WebhookTriggerTriggerTargetHeaderGetArgs()
         {
         }
+        public static new WebhookTriggerTriggerTargetHeaderGetArgs Empty => new WebhookTriggerTriggerTargetHeaderGetArgs();
     }
 }
