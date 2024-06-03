@@ -70,6 +70,7 @@ build_sdks:: install_plugins provider build_nodejs build_python build_go build_d
 build_nodejs:: VERSION := $(shell pulumictl get version --language javascript)
 build_nodejs:: export PULUMI_SKIP_MISSING_MAPPING_ERROR := ${PULUMI_SKIP_ERROR}
 build_nodejs:: install_plugins tfgen # build the node sdk
+	rm -rf sdk/nodejs/node_modules # clean node_modules before building
 	$(WORKING_DIR)/bin/$(TFGEN) nodejs --overlays provider/overlays/nodejs --out sdk/nodejs/
 	cd sdk/nodejs/ && \
         yarn install && \
