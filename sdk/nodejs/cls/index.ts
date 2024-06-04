@@ -70,6 +70,11 @@ export const getShipperTasks: typeof import("./getShipperTasks").getShipperTasks
 export const getShipperTasksOutput: typeof import("./getShipperTasks").getShipperTasksOutput = null as any;
 utilities.lazyLoad(exports, ["getShipperTasks","getShipperTasksOutput"], () => require("./getShipperTasks"));
 
+export { IndexArgs, IndexState } from "./index_";
+export type Index = import("./index_").Index;
+export const Index: typeof import("./index_").Index = null as any;
+utilities.lazyLoad(exports, ["Index"], () => require("./index_"));
+
 export { KafkaRechargeArgs, KafkaRechargeState } from "./kafkaRecharge";
 export type KafkaRecharge = import("./kafkaRecharge").KafkaRecharge;
 export const KafkaRecharge: typeof import("./kafkaRecharge").KafkaRecharge = null as any;
@@ -120,6 +125,8 @@ const _module = {
                 return new DataTransform(name, <any>undefined, { urn })
             case "tencentcloud:Cls/export:Export":
                 return new Export(name, <any>undefined, { urn })
+            case "tencentcloud:Cls/index:Index":
+                return new Index(name, <any>undefined, { urn })
             case "tencentcloud:Cls/kafkaRecharge:KafkaRecharge":
                 return new KafkaRecharge(name, <any>undefined, { urn })
             case "tencentcloud:Cls/logset:Logset":
@@ -145,6 +152,7 @@ pulumi.runtime.registerResourceModule("tencentcloud", "Cls/cosRecharge", _module
 pulumi.runtime.registerResourceModule("tencentcloud", "Cls/cosShipper", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Cls/dataTransform", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Cls/export", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Cls/index", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Cls/kafkaRecharge", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Cls/logset", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Cls/machineGroup", _module)

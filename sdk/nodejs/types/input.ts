@@ -8115,6 +8115,129 @@ export namespace Cls {
         topicId: pulumi.Input<string>;
     }
 
+    export interface IndexRule {
+        /**
+         * The key value index is automatically configured. If it is empty, it means that the function is not enabled.
+         */
+        dynamicIndex?: pulumi.Input<inputs.Cls.IndexRuleDynamicIndex>;
+        /**
+         * Full-Text index configuration.
+         */
+        fullText?: pulumi.Input<inputs.Cls.IndexRuleFullText>;
+        /**
+         * Key-Value index configuration.
+         */
+        keyValue?: pulumi.Input<inputs.Cls.IndexRuleKeyValue>;
+        /**
+         * Metafield index configuration.
+         */
+        tag?: pulumi.Input<inputs.Cls.IndexRuleTag>;
+    }
+
+    export interface IndexRuleDynamicIndex {
+        /**
+         * index automatic configuration switch.
+         */
+        status: pulumi.Input<boolean>;
+    }
+
+    export interface IndexRuleFullText {
+        /**
+         * Case sensitivity.
+         */
+        caseSensitive: pulumi.Input<boolean>;
+        /**
+         * Whether Chinese characters are contained.
+         */
+        containZH: pulumi.Input<boolean>;
+        /**
+         * Full-Text index delimiter. Each character in the string represents a delimiter.
+         */
+        tokenizer: pulumi.Input<string>;
+    }
+
+    export interface IndexRuleKeyValue {
+        /**
+         * Case sensitivity.
+         */
+        caseSensitive: pulumi.Input<boolean>;
+        /**
+         * Key-Value pair information of the index to be created. Up to 100 key-value pairs can be configured.
+         */
+        keyValues?: pulumi.Input<pulumi.Input<inputs.Cls.IndexRuleKeyValueKeyValue>[]>;
+    }
+
+    export interface IndexRuleKeyValueKeyValue {
+        /**
+         * When a key value or metafield index needs to be configured for a field, the metafield Key does not need to be prefixed with __TAG__. and is consistent with the one when logs are uploaded. __TAG__. will be prefixed automatically for display in the console..
+         */
+        key: pulumi.Input<string>;
+        /**
+         * Field index description information.
+         */
+        value?: pulumi.Input<inputs.Cls.IndexRuleKeyValueKeyValueValue>;
+    }
+
+    export interface IndexRuleKeyValueKeyValueValue {
+        /**
+         * Whether Chinese characters are contained.
+         */
+        containZH?: pulumi.Input<boolean>;
+        /**
+         * Whether the analysis feature is enabled for the field.
+         */
+        sqlFlag?: pulumi.Input<boolean>;
+        /**
+         * Field delimiter, which is meaningful only if the field type is text. Each character in the entered string represents a delimiter.
+         */
+        tokenizer?: pulumi.Input<string>;
+        /**
+         * Field type. Valid values: long, text, double.
+         */
+        type: pulumi.Input<string>;
+    }
+
+    export interface IndexRuleTag {
+        /**
+         * Case sensitivity.
+         */
+        caseSensitive: pulumi.Input<boolean>;
+        /**
+         * Key-Value pair information of the index to be created. Up to 100 key-value pairs can be configured.
+         */
+        keyValues?: pulumi.Input<pulumi.Input<inputs.Cls.IndexRuleTagKeyValue>[]>;
+    }
+
+    export interface IndexRuleTagKeyValue {
+        /**
+         * When a key value or metafield index needs to be configured for a field, the metafield Key does not need to be prefixed with __TAG__. and is consistent with the one when logs are uploaded. __TAG__. will be prefixed automatically for display in the console..
+         */
+        key: pulumi.Input<string>;
+        /**
+         * Field index description information.
+         */
+        value?: pulumi.Input<inputs.Cls.IndexRuleTagKeyValueValue>;
+    }
+
+    export interface IndexRuleTagKeyValueValue {
+        /**
+         * Whether Chinese characters are contained.
+         */
+        containZH?: pulumi.Input<boolean>;
+        /**
+         * Whether the analysis feature is enabled for the field.
+         */
+        sqlFlag?: pulumi.Input<boolean>;
+        /**
+         * Field delimiter, which is meaningful only if the field type is text. Each character in the entered string represents a delimiter.
+         */
+        tokenizer?: pulumi.Input<string>;
+        /**
+         * Field type. Valid values: long, text, double.
+         */
+        type: pulumi.Input<string>;
+    }
+
     export interface KafkaRechargeLogRechargeRule {
         /**
          * default time from.
@@ -27307,6 +27430,21 @@ export namespace Tdmq {
          * Vpc ID.
          */
         vpcId?: pulumi.Input<string>;
+    }
+
+    export interface RocketmqVipInstanceIpRule {
+        /**
+         * Whether to allow or deny.
+         */
+        allow: pulumi.Input<boolean>;
+        /**
+         * IP address block information.
+         */
+        ipRule: pulumi.Input<string>;
+        /**
+         * Remark.
+         */
+        remark: pulumi.Input<string>;
     }
 
     export interface RocketmqVipInstanceVpcInfo {

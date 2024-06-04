@@ -29,31 +29,53 @@ import (
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
 //			_, err := Instance.GetTypes(ctx, &instance.GetTypesArgs{
-//				AvailabilityZone: pulumi.StringRef("ap-guangzhou-2"),
-//				CpuCoreCount:     pulumi.IntRef(2),
-//				MemorySize:       pulumi.IntRef(4),
+//				AvailabilityZone: pulumi.StringRef("ap-guangzhou-6"),
+//				CpuCoreCount:     pulumi.IntRef(4),
+//				MemorySize:       pulumi.IntRef(8),
 //			}, nil)
 //			if err != nil {
 //				return err
 //			}
-//			_, err = Instance.GetTypes(ctx, &instance.GetTypesArgs{
-//				CpuCoreCount:   pulumi.IntRef(1),
+//			return nil
+//		})
+//	}
+//
+// ```
+// <!--End PulumiCodeChooser -->
+//
+// ### Complete Example
+//
+// <!--Start PulumiCodeChooser -->
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Instance"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Instance.GetTypes(ctx, &instance.GetTypesArgs{
+//				CpuCoreCount:   pulumi.IntRef(4),
 //				ExcludeSoldOut: pulumi.BoolRef(true),
 //				Filters: []instance.GetTypesFilter{
 //					{
-//						Name: "instance-charge-type",
+//						Name: "instance-family",
 //						Values: []string{
-//							"POSTPAID_BY_HOUR",
+//							"SA2",
 //						},
 //					},
 //					{
 //						Name: "zone",
 //						Values: []string{
-//							"ap-shanghai-2",
+//							"ap-guangzhou-6",
 //						},
 //					},
 //				},
-//				MemorySize: pulumi.IntRef(1),
+//				MemorySize: pulumi.IntRef(8),
 //			}, nil)
 //			if err != nil {
 //				return err

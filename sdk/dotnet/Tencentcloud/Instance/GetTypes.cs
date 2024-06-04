@@ -26,25 +26,40 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Instance
         /// 
         /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     var foo = Tencentcloud.Instance.GetTypes.Invoke(new()
+        ///     var example = Tencentcloud.Instance.GetTypes.Invoke(new()
         ///     {
-        ///         AvailabilityZone = "ap-guangzhou-2",
-        ///         CpuCoreCount = 2,
-        ///         MemorySize = 4,
+        ///         AvailabilityZone = "ap-guangzhou-6",
+        ///         CpuCoreCount = 4,
+        ///         MemorySize = 8,
         ///     });
         /// 
-        ///     var t1c1g = Tencentcloud.Instance.GetTypes.Invoke(new()
+        /// });
+        /// ```
+        /// &lt;!--End PulumiCodeChooser --&gt;
+        /// 
+        /// ### Complete Example
+        /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
+        /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
+        /// using Pulumi;
+        /// using Tencentcloud = Pulumi.Tencentcloud;
+        /// 
+        /// return await Deployment.RunAsync(() =&gt; 
+        /// {
+        ///     var example = Tencentcloud.Instance.GetTypes.Invoke(new()
         ///     {
-        ///         CpuCoreCount = 1,
+        ///         CpuCoreCount = 4,
         ///         ExcludeSoldOut = true,
         ///         Filters = new[]
         ///         {
         ///             new Tencentcloud.Instance.Inputs.GetTypesFilterInputArgs
         ///             {
-        ///                 Name = "instance-charge-type",
+        ///                 Name = "instance-family",
         ///                 Values = new[]
         ///                 {
-        ///                     "POSTPAID_BY_HOUR",
+        ///                     "SA2",
         ///                 },
         ///             },
         ///             new Tencentcloud.Instance.Inputs.GetTypesFilterInputArgs
@@ -52,11 +67,11 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Instance
         ///                 Name = "zone",
         ///                 Values = new[]
         ///                 {
-        ///                     "ap-shanghai-2",
+        ///                     "ap-guangzhou-6",
         ///                 },
         ///             },
         ///         },
-        ///         MemorySize = 1,
+        ///         MemorySize = 8,
         ///     });
         /// 
         /// });
@@ -80,25 +95,40 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Instance
         /// 
         /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     var foo = Tencentcloud.Instance.GetTypes.Invoke(new()
+        ///     var example = Tencentcloud.Instance.GetTypes.Invoke(new()
         ///     {
-        ///         AvailabilityZone = "ap-guangzhou-2",
-        ///         CpuCoreCount = 2,
-        ///         MemorySize = 4,
+        ///         AvailabilityZone = "ap-guangzhou-6",
+        ///         CpuCoreCount = 4,
+        ///         MemorySize = 8,
         ///     });
         /// 
-        ///     var t1c1g = Tencentcloud.Instance.GetTypes.Invoke(new()
+        /// });
+        /// ```
+        /// &lt;!--End PulumiCodeChooser --&gt;
+        /// 
+        /// ### Complete Example
+        /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
+        /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
+        /// using Pulumi;
+        /// using Tencentcloud = Pulumi.Tencentcloud;
+        /// 
+        /// return await Deployment.RunAsync(() =&gt; 
+        /// {
+        ///     var example = Tencentcloud.Instance.GetTypes.Invoke(new()
         ///     {
-        ///         CpuCoreCount = 1,
+        ///         CpuCoreCount = 4,
         ///         ExcludeSoldOut = true,
         ///         Filters = new[]
         ///         {
         ///             new Tencentcloud.Instance.Inputs.GetTypesFilterInputArgs
         ///             {
-        ///                 Name = "instance-charge-type",
+        ///                 Name = "instance-family",
         ///                 Values = new[]
         ///                 {
-        ///                     "POSTPAID_BY_HOUR",
+        ///                     "SA2",
         ///                 },
         ///             },
         ///             new Tencentcloud.Instance.Inputs.GetTypesFilterInputArgs
@@ -106,11 +136,11 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Instance
         ///                 Name = "zone",
         ///                 Values = new[]
         ///                 {
-        ///                     "ap-shanghai-2",
+        ///                     "ap-guangzhou-6",
         ///                 },
         ///             },
         ///         },
-        ///         MemorySize = 1,
+        ///         MemorySize = 8,
         ///     });
         /// 
         /// });

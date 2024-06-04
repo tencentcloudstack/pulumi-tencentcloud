@@ -143,13 +143,46 @@ class RenewInstance(pulumi.CustomResource):
         import pulumi
         import tencentcloud_iac_pulumi as tencentcloud
 
-        renew_instance = tencentcloud.cvm.RenewInstance("renewInstance",
+        # create vpc
+        vpc = tencentcloud.vpc.Instance("vpc", cidr_block="10.0.0.0/16")
+        # create vpc subnet
+        subnet = tencentcloud.subnet.Instance("subnet",
+            vpc_id=vpc.id,
+            availability_zone="ap-guangzhou-6",
+            cidr_block="10.0.20.0/28",
+            is_multicast=False)
+        # create cvm
+        example_instance = tencentcloud.instance.Instance("exampleInstance",
+            instance_name="tf_example",
+            availability_zone="ap-guangzhou-6",
+            image_id="img-9qrfy1xt",
+            instance_type="SA3.MEDIUM4",
+            system_disk_type="CLOUD_HSSD",
+            system_disk_size=100,
+            hostname="example",
+            project_id=0,
+            vpc_id=vpc.id,
+            subnet_id=subnet.id,
+            force_delete=True,
+            instance_charge_type="PREPAID",
+            instance_charge_type_prepaid_period=1,
+            instance_charge_type_prepaid_renew_flag="NOTIFY_AND_MANUAL_RENEW",
+            data_disks=[tencentcloud.instance.InstanceDataDiskArgs(
+                data_disk_type="CLOUD_HSSD",
+                data_disk_size=50,
+                encrypt=False,
+            )],
+            tags={
+                "tagKey": "tagValue",
+            })
+        # renew instance
+        example_renew_instance = tencentcloud.cvm.RenewInstance("exampleRenewInstance",
+            instance_id=example_instance.id,
+            renew_portable_data_disk=True,
             instance_charge_prepaid=tencentcloud.cvm.RenewInstanceInstanceChargePrepaidArgs(
                 period=1,
-                renew_flag="NOTIFY_AND_AUTO_RENEW",
-            ),
-            instance_id="ins-f9jr4bd2",
-            renew_portable_data_disk=True)
+                renew_flag="NOTIFY_AND_MANUAL_RENEW",
+            ))
         ```
         <!--End PulumiCodeChooser -->
 
@@ -175,13 +208,46 @@ class RenewInstance(pulumi.CustomResource):
         import pulumi
         import tencentcloud_iac_pulumi as tencentcloud
 
-        renew_instance = tencentcloud.cvm.RenewInstance("renewInstance",
+        # create vpc
+        vpc = tencentcloud.vpc.Instance("vpc", cidr_block="10.0.0.0/16")
+        # create vpc subnet
+        subnet = tencentcloud.subnet.Instance("subnet",
+            vpc_id=vpc.id,
+            availability_zone="ap-guangzhou-6",
+            cidr_block="10.0.20.0/28",
+            is_multicast=False)
+        # create cvm
+        example_instance = tencentcloud.instance.Instance("exampleInstance",
+            instance_name="tf_example",
+            availability_zone="ap-guangzhou-6",
+            image_id="img-9qrfy1xt",
+            instance_type="SA3.MEDIUM4",
+            system_disk_type="CLOUD_HSSD",
+            system_disk_size=100,
+            hostname="example",
+            project_id=0,
+            vpc_id=vpc.id,
+            subnet_id=subnet.id,
+            force_delete=True,
+            instance_charge_type="PREPAID",
+            instance_charge_type_prepaid_period=1,
+            instance_charge_type_prepaid_renew_flag="NOTIFY_AND_MANUAL_RENEW",
+            data_disks=[tencentcloud.instance.InstanceDataDiskArgs(
+                data_disk_type="CLOUD_HSSD",
+                data_disk_size=50,
+                encrypt=False,
+            )],
+            tags={
+                "tagKey": "tagValue",
+            })
+        # renew instance
+        example_renew_instance = tencentcloud.cvm.RenewInstance("exampleRenewInstance",
+            instance_id=example_instance.id,
+            renew_portable_data_disk=True,
             instance_charge_prepaid=tencentcloud.cvm.RenewInstanceInstanceChargePrepaidArgs(
                 period=1,
-                renew_flag="NOTIFY_AND_AUTO_RENEW",
-            ),
-            instance_id="ins-f9jr4bd2",
-            renew_portable_data_disk=True)
+                renew_flag="NOTIFY_AND_MANUAL_RENEW",
+            ))
         ```
         <!--End PulumiCodeChooser -->
 

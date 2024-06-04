@@ -41,6 +41,8 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 		r = &DataTransform{}
 	case "tencentcloud:Cls/export:Export":
 		r = &Export{}
+	case "tencentcloud:Cls/index:Index":
+		r = &Index{}
 	case "tencentcloud:Cls/kafkaRecharge:KafkaRecharge":
 		r = &KafkaRecharge{}
 	case "tencentcloud:Cls/logset:Logset":
@@ -112,6 +114,11 @@ func init() {
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
 		"Cls/export",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Cls/index",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(

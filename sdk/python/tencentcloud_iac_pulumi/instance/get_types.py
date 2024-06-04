@@ -151,22 +151,32 @@ def get_types(availability_zone: Optional[str] = None,
     import pulumi
     import pulumi_tencentcloud as tencentcloud
 
-    foo = tencentcloud.Instance.get_types(availability_zone="ap-guangzhou-2",
-        cpu_core_count=2,
-        memory_size=4)
-    t1c1g = tencentcloud.Instance.get_types(cpu_core_count=1,
+    example = tencentcloud.Instance.get_types(availability_zone="ap-guangzhou-6",
+        cpu_core_count=4,
+        memory_size=8)
+    ```
+    <!--End PulumiCodeChooser -->
+
+    ### Complete Example
+
+    <!--Start PulumiCodeChooser -->
+    ```python
+    import pulumi
+    import pulumi_tencentcloud as tencentcloud
+
+    example = tencentcloud.Instance.get_types(cpu_core_count=4,
         exclude_sold_out=True,
         filters=[
             tencentcloud.instance.GetTypesFilterArgs(
-                name="instance-charge-type",
-                values=["POSTPAID_BY_HOUR"],
+                name="instance-family",
+                values=["SA2"],
             ),
             tencentcloud.instance.GetTypesFilterArgs(
                 name="zone",
-                values=["ap-shanghai-2"],
+                values=["ap-guangzhou-6"],
             ),
         ],
-        memory_size=1)
+        memory_size=8)
     ```
     <!--End PulumiCodeChooser -->
 
@@ -221,22 +231,32 @@ def get_types_output(availability_zone: Optional[pulumi.Input[Optional[str]]] = 
     import pulumi
     import pulumi_tencentcloud as tencentcloud
 
-    foo = tencentcloud.Instance.get_types(availability_zone="ap-guangzhou-2",
-        cpu_core_count=2,
-        memory_size=4)
-    t1c1g = tencentcloud.Instance.get_types(cpu_core_count=1,
+    example = tencentcloud.Instance.get_types(availability_zone="ap-guangzhou-6",
+        cpu_core_count=4,
+        memory_size=8)
+    ```
+    <!--End PulumiCodeChooser -->
+
+    ### Complete Example
+
+    <!--Start PulumiCodeChooser -->
+    ```python
+    import pulumi
+    import pulumi_tencentcloud as tencentcloud
+
+    example = tencentcloud.Instance.get_types(cpu_core_count=4,
         exclude_sold_out=True,
         filters=[
             tencentcloud.instance.GetTypesFilterArgs(
-                name="instance-charge-type",
-                values=["POSTPAID_BY_HOUR"],
+                name="instance-family",
+                values=["SA2"],
             ),
             tencentcloud.instance.GetTypesFilterArgs(
                 name="zone",
-                values=["ap-shanghai-2"],
+                values=["ap-guangzhou-6"],
             ),
         ],
-        memory_size=1)
+        memory_size=8)
     ```
     <!--End PulumiCodeChooser -->
 

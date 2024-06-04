@@ -6,7 +6,7 @@ replace github.com/hashicorp/terraform-plugin-sdk/v2 => github.com/pulumi/terraf
 
 require (
 	github.com/pulumi/pulumi-terraform-bridge/v3 v3.80.0
-	github.com/tencentcloudstack/terraform-provider-tencentcloud v1.81.99
+	github.com/tencentcloudstack/terraform-provider-tencentcloud v1.81.100
 )
 
 require (
@@ -228,7 +228,7 @@ require (
 	github.com/tencentcloud/tencentcloud-sdk-go/tencentcloud/clb v1.0.860 // indirect
 	github.com/tencentcloud/tencentcloud-sdk-go/tencentcloud/cloudaudit v1.0.544 // indirect
 	github.com/tencentcloud/tencentcloud-sdk-go/tencentcloud/cls v1.0.860 // indirect
-	github.com/tencentcloud/tencentcloud-sdk-go/tencentcloud/common v1.0.920 // indirect
+	github.com/tencentcloud/tencentcloud-sdk-go/tencentcloud/common v1.0.932 // indirect
 	github.com/tencentcloud/tencentcloud-sdk-go/tencentcloud/csip v1.0.860 // indirect
 	github.com/tencentcloud/tencentcloud-sdk-go/tencentcloud/cvm v1.0.624 // indirect
 	github.com/tencentcloud/tencentcloud-sdk-go/tencentcloud/cwp v1.0.762 // indirect
@@ -274,7 +274,7 @@ require (
 	github.com/tencentcloud/tencentcloud-sdk-go/tencentcloud/tcm v1.0.547 // indirect
 	github.com/tencentcloud/tencentcloud-sdk-go/tencentcloud/tcr v1.0.696 // indirect
 	github.com/tencentcloud/tencentcloud-sdk-go/tencentcloud/tdcpg v1.0.533 // indirect
-	github.com/tencentcloud/tencentcloud-sdk-go/tencentcloud/tdmq v1.0.825 // indirect
+	github.com/tencentcloud/tencentcloud-sdk-go/tencentcloud/tdmq v1.0.932 // indirect
 	github.com/tencentcloud/tencentcloud-sdk-go/tencentcloud/tem v1.0.578 // indirect
 	github.com/tencentcloud/tencentcloud-sdk-go/tencentcloud/teo v1.0.912 // indirect
 	github.com/tencentcloud/tencentcloud-sdk-go/tencentcloud/tke v1.0.916 // indirect

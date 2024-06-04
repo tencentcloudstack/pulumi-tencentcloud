@@ -104,8 +104,8 @@ def get_groups(name: Optional[str] = None,
     import pulumi
     import pulumi_tencentcloud as tencentcloud
 
-    foo = tencentcloud.Placement.get_groups(name="test",
-        placement_group_id="ps-21q9ibvr")
+    example = tencentcloud.Placement.get_groups(name="tf_example",
+        placement_group_id="ps-bwvst92h")
     ```
     <!--End PulumiCodeChooser -->
 
@@ -144,8 +144,8 @@ def get_groups_output(name: Optional[pulumi.Input[Optional[str]]] = None,
     import pulumi
     import pulumi_tencentcloud as tencentcloud
 
-    foo = tencentcloud.Placement.get_groups(name="test",
-        placement_group_id="ps-21q9ibvr")
+    example = tencentcloud.Placement.get_groups(name="tf_example",
+        placement_group_id="ps-bwvst92h")
     ```
     <!--End PulumiCodeChooser -->
 

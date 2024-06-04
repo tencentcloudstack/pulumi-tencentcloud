@@ -15,6 +15,8 @@ import (
 //
 // ## Example Usage
 //
+// ### Query key pairs by key ID
+//
 // <!--Start PulumiCodeChooser -->
 // ```go
 // package main
@@ -34,7 +36,29 @@ import (
 //			if err != nil {
 //				return err
 //			}
-//			_, err = Key.GetPairs(ctx, &key.GetPairsArgs{
+//			return nil
+//		})
+//	}
+//
+// ```
+// <!--End PulumiCodeChooser -->
+//
+// ### Query key pairs by key name
+//
+// <!--Start PulumiCodeChooser -->
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Key"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Key.GetPairs(ctx, &key.GetPairsArgs{
 //				KeyName: pulumi.StringRef("^test$"),
 //			}, nil)
 //			if err != nil {

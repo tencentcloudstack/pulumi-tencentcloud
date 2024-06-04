@@ -14,7 +14,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const normalAddressReturn = new tencentcloud.eip.NormalAddressReturn("normalAddressReturn", {addressIps: ["172.16.17.32"]});
+ * const example = new tencentcloud.eip.NormalAddressReturn("example", {addressIps: ["172.16.17.32"]});
  * ```
  * <!--End PulumiCodeChooser -->
  */

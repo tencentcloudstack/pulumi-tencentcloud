@@ -28,7 +28,7 @@ import (
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
-//			_, err := Eip.NewNormalAddressReturn(ctx, "normalAddressReturn", &Eip.NormalAddressReturnArgs{
+//			_, err := Eip.NewNormalAddressReturn(ctx, "example", &Eip.NormalAddressReturnArgs{
 //				AddressIps: pulumi.StringArray{
 //					pulumi.String("172.16.17.32"),
 //				},

@@ -20,18 +20,28 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cvm
     /// using System.Collections.Generic;
     /// using System.Linq;
     /// using Pulumi;
+    /// using Tencentcloud = Pulumi.Tencentcloud;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     var syncImage = new Tencentcloud.Cvm.SyncImage("syncImage", new()
+    ///     var exampleInstance = Tencentcloud.Images.GetInstance.Invoke(new()
     ///     {
+    ///         ImageTypes = new[]
+    ///         {
+    ///             "PRIVATE_IMAGE",
+    ///         },
+    ///         ImageNameRegex = "MyImage",
+    ///     });
+    /// 
+    ///     var exampleSyncImage = new Tencentcloud.Cvm.SyncImage("exampleSyncImage", new()
+    ///     {
+    ///         ImageId = exampleInstance.Apply(getInstanceResult =&gt; getInstanceResult.Images[0]?.ImageId),
     ///         DestinationRegions = new[]
     ///         {
     ///             "ap-guangzhou",
     ///             "ap-shanghai",
     ///         },
-    ///         ImageId = "img-xxxxxx",
     ///     });
     /// 
     /// });

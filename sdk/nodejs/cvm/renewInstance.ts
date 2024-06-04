@@ -16,13 +16,48 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const renewInstance = new tencentcloud.cvm.RenewInstance("renewInstance", {
+ * // create vpc
+ * const vpc = new tencentcloud.vpc.Instance("vpc", {cidrBlock: "10.0.0.0/16"});
+ * // create vpc subnet
+ * const subnet = new tencentcloud.subnet.Instance("subnet", {
+ *     vpcId: vpc.id,
+ *     availabilityZone: "ap-guangzhou-6",
+ *     cidrBlock: "10.0.20.0/28",
+ *     isMulticast: false,
+ * });
+ * // create cvm
+ * const exampleInstance = new tencentcloud.instance.Instance("exampleInstance", {
+ *     instanceName: "tf_example",
+ *     availabilityZone: "ap-guangzhou-6",
+ *     imageId: "img-9qrfy1xt",
+ *     instanceType: "SA3.MEDIUM4",
+ *     systemDiskType: "CLOUD_HSSD",
+ *     systemDiskSize: 100,
+ *     hostname: "example",
+ *     projectId: 0,
+ *     vpcId: vpc.id,
+ *     subnetId: subnet.id,
+ *     forceDelete: true,
+ *     instanceChargeType: "PREPAID",
+ *     instanceChargeTypePrepaidPeriod: 1,
+ *     instanceChargeTypePrepaidRenewFlag: "NOTIFY_AND_MANUAL_RENEW",
+ *     dataDisks: [{
+ *         dataDiskType: "CLOUD_HSSD",
+ *         dataDiskSize: 50,
+ *         encrypt: false,
+ *     }],
+ *     tags: {
+ *         tagKey: "tagValue",
+ *     },
+ * });
+ * // renew instance
+ * const exampleRenewInstance = new tencentcloud.cvm.RenewInstance("exampleRenewInstance", {
+ *     instanceId: exampleInstance.id,
+ *     renewPortableDataDisk: true,
  *     instanceChargePrepaid: {
  *         period: 1,
- *         renewFlag: "NOTIFY_AND_AUTO_RENEW",
+ *         renewFlag: "NOTIFY_AND_MANUAL_RENEW",
  *     },
- *     instanceId: "ins-f9jr4bd2",
- *     renewPortableDataDisk: true,
  * });
  * ```
  * <!--End PulumiCodeChooser -->

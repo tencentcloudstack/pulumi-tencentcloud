@@ -15,11 +15,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Image
         /// <summary>
         /// Provides an available image for the user.
         /// 
-        /// The Images data source fetch proper image, which could be one of the private images of the user and images of system resources provided by TencentCloud, as well as other public images and those available on the image market.
+        /// The Images data source fetch proper image, which could be one of the private images of the user and images of system
+        /// resources provided by TencentCloud, as well as other public images and those available on the image market.
         /// 
         /// &gt; **NOTE:** This data source will be deprecated, please use `tencentcloud.Images.getInstance` instead.
         /// 
         /// ## Example Usage
+        /// 
+        /// ### Query image
         /// 
         /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
@@ -30,7 +33,24 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Image
         /// 
         /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     var myFavorateImage = Tencentcloud.Image.GetInstance.Invoke(new()
+        ///     var example = Tencentcloud.Image.GetInstance.Invoke();
+        /// 
+        /// });
+        /// ```
+        /// &lt;!--End PulumiCodeChooser --&gt;
+        /// 
+        /// ### Query image by filter
+        /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
+        /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
+        /// using Pulumi;
+        /// using Tencentcloud = Pulumi.Tencentcloud;
+        /// 
+        /// return await Deployment.RunAsync(() =&gt; 
+        /// {
+        ///     var example = Tencentcloud.Image.GetInstance.Invoke(new()
         ///     {
         ///         Filters = new[]
         ///         {
@@ -43,7 +63,46 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Image
         ///                 },
         ///             },
         ///         },
+        ///     });
+        /// 
+        /// });
+        /// ```
+        /// &lt;!--End PulumiCodeChooser --&gt;
+        /// 
+        /// ### Query image by os name
+        /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
+        /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
+        /// using Pulumi;
+        /// using Tencentcloud = Pulumi.Tencentcloud;
+        /// 
+        /// return await Deployment.RunAsync(() =&gt; 
+        /// {
+        ///     var example = Tencentcloud.Image.GetInstance.Invoke(new()
+        ///     {
         ///         OsName = "centos",
+        ///     });
+        /// 
+        /// });
+        /// ```
+        /// &lt;!--End PulumiCodeChooser --&gt;
+        /// 
+        /// ### Query image by image name regex
+        /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
+        /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
+        /// using Pulumi;
+        /// using Tencentcloud = Pulumi.Tencentcloud;
+        /// 
+        /// return await Deployment.RunAsync(() =&gt; 
+        /// {
+        ///     var example = Tencentcloud.Image.GetInstance.Invoke(new()
+        ///     {
+        ///         ImageNameRegex = "^Windows\\s.*$",
         ///     });
         /// 
         /// });
@@ -56,11 +115,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Image
         /// <summary>
         /// Provides an available image for the user.
         /// 
-        /// The Images data source fetch proper image, which could be one of the private images of the user and images of system resources provided by TencentCloud, as well as other public images and those available on the image market.
+        /// The Images data source fetch proper image, which could be one of the private images of the user and images of system
+        /// resources provided by TencentCloud, as well as other public images and those available on the image market.
         /// 
         /// &gt; **NOTE:** This data source will be deprecated, please use `tencentcloud.Images.getInstance` instead.
         /// 
         /// ## Example Usage
+        /// 
+        /// ### Query image
         /// 
         /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
@@ -71,7 +133,24 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Image
         /// 
         /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     var myFavorateImage = Tencentcloud.Image.GetInstance.Invoke(new()
+        ///     var example = Tencentcloud.Image.GetInstance.Invoke();
+        /// 
+        /// });
+        /// ```
+        /// &lt;!--End PulumiCodeChooser --&gt;
+        /// 
+        /// ### Query image by filter
+        /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
+        /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
+        /// using Pulumi;
+        /// using Tencentcloud = Pulumi.Tencentcloud;
+        /// 
+        /// return await Deployment.RunAsync(() =&gt; 
+        /// {
+        ///     var example = Tencentcloud.Image.GetInstance.Invoke(new()
         ///     {
         ///         Filters = new[]
         ///         {
@@ -84,7 +163,46 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Image
         ///                 },
         ///             },
         ///         },
+        ///     });
+        /// 
+        /// });
+        /// ```
+        /// &lt;!--End PulumiCodeChooser --&gt;
+        /// 
+        /// ### Query image by os name
+        /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
+        /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
+        /// using Pulumi;
+        /// using Tencentcloud = Pulumi.Tencentcloud;
+        /// 
+        /// return await Deployment.RunAsync(() =&gt; 
+        /// {
+        ///     var example = Tencentcloud.Image.GetInstance.Invoke(new()
+        ///     {
         ///         OsName = "centos",
+        ///     });
+        /// 
+        /// });
+        /// ```
+        /// &lt;!--End PulumiCodeChooser --&gt;
+        /// 
+        /// ### Query image by image name regex
+        /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
+        /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
+        /// using Pulumi;
+        /// using Tencentcloud = Pulumi.Tencentcloud;
+        /// 
+        /// return await Deployment.RunAsync(() =&gt; 
+        /// {
+        ///     var example = Tencentcloud.Image.GetInstance.Invoke(new()
+        ///     {
+        ///         ImageNameRegex = "^Windows\\s.*$",
         ///     });
         /// 
         /// });

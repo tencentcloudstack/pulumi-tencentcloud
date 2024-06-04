@@ -11,13 +11,47 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * ### Query all cvm instances
+ *
  * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const foo = tencentcloud.Instances.getInstance({
- *     instanceId: "ins-da412f5a",
+ * const example = tencentcloud.Instances.getInstance({});
+ * ```
+ * <!--End PulumiCodeChooser -->
+ *
+ * ### Query cvm instances by filters
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const example = tencentcloud.Instances.getInstance({
+ *     availabilityZone: "ap-guangzhou-6",
+ *     instanceId: "ins-a81rnm8c",
+ *     instanceName: "tf_example",
+ *     projectId: 0,
+ *     subnetId: "subnet-1to7t9au",
+ *     tags: {
+ *         tagKey: "tagValue",
+ *     },
+ *     vpcId: "vpc-l040hycv",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ *
+ * ### Or by instance set id list
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const example = tencentcloud.Instances.getInstance({
+ *     instanceSetIds: ["ins-a81rnm8c"],
  * });
  * ```
  * <!--End PulumiCodeChooser -->
@@ -129,13 +163,47 @@ export interface GetInstanceResult {
  *
  * ## Example Usage
  *
+ * ### Query all cvm instances
+ *
  * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const foo = tencentcloud.Instances.getInstance({
- *     instanceId: "ins-da412f5a",
+ * const example = tencentcloud.Instances.getInstance({});
+ * ```
+ * <!--End PulumiCodeChooser -->
+ *
+ * ### Query cvm instances by filters
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const example = tencentcloud.Instances.getInstance({
+ *     availabilityZone: "ap-guangzhou-6",
+ *     instanceId: "ins-a81rnm8c",
+ *     instanceName: "tf_example",
+ *     projectId: 0,
+ *     subnetId: "subnet-1to7t9au",
+ *     tags: {
+ *         tagKey: "tagValue",
+ *     },
+ *     vpcId: "vpc-l040hycv",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ *
+ * ### Or by instance set id list
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const example = tencentcloud.Instances.getInstance({
+ *     instanceSetIds: ["ins-a81rnm8c"],
  * });
  * ```
  * <!--End PulumiCodeChooser -->

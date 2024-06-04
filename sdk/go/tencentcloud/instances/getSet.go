@@ -29,7 +29,15 @@ import (
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
 //			_, err := Instances.GetSet(ctx, &instances.GetSetArgs{
-//				VpcId: pulumi.StringRef("vpc-4owdpnwr"),
+//				AvailabilityZone: pulumi.StringRef("ap-guangzhou-6"),
+//				InstanceId:       pulumi.StringRef("ins-a81rnm8c"),
+//				InstanceName:     pulumi.StringRef("tf_example"),
+//				ProjectId:        pulumi.IntRef(0),
+//				SubnetId:         pulumi.StringRef("subnet-1to7t9au"),
+//				Tags: map[string]interface{}{
+//					"tagKey": "tagValue",
+//				},
+//				VpcId: pulumi.StringRef("vpc-l040hycv"),
 //			}, nil)
 //			if err != nil {
 //				return err

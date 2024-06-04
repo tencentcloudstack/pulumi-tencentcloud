@@ -13,11 +13,40 @@ import (
 
 // Provides an available image for the user.
 //
-// The Images data source fetch proper image, which could be one of the private images of the user and images of system resources provided by TencentCloud, as well as other public images and those available on the image market.
+// The Images data source fetch proper image, which could be one of the private images of the user and images of system
+// resources provided by TencentCloud, as well as other public images and those available on the image market.
 //
 // > **NOTE:** This data source will be deprecated, please use `Images.getInstance` instead.
 //
 // ## Example Usage
+//
+// ### Query image
+//
+// <!--Start PulumiCodeChooser -->
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Image"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Image.GetInstance(ctx, nil, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
+// <!--End PulumiCodeChooser -->
+//
+// ### Query image by filter
 //
 // <!--Start PulumiCodeChooser -->
 // ```go
@@ -41,7 +70,62 @@ import (
 //						},
 //					},
 //				},
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
+// <!--End PulumiCodeChooser -->
+//
+// ### Query image by os name
+//
+// <!--Start PulumiCodeChooser -->
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Image"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Image.GetInstance(ctx, &image.GetInstanceArgs{
 //				OsName: pulumi.StringRef("centos"),
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
+// <!--End PulumiCodeChooser -->
+//
+// ### Query image by image name regex
+//
+// <!--Start PulumiCodeChooser -->
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Image"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Image.GetInstance(ctx, &image.GetInstanceArgs{
+//				ImageNameRegex: pulumi.StringRef("^Windows\\s.*$"),
 //			}, nil)
 //			if err != nil {
 //				return err

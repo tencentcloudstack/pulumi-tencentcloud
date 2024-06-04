@@ -15,6 +15,34 @@ import (
 //
 // ## Example Usage
 //
+// ### Query all cvm instances
+//
+// <!--Start PulumiCodeChooser -->
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Instances"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Instances.GetInstance(ctx, nil, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
+// <!--End PulumiCodeChooser -->
+//
+// ### Query cvm instances by filters
+//
 // <!--Start PulumiCodeChooser -->
 // ```go
 // package main
@@ -29,7 +57,45 @@ import (
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
 //			_, err := Instances.GetInstance(ctx, &instances.GetInstanceArgs{
-//				InstanceId: pulumi.StringRef("ins-da412f5a"),
+//				AvailabilityZone: pulumi.StringRef("ap-guangzhou-6"),
+//				InstanceId:       pulumi.StringRef("ins-a81rnm8c"),
+//				InstanceName:     pulumi.StringRef("tf_example"),
+//				ProjectId:        pulumi.IntRef(0),
+//				SubnetId:         pulumi.StringRef("subnet-1to7t9au"),
+//				Tags: map[string]interface{}{
+//					"tagKey": "tagValue",
+//				},
+//				VpcId: pulumi.StringRef("vpc-l040hycv"),
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
+// <!--End PulumiCodeChooser -->
+//
+// ### Or by instance set id list
+//
+// <!--Start PulumiCodeChooser -->
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Instances"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Instances.GetInstance(ctx, &instances.GetInstanceArgs{
+//				InstanceSetIds: []string{
+//					"ins-a81rnm8c",
+//				},
 //			}, nil)
 //			if err != nil {
 //				return err

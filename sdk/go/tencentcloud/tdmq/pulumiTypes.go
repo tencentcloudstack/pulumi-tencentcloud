@@ -431,6 +431,121 @@ func (o RocketmqClusterVpcArrayOutput) Index(i pulumi.IntInput) RocketmqClusterV
 	}).(RocketmqClusterVpcOutput)
 }
 
+type RocketmqVipInstanceIpRule struct {
+	// Whether to allow or deny.
+	Allow bool `pulumi:"allow"`
+	// IP address block information.
+	IpRule string `pulumi:"ipRule"`
+	// Remark.
+	Remark string `pulumi:"remark"`
+}
+
+// RocketmqVipInstanceIpRuleInput is an input type that accepts RocketmqVipInstanceIpRuleArgs and RocketmqVipInstanceIpRuleOutput values.
+// You can construct a concrete instance of `RocketmqVipInstanceIpRuleInput` via:
+//
+//	RocketmqVipInstanceIpRuleArgs{...}
+type RocketmqVipInstanceIpRuleInput interface {
+	pulumi.Input
+
+	ToRocketmqVipInstanceIpRuleOutput() RocketmqVipInstanceIpRuleOutput
+	ToRocketmqVipInstanceIpRuleOutputWithContext(context.Context) RocketmqVipInstanceIpRuleOutput
+}
+
+type RocketmqVipInstanceIpRuleArgs struct {
+	// Whether to allow or deny.
+	Allow pulumi.BoolInput `pulumi:"allow"`
+	// IP address block information.
+	IpRule pulumi.StringInput `pulumi:"ipRule"`
+	// Remark.
+	Remark pulumi.StringInput `pulumi:"remark"`
+}
+
+func (RocketmqVipInstanceIpRuleArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*RocketmqVipInstanceIpRule)(nil)).Elem()
+}
+
+func (i RocketmqVipInstanceIpRuleArgs) ToRocketmqVipInstanceIpRuleOutput() RocketmqVipInstanceIpRuleOutput {
+	return i.ToRocketmqVipInstanceIpRuleOutputWithContext(context.Background())
+}
+
+func (i RocketmqVipInstanceIpRuleArgs) ToRocketmqVipInstanceIpRuleOutputWithContext(ctx context.Context) RocketmqVipInstanceIpRuleOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(RocketmqVipInstanceIpRuleOutput)
+}
+
+// RocketmqVipInstanceIpRuleArrayInput is an input type that accepts RocketmqVipInstanceIpRuleArray and RocketmqVipInstanceIpRuleArrayOutput values.
+// You can construct a concrete instance of `RocketmqVipInstanceIpRuleArrayInput` via:
+//
+//	RocketmqVipInstanceIpRuleArray{ RocketmqVipInstanceIpRuleArgs{...} }
+type RocketmqVipInstanceIpRuleArrayInput interface {
+	pulumi.Input
+
+	ToRocketmqVipInstanceIpRuleArrayOutput() RocketmqVipInstanceIpRuleArrayOutput
+	ToRocketmqVipInstanceIpRuleArrayOutputWithContext(context.Context) RocketmqVipInstanceIpRuleArrayOutput
+}
+
+type RocketmqVipInstanceIpRuleArray []RocketmqVipInstanceIpRuleInput
+
+func (RocketmqVipInstanceIpRuleArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]RocketmqVipInstanceIpRule)(nil)).Elem()
+}
+
+func (i RocketmqVipInstanceIpRuleArray) ToRocketmqVipInstanceIpRuleArrayOutput() RocketmqVipInstanceIpRuleArrayOutput {
+	return i.ToRocketmqVipInstanceIpRuleArrayOutputWithContext(context.Background())
+}
+
+func (i RocketmqVipInstanceIpRuleArray) ToRocketmqVipInstanceIpRuleArrayOutputWithContext(ctx context.Context) RocketmqVipInstanceIpRuleArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(RocketmqVipInstanceIpRuleArrayOutput)
+}
+
+type RocketmqVipInstanceIpRuleOutput struct{ *pulumi.OutputState }
+
+func (RocketmqVipInstanceIpRuleOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*RocketmqVipInstanceIpRule)(nil)).Elem()
+}
+
+func (o RocketmqVipInstanceIpRuleOutput) ToRocketmqVipInstanceIpRuleOutput() RocketmqVipInstanceIpRuleOutput {
+	return o
+}
+
+func (o RocketmqVipInstanceIpRuleOutput) ToRocketmqVipInstanceIpRuleOutputWithContext(ctx context.Context) RocketmqVipInstanceIpRuleOutput {
+	return o
+}
+
+// Whether to allow or deny.
+func (o RocketmqVipInstanceIpRuleOutput) Allow() pulumi.BoolOutput {
+	return o.ApplyT(func(v RocketmqVipInstanceIpRule) bool { return v.Allow }).(pulumi.BoolOutput)
+}
+
+// IP address block information.
+func (o RocketmqVipInstanceIpRuleOutput) IpRule() pulumi.StringOutput {
+	return o.ApplyT(func(v RocketmqVipInstanceIpRule) string { return v.IpRule }).(pulumi.StringOutput)
+}
+
+// Remark.
+func (o RocketmqVipInstanceIpRuleOutput) Remark() pulumi.StringOutput {
+	return o.ApplyT(func(v RocketmqVipInstanceIpRule) string { return v.Remark }).(pulumi.StringOutput)
+}
+
+type RocketmqVipInstanceIpRuleArrayOutput struct{ *pulumi.OutputState }
+
+func (RocketmqVipInstanceIpRuleArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]RocketmqVipInstanceIpRule)(nil)).Elem()
+}
+
+func (o RocketmqVipInstanceIpRuleArrayOutput) ToRocketmqVipInstanceIpRuleArrayOutput() RocketmqVipInstanceIpRuleArrayOutput {
+	return o
+}
+
+func (o RocketmqVipInstanceIpRuleArrayOutput) ToRocketmqVipInstanceIpRuleArrayOutputWithContext(ctx context.Context) RocketmqVipInstanceIpRuleArrayOutput {
+	return o
+}
+
+func (o RocketmqVipInstanceIpRuleArrayOutput) Index(i pulumi.IntInput) RocketmqVipInstanceIpRuleOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) RocketmqVipInstanceIpRule {
+		return vs[0].([]RocketmqVipInstanceIpRule)[vs[1].(int)]
+	}).(RocketmqVipInstanceIpRuleOutput)
+}
+
 type RocketmqVipInstanceVpcInfo struct {
 	// Subnet ID.
 	SubnetId string `pulumi:"subnetId"`
@@ -4689,6 +4804,8 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*ProfessionalClusterVpcPtrInput)(nil)).Elem(), ProfessionalClusterVpcArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*RocketmqClusterVpcInput)(nil)).Elem(), RocketmqClusterVpcArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*RocketmqClusterVpcArrayInput)(nil)).Elem(), RocketmqClusterVpcArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*RocketmqVipInstanceIpRuleInput)(nil)).Elem(), RocketmqVipInstanceIpRuleArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*RocketmqVipInstanceIpRuleArrayInput)(nil)).Elem(), RocketmqVipInstanceIpRuleArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*RocketmqVipInstanceVpcInfoInput)(nil)).Elem(), RocketmqVipInstanceVpcInfoArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*RocketmqVipInstanceVpcInfoPtrInput)(nil)).Elem(), RocketmqVipInstanceVpcInfoArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetProInstanceDetailClusterInfoInput)(nil)).Elem(), GetProInstanceDetailClusterInfoArgs{})
@@ -4753,6 +4870,8 @@ func init() {
 	pulumi.RegisterOutputType(ProfessionalClusterVpcPtrOutput{})
 	pulumi.RegisterOutputType(RocketmqClusterVpcOutput{})
 	pulumi.RegisterOutputType(RocketmqClusterVpcArrayOutput{})
+	pulumi.RegisterOutputType(RocketmqVipInstanceIpRuleOutput{})
+	pulumi.RegisterOutputType(RocketmqVipInstanceIpRuleArrayOutput{})
 	pulumi.RegisterOutputType(RocketmqVipInstanceVpcInfoOutput{})
 	pulumi.RegisterOutputType(RocketmqVipInstanceVpcInfoPtrOutput{})
 	pulumi.RegisterOutputType(GetProInstanceDetailClusterInfoOutput{})

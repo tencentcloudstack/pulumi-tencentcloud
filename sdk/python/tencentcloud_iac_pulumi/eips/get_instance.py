@@ -125,12 +125,60 @@ def get_instance(eip_id: Optional[str] = None,
 
     ## Example Usage
 
+    ### Query all eip instances
+
     <!--Start PulumiCodeChooser -->
     ```python
     import pulumi
     import pulumi_tencentcloud as tencentcloud
 
-    foo = tencentcloud.Eips.get_instance(eip_id="eip-ry9h95hg")
+    example = tencentcloud.Eips.get_instance()
+    ```
+    <!--End PulumiCodeChooser -->
+
+    ### Query eip instances by eip ID
+
+    <!--Start PulumiCodeChooser -->
+    ```python
+    import pulumi
+    import pulumi_tencentcloud as tencentcloud
+
+    example = tencentcloud.Eips.get_instance(eip_id="eip-ry9h95hg")
+    ```
+    <!--End PulumiCodeChooser -->
+
+    ### Query eip instances by eip name
+
+    <!--Start PulumiCodeChooser -->
+    ```python
+    import pulumi
+    import pulumi_tencentcloud as tencentcloud
+
+    example = tencentcloud.Eips.get_instance(eip_name="tf-example")
+    ```
+    <!--End PulumiCodeChooser -->
+
+    ### Query eip instances by public ip
+
+    <!--Start PulumiCodeChooser -->
+    ```python
+    import pulumi
+    import pulumi_tencentcloud as tencentcloud
+
+    example = tencentcloud.Eips.get_instance(public_ip="1.12.62.3")
+    ```
+    <!--End PulumiCodeChooser -->
+
+    ### Query eip instances by tags
+
+    <!--Start PulumiCodeChooser -->
+    ```python
+    import pulumi
+    import pulumi_tencentcloud as tencentcloud
+
+    example = tencentcloud.Eips.get_instance(tags={
+        "test": "test",
+    })
     ```
     <!--End PulumiCodeChooser -->
 
@@ -172,12 +220,60 @@ def get_instance_output(eip_id: Optional[pulumi.Input[Optional[str]]] = None,
 
     ## Example Usage
 
+    ### Query all eip instances
+
     <!--Start PulumiCodeChooser -->
     ```python
     import pulumi
     import pulumi_tencentcloud as tencentcloud
 
-    foo = tencentcloud.Eips.get_instance(eip_id="eip-ry9h95hg")
+    example = tencentcloud.Eips.get_instance()
+    ```
+    <!--End PulumiCodeChooser -->
+
+    ### Query eip instances by eip ID
+
+    <!--Start PulumiCodeChooser -->
+    ```python
+    import pulumi
+    import pulumi_tencentcloud as tencentcloud
+
+    example = tencentcloud.Eips.get_instance(eip_id="eip-ry9h95hg")
+    ```
+    <!--End PulumiCodeChooser -->
+
+    ### Query eip instances by eip name
+
+    <!--Start PulumiCodeChooser -->
+    ```python
+    import pulumi
+    import pulumi_tencentcloud as tencentcloud
+
+    example = tencentcloud.Eips.get_instance(eip_name="tf-example")
+    ```
+    <!--End PulumiCodeChooser -->
+
+    ### Query eip instances by public ip
+
+    <!--Start PulumiCodeChooser -->
+    ```python
+    import pulumi
+    import pulumi_tencentcloud as tencentcloud
+
+    example = tencentcloud.Eips.get_instance(public_ip="1.12.62.3")
+    ```
+    <!--End PulumiCodeChooser -->
+
+    ### Query eip instances by tags
+
+    <!--Start PulumiCodeChooser -->
+    ```python
+    import pulumi
+    import pulumi_tencentcloud as tencentcloud
+
+    example = tencentcloud.Eips.get_instance(tags={
+        "test": "test",
+    })
     ```
     <!--End PulumiCodeChooser -->
 

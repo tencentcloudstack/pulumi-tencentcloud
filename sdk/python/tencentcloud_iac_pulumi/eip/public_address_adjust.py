@@ -109,9 +109,41 @@ class PublicAddressAdjust(pulumi.CustomResource):
         import pulumi
         import tencentcloud_iac_pulumi as tencentcloud
 
-        public_address_adjust = tencentcloud.eip.PublicAddressAdjust("publicAddressAdjust",
-            address_id="eip-erft45fu",
-            instance_id="ins-cr2rfq78")
+        # create vpc
+        vpc = tencentcloud.vpc.Instance("vpc", cidr_block="10.0.0.0/16")
+        # create vpc subnet
+        subnet = tencentcloud.subnet.Instance("subnet",
+            vpc_id=vpc.id,
+            availability_zone="ap-guangzhou-6",
+            cidr_block="10.0.20.0/28",
+            is_multicast=False)
+        # create cvm
+        example_instance = tencentcloud.instance.Instance("exampleInstance",
+            instance_name="tf_example",
+            availability_zone="ap-guangzhou-6",
+            image_id="img-9qrfy1xt",
+            instance_type="SA3.MEDIUM4",
+            system_disk_type="CLOUD_HSSD",
+            system_disk_size=100,
+            hostname="example",
+            project_id=0,
+            vpc_id=vpc.id,
+            subnet_id=subnet.id,
+            allocate_public_ip=True,
+            internet_max_bandwidth_out=10,
+            data_disks=[tencentcloud.instance.InstanceDataDiskArgs(
+                data_disk_type="CLOUD_HSSD",
+                data_disk_size=50,
+                encrypt=False,
+            )],
+            tags={
+                "tagKey": "tagValue",
+            })
+        # create eip
+        example_eip_instance_instance = tencentcloud.eip.Instance("exampleEip/instanceInstance")
+        example_public_address_adjust = tencentcloud.eip.PublicAddressAdjust("examplePublicAddressAdjust",
+            instance_id=example_instance.id,
+            address_id=example_eip / instance_instance["id"])
         ```
         <!--End PulumiCodeChooser -->
 
@@ -136,9 +168,41 @@ class PublicAddressAdjust(pulumi.CustomResource):
         import pulumi
         import tencentcloud_iac_pulumi as tencentcloud
 
-        public_address_adjust = tencentcloud.eip.PublicAddressAdjust("publicAddressAdjust",
-            address_id="eip-erft45fu",
-            instance_id="ins-cr2rfq78")
+        # create vpc
+        vpc = tencentcloud.vpc.Instance("vpc", cidr_block="10.0.0.0/16")
+        # create vpc subnet
+        subnet = tencentcloud.subnet.Instance("subnet",
+            vpc_id=vpc.id,
+            availability_zone="ap-guangzhou-6",
+            cidr_block="10.0.20.0/28",
+            is_multicast=False)
+        # create cvm
+        example_instance = tencentcloud.instance.Instance("exampleInstance",
+            instance_name="tf_example",
+            availability_zone="ap-guangzhou-6",
+            image_id="img-9qrfy1xt",
+            instance_type="SA3.MEDIUM4",
+            system_disk_type="CLOUD_HSSD",
+            system_disk_size=100,
+            hostname="example",
+            project_id=0,
+            vpc_id=vpc.id,
+            subnet_id=subnet.id,
+            allocate_public_ip=True,
+            internet_max_bandwidth_out=10,
+            data_disks=[tencentcloud.instance.InstanceDataDiskArgs(
+                data_disk_type="CLOUD_HSSD",
+                data_disk_size=50,
+                encrypt=False,
+            )],
+            tags={
+                "tagKey": "tagValue",
+            })
+        # create eip
+        example_eip_instance_instance = tencentcloud.eip.Instance("exampleEip/instanceInstance")
+        example_public_address_adjust = tencentcloud.eip.PublicAddressAdjust("examplePublicAddressAdjust",
+            instance_id=example_instance.id,
+            address_id=example_eip / instance_instance["id"])
         ```
         <!--End PulumiCodeChooser -->
 

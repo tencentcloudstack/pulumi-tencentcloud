@@ -174,12 +174,44 @@ def get_instance(availability_zone: Optional[str] = None,
 
     ## Example Usage
 
+    ### Query all cvm instances
+
     <!--Start PulumiCodeChooser -->
     ```python
     import pulumi
     import pulumi_tencentcloud as tencentcloud
 
-    foo = tencentcloud.Instances.get_instance(instance_id="ins-da412f5a")
+    example = tencentcloud.Instances.get_instance()
+    ```
+    <!--End PulumiCodeChooser -->
+
+    ### Query cvm instances by filters
+
+    <!--Start PulumiCodeChooser -->
+    ```python
+    import pulumi
+    import pulumi_tencentcloud as tencentcloud
+
+    example = tencentcloud.Instances.get_instance(availability_zone="ap-guangzhou-6",
+        instance_id="ins-a81rnm8c",
+        instance_name="tf_example",
+        project_id=0,
+        subnet_id="subnet-1to7t9au",
+        tags={
+            "tagKey": "tagValue",
+        },
+        vpc_id="vpc-l040hycv")
+    ```
+    <!--End PulumiCodeChooser -->
+
+    ### Or by instance set id list
+
+    <!--Start PulumiCodeChooser -->
+    ```python
+    import pulumi
+    import pulumi_tencentcloud as tencentcloud
+
+    example = tencentcloud.Instances.get_instance(instance_set_ids=["ins-a81rnm8c"])
     ```
     <!--End PulumiCodeChooser -->
 
@@ -237,12 +269,44 @@ def get_instance_output(availability_zone: Optional[pulumi.Input[Optional[str]]]
 
     ## Example Usage
 
+    ### Query all cvm instances
+
     <!--Start PulumiCodeChooser -->
     ```python
     import pulumi
     import pulumi_tencentcloud as tencentcloud
 
-    foo = tencentcloud.Instances.get_instance(instance_id="ins-da412f5a")
+    example = tencentcloud.Instances.get_instance()
+    ```
+    <!--End PulumiCodeChooser -->
+
+    ### Query cvm instances by filters
+
+    <!--Start PulumiCodeChooser -->
+    ```python
+    import pulumi
+    import pulumi_tencentcloud as tencentcloud
+
+    example = tencentcloud.Instances.get_instance(availability_zone="ap-guangzhou-6",
+        instance_id="ins-a81rnm8c",
+        instance_name="tf_example",
+        project_id=0,
+        subnet_id="subnet-1to7t9au",
+        tags={
+            "tagKey": "tagValue",
+        },
+        vpc_id="vpc-l040hycv")
+    ```
+    <!--End PulumiCodeChooser -->
+
+    ### Or by instance set id list
+
+    <!--Start PulumiCodeChooser -->
+    ```python
+    import pulumi
+    import pulumi_tencentcloud as tencentcloud
+
+    example = tencentcloud.Instances.get_instance(instance_set_ids=["ins-a81rnm8c"])
     ```
     <!--End PulumiCodeChooser -->
 

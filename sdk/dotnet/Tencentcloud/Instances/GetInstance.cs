@@ -17,6 +17,8 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Instances
         /// 
         /// ## Example Usage
         /// 
+        /// ### Query all cvm instances
+        /// 
         /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
         /// using System.Collections.Generic;
@@ -26,9 +28,58 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Instances
         /// 
         /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     var foo = Tencentcloud.Instances.GetInstance.Invoke(new()
+        ///     var example = Tencentcloud.Instances.GetInstance.Invoke();
+        /// 
+        /// });
+        /// ```
+        /// &lt;!--End PulumiCodeChooser --&gt;
+        /// 
+        /// ### Query cvm instances by filters
+        /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
+        /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
+        /// using Pulumi;
+        /// using Tencentcloud = Pulumi.Tencentcloud;
+        /// 
+        /// return await Deployment.RunAsync(() =&gt; 
+        /// {
+        ///     var example = Tencentcloud.Instances.GetInstance.Invoke(new()
         ///     {
-        ///         InstanceId = "ins-da412f5a",
+        ///         AvailabilityZone = "ap-guangzhou-6",
+        ///         InstanceId = "ins-a81rnm8c",
+        ///         InstanceName = "tf_example",
+        ///         ProjectId = 0,
+        ///         SubnetId = "subnet-1to7t9au",
+        ///         Tags = 
+        ///         {
+        ///             { "tagKey", "tagValue" },
+        ///         },
+        ///         VpcId = "vpc-l040hycv",
+        ///     });
+        /// 
+        /// });
+        /// ```
+        /// &lt;!--End PulumiCodeChooser --&gt;
+        /// 
+        /// ### Or by instance set id list
+        /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
+        /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
+        /// using Pulumi;
+        /// using Tencentcloud = Pulumi.Tencentcloud;
+        /// 
+        /// return await Deployment.RunAsync(() =&gt; 
+        /// {
+        ///     var example = Tencentcloud.Instances.GetInstance.Invoke(new()
+        ///     {
+        ///         InstanceSetIds = new[]
+        ///         {
+        ///             "ins-a81rnm8c",
+        ///         },
         ///     });
         /// 
         /// });
@@ -43,6 +94,8 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Instances
         /// 
         /// ## Example Usage
         /// 
+        /// ### Query all cvm instances
+        /// 
         /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
         /// using System.Collections.Generic;
@@ -52,9 +105,58 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Instances
         /// 
         /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     var foo = Tencentcloud.Instances.GetInstance.Invoke(new()
+        ///     var example = Tencentcloud.Instances.GetInstance.Invoke();
+        /// 
+        /// });
+        /// ```
+        /// &lt;!--End PulumiCodeChooser --&gt;
+        /// 
+        /// ### Query cvm instances by filters
+        /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
+        /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
+        /// using Pulumi;
+        /// using Tencentcloud = Pulumi.Tencentcloud;
+        /// 
+        /// return await Deployment.RunAsync(() =&gt; 
+        /// {
+        ///     var example = Tencentcloud.Instances.GetInstance.Invoke(new()
         ///     {
-        ///         InstanceId = "ins-da412f5a",
+        ///         AvailabilityZone = "ap-guangzhou-6",
+        ///         InstanceId = "ins-a81rnm8c",
+        ///         InstanceName = "tf_example",
+        ///         ProjectId = 0,
+        ///         SubnetId = "subnet-1to7t9au",
+        ///         Tags = 
+        ///         {
+        ///             { "tagKey", "tagValue" },
+        ///         },
+        ///         VpcId = "vpc-l040hycv",
+        ///     });
+        /// 
+        /// });
+        /// ```
+        /// &lt;!--End PulumiCodeChooser --&gt;
+        /// 
+        /// ### Or by instance set id list
+        /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
+        /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
+        /// using Pulumi;
+        /// using Tencentcloud = Pulumi.Tencentcloud;
+        /// 
+        /// return await Deployment.RunAsync(() =&gt; 
+        /// {
+        ///     var example = Tencentcloud.Instances.GetInstance.Invoke(new()
+        ///     {
+        ///         InstanceSetIds = new[]
+        ///         {
+        ///             "ins-a81rnm8c",
+        ///         },
         ///     });
         /// 
         /// });

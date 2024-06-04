@@ -204,14 +204,17 @@ class SyncImage(pulumi.CustomResource):
         <!--Start PulumiCodeChooser -->
         ```python
         import pulumi
+        import pulumi_tencentcloud as tencentcloud
         import tencentcloud_iac_pulumi as tencentcloud
 
-        sync_image = tencentcloud.cvm.SyncImage("syncImage",
+        example_instance = tencentcloud.Images.get_instance(image_types=["PRIVATE_IMAGE"],
+            image_name_regex="MyImage")
+        example_sync_image = tencentcloud.cvm.SyncImage("exampleSyncImage",
+            image_id=example_instance.images[0].image_id,
             destination_regions=[
                 "ap-guangzhou",
                 "ap-shanghai",
-            ],
-            image_id="img-xxxxxx")
+            ])
         ```
         <!--End PulumiCodeChooser -->
 
@@ -237,14 +240,17 @@ class SyncImage(pulumi.CustomResource):
         <!--Start PulumiCodeChooser -->
         ```python
         import pulumi
+        import pulumi_tencentcloud as tencentcloud
         import tencentcloud_iac_pulumi as tencentcloud
 
-        sync_image = tencentcloud.cvm.SyncImage("syncImage",
+        example_instance = tencentcloud.Images.get_instance(image_types=["PRIVATE_IMAGE"],
+            image_name_regex="MyImage")
+        example_sync_image = tencentcloud.cvm.SyncImage("exampleSyncImage",
+            image_id=example_instance.images[0].image_id,
             destination_regions=[
                 "ap-guangzhou",
                 "ap-shanghai",
-            ],
-            image_id="img-xxxxxx")
+            ])
         ```
         <!--End PulumiCodeChooser -->
 

@@ -132,13 +132,69 @@ def get_instance(image_id: Optional[str] = None,
 
     ## Example Usage
 
+    ### Query all images
+
     <!--Start PulumiCodeChooser -->
     ```python
     import pulumi
     import pulumi_tencentcloud as tencentcloud
 
-    foo = tencentcloud.Images.get_instance(image_types=["PUBLIC_IMAGE"],
-        os_name="centos 7.5")
+    example = tencentcloud.Images.get_instance()
+    ```
+    <!--End PulumiCodeChooser -->
+
+    ### Query images by image ID
+
+    <!--Start PulumiCodeChooser -->
+    ```python
+    import pulumi
+    import pulumi_tencentcloud as tencentcloud
+
+    example = tencentcloud.Images.get_instance(image_id="img-9qrfy1xt")
+    ```
+    <!--End PulumiCodeChooser -->
+
+    ### Query images by os name
+
+    <!--Start PulumiCodeChooser -->
+    ```python
+    import pulumi
+    import pulumi_tencentcloud as tencentcloud
+
+    example = tencentcloud.Images.get_instance(os_name="TencentOS Server 3.2 (Final)")
+    ```
+    <!--End PulumiCodeChooser -->
+
+    ### Query images by image name regex
+
+    <!--Start PulumiCodeChooser -->
+    ```python
+    import pulumi
+    import pulumi_tencentcloud as tencentcloud
+
+    example = tencentcloud.Images.get_instance(image_name_regex="^TencentOS")
+    ```
+    <!--End PulumiCodeChooser -->
+
+    ### Query images by image type
+
+    <!--Start PulumiCodeChooser -->
+    ```python
+    import pulumi
+    import pulumi_tencentcloud as tencentcloud
+
+    example = tencentcloud.Images.get_instance(image_types=["PUBLIC_IMAGE"])
+    ```
+    <!--End PulumiCodeChooser -->
+
+    ### Query images by instance type
+
+    <!--Start PulumiCodeChooser -->
+    ```python
+    import pulumi
+    import pulumi_tencentcloud as tencentcloud
+
+    example = tencentcloud.Images.get_instance(instance_type="S1.SMALL1")
     ```
     <!--End PulumiCodeChooser -->
 
@@ -184,13 +240,69 @@ def get_instance_output(image_id: Optional[pulumi.Input[Optional[str]]] = None,
 
     ## Example Usage
 
+    ### Query all images
+
     <!--Start PulumiCodeChooser -->
     ```python
     import pulumi
     import pulumi_tencentcloud as tencentcloud
 
-    foo = tencentcloud.Images.get_instance(image_types=["PUBLIC_IMAGE"],
-        os_name="centos 7.5")
+    example = tencentcloud.Images.get_instance()
+    ```
+    <!--End PulumiCodeChooser -->
+
+    ### Query images by image ID
+
+    <!--Start PulumiCodeChooser -->
+    ```python
+    import pulumi
+    import pulumi_tencentcloud as tencentcloud
+
+    example = tencentcloud.Images.get_instance(image_id="img-9qrfy1xt")
+    ```
+    <!--End PulumiCodeChooser -->
+
+    ### Query images by os name
+
+    <!--Start PulumiCodeChooser -->
+    ```python
+    import pulumi
+    import pulumi_tencentcloud as tencentcloud
+
+    example = tencentcloud.Images.get_instance(os_name="TencentOS Server 3.2 (Final)")
+    ```
+    <!--End PulumiCodeChooser -->
+
+    ### Query images by image name regex
+
+    <!--Start PulumiCodeChooser -->
+    ```python
+    import pulumi
+    import pulumi_tencentcloud as tencentcloud
+
+    example = tencentcloud.Images.get_instance(image_name_regex="^TencentOS")
+    ```
+    <!--End PulumiCodeChooser -->
+
+    ### Query images by image type
+
+    <!--Start PulumiCodeChooser -->
+    ```python
+    import pulumi
+    import pulumi_tencentcloud as tencentcloud
+
+    example = tencentcloud.Images.get_instance(image_types=["PUBLIC_IMAGE"])
+    ```
+    <!--End PulumiCodeChooser -->
+
+    ### Query images by instance type
+
+    <!--Start PulumiCodeChooser -->
+    ```python
+    import pulumi
+    import pulumi_tencentcloud as tencentcloud
+
+    example = tencentcloud.Images.get_instance(instance_type="S1.SMALL1")
     ```
     <!--End PulumiCodeChooser -->
 

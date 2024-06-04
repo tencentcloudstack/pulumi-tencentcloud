@@ -17844,6 +17844,129 @@ export namespace Cls {
         topicId: string;
     }
 
+    export interface IndexRule {
+        /**
+         * The key value index is automatically configured. If it is empty, it means that the function is not enabled.
+         */
+        dynamicIndex?: outputs.Cls.IndexRuleDynamicIndex;
+        /**
+         * Full-Text index configuration.
+         */
+        fullText?: outputs.Cls.IndexRuleFullText;
+        /**
+         * Key-Value index configuration.
+         */
+        keyValue?: outputs.Cls.IndexRuleKeyValue;
+        /**
+         * Metafield index configuration.
+         */
+        tag?: outputs.Cls.IndexRuleTag;
+    }
+
+    export interface IndexRuleDynamicIndex {
+        /**
+         * index automatic configuration switch.
+         */
+        status: boolean;
+    }
+
+    export interface IndexRuleFullText {
+        /**
+         * Case sensitivity.
+         */
+        caseSensitive: boolean;
+        /**
+         * Whether Chinese characters are contained.
+         */
+        containZH: boolean;
+        /**
+         * Full-Text index delimiter. Each character in the string represents a delimiter.
+         */
+        tokenizer: string;
+    }
+
+    export interface IndexRuleKeyValue {
+        /**
+         * Case sensitivity.
+         */
+        caseSensitive: boolean;
+        /**
+         * Key-Value pair information of the index to be created. Up to 100 key-value pairs can be configured.
+         */
+        keyValues?: outputs.Cls.IndexRuleKeyValueKeyValue[];
+    }
+
+    export interface IndexRuleKeyValueKeyValue {
+        /**
+         * When a key value or metafield index needs to be configured for a field, the metafield Key does not need to be prefixed with __TAG__. and is consistent with the one when logs are uploaded. __TAG__. will be prefixed automatically for display in the console..
+         */
+        key: string;
+        /**
+         * Field index description information.
+         */
+        value?: outputs.Cls.IndexRuleKeyValueKeyValueValue;
+    }
+
+    export interface IndexRuleKeyValueKeyValueValue {
+        /**
+         * Whether Chinese characters are contained.
+         */
+        containZH?: boolean;
+        /**
+         * Whether the analysis feature is enabled for the field.
+         */
+        sqlFlag?: boolean;
+        /**
+         * Field delimiter, which is meaningful only if the field type is text. Each character in the entered string represents a delimiter.
+         */
+        tokenizer?: string;
+        /**
+         * Field type. Valid values: long, text, double.
+         */
+        type: string;
+    }
+
+    export interface IndexRuleTag {
+        /**
+         * Case sensitivity.
+         */
+        caseSensitive: boolean;
+        /**
+         * Key-Value pair information of the index to be created. Up to 100 key-value pairs can be configured.
+         */
+        keyValues?: outputs.Cls.IndexRuleTagKeyValue[];
+    }
+
+    export interface IndexRuleTagKeyValue {
+        /**
+         * When a key value or metafield index needs to be configured for a field, the metafield Key does not need to be prefixed with __TAG__. and is consistent with the one when logs are uploaded. __TAG__. will be prefixed automatically for display in the console..
+         */
+        key: string;
+        /**
+         * Field index description information.
+         */
+        value?: outputs.Cls.IndexRuleTagKeyValueValue;
+    }
+
+    export interface IndexRuleTagKeyValueValue {
+        /**
+         * Whether Chinese characters are contained.
+         */
+        containZH?: boolean;
+        /**
+         * Whether the analysis feature is enabled for the field.
+         */
+        sqlFlag?: boolean;
+        /**
+         * Field delimiter, which is meaningful only if the field type is text. Each character in the entered string represents a delimiter.
+         */
+        tokenizer?: string;
+        /**
+         * Field type. Valid values: long, text, double.
+         */
+        type: string;
+    }
+
     export interface KafkaRechargeLogRechargeRule {
         /**
          * default time from.
@@ -65387,6 +65510,21 @@ export namespace Tdmq {
          * Vpc ID.
          */
         vpcId: string;
+    }
+
+    export interface RocketmqVipInstanceIpRule {
+        /**
+         * Whether to allow or deny.
+         */
+        allow: boolean;
+        /**
+         * IP address block information.
+         */
+        ipRule: string;
+        /**
+         * Remark.
+         */
+        remark: string;
     }
 
     export interface RocketmqVipInstanceVpcInfo {

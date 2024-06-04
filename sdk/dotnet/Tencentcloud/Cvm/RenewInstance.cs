@@ -24,15 +24,63 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cvm
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     var renewInstance = new Tencentcloud.Cvm.RenewInstance("renewInstance", new()
+    ///     // create vpc
+    ///     var vpc = new Tencentcloud.Vpc.Instance("vpc", new()
     ///     {
+    ///         CidrBlock = "10.0.0.0/16",
+    ///     });
+    /// 
+    ///     // create vpc subnet
+    ///     var subnet = new Tencentcloud.Subnet.Instance("subnet", new()
+    ///     {
+    ///         VpcId = vpc.Id,
+    ///         AvailabilityZone = "ap-guangzhou-6",
+    ///         CidrBlock = "10.0.20.0/28",
+    ///         IsMulticast = false,
+    ///     });
+    /// 
+    ///     // create cvm
+    ///     var exampleInstance = new Tencentcloud.Instance.Instance("exampleInstance", new()
+    ///     {
+    ///         InstanceName = "tf_example",
+    ///         AvailabilityZone = "ap-guangzhou-6",
+    ///         ImageId = "img-9qrfy1xt",
+    ///         InstanceType = "SA3.MEDIUM4",
+    ///         SystemDiskType = "CLOUD_HSSD",
+    ///         SystemDiskSize = 100,
+    ///         Hostname = "example",
+    ///         ProjectId = 0,
+    ///         VpcId = vpc.Id,
+    ///         SubnetId = subnet.Id,
+    ///         ForceDelete = true,
+    ///         InstanceChargeType = "PREPAID",
+    ///         InstanceChargeTypePrepaidPeriod = 1,
+    ///         InstanceChargeTypePrepaidRenewFlag = "NOTIFY_AND_MANUAL_RENEW",
+    ///         DataDisks = new[]
+    ///         {
+    ///             new Tencentcloud.Instance.Inputs.InstanceDataDiskArgs
+    ///             {
+    ///                 DataDiskType = "CLOUD_HSSD",
+    ///                 DataDiskSize = 50,
+    ///                 Encrypt = false,
+    ///             },
+    ///         },
+    ///         Tags = 
+    ///         {
+    ///             { "tagKey", "tagValue" },
+    ///         },
+    ///     });
+    /// 
+    ///     // renew instance
+    ///     var exampleRenewInstance = new Tencentcloud.Cvm.RenewInstance("exampleRenewInstance", new()
+    ///     {
+    ///         InstanceId = exampleInstance.Id,
+    ///         RenewPortableDataDisk = true,
     ///         InstanceChargePrepaid = new Tencentcloud.Cvm.Inputs.RenewInstanceInstanceChargePrepaidArgs
     ///         {
     ///             Period = 1,
-    ///             RenewFlag = "NOTIFY_AND_AUTO_RENEW",
+    ///             RenewFlag = "NOTIFY_AND_MANUAL_RENEW",
     ///         },
-    ///         InstanceId = "ins-f9jr4bd2",
-    ///         RenewPortableDataDisk = true,
     ///     });
     /// 
     /// });

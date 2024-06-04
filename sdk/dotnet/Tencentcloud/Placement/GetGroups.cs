@@ -26,10 +26,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Placement
         /// 
         /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     var foo = Tencentcloud.Placement.GetGroups.Invoke(new()
+        ///     var example = Tencentcloud.Placement.GetGroups.Invoke(new()
         ///     {
-        ///         Name = "test",
-        ///         PlacementGroupId = "ps-21q9ibvr",
+        ///         Name = "tf_example",
+        ///         PlacementGroupId = "ps-bwvst92h",
         ///     });
         /// 
         /// });
@@ -53,10 +53,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Placement
         /// 
         /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     var foo = Tencentcloud.Placement.GetGroups.Invoke(new()
+        ///     var example = Tencentcloud.Placement.GetGroups.Invoke(new()
         ///     {
-        ///         Name = "test",
-        ///         PlacementGroupId = "ps-21q9ibvr",
+        ///         Name = "tf_example",
+        ///         PlacementGroupId = "ps-bwvst92h",
         ///     });
         /// 
         /// });

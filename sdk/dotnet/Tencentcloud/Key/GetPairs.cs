@@ -17,6 +17,8 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Key
         /// 
         /// ## Example Usage
         /// 
+        /// ### Query key pairs by key ID
+        /// 
         /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
         /// using System.Collections.Generic;
@@ -26,12 +28,27 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Key
         /// 
         /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     var foo = Tencentcloud.Key.GetPairs.Invoke(new()
+        ///     var keyId = Tencentcloud.Key.GetPairs.Invoke(new()
         ///     {
         ///         KeyId = "skey-ie97i3ml",
         ///     });
         /// 
-        ///     var name = Tencentcloud.Key.GetPairs.Invoke(new()
+        /// });
+        /// ```
+        /// &lt;!--End PulumiCodeChooser --&gt;
+        /// 
+        /// ### Query key pairs by key name
+        /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
+        /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
+        /// using Pulumi;
+        /// using Tencentcloud = Pulumi.Tencentcloud;
+        /// 
+        /// return await Deployment.RunAsync(() =&gt; 
+        /// {
+        ///     var keyName = Tencentcloud.Key.GetPairs.Invoke(new()
         ///     {
         ///         KeyName = "^test$",
         ///     });
@@ -48,6 +65,8 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Key
         /// 
         /// ## Example Usage
         /// 
+        /// ### Query key pairs by key ID
+        /// 
         /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
         /// using System.Collections.Generic;
@@ -57,12 +76,27 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Key
         /// 
         /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     var foo = Tencentcloud.Key.GetPairs.Invoke(new()
+        ///     var keyId = Tencentcloud.Key.GetPairs.Invoke(new()
         ///     {
         ///         KeyId = "skey-ie97i3ml",
         ///     });
         /// 
-        ///     var name = Tencentcloud.Key.GetPairs.Invoke(new()
+        /// });
+        /// ```
+        /// &lt;!--End PulumiCodeChooser --&gt;
+        /// 
+        /// ### Query key pairs by key name
+        /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
+        /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
+        /// using Pulumi;
+        /// using Tencentcloud = Pulumi.Tencentcloud;
+        /// 
+        /// return await Deployment.RunAsync(() =&gt; 
+        /// {
+        ///     var keyName = Tencentcloud.Key.GetPairs.Invoke(new()
         ///     {
         ///         KeyName = "^test$",
         ///     });

@@ -9,23 +9,62 @@ import * as utilities from "../utilities";
 /**
  * Provides an available image for the user.
  *
- * The Images data source fetch proper image, which could be one of the private images of the user and images of system resources provided by TencentCloud, as well as other public images and those available on the image market.
+ * The Images data source fetch proper image, which could be one of the private images of the user and images of system
+ * resources provided by TencentCloud, as well as other public images and those available on the image market.
  *
  * > **NOTE:** This data source will be deprecated, please use `tencentcloud.Images.getInstance` instead.
  *
  * ## Example Usage
+ *
+ * ### Query image
  *
  * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const myFavorateImage = tencentcloud.Image.getInstance({
+ * const example = tencentcloud.Image.getInstance({});
+ * ```
+ * <!--End PulumiCodeChooser -->
+ *
+ * ### Query image by filter
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const example = tencentcloud.Image.getInstance({
  *     filters: [{
  *         name: "image-type",
  *         values: ["PUBLIC_IMAGE"],
  *     }],
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ *
+ * ### Query image by os name
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const example = tencentcloud.Image.getInstance({
  *     osName: "centos",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ *
+ * ### Query image by image name regex
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const example = tencentcloud.Image.getInstance({
+ *     imageNameRegex: "^Windows\\s.*$",
  * });
  * ```
  * <!--End PulumiCodeChooser -->
@@ -88,23 +127,62 @@ export interface GetInstanceResult {
 /**
  * Provides an available image for the user.
  *
- * The Images data source fetch proper image, which could be one of the private images of the user and images of system resources provided by TencentCloud, as well as other public images and those available on the image market.
+ * The Images data source fetch proper image, which could be one of the private images of the user and images of system
+ * resources provided by TencentCloud, as well as other public images and those available on the image market.
  *
  * > **NOTE:** This data source will be deprecated, please use `tencentcloud.Images.getInstance` instead.
  *
  * ## Example Usage
+ *
+ * ### Query image
  *
  * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const myFavorateImage = tencentcloud.Image.getInstance({
+ * const example = tencentcloud.Image.getInstance({});
+ * ```
+ * <!--End PulumiCodeChooser -->
+ *
+ * ### Query image by filter
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const example = tencentcloud.Image.getInstance({
  *     filters: [{
  *         name: "image-type",
  *         values: ["PUBLIC_IMAGE"],
  *     }],
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ *
+ * ### Query image by os name
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const example = tencentcloud.Image.getInstance({
  *     osName: "centos",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ *
+ * ### Query image by image name regex
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const example = tencentcloud.Image.getInstance({
+ *     imageNameRegex: "^Windows\\s.*$",
  * });
  * ```
  * <!--End PulumiCodeChooser -->

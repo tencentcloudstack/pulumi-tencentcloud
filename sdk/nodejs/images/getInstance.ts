@@ -11,14 +11,78 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * ### Query all images
+ *
  * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const foo = tencentcloud.Images.getInstance({
+ * const example = tencentcloud.Images.getInstance({});
+ * ```
+ * <!--End PulumiCodeChooser -->
+ *
+ * ### Query images by image ID
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const example = tencentcloud.Images.getInstance({
+ *     imageId: "img-9qrfy1xt",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ *
+ * ### Query images by os name
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const example = tencentcloud.Images.getInstance({
+ *     osName: "TencentOS Server 3.2 (Final)",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ *
+ * ### Query images by image name regex
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const example = tencentcloud.Images.getInstance({
+ *     imageNameRegex: "^TencentOS",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ *
+ * ### Query images by image type
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const example = tencentcloud.Images.getInstance({
  *     imageTypes: ["PUBLIC_IMAGE"],
- *     osName: "centos 7.5",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ *
+ * ### Query images by instance type
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const example = tencentcloud.Images.getInstance({
+ *     instanceType: "S1.SMALL1",
  * });
  * ```
  * <!--End PulumiCodeChooser -->
@@ -100,14 +164,78 @@ export interface GetInstanceResult {
  *
  * ## Example Usage
  *
+ * ### Query all images
+ *
  * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const foo = tencentcloud.Images.getInstance({
+ * const example = tencentcloud.Images.getInstance({});
+ * ```
+ * <!--End PulumiCodeChooser -->
+ *
+ * ### Query images by image ID
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const example = tencentcloud.Images.getInstance({
+ *     imageId: "img-9qrfy1xt",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ *
+ * ### Query images by os name
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const example = tencentcloud.Images.getInstance({
+ *     osName: "TencentOS Server 3.2 (Final)",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ *
+ * ### Query images by image name regex
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const example = tencentcloud.Images.getInstance({
+ *     imageNameRegex: "^TencentOS",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ *
+ * ### Query images by image type
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const example = tencentcloud.Images.getInstance({
  *     imageTypes: ["PUBLIC_IMAGE"],
- *     osName: "centos 7.5",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ *
+ * ### Query images by instance type
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const example = tencentcloud.Images.getInstance({
+ *     instanceType: "S1.SMALL1",
  * });
  * ```
  * <!--End PulumiCodeChooser -->

@@ -75,17 +75,39 @@ class AddressTransform(pulumi.CustomResource):
         import pulumi
         import tencentcloud_iac_pulumi as tencentcloud
 
-        address_transform = tencentcloud.eip.AddressTransform("addressTransform", instance_id="")
+        # create vpc
+        vpc = tencentcloud.vpc.Instance("vpc", cidr_block="10.0.0.0/16")
+        # create vpc subnet
+        subnet = tencentcloud.subnet.Instance("subnet",
+            vpc_id=vpc.id,
+            availability_zone="ap-guangzhou-6",
+            cidr_block="10.0.20.0/28",
+            is_multicast=False)
+        # create cvm
+        example_instance = tencentcloud.instance.Instance("exampleInstance",
+            instance_name="tf_example",
+            availability_zone="ap-guangzhou-6",
+            image_id="img-9qrfy1xt",
+            instance_type="SA3.MEDIUM4",
+            system_disk_type="CLOUD_HSSD",
+            system_disk_size=100,
+            hostname="example",
+            project_id=0,
+            vpc_id=vpc.id,
+            subnet_id=subnet.id,
+            allocate_public_ip=True,
+            internet_max_bandwidth_out=10,
+            data_disks=[tencentcloud.instance.InstanceDataDiskArgs(
+                data_disk_type="CLOUD_HSSD",
+                data_disk_size=50,
+                encrypt=False,
+            )],
+            tags={
+                "tagKey": "tagValue",
+            })
+        example_address_transform = tencentcloud.eip.AddressTransform("exampleAddressTransform", instance_id=example_instance.id)
         ```
         <!--End PulumiCodeChooser -->
-
-        ## Import
-
-        eip address_transform can be imported using the id, e.g.
-
-        ```sh
-        $ pulumi import tencentcloud:Eip/addressTransform:AddressTransform address_transform address_transform_id
-        ```
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -107,17 +129,39 @@ class AddressTransform(pulumi.CustomResource):
         import pulumi
         import tencentcloud_iac_pulumi as tencentcloud
 
-        address_transform = tencentcloud.eip.AddressTransform("addressTransform", instance_id="")
+        # create vpc
+        vpc = tencentcloud.vpc.Instance("vpc", cidr_block="10.0.0.0/16")
+        # create vpc subnet
+        subnet = tencentcloud.subnet.Instance("subnet",
+            vpc_id=vpc.id,
+            availability_zone="ap-guangzhou-6",
+            cidr_block="10.0.20.0/28",
+            is_multicast=False)
+        # create cvm
+        example_instance = tencentcloud.instance.Instance("exampleInstance",
+            instance_name="tf_example",
+            availability_zone="ap-guangzhou-6",
+            image_id="img-9qrfy1xt",
+            instance_type="SA3.MEDIUM4",
+            system_disk_type="CLOUD_HSSD",
+            system_disk_size=100,
+            hostname="example",
+            project_id=0,
+            vpc_id=vpc.id,
+            subnet_id=subnet.id,
+            allocate_public_ip=True,
+            internet_max_bandwidth_out=10,
+            data_disks=[tencentcloud.instance.InstanceDataDiskArgs(
+                data_disk_type="CLOUD_HSSD",
+                data_disk_size=50,
+                encrypt=False,
+            )],
+            tags={
+                "tagKey": "tagValue",
+            })
+        example_address_transform = tencentcloud.eip.AddressTransform("exampleAddressTransform", instance_id=example_instance.id)
         ```
         <!--End PulumiCodeChooser -->
-
-        ## Import
-
-        eip address_transform can be imported using the id, e.g.
-
-        ```sh
-        $ pulumi import tencentcloud:Eip/addressTransform:AddressTransform address_transform address_transform_id
-        ```
 
         :param str resource_name: The name of the resource.
         :param AddressTransformArgs args: The arguments to use to populate this resource's properties.

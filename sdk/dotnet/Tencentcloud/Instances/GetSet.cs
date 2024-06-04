@@ -26,9 +26,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Instances
         /// 
         /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     var foo = Tencentcloud.Instances.GetSet.Invoke(new()
+        ///     var example = Tencentcloud.Instances.GetSet.Invoke(new()
         ///     {
-        ///         VpcId = "vpc-4owdpnwr",
+        ///         AvailabilityZone = "ap-guangzhou-6",
+        ///         InstanceId = "ins-a81rnm8c",
+        ///         InstanceName = "tf_example",
+        ///         ProjectId = 0,
+        ///         SubnetId = "subnet-1to7t9au",
+        ///         Tags = 
+        ///         {
+        ///             { "tagKey", "tagValue" },
+        ///         },
+        ///         VpcId = "vpc-l040hycv",
         ///     });
         /// 
         /// });
@@ -52,9 +61,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Instances
         /// 
         /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     var foo = Tencentcloud.Instances.GetSet.Invoke(new()
+        ///     var example = Tencentcloud.Instances.GetSet.Invoke(new()
         ///     {
-        ///         VpcId = "vpc-4owdpnwr",
+        ///         AvailabilityZone = "ap-guangzhou-6",
+        ///         InstanceId = "ins-a81rnm8c",
+        ///         InstanceName = "tf_example",
+        ///         ProjectId = 0,
+        ///         SubnetId = "subnet-1to7t9au",
+        ///         Tags = 
+        ///         {
+        ///             { "tagKey", "tagValue" },
+        ///         },
+        ///         VpcId = "vpc-l040hycv",
         ///     });
         /// 
         /// });

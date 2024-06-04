@@ -24,10 +24,65 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cvm
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     var securityGroupAttachment = new Tencentcloud.Cvm.SecurityGroupAttachment("securityGroupAttachment", new()
+    ///     // create vpc
+    ///     var vpc = new Tencentcloud.Vpc.Instance("vpc", new()
     ///     {
-    ///         InstanceId = "ins-xxxxxxxx",
-    ///         SecurityGroupId = "sg-xxxxxxx",
+    ///         CidrBlock = "10.0.0.0/16",
+    ///     });
+    /// 
+    ///     // create vpc subnet
+    ///     var subnet = new Tencentcloud.Subnet.Instance("subnet", new()
+    ///     {
+    ///         VpcId = vpc.Id,
+    ///         AvailabilityZone = "ap-guangzhou-6",
+    ///         CidrBlock = "10.0.20.0/28",
+    ///         IsMulticast = false,
+    ///     });
+    /// 
+    ///     // create security group
+    ///     var exampleGroup = new Tencentcloud.Security.Group("exampleGroup", new()
+    ///     {
+    ///         Description = "sg desc.",
+    ///         ProjectId = 0,
+    ///         Tags = 
+    ///         {
+    ///             { "example", "test" },
+    ///         },
+    ///     });
+    /// 
+    ///     // create cvm
+    ///     var exampleInstance = new Tencentcloud.Instance.Instance("exampleInstance", new()
+    ///     {
+    ///         InstanceName = "tf_example",
+    ///         AvailabilityZone = "ap-guangzhou-6",
+    ///         ImageId = "img-9qrfy1xt",
+    ///         InstanceType = "SA3.MEDIUM4",
+    ///         SystemDiskType = "CLOUD_HSSD",
+    ///         SystemDiskSize = 100,
+    ///         Hostname = "example",
+    ///         ProjectId = 0,
+    ///         VpcId = vpc.Id,
+    ///         SubnetId = subnet.Id,
+    ///         DataDisks = new[]
+    ///         {
+    ///             new Tencentcloud.Instance.Inputs.InstanceDataDiskArgs
+    ///             {
+    ///                 DataDiskType = "CLOUD_HSSD",
+    ///                 DataDiskSize = 50,
+    ///                 Encrypt = false,
+    ///             },
+    ///         },
+    ///         Tags = 
+    ///         {
+    ///             { "tagKey", "tagValue" },
+    ///         },
+    ///     });
+    /// 
+    ///     // attachment security group
+    ///     var exampleSecurityGroupAttachment = new Tencentcloud.Cvm.SecurityGroupAttachment("exampleSecurityGroupAttachment", new()
+    ///     {
+    ///         InstanceId = exampleInstance.Id,
+    ///         SecurityGroupId = exampleGroup.Id,
     ///     });
     /// 
     /// });
@@ -39,7 +94,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cvm
     /// cvm security_group_attachment can be imported using the id, e.g.
     /// 
     /// ```sh
-    /// $ pulumi import tencentcloud:Cvm/securityGroupAttachment:SecurityGroupAttachment security_group_attachment ${instance_id}#${security_group_id}
+    /// $ pulumi import tencentcloud:Cvm/securityGroupAttachment:SecurityGroupAttachment example ins-odl0lrcy#sg-5275dorp
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Cvm/securityGroupAttachment:SecurityGroupAttachment")]

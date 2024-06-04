@@ -24,10 +24,58 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Eip
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     var publicAddressAdjust = new Tencentcloud.Eip.PublicAddressAdjust("publicAddressAdjust", new()
+    ///     // create vpc
+    ///     var vpc = new Tencentcloud.Vpc.Instance("vpc", new()
     ///     {
-    ///         AddressId = "eip-erft45fu",
-    ///         InstanceId = "ins-cr2rfq78",
+    ///         CidrBlock = "10.0.0.0/16",
+    ///     });
+    /// 
+    ///     // create vpc subnet
+    ///     var subnet = new Tencentcloud.Subnet.Instance("subnet", new()
+    ///     {
+    ///         VpcId = vpc.Id,
+    ///         AvailabilityZone = "ap-guangzhou-6",
+    ///         CidrBlock = "10.0.20.0/28",
+    ///         IsMulticast = false,
+    ///     });
+    /// 
+    ///     // create cvm
+    ///     var exampleInstance = new Tencentcloud.Instance.Instance("exampleInstance", new()
+    ///     {
+    ///         InstanceName = "tf_example",
+    ///         AvailabilityZone = "ap-guangzhou-6",
+    ///         ImageId = "img-9qrfy1xt",
+    ///         InstanceType = "SA3.MEDIUM4",
+    ///         SystemDiskType = "CLOUD_HSSD",
+    ///         SystemDiskSize = 100,
+    ///         Hostname = "example",
+    ///         ProjectId = 0,
+    ///         VpcId = vpc.Id,
+    ///         SubnetId = subnet.Id,
+    ///         AllocatePublicIp = true,
+    ///         InternetMaxBandwidthOut = 10,
+    ///         DataDisks = new[]
+    ///         {
+    ///             new Tencentcloud.Instance.Inputs.InstanceDataDiskArgs
+    ///             {
+    ///                 DataDiskType = "CLOUD_HSSD",
+    ///                 DataDiskSize = 50,
+    ///                 Encrypt = false,
+    ///             },
+    ///         },
+    ///         Tags = 
+    ///         {
+    ///             { "tagKey", "tagValue" },
+    ///         },
+    ///     });
+    /// 
+    ///     // create eip
+    ///     var exampleEip_instanceInstance = new Tencentcloud.Eip.Instance("exampleEip/instanceInstance");
+    /// 
+    ///     var examplePublicAddressAdjust = new Tencentcloud.Eip.PublicAddressAdjust("examplePublicAddressAdjust", new()
+    ///     {
+    ///         InstanceId = exampleInstance.Id,
+    ///         AddressId = exampleEip / instanceInstance.Id,
     ///     });
     /// 
     /// });

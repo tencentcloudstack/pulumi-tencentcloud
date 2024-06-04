@@ -169,7 +169,15 @@ def get_set(availability_zone: Optional[str] = None,
     import pulumi
     import pulumi_tencentcloud as tencentcloud
 
-    foo = tencentcloud.Instances.get_set(vpc_id="vpc-4owdpnwr")
+    example = tencentcloud.Instances.get_set(availability_zone="ap-guangzhou-6",
+        instance_id="ins-a81rnm8c",
+        instance_name="tf_example",
+        project_id=0,
+        subnet_id="subnet-1to7t9au",
+        tags={
+            "tagKey": "tagValue",
+        },
+        vpc_id="vpc-l040hycv")
     ```
     <!--End PulumiCodeChooser -->
 
@@ -228,7 +236,15 @@ def get_set_output(availability_zone: Optional[pulumi.Input[Optional[str]]] = No
     import pulumi
     import pulumi_tencentcloud as tencentcloud
 
-    foo = tencentcloud.Instances.get_set(vpc_id="vpc-4owdpnwr")
+    example = tencentcloud.Instances.get_set(availability_zone="ap-guangzhou-6",
+        instance_id="ins-a81rnm8c",
+        instance_name="tf_example",
+        project_id=0,
+        subnet_id="subnet-1to7t9au",
+        tags={
+            "tagKey": "tagValue",
+        },
+        vpc_id="vpc-l040hycv")
     ```
     <!--End PulumiCodeChooser -->
 

@@ -41,6 +41,15 @@ __all__ = [
     'CosShipperContentJson',
     'CosShipperFilterRule',
     'DataTransformDstResource',
+    'IndexRule',
+    'IndexRuleDynamicIndex',
+    'IndexRuleFullText',
+    'IndexRuleKeyValue',
+    'IndexRuleKeyValueKeyValue',
+    'IndexRuleKeyValueKeyValueValue',
+    'IndexRuleTag',
+    'IndexRuleTagKeyValue',
+    'IndexRuleTagKeyValueValue',
     'KafkaRechargeLogRechargeRule',
     'KafkaRechargeProtocol',
     'MachineGroupMachineGroupType',
@@ -2243,6 +2252,463 @@ class DataTransformDstResource(dict):
         dst topic id.
         """
         return pulumi.get(self, "topic_id")
+
+
+@pulumi.output_type
+class IndexRule(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "dynamicIndex":
+            suggest = "dynamic_index"
+        elif key == "fullText":
+            suggest = "full_text"
+        elif key == "keyValue":
+            suggest = "key_value"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in IndexRule. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        IndexRule.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        IndexRule.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 dynamic_index: Optional['outputs.IndexRuleDynamicIndex'] = None,
+                 full_text: Optional['outputs.IndexRuleFullText'] = None,
+                 key_value: Optional['outputs.IndexRuleKeyValue'] = None,
+                 tag: Optional['outputs.IndexRuleTag'] = None):
+        """
+        :param 'IndexRuleDynamicIndexArgs' dynamic_index: The key value index is automatically configured. If it is empty, it means that the function is not enabled.
+        :param 'IndexRuleFullTextArgs' full_text: Full-Text index configuration.
+        :param 'IndexRuleKeyValueArgs' key_value: Key-Value index configuration.
+        :param 'IndexRuleTagArgs' tag: Metafield index configuration.
+        """
+        if dynamic_index is not None:
+            pulumi.set(__self__, "dynamic_index", dynamic_index)
+        if full_text is not None:
+            pulumi.set(__self__, "full_text", full_text)
+        if key_value is not None:
+            pulumi.set(__self__, "key_value", key_value)
+        if tag is not None:
+            pulumi.set(__self__, "tag", tag)
+
+    @property
+    @pulumi.getter(name="dynamicIndex")
+    def dynamic_index(self) -> Optional['outputs.IndexRuleDynamicIndex']:
+        """
+        The key value index is automatically configured. If it is empty, it means that the function is not enabled.
+        """
+        return pulumi.get(self, "dynamic_index")
+
+    @property
+    @pulumi.getter(name="fullText")
+    def full_text(self) -> Optional['outputs.IndexRuleFullText']:
+        """
+        Full-Text index configuration.
+        """
+        return pulumi.get(self, "full_text")
+
+    @property
+    @pulumi.getter(name="keyValue")
+    def key_value(self) -> Optional['outputs.IndexRuleKeyValue']:
+        """
+        Key-Value index configuration.
+        """
+        return pulumi.get(self, "key_value")
+
+    @property
+    @pulumi.getter
+    def tag(self) -> Optional['outputs.IndexRuleTag']:
+        """
+        Metafield index configuration.
+        """
+        return pulumi.get(self, "tag")
+
+
+@pulumi.output_type
+class IndexRuleDynamicIndex(dict):
+    def __init__(__self__, *,
+                 status: bool):
+        """
+        :param bool status: index automatic configuration switch.
+        """
+        pulumi.set(__self__, "status", status)
+
+    @property
+    @pulumi.getter
+    def status(self) -> bool:
+        """
+        index automatic configuration switch.
+        """
+        return pulumi.get(self, "status")
+
+
+@pulumi.output_type
+class IndexRuleFullText(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "caseSensitive":
+            suggest = "case_sensitive"
+        elif key == "containZH":
+            suggest = "contain_zh"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in IndexRuleFullText. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        IndexRuleFullText.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        IndexRuleFullText.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 case_sensitive: bool,
+                 contain_zh: bool,
+                 tokenizer: str):
+        """
+        :param bool case_sensitive: Case sensitivity.
+        :param bool contain_zh: Whether Chinese characters are contained.
+        :param str tokenizer: Full-Text index delimiter. Each character in the string represents a delimiter.
+        """
+        pulumi.set(__self__, "case_sensitive", case_sensitive)
+        pulumi.set(__self__, "contain_zh", contain_zh)
+        pulumi.set(__self__, "tokenizer", tokenizer)
+
+    @property
+    @pulumi.getter(name="caseSensitive")
+    def case_sensitive(self) -> bool:
+        """
+        Case sensitivity.
+        """
+        return pulumi.get(self, "case_sensitive")
+
+    @property
+    @pulumi.getter(name="containZH")
+    def contain_zh(self) -> bool:
+        """
+        Whether Chinese characters are contained.
+        """
+        return pulumi.get(self, "contain_zh")
+
+    @property
+    @pulumi.getter
+    def tokenizer(self) -> str:
+        """
+        Full-Text index delimiter. Each character in the string represents a delimiter.
+        """
+        return pulumi.get(self, "tokenizer")
+
+
+@pulumi.output_type
+class IndexRuleKeyValue(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "caseSensitive":
+            suggest = "case_sensitive"
+        elif key == "keyValues":
+            suggest = "key_values"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in IndexRuleKeyValue. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        IndexRuleKeyValue.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        IndexRuleKeyValue.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 case_sensitive: bool,
+                 key_values: Optional[Sequence['outputs.IndexRuleKeyValueKeyValue']] = None):
+        """
+        :param bool case_sensitive: Case sensitivity.
+        :param Sequence['IndexRuleKeyValueKeyValueArgs'] key_values: Key-Value pair information of the index to be created. Up to 100 key-value pairs can be configured.
+        """
+        pulumi.set(__self__, "case_sensitive", case_sensitive)
+        if key_values is not None:
+            pulumi.set(__self__, "key_values", key_values)
+
+    @property
+    @pulumi.getter(name="caseSensitive")
+    def case_sensitive(self) -> bool:
+        """
+        Case sensitivity.
+        """
+        return pulumi.get(self, "case_sensitive")
+
+    @property
+    @pulumi.getter(name="keyValues")
+    def key_values(self) -> Optional[Sequence['outputs.IndexRuleKeyValueKeyValue']]:
+        """
+        Key-Value pair information of the index to be created. Up to 100 key-value pairs can be configured.
+        """
+        return pulumi.get(self, "key_values")
+
+
+@pulumi.output_type
+class IndexRuleKeyValueKeyValue(dict):
+    def __init__(__self__, *,
+                 key: str,
+                 value: Optional['outputs.IndexRuleKeyValueKeyValueValue'] = None):
+        """
+        :param str key: When a key value or metafield index needs to be configured for a field, the metafield Key does not need to be prefixed with __TAG__. and is consistent with the one when logs are uploaded. __TAG__. will be prefixed automatically for display in the console..
+        :param 'IndexRuleKeyValueKeyValueValueArgs' value: Field index description information.
+        """
+        pulumi.set(__self__, "key", key)
+        if value is not None:
+            pulumi.set(__self__, "value", value)
+
+    @property
+    @pulumi.getter
+    def key(self) -> str:
+        """
+        When a key value or metafield index needs to be configured for a field, the metafield Key does not need to be prefixed with __TAG__. and is consistent with the one when logs are uploaded. __TAG__. will be prefixed automatically for display in the console..
+        """
+        return pulumi.get(self, "key")
+
+    @property
+    @pulumi.getter
+    def value(self) -> Optional['outputs.IndexRuleKeyValueKeyValueValue']:
+        """
+        Field index description information.
+        """
+        return pulumi.get(self, "value")
+
+
+@pulumi.output_type
+class IndexRuleKeyValueKeyValueValue(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "containZH":
+            suggest = "contain_zh"
+        elif key == "sqlFlag":
+            suggest = "sql_flag"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in IndexRuleKeyValueKeyValueValue. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        IndexRuleKeyValueKeyValueValue.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        IndexRuleKeyValueKeyValueValue.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 type: str,
+                 contain_zh: Optional[bool] = None,
+                 sql_flag: Optional[bool] = None,
+                 tokenizer: Optional[str] = None):
+        """
+        :param str type: Field type. Valid values: long, text, double.
+        :param bool contain_zh: Whether Chinese characters are contained.
+        :param bool sql_flag: Whether the analysis feature is enabled for the field.
+        :param str tokenizer: Field delimiter, which is meaningful only if the field type is text. Each character in the entered string represents a delimiter.
+        """
+        pulumi.set(__self__, "type", type)
+        if contain_zh is not None:
+            pulumi.set(__self__, "contain_zh", contain_zh)
+        if sql_flag is not None:
+            pulumi.set(__self__, "sql_flag", sql_flag)
+        if tokenizer is not None:
+            pulumi.set(__self__, "tokenizer", tokenizer)
+
+    @property
+    @pulumi.getter
+    def type(self) -> str:
+        """
+        Field type. Valid values: long, text, double.
+        """
+        return pulumi.get(self, "type")
+
+    @property
+    @pulumi.getter(name="containZH")
+    def contain_zh(self) -> Optional[bool]:
+        """
+        Whether Chinese characters are contained.
+        """
+        return pulumi.get(self, "contain_zh")
+
+    @property
+    @pulumi.getter(name="sqlFlag")
+    def sql_flag(self) -> Optional[bool]:
+        """
+        Whether the analysis feature is enabled for the field.
+        """
+        return pulumi.get(self, "sql_flag")
+
+    @property
+    @pulumi.getter
+    def tokenizer(self) -> Optional[str]:
+        """
+        Field delimiter, which is meaningful only if the field type is text. Each character in the entered string represents a delimiter.
+        """
+        return pulumi.get(self, "tokenizer")
+
+
+@pulumi.output_type
+class IndexRuleTag(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "caseSensitive":
+            suggest = "case_sensitive"
+        elif key == "keyValues":
+            suggest = "key_values"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in IndexRuleTag. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        IndexRuleTag.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        IndexRuleTag.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 case_sensitive: bool,
+                 key_values: Optional[Sequence['outputs.IndexRuleTagKeyValue']] = None):
+        """
+        :param bool case_sensitive: Case sensitivity.
+        :param Sequence['IndexRuleTagKeyValueArgs'] key_values: Key-Value pair information of the index to be created. Up to 100 key-value pairs can be configured.
+        """
+        pulumi.set(__self__, "case_sensitive", case_sensitive)
+        if key_values is not None:
+            pulumi.set(__self__, "key_values", key_values)
+
+    @property
+    @pulumi.getter(name="caseSensitive")
+    def case_sensitive(self) -> bool:
+        """
+        Case sensitivity.
+        """
+        return pulumi.get(self, "case_sensitive")
+
+    @property
+    @pulumi.getter(name="keyValues")
+    def key_values(self) -> Optional[Sequence['outputs.IndexRuleTagKeyValue']]:
+        """
+        Key-Value pair information of the index to be created. Up to 100 key-value pairs can be configured.
+        """
+        return pulumi.get(self, "key_values")
+
+
+@pulumi.output_type
+class IndexRuleTagKeyValue(dict):
+    def __init__(__self__, *,
+                 key: str,
+                 value: Optional['outputs.IndexRuleTagKeyValueValue'] = None):
+        """
+        :param str key: When a key value or metafield index needs to be configured for a field, the metafield Key does not need to be prefixed with __TAG__. and is consistent with the one when logs are uploaded. __TAG__. will be prefixed automatically for display in the console..
+        :param 'IndexRuleTagKeyValueValueArgs' value: Field index description information.
+        """
+        pulumi.set(__self__, "key", key)
+        if value is not None:
+            pulumi.set(__self__, "value", value)
+
+    @property
+    @pulumi.getter
+    def key(self) -> str:
+        """
+        When a key value or metafield index needs to be configured for a field, the metafield Key does not need to be prefixed with __TAG__. and is consistent with the one when logs are uploaded. __TAG__. will be prefixed automatically for display in the console..
+        """
+        return pulumi.get(self, "key")
+
+    @property
+    @pulumi.getter
+    def value(self) -> Optional['outputs.IndexRuleTagKeyValueValue']:
+        """
+        Field index description information.
+        """
+        return pulumi.get(self, "value")
+
+
+@pulumi.output_type
+class IndexRuleTagKeyValueValue(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "containZH":
+            suggest = "contain_zh"
+        elif key == "sqlFlag":
+            suggest = "sql_flag"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in IndexRuleTagKeyValueValue. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        IndexRuleTagKeyValueValue.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        IndexRuleTagKeyValueValue.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 type: str,
+                 contain_zh: Optional[bool] = None,
+                 sql_flag: Optional[bool] = None,
+                 tokenizer: Optional[str] = None):
+        """
+        :param str type: Field type. Valid values: long, text, double.
+        :param bool contain_zh: Whether Chinese characters are contained.
+        :param bool sql_flag: Whether the analysis feature is enabled for the field.
+        :param str tokenizer: Field delimiter, which is meaningful only if the field type is text. Each character in the entered string represents a delimiter.
+        """
+        pulumi.set(__self__, "type", type)
+        if contain_zh is not None:
+            pulumi.set(__self__, "contain_zh", contain_zh)
+        if sql_flag is not None:
+            pulumi.set(__self__, "sql_flag", sql_flag)
+        if tokenizer is not None:
+            pulumi.set(__self__, "tokenizer", tokenizer)
+
+    @property
+    @pulumi.getter
+    def type(self) -> str:
+        """
+        Field type. Valid values: long, text, double.
+        """
+        return pulumi.get(self, "type")
+
+    @property
+    @pulumi.getter(name="containZH")
+    def contain_zh(self) -> Optional[bool]:
+        """
+        Whether Chinese characters are contained.
+        """
+        return pulumi.get(self, "contain_zh")
+
+    @property
+    @pulumi.getter(name="sqlFlag")
+    def sql_flag(self) -> Optional[bool]:
+        """
+        Whether the analysis feature is enabled for the field.
+        """
+        return pulumi.get(self, "sql_flag")
+
+    @property
+    @pulumi.getter
+    def tokenizer(self) -> Optional[str]:
+        """
+        Field delimiter, which is meaningful only if the field type is text. Each character in the entered string represents a delimiter.
+        """
+        return pulumi.get(self, "tokenizer")
 
 
 @pulumi.output_type

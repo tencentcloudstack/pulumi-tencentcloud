@@ -370,6 +370,7 @@
         "cls/getMachines.ts",
         "cls/getShipperTasks.ts",
         "cls/index.ts",
+        "cls/index_.ts",
         "cls/kafkaRecharge.ts",
         "cls/logset.ts",
         "cls/machineGroup.ts",

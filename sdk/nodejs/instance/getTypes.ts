@@ -16,25 +16,35 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const foo = tencentcloud.Instance.getTypes({
- *     availabilityZone: "ap-guangzhou-2",
- *     cpuCoreCount: 2,
- *     memorySize: 4,
+ * const example = tencentcloud.Instance.getTypes({
+ *     availabilityZone: "ap-guangzhou-6",
+ *     cpuCoreCount: 4,
+ *     memorySize: 8,
  * });
- * const t1c1g = tencentcloud.Instance.getTypes({
- *     cpuCoreCount: 1,
+ * ```
+ * <!--End PulumiCodeChooser -->
+ *
+ * ### Complete Example
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const example = tencentcloud.Instance.getTypes({
+ *     cpuCoreCount: 4,
  *     excludeSoldOut: true,
  *     filters: [
  *         {
- *             name: "instance-charge-type",
- *             values: ["POSTPAID_BY_HOUR"],
+ *             name: "instance-family",
+ *             values: ["SA2"],
  *         },
  *         {
  *             name: "zone",
- *             values: ["ap-shanghai-2"],
+ *             values: ["ap-guangzhou-6"],
  *         },
  *     ],
- *     memorySize: 1,
+ *     memorySize: 8,
  * });
  * ```
  * <!--End PulumiCodeChooser -->
@@ -130,25 +140,35 @@ export interface GetTypesResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const foo = tencentcloud.Instance.getTypes({
- *     availabilityZone: "ap-guangzhou-2",
- *     cpuCoreCount: 2,
- *     memorySize: 4,
+ * const example = tencentcloud.Instance.getTypes({
+ *     availabilityZone: "ap-guangzhou-6",
+ *     cpuCoreCount: 4,
+ *     memorySize: 8,
  * });
- * const t1c1g = tencentcloud.Instance.getTypes({
- *     cpuCoreCount: 1,
+ * ```
+ * <!--End PulumiCodeChooser -->
+ *
+ * ### Complete Example
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const example = tencentcloud.Instance.getTypes({
+ *     cpuCoreCount: 4,
  *     excludeSoldOut: true,
  *     filters: [
  *         {
- *             name: "instance-charge-type",
- *             values: ["POSTPAID_BY_HOUR"],
+ *             name: "instance-family",
+ *             values: ["SA2"],
  *         },
  *         {
  *             name: "zone",
- *             values: ["ap-shanghai-2"],
+ *             values: ["ap-guangzhou-6"],
  *         },
  *     ],
- *     memorySize: 1,
+ *     memorySize: 8,
  * });
  * ```
  * <!--End PulumiCodeChooser -->

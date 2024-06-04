@@ -11,15 +11,27 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * ### Query key pairs by key ID
+ *
  * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const foo = tencentcloud.Key.getPairs({
+ * const keyId = tencentcloud.Key.getPairs({
  *     keyId: "skey-ie97i3ml",
  * });
- * const name = tencentcloud.Key.getPairs({
+ * ```
+ * <!--End PulumiCodeChooser -->
+ *
+ * ### Query key pairs by key name
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const keyName = tencentcloud.Key.getPairs({
  *     keyName: "^test$",
  * });
  * ```
@@ -90,15 +102,27 @@ export interface GetPairsResult {
  *
  * ## Example Usage
  *
+ * ### Query key pairs by key ID
+ *
  * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const foo = tencentcloud.Key.getPairs({
+ * const keyId = tencentcloud.Key.getPairs({
  *     keyId: "skey-ie97i3ml",
  * });
- * const name = tencentcloud.Key.getPairs({
+ * ```
+ * <!--End PulumiCodeChooser -->
+ *
+ * ### Query key pairs by key name
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const keyName = tencentcloud.Key.getPairs({
  *     keyName: "^test$",
  * });
  * ```

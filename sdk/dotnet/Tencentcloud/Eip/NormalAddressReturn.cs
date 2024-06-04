@@ -24,7 +24,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Eip
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     var normalAddressReturn = new Tencentcloud.Eip.NormalAddressReturn("normalAddressReturn", new()
+    ///     var example = new Tencentcloud.Eip.NormalAddressReturn("example", new()
     ///     {
     ///         AddressIps = new[]
     ///         {

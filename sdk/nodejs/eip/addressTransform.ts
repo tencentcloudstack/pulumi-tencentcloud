@@ -14,17 +14,41 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const addressTransform = new tencentcloud.eip.AddressTransform("addressTransform", {instanceId: ""});
+ * // create vpc
+ * const vpc = new tencentcloud.vpc.Instance("vpc", {cidrBlock: "10.0.0.0/16"});
+ * // create vpc subnet
+ * const subnet = new tencentcloud.subnet.Instance("subnet", {
+ *     vpcId: vpc.id,
+ *     availabilityZone: "ap-guangzhou-6",
+ *     cidrBlock: "10.0.20.0/28",
+ *     isMulticast: false,
+ * });
+ * // create cvm
+ * const exampleInstance = new tencentcloud.instance.Instance("exampleInstance", {
+ *     instanceName: "tf_example",
+ *     availabilityZone: "ap-guangzhou-6",
+ *     imageId: "img-9qrfy1xt",
+ *     instanceType: "SA3.MEDIUM4",
+ *     systemDiskType: "CLOUD_HSSD",
+ *     systemDiskSize: 100,
+ *     hostname: "example",
+ *     projectId: 0,
+ *     vpcId: vpc.id,
+ *     subnetId: subnet.id,
+ *     allocatePublicIp: true,
+ *     internetMaxBandwidthOut: 10,
+ *     dataDisks: [{
+ *         dataDiskType: "CLOUD_HSSD",
+ *         dataDiskSize: 50,
+ *         encrypt: false,
+ *     }],
+ *     tags: {
+ *         tagKey: "tagValue",
+ *     },
+ * });
+ * const exampleAddressTransform = new tencentcloud.eip.AddressTransform("exampleAddressTransform", {instanceId: exampleInstance.id});
  * ```
  * <!--End PulumiCodeChooser -->
- *
- * ## Import
- *
- * eip address_transform can be imported using the id, e.g.
- *
- * ```sh
- * $ pulumi import tencentcloud:Eip/addressTransform:AddressTransform address_transform address_transform_id
- * ```
  */
 export class AddressTransform extends pulumi.CustomResource {
     /**

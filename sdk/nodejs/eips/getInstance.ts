@@ -11,13 +11,67 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * ### Query all eip instances
+ *
  * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const foo = tencentcloud.Eips.getInstance({
+ * const example = tencentcloud.Eips.getInstance({});
+ * ```
+ * <!--End PulumiCodeChooser -->
+ *
+ * ### Query eip instances by eip ID
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const example = tencentcloud.Eips.getInstance({
  *     eipId: "eip-ry9h95hg",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ *
+ * ### Query eip instances by eip name
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const example = tencentcloud.Eips.getInstance({
+ *     eipName: "tf-example",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ *
+ * ### Query eip instances by public ip
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const example = tencentcloud.Eips.getInstance({
+ *     publicIp: "1.12.62.3",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ *
+ * ### Query eip instances by tags
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const example = tencentcloud.Eips.getInstance({
+ *     tags: {
+ *         test: "test",
+ *     },
  * });
  * ```
  * <!--End PulumiCodeChooser -->
@@ -96,13 +150,67 @@ export interface GetInstanceResult {
  *
  * ## Example Usage
  *
+ * ### Query all eip instances
+ *
  * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const foo = tencentcloud.Eips.getInstance({
+ * const example = tencentcloud.Eips.getInstance({});
+ * ```
+ * <!--End PulumiCodeChooser -->
+ *
+ * ### Query eip instances by eip ID
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const example = tencentcloud.Eips.getInstance({
  *     eipId: "eip-ry9h95hg",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ *
+ * ### Query eip instances by eip name
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const example = tencentcloud.Eips.getInstance({
+ *     eipName: "tf-example",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ *
+ * ### Query eip instances by public ip
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const example = tencentcloud.Eips.getInstance({
+ *     publicIp: "1.12.62.3",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ *
+ * ### Query eip instances by tags
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const example = tencentcloud.Eips.getInstance({
+ *     tags: {
+ *         test: "test",
+ *     },
  * });
  * ```
  * <!--End PulumiCodeChooser -->

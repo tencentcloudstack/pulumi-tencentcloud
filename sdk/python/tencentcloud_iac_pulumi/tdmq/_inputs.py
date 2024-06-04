@@ -13,6 +13,7 @@ __all__ = [
     'NamespaceRetentionPolicyArgs',
     'ProfessionalClusterVpcArgs',
     'RocketmqClusterVpcArgs',
+    'RocketmqVipInstanceIpRuleArgs',
     'RocketmqVipInstanceVpcInfoArgs',
     'GetProInstancesFilterArgs',
     'GetPublishersFilterArgs',
@@ -134,6 +135,58 @@ class RocketmqClusterVpcArgs:
     @vpc_id.setter
     def vpc_id(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "vpc_id", value)
+
+
+@pulumi.input_type
+class RocketmqVipInstanceIpRuleArgs:
+    def __init__(__self__, *,
+                 allow: pulumi.Input[bool],
+                 ip_rule: pulumi.Input[str],
+                 remark: pulumi.Input[str]):
+        """
+        :param pulumi.Input[bool] allow: Whether to allow or deny.
+        :param pulumi.Input[str] ip_rule: IP address block information.
+        :param pulumi.Input[str] remark: Remark.
+        """
+        pulumi.set(__self__, "allow", allow)
+        pulumi.set(__self__, "ip_rule", ip_rule)
+        pulumi.set(__self__, "remark", remark)
+
+    @property
+    @pulumi.getter
+    def allow(self) -> pulumi.Input[bool]:
+        """
+        Whether to allow or deny.
+        """
+        return pulumi.get(self, "allow")
+
+    @allow.setter
+    def allow(self, value: pulumi.Input[bool]):
+        pulumi.set(self, "allow", value)
+
+    @property
+    @pulumi.getter(name="ipRule")
+    def ip_rule(self) -> pulumi.Input[str]:
+        """
+        IP address block information.
+        """
+        return pulumi.get(self, "ip_rule")
+
+    @ip_rule.setter
+    def ip_rule(self, value: pulumi.Input[str]):
+        pulumi.set(self, "ip_rule", value)
+
+    @property
+    @pulumi.getter
+    def remark(self) -> pulumi.Input[str]:
+        """
+        Remark.
+        """
+        return pulumi.get(self, "remark")
+
+    @remark.setter
+    def remark(self, value: pulumi.Input[str]):
+        pulumi.set(self, "remark", value)
 
 
 @pulumi.input_type

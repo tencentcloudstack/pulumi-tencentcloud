@@ -29,8 +29,8 @@ import (
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
 //			_, err := Placement.GetGroups(ctx, &placement.GetGroupsArgs{
-//				Name:             pulumi.StringRef("test"),
-//				PlacementGroupId: pulumi.StringRef("ps-21q9ibvr"),
+//				Name:             pulumi.StringRef("tf_example"),
+//				PlacementGroupId: pulumi.StringRef("ps-bwvst92h"),
 //			}, nil)
 //			if err != nil {
 //				return err

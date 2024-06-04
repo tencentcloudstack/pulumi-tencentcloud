@@ -24,17 +24,27 @@ import (
 //
 //	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 //	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cvm"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Images"
 //
 // )
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
-//			_, err := Cvm.NewSyncImage(ctx, "syncImage", &Cvm.SyncImageArgs{
+//			exampleInstance, err := Images.GetInstance(ctx, &images.GetInstanceArgs{
+//				ImageTypes: []string{
+//					"PRIVATE_IMAGE",
+//				},
+//				ImageNameRegex: pulumi.StringRef("MyImage"),
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			_, err = Cvm.NewSyncImage(ctx, "exampleSyncImage", &Cvm.SyncImageArgs{
+//				ImageId: pulumi.String(exampleInstance.Images[0].ImageId),
 //				DestinationRegions: pulumi.StringArray{
 //					pulumi.String("ap-guangzhou"),
 //					pulumi.String("ap-shanghai"),
 //				},
-//				ImageId: pulumi.String("img-xxxxxx"),
 //			})
 //			if err != nil {
 //				return err

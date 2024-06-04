@@ -32,8 +32,7 @@ func GetResourceOutput() []*ResourceOutput {
 
 	// skip the resources whose document cannot be generated correctly
 	skippedResources := map[string]struct{}{
-		"tencentcloud_audit":     {},
-		"tencentcloud_cls_index": {},
+		"tencentcloud_audit": {},
 	}
 	skipFilter := func(resource string) bool {
 		_, exists := skippedResources[resource]

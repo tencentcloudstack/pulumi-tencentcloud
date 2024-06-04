@@ -1939,6 +1939,14 @@ _utilities.register(
  },
  {
   "pkg": "tencentcloud",
+  "mod": "Cls/index",
+  "fqn": "tencentcloud_iac_pulumi.cls",
+  "classes": {
+   "tencentcloud:Cls/index:Index": "Index"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
   "mod": "Cls/kafkaRecharge",
   "fqn": "tencentcloud_iac_pulumi.cls",
   "classes": {

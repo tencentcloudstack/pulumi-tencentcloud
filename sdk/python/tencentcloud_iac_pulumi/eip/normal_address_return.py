@@ -76,7 +76,7 @@ class NormalAddressReturn(pulumi.CustomResource):
         import pulumi
         import tencentcloud_iac_pulumi as tencentcloud
 
-        normal_address_return = tencentcloud.eip.NormalAddressReturn("normalAddressReturn", address_ips=["172.16.17.32"])
+        example = tencentcloud.eip.NormalAddressReturn("example", address_ips=["172.16.17.32"])
         ```
         <!--End PulumiCodeChooser -->
 
@@ -100,7 +100,7 @@ class NormalAddressReturn(pulumi.CustomResource):
         import pulumi
         import tencentcloud_iac_pulumi as tencentcloud
 
-        normal_address_return = tencentcloud.eip.NormalAddressReturn("normalAddressReturn", address_ips=["172.16.17.32"])
+        example = tencentcloud.eip.NormalAddressReturn("example", address_ips=["172.16.17.32"])
         ```
         <!--End PulumiCodeChooser -->
 

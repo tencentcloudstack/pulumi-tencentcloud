@@ -24,22 +24,59 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Eip
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     var addressTransform = new Tencentcloud.Eip.AddressTransform("addressTransform", new()
+    ///     // create vpc
+    ///     var vpc = new Tencentcloud.Vpc.Instance("vpc", new()
     ///     {
-    ///         InstanceId = "",
+    ///         CidrBlock = "10.0.0.0/16",
+    ///     });
+    /// 
+    ///     // create vpc subnet
+    ///     var subnet = new Tencentcloud.Subnet.Instance("subnet", new()
+    ///     {
+    ///         VpcId = vpc.Id,
+    ///         AvailabilityZone = "ap-guangzhou-6",
+    ///         CidrBlock = "10.0.20.0/28",
+    ///         IsMulticast = false,
+    ///     });
+    /// 
+    ///     // create cvm
+    ///     var exampleInstance = new Tencentcloud.Instance.Instance("exampleInstance", new()
+    ///     {
+    ///         InstanceName = "tf_example",
+    ///         AvailabilityZone = "ap-guangzhou-6",
+    ///         ImageId = "img-9qrfy1xt",
+    ///         InstanceType = "SA3.MEDIUM4",
+    ///         SystemDiskType = "CLOUD_HSSD",
+    ///         SystemDiskSize = 100,
+    ///         Hostname = "example",
+    ///         ProjectId = 0,
+    ///         VpcId = vpc.Id,
+    ///         SubnetId = subnet.Id,
+    ///         AllocatePublicIp = true,
+    ///         InternetMaxBandwidthOut = 10,
+    ///         DataDisks = new[]
+    ///         {
+    ///             new Tencentcloud.Instance.Inputs.InstanceDataDiskArgs
+    ///             {
+    ///                 DataDiskType = "CLOUD_HSSD",
+    ///                 DataDiskSize = 50,
+    ///                 Encrypt = false,
+    ///             },
+    ///         },
+    ///         Tags = 
+    ///         {
+    ///             { "tagKey", "tagValue" },
+    ///         },
+    ///     });
+    /// 
+    ///     var exampleAddressTransform = new Tencentcloud.Eip.AddressTransform("exampleAddressTransform", new()
+    ///     {
+    ///         InstanceId = exampleInstance.Id,
     ///     });
     /// 
     /// });
     /// ```
     /// &lt;!--End PulumiCodeChooser --&gt;
-    /// 
-    /// ## Import
-    /// 
-    /// eip address_transform can be imported using the id, e.g.
-    /// 
-    /// ```sh
-    /// $ pulumi import tencentcloud:Eip/addressTransform:AddressTransform address_transform address_transform_id
-    /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Eip/addressTransform:AddressTransform")]
     public partial class AddressTransform : global::Pulumi.CustomResource

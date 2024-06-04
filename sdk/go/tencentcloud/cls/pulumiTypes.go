@@ -5280,6 +5280,1424 @@ func (o DataTransformDstResourceArrayOutput) Index(i pulumi.IntInput) DataTransf
 	}).(DataTransformDstResourceOutput)
 }
 
+type IndexRule struct {
+	// The key value index is automatically configured. If it is empty, it means that the function is not enabled.
+	DynamicIndex *IndexRuleDynamicIndex `pulumi:"dynamicIndex"`
+	// Full-Text index configuration.
+	FullText *IndexRuleFullText `pulumi:"fullText"`
+	// Key-Value index configuration.
+	KeyValue *IndexRuleKeyValue `pulumi:"keyValue"`
+	// Metafield index configuration.
+	Tag *IndexRuleTag `pulumi:"tag"`
+}
+
+// IndexRuleInput is an input type that accepts IndexRuleArgs and IndexRuleOutput values.
+// You can construct a concrete instance of `IndexRuleInput` via:
+//
+//	IndexRuleArgs{...}
+type IndexRuleInput interface {
+	pulumi.Input
+
+	ToIndexRuleOutput() IndexRuleOutput
+	ToIndexRuleOutputWithContext(context.Context) IndexRuleOutput
+}
+
+type IndexRuleArgs struct {
+	// The key value index is automatically configured. If it is empty, it means that the function is not enabled.
+	DynamicIndex IndexRuleDynamicIndexPtrInput `pulumi:"dynamicIndex"`
+	// Full-Text index configuration.
+	FullText IndexRuleFullTextPtrInput `pulumi:"fullText"`
+	// Key-Value index configuration.
+	KeyValue IndexRuleKeyValuePtrInput `pulumi:"keyValue"`
+	// Metafield index configuration.
+	Tag IndexRuleTagPtrInput `pulumi:"tag"`
+}
+
+func (IndexRuleArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*IndexRule)(nil)).Elem()
+}
+
+func (i IndexRuleArgs) ToIndexRuleOutput() IndexRuleOutput {
+	return i.ToIndexRuleOutputWithContext(context.Background())
+}
+
+func (i IndexRuleArgs) ToIndexRuleOutputWithContext(ctx context.Context) IndexRuleOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(IndexRuleOutput)
+}
+
+func (i IndexRuleArgs) ToIndexRulePtrOutput() IndexRulePtrOutput {
+	return i.ToIndexRulePtrOutputWithContext(context.Background())
+}
+
+func (i IndexRuleArgs) ToIndexRulePtrOutputWithContext(ctx context.Context) IndexRulePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(IndexRuleOutput).ToIndexRulePtrOutputWithContext(ctx)
+}
+
+// IndexRulePtrInput is an input type that accepts IndexRuleArgs, IndexRulePtr and IndexRulePtrOutput values.
+// You can construct a concrete instance of `IndexRulePtrInput` via:
+//
+//	        IndexRuleArgs{...}
+//
+//	or:
+//
+//	        nil
+type IndexRulePtrInput interface {
+	pulumi.Input
+
+	ToIndexRulePtrOutput() IndexRulePtrOutput
+	ToIndexRulePtrOutputWithContext(context.Context) IndexRulePtrOutput
+}
+
+type indexRulePtrType IndexRuleArgs
+
+func IndexRulePtr(v *IndexRuleArgs) IndexRulePtrInput {
+	return (*indexRulePtrType)(v)
+}
+
+func (*indexRulePtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**IndexRule)(nil)).Elem()
+}
+
+func (i *indexRulePtrType) ToIndexRulePtrOutput() IndexRulePtrOutput {
+	return i.ToIndexRulePtrOutputWithContext(context.Background())
+}
+
+func (i *indexRulePtrType) ToIndexRulePtrOutputWithContext(ctx context.Context) IndexRulePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(IndexRulePtrOutput)
+}
+
+type IndexRuleOutput struct{ *pulumi.OutputState }
+
+func (IndexRuleOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*IndexRule)(nil)).Elem()
+}
+
+func (o IndexRuleOutput) ToIndexRuleOutput() IndexRuleOutput {
+	return o
+}
+
+func (o IndexRuleOutput) ToIndexRuleOutputWithContext(ctx context.Context) IndexRuleOutput {
+	return o
+}
+
+func (o IndexRuleOutput) ToIndexRulePtrOutput() IndexRulePtrOutput {
+	return o.ToIndexRulePtrOutputWithContext(context.Background())
+}
+
+func (o IndexRuleOutput) ToIndexRulePtrOutputWithContext(ctx context.Context) IndexRulePtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v IndexRule) *IndexRule {
+		return &v
+	}).(IndexRulePtrOutput)
+}
+
+// The key value index is automatically configured. If it is empty, it means that the function is not enabled.
+func (o IndexRuleOutput) DynamicIndex() IndexRuleDynamicIndexPtrOutput {
+	return o.ApplyT(func(v IndexRule) *IndexRuleDynamicIndex { return v.DynamicIndex }).(IndexRuleDynamicIndexPtrOutput)
+}
+
+// Full-Text index configuration.
+func (o IndexRuleOutput) FullText() IndexRuleFullTextPtrOutput {
+	return o.ApplyT(func(v IndexRule) *IndexRuleFullText { return v.FullText }).(IndexRuleFullTextPtrOutput)
+}
+
+// Key-Value index configuration.
+func (o IndexRuleOutput) KeyValue() IndexRuleKeyValuePtrOutput {
+	return o.ApplyT(func(v IndexRule) *IndexRuleKeyValue { return v.KeyValue }).(IndexRuleKeyValuePtrOutput)
+}
+
+// Metafield index configuration.
+func (o IndexRuleOutput) Tag() IndexRuleTagPtrOutput {
+	return o.ApplyT(func(v IndexRule) *IndexRuleTag { return v.Tag }).(IndexRuleTagPtrOutput)
+}
+
+type IndexRulePtrOutput struct{ *pulumi.OutputState }
+
+func (IndexRulePtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**IndexRule)(nil)).Elem()
+}
+
+func (o IndexRulePtrOutput) ToIndexRulePtrOutput() IndexRulePtrOutput {
+	return o
+}
+
+func (o IndexRulePtrOutput) ToIndexRulePtrOutputWithContext(ctx context.Context) IndexRulePtrOutput {
+	return o
+}
+
+func (o IndexRulePtrOutput) Elem() IndexRuleOutput {
+	return o.ApplyT(func(v *IndexRule) IndexRule {
+		if v != nil {
+			return *v
+		}
+		var ret IndexRule
+		return ret
+	}).(IndexRuleOutput)
+}
+
+// The key value index is automatically configured. If it is empty, it means that the function is not enabled.
+func (o IndexRulePtrOutput) DynamicIndex() IndexRuleDynamicIndexPtrOutput {
+	return o.ApplyT(func(v *IndexRule) *IndexRuleDynamicIndex {
+		if v == nil {
+			return nil
+		}
+		return v.DynamicIndex
+	}).(IndexRuleDynamicIndexPtrOutput)
+}
+
+// Full-Text index configuration.
+func (o IndexRulePtrOutput) FullText() IndexRuleFullTextPtrOutput {
+	return o.ApplyT(func(v *IndexRule) *IndexRuleFullText {
+		if v == nil {
+			return nil
+		}
+		return v.FullText
+	}).(IndexRuleFullTextPtrOutput)
+}
+
+// Key-Value index configuration.
+func (o IndexRulePtrOutput) KeyValue() IndexRuleKeyValuePtrOutput {
+	return o.ApplyT(func(v *IndexRule) *IndexRuleKeyValue {
+		if v == nil {
+			return nil
+		}
+		return v.KeyValue
+	}).(IndexRuleKeyValuePtrOutput)
+}
+
+// Metafield index configuration.
+func (o IndexRulePtrOutput) Tag() IndexRuleTagPtrOutput {
+	return o.ApplyT(func(v *IndexRule) *IndexRuleTag {
+		if v == nil {
+			return nil
+		}
+		return v.Tag
+	}).(IndexRuleTagPtrOutput)
+}
+
+type IndexRuleDynamicIndex struct {
+	// index automatic configuration switch.
+	Status bool `pulumi:"status"`
+}
+
+// IndexRuleDynamicIndexInput is an input type that accepts IndexRuleDynamicIndexArgs and IndexRuleDynamicIndexOutput values.
+// You can construct a concrete instance of `IndexRuleDynamicIndexInput` via:
+//
+//	IndexRuleDynamicIndexArgs{...}
+type IndexRuleDynamicIndexInput interface {
+	pulumi.Input
+
+	ToIndexRuleDynamicIndexOutput() IndexRuleDynamicIndexOutput
+	ToIndexRuleDynamicIndexOutputWithContext(context.Context) IndexRuleDynamicIndexOutput
+}
+
+type IndexRuleDynamicIndexArgs struct {
+	// index automatic configuration switch.
+	Status pulumi.BoolInput `pulumi:"status"`
+}
+
+func (IndexRuleDynamicIndexArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*IndexRuleDynamicIndex)(nil)).Elem()
+}
+
+func (i IndexRuleDynamicIndexArgs) ToIndexRuleDynamicIndexOutput() IndexRuleDynamicIndexOutput {
+	return i.ToIndexRuleDynamicIndexOutputWithContext(context.Background())
+}
+
+func (i IndexRuleDynamicIndexArgs) ToIndexRuleDynamicIndexOutputWithContext(ctx context.Context) IndexRuleDynamicIndexOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(IndexRuleDynamicIndexOutput)
+}
+
+func (i IndexRuleDynamicIndexArgs) ToIndexRuleDynamicIndexPtrOutput() IndexRuleDynamicIndexPtrOutput {
+	return i.ToIndexRuleDynamicIndexPtrOutputWithContext(context.Background())
+}
+
+func (i IndexRuleDynamicIndexArgs) ToIndexRuleDynamicIndexPtrOutputWithContext(ctx context.Context) IndexRuleDynamicIndexPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(IndexRuleDynamicIndexOutput).ToIndexRuleDynamicIndexPtrOutputWithContext(ctx)
+}
+
+// IndexRuleDynamicIndexPtrInput is an input type that accepts IndexRuleDynamicIndexArgs, IndexRuleDynamicIndexPtr and IndexRuleDynamicIndexPtrOutput values.
+// You can construct a concrete instance of `IndexRuleDynamicIndexPtrInput` via:
+//
+//	        IndexRuleDynamicIndexArgs{...}
+//
+//	or:
+//
+//	        nil
+type IndexRuleDynamicIndexPtrInput interface {
+	pulumi.Input
+
+	ToIndexRuleDynamicIndexPtrOutput() IndexRuleDynamicIndexPtrOutput
+	ToIndexRuleDynamicIndexPtrOutputWithContext(context.Context) IndexRuleDynamicIndexPtrOutput
+}
+
+type indexRuleDynamicIndexPtrType IndexRuleDynamicIndexArgs
+
+func IndexRuleDynamicIndexPtr(v *IndexRuleDynamicIndexArgs) IndexRuleDynamicIndexPtrInput {
+	return (*indexRuleDynamicIndexPtrType)(v)
+}
+
+func (*indexRuleDynamicIndexPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**IndexRuleDynamicIndex)(nil)).Elem()
+}
+
+func (i *indexRuleDynamicIndexPtrType) ToIndexRuleDynamicIndexPtrOutput() IndexRuleDynamicIndexPtrOutput {
+	return i.ToIndexRuleDynamicIndexPtrOutputWithContext(context.Background())
+}
+
+func (i *indexRuleDynamicIndexPtrType) ToIndexRuleDynamicIndexPtrOutputWithContext(ctx context.Context) IndexRuleDynamicIndexPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(IndexRuleDynamicIndexPtrOutput)
+}
+
+type IndexRuleDynamicIndexOutput struct{ *pulumi.OutputState }
+
+func (IndexRuleDynamicIndexOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*IndexRuleDynamicIndex)(nil)).Elem()
+}
+
+func (o IndexRuleDynamicIndexOutput) ToIndexRuleDynamicIndexOutput() IndexRuleDynamicIndexOutput {
+	return o
+}
+
+func (o IndexRuleDynamicIndexOutput) ToIndexRuleDynamicIndexOutputWithContext(ctx context.Context) IndexRuleDynamicIndexOutput {
+	return o
+}
+
+func (o IndexRuleDynamicIndexOutput) ToIndexRuleDynamicIndexPtrOutput() IndexRuleDynamicIndexPtrOutput {
+	return o.ToIndexRuleDynamicIndexPtrOutputWithContext(context.Background())
+}
+
+func (o IndexRuleDynamicIndexOutput) ToIndexRuleDynamicIndexPtrOutputWithContext(ctx context.Context) IndexRuleDynamicIndexPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v IndexRuleDynamicIndex) *IndexRuleDynamicIndex {
+		return &v
+	}).(IndexRuleDynamicIndexPtrOutput)
+}
+
+// index automatic configuration switch.
+func (o IndexRuleDynamicIndexOutput) Status() pulumi.BoolOutput {
+	return o.ApplyT(func(v IndexRuleDynamicIndex) bool { return v.Status }).(pulumi.BoolOutput)
+}
+
+type IndexRuleDynamicIndexPtrOutput struct{ *pulumi.OutputState }
+
+func (IndexRuleDynamicIndexPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**IndexRuleDynamicIndex)(nil)).Elem()
+}
+
+func (o IndexRuleDynamicIndexPtrOutput) ToIndexRuleDynamicIndexPtrOutput() IndexRuleDynamicIndexPtrOutput {
+	return o
+}
+
+func (o IndexRuleDynamicIndexPtrOutput) ToIndexRuleDynamicIndexPtrOutputWithContext(ctx context.Context) IndexRuleDynamicIndexPtrOutput {
+	return o
+}
+
+func (o IndexRuleDynamicIndexPtrOutput) Elem() IndexRuleDynamicIndexOutput {
+	return o.ApplyT(func(v *IndexRuleDynamicIndex) IndexRuleDynamicIndex {
+		if v != nil {
+			return *v
+		}
+		var ret IndexRuleDynamicIndex
+		return ret
+	}).(IndexRuleDynamicIndexOutput)
+}
+
+// index automatic configuration switch.
+func (o IndexRuleDynamicIndexPtrOutput) Status() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *IndexRuleDynamicIndex) *bool {
+		if v == nil {
+			return nil
+		}
+		return &v.Status
+	}).(pulumi.BoolPtrOutput)
+}
+
+type IndexRuleFullText struct {
+	// Case sensitivity.
+	CaseSensitive bool `pulumi:"caseSensitive"`
+	// Whether Chinese characters are contained.
+	ContainZH bool `pulumi:"containZH"`
+	// Full-Text index delimiter. Each character in the string represents a delimiter.
+	Tokenizer string `pulumi:"tokenizer"`
+}
+
+// IndexRuleFullTextInput is an input type that accepts IndexRuleFullTextArgs and IndexRuleFullTextOutput values.
+// You can construct a concrete instance of `IndexRuleFullTextInput` via:
+//
+//	IndexRuleFullTextArgs{...}
+type IndexRuleFullTextInput interface {
+	pulumi.Input
+
+	ToIndexRuleFullTextOutput() IndexRuleFullTextOutput
+	ToIndexRuleFullTextOutputWithContext(context.Context) IndexRuleFullTextOutput
+}
+
+type IndexRuleFullTextArgs struct {
+	// Case sensitivity.
+	CaseSensitive pulumi.BoolInput `pulumi:"caseSensitive"`
+	// Whether Chinese characters are contained.
+	ContainZH pulumi.BoolInput `pulumi:"containZH"`
+	// Full-Text index delimiter. Each character in the string represents a delimiter.
+	Tokenizer pulumi.StringInput `pulumi:"tokenizer"`
+}
+
+func (IndexRuleFullTextArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*IndexRuleFullText)(nil)).Elem()
+}
+
+func (i IndexRuleFullTextArgs) ToIndexRuleFullTextOutput() IndexRuleFullTextOutput {
+	return i.ToIndexRuleFullTextOutputWithContext(context.Background())
+}
+
+func (i IndexRuleFullTextArgs) ToIndexRuleFullTextOutputWithContext(ctx context.Context) IndexRuleFullTextOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(IndexRuleFullTextOutput)
+}
+
+func (i IndexRuleFullTextArgs) ToIndexRuleFullTextPtrOutput() IndexRuleFullTextPtrOutput {
+	return i.ToIndexRuleFullTextPtrOutputWithContext(context.Background())
+}
+
+func (i IndexRuleFullTextArgs) ToIndexRuleFullTextPtrOutputWithContext(ctx context.Context) IndexRuleFullTextPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(IndexRuleFullTextOutput).ToIndexRuleFullTextPtrOutputWithContext(ctx)
+}
+
+// IndexRuleFullTextPtrInput is an input type that accepts IndexRuleFullTextArgs, IndexRuleFullTextPtr and IndexRuleFullTextPtrOutput values.
+// You can construct a concrete instance of `IndexRuleFullTextPtrInput` via:
+//
+//	        IndexRuleFullTextArgs{...}
+//
+//	or:
+//
+//	        nil
+type IndexRuleFullTextPtrInput interface {
+	pulumi.Input
+
+	ToIndexRuleFullTextPtrOutput() IndexRuleFullTextPtrOutput
+	ToIndexRuleFullTextPtrOutputWithContext(context.Context) IndexRuleFullTextPtrOutput
+}
+
+type indexRuleFullTextPtrType IndexRuleFullTextArgs
+
+func IndexRuleFullTextPtr(v *IndexRuleFullTextArgs) IndexRuleFullTextPtrInput {
+	return (*indexRuleFullTextPtrType)(v)
+}
+
+func (*indexRuleFullTextPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**IndexRuleFullText)(nil)).Elem()
+}
+
+func (i *indexRuleFullTextPtrType) ToIndexRuleFullTextPtrOutput() IndexRuleFullTextPtrOutput {
+	return i.ToIndexRuleFullTextPtrOutputWithContext(context.Background())
+}
+
+func (i *indexRuleFullTextPtrType) ToIndexRuleFullTextPtrOutputWithContext(ctx context.Context) IndexRuleFullTextPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(IndexRuleFullTextPtrOutput)
+}
+
+type IndexRuleFullTextOutput struct{ *pulumi.OutputState }
+
+func (IndexRuleFullTextOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*IndexRuleFullText)(nil)).Elem()
+}
+
+func (o IndexRuleFullTextOutput) ToIndexRuleFullTextOutput() IndexRuleFullTextOutput {
+	return o
+}
+
+func (o IndexRuleFullTextOutput) ToIndexRuleFullTextOutputWithContext(ctx context.Context) IndexRuleFullTextOutput {
+	return o
+}
+
+func (o IndexRuleFullTextOutput) ToIndexRuleFullTextPtrOutput() IndexRuleFullTextPtrOutput {
+	return o.ToIndexRuleFullTextPtrOutputWithContext(context.Background())
+}
+
+func (o IndexRuleFullTextOutput) ToIndexRuleFullTextPtrOutputWithContext(ctx context.Context) IndexRuleFullTextPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v IndexRuleFullText) *IndexRuleFullText {
+		return &v
+	}).(IndexRuleFullTextPtrOutput)
+}
+
+// Case sensitivity.
+func (o IndexRuleFullTextOutput) CaseSensitive() pulumi.BoolOutput {
+	return o.ApplyT(func(v IndexRuleFullText) bool { return v.CaseSensitive }).(pulumi.BoolOutput)
+}
+
+// Whether Chinese characters are contained.
+func (o IndexRuleFullTextOutput) ContainZH() pulumi.BoolOutput {
+	return o.ApplyT(func(v IndexRuleFullText) bool { return v.ContainZH }).(pulumi.BoolOutput)
+}
+
+// Full-Text index delimiter. Each character in the string represents a delimiter.
+func (o IndexRuleFullTextOutput) Tokenizer() pulumi.StringOutput {
+	return o.ApplyT(func(v IndexRuleFullText) string { return v.Tokenizer }).(pulumi.StringOutput)
+}
+
+type IndexRuleFullTextPtrOutput struct{ *pulumi.OutputState }
+
+func (IndexRuleFullTextPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**IndexRuleFullText)(nil)).Elem()
+}
+
+func (o IndexRuleFullTextPtrOutput) ToIndexRuleFullTextPtrOutput() IndexRuleFullTextPtrOutput {
+	return o
+}
+
+func (o IndexRuleFullTextPtrOutput) ToIndexRuleFullTextPtrOutputWithContext(ctx context.Context) IndexRuleFullTextPtrOutput {
+	return o
+}
+
+func (o IndexRuleFullTextPtrOutput) Elem() IndexRuleFullTextOutput {
+	return o.ApplyT(func(v *IndexRuleFullText) IndexRuleFullText {
+		if v != nil {
+			return *v
+		}
+		var ret IndexRuleFullText
+		return ret
+	}).(IndexRuleFullTextOutput)
+}
+
+// Case sensitivity.
+func (o IndexRuleFullTextPtrOutput) CaseSensitive() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *IndexRuleFullText) *bool {
+		if v == nil {
+			return nil
+		}
+		return &v.CaseSensitive
+	}).(pulumi.BoolPtrOutput)
+}
+
+// Whether Chinese characters are contained.
+func (o IndexRuleFullTextPtrOutput) ContainZH() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *IndexRuleFullText) *bool {
+		if v == nil {
+			return nil
+		}
+		return &v.ContainZH
+	}).(pulumi.BoolPtrOutput)
+}
+
+// Full-Text index delimiter. Each character in the string represents a delimiter.
+func (o IndexRuleFullTextPtrOutput) Tokenizer() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *IndexRuleFullText) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Tokenizer
+	}).(pulumi.StringPtrOutput)
+}
+
+type IndexRuleKeyValue struct {
+	// Case sensitivity.
+	CaseSensitive bool `pulumi:"caseSensitive"`
+	// Key-Value pair information of the index to be created. Up to 100 key-value pairs can be configured.
+	KeyValues []IndexRuleKeyValueKeyValue `pulumi:"keyValues"`
+}
+
+// IndexRuleKeyValueInput is an input type that accepts IndexRuleKeyValueArgs and IndexRuleKeyValueOutput values.
+// You can construct a concrete instance of `IndexRuleKeyValueInput` via:
+//
+//	IndexRuleKeyValueArgs{...}
+type IndexRuleKeyValueInput interface {
+	pulumi.Input
+
+	ToIndexRuleKeyValueOutput() IndexRuleKeyValueOutput
+	ToIndexRuleKeyValueOutputWithContext(context.Context) IndexRuleKeyValueOutput
+}
+
+type IndexRuleKeyValueArgs struct {
+	// Case sensitivity.
+	CaseSensitive pulumi.BoolInput `pulumi:"caseSensitive"`
+	// Key-Value pair information of the index to be created. Up to 100 key-value pairs can be configured.
+	KeyValues IndexRuleKeyValueKeyValueArrayInput `pulumi:"keyValues"`
+}
+
+func (IndexRuleKeyValueArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*IndexRuleKeyValue)(nil)).Elem()
+}
+
+func (i IndexRuleKeyValueArgs) ToIndexRuleKeyValueOutput() IndexRuleKeyValueOutput {
+	return i.ToIndexRuleKeyValueOutputWithContext(context.Background())
+}
+
+func (i IndexRuleKeyValueArgs) ToIndexRuleKeyValueOutputWithContext(ctx context.Context) IndexRuleKeyValueOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(IndexRuleKeyValueOutput)
+}
+
+func (i IndexRuleKeyValueArgs) ToIndexRuleKeyValuePtrOutput() IndexRuleKeyValuePtrOutput {
+	return i.ToIndexRuleKeyValuePtrOutputWithContext(context.Background())
+}
+
+func (i IndexRuleKeyValueArgs) ToIndexRuleKeyValuePtrOutputWithContext(ctx context.Context) IndexRuleKeyValuePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(IndexRuleKeyValueOutput).ToIndexRuleKeyValuePtrOutputWithContext(ctx)
+}
+
+// IndexRuleKeyValuePtrInput is an input type that accepts IndexRuleKeyValueArgs, IndexRuleKeyValuePtr and IndexRuleKeyValuePtrOutput values.
+// You can construct a concrete instance of `IndexRuleKeyValuePtrInput` via:
+//
+//	        IndexRuleKeyValueArgs{...}
+//
+//	or:
+//
+//	        nil
+type IndexRuleKeyValuePtrInput interface {
+	pulumi.Input
+
+	ToIndexRuleKeyValuePtrOutput() IndexRuleKeyValuePtrOutput
+	ToIndexRuleKeyValuePtrOutputWithContext(context.Context) IndexRuleKeyValuePtrOutput
+}
+
+type indexRuleKeyValuePtrType IndexRuleKeyValueArgs
+
+func IndexRuleKeyValuePtr(v *IndexRuleKeyValueArgs) IndexRuleKeyValuePtrInput {
+	return (*indexRuleKeyValuePtrType)(v)
+}
+
+func (*indexRuleKeyValuePtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**IndexRuleKeyValue)(nil)).Elem()
+}
+
+func (i *indexRuleKeyValuePtrType) ToIndexRuleKeyValuePtrOutput() IndexRuleKeyValuePtrOutput {
+	return i.ToIndexRuleKeyValuePtrOutputWithContext(context.Background())
+}
+
+func (i *indexRuleKeyValuePtrType) ToIndexRuleKeyValuePtrOutputWithContext(ctx context.Context) IndexRuleKeyValuePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(IndexRuleKeyValuePtrOutput)
+}
+
+type IndexRuleKeyValueOutput struct{ *pulumi.OutputState }
+
+func (IndexRuleKeyValueOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*IndexRuleKeyValue)(nil)).Elem()
+}
+
+func (o IndexRuleKeyValueOutput) ToIndexRuleKeyValueOutput() IndexRuleKeyValueOutput {
+	return o
+}
+
+func (o IndexRuleKeyValueOutput) ToIndexRuleKeyValueOutputWithContext(ctx context.Context) IndexRuleKeyValueOutput {
+	return o
+}
+
+func (o IndexRuleKeyValueOutput) ToIndexRuleKeyValuePtrOutput() IndexRuleKeyValuePtrOutput {
+	return o.ToIndexRuleKeyValuePtrOutputWithContext(context.Background())
+}
+
+func (o IndexRuleKeyValueOutput) ToIndexRuleKeyValuePtrOutputWithContext(ctx context.Context) IndexRuleKeyValuePtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v IndexRuleKeyValue) *IndexRuleKeyValue {
+		return &v
+	}).(IndexRuleKeyValuePtrOutput)
+}
+
+// Case sensitivity.
+func (o IndexRuleKeyValueOutput) CaseSensitive() pulumi.BoolOutput {
+	return o.ApplyT(func(v IndexRuleKeyValue) bool { return v.CaseSensitive }).(pulumi.BoolOutput)
+}
+
+// Key-Value pair information of the index to be created. Up to 100 key-value pairs can be configured.
+func (o IndexRuleKeyValueOutput) KeyValues() IndexRuleKeyValueKeyValueArrayOutput {
+	return o.ApplyT(func(v IndexRuleKeyValue) []IndexRuleKeyValueKeyValue { return v.KeyValues }).(IndexRuleKeyValueKeyValueArrayOutput)
+}
+
+type IndexRuleKeyValuePtrOutput struct{ *pulumi.OutputState }
+
+func (IndexRuleKeyValuePtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**IndexRuleKeyValue)(nil)).Elem()
+}
+
+func (o IndexRuleKeyValuePtrOutput) ToIndexRuleKeyValuePtrOutput() IndexRuleKeyValuePtrOutput {
+	return o
+}
+
+func (o IndexRuleKeyValuePtrOutput) ToIndexRuleKeyValuePtrOutputWithContext(ctx context.Context) IndexRuleKeyValuePtrOutput {
+	return o
+}
+
+func (o IndexRuleKeyValuePtrOutput) Elem() IndexRuleKeyValueOutput {
+	return o.ApplyT(func(v *IndexRuleKeyValue) IndexRuleKeyValue {
+		if v != nil {
+			return *v
+		}
+		var ret IndexRuleKeyValue
+		return ret
+	}).(IndexRuleKeyValueOutput)
+}
+
+// Case sensitivity.
+func (o IndexRuleKeyValuePtrOutput) CaseSensitive() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *IndexRuleKeyValue) *bool {
+		if v == nil {
+			return nil
+		}
+		return &v.CaseSensitive
+	}).(pulumi.BoolPtrOutput)
+}
+
+// Key-Value pair information of the index to be created. Up to 100 key-value pairs can be configured.
+func (o IndexRuleKeyValuePtrOutput) KeyValues() IndexRuleKeyValueKeyValueArrayOutput {
+	return o.ApplyT(func(v *IndexRuleKeyValue) []IndexRuleKeyValueKeyValue {
+		if v == nil {
+			return nil
+		}
+		return v.KeyValues
+	}).(IndexRuleKeyValueKeyValueArrayOutput)
+}
+
+type IndexRuleKeyValueKeyValue struct {
+	// When a key value or metafield index needs to be configured for a field, the metafield Key does not need to be prefixed with __TAG__. and is consistent with the one when logs are uploaded. __TAG__. will be prefixed automatically for display in the console..
+	Key string `pulumi:"key"`
+	// Field index description information.
+	Value *IndexRuleKeyValueKeyValueValue `pulumi:"value"`
+}
+
+// IndexRuleKeyValueKeyValueInput is an input type that accepts IndexRuleKeyValueKeyValueArgs and IndexRuleKeyValueKeyValueOutput values.
+// You can construct a concrete instance of `IndexRuleKeyValueKeyValueInput` via:
+//
+//	IndexRuleKeyValueKeyValueArgs{...}
+type IndexRuleKeyValueKeyValueInput interface {
+	pulumi.Input
+
+	ToIndexRuleKeyValueKeyValueOutput() IndexRuleKeyValueKeyValueOutput
+	ToIndexRuleKeyValueKeyValueOutputWithContext(context.Context) IndexRuleKeyValueKeyValueOutput
+}
+
+type IndexRuleKeyValueKeyValueArgs struct {
+	// When a key value or metafield index needs to be configured for a field, the metafield Key does not need to be prefixed with __TAG__. and is consistent with the one when logs are uploaded. __TAG__. will be prefixed automatically for display in the console..
+	Key pulumi.StringInput `pulumi:"key"`
+	// Field index description information.
+	Value IndexRuleKeyValueKeyValueValuePtrInput `pulumi:"value"`
+}
+
+func (IndexRuleKeyValueKeyValueArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*IndexRuleKeyValueKeyValue)(nil)).Elem()
+}
+
+func (i IndexRuleKeyValueKeyValueArgs) ToIndexRuleKeyValueKeyValueOutput() IndexRuleKeyValueKeyValueOutput {
+	return i.ToIndexRuleKeyValueKeyValueOutputWithContext(context.Background())
+}
+
+func (i IndexRuleKeyValueKeyValueArgs) ToIndexRuleKeyValueKeyValueOutputWithContext(ctx context.Context) IndexRuleKeyValueKeyValueOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(IndexRuleKeyValueKeyValueOutput)
+}
+
+// IndexRuleKeyValueKeyValueArrayInput is an input type that accepts IndexRuleKeyValueKeyValueArray and IndexRuleKeyValueKeyValueArrayOutput values.
+// You can construct a concrete instance of `IndexRuleKeyValueKeyValueArrayInput` via:
+//
+//	IndexRuleKeyValueKeyValueArray{ IndexRuleKeyValueKeyValueArgs{...} }
+type IndexRuleKeyValueKeyValueArrayInput interface {
+	pulumi.Input
+
+	ToIndexRuleKeyValueKeyValueArrayOutput() IndexRuleKeyValueKeyValueArrayOutput
+	ToIndexRuleKeyValueKeyValueArrayOutputWithContext(context.Context) IndexRuleKeyValueKeyValueArrayOutput
+}
+
+type IndexRuleKeyValueKeyValueArray []IndexRuleKeyValueKeyValueInput
+
+func (IndexRuleKeyValueKeyValueArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]IndexRuleKeyValueKeyValue)(nil)).Elem()
+}
+
+func (i IndexRuleKeyValueKeyValueArray) ToIndexRuleKeyValueKeyValueArrayOutput() IndexRuleKeyValueKeyValueArrayOutput {
+	return i.ToIndexRuleKeyValueKeyValueArrayOutputWithContext(context.Background())
+}
+
+func (i IndexRuleKeyValueKeyValueArray) ToIndexRuleKeyValueKeyValueArrayOutputWithContext(ctx context.Context) IndexRuleKeyValueKeyValueArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(IndexRuleKeyValueKeyValueArrayOutput)
+}
+
+type IndexRuleKeyValueKeyValueOutput struct{ *pulumi.OutputState }
+
+func (IndexRuleKeyValueKeyValueOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*IndexRuleKeyValueKeyValue)(nil)).Elem()
+}
+
+func (o IndexRuleKeyValueKeyValueOutput) ToIndexRuleKeyValueKeyValueOutput() IndexRuleKeyValueKeyValueOutput {
+	return o
+}
+
+func (o IndexRuleKeyValueKeyValueOutput) ToIndexRuleKeyValueKeyValueOutputWithContext(ctx context.Context) IndexRuleKeyValueKeyValueOutput {
+	return o
+}
+
+// When a key value or metafield index needs to be configured for a field, the metafield Key does not need to be prefixed with __TAG__. and is consistent with the one when logs are uploaded. __TAG__. will be prefixed automatically for display in the console..
+func (o IndexRuleKeyValueKeyValueOutput) Key() pulumi.StringOutput {
+	return o.ApplyT(func(v IndexRuleKeyValueKeyValue) string { return v.Key }).(pulumi.StringOutput)
+}
+
+// Field index description information.
+func (o IndexRuleKeyValueKeyValueOutput) Value() IndexRuleKeyValueKeyValueValuePtrOutput {
+	return o.ApplyT(func(v IndexRuleKeyValueKeyValue) *IndexRuleKeyValueKeyValueValue { return v.Value }).(IndexRuleKeyValueKeyValueValuePtrOutput)
+}
+
+type IndexRuleKeyValueKeyValueArrayOutput struct{ *pulumi.OutputState }
+
+func (IndexRuleKeyValueKeyValueArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]IndexRuleKeyValueKeyValue)(nil)).Elem()
+}
+
+func (o IndexRuleKeyValueKeyValueArrayOutput) ToIndexRuleKeyValueKeyValueArrayOutput() IndexRuleKeyValueKeyValueArrayOutput {
+	return o
+}
+
+func (o IndexRuleKeyValueKeyValueArrayOutput) ToIndexRuleKeyValueKeyValueArrayOutputWithContext(ctx context.Context) IndexRuleKeyValueKeyValueArrayOutput {
+	return o
+}
+
+func (o IndexRuleKeyValueKeyValueArrayOutput) Index(i pulumi.IntInput) IndexRuleKeyValueKeyValueOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) IndexRuleKeyValueKeyValue {
+		return vs[0].([]IndexRuleKeyValueKeyValue)[vs[1].(int)]
+	}).(IndexRuleKeyValueKeyValueOutput)
+}
+
+type IndexRuleKeyValueKeyValueValue struct {
+	// Whether Chinese characters are contained.
+	ContainZH *bool `pulumi:"containZH"`
+	// Whether the analysis feature is enabled for the field.
+	SqlFlag *bool `pulumi:"sqlFlag"`
+	// Field delimiter, which is meaningful only if the field type is text. Each character in the entered string represents a delimiter.
+	Tokenizer *string `pulumi:"tokenizer"`
+	// Field type. Valid values: long, text, double.
+	Type string `pulumi:"type"`
+}
+
+// IndexRuleKeyValueKeyValueValueInput is an input type that accepts IndexRuleKeyValueKeyValueValueArgs and IndexRuleKeyValueKeyValueValueOutput values.
+// You can construct a concrete instance of `IndexRuleKeyValueKeyValueValueInput` via:
+//
+//	IndexRuleKeyValueKeyValueValueArgs{...}
+type IndexRuleKeyValueKeyValueValueInput interface {
+	pulumi.Input
+
+	ToIndexRuleKeyValueKeyValueValueOutput() IndexRuleKeyValueKeyValueValueOutput
+	ToIndexRuleKeyValueKeyValueValueOutputWithContext(context.Context) IndexRuleKeyValueKeyValueValueOutput
+}
+
+type IndexRuleKeyValueKeyValueValueArgs struct {
+	// Whether Chinese characters are contained.
+	ContainZH pulumi.BoolPtrInput `pulumi:"containZH"`
+	// Whether the analysis feature is enabled for the field.
+	SqlFlag pulumi.BoolPtrInput `pulumi:"sqlFlag"`
+	// Field delimiter, which is meaningful only if the field type is text. Each character in the entered string represents a delimiter.
+	Tokenizer pulumi.StringPtrInput `pulumi:"tokenizer"`
+	// Field type. Valid values: long, text, double.
+	Type pulumi.StringInput `pulumi:"type"`
+}
+
+func (IndexRuleKeyValueKeyValueValueArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*IndexRuleKeyValueKeyValueValue)(nil)).Elem()
+}
+
+func (i IndexRuleKeyValueKeyValueValueArgs) ToIndexRuleKeyValueKeyValueValueOutput() IndexRuleKeyValueKeyValueValueOutput {
+	return i.ToIndexRuleKeyValueKeyValueValueOutputWithContext(context.Background())
+}
+
+func (i IndexRuleKeyValueKeyValueValueArgs) ToIndexRuleKeyValueKeyValueValueOutputWithContext(ctx context.Context) IndexRuleKeyValueKeyValueValueOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(IndexRuleKeyValueKeyValueValueOutput)
+}
+
+func (i IndexRuleKeyValueKeyValueValueArgs) ToIndexRuleKeyValueKeyValueValuePtrOutput() IndexRuleKeyValueKeyValueValuePtrOutput {
+	return i.ToIndexRuleKeyValueKeyValueValuePtrOutputWithContext(context.Background())
+}
+
+func (i IndexRuleKeyValueKeyValueValueArgs) ToIndexRuleKeyValueKeyValueValuePtrOutputWithContext(ctx context.Context) IndexRuleKeyValueKeyValueValuePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(IndexRuleKeyValueKeyValueValueOutput).ToIndexRuleKeyValueKeyValueValuePtrOutputWithContext(ctx)
+}
+
+// IndexRuleKeyValueKeyValueValuePtrInput is an input type that accepts IndexRuleKeyValueKeyValueValueArgs, IndexRuleKeyValueKeyValueValuePtr and IndexRuleKeyValueKeyValueValuePtrOutput values.
+// You can construct a concrete instance of `IndexRuleKeyValueKeyValueValuePtrInput` via:
+//
+//	        IndexRuleKeyValueKeyValueValueArgs{...}
+//
+//	or:
+//
+//	        nil
+type IndexRuleKeyValueKeyValueValuePtrInput interface {
+	pulumi.Input
+
+	ToIndexRuleKeyValueKeyValueValuePtrOutput() IndexRuleKeyValueKeyValueValuePtrOutput
+	ToIndexRuleKeyValueKeyValueValuePtrOutputWithContext(context.Context) IndexRuleKeyValueKeyValueValuePtrOutput
+}
+
+type indexRuleKeyValueKeyValueValuePtrType IndexRuleKeyValueKeyValueValueArgs
+
+func IndexRuleKeyValueKeyValueValuePtr(v *IndexRuleKeyValueKeyValueValueArgs) IndexRuleKeyValueKeyValueValuePtrInput {
+	return (*indexRuleKeyValueKeyValueValuePtrType)(v)
+}
+
+func (*indexRuleKeyValueKeyValueValuePtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**IndexRuleKeyValueKeyValueValue)(nil)).Elem()
+}
+
+func (i *indexRuleKeyValueKeyValueValuePtrType) ToIndexRuleKeyValueKeyValueValuePtrOutput() IndexRuleKeyValueKeyValueValuePtrOutput {
+	return i.ToIndexRuleKeyValueKeyValueValuePtrOutputWithContext(context.Background())
+}
+
+func (i *indexRuleKeyValueKeyValueValuePtrType) ToIndexRuleKeyValueKeyValueValuePtrOutputWithContext(ctx context.Context) IndexRuleKeyValueKeyValueValuePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(IndexRuleKeyValueKeyValueValuePtrOutput)
+}
+
+type IndexRuleKeyValueKeyValueValueOutput struct{ *pulumi.OutputState }
+
+func (IndexRuleKeyValueKeyValueValueOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*IndexRuleKeyValueKeyValueValue)(nil)).Elem()
+}
+
+func (o IndexRuleKeyValueKeyValueValueOutput) ToIndexRuleKeyValueKeyValueValueOutput() IndexRuleKeyValueKeyValueValueOutput {
+	return o
+}
+
+func (o IndexRuleKeyValueKeyValueValueOutput) ToIndexRuleKeyValueKeyValueValueOutputWithContext(ctx context.Context) IndexRuleKeyValueKeyValueValueOutput {
+	return o
+}
+
+func (o IndexRuleKeyValueKeyValueValueOutput) ToIndexRuleKeyValueKeyValueValuePtrOutput() IndexRuleKeyValueKeyValueValuePtrOutput {
+	return o.ToIndexRuleKeyValueKeyValueValuePtrOutputWithContext(context.Background())
+}
+
+func (o IndexRuleKeyValueKeyValueValueOutput) ToIndexRuleKeyValueKeyValueValuePtrOutputWithContext(ctx context.Context) IndexRuleKeyValueKeyValueValuePtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v IndexRuleKeyValueKeyValueValue) *IndexRuleKeyValueKeyValueValue {
+		return &v
+	}).(IndexRuleKeyValueKeyValueValuePtrOutput)
+}
+
+// Whether Chinese characters are contained.
+func (o IndexRuleKeyValueKeyValueValueOutput) ContainZH() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v IndexRuleKeyValueKeyValueValue) *bool { return v.ContainZH }).(pulumi.BoolPtrOutput)
+}
+
+// Whether the analysis feature is enabled for the field.
+func (o IndexRuleKeyValueKeyValueValueOutput) SqlFlag() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v IndexRuleKeyValueKeyValueValue) *bool { return v.SqlFlag }).(pulumi.BoolPtrOutput)
+}
+
+// Field delimiter, which is meaningful only if the field type is text. Each character in the entered string represents a delimiter.
+func (o IndexRuleKeyValueKeyValueValueOutput) Tokenizer() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v IndexRuleKeyValueKeyValueValue) *string { return v.Tokenizer }).(pulumi.StringPtrOutput)
+}
+
+// Field type. Valid values: long, text, double.
+func (o IndexRuleKeyValueKeyValueValueOutput) Type() pulumi.StringOutput {
+	return o.ApplyT(func(v IndexRuleKeyValueKeyValueValue) string { return v.Type }).(pulumi.StringOutput)
+}
+
+type IndexRuleKeyValueKeyValueValuePtrOutput struct{ *pulumi.OutputState }
+
+func (IndexRuleKeyValueKeyValueValuePtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**IndexRuleKeyValueKeyValueValue)(nil)).Elem()
+}
+
+func (o IndexRuleKeyValueKeyValueValuePtrOutput) ToIndexRuleKeyValueKeyValueValuePtrOutput() IndexRuleKeyValueKeyValueValuePtrOutput {
+	return o
+}
+
+func (o IndexRuleKeyValueKeyValueValuePtrOutput) ToIndexRuleKeyValueKeyValueValuePtrOutputWithContext(ctx context.Context) IndexRuleKeyValueKeyValueValuePtrOutput {
+	return o
+}
+
+func (o IndexRuleKeyValueKeyValueValuePtrOutput) Elem() IndexRuleKeyValueKeyValueValueOutput {
+	return o.ApplyT(func(v *IndexRuleKeyValueKeyValueValue) IndexRuleKeyValueKeyValueValue {
+		if v != nil {
+			return *v
+		}
+		var ret IndexRuleKeyValueKeyValueValue
+		return ret
+	}).(IndexRuleKeyValueKeyValueValueOutput)
+}
+
+// Whether Chinese characters are contained.
+func (o IndexRuleKeyValueKeyValueValuePtrOutput) ContainZH() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *IndexRuleKeyValueKeyValueValue) *bool {
+		if v == nil {
+			return nil
+		}
+		return v.ContainZH
+	}).(pulumi.BoolPtrOutput)
+}
+
+// Whether the analysis feature is enabled for the field.
+func (o IndexRuleKeyValueKeyValueValuePtrOutput) SqlFlag() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *IndexRuleKeyValueKeyValueValue) *bool {
+		if v == nil {
+			return nil
+		}
+		return v.SqlFlag
+	}).(pulumi.BoolPtrOutput)
+}
+
+// Field delimiter, which is meaningful only if the field type is text. Each character in the entered string represents a delimiter.
+func (o IndexRuleKeyValueKeyValueValuePtrOutput) Tokenizer() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *IndexRuleKeyValueKeyValueValue) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Tokenizer
+	}).(pulumi.StringPtrOutput)
+}
+
+// Field type. Valid values: long, text, double.
+func (o IndexRuleKeyValueKeyValueValuePtrOutput) Type() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *IndexRuleKeyValueKeyValueValue) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Type
+	}).(pulumi.StringPtrOutput)
+}
+
+type IndexRuleTag struct {
+	// Case sensitivity.
+	CaseSensitive bool `pulumi:"caseSensitive"`
+	// Key-Value pair information of the index to be created. Up to 100 key-value pairs can be configured.
+	KeyValues []IndexRuleTagKeyValue `pulumi:"keyValues"`
+}
+
+// IndexRuleTagInput is an input type that accepts IndexRuleTagArgs and IndexRuleTagOutput values.
+// You can construct a concrete instance of `IndexRuleTagInput` via:
+//
+//	IndexRuleTagArgs{...}
+type IndexRuleTagInput interface {
+	pulumi.Input
+
+	ToIndexRuleTagOutput() IndexRuleTagOutput
+	ToIndexRuleTagOutputWithContext(context.Context) IndexRuleTagOutput
+}
+
+type IndexRuleTagArgs struct {
+	// Case sensitivity.
+	CaseSensitive pulumi.BoolInput `pulumi:"caseSensitive"`
+	// Key-Value pair information of the index to be created. Up to 100 key-value pairs can be configured.
+	KeyValues IndexRuleTagKeyValueArrayInput `pulumi:"keyValues"`
+}
+
+func (IndexRuleTagArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*IndexRuleTag)(nil)).Elem()
+}
+
+func (i IndexRuleTagArgs) ToIndexRuleTagOutput() IndexRuleTagOutput {
+	return i.ToIndexRuleTagOutputWithContext(context.Background())
+}
+
+func (i IndexRuleTagArgs) ToIndexRuleTagOutputWithContext(ctx context.Context) IndexRuleTagOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(IndexRuleTagOutput)
+}
+
+func (i IndexRuleTagArgs) ToIndexRuleTagPtrOutput() IndexRuleTagPtrOutput {
+	return i.ToIndexRuleTagPtrOutputWithContext(context.Background())
+}
+
+func (i IndexRuleTagArgs) ToIndexRuleTagPtrOutputWithContext(ctx context.Context) IndexRuleTagPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(IndexRuleTagOutput).ToIndexRuleTagPtrOutputWithContext(ctx)
+}
+
+// IndexRuleTagPtrInput is an input type that accepts IndexRuleTagArgs, IndexRuleTagPtr and IndexRuleTagPtrOutput values.
+// You can construct a concrete instance of `IndexRuleTagPtrInput` via:
+//
+//	        IndexRuleTagArgs{...}
+//
+//	or:
+//
+//	        nil
+type IndexRuleTagPtrInput interface {
+	pulumi.Input
+
+	ToIndexRuleTagPtrOutput() IndexRuleTagPtrOutput
+	ToIndexRuleTagPtrOutputWithContext(context.Context) IndexRuleTagPtrOutput
+}
+
+type indexRuleTagPtrType IndexRuleTagArgs
+
+func IndexRuleTagPtr(v *IndexRuleTagArgs) IndexRuleTagPtrInput {
+	return (*indexRuleTagPtrType)(v)
+}
+
+func (*indexRuleTagPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**IndexRuleTag)(nil)).Elem()
+}
+
+func (i *indexRuleTagPtrType) ToIndexRuleTagPtrOutput() IndexRuleTagPtrOutput {
+	return i.ToIndexRuleTagPtrOutputWithContext(context.Background())
+}
+
+func (i *indexRuleTagPtrType) ToIndexRuleTagPtrOutputWithContext(ctx context.Context) IndexRuleTagPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(IndexRuleTagPtrOutput)
+}
+
+type IndexRuleTagOutput struct{ *pulumi.OutputState }
+
+func (IndexRuleTagOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*IndexRuleTag)(nil)).Elem()
+}
+
+func (o IndexRuleTagOutput) ToIndexRuleTagOutput() IndexRuleTagOutput {
+	return o
+}
+
+func (o IndexRuleTagOutput) ToIndexRuleTagOutputWithContext(ctx context.Context) IndexRuleTagOutput {
+	return o
+}
+
+func (o IndexRuleTagOutput) ToIndexRuleTagPtrOutput() IndexRuleTagPtrOutput {
+	return o.ToIndexRuleTagPtrOutputWithContext(context.Background())
+}
+
+func (o IndexRuleTagOutput) ToIndexRuleTagPtrOutputWithContext(ctx context.Context) IndexRuleTagPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v IndexRuleTag) *IndexRuleTag {
+		return &v
+	}).(IndexRuleTagPtrOutput)
+}
+
+// Case sensitivity.
+func (o IndexRuleTagOutput) CaseSensitive() pulumi.BoolOutput {
+	return o.ApplyT(func(v IndexRuleTag) bool { return v.CaseSensitive }).(pulumi.BoolOutput)
+}
+
+// Key-Value pair information of the index to be created. Up to 100 key-value pairs can be configured.
+func (o IndexRuleTagOutput) KeyValues() IndexRuleTagKeyValueArrayOutput {
+	return o.ApplyT(func(v IndexRuleTag) []IndexRuleTagKeyValue { return v.KeyValues }).(IndexRuleTagKeyValueArrayOutput)
+}
+
+type IndexRuleTagPtrOutput struct{ *pulumi.OutputState }
+
+func (IndexRuleTagPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**IndexRuleTag)(nil)).Elem()
+}
+
+func (o IndexRuleTagPtrOutput) ToIndexRuleTagPtrOutput() IndexRuleTagPtrOutput {
+	return o
+}
+
+func (o IndexRuleTagPtrOutput) ToIndexRuleTagPtrOutputWithContext(ctx context.Context) IndexRuleTagPtrOutput {
+	return o
+}
+
+func (o IndexRuleTagPtrOutput) Elem() IndexRuleTagOutput {
+	return o.ApplyT(func(v *IndexRuleTag) IndexRuleTag {
+		if v != nil {
+			return *v
+		}
+		var ret IndexRuleTag
+		return ret
+	}).(IndexRuleTagOutput)
+}
+
+// Case sensitivity.
+func (o IndexRuleTagPtrOutput) CaseSensitive() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *IndexRuleTag) *bool {
+		if v == nil {
+			return nil
+		}
+		return &v.CaseSensitive
+	}).(pulumi.BoolPtrOutput)
+}
+
+// Key-Value pair information of the index to be created. Up to 100 key-value pairs can be configured.
+func (o IndexRuleTagPtrOutput) KeyValues() IndexRuleTagKeyValueArrayOutput {
+	return o.ApplyT(func(v *IndexRuleTag) []IndexRuleTagKeyValue {
+		if v == nil {
+			return nil
+		}
+		return v.KeyValues
+	}).(IndexRuleTagKeyValueArrayOutput)
+}
+
+type IndexRuleTagKeyValue struct {
+	// When a key value or metafield index needs to be configured for a field, the metafield Key does not need to be prefixed with __TAG__. and is consistent with the one when logs are uploaded. __TAG__. will be prefixed automatically for display in the console..
+	Key string `pulumi:"key"`
+	// Field index description information.
+	Value *IndexRuleTagKeyValueValue `pulumi:"value"`
+}
+
+// IndexRuleTagKeyValueInput is an input type that accepts IndexRuleTagKeyValueArgs and IndexRuleTagKeyValueOutput values.
+// You can construct a concrete instance of `IndexRuleTagKeyValueInput` via:
+//
+//	IndexRuleTagKeyValueArgs{...}
+type IndexRuleTagKeyValueInput interface {
+	pulumi.Input
+
+	ToIndexRuleTagKeyValueOutput() IndexRuleTagKeyValueOutput
+	ToIndexRuleTagKeyValueOutputWithContext(context.Context) IndexRuleTagKeyValueOutput
+}
+
+type IndexRuleTagKeyValueArgs struct {
+	// When a key value or metafield index needs to be configured for a field, the metafield Key does not need to be prefixed with __TAG__. and is consistent with the one when logs are uploaded. __TAG__. will be prefixed automatically for display in the console..
+	Key pulumi.StringInput `pulumi:"key"`
+	// Field index description information.
+	Value IndexRuleTagKeyValueValuePtrInput `pulumi:"value"`
+}
+
+func (IndexRuleTagKeyValueArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*IndexRuleTagKeyValue)(nil)).Elem()
+}
+
+func (i IndexRuleTagKeyValueArgs) ToIndexRuleTagKeyValueOutput() IndexRuleTagKeyValueOutput {
+	return i.ToIndexRuleTagKeyValueOutputWithContext(context.Background())
+}
+
+func (i IndexRuleTagKeyValueArgs) ToIndexRuleTagKeyValueOutputWithContext(ctx context.Context) IndexRuleTagKeyValueOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(IndexRuleTagKeyValueOutput)
+}
+
+// IndexRuleTagKeyValueArrayInput is an input type that accepts IndexRuleTagKeyValueArray and IndexRuleTagKeyValueArrayOutput values.
+// You can construct a concrete instance of `IndexRuleTagKeyValueArrayInput` via:
+//
+//	IndexRuleTagKeyValueArray{ IndexRuleTagKeyValueArgs{...} }
+type IndexRuleTagKeyValueArrayInput interface {
+	pulumi.Input
+
+	ToIndexRuleTagKeyValueArrayOutput() IndexRuleTagKeyValueArrayOutput
+	ToIndexRuleTagKeyValueArrayOutputWithContext(context.Context) IndexRuleTagKeyValueArrayOutput
+}
+
+type IndexRuleTagKeyValueArray []IndexRuleTagKeyValueInput
+
+func (IndexRuleTagKeyValueArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]IndexRuleTagKeyValue)(nil)).Elem()
+}
+
+func (i IndexRuleTagKeyValueArray) ToIndexRuleTagKeyValueArrayOutput() IndexRuleTagKeyValueArrayOutput {
+	return i.ToIndexRuleTagKeyValueArrayOutputWithContext(context.Background())
+}
+
+func (i IndexRuleTagKeyValueArray) ToIndexRuleTagKeyValueArrayOutputWithContext(ctx context.Context) IndexRuleTagKeyValueArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(IndexRuleTagKeyValueArrayOutput)
+}
+
+type IndexRuleTagKeyValueOutput struct{ *pulumi.OutputState }
+
+func (IndexRuleTagKeyValueOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*IndexRuleTagKeyValue)(nil)).Elem()
+}
+
+func (o IndexRuleTagKeyValueOutput) ToIndexRuleTagKeyValueOutput() IndexRuleTagKeyValueOutput {
+	return o
+}
+
+func (o IndexRuleTagKeyValueOutput) ToIndexRuleTagKeyValueOutputWithContext(ctx context.Context) IndexRuleTagKeyValueOutput {
+	return o
+}
+
+// When a key value or metafield index needs to be configured for a field, the metafield Key does not need to be prefixed with __TAG__. and is consistent with the one when logs are uploaded. __TAG__. will be prefixed automatically for display in the console..
+func (o IndexRuleTagKeyValueOutput) Key() pulumi.StringOutput {
+	return o.ApplyT(func(v IndexRuleTagKeyValue) string { return v.Key }).(pulumi.StringOutput)
+}
+
+// Field index description information.
+func (o IndexRuleTagKeyValueOutput) Value() IndexRuleTagKeyValueValuePtrOutput {
+	return o.ApplyT(func(v IndexRuleTagKeyValue) *IndexRuleTagKeyValueValue { return v.Value }).(IndexRuleTagKeyValueValuePtrOutput)
+}
+
+type IndexRuleTagKeyValueArrayOutput struct{ *pulumi.OutputState }
+
+func (IndexRuleTagKeyValueArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]IndexRuleTagKeyValue)(nil)).Elem()
+}
+
+func (o IndexRuleTagKeyValueArrayOutput) ToIndexRuleTagKeyValueArrayOutput() IndexRuleTagKeyValueArrayOutput {
+	return o
+}
+
+func (o IndexRuleTagKeyValueArrayOutput) ToIndexRuleTagKeyValueArrayOutputWithContext(ctx context.Context) IndexRuleTagKeyValueArrayOutput {
+	return o
+}
+
+func (o IndexRuleTagKeyValueArrayOutput) Index(i pulumi.IntInput) IndexRuleTagKeyValueOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) IndexRuleTagKeyValue {
+		return vs[0].([]IndexRuleTagKeyValue)[vs[1].(int)]
+	}).(IndexRuleTagKeyValueOutput)
+}
+
+type IndexRuleTagKeyValueValue struct {
+	// Whether Chinese characters are contained.
+	ContainZH *bool `pulumi:"containZH"`
+	// Whether the analysis feature is enabled for the field.
+	SqlFlag *bool `pulumi:"sqlFlag"`
+	// Field delimiter, which is meaningful only if the field type is text. Each character in the entered string represents a delimiter.
+	Tokenizer *string `pulumi:"tokenizer"`
+	// Field type. Valid values: long, text, double.
+	Type string `pulumi:"type"`
+}
+
+// IndexRuleTagKeyValueValueInput is an input type that accepts IndexRuleTagKeyValueValueArgs and IndexRuleTagKeyValueValueOutput values.
+// You can construct a concrete instance of `IndexRuleTagKeyValueValueInput` via:
+//
+//	IndexRuleTagKeyValueValueArgs{...}
+type IndexRuleTagKeyValueValueInput interface {
+	pulumi.Input
+
+	ToIndexRuleTagKeyValueValueOutput() IndexRuleTagKeyValueValueOutput
+	ToIndexRuleTagKeyValueValueOutputWithContext(context.Context) IndexRuleTagKeyValueValueOutput
+}
+
+type IndexRuleTagKeyValueValueArgs struct {
+	// Whether Chinese characters are contained.
+	ContainZH pulumi.BoolPtrInput `pulumi:"containZH"`
+	// Whether the analysis feature is enabled for the field.
+	SqlFlag pulumi.BoolPtrInput `pulumi:"sqlFlag"`
+	// Field delimiter, which is meaningful only if the field type is text. Each character in the entered string represents a delimiter.
+	Tokenizer pulumi.StringPtrInput `pulumi:"tokenizer"`
+	// Field type. Valid values: long, text, double.
+	Type pulumi.StringInput `pulumi:"type"`
+}
+
+func (IndexRuleTagKeyValueValueArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*IndexRuleTagKeyValueValue)(nil)).Elem()
+}
+
+func (i IndexRuleTagKeyValueValueArgs) ToIndexRuleTagKeyValueValueOutput() IndexRuleTagKeyValueValueOutput {
+	return i.ToIndexRuleTagKeyValueValueOutputWithContext(context.Background())
+}
+
+func (i IndexRuleTagKeyValueValueArgs) ToIndexRuleTagKeyValueValueOutputWithContext(ctx context.Context) IndexRuleTagKeyValueValueOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(IndexRuleTagKeyValueValueOutput)
+}
+
+func (i IndexRuleTagKeyValueValueArgs) ToIndexRuleTagKeyValueValuePtrOutput() IndexRuleTagKeyValueValuePtrOutput {
+	return i.ToIndexRuleTagKeyValueValuePtrOutputWithContext(context.Background())
+}
+
+func (i IndexRuleTagKeyValueValueArgs) ToIndexRuleTagKeyValueValuePtrOutputWithContext(ctx context.Context) IndexRuleTagKeyValueValuePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(IndexRuleTagKeyValueValueOutput).ToIndexRuleTagKeyValueValuePtrOutputWithContext(ctx)
+}
+
+// IndexRuleTagKeyValueValuePtrInput is an input type that accepts IndexRuleTagKeyValueValueArgs, IndexRuleTagKeyValueValuePtr and IndexRuleTagKeyValueValuePtrOutput values.
+// You can construct a concrete instance of `IndexRuleTagKeyValueValuePtrInput` via:
+//
+//	        IndexRuleTagKeyValueValueArgs{...}
+//
+//	or:
+//
+//	        nil
+type IndexRuleTagKeyValueValuePtrInput interface {
+	pulumi.Input
+
+	ToIndexRuleTagKeyValueValuePtrOutput() IndexRuleTagKeyValueValuePtrOutput
+	ToIndexRuleTagKeyValueValuePtrOutputWithContext(context.Context) IndexRuleTagKeyValueValuePtrOutput
+}
+
+type indexRuleTagKeyValueValuePtrType IndexRuleTagKeyValueValueArgs
+
+func IndexRuleTagKeyValueValuePtr(v *IndexRuleTagKeyValueValueArgs) IndexRuleTagKeyValueValuePtrInput {
+	return (*indexRuleTagKeyValueValuePtrType)(v)
+}
+
+func (*indexRuleTagKeyValueValuePtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**IndexRuleTagKeyValueValue)(nil)).Elem()
+}
+
+func (i *indexRuleTagKeyValueValuePtrType) ToIndexRuleTagKeyValueValuePtrOutput() IndexRuleTagKeyValueValuePtrOutput {
+	return i.ToIndexRuleTagKeyValueValuePtrOutputWithContext(context.Background())
+}
+
+func (i *indexRuleTagKeyValueValuePtrType) ToIndexRuleTagKeyValueValuePtrOutputWithContext(ctx context.Context) IndexRuleTagKeyValueValuePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(IndexRuleTagKeyValueValuePtrOutput)
+}
+
+type IndexRuleTagKeyValueValueOutput struct{ *pulumi.OutputState }
+
+func (IndexRuleTagKeyValueValueOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*IndexRuleTagKeyValueValue)(nil)).Elem()
+}
+
+func (o IndexRuleTagKeyValueValueOutput) ToIndexRuleTagKeyValueValueOutput() IndexRuleTagKeyValueValueOutput {
+	return o
+}
+
+func (o IndexRuleTagKeyValueValueOutput) ToIndexRuleTagKeyValueValueOutputWithContext(ctx context.Context) IndexRuleTagKeyValueValueOutput {
+	return o
+}
+
+func (o IndexRuleTagKeyValueValueOutput) ToIndexRuleTagKeyValueValuePtrOutput() IndexRuleTagKeyValueValuePtrOutput {
+	return o.ToIndexRuleTagKeyValueValuePtrOutputWithContext(context.Background())
+}
+
+func (o IndexRuleTagKeyValueValueOutput) ToIndexRuleTagKeyValueValuePtrOutputWithContext(ctx context.Context) IndexRuleTagKeyValueValuePtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v IndexRuleTagKeyValueValue) *IndexRuleTagKeyValueValue {
+		return &v
+	}).(IndexRuleTagKeyValueValuePtrOutput)
+}
+
+// Whether Chinese characters are contained.
+func (o IndexRuleTagKeyValueValueOutput) ContainZH() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v IndexRuleTagKeyValueValue) *bool { return v.ContainZH }).(pulumi.BoolPtrOutput)
+}
+
+// Whether the analysis feature is enabled for the field.
+func (o IndexRuleTagKeyValueValueOutput) SqlFlag() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v IndexRuleTagKeyValueValue) *bool { return v.SqlFlag }).(pulumi.BoolPtrOutput)
+}
+
+// Field delimiter, which is meaningful only if the field type is text. Each character in the entered string represents a delimiter.
+func (o IndexRuleTagKeyValueValueOutput) Tokenizer() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v IndexRuleTagKeyValueValue) *string { return v.Tokenizer }).(pulumi.StringPtrOutput)
+}
+
+// Field type. Valid values: long, text, double.
+func (o IndexRuleTagKeyValueValueOutput) Type() pulumi.StringOutput {
+	return o.ApplyT(func(v IndexRuleTagKeyValueValue) string { return v.Type }).(pulumi.StringOutput)
+}
+
+type IndexRuleTagKeyValueValuePtrOutput struct{ *pulumi.OutputState }
+
+func (IndexRuleTagKeyValueValuePtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**IndexRuleTagKeyValueValue)(nil)).Elem()
+}
+
+func (o IndexRuleTagKeyValueValuePtrOutput) ToIndexRuleTagKeyValueValuePtrOutput() IndexRuleTagKeyValueValuePtrOutput {
+	return o
+}
+
+func (o IndexRuleTagKeyValueValuePtrOutput) ToIndexRuleTagKeyValueValuePtrOutputWithContext(ctx context.Context) IndexRuleTagKeyValueValuePtrOutput {
+	return o
+}
+
+func (o IndexRuleTagKeyValueValuePtrOutput) Elem() IndexRuleTagKeyValueValueOutput {
+	return o.ApplyT(func(v *IndexRuleTagKeyValueValue) IndexRuleTagKeyValueValue {
+		if v != nil {
+			return *v
+		}
+		var ret IndexRuleTagKeyValueValue
+		return ret
+	}).(IndexRuleTagKeyValueValueOutput)
+}
+
+// Whether Chinese characters are contained.
+func (o IndexRuleTagKeyValueValuePtrOutput) ContainZH() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *IndexRuleTagKeyValueValue) *bool {
+		if v == nil {
+			return nil
+		}
+		return v.ContainZH
+	}).(pulumi.BoolPtrOutput)
+}
+
+// Whether the analysis feature is enabled for the field.
+func (o IndexRuleTagKeyValueValuePtrOutput) SqlFlag() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *IndexRuleTagKeyValueValue) *bool {
+		if v == nil {
+			return nil
+		}
+		return v.SqlFlag
+	}).(pulumi.BoolPtrOutput)
+}
+
+// Field delimiter, which is meaningful only if the field type is text. Each character in the entered string represents a delimiter.
+func (o IndexRuleTagKeyValueValuePtrOutput) Tokenizer() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *IndexRuleTagKeyValueValue) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Tokenizer
+	}).(pulumi.StringPtrOutput)
+}
+
+// Field type. Valid values: long, text, double.
+func (o IndexRuleTagKeyValueValuePtrOutput) Type() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *IndexRuleTagKeyValueValue) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Type
+	}).(pulumi.StringPtrOutput)
+}
+
 type KafkaRechargeLogRechargeRule struct {
 	// default time from.
 	DefaultTimeSrc *int `pulumi:"defaultTimeSrc"`
@@ -7357,6 +8775,24 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*CosShipperFilterRuleArrayInput)(nil)).Elem(), CosShipperFilterRuleArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*DataTransformDstResourceInput)(nil)).Elem(), DataTransformDstResourceArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*DataTransformDstResourceArrayInput)(nil)).Elem(), DataTransformDstResourceArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*IndexRuleInput)(nil)).Elem(), IndexRuleArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*IndexRulePtrInput)(nil)).Elem(), IndexRuleArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*IndexRuleDynamicIndexInput)(nil)).Elem(), IndexRuleDynamicIndexArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*IndexRuleDynamicIndexPtrInput)(nil)).Elem(), IndexRuleDynamicIndexArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*IndexRuleFullTextInput)(nil)).Elem(), IndexRuleFullTextArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*IndexRuleFullTextPtrInput)(nil)).Elem(), IndexRuleFullTextArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*IndexRuleKeyValueInput)(nil)).Elem(), IndexRuleKeyValueArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*IndexRuleKeyValuePtrInput)(nil)).Elem(), IndexRuleKeyValueArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*IndexRuleKeyValueKeyValueInput)(nil)).Elem(), IndexRuleKeyValueKeyValueArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*IndexRuleKeyValueKeyValueArrayInput)(nil)).Elem(), IndexRuleKeyValueKeyValueArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*IndexRuleKeyValueKeyValueValueInput)(nil)).Elem(), IndexRuleKeyValueKeyValueValueArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*IndexRuleKeyValueKeyValueValuePtrInput)(nil)).Elem(), IndexRuleKeyValueKeyValueValueArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*IndexRuleTagInput)(nil)).Elem(), IndexRuleTagArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*IndexRuleTagPtrInput)(nil)).Elem(), IndexRuleTagArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*IndexRuleTagKeyValueInput)(nil)).Elem(), IndexRuleTagKeyValueArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*IndexRuleTagKeyValueArrayInput)(nil)).Elem(), IndexRuleTagKeyValueArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*IndexRuleTagKeyValueValueInput)(nil)).Elem(), IndexRuleTagKeyValueValueArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*IndexRuleTagKeyValueValuePtrInput)(nil)).Elem(), IndexRuleTagKeyValueValueArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*KafkaRechargeLogRechargeRuleInput)(nil)).Elem(), KafkaRechargeLogRechargeRuleArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*KafkaRechargeLogRechargeRulePtrInput)(nil)).Elem(), KafkaRechargeLogRechargeRuleArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*KafkaRechargeProtocolInput)(nil)).Elem(), KafkaRechargeProtocolArgs{})
@@ -7439,6 +8875,24 @@ func init() {
 	pulumi.RegisterOutputType(CosShipperFilterRuleArrayOutput{})
 	pulumi.RegisterOutputType(DataTransformDstResourceOutput{})
 	pulumi.RegisterOutputType(DataTransformDstResourceArrayOutput{})
+	pulumi.RegisterOutputType(IndexRuleOutput{})
+	pulumi.RegisterOutputType(IndexRulePtrOutput{})
+	pulumi.RegisterOutputType(IndexRuleDynamicIndexOutput{})
+	pulumi.RegisterOutputType(IndexRuleDynamicIndexPtrOutput{})
+	pulumi.RegisterOutputType(IndexRuleFullTextOutput{})
+	pulumi.RegisterOutputType(IndexRuleFullTextPtrOutput{})
+	pulumi.RegisterOutputType(IndexRuleKeyValueOutput{})
+	pulumi.RegisterOutputType(IndexRuleKeyValuePtrOutput{})
+	pulumi.RegisterOutputType(IndexRuleKeyValueKeyValueOutput{})
+	pulumi.RegisterOutputType(IndexRuleKeyValueKeyValueArrayOutput{})
+	pulumi.RegisterOutputType(IndexRuleKeyValueKeyValueValueOutput{})
+	pulumi.RegisterOutputType(IndexRuleKeyValueKeyValueValuePtrOutput{})
+	pulumi.RegisterOutputType(IndexRuleTagOutput{})
+	pulumi.RegisterOutputType(IndexRuleTagPtrOutput{})
+	pulumi.RegisterOutputType(IndexRuleTagKeyValueOutput{})
+	pulumi.RegisterOutputType(IndexRuleTagKeyValueArrayOutput{})
+	pulumi.RegisterOutputType(IndexRuleTagKeyValueValueOutput{})
+	pulumi.RegisterOutputType(IndexRuleTagKeyValueValuePtrOutput{})
 	pulumi.RegisterOutputType(KafkaRechargeLogRechargeRuleOutput{})
 	pulumi.RegisterOutputType(KafkaRechargeLogRechargeRulePtrOutput{})
 	pulumi.RegisterOutputType(KafkaRechargeProtocolOutput{})

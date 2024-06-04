@@ -12,14 +12,19 @@ import * as utilities from "../utilities";
  * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const syncImage = new tencentcloud.cvm.SyncImage("syncImage", {
+ * const exampleInstance = tencentcloud.Images.getInstance({
+ *     imageTypes: ["PRIVATE_IMAGE"],
+ *     imageNameRegex: "MyImage",
+ * });
+ * const exampleSyncImage = new tencentcloud.cvm.SyncImage("exampleSyncImage", {
+ *     imageId: exampleInstance.then(exampleInstance => exampleInstance.images?.[0]?.imageId),
  *     destinationRegions: [
  *         "ap-guangzhou",
  *         "ap-shanghai",
  *     ],
- *     imageId: "img-xxxxxx",
  * });
  * ```
  * <!--End PulumiCodeChooser -->

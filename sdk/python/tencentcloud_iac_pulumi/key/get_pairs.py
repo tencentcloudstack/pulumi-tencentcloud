@@ -112,13 +112,25 @@ def get_pairs(key_id: Optional[str] = None,
 
     ## Example Usage
 
+    ### Query key pairs by key ID
+
     <!--Start PulumiCodeChooser -->
     ```python
     import pulumi
     import pulumi_tencentcloud as tencentcloud
 
-    foo = tencentcloud.Key.get_pairs(key_id="skey-ie97i3ml")
-    name = tencentcloud.Key.get_pairs(key_name="^test$")
+    key_id = tencentcloud.Key.get_pairs(key_id="skey-ie97i3ml")
+    ```
+    <!--End PulumiCodeChooser -->
+
+    ### Query key pairs by key name
+
+    <!--Start PulumiCodeChooser -->
+    ```python
+    import pulumi
+    import pulumi_tencentcloud as tencentcloud
+
+    key_name = tencentcloud.Key.get_pairs(key_name="^test$")
     ```
     <!--End PulumiCodeChooser -->
 
@@ -156,13 +168,25 @@ def get_pairs_output(key_id: Optional[pulumi.Input[Optional[str]]] = None,
 
     ## Example Usage
 
+    ### Query key pairs by key ID
+
     <!--Start PulumiCodeChooser -->
     ```python
     import pulumi
     import pulumi_tencentcloud as tencentcloud
 
-    foo = tencentcloud.Key.get_pairs(key_id="skey-ie97i3ml")
-    name = tencentcloud.Key.get_pairs(key_name="^test$")
+    key_id = tencentcloud.Key.get_pairs(key_id="skey-ie97i3ml")
+    ```
+    <!--End PulumiCodeChooser -->
+
+    ### Query key pairs by key name
+
+    <!--Start PulumiCodeChooser -->
+    ```python
+    import pulumi
+    import pulumi_tencentcloud as tencentcloud
+
+    key_name = tencentcloud.Key.get_pairs(key_name="^test$")
     ```
     <!--End PulumiCodeChooser -->
 

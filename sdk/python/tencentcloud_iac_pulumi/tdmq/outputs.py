@@ -14,6 +14,7 @@ __all__ = [
     'NamespaceRetentionPolicy',
     'ProfessionalClusterVpc',
     'RocketmqClusterVpc',
+    'RocketmqVipInstanceIpRule',
     'RocketmqVipInstanceVpcInfo',
     'GetProInstanceDetailClusterInfoResult',
     'GetProInstanceDetailClusterInfoNodeDistributionResult',
@@ -191,6 +192,63 @@ class RocketmqClusterVpc(dict):
         Vpc ID.
         """
         return pulumi.get(self, "vpc_id")
+
+
+@pulumi.output_type
+class RocketmqVipInstanceIpRule(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "ipRule":
+            suggest = "ip_rule"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in RocketmqVipInstanceIpRule. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        RocketmqVipInstanceIpRule.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        RocketmqVipInstanceIpRule.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 allow: bool,
+                 ip_rule: str,
+                 remark: str):
+        """
+        :param bool allow: Whether to allow or deny.
+        :param str ip_rule: IP address block information.
+        :param str remark: Remark.
+        """
+        pulumi.set(__self__, "allow", allow)
+        pulumi.set(__self__, "ip_rule", ip_rule)
+        pulumi.set(__self__, "remark", remark)
+
+    @property
+    @pulumi.getter
+    def allow(self) -> bool:
+        """
+        Whether to allow or deny.
+        """
+        return pulumi.get(self, "allow")
+
+    @property
+    @pulumi.getter(name="ipRule")
+    def ip_rule(self) -> str:
+        """
+        IP address block information.
+        """
+        return pulumi.get(self, "ip_rule")
+
+    @property
+    @pulumi.getter
+    def remark(self) -> str:
+        """
+        Remark.
+        """
+        return pulumi.get(self, "remark")
 
 
 @pulumi.output_type

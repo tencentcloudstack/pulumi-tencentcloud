@@ -114,22 +114,57 @@ def get_instance(filters: Optional[Sequence[pulumi.InputType['GetInstanceFilterA
     """
     Provides an available image for the user.
 
-    The Images data source fetch proper image, which could be one of the private images of the user and images of system resources provided by TencentCloud, as well as other public images and those available on the image market.
+    The Images data source fetch proper image, which could be one of the private images of the user and images of system
+    resources provided by TencentCloud, as well as other public images and those available on the image market.
 
     > **NOTE:** This data source will be deprecated, please use `images_get_instance` instead.
 
     ## Example Usage
+
+    ### Query image
 
     <!--Start PulumiCodeChooser -->
     ```python
     import pulumi
     import pulumi_tencentcloud as tencentcloud
 
-    my_favorate_image = tencentcloud.Image.get_instance(filters=[tencentcloud.image.GetInstanceFilterArgs(
-            name="image-type",
-            values=["PUBLIC_IMAGE"],
-        )],
-        os_name="centos")
+    example = tencentcloud.Image.get_instance()
+    ```
+    <!--End PulumiCodeChooser -->
+
+    ### Query image by filter
+
+    <!--Start PulumiCodeChooser -->
+    ```python
+    import pulumi
+    import pulumi_tencentcloud as tencentcloud
+
+    example = tencentcloud.Image.get_instance(filters=[tencentcloud.image.GetInstanceFilterArgs(
+        name="image-type",
+        values=["PUBLIC_IMAGE"],
+    )])
+    ```
+    <!--End PulumiCodeChooser -->
+
+    ### Query image by os name
+
+    <!--Start PulumiCodeChooser -->
+    ```python
+    import pulumi
+    import pulumi_tencentcloud as tencentcloud
+
+    example = tencentcloud.Image.get_instance(os_name="centos")
+    ```
+    <!--End PulumiCodeChooser -->
+
+    ### Query image by image name regex
+
+    <!--Start PulumiCodeChooser -->
+    ```python
+    import pulumi
+    import pulumi_tencentcloud as tencentcloud
+
+    example = tencentcloud.Image.get_instance(image_name_regex="^Windows\\\\s.*$")
     ```
     <!--End PulumiCodeChooser -->
 
@@ -166,22 +201,57 @@ def get_instance_output(filters: Optional[pulumi.Input[Optional[Sequence[pulumi.
     """
     Provides an available image for the user.
 
-    The Images data source fetch proper image, which could be one of the private images of the user and images of system resources provided by TencentCloud, as well as other public images and those available on the image market.
+    The Images data source fetch proper image, which could be one of the private images of the user and images of system
+    resources provided by TencentCloud, as well as other public images and those available on the image market.
 
     > **NOTE:** This data source will be deprecated, please use `images_get_instance` instead.
 
     ## Example Usage
+
+    ### Query image
 
     <!--Start PulumiCodeChooser -->
     ```python
     import pulumi
     import pulumi_tencentcloud as tencentcloud
 
-    my_favorate_image = tencentcloud.Image.get_instance(filters=[tencentcloud.image.GetInstanceFilterArgs(
-            name="image-type",
-            values=["PUBLIC_IMAGE"],
-        )],
-        os_name="centos")
+    example = tencentcloud.Image.get_instance()
+    ```
+    <!--End PulumiCodeChooser -->
+
+    ### Query image by filter
+
+    <!--Start PulumiCodeChooser -->
+    ```python
+    import pulumi
+    import pulumi_tencentcloud as tencentcloud
+
+    example = tencentcloud.Image.get_instance(filters=[tencentcloud.image.GetInstanceFilterArgs(
+        name="image-type",
+        values=["PUBLIC_IMAGE"],
+    )])
+    ```
+    <!--End PulumiCodeChooser -->
+
+    ### Query image by os name
+
+    <!--Start PulumiCodeChooser -->
+    ```python
+    import pulumi
+    import pulumi_tencentcloud as tencentcloud
+
+    example = tencentcloud.Image.get_instance(os_name="centos")
+    ```
+    <!--End PulumiCodeChooser -->
+
+    ### Query image by image name regex
+
+    <!--Start PulumiCodeChooser -->
+    ```python
+    import pulumi
+    import pulumi_tencentcloud as tencentcloud
+
+    example = tencentcloud.Image.get_instance(image_name_regex="^Windows\\\\s.*$")
     ```
     <!--End PulumiCodeChooser -->
 

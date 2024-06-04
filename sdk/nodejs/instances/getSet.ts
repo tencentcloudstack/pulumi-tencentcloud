@@ -16,8 +16,16 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const foo = tencentcloud.Instances.getSet({
- *     vpcId: "vpc-4owdpnwr",
+ * const example = tencentcloud.Instances.getSet({
+ *     availabilityZone: "ap-guangzhou-6",
+ *     instanceId: "ins-a81rnm8c",
+ *     instanceName: "tf_example",
+ *     projectId: 0,
+ *     subnetId: "subnet-1to7t9au",
+ *     tags: {
+ *         tagKey: "tagValue",
+ *     },
+ *     vpcId: "vpc-l040hycv",
  * });
  * ```
  * <!--End PulumiCodeChooser -->
@@ -128,8 +136,16 @@ export interface GetSetResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const foo = tencentcloud.Instances.getSet({
- *     vpcId: "vpc-4owdpnwr",
+ * const example = tencentcloud.Instances.getSet({
+ *     availabilityZone: "ap-guangzhou-6",
+ *     instanceId: "ins-a81rnm8c",
+ *     instanceName: "tf_example",
+ *     projectId: 0,
+ *     subnetId: "subnet-1to7t9au",
+ *     tags: {
+ *         tagKey: "tagValue",
+ *     },
+ *     vpcId: "vpc-l040hycv",
  * });
  * ```
  * <!--End PulumiCodeChooser -->
